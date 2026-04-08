@@ -303,6 +303,32 @@ header p {
   flex: 1;
 }
 
+.card-tags {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  margin-top: 0.25rem;
+}
+
+.card-tag {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 0.68rem; font-weight: 600;
+  font-family: var(--font-mono);
+  padding: 3px 8px;
+  border-radius: 6px;
+  letter-spacing: 0.01em;
+}
+
+.card-tag.score {
+  background: var(--accent-light);
+  color: var(--accent);
+  border: 1px solid var(--accent-border);
+}
+
+.card-tag.buy {
+  background: var(--green-bg);
+  color: var(--green);
+  border: 1px solid rgba(122,158,126,0.25);
+}
+
 .card-footer {
   display: flex; align-items: center; justify-content: space-between;
   margin-top: 0.5rem;
@@ -555,14 +581,34 @@ footer .refresh-info {
 
       var iconEmoji = pickIcon(repo.name, repo.description);
       var title = formatName(repo.name);
-      var desc = repo.description || 'No description available.';
+      var rawDesc = repo.description || 'No description available.';
       var updated = repo.pushed_at
         ? new Date(repo.pushed_at).toLocaleDateString('zh-CN', { year: 'numeric', month: 'short', day: 'numeric' })
         : '';
 
+      // Parse analysis metadata from description: "... | B 27/36 | 首仓 HK$76"
+      var desc = rawDesc;
+      var scoreTag = '';
+      var buyTag = '';
+      var pipeMatch = rawDesc.match(/^(.*?)\s*\|\s*([A-D][+\-]?\s+\d+\/36)\s*\|\s*(首仓\s*\S+)/);
+      if (pipeMatch) {
+        desc = pipeMatch[1].trim();
+        scoreTag = pipeMatch[2].trim();
+        buyTag = pipeMatch[3].trim();
+      }
+
+      var tagsHtml = '';
+      if (scoreTag || buyTag) {
+        tagsHtml = '<div class="card-tags">' +
+          (scoreTag ? '<span class="card-tag score">' + scoreTag + '</span>' : '') +
+          (buyTag ? '<span class="card-tag buy">' + buyTag + '</span>' : '') +
+          '</div>';
+      }
+
       card.innerHTML = '<div class="card-icon">' + iconEmoji + '</div>' +
         '<h2>' + title + '</h2>' +
         '<div class="desc">' + desc + '</div>' +
+        tagsHtml +
         '<div class="card-footer">' +
           '<div class="meta">' +
             (updated ? '<span>' + updated + '</span>' : '') +
