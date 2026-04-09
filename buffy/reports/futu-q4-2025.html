@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>富途控股 FUTU — 2025 Q4 & 全年财报深度分析</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root{--bg:#f5f0eb;--bg2:#ece6df;--card:#fff;--card2:#f8f5f1;--border:#d9d0c7;--text:#4a4340;--text2:#7a706a;--text3:#a89f98;--accent:#8a9a8e;--accent2:#7b8fa0;--accent3:#b08d7a;--rose:#c09090;--gold:#b9a06a;--red:#b87070;--green:#7a9a7a;--shadow:rgba(0,0,0,.06);--chart-grid:#e5ddd5}
+[data-theme=dark]{--bg:#1e1c1a;--bg2:#28251f;--card:#2e2a25;--card2:#363230;--border:#4a4540;--text:#d4ccc4;--text2:#a09890;--text3:#706860;--accent:#8a9a8e;--accent2:#8fabbf;--accent3:#c9a48e;--rose:#c09090;--gold:#c9b07a;--red:#c08080;--green:#8aaa8a;--shadow:rgba(0,0,0,.3);--chart-grid:#3e3a35}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Georgia','Noto Serif SC','PingFang SC',serif;line-height:1.75;font-size:14.5px;transition:background .35s,color .35s}
+a{color:var(--accent2);text-decoration:none}
+.theme-bar{position:sticky;top:0;z-index:100;background:var(--card);border-bottom:1px solid var(--border);padding:8px 24px;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(10px)}
+.theme-bar .logo{font-size:13px;color:var(--text2);letter-spacing:1px}
+.theme-toggle{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2)}
+.toggle-switch{position:relative;width:44px;height:22px;background:var(--border);border-radius:11px;cursor:pointer;transition:background .3s}
+.toggle-switch::after{content:'';position:absolute;top:2px;left:2px;width:18px;height:18px;background:var(--card);border-radius:50%;transition:transform .3s;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+[data-theme=dark] .toggle-switch{background:var(--accent2)}
+[data-theme=dark] .toggle-switch::after{transform:translateX(22px)}
+.hero{padding:48px 24px 36px;text-align:center;border-bottom:1px solid var(--border)}
+.hero-tag{display:inline-block;font-family:'Segoe UI',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);padding:3px 14px;border-radius:20px;margin-bottom:18px}
+.hero h1{font-size:32px;font-weight:700;letter-spacing:1px;margin-bottom:8px}
+.hero-sub{font-size:14px;color:var(--text2);margin-bottom:16px}
+.hero-pills{display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
+.pill{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:6px 18px;font-family:'Segoe UI',sans-serif;font-size:13px;color:var(--text2);box-shadow:0 1px 3px var(--shadow)}
+.pill strong{color:var(--text)}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+.section{padding:36px 0;border-bottom:1px solid var(--border)}
+.stitle{font-size:18px;font-weight:700;color:var(--accent3);margin-bottom:20px;letter-spacing:.5px;display:flex;align-items:center;gap:10px}
+.stitle::before{content:'';display:block;width:4px;height:20px;background:var(--accent3);border-radius:2px}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:14px}
+.kpi{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 18px;box-shadow:0 1px 4px var(--shadow)}
+.kpi-l{font-family:'Segoe UI',sans-serif;font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
+.kpi-v{font-size:20px;font-weight:700;margin-bottom:3px}
+.badge{display:inline-block;font-family:'Segoe UI',sans-serif;font-size:11px;font-weight:600;padding:2px 8px;border-radius:8px}
+.up{background:rgba(122,154,122,.15);color:var(--green)}
+.dn{background:rgba(184,112,112,.15);color:var(--red)}
+.nt{background:rgba(123,143,160,.15);color:var(--accent2)}
+.tbl-wrap{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow-x:auto;box-shadow:0 1px 4px var(--shadow)}
+.tbl{width:100%;border-collapse:collapse;font-family:'Segoe UI',sans-serif;font-size:13px}
+.tbl th{background:var(--card2);color:var(--text3);font-size:11px;letter-spacing:.5px;text-transform:uppercase;padding:10px 14px;text-align:right;border-bottom:1px solid var(--border)}
+.tbl th:first-child{text-align:left}
+.tbl td{padding:9px 14px;border-bottom:1px solid var(--border);text-align:right}
+.tbl td:first-child{text-align:left;color:var(--text2)}
+.tbl .hl td{font-weight:600;color:var(--text)}
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.cgrid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:16px}
+.ccard{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px;box-shadow:0 1px 4px var(--shadow)}
+.ctitle{font-family:'Segoe UI',sans-serif;font-size:12px;color:var(--text3);margin-bottom:12px;text-transform:uppercase;letter-spacing:.5px}
+.cwrap{position:relative;height:230px}
+.agrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
+.acard{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px;box-shadow:0 1px 4px var(--shadow)}
+.acard h4{font-size:13px;color:var(--accent2);margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px}
+.acard ul{padding-left:16px}
+.acard li{margin-bottom:5px;font-size:13px}
+.bscore{display:flex;align-items:center;gap:16px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin-bottom:12px;box-shadow:0 1px 4px var(--shadow)}
+.circle{width:62px;height:62px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;flex-shrink:0;border:3px solid;font-family:'Segoe UI',sans-serif}
+.cg{border-color:var(--green);color:var(--green)}
+.cw{border-color:var(--gold);color:var(--gold)}
+.cr{border-color:var(--red);color:var(--red)}
+.bscore .bd h4{font-size:14px;margin-bottom:3px}
+.bscore .bd p{font-size:13px;color:var(--text2);line-height:1.6}
+.verdict{background:var(--card2);border:2px solid var(--accent);border-radius:10px;padding:26px 28px;margin-bottom:16px}
+.verdict-t{font-size:17px;font-weight:700;color:var(--accent);margin-bottom:10px}
+.pgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:18px 0}
+.pbox{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center;box-shadow:0 1px 4px var(--shadow)}
+.pbox .pl{font-family:'Segoe UI',sans-serif;font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
+.pbox .pv{font-family:'Segoe UI',sans-serif;font-size:26px;font-weight:800}
+.pbox .pn{font-size:11px;color:var(--text3);margin-top:3px}
+.pc{color:var(--text2)} .pf{color:var(--gold)} .ps{color:var(--green)}
+#sankey{width:100%;height:460px}
+.cmt{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:26px;line-height:1.9;font-size:14.5px;box-shadow:0 1px 4px var(--shadow)}
+.cmt p{margin-bottom:14px}
+.hl-t{color:var(--accent3);font-weight:600}
+.warn-t{color:var(--red);font-weight:600}
+.ec-block{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:22px;margin-bottom:16px;box-shadow:0 1px 4px var(--shadow)}
+.ec-block h3{font-size:15px;font-weight:700;color:var(--accent3);margin-bottom:14px;border-bottom:1px solid var(--border);padding-bottom:8px}
+.ec-item{margin-bottom:16px;padding-bottom:14px;border-bottom:1px dashed rgba(150,140,130,.2)}
+.ec-item:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
+.ec-quote{font-style:italic;font-size:13.5px;line-height:1.8;color:var(--text);margin-bottom:8px;padding-left:14px;border-left:3px solid var(--rose)}
+.ec-tag{display:inline-flex;align-items:center;gap:5px;font-family:'Segoe UI',sans-serif;font-size:11.5px;font-weight:600;padding:3px 10px;border-radius:6px;margin-right:6px}
+.tag-bull{background:rgba(122,154,122,.15);color:var(--green)}
+.tag-bear{background:rgba(184,112,112,.15);color:var(--red)}
+.tag-neut{background:rgba(123,143,160,.15);color:var(--accent2)}
+.ec-note{font-size:12.5px;color:var(--text2);line-height:1.6;margin-top:6px;padding:6px 10px;background:var(--card2);border-radius:6px}
+footer{background:var(--card2);border-top:1px solid var(--border);padding:24px;text-align:center;color:var(--text3);font-size:12px;margin-top:40px}
+@media(max-width:768px){.cgrid,.cgrid3,.agrid,.pgrid{grid-template-columns:1fr}.hero h1{font-size:22px}.kpi-grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="theme-bar">
+  <div class="logo">BUFFY · 财报研究所</div>
+  <div class="theme-toggle"><span>☀️</span><div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div><span>🌙</span></div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">2025 Q4 & 全年 · 2026年3月18日</div>
+  <h1>富途控股 Futu Holdings 深度分析</h1>
+  <div class="hero-sub">NASDAQ: FUTU &nbsp;|&nbsp; 科技驱动的在线券商与财富管理平台 &nbsp;|&nbsp; 巴菲特视角</div>
+  <div class="hero-pills">
+    <div class="pill">股价 <strong>US$147.26</strong></div>
+    <div class="pill">市值 <strong>~US$205亿</strong></div>
+    <div class="pill">TTM P/E <strong>14.37x</strong></div>
+    <div class="pill">Forward P/E <strong>~11-12x</strong></div>
+    <div class="pill">Beta <strong>0.38</strong></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- S1: KPI -->
+<section class="section">
+  <div class="stitle">核心财务指标 — Q4 2025 & 全年</div>
+  <div style="font-size:12px;color:var(--text3);margin-bottom:8px;">▎Q4 2025（港元计价，汇率 HK$7.7833 = US$1）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">总营收</div><div class="kpi-v">HK$64.4亿</div><span class="badge up">YoY +45.3%</span></div>
+    <div class="kpi"><div class="kpi-l">毛利率</div><div class="kpi-v">88.7%</div><span class="badge up">+620bps</span></div>
+    <div class="kpi"><div class="kpi-l">经营利润率</div><div class="kpi-v">64.4%</div><span class="badge up">+1440bps</span></div>
+    <div class="kpi"><div class="kpi-l">净利润（GAAP）</div><div class="kpi-v">HK$33.7亿</div><span class="badge up">YoY +80.2%</span></div>
+    <div class="kpi"><div class="kpi-l">净利率</div><div class="kpi-v">52.3%</div><span class="badge up">+1010bps</span></div>
+    <div class="kpi"><div class="kpi-l">入金客户数</div><div class="kpi-v">336.5万</div><span class="badge up">YoY +39.6%</span></div>
+    <div class="kpi"><div class="kpi-l">客户资产</div><div class="kpi-v">HK$1.23万亿</div><span class="badge up">YoY +65.9%</span></div>
+    <div class="kpi"><div class="kpi-l">Q4 交易额</div><div class="kpi-v">HK$3.98万亿</div><span class="badge up">YoY +37.8%</span></div>
+  </div>
+  <div style="font-size:12px;color:var(--text3);margin:20px 0 8px;">▎全年 2025</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">总营收</div><div class="kpi-v">HK$228.5亿</div><span class="badge up">YoY +68.1%</span></div>
+    <div class="kpi"><div class="kpi-l">毛利率</div><div class="kpi-v">87.1%</div><span class="badge up">+510bps</span></div>
+    <div class="kpi"><div class="kpi-l">经营利润率</div><div class="kpi-v">61.6%</div><span class="badge up">+1290bps</span></div>
+    <div class="kpi"><div class="kpi-l">净利润（GAAP）</div><div class="kpi-v">HK$113.0亿</div><span class="badge up">YoY +108.0%</span></div>
+    <div class="kpi"><div class="kpi-l">Non-GAAP 净利</div><div class="kpi-v">HK$116.4亿</div><span class="badge up">YoY +101.9%</span></div>
+    <div class="kpi"><div class="kpi-l">全年交易额</div><div class="kpi-v">HK$14.68万亿</div><span class="badge up">YoY +89.4%</span></div>
+    <div class="kpi"><div class="kpi-l">全年新增入金</div><div class="kpi-v">95.4万</div><span class="badge up">+36.1%</span></div>
+    <div class="kpi"><div class="kpi-l">理财 AUM</div><div class="kpi-v">HK$1,796亿</div><span class="badge up">YoY +62.0%</span></div>
+  </div>
+</section>
+
+<!-- S2: TABLE -->
+<section class="section">
+  <div class="stitle">季度财务明细（港元百万）</div>
+  <div class="tbl-wrap">
+  <table class="tbl">
+    <thead><tr><th>指标</th><th>Q4'24</th><th>Q1'25</th><th>Q2'25</th><th>Q3'25</th><th>Q4'25</th><th>QoQ</th><th>YoY</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td>总营收</td><td>4,433</td><td>4,695</td><td>5,311</td><td>6,403</td><td>6,439</td><td style="color:var(--green)">+0.6%</td><td style="color:var(--green)">+45.3%</td></tr>
+      <tr><td>— 佣金及手续费</td><td>2,057</td><td>2,310</td><td>2,579</td><td>2,914</td><td>2,770</td><td style="color:var(--red)">-4.9%</td><td style="color:var(--green)">+34.6%</td></tr>
+      <tr><td>— 利息收入</td><td>2,022</td><td>2,071</td><td>2,288</td><td>3,045</td><td>3,038</td><td style="color:var(--text3)">-0.2%</td><td style="color:var(--green)">+50.2%</td></tr>
+      <tr><td>— 其他收入</td><td>353</td><td>314</td><td>444</td><td>444</td><td>631</td><td style="color:var(--green)">+42.1%</td><td style="color:var(--green)">+78.7%</td></tr>
+      <tr><td>毛利率</td><td>82.5%</td><td>84.2%</td><td>86.5%</td><td>87.6%</td><td>88.7%</td><td style="color:var(--green)">+110bps</td><td style="color:var(--green)">+620bps</td></tr>
+      <tr class="hl"><td>经营利润</td><td>2,217</td><td>2,685</td><td>3,344</td><td>3,904</td><td>4,147</td><td style="color:var(--green)">+6.2%</td><td style="color:var(--green)">+87.0%</td></tr>
+      <tr><td>经营利润率</td><td>50.0%</td><td>57.2%</td><td>63.0%</td><td>61.0%</td><td>64.4%</td><td style="color:var(--green)">+340bps</td><td style="color:var(--green)">+1440bps</td></tr>
+      <tr class="hl"><td>净利润 (GAAP)</td><td>1,870</td><td>2,143</td><td>2,573</td><td>3,217</td><td>3,369</td><td style="color:var(--green)">+4.7%</td><td style="color:var(--green)">+80.2%</td></tr>
+      <tr><td>净利率</td><td>42.2%</td><td>45.6%</td><td>48.4%</td><td>50.2%</td><td>52.3%</td><td style="color:var(--green)">+210bps</td><td style="color:var(--green)">+1010bps</td></tr>
+      <tr><td>入金客户 (K)</td><td>2,411</td><td>2,673</td><td>2,877</td><td>3,131</td><td>3,365</td><td style="color:var(--green)">+7.5%</td><td style="color:var(--green)">+39.6%</td></tr>
+      <tr><td>季度净增 (K)</td><td>215</td><td>262</td><td>204</td><td>254</td><td>234</td><td style="color:var(--red)">-7.9%</td><td style="color:var(--green)">+8.8%</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<!-- S3: CHARTS -->
+<section class="section">
+  <div class="stitle">营收与盈利趋势</div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">季度营收 (HK$ M)</div><div class="cwrap"><canvas id="c1"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">季度净利润 (HK$ M)</div><div class="cwrap"><canvas id="c2"></canvas></div></div>
+  </div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">利润率趋势</div><div class="cwrap"><canvas id="c3"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">入金客户增长 (K)</div><div class="cwrap"><canvas id="c4"></canvas></div></div>
+  </div>
+  <div class="cgrid3">
+    <div class="ccard"><div class="ctitle">Q4 营收结构</div><div class="cwrap"><canvas id="c5"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">Q4 运营费用结构</div><div class="cwrap"><canvas id="c6"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">客户资产 (HK$ B)</div><div class="cwrap"><canvas id="c7"></canvas></div></div>
+  </div>
+</section>
+
+<!-- S4: SANKEY -->
+<section class="section">
+  <div class="stitle">资金流向桑基图 — 2025全年 (HK$ B)</div>
+  <div class="ccard"><div id="sankey"></div></div>
+</section>
+
+<!-- S5: SEGMENTS -->
+<section class="section">
+  <div class="stitle">业务分部详解</div>
+  <div class="agrid">
+    <div class="acard">
+      <h4>💰 经纪佣金（占营收 46%）</h4>
+      <ul>
+        <li>全年 HK$105.7亿，YoY <span style="color:var(--green)">+74.9%</span></li>
+        <li>交易额 HK$14.68万亿（+89.4%），美股占主导</li>
+        <li>综合佣金率小幅下降（量增价降），但被交易量暴增覆盖</li>
+        <li>AI 产业链驱动美股交易热度，Q4 美股交易 HK$3.04万亿</li>
+        <li>港股 Q4 环比 -31%，中国科技股情绪低迷</li>
+      </ul>
+    </div>
+    <div class="acard">
+      <h4>🏦 利息收入（占营收 46%）</h4>
+      <ul>
+        <li>全年 HK$104.4亿，YoY <span style="color:var(--green)">+56.6%</span></li>
+        <li>融资融券余额 HK$677亿，QoQ +7.3%</li>
+        <li>利息支出仅增 8.7%——净息差显著扩大</li>
+        <li>Q4 利息支出反而下降 14.9%（融券成本改善）</li>
+        <li>高利率环境下的印钞机：借出客户闲置资金赚利差</li>
+      </ul>
+    </div>
+    <div class="acard">
+      <h4>📈 其他收入 (理财/IPO/汇兑，占 8%)</h4>
+      <ul>
+        <li>全年 HK$18.3亿，YoY <span style="color:var(--green)">+108.6%</span></li>
+        <li>理财 AUM HK$1,796亿 (+62% YoY)，高分红基金/伊斯兰基金拓品</li>
+        <li>IPO 分销 600 客户 (+24.5%)，港股主板过半新股覆盖</li>
+        <li>汇兑+企业服务（ESOP）贡献增量</li>
+        <li>这是增长最快且利润率最高的板块——战略方向正确</li>
+      </ul>
+    </div>
+    <div class="acard">
+      <h4>🌏 区域扩张</h4>
+      <ul>
+        <li>海外客户占入金客户 ~55%，国际化进展显著</li>
+        <li>Q4 新增客户：马来西亚/香港 >50%，美国/新加坡/日本各 10-20%</li>
+        <li>2026指引：80万新增入金客户，≥1个新亚洲市场</li>
+        <li>Crypto 渗透率持续上升（HK/SG/US），等待港 VATP 牌照</li>
+        <li>Airstar Bank 协同：理财 → 保险 → 基金分销，fee-based 收入</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- S6: EARNINGS CALL -->
+<section class="section">
+  <div class="stitle">电话会议完整内容 — 逐条记录 + 利好/利空判断</div>
+
+  <div class="ec-block">
+    <h3>📌 CEO 开场 — 李华 (Leaf Hua Li)</h3>
+    <div class="ec-item">
+      <div class="ec-quote">「2025年新增超95.4万入金客户，总数达340万，同比+39.6%。增长广泛来自香港和马来西亚的强劲客户获取。我们不仅巩固了在香港的市场领先地位——全区域最大市占率——还在马来西亚实现了显著的份额提升。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">39.6%的客户增长远超行业平均。香港+马来西亚双轮驱动，且港股下跌期间仍在获客——说明产品力而非市场情绪驱动。</div>
+    </div>
+    <div class="ec-item">
+      <div class="ec-quote">「Q4 新增约23.4万入金客户，环比-8%但同比+9%。香港因恒生指数大幅回调而放缓，但日本和马来西亚环比显著加速。我们看到各市场自下而上的充足增长机遇，给出2026年约80万新增入金客户的指引。」</div>
+      <span class="ec-tag tag-neut">📊 中性</span>
+      <div class="ec-note">80万指引 vs 2025年95.4万实际，同比-16%。管理层或在留余地（一贯风格），但也可能反映高基数+宏观不确定。</div>
+    </div>
+    <div class="ec-item">
+      <div class="ec-quote">「客户资产达HK$1.23万亿，+65.9% YoY。Q4 净资产流入保持强劲，但港股持仓市值缩水拖累总量环比持平。美国市场客均资产环比增速最快。融资融券余额升至HK$677亿，+7.3% QoQ——港股IPO热潮推动短期融资需求。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">净资产流入强劲 + 美国市场客均资产快速增长 = 高质量客户在持续涌入。融资余额+7.3%对利息收入是直接增量。</div>
+    </div>
+    <div class="ec-item">
+      <div class="ec-quote">「Q4交易额创纪录HK$3.98万亿，+37.8% YoY。美股交易额环比+17.1%至HK$3.04万亿，由AI价值链公司热度驱动。港股成交额环比-31%至HK$8,211亿。Crypto交易额尽管Q4市场情绪疲弱仍保持韧性，渗透率持续上升。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">美股交易占比76%——Futu已从"港股券商"进化为"美股主力平台"。AI主题交易热度为佣金收入提供强支撑。Crypto韧性是加分项。</div>
+    </div>
+    <div class="ec-item">
+      <div class="ec-quote">「理财AUM达HK$1,796亿，+62% YoY。我们在香港扩展了高分红基金产品线，在新加坡引入更多本地股票基金，在马来西亚推出了伊斯兰合规黄金追踪基金——深受当地客户欢迎。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">理财AUM增速+62%远超客户增速+40%——说明客均资产在提升且理财渗透率在加深。本地化产品（伊斯兰基金）展现了强执行力。</div>
+    </div>
+    <div class="ec-item">
+      <div class="ec-quote">「我们服务了600家IPO分销和IR客户，+24.5% YoY。2025年为超过一半的港股主板新上市公司提供投行服务，全年平台认购金额占港股公开发售认购总额的49%。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">49%的港股IPO公开认购份额——接近垄断地位。投行业务是高利润率 + 品牌背书的双重利好。</div>
+    </div>
+  </div>
+
+  <div class="ec-block">
+    <h3>📌 Q&A — 摩根大通 Peter Zhang</h3>
+    <div class="ec-item">
+      <div class="ec-quote">「Q1趋势：手续费收入增长良好，净资产流入环比双位数增长创历史新高，交易量环比持平，融资融券和佣金率基本持平。美股交易中中概ADR占比不到10%。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">净流入创历史新高 + 中概ADR不到10%说明客户交易以美国本土科技股为主——这降低了中美脱钩风险对交易量的影响。</div>
+    </div>
+  </div>
+
+  <div class="ec-block">
+    <h3>📌 Q&A — 美银 Emma Xu（Crypto & AI）</h3>
+    <div class="ec-item">
+      <div class="ec-quote">「Crypto方面：香港正在等待VATP（虚拟资产交易平台）牌照；新加坡和美国持续扩充代币种类；Crypto客户增长达双位数，渗透率在高个位数到低十几的范围。AI方面：自2022年起即集成AI——用于研报生成、业绩摘要、策略工具，持续提升运营效率。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">Crypto渗透率仍在早期（高个位数~低teens），上行空间巨大。VATP牌照一旦落地将打开香港Crypto交易增量。AI提效降本但尚未成为独立收入来源。</div>
+    </div>
+  </div>
+
+  <div class="ec-block">
+    <h3>📌 Q&A — 摩根士丹利 Chiyao Huang（2026指引 & Airstar Bank）</h3>
+    <div class="ec-item">
+      <div class="ec-quote">「2026年80万目标驱动力：已有市场的自然增长 + 至少一个新亚洲市场进入。Airstar Bank（天星银行）协同效应：理财产品（基金/保险）分销，推动fee-based收入增长。」</div>
+      <span class="ec-tag tag-neut">📊 中性偏好</span>
+      <div class="ec-note">新市场进入是增量但也意味着CAC上升。Airstar协同逻辑通顺——从交易型收入向资管/保险型fee-based转型，提高收入多元性。</div>
+    </div>
+  </div>
+
+  <div class="ec-block">
+    <h3>📌 Q&A — 中金 You Fan（区域拆分）</h3>
+    <div class="ec-item">
+      <div class="ec-quote">「Q4新增客户地区分布：马来西亚+香港占比超50%，美国/新加坡/日本各占10-20%。海外客户已占入金账户约55%。AUM方面香港仍是最大贡献者——高净值客户持续流入，部分抵消了恒指下跌约5%的市值缩水。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">海外占比55%意味着Futu已不再是纯港股概念——地域多元化显著降低了单一市场风险。高净值客户逆势流入说明品牌信任度在增强。</div>
+    </div>
+  </div>
+
+  <div class="ec-block">
+    <h3>📌 Q&A — 里昂 Leon Qi（新市场 & 净流入韧性）</h3>
+    <div class="ec-item">
+      <div class="ec-quote">「计划2026年进入至少一个新亚洲市场。尽管恒生指数环比下跌~5%导致市值缩水，客户净资产流入保持韧性，高净值客户流入尤为强劲。」</div>
+      <span class="ec-tag tag-neut">📊 中性</span>
+      <div class="ec-note">新市场扩张是长期正确但短期烧钱。净流入在市场下跌中保持韧性是对平台粘性的实证——但若市场持续下跌，这种韧性能维持多久有待观察。</div>
+    </div>
+  </div>
+
+  <div class="ec-block">
+    <h3>📌 Q&A — 华兴 Yun-Yin Wang（CAC & 香港竞争）</h3>
+    <div class="ec-item">
+      <div class="ec-quote">「客户获取成本（CAC）稳定在HK$2,500-3,000/客户，同比基本持平。新增客户中香港 vs 海外的分布比例稳定。Q1初步数据持续向好。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">CAC持平+客户量+40% = 获客效率保持高水平。HK$2,500-3,000的CAC对于人均资产HK$36.5万的客户来说，回收期极短（<1年）。</div>
+    </div>
+  </div>
+
+  <div class="ec-block">
+    <h3>📌 Q&A — 杰弗瑞 Yi Zong（竞争格局 & 回购）</h3>
+    <div class="ec-item">
+      <div class="ec-quote">「香港市场份额同比高双位数增长。$8亿美元回购计划已公布（2025年11月，有效期至2027年12月），Q4尚未执行任何回购，将根据市场条件机会性操作。」</div>
+      <span class="ec-tag tag-neut">📊 中性偏空</span>
+      <div class="ec-note">市占率增长是好事，但$8亿回购计划公布后一股未买——管理层要么认为股价不够便宜，要么在等更好时机。对已持股的投资者来说，这释放了混合信号。</div>
+    </div>
+  </div>
+
+  <div style="background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin-top:16px;">
+    <div style="font-size:14px;font-weight:700;color:var(--accent3);margin-bottom:12px;">📊 电话会议信号汇总</div>
+    <table class="tbl" style="font-size:12.5px;">
+      <thead><tr><th>信号类别</th><th>数量</th><th>代表性内容</th></tr></thead>
+      <tbody>
+        <tr><td><span class="ec-tag tag-bull" style="font-size:11px;">🟢 利好</span></td><td style="color:var(--green);font-weight:700;">9 项</td><td>客户+40%/资产+66%、利润率持续扩张、美股主导交易、Crypto渗透上升、IPO垄断、Q1流入创新高</td></tr>
+        <tr><td><span class="ec-tag tag-neut" style="font-size:11px;">📊 中性</span></td><td style="color:var(--accent2);font-weight:700;">4 项</td><td>2026指引保守80万、新市场进入待验证、Airstar协同待落地、回购未执行</td></tr>
+        <tr><td><span class="ec-tag tag-bear" style="font-size:11px;">🔴 利空</span></td><td style="color:var(--red);font-weight:700;">0 项</td><td>——</td></tr>
+      </tbody>
+    </table>
+    <div style="font-size:12px;color:var(--text2);margin-top:10px;line-height:1.6;">
+      <strong>总体基调：</strong>这是一场极度自信的电话会议——没有一个分析师问了让管理层为难的问题。所有指标全面正增长，唯一的"负面"是2026指引低于2025实际（管理层保守惯例）和回购未动手。整体基调：极强。
+    </div>
+  </div>
+</section>
+
+<!-- S7: BUFFETT ANALYSIS -->
+<section class="section">
+  <div class="stitle">巴菲特六维评分</div>
+  <div class="bscore"><div class="circle cg">A</div><div class="bd"><h4>护城河：技术 + 产品 + 监管壁垒</h4><p>Moomoo/Futubull 产品力在亚洲互联网券商中无人能及。多市场持牌（HK/SG/US/JP/MY/AU）是极高的监管壁垒——新进入者需数年+数亿获牌。社区功能形成用户粘性。港股IPO分销49%份额接近垄断。</p></div></div>
+  <div class="bscore"><div class="circle cg">A-</div><div class="bd"><h4>管理层：执行力卓越、诚信尚可</h4><p>李华团队连续超额完成客户增长目标（2025指引55万→实际95.4万）。但$8亿回购"只说不做"扣分。不分红的政策对现金充裕的公司来说稍显吝啬。总体执行力极强。</p></div></div>
+  <div class="bscore"><div class="circle cg">A</div><div class="bd"><h4>财务健康：极强</h4><p>净利率52.3%、毛利率88.7%——这是软件级别的利润率出现在金融公司身上。股东权益HK$400亿 vs 市值HK$1,600亿 = P/B仅4x（对比IBKR P/B ~10x）。零有息负债（除客户保证金相关负债）。</p></div></div>
+  <div class="bscore"><div class="circle cw">B+</div><div class="bd"><h4>盈利质量：优秀但周期性强</h4><p>利润高度依赖交易量和利率环境——两者都是周期性变量。牛市时利润暴增108%，熊市可能腰斩。利息收入占46%面临降息风险。理财/IPO等fee-based收入占比仅8%，仍需时间提升。</p></div></div>
+  <div class="bscore"><div class="circle cw">B</div><div class="bd"><h4>可预测性：中等偏上</h4><p>客户数和AUM增长可预测（结构性驱动），但季度营收和利润高度波动（取决于市场情绪）。Crypto和港股市场波动增加了不确定性。监管风险（中国VIE结构、各地牌照续期）是长期隐忧。</p></div></div>
+  <div class="bscore"><div class="circle cw">B</div><div class="bd"><h4>资本配置纪律：待改善</h4><p>$8亿回购计划有诚意但未执行。不分红让自由现金流堆积在资产负债表上。R&D支出+27.8%合理（投入AI+Crypto），但营销+40.5%的增速需要关注CAC是否真的"持平"。</p></div></div>
+</section>
+
+<!-- S8: DCF -->
+<section class="section">
+  <div class="stitle">DCF 估值 — 三情景对比</div>
+  <div style="font-size:12px;color:var(--text3);margin-bottom:16px;">假设：ADS ~139M 份 | 2025 GAAP 净利 HK$113亿 ≈ US$14.5亿 | 以净利润作为 FCF 近似（券商轻资产模型）</div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:18px;">
+    <div class="acard" style="border-top:3px solid var(--green);">
+      <h4 style="color:var(--green);">🟢 乐观情景</h4>
+      <ul style="font-size:12.5px;">
+        <li>收入 CAGR：<strong>20%</strong></li>
+        <li>净利率：<strong>55%（扩张）</strong></li>
+        <li>折现率：<strong>10%</strong></li>
+        <li>永续增长：<strong>3%</strong></li>
+        <li>地缘折扣：<strong>-15%</strong></li>
+        <li>2030E 净利：~US$41亿</li>
+        <li>5年现值：~US$118亿</li>
+        <li>终值现值：~US$407亿</li>
+        <li>折扣后：~US$446亿</li>
+        <li style="font-weight:700;color:var(--green);">每ADS：~US$321</li>
+      </ul>
+    </div>
+    <div class="acard" style="border-top:3px solid var(--gold);">
+      <h4 style="color:var(--gold);">📊 中性情景（基准）</h4>
+      <ul style="font-size:12.5px;">
+        <li>收入 CAGR：<strong>15%</strong></li>
+        <li>净利率：<strong>50%（稳定）</strong></li>
+        <li>折现率：<strong>12%</strong></li>
+        <li>永续增长：<strong>2.5%</strong></li>
+        <li>地缘折扣：<strong>-25%</strong></li>
+        <li>2030E 净利：~US$29亿</li>
+        <li>5年现值：~US$83亿</li>
+        <li>终值现值：~US$226亿</li>
+        <li>折扣后：~US$232亿</li>
+        <li style="font-weight:700;color:var(--gold);">每ADS：~US$167</li>
+      </ul>
+    </div>
+    <div class="acard" style="border-top:3px solid var(--red);">
+      <h4 style="color:var(--red);">🔴 悲观情景</h4>
+      <ul style="font-size:12.5px;">
+        <li>收入 CAGR：<strong>8%</strong></li>
+        <li>净利率：<strong>40%（压缩）</strong></li>
+        <li>折现率：<strong>14%</strong></li>
+        <li>永续增长：<strong>2%</strong></li>
+        <li>地缘折扣：<strong>-35%</strong></li>
+        <li>2030E 净利：~US$17亿</li>
+        <li>5年现值：~US$48亿</li>
+        <li>终值现值：~US$96亿</li>
+        <li>折扣后：~US$94亿</li>
+        <li style="font-weight:700;color:var(--red);">每ADS：~US$67</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="tbl-wrap" style="margin-bottom:18px;">
+    <table class="tbl" style="font-size:13px;">
+      <thead><tr><th>情景</th><th>WACC</th><th>地缘折扣</th><th>每ADS内在价值</th><th>含25%安全垫</th><th>vs 当前$147</th></tr></thead>
+      <tbody>
+        <tr><td style="color:var(--green);font-weight:600;">🟢 乐观</td><td>10%</td><td>-15%</td><td style="color:var(--green);font-weight:700;">$321</td><td>$241</td><td style="color:var(--green)">上行118%</td></tr>
+        <tr class="hl"><td style="color:var(--gold);font-weight:600;">📊 中性</td><td>12%</td><td>-25%</td><td style="color:var(--gold);font-weight:700;">$167</td><td>$125</td><td style="color:var(--green)">上行14%</td></tr>
+        <tr><td style="color:var(--red);font-weight:600;">🔴 悲观</td><td>14%</td><td>-35%</td><td style="color:var(--red);font-weight:700;">$67</td><td>$50</td><td style="color:var(--red)">下行54%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="verdict">
+    <div class="verdict-t">🎯 综合裁决</div>
+    <div style="line-height:1.8;margin-bottom:14px;">
+      当前股价 $147 处于<strong>中性情景与悲观情景之间偏中性</strong>的位置。中性DCF给出$167（上行14%）——合理但不算便宜。悲观情景$67意味着重大下行风险存在（降息+市场低迷+监管收紧的组合拳）。
+    </div>
+    <div class="pgrid">
+      <div class="pbox"><div class="pl">当前市场价</div><div class="pv pc">$147</div><div class="pn">TTM P/E 14.4x</div></div>
+      <div class="pbox"><div class="pl">中性 DCF</div><div class="pv pf">$167</div><div class="pn">上行 14%</div></div>
+      <div class="pbox"><div class="pl">中性含安全垫</div><div class="pv ps">$125</div><div class="pn">需等回调</div></div>
+    </div>
+    <div style="background:rgba(185,160,106,.1);border:1px solid rgba(185,160,106,.3);border-radius:8px;padding:14px;">
+      <div style="color:var(--gold);font-weight:700;margin-bottom:6px;">⚖️ 结论：合理估值，伺机加仓 (Fair Value — Buy on Dips)</div>
+      <div style="font-size:13px;line-height:1.8;">
+        <strong>核心判断：好公司好业绩，但当前价格已反映大部分利好。</strong><br><br>
+        ① 中性DCF $167 vs 股价 $147 → 仅14%上行空间，不构成"显著低估"<br>
+        ② 乐观DCF $321 → 如果牛市持续+Crypto落地，翻倍潜力存在<br>
+        ③ 悲观DCF $67 → 若全球降息+市场冷却，下行风险不可忽视<br><br>
+        <strong>操作建议：</strong><br>
+        • 已持仓者：持有，不追高<br>
+        • 未建仓者：等回调至 $120-130（中性安全垫附近）再入场<br>
+        • 激进策略：在 $100 以下重仓（接近悲观与中性之间）<br>
+        • 仓位建议：组合的 3-5%，不超过 8%<br><br>
+        <span style="color:var(--red)">⚠️ 风险：交易量周期性下滑 / 全球降息压缩利差 / 中国VIE结构风险 / 港股持续低迷 / Crypto监管收紧 / 新市场扩张亏损</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S9: COMMENTARY -->
+<section class="section">
+  <div class="stitle">🍔 巴菲特风格深度点评</div>
+  <div class="cmt">
+    <p>说实话，<span class="hl-t">富途是我看过的中概股里最接近"完美"的财务报表</span>。88.7%的毛利率、52.3%的净利率、营收+68%利润+108%——如果你把公司名字遮住，我会以为这是一家硅谷SaaS公司。</p>
+
+    <p>但它不是SaaS，它是券商。这是一把双刃剑。</p>
+
+    <p>好的一面：<span class="hl-t">富途的商业模式本质上是一台精密的印钞机</span>。客户的钱存进来（HK$1.23万亿），一半用来交易给你佣金，一半放在账上给你利差。收入的46%是利息——这几乎是"躺着赚"的钱。毛利率87%意味着每赚100块只花13块成本。连续五个季度利润率持续扩张（42.2%→52.3%），运营杠杆仍在释放。</p>
+
+    <p>客户数据更让人印象深刻。<span class="hl-t">340万入金客户、1.23万亿客户资产——换算下来每个客户平均资产HK$36.5万（约US$4.7万）</span>。这不是"韭菜型"用户，而是有真金白银的中产/高净值投资者。而且他们还在以40%的速度增长，CAC只有HK$2,500-3,000。</p>
+
+    <p>港股IPO分销49%的份额——<span class="hl-t">这几乎是垄断</span>。600家企业客户、超过一半的港股主板新股走你的平台——这种B端粘性一旦建立就极难撼动。</p>
+
+    <p>Crypto渗透率还在个位数到低teens——如果港VATP牌照落地，这是一个巨大的增量。AI整合从2022年就开始了，不是追风口，是真在用。区域多元化做到了55%海外——中国单一市场风险大幅降低。</p>
+
+    <p>那么，为什么只给"伺机加仓"而不是"强烈买入"？</p>
+
+    <p>因为<span class="warn-t">券商的利润周期性太强</span>。2025年全球市场牛市——美股AI热潮、港股一波小行情、Crypto反弹——这是最好的顺风。当风停了呢？2024年全年收入才HK$136亿，净利HK$54亿——如果2026年市场冷却回到那个水平，你付的14x P/E瞬间变成30x。</p>
+
+    <p>利息收入占46%在降息周期是个大问题。<span class="warn-t">如果全球进入降息通道，融资融券利差会被压缩</span>——这块收入的利润率最高，影响也最大。</p>
+
+    <p>最后，<span class="warn-t">$8亿回购一股未买</span>这件事让我有点不爽。如果管理层自己都不觉得$147便宜到值得回购，我为什么要在这个价格重仓？</p>
+
+    <p><span class="hl-t">我的策略：这是一家值得长期持有的优质公司，但当前不是最佳买入点。</span>等市场回调到$120-130区间（对应中性DCF的安全垫价），或者等一两个季度确认利润增速能在"正常化"的市场环境中持续，再建5%仓位。如果跌到$100以下——那就是送钱，果断加到8%。</p>
+
+    <p>好公司要在打折的时候买。富途绝对是好公司——<span class="hl-t">但好公司原价买只能赚平庸的回报</span>。</p>
+
+    <p style="color:var(--text3);font-size:12px;border-top:1px solid var(--border);padding-top:12px;margin-top:8px;">
+      ⚠️ 以上分析仅供研究参考，不构成投资建议。投资有风险，请结合自身风险承受能力做决策。
+    </p>
+  </div>
+</section>
+</div>
+
+<footer>
+  <div>富途控股（NASDAQ: FUTU）2025 Q4 & 全年深度分析</div>
+  <div style="margin-top:4px;">数据来源：富途IR官方、电话会议纪要（2026-03-12）</div>
+  <div style="margin-top:4px;">Buffy · AI 巴菲特分析引擎 · 2026-03-18 · 莫兰迪版</div>
+</footer>
+
+<script>
+function toggleTheme(){const h=document.documentElement;h.dataset.theme=h.dataset.theme==='dark'?'light':'dark';buildSankey()}
+const QL=['Q4\'24','Q1\'25','Q2\'25','Q3\'25','Q4\'25'];
+Chart.defaults.color='#a89f98';
+Chart.defaults.font.family="'Segoe UI','PingFang SC',sans-serif";
+
+new Chart(document.getElementById('c1'),{type:'bar',data:{labels:QL,datasets:[
+  {label:'佣金',data:[2057,2310,2579,2914,2770],backgroundColor:'#7b8fa0',borderRadius:4},
+  {label:'利息',data:[2022,2071,2288,3045,3038],backgroundColor:'#8a9a8e',borderRadius:4},
+  {label:'其他',data:[353,314,444,444,631],backgroundColor:'#b9a06a',borderRadius:4}
+]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10}}},scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,grid:{color:'rgba(150,140,130,.15)'},ticks:{callback:v=>v/1000+'B'}}}}});
+
+new Chart(document.getElementById('c2'),{type:'bar',data:{labels:QL,datasets:[{label:'HK$M',data:[1870,2143,2573,3217,3369],backgroundColor:['#b9a06a','#8a9a8e','#8a9a8e','#8a9a8e','#7a9a7a'],borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{grid:{color:'rgba(150,140,130,.15)'},ticks:{callback:v=>v/1000+'B'}},x:{grid:{display:false}}}}});
+
+new Chart(document.getElementById('c3'),{type:'line',data:{labels:QL,datasets:[
+  {label:'毛利率',data:[82.5,84.2,86.5,87.6,88.7],borderColor:'#8a9a8e',backgroundColor:'rgba(138,154,142,.1)',fill:true,tension:.4,pointRadius:5},
+  {label:'经营利润率',data:[50.0,57.2,63.0,61.0,64.4],borderColor:'#7b8fa0',backgroundColor:'rgba(123,143,160,.1)',fill:true,tension:.4,pointRadius:5},
+  {label:'净利率',data:[42.2,45.6,48.4,50.2,52.3],borderColor:'#b9a06a',backgroundColor:'rgba(185,160,106,.1)',fill:true,tension:.4,pointRadius:5}
+]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10}}},scales:{y:{grid:{color:'rgba(150,140,130,.15)'},ticks:{callback:v=>v+'%'}},x:{grid:{display:false}}}}});
+
+new Chart(document.getElementById('c4'),{type:'bar',data:{labels:QL,datasets:[
+  {label:'累计 (K)',data:[2411,2673,2877,3131,3365],backgroundColor:'rgba(123,143,160,.3)',borderColor:'#7b8fa0',borderWidth:1,borderRadius:4,yAxisID:'y'},
+  {label:'季度新增 (K)',data:[215,262,204,254,234],type:'line',borderColor:'#b9a06a',pointBackgroundColor:'#b9a06a',pointRadius:5,tension:.3,yAxisID:'y1'}
+]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10}}},scales:{y:{grid:{color:'rgba(150,140,130,.15)'},position:'left'},y1:{grid:{display:false},position:'right'},x:{grid:{display:false}}}}});
+
+new Chart(document.getElementById('c5'),{type:'doughnut',data:{labels:['佣金 43%','利息 47%','其他 10%'],datasets:[{data:[2770,3038,631],backgroundColor:['#7b8fa0','#8a9a8e','#b9a06a'],borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{boxWidth:10}}},cutout:'62%'}});
+
+new Chart(document.getElementById('c6'),{type:'doughnut',data:{labels:['研发 32%','营销 32%','管理 36%'],datasets:[{data:[507,507,550],backgroundColor:['#7b8fa0','#b9a06a','#c09090'],borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{boxWidth:10}}},cutout:'62%'}});
+
+new Chart(document.getElementById('c7'),{type:'bar',data:{labels:QL,datasets:[{label:'HK$ B',data:[743,850,1020,1230,1230],backgroundColor:['#b9a06a','#8a9a8e','#8a9a8e','#8a9a8e','#7a9a7a'],borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{grid:{color:'rgba(150,140,130,.15)'}},x:{grid:{display:false}}}}});
+
+function buildSankey(){
+  const isDark=document.documentElement.dataset.theme==='dark';
+  Plotly.newPlot('sankey',[{type:'sankey',orientation:'h',
+    node:{pad:18,thickness:22,line:{color:isDark?'rgba(74,69,64,.5)':'rgba(200,190,180,.5)',width:1},
+      label:['总营收 22.8B','营收成本 2.9B','毛利润 19.9B','研发 1.9B','营销 2.0B','管理 1.9B','经营利润 14.1B','其他损益','净利润 11.3B'],
+      color:['#7b8fa0','#b87070','#8a9a8e','#b87070','#b87070','#b87070','#7b8fa0','#b9a06a','#7a9a7a']},
+    link:{source:[0,0,2,2,2,2,6,7],target:[1,2,3,4,5,6,8,8],
+      value:[2.9,19.9,1.9,2.0,1.9,14.1,11.3,0],
+      color:['rgba(184,112,112,.2)','rgba(138,154,142,.3)','rgba(184,112,112,.2)','rgba(184,112,112,.2)','rgba(184,112,112,.2)','rgba(123,143,160,.3)','rgba(122,154,122,.3)','rgba(185,160,106,.2)']}
+  }],{paper_bgcolor:isDark?'#2e2a25':'#fff',plot_bgcolor:isDark?'#2e2a25':'#fff',font:{color:isDark?'#d4ccc4':'#4a4340',family:"'Segoe UI','PingFang SC',sans-serif",size:12},margin:{t:8,b:8,l:8,r:8}},{responsive:true,displayModeBar:false});
+}
+buildSankey();
+</script>
+</body>
+</html>

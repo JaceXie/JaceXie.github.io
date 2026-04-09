@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Circle Internet Group (CRCL) — Q4 2025 & 全年财报深度分析 V2</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root {
+  --bg:#f5f0eb; --bg2:#ece6df; --card:#ffffff; --card2:#f8f5f1;
+  --border:#d9d0c7; --text:#4a4340; --text2:#7a706a; --text3:#a89f98;
+  --accent:#8a9a8e; --accent2:#7b8fa0; --accent3:#b08d7a; --rose:#c09090;
+  --gold:#b9a06a; --red:#b87070; --green:#7a9a7a; --shadow:rgba(0,0,0,.06);
+  --chart-grid:#e5ddd5;
+}
+[data-theme="dark"] {
+  --bg:#1e1c1a; --bg2:#28251f; --card:#2e2a25; --card2:#363230;
+  --border:#4a4540; --text:#d4ccc4; --text2:#a09890; --text3:#706860;
+  --accent:#8a9a8e; --accent2:#8fabbf; --accent3:#c9a48e; --rose:#c09090;
+  --gold:#c9b07a; --red:#c08080; --green:#8aaa8a; --shadow:rgba(0,0,0,.3);
+  --chart-grid:#3e3a35;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Georgia','PingFang SC',serif;line-height:1.75;font-size:14.5px;transition:background .35s,color .35s}
+a{color:var(--accent2);text-decoration:none}
+
+.theme-bar{position:sticky;top:0;z-index:100;background:var(--card);border-bottom:1px solid var(--border);padding:8px 24px;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(10px);transition:background .35s}
+.theme-bar .logo{font-size:13px;color:var(--text2);letter-spacing:1px;font-family:'Segoe UI',sans-serif}
+.theme-toggle{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2);font-family:'Segoe UI',sans-serif}
+.toggle-switch{position:relative;width:44px;height:22px;background:var(--border);border-radius:11px;cursor:pointer;transition:background .3s}
+.toggle-switch::after{content:'';position:absolute;top:2px;left:2px;width:18px;height:18px;background:var(--card);border-radius:50%;transition:transform .3s;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+[data-theme="dark"] .toggle-switch{background:var(--accent2)}
+[data-theme="dark"] .toggle-switch::after{transform:translateX(22px)}
+
+.hero{padding:48px 24px 36px;text-align:center;border-bottom:1px solid var(--border)}
+.hero-tag{display:inline-block;font-family:'Segoe UI',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);padding:3px 14px;border-radius:20px;margin-bottom:18px}
+.hero h1{font-size:30px;font-weight:700;color:var(--text);letter-spacing:1px;margin-bottom:8px}
+.hero-sub{font-size:14px;color:var(--text2);margin-bottom:20px}
+.hero-pills{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+.pill{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:6px 18px;font-family:'Segoe UI',sans-serif;font-size:13px;color:var(--text2);box-shadow:0 1px 3px var(--shadow)}
+.pill strong{color:var(--text)}
+
+/* STOCK SNAPSHOT */
+.snap-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:900px;margin:0 auto 8px}
+.snap-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 18px;box-shadow:0 2px 8px var(--shadow);position:relative;overflow:hidden}
+.snap-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.snap-card:nth-child(1)::before{background:var(--red)}
+.snap-card:nth-child(2)::before{background:var(--accent2)}
+.snap-card:nth-child(3)::before{background:var(--gold)}
+.snap-card:nth-child(4)::before{background:var(--accent)}
+.snap-l{font-family:'Segoe UI',sans-serif;font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.snap-v{font-family:'Segoe UI',sans-serif;font-size:22px;font-weight:800;color:var(--text);margin-bottom:4px}
+.snap-sub{font-size:12px;color:var(--text2)}
+
+/* ALERT BOX */
+.alert{background:rgba(184,112,112,.08);border:1.5px solid var(--red);border-radius:10px;padding:16px 20px;margin-bottom:20px}
+.alert-title{font-weight:700;color:var(--red);margin-bottom:6px;font-family:'Segoe UI',sans-serif;display:flex;align-items:center;gap:8px}
+.alert p{font-size:13.5px;color:var(--text2);line-height:1.7}
+
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+.section{padding:36px 0;border-bottom:1px solid var(--border)}
+.stitle{font-size:18px;font-weight:700;color:var(--accent3);margin-bottom:20px;letter-spacing:.5px;display:flex;align-items:center;gap:10px}
+.stitle::before{content:'';display:block;width:4px;height:20px;background:var(--accent3);border-radius:2px}
+
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:14px}
+.kpi{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 18px;box-shadow:0 1px 4px var(--shadow)}
+.kpi-l{font-family:'Segoe UI',sans-serif;font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
+.kpi-v{font-size:20px;font-weight:700;color:var(--text);margin-bottom:3px}
+.badge{display:inline-block;font-family:'Segoe UI',sans-serif;font-size:11px;font-weight:600;padding:2px 8px;border-radius:8px}
+.up{background:rgba(122,154,122,.15);color:var(--green)}
+.dn{background:rgba(184,112,112,.15);color:var(--red)}
+.nt{background:rgba(123,143,160,.15);color:var(--accent2)}
+
+.tbl-wrap{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow-x:auto;box-shadow:0 1px 4px var(--shadow)}
+.tbl{width:100%;border-collapse:collapse;font-family:'Segoe UI',sans-serif;font-size:13px}
+.tbl th{background:var(--card2);color:var(--text3);font-size:11px;letter-spacing:.5px;text-transform:uppercase;padding:10px 14px;text-align:right;border-bottom:1px solid var(--border)}
+.tbl th:first-child{text-align:left}
+.tbl td{padding:9px 14px;border-bottom:1px solid var(--border);text-align:right}
+.tbl td:first-child{text-align:left;color:var(--text2)}
+.tbl .hl td{font-weight:600;color:var(--text)}
+.tbl .hl2 td{font-weight:700;color:var(--accent);background:rgba(138,154,142,.05)}
+
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.cgrid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:16px}
+.ccard{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px;box-shadow:0 1px 4px var(--shadow)}
+.ctitle{font-family:'Segoe UI',sans-serif;font-size:12px;color:var(--text3);margin-bottom:12px;text-transform:uppercase;letter-spacing:.5px}
+.cwrap{position:relative;height:230px}
+
+/* PLATFORM GRID */
+.pgrid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.pcard{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center;box-shadow:0 1px 4px var(--shadow)}
+.p-icon{font-size:22px;margin-bottom:6px}
+.p-lbl{font-family:'Segoe UI',sans-serif;font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.p-val{font-family:'Segoe UI',sans-serif;font-size:1.15rem;font-weight:700}
+.p-chg{font-size:11.5px;margin-top:2px}
+
+/* EARNINGS CALL */
+.ec-block{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px 22px;margin-bottom:14px;box-shadow:0 1px 4px var(--shadow)}
+.ec-block.bull{border-left:4px solid var(--green)}
+.ec-block.bear{border-left:4px solid var(--red)}
+.ec-block.neut{border-left:4px solid var(--accent2)}
+.ec-hdr{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:10px}
+.ec-meta{flex:1}
+.ec-topic{font-family:'Segoe UI',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--text3);margin-bottom:4px}
+.ec-speaker{font-weight:700;font-size:14px;color:var(--accent3)}
+.ec-role{font-family:'Segoe UI',sans-serif;font-size:12px;color:var(--text3)}
+.ec-tags{display:flex;gap:6px;flex-shrink:0}
+.tag-bull{background:rgba(122,154,122,.15);color:var(--green);font-family:'Segoe UI',sans-serif;font-size:11px;font-weight:700;padding:3px 10px;border-radius:10px}
+.tag-bear{background:rgba(184,112,112,.15);color:var(--red);font-family:'Segoe UI',sans-serif;font-size:11px;font-weight:700;padding:3px 10px;border-radius:10px}
+.tag-neut{background:rgba(123,143,160,.15);color:var(--accent2);font-family:'Segoe UI',sans-serif;font-size:11px;font-weight:700;padding:3px 10px;border-radius:10px}
+.ec-quote{font-style:italic;font-size:13.5px;color:var(--text);line-height:1.8;margin-bottom:12px}
+.ec-cmnt{font-family:'Segoe UI',sans-serif;font-size:12.5px;color:var(--text2);background:var(--bg2);padding:10px 14px;border-radius:8px}
+
+/* NEW DEV SECTION */
+.news-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.news-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 18px;box-shadow:0 1px 4px var(--shadow)}
+.news-date{font-family:'Segoe UI',sans-serif;font-size:11px;color:var(--text3);margin-bottom:6px}
+.news-title{font-weight:600;font-size:14px;margin-bottom:8px}
+.news-body{font-size:13px;color:var(--text2);line-height:1.65}
+
+/* BUFFETT SCORES */
+.bscore{display:flex;align-items:center;gap:16px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin-bottom:12px;box-shadow:0 1px 4px var(--shadow)}
+.circle{width:62px;height:62px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;flex-shrink:0;border:3px solid;font-family:'Segoe UI',sans-serif}
+.cg{border-color:var(--green);color:var(--green)}
+.cw{border-color:var(--gold);color:var(--gold)}
+.cr{border-color:var(--red);color:var(--red)}
+.bscore .bd h4{font-size:14px;margin-bottom:3px}
+.bscore .bd p{font-size:13px;color:var(--text2);line-height:1.6}
+
+/* DCF SCENARIOS */
+.dcf-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:16px}
+.dcf-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px;text-align:center;box-shadow:0 1px 4px var(--shadow)}
+.dcf-lbl{font-family:'Segoe UI',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--text3);margin-bottom:8px}
+.dcf-price{font-family:'Segoe UI',sans-serif;font-size:2rem;font-weight:800;margin:8px 0}
+.dcf-bull .dcf-price{color:var(--green)}
+.dcf-base .dcf-price{color:var(--accent2)}
+.dcf-bear .dcf-price{color:var(--red)}
+.dcf-desc{font-size:12px;color:var(--text2);line-height:1.7;text-align:left;margin-top:10px}
+
+/* VERDICT */
+.verdict{background:var(--card2);border:2px solid var(--accent);border-radius:10px;padding:26px 28px;margin-bottom:16px}
+.verdict-t{font-size:17px;font-weight:700;color:var(--accent);margin-bottom:10px}
+.pgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:18px 0}
+.pbox{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center;box-shadow:0 1px 4px var(--shadow)}
+.pbox .pl{font-family:'Segoe UI',sans-serif;font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
+.pbox .pv{font-family:'Segoe UI',sans-serif;font-size:26px;font-weight:800}
+.pbox .pn{font-size:11px;color:var(--text3);margin-top:3px}
+.pc{color:var(--text2)}.pf{color:var(--gold)}.ps{color:var(--green)}.prd{color:var(--red)}
+
+#sankey{width:100%;height:440px}
+.cmt{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:26px;line-height:1.9;font-size:14.5px;box-shadow:0 1px 4px var(--shadow)}
+.cmt p{margin-bottom:14px}
+.hl-t{color:var(--accent3);font-weight:600}
+.warn-t{color:var(--red);font-weight:600}
+footer{background:var(--card2);border-top:1px solid var(--border);padding:24px;text-align:center;color:var(--text3);font-size:12px;margin-top:40px;font-family:'Segoe UI',sans-serif}
+
+@media(max-width:768px){
+  .cgrid,.cgrid3,.snap-grid,.news-grid,.dcf-grid,.pgrid{grid-template-columns:1fr}
+  .snap-grid{grid-template-columns:1fr 1fr}
+  .hero h1{font-size:22px}
+  .kpi-grid{grid-template-columns:1fr 1fr}
+  .bscore{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <div class="logo">BUFFY · 财报研究所 🍔</div>
+  <div class="theme-toggle">
+    <span>☀️</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">V2 · 2026年3月25日 · 最新市场数据</div>
+  <h1>Circle Internet Group — Q4 2025 & 全年财报深度解析</h1>
+  <div class="hero-sub">NYSE: CRCL &nbsp;|&nbsp; USDC 稳定币基础设施 &nbsp;|&nbsp; IPO 后首个完整财年 &nbsp;|&nbsp; 巴菲特价值投资视角</div>
+
+  <!-- ★ STOCK SNAPSHOT — 四项必填指标 -->
+  <div class="snap-grid">
+    <div class="snap-card">
+      <div class="snap-l">当前股价</div>
+      <div class="snap-v" style="color:var(--red)">$98.62</div>
+      <div class="snap-sub">🔴 今日 -22.1%（CLARITY Act 触发）</div>
+    </div>
+    <div class="snap-card">
+      <div class="snap-l">市值（摊薄）</div>
+      <div class="snap-v">$261亿</div>
+      <div class="snap-sub">~2.65亿摊薄股 × $98.62</div>
+    </div>
+    <div class="snap-card">
+      <div class="snap-l">TTM 市盈率</div>
+      <div class="snap-v">N/A</div>
+      <div class="snap-sub">GAAP全年亏损 | Adj ~64x</div>
+    </div>
+    <div class="snap-card">
+      <div class="snap-l">Forward P/E</div>
+      <div class="snap-v">~108x</div>
+      <div class="snap-sub">FY2026E EPS $0.91（含SBC）</div>
+    </div>
+  </div>
+
+  <div class="hero-pills">
+    <div class="pill">52周区间 <strong>$49.90 – $298.99</strong></div>
+    <div class="pill">IPO价 <strong>$31</strong>（2025年6月）</div>
+    <div class="pill">分析师均目标价 <strong>$126</strong>（23位 · 持有）</div>
+    <div class="pill">EV/FY26E EBITDA <strong>~38x</strong></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ ALERT ═══ -->
+<section class="section" style="padding-top:28px">
+  <div class="alert">
+    <div class="alert-title">🚨 重大事件：2026年3月24日 股价单日暴跌 22.1%</div>
+    <p>Senate CLARITY Act（数字资产市场结构法案）最新草案（3月23日披露）拟<strong>禁止平台向稳定币持有人提供被动收益/利息</strong>，直接威胁 Circle 现有的分成分发模式。Tether 同日宣布聘请四大会计师事务所进行首次全面审计，进一步加剧市场担忧。CRCL 从 $126.64 跌至 $98.62，创上市后最大单日跌幅。Coinbase (COIN) 同步下跌 8-9%。法案尚未通过（需60票 Senate + 众议院协商 + 总统签署），通过概率约 68-72%，最快 2026 年中。</p>
+  </div>
+</section>
+
+<!-- ═══ S1: KPI ═══ -->
+<section class="section">
+  <div class="stitle">核心财务指标 — Q4 2025 & 全年</div>
+  <div style="font-size:12px;color:var(--text3);font-family:'Segoe UI',sans-serif;margin-bottom:10px">▎Q4 2025 单季度</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">总收入及储备收益</div><div class="kpi-v">$7.70亿</div><span class="badge up">YoY +77%</span></div>
+    <div class="kpi"><div class="kpi-l">储备收益</div><div class="kpi-v">$7.33亿</div><span class="badge up">YoY +69%</span></div>
+    <div class="kpi"><div class="kpi-l">其他收入</div><div class="kpi-v">$3700万</div><span class="badge up">QoQ +28%</span></div>
+    <div class="kpi"><div class="kpi-l">RLDC（扣分发后收入）</div><div class="kpi-v">$3.09亿</div><span class="badge up">YoY +136%</span></div>
+    <div class="kpi"><div class="kpi-l">RLDC 利润率</div><div class="kpi-v">40.1%</div><span class="badge up">QoQ +0.6pp</span></div>
+    <div class="kpi"><div class="kpi-l">调整后 EBITDA</div><div class="kpi-v">$1.67亿</div><span class="badge up">YoY +412%</span></div>
+    <div class="kpi"><div class="kpi-l">EBITDA 利润率</div><div class="kpi-v">54%</div><span class="badge up">前季~67%</span></div>
+    <div class="kpi"><div class="kpi-l">净利润（持续业务）</div><div class="kpi-v">$1.33亿</div><span class="badge up">前季 $0.04亿</span></div>
+  </div>
+  <div style="font-size:12px;color:var(--text3);font-family:'Segoe UI',sans-serif;margin:20px 0 10px">▎全年 FY2025</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">全年总收入</div><div class="kpi-v">$27.47亿</div><span class="badge up">YoY +64%</span></div>
+    <div class="kpi"><div class="kpi-l">全年储备收益</div><div class="kpi-v">$26.37亿</div><span class="badge up">YoY +59%</span></div>
+    <div class="kpi"><div class="kpi-l">全年其他收入</div><div class="kpi-v">$1.10亿</div><span class="badge up">超指引10%+</span></div>
+    <div class="kpi"><div class="kpi-l">全年 RLDC</div><div class="kpi-v">$10.83亿</div><span class="badge up">YoY +64%</span></div>
+    <div class="kpi"><div class="kpi-l">全年 RLDC 利润率</div><div class="kpi-v">39.4%</div><span class="badge up">超指引~38%</span></div>
+    <div class="kpi"><div class="kpi-l">全年 Adj. EBITDA</div><div class="kpi-v">$5.82亿</div><span class="badge up">YoY +104%</span></div>
+    <div class="kpi"><div class="kpi-l">GAAP 净亏损</div><div class="kpi-v">-$7000万</div><span class="badge nt">IPO SBC 影响</span></div>
+    <div class="kpi"><div class="kpi-l">企业可用现金</div><div class="kpi-v">~$23.5亿</div><span class="badge nt">极低杠杆</span></div>
+  </div>
+  <div style="background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin-top:14px;font-size:13px;color:var(--text2);font-family:'Segoe UI',sans-serif">
+    ⚠️ FY2025 GAAP 亏损 $7000万 系 IPO 相关股权激励一次性摊销 $4.24亿 所致，剔除后调整 EBITDA $5.82亿（+104%）。2026年起 SBC 将大幅正常化。
+  </div>
+</section>
+
+<!-- ═══ S2: TABLE ═══ -->
+<section class="section">
+  <div class="stitle">季度财务明细（5季度对比）</div>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr>
+        <th>指标（百万美元）</th><th>Q4'24</th><th>Q1'25</th><th>Q2'25</th><th>Q3'25</th><th>Q4'25</th><th>QoQ</th><th>YoY</th>
+      </tr></thead>
+      <tbody>
+        <tr><td>储备收益</td><td>$433</td><td>$558</td><td>$634</td><td>$711</td><td>$733</td><td style="color:var(--green)">+3.1%</td><td style="color:var(--green)">+69%</td></tr>
+        <tr><td>其他收入</td><td>$2</td><td>$21</td><td>$24</td><td>$29</td><td>$37</td><td style="color:var(--green)">+27.6%</td><td style="color:var(--green)">NM</td></tr>
+        <tr class="hl"><td>总收入及储备收益</td><td>$435</td><td>$579</td><td>$658</td><td>$740</td><td>$770</td><td style="color:var(--green)">+4.1%</td><td style="color:var(--green)">+77%</td></tr>
+        <tr><td>分发及交易成本</td><td>$305</td><td>$348</td><td>$407</td><td>$448</td><td>$461</td><td style="color:var(--red)">+2.9%</td><td style="color:var(--red)">+51%</td></tr>
+        <tr class="hl2"><td>RLDC</td><td>$131</td><td>$231</td><td>$251</td><td>$292</td><td>$309</td><td style="color:var(--green)">+5.8%</td><td style="color:var(--green)">+136%</td></tr>
+        <tr><td>RLDC 利润率</td><td>30.0%</td><td>39.9%</td><td>38.1%</td><td>39.5%</td><td>40.1%</td><td style="color:var(--green)">+0.6pp</td><td style="color:var(--green)">+10.1pp</td></tr>
+        <tr><td>调整后运营费用</td><td>$109</td><td>$117</td><td>$126</td><td>$121</td><td>$144</td><td style="color:var(--red)">+19%</td><td style="color:var(--red)">+32%</td></tr>
+        <tr class="hl2"><td>调整后 EBITDA</td><td>$32</td><td>$88*</td><td>$130*</td><td>$197*</td><td>$167</td><td style="color:var(--red)">-15%</td><td style="color:var(--green)">+412%</td></tr>
+        <tr><td>EBITDA 利润率</td><td>7.4%</td><td>~38%</td><td>~52%</td><td>~67%</td><td>54%</td><td style="color:var(--red)">-13pp</td><td style="color:var(--green)">+47pp</td></tr>
+        <tr><td>储备回报率（SOFR）</td><td>4.49%</td><td>4.30%</td><td>4.10%</td><td>3.95%</td><td>3.81%</td><td style="color:var(--red)">-14bps</td><td style="color:var(--red)">-68bps</td></tr>
+        <tr class="hl"><td>净利润（持续业务）</td><td>$4</td><td>—</td><td>—</td><td>—</td><td>$133</td><td>—</td><td style="color:var(--green)">NM</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="font-size:12px;color:var(--text3);padding:8px 4px;font-family:'Segoe UI',sans-serif">*Q1-Q3 EBITDA 为估算值，由全年 $582M 减 Q4 $167M 按 RLDC 比例分配</div>
+
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 18px;margin-top:16px">
+    <div style="font-size:14px;font-weight:600;color:var(--accent3);margin-bottom:10px;font-family:'Segoe UI',sans-serif">📊 估值多角度 P/E 分析</div>
+    <div class="tbl-wrap" style="box-shadow:none;border:none">
+      <table class="tbl">
+        <thead><tr><th>口径</th><th>基准（EPS 或 每股 EBITDA）</th><th>当前倍数</th><th>适用性</th></tr></thead>
+        <tbody>
+          <tr><td>TTM GAAP P/E</td><td>-$0.44/股（全年亏损）</td><td style="color:var(--text3)">N/A</td><td>❌ IPO SBC 失真</td></tr>
+          <tr><td>TTM Adj. P/E（估算）</td><td>~$1.55/股</td><td style="color:var(--gold)">~64x</td><td>⚠️ 参考价值有限</td></tr>
+          <tr><td>Q4 Net Income 年化</td><td>$0.50/股 × 4</td><td style="color:var(--gold)">~50x</td><td>⚠️ 包含非经常性收益</td></tr>
+          <tr class="hl"><td>FY2026E Forward P/E（共识）</td><td>$0.91/股（GAAP）</td><td style="color:var(--accent2)">~108x</td><td>✅ 基准参考</td></tr>
+          <tr><td>FY2026E EV/EBITDA</td><td>~$6.3亿 EBITDA</td><td style="color:var(--accent2)">~38x</td><td>✅ 更合理的估值基准</td></tr>
+          <tr><td>FY2027E Forward P/E（共识）</td><td>$1.69/股</td><td style="color:var(--green)">~58x</td><td>📊 成长轨迹参考</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ S3: CHARTS ═══ -->
+<section class="section">
+  <div class="stitle">营收与盈利趋势</div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">季度总收入 vs RLDC（百万美元）</div><div class="cwrap"><canvas id="c1"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">调整后 EBITDA 及利润率</div><div class="cwrap"><canvas id="c2"></canvas></div></div>
+  </div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">USDC 在途余额（十亿美元）</div><div class="cwrap"><canvas id="c3"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">收入结构拆分（FY2025）</div><div class="cwrap"><canvas id="c4"></canvas></div></div>
+  </div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">其他收入增长轨迹（季度）</div><div class="cwrap"><canvas id="c5"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">分析师目标价分布</div><div class="cwrap"><canvas id="c6"></canvas></div></div>
+  </div>
+</section>
+
+<!-- ═══ S4: PLATFORM METRICS ═══ -->
+<section class="section">
+  <div class="stitle">平台运营指标（截至最新可获取数据）</div>
+  <div class="pgrid2">
+    <div class="pcard"><div class="p-icon">💵</div><div class="p-lbl">USDC 在途余额</div><div class="p-val">$785亿</div><div class="p-chg up">↑ 4.3% vs YE2025</div></div>
+    <div class="pcard"><div class="p-icon">🔄</div><div class="p-lbl">链上交易量（Q4）</div><div class="p-val">$11.9万亿</div><div class="p-chg up">↑ 247% YoY</div></div>
+    <div class="pcard"><div class="p-icon">🌉</div><div class="p-lbl">CCTP 跨链量（Q4）</div><div class="p-val">$410亿</div><div class="p-chg up">62% 桥接份额</div></div>
+    <div class="pcard"><div class="p-icon">🏦</div><div class="p-lbl">CPN 入驻机构</div><div class="p-val">55家</div><div class="p-chg up">↑ 29→55 QoQ</div></div>
+    <div class="pcard"><div class="p-icon">💸</div><div class="p-lbl">CPN 年化 TPV</div><div class="p-val">$57亿</div><div class="p-chg up">↑ 68% QoQ</div></div>
+    <div class="pcard"><div class="p-icon">🌍</div><div class="p-lbl">EURC 流通（欧元）</div><div class="p-val">€3.89亿</div><div class="p-chg up">↑ 3.8x YoY</div></div>
+    <div class="pcard"><div class="p-icon">💎</div><div class="p-lbl">USYC 资产规模</div><div class="p-val">$17亿</div><div class="p-chg up">↑ 快速增长</div></div>
+    <div class="pcard"><div class="p-icon">📊</div><div class="p-lbl">交易量市场份额</div><div class="p-val">~64%</div><div class="p-chg up">首超 USDT 历史新高</div></div>
+    <div class="pcard"><div class="p-icon">🏛️</div><div class="p-lbl">代币化国债规模</div><div class="p-val">$110亿</div><div class="p-chg up">超越 BlackRock</div></div>
+    <div class="pcard"><div class="p-icon">🔗</div><div class="p-lbl">支持区块链数</div><div class="p-val">30+条</div><div class="p-chg nt">持续扩张</div></div>
+    <div class="pcard"><div class="p-icon">🤖</div><div class="p-lbl">AI 支付占比</div><div class="p-val">~99%</div><div class="p-chg up">USDC 主导</div></div>
+    <div class="pcard"><div class="p-icon">⚡</div><div class="p-lbl">Arc 测试网</div><div class="p-val">1.66亿笔</div><div class="p-chg up">0.5s 终局 · 2026主网</div></div>
+  </div>
+</section>
+
+<!-- ═══ S5: SANKEY ═══ -->
+<section class="section">
+  <div class="stitle">资金流向 Sankey — Q4 2025（百万美元）</div>
+  <div class="ccard">
+    <div style="font-size:12px;color:var(--text3);font-family:'Segoe UI',sans-serif;margin-bottom:8px">从储备收益到净利润的完整资金流向</div>
+    <div id="sankey"></div>
+  </div>
+</section>
+
+<!-- ═══ S6: 最新动态 ═══ -->
+<section class="section">
+  <div class="stitle">⚡ 最新市场动态（2026年3月，财报发布后）</div>
+  <div class="news-grid">
+    <div class="news-card" style="border-left:4px solid var(--red)">
+      <div class="news-date">2026-03-24 🔴 利空</div>
+      <div class="news-title">CLARITY Act 草案拟禁止稳定币被动收益</div>
+      <div class="news-body">Senate 草案条款：禁止平台向 USDC 等稳定币持有人提供"直接或间接"等同于利息的被动回报。仅允许与使用行为挂钩的"活动奖励"（如转账返现、治理参与）。若通过，将直接冲击 Coinbase 等合作伙伴的 USDC 收益分成模式，威胁 USDC 采纳动力。CRCL 暴跌22%。</div>
+    </div>
+    <div class="news-card" style="border-left:4px solid var(--red)">
+      <div class="news-date">2026-03-24 🔴 利空</div>
+      <div class="news-title">Tether 宣布聘四大事务所进行首次全面审计</div>
+      <div class="news-body">Tether（USDT $1840亿流通）宣布正式聘请一家四大审计 $1840亿储备。此前 Circle 的 Deloitte 季度证明是其区别于 Tether 的核心竞争优势。若 Tether 通过完整审计，Circle 的"合规透明度"护城河将显著收窄。</div>
+    </div>
+    <div class="news-card" style="border-left:4px solid var(--green)">
+      <div class="news-date">2026-03-13 🟢 利好</div>
+      <div class="news-title">USDC 交易量首超 USDT（历史首次）</div>
+      <div class="news-body">据 Mizuho 基于链上数据分析，USDC 2026年 YTD 调整后交易量首次超过 USDT，实时份额约 64%（vs 历史约 28-30%）。Visa 剔除机器人和交易所内部结算后，USDC 份额 Q4 已升至 ~50%，Q1 2026 进一步提升。催生 Mizuho 等多家券商上调目标价。</div>
+    </div>
+    <div class="news-card" style="border-left:4px solid var(--green)">
+      <div class="news-date">2026-03-13 🟢 利好</div>
+      <div class="news-title">代币化国债规模超越 BlackRock，登顶行业第一</div>
+      <div class="news-body">Circle 通过 USYC 等产品，代币化美国国债规模突破 $110亿，超越 BlackRock 的 BUIDL，成为全球最大代币化国债发行商。与 Arc 主网叙事高度契合——CCTP 作为"价值高速公路"的定位进一步验证。</div>
+    </div>
+    <div class="news-card" style="border-left:4px solid var(--green)">
+      <div class="news-date">2026-03-07 🟢 利好</div>
+      <div class="news-title">Circle 内部用 USDC 结算 $6800万国库款项</div>
+      <div class="news-body">Circle 通过自家 CCTP 完成 $6800万内部国库支付，验证企业场景下 USDC 实际可用性。CEO Allaire 称这是"教科书式的 USDC 企业采用案例"，有助于推动更多企业客户将日常财务结算迁移到链上。</div>
+    </div>
+    <div class="news-card" style="border-left:4px solid var(--accent2)">
+      <div class="news-date">2026-03-17 🔵 中性</div>
+      <div class="news-title">董事会新增 Kirk Koenigsbauer（前微软）</div>
+      <div class="news-body">Kirk Koenigsbauer（前微软 Office/Copilot 产品 VP）加入 Circle 董事会。AI 产品背景与 Circle 的 AI 代理支付战略高度匹配，亦是 Circle 与微软 AI 生态建立深度关系的信号。战略意义大于短期财务影响。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ S7: FULL EARNINGS CALL ═══ -->
+<section class="section">
+  <div class="stitle">电话会议全程解读（2026-02-25，所有话题）</div>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;font-family:'Segoe UI',sans-serif;font-size:13px">
+    <span style="background:rgba(122,154,122,.15);color:var(--green);padding:4px 12px;border-radius:10px;font-weight:600">🟢 利好 9</span>
+    <span style="background:rgba(123,143,160,.15);color:var(--accent2);padding:4px 12px;border-radius:10px;font-weight:600">🔵 中性 4</span>
+    <span style="background:rgba(184,112,112,.15);color:var(--red);padding:4px 12px;border-radius:10px;font-weight:600">🔴 利空 3</span>
+    <span style="color:var(--text3)">共 16 个核心话题（管理层陈述 + 全部 Q&A）</span>
+  </div>
+
+  <!-- 1 -->
+  <div class="ec-block bull">
+    <div class="ec-hdr">
+      <div class="ec-meta">
+        <div class="ec-topic">CEO 开场 · AI 代理经济愿景</div>
+        <div class="ec-speaker">Jeremy Allaire</div>
+        <div class="ec-role">Co-Founder, CEO & Chairman</div>
+      </div>
+      <div class="ec-tags"><span class="tag-bull">🟢 利好</span></div>
+    </div>
+    <div class="ec-quote">「我们正进入一个数百亿甚至数千亿 AI 代理在互联网上进行经济活动的世界。AI 代理与代理之间的交易需要可靠、低成本、可信的交换媒介。几乎所有 AI 支付基础设施都在用 USDC。这是空前鼓励的信号，我们正在大力加注。」</div>
+    <div class="ec-cmnt">🍔 <strong>Buffy：</strong>99% AI 支付用 USDC 这数字不是营销，是网络效应自然选择的结果。老巴最爱护城河，而护城河正在被 AI 这把铲子越挖越深。关键风险：AI 代理经济规模化的速度与时间——目前仍是"期权"而非"资产"。</div>
+  </div>
+
+  <!-- 2 -->
+  <div class="ec-block bull">
+    <div class="ec-hdr">
+      <div class="ec-meta">
+        <div class="ec-topic">CEO · USDC 网络增长 & 竞争护城河</div>
+        <div class="ec-speaker">Jeremy Allaire</div>
+        <div class="ec-role">CEO</div>
+      </div>
+      <div class="ec-tags"><span class="tag-bull">🟢 利好</span></div>
+    </div>
+    <div class="ec-quote">「$75B USDC 流通支撑了 Q4 $1630亿铸造与兑换量——这种兑换能力是竞争对手无法复制的。稳定币市场本质上只有两个主要玩家，其他新入场稳定币在真实经济交易中使用量几乎为零。CCTP 在 1 月达到所有跨链资产桥接量的 62%。」</div>
+    <div class="ec-cmnt">🍔 <strong>Buffy：</strong>双寡头格局护城河是真实的。但今天 Tether 宣布四大审计，透明度差距正在收窄。Circle 的护城河从"合规透明"转向"机构信任 + 生态广度"——这是更持久但也更难量化的优势。</div>
+  </div>
+
+  <!-- 3 -->
+  <div class="ec-block bull">
+    <div class="ec-hdr">
+      <div class="ec-meta">
+        <div class="ec-topic">CEO · Circle 三大平台支柱</div>
+        <div class="ec-speaker">Jeremy Allaire</div>
+        <div class="ec-role">CEO</div>
+      </div>
+      <div class="ec-tags"><span class="tag-bull">🟢 利好</span></div>
+    </div>
+    <div class="ec-quote">「Circle 的平台已从稳定币网络演进为三大支柱：① Arc 及开发者基础设施（链上操作系统）；② 数字资产与服务（USDC、EURC、USYC、Circle Mint）；③ 应用层（CPN 支付网络、StableFX 外汇应用）。」</div>
+    <div class="ec-cmnt">🍔 <strong>Buffy：</strong>从"铸币商"到"互联网金融操作系统"的叙事转变是 Circle 估值溢价的核心驱动力。问题是：除储备收益外，其他收入仅 $1.1亿（仅占 4%）。转型叙事需要 2-3 年数据验证才能支撑当前估值。</div>
+  </div>
+
+  <!-- 4 -->
+  <div class="ec-block bull">
+    <div class="ec-hdr">
+      <div class="ec-meta">
+        <div class="ec-topic">CEO · Arc 测试网 & Circle Gateway</div>
+        <div class="ec-speaker">Jeremy Allaire</div>
+        <div class="ec-role">CEO</div>
+      </div>
+      <div class="ec-tags"><span class="tag-bull">🟢 利好</span></div>
+    </div>
+    <div class="ec-quote">「Arc 测试网：100+ 家机构参与；0.5 秒结算终局；1.66亿笔交易；日均 230 万笔。Circle Gateway 测试版：AI 代理自主跨链 USDC 交易，单笔成本 $0.00001。我们相信世界上没有任何支付系统能做到这一点。」</div>
+    <div class="ec-cmnt">🍔 <strong>Buffy：</strong>$0.00001 的交易成本让传统支付系统完全无竞争力。Arc 主网 2026 年上线是最重要的催化剂之一。关键问题：Arc 是否需要原生代币（Arc Token）才能实现网络效应？管理层尚未给出时间表。</div>
+  </div>
+
+  <!-- 5 -->
+  <div class="ec-block bull">
+    <div class="ec-hdr">
+      <div class="ec-meta">
+        <div class="ec-topic">CEO · CPN 扩张 + StableFX 发布</div>
+        <div class="ec-speaker">Jeremy Allaire</div>
+        <div class="ec-role">CEO</div>
+      </div>
+      <div class="ec-tags"><span class="tag-bull">🟢 利好</span></div>
+    </div>
+    <div class="ec-quote">「CPN 从 Q3 的 29 家增至 55 家，74 家在资质审核中，年化 TPV $57亿（+68% QoQ），已覆盖 14 个国家市场，未来几个月将新增 11 个市场。StableFX 测试版上线，提供 7×24 的链上 FX 原子结算。」</div>
+    <div class="ec-cmnt">🍔 <strong>Buffy：</strong>CPN 是 Circle 摆脱"息差游戏"标签的关键出路。从 $57亿 到 $1万亿的路还很长，但趋势是真实的。StableFX 更是直接打全球 $7.5万亿/日 FX 市场——如果成功，将是 Circle 第二条增长曲线的起点。</div>
+  </div>
+
+  <!-- 6 -->
+  <div class="ec-block bull">
+    <div class="ec-hdr">
+      <div class="ec-meta">
+        <div class="ec-topic">CEO · 企业合作：Intuit / Visa / JPMorgan / Mastercard</div>
+        <div class="ec-speaker">Jeremy Allaire</div>
+        <div class="ec-role">CEO</div>
+      </div>
+      <div class="ec-tags"><span class="tag-bull">🟢 利好</span></div>
+    </div>
+    <div class="ec-quote">「Intuit 将通过 Circle 技术为数百万消费者和企业提供可编程货币；Visa 允许美国发卡/收单行用 USDC 在非银行工作时间结算；JPMorgan、Mastercard、Cash App、Interactive Brokers 均已推出 USDC 产品；Polymarket 将 USDC 定为核心结算资产。」</div>
+    <div class="ec-cmnt">🍔 <strong>Buffy：</strong>这些不是小公司的背书。Intuit 管理数百万商业账户，Visa 是全球最大支付网络。每个大机构接入都在加固 USDC 的网络效应——这就是老巴最喜欢的"飞轮"效应：用得越多，越难被替代。</div>
+  </div>
+
+  <!-- 7 -->
+  <div class="ec-block bull">
+    <div class="ec-hdr">
+      <div class="ec-meta">
+        <div class="ec-topic">CFO · Q4 财务亮点 & FY2025 指引达成</div>
+        <div class="ec-speaker">Jeremy Fox-Geen</div>
+        <div class="ec-role">Chief Financial Officer</div>
+      </div>
+      <div class="ec-tags"><span class="tag-bull">🟢 利好</span></div>
+    </div>
+    <div class="ec-quote">「FY2025 全部三项指引均达标或超额：其他收入 $1.10亿（超指引 $0.90-1.00亿）；RLDC 利润率 39.4%（超约 38%）；调整后运营费用 $5.08亿（符合指引）。Q4 Canton Coin 开始交易额外带来 $700万收益。」</div>
+    <div class="ec-cmnt">🍔 <strong>Buffy：</strong>三项指引全部达标或超额——这在 crypto 公司里相当罕见。管理层的可信度评级 A。但注意：超额仅 10%，且有一次性 Canton Coin 因素，不代表系统性超预期。</div>
+  </div>
+
+  <!-- 8 -->
+  <div class="ec-block neut">
+    <div class="ec-hdr">
+      <div class="ec-meta">
+        <div class="ec-topic">CFO · FY2026 指引</div>
+        <div class="ec-speaker">Jeremy Fox-Geen</div>
+        <div class="ec-role">CFO</div>
+      </div>
+      <div class="ec-tags"><span class="tag-neut">🔵 中性</span></div>
+    </div>
+    <div class="ec-quote">「FY2026：其他收入 $1.50-1.70亿；RLDC 利润率 38-40%；调整后运营费用 $5.70-5.85亿（新定义，剔除 SBC 相关工资税约 $2060万）。不对 USDC 规模给出指引，预期40% CAGR 穿越周期。」</div>
+    <div class="ec-cmnt">🍔 <strong>Buffy：</strong>OpEx 从 $4.78亿（FY25可比口径）增至 $5.78亿（+21%），增速超过其他收入（+$60M，+55%）。管理层在大力投入未来——这需要投资人的信任和耐心。关键风险：SOFR 持续下行会压缩 RLDC，指引隐含假设利率相对稳定。</div>
+  </div>
+
+  <!-- 9 -->
+  <div class="ec-block bear">
+    <div class="ec-hdr">
+      <div class="ec-meta">
+        <div class="ec-topic">CFO · 储备回报率下行</div>
+        <div class="ec-speaker">Jeremy Fox-Geen</div>
+        <div class="ec-role">CFO</div>
+      </div>
+      <div class="ec-tags"><span class="tag-bear">🔴 利空</span></div>
+    </div>
+    <div class="ec-quote">「Q4 储备回报率 3.81%，同比下降 68bps，反映 SOFR 利率下行。全年储备回报率 4.1%，同比下降 90bps。」</div>
+    <div class="ec-cmnt">🍔 <strong>Buffy：</strong>公式简单粗暴：$78.5B USDC × 3.81% ≈ $30亿年化储备收益。SOFR 每下降 100bps 约损失 $7.5亿收入。美联储 2026 降息路径是 Circle 最大的外部宏观风险——不在公司控制范围内。</div>
+  </div>
+
+  <!-- 10 -->
+  <div class="ec-block bear">
+    <div class="ec-hdr">
+      <div class="ec-meta">
+        <div class="ec-topic">CFO · 分发成本集中度 & Coinbase 依赖</div>
+        <div class="ec-speaker">Jeremy Fox-Geen</div>
+        <div class="ec-role">CFO</div>
+      </div>
+      <div class="ec-tags"><span class="tag-bear">🔴 利空</span></div>
+    </div>
+    <div class="ec-quote">「Q4 分发成本 $4.61亿（YoY +52%），仍是收入最大减项。上年同期包含向一大型合作伙伴的一次性付款 $6000万。分发成本随 USDC 规模线性增长，边际改善主要来自其他收入增长。」</div>
+    <div class="ec-cmnt">🍔 <strong>Buffy：</strong>Coinbase 拿走了大量储备收益的分成——这是公开的秘密，也是 RLDC 利润率长期压在 40% 的主要原因。风险在于：若 CLARITY Act 限制收益分成模式，Coinbase 可能重新谈判合同，进一步侵蚀利润率。</div>
+  </div>
+
+  <!-- 11 -->
+  <div class="ec-block bull">
+    <div class="ec-hdr">
+      <div class="ec-meta">
+        <div class="ec-topic">Q&A · AI 代理支付时间表 & USDC 定位（Citizens 分析师 Devin Ryan）</div>
+        <div class="ec-speaker">Devin Ryan / Jeremy Allaire</div>
+        <div class="ec-role">Citizens JMP · CEO</div>
+      </div>
+      <div class="ec-tags"><span class="tag-bull">🟢 利好</span></div>
+    </div>
+    <div class="ec-quote">「（Allaire）AI 代理市场已经存在——AI 可以雇佣人类工作者，用 USDC 支付；AI 招聘平台让 AI 雇佣 AI。这在有机地发生。Collison Brothers 说 Q1 2026 可能是奇点的起跳时刻……Arc 的 Circle Gateway 就是为这个时刻设计的——$0.00001 的交易成本，<1秒完成。」</div>
+    <div class="ec-cmnt">🍔 <strong>Buffy：</strong>AI 代理经济的速度快于预期。但老巴会说：愿景是好的，show me the money。真正的变现要等 Arc 主网上线、Gateway 商业化，最快 2027 年才会在财报里体现出来。</div>
+  </div>
+
+  <!-- 12 -->
+  <div class="ec-block neut">
+    <div class="ec-hdr">
+      <div class="ec-meta">
+        <div class="ec-topic">Q&A · Arc Token 探索——时间表未定（Citizens 追问）</div>
+        <div class="ec-speaker">Jeremy Allaire</div>
+        <div class="ec-role">CEO</div>
+      </div>
+      <div class="ec-tags"><span class="tag-neut">🔵 中性</span></div>
+    </div>
+    <div class="ec-quote">「Arc Token 探索继续推进——我们在深入理解代币在激励、治理、安全、实用性等方面如何发挥作用。没有具体时间表，一切仍在探索中。」</div>
+    <div class="ec-cmnt">🍔 <strong>Buffy：</strong>Arc Token 是潜在的巨大期权——如果发行，可能复制以太坊的原生代币+生态模式，为 CRCL 股价带来重大催化剂。但也是监管和估值的双重未知数。不要把它当作已实现价值计价。</div>
+  </div>
+
+  <!-- 13 -->
+  <div class="ec-block bull">
+    <div class="ec-hdr">
+      <div class="ec-meta">
+        <div class="ec-topic">Q&A · 监管红利：GENIUS 法案 + CLARITY 法案（Canaccord 分析师 Vafi）</div>
+        <div class="ec-speaker">Joseph Vafi / Jeremy Allaire</div>
+        <div class="ec-role">Canaccord Genuity · CEO</div>
+      </div>
+      <div class="ec-tags"><span class="tag-bull">🟢 利好</span></div>
+    </div>
+    <div class="ec-quote">「（Allaire）GENIUS 法案已经在为机构入场创建法律框架……SEC 和 CFTC 在明确 GENIUS 合规稳定币作为保证金/抵押品的使用方式。CLARITY 法案非常接近终点线，我对此审慎乐观——这是行业的又一重大解锁。」</div>
+    <div class="ec-cmnt">🍔 <strong>Buffy：</strong>讽刺的是，就在 Allaire "审慎乐观" CLARITY Act 的 3 周后，该法案的收益禁令条款让 CRCL 暴跌 22%。可见监管的双刃剑特性：GENIUS 是利好，CLARITY 的具体条款却可能是利空。</div>
+  </div>
+
+  <!-- 14 -->
+  <div class="ec-block bull">
+    <div class="ec-hdr">
+      <div class="ec-meta">
+        <div class="ec-topic">Q&A · Arc 长期愿景：万能资产代币化 OS（Needham 分析师 Todaro）</div>
+        <div class="ec-speaker">John Todaro / Jeremy Allaire</div>
+        <div class="ec-role">Needham · CEO</div>
+      </div>
+      <div class="ec-tags"><span class="tag-bull">🟢 利好</span></div>
+    </div>
+    <div class="ec-quote">「（Allaire）Arc 是经济操作系统，由主要金融基础设施机构共同运营。Arc 既是 USDC 最高效的流动性层，也是代币化股票/基金/银行存款等各类资产的流动性和分发枢纽。CCTP 是公路，Arc 是要点亮这些公路的引擎。」</div>
+    <div class="ec-cmnt">🍔 <strong>Buffy：</strong>CCTP 在 1 月已占所有跨链资产 62% 的流量——Circle 已经建好了价值互联网的基础设施。关键在于：Arc 主网上线后能否将这些"过路流量"转化为收费收入。这是从基础设施提供商升级为平台经济的关键一跃。</div>
+  </div>
+
+  <!-- 15 -->
+  <div class="ec-block neut">
+    <div class="ec-hdr">
+      <div class="ec-meta">
+        <div class="ec-topic">Q&A · AI×区块链融合作为行业通用催化剂（Needham 追问）</div>
+        <div class="ec-speaker">John Todaro / Jeremy Allaire</div>
+        <div class="ec-role">Needham · CEO</div>
+      </div>
+      <div class="ec-tags"><span class="tag-neut">🔵 中性</span></div>
+    </div>
+    <div class="ec-quote">「（Allaire）AI 开发者在构建 AI 代理时意识到：区块链基础设施就像云平台之于移动端——是必不可少的后端。区块链提供密码学证明，是信任 AI 代理活动和交易的唯一手段。AI 平台和区块链操作系统将从 2026 年起"形影不离"。」</div>
+    <div class="ec-cmnt">🍔 <strong>Buffy：</strong>这个逻辑是对的，但受益者不仅仅是 Circle——整个区块链生态都有望受益。Circle 的优势在于：它是监管合规、透明度最高的稳定币，在机构和合规场景中有天然优势。AI 代理会在合规框架内用 USDC，这点毋庸置疑。</div>
+  </div>
+
+  <!-- 16 -->
+  <div class="ec-block bull">
+    <div class="ec-hdr">
+      <div class="ec-meta">
+        <div class="ec-topic">Q&A · CPN 详情：使用场景、增长黏性、代理商业模式（Citi 分析师 Christiansen）</div>
+        <div class="ec-speaker">Pete Christiansen / Jeremy Allaire</div>
+        <div class="ec-role">Citi · CEO</div>
+      </div>
+      <div class="ec-tags"><span class="tag-bull">🟢 利好</span></div>
+    </div>
+    <div class="ec-quote">「（Allaire）CPN 从零起步到 $57亿年化 TPV，55 家金融机构入驻——增长非常稳健。越来越多能承载更大流量的大型机构正在加入。主要使用场景是跨境支付和企业结算。很多金融机构从未接触过区块链，我们在为他们铺路。」</div>
+    <div class="ec-cmnt">🍔 <strong>Buffy：</strong>CPN 是把 Circle 从 B2C（USDC 用户）转向 B2B（金融机构基础设施）的关键杠杆。但 $57亿年化 TPV 对应的收入贡献目前仍微乎其微——真正的变现还在后面。这是一个需要多年耐心培育的生意，不是短期催化剂。</div>
+  </div>
+
+  <!-- Signal Summary -->
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 20px;margin-top:16px">
+    <div style="font-size:14px;font-weight:600;font-family:'Segoe UI',sans-serif;margin-bottom:12px;color:var(--accent3)">📊 电话会议信号汇总</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;font-family:'Segoe UI',sans-serif;text-align:center">
+      <div style="background:rgba(122,154,122,.08);border:1px solid rgba(122,154,122,.2);border-radius:8px;padding:12px"><div style="font-size:24px;font-weight:800;color:var(--green)">9</div><div style="font-size:12px;color:var(--text3)">🟢 利好信号</div></div>
+      <div style="background:rgba(123,143,160,.08);border:1px solid rgba(123,143,160,.2);border-radius:8px;padding:12px"><div style="font-size:24px;font-weight:800;color:var(--accent2)">4</div><div style="font-size:12px;color:var(--text3)">🔵 中性信号</div></div>
+      <div style="background:rgba(184,112,112,.08);border:1px solid rgba(184,112,112,.2);border-radius:8px;padding:12px"><div style="font-size:24px;font-weight:800;color:var(--red)">3</div><div style="font-size:12px;color:var(--text3)">🔴 利空信号</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ S8: BUFFETT 6 DIMENSIONS ═══ -->
+<section class="section">
+  <div class="stitle">巴菲特六维评分</div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>护城河宽度（Moat）— A-</h4>
+      <p>USDC 网络效应是真实且持久的：$78.5B 流通 + CCTP 62% 跨链份额 + 30+ 条链的互操作基础设施，构成强大的结构性壁垒。机构信任（上市公司 + Deloitte 季度证明 + OCC 执照）是 Tether 短期难以复制的。扣分项：利率敏感性（收入 87% 来自储备收益）+ Coinbase 分成集中度 + 今日 CLARITY Act 威胁。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">A</div>
+    <div class="bd">
+      <h4>管理层质量（Management）— A</h4>
+      <p>FY2025 三项指引全部达标或超额，这在 crypto 公司里极为少见。IPO 管理良好，上市后透明度高。CEO Allaire 与 CFO Fox-Geen 在战略表达与财务纪律之间保持良好平衡。IPO SBC $4.24亿是一次性事件，不代表长期资本纪律问题。新增微软前 VP 进入董事会，AI 战略布局提前。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">B+</div>
+    <div class="bd">
+      <h4>财务健康（Financial Health）— B+</h4>
+      <p>企业可用现金约 $23.5亿，无实质性债务（仅 $3700万可转债），极低杠杆。Adj. EBITDA Q4 利润率 54%，全年 21%。GAAP 亏损 $7000万 系 IPO SBC 所致，剔除后盈利能力强劲。一个扣分点：商誉 $2.66亿 + 无形资产 $4.11亿，在 crypto 行业中需留意减值风险。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B-</div>
+    <div class="bd">
+      <h4>盈利质量（Earnings Quality）— B-</h4>
+      <p>87% 的收入来自储备利息——这是被动的"息差生意"，与银行存款利差逻辑相似，高度依赖 SOFR/Fed Funds Rate。其他收入仅 $1.10亿（4%），尽管增速快。Q4 净利润 $1.33亿 中包含 $8500万可转债公允价值变动等非经常性收益，核心盈利能力被高估。如果利率回到 2%，整个商业模式需要彻底重评。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">C+</div>
+    <div class="bd">
+      <h4>可预测性（Predictability）— C+</h4>
+      <p>USDC 循环流通量是实时可见的（这是优点），但受市场情绪和加密周期影响巨大。利率走势不由 Circle 决定。今日 CLARITY Act 收益禁令事件说明：监管黑天鹅是这门生意最不可预测的风险。FY2026 分析师 EPS 共识范围 $0.63-$1.49（悬差 2.4 倍），说明市场对预测能力的信心有限。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B</div>
+    <div class="bd">
+      <h4>资本纪律（Capital Discipline）— B</h4>
+      <p>IPO 以来尚未启动回购，资本主要投向 Arc、CPN、StableFX 等平台建设——这是正确的战略选择，但短期内对 EPS 无直接贡献。FY2026E OpEx 增长 21% 体现了"重投入换增长"的取向，需要时间验证回报。正面：Adj. EBITDA 利润率从 FY24 的 17% 提升至 FY25 的 21%，运营杠杆正在体现。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ S9: DCF SCENARIOS ═══ -->
+<section class="section">
+  <div class="stitle">三情景 DCF 估值</div>
+  <div style="background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin-bottom:16px;font-size:13px;color:var(--text2);font-family:'Segoe UI',sans-serif">
+    核心驱动变量：① USDC 规模增速（受市场情绪、AI 代理经济、竞争影响）；② SOFR/利率水平（关键外生变量）；③ CLARITY Act 是否通过收益禁令条款（今日最大二元风险）；④ Arc 主网商业化进度。当前价格 $98.62 接近基准情景。
+  </div>
+
+  <div class="dcf-grid">
+    <div class="dcf-card dcf-bull" style="border-top:3px solid var(--green)">
+      <div class="dcf-lbl">🐂 乐观情景</div>
+      <div class="dcf-price">$148</div>
+      <div class="dcf-desc">
+        <strong>假设：</strong>CLARITY Act 收益禁令失败或被大幅修订；USDC 40% CAGR 维持（$105B avg 2026）；SOFR 稳在 3.5%+；Arc 主网 Q3 2026 上线并快速获客；CPN 年化 TPV 突破 $500亿；Arc Token 发行预期纳入<br><br>
+        <strong>FY2026E FCF：</strong>~$6.0亿<br>
+        <strong>Y1-5 年增速：</strong>30%<br>
+        <strong>终值增速：</strong>3%<br>
+        <strong>WACC：</strong>10%<br>
+        <strong>安全边际买入价（-25%）：</strong><span style="color:var(--green)">$111</span>
+      </div>
+    </div>
+    <div class="dcf-card dcf-base" style="border-top:3px solid var(--accent2)">
+      <div class="dcf-lbl">⚖️ 基准情景</div>
+      <div class="dcf-price">$92</div>
+      <div class="dcf-desc">
+        <strong>假设：</strong>CLARITY Act 部分通过（仅限活动奖励）；USDC 25-30% 增速（$95B avg）；SOFR 降至 3.2%；Arc 主网正常推进；CPN 年化 TPV 达 $200亿；Other Revenue FY26E $1.6亿<br><br>
+        <strong>FY2026E FCF：</strong>~$4.8亿<br>
+        <strong>Y1-5 年增速：</strong>18%<br>
+        <strong>终值增速：</strong>2.5%<br>
+        <strong>WACC：</strong>11%<br>
+        <strong>安全边际买入价（-25%）：</strong><span style="color:var(--accent2)">$69</span>
+      </div>
+    </div>
+    <div class="dcf-card dcf-bear" style="border-top:3px solid var(--red)">
+      <div class="dcf-lbl">🐻 悲观情景</div>
+      <div class="dcf-price">$36</div>
+      <div class="dcf-desc">
+        <strong>假设：</strong>CLARITY Act 全面通过严格收益禁令；Coinbase 重谈分成协议侵蚀 RLDC；美联储降息 SOFR 降至 2%；USDC 增速放缓至 10-15%（Tether 审计后份额收窄）；Arc 延期或 Token 受监管阻碍<br><br>
+        <strong>FY2026E FCF：</strong>~$3.0亿<br>
+        <strong>Y1-5 年增速：</strong>8%<br>
+        <strong>终值增速：</strong>2%<br>
+        <strong>WACC：</strong>13%<br>
+        <strong>安全边际买入价（-25%）：</strong><span style="color:var(--red)">$27</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>场景</th><th>内在价值</th><th>安全边际价</th><th>当前价 $98.62</th><th>CLARITY Act 假设</th><th>EV/FY26E EBITDA</th></tr></thead>
+      <tbody>
+        <tr><td>🐂 乐观</td><td style="color:var(--green)">$148</td><td style="color:var(--green)">$111</td><td style="color:var(--accent2)">低估 50%</td><td>收益禁令被否决</td><td>~50x</td></tr>
+        <tr class="hl"><td>⚖️ 基准</td><td style="color:var(--accent2)">$92</td><td style="color:var(--accent2)">$69</td><td style="color:var(--red)">溢价 7%</td><td>部分通过（活动奖励例外）</td><td>~38x</td></tr>
+        <tr><td>🐻 悲观</td><td style="color:var(--red)">$36</td><td style="color:var(--red)">$27</td><td style="color:var(--red)">高估 174%</td><td>全面通过严格版本</td><td>~22x</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ═══ S10: VERDICT ═══ -->
+<section class="section">
+  <div class="stitle">综合评级与仓位建议</div>
+  <div class="verdict">
+    <div class="verdict-t">⚖️ 评级：条件性持有 / 关注（Conditional Hold / Watch）— 等待 CLARITY Act 明朗化</div>
+    <div style="font-size:14px;color:var(--text2);line-height:1.8;margin-bottom:16px">
+      CRCL 是一家基本面真实优秀的公司，拥有真实且持续增长的护城河（USDC 网络效应、CCTP 基础设施主导地位、机构信任体系）。但 3 月 24 日的 22% 暴跌揭示了一个本质性的监管二元风险：CLARITY Act 收益禁令条款，可能从根本上冲击 Circle 的核心收入分发模式。当前 $98.62 的股价在基准情景下已轻微溢价，在悲观情景下则严重高估。这不是一个可以无脑左侧买入的时刻。
+    </div>
+    <div class="pgrid">
+      <div class="pbox"><div class="pl">基准情景内在价值</div><div class="pv pc">$92</div><div class="pn">当前轻微溢价</div></div>
+      <div class="pbox"><div class="pl">乐观情景目标价</div><div class="pv ps">$148</div><div class="pn">CLARITY Act 失败时上行空间</div></div>
+      <div class="pbox"><div class="pl">悲观情景风险价</div><div class="pv prd">$36</div><div class="pn">全面收益禁令通过时</div></div>
+    </div>
+  </div>
+
+  <!-- Buffett Commentary -->
+  <div class="cmt">
+    <p>🍔 <span class="hl-t">少年巴菲特 Buffy 说：</span></p>
+    <p>让我先说说今天这个 22% 的暴跌。市场先生今天非常情绪化——这不奇怪，他本来就这样。CLARITY Act 的收益禁令草案确实是一个真实的风险，但它还没有成为法律。需要 60 票 Senate 多数、众议院协商、总统签署，最早 2026 年中才可能生效。更重要的是，Circle 的核心商业模式——铸造 USDC 并将储备收益据为己有——并不在禁令范围内。禁的是平台向持有人的<em>间接</em>收益传递。直接影响的是 Coinbase 等合作伙伴的分成模式，间接影响 USDC 的采纳激励。</p>
+    <p>但我要说两面话。<span class="hl-t">利好：</span>Circle 这家公司的基本面是我近年来见过的最清晰的 crypto 公司之一。$78.5B USDC 流通 × ~3.8% 储备回报 ≈ $30亿年化储备收益。这个收入是真实的、现金流支撑的、可审计的。CCTP 的 62% 跨链份额说明 Circle 已经建好了价值互联网的公路，现在要考虑的是如何收过路费。USDC 交易量首超 USDT、代币化国债排名第一、AI 代理 99% 用 USDC——这些都是网络效应增强的信号。</p>
+    <p><span class="warn-t">我的担忧：</span>这门生意 87% 依赖利率——而利率不由 Circle 决定。如果 SOFR 回到 2019 年的接近零水平，Circle 的商业模式需要根本重建。当前 Forward P/E 108x、EV/EBITDA 38x 的估值，已经把很多美好的未来提前计价了。在这个估值水平上，你不是在买一个有安全边际的企业——你是在买一张有宏大想象空间的高价期权。</p>
+    <p><span class="hl-t">操作建议：</span>当前位置（$98.62）不是追入的好时机，也不是恐慌卖出的时机。我建议等待两个信号：① CLARITY Act 参议院版本最终条款明朗（预计 4-5 月）；② Q1 2026 财报（预计 5 月）验证 USDC 增速是否维持。如果 CLARITY Act 收益条款被修订（允许活动奖励），$70-80 以下是不错的布局区域（安全边际价）。如果全面通过严格版本，$50 以下才具备投资价值。</p>
+    <p style="color:var(--text3);font-size:12px;font-family:'Segoe UI',sans-serif">⚠️ 以上分析仅供参考，不构成个人投资建议。加密资产和相关股票波动极大，请根据自身风险承受能力决策。过往表现不代表未来收益。</p>
+  </div>
+</section>
+
+</div><!-- /container -->
+
+<footer>
+  数据来源：Circle IR、Motley Fool 电话会议纪要、Yahoo Finance、CoinGecko、Barron's、CoinDesk &nbsp;|&nbsp; 市场数据截至 2026-03-24 &nbsp;|&nbsp; 由 Buffy 🍔 制作 via OpenClaw
+</footer>
+
+<script>
+function toggleTheme(){
+  const d=document.documentElement;
+  d.getAttribute('data-theme')==='dark'?d.setAttribute('data-theme','light'):d.setAttribute('data-theme','dark');
+  redrawSankey();
+}
+(function(){const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t)})();
+
+const CV=(v)=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+Chart.defaults.font.family='-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif';
+Chart.defaults.font.size=12;
+
+const labels5=['Q4\'24','Q1\'25','Q2\'25','Q3\'25','Q4\'25'];
+
+// C1: Revenue + RLDC
+new Chart(document.getElementById('c1').getContext('2d'),{
+  type:'bar',
+  data:{labels:labels5,datasets:[
+    {label:'总收入',data:[435,579,658,740,770],backgroundColor:'rgba(138,154,142,.7)',borderColor:'#8a9a8e',borderWidth:1},
+    {label:'RLDC',data:[131,231,251,292,309],backgroundColor:'rgba(123,143,160,.7)',borderColor:'#7b8fa0',borderWidth:1}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'}},scales:{y:{beginAtZero:true,ticks:{callback:v=>'$'+v+'M'}}}}
+});
+
+// C2: EBITDA + margin
+new Chart(document.getElementById('c2').getContext('2d'),{
+  type:'bar',
+  data:{labels:labels5,datasets:[
+    {label:'Adj.EBITDA ($M)',data:[32,88,130,197,167],backgroundColor:'rgba(176,141,122,.75)',borderColor:'#b08d7a',borderWidth:1,yAxisID:'y'},
+    {label:'EBITDA利润率(%)',data:[7.4,38,52,67,54],type:'line',borderColor:'#c09090',backgroundColor:'rgba(192,144,144,.1)',borderWidth:2.5,pointRadius:5,fill:false,tension:.35,yAxisID:'y2'}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'}},scales:{
+    y:{beginAtZero:true,ticks:{callback:v=>'$'+v+'M'}},
+    y2:{position:'right',min:0,max:80,ticks:{callback:v=>v+'%'},grid:{drawOnChartArea:false}}
+  }}
+});
+
+// C3: USDC
+new Chart(document.getElementById('c3').getContext('2d'),{
+  type:'line',
+  data:{labels:[...labels5,'2026-03'],datasets:[
+    {label:'USDC 在途余额 ($B)',data:[43.9,55,65,72,75.3,78.5],borderColor:'#8a9a8e',backgroundColor:'rgba(138,154,142,.12)',borderWidth:2.5,pointRadius:5,fill:true,tension:.3},
+    {label:'平台上 USDC ($B)',data:[2.3,5,8,10.5,12.5,13.2],borderColor:'#b08d7a',backgroundColor:'rgba(176,141,122,.1)',borderWidth:2,pointRadius:4,fill:false,tension:.3}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'}},scales:{y:{beginAtZero:false,ticks:{callback:v=>'$'+v+'B'}}}}
+});
+
+// C4: Revenue breakdown FY2025
+new Chart(document.getElementById('c4').getContext('2d'),{
+  type:'doughnut',
+  data:{
+    labels:['储备收益（96%）','其他收入-区块链合作（3%）','其他收入-交易手续费（1%）'],
+    datasets:[{data:[2637,72.5,37.5],backgroundColor:['rgba(138,154,142,.8)','rgba(123,143,160,.8)','rgba(192,144,144,.8)'],borderColor:['#8a9a8e','#7b8fa0','#c09090'],borderWidth:2}]
+  },
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:{size:11}}},tooltip:{callbacks:{label:ctx=>'$'+ctx.raw+'M'}}}}
+});
+
+// C5: Other Revenue trend
+new Chart(document.getElementById('c5').getContext('2d'),{
+  type:'bar',
+  data:{labels:labels5,datasets:[
+    {label:'区块链网络合作',data:[1,14,15,17,24.7],backgroundColor:'rgba(123,143,160,.75)',borderColor:'#7b8fa0',borderWidth:1},
+    {label:'交易及其他',data:[1,7,9,12,12.2],backgroundColor:'rgba(192,144,144,.75)',borderColor:'#c09090',borderWidth:1}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'}},scales:{y:{beginAtZero:true,stacked:true,ticks:{callback:v=>'$'+v+'M'}},x:{stacked:true}}}
+});
+
+// C6: Analyst targets distribution
+new Chart(document.getElementById('c6').getContext('2d'),{
+  type:'bar',
+  data:{
+    labels:['$50-70','$70-100','$100-130','$130-160','$160-200','$200+'],
+    datasets:[{label:'分析师人数',data:[2,3,7,6,3,2],backgroundColor:['rgba(184,112,112,.7)','rgba(184,112,112,.5)','rgba(123,143,160,.7)','rgba(122,154,122,.6)','rgba(122,154,122,.7)','rgba(122,154,122,.8)'],borderWidth:1}]
+  },
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},annotation:{annotations:[{type:'line',xMin:2.5,xMax:2.5,borderColor:'#b08d7a',borderWidth:2,borderDash:[5,5],label:{content:'当前价 $98',display:true,position:'start',font:{size:10}}}]}},scales:{y:{beginAtZero:true,ticks:{callback:v=>v+'位'}}}}
+});
+
+// SANKEY
+function redrawSankey(){
+  const dark=document.documentElement.getAttribute('data-theme')==='dark';
+  const bg=dark?'#2e2a25':'#ffffff';
+  const fc=dark?'#d4ccc4':'#4a4340';
+  Plotly.newPlot('sankey',[{
+    type:'sankey',orientation:'h',
+    node:{pad:16,thickness:20,line:{color:dark?'#4a4540':'#d9d0c7',width:.5},
+      label:['储备收益 $733M','其他收入 $37M','总收入 $770M','分发成本 $461M','RLDC $309M','Adj.OpEx $144M','Adj.EBITDA $167M','折旧摊销 $26M','其他收益 $85M','GAAP营业利润 $55M','净利润 $133M'],
+      color:['#8a9a8e','#b09878','#5c7a9e','#b87070','#8a9a8e','#b08d7a','#7a9a7a','#a89f98','#b9a06a','#7b8fa0','#7a9a7a'],
+      x:[0,0,.18,.18,.40,.40,.65,.40,.65,.82,1],y:[.1,.7,.3,.7,.25,.7,.2,.5,.55,.4,.35]
+    },
+    link:{
+      source:[0,1,2,2,4,4,5,6,7,8,9,9],
+      target:[2,2,3,4,5,6,6,9,9,9,10,10],
+      value: [733,37,461,309,144,167,144,26,44,55,55,78],
+      color:['rgba(138,154,142,.35)','rgba(176,152,120,.35)','rgba(184,112,112,.3)','rgba(138,154,142,.35)','rgba(176,141,122,.35)','rgba(122,154,122,.35)','rgba(122,154,122,.35)','rgba(160,159,152,.3)','rgba(185,160,106,.3)','rgba(123,143,160,.35)','rgba(122,154,122,.4)','rgba(122,154,122,.4)']
+    }
+  }],{
+    paper_bgcolor:bg,plot_bgcolor:bg,
+    font:{family:'-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif',color:fc,size:12},
+    margin:{l:20,r:20,t:20,b:20},
+    height:420
+  },{responsive:true,displayModeBar:false});
+}
+redrawSankey();
+</script>
+</body>
+</html>

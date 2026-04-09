@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>腾讯音乐 TME — Q4 2025 & 全年财报深度分析</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root {
+  --bg:#f5f0eb;--bg2:#ece6df;--card:#ffffff;--card2:#f8f5f1;
+  --border:#d9d0c7;--text:#4a4340;--text2:#7a706a;--text3:#a89f98;
+  --accent:#8a9a8e;--accent2:#7b8fa0;--accent3:#b08d7a;--rose:#c09090;
+  --gold:#b9a06a;--red:#b87070;--green:#7a9a7a;--shadow:rgba(0,0,0,0.06);
+  --chart-grid:#e5ddd5;
+}
+[data-theme="dark"] {
+  --bg:#1e1c1a;--bg2:#28251f;--card:#2e2a25;--card2:#363230;
+  --border:#4a4540;--text:#d4ccc4;--text2:#a09890;--text3:#706860;
+  --accent:#8a9a8e;--accent2:#8fabbf;--accent3:#c9a48e;--rose:#c09090;
+  --gold:#c9b07a;--red:#c08080;--green:#8aaa8a;--shadow:rgba(0,0,0,0.3);
+  --chart-grid:#3e3a35;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Georgia','Noto Serif SC','PingFang SC',serif;line-height:1.75;font-size:14.5px;transition:background .35s,color .35s}
+a{color:var(--accent2);text-decoration:none}
+.theme-bar{position:sticky;top:0;z-index:100;background:var(--card);border-bottom:1px solid var(--border);padding:8px 24px;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(10px);transition:background .35s}
+.theme-bar .logo{font-size:13px;color:var(--text2);letter-spacing:1px}
+.theme-toggle{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2)}
+.toggle-switch{position:relative;width:44px;height:22px;background:var(--border);border-radius:11px;cursor:pointer;transition:background .3s}
+.toggle-switch::after{content:'';position:absolute;top:2px;left:2px;width:18px;height:18px;background:var(--card);border-radius:50%;transition:transform .3s;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+[data-theme="dark"] .toggle-switch{background:var(--accent2)}
+[data-theme="dark"] .toggle-switch::after{transform:translateX(22px)}
+.hero{padding:48px 24px 36px;text-align:center;border-bottom:1px solid var(--border)}
+.hero-tag{display:inline-block;font-family:'Segoe UI',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);padding:3px 14px;border-radius:20px;margin-bottom:18px}
+.hero h1{font-size:32px;font-weight:700;color:var(--text);letter-spacing:1px;margin-bottom:8px}
+.hero-sub{font-size:14px;color:var(--text2);margin-bottom:16px}
+.hero-pills{display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
+.pill{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:6px 18px;font-family:'Segoe UI',sans-serif;font-size:13px;color:var(--text2);box-shadow:0 1px 3px var(--shadow)}
+.pill strong{color:var(--text)}
+.pill.warn{border-color:var(--red)}
+.pill.warn strong{color:var(--red)}
+.pill.ok{border-color:var(--green)}
+.pill.ok strong{color:var(--green)}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+.section{padding:36px 0;border-bottom:1px solid var(--border)}
+.stitle{font-size:18px;font-weight:700;color:var(--accent3);margin-bottom:20px;letter-spacing:.5px;display:flex;align-items:center;gap:10px}
+.stitle::before{content:'';display:block;width:4px;height:20px;background:var(--accent3);border-radius:2px}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:14px}
+.kpi{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 18px;box-shadow:0 1px 4px var(--shadow);transition:background .35s}
+.kpi-l{font-family:'Segoe UI',sans-serif;font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
+.kpi-v{font-size:20px;font-weight:700;color:var(--text);margin-bottom:3px}
+.badge{display:inline-block;font-family:'Segoe UI',sans-serif;font-size:11px;font-weight:600;padding:2px 8px;border-radius:8px}
+.up{background:rgba(122,154,122,.15);color:var(--green)}
+.dn{background:rgba(184,112,112,.15);color:var(--red)}
+.nt{background:rgba(123,143,160,.15);color:var(--accent2)}
+.tbl-wrap{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow-x:auto;box-shadow:0 1px 4px var(--shadow)}
+.tbl{width:100%;border-collapse:collapse;font-family:'Segoe UI',sans-serif;font-size:13px}
+.tbl th{background:var(--card2);color:var(--text3);font-size:11px;letter-spacing:.5px;text-transform:uppercase;padding:10px 14px;text-align:right;border-bottom:1px solid var(--border)}
+.tbl th:first-child{text-align:left}
+.tbl td{padding:9px 14px;border-bottom:1px solid var(--border);text-align:right}
+.tbl td:first-child{text-align:left;color:var(--text2)}
+.tbl .hl td{font-weight:600;color:var(--text)}
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.cgrid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:16px}
+.ccard{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px;box-shadow:0 1px 4px var(--shadow)}
+.ctitle{font-family:'Segoe UI',sans-serif;font-size:12px;color:var(--text3);margin-bottom:12px;text-transform:uppercase;letter-spacing:.5px}
+.cwrap{position:relative;height:230px}
+.agrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
+.acard{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px;box-shadow:0 1px 4px var(--shadow)}
+.acard h4{font-size:13px;color:var(--accent2);margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px}
+.acard ul{padding-left:16px}
+.acard li{margin-bottom:5px;font-size:13px}
+.bscore{display:flex;align-items:center;gap:16px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin-bottom:12px;box-shadow:0 1px 4px var(--shadow)}
+.circle{width:62px;height:62px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;flex-shrink:0;border:3px solid;font-family:'Segoe UI',sans-serif}
+.cg{border-color:var(--green);color:var(--green)}
+.cw{border-color:var(--gold);color:var(--gold)}
+.cr{border-color:var(--red);color:var(--red)}
+.bscore .bd h4{font-size:14px;margin-bottom:3px}
+.bscore .bd p{font-size:13px;color:var(--text2);line-height:1.6}
+.verdict{background:var(--card2);border:2px solid var(--accent);border-radius:10px;padding:26px 28px;margin-bottom:16px}
+.verdict-t{font-size:17px;font-weight:700;color:var(--accent);margin-bottom:10px}
+.pgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:18px 0}
+.pbox{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center;box-shadow:0 1px 4px var(--shadow)}
+.pbox .pl{font-family:'Segoe UI',sans-serif;font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
+.pbox .pv{font-family:'Segoe UI',sans-serif;font-size:26px;font-weight:800}
+.pbox .pn{font-size:11px;color:var(--text3);margin-top:3px}
+.pc{color:var(--text2)}.pf{color:var(--gold)}.ps{color:var(--green)}
+#sankey{width:100%;height:420px}
+.cmt{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:26px;line-height:1.9;font-size:14.5px;box-shadow:0 1px 4px var(--shadow)}
+.cmt p{margin-bottom:14px}
+.hl-t{color:var(--accent3);font-weight:600}
+.warn-t{color:var(--red);font-weight:600}
+footer{background:var(--card2);border-top:1px solid var(--border);padding:24px;text-align:center;color:var(--text3);font-size:12px;margin-top:40px}
+
+/* Earnings Call Styles */
+.ec-block{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:22px;margin-bottom:16px;box-shadow:0 1px 4px var(--shadow)}
+.ec-block h3{font-size:15px;font-weight:700;color:var(--accent3);margin-bottom:14px;border-bottom:1px solid var(--border);padding-bottom:8px}
+.ec-item{margin-bottom:16px;padding-bottom:14px;border-bottom:1px dashed rgba(150,140,130,.2)}
+.ec-item:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
+.ec-quote{font-style:italic;font-size:13.5px;line-height:1.8;color:var(--text);margin-bottom:8px;padding-left:14px;border-left:3px solid var(--rose)}
+.ec-tag{display:inline-flex;align-items:center;gap:5px;font-family:'Segoe UI',sans-serif;font-size:11.5px;font-weight:600;padding:3px 10px;border-radius:6px;margin-right:6px}
+.tag-bull{background:rgba(122,154,122,.15);color:var(--green)}
+.tag-bear{background:rgba(184,112,112,.15);color:var(--red)}
+.tag-neut{background:rgba(123,143,160,.15);color:var(--accent2)}
+.ec-note{font-size:12.5px;color:var(--text2);line-height:1.6;margin-top:6px;padding:6px 10px;background:var(--card2);border-radius:6px}
+.ec-speaker{font-weight:700;color:var(--accent2);font-size:13px;margin-bottom:2px}
+.ec-role{font-family:'Segoe UI',sans-serif;font-size:11px;color:var(--text3);margin-bottom:10px}
+.ec-qa-label{display:inline-block;font-family:'Segoe UI',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:2px 8px;border-radius:4px;margin-bottom:10px}
+.ec-qa-q{background:rgba(176,141,122,.15);color:var(--accent3)}
+.ec-qa-a{background:rgba(138,154,142,.15);color:var(--accent)}
+
+/* Alert box */
+.alert-box{background:rgba(184,112,112,.08);border:1px solid rgba(184,112,112,.3);border-radius:10px;padding:14px 18px;margin-bottom:14px;font-size:13px}
+.alert-box.green{background:rgba(122,154,122,.08);border-color:rgba(122,154,122,.3)}
+.alert-box.gold{background:rgba(185,160,106,.08);border-color:rgba(185,160,106,.3)}
+
+/* Stock snapshot */
+.snap-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}
+.snap-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 20px;text-align:center;box-shadow:0 1px 4px var(--shadow)}
+.snap-card .sc-l{font-family:'Segoe UI',sans-serif;font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.snap-card .sc-v{font-size:22px;font-weight:800;margin-bottom:3px}
+.snap-card .sc-n{font-size:11px;color:var(--text3)}
+.snap-card.warn-card{border-color:var(--red)}
+.snap-card.ok-card{border-color:var(--green)}
+
+@media(max-width:768px){
+  .cgrid,.cgrid3,.agrid,.pgrid,.snap-grid{grid-template-columns:1fr}
+  .hero h1{font-size:22px}
+  .kpi-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <div class="logo">BUFFY · 财报研究所</div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">2026年3月18日 · Q4 2025 · 全年业绩</div>
+  <h1>腾讯音乐娱乐集团 TME</h1>
+  <div class="hero-sub">NYSE: TME &nbsp;|&nbsp; HKEX: 1698 &nbsp;|&nbsp; 2025 Q4 & 全年财报深度分析 &nbsp;|&nbsp; 巴菲特价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill warn">股价 <strong>$11.37</strong> <span style="font-size:11px;color:var(--red)">▼25%（财报后）</span></div>
+    <div class="pill">市值 <strong>~$175亿</strong></div>
+    <div class="pill">汇率 <strong>1 USD ≈ 6.99 RMB</strong></div>
+    <div class="pill">ADS <strong>~15.4亿</strong></div>
+    <div class="pill ok">股息 <strong>$0.24/ADS</strong></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ STOCK SNAPSHOT ═══ -->
+<section class="section">
+  <div class="stitle">股票快照 — 财报后实时</div>
+  <div class="snap-grid">
+    <div class="snap-card warn-card">
+      <div class="sc-l">当前股价</div>
+      <div class="sc-v" style="color:var(--red)">$11.37</div>
+      <div class="sc-n">财报次日暴跌 -25%</div>
+    </div>
+    <div class="snap-card">
+      <div class="sc-l">市值</div>
+      <div class="sc-v" style="color:var(--text)">~$175亿</div>
+      <div class="sc-n">vs 现金 $54.4亿</div>
+    </div>
+    <div class="snap-card ok-card">
+      <div class="sc-l">TTM Non-IFRS P/E</div>
+      <div class="sc-v" style="color:var(--green)">12.9x</div>
+      <div class="sc-n">Non-IFRS EPS $0.88/ADS</div>
+    </div>
+    <div class="snap-card">
+      <div class="sc-l">Forward P/E (2026E)</div>
+      <div class="sc-v" style="color:var(--gold)">11.5x</div>
+      <div class="sc-n">分析师均值 CNY 6.93/ADS</div>
+    </div>
+  </div>
+
+  <div class="alert-box" style="border-color:var(--red)">
+    🚨 <strong>核心警示：腾讯音乐宣布从下季度起停止披露在线音乐 MAU、付费用户数量和 ARPPU 等核心运营指标。</strong>这是股价暴跌 25% 的最大导火索——投资者无法追踪增长质量，恐慌性抛售。管理层称"业务已进化，将以收入和利润为主要业绩指标"——但 MAU 持续下滑（528M, -5% YoY）的现实让这一说法难以令人信服。
+  </div>
+</section>
+
+<!-- ═══ S1: KPI ═══ -->
+<section class="section">
+  <div class="stitle">核心财务指标 — Q4 2025 & 全年</div>
+  <div style="font-size:12px;color:var(--text3);margin-bottom:8px;">▎Q4 2025 单季 (RMB / USD 换算率 6.9931)</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">总营收</div><div class="kpi-v">RMB 86.4亿</div><span class="badge up">YoY +15.9%</span></div>
+    <div class="kpi"><div class="kpi-l">在线音乐服务</div><div class="kpi-v">RMB 71.0亿</div><span class="badge up">YoY +21.7%</span></div>
+    <div class="kpi"><div class="kpi-l">— 音乐订阅</div><div class="kpi-v">RMB 45.6亿</div><span class="badge up">YoY +13.2%</span></div>
+    <div class="kpi"><div class="kpi-l">— 非订阅音乐</div><div class="kpi-v">RMB 25.4亿</div><span class="badge up">YoY +40.8%</span></div>
+    <div class="kpi"><div class="kpi-l">社交娱乐</div><div class="kpi-v">RMB 15.4亿</div><span class="badge dn">YoY -5.2%</span></div>
+    <div class="kpi"><div class="kpi-l">毛利率</div><div class="kpi-v">44.7%</div><span class="badge up">+1.1pp YoY</span></div>
+    <div class="kpi"><div class="kpi-l">Non-IFRS 净利润（归母）</div><div class="kpi-v">RMB 24.9亿</div><span class="badge up">YoY +9.0%</span></div>
+    <div class="kpi"><div class="kpi-l">在线音乐月活用户</div><div class="kpi-v">5.28亿</div><span class="badge dn">YoY -5.0%</span></div>
+  </div>
+
+  <div style="font-size:12px;color:var(--text3);margin:20px 0 8px;">▎Q4 2025 用户运营指标（本季度最后一次完整披露）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">付费用户（在线音乐）</div><div class="kpi-v">1.274亿</div><span class="badge up">YoY +5.3%</span></div>
+    <div class="kpi"><div class="kpi-l">月度 ARPPU</div><div class="kpi-v">RMB 11.9</div><span class="badge up">YoY +7.2%</span></div>
+    <div class="kpi"><div class="kpi-l">SVIP 用户</div><div class="kpi-v">>2000万</div><span class="badge up">年末突破</span></div>
+    <div class="kpi"><div class="kpi-l">社交娱乐付费用户</div><div class="kpi-v">未披露</div><span class="badge nt">已停止</span></div>
+  </div>
+
+  <div style="font-size:12px;color:var(--text3);margin:20px 0 8px;">▎全年 2025</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">总营收</div><div class="kpi-v">RMB 329亿</div><span class="badge up">YoY +15.8%</span></div>
+    <div class="kpi"><div class="kpi-l">在线音乐服务</div><div class="kpi-v">RMB 267亿</div><span class="badge up">YoY +22.9%</span></div>
+    <div class="kpi"><div class="kpi-l">社交娱乐</div><div class="kpi-v">RMB 61.8亿</div><span class="badge dn">YoY -7.3%</span></div>
+    <div class="kpi"><div class="kpi-l">毛利率</div><div class="kpi-v">44.2%</div><span class="badge up">+1.9pp YoY</span></div>
+    <div class="kpi"><div class="kpi-l">Non-IFRS 净利润（归母）</div><div class="kpi-v">RMB 95.9亿</div><span class="badge up">YoY +25.0%</span></div>
+    <div class="kpi"><div class="kpi-l">GAAP 净利润（归母）</div><div class="kpi-v">RMB 110.6亿</div><span class="badge up">YoY +66.4%*</span></div>
+    <div class="kpi"><div class="kpi-l">经营性现金流</div><div class="kpi-v">RMB 102.3亿</div><span class="badge nt">≈$1.46B</span></div>
+    <div class="kpi"><div class="kpi-l">现金及短期投资</div><div class="kpi-v">RMB 380亿</div><span class="badge nt">≈$5.44B</span></div>
+  </div>
+  <div style="font-size:12px;color:var(--text3);margin-top:8px;">* 含 Q1 2025 UMG 股权视同处置一次性收益 RMB 23.7亿（~$3.39亿），Non-IFRS 已剔除。</div>
+</section>
+
+<!-- ═══ S2: TABLE ═══ -->
+<section class="section">
+  <div class="stitle">五季度财务明细（RMB亿元）</div>
+
+  <div class="alert-box gold" style="margin-bottom:14px;">
+    ⚠️ <strong>关键数据异常：</strong>Q1 2025 经营利润/净利润大幅跳升，原因是 UMG 股权处置一次性收益 RMB 23.7亿。GAAP 层面会产生巨大失真，应聚焦 Non-IFRS 数据看趋势。
+  </div>
+
+  <div class="tbl-wrap">
+  <table class="tbl">
+    <thead><tr>
+      <th>指标</th><th>Q4 2024</th><th>Q1 2025</th><th>Q2 2025</th><th>Q3 2025</th><th>Q4 2025</th><th>QoQ</th><th>YoY</th>
+    </tr></thead>
+    <tbody>
+      <tr class="hl"><td>总营收</td><td>74.6</td><td>73.6</td><td>84.4</td><td>84.6</td><td>86.4</td><td style="color:var(--green)">+2.1%</td><td style="color:var(--green)">+15.9%</td></tr>
+      <tr><td>— 在线音乐服务</td><td>58.3</td><td>58.0</td><td>68.5</td><td>69.7</td><td>71.0</td><td style="color:var(--green)">+1.9%</td><td style="color:var(--green)">+21.7%</td></tr>
+      <tr><td>&nbsp;&nbsp;— 音乐订阅</td><td>40.3</td><td>42.2</td><td>43.8</td><td>45.0</td><td>45.6</td><td style="color:var(--green)">+1.3%</td><td style="color:var(--green)">+13.2%</td></tr>
+      <tr><td>&nbsp;&nbsp;— 非订阅音乐</td><td>18.0</td><td>15.8</td><td>24.7</td><td>24.7</td><td>25.4</td><td style="color:var(--green)">+2.8%</td><td style="color:var(--green)">+40.8%</td></tr>
+      <tr><td>— 社交娱乐及其他</td><td>16.3</td><td>15.5</td><td>15.9</td><td>14.9</td><td>15.4</td><td style="color:var(--green)">+3.4%</td><td style="color:var(--red)">-5.2%</td></tr>
+      <tr class="hl"><td>毛利率</td><td>43.6%</td><td>~44.0%</td><td>~44.0%</td><td>~43.5%</td><td>44.7%</td><td style="color:var(--green)">+1.2pp</td><td style="color:var(--green)">+1.1pp</td></tr>
+      <tr><td>经营利润（GAAP）</td><td>24.1</td><td>48.4*</td><td>29.8</td><td>27.1</td><td>28.4</td><td style="color:var(--green)">+4.8%</td><td style="color:var(--green)">+17.9%</td></tr>
+      <tr class="hl"><td>Non-IFRS 净利润（归母）</td><td>22.8</td><td>~20.5</td><td>~25.9</td><td>~24.8</td><td>24.9</td><td style="color:var(--green)">+0.4%</td><td style="color:var(--green)">+9.0%</td></tr>
+      <tr><td>在线音乐付费用户（百万）</td><td>121.0</td><td>122.9</td><td>124.4</td><td>125.7</td><td>127.4</td><td style="color:var(--green)">+1.7M</td><td style="color:var(--green)">+5.3%</td></tr>
+      <tr><td>在线音乐 MAU（百万）</td><td>556</td><td>~550</td><td>~545</td><td>~538</td><td>528</td><td style="color:var(--red)">-10M</td><td style="color:var(--red)">-5.0%</td></tr>
+      <tr><td>月度 ARPPU（RMB）</td><td>11.1</td><td>~11.4</td><td>~11.7</td><td>~11.7</td><td>11.9</td><td style="color:var(--green)">+0.2</td><td style="color:var(--green)">+7.2%</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div style="font-size:12px;color:var(--text3);margin-top:6px;">* Q1 2025 含 UMG 视同处置一次性收益 RMB 23.7亿，Non-IFRS 已剔除。</div>
+
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin-top:14px;">
+    <div style="font-size:13px;font-weight:600;color:var(--accent3);margin-bottom:8px;">💡 市场为什么暴跌 25%？四大原因</div>
+    <table class="tbl" style="font-size:12.5px;">
+      <thead><tr><th>原因</th><th>市场解读</th><th>Buffy 评估</th></tr></thead>
+      <tbody>
+        <tr><td><span class="badge dn">利空</span> 停止披露 MAU/付费用户/ARPPU</td><td>信息透明度骤降，恐慌性抛售</td><td>🔴 最大问题——MAU 下滑是被迫停披还是战略选择？</td></tr>
+        <tr><td><span class="badge dn">利空</span> Non-IFRS EPS 略低于市场预期</td><td>$0.23 vs 预期 ~$0.25，miss 约 8%</td><td>🟡 轻微 miss，但叠加其他因素放大恐慌</td></tr>
+        <tr><td><span class="badge dn">利空</span> MAU 持续下滑至 5.28亿（-5% YoY）</td><td>规模萎缩，长期增长逻辑受损</td><td>🔴 用户总池在缩小，依赖 ARPU 拉收入终有天花板</td></tr>
+        <tr class="hl"><td><span class="badge up">利好（被忽视）</span> 营收+16%、Non-IFRS 利润+25%</td><td>被指标停披消息淹没</td><td>🟢 基本面实际扎实，市场情绪性定价</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ═══ S3: CHARTS ═══ -->
+<section class="section">
+  <div class="stitle">营收与盈利趋势</div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">季度营收（RMB亿）</div><div class="cwrap"><canvas id="c1"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">Non-IFRS 净利润（归母，RMB亿）</div><div class="cwrap"><canvas id="c2"></canvas></div></div>
+  </div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">在线音乐 vs 社交娱乐（RMB亿）</div><div class="cwrap"><canvas id="c3"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">付费用户 & ARPPU 趋势</div><div class="cwrap"><canvas id="c4"></canvas></div></div>
+  </div>
+  <div class="cgrid3">
+    <div class="ccard"><div class="ctitle">毛利率趋势</div><div class="cwrap"><canvas id="c5"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">FY2025 营收结构</div><div class="cwrap"><canvas id="c6"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">在线音乐 MAU（百万）</div><div class="cwrap"><canvas id="c7"></canvas></div></div>
+  </div>
+</section>
+
+<!-- ═══ S4: SANKEY ═══ -->
+<section class="section">
+  <div class="stitle">资金流向桑基图 — 2025 全年（RMB亿）</div>
+  <div class="ccard">
+    <div style="font-size:12px;color:var(--text3);margin-bottom:6px;">从营收到经营现金流的完整流向（基于 Non-IFRS 口径，已剔除 UMG 一次性收益）</div>
+    <div id="sankey"></div>
+  </div>
+</section>
+
+<!-- ═══ S5: SEGMENTS ═══ -->
+<section class="section">
+  <div class="stitle">业务分部深度解析</div>
+  <div class="agrid">
+    <div class="acard">
+      <h4>🎵 在线音乐订阅 — 稳定引擎</h4>
+      <ul>
+        <li>Q4 RMB 45.6亿，YoY <span style="color:var(--green)">+13.2%</span>；全年 RMB 176.6亿，+16%</li>
+        <li>付费用户 1.274亿 (+5.3% YoY)，连续稳步增长</li>
+        <li>ARPPU RMB 11.9 (+7.2%)——SVIP 拉升是核心驱动</li>
+        <li>SVIP 用户突破 2000万（全年末），Q2 时为 1500万</li>
+        <li>SVIP 穿透率 16%（20M/127M）——仍有巨大提升空间</li>
+        <li><strong>飞轮逻辑：</strong>内容丰富 → SVIP 转化 → 提升 ARPPU → 投入更多内容</li>
+      </ul>
+    </div>
+    <div class="acard">
+      <h4>🎤 非订阅音乐服务 — 高速增长新引擎</h4>
+      <ul>
+        <li>Q4 RMB 25.4亿，YoY <span style="color:var(--green)">+40.8%</span>；全年 RMB 90.7亿，+39.2%</li>
+        <li>包含：线下演出、广告、艺人周边商品</li>
+        <li>G-DRAGON 2025 巡演：亚太 8城 20场，逾 26万观众</li>
+        <li>与 Ed Sheeran 合作生产 KIT 专辑，首次与顶级西方艺人合作</li>
+        <li>广告：多元化产品矩阵 + 激励式互动任务，收入同比强劲增长</li>
+        <li><span style="color:var(--red)">⚠️ 演出/周边成本也同步上升，拖累毛利率</span></li>
+      </ul>
+    </div>
+    <div class="acard">
+      <h4>📱 社交娱乐 — 持续萎缩管控中</h4>
+      <ul>
+        <li>Q4 RMB 15.4亿，YoY <span style="color:var(--red)">-5.2%</span>；全年 RMB 61.8亿，-7.3%</li>
+        <li>直播功能调整 + 监管合规趋严，直播流水持续下降</li>
+        <li>但收入分成比例下降 → 实际对毛利率的拖累减小</li>
+        <li>社交娱乐付费用户数据已停止披露</li>
+        <li>管理层战略：社交娱乐不再是重点，聚焦音乐广告和会员</li>
+        <li>这块业务占总营收比例：2023年 ~37% → 2025年 ~18.8%</li>
+      </ul>
+    </div>
+    <div class="acard">
+      <h4>🤖 AI 战略 — 全面融入各环节</h4>
+      <ul>
+        <li>一站式 AI 音乐生产平台：赋能 15万+创作者、1000万+用户</li>
+        <li>DeepSeek LLM 集成 → 智能评论区、AI 助手、推荐页个性化</li>
+        <li>自研多模态大模型 → 推荐系统记录最高推荐驱动播放份额</li>
+        <li>QQ Music AI Agent（由腾讯元宝驱动）：语音指令直达购买</li>
+        <li>与腾讯视频账号深度集成 → 内容分发与消费联动</li>
+        <li>AI 音乐 AI 创作内容：不取代人工内容，流量分配优先原创</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ S6: EARNINGS CALL ═══ -->
+<section class="section">
+  <div class="stitle">电话会议完整内容 — 逐条记录 + 利好/利空判断</div>
+
+  <!-- CEO 开场 -->
+  <div class="ec-block">
+    <h3>📌 第一部分：主席 & CEO 开场陈述</h3>
+
+    <div class="ec-item">
+      <div class="ec-speaker">彭迦信（Cussion Pang）— 执行主席</div>
+      <div class="ec-role">Executive Chairman</div>
+      <div class="ec-quote">「2025年，我们以纪律性执行内容和平台战略，实现了营收增长加速和利润率持续扩张。订阅服务的扎实增长，叠加非订阅音乐 IP 服务的强劲势头，正在构建一个差异化的全功能一站式音乐服务平台。这使我们能够从音乐 IP 中解锁更大价值，为艺人创造新机遇，并打入更大的市场。我们对为股东持续创造价值充满信心。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">全年营收+16%、Non-IFRS 利润+25%——成绩客观属实。"内容+平台双轮驱动"的战略叙事得到数据支撑。但"打入更大市场"的说法与 MAU 持续下滑形成矛盾。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-speaker">梁柱（Ross Liang）— 首席执行官</div>
+      <div class="ec-role">Chief Executive Officer</div>
+      <div class="ec-quote">「面对 AI 技术的快速进步和消费者期望的演变，我们保持敏捷，从多个维度主动应对。我们对产品的持续打磨和多层次、以用户为中心的策略，在2025年全年驱动了有效的订阅转化、更深度的用户参与和更高的钱包份额。值得注意的是，SVIP 用户规模超过2000万，ARPPU 持续向上。我们新推出的广告支持型订阅计划正在取得初步进展，将逐步扩大用户准入面并吸引新受众。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">SVIP 2000万里程碑 + ARPPU 上涨是实质性进展。广告订阅新计划（免费/低价订阅看广告）理论上能扩大用户基础，商业模式创新值得关注。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「重要披露变更：自下季度起，我们将停止披露在线音乐 MAU、付费用户数量和 ARPPU 等季度运营指标，转为每年年末披露总付费用户数。管理层认为，随着业务模式进化——广告和 IP 相关业务规模化，多层次会员制推出——每个付费会员的商业影响差异日益增大。我们将以收入和利润作为主要业绩指标。」</div>
+      <span class="ec-tag tag-bear">🔴 利空（最大）</span>
+      <div class="ec-note">这是整个财报中投资者最不满的一条。核心问题：MAU 同比 -5%（528M），这个数字不好看，停披的时机点让市场高度怀疑。三层透明度降低（MAU + 付费用户 + ARPPU）意味着分析师无法建立精确模型，信息不对称成本转嫁到投资者。这是 25% 暴跌的真正原因。</div>
+    </div>
+  </div>
+
+  <!-- CFO 财务详述 -->
+  <div class="ec-block">
+    <h3>📌 第二部分：CFO 财务详述 — 胡柳（Shirley Hu）</h3>
+
+    <div class="ec-item">
+      <div class="ec-speaker">胡柳（Shirley Hu）— 首席财务官</div>
+      <div class="ec-role">Chief Financial Officer</div>
+      <div class="ec-quote">「Q4 总营收同比增长 15.9% 至 RMB 86.4亿。在线音乐服务营收增长 21.7%，主要由订阅和线下演出驱动，辅以广告收入增长。非订阅音乐服务同比增长 40.8%——这是本季最亮眼的增长亮点。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">非订阅音乐+40.8%确实是超预期亮点。演出、周边、广告三条腿共同发力，说明 TME 的变现渠道正在有效多元化，不再只靠订阅。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「毛利率提升至 44.7%（同比+1.1pp），主要受益于订阅和广告增长的规模效应，以及社交娱乐收入分成比例下降。演出及周边相关成本增加有所抵消，但整体毛利质量持续提升。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">44.7% 是历史高位附近，且是在演出/周边这些低毛利业务快速扩张背景下实现的。说明高毛利的订阅和广告的结构性提升足够强劲，能够消化新业务的毛利摊薄。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「全年经营费用仅增长 3.9%（vs 营收+15.8%），占总营收比例从 16.5% 降至 14.8%。销售及营销费用增长 8.8%，主要用于内容推广和渠道获客；一般及行政费用增长 2.8%，主要是员工成本。整体费用纪律良好。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">OPEX 增速远低于营收增速，运营杠杆非常健康。这是 Non-IFRS 利润+25% 能够超越营收+16% 的核心驱动——不是靠烧钱买增长，是真实的经营效率提升。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「Q1 2025 确认了 UMG 视同处置一次性收益 RMB 23.7亿——这源于我们从一家关联企业按比例收到了 2% 的 UMG 股权。该股权被指定为以公允价值计量且其变动计入其他综合收益的金融资产，我们现在直接持有 UMG 股份。」</div>
+      <span class="ec-tag tag-neut">📊 中性偏好</span>
+      <div class="ec-note">持有 UMG 2% 股权是有价值的战略资产——UMG 是全球最大音乐公司，双方合作关系更稳固。但这是一次性收益，不应放入 Non-IFRS 持续盈利能力计算。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「全年经营现金流 RMB 102.3亿（约$14.6亿），现金及短期投资合计 RMB 380亿（约$54亿）。董事会批准年度股息约 $3.68亿（每 ADS $0.24），较去年$0.18 增长 33%。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">股息提升 33% 是真金白银的回报信号。现金储备$54亿相当于市值的 31%，"现金/市值"比例在互联网公司中属于极高水平。持续经营现金流$14.6亿夯实了可持续分红能力。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「2025年全年回购股份合计 RMB 46.5亿（约$6.65亿）。新一期 $10亿回购计划从 2025年3月开始执行，24个月内完成。结合股息，2025年全年股东回报约达 $10亿。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">$10亿股东回报相当于市值的 5.7%（按暴跌前 ~$175亿计算）——这是非常高的股东回报率。持续回购 + 提升股息传递出强烈的管理层自信信号。</div>
+    </div>
+  </div>
+
+  <!-- Q&A — 花旗 Citi -->
+  <div class="ec-block">
+    <h3>📌 第三部分：Q&A — 花旗（Alicia Yap）</h3>
+
+    <div class="ec-item">
+      <div class="ec-qa-label ec-qa-q">🎤 分析师提问</div>
+      <div class="ec-quote">「在 AI 浪潮和竞争格局演变的背景下，公司 2026 年的战略增长展望如何？如何把握机遇并应对挑战？」</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-qa-label ec-qa-a">💬 CEO 梁柱回应</div>
+      <div class="ec-quote">「2026年我们将继续深化内容和平台战略。在订阅端，基于三层会员体系（基础/高级/SVIP）持续提升 ARPU，SVIP 2000万用户基础为进一步渗透奠定坚实基础。在非订阅端，演出、周边、广告三驾马车将继续高速增长。AI 方面，将进一步强化个性化推荐和 AI 创作工具。尽管竞争加剧，我们对实现高质量增长充满信心。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">三层会员体系 + SVIP 渗透提升的逻辑清晰——即使用户总量不增，ARPU 提升也能驱动收入。但"高质量增长"如何量化在指标停披后变得模糊。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「广告支持型订阅计划是我们今年的重要创新。这个模式允许不愿意付费的用户以观看广告换取部分免费服务，理论上能扩大整体付费用户基础并带来广告收入增量。目前已取得初步进展，预计2026年逐步扩大规模。」</div>
+      <span class="ec-tag tag-neut">📊 中性偏好</span>
+      <div class="ec-note">"广告换会员"的商业模式 Spotify 已验证有效。若能把 MAU 中大量免费用户转化为广告付费用户，将带来实质性的货币化提升。但中国市场用户对广告的容忍度是未知变量。</div>
+    </div>
+  </div>
+
+  <!-- Q&A — 高盛 Goldman Sachs -->
+  <div class="ec-block">
+    <h3>📌 第四部分：Q&A — 高盛（Lincoln Kong）</h3>
+
+    <div class="ec-item">
+      <div class="ec-qa-label ec-qa-q">🎤 分析师提问</div>
+      <div class="ec-quote">「腾讯音乐如何在产品和生态系统中整合 AI？管理层对 AI 对音乐版权方、流媒体平台和用户行为的影响有何看法？」</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-qa-label ec-qa-a">💬 CEO 梁柱回应</div>
+      <div class="ec-quote">「我们将 AI 视为音乐生态系统的强大赋能工具，而非颠覆者。在创作端，我们的一站式 AI 音乐制作平台已有 15万+创作者和 1000万+普通用户参与，AI 大幅提升了创作效率。在内容分发端，自研多模态大模型提升了推荐系统精准度，推荐驱动的播放份额创历史新高。在用户端，QQ Music AI Agent 实现了从'音乐发现'到'购买决策'的全流程智能化。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">AI 应用落地有实质数据支撑（推荐驱动份额历史新高），不只是PPT战略。一站式创作平台打通了 UGC 和商业化路径——这是差异化护城河。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「关于 AI 生成音乐对版权池的影响：我们的判断是，AI 生成内容目前主要是补充而非替代人工内容。我们在推荐流量上优先分配给 PGC 和 OGC 内容，AI 内容有适当的流量配额。版权收入分成机制基本维持不变——AI 创作者参与分成的方式与传统模式兼容。」</div>
+      <span class="ec-tag tag-neut">📊 中性</span>
+      <div class="ec-note">对版权影响的判断谨慎，并对 AI 内容流量分配做了主动管控，说明 TME 有意维护与传统音乐版权方的关系。但随着 AI 生成内容爆炸式增长，这个平衡点的长期可持续性存疑。</div>
+    </div>
+  </div>
+
+  <!-- Q&A — 摩根大通 JPMorgan -->
+  <div class="ec-block">
+    <h3>📌 第五部分：Q&A — 摩根大通（Alex Yao）</h3>
+
+    <div class="ec-item">
+      <div class="ec-qa-label ec-qa-q">🎤 分析师提问</div>
+      <div class="ec-quote">「AI 生成音乐对需求侧的影响是增量还是零和？如果 AI 使音乐创作民主化，对版权收入池有何影响，商业模式需要哪些调整？」</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-qa-label ec-qa-a">💬 CEO 梁柱回应</div>
+      <div class="ec-quote">「从需求端看，AI 增加了音乐消费的多样性和频次，目前是增量需求。数据显示 AI 工具催生了更多的音乐翻唱内容（covers）登上榜单，但用户对原创内容的偏好没有根本改变。从版权池来看，UGC 的 AI 内容不会实质性影响 PGC/OGC 的版权分成比例，因为我们的版权合同是基于专业内容产出协商的，与 UGC 的分成机制相互独立。」</div>
+      <span class="ec-tag tag-neut">📊 中性偏好</span>
+      <div class="ec-note">AI 是增量需求的结论对平台有利——但这个结论目前仍在早期阶段，随着 AI 内容质量进一步提升（尤其是 Suno/Udio 等工具），未来 18 个月需持续观察。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「腾讯音乐自有的 AI 创作平台是我们在 AI 时代构建差异化优势的核心。我们的平台不仅连接创作者和听众，还通过 AI 工具为创作者提供全流程支持——从灵感到成品到发布到变现。这个闭环是纯流媒体平台无法复制的，是我们在 AI 音乐时代的真正护城河。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">"创作-分发-变现"一体化平台是真实的差异化。如果能持续吸引优质创作者，内容护城河会越来越深。这是 Spotify 不具备的中国本土优势。</div>
+    </div>
+  </div>
+
+  <!-- Q&A — 杰弗瑞 Jefferies -->
+  <div class="ec-block">
+    <h3>📌 第六部分：Q&A — 杰弗瑞（Thomas Chong）</h3>
+
+    <div class="ec-item">
+      <div class="ec-qa-label ec-qa-q">🎤 分析师提问</div>
+      <div class="ec-quote">「从财务角度看，2026年毛利率、OPEX 和利润增长的趋势如何？管理层对内容投入、IP 开发、演出和 AI 方面的持续投资有何规划？」</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-qa-label ec-qa-a">💬 CFO 胡柳回应</div>
+      <div class="ec-quote">「2026年毛利率展望：大致持平于 2025年水平（44.2%），可能略有下降。正面因素：订阅和广告增长的规模效应、内容成本优化、iOS 渠道费用近期下调。负面因素：IP 版权、自制内容、艺人合作及演出/周边等新业务的前期投入持续，这些收入增长与成本增长同步。」</div>
+      <span class="ec-tag tag-neut">📊 中性</span>
+      <div class="ec-note">明确"略有下降"的毛利率指引是诚实的预期管理。演出/周边是低毛利业务——这是为了长期 IP 价值而有意接受的结构性取舍。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「OPEX 方面，销售及营销费用增速将略快于营收，主要用于自制内容推广和渠道获客（如广告支持型订阅计划）。整体 OPEX 纪律维持，不会出现大幅激进扩张。一般及行政费用保持稳定，增速低于营收。」</div>
+      <span class="ec-tag tag-neut">📊 中性偏好</span>
+      <div class="ec-note">S&M 略快于营收增速意味着运营杠杆会轻微减弱，但"不激进扩张"承诺可信——过去三年 TME 在成本控制上的执行力有目共睹。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「2026年盈利展望：Non-IFRS 净利润整体改善，增速与营收增速相近（假设 15-20%区间）。净利率相似或略低于 2025年水平——因为新业务投入和竞争压力。长期战略是通过内容升级、一站式音乐服务和最大化 IP 价值驱动高质量增长。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">2026E Non-IFRS 净利润增速 15-20% 的指引超出暴跌后市场的悲观预期。若兑现，当前 11.5x forward P/E 对应的是一个净利润增长 15-20% 的平台——PEG ≈ 0.7，极度低估。</div>
+    </div>
+  </div>
+
+  <!-- 电话会议汇总 -->
+  <div style="background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin-top:16px;">
+    <div style="font-size:14px;font-weight:700;color:var(--accent3);margin-bottom:12px;">📊 电话会议信号汇总</div>
+    <table class="tbl" style="font-size:12.5px;">
+      <thead><tr><th>信号类别</th><th>数量</th><th>代表性内容</th></tr></thead>
+      <tbody>
+        <tr><td><span class="ec-tag tag-bull" style="font-size:11px;">🟢 利好</span></td><td style="color:var(--green);font-weight:700;">8项</td><td>营收+16%、利润+25%、毛利率扩张、SVIP 2000万、OPEX 杠杆、股东回报$10亿、AI 落地、2026E 利润指引 15-20%</td></tr>
+        <tr><td><span class="ec-tag tag-neut" style="font-size:11px;">📊 中性</span></td><td style="color:var(--accent2);font-weight:700;">5项</td><td>广告订阅模式初期、AI 版权影响待观察、毛利率2026年略降、UMG 持股一次性、iOS 渠道费减少</td></tr>
+        <tr><td><span class="ec-tag tag-bear" style="font-size:11px;">🔴 利空</span></td><td style="color:var(--red);font-weight:700;">2项</td><td>停止披露 MAU/付费用户/ARPPU（最大利空）、MAU 持续下滑 -5% YoY</td></tr>
+      </tbody>
+    </table>
+    <div style="font-size:12px;color:var(--text2);margin-top:10px;line-height:1.6;">
+      <strong>总体基调：</strong>管理层传递出对 2026年持续增长的较强信心，但指标透明度骤降引爆市场恐慌。财报本身是超预期的，但"透明度问题"的成本被市场一次性定价了 25%。未来 2 个季度的年度数据（Q4 年末只披露总付费用户数）将是重建市场信任的关键。
+    </div>
+  </div>
+</section>
+
+<!-- ═══ S7: BUFFETT ANALYSIS ═══ -->
+<section class="section">
+  <div class="stitle">巴菲特逐项评分</div>
+
+  <div class="bscore"><div class="circle cg">A-</div><div class="bd">
+    <h4>护城河：音乐版权 + 超级用户数据 + 社交网络（强）</h4>
+    <p>中国唯一一家同时拥有 QQ音乐 / 酷狗 / 酷我 / 全民K歌四平台的音乐生态。与腾讯视频账号、微信深度集成构建独特流量入口。260M+ 曲库 + SVIP 生态打造了高切换成本。AI 创作平台形成新的内容护城河。</p>
+  </div></div>
+
+  <div class="bscore"><div class="circle cw">B-</div><div class="bd">
+    <h4>管理层：能力强但透明度让人担心</h4>
+    <p>成本控制能力出色（OPEX/Revenue 从 18% 降到 15%），股东回报积极（$0.24/ADS 股息 +33%、$10亿 buyback）。但停止披露核心运营指标是严重的信任减分。在 MAU 下滑的背景下做出此决定，无论初衷如何，都会被市场解读为"藏坏消息"。</p>
+  </div></div>
+
+  <div class="bscore"><div class="circle cg">A</div><div class="bd">
+    <h4>财务健康：现金充裕，负债轻，现金流强劲</h4>
+    <p>现金及短期投资 RMB 380亿（~$54亿）= 市值的约 31%（按暴跌后 $175亿）。无有息负债（票据已还清）。经营现金流 RMB 102亿（~$14.6亿），FCF 更高（科技公司资本支出极少）。股息可持续性无虞。</p>
+  </div></div>
+
+  <div class="bscore"><div class="circle cg">B+</div><div class="bd">
+    <h4>盈利质量：核心盈利能力持续提升</h4>
+    <p>毛利率 44.2%（历史高位），且在演出/周边低毛利业务扩张背景下仍实现扩张，说明订阅和广告的高毛利占比提升已形成结构性改善。Non-IFRS 利润扣除一次性 UMG 收益后增长 25%，质量真实。</p>
+  </div></div>
+
+  <div class="bscore"><div class="circle cr">C+</div><div class="bd">
+    <h4>可预测性：订阅可见，但新指引让未来不透明</h4>
+    <p>订阅收入（全年 RMB 176.6亿）有较高可见性。但从下季度起，失去 MAU、付费用户、ARPPU 等月度数据，分析师无法追踪增长质量。演出/周边业务受艺人档期影响大，波动性较高。中国监管仍是结构性不确定因素（直播功能调整历史前车之鉴）。</p>
+  </div></div>
+
+  <div class="bscore"><div class="circle cg">A-</div><div class="bd">
+    <h4>资本配置：股东友好，回购纪律强</h4>
+    <p>2025年全年股东回报约 $10亿（股息 $3.68亿 + 回购 $6.65亿），回报率约 5.7%（按暴跌前市值）。新的 $10亿回购授权从 2025年3月启动（24个月），持续注销股份传递强烈信心。资本效率高：无需大规模资本支出支撑增长。</p>
+  </div></div>
+</section>
+
+<!-- ═══ S8: DCF ═══ -->
+<section class="section">
+  <div class="stitle">DCF 折现估值 — 三情景对比</div>
+
+  <div style="font-size:12px;color:var(--text3);margin-bottom:16px;">共同假设：ADS ~15.4亿 | 年末现金 RMB 380亿 (~$54亿) | 债务 ~RMB 35亿 (~$5亿) | 净现金 ~$49亿 | 汇率 6.99 RMB/USD</div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:18px;">
+
+    <div class="acard" style="border-top:3px solid var(--green);">
+      <h4 style="color:var(--green)">🟢 乐观情景</h4>
+      <ul style="font-size:12.5px;">
+        <li>基础 FCF（2025A）：$14亿</li>
+        <li>增长：15%/年（5年）→ 终端 7%</li>
+        <li>折现率：10%</li>
+        <li>地缘折扣：-20%</li>
+        <li>5年FCF现值：$55亿</li>
+        <li>终值现值：$197亿</li>
+        <li>EV：$252亿</li>
+        <li>+净现金：$49亿 = $301亿</li>
+        <li>地缘折扣后：$241亿</li>
+        <li style="font-weight:700;color:var(--green)">每ADS：~$15.6</li>
+        <li>vs 当前 $11.37 → <strong>折价 27%</strong></li>
+      </ul>
+    </div>
+
+    <div class="acard" style="border-top:3px solid var(--gold);">
+      <h4 style="color:var(--gold)">📊 中性情景（基准）</h4>
+      <ul style="font-size:12.5px;">
+        <li>基础 FCF（2025A）：$14亿</li>
+        <li>增长：10%/年（5年）→ 终端 4%</li>
+        <li>折现率：12%</li>
+        <li>地缘折扣：-30%</li>
+        <li>5年FCF现值：$50亿</li>
+        <li>终值现值：$120亿</li>
+        <li>EV：$170亿</li>
+        <li>+净现金：$49亿 = $219亿</li>
+        <li>地缘折扣后：$153亿</li>
+        <li style="font-weight:700;color:var(--gold)">每ADS：~$9.9</li>
+        <li>vs 当前 $11.37 → <strong>溢价 15%</strong></li>
+      </ul>
+    </div>
+
+    <div class="acard" style="border-top:3px solid var(--red);">
+      <h4 style="color:var(--red)">🔴 悲观情景</h4>
+      <ul style="font-size:12.5px;">
+        <li>基础 FCF（2025A）：$14亿</li>
+        <li>增长：5%/年（5年）→ 终端 2%</li>
+        <li>折现率：14%</li>
+        <li>地缘折扣：-40%</li>
+        <li>5年FCF现值：$46亿</li>
+        <li>终值现值：$63亿</li>
+        <li>EV：$109亿</li>
+        <li>+净现金：$49亿 = $158亿</li>
+        <li>地缘折扣后：$95亿</li>
+        <li style="font-weight:700;color:var(--red)">每ADS：~$6.2</li>
+        <li>vs 当前 $11.37 → <strong>高估 83%</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="tbl-wrap" style="margin-bottom:18px;">
+    <table class="tbl" style="font-size:13px;">
+      <thead><tr><th>情景</th><th>FCF 增速</th><th>折现率</th><th>地缘折扣</th><th>每ADS内在价值</th><th>含25%安全垫买入价</th><th>vs 当前$11.37</th></tr></thead>
+      <tbody>
+        <tr><td style="color:var(--green);font-weight:600;">🟢 乐观</td><td>15%→7%</td><td>10%</td><td>-20%</td><td style="color:var(--green);font-weight:700;">$15.6</td><td>$11.7</td><td style="color:var(--green)">折价 27%（约合理）</td></tr>
+        <tr class="hl"><td style="color:var(--gold);font-weight:600;">📊 中性（基准）</td><td>10%→4%</td><td>12%</td><td>-30%</td><td style="color:var(--gold);font-weight:700;">$9.9</td><td>$7.4</td><td style="color:var(--red)">溢价 15%（轻微高估）</td></tr>
+        <tr><td style="color:var(--red);font-weight:600;">🔴 悲观</td><td>5%→2%</td><td>14%</td><td>-40%</td><td style="color:var(--red);font-weight:700;">$6.2</td><td>$4.6</td><td style="color:var(--red)">高估 83%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="alert-box gold">
+    💡 <strong>DCF 解读：</strong>当前 $11.37 处于乐观与中性情景之间——仅在<strong>乐观情景下才有安全边际</strong>。核心判断：如果管理层的 2026E 增速 15-20% 指引能兑现，乐观情景成立，当前价格略有吸引力。若增速实际放缓（MAU 下滑的隐患），中性/悲观情景成立，当前价可能仍有下行风险。<strong>最大不确定性：没有 MAU/付费用户数据，无法独立验证增长质量。</strong>
+  </div>
+
+  <div class="verdict">
+    <div class="verdict-t">🎯 综合裁决 — 条件性观察仓</div>
+    <div style="line-height:1.8;margin-bottom:14px;">
+      当前 $11.37 = 乐观 DCF 的 73%（含安全垫价 $11.7）= 中性 DCF 的 115%。<strong>不是极度低估，但也不是泡沫。</strong>暴跌 25% 是情绪化的过度反应，但 MAU 下滑 + 透明度问题是真实的结构性隐患，不能完全无视。
+    </div>
+    <div class="pgrid">
+      <div class="pbox"><div class="pl">当前市场价</div><div class="pv pc">$11.37</div><div class="pn">财报次日收盘</div></div>
+      <div class="pbox"><div class="pl">乐观DCF内在价值</div><div class="pv ps">$15.6</div><div class="pn">10%折现/15%增速</div></div>
+      <div class="pbox"><div class="pl">乐观含安全垫买入价</div><div class="pv pf">$11.7</div><div class="pn">当前价约等于此</div></div>
+    </div>
+    <div style="background:rgba(185,160,106,.1);border:1px solid rgba(185,160,106,.3);border-radius:8px;padding:14px;">
+      <div style="color:var(--gold);font-weight:700;margin-bottom:6px;">⚖️ 结论：有条件观察仓（Watchlist / Conditional Entry）</div>
+      <div style="font-size:13px;line-height:1.8;">
+        <strong>触发买入条件（需同时满足）：</strong><br>
+        ① 2026Q2 年度总付费用户数（唯一保留的运营指标）维持增长 → 确认增长逻辑<br>
+        ② 非订阅音乐服务（演出/广告/周边）持续维持 30%+ 增长 → 确认新引擎<br>
+        ③ Non-IFRS 净利润 2026H1 维持 15%+ 增速 → 管理层指引可信<br><br>
+        <strong>操作建议：</strong><br>
+        • 当前不建议大仓买入——信息不透明度溢价需要等待<br>
+        • 若价格进一步下跌至 $9-10（中性 DCF 内在价值区间），可考虑 2-3% 小仓位<br>
+        • 若 2026 年中年度数据验证增长，再加仓至 5-7%<br>
+        • 止损线：若年度付费用户出现负增长或 Non-IFRS 利润增速跌破 10%，清仓<br><br>
+        <span style="color:var(--red)">⚠️ 主要风险：MAU 下滑加速导致订阅增长见顶 / 指标停披引发持续估值折价 / 中国监管加强直播管控 / AI 音乐冲击版权收入 / VIE 结构法律风险</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ S9: COMMENTARY ═══ -->
+<section class="section">
+  <div class="stitle">🍔 巴菲特风格深度点评</div>
+  <div class="cmt">
+    <p>好，我来聊聊腾讯音乐这个"一天跌 25%"的故事。</p>
+
+    <p>首先，数字本身不差：营收+16%，Non-IFRS 利润+25%，毛利率创新高 44.2%，手里捏着$54亿现金，股息还提了 33%。如果只看财报数字，这是一家运营良好、财务健康的优质公司。</p>
+
+    <p>但市场为什么暴跌 25%？<span class="warn-t">因为管理层宣布从下季度起不再披露 MAU、付费用户数量和 ARPPU。</span></p>
+
+    <p>我做投资 70 年，有一条铁律：<span class="hl-t">好的管理层不会减少信息披露，除非他们有不想你看到的东西。</span> 当然，管理层的理由听起来合理——"业务进化了，多层次会员让每个付费用户的商业价值不同，用收入和利润来衡量更准确"。这话没错，但问题是时机：恰恰在 MAU 连续下滑、从 576M 跌到 528M 之后宣布停披，很难让人相信这是纯粹的战略考量。</p>
+
+    <p>我们把情绪放一边，看本质问题：<span class="hl-t">腾讯音乐的用户池在收缩，但货币化效率在大幅提升。</span> 这是两个同时成立的事实。付费用户从 121M 增到 127M (+5.3%)，ARPPU 从 11.1 提到 11.9 (+7.2%)，SVIP 用户破 2000万——这些是真实的变现能力提升。非订阅音乐业务（演出/广告/周边）+40.8%，说明 TME 正在把版权资产的商业价值从"订阅"延伸到整个娱乐消费链条。</p>
+
+    <p>但有一个数学上的担忧：<span class="warn-t">MAU 已经降到 5.28亿，付费渗透率约 24%（1.27亿/5.28亿）。如果 MAU 继续下滑，即使渗透率提高，总付费用户的天花板也在收缩。</span>靠 ARPPU 增长驱动收入，是有上限的——中国用户的音乐订阅价格接受度有其边界。</p>
+
+    <p>从估值看：暴跌后 Forward P/E 约 11.5x，对应管理层给出的 2026E 利润增速 15-20%，PEG ≈ 0.7。这个水平，如果增长兑现，是有吸引力的。但"如果"是个大词——没有月度指标，这个"如果"的验证周期从一个季度拉长到一年。</p>
+
+    <p><span class="hl-t">我的判断：市场情绪化了，但担忧并非无理。</span>这不是一个"闭眼买"的情况，而是一个"设好条件等验证"的情况。不如把注意力放在 2026年年底的年度付费用户数——那将是管理层信用的第一次重大考验。</p>
+
+    <p>作为一名价值投资者，我喜欢"别人恐惧时贪婪"——但我也知道，有时候恐惧是有道理的。对腾讯音乐，我的仓位是：观望，等条件成熟，然后小仓出手。</p>
+
+    <p style="color:var(--text3);font-size:12px;border-top:1px solid var(--border);padding-top:12px;margin-top:8px;">
+      ⚠️ 以上分析仅供研究参考，不构成投资建议。投资有风险，请结合自身风险承受能力做决策。
+    </p>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <div>腾讯音乐娱乐集团（NYSE: TME）Q4 2025 & 全年财报深度分析</div>
+  <div style="margin-top:4px;">数据来源：TME IR 官方（2026-03-17）· 电话会议文字稿 · Yahoo Finance</div>
+  <div style="margin-top:4px;">Buffy · AI 巴菲特分析引擎 · 2026-03-18 · 莫兰迪版</div>
+</footer>
+
+<script>
+/* ── THEME ── */
+function toggleTheme(){
+  const h=document.documentElement;
+  h.dataset.theme=h.dataset.theme==='dark'?'light':'dark';
+  buildSankey();
+}
+
+/* ── CHART HELPERS ── */
+const QL=['Q4 2024','Q1 2025','Q2 2025','Q3 2025','Q4 2025'];
+const opt=(yLabel,extra={})=>({
+  responsive:true,maintainAspectRatio:false,
+  plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11}}}},
+  scales:{
+    y:{grid:{color:'rgba(150,140,130,.15)'},ticks:{callback:v=>v+(yLabel||'')},title:{display:!!yLabel,text:yLabel,color:'#a89f98',font:{size:10}}},
+    x:{grid:{display:false}}
+  },...extra
+});
+
+/* C1: Total Revenue */
+new Chart(document.getElementById('c1'),{
+  type:'bar',
+  data:{labels:QL,datasets:[
+    {label:'在线音乐',data:[58.3,58.0,68.5,69.7,71.0],backgroundColor:'rgba(138,154,142,.7)',borderRadius:3},
+    {label:'社交娱乐',data:[16.3,15.5,15.9,14.9,15.4],backgroundColor:'rgba(192,144,144,.7)',borderRadius:3}
+  ]},
+  options:{...opt('亿RMB'),plugins:{legend:{position:'top',labels:{boxWidth:10}}},scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,grid:{color:'rgba(150,140,130,.15)'},ticks:{callback:v=>v+'亿'}}}}
+});
+
+/* C2: Non-IFRS Profit */
+new Chart(document.getElementById('c2'),{
+  type:'bar',
+  data:{labels:QL,datasets:[{
+    label:'Non-IFRS净利润(归母)',data:[22.8,20.5,25.9,24.8,24.9],
+    backgroundColor:['#b9a06a','#b9a06a','#b9a06a','#b9a06a','#8a9a8e'],
+    borderRadius:4
+  }]},
+  options:{...opt('亿RMB'),plugins:{legend:{display:false}}}
+});
+
+/* C3: Online Music vs Social */
+new Chart(document.getElementById('c3'),{
+  type:'line',
+  data:{labels:QL,datasets:[
+    {label:'在线音乐',data:[58.3,58.0,68.5,69.7,71.0],borderColor:'#8a9a8e',backgroundColor:'rgba(138,154,142,.1)',fill:true,tension:.4,pointRadius:5},
+    {label:'社交娱乐',data:[16.3,15.5,15.9,14.9,15.4],borderColor:'#c09090',backgroundColor:'rgba(192,144,144,.1)',fill:true,tension:.4,pointRadius:5}
+  ]},
+  options:opt('亿RMB')
+});
+
+/* C4: Paying Users & ARPPU */
+new Chart(document.getElementById('c4'),{
+  type:'line',
+  data:{labels:QL,datasets:[
+    {label:'付费用户(百万)',data:[121.0,122.9,124.4,125.7,127.4],borderColor:'#7b8fa0',tension:.4,pointRadius:5,yAxisID:'y'},
+    {label:'ARPPU(RMB)',data:[11.1,11.4,11.7,11.7,11.9],borderColor:'#b9a06a',tension:.4,pointRadius:5,yAxisID:'y1',borderDash:[4,4]}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11}}}},
+    scales:{
+      y:{position:'left',grid:{color:'rgba(150,140,130,.15)'},ticks:{callback:v=>v+'M'},title:{display:true,text:'付费用户(百万)',color:'#a89f98',font:{size:10}}},
+      y1:{position:'right',grid:{display:false},ticks:{callback:v=>'¥'+v},title:{display:true,text:'ARPPU(RMB)',color:'#a89f98',font:{size:10}}},
+      x:{grid:{display:false}}
+    }
+  }
+});
+
+/* C5: Gross Margin */
+new Chart(document.getElementById('c5'),{
+  type:'line',
+  data:{labels:QL,datasets:[{
+    label:'毛利率',data:[43.6,44.0,44.0,43.5,44.7],
+    borderColor:'#b08d7a',backgroundColor:'rgba(176,141,122,.1)',fill:true,tension:.4,pointRadius:5
+  }]},
+  options:{...opt('%'),plugins:{legend:{display:false}},scales:{y:{min:42,max:46,ticks:{callback:v=>v+'%'},grid:{color:'rgba(150,140,130,.15)'}},x:{grid:{display:false}}}}
+});
+
+/* C6: Revenue Structure Pie */
+new Chart(document.getElementById('c6'),{
+  type:'doughnut',
+  data:{labels:['音乐订阅','非订阅音乐','社交娱乐'],datasets:[{
+    data:[176.6,90.7,61.8],
+    backgroundColor:['#8a9a8e','#b9a06a','#c09090'],borderWidth:2
+  }]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:11}}},tooltip:{callbacks:{label:c=>c.label+': RMB '+c.raw+'亿'}}},cutout:'60%'}
+});
+
+/* C7: MAU Trend */
+new Chart(document.getElementById('c7'),{
+  type:'line',
+  data:{labels:QL,datasets:[{
+    label:'在线音乐MAU(百万)',data:[556,550,545,538,528],
+    borderColor:'#b87070',backgroundColor:'rgba(184,112,112,.1)',fill:true,tension:.4,pointRadius:5
+  }]},
+  options:{...opt('百万'),plugins:{legend:{display:false}},scales:{y:{min:510,max:570,ticks:{callback:v=>v+'M'},grid:{color:'rgba(150,140,130,.15)'}},x:{grid:{display:false}}}}
+});
+
+/* ── SANKEY ── */
+function buildSankey(){
+  const isDark=document.documentElement.dataset.theme==='dark';
+  const bg=isDark?'#2e2a25':'#ffffff';
+  const fc=isDark?'#d4ccc4':'#4a4340';
+  Plotly.newPlot('sankey',[{
+    type:'sankey',orientation:'h',
+    node:{
+      pad:15,thickness:20,
+      line:{color:isDark?'rgba(74,69,64,.5)':'rgba(200,190,180,.5)',width:1},
+      label:['总营收 RMB 329亿','营收成本 184亿','毛利润 145亿','销售营销 9.4亿','一般行政 39.2亿','核心经营利润 97亿','利息收入 10.5亿','一次性收益 26.3亿','税前利润 133亿','所得税 19.2亿','Non-IFRS净利润 99亿','经营现金流 102亿'],
+      color:['#7b8fa0','#b87070','#8a9a8e','#b87070','#b87070','#7b8fa0','#8a9a8e','#b9a06a','#7b8fa0','#b87070','#8a9a8e','#8a9a8e']
+    },
+    link:{
+      source:[0,0, 2,2,2, 5,6,7, 8,8, 10],
+      target:[1,2, 3,4,5, 8,8,8, 9,10, 11],
+      value: [184,145, 9.4,39.2,96.4, 96.4,10.5,26.3, 19.2,99.2, 102],
+      color:[
+        'rgba(184,112,112,.2)','rgba(138,154,142,.3)',
+        'rgba(184,112,112,.2)','rgba(184,112,112,.2)','rgba(123,143,160,.3)',
+        'rgba(123,143,160,.3)','rgba(138,154,142,.2)','rgba(185,160,106,.2)',
+        'rgba(184,112,112,.2)','rgba(138,154,142,.3)',
+        'rgba(138,154,142,.35)'
+      ]
+    }
+  }],{
+    paper_bgcolor:bg,plot_bgcolor:bg,
+    font:{color:fc,family:"'Segoe UI','PingFang SC',sans-serif",size:12},
+    margin:{t:8,b:8,l:8,r:8}
+  },{responsive:true,displayModeBar:false});
+}
+buildSankey();
+</script>
+</body>
+</html>

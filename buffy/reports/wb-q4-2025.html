@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>微博 Weibo — 2025 Q4 & 全年财报深度分析</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+/* ── MORANDI PALETTE ── */
+:root {
+  --bg:        #f5f0eb;
+  --bg2:       #ece6df;
+  --card:      #ffffff;
+  --card2:     #f8f5f1;
+  --border:    #d9d0c7;
+  --text:      #4a4340;
+  --text2:     #7a706a;
+  --text3:     #a89f98;
+  --accent:    #8a9a8e;
+  --accent2:   #7b8fa0;
+  --accent3:   #b08d7a;
+  --rose:      #c09090;
+  --gold:      #b9a06a;
+  --red:       #b87070;
+  --green:     #7a9a7a;
+  --shadow:    rgba(0,0,0,0.06);
+  --chart-grid:#e5ddd5;
+}
+[data-theme="dark"] {
+  --bg:        #1e1c1a;
+  --bg2:       #28251f;
+  --card:      #2e2a25;
+  --card2:     #363230;
+  --border:    #4a4540;
+  --text:      #d4ccc4;
+  --text2:     #a09890;
+  --text3:     #706860;
+  --accent:    #8a9a8e;
+  --accent2:   #8fabbf;
+  --accent3:   #c9a48e;
+  --rose:      #c09090;
+  --gold:      #c9b07a;
+  --red:       #c08080;
+  --green:     #8aaa8a;
+  --shadow:    rgba(0,0,0,0.3);
+  --chart-grid:#3e3a35;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', 'SimSun', serif;
+  line-height: 1.75;
+  font-size: 14.5px;
+  transition: background .35s, color .35s;
+}
+a { color: var(--accent2); text-decoration: none; }
+
+/* ── THEME TOGGLE ── */
+.theme-bar {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 8px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  transition: background .35s;
+}
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; }
+.theme-toggle {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; color: var(--text2);
+}
+.toggle-switch {
+  position: relative;
+  width: 44px; height: 22px;
+  background: var(--border);
+  border-radius: 11px;
+  cursor: pointer;
+  transition: background .3s;
+}
+.toggle-switch::after {
+  content: '';
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 18px; height: 18px;
+  background: var(--card);
+  border-radius: 50%;
+  transition: transform .3s;
+  box-shadow: 0 1px 3px rgba(0,0,0,.15);
+}
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+
+/* ── HERO ── */
+.hero {
+  padding: 48px 24px 36px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+.hero-tag {
+  display: inline-block;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 3px 14px;
+  border-radius: 20px;
+  margin-bottom: 18px;
+}
+.hero h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills {
+  display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;
+}
+.pill {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 6px 18px;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 13px;
+  color: var(--text2);
+  box-shadow: 0 1px 3px var(--shadow);
+}
+.pill strong { color: var(--text); }
+
+/* ── LAYOUT ── */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle {
+  font-size: 18px; font-weight: 700; color: var(--accent3);
+  margin-bottom: 20px; letter-spacing: 0.5px;
+  display: flex; align-items: center; gap: 10px;
+}
+.stitle::before {
+  content: ''; display: block; width: 4px; height: 20px;
+  background: var(--accent3); border-radius: 2px;
+}
+
+/* ── KPI ── */
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.kpi {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 16px 18px;
+  box-shadow: 0 1px 4px var(--shadow);
+  transition: background .35s;
+}
+.kpi-l { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.badge {
+  display: inline-block; font-family: 'Segoe UI', sans-serif;
+  font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px;
+}
+.up   { background: rgba(122,154,122,.15); color: var(--green); }
+.dn   { background: rgba(184,112,112,.15); color: var(--red); }
+.nt   { background: rgba(123,143,160,.15); color: var(--accent2); }
+
+/* ── TABLE ── */
+.tbl-wrap {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow);
+}
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI', sans-serif; font-size: 13px; }
+.tbl th {
+  background: var(--card2); color: var(--text3); font-size: 11px;
+  letter-spacing: .5px; text-transform: uppercase;
+  padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border);
+}
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); }
+.tbl tr:last-child td { border-bottom: none; }
+
+/* ── CHARTS ── */
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.cgrid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow);
+}
+.ctitle { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 230px; }
+
+/* ── EARNINGS CALL ── */
+.ec-block { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:22px; margin-bottom:16px; box-shadow:0 1px 4px var(--shadow); }
+.ec-block h3 { font-size:15px; font-weight:700; color:var(--accent3); margin-bottom:14px; border-bottom:1px solid var(--border); padding-bottom:8px; }
+.ec-item { margin-bottom:16px; padding-bottom:14px; border-bottom:1px dashed rgba(150,140,130,.2); }
+.ec-item:last-child { margin-bottom:0; padding-bottom:0; border-bottom:none; }
+.ec-quote { font-style:italic; font-size:13.5px; line-height:1.8; color:var(--text); margin-bottom:8px; padding-left:14px; border-left:3px solid var(--rose); }
+.ec-tag { display:inline-flex; align-items:center; gap:5px; font-family:'Segoe UI',sans-serif; font-size:11.5px; font-weight:600; padding:3px 10px; border-radius:6px; margin-right:6px; }
+.tag-bull { background:rgba(122,154,122,.15); color:var(--green); }
+.tag-bear { background:rgba(184,112,112,.15); color:var(--red); }
+.tag-neut { background:rgba(123,143,160,.15); color:var(--accent2); }
+.ec-note { font-size:12.5px; color:var(--text2); line-height:1.6; margin-top:6px; padding:6px 10px; background:var(--card2); border-radius:6px; }
+.ec-speaker { font-weight:700; color:var(--accent2); font-size:13px; margin-bottom:2px; }
+.ec-role { font-family:'Segoe UI',sans-serif; font-size:11px; color:var(--text3); margin-bottom:10px; }
+.ec-qa-label { display:inline-block; font-family:'Segoe UI',sans-serif; font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; padding:2px 8px; border-radius:4px; margin-bottom:10px; }
+.ec-qa-q { background:rgba(176,141,122,.15); color:var(--accent3); }
+.ec-qa-a { background:rgba(138,154,142,.15); color:var(--accent); }
+
+/* ── BUFFETT SCORE ── */
+.bscore {
+  display: flex; align-items: center; gap: 16px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px 22px; margin-bottom: 12px;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.circle {
+  width: 62px; height: 62px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 18px; flex-shrink: 0;
+  border: 3px solid; font-family: 'Segoe UI', sans-serif;
+}
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 3px; }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+/* ── VERDICT / DCF ── */
+.verdict {
+  background: var(--card2); border: 2px solid var(--accent);
+  border-radius: 10px; padding: 26px 28px; margin-bottom: 16px;
+}
+.verdict-t { font-size: 17px; font-weight: 700; color: var(--accent); margin-bottom: 10px; }
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 14px; text-align: center;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.pbox .pl { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.pbox .pv { font-family: 'Segoe UI', sans-serif; font-size: 26px; font-weight: 800; }
+.pbox .pn { font-size: 11px; color: var(--text3); margin-top: 3px; }
+.pc { color: var(--text2); } .pf { color: var(--gold); } .ps { color: var(--green); }
+
+/* ── SANKEY ── */
+#sankey { width: 100%; height: 460px; }
+
+/* ── COMMENTARY ── */
+.cmt {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 26px; line-height: 1.9; font-size: 14.5px;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.cmt p { margin-bottom: 14px; }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+
+/* ── ANALYSIS GRID ── */
+.agrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+.acard {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow);
+}
+.acard h4 { font-size: 13px; color: var(--accent2); margin-bottom: 10px; text-transform: uppercase; letter-spacing: .5px; }
+.acard ul { padding-left: 16px; }
+.acard li { margin-bottom: 5px; font-size: 13px; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--card2); border-top: 1px solid var(--border);
+  padding: 24px; text-align: center; color: var(--text3); font-size: 12px;
+  margin-top: 40px;
+}
+
+/* ── SIGNAL SUMMARY ── */
+.sig-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-top: 16px; }
+.sig-box { border-radius: 10px; padding: 16px; text-align: center; }
+.sig-bull { background: rgba(122,154,122,.12); border: 1px solid rgba(122,154,122,.3); }
+.sig-bear { background: rgba(184,112,112,.12); border: 1px solid rgba(184,112,112,.3); }
+.sig-neut { background: rgba(123,143,160,.12); border: 1px solid rgba(123,143,160,.3); }
+.sig-num { font-size: 36px; font-weight: 800; font-family: 'Segoe UI', sans-serif; }
+.sig-lbl { font-size: 12px; margin-top: 4px; }
+
+@media (max-width: 768px) {
+  .cgrid,.cgrid3,.agrid,.pgrid,.sig-grid { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 22px; }
+  .kpi-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── THEME BAR ── -->
+<div class="theme-bar">
+  <div class="logo">BUFFY · 财报研究所</div>
+  <div class="theme-toggle">
+    <span>☀ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-tag">深度分析 · 巴菲特价值投资视角 · 2026年3月18日</div>
+  <h1>微博集团 Weibo Corporation 季报深度分析</h1>
+  <div class="hero-sub">NASDAQ: WB &nbsp;|&nbsp; 2025年 Q4 & 全年业绩 &nbsp;|&nbsp; 财报发布日：2026年3月18日</div>
+  <div class="hero-pills">
+    <div class="pill">股价 <strong>$9.16</strong></div>
+    <div class="pill">市值 <strong>~$22.6亿</strong></div>
+    <div class="pill">汇率 <strong>1 USD ≈ 7.18 RMB</strong></div>
+    <div class="pill">稀释股数 <strong>~2.686亿股</strong></div>
+    <div class="pill">FCF收益率 <strong>~21%</strong></div>
+    <div class="pill">股息率 <strong>~6.7%</strong></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ S1: KPI ═══ -->
+<section class="section">
+  <div class="stitle">核心财务指标 — Q4 2025 & 全年</div>
+  <div style="font-size:12px;color:var(--text3);margin-bottom:8px;">▎Q4 2025 单季</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">净营收</div><div class="kpi-v">$473.3M</div><span class="badge up">YoY +4%</span></div>
+    <div class="kpi"><div class="kpi-l">广告收入</div><div class="kpi-v">$403.8M</div><span class="badge up">YoY +5%</span></div>
+    <div class="kpi"><div class="kpi-l">阿里广告</div><div class="kpi-v">$50.0M</div><span class="badge up">YoY +24%</span></div>
+    <div class="kpi"><div class="kpi-l">非阿里广告</div><div class="kpi-v">$353.8M</div><span class="badge up">YoY +2%</span></div>
+    <div class="kpi"><div class="kpi-l">增值服务(VAS)</div><div class="kpi-v">$69.5M</div><span class="badge dn">YoY -2%</span></div>
+    <div class="kpi"><div class="kpi-l">GAAP 经营利润</div><div class="kpi-v">$91.6M</div><span class="badge dn">利润率 19%</span></div>
+    <div class="kpi"><div class="kpi-l">Non-GAAP 经营利润</div><div class="kpi-v">$100.4M</div><span class="badge dn">利润率 21%</span></div>
+    <div class="kpi"><div class="kpi-l">GAAP 净利润</div><div class="kpi-v">-$4.7M</div><span class="badge dn">净亏损</span></div>
+    <div class="kpi"><div class="kpi-l">Non-GAAP 净利润</div><div class="kpi-v">$66.4M</div><span class="badge dn">YoY -38%</span></div>
+    <div class="kpi"><div class="kpi-l">月活用户(MAU)</div><div class="kpi-v">5.67亿</div><span class="badge dn">YoY -4%</span></div>
+    <div class="kpi"><div class="kpi-l">日活用户(DAU)</div><div class="kpi-v">2.52亿</div><span class="badge dn">YoY -3%</span></div>
+    <div class="kpi"><div class="kpi-l">EPS 实际 vs 预期</div><div class="kpi-v">$0.25</div><span class="badge dn">预期 $0.32 (-22%)</span></div>
+  </div>
+
+  <div style="font-size:12px;color:var(--text3);margin:20px 0 8px;">▎全年 2025 vs 2024</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">全年净营收</div><div class="kpi-v">$1,757M</div><span class="badge nt">YoY +0.1%</span></div>
+    <div class="kpi"><div class="kpi-l">全年广告收入</div><div class="kpi-v">$1,502M</div><span class="badge nt">YoY +0.2%</span></div>
+    <div class="kpi"><div class="kpi-l">Non-GAAP 经营利润</div><div class="kpi-v">$523.6M</div><span class="badge dn">YoY -10%</span></div>
+    <div class="kpi"><div class="kpi-l">Non-GAAP 净利润</div><div class="kpi-v">$439.8M</div><span class="badge dn">YoY -8%</span></div>
+    <div class="kpi"><div class="kpi-l">GAAP 净利润</div><div class="kpi-v">$449.0M</div><span class="badge up">YoY +49%*</span></div>
+    <div class="kpi"><div class="kpi-l">自由现金流(FCF)</div><div class="kpi-v">$477.1M</div><span class="badge dn">YoY -21%</span></div>
+    <div class="kpi"><div class="kpi-l">Adj. EBITDA</div><div class="kpi-v">$569.5M</div><span class="badge dn">YoY -6%</span></div>
+    <div class="kpi"><div class="kpi-l">年度股息</div><div class="kpi-v">$1.50亿</div><span class="badge dn">减少 vs $2亿</span></div>
+  </div>
+  <div style="font-size:12px;color:var(--text3);margin-top:8px;">* GAAP净利润提升主要由Q3非经营性投资收益$1.41亿推动，属低质量盈利</div>
+</section>
+
+<!-- ═══ S2: QUARTERLY TABLE ═══ -->
+<section class="section">
+  <div class="stitle">季度财务明细（USD百万）</div>
+  <div class="tbl-wrap">
+  <table class="tbl">
+    <thead><tr>
+      <th>指标</th><th>Q4 2024</th><th>Q1 2025</th><th>Q2 2025</th><th>Q3 2025</th><th>Q4 2025</th><th>YoY</th>
+    </tr></thead>
+    <tbody>
+      <tr class="hl"><td>净营收 ($M)</td><td>456.8</td><td>396.9</td><td>444.8</td><td>442.3</td><td>473.3</td><td style="color:var(--green)">+4%</td></tr>
+      <tr><td>— 广告收入</td><td>385.9</td><td>339.1</td><td>383.4</td><td>375.4</td><td>403.8</td><td style="color:var(--green)">+5%</td></tr>
+      <tr><td>&nbsp;&nbsp;· 阿里广告</td><td>40.3</td><td>~30</td><td>~40</td><td>~64</td><td>50.0</td><td style="color:var(--green)">+24%</td></tr>
+      <tr><td>&nbsp;&nbsp;· 非阿里广告</td><td>345.5</td><td>~309</td><td>~343</td><td>~311</td><td>353.8</td><td style="color:var(--green)">+2%</td></tr>
+      <tr><td>— 增值服务(VAS)</td><td>71.0</td><td>57.7</td><td>61.4</td><td>66.9</td><td>69.5</td><td style="color:var(--red)">-2%</td></tr>
+      <tr class="hl"><td>GAAP 经营利润</td><td>117.9</td><td>110.3</td><td>145.6</td><td>117.3</td><td>91.6</td><td style="color:var(--red)">-22%</td></tr>
+      <tr><td>GAAP 经营利润率</td><td>26%</td><td>28%</td><td>33%</td><td>27%</td><td>19%</td><td style="color:var(--red)">-7pp</td></tr>
+      <tr class="hl"><td>Non-GAAP 经营利润</td><td>136.2</td><td>129.5</td><td>161.8</td><td>132.0</td><td>100.4</td><td style="color:var(--red)">-26%</td></tr>
+      <tr><td>Non-GAAP 经营利润率</td><td>30%</td><td>33%</td><td>36%</td><td>30%</td><td>21%</td><td style="color:var(--red)">-9pp</td></tr>
+      <tr class="hl"><td>Non-GAAP 净利润</td><td>106.6</td><td>119.5</td><td>143.2</td><td>110.7</td><td>66.4</td><td style="color:var(--red)">-38%</td></tr>
+      <tr><td>GAAP 净利润</td><td>8.9</td><td>107.0</td><td>125.7</td><td>221.1†</td><td>-4.7</td><td style="color:var(--red)">N/A</td></tr>
+      <tr><td>MAU（百万）</td><td>590</td><td>591</td><td>588</td><td>578</td><td>567</td><td style="color:var(--red)">-4%</td></tr>
+      <tr><td>DAU（百万）</td><td>260</td><td>261</td><td>261</td><td>257</td><td>252</td><td style="color:var(--red)">-3%</td></tr>
+      <tr><td>DAU/MAU 比率</td><td>44.1%</td><td>44.2%</td><td>44.4%</td><td>44.5%</td><td>44.5%</td><td style="color:var(--accent2)">持稳</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div style="font-size:12px;color:var(--text3);margin-top:8px;">† Q3 GAAP净利润$2.211亿包含约$1.41亿非经营投资公允价值收益（低质量）</div>
+
+  <div style="margin-top:16px;" class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>全年对比</th><th>FY 2024</th><th>FY 2025</th><th>YoY变动</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td>净营收 ($M)</td><td>1,754.7</td><td>1,757.2</td><td style="color:var(--green)">+0.1%</td></tr>
+        <tr><td>广告收入</td><td>1,498.7</td><td>1,501.6</td><td style="color:var(--green)">+0.2%</td></tr>
+        <tr><td>— 阿里广告</td><td>116.8</td><td>173.8</td><td style="color:var(--green)">+49%</td></tr>
+        <tr><td>— 非阿里广告</td><td>1,381.9</td><td>1,327.8</td><td style="color:var(--red)">-4%</td></tr>
+        <tr><td>增值服务</td><td>256.0</td><td>255.6</td><td style="color:var(--red)">-0.2%</td></tr>
+        <tr class="hl"><td>Non-GAAP 经营利润</td><td>584.1</td><td>523.6</td><td style="color:var(--red)">-10%</td></tr>
+        <tr><td>Non-GAAP 经营利润率</td><td>33%</td><td>30%</td><td style="color:var(--red)">-3pp</td></tr>
+        <tr><td>Non-GAAP 净利润</td><td>478.6</td><td>439.8</td><td style="color:var(--red)">-8%</td></tr>
+        <tr><td>Non-GAAP 稀释EPS</td><td>$1.82</td><td>$1.65</td><td style="color:var(--red)">-9%</td></tr>
+        <tr class="hl"><td>经营现金流</td><td>639.9</td><td>519.5</td><td style="color:var(--red)">-19%</td></tr>
+        <tr><td>资本支出</td><td>~38</td><td>42.4</td><td style="color:var(--red)">+12%</td></tr>
+        <tr><td>自由现金流(FCF)</td><td>~602</td><td>477.1</td><td style="color:var(--red)">-21%</td></tr>
+        <tr><td>Adj. EBITDA</td><td>606.2</td><td>569.5</td><td style="color:var(--red)">-6%</td></tr>
+        <tr><td>年度股息</td><td>$200M</td><td>$150M</td><td style="color:var(--red)">-25%</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ═══ S3: Q4 COST BREAKDOWN ═══ -->
+<section class="section">
+  <div class="stitle">Q4 2025 成本结构拆解</div>
+  <div style="background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin-bottom:14px;font-size:13px;color:var(--red);">
+    ⚠️ <strong>成本警示</strong>：Q4总运营费用同比+13%（$338.9M → $381.7M），显著高于收入增速+4%，导致Non-GAAP利润率从30%骤降至21%，压缩9pp。
+  </div>
+  <div class="tbl-wrap">
+  <table class="tbl">
+    <thead><tr>
+      <th>费用项目</th><th>Q4 2024 ($M)</th><th>Q4 2025 ($M)</th><th>YoY</th><th>占收入比</th><th>备注</th>
+    </tr></thead>
+    <tbody>
+      <tr><td>营业成本</td><td>100.5</td><td>123.4</td><td style="color:var(--red)">+23%</td><td>26.1%</td><td>广告制作成本上升</td></tr>
+      <tr><td>销售及营销费用</td><td>139.9</td><td>153.5</td><td style="color:var(--red)">+10%</td><td>32.4%</td><td>品牌投入加大</td></tr>
+      <tr><td>产品研发费用</td><td>75.9</td><td>92.2</td><td style="color:var(--red)">+21%</td><td>19.5%</td><td>AI 投入加码</td></tr>
+      <tr><td>一般及行政费用</td><td>22.6</td><td>12.6</td><td style="color:var(--green)">-44%</td><td>2.7%</td><td>效率提升</td></tr>
+      <tr class="hl"><td>合计</td><td>338.9</td><td>381.7</td><td style="color:var(--red)">+13%</td><td>80.7%</td><td>vs 收入+4%，剪刀差扩大</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<!-- ═══ S4: CHARTS ═══ -->
+<section class="section">
+  <div class="stitle">营收与盈利趋势图</div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">季度营收结构 ($M)</div><div class="cwrap"><canvas id="c1"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">Non-GAAP 经营利润率趋势</div><div class="cwrap"><canvas id="c2"></canvas></div></div>
+  </div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">MAU & DAU 趋势（百万）</div><div class="cwrap"><canvas id="c3"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">全年广告收入构成 — 阿里 vs 非阿里 ($M)</div><div class="cwrap"><canvas id="c4"></canvas></div></div>
+  </div>
+  <div class="cgrid3">
+    <div class="ccard"><div class="ctitle">Q4 2025 营收构成</div><div class="cwrap"><canvas id="c5"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">Q4 成本构成 ($M)</div><div class="cwrap"><canvas id="c6"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">全年 FCF vs Non-GAAP NI ($M)</div><div class="cwrap"><canvas id="c7"></canvas></div></div>
+  </div>
+</section>
+
+<!-- ═══ S5: SANKEY ═══ -->
+<section class="section">
+  <div class="stitle">资金流向桑基图 — FY2025 全年 ($M)</div>
+  <div class="ccard">
+    <div style="font-size:12px;color:var(--text3);margin-bottom:6px;">从净营收到自由现金流的完整流向路径</div>
+    <div id="sankey"></div>
+  </div>
+</section>
+
+<!-- ═══ S6: BALANCE SHEET ═══ -->
+<section class="section">
+  <div class="stitle">资产负债表要点（2025年12月31日）</div>
+  <div class="agrid">
+    <div class="acard">
+      <h4>💰 流动性 & 现金</h4>
+      <ul>
+        <li>现金及短期投资：<strong>$24.05亿</strong>（现金$22.99亿 + 短期投资$1.06亿）</li>
+        <li>长期投资：$16.63亿</li>
+        <li>SINA应收款（短期贷款）：$4.41亿（关联方风险）</li>
+        <li>总资产：$70.91亿</li>
+        <li><strong>净现金（现金+短投 - 长期债务）：~$5.41亿</strong></li>
+      </ul>
+    </div>
+    <div class="acard">
+      <h4>🏦 债务结构</h4>
+      <ul>
+        <li>可转换票据：$3.24亿</li>
+        <li>无担保优先票据：$7.46亿</li>
+        <li>长期贷款：$7.94亿</li>
+        <li><strong>长期债务合计：$18.64亿</strong></li>
+        <li>股东权益：$39.21亿</li>
+        <li>EBITDA/债务杠杆率：仅 0.31x（极低）</li>
+      </ul>
+    </div>
+  </div>
+  <div style="background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin-top:4px;">
+    <strong style="color:var(--accent3);">关键观察：</strong>
+    <span style="font-size:13px;color:var(--text2);">市值约$22.6亿，与现金+短期投资$24.05亿几乎相等。意味着市场对经营业务本身定价为<span style="color:var(--red);font-weight:600;">接近零甚至负值</span>——这正是"雪茄烟蒂"式机会的核心逻辑所在。</span>
+  </div>
+</section>
+
+<!-- ═══ S7: EARNINGS CALL ═══ -->
+<section class="section">
+  <div class="stitle">电话会议完整内容 — 逐条记录 + 信号判断</div>
+
+  <!-- CEO -->
+  <div class="ec-block">
+    <h3>📌 第一部分：CEO 开场陈述 — 王高飞（Gaofei Wang）</h3>
+
+    <div class="ec-item">
+      <div class="ec-speaker">王高飞 CEO</div>
+      <div class="ec-role">用户策略 · 第1点</div>
+      <div class="ec-quote">「2025年我们专注于强化社交功能，同时优化推荐内容生态系统，以提升用户内容消费效率和粘性。」</div>
+      <span class="ec-tag tag-neut">📊 中性</span>
+      <div class="ec-note">强化社交与推荐优化是防御性策略，应对抖音、小红书竞争。但并未披露具体用户留存或停留时长数据佐证成效。MAU同比下滑4%说明现有策略尚未扭转用户流失趋势。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-speaker">王高飞 CEO</div>
+      <div class="ec-role">AI 技术 · 第2点</div>
+      <div class="ec-quote">「2025年全年，微博智能搜索功能的用户规模和搜索量均实现稳健增长；AI技术有效提升了内容消费效率，并驱动了更具连贯性、深度化的搜索需求。」</div>
+      <span class="ec-tag tag-neut">📊 中性</span>
+      <div class="ec-note">AI搜索用户增长属正面信号，但"稳健增长"无具体数字。更关键的是——智能搜索何时产生商业化收入？CEO未提供时间表。产品研发费用同比+21%（$75.9M→$92.2M），AI是主要投入方向，但回报尚不明朗。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-speaker">王高飞 CEO</div>
+      <div class="ec-role">广告业务 · 第3点</div>
+      <div class="ec-quote">「2025年广告业务整体呈现企稳趋势，受电商及本地服务等核心行业强劲表现的驱动。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">广告"企稳"是一个相对积极的信号——相比此前担忧的持续下滑，企稳意味着底部已现。电商广告与本地服务是两大结构性增长驱动力，与宏观消费复苏方向一致。全年广告+0.2%（基本持平），而非阿里广告-4%，说明"企稳"主要由阿里+49%的增量拉动。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-speaker">王高飞 CEO</div>
+      <div class="ec-role">货币化策略 · 第4点</div>
+      <div class="ec-quote">「我们正在加大内容营销和AI能力方面的投入，以提升广告投放效率，实现更好的货币化效果。」</div>
+      <span class="ec-tag tag-neut">📊 中性偏空</span>
+      <div class="ec-note">"加大投入"意味着短期继续承压利润率。AI能力提升广告效率是中长期逻辑，但Q4利润率已从30%压缩至21%，投入产出比何时改善是关键问题。管理层给方向但未给时间表。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-speaker">王高飞 CEO</div>
+      <div class="ec-role">股东回报 · 第5点</div>
+      <div class="ec-quote">「董事会批准2025财年$1.50亿年度现金股息，折合每ADS约$0.61，年化股息率约6.7%。」</div>
+      <span class="ec-tag tag-neut">📊 中性偏空</span>
+      <div class="ec-note">股息维持是积极信号（相比担心取消），但金额从$2亿削减至$1.5亿（-25%），与Non-GAAP净利润下滑8%幅度相比，减幅更大，反映管理层对现金流的谨慎态度，以及对未来盈利可预测性的保守预期。</div>
+    </div>
+  </div>
+
+  <!-- CFO -->
+  <div class="ec-block">
+    <h3>📊 第二部分：CFO 财务述评 — 曹菲（Fei Cao）</h3>
+
+    <div class="ec-item">
+      <div class="ec-speaker">曹菲 CFO</div>
+      <div class="ec-role">Q4营收 · 第1点</div>
+      <div class="ec-quote">「Q4净营收同比增长4%至$4.733亿，其中广告收入+5%，受电商和本地服务强劲带动；阿里巴巴广告收入同比+24%至$5,000万；非阿里广告+2%至$3.538亿。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">营收端总体符合预期，收入+4%尚算稳健。阿里广告+24%是全季最强增长点，而非阿里广告+2%（尽管仍正增长）说明核心广告业务仍较脆弱。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-speaker">曹菲 CFO</div>
+      <div class="ec-role">VAS收入 · 第2点</div>
+      <div class="ec-quote">「增值服务收入同比小幅下降2%至$6,950万，会员订阅和游戏收入均有所下滑。」</div>
+      <span class="ec-tag tag-neut">📊 中性偏空</span>
+      <div class="ec-note">VAS是第二大收入来源（占季度收入14.7%），连续出现轻微下滑。游戏收入受到行业整体压力影响，会员收入下滑则可能与用户活跃度下降相关。全年VAS仅-0.2%，属于温水煮青蛙式的缓慢衰退。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-speaker">曹菲 CFO</div>
+      <div class="ec-role">Q4成本 · 第3点</div>
+      <div class="ec-quote">「Q4运营费用同比增长13%，主要来自广告制作成本增加和市场营销费用上升，产品研发费用增长21%反映AI能力投入加码。」</div>
+      <span class="ec-tag tag-bear">🔴 利空</span>
+      <div class="ec-note">成本+13% vs 收入+4%，这是本季度最大的负面信号。营业成本+23%尤为突出，部分系项目性支出（CFO称"部分具有项目属性"），但未明确量化一次性成分，市场无法判断是否持续。研发+21%属于主动投入，但短期利润压力真实存在。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-speaker">曹菲 CFO</div>
+      <div class="ec-role">Q4利润率 · 第4点</div>
+      <div class="ec-quote">「Q4 Non-GAAP经营利润率为21%，较去年同期30%下降9个百分点，GAAP经营利润率19%，较去年26%下降7pp。」</div>
+      <span class="ec-tag tag-bear">🔴 利空</span>
+      <div class="ec-note">利润率大幅压缩是本季度最核心的担忧。Non-GAAP利润率从30%→21%，单季急降9pp。若成本增速不能在2026年正常化，全年利润率恢复将十分困难。这也是股价当日下跌约5%的直接原因。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-speaker">曹菲 CFO</div>
+      <div class="ec-role">Q4 GAAP净亏损 · 第5点</div>
+      <div class="ec-quote">「Q4 GAAP净亏损$470万，主要受$5,760万非经营性损失（主要为投资公允价值变动亏损）及$3,130万所得税拖累。Non-GAAP净利润为$6,640万。」</div>
+      <span class="ec-tag tag-neut">📊 中性</span>
+      <div class="ec-note">GAAP净亏损本质是非经营性投资损失所致，并非主营业务恶化的信号——这与Q3非经营性收益推高GAAP利润属于同一枚硬币的两面，均为低质量盈利。核心关注Non-GAAP净利润$6,640万，同比下滑38%，才是真正令人担忧的数字。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-speaker">曹菲 CFO</div>
+      <div class="ec-role">全年业绩 · 第6点</div>
+      <div class="ec-quote">「全年营收基本持平（+0.1%），Non-GAAP经营利润率30%（vs 上年33%），自由现金流$4.771亿（vs 上年约$6.02亿）。」</div>
+      <span class="ec-tag tag-neut">📊 中性偏空</span>
+      <div class="ec-note">全年视角：营收停滞+利润率下滑3pp+FCF下滑21%。三个维度同时恶化，但仍保持正FCF且规模可观。与2023年比较，公司自由现金流已从高点持续下行，尚未见底迹象。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-speaker">曹菲 CFO</div>
+      <div class="ec-role">阿里广告全年 · 第7点</div>
+      <div class="ec-quote">「全年阿里巴巴广告收入$1.738亿，同比大幅增长49%，成为2025年广告收入增长的主要驱动力，有效对冲了非阿里广告-4%的下滑。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">阿里+49%是全年最大亮点。但也揭示了一个结构性风险：若无阿里合作深化，全年广告收入将下滑4%而非持平。阿里广告占广告总收入比例从7.8%提升至11.6%，集中度风险上升。全年阿里贡献了广告增量的全部，是"护城河"还是"依赖"？</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-speaker">曹菲 CFO</div>
+      <div class="ec-role">现金状况 · 第8点</div>
+      <div class="ec-quote">「截至2025年12月31日，现金及短期投资合计$24.05亿；扣除长期债务$18.64亿后，净现金约$5.41亿。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">现金充裕是微博最核心的安全边际。$24亿现金接近$22.6亿市值——即便业务完全停滞，光凭现金也具备基本价值支撑。SINA应收款$4.41亿（关联方贷款）是潜在流动性来源，但存在一定收款不确定性（50%折扣处理较为谨慎）。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-speaker">曹菲 CFO</div>
+      <div class="ec-role">FY2025 股息 · 第9点</div>
+      <div class="ec-quote">「2025财年年度股息定为每ADS约$0.61，合计约$1.50亿，较上年$2亿减少25%，与Non-GAAP盈利下滑方向一致，反映谨慎的资本配置原则。」</div>
+      <span class="ec-tag tag-neut">📊 中性</span>
+      <div class="ec-note">股息减少但维持支付，体现了管理层对平衡股东回报与保留流动性的考量。合计过去三年股息：$2亿+$2亿+$1.5亿=$5.5亿，占当前市值约24%——对价值投资者而言是实实在在的现金回报。</div>
+    </div>
+  </div>
+
+  <!-- Q&A -->
+  <div class="ec-block">
+    <h3>🎤 第三部分：Q&A 分析师问答</h3>
+
+    <!-- Q1 CICC -->
+    <div style="margin-bottom:8px;"><span class="ec-qa-label ec-qa-q">问题方</span> <strong>张雪晴 — 中国国际金融（CICC）</strong></div>
+    <div class="ec-item">
+      <div class="ec-quote">「鉴于Q4成本增加和利润率压缩，管理层如何看待2026年广告收入走势和利润率恢复路径？」</div>
+      <span class="ec-qa-label ec-qa-a">管理层回应</span>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-speaker">管理层</div>
+      <div class="ec-role">CICC Q&A · 子点1 — 电商广告持续强劲</div>
+      <div class="ec-quote">「电商广告具有结构性顺风，2025年已表现强劲，预计2026年将继续保持增长势头。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">电商广告是中国互联网广告中最具韧性的品类，与消费者直接购物行为挂钩，ROI可量化，广告主不易削减预算。这一判断与行业整体趋势吻合。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-speaker">管理层</div>
+      <div class="ec-role">CICC Q&A · 子点2 — 本地服务新增长引擎</div>
+      <div class="ec-quote">「本地服务广告是新兴增长驱动力，已成为重要增量来源，2026年预计继续扩大贡献。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">本地服务（餐饮、零售、生活类）广告是微博的新业务扩展方向，受益于本地生活服务数字化大趋势。但目前基数较小，整体贡献尚有限，需持续跟踪规模化进展。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-speaker">管理层</div>
+      <div class="ec-role">CICC Q&A · 子点3 — Q4成本增加"部分具有项目属性"</div>
+      <div class="ec-quote">「Q4广告制作成本增加部分具有项目性质，预计2026年成本比率将趋于正常化。」</div>
+      <span class="ec-tag tag-neut">📊 中性</span>
+      <div class="ec-note">"部分具有项目属性"是一个含糊的表述——无法量化一次性成分占比，投资者无从判断正常化后的真实成本基数。若大部分成本属于持续性质，则2026年利润率难以显著改善。这是本次电话会议中透明度最低的表述之一。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-speaker">管理层</div>
+      <div class="ec-role">CICC Q&A · 子点4 — AI投入是主动战略选择</div>
+      <div class="ec-quote">「产品研发费用增加（含AI投入）是有意为之的战略性布局，旨在提升长期竞争力，而非一次性支出。」</div>
+      <span class="ec-tag tag-neut">📊 中性偏空</span>
+      <div class="ec-note">管理层明确AI研发投入将持续，短期利润率压力是"战略代价"。这对长期投资者是可接受的，但对寻找短期盈利弹性的投资者而言是负面信号。关键是：AI投入是否能在未来2-3年内转化为差异化广告产品和更高CPM？目前尚无路线图。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-speaker">管理层</div>
+      <div class="ec-role">CICC Q&A · 子点5 — 未提供2026年具体指引</div>
+      <div class="ec-quote">「（管理层未给出2026年收入或利润率的具体数值指引）」</div>
+      <span class="ec-tag tag-neut">📊 中性偏空</span>
+      <div class="ec-note">微博与其他中国科技公司一样，通常不提供forward guidance。但在利润率大幅压缩的情况下，缺乏指引加大了市场不确定性，给估值带来额外折让。这是可预测性评分较低的核心原因之一。</div>
+    </div>
+
+    <!-- Q2 Citi -->
+    <div style="margin-bottom:8px;margin-top:20px;"><span class="ec-qa-label ec-qa-q">问题方</span> <strong>叶明燕（Alicia Yap） — 花旗银行（Citi）</strong></div>
+    <div class="ec-item">
+      <div class="ec-quote">「能否详细介绍AI智能搜索的进展及变现时间表？另外，2025年MAU从5.91亿降至5.67亿，稳定用户基础的策略是什么？」</div>
+      <span class="ec-qa-label ec-qa-a">CEO 回应</span>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-speaker">王高飞 CEO</div>
+      <div class="ec-role">Citi Q&A · 子点1 — AI搜索进展（无变现时间表）</div>
+      <div class="ec-quote">「智能搜索2025年全年实现了用户规模和搜索量的稳健增长，AI显著提升内容消费效率，驱动更深度、连贯的搜索行为。AI搜索变现尚处于探索阶段，当前优先聚焦用户价值创造。」</div>
+      <span class="ec-tag tag-neut">📊 中性</span>
+      <div class="ec-note">AI搜索"聚焦用户价值"是标准的早期产品话术，意味着商业化至少还需1-2年。对比百度、抖音在AI搜索商业化上的积极推进，微博的节奏相对保守。产品研发+21%的投入若未能在2026-2027年转化为新收入流，投资价值将大打折扣。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-speaker">王高飞 CEO</div>
+      <div class="ec-role">Citi Q&A · 子点2 — MAU下滑是"质量转型"</div>
+      <div class="ec-quote">「MAU指标反映了我们战略性地从规模扩张向参与质量提升的转型。DAU/MAU比率维持约44%的健康水平。我们正投入社交产品整合和推荐系统升级以提升用户粘性。」</div>
+      <span class="ec-tag tag-neut">📊 中性偏空</span>
+      <div class="ec-note">将用户下滑定性为"战略转型"是管理层的标准防御性叙事。一年内MAU从5.91亿下降2,400万（-4%）并不是小数字，且趋势仍未逆转。DAU/MAU维持44%是少见的正面数据点，说明活跃用户的粘性较高，但新用户获取明显乏力。抖音/小红书的压力是结构性而非周期性的。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-speaker">王高飞 CEO</div>
+      <div class="ec-role">Citi Q&A · 子点3 — 竞争格局定位</div>
+      <div class="ec-quote">「抖音和小红书在内容消费上具有竞争力，但微博作为公共舆论平台和热搜第一入口的独特定位难以复制。我们的差异化在于实时公共话语、名人-粉丝生态和社会事件讨论的不可替代性。」</div>
+      <span class="ec-tag tag-neut">📊 中性</span>
+      <div class="ec-note">微博"热搜垄断"的护城河论点是真实的——确实没有竞争对手能复制这一公共话语平台的地位。但问题在于用时长：热搜可以是用户"跳入微博查一眼"的入口，而非深度停留的理由。广告变现需要时长和频次，这两点恰恰是短视频平台的优势。护城河存在但正在被侵蚀。</div>
+    </div>
+  </div>
+
+  <!-- SIGNAL SUMMARY -->
+  <div class="ec-block">
+    <h3>📈 电话会议信号汇总</h3>
+    <div class="sig-grid">
+      <div class="sig-box sig-bull">
+        <div class="sig-num" style="color:var(--green)">5</div>
+        <div class="sig-lbl" style="color:var(--green)"><strong>利好信号</strong><br>广告企稳、阿里+49%、现金充裕、电商/本地服务驱动、FCF真实</div>
+      </div>
+      <div class="sig-box sig-neut">
+        <div class="sig-num" style="color:var(--accent2)">9</div>
+        <div class="sig-lbl" style="color:var(--accent2)"><strong>中性信号</strong><br>AI无变现时间表、无指引、VAS温和下滑、竞争叙事防御性、用户质量论</div>
+      </div>
+      <div class="sig-box sig-bear">
+        <div class="sig-num" style="color:var(--red)">3</div>
+        <div class="sig-lbl" style="color:var(--red)"><strong>利空信号</strong><br>Q4成本+13%、利润率压缩9pp、Non-GAAP净利-38%</div>
+      </div>
+    </div>
+    <div style="margin-top:12px;font-size:13px;color:var(--text2);background:var(--card2);padding:12px 16px;border-radius:8px;">
+      <strong>综合判断：</strong>电话会议定性信息中性偏谨慎。管理层态度保守、诚实（未掩盖利润压缩），但缺乏具体的转机时间表。核心矛盾是：现金和FCF质量优秀，但运营趋势（用户、非阿里广告、利润率）均面临下行压力。
+    </div>
+  </div>
+</section>
+
+<!-- ═══ S8: BUFFETT 6-DIMENSION ═══ -->
+<section class="section">
+  <div class="stitle">巴菲特六维评分</div>
+
+  <div class="bscore">
+    <div class="circle cw">B-</div>
+    <div class="bd">
+      <h4>① 护城河（Economic Moat）</h4>
+      <p><strong style="color:var(--green)">优势：</strong>热搜垄断地位不可替代；星粉营销生态难以复制；公共舆论第一平台的网络效应。<br>
+      <strong style="color:var(--red)">弱点：</strong>MAU持续下滑（591M→567M），抖音/小红书蚕食用户时长；非阿里广告-4%揭示变现护城河在收窄。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B</div>
+    <div class="bd">
+      <h4>② 管理层质量（Management Quality）</h4>
+      <p><strong style="color:var(--green)">优势：</strong>保守稳健、无虚荣型并购；三年累计分红$5.5亿，股东回报真实；财报披露坦诚，未回避利润压缩问题。<br>
+      <strong style="color:var(--red)">弱点：</strong>营收停滞3年以上，战略突破有限；股息从$2亿削减至$1.5亿是负面信号；在AI竞争中响应速度不够积极。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>③ 财务健康（Financial Health）</h4>
+      <p><strong style="color:var(--green)">优势：</strong>$24亿现金接近市值；净现金正值$5.41亿（扣债后）；FCF $4.77亿极为健康；EBITDA/债务杠杆仅0.31x；SINA应收款$4.41亿提供额外流动性。<br>
+      <strong style="color:var(--red)">弱点：</strong>持有$18.64亿长期债务同时保有$24亿现金，资本结构效率偏低；SINA关联方风险不可忽视。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B+</div>
+    <div class="bd">
+      <h4>④ 盈利质量（Earnings Quality）</h4>
+      <p><strong style="color:var(--green)">优势：</strong>FCF $4.77亿 > Non-GAAP净利$4.40亿（FCF/NI > 1，高质量）；广告收入为真实现金付款；经营现金流仍处$5.195亿规模。<br>
+      <strong style="color:var(--red)">弱点：</strong>FY2025 GAAP净利$4.49亿因Q3非经营投资收益$1.41亿虚增（低质量）；Non-GAAP净利趋势性下降-8%；Q4非GAAP利润率21%为近期最低点。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cr">C+</div>
+    <div class="bd">
+      <h4>⑤ 可预测性（Predictability）</h4>
+      <p><strong style="color:var(--green)">优势：</strong>营收连续3年基本持平（不增但也未大幅下滑）；广告收入具有结构性来源，相对稳定。<br>
+      <strong style="color:var(--red)">弱点：</strong>中国宏观广告市场波动性高；阿里依赖度上升（集中风险）；VIE架构+监管风险不可量化；无前瞻指引；非阿里广告趋势不明。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B</div>
+    <div class="bd">
+      <h4>⑥ 资本配置（Capital Allocation）</h4>
+      <p><strong style="color:var(--green)">优势：</strong>坚持股息支付（3年合计$5.5亿）；FCF转化率优秀（FCF/EBITDA=84%）；无冒进型投资并购。<br>
+      <strong style="color:var(--red)">弱点：</strong>同时持有$24亿现金和$18.64亿债务，资本结构冗余；AI投入增加OPEX但ROI路径不明；未见大规模回购计划。</p>
+    </div>
+  </div>
+
+  <div style="background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:16px 20px;margin-top:8px;">
+    <strong style="color:var(--accent3);">综合评级：</strong>
+    <span style="font-size:13px;color:var(--text2);">
+      财务健康A-（最强），可预测性C+（最弱）。加权综合评分约 <strong style="color:var(--gold);">B / B-</strong>。
+      典型"雪茄烟蒂"特征：财务极度健康、估值极度便宜，但缺乏成长引擎。
+      适合价值投资者的分仓仓位，而非集中押注。
+    </span>
+  </div>
+</section>
+
+<!-- ═══ S9: DCF ═══ -->
+<section class="section">
+  <div class="stitle">DCF 三情景估值分析</div>
+
+  <div style="background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin-bottom:16px;font-size:13px;color:var(--text2);">
+    <strong style="color:var(--accent3);">估值假设基础：</strong>当前FCF $4.77亿 | 净现金 $5.41亿 | SINA应收款50%折扣→$2.21亿 | 调整后净现金：~$7.62亿 | 稀释股数：2.686亿
+  </div>
+
+  <div class="pgrid">
+    <div class="pbox">
+      <div class="pl">悲观情景</div>
+      <div class="pv pc">$10.86</div>
+      <div class="pn">DCF内在价值/股</div>
+      <div style="margin-top:8px;font-size:12px;color:var(--text3);">FCF年降5% | 折现率12% | 终值增长率1%<br>VIE/中国折扣 -30%</div>
+      <div style="margin-top:8px;font-size:12px;color:var(--red);">安全边际(25%折扣): <strong>$8.15/股</strong></div>
+    </div>
+    <div class="pbox">
+      <div class="pl">中性情景</div>
+      <div class="pv pf">$17.01</div>
+      <div class="pn">DCF内在价值/股</div>
+      <div style="margin-top:8px;font-size:12px;color:var(--text3);">FCF持平至+2% | 折现率11% | 终值增长率2%<br>VIE/中国折扣 -25%</div>
+      <div style="margin-top:8px;font-size:12px;color:var(--gold);">安全边际(25%折扣): <strong>$12.76/股</strong></div>
+    </div>
+    <div class="pbox">
+      <div class="pl">乐观情景</div>
+      <div class="pv ps">$26.38</div>
+      <div class="pn">DCF内在价值/股</div>
+      <div style="margin-top:8px;font-size:12px;color:var(--text3);">FCF年增6-8% | 折现率10% | 终值增长率3%<br>VIE/中国折扣 -20%</div>
+      <div style="margin-top:8px;font-size:12px;color:var(--green);">安全边际(25%折扣): <strong>$19.79/股</strong></div>
+    </div>
+  </div>
+
+  <div class="tbl-wrap" style="margin-top:4px;">
+  <table class="tbl">
+    <thead><tr>
+      <th>情景</th><th>2026E FCF</th><th>2027E FCF</th><th>2028E FCF</th><th>2029E FCF</th><th>2030E FCF</th><th>EV</th><th>VIE折扣后</th><th>每股价值</th>
+    </tr></thead>
+    <tbody>
+      <tr><td>悲观（FCF -5%/年）</td><td>$453M</td><td>$430M</td><td>$409M</td><td>$388M</td><td>$369M</td><td>$3,404M</td><td>$2,916M</td><td style="color:var(--text2)">$10.86</td></tr>
+      <tr class="hl"><td>中性（FCF 持平~+2%）</td><td>$487M</td><td>$497M</td><td>$507M</td><td>$517M</td><td>$527M</td><td>$5,330M</td><td>$4,569M</td><td style="color:var(--gold)">$17.01</td></tr>
+      <tr><td>乐观（FCF +6-8%/年）</td><td>$506M</td><td>$542M</td><td>$580M</td><td>$622M</td><td>$666M</td><td>$8,095M</td><td>$7,086M</td><td style="color:var(--green)">$26.38</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="verdict" style="margin-top:16px;">
+    <div class="verdict-t">📍 当前股价 $9.16 的位置分析</div>
+    <p style="font-size:13px;color:var(--text2);line-height:1.8;">
+      当前股价$9.16处于悲观DCF内在价值($10.86)与悲观安全边际价格($8.15)之间。
+      <br><br>
+      <strong style="color:var(--accent3);">解读：</strong>市场正以接近"最坏情景"的价格定价，但尚未跌破悲观情景的安全边际。若投资者认为中性情景（FCF持平）更可能发生，当前股价相对$12.76安全边际仍有约40%折扣，是具有吸引力的介入区间。
+      <br><br>
+      <strong style="color:var(--red);">风险：</strong>若非阿里广告持续恶化（>-10%/年两个季度），或MAU跌破5.3亿，则悲观情景成为基准，安全边际减薄。
+    </p>
+  </div>
+</section>
+
+<!-- ═══ S10: BUFFETT COMMENTARY ═══ -->
+<section class="section">
+  <div class="stitle">巴菲特式投资备忘录</div>
+  <div class="cmt">
+
+    <p><span class="hl-t">数字会说话。让我们先看数字：</span>$22.6亿的市值。$24亿的现金和短期投资。$4.77亿的自由现金流。年化FCF收益率21%。股息率6.7%。市净率约0.58倍。</p>
+
+    <p>如果这些数字在一家美国公司身上出现，早就被私募基金拆了变现。但这是微博，一家中国互联网公司，于是市场给它贴上了折扣标签——大折扣。这个折扣有没有道理？部分有。但是否已经被定价进去了？这才是真正的问题。</p>
+
+    <p><span class="hl-t">先说好的部分。</span>微博拥有我在中国互联网行业很少见到的一样东西：<strong>不可替代的网络效应</strong>。热搜——中国公众获取实时信息的第一入口——是微博独有的产品。当某位明星出轨、某项政策发布、某场地震发生，中国人打开的第一个APP是微博，而不是抖音，不是微信。这个"第一打开"的反射性动作，是二十年积累下来的用户习惯，不是哪个产品经理能设计出来的——它自然生长，也因此难以被复制。</p>
+
+    <p><span class="hl-t">再说现金的问题。</span>$24亿现金在账上，市值$22.6亿。这意味着什么？意味着如果你今天买下整个微博，现金就能还你买价，还多$1.4亿。换句话说，你免费拿到了：每年$4.77亿自由现金流的业务，5.67亿月活用户的平台，中国最大的公共舆论流量入口。这笔账，在价值投资的语言里，叫做<span class="hl-t">以低于清算价值的价格买入运营中的企业</span>。格雷厄姆的精神来了。</p>
+
+    <p><span class="warn-t">但我们必须诚实面对真正的问题所在。</span>非阿里广告——占广告收入88%的核心业务——全年下滑了4%。这不是周期性问题，这是结构性问题。微博的广告主在减少对它的投入，或者转向抖音、小红书更精准的流量。阿里巴巴的49%增长是真实的，但它在帮微博掩盖一个正在发展的伤口：<strong>若无阿里，2025年广告收入将下滑，而非持平</strong>。这是公司依赖单一大客户填补结构性漏洞的信号，在价值分析里，我们应该给它涂上红色。</p>
+
+    <p>MAU从5.91亿降至5.67亿，一年减少2,400万用户。管理层把这称为"向质量转型"。也许是真的——DAU/MAU维持44%确实说明留下来的用户更活跃。但失去的2,400万人不会自己回来。每一个离开的用户，都是一份潜在广告展示量、一份潜在购买意图数据的永久损失。</p>
+
+    <p><span class="hl-t">那么，这是一个什么样的投资机会？</span>用巴菲特早年的语言说：这是一根<strong>"雪茄烟蒂"</strong>——在地上捡到的半截雪茄，还能抽上几口，但不是你会珍藏的好雪茄。它是一门正在缓慢收缩的生意，在极低估值下仍能产生现金回报，给耐心的投资者提供不错的被动回报，但不太可能产生改变命运的复利。</p>
+
+    <p><span class="hl-t">仓位建议：</span>3-5%的投资组合比例。进入逻辑：已处于有吸引力的价格区间（悲观内在价值$10.86以下，当前$9.16）。可在$8以下追加。离场触发条件：非阿里广告连续两个季度同比下滑超过10%；或MAU跌破5.3亿；或公司宣布削减/取消股息而无充分理由。</p>
+
+    <p style="font-size:12px;color:var(--text3);border-top:1px solid var(--border);padding-top:12px;margin-top:8px;">
+      ⚠️ <strong>风险披露：</strong>本备忘录仅供参考，不构成投资建议。微博(WB)作为VIE架构在美上市的中国互联网公司，面临中美监管风险、VIE架构法律不确定性、中国互联网行业政策风险及外汇风险。过往财务数据不代表未来表现。投资者应独立进行尽职调查，并结合自身风险承受能力做出投资决策。
+    </p>
+  </div>
+</section>
+
+</div><!-- /container -->
+
+<footer>
+  <div>微博 Weibo Corporation (NASDAQ: WB) · Q4 2025 & 全年财报深度分析</div>
+  <div style="margin-top:4px;">数据来源：微博官方投资者关系新闻稿（2026年3月18日） · 分析日期：2026年3月18日</div>
+  <div style="margin-top:4px;">BUFFY · 财报研究所 · 本报告仅供参考，不构成投资建议</div>
+</footer>
+
+<script>
+/* ── THEME TOGGLE ── */
+function toggleTheme() {
+  const html = document.documentElement;
+  html.dataset.theme = html.dataset.theme === 'dark' ? 'light' : 'dark';
+  renderCharts();
+  renderSankey();
+}
+
+/* ── CHART COLORS ── */
+function getColors() {
+  const s = getComputedStyle(document.documentElement);
+  return {
+    accent:  s.getPropertyValue('--accent').trim(),
+    accent2: s.getPropertyValue('--accent2').trim(),
+    accent3: s.getPropertyValue('--accent3').trim(),
+    rose:    s.getPropertyValue('--rose').trim(),
+    gold:    s.getPropertyValue('--gold').trim(),
+    red:     s.getPropertyValue('--red').trim(),
+    green:   s.getPropertyValue('--green').trim(),
+    text2:   s.getPropertyValue('--text2').trim(),
+    text3:   s.getPropertyValue('--text3').trim(),
+    grid:    s.getPropertyValue('--chart-grid').trim(),
+    text:    s.getPropertyValue('--text').trim(),
+    card:    s.getPropertyValue('--card').trim(),
+  };
+}
+
+function baseOpts(c) {
+  return {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { labels: { color: c.text2, font: { size: 11 } } } },
+    scales: {
+      x: { ticks: { color: c.text3, font: { size: 11 } }, grid: { color: c.grid } },
+      y: { ticks: { color: c.text3, font: { size: 11 } }, grid: { color: c.grid } }
+    }
+  };
+}
+
+let charts = {};
+function destroyAll() {
+  Object.values(charts).forEach(ch => { if(ch) ch.destroy(); });
+  charts = {};
+}
+
+function renderCharts() {
+  destroyAll();
+  const c = getColors();
+  const labels = ['Q4 2024','Q1 2025','Q2 2025','Q3 2025','Q4 2025'];
+
+  /* C1: 季度营收结构 */
+  charts.c1 = new Chart(document.getElementById('c1'), {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [
+        { label: '非阿里广告', data: [345.5, 309, 343, 311, 353.8], backgroundColor: c.accent2 + 'cc', stack: 'a' },
+        { label: '阿里广告',   data: [40.3, 30, 40, 64, 50.0],     backgroundColor: c.gold + 'cc', stack: 'a' },
+        { label: 'VAS',        data: [71.0, 57.7, 61.4, 66.9, 69.5], backgroundColor: c.accent3 + 'cc', stack: 'a' },
+      ]
+    },
+    options: { ...baseOpts(c), scales: { x: { stacked: true, ticks: { color: c.text3, font:{size:11} }, grid:{color:c.grid} }, y: { stacked: true, ticks: { color: c.text3, font:{size:11} }, grid:{color:c.grid} } } }
+  });
+
+  /* C2: Non-GAAP 经营利润率 */
+  charts.c2 = new Chart(document.getElementById('c2'), {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        { label: 'Non-GAAP 经营利润率', data: [30, 33, 36, 30, 21], borderColor: c.accent3, backgroundColor: c.accent3 + '22', fill: true, tension: 0.3, pointRadius: 5 },
+        { label: 'GAAP 经营利润率',     data: [26, 28, 33, 27, 19], borderColor: c.accent2, backgroundColor: 'transparent', borderDash: [5,4], tension: 0.3, pointRadius: 4 }
+      ]
+    },
+    options: {
+      ...baseOpts(c),
+      scales: {
+        x: { ticks:{color:c.text3,font:{size:11}}, grid:{color:c.grid} },
+        y: { ticks:{color:c.text3,font:{size:11},callback:v=>v+'%'}, grid:{color:c.grid}, min:10, max:40 }
+      }
+    }
+  });
+
+  /* C3: MAU & DAU */
+  charts.c3 = new Chart(document.getElementById('c3'), {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        { label: 'MAU（百万）', data: [590, 591, 588, 578, 567], borderColor: c.rose, backgroundColor: c.rose+'22', fill: true, tension: 0.3, pointRadius: 5 },
+        { label: 'DAU（百万）', data: [260, 261, 261, 257, 252], borderColor: c.green, backgroundColor: c.green+'22', fill: true, tension: 0.3, pointRadius: 5 },
+      ]
+    },
+    options: {
+      ...baseOpts(c),
+      scales: {
+        x: { ticks:{color:c.text3,font:{size:11}}, grid:{color:c.grid} },
+        y: { ticks:{color:c.text3,font:{size:11}}, grid:{color:c.grid}, min:220, max:620 }
+      }
+    }
+  });
+
+  /* C4: 全年广告收入 阿里 vs 非阿里 */
+  charts.c4 = new Chart(document.getElementById('c4'), {
+    type: 'bar',
+    data: {
+      labels: ['FY2024','FY2025'],
+      datasets: [
+        { label: '非阿里广告', data: [1381.9, 1327.8], backgroundColor: c.accent2 + 'cc' },
+        { label: '阿里广告',   data: [116.8, 173.8],   backgroundColor: c.gold + 'cc' },
+      ]
+    },
+    options: {
+      ...baseOpts(c),
+      scales: {
+        x: { stacked: true, ticks:{color:c.text3,font:{size:11}}, grid:{color:c.grid} },
+        y: { stacked: true, ticks:{color:c.text3,font:{size:11}}, grid:{color:c.grid} }
+      }
+    }
+  });
+
+  /* C5: Q4 营收构成 doughnut */
+  charts.c5 = new Chart(document.getElementById('c5'), {
+    type: 'doughnut',
+    data: {
+      labels: ['非阿里广告 $353.8M', '阿里广告 $50.0M', 'VAS $69.5M'],
+      datasets: [{ data: [353.8, 50.0, 69.5], backgroundColor: [c.accent2+'cc', c.gold+'cc', c.accent3+'cc'], borderWidth: 0 }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'bottom', labels: { color: c.text2, font:{size:11}, padding:10 } } }
+    }
+  });
+
+  /* C6: Q4 成本构成 */
+  charts.c6 = new Chart(document.getElementById('c6'), {
+    type: 'bar',
+    data: {
+      labels: ['营业成本','销售营销','产品研发','一般行政'],
+      datasets: [
+        { label: 'Q4 2024', data: [100.5, 139.9, 75.9, 22.6], backgroundColor: c.accent2+'99' },
+        { label: 'Q4 2025', data: [123.4, 153.5, 92.2, 12.6], backgroundColor: c.accent3+'cc' },
+      ]
+    },
+    options: baseOpts(c)
+  });
+
+  /* C7: FCF vs Non-GAAP NI */
+  charts.c7 = new Chart(document.getElementById('c7'), {
+    type: 'bar',
+    data: {
+      labels: ['FY2024','FY2025'],
+      datasets: [
+        { label: 'FCF ($M)', data: [602, 477.1], backgroundColor: c.green+'cc' },
+        { label: 'Non-GAAP NI ($M)', data: [478.6, 439.8], backgroundColor: c.accent2+'cc' },
+      ]
+    },
+    options: baseOpts(c)
+  });
+}
+
+/* ── SANKEY ── */
+function renderSankey() {
+  const isDark = document.documentElement.dataset.theme === 'dark';
+  const fontColor = isDark ? '#a09890' : '#7a706a';
+  const nodeColor = isDark ? '#4a4540' : '#d9d0c7';
+
+  const data = [{
+    type: 'sankey',
+    orientation: 'h',
+    node: {
+      pad: 18, thickness: 22,
+      line: { color: 'transparent', width: 0 },
+      label: [
+        '净营收 $1,757M',         // 0
+        '广告收入 $1,502M',        // 1
+        '增值服务 $255M',          // 2
+        '毛利润 ~$1,250M',         // 3
+        '营业成本 ~$507M',         // 4
+        '销售营销 ~$575M',         // 5
+        '产品研发 ~$318M',         // 6
+        '一般行政 ~$88M',          // 7
+        'GAAP经营利润 $465M',      // 8
+        '非经营收入净额 ~$116M',   // 9
+        '所得税 ~$132M',           // 10
+        'GAAP净利润 $449M',        // 11
+        'SBC & 折旧摊销调整',      // 12
+        '经营现金流 $520M',        // 13
+        '资本支出 $42M',           // 14
+        'FCF $477M',               // 15
+      ],
+      color: [
+        '#7b8fa0cc','#8a9a8ecc','#b9a06acc',
+        '#8a9a8ecc','#b87070cc','#b87070cc','#b87070cc','#b87070cc',
+        '#7b8fa0cc','#7a9a7acc','#b87070cc','#b9a06acc',
+        '#a89f98cc','#7b8fa0cc','#b87070cc','#7a9a7acc'
+      ],
+      font: { size: 12, color: fontColor }
+    },
+    link: {
+      source: [0,0, 1,1,2, 3,3,3,3, 8,9,10, 11,12, 13,13],
+      target: [1,2, 3,4,3, 5,6,7,8, 11,11,11, 13,13, 14,15],
+      value:  [1502,255, 1250,252,255, 575,318,88,465, 449,116,132, 449,71, 42,477],
+      color:  [
+        '#7b8fa022','#b9a06a22',
+        '#8a9a8e22','#b8707022','#8a9a8e22',
+        '#b8707022','#b8707022','#b8707022','#7b8fa022',
+        '#b9a06a22','#7a9a7a22','#b8707022',
+        '#7b8fa022','#a89f9822',
+        '#b8707022','#7a9a7a22'
+      ]
+    }
+  }];
+
+  const layout = {
+    paper_bgcolor: 'transparent',
+    plot_bgcolor: 'transparent',
+    font: { color: fontColor, size: 12 },
+    margin: { l: 10, r: 10, t: 20, b: 20 }
+  };
+
+  Plotly.newPlot('sankey', data, layout, { responsive: true, displayModeBar: false });
+}
+
+/* ── INIT ── */
+window.addEventListener('load', () => {
+  renderCharts();
+  renderSankey();
+});
+</script>
+</body>
+</html>

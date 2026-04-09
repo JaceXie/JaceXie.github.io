@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>京东 JD.com — 2025 Q4 & 全年财报深度分析（V2）</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+/* ── MORANDI PALETTE ── */
+:root {
+  /* Light (default) */
+  --bg:        #f5f0eb;
+  --bg2:       #ece6df;
+  --card:      #ffffff;
+  --card2:     #f8f5f1;
+  --border:    #d9d0c7;
+  --text:      #4a4340;
+  --text2:     #7a706a;
+  --text3:     #a89f98;
+  --accent:    #8a9a8e;   /* sage */
+  --accent2:   #7b8fa0;   /* muted blue */
+  --accent3:   #b08d7a;   /* dusty terracotta */
+  --rose:      #c09090;   /* dusty rose */
+  --gold:      #b9a06a;
+  --red:       #b87070;
+  --green:     #7a9a7a;
+  --shadow:    rgba(0,0,0,0.06);
+  --chart-grid:#e5ddd5;
+}
+[data-theme="dark"] {
+  --bg:        #1e1c1a;
+  --bg2:       #28251f;
+  --card:      #2e2a25;
+  --card2:     #363230;
+  --border:    #4a4540;
+  --text:      #d4ccc4;
+  --text2:     #a09890;
+  --text3:     #706860;
+  --accent:    #8a9a8e;
+  --accent2:   #8fabbf;
+  --accent3:   #c9a48e;
+  --rose:      #c09090;
+  --gold:      #c9b07a;
+  --red:       #c08080;
+  --green:     #8aaa8a;
+  --shadow:    rgba(0,0,0,0.3);
+  --chart-grid:#3e3a35;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', 'SimSun', serif;
+  line-height: 1.75;
+  font-size: 14.5px;
+  transition: background .35s, color .35s;
+}
+a { color: var(--accent2); text-decoration: none; }
+
+/* ── THEME TOGGLE ── */
+.theme-bar {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 8px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  transition: background .35s;
+}
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; }
+.theme-toggle {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; color: var(--text2);
+}
+.toggle-switch {
+  position: relative;
+  width: 44px; height: 22px;
+  background: var(--border);
+  border-radius: 11px;
+  cursor: pointer;
+  transition: background .3s;
+}
+.toggle-switch::after {
+  content: '';
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 18px; height: 18px;
+  background: var(--card);
+  border-radius: 50%;
+  transition: transform .3s;
+  box-shadow: 0 1px 3px rgba(0,0,0,.15);
+}
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+
+/* ── HERO ── */
+.hero {
+  padding: 48px 24px 36px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+.hero-tag {
+  display: inline-block;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 3px 14px;
+  border-radius: 20px;
+  margin-bottom: 18px;
+}
+.hero h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills {
+  display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;
+}
+.pill {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 6px 18px;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 13px;
+  color: var(--text2);
+  box-shadow: 0 1px 3px var(--shadow);
+}
+.pill strong { color: var(--text); }
+
+/* ── LAYOUT ── */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle {
+  font-size: 18px; font-weight: 700; color: var(--accent3);
+  margin-bottom: 20px; letter-spacing: 0.5px;
+  display: flex; align-items: center; gap: 10px;
+}
+.stitle::before {
+  content: ''; display: block; width: 4px; height: 20px;
+  background: var(--accent3); border-radius: 2px;
+}
+
+/* ── KPI ── */
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.kpi {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 16px 18px;
+  box-shadow: 0 1px 4px var(--shadow);
+  transition: background .35s;
+}
+.kpi-l { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.badge {
+  display: inline-block; font-family: 'Segoe UI', sans-serif;
+  font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px;
+}
+.up   { background: rgba(122,154,122,.15); color: var(--green); }
+.dn   { background: rgba(184,112,112,.15); color: var(--red); }
+.nt   { background: rgba(123,143,160,.15); color: var(--accent2); }
+
+/* ── TABLE ── */
+.tbl-wrap {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow);
+}
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI', sans-serif; font-size: 13px; }
+.tbl th {
+  background: var(--card2); color: var(--text3); font-size: 11px;
+  letter-spacing: .5px; text-transform: uppercase;
+  padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border);
+}
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); }
+
+/* ── CHARTS ── */
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.cgrid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow);
+}
+.ctitle { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 230px; }
+
+/* ── QUOTES ── */
+.qgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.qcard {
+  background: var(--card); border: 1px solid var(--border);
+  border-left: 4px solid var(--rose);
+  border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow);
+}
+.qname { font-weight: 700; color: var(--accent3); margin-bottom: 2px; }
+.qrole { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); margin-bottom: 10px; }
+.qtext { font-style: italic; font-size: 13.5px; color: var(--text); line-height: 1.8; }
+
+/* ── ANALYSIS ── */
+.agrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+.acard {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow);
+}
+.acard h4 { font-size: 13px; color: var(--accent2); margin-bottom: 10px; text-transform: uppercase; letter-spacing: .5px; }
+.acard ul { padding-left: 16px; }
+.acard li { margin-bottom: 5px; font-size: 13px; }
+
+/* ── BUFFETT SCORE ── */
+.bscore {
+  display: flex; align-items: center; gap: 16px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px 22px; margin-bottom: 12px;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.circle {
+  width: 62px; height: 62px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 18px; flex-shrink: 0;
+  border: 3px solid; font-family: 'Segoe UI', sans-serif;
+}
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 3px; }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+/* ── VERDICT ── */
+.verdict {
+  background: var(--card2); border: 2px solid var(--accent);
+  border-radius: 10px; padding: 26px 28px; margin-bottom: 16px;
+}
+.verdict-t { font-size: 17px; font-weight: 700; color: var(--accent); margin-bottom: 10px; }
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 14px; text-align: center;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.pbox .pl { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.pbox .pv { font-family: 'Segoe UI', sans-serif; font-size: 26px; font-weight: 800; }
+.pbox .pn { font-size: 11px; color: var(--text3); margin-top: 3px; }
+.pc { color: var(--text2); } .pf { color: var(--gold); } .ps { color: var(--green); }
+
+/* ── SANKEY ── */
+#sankey { width: 100%; height: 460px; }
+
+/* ── COMMENTARY ── */
+.cmt {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 26px; line-height: 1.9; font-size: 14.5px;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.cmt p { margin-bottom: 14px; }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--card2); border-top: 1px solid var(--border);
+  padding: 24px; text-align: center; color: var(--text3); font-size: 12px;
+  margin-top: 40px;
+}
+
+@media (max-width: 768px) {
+  .cgrid,.cgrid3,.qgrid,.agrid,.pgrid { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 22px; }
+  .kpi-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── THEME BAR ── -->
+<div class="theme-bar">
+  <div class="logo">BUFFY · 财报研究所</div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-tag">V2 · 保守估值 · 2026年3月6日</div>
+  <h1>京东集团 JD.com 季报深度分析</h1>
+  <div class="hero-sub">NASDAQ: JD &nbsp;|&nbsp; 2025年 Q4 & 全年业绩 &nbsp;|&nbsp; 巴菲特价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill">股价 <strong>$27.10</strong></div>
+    <div class="pill">市值 <strong>~$379亿</strong></div>
+    <div class="pill">汇率 <strong>1 USD ≈ 7.0 RMB</strong></div>
+    <div class="pill">ADS <strong>~14亿股</strong></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ S1: KPI ═══ -->
+<section class="section">
+  <div class="stitle">核心财务指标 — Q4 2025 & 全年</div>
+  <div style="font-size:12px;color:var(--text3);margin-bottom:8px;">▎Q4 2025 单季</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">净营收</div><div class="kpi-v">$50.3B</div><span class="badge up">YoY +1.5%</span></div>
+    <div class="kpi"><div class="kpi-l">毛利率</div><div class="kpi-v">15.6%</div><span class="badge up">+32bps</span></div>
+    <div class="kpi"><div class="kpi-l">Non-GAAP 净利润</div><div class="kpi-v">$155M</div><span class="badge dn">YoY -90%</span></div>
+    <div class="kpi"><div class="kpi-l">Non-GAAP 净利率</div><div class="kpi-v">0.3%</div><span class="badge dn">前季 1.9%</span></div>
+    <div class="kpi"><div class="kpi-l">京东零售营收</div><div class="kpi-v">$43.1B</div><span class="badge dn">YoY -1.7%</span></div>
+    <div class="kpi"><div class="kpi-l">零售经营利润率</div><div class="kpi-v">3.2%</div><span class="badge nt">持平</span></div>
+    <div class="kpi"><div class="kpi-l">服务收入</div><div class="kpi-v">$11.4B</div><span class="badge up">YoY +20%</span></div>
+    <div class="kpi"><div class="kpi-l">新业务 Non-GAAP 亏损</div><div class="kpi-v">-$2.1B</div><span class="badge dn">外卖主导</span></div>
+  </div>
+  <div style="font-size:12px;color:var(--text3);margin:20px 0 8px;">▎全年 2025</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">净营收</div><div class="kpi-v">$187.0B</div><span class="badge up">YoY +13%</span></div>
+    <div class="kpi"><div class="kpi-l">毛利率</div><div class="kpi-v">16.0%</div><span class="badge up">+18bps</span></div>
+    <div class="kpi"><div class="kpi-l">Non-GAAP 净利润</div><div class="kpi-v">$3.86B</div><span class="badge dn">YoY -21%</span></div>
+    <div class="kpi"><div class="kpi-l">Non-GAAP 净利率</div><div class="kpi-v">2.1%</div><span class="badge dn">前年 3.3%</span></div>
+    <div class="kpi"><div class="kpi-l">FCF（自由现金流）</div><div class="kpi-v">$0.93B</div><span class="badge dn">前年 $6.3B</span></div>
+    <div class="kpi"><div class="kpi-l">现金及等价物</div><div class="kpi-v">$32.1B</div><span class="badge nt">流动充裕</span></div>
+    <div class="kpi"><div class="kpi-l">年度股息</div><div class="kpi-v">$1.0/ADS</div><span class="badge nt">合计 $1.4B</span></div>
+    <div class="kpi"><div class="kpi-l">回购</div><div class="kpi-v">$3.0B</div><span class="badge up">6.3% 流通股</span></div>
+  </div>
+</section>
+
+<!-- ═══ S2: TABLE ═══ -->
+<section class="section">
+  <div class="stitle">季度财务明细（Non-GAAP · 美元换算）</div>
+
+  <div style="background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin-bottom:14px;font-size:13px;color:var(--red);">
+    ⚠️ <strong>盈利趋势警示</strong>：Q1 净利润 $1.82B 占全年 47%——后三个季度利润快速衰减。用全年均值计算 P/E 会严重低估真实估值倍数。下方同时列出"近两季年化"run-rate 供参考。
+  </div>
+
+  <div class="tbl-wrap">
+  <table class="tbl">
+    <thead><tr>
+      <th>指标</th><th>2024 Q4</th><th>2025 Q1</th><th>2025 Q2</th><th>2025 Q3</th><th>2025 Q4</th><th>QoQ</th><th>YoY</th>
+    </tr></thead>
+    <tbody>
+      <tr class="hl"><td>净营收 ($B)</td><td>49.6</td><td>43.0</td><td>50.9</td><td>42.7</td><td>50.3</td><td style="color:var(--green)">+17.8%</td><td style="color:var(--green)">+1.5%</td></tr>
+      <tr><td>— 商品收入</td><td>41.5</td><td>36.2</td><td>42.9</td><td>35.5</td><td>40.3</td><td style="color:var(--green)">+13.5%</td><td style="color:var(--red)">-2.8%</td></tr>
+      <tr><td>— 服务收入</td><td>9.5</td><td>9.4</td><td>11.3</td><td>9.1</td><td>11.4</td><td style="color:var(--green)">+25.3%</td><td style="color:var(--green)">+20.1%</td></tr>
+      <tr><td>毛利率</td><td>15.28%</td><td>15.88%</td><td>15.91%</td><td>16.87%</td><td>15.60%</td><td style="color:var(--red)">-1.27pp</td><td style="color:var(--green)">+0.32pp</td></tr>
+      <tr class="hl"><td>Non-GAAP 经营利润 ($B)</td><td>1.50</td><td>1.67</td><td>0.13</td><td>0.03</td><td>-0.45</td><td style="color:var(--red)">恶化</td><td style="color:var(--red)">N/A</td></tr>
+      <tr><td>Non-GAAP 经营利润率</td><td>3.0%</td><td>3.9%</td><td>0.3%</td><td>0.1%</td><td>-0.9%</td><td style="color:var(--red)">-1.0pp</td><td style="color:var(--red)">-3.9pp</td></tr>
+      <tr class="hl"><td>Non-GAAP 净利润 ($B)</td><td>1.61</td><td>1.82</td><td>1.06</td><td>0.83</td><td>0.155</td><td style="color:var(--red)">-81%</td><td style="color:var(--red)">-90%</td></tr>
+      <tr><td>Non-GAAP 净利率</td><td>3.3%</td><td>4.2%</td><td>2.1%</td><td>1.9%</td><td>0.3%</td><td style="color:var(--red)">-1.6pp</td><td style="color:var(--red)">-3.0pp</td></tr>
+      <tr><td>库存周转天数 (TTM)</td><td>31.5</td><td>32.8</td><td>34.1</td><td>35.8</td><td>37.8</td><td style="color:var(--red)">+2.0</td><td style="color:var(--red)">+6.3</td></tr>
+      <tr><td>FCF TTM ($B)</td><td>6.24</td><td>5.37</td><td>1.44</td><td>1.80</td><td>0.93</td><td style="color:var(--red)">-48%</td><td style="color:var(--red)">-85%</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin-top:14px;">
+    <div style="font-size:13px;font-weight:600;color:var(--accent3);margin-bottom:8px;">真实 P/E 多角度审视</div>
+    <table class="tbl" style="font-size:13px;">
+      <thead><tr><th>计算口径</th><th>年化净利润</th><th>P/E 倍数</th><th>可靠度</th></tr></thead>
+      <tbody>
+        <tr><td>全年均值（2025A）</td><td>$3.86B</td><td style="color:var(--green)">9.8x</td><td>⚠️ 被 Q1 高利润拉低</td></tr>
+        <tr><td>近两季年化（H2 run-rate）</td><td>$1.97B</td><td style="color:var(--gold)">19.2x</td><td>✅ 更反映当前趋势</td></tr>
+        <tr><td>Q4单季年化（最保守）</td><td>$0.62B</td><td style="color:var(--red)">61x</td><td>⚡ 极端悲观</td></tr>
+        <tr class="hl"><td>2026E 中性预测</td><td>$2.5B</td><td style="color:var(--accent2)">15.2x</td><td>📊 本报告基准情景</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ═══ S3: CHARTS ═══ -->
+<section class="section">
+  <div class="stitle">营收与盈利趋势</div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">季度营收 ($B)</div><div class="cwrap"><canvas id="c1"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">Non-GAAP 净利润 ($B)</div><div class="cwrap"><canvas id="c2"></canvas></div></div>
+  </div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">各线 Q4 YoY 同比增长</div><div class="cwrap"><canvas id="c3"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">年度营收 & FCF (RMB B)</div><div class="cwrap"><canvas id="c4"></canvas></div></div>
+  </div>
+  <div class="cgrid3">
+    <div class="ccard"><div class="ctitle">利润率季度趋势</div><div class="cwrap"><canvas id="c5"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">Q4 业务分部营收占比</div><div class="cwrap"><canvas id="c6"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">股东回报 2025 ($B)</div><div class="cwrap"><canvas id="c7"></canvas></div></div>
+  </div>
+</section>
+
+<!-- ═══ S4: SANKEY ═══ -->
+<section class="section">
+  <div class="stitle">资金流向桑基图 — 2025全年 ($B)</div>
+  <div class="ccard">
+    <div style="font-size:12px;color:var(--text3);margin-bottom:6px;">从净营收到自由现金流的完整流向</div>
+    <div id="sankey"></div>
+  </div>
+</section>
+
+<!-- ═══ S5: SEGMENTS ═══ -->
+<section class="section">
+  <div class="stitle">业务分部详解</div>
+  <div class="agrid">
+    <div class="acard">
+      <h4>🛒 京东零售</h4>
+      <ul>
+        <li>Q4营收 $43.1B，YoY <span style="color:var(--red)">-1.7%</span>（3C高基数）；全年 +11%</li>
+        <li>毛利率 Q4/全年均同比 +1.1pp（供应链效率持续提升）</li>
+        <li>Q4经营利润率 3.2%（稳）；全年 4.6%（+52bps，连续第6年扩张）</li>
+        <li>大众商品 Q4 +12.1%，连续5季度双位数增长</li>
+        <li>3C家电 Q4 -12%（以旧换新高基数）；管理层预期 H2 2026 回暖</li>
+      </ul>
+    </div>
+    <div class="acard">
+      <h4>🚚 京东物流</h4>
+      <ul>
+        <li>Q4营收 YoY +22%，全年 +19%（即时配送增量）</li>
+        <li>全年利润 -17%（投入自动化/AI/海外），Q4利润 +3%</li>
+        <li>JoyExpress 欧洲上线（英/德/法/荷次日达）</li>
+      </ul>
+    </div>
+    <div class="acard">
+      <h4>🆕 新兴业务（亏损源头）</h4>
+      <ul>
+        <li>Q4营收 +201%；Q4亏损 $2.1B（环比收窄约20%）</li>
+        <li>外卖：活跃商户 +270%，七鲜厨房 50+ 门店</li>
+        <li>Joybuy 欧洲站 2026-03 正式上线</li>
+        <li>管理层预计2026年外卖投入低于2025——<span style="color:var(--red)">但取决于竞争动态</span></li>
+      </ul>
+    </div>
+    <div class="acard">
+      <h4>📢 广告 & 平台服务（高利润引擎）</h4>
+      <ul>
+        <li>平台广告 Q4 +15%，全年 +19%（每季度均双位数）</li>
+        <li>AI算法优化流量分配 + 外卖贡献增量广告 2-3%</li>
+        <li>物流服务 Q4 +23.6%，全年 +27%</li>
+        <li>服务占比提升 → 利润结构长期改善的核心逻辑</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ S6: FULL EARNINGS CALL ═══ -->
+<section class="section">
+  <div class="stitle">电话会议完整内容 — 逐条记录 + 利好/利空判断</div>
+
+  <style>
+    .ec-block { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:22px; margin-bottom:16px; box-shadow:0 1px 4px var(--shadow); }
+    .ec-block h3 { font-size:15px; font-weight:700; color:var(--accent3); margin-bottom:14px; border-bottom:1px solid var(--border); padding-bottom:8px; }
+    .ec-item { margin-bottom:16px; padding-bottom:14px; border-bottom:1px dashed rgba(150,140,130,.2); }
+    .ec-item:last-child { margin-bottom:0; padding-bottom:0; border-bottom:none; }
+    .ec-quote { font-style:italic; font-size:13.5px; line-height:1.8; color:var(--text); margin-bottom:8px; padding-left:14px; border-left:3px solid var(--rose); }
+    .ec-tag { display:inline-flex; align-items:center; gap:5px; font-family:'Segoe UI',sans-serif; font-size:11.5px; font-weight:600; padding:3px 10px; border-radius:6px; margin-right:6px; }
+    .tag-bull { background:rgba(122,154,122,.15); color:var(--green); }
+    .tag-bear { background:rgba(184,112,112,.15); color:var(--red); }
+    .tag-neut { background:rgba(123,143,160,.15); color:var(--accent2); }
+    .ec-note { font-size:12.5px; color:var(--text2); line-height:1.6; margin-top:6px; padding:6px 10px; background:var(--card2); border-radius:6px; }
+    .ec-speaker { font-weight:700; color:var(--accent2); font-size:13px; margin-bottom:2px; }
+    .ec-role { font-family:'Segoe UI',sans-serif; font-size:11px; color:var(--text3); margin-bottom:10px; }
+    .ec-qa-label { display:inline-block; font-family:'Segoe UI',sans-serif; font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; padding:2px 8px; border-radius:4px; margin-bottom:10px; }
+    .ec-qa-q { background:rgba(176,141,122,.15); color:var(--accent3); }
+    .ec-qa-a { background:rgba(138,154,142,.15); color:var(--accent); }
+  </style>
+
+  <!-- ━━━ PART 1: CEO OPENING ━━━ -->
+  <div class="ec-block">
+    <h3>📌 第一部分：CEO 开场陈述 — 许冉（Sandy Xu）</h3>
+
+    <div class="ec-item">
+      <div class="ec-quote">「我们以符合预期的成绩结束了Q4。尽管电子产品和家电品类面临较高的同比比较基数，我们的顶线仍展现出韧性，得益于大众商品品类以及平台广告和营销服务的持续强劲势头。」</div>
+      <span class="ec-tag tag-neut">📊 中性</span>
+      <div class="ec-note">"符合预期"意味着没有惊喜也没有暴雷。顶线韧性靠结构切换（大众商品+广告替代3C），但整体增速仅+1.5%，离"强劲"有距离。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「京东零售在Q4实现了显著的毛利率扩张，我们进一步发挥了供应链优势。我们战略性地将部分毛利增长投入到价格竞争力中，特别是在电子产品和家电品类，以及R&D能力和人才储备，以确保长期竞争优势。这略微抑制了零售的利润率扩张。」</div>
+      <span class="ec-tag tag-neut">📊 中性偏空</span>
+      <div class="ec-note">毛利扩张是好事，但主动让利给3C品类+研发加码导致零售利润率"暂停扩张"。管理层称之为"战略选择"——但投资者关心的是"什么时候回来"。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「2025年是扎实执行的一年。我们的用户基础和购物频次获得显著增长，核心零售业务重回双位数顶线增长，同时连续第六年扩大京东零售经营利润率。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">全年维度看零售基盘确实强劲：营收+11%、利润率+52bps、连续6年扩张——这是核心投资逻辑的支撑。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「活跃客户在Q4同比增长30%，全年超过7亿年活跃客户。JD Plus活跃会员突破4000万。更令人鼓舞的是用户增长的质量——全年购物频次同比飙升超过40%，在所有用户群体中均有广泛提升。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">用户数据是本次财报最强亮点。7亿活跃用户+频次+40%意味着收入增长的基础极为扎实，且外卖业务贡献了跨品类拉新效应。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「京东外卖在用户频次提升中扮演了重要角色。我们将用户基础和参与度的扩大视为业务的长期战略驱动力，预计2026年及以后将进一步放大。」</div>
+      <span class="ec-tag tag-neut">📊 中性</span>
+      <div class="ec-note">外卖拉新确实有效，但问题是获客成本多高？目前外卖单季亏损$2.1B，若用户留存不及预期，这些"频次提升"可能昙花一现。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「核心零售在Q4保持了稳定的利润率，尽管面临短期顶线逆风。全年来看，京东零售实现了营收和经营利润的双位数增长，经营利润率扩张52个基点至4.6%。从长期视角看，京东零售利润率的持续上升轨迹，是我们供应链驱动模型韧性的有力证明。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">4.6%利润率是历史新高，且强调"连续多年上升"。供应链优势的长期价值在财报中得到数据验证——这是巴菲特最喜欢的"耐久性竞争优势"的证据。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「进入2026年，我们已经看到一致向上的趋势。用户势能保持强劲，大众商品和广告营销服务的增长轨迹无缝延续到了新的一年。……对2026年全年实现健康、高质量增长充满信心。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">YTD 2026数据改善是实质性的前瞻信号，说明Q4的低迷可能确实是阶段性而非趋势性的。但需Q1季报数据验证。</div>
+    </div>
+  </div>
+
+  <!-- ━━━ PART 2: CFO FINANCIALS ━━━ -->
+  <div class="ec-block">
+    <h3>📌 第二部分：CFO 财务详述 — 单因（Ian Shan）</h3>
+
+    <div class="ec-item">
+      <div class="ec-quote">「Q4总营收同比增长2%至人民币3520亿元，Non-GAAP净利润为人民币11亿元。全年总营收增长13%至人民币1.3万亿元，Non-GAAP归母净利润为人民币270亿元——对应全年净利率2.1%，Q4净利率0.3%。」</div>
+      <span class="ec-tag tag-bear">🔴 利空</span>
+      <div class="ec-note">Q4净利率仅0.3%，全年2.1%也低于2024年的3.3%。利润增速大幅落后营收增速（-21% vs +13%），说明利润被新业务严重侵蚀。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「按收入类型，产品收入Q4下降3%，但全年增长10%。服务收入Q4增长20%，全年增长24%。其中平台广告和营销收入Q4增长15%、全年增长19%；物流及其他服务收入Q4增长24%、全年增长27%，主要受外卖业务的增量配送收入驱动。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">服务收入占比持续提升（高毛利）是利润结构改善的核心逻辑。广告每季双位数增长的稳定性尤其可贵——这是平台价值的真正体现。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「3C家电品类收入Q4同比下降12%，但全年增长7%。我们已与合作伙伴紧密协作应对高基数挑战，对2026年至今（YTD）的改善势头感到鼓舞。大众商品品类持续强劲——Q4增长12%、全年增长15%，由超市、时尚和医疗健康引领。」</div>
+      <span class="ec-tag tag-neut">📊 中性</span>
+      <div class="ec-note">3C -12%是已知的高基数效应，不意外但幅度较大。大众商品+12%保持强劲是对冲力量。关键看H2 2026 3C能否回正。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「综合毛利率Q4为15.6%，同比扩张32个基点；全年为16.0%，扩张18个基点，主要由京东零售毛利率改善驱动。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">毛利率持续扩张说明供应链效率确实在提升，而非一次性因素。全年16%是历史最高——零售转平台型高毛利业务的趋势仍在。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「董事会批准2025年年度现金股息合计约14亿美元，即每普通股0.5美分、每ADS 1美元。此外，2025年回购约6.3%流通股份，合计30亿美元，所有回购股份已注销。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">利润下滑仍维持去年水平的股息+$3B回购（且全部注销非留库），传递强烈的股东回报信号。但注意：FCF仅$0.93B却分红+回购$4.4B——差额全靠吃老本。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「京东零售营收Q4下降2%，全年增长11%。Q4下滑主要因3C高基数，被大众商品和广告收入增长大幅抵消。值得注意的是，京东零售不再是单一增长引擎的业务——我们已成功构建多元增长矩阵。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">"多元增长矩阵"说法有数据支撑：大众商品+广告+物流三驾马车确实分散了对3C单一品类的依赖，增强了业务韧性。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「京东零售毛利率Q4和全年均同比提升1.1个百分点——这一持续改善已延续多年，反映了供应链实力增强和产品结构优化。Q4零售经营利润同比下降2%，经营利润率稳定在3.2%。利润率扩张的暂时停顿是战略选择——我们为3C品类提供补贴以保持价格竞争力和市场领导地位，同时增加研发和员工薪酬投入。」</div>
+      <span class="ec-tag tag-neut">📊 中性偏空</span>
+      <div class="ec-note">毛利+1.1pp本是大利好，但被OPEX增长完全吞噬（经营利润反而-2%）。R&D+人员成本Q4 YoY +48%增速惊人——管理层花钱意愿远超利润增速。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「全年京东零售经营利润增长25%，利润率改善52个基点至4.6%。从2019年首次披露分部数据的2.7%，到2025年的4.6%，利润率轨迹非常健康，朝着长期利润率目标稳步前进。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">2.7%→4.6%六年爬坡是实打实的运营能力提升。管理层提及的"长期目标"是高个位数（7-9%），如能实现意味着利润空间还有翻倍潜力。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「京东物流营收Q4增长22%、全年增长19%，受外卖增量贡献。物流Non-GAAP经营利润全年下降17%，但Q4增长3%。物流将持续投入客户体验提升、国内外服务能力扩展、以及AI和机器人技术。」</div>
+      <span class="ec-tag tag-neut">📊 中性</span>
+      <div class="ec-note">物流营收增速健康但利润承压（全年-17%）。持续投入自动化和海外布局是正确方向，但短期拖累利润。Q4利润+3%是积极信号。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「新兴业务营收Q4同比增长201%、全年增长157%，由外卖、京喜和国际业务的快速扩张驱动。Q4 Non-GAAP经营亏损收窄至人民币148亿元（~$2.1B），环比减亏约20%，延续了自上线以来的持续改善趋势。」</div>
+      <span class="ec-tag tag-bear">🔴 利空偏中性</span>
+      <div class="ec-note">201%营收增长是假象——基数极低。单季$2.1B亏损是全集团利润的最大杀手。环比减亏20%是正面信号，但绝对金额仍然巨大。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「全年自由现金流为人民币65亿元（~$0.93B），去年为440亿元（~$6.3B）。主要反映以旧换新项目相关的现金流出，以及经营利润的波动。应收账款已连续两个季度环比下降，主要因以旧换新相关应收的健康回收。年末现金及等价物、受限现金和短期投资合计人民币2250亿元（$32.1B）。」</div>
+      <span class="ec-tag tag-bear">🔴 利空</span>
+      <div class="ec-note">FCF从$6.3B暴跌至$0.93B是本次财报最大利空。管理层归因以旧换新+外卖，但即使剔除，核心运营现金流也在恶化。应收回收是小积极——但库存周转从31.5天升至37.8天的恶化被刻意淡化了。</div>
+    </div>
+  </div>
+
+  <!-- ━━━ PART 3: Q&A — GOLDMAN SACHS ━━━ -->
+  <div class="ec-block">
+    <h3>📌 第三部分：Q&A — 高盛（Ronald Kong）</h3>
+
+    <div class="ec-item">
+      <div class="ec-qa-label ec-qa-q">🎤 分析师提问</div>
+      <div class="ec-quote">「Q1：京东零售2026年增长展望如何？考虑到3C品类在H2恢复正常基数而大众商品保持健康，上下半年增速差异如何？Q2：外卖业务相比更大的竞争对手，如何改善单位经济性？如何通过供应链驱动模型差异化？外卖行业监管调查是否有助于改善经济性？」</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-qa-label ec-qa-a">💬 CEO 许冉回应</div>
+      <div class="ec-quote">「大众商品品类保持非常健康的强劲增长轨迹。即使考虑以旧换新对其他品类的影响，大众商品仍然是京东零售的主要增长引擎。超市、时尚、医疗健康均取得了非常强劲的成果。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">大众商品脱离3C独立增长，且全品类（超市/时尚/医疗）多点开花——这降低了品类集中风险。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「展望2026年，我们对维持这种健康势头非常有信心。超市品类在用户渗透和子品类扩展方面仍有巨大未开发潜力；时尚品类去年完成了大量基础设施建设（商户招募等），将在此基础上进一步提升增长动能；医疗健康品类预计将继续保持行业领先地位和用户心智份额。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">超市"未开发潜力"和时尚"基建完成"暗示2026年这两个品类可能加速增长。若兑现，将对冲3C的持续低迷。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「3C家电品类短期仍受高基数效应影响。2026年上半年，由于2025年上半年政府补贴消耗更快更多，家电/手机/电脑/数码产品的同比增长仍将受压。但我们预计相比2025年Q4会有环比改善，下半年增长将更为强劲。此外，记忆芯片成本持续上涨，手机和数码产品价格预计全线上涨——这可能抑制销量但ASP上升会部分抵消影响。」</div>
+      <span class="ec-tag tag-neut">📊 中性</span>
+      <div class="ec-note">3C恢复的时间线被明确推迟到H2 2026——比市场期望更晚。芯片涨价→ASP上升是双刃剑：收入可能还行，但消费者购买力下降影响用户体验和市占率。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「AI和新兴技术为创新和新品类创造了大量机遇，进一步展示了我们供应链的优势。虽然AI相关新产品的初始收入贡献相对于3C品类现有规模仍然有限，但我们看到显著的机遇和转变，将与品牌商和供应商紧密合作快速响应。」</div>
+      <span class="ec-tag tag-neut">📊 中性</span>
+      <div class="ec-note">AI新品类的收入贡献目前"有限"——诚实但也说明短期内不构成增长驱动力。中长期叙事可期但需时间验证。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「外卖业务差异化优势：第一，专注高品质外卖定位；第二，由专职骑手驱动的卓越服务品质；第三，依托强大供应链的全市生态协同整合。」</div>
+      <span class="ec-tag tag-neut">📊 中性</span>
+      <div class="ec-note">"高品质定位"和"专职骑手"是差异化，但也意味着更高成本。关键问题：高端外卖市场是否足够大以支撑如此规模的投资？</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「UE改善驱动力：第一，更多元化的收入来源；第二，持续优化补贴效率，包括针对不同用户和区域的精准补贴；第三，随着订单量增长带来的配送规模效应提升配送效率。」</div>
+      <span class="ec-tag tag-neut">📊 中性偏好</span>
+      <div class="ec-note">减亏路径逻辑清晰，但"精准补贴"和"规模效应"都需要时间。竞争对手（美团/饿了么）也在做同样的事。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「七鲜厨房（7FRESH Kitchen）是高度创新和差异化的业务模型，与京东供应链深度整合，与即时零售业务有很强的协同效应。截至2月底，七鲜厨房运营点位已扩展至逾50个。」</div>
+      <span class="ec-tag tag-neut">📊 中性</span>
+      <div class="ec-note">50个点位在全国范围内还很小。模型有创新性但尚未证明可规模化盈利。需持续观察。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「外卖和即时零售是京东的长期战略。将以长期视角推动战略进展，持续提升运营效率以驱动盈利能力改善。同时将继续挖掘外卖与核心零售业务之间的协同潜力，2025年外卖已证明是用户增长的战略引擎。2026年预计将进一步释放协同效应——由强劲的跨品类销售和广告收入增量驱动。」</div>
+      <span class="ec-tag tag-neut">📊 中性偏空</span>
+      <div class="ec-note">"长期战略"意味着短期不指望盈利。跨品类协同听起来好，但外卖用户与电商用户的重合度和转化率尚未有公开数据。"继续挖掘潜力"是模糊承诺。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「关于外卖行业监管：第一，我们支持并欢迎维护公平竞争市场环境的监管，这有利于行业健康发展；第二，我们坚定反对行业内的不健康竞争；第三，我们致力于通过供应链模式的持续创新推动高品质外卖的高质量进化。」</div>
+      <span class="ec-tag tag-bull">🟢 潜在利好</span>
+      <div class="ec-note">暗示监管可能约束美团的市场支配力，为京东创造更公平的竞争空间。若反垄断执法真正落地，对京东是结构性利好。但执行力度不确定。</div>
+    </div>
+  </div>
+
+  <!-- ━━━ PART 4: Q&A — UBS ━━━ -->
+  <div class="ec-block">
+    <h3>📌 第四部分：Q&A — 瑞银（UBS）</h3>
+
+    <div class="ec-item">
+      <div class="ec-qa-label ec-qa-q">🎤 分析师提问</div>
+      <div class="ec-quote">「Q1：在宏观不确定性背景下，海外和京喜业务投入加速，管理层如何平衡增长与盈利？2026年新业务投入预期如何？对集团利润的影响？Q2：Ceconomy收购进展和时间线？Joybuy的战略定位和集团协同效应？」</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-qa-label ec-qa-a">💬 CFO 单因回应（投资与盈利平衡）</div>
+      <div class="ec-quote">「从长期视角看，我们对中国市场和自身发展前景充满信心。基于对市场机遇的判断，我们进行了国际业务、低线市场和即时零售等长期战略投资，同时持续投入R&D和技术。通过增强基础能力和扩大服务范围，我们相信将持续释放新增长机遇，推动长期盈利能力。」</div>
+      <span class="ec-tag tag-neut">📊 中性</span>
+      <div class="ec-note">标准的"长期主义"叙事。投资者真正想听的是具体数字——2026年新业务亏损预算是多少？管理层回避了。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「京东的高个位数长期利润率目标保持不变。京东零售方面，预计2026年将看到零售利润的健康增长，零售的高个位数长期利润率目标也保持不变。核心驱动力：供应链优势带来的产品毛利改善、广告等高毛利业务的强劲增长、超市等品类的利润率提升，以及AI技术驱动的运营效率提升。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">高个位数（7-9%）利润率目标重申，且明确"2026年零售利润健康增长"——这是比较硬的前瞻承诺。如果零售利润+20%以上、新业务减亏，集团利润有望显著修复。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「外卖业务Q4亏损环比收窄约20%，将维持健康规模扩张的同时以运营效率提升和收入增长来收窄亏损率。展望2026，如果行业竞争趋于理性化，我们预计外卖投入将低于2025年水平。」</div>
+      <span class="ec-tag tag-neut">📊 中性偏好</span>
+      <div class="ec-note">减亏20%是积极信号，但"如果竞争理性化"这个条件非常关键。美团正在加大补贴反击，竞争理性化的概率目前看不高。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「国际业务将以可控规模逐步增加投入，保持财务纪律。京喜专注低线市场和非品牌商品供给，在六线及以下城市实现了有意义的渗透提升，提供了与主站差异化的产品供给，拓展了用户增长边界。预计京喜投入会小幅增加，但UE将在2026年继续改善。」</div>
+      <span class="ec-tag tag-neut">📊 中性偏空</span>
+      <div class="ec-note">三条战线（外卖+国际+京喜）同时投入增加——即使每条"小幅增加"，合计也不小。这进一步压制了2026年集团利润恢复的空间。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「Ceconomy交易目前仍在监管审查中，我们会适时更新。Joybuy是我们在欧洲的全品类线上零售平台，定于2026年3月正式上线。基于试运营反馈，用户对性能表现给予了非常正面的评价。G6服务体验将是Joybuy的核心差异化。」</div>
+      <span class="ec-tag tag-neut">📊 中性</span>
+      <div class="ec-note">Ceconomy悬而未决增加不确定性。Joybuy欧洲上线是重大战略举措，但海外电商烧钱强度可能远超预期——参考Temu/Shein的投入力度。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「我们正在欧洲构建自有配送网络。JoyExpress已经上线，在英国、德国、法国和荷兰的主要城市提供次日达和当日达服务，包括上门配送。欢迎分析师和投资者体验我们的服务。」</div>
+      <span class="ec-tag tag-bear">🔴 利空（短期）</span>
+      <div class="ec-note">在欧洲自建配送网络的资本投入巨大——这不是轻资产模式。4个国家同时铺开，未来2-3年将持续产生亏损。长期可能构建壁垒，但短期是纯粹的利润拖累。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「协同效应方面：第一，供应链——帮助中国品牌出海的同时，也将更多高品质全球品牌引入中国市场；第二，物流——随Joybuy扩张，海外零售与物流的协同将进一步强化；第三，技术——京东长期积累的技术专长和基础设施将持续赋能国际业务。」</div>
+      <span class="ec-tag tag-neut">📊 中性</span>
+      <div class="ec-note">协同叙事合理但远未兑现。真正的考验是：欧洲消费者是否为"京东品质"买单？与Amazon、Zalando的正面竞争胜算几何？</div>
+    </div>
+  </div>
+
+  <!-- ━━━ PART 5: Q&A — CITI ━━━ -->
+  <div class="ec-block">
+    <h3>📌 第五部分：Q&A — 花旗（Alicia Yap）</h3>
+
+    <div class="ec-item">
+      <div class="ec-qa-label ec-qa-q">🎤 分析师提问</div>
+      <div class="ec-quote">「Q1：考虑到今年零售销售增速可能放缓，管理层对大众商品GMV和收入增速的预期？在竞争加剧和消费放缓背景下如何继续跑赢？具体差异化领域是什么？Q2：京东如何准备和定位以拥抱即将到来的 Agentic Commerce（AI代理商务）的威胁与机遇？」</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-qa-label ec-qa-a">💬 CEO 许冉回应（AI与代理商务）</div>
+      <div class="ec-quote">「我们将AI赋能商务视为京东进化的重大机遇而非挑战。Agentic Commerce仍处于早期阶段，目前主要影响前端用户流量。我们的观点是：无论流量模式如何变化，零售业的核心仍然是用户体验、成本与效率。因此只要我们持续优化产品、价格和服务，京东的供应链优势将在AI时代产生更大的协同效应，进一步拉宽我们的竞争护城河。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">对AI的定位非常正确——流量入口可能变，但"交付能力"不会被AI颠覆。1P自营+自建物流的"重模式"在AI代理时代反而是优势（因为AI需要可靠的履约后端）。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「我们正在加速技术投入，推动自研大语言模型的落地应用，同时保持开放生态，积极与行业领先的外部AI大模型提供商合作。我们正在演变为一家横跨供应链到客户全链条的领先科技商业公司。」</div>
+      <span class="ec-tag tag-neut">📊 中性</span>
+      <div class="ec-note">自研LLM+开放合作的两手策略合理。但"科技商业公司"的愿景需要持续高研发投入——这与短期利润恢复存在张力。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「作为拥有自营物流履约服务的1P业务模型，京东的AI应用场景极其丰富——这是与纯平台模型的根本差异。需求侧：AI驱动的搜索和推荐重塑购物旅程、提升用户体验；供给侧：AI持续提升采购、定价、库存管理等环节的效率，替代人工操作；我们还在物理世界扩展应用——履约自动化和售后服务。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">1P+物流的"重模式"在AI时代有独特优势——每个环节（仓储/配送/定价/库存）都有AI降本空间，而纯平台只能在流量端使用AI。这是真正的"飞轮加速"。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「此外，我们正通过AI开拓新的消费潜力——例如JD Insight，我们的硬件AI助手。我之前提到过，搭载JD Insight的智能产品在双11期间的销售额相比618增长了24倍。我们非常有信心能够抓住AI驱动电商的战略机遇，巩固在AI赋能电商领域的领导地位。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">JD Insight产品双11销售增24倍（vs 618）虽然基数可能很小，但增速惊人，显示AI硬件产品有真实的消费者需求。这可能成为新的增长品类。</div>
+    </div>
+  </div>
+
+  <!-- ━━━ PART 6: Q&A — JEFFERIES ━━━ -->
+  <div class="ec-block">
+    <h3>📌 第六部分：Q&A — 杰弗瑞（Thomas Chong）</h3>
+
+    <div class="ec-item">
+      <div class="ec-qa-label ec-qa-q">🎤 分析师提问</div>
+      <div class="ec-quote">「Q1：能否分享股东回报的最新进展？Q2：互联网平台公司的监管环境有什么变化？如何看待？」</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-qa-label ec-qa-a">💬 CFO 单因回应（股东回报）</div>
+      <div class="ec-quote">「尽管2025年进行了长期战略投资，我们仍坚定回报股东。2025年度现金股息为每ADS 1美元，与去年持平，总额约14亿美元。这彰显了我们基于可持续盈利和现金流向股东提供稳定现金回报的承诺。此外，2025年回购了30亿美元的股份，占流通股6.3%，截至2024年底所有回购股份已注销。我们将通过健康的业务发展、股息和回购，坚定回报股东。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">利润承压之下仍坚持$1/ADS股息+$3B回购，且全部注销——诚意十足。但需注意：如果2026年FCF继续低迷，这种回报水平不可持续。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-qa-label ec-qa-a">💬 CEO 许冉回应（监管环境）</div>
+      <div class="ec-quote">「监管机构持续推动平台经济的规范化发展和健康发展，确保行业长期可持续性。我们欢迎监管指导。政府支持合规企业发展的承诺没有改变。」</div>
+      <span class="ec-tag tag-neut">📊 中性</span>
+      <div class="ec-note">标准政治正确表态。"政府支持合规企业"的潜台词是：不合规的竞争对手可能面临处罚——对京东间接有利。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「我们认为严格的监管并非约束，而是推动行业高质量发展的催化剂。在规范化监管环境下，合规企业将获得更公平的竞争机会——防止"劣币驱逐良币"。京东一直将合规经营作为基石——无论反垄断措施、税务规范化还是防止非理性竞争，都与京东的长期经营理念完美契合。从长远来看，京东合规可持续商业模式的优势将日益凸显。」</div>
+      <span class="ec-tag tag-bull">🟢 潜在利好</span>
+      <div class="ec-note">明确暗示竞争对手存在不合规行为（"劣币"、"非理性竞争"）。如果外卖行业反垄断监管加强（针对美团），京东是最大受益者。但政策落地的不确定性很高。</div>
+    </div>
+  </div>
+
+  <!-- ━━━ SUMMARY ━━━ -->
+  <div style="background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin-top:16px;">
+    <div style="font-size:14px;font-weight:700;color:var(--accent3);margin-bottom:12px;">📊 电话会议信号汇总</div>
+    <table class="tbl" style="font-size:12.5px;">
+      <thead><tr><th>信号类别</th><th>数量</th><th>代表性内容</th></tr></thead>
+      <tbody>
+        <tr><td><span class="ec-tag tag-bull" style="font-size:11px;">🟢 利好</span></td><td style="color:var(--green);font-weight:700;">12项</td><td>用户+30%/频次+40%、零售6年利润扩张、广告双位数、AI应用场景、股东回报$4.4B、YTD2026改善</td></tr>
+        <tr><td><span class="ec-tag tag-neut" style="font-size:11px;">📊 中性</span></td><td style="color:var(--accent2);font-weight:700;">14项</td><td>外卖差异化但烧钱、3C恢复推迟至H2、欧洲战略远未兑现、七鲜50门店规模有限、"长期战略"措辞模糊</td></tr>
+        <tr><td><span class="ec-tag tag-bear" style="font-size:11px;">🔴 利空</span></td><td style="color:var(--red);font-weight:700;">4项</td><td>Q4净利率仅0.3%、FCF暴跌85%、新业务单季亏$2.1B、欧洲自建配送烧钱</td></tr>
+      </tbody>
+    </table>
+    <div style="font-size:12px;color:var(--text2);margin-top:10px;line-height:1.6;">
+      <strong>总体基调：</strong>管理层以"长期战略投入换短期利润牺牲"为核心叙事。核心零售基盘扎实（利好主导），但集团层面被新业务亏损严重拖累（利空集中在此）。2026年的关键变量：外卖减亏速度 + 3C品类恢复节奏 + 三条新战线的投入纪律。
+    </div>
+  </div>
+</section>
+
+<!-- ═══ S7: FORWARD PE ═══ -->
+<section class="section">
+  <div class="stitle">公司展望 & 预测市盈率</div>
+  <div class="agrid">
+    <div class="acard">
+      <h4>📊 管理层 2026 指引</h4>
+      <ul>
+        <li>大众商品维持双位数增长</li>
+        <li>3C家电：H1 高基数持续，H2 回暖</li>
+        <li>广告维持快速增长</li>
+        <li>外卖投入预计低于 2025</li>
+        <li>零售利润 2026 健康增长</li>
+        <li>长期目标：高个位数净利率</li>
+      </ul>
+    </div>
+    <div class="acard">
+      <h4>📈 Forward P/E 三情景（保守框架）</h4>
+      <ul>
+        <li><strong>乐观</strong>（外卖减亏60%+3C回暖）→ 2026E 净利 ~$4.0B → P/E <span style="color:var(--green)">~9.5x</span></li>
+        <li><strong style="color:var(--accent3)">中性</strong>（外卖减亏30%）→ 2026E 净利 ~$2.5B → P/E <span style="color:var(--gold)">~15.2x</span></li>
+        <li><strong>悲观</strong>（外卖不减+竞争加剧）→ 2026E 净利 ~$1.5B → P/E <span style="color:var(--red)">~25x</span></li>
+        <li>本报告 DCF 采用<strong>中性偏保守</strong>情景</li>
+        <li>同行参考：BABA ~9x; PDD ~8x; AMZN ~35x</li>
+        <li>中性 15x 不算贵也不便宜，<strong>不构成"极低估"</strong></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ S8: BUFFETT ANALYSIS ═══ -->
+<section class="section">
+  <div class="stitle">巴菲特逐项财务分析</div>
+
+  <div class="bscore"><div class="circle cg">A</div><div class="bd">
+    <h4>护城河：自建供应链 + 物流（强）</h4>
+    <p>覆盖95%区域次日达的自建仓配体系，10年+数千亿堆砌的资产壁垒，几乎不可复制。广告收入连续双位数增长强化双边网络效应。</p>
+  </div></div>
+
+  <div class="bscore"><div class="circle cg">B+</div><div class="bd">
+    <h4>管理层：诚实 + 股东友好</h4>
+    <p>利润下滑仍维持 $1/ADS 股息 + $3B 回购（全部注销）。电话会坦承 FCF 下滑原因，未粉饰。外卖季度减亏20%兑现承诺。</p>
+  </div></div>
+
+  <div class="bscore"><div class="circle cw">B-</div><div class="bd">
+    <h4>财务健康：现金充裕但 FCF 恶化严重</h4>
+    <p>现金 $32.1B ≈ 市值 $37.9B（接近"净现金买生意"）。但 2025 FCF 仅 $0.93B（-85% YoY），且衰退加速——Q4 经营层面已转亏。库存周转延长至37.8天（+6.3天YoY）也是负面信号。管理层归因于以旧换新垫付 + 外卖，需关注 H1 2026 是否真正改善。</p>
+  </div></div>
+
+  <div class="bscore"><div class="circle cw">B</div><div class="bd">
+    <h4>盈利质量：核心稳定但被新业务严重拖累</h4>
+    <p>零售利润率 2.7%→4.6%（6年持续扩张）值得肯定。但集团 Q4 Non-GAAP 经营利润转负（-0.9%），新业务单季吞噬全部零售利润。若外卖烧钱超预期，盈利能力被侵蚀的时间可能比市场预期更长。</p>
+  </div></div>
+
+  <div class="bscore"><div class="circle cr">C+</div><div class="bd">
+    <h4>可预测性：核心可见，总体不确定性高</h4>
+    <p>零售基盘（占85%营收）可预测且增长清晰。但外卖竞争（vs 美团）、欧洲扩张（Joybuy/Ceconomy）、Jingxi 低线渗透，三条战线同时打，财务可见度大幅下降。中国监管 + VIE + 地缘政治是巴菲特不喜欢的结构性不确定。</p>
+  </div></div>
+
+  <div class="bscore"><div class="circle cr">C</div><div class="bd">
+    <h4>资本配置纪律：回报不错但烧钱意愿偏高</h4>
+    <p>2025年新业务亏损 ~$5-6B，几乎吃掉核心零售全年利润。管理层承诺2026减少投入，但"取决于竞争动态"留了后门。R&D+人员成本 Q4 YoY +48%，增速过快。巴菲特更偏好"把钱还给股东"而非"投入一场胜负未卜的战争"。</p>
+  </div></div>
+
+  <!-- ━━━ FCF FORECAST: THREE SCENARIOS ━━━ -->
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:22px;margin:18px 0;box-shadow:0 1px 4px var(--shadow);">
+    <div class="stitle" style="font-size:15px;margin-bottom:4px;">自由现金流预测 — 三情景对比 (2026E–2030E)</div>
+    <div style="font-size:12px;color:var(--text3);margin-bottom:16px;">单位：亿美元 | 1B = 10亿美元 | 汇率 1 USD ≈ 7.0 RMB</div>
+
+    <!-- OPTIMISTIC -->
+    <div style="border:1px solid var(--green);border-radius:8px;padding:16px;margin-bottom:14px;">
+      <div style="font-size:13px;font-weight:700;color:var(--green);margin-bottom:4px;">🟢 乐观情景 — 外卖减亏60%/年、核心零售FCF增速12-15%、以旧换新一年消退</div>
+      <div style="font-size:11.5px;color:var(--text3);margin-bottom:10px;">假设：外卖竞争快速理性化，3C品类H2 2026强劲反弹，广告收入加速</div>
+      <table class="tbl" style="font-size:12px;">
+        <thead><tr><th>年份</th><th>核心零售FCF</th><th>外卖</th><th>其他新业务</th><th>综合FCF</th></tr></thead>
+        <tbody>
+          <tr class="hl"><td>2025A（实绩）</td><td>65亿</td><td>-21亿</td><td>-35亿</td><td>9.3亿</td></tr>
+          <tr><td>2026E</td><td>75亿</td><td>-8.4亿</td><td>-15亿</td><td>51.6亿</td></tr>
+          <tr><td>2027E</td><td>87亿</td><td>-3.4亿</td><td>-6亿</td><td>77.6亿</td></tr>
+          <tr><td>2028E</td><td>100亿</td><td>-1.3亿</td><td>+2亿</td><td>100.7亿</td></tr>
+          <tr><td>2029E</td><td>115亿</td><td>持平</td><td>+7亿</td><td>122亿</td></tr>
+          <tr><td>2030E</td><td>130亿</td><td>+3亿</td><td>+12亿</td><td>145亿</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- NEUTRAL -->
+    <div style="border:1px solid var(--gold);border-radius:8px;padding:16px;margin-bottom:14px;">
+      <div style="font-size:13px;font-weight:700;color:var(--gold);margin-bottom:4px;">📊 中性情景 — 外卖减亏30%/年、核心零售FCF增速8-10%、以旧换新两年消退</div>
+      <div style="font-size:11.5px;color:var(--text3);margin-bottom:10px;">假设：外卖竞争缓慢降温，3C品类温和恢复，整体大盘平稳</div>
+      <table class="tbl" style="font-size:12px;">
+        <thead><tr><th>年份</th><th>核心零售FCF</th><th>外卖</th><th>其他新业务</th><th>综合FCF</th></tr></thead>
+        <tbody>
+          <tr class="hl"><td>2025A（实绩）</td><td>65亿</td><td>-21亿</td><td>-35亿</td><td>9.3亿</td></tr>
+          <tr><td>2026E</td><td>68亿</td><td>-14.7亿</td><td>-20亿</td><td>33.3亿</td></tr>
+          <tr><td>2027E</td><td>73亿</td><td>-10.3亿</td><td>-12亿</td><td>50.7亿</td></tr>
+          <tr><td>2028E</td><td>79亿</td><td>-7.2亿</td><td>-5亿</td><td>66.8亿</td></tr>
+          <tr><td>2029E</td><td>86亿</td><td>-5亿</td><td>+1亿</td><td>82亿</td></tr>
+          <tr><td>2030E</td><td>93亿</td><td>-3.5亿</td><td>+5亿</td><td>94.5亿</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- PESSIMISTIC -->
+    <div style="border:1px solid var(--red);border-radius:8px;padding:16px;">
+      <div style="font-size:13px;font-weight:700;color:var(--red);margin-bottom:4px;">🔴 悲观情景 — 外卖不减反增、核心零售FCF增速3-5%、宏观消费降级</div>
+      <div style="font-size:11.5px;color:var(--text3);margin-bottom:10px;">假设：美团强力反击外卖价格战升级，3C持续疲软，欧洲扩张烧钱超预期</div>
+      <table class="tbl" style="font-size:12px;">
+        <thead><tr><th>年份</th><th>核心零售FCF</th><th>外卖</th><th>其他新业务</th><th>综合FCF</th></tr></thead>
+        <tbody>
+          <tr class="hl"><td>2025A（实绩）</td><td>65亿</td><td>-21亿</td><td>-35亿</td><td>9.3亿</td></tr>
+          <tr><td>2026E</td><td>62亿</td><td>-25亿</td><td>-25亿</td><td>12亿</td></tr>
+          <tr><td>2027E</td><td>64亿</td><td>-22亿</td><td>-20亿</td><td>22亿</td></tr>
+          <tr><td>2028E</td><td>67亿</td><td>-18亿</td><td>-15亿</td><td>34亿</td></tr>
+          <tr><td>2029E</td><td>69亿</td><td>-14亿</td><td>-10亿</td><td>45亿</td></tr>
+          <tr><td>2030E</td><td>71亿</td><td>-10亿</td><td>-6亿</td><td>55亿</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- FCF FORECAST CHART -->
+  <div class="ccard" style="margin-bottom:18px;">
+    <div class="ctitle">三情景 FCF 对比（亿美元）</div>
+    <div style="position:relative;height:260px;"><canvas id="c8"></canvas></div>
+  </div>
+</section>
+
+<!-- ═══ S9: DCF THREE SCENARIOS ═══ -->
+<section class="section">
+  <div class="stitle">DCF 折现估值 — 三情景对比</div>
+
+  <div style="font-size:12px;color:var(--text3);margin-bottom:16px;">共同假设：流通ADS ~14亿股 | 年末现金 321亿美元 | 净债务 ~30亿美元 | 单位：亿美元</div>
+
+  <!-- Three scenario cards -->
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:18px;">
+
+    <!-- OPTIMISTIC -->
+    <div class="acard" style="border-top:3px solid var(--green);">
+      <h4 style="color:var(--green);">🟢 乐观情景</h4>
+      <ul style="font-size:12.5px;">
+        <li>折现率：<strong>10%</strong></li>
+        <li>永续增长：<strong>3%</strong></li>
+        <li>地缘折扣：<strong>-20%</strong></li>
+        <li>5年FCF现值：<strong>312亿</strong></li>
+        <li>终值现值：<strong>1,083亿</strong></li>
+        <li>EV：<strong>1,395亿</strong></li>
+        <li>+现金-债务：<strong>1,686亿</strong></li>
+        <li>地缘折扣后：<strong>1,349亿</strong></li>
+        <li style="font-weight:700;color:var(--green);">每ADS：~$96.3</li>
+        <li>vs当前$27.10 → <strong>折价72%</strong></li>
+      </ul>
+    </div>
+
+    <!-- NEUTRAL -->
+    <div class="acard" style="border-top:3px solid var(--gold);">
+      <h4 style="color:var(--gold);">📊 中性情景（基准）</h4>
+      <ul style="font-size:12.5px;">
+        <li>折现率：<strong>12%</strong></li>
+        <li>永续增长：<strong>2.5%</strong></li>
+        <li>地缘折扣：<strong>-30%</strong></li>
+        <li>5年FCF现值：<strong>202亿</strong></li>
+        <li>终值现值：<strong>538亿</strong></li>
+        <li>EV：<strong>740亿</strong></li>
+        <li>+现金-债务：<strong>1,031亿</strong></li>
+        <li>地缘折扣后：<strong>722亿</strong></li>
+        <li style="font-weight:700;color:var(--gold);">每ADS：~$51.5</li>
+        <li>vs当前$27.10 → <strong>折价47%</strong></li>
+      </ul>
+    </div>
+
+    <!-- PESSIMISTIC -->
+    <div class="acard" style="border-top:3px solid var(--red);">
+      <h4 style="color:var(--red);">🔴 悲观情景</h4>
+      <ul style="font-size:12.5px;">
+        <li>折现率：<strong>14%</strong></li>
+        <li>永续增长：<strong>2%</strong></li>
+        <li>地缘折扣：<strong>-40%</strong></li>
+        <li>5年FCF现值：<strong>107亿</strong></li>
+        <li>终值现值：<strong>235亿</strong></li>
+        <li>EV：<strong>342亿</strong></li>
+        <li>+现金-债务：<strong>633亿</strong></li>
+        <li>地缘折扣后：<strong>380亿</strong></li>
+        <li style="font-weight:700;color:var(--red);">每ADS：~$27.1</li>
+        <li>vs当前$27.10 → <strong>折价0%（合理定价）</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Summary table -->
+  <div class="tbl-wrap" style="margin-bottom:18px;">
+    <table class="tbl" style="font-size:13px;">
+      <thead><tr><th>情景</th><th>折现率</th><th>地缘折扣</th><th>每ADS内在价值</th><th>含25%安全垫买入价</th><th>vs 当前$27.10</th></tr></thead>
+      <tbody>
+        <tr><td style="color:var(--green);font-weight:600;">🟢 乐观</td><td>10%</td><td>-20%</td><td style="color:var(--green);font-weight:700;">$96.3</td><td>$72.2</td><td style="color:var(--green)">折价72%</td></tr>
+        <tr class="hl"><td style="color:var(--gold);font-weight:600;">📊 中性（基准）</td><td>12%</td><td>-30%</td><td style="color:var(--gold);font-weight:700;">$51.5</td><td>$38.6</td><td style="color:var(--green)">折价47%</td></tr>
+        <tr><td style="color:var(--red);font-weight:600;">🔴 悲观</td><td>14%</td><td>-40%</td><td style="color:var(--red);font-weight:700;">$27.1</td><td>$20.3</td><td style="color:var(--text3)">合理定价</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- VERDICT -->
+  <div class="verdict">
+    <div class="verdict-t">🎯 三情景综合裁决</div>
+    <div style="line-height:1.8;margin-bottom:14px;">
+      当前股价 $27.10 恰好等于<strong style="color:var(--red)">悲观情景下的内在价值</strong>——这意味着市场已经按最差情况定价。如果现实好于最差假设（外卖至少部分减亏、核心零售保持稳定），当前价格就具备安全边际。但如果现实更差（外卖失控+宏观恶化），仍有下行空间至悲观情景含安全垫的 $20.3。
+    </div>
+    <div class="pgrid">
+      <div class="pbox"><div class="pl">当前市场价</div><div class="pv pc">$27.10</div><div class="pn">= 悲观DCF</div></div>
+      <div class="pbox"><div class="pl">中性DCF内在价值</div><div class="pv pf">$51.5</div><div class="pn">12%折现+30%地缘折扣</div></div>
+      <div class="pbox"><div class="pl">中性含安全垫买入价</div><div class="pv ps">$38.6</div><div class="pn">巴菲特式目标价</div></div>
+    </div>
+    <div style="background:rgba(185,160,106,.1);border:1px solid rgba(185,160,106,.3);border-radius:8px;padding:14px;">
+      <div style="color:var(--gold);font-weight:700;margin-bottom:6px;">⚖️ 结论：有条件买入（Conditional Buy）</div>
+      <div style="font-size:13px;line-height:1.8;">
+        <strong>核心判断：市场已按悲观定价，赔率有利但需验证。</strong><br><br>
+        ① 悲观情景 = 当前股价 → 下行空间约 -25%（至$20.3安全垫价）<br>
+        ② 中性情景 → 上行空间约 +90%（至$51.5）<br>
+        ③ 乐观情景 → 上行空间约 +255%（至$96.3）<br><br>
+        <strong>风险收益比：</strong>下行25% vs 上行90-255%，赔率约1:4至1:10 → <span style="color:var(--green);font-weight:600;">赔率有利</span><br><br>
+        <strong>操作建议：</strong><br>
+        • 当前价建观察仓（组合2-3%），等Q1 2026季报验证FCF止跌<br>
+        • 若FCF恢复至40亿+美元年化 → 加仓至5-8%<br>
+        • 若跌至$20附近（悲观安全垫）且基本面未恶化 → 加仓至8-12%<br>
+        • 若外卖亏损扩大+FCF继续恶化 → 止损认错<br><br>
+        <span style="color:var(--red)">⚠️ 风险：外卖价格战升级 / VIE法律风险 / 中美关系恶化 / 管理层烧钱纪律失控 / 宏观消费降级</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ S10: COMMENTARY ═══ -->
+<section class="section">
+  <div class="stitle">🍔 巴菲特风格深度点评</div>
+  <div class="cmt">
+    <p>我这辈子见过很多"看起来便宜"的公司。其中一半后来确实涨了，另一半告诉我一个道理：<span class="hl-t">便宜有时候是有原因的</span>。</p>
+
+    <p>京东属于哪一类？让我拆开看。</p>
+
+    <p>首先，好的部分。321亿美元现金 vs 379亿美元市值，几乎是<span class="hl-t">"零价格买一座仓储帝国"</span>。京东零售连续六年利润率扩张，从2.7%走到4.6%，这不是运气，是供应链效率持续磨出来的。广告收入每季双位数增长，说明平台从"卖货赚差价"向"收广告费"的高毛利模式在成功转型。7亿年活跃用户，购物频次+40%——这些是真实的护城河数据。</p>
+
+    <p>然后是让我不安的部分。</p>
+
+    <p><span class="warn-t">Q4集团经营利润转负。不是微利，是亏损。</span>这在京东历史上极少见。原因很清楚：外卖业务单季烧掉21亿美元。管理层说"2026年投入会下降"，但原话留了一个大后门——"取决于市场竞争动态"。翻译过来就是：如果美团反击，我们会继续烧。</p>
+
+    <p>FCF从63亿美元暴跌至9.3亿美元，跌幅85%。管理层解释说是以旧换新垫付（一次性）和外卖投入。我愿意相信以旧换新是一次性的，但外卖？这可能是一场持续3-5年的战争。同时库存周转从31.5天恶化到37.8天，应收从5.9天升到8.7天——这些细节说明底层运营效率在下降，不只是新业务拖累。</p>
+
+    <p>更值得深思的是：<span class="warn-t">R&D + 人员成本 Q4 同比涨了48%</span>。研发投入是好事，但在利润缩水的时候加速花钱，说明管理层对"增长"的渴望远大于对"利润"的节制。老巴最怕的就是这种——管理层优秀但控制不住花钱的手。</p>
+
+    <p>我做了三套DCF：乐观$96、中性$51.5、悲观$27.1。有趣的是，<span class="hl-t">当前股价$27.10恰好等于悲观情景的内在价值</span>——市场已经按"一切都会出错"的假设定价了。这意味着：如果现实哪怕比最差稍好一点，你就有赚头。中性情景上行90%、乐观上行255%，而下行（到悲观含安全垫的$20.3）约25%。赔率大约1:4到1:10——这是我喜欢的不对称赌注。</p>
+
+    <p>但我不会把全副身家押上去。如果H1 2026的数据证明FCF能恢复到40-50亿美元年化水平、外卖亏损确实收窄，那$27就是个真正的好价格。如果数据证伪，$27可能还不是底——悲观安全垫价$20.3才是终极支撑。</p>
+
+    <p><span class="hl-t">我的策略：先买观察仓（组合的2-3%），等Q1 2026季报验证后再决定是否加仓至5-8%。</span>在"便宜"和"价值陷阱"之间，唯一的区分标准是时间给出的证据。不着急，让数据说话。</p>
+
+    <p style="color:var(--text3);font-size:12px;border-top:1px solid var(--border);padding-top:12px;margin-top:8px;">
+      ⚠️ 以上分析仅供研究参考，不构成投资建议。投资有风险，请结合自身风险承受能力做决策。
+    </p>
+  </div>
+</section>
+</div>
+
+<footer>
+  <div>京东集团（NASDAQ: JD）2025 Q4 & 全年深度分析 · V2 保守估值</div>
+  <div style="margin-top:4px;">数据来源：京东IR官方、电话会议文字稿（2026-03-05）</div>
+  <div style="margin-top:4px;">Buffy · AI 巴菲特分析引擎 · 2026-03-06 · 莫兰迪版</div>
+</footer>
+
+<script>
+/* ── THEME ── */
+function toggleTheme() {
+  const h = document.documentElement;
+  h.dataset.theme = h.dataset.theme === 'dark' ? 'light' : 'dark';
+  buildSankey();
+  // Charts auto-adapt via CSS vars for grid; text needs rebuild for full theme sync
+}
+
+/* ── CHART COLORS ── */
+function cc() {
+  const s = getComputedStyle(document.documentElement);
+  return {
+    grid: s.getPropertyValue('--chart-grid').trim() || '#e5ddd5',
+    txt: s.getPropertyValue('--text3').trim() || '#a89f98',
+    accent: s.getPropertyValue('--accent2').trim(),
+    accent3: s.getPropertyValue('--accent3').trim(),
+    green: s.getPropertyValue('--green').trim(),
+    red: s.getPropertyValue('--red').trim(),
+    gold: s.getPropertyValue('--gold').trim(),
+    rose: s.getPropertyValue('--rose').trim(),
+  };
+}
+const C = cc();
+Chart.defaults.color = C.txt;
+Chart.defaults.font.family = "'Segoe UI','PingFang SC',sans-serif";
+
+const QL = ['24Q4','25Q1','25Q2','25Q3','25Q4'];
+
+/* C1: Revenue */
+new Chart(document.getElementById('c1'), {
+  type:'bar', data:{ labels:QL, datasets:[{
+    label:'$B', data:[49.6,43.0,50.9,42.7,50.3],
+    backgroundColor:['#7b8fa0','#7b8fa0','#7b8fa0','#7b8fa0','#8a9a8e'],
+    borderColor:['#7b8fa0','#7b8fa0','#7b8fa0','#7b8fa0','#8a9a8e'],
+    borderWidth:1, borderRadius:4
+  }]},
+  options:{ responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{display:false}},
+    scales:{ y:{grid:{color:'rgba(150,140,130,.15)'},ticks:{callback:v=>'$'+v+'B'}}, x:{grid:{display:false}} }
+  }
+});
+
+/* C2: Profit */
+new Chart(document.getElementById('c2'), {
+  type:'bar', data:{ labels:QL, datasets:[{
+    label:'$B', data:[1.61,1.82,1.06,0.83,0.155],
+    backgroundColor:['#b9a06a','#b9a06a','#b9a06a','#b9a06a','#b87070'],
+    borderWidth:1, borderRadius:4
+  }]},
+  options:{ responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{display:false}},
+    scales:{ y:{grid:{color:'rgba(150,140,130,.15)'},ticks:{callback:v=>'$'+v+'B'}}, x:{grid:{display:false}} }
+  }
+});
+
+/* C3: Segment YoY */
+new Chart(document.getElementById('c3'), {
+  type:'bar', data:{ labels:['大众商品','广告平台','物流服务','总营收','3C家电','产品收入'],
+    datasets:[{ label:'YoY%', data:[12.1,15.0,23.6,1.5,-12.0,-2.8],
+      backgroundColor: [12.1,15.0,23.6,1.5,-12.0,-2.8].map(v=>v>=0?'#8a9a8e':'#b87070'),
+      borderWidth:1, borderRadius:4
+    }]},
+  options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{display:false}},
+    scales:{ x:{grid:{color:'rgba(150,140,130,.15)'},ticks:{callback:v=>v+'%'}}, y:{grid:{display:false}} }
+  }
+});
+
+/* C4: Annual */
+new Chart(document.getElementById('c4'), {
+  type:'bar', data:{ labels:['2020','2021','2022','2023','2024','2025'],
+    datasets:[
+      { label:'营收(RMBB)', data:[745.8,951.6,1046.2,1084.7,1158.8,1309.1], backgroundColor:'rgba(123,143,160,.5)', borderColor:'#7b8fa0', borderWidth:1, borderRadius:4, yAxisID:'y' },
+      { label:'FCF(RMBB)', data:[20.5,44.8,42.6,43.7,44.0,6.5], type:'line', borderColor:'#b9a06a', pointBackgroundColor:'#b9a06a', pointRadius:5, tension:.3, yAxisID:'y1', fill:false }
+    ]},
+  options:{ responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{position:'top',labels:{boxWidth:10}}},
+    scales:{
+      y:{grid:{color:'rgba(150,140,130,.15)'},ticks:{callback:v=>v+'B'},position:'left'},
+      y1:{grid:{display:false},ticks:{callback:v=>v+'B'},position:'right'},
+      x:{grid:{display:false}}
+    }
+  }
+});
+
+/* C5: Margin */
+new Chart(document.getElementById('c5'), {
+  type:'line', data:{ labels:QL, datasets:[
+    { label:'经营利润率', data:[3.0,3.9,0.3,0.1,-0.9], borderColor:'#7b8fa0', backgroundColor:'rgba(123,143,160,.1)', fill:true, tension:.4, pointRadius:5 },
+    { label:'净利率', data:[3.3,4.2,2.1,1.9,0.3], borderColor:'#8a9a8e', backgroundColor:'rgba(138,154,142,.1)', fill:true, tension:.4, pointRadius:5 }
+  ]},
+  options:{ responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{position:'top',labels:{boxWidth:10}}},
+    scales:{ y:{grid:{color:'rgba(150,140,130,.15)'},ticks:{callback:v=>v+'%'}}, x:{grid:{display:false}} }
+  }
+});
+
+/* C6: Pie */
+new Chart(document.getElementById('c6'), {
+  type:'doughnut', data:{ labels:['京东零售','京东物流','新兴业务'],
+    datasets:[{ data:[43.1,9.1,9.1], backgroundColor:['#7b8fa0','#8a9a8e','#b9a06a'], borderColor:['#7b8fa0','#8a9a8e','#b9a06a'], borderWidth:2 }]},
+  options:{ responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{position:'bottom',labels:{boxWidth:10,font:{size:11}}}, tooltip:{callbacks:{label:c=>c.label+': $'+c.raw+'B'}} }, cutout:'62%' }
+});
+
+/* C7: Return */
+new Chart(document.getElementById('c7'), {
+  type:'bar', data:{ labels:['股息','回购','合计'],
+    datasets:[{ label:'$B', data:[1.4,3.0,4.4], backgroundColor:['#8a9a8e','#b9a06a','#7b8fa0'], borderWidth:1, borderRadius:6 }]},
+  options:{ responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{display:false}},
+    scales:{ y:{grid:{color:'rgba(150,140,130,.15)'},ticks:{callback:v=>'$'+v+'B'}}, x:{grid:{display:false}} }
+  }
+});
+
+/* C8: FCF Three Scenarios */
+new Chart(document.getElementById('c8'), {
+  type:'line', data:{ labels:['2025A','2026E','2027E','2028E','2029E','2030E'],
+    datasets:[
+      { label:'乐观', data:[9.3,51.6,77.6,100.7,122,145], borderColor:'#7a9a7a', backgroundColor:'rgba(122,154,122,.08)', fill:true, tension:.3, pointRadius:5, borderWidth:2 },
+      { label:'中性', data:[9.3,33.3,50.7,66.8,82,94.5], borderColor:'#b9a06a', backgroundColor:'rgba(185,160,106,.08)', fill:true, tension:.3, pointRadius:5, borderWidth:2 },
+      { label:'悲观', data:[9.3,12,22,34,45,55], borderColor:'#b87070', backgroundColor:'rgba(184,112,112,.08)', fill:true, tension:.3, pointRadius:5, borderWidth:2 }
+    ]},
+  options:{ responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11}}}},
+    scales:{
+      y:{grid:{color:'rgba(150,140,130,.15)'},ticks:{callback:v=>v+'亿'}},
+      x:{grid:{display:false}}
+    }
+  }
+});
+
+/* ── SANKEY ── */
+function buildSankey() {
+  const isDark = document.documentElement.dataset.theme === 'dark';
+  const bg = isDark ? '#2e2a25' : '#ffffff';
+  const fc = isDark ? '#d4ccc4' : '#4a4340';
+  Plotly.newPlot('sankey', [{
+    type:'sankey', orientation:'h',
+    node: {
+      pad:18, thickness:22,
+      line:{ color: isDark?'rgba(74,69,64,.5)':'rgba(200,190,180,.5)', width:1 },
+      label:['净营收$187B','营收成本$157B','毛利润$30B','履约$12.5B','营销$11.8B','R&D$3B','管理$1.3B','经营利润$1.4B','其他收入$3.5B','税前利润$4.9B','税费$1B','净利润$3.9B','运营资金-$2.6B','资本支出-$0.2B','FCF$0.93B'],
+      color:['#7b8fa0','#b87070','#8a9a8e','#b87070','#b87070','#b87070','#b87070','#7b8fa0','#8a9a8e','#7b8fa0','#b87070','#8a9a8e','#b87070','#b87070','#b9a06a']
+    },
+    link: {
+      source:[0,0, 2,2,2,2,2, 7,8, 9,9, 11,11,11],
+      target:[1,2, 3,4,5,6,7, 9,9, 10,11, 12,13,14],
+      value: [157,30, 12.5,11.8,3,1.3,1.4, 1.4,3.5, 1,3.9, 2.6,0.2,1.1],
+      color: [
+        'rgba(184,112,112,.2)','rgba(138,154,142,.3)',
+        'rgba(184,112,112,.2)','rgba(184,112,112,.2)','rgba(184,112,112,.2)','rgba(184,112,112,.2)','rgba(123,143,160,.3)',
+        'rgba(123,143,160,.3)','rgba(138,154,142,.3)',
+        'rgba(184,112,112,.2)','rgba(138,154,142,.3)',
+        'rgba(184,112,112,.2)','rgba(184,112,112,.2)','rgba(185,160,106,.35)'
+      ]
+    }
+  }], {
+    paper_bgcolor:bg, plot_bgcolor:bg,
+    font:{ color:fc, family:"'Segoe UI','PingFang SC',sans-serif", size:12 },
+    margin:{t:8,b:8,l:8,r:8}
+  }, { responsive:true, displayModeBar:false });
+}
+buildSankey();
+</script>
+</body>
+</html>

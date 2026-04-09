@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>lululemon LULU — 2025 Q4 & 全年财报深度分析</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root{--bg:#f5f0eb;--bg2:#ece6df;--card:#fff;--card2:#f8f5f1;--border:#d9d0c7;--text:#4a4340;--text2:#7a706a;--text3:#a89f98;--accent:#8a9a8e;--accent2:#7b8fa0;--accent3:#b08d7a;--rose:#c09090;--gold:#b9a06a;--red:#b87070;--green:#7a9a7a;--shadow:rgba(0,0,0,.06);--chart-grid:#e5ddd5}
+[data-theme="dark"]{--bg:#1e1c1a;--bg2:#28251f;--card:#2e2a25;--card2:#363230;--border:#4a4540;--text:#d4ccc4;--text2:#a09890;--text3:#706860;--accent:#8a9a8e;--accent2:#8fabbf;--accent3:#c9a48e;--rose:#c09090;--gold:#c9b07a;--red:#c08080;--green:#8aaa8a;--shadow:rgba(0,0,0,.3);--chart-grid:#3e3a35}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background:var(--bg);color:var(--text);font-family:'Georgia','Noto Serif SC','PingFang SC','SimSun',serif;line-height:1.75;font-size:14.5px;transition:background .35s,color .35s}a{color:var(--accent2);text-decoration:none}
+.theme-bar{position:sticky;top:0;z-index:100;background:var(--card);border-bottom:1px solid var(--border);padding:8px 24px;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(10px)}.theme-bar .logo{font-size:13px;color:var(--text2);letter-spacing:1px}.theme-toggle{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2)}.toggle-switch{position:relative;width:44px;height:22px;background:var(--border);border-radius:11px;cursor:pointer;transition:background .3s}.toggle-switch::after{content:'';position:absolute;top:2px;left:2px;width:18px;height:18px;background:var(--card);border-radius:50%;transition:transform .3s;box-shadow:0 1px 3px rgba(0,0,0,.15)}[data-theme="dark"] .toggle-switch{background:var(--accent2)}[data-theme="dark"] .toggle-switch::after{transform:translateX(22px)}
+.hero{padding:48px 24px 36px;text-align:center;border-bottom:1px solid var(--border);background:linear-gradient(180deg,var(--card2) 0%,var(--bg) 100%)}.hero-tag{display:inline-block;font-family:'Segoe UI',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);padding:3px 14px;border-radius:20px;margin-bottom:18px}.hero h1{font-size:32px;font-weight:700;color:var(--text);letter-spacing:1px;margin-bottom:8px}.hero-sub{font-size:14px;color:var(--text2);margin-bottom:16px}.hero-pills{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:16px}.pill{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:6px 18px;font-family:'Segoe UI',sans-serif;font-size:13px;color:var(--text2);box-shadow:0 1px 3px var(--shadow)}.pill strong{color:var(--text)}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}.section{padding:36px 0;border-bottom:1px solid var(--border)}.stitle{font-size:18px;font-weight:700;color:var(--accent3);margin-bottom:20px;letter-spacing:.5px;display:flex;align-items:center;gap:10px}.stitle::before{content:'';display:block;width:4px;height:20px;background:var(--accent3);border-radius:2px}
+.snap-grid,.kpi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px}.snap,.kpi,.ccard,.ccard-full,.qcard,.acard,.pbox,.score-card,.source-box,.signal,.verdict,.moat-box{background:var(--card);border:1px solid var(--border);border-radius:10px;box-shadow:0 1px 4px var(--shadow)}.snap,.kpi{padding:16px 18px}.snap-l,.kpi-l,.ctitle{font-family:'Segoe UI',sans-serif;font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}.snap-v,.kpi-v{font-size:20px;font-weight:700;color:var(--text);margin-bottom:3px}.snap-note,.kpi-note{font-size:11px;color:var(--text3)}
+.badge{display:inline-block;font-family:'Segoe UI',sans-serif;font-size:11px;font-weight:600;padding:2px 8px;border-radius:8px}.up{background:rgba(122,154,122,.15);color:var(--green)}.dn{background:rgba(184,112,112,.15);color:var(--red)}.nt{background:rgba(123,143,160,.15);color:var(--accent2)}.nw{background:rgba(185,160,106,.18);color:var(--gold)}
+.alert{border-radius:10px;padding:14px 18px;margin-bottom:16px;font-size:13px;line-height:1.7}.alert-info{background:rgba(122,154,122,.08);border:1px solid var(--green)}.alert-warn{background:rgba(184,112,112,.08);border:1px solid var(--red)}.alert-note{background:rgba(123,143,160,.08);border:1px solid var(--accent2)}
+.tbl-wrap{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow-x:auto;box-shadow:0 1px 4px var(--shadow)}.tbl{width:100%;border-collapse:collapse;font-family:'Segoe UI',sans-serif;font-size:13px}.tbl th{background:var(--card2);color:var(--text3);font-size:11px;letter-spacing:.5px;text-transform:uppercase;padding:10px 14px;text-align:right;border-bottom:1px solid var(--border)}.tbl th:first-child,.tbl td:first-child{text-align:left}.tbl td{padding:9px 14px;border-bottom:1px solid var(--border);text-align:right}.tbl td:first-child{color:var(--text2)}.tbl .hl td{font-weight:600;color:var(--text);background:var(--card2)}.tbl tr:last-child td{border-bottom:none}.pos{color:var(--green);font-weight:600}.neg{color:var(--red);font-weight:600}
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}.ccard,.ccard-full{padding:18px}.ccard-full{margin-bottom:16px}.cwrap{position:relative;height:250px}.qgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.qcard{padding:18px;border-left:4px solid var(--rose)}.qname{font-weight:700;color:var(--accent3);margin-bottom:4px}.qrole{font-family:'Segoe UI',sans-serif;font-size:11px;color:var(--text3);margin-bottom:10px}.qtext{font-size:13.5px;color:var(--text);line-height:1.8}.annotation{margin-top:12px;padding-top:10px;border-top:1px dashed var(--border);font-size:12.5px;color:var(--text2)}.annotation .badge{margin-right:8px}
+.agrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}.acard{padding:18px}.acard h4,.moat-box h4{font-size:13px;color:var(--accent2);margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px}.acard ul{padding-left:18px}.acard li{margin-bottom:6px;font-size:13px}
+.signal-list{display:grid;grid-template-columns:1fr 1fr;gap:12px}.signal{padding:14px 16px;display:flex;gap:12px;align-items:flex-start}.sig-tag{font-family:'Segoe UI',sans-serif;font-size:11px;font-weight:700;padding:3px 10px;border-radius:12px;flex-shrink:0;white-space:nowrap;margin-top:2px}.bull{background:rgba(122,154,122,.18);color:var(--green)}.bear{background:rgba(184,112,112,.18);color:var(--red)}.neutral{background:rgba(185,160,106,.18);color:var(--gold)}
+.score-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.score-card{padding:16px 18px;display:flex;gap:14px;align-items:flex-start}.grade{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;flex-shrink:0;border:3px solid;font-family:'Segoe UI',sans-serif}.cg{border-color:var(--green);color:var(--green)}.cw{border-color:var(--gold);color:var(--gold)}.cr{border-color:var(--red);color:var(--red)}.score-card h4{font-size:14px;margin-bottom:4px}.score-card p{font-size:13px;color:var(--text2);line-height:1.65}
+.moat-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:14px}.moat-box{padding:16px}.pgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:18px 0}.pbox{padding:14px;text-align:center}.pl{font-family:'Segoe UI',sans-serif;font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}.pv{font-family:'Segoe UI',sans-serif;font-size:26px;font-weight:800}.pn{font-size:11px;color:var(--text3);margin-top:3px}.pc{color:var(--text2)}.pf{color:var(--gold)}.ps{color:var(--green)}
+.verdict{padding:24px 28px;background:var(--card2);border:2px solid var(--accent)}.verdict-t{font-size:17px;font-weight:700;color:var(--accent);margin-bottom:10px}.vlist{padding-left:18px;margin-top:12px}.vlist li{margin-bottom:6px;font-size:13.5px}
+#sankey{width:100%;height:470px}.footer{padding:28px 0 42px;text-align:center;color:var(--text3);font-size:12px}
+@media (max-width:960px){.cgrid,.qgrid,.agrid,.score-grid,.moat-grid,.signal-list,.pgrid{grid-template-columns:1fr}}@media (max-width:640px){.hero h1{font-size:25px}.container{padding:0 16px}.theme-bar{padding:8px 16px}}
+</style>
+</head>
+<body>
+<div class="theme-bar"><div class="logo">🍔 BUFFY EARNINGS LAB</div><div class="theme-toggle"><span>Light / Dark</span><div class="toggle-switch" onclick="toggleTheme()"></div></div></div>
+<section class="hero">
+<div class="hero-tag">Q4 2025 · Deep Dive</div>
+<h1>lululemon athletica（NASDAQ: LULU）</h1>
+<div class="hero-sub">2025 Q4 & 全年财报深度分析：高端运动服护城河还在，但北美熄火、关税抽血、利润率塌了一截</div>
+<div class="hero-pills">
+<div class="pill"><strong>股价</strong> $155.72</div>
+<div class="pill"><strong>市值</strong> $18.27B</div>
+<div class="pill"><strong>TTM P/E</strong> 11.7x</div>
+<div class="pill"><strong>净现金</strong> $1.81B</div>
+<div class="pill"><strong>Buffy 评级</strong> 观望 / 有条件关注</div>
+</div>
+</section>
+<div class="container">
+<section class="section">
+<div class="stitle">一、先说结论</div>
+<div class="alert alert-info"><strong>一句话：</strong>LULU 不是坏公司，相反它依然是运动服里最像奢侈消费品的那类优质品牌；但 2025 年的问题已经从“增速放缓”升级成“北美需求 + 产品节奏 + 关税成本”三杀。公司给出的 2026 指引是收入小增、EPS 下滑，说明修复要到 2026 下半年甚至 2027 才能真正验证。</div>
+<div class="alert alert-warn"><strong>核心矛盾：</strong>估值看上去不贵（TTM 11.7x），但这是建立在 2025 EPS $13.26 的基础上；管理层自己已经预告 2026 EPS 只剩 $12.10–$12.30。你现在买的不是“低估成长股”，而是“等待北美业务重启的 turnaround trade”。</div>
+<div class="alert alert-note"><strong>Buffett 视角：</strong>品牌和资产负债表都很漂亮，但当管理层同时讲“full-price 恢复”“库存更健康”“产品更有新意”“下半年转正”，通常意味着上半年的坑还没填平。好公司没错，但好公司也能买贵，更能在修复期里横很久。</div>
+<div class="snap-grid" style="margin-top:18px">
+<div class="snap"><div class="snap-l">FY2025 Revenue</div><div class="snap-v">$11.10B</div><div class="snap-note">+5% YoY</div></div>
+<div class="snap"><div class="snap-l">Q4 Revenue</div><div class="snap-v">$3.64B</div><div class="snap-note">+1% YoY / +6% ex-53rd week</div></div>
+<div class="snap"><div class="snap-l">FY2025 EPS</div><div class="snap-v">$13.26</div><div class="snap-note">vs $14.64 in 2024</div></div>
+<div class="snap"><div class="snap-l">FY2025 FCF</div><div class="snap-v">$0.94B</div><div class="snap-note">同比 -36%，现金转化变差</div></div>
+<div class="snap"><div class="snap-l">Gross Margin</div><div class="snap-v">56.6%</div><div class="snap-note">同比 -260bps</div></div>
+<div class="snap"><div class="snap-l">2026 EPS Guide</div><div class="snap-v">$12.10–12.30</div><div class="snap-note">同比继续下滑</div></div>
+</div>
+</section>
+<section class="section">
+<div class="stitle">二、核心财务快照</div>
+<div class="kpi-grid">
+<div class="kpi"><div class="kpi-l">Q4 可比销售</div><div class="kpi-v">+2%</div><span class="badge nt">看起来还行</span><div class="kpi-note">但 Americas comps -2%，国际在撑场面</div></div>
+<div class="kpi"><div class="kpi-l">Q4 北美收入</div><div class="kpi-v">Flat CC</div><span class="badge dn">偏弱</span><div class="kpi-note">美国收入 -1%，加拿大 +3%</div></div>
+<div class="kpi"><div class="kpi-l">Q4 中国大陆</div><div class="kpi-v">+28%</div><span class="badge up">亮点</span><div class="kpi-note">comps +26%，外套和 lounge 表现强</div></div>
+<div class="kpi"><div class="kpi-l">Q4 数字渠道</div><div class="kpi-v">$1.9B</div><span class="badge up">占比过半</span><div class="kpi-note">同比 +9%</div></div>
+<div class="kpi"><div class="kpi-l">Q4 毛利率</div><div class="kpi-v">54.9%</div><span class="badge dn">大幅下滑</span><div class="kpi-note">同比 -550bps，主因关税+折扣</div></div>
+<div class="kpi"><div class="kpi-l">Q4 经营利润率</div><div class="kpi-v">22.3%</div><span class="badge dn">降得凶</span><div class="kpi-note">vs 28.9% last year</div></div>
+<div class="kpi"><div class="kpi-l">期末库存</div><div class="kpi-v">$1.70B</div><span class="badge nw">需盯</span><div class="kpi-note">金额 +18%，件数 +6%</div></div>
+<div class="kpi"><div class="kpi-l">全年回购</div><div class="kpi-v">$1.2B</div><span class="badge nt">股东友好</span><div class="kpi-note">但均价偏高，时点一般</div></div>
+<div class="kpi"><div class="kpi-l">现金</div><div class="kpi-v">$1.81B</div><span class="badge up">安全</span><div class="kpi-note">几乎零资产负债表压力</div></div>
+<div class="kpi"><div class="kpi-l">门店总数</div><div class="kpi-v">811</div><span class="badge nt">继续扩张</span><div class="kpi-note">全年净增 44 家</div></div>
+</div>
+</section>
+<section class="section">
+<div class="stitle">三、五个季度趋势：问题不是收入塌，而是利润率塌</div>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>指标</th><th>Q4'24</th><th>Q1'25</th><th>Q2'25</th><th>Q3'25</th><th>Q4'25</th></tr></thead><tbody>
+<tr><td>营收 ($B)</td><td>3.61</td><td>2.40</td><td>2.50</td><td>2.60</td><td>3.64</td></tr>
+<tr><td>同比增速</td><td>+13%</td><td>+7%</td><td>+7%</td><td>+7%</td><td>+1%</td></tr>
+<tr><td>可比销售</td><td>+3%</td><td>+1%</td><td>+1%</td><td>+1% / +2% CC</td><td>+3% / +2% CC</td></tr>
+<tr><td>毛利率</td><td>60.4%</td><td>58.3%</td><td>58.5%</td><td>55.6%</td><td>54.9%</td></tr>
+<tr><td>经营利润率</td><td>28.9%</td><td>18.5%</td><td>20.7%</td><td>17.0%</td><td>22.3%</td></tr>
+<tr><td>稀释 EPS ($)</td><td>6.14</td><td>2.60</td><td>3.10</td><td>2.59</td><td>5.01</td></tr>
+<tr><td>库存 ($B)</td><td>1.44</td><td>1.70</td><td>1.70</td><td>2.00</td><td>1.70</td></tr>
+<tr class="hl"><td>核心判断</td><td colspan="5">营收仍在长，但毛利率从 60%+ 一路被打到 55% 附近，利润杠杆明显反向工作</td></tr>
+</tbody></table></div>
+</section>
+<section class="section">
+<div class="stitle">四、图表：North America 熄火，International 在救场</div>
+<div class="cgrid">
+<div class="ccard"><div class="ctitle">季度营收与同比</div><div class="cwrap"><canvas id="revChart"></canvas></div></div>
+<div class="ccard"><div class="ctitle">季度利润率走势</div><div class="cwrap"><canvas id="marginChart"></canvas></div></div>
+</div>
+<div class="cgrid">
+<div class="ccard"><div class="ctitle">年度收入 / EPS / FCF</div><div class="cwrap"><canvas id="annualChart"></canvas></div></div>
+<div class="ccard"><div class="ctitle">2025 区域与渠道信号</div><div class="cwrap"><canvas id="mixChart"></canvas></div></div>
+</div>
+<div class="ccard-full"><div class="ctitle">FY2025 现金流桑基图：Revenue 没问题，利润和现金流被关税 + 折扣 + 投入侵蚀</div><div id="sankey"></div></div>
+</section>
+<section class="section">
+<div class="stitle">五、怎么理解这份财报</div>
+<div class="signal-list">
+<div class="signal"><span class="sig-tag bull">利好</span><div><strong>品牌并没塌。</strong> 美国仍是 women’s activewear 第一品牌，会员/留存/参与度仍稳，这说明消费者没把它从衣柜里删掉，只是最近掏钱包没那么痛快。</div></div>
+<div class="signal"><span class="sig-tag bull">利好</span><div><strong>中国和国际化继续兑现。</strong> 中国大陆 Q4 收入 +28%，Rest of World +12%，这是 LULU 还能保持中长期成长叙事的关键支柱。</div></div>
+<div class="signal"><span class="sig-tag bear">利空</span><div><strong>北美问题比管理层嘴上说的更深。</strong> 公司反复提“恢复 full-price health”“增加 newness”“减少 markdown”，翻译成人话就是：之前货不够新、打折太多、品牌溢价被自己稀释了。</div></div>
+<div class="signal"><span class="sig-tag bear">利空</span><div><strong>关税不是噪音，是实打实利润杀手。</strong> Q4 毛利率 -550bps，其中关税毛影响 520bps；2026 年还预计 gross tariff impact $380M。你可以靠效率抵一部分，抵不掉全部。</div></div>
+<div class="signal"><span class="sig-tag neutral">中性</span><div><strong>库存表面回落，质量仍要观察。</strong> 期末库存金额 +18%，但件数仅 +6%，说明其中不少是关税/汇率抬高的成本；不过管理层也承认要靠更精简 SKU 和 chase 能力来改善结构。</div></div>
+<div class="signal"><span class="sig-tag neutral">中性</span><div><strong>回购很积极，但 timing 一般。</strong> 全年回购 $1.2B，说明管理层股东友好；但 2025 回购均价显著高于当前股价，资本配置不是神操作。</div></div>
+</div>
+</section>
+<section class="section">
+<div class="stitle">六、电话会议全景：管理层到底讲了什么</div>
+<div class="qgrid">
+<div class="qcard"><div class="qname">1. 行动计划三支柱：产品、激活、企业效率</div><div class="qrole">Meghan Frank / 开场主线</div><div class="qtext">2026 核心不是激进扩张，而是修复北美 full-price 销售、提升产品新意、压低 markdown，并通过 AI/自动化/供应链效率对冲成本。</div><div class="annotation"><span class="badge nt">中性</span> 方向对，但也说明老问题是真存在，不是市场瞎担心。</div></div>
+<div class="qcard"><div class="qname">2. CEO 搜索仍在进行，Chip Bergh 加入董事会</div><div class="qrole">治理 / Board Refresh</div><div class="qtext">公司欢迎前 Levi’s CEO Chip Bergh 加入董事会，同时承认永久 CEO 还在找。</div><div class="annotation"><span class="badge nt">中性</span> 董事会补强是好事，但市场真正要看的是谁来掌舵。</div></div>
+<div class="qcard"><div class="qname">3. 北美首要任务：恢复 full-price sales health</div><div class="qrole">最关键经营目标</div><div class="qtext">2025 年 markdown penetration 过高，2026 要靠新产品、SKU reduction、库存重平衡，把正价销售拉回来，预计 Q2 接近持平、下半年转正。</div><div class="annotation"><span class="badge dn">利空</span> 这基本是在承认 2025 北美靠折扣撑得太多。</div></div>
+<div class="qcard"><div class="qname">4. 产品创新：Unrestricted Power、ShowZero、ThermoZen</div><div class="qrole">产品管线</div><div class="qtext">公司重点推介新面料 PowerLu、无汗显色技术 ShowZero、保暖外套 ThermoZen，以及跑步胶囊系列。</div><div class="annotation"><span class="badge up">利好</span> 对 LULU 这种品牌，创新是命根子；新品真能打，修复就不是空话。</div></div>
+<div class="qcard"><div class="qname">5. 设计语言回归：更少 logo、更聚焦配色、更精简配件</div><div class="qrole">产品重置</div><div class="qtext">未来会减少 logo、收紧色系、缩减小配件 SKU，让货架表达更“像 lululemon”。</div><div class="annotation"><span class="badge up">利好</span> 这是从“堆货”回到“选品”，对高端品牌是对路的。</div></div>
+<div class="qcard"><div class="qname">6. 速度不能牺牲质量</div><div class="qrole">供应链 / 品控</div><div class="qtext">公司希望缩短 go-to-market 周期，但强调不会为提速而牺牲质量标准。</div><div class="annotation"><span class="badge nt">中性</span> 真正难点是：既要快、又要少打折、还要维持 premium 质感。</div></div>
+<div class="qcard"><div class="qname">7. Guest activation：Studio Yet、BNP 网球赛、CNY 活动</div><div class="qrole">营销 / 社群</div><div class="qtext">洛杉矶 Studio Yet 三周快闪课满额；Indian Wells 网球赛快闪店约 2/3 访客是新客。</div><div class="annotation"><span class="badge up">利好</span> LULU 的强项本来就不是打广告，而是把人卷进社区和生活方式里。</div></div>
+<div class="qcard"><div class="qname">8. AI 和自动化已经放进 CapEx 预算</div><div class="qrole">Enterprise Enablement</div><div class="qtext">AI 投入用于 guest-facing 体验、加快 go-to-market、数据底座升级，以及供应链/采购效率提升。</div><div class="annotation"><span class="badge nt">中性</span> 长期可能值钱，但短期更像成本项，不会立刻拯救 EPS。</div></div>
+<div class="qcard"><div class="qname">9. 北美门店陈列重做：低密度、活动分区、SoHo 先试</div><div class="qrole">门店体验</div><div class="qtext">新设计 playbook 已在 SoHo 等店测试：货架更疏、按 run/train/yoga/pilates 分区，提升高级感与可导航性。</div><div class="annotation"><span class="badge up">利好</span> Premium brand 本来就该卖“体验感”，不是把架子塞满。</div></div>
+<div class="qcard"><div class="qname">10. 新款占比从 23% 提到 35%</div><div class="qrole">Q&A：关于 newness 的澄清</div><div class="qtext">35% 指“客人没见过的全新款式”，不是旧款换个颜色糊弄人，同时会配合 SKU reduction。</div><div class="annotation"><span class="badge up">利好</span> 这是最像真正修复信号的一条。</div></div>
+<div class="qcard"><div class="qname">11. 中国大陆继续强，Yo-Yo Ma 春节活动、Wunder Puff 外套带货</div><div class="qrole">国际业务</div><div class="qtext">中国 Q4 表现强于预期，即使受到双 11 提前和春节移位扰动；外套、lounge 是亮点。</div><div class="annotation"><span class="badge up">利好</span> 国际业务还在跑，LULU 至少不是只有北美一条腿。</div></div>
+<div class="qcard"><div class="qname">12. 韩国、米兰、EMEA、印度继续拓展</div><div class="qrole">全球扩张</div><div class="qtext">韩国江南新店反馈好；EMEA 第 100 家店在波兰开出；2026 还计划进入希腊、奥地利、匈牙利、罗马尼亚、印度等 franchise 市场。</div><div class="annotation"><span class="badge up">利好</span> 国际 runway 依旧很长，问题只是国际增速够不够覆盖北美的坑。</div></div>
+<div class="qcard"><div class="qname">13. 关税账单：2025 毛影响 $275M，2026 预计 $380M</div><div class="qrole">财务风险核心</div><div class="qtext">2025 通过效率措施抵掉了 $62M；2026 预计 gross impact $380M，计划抵掉约 $160M。</div><div class="annotation"><span class="badge dn">利空</span> 这不是一阵风，是直接写进全年利润模型里的真成本。</div></div>
+<div class="qcard"><div class="qname">14. 2026 指引：收入 +2%~4%，EPS 反而下滑</div><div class="qrole">全年展望</div><div class="qtext">North America 预计 -1%~ -3%，China +20%，Rest of World mid-teens；但 EPS 只给 $12.10–12.30。</div><div class="annotation"><span class="badge dn">利空</span> 收入还能长，利润先让步，这就不是高景气成长股该有的样子。</div></div>
+<div class="qcard"><div class="qname">15. Q1 指引更难看：EPS 只有 $1.63–1.68</div><div class="qrole">短期压力</div><div class="qtext">公司预计 Q1 经营利润率同比下滑 710bps，North America 中个位数下滑，关税、营销活动和 proxy contest 一起压利润。</div><div class="annotation"><span class="badge dn">利空</span> turnaround 不是明天起飞，而是还要先吃一波苦头。</div></div>
+<div class="qcard"><div class="qname">16. 新店 ROI >100%，回本少于一年</div><div class="qrole">Q&A：门店扩张合理性</div><div class="qtext">新店在北美和国际都实现 >100% ROI，payback <1 年，top stores 销售密度 >$1,400/平方英尺。</div><div class="annotation"><span class="badge up">利好</span> 说明门店扩张还不是乱花钱，至少现有模型能算得过账。</div></div>
+<div class="qcard"><div class="qname">17. 营销费用率大致持平，但结构会更偏体验和达人</div><div class="qrole">Q&A：Marketing</div><div class="qtext">营销 rate of sales 大致稳定，但预算会更多投向 guest activations、合适的 influencers 和 ambassadors。</div><div class="annotation"><span class="badge nt">中性</span> 营销解决不了产品和定价问题，它只能放大好货。</div></div>
+<div class="qcard"><div class="qname">18. 回购仍是首选回报方式</div><div class="qrole">资本配置</div><div class="qtext">2026 回购节奏预计与 2025 类似，指引中没有计入未来回购贡献，账上仍有 $1.2B 授权。</div><div class="annotation"><span class="badge nt">中性</span> 股东友好没问题，但若经营没修复，回购只是把 EPS 伤口包扎得好看一点。</div></div>
+</div>
+</section>
+<section class="section">
+<div class="stitle">七、Buffett 六维打分</div>
+<div class="score-grid">
+<div class="score-card"><div class="grade cg">A-</div><div><h4>护城河（Moat）</h4><p>品牌力、定价权、社区文化、女装功能运动服心智都还在。毛利率虽被压，但 56.6% 这种水平在服装业仍是优等生。</p></div></div>
+<div class="score-card"><div class="grade cw">B</div><div><h4>管理层（Management）</h4><p>电话会对问题讲得算坦诚：北美得修、markdown 太高、要等到下半年甚至 2027 才能完全恢复。但 CEO 空缺、proxy contest、过往回购时点一般，说明治理层面不是满分。</p></div></div>
+<div class="score-card"><div class="grade cg">A</div><div><h4>财务健康（Financial Health）</h4><p>$1.81B 现金、几乎无偿债压力，资产负债表很干净。即便 EPS 下滑，公司也完全有能力继续开店、做科技投入、回购股票。</p></div></div>
+<div class="score-card"><div class="grade cw">B-</div><div><h4>盈利质量（Earnings Quality）</h4><p>盈利是真盈利，但 2025 经营利润率从 23.7% 掉到 19.9%，OCF/净利润也从 125% 降到 101%，FCF 进一步滑到 59%。</p></div></div>
+<div class="score-card"><div class="grade cw">B-</div><div><h4>可预测性（Predictability）</h4><p>国际扩张的确定性还行，但北美 turnaround、关税环境、产品新鲜度、消费者接受度都带来不确定性。</p></div></div>
+<div class="score-card"><div class="grade cw">B-</div><div><h4>资本配置纪律（Capital Discipline）</h4><p>持续回购是优点，新店 ROI 数据也好看；但 2025 高价回购、同时利润率恶化，说明资本配置不是完美 timing machine。</p></div></div>
+</div>
+<div class="moat-grid">
+<div class="moat-box"><h4>Buffy 总分</h4><p><strong>7.6 / 10</strong><br>好公司，阶段性失速，不是结构性崩坏。</p></div>
+<div class="moat-box"><h4>最大看点</h4><p>国际业务 + 产品创新，如果北美正价销售恢复，估值能修。</p></div>
+<div class="moat-box"><h4>最大风险</h4><p>北美恢复慢于预期，关税长期化，EPS 一路被压到 2027。</p></div>
+</div>
+</section>
+<section class="section">
+<div class="stitle">八、估值：便宜吗？没有你想的那么便宜</div>
+<div class="agrid">
+<div class="acard"><h4>相对估值</h4><ul>
+<li>当前股价：<strong>$155.72</strong></li>
+<li>TTM EPS：<strong>$13.26</strong> → TTM P/E <strong>11.7x</strong></li>
+<li>2026E EPS（管理层中位数 $12.20）：Forward P/E <strong>12.8x</strong></li>
+<li>市销率（P/S）：<strong>1.65x</strong></li>
+<li>企业价值 / FCF：<strong>约 17.5x</strong></li>
+<li>自由现金流收益率：<strong>约 5.1%</strong></li>
+</ul></div>
+<div class="acard"><h4>估值解读</h4><ul>
+<li>如果把 LULU 当高质量品牌公司，11~13x PE 看着确实不贵。</li>
+<li>但现在利润率在下滑、2026 EPS 指引继续降，所以不能用过去高景气阶段的高估值硬套。</li>
+<li>市场给低估值，不一定是瞎眼，可能只是它提前把“修复需要时间”折现了。</li>
+<li><strong>这不是一眼便宜，而是要靠经营反转来证明便宜。</strong></li>
+</ul></div>
+</div>
+<div class="tbl-wrap" style="margin-bottom:16px"><table class="tbl"><thead><tr><th>DCF 情景</th><th>EV ($B)</th><th>股权价值 ($B)</th><th>每股价值</th><th>相对现价</th><th>判断</th></tr></thead><tbody>
+<tr><td>乐观</td><td>18.62</td><td>20.43</td><td>$176.69</td><td class="pos">+13.5%</td><td>新品顺利、北美修复较快</td></tr>
+<tr class="hl"><td>中性</td><td>13.61</td><td>15.41</td><td>$133.33</td><td class="neg">-14.4%</td><td>收入小增，利润率慢修</td></tr>
+<tr><td>悲观</td><td>10.11</td><td>11.92</td><td>$103.09</td><td class="neg">-33.8%</td><td>北美修复继续拖，关税难消化</td></tr>
+</tbody></table></div>
+<div class="pgrid">
+<div class="pbox"><div class="pl">当前价格</div><div class="pv pc">$155.72</div><div class="pn">市场给的是“半信半疑”定价</div></div>
+<div class="pbox"><div class="pl">中性内在价值</div><div class="pv pf">$133.33</div><div class="pn">我主线采用的估值</div></div>
+<div class="pbox"><div class="pl">25% 安全边际价</div><div class="pv ps">$100.00</div><div class="pn">真正舒服的捡货区</div></div>
+</div>
+<div class="alert alert-note"><strong>DCF 参数：</strong>基准 FCF $0.94B；乐观/中性/悲观五年 FCF 增速分别为 12→8%、8→5%、4→2%；折现率 10% / 11% / 12%；永续增长率 3.0% / 2.5% / 2.0%。</div>
+</section>
+<section class="section">
+<div class="stitle">九、最终裁决：别急着把瑜伽裤当烟屁股捡</div>
+<div class="verdict"><div class="verdict-t">评级：持有 / 观望（Wait for proof, not promises）</div>
+<p>如果你问我这票能不能买——<strong>能，但不是现在这种“看着便宜就冲”的买法</strong>。LULU 现在最吸引人的地方，是它依然是一家高质量品牌公司，北美问题更像经营偏航，不是品牌彻底废了；最危险的地方，是管理层已经明说修复需要时间，而市场还在等证据。</p>
+<ul class="vlist">
+<li><strong>激进型：</strong>愿意赌 North America 下半年明显改善时，可考虑 <strong>1%–2% 观察仓</strong>。</li>
+<li><strong>稳健型：</strong>等 Q2/Q3 看到 <strong>北美正价销售转正、markdown 同比下降、毛利率企稳</strong> 再加仓。</li>
+<li><strong>理想买点：</strong>$120–$135 开始有吸引力；<strong>$100 左右</strong> 才符合巴菲特式安全边际。</li>
+<li><strong>放弃条件：</strong>若 2026 下半年 North America 仍无改善、库存再度恶化、关税无法被 offset，大概率说明这不是短期 hiccup。</li>
+</ul></div>
+</section>
+<section class="section">
+<div class="stitle">十、我会盯什么验证点</div>
+<div class="signal-list">
+<div class="signal"><span class="sig-tag neutral">验证点</span><div><strong>North America full-price 销售</strong><br>Q2 是否至少接近平、下半年是否明确转正。</div></div>
+<div class="signal"><span class="sig-tag neutral">验证点</span><div><strong>Markdown penetration</strong><br>若 markdown 还在高位，说明所谓 newness 和品牌修复没真正落地。</div></div>
+<div class="signal"><span class="sig-tag neutral">验证点</span><div><strong>毛利率 vs 关税 offset</strong><br>公司说 2026 的 90bps tariff impact “almost all offset”，要看财报里是不是嘴比手快。</div></div>
+<div class="signal"><span class="sig-tag neutral">验证点</span><div><strong>Inventory units</strong><br>库存金额会被关税污染，更关键看 unit growth 能否保持 flat/down slightly。</div></div>
+<div class="signal"><span class="sig-tag neutral">验证点</span><div><strong>国际业务能否持续双位数</strong><br>中国和 Rest of World 不能掉链子，否则北美的坑没人填。</div></div>
+<div class="signal"><span class="sig-tag neutral">验证点</span><div><strong>CEO 继任与 proxy contest</strong><br>治理层稳定后，市场会更愿意给它“修复溢价”。</div></div>
+</div>
+</section>
+<section class="section">
+<div class="stitle">十一、数据来源</div>
+<div class="source-box" style="padding:18px"><ul style="padding-left:18px;font-size:13px;color:var(--text2)">
+<li>lululemon IR：2026-03-17《Fourth Quarter and Full Year Fiscal 2025 Results》</li>
+<li>lululemon Results Center：Q1/Q2/Q3/Q4 2025 与 Q4 2024 财报公告</li>
+<li>Motley Fool：LULU Q4 2025 Earnings Call Transcript（用于电话会整理）</li>
+<li>Yahoo Finance / Google Finance：股价、市值、TTM P/E、shares outstanding 共识数据</li>
+<li>DCF 为 Buffy 自建模型，不是管理层给你的心灵鸡汤</li>
+</ul></div>
+</section>
+<div class="footer">Buffy Earnings Lab · 仅供研究交流，不构成投资建议 · “好公司也可以在错误的价格上变成烂交易。”</div>
+</div>
+<script>
+const chartColors={sage:'#8a9a8e',blue:'#7b8fa0',terracotta:'#b08d7a',rose:'#c09090',gold:'#b9a06a',red:'#b87070',green:'#7a9a7a'};
+function gridColor(){return getComputedStyle(document.documentElement).getPropertyValue('--chart-grid').trim()}function textColor(){return getComputedStyle(document.documentElement).getPropertyValue('--text2').trim()}let charts=[];
+function baseOpts(){return{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:textColor(),font:{family:'Segoe UI'}}},tooltip:{mode:'index',intersect:false}},scales:{x:{ticks:{color:textColor()},grid:{color:gridColor()}},y:{ticks:{color:textColor()},grid:{color:gridColor()}}}}}
+function renderCharts(){charts.forEach(c=>c.destroy());charts=[];
+charts.push(new Chart(document.getElementById('revChart'),{type:'bar',data:{labels:['Q4\'24','Q1\'25','Q2\'25','Q3\'25','Q4\'25'],datasets:[{label:'Revenue ($B)',data:[3.61,2.40,2.50,2.60,3.64],backgroundColor:chartColors.blue,yAxisID:'y'},{label:'YoY %',data:[13,7,7,7,1],type:'line',borderColor:chartColors.terracotta,backgroundColor:chartColors.terracotta,yAxisID:'y1',tension:.3}]},options:{...baseOpts(),scales:{x:{ticks:{color:textColor()},grid:{color:gridColor()}},y:{position:'left',ticks:{color:textColor()},grid:{color:gridColor()}},y1:{position:'right',ticks:{color:textColor(),callback:v=>v+'%'},grid:{display:false}}}}}));
+charts.push(new Chart(document.getElementById('marginChart'),{type:'line',data:{labels:['Q4\'24','Q1\'25','Q2\'25','Q3\'25','Q4\'25'],datasets:[{label:'Gross Margin %',data:[60.4,58.3,58.5,55.6,54.9],borderColor:chartColors.green,backgroundColor:'rgba(122,154,122,.12)',tension:.35,fill:false},{label:'Operating Margin %',data:[28.9,18.5,20.7,17.0,22.3],borderColor:chartColors.red,backgroundColor:'rgba(184,112,112,.12)',tension:.35,fill:false}]},options:baseOpts()}));
+charts.push(new Chart(document.getElementById('annualChart'),{data:{labels:['FY2024','FY2025'],datasets:[{type:'bar',label:'Revenue ($B)',data:[10.59,11.10],backgroundColor:chartColors.blue,yAxisID:'y'},{type:'bar',label:'FCF ($B)',data:[1.47,0.94],backgroundColor:chartColors.green,yAxisID:'y'},{type:'line',label:'Diluted EPS ($)',data:[14.64,13.26],borderColor:chartColors.terracotta,backgroundColor:chartColors.terracotta,yAxisID:'y1',tension:.35}]},options:{...baseOpts(),scales:{x:{ticks:{color:textColor()},grid:{color:gridColor()}},y:{position:'left',ticks:{color:textColor()},grid:{color:gridColor()}},y1:{position:'right',ticks:{color:textColor()},grid:{display:false}}}}}));
+charts.push(new Chart(document.getElementById('mixChart'),{type:'radar',data:{labels:['North America','China Mainland','Rest of World','Digital','Women','Men'],datasets:[{label:'Q4 growth signal',data:[0,28,12,9,7,3],borderColor:chartColors.gold,backgroundColor:'rgba(185,160,106,.18)',pointBackgroundColor:chartColors.gold}]},options:{...baseOpts(),scales:{r:{angleLines:{color:gridColor()},grid:{color:gridColor()},pointLabels:{color:textColor()},ticks:{color:textColor(),backdropColor:'transparent'}}}}}));}
+function renderSankey(){const data=[{type:'sankey',orientation:'h',node:{pad:18,thickness:18,line:{color:'rgba(0,0,0,0.15)',width:.5},label:['Revenue\n11.10','COGS\n4.82','Gross Profit\n6.28','SG&A+Amort\n4.07','Operating Income\n2.21','Tax+Other\n0.63','Net Income\n1.58','Capex\n0.66','FCF\n0.94'],color:['#7b8fa0','#c09090','#8a9a8e','#b9a06a','#b08d7a','#b87070','#8aaa8a','#c09090','#7a9a7a']},link:{source:[0,0,2,2,4,4,6,6],target:[1,2,3,4,5,6,7,8],value:[4.82,6.28,4.07,2.21,0.63,1.58,0.66,0.94],color:['rgba(123,143,160,.35)','rgba(138,154,142,.35)','rgba(185,160,106,.35)','rgba(176,141,122,.35)','rgba(184,112,112,.35)','rgba(122,154,122,.35)','rgba(192,144,144,.35)','rgba(122,154,122,.45)']}}];const layout={margin:{l:10,r:10,t:10,b:10},paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor:'rgba(0,0,0,0)',font:{family:'Segoe UI, sans-serif',size:12,color:textColor()}};Plotly.newPlot('sankey',data,layout,{displayModeBar:false,responsive:true})}
+function toggleTheme(){const html=document.documentElement;const next=html.getAttribute('data-theme')==='dark'?'light':'dark';html.setAttribute('data-theme',next);localStorage.setItem('buffy-theme',next);setTimeout(()=>{renderCharts();renderSankey()},50)}
+(function(){const saved=localStorage.getItem('buffy-theme');if(saved==='dark')document.documentElement.setAttribute('data-theme','dark');renderCharts();renderSankey()})();
+</script>
+</body>
+</html>

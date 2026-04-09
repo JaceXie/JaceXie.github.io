@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>奇富科技 QFIN — Q4 2025 & 全年财报深度分析</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+/* ── MORANDI PALETTE ── */
+:root {
+  --bg:        #f5f0eb;
+  --bg2:       #ece6df;
+  --card:      #ffffff;
+  --card2:     #f8f5f1;
+  --border:    #d9d0c7;
+  --text:      #4a4340;
+  --text2:     #7a706a;
+  --text3:     #a89f98;
+  --accent:    #8a9a8e;
+  --accent2:   #7b8fa0;
+  --accent3:   #b08d7a;
+  --rose:      #c09090;
+  --gold:      #b9a06a;
+  --red:       #b87070;
+  --green:     #7a9a7a;
+  --shadow:    rgba(0,0,0,0.06);
+  --chart-grid:#e5ddd5;
+}
+[data-theme="dark"] {
+  --bg:        #1e1c1a;
+  --bg2:       #28251f;
+  --card:      #2e2a25;
+  --card2:     #363230;
+  --border:    #4a4540;
+  --text:      #d4ccc4;
+  --text2:     #a09890;
+  --text3:     #706860;
+  --accent:    #8a9a8e;
+  --accent2:   #8fabbf;
+  --accent3:   #c9a48e;
+  --rose:      #c09090;
+  --gold:      #c9b07a;
+  --red:       #c08080;
+  --green:     #8aaa8a;
+  --shadow:    rgba(0,0,0,0.3);
+  --chart-grid:#3e3a35;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', 'SimSun', serif;
+  line-height: 1.75;
+  font-size: 14.5px;
+  transition: background .35s, color .35s;
+}
+a { color: var(--accent2); text-decoration: none; }
+
+/* ── THEME TOGGLE ── */
+.theme-bar {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 8px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  transition: background .35s;
+}
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; }
+.theme-toggle {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; color: var(--text2);
+}
+.toggle-switch {
+  position: relative;
+  width: 44px; height: 22px;
+  background: var(--border);
+  border-radius: 11px;
+  cursor: pointer;
+  transition: background .3s;
+}
+.toggle-switch::after {
+  content: '';
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 18px; height: 18px;
+  background: var(--card);
+  border-radius: 50%;
+  transition: transform .3s;
+  box-shadow: 0 1px 3px rgba(0,0,0,.15);
+}
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+
+/* ── HERO ── */
+.hero {
+  padding: 48px 24px 36px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, var(--card2) 0%, var(--bg) 100%);
+}
+.hero-tag {
+  display: inline-block;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 3px 14px;
+  border-radius: 20px;
+  margin-bottom: 18px;
+}
+.hero h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills {
+  display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;
+  margin-top: 16px;
+}
+.pill {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 6px 18px;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 13px;
+  color: var(--text2);
+  box-shadow: 0 1px 3px var(--shadow);
+}
+.pill strong { color: var(--text); }
+
+/* ── LAYOUT ── */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle {
+  font-size: 18px; font-weight: 700; color: var(--accent3);
+  margin-bottom: 20px; letter-spacing: 0.5px;
+  display: flex; align-items: center; gap: 10px;
+}
+.stitle::before {
+  content: ''; display: block; width: 4px; height: 20px;
+  background: var(--accent3); border-radius: 2px;
+}
+
+/* ── SUMMARY BANNER ── */
+.banner-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 20px; }
+.banner-card {
+  border-radius: 12px; padding: 20px 22px;
+  display: flex; flex-direction: column; gap: 6px;
+  box-shadow: 0 2px 8px var(--shadow);
+}
+.banner-ok  { background: rgba(122,154,122,.10); border: 1.5px solid var(--green); }
+.banner-warn{ background: rgba(185,160,106,.10); border: 1.5px solid var(--gold); }
+.banner-bad { background: rgba(184,112,112,.10); border: 1.5px solid var(--red); }
+.banner-icon { font-size: 26px; }
+.banner-title { font-size: 14px; font-weight: 700; font-family: 'Segoe UI', sans-serif; }
+.banner-ok   .banner-title { color: var(--green); }
+.banner-warn .banner-title { color: var(--gold); }
+.banner-bad  .banner-title { color: var(--red); }
+.banner-body { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+/* ── SNAPSHOT GRID ── */
+.snap-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px,1fr)); gap: 14px; margin-bottom: 20px; }
+.snap {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 16px 18px;
+  box-shadow: 0 1px 4px var(--shadow);
+  transition: background .35s;
+}
+.snap-l { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.snap-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.snap-note { font-size: 11px; color: var(--text3); }
+
+/* ── ALERT BOX ── */
+.alert {
+  border-radius: 10px; padding: 14px 18px; margin-bottom: 16px;
+  font-size: 13px; line-height: 1.7;
+}
+.alert-warn { background: rgba(184,112,112,.08); border: 1px solid var(--red); color: var(--text); }
+.alert-info { background: rgba(122,154,122,.08); border: 1px solid var(--green); color: var(--text); }
+.alert-note { background: rgba(123,143,160,.08); border: 1px solid var(--accent2); color: var(--text); }
+
+/* ── KPI ── */
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.kpi {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 16px 18px;
+  box-shadow: 0 1px 4px var(--shadow);
+  transition: background .35s;
+}
+.kpi-l { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.badge {
+  display: inline-block; font-family: 'Segoe UI', sans-serif;
+  font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px;
+}
+.up   { background: rgba(122,154,122,.15); color: var(--green); }
+.dn   { background: rgba(184,112,112,.15); color: var(--red); }
+.nt   { background: rgba(123,143,160,.15); color: var(--accent2); }
+
+/* ── TABLE ── */
+.tbl-wrap {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow);
+}
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI', sans-serif; font-size: 13px; }
+.tbl th {
+  background: var(--card2); color: var(--text3); font-size: 11px;
+  letter-spacing: .5px; text-transform: uppercase;
+  padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border);
+}
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); background: var(--card2); }
+.tbl tr:last-child td { border-bottom: none; }
+.pos { color: var(--green); font-weight: 600; }
+.neg { color: var(--red); font-weight: 600; }
+.one-time { background: rgba(185,160,106,.12); }
+.one-time td { font-style: italic; }
+
+/* ── CHARTS ── */
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.cgrid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow);
+}
+.ccard-full {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow);
+  margin-bottom: 16px;
+}
+.ctitle { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 230px; }
+.cwrap-tall { position: relative; height: 300px; }
+
+/* ── SIGNALS ── */
+.signal-list { list-style: none; padding: 0; }
+.signal-list li {
+  display: flex; align-items: flex-start; gap: 12px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 14px 18px; margin-bottom: 10px;
+  box-shadow: 0 1px 4px var(--shadow);
+  font-size: 13.5px; line-height: 1.7;
+}
+.sig-tag {
+  font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700;
+  padding: 3px 10px; border-radius: 12px; flex-shrink: 0; margin-top: 2px;
+  white-space: nowrap;
+}
+.bull { background: rgba(122,154,122,.18); color: var(--green); }
+.bear { background: rgba(184,112,112,.18); color: var(--red); }
+.neutral { background: rgba(185,160,106,.18); color: var(--gold); }
+
+/* ── BUFFETT SCORE ── */
+.bscore {
+  display: flex; align-items: center; gap: 16px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px 22px; margin-bottom: 12px;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.circle {
+  width: 62px; height: 62px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 18px; flex-shrink: 0;
+  border: 3px solid; font-family: 'Segoe UI', sans-serif;
+}
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 3px; }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+/* ── DCF TABLE ── */
+.dcf-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.dcf-box {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 20px; text-align: center;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.dcf-label { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; }
+.dcf-val { font-family: 'Segoe UI', sans-serif; font-size: 30px; font-weight: 800; margin-bottom: 4px; }
+.dcf-sub { font-size: 12px; color: var(--text3); }
+.dcf-params { font-size: 11px; color: var(--text2); margin-top: 10px; line-height: 1.8; }
+.dcf-opt { color: var(--green); }
+.dcf-mid { color: var(--gold); }
+.dcf-pes { color: var(--red); }
+
+/* ── VERDICT ── */
+.verdict {
+  background: var(--card2); border: 2px solid var(--accent);
+  border-radius: 10px; padding: 26px 28px; margin-bottom: 16px;
+}
+.verdict-t { font-size: 17px; font-weight: 700; color: var(--accent); margin-bottom: 10px; }
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 14px; text-align: center;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.pbox .pl { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.pbox .pv { font-family: 'Segoe UI', sans-serif; font-size: 26px; font-weight: 800; }
+.pbox .pn { font-size: 11px; color: var(--text3); margin-top: 3px; }
+.pc { color: var(--text2); } .pf { color: var(--gold); } .ps { color: var(--green); }
+
+/* ── SANKEY ── */
+#sankey { width: 100%; height: 460px; }
+
+/* ── COMMENTARY ── */
+.cmt {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 26px; line-height: 1.9; font-size: 14.5px;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.cmt p { margin-bottom: 14px; }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+.ok-t  { color: var(--green); font-weight: 600; }
+
+/* ── EARNINGS CALL ── */
+.ec-block {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 0; margin-bottom: 16px;
+  box-shadow: 0 1px 4px var(--shadow); overflow: hidden;
+}
+.ec-block-header {
+  background: var(--card2); border-bottom: 1px solid var(--border);
+  padding: 12px 20px; display: flex; align-items: center; gap: 12px;
+}
+.ec-speaker-name { font-size: 14px; font-weight: 700; color: var(--text); }
+.ec-speaker-role { font-size: 12px; color: var(--text3); font-family: 'Segoe UI', sans-serif; }
+.ec-block-body { padding: 6px 0; }
+.ec-item {
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: flex-start; gap: 14px;
+}
+.ec-item:last-child { border-bottom: none; }
+.ec-item-left { flex-shrink: 0; min-width: 56px; }
+.ec-tag {
+  display: inline-block; font-family: 'Segoe UI', sans-serif;
+  font-size: 10.5px; font-weight: 700; padding: 3px 8px;
+  border-radius: 10px; white-space: nowrap; text-align: center; width: 100%;
+}
+.ec-tag.bull  { background: rgba(122,154,122,.18); color: var(--green); }
+.ec-tag.bear  { background: rgba(184,112,112,.18); color: var(--red); }
+.ec-tag.neutral { background: rgba(185,160,106,.18); color: var(--gold); }
+.ec-tag.strong-bull { background: rgba(122,154,122,.28); color: var(--green); border: 1px solid var(--green); }
+.ec-tag.strong-bear { background: rgba(184,112,112,.28); color: var(--red); border: 1px solid var(--red); }
+
+/* ── CREDIT QUALITY ── */
+.cq-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 20px; }
+.cq-box {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 16px 18px;
+  box-shadow: 0 1px 4px var(--shadow); text-align: center;
+}
+.cq-label { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing:.5px; margin-bottom: 6px; }
+.cq-val { font-size: 26px; font-weight: 800; font-family: 'Segoe UI', sans-serif; }
+.cq-trend { font-size: 12px; color: var(--text3); margin-top: 4px; }
+.cq-bad { color: var(--red); }
+.cq-mid { color: var(--gold); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--card2); border-top: 1px solid var(--border);
+  padding: 24px; text-align: center; color: var(--text3); font-size: 12px;
+  margin-top: 40px;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .cgrid, .cgrid3, .banner-grid, .dcf-grid, .pgrid, .cq-grid { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- THEME BAR -->
+<div class="theme-bar">
+  <span class="logo">QFIN · Q4 2025 FINAL EARNINGS REPORT · 2026-03-18</span>
+  <div class="theme-toggle">
+    <span>浅色</span>
+    <div class="toggle-switch" onclick="toggleTheme()" id="themeToggle"></div>
+    <span>深色</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="container">
+    <div class="hero-tag">实际财报 · 2025年3月17日发布 · 财报后分析报告</div>
+    <h1>奇富科技 QFIN — Q4 2025 &amp; 全年财报深度分析</h1>
+    <div class="hero-sub">奇富科技控股 Qifu Technology Holdings · NASDAQ: QFIN · 分析日期：2026年3月18日</div>
+    <div class="hero-pills">
+      <div class="pill">股价 <strong>$14.00</strong></div>
+      <div class="pill">市值 <strong>~$1.82B</strong></div>
+      <div class="pill">FY25 P/E <strong>2.09x</strong></div>
+      <div class="pill">P/B <strong>0.53x</strong></div>
+      <div class="pill">股息率 <strong>11.1%</strong></div>
+      <div class="pill">52周 <strong>$13.81 – $48.94</strong></div>
+      <div class="pill">账面值 <strong>$26.42/ADS</strong></div>
+      <div class="pill">净现金 <strong>$942M</strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ §1 财报摘要横幅 ══ -->
+<div class="container">
+<div class="section">
+  <div class="stitle">财报摘要</div>
+  <div class="banner-grid">
+    <div class="banner-card banner-ok">
+      <div class="banner-icon">✅</div>
+      <div class="banner-title">Non-GAAP EPS 微超共识</div>
+      <div class="banner-body">Q4 Non-GAAP EPS $1.18 vs 共识预期 $1.17，技术性达标。Full-year Non-GAAP EPS $6.69，FY25 P/E 仅 2.09x。</div>
+    </div>
+    <div class="banner-card banner-warn">
+      <div class="banner-icon">⚠️</div>
+      <div class="banner-title">Q4 营收显著低于预期</div>
+      <div class="banner-body">Q4 总营收 RMB 4,092.7M（-8.7% YoY，-21.4% QoQ）。平台服务营收暴跌 -58.5% YoY，ICE 引荐费 -89% YoY，监管打击超出预期。</div>
+    </div>
+    <div class="banner-card banner-bad">
+      <div class="banner-icon">🔴</div>
+      <div class="banner-title">Q1 2026 指引 -51% YoY</div>
+      <div class="banner-body">Q1 2026 Non-GAAP 净利润指引 RMB 900-950M（YoY -51% to -53%）。盈利低谷仍未见底，信贷质量持续恶化，90天逾期率升至 2.71%。</div>
+    </div>
+  </div>
+  <div class="alert alert-note">
+    <strong>汇率说明：</strong>本报告使用汇率 1 USD = RMB 6.9931（报告发布日）。所有括号内美元金额均按此汇率换算。
+  </div>
+</div>
+
+<!-- ══ §2 Q4 2025 KPI ══ -->
+<div class="section">
+  <div class="stitle">Q4 2025 核心 KPI</div>
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div class="kpi-l">Q4 Non-GAAP EPS</div>
+      <div class="kpi-v">$1.18</div>
+      <span class="badge up">+0.8% vs 共识$1.17 ✅</span>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">Q4 总营收</div>
+      <div class="kpi-v">RMB 4,093M</div>
+      <span class="badge dn">YoY -8.7% · QoQ -21.4%</span>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">Q4 经营利润率</div>
+      <div class="kpi-v">21.2%</div>
+      <span class="badge dn">vs Q3 32.7% · vs Q4'24 42.2%</span>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">Q4 GAAP 净利润</div>
+      <div class="kpi-v">RMB 1,016M</div>
+      <span class="badge dn">YoY -46.9%</span>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">Q4 贷款促成量</div>
+      <div class="kpi-v">RMB 70,297M</div>
+      <span class="badge dn">YoY -21.8%</span>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">贷款余额</div>
+      <div class="kpi-v">RMB 126,012M</div>
+      <span class="badge dn">YoY -8.0%</span>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">90天+ 逾期率</div>
+      <div class="kpi-v">2.71%</div>
+      <span class="badge dn">vs Q3 2.09% · Q2 1.97% ⚠️</span>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">贷款损失拨备</div>
+      <div class="kpi-v">RMB 1,190M</div>
+      <span class="badge dn">YoY +98.9% 几乎翻倍！</span>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">ICE 引荐费</div>
+      <div class="kpi-v">RMB 99.7M</div>
+      <span class="badge dn">YoY -89.0% 🔴 监管打击</span>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">债务偿还收益（一次性）</div>
+      <div class="kpi-v">RMB 270M</div>
+      <span class="badge nt">=$38.6M · 非经常性项目</span>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">重复借款人占比</div>
+      <div class="kpi-v">90.8%</div>
+      <span class="badge nt">用户粘性强</span>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">平台消费者</div>
+      <div class="kpi-v">2.913亿</div>
+      <span class="badge up">YoY +11.5%</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══ §3 季度财务详表 ══ -->
+<div class="section">
+  <div class="stitle">季度财务对比（Q2–Q4 2025 vs Q4 2024）</div>
+  <div class="alert alert-warn" style="margin-bottom:14px;">
+    ⚠️ Q4 2025 净利润含 <strong>RMB 270.1M 债务提前偿还一次性收益</strong>（见标黄行）。剔除后实际经营净利润约 RMB 746M（$107M），经营质量更弱。
+  </div>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead>
+        <tr>
+          <th>项目（RMB 百万）</th>
+          <th>Q4 2024</th>
+          <th>Q2 2025</th>
+          <th>Q3 2025</th>
+          <th>Q4 2025</th>
+          <th>YoY</th>
+          <th>QoQ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="hl"><td>总营收</td><td>4,482.3</td><td>5,034.3</td><td>5,205.7</td><td>4,092.7</td><td class="neg">-8.7%</td><td class="neg">-21.4%</td></tr>
+        <tr><td>&nbsp;├ 信贷驱动服务</td><td>2,889.5</td><td>3,452.5</td><td>3,868.6</td><td>3,432.2</td><td class="pos">+18.8%</td><td class="neg">-11.3%</td></tr>
+        <tr><td>&nbsp;│ ├ 重资产撮合费</td><td>363.0</td><td>461.5</td><td>513.9</td><td>200.3</td><td class="neg">-44.8%</td><td class="neg">-61.0%</td></tr>
+        <tr><td>&nbsp;│ ├ 融资收入</td><td>1,667.3</td><td>2,024.8</td><td>2,340.6</td><td>2,206.3</td><td class="pos">+32.3%</td><td class="neg">-5.7%</td></tr>
+        <tr><td>&nbsp;│ └ 担保责任释放</td><td>761.8</td><td>966.2</td><td>912.8</td><td>916.6</td><td class="pos">+20.3%</td><td class="pos">+0.4%</td></tr>
+        <tr><td>&nbsp;└ 平台服务（轻资产）</td><td>1,592.8</td><td>1,581.8</td><td>1,337.1</td><td>660.5</td><td class="neg">-58.5%</td><td class="neg">-50.6%</td></tr>
+        <tr><td>&nbsp;&nbsp;&nbsp;├ 轻资产撮合费</td><td>515.1</td><td>448.9</td><td>263.1</td><td>198.9</td><td class="neg">-61.4%</td><td class="neg">-24.4%</td></tr>
+        <tr><td>&nbsp;&nbsp;&nbsp;├ ICE 引荐费</td><td>907.2</td><td>714.6</td><td>648.1</td><td>99.7</td><td class="neg"><strong>-89.0%</strong></td><td class="neg">-84.6%</td></tr>
+        <tr><td>&nbsp;&nbsp;&nbsp;└ 其他服务费</td><td>170.5</td><td>418.3</td><td>425.9</td><td>361.9</td><td class="pos">+112.3%</td><td class="neg">-15.0%</td></tr>
+        <tr class="hl"><td>总运营成本</td><td>2,591.9</td><td>2,756.5</td><td>3,505.6</td><td>3,225.3</td><td class="neg">+24.4%</td><td class="neg">-8.0%</td></tr>
+        <tr><td>&nbsp;├ 撮合服务费</td><td>734.7</td><td>731.3</td><td>760.6</td><td>745.8</td><td class="nt">+1.5%</td><td class="nt">-1.9%</td></tr>
+        <tr><td>&nbsp;├ 资金成本</td><td>126.8</td><td>134.1</td><td>142.8</td><td>141.4</td><td class="neg">+11.5%</td><td class="nt">-1.0%</td></tr>
+        <tr><td>&nbsp;├ 销售营销</td><td>523.9</td><td>597.5</td><td>664.8</td><td>550.6</td><td class="neg">+5.1%</td><td class="pos">-17.2%</td></tr>
+        <tr><td>&nbsp;├ 一般行政</td><td>156.1</td><td>134.5</td><td>143.8</td><td>142.8</td><td class="pos">-8.5%</td><td class="nt">-0.7%</td></tr>
+        <tr><td>&nbsp;├ <strong>贷款损失拨备</strong></td><td>598.4</td><td>614.9</td><td>837.8</td><td><strong>1,190.3</strong></td><td class="neg"><strong>+98.9%!</strong></td><td class="neg">+42.1%</td></tr>
+        <tr><td>&nbsp;├ 或有负债拨备</td><td>311.4</td><td>556.7</td><td>773.1</td><td>337.7</td><td class="neg">+8.4%</td><td class="pos">-56.3%</td></tr>
+        <tr class="hl"><td>经营利润</td><td>1,890.3</td><td>2,277.8</td><td>1,700.1</td><td>867.4</td><td class="neg">-54.1%</td><td class="neg">-49.0%</td></tr>
+        <tr><td>经营利润率</td><td>42.2%</td><td>45.2%</td><td>32.7%</td><td><strong>21.2%</strong></td><td class="neg">-21.0pp</td><td class="neg">-11.5pp</td></tr>
+        <tr class="one-time"><td>★ 债务提前偿还收益（一次性）</td><td>—</td><td>—</td><td>—</td><td>270.1</td><td>N/A</td><td>N/A</td></tr>
+        <tr class="hl"><td>GAAP 净利润</td><td>1,912.7</td><td>2,207.9</td><td>1,432.5</td><td>1,016.1</td><td class="neg">-46.9%</td><td class="neg">-29.1%</td></tr>
+        <tr><td>Non-GAAP 净利润</td><td>1,972.4</td><td>2,275.8</td><td>1,508.2</td><td>1,070.6</td><td class="neg">-45.7%</td><td class="neg">-29.0%</td></tr>
+        <tr><td>GAAP EPS（稀释，RMB）</td><td>13.24</td><td>15.84</td><td>10.80</td><td>7.82</td><td class="neg">-40.9%</td><td class="neg">-27.6%</td></tr>
+        <tr class="hl"><td>Non-GAAP EPS（$）</td><td>—</td><td>—</td><td>—</td><td><strong>$1.18</strong></td><td class="nt">vs 共识$1.17</td><td>—</td></tr>
+        <tr><td>净利率</td><td>42.7%</td><td>43.8%</td><td>27.5%</td><td>24.8%</td><td class="neg">-17.9pp</td><td class="neg">-2.7pp</td></tr>
+        <tr><td>有效税率</td><td>1.0%</td><td>14.6%</td><td>20.9%</td><td>11.8%</td><td class="neg">+10.8pp</td><td class="pos">-9.1pp</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══ §4 全年 2025 vs 2024 ══ -->
+<div class="section">
+  <div class="stitle">FY2025 vs FY2024 全年对比</div>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead>
+        <tr>
+          <th>指标（RMB 百万）</th>
+          <th>FY2024</th>
+          <th>FY2025</th>
+          <th>YoY 变化</th>
+          <th>美元（FY25）</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="hl"><td>总营收</td><td>17,165.7</td><td>19,205.1</td><td class="pos">+11.9%</td><td>$2,746.3M</td></tr>
+        <tr><td>&nbsp;├ 信贷驱动服务</td><td>11,719.0</td><td>13,977.2</td><td class="pos">+19.3%</td><td>$1,998.7M</td></tr>
+        <tr><td>&nbsp;└ 平台服务</td><td>5,446.6</td><td>5,227.8</td><td class="neg">-4.0%</td><td>$747.6M</td></tr>
+        <tr class="hl"><td>总运营成本</td><td>9,637.1</td><td>12,526.6</td><td class="neg">+30.0%</td><td>$1,790.8M</td></tr>
+        <tr><td>&nbsp;├ 销售营销</td><td>1,725.9</td><td>2,469.5</td><td class="neg">+43.1%</td><td>$353.2M</td></tr>
+        <tr><td>&nbsp;├ 贷款损失拨备</td><td>2,773.3</td><td>3,625.0</td><td class="neg">+30.7%</td><td>$518.4M</td></tr>
+        <tr><td>&nbsp;└ 或有负债拨备</td><td>478.4</td><td>1,667.7</td><td class="neg"><strong>+248.7%</strong></td><td>$238.5M</td></tr>
+        <tr class="hl"><td>经营利润</td><td>7,528.6</td><td>6,678.4</td><td class="neg">-11.3%</td><td>$954.9M</td></tr>
+        <tr><td>经营利润率</td><td>43.9%</td><td>34.8%</td><td class="neg">-9.1pp</td><td>—</td></tr>
+        <tr class="hl"><td>GAAP 净利润</td><td>6,248.1</td><td>5,975.6</td><td class="neg">-4.4%</td><td>$854.4M</td></tr>
+        <tr><td>Non-GAAP 净利润</td><td>6,415.7</td><td>6,354.0</td><td class="neg">-1.0%</td><td>$908.6M</td></tr>
+        <tr><td>净利率</td><td>36.4%</td><td>31.1%</td><td class="neg">-5.3pp</td><td>—</td></tr>
+        <tr class="hl"><td>GAAP EPS（稀释，RMB）</td><td>41.28</td><td>44.02</td><td class="pos">+6.6% ✅</td><td>$6.30</td></tr>
+        <tr><td>Non-GAAP EPS</td><td>42.39</td><td>46.79</td><td class="pos">+10.4% ✅</td><td>$6.69</td></tr>
+        <tr class="hl"><td>经营现金流</td><td>—</td><td><strong>11,100</strong></td><td class="pos">创历史纪录！</td><td>$1,587M</td></tr>
+        <tr><td>全年贷款促成量</td><td>321,969</td><td>327,069</td><td class="pos">+1.6%</td><td>—</td></tr>
+        <tr><td>平台服务贷款量</td><td>170,589</td><td>144,376</td><td class="neg">-15.4%</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="alert alert-info" style="margin-top:14px;">
+    <strong>EPS 悖论：</strong>FY25 GAAP/Non-GAAP EPS 均正增长（+6.6%/+10.4%），尽管净利润略降。原因是 2025 年大规模股份回购（15.9M ADS @ 均价$28.2），分母大幅缩减，每股收益反而提升。资本配置效率之高，令人印象深刻。
+  </div>
+</div>
+
+<!-- ══ §5 图表区 ══ -->
+<div class="section">
+  <div class="stitle">可视化分析</div>
+
+  <!-- Row 1: 季度营收 + 季度净利润 -->
+  <div class="cgrid">
+    <div class="ccard">
+      <div class="ctitle">季度总营收趋势（RMB 百万）</div>
+      <div class="cwrap"><canvas id="c-rev"></canvas></div>
+    </div>
+    <div class="ccard">
+      <div class="ctitle">季度净利润趋势（RMB 百万）含债务收益拆分</div>
+      <div class="cwrap"><canvas id="c-ni"></canvas></div>
+    </div>
+  </div>
+
+  <!-- Row 2: 利润率 + 逾期率双轴 -->
+  <div class="cgrid">
+    <div class="ccard">
+      <div class="ctitle">利润率压缩趋势（%）</div>
+      <div class="cwrap"><canvas id="c-margin"></canvas></div>
+    </div>
+    <div class="ccard">
+      <div class="ctitle">贷款余额 vs 90天+逾期率</div>
+      <div class="cwrap"><canvas id="c-credit"></canvas></div>
+    </div>
+  </div>
+
+  <!-- Row 3: 营收构成 + 年度历史 -->
+  <div class="cgrid">
+    <div class="ccard">
+      <div class="ctitle">Q4 营收结构：平台服务 vs 信贷驱动（RMB 百万）</div>
+      <div class="cwrap"><canvas id="c-mix"></canvas></div>
+    </div>
+    <div class="ccard">
+      <div class="ctitle">年度营收 &amp; Non-GAAP 净利润（2022–2025，RMB 百万）</div>
+      <div class="cwrap"><canvas id="c-annual"></canvas></div>
+    </div>
+  </div>
+
+  <!-- Row 4: 股东回报 full width -->
+  <div class="ccard-full">
+    <div class="ctitle">2025 全年股东回报结构（RMB 百万）</div>
+    <div class="cwrap"><canvas id="c-return"></canvas></div>
+  </div>
+</div>
+
+<!-- ══ §6 桑基图 ══ -->
+<div class="section">
+  <div class="stitle">Q4 2025 资金流向桑基图</div>
+  <div class="alert alert-note" style="margin-bottom:14px;">
+    下图展示 Q4 2025 总营收如何流经各成本项目，最终形成净利润。特别标注一次性债务偿还收益（RMB 270.1M）对净利润的贡献。
+  </div>
+  <div class="ccard-full">
+    <div id="sankey"></div>
+  </div>
+</div>
+
+<!-- ══ §7 信贷质量深度 ══ -->
+<div class="section">
+  <div class="stitle">信贷质量深度分析</div>
+  <div class="cq-grid">
+    <div class="cq-box">
+      <div class="cq-label">90天+ 逾期率</div>
+      <div class="cq-val cq-bad">2.71%</div>
+      <div class="cq-trend">Q2: 1.97% → Q3: 2.09% → Q4: 2.71%</div>
+    </div>
+    <div class="cq-box">
+      <div class="cq-label">Day-1 逾期率</div>
+      <div class="cq-val cq-bad">6.1%</div>
+      <div class="cq-trend">Q2: 5.1% → Q3: 5.5% → Q4: 6.1%</div>
+    </div>
+    <div class="cq-box">
+      <div class="cq-label">30天催收率</div>
+      <div class="cq-val cq-mid">84.1%</div>
+      <div class="cq-trend">Q2: 87.3% → Q3: 85.7% → Q4: 84.1%</div>
+    </div>
+  </div>
+
+  <div class="ccard-full" style="margin-bottom:16px;">
+    <div class="ctitle">三季度信贷质量趋势对比</div>
+    <div class="cwrap"><canvas id="c-delinq"></canvas></div>
+  </div>
+
+  <div class="ec-block">
+    <div class="ec-block-header">
+      <div>
+        <div class="ec-speaker-name">CRO 郑岩 — 信贷质量评述</div>
+        <div class="ec-speaker-role">首席风险官 · 官方新闻稿引述</div>
+      </div>
+    </div>
+    <div class="ec-block-body">
+      <div class="ec-item">
+        <div class="ec-item-left"><div class="ec-tag bear">风险警示</div></div>
+        <div>「在第四季度，由于宏观逆风和监管不确定性继续对市场流动性造成重大压力，特别是在高风险细分市场，<strong>我们的贷款组合风险明显上升</strong>。关键领先指标中，第四季度 Day-1 逾期率为 6.1%，30 天催收率为 84.1%。」</div>
+      </div>
+      <div class="ec-item">
+        <div class="ec-item-left"><div class="ec-tag bull">边际改善</div></div>
+        <div>「然而，<strong>我们在本季度采取的风险收紧措施在近几个月开始显示出边际改善结果</strong>，新贷款的风险表现开始改善，其贡献比例也在逐渐增加。」</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-warn">
+    <strong>分析师注：</strong>贷款损失拨备 YoY +98.9%（几乎翻倍），同期贷款促成量 YoY -21.8%。两个数据同向恶化，说明信贷质量恶化远超贷款规模收缩的速度。Q4 拨备达 RMB 1,190M，已超过 Q4 营收的 29%。CRO 提到"边际改善"信号，但尚未体现在滞后指标上，需观察 2026 Q2/Q3 数据验证。
+  </div>
+</div>
+
+<!-- ══ §8 高管引述 ══ -->
+<div class="section">
+  <div class="stitle">高管电话会议关键引述</div>
+
+  <div class="ec-block">
+    <div class="ec-block-header">
+      <div>
+        <div class="ec-speaker-name">吴海生 — CEO 首席执行官</div>
+        <div class="ec-speaker-role">官方新闻稿引述 · 2026年3月17日</div>
+      </div>
+    </div>
+    <div class="ec-block-body">
+      <div class="ec-item">
+        <div class="ec-item-left"><div class="ec-tag bear">诚实警示</div></div>
+        <div>「在第四季度，我们在运营中继续面临<strong>重大挑战</strong>，宏观不确定性和监管变化导致行业流动性紧缩和风险水平上升。我们努力做出积极变化，包括收紧风险标准、调整业务结构和优化成本结构，以减轻部分影响。」</div>
+      </div>
+      <div class="ec-item">
+        <div class="ec-item-left"><div class="ec-tag neutral">审慎信号</div></div>
+        <div>「在行业尚未在不断演变的监管指导和具有挑战性的宏观环境下稳定下来之前，<strong>我们将在业务规划中保持审慎</strong>。」— 这句话实际上是在预警 Q1 2026 指引仍将偏弱。</div>
+      </div>
+      <div class="ec-item">
+        <div class="ec-item-left"><div class="ec-tag bull">国际化</div></div>
+        <div>「在对国内业务进行必要调整的同时，我们继续专注于建立国际业务。在此季度，我们<strong>将业务拓展至多个发展中市场</strong>，获取必要资质并建立本地组织。我们相信这些国际市场呈现出极具吸引力的增长机遇，将使我们能够实现地理上的业务多元化。」</div>
+      </div>
+      <div class="ec-item">
+        <div class="ec-item-left"><div class="ec-tag bear">持续谨慎</div></div>
+        <div>「随着宏观挑战和不确定性持续存在，我们将继续努力维持基本业务的韧性。在急剧变化的环境中保持警惕至关重要，<strong>我们准备采取果断行动进一步精简运营并优化资源配置</strong>。」— 潜台词：可能有更多成本削减。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ec-block">
+    <div class="ec-block-header">
+      <div>
+        <div class="ec-speaker-name">徐左立（Alex Xu）— CFO 首席财务官</div>
+        <div class="ec-speaker-role">官方新闻稿引述 · 2026年3月17日</div>
+      </div>
+    </div>
+    <div class="ec-block-body">
+      <div class="ec-item">
+        <div class="ec-item-left"><div class="ec-tag bull">现金亮点</div></div>
+        <div>「在极具挑战性的环境下，我们在第四季度基本实现了大部分运营和财务目标。2025 年总营收为 191.2 亿元，Non-GAAP 净利润为 63.5 亿元。与此同时，<strong>我们在 2025 年创造了创纪录的 111 亿元经营现金流</strong>。」</div>
+      </div>
+      <div class="ec-item">
+        <div class="ec-item-left"><div class="ec-tag strong-bull">股东回报</div></div>
+        <div>「2025 年，我们通过股份回购和现金股息<strong>向股东回报了约 61.6 亿元（8.8 亿美元）</strong>。我们还利用市场窗口提前偿还了大量长期债务，进一步强化了资产负债表。」— 注：$880M 回报 ÷ 当前市值 $1.82B ≈ <strong>市值 48% 的回报</strong>，史诗级资本配置。</div>
+      </div>
+      <div class="ec-item">
+        <div class="ec-item-left"><div class="ec-tag bull">财务健康</div></div>
+        <div>「截至 2025 年底，现金及短期投资合计约为 <strong>107 亿元</strong>。我们强健的财务状况有望使我们在这一极具挑战性的环境中稳健前行，实现战略目标，并履行对市场的承诺与义务。」</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ §9 关键洞察 ══ -->
+<div class="section">
+  <div class="stitle">8 条关键分析洞察</div>
+  <ul class="signal-list">
+    <li>
+      <span class="sig-tag neutral">微超</span>
+      <div><strong>Non-GAAP EPS $1.18 技术性达标，市场已按差价定价。</strong> 全年 Non-GAAP EPS $6.69，当前 P/E 仅 2.09x，是纳斯达克中概股中最极端的估值折价之一。市场并非不知道这个数字，而是认为利润不可持续。</div>
+    </li>
+    <li>
+      <span class="sig-tag bear">遮羞布</span>
+      <div><strong>债务回购收益 RMB 270.1M 撑着 Q4 净利润。</strong> 剥掉这笔一次性项目后，实际经营净利润约 RMB 746M（$107M），比报告数字低 26.6%。市场正在为剔除后的数字定价，而不是为含一次性项目的报告数字。这是 Q4 经营质量偏弱的核心原因。</div>
+    </li>
+    <li>
+      <span class="sig-tag bear">监管地震</span>
+      <div><strong>ICE 引荐费 Q4 YoY -89%，从季度 RMB 907M 暴跌至 RMB 99.7M。</strong> 这不是短暂波动，是监管将这个收入来源的商业模式直接切断。全年平台服务贷款量 -15.4%，但轻资产营收仅 -4%（靠其他服务费补充），说明结构性调整正在进行中。但 ICE 归零后能否找到等量替代收入来源，是 2026-2027 年核心验证点。</div>
+    </li>
+    <li>
+      <span class="sig-tag bear">拨备飙升</span>
+      <div><strong>贷款损失拨备 YoY +98.9%，贷款量 YoY -21.8%。</strong> 两数同向恶化幅度悬殊：拨备几乎翻倍，贷款量却在萎缩。这意味着存量贷款的风险权重大幅提升，不是简单的规模扩张带来的损失增加，而是信贷质量系统性恶化。90天逾期率 2.71%（Q4）vs 1.97%（Q2），仅两个季度上升 0.74pp，速度令人警觉。</div>
+    </li>
+    <li>
+      <span class="sig-tag bull">现金机器</span>
+      <div><strong>经营现金流 RMB 111 亿，创历史纪录。</strong> 这是整张财报最重要的亮点。GAAP 净利润下滑 -4.4%，但现金流创新高，说明非现金拨备占比大幅提升（拨备是非现金成本），实际现金产生能力远强于报告利润所显示的。这证明商业模式基本面健康，不是真正意义上的盈利能力恶化。</div>
+    </li>
+    <li>
+      <span class="sig-tag bull">股东回报</span>
+      <div><strong>2025 全年股东回报 ~RMB 61.6 亿（$880M）= 当前市值 48%。</strong> 分解：回购 15.9M ADS @ 均价$28.2 ≈ $448M；2030 可转债提前回购 $460M 面值用 $399M（$61M 收益）；H2 2025 股息$0.78/ADS ÷ 130M ADS ≈ $102M。资本配置效率已达顶级价值股水准。</div>
+    </li>
+    <li>
+      <span class="sig-tag neutral">回购反思</span>
+      <div><strong>管理层均价 $28.2 回购，现价 $14.00，账面亏损 -50%。</strong> 从一个角度看，管理层对自身公司判断失误（或者市场对监管风险的重新定价超出预期）。但从另一个角度：当你对一家公司深度了解且认为内在价值远高于市价时，在任何价格坚持回购都是理性的。$28 买，$14 继续买，是越错越买的魄力，也是强烈的内在价值信号。</div>
+    </li>
+    <li>
+      <span class="sig-tag bear">盈利低谷</span>
+      <div><strong>Q1 2026 指引 Non-GAAP 净利润 RMB 900-950M（YoY -51% to -53%）。</strong> 按此推算，FY2026 全年利润约 $640M（假设 H2 2026 回升至 $800M+ run rate）。若 2027 年信贷质量改善，ICE 新业务逐步重建，利润恢复路径为：2026E $640M → 2027E $750M → 2028E $840M。底部拐点可能在 Q2/Q3 2026，需要等待信贷领先指标（Day-1 逾期率）持续改善的确认。</div>
+    </li>
+  </ul>
+</div>
+
+<!-- ══ §10 巴菲特六维评分 ══ -->
+<div class="section">
+  <div class="stitle">巴菲特六维评分（基于 Q4 2025 实际数据）</div>
+  <div class="alert alert-note" style="margin-bottom:16px;">
+    评分基于截至 2025 年 12 月 31 日的实际财务数据及管理层陈述。评分体系：A（优秀）/ B（良好）/ C（一般）/ D（较差）。
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">C+</div>
+    <div class="bd">
+      <h4>护城河（Economic Moat）</h4>
+      <p>ICE 监管打击严重，轻资产模式核心收入来源被切断（ICE 引荐费 -89% YoY）。但 167 家金融机构合作网络、2.913 亿平台用户、90.8% 重复借款人占比仍构成较强的关系护城河。大数据风控能力是真实竞争优势，但监管可以改变收益率。科技方案能否重建营收结构是关键验证点。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">B+</div>
+    <div class="bd">
+      <h4>管理层（Management Quality）</h4>
+      <p>资本配置堪称教科书：$880M 年回报 = 市值 48%，可转债用 $399M 回购 $460M 面值（创造$61M收益），体现了优秀的财务工程能力。扣分项：激进扩张导致 SG&A +43%（2025全年），ICE 崩塌未充分预警市场（2025 Q3 信披时收入仍在），均价 $28 回购后股价腰斩证明宏观判断有误差。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B</div>
+    <div class="bd">
+      <h4>财务健康（Financial Health）</h4>
+      <p>净现金 RMB 65.88 亿（$942M），创纪录经营现金流 RMB 111 亿，账面价值 $26.42/ADS vs 股价 $14（P/B 0.53x），杠杆整体可控。潜在担忧：信托投资者应付 RMB 192 亿（当期+长期）是隐性融资杠杆，主要对应重资产贷款组合；可转债 RMB 26 亿（2026 到期 RMB 10.2 亿，需留意）。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">C</div>
+    <div class="bd">
+      <h4>盈利质量（Earnings Quality）</h4>
+      <p>Q4 剔除 RMB 270M 一次性债务收益后，经营净利润约 RMB 746M，明显弱于报告数字。贷款损失拨备 +98.9% 直接侵蚀盈利质量。正面：经营现金流 RMB 111 亿远超 GAAP 净利润（RMB 59.8 亿），现金质量实际上高于账面利润，说明拨备是保守型非现金成本，未来可能部分回转。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cr">D</div>
+    <div class="bd">
+      <h4>可预测性（Predictability）</h4>
+      <p>Q4 ICE 引荐费 -89% YoY 完全超出分析师预期（Q3 2025 还有 RMB 648M）。Q1 2026 指引 -51%，幅度远超市场预期。信贷周期对宏观和监管双重变量敏感，几乎无法建立可靠的前向预测模型。中国监管政策不透明度高，任何新规都可能在一个季度内颠覆现有商业模式。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">A</div>
+    <div class="bd">
+      <h4>资本配置纪律（Capital Allocation Discipline）</h4>
+      <p>毫无疑问的 A 级。年回购+分红 = 市值 48%，这在任何市场、任何行业都是极罕见的股东回报率。提高 H2 2025 股息至 $0.78/ADS（提升！），在逆境中仍维持高股息承诺。2030 可转债用 $399M 回购 $460M 面值，财务工程效率极高。当前$14.00股价下，股息收益率 11.1%，为股东提供了极强的持股支撑。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ §11 DCF 三情景 ══ -->
+<div class="section">
+  <div class="stitle">更新 DCF 三情景估值</div>
+  <div class="alert alert-note" style="margin-bottom:16px;">
+    估值基准：FY2025 Non-GAAP 净利润 $908.6M，Q1 2026 指引暗示盈利低谷，三情景对应不同的恢复路径。所有情景均含净现金 +$942M（$7.25/ADS）加回。地缘折扣反映中美政治风险溢价。
+  </div>
+  <div class="dcf-grid">
+    <div class="dcf-box" style="border-color: var(--red);">
+      <div class="dcf-label">悲观情景</div>
+      <div class="dcf-val dcf-pes">$20</div>
+      <div class="dcf-sub">内在价值 / ADS</div>
+      <div class="dcf-params">
+        WACC: 15% | 永续增长: 1.5%<br>地缘折扣: -40%<br>
+        2026E: $520M<br>
+        2027E: $450M<br>
+        2028E: $460M<br>
+        2029E: $480M<br>
+        2030E: $500M<br>
+        假设：监管持续打压，信贷质量无法改善，ICE 新业务失败，国际化进展缓慢
+      </div>
+    </div>
+    <div class="dcf-box" style="border-color: var(--gold);">
+      <div class="dcf-label">中性情景</div>
+      <div class="dcf-val dcf-mid">$50</div>
+      <div class="dcf-sub">内在价值 / ADS</div>
+      <div class="dcf-params">
+        WACC: 12% | 永续增长: 2%<br>地缘折扣: -30%<br>
+        2026E: $660M<br>
+        2027E: $750M<br>
+        2028E: $840M<br>
+        2029E: $900M<br>
+        2030E: $950M<br>
+        假设：2026 H2 拐点，ICE 逐步重建，信贷质量 2027 年显著改善，国际化贡献开始显现
+      </div>
+    </div>
+    <div class="dcf-box" style="border-color: var(--green);">
+      <div class="dcf-label">乐观情景</div>
+      <div class="dcf-val dcf-opt">$90</div>
+      <div class="dcf-sub">内在价值 / ADS</div>
+      <div class="dcf-params">
+        WACC: 10% | 永续增长: 2.5%<br>地缘折扣: -20%<br>
+        2026E: $750M<br>
+        2027E: $900M<br>
+        2028E: $1,000M<br>
+        2029E: $1,100M<br>
+        2030E: $1,200M<br>
+        假设：监管环境稳定，ICE 新形态崛起，国际化大幅贡献营收，信贷质量全面改善
+      </div>
+    </div>
+  </div>
+
+  <div class="tbl-wrap" style="margin-top:16px;">
+    <table class="tbl">
+      <thead>
+        <tr>
+          <th>情景对比</th>
+          <th>内在价值/ADS</th>
+          <th>安全边际买入价</th>
+          <th>vs 当前$14.00</th>
+          <th>核心假设</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>乐观</td><td class="pos">$90</td><td class="pos">~$67</td><td class="pos">+543%</td><td>监管稳定 + 国际化腾飞</td></tr>
+        <tr class="hl"><td>中性</td><td style="color:var(--gold);font-weight:700;">$50</td><td style="color:var(--gold);">~$37.5</td><td class="pos">+257%</td><td>2026 H2 拐点 + ICE 重建</td></tr>
+        <tr><td>悲观</td><td class="neg">$20</td><td class="neg">~$15</td><td class="neg">+43%</td><td>监管持续 + 信贷无改善</td></tr>
+        <tr class="hl"><td>当前股价</td><td>$14.00</td><td>—</td><td>≈ 悲观安全边际</td><td>市场隐含极端悲观预期</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="alert alert-info" style="margin-top:14px;">
+    <strong>当前 $14.00 约等于悲观情景安全边际价（~$15）</strong>，市场已经把最坏情况基本完全定价。从概率权重角度：若给乐观/中性/悲观分别 20%/50%/30% 权重，加权内在价值约 $58，较当前价格有 314% 上行空间。
+  </div>
+</div>
+
+<!-- ══ §12 最终裁决 ══ -->
+<div class="section">
+  <div class="stitle">最终裁决 · 投资评级</div>
+  <div class="verdict">
+    <div class="verdict-t">机会性买入，但需耐心等待 (Opportunistic Buy with Patience Required)</div>
+    <p style="font-size:14px; color:var(--text2); margin-bottom:16px;">评级日期：2026年3月18日 · 基准价格：$14.00</p>
+    <div class="pgrid">
+      <div class="pbox">
+        <div class="pl">当前股价</div>
+        <div class="pv pc">$14.00</div>
+        <div class="pn">财报后基本持平（前收$13.93）</div>
+      </div>
+      <div class="pbox">
+        <div class="pl">中性DCF内在价值</div>
+        <div class="pv pf">$50</div>
+        <div class="pn">257% 潜在上行 · 安全边际$37.5</div>
+      </div>
+      <div class="pbox">
+        <div class="pl">P/B 账面价值</div>
+        <div class="pv ps">$26.42</div>
+        <div class="pn">P/B 仅 0.53x · 极度折价</div>
+      </div>
+    </div>
+  </div>
+
+  <ul class="signal-list">
+    <li>
+      <span class="sig-tag bull">核心论点</span>
+      <div><strong>ICE 崩塌是周期性 + 监管性，而非结构性商业失败。</strong> 消费信贷需求在中国长期存在，167 家机构合作关系、2.913 亿用户、90.8% 复借率证明用户粘性和平台价值未受损。当前$14 是在悲观情景安全边际附近买入，向下保护好，向上空间极大。</div>
+    </li>
+    <li>
+      <span class="sig-tag bull">现金流支撑</span>
+      <div><strong>经营现金流 RMB 111 亿是商业模式健康的最佳证明。</strong> GAAP 利润因拨备偏高，但现金产生能力不受影响。$880M 年回报（市值48%）+ 11.1% 股息收益率，为持股提供极强支撑。每年仅靠股息和回购，市值就在被快速消耗。</div>
+    </li>
+    <li>
+      <span class="sig-tag neutral">等待拐点</span>
+      <div><strong>操作建议：等待 Q2/Q3 2026 信贷质量改善信号。</strong> 具体观察指标：Day-1 逾期率（需低于 5.5%）、30 天催收率（需高于 86%）、贷款损失拨备 QoQ 下降。Q1 2026 仍是低谷，不建议追高。当前价位可视为分批建仓区间（悲观情景安全边际），但需要有 12-18 个月的等待耐心。</div>
+    </li>
+    <li>
+      <span class="sig-tag bear">主要风险</span>
+      <div><strong>风险因素：①</strong> 监管进一步收紧（可转债市场、消费信贷利率上限）<strong>②</strong> 中美关系恶化导致 ADR 强制退市风险（低概率但高影响）<strong>③</strong> 2026 上半年可转债到期压力（RMB 10.2 亿）<strong>④</strong> ICE 新业务模式无法建立，轻资产营收持续萎缩。以上任一风险若实现，悲观情景权重需上调至 50%+，目标价对应 $10-15。</div>
+    </li>
+  </ul>
+</div>
+
+<!-- ══ §13 Buffy 点评 ══ -->
+<div class="section">
+  <div class="stitle">Buffy 毒舌点评</div>
+  <div class="cmt">
+    <p>好，让我们来做一件最重要的事：<span class="hl-t">把遮羞布一层一层剥掉。</span></p>
+
+    <p>首先是<span class="warn-t">发钱消失术</span>。2025 全年，奇富科技向股东回报了 RMB 61.6 亿，折合 $880 million。这相当于当前市值的 <span class="warn-t">48%</span>。公司相当于把将近一半的市值以现金形式还给了股东。但与此同时，股价从年初 $30 多跌到了 $14。你拿到了钱，但账户余额缩水了更多。这就是资本市场的铁律：发钱不等于创造价值，除非市场相信利润是可持续的。而市场显然不相信。</p>
+
+    <p>接下来是 <span class="warn-t">ICE 引荐费 -89%</span> 这把大刀。Q3 2025 还有 RMB 648M，Q4 2025 只剩 RMB 99.7M。这不是短暂波动，这是监管把这个收入来源的商业模式活活锯断。有人可能会说「这是一次性冲击」——错了，ICE（互联网金融信息中介）模式的整个监管框架已经改变，这个收入来源不会自动回来。管理层现在说要发展「科技方案」和「国际业务」，但这些替代收入要从零开始建立，需要时间和运气。</p>
+
+    <p>然后是那笔 <span class="warn-t">RMB 270M 的遮羞布</span>。债务提前偿还的一次性收益，被老老实实地计入了 Q4 净利润。没有这笔，Q4 净利润是 RMB 746M，不是报告的 RMB 1,016M。EPS 应该是 $0.84，不是 $1.18。当然，Non-GAAP 调整部分包含了这个，但报告标题里 "微超共识$1.17" 这句话背后的 $1.18 Non-GAAP EPS……你去查一下官方 Non-GAAP 调整项，会发现这笔收益确实被保留在 Non-GAAP 数字里。所以那个"微超"是含金量不高的微超。</p>
+
+    <p>现在说<span class="ok-t">真正的亮点</span>：经营现金流 RMB 111 亿是本张财报里最重要的一个数字。为什么？因为贷款损失拨备是非现金成本——它让会计利润变难看，但不消耗实际现金。经营现金流 RMB 111 亿 vs GAAP 净利润 RMB 59.8 亿，差值约 RMB 51 亿就是非现金拨备的贡献。这说明商业模式本身是个现金生产机器，只是暂时被拨备压住了账面利润。如果未来信贷质量改善，拨备回落，利润弹性会非常可观。</p>
+
+    <p>最后说说<span class="hl-t">均价 $28.2 回购这件事</span>。巴菲特有句名言：「当别人恐惧时贪婪。」但当你自己也在恐惧中买的时候怎么办？管理层 2025 年花了 $448M 在均价 $28.2 买自家股票，现在价格是 $14。账面亏了 50%。这说明：要么管理层对监管风险判断失误，要么市场对风险溢价的重新定价远超任何人的预期。我倾向于是后者——没有人在 2024 年底能预测到 ICE 引荐费在一个季度内归零。但这也说明，内在价值估算本身就包含了极大的不确定性。</p>
+
+    <p><span class="ok-t">结论</span>：当前 $14 是在悲观情景安全边际附近定价，超调极端。P/E 2.09x、P/B 0.53x、股息率 11.1%——这三个数字同时出现在一家盈利公司身上，只有两种可能：要么是千载难逢的买入机会，要么是市场看到了报告里没有写出来的更深层风险。<span class="warn-t">在 Q2/Q3 2026 信贷质量改善信号出现之前，这个问题没有确定答案。</span> 等待拐点确认再重仓，这才是正确的仓位管理。</p>
+  </div>
+</div>
+</div><!-- end container -->
+
+<!-- FOOTER -->
+<footer>
+  <div>奇富科技控股 QFIN — Q4 2025 &amp; FY2025 财报深度分析报告</div>
+  <div style="margin-top:6px;">生成日期：2026年3月18日 · 基于 2026 年 3 月 17 日盘后发布的官方财报 · 汇率：1 USD = RMB 6.9931</div>
+  <div style="margin-top:6px; color: var(--text3);">
+    ⚠️ 本报告仅供参考，不构成任何投资建议。投资有风险，入市需谨慎。所有数据均来源于公司官方财报及新闻稿。
+  </div>
+</footer>
+
+<script>
+// ── THEME TOGGLE ──
+function toggleTheme() {
+  const html = document.documentElement;
+  html.dataset.theme = html.dataset.theme === 'dark' ? 'light' : 'dark';
+  updateCharts();
+}
+
+// ── CHART HELPERS ──
+function getCV(v) { return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); }
+
+function chartDefaults() {
+  const grid = getCV('--chart-grid');
+  const text2 = getCV('--text2');
+  return {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { labels: { color: text2, font: { size: 11, family: 'Segoe UI' }, boxWidth: 12, padding: 12 } } },
+    scales: {
+      x: { ticks: { color: text2, font: { size: 10 } }, grid: { color: grid } },
+      y: { ticks: { color: text2, font: { size: 10 } }, grid: { color: grid } }
+    }
+  };
+}
+
+let charts = {};
+
+function buildCharts() {
+  const opts = chartDefaults();
+  const green = getCV('--green');
+  const red = getCV('--red');
+  const gold = getCV('--gold');
+  const accent = getCV('--accent');
+  const accent2 = getCV('--accent2');
+  const accent3 = getCV('--accent3');
+  const text3 = getCV('--text3');
+
+  // ── C1: 季度营收 ──
+  const c1 = document.getElementById('c-rev').getContext('2d');
+  charts.rev = new Chart(c1, {
+    type: 'bar',
+    data: {
+      labels: ['Q1\'25', 'Q2\'25', 'Q3\'25', 'Q4\'25'],
+      datasets: [
+        { label: '信贷驱动服务', data: [3656.5, 3452.5, 3868.6, 3432.2], backgroundColor: accent2 + '99' },
+        { label: '平台服务', data: [2308.6, 1581.8, 1337.1, 660.5], backgroundColor: accent3 + '99' }
+      ]
+    },
+    options: { ...opts, scales: { x: opts.scales.x, y: { ...opts.scales.y, stacked: false } }, plugins: { ...opts.plugins, title: { display: false } } }
+  });
+
+  // ── C2: 季度净利润（拆分一次性）──
+  const c2 = document.getElementById('c-ni').getContext('2d');
+  charts.ni = new Chart(c2, {
+    type: 'bar',
+    data: {
+      labels: ['Q4\'24', 'Q1\'25', 'Q2\'25', 'Q3\'25', 'Q4\'25'],
+      datasets: [
+        { label: '经营净利润', data: [1912.7, 1835.5, 2207.9, 1432.5, 746.0], backgroundColor: accent + '99' },
+        { label: '一次性债务收益', data: [0, 0, 0, 0, 270.1], backgroundColor: gold + '99' }
+      ]
+    },
+    options: {
+      ...opts,
+      scales: {
+        x: opts.scales.x,
+        y: { ...opts.scales.y, stacked: true }
+      },
+      plugins: { ...opts.plugins, tooltip: { callbacks: { afterLabel: (ctx) => ctx.datasetIndex === 1 && ctx.raw > 0 ? '★ 一次性项目' : '' } } }
+    }
+  });
+
+  // ── C3: 利润率 ──
+  const c3 = document.getElementById('c-margin').getContext('2d');
+  charts.margin = new Chart(c3, {
+    type: 'line',
+    data: {
+      labels: ['Q4\'24', 'Q1\'25', 'Q2\'25', 'Q3\'25', 'Q4\'25'],
+      datasets: [
+        { label: '经营利润率%', data: [42.2, 36.3, 45.2, 32.7, 21.2], borderColor: accent2, backgroundColor: accent2 + '22', tension: 0.3, fill: true, pointRadius: 5 },
+        { label: '净利率%', data: [42.7, 36.5, 43.8, 27.5, 24.8], borderColor: accent3, backgroundColor: accent3 + '22', tension: 0.3, fill: false, pointRadius: 5 }
+      ]
+    },
+    options: { ...opts }
+  });
+
+  // ── C4: 贷款余额 vs 逾期率 双轴 ──
+  const c4 = document.getElementById('c-credit').getContext('2d');
+  charts.credit = new Chart(c4, {
+    type: 'bar',
+    data: {
+      labels: ['Q2\'25', 'Q3\'25', 'Q4\'25'],
+      datasets: [
+        { type: 'bar', label: '贷款余额(RMB十亿)', data: [141.1, 136.9, 126.0], backgroundColor: accent + '77', yAxisID: 'y' },
+        { type: 'line', label: '90天+逾期率%', data: [1.97, 2.09, 2.71], borderColor: red, backgroundColor: red + '22', tension: 0.3, pointRadius: 6, yAxisID: 'y2' }
+      ]
+    },
+    options: {
+      ...opts,
+      scales: {
+        x: opts.scales.x,
+        y: { ...opts.scales.y, title: { display: true, text: 'RMB 十亿', color: getCV('--text3') } },
+        y2: { position: 'right', ticks: { color: red, font: { size: 10 } }, grid: { display: false }, title: { display: true, text: '逾期率 %', color: red } }
+      }
+    }
+  });
+
+  // ── C5: 营收构成堆叠 ──
+  const c5 = document.getElementById('c-mix').getContext('2d');
+  charts.mix = new Chart(c5, {
+    type: 'bar',
+    data: {
+      labels: ['Q4\'24', 'Q1\'25', 'Q2\'25', 'Q3\'25', 'Q4\'25'],
+      datasets: [
+        { label: '融资收入', data: [1667.3, 1504.4, 2024.8, 2340.6, 2206.3], backgroundColor: accent2 + 'cc' },
+        { label: '担保责任释放', data: [761.8, 1182.4, 966.2, 912.8, 916.6], backgroundColor: accent + 'cc' },
+        { label: '重资产撮合费', data: [363.0, 313.6, 461.5, 513.9, 200.3], backgroundColor: accent3 + 'cc' },
+        { label: 'ICE 引荐费', data: [907.2, 906.9, 714.6, 648.1, 99.7], backgroundColor: red + 'aa' },
+        { label: '其他轻资产', data: [685.9, 458.6, 867.2, 789.3, 670.8], backgroundColor: gold + 'aa' }
+      ]
+    },
+    options: { ...opts, scales: { x: opts.scales.x, y: { ...opts.scales.y, stacked: true } } }
+  });
+
+  // ── C6: 年度历史 ──
+  const c6 = document.getElementById('c-annual').getContext('2d');
+  charts.annual = new Chart(c6, {
+    type: 'bar',
+    data: {
+      labels: ['2022', '2023', '2024', '2025'],
+      datasets: [
+        { type: 'bar', label: '总营收', data: [13550, 16195, 17166, 19205], backgroundColor: accent2 + '88', yAxisID: 'y' },
+        { type: 'line', label: 'Non-GAAP净利润', data: [3900, 5120, 6416, 6354], borderColor: gold, backgroundColor: gold + '22', tension: 0.3, pointRadius: 5, yAxisID: 'y' }
+      ]
+    },
+    options: { ...opts }
+  });
+
+  // ── C7: 股东回报 ──
+  const c7 = document.getElementById('c-return').getContext('2d');
+  charts.rtn = new Chart(c7, {
+    type: 'bar',
+    data: {
+      labels: ['ADS 回购\n(15.9M @ $28.2)', '3月额外回购\n(5.1M @ $44.23)', '可转债回购\n($460M面值→$399M)', 'H2 2025 股息\n($0.78/ADS)'],
+      datasets: [{
+        label: '2025年股东回报（RMB百万）',
+        data: [3134, 1590, 2793, 716],
+        backgroundColor: [accent2 + 'cc', accent3 + 'cc', gold + 'cc', green + 'cc'],
+        borderWidth: 0
+      }]
+    },
+    options: {
+      ...opts,
+      indexAxis: 'y',
+      plugins: { ...opts.plugins, legend: { display: false } }
+    }
+  });
+
+  // ── C8: 信贷质量趋势 ──
+  const c8 = document.getElementById('c-delinq').getContext('2d');
+  charts.delinq = new Chart(c8, {
+    type: 'line',
+    data: {
+      labels: ['Q2 2025', 'Q3 2025', 'Q4 2025'],
+      datasets: [
+        { label: '90天+逾期率 %', data: [1.97, 2.09, 2.71], borderColor: red, backgroundColor: red + '22', tension: 0.2, pointRadius: 6, fill: true },
+        { label: 'Day-1逾期率 %', data: [5.1, 5.5, 6.1], borderColor: accent3, backgroundColor: accent3 + '22', tension: 0.2, pointRadius: 6 },
+        { label: '30天催收率 %', data: [87.3, 85.7, 84.1], borderColor: accent2, backgroundColor: accent2 + '22', tension: 0.2, pointRadius: 6, yAxisID: 'y2' }
+      ]
+    },
+    options: {
+      ...opts,
+      scales: {
+        x: opts.scales.x,
+        y: { ...opts.scales.y, title: { display: true, text: '逾期率 %', color: getCV('--text3') }, min: 0, max: 10 },
+        y2: { position: 'right', min: 80, max: 92, ticks: { color: accent2, font: { size: 10 } }, grid: { display: false }, title: { display: true, text: '催收率 %', color: accent2 } }
+      }
+    }
+  });
+}
+
+function updateCharts() {
+  Object.values(charts).forEach(c => c.destroy());
+  charts = {};
+  setTimeout(buildCharts, 50);
+}
+
+// ── SANKEY ──
+function buildSankey() {
+  const isDark = document.documentElement.dataset.theme === 'dark';
+  const textColor = isDark ? '#d4ccc4' : '#4a4340';
+  const paperBg = isDark ? '#2e2a25' : '#ffffff';
+
+  // Q4 2025 flow: Revenue (4092.7) -> Costs -> Operating Profit -> Net Adjustments -> Net Income
+  // Costs: 撮合服务费745.8, 资金成本141.4, 销售营销550.6, G&A142.8, 贷款损失拨备1190.3, 或有负债拨备337.7, 其他116.7
+  // Operating profit 867.4, + debt gain 270.1, - tax 121.4 = ~1016.1
+
+  const data = {
+    type: 'sankey',
+    orientation: 'h',
+    node: {
+      pad: 15,
+      thickness: 22,
+      line: { color: isDark ? '#4a4540' : '#d9d0c7', width: 0.5 },
+      label: [
+        '总营收\nRMB 4,093M',        // 0
+        '信贷驱动服务\nRMB 3,432M',   // 1
+        '平台服务\nRMB 661M',         // 2
+        '撮合服务费\n745.8M',         // 3
+        '资金成本\n141.4M',           // 4
+        '销售营销\n550.6M',           // 5
+        '一般行政\n142.8M',           // 6
+        '贷款损失拨备\n1,190.3M',     // 7
+        '或有负债拨备\n337.7M',       // 8
+        '其他运营成本\n116.7M',       // 9
+        '经营利润\n867.4M',           // 10
+        '★债务偿还收益\n270.1M (一次性)', // 11
+        '税+少数股东\n121.4M',        // 12
+        'GAAP净利润\n1,016.1M',       // 13
+      ],
+      color: [
+        '#7b8fa0cc', '#8a9a8ecc', '#b08d7acc',
+        '#b8707099', '#b8707099', '#b8707099', '#b8707099', '#b8707099', '#b8707099', '#b8707099',
+        '#b9a06acc',
+        '#b9a06acc',
+        '#b8707099',
+        '#7a9a7acc'
+      ],
+      x: [0.01, 0.15, 0.15, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.7, 0.7, 0.88, 0.99],
+      y: [0.5, 0.3, 0.7, 0.1, 0.22, 0.34, 0.46, 0.62, 0.78, 0.90, 0.4, 0.65, 0.7, 0.55]
+    },
+    link: {
+      source: [0,0,  1,1,1,1,1,1,1,  2,   10,11, 10, 12],
+      target: [1,2,  3,4,5,6,7,8,9,  3,   12,13, 13, 13],
+      value:  [3432,661, 500,141,400,100,900,250,100, 246,  121,270, 867, 121],
+      color:  [
+        '#7b8fa033','#b08d7a33',
+        '#b8707033','#b8707033','#b8707033','#b8707033','#b8707033','#b8707033','#b8707033',
+        '#b8707033',
+        '#b8707033','#b9a06a33',
+        '#7a9a7a33',
+        '#b8707033'
+      ]
+    }
+  };
+
+  const layout = {
+    font: { size: 11, color: textColor, family: 'Segoe UI, sans-serif' },
+    paper_bgcolor: paperBg,
+    plot_bgcolor: paperBg,
+    margin: { l: 10, r: 10, t: 20, b: 10 }
+  };
+
+  Plotly.newPlot('sankey', [data], layout, { responsive: true, displayModeBar: false });
+}
+
+// ── INIT ──
+window.addEventListener('DOMContentLoaded', () => {
+  buildCharts();
+  buildSankey();
+});
+
+// Re-build sankey on theme change
+const origToggle = window.toggleTheme;
+window.toggleTheme = function() {
+  origToggle && origToggle();
+  setTimeout(buildSankey, 100);
+};
+</script>
+</body>
+</html>

@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SK hynix (000660.KS) — Q4 2025 & 全年财报深度分析</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root {
+  --bg:#f5f0eb;--bg2:#ece6df;--card:#fff;--card2:#f8f5f1;
+  --border:#d9d0c7;--text:#4a4340;--text2:#7a706a;--text3:#a89f98;
+  --accent:#8a9a8e;--accent2:#7b8fa0;--accent3:#b08d7a;
+  --rose:#c09090;--gold:#b9a06a;--red:#b87070;--green:#7a9a7a;
+  --shadow:rgba(0,0,0,.06);--chart-grid:#e5ddd5;
+}
+[data-theme="dark"]{
+  --bg:#1e1c1a;--bg2:#28251f;--card:#2e2a25;--card2:#363230;
+  --border:#4a4540;--text:#d4ccc4;--text2:#a09890;--text3:#706860;
+  --accent:#8a9a8e;--accent2:#8fabbf;--accent3:#c9a48e;
+  --rose:#c09090;--gold:#c9b07a;--red:#c08080;--green:#8aaa8a;
+  --shadow:rgba(0,0,0,.3);--chart-grid:#3e3a35;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Georgia','Noto Serif SC',serif;line-height:1.75;font-size:14.5px;transition:background .35s,color .35s}
+a{color:var(--accent2);text-decoration:none}
+.theme-bar{position:sticky;top:0;z-index:100;background:var(--card);border-bottom:1px solid var(--border);padding:8px 24px;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(10px);transition:background .35s}
+.theme-bar .logo{font-size:13px;color:var(--text2);letter-spacing:1px;font-family:'Segoe UI',sans-serif}
+.theme-toggle{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2);font-family:'Segoe UI',sans-serif}
+.toggle-switch{position:relative;width:44px;height:22px;background:var(--border);border-radius:11px;cursor:pointer;transition:background .3s}
+.toggle-switch::after{content:'';position:absolute;top:2px;left:2px;width:18px;height:18px;background:var(--card);border-radius:50%;transition:transform .3s;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+[data-theme="dark"] .toggle-switch{background:var(--accent2)}
+[data-theme="dark"] .toggle-switch::after{transform:translateX(22px)}
+.hero{padding:48px 24px 36px;text-align:center;border-bottom:1px solid var(--border)}
+.hero-tag{display:inline-block;font-family:'Segoe UI',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);padding:3px 14px;border-radius:20px;margin-bottom:18px}
+.hero h1{font-size:30px;font-weight:700;color:var(--text);letter-spacing:1px;margin-bottom:8px}
+.hero-sub{font-size:14px;color:var(--text2);margin-bottom:16px}
+.hero-pills{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.pill{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:5px 16px;font-family:'Segoe UI',sans-serif;font-size:13px;color:var(--text2);box-shadow:0 1px 3px var(--shadow)}
+.pill strong{color:var(--text)}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+.section{padding:36px 0;border-bottom:1px solid var(--border)}
+.stitle{font-size:18px;font-weight:700;color:var(--accent3);margin-bottom:20px;letter-spacing:.5px;display:flex;align-items:center;gap:10px}
+.stitle::before{content:'';display:block;width:4px;height:20px;background:var(--accent3);border-radius:2px}
+.snap-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:8px}
+.snap-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 20px;text-align:center;box-shadow:0 1px 4px var(--shadow)}
+.snap-l{font-family:'Segoe UI',sans-serif;font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.snap-v{font-size:22px;font-weight:800;color:var(--accent3);font-family:'Segoe UI',sans-serif}
+.snap-sub{font-size:12px;color:var(--text3);margin-top:3px}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:14px}
+.kpi{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 18px;box-shadow:0 1px 4px var(--shadow);transition:background .35s}
+.kpi-l{font-family:'Segoe UI',sans-serif;font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
+.kpi-v{font-size:20px;font-weight:700;color:var(--text);margin-bottom:3px}
+.badge{display:inline-block;font-family:'Segoe UI',sans-serif;font-size:11px;font-weight:600;padding:2px 8px;border-radius:8px}
+.up{background:rgba(122,154,122,.15);color:var(--green)}
+.dn{background:rgba(184,112,112,.15);color:var(--red)}
+.nt{background:rgba(123,143,160,.15);color:var(--accent2)}
+.tbl-wrap{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow-x:auto;box-shadow:0 1px 4px var(--shadow)}
+.tbl{width:100%;border-collapse:collapse;font-family:'Segoe UI',sans-serif;font-size:13px}
+.tbl th{background:var(--card2);color:var(--text3);font-size:11px;letter-spacing:.5px;text-transform:uppercase;padding:10px 14px;text-align:right;border-bottom:1px solid var(--border)}
+.tbl th:first-child{text-align:left}
+.tbl td{padding:9px 14px;border-bottom:1px solid var(--border);text-align:right}
+.tbl td:first-child{text-align:left;color:var(--text2)}
+.tbl .hl td{font-weight:600;color:var(--text)}
+.tbl tr:last-child td{border-bottom:none}
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.ccard{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px;box-shadow:0 1px 4px var(--shadow)}
+.ctitle{font-family:'Segoe UI',sans-serif;font-size:12px;color:var(--text3);margin-bottom:12px;text-transform:uppercase;letter-spacing:.5px}
+.cwrap{position:relative;height:230px}
+.seg-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
+.seg-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px;box-shadow:0 1px 4px var(--shadow)}
+.seg-card h4{font-size:13px;color:var(--accent2);margin-bottom:12px;text-transform:uppercase;letter-spacing:.5px;font-family:'Segoe UI',sans-serif}
+.seg-card p{font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:8px}
+.ec-block{margin-bottom:14px;background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;box-shadow:0 1px 4px var(--shadow)}
+.ec-head{padding:12px 16px;background:var(--card2);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+.ec-head strong{font-size:13px;font-family:'Segoe UI',sans-serif}
+.ec-head span{font-size:11px;color:var(--text3)}
+.ec-item{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;gap:12px;align-items:flex-start}
+.ec-item:last-child{border-bottom:none}
+.ec-tag{font-family:'Segoe UI',sans-serif;font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px;white-space:nowrap;flex-shrink:0;margin-top:1px}
+.tag-bull{background:rgba(122,154,122,.18);color:var(--green)}
+.tag-bear{background:rgba(184,112,112,.18);color:var(--red)}
+.tag-neut{background:rgba(123,143,160,.18);color:var(--accent2)}
+.ec-quote{font-style:italic;font-size:13px;color:var(--text);line-height:1.7;flex:1}
+.ec-comment{font-size:12px;color:var(--text3);margin-top:4px;font-style:normal}
+.bscore{display:flex;align-items:center;gap:16px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin-bottom:12px;box-shadow:0 1px 4px var(--shadow)}
+.circle{width:62px;height:62px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;flex-shrink:0;border:3px solid;font-family:'Segoe UI',sans-serif}
+.cg{border-color:var(--green);color:var(--green)}
+.cw{border-color:var(--gold);color:var(--gold)}
+.cr{border-color:var(--red);color:var(--red)}
+.bscore .bd h4{font-size:14px;margin-bottom:3px}
+.bscore .bd p{font-size:13px;color:var(--text2);line-height:1.6}
+.dcf-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:16px}
+.dcf-box{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px;box-shadow:0 1px 4px var(--shadow)}
+.dcf-box h4{font-size:12px;text-transform:uppercase;letter-spacing:.5px;font-family:'Segoe UI',sans-serif;margin-bottom:12px}
+.dcf-box .dcf-val{font-size:22px;font-weight:800;font-family:'Segoe UI',sans-serif;margin:6px 0}
+.dcf-box ul{font-size:12px;color:var(--text2);padding-left:14px;line-height:1.9}
+.verdict{background:var(--card2);border:2px solid var(--accent);border-radius:10px;padding:26px 28px;margin-bottom:16px}
+.verdict-t{font-size:17px;font-weight:700;color:var(--accent);margin-bottom:10px}
+.pgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:18px 0}
+.pbox{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center;box-shadow:0 1px 4px var(--shadow)}
+.pbox-l{font-family:'Segoe UI',sans-serif;font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.pbox-v{font-size:19px;font-weight:700;font-family:'Segoe UI',sans-serif}
+.pbox-sub{font-size:11px;color:var(--text3);margin-top:4px}
+.footer{padding:28px 24px;text-align:center;font-size:12px;color:var(--text3);font-family:'Segoe UI',sans-serif;line-height:1.8}
+@media(max-width:768px){
+  .snap-grid,.cgrid,.seg-grid,.dcf-grid,.pgrid{grid-template-columns:1fr}
+  .hero h1{font-size:22px}
+  .bscore{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <span class="logo">🍔 Buffy 财报研究室 · SK hynix 000660.KS</span>
+  <label class="theme-toggle">
+    <span id="themeLabel">浅色</span>
+    <div class="toggle-switch" onclick="toggleTheme()"></div>
+  </label>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">KRX : 000660 · 半导体存储</div>
+  <h1>SK hynix — 2025 Q4 &amp; 全年财报深度分析</h1>
+  <div class="hero-sub">HBM 霸主 · AI 存储核心受益者 · 史上最强财报</div>
+  <div class="hero-pills">
+    <span class="pill">发布日期 <strong>2026-01-28</strong></span>
+    <span class="pill">汇率 <strong>₩1,500 = $1</strong></span>
+    <span class="pill">数据截止 <strong>2025-12-31</strong></span>
+    <span class="pill">分析师 <strong>🍔 Buffy</strong></span>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- S0: STOCK SNAPSHOT -->
+<div class="section">
+  <div class="stitle">📈 股票快照</div>
+  <div class="snap-grid">
+    <div class="snap-card">
+      <div class="snap-l">当前股价</div>
+      <div class="snap-v">$671</div>
+      <div class="snap-sub">₩1,007,000 · 2026-03-19</div>
+    </div>
+    <div class="snap-card">
+      <div class="snap-l">市值</div>
+      <div class="snap-v">$463B</div>
+      <div class="snap-sub">₩695T · 690M 股</div>
+    </div>
+    <div class="snap-card">
+      <div class="snap-l">TTM 市盈率</div>
+      <div class="snap-v">16.2x</div>
+      <div class="snap-sub">FY2025 净利 $28.6B</div>
+    </div>
+    <div class="snap-card">
+      <div class="snap-l">前瞻市盈率</div>
+      <div class="snap-v">11.3x</div>
+      <div class="snap-sub">Q4 净利 $10.2B × 4 = $40.8B</div>
+    </div>
+  </div>
+  <div class="tbl-wrap" style="margin-top:16px">
+    <table class="tbl">
+      <thead><tr><th>指标</th><th>SK hynix</th><th>Micron (MU)</th><th>Samsung (005930)</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td>P/E (TTM)</td><td><strong>16.2x</strong></td><td>~14x</td><td>~18x</td><td>SK hynix 盈利质量更纯</td></tr>
+        <tr><td>前瞻 P/E (Q4 年化)</td><td><strong>11.3x</strong></td><td>~10x</td><td>~15x</td><td>Q4 利润激增压低 Forward PE</td></tr>
+        <tr><td>营业利润率</td><td><strong>49%</strong></td><td>~25%</td><td>~18%</td><td>HBM 溢价显著拉开差距</td></tr>
+        <tr><td>HBM 市场份额</td><td><strong>~55%</strong></td><td>~5%</td><td>~40%</td><td>Samsung HBM3E 良率仍落后</td></tr>
+        <tr><td>净现金</td><td><strong>+$8.5B</strong></td><td>净负债</td><td>净现金</td><td>2025 年转为净现金</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- S1: KPI -->
+<div class="section">
+  <div class="stitle">📊 核心 KPI — Q4 2025</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">Q4 营收</div><div class="kpi-v">$21.9B</div><span class="badge up">+66% YoY</span>&nbsp;<span class="badge up">+34% QoQ</span></div>
+    <div class="kpi"><div class="kpi-l">Q4 营业利润</div><div class="kpi-v">$12.8B</div><span class="badge up">+137% YoY</span>&nbsp;<span class="badge up">+68% QoQ</span></div>
+    <div class="kpi"><div class="kpi-l">Q4 营业利润率</div><div class="kpi-v">58%</div><span class="badge up">+17pp YoY</span>&nbsp;<span class="badge up">+11pp QoQ</span></div>
+    <div class="kpi"><div class="kpi-l">Q4 净利润</div><div class="kpi-v">$10.2B</div><span class="badge up">+90% YoY</span>&nbsp;<span class="badge up">+21% QoQ</span></div>
+    <div class="kpi"><div class="kpi-l">FY2025 营收</div><div class="kpi-v">$64.8B</div><span class="badge up">+47% YoY · 史上最高</span></div>
+    <div class="kpi"><div class="kpi-l">FY2025 营业利润</div><div class="kpi-v">$31.5B</div><span class="badge up">+101% YoY · 史上最高</span></div>
+    <div class="kpi"><div class="kpi-l">FY2025 净利润</div><div class="kpi-v">$28.6B</div><span class="badge up">+117% YoY · 净利率 44%</span></div>
+    <div class="kpi"><div class="kpi-l">净现金头寸</div><div class="kpi-v">$8.5B</div><span class="badge up">从净负债转为净现金</span></div>
+    <div class="kpi"><div class="kpi-l">HBM 年营收</div><div class="kpi-v">&gt;2× YoY</div><span class="badge up">全球市占率 ~55%</span></div>
+    <div class="kpi"><div class="kpi-l">DRAM ASP (Q4)</div><div class="kpi-v">+中20% QoQ</div><span class="badge up">供需持续偏紧</span></div>
+    <div class="kpi"><div class="kpi-l">Q4 EBITDA</div><div class="kpi-v">$15.1B</div><span class="badge nt">EBITDA 利润率 69%</span></div>
+    <div class="kpi"><div class="kpi-l">股东回报</div><div class="kpi-v">$9.5B</div><span class="badge nt">分红 $1.4B + 注销 $8.1B</span></div>
+  </div>
+</div>
+
+<!-- S2: QUARTERLY TABLE -->
+<div class="section">
+  <div class="stitle">📋 五季度财务趋势 (USD)</div>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>指标</th><th>Q4 2024</th><th>Q1 2025</th><th>Q2 2025</th><th>Q3 2025</th><th>Q4 2025</th><th>QoQ</th><th>YoY</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td>营收</td><td>$13.2B</td><td>$11.8B</td><td>$14.8B</td><td>$16.3B</td><td><strong>$21.9B</strong></td><td><span class="badge up">+34%</span></td><td><span class="badge up">+66%</span></td></tr>
+        <tr class="hl"><td>营业利润</td><td>$5.4B</td><td>$5.0B</td><td>$6.1B</td><td>$7.6B</td><td><strong>$12.8B</strong></td><td><span class="badge up">+68%</span></td><td><span class="badge up">+137%</span></td></tr>
+        <tr><td>营业利润率</td><td>41%</td><td>42%</td><td>41%</td><td>47%</td><td><strong>58%</strong></td><td><span class="badge up">+11pp</span></td><td><span class="badge up">+17pp</span></td></tr>
+        <tr class="hl"><td>净利润</td><td>$5.3B</td><td>—</td><td>—</td><td>$8.4B</td><td><strong>$10.2B</strong></td><td><span class="badge up">+21%</span></td><td><span class="badge up">+90%</span></td></tr>
+        <tr><td>EBITDA</td><td>—</td><td>—</td><td>—</td><td>—</td><td><strong>$15.1B</strong></td><td>—</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="margin-top:20px" class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>全年</th><th>FY2023</th><th>FY2024</th><th>FY2025</th><th>YoY</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td>营收</td><td>$21.8B</td><td>$44.1B</td><td><strong>$64.8B</strong></td><td><span class="badge up">+47%</span></td></tr>
+        <tr><td>营业利润</td><td>-$5.2B</td><td>$15.6B</td><td><strong>$31.5B</strong></td><td><span class="badge up">+101%</span></td></tr>
+        <tr><td>营业利润率</td><td>-24%</td><td>35%</td><td><strong>49%</strong></td><td><span class="badge up">+14pp</span></td></tr>
+        <tr class="hl"><td>净利润</td><td>-$5.2B</td><td>$13.2B</td><td><strong>$28.6B</strong></td><td><span class="badge up">+117%</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- P/E Multi-lens -->
+  <div style="margin-top:20px" class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>P/E 多维度</th><th>净利润基数</th><th>P/E</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td>TTM (全年)</td><td>$28.6B</td><td>16.2x</td><td>FY2025 实际净利</td></tr>
+        <tr class="hl"><td><strong>前瞻 (Q4 年化)</strong></td><td><strong>$40.8B</strong></td><td><strong>11.3x</strong></td><td>Q4 $10.2B × 4，反映当前盈利能力</td></tr>
+        <tr><td>H2 年化</td><td>$37.2B</td><td>12.4x</td><td>(Q3 $8.4B + Q4 $10.2B) × 2</td></tr>
+        <tr><td>2026E 共识</td><td>~$36B</td><td>~12.9x</td><td>分析师共识预期（估算）</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- S3: CHARTS -->
+<div class="section">
+  <div class="stitle">📈 财务走势图</div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">季度营收 & 营业利润 ($B)</div><div class="cwrap"><canvas id="chartRevOp"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">营业利润率趋势 (%)</div><div class="cwrap"><canvas id="chartMargin"></canvas></div></div>
+  </div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">FY2025 营收分布 (估算)</div><div class="cwrap"><canvas id="chartSegPie"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">资产负债结构 ($B，年末)</div><div class="cwrap"><canvas id="chartBalance"></canvas></div></div>
+  </div>
+</div>
+
+<!-- S4: SANKEY -->
+<div class="section">
+  <div class="stitle">🌊 FY2025 现金流向桑基图 ($B)</div>
+  <div class="ccard"><div id="sankey" style="height:380px"></div></div>
+</div>
+
+<!-- S5: BUSINESS SEGMENTS -->
+<div class="section">
+  <div class="stitle">🏭 业务分部深度拆解</div>
+  <div class="seg-grid">
+    <div class="seg-card">
+      <h4>🔵 DRAM &amp; HBM — 主引擎</h4>
+      <p><strong>规模：</strong>约占全年营收 80%（约 $52B）。HBM 是 2025 年最核心增长驱动力。</p>
+      <p><strong>HBM 亮点：</strong>全年营收 >2x YoY，HBM3E 12Hi 大规模供货 NVIDIA；全球率先量产 HBM4（2025年9月），成为唯一能同时量产 HBM3E + HBM4 的厂商。</p>
+      <p><strong>Q4 DRAM：</strong>出货量 +低单位数% QoQ（HBM3E 12Hi 带动），DDR5 服务器模组出货 +50% QoQ，ASP +中20% QoQ。</p>
+      <p><strong>1cnm 节点：</strong>DDR5 已进入 1c 纳米全面量产，较 1b 工艺提升 20% 密度，服务器 256GB RDIMM 引领行业。</p>
+      <p><strong>竞争格局：</strong>市占率约 55%，Samsung HBM3E 良率改善慢，Micron HBM 体量有限，SK hynix 领先至少 12-18 个月。</p>
+      <p><span class="badge up">持续扩大 ASP 溢价</span></p>
+    </div>
+    <div class="seg-card">
+      <h4>🟠 NAND — 结构性复苏</h4>
+      <p><strong>规模：</strong>约占全年营收 20%（约 $13B），H1 需求疲软，H2 eSSD 强劲复苏带动全年创历史新高。</p>
+      <p><strong>Q4 NAND：</strong>出货量 +10% QoQ（超预期），ASP +低30% QoQ，eSSD 贡献主要增量。</p>
+      <p><strong>321 层 QLC：</strong>已完成研发，技术领先 Samsung，QLC eSSD 单位存储成本降低约 25%，AI 数据中心储存需求结构性上升。</p>
+      <p><strong>Solidigm 协同：</strong>收购 Intel NAND 业务后，企业 eSSD 产品线完整，直面 AI 推理基础设施存储需求。</p>
+      <p><span class="badge nt">NAND 正从商品化转向计算存储关键组件</span></p>
+    </div>
+    <div class="seg-card">
+      <h4>⚡ HBM4 — 下一代护城河</h4>
+      <p><strong>里程碑：</strong>全球率先（2025年9月）完成 HBM4 量产准备，现正按客户需求大规模生产。</p>
+      <p><strong>技术差异化：</strong>采用专有 MRNUF 先进封装技术，目标良率对标 HBM3E 12Hi 水平。</p>
+      <p><strong>Custom HBM：</strong>与主要客户合作定制 HBM 规格，技术壁垒高，类似「存储版 ASIC」，可持续获取高溢价。</p>
+      <p><strong>客户生态：</strong>NVIDIA 首选供应商 + Microsoft AI 芯片独家供应商（据报道），2026 年 HBM4 需求锁定程度高。</p>
+      <p><span class="badge up">技术壁垒 + 量产先发 + 客户信任</span></p>
+    </div>
+    <div class="seg-card">
+      <h4>🏗️ 产能扩张 &amp; 资本规划</h4>
+      <p><strong>M15X 清州厂：</strong>计划提前拉满产能，主攻 HBM 及 1c 纳米 DDR5，2026 年产量增长核心来源。</p>
+      <p><strong>龙仁半导体集群：</strong>超大型新建厂，第一期已开工，为 2028+ 产能储备。</p>
+      <p><strong>先进封装：</strong>清州 + 美国 Indiana 两地 HBM 封装厂在建，建立全球前后段一体化制造体系。</p>
+      <p><strong>2026 资本开支：</strong>"相当大幅度增加"，目标维持 capex/revenue ~中30%，估算 $25-30B。</p>
+      <p><span class="badge nt">高 capex 压制 FCF，扩产节奏需匹配需求</span></p>
+    </div>
+  </div>
+</div>
+
+<!-- S6: EARNINGS CALL -->
+<div class="section">
+  <div class="stitle">🎙️ Q4 2025 电话会议全文解析</div>
+
+  <div class="ec-block">
+    <div class="ec-head"><strong>📢 管理层开场</strong><span>CEO + CFO</span></div>
+    <div class="ec-item"><span class="ec-tag tag-bull">🟢 利好</span><div><div class="ec-quote">「2025 年 SK hynix 用世界级技术领导力再次证明自己。以 AI 为中心的需求结构中，同时实现了增长与盈利。」</div><div class="ec-comment">→ 全年营收 $64.8B(+47%), 营业利润 $31.5B(+101%), 双创历史新高。</div></div></div>
+    <div class="ec-item"><span class="ec-tag tag-bull">🟢 利好</span><div><div class="ec-quote">「Q4 在 HBM 之外，服务器传统内存需求也大幅增加。营收、营业利润、净利润三项同时创单季历史新高，营业利润率达 58%。」</div><div class="ec-comment">→ 58% 营业利润率是全球存储行业史无前例的水平。</div></div></div>
+    <div class="ec-item"><span class="ec-tag tag-bull">🟢 利好</span><div><div class="ec-quote">「HBM 全年营收超过 2 倍增长，传统 DRAM 进入 1cnm 全面量产，NAND 实现历史最高年营收。」</div><div class="ec-comment">→ DRAM + NAND 同步创新高，技术路线图清晰执行。</div></div></div>
+  </div>
+
+  <div class="ec-block">
+    <div class="ec-head"><strong>💰 Q4 财务详情</strong><span>CFO</span></div>
+    <div class="ec-item"><span class="ec-tag tag-bull">🟢 利好</span><div><div class="ec-quote">「DRAM 出货量低个位数增长，HBM3E 12Hi 和 DDR5 驱动。高密度 DDR5 模组出货 QoQ +50%，DRAM ASP 环比 +中20%。」</div><div class="ec-comment">→ 量价双升，DDR5 模组高增说明 AI 服务器升级持续。</div></div></div>
+    <div class="ec-item"><span class="ec-tag tag-bull">🟢 利好</span><div><div class="ec-quote">「NAND 出货量 QoQ +10% 超预期，ASP +低30%，企业 SSD 需求复苏主要拉动。」</div><div class="ec-comment">→ NAND 超预期，eSSD 结构性需求持续改善。</div></div></div>
+    <div class="ec-item"><span class="ec-tag tag-bull">🟢 利好</span><div><div class="ec-quote">「期末现金 $23.3B，较 2024 年末增加 $13.9B；借款减少至 $14.8B，债务比率降至 18%，净现金为正。」</div><div class="ec-comment">→ 一年内从净负债转为净现金，资产负债表质量飞跃。</div></div></div>
+    <div class="ec-item"><span class="ec-tag tag-neut">📊 中性</span><div><div class="ec-quote">「Q4 非经营净损失 $1.0B，其中投资估值收益 $4.4B，衍生工具损失 $5.6B。」</div><div class="ec-comment">→ 衍生工具损失属汇率对冲一次性波动，不影响经营质量。</div></div></div>
+  </div>
+
+  <div class="ec-block">
+    <div class="ec-head"><strong>🔬 HBM4 &amp; 技术领导力</strong></div>
+    <div class="ec-item"><span class="ec-tag tag-bull">🟢 利好</span><div><div class="ec-quote">「全球首家（2025年9月）完成 HBM4 量产准备，目前正按客户需求大规模生产，唯一能同时稳定供应 HBM3E 和 HBM4。」</div><div class="ec-comment">→ 领先 Samsung ≥12 个月，Micron 差距更大。</div></div></div>
+    <div class="ec-item"><span class="ec-tag tag-bull">🟢 利好</span><div><div class="ec-quote">「HBM4 采用 1b 纳米 + 专有 MRNUF 封装，目标良率与 HBM3E 12Hi 相当。客户对我们 HBM4 表现出强烈偏好。」</div><div class="ec-comment">→ 良率可比肩量产级，不会重蹈 Samsung HBM3E 初期良率问题。</div></div></div>
+    <div class="ec-item"><span class="ec-tag tag-bull">🟢 利好</span><div><div class="ec-quote">「Custom HBM 正成为关键差异化方向。竞争将从简单堆叠演进至定制化，我们正与核心客户积极开展技术讨论。」</div><div class="ec-comment">→ Custom HBM 壁垒更高，类似存储版 ASIC，持续锁定高溢价。</div></div></div>
+  </div>
+
+  <div class="ec-block">
+    <div class="ec-head"><strong>🌐 行业趋势 &amp; 2026 展望</strong></div>
+    <div class="ec-item"><span class="ec-tag tag-bull">🟢 利好</span><div><div class="ec-quote">「2026 DRAM 需求增长 >20%，NAND 高十几个百分点。供需偏紧将持续，因生产空间物理限制和技术迁移。」</div><div class="ec-comment">→ 供需缺口非短期现象，涨价周期可持续较长。</div></div></div>
+    <div class="ec-item"><span class="ec-tag tag-bull">🟢 利好</span><div><div class="ec-quote">「服务器客户库存减少，难以获得足够内存量。DRAM 库存 Q4 环比下降，偏紧趋势预计贯穿全年。」</div><div class="ec-comment">→ 全面库存去化完成，价格涨势未见顶。</div></div></div>
+    <div class="ec-item"><span class="ec-tag tag-neut">📊 中性</span><div><div class="ec-quote">「PC 和手机客户因成本上涨和消费者情绪疲软，短期出货量将调整。」</div><div class="ec-comment">→ 消费端拖累存在，但服务器/AI 占比提升对冲影响。</div></div></div>
+  </div>
+
+  <div class="ec-block">
+    <div class="ec-head"><strong>📅 Q1 2026 指引 &amp; 资本配置</strong></div>
+    <div class="ec-item"><span class="ec-tag tag-bull">🟢 利好</span><div><div class="ec-quote">「Q1 通常是淡季，但客户需求依然强劲。DRAM 出货量维持上季度水平。」</div><div class="ec-comment">→ 淡季不淡，传统 Q1 维持 Q4 高出货量，需求极度旺盛。</div></div></div>
+    <div class="ec-item"><span class="ec-tag tag-neut">📊 中性</span><div><div class="ec-quote">「2026 capex 相当大幅度增加，支持产能扩张。目标维持 capex/revenue 中30%+区间。」</div><div class="ec-comment">→ 高 capex 压制 FCF，但以中30%为目标说明管理层有纪律。</div></div></div>
+    <div class="ec-item"><span class="ec-tag tag-bull">🟢 利好</span><div><div class="ec-quote">「FY2025 全年股息 $3,000/股（合计 $1.4B），注销库存股 1,530 万股（≈$8.1B）。」</div><div class="ec-comment">→ $9.5B 股东回报 = 净利润 33%，体现管理层对业绩可持续性信心。</div></div></div>
+  </div>
+
+  <div class="ec-block">
+    <div class="ec-head"><strong>🌍 关税 &amp; 地缘风险</strong></div>
+    <div class="ec-item"><span class="ec-tag tag-bear">🔴 利空</span><div><div class="ec-quote">「美国政府近期谈到若不在美建厂则对半导体征收 100% 关税。公司将监测并择机沟通。」</div><div class="ec-comment">→ 重大不确定性。若落地将直接冲击对美出口竞争力和成本结构。</div></div></div>
+    <div class="ec-item"><span class="ec-tag tag-neut">📊 中性</span><div><div class="ec-quote">「在美国设立 AI Co.，探索 AI 解决方案商业化机会。」</div><div class="ec-comment">→ 布局 AI 应用层兼顾美国本土化，战略意义待验证。</div></div></div>
+  </div>
+
+  <div style="margin-top:16px;background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:18px">
+    <div style="font-family:'Segoe UI',sans-serif;font-size:13px;font-weight:700;color:var(--text3);margin-bottom:10px">电话会议信号汇总</div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <div style="background:rgba(122,154,122,.15);color:var(--green);padding:6px 18px;border-radius:8px;font-family:'Segoe UI',sans-serif;font-size:13px;font-weight:600">🟢 利好 11 条</div>
+      <div style="background:rgba(123,143,160,.15);color:var(--accent2);padding:6px 18px;border-radius:8px;font-family:'Segoe UI',sans-serif;font-size:13px;font-weight:600">📊 中性 5 条</div>
+      <div style="background:rgba(184,112,112,.15);color:var(--red);padding:6px 18px;border-radius:8px;font-family:'Segoe UI',sans-serif;font-size:13px;font-weight:600">🔴 利空 1 条</div>
+      <div style="color:var(--text2);font-size:13px;align-self:center">→ 压倒性利好，唯一利空为美国关税风险</div>
+    </div>
+  </div>
+</div>
+
+<!-- S7: BUFFETT SCORES -->
+<div class="section">
+  <div class="stitle">🎯 巴菲特六维评分</div>
+  <div class="bscore"><div class="circle cg">A</div><div class="bd"><h4>护城河（Moat）</h4><p>HBM 护城河宽且深：全球首发 HBM4 量产，Custom HBM 锁客，MRNUF 封装专利壁垒，NVIDIA/Microsoft 首选供应商。Samsung 良率差距 12-18 个月，Micron 体量有限。3-5 年内被追上可能性低。</p></div></div>
+  <div class="bscore"><div class="circle cg">A-</div><div class="bd"><h4>管理层（Management）</h4><p>持续做出正确战略选择：HBM3E→HBM4 提前布局，收购 Solidigm 完善 NAND 生态，股东回报纪律良好（$9.5B）。唯一减分：高 capex 扩产节奏需精准匹配需求。</p></div></div>
+  <div class="bscore"><div class="circle cg">A-</div><div class="bd"><h4>财务健康（Financial Health）</h4><p>2025 年末净现金 +$8.5B，债务比率降至 18%。FCF 估计 $13-18B。减分：资本密集型行业 FCF/净利较低；2026 capex $25-30B 将再次压制 FCF。</p></div></div>
+  <div class="bscore"><div class="circle cw">B+</div><div class="bd"><h4>盈利质量（Earnings Quality）</h4><p>核心营业利润质量高，HBM 溢价真实可见。但 Q4 衍生工具损失 $5.6B 造成净利波动。周期性是最大隐患：2023 年亏损 $5.2B → 2025 年盈利 $31.5B，波幅极大。</p></div></div>
+  <div class="bscore"><div class="circle cw">C+</div><div class="bd"><h4>可预测性（Predictability）</h4><p>存储芯片周期性最强。2023 深度亏损 → 2025 历史新高，两年落差超 $36B。AI/HBM 提升结构性需求预测置信度，但商品化部分仍高度敏感于宏观和技术节奏。</p></div></div>
+  <div class="bscore"><div class="circle cw">B-</div><div class="bd"><h4>资本配置纪律（Capital Discipline）</h4><p>2025 年表现可圈可点：capex ~35% of revenue + 股东回报 $9.5B。但 2026 capex "相当大幅度增加"措辞模糊，内存行业容易在周期顶部过度扩产。</p></div></div>
+</div>
+
+<!-- S8: DCF -->
+<div class="section">
+  <div class="stitle">💰 三情景 DCF 估值</div>
+  <div style="background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:16px 20px;margin-bottom:16px;font-size:13px;color:var(--text2)">
+    <strong style="color:var(--text)">估值假设：</strong> FY2025 FCF ≈ $13-18B（营业现金流 ~$38B - capex ~$22B）。韩国风险折扣 -10%。周期性内嵌至 WACC。前瞻 P/E 基于 Q4 净利 $10.2B × 4 = $40.8B → <strong>11.3x</strong>。
+  </div>
+
+  <div class="dcf-grid">
+    <div class="dcf-box">
+      <h4 style="color:var(--red)">🔴 悲观情景</h4>
+      <p style="font-size:12px;color:var(--text2);margin-bottom:10px">周期回调 + Samsung 良率追上 + HBM 竞争加剧</p>
+      <ul>
+        <li>2026: $10B → 2027: $7B → 2028: $6B → 2029: $9B → 2030: $12B</li>
+        <li>WACC: 14%，永续增长: 2%</li>
+        <li>韩国折扣: -10%</li>
+      </ul>
+      <div class="dcf-val" style="color:var(--red)">$136/股</div>
+      <div style="font-size:12px;color:var(--text3)">安全边际买入价 $102<br>vs 现价 $671 折价 80%</div>
+    </div>
+    <div class="dcf-box">
+      <h4 style="color:var(--gold)">📊 中性情景</h4>
+      <p style="font-size:12px;color:var(--text2);margin-bottom:10px">AI 持续 + 温和周期波动 + HBM4 保持领先</p>
+      <ul>
+        <li>2026: $14B → 2027: $13B → 2028: $15B → 2029: $19B → 2030: $23B</li>
+        <li>WACC: 12%，永续增长: 2.5%</li>
+        <li>韩国折扣: -10%</li>
+      </ul>
+      <div class="dcf-val" style="color:var(--gold)">$302/股</div>
+      <div style="font-size:12px;color:var(--text3)">安全边际买入价 $227<br>vs 现价 $671 折价 55%</div>
+    </div>
+    <div class="dcf-box">
+      <h4 style="color:var(--green)">🟢 乐观情景</h4>
+      <p style="font-size:12px;color:var(--text2);margin-bottom:10px">HBM4 超级周期 + Custom HBM 垄断 + AI 基建 5 年爆发</p>
+      <ul>
+        <li>2026: $18B → 2027: $23B → 2028: $29B → 2029: $34B → 2030: $40B</li>
+        <li>WACC: 11%，永续增长: 3%</li>
+        <li>韩国折扣: -10%</li>
+      </ul>
+      <div class="dcf-val" style="color:var(--green)">$601/股</div>
+      <div style="font-size:12px;color:var(--text3)">安全边际买入价 $451<br>vs 现价 $671 折价 10%</div>
+    </div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>情景</th><th>FCF 路径</th><th>WACC</th><th>内在价值</th><th>安全边际价</th><th>vs 现价</th><th>评级</th></tr></thead>
+      <tbody>
+        <tr><td>悲观</td><td>$10B→$12B</td><td>14%</td><td>$136</td><td>$102</td><td><span class="badge dn">-80%</span></td><td>严重高估</td></tr>
+        <tr class="hl"><td>中性（基准）</td><td>$14B→$23B</td><td>12%</td><td>$302</td><td>$227</td><td><span class="badge dn">-55%</span></td><td>显著高估</td></tr>
+        <tr><td>乐观</td><td>$18B→$40B</td><td>11%</td><td>$601</td><td>$451</td><td><span class="badge dn">-10%</span></td><td>略有高估</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="margin-top:12px;font-size:13px;color:var(--text2);background:var(--card2);padding:14px 16px;border-radius:8px">
+    <strong>⚠️ 关键洞察：</strong>即便乐观情景，$671 仍高于内在价值 12%。市场定价比乐观假设更激进——HBM 超级周期持续 10 年+且无竞争侵蚀。不是价值投资者的买点。
+  </div>
+</div>
+
+<!-- S9: VERDICT -->
+<div class="section">
+  <div class="stitle">🍔 巴菲特视角 — Buffy 评级</div>
+  <div class="verdict">
+    <div class="verdict-t">📋 综合评级：<strong>谨慎观望 / 等待回调</strong></div>
+    <p style="font-size:14px;line-height:1.85">SK hynix 的业务质量是 A 级。HBM 护城河真实存在，技术领导力清晰可见，管理层这两年做了很多正确的事。如果这是一家你能在 $300-$350 买到的公司，我会毫不犹豫告诉你"买"。</p>
+    <p style="font-size:14px;line-height:1.85;margin-top:12px">但 <strong>$671 定价的是乐观情景的 1.1 倍</strong>。市场相信 HBM 超级周期持续 5-8 年，且 SK hynix 市占率和溢价不被 Samsung 追上。"可能成真"不等于"值得用 1.1 倍乐观估值去博"。</p>
+    <p style="font-size:14px;line-height:1.85;margin-top:12px">虽然前瞻 P/E 只有 11.3x（Q4 年化），看似便宜，但 <strong>Q4 的 58% 营业利润率几乎不可持续</strong>。存储行业从未在 55%+ 利润率维持超过 3 个季度。这正是用当季利润线性外推的陷阱。</p>
+
+    <div class="pgrid" style="margin-top:20px">
+      <div class="pbox"><div class="pbox-l">建议仓位</div><div class="pbox-v" style="color:var(--text3)">0%</div><div class="pbox-sub">当前不建仓</div></div>
+      <div class="pbox"><div class="pbox-l">观察入场价</div><div class="pbox-v" style="color:var(--gold)">$467</div><div class="pbox-sub">中性估值附近，3-5%</div></div>
+      <div class="pbox"><div class="pbox-l">理想买入价</div><div class="pbox-v" style="color:var(--green)">$333</div><div class="pbox-sub">安全边际充足，可加至 8%</div></div>
+    </div>
+
+    <div style="margin-top:14px;font-size:13.5px;line-height:1.85">
+      <strong>触发点：</strong><br>
+      📌 <strong>加仓：</strong>① 股价跌至 $467 以下 + DRAM/HBM 需求未恶化；② Q1 2026 HBM 出货量维持 Q4 水平<br>
+      📌 <strong>回避：</strong>① Samsung HBM3E 良率大幅提升；② 美国 100% 半导体关税落地；③ NVIDIA 转向 Samsung<br>
+      📌 <strong>验证节点：</strong>Q1 2026 财报（2026年4月底），重点看 HBM 出货量 + ASP 是否维持
+    </div>
+  </div>
+  <div style="background:var(--card);border:1px dashed var(--border);border-radius:10px;padding:18px 20px;font-size:13px;color:var(--text3)">
+    <strong>⚠️ 风险免责声明：</strong>本报告仅为个人研究，不构成投资建议。SK hynix 是高度周期性行业，历史上曾多次从巅峰跌落 60-80%。请咨询专业财务顾问。
+  </div>
+</div>
+
+</div>
+
+<div class="footer">
+  🍔 Buffy 财报研究室 · SK hynix (000660.KS) Q4 2025 & FY2025<br>
+  数据来源：SK hynix IR、Alpha-Sense、CNBC、PR Newswire · 汇率 ₩1,500 = $1<br>
+  "别人恐惧时贪婪，别人贪婪时恐惧。" — 但要先搞清楚价格是否合理。
+</div>
+
+<script>
+function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='dark'?'light':'dark';h.setAttribute('data-theme',n);document.getElementById('themeLabel').textContent=n==='dark'?'深色':'浅色';localStorage.setItem('hx-theme',n);renderSankey()}
+(function(){if(localStorage.getItem('hx-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')})();
+
+const Q=['Q4 2024','Q1 2025','Q2 2025','Q3 2025','Q4 2025'];
+const rev=[13.2,11.8,14.8,16.3,21.9];
+const op=[5.4,5.0,6.1,7.6,12.8];
+
+new Chart(document.getElementById('chartRevOp'),{
+  data:{labels:Q,datasets:[
+    {type:'bar',label:'营收 ($B)',data:rev,backgroundColor:'rgba(123,143,160,.55)',borderRadius:4,order:2},
+    {type:'bar',label:'营业利润 ($B)',data:op,backgroundColor:'rgba(138,154,142,.7)',borderRadius:4,order:2},
+    {type:'line',label:'营业利润率 (%)',data:[41,42,41,47,58],borderColor:'#b9a06a',backgroundColor:'transparent',pointBackgroundColor:'#b9a06a',tension:.4,yAxisID:'y2',order:1}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{size:11},color:'#7a706a'}}},
+    scales:{x:{ticks:{color:'#a89f98'},grid:{color:'#e5ddd5'}},y:{ticks:{color:'#a89f98'},grid:{color:'#e5ddd5'},title:{display:true,text:'$B',color:'#a89f98'}},y2:{position:'right',ticks:{color:'#b9a06a',callback:v=>v+'%'},grid:{display:false},min:35,max:65}}}
+});
+
+new Chart(document.getElementById('chartMargin'),{type:'line',
+  data:{labels:Q,datasets:[
+    {label:'营业利润率 (%)',data:[41,42,41,47,58],borderColor:'#8a9a8e',backgroundColor:'rgba(138,154,142,.1)',fill:true,tension:.4,pointBackgroundColor:'#8a9a8e',pointRadius:5},
+    {label:'净利润率 (%)',data:[null,null,null,52,46],borderColor:'#c09090',backgroundColor:'transparent',tension:.4,pointBackgroundColor:'#c09090',pointRadius:5,borderDash:[5,3]}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{size:11},color:'#7a706a'}}},
+    scales:{x:{ticks:{color:'#a89f98'},grid:{color:'#e5ddd5'}},y:{ticks:{color:'#a89f98',callback:v=>v+'%'},grid:{color:'#e5ddd5'},min:35,max:65}}}
+});
+
+new Chart(document.getElementById('chartSegPie'),{type:'doughnut',
+  data:{labels:['HBM (AI)','DRAM 传统','NAND eSSD','NAND 消费'],
+    datasets:[{data:[38,42,13,7],backgroundColor:['rgba(122,154,122,.8)','rgba(123,143,160,.7)','rgba(185,160,106,.7)','rgba(192,144,144,.6)'],borderWidth:2,borderColor:'rgba(255,255,255,.3)'}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:{size:11},color:'#7a706a'}}}}
+});
+
+new Chart(document.getElementById('chartBalance'),{type:'bar',
+  data:{labels:['FY2024','FY2025'],datasets:[
+    {label:'现金 ($B)',data:[9.4,23.3],backgroundColor:'rgba(122,154,122,.7)',borderRadius:4},
+    {label:'借款 ($B)',data:[15.1,14.8],backgroundColor:'rgba(184,112,112,.6)',borderRadius:4}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{size:11},color:'#7a706a'}}},
+    scales:{x:{ticks:{color:'#a89f98'},grid:{color:'#e5ddd5'}},y:{ticks:{color:'#a89f98'},grid:{color:'#e5ddd5'},title:{display:true,text:'$B',color:'#a89f98'}}}}
+});
+
+function renderSankey(){
+  const dark=document.documentElement.getAttribute('data-theme')==='dark';
+  const fc=dark?'#d4ccc4':'#4a4340';const bg=dark?'#2e2a25':'#ffffff';
+  Plotly.react('sankey',[{type:'sankey',orientation:'h',
+    node:{label:['营收\n$64.8B','营业成本\n$26.7B','毛利润\n$38.1B','研发+销管\n$6.6B','营业利润\n$31.5B','非经营&税\n$2.9B','净利润\n$28.6B','股息\n$1.4B','回购注销\n$8.1B','留存利润\n$19.1B'],
+      color:['#7b8fa0','#b87070','#8a9a8e','#b9a06a','#8a9a8e','#b87070','#8a9a8e','#c09090','#b08d7a','#7a9a7a'],pad:20,thickness:18},
+    link:{source:[0,0,2,2,4,4,6,6,6],target:[1,2,3,4,5,6,7,8,9],value:[26.7,38.1,6.6,31.5,2.9,28.6,1.4,8.1,19.1],
+      color:['rgba(184,112,112,.3)','rgba(138,154,142,.3)','rgba(185,160,106,.3)','rgba(138,154,142,.3)','rgba(184,112,112,.3)','rgba(138,154,142,.3)','rgba(192,144,144,.3)','rgba(176,141,122,.3)','rgba(122,154,122,.3)']}}],
+  {paper_bgcolor:bg,plot_bgcolor:bg,font:{color:fc,size:11},margin:{t:20,b:20,l:20,r:20}},{responsive:true,displayModeBar:false});
+}
+renderSankey();
+</script>
+</body>
+</html>

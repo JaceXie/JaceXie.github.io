@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>美光科技 Micron Technology (MU) — Q2 FY2026 深度分析</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+/* ── MORANDI PALETTE ── */
+:root {
+  --bg:        #f5f0eb;
+  --bg2:       #ece6df;
+  --card:      #ffffff;
+  --card2:     #f8f5f1;
+  --border:    #d9d0c7;
+  --text:      #4a4340;
+  --text2:     #7a706a;
+  --text3:     #a89f98;
+  --accent:    #8a9a8e;
+  --accent2:   #7b8fa0;
+  --accent3:   #b08d7a;
+  --rose:      #c09090;
+  --gold:      #b9a06a;
+  --red:       #b87070;
+  --green:     #7a9a7a;
+  --shadow:    rgba(0,0,0,0.06);
+  --chart-grid:#e5ddd5;
+}
+[data-theme="dark"] {
+  --bg:        #1e1c1a;
+  --bg2:       #28251f;
+  --card:      #2e2a25;
+  --card2:     #363230;
+  --border:    #4a4540;
+  --text:      #d4ccc4;
+  --text2:     #a09890;
+  --text3:     #706860;
+  --accent:    #8a9a8e;
+  --accent2:   #8fabbf;
+  --accent3:   #c9a48e;
+  --rose:      #c09090;
+  --gold:      #c9b07a;
+  --red:       #c08080;
+  --green:     #8aaa8a;
+  --shadow:    rgba(0,0,0,0.3);
+  --chart-grid:#3e3a35;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', 'SimSun', serif;
+  line-height: 1.75;
+  font-size: 14.5px;
+  transition: background .35s, color .35s;
+}
+a { color: var(--accent2); text-decoration: none; }
+
+/* ── THEME TOGGLE ── */
+.theme-bar {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 8px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  transition: background .35s;
+}
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; }
+.theme-toggle {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; color: var(--text2);
+}
+.toggle-switch {
+  position: relative;
+  width: 44px; height: 22px;
+  background: var(--border);
+  border-radius: 11px;
+  cursor: pointer;
+  transition: background .3s;
+}
+.toggle-switch::after {
+  content: '';
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 18px; height: 18px;
+  background: var(--card);
+  border-radius: 50%;
+  transition: transform .3s;
+  box-shadow: 0 1px 3px rgba(0,0,0,.15);
+}
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+
+/* ── HERO ── */
+.hero {
+  padding: 48px 24px 36px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+.hero-tag {
+  display: inline-block;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 3px 14px;
+  border-radius: 20px;
+  margin-bottom: 18px;
+}
+.hero h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills {
+  display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;
+}
+.pill {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 6px 18px;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 13px;
+  color: var(--text2);
+  box-shadow: 0 1px 3px var(--shadow);
+}
+.pill strong { color: var(--text); }
+
+/* ── STOCK SNAPSHOT ── */
+.snapshot-bar {
+  background: var(--card2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin: 24px 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+}
+.snap-item { text-align: center; }
+.snap-label { font-family: 'Segoe UI', sans-serif; font-size: 10px; text-transform: uppercase; letter-spacing: .8px; color: var(--text3); margin-bottom: 4px; }
+.snap-val { font-family: 'Segoe UI', sans-serif; font-size: 22px; font-weight: 800; color: var(--text); }
+.snap-sub { font-size: 11px; color: var(--text2); margin-top: 2px; }
+
+/* ── LAYOUT ── */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle {
+  font-size: 18px; font-weight: 700; color: var(--accent3);
+  margin-bottom: 20px; letter-spacing: 0.5px;
+  display: flex; align-items: center; gap: 10px;
+}
+.stitle::before {
+  content: ''; display: block; width: 4px; height: 20px;
+  background: var(--accent3); border-radius: 2px;
+}
+
+/* ── KPI ── */
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.kpi {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 16px 18px;
+  box-shadow: 0 1px 4px var(--shadow);
+  transition: background .35s;
+}
+.kpi-l { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.badge {
+  display: inline-block; font-family: 'Segoe UI', sans-serif;
+  font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px;
+}
+.up   { background: rgba(122,154,122,.15); color: var(--green); }
+.dn   { background: rgba(184,112,112,.15); color: var(--red); }
+.nt   { background: rgba(123,143,160,.15); color: var(--accent2); }
+.star { background: rgba(185,160,106,.18); color: var(--gold); }
+
+/* ── TABLE ── */
+.tbl-wrap {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow);
+}
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI', sans-serif; font-size: 13px; }
+.tbl th {
+  background: var(--card2); color: var(--text3); font-size: 11px;
+  letter-spacing: .5px; text-transform: uppercase;
+  padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border);
+}
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); }
+.tbl tr:last-child td { border-bottom: none; }
+
+/* ── CHARTS ── */
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.cgrid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow);
+}
+.ctitle { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 230px; }
+
+/* ── SANKEY ── */
+#sankey { width: 100%; height: 480px; }
+
+/* ── EARNINGS CALL ── */
+.ec-section { margin-bottom: 28px; }
+.ec-speaker {
+  font-family: 'Segoe UI', sans-serif; font-size: 12px;
+  text-transform: uppercase; letter-spacing: 1.5px;
+  color: var(--accent); margin-bottom: 14px; padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+.ec-item {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 16px 20px; margin-bottom: 10px;
+  box-shadow: 0 1px 4px var(--shadow);
+  display: flex; gap: 14px; align-items: flex-start;
+}
+.ec-tag {
+  font-family: 'Segoe UI', sans-serif; font-size: 11px;
+  font-weight: 700; padding: 3px 10px; border-radius: 20px;
+  white-space: nowrap; flex-shrink: 0; margin-top: 2px;
+}
+.tag-bull { background: rgba(122,154,122,.18); color: var(--green); }
+.tag-bear { background: rgba(184,112,112,.18); color: var(--red); }
+.tag-neut { background: rgba(123,143,160,.18); color: var(--accent2); }
+.ec-content { flex: 1; }
+.ec-topic { font-weight: 700; font-size: 13px; color: var(--accent3); margin-bottom: 5px; }
+.ec-text { font-size: 13.5px; color: var(--text); line-height: 1.8; }
+.ec-quote { font-style: italic; color: var(--text2); border-left: 3px solid var(--border); padding-left: 12px; margin-top: 6px; font-size: 13px; }
+
+/* Q&A */
+.qa-item {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px 20px; margin-bottom: 12px;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.qa-q { font-weight: 700; color: var(--accent2); font-size: 13px; margin-bottom: 8px; }
+.qa-analyst { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); margin-bottom: 6px; }
+.qa-a { font-size: 13.5px; color: var(--text); line-height: 1.8; }
+.qa-a-label { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 600; color: var(--accent3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+
+/* ── BUFFETT SCORE ── */
+.bscore {
+  display: flex; align-items: center; gap: 16px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px 22px; margin-bottom: 12px;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.circle {
+  width: 62px; height: 62px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 18px; flex-shrink: 0;
+  border: 3px solid; font-family: 'Segoe UI', sans-serif;
+}
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 3px; }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+/* ── DCF ── */
+.dcf-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.dcf-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 20px; box-shadow: 0 1px 4px var(--shadow);
+}
+.dcf-label { font-family: 'Segoe UI', sans-serif; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; font-weight: 700; }
+.dcf-bull .dcf-label { color: var(--green); }
+.dcf-neut .dcf-label { color: var(--gold); }
+.dcf-bear .dcf-label { color: var(--red); }
+.dcf-price { font-family: 'Segoe UI', sans-serif; font-size: 36px; font-weight: 800; margin-bottom: 4px; }
+.dcf-bull .dcf-price { color: var(--green); }
+.dcf-neut .dcf-price { color: var(--gold); }
+.dcf-bear .dcf-price { color: var(--red); }
+.dcf-updown { font-family: 'Segoe UI', sans-serif; font-size: 14px; font-weight: 600; margin-bottom: 14px; }
+.dcf-row { display: flex; justify-content: space-between; font-size: 12px; color: var(--text2); padding: 4px 0; border-bottom: 1px solid var(--border); }
+.dcf-row:last-child { border-bottom: none; }
+.dcf-row span:last-child { font-weight: 600; color: var(--text); }
+
+/* ── VERDICT ── */
+.verdict {
+  background: var(--card2); border: 2px solid var(--accent);
+  border-radius: 10px; padding: 26px 28px; margin-bottom: 16px;
+}
+.verdict-t { font-size: 17px; font-weight: 700; color: var(--accent); margin-bottom: 10px; }
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 14px; text-align: center;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.pbox .pl { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.pbox .pv { font-family: 'Segoe UI', sans-serif; font-size: 22px; font-weight: 800; }
+.pbox .pn { font-size: 11px; color: var(--text3); margin-top: 3px; }
+.pc { color: var(--text2); } .pf { color: var(--gold); } .ps { color: var(--green); } .pr { color: var(--red); }
+
+/* ── SEGMENTS ── */
+.seg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.seg-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow);
+}
+.seg-name { font-size: 14px; font-weight: 700; color: var(--accent3); margin-bottom: 4px; }
+.seg-rev { font-family: 'Segoe UI', sans-serif; font-size: 28px; font-weight: 800; color: var(--text); }
+.seg-meta { display: flex; gap: 10px; flex-wrap: wrap; margin: 8px 0; }
+.seg-bar-wrap { background: var(--bg2); border-radius: 4px; height: 6px; margin: 10px 0 6px; overflow: hidden; }
+.seg-bar { height: 100%; border-radius: 4px; background: var(--accent); }
+.seg-desc { font-size: 12.5px; color: var(--text2); line-height: 1.7; }
+
+/* ── ANALYSIS CARDS ── */
+.agrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+.acard {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow);
+}
+.acard h4 { font-size: 13px; color: var(--accent2); margin-bottom: 10px; text-transform: uppercase; letter-spacing: .5px; }
+.acard ul { padding-left: 16px; }
+.acard li { margin-bottom: 5px; font-size: 13px; }
+
+/* ── COMMENTARY ── */
+.cmt {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 26px; line-height: 1.9; font-size: 14.5px;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.cmt p { margin-bottom: 14px; }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--card2); border-top: 1px solid var(--border);
+  padding: 24px; text-align: center; color: var(--text3); font-size: 12px;
+  margin-top: 40px;
+}
+.disclaimer {
+  background: var(--card); border: 1px solid var(--border);
+  border-left: 4px solid var(--gold); border-radius: 10px;
+  padding: 18px 22px; font-size: 12.5px; color: var(--text2); line-height: 1.8;
+}
+
+@media (max-width: 768px) {
+  .cgrid,.cgrid3,.agrid,.dcf-grid,.seg-grid { grid-template-columns: 1fr; }
+  .pgrid { grid-template-columns: 1fr 1fr; }
+  .hero h1 { font-size: 22px; }
+  .kpi-grid { grid-template-columns: 1fr 1fr; }
+  .snapshot-bar { grid-template-columns: 1fr 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── THEME BAR ── -->
+<div class="theme-bar">
+  <div class="logo">BUFFY · 财报研究所</div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-tag">Q2 FY2026 · 深度分析 · 2026年3月19日</div>
+  <h1>美光科技 Micron Technology (MU)</h1>
+  <div class="hero-sub">NASDAQ: MU &nbsp;|&nbsp; FY2026 Q2（截至2026年2月26日）&nbsp;|&nbsp; 巴菲特价值投资视角 · 三情景DCF</div>
+  <div class="hero-pills">
+    <div class="pill">收盘价 <strong>$461.73</strong></div>
+    <div class="pill">市值 <strong>~$5,220亿</strong></div>
+    <div class="pill">流通股 <strong>~11.3亿股</strong></div>
+    <div class="pill">净现金 <strong>$65亿</strong></div>
+    <div class="pill">季度股息 <strong>$0.15/股</strong></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ── STOCK SNAPSHOT ── -->
+<div class="snapshot-bar">
+  <div class="snap-item">
+    <div class="snap-label">3月18日收盘（历史新高）</div>
+    <div class="snap-val" style="color:var(--green)">$461.73</div>
+    <div class="snap-sub">财报后大涨</div>
+  </div>
+  <div class="snap-item">
+    <div class="snap-label">3月19日盘前</div>
+    <div class="snap-val" style="color:var(--red)">$442.19</div>
+    <div class="snap-sub">-4.23%（获利回吐）</div>
+  </div>
+  <div class="snap-item">
+    <div class="snap-label">市值</div>
+    <div class="snap-val">~$5,220亿</div>
+    <div class="snap-sub">11.3亿股</div>
+  </div>
+  <div class="snap-item">
+    <div class="snap-label">TTM Non-GAAP P/E</div>
+    <div class="snap-val" style="color:var(--gold)">~21x</div>
+    <div class="snap-sub">EPS $21.92（最近4季）</div>
+  </div>
+  <div class="snap-item">
+    <div class="snap-label">FY2026E 前瞻P/E ★</div>
+    <div class="snap-val" style="color:var(--green)">~7.9x</div>
+    <div class="snap-sub">FY26E EPS ~$58</div>
+  </div>
+  <div class="snap-item">
+    <div class="snap-label">Q3指引年化P/E</div>
+    <div class="snap-val" style="color:var(--green)">~6x</div>
+    <div class="snap-sub">$19.15×4=$76.6</div>
+  </div>
+  <div class="snap-item">
+    <div class="snap-label">净现金（历史新高）</div>
+    <div class="snap-val">$65亿</div>
+    <div class="snap-sub">现金$167亿 - 债务$101亿</div>
+  </div>
+  <div class="snap-item">
+    <div class="snap-label">季息（+30%）</div>
+    <div class="snap-val">$0.15</div>
+    <div class="snap-sub">年化~$6.9亿</div>
+  </div>
+</div>
+
+<!-- ═══ S1: KPI ═══ -->
+<section class="section">
+  <div class="stitle">核心财务指标 — Q2 FY2026（单季）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">总营收</div><div class="kpi-v">$238.6亿</div><span class="badge up">QoQ +75% · YoY +196%</span></div>
+    <div class="kpi"><div class="kpi-l">DRAM营收</div><div class="kpi-v">$188亿</div><span class="badge up">占比79% · QoQ +74%</span></div>
+    <div class="kpi"><div class="kpi-l">NAND营收</div><div class="kpi-v">$50亿</div><span class="badge up">占比21% · QoQ +82%</span></div>
+    <div class="kpi"><div class="kpi-l">毛利率（Non-GAAP）</div><div class="kpi-v">74.9%</div><span class="badge up">历史新高 · QoQ +18pp</span></div>
+    <div class="kpi"><div class="kpi-l">经营利润（Non-GAAP）</div><div class="kpi-v">$165亿</div><span class="badge up">利润率69% · QoQ +22pp</span></div>
+    <div class="kpi"><div class="kpi-l">Non-GAAP EPS</div><div class="kpi-v">$12.20</div><span class="badge star">大超预期 vs $9.31</span></div>
+    <div class="kpi"><div class="kpi-l">GAAP EPS</div><div class="kpi-v">$12.07</div><span class="badge up">净利润$137.85亿</span></div>
+    <div class="kpi"><div class="kpi-l">经营现金流</div><div class="kpi-v">$119亿</div><span class="badge up">单季历史新高</span></div>
+    <div class="kpi"><div class="kpi-l">资本支出</div><div class="kpi-v">$50亿</div><span class="badge nt">FY26全年>$250亿</span></div>
+    <div class="kpi"><div class="kpi-l">自由现金流</div><div class="kpi-v">$69亿</div><span class="badge star">历史新高 · 超前季+77%</span></div>
+    <div class="kpi"><div class="kpi-l">库存天数</div><div class="kpi-v">123天</div><span class="badge nt">DRAM库存<120天极紧</span></div>
+    <div class="kpi"><div class="kpi-l">债务削减（本季）</div><div class="kpi-v">$16亿</div><span class="badge up">近3季累计削减$50亿+</span></div>
+  </div>
+</section>
+
+<!-- ═══ S2: HISTORICAL TABLE ═══ -->
+<section class="section">
+  <div class="stitle">历史季度财务数据（5季对比）</div>
+  <div class="tbl-wrap">
+  <table class="tbl">
+    <thead><tr>
+      <th>指标</th>
+      <th>Q2 FY25</th>
+      <th>Q3 FY25</th>
+      <th>Q4 FY25</th>
+      <th>Q1 FY26</th>
+      <th>Q2 FY26</th>
+      <th>Q3 FY26E（指引）</th>
+    </tr></thead>
+    <tbody>
+      <tr class="hl"><td>营收 ($B)</td><td>8.05</td><td>9.30</td><td>11.32</td><td>13.64</td><td>23.86</td><td style="color:var(--green);font-weight:700">33.50±0.75</td></tr>
+      <tr><td>QoQ增速</td><td>—</td><td>+15.5%</td><td>+21.7%</td><td>+20.5%</td><td>+75.0%</td><td style="color:var(--green)">+40.4%</td></tr>
+      <tr><td>YoY增速</td><td>+61%</td><td>+93%</td><td>+93%</td><td>+84%</td><td style="color:var(--green);font-weight:700">+196%</td><td>—</td></tr>
+      <tr class="hl"><td>毛利率（Non-GAAP）</td><td>36.8%</td><td>39.0%</td><td>44.7%</td><td>56.8%</td><td style="color:var(--green);font-weight:700">74.9%</td><td style="color:var(--green);font-weight:700">~81%</td></tr>
+      <tr><td>毛利率（GAAP）</td><td>22.6%</td><td>36.2%</td><td>42.5%</td><td>55.0%</td><td>74.4%</td><td>—</td></tr>
+      <tr class="hl"><td>Non-GAAP EPS</td><td>$1.56</td><td>$1.91</td><td>$3.03</td><td>$4.78</td><td style="color:var(--green);font-weight:700">$12.20</td><td style="color:var(--green);font-weight:700">$19.15±0.40</td></tr>
+      <tr><td>经营利润率（Non-GAAP）</td><td>~21%</td><td>~24%</td><td>~30%</td><td>47%</td><td style="color:var(--green);font-weight:700">69%</td><td>~75%+</td></tr>
+      <tr><td>自由现金流 ($B)</td><td>~0.6</td><td>~1.2</td><td>~2.5</td><td>3.9</td><td style="color:var(--green);font-weight:700">6.9</td><td style="color:var(--green)">~14（指引翻倍）</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 20px;margin-top:14px;">
+    <div style="font-size:13px;font-weight:600;color:var(--accent3);margin-bottom:10px;">P/E 多角度审视</div>
+    <table class="tbl" style="font-size:13px;">
+      <thead><tr><th>计算口径</th><th>年化EPS基础</th><th>P/E倍数</th><th>可靠度</th></tr></thead>
+      <tbody>
+        <tr><td>FY2025全年GAAP TTM</td><td>$7.59/股</td><td style="color:var(--red)">61x</td><td>⚠️ 极具误导性（周期谷底年）</td></tr>
+        <tr><td>TTM Non-GAAP（近4季）</td><td>$21.92（$1.91+$3.03+$4.78+$12.20）</td><td style="color:var(--gold)">~21x</td><td>✅ 最可靠的后视P/E ★</td></tr>
+        <tr class="hl"><td>FY2026E Non-GAAP</td><td>~$58/股</td><td style="color:var(--green)">~7.9x</td><td>⭐ 最重要的前瞻估值指标</td></tr>
+        <tr><td>Q3 FY2026指引年化</td><td>$19.15×4=$76.6</td><td style="color:var(--green)">~6x</td><td>📊 近期运营率（最乐观）</td></tr>
+      </tbody>
+    </table>
+    <div style="font-size:12px;color:var(--text3);margin-top:8px;">注：7.9x前瞻P/E 对于一家YoY增速196%的公司而言极便宜，但周期性风险是核心不确定变量。</div>
+  </div>
+</section>
+
+<!-- ═══ S3: CHARTS ═══ -->
+<section class="section">
+  <div class="stitle">营收、利润率与盈利趋势图</div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">季度营收趋势 ($B) — 含Q3指引</div><div class="cwrap"><canvas id="c1"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">Non-GAAP EPS 趋势 ($)</div><div class="cwrap"><canvas id="c2"></canvas></div></div>
+  </div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">毛利率 & 经营利润率趋势（%）</div><div class="cwrap"><canvas id="c3"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">自由现金流季度趋势 ($B)</div><div class="cwrap"><canvas id="c4"></canvas></div></div>
+  </div>
+  <div class="cgrid3">
+    <div class="ccard"><div class="ctitle">Q2 FY26 营收构成（DRAM vs NAND）</div><div class="cwrap"><canvas id="c5"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">四大业务部门营收占比（Q2 FY26）</div><div class="cwrap"><canvas id="c6"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">三情景每股内在价值（DCF）</div><div class="cwrap"><canvas id="c7"></canvas></div></div>
+  </div>
+</section>
+
+<!-- ═══ S4: SANKEY ═══ -->
+<section class="section">
+  <div class="stitle">资金流向桑基图 — Q2 FY2026 单季 P&L（$亿）</div>
+  <div class="ccard">
+    <div id="sankey"></div>
+  </div>
+</section>
+
+<!-- ═══ S5: SEGMENTS ═══ -->
+<section class="section">
+  <div class="stitle">四大业务分部深度解析 — Q2 FY2026</div>
+  <div class="seg-grid">
+    <div class="seg-card">
+      <div class="seg-name">云端存储部 (CMBU)</div>
+      <div class="seg-rev">$77.5亿</div>
+      <div class="seg-meta">
+        <span class="badge up">占比32%</span>
+        <span class="badge up">QoQ +47%</span>
+        <span class="badge nt">毛利率74%</span>
+      </div>
+      <div class="seg-bar-wrap"><div class="seg-bar" style="width:32%;background:var(--accent2)"></div></div>
+      <div class="seg-desc">服务超大规模云服务商（AWS、Azure、Google Cloud）。HBM4需求旺盛，数据中心AI推理/训练用DRAM需求激增。HBM4 36GB 12-Hi已开始量产出货，专为NVIDIA Vera Rubin架构设计。数据中心比特位需求首次超行业总TAM的50%。</div>
+    </div>
+    <div class="seg-card">
+      <div class="seg-name">核心数据中心部 (CDBU)</div>
+      <div class="seg-rev">$56.9亿</div>
+      <div class="seg-meta">
+        <span class="badge up">占比24%</span>
+        <span class="badge star">季度新高</span>
+        <span class="badge nt">毛利率74%</span>
+      </div>
+      <div class="seg-bar-wrap"><div class="seg-bar" style="width:24%;background:var(--accent)"></div></div>
+      <div class="seg-desc">传统数据中心服务器DRAM及SSD。数据中心SSD市占率连续第4个日历年创历史新高。G9 NAND PCIe Gen6 SSD量产，122TB SSD正式推出。NAND数据中心营收环比翻倍以上。256GB LP SoC-M2（1γ节点）已向客户送样。</div>
+    </div>
+    <div class="seg-card">
+      <div class="seg-name">移动与客户端部 (MCBU)</div>
+      <div class="seg-rev">$77.1亿</div>
+      <div class="seg-meta">
+        <span class="badge up">占比32%</span>
+        <span class="badge up">QoQ +81%</span>
+        <span class="badge up">毛利率79%（最高）</span>
+      </div>
+      <div class="seg-bar-wrap"><div class="seg-bar" style="width:32%;background:var(--accent3)"></div></div>
+      <div class="seg-desc">智能手机及PC DRAM/NAND。旗舰手机搭载12GB+DRAM占比从不足20%飙升至约80%（一年内）。AI PC推荐内存32GB+（Agentic AI场景）。个人AI工作站（NVIDIA DGX Spark、AMD Ryzen AI Halo）配置128GB。CHIPS Act约束下，供应仍远不足需求。</div>
+    </div>
+    <div class="seg-card">
+      <div class="seg-name">汽车与嵌入式部 (AEBU)</div>
+      <div class="seg-rev">$27.1亿</div>
+      <div class="seg-meta">
+        <span class="badge up">占比11%</span>
+        <span class="badge up">QoQ +57%</span>
+        <span class="badge nt">毛利率68%</span>
+      </div>
+      <div class="seg-bar-wrap"><div class="seg-bar" style="width:11%;background:var(--gold)"></div></div>
+      <div class="seg-desc">汽车+工业合计超$20亿，创历史新高。L2 ADAS车辆平均搭载~16GB DRAM；L4自动驾驶需>300GB。机器人领域：CEO预计这将是"20年增长向量"，人形机器人所需算力相当于L4自动驾驶级别。已商业化出货印度A&T工厂产品。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ S6: TECHNOLOGY & MANUFACTURING ═══ -->
+<section class="section">
+  <div class="stitle">技术路线图 & 全球制造布局</div>
+  <div class="agrid">
+    <div class="acard">
+      <h4>DRAM技术节点进展</h4>
+      <ul>
+        <li><strong>HBM4 36GB 12-Hi：</strong>2026年Q2起量产出货，专为NVIDIA Vera Rubin设计</li>
+        <li><strong>HBM4 16-Hi（48GB）：</strong>已完成送样；HBM4E基于1γ节点开发中</li>
+        <li><strong>HBM4E：</strong>2027年日历年量产；HBM4D差异化定制选项</li>
+        <li><strong>1γ（1-gamma）DRAM节点：</strong>公司历史上达到成熟良率最快的节点，目标2026年中成为DRAM主力量产节点</li>
+        <li><strong>1δ（1-delta）DRAM节点：</strong>EUV光刻占比持续提升，提升效率</li>
+        <li><strong>LPDRAM for DC：</strong>256GB LP SoC-M2（1γ）送样，支持每CPU 2TB</li>
+      </ul>
+    </div>
+    <div class="acard">
+      <h4>NAND技术节点进展</h4>
+      <ul>
+        <li><strong>G9 NAND节点：</strong>2026年中成为NAND比特位主力节点</li>
+        <li><strong>QLC（四层单元）：</strong>混合比例创历史新高，降本效果显著</li>
+        <li><strong>G9 PCIe Gen6 SSD：</strong>大规模量产中，性能领先行业</li>
+        <li><strong>122TB SSD：</strong>正式商业发布，AI训练集群需求旺盛</li>
+        <li><strong>数据中心SSD市占率：</strong>连续第4个日历年创新高</li>
+        <li><strong>NAND供需：</strong>可见未来内需求显著超过可用供应</li>
+      </ul>
+    </div>
+    <div class="acard">
+      <h4>全球制造扩张计划</h4>
+      <ul>
+        <li><strong>爱达荷州 Fab 1：</strong>2027年中开始晶圆产出，Fab 2地基准备已开工</li>
+        <li><strong>纽约州 Fab 1：</strong>已破土动工（$1,000亿校区），2028年H2产出</li>
+        <li><strong>台湾铜锣（Tongluo）：</strong>收购宝成电子已提前完成；第二洁净室建设中，2028财年起有意义产出</li>
+        <li><strong>新加坡 NAND 新厂：</strong>已破土，2028年产出</li>
+        <li><strong>新加坡 HBM封装：</strong>2027年日历年起贡献有意义HBM供应</li>
+        <li><strong>日本广岛：</strong>洁净室扩建地基准备中</li>
+        <li><strong>印度（封装测试）：</strong>已正式商业出货，全球最大单层A&T洁净室</li>
+      </ul>
+    </div>
+    <div class="acard">
+      <h4>市场动态 & 竞争格局</h4>
+      <ul>
+        <li><strong>DRAM行业供应增速：</strong>2026年约20%低/中段（受约束）</li>
+        <li><strong>NAND行业供应增速：</strong>2026年约20%（受约束）</li>
+        <li><strong>HBM供应：</strong>2026全年已售罄；仅能满足关键客户50-66%需求</li>
+        <li><strong>供需紧张：</strong>预计持续至2026年以后</li>
+        <li><strong>PC/手机单元：</strong>供应约束推高价格可能导致2026年出货量下降低两位数%（但单机内容量持续上升）</li>
+        <li><strong>美光DRAM市占：</strong>约15-20%；HBM市占约10-15%（增长中）</li>
+        <li><strong>美光竞争优势：</strong>美国唯一先进存储芯片制造商；HBM4良率超预期；客户质量评分第一</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ S7: FULL EARNINGS CALL ═══ -->
+<section class="section">
+  <div class="stitle">完整财报电话会议解析</div>
+
+  <!-- CEO -->
+  <div class="ec-section">
+    <div class="ec-speaker">CEO — Sanjay Mehrotra 准备好的陈述（14个核心议题）</div>
+
+    <div class="ec-item">
+      <span class="ec-tag tag-bull">利好</span>
+      <div class="ec-content">
+        <div class="ec-topic">1. Q3指引创公司历史纪录</div>
+        <div class="ec-text">Q3单季营收指引（$335亿）将超过公司历史上任何一整个财年的全年营收（包括FY2024及更早年份）。</div>
+        <div class="ec-quote">"Our fiscal Q3 single-quarter revenue guidance exceeds the full-year revenue for every year in our company's history through fiscal 2024."</div>
+      </div>
+    </div>
+
+    <div class="ec-item">
+      <span class="ec-tag tag-bull">利好</span>
+      <div class="ec-content">
+        <div class="ec-topic">2. AI重新定义存储的战略价值</div>
+        <div class="ec-text">存储不再只是AI的配角，而是AI能力的决定性战略资产。更大的上下文窗口、更深的推理链和多智能体编排都依赖内存带宽和容量。</div>
+        <div class="ec-quote">"AI has not just increased demand for memory; it has fundamentally recast memory as a defining strategic asset in the AI era."</div>
+      </div>
+    </div>
+
+    <div class="ec-item">
+      <span class="ec-tag tag-bull">利好</span>
+      <div class="ec-content">
+        <div class="ec-topic">3. 首个5年SCA（战略客户协议）签署</div>
+        <div class="ec-text">签署公司历史上首个5年期战略客户协议，包含具体的数量承诺和定价条款（区别于此前只有定价指引的LTA），提供前所未有的双向可见度。</div>
+        <div class="ec-quote">"We are excited to have signed our first five-year SCA [Strategic Customer Agreement]."</div>
+      </div>
+    </div>
+
+    <div class="ec-item">
+      <span class="ec-tag tag-bull">利好</span>
+      <div class="ec-content">
+        <div class="ec-topic">4. 1γ节点 — 史上最快良率爬坡</div>
+        <div class="ec-text">1γ（1-gamma）DRAM节点是公司历史上达到成熟良率最快的节点，量产规模提升速度也超越所有历史节点，预计2026年中成为DRAM比特位主力。</div>
+        <div class="ec-quote">"Our 1γ node was already the fastest ramp to mature yields, is ramping volumes faster than all prior nodes in our history, and is on track to become a majority of our DRAM bit mix by mid-calendar 2026."</div>
+      </div>
+    </div>
+
+    <div class="ec-item">
+      <span class="ec-tag tag-bull">利好</span>
+      <div class="ec-content">
+        <div class="ec-topic">5. HBM4量产 — 为NVIDIA Vera Rubin设计</div>
+        <div class="ec-text">在NVIDIA GTC大会上宣布，美光HBM4 36GB 12-Hi已于2026年开始量产出货，并已专门为NVIDIA Vera Rubin（下一代Blackwell+架构）完成设计适配。</div>
+        <div class="ec-quote">"At NVIDIA's GTC, we announced that Micron Technology has begun volume shipment of its HBM4 36GB 12-Hi in 2026 and is designed for NVIDIA Vera Rubin."</div>
+      </div>
+    </div>
+
+    <div class="ec-item">
+      <span class="ec-tag tag-bull">利好</span>
+      <div class="ec-content">
+        <div class="ec-topic">6. 数据中心比特位首次超全行业TAM的50%</div>
+        <div class="ec-text">2026日历年，AI需求驱动DRAM和NAND数据中心比特位需求首次超过全行业总TAM的50%，这是行业结构性转变的里程碑。</div>
+        <div class="ec-quote">"AI demand is driving DRAM and NAND data center bits TAM to exceed 50% of the industry TAM for the first time in calendar 2026."</div>
+      </div>
+    </div>
+
+    <div class="ec-item">
+      <span class="ec-tag tag-bull">利好</span>
+      <div class="ec-content">
+        <div class="ec-topic">7. NAND需求显著超过供应</div>
+        <div class="ec-text">公司NAND需求显著超过可用供应，且这种状态在可见未来内将持续。数据中心NAND营收环比翻倍以上。</div>
+        <div class="ec-quote">"We are now seeing NAND demand significantly in excess of our available supply for the foreseeable future."</div>
+      </div>
+    </div>
+
+    <div class="ec-item">
+      <span class="ec-tag tag-bull">利好</span>
+      <div class="ec-content">
+        <div class="ec-topic">8. 供需紧张将持续至2026年以后</div>
+        <div class="ec-text">管理层明确预期DRAM和NAND的供需紧张将延续至2026年日历年之后，这是对周期担忧的重要正面信号。</div>
+        <div class="ec-quote">"We continue to expect supply and demand for both DRAM and NAND to remain tight beyond calendar 2026."</div>
+      </div>
+    </div>
+
+    <div class="ec-item">
+      <span class="ec-tag tag-bull">利好</span>
+      <div class="ec-content">
+        <div class="ec-topic">9. 旗舰手机DRAM含量快速提升</div>
+        <div class="ec-text">搭载12GB+DRAM的旗舰智能手机占比在一年内从不足20%飙升至约80%，单机内容量提升部分抵消了出货量下滑的影响，且agentic AI推动进一步提升至16GB+。</div>
+        <div class="ec-quote">"The mix of flagship smartphones shipping with 12GB or more of DRAM increased to nearly 80% in calendar Q4, up from under 20% a year ago."</div>
+      </div>
+    </div>
+
+    <div class="ec-item">
+      <span class="ec-tag tag-bull">利好</span>
+      <div class="ec-content">
+        <div class="ec-topic">10. 机器人 — 20年增长向量</div>
+        <div class="ec-text">CEO认为机器人将成为科技世界最大产品品类之一，人形机器人所需算力相当于L4自动驾驶级别（>300GB DRAM）。</div>
+        <div class="ec-quote">"We believe we are on the cusp of a 20-year growth vector in robotics and expect robotics to become one of the largest product categories in the technology world."</div>
+      </div>
+    </div>
+
+    <div class="ec-item">
+      <span class="ec-tag tag-bear">利空</span>
+      <div class="ec-content">
+        <div class="ec-topic">11. PC和手机单元量可能下降低两位数%</div>
+        <div class="ec-text">由于DRAM和NAND供应约束推高价格，2026日历年PC和手机出货量可能下降低两位数%，对终端需求构成短期压力。但单机内存容量持续提升形成对冲。</div>
+        <div class="ec-quote">"[In] calendar 2026, a number of factors including DRAM and NAND supply constraints could cause PC and smartphone units to decline in the low double-digit percentage range."</div>
+      </div>
+    </div>
+
+    <div class="ec-item">
+      <span class="ec-tag tag-bull">利好</span>
+      <div class="ec-content">
+        <div class="ec-topic">12. 美国唯一先进存储制造商 — 战略地位</div>
+        <div class="ec-text">作为美国唯一的先进存储芯片制造商，美光在CHIPS法案支持下进行大规模本土建厂，获得约$60亿政府补贴，具备独特的地缘政治安全优势。</div>
+        <div class="ec-quote">"As the only U.S.-based manufacturer of advanced memory products, Micron Technology is uniquely positioned to capitalize on the unprecedented opportunities ahead."</div>
+      </div>
+    </div>
+
+    <div class="ec-item">
+      <span class="ec-tag tag-nt tag-neut">中性</span>
+      <div class="ec-content">
+        <div class="ec-topic">13. 大规模资本支出承诺</div>
+        <div class="ec-text">FY2026资本支出预计超过$250亿，FY2027将有"有意义"的进一步提升，建设性资本支出YoY增加$100亿+。这是公司历史上最大的资本承诺，若周期反转将形成重大压力。</div>
+        <div class="ec-quote">"We expect fiscal 2026 CapEx to be above $25 billion. ...We project our fiscal 2027 CapEx to step up meaningfully..."</div>
+      </div>
+    </div>
+
+    <div class="ec-item">
+      <span class="ec-tag tag-bull">利好</span>
+      <div class="ec-content">
+        <div class="ec-topic">14. 存储使AI更智能、更有能力</div>
+        <div class="ec-text">随着AI架构演进（更大上下文窗口、更深推理链、多智能体协作），计算架构将变得更加"内存密集型"，存储将从配件变为AI能力的核心决定因素。</div>
+        <div class="ec-quote">"Memory makes AI smarter and more capable, enabling longer context windows, deeper reasoning chains, and multi-agent orchestration. As AI evolves, we expect compute architectures to become more memory intensive."</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CFO -->
+  <div class="ec-section">
+    <div class="ec-speaker">CFO — Mark Murphy 财务亮点（11个核心议题）</div>
+
+    <div class="ec-item">
+      <span class="ec-tag tag-bull">利好</span>
+      <div class="ec-content">
+        <div class="ec-topic">1. 史上最大单季营收环比增量</div>
+        <div class="ec-text">Q2 FY2026总营收$238.6亿，环比增75%，同比增196%，连续第4个季度创公司营收新高。单季环比增量$102亿，是公司历史上最大的单季增量。</div>
+        <div class="ec-quote">"Total fiscal Q2 revenue was $23.9 billion, up 75% sequentially and up 196% year over year...The $10.2 billion sequential increase is the largest in our history."</div>
+      </div>
+    </div>
+
+    <div class="ec-item">
+      <span class="ec-tag tag-bull">利好</span>
+      <div class="ec-content">
+        <div class="ec-topic">2. 毛利率历史新高74.9%，较去年几乎翻倍</div>
+        <div class="ec-text">Q2毛利率74.9%（Non-GAAP），环比提升18个百分点，较一年前几乎翻倍，创公司历史记录。提升驱动因素：定价上涨（主要）+有利产品组合+成本改善。</div>
+        <div class="ec-quote">"The consolidated gross margin for fiscal Q2 was 75%, up 18 percentage points sequentially...and was a company record."</div>
+      </div>
+    </div>
+
+    <div class="ec-item">
+      <span class="ec-tag tag-bull">利好</span>
+      <div class="ec-content">
+        <div class="ec-topic">3. 自由现金流历史新高，超前季+77%</div>
+        <div class="ec-text">Q2 FCF（自由现金流）创历史新高，较前季（FY2026 Q1）高出77%，充分验证盈利质量，而非纸面利润。</div>
+        <div class="ec-quote">"Fiscal Q2 free cash flow was a quarterly record for the company, exceeding our prior record in fiscal Q1 2026 by 77%."</div>
+      </div>
+    </div>
+
+    <div class="ec-item">
+      <span class="ec-tag tag-bull">利好</span>
+      <div class="ec-content">
+        <div class="ec-topic">4. 现金与投资额$167亿，历史最高</div>
+        <div class="ec-text">季末达到创纪录的$167亿现金和投资，加上未动用信贷额度，总流动性超过$200亿，财务灵活性极强。</div>
+        <div class="ec-quote">"We reached record levels of cash and investments of $16.7 billion at quarter end and had liquidity over $20 billion when including our untapped credit facility."</div>
+      </div>
+    </div>
+
+    <div class="ec-item">
+      <span class="ec-tag tag-bull">利好</span>
+      <div class="ec-content">
+        <div class="ec-topic">5. 净现金$65亿 — 公司历史最强资产负债表</div>
+        <div class="ec-text">季末债务$101亿，净现金余额$65亿，是公司历史上最强的净现金头寸。过去3个季度债务削减超过$50亿，信用评级升至投资级BBB。</div>
+        <div class="ec-quote">"We closed the quarter with $10.1 billion of debt and a net cash balance of $6.5 billion."</div>
+      </div>
+    </div>
+
+    <div class="ec-item">
+      <span class="ec-tag tag-bull">利好</span>
+      <div class="ec-content">
+        <div class="ec-topic">6. 股息上调30%至每季$0.15/股</div>
+        <div class="ec-text">董事会批准季度股息提升30%至$0.15/股，体现对技术领先性和现金创造持续性的高度信心。</div>
+        <div class="ec-quote">"Reflecting the sustained strength of our technology leadership and cash generation, the Board has approved a 30% increase in our quarterly dividend to $0.15 per share."</div>
+      </div>
+    </div>
+
+    <div class="ec-item">
+      <span class="ec-tag tag-bull">利好</span>
+      <div class="ec-content">
+        <div class="ec-topic">7. DRAM库存天数极度偏紧（&lt;120天）</div>
+        <div class="ec-text">虽然整体库存为123天（DRAM+NAND），但DRAM库存天数仍低于120天，处于极度偏紧状态，为定价提供强力支撑。</div>
+        <div class="ec-quote">"DRAM inventory days remain especially tight and below 120 days."</div>
+      </div>
+    </div>
+
+    <div class="ec-item">
+      <span class="ec-tag tag-bull">利好</span>
+      <div class="ec-content">
+        <div class="ec-topic">8. Q3毛利率指引约81%（+600bps QoQ）</div>
+        <div class="ec-text">Q3预期毛利率约81%，环比再提升约600个基点，受益于更高定价、更低成本和更有利产品组合（HBM4比重提升）三重驱动。</div>
+        <div class="ec-quote">"[Q3 guidance] We expect higher price, lower cost, and favorable mix to all contribute to gross margin expansion in Q3."</div>
+      </div>
+    </div>
+
+    <div class="ec-item">
+      <span class="ec-tag tag-neut">中性</span>
+      <div class="ec-content">
+        <div class="ec-topic">9. FY2027建设性资本支出YoY增加$100亿+</div>
+        <div class="ec-text">FY2027建设性资本支出（厂房建设）预计较FY2026增加$100亿以上，用于爱达荷、纽约、台湾铜锣、新加坡和日本的产能扩张。</div>
+        <div class="ec-quote">"We expect construction-related CapEx to increase by over $10 billion year over year in fiscal 2027 as we build out our global manufacturing sites."</div>
+      </div>
+    </div>
+
+    <div class="ec-item">
+      <span class="ec-tag tag-neut">中性</span>
+      <div class="ec-content">
+        <div class="ec-topic">10. Q3指引：EPS $19.15±$0.40（基于11.5亿股）</div>
+        <div class="ec-text">Q3指引：营收$335亿±$7.5亿；毛利率~81%；运营费用~$14亿；Non-GAAP EPS $19.15±$0.40（基于11.5亿股）；资本支出~$70亿。</div>
+      </div>
+    </div>
+
+    <div class="ec-item">
+      <span class="ec-tag tag-bear">利空</span>
+      <div class="ec-content">
+        <div class="ec-topic">11. 贸易/关税影响未纳入指引</div>
+        <div class="ec-text">管理层明确表示，任何因贸易或地缘政治发展导致的影响均未纳入Q3指引。这是重要的不确定性风险提示，中美贸易摩擦可能对公司造成未计入的负面影响。</div>
+        <div class="ec-quote">"Any impact that may occur due to trade or geopolitical developments are not included in our guidance."</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q&A -->
+  <div class="ec-section">
+    <div class="ec-speaker">分析师问答（Q&A — 12个交流片段）</div>
+
+    <div class="qa-item">
+      <div class="qa-analyst">Q1 · TD Cowen（Krish Sankar）</div>
+      <div class="qa-q">问：HBM4量产后毛利率的可持续性？81%的Q3指引在HBM4爬坡期能否维持？</div>
+      <div class="qa-a-label">CFO Mark Murphy 回答</div>
+      <div class="qa-a">Q3 81%的毛利率指引已将HBM4量产增长考虑在内。展望Q3之后，市场环境预计将保持紧张。AI驱动多年投资周期，"绝大多数机会还在我们面前"。未提供Q4具体指引，但整体方向积极。</div>
+      <span class="badge up" style="margin-top:8px;display:inline-block">利好</span>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-analyst">Q2 · TD Cowen 追问</div>
+      <div class="qa-q">问：首个5年SCA与过去LTA（长期协议）有何本质区别？</div>
+      <div class="qa-a-label">CEO Sanjay Mehrotra 回答</div>
+      <div class="qa-a">SCA包含具体的数量承诺和定价条款（非仅定价），为双方提供更深层的互惠可见度和规划确定性。5年期是行业里程碑，意味着客户对美光技术路线图的高度信任，也使美光能够更好地规划产能投资。</div>
+      <span class="badge up" style="margin-top:8px;display:inline-block">利好</span>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-analyst">Q3 · 分析师</div>
+      <div class="qa-q">问：关键客户的需求满足情况如何？HBM供应是否仍然不足？</div>
+      <div class="qa-a-label">CEO Sanjay Mehrotra 回答</div>
+      <div class="qa-a">对于部分关键客户，美光在中期内只能满足其50%至三分之二的需求。2026年全年HBM供应已全部售罄。这一供需缺口是公司保持高定价的核心支撑。</div>
+      <span class="badge up" style="margin-top:8px;display:inline-block">利好</span>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-analyst">Q4 · 分析师</div>
+      <div class="qa-q">问：价格上涨导致PC和手机需求下降，净比特位需求会受影响吗？</div>
+      <div class="qa-a-label">CEO Sanjay Mehrotra 回答</div>
+      <div class="qa-a">供应约束推高价格可能导致2026日历年PC/手机单元量下降低两位数%，但单机内存含量大幅提升（旗舰手机12GB+占比从<20%升至约80%）形成强力对冲。AI PC推荐32GB+，agentic AI场景推动更高配置。净效应：比特位总需求仍然健康。</div>
+      <span class="badge nt" style="margin-top:8px;display:inline-block">中性</span>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-analyst">Q5 · 分析师</div>
+      <div class="qa-q">问：美光HBM4相对三星/SK海力士的竞争地位如何？</div>
+      <div class="qa-a-label">CEO Sanjay Mehrotra 回答</div>
+      <div class="qa-a">美光HBM4量产出货已启动，良率爬坡速度超过HBM3E（优于内部计划）。HBM4已完成为NVIDIA Vera Rubin的设计适配。HBM4D差异化定制选项提供额外竞争优势。"明显多数的客户将美光排在质量第一位。"</div>
+      <span class="badge up" style="margin-top:8px;display:inline-block">利好</span>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-analyst">Q6 · 分析师</div>
+      <div class="qa-q">问：FY2027资本支出大幅增加，如何看待CapEx纪律和回报率？</div>
+      <div class="qa-a-label">CFO Mark Murphy 回答</div>
+      <div class="qa-a">投资决策与市场环境相匹配。FY2026 >$250亿，FY2027"有意义"进一步提升，主要为建设性资本（爱达荷、纽约、铜锣、新加坡、日本洁净室）。设备支出也在上升。鉴于结构性需求强劲，回报率预期强劲。管理层强调投资决策是"响应市场"而非盲目扩张。</div>
+      <span class="badge nt" style="margin-top:8px;display:inline-block">中性</span>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-analyst">Q7 · 分析师</div>
+      <div class="qa-q">问：NAND业务和SSD市场份额具体情况？</div>
+      <div class="qa-a-label">CEO Sanjay Mehrotra 回答</div>
+      <div class="qa-a">数据中心SSD市场份额连续第4个日历年创新高。G9 NAND PCIe Gen6 SSD量产，122TB SSD获得强劲采用。"NAND需求显著超过可用供应，这种状态在可见未来内将持续。"数据中心NAND营收本季超过翻倍。</div>
+      <span class="badge up" style="margin-top:8px;display:inline-block">利好</span>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-analyst">Q8 · 分析师</div>
+      <div class="qa-q">问：汽车/嵌入式业务展望及机器人机遇？</div>
+      <div class="qa-a-label">CEO Sanjay Mehrotra 回答</div>
+      <div class="qa-a">AEBU本季创营收新高，汽车+工业合计超$20亿。L2 ADAS每辆约16GB DRAM；L4自动驾驶需>300GB。"我们认为我们正处于机器人领域20年增长向量的边缘，预计机器人将成为科技世界最大产品品类之一。"人形机器人所需算力等同于L4自动驾驶级别。</div>
+      <span class="badge up" style="margin-top:8px;display:inline-block">利好</span>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-analyst">Q9 · 分析师</div>
+      <div class="qa-q">问：资本配置优先级 — 回购、分红、减债如何权衡？</div>
+      <div class="qa-a-label">CFO Mark Murphy 回答</div>
+      <div class="qa-a">CHIPS法案限制了回购力度（Q2仅$3.5亿）。债务过去3季减少$50亿+。股息提升30%。首要资本配置优先级是将资金再投入高回报增长（研发+资本支出）。资产负债表达到历史最强，信用评级升至BBB投资级。</div>
+      <span class="badge nt" style="margin-top:8px;display:inline-block">中性</span>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-analyst">Q10 · 分析师</div>
+      <div class="qa-q">问：贸易/关税风险和中国敞口？</div>
+      <div class="qa-a-label">CFO/CEO 联合回答</div>
+      <div class="qa-a">"任何因贸易或地缘政治发展产生的影响均未纳入指引。"未提供关税具体情景的指引。中国市场持续面临2023年禁令带来的不确定性（此为持续的下行风险）。美国本土制造布局（CHIPS法案）在一定程度上提供了地缘政治缓冲。</div>
+      <span class="badge dn" style="margin-top:8px;display:inline-block">利空</span>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-analyst">Q11 · 分析师</div>
+      <div class="qa-q">问：Agentic AI（智能体AI）如何驱动更大内存需求升级？</div>
+      <div class="qa-a-label">CEO Sanjay Mehrotra 回答</div>
+      <div class="qa-a">智能体AI应用需要32GB+的PC本地推理工作负载。个人AI工作站（NVIDIA DGX Spark、AMD Ryzen AI Halo）配置128GB。三星Galaxy S26和Google Pixel 10内置智能体AI。内存是设备端AI推理的核心使能技术。AI进化将持续推动计算架构向"内存密集型"演进。</div>
+      <span class="badge up" style="margin-top:8px;display:inline-block">利好</span>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-analyst">Q12 · 分析师</div>
+      <div class="qa-q">问：爱达荷和纽约工厂时间线及预期产出规模？</div>
+      <div class="qa-a-label">CEO Sanjay Mehrotra 回答</div>
+      <div class="qa-a">爱达荷Fab 1：2027年中历史首批晶圆产出，Fab 2地基准备已开工。纽约：Fab 1已破土（$1,000亿园区），预计2028年H2产出。台湾铜锣（已完成收购）：现有工厂FY2028起有意义产出，第二洁净室建设中。新加坡NAND新厂：已破土，2028年产出。新加坡HBM封装：2027年日历年起贡献有意义HBM供应。</div>
+      <span class="badge up" style="margin-top:8px;display:inline-block">利好</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ S8: BUFFETT 6-DIMENSION ═══ -->
+<section class="section">
+  <div class="stitle">巴菲特六维分析框架</div>
+
+  <div class="bscore">
+    <div class="circle cr">C+</div>
+    <div class="bd">
+      <h4>① 护城河（Moat）</h4>
+      <p><strong>正面：</strong>美国唯一先进存储制造商；HBM4设计入NVIDIA Vera Rubin；1γ节点历史最快爬坡；垂直整合（设计+制造+封装）；CHIPS法案创造美国制造优势。<br>
+      <strong>负面：</strong>存储本质是商品业务；长期来看是价格接受者而非定价者；三星（50%份额）、SK海力士（30-35%）具有规模优势；下行周期无定价权；存储规格标准化，客户可切换供应商。<br>
+      <strong>结论：</strong>在存储行业标准之上的护城河（唯一美国厂商+HBM设计胜出），但本质仍是商品制造，非巴菲特青睐的"要塞型"护城河。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>② 管理层质量（Management）</h4>
+      <p><strong>正面：</strong>CEO Sanjay Mehrotra自2017年以来重塑美光；HBM4良率超内部计划；1γ历史最快爬坡；CFO Murphy纪律严明——边投入$250亿CapEx边削减$50亿+债务；首个5年SCA彰显商业成熟度；股息提升30%回报股东；信息披露透明（关税风险未纳入指引明确说明）。<br>
+      <strong>担忧：</strong>$250亿+CapEx承诺是公司历史上最大赌注；若周期反转，这将造成严重资本错配。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">A</div>
+    <div class="bd">
+      <h4>③ 财务健康（Financial Health）</h4>
+      <p>净现金$65亿（历史最高）；现金+投资$167亿 vs 债务$101亿；流动性超$200亿（含信贷额度）；近3季削减债务$50亿+；信用升至BBB投资级；单季OCF $119亿。这是公司历史上最强的财务状况——但这是周期高峰，需警惕均值回归。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B+</div>
+    <div class="bd">
+      <h4>④ 盈利质量（Earnings Quality）</h4>
+      <p><strong>正面：</strong>营收增长真实（实际比特位出货量增加+真实供需失衡驱动的定价上涨，非会计操作）；FCF与净利润吻合（OCF $119亿 vs NI $137.85亿 — 合理）；毛利率扩张来自真实供需，非财务工程。<br>
+      <strong>风险：</strong>定价驱动的利润率本质脆弱——若定价反转，毛利率将迅速崩塌（参考FY2023：毛利率从47%跌至-1%）。美光FY2023净亏损$58亿，三年前EPS为-$1.76。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cr">C</div>
+    <div class="bd">
+      <h4>⑤ 可预测性（Predictability）</h4>
+      <p><strong>正面：</strong>首个5年SCA提供不寻常的能见度；HBM全年已售罄；供需紧张预计延续至2026年以后；管理层Q3实际营收$238.6亿大超原先市场预期$200.1亿，执行力强。<br>
+      <strong>负面：</strong>存储是出了名的周期性行业——FY2023净亏损$58亿；无人能准确预测多年期存储价格；贸易/关税风险被管理层自己排除在指引之外；3-5年前瞻可预测性接近于零。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B-</div>
+    <div class="bd">
+      <h4>⑥ 资本配置纪律（Capital Discipline）</h4>
+      <p><strong>正面：</strong>积极削债；上调股息；首个SCA为CapEx决策提供营收确定性支撑；必要的R&D投入维护技术领先。<br>
+      <strong>负面：</strong>FY2026 >$250亿CapEx是公司历史上最大资本承诺；FY2027进一步提升——若周期在FY2027-2028反转，这将是周期高峰的灾难性资本错配。CHIPS法案限制股票回购——政府补贴附带重要条款。巴菲特警惕在周期高峰感到"不可抗拒的投资机会"的管理层。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ S9: DCF THREE SCENARIOS ═══ -->
+<section class="section">
+  <div class="stitle">三情景DCF内在价值估算</div>
+
+  <div style="background:var(--card);border:1px solid var(--border);border-left:4px solid var(--gold);border-radius:10px;padding:14px 20px;margin-bottom:18px;font-size:13px;color:var(--text2);">
+    <strong style="color:var(--accent3)">重要背景：</strong>美光是资本密集型<strong>周期性</strong>半导体公司。历史上其利润可在2年内从峰值暴跌至接近零。AI超级周期可能抬高周期底部，但周期风险真实存在。FY2026 CapEx >$250亿意味着FCF = OCF - 巨额CapEx；FY2027 CapEx进一步提升。基准股价：$461.73 | 流通股：11.5亿 | 净现金：$65亿
+  </div>
+
+  <div class="dcf-grid">
+    <div class="dcf-card dcf-bull">
+      <div class="dcf-label">乐观情景（AI周期持续5年+）</div>
+      <div class="dcf-price">$841</div>
+      <div class="dcf-updown" style="color:var(--green)">vs $461.73 → 上涨空间 +82%</div>
+      <div class="dcf-row"><span>WACC</span><span>9%</span></div>
+      <div class="dcf-row"><span>永续增长率</span><span>3%</span></div>
+      <div class="dcf-row"><span>FY2026E FCF</span><span>$410亿</span></div>
+      <div class="dcf-row"><span>FY2027E FCF</span><span>$480亿</span></div>
+      <div class="dcf-row"><span>FY2028E FCF</span><span>$550亿</span></div>
+      <div class="dcf-row"><span>FY2029E FCF</span><span>$600亿</span></div>
+      <div class="dcf-row"><span>FY2030E FCF</span><span>$650亿</span></div>
+      <div class="dcf-row"><span>5年FCF现值</span><span>~$2,130亿</span></div>
+      <div class="dcf-row"><span>终值现值</span><span>~$7,480亿</span></div>
+      <div class="dcf-row"><span>EV → 加净现金$65亿</span><span>~$9,675亿</span></div>
+      <div style="margin-top:10px;font-size:12px;color:var(--text3)">安全边际买入价（-25%折价）：$631</div>
+      <div style="font-size:12px;color:var(--text3)">假设：AI周期持续5年+；新工厂按时产出；供应结构性受限；无重大周期反转</div>
+    </div>
+
+    <div class="dcf-card dcf-neut">
+      <div class="dcf-label">中性情景（AI需求减速，FY2028部分周期回归）</div>
+      <div class="dcf-price">$426</div>
+      <div class="dcf-updown" style="color:var(--red)">vs $461.73 → 轻微下行 -8%（基本公允）</div>
+      <div class="dcf-row"><span>WACC</span><span>11%</span></div>
+      <div class="dcf-row"><span>永续增长率</span><span>2.5%</span></div>
+      <div class="dcf-row"><span>FY2026E FCF</span><span>$410亿</span></div>
+      <div class="dcf-row"><span>FY2027E FCF</span><span>$330亿（CapEx峰值挤压）</span></div>
+      <div class="dcf-row"><span>FY2028E FCF</span><span>$380亿（部分供需正常化）</span></div>
+      <div class="dcf-row"><span>FY2029E FCF</span><span>$430亿</span></div>
+      <div class="dcf-row"><span>FY2030E FCF</span><span>$470亿</span></div>
+      <div class="dcf-row"><span>5年FCF现值</span><span>~$1,540亿</span></div>
+      <div class="dcf-row"><span>终值现值</span><span>~$3,290亿</span></div>
+      <div class="dcf-row"><span>EV → 加净现金$65亿</span><span>~$4,895亿</span></div>
+      <div style="margin-top:10px;font-size:12px;color:var(--text3)">安全边际买入价（-25%折价）：$320</div>
+      <div style="font-size:12px;color:var(--text3)">假设：AI周期FY2027-2028有所减速；三星/SK海力士部分增加HBM供应；CapEx峰值年FCF受压</div>
+    </div>
+
+    <div class="dcf-card dcf-bear">
+      <div class="dcf-label">悲观情景（FY2027经典周期反转）</div>
+      <div class="dcf-price">$158</div>
+      <div class="dcf-updown" style="color:var(--red)">vs $461.73 → 下行风险 -66%</div>
+      <div class="dcf-row"><span>WACC</span><span>13%</span></div>
+      <div class="dcf-row"><span>永续增长率</span><span>1.5%</span></div>
+      <div class="dcf-row"><span>FY2026E FCF</span><span>$410亿</span></div>
+      <div class="dcf-row"><span>FY2027E FCF</span><span>$80亿（三星/SK Hynix大量增供+DRAM价格崩盘）</span></div>
+      <div class="dcf-row"><span>FY2028E FCF</span><span>-$80亿（周期下行，CapEx仍高，可能亏损）</span></div>
+      <div class="dcf-row"><span>FY2029E FCF</span><span>$120亿（逐步复苏）</span></div>
+      <div class="dcf-row"><span>FY2030E FCF</span><span>$280亿</span></div>
+      <div class="dcf-row"><span>5年FCF现值</span><span>~$650亿</span></div>
+      <div class="dcf-row"><span>终值现值</span><span>~$1,100亿</span></div>
+      <div class="dcf-row"><span>EV → 加净现金$65亿</span><span>~$1,815亿</span></div>
+      <div style="margin-top:10px;font-size:12px;color:var(--text3)">安全边际买入价（-25%折价）：$119</div>
+      <div style="font-size:12px;color:var(--text3)">假设：FY2027三星+SK Hynix显著增加HBM产能；DRAM价格崩溃；高CapEx+低定价=FCF转负；历史上多次发生</div>
+    </div>
+  </div>
+
+  <div class="ccard" style="margin-top:0">
+    <div class="ctitle">DCF情景下内在价值 vs 当前股价对比</div>
+    <div class="cwrap" style="height:200px"><canvas id="c8"></canvas></div>
+  </div>
+</section>
+
+<!-- ═══ S10: VERDICT ═══ -->
+<section class="section">
+  <div class="stitle">投资结论与仓位建议</div>
+
+  <div class="verdict">
+    <div class="verdict-t">评级：谨慎参与（周期性赌注，非巴菲特经典买入）</div>
+    <p style="font-size:14px;color:var(--text2);line-height:1.9">
+      <strong style="color:var(--accent3)">巴菲特为什么不会买美光：</strong>① 商品业务，无持久定价权；② 盈利周期性，3-5年不可预测；③ 管理层在疑似周期高峰进行历史最大CapEx押注。<br>
+      <strong style="color:var(--green)">但对于周期意识投资者：</strong>7.9x FY2026E P/E对于一家YoY增速196%的公司而言确实便宜；$65亿净现金+创纪录FCF提供下行缓冲；AI结构性需求转变可能永久性抬高周期底部。<br>
+      <strong style="color:var(--red)">核心风险：</strong>-66%的熊市情景是真实的，且在历史上发生过（FY2023：美光从盈利到净亏损$58亿，历时不到2年）。
+    </p>
+    <div class="pgrid">
+      <div class="pbox">
+        <div class="pl">建议仓位</div>
+        <div class="pv pf">2-4%</div>
+        <div class="pn">组合最大占比</div>
+      </div>
+      <div class="pbox">
+        <div class="pl">当前价格评估</div>
+        <div class="pv pc">$441-462</div>
+        <div class="pn">中性DCF附近（基本公允）</div>
+      </div>
+      <div class="pbox">
+        <div class="pl">加仓价位</div>
+        <div class="pv ps">≤$350</div>
+        <div class="pn">更好的安全边际</div>
+      </div>
+      <div class="pbox">
+        <div class="pl">止损信号</div>
+        <div class="pv pr">Q3 FCF<br>-20%</div>
+        <div class="pn">或三星宣布大规模新增HBM产能</div>
+      </div>
+    </div>
+    <div style="font-size:13px;color:var(--text2);line-height:1.8;">
+      <strong>出场条件：</strong>Q3实际FCF低于$112亿指引的20%以上；或三星/SK海力士宣布超预期的新HBM产能承诺；或美中贸易摩擦升级直接冲击美光供应链。<br>
+      <strong>切忌：</strong>将美光视为"长期持有"型股票——这是一个需要主动管理仓位的周期性行业赌注，不适合"买入并遗忘"策略。
+    </div>
+  </div>
+</section>
+
+<!-- ═══ S11: COMMENTARY ═══ -->
+<section class="section">
+  <div class="stitle">深度评论：AI超级周期与存储命运</div>
+  <div class="cmt">
+    <p>美光本季度业绩用数字书写了一个令人窒息的故事：<span class="hl-t">营收同比增长196%、毛利率从一年前的22.6%飙至74.9%、单季自由现金流$69亿</span>——所有这些数字都在告诉投资者，存储行业正在经历一场范式转移，而不仅仅是又一次普通的周期上行。</p>
+
+    <p>这场范式转移的核心论点令人信服：<span class="hl-t">数据中心比特位需求首次超过全行业TAM的50%</span>，这是一个历史分水岭。AI训练需要HBM；AI推理需要大容量DRAM；AI推理在边缘端（手机、PC、汽车）需要LPDRAM和闪存。存储正在从计算机的"配件"演变为AI能力的"基础设施"。CEO Mehrotra的金句——"存储使AI更智能、更有能力"——不是营销话语，而是架构现实。</p>
+
+    <p>然而，<span class="warn-t">清醒的投资者必须抵制叙事的诱惑</span>。美光在FY2023仅仅两年前还净亏损$58亿。存储行业的周期就是这样运作的：需求放缓 → 价格崩盘 → 企业亏损 → 减产 → 供应收缩 → 价格反弹 → 重复。AI的出现可能（也可能不会）永久性打破这个轮回。</p>
+
+    <p>最令人不安的信号不是业绩本身，而是<span class="warn-t">管理层的资本支出承诺</span>：FY2026 >$250亿，FY2027再增加$100亿+建设性资本支出。这是公司历史上最大的押注，发生在疑似周期高峰时期。若AI需求在FY2027-2028放缓，这些正在建设的洁净室将成为沉没成本的痛苦来源。</p>
+
+    <p>反方论点同样有力：<span class="hl-t">HBM 2026年全年已售罄</span>；首个5年SCA提供了前所未有的需求可见度；管理层明确表示供需紧张将延续至2026年以后；美光是美国唯一的先进存储制造商，享受CHIPS法案约$60亿政府补贴。这些不是普通周期的特征，这是结构性需求转变。</p>
+
+    <p>最终，<span class="hl-t">美光以7.9x FY2026E前瞻P/E交易</span>，比所有同行（三星12-15x，SK海力士8-12x，英伟达35x）都便宜。这种折价反映了市场对周期风险的定价。问题不是"美光是否在成长？"——答案显然是肯定的。问题是<span class="warn-t">"AI超级周期能否持续足够长的时间，让这批$250亿+的工厂投资产生足够的回报？"</span>这个问题没有人能在今天给出确定性答案。</p>
+
+    <p>机器人领域的2026年Q2财报会议评论值得特别关注。CEO预测机器人将成为"科技世界最大产品品类之一"，并视之为"20年增长向量"。如果人形机器人（每台所需算力等同于L4自动驾驶）在未来10年实现大规模商业化，美光将成为受益最大的存储公司之一。这是一个长期的、高度不确定但潜在规模极大的期权。</p>
+
+    <p style="margin-bottom:0"><strong>底线：</strong>以当前价格（约$441-462），美光大致处于中性DCF内在价值附近。既不是明显便宜，也不是明显昂贵。对于<span class="hl-t">风险意识强、理解存储周期的投资者</span>，2-4%的适度仓位是合理的。对于寻求"买入并遗忘"的巴菲特式长期持有者，美光不是正确的选择——存储行业的周期永不会消亡，只会改变形状。</p>
+  </div>
+</section>
+
+<!-- ═══ DISCLAIMER ═══ -->
+<section class="section">
+  <div class="stitle">风险提示与免责声明</div>
+  <div class="disclaimer">
+    <p><strong>本报告仅供参考，不构成任何投资建议。</strong>所有财务数据基于公开披露的财报信息及电话会议内容，估值模型假设存在重大不确定性。过去业绩不代表未来表现。</p>
+    <p>主要风险因素包括但不限于：① 存储行业供需周期性反转风险；② 中美贸易摩擦及出口管制升级风险（已被管理层明确排除在指引之外）；③ 竞争对手（三星、SK海力士）大规模增加HBM产能的风险；④ CapEx超支导致FCF承压的风险；⑤ 技术节点良率不及预期的风险；⑥ 宏观经济衰退导致终端需求下滑的风险；⑦ CHIPS法案条款限制资本灵活性的风险。</p>
+    <p>DCF估值基于高度主观的假设，三种情景均存在重大偏差可能性。投资者应进行独立的尽职调查，并根据自身风险承受能力做出投资决策。</p>
+    <p style="color:var(--text3);font-size:11.5px;margin-bottom:0">报告生成日期：2026年3月19日 | 数据截至：2026年3月18日财报发布后 | 报告语言：中文（财务缩写保留英文）</p>
+  </div>
+</section>
+
+</div><!-- /container -->
+
+<footer>
+  <div>美光科技 Micron Technology (NASDAQ: MU) · Q2 FY2026 深度分析报告</div>
+  <div style="margin-top:4px">FY2026 Q2 截至2026年2月26日 · 财报发布：2026年3月18日 · 本报告仅供参考，不构成投资建议</div>
+  <div style="margin-top:4px">BUFFY · 财报研究所 · 巴菲特价值投资视角</div>
+</footer>
+
+<script>
+// ── THEME TOGGLE ──
+function toggleTheme() {
+  const html = document.documentElement;
+  html.dataset.theme = html.dataset.theme === 'dark' ? 'light' : 'dark';
+  updateCharts();
+}
+
+// ── CHART HELPERS ──
+function getColor(name) {
+  const s = getComputedStyle(document.documentElement);
+  return s.getPropertyValue('--' + name).trim();
+}
+
+function chartDefaults() {
+  return {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { labels: { color: getColor('text2'), font: { size: 11 } } } },
+    scales: {
+      x: { ticks: { color: getColor('text2'), font: { size: 11 } }, grid: { color: getColor('chart-grid') } },
+      y: { ticks: { color: getColor('text2'), font: { size: 11 } }, grid: { color: getColor('chart-grid') } }
+    }
+  };
+}
+
+const QUARTERS = ['Q2 FY25', 'Q3 FY25', 'Q4 FY25', 'Q1 FY26', 'Q2 FY26', 'Q3 FY26E'];
+const REVENUE = [8.05, 9.30, 11.32, 13.64, 23.86, 33.50];
+const EPS = [1.56, 1.91, 3.03, 4.78, 12.20, 19.15];
+const GM = [36.8, 39.0, 44.7, 56.8, 74.9, 81.0];
+const OPM = [21, 24, 30, 47, 69, 75];
+const FCF = [0.6, 1.2, 2.5, 3.9, 6.9, 14.0];
+
+let charts = {};
+
+function buildCharts() {
+  const G = () => getColor('chart-grid');
+  const T = () => getColor('text2');
+
+  // C1 - Revenue
+  charts.c1 = new Chart(document.getElementById('c1'), {
+    type: 'bar',
+    data: {
+      labels: QUARTERS,
+      datasets: [{
+        label: '营收 ($B)',
+        data: REVENUE,
+        backgroundColor: QUARTERS.map((_, i) => i === 5 ? 'rgba(122,154,122,0.4)' : i === 4 ? 'rgba(176,141,122,0.85)' : 'rgba(123,143,160,0.55)'),
+        borderColor: QUARTERS.map((_, i) => i === 5 ? 'rgba(122,154,122,0.8)' : i === 4 ? 'rgba(176,141,122,1)' : 'rgba(123,143,160,0.8)'),
+        borderWidth: 2,
+        borderRadius: 5
+      }]
+    },
+    options: { ...chartDefaults(), plugins: { legend: { display: false } } }
+  });
+
+  // C2 - EPS
+  charts.c2 = new Chart(document.getElementById('c2'), {
+    type: 'bar',
+    data: {
+      labels: QUARTERS,
+      datasets: [{
+        label: 'Non-GAAP EPS ($)',
+        data: EPS,
+        backgroundColor: QUARTERS.map((_, i) => i === 5 ? 'rgba(122,154,122,0.4)' : i === 4 ? 'rgba(185,160,106,0.85)' : 'rgba(176,141,122,0.55)'),
+        borderColor: QUARTERS.map((_, i) => i === 5 ? 'rgba(122,154,122,0.8)' : i === 4 ? 'rgba(185,160,106,1)' : 'rgba(176,141,122,0.8)'),
+        borderWidth: 2,
+        borderRadius: 5
+      }]
+    },
+    options: { ...chartDefaults(), plugins: { legend: { display: false } } }
+  });
+
+  // C3 - Margins
+  charts.c3 = new Chart(document.getElementById('c3'), {
+    type: 'line',
+    data: {
+      labels: QUARTERS,
+      datasets: [
+        {
+          label: '毛利率 (%)',
+          data: GM,
+          borderColor: 'rgba(176,141,122,0.9)', backgroundColor: 'rgba(176,141,122,0.1)',
+          tension: 0.4, fill: true, borderWidth: 2.5,
+          pointBackgroundColor: 'rgba(176,141,122,0.9)', pointRadius: 4
+        },
+        {
+          label: '经营利润率 (%)',
+          data: OPM,
+          borderColor: 'rgba(122,154,122,0.9)', backgroundColor: 'rgba(122,154,122,0.1)',
+          tension: 0.4, fill: false, borderWidth: 2.5, borderDash: [5,3],
+          pointBackgroundColor: 'rgba(122,154,122,0.9)', pointRadius: 4
+        }
+      ]
+    },
+    options: { ...chartDefaults() }
+  });
+
+  // C4 - FCF
+  charts.c4 = new Chart(document.getElementById('c4'), {
+    type: 'bar',
+    data: {
+      labels: QUARTERS,
+      datasets: [{
+        label: '自由现金流 ($B)',
+        data: FCF,
+        backgroundColor: QUARTERS.map((_, i) => i === 5 ? 'rgba(122,154,122,0.4)' : i === 4 ? 'rgba(122,154,122,0.85)' : 'rgba(123,143,160,0.5)'),
+        borderColor: QUARTERS.map((_, i) => i === 5 ? 'rgba(122,154,122,0.8)' : i === 4 ? 'rgba(122,154,122,1)' : 'rgba(123,143,160,0.8)'),
+        borderWidth: 2, borderRadius: 5
+      }]
+    },
+    options: { ...chartDefaults(), plugins: { legend: { display: false } } }
+  });
+
+  // C5 - DRAM vs NAND pie
+  charts.c5 = new Chart(document.getElementById('c5'), {
+    type: 'doughnut',
+    data: {
+      labels: ['DRAM $188亿 (79%)', 'NAND $50亿 (21%)'],
+      datasets: [{ data: [18.8, 5.0], backgroundColor: ['rgba(123,143,160,0.8)', 'rgba(176,141,122,0.8)'], borderWidth: 0 }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'bottom', labels: { color: getColor('text2'), font: { size: 11 }, padding: 12 } } },
+      cutout: '60%'
+    }
+  });
+
+  // C6 - Business units doughnut
+  charts.c6 = new Chart(document.getElementById('c6'), {
+    type: 'doughnut',
+    data: {
+      labels: ['CMBU(云) $77.5B', 'MCBU(移动/PC) $77.1B', 'CDBU(数据中心) $56.9B', 'AEBU(汽车) $27.1B'],
+      datasets: [{ data: [7.75, 7.71, 5.69, 2.71], backgroundColor: ['rgba(123,143,160,0.8)', 'rgba(176,141,122,0.8)', 'rgba(138,154,142,0.8)', 'rgba(185,160,106,0.8)'], borderWidth: 0 }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'bottom', labels: { color: getColor('text2'), font: { size: 10 }, padding: 8 } } },
+      cutout: '55%'
+    }
+  });
+
+  // C7 - DCF scenarios bar
+  charts.c7 = new Chart(document.getElementById('c7'), {
+    type: 'bar',
+    data: {
+      labels: ['悲观', '中性', '当前价', '乐观'],
+      datasets: [{ label: '每股价值/价格 ($)', data: [158, 426, 461.73, 841],
+        backgroundColor: ['rgba(184,112,112,0.7)', 'rgba(185,160,106,0.7)', 'rgba(123,143,160,0.7)', 'rgba(122,154,122,0.7)'],
+        borderColor: ['rgba(184,112,112,1)', 'rgba(185,160,106,1)', 'rgba(123,143,160,1)', 'rgba(122,154,122,1)'],
+        borderWidth: 2, borderRadius: 5
+      }]
+    },
+    options: { ...chartDefaults(), plugins: { legend: { display: false } } }
+  });
+
+  // C8 - DCF comparison
+  charts.c8 = new Chart(document.getElementById('c8'), {
+    type: 'bar',
+    data: {
+      labels: ['熊市内在值\n$158', '中性内在值\n$426', '当前股价\n$461.73', '牛市内在值\n$841'],
+      datasets: [{ label: '价格/内在价值 ($)', data: [158, 426, 461.73, 841],
+        backgroundColor: ['rgba(184,112,112,0.7)', 'rgba(185,160,106,0.7)', 'rgba(123,143,160,0.85)', 'rgba(122,154,122,0.7)'],
+        borderColor: ['rgba(184,112,112,1)', 'rgba(185,160,106,1)', 'rgba(123,143,160,1)', 'rgba(122,154,122,1)'],
+        borderWidth: 2, borderRadius: 5
+      }]
+    },
+    options: { ...chartDefaults(), plugins: { legend: { display: false } },
+      scales: { x: { ticks: { color: getColor('text2'), font: { size: 10 } }, grid: { color: getColor('chart-grid') } },
+                y: { ticks: { color: getColor('text2') }, grid: { color: getColor('chart-grid') } } }
+    }
+  });
+}
+
+function updateCharts() {
+  Object.values(charts).forEach(c => {
+    if (c.options.scales?.x) c.options.scales.x.ticks.color = getColor('text2');
+    if (c.options.scales?.y) c.options.scales.y.ticks.color = getColor('text2');
+    if (c.options.scales?.x) c.options.scales.x.grid.color = getColor('chart-grid');
+    if (c.options.scales?.y) c.options.scales.y.grid.color = getColor('chart-grid');
+    if (c.options.plugins?.legend?.labels) c.options.plugins.legend.labels.color = getColor('text2');
+    c.update();
+  });
+  buildSankey();
+}
+
+// ── SANKEY ──
+function buildSankey() {
+  const isDark = document.documentElement.dataset.theme === 'dark';
+  const textColor = isDark ? '#d4ccc4' : '#4a4340';
+  const linkOpacity = isDark ? 0.35 : 0.45;
+
+  // Q2 FY2026 P&L Sankey ($亿)
+  // Revenue 238.6 → COGS ~60.4 (25.6%) + Gross Profit 178.2 (74.4% GAAP)
+  // Gross Profit → OpEx ~13.7 + Op Income 164.5 GAAP
+  // Op Income → Tax ~25 + Net Income 137.85
+  const data = {
+    type: 'sankey',
+    orientation: 'h',
+    node: {
+      pad: 18, thickness: 22,
+      line: { color: isDark ? '#4a4540' : '#d9d0c7', width: 0.5 },
+      label: [
+        '总营收 $238.6亿',      // 0
+        'DRAM营收 $188亿',      // 1
+        'NAND营收 $50亿',       // 2
+        '销货成本 $60.4亿',     // 3
+        '毛利润 $178.2亿',      // 4
+        '运营费用 $13.7亿',     // 5
+        'GAAP经营利润 $164.5亿',// 6
+        '税项/其他 $26.7亿',    // 7
+        'GAAP净利润 $137.85亿', // 8
+      ],
+      color: [
+        'rgba(123,143,160,0.85)',
+        'rgba(123,143,160,0.7)',
+        'rgba(176,141,122,0.7)',
+        'rgba(184,112,112,0.7)',
+        'rgba(138,154,142,0.85)',
+        'rgba(184,112,112,0.6)',
+        'rgba(185,160,106,0.85)',
+        'rgba(184,112,112,0.6)',
+        'rgba(122,154,122,0.9)',
+      ],
+      x: [0.0, 0.0, 0.0, 0.25, 0.25, 0.55, 0.55, 0.8, 0.8],
+      y: [0.45, 0.15, 0.75, 0.3, 0.75, 0.2, 0.75, 0.3, 0.75]
+    },
+    link: {
+      source: [0, 0, 0, 0,  4, 4,  6, 6],
+      target: [1, 2, 3, 4,  5, 6,  7, 8],
+      value:  [18.8, 5.0, 6.04, 17.82, 1.37, 16.45, 2.67, 13.785],
+      color: [
+        `rgba(123,143,160,${linkOpacity})`,
+        `rgba(176,141,122,${linkOpacity})`,
+        `rgba(184,112,112,${linkOpacity})`,
+        `rgba(138,154,142,${linkOpacity})`,
+        `rgba(184,112,112,${linkOpacity})`,
+        `rgba(185,160,106,${linkOpacity})`,
+        `rgba(184,112,112,${linkOpacity})`,
+        `rgba(122,154,122,${linkOpacity})`,
+      ]
+    }
+  };
+
+  const layout = {
+    paper_bgcolor: 'rgba(0,0,0,0)',
+    plot_bgcolor: 'rgba(0,0,0,0)',
+    font: { color: textColor, family: 'Segoe UI, sans-serif', size: 12 },
+    margin: { l: 20, r: 20, t: 20, b: 20 }
+  };
+
+  Plotly.react('sankey', [data], layout, { responsive: true, displayModeBar: false });
+}
+
+// ── INIT ──
+document.addEventListener('DOMContentLoaded', () => {
+  buildCharts();
+  buildSankey();
+});
+</script>
+</body>
+</html>

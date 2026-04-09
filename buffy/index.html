@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buffy's Research Hub 🍔</title>
+<style>
+  :root {
+    --bg: #FAF8F5;
+    --card-bg: #FFFFFF;
+    --text: #2D3436;
+    --text-secondary: #636E72;
+    --accent: #7D8C6E;
+    --accent-light: #A8B89A;
+    --border: #E8E4DF;
+    --shadow: 0 2px 12px rgba(0,0,0,0.06);
+    --tag-bg: #F0EDE8;
+  }
+  [data-theme="dark"] {
+    --bg: #1A1D21;
+    --card-bg: #23272E;
+    --text: #E8E4DF;
+    --text-secondary: #9BA3AB;
+    --accent: #A8B89A;
+    --accent-light: #7D8C6E;
+    --border: #333840;
+    --shadow: 0 2px 12px rgba(0,0,0,0.3);
+    --tag-bg: #2C3138;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Noto Sans SC', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    transition: background 0.3s, color 0.3s;
+  }
+  .container { max-width: 960px; margin: 0 auto; padding: 40px 24px; }
+
+  /* Header */
+  header {
+    text-align: center;
+    margin-bottom: 48px;
+    position: relative;
+  }
+  header h1 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+  }
+  header h1 span { color: var(--accent); }
+  header p {
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+  .theme-toggle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 6px 14px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: all 0.2s;
+  }
+  .theme-toggle:hover { transform: scale(1.1); }
+
+  /* Section */
+  .section-title {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* Report Cards */
+  .report-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .report-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.25s;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow);
+  }
+  .report-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent);
+    box-shadow: 0 6px 24px rgba(0,0,0,0.1);
+  }
+  .report-card .ticker {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .report-card h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  .report-card .desc {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    flex: 1;
+    margin-bottom: 12px;
+  }
+  .report-card .meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+  }
+  .tag {
+    display: inline-block;
+    background: var(--tag-bg);
+    padding: 3px 10px;
+    border-radius: 10px;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+  .tag.buy { color: #7D8C6E; }
+  .tag.hold { color: #8B7E6A; }
+  .tag.sell { color: #B07070; }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>🍔 Buffy's <span>Research Hub</span></h1>
+    <p>少年巴菲特的投资研究站 — 财报分析 · DCF 估值 · 价值投资</p>
+    <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙</button>
+  </header>
+
+  <div class="section-title">📊 财报分析 · 按最后修改时间排序</div>
+  <div class="report-grid" id="reportGrid"></div>
+
+  <footer>
+    <p>Powered by <a href="https://github.com/openclaw/openclaw">OpenClaw</a> · Built with 🍔 by Buffy</p>
+  </footer>
+</div>
+
+<script>
+/* ── REPORT DATA — sorted by modTime desc (newest first) ── */
+const reports = [
+  {
+    file: "reports/rlx-q4-2025.html",
+    ticker: "NYSE: RLX",
+    title: "RLX 雾芯科技 Q4 2025 & 全年财报深度分析",
+    desc: "电子烟不是重点，现金山才是重点。FY2025 营收 $566.1M(+44%) · GAAP净利 $133.6M(+65.6%) · 国际业务占 Q4 收入 76.5% · 金融资产 $2.25B · 电话会全量 19 条标注 · DCF 三情景（$2.93/$3.54/$4.14）",
+    tag: "审慎看多 / 低位可分批吸纳",
+    tagClass: "buy",
+    date: "2026-04-09",
+    modTime: 1775672940000
+  },
+  {
+    file: "reports/china-mobile-fy2025.html",
+    ticker: "HKEX: 0941",
+    title: "中国移动 China Mobile FY2025 深度分析",
+    desc: "港股高息防守王 · 营收 RMB1,050.2bn(+0.9%) · 经营利润 +4.4% · FCF RMB82.0bn(-45.9%) 是最大瑕疵 · 5G客户 6.42亿 · 智能算力收入 +279% · 三情景 DCF（HK$62 / HK$80 / HK$105）",
+    tag: "稳健收息型持有 / 回调买入",
+    tagClass: "buy",
+    date: "2026-04-07",
+    modTime: 1775498841277
+  },
+  {
+    file: "reports/lulu-q4-2025.html",
+    ticker: "NASDAQ: LULU",
+    title: "lululemon Q4 2025 & 全年财报深度分析",
+    desc: "高端运动服护城河仍在 · FY25营收$11.1B(+5%) · EPS $13.26 但2026E继续下滑 · 北美修复+关税压力双线博弈 · 全量电话会18条标注 · DCF三情景（$103/$133/$177）",
+    tag: "观望 / 有条件关注",
+    tagClass: "hold",
+    date: "2026-04-06",
+    modTime: 1775409840000
+  },
+  {
+    file: "reports/crox-q4-2025.html",
+    ticker: "NASDAQ: CROX",
+    title: "Crocs Inc. Q4 2025 & 全年财报深度分析",
+    desc: "洞洞鞋不是笑话，是台 6 倍 PE 的现金机器。FY25 FCF $659M · 回购 10% 股本 · 三情景 DCF ($57/$97/$143) · 电话会议全量 22 条标注 · 巴菲特六维评分",
+    tag: "有条件买入",
+    tagClass: "buy",
+    date: "2026-04-04",
+    modTime: 1743724200000
+  },
+
+  {
+    file: "reports/mnso-q4-2025.html",
+    ticker: "NYSE: MNSO / HKEX: 9896",
+    title: "名创优品 MINISO Q4 2025 & 全年财报深度分析",
+    desc: "营收创纪录+32.7% · Q4超指引上限 · TOP TOY+112% · 永辉投资亏损RMB8.1亿拖累净利 · 调整后净利+6.5% · FCF RMB 15.8亿 · 股东回报RMB19亿=66%净利 · Forward P/E 9.37 · PEG 0.19 · DCF三情景估值",
+    tag: "有条件买入",
+    tagClass: "buy",
+    date: "2026-04-01",
+    modTime: 1743505200000
+  },
+  {
+    file: "reports/xiaomi-q4-2025.html",
+    ticker: "HKEX: 1810",
+    title: "小米集团 Xiaomi Q4 2025 & 全年财报深度分析",
+    desc: "汽车首破千亿¥1,061亿(+224%) · 首次年度盈利¥9亿 · 全年营收¥4,573亿(+25%) · 经调整净利¥392亿(+44%) · Q4利润-24% 存储芯片逆风 · 手机-2.8%但高端突破 · DCF三情景（HKD 21/41/67）",
+    tag: "谨慎乐观",
+    tagClass: "buy",
+    date: "2026-03-24",
+    modTime: 1742803200000
+  },
+  {
+    file: "reports/skhynix-q4-2025.html",
+    ticker: "KRX: 000660",
+    title: "SK hynix Q4 2025 & 全年财报深度分析",
+    desc: "HBM 霸主 · 史上最强财报 · 营收₩97.1T(+47%) · 营业利润₩47.2T(+101%) · 58%营业利润率 · HBM4全球率先量产 · 三情景DCF · 估值提示：现价高于乐观情景",
+    tag: "谨慎观望",
+    tagClass: "hold",
+    date: "2026-03-21",
+    modTime: 1742483700000
+  },
+  {
+    file: "reports/bidu-q4-2025.html",
+    ticker: "NASDAQ: BIDU",
+    title: "百度集团 Baidu Q4 2025 & 全年财报深度分析",
+    desc: "AI成为新核心 · Cloud Infra订阅+143% · AI-native营销+301% · 净现金$42B≈市值 · Apollo Go 26城市 · $5B回购+首次分红 · DCF三情景估值",
+    tag: "持有/谨慎观望",
+    tagClass: "hold",
+    date: "2026-03-20",
+    modTime: 1742406000000
+  },
+  {
+    file: "reports/vg-q4-2025.html",
+    ticker: "NYSE: VG",
+    title: "Venture Global Q4 2025 & 全年深度分析",
+    desc: "美国LNG新巨头 · 营收$138亿(+177%) · EBITDA $63亿(+198%) · 三大LNG项目同步推进 · 净债务$323亿（高杠杆） · $1,340亿已签约收入 · 三情景估值（$5.3/$24.7/$42.8）",
+    tag: "投机性买入",
+    tagClass: "hold",
+    date: "2026-03-20",
+    modTime: 1742428800000
+  },
+  {
+    file: "reports/mu-q2-fy2026.html",
+    ticker: "NASDAQ: MU",
+    title: "美光科技 Micron Technology Q2 FY2026 深度分析",
+    desc: "营收 $23.9B（+196% YoY）· 毛利率 74.9%（创纪录）· HBM4 量产出货 NVIDIA Vera Rubin · Q3 指引 $33.5B / 81% 毛利 · FCF $6.9B（创纪录）· 三情景 DCF（$158/$426/$841）",
+    tag: "谨慎参与",
+    tagClass: "hold",
+    date: "2026-03-19",
+    modTime: 1742374800000
+  },
+  {
+    file: "reports/tme-q4-2025.html",
+    ticker: "NYSE: TME",
+    title: "腾讯音乐 TME Q4 2025 & 全年财报深度分析",
+    desc: "股价暴跌25% · 停止披露MAU/付费用户/ARPPU · 营收+16%/Non-IFRS利润+25% · 毛利率44.2%创新高 · SVIP破2000万 · 非订阅音乐+41% · 现金$54亿=市值31% · DCF三情景（$6.2/$9.9/$15.6）",
+    tag: "条件性观察仓",
+    tagClass: "hold",
+    date: "2026-03-18",
+    modTime: 1742325600000
+  },
+  {
+    file: "reports/wb-q4-2025.html",
+    ticker: "NASDAQ: WB",
+    title: "微博 Weibo Q4 2025 & 全年财报深度分析",
+    desc: "P/E 5.4x · FCF Yield 21% · 现金$24亿≈市值 · MAU 5.67亿(-4%) · 阿里广告+49% · 非阿里广告-4% · DCF三情景（$10.86/$17.01/$26.38）· 烟蒂式估值",
+    tag: "烟蒂式买入",
+    tagClass: "buy",
+    date: "2026-03-18",
+    modTime: 1742320000000
+  },
+  {
+    file: "reports/futu-q4-2025.html",
+    ticker: "NASDAQ: FUTU",
+    title: "富途控股 Futu Holdings Q4 2025 & 全年深度分析",
+    desc: "营收+68% · 净利翻倍 · 净利率52% · 入金客户340万+40% · 客户资产HK$1.23T · 三情景DCF（$67/$167/$321）· 巴菲特六维评分",
+    tag: "合理估值·伺机加仓",
+    tagClass: "hold",
+    date: "2026-03-18",
+    modTime: 1742313600000
+  },
+  {
+    file: "reports/xinhua-winshare-2024.html",
+    ticker: "HKEX: 00811",
+    title: "新华文轩 2024 年报深度分析",
+    desc: "四川教材垄断 · P/E 7.2x · P/B 0.81x · 净现金=市值75% · 股息率6.3%(+50%) · DCF三情景(HKD 12.3/$17.7/$26.6) · 巴菲特六维评分",
+    tag: "有条件买入",
+    tagClass: "buy",
+    date: "2026-03-17",
+    modTime: 1742190000000
+  },
+  {
+    file: "reports/qfin-q4-2025.html",
+    ticker: "NASDAQ: QFIN",
+    title: "奇富科技 Q4 2025 & 全年正式财报深度分析",
+    desc: "P/E 2.09x · P/B 0.53x · 11.1%股息 · EPS微超共识 · ICE引荐费-89% · 经营现金流RMB111亿创纪录 · 全年股东回报$880M=市值48% · DCF三情景（$20/$50/$90）",
+    tag: "机会性买入",
+    tagClass: "buy",
+    date: "2026-03-18",
+    modTime: 1742263200000
+  },
+  {
+    file: "reports/tcom-q4-2025.html",
+    ticker: "NASDAQ: TCOM",
+    title: "携程集团 Trip.com Q4 2025 & 全年财报深度分析",
+    desc: "中国在线旅游龙头 · 疫后出行复苏 · 国际业务高速增长 · AI 赋能旅行体验 · 酒店/机票/度假全链条拆解 · DCF 估值 · 巴菲特视角分析",
+    tag: "值得关注",
+    tagClass: "buy",
+    date: "2026-03-10",
+    modTime: 1741539900000
+  },
+  {
+    file: "reports/pdd-fy2025-v2.html",
+    ticker: "NASDAQ: PDD",
+    title: "PDD Holdings 拼多多 Q4 & FY2025 财报深度分析 v2",
+    desc: "电话会Q&A全量补齐 · 最新股价$100.87 · Forward P/E 8.3x · EV/NI 5.8x · DCF三情景（$77.68/$138.51/$228.53）· 维持有条件买入",
+    tag: "有条件买入 v2",
+    tagClass: "buy",
+    date: "2026-04-06",
+    modTime: 1775433600000
+  },
+  {
+    file: "reports/pdd-q3-2025.html",
+    ticker: "NASDAQ: PDD",
+    title: "PDD Holdings 拼多多 TTM 深度分析",
+    desc: "Temu 关税风暴 · 百亿商家扶持 · $454亿现金堡垒 · 毛利率结构性压缩 · 管理层拒绝提供指引 · DCF 三情景估值（$55/$120/$209）",
+    tag: "谨慎观望",
+    tagClass: "hold",
+    date: "2026-03-06",
+    modTime: 1741241100000
+  },
+  {
+    file: "reports/crcl-q4-2025.html",
+    ticker: "NYSE: CRCL",
+    title: "Circle Internet Group Q4 2025 & 全年财报深度分析",
+    desc: "USDC 稳定币基础设施龙头 · IPO 后首个完整财年 · AI 代理支付 · Arc 区块链 · DCF 三情景估值 · 13 条电话会议标注",
+    tag: "审慎买入",
+    tagClass: "hold",
+    date: "2026-03-06",
+    modTime: 1741236540000
+  },
+  {
+    file: "reports/jd-q4-2025.html",
+    ticker: "NASDAQ: JD",
+    title: "京东 Q4 2025 & 全年财报深度分析",
+    desc: "Morandi 风格交互式报告：收入拆解、桑基图、DCF 保守估值（$52.8/ADS）、多场景 P/E、巴菲特视角评级",
+    tag: "有条件买入",
+    tagClass: "buy",
+    date: "2026-03-06",
+    modTime: 1741233960000
+  }
+];
+
+/* ── RENDER (sort by modTime desc) ── */
+function renderReports() {
+  const grid = document.getElementById('reportGrid');
+  reports.sort((a, b) => b.modTime - a.modTime);
+  grid.innerHTML = reports.map(r => `
+    <a class="report-card" href="${r.file}">
+      <div class="ticker">${r.ticker}</div>
+      <h3>${r.title}</h3>
+      <div class="desc">${r.desc}</div>
+      <div class="meta">
+        <span class="tag ${r.tagClass}">${r.tag}</span>
+        <span>${r.date}</span>
+      </div>
+    </a>
+  `).join('');
+}
+renderReports();
+
+/* ── THEME ── */
+function toggleTheme() {
+  const d = document.documentElement;
+  const btn = document.getElementById('themeBtn');
+  if (d.getAttribute('data-theme') === 'dark') {
+    d.removeAttribute('data-theme');
+    btn.textContent = '🌙';
+    localStorage.setItem('theme', 'light');
+  } else {
+    d.setAttribute('data-theme', 'dark');
+    btn.textContent = '☀️';
+    localStorage.setItem('theme', 'dark');
+  }
+}
+(function() {
+  const t = localStorage.getItem('theme');
+  if (t === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('themeBtn').textContent = '☀️';
+    });
+  }
+})();
+</script>
+</body>
+</html>

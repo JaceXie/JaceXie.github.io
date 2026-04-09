@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>百度 Baidu — 2025 Q4 & 全年财报深度分析</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root {
+  --bg:#f5f0eb; --bg2:#ece6df; --card:#ffffff; --card2:#f8f5f1;
+  --border:#d9d0c7; --text:#4a4340; --text2:#7a706a; --text3:#a89f98;
+  --accent:#8a9a8e; --accent2:#7b8fa0; --accent3:#b08d7a;
+  --rose:#c09090; --gold:#b9a06a; --red:#b87070; --green:#7a9a7a;
+  --shadow:rgba(0,0,0,0.06); --chart-grid:#e5ddd5;
+}
+[data-theme="dark"] {
+  --bg:#1e1c1a; --bg2:#28251f; --card:#2e2a25; --card2:#363230;
+  --border:#4a4540; --text:#d4ccc4; --text2:#a09890; --text3:#706860;
+  --accent:#8a9a8e; --accent2:#8fabbf; --accent3:#c9a48e;
+  --rose:#c09090; --gold:#c9b07a; --red:#c08080; --green:#8aaa8a;
+  --shadow:rgba(0,0,0,0.3); --chart-grid:#3e3a35;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Georgia','Noto Serif SC','PingFang SC',serif;line-height:1.75;font-size:14.5px;transition:background .35s,color .35s}
+a{color:var(--accent2);text-decoration:none}
+.theme-bar{position:sticky;top:0;z-index:100;background:var(--card);border-bottom:1px solid var(--border);padding:8px 24px;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(10px);transition:background .35s}
+.theme-bar .logo{font-size:13px;color:var(--text2);letter-spacing:1px}
+.theme-toggle{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2)}
+.toggle-switch{position:relative;width:44px;height:22px;background:var(--border);border-radius:11px;cursor:pointer;transition:background .3s}
+.toggle-switch::after{content:'';position:absolute;top:2px;left:2px;width:18px;height:18px;background:var(--card);border-radius:50%;transition:transform .3s;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+[data-theme="dark"] .toggle-switch{background:var(--accent2)}
+[data-theme="dark"] .toggle-switch::after{transform:translateX(22px)}
+.hero{padding:48px 24px 36px;text-align:center;border-bottom:1px solid var(--border)}
+.hero-tag{display:inline-block;font-family:'Segoe UI',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);padding:3px 14px;border-radius:20px;margin-bottom:18px}
+.hero h1{font-size:32px;font-weight:700;color:var(--text);letter-spacing:1px;margin-bottom:8px}
+.hero-sub{font-size:14px;color:var(--text2);margin-bottom:16px}
+.hero-pills{display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
+.pill{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:6px 18px;font-family:'Segoe UI',sans-serif;font-size:13px;color:var(--text2);box-shadow:0 1px 3px var(--shadow)}
+.pill strong{color:var(--text)}
+.snapshot{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:20px 24px;background:var(--card2);border-bottom:1px solid var(--border)}
+.snap-item{text-align:center;padding:12px;background:var(--card);border:1px solid var(--border);border-radius:10px}
+.snap-label{font-family:'Segoe UI',sans-serif;font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
+.snap-value{font-size:22px;font-weight:800;font-family:'Segoe UI',sans-serif;color:var(--text)}
+.snap-sub{font-size:11px;color:var(--text3);margin-top:3px}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+.section{padding:36px 0;border-bottom:1px solid var(--border)}
+.stitle{font-size:18px;font-weight:700;color:var(--accent3);margin-bottom:20px;letter-spacing:.5px;display:flex;align-items:center;gap:10px}
+.stitle::before{content:'';display:block;width:4px;height:20px;background:var(--accent3);border-radius:2px}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:14px}
+.kpi{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 18px;box-shadow:0 1px 4px var(--shadow);transition:background .35s}
+.kpi-l{font-family:'Segoe UI',sans-serif;font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
+.kpi-v{font-size:20px;font-weight:700;color:var(--text);margin-bottom:3px}
+.badge{display:inline-block;font-family:'Segoe UI',sans-serif;font-size:11px;font-weight:600;padding:2px 8px;border-radius:8px}
+.up{background:rgba(122,154,122,.15);color:var(--green)}
+.dn{background:rgba(184,112,112,.15);color:var(--red)}
+.nt{background:rgba(123,143,160,.15);color:var(--accent2)}
+.tbl-wrap{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow-x:auto;box-shadow:0 1px 4px var(--shadow)}
+.tbl{width:100%;border-collapse:collapse;font-family:'Segoe UI',sans-serif;font-size:13px}
+.tbl th{background:var(--card2);color:var(--text3);font-size:11px;letter-spacing:.5px;text-transform:uppercase;padding:10px 14px;text-align:right;border-bottom:1px solid var(--border)}
+.tbl th:first-child{text-align:left}
+.tbl td{padding:9px 14px;border-bottom:1px solid var(--border);text-align:right}
+.tbl td:first-child{text-align:left;color:var(--text2)}
+.tbl .hl td{font-weight:600;color:var(--text)}
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.cgrid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:16px}
+.ccard{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px;box-shadow:0 1px 4px var(--shadow)}
+.ctitle{font-family:'Segoe UI',sans-serif;font-size:12px;color:var(--text3);margin-bottom:12px;text-transform:uppercase;letter-spacing:.5px}
+.cwrap{position:relative;height:230px}
+.agrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
+.acard{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px;box-shadow:0 1px 4px var(--shadow)}
+.acard h4{font-size:13px;color:var(--accent2);margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px}
+.acard ul{padding-left:16px}
+.acard li{margin-bottom:5px;font-size:13px}
+.bscore{display:flex;align-items:center;gap:16px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin-bottom:12px;box-shadow:0 1px 4px var(--shadow)}
+.circle{width:62px;height:62px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;flex-shrink:0;border:3px solid;font-family:'Segoe UI',sans-serif}
+.cg{border-color:var(--green);color:var(--green)}
+.cw{border-color:var(--gold);color:var(--gold)}
+.cr{border-color:var(--red);color:var(--red)}
+.bscore .bd h4{font-size:14px;margin-bottom:3px}
+.bscore .bd p{font-size:13px;color:var(--text2);line-height:1.6}
+.verdict{background:var(--card2);border:2px solid var(--accent);border-radius:10px;padding:26px 28px;margin-bottom:16px}
+.verdict-t{font-size:17px;font-weight:700;color:var(--accent);margin-bottom:10px}
+.pgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:18px 0}
+.pbox{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center;box-shadow:0 1px 4px var(--shadow)}
+.pbox .pl{font-family:'Segoe UI',sans-serif;font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
+.pbox .pv{font-family:'Segoe UI',sans-serif;font-size:26px;font-weight:800}
+.pbox .pn{font-size:11px;color:var(--text3);margin-top:3px}
+.pc{color:var(--text2)}.pf{color:var(--gold)}.ps{color:var(--green)}
+#sankey{width:100%;height:460px}
+.cmt{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:26px;line-height:1.9;font-size:14.5px;box-shadow:0 1px 4px var(--shadow)}
+.cmt p{margin-bottom:14px}
+.hl-t{color:var(--accent3);font-weight:600}
+.warn-t{color:var(--red);font-weight:600}
+footer{background:var(--card2);border-top:1px solid var(--border);padding:24px;text-align:center;color:var(--text3);font-size:12px;margin-top:40px}
+.ec-block{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:22px;margin-bottom:16px;box-shadow:0 1px 4px var(--shadow)}
+.ec-block h3{font-size:15px;font-weight:700;color:var(--accent3);margin-bottom:14px;border-bottom:1px solid var(--border);padding-bottom:8px}
+.ec-item{margin-bottom:16px;padding-bottom:14px;border-bottom:1px dashed rgba(150,140,130,.2)}
+.ec-item:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
+.ec-quote{font-style:italic;font-size:13.5px;line-height:1.8;color:var(--text);margin-bottom:8px;padding-left:14px;border-left:3px solid var(--rose)}
+.ec-tag{display:inline-flex;align-items:center;gap:5px;font-family:'Segoe UI',sans-serif;font-size:11.5px;font-weight:600;padding:3px 10px;border-radius:6px;margin-right:6px}
+.tag-bull{background:rgba(122,154,122,.15);color:var(--green)}
+.tag-bear{background:rgba(184,112,112,.15);color:var(--red)}
+.tag-neut{background:rgba(123,143,160,.15);color:var(--accent2)}
+.ec-note{font-size:12.5px;color:var(--text2);line-height:1.6;margin-top:6px;padding:6px 10px;background:var(--card2);border-radius:6px}
+@media(max-width:768px){.cgrid,.cgrid3,.agrid,.pgrid{grid-template-columns:1fr}.hero h1{font-size:22px}.kpi-grid{grid-template-columns:1fr 1fr}.snapshot{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <div class="logo">BUFFY · 财报研究所</div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">2026年3月20日 · 官方数据 · 巴菲特视角</div>
+  <h1>百度集团 Baidu, Inc. 财报深度分析</h1>
+  <div class="hero-sub">NASDAQ: BIDU &nbsp;|&nbsp; 2025年 Q4 & 全年业绩 &nbsp;|&nbsp; AI转型关键之年</div>
+  <div class="hero-pills">
+    <div class="pill">股价 <strong>$119.19</strong></div>
+    <div class="pill">市值 <strong>~$41.6B</strong></div>
+    <div class="pill">汇率 <strong>1 USD ≈ 6.99 RMB</strong></div>
+    <div class="pill">ADS <strong>~341M股</strong></div>
+  </div>
+</div>
+
+<!-- 股票快照 -->
+<div class="snapshot">
+  <div class="snap-item">
+    <div class="snap-label">当前股价</div>
+    <div class="snap-value">$119.19</div>
+    <div class="snap-sub">52周: $74.71 – $165.30</div>
+  </div>
+  <div class="snap-item">
+    <div class="snap-label">市值</div>
+    <div class="snap-value">$41.6B</div>
+    <div class="snap-sub">企业价值(EV) ~$12B</div>
+  </div>
+  <div class="snap-item">
+    <div class="snap-label">TTM P/E</div>
+    <div class="snap-value" style="color:var(--gold)">15.3x</div>
+    <div class="snap-sub">Non-GAAP | GAAP 52x（减值扭曲）</div>
+  </div>
+  <div class="snap-item">
+    <div class="snap-label">Forward P/E</div>
+    <div class="snap-value" style="color:var(--accent2)">~14x</div>
+    <div class="snap-sub">2026E 中性预测</div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- S1: KPI -->
+<section class="section">
+  <div class="stitle">核心财务指标 — Q4 2025 & 全年</div>
+  <div style="font-size:12px;color:var(--text3);margin-bottom:8px;">▎Q4 2025 单季（RMB÷6.99）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">总营收</div><div class="kpi-v">$4.68B</div><span class="badge nt">QoQ +5%</span> <span class="badge dn">YoY -4%</span></div>
+    <div class="kpi"><div class="kpi-l">百度通用业务</div><div class="kpi-v">$3.73B</div><span class="badge nt">QoQ +6%</span> <span class="badge dn">YoY -6%</span></div>
+    <div class="kpi"><div class="kpi-l">AI-powered 业务</div><div class="kpi-v">$1.62B</div><span class="badge up">占比 43%</span></div>
+    <div class="kpi"><div class="kpi-l">AI Cloud Infra</div><div class="kpi-v">$0.83B</div><span class="badge up">订阅+143% YoY</span></div>
+    <div class="kpi"><div class="kpi-l">Non-GAAP 经营利润</div><div class="kpi-v">$424M</div><span class="badge nt">利润率 9%</span></div>
+    <div class="kpi"><div class="kpi-l">Non-GAAP 净利润</div><div class="kpi-v">$559M</div><span class="badge dn">YoY -42%</span></div>
+    <div class="kpi"><div class="kpi-l">Non-GAAP 净利率</div><div class="kpi-v">12%</div><span class="badge dn">前季 12%</span></div>
+    <div class="kpi"><div class="kpi-l">自由现金流</div><div class="kpi-v">$91M</div><span class="badge up">H2 转正</span></div>
+  </div>
+  <div style="font-size:12px;color:var(--text3);margin:20px 0 8px;">▎全年 2025</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">总营收</div><div class="kpi-v">$18.46B</div><span class="badge dn">YoY -3%</span></div>
+    <div class="kpi"><div class="kpi-l">AI-powered 业务</div><div class="kpi-v">$5.72B</div><span class="badge up">YoY +48%</span></div>
+    <div class="kpi"><div class="kpi-l">AI Cloud Infra</div><div class="kpi-v">$2.83B</div><span class="badge up">YoY +34%</span></div>
+    <div class="kpi"><div class="kpi-l">AI-native 营销</div><div class="kpi-v">$1.40B</div><span class="badge up">YoY +301%</span></div>
+    <div class="kpi"><div class="kpi-l">Non-GAAP 净利润</div><div class="kpi-v">$2.71B</div><span class="badge dn">YoY -30%</span></div>
+    <div class="kpi"><div class="kpi-l">总现金及投资</div><div class="kpi-v">$42.06B</div><span class="badge up">≈ 市值</span></div>
+    <div class="kpi"><div class="kpi-l">资本开支</div><div class="kpi-v">$1.73B</div><span class="badge dn">YoY +48%</span></div>
+    <div class="kpi"><div class="kpi-l">自由现金流</div><div class="kpi-v">-$2.16B</div><span class="badge dn">Capex暴增拖累</span></div>
+  </div>
+</section>
+
+<!-- S2: 季度表 -->
+<section class="section">
+  <div class="stitle">季度财务明细（Non-GAAP · 美元换算）</div>
+
+  <div style="background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin-bottom:14px;font-size:13px;color:var(--gold);">
+    ⚠️ <strong>关键注意</strong>：Q3 2025含RMB 162亿资产减值（核心资产组），GAAP利润严重扭曲。FY2025 GAAP P/E = 52x 失真。Non-GAAP P/E = 15.3x 更有参考价值。另：FY2025 FCF -$2.16B主要因AI基础设施Capex暴增48%。
+  </div>
+
+  <div class="tbl-wrap">
+  <table class="tbl">
+    <thead><tr>
+      <th>指标</th><th>2024 Q4</th><th>2025 Q1</th><th>2025 Q2</th><th>2025 Q3</th><th>2025 Q4</th><th>QoQ</th><th>YoY</th>
+    </tr></thead>
+    <tbody>
+      <tr class="hl"><td>总营收 ($B)</td><td>4.88</td><td>4.47</td><td>4.69</td><td>4.46</td><td>4.68</td><td style="color:var(--green)">+5%</td><td style="color:var(--red)">-4%</td></tr>
+      <tr><td>—百度通用业务</td><td>3.96</td><td>3.68</td><td>3.89</td><td>3.53</td><td>3.73</td><td style="color:var(--green)">+6%</td><td style="color:var(--red)">-6%</td></tr>
+      <tr><td>—爱奇艺</td><td>0.95</td><td>0.89</td><td>0.87</td><td>0.96</td><td>0.97</td><td style="color:var(--green)">+2%</td><td style="color:var(--green)">+3%</td></tr>
+      <tr><td>AI-powered业务</td><td>—</td><td>—</td><td>—</td><td>1.37</td><td>1.62</td><td style="color:var(--green)">+18%</td><td style="color:var(--green)">+48%*</td></tr>
+      <tr class="hl"><td>Non-GAAP 经营利润 ($M)</td><td>722</td><td>618</td><td>624</td><td>315</td><td>424</td><td style="color:var(--green)">+35%</td><td style="color:var(--red)">-41%</td></tr>
+      <tr><td>Non-GAAP 经营利润率</td><td>15%</td><td>14%</td><td>13%</td><td>7%</td><td>9%</td><td style="color:var(--green)">+2pp</td><td style="color:var(--red)">-6pp</td></tr>
+      <tr class="hl"><td>Non-GAAP 净利润 ($M)</td><td>959</td><td>811</td><td>727</td><td>539</td><td>559</td><td style="color:var(--green)">+4%</td><td style="color:var(--red)">-42%</td></tr>
+      <tr><td>Non-GAAP 净利率</td><td>20%</td><td>18%</td><td>16%</td><td>12%</td><td>12%</td><td>持平</td><td style="color:var(--red)">-8pp</td></tr>
+      <tr><td>经营现金流 ($M)</td><td>337</td><td>—</td><td>—</td><td>180</td><td>373</td><td style="color:var(--green)">+107%</td><td style="color:var(--green)">+11%</td></tr>
+      <tr><td>资本开支 ($M)</td><td>333</td><td>—</td><td>—</td><td>486</td><td>282</td><td style="color:var(--green)">-42%</td><td style="color:var(--red)">-15%</td></tr>
+      <tr><td>FCF ($M)</td><td>3</td><td>—</td><td>—</td><td>-307</td><td>91</td><td style="color:var(--green)">转正</td><td>—</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div style="font-size:11px;color:var(--text3);margin-top:6px;">*AI-powered业务口径2025Q4始正式分业务披露；FY同比+48%为全年可比数据</div>
+
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin-top:14px;">
+    <div style="font-size:13px;font-weight:600;color:var(--accent3);margin-bottom:8px;">🔍 P/E 多视角审视</div>
+    <table class="tbl" style="font-size:13px;">
+      <thead><tr><th>计算口径</th><th>年化净利润</th><th>P/E倍数</th><th>可靠度</th></tr></thead>
+      <tbody>
+        <tr><td>GAAP全年TTM</td><td>$799M</td><td style="color:var(--red)">52x</td><td>⚠️ 减值RMB 162亿严重扭曲</td></tr>
+        <tr><td>扣除减值GAAP</td><td>$2.77B</td><td style="color:var(--gold)">15.0x</td><td>✅ 较合理</td></tr>
+        <tr class="hl"><td>Non-GAAP TTM</td><td>$2.71B</td><td style="color:var(--gold)">15.3x</td><td>✅ 本报告基准</td></tr>
+        <tr><td>Q4 Non-GAAP年化</td><td>$2.24B</td><td style="color:var(--gold)">18.6x</td><td>📊 最新季度水平</td></tr>
+        <tr><td>EV/Non-GAAP EBITDA</td><td>$3.27B</td><td style="color:var(--green)">3.7x</td><td>🔥 极低 — 现金几乎等于市值</td></tr>
+        <tr><td>2026E 中性预测</td><td>~$2.9B</td><td style="color:var(--accent2)">~14x</td><td>📊 本报告前瞻基准</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- S3: 图表 -->
+<section class="section">
+  <div class="stitle">营收与盈利趋势</div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">季度总营收 ($B)</div><div class="cwrap"><canvas id="c1"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">Non-GAAP 净利润 ($M)</div><div class="cwrap"><canvas id="c2"></canvas></div></div>
+  </div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">AI-powered 业务拆解 — FY2025 ($B)</div><div class="cwrap"><canvas id="c3"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">AI业务占比趋势 (% 通用业务)</div><div class="cwrap"><canvas id="c4"></canvas></div></div>
+  </div>
+  <div class="cgrid3">
+    <div class="ccard"><div class="ctitle">Non-GAAP 利润率趋势</div><div class="cwrap"><canvas id="c5"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">Q4 营收结构</div><div class="cwrap"><canvas id="c6"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">Capex vs FCF ($M)</div><div class="cwrap"><canvas id="c7"></canvas></div></div>
+  </div>
+</section>
+
+<!-- S4: Sankey -->
+<section class="section">
+  <div class="stitle">资金流向桑基图 — FY2025 ($B)</div>
+  <div class="ccard">
+    <div style="font-size:12px;color:var(--text3);margin-bottom:6px;">从总营收到自由现金流的完整流向</div>
+    <div id="sankey"></div>
+  </div>
+</section>
+
+<!-- S5: 业务分部 -->
+<section class="section">
+  <div class="stitle">业务分部深度解析</div>
+  <div class="agrid">
+    <div class="acard">
+      <h4>☁️ AI Cloud Infra（核心增长引擎）</h4>
+      <ul>
+        <li>Q4: $0.83B, 订阅收入YoY <span style="color:var(--green)">+143%</span></li>
+        <li>FY25: $2.83B, YoY +34%</li>
+        <li>差异化: 全栈端到端能力（芯片昆仑芯→框架PaddlePaddle→ERNIE大模型→应用）</li>
+        <li>企业认可度持续提升；大型客户通用AI基础设施使用增长</li>
+        <li>昆仑芯拆分后独立上市将释放估值</li>
+      </ul>
+    </div>
+    <div class="acard">
+      <h4>🤖 AI-native 营销服务（爆发式增长）</h4>
+      <ul>
+        <li>Q4: $0.39B, YoY <span style="color:var(--green)">+110%</span></li>
+        <li>FY25: $1.40B, YoY <span style="color:var(--green)">+301%</span></li>
+        <li>从传统竞价广告转向AI生成原生营销</li>
+        <li>ERNIE驱动的智能广告比传统效果更好</li>
+        <li>⚠️ 高基数下2026年增速将显著放缓</li>
+      </ul>
+    </div>
+    <div class="acard">
+      <h4>📱 AI 应用（温和增长）</h4>
+      <ul>
+        <li>Q4: $0.39B; FY25: $1.46B, YoY +5%</li>
+        <li>ERNIE助手MAU: 2.02亿 (2025.12)</li>
+        <li>百度App MAU: 6.79亿（持平）</li>
+        <li>Miaoda（AI编程）: IDC评为中国领先低代码生成式AI平台</li>
+        <li>⚠️ 用户增长停滞，变现路径仍不清晰</li>
+      </ul>
+    </div>
+    <div class="acard">
+      <h4>🚗 Apollo Go 自动驾驶</h4>
+      <ul>
+        <li>Q4: 340万次完全无人驾驶, 峰值周>30万次, YoY <span style="color:var(--green)">+200%</span></li>
+        <li>累计突破2000万次 (至2026年2月)</li>
+        <li>全球26城市, 3亿+自动驾驶公里</li>
+        <li>国际: 伦敦(Uber+Lyft)、阿布扎比、迪拜、首尔、香港</li>
+        <li>⚠️ 仍持续烧钱，未见盈利时间表</li>
+      </ul>
+    </div>
+    <div class="acard">
+      <h4>📉 传统业务（Legacy Business，萎缩中）</h4>
+      <ul>
+        <li>Q4: RMB 12.3B (占百度GB的47%)</li>
+        <li>传统搜索/信息流广告持续下滑</li>
+        <li>被AI原生营销逐步蚕食但速度较慢</li>
+        <li>仍是集团现金奶牛，利润率显著高于AI业务</li>
+        <li>2026年预计继续下滑约5-10%</li>
+      </ul>
+    </div>
+    <div class="acard">
+      <h4>🎬 爱奇艺（稳定但不亮眼）</h4>
+      <ul>
+        <li>Q4: $0.97B (YoY +3%); FY25: $3.90B (YoY -7%)</li>
+        <li>Q4 Non-GAAP经营利润率 2%（全年2%）</li>
+        <li>会员服务+内容授权是主要收入</li>
+        <li>长期战略价值不明, 但拖累集团利润率</li>
+        <li>是否分拆或出售? 管理层未有明确表示</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- S6: 电话会议 -->
+<section class="section">
+  <div class="stitle">电话会议完整记录 — 逐条标注</div>
+
+  <div class="ec-block">
+    <h3>📌 CEO 李彦宏开场 — 战略定调</h3>
+
+    <div class="ec-item">
+      <div class="ec-quote">「2025年是AI成为百度新核心的关键之年。AI Cloud Infra强劲增长，我们差异化的全栈端到端AI能力赢得了越来越多企业客户的认可。Apollo Go进一步巩固了全球领导地位，在行业领先规模下运营，同时加速国际市场拓展。AI原生营销服务持续增长，为长期发展开创了新可能。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">AI战略定调清晰，全栈布局（芯片→模型→应用）是真正的技术护城河。AI原生营销+300%增速证明商业化落地有效。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「随着AI-first战略成形，我们对在AI时代创造持久价值充满信心。」</div>
+      <span class="ec-tag tag-neut">📊 中性</span>
+      <div class="ec-note">信心充足，但"持久价值"缺乏具体数字支撑。竞争对手（DeepSeek、字节、腾讯）均在加速追赶，差距正在缩小。</div>
+    </div>
+  </div>
+
+  <div class="ec-block">
+    <h3>📌 CFO 何海剑 — 财务数据解读</h3>
+
+    <div class="ec-item">
+      <div class="ec-quote">「本季度，百度Core AI-powered业务营收超过110亿元人民币，占百度通用业务营收的43%。百度通用业务总营收环比增长6%，Non-GAAP经营利润环比增长28%至28亿元人民币。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">AI业务占比43%是重要里程碑，意味着不到2年内将超过传统业务（Legacy Q4仍占47%）。利润率Q4回升到11%说明AI业务已有一定盈利能力。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「2025年下半年百度经营现金流转正，合计产生39亿元人民币，而上半年为负现金流。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">H2现金流转正是关键信号，说明AI相关Capex投入在形成收入。但全年OCF仍为-30亿元，FCF-151亿元——主要因上半年大规模基础设施投入。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「董事会批准新股份回购计划，授权最高50亿美元，有效期至2028年12月31日。同时首次批准公司股息政策，首次派息可能于2026年底前执行。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">$5B回购授权 + 首次股息政策是强烈的股东回报信号。以$41.6B市值计算，$5B回购相当于12%的股份。但执行力度和时间节点仍有不确定性。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「昆仑芯分拆及独立上市正在推进中，我们相信这将为股东释放重大价值。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">昆仑芯是中国领先AI芯片厂商，独立上市后可能获得远高于百度整体的估值倍数。但上市时间和发行方式仍不确定。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「全年营收同比下降3%至1290亿元，主要由传统业务（Legacy Business）下滑所致，部分被AI-powered业务的增长抵消。」</div>
+      <span class="ec-tag tag-bear">🔴 利空</span>
+      <div class="ec-note">全年营收-3%是百度连续第二年下滑。传统搜索广告的失血速度仍快于AI业务的输血速度。若2026年趋势不扭转，市场信心将进一步受损。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「核心资产组商誉及长期资产减值16.2亿元人民币，导致全年GAAP经营亏损58亿元人民币。」</div>
+      <span class="ec-tag tag-bear">🔴 利空</span>
+      <div class="ec-note">162亿RMB减值是重大警示——意味着之前的投资（研发、并购、基础设施）未能产生预期回报。管理层没有明确说明减值具体对象，透明度不足。</div>
+    </div>
+  </div>
+
+  <div class="ec-block">
+    <h3>📌 Q&A — AI Cloud 增长可持续性</h3>
+    <div class="ec-item">
+      <div class="ec-quote">AI Cloud Infra订阅收入Q4同比增长143%——分析师询问：这种增速能否持续？是否有大客户集中风险？</div>
+      <span class="ec-tag tag-neut">📊 中性</span>
+      <div class="ec-note">143%增速很亮眼，但基数效应明显。预计2026年增速将放缓至40-60%区间。大客户集中风险是隐患，管理层未披露前五大客户占比。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">管理层强调百度的差异化在于「全栈能力」：昆仑芯AI芯片 → PaddlePaddle框架 → ERNIE基础模型 → 企业AI应用，形成闭环。竞争对手难以复制整条链路。</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">全栈布局是真实的护城河，降低了对NVIDIA等海外供应商的依赖。在中国AI国产化背景下，昆仑芯有政策红利。但与华为昇腾、寒武纪等国产芯片的竞争同样激烈。</div>
+    </div>
+  </div>
+
+  <div class="ec-block">
+    <h3>📌 Q&A — Apollo Go 商业化路径</h3>
+    <div class="ec-item">
+      <div class="ec-quote">分析师询问：Apollo Go 单量同比+200%，但何时实现收支平衡？自动驾驶投资回报时间线？</div>
+      <span class="ec-tag tag-neut">📊 中性偏空</span>
+      <div class="ec-note">管理层回避了具体盈利时间表，只强调"规模化是关键"。以目前26城市运营看，单车经济性改善有限，预计2027-2028年前仍持续亏损。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「Apollo Go在阿布扎比、迪拜、伦敦等市场的国际扩张，证明我们的技术在全球范围内具有竞争力和可部署性。与Uber、Lyft等平台合作进一步扩大了我们的触达范围。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">国际市场拓展是百度少有的正面叙事。与Uber/Lyft合作是轻资产扩张策略，避免了在海外自建运营的高成本。若欧美市场准入打通，估值想象空间巨大。</div>
+    </div>
+  </div>
+
+  <div class="ec-block">
+    <h3>📌 Q&A — 资本配置与股东回报</h3>
+    <div class="ec-item">
+      <div class="ec-quote">分析师询问：FY2025 Capex同比增长48%至170亿元，2026年Capex指引如何？FCF何时转正？</div>
+      <span class="ec-tag tag-bear">🔴 利空</span>
+      <div class="ec-note">管理层未给出明确Capex指引，只说"继续投资AI基础设施"。若2026年Capex维持高水平，FCF依然难以转正。投资者需要更明确的资本支出纪律信号。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「$5B回购计划的规模反映了我们对公司内在价值的信心和对股东回报的承诺。首次股息政策标志着百度迈入新阶段——成熟稳健的现金流生成者。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">以市值$41.6B计算，$5B回购是重量级承诺（12%）。但注意：当前FCF为负，回购资金需动用现金储备（$42B总现金中大量为受限或长期）。首次分红更多是姿态性信号。</div>
+    </div>
+  </div>
+
+  <div class="ec-block">
+    <h3>📌 Q&A — 传统业务萎缩速度</h3>
+    <div class="ec-item">
+      <div class="ec-quote">分析师询问：传统搜索广告（Legacy Business）Q4 RMB 12.3B，下滑趋势是否加速？AI搜索是否在蚕食自身业务？</div>
+      <span class="ec-tag tag-bear">🔴 利空</span>
+      <div class="ec-note">这是百度面临的"创新者困境"——ERNIE加持的AI搜索正在替代传统付费竞价排名，而AI营销的单次价值高于传统广告但总量尚不足以弥补缺口。2026年Legacy下滑可能加速。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">管理层表示AI-native营销服务正逐步将传统广告主迁移到新模式，「这是主动的业务演进，而非被动的流失」。AI营销的CPM和转化率均优于传统广告。</div>
+      <span class="ec-tag tag-neut">📊 中性</span>
+      <div class="ec-note">主动迁移vs被动流失的叙事逻辑上成立，但实际上广告主同时在投其他平台（抖音、微信等）。百度搜索的市场份额从高峰的75%已降至约50%。</div>
+    </div>
+  </div>
+
+  <div class="ec-block">
+    <h3>📌 Q&A — ERNIE 5.0 与竞争格局</h3>
+    <div class="ec-item">
+      <div class="ec-quote">「2026年1月发布的ERNIE 5.0是原生全模态基础模型，在多项基准测试中表现领先。我们将持续迭代，保持领先优势。」</div>
+      <span class="ec-tag tag-neut">📊 中性</span>
+      <div class="ec-note">ERNIE 5.0发布时间恰在DeepSeek R1引发全球轰动之后，有跟风应对之嫌。评测基准领先并不等于实际应用领先，市场口碑仍待验证。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">分析师询问：DeepSeek的崛起对百度AI Cloud业务影响如何？开源模型是否压制了企业对百度私有云的需求？</div>
+      <span class="ec-tag tag-bear">🔴 利空</span>
+      <div class="ec-note">DeepSeek是百度最大的短期威胁——高性能开源模型降低了企业使用AI云的门槛和成本，直接冲击百度Cloud的定价权。管理层没有正面回答这个问题。</div>
+    </div>
+  </div>
+
+  <!-- 信号汇总 -->
+  <div style="background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin-top:16px;">
+    <div style="font-size:14px;font-weight:700;color:var(--accent3);margin-bottom:12px;">📊 电话会议信号汇总</div>
+    <table class="tbl" style="font-size:12.5px;">
+      <thead><tr><th>信号类别</th><th>数量</th><th>代表性内容</th></tr></thead>
+      <tbody>
+        <tr><td><span class="ec-tag tag-bull" style="font-size:11px;">🟢 利好</span></td><td style="color:var(--green);font-weight:700;">8项</td><td>AI Cloud +143%、AI占比43%、$5B回购+首次分红、昆仑芯分拆、H2 OCF转正、Apollo国际化、全栈护城河、利润率环比+2pp</td></tr>
+        <tr><td><span class="ec-tag tag-neut" style="font-size:11px;">📊 中性</span></td><td style="color:var(--accent2);font-weight:700;">5项</td><td>ERNIE 5.0发布（跟随性质）、AI营销"主动迁移"叙事、Apollo商业化时间不确定、增速基数效应、全栈差异化有对手</td></tr>
+        <tr><td><span class="ec-tag tag-bear" style="font-size:11px;">🔴 利空</span></td><td style="color:var(--red);font-weight:700;">5项</td><td>营收连续两年下滑、162亿减值透明度低、Capex无指引FCF难转正、Legacy加速萎缩、DeepSeek冲击未正面回应</td></tr>
+      </tbody>
+    </table>
+    <div style="font-size:12px;color:var(--text2);margin-top:10px;line-height:1.6;">
+      <strong>总体基调：</strong>管理层以"AI转型成功、前景光明"为主线，利好和利空各半。AI业务数据确实亮眼，但传统业务萎缩、FCF转负、减值缺透明度三大问题仍未解决。2026年的关键验证点：AI Cloud增长能否在DeepSeek冲击下维持、Legacy下滑速度是否可控、Capex是否见顶。
+    </div>
+  </div>
+</section>
+
+<!-- S7: 巴菲特六维 -->
+<section class="section">
+  <div class="stitle">巴菲特六维评分</div>
+
+  <div class="bscore"><div class="circle cw">B+</div><div class="bd">
+    <h4>护城河 — 技术壁垒存在，但正在被侵蚀</h4>
+    <p>全栈AI能力（昆仑芯+PaddlePaddle+ERNIE+应用）是真实护城河，非硬件公司难以复制。Apollo Go的300M自动驾驶公里数据是竞争壁垒。但核心搜索的市场份额从75%降至~50%，ERNIE面临DeepSeek、字节豆包、腾讯混元的激烈竞争，护城河正在收窄。</p>
+  </div></div>
+
+  <div class="bscore"><div class="circle cw">B</div><div class="bd">
+    <h4>管理层 — 技术远见强，资本纪律待验证</h4>
+    <p>李彦宏的AI战略布局（2012年就成立深度学习研究院）证明了前瞻性。$5B回购+首次分红是股东友好信号。但162亿减值暗示之前有错误投资，Capex从81亿暴增到120亿且无指引，让人担心资本配置纪律。管理层电话会议的问题回避策略（DeepSeek、减值细节）透明度不足。</p>
+  </div></div>
+
+  <div class="bscore"><div class="circle cg">B+</div><div class="bd">
+    <h4>财务健康 — 现金堡垒极其强大</h4>
+    <p>总现金及投资$42.06B ≈ 市值$41.6B，极端情况下"零价格买业务"。净债务为负，利息收入$1.23B/年（RMB 86亿）。但FY25 OCF -$0.43B、FCF -$2.16B需要关注。应收账款同比增加28%（12.97B vs 10.10B），可能是信用风险信号，也是SGA增加的主因（预期信用损失）。</p>
+  </div></div>
+
+  <div class="bscore"><div class="circle cw">B-</div><div class="bd">
+    <h4>盈利质量 — 结构性压力明显</h4>
+    <p>Non-GAAP净利率从2024年20%降至2025年15%，趋势向下。AI Cloud毛利率推测低于传统广告（服务器成本高），结构性压力将在2026年持续。一次性减值162亿后，利润质量存疑——管理层没有解释具体减值对象。R&D费用下降8%意味着削减了人员，短期提升利润率但可能损害长期竞争力。</p>
+  </div></div>
+
+  <div class="bscore"><div class="circle cr">C+</div><div class="bd">
+    <h4>可预测性 — 多重不确定性</h4>
+    <p>AI Cloud增速受DeepSeek冲击、Legacy下滑速度、Apollo烧钱节奏、中美科技博弈均高度不确定。2025连续两年营收下滑打破了百度的"稳定性"标签。用户数持平、市场份额继续下滑意味着平台量没有增长。巴菲特最讨厌的转型期不确定性，百度目前正处其中。</p>
+  </div></div>
+
+  <div class="bscore"><div class="circle cw">B-</div><div class="bd">
+    <h4>资本纪律 — 回购是好信号，但Capex令人不安</h4>
+    <p>$5B回购 + 首次分红 = 积极信号。但FY25 Capex 120亿（同比+48%）且无明确指引，在FCF为负的情况下大手笔投资AI基础设施，是典型的"科技公司先花后赚"模式。如果2026年AI Cloud收入增速不能超越Capex增速，这笔投资将进一步损害股东价值。</p>
+  </div></div>
+</section>
+
+<!-- S8: DCF三情景 -->
+<section class="section">
+  <div class="stitle">DCF 折现估值 — 三情景对比</div>
+
+  <div style="font-size:12px;color:var(--text3);margin-bottom:16px;">
+    共同假设：流通ADS ~341M | 净现金 $29.3B（总现金$42.1B - 总债务$12.8B）| 单位：亿美元<br>
+    注：百度净现金极高（占市值70%），DCF估值须与现金价值合并
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:18px;">
+    <div class="acard" style="border-top:3px solid var(--green);">
+      <h4 style="color:var(--green);">🟢 乐观情景</h4>
+      <ul style="font-size:12.5px;">
+        <li>AI Cloud: 40%增长3年→20%</li>
+        <li>AI Marketing保持高增速</li>
+        <li>Legacy: -5%/年（缓慢衰减）</li>
+        <li>Apollo Go 2028年微盈</li>
+        <li>折现率：<strong>10%</strong></li>
+        <li>永续增长：<strong>3%</strong></li>
+        <li>地缘折扣：<strong>-20%</strong></li>
+        <li>业务DCF: <strong>$160亿</strong></li>
+        <li>+净现金 $293亿</li>
+        <li style="font-weight:700;color:var(--green);">每ADS：~<strong>$133</strong></li>
+        <li>vs当前$119 → 折价10%</li>
+      </ul>
+    </div>
+    <div class="acard" style="border-top:3px solid var(--gold);">
+      <h4 style="color:var(--gold);">📊 中性情景（基准）</h4>
+      <ul style="font-size:12.5px;">
+        <li>AI Cloud: 25%增长后降速</li>
+        <li>Legacy: -8%/年（加速衰减）</li>
+        <li>Apollo Go持续烧钱至2028</li>
+        <li>FCF 2027年转正</li>
+        <li>折现率：<strong>12%</strong></li>
+        <li>永续增长：<strong>2.5%</strong></li>
+        <li>地缘折扣：<strong>-30%</strong></li>
+        <li>业务DCF: <strong>$90亿</strong></li>
+        <li>+净现金 $293亿</li>
+        <li style="font-weight:700;color:var(--gold);">每ADS：~<strong>$113</strong></li>
+        <li>vs当前$119 → 折价-5%</li>
+      </ul>
+    </div>
+    <div class="acard" style="border-top:3px solid var(--red);">
+      <h4 style="color:var(--red);">🔴 悲观情景</h4>
+      <ul style="font-size:12.5px;">
+        <li>AI Cloud被DeepSeek冲击</li>
+        <li>Legacy: -15%/年（加速崩溃）</li>
+        <li>Apollo Go越陷越深</li>
+        <li>监管/地缘风险升级</li>
+        <li>折现率：<strong>14%</strong></li>
+        <li>永续增长：<strong>2%</strong></li>
+        <li>地缘折扣：<strong>-40%</strong></li>
+        <li>业务DCF: <strong>$20亿</strong></li>
+        <li>+净现金 $293亿</li>
+        <li style="font-weight:700;color:var(--red);">每ADS：~<strong>$92</strong></li>
+        <li>vs当前$119 → 溢价29%</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="tbl-wrap" style="margin-bottom:18px;">
+    <table class="tbl" style="font-size:13px;">
+      <thead><tr><th>情景</th><th>折现率</th><th>地缘折扣</th><th>业务DCF</th><th>净现金</th><th>每ADS内在价值</th><th>含25%安全垫买入价</th></tr></thead>
+      <tbody>
+        <tr><td style="color:var(--green);font-weight:600;">🟢 乐观</td><td>10%</td><td>-20%</td><td>$160亿</td><td>$293亿</td><td style="color:var(--green);font-weight:700;">$133</td><td>$100</td></tr>
+        <tr class="hl"><td style="color:var(--gold);font-weight:600;">📊 中性（基准）</td><td>12%</td><td>-30%</td><td>$90亿</td><td>$293亿</td><td style="color:var(--gold);font-weight:700;">$113</td><td>$85</td></tr>
+        <tr><td style="color:var(--red);font-weight:600;">🔴 悲观</td><td>14%</td><td>-40%</td><td>$20亿</td><td>$293亿</td><td style="color:var(--red);font-weight:700;">$92</td><td>$69</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="verdict">
+    <div class="verdict-t">🎯 三情景综合裁决</div>
+    <div style="line-height:1.8;margin-bottom:14px;">
+      当前股价$119接近<strong style="color:var(--gold)">中性情景内在价值$113</strong>——说明市场已按"温和转型成功"定价，没有明显安全边际。独特之处在于：净现金$293亿占估值的绝大部分，业务本身的DCF价值很小。这意味着百度是一家<span class="hl-t">"以净现金价格买入，业务免费附送"</span>的特殊标的——前提是相信管理层不会乱烧这笔钱。
+    </div>
+    <div class="pgrid">
+      <div class="pbox"><div class="pl">当前股价</div><div class="pv pc">$119.19</div><div class="pn">约等于中性DCF</div></div>
+      <div class="pbox"><div class="pl">中性内在价值</div><div class="pv pf">$113</div><div class="pn">12%折现+30%地缘</div></div>
+      <div class="pbox"><div class="pl">中性含安全垫买入价</div><div class="pv ps">$85</div><div class="pn">下跌28%才到安全区</div></div>
+    </div>
+    <div style="background:rgba(185,160,106,.1);border:1px solid rgba(185,160,106,.3);border-radius:8px;padding:14px;">
+      <div style="color:var(--gold);font-weight:700;margin-bottom:6px;">⚖️ 结论：持有/谨慎观望（Hold / Cautious Watch）</div>
+      <div style="font-size:13px;line-height:1.8;">
+        <strong>核心判断：中性DCF ≈ 当前价，安全边际不足，但现金价值提供底部保护。</strong><br><br>
+        ① 悲观情景下行空间约 -23%（至$92）<br>
+        ② 中性情景上行空间约 -5%（几乎持平）<br>
+        ③ 乐观情景上行空间约 +12%（至$133）<br><br>
+        <strong>风险收益比不对称：</strong>下行23% vs 上行12%，赔率偏差 → <span style="color:var(--gold);font-weight:600;">当前价不宜新建仓</span><br><br>
+        <strong>操作建议：</strong><br>
+        • 已持仓：继续持有，等待Q1 2026季报验证AI Cloud增速和FCF趋势<br>
+        • 新建仓：等待回落至 $90-100 区间（中性含安全垫$85附近）<br>
+        • 若昆仑芯成功上市、Apollo Go商业化有实质进展 → 上调至有条件买入<br>
+        • 止损线：若传统搜索市场份额跌破45%、AI Cloud增速降至20%以下 → 考虑减仓<br><br>
+        <span style="color:var(--red)">⚠️ 主要风险：DeepSeek等开源模型冲击定价权 / 中美科技博弈升级 / VIE法律风险 / Apollo Go持续烧钱超预期 / 管理层挥霍现金储备 / 营收连续下滑侵蚀市场信心</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S9: 巴菲特点评 -->
+<section class="section">
+  <div class="stitle">🍔 巴菲特风格深度点评</div>
+  <div class="cmt">
+    <p>百度是我见过的最奇特的投资标的之一。<span class="hl-t">市值$416亿，现金及投资$421亿——你用零价格就能买到这整个企业，然后连带赠送一家全球最大的中文AI公司、一个正在国际扩张的自动驾驶领导者，以及一个快速增长的AI云业务。</span></p>
+
+    <p>听起来很完美，对吧？且慢。</p>
+
+    <p>我做生意70年，学到最重要的一课是：<span class="warn-t">"看起来便宜"和"真的便宜"是两回事</span>。一家公司手握$421亿现金，代表管理层有机会创造巨大价值，或者毁掉巨大价值。两种结果都发生过。</p>
+
+    <p>百度让我担心的不是AI技术——技术上他们确实领先，全栈布局是真实的护城河。让我担心的是：<span class="warn-t">FY2025全年经营现金流为负$4.3亿，自由现金流负$21.6亿，同时Capex同比暴增48%，且管理层拒绝给出2026年的资本支出指引。</span>这不是一家"保守稳健"管理的公司应有的样子。</p>
+
+    <p>更令人困惑的是那笔162亿人民币的减值。管理层说是"核心资产组"，但什么是核心资产组？哪些资产从高价买入、现在不值钱了？我问过投行分析师，没人说得清楚。不透明的减值是危险信号——它意味着之前的投资决策出了问题，而你还不知道问题有多深。</p>
+
+    <p>好消息是：<span class="hl-t">$5B回购授权加上首次分红政策，说明管理层终于意识到手里的现金应该部分回馈股东</span>。这个信号比任何季度财报都重要——它意味着百度从"科技成长股"叙事转向"价值+成长"叙事。</p>
+
+    <p>关于Apollo Go：我不投自己看不懂的业务。一辆无人驾驶汽车在阿布扎比和伦敦行驶的商业模式，我没有足够的理解框架来判断它的价值。我知道的是：它每年烧很多钱，而"何时盈利"这个问题没有人能回答。</p>
+
+    <p><span class="hl-t">我的结论：百度的安全边际来自现金，而不是业务。</span>在AI转型完成之前，这家公司是一个"期权"——如果AI战略成功，现在的价格是便宜的；如果失败，现金保护了你的下行空间。但期权不是我喜欢的投资方式。我喜欢护城河清晰、现金流稳定、管理层透明的企业。</p>
+
+    <p>如果你一定要买，等到$90-100美元——那时候你是在用九折价格买净现金，业务完全免费。那才是真正的安全边际。现在的$119，我宁愿观望。</p>
+
+    <p style="color:var(--text3);font-size:12px;border-top:1px solid var(--border);padding-top:12px;margin-top:8px;">
+      ⚠️ 以上分析仅供研究参考，不构成投资建议。投资有风险，请结合自身风险承受能力做决策。
+    </p>
+  </div>
+</section>
+
+</div><!-- /container -->
+
+<footer>
+  <div>百度集团（NASDAQ: BIDU）2025 Q4 & 全年深度分析</div>
+  <div style="margin-top:4px;">数据来源：百度IR官方（2026-02-26）| 汇率 RMB 6.9931 = US$1</div>
+  <div style="margin-top:4px;">Buffy · AI 巴菲特分析引擎 · 2026-03-20 · 莫兰迪版</div>
+</footer>
+
+<script>
+/* ── THEME ── */
+function toggleTheme() {
+  const h = document.documentElement;
+  h.dataset.theme = h.dataset.theme === 'dark' ? 'light' : 'dark';
+  buildSankey();
+}
+
+/* ── CHART.JS 默认 ── */
+Chart.defaults.color = '#a89f98';
+Chart.defaults.font.family = "'Segoe UI','PingFang SC',sans-serif";
+
+const QL = ['24Q4','25Q1','25Q2','25Q3','25Q4'];
+
+/* C1: 营收 */
+new Chart(document.getElementById('c1'), {
+  type:'bar',
+  data:{ labels:QL, datasets:[
+    { label:'百度通用业务', data:[3.96,3.68,3.89,3.53,3.73], backgroundColor:'rgba(123,143,160,.7)', borderRadius:4 },
+    { label:'爱奇艺', data:[0.95,0.89,0.87,0.96,0.97], backgroundColor:'rgba(184,112,112,.5)', borderRadius:4 }
+  ]},
+  options:{ responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11}}}},
+    scales:{ x:{stacked:true,grid:{display:false}}, y:{stacked:true,grid:{color:'rgba(150,140,130,.15)'},ticks:{callback:v=>'$'+v+'B'}} }
+  }
+});
+
+/* C2: Non-GAAP 净利 */
+new Chart(document.getElementById('c2'), {
+  type:'bar',
+  data:{ labels:QL, datasets:[{ label:'Non-GAAP净利($M)', data:[959,811,727,539,559],
+    backgroundColor:[959,811,727,539,559].map(v=>v>=700?'rgba(138,154,142,.7)':'rgba(185,160,106,.7)'),
+    borderRadius:4 }]},
+  options:{ responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{display:false}},
+    scales:{ x:{grid:{display:false}}, y:{grid:{color:'rgba(150,140,130,.15)'},ticks:{callback:v=>'$'+v+'M'}} }
+  }
+});
+
+/* C3: AI业务拆解 - 水平条 */
+new Chart(document.getElementById('c3'), {
+  type:'bar',
+  data:{ labels:['AI Cloud Infra','AI Applications','AI-native Marketing'],
+    datasets:[
+      { label:'FY24', data:[14.8/7,9.8/7,2.4/7], backgroundColor:'rgba(185,160,106,.4)', borderRadius:4 },
+      { label:'FY25', data:[19.8/7,10.2/7,9.8/7], backgroundColor:['rgba(123,143,160,.8)','rgba(138,154,142,.8)','rgba(176,141,122,.8)'], borderRadius:4 }
+    ]},
+  options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
+    plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11}}}},
+    scales:{ x:{stacked:false,grid:{color:'rgba(150,140,130,.15)'},ticks:{callback:v=>'$'+v.toFixed(1)+'B'}}, y:{grid:{display:false}} }
+  }
+});
+
+/* C4: AI占比趋势 */
+new Chart(document.getElementById('c4'), {
+  type:'line',
+  data:{ labels:['FY24','Q3 25','Q4 25'],
+    datasets:[{ label:'AI占百度通用业务%', data:[26,39,43],
+      borderColor:'#7b8fa0', backgroundColor:'rgba(123,143,160,.1)',
+      fill:true, tension:.4, pointRadius:6, borderWidth:2.5 }]},
+  options:{ responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{display:false}},
+    scales:{ y:{grid:{color:'rgba(150,140,130,.15)'},ticks:{callback:v=>v+'%'},min:20,max:60}, x:{grid:{display:false}} }
+  }
+});
+
+/* C5: 利润率趋势 */
+new Chart(document.getElementById('c5'), {
+  type:'line',
+  data:{ labels:QL, datasets:[
+    { label:'Non-GAAP净利率', data:[20,18,16,12,12], borderColor:'#8a9a8e', pointRadius:5, tension:.3, borderWidth:2 },
+    { label:'Non-GAAP经营利润率', data:[15,14,13,7,9], borderColor:'#b9a06a', pointRadius:5, tension:.3, borderWidth:2, borderDash:[5,3] }
+  ]},
+  options:{ responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11}}}},
+    scales:{ y:{grid:{color:'rgba(150,140,130,.15)'},ticks:{callback:v=>v+'%'}}, x:{grid:{display:false}} }
+  }
+});
+
+/* C6: Q4营收结构 */
+new Chart(document.getElementById('c6'), {
+  type:'doughnut',
+  data:{ labels:['传统业务Legacy','AI Cloud Infra','AI Applications','AI-native营销','其他通用','爱奇艺'],
+    datasets:[{ data:[1.76,0.83,0.39,0.39,0.36,0.97],
+      backgroundColor:['rgba(184,112,112,.6)','rgba(123,143,160,.8)','rgba(138,154,142,.8)','rgba(176,141,122,.8)','rgba(185,160,106,.6)','rgba(192,144,144,.6)'],
+      borderColor:'rgba(255,255,255,.1)', borderWidth:1 }]},
+  options:{ responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{position:'bottom',labels:{boxWidth:8,font:{size:10}}}, tooltip:{callbacks:{label:c=>'$'+c.raw+'B'}} },
+    cutout:'58%' }
+});
+
+/* C7: Capex vs FCF */
+new Chart(document.getElementById('c7'), {
+  type:'bar',
+  data:{ labels:['FY24','FY25'],
+    datasets:[
+      { label:'Capex ($M)', data:[1163,1726], backgroundColor:'rgba(184,112,112,.5)', borderRadius:4 },
+      { label:'FCF ($M)', data:[1873,-2157], backgroundColor:['rgba(138,154,142,.7)','rgba(185,160,106,.7)'], borderRadius:4 }
+    ]},
+  options:{ responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11}}}},
+    scales:{ x:{grid:{display:false}}, y:{grid:{color:'rgba(150,140,130,.15)'},ticks:{callback:v=>'$'+v+'M'}} }
+  }
+});
+
+/* ── SANKEY ── */
+function buildSankey() {
+  const isDark = document.documentElement.dataset.theme === 'dark';
+  const bg = isDark ? '#2e2a25' : '#ffffff';
+  const fc = isDark ? '#d4ccc4' : '#4a4340';
+  Plotly.newPlot('sankey', [{
+    type:'sankey', orientation:'h',
+    node:{
+      pad:16, thickness:20,
+      line:{color: isDark?'rgba(74,69,64,.4)':'rgba(200,190,180,.4)', width:1},
+      label:['总营收$18.5B','营收成本$10.4B','毛利润$8.1B','SGA$3.7B','R&D$2.9B','减值$2.3B','GAAP经营亏损$0.8B','非GAAP调整$3.0B','Non-GAAP经营利润$2.1B','其他收入$1.8B','税$0.2B','Non-GAAP净利$2.7B','Capex$1.7B','FCF亏损$2.2B'],
+      color:['#7b8fa0','#b87070','#8a9a8e','#b87070','#b87070','#b87070','#b87070','#b9a06a','#7b8fa0','#8a9a8e','#b87070','#8a9a8e','#b87070','#b87070']
+    },
+    link:{
+      source:[0,0, 2,2,2,2, 6,7, 8,9, 10, 11,11],
+      target:[1,2, 3,4,5,6, 8,8, 9,10,11, 12,13],
+      value: [10.4,8.1, 3.7,2.9,2.3,0.8, 0.8,3.0, 2.1,1.8,0.2, 1.7,2.2],
+      color: [
+        'rgba(184,112,112,.2)','rgba(138,154,142,.3)',
+        'rgba(184,112,112,.2)','rgba(184,112,112,.2)','rgba(184,112,112,.2)','rgba(184,112,112,.2)',
+        'rgba(185,160,106,.25)','rgba(185,160,106,.35)',
+        'rgba(123,143,160,.3)','rgba(138,154,142,.3)','rgba(184,112,112,.2)',
+        'rgba(184,112,112,.2)','rgba(184,112,112,.2)'
+      ]
+    }
+  }], {
+    paper_bgcolor:bg, plot_bgcolor:bg,
+    font:{color:fc, family:"'Segoe UI','PingFang SC',sans-serif", size:11.5},
+    margin:{t:8,b:8,l:8,r:8}
+  }, {responsive:true, displayModeBar:false});
+}
+buildSankey();
+</script>
+</body>
+</html>

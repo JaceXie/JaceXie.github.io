@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Circle Internet Group (CRCL) — Q4 2025 & 全年财报分析</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+  :root {
+    --bg: #f5f3ef;
+    --card: #ffffff;
+    --border: #e0dbd3;
+    --text: #2d2926;
+    --sub: #7a7570;
+    --accent1: #7a9e8e; /* sage green */
+    --accent2: #7b8fad; /* muted blue */
+    --accent3: #c07c5e; /* dusty terracotta */
+    --accent4: #b07b8f; /* dusty rose */
+    --accent5: #a89878; /* warm khaki */
+    --green: #5a9068;
+    --red: #b05a5a;
+    --neutral: #7b8fad;
+    --shadow: rgba(0,0,0,0.06);
+  }
+  [data-theme="dark"] {
+    --bg: #1c1a18;
+    --card: #262320;
+    --border: #3a3632;
+    --text: #e8e4de;
+    --sub: #9a9490;
+    --shadow: rgba(0,0,0,0.3);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    transition: background 0.3s, color 0.3s;
+  }
+  .header {
+    background: linear-gradient(135deg, #2c3e50 0%, #4a6741 40%, #5c7a9e 100%);
+    padding: 48px 32px 40px;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+  .header-inner { max-width: 1100px; margin: 0 auto; position: relative; }
+  .header-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .badge { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; padding: 4px 14px; font-size: 13px; font-weight: 500; }
+  .header h1 { font-size: 2.4rem; font-weight: 700; margin-bottom: 10px; letter-spacing: -0.02em; }
+  .header .sub { opacity: 0.8; font-size: 1rem; }
+  .theme-toggle {
+    position: absolute; top: 20px; right: 20px;
+    background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3);
+    color: #fff; border-radius: 20px; padding: 6px 16px; cursor: pointer;
+    font-size: 13px; transition: background 0.2s;
+  }
+  .theme-toggle:hover { background: rgba(255,255,255,0.25); }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 32px 20px 60px; }
+  .section-title {
+    font-size: 1.25rem; font-weight: 700; color: var(--text);
+    margin: 40px 0 20px; padding-bottom: 10px;
+    border-bottom: 2px solid var(--accent1);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-title .icon { font-size: 1.1em; }
+
+  /* KPI Grid */
+  .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+  .kpi-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px 18px;
+    box-shadow: 0 2px 8px var(--shadow);
+    border-top: 3px solid var(--accent1);
+  }
+  .kpi-card:nth-child(2) { border-top-color: var(--accent2); }
+  .kpi-card:nth-child(3) { border-top-color: var(--accent3); }
+  .kpi-card:nth-child(4) { border-top-color: var(--accent4); }
+  .kpi-card:nth-child(5) { border-top-color: var(--accent5); }
+  .kpi-card:nth-child(6) { border-top-color: var(--accent1); }
+  .kpi-card:nth-child(7) { border-top-color: var(--accent2); }
+  .kpi-card:nth-child(8) { border-top-color: var(--accent3); }
+  .kpi-label { font-size: 12px; color: var(--sub); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; }
+  .kpi-val { font-size: 1.6rem; font-weight: 700; color: var(--text); }
+  .kpi-change { font-size: 13px; margin-top: 4px; }
+  .up { color: var(--green); }
+  .dn { color: var(--red); }
+  .nt { color: var(--neutral); }
+
+  /* Charts */
+  .chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .chart-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 24px;
+    box-shadow: 0 2px 8px var(--shadow);
+  }
+  .chart-card.full { grid-column: 1 / -1; }
+  .chart-title { font-size: 14px; font-weight: 600; color: var(--sub); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.05em; }
+  canvas { max-height: 280px; }
+
+  /* Tables */
+  .fin-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  .fin-table th { background: var(--accent1); color: #fff; padding: 10px 14px; text-align: right; font-weight: 600; }
+  .fin-table th:first-child { text-align: left; }
+  .fin-table td { padding: 9px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+  .fin-table td:first-child { text-align: left; font-weight: 500; }
+  .fin-table tr:hover td { background: var(--bg); }
+  .fin-table .subtotal td { font-weight: 600; background: rgba(122,158,142,0.08); }
+  .fin-table .highlight td { font-weight: 700; color: var(--accent1); }
+  .table-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px var(--shadow); }
+
+  /* Sankey */
+  #sankey { background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px var(--shadow); }
+
+  /* Earnings call */
+  .ec-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  .ec-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 22px 24px;
+    box-shadow: 0 2px 8px var(--shadow);
+    border-left: 4px solid var(--accent1);
+  }
+  .ec-card.bullish { border-left-color: var(--green); }
+  .ec-card.bearish { border-left-color: var(--red); }
+  .ec-card.neutral { border-left-color: var(--neutral); }
+  .ec-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+  .ec-speaker { font-weight: 700; font-size: 15px; }
+  .ec-role { color: var(--sub); font-size: 13px; }
+  .ec-tag-wrap { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
+  .ec-tag {
+    font-size: 12px; font-weight: 700; padding: 3px 10px;
+    border-radius: 20px; white-space: nowrap;
+  }
+  .ec-tag.up-tag { background: rgba(90,144,104,0.12); color: var(--green); }
+  .ec-tag.dn-tag { background: rgba(176,90,90,0.12); color: var(--red); }
+  .ec-tag.nt-tag { background: rgba(123,143,173,0.12); color: var(--neutral); }
+  .ec-topic { font-size: 13px; font-weight: 600; color: var(--sub); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
+  .ec-quote { font-size: 14.5px; color: var(--text); line-height: 1.65; font-style: italic; margin-bottom: 14px; }
+  .ec-comment { font-size: 13.5px; color: var(--sub); background: var(--bg); padding: 10px 14px; border-radius: 8px; }
+
+  /* Valuation */
+  .val-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  .val-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 22px 20px; text-align: center;
+    box-shadow: 0 2px 8px var(--shadow);
+  }
+  .val-scenario { font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--sub); margin-bottom: 8px; }
+  .val-price { font-size: 2.2rem; font-weight: 800; margin: 8px 0; }
+  .val-bull .val-price { color: var(--green); }
+  .val-base .val-price { color: var(--accent2); }
+  .val-bear .val-price { color: var(--red); }
+  .val-desc { font-size: 12.5px; color: var(--sub); line-height: 1.6; }
+  .val-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .val-table td { padding: 8px 12px; border-bottom: 1px solid var(--border); }
+  .val-table td:last-child { text-align: right; font-weight: 600; }
+
+  /* Risk */
+  .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .risk-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px var(--shadow); }
+  .risk-title { font-weight: 700; margin-bottom: 10px; display: flex; gap: 8px; align-items: center; }
+  .risk-item { font-size: 13.5px; color: var(--sub); margin-bottom: 8px; padding-left: 16px; position: relative; }
+  .risk-item::before { content: '•'; position: absolute; left: 0; color: var(--accent3); }
+
+  /* Buffett */
+  .buffett-box {
+    background: linear-gradient(135deg, #2c3e50, #4a5e41);
+    color: #fff; border-radius: 16px; padding: 32px 36px;
+    position: relative; overflow: hidden;
+  }
+  .buffett-box::before {
+    content: '🍔';
+    position: absolute; right: 30px; top: 20px;
+    font-size: 64px; opacity: 0.15;
+  }
+  .buffett-quote { font-size: 1.1rem; line-height: 1.8; font-style: italic; margin-bottom: 20px; }
+  .buffett-verdict { font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; }
+  .buffett-sub { font-size: 13px; opacity: 0.8; }
+
+  /* Platform metrics */
+  .platform-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 14px; }
+  .platform-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 16px; text-align: center;
+    box-shadow: 0 2px 6px var(--shadow);
+  }
+  .platform-icon { font-size: 24px; margin-bottom: 8px; }
+  .platform-label { font-size: 11px; color: var(--sub); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+  .platform-val { font-size: 1.2rem; font-weight: 700; }
+  .platform-change { font-size: 12px; margin-top: 2px; }
+
+  /* Guidance */
+  .guide-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .guide-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px;
+    box-shadow: 0 2px 8px var(--shadow);
+    border-top: 3px solid var(--accent2);
+    text-align: center;
+  }
+  .guide-label { font-size: 12px; color: var(--sub); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px; }
+  .guide-val { font-size: 1.3rem; font-weight: 700; color: var(--accent2); margin-bottom: 6px; }
+  .guide-note { font-size: 12px; color: var(--sub); }
+
+  @media (max-width: 700px) {
+    .chart-grid { grid-template-columns: 1fr; }
+    .val-grid { grid-template-columns: 1fr; }
+    .risk-grid { grid-template-columns: 1fr; }
+    .guide-grid { grid-template-columns: 1fr; }
+    .header h1 { font-size: 1.6rem; }
+  }
+  .small-note { font-size: 12px; color: var(--sub); margin-top: 10px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <button class="theme-toggle" onclick="toggleTheme()">☀️ 日/夜</button>
+  <div class="header-inner">
+    <div class="header-meta">
+      <span class="badge">NYSE: CRCL</span>
+      <span class="badge">Circle Internet Group</span>
+      <span class="badge">Q4 2025 财报分析</span>
+      <span class="badge">发布：2026-02-25</span>
+    </div>
+    <h1>Circle Internet Group — Q4 2025 全年财报深度解析</h1>
+    <div class="sub">稳定币基础设施领导者 · USDC 发行方 · IPO 后首个完整财年 · 巴菲特风格估值</div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- KPI -->
+  <div class="section-title"><span class="icon">📊</span> 核心 KPI 一览</div>
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-label">Q4 总收入（含储备收益）</div>
+      <div class="kpi-val">$7.70亿</div>
+      <div class="kpi-change up">↑ 77% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Q4 调整后 EBITDA</div>
+      <div class="kpi-val">$1.67亿</div>
+      <div class="kpi-change up">↑ 412% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Q4 净利润（持续业务）</div>
+      <div class="kpi-val">$1.33亿</div>
+      <div class="kpi-change up">↑ $1.29亿 YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">全年调整后 EBITDA</div>
+      <div class="kpi-val">$5.82亿</div>
+      <div class="kpi-change up">↑ 104% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">全年总收入</div>
+      <div class="kpi-val">$27.5亿</div>
+      <div class="kpi-change up">↑ 64% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">USDC 在途余额（期末）</div>
+      <div class="kpi-val">$753亿</div>
+      <div class="kpi-change up">↑ 72% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">RLDC 利润率（Q4）</div>
+      <div class="kpi-val">40.1%</div>
+      <div class="kpi-change up">↑ 1,004bps YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">USDC 链上交易量（Q4）</div>
+      <div class="kpi-val">$11.9万亿</div>
+      <div class="kpi-change up">↑ 247% YoY</div>
+    </div>
+  </div>
+
+  <!-- Quarterly P&L -->
+  <div class="section-title"><span class="icon">📈</span> 季度财务表现（5季度对比）</div>
+  <div class="table-wrap" style="margin-bottom:20px; overflow-x:auto;">
+    <table class="fin-table">
+      <thead>
+        <tr>
+          <th>项目（百万美元）</th>
+          <th>Q4'24</th>
+          <th>Q1'25</th>
+          <th>Q2'25</th>
+          <th>Q3'25</th>
+          <th>Q4'25</th>
+          <th>QoQ</th>
+          <th>YoY</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>储备收益（Reserve Income）</td>
+          <td>$433</td>
+          <td>$558</td>
+          <td>$634</td>
+          <td>$711</td>
+          <td>$733</td>
+          <td class="up">+3.1%</td>
+          <td class="up">+69%</td>
+        </tr>
+        <tr>
+          <td>其他收入（Other Revenue）</td>
+          <td>$2</td>
+          <td>$21</td>
+          <td>$24</td>
+          <td>$29</td>
+          <td>$37</td>
+          <td class="up">+28%</td>
+          <td class="up">NM</td>
+        </tr>
+        <tr class="subtotal">
+          <td>总收入及储备收益</td>
+          <td>$435</td>
+          <td>$579</td>
+          <td>$658</td>
+          <td>$740</td>
+          <td>$770</td>
+          <td class="up">+4.1%</td>
+          <td class="up">+77%</td>
+        </tr>
+        <tr>
+          <td>分发与交易成本</td>
+          <td>$305</td>
+          <td>$348</td>
+          <td>$407</td>
+          <td>$448</td>
+          <td>$461</td>
+          <td class="dn">+2.9%</td>
+          <td class="dn">+52%</td>
+        </tr>
+        <tr class="highlight">
+          <td>RLDC（扣除分发成本后收入）</td>
+          <td>$131</td>
+          <td>$231</td>
+          <td>$251</td>
+          <td>$292</td>
+          <td>$309</td>
+          <td class="up">+5.8%</td>
+          <td class="up">+136%</td>
+        </tr>
+        <tr>
+          <td>RLDC 利润率</td>
+          <td>30%</td>
+          <td>40%</td>
+          <td>38%</td>
+          <td>39%</td>
+          <td>40%</td>
+          <td class="nt">+0.6pp</td>
+          <td class="up">+10pp</td>
+        </tr>
+        <tr>
+          <td>运营费用（GAAP）</td>
+          <td>$130</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>$254</td>
+          <td>—</td>
+          <td class="dn">+95%</td>
+        </tr>
+        <tr>
+          <td>调整后运营费用（Adj. OpEx）</td>
+          <td>$109</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>$144</td>
+          <td>—</td>
+          <td class="dn">+32%</td>
+        </tr>
+        <tr class="highlight">
+          <td>调整后 EBITDA</td>
+          <td>$32</td>
+          <td>~$88</td>
+          <td>~$130</td>
+          <td>~$197</td>
+          <td>$167</td>
+          <td class="dn">-15%</td>
+          <td class="up">+412%</td>
+        </tr>
+        <tr>
+          <td>调整后 EBITDA 利润率</td>
+          <td>25%</td>
+          <td>~38%</td>
+          <td>~52%</td>
+          <td>~67%</td>
+          <td>54%</td>
+          <td>—</td>
+          <td class="up">+29pp</td>
+        </tr>
+        <tr class="subtotal">
+          <td>净利润/亏损（持续业务）</td>
+          <td>$4</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>$133</td>
+          <td>—</td>
+          <td class="up">NM</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="small-note">* 全年净亏损 $7,000 万受 IPO 相关股权激励（$4.24亿）影响；Q4 净利润含可转债公允价值变动等非经常性收益 $8,500 万</p>
+
+  <!-- Charts -->
+  <div class="chart-grid" style="margin-top:24px;">
+    <div class="chart-card">
+      <div class="chart-title">季度总收入 vs. RLDC 趋势（百万美元）</div>
+      <canvas id="revChart"></canvas>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">调整后 EBITDA 及利润率趋势</div>
+      <canvas id="ebitdaChart"></canvas>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">其他收入结构拆分（Q4 2025）</div>
+      <canvas id="otherRevChart"></canvas>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">USDC 在途余额趋势（十亿美元）</div>
+      <canvas id="usdcChart"></canvas>
+    </div>
+  </div>
+
+  <!-- Full Year Comparison -->
+  <div class="section-title"><span class="icon">📋</span> 全年对比（FY2024 vs FY2025）</div>
+  <div class="table-wrap" style="overflow-x:auto;">
+    <table class="fin-table">
+      <thead>
+        <tr>
+          <th>项目（百万美元）</th>
+          <th>FY2024</th>
+          <th>FY2025</th>
+          <th>变动</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>储备收益</td><td>$1,661</td><td>$2,637</td><td class="up">+59%</td></tr>
+        <tr><td>其他收入</td><td>$15</td><td>$110</td><td class="up">+633%</td></tr>
+        <tr class="subtotal"><td>总收入及储备收益</td><td>$1,676</td><td>$2,747</td><td class="up">+64%</td></tr>
+        <tr><td>分发与交易成本</td><td>$1,017</td><td>$1,664</td><td class="dn">+64%</td></tr>
+        <tr class="highlight"><td>RLDC</td><td>$659</td><td>$1,083</td><td class="up">+64%</td></tr>
+        <tr><td>RLDC 利润率</td><td>39.3%</td><td>39.4%</td><td class="nt">+0.1pp</td></tr>
+        <tr><td>GAAP 运营费用</td><td>$492</td><td>$1,179</td><td class="dn">+140%</td></tr>
+        <tr><td>&nbsp;&nbsp;其中：薪酬（含 $4.24亿 IPO SBC）</td><td>$263</td><td>$845</td><td class="dn">+221%</td></tr>
+        <tr><td>调整后运营费用</td><td>—</td><td>$508</td><td>—</td></tr>
+        <tr class="highlight"><td>调整后 EBITDA</td><td>$285</td><td>$582</td><td class="up">+104%</td></tr>
+        <tr><td>GAAP 净利润/亏损</td><td>$157</td><td class="dn">($70)</td><td class="dn">NM</td></tr>
+        <tr><td>稀释每股收益</td><td>$0.30</td><td>($0.44)</td><td class="dn">NM</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="small-note">* FY2025 GAAP 亏损主要源自 IPO 相关股权激励 $4.24亿 一次性摊销，剔除后实际盈利能力强劲</p>
+
+  <!-- Balance Sheet -->
+  <div class="section-title"><span class="icon">🏦</span> 资产负债表精要（2025.12.31）</div>
+  <div class="table-wrap" style="overflow-x:auto;">
+    <table class="fin-table">
+      <thead>
+        <tr>
+          <th>项目（千美元）</th>
+          <th>2025.12.31</th>
+          <th>2024.12.31</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>企业现金及等价物</td><td>$1,526,046</td><td>$750,981</td></tr>
+        <tr><td>企业持有稳定币隔离现金</td><td>$822,963</td><td>$294,493</td></tr>
+        <tr class="subtotal"><td>企业可用现金合计（估算）</td><td>~$2,349M</td><td>~$1,045M</td></tr>
+        <tr><td>USDC 持有人隔离储备（对应负债）</td><td>$75,068M</td><td>$43,919M</td></tr>
+        <tr><td>商誉</td><td>$265,742</td><td>$169,544</td></tr>
+        <tr><td>无形资产净值</td><td>$411,146</td><td>$331,394</td></tr>
+        <tr class="subtotal"><td>总股东权益</td><td>$3,330,773</td><td>$570,529</td></tr>
+        <tr><td>可转债净值</td><td>$36,821</td><td>$40,717</td></tr>
+        <tr><td>A类普通股（流通）</td><td>223.6M 股</td><td>56.4M 股</td></tr>
+        <tr><td>B类普通股（流通）</td><td>18.7M 股</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Platform Metrics -->
+  <div class="section-title"><span class="icon">⚡</span> 平台运营指标</div>
+  <div class="platform-grid">
+    <div class="platform-card">
+      <div class="platform-icon">💵</div>
+      <div class="platform-label">USDC 在途余额</div>
+      <div class="platform-val">$753亿</div>
+      <div class="platform-change up">↑ 72% YoY</div>
+    </div>
+    <div class="platform-card">
+      <div class="platform-icon">🔄</div>
+      <div class="platform-label">链上交易量（Q4）</div>
+      <div class="platform-val">$11.9万亿</div>
+      <div class="platform-change up">↑ 247% YoY</div>
+    </div>
+    <div class="platform-card">
+      <div class="platform-icon">🌉</div>
+      <div class="platform-label">CCTP 跨链量（Q4）</div>
+      <div class="platform-val">$410亿</div>
+      <div class="platform-change up">↑ 3.7x YoY</div>
+    </div>
+    <div class="platform-card">
+      <div class="platform-icon">🌍</div>
+      <div class="platform-label">EURC 流通（欧元）</div>
+      <div class="platform-val">€3.10亿</div>
+      <div class="platform-change up">↑ 3.8x YoY</div>
+    </div>
+    <div class="platform-card">
+      <div class="platform-icon">💎</div>
+      <div class="platform-label">USYC 资产规模</div>
+      <div class="platform-val">$15亿</div>
+      <div class="platform-change up">↑ 111% QoQ</div>
+    </div>
+    <div class="platform-card">
+      <div class="platform-icon">🏛️</div>
+      <div class="platform-label">CPN 入驻机构</div>
+      <div class="platform-val">55家</div>
+      <div class="platform-change up">+26家 QoQ</div>
+    </div>
+    <div class="platform-card">
+      <div class="platform-icon">💸</div>
+      <div class="platform-label">CPN 年化 TPV</div>
+      <div class="platform-val">$57亿</div>
+      <div class="platform-change up">↑ 68% QoQ</div>
+    </div>
+    <div class="platform-card">
+      <div class="platform-icon">👛</div>
+      <div class="platform-label">活跃钱包（>$10）</div>
+      <div class="platform-val">680万</div>
+      <div class="platform-change up">↑ 59% YoY</div>
+    </div>
+    <div class="platform-card">
+      <div class="platform-icon">📈</div>
+      <div class="platform-label">稳定币市场份额</div>
+      <div class="platform-val">28%</div>
+      <div class="platform-change up">↑ 4.3pp YoY</div>
+    </div>
+    <div class="platform-card">
+      <div class="platform-icon">⚡</div>
+      <div class="platform-label">交易量份额（Visa）</div>
+      <div class="platform-val">~50%</div>
+      <div class="platform-change up">39% → 50% QoQ</div>
+    </div>
+    <div class="platform-card">
+      <div class="platform-icon">🔗</div>
+      <div class="platform-label">支持区块链数量</div>
+      <div class="platform-val">30+条</div>
+      <div class="platform-change nt">跨链互操作</div>
+    </div>
+    <div class="platform-card">
+      <div class="platform-icon">🤖</div>
+      <div class="platform-label">AI 支付占比（USDC）</div>
+      <div class="platform-val">~99%</div>
+      <div class="platform-change up">快速增长中</div>
+    </div>
+  </div>
+
+  <!-- Sankey -->
+  <div class="section-title"><span class="icon">🌊</span> 资金流向 Sankey — Q4 2025（百万美元）</div>
+  <div id="sankey" style="height:400px;"></div>
+
+  <!-- Earnings Call -->
+  <div class="section-title"><span class="icon">🎙️</span> 电话会议全程解读（2026-02-25）</div>
+  <div class="ec-grid">
+
+    <!-- 1 -->
+    <div class="ec-card bullish">
+      <div class="ec-header">
+        <div>
+          <div class="ec-topic">CEO 开场：AI 代理经济 + USDC 战略地位</div>
+          <div class="ec-speaker">Jeremy Allaire</div>
+          <div class="ec-role">Co-Founder, CEO & Chairman</div>
+        </div>
+        <div class="ec-tag-wrap">
+          <span class="ec-tag up-tag">🟢 利好</span>
+        </div>
+      </div>
+      <div class="ec-quote">
+        "我们正进入一个数百亿甚至数千亿 AI 代理在互联网上进行经济活动的世界……AI 代理到代理交易需要可靠、低成本、可信的交换媒介。几乎所有 AI 支付基础设施都在用 USDC。这是空前鼓励的信号，我们正在大力加注。"
+      </div>
+      <div class="ec-comment">🔍 <strong>Buffy 点评：</strong>老巴最爱护城河，Circle 正在构建 AI 时代的货币基础设施。99% AI 支付用 USDC 这数字不是靠营销，是网络效应自然选择的结果——这才是真正的护城河。</div>
+    </div>
+
+    <!-- 2 -->
+    <div class="ec-card bullish">
+      <div class="ec-header">
+        <div>
+          <div class="ec-topic">CFO 财务报告：Q4 强势收官，EBITDA 利润率 54%</div>
+          <div class="ec-speaker">Jeremy Fox-Geen</div>
+          <div class="ec-role">Chief Financial Officer</div>
+        </div>
+        <div class="ec-tag-wrap">
+          <span class="ec-tag up-tag">🟢 利好</span>
+        </div>
+      </div>
+      <div class="ec-quote">
+        "RLDC 利润率 Q4 达 40.1%，全年 39.4%，超出约 38% 的指引目标。全年调整后运营费用 $5.08亿 符合指引。FY25 其他收入 $1.10亿 也超出 $0.90-1.00亿 的指引，Canton Coin 开始交易带来了 $700 万的额外收益。"
+      </div>
+      <div class="ec-comment">🔍 <strong>Buffy 点评：</strong>三项核心指引全部达标或超额。这种执行力在 crypto 公司里很罕见。老巴说"买你能理解的生意"——Circle 的商业模式比大多数 crypto 公司简单得多：$75B USDC × 3.8% 储备率 ≈ $2.85B 年化储备收益，算术题一道。</div>
+    </div>
+
+    <!-- 3 -->
+    <div class="ec-card bullish">
+      <div class="ec-header">
+        <div>
+          <div class="ec-topic">AI 代理支付基础设施：Circle Gateway 发布</div>
+          <div class="ec-speaker">Jeremy Allaire</div>
+          <div class="ec-role">CEO</div>
+        </div>
+        <div class="ec-tag-wrap">
+          <span class="ec-tag up-tag">🟢 利好</span>
+        </div>
+      </div>
+      <div class="ec-quote">
+        "我们刚发布了 Circle Gateway 测试网——允许 AI 代理自主进行跨链 USDC 交易，单笔成本仅 $0.00001。我们相信世界上没有任何支付系统能做到这一点……AI 代理市场、AI 招聘板，正在用 USDC 作为交换媒介。"
+      </div>
+      <div class="ec-comment">🔍 <strong>Buffy 点评：</strong>利好中的利好。$0.00001 的交易成本让传统支付系统毫无竞争力。问题是这个收入短期微乎其微，但若 AI 代理经济真成大气候，这是 10 年维度的期权。不要低估复利的力量。</div>
+    </div>
+
+    <!-- 4 -->
+    <div class="ec-card bullish">
+      <div class="ec-header">
+        <div>
+          <div class="ec-topic">Arc 区块链测试网进展超预期</div>
+          <div class="ec-speaker">Jeremy Allaire</div>
+          <div class="ec-role">CEO</div>
+        </div>
+        <div class="ec-tag-wrap">
+          <span class="ec-tag up-tag">🟢 利好</span>
+        </div>
+      </div>
+      <div class="ec-quote">
+        "Arc 测试网：100+ 家参与机构（银行、资本市场、数字资产、技术公司）；近 100% 正常运行时间；0.5 秒结算终局；累计 1.66 亿笔交易；日均 230 万笔交易。主网今年上线，我们正在全力推进。"
+      </div>
+      <div class="ec-comment">🔍 <strong>Buffy 点评：</strong>测试网数据非常亮眼。但 mainnet 才是变现关键——Arc 的估值贡献目前纯粹是期权价值。老巴不喜欢付期权价格，但承认如果 Arc 成功，这是 Circle 从"稳定币发行商"跃升为"互联网金融操作系统"的质变。</div>
+    </div>
+
+    <!-- 5 -->
+    <div class="ec-card bullish">
+      <div class="ec-header">
+        <div>
+          <div class="ec-topic">Circle 支付网络（CPN）高速扩张</div>
+          <div class="ec-speaker">Jeremy Allaire</div>
+          <div class="ec-role">CEO（回应 Citi 分析师提问）</div>
+        </div>
+        <div class="ec-tag-wrap">
+          <span class="ec-tag up-tag">🟢 利好</span>
+        </div>
+      </div>
+      <div class="ec-quote">
+        "CPN 从 Q3 的 29 家入驻机构增至 Q4 的 55 家，年化 TPV 达 $57亿，较上季度增长 68%。14 个市场已开通实时流量，未来几个月将新增 11 个市场。数百家银行和支付公司在候选池中。"
+      </div>
+      <div class="ec-comment">🔍 <strong>Buffy 点评：</strong>CPN 是 Circle 第二条腿，而且这条腿目前还不挣钱——它是对未来的投资。当它真正规模化，就是从利率敏感型收入（储备收益）转向经常性服务型收入的关键转折点。这是 Circle 摆脱"息差游戏"标签的出路。</div>
+    </div>
+
+    <!-- 6 -->
+    <div class="ec-card neutral">
+      <div class="ec-header">
+        <div>
+          <div class="ec-topic">竞争格局：稳定币市场本质上是双寡头</div>
+          <div class="ec-speaker">Jeremy Allaire</div>
+          <div class="ec-role">CEO</div>
+        </div>
+        <div class="ec-tag-wrap">
+          <span class="ec-tag nt-tag">🔵 中性</span>
+        </div>
+      </div>
+      <div class="ec-quote">
+        "尽管有大量新玩家试图进入，稳定币市场实际上只有两个主要发行商。其他新入场的稳定币在真实经济交易中的使用量几乎为零……这反映了我们维持的持久网络效应，是显著的进入壁垒。"
+      </div>
+      <div class="ec-comment">🔍 <strong>Buffy 点评：</strong>说双寡头没错，但 Tether（USDT）在新兴市场的主导地位也不容忽视。Circle 在合规市场份额增长（28% → 更高）是核心逻辑，PayPal PYUSD、Coinbase CBDC 等都是潜在威胁但短期影响有限。</div>
+    </div>
+
+    <!-- 7 -->
+    <div class="ec-card bullish">
+      <div class="ec-header">
+        <div>
+          <div class="ec-topic">监管红利：GENIUS 法案持续利好，CLARITY 法案进展顺利</div>
+          <div class="ec-speaker">Jeremy Allaire</div>
+          <div class="ec-role">CEO（回应 Canaccord 分析师 Vafi 提问）</div>
+        </div>
+        <div class="ec-tag-wrap">
+          <span class="ec-tag up-tag">🟢 利好</span>
+        </div>
+      </div>
+      <div class="ec-quote">
+        "GENIUS 法案为主要机构进入市场提供了法律基础……SEC 和 CFTC 正在明确 GENIUS 合规稳定币作为 CFTC 市场抵押品的使用方式。CLARITY 法案非常接近终点线……我对此谨慎乐观。"
+      </div>
+      <div class="ec-comment">🔍 <strong>Buffy 点评：</strong>监管框架确立是 Circle 最大的系统性利好。GENIUS 法案让机构资金放心入场，OCC 国家信托银行执照批准进一步加固了护城河。这不是短期利好，是结构性变化。</div>
+    </div>
+
+    <!-- 8 -->
+    <div class="ec-card bullish">
+      <div class="ec-header">
+        <div>
+          <div class="ec-topic">Arc 长期愿景：万能资产代币化操作系统</div>
+          <div class="ec-speaker">Jeremy Allaire</div>
+          <div class="ec-role">CEO（回应 Needham 分析师 Todaro 提问）</div>
+        </div>
+        <div class="ec-tag-wrap">
+          <span class="ec-tag up-tag">🟢 利好</span>
+        </div>
+      </div>
+      <div class="ec-quote">
+        "Arc 是一个经济操作系统，为代币化股票、代币化基金、银行存款代币等各类资产发行提供流动性和分发能力。CCTP 在 1 月达到所有跨链资产桥接量的 62%——我们已经建好了公路，现在要点亮这些公路。"
+      </div>
+      <div class="ec-comment">🔍 <strong>Buffy 点评：</strong>CCTP 62% 的跨链市场份额这个数据很震撼——Circle 已经建成了价值互联网的基础设施。如果所有 RWA（现实世界资产）代币化都要通过 CCTP 流动，这条"收费公路"的价值将是难以估量的。</div>
+    </div>
+
+    <!-- 9 -->
+    <div class="ec-card neutral">
+      <div class="ec-header">
+        <div>
+          <div class="ec-topic">Arc Token 探索中，时间表未明</div>
+          <div class="ec-speaker">Jeremy Allaire</div>
+          <div class="ec-role">CEO（回应 Devin Ryan 追问）</div>
+        </div>
+        <div class="ec-tag-wrap">
+          <span class="ec-tag nt-tag">🔵 中性</span>
+        </div>
+      </div>
+      <div class="ec-quote">
+        "Arc Token 的探索在继续推进。我们正在深入理解代币在激励机制、治理、安全性、实用性等方面如何发挥作用。我们没有披露具体时间表，因为仍在探索阶段……届时我们会对外公告。"
+      </div>
+      <div class="ec-comment">🔍 <strong>Buffy 点评：</strong>Arc Token 是潜在巨大的期权价值——如果发行，可能复制以太坊的"原生代币+生态"模式。但这也是监管和估值的双重未知数。谨慎乐观，不要把它当成已实现的价值来计价。</div>
+    </div>
+
+    <!-- 10 -->
+    <div class="ec-card neutral">
+      <div class="ec-header">
+        <div>
+          <div class="ec-topic">FY2026 指引：运营费用大幅增加，收入增量依赖利率</div>
+          <div class="ec-speaker">Jeremy Fox-Geen</div>
+          <div class="ec-role">CFO</div>
+        </div>
+        <div class="ec-tag-wrap">
+          <span class="ec-tag nt-tag">🔵 中性</span>
+        </div>
+      </div>
+      <div class="ec-quote">
+        "FY2026 指引：其他收入 $1.50-1.70亿；RLDC 利润率 38-40%；调整后运营费用 $5.70-5.85亿。我们将继续投资平台能力和全球合作伙伴关系。"
+      </div>
+      <div class="ec-comment">🔍 <strong>Buffy 点评：</strong>运营费用从 FY25 的 $5.08亿 增至 FY26E 的 $5.78亿（+14%），增速超过其他收入增速（+$60M，+55%）。管理层在大力押注未来——这需要投资人给予信任，也意味着短期内 EBITDA 弹性大部分来自 USDC 规模增长和利率水平，这两个变量都不在 Circle 控制之内。</div>
+    </div>
+
+    <!-- 11 -->
+    <div class="ec-card bearish">
+      <div class="ec-header">
+        <div>
+          <div class="ec-topic">利率风险：储备回报率持续下行</div>
+          <div class="ec-speaker">Jeremy Fox-Geen</div>
+          <div class="ec-role">CFO</div>
+        </div>
+        <div class="ec-tag-wrap">
+          <span class="ec-tag dn-tag">🔴 利空</span>
+        </div>
+      </div>
+      <div class="ec-quote">
+        "Q4 储备回报率为 3.81%，同比下降 68 个基点，主要反映了同期 SOFR 利率的下行。全年储备回报率 4.1%，同比下降 90 个基点。"
+      </div>
+      <div class="ec-comment">🔍 <strong>Buffy 点评：</strong>这是 Circle 商业模式的核心风险。公式是：$75B USDC × 储备回报率 = 储备收益。如果美联储继续降息（SOFR 从 ~5.3% 降至现在的 ~3.8%），Circle 就是在主动骑着降息周期做生意。每降 100bps ≈ 失去约 $7.5亿 年化收入。这必须用 USDC 规模扩张来弥补。</div>
+    </div>
+
+    <!-- 12 -->
+    <div class="ec-card bearish">
+      <div class="ec-header">
+        <div>
+          <div class="ec-topic">分发成本集中度风险：Coinbase 单一大客户依赖</div>
+          <div class="ec-speaker">Jeremy Fox-Geen</div>
+          <div class="ec-role">CFO</div>
+        </div>
+        <div class="ec-tag-wrap">
+          <span class="ec-tag dn-tag">🔴 利空</span>
+        </div>
+      </div>
+      <div class="ec-quote">
+        "分发成本上季度曾包含向一大型分发合作伙伴一次性支付的 6,000 万美元。分发成本 Q4 同比增长 52%，主要因 USDC 规模增长带动分发付款增加。"
+      </div>
+      <div class="ec-comment">🔍 <strong>Buffy 点评：</strong>Coinbase 拿走了 Circle 大量储备收益的分成——这是公开的秘密。Circle 需要支付合作伙伴来维持 USDC 分发，但这个成本结构在 USDC 快速增长阶段是可以接受的。真正的风险是若 Coinbase 威胁自己发行稳定币来取代分成协议。</div>
+    </div>
+
+    <!-- 13 -->
+    <div class="ec-card bullish">
+      <div class="ec-header">
+        <div>
+          <div class="ec-topic">重大机构合作：Intuit、Visa、JPMorgan、Mastercard 全面接入</div>
+          <div class="ec-speaker">Jeremy Allaire</div>
+          <div class="ec-role">CEO</div>
+        </div>
+        <div class="ec-tag-wrap">
+          <span class="ec-tag up-tag">🟢 利好</span>
+        </div>
+      </div>
+      <div class="ec-quote">
+        "Intuit 与 Circle 战略合作，将通过 Circle 技术为数百万消费者和企业提供低成本可编程货币；Visa 允许美国发卡行和收单行用 USDC 在非银行工作时间结算；Polymarket 将 USDC 作为核心抵押品；JPMorgan、Mastercard 等均已推出 USDC 产品。"
+      </div>
+      <div class="ec-comment">🔍 <strong>Buffy 点评：</strong>这些不是小客户的吹牛——Intuit 管理数百万商业账户，Visa 是全球最大支付网络。每一个大机构的接入都在加固 USDC 的网络效应。老巴买可口可乐是因为它无处不在——Circle 在努力让 USDC 成为数字世界的可口可乐。</div>
+    </div>
+
+  </div>
+
+  <!-- 2026 Guidance -->
+  <div class="section-title"><span class="icon">🔭</span> FY2026 管理层指引</div>
+  <div class="guide-grid">
+    <div class="guide-card">
+      <div class="guide-label">其他收入（Other Revenue）</div>
+      <div class="guide-val">$1.50–1.70亿</div>
+      <div class="guide-note">vs FY25 实际 $1.10亿（+36–55%）</div>
+    </div>
+    <div class="guide-card">
+      <div class="guide-label">RLDC 利润率</div>
+      <div class="guide-val">38–40%</div>
+      <div class="guide-note">FY25 实际 39.4%，基本持平</div>
+    </div>
+    <div class="guide-card">
+      <div class="guide-label">调整后运营费用</div>
+      <div class="guide-val">$5.70–5.85亿</div>
+      <div class="guide-note">新定义剔除股权激励工资税等（FY25 可比 $4.78亿，+19–22%）</div>
+    </div>
+    <div class="guide-card">
+      <div class="guide-label">USDC 增长 CAGR（多年）</div>
+      <div class="guide-val">40%</div>
+      <div class="guide-note">穿越周期的中长期目标</div>
+    </div>
+    <div class="guide-card">
+      <div class="guide-label">Arc 主网</div>
+      <div class="guide-val">2026 上线</div>
+      <div class="guide-note">测试网已运行，100+ 机构参与</div>
+    </div>
+    <div class="guide-card">
+      <div class="guide-label">CPN 新增市场</div>
+      <div class="guide-val">+11 个市场</div>
+      <div class="guide-note">未来数月内，覆盖全球主要区域</div>
+    </div>
+  </div>
+
+  <!-- Valuation -->
+  <div class="section-title"><span class="icon">💰</span> 估值分析 — 多维度 DCF & 相对估值</div>
+
+  <div class="chart-card" style="margin-bottom:20px; overflow-x:auto;">
+    <div class="chart-title">关键估值倍数（基于市价 ~$105.74 / 摊薄股数 ~2.68亿）</div>
+    <table class="val-table">
+      <tbody>
+        <tr><td>当前股价（2026年3月初估算）</td><td>~$105.74</td></tr>
+        <tr><td>摊薄市值（~2.68亿股）</td><td>~$283亿</td></tr>
+        <tr><td>IPO 价（2025年6月）</td><td>$31/股（+241%）</td></tr>
+        <tr><td>52 周区间</td><td>$49.90 – $298.99</td></tr>
+        <tr><td>EV / 调整后 EBITDA（FY25）</td><td>~49x</td></tr>
+        <tr><td>EV / 调整后 EBITDA（FY26E ~$7.0亿）</td><td>~40x</td></tr>
+        <tr><td>EV / RLDC（FY25 $10.83亿）</td><td>~26x</td></tr>
+        <tr><td>EV / 总收入（FY25 $27.47亿）</td><td>~10x</td></tr>
+        <tr><td>Q4 净利润年化 P/E（~$5.3亿，含非经常性）</td><td>~53x</td></tr>
+        <tr><td>GAAP 净利润（FY25 亏损）</td><td>不适用</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="val-grid" style="margin-bottom:20px;">
+    <div class="val-card val-bull">
+      <div class="val-scenario">🐂 乐观情景</div>
+      <div class="val-price">$155</div>
+      <div class="val-desc">
+        假设：<br>
+        USDC 40% CAGR（$140B by 2027）<br>
+        利率稳定在 3.5%+<br>
+        Arc 主网成功 + CPN 规模化<br>
+        AI 代理支付爆发式增长<br>
+        FY27E Adj EBITDA ~$12亿<br>
+        估值 EV/EBITDA 45x
+      </div>
+    </div>
+    <div class="val-card val-base">
+      <div class="val-scenario">⚖️ 基准情景</div>
+      <div class="val-price">$105</div>
+      <div class="val-desc">
+        假设：<br>
+        USDC 30-35% 增长<br>
+        利率温和下行至 3.2%<br>
+        CPN 稳步扩张<br>
+        Arc 主网正常推进<br>
+        FY26E Adj EBITDA ~$7亿<br>
+        估值 EV/EBITDA 40x
+      </div>
+    </div>
+    <div class="val-card val-bear">
+      <div class="val-scenario">🐻 悲观情景</div>
+      <div class="val-price">$45</div>
+      <div class="val-desc">
+        假设：<br>
+        美联储大幅降息（SOFR 降至 2%）<br>
+        USDC 竞争加剧，增速放缓至 15%<br>
+        Arc 主网延期 / Arc Token 受阻<br>
+        CPN 规模化比预期慢<br>
+        FY26E Adj EBITDA ~$3.5亿<br>
+        估值 EV/EBITDA 35x
+      </div>
+    </div>
+  </div>
+
+  <div class="chart-card" style="overflow-x:auto;">
+    <div class="chart-title">DCF 参数假设（5+5 年模型）</div>
+    <table class="val-table">
+      <tbody>
+        <tr><td>FY26E FCF（Adj EBITDA × 85%）</td><td>~$5.95亿</td></tr>
+        <tr><td>Year 1-5 FCF 年增速</td><td>25%（USDC 40% CAGR，利率部分对冲）</td></tr>
+        <tr><td>Year 6-10 FCF 年增速</td><td>12%（成熟期）</td></tr>
+        <tr><td>永续增长率</td><td>3%</td></tr>
+        <tr><td>WACC</td><td>10%（金融科技 / 加密基础设施溢价）</td></tr>
+        <tr><td>DCF 内在价值（每股）</td><td>~$75-95（核心业务）</td></tr>
+        <tr><td>Arc + AI 代理期权价值</td><td>$30-60（期权溢价）</td></tr>
+        <tr><td>合理价值范围</td><td>$75–155（宽幅不确定性）</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Risk -->
+  <div class="section-title"><span class="icon">⚠️</span> 风险矩阵</div>
+  <div class="risk-grid">
+    <div class="risk-card">
+      <div class="risk-title" style="color:var(--red)">🔴 核心风险</div>
+      <div class="risk-item">利率敏感性：SOFR 每降 100bps ≈ 丢失 $7.5亿 年化储备收益</div>
+      <div class="risk-item">Coinbase 分成依赖：主要分发合作伙伴议价权过强</div>
+      <div class="risk-item">监管不确定性：CLARITY 法案若失败可能打击机构采纳</div>
+      <div class="risk-item">稳定币新竞争者：PayPal、银行联盟、各国 CBDC 的潜在冲击</div>
+    </div>
+    <div class="risk-card">
+      <div class="risk-title" style="color:var(--accent3)">🟡 重要风险</div>
+      <div class="risk-item">USDC 储备安全性：若出现类 SVB 事件，可能引发挤兑</div>
+      <div class="risk-item">Arc 主网延迟或技术故障</div>
+      <div class="risk-item">加密市场系统性崩溃导致 USDC 需求大幅下滑</div>
+      <div class="risk-item">AI 代理经济爆发速度慢于预期</div>
+    </div>
+    <div class="risk-card">
+      <div class="risk-title" style="color:var(--green)">🟢 结构性利好</div>
+      <div class="risk-item">GENIUS 法案建立合规稳定币的法律框架</div>
+      <div class="risk-item">OCC 国家信托银行执照批准在即</div>
+      <div class="risk-item">CCTP 跨链协议主导地位（62% 市场份额）</div>
+      <div class="risk-item">AI 代理经济让 USDC 成为事实上的"机器货币"</div>
+    </div>
+    <div class="risk-card">
+      <div class="risk-title" style="color:var(--accent2)">🔵 机遇空间</div>
+      <div class="risk-item">CPN 成为全球跨境支付基础设施（现 $57B 年化，目标万亿级）</div>
+      <div class="risk-item">Arc Token 发行：可能是 Circle 市值的重大催化剂</div>
+      <div class="risk-item">EURC 等非美元稳定币在全球市场渗透</div>
+      <div class="risk-item">传统金融机构大规模采用 USDC 用于证券结算</div>
+    </div>
+  </div>
+
+  <!-- Sankey Plotly will be here -->
+
+  <!-- Buffett Commentary -->
+  <div class="section-title"><span class="icon">🍔</span> 巴菲特式点评</div>
+  <div class="buffett-box">
+    <div class="buffett-verdict">⚖️ 评级：审慎买入（Cautious Buy） — 适合风险承受力高的成长投资者</div>
+    <div class="buffett-quote" style="margin-top:16px;">
+      老巴从来不投他看不懂的东西。但如果老巴看懂了 Circle，他会说什么？<br><br>
+      "Circle 就像 1960 年代的美联储在做一件私人企业的版本。它在数字互联网上印美元，收铸币税。$75B 的 USDC 乘以 3.8% 的储备回报率，每年赚 $2.85B——这是货真价实的特许经营权。"<br><br>
+      "但我要提醒你三件事：第一，这门生意高度依赖利率，而利率不由 Circle 决定。第二，Coinbase 是 Circle 的主要分销商，也是潜在的竞争者。第三，这个生意我 90 岁以后还存在吗？——我不知道，但那些 AI 代理用 USDC 交易的场景让我觉得……也许会。"<br><br>
+      "当前股价 ~$105 相当于 40x 明年 EBITDA，这已经把很多美好的未来提前计入了价格。这不是可口可乐——可口可乐我能看清楚未来 20 年。这是一张有巨大上行空间但也有巨大未知数的期权。"
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:20px;">
+      <div style="background:rgba(255,255,255,0.1);border-radius:8px;padding:14px;">
+        <div style="font-size:12px;opacity:0.7;margin-bottom:4px;">护城河宽度</div>
+        <div style="font-size:1.3rem;font-weight:700;">★★★★☆</div>
+        <div style="font-size:12px;opacity:0.7;">网络效应强大，但监管风险存在</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.1);border-radius:8px;padding:14px;">
+        <div style="font-size:12px;opacity:0.7;margin-bottom:4px;">管理层诚信度</div>
+        <div style="font-size:1.3rem;font-weight:700;">★★★★★</div>
+        <div style="font-size:12px;opacity:0.7;">IPO 后透明度高，超额完成全年指引</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.1);border-radius:8px;padding:14px;">
+        <div style="font-size:12px;opacity:0.7;margin-bottom:4px;">价格合理性</div>
+        <div style="font-size:1.3rem;font-weight:700;">★★★☆☆</div>
+        <div style="font-size:12px;opacity:0.7;">40x EBITDA 已包含不少期望值</div>
+      </div>
+    </div>
+    <div class="buffett-sub" style="margin-top:16px;">
+      ⚠️ 投资建议仅供参考，非个人投资建议。加密资产高波动，请自行评估风险。
+    </div>
+  </div>
+
+  <p style="text-align:center;color:var(--sub);font-size:12px;margin-top:40px;">
+    数据来源：Circle IR 新闻稿、Motley Fool 财报电话会议纪要 | 生成时间：2026-03-06 | 由 Buffy 🍔 制作
+  </p>
+
+</div>
+
+<script>
+function toggleTheme() {
+  const root = document.documentElement;
+  const current = root.getAttribute('data-theme');
+  root.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+  const btn = document.querySelector('.theme-toggle');
+  btn.textContent = current === 'dark' ? '☀️ 日/夜' : '🌙 日/夜';
+  redrawSankey();
+}
+
+const getCssVar = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+
+// Chart defaults
+Chart.defaults.font.family = '-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif';
+Chart.defaults.font.size = 12;
+
+// 1. Revenue Chart
+const revCtx = document.getElementById('revChart').getContext('2d');
+new Chart(revCtx, {
+  type: 'bar',
+  data: {
+    labels: ["Q4'24", "Q1'25", "Q2'25", "Q3'25", "Q4'25"],
+    datasets: [
+      {
+        label: '总收入及储备收益',
+        data: [435, 579, 658, 740, 770],
+        backgroundColor: 'rgba(122,158,142,0.75)',
+        borderColor: '#7a9e8e',
+        borderWidth: 1,
+      },
+      {
+        label: 'RLDC',
+        data: [131, 231, 251, 292, 309],
+        backgroundColor: 'rgba(123,143,173,0.75)',
+        borderColor: '#7b8fad',
+        borderWidth: 1,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { position: 'top' } },
+    scales: {
+      y: { beginAtZero: true, ticks: { callback: v => '$'+v+'M' } }
+    }
+  }
+});
+
+// 2. EBITDA Chart
+const ebitdaCtx = document.getElementById('ebitdaChart').getContext('2d');
+new Chart(ebitdaCtx, {
+  type: 'bar',
+  data: {
+    labels: ["Q4'24", "Q1'25", "Q2'25", "Q3'25", "Q4'25"],
+    datasets: [
+      {
+        label: '调整后 EBITDA (M)',
+        data: [32, 88, 130, 197, 167],
+        backgroundColor: 'rgba(192,124,94,0.75)',
+        borderColor: '#c07c5e',
+        borderWidth: 1,
+        yAxisID: 'y',
+      },
+      {
+        label: 'EBITDA 利润率 (%)',
+        data: [25, 38, 52, 67, 54],
+        type: 'line',
+        borderColor: '#b07b8f',
+        backgroundColor: 'rgba(176,123,143,0.1)',
+        borderWidth: 2,
+        pointRadius: 5,
+        fill: false,
+        yAxisID: 'y2',
+        tension: 0.3,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { position: 'top' } },
+    scales: {
+      y: { beginAtZero: true, ticks: { callback: v => '$'+v+'M' }, title: { display: true, text: 'EBITDA ($M)' } },
+      y2: { position: 'right', min: 0, max: 80, ticks: { callback: v => v+'%' }, grid: { drawOnChartArea: false }, title: { display: true, text: '利润率 (%)' } }
+    }
+  }
+});
+
+// 3. Other Revenue breakdown (Q4 2025)
+const otherRevCtx = document.getElementById('otherRevChart').getContext('2d');
+new Chart(otherRevCtx, {
+  type: 'doughnut',
+  data: {
+    labels: ['区块链网络合作（区块链赏金、Canton Coin等）', '交易收入（CCTP手续费等）'],
+    datasets: [{
+      data: [24.7, 12.2],
+      backgroundColor: ['rgba(122,158,142,0.8)', 'rgba(123,143,173,0.8)'],
+      borderColor: ['#7a9e8e', '#7b8fad'],
+      borderWidth: 2,
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'bottom' },
+      tooltip: { callbacks: { label: ctx => ctx.label + ': $' + ctx.raw + 'M' } }
+    }
+  }
+});
+
+// 4. USDC Chart
+const usdcCtx = document.getElementById('usdcChart').getContext('2d');
+new Chart(usdcCtx, {
+  type: 'line',
+  data: {
+    labels: ["Q4'24", "Q1'25", "Q2'25", "Q3'25", "Q4'25"],
+    datasets: [
+      {
+        label: 'USDC 在途余额 ($B)',
+        data: [43.9, 55, 65, 72, 75.3],
+        borderColor: '#7a9e8e',
+        backgroundColor: 'rgba(122,158,142,0.15)',
+        borderWidth: 2.5,
+        pointRadius: 5,
+        fill: true,
+        tension: 0.3,
+      },
+      {
+        label: 'USDC 平台上余额 ($B)',
+        data: [2.3, 5, 8, 10.5, 12.5],
+        borderColor: '#c07c5e',
+        backgroundColor: 'rgba(192,124,94,0.1)',
+        borderWidth: 2,
+        pointRadius: 4,
+        fill: false,
+        tension: 0.3,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { position: 'top' } },
+    scales: {
+      y: { beginAtZero: true, ticks: { callback: v => '$'+v+'B' } }
+    }
+  }
+});
+
+// Sankey
+function redrawSankey() {
+  const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const bg = dark ? '#262320' : '#ffffff';
+  const font = dark ? '#e8e4de' : '#2d2926';
+
+  const nodeColors = [
+    '#7a9e8e','#c07c5e','#b07b8f','#7b8fad','#a89878',
+    '#5a9068','#b05a5a','#7b8fad','#a89878'
+  ];
+
+  const data = [{
+    type: 'sankey',
+    orientation: 'h',
+    node: {
+      pad: 18,
+      thickness: 22,
+      line: { color: dark ? '#3a3632' : '#e0dbd3', width: 0.5 },
+      label: [
+        '储备收益 $733M',        // 0
+        '其他收入 $37M',         // 1
+        '总收入 $770M',          // 2
+        '分发&交易成本 $461M',   // 3
+        'RLDC $309M',            // 4
+        '调整后运营费用 $144M',  // 5
+        'Adj.EBITDA $167M',      // 6
+        '折旧摊销 $26M',         // 7
+        '调整项 & 其他 $45M',    // 8
+        'GAAP 营业利润 $55M',    // 9
+        '其他收益 $85M',         // 10
+        '净利润 $133M',          // 11
+      ],
+      color: ['#7a9e8e','#a89878','#5c7a9e','#b05a5a','#7a9e8e','#c07c5e',
+              '#5a9068','#9a9490','#9a9490','#7b8fad','#a89878','#5a9068'],
+      x: [0.0, 0.0, 0.18, 0.18, 0.40, 0.40, 0.65, 0.40, 0.65, 0.82, 0.82, 1.0],
+      y: [0.1, 0.7, 0.3, 0.7, 0.3, 0.7, 0.3, 0.5, 0.65, 0.5, 0.7, 0.5],
+    },
+    link: {
+      source: [0, 1, 2, 2, 4, 4, 5, 6, 7, 8, 9, 10],
+      target: [2, 2, 3, 4, 5, 6, 6, 9, 9, 9, 11,11],
+      value:  [733,37,461,309,144,167,144,26,45,45,55,85],
+      color: [
+        'rgba(122,158,142,0.35)',
+        'rgba(168,152,120,0.35)',
+        'rgba(176,90,90,0.3)',
+        'rgba(122,158,142,0.35)',
+        'rgba(192,124,94,0.35)',
+        'rgba(90,144,104,0.35)',
+        'rgba(90,144,104,0.35)',
+        'rgba(154,148,144,0.3)',
+        'rgba(154,148,144,0.3)',
+        'rgba(154,148,144,0.3)',
+        'rgba(123,143,173,0.4)',
+        'rgba(168,152,120,0.4)',
+      ],
+    }
+  }];
+
+  const layout = {
+    paper_bgcolor: bg,
+    plot_bgcolor: bg,
+    font: { family: '-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif', color: font, size: 12 },
+    margin: { l: 20, r: 20, t: 20, b: 20 },
+    height: 380,
+  };
+
+  Plotly.newPlot('sankey', data, layout, { responsive: true, displayModeBar: false });
+}
+
+redrawSankey();
+</script>
+</body>
+</html>

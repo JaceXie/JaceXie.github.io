@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>CROX Crocs — 2025 Q4 & 全年财报深度分析</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root{--bg:#f5f0eb;--bg2:#ece6df;--card:#ffffff;--card2:#f8f5f1;--border:#d9d0c7;--text:#4a4340;--text2:#7a706a;--text3:#a89f98;--accent:#8a9a8e;--accent2:#7b8fa0;--accent3:#b08d7a;--rose:#c09090;--gold:#b9a06a;--red:#b87070;--green:#7a9a7a;--shadow:rgba(0,0,0,.06);--cgrid:#e5ddd5}
+[data-theme=dark]{--bg:#1f1d1b;--bg2:#2a2724;--card:#2d2a27;--card2:#37322f;--border:#4a433d;--text:#e6ded8;--text2:#b7aba2;--text3:#8e837a;--accent:#8fa08f;--accent2:#8c9bab;--accent3:#c19b85;--rose:#d0a1a1;--gold:#c6b07a;--red:#cf8585;--green:#8bb28b;--shadow:rgba(0,0,0,.25);--cgrid:#453f3a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,"PingFang SC","Noto Sans SC",sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+.wrap{max-width:1240px;margin:0 auto;padding:22px}
+.topbar{position:sticky;top:0;z-index:20;backdrop-filter:blur(10px);background:rgba(245,240,235,.88);border-bottom:1px solid var(--border)}
+[data-theme=dark] .topbar{background:rgba(31,29,27,.88)}
+.topin{max-width:1240px;margin:0 auto;padding:12px 22px;display:flex;justify-content:space-between;align-items:center}
+.brand{font-weight:700;font-size:16px}
+.btn{border:1px solid var(--border);background:var(--card);color:var(--text2);border-radius:10px;padding:7px 12px;cursor:pointer;font-size:14px}
+.hero-card{background:linear-gradient(135deg,var(--card),var(--card2));border:1px solid var(--border);border-radius:22px;box-shadow:0 12px 32px var(--shadow);padding:28px;margin:22px 0 18px}
+.eyebrow{color:var(--accent3);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.1px}
+h1{font-size:38px;line-height:1.1;margin-top:8px}
+.sub{margin-top:12px;color:var(--text2);font-size:16px;max-width:920px}
+.hgrid{display:grid;grid-template-columns:1.2fr .8fr;gap:16px;margin-top:18px}
+.note,.verdict{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:16px}
+.vtag{display:inline-block;background:rgba(122,154,122,.18);color:var(--green);padding:5px 10px;border-radius:999px;font-weight:700;font-size:12px;margin-bottom:8px}
+.stitle{font-size:22px;font-weight:800;margin:26px 0 12px;display:flex;align-items:center;gap:8px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.g2{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.kpi,.snap{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;box-shadow:0 4px 16px var(--shadow)}
+.k{color:var(--text3);font-size:11px;text-transform:uppercase;letter-spacing:.8px}
+.v{font-size:26px;font-weight:800;margin-top:6px}
+.badge{display:inline-block;margin-top:8px;padding:3px 9px;border-radius:999px;font-size:11px;font-weight:700}
+.up{background:rgba(122,154,122,.15);color:var(--green)}.dn{background:rgba(184,112,112,.15);color:var(--red)}.nt{background:rgba(123,143,160,.15);color:var(--accent2)}
+.tbl-wrap{overflow:auto;background:var(--card);border:1px solid var(--border);border-radius:16px;box-shadow:0 4px 16px var(--shadow)}
+.tbl{width:100%;border-collapse:collapse;min-width:800px}
+.tbl th,.tbl td{padding:11px 13px;border-bottom:1px solid var(--border);text-align:left;font-size:13px}
+.tbl th{background:var(--card2);color:var(--text2);font-size:11px;text-transform:uppercase;letter-spacing:.7px}
+.tbl tr:last-child td{border-bottom:none}
+.ccard{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px;box-shadow:0 4px 16px var(--shadow)}
+.chartbox{height:300px}
+.acard{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;box-shadow:0 4px 16px var(--shadow)}
+.acard h3{font-size:16px;font-weight:700;margin-bottom:8px}.acard ul{padding-left:17px;color:var(--text2)}.acard li{margin:5px 0;font-size:13px}
+.ec-item{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;box-shadow:0 4px 16px var(--shadow)}
+.ec-head{display:flex;justify-content:space-between;gap:8px;align-items:flex-start;margin-bottom:10px}
+.ec-speaker{color:var(--text3);font-size:11px;text-transform:uppercase;letter-spacing:.7px}
+.ec-topic{font-size:16px;font-weight:800;line-height:1.3;margin-top:4px}
+.ec-tag{flex:0 0 auto;font-size:11px;font-weight:800;padding:4px 8px;border-radius:999px;white-space:nowrap}
+.tag-bull{background:rgba(122,154,122,.15);color:var(--green)}.tag-neut{background:rgba(123,143,160,.15);color:var(--accent2)}.tag-bear{background:rgba(184,112,112,.15);color:var(--red)}
+.ec-quote{color:var(--text2);font-size:13px;line-height:1.55}
+.ec-note{margin-top:8px;background:var(--bg2);border-radius:10px;padding:9px 11px;font-size:12px}
+.sumbox{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;text-align:center;box-shadow:0 4px 16px var(--shadow)}
+.snum{font-size:32px;font-weight:800}
+.bitem{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;display:flex;gap:14px;box-shadow:0 4px 16px var(--shadow)}
+.circle{width:54px;height:54px;flex:0 0 54px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900}
+.btitle{font-size:16px;font-weight:800;margin-bottom:5px}.btext{color:var(--text2);font-size:13px}
+.pbox{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;box-shadow:0 4px 16px var(--shadow)}
+.pbox h3{font-size:16px;margin-bottom:6px}.pv{font-size:30px;font-weight:900;margin:6px 0}.pbox ul{padding-left:16px;color:var(--text2);font-size:13px}.pbox li{margin:4px 0}
+.verdict2{background:linear-gradient(135deg,rgba(138,154,142,.14),rgba(123,143,160,.1));border:1px solid var(--border);border-radius:18px;padding:18px;margin-top:12px}
+.essay{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;box-shadow:0 4px 16px var(--shadow);color:var(--text2)}
+.essay p{margin:0 0 13px;font-size:14px;line-height:1.7}
+.foot{color:var(--text3);font-size:11px;margin-top:20px;padding:10px 2px 26px;line-height:1.6}
+@media(max-width:960px){.hgrid,.g2,.g4,.g3{grid-template-columns:repeat(2,1fr)}h1{font-size:30px}}
+@media(max-width:600px){.hgrid,.g2,.g4,.g3{grid-template-columns:1fr}.wrap{padding:14px}h1{font-size:26px}}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="topin"><div class="brand">🍔 Buffy 财报研究室 · CROX</div><button class="btn" id="themeBtn" onclick="toggleTheme()">🌙 切换主题</button></div></div>
+<div class="wrap">
+
+<div class="hero-card">
+  <div class="eyebrow">NASDAQ · CROX · Crocs, Inc. · Q4 2025 & 全年财报深度分析</div>
+  <h1>洞洞鞋不是笑话，<br>它是台 6 倍 PE 的现金机器。</h1>
+  <p class="sub">营收小降、HEYDUDE 继续掉链子，骨子里却是高毛利品牌、超强自由现金流、疯狂回购和国际化持续推进。问题不在于它值不值钱，而在于：<b>你愿不愿意相信北美 Crocs 能稳住，HEYDUDE 能止血。</b></p>
+  <div class="hgrid">
+    <div class="note"><b>一句话结论：</b> 这是一家<b>基本盘很硬、修复故事很烦、估值又便宜得离谱</b>的消费股。Crocs 主品牌没死，国际化还在冲，管理层愿意牺牲短期收入换长期渠道健康；但 HEYDUDE 还在拖后腿，关税和北美消费分层也是真问题。<br><br><b>Buffy 裁决：</b> <span style="color:var(--green);font-weight:800">有条件买入</span>，先拿 2%-4% 观察仓，等北美主品牌回暖和 HEYDUDE H2 兑现再说。</div>
+    <div class="verdict"><div class="vtag">有条件买入</div>
+      <div style="font-size:14px"><b>建议仓位：</b> 2%–4% 观察仓</div>
+      <div style="font-size:14px;margin-top:6px"><b>加仓条件：</b> 北美 Crocs 恢复正增长 / HEYDUDE H2 转正 / 毛利率扛住关税</div>
+      <div style="font-size:14px;margin-top:6px"><b>警戒条件：</b> Q2 后 Crocs 北美仍高个位数下滑，或 HEYDUDE 靠清库存硬撑</div>
+      <div style="font-size:14px;margin-top:6px"><b>股价 vs 中性 DCF：</b> $83.66 vs $97.09</div>
+    </div>
+  </div>
+</div>
+
+<div class="stitle">📌 股票快照</div>
+<div class="g4">
+
+  <div class="snap"><div class="k">Current Price</div><div class="v">$83.66</div><div style="color:var(--text3);font-size:12px;margin-top:5px">4/2/2026 收盘</div></div>
+  <div class="snap"><div class="k">Market Cap</div><div class="v">$4.20B</div><div style="color:var(--text3);font-size:12px;margin-top:5px">按 50.2M 股</div></div>
+  <div class="snap"><div class="k">TTM Adj. P/E</div><div class="v">6.7x</div><div style="color:var(--text3);font-size:12px;margin-top:5px">FY25 Adj. EPS $12.51</div></div>
+  <div class="snap"><div class="k">Forward P/E</div><div class="v">6.4x</div><div style="color:var(--text3);font-size:12px;margin-top:5px">2026 指引中值 $13.12</div></div>
+</div>
+
+<div class="stitle">⚡ KPI 仪表盘</div>
+<div class="g4">
+  <div class="kpi"><div class="k">Q4 Revenue</div><div class="v">$958M</div><span class="badge dn">-4% YoY</span></div>
+  <div class="kpi"><div class="k">Q4 Adj. Op Margin</div><div class="v">16.8%</div><span class="badge dn">-340bps YoY</span></div>
+  <div class="kpi"><div class="k">Q4 Adj. EPS</div><div class="v">$2.29</div><span class="badge dn">-9% YoY</span></div>
+  <div class="kpi"><div class="k">FY25 Revenue</div><div class="v">$4.04B</div><span class="badge dn">-2% YoY</span></div>
+  <div class="kpi"><div class="k">FY25 FCF</div><div class="v">$659M</div><span class="badge nt">FCF yield 15.7%</span></div>
+  <div class="kpi"><div class="k">FY25 Buybacks</div><div class="v">$577M</div><span class="badge up">≈10% 股本</span></div>
+  <div class="kpi"><div class="k">Net Debt</div><div class="v">$1.10B</div><span class="badge nt">杠杆区间低端</span></div>
+  <div class="kpi"><div class="k">2026 Adj. EPS Guide</div><div class="v">$12.88–13.35</div><span class="badge up">Forward PE ~6.4x</span></div>
+</div>
+
+<div class="stitle">📋 五季度趋势表</div>
+<div class="tbl-wrap">
+<table class="tbl">
+<thead><tr><th>季度</th><th>营收 ($M)</th><th>YoY</th><th>QoQ</th><th>调整营业利润率</th><th>调整 EPS</th><th>点评</th></tr></thead>
+<tbody>
+<tr><td><span>Q4'24</span></td><td><span>989.8</span></td><td>—</td><td>—</td><td>20.2%</td><td>$2.52</td><td>高基数季度，作为 2025 对比底稿</td></tr><tr><td><span>Q1'25</span></td><td><span>937.0</span></td><td>+1%</td><td>-5.3%</td><td>23.8%</td><td>$3.0</td><td>两品牌均超预期，随后因关税撤回全年指引</td></tr><tr><td><span>Q2'25</span></td><td><span>1149.0</span></td><td>+3%</td><td>+22.6%</td><td>26.9%</td><td>$4.23</td><td>全年最强利润季，开始主动收促销、降库存</td></tr><tr><td><span>Q3'25</span></td><td><span>996.0</span></td><td>-7%</td><td>-13.3%</td><td>20.8%</td><td>$2.92</td><td>HEYDUDE 和批发渠道拖累，管理层加码降本</td></tr><tr><td><b>Q4'25</b></td><td><b>957.6</b></td><td>-4%</td><td>-3.9%</td><td>16.8%</td><td>$2.29</td><td>假日季好于预期，但利润率被关税和清渠道打薄</td></tr>
+</tbody></table></div>
+
+<div class="stitle">📈 图表总览</div>
+<div class="g2">
+  <div class="ccard"><div class="chartbox"><canvas id="revMarginChart"></canvas></div></div>
+  <div class="ccard"><div class="chartbox"><canvas id="epsChart"></canvas></div></div>
+  <div class="ccard"><div class="chartbox"><canvas id="brandChart"></canvas></div></div>
+  <div class="ccard"><div class="chartbox"><canvas id="peerChart"></canvas></div></div>
+</div>
+
+<div class="stitle">🧩 业务拆解</div>
+<div class="g2">
+  <div class="acard"><h3>Crocs 主品牌：真现金牛</h3><ul>
+    <li>FY25 收入 <b>$3.326B</b>，同比 <b>+1%</b>；Q4 收入 <b>$768M</b>，同比基本持平。</li>
+    <li>国际业务 FY25 <b>+11%</b>，中国 <b>+30%</b>，日本恢复增长，西欧维持双位数。</li>
+    <li>DTC 同比 <b>+3%</b>，TikTok Shop 美国鞋履第一，数字化是增长主引擎。</li>
+    <li>Clogs 占品牌销售 <b>74%</b>，sandals 升至 <b>13%</b>（接近 $450M），Jibbitz 占 <b>8%</b>。</li>
+    <li>⚠️ 北美 FY25 <b>-7%</b>，经典款需控折扣控库存，短期拖累，但长期保品牌。</li>
+  </ul></div>
+  <div class="acard"><h3>HEYDUDE：拖油瓶，但不一定永远拖</h3><ul>
+    <li>FY25 收入 <b>$715M</b>，同比 <b>-14%</b>；Q4 收入 <b>$189M</b>，同比 <b>-18%</b>。</li>
+    <li>批发 FY25 <b>-27%</b>，Q4 <b>-42%</b>；公司主动退货、markdown、削减低效投放。</li>
+    <li>这些动作在 H2'25 拖累收入约 <b>$45M</b>，但改善了库存和品牌陈列质量。</li>
+    <li>品牌认知度升至 <b>39%</b>（+9ppt），新产品 Stretch Jersey / work / sandals。</li>
+    <li>⚠️ 修复路径仍未完全证明，H2'26 恢复增长是关键验证点。</li>
+  </ul></div>
+  <div class="acard"><h3>利润率与现金流：真护城河</h3><ul>
+    <li>FY25 调整毛利率 <b>58.3%</b>，调整营业利润率 <b>22.3%</b>，鞋服行业的优等生。</li>
+    <li>Q4 调整毛利率跌到 <b>54.7%</b>，关税头风约 <b>300bps</b> 是主要原因。</li>
+    <li>FY25 自由现金流 <b>$659M</b>，FCF yield 约 <b>15.7%</b>；经营质量非常硬。</li>
+    <li>2025 年回购 <b>$577M</b>，回购 yield 约 <b>13.7%</b>，比很多公司股息还猛。</li>
+    <li>净负债约 <b>$1.10B</b>，现金流足够同时支撑去杠杆和持续回购。</li>
+  </ul></div>
+  <div class="acard"><h3>2026 看点：前弱后强</h3><ul>
+    <li>公司预计全年企业收入 <b>持平至 -1%</b>；Q1 收入 <b>-3.5% 至 -5.5%</b>。</li>
+    <li>Crocs 品牌 <b>0% 至 +2%</b>；HEYDUDE <b>-7% 至 -9%</b>，但 H2 恢复增长。</li>
+    <li>Q1 关税影响约 <b>100bps</b>，Q2 约 <b>200bps</b>，全年未对冲头风约 <b>$80M</b>。</li>
+    <li>$100M 额外成本节省已识别并落地，部分对冲关税、部分留作再投资。</li>
+    <li>2026 调整营业利润率预计略超 <b>22.3%</b>；调整 EPS 指引 <b>$12.88-$13.35</b>。</li>
+  </ul></div>
+</div>
+
+<div class="stitle">🌊 现金流桑基图：钱从哪来，流到哪去</div>
+<div class="ccard"><div id="sankey" class="chartbox" style="height:400px"></div></div>
+
+<div class="stitle">☎️ 电话会议全量要点（含情绪标注）</div>
+
+<div class="g3" style="margin-bottom:12px">
+  <div class="sumbox"><div class="snum" style="color:var(--green)">8</div><div>利好信号</div></div>
+  <div class="sumbox"><div class="snum" style="color:var(--accent2)">12</div><div>中性信号</div></div>
+  <div class="sumbox"><div class="snum" style="color:var(--red)">2</div><div>利空信号</div></div>
+</div>
+<div class="g2"><div class="ec-item"><div class="ec-head"><div><div class="ec-speaker">Andrew Rees / CEO</div><div class="ec-topic">假日季超预期，现金流继续像印钞机</div></div><span class="ec-tag tag-bull">🟢 利好</span></div><div class="ec-quote">Q4 假日季好于预期，2025 年 FCF $659M。用这笔钱回购约 10% 流通股，并偿还 $128M 债务，同时维持杠杆在目标区间低端。</div><div class="ec-note">🟢 利好：这家公司最性感的地方不是洞洞鞋，而是现金回笼速度。</div></div><div class="ec-item"><div class="ec-head"><div><div class="ec-speaker">Andrew Rees / CEO</div><div class="ec-topic">20 年上市里程碑，累计售出 15 亿双</div></div><span class="ec-tag tag-bull">🟢 利好</span></div><div class="ec-quote">Crocs 自 IPO 以来，累计售出约 15 亿双，总股东回报超 700%，约为同期 S&P 500 的 2 倍。强调未来增长依赖国际化、数字化、非 clog 三条曲线。</div><div class="ec-note">🟢 利好：品牌不是一时潮玩，已经跑出长周期资产雏形。</div></div><div class="ec-item"><div class="ec-head"><div><div class="ec-speaker">Andrew Rees / CEO</div><div class="ec-topic">Crocs 主品牌：经典款控货，新 clog 迭代接棒</div></div><span class="ec-tag tag-bull">🟢 利好</span></div><div class="ec-quote">2025 年 clogs 占品牌销售 74%，经典款北美刻意控库存控折扣；Echo RO、Bae、Crafted、Unfurgettable 等新系列填补增量。北美经典款收紧让短期承压，但这是长期护城河投资。</div><div class="ec-note">🟢 利好：宁可少卖也不乱打折，说明管理层没把品牌当临期甩卖。</div></div><div class="ec-item"><div class="ec-head"><div><div class="ec-speaker">Andrew Rees / CEO</div><div class="ec-topic">凉鞋接近 $450M，不再只靠一双洞洞鞋</div></div><span class="ec-tag tag-bull">🟢 利好</span></div><div class="ec-quote">Sandals 约占企业收入 13%，接近 $450M；Jibbitz 占 8%，并向包袋/挂件/配饰延伸。Crocs 正把『舒适+个性化』从单品做成平台。</div><div class="ec-note">🟢 利好：单一爆品风险在下降，品类树开始长分叉。</div></div><div class="ec-item"><div class="ec-head"><div><div class="ec-speaker">Andrew Rees / CEO</div><div class="ec-topic">LEGO、NFL、Twilight——营销还是够野</div></div><span class="ec-tag tag-bull">🟢 利好</span></div><div class="ec-quote">Crocs 联名 LEGO、NFL、Stranger Things、Twilight；是 TikTok Shop 美国第一鞋履品牌，2025 年全球新开 7 个 TikTok Shop 市场，2026 年继续扩张。</div><div class="ec-note">🟢 利好：品牌依然掌握低成本引爆流量的能力，这比传统广告值钱多了。</div></div><div class="ec-item"><div class="ec-head"><div><div class="ec-speaker">Andrew Rees / CEO</div><div class="ec-topic">国际市场双位数，中国增长 30% 像开了外挂</div></div><span class="ec-tag tag-bull">🟢 利好</span></div><div class="ec-quote">Crocs 国际收入 FY25 增长 11%，中国 +30%，日本恢复增长，西欧维持双位数，印度正进入长期投入期。2026 年计划再开 200-250 家国际门店/柜台。</div><div class="ec-note">🟢 利好：真正的增量不在北美老客，而在全球渗透率还很低的市场。</div></div><div class="ec-item"><div class="ec-head"><div><div class="ec-speaker">Jonathan Komp / Baird → CEO</div><div class="ec-topic">北美复苏路径：新 clog、凉鞋、数字渠道三板斧</div></div><span class="ec-tag tag-bull">🟢 利好</span></div><div class="ec-quote">管理层将北美 Crocs 列为 2026 年核心任务：clog 迭代（Crafted、Crocband、Echo 2.0）、凉鞋/个性化非 clog 拓展、TikTok Shop 等新渠道。国际业务规模也将首次超过美国。</div><div class="ec-note">🟢 利好：不是空喊口号，把恢复路径拆成了可执行动作。</div></div><div class="ec-item"><div class="ec-head"><div><div class="ec-speaker">Peter McGoldrick / Stifel → CEO</div><div class="ec-topic">中国、日本、西欧、印度——国际化不是只会说 China Story</div></div><span class="ec-tag tag-bull">🟢 利好</span></div><div class="ec-quote">Andrew 点名 4 个重点市场：中国持续高增长，日本两年投入后回正，西欧保持双位数，印度进入更长期投入期。增长引擎地域分散，防风险能力更强。</div><div class="ec-note">🟢 利好：国际化不是单点赌徒，地域分散让它更像真增长引擎。</div></div><div class="ec-item"><div class="ec-head"><div><div class="ec-speaker">Andrew Rees / Patraic Reagan</div><div class="ec-topic">HEYDUDE 渠道清理拖累 $45M 收入，下猛药</div></div><span class="ec-tag tag-bear">🔴 利空</span></div><div class="ec-quote">2025 年 H2 加速退货、markdown allowance、削减低效投放，合计拖累 HEYDUDE 收入约 $45M；全年 HEYDUDE 营收 -14%，Q4 -18%，批发渠道 -42%。</div><div class="ec-note">🔴 利空：治病方向对，但说明 HEYDUDE 的伤口比市场想的更深。</div></div><div class="ec-item"><div class="ec-head"><div><div class="ec-speaker">Patraic Reagan / CFO</div><div class="ec-topic">关税 Q2 头风最大，毛利率要先挨打</div></div><span class="ec-tag tag-bear">🔴 利空</span></div><div class="ec-quote">Q1 额外关税影响约 100bps，Q2 约 200bps，全年未对冲头风约 $80M。Q4 毛利率已跌至 54.7%，被关税打了约 300bps，是五个季度中最低点。</div><div class="ec-note">🔴 利空：短期毛利率压力是实打实的，不是 PowerPoint 上的装饰线条。</div></div><div class="ec-item"><div class="ec-head"><div><div class="ec-speaker">Andrew Rees / CEO</div><div class="ec-topic">HEYDUDE：监护仪不再狂响，但病人还没下床</div></div><span class="ec-tag tag-neut">📊 中性</span></div><div class="ec-quote">2025 年重点是稳定北美、聚焦核心消费者；品牌认知度升至 39%（+9ppt），ASP 连续 10 季同比正增长，新产品 Stretch Jersey / work / sandals 是修复抓手。</div><div class="ec-note">📊 中性：方向比去年清楚，但修复路径还没完全证明。</div></div><div class="ec-item"><div class="ec-head"><div><div class="ec-speaker">Patraic Reagan / CFO</div><div class="ec-topic">FY25 全年：营收小降，利润率被关税和清渠道两面夹击</div></div><span class="ec-tag tag-neut">📊 中性</span></div><div class="ec-quote">FY25 企业收入 $4.04B（-2%），调整毛利率 58.3%（-50bps），调整营业利润率 22.3%（-330bps）。库存件数同比高个位数下降，库存质量改善。</div><div class="ec-note">📊 中性：现金和库存管理没坏，但利润率确实在掉。</div></div><div class="ec-item"><div class="ec-head"><div><div class="ec-speaker">Patraic Reagan / CFO</div><div class="ec-topic">2026 指引：稳健但不狂飙，前弱后强格局</div></div><span class="ec-tag tag-neut">📊 中性</span></div><div class="ec-quote">2026 全年收入持平至 -1%；Crocs 品牌 0% 至 +2%，HEYDUDE -7% 至 -9%，但预计 H2 恢复增长；调整 EPS 指引 $12.88-$13.35；$100M 成本节省计划已落地。</div><div class="ec-note">📊 中性：指引不炸裂，但对 6 倍多 forward PE 来说已经够交差。</div></div><div class="ec-item"><div class="ec-head"><div><div class="ec-speaker">Adrienne Yih / Barclays → CEO</div><div class="ec-topic">2026 新品比去年更猛，AI 实验期还没贡献利润</div></div><span class="ec-tag tag-neut">📊 中性</span></div><div class="ec-quote">今年新品显著多于 2025：Crafted clog、Saturday 凉鞋、HEYDUDE Stretch Jersey 等；AI 应用于营销/设计/供应链效率，但目前不把 AI upside 计入指引。</div><div class="ec-note">📊 中性：AI 先别当仙丹，真正有用的还是产品自己会不会卖。</div></div><div class="ec-item"><div class="ec-head"><div><div class="ec-speaker">Rick Patel / Raymond James → CEO</div><div class="ec-topic">增长不靠涨价，靠结构和纪律</div></div><span class="ec-tag tag-neut">📊 中性</span></div><div class="ec-quote">管理层明确：2026 北美没有重大提价计划；更重要的是对经典款减促销、让渠道库存和 sell-in 更健康，避免短期提价伤害品牌形象。</div><div class="ec-note">📊 中性：不靠涨价挤利润，说明公司对需求真实度更有底。</div></div><div class="ec-item"><div class="ec-head"><div><div class="ec-speaker">Patraic Reagan / CFO → Tom Nikic</div><div class="ec-topic">$100M 成本节省不全进利润，部分留作再投资弹药</div></div><span class="ec-tag tag-neut">📊 中性</span></div><div class="ec-quote">$100M 节约：一部分流向毛利与利润，另一部分保留为 AI 等试验项目的投资弹药。这确保公司在效率与增长投入之间保持平衡。</div><div class="ec-note">📊 中性：这是防守型财务动作，稳，但不会让你立刻拍大腿。</div></div><div class="ec-item"><div class="ec-head"><div><div class="ec-speaker">Brooke Roach / Goldman → CEO</div><div class="ec-topic">消费者依旧分层，低收入客群更谨慎</div></div><span class="ec-tag tag-neut">📊 中性</span></div><div class="ec-quote">Andrew 认为美国消费者仍 bifurcated：高收入群体在消费，低收入群体更谨慎；Crocs 和 HEYDUDE 的 sell-out 与库存已基本平衡，市场保持竞争但可控。</div><div class="ec-note">📊 中性：消费环境没烂掉，但也不是能闭眼加杠杆的年份。</div></div><div class="ec-item"><div class="ec-head"><div><div class="ec-speaker">Anna Andreeva / Piper → CEO</div><div class="ec-topic">HEYDUDE 不急铺新渠道，先把老渠道做健康</div></div><span class="ec-tag tag-neut">📊 中性</span></div><div class="ec-quote">HEYDUDE 不大幅增加新批发伙伴，先在核心伙伴内提高上架深度；Crocs sandals 去年国际增速低于北美，但 2026 年预计会加速，印度/东南亚潜力大。</div><div class="ec-note">📊 中性：策略像先把地基补好，再决定要不要加层。</div></div><div class="ec-item"><div class="ec-head"><div><div class="ec-speaker">Jim Chartier / Monness → CEO</div><div class="ec-topic">75 家 HEYDUDE outlet 店表现尚可</div></div><span class="ec-tag tag-neut">📊 中性</span></div><div class="ec-quote">HEYDUDE 年底共有 75 家门店（主要为 outlet），能同步清理库存和拓展消费者认知；2026 年开店数低于 2025 年。管理层对门店经济模型满意。</div><div class="ec-note">📊 中性：开店不激进，更像排水沟而不是增长火箭。</div></div><div class="ec-item"><div class="ec-head"><div><div class="ec-speaker">Jim Chartier / CEO</div><div class="ec-topic">国际批发放缓是渠道 mix 变化，不是渠道恶化</div></div><span class="ec-tag tag-neut">📊 中性</span></div><div class="ec-quote">国际增长主要由 DTC 和开店驱动，批发更多集中于 distributor 体系；批发增速放缓不代表渠道崩坏，而是 DTC 加速导致的结构性 mix 变化。</div><div class="ec-note">📊 中性：渠道 mix 变化大于渠道崩坏。</div></div><div class="ec-item"><div class="ec-head"><div><div class="ec-speaker">Mitch Kummetz / Seaport → CFO</div><div class="ec-topic">HEYDUDE H2 回升：一半是真修复，一半是低基数</div></div><span class="ec-tag tag-neut">📊 中性</span></div><div class="ec-quote">CFO 承认 H2 恢复增长有一部分来自 $45M 清库存的低基数，但也强调认知度 30%→39%、新品、sell-in 广度改善，公司拒绝披露订单簿。</div><div class="ec-note">📊 中性：有改善，但故事还需要用数字来验证。</div></div><div class="ec-item"><div class="ec-head"><div><div class="ec-speaker">Jonathan Komp / Baird → CEO</div><div class="ec-topic">2026 还是前弱后强，H2 利润弹性才体现</div></div><span class="ec-tag tag-neut">📊 中性</span></div><div class="ec-quote">管理层再度强调 2025 H2 采取的动作继续拖累 2026 H1，因此利润节奏前低后高；从 Q2 后开始接近正常化运行率。这是模型里要注意的节奏。</div><div class="ec-note">📊 中性：别急着在 Q1/Q2 就下结论，鳄鱼的鞋今年先穿左脚再穿右脚。</div></div></div>
+
+<div class="stitle">🧠 巴菲特六维评分</div>
+<div class="g2"><div class="bitem"><div class="circle">B+</div><div><div class="btitle">护城河</div><div class="btext">Crocs 主品牌是高毛利+低价位+强品牌的稀缺组合，Classic Clog 已成品类图腾；但时尚属性决定它不是可口可乐级别的永恒刚需，HEYDUDE 也拖低了整体护城河纯度。</div></div></div><div class="bitem"><div class="circle">A-</div><div><div class="btitle">管理层</div><div class="btext">Andrew Rees 团队没有回避 HEYDUDE 的问题，愿意牺牲短期收入换渠道健康；持续回购、降杠杆，资本配置比大多数消费股老实。</div></div></div><div class="bitem"><div class="circle">B+</div><div><div class="btitle">财务健康</div><div class="btext">年末现金 $130M、债务 $1,231M，净杠杆处于目标区间低端；虽然不是堡垒资产负债表，但 $659M 自由现金流足以支撑去杠杆和回购并行。</div></div></div><div class="bitem"><div class="circle">B</div><div><div class="btitle">盈利质量</div><div class="btext">经营和自由现金流非常硬，FCF yield 约 15-16%；但 2025 利润率受关税与 HEYDUDE 清渠道影响；GAAP 年度亏损主要被税务结构性项目扭曲，看非 GAAP 更合理。</div></div></div><div class="bitem"><div class="circle">B-</div><div><div class="btitle">可预测性</div><div class="btext">Crocs 品牌相对可预测，但鞋服消费品会受时尚周期、促销环境和关税政策影响；HEYDUDE 处于修复期，增加了整体波动性。</div></div></div><div class="bitem"><div class="circle">A-</div><div><div class="btitle">资本配置纪律</div><div class="btext">2025 年回购 $577M，约占流通股 10%，同时还偿还 $128M 债务。对一家 6-7 倍 PE 的公司来说，这种回购效率像拿灭火器浇现金机。</div></div></div></div>
+
+<div class="stitle">💰 三情景 DCF 估值</div>
+<div class="g3">
+  <div class="pbox"><h3>悲观情景</h3><div class="pv">$57.95</div><div style="color:var(--text3);font-size:12px">安全边际买点 $43.46</div>
+    <ul><li>HEYDUDE 修复继续拖</li><li>北美 Crocs 继续承压</li><li>WACC 12.5% / 永续增长 1.8%</li><li>额外打 20% 折扣</li></ul>
+  </div>
+  <div class="pbox" style="border-color:var(--accent2)"><h3>中性情景 ⭐</h3><div class="pv" style="color:var(--accent2)">$97.09</div><div style="color:var(--text3);font-size:12px">安全边际买点 $72.82</div>
+    <ul><li>Crocs 主品牌低个位数增长</li><li>HEYDUDE 2026H2 才恢复增长</li><li>WACC 11.0% / 永续增长 2.2%</li><li>额外打 10% 波动折扣</li></ul>
+  </div>
+  <div class="pbox"><h3>乐观情景</h3><div class="pv">$143.79</div><div style="color:var(--text3);font-size:12px">安全边际买点 $107.84</div>
+    <ul><li>国际化持续加速</li><li>HEYDUDE 顺利转正</li><li>WACC 10.0% / 永续增长 2.5%</li><li>无额外折扣</li></ul>
+  </div>
+</div>
+<div class="g2" style="margin-top:12px">
+  <div class="ccard"><div class="chartbox"><canvas id="dcfChart"></canvas></div></div>
+  <div class="verdict2">
+    <b>DCF 解释：</b> 我没有直接拿 FY25 的 $659M FCF 生吞活剥，而是把基数降到 <b>$550M 的归一化 owner earnings</b>，因为鞋服现金流会受营运资本节奏影响。即便如此，中性内在价值仍有 <b>$97.09</b>，相对当前股价 $83.66 有约 <b>+16%</b> 空间；乐观情景 $143.79 则意味着 <b>+72%</b>。<br><br>
+    市场给 CROX 6 倍多 forward PE，定价的不是『普通波动』，而是『品牌衰退 + HEYDUDE 持续失血 + 关税长期打脸』三件事同时发生的极端情景。这种极端折价，正是 <b>有条件买入</b> 的核心逻辑所在。
+  </div>
+</div>
+
+<div class="stitle">🪑 巴菲特视角：这双鞋值不值得捡？</div>
+<div class="essay">
+  <p>如果我是老巴，我会先说：<b>这不是那种闭着眼都能买的伟大公司。</b>Crocs 不是苹果，也不是可口可乐。它卖的是鞋，而且是带明显时尚属性的鞋。消费者哪天突然变心，增长曲线就可能从滑梯变跳楼机。更别说手里还有个 HEYDUDE，这牌子现在还在修渠道、修品牌、修产品。</p>
+  <p>但如果只因为是洞洞鞋就把这家公司当笑话，那就是典型的用鼻子做投资。CROX 真正有杀伤力的地方，是把一门看起来不高级的生意，做成了<b>高毛利、高现金转换、高回购效率</b>的机器。FY25 自由现金流 $659M，按约 $42 亿市值算，FCF yield 约 15-16%。这种现金回报，在一堆嘴上讲品牌、手上烧营销费的消费股里，已经像秃子里长出卷发。</p>
+  <p>我最看重两点。<b>第一，管理层在做难但正确的事。</b>北美控折扣、控经典款库存，HEYDUDE 直接硬清渠道，这些动作都会伤短期收入，但能保长期品牌结构。<b>第二，资本配置相当靠谱。</b>2025 年回购 $577M，干掉约 10% 流通股，同时继续降债。对一个远期 PE 只有 6 倍多的公司来说，这种回购不是粉饰，是实打实地把未来每股价值往上抬。</p>
+  <p>当然，便宜从来不自动等于安全。CROX 现在的主要风险就三个：一是 HEYDUDE 修复不达预期，H2'26 恢复增长只停留在财报 PPT；二是 Crocs 北美主品牌继续负增长，说明经典款的成熟期比管理层想象来得更早；三是关税和消费者分层让利润率长期抬不起来。</p>
+  <p>所以我对它的结论不是"梭哈"，而是<b>"有条件买入"</b>。先用 <b>2%-4%</b> 做观察仓。后面如果看到两个信号——<b>Crocs 北美恢复增长</b>、<b>HEYDUDE H2 真转正</b>——市场通常已经不再给你 6 倍多 PE 这种白菜价了。相反，如果 Q2/Q3 还在讲渠道清理和未来改善，那就意味着，这只鳄鱼还没走出泥地。</p>
+  <p><b>风险提示：</b> 本报告仅供研究交流，不构成任何投资建议。消费品是会翻脸的，市场先生比鳄鱼还咬人。</p>
+</div>
+
+<div class="foot">
+  <div><b>主要来源：</b> Crocs IR Q4/FY2025 Earnings Presentation (Feb 12 2026)、Q4 2025 Earnings Call Transcript (FactSet CallStreet)、Q1-Q4 2025 Infographics、Yahoo Finance / StockAnalysis 市场数据。</div>
+  <div>注：TTM / Forward P/E 使用调整后 EPS 口径；GAAP 2025 年度利润受税务结构性项目显著扭曲，主判断采用非 GAAP 口径。</div>
+</div>
+</div>
+<script>
+
+const QUARTERS = [{"q": "Q4'24", "rev": 989.8, "yoy": "—", "qoq": "—", "opm": 20.2, "eps": 2.52, "note": "高基数季度，作为 2025 对比底稿"}, {"q": "Q1'25", "rev": 937.0, "yoy": "+1%", "qoq": "-5.3%", "opm": 23.8, "eps": 3.0, "note": "两品牌均超预期，随后因关税撤回全年指引"}, {"q": "Q2'25", "rev": 1149.0, "yoy": "+3%", "qoq": "+22.6%", "opm": 26.9, "eps": 4.23, "note": "全年最强利润季，开始主动收促销、降库存"}, {"q": "Q3'25", "rev": 996.0, "yoy": "-7%", "qoq": "-13.3%", "opm": 20.8, "eps": 2.92, "note": "HEYDUDE 和批发渠道拖累，管理层加码降本"}, {"q": "Q4'25", "rev": 957.6, "yoy": "-4%", "qoq": "-3.9%", "opm": 16.8, "eps": 2.29, "note": "假日季好于预期，但利润率被关税和清渠道打薄"}];
+const PEERS = [{"t": "CROX", "pe": 6.63}, {"t": "DECK", "pe": 13.5}, {"t": "BIRK", "pe": 15.38}];
+const DCF_VALS = [57.95, 97.09, 143.79];
+const PRICE = 83.66;
+
+let charts=[];
+function gv(){
+  const s=getComputedStyle(document.documentElement);
+  const g=p=>s.getPropertyValue(p).trim();
+  return{text:g('--text'),text2:g('--text2'),border:g('--border'),grid:g('--cgrid'),
+    accent:g('--accent'),accent2:g('--accent2'),accent3:g('--accent3'),rose:g('--rose'),
+    green:g('--green'),red:g('--red'),gold:g('--gold')};
+}
+function destroyAll(){charts.forEach(c=>{if(c&&c.destroy)c.destroy()});charts=[];}
+function buildCharts(){
+  destroyAll();
+  const v=gv();
+  Chart.defaults.color=v.text2; Chart.defaults.borderColor=v.grid;
+  const labs=QUARTERS.map(x=>x.q);
+  charts.push(new Chart(document.getElementById('revMarginChart'),{
+    type:'bar',
+    data:{labels:labs,datasets:[
+      {type:'bar',label:'营收 ($M)',data:QUARTERS.map(x=>x.rev),backgroundColor:v.accent2,borderRadius:7,yAxisID:'y'},
+      {type:'line',label:'调整营业利润率 %',data:QUARTERS.map(x=>x.opm),borderColor:v.accent3,backgroundColor:v.accent3,tension:.35,yAxisID:'y1'}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom'},title:{display:true,text:'营收 vs 营业利润率趋势'}},
+      scales:{y:{beginAtZero:false},y1:{position:'right',grid:{display:false},beginAtZero:true}}}
+  }));
+  charts.push(new Chart(document.getElementById('epsChart'),{
+    type:'bar',data:{labels:labs,datasets:[{label:'调整 EPS ($)',data:QUARTERS.map(x=>x.eps),backgroundColor:[v.gold,v.accent,v.accent,v.accent,v.rose],borderRadius:7}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},title:{display:true,text:'调整 EPS 季度趋势'}}}
+  }));
+  charts.push(new Chart(document.getElementById('brandChart'),{
+    type:'doughnut',data:{labels:['Crocs Brand','HEYDUDE'],datasets:[{data:[3326,715],backgroundColor:[v.accent,v.rose]}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom'},title:{display:true,text:'FY25 品牌收入结构 ($M)'}}}
+  }));
+  charts.push(new Chart(document.getElementById('peerChart'),{
+    type:'bar',data:{labels:PEERS.map(x=>x.t),datasets:[{label:'Forward P/E',data:PEERS.map(x=>x.pe),backgroundColor:[v.accent3,v.accent2,v.gold],borderRadius:7}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},title:{display:true,text:'同业远期 PE 对比'}},scales:{y:{beginAtZero:true}}}
+  }));
+  charts.push(new Chart(document.getElementById('dcfChart'),{
+    type:'bar',data:{labels:['悲观','中性','乐观'],datasets:[
+      {label:'每股内在价值',data:DCF_VALS,backgroundColor:[v.red,v.accent2,v.green],borderRadius:7},
+      {type:'line',label:'当前股价 $83.66',data:[PRICE,PRICE,PRICE],borderColor:v.gold,backgroundColor:v.gold,tension:0,pointRadius:6}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom'},title:{display:true,text:'DCF 每股价值 vs 当前价'}},scales:{y:{beginAtZero:true}}}
+  }));
+}
+function buildSankey(){
+  const v=gv();
+  Plotly.newPlot('sankey',[{
+    type:'sankey',arrangement:'snap',
+    node:{pad:18,thickness:18,line:{color:v.border,width:1},
+      label:['FY25 Revenue<br>$4,041M','Gross Profit<br>$2,357M','Adj. Op Income<br>$901M','Operating CF<br>$710M','Free Cash Flow<br>$659M'],
+      color:[v.accent2,v.accent,v.accent3,v.gold,v.green]
+    },
+    link:{source:[0,1,2,3],target:[1,2,3,4],value:[2357,901,710,659],
+      color:['rgba(123,143,160,0.3)','rgba(138,154,142,0.3)','rgba(176,141,122,0.3)','rgba(122,154,122,0.3)']
+    }
+  }],
+  {paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor:'rgba(0,0,0,0)',font:{color:v.text,size:12},margin:{l:8,r:8,t:8,b:8}},
+  {displayModeBar:false,responsive:true});
+}
+function toggleTheme(){
+  const h=document.documentElement;
+  const n=h.getAttribute('data-theme')==='dark'?'light':'dark';
+  h.setAttribute('data-theme',n);
+  document.getElementById('themeBtn').textContent=n==='dark'?'☀️ 切换主题':'🌙 切换主题';
+  localStorage.setItem('buffy-theme',n);
+  setTimeout(()=>{buildCharts();buildSankey();},60);
+}
+(function(){
+  const t=localStorage.getItem('buffy-theme');
+  if(t==='dark'){document.documentElement.setAttribute('data-theme','dark');document.addEventListener('DOMContentLoaded',()=>document.getElementById('themeBtn').textContent='☀️ 切换主题');}
+})();
+buildCharts();
+buildSankey();
+</script>
+</body></html>

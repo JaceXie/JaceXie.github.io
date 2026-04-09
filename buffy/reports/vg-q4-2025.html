@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Venture Global (VG) — Q4 2025 & 全年深度分析</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root{--bg:#f5f0eb;--bg2:#ece6df;--card:#fff;--card2:#f8f5f1;--border:#d9d0c7;--text:#4a4340;--text2:#7a706a;--text3:#a89f98;--accent:#8a9a8e;--accent2:#7b8fa0;--accent3:#b08d7a;--rose:#c09090;--gold:#b9a06a;--red:#b87070;--green:#7a9a7a;--shadow:rgba(0,0,0,.06);--chart-grid:#e5ddd5}
+[data-theme="dark"]{--bg:#1e1c1a;--bg2:#28251f;--card:#2e2a25;--card2:#363230;--border:#4a4540;--text:#d4ccc4;--text2:#a09890;--text3:#706860;--accent:#8a9a8e;--accent2:#8fabbf;--accent3:#c9a48e;--rose:#c09090;--gold:#c9b07a;--red:#c08080;--green:#8aaa8a;--shadow:rgba(0,0,0,.3);--chart-grid:#3e3a35}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Georgia','Noto Serif SC','PingFang SC',serif;line-height:1.75;font-size:14.5px;transition:background .35s,color .35s}
+a{color:var(--accent2);text-decoration:none}
+.theme-bar{position:sticky;top:0;z-index:100;background:var(--card);border-bottom:1px solid var(--border);padding:8px 24px;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(10px);transition:background .35s}
+.theme-bar .logo{font-size:13px;color:var(--text2);letter-spacing:1px}
+.theme-toggle{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2)}
+.toggle-switch{position:relative;width:44px;height:22px;background:var(--border);border-radius:11px;cursor:pointer;transition:background .3s}
+.toggle-switch::after{content:'';position:absolute;top:2px;left:2px;width:18px;height:18px;background:var(--card);border-radius:50%;transition:transform .3s;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+[data-theme="dark"] .toggle-switch{background:var(--accent2)}
+[data-theme="dark"] .toggle-switch::after{transform:translateX(22px)}
+.hero{padding:48px 24px 36px;text-align:center;border-bottom:1px solid var(--border)}
+.hero-tag{display:inline-block;font-family:'Segoe UI',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);padding:3px 14px;border-radius:20px;margin-bottom:18px}
+.hero h1{font-size:32px;font-weight:700;color:var(--text);letter-spacing:1px;margin-bottom:8px}
+.hero-sub{font-size:14px;color:var(--text2);margin-bottom:16px}
+.hero-pills{display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
+.pill{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:6px 18px;font-family:'Segoe UI',sans-serif;font-size:13px;color:var(--text2);box-shadow:0 1px 3px var(--shadow)}
+.pill strong{color:var(--text)}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+.section{padding:36px 0;border-bottom:1px solid var(--border)}
+.stitle{font-size:18px;font-weight:700;color:var(--accent3);margin-bottom:20px;letter-spacing:.5px;display:flex;align-items:center;gap:10px}
+.stitle::before{content:'';display:block;width:4px;height:20px;background:var(--accent3);border-radius:2px}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:14px}
+.kpi{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 18px;box-shadow:0 1px 4px var(--shadow);transition:background .35s}
+.kpi-l{font-family:'Segoe UI',sans-serif;font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
+.kpi-v{font-size:20px;font-weight:700;color:var(--text);margin-bottom:3px}
+.badge{display:inline-block;font-family:'Segoe UI',sans-serif;font-size:11px;font-weight:600;padding:2px 8px;border-radius:8px}
+.up{background:rgba(122,154,122,.15);color:var(--green)}
+.dn{background:rgba(184,112,112,.15);color:var(--red)}
+.nt{background:rgba(123,143,160,.15);color:var(--accent2)}
+.tbl-wrap{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow-x:auto;box-shadow:0 1px 4px var(--shadow)}
+.tbl{width:100%;border-collapse:collapse;font-family:'Segoe UI',sans-serif;font-size:13px}
+.tbl th{background:var(--card2);color:var(--text3);font-size:11px;letter-spacing:.5px;text-transform:uppercase;padding:10px 14px;text-align:right;border-bottom:1px solid var(--border)}
+.tbl th:first-child{text-align:left}
+.tbl td{padding:9px 14px;border-bottom:1px solid var(--border);text-align:right}
+.tbl td:first-child{text-align:left;color:var(--text2)}
+.tbl .hl td{font-weight:600;color:var(--text)}
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.cgrid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:16px}
+.ccard{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px;box-shadow:0 1px 4px var(--shadow)}
+.ctitle{font-family:'Segoe UI',sans-serif;font-size:12px;color:var(--text3);margin-bottom:12px;text-transform:uppercase;letter-spacing:.5px}
+.cwrap{position:relative;height:230px}
+.agrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
+.acard{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px;box-shadow:0 1px 4px var(--shadow)}
+.acard h4{font-size:13px;color:var(--accent2);margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px}
+.acard ul{padding-left:16px}
+.acard li{margin-bottom:5px;font-size:13px}
+.ec-block{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:22px;margin-bottom:16px;box-shadow:0 1px 4px var(--shadow)}
+.ec-block h3{font-size:15px;font-weight:700;color:var(--accent3);margin-bottom:14px;border-bottom:1px solid var(--border);padding-bottom:8px}
+.ec-item{margin-bottom:16px;padding-bottom:14px;border-bottom:1px dashed rgba(150,140,130,.2)}
+.ec-item:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
+.ec-quote{font-style:italic;font-size:13.5px;line-height:1.8;color:var(--text);margin-bottom:8px;padding-left:14px;border-left:3px solid var(--rose)}
+.ec-tag{display:inline-flex;align-items:center;gap:5px;font-family:'Segoe UI',sans-serif;font-size:11.5px;font-weight:600;padding:3px 10px;border-radius:6px;margin-right:6px}
+.tag-bull{background:rgba(122,154,122,.15);color:var(--green)}
+.tag-bear{background:rgba(184,112,112,.15);color:var(--red)}
+.tag-neut{background:rgba(123,143,160,.15);color:var(--accent2)}
+.ec-note{font-size:12.5px;color:var(--text2);line-height:1.6;margin-top:6px;padding:6px 10px;background:var(--card2);border-radius:6px}
+.bscore{display:flex;align-items:center;gap:16px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin-bottom:12px;box-shadow:0 1px 4px var(--shadow)}
+.circle{width:62px;height:62px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;flex-shrink:0;border:3px solid;font-family:'Segoe UI',sans-serif}
+.cg{border-color:var(--green);color:var(--green)}
+.cw{border-color:var(--gold);color:var(--gold)}
+.cr{border-color:var(--red);color:var(--red)}
+.bscore .bd h4{font-size:14px;margin-bottom:3px}
+.bscore .bd p{font-size:13px;color:var(--text2);line-height:1.6}
+.verdict{background:var(--card2);border:2px solid var(--accent);border-radius:10px;padding:26px 28px;margin-bottom:16px}
+.verdict-t{font-size:17px;font-weight:700;color:var(--accent);margin-bottom:10px}
+.pgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:18px 0}
+.pbox{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center;box-shadow:0 1px 4px var(--shadow)}
+.pbox .pl{font-family:'Segoe UI',sans-serif;font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
+.pbox .pv{font-family:'Segoe UI',sans-serif;font-size:26px;font-weight:800}
+.pbox .pn{font-size:11px;color:var(--text3);margin-top:3px}
+.pc{color:var(--text2)}.pf{color:var(--gold)}.ps{color:var(--green)}
+#sankey{width:100%;height:460px}
+.cmt{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:26px;line-height:1.9;font-size:14.5px;box-shadow:0 1px 4px var(--shadow)}
+.cmt p{margin-bottom:14px}
+.hl-t{color:var(--accent3);font-weight:600}
+.warn-t{color:var(--red);font-weight:600}
+footer{background:var(--card2);border-top:1px solid var(--border);padding:24px;text-align:center;color:var(--text3);font-size:12px;margin-top:40px}
+@media(max-width:768px){.cgrid,.cgrid3,.agrid,.pgrid{grid-template-columns:1fr}.hero h1{font-size:22px}.kpi-grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+
+<!-- THEME BAR -->
+<div class="theme-bar">
+  <div class="logo">BUFFY · 财报研究所</div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">深度研究 · 2026年3月20日</div>
+  <h1>Venture Global 深度分析</h1>
+  <div class="hero-sub">NYSE: VG &nbsp;|&nbsp; 2025 Q4 & 全年业绩 &nbsp;|&nbsp; 巴菲特价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill">股价 <strong>$16.23</strong></div>
+    <div class="pill">市值 <strong>~$400亿</strong></div>
+    <div class="pill">TTM P/E <strong>17.7x</strong></div>
+    <div class="pill">EV/EBITDA <strong>11.5x</strong></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- S1: STOCK SNAPSHOT -->
+<section class="section">
+  <div class="stitle">公司概况 — 美国LNG出口新巨头</div>
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin-bottom:16px;font-size:13.5px;line-height:1.8;">
+    <strong>Venture Global</strong> 是美国快速崛起的LNG（液化天然气）生产商和出口商，总部位于弗吉尼亚州阿灵顿。公司在路易斯安那州墨西哥湾沿岸开发、建设和运营大型LNG液化和出口设施。<br><br>
+    <strong>三大核心资产：</strong><br>
+    • <strong>Calcasieu Pass (CP)</strong> — 已商业运营 (2025年4月COD)，约10 MTPA产能<br>
+    • <strong>Plaquemines LNG</strong> — 调试阶段，36台液化列车全部启动，2026年Q4目标COD，约20 MTPA<br>
+    • <strong>CP2 LNG</strong> — 在建，Phase I预计2027年底首产，Phase II 2026年3月获FID，约29 MTPA<br><br>
+    <strong>关键数据：</strong> 2025年1月IPO（$23-27/股，融资$18亿）| 总签约长期收入 >$1,340亿 | 49 MTPA 长期购销协议 | 2025年出口380船LNG
+  </div>
+</section>
+
+<!-- S2: KPI -->
+<section class="section">
+  <div class="stitle">核心财务指标 — Q4 2025 & 全年</div>
+  <div style="font-size:12px;color:var(--text3);margin-bottom:8px;">▎Q4 2025 单季</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">营收</div><div class="kpi-v">$44.5亿</div><span class="badge up">YoY +192%</span></div>
+    <div class="kpi"><div class="kpi-l">经营利润</div><div class="kpi-v">$17.2亿</div><span class="badge up">YoY +189%</span></div>
+    <div class="kpi"><div class="kpi-l">归母净利润</div><div class="kpi-v">$10.7亿</div><span class="badge up">YoY +23%</span></div>
+    <div class="kpi"><div class="kpi-l">稀释EPS</div><div class="kpi-v">$0.41</div><span class="badge nt">略低于预期</span></div>
+    <div class="kpi"><div class="kpi-l">调整后EBITDA</div><div class="kpi-v">$20.0亿</div><span class="badge up">YoY +191%</span></div>
+    <div class="kpi"><div class="kpi-l">出口船次</div><div class="kpi-v">128船</div><span class="badge up">YoY +288%</span></div>
+    <div class="kpi"><div class="kpi-l">LNG销量(TBtu)</div><div class="kpi-v">478.3</div><span class="badge up">YoY +275%</span></div>
+    <div class="kpi"><div class="kpi-l">Plaquemines液化费</div><div class="kpi-v">$6.02/MMBtu</div><span class="badge nt">调试期费率</span></div>
+  </div>
+  <div style="font-size:12px;color:var(--text3);margin:20px 0 8px;">▎全年 2025</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">营收</div><div class="kpi-v">$137.7亿</div><span class="badge up">YoY +177%</span></div>
+    <div class="kpi"><div class="kpi-l">经营利润</div><div class="kpi-v">$51.6亿</div><span class="badge up">YoY +192%</span></div>
+    <div class="kpi"><div class="kpi-l">归母净利润</div><div class="kpi-v">$22.6亿</div><span class="badge up">YoY +53%</span></div>
+    <div class="kpi"><div class="kpi-l">稀释EPS</div><div class="kpi-v">$0.86</div><span class="badge up">YoY +51%</span></div>
+    <div class="kpi"><div class="kpi-l">调整后EBITDA</div><div class="kpi-v">$62.7亿</div><span class="badge up">YoY +198%</span></div>
+    <div class="kpi"><div class="kpi-l">总出口船次</div><div class="kpi-v">380船</div><span class="badge up">YoY +170%</span></div>
+    <div class="kpi"><div class="kpi-l">经营现金流</div><div class="kpi-v">$65.7亿</div><span class="badge up">YoY +205%</span></div>
+    <div class="kpi"><div class="kpi-l">FCF（含Capex）</div><div class="kpi-v">-$68.0亿</div><span class="badge dn">建设期大额资本支出</span></div>
+  </div>
+</section>
+
+<!-- S3: TABLE -->
+<section class="section">
+  <div class="stitle">年度财务趋势（百万美元）</div>
+  <div class="tbl-wrap">
+  <table class="tbl">
+    <thead><tr>
+      <th>指标</th><th>FY 2021</th><th>FY 2022</th><th>FY 2023</th><th>FY 2024</th><th>FY 2025</th><th>YoY</th>
+    </tr></thead>
+    <tbody>
+      <tr class="hl"><td>营收</td><td>—</td><td>6,448</td><td>7,897</td><td>4,972</td><td>13,769</td><td style="color:var(--green)">+177%</td></tr>
+      <tr><td>毛利润</td><td>-335</td><td>3,713</td><td>5,108</td><td>2,085</td><td>6,097</td><td style="color:var(--green)">+192%</td></tr>
+      <tr><td>毛利率</td><td>—</td><td>57.6%</td><td>64.7%</td><td>41.9%</td><td>44.3%</td><td style="color:var(--green)">+2.3pp</td></tr>
+      <tr class="hl"><td>经营利润</td><td>-337</td><td>3,555</td><td>4,850</td><td>1,763</td><td>5,156</td><td style="color:var(--green)">+192%</td></tr>
+      <tr><td>经营利润率</td><td>—</td><td>55.1%</td><td>61.4%</td><td>35.5%</td><td>37.4%</td><td style="color:var(--green)">+2.0pp</td></tr>
+      <tr class="hl"><td>净利润（归母）</td><td>-436</td><td>1,858</td><td>2,681</td><td>1,475</td><td>2,260</td><td style="color:var(--green)">+53%</td></tr>
+      <tr><td>净利率</td><td>—</td><td>28.8%</td><td>33.9%</td><td>29.7%</td><td>16.4%</td><td style="color:var(--red)">-13.3pp</td></tr>
+      <tr><td>利息支出</td><td>52</td><td>592</td><td>641</td><td>584</td><td>1,454</td><td style="color:var(--red)">+149%</td></tr>
+      <tr><td>经营现金流</td><td>-503</td><td>3,702</td><td>4,550</td><td>2,149</td><td>6,566</td><td style="color:var(--green)">+205%</td></tr>
+      <tr><td>资本支出</td><td>2,009</td><td>4,618</td><td>8,091</td><td>13,717</td><td>13,365</td><td style="color:var(--green)">-3%</td></tr>
+      <tr class="hl"><td>自由现金流</td><td>-2,512</td><td>-916</td><td>-3,541</td><td>-11,568</td><td>-6,799</td><td style="color:var(--green)">改善</td></tr>
+      <tr><td>总资产</td><td>—</td><td>15,097</td><td>28,463</td><td>43,491</td><td>53,446</td><td style="color:var(--green)">+23%</td></tr>
+      <tr><td>总债务</td><td>—</td><td>10,945</td><td>21,168</td><td>29,812</td><td>34,901</td><td style="color:var(--red)">+17%</td></tr>
+      <tr><td>现金</td><td>—</td><td>1,009</td><td>5,343</td><td>3,777</td><td>2,550</td><td style="color:var(--red)">-32%</td></tr>
+      <tr class="hl"><td>净债务</td><td>—</td><td>9,936</td><td>15,825</td><td>26,035</td><td>32,351</td><td style="color:var(--red)">+24%</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div style="background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin-top:14px;font-size:13px;color:var(--accent3);">
+    ⚠️ <strong>关键理解</strong>：VG当前处于大规模建设期（Plaquemines + CP2），FCF持续为负是资本支出驱动而非运营亏损。经营现金流 $65.7亿 非常健康，一旦建设完成（2027-2028），FCF将大幅转正。这与传统"亏损公司"有本质区别。
+  </div>
+</section>
+
+<!-- S4: CHARTS -->
+<section class="section">
+  <div class="stitle">营收与EBITDA趋势</div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">年度营收 & EBITDA ($B)</div><div class="cwrap"><canvas id="c1"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">经营利润率 & 净利率 (%)</div><div class="cwrap"><canvas id="c2"></canvas></div></div>
+  </div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">资本支出 vs 经营现金流 ($B)</div><div class="cwrap"><canvas id="c3"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">LNG出口量 (船次)</div><div class="cwrap"><canvas id="c4"></canvas></div></div>
+  </div>
+  <div class="cgrid3">
+    <div class="ccard"><div class="ctitle">债务 vs 资产 ($B)</div><div class="cwrap"><canvas id="c5"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">Q4 2025 营收来源</div><div class="cwrap"><canvas id="c6"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">2026E EBITDA 三情景 ($B)</div><div class="cwrap"><canvas id="c7"></canvas></div></div>
+  </div>
+</section>
+
+<!-- S5: SANKEY -->
+<section class="section">
+  <div class="stitle">资金流向桑基图 — FY2025 ($B)</div>
+  <div class="ccard">
+    <div style="font-size:12px;color:var(--text3);margin-bottom:6px;">从LNG销售收入到自由现金流的完整流向</div>
+    <div id="sankey"></div>
+  </div>
+</section>
+
+<!-- S6: PROJECT DETAIL -->
+<section class="section">
+  <div class="stitle">三大LNG项目详解</div>
+  <div class="agrid">
+    <div class="acard" style="border-top:3px solid var(--green);">
+      <h4>🟢 Calcasieu Pass (CP) — 已商业运营</h4>
+      <ul>
+        <li>状态：2025年4月达到COD（商业运营日），美国第7大LNG出口设施</li>
+        <li>产能：约10 MTPA（peak），18台液化列车</li>
+        <li>Q4出口：38船（略低预期，受船舶可用性+大西洋风暴影响）</li>
+        <li>液化费：$2.01/MMBtu（Q4实现，含仲裁准备金）；2026E $1.98/MMBtu</li>
+        <li>仲裁：Repsol案1月获胜（无赔偿责任）；BP案进行中，估计对收入影响约$1,300万/季</li>
+        <li>盈利能力：稳定运营中，但受长期SPA定价限制，利润率低于调试期Plaquemines</li>
+      </ul>
+    </div>
+    <div class="acard" style="border-top:3px solid var(--gold);">
+      <h4>📊 Plaquemines LNG — 调试冲刺阶段</h4>
+      <ul>
+        <li>状态：全部36台液化列车已初始启动，日产超1船调试货物</li>
+        <li>产能：约20 MTPA（peak）；已申请FERC扩容至35 MTPA</li>
+        <li>2025出口：234船（占全公司62%）</li>
+        <li>液化费：$6.02/MMBtu（Q4调试期费率，远高于CP的$2.01）</li>
+        <li>时间线：Q2 2026切换永久电力，夏季完成EPC实质完工，Q4 2026 目标COD</li>
+        <li>融资：发行$30亿票据，偿还$32亿建设贷款</li>
+        <li>扩张：已向DOE和FERC申请31 MTPA bolt-on扩建</li>
+      </ul>
+    </div>
+    <div class="acard" style="border-top:3px solid var(--accent2);">
+      <h4>🔵 CP2 LNG — 在建，规模最大</h4>
+      <ul>
+        <li>Phase I：按预算按时推进，首个LNG储罐创行业最快封顶记录</li>
+        <li>26台液化列车中6台已交付上基础，预处理模块即将安装</li>
+        <li>Phase I 预计2027年底首产，产能约20 MTPA</li>
+        <li>Phase II：<span style="color:var(--green);font-weight:600;">2026年3月获FID</span>，追加约9 MTPA</li>
+        <li>合计产能：29 MTPA（peak），几乎全部签约</li>
+        <li>已投入$17亿权益资金，项目融资已完成</li>
+        <li>计划bolt-on扩建 +6.4 MTPA</li>
+      </ul>
+    </div>
+    <div class="acard" style="border-top:3px solid var(--rose);">
+      <h4>📈 商业签约 & 全球布局</h4>
+      <ul>
+        <li>总签约：49 MTPA 长期/中期购销协议，$1,340亿+合同收入</li>
+        <li>2025年新签：9.25 MTPA 二十年SPA</li>
+        <li>新客户：韩华航空（1.5 MTPA / 20年），Trafigura（0.5 MTPA / 5年，净利差>$3）</li>
+        <li>2026年已签约比例：69%的预期货物</li>
+        <li>客户分布：欧洲、亚洲、全球贸易商，高度分散化</li>
+        <li>核心优势：低成本、高产量、模块化建设——行业最快建设速度</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- S7: EARNINGS CALL -->
+<section class="section">
+  <div class="stitle">电话会议完整内容 — 逐条记录 + 利好/利空判断</div>
+
+  <div class="ec-block">
+    <h3>📌 CEO 开场 — Michael Sabel</h3>
+
+    <div class="ec-item">
+      <div class="ec-quote">「2025年是公司具有里程碑意义的一年。我们完成了1月的IPO、4月Calcasieu Pass商业运营、Plaquemines持续调试斜坡式爬产，以及CP2启动建设并完成Phase I融资。我们正在同时建设57 MTPA以上的产能。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">同时推进两个超大型项目的执行力令人印象深刻。57 MTPA在建产能相当于Cheniere Energy全部运营产能，体现了极强的项目管理能力。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「Plaquemines现在每天产出超过一船调试货物。所有36台液化列车已完成初始启动。我们预计Phase I将在Q2切换到永久电厂配置，在夏末实现EPC实质完工。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">日产一船是Plaquemines产能爬升的重要里程碑。36台列车全部启动意味着产能验证基本完成，2026年COD目标可信度大幅提升。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「CP2 Phase I建设按预算按时推进。首个LNG储罐以行业创纪录的速度完成封顶。6台液化列车已交付并安装到基础上，首个预处理模块即将到位。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">CP2建设提前于进度是少见的好消息——LNG项目通常延期超支。创纪录的封顶速度验证了VG模块化建设方法的优势。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「自去年4月重新进入签约市场以来，我们签署了9.25 MTPA的新20年SPA。今天额外宣布与Trafigura签署0.5 MTPA的5年合同（净利差超过$3），以及与韩华航空签署1.5 MTPA的20年SPA——这是我们首个韩国长期客户。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">Trafigura的$3+净利差体现了中短期合同的高利润率。韩国客户的突破意味着亚太市场开拓加速，且20年期限锁定了长期收入可见性。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「公司拥有超过$1,340亿的已签约第三方收入，以及49 MTPA的长期和中期购销协议基础。总资产在年内增长约$100亿至$534亿。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">$1,340亿合同收入提供了极高的长期现金流可见性。对于一个市值$400亿的公司来说，合同价值是市值的3.3倍——未来收入的确定性非常高。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「Calcasieu Pass在Q4出口38船，略低于预期——主要因船舶可用性和大西洋风暴延误。Repsol仲裁案我们在1月获得'无赔偿责任'的有利裁决。对于其余仲裁案（含BP），目前最佳估计是每季度减少CP收入约$1,300万的非现金准备金，贯穿20年SPA期限。」</div>
+      <span class="ec-tag tag-neut">📊 中性</span>
+      <div class="ec-note">Repsol案胜诉是好消息，但BP仲裁持续是不确定因素。$1,300万/季的影响虽小（不到收入的1%），但20年期限意味着累计影响约$10.4亿——不算无足轻重。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「我们已向FERC申请将Plaquemines和CP2的授权峰值液化产能提高至35 MTPA，并向FERC和DOE申请在Plaquemines进行最多31 MTPA的bolt-on扩建。我们预计将在CP2和Plaquemines都进行bolt-on扩建——每个约增加6.4 MTPA。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">Bolt-on扩建是最优的增长路径——利用现有基础设施、约20个月建成、资本效率远高于绿地项目。如果获批，总产能可从目前的~60 MTPA提升至~73 MTPA。</div>
+    </div>
+  </div>
+
+  <div class="ec-block">
+    <h3>📌 CFO 财务详述 — Jack Thayer</h3>
+
+    <div class="ec-item">
+      <div class="ec-quote">「Q4营收$44亿，同比增长192%，主要由更高的销售量驱动（478 TBtu vs 128 TBtu），部分被更低的净费率抵消。全年营收$138亿，同比增长177%。Q4调整后EBITDA $20亿，同比增长191%；全年调整后EBITDA $63亿，同比增长198%。」</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">近3倍的营收增长和EBITDA增长令人震撼，主要得益于Plaquemines产量爬坡。值得注意的是EBITDA增速略低于营收增速，说明成本也在同步上升。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「Q4归母净利润$10.7亿，同比增长23%——增速远低于EBITDA的191%。这主要因为更高的利息支出和利率互换变动的负面影响。全年利息支出从$5.84亿增长至$14.54亿——增长了149%。」</div>
+      <span class="ec-tag tag-bear">🔴 利空</span>
+      <div class="ec-note">利息支出暴增149%是最大隐忧。$14.5亿的年度利息占EBITDA的23%，意味着每赚$4就有$1给了债主。高杠杆在增长期可接受，但利率风险和再融资风险不容忽视。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「融资方面：我们发行了$30亿Plaquemines票据并偿还了$32亿建设贷款，同时获得了$20亿公司循环信贷额度（年末未动用）。」</div>
+      <span class="ec-tag tag-neut">📊 中性偏好</span>
+      <div class="ec-note">债务结构优化（建设贷→票据）降低了短期再融资压力。$20亿未动用的循环额度提供了充足的流动性缓冲。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「Plaquemines Q4实现加权平均液化费$6.02/MMBtu，但受到12月Henry Hub价格上涨、航运日租金上升和TTF基本持平的压缩。Calcasieu Pass Q4实现$2.01/MMBtu，2026年预计$1.98/MMBtu。」</div>
+      <span class="ec-tag tag-neut">📊 中性</span>
+      <div class="ec-note">Plaquemines调试期的$6.02利润丰厚但不可持续——COD后将按SPA合同定价（通常$3-4）。CP的$2.01反映成熟资产的稳定但较低回报率。关键看合同组合的加权利差。</div>
+    </div>
+  </div>
+
+  <div class="ec-block">
+    <h3>📌 2026年指引与市场展望</h3>
+
+    <div class="ec-item">
+      <div class="ec-quote">「2026年预计出口486-527船：Calcasieu Pass 145-156船，Plaquemines 341-371船。Plaquemines范围较宽反映调试不确定性和潜在修复中断。」</div>
+      <span class="ec-tag tag-neut">📊 中性</span>
+      <div class="ec-note">指引比2025年实际（380船）增长28-39%，增量全部来自Plaquemines继续爬坡。但宽幅指引（41船差距）暗示执行仍有不确定性。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「2026年调整后EBITDA指引$52-58亿，假设剩余未售货物的液化费$5-6/MMBtu。液化费每变动$1/MMBtu，EBITDA影响约$5.75-6.25亿。」</div>
+      <span class="ec-tag tag-bear">🔴 利空偏中性</span>
+      <div class="ec-note">2026E EBITDA指引中值$55亿 低于 2025A的$63亿——这意味着利润率压缩。核心原因是Plaquemines从高利润的调试期切换到正常SPA定价。市场看到的是"增速放缓"。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「Q1 2026将受到Winter Storm Fern的影响和利润率压缩。目前2026年69%的潜在货物已签约，预计签约比例还将随新合同签署继续提升。」</div>
+      <span class="ec-tag tag-neut">📊 中性</span>
+      <div class="ec-note">Q1季节性弱势+风暴影响已被提前沟通。69%签约率提供底部保障，但31%敞口暴露在现货价格波动下。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「CP2 Phase II FID预计在2026年上半年完成，目前已签署5 MTPA的20年SPA支持融资。我们已投入$17亿权益资金。」——注：Phase II于2026年3月14日正式获得FID和项目融资交割。</div>
+      <span class="ec-tag tag-bull">🟢 利好</span>
+      <div class="ec-note">Phase II FID已于3/14达成，是VG第五个FID——不到7年实现5个FID在LNG行业史无前例。这进一步验证了VG的融资能力和项目执行力。</div>
+    </div>
+
+    <div class="ec-item">
+      <div class="ec-quote">「美国将在稳定全球LNG市场中发挥关键角色。VG拥有市场上最大的可用货物量之一。低且稳定的LNG价格长期可以增加需求。航运约束和费率是近期关键变量。」</div>
+      <span class="ec-tag tag-neut">📊 中性</span>
+      <div class="ec-note">管理层对LNG宏观前景乐观但也坦诚面临航运瓶颈。"最大可用货物量"说明VG已成为全球LNG定价的重要参与者。</div>
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div style="background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin-top:16px;">
+    <div style="font-size:14px;font-weight:700;color:var(--accent3);margin-bottom:12px;">📊 电话会议信号汇总</div>
+    <table class="tbl" style="font-size:12.5px;">
+      <thead><tr><th>信号类别</th><th>数量</th><th>代表性内容</th></tr></thead>
+      <tbody>
+        <tr><td><span class="ec-tag tag-bull" style="font-size:11px;">🟢 利好</span></td><td style="color:var(--green);font-weight:700;">8项</td><td>产能爬坡超预期、CP2建设提前、签约$1,340亿、bolt-on扩建计划、Phase II FID达成</td></tr>
+        <tr><td><span class="ec-tag tag-neut" style="font-size:11px;">📊 中性</span></td><td style="color:var(--accent2);font-weight:700;">6项</td><td>2026指引宽幅范围、Q1风暴影响、69%签约率、CP液化费偏低、航运瓶颈</td></tr>
+        <tr><td><span class="ec-tag tag-bear" style="font-size:11px;">🔴 利空</span></td><td style="color:var(--red);font-weight:700;">2项</td><td>利息支出暴增149%、2026E EBITDA低于2025A（利润率压缩）</td></tr>
+      </tbody>
+    </table>
+    <div style="font-size:12px;color:var(--text2);margin-top:10px;line-height:1.6;">
+      <strong>总体基调：</strong>管理层高度自信，以"执行力+规模化+长期合同"为核心叙事。利好集中在项目进展和签约（强执行验证），利空集中在债务成本和短期利润率压缩。整体属于"建设期阵痛、曙光在2027-2028"的故事。
+    </div>
+  </div>
+</section>
+
+<!-- S8: VALUATION -->
+<section class="section">
+  <div class="stitle">估值多角度审视</div>
+
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin-bottom:16px;">
+    <div style="font-size:13px;font-weight:600;color:var(--accent3);margin-bottom:8px;">估值对比表</div>
+    <table class="tbl" style="font-size:13px;">
+      <thead><tr><th>指标</th><th>VG</th><th>Cheniere (LNG)</th><th>行业参考</th></tr></thead>
+      <tbody>
+        <tr><td>EV/EBITDA (TTM)</td><td style="font-weight:600;">11.5x</td><td>~10-11x</td><td>LNG基础设施 10-14x</td></tr>
+        <tr><td>EV/EBITDA (2026E)</td><td style="color:var(--red);">13.1x</td><td>~10x</td><td>溢价反映增长预期</td></tr>
+        <tr><td>P/E (TTM)</td><td>17.7x</td><td>~14x</td><td>—</td></tr>
+        <tr><td>P/OCF</td><td style="color:var(--green);">6.1x</td><td>~8x</td><td>现金流视角便宜</td></tr>
+        <tr><td>P/B</td><td>5.9x</td><td>—</td><td>重资产高杠杆</td></tr>
+        <tr><td>净债务/EBITDA</td><td style="color:var(--red);">5.2x</td><td>~2.5x</td><td>建设期高杠杆</td></tr>
+        <tr><td>利息覆盖率</td><td style="color:var(--gold);">4.3x</td><td>~8x</td><td>杠杆尚可控</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:14px 18px;font-size:13px;color:var(--red);margin-bottom:16px;">
+    ⚠️ <strong>估值核心矛盾</strong>：EV/EBITDA看起来合理（11.5x），但净债务/EBITDA高达5.2x，远超Cheniere的2.5x。意味着：如果EBITDA不能按计划增长（项目延期/LNG价格暴跌），$349亿的债务负担将成为噩梦。高杠杆放大了向上和向下的弹性。
+  </div>
+
+  <div class="agrid">
+    <div class="acard">
+      <h4>📊 2026 指引 & Forward 估值</h4>
+      <ul>
+        <li>2026E EBITDA：$52-58亿（中值$55亿）</li>
+        <li>2026E 出口：486-527船</li>
+        <li>Forward EV/EBITDA：13.1x（vs 2025A的11.5x）</li>
+        <li>利润率压缩原因：调试期→正常SPA定价转换</li>
+        <li>液化费每$1波动 → EBITDA影响约$6亿</li>
+        <li>2027-2028才是真正价值释放期（CP2 Phase I投产）</li>
+      </ul>
+    </div>
+    <div class="acard">
+      <h4>📈 稳态盈利潜力（2028E+）</h4>
+      <ul>
+        <li>Calcasieu Pass 稳态：$6-8亿 EBITDA/年</li>
+        <li>Plaquemines 稳态：$40-50亿 EBITDA/年</li>
+        <li>CP2 Phase I 稳态：$40-50亿 EBITDA/年</li>
+        <li><strong>合计稳态EBITDA：$86-108亿/年</strong></li>
+        <li>@ 10x EV/EBITDA → EV $860-1,080亿</li>
+        <li>减净债务$350亿 → 权益$510-730亿</li>
+        <li>→ <strong>每股$21-30</strong>（vs 当前$16.23）</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- S9: BUFFETT ANALYSIS -->
+<section class="section">
+  <div class="stitle">巴菲特六维分析</div>
+
+  <div class="bscore"><div class="circle cw">B</div><div class="bd">
+    <h4>护城河：规模+速度优势，但LNG是大宗商品</h4>
+    <p>VG的核心竞争力是建设速度（行业最快）和低成本模块化方法。但LNG本质上是大宗商品——没有定价权，利润取决于Henry Hub与TTF/JKM的价差。长期SPA提供了收入确定性，但不等于护城河。真正的壁垒是$500亿+的资产规模和FERC审批门槛。</p>
+  </div></div>
+
+  <div class="bscore"><div class="circle cg">B+</div><div class="bd">
+    <h4>管理层：极强的执行力，但杠杆使用激进</h4>
+    <p>CEO Michael Sabel带领VG在不到7年内完成5个FID——LNG行业史无前例。项目按时按预算推进是少见的。但管理层对杠杆的使用极其激进（净债务/EBITDA 5.2x），如果项目延期，后果严重。IPO定价$23-27也显得过于自信。</p>
+  </div></div>
+
+  <div class="bscore"><div class="circle cr">C+</div><div class="bd">
+    <h4>财务健康：盈利优秀但负债惊人</h4>
+    <p>经营层面非常健康：$65.7亿经营现金流、37%经营利润率、$63亿EBITDA。但$349亿总债务是市值的近9倍（！），利息支出$14.5亿吞噬了EBITDA的23%。净债务$323亿意味着这是一个高度杠杆化的赌注——押注LNG需求持续增长+项目按时完工。</p>
+  </div></div>
+
+  <div class="bscore"><div class="circle cg">A-</div><div class="bd">
+    <h4>盈利质量：合同收入高度可预测</h4>
+    <p>$1,340亿已签约收入提供了极高的长期现金流可见性。49 MTPA的20年SPA意味着未来10-20年的收入基本锁定。这是巴菲特最喜欢的"收费桥梁"模式——建好桥，收20年过路费。但调试期利润率不可外推，COD后利润率将回归正常。</p>
+  </div></div>
+
+  <div class="bscore"><div class="circle cw">B-</div><div class="bd">
+    <h4>可预测性：长期清晰，短期波动大</h4>
+    <p>一旦所有项目投产（2028+），盈利可预测性极高——固定合同+低变动成本。但当前处于建设/调试阶段，季度业绩波动巨大（调试期vs运营期费率差异、天气影响、航运约束）。此外，BP仲裁和LNG价格波动是持续的不确定因素。</p>
+  </div></div>
+
+  <div class="bscore"><div class="circle cr">C</div><div class="bd">
+    <h4>资本配置纪律：极度激进的扩张</h4>
+    <p>VG的策略是"全力加速"——同时建设57 MTPA产能、每年$130亿+资本支出、净债务从$100亿升至$323亿。这不是巴菲特式的保守资本配置。IPO融资$18亿、公司股息仅$0.067/股，说明所有现金都投入了增长。如果LNG市场转向——供过于求或价格暴跌——这种激进扩张可能变成致命弱点。</p>
+  </div></div>
+</section>
+
+<!-- S10: DCF THREE SCENARIOS -->
+<section class="section">
+  <div class="stitle">三情景估值 — EV/EBITDA框架</div>
+
+  <div style="font-size:12px;color:var(--text3);margin-bottom:16px;">基于稳态EBITDA的EV/EBITDA估值 | 总股本 ~24.3亿股 | 当前净债务 $323亿</div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:18px;">
+    <div class="acard" style="border-top:3px solid var(--green);">
+      <h4 style="color:var(--green);">🟢 乐观情景</h4>
+      <ul style="font-size:12.5px;">
+        <li>假设：所有项目按时完工+bolt-on获批+LNG利差$5-6/MMBtu</li>
+        <li>稳态EBITDA（2029E）：<strong>$120亿</strong></li>
+        <li>EV/EBITDA：<strong>11x</strong></li>
+        <li>企业价值：$1,320亿</li>
+        <li>减 净债务（2029E）：~$280亿</li>
+        <li>权益价值：$1,040亿</li>
+        <li style="font-weight:700;color:var(--green);">每股：~$42.8</li>
+        <li>vs $16.23 → <strong>上行164%</strong></li>
+      </ul>
+    </div>
+
+    <div class="acard" style="border-top:3px solid var(--gold);">
+      <h4 style="color:var(--gold);">📊 中性情景（基准）</h4>
+      <ul style="font-size:12.5px;">
+        <li>假设：Phase I按时完工、Phase II延期6个月、LNG利差$4-5/MMBtu</li>
+        <li>稳态EBITDA（2029E）：<strong>$90亿</strong></li>
+        <li>EV/EBITDA：<strong>10x</strong></li>
+        <li>企业价值：$900亿</li>
+        <li>减 净债务（2029E）：~$300亿</li>
+        <li>权益价值：$600亿</li>
+        <li style="font-weight:700;color:var(--gold);">每股：~$24.7</li>
+        <li>vs $16.23 → <strong>上行52%</strong></li>
+      </ul>
+    </div>
+
+    <div class="acard" style="border-top:3px solid var(--red);">
+      <h4 style="color:var(--red);">🔴 悲观情景</h4>
+      <ul style="font-size:12.5px;">
+        <li>假设：CP2延期1年+LNG供过于求利差<$3/MMBtu+仲裁大额赔偿</li>
+        <li>稳态EBITDA（2030E）：<strong>$60亿</strong></li>
+        <li>EV/EBITDA：<strong>8x</strong></li>
+        <li>企业价值：$480亿</li>
+        <li>减 净债务（2030E）：~$350亿</li>
+        <li>权益价值：$130亿</li>
+        <li style="font-weight:700;color:var(--red);">每股：~$5.3</li>
+        <li>vs $16.23 → <strong>下行67%</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="tbl-wrap" style="margin-bottom:18px;">
+    <table class="tbl" style="font-size:13px;">
+      <thead><tr><th>情景</th><th>稳态EBITDA</th><th>EV/EBITDA</th><th>每股价值</th><th>vs $16.23</th></tr></thead>
+      <tbody>
+        <tr><td style="color:var(--green);font-weight:600;">🟢 乐观</td><td>$120亿</td><td>11x</td><td style="color:var(--green);font-weight:700;">$42.8</td><td style="color:var(--green)">+164%</td></tr>
+        <tr class="hl"><td style="color:var(--gold);font-weight:600;">📊 中性</td><td>$90亿</td><td>10x</td><td style="color:var(--gold);font-weight:700;">$24.7</td><td style="color:var(--green)">+52%</td></tr>
+        <tr><td style="color:var(--red);font-weight:600;">🔴 悲观</td><td>$60亿</td><td>8x</td><td style="color:var(--red);font-weight:700;">$5.3</td><td style="color:var(--red)">-67%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ccard" style="margin-bottom:18px;">
+    <div class="ctitle">三情景估值对比</div>
+    <div style="position:relative;height:260px;"><canvas id="c8"></canvas></div>
+  </div>
+
+  <!-- VERDICT -->
+  <div class="verdict">
+    <div class="verdict-t">🎯 综合裁决</div>
+    <div style="line-height:1.8;margin-bottom:14px;">
+      当前股价 $16.23 处于52周区间 $5.72-$19.50 的中段，低于IPO价$23-27约35-40%。三情景分析显示：<br>
+      • 中性情景目标价 $24.7 → 上行52%<br>
+      • 悲观情景 $5.3 → 下行67%<br>
+      • 乐观情景 $42.8 → 上行164%<br><br>
+      <strong style="color:var(--accent3);">风险收益比约 1:0.8 至 1:2.5</strong> — 取决于你对项目执行和LNG价格的信心。这不是典型的巴菲特标的——太多杠杆、太依赖大宗商品价格、建设期不确定性高。但如果执行到位，当前价格低于中性估值38%，具有吸引力。
+    </div>
+    <div class="pgrid">
+      <div class="pbox"><div class="pl">当前股价</div><div class="pv pc">$16.23</div><div class="pn">52周: $5.72-$19.50</div></div>
+      <div class="pbox"><div class="pl">中性目标价</div><div class="pv pf">$24.7</div><div class="pn">10x 稳态EBITDA</div></div>
+      <div class="pbox"><div class="pl">悲观底部</div><div class="pv" style="color:var(--red);">$5.3</div><div class="pn">高杠杆风险</div></div>
+    </div>
+    <div style="background:rgba(185,160,106,.1);border:1px solid rgba(185,160,106,.3);border-radius:8px;padding:14px;">
+      <div style="color:var(--gold);font-weight:700;margin-bottom:6px;">⚖️ 结论：投机性买入（Speculative Buy）— 非传统价投标的</div>
+      <div style="font-size:13px;line-height:1.8;">
+        <strong>核心判断：高杠杆+高成长的基础设施赌注。不是巴菲特的菜，但赔率可能有利。</strong><br><br>
+        <strong>为什么不是"买入"：</strong><br>
+        ① 净债务$323亿 ≈ 市值的8倍 → 任何项目延期或LNG价格崩盘都可能是灾难<br>
+        ② 2026 EBITDA指引低于2025（利润率压缩），短期催化不足<br>
+        ③ IPO不到1年，管理层track record有限（仅VG这一家公司）<br>
+        ④ 公众流通股仅488M（总股本的20%），股东结构不透明<br><br>
+        <strong>为什么值得关注：</strong><br>
+        ① $1,340亿合同收入 = 市值的33倍 → 长期现金流确定性极高<br>
+        ② 稳态EBITDA $90-120亿 → 当前EV仅6-8x稳态EBITDA，极具吸引力<br>
+        ③ 全球能源安全需求 + 欧洲去俄气 → LNG需求结构性增长<br>
+        ④ 项目执行力已被验证（5个FID、按时交付Calcasieu Pass）<br><br>
+        <strong>操作建议：</strong><br>
+        • 风险偏好较高的投资者：当前价建小仓位（组合1-2%），等2026 Q2 Plaquemines COD验证后加仓<br>
+        • 保守投资者：等Plaquemines正式COD + Q3 2026财报确认稳态利润率后再入场<br>
+        • 止损线：$10以下（意味着悲观情景正在兑现）<br>
+        • 加仓触发：Plaquemines COD + 稳态EBITDA确认>$70亿/年<br><br>
+        <span style="color:var(--red)">⚠️ 主要风险：LNG价格暴跌 / 项目延期超支 / 利率上升推高债务成本 / BP仲裁大额赔偿 / 地缘政治影响LNG贸易 / 股东结构不透明（80%非流通）/ 环保监管收紧</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S11: COMMENTARY -->
+<section class="section">
+  <div class="stitle">🍔 巴菲特风格深度点评</div>
+  <div class="cmt">
+    <p>如果你要我用一句话概括Venture Global，那就是：<span class="hl-t">这是一场$350亿的赌博——赌LNG是21世纪的"过渡燃料之王"，赌这个团队能比任何人更快地把气变成钱</span>。</p>
+
+    <p>先说好的。VG做到了LNG行业从未做到的事：不到7年拿下5个FID、同时建设57 MTPA产能（接近Cheniere全部运营产能）、Calcasieu Pass按时投产。$1,340亿的已签约合同收入——如果你把它想象成一座收费桥梁，这座桥在建好之前就已经预售了20年的过路费。这种收入可见性，连可口可乐都羡慕。</p>
+
+    <p>Plaquemines日产一船LNG——这台机器正在加速。CP2创下行业最快封顶记录。管理层的执行力不是说说而已，是用钢筋水泥证明的。如果一切按计划走，到2028-2029年，这家公司将拥有$90-120亿的稳态EBITDA，以当前估值计算，<span class="hl-t">稳态EV/EBITDA仅6-8倍——这在基础设施领域是非常便宜的</span>。</p>
+
+    <p>然后是让我睡不着觉的部分。</p>
+
+    <p><span class="warn-t">$349亿的总债务。</span>这不是打字错误。三百四十九亿美元。是市值的近9倍。利息支出$14.5亿/年——每天烧掉$400万用于还息。虽然利息覆盖率4.3x还算安全，但如果EBITDA因为LNG价格崩盘而腰斩，这个数字瞬间变成2x——那就是"打电话给债权人"的时刻了。</p>
+
+    <p>2026年的EBITDA指引$52-58亿<span class="warn-t">低于</span>2025年的$63亿。没错，指引是下降的。原因是Plaquemines从高利润的调试期（$6.02/MMBtu）过渡到正常合同定价（$3-4/MMBtu）。这不是坏事——说明项目在从"试运行"走向"正式运营"——但华尔街看到的是"利润下滑"，短期股价可能承压。</p>
+
+    <p>更深层的问题是：<span class="warn-t">全球LNG市场正在从紧缺走向平衡</span>。2022-2023年的"能源危机溢价"正在消退。卡塔尔、莫桑比克、加拿大、甚至更多美国项目都在上产能。如果2027-2028年出现供过于求——VG的$6/MMBtu利差可能压缩到$3或更低。在$349亿债务的放大效应下，利差每压缩$1，EBITDA就少$6亿——这不是小数字。</p>
+
+    <p>我对这只股票的态度是：<span class="hl-t">它不是巴菲特标的——但它可能是一个好的投机</span>。巴菲特不会碰$349亿债务的能源公司，就像他不会碰航空股一样。但如果你有风险承受能力，当前$16的价格是在为"一切都会出错"定价——股价比IPO价低了35%。如果现实比最坏情况好哪怕一点点，你就有赚头。</p>
+
+    <p><span class="hl-t">我的策略：观望为主，小仓位试探（组合的1%以内）。</span>等两个催化剂：①Plaquemines 2026年COD达成；②Q3 2026财报确认稳态利润率。如果都验证了，$16可能是个好价格。如果没有——记住，悲观情景的底部是$5。在"基础设施金矿"和"杠杆地雷"之间，答案取决于执行。耐心等待，让数据说话。</p>
+
+    <p style="color:var(--text3);font-size:12px;border-top:1px solid var(--border);padding-top:12px;margin-top:8px;">
+      ⚠️ 以上分析仅供研究参考，不构成投资建议。VG为高杠杆基础设施标的，波动极大，请结合自身风险承受能力做决策。
+    </p>
+  </div>
+</section>
+</div>
+
+<footer>
+  <div>Venture Global, Inc.（NYSE: VG）2025 Q4 & 全年深度分析</div>
+  <div style="margin-top:4px;">数据来源：VG IR官方、MarketBeat、StockAnalysis、Yahoo Finance</div>
+  <div style="margin-top:4px;">Buffy · AI 巴菲特分析引擎 · 2026-03-20 · 莫兰迪版</div>
+</footer>
+
+<script>
+function toggleTheme(){const h=document.documentElement;h.dataset.theme=h.dataset.theme==='dark'?'light':'dark';buildSankey()}
+Chart.defaults.color='#a89f98';Chart.defaults.font.family="'Segoe UI','PingFang SC',sans-serif";
+
+/* C1: Revenue & EBITDA */
+new Chart(document.getElementById('c1'),{type:'bar',data:{labels:['2021','2022','2023','2024','2025'],datasets:[
+{label:'营收',data:[0,6.4,7.9,5.0,13.8],backgroundColor:'rgba(123,143,160,.5)',borderColor:'#7b8fa0',borderWidth:1,borderRadius:4},
+{label:'Adj.EBITDA',data:[0,3.7,5.1,2.1,6.3],backgroundColor:'rgba(138,154,142,.5)',borderColor:'#8a9a8e',borderWidth:1,borderRadius:4}
+]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10}}},scales:{y:{grid:{color:'rgba(150,140,130,.15)'},ticks:{callback:v=>'$'+v+'B'}},x:{grid:{display:false}}}}});
+
+/* C2: Margins */
+new Chart(document.getElementById('c2'),{type:'line',data:{labels:['2022','2023','2024','2025'],datasets:[
+{label:'经营利润率',data:[55.1,61.4,35.5,37.4],borderColor:'#7b8fa0',fill:false,tension:.4,pointRadius:5,borderWidth:2},
+{label:'净利率',data:[28.8,33.9,29.7,16.4],borderColor:'#b9a06a',fill:false,tension:.4,pointRadius:5,borderWidth:2}
+]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10}}},scales:{y:{grid:{color:'rgba(150,140,130,.15)'},ticks:{callback:v=>v+'%'}},x:{grid:{display:false}}}}});
+
+/* C3: Capex vs OCF */
+new Chart(document.getElementById('c3'),{type:'bar',data:{labels:['2021','2022','2023','2024','2025'],datasets:[
+{label:'经营现金流',data:[-0.5,3.7,4.6,2.1,6.6],backgroundColor:'rgba(122,154,122,.5)',borderColor:'#7a9a7a',borderWidth:1,borderRadius:4},
+{label:'资本支出',data:[2.0,4.6,8.1,13.7,13.4],backgroundColor:'rgba(184,112,112,.4)',borderColor:'#b87070',borderWidth:1,borderRadius:4}
+]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10}}},scales:{y:{grid:{color:'rgba(150,140,130,.15)'},ticks:{callback:v=>'$'+v+'B'}},x:{grid:{display:false}}}}});
+
+/* C4: Cargoes */
+new Chart(document.getElementById('c4'),{type:'bar',data:{labels:['2024','2025','2026E低','2026E高'],datasets:[
+{label:'船次',data:[141,380,486,527],backgroundColor:['#7b8fa0','#8a9a8e','#b9a06a','#b9a06a'],borderWidth:1,borderRadius:4}
+]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{grid:{color:'rgba(150,140,130,.15)'}},x:{grid:{display:false}}}}});
+
+/* C5: Debt vs Assets */
+new Chart(document.getElementById('c5'),{type:'bar',data:{labels:['2022','2023','2024','2025'],datasets:[
+{label:'总资产',data:[15.1,28.5,43.5,53.4],backgroundColor:'rgba(138,154,142,.4)',borderWidth:1,borderRadius:4},
+{label:'总债务',data:[10.9,21.2,29.8,34.9],backgroundColor:'rgba(184,112,112,.4)',borderWidth:1,borderRadius:4}
+]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10}}},scales:{y:{grid:{color:'rgba(150,140,130,.15)'},ticks:{callback:v=>'$'+v+'B'}},x:{grid:{display:false}}}}});
+
+/* C6: Revenue source pie */
+new Chart(document.getElementById('c6'),{type:'doughnut',data:{labels:['Plaquemines调试','Calcasieu Pass','其他/优化'],datasets:[{data:[60,30,10],backgroundColor:['#8a9a8e','#7b8fa0','#b9a06a'],borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:11}}}},cutout:'62%'}});
+
+/* C7: 2026E EBITDA scenarios */
+new Chart(document.getElementById('c7'),{type:'bar',data:{labels:['悲观','指引低','指引高','乐观'],datasets:[{label:'$B',data:[4.5,5.2,5.8,6.5],backgroundColor:['#b87070','#b9a06a','#b9a06a','#7a9a7a'],borderWidth:1,borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{grid:{color:'rgba(150,140,130,.15)'},ticks:{callback:v=>'$'+v+'B'}},x:{grid:{display:false}}}}});
+
+/* C8: Three scenario valuation */
+new Chart(document.getElementById('c8'),{type:'bar',data:{labels:['悲观 $5.3','中性 $24.7','乐观 $42.8','当前 $16.23'],datasets:[{label:'每股价值',data:[5.3,24.7,42.8,16.23],backgroundColor:['#b87070','#b9a06a','#7a9a7a','#7b8fa0'],borderWidth:1,borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{grid:{color:'rgba(150,140,130,.15)'},ticks:{callback:v=>'$'+v}},x:{grid:{display:false}}}}});
+
+/* SANKEY */
+function buildSankey(){const isDark=document.documentElement.dataset.theme==='dark';const bg=isDark?'#2e2a25':'#ffffff';const fc=isDark?'#d4ccc4':'#4a4340';
+Plotly.newPlot('sankey',[{type:'sankey',orientation:'h',node:{pad:18,thickness:22,line:{color:isDark?'rgba(74,69,64,.5)':'rgba(200,190,180,.5)',width:1},
+label:['LNG销售$137.7B','燃料&购气$59.2B','运维$17.5B','毛利润$61.0B','折旧$9.4B','经营利润$51.6B','利息$14.5B','其他费用$4.9B','税前利润$33.6B','所得税$6.3B','净利润$22.6B','少数股东$2.0B','归母净利$22.6B','经营现金流$65.7B','资本支出$133.7B','FCF -$68.0B'],
+color:['#7b8fa0','#b87070','#b87070','#8a9a8e','#b87070','#7b8fa0','#b87070','#b87070','#7b8fa0','#b87070','#8a9a8e','#b87070','#b9a06a','#8a9a8e','#b87070','#b87070']},
+link:{source:[0,0,0,3,3,5,5,5,8,8,10,10,13,13],target:[1,2,3,4,5,6,7,8,9,10,11,12,14,15],
+value:[59.2,17.5,61.0,9.4,51.6,14.5,4.9,33.6,6.3,22.6,2.0,22.6,133.7,65.7],
+color:['rgba(184,112,112,.2)','rgba(184,112,112,.2)','rgba(138,154,142,.3)','rgba(184,112,112,.2)','rgba(123,143,160,.3)','rgba(184,112,112,.2)','rgba(184,112,112,.2)','rgba(123,143,160,.3)','rgba(184,112,112,.2)','rgba(138,154,142,.3)','rgba(184,112,112,.2)','rgba(185,160,106,.35)','rgba(184,112,112,.2)','rgba(138,154,142,.3)']}}],
+{paper_bgcolor:bg,plot_bgcolor:bg,font:{color:fc,family:"'Segoe UI','PingFang SC',sans-serif",size:12},margin:{t:8,b:8,l:8,r:8}},{responsive:true,displayModeBar:false})}
+buildSankey();
+</script>
+</body>
+</html>

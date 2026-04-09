@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<!-- Data as of 2026-03-24, Q4 2025 results released today -->
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>小米集团 Xiaomi — 2025 Q4 & 全年财报深度分析</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+/* ── MORANDI PALETTE ── */
+:root {
+  --bg:        #f5f0eb;
+  --bg2:       #ece6df;
+  --card:      #ffffff;
+  --card2:     #f8f5f1;
+  --border:    #d9d0c7;
+  --text:      #4a4340;
+  --text2:     #7a706a;
+  --text3:     #a89f98;
+  --accent:    #8a9a8e;
+  --accent2:   #7b8fa0;
+  --accent3:   #b08d7a;
+  --rose:      #c09090;
+  --gold:      #b9a06a;
+  --red:       #b87070;
+  --green:     #7a9a7a;
+  --shadow:    rgba(0,0,0,0.06);
+  --chart-grid:#e5ddd5;
+}
+[data-theme="dark"] {
+  --bg:        #1e1c1a;
+  --bg2:       #28251f;
+  --card:      #2e2a25;
+  --card2:     #363230;
+  --border:    #4a4540;
+  --text:      #d4ccc4;
+  --text2:     #a09890;
+  --text3:     #706860;
+  --accent:    #8a9a8e;
+  --accent2:   #8fabbf;
+  --accent3:   #c9a48e;
+  --rose:      #c09090;
+  --gold:      #c9b07a;
+  --red:       #c08080;
+  --green:     #8aaa8a;
+  --shadow:    rgba(0,0,0,0.3);
+  --chart-grid:#3e3a35;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', 'SimSun', serif;
+  line-height: 1.75;
+  font-size: 14.5px;
+  transition: background .35s, color .35s;
+}
+a { color: var(--accent2); text-decoration: none; }
+
+/* ── THEME TOGGLE ── */
+.theme-bar {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 8px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  transition: background .35s;
+}
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; }
+.theme-toggle {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; color: var(--text2);
+}
+.toggle-switch {
+  position: relative;
+  width: 44px; height: 22px;
+  background: var(--border);
+  border-radius: 11px;
+  cursor: pointer;
+  transition: background .3s;
+}
+.toggle-switch::after {
+  content: '';
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 18px; height: 18px;
+  background: var(--card);
+  border-radius: 50%;
+  transition: transform .3s;
+  box-shadow: 0 1px 3px rgba(0,0,0,.15);
+}
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+
+/* ── HERO ── */
+.hero {
+  padding: 48px 24px 36px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+.hero-tag {
+  display: inline-block;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 3px 14px;
+  border-radius: 20px;
+  margin-bottom: 18px;
+}
+.hero h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills {
+  display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;
+}
+.pill {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 6px 18px;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 13px;
+  color: var(--text2);
+  box-shadow: 0 1px 3px var(--shadow);
+}
+.pill strong { color: var(--text); }
+
+/* ── LAYOUT ── */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle {
+  font-size: 18px; font-weight: 700; color: var(--accent3);
+  margin-bottom: 20px; letter-spacing: 0.5px;
+  display: flex; align-items: center; gap: 10px;
+}
+.stitle::before {
+  content: ''; display: block; width: 4px; height: 20px;
+  background: var(--accent3); border-radius: 2px;
+}
+
+/* ── STOCK SNAPSHOT ── */
+.stock-snap {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 22px 28px;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px;
+  box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px;
+}
+.snap-item { text-align: center; }
+.snap-label { font-family: 'Segoe UI', sans-serif; font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.snap-val { font-family: 'Segoe UI', sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+.snap-val.up { color: var(--green); }
+.snap-val.dn { color: var(--red); }
+.snap-sub { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+/* ── KPI ── */
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.kpi {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 16px 18px;
+  box-shadow: 0 1px 4px var(--shadow);
+  transition: background .35s;
+}
+.kpi-l { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.badge {
+  display: inline-block; font-family: 'Segoe UI', sans-serif;
+  font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px;
+}
+.up   { background: rgba(122,154,122,.15); color: var(--green); }
+.dn   { background: rgba(184,112,112,.15); color: var(--red); }
+.nt   { background: rgba(123,143,160,.15); color: var(--accent2); }
+
+/* ── TABLE ── */
+.tbl-wrap {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow);
+}
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI', sans-serif; font-size: 13px; }
+.tbl th {
+  background: var(--card2); color: var(--text3); font-size: 11px;
+  letter-spacing: .5px; text-transform: uppercase;
+  padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border);
+}
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); background: var(--card2); }
+.tbl tr:last-child td { border-bottom: none; }
+
+/* ── CHARTS ── */
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow);
+}
+.ctitle { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 260px; }
+
+/* ── SEGMENT CARDS ── */
+.sgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+.scard {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 20px; box-shadow: 0 1px 4px var(--shadow);
+  border-top: 4px solid var(--accent);
+}
+.scard.ev { border-top-color: var(--green); }
+.scard.iot { border-top-color: var(--accent2); }
+.scard.internet { border-top-color: var(--gold); }
+.scard.phone { border-top-color: var(--rose); }
+.scard h4 { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.scard .srev { font-family: 'Segoe UI', sans-serif; font-size: 24px; font-weight: 800; color: var(--text); }
+.scard .ssub { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); margin-top: 2px; margin-bottom: 12px; }
+.scard ul { padding-left: 15px; }
+.scard li { font-size: 13px; color: var(--text2); margin-bottom: 4px; }
+
+/* ── EARNINGS CALL ── */
+.ec-item {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 14px 18px; margin-bottom: 10px;
+  display: flex; align-items: flex-start; gap: 14px;
+  box-shadow: 0 1px 3px var(--shadow);
+}
+.ec-badge {
+  flex-shrink: 0; font-size: 12px; font-weight: 700;
+  padding: 3px 10px; border-radius: 20px; margin-top: 2px;
+  font-family: 'Segoe UI', sans-serif; letter-spacing: .3px;
+}
+.ec-bull { background: rgba(122,154,122,.18); color: var(--green); }
+.ec-bear { background: rgba(184,112,112,.18); color: var(--red); }
+.ec-neut { background: rgba(185,160,106,.18); color: var(--gold); }
+.ec-body { flex: 1; }
+.ec-title { font-weight: 600; color: var(--text); margin-bottom: 3px; font-size: 14px; }
+.ec-note { font-size: 13px; color: var(--text2); }
+
+/* ── BUFFETT SCORE ── */
+.bscore {
+  display: flex; align-items: center; gap: 16px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px 22px; margin-bottom: 12px;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.circle {
+  width: 62px; height: 62px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 18px; flex-shrink: 0;
+  border: 3px solid; font-family: 'Segoe UI', sans-serif;
+}
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 3px; }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+/* ── DCF TABLE ── */
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px; text-align: center;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.pbox .pl { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; }
+.pbox .pv { font-family: 'Segoe UI', sans-serif; font-size: 30px; font-weight: 800; margin-bottom: 5px; }
+.pbox .pn { font-size: 12px; color: var(--text3); line-height: 1.5; }
+.pc { color: var(--red); } .pf { color: var(--gold); } .ps { color: var(--green); }
+.dcf-note {
+  background: var(--card2); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px 22px; font-size: 13px;
+  color: var(--text2); line-height: 1.8;
+}
+.dcf-note strong { color: var(--text); }
+
+/* ── SANKEY ── */
+#sankey { width: 100%; height: 480px; }
+
+/* ── COMMENTARY ── */
+.cmt {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 28px 32px; line-height: 2.0; font-size: 14.5px;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.cmt p { margin-bottom: 16px; }
+.cmt .cmt-author {
+  font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3);
+  margin-top: 20px; padding-top: 14px; border-top: 1px solid var(--border);
+}
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--card2); border-top: 1px solid var(--border);
+  padding: 24px; text-align: center; color: var(--text3); font-size: 12px;
+  margin-top: 40px; line-height: 1.8;
+}
+
+@media (max-width: 768px) {
+  .cgrid,.pgrid { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 22px; }
+  .kpi-grid { grid-template-columns: 1fr 1fr; }
+  .stock-snap { grid-template-columns: 1fr 1fr; }
+  .sgrid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── THEME BAR ── -->
+<div class="theme-bar">
+  <div class="logo">BUFFY · 财报研究所</div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-tag">2026年3月24日 · 业绩日首发 · 价值投资视角</div>
+  <h1>小米集团 Xiaomi Group 财报深度分析</h1>
+  <div class="hero-sub">HKEX: 1810.HK &nbsp;|&nbsp; 2025年 Q4 & 全年业绩 &nbsp;|&nbsp; 少年巴菲特视角</div>
+  <div class="hero-pills">
+    <div class="pill">股价 <strong>HKD 32.68</strong> <span style="color:var(--green)">+1.93%</span></div>
+    <div class="pill">市值 <strong>HKD 846B</strong></div>
+    <div class="pill">全年营收 <strong>¥4,573亿</strong> <span style="color:var(--green)">+25%</span></div>
+    <div class="pill">EV交付 <strong>411,082辆</strong> 首次盈利</div>
+    <div class="pill">毛利润 <strong>首破¥1,000亿</strong></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ── STOCK SNAPSHOT ── -->
+<div class="section">
+  <div class="stitle">市场数据快照（2026-03-24）</div>
+  <div class="stock-snap">
+    <div class="snap-item">
+      <div class="snap-label">股价（港元）</div>
+      <div class="snap-val up">32.68</div>
+      <div class="snap-sub">+1.93% 今日</div>
+    </div>
+    <div class="snap-item">
+      <div class="snap-label">市值</div>
+      <div class="snap-val">HKD 846B</div>
+      <div class="snap-sub">≈ USD 108B</div>
+    </div>
+    <div class="snap-item">
+      <div class="snap-label">TTM P/E</div>
+      <div class="snap-val">20.22x</div>
+      <div class="snap-sub">Forward: 18.28x</div>
+    </div>
+    <div class="snap-item">
+      <div class="snap-label">EPS (TTM)</div>
+      <div class="snap-val">HKD 1.640</div>
+      <div class="snap-sub">Non-GAAP</div>
+    </div>
+    <div class="snap-item">
+      <div class="snap-label">52周区间</div>
+      <div class="snap-val dn">32.68</div>
+      <div class="snap-sub">低: 31.20 / 高: 61.45</div>
+    </div>
+    <div class="snap-item">
+      <div class="snap-label">分析师均价目标</div>
+      <div class="snap-val">HKD 46.65</div>
+      <div class="snap-sub">上行空间 +42.7%</div>
+    </div>
+    <div class="snap-item">
+      <div class="snap-label">YTD / 1年回报</div>
+      <div class="snap-val dn">-16.6% / -42.7%</div>
+      <div class="snap-sub">3年: +162.7%</div>
+    </div>
+    <div class="snap-item">
+      <div class="snap-label">现金 / FCF(TTM)</div>
+      <div class="snap-val">HKD 110B</div>
+      <div class="snap-sub">FCF: HKD 32.4B</div>
+    </div>
+    <div class="snap-item">
+      <div class="snap-label">P/B / ROE</div>
+      <div class="snap-val">2.84x</div>
+      <div class="snap-sub">ROE 19.86%</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── FY 2025 KPI ── -->
+<div class="section">
+  <div class="stitle">2025 全年核心业绩（RMB 亿元）</div>
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div class="kpi-l">总收入</div>
+      <div class="kpi-v">¥4,572.9亿</div>
+      <span class="badge up">▲ +25.0% YoY</span>
+      <div style="font-size:12px;color:var(--text3);margin-top:4px">历史新高</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">经调整净利润</div>
+      <div class="kpi-v">¥391.7亿</div>
+      <span class="badge up">▲ +43.8% YoY</span>
+      <div style="font-size:12px;color:var(--text3);margin-top:4px">历史新高</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">毛利润</div>
+      <div class="kpi-v">¥1,000亿+</div>
+      <span class="badge up">▲ 首次突破</span>
+      <div style="font-size:12px;color:var(--text3);margin-top:4px">历史里程碑</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">EV+AI业务收入</div>
+      <div class="kpi-v">¥1,061亿</div>
+      <span class="badge up">▲ +223.8% YoY</span>
+      <div style="font-size:12px;color:var(--text3);margin-top:4px">首次突破千亿</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">EV年度交付量</div>
+      <div class="kpi-v">411,082辆</div>
+      <span class="badge up">▲ +200.4% YoY</span>
+      <div style="font-size:12px;color:var(--text3);margin-top:4px">vs 2024年 136,854辆</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">汽车业务经营利润</div>
+      <div class="kpi-v">¥9亿</div>
+      <span class="badge up">▲ 扭亏为盈</span>
+      <div style="font-size:12px;color:var(--text3);margin-top:4px">vs 2024年亏损¥62亿</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">研发投入</div>
+      <div class="kpi-v">¥331亿</div>
+      <span class="badge up">▲ +37.8% YoY</span>
+      <div style="font-size:12px;color:var(--text3);margin-top:4px">5年累计¥1,055亿</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">IoT生活消费产品</div>
+      <div class="kpi-v">¥1,232亿</div>
+      <span class="badge up">▲ +18.3% YoY</span>
+      <div style="font-size:12px;color:var(--text3);margin-top:4px">毛利率 23.1% 历史高</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">互联网服务</div>
+      <div class="kpi-v">¥374亿</div>
+      <span class="badge up">▲ +9.7% YoY</span>
+      <div style="font-size:12px;color:var(--text3);margin-top:4px">历史新高</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">3000元+手机占比</div>
+      <div class="kpi-v">27.1%</div>
+      <span class="badge up">▲ +3.8 ppt</span>
+      <div style="font-size:12px;color:var(--text3);margin-top:4px">高端化持续推进</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">智能手机收入</div>
+      <div class="kpi-v">¥1,864亿</div>
+      <span class="badge dn">▼ -2.8% YoY</span>
+      <div style="font-size:12px;color:var(--text3);margin-top:4px">量减价升中</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">研发人员</div>
+      <div class="kpi-v">25,457人</div>
+      <span class="badge nt">● 持续扩张</span>
+      <div style="font-size:12px;color:var(--text3);margin-top:4px">技术人才储备</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Q4 KPI ── -->
+<div class="section">
+  <div class="stitle">Q4 2025 季度业绩（RMB 亿元）</div>
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div class="kpi-l">Q4 总收入</div>
+      <div class="kpi-v">¥1,169亿</div>
+      <span class="badge up">▲ +7.3% YoY</span>
+      <div style="font-size:12px;color:var(--text3);margin-top:4px">vs Q4 2024: ¥1,090亿</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">Q4 经调整净利润</div>
+      <div class="kpi-v">¥63.49亿</div>
+      <span class="badge dn">▼ -23.7% YoY</span>
+      <div style="font-size:12px;color:var(--text3);margin-top:4px">2022年以来最大季度下降</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">Q4 GAAP净利润</div>
+      <div class="kpi-v">¥65.44亿</div>
+      <span class="badge dn">▼ -43.9% QoQ</span>
+      <div style="font-size:12px;color:var(--text3);margin-top:4px">vs Q3 2025: ¥113亿</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">Q4 运营利润</div>
+      <div class="kpi-v">¥62.29亿</div>
+      <span class="badge nt">● 季度数据</span>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">Q4 智能手机</div>
+      <div class="kpi-v">¥443亿</div>
+      <span class="badge dn">▼ -13.6% YoY</span>
+      <div style="font-size:12px;color:var(--text3);margin-top:4px">vs Q4 2024: ¥513亿</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">Q4 IoT</div>
+      <div class="kpi-v">¥246亿</div>
+      <span class="badge nt">GM 20.1%</span>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">Q4 互联网服务(估)</div>
+      <div class="kpi-v">~¥95亿</div>
+      <span class="badge nt">● 估算</span>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">Q4 EV+AI(估)</div>
+      <div class="kpi-v">~¥385亿</div>
+      <span class="badge up">▲ 占比&gt;30%</span>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">Q4 手机×AIoT GM</div>
+      <div class="kpi-v">20.0%</div>
+      <span class="badge dn">▼ vs Q3 22.1%</span>
+      <div style="font-size:12px;color:var(--text3);margin-top:4px">存储成本拖累</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── CHARTS ── -->
+<div class="section">
+  <div class="stitle">季度趋势图（近5季）</div>
+  <div class="cgrid">
+    <div class="ccard">
+      <div class="ctitle">季度总收入 (RMB 亿元) — 柱状为实际，虚线为估算</div>
+      <div class="cwrap"><canvas id="revenueChart"></canvas></div>
+    </div>
+    <div class="ccard">
+      <div class="ctitle">季度经调整净利润 (RMB 亿元)</div>
+      <div class="cwrap"><canvas id="profitChart"></canvas></div>
+    </div>
+  </div>
+  <div class="ccard" style="margin-top:0">
+    <div class="ctitle">分部收入对比：FY2024 vs FY2025 (RMB 亿元)</div>
+    <div class="cwrap" style="height:280px"><canvas id="segmentChart"></canvas></div>
+  </div>
+</div>
+
+<!-- ── SANKEY ── -->
+<div class="section">
+  <div class="stitle">FY2025 收入结构 Sankey 图</div>
+  <div class="ccard">
+    <div id="sankey"></div>
+  </div>
+</div>
+
+<!-- ── SEGMENT DEEP-DIVE ── -->
+<div class="section">
+  <div class="stitle">四大业务分部深度解析</div>
+  <div class="sgrid">
+    <div class="scard phone">
+      <h4>📱 智能手机业务</h4>
+      <div class="srev">¥1,864亿</div>
+      <div class="ssub">FY2025 全年 · <span class="badge dn">▼ -2.8% YoY</span></div>
+      <ul>
+        <li>Q4单季 ¥443亿，YoY -13.6%，受存储成本冲击</li>
+        <li>高端化：3000元+ 占比27.1%（+3.8 ppt）</li>
+        <li>旗舰段 6000–10000元占4.5%（+2.3 ppt，历史高）</li>
+        <li>西欧高端机销售 +40% YoY，国际化加速</li>
+        <li>SU7系列形成品牌溢价反哺手机高端化</li>
+        <li>Q4 毛利率 20.0% 受存储芯片成本冲击明显</li>
+      </ul>
+    </div>
+    <div class="scard iot">
+      <h4>🏠 IoT与生活消费产品</h4>
+      <div class="srev">¥1,232亿</div>
+      <div class="ssub">FY2025 全年 · <span class="badge up">▲ +18.3% YoY</span></div>
+      <ul>
+        <li>毛利率 23.1%，历史最高，境内外双创新高</li>
+        <li>Q4单季 ¥246亿，GM 20.1%</li>
+        <li>小米生态链产品渗透率持续提升</li>
+        <li>与手机/EV形成三角生态飞轮效应</li>
+        <li>大家电（空调/冰箱）持续放量</li>
+        <li>海外IoT增长显著，东南亚、欧洲布局深化</li>
+      </ul>
+    </div>
+    <div class="scard internet">
+      <h4>🌐 互联网服务</h4>
+      <div class="srev">¥374亿</div>
+      <div class="ssub">FY2025 全年 · <span class="badge up">▲ +9.7% YoY</span></div>
+      <ul>
+        <li>历史收入新高，高毛利引擎稳定增长</li>
+        <li>Q4 ~¥95亿（估算）</li>
+        <li>MIUI/HyperOS月活用户超6.5亿（全球）</li>
+        <li>广告、游戏、金融科技三驾马车</li>
+        <li>AI功能深度融合，用户粘性增强</li>
+        <li>EV新用户导入互联网服务扩展空间</li>
+      </ul>
+    </div>
+    <div class="scard ev">
+      <h4>🚗 电动车及AI创新业务</h4>
+      <div class="srev">¥1,061亿</div>
+      <div class="ssub">FY2025 全年 · <span class="badge up">▲ +223.8% YoY</span></div>
+      <ul>
+        <li>首次年度突破千亿，首次经营利润¥9亿（扭亏为盈）</li>
+        <li>FY2025 交付 411,082辆（+200.4%）</li>
+        <li>平均单车售价约¥25万，定位中高端</li>
+        <li>SU7：2025累计24.6万辆，20万+轿车年销冠军</li>
+        <li>YU7（SUV）：连续7个月中大型SUV销量第一</li>
+        <li>新SU7（3月19日）：34分钟锁单1.5万，3天3万辆</li>
+        <li>2026年目标：550,000辆（+34%）</li>
+        <li>未来3年AI投入¥630亿，MiMo-V2系列已发布</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ── EARNINGS CALL ── -->
+<div class="section">
+  <div class="stitle">业绩发布会要点解读（共14项）</div>
+
+  <div class="ec-item">
+    <div class="ec-badge ec-bull">🟢 利好</div>
+    <div class="ec-body">
+      <div class="ec-title">1. 全年业绩创历史新高：营收+25%，净利润+44%</div>
+      <div class="ec-note">营收¥4,573亿、经调整净利润¥391.7亿双双创历史新高，毛利润首次突破¥1,000亿，彰显小米"手机×AIoT×EV"三引擎协同的战略价值。</div>
+    </div>
+  </div>
+
+  <div class="ec-item">
+    <div class="ec-badge ec-bear">🔴 利空</div>
+    <div class="ec-body">
+      <div class="ec-title">2. Q4逆风：存储芯片成本暴涨拖累盈利</div>
+      <div class="ec-note">Q4经调整净利润¥63.49亿（YoY -23.7%），为2022年以来最大季度同比降幅。管理层将其归因于存储芯片价格周期性上涨及竞争加剧，强调为非结构性问题，但短期压力真实存在。</div>
+    </div>
+  </div>
+
+  <div class="ec-item">
+    <div class="ec-badge ec-bull">🟢 利好</div>
+    <div class="ec-body">
+      <div class="ec-title">3. 汽车业务首次年度盈利：经营利润¥9亿</div>
+      <div class="ec-note">从2024年亏损¥62亿到2025年盈利¥9亿，仅用两年实现从零到盈利。这一里程碑远超市场预期，证明小米造车的商业模式具备可持续性，而非烧钱无底洞。</div>
+    </div>
+  </div>
+
+  <div class="ec-item">
+    <div class="ec-badge ec-bull">🟢 利好</div>
+    <div class="ec-body">
+      <div class="ec-title">4. 2026年汽车交付目标：550,000辆（+34%）</div>
+      <div class="ec-note">管理层将2026年目标定为55万辆，较2025年实际交付41.1万辆增长约34%。雷军此前兑现了2025年13.5万辆→41.1万辆的超额承诺，市场对目标可信度评价较高。</div>
+    </div>
+  </div>
+
+  <div class="ec-item">
+    <div class="ec-badge ec-bull">🟢 利好</div>
+    <div class="ec-body">
+      <div class="ec-title">5. 新SU7发布大卖：34分钟锁单1.5万辆，3天3万辆</div>
+      <div class="ec-note">2026年3月19日新SU7发布，34分钟内锁定订单1.5万辆，3天累计3万辆，彰显小米汽车强劲的品牌势能与用户需求，为2026年目标奠定坚实基础。</div>
+    </div>
+  </div>
+
+  <div class="ec-item">
+    <div class="ec-badge ec-bear">🔴 利空</div>
+    <div class="ec-body">
+      <div class="ec-title">6. 手机业务持续承压：Q4 -13.6% YoY，全年 -2.8%</div>
+      <div class="ec-note">智能手机全年收入¥1,864亿同比下滑，Q4单季大幅下滑13.6%，主因出货量减少叠加存储成本攀升。高端化路线执行中但核心收入仍在收缩，竞争格局不容乐观。</div>
+    </div>
+  </div>
+
+  <div class="ec-item">
+    <div class="ec-badge ec-bull">🟢 利好</div>
+    <div class="ec-body">
+      <div class="ec-title">7. 高端手机突破：6000–10000元档占比4.5%（+2.3 ppt），西欧+40%</div>
+      <div class="ec-note">旗舰价格带份额持续提升，西欧高端机同比增长40%，说明小米品牌溢价正在成形。即便整体出货量有压力，结构改善将提升长期毛利率。</div>
+    </div>
+  </div>
+
+  <div class="ec-item">
+    <div class="ec-badge ec-bull">🟢 利好</div>
+    <div class="ec-body">
+      <div class="ec-title">8. IoT历史新高：¥1,232亿 +18.3%，毛利率 23.1%创历史</div>
+      <div class="ec-note">IoT业务贡献稳定现金流，毛利率23.1%为历史最高，境内境外均创新高，与手机和EV形成差异化生态护城河。这是被市场低估的高质量业务。</div>
+    </div>
+  </div>
+
+  <div class="ec-item">
+    <div class="ec-badge ec-neut">📊 中性</div>
+    <div class="ec-body">
+      <div class="ec-title">9. 研发投入¥331亿（+37.8%），接近全年利润总额</div>
+      <div class="ec-note">研发投入占全年经调整净利润的84.5%，过去5年累计¥1,055亿，研发人员25,457人。长期来看是核心竞争力的积累，短期则持续压缩利润转化率。方向正确，但压力实在。</div>
+    </div>
+  </div>
+
+  <div class="ec-item">
+    <div class="ec-badge ec-neut">📊 中性</div>
+    <div class="ec-body">
+      <div class="ec-title">10. AI战略加速：MiMo-V2系列发布，未来3年AI投入¥630亿</div>
+      <div class="ec-note">发布MiMo-V2-Pro、Omni、TTS等自研大模型，宣布未来3年投入¥630亿（约每年¥210亿）。方向正确，与科技巨头正面竞争，但规模之大将进一步侵蚀中期利润。</div>
+    </div>
+  </div>
+
+  <div class="ec-item">
+    <div class="ec-badge ec-neut">📊 中性</div>
+    <div class="ec-body">
+      <div class="ec-title">11. 股价近52周低位：HKD 32.68，较高峰跌约47%</div>
+      <div class="ec-note">当前股价 HKD 32.68，较2025年高峰 HKD 61.45 下跌约47%，YTD -16.6%，逼近52周低位 31.20。分析师均价目标 HKD 46.65（上行空间+42.7%）。对价值投资者而言是低吸窗口，但下行风险（存储周期、EV竞争）依然存在。</div>
+    </div>
+  </div>
+
+  <div class="ec-item">
+    <div class="ec-badge ec-bull">🟢 利好</div>
+    <div class="ec-body">
+      <div class="ec-title">12. YU7 SUV：连续7个月中大型SUV销量冠军</div>
+      <div class="ec-note">小米YU7在中大型SUV细分市场连续7个月销量第一，证明小米汽车不只是SU7一款爆款，产品矩阵开始形成，有助于提升整体交付量与毛利率。</div>
+    </div>
+  </div>
+
+  <div class="ec-item">
+    <div class="ec-badge ec-bull">🟢 利好</div>
+    <div class="ec-body">
+      <div class="ec-title">13. 互联网服务历史新高¥374亿：高毛利引擎稳定成长</div>
+      <div class="ec-note">互联网服务连续创历史新高，+9.7% YoY，依托超6.5亿月活用户基础。随着EV用户新增，将为互联网服务带来车载场景新流量，长期收入想象空间大。</div>
+    </div>
+  </div>
+
+  <div class="ec-item">
+    <div class="ec-badge ec-neut">📊 中性</div>
+    <div class="ec-body">
+      <div class="ec-title">14. 毛利率压力：手机×AIoT Q4 GM 20.0% vs Q3 22.1%</div>
+      <div class="ec-note">手机AIoT分部Q4毛利率环比大降2.1 ppt，主因存储芯片成本上涨。管理层将此定性为周期性而非结构性问题，预期随成本回落将恢复。需持续关注后续季度验证。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── BUFFETT DIMENSIONS ── -->
+<div class="section">
+  <div class="stitle">巴菲特六维评分</div>
+
+  <div class="bscore">
+    <div class="circle cw">B</div>
+    <div class="bd">
+      <h4>护城河（Moat）</h4>
+      <p>手机+AIoT生态护城河稳固，全球6.5亿月活用户形成强粘性。但硬件护城河较窄，价格竞争激烈；EV赛道正面迎战比亚迪、特斯拉，护城河尚在构建中。小米"人车家"生态战略若执行成功，护城河将显著拓宽。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>管理层（Management）</h4>
+      <p>雷军高度兑现承诺：SU7年初定目标13.5万辆，实际交付41.1万辆，远超预期。高端化战略执行力强，西欧+40%、旗舰段份额持续提升。AI战略方向清晰，¥630亿投入体现前瞻性。唯一顾虑：资本支出节奏激进，短期利润受压。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B+</div>
+    <div class="bd">
+      <h4>财务健康（Financial Health）</h4>
+      <p>现金储备 HKD 110B（约¥1,519亿），低杠杆，自由现金流 HKD 32.4B TTM 充裕。毛利润首破¥1,000亿，流动性无虞。EV业务扭亏为盈显著降低"无底洞"风险。主要隐患：研发+EV资本支出双重压力下，净利润转化率偏低。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B</div>
+    <div class="bd">
+      <h4>盈利质量（Earnings Quality）</h4>
+      <p>Non-GAAP调整项目合理，主要为股权激励费用，无异常重大调整。但研发¥331亿≈经调整净利润84.5%，资本密集型特征明显。汽车业务会计处理透明。Q4利润骤降反映真实的成本压力，无掩盖迹象，管理层坦诚披露。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cr">C+</div>
+    <div class="bd">
+      <h4>可预测性（Predictability）</h4>
+      <p>EV业务处于高速增长期，季度波动显著（Q3 GAAP净利润¥113亿→Q4¥65亿）。存储芯片价格周期性不可控，对毛利率冲击难以预判。全年增速+25%稳健，但季度层面不确定性较高。2026年55万辆目标可信，但执行中的外部变量多。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B</div>
+    <div class="bd">
+      <h4>资本纪律（Capital Discipline）</h4>
+      <p>无现金分红，回购规模较小，但资本配置逻辑清晰：研发+EV均为战略必要投入，非盲目扩张。未来3年¥630亿AI投入规模惊人，需密切观察投入产出比。相比同类中国科技公司，资本纪律处于中等偏上水平。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── DCF ── -->
+<div class="section">
+  <div class="stitle">三情景 DCF 估值</div>
+  <div class="pgrid">
+    <div class="pbox">
+      <div class="pl">悲观情景</div>
+      <div class="pv pc">HKD 21</div>
+      <div class="pn">FCF增速 5%/年<br>终值倍数 15x<br>WACC 13%，地缘折扣 -25%</div>
+    </div>
+    <div class="pbox">
+      <div class="pl">中性情景</div>
+      <div class="pv pf">HKD 41</div>
+      <div class="pn">FCF增速 12%/年<br>终值倍数 20x<br>WACC 13%，地缘折扣 -25%</div>
+    </div>
+    <div class="pbox">
+      <div class="pl">乐观情景</div>
+      <div class="pv ps">HKD 67</div>
+      <div class="pn">FCF增速 20%/年<br>终值倍数 25x<br>WACC 13%，地缘折扣 -25%</div>
+    </div>
+  </div>
+  <div class="dcf-note">
+    <strong>当前股价 HKD 32.68</strong> 位于悲观与中性情景之间，隐含市场定价约为"低增速+低估值"预期。<br><br>
+    <strong>基础假设：</strong>FCF 基数 HKD 32.39B（TTM），5年投影后加终值，WACC 13%（中国科技溢价），地缘政治风险折扣 -25%（港股/中概标准溢价）。<br><br>
+    <strong>关键分歧：</strong>若EV业务2026年持续盈利并加速，FCF增速可能突破12%→支持中性甚至偏乐观；若存储周期持续恶化、竞争压制毛利率，则悲观情景¥21/股存在一定合理性。<strong>分析师均价目标 HKD 46.65 与中性DCF高度吻合</strong>，暗示当前估值具备一定安全边际。
+  </div>
+</div>
+
+<!-- ── QUARTERLY TREND TABLE ── -->
+<div class="section">
+  <div class="stitle">近5季度业绩汇总</div>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead>
+        <tr>
+          <th>季度</th>
+          <th>总收入（亿元）</th>
+          <th>经调整净利润（亿元）</th>
+          <th>YoY 收入</th>
+          <th>备注</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Q4 2024</td>
+          <td>1,090</td>
+          <td>83.16</td>
+          <td>—</td>
+          <td style="color:var(--text3);font-size:12px">基期</td>
+        </tr>
+        <tr>
+          <td>Q1 2025 <span style="color:var(--text3);font-size:11px">*</span></td>
+          <td>~900</td>
+          <td>~95</td>
+          <td>—</td>
+          <td style="color:var(--text3);font-size:12px">*估算，含季节性低谷</td>
+        </tr>
+        <tr>
+          <td>Q2 2025 <span style="color:var(--text3);font-size:11px">*</span></td>
+          <td>~1,150</td>
+          <td>~128</td>
+          <td>—</td>
+          <td style="color:var(--text3);font-size:12px">*估算</td>
+        </tr>
+        <tr>
+          <td>Q3 2025 <span style="color:var(--text3);font-size:11px">*</span></td>
+          <td>~1,254</td>
+          <td>~105</td>
+          <td>—</td>
+          <td style="color:var(--text3);font-size:12px">*估算；GAAP净利润¥113亿</td>
+        </tr>
+        <tr class="hl">
+          <td>Q4 2025 ✓</td>
+          <td>1,169</td>
+          <td>63.49</td>
+          <td>+7.3%</td>
+          <td style="font-size:12px">实际值；YoY -23.7%（利润）</td>
+        </tr>
+        <tr class="hl" style="background:var(--bg2)">
+          <td>FY 2025 全年 ✓</td>
+          <td>4,572.9</td>
+          <td>391.7</td>
+          <td>+25.0%</td>
+          <td style="font-size:12px">实际值；历史新高</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ── SEGMENT COMPARISON TABLE ── -->
+<div class="section">
+  <div class="stitle">分部收入：FY2024 vs FY2025（RMB 亿元）</div>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead>
+        <tr>
+          <th>业务分部</th>
+          <th>FY2024</th>
+          <th>FY2025</th>
+          <th>同比变化</th>
+          <th>占FY2025总收入</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>📱 智能手机</td>
+          <td>1,918</td>
+          <td>1,864</td>
+          <td><span class="badge dn">▼ -2.8%</span></td>
+          <td>40.8%</td>
+        </tr>
+        <tr>
+          <td>🏠 IoT与生活消费产品</td>
+          <td>1,041</td>
+          <td>1,232</td>
+          <td><span class="badge up">▲ +18.3%</span></td>
+          <td>26.9%</td>
+        </tr>
+        <tr>
+          <td>🌐 互联网服务</td>
+          <td>373</td>
+          <td>374</td>
+          <td><span class="badge up">▲ +0.3%</span></td>
+          <td>8.2%</td>
+        </tr>
+        <tr>
+          <td>🚗 电动车及AI创新</td>
+          <td>328</td>
+          <td>1,061</td>
+          <td><span class="badge up">▲ +223.8%</span></td>
+          <td>23.2%</td>
+        </tr>
+        <tr class="hl">
+          <td>合计</td>
+          <td>3,659</td>
+          <td>4,573</td>
+          <td><span class="badge up">▲ +25.0%</span></td>
+          <td>100%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ── BUFFY COMMENTARY ── -->
+<div class="section">
+  <div class="stitle">少年巴菲特说 · Buffy点评</div>
+  <div class="cmt">
+    <p>今天（2026年3月24日），小米集团公布了2025年全年及第四季度业绩。我读完财报，心情有点复杂——<span class="hl-t">像咬了一口加了咸柠檬的蛋糕：外表甜，里头有点儿酸。</span></p>
+
+    <p>先说好消息。全年营收¥4,573亿，同比增长25%，经调整净利润¥391.7亿，增长44%，毛利润首次突破¥1,000亿大关。这三个数字放在一起，任何一个理性的投资者都应该点点头：小米的商业引擎还在全速运转。更令人振奋的是<span class="hl-t">汽车业务的扭亏为盈</span>——从2024年亏损¥62亿，到2025年经营利润¥9亿。这一转变不只是会计上的变化，它意味着小米造车的逻辑被现实验证了。411,082辆的年度交付量，比原目标翻了三倍，SU7成为20万元以上轿车的年销冠军，YU7拿下连续7个月中大型SUV销量第一。雷军说到做到，这一点我必须承认。</p>
+
+    <p>然而，<span class="warn-t">第四季度的利润数字让我皱眉。</span>Q4经调整净利润¥63.49亿，同比下降23.7%，创下2022年以来最大季度降幅。全年营收节节高升，最后一个季度的利润却大跌，这种反差让市场困惑，也让我警觉。管理层将原因归结为存储芯片成本周期性暴涨，我认为这个解释有一定道理——存储成本的周期性波动确实是真实存在的行业现象。但"周期性"这个词有时候是解释问题的便利出口，需要后续季度数据验证。如果2026年Q1存储成本回落、毛利率回升，则管理层的判断正确，Q4是噪音；如果压力延续，则是信号。</p>
+
+    <p>小米目前的股价 HKD 32.68 逼近52周低点 31.20，距离去年高峰 HKD 61.45 已跌去近半。分析师均价目标 HKD 46.65，对应约42.7%的上行空间。我的三情景DCF测算显示，<span class="hl-t">中性假设下内在价值约 HKD 41，当前股价位于悲观与中性之间，安全边际初步出现</span>，但称不上"便宜得不像话"。</p>
+
+    <p>研发投入¥331亿（+37.8%），接近全年净利润，加上未来3年承诺¥630亿AI投入，小米的资本消耗轨迹令人肃然起敬——但也令人担忧。巴菲特的老师格雷厄姆说过，聪明的投资是未来收益有充分保障的投资。小米的研发和AI投入是否会转化为可持续的竞争优势？<span class="hl-t">IoT毛利率23.1%历史新高是一个积极的早期信号</span>，但大规模投入转化为护城河，需要时间，也需要耐心。</p>
+
+    <p>综合来看，小米是一家正处于"增长阵痛期"的优秀公司：全年成绩单漂亮，但季度盈利的波动性提醒我们，这不是一支可以买了就忘的"躺平股"。如果你相信EV业务会在2026年进一步扩大盈利、存储成本压力将于上半年缓解、AI投入终将形成差异化壁垒，那么当前价位具备合理的布局价值。如果你对上述任何一条存有疑虑，<span class="warn-t">等待更多季度验证，不失为更审慎的选择。</span>我的结论：以¥32.68港元买入，不是错误，但需要做好波动的心理准备。安全边际存在，但不充裕。</p>
+
+    <div class="cmt-author">— 少年巴菲特 (Buffy) · BUFFY财报研究所 · 2026年3月24日<br>本分析仅供参考，不构成任何投资建议。所有数据基于公司公告，估算项已注明。</div>
+  </div>
+</div>
+
+<!-- ── DISCLAIMER ── -->
+<div class="section" style="border-bottom:none">
+  <div style="background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:20px 24px;font-size:12px;color:var(--text3);line-height:1.8">
+    <strong style="color:var(--text2)">风险提示 Risk Disclaimer</strong><br>
+    本报告仅用于研究与教育目的，不构成任何投资建议或邀约。股票投资存在风险，过往业绩不代表未来表现。本报告所载数据来源于小米集团公开披露的财报及公告（数据截至2026年3月24日），部分季度数据为估算值，已在文中标注。汇率换算为近似值。投资者应自行进行独立研究，并咨询专业财务顾问。作者不承担因使用本报告信息而产生的任何损失责任。
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<footer>
+  <div>BUFFY · 财报研究所 &nbsp;|&nbsp; 小米集团 (1810.HK) Q4 & FY2025 财报分析</div>
+  <div style="margin-top:4px">数据日期：2026年3月24日（业绩发布日）&nbsp;|&nbsp; 季度估算数据已注明 &nbsp;|&nbsp; 仅供研究参考</div>
+</footer>
+
+<script>
+// ── THEME TOGGLE ──
+function toggleTheme() {
+  const html = document.documentElement;
+  html.setAttribute('data-theme', html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  updateCharts();
+}
+
+// ── CHART HELPERS ──
+function getCSSVar(name) {
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+}
+
+// ── CHART INSTANCES ──
+let revenueChart, profitChart, segmentChart;
+
+function buildCharts() {
+  const quarters = ['Q4 2024', 'Q1 2025\n(估)', 'Q2 2025\n(估)', 'Q3 2025\n(估)', 'Q4 2025'];
+  const revenueData = [1090, 900, 1150, 1254, 1169];
+  const profitData  = [83.16, 95, 128, 105, 63.49];
+  const isEst       = [false, true, true, true, false];
+
+  const grid   = getCSSVar('--chart-grid');
+  const text2  = getCSSVar('--text2');
+  const green  = getCSSVar('--green');
+  const rose   = getCSSVar('--rose');
+  const accent2= getCSSVar('--accent2');
+  const accent3= getCSSVar('--accent3');
+  const gold   = getCSSVar('--gold');
+  const red    = getCSSVar('--red');
+
+  // Revenue bar chart
+  const rCtx = document.getElementById('revenueChart').getContext('2d');
+  revenueChart = new Chart(rCtx, {
+    type: 'bar',
+    data: {
+      labels: ['Q4 2024', 'Q1 2025*', 'Q2 2025*', 'Q3 2025*', 'Q4 2025'],
+      datasets: [{
+        label: '总收入',
+        data: revenueData,
+        backgroundColor: revenueData.map((_, i) => isEst[i]
+          ? 'rgba(176,141,122,0.35)'
+          : 'rgba(138,154,142,0.75)'),
+        borderColor: revenueData.map((_, i) => isEst[i] ? accent3 : green),
+        borderWidth: 1.5,
+        borderRadius: 5,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => `¥${ctx.raw}亿` } }
+      },
+      scales: {
+        x: { grid: { color: grid }, ticks: { color: text2, font: { size: 11 } } },
+        y: {
+          grid: { color: grid }, ticks: { color: text2, font: { size: 11 },
+          callback: v => `¥${v}亿` }, min: 700
+        }
+      }
+    }
+  });
+
+  // Profit line chart
+  const pCtx = document.getElementById('profitChart').getContext('2d');
+  profitChart = new Chart(pCtx, {
+    type: 'line',
+    data: {
+      labels: ['Q4 2024', 'Q1 2025*', 'Q2 2025*', 'Q3 2025*', 'Q4 2025'],
+      datasets: [{
+        label: '经调整净利润',
+        data: profitData,
+        borderColor: rose,
+        backgroundColor: 'rgba(192,144,144,0.12)',
+        pointBackgroundColor: profitData.map((_, i) => isEst[i] ? 'rgba(192,144,144,0.4)' : rose),
+        pointRadius: 5,
+        pointBorderWidth: isEst.map(e => e ? 1 : 2),
+        tension: 0.35,
+        fill: true,
+        borderDash: [],
+        segment: {
+          borderDash: ctx => isEst[ctx.p0DataIndex] ? [5,4] : undefined
+        }
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => `¥${ctx.raw}亿` } }
+      },
+      scales: {
+        x: { grid: { color: grid }, ticks: { color: text2, font: { size: 11 } } },
+        y: {
+          grid: { color: grid }, ticks: { color: text2, font: { size: 11 },
+          callback: v => `¥${v}亿` }, min: 40
+        }
+      }
+    }
+  });
+
+  // Segment grouped bar chart
+  const sCtx = document.getElementById('segmentChart').getContext('2d');
+  segmentChart = new Chart(sCtx, {
+    type: 'bar',
+    data: {
+      labels: ['智能手机', 'IoT生活消费', '互联网服务', 'EV+AI创新'],
+      datasets: [
+        {
+          label: 'FY2024',
+          data: [1918, 1041, 373, 328],
+          backgroundColor: 'rgba(123,143,160,0.55)',
+          borderColor: accent2,
+          borderWidth: 1.5,
+          borderRadius: 4,
+        },
+        {
+          label: 'FY2025',
+          data: [1864, 1232, 374, 1061],
+          backgroundColor: 'rgba(138,154,142,0.7)',
+          borderColor: green,
+          borderWidth: 1.5,
+          borderRadius: 4,
+        }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { labels: { color: text2, font: { size: 12 } } },
+        tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: ¥${ctx.raw}亿` } }
+      },
+      scales: {
+        x: { grid: { color: grid }, ticks: { color: text2, font: { size: 12 } } },
+        y: {
+          grid: { color: grid },
+          ticks: { color: text2, font: { size: 11 }, callback: v => `¥${v}亿` }
+        }
+      }
+    }
+  });
+}
+
+function updateCharts() {
+  // Destroy and rebuild on theme change
+  if (revenueChart) revenueChart.destroy();
+  if (profitChart)  profitChart.destroy();
+  if (segmentChart) segmentChart.destroy();
+  buildCharts();
+  buildSankey();
+}
+
+// ── SANKEY ──
+function buildSankey() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const textColor = isDark ? '#d4ccc4' : '#4a4340';
+  const paperBg   = isDark ? '#2e2a25' : '#ffffff';
+  const plotBg    = isDark ? '#2e2a25' : '#ffffff';
+
+  // Nodes: Revenue → Segments → Cost/Profit
+  // 0: 总收入 ¥4573亿
+  // 1: 手机×AIoT ¥3512亿
+  // 2: EV+AI ¥1061亿
+  // 3: 手机业务成本 ¥1489亿 (~80% of ¥1864)
+  // 4: IoT成本 ¥947亿 (~77% of ¥1232)
+  // 5: 互联网成本 ¥75亿 (~20% of ¥374)
+  // 6: EV成本 ¥952亿 (~90% of ¥1061)
+  // 7: 手机×AIoT毛利 ¥702亿 (合并)
+  // 8: EV+AI毛利 ¥109亿
+  // 9: 经营费用 ¥462亿 (研发¥331+销售管理等)
+  // 10: 经调整净利润 ¥392亿
+
+  const label = [
+    '总收入 ¥4,573亿',
+    '手机×AIoT ¥3,512亿',
+    'EV+AI ¥1,061亿',
+    '智能手机成本 ~¥1,489亿',
+    'IoT成本 ~¥947亿',
+    '互联网成本 ~¥75亿',
+    'EV成本 ~¥952亿',
+    '手机×AIoT毛利 ~¥702亿',
+    'EV+AI毛利 ~¥109亿',
+    '经营费用 ~¥419亿',
+    '经调整净利润 ¥391.7亿',
+  ];
+
+  const colors = isDark
+    ? ['#8fabbf','#c9a48e','#8aaa8a','#c08080','#b09070','#c08080','#c08080','#c9b07a','#8aaa8a','#c08080','#8aaa8a']
+    : ['#7b8fa0','#b08d7a','#7a9a7a','#b87070','#c09090','#b87070','#b87070','#b9a06a','#7a9a7a','#b87070','#7a9a7a'];
+
+  const source = [0,  0,  1,  1,  1,  2,  7,  8,  7,  8];
+  const target = [1,  2,  3,  4,  5,  6,  9,  9,  10, 10];
+  const value  = [3512, 1061, 1489, 947, 75, 952, 250, 169, 452, 109];
+
+  const data = [{
+    type: 'sankey',
+    orientation: 'h',
+    arrangement: 'snap',
+    node: {
+      pad: 18,
+      thickness: 22,
+      line: { color: isDark ? '#4a4540' : '#d9d0c7', width: 0.5 },
+      label,
+      color: colors,
+      hoverlabel: { font: { size: 12 } }
+    },
+    link: {
+      source,
+      target,
+      value,
+      color: source.map((s, i) => {
+        const hex = colors[target[i]];
+        return hex + '55';
+      }),
+    }
+  }];
+
+  const layout = {
+    paper_bgcolor: paperBg,
+    plot_bgcolor:  plotBg,
+    font: { family: 'Segoe UI, sans-serif', color: textColor, size: 12 },
+    margin: { l: 10, r: 10, t: 30, b: 10 },
+    title: { text: 'FY2025 收入→成本→利润 资金流向（估算值，RMB 亿元）', font: { size: 13, color: textColor } }
+  };
+
+  Plotly.newPlot('sankey', data, layout, { responsive: true, displayModeBar: false });
+}
+
+// ── INIT ──
+document.addEventListener('DOMContentLoaded', () => {
+  buildCharts();
+  buildSankey();
+});
+</script>
+</body>
+</html>
