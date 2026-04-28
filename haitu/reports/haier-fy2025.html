@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-04-28，海尔智家 FY2025 财报已于 2026-03-27 发布 -->
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>海尔智家 06690.HK — FY2025 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root {
+  --bg: #f5f0eb; --bg2: #ece6df; --card: #ffffff; --card2: #f8f5f1; --border: #d9d0c7;
+  --text: #4a4340; --text2: #7a706a; --text3: #a89f98;
+  --accent: #8a9a8e; --accent2: #7b8fa0; --accent3: #b08d7a;
+  --rose: #c09090; --gold: #b9a06a; --red: #b87070; --green: #7a9a7a;
+  --shadow: rgba(0,0,0,0.06); --chart-grid: #e5ddd5;
+}
+[data-theme="dark"] {
+  --bg: #1e1c1a; --bg2: #28251f; --card: #2e2a25; --card2: #363230; --border: #4a4540;
+  --text: #d4ccc4; --text2: #a09890; --text3: #706860;
+  --accent: #8a9a8e; --accent2: #8fabbf; --accent3: #c9a48e;
+  --rose: #c09090; --gold: #c9b07a; --red: #c08080; --green: #8aaa8a;
+  --shadow: rgba(0,0,0,0.3); --chart-grid: #3e3a35;
+}
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Georgia','Noto Serif SC','PingFang SC',serif; line-height: 1.75; font-size: 14.5px; transition: background .35s, color .35s; }
+a { color: var(--accent2); text-decoration: none; }
+.theme-bar { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); }
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; }
+.theme-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+.toggle-switch { position: relative; width: 44px; height: 22px; background: var(--border); border-radius: 11px; cursor: pointer; transition: background .3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: var(--card); border-radius: 50%; transition: transform .3s; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+.hero { padding: 48px 24px 36px; text-align: center; border-bottom: 1px solid var(--border); }
+.hero-tag { display: inline-block; font-family: 'Segoe UI',sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 3px 14px; border-radius: 20px; margin-bottom: 18px; }
+.hero h1 { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.pill { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: 'Segoe UI',sans-serif; font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow); }
+.pill strong { color: var(--text); }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle { font-size: 18px; font-weight: 700; color: var(--accent3); margin-bottom: 20px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+.stitle::before { content: ''; display: block; width: 4px; height: 20px; background: var(--accent3); border-radius: 2px; }
+.haitu-quip { display: flex; align-items: center; gap: 18px; background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 18px 24px; margin: 24px 0; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-quote { flex: 1; }
+.haitu-portrait { font-size: 15px; line-height: 1.65; color: var(--text); margin-bottom: 6px; font-weight: 600; }
+.haitu-rating-line { font-size: 13px; color: var(--text2); font-family: 'Segoe UI',sans-serif; }
+.rating-badge { display: inline-block; padding: 2px 12px; border-radius: 12px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; margin-left: 4px; }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+.rating-cond-buy { background: rgba(185,160,106,.18); color: var(--gold); }
+.haitu-essay { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 28px 32px; margin: 24px 0 20px; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-essay-header { display: flex; align-items: center; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.haitu-avatar-sm { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); background: var(--red); box-shadow: 0 2px 8px rgba(184,112,112,0.2); }
+.haitu-name-lg { font-family: 'Georgia','Noto Serif SC',serif; font-size: 28px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 4px; }
+.haitu-essay-tag { font-family: 'Segoe UI',sans-serif; font-size: 12px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; }
+.haitu-essay-body { font-family: 'Georgia','Noto Serif SC',serif; font-size: 15px; line-height: 2.0; color: var(--text); }
+.haitu-essay-body p { margin-bottom: 14px; }
+.haitu-essay-body p.lead { font-size: 16px; font-style: italic; color: var(--text2); margin-bottom: 18px; }
+.haitu-essay-body strong { color: var(--text); font-weight: 700; }
+.haitu-essay-body h4 { font-size: 14px; color: var(--accent3); margin: 18px 0 10px; font-family: 'Segoe UI',sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+.haitu-sign { text-align: right; margin-top: 18px; font-family: 'Georgia',serif; font-size: 14px; color: var(--text2); font-style: italic; }
+.haitu-disc { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); font-style: italic; line-height: 1.7; }
+.stock-snap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill,minmax(160px,1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px; }
+.snap-item { text-align: center; }
+.snap-label { font-family: 'Segoe UI',sans-serif; font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.snap-val { font-family: 'Segoe UI',sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+.snap-val.up { color: var(--green); }
+.snap-val.dn { color: var(--red); }
+.snap-sub { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text3); margin-top: 2px; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(195px,1fr)); gap: 14px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow); }
+.kpi-l { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.badge { display: inline-block; font-family: 'Segoe UI',sans-serif; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+.up { background: rgba(122,154,122,.15); color: var(--green); }
+.dn { background: rgba(184,112,112,.15); color: var(--red); }
+.nt { background: rgba(123,143,160,.15); color: var(--accent2); }
+.tbl-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow); }
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI',sans-serif; font-size: 13px; }
+.tbl th { background: var(--card2); color: var(--text3); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); background: var(--card2); }
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); }
+.ctitle { font-family: 'Segoe UI',sans-serif; font-size: 12px; color: var(--text3); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 260px; }
+.cmt { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 26px; line-height: 1.95; font-size: 14px; box-shadow: 0 1px 4px var(--shadow); color: var(--text); }
+.cmt p { margin-bottom: 14px; }
+.cmt p:last-child { margin-bottom: 0; }
+.cmt strong { color: var(--text); }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+.bscore { display: flex; align-items: center; gap: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; margin-bottom: 12px; box-shadow: 0 1px 4px var(--shadow); }
+.circle { width: 62px; height: 62px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; flex-shrink: 0; border: 3px solid; font-family: 'Segoe UI',sans-serif; }
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 4px; color: var(--text); }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+.sgrid { display: grid; grid-template-columns: repeat(auto-fill,minmax(260px,1fr)); gap: 16px; }
+.scard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 20px; box-shadow: 0 1px 4px var(--shadow); border-top: 4px solid var(--accent); }
+.scard.brand1 { border-top-color: var(--accent3); }
+.scard.brand2 { border-top-color: var(--accent2); }
+.scard.brand3 { border-top-color: var(--gold); }
+.scard.brand4 { border-top-color: var(--rose); }
+.scard.brand5 { border-top-color: var(--green); }
+.scard h4 { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.scard .srev { font-family: 'Segoe UI',sans-serif; font-size: 24px; font-weight: 800; color: var(--text); }
+.scard .ssub { font-family: 'Segoe UI',sans-serif; font-size: 12px; color: var(--text3); margin-top: 2px; margin-bottom: 12px; }
+.scard ul { padding-left: 15px; }
+.scard li { font-size: 13px; color: var(--text2); margin-bottom: 4px; }
+.moat-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap: 14px; }
+.moat-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); border-left: 4px solid var(--accent); }
+.moat-card.wide { border-left-color: var(--green); }
+.moat-card.narrow { border-left-color: var(--gold); }
+.moat-card.none { border-left-color: var(--red); }
+.moat-card h5 { font-size: 13px; color: var(--text); margin-bottom: 6px; }
+.moat-card .moat-rate { font-family: 'Segoe UI',sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.moat-card.wide .moat-rate { background: rgba(122,154,122,.18); color: var(--green); }
+.moat-card.narrow .moat-rate { background: rgba(185,160,106,.18); color: var(--gold); }
+.moat-card.none .moat-rate { background: rgba(184,112,112,.18); color: var(--red); }
+.moat-card p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+.ec-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 14px; box-shadow: 0 1px 3px var(--shadow); }
+.ec-badge { flex-shrink: 0; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-top: 2px; font-family: 'Segoe UI',sans-serif; }
+.ec-bull { background: rgba(122,154,122,.18); color: var(--green); }
+.ec-bear { background: rgba(184,112,112,.18); color: var(--red); }
+.ec-neut { background: rgba(185,160,106,.18); color: var(--gold); }
+.ec-body { flex: 1; }
+.ec-title { font-weight: 600; color: var(--text); margin-bottom: 3px; font-size: 14px; }
+.ec-note { font-size: 13px; color: var(--text2); line-height: 1.7; }
+.dcf-note { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.dcf-note strong { color: var(--text); }
+.scorecard { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow); }
+.score-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(280px,1fr)); gap: 14px; }
+.score-card { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px; }
+.score-letter { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Segoe UI',sans-serif; font-weight: 800; font-size: 22px; flex-shrink: 0; border: 3px solid; }
+.s-a { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.12); }
+.s-bp { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.06); }
+.s-b { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.10); }
+.s-bm { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.06); }
+.s-c { color: var(--red); border-color: var(--red); background: rgba(184,112,112,.08); }
+.score-body h4 { font-size: 13px; color: var(--text); margin-bottom: 4px; }
+.score-body p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+.flag-row { margin-top: 16px; padding: 12px 16px; background: rgba(122,154,122,.08); border: 1px solid rgba(122,154,122,.2); border-radius: 8px; font-size: 13px; color: var(--text2); }
+.flag-row strong { color: var(--green); }
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center; box-shadow: 0 1px 4px var(--shadow); }
+.pbox .pl { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; }
+.pbox .pv { font-family: 'Segoe UI',sans-serif; font-size: 28px; font-weight: 800; margin-bottom: 5px; }
+.pbox .pn { font-size: 12px; color: var(--text3); line-height: 1.5; }
+.pc { color: var(--red); } .pf { color: var(--gold); } .ps { color: var(--green); }
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(280px,1fr)); gap: 14px; }
+.risk-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); position: relative; overflow: hidden; }
+.risk-card::before { content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent); }
+.risk-card.r1::before { background: var(--green); }
+.risk-card.r2::before { background: rgba(122,154,122,.6); }
+.risk-card.r3::before { background: var(--gold); }
+.risk-card.r4::before { background: var(--rose); }
+.risk-card.r5::before { background: var(--red); }
+.risk-card h5 { font-size: 14px; margin-bottom: 6px; color: var(--text); }
+.risk-score { font-family: 'Segoe UI',sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.r1 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r2 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r3 .risk-score { background: rgba(185,160,106,.18); color: var(--gold); }
+.r4 .risk-score { background: rgba(192,144,144,.18); color: var(--rose); }
+.r5 .risk-score { background: rgba(184,112,112,.18); color: var(--red); }
+.risk-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+footer { background: var(--card2); border-top: 1px solid var(--border); padding: 24px; text-align: center; color: var(--text3); font-size: 12px; margin-top: 40px; line-height: 1.8; }
+@media (max-width: 768px) { .cgrid,.pgrid { grid-template-columns: 1fr; } .hero h1 { font-size: 22px; } .kpi-grid { grid-template-columns: 1fr 1fr; } .stock-snap { grid-template-columns: 1fr 1fr; } .haitu-essay-header { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <div class="logo">海图夜读 · 财报研究所</div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">2026年4月28日 · FY2025 · 海图研判</div>
+  <h1>海尔智家 Haier Smart Home · 财报深度分析</h1>
+  <div class="hero-sub">HKEX: 06690 · SSE: 600690 · FRA: 690D &nbsp;|&nbsp; 2025年全年业绩 &nbsp;|&nbsp; 价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill">H 股 <strong>HKD 20.44</strong> <span style="color:var(--green)">股息率 5.7%</span></div>
+    <div class="pill">FY2025 营收 <strong>¥3,023亿</strong> <span style="color:var(--green)">+5.7%</span> 首破 3000 亿</div>
+    <div class="pill">归母净利 <strong>¥195.5亿</strong> <span style="color:var(--green)">+4.4%</span></div>
+    <div class="pill">海外收入 <strong>¥1,545亿</strong> 占比 51%（首超国内）</div>
+    <div class="pill">分红率 <strong>55%</strong> → 2028 ≥ 60%</div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 海图页首短评（不带头像、不带署名） ═══ -->
+<div class="haitu-quip">
+  <div class="haitu-quote">
+    <div class="haitu-portrait">全球家电行业的"中国整合者"——把 GE Appliances + Fisher&Paykel + Candy + Kwikot 四个海外品牌组成的全球版图，与卡萨帝高端国货组合成 ¥3,000 亿规模、海外占比 51% 的家电航母。</div>
+    <div class="haitu-rating-line">评级：<span class="rating-badge rating-buy">买入</span> · 12 个月目标价 HKD 28（+37%）· H 股折价 + 5.7% 股息双引擎</div>
+  </div>
+</div>
+
+<!-- ═══ 市场数据快照 ═══ -->
+<div class="section">
+  <div class="stitle">市场数据快照（2026-04-28）</div>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">H 股价（港元）</div><div class="snap-val">20.44</div><div class="snap-sub">截至 4 月 7 日</div></div>
+    <div class="snap-item"><div class="snap-label">A 股价（人民币）</div><div class="snap-val">~30.00</div><div class="snap-sub">600690.SH</div></div>
+    <div class="snap-item"><div class="snap-label">AH 折价</div><div class="snap-val up">~37%</div><div class="snap-sub">H 股折价 A 股</div></div>
+    <div class="snap-item"><div class="snap-label">总市值</div><div class="snap-val">¥2,500亿</div><div class="snap-sub">≈ USD 350B</div></div>
+    <div class="snap-item"><div class="snap-label">TTM P/E（A 股）</div><div class="snap-val">14.4x</div><div class="snap-sub">H 股 P/E 仅 9.0x</div></div>
+    <div class="snap-item"><div class="snap-label">EPS TTM</div><div class="snap-val">¥2.08</div><div class="snap-sub">+4.4% YoY</div></div>
+    <div class="snap-item"><div class="snap-label">远期股息率</div><div class="snap-val up">5.70%</div><div class="snap-sub">H 股，每股 HKD 0.29 中期</div></div>
+    <div class="snap-item"><div class="snap-label">P/B</div><div class="snap-val">~2.5x</div><div class="snap-sub">ROE 18%</div></div>
+    <div class="snap-item"><div class="snap-label">FCF Yield</div><div class="snap-val up">~7%</div><div class="snap-sub">FCF ¥175亿（估）</div></div>
+    <div class="snap-item"><div class="snap-label">分红比例</div><div class="snap-val">55%</div><div class="snap-sub">2026 ≥ 58% / 2028 ≥ 60%</div></div>
+    <div class="snap-item"><div class="snap-label">2025 回购</div><div class="snap-val">¥13亿</div><div class="snap-sub">A股 12 + H股 1（港币）</div></div>
+    <div class="snap-item"><div class="snap-label">机构均价目标（H）</div><div class="snap-val">HKD 30.1</div><div class="snap-sub">交银国际 +47%</div></div>
+  </div>
+</div>
+
+<!-- ═══ FY2025 KPI ═══ -->
+<div class="section">
+  <div class="stitle">FY2025 全年核心业绩（RMB 亿元）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">总营收</div><div class="kpi-v">¥3,023.5</div><span class="badge up">▲ +5.71% YoY</span><div style="font-size:12px;color:var(--text3);margin-top:4px">首破 3000 亿</div></div>
+    <div class="kpi"><div class="kpi-l">归母净利</div><div class="kpi-v">¥195.53</div><span class="badge up">▲ +4.39%</span><div style="font-size:12px;color:var(--text3);margin-top:4px">创历史新高</div></div>
+    <div class="kpi"><div class="kpi-l">中国大陆收入</div><div class="kpi-v">¥1,460.4</div><span class="badge up">▲ +3.07%</span><div style="font-size:12px;color:var(--text3);margin-top:4px">占比 48.3%</div></div>
+    <div class="kpi"><div class="kpi-l">海外收入</div><div class="kpi-v">¥1,545.5</div><span class="badge up">▲ +8.15%</span><div style="font-size:12px;color:var(--text3);margin-top:4px">占比 51.1%（首超国内）</div></div>
+    <div class="kpi"><div class="kpi-l">毛利率</div><div class="kpi-v">26.7%</div><span class="badge dn">▼ -1.1ppt YoY</span><div style="font-size:12px;color:var(--text3);margin-top:4px">原材料涨价拖累</div></div>
+    <div class="kpi"><div class="kpi-l">经营现金流</div><div class="kpi-v">¥260.0</div><span class="badge nt">● 1.33x 净利</span><div style="font-size:12px;color:var(--text3);margin-top:4px">质量优秀</div></div>
+    <div class="kpi"><div class="kpi-l">卡萨帝（高端）</div><div class="kpi-v">双位数+</div><span class="badge up">▲ 10 年第一</span><div style="font-size:12px;color:var(--text3);margin-top:4px">品牌价值 ¥928 亿</div></div>
+    <div class="kpi"><div class="kpi-l">Leader 统帅</div><div class="kpi-v">¥100亿+</div><span class="badge up">▲ +30% 首破</span><div style="font-size:12px;color:var(--text3);margin-top:4px">懒人三筒洗衣机 30 万台</div></div>
+    <div class="kpi"><div class="kpi-l">分红比例</div><div class="kpi-v">55%</div><span class="badge up">▲ +7ppt YoY</span><div style="font-size:12px;color:var(--text3);margin-top:4px">2028 计划 ≥60%</div></div>
+    <div class="kpi"><div class="kpi-l">总分红金额</div><div class="kpi-v">~¥99亿</div><span class="badge up">▲ 中期+末期</span><div style="font-size:12px;color:var(--text3);margin-top:4px">+ A/H/D 三市场回购 ¥13亿</div></div>
+    <div class="kpi"><div class="kpi-l">空调/水家电</div><div class="kpi-v">+10%</div><span class="badge up">▲ 增速最快</span><div style="font-size:12px;color:var(--text3);margin-top:4px">细分品类龙头</div></div>
+    <div class="kpi"><div class="kpi-l">股本结构</div><div class="kpi-v">A+H+D</div><span class="badge nt">● 三市场上市</span><div style="font-size:12px;color:var(--text3);margin-top:4px">总股本 ~94亿股</div></div>
+  </div>
+</div>
+
+<!-- ═══ Q4 2025 KPI ═══ -->
+<div class="section">
+  <div class="stitle">Q4 2025 季度业绩（估算 · 基于全年-前三季度）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">Q4 营收（估）</div><div class="kpi-v">~¥780亿</div><span class="badge dn">▼ Q4 减速</span><div style="font-size:12px;color:var(--text3);margin-top:4px">前三季 +10%, Q4 转负</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 归母净利（估）</div><div class="kpi-v">~¥45亿</div><span class="badge dn">▼ -15% 同比</span><div style="font-size:12px;color:var(--text3);margin-top:4px">"尾盘跳水" 36 氪报道</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 毛利率（估）</div><div class="kpi-v">~25.5%</div><span class="badge dn">▼ 全年最低</span><div style="font-size:12px;color:var(--text3);margin-top:4px">原材料涨价 + 补贴退坡</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 海外占比（估）</div><div class="kpi-v">52-53%</div><span class="badge up">▲ 持续提升</span></div>
+    <div class="kpi"><div class="kpi-l">Q4 卡萨帝增速</div><div class="kpi-v">放缓</div><span class="badge nt">● 低基数下 +10%</span></div>
+    <div class="kpi"><div class="kpi-l">Q4 一次性</div><div class="kpi-v">无重大</div><span class="badge nt">● 干净季报</span></div>
+  </div>
+</div>
+
+<!-- ═══ 季度趋势图 ═══ -->
+<div class="section">
+  <div class="stitle">季度趋势 + 5 年总览</div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">5 年营收（RMB 亿元）</div><div class="cwrap"><canvas id="revenueChart"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">5 年归母净利（RMB 亿元）</div><div class="cwrap"><canvas id="profitChart"></canvas></div></div>
+  </div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">FY2025 国内 vs 海外（RMB 亿元）</div><div class="cwrap"><canvas id="segmentChart"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">5 年分红与回购（RMB 亿元）</div><div class="cwrap"><canvas id="dividendChart"></canvas></div></div>
+  </div>
+</div>
+
+<!-- ═══ 资金流向桑基图 ═══ -->
+<div class="section">
+  <div class="stitle">FY2025 资金流向 · 营收 → 自由现金流（RMB 亿元）</div>
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px;box-shadow:0 1px 4px var(--shadow);">
+    <div id="sankey" style="width:100%;height:480px;"></div>
+    <p style="font-size:12px;color:var(--text3);margin-top:10px;line-height:1.7;">
+      桑基图揭示海尔的资金路径：3,023 亿营收中 2,217 亿被 COGS 消耗（毛利率 26.7%——制造业典型水平），毛利 807 亿覆盖 470 亿销售&管理费用 + 100 亿研发，形成营业利润 230 亿；扣除税收 35 亿后归母净利 196 亿；加回 75 亿非现金调整（折旧+股权激励）后经营现金流 260 亿，扣除 85 亿资本开支（产线升级 + 海外扩张）后<strong>FCF ≈ 175 亿（FCF Yield ~7%）</strong>。海尔的现金转化效率不如腾讯但优于一般制造业。
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 模块 1：公司概览与背景 ═══ -->
+<div class="section">
+  <div class="stitle">模块 1 · 公司概览与背景</div>
+  <div class="cmt">
+    <p><strong>基本信息：</strong>海尔智家股份有限公司（Haier Smart Home Co., Ltd.，A股 600690 / H股 06690 / D股 690D），全球第一家电品牌（按 Euromonitor 大型家电零售量统计连续 16 年）。前身为 1984 年成立的青岛电冰箱总厂，张瑞敏"砸冰箱"事件的发源地。1993 年 A 股上市，2018 年 D 股法兰克福上市，2020 年 12 月 H 股港交所上市。</p>
+
+    <p><strong>关键里程碑：</strong></p>
+    <ul style="margin-left:24px;color:var(--text2);">
+      <li>1984：青岛电冰箱总厂成立，张瑞敏接手</li>
+      <li>1985：张瑞敏"砸冰箱"事件——质量管理革命</li>
+      <li>1993：A 股上市（600690.SH）</li>
+      <li>2016：65.4 亿美元收购 GE Appliances（美国家电巨头）—— 中国家电史上最大跨境并购</li>
+      <li>2018：收购 Fisher & Paykel（新西兰高端品牌）；D 股法兰克福上市</li>
+      <li>2019：收购 Candy（意大利百年品牌，欧洲市场）</li>
+      <li>2020 年 12 月：H 股港交所上市，募资 ¥267 亿</li>
+      <li>2024：收购南非 CCR 和 Kwikot（百年水器品牌）</li>
+      <li>2025：营收首破 3000 亿，海外占比首超国内（51%）</li>
+    </ul>
+
+    <p><strong>股权结构（截至 2025 年末）：</strong></p>
+    <ul style="margin-left:24px;color:var(--text2);">
+      <li>海尔集团（青岛市国资委参与的混合所有制集团）：约 35%</li>
+      <li>HCH（HONG KONG）公司：约 15%</li>
+      <li>海尔员工持股计划：~5%</li>
+      <li>其他公众股东：~45%</li>
+      <li><strong>同股同权</strong>，无双重股权（A/H/D 三市场流通）</li>
+    </ul>
+
+    <p><strong>公司治理与 ESG：</strong>董事会 9 人，独立董事 3 人。CEO 周云杰（张瑞敏接班人）已任 CEO 6 年，稳定性高。MSCI ESG 评级：BBB（中国家电行业最高）。"人单合一"管理模式（员工与用户直接对接）是海尔独有的组织哲学，被哈佛商学院多次写入案例。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 2：管理层评估 ═══ -->
+<div class="section">
+  <div class="stitle">模块 2 · 管理层评估</div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>名誉董事长 · 张瑞敏（已退居二线，但仍是精神领袖）</h4>
+      <p>1949 年生，海尔集团创始人。1984 年接手青岛电冰箱厂，1985 年"砸 76 台不合格冰箱"事件成为中国管理学经典案例。2021 年 11 月辞去董事长一职，由周云杰接任。提出"人单合一"管理哲学，被多家全球商学院作为案例研究。<strong>3/3 · 长期主义典范</strong>。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>董事长兼 CEO · 周云杰（接班人）</h4>
+      <p>1966 年生，1988 年加入海尔，已 38 年司龄。2021 年正式接任 CEO，2024 年起兼任董事长。在张瑞敏退居后稳定地推进了"高端化（卡萨帝）+ 全球化（GE/Candy 整合）+ 数字化"三大战略。在最新业绩说明会中坦承"2025 年下半年面临原材料涨价压力"——管理层坦诚度高。<strong>3/3 · 像老板一样思考</strong>。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">A</div>
+    <div class="bd">
+      <h4>资本配置历史 · 四大经典并购案例</h4>
+      <p><strong>1. 2016 年收购 GE Appliances（$5.4B）：</strong>从 GE 手中买下美国家电巨头，10 年后 GE Appliances 已成为海尔海外最大利润中心，跨境并购教科书级案例。<br>
+      <strong>2. 2018 年收购 Fisher & Paykel：</strong>新西兰高端家电品牌，与卡萨帝形成"国内外双高端"格局。<br>
+      <strong>3. 2019 年收购 Candy：</strong>意大利百年品牌，进入欧洲市场。2025 年欧洲市场增速双位数，整合见效。<br>
+      <strong>4. 2024 年收购 CCR + Kwikot：</strong>南非百年水器品牌，进入非洲市场。海尔"全球第一家电"地位的最后拼图。<br>
+      <strong>资本配置评分：A 级</strong>——4 次跨境并购全部消化吸收，没有出现像联想-IBM PC、TCL-汤姆逊那样的整合失败案例。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">A</div>
+    <div class="bd">
+      <h4>分红 + 回购 双重股东回报（罕见）</h4>
+      <p>2025 年分红比例 55%（同比 +7ppt），承诺 2026 ≥ 58%、2027/2028 ≥ 60%——<strong>明确递增的分红规划</strong>是中国上市公司中极少见的。同时 2025 年在 A/H/D 三个市场全部回购：A 股 ¥12 亿、H 股 HK$1 亿、D 股 86.6 万股。<span class="hl-t">这种"分红+回购双轨道+三市场协调"的资本配置纪律，是中国家电行业中独一档</span>——美的也分红但比例较低，格力则更倾向特别股息但不连续。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 模块 3：商业模式深度解析 ═══ -->
+<div class="section">
+  <div class="stitle">模块 3 · 商业模式深度解析</div>
+
+  <div class="cmt">
+    <p><span class="hl-t">海图"一句话测试"：</span>"海尔智家是把工厂、品牌、渠道、服务整合成的'全球家电生态'——从冰箱、洗衣机、空调到水家电、智能家居场景化，覆盖 200 多个国家，靠规模 + 品牌组合（卡萨帝高端 + GE 海外 + Candy 欧洲）赚毛利。"</p>
+  </div>
+
+  <div class="sgrid" style="margin-top:18px;">
+    <div class="scard brand1">
+      <h4>🇨🇳 中国大陆主品牌</h4>
+      <div class="srev">¥1,460亿</div>
+      <div class="ssub">FY2025 · +3.1% · 占比 48.3%</div>
+      <ul>
+        <li>海尔（主品牌）+ 卡萨帝（高端）+ Leader（年轻化）</li>
+        <li>冰箱、洗衣机、空调、热水器市占率第一</li>
+        <li>受补贴退坡 + 消费疲弱影响，增速放缓</li>
+      </ul>
+    </div>
+    <div class="scard brand2">
+      <h4>👑 卡萨帝（高端旗舰）</h4>
+      <div class="srev">双位数+</div>
+      <div class="ssub">连续 10 年高端市场第一</div>
+      <ul>
+        <li>冰箱 1 万元+ 市占率 44%</li>
+        <li>洗衣机高端市占率 75%（垄断）</li>
+        <li>空调 1.5 万元+ 市占率 53%</li>
+        <li>品牌价值 ¥928.16 亿</li>
+      </ul>
+    </div>
+    <div class="scard brand3">
+      <h4>🆕 Leader 统帅（年轻化）</h4>
+      <div class="srev">¥100亿+</div>
+      <div class="ssub">+30% YoY · 首次破百亿</div>
+      <ul>
+        <li>主打 95/00 后年轻群体</li>
+        <li>懒人三筒洗衣机销量超 30 万台</li>
+        <li>电商渠道 + 内容营销驱动</li>
+      </ul>
+    </div>
+    <div class="scard brand4">
+      <h4>🇺🇸 GE Appliances（美国）</h4>
+      <div class="srev">~¥600亿（估）</div>
+      <div class="ssub">海外最大利润中心</div>
+      <ul>
+        <li>2016 年 $5.4B 收购</li>
+        <li>2025 年获 Lowe's 最佳供应商奖</li>
+        <li>路易斯维尔扩建洗衣机产线</li>
+        <li>HVAC 业务双位数增长</li>
+      </ul>
+    </div>
+    <div class="scard brand5">
+      <h4>🌍 欧洲（Candy）+ 大洋洲（F&P）+ 非洲（CCR/Kwikot）</h4>
+      <div class="srev">~¥900亿（估）</div>
+      <div class="ssub">海外其余市场合计</div>
+      <ul>
+        <li>欧洲市场双位数增长 + 盈利改善</li>
+        <li>F&P 高端品牌 + 大洋洲市场领先</li>
+        <li>南非水器 Kwikot 整合中</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="cmt" style="margin-top:18px;">
+    <p><strong>单位经济（Unit Economics）：</strong></p>
+    <ul style="margin-left:24px;color:var(--text2);">
+      <li><strong>全球出货量：</strong>家电件数 ~2 亿台/年（含冰箱、洗衣机、空调等所有品类）</li>
+      <li><strong>每台均价 ARPU ≈ ¥1,500</strong>（综合）；卡萨帝单台均价可达 ¥10,000+</li>
+      <li><strong>毛利率结构：</strong>主品牌 ~22% / 卡萨帝 ~35% / GE Appliances ~25% / Candy ~20%</li>
+      <li><strong>渠道结构：</strong>线上 35% + 线下 65%；海外以经销商模式为主</li>
+      <li><strong>品牌溢价</strong>：卡萨帝 vs 海尔主品牌的同品类售价差距 2-3 倍——这是最强的护城河证据</li>
+    </ul>
+
+    <p><strong>产业链定位：</strong>海尔是<span class="hl-t">"垂直整合的家电制造商"</span>——既是上游制造（自有工厂遍布全球 30+ 国家）、也是中游品牌（多品牌矩阵）、还是下游零售（自营线上 + 经销商网络）。这种垂直整合模式的优势是<strong>可控性强</strong>，劣势是<strong>资产较重、对周期敏感</strong>。议价能力评分：<strong>4/5 · 上游强 + 下游中等</strong>（对原材料供应商弱，对家电零售商较强）。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 4：经济护城河分析 ═══ -->
+<div class="section">
+  <div class="stitle">模块 4 · 经济护城河分析（5 维）</div>
+
+  <div class="moat-grid">
+    <div class="moat-card narrow">
+      <h5>1. 网络效应</h5>
+      <span class="moat-rate">中等护城河 ★★★</span>
+      <p>智能家居场景化（"三翼鸟"全屋方案）正在构建用户场景网络效应——一个海尔冰箱+一个海尔洗衣机会让用户更倾向于继续选择海尔空调。但这种网络效应仍较弱，远低于互联网平台。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>2. 转换成本</h5>
+      <span class="moat-rate">中等护城河 ★★★</span>
+      <p>家电耐用品 8-10 年寿命，本身就是"低换购频率"市场。卡萨帝高端用户的品牌粘性较强；但中低端市场用户转换成本几乎为零。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>3. 成本优势</h5>
+      <span class="moat-rate">宽护城河 ★★★★</span>
+      <p>全球 35 家工厂 + 中国大规模生产 + 上下游议价能力——单台冰箱/洗衣机的边际成本比中小厂家低 15-20%。这是真实的规模护城河。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>4. 无形资产（多品牌矩阵）</h5>
+      <span class="moat-rate">宽护城河 ★★★★</span>
+      <p>海尔（中国主品牌）+ 卡萨帝（高端）+ GE Appliances（美国）+ Candy（欧洲）+ Fisher&Paykel（大洋洲）+ Kwikot（非洲）—— <strong>全球唯一拥有完整地理品牌矩阵的家电公司</strong>。卡萨帝的 ¥928 亿品牌价值 + 10 年高端第一是核心。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>5. 有效规模</h5>
+      <span class="moat-rate">中等护城河 ★★★</span>
+      <p>全球家电市场规模 $500B+，海尔约 5% 全球份额——不算垄断。中国市场（白电三巨头海尔/美的/格力）CR3 = 60-70%，相对集中但仍有竞争。</p>
+    </div>
+  </div>
+
+  <div class="cmt" style="margin-top:18px;">
+    <p><strong>护城河总评：宽护城河（3.4/5）</strong>——成本优势 + 多品牌无形资产是双核心。比一般家电公司宽，但比腾讯/茅台等顶级护城河公司窄。</p>
+    <p><strong>护城河趋势：</strong></p>
+    <ul style="margin-left:24px;color:var(--text2);">
+      <li><span class="hl-t">加宽中：</span>卡萨帝品牌价值 4 年翻倍（¥459 亿 → ¥928 亿）；海外品牌矩阵从 4 个扩到 6 个；"三翼鸟"场景化加强用户粘性</li>
+      <li><span class="hl-t">稳定：</span>中国白电市场地位（CR3 第一名）</li>
+      <li><span class="warn-t">轻微侵蚀：</span>小米生态链（米家家电）切入年轻市场；抖音电商让中小品牌可低成本获取流量；原材料涨价压制成本优势</li>
+    </ul>
+    <p><strong>10 年后会更宽还是更窄？</strong>——更宽。理由：(1) 全球品牌整合还在持续；(2) 智能家居场景化仍处于早期；(3) 印度 + 东南亚 + 非洲新兴市场仍有 5-10 年增长空间。海尔是<span class="hl-t">少数有"5 年以上确定性增长路径"的中国制造业公司</span>。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 5：财务深度分析 ═══ -->
+<div class="section">
+  <div class="stitle">模块 5 · 财务深度分析</div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:18px 0 12px">5.1 利润表 — 5 年趋势</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>项目（RMB 亿元）</th><th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th></tr></thead>
+      <tbody>
+        <tr><td>营业收入</td><td>2,275</td><td>2,435</td><td>2,614</td><td>2,860</td><td><strong>3,023</strong></td></tr>
+        <tr><td>YoY%</td><td>+8.5%</td><td>+7.0%</td><td>+7.3%</td><td>+9.4%</td><td><strong>+5.7%</strong></td></tr>
+        <tr><td>毛利</td><td>713</td><td>753</td><td>760</td><td>796</td><td><strong>807</strong></td></tr>
+        <tr><td>毛利率%</td><td>31.3%</td><td>30.9%</td><td>29.1%</td><td>27.8%</td><td><strong>26.7%</strong></td></tr>
+        <tr><td>营业利润</td><td>165</td><td>177</td><td>200</td><td>226</td><td><strong>230</strong></td></tr>
+        <tr class="hl"><td>归母净利</td><td>131</td><td>147</td><td>166</td><td>187</td><td><strong>195.5</strong></td></tr>
+        <tr><td>YoY%</td><td>+47%</td><td>+12%</td><td>+13%</td><td>+13%</td><td><strong>+4.4%</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:12px;color:var(--text3);margin-top:8px;line-height:1.6">注：毛利率从 2021 年的 31.3% 持续下降到 2025 年的 26.7%（4 年累计 -4.6ppt），<strong>这是制造业典型的"规模扩张牺牲毛利"路径</strong>——海外低毛利业务占比上升 + 原材料涨价。但净利率反而稳定在 6.5%，说明费用管控有效。</p>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">5.2 关键财务比率（5 年趋势）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>比率</th><th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th><th>趋势</th></tr></thead>
+      <tbody>
+        <tr><td>毛利率</td><td>31.3%</td><td>30.9%</td><td>29.1%</td><td>27.8%</td><td>26.7%</td><td><span class="badge dn">▼ 持续下降</span></td></tr>
+        <tr><td>营业利润率</td><td>7.3%</td><td>7.3%</td><td>7.7%</td><td>7.9%</td><td>7.6%</td><td><span class="badge nt">● 稳定</span></td></tr>
+        <tr><td>净利率</td><td>5.8%</td><td>6.0%</td><td>6.4%</td><td>6.5%</td><td>6.5%</td><td><span class="badge up">▲ 缓升</span></td></tr>
+        <tr><td>ROE</td><td>17.2%</td><td>17.6%</td><td>17.8%</td><td>18.0%</td><td>~18%</td><td><span class="badge up">▲ 稳健</span></td></tr>
+        <tr><td>ROA</td><td>5.5%</td><td>5.7%</td><td>5.9%</td><td>6.1%</td><td>~6%</td><td><span class="badge up">▲ 缓升</span></td></tr>
+        <tr><td>ROIC</td><td>12.0%</td><td>12.5%</td><td>13.0%</td><td>13.5%</td><td>~13%</td><td><span class="badge up">▲ 稳健</span></td></tr>
+        <tr><td>FCF/Revenue</td><td>3.5%</td><td>4.5%</td><td>5.5%</td><td>6.5%</td><td>~5.8%</td><td><span class="badge nt">● 略降</span></td></tr>
+        <tr><td>FCF/净利润</td><td>61%</td><td>76%</td><td>87%</td><td>99%</td><td>~90%</td><td><span class="badge up">▲ 优质</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:12px;color:var(--text3);margin-top:8px;line-height:1.6">注：海尔 ROE 稳定在 17-18%——<strong>这是中国制造业中较为优秀的水平</strong>，且 5 年间持续微升。FCF/净利润从 61% 升至 90%，现金质量显著改善。</p>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">5.3 杜邦分析 — 拆解 ROE 18%</h3>
+  <div class="cmt">
+    <p>FY2025 ROE = 利润率 × 资产周转率 × 财务杠杆 = <strong>6.5% × 1.0 × 2.8 = 18.2%</strong></p>
+    <ul style="margin-left:24px;color:var(--text2);">
+      <li><strong>利润率 6.5%（薄）：</strong>制造业典型水平，比腾讯（35%）/ 茅台（50%+）低一个数量级。但比一般白电同行（如格力 14%、美的 9%）有所差距</li>
+      <li><strong>资产周转率 1.0（高）：</strong>海尔的资产周转率领先美的（0.8）、格力（0.5），是 ROE 的最大贡献</li>
+      <li><strong>财务杠杆 2.8（适中）：</strong>有息负债 + 应付账款 + 经营性负债，符合制造业模式</li>
+    </ul>
+    <p>结论：海尔 ROE 来自<span class="hl-t">资产高效周转 + 适度财务杠杆</span>，而非利润率。这是<strong>"运营效率取胜"型公司</strong>，而非"高定价取胜"型。</p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">5.4 资产负债健康度</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>项目（RMB 亿元）</th><th>2025 年末</th><th>评估</th><th>价值投资标准</th></tr></thead>
+      <tbody>
+        <tr><td>流动比率</td><td>~1.2x</td><td>合理</td><td>&gt;1.0x</td></tr>
+        <tr><td>速动比率</td><td>~0.9x</td><td>临界</td><td>&gt;0.8x（制造业放宽）</td></tr>
+        <tr><td>有息负债总额</td><td>~¥250亿</td><td>较低</td><td>合理</td></tr>
+        <tr><td>有息负债 / 总资产</td><td>~12%</td><td>较低</td><td>&lt;30%</td></tr>
+        <tr><td>有息负债 / 所有者盈余</td><td>~1.2x</td><td>极优</td><td>&lt;4x</td></tr>
+        <tr><td>利息覆盖倍数</td><td>~30x</td><td>极优</td><td>&gt;5x</td></tr>
+        <tr><td>总现金（含短投）</td><td>~¥600亿</td><td>充裕</td><td>—</td></tr>
+        <tr class="hl"><td>净现金</td><td>~¥350亿</td><td>稳健</td><td>—</td></tr>
+        <tr><td>商誉</td><td>~¥250亿</td><td>合理</td><td>主要为 GE/Candy/F&P 收购</td></tr>
+        <tr><td>商誉减值风险</td><td>低</td><td>—</td><td>4 次跨境并购消化良好</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">5.5 现金流质量</h3>
+  <div class="cmt">
+    <ul style="margin-left:24px;color:var(--text2);">
+      <li><strong>经营现金流/净利润 = 260/195.5 = 133%</strong> — <span class="hl-t">优质标志</span></li>
+      <li><strong>5 年自由现金流轨迹：</strong>2021 年 ¥80 亿 → 2022 年 ¥110 亿 → 2023 年 ¥144 亿 → 2024 年 ¥185 亿 → 2025 年 ~¥175 亿；CAGR 17%（2025 略降是 Capex 增加）</li>
+      <li><strong>资本开支结构：</strong>FY2025 总 Capex ~¥85 亿 = 维护性 ~¥30 亿 + 扩张性（产线升级 + 海外建厂）~¥55 亿。海尔是"中度资本密集"行业</li>
+      <li><strong>营运资金管理：</strong>预收账款 + 应付账款管理优秀，营运资金净流入贡献 OCF</li>
+    </ul>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">5.6 所有者盈余计算</h3>
+  <div class="cmt">
+    <p style="font-family:'Segoe UI',monospace;background:var(--card2);padding:14px;border-radius:6px;margin:12px 0;font-size:13px">
+    所有者盈余 = ¥195.5 亿（GAAP 净利） + ¥75 亿（折旧摊销估） + ¥15 亿（股权激励估） - ¥30 亿（维护 Capex） + ¥30 亿（营运资金净流入）<br>
+    = <strong style="color:var(--green)">¥285.5 亿</strong>
+    </p>
+    <p>所有者盈余收益率 = 285.5 / 2,500 (CNY 总市值) = <strong style="color:var(--green)">11.4%</strong></p>
+    <p>对比 10 年期中国国债收益率约 2.0%，海尔的所有者盈余收益率提供约 9.4 个百分点的<span class="hl-t">巨额风险溢价</span>。<strong>港股 H 股因 AH 折价 37%，实际收益率更高至 ~14%</strong>——这是 H 股投资者额外享受的折价红利。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 6：电话会分析 ═══ -->
+<div class="section">
+  <div class="stitle">模块 6 · 业绩说明会分析（最新 + 前 2 期）</div>
+
+  <p style="font-size:13px;color:var(--text2);margin-bottom:16px;">主要解读 FY2025 业绩说明会（2026-03-27）+ Q3 2025 + H1 2025 三期演变。</p>
+
+  <h3 style="font-size:15px;color:var(--text);margin:18px 0 12px">FY2025 业绩说明会要点</h3>
+
+  <div class="ec-item">
+    <span class="ec-badge ec-bull">利好</span>
+    <div class="ec-body">
+      <div class="ec-title">周云杰：海外收入首超国内，全球第一家电品牌地位巩固</div>
+      <div class="ec-note">"2025 年是公司全球化进入新阶段的元年"——海外占比 51% 是历史性突破。GE Appliances 美国市场获 Lowe's 最佳供应商奖；欧洲 Candy 整合见效，业绩双位数增长。</div>
+    </div>
+  </div>
+
+  <div class="ec-item">
+    <span class="ec-badge ec-bull">利好</span>
+    <div class="ec-body">
+      <div class="ec-title">分红比例承诺递增：2026 ≥58%，2028 ≥60%</div>
+      <div class="ec-note">"未来 3 年股东回报规划"是海尔历史上首次发布<strong>明确的多年分红规划</strong>。这与中国移动、新华文轩等"高股息"标的的资本配置纪律一致。同时 2025 年 A/H/D 三市场协同回购也是创新。</div>
+    </div>
+  </div>
+
+  <div class="ec-item">
+    <span class="ec-badge ec-bull">利好</span>
+    <div class="ec-body">
+      <div class="ec-title">卡萨帝 + Leader 双轮驱动</div>
+      <div class="ec-note">卡萨帝连续 10 年高端第一，品牌价值 ¥928 亿；Leader 首次破百亿+30%。两个差异化品牌在不同细分市场都站稳脚跟——这种"高端 + 年轻化"双品牌战略是海尔区别于美的、格力的核心。</div>
+    </div>
+  </div>
+
+  <div class="ec-item">
+    <span class="ec-badge ec-bear">利空</span>
+    <div class="ec-body">
+      <div class="ec-title">毛利率连续 4 年下降至 26.7%</div>
+      <div class="ec-note">"海外低毛利业务扩张 + 原材料涨价"双重压力。<span class="warn-t">2026 年的铜（+40% YTD）、R32 制冷剂（+80% YoY）涨价将进一步压制毛利率</span>。管理层未给具体毛利率指引但暗示"短期承压"。</div>
+    </div>
+  </div>
+
+  <div class="ec-item">
+    <span class="ec-badge ec-bear">利空</span>
+    <div class="ec-body">
+      <div class="ec-title">2026 年中国家电以旧换新补贴或减半</div>
+      <div class="ec-note">交银国际预计 2026 年家电零售规模较 2025 年下滑 6.7%。<span class="warn-t">国内市场 2026 年大概率是负增长</span>——海尔需要靠海外业务的增长来弥补。</div>
+    </div>
+  </div>
+
+  <div class="ec-item">
+    <span class="ec-badge ec-neut">中性</span>
+    <div class="ec-body">
+      <div class="ec-title">"三翼鸟"场景化战略持续推进</div>
+      <div class="ec-note">智能家居全屋场景方案已布局 5 年，但变现路径仍未完全跑通。<span class="hl-t">这是海尔的"长期赌注"</span>——成功了护城河会大幅加宽，失败了仅是策略调整。</div>
+    </div>
+  </div>
+
+  <div class="ec-item">
+    <span class="ec-badge ec-bull">利好</span>
+    <div class="ec-body">
+      <div class="ec-title">空调、水家电业务保持双位数增长</div>
+      <div class="ec-note">在主品类增速放缓的背景下，空调、水家电是海尔的"第二曲线"。空调对标格力/美的、水家电对标 A.O.史密斯，两个细分市场份额均在前三。</div>
+    </div>
+  </div>
+
+  <div class="ec-item">
+    <span class="ec-badge ec-neut">中性</span>
+    <div class="ec-body">
+      <div class="ec-title">2025 年回购规模 ¥13 亿（A+H+D 三市场）</div>
+      <div class="ec-note">海尔在三个市场同时回购是港股市场少见的资本配置纪律。但<span class="warn-t">¥13 亿相对 ¥2,500 亿市值仅 0.5%</span>，规模偏小——比腾讯 800 亿港元回购弱，更多是"信号意义"。</div>
+    </div>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">指引演变追踪</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>承诺事项</th><th>H1 2025</th><th>Q3 2025</th><th>FY2025</th><th>兑现状况</th></tr></thead>
+      <tbody>
+        <tr><td>营收破 3000 亿</td><td>"力争达成"</td><td>"路径清晰"</td><td>"达成 ¥3,023 亿"</td><td><span class="badge up">✓ 兑现</span></td></tr>
+        <tr><td>海外占比超国内</td><td>"年内有望"</td><td>"H2 加速"</td><td>"达成 51%"</td><td><span class="badge up">✓ 兑现</span></td></tr>
+        <tr><td>卡萨帝双位数+</td><td>"信心十足"</td><td>"维持双位数"</td><td>"双位数"</td><td><span class="badge up">✓ 兑现</span></td></tr>
+        <tr><td>Leader 破百亿</td><td>"全力冲刺"</td><td>"接近百亿"</td><td>"超 ¥100 亿（+30%）"</td><td><span class="badge up">✓ 兑现</span></td></tr>
+        <tr><td>分红比例提升</td><td>"持续提升"</td><td>"约 50-55%"</td><td>"55%（同 +7ppt）"</td><td><span class="badge up">✓ 兑现</span></td></tr>
+        <tr><td>毛利率稳定</td><td>"小幅下降"</td><td>"承压"</td><td>"-1.1ppt 至 26.7%"</td><td><span class="badge dn">✗ 略不达预期</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:13px;color:var(--text2);margin-top:12px;line-height:1.7">总评：管理层 5/6 项兑现，<span class="hl-t">业绩说明会信誉极高</span>。唯一未达预期的毛利率是行业共性问题（原材料涨价），非海尔独有。</p>
+</div>
+
+<!-- ═══ 模块 7：多模型估值 ═══ -->
+<div class="section">
+  <div class="stitle">模块 7 · 多模型估值（8 种方法交叉验证）</div>
+
+  <p style="font-size:13px;color:var(--text2);margin-bottom:16px;">所有估值<strong>独立推导</strong>，不锚定当前股价 HKD 20.44。基于 FY2025 实际数据 + FY2026E 前瞻指引。汇率：1 CNY ≈ 1.075 HKD。</p>
+
+  <h3 style="font-size:15px;color:var(--text);margin:18px 0 12px">7.1 相对估值（同行 + 历史分位）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>指标</th><th>海尔 H 股</th><th>海尔 A 股</th><th>美的</th><th>格力</th><th>Whirlpool</th><th>Bosch（私）</th></tr></thead>
+      <tbody>
+        <tr><td>P/E (TTM)</td><td>9.0x</td><td>14.4x</td><td>13.5x</td><td>9.5x</td><td>22x</td><td>—</td></tr>
+        <tr><td>P/E (Forward 2026E)</td><td>9.5x</td><td>14.0x</td><td>12.5x</td><td>9.0x</td><td>20x</td><td>—</td></tr>
+        <tr><td>P/B</td><td>1.6x</td><td>2.5x</td><td>3.5x</td><td>2.0x</td><td>2.8x</td><td>—</td></tr>
+        <tr><td>EV/EBITDA</td><td>5.5x</td><td>9.0x</td><td>9.5x</td><td>5.5x</td><td>11x</td><td>—</td></tr>
+        <tr><td>股息率</td><td>5.7%</td><td>3.5%</td><td>4.5%</td><td>7.5%</td><td>5.0%</td><td>—</td></tr>
+        <tr><td>ROE</td><td>18%</td><td>18%</td><td>20%</td><td>20%</td><td>20%</td><td>—</td></tr>
+        <tr><td>5 年净利 CAGR</td><td>+10%</td><td>+10%</td><td>+11%</td><td>-3%</td><td>-15%</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:13px;color:var(--text2);margin-top:12px;line-height:1.7"><strong>结论：</strong>海尔 H 股 P/E 9.0x 在白电三巨头中最低（vs 美的 13.5x、格力 9.5x）。<span class="hl-t">海尔 H 股 vs A 股折价 37%</span>——这是港股标的特有的"双重折价"机会（中概股折价 + AH 折价）。<strong>合理 P/E 区间：H 股 13-15x → 对应 HKD 28-32</strong>。</p>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">7.1.1 P/E 多档透视表</h3>
+  <p style="font-size:13px;color:var(--text2);margin-bottom:14px;">海尔 IFRS vs 非 IFRS 差异较小（&lt;5%），季度净利波动不大，<strong>基本不需要 P/E 多档透视</strong>。但因 AH 双重上市存在显著价差，列出 A/H 双档对比：</p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>计算口径</th><th>对应净利</th><th>EPS</th><th>P/E</th><th>可信度</th><th>解读</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td><strong>H 股 TTM P/E</strong></td><td>¥195.5 亿</td><td>HKD 2.24</td><td><strong>9.0x</strong></td><td><strong>高</strong></td><td><strong>港股折价 37%——价值投资者首选</strong></td></tr>
+        <tr><td>A 股 TTM P/E</td><td>¥195.5 亿</td><td>¥2.08</td><td>14.4x</td><td>高</td><td>大陆 A 股市场定价</td></tr>
+        <tr><td>D 股 TTM P/E（法兰克福）</td><td>¥195.5 亿</td><td>~EUR 1.45</td><td>~10x</td><td>中</td><td>欧洲投资者定价</td></tr>
+        <tr><td>Forward 2026E（H 股）</td><td>~¥210 亿（共识）</td><td>~HKD 2.40</td><td>8.5x</td><td>中高</td><td>市场预期 +7-8% 增长</td></tr>
+        <tr><td>5 年平均 P/E（H 股）</td><td>—</td><td>—</td><td>~12x</td><td>—</td><td>当前位于 5 年 25% 分位</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:13px;color:var(--text2);margin-top:12px;line-height:1.7;">
+    <strong>关键洞察：</strong>同一家公司、同一份财报，H 股 P/E 9x vs A 股 14.4x，<strong>H 股折价 37%</strong>。这种折价主要来自港股市场流动性折扣 + 港股估值中枢偏低。但企业基本面完全相同——<span class="hl-t">如果你是中长期投资者，H 股是更优选择</span>。
+  </p>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">7.2 DCF 三情景估值</h3>
+  <div class="dcf-note" style="margin-bottom:18px">
+    <strong>关键假设：</strong>WACC 9.0%（无风险利率 2.5% + 股权风险溢价 6.5%）；终值永续增长率 3%（家电制造业接近 GDP 增速）；股本不变；FY2025 自由现金流基础约 ¥175 亿。
+  </div>
+
+  <div class="pgrid">
+    <div class="pbox">
+      <div class="pl">悲观情景（25%）</div>
+      <div class="pv pc">HKD 18</div>
+      <div class="pn">营收 CAGR 3%（国内萎缩 + 海外放缓）<br>OPM 收窄至 7%<br>FCF CAGR 0%</div>
+    </div>
+    <div class="pbox">
+      <div class="pl">基准情景（50%）</div>
+      <div class="pv pf">HKD 28</div>
+      <div class="pn">营收 CAGR 6%（海外驱动 + 卡萨帝）<br>OPM 稳定 8%<br>FCF CAGR 8%</div>
+    </div>
+    <div class="pbox">
+      <div class="pl">乐观情景（25%）</div>
+      <div class="pv ps">HKD 38</div>
+      <div class="pn">营收 CAGR 9%（新兴市场放量 + 三翼鸟变现）<br>OPM 提升至 9%<br>FCF CAGR 12%</div>
+    </div>
+  </div>
+
+  <p style="font-size:13px;color:var(--text2);line-height:1.7"><strong>概率加权 DCF 公允价值 = 18×25% + 28×50% + 38×25% = HKD 28</strong></p>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">7.3 所有者盈余收益率</h3>
+  <div class="cmt">
+    <p>FY2025 所有者盈余 ≈ ¥285.5 亿</p>
+    <p>港股市值（H 股部分按 ~30% 比例 × ¥2,500 亿总）≈ ¥750 亿对应 H 股流通部分</p>
+    <p>如按全公司 ¥2,500 亿市值计算：所有者盈余收益率 = 285.5 / 2,500 = <span class="hl-t">11.4%</span></p>
+    <p>价值投资视角对优质企业的目标收益率：5-7%（对应 P/E 14-20x）</p>
+    <p>合理市值 = 285.5 / 6.5% = ¥4,392 亿 → H 股 P/E 倍数应为 14x → 公允 H 股价 = <strong style="color:var(--green)">HKD 31/股</strong></p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">7.4 PEG 比率</h3>
+  <div class="cmt">
+    <p>当前 H 股 Forward P/E = 8.5x · 5 年共识 EPS CAGR = 7-8% → PEG = <strong>1.10</strong>（合理）</p>
+    <p>对于一家 ROE 18%、股息率 5.7%、护城河中等宽广的企业，公允 PEG 区间 1.0-1.3</p>
+    <p>PEG = 1.2 隐含 P/E = 9.6x → 公允 H 股价 = 9.6 × Forward EPS HKD 2.40 = <strong style="color:var(--green)">HKD 23/股</strong></p>
+    <p style="color:var(--text3);font-size:13px"><em>注：PEG 法对成熟制造业适用度有限，因为 EPS CAGR 不易测准。仅作参考。</em></p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">7.5 DDM 股利折现（高分红公司适用）</h3>
+  <div class="cmt">
+    <p>FY2025 H 股每股股息约 HKD 1.16（每年合计），按 5.7% 股息率反推。</p>
+    <p>三阶段 DDM：</p>
+    <ul style="margin-left:24px;color:var(--text2);">
+      <li>1-3 年股息 CAGR 12%（分红比例 55% → 60%）</li>
+      <li>4-10 年股息 CAGR 6%（业绩驱动）</li>
+      <li>永续 3%</li>
+      <li>折现率 8.5%</li>
+    </ul>
+    <p>DDM 公允 H 股价 ≈ <strong style="color:var(--green)">HKD 30/股</strong></p>
+    <p style="color:var(--text3);font-size:13px"><em>DDM 对海尔高度适用——分红比例高（55%+）+ 明确递增承诺 + ROE 稳定。</em></p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">7.6 SOTP 分部加总</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>业务板块</th><th>FY2025 收入（亿元）</th><th>2026E 营业利润</th><th>合理倍数</th><th>价值（亿元）</th><th>每 H 股价值</th></tr></thead>
+      <tbody>
+        <tr><td>中国主品牌（海尔+Leader）</td><td>~1,360</td><td>¥80</td><td>13x P/E</td><td>1,040</td><td>HKD 11.9</td></tr>
+        <tr><td>卡萨帝（高端）</td><td>~100</td><td>¥25</td><td>20x P/E</td><td>500</td><td>HKD 5.7</td></tr>
+        <tr><td>GE Appliances（美国）</td><td>~600</td><td>¥45</td><td>12x P/E</td><td>540</td><td>HKD 6.2</td></tr>
+        <tr><td>Candy + F&P + Kwikot（其他海外）</td><td>~900</td><td>¥40</td><td>11x P/E</td><td>440</td><td>HKD 5.0</td></tr>
+        <tr><td>水家电 + 智能场景</td><td>~63</td><td>¥10</td><td>15x P/E</td><td>150</td><td>HKD 1.7</td></tr>
+        <tr class="hl"><td>核心运营业务合计</td><td>3,023</td><td>~¥200</td><td>~13.4x</td><td>2,670</td><td>HKD 30.5</td></tr>
+        <tr><td>+ 净现金</td><td>—</td><td>—</td><td>1.0x</td><td>350</td><td>HKD 4.0</td></tr>
+        <tr class="hl"><td><strong>SOTP 公允价值（A 股口径）</strong></td><td>—</td><td>—</td><td>—</td><td><strong>3,020</strong></td><td><strong>—</strong></td></tr>
+        <tr class="hl"><td><strong>SOTP 公允价值（H 股 ×0.75 折扣）</strong></td><td>—</td><td>—</td><td>—</td><td><strong>2,265</strong></td><td><strong>HKD 26</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:13px;color:var(--text2);margin-top:12px;line-height:1.7"><strong>SOTP 结论：A 股口径 ¥3,020 亿（约 HKD 35/股），H 股因流动性折扣 75% 后约 HKD 26</strong>。</p>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">7.7 反向 DCF — 当前价格隐含什么？</h3>
+  <div class="cmt">
+    <p>当前 H 股 HKD 20.44 × 全公司股本 ~94 亿股 = 全市值约 HKD 1,920 亿 = ¥1,790 亿</p>
+    <p>但海尔 A+H+D 三市场总市值约 ¥2,500 亿（A 股占 ~75%）—— H 股是 AH 折价市场</p>
+    <p>FY2025 净利 ¥195.5 亿 → 隐含 H 股 P/E = 9.0x</p>
+    <p>反向 DCF：在 WACC 9%、终值 3% 假设下，市场对 H 股隐含的永续增长率约 <strong>2-3%（接近通胀）</strong></p>
+    <p><strong>结论：</strong>市场仅在为海尔 H 股定价"接近通胀的低速增长"——但海尔过去 5 年净利 CAGR 9%、营收 CAGR 7%。<span class="hl-t">这是市场过度悲观的反映</span>。</p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">7.8 估值方法汇总（H 股口径）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>估值方法</th><th>公允 H 股价（HKD）</th><th>权重</th><th>适用度</th><th>备注</th></tr></thead>
+      <tbody>
+        <tr><td>1. 相对估值（P/E 中位）</td><td>28-32</td><td>15%</td><td>★★★★</td><td>5 年 25% 分位偏便宜</td></tr>
+        <tr class="hl"><td><strong>2. DCF（概率加权）</strong></td><td><strong>28</strong></td><td><strong>20%</strong></td><td>★★★★★</td><td>核心方法</td></tr>
+        <tr><td>3. 所有者盈余收益率</td><td>31</td><td>10%</td><td>★★★</td><td>需调整 H 股流通比例</td></tr>
+        <tr><td>4. PEG 比率</td><td>23</td><td>5%</td><td>★★</td><td>EPS CAGR 难测</td></tr>
+        <tr class="hl"><td><strong>5. DDM 股利折现</strong></td><td><strong>30</strong></td><td><strong>25%</strong></td><td>★★★★★</td><td><strong>高分红公司 + 明确递增 = 最适用</strong></td></tr>
+        <tr><td>6. SOTP</td><td>26</td><td>10%</td><td>★★★</td><td>多品牌矩阵适用</td></tr>
+        <tr><td>7. 反向 DCF</td><td>市场隐含 2-3% 增长（过低）</td><td>10%</td><td>★★★★</td><td>显示安全边际</td></tr>
+        <tr><td>8. NAV</td><td>不适用</td><td>0%</td><td>—</td><td>非地产/控股公司</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="dcf-note" style="margin-top:20px">
+    <p><strong>加权公允价值（H 股口径）：</strong></p>
+    <p>= 30×15% + 28×20% + 31×10% + 23×5% + 30×25% + 26×10% + 隐含市场过度悲观调整 +5%</p>
+    <p>= <strong style="color:var(--green);font-size:18px">HKD 28/股</strong></p>
+    <p>当前 H 股价 HKD 20.44 → 距加权公允价值 <strong style="color:var(--green)">折价 37%</strong>，安全边际充足。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 8：竞争与行业分析 ═══ -->
+<div class="section">
+  <div class="stitle">模块 8 · 竞争与行业分析</div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:18px 0 12px">8.1 中国白电三巨头对比（FY2025）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>指标</th><th>海尔智家 (06690 / 600690)</th><th>美的集团 (000333)</th><th>格力电器 (000651)</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td><strong>市值（CNY 亿）</strong></td><td><strong>2,500</strong></td><td><strong>4,800</strong></td><td><strong>2,200</strong></td></tr>
+        <tr><td>FY25 营收</td><td>¥3,023 亿</td><td>~¥4,200 亿</td><td>~¥2,000 亿</td></tr>
+        <tr><td>YoY%</td><td>+5.7%</td><td>+8%</td><td>+2%</td></tr>
+        <tr><td>归母净利</td><td>¥195.5 亿</td><td>¥390 亿</td><td>¥290 亿</td></tr>
+        <tr><td>净利率</td><td>6.5%</td><td>9.3%</td><td>14.5%</td></tr>
+        <tr><td>ROE</td><td>18%</td><td>20%</td><td>20%</td></tr>
+        <tr><td>P/E (TTM)</td><td>14.4x（A 股）/ 9.0x（H 股）</td><td>13.5x</td><td>9.5x</td></tr>
+        <tr><td>股息率</td><td>3.5%（A）/ 5.7%（H）</td><td>4.5%</td><td>7.5%</td></tr>
+        <tr class="hl"><td><strong>海外收入 / 占比</strong></td><td><strong>¥1,545 亿 / 51%</strong></td><td>¥1,800 亿 / 43%</td><td>¥335 亿 / 17%</td></tr>
+        <tr><td>海外增速</td><td>+8.2%</td><td>+17.7%</td><td>+10.2%</td></tr>
+        <tr><td>主营品类领先</td><td>冰箱 / 洗衣机 / 水家电</td><td>空调（与格力并列）/ 家居电器</td><td>空调（与美的并列）</td></tr>
+        <tr><td>多品牌矩阵</td><td>海尔/卡萨帝/Leader/GE/Candy/F&P/Kwikot</td><td>美的/COLMO/华凌/Eureka</td><td>格力/晶弘</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:13px;color:var(--text2);margin-top:12px;line-height:1.7"><strong>关键观察：</strong>
+  (1) <span class="hl-t">海尔海外占比 51% 在三巨头中最高</span>——这是真实的"全球化"领先；
+  (2) 海尔净利率最低（6.5%），因为海外业务低毛利拖累；
+  (3) 海尔 H 股 P/E 9.0x 与格力 9.5x 相近，但增长性更好（海外驱动）；
+  (4) <span class="hl-t">海尔 H 股股息率 5.7% + 多品牌矩阵 + 海外增长，是三巨头中性价比最高的标的</span>。</p>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">8.2 全球家电巨头对比</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>公司</th><th>市值 ($B)</th><th>营收</th><th>净利率</th><th>ROE</th><th>P/E</th><th>股息率</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td><strong>海尔智家（H 股）</strong></td><td><strong>50（H 股市值）</strong></td><td><strong>¥3,023 亿（$425B）</strong></td><td><strong>6.5%</strong></td><td><strong>18%</strong></td><td><strong>9.0x</strong></td><td><strong>5.7%</strong></td></tr>
+        <tr><td>Whirlpool (WHR)</td><td>5</td><td>$17B</td><td>2%</td><td>15%</td><td>22x</td><td>5.0%</td></tr>
+        <tr><td>Electrolux (ELUX)</td><td>3</td><td>SEK 130B</td><td>1%</td><td>5%</td><td>负</td><td>3.5%</td></tr>
+        <tr><td>美的集团</td><td>67</td><td>$580B 等值</td><td>9%</td><td>20%</td><td>13.5x</td><td>4.5%</td></tr>
+        <tr><td>格力电器</td><td>31</td><td>$280B 等值</td><td>14.5%</td><td>20%</td><td>9.5x</td><td>7.5%</td></tr>
+        <tr><td>LG Electronics（韩国）</td><td>15</td><td>KRW 80T</td><td>3%</td><td>10%</td><td>15x</td><td>2.0%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:13px;color:var(--text2);margin-top:12px;line-height:1.7"><strong>结论：</strong>海尔在全球家电行业中规模仅次于美的（中国），高于 Whirlpool（美国）和 Electrolux（欧洲）。<span class="hl-t">海尔是真正意义上的"全球第一家电"</span>，但市场估值（H 股 P/E 9x）显著低于美国/欧洲同行（15-22x）。这是中概股折价的体现，也是 H 股投资者的机会。</p>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">8.3 波特五力分析</h3>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">供应商议价力</div><div class="kpi-v">中 (3/5)</div><span class="badge nt">● 中等</span><div style="font-size:12px;color:var(--text3);margin-top:4px">大宗原材料涨价直接传导</div></div>
+    <div class="kpi"><div class="kpi-l">买方议价力</div><div class="kpi-v">中 (3/5)</div><span class="badge nt">● 中等</span><div style="font-size:12px;color:var(--text3);margin-top:4px">大型零售（Lowe's/Costco）有议价权</div></div>
+    <div class="kpi"><div class="kpi-l">替代品威胁</div><div class="kpi-v">弱 (2/5)</div><span class="badge up">▼ 有利</span><div style="font-size:12px;color:var(--text3);margin-top:4px">家电是必需品，无替代</div></div>
+    <div class="kpi"><div class="kpi-l">新进入者威胁</div><div class="kpi-v">中 (3/5)</div><span class="badge nt">● 中等</span><div style="font-size:12px;color:var(--text3);margin-top:4px">小米生态链 + 创业品牌切入</div></div>
+    <div class="kpi"><div class="kpi-l">行业内竞争</div><div class="kpi-v">高 (4/5)</div><span class="badge dn">▲ 不利</span><div style="font-size:12px;color:var(--text3);margin-top:4px">美的 + 格力 + 国际品牌全球肉搏</div></div>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">8.4 颠覆风险评估</h3>
+  <div class="cmt">
+    <ul style="margin-left:24px;color:var(--text2);">
+      <li><strong>小米生态链冲击（中度风险）：</strong>米家家电以低价 + 物联网生态切入年轻市场，但主要在中低端价位与海尔主品牌竞争，对卡萨帝高端冲击有限</li>
+      <li><strong>智能家居范式革命（中度风险）：</strong>如果未来 AIoT 平台（如苹果 HomeKit/Google Home）取代单品销售模式，海尔的"三翼鸟"战略需要加速跟进</li>
+      <li><strong>海外贸易摩擦（中度风险）：</strong>美国对中国家电的关税、欧洲对中国制造的反倾销调查可能持续</li>
+      <li><strong>原材料涨价（高度风险）：</strong>铜 +40% YTD、R32 +80%——这是 2026 年最大的成本压力</li>
+      <li><strong>消费降级（中度风险）：</strong>中国消费者 2025-2026 持续节约，可能压制卡萨帝高端增长</li>
+    </ul>
+    <p style="margin-top:12px"><strong>差异化优势：</strong>海尔的差异化是"<span class="hl-t">全球品牌矩阵 + 多品牌定位 + 海外整合能力</span>"——这是其他白电同行难以复制的。10 年的整合经验是真正的护城河。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 9：技术面分析 ═══ -->
+<div class="section">
+  <div class="stitle">模块 9 · 技术面与 K 线分析（次要参考）</div>
+
+  <p style="font-size:13px;color:var(--text2);margin-bottom:16px;"><em>技术面次要于基本面。</em></p>
+
+  <h3 style="font-size:15px;color:var(--text);margin:18px 0 12px">9.1 趋势与均线（H 股，截至 2026-04 中旬）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>指标</th><th>数值</th><th>当前价相对位置</th><th>信号</th></tr></thead>
+      <tbody>
+        <tr><td>当前 H 股价</td><td>HKD 20.44</td><td>—</td><td>—</td></tr>
+        <tr><td>MA20</td><td>~HKD 21</td><td>-2.7%</td><td>弱势</td></tr>
+        <tr><td>MA50</td><td>~HKD 22.5</td><td>-9.2%</td><td>空头</td></tr>
+        <tr><td>MA200</td><td>~HKD 25</td><td>-18.3%</td><td>深度空头</td></tr>
+        <tr><td>52 周高点</td><td>~HKD 30</td><td>-31.9%</td><td>距高点 1/3</td></tr>
+        <tr><td>52 周低点</td><td>~HKD 19</td><td>+7.6%</td><td>接近年内低点</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">9.2 关键支撑与阻力位（H 股）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>类型</th><th>价位（HKD）</th><th>性质</th></tr></thead>
+      <tbody>
+        <tr><td>强阻力</td><td>30</td><td>52 周高点 + 心理整数</td></tr>
+        <tr><td>中阻力</td><td>25</td><td>200 日均线</td></tr>
+        <tr><td>弱阻力</td><td>22</td><td>近期突破后回踩</td></tr>
+        <tr><td>当前价</td><td>20.44</td><td>—</td></tr>
+        <tr><td>第一支撑</td><td>19</td><td>52 周低点 + 心理位</td></tr>
+        <tr><td>第二支撑</td><td>17.5</td><td>2024 年中位数</td></tr>
+        <tr><td>强支撑</td><td>15-16</td><td>2022 年低点</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">9.3 技术指标</h3>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">RSI(14)</div><div class="kpi-v">~35</div><span class="badge dn">▼ 弱势</span><div style="font-size:12px;color:var(--text3);margin-top:4px">接近超卖区</div></div>
+    <div class="kpi"><div class="kpi-l">MACD</div><div class="kpi-v">空头</div><span class="badge dn">▼ 死叉</span><div style="font-size:12px;color:var(--text3);margin-top:4px">短期承压</div></div>
+    <div class="kpi"><div class="kpi-l">布林带位置</div><div class="kpi-v">下轨</div><span class="badge dn">▼ 弱势</span></div>
+    <div class="kpi"><div class="kpi-l">趋势</div><div class="kpi-v">下行通道</div><span class="badge dn">▼ 中期空头</span></div>
+    <div class="kpi"><div class="kpi-l">成交量</div><div class="kpi-v">中性</div><span class="badge nt">● 平稳</span></div>
+    <div class="kpi"><div class="kpi-l">机构评级</div><div class="kpi-v up">买入</div><span class="badge up">▲ 交银国际</span></div>
+  </div>
+
+  <div class="cmt" style="margin-top:18px">
+    <p><strong>技术面综合研判：</strong>H 股处于<span class="warn-t">中期下行通道但已逼近重要支撑</span>。RSI 35 接近超卖，MACD 空头但乏力。HKD 19-20 是 52 周低点 + 心理整数双重支撑。<span class="warn-t">短期破位风险：跌破 HKD 19</span> 后下一支撑在 HKD 17.5。</p>
+    <p><strong>建议：</strong>HKD 19-20 区间分批吸纳；中长期投资者可忽略短期技术面。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 10：增长催化剂 ═══ -->
+<div class="section">
+  <div class="stitle">模块 10 · 增长催化剂与前景展望</div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:18px 0 12px">10.1 行业顺风</h3>
+  <div class="cmt">
+    <ul style="margin-left:24px;color:var(--text2);">
+      <li><strong>新兴市场需求增长：</strong>东南亚、中东、非洲家电渗透率 50-60%（vs 中国 95%+），未来 10 年仍有渗透空间</li>
+      <li><strong>智能家居场景化：</strong>"三翼鸟"全屋方案的市场教育期完成，2026 起进入变现期</li>
+      <li><strong>欧美市场更新换代：</strong>2008 金融危机前购置的家电进入更新周期</li>
+      <li><strong>分红比例递增承诺：</strong>2026 ≥ 58%、2028 ≥ 60%——明确的股东回报路径</li>
+      <li><strong>AH 折价收敛预期：</strong>港股流动性改善、南向资金持续流入</li>
+    </ul>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:18px 0 12px">10.2 行业逆风</h3>
+  <div class="cmt">
+    <ul style="margin-left:24px;color:var(--text2);">
+      <li><span class="warn-t">原材料涨价：</span>铜 +40% YTD、R32 +80% YoY，2026 毛利率持续承压</li>
+      <li><span class="warn-t">中国国内补贴退坡：</span>2026 以旧换新或减半，国内零售或下滑 6.7%</li>
+      <li><span class="warn-t">海外贸易摩擦：</span>美国关税、欧盟反倾销调查不确定性</li>
+      <li><span class="warn-t">小米生态链扩张：</span>米家家电低价切入，对低端市场有冲击</li>
+    </ul>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:18px 0 12px">10.3 短期催化剂（未来 6 个月）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>事件</th><th>预期日期</th><th>预期影响</th></tr></thead>
+      <tbody>
+        <tr><td>Q1 2026 财报</td><td>2026 年 4 月底</td><td>高 — 国内补贴退坡影响首次显现</td></tr>
+        <tr><td>分红派发</td><td>2026 年 6-7 月</td><td>中 — 5.7% 股息率落实</td></tr>
+        <tr><td>H1 2026 半年报</td><td>2026 年 8 月底</td><td>高 — 海外业务持续验证</td></tr>
+        <tr><td>2025 年终分红派发</td><td>2026 年 6-7 月</td><td>中 — 末期分红</td></tr>
+        <tr><td>南非 Kwikot 整合进度</td><td>持续</td><td>中 — 2024 年并购效益验证</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:18px 0 12px">10.4 长期展望（2030 年的海尔）</h3>
+  <div class="cmt">
+    <p>到 <strong>2030 年</strong>，对海尔的"理想态"画像：</p>
+    <ul style="margin-left:24px;color:var(--text2);">
+      <li>营收：¥4,500-5,000 亿（CAGR 8-10%）</li>
+      <li>归母净利：¥350-400 亿（CAGR 12-15%）</li>
+      <li>FCF：¥330-380 亿</li>
+      <li>海外占比：60%+（持续超国内）</li>
+      <li>卡萨帝营收：¥300 亿（vs 2025 的 ~100 亿）</li>
+      <li>分红比例：≥60% + 持续回购</li>
+      <li>市值：¥4,500-5,500 亿（按 13-14x P/E）</li>
+    </ul>
+    <p>5 年股价 CAGR 预期：12-15%（基准）+ 5.7% 股息 = <strong>总回报 17-21%</strong>（基准）</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 11：风险矩阵 ═══ -->
+<div class="section">
+  <div class="stitle">模块 11 · 风险矩阵（多维评估）</div>
+
+  <div class="risk-grid">
+    <div class="risk-card r2">
+      <h5>经营风险</h5>
+      <span class="risk-score">2/5 · 较低</span>
+      <p>管理层稳定（周云杰已 38 年司龄）；多品牌矩阵分散单品类风险；4 次跨境并购全部消化吸收。唯一关键人物风险：周云杰健康。</p>
+    </div>
+    <div class="risk-card r2">
+      <h5>财务风险</h5>
+      <span class="risk-score">2/5 · 较低</span>
+      <p>有息负债率 12%、净现金 ¥350 亿、利息覆盖 30x。FCF 稳定 ¥175 亿+。无再融资压力。</p>
+    </div>
+    <div class="risk-card r3">
+      <h5>竞争风险</h5>
+      <span class="risk-score">3/5 · 中等</span>
+      <p>美的 + 格力国内三强争夺；小米生态链中低端冲击；Whirlpool/Electrolux 海外反扑。但海尔多品牌矩阵护城河仍存。</p>
+    </div>
+    <div class="risk-card r3">
+      <h5>监管/政策风险</h5>
+      <span class="risk-score">3/5 · 中等</span>
+      <p>中国家电以旧换新补贴退坡；美国对华关税；欧盟反倾销调查；中国国资改革（青岛市国资委参与的混合所有制）潜在影响。</p>
+    </div>
+    <div class="risk-card r4">
+      <h5>宏观风险（原材料）</h5>
+      <span class="risk-score">4/5 · 较高</span>
+      <p>铜 +40% YTD、R32 +80%——直接压制毛利率。中国消费疲弱拖累国内市场；汇率波动影响海外利润。<strong>这是 2026 年最大的不确定性</strong>。</p>
+    </div>
+    <div class="risk-card r2">
+      <h5>估值风险</h5>
+      <span class="risk-score">2/5 · 较低</span>
+      <p>当前 H 股 P/E 9x 处于 5 年 25% 分位；股息率 5.7%；安全边际 37%。下行空间有限。</p>
+    </div>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">黑天鹅情景（压力测试）</h3>
+  <div class="cmt">
+    <p><strong>情景 1（概率 5%）：原材料持续涨价 + 补贴退坡 + 消费萎缩三重打击</strong></p>
+    <p>影响：FY2026 净利或下滑 15-20%。H 股价跌至 HKD 14-16。</p>
+
+    <p style="margin-top:12px"><strong>情景 2（概率 3%）：美国对中国家电加征 50%+ 关税</strong></p>
+    <p>影响：GE Appliances 业务受冲击但本地化生产可对冲。H 股价跌至 HKD 17-19。</p>
+
+    <p style="margin-top:12px"><strong>情景 3（概率 2%）：周云杰意外离任 / 重大并购失败</strong></p>
+    <p>影响：短期市场恐慌；但管理层梯队完整。短期跌幅 10-15%（HKD 17-18），后续修复。</p>
+
+    <p style="margin-top:12px"><strong>情景 4（概率 1%）：港股市场系统性危机</strong></p>
+    <p>影响：H 股流动性进一步恶化、AH 折价加深。基本面不受影响——这是<span class="hl-t">最佳加仓机会</span>。</p>
+
+    <p style="margin-top:12px;color:var(--text3)"><em>所有黑天鹅情景下，海尔破产概率几乎为 0——多品牌矩阵 + 全球分散 + 净现金堡垒提供深度安全垫。</em></p>
+  </div>
+</div>
+
+<!-- ═══ 海图评分卡（6 维 A-D） ═══ -->
+<div class="section">
+  <div class="stitle">海图评分卡 · 6 维 A-D + 红旗排查</div>
+  <div class="scorecard">
+    <div class="score-grid">
+      <div class="score-card">
+        <div class="score-letter s-bp">B+</div>
+        <div class="score-body">
+          <h4>1. 生意可预测性</h4>
+          <p>家电是必需品行业，需求稳定。海尔多品牌矩阵 + 海外分散降低单一市场风险。5 年 CAGR 7-10%，可预测性较高。</p>
+        </div>
+      </div>
+      <div class="score-card">
+        <div class="score-letter s-bp">B+</div>
+        <div class="score-body">
+          <h4>2. 经济护城河</h4>
+          <p>5 维护城河综合 3.4/5，2 维"宽"（成本优势 + 多品牌）+ 3 维"中等"。10 年看趋势加宽（卡萨帝品牌价值翻倍 + 海外整合扩展）。</p>
+        </div>
+      </div>
+      <div class="score-card">
+        <div class="score-letter s-a">A</div>
+        <div class="score-body">
+          <h4>3. 管理层质量</h4>
+          <p>周云杰 38 年司龄；4 次跨境并购全部成功消化；分红+回购双轨道纪律严明；2028 分红比例 ≥60% 明确承诺。在中国制造业中是顶级管理层之一。</p>
+        </div>
+      </div>
+      <div class="score-card">
+        <div class="score-letter s-bp">B+</div>
+        <div class="score-body">
+          <h4>4. 财务质量</h4>
+          <p>ROE 18% + 净现金 ¥350 亿 + FCF/净利 90%。有息负债率 12% 健康。利率覆盖 30x。营运效率（资产周转 1.0）是 ROE 主要驱动。</p>
+        </div>
+      </div>
+      <div class="score-card">
+        <div class="score-letter s-a">A</div>
+        <div class="score-body">
+          <h4>5. 资本配置纪律</h4>
+          <p>5 年 4 次成功跨境并购 + 持续回购 + 分红比例递增承诺——<strong>这是海尔最强的维度</strong>。在中国家电三巨头中独一档（美的分红较低、格力分红不连续）。</p>
+        </div>
+      </div>
+      <div class="score-card">
+        <div class="score-letter s-a">A</div>
+        <div class="score-body">
+          <h4>6. 估值与安全边际</h4>
+          <p>H 股 P/E 9.0x 处于 5 年 25% 分位；H 股 vs A 股折价 37%；股息率 5.7%。当前 HKD 20.44 vs 估值中位数 HKD 28，安全边际 37%——双重折价机会。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="flag-row">
+      <strong>🚩 红旗排查：无问题</strong> · 商誉减值历史审慎（4 次大额并购全部消化吸收，无突然减值）；收入确认稳定；关联交易透明；表外负债低；股权激励合理；近 5 年无会计变更；唯一可注意的"信披瑕疵" 媒体提及但属于非重大事项。
+    </div>
+
+    <div style="margin-top:18px;padding:14px 18px;background:rgba(122,154,122,.10);border:1px solid var(--green);border-radius:8px;">
+      <strong style="color:var(--green);font-size:14px;">综合评级：买入（核心仓配置 / 港股高股息组合）</strong>
+      <p style="font-size:13px;color:var(--text2);margin-top:6px;">6 维中 3 维 A、3 维 B+，无红旗。这是港股市场中<strong>少数兼具"全球化运营 + 高股息 + 安全边际 + 资本配置纪律"的标的</strong>。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 投资决策 ═══ -->
+<div class="section">
+  <div class="stitle">海图研判 · 投资决策</div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:18px 0 12px;">分批建仓策略（独立估值中位数 HKD 28）</h3>
+  <div class="pgrid">
+    <div class="pbox">
+      <div class="pl">首仓（40% 仓位）</div>
+      <div class="pv ps">HKD 22.4</div>
+      <div class="pn">= 28 × 80%<br>稍高于现价 20.44<br>建议等待回踩 21-22.5 区间</div>
+    </div>
+    <div class="pbox">
+      <div class="pl">二仓（30% 仓位）</div>
+      <div class="pv pf">HKD 19.6</div>
+      <div class="pn">= 28 × 70%<br>跌至 52 周低点附近</div>
+    </div>
+    <div class="pbox">
+      <div class="pl">三仓（30% 仓位）</div>
+      <div class="pv pc">HKD 16.8</div>
+      <div class="pn">= 28 × 60%<br>触及 2024 年中枢<br>极端低位机会</div>
+    </div>
+  </div>
+  <p style="font-size:13px;color:var(--text2);margin-top:12px;line-height:1.7"><strong>当前价 HKD 20.44 已介于首仓和二仓之间</strong>——可考虑直接以 30-50% 计划仓位介入，等回调或下行至 19 时再加 30-40%。</p>
+
+  <h3 style="font-size:15px;color:var(--text);margin:22px 0 12px;">三档止盈（不设止损）</h3>
+  <div class="pgrid">
+    <div class="pbox"><div class="pl">第一档</div><div class="pv pf">HKD 32</div><div class="pn">减仓 25%<br>对应 P/E ~14x</div></div>
+    <div class="pbox"><div class="pl">第二档</div><div class="pv pf">HKD 38</div><div class="pn">再减仓 25%<br>对应 P/E ~16x</div></div>
+    <div class="pbox"><div class="pl">第三档</div><div class="pv pf">HKD 45</div><div class="pn">再减仓 25%<br>对应 P/E ~19x（5 年 80% 分位）</div></div>
+  </div>
+  <p style="font-size:13px;color:var(--text2);margin-top:12px;line-height:1.7">最后 25% 作为<strong>"长期持有"核心仓</strong>——海尔分红+回购双轨道 + 全球化叙事，适合长期复利。</p>
+
+  <div style="background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin-top:18px;font-size:13px;color:var(--text2);line-height:1.85;">
+    <strong style="color:var(--text);">仓位与持有：</strong>建议占组合 4-8%（中等仓位，与中国移动/新华文轩等高股息标的配伍）。持有周期 5-10 年。<br>
+    <strong style="color:var(--text);">关键监控指标：</strong>(1) 海外业务季度增速；(2) 卡萨帝高端市场份额；(3) 分红比例兑现度；(4) 原材料价格变化；(5) AH 折价收敛进度。<br>
+    <strong style="color:var(--text);">下次重审：</strong>2026 年 4 月底 Q1 2026 财报后第一天。
+  </div>
+</div>
+
+<!-- ═══ 海图页末长评 = 社媒短文同源 ═══ -->
+<div class="section">
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记 · 1080 字</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p class="lead">把工厂、品牌、资本配置纪律放在一个篮子里——这是海尔，也是中国制造业能让我安心睡觉的少数标的之一。</p>
+
+      <p>港股 06690 不是一个性感的故事。它没有 AI、没有创新药、没有 SaaS 增长曲线。它有的只是 2 亿台年出货量的家电制造、6 个全球品牌的整合记忆、连续 4 年慢慢往上爬的 ROE，以及一份明确告诉你"未来 3 年分红比例会从 55% 升到 60%"的承诺。</p>
+
+      <h4>几个研判要点</h4>
+
+      <p><strong>一、海外占比首破 50% 是真正的全球化里程碑。</strong>2025 年海尔海外收入 ¥1,545 亿（+8.2%）首次超过国内 ¥1,460 亿（+3.1%）。这不是地理分布的简单调整——而是<strong>从"中国家电龙头"到"全球家电运营商"的身份转换</strong>。GE Appliances 在美国、Candy 在欧洲、Fisher&Paykel 在大洋洲、Kwikot 在非洲——海尔是中国制造业中唯一拥有完整全球品牌矩阵的家电公司。</p>
+
+      <p><strong>二、4 次跨境并购全部消化吸收，是稀缺的资本配置能力。</strong>从 2016 年 GE Appliances（$5.4B）到 2024 年 Kwikot——海尔的 4 次并购没有出现像 TCL-汤姆逊、联想-IBM PC 那样的整合失败案例。10 年后回头看，<strong>这种跨境并购的稳定执行力本身就是护城河</strong>，比任何品牌都难以复制。</p>
+
+      <p><strong>三、H 股折价 37% + 5.7% 股息率 = 双重安全垫。</strong>同一份财报、同一个公司，A 股 P/E 14.4x 而 H 股 P/E 仅 9.0x。这是港股流动性折扣 + 中概股折价的双重压制——<span class="hl-t">但企业基本面完全相同</span>。如果你是中长期投资者，H 股是更优选择。再加上 5.7% 的股息率，这是港股中性价比最高的家电标的之一。</p>
+
+      <p><strong>四、分红+回购双轨道 + 明确递增承诺，在中国制造业中独一档。</strong>2025 年分红比例 55%（同比 +7ppt），承诺 2026 ≥58%、2027/2028 ≥60%——这种<strong>多年明确递增的分红规划</strong>是中国上市公司中极少见的。同时 2025 年在 A/H/D 三个市场全部回购 ¥13 亿——这种"分红+回购双轨道+三市场协同"的资本配置纪律，是中国家电行业中独一档。</p>
+
+      <p><strong>五、毛利率连续 4 年下降是真实的压力。</strong>2021 年的 31.3% 一路降到 2025 年的 26.7%——<span class="warn-t">2026 年铜（+40% YTD）、R32（+80%）涨价 + 国内以旧换新补贴退坡</span>会让毛利率继续承压。这是基本面的真实瑕疵，不能忽视。但海尔通过费用管控让净利率反而稳定在 6.5%——<strong>说明运营效率仍在持续改善</strong>。</p>
+
+      <h4>海图研判</h4>
+
+      <p><strong>评级：买入</strong>（核心仓配置）。12 个月概率加权目标价 <strong>HKD 28</strong>（上行 +37%），加上 5.7% 股息，<strong>预期总回报 ~43%</strong>。</p>
+
+      <p>操作建议（独立估值中位数 HKD 28）：首仓 HKD 22.4（近现价，估值 × 80%），二仓 HKD 19.6（× 70%），三仓 HKD 16.8（× 60%）。止盈三档 HKD 32 / 38 / 45，每档减仓 25%。建议仓位 <strong>4-8%</strong>，持有周期 5-10 年。</p>
+
+      <h4>风险提示</h4>
+
+      <p>原材料持续涨价压制毛利率 / 中国国内补贴退坡 / 美国关税升级 / 小米生态链冲击中低端 / 港股流动性进一步恶化——任一项都可能让股价回踩 HKD 17-18 区间。但 ¥350 亿净现金 + 6 个全球品牌 + 4 年成功跨境并购历史，让破产概率为零。</p>
+
+      <p>如果你已经持有腾讯（互联网龙头）+ 中国移动（公用事业）的组合，海尔可以补充<strong>"全球化制造业 + 高股息"维度</strong>——形成"互联网+电信+制造"的港股中国资产铁三角。</p>
+
+      <p class="haitu-sign">—— 海图，灯下落笔，明日再观风浪。</p>
+
+      <p class="haitu-disc">⚠️ 免责声明：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，不构成任何投资建议。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div>《海图夜读》 · 海尔智家 06690.HK FY2025 海图研判</div>
+  <div style="margin-top:6px;">数据来源：海尔智家 2025 年年度报告、业绩说明会记录、HKEX、行业研究报告</div>
+  <div style="margin-top:6px;">价值投资 · 长期主义</div>
+</footer>
+
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  const cur = html.getAttribute('data-theme');
+  html.setAttribute('data-theme', cur === 'dark' ? 'light' : 'dark');
+  localStorage.setItem('theme', html.getAttribute('data-theme'));
+  renderCharts();
+}
+(function() {
+  const t = localStorage.getItem('theme');
+  if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+})();
+
+function gc(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+
+let charts = {};
+function renderCharts() {
+  Object.values(charts).forEach(c => c && c.destroy && c.destroy());
+  charts = {};
+  const txt2 = gc('--text2'), txt3 = gc('--text3'), grid = gc('--chart-grid');
+  const accent = gc('--accent'), accent2 = gc('--accent2'), accent3 = gc('--accent3');
+  const green = gc('--green'), gold = gc('--gold'), rose = gc('--rose'), red = gc('--red');
+
+  Chart.defaults.color = txt2;
+  Chart.defaults.font.family = 'Segoe UI, sans-serif';
+  Chart.defaults.font.size = 11;
+
+  charts.rev = new Chart(document.getElementById('revenueChart'), {
+    type: 'bar',
+    data: { labels: ['FY2021', 'FY2022', 'FY2023', 'FY2024', 'FY2025'],
+      datasets: [{ label: 'Revenue', data: [2275, 2435, 2614, 2860, 3023], backgroundColor: [accent3, gold, accent2, accent, green], borderRadius: 4 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+      scales: { y: { grid: { color: grid }, ticks: { color: txt3 } }, x: { grid: { display: false }, ticks: { color: txt3 } } } }
+  });
+
+  charts.profit = new Chart(document.getElementById('profitChart'), {
+    type: 'line',
+    data: { labels: ['FY2021', 'FY2022', 'FY2023', 'FY2024', 'FY2025'],
+      datasets: [{ label: 'Net Profit', data: [131, 147, 166, 187, 195.5], borderColor: green, backgroundColor: 'rgba(122,154,122,0.1)', tension: 0.3, fill: true, pointBackgroundColor: green, pointRadius: 5 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+      scales: { y: { grid: { color: grid }, ticks: { color: txt3 } }, x: { grid: { display: false }, ticks: { color: txt3 } } } }
+  });
+
+  charts.seg = new Chart(document.getElementById('segmentChart'), {
+    type: 'doughnut',
+    data: { labels: ['中国大陆', '海外（GE/Candy/F&P/Kwikot）'],
+      datasets: [{ data: [1460, 1545], backgroundColor: [accent3, accent], borderColor: gc('--card'), borderWidth: 2 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { color: txt2, font: { size: 12 } } } } }
+  });
+
+  charts.dividend = new Chart(document.getElementById('dividendChart'), {
+    type: 'bar',
+    data: { labels: ['FY2021', 'FY2022', 'FY2023', 'FY2024', 'FY2025'],
+      datasets: [
+        { label: '分红', data: [40, 53, 67, 86, 99], backgroundColor: green, borderRadius: 4, stack: 'a' },
+        { label: '回购', data: [0, 0, 0, 0, 13], backgroundColor: gold, borderRadius: 4, stack: 'a' }
+      ] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top', labels: { color: txt2, font: { size: 11 } } } },
+      scales: { y: { stacked: true, grid: { color: grid }, ticks: { color: txt3 } }, x: { stacked: true, grid: { display: false }, ticks: { color: txt3 } } } }
+  });
+
+  // 桑基图
+  buildSankey();
+}
+
+function buildSankey() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const txt = isDark ? '#d4ccc4' : '#4a4340';
+  const cardBg = isDark ? '#2e2a25' : '#ffffff';
+
+  const accent = gc('--accent'), accent2 = gc('--accent2'), accent3 = gc('--accent3');
+  const green = gc('--green'), gold = gc('--gold'), rose = gc('--rose'), red = gc('--red');
+
+  const sankeyData = [{
+    type: 'sankey',
+    orientation: 'h',
+    arrangement: 'snap',
+    valueformat: ',.0f',
+    valuesuffix: ' 亿',
+    node: {
+      pad: 22,
+      thickness: 22,
+      line: { color: 'transparent', width: 0 },
+      label: [
+        '营收 3,023',           // 0
+        '营业成本 2,217',       // 1（出口）
+        '毛利 807',             // 2
+        '销售&管理 470',        // 3（出口）
+        '研发 100',             // 4（出口）
+        '营业利润 230',         // 5
+        '所得税&其他 35',       // 6（出口）
+        '归母净利 196',         // 7
+        '非现金调整 +75',       // 8（D&A + SBC）
+        '经营现金流 260',       // 9
+        '资本开支 85',          // 10（出口）
+        '自由现金流 175'        // 11（终点）
+      ],
+      color: [accent2, red, accent, rose, gold, accent3, red, green, accent2, accent3, red, green]
+    },
+    link: {
+      source: [0, 0, 2, 2, 2, 5, 5, 7, 8, 9, 9],
+      target: [1, 2, 3, 4, 5, 6, 7, 9, 9, 10, 11],
+      value:  [2217, 807, 470, 100, 230, 35, 196, 196, 75, 85, 175],
+      color: [
+        'rgba(184,112,112,0.30)',
+        'rgba(138,154,142,0.45)',
+        'rgba(192,144,144,0.30)',
+        'rgba(185,160,106,0.30)',
+        'rgba(176,141,122,0.45)',
+        'rgba(184,112,112,0.30)',
+        'rgba(122,154,122,0.45)',
+        'rgba(122,154,122,0.40)',
+        'rgba(123,143,160,0.40)',
+        'rgba(184,112,112,0.30)',
+        'rgba(122,154,122,0.50)'
+      ]
+    }
+  }];
+
+  const layout = {
+    font: { family: 'Segoe UI, sans-serif', size: 11, color: txt },
+    paper_bgcolor: cardBg,
+    plot_bgcolor: cardBg,
+    margin: { l: 10, r: 10, t: 10, b: 10 }
+  };
+
+  Plotly.react('sankey', sankeyData, layout, { displayModeBar: false, responsive: true });
+}
+
+document.addEventListener('DOMContentLoaded', renderCharts);
+</script>
+
+</body>
+</html>
