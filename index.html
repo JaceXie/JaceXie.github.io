@@ -3,652 +3,372 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jace's Lab — Project Gallery</title>
+<title>海图夜读 · 财报如海图，在风浪里寻找价值。</title>
+<link rel="icon" type="image/png" href="haitu/assets/hai.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-/* ═══════════════════════════════════════
-   Morandi Palette — Light & Dark Themes
-   ═══════════════════════════════════════ */
-
 :root {
-  --bg: #F2EDE8;
-  --bg-alt: #EBE4DD;
-  --surface: #FFFFFF;
-  --surface-hover: #F9F6F3;
-  --border: #D8CFCA;
-  --border-accent: #C4A882;
-  --text: #4A433E;
-  --text-secondary: #7A726B;
-  --text-dim: #A09890;
-  --heading: #3A3330;
+  /* 海图夜读 · 深海蓝 + 金色 + 暗红点缀 */
+  --bg: #f4ede4;
+  --bg-alt: #ebe2d4;
+  --card-bg: #ffffff;
+  --text: #2d3540;
+  --text-secondary: #6a7280;
+  --text-dim: #98a0aa;
+  --heading: #1a2230;
+  --border: #e0d6c8;
 
-  --morandi-rose: #C9A9A0;
-  --morandi-sage: #A3B0A0;
-  --morandi-sand: #C4A882;
-  --morandi-blue: #9EB0BC;
-  --morandi-mauve: #B0A0B0;
-  --morandi-clay: #BEA898;
-  --morandi-olive: #A0A890;
-  --morandi-stone: #B0AAA0;
+  --accent: #2c4054;        /* 深海蓝 */
+  --accent-soft: #4a6280;
+  --accent-gold: #b08d52;   /* 金色 */
+  --accent-red: #b87070;    /* 暗红（呼应海图头像） */
 
-  --accent: #8B7355;
-  --accent-light: rgba(139,115,85,0.08);
-  --accent-border: rgba(139,115,85,0.2);
-  --accent-glow: rgba(139,115,85,0.12);
+  --green: #5a8068;
+  --gold: #b08d52;
+  --red: #b87070;
+  --tag-bg: #ede5d6;
 
-  --green: #7A9E7E;
-  --green-bg: rgba(122,158,126,0.1);
-
-  --shadow-sm: 0 1px 3px rgba(74,67,62,0.06);
-  --shadow-md: 0 4px 14px rgba(74,67,62,0.08);
-  --shadow-lg: 0 8px 32px rgba(74,67,62,0.1);
-
-  --radius: 12px;
-  --radius-lg: 16px;
-
-  --font-display: 'Noto Serif SC', Georgia, serif;
-  --font-body: 'Noto Sans SC', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --shadow: 0 2px 12px rgba(20,30,50,0.07);
+  --shadow-lg: 0 8px 32px rgba(20,30,50,0.12);
 }
-
 [data-theme="dark"] {
-  --bg: #262320;
-  --bg-alt: #2E2A27;
-  --surface: #33302D;
-  --surface-hover: #3B3734;
-  --border: #4A4540;
-  --border-accent: #8B7355;
-  --text: #E0D8D0;
-  --text-secondary: #B0A89E;
-  --text-dim: #807870;
-  --heading: #F0E8E0;
+  --bg: #1a1d24;
+  --bg-alt: #22262e;
+  --card-bg: #2a2e36;
+  --text: #e6dfd2;
+  --text-secondary: #a8a092;
+  --text-dim: #706860;
+  --heading: #f0e8d8;
+  --border: #3a3a40;
 
-  --accent: #C4A882;
-  --accent-light: rgba(196,168,130,0.1);
-  --accent-border: rgba(196,168,130,0.25);
-  --accent-glow: rgba(196,168,130,0.15);
+  --accent: #6a8aaa;
+  --accent-soft: #4a6a8a;
+  --accent-gold: #c9a872;
+  --accent-red: #c08080;
 
-  --green: #8EB892;
-  --green-bg: rgba(142,184,146,0.12);
+  --green: #7a9a7a;
+  --gold: #c9a872;
+  --red: #c08080;
+  --tag-bg: #34313a;
 
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.2);
-  --shadow-md: 0 4px 14px rgba(0,0,0,0.25);
-  --shadow-lg: 0 8px 32px rgba(0,0,0,0.3);
+  --shadow: 0 2px 12px rgba(0,0,0,0.3);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.45);
 }
-
-/* ═══════════════════════════════
-   Reset & Base
-   ═══════════════════════════════ */
-
-*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-html { font-size: 16px; scroll-behavior: smooth; }
-
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 body {
-  font-family: var(--font-body);
+  font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif;
   background: var(--bg);
   color: var(--text);
   min-height: 100vh;
-  overflow-x: hidden;
+  transition: background 0.4s, color 0.3s;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  transition: background 0.4s ease, color 0.3s ease;
 }
+.container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
 
-/* ═══════════════════════════════
-   Ambient Decoration
-   ═══════════════════════════════ */
-
-.ambient {
-  position: fixed; inset: 0; overflow: hidden; z-index: 0; pointer-events: none;
-}
-
-.ambient .orb {
-  position: absolute; border-radius: 50%; filter: blur(100px); will-change: transform;
-}
-
-[data-theme="light"] .ambient .orb { opacity: 0.12; }
-[data-theme="dark"] .ambient .orb { opacity: 0.06; }
-
-.ambient .orb:nth-child(1) {
-  width: 500px; height: 500px;
-  background: var(--morandi-sand);
-  top: -12%; left: -8%;
-  animation: drift1 28s ease-in-out infinite;
-}
-.ambient .orb:nth-child(2) {
-  width: 420px; height: 420px;
-  background: var(--morandi-sage);
-  bottom: -8%; right: -6%;
-  animation: drift2 32s ease-in-out infinite;
-}
-.ambient .orb:nth-child(3) {
-  width: 260px; height: 260px;
-  background: var(--morandi-rose);
-  top: 45%; left: 55%;
-  animation: drift3 22s ease-in-out infinite;
-}
-
-@keyframes drift1 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(50px,35px); } }
-@keyframes drift2 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(-40px,-25px); } }
-@keyframes drift3 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(-30px,40px); } }
-
-/* ═══════════════════════════════
-   Layout
-   ═══════════════════════════════ */
-
-.container {
-  position: relative; z-index: 1;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: clamp(2rem,6vh,5rem) clamp(1rem,4vw,3rem);
-}
-
-/* ═══════════════════════════════
-   Header
-   ═══════════════════════════════ */
-
-header {
+/* ── HERO ── */
+.hero {
   text-align: center;
-  margin-bottom: 3.5rem;
+  padding: 80px 24px 60px;
+  background: linear-gradient(180deg, var(--bg-alt) 0%, var(--bg) 100%);
+  border-bottom: 1px solid var(--border);
+  position: relative;
 }
-
-.header-top {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 2rem;
-}
-
 .theme-toggle {
-  width: 40px; height: 40px;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--text-secondary);
-  cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.1rem;
-  transition: all 0.25s;
-  box-shadow: var(--shadow-sm);
+  position: absolute; top: 24px; right: 24px;
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: 24px; padding: 8px 16px; cursor: pointer;
+  font-size: 1.2rem; transition: all 0.2s;
+  box-shadow: var(--shadow);
+}
+.theme-toggle:hover { transform: scale(1.08); }
+
+.haitu-portrait {
+  width: 132px; height: 132px;
+  border-radius: 50%;
+  margin: 0 auto 20px;
+  display: block;
+  border: 4px solid var(--card-bg);
+  box-shadow: 0 8px 28px rgba(184, 112, 112, 0.32);
+  background: var(--accent-red);
 }
 
-.theme-toggle:hover {
-  background: var(--surface-hover);
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
-.badge {
-  display: inline-flex; align-items: center; gap: 6px;
-  font-size: 0.72rem; font-weight: 500;
-  text-transform: uppercase; letter-spacing: 0.1em;
-  color: var(--accent);
-  background: var(--accent-light);
-  border: 1px solid var(--accent-border);
-  border-radius: 999px;
-  padding: 5px 16px;
-  margin-bottom: 1.5rem;
-}
-
-.badge .dot {
-  width: 6px; height: 6px; border-radius: 50%;
-  background: var(--green);
-  animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%,100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.4; transform: scale(0.8); }
-}
-
-h1 {
-  font-family: var(--font-display);
-  font-size: clamp(2.4rem,5.5vw,4rem);
+.brand-name {
+  font-family: 'Noto Serif SC', Georgia, serif;
+  font-size: 3rem;
   font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+  letter-spacing: 4px;
   color: var(--heading);
-  margin-bottom: 0.75rem;
+  margin-bottom: 12px;
 }
+.brand-name .accent { color: var(--accent-red); }
 
-h1 em {
-  font-style: italic;
-  color: var(--accent);
-}
-
-header p {
+.slogan {
+  font-family: 'Noto Serif SC', Georgia, serif;
+  font-size: 1.15rem;
   color: var(--text-secondary);
-  font-size: 1rem;
-  max-width: 460px;
-  margin: 0 auto;
-  line-height: 1.7;
+  font-style: italic;
+  letter-spacing: 1.5px;
+  margin-bottom: 28px;
+}
+.slogan::before { content: '「'; color: var(--accent-gold); }
+.slogan::after { content: '」'; color: var(--accent-gold); }
+
+.subtitle {
+  color: var(--text-dim);
+  font-size: 0.95rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
 }
 
-/* ═══════════════════════════════
-   Grid
-   ═══════════════════════════════ */
+/* ── SECTION ── */
+.section { padding: 60px 0; }
+.section-title {
+  display: flex; align-items: center; gap: 12px;
+  font-family: 'Noto Serif SC', serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: var(--text-secondary);
+  margin-bottom: 28px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.section-title::before {
+  content: '';
+  display: inline-block;
+  width: 4px; height: 20px;
+  background: var(--accent-gold);
+  border-radius: 2px;
+}
 
-.grid {
+/* ── REPORT CARDS ── */
+.report-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 1.25rem;
+  gap: 22px;
 }
-
-/* ═══════════════════════════════
-   Card
-   ═══════════════════════════════ */
-
-.card {
+.report-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 26px;
+  text-decoration: none;
+  color: var(--text);
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow);
   position: relative;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 1.75rem;
-  display: flex; flex-direction: column; gap: 0.75rem;
-  transition: all 0.35s cubic-bezier(0.22,1,0.36,1);
-  cursor: pointer;
-  text-decoration: none;
-  color: inherit;
   overflow: hidden;
-  box-shadow: var(--shadow-sm);
 }
-
-.card::before {
+.report-card::before {
   content: '';
-  position: absolute; inset: 0;
-  border-radius: var(--radius-lg);
-  background: radial-gradient(500px circle at var(--mx,50%) var(--my,50%), var(--accent-glow), transparent 50%);
-  opacity: 0;
-  transition: opacity 0.35s;
-  pointer-events: none;
-}
-
-.card:hover {
-  border-color: var(--accent-border);
-  background: var(--surface-hover);
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
-}
-
-.card:hover::before { opacity: 1; }
-
-.card-icon {
-  width: 44px; height: 44px;
-  border-radius: var(--radius);
-  background: linear-gradient(135deg, var(--accent-light), rgba(163,176,160,0.12));
-  border: 1px solid var(--accent-border);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.3rem;
-  flex-shrink: 0;
-  transition: transform 0.35s cubic-bezier(0.22,1,0.36,1);
-}
-
-.card:hover .card-icon { transform: scale(1.1) rotate(-4deg); }
-
-.card h2 {
-  font-family: var(--font-display);
-  font-size: 1.3rem;
-  font-weight: 600;
-  line-height: 1.25;
-  letter-spacing: -0.01em;
-  color: var(--heading);
-}
-
-.card .desc {
-  color: var(--text-secondary);
-  font-size: 0.85rem;
-  line-height: 1.6;
-  flex: 1;
-}
-
-.card-tags {
-  display: flex; flex-wrap: wrap; gap: 6px;
-  margin-top: 0.25rem;
-}
-
-.card-tag {
-  display: inline-flex; align-items: center; gap: 4px;
-  font-size: 0.68rem; font-weight: 600;
-  font-family: var(--font-mono);
-  padding: 3px 8px;
-  border-radius: 6px;
-  letter-spacing: 0.01em;
-}
-
-.card-tag.score {
-  background: var(--accent-light);
-  color: var(--accent);
-  border: 1px solid var(--accent-border);
-}
-
-.card-tag.buy {
-  background: var(--green-bg);
-  color: var(--green);
-  border: 1px solid rgba(122,158,126,0.25);
-}
-
-.card-footer {
-  display: flex; align-items: center; justify-content: space-between;
-  margin-top: 0.5rem;
-  padding-top: 0.75rem;
-  border-top: 1px solid var(--border);
-}
-
-.card-footer .meta {
-  display: flex; align-items: center; gap: 0.5rem;
-  font-size: 0.72rem;
-  font-family: var(--font-mono);
-  color: var(--text-dim);
-}
-
-.card-footer .arrow {
-  font-size: 1.1rem;
-  color: var(--accent);
-  opacity: 0;
-  transform: translateX(-6px);
-  transition: all 0.35s cubic-bezier(0.22,1,0.36,1);
-}
-
-.card:hover .card-footer .arrow { opacity: 1; transform: translateX(0); }
-
-/* ═══════════════════════════════
-   Loading Skeleton
-   ═══════════════════════════════ */
-
-@keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
-
-.skeleton-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 1.75rem;
-  display: flex; flex-direction: column; gap: 1rem;
-}
-
-.skeleton-card .sk-line {
-  height: 14px; border-radius: 6px;
-  background: linear-gradient(90deg, var(--border) 25%, var(--surface-hover) 50%, var(--border) 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.8s ease-in-out infinite;
-}
-
-.skeleton-card .sk-icon {
-  width: 44px; height: 44px; border-radius: var(--radius);
-  background: linear-gradient(90deg, var(--border) 25%, var(--surface-hover) 50%, var(--border) 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.8s ease-in-out infinite;
-}
-
-.skeleton-card .sk-title { width: 65%; }
-.skeleton-card .sk-desc1 { width: 90%; }
-.skeleton-card .sk-desc2 { width: 70%; }
-
-/* ═══════════════════════════════
-   Error State
-   ═══════════════════════════════ */
-
-.error-msg {
-  text-align: center;
-  padding: 3rem 1rem;
-  color: var(--text-secondary);
-}
-
-.error-msg .icon { font-size: 2.5rem; margin-bottom: 1rem; }
-
-.error-msg button {
-  margin-top: 1rem;
-  padding: 0.6rem 1.4rem;
-  font-family: var(--font-body);
-  font-size: 0.85rem; font-weight: 500;
-  background: var(--accent-light);
-  color: var(--accent);
-  border: 1px solid var(--accent-border);
-  border-radius: 999px;
-  cursor: pointer;
-  transition: all 0.25s;
-}
-
-.error-msg button:hover { background: var(--accent-glow); }
-
-/* ═══════════════════════════════
-   Card Entrance
-   ═══════════════════════════════ */
-
-.card {
-  opacity: 0; transform: translateY(20px);
-  animation: cardIn 0.55s cubic-bezier(0.22,1,0.36,1) forwards;
-}
-
-@keyframes cardIn { to { opacity: 1; transform: translateY(0); } }
-
-/* ═══════════════════════════════
-   Footer
-   ═══════════════════════════════ */
-
-footer {
-  text-align: center;
-  margin-top: 4rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--border);
-  color: var(--text-dim);
-  font-size: 0.8rem;
-}
-
-footer a {
-  color: var(--accent);
-  text-decoration: none;
-}
-
-footer a:hover { text-decoration: underline; }
-
-footer .refresh-info {
-  margin-top: 0.5rem;
-  font-size: 0.72rem;
-  font-family: var(--font-mono);
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--accent-gold);
   opacity: 0.6;
 }
+.report-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent-gold);
+  box-shadow: var(--shadow-lg);
+}
+.report-card .ticker {
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 1.5px;
+  margin-bottom: 8px;
+}
+.report-card h3 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 1.18rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  line-height: 1.45;
+  color: var(--heading);
+}
+.report-card .desc {
+  color: var(--text-secondary);
+  font-size: 0.91rem;
+  line-height: 1.65;
+  flex: 1;
+  margin-bottom: 16px;
+}
+.report-card .meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+.tag {
+  display: inline-block;
+  background: var(--tag-bg);
+  padding: 4px 11px;
+  border-radius: 11px;
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+.tag.buy { color: var(--green); background: rgba(90,128,104,0.13); }
+.tag.hold { color: var(--gold); background: rgba(176,141,82,0.13); }
+.tag.sell { color: var(--red); background: rgba(184,112,112,0.13); }
 
-/* ═══════════════════════════════
-   Responsive
-   ═══════════════════════════════ */
+/* ── EMPTY STATE ── */
+.empty-state {
+  text-align: center;
+  padding: 60px 24px;
+  color: var(--text-dim);
+  font-style: italic;
+  background: var(--card-bg);
+  border: 1px dashed var(--border);
+  border-radius: 14px;
+}
+.empty-state .empty-icon { font-size: 2.5rem; margin-bottom: 12px; opacity: 0.5; }
 
-@media (max-width: 440px) {
-  .grid { grid-template-columns: 1fr; }
-  h1 { font-size: 2rem; }
+/* ── ABOUT ── */
+.about-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 36px 40px;
+  box-shadow: var(--shadow);
+  font-family: 'Noto Serif SC', serif;
+  line-height: 2.0;
+  font-size: 1rem;
+  color: var(--text);
+}
+.about-card p { margin-bottom: 16px; }
+.about-card p:last-child { margin-bottom: 0; }
+.about-card strong { color: var(--accent-red); }
+
+/* ── FOOTER ── */
+footer {
+  text-align: center;
+  margin-top: 40px;
+  padding: 32px 24px 40px;
+  border-top: 1px solid var(--border);
+  color: var(--text-dim);
+  font-size: 0.82rem;
+  background: var(--bg-alt);
+}
+footer p { margin-bottom: 6px; }
+
+@media (max-width: 768px) {
+  .brand-name { font-size: 2.2rem; }
+  .slogan { font-size: 1rem; }
+  .haitu-portrait { width: 110px; height: 110px; }
+  .hero { padding: 60px 24px 40px; }
+  .section { padding: 40px 0; }
 }
 </style>
 </head>
 <body>
 
-<div class="ambient">
-  <div class="orb"></div>
-  <div class="orb"></div>
-  <div class="orb"></div>
-</div>
+<header class="hero">
+  <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙</button>
+  <img src="haitu/assets/hai.png" alt="海图" class="haitu-portrait">
+  <h1 class="brand-name">海图<span class="accent">夜读</span></h1>
+  <div class="slogan">财报如海图，在风浪里寻找价值。</div>
+  <div class="subtitle">Value Investing Research · Stock Analysis</div>
+</header>
 
 <div class="container">
-  <header>
-    <div class="header-top">
-      <button class="theme-toggle" id="themeToggle" title="切换主题" aria-label="Toggle theme">
-        <span id="themeIcon">&#9790;</span>
-      </button>
+
+  <section class="section">
+    <div class="section-title">📜 关于海图夜读</div>
+    <div class="about-card">
+      <p>每一份上市公司财报都是一张<strong>海图</strong>——记录着企业过去的航迹，也暗示着未来的水深与暗礁。</p>
+      <p>《海图夜读》是一档专注于<strong>价值投资</strong>的财报研究栏目。我们以护城河、所有者盈余、安全边际为锚点，输出 12 模块深度分析与 6 维海图评分卡。</p>
+      <p><strong>海图</strong>是这里的虚拟人物——一个夜读财报的角色。他不喧哗，不卖焦虑，只在灯下慢慢读懂一家企业的本质。</p>
+      <p>我们覆盖<strong>美股、港股、A 股</strong>三大市场。每一份报告都包含完整 HTML 深度版（这里）+ 800-1200 字社媒短文（用于发布）。</p>
     </div>
-    <div class="badge"><span class="dot"></span> Live from GitHub</div>
-    <h1>Jace's <em>Lab</em></h1>
-    <p>A collection of interactive dashboards and reports, auto-discovered from GitHub Pages.</p>
-  </header>
+  </section>
 
-  <div class="grid" id="projects"></div>
+  <section class="section">
+    <div class="section-title">🌙 海图研判 · 按发布时间排序</div>
+    <div class="report-grid" id="reportGrid"></div>
+  </section>
 
-  <footer>
-    <p>Built by <a href="https://github.com/JaceXie" target="_blank" rel="noopener">@JaceXie</a></p>
-    <p class="refresh-info" id="refresh-info"></p>
-  </footer>
 </div>
 
+<footer>
+  <p>《海图夜读》 · 价值投资研究站</p>
+  <p>所有内容仅供研究参考，不构成投资建议。市场有风险，投资需谨慎。</p>
+  <p>© 2026 Haitu Night Reading</p>
+</footer>
+
 <script>
+/* ── REPORT DATA — sorted by modTime desc (newest first) ── */
+const reports = [
+  {
+    file: "haitu/reports/tencent-q4-2025.html",
+    ticker: "HKEX: 0700",
+    title: "腾讯控股 Tencent FY2025 海图研判",
+    desc: "14 亿微信用户构成的中国数字基础设施 + 全球第一的游戏帝国 + 一万亿规模的投资组合。FY2025 营收 ¥7,517.7亿(+14%) · FCF ¥1,826亿(+18%) · 海图评分 6 维 A-A-A-A-B+-B+ · 公允价值 HKD 615",
+    tag: "买入 / 核心仓配置",
+    tagClass: "buy",
+    date: "2026-04-28",
+    modTime: 1777334400000
+  },
+];
+
+function renderReports() {
+  const grid = document.getElementById('reportGrid');
+  if (reports.length === 0) {
+    grid.innerHTML = `
+      <div class="empty-state" style="grid-column: 1 / -1;">
+        <div class="empty-icon">🌊</div>
+        <p>第一份海图研判正在准备中……</p>
+      </div>
+    `;
+    return;
+  }
+  reports.sort((a, b) => b.modTime - a.modTime);
+  grid.innerHTML = reports.map(r => `
+    <a class="report-card" href="${r.file}">
+      <div class="ticker">${r.ticker}</div>
+      <h3>${r.title}</h3>
+      <div class="desc">${r.desc}</div>
+      <div class="meta">
+        <span class="tag ${r.tagClass}">${r.tag}</span>
+        <span>${r.date}</span>
+      </div>
+    </a>
+  `).join('');
+}
+renderReports();
+
+/* ── THEME TOGGLE ── */
+function toggleTheme() {
+  const d = document.documentElement;
+  const btn = document.getElementById('themeBtn');
+  if (d.getAttribute('data-theme') === 'dark') {
+    d.removeAttribute('data-theme');
+    btn.textContent = '🌙';
+    localStorage.setItem('theme', 'light');
+  } else {
+    d.setAttribute('data-theme', 'dark');
+    btn.textContent = '☀️';
+    localStorage.setItem('theme', 'dark');
+  }
+}
 (function() {
-  var USERNAME = 'JaceXie';
-  var GRID = document.getElementById('projects');
-  var REFRESH_INFO = document.getElementById('refresh-info');
-
-  // ── Theme ──
-  var html = document.documentElement;
-  var toggle = document.getElementById('themeToggle');
-  var icon = document.getElementById('themeIcon');
-
-  var saved = localStorage.getItem('jace-lab-theme');
-  if (saved) {
-    html.setAttribute('data-theme', saved);
-  } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    html.setAttribute('data-theme', 'dark');
-  }
-
-  function updateIcon() {
-    icon.innerHTML = html.getAttribute('data-theme') === 'dark' ? '&#9788;' : '&#9790;';
-  }
-  updateIcon();
-
-  toggle.addEventListener('click', function() {
-    var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    html.setAttribute('data-theme', next);
-    localStorage.setItem('jace-lab-theme', next);
-    updateIcon();
-  });
-
-  // ── Icon mapping ──
-  function pickIcon(name, desc) {
-    var s = (name + ' ' + (desc || '')).toLowerCase();
-    if (s.includes('wallet') || s.includes('monitor')) return '\uD83D\uDCCA';
-    if (s.includes('report') || s.includes('earning') || s.includes('financial') || s.includes('analysis')) return '\uD83D\uDCC8';
-    if (s.includes('chart') || s.includes('dashboard')) return '\uD83D\uDCC9';
-    if (s.includes('blog') || s.includes('post')) return '\u270D\uFE0F';
-    if (s.includes('game')) return '\uD83C\uDFAE';
-    if (s.includes('map')) return '\uD83D\uDDFA\uFE0F';
-    if (s.includes('photo') || s.includes('gallery')) return '\uD83D\uDCF7';
-    if (s.includes('music') || s.includes('audio')) return '\uD83C\uDFB5';
-    if (s.includes('ai') || s.includes('ml') || s.includes('model') || s.includes('edu')) return '\uD83E\uDD16';
-    if (s.includes('crypto') || s.includes('bitcoin') || s.includes('btc') || s.includes('bitdeer')) return '\u20BF';
-    if (s.includes('power') || s.includes('energy') || s.includes('电力')) return '\u26A1';
-    if (s.includes('buffett') || s.includes('巴菲特') || s.includes('投资')) return '\uD83D\uDCC8';
-    return '\uD83D\uDE80';
-  }
-
-  // ── Format name ──
-  function formatName(name) {
-    return name.replace(/[-_]/g, ' ').replace(/\b\w/g, function(c) { return c.toUpperCase(); });
-  }
-
-  // ── Loading ──
-  function showLoading() {
-    GRID.innerHTML = '';
-    for (var i = 0; i < 4; i++) {
-      var el = document.createElement('div');
-      el.className = 'skeleton-card';
-      el.innerHTML = '<div class="sk-icon"></div><div class="sk-line sk-title"></div><div class="sk-line sk-desc1"></div><div class="sk-line sk-desc2"></div>';
-      el.style.animationDelay = (i * 0.1) + 's';
-      GRID.appendChild(el);
-    }
-  }
-
-  // ── Error ──
-  function showError(msg) {
-    GRID.innerHTML = '<div class="error-msg" style="grid-column:1/-1"><div class="icon">\u26A0\uFE0F</div><p>' + msg + '</p><button onclick="location.reload()">Retry</button></div>';
-  }
-
-  // ── Render ──
-  function renderProjects(repos) {
-    GRID.innerHTML = '';
-
-    if (repos.length === 0) {
-      GRID.innerHTML = '<div class="error-msg" style="grid-column:1/-1"><div class="icon">\uD83C\uDF43</div><p>No GitHub Pages projects found yet.</p></div>';
-      return;
-    }
-
-    repos.forEach(function(repo, i) {
-      var pagesUrl = 'https://' + USERNAME.toLowerCase() + '.github.io/' + repo.name + '/';
-      var card = document.createElement('a');
-      card.className = 'card';
-      card.href = pagesUrl;
-      card.target = '_blank';
-      card.rel = 'noopener';
-      card.style.animationDelay = (i * 0.08) + 's';
-
-      var iconEmoji = pickIcon(repo.name, repo.description);
-      var title = formatName(repo.name);
-      var rawDesc = repo.description || 'No description available.';
-      var updated = repo.pushed_at
-        ? new Date(repo.pushed_at).toLocaleDateString('zh-CN', { year: 'numeric', month: 'short', day: 'numeric' })
-        : '';
-
-      // Parse analysis metadata from description: "... | B 27/36 | 首仓 HK$76"
-      var desc = rawDesc;
-      var scoreTag = '';
-      var buyTag = '';
-      var pipeMatch = rawDesc.match(/^(.*?)\s*\|\s*([A-D][+\-]?\s+\d+\/36)\s*\|\s*(首仓\s*\S+)/);
-      if (pipeMatch) {
-        desc = pipeMatch[1].trim();
-        scoreTag = pipeMatch[2].trim();
-        buyTag = pipeMatch[3].trim();
-      }
-
-      var tagsHtml = '';
-      if (scoreTag || buyTag) {
-        tagsHtml = '<div class="card-tags">' +
-          (scoreTag ? '<span class="card-tag score">' + scoreTag + '</span>' : '') +
-          (buyTag ? '<span class="card-tag buy">' + buyTag + '</span>' : '') +
-          '</div>';
-      }
-
-      card.innerHTML = '<div class="card-icon">' + iconEmoji + '</div>' +
-        '<h2>' + title + '</h2>' +
-        '<div class="desc">' + desc + '</div>' +
-        tagsHtml +
-        '<div class="card-footer">' +
-          '<div class="meta">' +
-            (updated ? '<span>' + updated + '</span>' : '') +
-            (repo.language ? '<span>&middot; ' + repo.language + '</span>' : '') +
-          '</div>' +
-          '<span class="arrow">&rarr;</span>' +
-        '</div>';
-
-      card.addEventListener('mousemove', function(e) {
-        var rect = card.getBoundingClientRect();
-        card.style.setProperty('--mx', (e.clientX - rect.left) + 'px');
-        card.style.setProperty('--my', (e.clientY - rect.top) + 'px');
-      });
-
-      GRID.appendChild(card);
+  const t = localStorage.getItem('theme');
+  if (t === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('themeBtn').textContent = '☀️';
     });
   }
-
-  // ── Fetch ──
-  async function fetchPagesRepos() {
-    showLoading();
-    try {
-      var resp = await fetch(
-        'https://api.github.com/users/' + USERNAME + '/repos?per_page=100&sort=pushed&direction=desc',
-        { headers: { 'Accept': 'application/vnd.github.v3+json' } }
-      );
-      if (!resp.ok) throw new Error('GitHub API returned ' + resp.status);
-      var repos = await resp.json();
-      var pagesRepos = repos.filter(function(r) { return r.has_pages && r.name !== USERNAME + '.github.io'; });
-      renderProjects(pagesRepos);
-      var now = new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });
-      REFRESH_INFO.textContent = 'Last synced at ' + now + ' · Auto-refreshes every 5 min';
-    } catch (err) {
-      console.error('Failed to fetch repos:', err);
-      showError('Failed to load projects from GitHub. Rate limit may have been hit.');
-    }
-  }
-
-  fetchPagesRepos();
-  setInterval(fetchPagesRepos, 5 * 60 * 1000);
 })();
 </script>
 </body>

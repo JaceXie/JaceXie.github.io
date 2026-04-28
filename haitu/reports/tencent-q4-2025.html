@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-04-28，FY2025 财报已于 2026-03-18 发布 -->
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>腾讯控股 0700.HK — FY2025 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+:root {
+  --bg:        #f5f0eb;
+  --bg2:       #ece6df;
+  --card:      #ffffff;
+  --card2:     #f8f5f1;
+  --border:    #d9d0c7;
+  --text:      #4a4340;
+  --text2:     #7a706a;
+  --text3:     #a89f98;
+  --accent:    #8a9a8e;
+  --accent2:   #7b8fa0;
+  --accent3:   #b08d7a;
+  --rose:      #c09090;
+  --gold:      #b9a06a;
+  --red:       #b87070;
+  --green:     #7a9a7a;
+  --shadow:    rgba(0,0,0,0.06);
+  --chart-grid:#e5ddd5;
+}
+[data-theme="dark"] {
+  --bg:        #1e1c1a;
+  --bg2:       #28251f;
+  --card:      #2e2a25;
+  --card2:     #363230;
+  --border:    #4a4540;
+  --text:      #d4ccc4;
+  --text2:     #a09890;
+  --text3:     #706860;
+  --accent:    #8a9a8e;
+  --accent2:   #8fabbf;
+  --accent3:   #c9a48e;
+  --rose:      #c09090;
+  --gold:      #c9b07a;
+  --red:       #c08080;
+  --green:     #8aaa8a;
+  --shadow:    rgba(0,0,0,0.3);
+  --chart-grid:#3e3a35;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', 'SimSun', serif;
+  line-height: 1.75;
+  font-size: 14.5px;
+  transition: background .35s, color .35s;
+}
+a { color: var(--accent2); text-decoration: none; }
+
+.theme-bar {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 8px 24px;
+  display: flex; justify-content: space-between; align-items: center;
+  backdrop-filter: blur(10px);
+}
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; }
+.theme-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+.toggle-switch {
+  position: relative; width: 44px; height: 22px;
+  background: var(--border); border-radius: 11px; cursor: pointer;
+  transition: background .3s;
+}
+.toggle-switch::after {
+  content: ''; position: absolute;
+  top: 2px; left: 2px; width: 18px; height: 18px;
+  background: var(--card); border-radius: 50%;
+  transition: transform .3s; box-shadow: 0 1px 3px rgba(0,0,0,.15);
+}
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+
+.hero {
+  padding: 48px 24px 36px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+.hero-tag {
+  display: inline-block;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--accent); border: 1px solid var(--accent);
+  padding: 3px 14px; border-radius: 20px; margin-bottom: 18px;
+}
+.hero h1 { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.pill {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 24px; padding: 6px 18px;
+  font-family: 'Segoe UI', sans-serif; font-size: 13px; color: var(--text2);
+  box-shadow: 0 1px 3px var(--shadow);
+}
+.pill strong { color: var(--text); }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle {
+  font-size: 18px; font-weight: 700; color: var(--accent3);
+  margin-bottom: 20px; letter-spacing: 0.5px;
+  display: flex; align-items: center; gap: 10px;
+}
+.stitle::before {
+  content: ''; display: block; width: 4px; height: 20px;
+  background: var(--accent3); border-radius: 2px;
+}
+
+/* ── 海图签名块 ── */
+.haitu-quip {
+  display: flex; align-items: center; gap: 18px;
+  background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red);
+  border-radius: 12px; padding: 18px 24px; margin: 24px 0;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.haitu-avatar-sm {
+  width: 64px; height: 64px; border-radius: 50%;
+  object-fit: cover; flex-shrink: 0;
+  border: 2px solid var(--border); background: var(--red);
+  box-shadow: 0 2px 8px rgba(184,112,112,0.2);
+}
+.haitu-quote { flex: 1; }
+.haitu-name {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 12px; font-weight: 700; letter-spacing: 1.5px;
+  color: var(--red); text-transform: uppercase; margin-bottom: 4px;
+}
+.haitu-portrait {
+  font-size: 15px; line-height: 1.65; color: var(--text);
+  margin-bottom: 6px; font-weight: 600;
+}
+.haitu-rating-line {
+  font-size: 13px; color: var(--text2);
+  font-family: 'Segoe UI', sans-serif;
+}
+.rating-badge {
+  display: inline-block; padding: 2px 12px; border-radius: 12px;
+  font-weight: 700; font-size: 13px; letter-spacing: 0.5px; margin-left: 4px;
+}
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+
+.haitu-essay {
+  background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red);
+  border-radius: 12px; padding: 28px 32px; margin: 24px 0 20px;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.haitu-essay-header {
+  display: flex; align-items: center; gap: 18px;
+  padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px;
+}
+.haitu-avatar-lg {
+  width: 110px; height: 110px; border-radius: 50%;
+  object-fit: cover; flex-shrink: 0;
+  border: 3px solid var(--border); background: var(--red);
+  box-shadow: 0 4px 14px rgba(184,112,112,0.22);
+}
+.haitu-name-lg {
+  font-family: 'Georgia', 'Noto Serif SC', serif;
+  font-size: 28px; font-weight: 700; color: var(--text);
+  letter-spacing: 1px; margin-bottom: 4px;
+}
+.haitu-essay-tag {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 12px; color: var(--text3); letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+.haitu-essay-body {
+  font-family: 'Georgia', 'Noto Serif SC', serif;
+  font-size: 15px; line-height: 2.0; color: var(--text);
+}
+.haitu-essay-body p { margin-bottom: 14px; }
+.haitu-essay-body p.lead {
+  font-size: 16px; font-style: italic; color: var(--text2); margin-bottom: 18px;
+}
+.haitu-essay-body strong { color: var(--text); font-weight: 700; }
+.haitu-essay-body h4 {
+  font-size: 14px; color: var(--accent3);
+  margin: 18px 0 10px; font-family: 'Segoe UI', sans-serif;
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.haitu-sign {
+  text-align: right; margin-top: 18px;
+  font-family: 'Georgia', serif; font-size: 14px;
+  color: var(--text2); font-style: italic;
+}
+.haitu-disc {
+  margin-top: 22px; padding-top: 14px;
+  border-top: 1px solid var(--border);
+  font-size: 12px; color: var(--text3); font-style: italic; line-height: 1.7;
+}
+
+/* ── 数据快照 / KPI / 表格 ── */
+.stock-snap {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 22px 28px;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px;
+  box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px;
+}
+.snap-item { text-align: center; }
+.snap-label { font-family: 'Segoe UI', sans-serif; font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.snap-val { font-family: 'Segoe UI', sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+.snap-val.up { color: var(--green); }
+.snap-val.dn { color: var(--red); }
+.snap-sub { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.kpi {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 16px 18px;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.kpi-l { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.badge {
+  display: inline-block; font-family: 'Segoe UI', sans-serif;
+  font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px;
+}
+.up   { background: rgba(122,154,122,.15); color: var(--green); }
+.dn   { background: rgba(184,112,112,.15); color: var(--red); }
+.nt   { background: rgba(123,143,160,.15); color: var(--accent2); }
+
+.tbl-wrap {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow);
+}
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI', sans-serif; font-size: 13px; }
+.tbl th {
+  background: var(--card2); color: var(--text3); font-size: 11px;
+  letter-spacing: .5px; text-transform: uppercase;
+  padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border);
+}
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); background: var(--card2); }
+
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow);
+}
+.ctitle { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 260px; }
+
+/* 海图评分卡 (6 维 A-D) */
+.scorecard {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow);
+}
+.score-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.score-card {
+  background: var(--card2); border: 1px solid var(--border);
+  border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px;
+}
+.score-letter {
+  width: 56px; height: 56px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Segoe UI', sans-serif; font-weight: 800; font-size: 22px;
+  flex-shrink: 0; border: 3px solid;
+}
+.s-a { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.12); }
+.s-bp { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.06); }
+.s-b { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.10); }
+.s-bm { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.06); }
+.s-c { color: var(--red); border-color: var(--red); background: rgba(184,112,112,.08); }
+.score-body h4 { font-size: 13px; color: var(--text); margin-bottom: 4px; }
+.score-body p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+.flag-row {
+  margin-top: 16px; padding: 12px 16px;
+  background: rgba(122,154,122,.08); border: 1px solid rgba(122,154,122,.2);
+  border-radius: 8px; font-size: 13px; color: var(--text2);
+}
+.flag-row strong { color: var(--green); }
+
+/* 估值卡 */
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px; text-align: center;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.pbox .pl { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; }
+.pbox .pv { font-family: 'Segoe UI', sans-serif; font-size: 28px; font-weight: 800; margin-bottom: 5px; }
+.pbox .pn { font-size: 12px; color: var(--text3); line-height: 1.5; }
+.pc { color: var(--red); } .pf { color: var(--gold); } .ps { color: var(--green); }
+
+footer {
+  background: var(--card2); border-top: 1px solid var(--border);
+  padding: 24px; text-align: center; color: var(--text3); font-size: 12px;
+  margin-top: 40px; line-height: 1.8;
+}
+
+@media (max-width: 768px) {
+  .cgrid,.pgrid { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 22px; }
+  .kpi-grid { grid-template-columns: 1fr 1fr; }
+  .stock-snap { grid-template-columns: 1fr 1fr; }
+  .haitu-quip { flex-direction: column; text-align: center; }
+  .haitu-essay-header { flex-direction: column; text-align: center; }
+  .haitu-avatar-sm { width: 80px; height: 80px; }
+  .haitu-avatar-lg { width: 90px; height: 90px; }
+}
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <div class="logo">海图夜读 · 财报研究所</div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">2026年4月28日 · FY2025 · 海图研判</div>
+  <h1>腾讯控股 Tencent Holdings 财报深度分析</h1>
+  <div class="hero-sub">HKEX: 0700.HK &nbsp;|&nbsp; 2025年 Q4 & 全年业绩 &nbsp;|&nbsp; 价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill">股价 <strong>HKD 493.40</strong> <span style="color:var(--red)">距高点 -28%</span></div>
+    <div class="pill">市值 <strong>HKD 4.46万亿</strong></div>
+    <div class="pill">FY2025营收 <strong>¥7,517.7亿</strong> <span style="color:var(--green)">+14%</span></div>
+    <div class="pill">FCF <strong>¥1,826亿</strong> <span style="color:var(--green)">+18%</span></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 海图页首短评（hero 之后立即出现） ═══ -->
+<div class="haitu-quip">
+  <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+  <div class="haitu-quote">
+    <div class="haitu-name">海图</div>
+    <div class="haitu-portrait">14 亿微信用户构成的中国数字基础设施 + 全球第一的游戏帝国 + 一万亿规模的投资组合，三个独立的大业务装在一家公司里。</div>
+    <div class="haitu-rating-line">评级：<span class="rating-badge rating-buy">买入</span> · 12 个月目标价 HKD 625（+27%）</div>
+  </div>
+</div>
+
+<!-- ═══ 市场数据快照 ═══ -->
+<div class="section">
+  <div class="stitle">市场数据快照（2026-04-28）</div>
+  <div class="stock-snap">
+    <div class="snap-item">
+      <div class="snap-label">股价（港元）</div>
+      <div class="snap-val">493.40</div>
+      <div class="snap-sub">截至 4月26日</div>
+    </div>
+    <div class="snap-item">
+      <div class="snap-label">市值</div>
+      <div class="snap-val">HKD 4.46T</div>
+      <div class="snap-sub">≈ USD 572B</div>
+    </div>
+    <div class="snap-item">
+      <div class="snap-label">TTM P/E</div>
+      <div class="snap-val">17.2x</div>
+      <div class="snap-sub">Non-IFRS: 14.9x</div>
+    </div>
+    <div class="snap-item">
+      <div class="snap-label">EPS TTM</div>
+      <div class="snap-val">¥24.87</div>
+      <div class="snap-sub">Non-IFRS: ¥27.88 (+19%)</div>
+    </div>
+    <div class="snap-item">
+      <div class="snap-label">52周区间</div>
+      <div class="snap-val dn">距高点 -28%</div>
+      <div class="snap-sub">低 469 / 高 683</div>
+    </div>
+    <div class="snap-item">
+      <div class="snap-label">分红</div>
+      <div class="snap-val">HKD 5.30/股</div>
+      <div class="snap-sub">+18% YoY</div>
+    </div>
+    <div class="snap-item">
+      <div class="snap-label">P/B</div>
+      <div class="snap-val">~2.5x</div>
+      <div class="snap-sub">ROE 22%</div>
+    </div>
+    <div class="snap-item">
+      <div class="snap-label">FCF Yield</div>
+      <div class="snap-val">~4.4%</div>
+      <div class="snap-sub">FCF ¥1,826亿</div>
+    </div>
+    <div class="snap-item">
+      <div class="snap-label">总现金</div>
+      <div class="snap-val">¥4,949亿</div>
+      <div class="snap-sub">净现金 ¥1,071亿</div>
+    </div>
+    <div class="snap-item">
+      <div class="snap-label">投资组合</div>
+      <div class="snap-val">~¥1.0T</div>
+      <div class="snap-sub">含上市+非上市</div>
+    </div>
+    <div class="snap-item">
+      <div class="snap-label">2025回购</div>
+      <div class="snap-val">HKD 800亿</div>
+      <div class="snap-sub">1.534亿股 全注销</div>
+    </div>
+    <div class="snap-item">
+      <div class="snap-label">微信MAU</div>
+      <div class="snap-val">14.14亿</div>
+      <div class="snap-sub">+2% YoY</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FY2025 KPI ═══ -->
+<div class="section">
+  <div class="stitle">FY2025 全年核心业绩（RMB 亿元）</div>
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div class="kpi-l">总收入</div>
+      <div class="kpi-v">¥7,517.7亿</div>
+      <span class="badge up">▲ +14% YoY</span>
+      <div style="font-size:12px;color:var(--text3);margin-top:4px">2023 年来最快增速</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">毛利率</div>
+      <div class="kpi-v">56.4%</div>
+      <span class="badge up">▲ 3年高</span>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">非IFRS经营利润</div>
+      <div class="kpi-v">¥2,806.6亿</div>
+      <span class="badge up">▲ +18%</span>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">非IFRS归母净利</div>
+      <div class="kpi-v">¥2,596亿</div>
+      <span class="badge up">▲ +17%</span>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">非IFRS净利率</div>
+      <div class="kpi-v">34.5%</div>
+      <span class="badge up">▲ 持续提升</span>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">非IFRS摊薄EPS</div>
+      <div class="kpi-v">¥27.88</div>
+      <span class="badge up">▲ +19%</span>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">经营现金流</div>
+      <div class="kpi-v">¥3,030亿</div>
+      <span class="badge up">▲ +17%</span>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">自由现金流</div>
+      <div class="kpi-v">¥1,826亿</div>
+      <span class="badge up">▲ +18%</span>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">资本开支</div>
+      <div class="kpi-v">¥792亿</div>
+      <span class="badge nt">● AI 算力投入</span>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">研发投入</div>
+      <div class="kpi-v">¥857.5亿</div>
+      <span class="badge up">▲ 创纪录</span>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">总现金</div>
+      <div class="kpi-v">¥4,949亿</div>
+      <span class="badge up">▲ +19%</span>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">ROE</div>
+      <div class="kpi-v">~22%</div>
+      <span class="badge up">▲ 顶级水准</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 季度趋势图 ═══ -->
+<div class="section">
+  <div class="stitle">季度趋势（近 5 个季度）</div>
+  <div class="cgrid">
+    <div class="ccard">
+      <div class="ctitle">季度营收（RMB 亿元）</div>
+      <div class="cwrap"><canvas id="revenueChart"></canvas></div>
+    </div>
+    <div class="ccard">
+      <div class="ctitle">季度非 IFRS 净利（RMB 亿元）</div>
+      <div class="cwrap"><canvas id="profitChart"></canvas></div>
+    </div>
+  </div>
+  <div class="cgrid">
+    <div class="ccard">
+      <div class="ctitle">FY2025 业务收入结构（RMB 亿元）</div>
+      <div class="cwrap"><canvas id="segmentChart"></canvas></div>
+    </div>
+    <div class="ccard">
+      <div class="ctitle">5 年自由现金流轨迹（RMB 亿元）</div>
+      <div class="cwrap"><canvas id="fcfChart"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 商业模式与护城河 ═══ -->
+<div class="section">
+  <div class="stitle">商业模式 · 一句话画像</div>
+  <div style="background:var(--card);border:1px solid var(--border);border-left:4px solid var(--accent3);border-radius:10px;padding:24px;font-size:15px;line-height:1.9;color:var(--text);">
+    <p style="margin-bottom:12px;"><strong>"腾讯把 14 亿中国人困在自己的微信、QQ 和游戏里，每天花 4-6 小时使用，然后把这些时间变现为广告、数字内容、金融服务和企业云收入。"</strong></p>
+    <p style="font-size:13px;color:var(--text2);">这是世界上少数几家可以用一句话说清楚的"赚钱机器"，且每个分部都拥有独立的全球级竞争力——游戏全球第一、社交全球第一（中文圈）、移动支付全球前三、企业云中国前三、AI 模型中国前三。</p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 14px;">5 维护城河评估</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead>
+        <tr>
+          <th>维度</th>
+          <th>评级</th>
+          <th>关键证据</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>网络效应</td><td><strong style="color:var(--green)">极宽</strong></td><td>微信 14 亿 MAU，社交关系链不可迁移</td></tr>
+        <tr><td>转换成本</td><td><strong style="color:var(--green)">宽</strong></td><td>微信支付 + 聊天 + 朋友圈 + 小程序，10 年沉淀数据</td></tr>
+        <tr><td>成本优势</td><td><strong style="color:var(--gold)">中</strong></td><td>规模带来服务器/带宽/CDN 优势，但 AI 算力受芯片管制</td></tr>
+        <tr><td>无形资产</td><td><strong style="color:var(--green)">宽</strong></td><td>《王者荣耀》《和平精英》《英雄联盟》生命周期超 10 年的 IP</td></tr>
+        <tr><td>有效规模</td><td><strong style="color:var(--green)">宽</strong></td><td>中国超级 App 三足鼎立 (微信/抖音/支付宝)，新进入者不可行</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:13px;color:var(--text2);margin-top:14px;line-height:1.7;"><strong style="color:var(--accent3);">护城河趋势：加宽中</strong>。视频号成功阻击抖音；游戏国际化连续 3 年 +20%；AI Agent 兴起让"通讯录入口 + 支付通道"价值进一步放大。10 年后会更宽。</p>
+</div>
+
+<!-- ═══ 财务深度 ═══ -->
+<div class="section">
+  <div class="stitle">财务深度 · 季度趋势 + 关键比率</div>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead>
+        <tr>
+          <th>项目（RMB 亿元）</th>
+          <th>Q4 2024</th>
+          <th>Q1 2025</th>
+          <th>Q2 2025</th>
+          <th>Q3 2025</th>
+          <th>Q4 2025</th>
+          <th>FY2025</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>营业收入</td><td>1,724</td><td>1,800</td><td>1,845</td><td>1,929</td><td>1,944</td><td><strong>7,517.7</strong></td></tr>
+        <tr><td>YoY%</td><td>+11%</td><td>+13%</td><td>+15%</td><td>+15%</td><td>+13%</td><td><strong>+14%</strong></td></tr>
+        <tr><td>毛利</td><td>912</td><td>988</td><td>1,034</td><td>1,113</td><td>1,083</td><td><strong>4,239</strong></td></tr>
+        <tr><td>毛利率</td><td>52.9%</td><td>54.9%</td><td>56.0%</td><td>57.7%</td><td>55.7%</td><td><strong>56.4%</strong></td></tr>
+        <tr><td>非IFRS经营利润</td><td>595</td><td>693</td><td>716</td><td>731</td><td>695</td><td><strong>2,806.6</strong></td></tr>
+        <tr class="hl"><td>非IFRS净利</td><td>553</td><td>613</td><td>633</td><td>706</td><td>647</td><td><strong>2,596</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:22px 0 12px;">关键比率（5 年趋势）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead>
+        <tr><th>比率</th><th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th><th>趋势</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>毛利率</td><td>43.9%</td><td>43.1%</td><td>48.1%</td><td>52.7%</td><td>56.4%</td><td><span class="badge up">▲ 持续改善</span></td></tr>
+        <tr><td>非IFRS经营利润率</td><td>27.6%</td><td>22.0%</td><td>30.2%</td><td>35.8%</td><td>37.3%</td><td><span class="badge up">▲ 经营杠杆</span></td></tr>
+        <tr><td>非IFRS净利率</td><td>23.3%</td><td>19.4%</td><td>27.4%</td><td>33.7%</td><td>34.5%</td><td><span class="badge up">▲ 顶级</span></td></tr>
+        <tr><td>ROE</td><td>26.4%</td><td>10.4%</td><td>13.4%</td><td>21.5%</td><td>~22%</td><td><span class="badge up">▲ 已恢复</span></td></tr>
+        <tr><td>FCF/Revenue</td><td>17.5%</td><td>17.8%</td><td>22.5%</td><td>23.5%</td><td>24.3%</td><td><span class="badge up">▲ 现金奶牛</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin-top:18px;font-size:13px;color:var(--text2);line-height:1.85;">
+    <strong style="color:var(--text);">所有者盈余计算（FY2025）：</strong><br>
+    净利润 ¥2,248 + 折旧摊销 ¥600 + 股权激励 ¥250 - 维护性 Capex ¥150 + 营运资金 ¥80 = <strong style="color:var(--green);">¥3,028 亿</strong><br>
+    所有者盈余收益率 = ¥3,028 / ¥41,500（市值换算 CNY） = <strong style="color:var(--green);">7.3%</strong><br>
+    对比 10 年中国国债收益率 ~2.0%，<strong style="color:var(--text);">提供 5.3 个百分点的风险溢价</strong>——2018 年来首次。
+  </div>
+</div>
+
+<!-- ═══ 估值 ═══ -->
+<div class="section">
+  <div class="stitle">多模型估值 · 8 种方法交叉验证</div>
+  <p style="font-size:13px;color:var(--text2);margin-bottom:16px;">所有估值<strong>独立推导</strong>，不锚定当前股价。汇率：1 CNY ≈ 1.075 HKD。</p>
+
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead>
+        <tr><th>估值方法</th><th>公允价值（HKD）</th><th>权重</th><th>适用度</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1. 相对估值（P/E 中位）</td><td>600</td><td>15%</td><td>★★★★</td></tr>
+        <tr class="hl"><td><strong>2. DCF（概率加权）</strong></td><td><strong>630</strong></td><td><strong>25%</strong></td><td>★★★★★</td></tr>
+        <tr><td>3. 所有者盈余收益率</td><td>654</td><td>15%</td><td>★★★★</td></tr>
+        <tr><td>4. PEG 比率</td><td>593</td><td>10%</td><td>★★★</td></tr>
+        <tr><td>5. DDM 股利折现</td><td>不适用</td><td>0%</td><td>★</td></tr>
+        <tr class="hl"><td><strong>6. SOTP 分部加总</strong></td><td><strong>645</strong></td><td><strong>30%</strong></td><td>★★★★★</td></tr>
+        <tr><td>7. 反向 DCF</td><td>当前隐含 5% 增长（过低）</td><td>5%</td><td>★★★★</td></tr>
+        <tr><td>8. NAV（已纳入 SOTP）</td><td>—</td><td>0%</td><td>—</td></tr>
+        <tr class="hl"><td><strong>加权公允价值中位数</strong></td><td><strong style="color:var(--green);">HKD 615</strong></td><td>—</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:22px 0 12px;">DCF 三情景</h3>
+  <div class="pgrid">
+    <div class="pbox">
+      <div class="pl">悲观（25% 概率）</div>
+      <div class="pv pc">HKD 460</div>
+      <div class="pn">营收 CAGR 6%<br>OPM 35%<br>FCF CAGR 4%</div>
+    </div>
+    <div class="pbox">
+      <div class="pl">基准（50% 概率）</div>
+      <div class="pv pf">HKD 615</div>
+      <div class="pn">营收 CAGR 10%<br>OPM 提升至 38%<br>FCF CAGR 9%</div>
+    </div>
+    <div class="pbox">
+      <div class="pl">乐观（25% 概率）</div>
+      <div class="pv ps">HKD 800</div>
+      <div class="pn">营收 CAGR 14%<br>OPM 提升至 41%<br>FCF CAGR 13%</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 海图评分卡（6 维 A-D） ═══ -->
+<div class="section">
+  <div class="stitle">海图评分卡 · 6 维 A-D + 红旗排查</div>
+  <div class="scorecard">
+    <div class="score-grid">
+      <div class="score-card">
+        <div class="score-letter s-a">A</div>
+        <div class="score-body">
+          <h4>1. 生意可预测性</h4>
+          <p>"流量+游戏+广告+金融+云"，一句话能说清。微信 27 年未变核心定位。5 年盈利波动度小。</p>
+        </div>
+      </div>
+      <div class="score-card">
+        <div class="score-letter s-a">A</div>
+        <div class="score-body">
+          <h4>2. 经济护城河</h4>
+          <p>5 维护城河 4 维"宽"，1 维"中"。趋势：加宽中。10 年看更宽。</p>
+        </div>
+      </div>
+      <div class="score-card">
+        <div class="score-letter s-a">A</div>
+        <div class="score-body">
+          <h4>3. 管理层质量</h4>
+          <p>马化腾持股 8.4%（HKD 3,750 亿）。Martin Lau 在职 20 年。承认 AI 落后但迅速调整策略——坦诚 + 灵活。</p>
+        </div>
+      </div>
+      <div class="score-card">
+        <div class="score-letter s-a">A</div>
+        <div class="score-body">
+          <h4>4. 财务质量</h4>
+          <p>ROE 22% + 净现金 ¥1,071 亿 + FCF/Rev 24.3%。OCF/NI = 134.8%。堡垒级资产负债表。</p>
+        </div>
+      </div>
+      <div class="score-card">
+        <div class="score-letter s-bp">B+</div>
+        <div class="score-body">
+          <h4>5. 资本配置纪律</h4>
+          <p>2025 年 800 亿港元低位回购 + 18% 分红增长——满分操作。仅扣分项：AI Capex 大幅扩张，2026 年再翻倍。</p>
+        </div>
+      </div>
+      <div class="score-card">
+        <div class="score-letter s-bp">B+</div>
+        <div class="score-body">
+          <h4>6. 估值与安全边际</h4>
+          <p>当前 HKD 493 vs 估值中位数 HKD 615，安全边际 20%。距离 25%（B+ 门槛）仅一步。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="flag-row">
+      <strong>🚩 红旗排查：无问题</strong> · 商誉减值历史审慎、收入确认稳定、关联交易透明、表外负债低、股权激励合理、近 5 年无会计变更。
+    </div>
+
+    <div style="margin-top:18px;padding:14px 18px;background:rgba(122,154,122,.10);border:1px solid var(--green);border-radius:8px;">
+      <strong style="color:var(--green);font-size:14px;">综合评级：买入（核心仓配置）</strong>
+      <p style="font-size:13px;color:var(--text2);margin-top:6px;">6 维中 4 维 A、2 维 B+，无红旗。这是港股市场上罕见的"近乎全 A"级标的。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 投资决策 ═══ -->
+<div class="section">
+  <div class="stitle">海图研判 · 投资决策</div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:18px 0 12px;">分批建仓策略（独立估值中位数 HKD 615）</h3>
+  <div class="pgrid">
+    <div class="pbox">
+      <div class="pl">首仓（40% 仓位）</div>
+      <div class="pv ps">HKD 492</div>
+      <div class="pn">= 615 × 80%<br>≈ 当前价位<br>立即建立基础仓</div>
+    </div>
+    <div class="pbox">
+      <div class="pl">二仓（30% 仓位）</div>
+      <div class="pv pf">HKD 430</div>
+      <div class="pn">= 615 × 70%<br>等于前瞻 P/E 12x</div>
+    </div>
+    <div class="pbox">
+      <div class="pl">三仓（30% 仓位）</div>
+      <div class="pv pc">HKD 369</div>
+      <div class="pn">= 615 × 60%<br>等于前瞻 P/E 10x<br>黑天鹅机会</div>
+    </div>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:22px 0 12px;">三档止盈（不设止损）</h3>
+  <div class="pgrid">
+    <div class="pbox">
+      <div class="pl">第一档</div>
+      <div class="pv pf">HKD 700</div>
+      <div class="pn">减仓 25%<br>对应前瞻 P/E ~17x</div>
+    </div>
+    <div class="pbox">
+      <div class="pl">第二档</div>
+      <div class="pv pf">HKD 800</div>
+      <div class="pn">再减仓 25%<br>对应前瞻 P/E ~19x</div>
+    </div>
+    <div class="pbox">
+      <div class="pl">第三档</div>
+      <div class="pv pf">HKD 950</div>
+      <div class="pn">再减仓 25%<br>对应前瞻 P/E ~22x</div>
+    </div>
+  </div>
+  <p style="font-size:13px;color:var(--text2);margin-top:12px;line-height:1.7;">最后 25% 作为<strong>"永远不卖"的核心仓</strong>——价值投资视角对优质企业的处理方式。</p>
+
+  <div style="background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin-top:18px;font-size:13px;color:var(--text2);line-height:1.85;">
+    <strong style="color:var(--text);">仓位与持有：</strong>建议占组合 5-10%（中等仓位，单一国家风险）。持有周期 5-10 年。<br>
+    <strong style="color:var(--text);">下次重审：</strong>2026 年 5 月 13 日 Q1 2026 财报后第一天。
+  </div>
+</div>
+
+<!-- ═══ 海图页末长评 = 社媒短文同源 ═══ -->
+<div class="section">
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-lg">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记 · 980 字</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p class="lead">时间是好生意的朋友，坏生意的敌人。腾讯如今的处境恰是这句话的反面注脚——它的护城河没变，变的是市场的耐心。</p>
+
+      <p>这家公司很难用一句话说清，但又很简单：<strong>14 亿微信用户构成的中国数字基础设施 + 全球第一的游戏帝国 + 一万亿规模的投资组合</strong>。三个独立的大业务装在一家公司里，市场在 2026 年 4 月把它从 HKD 683 打回 HKD 493，跌幅 28%。</p>
+
+      <h4>几个研判要点</h4>
+
+      <p><strong>一、FY2025 自由现金流 1826 亿（+18%），FCF 收益率 4.4%。</strong>这是 2018 年以来腾讯首次提供如此优厚的所有者收益率——不带任何叙事，安静地落到账上。</p>
+
+      <p><strong>二、主业增速反而在加速。</strong>营收 +14% 是 2023 年来最快，毛利率从 52.7% 升到 56.4%（3 年新高），非 IFRS 经营利润率冲到 37.3%。规模这么大还能加速，全球互联网公司里数得过来的不超过 5 家。</p>
+
+      <p><strong>三、资本配置纪律罕见地完美。</strong>2025 年回购 800 亿港元（注销 1.534 亿股），分红 +18% 至 HKD 5.30/股。在估值低位区间执行回购，每股内在价值进一步浓缩——价值投资视角最看重的"逆向回购"操作。</p>
+
+      <p><strong>四、唯一的不确定来自 AI。</strong>混元落后 DeepSeek 是事实，管理层已通过元宝接入 DeepSeek 调整策略，腾讯还在洽谈入股 DeepSeek 20%。2026 年 AI 资本开支翻倍至 360 亿，是值得跟踪的关键变量。短期看是利润率压力，长期看是入场费。</p>
+
+      <p><strong>五、万亿投资组合是隐形的资产负债表。</strong>上市投资公允价值约 8000 亿，非上市约 3500 亿，加上 1071 亿净现金——这 1.2 万亿在市值 4.46 万亿里几乎没被定价。市场只在为腾讯的核心运营业务付钱，投资部分是白送的。</p>
+
+      <h4>海图研判</h4>
+
+      <p><strong>评级：买入</strong>（核心仓配置）。12 个月概率加权目标价 HKD 625（上行 +27%）。</p>
+
+      <p>操作建议（独立估值中位数 HKD 615）：首仓 HKD 492（接近现价，估值 × 80%），二仓 HKD 430（× 70%），三仓 HKD 369（× 60%，黑天鹅机会）。止盈三档 HKD 700 / 800 / 950，每档减仓 25%，最后 25% 永不卖。建议仓位 5-10%，持有周期 5-10 年。</p>
+
+      <h4>风险提示</h4>
+
+      <p>AI 追赶失败 + DeepSeek 被字节锁定 → AI 叙事破裂；金融科技监管再升级 → 微信支付若被强制拆分；中美脱钩升级 → 影响国际游戏运营。但这些都是 12 个月以内的故事。5 年回头看，护城河 + FCF + 估值 + 管理层 + 资本配置——这五个要素同时打 A 的港股标的，找不出第二只。</p>
+
+      <p class="haitu-sign">—— 海图，灯下落笔，明日再观风浪。</p>
+
+      <p class="haitu-disc">⚠️ 免责声明：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，不构成任何投资建议。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div>《海图夜读》 · 腾讯控股 0700.HK FY2025 海图研判</div>
+  <div style="margin-top:6px;">数据来源：腾讯官方公告、电话会议记录、HKEX、行业研究报告</div>
+  <div style="margin-top:6px;">价值投资 · 长期主义</div>
+</footer>
+
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  const cur = html.getAttribute('data-theme');
+  html.setAttribute('data-theme', cur === 'dark' ? 'light' : 'dark');
+  localStorage.setItem('theme', html.getAttribute('data-theme'));
+  renderCharts();
+}
+(function() {
+  const t = localStorage.getItem('theme');
+  if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+})();
+
+function gc(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+
+let charts = {};
+function renderCharts() {
+  Object.values(charts).forEach(c => c && c.destroy && c.destroy());
+  charts = {};
+  const txt2 = gc('--text2'), txt3 = gc('--text3'), grid = gc('--chart-grid');
+  const accent = gc('--accent'), accent2 = gc('--accent2'), accent3 = gc('--accent3');
+  const green = gc('--green'), gold = gc('--gold'), rose = gc('--rose'), red = gc('--red');
+
+  Chart.defaults.color = txt2;
+  Chart.defaults.font.family = 'Segoe UI, sans-serif';
+  Chart.defaults.font.size = 11;
+
+  charts.rev = new Chart(document.getElementById('revenueChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Q4 2024', 'Q1 2025', 'Q2 2025', 'Q3 2025', 'Q4 2025'],
+      datasets: [{ label: 'Revenue', data: [1724, 1800, 1845, 1929, 1944],
+        backgroundColor: [accent, accent, accent2, accent3, green], borderRadius: 4 }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+      scales: { y: { grid: { color: grid }, ticks: { color: txt3 } }, x: { grid: { display: false }, ticks: { color: txt3 } } } }
+  });
+
+  charts.profit = new Chart(document.getElementById('profitChart'), {
+    type: 'line',
+    data: {
+      labels: ['Q4 2024', 'Q1 2025', 'Q2 2025', 'Q3 2025', 'Q4 2025'],
+      datasets: [{ label: 'Net Profit', data: [553, 613, 633, 706, 647],
+        borderColor: green, backgroundColor: 'rgba(122,154,122,0.1)', tension: 0.3, fill: true,
+        pointBackgroundColor: green, pointRadius: 5 }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+      scales: { y: { grid: { color: grid }, ticks: { color: txt3 } }, x: { grid: { display: false }, ticks: { color: txt3 } } } }
+  });
+
+  charts.seg = new Chart(document.getElementById('segmentChart'), {
+    type: 'doughnut',
+    data: {
+      labels: ['本土游戏', '国际游戏', '社交网络', '营销服务', '金融科技', '云与企业服务'],
+      datasets: [{ data: [1642, 774, 1277, 1450, 1376, 918],
+        backgroundColor: [accent3, gold, accent2, accent, rose, green],
+        borderColor: gc('--card'), borderWidth: 2 }]
+    },
+    options: { responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'right', labels: { color: txt2, font: { size: 11 } } } } }
+  });
+
+  charts.fcf = new Chart(document.getElementById('fcfChart'), {
+    type: 'bar',
+    data: {
+      labels: ['FY2021', 'FY2022', 'FY2023', 'FY2024', 'FY2025'],
+      datasets: [{ label: 'FCF', data: [1031, 978, 1346, 1547, 1826],
+        backgroundColor: [accent3, gold, accent2, accent, green], borderRadius: 4 }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+      scales: { y: { grid: { color: grid }, ticks: { color: txt3 } }, x: { grid: { display: false }, ticks: { color: txt3 } } } }
+  });
+}
+document.addEventListener('DOMContentLoaded', renderCharts);
+</script>
+
+</body>
+</html>
