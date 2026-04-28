@@ -68,7 +68,10 @@ a { color: var(--accent2); text-decoration: none; }
   display: flex; justify-content: space-between; align-items: center;
   backdrop-filter: blur(10px);
 }
-.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; }
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; text-decoration: none; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
 .theme-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
 .toggle-switch {
   position: relative; width: 44px; height: 22px;
@@ -442,7 +445,7 @@ footer {
 <body>
 
 <div class="theme-bar">
-  <div class="logo">海图夜读 · 财报研究所</div>
+  <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
   <div class="theme-toggle">
     <span>☀️ 浅色</span>
     <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
@@ -451,7 +454,7 @@ footer {
 </div>
 
 <div class="hero">
-  <div class="hero-tag">2026年4月28日 · FY2025 · 海图研判</div>
+  <div class="hero-tag">Q4 2025 / FY2025 财报发布 · 2026-03-18 &nbsp;|&nbsp; 海图研判 · 2026-04-28</div>
   <h1>腾讯控股 Tencent Holdings 财报深度分析</h1>
   <div class="hero-sub">HKEX: 0700.HK &nbsp;|&nbsp; 2025年 Q4 & 全年业绩 &nbsp;|&nbsp; 价值投资视角</div>
   <div class="hero-pills">
