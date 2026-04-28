@@ -7,6 +7,7 @@
 <title>腾讯控股 0700.HK — FY2025 海图研判 · 海图夜读</title>
 <link rel="icon" type="image/png" href="../assets/hai.png">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
 <style>
 :root {
   --bg:        #f5f0eb;
@@ -671,6 +672,17 @@ footer {
       <div class="ctitle">5 年自由现金流轨迹（RMB 亿元）</div>
       <div class="cwrap"><canvas id="fcfChart"></canvas></div>
     </div>
+  </div>
+</div>
+
+<!-- ═══ 资金流向桑基图 ═══ -->
+<div class="section">
+  <div class="stitle">FY2025 资金流向 · 营收 → 自由现金流（RMB 亿元）</div>
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px;box-shadow:0 1px 4px var(--shadow);">
+    <div id="sankey" style="width:100%;height:480px;"></div>
+    <p style="font-size:12px;color:var(--text3);margin-top:10px;line-height:1.7;">
+      桑基图揭示腾讯的资金路径：7,518 亿营收中 3,279 亿被 COGS 消耗（毛利率 56.4%），4,239 亿毛利覆盖 1,432 亿运营费用（含 858 亿研发 + 574 亿销售&管理），形成非 IFRS 经营利润 2,807 亿；扣除税收等后净利润 2,248 亿（IFRS）；加回非现金调整 +782 亿（D&A + 股权激励 + 营运资金）后经营现金流 3,030 亿，扣除 792 亿资本开支（AI 算力主导）后<strong>FCF ≈ 1,826 亿（+18% YoY）</strong>——FCF/Revenue 24.3%，连续 5 年提升。
+    </p>
   </div>
 </div>
 
@@ -1811,7 +1823,75 @@ function renderCharts() {
     options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
       scales: { y: { grid: { color: grid }, ticks: { color: txt3 } }, x: { grid: { display: false }, ticks: { color: txt3 } } } }
   });
+
+  // ── 资金流向桑基图（Plotly） ──
+  buildSankey();
 }
+
+function buildSankey() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const txt = isDark ? '#d4ccc4' : '#4a4340';
+  const cardBg = isDark ? '#2e2a25' : '#ffffff';
+
+  const accent = gc('--accent'), accent2 = gc('--accent2'), accent3 = gc('--accent3');
+  const green = gc('--green'), gold = gc('--gold'), rose = gc('--rose'), red = gc('--red');
+
+  const sankeyData = [{
+    type: 'sankey',
+    orientation: 'h',
+    arrangement: 'snap',
+    valueformat: ',.0f',
+    valuesuffix: ' 亿',
+    node: {
+      pad: 22,
+      thickness: 22,
+      line: { color: 'transparent', width: 0 },
+      label: [
+        '营收 7,518',           // 0
+        '营业成本 3,279',       // 1（出口）
+        '毛利 4,239',           // 2
+        '销售&管理 574',        // 3（出口）
+        '研发 858',             // 4（出口）
+        '经营利润 2,807',       // 5（非 IFRS）
+        '所得税&其他 559',      // 6（出口）
+        'IFRS 净利 2,248',      // 7
+        '非现金调整 +782',      // 8（D&A + SBC + 营运资金）
+        '经营现金流 3,030',     // 9
+        '资本开支 792',         // 10（出口，AI 算力主导）
+        '自由现金流 1,826'      // 11（终点）
+      ],
+      color: [accent2, red, accent, rose, gold, accent3, red, green, accent2, accent3, red, green]
+    },
+    link: {
+      source: [0, 0, 2, 2, 2, 5, 5, 7, 8, 9, 9],
+      target: [1, 2, 3, 4, 5, 6, 7, 9, 9, 10, 11],
+      value:  [3279, 4239, 574, 858, 2807, 559, 2248, 2248, 782, 792, 1826],
+      color: [
+        'rgba(184,112,112,0.30)',
+        'rgba(138,154,142,0.45)',
+        'rgba(192,144,144,0.30)',
+        'rgba(185,160,106,0.30)',
+        'rgba(176,141,122,0.45)',
+        'rgba(184,112,112,0.30)',
+        'rgba(122,154,122,0.45)',
+        'rgba(122,154,122,0.40)',
+        'rgba(123,143,160,0.40)',
+        'rgba(184,112,112,0.30)',
+        'rgba(122,154,122,0.50)'
+      ]
+    }
+  }];
+
+  const layout = {
+    font: { family: 'Segoe UI, sans-serif', size: 11, color: txt },
+    paper_bgcolor: cardBg,
+    plot_bgcolor: cardBg,
+    margin: { l: 10, r: 10, t: 10, b: 10 }
+  };
+
+  Plotly.react('sankey', sankeyData, layout, { displayModeBar: false, responsive: true });
+}
+
 document.addEventListener('DOMContentLoaded', renderCharts);
 </script>
 
