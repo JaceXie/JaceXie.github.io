@@ -68,63 +68,59 @@ body {
 }
 .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
 
-/* ── HERO ── */
+/* ── HERO（压缩版） ── */
 .hero {
-  text-align: center;
-  padding: 80px 24px 60px;
-  background: linear-gradient(180deg, var(--bg-alt) 0%, var(--bg) 100%);
+  display: flex; align-items: center; justify-content: center; gap: 22px;
+  padding: 28px 24px;
+  background: var(--bg-alt);
   border-bottom: 1px solid var(--border);
   position: relative;
+  flex-wrap: wrap;
 }
 .theme-toggle {
-  position: absolute; top: 24px; right: 24px;
+  position: absolute; top: 16px; right: 20px;
   background: var(--card-bg); border: 1px solid var(--border);
-  border-radius: 24px; padding: 8px 16px; cursor: pointer;
-  font-size: 1.2rem; transition: all 0.2s;
+  border-radius: 20px; padding: 5px 12px; cursor: pointer;
+  font-size: 1rem; transition: all 0.2s;
   box-shadow: var(--shadow);
 }
 .theme-toggle:hover { transform: scale(1.08); }
 
 .haitu-portrait {
-  width: 132px; height: 132px;
+  width: 64px; height: 64px;
   border-radius: 50%;
-  margin: 0 auto 20px;
   display: block;
-  border: 4px solid var(--card-bg);
-  box-shadow: 0 8px 28px rgba(184, 112, 112, 0.32);
+  border: 2px solid var(--card-bg);
+  box-shadow: 0 2px 10px rgba(184, 112, 112, 0.25);
   background: var(--accent-red);
+  flex-shrink: 0;
 }
+
+.hero-text { display: flex; flex-direction: column; gap: 4px; }
 
 .brand-name {
   font-family: 'Noto Serif SC', Georgia, serif;
-  font-size: 3rem;
+  font-size: 1.6rem;
   font-weight: 700;
-  letter-spacing: 4px;
+  letter-spacing: 3px;
   color: var(--heading);
-  margin-bottom: 12px;
+  line-height: 1.2;
 }
 .brand-name .accent { color: var(--accent-red); }
 
 .slogan {
   font-family: 'Noto Serif SC', Georgia, serif;
-  font-size: 1.15rem;
+  font-size: 0.95rem;
   color: var(--text-secondary);
   font-style: italic;
-  letter-spacing: 1.5px;
-  margin-bottom: 28px;
+  letter-spacing: 1px;
 }
 .slogan::before { content: '「'; color: var(--accent-gold); }
 .slogan::after { content: '」'; color: var(--accent-gold); }
 
-.subtitle {
-  color: var(--text-dim);
-  font-size: 0.95rem;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-}
-
 /* ── SECTION ── */
-.section { padding: 60px 0; }
+.section { padding: 40px 0; }
+.section.first { padding-top: 32px; }
 .section-title {
   display: flex; align-items: center; gap: 12px;
   font-family: 'Noto Serif SC', serif;
@@ -263,11 +259,11 @@ footer {
 footer p { margin-bottom: 6px; }
 
 @media (max-width: 768px) {
-  .brand-name { font-size: 2.2rem; }
-  .slogan { font-size: 1rem; }
-  .haitu-portrait { width: 110px; height: 110px; }
-  .hero { padding: 60px 24px 40px; }
-  .section { padding: 40px 0; }
+  .brand-name { font-size: 1.4rem; letter-spacing: 2px; }
+  .slogan { font-size: 0.88rem; }
+  .haitu-portrait { width: 56px; height: 56px; }
+  .hero { padding: 22px 20px; gap: 16px; }
+  .section { padding: 32px 0; }
 }
 </style>
 </head>
@@ -276,26 +272,25 @@ footer p { margin-bottom: 6px; }
 <header class="hero">
   <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙</button>
   <img src="haitu/assets/hai.png" alt="海图" class="haitu-portrait">
-  <h1 class="brand-name">海图<span class="accent">夜读</span></h1>
-  <div class="slogan">财报如海图，在风浪里寻找价值。</div>
-  <div class="subtitle">Value Investing Research · Stock Analysis</div>
+  <div class="hero-text">
+    <h1 class="brand-name">海图<span class="accent">夜读</span></h1>
+    <div class="slogan">财报如海图，在风浪里寻找价值。</div>
+  </div>
 </header>
 
 <div class="container">
+
+  <section class="section first">
+    <div class="section-title">🌙 海图研判 · 按发布时间排序</div>
+    <div class="report-grid" id="reportGrid"></div>
+  </section>
 
   <section class="section">
     <div class="section-title">📜 关于海图夜读</div>
     <div class="about-card">
       <p>每一份上市公司财报都是一张<strong>海图</strong>——记录着企业过去的航迹，也暗示着未来的水深与暗礁。</p>
       <p>《海图夜读》是一档专注于<strong>价值投资</strong>的财报研究栏目。我们以护城河、所有者盈余、安全边际为锚点，输出 12 模块深度分析与 6 维海图评分卡。</p>
-      <p><strong>海图</strong>是这里的虚拟人物——一个夜读财报的角色。他不喧哗，不卖焦虑，只在灯下慢慢读懂一家企业的本质。</p>
-      <p>我们覆盖<strong>美股、港股、A 股</strong>三大市场。每一份报告都包含完整 HTML 深度版（这里）+ 800-1200 字社媒短文（用于发布）。</p>
     </div>
-  </section>
-
-  <section class="section">
-    <div class="section-title">🌙 海图研判 · 按发布时间排序</div>
-    <div class="report-grid" id="reportGrid"></div>
   </section>
 
 </div>
