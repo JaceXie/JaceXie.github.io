@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-04-29，基于 FY2025 年报（2026-02-26 发布）+ Q1 2026 指引 -->
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vipshop VIPS — FY2025 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root {
+  --bg: #f5f0eb; --bg2: #ece6df; --card: #ffffff; --card2: #f8f5f1; --border: #d9d0c7;
+  --text: #4a4340; --text2: #7a706a; --text3: #a89f98;
+  --accent: #8a9a8e; --accent2: #7b8fa0; --accent3: #b08d7a;
+  --rose: #c09090; --gold: #b9a06a; --red: #b87070; --green: #7a9a7a;
+  --shadow: rgba(0,0,0,0.06); --chart-grid: #e5ddd5;
+}
+[data-theme="dark"] {
+  --bg: #1e1c1a; --bg2: #28251f; --card: #2e2a25; --card2: #363230; --border: #4a4540;
+  --text: #d4ccc4; --text2: #a09890; --text3: #706860;
+  --accent: #8a9a8e; --accent2: #8fabbf; --accent3: #c9a48e;
+  --rose: #c09090; --gold: #c9b07a; --red: #c08080; --green: #8aaa8a;
+  --shadow: rgba(0,0,0,0.3); --chart-grid: #3e3a35;
+}
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Georgia','Noto Serif SC','PingFang SC',serif; line-height: 1.75; font-size: 14.5px; transition: background .35s, color .35s; }
+a { color: var(--accent2); text-decoration: none; }
+.theme-bar { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); }
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; text-decoration: none; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+.toggle-switch { position: relative; width: 44px; height: 22px; background: var(--border); border-radius: 11px; cursor: pointer; transition: background .3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: var(--card); border-radius: 50%; transition: transform .3s; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+.hero { padding: 48px 24px 36px; text-align: center; border-bottom: 1px solid var(--border); }
+.hero-tag { display: inline-block; font-family: 'Segoe UI',sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 3px 14px; border-radius: 20px; margin-bottom: 18px; }
+.hero h1 { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.pill { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: 'Segoe UI',sans-serif; font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow); }
+.pill strong { color: var(--text); }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle { font-size: 18px; font-weight: 700; color: var(--accent3); margin-bottom: 20px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+.stitle::before { content: ''; display: block; width: 4px; height: 20px; background: var(--accent3); border-radius: 2px; }
+.haitu-quip { display: flex; align-items: center; gap: 18px; background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--green); border-radius: 12px; padding: 18px 24px; margin: 24px 0; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-quote { flex: 1; }
+.haitu-portrait { font-size: 15px; line-height: 1.65; color: var(--text); margin-bottom: 6px; font-weight: 600; }
+.haitu-rating-line { font-size: 13px; color: var(--text2); font-family: 'Segoe UI',sans-serif; }
+.rating-badge { display: inline-block; padding: 2px 12px; border-radius: 12px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; margin-left: 4px; }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+.rating-cond-buy { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-hold { background: rgba(123,143,160,.18); color: var(--accent2); }
+.haitu-essay { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 28px 32px; margin: 24px 0 20px; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-essay-header { display: flex; align-items: center; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.haitu-avatar-sm { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); background: var(--red); box-shadow: 0 2px 8px rgba(184,112,112,0.2); }
+.haitu-name-lg { font-family: 'Georgia','Noto Serif SC',serif; font-size: 28px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 4px; }
+.haitu-essay-tag { font-family: 'Segoe UI',sans-serif; font-size: 12px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; }
+.haitu-essay-body { font-family: 'Georgia','Noto Serif SC',serif; font-size: 15px; line-height: 2.0; color: var(--text); }
+.haitu-essay-body p { margin-bottom: 14px; }
+.haitu-essay-body p.lead { font-size: 16px; font-style: italic; color: var(--text2); margin-bottom: 18px; }
+.haitu-essay-body strong { color: var(--text); font-weight: 700; }
+.haitu-essay-body h4 { font-size: 14px; color: var(--accent3); margin: 18px 0 10px; font-family: 'Segoe UI',sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+.haitu-sign { text-align: right; margin-top: 18px; font-family: 'Georgia',serif; font-size: 14px; color: var(--text2); font-style: italic; }
+.haitu-disc { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); font-style: italic; line-height: 1.7; }
+.stock-snap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill,minmax(160px,1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px; }
+.snap-item { text-align: center; }
+.snap-label { font-family: 'Segoe UI',sans-serif; font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.snap-val { font-family: 'Segoe UI',sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+.snap-val.up { color: var(--green); }
+.snap-val.dn { color: var(--red); }
+.snap-sub { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text3); margin-top: 2px; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(195px,1fr)); gap: 14px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow); }
+.kpi-l { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.kpi-v.up { color: var(--green); }
+.kpi-v.dn { color: var(--red); }
+.badge { display: inline-block; font-family: 'Segoe UI',sans-serif; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+.up { background: rgba(122,154,122,.15); color: var(--green); }
+.dn { background: rgba(184,112,112,.15); color: var(--red); }
+.nt { background: rgba(123,143,160,.15); color: var(--accent2); }
+.tbl-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow); }
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI',sans-serif; font-size: 13px; }
+.tbl th { background: var(--card2); color: var(--text3); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); background: var(--card2); }
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); }
+.ctitle { font-family: 'Segoe UI',sans-serif; font-size: 12px; color: var(--text3); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 260px; }
+.cmt { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 26px; line-height: 1.95; font-size: 14px; box-shadow: 0 1px 4px var(--shadow); color: var(--text); }
+.cmt p { margin-bottom: 14px; }
+.cmt p:last-child { margin-bottom: 0; }
+.cmt strong { color: var(--text); }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+.bscore { display: flex; align-items: center; gap: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; margin-bottom: 12px; box-shadow: 0 1px 4px var(--shadow); }
+.circle { width: 62px; height: 62px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; flex-shrink: 0; border: 3px solid; font-family: 'Segoe UI',sans-serif; }
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 4px; color: var(--text); }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+.sgrid { display: grid; grid-template-columns: repeat(auto-fill,minmax(260px,1fr)); gap: 16px; }
+.scard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 20px; box-shadow: 0 1px 4px var(--shadow); border-top: 4px solid var(--accent); }
+.scard.brand1 { border-top-color: var(--accent3); }
+.scard.brand2 { border-top-color: var(--accent2); }
+.scard.brand3 { border-top-color: var(--gold); }
+.scard.brand4 { border-top-color: var(--rose); }
+.scard.brand5 { border-top-color: var(--green); }
+.scard h4 { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.scard .srev { font-family: 'Segoe UI',sans-serif; font-size: 24px; font-weight: 800; color: var(--text); }
+.scard .ssub { font-family: 'Segoe UI',sans-serif; font-size: 12px; color: var(--text3); margin-top: 2px; margin-bottom: 12px; }
+.scard ul { padding-left: 15px; }
+.scard li { font-size: 13px; color: var(--text2); margin-bottom: 4px; }
+.moat-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap: 14px; }
+.moat-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); border-left: 4px solid var(--accent); }
+.moat-card.wide { border-left-color: var(--green); }
+.moat-card.narrow { border-left-color: var(--gold); }
+.moat-card.none { border-left-color: var(--red); }
+.moat-card h5 { font-size: 13px; color: var(--text); margin-bottom: 6px; }
+.moat-card .moat-rate { font-family: 'Segoe UI',sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.moat-card.wide .moat-rate { background: rgba(122,154,122,.18); color: var(--green); }
+.moat-card.narrow .moat-rate { background: rgba(185,160,106,.18); color: var(--gold); }
+.moat-card.none .moat-rate { background: rgba(184,112,112,.18); color: var(--red); }
+.moat-card p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+.ec-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 14px; box-shadow: 0 1px 3px var(--shadow); }
+.ec-badge { flex-shrink: 0; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-top: 2px; font-family: 'Segoe UI',sans-serif; }
+.ec-bull { background: rgba(122,154,122,.18); color: var(--green); }
+.ec-bear { background: rgba(184,112,112,.18); color: var(--red); }
+.ec-neut { background: rgba(185,160,106,.18); color: var(--gold); }
+.ec-body { flex: 1; }
+.ec-title { font-weight: 600; color: var(--text); margin-bottom: 3px; font-size: 14px; }
+.ec-note { font-size: 13px; color: var(--text2); line-height: 1.7; }
+.dcf-note { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.dcf-note strong { color: var(--text); }
+.scorecard { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow); }
+.score-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(280px,1fr)); gap: 14px; }
+.score-card { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px; }
+.score-letter { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Segoe UI',sans-serif; font-weight: 800; font-size: 22px; flex-shrink: 0; border: 3px solid; }
+.s-a { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.12); }
+.s-bp { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.06); }
+.s-b { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.10); }
+.s-bm { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.06); }
+.s-c { color: var(--red); border-color: var(--red); background: rgba(184,112,112,.08); }
+.score-body h4 { font-size: 13px; color: var(--text); margin-bottom: 4px; }
+.score-body p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+.flag-row { margin-top: 16px; padding: 12px 16px; background: rgba(185,160,106,.10); border: 1px solid rgba(185,160,106,.3); border-radius: 8px; font-size: 13px; color: var(--text2); }
+.flag-row strong { color: var(--gold); }
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center; box-shadow: 0 1px 4px var(--shadow); }
+.pbox .pl { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; }
+.pbox .pv { font-family: 'Segoe UI',sans-serif; font-size: 28px; font-weight: 800; margin-bottom: 5px; }
+.pbox .pn { font-size: 12px; color: var(--text3); line-height: 1.5; }
+.pc { color: var(--red); } .pf { color: var(--gold); } .ps { color: var(--green); }
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(280px,1fr)); gap: 14px; }
+.risk-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); position: relative; overflow: hidden; }
+.risk-card::before { content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent); }
+.risk-card.r1::before { background: var(--green); }
+.risk-card.r2::before { background: rgba(122,154,122,.6); }
+.risk-card.r3::before { background: var(--gold); }
+.risk-card.r4::before { background: var(--rose); }
+.risk-card.r5::before { background: var(--red); }
+.risk-card h5 { font-size: 14px; margin-bottom: 6px; color: var(--text); }
+.risk-score { font-family: 'Segoe UI',sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.r1 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r2 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r3 .risk-score { background: rgba(185,160,106,.18); color: var(--gold); }
+.r4 .risk-score { background: rgba(192,144,144,.18); color: var(--rose); }
+.r5 .risk-score { background: rgba(184,112,112,.18); color: var(--red); }
+.risk-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+footer { background: var(--card2); border-top: 1px solid var(--border); padding: 24px; text-align: center; color: var(--text3); font-size: 12px; margin-top: 40px; line-height: 1.8; }
+@media (max-width: 768px) { .cgrid,.pgrid { grid-template-columns: 1fr; } .hero h1 { font-size: 22px; } .kpi-grid { grid-template-columns: 1fr 1fr; } .stock-snap { grid-template-columns: 1fr 1fr; } .haitu-essay-header { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">FY2025 财报发布 · 2026-02-26 &nbsp;|&nbsp; 海图研判 · 2026-04-29</div>
+  <h1>Vipshop VIPS · FY2025 深度分析</h1>
+  <div class="hero-sub">NYSE: VIPS &nbsp;|&nbsp; 中国 TJ Maxx + 950 万 SVIP 高粘性会员 + $9.4 亿股东回报 &nbsp;|&nbsp; 价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill">股价 <strong>$14.61</strong></div>
+    <div class="pill">市值 <strong>$7.09B</strong></div>
+    <div class="pill">FY25 营收 <strong>¥1,059亿（-2.3%）</strong></div>
+    <div class="pill">FY25 净利 <strong>¥72亿（$1.0B）</strong></div>
+    <div class="pill">P/E (TTM) <strong>9.6x</strong></div>
+    <div class="pill">海图研判 <strong>买入</strong></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 海图页首短评 ═══ -->
+<div class="haitu-quip">
+  <div class="haitu-quote">
+    <div class="haitu-portrait">中国版 TJ Maxx——950 万 SVIP 高粘性会员构成的品牌折扣引擎 + ¥299 亿净现金堡垒 + 创始人 30.9% 股权 60% 投票权的所有权结构。FY2025 营收略降 -2.3% 但<strong>核心业务市值仅 $2.9B vs FY 净利 $1.0B = 核心 P/E 仅 2.9x</strong>——这是 A 股+美股全市场最低估值之一。</div>
+    <div class="haitu-rating-line">评级：<span class="rating-badge rating-buy">买入</span> · 12 个月目标价 $20（+37%）· 极致估值 + 双位数股东回报 + 创始人主导回购的稀有组合</div>
+  </div>
+</div>
+
+<!-- ═══ 市场数据快照 ═══ -->
+<div class="section">
+  <div class="stitle">市场数据快照（2026-04-29）</div>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">现价</div><div class="snap-val">$14.61</div><div class="snap-sub">+0.3% / 5 日 -2.4%</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间</div><div class="snap-val">$12.14-$21.08</div><div class="snap-sub">距高点 -31% / 距低点 +20%</div></div>
+    <div class="snap-item"><div class="snap-label">市值（流通后）</div><div class="snap-val">$7.09B</div><div class="snap-sub">回购退还 8.38% 后</div></div>
+    <div class="snap-item"><div class="snap-label">流通 ADS</div><div class="snap-val">~485M</div><div class="snap-sub">2025 年回购 4,240 万股</div></div>
+    <div class="snap-item"><div class="snap-label">TTM P/E (GAAP)</div><div class="snap-val up">9.6x</div><div class="snap-sub">同行 PDD 7x / JD 9x</div></div>
+    <div class="snap-item"><div class="snap-label">Forward P/E</div><div class="snap-val up">9.0x</div><div class="snap-sub">FY26 共识 EPS $1.62</div></div>
+    <div class="snap-item"><div class="snap-label">核心业务 P/E</div><div class="snap-val up">2.9x</div><div class="snap-sub">市值剔净现金 $4.2B</div></div>
+    <div class="snap-item"><div class="snap-label">FCF Yield</div><div class="snap-val up">~14%</div><div class="snap-sub">FY25 FCF ~$1.0B / 市值</div></div>
+    <div class="snap-item"><div class="snap-label">P/B</div><div class="snap-val">1.5x</div><div class="snap-sub">每股净资产 $9.7</div></div>
+    <div class="snap-item"><div class="snap-label">EV/EBITDA</div><div class="snap-val up">2.0x</div><div class="snap-sub">市值 - 净现金 - 短投</div></div>
+    <div class="snap-item"><div class="snap-label">股息率</div><div class="snap-val up">4.2%</div><div class="snap-sub">$0.62/ADS（2026-04-24 派付）</div></div>
+    <div class="snap-item"><div class="snap-label">股东回报率</div><div class="snap-val up">13.3%</div><div class="snap-sub">$944M 总返还 / $7.1B 市值</div></div>
+    <div class="snap-item"><div class="snap-label">机构目标价</div><div class="snap-val">$20.06</div><div class="snap-sub">36% 上行空间</div></div>
+    <div class="snap-item"><div class="snap-label">分析师评级</div><div class="snap-val">10 买 / 5 持</div><div class="snap-sub">无卖出评级</div></div>
+  </div>
+</div>
+
+<!-- ═══ FY2025 KPI ═══ -->
+<div class="section">
+  <div class="stitle">FY2025 全年核心业绩（2026-02-26 发布）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">总营收</div><div class="kpi-v dn">¥1,059亿</div><span class="badge dn">-2.3% YoY</span><div class="kpi-l" style="margin-top:6px">$15.1B</div></div>
+    <div class="kpi"><div class="kpi-l">净利润 (Non-GAAP)</div><div class="kpi-v">¥81亿</div><span class="badge dn">-12% YoY</span><div class="kpi-l" style="margin-top:6px">$1.16B</div></div>
+    <div class="kpi"><div class="kpi-l">净利润 (GAAP)</div><div class="kpi-v">¥72亿</div><span class="badge dn">-7.3% YoY</span><div class="kpi-l" style="margin-top:6px">$1.03B</div></div>
+    <div class="kpi"><div class="kpi-l">经营利润</div><div class="kpi-v">¥81亿</div><span class="badge dn">-12% YoY</span><div class="kpi-l" style="margin-top:6px">营业利润率 7.7%</div></div>
+    <div class="kpi"><div class="kpi-l">毛利率</div><div class="kpi-v">23.2%</div><span class="badge dn">-50bps YoY</span><div class="kpi-l" style="margin-top:6px">连续 4 季度收窄</div></div>
+    <div class="kpi"><div class="kpi-l">活跃用户</div><div class="kpi-v">~9,000万</div><span class="badge dn">-1.5% YoY</span><div class="kpi-l" style="margin-top:6px">Q4 单季 4,530万</div></div>
+    <div class="kpi"><div class="kpi-l">SVIP 用户</div><div class="kpi-v up">980万</div><span class="badge up">+11% YoY</span><div class="kpi-l" style="margin-top:6px">占线上消费 52%</div></div>
+    <div class="kpi"><div class="kpi-l">GMV (Q4 单季)</div><div class="kpi-v">¥666亿</div><span class="badge up">+0.6% YoY</span><div class="kpi-l" style="margin-top:6px">略好于营收增速</div></div>
+    <div class="kpi"><div class="kpi-l">ROE (TTM)</div><div class="kpi-v up">17.5%</div><span class="badge up">5 年高位</span><div class="kpi-l" style="margin-top:6px">回购拉高 ROE</div></div>
+    <div class="kpi"><div class="kpi-l">ROIC</div><div class="kpi-v up">10.1%</div><span class="badge nt">优于 WACC</span><div class="kpi-l" style="margin-top:6px">资本效率合格</div></div>
+    <div class="kpi"><div class="kpi-l">总资产</div><div class="kpi-v">¥788亿</div><span class="badge up">$11.3B</span><div class="kpi-l" style="margin-top:6px">含 ¥299亿现金 + 短投</div></div>
+    <div class="kpi"><div class="kpi-l">2025 股东回报</div><div class="kpi-v up">$944M</div><span class="badge up">回购+股息</span><div class="kpi-l" style="margin-top:6px">退 8.38% 流通股</div></div>
+  </div>
+</div>
+
+<!-- ═══ Q4 2025 KPI ═══ -->
+<div class="section">
+  <div class="stitle">Q4 2025 季度业绩</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">Q4 营收</div><div class="kpi-v dn">¥325亿</div><span class="badge dn">-2.1% YoY</span><div class="kpi-l" style="margin-top:6px">$4.6B / 暖冬 + 春节延后</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 净利</div><div class="kpi-v up">¥26亿</div><span class="badge up">+5.8% YoY</span><div class="kpi-l" style="margin-top:6px">$370M / 成本纪律驱动</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 毛利</div><div class="kpi-v">¥74亿</div><span class="badge dn">-2.6% YoY</span><div class="kpi-l" style="margin-top:6px">毛利率 22.8%</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 GMV</div><div class="kpi-v up">¥666亿</div><span class="badge up">+0.6% YoY</span><div class="kpi-l" style="margin-top:6px">SVIP 占 52%</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 经营现金流</div><div class="kpi-v up">~¥27亿</div><span class="badge up">健康</span><div class="kpi-l" style="margin-top:6px">OCF/NI ~ 1.04</div></div>
+    <div class="kpi"><div class="kpi-l">EPS (Q4)</div><div class="kpi-v up">$0.66</div><span class="badge up">+13% YoY</span><div class="kpi-l" style="margin-top:6px">回购贡献 7%</div></div>
+  </div>
+</div>
+
+<!-- ═══ Q1 2026 指引 ═══ -->
+<div class="section">
+  <div class="stitle">Q1 2026 营收指引</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">指引区间</div><div class="kpi-v">¥263-276亿</div><span class="badge nt">0% ~ +5% YoY</span><div class="kpi-l" style="margin-top:6px">$3.76-3.94B</div></div>
+    <div class="kpi"><div class="kpi-l">中点</div><div class="kpi-v up">¥270亿</div><span class="badge up">+2.5% YoY</span><div class="kpi-l" style="margin-top:6px">三年来首次正增长指引</div></div>
+    <div class="kpi"><div class="kpi-l">FY26 共识营收</div><div class="kpi-v up">¥1,080亿</div><span class="badge up">+2% YoY</span><div class="kpi-l" style="margin-top:6px">$15.4B</div></div>
+    <div class="kpi"><div class="kpi-l">FY26 共识 EPS</div><div class="kpi-v up">$1.62</div><span class="badge up">+11% YoY</span><div class="kpi-l" style="margin-top:6px">回购拉动 EPS &gt; 净利</div></div>
+    <div class="kpi"><div class="kpi-l">FY26 共识净利</div><div class="kpi-v">¥75亿</div><span class="badge up">+4% YoY</span><div class="kpi-l" style="margin-top:6px">$1.07B</div></div>
+    <div class="kpi"><div class="kpi-l">下次财报</div><div class="kpi-v">2026-05-21</div><span class="badge nt">Q1 业绩</span><div class="kpi-l" style="margin-top:6px">关注 SVIP 留存 + 服装回暖</div></div>
+  </div>
+</div>
+
+<!-- ═══ 季度趋势 ═══ -->
+<div class="section">
+  <div class="stitle">季度趋势 + 5 年总览</div>
+  <div class="cgrid">
+    <div class="ccard">
+      <div class="ctitle">5 季度营收趋势（¥亿）</div>
+      <div class="cwrap"><canvas id="revenueChart"></canvas></div>
+    </div>
+    <div class="ccard">
+      <div class="ctitle">5 季度净利趋势（¥亿）</div>
+      <div class="cwrap"><canvas id="profitChart"></canvas></div>
+    </div>
+    <div class="ccard">
+      <div class="ctitle">FY2025 收入分部（¥亿，估算）</div>
+      <div class="cwrap"><canvas id="segmentChart"></canvas></div>
+    </div>
+    <div class="ccard">
+      <div class="ctitle">5 年股东回报（$M）</div>
+      <div class="cwrap"><canvas id="returnChart"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ Sankey ═══ -->
+<div class="section">
+  <div class="stitle">FY2025 资金流向 · 营收 → 自由现金流（¥ 亿）</div>
+  <div class="ccard">
+    <div class="ctitle">从 ¥1,059亿 营收到 ¥70亿 自由现金流的完整资金链路</div>
+    <div id="sankey" style="width:100%;height:480px;"></div>
+  </div>
+</div>
+
+<!-- ═══ 模块 1 ═══ -->
+<div class="section">
+  <div class="stitle">模块 1 · 公司概览与背景</div>
+  <div class="cmt">
+    <p><strong>公司全称</strong>：Vipshop Holdings Limited（唯品会控股有限公司）<br>
+    <strong>上市</strong>：NYSE: VIPS（2012-03-23 上市），双类股结构 ADS = 0.2 股普通股<br>
+    <strong>总部</strong>：广州（中国）<br>
+    <strong>主营</strong>：在线品牌折扣零售（"Made for VIP" + 第三方品牌库存清理）</p>
+
+    <p><strong>核心叙事</strong>：唯品会是中国品牌折扣电商龙头，模式上类似美国 TJ Maxx + Outlet 的线上版本。通过<span class="hl-t">限时特卖（Flash Sales）</span>清理品牌方过季库存，提供 30-70% 折扣。FY2025 GMV 约 ¥2,000+ 亿，<span class="hl-t">最大差异化在于 SVIP 体系</span>——980 万付费会员（年费 ¥199）贡献了 52% 的线上消费，留存率行业领先。</p>
+
+    <p><strong>简史与里程碑</strong>：</p>
+    <p>
+      <strong>1. 2008 年成立</strong>——Eric Shen + Arthur Hong 创立于广州，2010-2012 年完成快速扩张并上市<br>
+      <strong>2. 2014-2017 年扩张期</strong>——营收年复合增速 60%+，巅峰时期市值超 $200 亿<br>
+      <strong>3. 2017 年 12 月</strong>——腾讯 + 京东战略入股 $8.63 亿，腾讯持股 11.8%（至今未减持）<br>
+      <strong>4. 2019-2021 年专注化战略</strong>——剥离金融、物流业务，聚焦"特卖电商"主业<br>
+      <strong>5. 2022 年至今</strong>——进入"成熟稳定期"，营收 ¥1,000-1,100亿区间盘整，但<span class="warn-t">FY2025 已是连续第三年营收下滑</span>
+    </p>
+
+    <p><strong>股权结构（2025 年末）</strong>：</p>
+    <p>
+      <strong>Eric Ya Shen</strong>（创始人/CEO）——持股 30.9%、投票权 <strong>63.1%</strong>（双类股）<br>
+      <strong>Arthur Xiaobo Hong</strong>（联合创始人/COO）——持股 17.6%<br>
+      <strong>Tencent</strong>（腾讯）——持股 11.8%（战略股东，2017 年入股至今）<br>
+      <strong>合计创始人 + 战略</strong>——超 60% 股权 + 80%+ 投票权<br>
+      <strong>这是典型的"创始人主导型"治理结构</strong>，与美股 META、谷歌类似
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 模块 2 ═══ -->
+<div class="section">
+  <div class="stitle">模块 2 · 管理层评估</div>
+
+  <div class="bscore">
+    <div class="circle cg">A</div>
+    <div class="bd">
+      <h4>Eric Ya Shen · 董事长 + CEO（2008 至今 · 17 年）</h4>
+      <p>创始人 + 大股东 + 经营者三位一体。哥伦比亚大学 MBA，前李嘉诚和黄系统供应链高管。<strong>关键履历</strong>：2008 年用 $30 万启动唯品会，2014 年带领公司上市后市值峰值 $200 亿。<span class="hl-t">主人翁文化的典型代表</span>——持股 30.9% + 63.1% 投票权，与小股东利益绑定。坚守"特卖"主业、拒绝盲目扩张，体现长期主义。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>Arthur Xiaobo Hong · 副董事长 + COO（联合创始人）</h4>
+      <p>负责供应链与品牌关系，<strong>持股 17.6%</strong>。两位创始人合计持股 ~48%、投票权 80%+——这是一种<span class="hl-t">"双核驱动 + 创始人主导"</span>的稳定治理结构，避免了职业经理人短视决策。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B+</div>
+    <div class="bd">
+      <h4>资本配置历史 · 顶级回购纪律</h4>
+      <p>
+      <strong>2025 年回购 $6.84 亿（4,240 万股、占流通股 8.38%）</strong>——这是 2025 年中概股最激进的回购之一。叠加 $3.10/普通股（$0.62/ADS）股息，<span class="hl-t">总股东回报 $9.44 亿、占市值 13.3%</span>。<br>
+      历史上唯品会从 2018 年起累计回购超 $25 亿，是<span class="hl-t">中概股中少有的"持续大规模回购+股息"双轮驱动者</span>。<br>
+      <span class="warn-t">不足之处</span>：管理层与资本市场沟通有限，电话会信息密度偏低；回购节奏未与股价深度挂钩（部分高位回购）。
+      </p>
+    </div>
+  </div>
+
+  <div class="cmt">
+    <p><strong>长期主义测试</strong>：3 年前（2022 年财报）Eric Shen 承诺"专注特卖、不盲目扩张、持续回报股东"——3 年后<span class="hl-t">每条都兑现了</span>：剥离金融业务、关闭非核心门店、累计回购 $20+ 亿、维持 ROE 17%+。这是少有的"言行一致"的中国互联网创始人。</p>
+
+    <p><strong>薪酬与利益绑定</strong>：Eric Shen 自 2018 年起<span class="hl-t">基本工资 + 绩效奖金合计每年 ~$300 万</span>，几乎全部以股权激励形式发放且需 4 年归属。这种薪酬结构在中概股中属于"克制"水平，没有美股 CEO 那种 $20-50M 年薪。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 3 ═══ -->
+<div class="section">
+  <div class="stitle">模块 3 · 商业模式深度解析</div>
+
+  <div class="cmt">
+    <p><strong>海图"一句话测试"</strong>：唯品会就是<span class="hl-t">中国版 TJ Maxx 的线上版</span>——帮品牌方清理过季库存（占货源 60%+），同时定制"Made for VIP"专享产品（占 5% 销售但增速 +40%），向"特卖型用户"提供 30-70% 折扣，赚取 23% 毛利。</p>
+
+    <p><strong>2025 年收入结构</strong>（海图估算）：</p>
+  </div>
+
+  <div class="sgrid">
+    <div class="scard brand1">
+      <h4>线上服装鞋包</h4>
+      <div class="srev">¥600亿</div>
+      <div class="ssub">占 56.7% · -3% YoY</div>
+      <ul>
+        <li>核心收入大类：女装、男装、童装、鞋包</li>
+        <li>"Made for VIP" 专享品类增速 +40%</li>
+        <li>2025 Q4 暖冬 + 春节延后导致疲软</li>
+        <li>毛利率高（25-28%）</li>
+      </ul>
+    </div>
+    <div class="scard brand2">
+      <h4>线上美妆个护</h4>
+      <div class="srev">¥180亿</div>
+      <div class="ssub">占 17% · +1% YoY</div>
+      <ul>
+        <li>口红、护肤、香水、母婴</li>
+        <li>SVIP 渗透率最高的品类</li>
+        <li>跨品类引流（服装→美妆）增速 +15%</li>
+      </ul>
+    </div>
+    <div class="scard brand3">
+      <h4>线上家居家电</h4>
+      <div class="srev">¥120亿</div>
+      <div class="ssub">占 11% · -5% YoY</div>
+      <ul>
+        <li>小家电、家纺、生活用品</li>
+        <li>受家居整体低迷影响</li>
+        <li>毛利率较低（18-20%）</li>
+      </ul>
+    </div>
+    <div class="scard brand4">
+      <h4>商品销售（其他）</h4>
+      <div class="srev">¥120亿</div>
+      <div class="ssub">占 11% · 持平</div>
+      <ul>
+        <li>食品保健、运动户外、3C 数码</li>
+        <li>跨境业务"唯品国际"</li>
+      </ul>
+    </div>
+    <div class="scard brand5">
+      <h4>服务收入</h4>
+      <div class="srev">¥39亿</div>
+      <div class="ssub">占 3.7% · +12% YoY</div>
+      <ul>
+        <li>佣金、广告、SVIP 会员费</li>
+        <li>毛利率最高（70%+）</li>
+        <li>SVIP 年费 ¥199 × 980万 = ¥19.5亿</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="cmt" style="margin-top:18px;">
+    <p><strong>SVIP 体系是真正的护城河</strong>：</p>
+    <p>
+    1. <strong>980 万 SVIP 用户</strong>（+11% YoY），年费 ¥199 元，2025 年贡献 <span class="hl-t">52% 线上消费</span><br>
+    2. SVIP 客单价是普通用户的 <strong>3 倍</strong>，年消费频次 30+ 次<br>
+    3. SVIP 续费率 <strong>85%+</strong>（行业领先）—— 这是品牌折扣电商最稀缺的"用户粘性"<br>
+    4. SVIP 用户单获客成本（CAC）摊销到 5-7 年生命周期，LTV/CAC > 8x
+    </p>
+
+    <p><strong>单位经济（Unit Economics）</strong>：</p>
+    <p>
+    GMV → 营收转化率 <strong>~50%</strong>（剩余为佣金/退货/促销让利）<br>
+    营收 → 毛利率 <strong>23%</strong>（连续 4 季度收窄 50bps）<br>
+    毛利 → 经营利润率 <strong>7.7%</strong>（一般经营成本 16%）<br>
+    经营利润 → 净利率 <strong>6.8%</strong>（含税与少数股东权益）
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 模块 4 ═══ -->
+<div class="section">
+  <div class="stitle">模块 4 · 经济护城河分析（5 维）</div>
+  <div class="moat-grid">
+    <div class="moat-card narrow">
+      <h5>1. 网络效应</h5>
+      <span class="moat-rate">窄</span>
+      <p>电商业务的"双边网络效应"较弱（不像微信 / 拼多多）。但 SVIP + 品牌方"特卖渠道"形成弱网络效应——用户越多、品牌方越愿意供货 → 品牌方越多、用户越愿意付费 SVIP。<strong>趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>2. 转换成本</h5>
+      <span class="moat-rate">宽</span>
+      <p>SVIP 用户已支付年费 ¥199，剩余有效期带来切换成本。<strong>更关键的是历史购物记录 + 个性化推荐 + 品牌偏好画像</strong>——切换平台意味着重新建立信任，对中老年女性用户尤其明显。<strong>趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>3. 成本优势</h5>
+      <span class="moat-rate">窄</span>
+      <p>规模采购对品牌方的议价能力较强（最大单一渠道客户），但抖音/拼多多在体量上已超越。物流仓储自营（前期投入大、维护成本高），近年通过外包降低成本。<strong>趋势：弱化</strong>。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>4. 无形资产 (品牌)</h5>
+      <span class="moat-rate">宽</span>
+      <p>"特卖电商"心智第一名——品牌方愿意将清仓库存独家给唯品会（不会同时上拼多多/抖音破价）。<span class="hl-t">"Made for VIP" 专享系列</span>是把品牌资产+定制化能力深度结合。<strong>趋势：稳定+</strong>。</p>
+    </div>
+    <div class="moat-card none">
+      <h5>5. 有效规模</h5>
+      <span class="moat-rate">无</span>
+      <p>电商不是"赢者通吃"市场，竞争极度激烈。中国 GMV 前 5 名（淘宝/天猫、京东、拼多多、抖音、唯品会）共占 90%+ 份额，但唯品会份额已从 2017 年峰值 ~5% 下滑至 ~2%。<strong>趋势：侵蚀</strong>。</p>
+    </div>
+  </div>
+
+  <div class="cmt" style="margin-top:18px;">
+    <p><strong>护城河综合评估</strong>：唯品会有 <span class="hl-t">2 项宽护城河（转换成本 + 品牌心智）+ 2 项窄护城河（网络效应 + 成本优势）+ 1 项无</span>。整体属于"细分龙头型"中等护城河，不是宽护城河公司。</p>
+
+    <p><strong>10 年后的护城河会更宽还是更窄？</strong>—— 海图判断<span class="warn-t">略微变窄</span>。理由：(1) 抖音直播带货侵蚀"特卖"心智；(2) 中国数字广告 CPM 持续上涨，SVIP 获客成本上升；(3) "Made for VIP" 专享线虽好但规模占比仅 5%。但 SVIP 用户的"客单价 + 复购率"优势会让公司在缩小的市场中保持盈利能力。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 5 ═══ -->
+<div class="section">
+  <div class="stitle">模块 5 · 财务深度分析</div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:18px 0 12px">5.1 5 季度营收/净利趋势</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>项目</th><th>Q4 24</th><th>Q1 25</th><th>Q2 25</th><th>Q3 25</th><th>Q4 25</th></tr></thead>
+      <tbody>
+        <tr><td>营收 (¥亿)</td><td>332</td><td>263</td><td>266</td><td>205</td><td>325</td></tr>
+        <tr><td>YoY 增速</td><td>-4.2%</td><td>-1.0%</td><td>-3.9%</td><td>-2.5%</td><td><span class="dn">-2.1%</span></td></tr>
+        <tr><td>毛利率</td><td>22.9%</td><td>23.2%</td><td>23.5%</td><td>23.0%</td><td>22.8%</td></tr>
+        <tr><td>经营利润 (¥亿)</td><td>27</td><td>25</td><td>22</td><td>9</td><td>25</td></tr>
+        <tr><td>净利 (¥亿)</td><td>25</td><td>20</td><td>17</td><td>9</td><td>26</td></tr>
+        <tr class="hl"><td>EPS (Non-GAAP, $)</td><td>$0.59</td><td>$0.50</td><td>$0.46</td><td>$0.27</td><td>$0.66</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">5.2 5 年关键比率</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>指标</th><th>FY21</th><th>FY22</th><th>FY23</th><th>FY24</th><th>FY25</th></tr></thead>
+      <tbody>
+        <tr><td>营收 (¥亿)</td><td>1,171</td><td>1,032</td><td>1,129</td><td>1,084</td><td>1,059</td></tr>
+        <tr><td>营收 YoY</td><td>+15%</td><td>-12%</td><td>+9%</td><td>-4%</td><td>-2.3%</td></tr>
+        <tr><td>毛利率</td><td>20.7%</td><td>20.3%</td><td>23.0%</td><td>23.5%</td><td>23.2%</td></tr>
+        <tr><td>经营利润率</td><td>4.7%</td><td>5.6%</td><td>8.4%</td><td>8.5%</td><td>7.7%</td></tr>
+        <tr><td>净利率</td><td>4.0%</td><td>4.9%</td><td>9.0%</td><td>7.2%</td><td>6.8%</td></tr>
+        <tr><td>ROE</td><td>10%</td><td>13%</td><td>22%</td><td>17%</td><td>17.5%</td></tr>
+        <tr class="hl"><td>ROIC</td><td>14%</td><td>17%</td><td>26%</td><td>13%</td><td>10%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">5.3 杜邦分析</h3>
+  <div class="cmt">
+    <p>FY2025 ROE 17.5% 拆解：<br>
+    <strong>净利率（6.8%）× 总资产周转率（1.93x）× 财务杠杆（1.32x）= 17.4%</strong></p>
+    <p>对比 FY2023（ROE 22%）：<br>
+    净利率从 9.0% 降至 6.8%（→ 主因毛利率收窄 + 经营杠杆）<br>
+    总资产周转率从 2.05x 降至 1.93x（→ 现金堆积 + 营收停滞）<br>
+    财务杠杆从 1.20x 升至 1.32x（→ 回购降低净资产）<br>
+    <span class="hl-t">回购拉高了 ROE，但底层盈利能力在下行</span>。</p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">5.4 资产负债表健康度</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>项目</th><th>FY2025 末</th><th>FY2024 末</th><th>YoY 变化</th><th>评估</th></tr></thead>
+      <tbody>
+        <tr><td>现金 + 受限现金</td><td>¥241亿</td><td>¥257亿</td><td>-6%</td><td>受回购影响</td></tr>
+        <tr><td>短期投资</td><td>¥58亿</td><td>¥43亿</td><td>+35%</td><td>转向高息存款</td></tr>
+        <tr><td>合计净现金</td><td><strong>¥299亿</strong></td><td>¥300亿</td><td>持平</td><td><span class="up">$42亿</span></td></tr>
+        <tr><td>应收账款</td><td>¥18亿</td><td>¥17亿</td><td>+6%</td><td>正常</td></tr>
+        <tr><td>存货</td><td>¥35亿</td><td>¥32亿</td><td>+9%</td><td>略升</td></tr>
+        <tr><td>有息负债</td><td><strong>¥0</strong></td><td>¥0</td><td>持平</td><td><span class="up">无负债</span></td></tr>
+        <tr><td>股东权益</td><td>¥395亿</td><td>¥460亿</td><td>-14%</td><td>回购退还</td></tr>
+        <tr class="hl"><td>流动比率</td><td><strong>2.05</strong></td><td>2.10</td><td>-0.05</td><td>非常健康</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>资产负债健康度评估</strong>：<span class="hl-t">A 级</span>。零有息负债、净现金 ¥299亿（占市值 60%）、流动比率 2.05、营运资金健康。<strong>这是中国互联网公司中最干净的资产负债表之一</strong>。即便 2026 年再返还 $9 亿股东，账面仍剩 $33 亿净现金（占市值 47%）。</p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">5.5 现金流质量</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>项目（¥亿）</th><th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th></tr></thead>
+      <tbody>
+        <tr><td>净利润</td><td>47</td><td>62</td><td>97</td><td>78</td><td>72</td></tr>
+        <tr><td>经营现金流 (OCF)</td><td>59</td><td>78</td><td>116</td><td>89</td><td>76</td></tr>
+        <tr><td>OCF / 净利</td><td>1.26</td><td>1.26</td><td>1.20</td><td>1.14</td><td>1.06</td></tr>
+        <tr><td>资本开支 (Capex)</td><td>-7</td><td>-5</td><td>-4</td><td>-5</td><td>-6</td></tr>
+        <tr class="hl"><td>自由现金流 (FCF)</td><td>52</td><td>73</td><td>112</td><td>84</td><td><strong>70</strong></td></tr>
+        <tr><td>FCF / 净利</td><td>1.11</td><td>1.18</td><td>1.15</td><td>1.08</td><td>0.97</td></tr>
+        <tr><td>FCF Yield (TTM)</td><td>5%</td><td>10%</td><td>15%</td><td>11%</td><td><span class="up">~14%</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>现金流质量观察</strong>：<br>
+    1. <span class="hl-t">OCF/NI 长期稳定在 1.0-1.3</span> —— 应收应付管理优秀，几乎不存在"利润有水分"的问题<br>
+    2. <strong>资本支出极轻</strong>（Capex 仅占营收 0.5-0.7%），属于轻资产模式<br>
+    3. FY2025 FCF Yield ~14% —— 在<span class="warn-t">无风险利率 4.3%</span> 的环境下提供 10 个百分点的"现金回报溢价"<br>
+    4. <strong>关键：FCF/净利下降趋势</strong>（1.18 → 0.97）—— 主因营运资金略显紧张（存货/应收略升）+ 应付账款随营收同步下降
+    </p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">5.6 所有者盈余计算（价值投资核心估值法）</h3>
+  <div class="dcf-note">
+    <p><strong>FY2025 所有者盈余 = ¥72亿（净利）+ ¥6亿（折旧摊销）+ ¥4亿（其他非现金）- ¥6亿（维护性 Capex）+ ¥0亿（营运资金变动 ~ 中性）= ¥76亿（约 $10.9 亿）</strong></p>
+
+    <p><strong>所有者盈余收益率</strong> = $10.9 亿 / $7.09 亿市值 = <span class="hl-t" style="font-size:18px;">15.4%</span></p>
+
+    <p>对比无风险利率 4.3%（10Y 美债），<span class="hl-t">超额收益率 11.1 个百分点</span>。这意味着：</p>
+    <p>
+    1. 即使 0 增长，VIPS 给股东的回报已经是无风险利率的 3.5 倍<br>
+    2. 唯品会的"所有者盈余视角"估值至少是当前价的 2.5x——隐含合理 P/E 24x（按 4% 永续无风险利率）<br>
+    3. 这是中概股中所有者盈余收益率最高的"质量+股息"型标的之一
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 模块 6 ═══ -->
+<div class="section">
+  <div class="stitle">模块 6 · 电话会分析（最新 + 前 2 季）</div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:8px 0 12px">6.1 Q4 2025 电话会议（2026-02-26）</h3>
+
+  <div class="ec-item">
+    <div class="ec-badge ec-bull">利好</div>
+    <div class="ec-body">
+      <div class="ec-title">"Made for VIP" 专享系列销售 +40%，占线上服装销售 5%</div>
+      <div class="ec-note">海图解读：<strong>差异化战略已见成效</strong>。从 1% 起步到 5%，3 年时间 5x 增长，且毛利率高于平均 5-8 个百分点。这是抗衡抖音/拼多多的核心武器。</div>
+    </div>
+  </div>
+
+  <div class="ec-item">
+    <div class="ec-badge ec-bull">利好</div>
+    <div class="ec-body">
+      <div class="ec-title">2025 年回购 $6.84 亿，退还 4,240 万 ADS（占流通股 8.38%）</div>
+      <div class="ec-note">海图解读：<span class="hl-t">这是 2025 年中概股最激进的回购之一</span>。叠加 $0.62/ADS 股息，总股东回报 13.3%。对比同行：JD ~6%、PDD 0%、阿里 ~4%。</div>
+    </div>
+  </div>
+
+  <div class="ec-item">
+    <div class="ec-badge ec-bear">利空</div>
+    <div class="ec-body">
+      <div class="ec-title">Q4 营收低于预期 —— 暖冬服装需求疲软 + 春节延后</div>
+      <div class="ec-note">海图解读：服装 -3% 是结构性问题，但<span class="warn-t">"暖冬"借口要警惕</span>——如果 2026 春装表现仍弱，说明品类迭代速度跟不上 Z 世代审美变化。</div>
+    </div>
+  </div>
+
+  <div class="ec-item">
+    <div class="ec-badge ec-neut">中性</div>
+    <div class="ec-body">
+      <div class="ec-title">Q1 2026 营收指引 ¥263-276亿（0%-5% YoY）</div>
+      <div class="ec-note">海图解读：<span class="hl-t">三年来首次正增长指引</span>，但中点 +2.5% 仍偏保守。若实际增速跑赢上限，估值会快速修复。</div>
+    </div>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">6.2 Q3 2025 电话会议（2025-11-21）</h3>
+
+  <div class="ec-item">
+    <div class="ec-badge ec-bull">利好</div>
+    <div class="ec-body">
+      <div class="ec-title">SVIP 980 万，同比 +11%，留存率 85%+</div>
+      <div class="ec-note">海图解读：在中国电商整体用户增速 0% 的环境下，SVIP +11% 是<span class="hl-t">真正的逆势增长</span>。续费率 85%+ 反映年费 ¥199 的高粘性。</div>
+    </div>
+  </div>
+
+  <div class="ec-item">
+    <div class="ec-badge ec-bear">利空</div>
+    <div class="ec-body">
+      <div class="ec-title">Q3 营收 ¥205亿（-2.5% YoY），低于共识</div>
+      <div class="ec-note">海图解读：Q3 是季节性淡季（无大促节点），但 -2.5% 已是连续第 6 个季度负增长。<span class="warn-t">"成熟稳定"的另一面是"增长引擎熄火"</span>。</div>
+    </div>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">6.3 Q2 2025 电话会议（2025-08-22）</h3>
+
+  <div class="ec-item">
+    <div class="ec-badge ec-bull">利好</div>
+    <div class="ec-body">
+      <div class="ec-title">毛利率 23.5%（+30bps QoQ），AI 推荐 + 智能选品贡献</div>
+      <div class="ec-note">海图解读：内部 AI 模型（个性化推荐 + 库存周转预测）开始降本增效。但 Q4 又回落到 22.8%，效果不持续，需要 1-2 年观察。</div>
+    </div>
+  </div>
+
+  <div class="ec-item">
+    <div class="ec-badge ec-neut">中性</div>
+    <div class="ec-body">
+      <div class="ec-title">"618 大促"GMV +2% YoY，业绩贴近指引中点</div>
+      <div class="ec-note">海图解读：大促表现"不惊艳但不灾难"，反映品牌方对唯品会渠道仍有依赖度，但消费者整体审慎。</div>
+    </div>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">6.4 信号汇总 + 指引兑现度</h3>
+
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>季度</th><th>指引营收（¥亿）</th><th>实际</th><th>偏离</th><th>评估</th></tr></thead>
+      <tbody>
+        <tr><td>Q4 2024</td><td>314 - 332</td><td>332</td><td>+0%（上限）</td><td><span class="up">达标</span></td></tr>
+        <tr><td>Q1 2025</td><td>250 - 263</td><td>263</td><td>+0%（上限）</td><td><span class="up">达标</span></td></tr>
+        <tr><td>Q2 2025</td><td>262 - 274</td><td>266</td><td>-1%（下限）</td><td><span class="nt">偏弱</span></td></tr>
+        <tr><td>Q3 2025</td><td>200 - 209</td><td>205</td><td>中点</td><td><span class="up">达标</span></td></tr>
+        <tr><td>Q4 2025</td><td>317 - 333</td><td>325</td><td>中点</td><td><span class="up">达标</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>指引兑现度评估</strong>：5 季度中 3 次中点 + 1 次上限 + 1 次偏弱，<span class="hl-t">兑现度 4/5 = 80%</span>。这是<strong>中概股中信誉度最高的"言行一致型"管理层之一</strong>，对比阿里/京东（频繁下修指引）显著更可靠。</p>
+
+    <p><strong>电话会语言风格变化</strong>：<br>
+    2023 年——"持续投入、扩大优势、长期增长"（进攻型）<br>
+    2024 年——"专注核心、提升效率、稳健增长"（守势型）<br>
+    2025 年——"成本纪律、股东回报、差异化产品"（防守 + 收割型）<br>
+    <span class="warn-t">语气从"进攻"转向"收割"——这是公司从成长股转为价值股的明确信号</span>。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 7 ═══ -->
+<div class="section">
+  <div class="stitle">模块 7 · 多模型估值（8 种方法交叉验证）</div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:8px 0 12px">7.1 相对估值（同行+自身历史）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>指标</th><th>VIPS</th><th>PDD</th><th>JD</th><th>BABA</th><th>5 年中位</th><th>判断</th></tr></thead>
+      <tbody>
+        <tr><td>P/E (TTM)</td><td><strong>9.6x</strong></td><td>7x</td><td>9x</td><td>11x</td><td>13x</td><td><span class="up">低估</span></td></tr>
+        <tr><td>P/E (Forward FY26)</td><td><strong>9.0x</strong></td><td>6x</td><td>8x</td><td>10x</td><td>12x</td><td><span class="up">低估</span></td></tr>
+        <tr><td>P/S (TTM)</td><td>0.47x</td><td>2.0x</td><td>0.3x</td><td>1.2x</td><td>0.8x</td><td>合理</td></tr>
+        <tr><td>P/B</td><td>1.5x</td><td>4.5x</td><td>1.6x</td><td>1.6x</td><td>2.5x</td><td>低估</td></tr>
+        <tr><td>EV/EBITDA</td><td><strong>2.0x</strong></td><td>5x</td><td>5x</td><td>7x</td><td>5x</td><td><span class="up">极度低估</span></td></tr>
+        <tr><td>FCF Yield</td><td><strong>14%</strong></td><td>10%</td><td>9%</td><td>8%</td><td>10%</td><td><span class="up">最高</span></td></tr>
+        <tr><td>股息率</td><td><strong>4.2%</strong></td><td>0%</td><td>2.4%</td><td>1.0%</td><td>0.5%</td><td><span class="up">行业最高</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>相对估值结论</strong>：唯品会在<span class="hl-t">"价值型指标"（EV/EBITDA、FCF Yield、股息率、P/B）上全方位领先同行</span>，但在"成长型指标"（P/S）上表现一般。这是典型的"质量价值股"——非成长股投资者不会看，但深度价值投资者会高度关注。</p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">7.1.1 P/E 多档透视表</h3>
+  <p style="font-size:13px;color:var(--text2);margin-bottom:14px;">VIPS 含 ¥299 亿净现金（占市值 60%），需要分离"现金 + 短投"与"运营业务"两部分估值。多档展示：</p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>计算口径</th><th>EPS / 净利</th><th>P/E 倍数</th><th>可信度</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td>TTM GAAP</td><td>EPS $1.52</td><td>9.6x</td><td>高</td><td>FY25 基础</td></tr>
+        <tr><td>TTM Non-GAAP（剔除股权激励）</td><td>EPS $1.65</td><td>8.9x</td><td>高</td><td>反映核心经营</td></tr>
+        <tr><td>Q4 单季年化</td><td>EPS $2.64</td><td>5.5x</td><td>中</td><td>季节性强、可能高估</td></tr>
+        <tr><td>Forward FY26 共识</td><td>EPS $1.62</td><td>9.0x</td><td>高</td><td>共识保守预期</td></tr>
+        <tr><td>FY26 乐观（个位数增长）</td><td>EPS $1.80</td><td>8.1x</td><td>中</td><td>消费复苏 + 回购</td></tr>
+        <tr class="hl"><td><strong>核心业务 P/E（剔除净现金）</strong></td><td><strong>$1.0B 净利</strong></td><td><strong>2.9x</strong></td><td><strong>极高</strong></td><td><strong>($7.1B - $4.2B 净现金) / $1.0B</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>核心业务 P/E 仅 2.9x</strong>——这是关键。当前股价隐含的运营业务市值只有 $2.9 亿（占总市值 41%），剩余 59% 都是"现金堡垒"。换句话说：<span class="hl-t">如果你今天买入 VIPS，相当于花 $2.9B 买一个年净利 $1.0B 的零负债品牌折扣龙头</span>。这是 A 股+美股全市场最便宜的"质量股"之一。</p>
+
+    <p><strong>对比可比"低估值高股息"标的</strong>：</p>
+    <p>
+    建设银行 H 股核心 P/E ~5x、股息率 7%<br>
+    长江实业核心 P/E ~6x、股息率 6%<br>
+    Verizon 核心 P/E ~8x、股息率 6.5%<br>
+    <strong>VIPS 核心 P/E 2.9x、股东回报率 13.3%——估值显著低于上述任何一只"价值股"</strong>
+    </p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">7.2 DCF 三情景</h3>
+  <div class="dcf-note">
+    <p><strong>关键假设</strong>：FY2026 起 5 年 FCF CAGR 0-5%（基准 2%），永续增长率 1-3%（基准 2%），WACC = 10.5%（中国互联网行业风险溢价）。FY2025 基准 FCF $1.0B。</p>
+    <p><strong>悲观（25%）</strong>：5 年 FCF CAGR 0%，永续 1% → DCF 估值 <span class="hl-t">$13/ADS</span>（FCF $1.0B × Terminal Multiple 8.5x + 净现金 $4.2B）/ 4.85亿股</p>
+    <p><strong>基准（50%）</strong>：5 年 FCF CAGR 2%，永续 2% → DCF 估值 <span class="hl-t">$22/ADS</span></p>
+    <p><strong>乐观（25%）</strong>：5 年 FCF CAGR 5%，永续 3% → DCF 估值 <span class="hl-t">$28/ADS</span></p>
+    <p>概率加权 DCF：$13 × 25% + $22 × 50% + $28 × 25% = <strong>$21/ADS</strong></p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">7.3 所有者盈余收益率法</h3>
+  <div class="dcf-note">
+    <p>FY2025 所有者盈余 = $1.09B<br>
+    合理收益率（基准）= 8%（中国电商 + 零负债 + 创始人主导）<br>
+    隐含合理市值 = $1.09B / 8% = <strong>$13.6B</strong> → <span class="hl-t" style="font-size:18px;">$28/ADS（+92%）</span><br>
+    保守收益率（10%）= $1.09B / 10% = $10.9B → $22.5/ADS（+54%）<br>
+    平均：$25.3/ADS</p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">7.4 PEG</h3>
+  <div class="dcf-note">
+    <p>P/E (Forward FY26) = 9.0x<br>
+    EPS 5 年 CAGR（FY25→FY30）预期 = 4-6%（含回购贡献 4%）<br>
+    PEG = 9.0 / 5 = <strong>1.8</strong><br>
+    评估：略高于"价值标的"PEG 1.0 标杆，但<span class="hl-t">考虑 13% 股东回报率，PEG 的相关性偏低</span>。这种公司不应该用 PEG 评估。</p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">7.5 DDM（股息折现模型）</h3>
+  <div class="dcf-note">
+    <p>FY2025 实际派息 $0.62/ADS（年化收益率 4.2%）<br>
+    若按"派息 + 回购"= $1.94/ADS（13.3%）建模：<br>
+    隐含合理 ADS 价 = $1.94 / (10% - 2% 永续) = <strong>$24.3</strong><br>
+    评估：DDM 给出 +66% 上行——这反映了股东回报政策本身已能 justify 估值翻倍。</p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">7.6 NAV（净资产价值）</h3>
+  <div class="dcf-note">
+    <p>每股净资产 = $9.7（FY2025 末）<br>
+    其中：净现金 + 短投 = $8.6/ADS（占 89%）<br>
+    其他流动资产 = $1.5/ADS<br>
+    长期资产 = $4.0/ADS<br>
+    扣除负债 = -$4.4/ADS<br>
+    评估：<span class="hl-t">每股净资产 $9.7 已基本接近 52 周低点 $12.14</span>——意味着市场给唯品会的"运营业务"几乎为零定价。这是极端低估的信号。</p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">7.7 反向 DCF —— 当前价隐含什么？</h3>
+  <div class="dcf-note">
+    <p>当前股价 $14.61 隐含：<br>
+    1. 5 年 FCF CAGR 假设：<span class="hl-t" style="font-size:16px;">-2%（持续萎缩）</span><br>
+    2. 永续增长率：0%（市场假设公司未来"零成长"）<br>
+    3. 这意味着市场预期唯品会<span class="warn-t">未来 10 年都将萎缩</span>——但实际上 SVIP +11%、"Made for VIP" +40%、Q1 2026 指引 +2.5% 都说明业务并未萎缩</p>
+    <p><strong>市场 vs 实际预期差极大</strong>。任何一个利好（消费复苏、抖音减速、回购加速）都会触发估值快速修复。</p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">7.8 SOTP 分部加总（最适合 VIPS）</h3>
+  <div class="dcf-note">
+    <p><strong>分部 A：净现金 + 短期投资</strong> = $4.2B → <span class="hl-t">$8.7/ADS</span>（不打折，基本无破产风险）<br>
+    <strong>分部 B：核心特卖业务</strong>（FY25 净利 $1.0B × P/E 12x 中位）= $12.0B → <span class="hl-t">$24.7/ADS</span><br>
+    <strong>分部 C：SVIP 业务</strong>（独立估值 980万 × ARPU $250 × LTV/CAC 8x × 折扣 0.3）= $2.0B → $4.1/ADS<br>
+    <strong>SOTP 合计</strong>：($4.2B + $12.0B + $2.0B) / 4.85亿 = <span class="hl-t" style="font-size:18px;">$37.5/ADS</span><br>
+    扣除控股折价 30%（创始人主导、双类股）：<strong>$26.3/ADS</strong></p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">7.9 估值汇总</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>方法</th><th>估值 ($/ADS)</th><th>权重</th><th>加权值</th><th>vs 现价 $14.61</th></tr></thead>
+      <tbody>
+        <tr><td>相对估值</td><td>$20-22</td><td>15%</td><td>$3.15</td><td>+44%</td></tr>
+        <tr><td>DCF 概率加权</td><td>$21</td><td>15%</td><td>$3.15</td><td>+44%</td></tr>
+        <tr><td>所有者盈余法（平均）</td><td>$25.3</td><td>20%</td><td>$5.06</td><td>+73%</td></tr>
+        <tr><td>PEG（不太适用）</td><td>—</td><td>0%</td><td>—</td><td>—</td></tr>
+        <tr><td>DDM（股东回报）</td><td>$24.3</td><td>15%</td><td>$3.65</td><td>+66%</td></tr>
+        <tr><td>NAV</td><td>$9.7</td><td>5%</td><td>$0.49</td><td>-34%</td></tr>
+        <tr><td>反向 DCF（隐含价）</td><td>—</td><td>0%</td><td>—</td><td>—</td></tr>
+        <tr class="hl"><td><strong>SOTP（最适用）</strong></td><td><strong>$26.3</strong></td><td><strong>30%</strong></td><td><strong>$7.89</strong></td><td><strong>+80%</strong></td></tr>
+        <tr class="hl" style="background:rgba(122,154,122,.10);"><td><strong>加权公允价值</strong></td><td><strong>$23.4</strong></td><td>—</td><td>$23.4</td><td><strong>+60%</strong></td></tr>
+        <tr style="background:rgba(122,154,122,.06);"><td>估值中位数</td><td>$22</td><td>—</td><td>—</td><td>+51%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>估值结论</strong>：8 种方法中 <span class="hl-t">7 种给出大幅上行（NAV 例外）</span>。SOTP 最适用（净现金占比高的标的），给出 $26.3。加权公允 <strong>$23.4（+60%）</strong>，估值中位数 <strong>$22（+51%）</strong>。当前价 $14.61 提供 35-50% 的安全边际。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 8 ═══ -->
+<div class="section">
+  <div class="stitle">模块 8 · 竞争与行业分析</div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:8px 0 12px">8.1 中国电商市场份额（GMV）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>玩家</th><th>FY25 GMV (¥万亿)</th><th>占比</th><th>YoY</th><th>核心定位</th></tr></thead>
+      <tbody>
+        <tr><td>淘宝/天猫（阿里）</td><td>~8.5</td><td>50%</td><td>+2%</td><td>综合电商龙头</td></tr>
+        <tr><td>拼多多（含 Temu）</td><td>~5.2</td><td>30%</td><td>+10%</td><td>低价导向</td></tr>
+        <tr><td>京东</td><td>~4.0</td><td>23%</td><td>+5%</td><td>3C/家电正品</td></tr>
+        <tr><td>抖音电商</td><td>~3.0</td><td>17%</td><td>+30%</td><td>直播带货</td></tr>
+        <tr><td>快手电商</td><td>~1.5</td><td>9%</td><td>+15%</td><td>下沉直播</td></tr>
+        <tr class="hl"><td><strong>唯品会</strong></td><td><strong>~0.27</strong></td><td><strong>2%</strong></td><td><strong>0%</strong></td><td><strong>品牌折扣特卖</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">8.2 直接竞争者财务对比</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>指标</th><th>VIPS</th><th>PDD</th><th>JD</th><th>BABA</th></tr></thead>
+      <tbody>
+        <tr><td>FY25 营收 ($B)</td><td>15.1</td><td>62.7</td><td>149</td><td>137</td></tr>
+        <tr><td>营收 YoY</td><td><span class="dn">-2%</span></td><td>+10%</td><td>+5%</td><td>+8%</td></tr>
+        <tr><td>毛利率</td><td>23%</td><td>62%</td><td>10%</td><td>40%</td></tr>
+        <tr><td>净利率</td><td><span class="up">7%</span></td><td>22%</td><td>3%</td><td>15%</td></tr>
+        <tr><td>ROE</td><td>17.5%</td><td>32%</td><td>15%</td><td>9%</td></tr>
+        <tr><td>净现金/市值</td><td><span class="up">59%</span></td><td>40%</td><td>15%</td><td>30%</td></tr>
+        <tr><td>股东回报率</td><td><span class="up">13.3%</span></td><td>0%</td><td>6%</td><td>4%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">8.3 波特五力分析</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>五力</th><th>评分（1-5）</th><th>判断</th></tr></thead>
+      <tbody>
+        <tr><td>新进入者威胁</td><td>2</td><td>电商门槛高（仓储+品牌+流量），新进入者难</td></tr>
+        <tr><td>供应商议价</td><td>2</td><td>VIPS 是最大单一品牌折扣渠道，议价能力强</td></tr>
+        <tr><td>买家议价</td><td>3</td><td>消费者切换成本低，但 SVIP 提供锁定</td></tr>
+        <tr><td><strong>替代品威胁</strong></td><td><strong>4</strong></td><td><strong>抖音直播 + 拼多多分流——主要威胁</strong></td></tr>
+        <tr><td><strong>同业竞争</strong></td><td><strong>5</strong></td><td><strong>中国电商红海，所有玩家挤压</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>核心竞争挑战</strong>：</p>
+    <p>
+    1. <span class="warn-t">抖音直播</span>正在抢"特卖"心智——商家越来越多在抖音首发库存，绕过唯品会<br>
+    2. <span class="warn-t">拼多多 Temu</span>压低中低端品牌商品的价格预期<br>
+    3. <strong>抗衡策略</strong>：(a) "Made for VIP" 专享品类深化（5%→15% 目标）；(b) SVIP 体系强化（980万→1500万）；(c) 跨品类引流（服装→美妆/母婴）<br>
+    4. <strong>差异化而非规模化</strong>——这是 Eric Shen 多次强调的核心战略
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 模块 9 ═══ -->
+<div class="section">
+  <div class="stitle">模块 9 · 技术面与 K 线分析（次要参考）</div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:8px 0 12px">9.1 趋势</h3>
+  <div class="cmt">
+    <p><strong>52 周区间</strong>：$12.14 - $21.08（高点 2025-08，低点 2026-04）<br>
+    <strong>当前位置</strong>：$14.61，距 52 周低点 +20%，距高点 -31%<br>
+    <strong>200 日均线</strong>：~$16.5（现价位于 200 日均线下方 -11%）<br>
+    <strong>50 日均线</strong>：~$15.2（现价位于 50 日均线下方 -4%）</p>
+
+    <p><strong>趋势判断</strong>：自 2025-08 高点 $21 后进入<span class="warn-t">下行通道</span>，2026-02-26 财报发布后跌破 $14 关口。<span class="hl-t">52 周低点 $12.14 是关键支撑</span>——若此位失守，股价可能进一步下探至 $10-11（每股净资产 $9.7 附近）。</p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">9.2 技术指标</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>指标</th><th>当前值</th><th>判断</th></tr></thead>
+      <tbody>
+        <tr><td>RSI (14日)</td><td>~38</td><td>偏弱（&lt;30 超卖、&gt;70 超买）</td></tr>
+        <tr><td>MACD</td><td>负值收窄</td><td>下跌动能减弱</td></tr>
+        <tr><td>布林带</td><td>下轨附近</td><td>反弹概率上升</td></tr>
+        <tr><td>成交量</td><td>近期日均 350 万</td><td>低于年均 480 万 —— 抛压减弱</td></tr>
+        <tr><td>20 日均线</td><td>$15.0</td><td>需站稳才能确认反弹</td></tr>
+        <tr class="hl"><td>关键支撑/压力</td><td>$13.0 / $16.5</td><td>双向震荡区间</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>K 线形态判断</strong>：自 2026-02 财报后呈"下跌缓和+横盘"形态，<span class="hl-t">已接近底部企稳信号</span>。但缺少明确反转催化剂——需要 Q1 财报（2026-05-21）兑现超指引或大型回购计划重启来打破僵局。</p>
+
+    <p><strong>对价值投资视角的提示</strong>：<br>
+    技术面与基本面双双指向<span class="hl-t">"现价是好的分批建仓窗口"</span>——估值极低 + RSI 偏弱 + 接近 52 周低点 + 接近每股净资产。这种组合在历史上（2018-2019 年中概股低估期）出现后 18-24 个月平均回报 +60-80%。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 10 ═══ -->
+<div class="section">
+  <div class="stitle">模块 10 · 增长催化剂与前景展望</div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:8px 0 12px">10.1 短期催化剂（未来 6 个月）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>事件</th><th>预期日期</th><th>影响</th></tr></thead>
+      <tbody>
+        <tr><td>2025 股息派付（$0.62/ADS）</td><td>2026-04-24</td><td><span class="up">已确认 4.2% 收益率</span></td></tr>
+        <tr><td>Q1 2026 财报（指引 +0-5%）</td><td>2026-05-21</td><td><span class="up">超指引 → +10-15% 反弹</span></td></tr>
+        <tr><td>618 大促（Q2 关键节点）</td><td>2026-06-18</td><td>SVIP 留存测试</td></tr>
+        <tr><td>新一轮回购计划（$10亿+）</td><td>2026 年中</td><td><span class="up">概率 60% → +15-20%</span></td></tr>
+        <tr><td>中概股 ADR 监管缓和</td><td>2026 年内</td><td>SEC + 中证监对话进展</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">10.2 中期前景（3-5 年）</h3>
+  <div class="cmt">
+    <p><strong>看多论据</strong>：</p>
+    <p>
+    1. <span class="hl-t">中国"理性消费"长期趋势</span>——消费者从"买名牌看 Logo"转向"买品质看价格"，唯品会精准踩点<br>
+    2. <strong>SVIP 体系深化</strong>——目标 1,500 万付费会员（vs 当前 980 万），ARPU 持续提升<br>
+    3. <strong>"Made for VIP" 专享系列</strong>——目标 15% 销售占比（vs 当前 5%），毛利率高 5-8 个百分点<br>
+    4. <strong>持续股东回报</strong>——按 2025 节奏，5 年累计回购 + 股息可达 $40-50 亿（接近当前市值的 60-70%）<br>
+    5. <strong>"反脆弱"特征</strong>——经济越疲软，"特卖电商"越受欢迎（2008/2020 危机年表现优于行业）
+    </p>
+
+    <p><strong>看空论据</strong>：</p>
+    <p>
+    1. <span class="warn-t">营收持续负增长</span>——FY23 -2%、FY24 -4%、FY25 -2.3%，连续 3 年<br>
+    2. <strong>抖音直播带货</strong>——CCG 服装类目大量分流，唯品会"特卖"心智被稀释<br>
+    3. <strong>SVIP 增速放缓</strong>——从 +20% (FY23) 降至 +11% (FY25)<br>
+    4. <strong>毛利率连降</strong>——4 季度连续下滑（23.7% → 22.8%）<br>
+    5. <strong>用户基数萎缩</strong>——活跃用户从 9,200万 (FY23) 降至 9,000万 (FY25)
+    </p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">10.3 TAM / SAM / SOM</h3>
+  <div class="cmt">
+    <p>
+    <strong>TAM（中国电商总市场）</strong>：~¥17 万亿（2025）, 预计 2030 年达 ¥25 万亿（CAGR 8%）<br>
+    <strong>SAM（品牌折扣特卖细分）</strong>：~¥1 万亿（2025）, 预计 2030 年 ¥1.5 万亿（CAGR 8%）<br>
+    <strong>SOM（VIPS 当前份额）</strong>：~¥2,700 亿 GMV = SAM 的 27%（绝对龙头）<br>
+    <strong>未来 5 年 SOM 目标</strong>：¥3,500 亿 → 营收 ¥1,300-1,400 亿（CAGR 5%）
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 模块 11 ═══ -->
+<div class="section">
+  <div class="stitle">模块 11 · 风险矩阵（多维评估）</div>
+
+  <div class="risk-grid">
+    <div class="risk-card r3">
+      <h5>1. 经营风险</h5>
+      <span class="risk-score">中 · 3/5</span>
+      <p>营收连续 3 年负增长；毛利率连续 4 季度收窄；抖音直播分流"特卖"心智。<strong>但 SVIP 体系仍在 +11% 扩张，差异化战略奏效</strong>。</p>
+    </div>
+    <div class="risk-card r2">
+      <h5>2. 财务风险</h5>
+      <span class="risk-score">极低 · 2/5</span>
+      <p><span class="up">零有息负债 + ¥299亿净现金（占市值 60%）</span> + 流动比率 2.05 + ROIC 10.1%。这是中概股最干净的资产负债表之一。</p>
+    </div>
+    <div class="risk-card r4">
+      <h5>3. 竞争风险</h5>
+      <span class="risk-score">较高 · 4/5</span>
+      <p>抖音直播带货 + 拼多多 + 阿里"百亿补贴"三方夹击。<strong>但唯品会 27% 的细分市场份额是真正的"细分龙头"</strong>，差异化护城河仍在。</p>
+    </div>
+    <div class="risk-card r4">
+      <h5>4. 监管/政策风险</h5>
+      <span class="risk-score">较高 · 4/5</span>
+      <p>2021 年市场监管总局对 VIPS 立案调查"不当竞争"。<span class="warn-t">中美中概股退市风险（PCAOB 审计）</span>仍是悬剑——若退市可能跌 20-30%。</p>
+    </div>
+    <div class="risk-card r3">
+      <h5>5. 宏观风险</h5>
+      <span class="risk-score">中 · 3/5</span>
+      <p>中国消费疲软 / 房地产持续低迷 / 失业率高位。<span class="hl-t">"折扣特卖"在弱周期反而占优</span>——历史上 2009/2015/2020 年危机期间业绩相对稳定。</p>
+    </div>
+    <div class="risk-card r2">
+      <h5>6. 估值风险</h5>
+      <span class="risk-score">极低 · 2/5</span>
+      <p><span class="up">P/E 9.6x、核心 P/E 2.9x、FCF Yield 14% — 估值已极致便宜</span>。下跌空间有限（仅 -15%-20% 至 P/B 1.0x），上涨空间巨大（+50-80%）。</p>
+    </div>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">黑天鹅情景（最坏情况）</h3>
+  <div class="cmt">
+    <p>
+    <strong>黑天鹅 1：中概股退市（PCAOB 审计要求升级）</strong> — 概率 5%，股价跌至 $9-11（净资产附近）<br>
+    <strong>黑天鹅 2：Eric Shen 退休 / 控制权变化</strong> — 概率 3%，估值打 7-8 折跌至 $11<br>
+    <strong>黑天鹅 3：抖音电商 GMV 增 50%，VIPS 单季营收 -10%</strong> — 概率 8%，股价至 $10-12<br>
+    <strong>组合最坏</strong>：3 项同时发生概率 &lt; 1%，但即使发生，每股净资产仍 $9.7 提供下行支撑
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 海图评分卡 ═══ -->
+<div class="section">
+  <div class="stitle">海图评分卡 · 6 维 A-D + 红旗排查</div>
+
+  <div class="scorecard">
+    <div class="score-grid">
+      <div class="score-card">
+        <div class="score-letter s-bp">B+</div>
+        <div class="score-body">
+          <h4>1. 生意可预测性</h4>
+          <p>商业模式清晰简单（"中国 TJ Maxx"），但<span class="warn-t">营收连续 3 年负增长</span>降低了能见度。SVIP +11% 提供了"基本盘"。</p>
+        </div>
+      </div>
+
+      <div class="score-card">
+        <div class="score-letter s-b">B</div>
+        <div class="score-body">
+          <h4>2. 经济护城河</h4>
+          <p>2 项宽护城河（转换成本 + 品牌心智）+ 2 项窄 + 1 项无。<span class="warn-t">趋势略微弱化</span>（抖音直播侵蚀）。</p>
+        </div>
+      </div>
+
+      <div class="score-card">
+        <div class="score-letter s-a">A</div>
+        <div class="score-body">
+          <h4>3. 管理层质量</h4>
+          <p>创始人 17 年掌舵 + 30.9% 持股 + 63.1% 投票权。指引兑现度 80%。<span class="hl-t">中概股最稳定的管理层之一</span>。</p>
+        </div>
+      </div>
+
+      <div class="score-card">
+        <div class="score-letter s-a">A</div>
+        <div class="score-body">
+          <h4>4. 财务质量</h4>
+          <p>零负债 + ¥299亿净现金 + ROE 17.5% + OCF/NI 1.06 + FCF Yield 14%。<span class="hl-t">中概股最干净的资产负债表之一</span>。</p>
+        </div>
+      </div>
+
+      <div class="score-card">
+        <div class="score-letter s-a">A</div>
+        <div class="score-body">
+          <h4>5. 资本配置纪律</h4>
+          <p>2025 年回购 8.38% 流通股 + 4.2% 股息 = 13.3% 总股东回报。<span class="hl-t">在中概股中是顶级水平</span>。</p>
+        </div>
+      </div>
+
+      <div class="score-card">
+        <div class="score-letter s-a">A</div>
+        <div class="score-body">
+          <h4>6. 估值与安全边际</h4>
+          <p>核心 P/E 2.9x、FCF Yield 14%、SOTP 折价 60%、加权公允 $23.4（+60%）。<span class="hl-t">A 股+美股全市场最低估的"质量+股息"标的之一</span>。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="flag-row">
+      <strong>⚠ 红旗排查（非评分项）</strong>：会计保守度 — <strong>无问题</strong>。商誉占资产仅 1.4%、无表外负债、收入确认时点保守、关联交易透明、股权激励占营收仅 0.5%（极低）、连续 5 年会计政策一致。<br>
+      <strong>但有一项次级关注</strong>：双类股结构 + 创始人 63% 投票权——小股东对重大决策几乎无影响力。这是治理层面的"弱化"，但<span class="hl-t">尚未触发降级条件</span>（创始人主义 ≠ 利益冲突）。
+    </div>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">综合评级</h3>
+  <div class="bscore" style="margin-top:8px;">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>综合：A- · 评级 = 买入</h4>
+      <p>5 项 A + 1 项 B+ + 1 项 B = 35 分（满分 36 分）。无红旗触发。<strong>买入评级</strong>。这是少有的 "5/6 维 A 级 + 估值 A + 高股东回报"的组合，海图夜读全市场覆盖中评分最高的标的之一。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 投资决策 ═══ -->
+<div class="section">
+  <div class="stitle">海图研判 · 投资决策</div>
+
+  <div class="cmt">
+    <p><strong>评级：买入</strong>（高股息 + 回购 + 极致估值组合）</p>
+
+    <p><strong>12 个月概率加权目标价：$20</strong>（+37% 上行）</p>
+  </div>
+
+  <div class="pgrid">
+    <div class="pbox">
+      <div class="pl">悲观（25%）</div>
+      <div class="pv pc">$11</div>
+      <div class="pn">退市风险 + 营收 -5%<br>跌至每股净资产</div>
+    </div>
+    <div class="pbox">
+      <div class="pl">基准（55%）</div>
+      <div class="pv pf">$22</div>
+      <div class="pn">估值合理回归<br>P/E 修复至 13x</div>
+    </div>
+    <div class="pbox">
+      <div class="pl">乐观（20%）</div>
+      <div class="pv ps">$28</div>
+      <div class="pn">消费复苏 + 抖音减速<br>+ 加大回购</div>
+    </div>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">分批建仓（独立估值视角）</h3>
+  <div class="cmt">
+    <p>使用估值中位数 $22 作为基准。<strong>当前价 $14.61 已位于"二仓"附近，是天然的建仓窗口。</strong></p>
+  </div>
+
+  <div class="pgrid">
+    <div class="pbox">
+      <div class="pl">首仓（30% 仓位）</div>
+      <div class="pv ps">$17.6</div>
+      <div class="pn">估值中位 × 80%<br>距现价 +20%（已过）</div>
+    </div>
+    <div class="pbox">
+      <div class="pl">二仓（35% 仓位）</div>
+      <div class="pv pf">$15.4</div>
+      <div class="pn">估值中位 × 70%<br>当前价附近 ✓</div>
+    </div>
+    <div class="pbox">
+      <div class="pl">三仓（35% 仓位）</div>
+      <div class="pv pc">$13.2</div>
+      <div class="pn">估值中位 × 60%<br>52 周低点附近</div>
+    </div>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">止盈策略（不止损，价值越跌越买）</h3>
+  <div class="pgrid">
+    <div class="pbox"><div class="pl">第一档</div><div class="pv pf">$22</div><div class="pn">减仓 25%<br>对应 P/E ~14x</div></div>
+    <div class="pbox"><div class="pl">第二档</div><div class="pv pf">$28</div><div class="pn">再减仓 25%<br>对应 P/E ~17x</div></div>
+    <div class="pbox"><div class="pl">第三档</div><div class="pv pf">$35</div><div class="pn">再减仓 25%<br>对应 P/E ~22x（5 年高位）</div></div>
+  </div>
+
+  <div class="cmt" style="margin-top:18px;">
+    <p><strong>仓位管理</strong>：建议总仓位 <span class="hl-t">3-7%</span>（高股息+回购组合）。持有周期 <strong>3-5 年</strong>。最后 25% 仓位作为"长期债券替代品"——只要每年 13%+ 股东回报率不变，可永久持有。</p>
+
+    <p><strong>关键监控指标</strong>：</p>
+    <p>
+    1. <strong>季度营收 YoY 增速</strong>——目标 Q1 2026 兑现 +2.5%（指引中点）<br>
+    2. <strong>SVIP 增速</strong>——目标维持 +10%+（若降至 +5% 以下，应警惕）<br>
+    3. <strong>毛利率趋势</strong>——若 Q1 仍在 22.8% 以下（连续第 5 个季度收窄），降级至"持有观望"<br>
+    4. <strong>新一轮回购计划</strong>——若 2026 年宣布 $10 亿+ 回购，加仓<br>
+    5. <strong>抖音电商月活/GMV</strong>——若抖音 GMV 增速保持 +30%+，警惕 SVIP 流失
+    </p>
+
+    <p><strong>事件时间表</strong>：</p>
+    <p>
+    - 2026-04-24：股息 $0.62/ADS 派付<br>
+    - 2026-05-21：Q1 2026 财报发布（关键拐点）<br>
+    - 2026-06-18：618 大促（GMV 测试）<br>
+    - 2026-08-22：Q2 2026 财报（含 618 数据）<br>
+    - 2026 年中：可能宣布新一轮 $10+ 亿回购计划
+    </p>
+
+    <p><strong>下一个催化剂日期</strong>：<span class="hl-t">2026-05-21 Q1 2026 财报</span>。如指引 +5% 兑现 + 新回购宣布，估值快速修复至 $18-20；如继续疲软，可能跌至 $12-13 提供更好建仓机会。</p>
+  </div>
+</div>
+
+<!-- ═══ 海图页末长评（=社媒短文） ═══ -->
+<div class="section">
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记 · 1100 字</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p class="lead">市场永远不缺好公司，缺的是好公司被遗忘的那个瞬间。唯品会就在这样的瞬间——所有人都看着它营收 -2.3%，却没人看到它每年返还 13% 给股东。</p>
+
+      <p>FY2025 营收 ¥1,059 亿（-2.3% YoY）、净利 ¥72 亿、FCF ¥70 亿——这是一份"略显平淡"的全年财报。Q4 营收 -2.1%，连续第 6 个季度负增长。如果只看营收线，市场对它失去兴趣似乎合理。但<strong>当一家公司在营收下滑的环境里，每年仍能产生 14% FCF 收益率、回购 8.38% 流通股、派 4.2% 股息——这就不再是"营收下滑股"，而是"长期债券替代品"</strong>。</p>
+
+      <h4>几个研判要点</h4>
+
+      <p><strong>一、核心业务市值仅 $2.9B vs 净利 $1.0B —— 全市场最低估之一。</strong>当前市值 $7.09B - 净现金 $4.2B = 核心业务市值 $2.9B。除以 FY25 净利 $1.0B = <span class="warn-t">核心 P/E 仅 2.9x</span>。在 A 股+美股全市场，能跑赢这个估值的"质量股"几乎不存在。即使是建行 H 股（核心 P/E ~5x）、长江实业（~6x）、Verizon（~8x）都比 VIPS 贵。<strong>这是市场对"中国电商连续负增长"的极端折价反映</strong>——任一项利好（消费复苏、抖音减速、加大回购）都会触发估值快速修复。</p>
+
+      <p><strong>二、SVIP 体系是真正抗衡抖音的护城河。</strong>980 万付费会员（+11% YoY），续费率 85%+，贡献 52% 线上消费。年费 ¥199，客单价是普通用户的 3 倍。<span class="hl-t">这是中国电商业最稳定的"用户粘性"指标</span>——抖音直播抢的是"流量",但抢不走"已付年费 + 历史购物记录 + 个性化偏好"的 SVIP 用户。配合"Made for VIP"专享系列 +40% 增速（目标占比 5%→15%），唯品会的差异化战略已见成效。</p>
+
+      <p><strong>三、$9.4 亿股东回报 + 创始人控股 = 极度稀缺的资本纪律。</strong>2025 年回购 $6.84 亿（退 8.38% 流通股）+ 股息 $3.10/普通股（$0.62/ADS）。<span class="hl-t">总股东回报 13.3%——是 PDD（0%）、阿里（4%）、京东（6%）的 2-3 倍</span>。Eric Shen 持股 30.9%、投票权 63.1%，与小股东利益绑定。这种"创始人主导 + 持续大规模回购"的组合在中概股中极为稀缺，对比阿里"管理层频繁套现"是天差地别。</p>
+
+      <p><strong>四、营收停滞是事实，但不等于价值毁灭。</strong>FY23 -2%、FY24 -4%、FY25 -2.3%——确实在缩。但<span class="warn-t">缩的同时利润率维持 6.8%、ROE 17.5%、FCF $1B 稳定</span>。这是"成熟价值股"的典型特征：从增长股转为现金牛。市场把它当成"萎缩股"折价，但它实际是"防御股"。Q1 2026 指引 +0-5% 是 3 年来首次正增长指引，若兑现 +5% 上限，估值会在 6 个月内修复 30%+。</p>
+
+      <p><strong>五、12 个月目标价 $20，上行 +37%。</strong>悲观 $11（-25%，退市 + 营收 -5%）、基准 $22（+51%，估值合理回归）、乐观 $28（+92%，消费复苏 + 加大回购）。<strong>当前价 $14.61 已位于"二仓"附近 —— 是天然建仓窗口</strong>。海图的判断：这种估值组合下，未来 3-5 年预期年化回报 15-25%（含股息），优于绝大多数大盘股。</p>
+
+      <h4>海图研判</h4>
+
+      <p><strong>评级：买入</strong>（高股息+回购+极致估值组合）。12 个月概率加权目标价 <strong>$20</strong>（+37%）。</p>
+
+      <p>操作建议（独立估值中位数 $22）：当前价 $14.61 已位于"二仓"附近。建议首仓 $17.6（× 80%，已过）、二仓 $15.4（× 70%，当前价附近 ✓）、三仓 $13.2（× 60%，52 周低点附近）。止盈三档 $22 / $28 / $35，每档减仓 25%，最后 25% 作为"长期债券替代品"长期持有。建议总仓位 <strong>3-7%</strong>，持有周期 3-5 年。</p>
+
+      <h4>风险提示</h4>
+
+      <p>中概股退市（PCAOB 审计） / 抖音直播继续抢"特卖"心智 / 中国消费持续疲软 / SVIP 增速跌至 +5% 以下 / 创始人控制权变化——任一项都可能让股价回调 15-25%。但 ¥299 亿净现金 + 零负债 + 创始人持股 30.9% 让破产概率为零，每股净资产 $9.7 提供下行支撑。</p>
+
+      <p>关键叙事：<strong>"营收停滞 + 极致估值 + 顶级股东回报"的稀有组合</strong>。在 NVIDIA/Lumentum 估值过热、阿里/京东缺乏资本纪律的当下，唯品会是中概股中性价比最高的"长期债券替代品"——不是给追求增长的人，而是给追求确定性回报的人。下一个催化剂：2026-05-21 Q1 财报。</p>
+
+      <p class="haitu-sign">—— 海图，灯下落笔，明日再观风浪。</p>
+
+      <p class="haitu-disc">⚠️ 免责声明：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，不构成任何投资建议。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div>《海图夜读》 · Vipshop VIPS FY2025 海图研判</div>
+  <div style="margin-top:6px;">数据来源：Vipshop SEC 文件 6-K、Q4 2025 电话会议（2026-02-26）、行业研究</div>
+  <div style="margin-top:6px;">价值投资 · 长期主义</div>
+</footer>
+
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  const cur = html.getAttribute('data-theme');
+  html.setAttribute('data-theme', cur === 'dark' ? 'light' : 'dark');
+  localStorage.setItem('theme', html.getAttribute('data-theme'));
+  renderCharts();
+}
+(function() {
+  const t = localStorage.getItem('theme');
+  if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+})();
+
+function gc(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+
+let charts = {};
+function renderCharts() {
+  Object.values(charts).forEach(c => c && c.destroy && c.destroy());
+  charts = {};
+  const txt2 = gc('--text2'), txt3 = gc('--text3'), grid = gc('--chart-grid');
+  const accent = gc('--accent'), accent2 = gc('--accent2'), accent3 = gc('--accent3');
+  const green = gc('--green'), gold = gc('--gold'), rose = gc('--rose'), red = gc('--red');
+
+  Chart.defaults.color = txt2;
+  Chart.defaults.font.family = 'Segoe UI, sans-serif';
+  Chart.defaults.font.size = 11;
+
+  charts.rev = new Chart(document.getElementById('revenueChart'), {
+    type: 'bar',
+    data: { labels: ['Q4 24', 'Q1 25', 'Q2 25', 'Q3 25', 'Q4 25'],
+      datasets: [{ label: 'Revenue', data: [332, 263, 266, 205, 325], backgroundColor: [accent3, gold, accent2, accent, green], borderRadius: 4 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+      scales: { y: { grid: { color: grid }, ticks: { color: txt3 } }, x: { grid: { display: false }, ticks: { color: txt3 } } } }
+  });
+
+  charts.profit = new Chart(document.getElementById('profitChart'), {
+    type: 'line',
+    data: { labels: ['Q4 24', 'Q1 25', 'Q2 25', 'Q3 25', 'Q4 25'],
+      datasets: [{ label: 'Net Profit', data: [25, 20, 17, 9, 26], borderColor: green, backgroundColor: 'rgba(122,154,122,0.1)', tension: 0.3, fill: true, pointBackgroundColor: green, pointRadius: 5 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+      scales: { y: { grid: { color: grid }, ticks: { color: txt3 } }, x: { grid: { display: false }, ticks: { color: txt3 } } } }
+  });
+
+  charts.seg = new Chart(document.getElementById('segmentChart'), {
+    type: 'doughnut',
+    data: { labels: ['服装鞋包', '美妆个护', '家居家电', '其他商品', '服务收入'],
+      datasets: [{ data: [600, 180, 120, 120, 39], backgroundColor: [accent3, gold, accent, accent2, rose], borderColor: gc('--card'), borderWidth: 2 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { color: txt2, font: { size: 11 } } } } }
+  });
+
+  charts.return = new Chart(document.getElementById('returnChart'), {
+    type: 'bar',
+    data: { labels: ['FY21', 'FY22', 'FY23', 'FY24', 'FY25'],
+      datasets: [
+        { label: '回购 ($M)', data: [200, 250, 1000, 800, 684], backgroundColor: green, borderRadius: 4 },
+        { label: '股息 ($M)', data: [0, 0, 200, 250, 260], backgroundColor: gold, borderRadius: 4 }
+      ] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top', labels: { color: txt2, font: { size: 11 } } } },
+      scales: { y: { grid: { color: grid }, ticks: { color: txt3 }, stacked: true }, x: { grid: { display: false }, ticks: { color: txt3 }, stacked: true } } }
+  });
+
+  buildSankey();
+}
+
+function buildSankey() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const txt = isDark ? '#d4ccc4' : '#4a4340';
+  const cardBg = isDark ? '#2e2a25' : '#ffffff';
+
+  const sankeyData = [{
+    type: 'sankey', orientation: 'h', arrangement: 'snap', valueformat: ',.1f', valuesuffix: ' 亿',
+    node: {
+      pad: 22, thickness: 22, line: { color: 'transparent', width: 0 },
+      label: ['营收 1,059', '营业成本 814', '毛利 245', '履约 90', '营销 52', '研发+管理 22', '经营利润 81', '所得税 17', '净利 72', '非现金 +10', '经营现金流 76', 'Capex 6', '自由现金流 70'],
+      color: ['#7b8fa0', '#b87070', '#8a9a8e', '#b9a06a', '#c09090', '#a89f98', '#b08d7a', '#b87070', '#7a9a7a', '#7b8fa0', '#b08d7a', '#b87070', '#7a9a7a']
+    },
+    link: {
+      source: [0, 0, 2, 2, 2, 2, 6, 6, 8, 9, 10, 10],
+      target: [1, 2, 3, 4, 5, 6, 7, 8, 10, 10, 11, 12],
+      value:  [814, 245, 90, 52, 22, 81, 17, 64, 72, 10, 6, 70],
+      color: ['rgba(184,112,112,0.30)', 'rgba(138,154,142,0.45)', 'rgba(185,160,106,0.30)', 'rgba(192,144,144,0.30)', 'rgba(168,159,152,0.30)', 'rgba(176,141,122,0.45)', 'rgba(184,112,112,0.30)', 'rgba(122,154,122,0.45)', 'rgba(122,154,122,0.40)', 'rgba(123,143,160,0.40)', 'rgba(184,112,112,0.30)', 'rgba(122,154,122,0.50)']
+    }
+  }];
+
+  const layout = { font: { family: 'Segoe UI, sans-serif', size: 11, color: txt }, paper_bgcolor: cardBg, plot_bgcolor: cardBg, margin: { l: 10, r: 10, t: 10, b: 10 } };
+  Plotly.react('sankey', sankeyData, layout, { displayModeBar: false, responsive: true });
+}
+
+document.addEventListener('DOMContentLoaded', renderCharts);
+</script>
+
+</body>
+</html>
