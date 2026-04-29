@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-04-29，基于 Q2 FY2026 季报（2026-02-04 发布）+ Q3 FY2026 指引 -->
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumentum LITE — Q2 FY2026 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root {
+  --bg: #f5f0eb; --bg2: #ece6df; --card: #ffffff; --card2: #f8f5f1; --border: #d9d0c7;
+  --text: #4a4340; --text2: #7a706a; --text3: #a89f98;
+  --accent: #8a9a8e; --accent2: #7b8fa0; --accent3: #b08d7a;
+  --rose: #c09090; --gold: #b9a06a; --red: #b87070; --green: #7a9a7a;
+  --shadow: rgba(0,0,0,0.06); --chart-grid: #e5ddd5;
+}
+[data-theme="dark"] {
+  --bg: #1e1c1a; --bg2: #28251f; --card: #2e2a25; --card2: #363230; --border: #4a4540;
+  --text: #d4ccc4; --text2: #a09890; --text3: #706860;
+  --accent: #8a9a8e; --accent2: #8fabbf; --accent3: #c9a48e;
+  --rose: #c09090; --gold: #c9b07a; --red: #c08080; --green: #8aaa8a;
+  --shadow: rgba(0,0,0,0.3); --chart-grid: #3e3a35;
+}
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Georgia','Noto Serif SC','PingFang SC',serif; line-height: 1.75; font-size: 14.5px; transition: background .35s, color .35s; }
+a { color: var(--accent2); text-decoration: none; }
+.theme-bar { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); }
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; text-decoration: none; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+.toggle-switch { position: relative; width: 44px; height: 22px; background: var(--border); border-radius: 11px; cursor: pointer; transition: background .3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: var(--card); border-radius: 50%; transition: transform .3s; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+.hero { padding: 48px 24px 36px; text-align: center; border-bottom: 1px solid var(--border); }
+.hero-tag { display: inline-block; font-family: 'Segoe UI',sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 3px 14px; border-radius: 20px; margin-bottom: 18px; }
+.hero h1 { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.pill { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: 'Segoe UI',sans-serif; font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow); }
+.pill strong { color: var(--text); }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle { font-size: 18px; font-weight: 700; color: var(--accent3); margin-bottom: 20px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+.stitle::before { content: ''; display: block; width: 4px; height: 20px; background: var(--accent3); border-radius: 2px; }
+.haitu-quip { display: flex; align-items: center; gap: 18px; background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 18px 24px; margin: 24px 0; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-quote { flex: 1; }
+.haitu-portrait { font-size: 15px; line-height: 1.65; color: var(--text); margin-bottom: 6px; font-weight: 600; }
+.haitu-rating-line { font-size: 13px; color: var(--text2); font-family: 'Segoe UI',sans-serif; }
+.rating-badge { display: inline-block; padding: 2px 12px; border-radius: 12px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; margin-left: 4px; }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+.rating-cond-buy { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-hold { background: rgba(123,143,160,.18); color: var(--accent2); }
+.haitu-essay { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 28px 32px; margin: 24px 0 20px; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-essay-header { display: flex; align-items: center; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.haitu-avatar-sm { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); background: var(--red); box-shadow: 0 2px 8px rgba(184,112,112,0.2); }
+.haitu-name-lg { font-family: 'Georgia','Noto Serif SC',serif; font-size: 28px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 4px; }
+.haitu-essay-tag { font-family: 'Segoe UI',sans-serif; font-size: 12px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; }
+.haitu-essay-body { font-family: 'Georgia','Noto Serif SC',serif; font-size: 15px; line-height: 2.0; color: var(--text); }
+.haitu-essay-body p { margin-bottom: 14px; }
+.haitu-essay-body p.lead { font-size: 16px; font-style: italic; color: var(--text2); margin-bottom: 18px; }
+.haitu-essay-body strong { color: var(--text); font-weight: 700; }
+.haitu-essay-body h4 { font-size: 14px; color: var(--accent3); margin: 18px 0 10px; font-family: 'Segoe UI',sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+.haitu-sign { text-align: right; margin-top: 18px; font-family: 'Georgia',serif; font-size: 14px; color: var(--text2); font-style: italic; }
+.haitu-disc { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); font-style: italic; line-height: 1.7; }
+.stock-snap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill,minmax(160px,1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px; }
+.snap-item { text-align: center; }
+.snap-label { font-family: 'Segoe UI',sans-serif; font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.snap-val { font-family: 'Segoe UI',sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+.snap-val.up { color: var(--green); }
+.snap-val.dn { color: var(--red); }
+.snap-sub { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text3); margin-top: 2px; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(195px,1fr)); gap: 14px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow); }
+.kpi-l { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.kpi-v.up { color: var(--green); }
+.kpi-v.dn { color: var(--red); }
+.badge { display: inline-block; font-family: 'Segoe UI',sans-serif; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+.up { background: rgba(122,154,122,.15); color: var(--green); }
+.dn { background: rgba(184,112,112,.15); color: var(--red); }
+.nt { background: rgba(123,143,160,.15); color: var(--accent2); }
+.tbl-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow); }
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI',sans-serif; font-size: 13px; }
+.tbl th { background: var(--card2); color: var(--text3); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); background: var(--card2); }
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); }
+.ctitle { font-family: 'Segoe UI',sans-serif; font-size: 12px; color: var(--text3); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 260px; }
+.cmt { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 26px; line-height: 1.95; font-size: 14px; box-shadow: 0 1px 4px var(--shadow); color: var(--text); }
+.cmt p { margin-bottom: 14px; }
+.cmt p:last-child { margin-bottom: 0; }
+.cmt strong { color: var(--text); }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+.bscore { display: flex; align-items: center; gap: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; margin-bottom: 12px; box-shadow: 0 1px 4px var(--shadow); }
+.circle { width: 62px; height: 62px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; flex-shrink: 0; border: 3px solid; font-family: 'Segoe UI',sans-serif; }
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 4px; color: var(--text); }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+.sgrid { display: grid; grid-template-columns: repeat(auto-fill,minmax(260px,1fr)); gap: 16px; }
+.scard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 20px; box-shadow: 0 1px 4px var(--shadow); border-top: 4px solid var(--accent); }
+.scard.brand1 { border-top-color: var(--accent3); }
+.scard.brand2 { border-top-color: var(--accent2); }
+.scard.brand3 { border-top-color: var(--gold); }
+.scard.brand4 { border-top-color: var(--rose); }
+.scard.brand5 { border-top-color: var(--green); }
+.scard h4 { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.scard .srev { font-family: 'Segoe UI',sans-serif; font-size: 24px; font-weight: 800; color: var(--text); }
+.scard .ssub { font-family: 'Segoe UI',sans-serif; font-size: 12px; color: var(--text3); margin-top: 2px; margin-bottom: 12px; }
+.scard ul { padding-left: 15px; }
+.scard li { font-size: 13px; color: var(--text2); margin-bottom: 4px; }
+.moat-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap: 14px; }
+.moat-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); border-left: 4px solid var(--accent); }
+.moat-card.wide { border-left-color: var(--green); }
+.moat-card.narrow { border-left-color: var(--gold); }
+.moat-card.none { border-left-color: var(--red); }
+.moat-card h5 { font-size: 13px; color: var(--text); margin-bottom: 6px; }
+.moat-card .moat-rate { font-family: 'Segoe UI',sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.moat-card.wide .moat-rate { background: rgba(122,154,122,.18); color: var(--green); }
+.moat-card.narrow .moat-rate { background: rgba(185,160,106,.18); color: var(--gold); }
+.moat-card.none .moat-rate { background: rgba(184,112,112,.18); color: var(--red); }
+.moat-card p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+.ec-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 14px; box-shadow: 0 1px 3px var(--shadow); }
+.ec-badge { flex-shrink: 0; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-top: 2px; font-family: 'Segoe UI',sans-serif; }
+.ec-bull { background: rgba(122,154,122,.18); color: var(--green); }
+.ec-bear { background: rgba(184,112,112,.18); color: var(--red); }
+.ec-neut { background: rgba(185,160,106,.18); color: var(--gold); }
+.ec-body { flex: 1; }
+.ec-title { font-weight: 600; color: var(--text); margin-bottom: 3px; font-size: 14px; }
+.ec-note { font-size: 13px; color: var(--text2); line-height: 1.7; }
+.dcf-note { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.dcf-note strong { color: var(--text); }
+.scorecard { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow); }
+.score-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(280px,1fr)); gap: 14px; }
+.score-card { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px; }
+.score-letter { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Segoe UI',sans-serif; font-weight: 800; font-size: 22px; flex-shrink: 0; border: 3px solid; }
+.s-a { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.12); }
+.s-bp { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.06); }
+.s-b { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.10); }
+.s-bm { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.06); }
+.s-c { color: var(--red); border-color: var(--red); background: rgba(184,112,112,.08); }
+.s-d { color: var(--red); border-color: var(--red); background: rgba(184,112,112,.18); }
+.score-body h4 { font-size: 13px; color: var(--text); margin-bottom: 4px; }
+.score-body p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+.flag-row { margin-top: 16px; padding: 12px 16px; background: rgba(185,160,106,.10); border: 1px solid rgba(185,160,106,.3); border-radius: 8px; font-size: 13px; color: var(--text2); }
+.flag-row strong { color: var(--gold); }
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center; box-shadow: 0 1px 4px var(--shadow); }
+.pbox .pl { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; }
+.pbox .pv { font-family: 'Segoe UI',sans-serif; font-size: 28px; font-weight: 800; margin-bottom: 5px; }
+.pbox .pn { font-size: 12px; color: var(--text3); line-height: 1.5; }
+.pc { color: var(--red); } .pf { color: var(--gold); } .ps { color: var(--green); }
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(280px,1fr)); gap: 14px; }
+.risk-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); position: relative; overflow: hidden; }
+.risk-card::before { content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent); }
+.risk-card.r1::before { background: var(--green); }
+.risk-card.r2::before { background: rgba(122,154,122,.6); }
+.risk-card.r3::before { background: var(--gold); }
+.risk-card.r4::before { background: var(--rose); }
+.risk-card.r5::before { background: var(--red); }
+.risk-card h5 { font-size: 14px; margin-bottom: 6px; color: var(--text); }
+.risk-score { font-family: 'Segoe UI',sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.r1 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r2 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r3 .risk-score { background: rgba(185,160,106,.18); color: var(--gold); }
+.r4 .risk-score { background: rgba(192,144,144,.18); color: var(--rose); }
+.r5 .risk-score { background: rgba(184,112,112,.18); color: var(--red); }
+.risk-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+footer { background: var(--card2); border-top: 1px solid var(--border); padding: 24px; text-align: center; color: var(--text3); font-size: 12px; margin-top: 40px; line-height: 1.8; }
+@media (max-width: 768px) { .cgrid,.pgrid { grid-template-columns: 1fr; } .hero h1 { font-size: 22px; } .kpi-grid { grid-template-columns: 1fr 1fr; } .stock-snap { grid-template-columns: 1fr 1fr; } .haitu-essay-header { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">Q2 FY2026 财报发布 · 2026-02-04 &nbsp;|&nbsp; 海图研判 · 2026-04-29</div>
+  <h1>Lumentum Holdings · Q2 FY2026 深度分析</h1>
+  <div class="hero-sub">NASDAQ: LITE &nbsp;|&nbsp; AI 数据中心光引擎 + NVIDIA $2B 直接投资 &nbsp;|&nbsp; 价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill">股价 <strong>$836.92</strong> <span style="color:var(--green)">12 月 +1300%</span></div>
+    <div class="pill">市值 <strong>$59.76B</strong></div>
+    <div class="pill">Q2 营收 <strong>$665.5M</strong> <span style="color:var(--green)">+65.5%</span></div>
+    <div class="pill">Q3 指引 <strong>$780-830M</strong> <span style="color:var(--green)">+85% 中点</span></div>
+    <div class="pill">2028 EPS 目标 <strong>$30</strong></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 海图页首短评 ═══ -->
+<div class="haitu-quip">
+  <div class="haitu-quote">
+    <div class="haitu-portrait">AI 数据中心的"光引擎核心供应商"——50-60% 高端激光器全球份额 + NVIDIA 直接投资 $2B 锁定产能 + 200G/lane EML 是 1.6T/3.2T 收发器的"心跳"。但<strong>股价 12 个月涨 1300%、TTM P/E 172x</strong>，估值已 price in 大量未来增长。</div>
+    <div class="haitu-rating-line">评级：<span class="rating-badge rating-hold">持有观望</span> · 12 个月目标价 $700（下行 -16%）· 高位审慎，回调至 $560 以下再考虑建仓</div>
+  </div>
+</div>
+
+<!-- ═══ 市场数据快照 ═══ -->
+<div class="section">
+  <div class="stitle">市场数据快照（2026-04-29）</div>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">股价（USD）</div><div class="snap-val">836.92</div><div class="snap-sub">4 月 21 日</div></div>
+    <div class="snap-item"><div class="snap-label">市值</div><div class="snap-val">$59.76B</div><div class="snap-sub">流通股 71.4M</div></div>
+    <div class="snap-item"><div class="snap-label">12 月涨幅</div><div class="snap-val up">+1300%</div><div class="snap-sub">极端 AI 主题</div></div>
+    <div class="snap-item"><div class="snap-label">YTD 2026</div><div class="snap-val up">+92%</div><div class="snap-sub">2025 全年 +340%</div></div>
+    <div class="snap-item"><div class="snap-label">TTM P/E (GAAP)</div><div class="snap-val dn">~172x</div><div class="snap-sub">极高估值</div></div>
+    <div class="snap-item"><div class="snap-label">Forward P/E (FY26)</div><div class="snap-val">~112x</div><div class="snap-sub">EPS ~$7.50</div></div>
+    <div class="snap-item"><div class="snap-label">Forward P/E (FY27)</div><div class="snap-val">~64x</div><div class="snap-sub">EPS ~$13</div></div>
+    <div class="snap-item"><div class="snap-label">2028 目标 P/E</div><div class="snap-val up">~28x</div><div class="snap-sub">如 EPS 兑现 $30</div></div>
+    <div class="snap-item"><div class="snap-label">P/S (TTM)</div><div class="snap-val dn">~28x</div><div class="snap-sub">远高于半导体均值</div></div>
+    <div class="snap-item"><div class="snap-label">总现金</div><div class="snap-val">~$1.12B</div><div class="snap-sub">含可转债缓冲</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间</div><div class="snap-val up">距高点 -10%</div><div class="snap-sub">低 60 / 高 920</div></div>
+    <div class="snap-item"><div class="snap-label">分析师均价目标</div><div class="snap-val">$760</div><div class="snap-sub">已落后实际股价</div></div>
+  </div>
+</div>
+
+<!-- ═══ Q2 FY2026 KPI ═══ -->
+<div class="section">
+  <div class="stitle">Q2 FY2026 季度业绩（2026-02-04 发布）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">Q2 营收</div><div class="kpi-v up">$665.5M</div><span class="badge up">▲ +65.5% YoY</span><div style="font-size:12px;color:var(--text3);margin-top:4px">超共识 $646.7M</div></div>
+    <div class="kpi"><div class="kpi-l">Components 业务</div><div class="kpi-v up">$443.7M</div><span class="badge up">▲ +68%</span><div style="font-size:12px;color:var(--text3);margin-top:4px">EML/VCSEL/光器件</div></div>
+    <div class="kpi"><div class="kpi-l">Systems 业务</div><div class="kpi-v up">$221.8M</div><span class="badge up">▲ +60%</span><div style="font-size:12px;color:var(--text3);margin-top:4px">收发器+光路交换</div></div>
+    <div class="kpi"><div class="kpi-l">Q2 Non-GAAP EPS</div><div class="kpi-v up">$1.67</div><span class="badge up">▲ 超预期 18%</span><div style="font-size:12px;color:var(--text3);margin-top:4px">共识 $1.41</div></div>
+    <div class="kpi"><div class="kpi-l">Non-GAAP 毛利率</div><div class="kpi-v">~37%</div><span class="badge up">▲ 持续改善</span></div>
+    <div class="kpi"><div class="kpi-l">Non-GAAP OPM</div><div class="kpi-v">~25%</div><span class="badge up">▲ 经营杠杆</span></div>
+    <div class="kpi"><div class="kpi-l">OCS 业务首入 $10M+</div><div class="kpi-v">$10M+</div><span class="badge up">▲ 新增长极</span><div style="font-size:12px;color:var(--text3);margin-top:4px">订单 backlog $400M+</div></div>
+    <div class="kpi"><div class="kpi-l">Under-shipping 程度</div><div class="kpi-v dn">25-30%</div><span class="badge nt">● 供给约束</span><div style="font-size:12px;color:var(--text3);margin-top:4px">需求远超产能</div></div>
+  </div>
+</div>
+
+<!-- ═══ Q3 FY2026 指引 ═══ -->
+<div class="section">
+  <div class="stitle">Q3 FY2026 指引（公告日 2026-05-05）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">Q3 营收指引</div><div class="kpi-v up">$780-830M</div><span class="badge up">▲ +85% 中点</span><div style="font-size:12px;color:var(--text3);margin-top:4px">中位 $805M</div></div>
+    <div class="kpi"><div class="kpi-l">Q3 Non-GAAP OPM</div><div class="kpi-v up">30-31%</div><span class="badge up">▲ 大幅扩张</span></div>
+    <div class="kpi"><div class="kpi-l">Q3 Non-GAAP EPS</div><div class="kpi-v up">$2.15-2.35</div><span class="badge up">▲ +120% YoY</span></div>
+    <div class="kpi"><div class="kpi-l">FY2026 隐含全年</div><div class="kpi-v">$2.7B</div><span class="badge up">▲ +63% YoY</span></div>
+    <div class="kpi"><div class="kpi-l">FY2026 EPS（估）</div><div class="kpi-v up">~$7.50</div><span class="badge up">▲ +163%</span></div>
+    <div class="kpi"><div class="kpi-l">公司长期目标</div><div class="kpi-v">$2B/季</div><span class="badge nt">● 2028 时点</span><div style="font-size:12px;color:var(--text3);margin-top:4px">EPS $30 目标</div></div>
+  </div>
+</div>
+
+<!-- ═══ 季度趋势图 ═══ -->
+<div class="section">
+  <div class="stitle">季度趋势 + AI 增长曲线</div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">5 季度营收（USD M）</div><div class="cwrap"><canvas id="revenueChart"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">5 季度 Non-GAAP EPS（USD）</div><div class="cwrap"><canvas id="profitChart"></canvas></div></div>
+  </div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">Q2 FY2026 业务结构（USD M）</div><div class="cwrap"><canvas id="segmentChart"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">5 财年营收轨迹（USD M）</div><div class="cwrap"><canvas id="yearChart"></canvas></div></div>
+  </div>
+</div>
+
+<!-- ═══ 资金流向桑基图 ═══ -->
+<div class="section">
+  <div class="stitle">FY2026E 资金流向 · 营收 → 自由现金流（USD M）</div>
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px;box-shadow:0 1px 4px var(--shadow);">
+    <div id="sankey" style="width:100%;height:480px;"></div>
+    <p style="font-size:12px;color:var(--text3);margin-top:10px;line-height:1.7;">
+      使用 FY2026E 全年估算数据：$2,700M 营收 → COGS $1,701M（毛利率 37%）→ 毛利 $999M 覆盖运营费用 $324M → 经营利润 $675M（OPM 25%）→ 扣除税收 $135M 后净利 $540M → 加非现金调整 $135M 后经营现金流 $675M → 扣除 $130M 资本开支后<strong>FCF ≈ $545M（FCF Yield 仅 0.9%）</strong>。极低 FCF Yield 是高估值的反面证据。
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 模块 1：公司概览与背景 ═══ -->
+<div class="section">
+  <div class="stitle">模块 1 · 公司概览与背景</div>
+  <div class="cmt">
+    <p><strong>基本信息：</strong>Lumentum Holdings Inc.（NASDAQ: LITE），全球领先的光通信组件 + 商用激光器制造商。2015 年从 JDSU（JDS Uniphase Corporation）分拆独立上市，总部位于美国加州 San Jose。Lumentum 是 AI 数据中心光通信领域的关键供应商，<strong>NVIDIA Vera Rubin / Blackwell GPU 集群的"光纤心脏"</strong>。</p>
+
+    <p><strong>关键里程碑：</strong></p>
+    <ul style="margin-left:24px;color:var(--text2);">
+      <li>2015：从 JDSU 分拆，纳斯达克独立上市（LITE）</li>
+      <li>2018：苹果 iPhone X Face ID 的 VCSEL 关键供应商</li>
+      <li>2022：以 $5.7B 收购 NeoPhotonics，强化电信光器件</li>
+      <li>2023：以 $750M 收购 Cloud Light（数据中心收发器）</li>
+      <li>2024：开始受益于 AI 数据中心爆发</li>
+      <li>2025：股价 +340%；推出 200G/lane EML 激光器</li>
+      <li>2026 年 3 月：1.6T DR4 OSFP 收发器量产</li>
+      <li>2026 年 3 月：宣布 NVIDIA $2B 直接投资（NVIDIA 总 $4B 一半）</li>
+      <li>2028 长期目标：单季 $2B 营收 + EPS $30</li>
+    </ul>
+
+    <p><strong>股权结构（2026 年 4 月）：</strong></p>
+    <ul style="margin-left:24px;color:var(--text2);">
+      <li>NVIDIA：刚获得 $2B 战略投资，预计持股 5-10%（具体比例待披露）</li>
+      <li>Vanguard、BlackRock 等机构：合计 ~30%</li>
+      <li>管理层 + 员工持股：~3%</li>
+      <li>其他公众：~57%</li>
+    </ul>
+
+    <p><strong>公司治理与 ESG：</strong>董事会 9 人。MSCI ESG 评级 BBB。Lumentum 总部在加州，主要研发在美国 + 加拿大，制造分布美国、马来西亚、台湾、中国大陆。<strong>NVIDIA 战略入股是 2026 年最重要的治理事件</strong>——它锁定了 Lumentum 长期产能给 NVIDIA，但也增加了"客户即股东"的双向依赖。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 2：管理层评估 ═══ -->
+<div class="section">
+  <div class="stitle">模块 2 · 管理层评估</div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>CEO · Michael Hurlston（2025 年接任）</h4>
+      <p>2025 年 2 月接任 CEO（前 Synaptics CEO）。在 Synaptics 期间将公司业务从手机延伸到汽车、IoT、AI Edge。Hurlston 上任后立即推动 1.6T 量产 + NVIDIA 战略合作 + 光路交换（OCS）业务——节奏快、决策果断。<strong>2/3 · 强势 CEO，但任期较短需要时间验证</strong>。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B+</div>
+    <div class="bd">
+      <h4>CFO · Wajid Ali</h4>
+      <p>资深半导体行业 CFO。在电话会议中以高度坦诚著称——明确披露"under-shipping 25-30%"承认产能瓶颈，同时给出 2028 年 $30 EPS 的长期路标——这种"坦诚短期 + 大胆长期"的表态是 A 级管理层的标志。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">A</div>
+    <div class="bd">
+      <h4>资本配置历史 · 战略并购组合</h4>
+      <p><strong>1. 2022 年收购 NeoPhotonics ($5.7B)：</strong>当时被市场认为"溢价过高"，但 4 年后 AI 周期到来，NeoPhotonics 的 InP 光器件成为 Lumentum 的"AI 王冠"。<br>
+      <strong>2. 2023 年收购 Cloud Light ($750M)：</strong>直接获得数据中心收发器能力。Cloud Light 业务 +60% 验证整合见效。<br>
+      <strong>3. 2026 年 NVIDIA $2B 战略合作：</strong>Lumentum 用产能换 NVIDIA 长期需求绑定——这是 AI 周期最聪明的"客户锁定"操作。<br>
+      <strong>资本配置：A 级</strong>——但仍要等 2028 EPS $30 兑现验证。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B</div>
+    <div class="bd">
+      <h4>无分红 · 偶尔回购</h4>
+      <p>Lumentum 不分红（半导体公司常态）。回购历史时机不佳——大部分回购集中在 2022-2023 年股价 $40-60 时（现在看是低点），2024 后股价上涨没有大规模回购。<strong>资本配置纪律相对一般，主要因为公司处于高投入扩张期</strong>。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 模块 3：商业模式深度解析 ═══ -->
+<div class="section">
+  <div class="stitle">模块 3 · 商业模式深度解析</div>
+
+  <div class="cmt">
+    <p><span class="hl-t">海图"一句话测试"：</span>"Lumentum 是 AI 数据中心 GPU 集群的'光通信血管'供应商——它做的高功率激光器（200G/lane EML）、VCSEL 和光收发器，是 NVIDIA 等 GPU 互连的物理基础设施。"</p>
+  </div>
+
+  <div class="sgrid" style="margin-top:18px;">
+    <div class="scard brand1">
+      <h4>🔬 Components（光器件）</h4>
+      <div class="srev">$443.7M</div>
+      <div class="ssub">Q2 FY2026 · +68% · 占比 67%</div>
+      <ul>
+        <li><strong>EML 激光器（200G/lane）</strong>——1.6T/3.2T 收发器核心</li>
+        <li><strong>VCSEL</strong>——3D 感测 + 数据中心</li>
+        <li><strong>InP 光芯片</strong>——NeoPhotonics 整合资产</li>
+        <li>毛利率 ~40%（高于平均）</li>
+      </ul>
+    </div>
+    <div class="scard brand2">
+      <h4>📦 Systems（光收发器）</h4>
+      <div class="srev">$221.8M</div>
+      <div class="ssub">Q2 FY2026 · +60% · 占比 33%</div>
+      <ul>
+        <li>800G / 1.6T DR4 OSFP 收发器</li>
+        <li>Cloud Light 整合资产</li>
+        <li>客户：NVIDIA、Microsoft、Meta、Google</li>
+        <li>毛利率 ~30%（系统集成成本）</li>
+      </ul>
+    </div>
+    <div class="scard brand3">
+      <h4>⚡ OCS 光路交换（新业务）</h4>
+      <div class="srev">$10M+ Q2 首破</div>
+      <div class="ssub">Backlog $400M+</div>
+      <ul>
+        <li>用于 AI 集群"scale-up"互连</li>
+        <li>替代部分电交换机</li>
+        <li>2026-2027 主要增长动力</li>
+        <li>客户主要是超大规模数据中心</li>
+      </ul>
+    </div>
+    <div class="scard brand4">
+      <h4>🏭 商用激光器（成熟业务）</h4>
+      <div class="srev">~$80M（估）</div>
+      <div class="ssub">非 AI 业务 · 增速放缓</div>
+      <ul>
+        <li>工业切割、精密加工</li>
+        <li>毛利率 ~35%</li>
+        <li>低增速但稳定</li>
+        <li>占总营收 12%</li>
+      </ul>
+    </div>
+    <div class="scard brand5">
+      <h4>📡 电信光器件（成熟业务）</h4>
+      <div class="srev">~$60M（估）</div>
+      <div class="ssub">非 AI 业务 · 周期性</div>
+      <ul>
+        <li>5G 基站光器件</li>
+        <li>城域网 / 长途传输</li>
+        <li>毛利率 ~25%</li>
+        <li>已被 AI 业务全面盖过</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="cmt" style="margin-top:18px;">
+    <p><strong>单位经济（Unit Economics）：</strong></p>
+    <ul style="margin-left:24px;color:var(--text2);">
+      <li><strong>客户集中度高：</strong>NVIDIA + Microsoft + Meta + Google 合计占营收 60%+。NVIDIA 占比预计 25-30%</li>
+      <li><strong>1.6T 收发器单价 ~$1,500-2,000</strong>，毛利率 ~30%</li>
+      <li><strong>200G/lane EML 单价 ~$200-300</strong>，毛利率 ~50%（核心产品）</li>
+      <li><strong>OCS 单价 $50K-100K/台</strong>，但订单稀少（高单价低数量）</li>
+      <li><strong>研发投入：</strong>FY2026E 研发占营收 ~13%</li>
+      <li><strong>资本密集度：</strong>FY2026E Capex ~$130M = 营收 4.8%（接近半导体均值）</li>
+    </ul>
+
+    <p><strong>产业链定位：</strong>Lumentum 是<span class="hl-t">"AI 算力的物理瓶颈"</span>——GPU 数量爆炸性增长但单卡间互连必须通过光纤实现。Lumentum 的 EML 激光器是这条链路的核心组件，全球只有 3-4 家公司能做（Lumentum、Coherent、Mitsubishi、住友），<strong>Lumentum 占 50-60% 高端份额</strong>。议价能力评分：<strong>5/5 · 卖方市场极强</strong>，体现为 under-shipping 25-30%。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 4：经济护城河分析 ═══ -->
+<div class="section">
+  <div class="stitle">模块 4 · 经济护城河分析（5 维）</div>
+
+  <div class="moat-grid">
+    <div class="moat-card narrow">
+      <h5>1. 网络效应</h5>
+      <span class="moat-rate">弱护城河 ★</span>
+      <p>光器件本质是 B2B 部件销售，无典型网络效应。但客户的"光器件资格认证"是隐性切换成本——一旦认证 Lumentum 的 EML，客户更换其他供应商需重新认证。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>2. 转换成本</h5>
+      <span class="moat-rate">宽护城河 ★★★★</span>
+      <p>NVIDIA + Microsoft + Meta 等大客户对 EML 进行了 6-12 个月的测试和认证。一旦上线，<strong>切换成本极高</strong>——重新认证 + 性能验证 + 集成测试。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>3. 成本优势</h5>
+      <span class="moat-rate">宽护城河 ★★★★</span>
+      <p>InP 光芯片自产 + 垂直整合（从晶圆到模块）。Cloud Light 收购给了 Lumentum 系统集成成本优势。<strong>对手如 Innolight 必须从 Lumentum 采购 EML，再卖 1.6T 收发器</strong>——Lumentum 是上游赢家。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>4. 无形资产（专利 + 产能）</h5>
+      <span class="moat-rate">宽护城河 ★★★★</span>
+      <p>50-60% 高端激光器全球份额；NeoPhotonics 1000+ 项 InP 专利；NVIDIA $2B 投资换来的 4 年产能锁定。<strong>这种"专利 + 产能 + 大客户绑定"三位一体在半导体很罕见</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>5. 有效规模</h5>
+      <span class="moat-rate">中等护城河 ★★★</span>
+      <p>全球高端 EML 市场玩家有限：Lumentum、Coherent、Mitsubishi、住友、II-VI（已并入 Coherent）。市场结构寡头化但玩家仍超 3 家——不是垄断。</p>
+    </div>
+  </div>
+
+  <div class="cmt" style="margin-top:18px;">
+    <p><strong>护城河总评：宽护城河（3.6/5）</strong>——转换成本 + 成本优势 + 无形资产三维"宽"。但有"AI 周期"这个时间附加条件——AI 减速会让护城河价值大幅缩水。</p>
+    <p><strong>护城河趋势：</strong></p>
+    <ul style="margin-left:24px;color:var(--text2);">
+      <li><span class="hl-t">加宽中（短期 1-3 年）：</span>NVIDIA $2B 投资锁定产能、1.6T → 3.2T 升级周期</li>
+      <li><span class="warn-t">中期不确定（3-5 年）：</span>硅光（Silicon Photonics）替代风险、CPO（Co-packaged Optics）变革风险</li>
+      <li><span class="warn-t">长期周期性（5-10 年）：</span>AI capex 周期会有一次大调整，光器件公司会面临 30-50% 营收下滑</li>
+    </ul>
+    <p><strong>10 年后会更宽还是更窄？</strong>——<span class="warn-t">不确定，取决于 AI capex 持续性 + 硅光替代速度</span>。这与腾讯（确定性宽护城河）本质不同——Lumentum 的护城河是"AI 周期的护城河"，不是"永久结构性护城河"。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 5：财务深度分析 ═══ -->
+<div class="section">
+  <div class="stitle">模块 5 · 财务深度分析</div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:18px 0 12px">5.1 利润表 — 5 季度趋势</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>项目（USD M）</th><th>Q2 FY25</th><th>Q3 FY25</th><th>Q4 FY25</th><th>Q1 FY26</th><th>Q2 FY26</th></tr></thead>
+      <tbody>
+        <tr><td>营业收入</td><td>402</td><td>425</td><td>481</td><td>534</td><td><strong>665.5</strong></td></tr>
+        <tr><td>YoY%</td><td>+5%</td><td>+15%</td><td>+30%</td><td>+47%</td><td><strong>+65.5%</strong></td></tr>
+        <tr><td>QoQ%</td><td>—</td><td>+6%</td><td>+13%</td><td>+11%</td><td><strong>+25%</strong></td></tr>
+        <tr><td>Non-GAAP 毛利率</td><td>32%</td><td>34%</td><td>35%</td><td>36%</td><td><strong>37%</strong></td></tr>
+        <tr><td>Non-GAAP OPM</td><td>10%</td><td>14%</td><td>18%</td><td>22%</td><td><strong>25%</strong></td></tr>
+        <tr class="hl"><td>Non-GAAP EPS</td><td>$0.42</td><td>$0.78</td><td>$1.10</td><td>$1.20</td><td><strong>$1.67</strong></td></tr>
+        <tr><td>YoY% (EPS)</td><td>+24%</td><td>+95%</td><td>+157%</td><td>+200%</td><td><strong>+298%</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:12px;color:var(--text3);margin-top:8px;line-height:1.6">注：Lumentum 财年截至 6 月。Q2 FY26 = 2025 年 10-12 月。<strong>5 季度 EPS 从 $0.42 → $1.67（4 倍增长）</strong>是典型的"AI 加速器"图谱——但也意味着比较基数将快速上升，2027 之后增速会下台阶。</p>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">5.2 关键财务比率（5 财年趋势）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>比率</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th><th>FY2026E</th></tr></thead>
+      <tbody>
+        <tr><td>营收（USD M）</td><td>1,711</td><td>1,766</td><td>1,359</td><td>1,645</td><td><strong>~2,700</strong></td></tr>
+        <tr><td>YoY%</td><td>+11%</td><td>+3%</td><td>-23%</td><td>+21%</td><td><strong>+64%</strong></td></tr>
+        <tr><td>Non-GAAP 毛利率</td><td>49%</td><td>43%</td><td>30%</td><td>33%</td><td><strong>~37%</strong></td></tr>
+        <tr><td>Non-GAAP OPM</td><td>30%</td><td>22%</td><td>5%</td><td>13%</td><td><strong>~25%</strong></td></tr>
+        <tr><td>Non-GAAP EPS</td><td>$5.36</td><td>$3.20</td><td>$0.40</td><td>$2.50</td><td><strong>~$7.50</strong></td></tr>
+        <tr><td>ROE</td><td>15%</td><td>9%</td><td>-2%</td><td>5%</td><td><strong>~15%</strong></td></tr>
+        <tr><td>FCF/Revenue</td><td>10%</td><td>7%</td><td>-2%</td><td>8%</td><td><strong>~20%</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:12px;color:var(--text3);margin-top:8px;line-height:1.6">注：FY2024 是底部年份（电信周期低谷 + AI 还没起来），FY2025 开始恢复，<strong>FY2026 是 AI 周期爆发的第一年</strong>。但要注意：FY2022 的 EPS 也曾达到 $5.36 后回落到 $0.40——这<strong>提醒我们光通信是周期性行业</strong>。</p>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">5.3 杜邦分析 — 拆解 ROE</h3>
+  <div class="cmt">
+    <p>FY2026E ROE = 利润率 × 资产周转率 × 财务杠杆 ≈ <strong>20% × 0.55 × 1.4 = 15.4%</strong></p>
+    <ul style="margin-left:24px;color:var(--text2);">
+      <li><strong>净利率 20%：</strong>是历史上最高水平，<strong>反映 AI 周期的红利</strong>——历史均值 5-15%</li>
+      <li><strong>资产周转率 0.55：</strong>制造业典型水平</li>
+      <li><strong>财务杠杆 1.4：</strong>保守。Lumentum 资产负债率适中</li>
+    </ul>
+    <p>结论：FY2026 ROE 15% 看似稳健，但<span class="warn-t">完全由"利润率峰值"驱动</span>。AI 周期一旦反转，ROE 可能跌回 5-8%。</p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">5.4 资产负债健康度</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>项目（USD M）</th><th>2026 Q2 末</th><th>评估</th></tr></thead>
+      <tbody>
+        <tr><td>流动比率</td><td>~2.5x</td><td>充裕</td></tr>
+        <tr><td>有息负债总额</td><td>~$1,750（含可转债）</td><td>偏高</td></tr>
+        <tr><td>有息负债 / 总资产</td><td>~30%</td><td>合理</td></tr>
+        <tr><td>利息覆盖倍数</td><td>~10x</td><td>健康</td></tr>
+        <tr><td>总现金（含短投）</td><td>~$1,121</td><td>充裕</td></tr>
+        <tr class="hl"><td>净负债（≈$0.6B 净负债）</td><td>~$630</td><td>需偿还可转债</td></tr>
+        <tr><td>商誉</td><td>~$1,500</td><td>NeoPhotonics + Cloud Light 收购</td></tr>
+        <tr><td>商誉 / 净资产</td><td>~75%</td><td><span class="warn-t">较高</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:12px;color:var(--text3);margin-top:8px;line-height:1.6">注：商誉占净资产 75% 是<span class="warn-t">明显偏高</span>——主要来自 NeoPhotonics ($5.7B) 收购。如 AI 周期反转，商誉可能减值。</p>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">5.5 现金流质量</h3>
+  <div class="cmt">
+    <ul style="margin-left:24px;color:var(--text2);">
+      <li><strong>FY2025 经营现金流：</strong>~$200M，反映 AI 周期开始起飞</li>
+      <li><strong>FY2026E 经营现金流：</strong>~$675M（同比 +238%）</li>
+      <li><strong>5 年 FCF 轨迹：</strong>FY22 $171M → FY23 $124M → FY24 -$30M → FY25 $130M → FY26E $545M</li>
+      <li><strong>资本开支：</strong>FY2026E ~$130M（产能扩张 + NVIDIA 专属）</li>
+      <li><strong>FCF Yield 仅 0.9%</strong>（按当前 $59.76B 市值）—— <span class="warn-t">极低，反映高估值</span></li>
+    </ul>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">5.6 所有者盈余（FY2026E）</h3>
+  <div class="cmt">
+    <p style="font-family:'Segoe UI',monospace;background:var(--card2);padding:14px;border-radius:6px;margin:12px 0;font-size:13px">
+    所有者盈余 = $540（GAAP 净利） + $90（折旧摊销估） + $80（股权激励估） - $80（维护 Capex） + $20（营运资金）<br>
+    = <strong style="color:var(--green)">$650M（FY2026E）</strong>
+    </p>
+    <p>所有者盈余收益率 = 650 / 59,760 = <span class="warn-t">1.09%</span>（按当前 $59.76B 市值）</p>
+    <p>对比 10 年期美国国债 ~4.3%，Lumentum 的所有者盈余收益率<strong>反而低于无风险利率 320 bps</strong>——这是<span class="warn-t">极端估值偏高的信号</span>。</p>
+    <p>价值投资目标收益率 5-7% → 合理市值 = $650 / 6% = <strong>$10,833M</strong>（!）→ 每股 $152 ← 这显然过于保守</p>
+    <p style="color:var(--text3);font-size:13px"><em>注：所有者盈余收益率法对 Lumentum <strong>不适用</strong>——因为它不能反映 AI 周期下利润快速增长的预期。需要用 DCF 或 PEG 方法。但即便如此，<strong>1.09% 的所有者盈余收益率本身就是明确的"高估"警告</strong>。</em></p>
+  </div>
+</div>
+
+<!-- ═══ 模块 6：电话会分析 ═══ -->
+<div class="section">
+  <div class="stitle">模块 6 · 电话会分析（最新 + 前 2 季）</div>
+
+  <p style="font-size:13px;color:var(--text2);margin-bottom:16px;">主要解读 Q2 FY2026 电话会议（2026-02-04）+ Q1 FY2026（2025-11-05）+ Q4 FY2025（2025-08-13）三期演变。</p>
+
+  <h3 style="font-size:15px;color:var(--text);margin:18px 0 12px">Q2 FY2026 电话会要点</h3>
+
+  <div class="ec-item">
+    <span class="ec-badge ec-bull">利好</span>
+    <div class="ec-body">
+      <div class="ec-title">CEO Hurlston：1.6T 收发器开始量产，订单簿到 2028</div>
+      <div class="ec-note">"Our order book is now booked through 2028 for key AI products."—— 这是 AI 周期最强的信号之一，订单可见度长达 3 年。</div>
+    </div>
+  </div>
+
+  <div class="ec-item">
+    <span class="ec-badge ec-bull">利好</span>
+    <div class="ec-body">
+      <div class="ec-title">NVIDIA $2B 战略投资锁定 EML 产能（3 月公告）</div>
+      <div class="ec-note">这是 NVIDIA $4B 总投资的一半，分给 Lumentum 和 Coherent 各 $2B。换来 Lumentum 给 NVIDIA 长期专属 EML 产能——双方深度绑定。</div>
+    </div>
+  </div>
+
+  <div class="ec-item">
+    <span class="ec-badge ec-bull">利好</span>
+    <div class="ec-body">
+      <div class="ec-title">OCS（光路交换）业务首破 $10M，订单 $400M+</div>
+      <div class="ec-note">这是 Lumentum 的"第二曲线"——AI 集群"scale-up"互连的下一代技术。Backlog $400M+ 意味着未来 2-3 年的高速增长。</div>
+    </div>
+  </div>
+
+  <div class="ec-item">
+    <span class="ec-badge ec-neut">中性</span>
+    <div class="ec-body">
+      <div class="ec-title">明确表示"under-shipping 25-30%"</div>
+      <div class="ec-note">CFO 坦承产能瓶颈——需求远超供给。这是<strong>"卖方市场"的强烈信号</strong>，但也意味着市场份额可能流失给 Coherent / 中国 Innolight。</div>
+    </div>
+  </div>
+
+  <div class="ec-item">
+    <span class="ec-badge ec-bull">利好</span>
+    <div class="ec-body">
+      <div class="ec-title">2028 长期目标：单季 $2B 营收、EPS $30</div>
+      <div class="ec-note">隐含 2028 年全年 ~$8B 营收、EPS $30。当前 FY2026E 营收 $2.7B，意味着未来 2 年<strong>营收要再翻 3 倍</strong>。这是"AI 大牛市"假设下的目标，是否能兑现是核心争议。</div>
+    </div>
+  </div>
+
+  <div class="ec-item">
+    <span class="ec-badge ec-bear">利空</span>
+    <div class="ec-body">
+      <div class="ec-title">CEO 提到"NVIDIA 重申铜互连"对短期需求有压力</div>
+      <div class="ec-note">2026 年 3 月 GTC 大会上，黄仁勋强调铜在 GPU 内部互连的优势——这让光器件公司股价短期回调。<span class="warn-t">短期风险</span>——但长期 GPU 集群间互连仍只能用光纤。</div>
+    </div>
+  </div>
+
+  <div class="ec-item">
+    <span class="ec-badge ec-neut">中性</span>
+    <div class="ec-body">
+      <div class="ec-title">中国 Innolight + Eoptolink 拿下 NVIDIA 60% 800G 增量订单</div>
+      <div class="ec-note">这是<strong>市场份额警示</strong>——Lumentum 在 800G 已被中国厂商抢占大量份额。Lumentum 的策略是上游 EML 卖给 Innolight，让中国对手"用 Lumentum 的零部件做收发器"。</div>
+    </div>
+  </div>
+
+  <div class="ec-item">
+    <span class="ec-badge ec-bull">利好</span>
+    <div class="ec-body">
+      <div class="ec-title">新晶圆厂建设中（位置美国，2027 投产）</div>
+      <div class="ec-note">投资 $500M+ 建立美国新晶圆厂，应对长期 AI 需求 + 美国制造政策红利。NVIDIA $2B 中部分用于此项目。</div>
+    </div>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">指引演变追踪</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>承诺事项</th><th>Q4 FY25</th><th>Q1 FY26</th><th>Q2 FY26</th><th>兑现状况</th></tr></thead>
+      <tbody>
+        <tr><td>Q1 FY26 营收 $480-510M</td><td>"目标"</td><td>"达成 $534M"</td><td>—</td><td><span class="badge up">✓ 超预期</span></td></tr>
+        <tr><td>Q2 FY26 营收 $580-610M</td><td>—</td><td>"目标"</td><td>"达成 $665M"</td><td><span class="badge up">✓ 大幅超预期</span></td></tr>
+        <tr><td>毛利率持续改善</td><td>"34%"</td><td>"36%"</td><td>"37%"</td><td><span class="badge up">✓ 持续改善</span></td></tr>
+        <tr><td>1.6T 量产</td><td>"H1 CY26"</td><td>"按计划"</td><td>"已量产"</td><td><span class="badge up">✓ 兑现</span></td></tr>
+        <tr><td>OCS 业务破 $10M</td><td>"FY26 内"</td><td>"接近"</td><td>"达成"</td><td><span class="badge up">✓ 兑现</span></td></tr>
+        <tr><td>2028 长期 EPS $30</td><td>"长期目标"</td><td>"维持"</td><td>"维持"</td><td><span class="badge nt">● 待验证</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:13px;color:var(--text2);margin-top:12px;line-height:1.7">总评：管理层<strong>5/5 项业务承诺全部兑现</strong>，仅 2028 长期目标待验证。指引信誉极高。</p>
+</div>
+
+<!-- ═══ 模块 7：多模型估值 ═══ -->
+<div class="section">
+  <div class="stitle">模块 7 · 多模型估值（8 种方法交叉验证）</div>
+
+  <p style="font-size:13px;color:var(--text2);margin-bottom:16px;">所有估值<strong>独立推导</strong>，不锚定当前股价 $836.92。基于 Q2 FY2026 实际 + Q3 FY2026 指引 + 2028 长期目标。</p>
+
+  <h3 style="font-size:15px;color:var(--text);margin:18px 0 12px">7.1 相对估值（同行 + 历史分位）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>指标</th><th>LITE</th><th>COHR</th><th>FN</th><th>NVDA</th><th>半导体均值</th></tr></thead>
+      <tbody>
+        <tr><td>P/E (TTM)</td><td>~172x</td><td>~80x</td><td>~50x</td><td>~55x</td><td>~30x</td></tr>
+        <tr><td>P/E (Forward FY26E)</td><td>~112x</td><td>~50x</td><td>~32x</td><td>~38x</td><td>~25x</td></tr>
+        <tr><td>P/E (Forward FY27E)</td><td>~64x</td><td>~38x</td><td>~28x</td><td>~32x</td><td>~22x</td></tr>
+        <tr><td>P/S (TTM)</td><td>~28x</td><td>~9x</td><td>~6x</td><td>~22x</td><td>~6x</td></tr>
+        <tr><td>P/B</td><td>~28x</td><td>~7x</td><td>~5x</td><td>~52x</td><td>~5x</td></tr>
+        <tr><td>EV/EBITDA</td><td>~80x</td><td>~30x</td><td>~22x</td><td>~40x</td><td>~18x</td></tr>
+        <tr><td>FCF Yield</td><td>0.9%</td><td>3%</td><td>4%</td><td>1.5%</td><td>4%</td></tr>
+        <tr><td>5 年 EPS CAGR 预期</td><td>+50%（高基数）</td><td>+30%</td><td>+25%</td><td>+30%</td><td>+15%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:13px;color:var(--text2);margin-top:12px;line-height:1.7"><strong>结论：</strong>LITE 估值在所有维度都<span class="warn-t">显著高于同行</span>。即使 Forward FY27 P/E 64x 也比 NVDA 32x 贵一倍。<span class="warn-t">5 年历史分位 ~99%（即过去 5 年中只有 1% 的时间比现在贵）</span>。<strong>合理 P/E（按 FY27E）：35-45x → 对应 $455-585</strong>。</p>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">7.1.1 P/E 多档透视表（半导体周期股必含）</h3>
+  <p style="font-size:13px;color:var(--text2);margin-bottom:14px;">Lumentum 是典型的半导体周期股，5 季度净利从 $0.42 涨到 $1.67（4 倍），单一 P/E 误导性极强。多档展示：</p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>计算口径</th><th>对应净利/EPS</th><th>P/E</th><th>可信度</th><th>解读</th></tr></thead>
+      <tbody>
+        <tr><td>TTM GAAP（最近 4 季）</td><td>EPS ~$4.87</td><td>~172x</td><td>低</td><td>含 FY24 低谷季度，严重低估</td></tr>
+        <tr><td>TTM Non-GAAP</td><td>EPS ~$5.20</td><td>~161x</td><td>低</td><td>同上</td></tr>
+        <tr><td>H2 FY2026 年化（Q1+Q2 × 2）</td><td>EPS ~$5.74</td><td>~146x</td><td>中</td><td>但 Q1 是低基期</td></tr>
+        <tr class="hl"><td><strong>Q2 FY26 单季年化</strong></td><td>EPS ~$6.68</td><td><strong>~125x</strong></td><td><strong>中高</strong></td><td><strong>最近一季外推</strong></td></tr>
+        <tr class="hl"><td><strong>Q3 FY26 指引中点年化</strong></td><td>EPS ~$9.00</td><td><strong>~93x</strong></td><td><strong>中高</strong></td><td><strong>未来一季已知数据</strong></td></tr>
+        <tr><td>Forward FY2026E（共识）</td><td>EPS ~$7.50</td><td>~112x</td><td>中</td><td>共识下半年加速</td></tr>
+        <tr class="hl"><td><strong>Forward FY2027E（共识）</strong></td><td><strong>EPS ~$13</strong></td><td><strong>~64x</strong></td><td><strong>中高</strong></td><td><strong>5 年内唯一支持高估值的口径</strong></td></tr>
+        <tr><td>2028 公司目标 EPS</td><td>$30</td><td>~28x</td><td>中（管理层目标）</td><td>如果兑现则估值合理</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:13px;color:var(--text2);margin-top:12px;line-height:1.7;">
+    <strong>关键洞察：</strong>口径范围 28x（2028 目标）至 172x（TTM）。<span class="warn-t">市场实际定价隐含"2028 EPS $30 几乎确定兑现"</span>——这种过度乐观需要警惕。如果 2028 EPS 只到 $20（仍是高速增长），合理 P/E 30x → 公允价 $600。
+  </p>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">7.2 DCF 三情景估值</h3>
+  <div class="dcf-note" style="margin-bottom:18px">
+    <strong>关键假设：</strong>WACC 11.0%（无风险利率 4.3% + ERP 6.5% × β 1.05）；终值永续 3.5%；FY2026E FCF $545M。
+  </div>
+
+  <div class="pgrid">
+    <div class="pbox">
+      <div class="pl">悲观情景（25%）</div>
+      <div class="pv pc">$400</div>
+      <div class="pn">营收 5 年 CAGR 15%（AI 减速）<br>OPM 收窄至 22%<br>2028 EPS 仅 $18</div>
+    </div>
+    <div class="pbox">
+      <div class="pl">基准情景（50%）</div>
+      <div class="pv pf">$700</div>
+      <div class="pn">营收 5 年 CAGR 28%（AI 持续）<br>OPM 稳定 28%<br>2028 EPS $25</div>
+    </div>
+    <div class="pbox">
+      <div class="pl">乐观情景（25%）</div>
+      <div class="pv ps">$1,100</div>
+      <div class="pn">营收 5 年 CAGR 38%（AI 超预期）<br>OPM 提升至 32%<br>2028 EPS $35（超管理层目标）</div>
+    </div>
+  </div>
+
+  <p style="font-size:13px;color:var(--text2);line-height:1.7"><strong>概率加权 DCF 公允价值 = 400×25% + 700×50% + 1,100×25% = $725</strong></p>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">7.3 所有者盈余收益率</h3>
+  <div class="cmt">
+    <p>FY2026E 所有者盈余 ≈ $650M / 当前市值 $59,760M = <span class="warn-t">1.09%</span></p>
+    <p>对比 10 年期美国国债 4.3%，<strong>所有者盈余收益率反而低于无风险利率 320 bps</strong>——这是<span class="warn-t">极端高估的信号</span>。</p>
+    <p>合理收益率（高增长公司）3% → 合理市值 = 650/0.03 = $21.7B → 每股 <strong style="color:var(--red)">$304/股</strong></p>
+    <p style="color:var(--text3);font-size:13px"><em>注：所有者盈余收益率法对周期顶点的高增长股<strong>结果偏保守</strong>，但 1.09% 的当前收益率本身就是明确的过热信号。</em></p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">7.4 PEG 比率</h3>
+  <div class="cmt">
+    <p>当前 Forward P/E (FY27) = 64x · 5 年 EPS CAGR 共识 = 50% → PEG = <strong>1.28</strong></p>
+    <p>对于高增长半导体股，公允 PEG = 1.0-1.5。<strong>PEG 1.28 在合理上限</strong>——但前提是 EPS CAGR 50% 必须兑现。</p>
+    <p>合理 P/E (PEG = 1.0) = 50x → 公允价 = 50 × $13 = <strong style="color:var(--green)">$650/股</strong></p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">7.5 DDM 股利折现</h3>
+  <div class="cmt">
+    <p>Lumentum 不分红（半导体公司常态）→ <strong>DDM 不适用</strong>。</p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">7.6 SOTP 分部加总</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>业务板块</th><th>FY26E 营收</th><th>FY26E 经营利润</th><th>合理倍数</th><th>价值（$M）</th></tr></thead>
+      <tbody>
+        <tr><td>Components（AI 高端激光）</td><td>$1,800M</td><td>$540</td><td>15x P/E（高增长）</td><td>$8,100</td></tr>
+        <tr><td>Systems（数据中心收发器）</td><td>$700M</td><td>$140</td><td>12x P/E</td><td>$1,680</td></tr>
+        <tr><td>OCS（新业务）</td><td>$50M（早期）</td><td>~$0</td><td>5x P/S（option value）</td><td>$250</td></tr>
+        <tr><td>商用激光器（成熟）</td><td>$80M</td><td>$28</td><td>10x P/E</td><td>$280</td></tr>
+        <tr><td>电信光器件（成熟）</td><td>$70M</td><td>$10</td><td>8x P/E</td><td>$80</td></tr>
+        <tr class="hl"><td>核心运营业务合计</td><td>$2,700M</td><td>~$718</td><td>~14.5x</td><td>$10,390</td></tr>
+        <tr><td>+ 净现金（净 -$630）</td><td>—</td><td>—</td><td>1.0x</td><td>-$630</td></tr>
+        <tr class="hl"><td><strong>SOTP 公允价值</strong></td><td>—</td><td>—</td><td>—</td><td><strong>$9,760M / 股 $137</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:13px;color:var(--text2);margin-top:12px;line-height:1.7"><strong>SOTP 极保守结果 $137/股</strong>——按当前盈利能力 + 半导体行业平均倍数估算。这与市场价 $836 相差 6 倍——说明<span class="warn-t">市场已 price in 大量未来增长</span>。如果按 2028 EPS 兑现重算，SOTP 可升至 $700-800。</p>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">7.7 反向 DCF — 当前价格隐含什么？</h3>
+  <div class="cmt">
+    <p>当前价 $836 × 71.4M 股 = $59.76B 市值</p>
+    <p>FY2026E FCF $545M → 反向 DCF：<strong>市场隐含 5 年 FCF CAGR 35%+，10 年永续 8%</strong></p>
+    <p>翻译：市场假设 Lumentum 在 AI 周期中<strong>持续 5 年 35% 增长，10 年都不进入衰退</strong>。</p>
+    <p><strong>结论：</strong>这种假设要求 NVIDIA + AI 数据中心 capex 在未来 5 年持续高速增长 + Lumentum 维持高市占。<span class="warn-t">是相当激进的假设</span>——历史上半导体周期股从未连续 5 年高速增长。</p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">7.8 估值方法汇总</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>估值方法</th><th>公允价值（USD）</th><th>权重</th><th>适用度</th></tr></thead>
+      <tbody>
+        <tr><td>1. 相对估值（P/E 中位）</td><td>$455-585</td><td>15%</td><td>★★★</td></tr>
+        <tr class="hl"><td><strong>2. DCF（概率加权）</strong></td><td><strong>$725</strong></td><td><strong>30%</strong></td><td>★★★★★</td></tr>
+        <tr><td>3. 所有者盈余收益率</td><td>$304-450</td><td>5%</td><td>★★（周期股不太适用）</td></tr>
+        <tr class="hl"><td><strong>4. PEG 比率</strong></td><td><strong>$650</strong></td><td><strong>20%</strong></td><td>★★★★（高增长股核心）</td></tr>
+        <tr><td>5. DDM</td><td>不适用</td><td>0%</td><td>—</td></tr>
+        <tr><td>6. SOTP（保守）</td><td>$137</td><td>5%</td><td>★★（按当前盈利保守估）</td></tr>
+        <tr class="hl"><td><strong>7. 反向 DCF</strong></td><td><strong>市场隐含 35% CAGR（极端激进）</strong></td><td><strong>20%</strong></td><td>★★★★★</td></tr>
+        <tr><td>8. NAV</td><td>不适用</td><td>0%</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="dcf-note" style="margin-top:20px">
+    <p><strong>加权公允价值（不含 DDM/NAV，权重归一到 95%）：</strong></p>
+    <p>= (520×15% + 725×30% + 380×5% + 650×20% + 137×5% + 600×20%) ÷ 95% （反向 DCF 隐含合理价 ~$600）</p>
+    <p>= (78 + 217.5 + 19 + 130 + 6.85 + 120) ÷ 0.95</p>
+    <p>= 571.35 ÷ 0.95 ≈ <strong style="color:var(--gold);font-size:18px">$601/股</strong>（保守）</p>
+    <p><strong>估值中位数（5 种主要方法）：</strong>137, 380, 520, 650, 725 → 中位 = <strong>$520/股</strong></p>
+    <p>当前股价 $836.92 → 距加权公允 <strong style="color:var(--red)">高估 39%</strong>；距中位 $520 高估 <strong style="color:var(--red)">61%</strong>。<span class="warn-t">没有任何安全边际。</span></p>
+    <p style="font-size:12px;color:var(--text3);margin-top:8px;"><em>注：估值结论高度依赖 AI 周期持续性。如 2028 EPS $30 真兑现，按 28-30x P/E 合理价为 $840-900——与当前价格基本一致。<strong>这意味着市场已经把"管理层最乐观目标完全兑现"price in 了，没有任何安全垫</strong>。</em></p>
+  </div>
+</div>
+
+<!-- ═══ 模块 8：竞争与行业分析 ═══ -->
+<div class="section">
+  <div class="stitle">模块 8 · 竞争与行业分析</div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:18px 0 12px">8.1 AI 光通信行业格局</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>业务领域</th><th>主要竞争者</th><th>Lumentum 份额</th><th>第一名</th></tr></thead>
+      <tbody>
+        <tr><td>高端 EML 激光器</td><td>Coherent / Mitsubishi / 住友</td><td><strong>50-60%（领先）</strong></td><td>—</td></tr>
+        <tr><td>VCSEL（数据中心）</td><td>Coherent / 加拿大 II-VI（已并入）</td><td>~40%</td><td>Coherent</td></tr>
+        <tr><td>800G 收发器</td><td>Innolight / Eoptolink / Coherent</td><td>~15%</td><td>Innolight ~30%</td></tr>
+        <tr><td>1.6T 收发器</td><td>Coherent / Innolight</td><td>领先（早期）</td><td>—</td></tr>
+        <tr><td>OCS 光路交换</td><td>Coherent / Lightmatter / startup</td><td><strong>领先（早期）</strong></td><td>—</td></tr>
+        <tr><td>商用激光器</td><td>nLight / Coherent / IPG</td><td>~15%</td><td>IPG/Coherent</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">8.2 直接竞争者财务对比</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>公司</th><th>市值 ($B)</th><th>FY26E 营收</th><th>YoY%</th><th>OPM</th><th>P/E (FY27E)</th><th>YTD 2026</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td><strong>Lumentum (LITE)</strong></td><td><strong>59.76</strong></td><td><strong>$2.7B</strong></td><td><strong>+64%</strong></td><td><strong>25%</strong></td><td><strong>64x</strong></td><td><strong>+92%</strong></td></tr>
+        <tr><td>Coherent (COHR)</td><td>50.0</td><td>~$6.0B</td><td>+25%</td><td>15%</td><td>38x</td><td>+54%</td></tr>
+        <tr><td>Fabrinet (FN)</td><td>15.0</td><td>~$3.5B</td><td>+25%</td><td>10%</td><td>28x</td><td>+38%</td></tr>
+        <tr><td>nLight (LASR)</td><td>2.5</td><td>~$220M</td><td>+15%</td><td>5%</td><td>40x</td><td>+22%</td></tr>
+        <tr><td>Ciena (CIEN)</td><td>15.0</td><td>~$5.0B</td><td>+15%</td><td>10%</td><td>22x</td><td>+18%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:13px;color:var(--text2);margin-top:12px;line-height:1.7"><strong>关键观察：</strong>(1) LITE 增速最高（+64%），是 COHR/FN 的 2.5 倍；(2) LITE 估值最贵（64x vs COHR 38x）；(3) <span class="warn-t">市场对 LITE 的"NVIDIA 主供应商"叙事给了高溢价</span>，但 COHR 也有 NVIDIA $2B 投资，估值差距过大。</p>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">8.3 波特五力分析</h3>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">供应商议价力</div><div class="kpi-v">中 (3/5)</div><span class="badge nt">●</span><div style="font-size:12px;color:var(--text3);margin-top:4px">InP 晶圆供应商有限</div></div>
+    <div class="kpi"><div class="kpi-l">买方议价力</div><div class="kpi-v">中 (3/5)</div><span class="badge nt">●</span><div style="font-size:12px;color:var(--text3);margin-top:4px">客户集中（NVIDIA + 4 大 hyperscaler）</div></div>
+    <div class="kpi"><div class="kpi-l">替代品威胁</div><div class="kpi-v">中高 (4/5)</div><span class="badge dn">▲</span><div style="font-size:12px;color:var(--text3);margin-top:4px">硅光 + CPO 长期威胁</div></div>
+    <div class="kpi"><div class="kpi-l">新进入者威胁</div><div class="kpi-v">弱 (2/5)</div><span class="badge up">▼</span><div style="font-size:12px;color:var(--text3);margin-top:4px">高资本密集 + 专利壁垒</div></div>
+    <div class="kpi"><div class="kpi-l">行业内竞争</div><div class="kpi-v">高 (4/5)</div><span class="badge dn">▲</span><div style="font-size:12px;color:var(--text3);margin-top:4px">Coherent 全产品线竞争 + 中国厂商</div></div>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">8.4 颠覆风险评估</h3>
+  <div class="cmt">
+    <ul style="margin-left:24px;color:var(--text2);">
+      <li><strong>硅光（Silicon Photonics）替代（高度风险）：</strong>Intel、台积电、各家 CPO（Co-packaged Optics）方案如成熟，传统 Pluggable 收发器需求会大幅下降</li>
+      <li><strong>NVIDIA 转向铜互连（中度风险）：</strong>2026 年 3 月 GTC 强调铜在 GPU 内部的优势，但集群间互连仍只能用光纤</li>
+      <li><strong>中国国产替代（中度风险）：</strong>Innolight + Eoptolink 已在 800G 拿下 60% NVIDIA 增量份额，向 1.6T 渗透时 LITE 份额可能继续流失</li>
+      <li><strong>AI capex 周期反转（高度风险）：</strong>历史上半导体周期 12-24 个月会有一次重大调整，当前 AI capex 已持续 24+ 个月</li>
+    </ul>
+    <p style="margin-top:12px"><strong>差异化优势：</strong>Lumentum 的差异化是"<span class="hl-t">高端 EML 激光器 50-60% 全球份额 + NeoPhotonics 1000+ InP 专利 + NVIDIA $2B 长期绑定</span>"。但<strong>所有这些优势都建立在 AI 数据中心 capex 持续增长这一假设上</strong>。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 9：技术面 ═══ -->
+<div class="section">
+  <div class="stitle">模块 9 · 技术面与 K 线分析（次要参考）</div>
+  <p style="font-size:13px;color:var(--text2);margin-bottom:16px;"><em>技术面次要于基本面。但对周期股，技术面的"过热"信号有参考价值。</em></p>
+
+  <h3 style="font-size:15px;color:var(--text);margin:18px 0 12px">9.1 趋势与均线（截至 2026-04-28）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>指标</th><th>数值</th><th>当前价相对位置</th><th>信号</th></tr></thead>
+      <tbody>
+        <tr><td>当前股价</td><td>$836.92</td><td>—</td><td>—</td></tr>
+        <tr><td>MA20</td><td>~$800</td><td>+4.6%</td><td>多头</td></tr>
+        <tr><td>MA60</td><td>$444.46</td><td>+88%</td><td>极度多头</td></tr>
+        <tr><td>MA200</td><td>$234.33</td><td>+257%</td><td><span class="warn-t">远超合理范围</span></td></tr>
+        <tr><td>52 周高点</td><td>~$920</td><td>-9%</td><td>距高点近 10%</td></tr>
+        <tr><td>52 周低点</td><td>$60</td><td>+1295%</td><td>已涨 13 倍</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">9.2 关键支撑与阻力位</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>类型</th><th>价位（USD）</th><th>性质</th></tr></thead>
+      <tbody>
+        <tr><td>强阻力</td><td>$920</td><td>52 周高点</td></tr>
+        <tr><td>弱阻力</td><td>$880</td><td>近期密集成交</td></tr>
+        <tr><td>当前价</td><td>$836.92</td><td>—</td></tr>
+        <tr><td>第一支撑</td><td>$700</td><td>心理整数 + 1 月低点</td></tr>
+        <tr><td>第二支撑</td><td>$550-600</td><td>2025 年 12 月-2026 年 1 月密集区</td></tr>
+        <tr><td>第三支撑</td><td>$444</td><td>60 日均线（距现价 -47%）</td></tr>
+        <tr><td>极端支撑</td><td>$234</td><td>200 日均线（距现价 -72%）</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">9.3 技术指标</h3>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">RSI(14)</div><div class="kpi-v">~57</div><span class="badge nt">● 中性</span><div style="font-size:12px;color:var(--text3);margin-top:4px">未超买未超卖</div></div>
+    <div class="kpi"><div class="kpi-l">MACD</div><div class="kpi-v up">+54</div><span class="badge up">▲ 多头</span></div>
+    <div class="kpi"><div class="kpi-l">趋势</div><div class="kpi-v up">长期上行</div><span class="badge up">▲ 12 月 +1300%</span></div>
+    <div class="kpi"><div class="kpi-l">距 200 日均线</div><div class="kpi-v dn">+257%</div><span class="badge dn">▲ 极端偏离</span></div>
+    <div class="kpi"><div class="kpi-l">隐含波动率</div><div class="kpi-v">~70%</div><span class="badge nt">● 高</span></div>
+    <div class="kpi"><div class="kpi-l">分析师评级</div><div class="kpi-v up">买入</div><span class="badge up">▲ 但目标价 $760 落后</span></div>
+  </div>
+
+  <div class="cmt" style="margin-top:18px">
+    <p><strong>技术面综合：</strong>趋势仍是<strong>长期上行</strong>，所有均线多头排列。但<span class="warn-t">距 200 日均线 +257% 是极端偏离</span>——历史上类似偏离后通常会出现 30-50% 的回调。</p>
+    <p><strong>建议：</strong>新建仓不在当前价位，等待回调到 $550-700 区间（接近 60 日均线）。已持有 5%+ 仓位的可考虑分批止盈。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 10：增长催化剂 ═══ -->
+<div class="section">
+  <div class="stitle">模块 10 · 增长催化剂与前景展望</div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:18px 0 12px">10.1 行业顺风</h3>
+  <div class="cmt">
+    <ul style="margin-left:24px;color:var(--text2);">
+      <li><strong>NVIDIA Blackwell + Vera Rubin 集群放量</strong>：单 GPU 集群需要 100,000+ 个光收发器</li>
+      <li><strong>1.6T → 3.2T 升级周期</strong>：未来 2 年的核心增长动力</li>
+      <li><strong>OCS 光路交换商业化</strong>：$400M+ 订单 backlog 转化中</li>
+      <li><strong>美国本土制造红利</strong>：CHIPS Act + 关税政策利好美国半导体</li>
+      <li><strong>NVIDIA 长期产能锁定</strong>：$2B 投资换来的稳定订单</li>
+    </ul>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:18px 0 12px">10.2 行业逆风</h3>
+  <div class="cmt">
+    <ul style="margin-left:24px;color:var(--text2);">
+      <li><span class="warn-t">硅光（CPO）替代风险</span>：2027-2028 可能商业化</li>
+      <li><span class="warn-t">中国 Innolight/Eoptolink 抢份额</span>：800G 已拿下 60% NVIDIA 增量</li>
+      <li><span class="warn-t">AI capex 周期反转</span>：历史半导体周期 24 个月一次调整</li>
+      <li><span class="warn-t">估值过热</span>：12 月 +1300%、TTM P/E 172x</li>
+    </ul>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:18px 0 12px">10.3 短期催化剂（未来 6 个月）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>事件</th><th>预期日期</th><th>预期影响</th></tr></thead>
+      <tbody>
+        <tr><td>Q3 FY2026 财报</td><td>2026-05-05</td><td><strong>极高</strong> — 是否再次大幅超指引</td></tr>
+        <tr><td>NVIDIA Computex 大会</td><td>2026 年 5 月</td><td>高 — 下一代 GPU 路线图</td></tr>
+        <tr><td>Q4 FY2026 财报</td><td>2026 年 8 月</td><td>高 — 全年总结 + FY2027 指引</td></tr>
+        <tr><td>1.6T 收发器月度出货量</td><td>持续</td><td>中 — 量产爬坡进度</td></tr>
+        <tr><td>NVIDIA 投资细节披露</td><td>2026 年 H1</td><td>中 — 持股比例 + 产能锁定细节</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:18px 0 12px">10.4 长期展望（2030 年的 Lumentum）</h3>
+  <div class="cmt">
+    <p>到 <strong>2030 年</strong>（基准情景）：</p>
+    <ul style="margin-left:24px;color:var(--text2);">
+      <li>营收：$10-12B（CAGR 30%+）</li>
+      <li>EPS：$25-35（CAGR 25%+）</li>
+      <li>FCF：$2-3B</li>
+      <li>市占率：高端 EML 维持 50%+，1.6T → 3.2T 收发器领先</li>
+      <li>市值：$70-100B（按 25-30x P/E）</li>
+    </ul>
+    <p>5 年股价 CAGR 预期：<strong>仅 -3% 至 +5%（基准）</strong>——因为当前价已 price in 大部分增长。乐观情景 +10%/年，悲观情景 -15%/年。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 11：风险矩阵 ═══ -->
+<div class="section">
+  <div class="stitle">模块 11 · 风险矩阵（多维评估）</div>
+
+  <div class="risk-grid">
+    <div class="risk-card r3">
+      <h5>经营风险</h5>
+      <span class="risk-score">3/5 · 中等</span>
+      <p>客户集中度高（NVIDIA + 4 大 hyperscaler 占 60%+）；CEO 任期较短；产能瓶颈 25-30%。</p>
+    </div>
+    <div class="risk-card r3">
+      <h5>财务风险</h5>
+      <span class="risk-score">3/5 · 中等</span>
+      <p>有息负债 $1.75B（含可转债），净负债 -$630M。商誉 $1.5B 占净资产 75%——AI 周期反转可能导致大规模减值。</p>
+    </div>
+    <div class="risk-card r4">
+      <h5>竞争风险</h5>
+      <span class="risk-score">4/5 · 较高</span>
+      <p>Coherent + 中国厂商两面夹击。中国 800G 已拿下 60% NVIDIA 增量份额。1.6T 升级期能否守住份额是关键。</p>
+    </div>
+    <div class="risk-card r3">
+      <h5>监管/政策风险</h5>
+      <span class="risk-score">3/5 · 中等</span>
+      <p>美国出口管制 + 中国反制可能影响中国市场销售（占比 ~15%）。CHIPS Act 红利不确定。</p>
+    </div>
+    <div class="risk-card r5">
+      <h5>宏观/周期风险</h5>
+      <span class="risk-score">5/5 · 极高</span>
+      <p><strong>AI capex 周期反转是最大风险</strong>。历史上半导体公司在周期顶点的回调可达 60-70%。</p>
+    </div>
+    <div class="risk-card r5">
+      <h5>估值风险</h5>
+      <span class="risk-score">5/5 · 极高</span>
+      <p>当前 TTM P/E 172x、Forward FY27 P/E 64x、距 200 日均线 +257%。<strong>无任何安全边际</strong>。</p>
+    </div>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">黑天鹅情景（压力测试）</h3>
+  <div class="cmt">
+    <p><strong>情景 1（概率 15%）：AI capex 周期 2026 H2 反转</strong></p>
+    <p>影响：Lumentum 营收增速从 +65% 降至 -10%。EPS 预期从 $13 降至 $5。股价跌至 $200-250。</p>
+
+    <p style="margin-top:12px"><strong>情景 2（概率 8%）：硅光（CPO）2027 大规模替代 Pluggable 收发器</strong></p>
+    <p>影响：Lumentum Systems 业务腰斩，Components 业务也受影响。股价跌至 $300-400。</p>
+
+    <p style="margin-top:12px"><strong>情景 3（概率 5%）：NVIDIA 大幅减少光器件采购，转向铜互连 + CPO</strong></p>
+    <p>影响：失去最大客户。股价跌至 $250-350。</p>
+
+    <p style="margin-top:12px"><strong>情景 4（概率 3%）：商誉减值 + 核心管理层离职</strong></p>
+    <p>影响：信任危机 + 财务大幅下修。股价跌至 $150-250。</p>
+
+    <p style="margin-top:12px;color:var(--text3)"><em>所有黑天鹅情景下，Lumentum 破产概率几乎为 0——但<strong>股价跌幅可能是 50-70%</strong>。这是高估值股的固有风险。</em></p>
+  </div>
+</div>
+
+<!-- ═══ 海图评分卡 ═══ -->
+<div class="section">
+  <div class="stitle">海图评分卡 · 6 维 A-D + 红旗排查</div>
+  <div class="scorecard">
+    <div class="score-grid">
+      <div class="score-card">
+        <div class="score-letter s-c">C+</div>
+        <div class="score-body">
+          <h4>1. 生意可预测性</h4>
+          <p>半导体周期股 + AI 主题狂热。5 季度 EPS 从 $0.42 → $1.67（4 倍），<strong>波动度极高</strong>。FY24 OPM 仅 5%、FY26E 25%——这种波动反映了行业周期性。</p>
+        </div>
+      </div>
+      <div class="score-card">
+        <div class="score-letter s-bp">B+</div>
+        <div class="score-body">
+          <h4>2. 经济护城河</h4>
+          <p>5 维护城河综合 3.6/5，3 维"宽"（转换成本 + 成本优势 + 无形资产）。但<strong>护城河的耐久性挂在 AI 周期上</strong>——硅光 + CPO 长期替代风险存在。</p>
+        </div>
+      </div>
+      <div class="score-card">
+        <div class="score-letter s-bp">B+</div>
+        <div class="score-body">
+          <h4>3. 管理层质量</h4>
+          <p>新任 CEO Hurlston 上任 1 年内推出 1.6T + NVIDIA 合作 + OCS 突破——执行力 A 级。但<strong>任期较短需要时间验证</strong>。CFO 透明度高（坦承 under-shipping 25-30%）。</p>
+        </div>
+      </div>
+      <div class="score-card">
+        <div class="score-letter s-bm">B-</div>
+        <div class="score-body">
+          <h4>4. 财务质量</h4>
+          <p>FY26E ROE 15% + OPM 25% 反映 AI 周期红利。但<strong>商誉占净资产 75% 偏高</strong>，净负债 -$630M（有息负债 > 现金）。FCF Yield 仅 0.9%（低于无风险利率）。</p>
+        </div>
+      </div>
+      <div class="score-card">
+        <div class="score-letter s-c">C+</div>
+        <div class="score-body">
+          <h4>5. 资本配置纪律</h4>
+          <p>无分红，回购历史时机不佳（多在低位回购但规模有限）。NeoPhotonics + Cloud Light 收购消化良好。<strong>NVIDIA $2B 战略合作是强项</strong>——但等于"卖股权换长期订单"。</p>
+        </div>
+      </div>
+      <div class="score-card">
+        <div class="score-letter s-d">D</div>
+        <div class="score-body">
+          <h4>6. 估值与安全边际</h4>
+          <p>当前 $836.92 vs 加权公允 $601、中位 $520——<strong>高估 39-61%，无安全边际</strong>。FCF Yield 1%、TTM P/E 172x、距 200 日均线 +257%。<span class="warn-t">价值投资视角下完全不应该在此价位买入</span>。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="flag-row">
+      <strong>🚩 红旗排查：警示</strong> · 商誉 $1.5B 占净资产 75% 偏高（NeoPhotonics 收购）；FCF Yield 1% 低于无风险利率；估值极端偏离历史均值。无明显会计问题但<strong>估值过热已构成事实上的红旗</strong>。
+    </div>
+
+    <div style="margin-top:18px;padding:14px 18px;background:rgba(123,143,160,.10);border:1px solid var(--accent2);border-radius:8px;">
+      <strong style="color:var(--accent2);font-size:14px;">综合评级：持有观望（高位审慎）</strong>
+      <p style="font-size:13px;color:var(--text2);margin-top:6px;">6 维中 0 维 A、3 维 B+/B-、2 维 C+、1 维 D。<strong>"伟大公司 + 危险价格" 的典型组合</strong>——业务质量 B+ 不足以支撑 D 级估值。新建仓不建议；已持仓的可分批止盈；等回调到 $560 以下再考虑首仓。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 投资决策 ═══ -->
+<div class="section">
+  <div class="stitle">海图研判 · 投资决策</div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:18px 0 12px;">分批建仓策略（独立估值中位数 $520，加权公允 $601）</h3>
+  <p style="font-size:13px;color:var(--text2);margin-bottom:14px;">
+    使用估值中位数 $520 作为基准（5 种方法排序中位）。<strong>当前价 $836 显著高于中位，新建仓不建议</strong>。
+  </p>
+  <div class="pgrid">
+    <div class="pbox">
+      <div class="pl">首仓（30% 仓位）</div>
+      <div class="pv ps">$416</div>
+      <div class="pn">= 520 × 80%<br>距现价 -50%<br>需大幅回调</div>
+    </div>
+    <div class="pbox">
+      <div class="pl">二仓（35% 仓位）</div>
+      <div class="pv pf">$364</div>
+      <div class="pn">= 520 × 70%<br>距现价 -56%</div>
+    </div>
+    <div class="pbox">
+      <div class="pl">三仓（35% 仓位）</div>
+      <div class="pv pc">$312</div>
+      <div class="pn">= 520 × 60%<br>距现价 -63%<br>极端低位</div>
+    </div>
+  </div>
+  <p style="font-size:13px;color:var(--text2);margin-top:12px;line-height:1.7"><strong>当前价 $836 与首仓 $416 相差一倍——意味着需要等待 50% 以上的回调才进场。</strong>这是"持有观望"评级的核心含义：好公司，但价格不对。</p>
+
+  <h3 style="font-size:15px;color:var(--text);margin:22px 0 12px;">已持仓者：分批止盈（特殊情况）</h3>
+  <p style="font-size:13px;color:var(--text2);margin-bottom:14px;">如果你已经在低位（$60-200）持有 LITE，目前应该考虑分批锁定利润：</p>
+  <div class="pgrid">
+    <div class="pbox"><div class="pl">第一档（已可执行）</div><div class="pv pf">$836（现价）</div><div class="pn">减仓 25%（落袋为安）</div></div>
+    <div class="pbox"><div class="pl">第二档</div><div class="pv pf">$950</div><div class="pn">再减仓 25%<br>52 周高点附近</div></div>
+    <div class="pbox"><div class="pl">第三档</div><div class="pv pf">$1,100</div><div class="pn">再减仓 25%<br>极端乐观情景</div></div>
+  </div>
+  <p style="font-size:13px;color:var(--text2);margin-top:12px;line-height:1.7">最后 25% 作为<strong>"AI 长期持仓"</strong>——但建议不超过组合 1-2%。</p>
+
+  <h3 style="font-size:15px;color:var(--text);margin:22px 0 12px;">12 个月目标价（基准）</h3>
+  <div class="pgrid">
+    <div class="pbox">
+      <div class="pl">悲观（25%）</div>
+      <div class="pv pc">$400</div>
+      <div class="pn">下行 -52%<br>AI 减速 + 周期反转</div>
+    </div>
+    <div class="pbox">
+      <div class="pl">基准（50%）</div>
+      <div class="pv pf">$700</div>
+      <div class="pn">下行 -16%<br>估值合理回归</div>
+    </div>
+    <div class="pbox">
+      <div class="pl">乐观（25%）</div>
+      <div class="pv ps">$1,100</div>
+      <div class="pn">上行 +31%<br>2028 EPS $30 完全兑现</div>
+    </div>
+  </div>
+  <p style="font-size:13px;color:var(--text2);margin-top:12px;line-height:1.7"><strong>概率加权 12 个月目标价 = $725</strong>（下行 -13%）。</p>
+
+  <div style="background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin-top:18px;font-size:13px;color:var(--text2);line-height:1.85;">
+    <strong style="color:var(--text);">仓位与持有：</strong>新建仓不建议占组合任何比例。已持仓者建议<strong>不超过组合 2-3%</strong>（高估值高波动）。<br>
+    <strong style="color:var(--text);">关键监控：</strong>(1) <strong>Q3 FY26 财报（5 月 5 日）</strong>是否再超指引；(2) NVIDIA Blackwell/Vera Rubin 出货节奏；(3) 中国厂商 1.6T 渗透率；(4) 硅光/CPO 商业化进度；(5) AI capex 周期信号。<br>
+    <strong style="color:var(--text);">下次重审：</strong>2026 年 5 月 5 日 Q3 FY2026 财报后立即更新。
+  </div>
+</div>
+
+<!-- ═══ 海图页末长评 ═══ -->
+<div class="section">
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记 · 1080 字</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p class="lead">伟大的公司，未必是伟大的投资。Lumentum 是 AI 时代最锋利的"光引擎供应商"，但当它在 12 个月内涨 1300% 后，问题不是"它好不好"，而是"还剩多少没有 price in"。</p>
+
+      <p>这是一份近乎完美的财报：Q2 营收 +65.5%、EPS 从 $0.42 涨到 $1.67、订单簿到 2028、NVIDIA 直接投资 $2B 锁定产能、200G/lane EML 是 1.6T 收发器的"心跳"。如果你只看基本面，这是一家 A 级公司。但<strong>市场已经给它定价 A++ 级公司</strong>——TTM P/E 172x、Forward FY27 P/E 64x、距 200 日均线偏离 +257%。</p>
+
+      <h4>几个研判要点</h4>
+
+      <p><strong>一、护城河真实但有"AI 周期附加条件"。</strong>Lumentum 的 50-60% 高端 EML 份额、NeoPhotonics 1000+ InP 专利、NVIDIA $2B 投资锁定产能——这些都是真实的护城河。但<strong>所有这些价值都建立在 AI 数据中心 capex 持续高速增长的假设上</strong>。一旦 AI capex 进入调整（半导体周期通常 24 个月一次），Lumentum 的"AI 红利护城河"会快速折价 30-50%。</p>
+
+      <p><strong>二、估值已 price in "管理层最乐观目标完全兑现"。</strong>反向 DCF 显示，当前股价隐含 5 年 FCF CAGR 35%+、10 年永续 8%。换算到 2028 年 EPS，市场假设兑现 $30（管理层目标）几乎是确定事件。<span class="warn-t">但历史上，半导体公司从未连续 5 年保持 35% 增速</span>——这不是 Lumentum 不好，而是这个目标本身极端激进。</p>
+
+      <p><strong>三、FCF Yield 1% 是明确的过热信号。</strong>当一只股票的所有者盈余收益率（1.09%）<strong>低于无风险利率（4.3%）320 个基点</strong>时，按价值投资视角已无安全边际。这意味着即便公司质量极佳，未来 12-24 个月的预期回报也大概率为负——除非业绩超预期幅度大于估值压缩幅度。</p>
+
+      <p><strong>四、中国厂商 + 硅光是两个长期威胁。</strong>Innolight + Eoptolink 已拿下 NVIDIA 800G 增量订单 60%（vs Lumentum + Coherent 的 40%）。1.6T 升级期 Lumentum 是否守得住份额是关键——如果失守，估值会迅速回归 30x P/E。<strong>更长期的硅光/CPO（共封装光学）替代</strong>是 2027-2028 的潜在颠覆者。</p>
+
+      <p><strong>五、12 个月目标价 $725，下行 -13%。</strong>悲观情景 $400（-52%）、基准 $700（-16%）、乐观 $1,100（+31%）。概率加权后，未来 12 个月预期回报 <strong>负值</strong>。这是<span class="warn-t">"持有观望"评级的核心含义</span>——好公司，错价格。</p>
+
+      <h4>海图研判</h4>
+
+      <p><strong>评级：持有观望</strong>（高位审慎）。已持仓者建议<strong>分批止盈</strong>——首档 $836（现价）减仓 25%、$950 再减 25%、$1,100 再减 25%，最后 25% 留作 AI 长期持仓但不超过组合 1-2%。</p>
+
+      <p>新建仓策略：估值中位数 $520，首仓 $416（× 80%）、二仓 $364（× 70%）、三仓 $312（× 60%）。<strong>当前价 $836 与首仓相差一倍</strong>——意味着需要等待 50% 以上的回调才进场。这种回调可能在以下几种情形发生：(1) AI capex 周期反转；(2) NVIDIA 大幅减少采购；(3) 硅光商业化加速；(4) 大盘整体调整。</p>
+
+      <h4>风险提示</h4>
+
+      <p>AI capex 周期反转 / 硅光（CPO）2027 商业化 / NVIDIA 转铜 + CPO / 中国厂商 1.6T 抢份额——任一项都可能让股价跌回 $300-450。但 Lumentum 破产概率几乎为 0——这只是"伟大公司错误价格"的典型案例。</p>
+
+      <p>价值投资视角的核心教训：<strong>市场可以在很长时间内保持非理性</strong>。Lumentum 可能继续涨到 $1,000、$1,200，甚至更高。但<strong>从今天买入到未来 5 年的预期回报，已经透支</strong>。耐心的人会等到下一次周期低点——这是正确的"做空"，不是"做空股票"，而是做空市场情绪。</p>
+
+      <p class="haitu-sign">—— 海图，灯下落笔，明日再观风浪。</p>
+
+      <p class="haitu-disc">⚠️ 免责声明：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，不构成任何投资建议。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div>《海图夜读》 · Lumentum LITE Q2 FY2026 海图研判</div>
+  <div style="margin-top:6px;">数据来源：Lumentum SEC 文件、Q2 FY2026 电话会议、行业研究</div>
+  <div style="margin-top:6px;">价值投资 · 长期主义</div>
+</footer>
+
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  const cur = html.getAttribute('data-theme');
+  html.setAttribute('data-theme', cur === 'dark' ? 'light' : 'dark');
+  localStorage.setItem('theme', html.getAttribute('data-theme'));
+  renderCharts();
+}
+(function() {
+  const t = localStorage.getItem('theme');
+  if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+})();
+
+function gc(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+
+let charts = {};
+function renderCharts() {
+  Object.values(charts).forEach(c => c && c.destroy && c.destroy());
+  charts = {};
+  const txt2 = gc('--text2'), txt3 = gc('--text3'), grid = gc('--chart-grid');
+  const accent = gc('--accent'), accent2 = gc('--accent2'), accent3 = gc('--accent3');
+  const green = gc('--green'), gold = gc('--gold'), rose = gc('--rose'), red = gc('--red');
+
+  Chart.defaults.color = txt2;
+  Chart.defaults.font.family = 'Segoe UI, sans-serif';
+  Chart.defaults.font.size = 11;
+
+  charts.rev = new Chart(document.getElementById('revenueChart'), {
+    type: 'bar',
+    data: { labels: ['Q2 FY25', 'Q3 FY25', 'Q4 FY25', 'Q1 FY26', 'Q2 FY26'],
+      datasets: [{ label: 'Revenue', data: [402, 425, 481, 534, 665.5], backgroundColor: [accent3, gold, accent2, accent, green], borderRadius: 4 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+      scales: { y: { grid: { color: grid }, ticks: { color: txt3 } }, x: { grid: { display: false }, ticks: { color: txt3 } } } }
+  });
+
+  charts.profit = new Chart(document.getElementById('profitChart'), {
+    type: 'line',
+    data: { labels: ['Q2 FY25', 'Q3 FY25', 'Q4 FY25', 'Q1 FY26', 'Q2 FY26'],
+      datasets: [{ label: 'Non-GAAP EPS', data: [0.42, 0.78, 1.10, 1.20, 1.67], borderColor: green, backgroundColor: 'rgba(122,154,122,0.1)', tension: 0.3, fill: true, pointBackgroundColor: green, pointRadius: 5 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+      scales: { y: { grid: { color: grid }, ticks: { color: txt3 } }, x: { grid: { display: false }, ticks: { color: txt3 } } } }
+  });
+
+  charts.seg = new Chart(document.getElementById('segmentChart'), {
+    type: 'doughnut',
+    data: { labels: ['Components（光器件）', 'Systems（光收发器）'],
+      datasets: [{ data: [443.7, 221.8], backgroundColor: [accent, accent3], borderColor: gc('--card'), borderWidth: 2 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { color: txt2, font: { size: 12 } } } } }
+  });
+
+  charts.year = new Chart(document.getElementById('yearChart'), {
+    type: 'bar',
+    data: { labels: ['FY2022', 'FY2023', 'FY2024', 'FY2025', 'FY2026E'],
+      datasets: [{ label: 'Revenue', data: [1711, 1766, 1359, 1645, 2700], backgroundColor: [accent3, gold, red, accent2, green], borderRadius: 4 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+      scales: { y: { grid: { color: grid }, ticks: { color: txt3 } }, x: { grid: { display: false }, ticks: { color: txt3 } } } }
+  });
+
+  buildSankey();
+}
+
+function buildSankey() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const txt = isDark ? '#d4ccc4' : '#4a4340';
+  const cardBg = isDark ? '#2e2a25' : '#ffffff';
+
+  const sankeyData = [{
+    type: 'sankey', orientation: 'h', arrangement: 'snap', valueformat: ',.0f', valuesuffix: ' M',
+    node: {
+      pad: 22, thickness: 22, line: { color: 'transparent', width: 0 },
+      label: ['营收 2,700', '营业成本 1,701', '毛利 999', '销售&管理 200', '研发 124', '经营利润 675', '所得税 135', '净利 540', '非现金调整 +135', '经营现金流 675', '资本开支 130', '自由现金流 545'],
+      color: ['#7b8fa0', '#b87070', '#8a9a8e', '#c09090', '#b9a06a', '#b08d7a', '#b87070', '#7a9a7a', '#7b8fa0', '#b08d7a', '#b87070', '#7a9a7a']
+    },
+    link: {
+      source: [0, 0, 2, 2, 2, 5, 5, 7, 8, 9, 9],
+      target: [1, 2, 3, 4, 5, 6, 7, 9, 9, 10, 11],
+      value:  [1701, 999, 200, 124, 675, 135, 540, 540, 135, 130, 545],
+      color: ['rgba(184,112,112,0.30)', 'rgba(138,154,142,0.45)', 'rgba(192,144,144,0.30)', 'rgba(185,160,106,0.30)', 'rgba(176,141,122,0.45)', 'rgba(184,112,112,0.30)', 'rgba(122,154,122,0.45)', 'rgba(122,154,122,0.40)', 'rgba(123,143,160,0.40)', 'rgba(184,112,112,0.30)', 'rgba(122,154,122,0.50)']
+    }
+  }];
+
+  const layout = { font: { family: 'Segoe UI, sans-serif', size: 11, color: txt }, paper_bgcolor: cardBg, plot_bgcolor: cardBg, margin: { l: 10, r: 10, t: 10, b: 10 } };
+  Plotly.react('sankey', sankeyData, layout, { displayModeBar: false, responsive: true });
+}
+
+document.addEventListener('DOMContentLoaded', renderCharts);
+</script>
+
+</body>
+</html>
