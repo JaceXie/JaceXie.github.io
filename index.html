@@ -218,6 +218,118 @@ body {
 .tag.hold { color: var(--gold); background: rgba(176,141,82,0.13); }
 .tag.sell { color: var(--red); background: rgba(184,112,112,0.13); }
 
+/* ── CALENDAR PANEL ── */
+.calendar-panel {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.cal-header {
+  display: grid;
+  grid-template-columns: 110px 90px 110px 1fr 130px;
+  gap: 14px;
+  padding: 14px 22px;
+  background: var(--bg-alt);
+  border-bottom: 1px solid var(--border);
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-dim);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.cal-row {
+  display: grid;
+  grid-template-columns: 110px 90px 110px 1fr 130px;
+  gap: 14px;
+  padding: 14px 22px;
+  border-bottom: 1px solid var(--border);
+  align-items: center;
+  transition: background 0.2s;
+}
+.cal-row:last-child { border-bottom: none; }
+.cal-row:hover { background: var(--bg-alt); }
+.cal-row.past { opacity: 0.45; }
+.cal-row.today { background: rgba(176,141,82,0.08); }
+.cal-row.today:hover { background: rgba(176,141,82,0.13); }
+.cal-row.upcoming { }
+.cal-date {
+  font-family: 'Segoe UI', monospace;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text);
+}
+.cal-date .day-of-week {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  font-weight: 400;
+  margin-top: 2px;
+}
+.cal-ticker {
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 700;
+  font-size: 0.78rem;
+  color: var(--accent);
+  letter-spacing: 0.5px;
+}
+.cal-type {
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 10px;
+  display: inline-block;
+  text-align: center;
+  letter-spacing: 0.3px;
+}
+.cal-type.earnings { background: rgba(44,64,84,0.10); color: var(--accent); }
+.cal-type.ex-div { background: rgba(176,141,82,0.13); color: var(--gold); }
+.cal-type.record { background: rgba(74,98,128,0.10); color: var(--accent-soft); }
+.cal-type.payment { background: rgba(90,128,104,0.13); color: var(--green); }
+.cal-detail {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+.cal-detail strong { color: var(--text); font-weight: 600; }
+.cal-action {
+  text-align: right;
+}
+.cal-action a {
+  display: inline-block;
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+  padding: 4px 10px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: all 0.2s;
+  letter-spacing: 0.3px;
+}
+.cal-action a:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.cal-empty {
+  padding: 40px;
+  text-align: center;
+  color: var(--text-dim);
+  font-style: italic;
+}
+@media (max-width: 768px) {
+  .cal-header { display: none; }
+  .cal-row {
+    grid-template-columns: 1fr;
+    gap: 6px;
+    padding: 14px 18px;
+  }
+  .cal-action { text-align: left; }
+  .cal-action a { font-size: 0.7rem; }
+}
+
 /* ── EMPTY STATE ── */
 .empty-state {
   text-align: center;
@@ -283,6 +395,20 @@ footer p { margin-bottom: 6px; }
   <section class="section first">
     <div class="section-title">🌙 海图研判 · 按发布时间排序</div>
     <div class="report-grid" id="reportGrid"></div>
+  </section>
+
+  <section class="section">
+    <div class="section-title">🗓 海图日历 · 报告标的关键事件</div>
+    <div class="calendar-panel">
+      <div class="cal-header">
+        <div>日期</div>
+        <div>标的</div>
+        <div>事件</div>
+        <div>说明</div>
+        <div style="text-align:right;">链接</div>
+      </div>
+      <div id="calendarRows"></div>
+    </div>
   </section>
 
   <section class="section">
@@ -391,6 +517,81 @@ function renderReports() {
   `).join('');
 }
 renderReports();
+
+/* ── CALENDAR DATA ── */
+/* 数据来源：各公司投资者关系页 + 雪球 / 共识预期 ; 数据时点 2026-04-29 */
+const calendar = [
+  /* GOOGL */
+  { date: "2026-04-29", ticker: "GOOGL", type: "earnings", typeLabel: "Q1 2026 财报", detail: "Alphabet — <strong>盘后发布</strong>，关注 Cloud +50% 兑现 + Capex 不再上修", xueqiu: "GOOGL" },
+  { date: "2026-06-09", ticker: "GOOGL", type: "ex-div", typeLabel: "除权日", detail: "Alphabet — 季度股息 <strong>$0.21/股</strong>", xueqiu: "GOOGL" },
+  { date: "2026-06-16", ticker: "GOOGL", type: "payment", typeLabel: "派息日", detail: "Alphabet — 季度股息派付 <strong>$0.21/股</strong>", xueqiu: "GOOGL" },
+
+  /* LITE */
+  { date: "2026-05-05", ticker: "LITE", type: "earnings", typeLabel: "Q3 FY2026 财报", detail: "Lumentum — 盘后发布，营收指引 $780-830M(中点 $805M, +85% YoY)", xueqiu: "LITE" },
+
+  /* Tencent 0700 */
+  { date: "2026-05-13", ticker: "00700", type: "earnings", typeLabel: "Q1 2026 财报", detail: "腾讯 — 港股盘后发布，关注游戏 + 广告 + 微信视频号商业化", xueqiu: "00700" },
+  { date: "2026-05-15", ticker: "00700", type: "ex-div", typeLabel: "除权日", detail: "腾讯 — 2025 末期股息 <strong>HKD 5.30/股</strong>", xueqiu: "00700" },
+
+  /* VIPS */
+  { date: "2026-05-19", ticker: "VIPS", type: "earnings", typeLabel: "Q1 2026 财报", detail: "唯品会 — 盘后发布，指引 ¥263-276亿(0-5%)三年来首次正增长", xueqiu: "VIPS" },
+
+  /* PDD */
+  { date: "2026-05-22", ticker: "PDD", type: "earnings", typeLabel: "Q1 2026 财报", detail: "拼多多 — 盘后发布，关注 Temu 欧洲 + 千亿扶持回报期", xueqiu: "PDD" },
+
+  /* Haier 06690 */
+  { date: "2026-06-29", ticker: "06690", type: "ex-div", typeLabel: "除权日", detail: "海尔智家 — 2025 末期股息 <strong>HKD 1.05/股</strong>(每 10 股派 RMB 8.867)", xueqiu: "06690" },
+  { date: "2026-07-24", ticker: "06690", type: "payment", typeLabel: "派息日", detail: "海尔智家 — 2025 末期股息派付 <strong>HKD 1.05/股</strong>", xueqiu: "06690" },
+  { date: "2026-08-29", ticker: "06690", type: "earnings", typeLabel: "H1 2026 中报", detail: "海尔智家 — 港股盘后发布(估)，关注北美关税缓解 + 中国份额回升", xueqiu: "06690" },
+
+  /* VIPS 2025 已派 - 历史参考 */
+  { date: "2026-04-24", ticker: "VIPS", type: "payment", typeLabel: "派息日(已发)", detail: "唯品会 — 2025 年度股息 <strong>$0.62/ADS</strong>(已派付，4.2% 收益率)", xueqiu: "VIPS" },
+  { date: "2026-04-10", ticker: "VIPS", type: "ex-div", typeLabel: "除权日(已过)", detail: "唯品会 — 2025 年度股息除权日", xueqiu: "VIPS" },
+];
+
+function renderCalendar() {
+  const container = document.getElementById('calendarRows');
+  if (!calendar.length) {
+    container.innerHTML = '<div class="cal-empty">尚无即将到来的事件</div>';
+    return;
+  }
+
+  // 按日期排序：未来 → 今天 → 过去
+  const today = new Date('2026-04-29');
+  today.setHours(0, 0, 0, 0);
+
+  calendar.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+  // Filter: 显示过去 30 天 + 未来全部
+  const filtered = calendar.filter(e => {
+    const d = new Date(e.date);
+    const diffDays = (d - today) / (1000 * 60 * 60 * 24);
+    return diffDays >= -30; // 显示过去 30 天 + 未来
+  });
+
+  const dayNames = ['周日','周一','周二','周三','周四','周五','周六'];
+
+  container.innerHTML = filtered.map(e => {
+    const d = new Date(e.date);
+    const isPast = d < today;
+    const isToday = d.getTime() === today.getTime();
+    const cls = isPast ? 'past' : (isToday ? 'today' : 'upcoming');
+    const dow = dayNames[d.getDay()];
+    const todayLabel = isToday ? ' <span style="color:var(--accent-gold);font-weight:700;">· 今天</span>' : '';
+    return `
+      <div class="cal-row ${cls}">
+        <div class="cal-date">${e.date}<span class="day-of-week">${dow}${todayLabel}</span></div>
+        <div class="cal-ticker">${e.ticker}</div>
+        <div><span class="cal-type ${e.type}">${e.typeLabel}</span></div>
+        <div class="cal-detail">${e.detail}</div>
+        <div class="cal-action">
+          <a href="https://xueqiu.com/S/${e.xueqiu}" target="_blank" rel="noopener">雪球 →</a>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+renderCalendar();
 
 /* ── THEME TOGGLE ── */
 function toggleTheme() {
