@@ -22,8 +22,27 @@ export function buildCalendar(fetchResults, todayStr) {
     // displayName 优先（中文名），fallback 到 xueqiuCode
     const displayName = t.displayName || t.xueqiuCode;
 
-    // ── 1. 下次财报 (earnings) ──
-    if (data.nextEarningsDate && data.nextEarningsDate >= sevenAgoStr) {
+    // ── 检测 yfinance 过时数据：nextEarningsDate 比 lastEarningsDate 晚 < 30 天 ──
+    // 真正的下次财报应该至少 60 天后。如果 yfinance 的 next 紧贴 last（差 < 30 天），
+    // 它一定是"陈旧预测"——已发布但 next 字段未更新。此时优先信任 lastEarningsDate，
+    // 跳过 nextEarningsDate 避免重复显示。
+    const nextStaleSuspect =
+      data.nextEarningsDate &&
+      data.lastEarningsDate &&
+      daysBetween(data.lastEarningsDate, data.nextEarningsDate) < 30;
+
+    if (nextStaleSuspect) {
+      logger.info(
+        `[${t.ticker}] yfinance nextEarningsDate=${data.nextEarningsDate} 距 lastEarningsDate=${data.lastEarningsDate} 仅 ${daysBetween(data.lastEarningsDate, data.nextEarningsDate)} 天，判定为过时预测，跳过`
+      );
+    }
+
+    // ── 1. 下次财报 (earnings) — 排除过时预测后才加入 ──
+    if (
+      data.nextEarningsDate &&
+      data.nextEarningsDate >= sevenAgoStr &&
+      !nextStaleSuspect
+    ) {
       const isPast = data.nextEarningsDate < todayStr;
       const isToday = data.nextEarningsDate === todayStr;
       events.push({
@@ -106,6 +125,13 @@ export function buildCalendar(fetchResults, todayStr) {
 
   logger.info(`Built calendar with ${dedup.length} events (window: ${sevenAgoStr} → future)`);
   return dedup;
+}
+
+function daysBetween(dateA, dateB) {
+  // 返回 |dateB - dateA| 的天数（绝对值）
+  const a = new Date(dateA);
+  const b = new Date(dateB);
+  return Math.abs(Math.round((b - a) / (1000 * 60 * 60 * 24)));
 }
 
 function getCompanyShortName(t) {
