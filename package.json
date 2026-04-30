@@ -1,0 +1,21 @@
+{
+  "name": "haitu-daily-bot",
+  "version": "1.0.0",
+  "description": "海图夜读 · GitHub Pages 自动化维护 — 每日更新日历 + 检测新财报",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "update": "node src/daily-update.js",
+    "update:dry": "DRY_RUN=1 node src/daily-update.js",
+    "bootstrap": "node src/scripts/bootstrap-tickers.js",
+    "pm2:start": "pm2 start ecosystem.config.cjs",
+    "pm2:stop": "pm2 stop haitu-daily-update",
+    "pm2:restart": "pm2 restart haitu-daily-update",
+    "pm2:logs": "pm2 logs haitu-daily-update",
+    "pm2:status": "pm2 list"
+  },
+  "dependencies": {}
+}
