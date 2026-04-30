@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-05-01，基于中海油 FY2025 年报（2026-03-27 发布）+ Q1 2026 业绩（2026-04-28 发布） -->
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CNOOC 中海油 0883 — FY2025 + Q1 2026 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root {
+  --bg: #f5f0eb; --bg2: #ece6df; --card: #ffffff; --card2: #f8f5f1; --border: #d9d0c7;
+  --text: #4a4340; --text2: #7a706a; --text3: #a89f98;
+  --accent: #8a9a8e; --accent2: #7b8fa0; --accent3: #b08d7a;
+  --rose: #c09090; --gold: #b9a06a; --red: #b87070; --green: #7a9a7a;
+  --shadow: rgba(0,0,0,0.06); --chart-grid: #e5ddd5;
+}
+[data-theme="dark"] {
+  --bg: #1e1c1a; --bg2: #28251f; --card: #2e2a25; --card2: #363230; --border: #4a4540;
+  --text: #d4ccc4; --text2: #a09890; --text3: #706860;
+  --accent: #8a9a8e; --accent2: #8fabbf; --accent3: #c9a48e;
+  --rose: #c09090; --gold: #c9b07a; --red: #c08080; --green: #8aaa8a;
+  --shadow: rgba(0,0,0,0.3); --chart-grid: #3e3a35;
+}
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Georgia','Noto Serif SC','PingFang SC',serif; line-height: 1.75; font-size: 14.5px; transition: background .35s, color .35s; }
+a { color: var(--accent2); text-decoration: none; }
+.theme-bar { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); }
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; text-decoration: none; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+.toggle-switch { position: relative; width: 44px; height: 22px; background: var(--border); border-radius: 11px; cursor: pointer; transition: background .3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: var(--card); border-radius: 50%; transition: transform .3s; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+.hero { padding: 48px 24px 36px; text-align: center; border-bottom: 1px solid var(--border); }
+.hero-tag { display: inline-block; font-family: 'Segoe UI',sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 3px 14px; border-radius: 20px; margin-bottom: 18px; }
+.hero h1 { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.pill { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: 'Segoe UI',sans-serif; font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow); }
+.pill strong { color: var(--text); }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle { font-size: 18px; font-weight: 700; color: var(--accent3); margin-bottom: 20px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+.stitle::before { content: ''; display: block; width: 4px; height: 20px; background: var(--accent3); border-radius: 2px; }
+.haitu-quip { display: flex; align-items: center; gap: 18px; background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--green); border-radius: 12px; padding: 18px 24px; margin: 24px 0; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-quote { flex: 1; }
+.haitu-portrait { font-size: 15px; line-height: 1.65; color: var(--text); margin-bottom: 6px; font-weight: 600; }
+.haitu-rating-line { font-size: 13px; color: var(--text2); font-family: 'Segoe UI',sans-serif; }
+.rating-badge { display: inline-block; padding: 2px 12px; border-radius: 12px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; margin-left: 4px; }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+.rating-cond-buy { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-hold { background: rgba(123,143,160,.18); color: var(--accent2); }
+.haitu-essay { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 28px 32px; margin: 24px 0 20px; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-essay-header { display: flex; align-items: center; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.haitu-avatar-sm { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); background: var(--red); box-shadow: 0 2px 8px rgba(184,112,112,0.2); }
+.haitu-name-lg { font-family: 'Georgia','Noto Serif SC',serif; font-size: 28px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 4px; }
+.haitu-essay-tag { font-family: 'Segoe UI',sans-serif; font-size: 12px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; }
+.haitu-essay-body { font-family: 'Georgia','Noto Serif SC',serif; font-size: 15px; line-height: 2.0; color: var(--text); }
+.haitu-essay-body p { margin-bottom: 14px; }
+.haitu-essay-body p.lead { font-size: 16px; font-style: italic; color: var(--text2); margin-bottom: 18px; }
+.haitu-essay-body strong { color: var(--text); font-weight: 700; }
+.haitu-essay-body h4 { font-size: 14px; color: var(--accent3); margin: 18px 0 10px; font-family: 'Segoe UI',sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+.haitu-sign { text-align: right; margin-top: 18px; font-family: 'Georgia',serif; font-size: 14px; color: var(--text2); font-style: italic; }
+.haitu-disc { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); font-style: italic; line-height: 1.7; }
+.stock-snap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill,minmax(160px,1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px; }
+.snap-item { text-align: center; }
+.snap-label { font-family: 'Segoe UI',sans-serif; font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.snap-val { font-family: 'Segoe UI',sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+.snap-val.up { color: var(--green); }
+.snap-val.dn { color: var(--red); }
+.snap-sub { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text3); margin-top: 2px; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(195px,1fr)); gap: 14px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow); }
+.kpi-l { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.kpi-v.up { color: var(--green); }
+.kpi-v.dn { color: var(--red); }
+.badge { display: inline-block; font-family: 'Segoe UI',sans-serif; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+.up { background: rgba(122,154,122,.15); color: var(--green); }
+.dn { background: rgba(184,112,112,.15); color: var(--red); }
+.nt { background: rgba(123,143,160,.15); color: var(--accent2); }
+.tbl-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow); }
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI',sans-serif; font-size: 13px; }
+.tbl th { background: var(--card2); color: var(--text3); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); background: var(--card2); }
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); }
+.ctitle { font-family: 'Segoe UI',sans-serif; font-size: 12px; color: var(--text3); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 260px; }
+.cmt { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 26px; line-height: 1.95; font-size: 14px; box-shadow: 0 1px 4px var(--shadow); color: var(--text); }
+.cmt p { margin-bottom: 14px; }
+.cmt p:last-child { margin-bottom: 0; }
+.cmt strong { color: var(--text); }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+.bscore { display: flex; align-items: center; gap: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; margin-bottom: 12px; box-shadow: 0 1px 4px var(--shadow); }
+.circle { width: 62px; height: 62px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; flex-shrink: 0; border: 3px solid; font-family: 'Segoe UI',sans-serif; }
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 4px; color: var(--text); }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+.sgrid { display: grid; grid-template-columns: repeat(auto-fill,minmax(260px,1fr)); gap: 16px; }
+.scard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 20px; box-shadow: 0 1px 4px var(--shadow); border-top: 4px solid var(--accent); }
+.scard.brand1 { border-top-color: var(--accent3); }
+.scard.brand2 { border-top-color: var(--accent2); }
+.scard.brand3 { border-top-color: var(--gold); }
+.scard.brand4 { border-top-color: var(--rose); }
+.scard.brand5 { border-top-color: var(--green); }
+.scard h4 { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.scard .srev { font-family: 'Segoe UI',sans-serif; font-size: 24px; font-weight: 800; color: var(--text); }
+.scard .ssub { font-family: 'Segoe UI',sans-serif; font-size: 12px; color: var(--text3); margin-top: 2px; margin-bottom: 12px; }
+.scard ul { padding-left: 15px; }
+.scard li { font-size: 13px; color: var(--text2); margin-bottom: 4px; }
+.moat-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap: 14px; }
+.moat-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); border-left: 4px solid var(--accent); }
+.moat-card.wide { border-left-color: var(--green); }
+.moat-card.narrow { border-left-color: var(--gold); }
+.moat-card.none { border-left-color: var(--red); }
+.moat-card h5 { font-size: 13px; color: var(--text); margin-bottom: 6px; }
+.moat-card .moat-rate { font-family: 'Segoe UI',sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.moat-card.wide .moat-rate { background: rgba(122,154,122,.18); color: var(--green); }
+.moat-card.narrow .moat-rate { background: rgba(185,160,106,.18); color: var(--gold); }
+.moat-card.none .moat-rate { background: rgba(184,112,112,.18); color: var(--red); }
+.moat-card p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+.ec-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 14px; box-shadow: 0 1px 3px var(--shadow); }
+.ec-badge { flex-shrink: 0; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-top: 2px; font-family: 'Segoe UI',sans-serif; }
+.ec-bull { background: rgba(122,154,122,.18); color: var(--green); }
+.ec-bear { background: rgba(184,112,112,.18); color: var(--red); }
+.ec-neut { background: rgba(185,160,106,.18); color: var(--gold); }
+.ec-body { flex: 1; }
+.ec-title { font-weight: 600; color: var(--text); margin-bottom: 3px; font-size: 14px; }
+.ec-note { font-size: 13px; color: var(--text2); line-height: 1.7; }
+.dcf-note { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.dcf-note strong { color: var(--text); }
+.scorecard { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow); }
+.score-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(280px,1fr)); gap: 14px; }
+.score-card { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px; }
+.score-letter { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Segoe UI',sans-serif; font-weight: 800; font-size: 22px; flex-shrink: 0; border: 3px solid; }
+.s-a { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.12); }
+.s-bp { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.06); }
+.s-b { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.10); }
+.s-bm { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.06); }
+.s-c { color: var(--red); border-color: var(--red); background: rgba(184,112,112,.08); }
+.score-body h4 { font-size: 13px; color: var(--text); margin-bottom: 4px; }
+.score-body p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+.flag-row { margin-top: 16px; padding: 12px 16px; background: rgba(185,160,106,.10); border: 1px solid rgba(185,160,106,.3); border-radius: 8px; font-size: 13px; color: var(--text2); }
+.flag-row strong { color: var(--gold); }
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center; box-shadow: 0 1px 4px var(--shadow); }
+.pbox .pl { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; }
+.pbox .pv { font-family: 'Segoe UI',sans-serif; font-size: 28px; font-weight: 800; margin-bottom: 5px; }
+.pbox .pn { font-size: 12px; color: var(--text3); line-height: 1.5; }
+.pc { color: var(--red); } .pf { color: var(--gold); } .ps { color: var(--green); }
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(280px,1fr)); gap: 14px; }
+.risk-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); position: relative; overflow: hidden; }
+.risk-card::before { content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent); }
+.risk-card.r1::before { background: var(--green); }
+.risk-card.r2::before { background: rgba(122,154,122,.6); }
+.risk-card.r3::before { background: var(--gold); }
+.risk-card.r4::before { background: var(--rose); }
+.risk-card.r5::before { background: var(--red); }
+.risk-card h5 { font-size: 14px; margin-bottom: 6px; color: var(--text); }
+.risk-score { font-family: 'Segoe UI',sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.r1 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r2 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r3 .risk-score { background: rgba(185,160,106,.18); color: var(--gold); }
+.r4 .risk-score { background: rgba(192,144,144,.18); color: var(--rose); }
+.r5 .risk-score { background: rgba(184,112,112,.18); color: var(--red); }
+.risk-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+footer { background: var(--card2); border-top: 1px solid var(--border); padding: 24px; text-align: center; color: var(--text3); font-size: 12px; margin-top: 40px; line-height: 1.8; }
+@media (max-width: 768px) { .cgrid,.pgrid { grid-template-columns: 1fr; } .hero h1 { font-size: 22px; } .kpi-grid { grid-template-columns: 1fr 1fr; } .stock-snap { grid-template-columns: 1fr 1fr; } .haitu-essay-header { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/00883" target="_blank" rel="noopener" title="在雪球查看 中海油 实时行情">雪球 00883</a>
+  </div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">FY2025 财报发布 · 2026-03-27 &nbsp;|&nbsp; Q1 2026 财报 · 2026-04-28 &nbsp;|&nbsp; 海图研判 · 2026-05-01</div>
+  <h1>CNOOC 中海油 0883 · FY2025 + Q1 2026 深度分析</h1>
+  <div class="hero-sub">HKEX: 0883 / SH: 600938 &nbsp;|&nbsp; 全球桶油成本最低纯上游石油商 · 产量 7 连增 + 储量替代率 100%+ + 4.34% 股息率 &nbsp;|&nbsp; 价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill">H 股 <strong>HKD 28.98</strong></div>
+    <div class="pill">市值 <strong>HKD 1.29万亿</strong></div>
+    <div class="pill">FY25 净利 <strong>¥1,221亿(-11.5%)</strong></div>
+    <div class="pill">桶油成本 <strong>$27.9</strong> 全球最低</div>
+    <div class="pill">股息率 <strong>4.34%</strong></div>
+    <div class="pill">海图研判 <strong>买入</strong></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 海图页首短评 ═══ -->
+<div class="haitu-quip">
+  <div class="haitu-quote">
+    <div class="haitu-portrait">中国最大、全球桶油成本最低的纯上游石油商——FY2025 油气净产量 777.3 百万桶油当量(+7%)、桶油成本 <strong>$27.9</strong>(全球最低)、储量替代率 100%+。FY25 油价从 $76.75 跌至 $66.47(-13.4%) 拖累营收 -5.6%、净利 -11.5%，但 <strong>Q1 2026 营收 +8.6% 净利 +7.1% 强势反弹</strong>。AH 折价 35%、经营现金流连续 4 年破 ¥2,000 亿、资产负债率仅 26.7%。</div>
+    <div class="haitu-rating-line">评级：<span class="rating-badge rating-buy">买入</span> · 12 个月目标价 HKD 35（+21%）· 全球最低成本上游+产量 7 连增+AH 大幅折价的三轮组合</div>
+  </div>
+</div>
+
+<!-- ═══ 市场数据快照 ═══ -->
+<div class="section">
+  <div class="stitle">市场数据快照（2026-05-01）</div>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">H 股股价</div><div class="snap-val">HKD 28.98</div><div class="snap-sub">2026-04-28 收盘</div></div>
+    <div class="snap-item"><div class="snap-label">A 股股价</div><div class="snap-val">¥40.93</div><div class="snap-sub">SH: 600938</div></div>
+    <div class="snap-item"><div class="snap-label">市值（H 股）</div><div class="snap-val">HKD 1.29万亿</div><div class="snap-sub">~RMB 1.18万亿</div></div>
+    <div class="snap-item"><div class="snap-label">总市值（A+H）</div><div class="snap-val">¥1.95万亿</div><div class="snap-sub">流通股 ~475亿</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间</div><div class="snap-val">HKD 16.24-30.98</div><div class="snap-sub">距高点 -6.5%</div></div>
+    <div class="snap-item"><div class="snap-label">TTM P/E (H 股)</div><div class="snap-val up">10.3x</div><div class="snap-sub">EPS ¥2.57 / HKD 2.81</div></div>
+    <div class="snap-item"><div class="snap-label">TTM P/E (A 股)</div><div class="snap-val">15.9x</div><div class="snap-sub">A 股溢价</div></div>
+    <div class="snap-item"><div class="snap-label">P/B</div><div class="snap-val up">1.45x</div><div class="snap-sub">每股净资产 HKD 20</div></div>
+    <div class="snap-item"><div class="snap-label">EV/EBITDA</div><div class="snap-val up">~5x</div><div class="snap-sub">EBITDA ~¥2,400亿</div></div>
+    <div class="snap-item"><div class="snap-label">股息率</div><div class="snap-val up">4.34%</div><div class="snap-sub">FY25 全年</div></div>
+    <div class="snap-item"><div class="snap-label">FCF Yield</div><div class="snap-val up">~7.5%</div><div class="snap-sub">FCF ¥974亿</div></div>
+    <div class="snap-item"><div class="snap-label">AH 折价</div><div class="snap-val up">~35%</div><div class="snap-sub">H 股相对 A 股</div></div>
+    <div class="snap-item"><div class="snap-label">资产负债率</div><div class="snap-val up">26.7%</div><div class="snap-sub">行业最低</div></div>
+    <div class="snap-item"><div class="snap-label">产量增速</div><div class="snap-val up">+8.6% (Q1)</div><div class="snap-sub">7 年 CAGR ~6%</div></div>
+    <div class="snap-item"><div class="snap-label">YTD 2026 (A股)</div><div class="snap-val up">+35.6%</div><div class="snap-sub">A股大涨</div></div>
+  </div>
+</div>
+
+<!-- ═══ FY2025 KPI ═══ -->
+<div class="section">
+  <div class="stitle">FY2025 全年核心业绩（2026-03-27 发布）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">油气销售收入</div><div class="kpi-v dn">¥3,357亿</div><span class="badge dn">-5.6% YoY</span><div class="kpi-l" style="margin-top:6px">$480亿 / 油价 -13% 拖累</div></div>
+    <div class="kpi"><div class="kpi-l">归母净利润</div><div class="kpi-v dn">¥1,221亿</div><span class="badge dn">-11.5% YoY</span><div class="kpi-l" style="margin-top:6px">$175亿 / 周期低点</div></div>
+    <div class="kpi"><div class="kpi-l">油气净产量</div><div class="kpi-v up">777.3 百万桶</div><span class="badge up">+7% YoY · 7 连增</span><div class="kpi-l" style="margin-top:6px">日均 213 万桶</div></div>
+    <div class="kpi"><div class="kpi-l">原油增长</div><div class="kpi-v up">+5.8%</div><span class="badge up">主导产品</span><div class="kpi-l" style="margin-top:6px">受益新油田投产</div></div>
+    <div class="kpi"><div class="kpi-l">天然气增长</div><div class="kpi-v up">+11.6%</div><span class="badge up">高增长</span><div class="kpi-l" style="margin-top:6px">能源转型受益</div></div>
+    <div class="kpi"><div class="kpi-l">实现油价</div><div class="kpi-v dn">$66.47/桶</div><span class="badge dn">-13.4% YoY</span><div class="kpi-l" style="margin-top:6px">vs FY24 $76.75</div></div>
+    <div class="kpi"><div class="kpi-l">桶油成本</div><div class="kpi-v up">$27.9/桶</div><span class="badge up">-2.2% YoY · 全球最低</span><div class="kpi-l" style="margin-top:6px">vs Exxon $40 / Chevron $45</div></div>
+    <div class="kpi"><div class="kpi-l">资本开支 (Capex)</div><div class="kpi-v">¥1,205亿</div><span class="badge nt">完成度 100%</span><div class="kpi-l" style="margin-top:6px">2026 指引 ¥1,120-1,220亿</div></div>
+    <div class="kpi"><div class="kpi-l">经营现金流</div><div class="kpi-v up">¥2,090亿</div><span class="badge up">连续 4 年破 ¥2,000亿</span><div class="kpi-l" style="margin-top:6px">$299亿</div></div>
+    <div class="kpi"><div class="kpi-l">自由现金流</div><div class="kpi-v up">¥974亿</div><span class="badge up">FCF Yield 7.5%</span><div class="kpi-l" style="margin-top:6px">$139亿</div></div>
+    <div class="kpi"><div class="kpi-l">净证实储量</div><div class="kpi-v up">77.7亿桶油当量</div><span class="badge up">+6.9% YoY</span><div class="kpi-l" style="margin-top:6px">储量替代率 100%+</div></div>
+    <div class="kpi"><div class="kpi-l">资产负债率</div><div class="kpi-v up">26.7%</div><span class="badge up">行业最低</span><div class="kpi-l" style="margin-top:6px">资本负债率 8.0%</div></div>
+    <div class="kpi"><div class="kpi-l">EPS</div><div class="kpi-v">¥2.57</div><span class="badge dn">~HKD 2.81</span><div class="kpi-l" style="margin-top:6px">基本 EPS</div></div>
+    <div class="kpi"><div class="kpi-l">2026 产量目标</div><div class="kpi-v up">780-800 百万桶</div><span class="badge up">连续增长</span><div class="kpi-l" style="margin-top:6px">+0.3-2.9% 中位</div></div>
+    <div class="kpi"><div class="kpi-l">勘探投入</div><div class="kpi-v up">¥200亿</div><span class="badge up">持续高投入</span><div class="kpi-l" style="margin-top:6px">储量增长保障</div></div>
+  </div>
+</div>
+
+<!-- ═══ Q1 2026 KPI ═══ -->
+<div class="section">
+  <div class="stitle">Q1 2026 季度业绩（2026-04-28 已发布 · 强势反弹）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">Q1 营业收入</div><div class="kpi-v up">¥1,160.79亿</div><span class="badge up">+8.6% YoY</span><div class="kpi-l" style="margin-top:6px">$166亿 / 强势</div></div>
+    <div class="kpi"><div class="kpi-l">Q1 油气销售收入</div><div class="kpi-v up">~¥970亿</div><span class="badge up">+9.9% YoY</span><div class="kpi-l" style="margin-top:6px">主营核心</div></div>
+    <div class="kpi"><div class="kpi-l">Q1 归母净利</div><div class="kpi-v up">¥391.4亿</div><span class="badge up">+7.1% YoY</span><div class="kpi-l" style="margin-top:6px">$56亿 / 7 连增</div></div>
+    <div class="kpi"><div class="kpi-l">Q1 油气净产量</div><div class="kpi-v up">205.1 百万桶</div><span class="badge up">+8.6% YoY</span><div class="kpi-l" style="margin-top:6px">单季历史新高</div></div>
+    <div class="kpi"><div class="kpi-l">Q1 桶油成本</div><div class="kpi-v">$28.41</div><span class="badge nt">维持低位</span><div class="kpi-l" style="margin-top:6px">略高于 FY25 $27.9</div></div>
+    <div class="kpi"><div class="kpi-l">Q1 销售费用</div><div class="kpi-v up">大降 86.8%</div><span class="badge up">成本控制</span><div class="kpi-l" style="margin-top:6px">运营效率提升</div></div>
+    <div class="kpi"><div class="kpi-l">Q1 净利率</div><div class="kpi-v">33.7%</div><span class="badge nt">高利润率</span><div class="kpi-l" style="margin-top:6px">行业领先</div></div>
+    <div class="kpi"><div class="kpi-l">Q1 EPS</div><div class="kpi-v up">¥0.824</div><span class="badge up">+7.1% YoY</span><div class="kpi-l" style="margin-top:6px">~HKD 0.90</div></div>
+    <div class="kpi"><div class="kpi-l">下次财报</div><div class="kpi-v">2026-08-15</div><span class="badge nt">H1 2026 中报</span><div class="kpi-l" style="margin-top:6px">中期股息公告</div></div>
+  </div>
+
+  <div class="dcf-note" style="margin-top:18px">
+    <strong>Q1 2026 关键洞察 · 强势反弹：</strong>
+    <p style="margin-top:8px">(1) <span class="hl-t">营收 +8.6% / 净利 +7.1%</span>—— 与 FY25 -5.6% / -11.5% 形成鲜明对比；(2) <strong>产量 +8.6% 创单季历史新高</strong>——海上油气田持续增产，证明产量增长动能强劲；(3) 桶油成本 $28.41 略高于 FY25 $27.9 但仍是行业最低；(4) <strong>销售费用大降 86.8%</strong>—— 成本控制能力极强；(5) Q1 强势反弹意味着 FY26 有望恢复增长，海图判断 FY26 净利可能 +5-10%。
+  </div>
+</div>
+
+<!-- ═══ 季度趋势 ═══ -->
+<div class="section">
+  <div class="stitle">季度趋势 + 5 年总览</div>
+  <div class="cgrid">
+    <div class="ccard">
+      <div class="ctitle">5 季度营收趋势（¥亿）</div>
+      <div class="cwrap"><canvas id="revenueChart"></canvas></div>
+    </div>
+    <div class="ccard">
+      <div class="ctitle">5 季度净利趋势（¥亿）</div>
+      <div class="cwrap"><canvas id="profitChart"></canvas></div>
+    </div>
+    <div class="ccard">
+      <div class="ctitle">FY2025 业务结构（¥亿）</div>
+      <div class="cwrap"><canvas id="segmentChart"></canvas></div>
+    </div>
+    <div class="ccard">
+      <div class="ctitle">7 年油气产量增长（百万桶）</div>
+      <div class="cwrap"><canvas id="capexChart"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ Sankey ═══ -->
+<div class="section">
+  <div class="stitle">FY2025 资金流向 · 营收 → 自由现金流（¥ 亿）</div>
+  <div class="ccard">
+    <div class="ctitle">从 ¥3,357亿 油气销售收入到 ¥974亿 自由现金流的完整资金链路</div>
+    <div id="sankey" style="width:100%;height:480px;"></div>
+  </div>
+</div>
+
+<!-- ═══ 模块 1 ═══ -->
+<div class="section">
+  <div class="stitle">模块 1 · 公司概览与背景</div>
+  <div class="cmt">
+    <p><strong>公司全称</strong>：中国海洋石油有限公司 / CNOOC Limited<br>
+    <strong>上市</strong>：HKEX: 0883（2001-02-28 香港+纽约同步上市）+ SH: 600938（2022-04-21 A 股回归）+ NYSE: CEO（已 2022-10 退市）<br>
+    <strong>总部</strong>：北京 / 香港<br>
+    <strong>主营</strong>：海上原油+天然气勘探+开发+生产+销售（纯上游）</p>
+
+    <p><strong>核心叙事</strong>：中海油是<span class="hl-t">中国最大、全球桶油成本最低的纯上游石油商</span>——FY2025 桶油成本仅 $27.9（vs Exxon $40 / Chevron $45 / 沙特阿美 $10-15），是中国少数同时具备"低成本 + 高储量 + 持续增产"的能源公司。<span class="hl-t">与中石油（一体化油气）、中石化（炼化为主）形成鲜明对比</span>——纯上游纯资源股的业绩弹性最大。FY25 因 OPEC+ 增产油价跌 13% 拖累净利 -11.5%，但 Q1 2026 营收 +8.6% / 净利 +7.1% 强势反弹，说明<strong>这是一家"成本控制极强、产量持续增长"的核心资产</strong>。</p>
+
+    <p><strong>简史与里程碑</strong>：</p>
+    <p>
+      <strong>1. 1982 年成立</strong>——中国海洋石油集团成立，海上石油专营权<br>
+      <strong>2. 2001-02-28 港股+美股双上市</strong>——HKEX: 0883 + NYSE: CEO<br>
+      <strong>3. 2008 年蓬莱 19-3 重大油田投产</strong>——成为全球十大海上油气公司<br>
+      <strong>4. 2018 年储量替代率连续超 100%</strong>——勘探储量持续补充<br>
+      <strong>5. 2022-04-21 A 股回归</strong>——SH: 600938 上市，发行价 ¥10.80<br>
+      <strong>6. 2022-10 NYSE 退市</strong>——美中科技脱钩压力<br>
+      <strong>7. 2024-2025 产量 7 连增</strong>——FY24 +7.2%, FY25 +7%<br>
+      <strong>8. 2026 Q1 强势反弹</strong>——营收 +8.6% / 净利 +7.1%
+    </p>
+
+    <p><strong>股权结构（2025-12-31 末）</strong>：</p>
+    <p>
+      <strong>中国海洋石油集团（母公司）</strong>——~64.4% 股权（国资委 100% 控股）<br>
+      <strong>香港公众股东</strong>——~16% H 股流通<br>
+      <strong>A 股公众股东</strong>——~19.6% A 股流通<br>
+      <strong>这是典型的"国家队 + 国资委监管"治理结构</strong>，中国海上石油专营权牌照
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 模块 2 ═══ -->
+<div class="section">
+  <div class="stitle">模块 2 · 管理层评估</div>
+
+  <div class="bscore">
+    <div class="circle cw">B+</div>
+    <div class="bd">
+      <h4>汪东进 · 董事长（2024 至今 · 国资委轮换制）</h4>
+      <p>1962 年生，2024 年任董事长（前董事长汪东进于 2018-2023 任职后回归）。中海油管理层是国资委轮换制——CEO/董事长 5 年一换，没有"创始人主义"。但产量增长、桶油成本控制、派息率纪律都在管理层轮换中保持稳定。<strong>海图判断这是"制度优于个人"的治理结构</strong>——任何 CEO 上任后都要执行国资委的"产量增长 + 高质量发展 + 股东回报"三重要求。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>资本配置纪律 · 国企标杆</h4>
+      <p>
+      <strong>FY2025 派息率约 44%、股息率 4.34%</strong>——略低于三大运营商但高于全球油气同行。<br>
+      过去 5 年股息保持稳定增长，FY25 末期 + 中期合计股息有所提升。<br>
+      Capex 也展现纪律：FY24 ¥1,322 → FY25 ¥1,205（-9%）。FY26 指引 ¥1,120-1,220 亿（持平至略降）。<br>
+      <span class="warn-t">不足之处</span>：未启动股票回购计划，仅靠股息回报股东。
+      </p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">A</div>
+    <div class="bd">
+      <h4>战略执行能力 · 全球桶油成本最低</h4>
+      <p>FY25 桶油成本 $27.9，<span class="hl-t">远低于 Exxon $40、Chevron $45、Shell $35、BP $40、沙特阿美 $10-15</span>。在油价下跌 13% 的环境下仍能保持高利润率（净利率 31%），是<strong>全球纯上游石油商中"最能扛周期"的核心资产</strong>。海图判断："国企里少有的极致经营能力"。</p>
+    </div>
+  </div>
+
+  <div class="cmt">
+    <p><strong>长期主义测试</strong>：3 年前（FY22 财报）管理层承诺"产量持续增长 + 桶油成本控制在 $30 以下 + 储量替代率超 100%"——3 年后<span class="hl-t">每条都兑现并超额</span>：产量 FY22 624 → FY25 777 百万桶（CAGR 7.6%）、桶油成本 $30.39 → $27.9（-8%）、储量替代率连续 5 年超 100%。这是国企运营中"言行一致"的优秀代表。</p>
+
+    <p><strong>薪酬与利益绑定</strong>：管理层薪酬遵循国企"限薪令"，董事长年薪 ~¥120 万 + 业绩奖金。<span class="warn-t">激励机制弱</span>，但战略执行力强。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 3 ═══ -->
+<div class="section">
+  <div class="stitle">模块 3 · 商业模式深度解析</div>
+
+  <div class="cmt">
+    <p><strong>海图"一句话测试"</strong>：中海油是<span class="hl-t">"中国海上石油专营权 + 全球最低桶油成本"的纯上游石油商</span>——通过 777 百万桶/年油气产量（每天 213 万桶），在 $66.47 实现油价下，每桶赚 $66.47 - $27.9 = $38.57 毛利。其中海上原油占 75%、天然气占 25%。</p>
+
+    <p><strong>FY2025 收入结构（按产品+地区）</strong>：</p>
+  </div>
+
+  <div class="sgrid">
+    <div class="scard brand1">
+      <h4>原油销售（核心主战场）</h4>
+      <div class="srev">¥2,520亿</div>
+      <div class="ssub">占油气销售 75% · -8% YoY</div>
+      <ul>
+        <li>原油产量 +5.8%</li>
+        <li>实现油价 $66.47（-13%）</li>
+        <li>渤海+南海+东海主力</li>
+        <li>蓬莱 19-3、流花 11-1 等</li>
+        <li>毛利率 ~58%</li>
+      </ul>
+    </div>
+    <div class="scard brand2">
+      <h4>天然气销售（增长引擎）</h4>
+      <div class="srev">¥600亿</div>
+      <div class="ssub">占油气销售 18% · +5% YoY</div>
+      <ul>
+        <li>天然气产量 +11.6%</li>
+        <li>能源转型受益</li>
+        <li>南海深水气田主力</li>
+        <li>"双碳"战略支持</li>
+        <li>毛利率 ~50%</li>
+      </ul>
+    </div>
+    <div class="scard brand3">
+      <h4>贸易及其他</h4>
+      <div class="srev">¥237亿</div>
+      <div class="ssub">占油气销售 7%</div>
+      <ul>
+        <li>液化天然气贸易</li>
+        <li>炼化产品销售</li>
+        <li>低毛利但战略意义</li>
+      </ul>
+    </div>
+    <div class="scard brand4">
+      <h4>国内 vs 海外</h4>
+      <div class="srev">国内 67%</div>
+      <div class="ssub">海外 33%</div>
+      <ul>
+        <li>国内：渤海+南海+东海</li>
+        <li>海外：北美 + 巴西 + 圭亚那</li>
+        <li>圭亚那 Stabroek 区块爆发性增长</li>
+        <li>地缘风险分散</li>
+      </ul>
+    </div>
+    <div class="scard brand5">
+      <h4>新能源探索</h4>
+      <div class="srev">¥30亿</div>
+      <div class="ssub">占总营 1%</div>
+      <ul>
+        <li>海上风电（与三峡合作）</li>
+        <li>CCS 碳捕集</li>
+        <li>氢能</li>
+        <li>占比小但战略布局</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="cmt" style="margin-top:18px;">
+    <p><strong>商业模式核心特征</strong>：</p>
+    <p>
+    1. <strong>"重资产 + 高现金流"上游石油商</strong>——固定资产 ¥9,000+ 亿，但 EBITDA 率 ~70%、FCF 持续为正<br>
+    2. <span class="hl-t">"国家级海上石油专营权"</span>——中国海上油气专营权（与中石油陆上专营形成互补）<br>
+    3. <strong>"低估值 + 高股息 + 周期防御"三合一</strong>：H 股 P/E 10.3x、股息率 4.34%、AH 折价 35%<br>
+    4. <span class="hl-t">桶油成本 $27.9 是真正的护城河</span>：油价跌至 $40 仍能保持盈利
+    </p>
+
+    <p><strong>单位经济（FY2025）</strong>：</p>
+    <p>
+    每桶售价 → $66.47<br>
+    每桶成本 → $27.9（含勘探+开发+生产+管理）<br>
+    每桶毛利 → $38.57（毛利率 58%）<br>
+    每桶税前利润 → ~$30（含资源税、企业所得税）<br>
+    每桶净利 → ~$22<br>
+    全年 777 百万桶 × $22 = $171亿（与实际 $175亿吻合）
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 模块 4 ═══ -->
+<div class="section">
+  <div class="stitle">模块 4 · 经济护城河分析（5 维）</div>
+  <div class="moat-grid">
+    <div class="moat-card narrow">
+      <h5>1. 网络效应</h5>
+      <span class="moat-rate">窄</span>
+      <p>石油是大宗商品，几乎无网络效应。但海上钻井平台 + 输油管网 + LNG 接收站构成<span class="hl-t">基础设施网络效应</span>——客户越多越便宜。<strong>趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>2. 转换成本</h5>
+      <span class="moat-rate">窄</span>
+      <p>石油是同质化产品，买家可轻松切换。但<strong>政府订单（中石化炼厂、华能电厂等）合同期 3-5 年 + 长期 LNG 合同</strong>提供锁定。<strong>趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>3. 成本优势</h5>
+      <span class="moat-rate">宽</span>
+      <p><span class="hl-t">桶油成本 $27.9 是全球最低之一</span>——远低于 Exxon $40、Chevron $45、Shell $35、BP $40。海上规模效应 + 自动化作业 + 自有钻井平台 + 长期与中海油服合作。<strong>趋势：稳定+</strong>。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>4. 无形资产 (牌照+储量)</h5>
+      <span class="moat-rate">宽</span>
+      <p><span class="hl-t">中国海上石油专营权</span>——中海油独占中国海上石油勘探开发权（中石油主要陆上）。证实储量 77.7 亿桶油当量（国内最大海上储量）。<strong>这是政府授权的法定护城河</strong>。<strong>趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>5. 有效规模</h5>
+      <span class="moat-rate">宽</span>
+      <p>中国海上原油 + 天然气产量市场份额 ~70%。<span class="hl-t">"赢者通吃"型寡头</span>——中海油 + 中石油海洋分公司构成 95%+ 市场。<strong>趋势：稳定</strong>。</p>
+    </div>
+  </div>
+
+  <div class="cmt" style="margin-top:18px;">
+    <p><strong>护城河综合评估</strong>：中海油在 5 维护城河上 <span class="hl-t">3 项宽 + 2 项窄</span>。整体属于"宽护城河 + 政府授权"型公司，与电网、铁路、银行同档。<strong>但护城河来自垄断 + 资源禀赋而非创新</strong>。</p>
+
+    <p><strong>10 年后的护城河会更宽还是更窄？</strong>—— 海图判断<span class="hl-t">略加宽</span>。理由：(1) 桶油成本继续下降（自动化 + 数字化）；(2) 海上风电+CCS+氢能逐步成型；(3) 储量持续补充（2025 替代率 100%+）。<strong>但要警惕</strong>：能源转型加速 + 全球电动车渗透 + 化石燃料长期需求下降。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 5 ═══ -->
+<div class="section">
+  <div class="stitle">模块 5 · 财务深度分析</div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:18px 0 12px">5.1 5 季度营收/净利趋势</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>项目（¥亿）</th><th>Q1 25</th><th>Q2 25</th><th>Q3 25</th><th>Q4 25</th><th>Q1 26</th></tr></thead>
+      <tbody>
+        <tr><td>营业收入</td><td>1,069</td><td>904</td><td>800</td><td>584</td><td>1,161</td></tr>
+        <tr><td>YoY 增速</td><td>-4.1%</td><td>-7.2%</td><td>-6.5%</td><td>-3.5%</td><td><span class="up">+8.6%</span></td></tr>
+        <tr><td>实现油价 ($/桶)</td><td>74.0</td><td>67.8</td><td>62.1</td><td>62.0</td><td>72.5</td></tr>
+        <tr><td>归母净利 (¥亿)</td><td>366</td><td>307</td><td>312</td><td>236</td><td>391</td></tr>
+        <tr><td>净利率</td><td>34.2%</td><td>33.9%</td><td>39.0%</td><td>40.4%</td><td><span class="up">33.7%</span></td></tr>
+        <tr class="hl"><td>EPS (¥)</td><td>¥0.770</td><td>¥0.646</td><td>¥0.657</td><td>¥0.497</td><td>¥0.824</td></tr>
+        <tr><td>产量（百万桶）</td><td>189</td><td>193</td><td>198</td><td>197</td><td><strong>205</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">5.2 5 年关键比率</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>指标</th><th>FY21</th><th>FY22</th><th>FY23</th><th>FY24</th><th>FY25</th></tr></thead>
+      <tbody>
+        <tr><td>油气销售 (¥亿)</td><td>2,461</td><td>3,755</td><td>3,591</td><td>3,556</td><td>3,357</td></tr>
+        <tr><td>营收 YoY</td><td>+58%</td><td>+53%</td><td>-4%</td><td>-1%</td><td>-5.6%</td></tr>
+        <tr><td>实现油价 ($)</td><td>69.69</td><td>96.59</td><td>77.96</td><td>76.75</td><td>66.47</td></tr>
+        <tr><td>桶油成本 ($)</td><td>30.39</td><td>30.39</td><td>28.83</td><td>28.52</td><td>27.90</td></tr>
+        <tr><td>归母净利 (¥亿)</td><td>703</td><td>1,417</td><td>1,238</td><td>1,379</td><td>1,221</td></tr>
+        <tr><td>净利率</td><td>28.6%</td><td>37.7%</td><td>34.5%</td><td>38.8%</td><td>36.4%</td></tr>
+        <tr><td>ROE</td><td>14%</td><td>22%</td><td>17%</td><td>17%</td><td>14%</td></tr>
+        <tr class="hl"><td>ROIC</td><td>10%</td><td>16%</td><td>13%</td><td>13%</td><td>11%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">5.3 杜邦分析</h3>
+  <div class="cmt">
+    <p>FY2025 ROE 14% 拆解：<br>
+    <strong>净利率（36.4%）× 总资产周转率（0.27x）× 财务杠杆（1.43x）= 14.0%</strong></p>
+    <p>对比 FY2022 高油价峰值（ROE 22%）：<br>
+    净利率从 37.7% 降至 36.4%（→ 主因油价从 $96.59 跌至 $66.47）<br>
+    总资产周转率从 0.36x 降至 0.27x（→ 资产规模扩张快于营收）<br>
+    财务杠杆从 1.41x 升至 1.43x（→ 微调）<br>
+    <span class="hl-t">ROE 主要受油价驱动，与桶油成本控制无关</span>——这是周期股的典型特征。</p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">5.4 资产负债表健康度</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>项目（¥亿）</th><th>FY2025 末</th><th>FY2024 末</th><th>YoY</th><th>评估</th></tr></thead>
+      <tbody>
+        <tr><td>现金及短期投资</td><td>~1,800</td><td>~1,650</td><td>+9.1%</td><td>充裕</td></tr>
+        <tr><td>应收账款</td><td>~250</td><td>~240</td><td>+4%</td><td>正常</td></tr>
+        <tr><td>固定资产 (PP&E)</td><td>~9,000</td><td>~8,700</td><td>+3.4%</td><td>Capex 累积</td></tr>
+        <tr><td>勘探权 + 油气资产</td><td>~6,000</td><td>~5,800</td><td>+3.4%</td><td>核心资产</td></tr>
+        <tr><td>总资产</td><td>~16,000</td><td>~15,500</td><td>+3.2%</td><td>$2,287亿</td></tr>
+        <tr><td><strong>有息负债</strong></td><td><strong>~750</strong></td><td><strong>~800</strong></td><td><span class="up">-6.3%</span></td><td><span class="up">极低</span></td></tr>
+        <tr><td>应付账款</td><td>~1,200</td><td>~1,100</td><td>+9%</td><td>正常</td></tr>
+        <tr><td>总负债</td><td>~4,272</td><td>~4,140</td><td>+3.2%</td><td>资产负债率 26.7%</td></tr>
+        <tr class="hl"><td><strong>真实净现金（流动现金 - 有息负债）</strong></td><td><strong>~1,050</strong></td><td>~850</td><td><span class="up">+23.5%</span></td><td><span class="up">$150亿 / 占市值 7.7%</span></td></tr>
+        <tr><td>归母权益</td><td>~9,500</td><td>~9,000</td><td>+5.6%</td><td>$1,358亿</td></tr>
+        <tr><td>资产负债率</td><td><strong>26.7%</strong></td><td>26.7%</td><td>持平</td><td><span class="up">行业最低</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>资产负债健康度评估</strong>：<span class="hl-t">A 级</span>。<strong>资产负债率 26.7% 是全球纯上游石油商中最低（vs Exxon 35% / Chevron 25% / Shell 33%）+ 真实净现金 ¥1,050 亿 + 信用评级 A+/A1 + 资本负债率仅 8.0%</strong>。即便油价跌至 $40 仍能扛过周期。</p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">5.5 现金流质量</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>项目（¥亿）</th><th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th></tr></thead>
+      <tbody>
+        <tr><td>归母净利</td><td>703</td><td>1,417</td><td>1,238</td><td>1,379</td><td>1,221</td></tr>
+        <tr><td>经营现金流 (OCF)</td><td>1,572</td><td>2,396</td><td>2,103</td><td>2,221</td><td>2,090</td></tr>
+        <tr><td>OCF / 净利</td><td>2.24</td><td>1.69</td><td>1.70</td><td>1.61</td><td>1.71</td></tr>
+        <tr><td>资本开支 (Capex)</td><td>-902</td><td>-1,003</td><td>-1,296</td><td>-1,322</td><td>-1,205</td></tr>
+        <tr class="hl"><td>自由现金流 (FCF)</td><td>670</td><td>1,393</td><td>807</td><td>899</td><td><strong>974</strong></td></tr>
+        <tr><td>FCF / 净利</td><td>0.95</td><td>0.98</td><td>0.65</td><td>0.65</td><td>0.80</td></tr>
+        <tr><td>FCF Yield</td><td>~6%</td><td>~12%</td><td>~7%</td><td>~7%</td><td><span class="up">~7.5%</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>现金流质量观察</strong>：<br>
+    1. <span class="hl-t">FY2025 FCF +8.3% 达 ¥974 亿</span>——这是中海油的亮点（油价跌 13% 但 FCF 仍增长）<br>
+    2. <strong>OCF/NI 长期 1.6-2.2</strong>（折旧摊销大 + 应付占款）—— 现金流质量优秀<br>
+    3. <strong>经营现金流连续 4 年破 ¥2,000亿</strong>——这是真正的"现金机器"<br>
+    4. <span class="hl-t">5 年累计 FCF ¥4,743 亿</span>——支持了派息率从 38% 升至 44% 的可持续性<br>
+    5. FCF Yield 7.5% 高于中国移动 5.5% / 三大运营商均值 5%——<strong>这是中海油被低估的最强财务信号</strong>
+    </p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">5.6 所有者盈余计算（价值投资核心估值法）</h3>
+  <div class="dcf-note">
+    <p><strong>FY2025 所有者盈余 = ¥1,221亿（净利）+ ¥1,000亿（折旧摊销）+ ¥80亿（其他非现金）- ¥800亿（维护性 Capex 估，约总 Capex ¥1,205亿 的 66%）+ 营运资金 -¥100亿 = ¥1,401亿（约 $200亿）</strong></p>
+
+    <p>注：中海油的 Capex 中约 60-65% 是维护性 Capex（油田维护 + 钻井 + 现有平台升级），约 35-40% 是扩张性 Capex（新油田勘探 + 新平台建设 + 新储量获取）。</p>
+
+    <p><strong>所有者盈余收益率</strong> = $200亿 / $1,840亿市值（A+H 合计）= <span class="hl-t" style="font-size:18px;">10.9%</span></p>
+
+    <p>对比无风险利率 4.3%（10Y 美债），<span class="hl-t">超额收益率 6.6 个百分点</span>。这意味着：</p>
+    <p>
+    1. 即使 0 增长，中海油给股东的回报已经是无风险利率的 2.5 倍<br>
+    2. 隐含合理 P/E 18x（按 4% 永续无风险利率）—— 远高于当前 10.3x<br>
+    3. 这是港股大蓝筹中所有者盈余收益率最高的"高股息防御 + 周期赔率"标的
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 模块 6 ═══ -->
+<div class="section">
+  <div class="stitle">模块 6 · 电话会分析（最新 + 前 2 季）</div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:8px 0 12px">6.1 Q1 2026 财报（2026-04-28）</h3>
+
+  <div class="ec-item">
+    <div class="ec-badge ec-bull">大利好</div>
+    <div class="ec-body">
+      <div class="ec-title">Q1 营收 +8.6% / 净利 +7.1% · 强势反弹</div>
+      <div class="ec-note">海图解读：<span class="hl-t">这是 FY25 -11.5% 净利下滑后的强势反弹</span>。Q1 实现油价 $72.5（恢复 +9% YoY），加上产量 +8.6%，量价齐升。<strong>这意味着 FY25 的下滑是周期性而非结构性</strong>。</div>
+    </div>
+  </div>
+
+  <div class="ec-item">
+    <div class="ec-badge ec-bull">大利好</div>
+    <div class="ec-body">
+      <div class="ec-title">Q1 油气产量 205.1 百万桶 · 单季历史新高</div>
+      <div class="ec-note">海图解读：<span class="hl-t">Q1 单季产量超过 H1 25 半年的 50%</span>——产量增长动能极强。圭亚那 Stabroek 区块继续爆发性增长，国内渤海湾 + 南海继续发力。</div>
+    </div>
+  </div>
+
+  <div class="ec-item">
+    <div class="ec-badge ec-bull">利好</div>
+    <div class="ec-body">
+      <div class="ec-title">销售费用大降 86.8% · 成本控制能力极强</div>
+      <div class="ec-note">海图解读：在营收 +8.6% 的情况下销售费用 -86.8%——<strong>反映管理层在油价低位时主动收缩营销支出</strong>，把现金留给核心业务和分红。</div>
+    </div>
+  </div>
+
+  <div class="ec-item">
+    <div class="ec-badge ec-neut">中性</div>
+    <div class="ec-body">
+      <div class="ec-title">Q1 桶油成本 $28.41 略升于 FY25 $27.9</div>
+      <div class="ec-note">海图解读：成本微升是产量扩张期的正常现象（新油田初期成本较高）。仍是<strong>全球最低水平</strong>。</div>
+    </div>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">6.2 FY2025 业绩说明会（2026-03-26）</h3>
+
+  <div class="ec-item">
+    <div class="ec-badge ec-bear">利空</div>
+    <div class="ec-body">
+      <div class="ec-title">FY25 净利 -11.5% · 主因油价 -13.4%</div>
+      <div class="ec-note">海图解读：FY25 全年实现油价 $66.47（vs FY24 $76.75），跌 13.4% 拖累营收 -5.6%、净利 -11.5%。但<strong>桶油成本 $27.9 跌 -2.2%</strong>——成本控制对冲了部分油价下跌。</div>
+    </div>
+  </div>
+
+  <div class="ec-item">
+    <div class="ec-badge ec-bull">利好</div>
+    <div class="ec-body">
+      <div class="ec-title">FY25 产量 +7% / 储量替代率 100%+ / Capex 完成度 100%</div>
+      <div class="ec-note">海图解读：<span class="hl-t">三个关键运营指标全部达标</span>。产量 7 连增，储量持续补充，Capex 没有超预算。这是国企运营商中"言行一致"的标杆。</div>
+    </div>
+  </div>
+
+  <div class="ec-item">
+    <div class="ec-badge ec-bull">利好</div>
+    <div class="ec-body">
+      <div class="ec-title">2026 产量目标 780-800 百万桶 · 中位 +0.3-2.9%</div>
+      <div class="ec-note">海图解读：管理层指引保守，但海图判断 Q1 产量 +8.6% 已超预期，<strong>FY26 产量可能达 820-830 百万桶（+5-7%）</strong>。</div>
+    </div>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">6.3 H1 2025 业绩（2025-08-15）</h3>
+
+  <div class="ec-item">
+    <div class="ec-badge ec-bull">利好</div>
+    <div class="ec-body">
+      <div class="ec-title">H1 净利 ¥673 亿 · 中期股息约 ¥0.65/股</div>
+      <div class="ec-note">海图解读：H1 财报是 H 股投资者拿到中期股息的关键节点。FY25 全年股息率 4.34% 给保守者提供"票息"。</div>
+    </div>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">6.4 信号汇总 + 指引兑现度</h3>
+
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>承诺事项</th><th>FY2024 指引</th><th>FY2025 实际</th><th>评估</th></tr></thead>
+      <tbody>
+        <tr><td>产量目标</td><td>720-740 百万桶</td><td>777.3 百万桶</td><td><span class="up">超预期 +5%</span></td></tr>
+        <tr><td>桶油成本</td><td>≤$30</td><td>$27.9</td><td><span class="up">超预期</span></td></tr>
+        <tr><td>储量替代率</td><td>≥100%</td><td>100%+</td><td><span class="up">达标</span></td></tr>
+        <tr><td>Capex</td><td>¥1,250-1,350 亿</td><td>¥1,205 亿</td><td><span class="up">超预期</span></td></tr>
+        <tr><td>派息率</td><td>≥40%</td><td>~44%</td><td><span class="up">超预期</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>指引兑现度评估</strong>：5/5 全部超预期。<span class="hl-t">兑现度 100%，且全部超额</span>——这是国企运营中最稳健的"言行一致"型管理层之一。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 7 ═══ -->
+<div class="section">
+  <div class="stitle">模块 7 · 多模型估值（8 种方法交叉验证）</div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:8px 0 12px">7.1 相对估值（同行+自身历史）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>指标</th><th>中海油 0883</th><th>Exxon</th><th>Chevron</th><th>Shell</th><th>沙特阿美</th><th>5 年中位</th><th>判断</th></tr></thead>
+      <tbody>
+        <tr><td>P/E (TTM)</td><td><strong>10.3x</strong></td><td>13x</td><td>14x</td><td>11x</td><td>15x</td><td>13x</td><td><span class="up">略低估</span></td></tr>
+        <tr><td>P/E (Forward FY26)</td><td>9.5x</td><td>12x</td><td>13x</td><td>10x</td><td>14x</td><td>12x</td><td><span class="up">低估</span></td></tr>
+        <tr><td>P/B</td><td>1.45x</td><td>1.8x</td><td>1.7x</td><td>1.4x</td><td>3.5x</td><td>1.7x</td><td><span class="up">低估</span></td></tr>
+        <tr><td>EV/EBITDA</td><td><strong>5x</strong></td><td>6x</td><td>7x</td><td>5x</td><td>8x</td><td>6x</td><td>合理</td></tr>
+        <tr><td>股息率</td><td>4.34%</td><td>3.5%</td><td>4.5%</td><td>4.0%</td><td>5.0%</td><td>4%</td><td>合理</td></tr>
+        <tr><td>桶油成本 ($)</td><td><strong>27.9</strong></td><td>40</td><td>45</td><td>35</td><td>10-15</td><td>35</td><td><span class="up">第二低</span></td></tr>
+        <tr><td>FCF Yield</td><td><strong>7.5%</strong></td><td>5%</td><td>5%</td><td>6%</td><td>4%</td><td>5%</td><td><span class="up">行业最高</span></td></tr>
+        <tr><td>资产负债率</td><td><strong>26.7%</strong></td><td>35%</td><td>25%</td><td>33%</td><td>20%</td><td>30%</td><td><span class="up">较低</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>相对估值结论</strong>：中海油在<span class="hl-t">"估值合理 + 成本最低 + FCF Yield 最高 + 资产负债率最低"</span>上全方位领先全球同行（除沙特阿美这个特殊存在）。</p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">7.2 DCF 三情景</h3>
+  <div class="dcf-note">
+    <p><strong>关键假设</strong>：FY26 起 5 年 FCF CAGR -3% 至 +8%（基准 +3%），永续增长率 0%-1%（基准 0%），WACC = 9%（油气周期股风险溢价）。FY26 起步 FCF 假设 ¥1,050 亿（油价回升）。</p>
+    <p><strong>悲观（25%）</strong>：5 年 FCF CAGR -3%，永续 0%（油价持续低于 $60） → DCF 估值 <span class="hl-t">HKD 22</span></p>
+    <p><strong>基准（55%）</strong>：5 年 FCF CAGR +3%，永续 0%（油价 $65-75 区间）→ DCF 估值 <span class="hl-t">HKD 35</span></p>
+    <p><strong>乐观（20%）</strong>：5 年 FCF CAGR +8%，永续 1%（油价回升至 $80+）→ DCF 估值 <span class="hl-t">HKD 48</span></p>
+    <p>概率加权 DCF：HKD 22 × 25% + HKD 35 × 55% + HKD 48 × 20% = <strong>HKD 34</strong></p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">7.3 所有者盈余收益率法</h3>
+  <div class="dcf-note">
+    <p>FY2025 所有者盈余 = $200亿<br>
+    合理收益率（基准）= 7%（成熟石油商 + 高股息 + 国企稳定）<br>
+    隐含合理市值 = $200亿 / 7% = <strong>$2,857亿</strong> → <span class="hl-t" style="font-size:18px;">总市值 HKD 22,250亿 / H 股 HKD 47</span><br>
+    保守收益率（10%）= $200亿 / 10% = $2,000亿 → 总市值 HKD 15,575亿 / H 股 HKD 33<br>
+    平均：<strong>HKD 40</strong></p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">7.4 PEG</h3>
+  <div class="dcf-note">
+    <p>P/E (Forward FY26) = 9.5x<br>
+    EPS 5 年 CAGR（FY26→FY30）预期 = +5-7%（含产量增长 + 桶油成本下降）<br>
+    PEG = 9.5 / 6 = <strong>1.58</strong><br>
+    评估：<span class="warn-t">PEG &gt; 1，周期股不适合用 PEG 评估</span>。</p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">7.5 DDM（股息折现模型）</h3>
+  <div class="dcf-note">
+    <p>FY2025 实际派息 ¥1.13/股 = HKD 1.23（年化收益率 4.34%）<br>
+    Gordon Growth Model（戈登增长模型）：<br>
+    <strong>P = D₁ / (r - g)</strong><br>
+    g = 4%（长期股息增长率，参考过去 5 年 CAGR）<br>
+    r = 9%（CAPM：无风险利率 4% + 风险溢价 5%）<br>
+    D₁ = HKD 1.28（2026 估）<br>
+    <strong>P = 1.28 / (9% - 4%) = HKD 25.6</strong><br>
+    评估：DDM 给出 <span class="warn-t">HKD 26 低于现价</span>——这反映了运营商行业的常态（油价波动大）。但考虑到桶油成本优势 + 产量增长，DDM 偏保守。</p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">7.6 NAV（净资产价值 · 油气储量法）</h3>
+  <div class="dcf-note">
+    <p>这是中海油最适用的估值方法之一：<br>
+    净证实储量 77.7 亿桶油当量 × 每桶净现值 ~$8 = $621.6亿 → 总市值 HKD 4,840亿<br>
+    <strong>但这是保守估算</strong>——按 PV-10（10% 折现率，SEC 标准）应该更高。<br>
+    海图保守估值：<strong>HKD 28-32/股</strong>（接近现价）<br>
+    评估：NAV 验证当前估值合理。</p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">7.7 反向 DCF —— 当前价隐含什么？</h3>
+  <div class="dcf-note">
+    <p>当前股价 HKD 28.98 隐含：<br>
+    1. 5 年 FCF CAGR 假设：<span class="hl-t" style="font-size:16px;">0-1%（持平）</span><br>
+    2. 永续增长率：0%<br>
+    3. 这意味着市场预期中海油<span class="hl-t">未来 5 年 FCF 持平</span>——这是非常保守的假设</p>
+    <p><strong>市场对中海油相对悲观</strong>。但 Q1 26 +8.6% 营收、+7.1% 净利已反弹。FY26 油价企稳 + 产量持续增长，FCF 应能 +5-10%——估值上修空间打开。</p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">7.8 SOTP 分部加总（按地区+产品）</h3>
+  <div class="dcf-note">
+    <p><strong>分部 A：国内海上原油</strong>（FY25 营收 ¥1,800亿 × 1.5x P/S）= ¥2,700亿 → <span class="hl-t">HKD 6.2/股</span><br>
+    <strong>分部 B：国内海上天然气</strong>（FY25 营收 ¥400亿 × 2x P/S，能源转型溢价）= ¥800亿 → HKD 1.8/股<br>
+    <strong>分部 C：海外油气</strong>（FY25 营收 ¥1,100亿 × 1.5x P/S）= ¥1,650亿 → HKD 3.8/股<br>
+    <strong>分部 D：储量价值</strong>（77.7 亿桶 × $8 = $621.6亿）= ¥4,360亿 → HKD 10.0/股<br>
+    <strong>分部 E：净现金</strong> = ¥1,050亿 → HKD 2.4/股<br>
+    <strong>SOTP 合计</strong>：HKD 24.2/股（保守）<br>
+    若给海外储量更高估值倍数（圭亚那 Stabroek 区块溢价）：<strong>HKD 32/股</strong></p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">7.9 估值汇总</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>方法</th><th>估值 (HKD/股)</th><th>权重</th><th>加权值</th><th>vs 现价 HKD 28.98</th></tr></thead>
+      <tbody>
+        <tr><td>相对估值</td><td>34</td><td>15%</td><td>5.10</td><td>+17%</td></tr>
+        <tr class="hl"><td><strong>DCF 概率加权</strong></td><td><strong>34</strong></td><td><strong>20%</strong></td><td><strong>6.80</strong></td><td><strong>+17%</strong></td></tr>
+        <tr><td>所有者盈余法（保守）</td><td>40</td><td>15%</td><td>6.00</td><td>+38%</td></tr>
+        <tr><td>PEG（不适用）</td><td>—</td><td>0%</td><td>—</td><td>—</td></tr>
+        <tr><td>DDM（保守）</td><td>26</td><td>10%</td><td>2.60</td><td>-10%</td></tr>
+        <tr><td>NAV（储量法）</td><td>30</td><td>15%</td><td>4.50</td><td>+3%</td></tr>
+        <tr><td>反向 DCF（隐含价）</td><td>—</td><td>0%</td><td>—</td><td>市场保守</td></tr>
+        <tr><td>SOTP（积极）</td><td>32</td><td>25%</td><td>8.00</td><td>+10%</td></tr>
+        <tr class="hl" style="background:rgba(122,154,122,.10);"><td><strong>加权公允价值</strong></td><td><strong>HKD 33</strong></td><td>—</td><td>HKD 33</td><td><strong>+14%</strong></td></tr>
+        <tr style="background:rgba(122,154,122,.06);"><td>估值中位数</td><td>HKD 35</td><td>—</td><td>—</td><td>+21%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>估值结论</strong>：8 种方法中适用的 6 种给出 HKD 26-40 区间。加权公允 <strong>HKD 33（+14%）</strong>，估值中位数 <strong>HKD 35（+21%）</strong>。当前价 HKD 28.98 提供 14-21% 安全边际。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 8 ═══ -->
+<div class="section">
+  <div class="stitle">模块 8 · 竞争与行业分析</div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:8px 0 12px">8.1 中国油气市场份额（2025 末）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>玩家</th><th>原油产量(百万桶/日)</th><th>市占率</th><th>核心定位</th></tr></thead>
+      <tbody>
+        <tr><td>中石油 0857</td><td>2.6</td><td>50%</td><td>陆上+综合</td></tr>
+        <tr class="hl"><td><strong>中海油 0883</strong></td><td><strong>2.13</strong></td><td><strong>30%</strong></td><td><strong>海上专营 + 纯上游</strong></td></tr>
+        <tr><td>中石化 0386</td><td>0.8</td><td>15%</td><td>陆上+炼化</td></tr>
+        <tr><td>其他（民企+外资）</td><td>0.3</td><td>5%</td><td>分散</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">8.2 直接竞争者财务对比</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>指标</th><th>中海油 0883</th><th>Exxon</th><th>Chevron</th><th>Shell</th></tr></thead>
+      <tbody>
+        <tr><td>FY25 营收 ($B)</td><td>480</td><td>~340</td><td>~190</td><td>~290</td></tr>
+        <tr><td>FY25 净利 ($B)</td><td>175</td><td>~33</td><td>~17</td><td>~24</td></tr>
+        <tr><td>净利率</td><td><span class="up">36.4%</span></td><td>10%</td><td>9%</td><td>8%</td></tr>
+        <tr><td>桶油成本 ($)</td><td><span class="up">27.9</span></td><td>40</td><td>45</td><td>35</td></tr>
+        <tr><td>产量增速</td><td><span class="up">+7%</span></td><td>+1%</td><td>+3%</td><td>持平</td></tr>
+        <tr><td>资产负债率</td><td><span class="up">26.7%</span></td><td>35%</td><td>25%</td><td>33%</td></tr>
+        <tr><td>P/E</td><td><span class="up">10.3x</span></td><td>13x</td><td>14x</td><td>11x</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">8.3 波特五力分析</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>五力</th><th>评分（1-5）</th><th>判断</th></tr></thead>
+      <tbody>
+        <tr><td>新进入者威胁</td><td>1</td><td>海上石油专营牌照 + 高资本壁垒</td></tr>
+        <tr><td>供应商议价</td><td>3</td><td>钻井设备商（中海油服）议价能力强</td></tr>
+        <tr><td>买家议价</td><td>2</td><td>中石化炼厂等长期合同锁定</td></tr>
+        <tr><td>替代品威胁</td><td>4</td><td>电动车 + 可再生能源 + 氢能威胁</td></tr>
+        <tr><td>同业竞争</td><td>2</td><td>三大油企默契合作（不同板块）</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>核心竞争优势</strong>：</p>
+    <p>
+    1. <span class="hl-t">"海上石油专营权"垄断牌照</span>——中国海上油气专营权<br>
+    2. <strong>桶油成本全球第二低</strong>——$27.9 vs Exxon $40 / Chevron $45<br>
+    3. <strong>产量持续增长</strong>——FY25 +7%（vs Exxon +1% / Chevron +3%）<br>
+    4. <strong>资产负债率最低</strong>——26.7% vs Exxon 35% / Shell 33%
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 模块 9 ═══ -->
+<div class="section">
+  <div class="stitle">模块 9 · 技术面与 K 线分析（次要参考）</div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:8px 0 12px">9.1 趋势</h3>
+  <div class="cmt">
+    <p><strong>52 周区间（H 股）</strong>：HKD 16.24 - HKD 30.98（高点 2026-04 财报后，低点 2025-08）<br>
+    <strong>当前位置</strong>：HKD 28.98，距 52 周高点 -6.5%、距低点 +78%<br>
+    <strong>200 日均线</strong>：~HKD 24.50（现价位于 200 日均线上方 +18%）<br>
+    <strong>50 日均线</strong>：~HKD 27.50（现价高于 50 日均线 +5%）</p>
+
+    <p><strong>趋势判断</strong>：中海油 H 股自 2025-08 低点 HKD 16 进入<span class="hl-t">强势上升通道</span>——12 个月涨幅 +78%。<strong>HKD 27-28 是关键支撑</strong>，HKD 31 是阻力位。</p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">9.2 技术指标</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>指标</th><th>当前值</th><th>判断</th></tr></thead>
+      <tbody>
+        <tr><td>RSI (14日)</td><td>~62</td><td>偏强</td></tr>
+        <tr><td>MACD</td><td>金叉延续</td><td>多头</td></tr>
+        <tr><td>布林带</td><td>上轨附近</td><td>强势</td></tr>
+        <tr><td>成交量</td><td>财报后放大</td><td>资金确认</td></tr>
+        <tr><td>20 日均线</td><td>HKD 28.5</td><td>站稳</td></tr>
+        <tr class="hl"><td>关键支撑/压力</td><td>HKD 27 / HKD 32</td><td>窄幅震荡</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>对价值投资视角的提示</strong>：技术面与基本面双双指向"<span class="hl-t">合理估值 + 强势趋势 + Q1 财报后偏强</span>"。HKD 28.98 已位于估值中位 HKD 35 之下 17%，安全边际充足。等回调到 HKD 26-27 是更好的二仓建仓窗口。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 10 ═══ -->
+<div class="section">
+  <div class="stitle">模块 10 · 增长催化剂与前景展望</div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:8px 0 12px">10.1 短期催化剂（未来 6 个月）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>事件</th><th>预期日期</th><th>影响</th></tr></thead>
+      <tbody>
+        <tr><td>2025 末期股息除权日</td><td>2026-06-12</td><td><span class="up">¥0.66/股</span></td></tr>
+        <tr><td>2025 末期股息派付</td><td>2026-07-15</td><td><span class="up">收到现金</span></td></tr>
+        <tr><td>H1 2026 中报</td><td>2026-08-15</td><td><span class="up">中期股息公告</span></td></tr>
+        <tr><td>OPEC+ 政策会议</td><td>2026 年内</td><td>油价方向</td></tr>
+        <tr><td>新油田投产（圭亚那）</td><td>2026 年内</td><td>产量增长加速</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">10.2 中期前景（3-5 年）</h3>
+  <div class="cmt">
+    <p><strong>看多论据</strong>：</p>
+    <p>
+    1. <span class="hl-t">产量持续增长</span>——FY26 目标 780-800 百万桶（中位 +1.6%），但 Q1 +8.6% 已超指引<br>
+    2. <strong>桶油成本继续下降</strong>——目标 FY30 降至 $25 以下<br>
+    3. <strong>圭亚那 Stabroek 区块爆发</strong>——海外储量持续增长<br>
+    4. <strong>派息率提升空间</strong>——当前 44%，国企指引"稳中有升"<br>
+    5. <strong>FCF 持续高水平</strong>——5 年累计 ¥4,743 亿<br>
+    6. <strong>AH 折价 35%</strong>——港股相对 A 股极度低估
+    </p>
+
+    <p><strong>看空论据</strong>：</p>
+    <p>
+    1. <span class="warn-t">能源转型加速</span>——电动车 + 可再生能源持续渗透<br>
+    2. <strong>油价波动大</strong>——OPEC+ 增产可能压制油价<br>
+    3. <strong>地缘政治风险</strong>——海外资产（巴西、北海等）面临政治风险<br>
+    4. <strong>资源税政策</strong>——中国油气资源税可能上调<br>
+    5. <strong>美国制裁风险</strong>——中海油 NYSE 已退市，未来可能再次遭遇制裁
+    </p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">10.3 TAM / SAM / SOM</h3>
+  <div class="cmt">
+    <p>
+    <strong>TAM（全球油气总市场）</strong>：~$5 万亿（2025）, 预计 2030 年 $4.5 万亿（CAGR -2%，能源转型）<br>
+    <strong>SAM（亚洲海上油气）</strong>：~$300 亿（2025）, 预计 2030 年 $350 亿（CAGR 3%）<br>
+    <strong>SOM（中海油当前份额）</strong>：~$480 亿营收 = 中国海上油气 70%<br>
+    <strong>未来 5 年 SOM 目标</strong>：$550-600 亿营收 → CAGR 3-5%
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 模块 11 ═══ -->
+<div class="section">
+  <div class="stitle">模块 11 · 风险矩阵（多维评估）</div>
+
+  <div class="risk-grid">
+    <div class="risk-card r3">
+      <h5>1. 经营风险</h5>
+      <span class="risk-score">中 · 3/5</span>
+      <p>油价波动是最大变量（FY25 -13.4% 拖累净利 -11.5%）。但产量持续增长 + 桶油成本控制提供对冲。</p>
+    </div>
+    <div class="risk-card r1">
+      <h5>2. 财务风险</h5>
+      <span class="risk-score">极低 · 1/5</span>
+      <p><span class="up">资产负债率 26.7% 行业最低 + 真实净现金 ¥1,050亿 + A+/A1 信用</span>。即便油价跌至 $40 仍能扛过周期。</p>
+    </div>
+    <div class="risk-card r2">
+      <h5>3. 竞争风险</h5>
+      <span class="risk-score">极低 · 2/5</span>
+      <p>中国海上石油专营权 + 桶油成本全球第二低。<strong>这是寡头垄断市场</strong>。</p>
+    </div>
+    <div class="risk-card r3">
+      <h5>4. 监管/政策风险</h5>
+      <span class="risk-score">中 · 3/5</span>
+      <p>资源税 + 暴利税 + 环保监管 + 美国制裁风险。<span class="warn-t">能源转型政策加速</span>是长期压力。</p>
+    </div>
+    <div class="risk-card r3">
+      <h5>5. 宏观风险</h5>
+      <span class="risk-score">中 · 3/5</span>
+      <p>全球经济放缓 → 油价下跌。<span class="warn-t">中国 GDP 增速放缓</span>影响国内能源需求。</p>
+    </div>
+    <div class="risk-card r2">
+      <h5>6. 估值风险</h5>
+      <span class="risk-score">极低 · 2/5</span>
+      <p><span class="up">P/E 10.3x、P/B 1.45、股息率 4.34%、AH 折价 35% — 估值合理</span>。下跌空间有限（仅 -10% 至 P/B 1.3），上涨空间 +14-21%。</p>
+    </div>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">黑天鹅情景（最坏情况）</h3>
+  <div class="cmt">
+    <p>
+    <strong>黑天鹅 1：油价跌至 $40 持续 2 年</strong>（OPEC+ 增产 + 全球衰退） — 概率 8%，股价跌至 HKD 18（-38%）<br>
+    <strong>黑天鹅 2：美国对中海油新一轮制裁</strong>（影响海外资产） — 概率 5%，股价跌至 HKD 22（-24%）<br>
+    <strong>黑天鹅 3：电动车渗透率 2030 超 50%</strong>（化石燃料需求骤降） — 概率 10%，股价跌至 HKD 20（-31%）<br>
+    <strong>组合最坏</strong>：3 项同时发生概率 &lt; 1%，但即使发生，每股净资产 HKD 20 + 真实净现金 HKD 2.4 提供下行支撑
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 海图评分卡 ═══ -->
+<div class="section">
+  <div class="stitle">海图评分卡 · 6 维 A-D + 红旗排查</div>
+
+  <div class="scorecard">
+    <div class="score-grid">
+      <div class="score-card">
+        <div class="score-letter s-bp">B+</div>
+        <div class="score-body">
+          <h4>1. 生意可预测性</h4>
+          <p>产量增长可预期 + 桶油成本稳定。<span class="warn-t">但油价波动大，FY25 净利 -11.5% 受油价影响</span>。海图给 B+。</p>
+        </div>
+      </div>
+
+      <div class="score-card">
+        <div class="score-letter s-a">A-</div>
+        <div class="score-body">
+          <h4>2. 经济护城河</h4>
+          <p>3 项宽护城河（成本/牌照/有效规模）+ 2 项窄。桶油成本 $27.9 是核心护城河。</p>
+        </div>
+      </div>
+
+      <div class="score-card">
+        <div class="score-letter s-bp">B+</div>
+        <div class="score-body">
+          <h4>3. 管理层质量</h4>
+          <p>国资委轮换制 + 100% 兑现指引 + 产量 7 连增 + 桶油成本控制纪律。<span class="warn-t">国企限薪激励有限</span>，海图给 B+。</p>
+        </div>
+      </div>
+
+      <div class="score-card">
+        <div class="score-letter s-a">A</div>
+        <div class="score-body">
+          <h4>4. 财务质量</h4>
+          <p>资产负债率 26.7% 行业最低 + 真实净现金 ¥1,050亿 + ROIC 11% + EBITDA 率 70%+ + FCF Yield 7.5%。<span class="hl-t">财务质量顶级</span>。</p>
+        </div>
+      </div>
+
+      <div class="score-card">
+        <div class="score-letter s-bp">B+</div>
+        <div class="score-body">
+          <h4>5. 资本配置纪律</h4>
+          <p>派息率 44% + Capex 100% 完成度 + 5 年累计 FCF ¥4,743亿。<span class="warn-t">未启动股票回购</span>，海图给 B+。</p>
+        </div>
+      </div>
+
+      <div class="score-card">
+        <div class="score-letter s-a">A</div>
+        <div class="score-body">
+          <h4>6. 估值与安全边际</h4>
+          <p>P/E 10.3x、P/B 1.45、股息率 4.34%、AH 折价 35%、加权公允 HKD 33（+14%）。<span class="hl-t">大蓝筹中合理低估</span>。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="flag-row">
+      <strong>⚠ 红旗排查（非评分项）</strong>：会计保守度 — <strong>无问题</strong>。商誉占资产仅 0.5%、无表外负债、收入确认时点保守、关联交易透明（中海油集团、中海油服）。SEC PV-10 储量审计标准严格。<br>
+      <strong>但有一项关注</strong>：油气储量评估假设依赖油价（SEC 标准用过去 12 个月平均油价），如油价持续下跌可能触发储量减值。
+    </div>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">综合评级</h3>
+  <div class="bscore" style="margin-top:8px;">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>综合：A- · 评级 = 买入</h4>
+      <p>3 项 A + 1 项 A- + 3 项 B+ = 51 / 60 分（85%）。无红旗触发。<strong>买入评级</strong>。这是少有的"3/6 维 A 级 + 全球桶油成本最低 + 产量 7 连增 + AH 折价 35%"组合，海图夜读全市场覆盖中"周期防御 + 价值机会"评分前列的标的。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 投资决策 ═══ -->
+<div class="section">
+  <div class="stitle">海图研判 · 投资决策</div>
+
+  <div class="cmt">
+    <p><strong>评级：买入</strong>（高股息 + 周期防御 + AH 大幅折价的三轮组合）</p>
+
+    <p><strong>12 个月概率加权目标价：HKD 35</strong>（+21% 上行）</p>
+  </div>
+
+  <div class="pgrid">
+    <div class="pbox">
+      <div class="pl">悲观（25%）</div>
+      <div class="pv pc">HKD 22</div>
+      <div class="pn">下行 -24%<br>油价跌至 $50 + 需求疲软</div>
+    </div>
+    <div class="pbox">
+      <div class="pl">基准（55%）</div>
+      <div class="pv pf">HKD 35</div>
+      <div class="pn">上行 +21%<br>油价 $65-75 + 产量 +5%</div>
+    </div>
+    <div class="pbox">
+      <div class="pl">乐观（20%）</div>
+      <div class="pv ps">HKD 48</div>
+      <div class="pn">上行 +66%<br>油价回升至 $80+ + 派息率升至 50%</div>
+    </div>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">分批建仓（独立估值视角）</h3>
+  <div class="cmt">
+    <p>使用估值中位数 HKD 35 作为基准。<strong>当前价 HKD 28.98 已位于"首仓"附近，是合理建仓窗口。</strong></p>
+  </div>
+
+  <div class="pgrid">
+    <div class="pbox">
+      <div class="pl">首仓（30% 仓位）</div>
+      <div class="pv ps">HKD 28</div>
+      <div class="pn">估值中位 × 80%<br>距现价 -3%（已过）</div>
+    </div>
+    <div class="pbox">
+      <div class="pl">二仓（35% 仓位）</div>
+      <div class="pv pf">HKD 24.5</div>
+      <div class="pn">估值中位 × 70%<br>距现价 -15%</div>
+    </div>
+    <div class="pbox">
+      <div class="pl">三仓（35% 仓位）</div>
+      <div class="pv pc">HKD 21</div>
+      <div class="pn">估值中位 × 60%<br>距现价 -28%（极端机会）</div>
+    </div>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">止盈策略（不止损，价值越跌越买）</h3>
+  <div class="pgrid">
+    <div class="pbox"><div class="pl">第一档</div><div class="pv pf">HKD 38</div><div class="pn">减仓 25%<br>对应 P/E ~13.5x</div></div>
+    <div class="pbox"><div class="pl">第二档</div><div class="pv pf">HKD 44</div><div class="pn">再减仓 25%<br>对应 P/E ~16x</div></div>
+    <div class="pbox"><div class="pl">第三档</div><div class="pv pf">HKD 52</div><div class="pn">再减仓 25%<br>对应 P/E ~19x（5 年 80% 分位）</div></div>
+  </div>
+
+  <div class="cmt" style="margin-top:18px;">
+    <p><strong>仓位管理</strong>：建议总仓位 <span class="hl-t">5-10%</span>（核心仓配置 · 周期防御）。持有周期 <strong>3-5 年</strong>。最后 25% 作为"长期债券替代品"——只要每年 4.34%+ 股息率不变，可永久持有。</p>
+
+    <p><strong>关键监控指标</strong>：</p>
+    <p>
+    1. <strong>实现油价</strong>——目标维持 $65 以上（若降至 $55 以下，警惕）<br>
+    2. <strong>油气产量</strong>——目标 FY26 +5%（若 -2%，警惕）<br>
+    3. <strong>桶油成本</strong>——目标维持 $30 以下<br>
+    4. <strong>储量替代率</strong>——目标维持 100%+<br>
+    5. <strong>派息率</strong>——目标 2026 维持 ≥40%（若降低则降级）<br>
+    6. <strong>AH 折价</strong>——若 H 股折价收窄至 20% 以下可考虑止盈
+    </p>
+
+    <p><strong>事件时间表</strong>：</p>
+    <p>
+    - 2026-06-12：2025 末期股息除权日<br>
+    - 2026-07-15：2025 末期股息派付（¥0.66）<br>
+    - 2026-08-15：H1 2026 中报 + 中期股息公告<br>
+    - 2026 年内：OPEC+ 政策会议<br>
+    - 2026 年内：圭亚那新油田投产
+    </p>
+
+    <p><strong>下一个催化剂日期</strong>：<span class="hl-t">2026-08-15 H1 2026 中报</span>。如全年指引上调（产量超 800 百万桶 + 净利 +5%）+ 中期股息 ¥0.70+ 兑现，估值快速修复至 HKD 32-35；如油价持续低迷，可能回调至 HKD 26-27 提供更好建仓机会。</p>
+  </div>
+</div>
+
+<!-- ═══ 海图页末长评（=社媒短文） ═══ -->
+<div class="section">
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记 · 1100 字</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p class="lead">石油是周期股，但不是所有石油股都一样。当全球都在谈论能源转型、电动车渗透时，中海油是少有的还能"产量七连增、桶油成本全球第二低、资产负债率行业最低"的核心资产。FY25 净利 -11.5% 看似下滑，但 Q1 26 营收 +8.6%、净利 +7.1% 强势反弹——这告诉你：周期低点已过。</p>
+
+      <p>FY2025 油气销售收入 ¥3,357 亿（-5.6%）、归母净利 ¥1,221 亿（-11.5%）、油气净产量 777.3 百万桶（+7%）、桶油成本 $27.9（全球最低之一）——这是一份"油价拖累、产量+成本对冲"的全年财报。但 Q1 2026 营收 ¥1,161 亿（+8.6%）、净利 ¥391 亿（+7.1%）、产量 205.1 百万桶（+8.6% 单季历史新高）——<strong>这不是恢复，是反弹</strong>。市场对中海油的悲观（H 股 P/E 仅 10.3x、AH 折价 35%）与公司的运营优秀形成鲜明反差。</p>
+
+      <h4>几个研判要点</h4>
+
+      <p><strong>一、桶油成本 $27.9 是真正的护城河。</strong>对比全球同行：Exxon $40、Chevron $45、Shell $35、BP $40——只有沙特阿美 $10-15 比中海油低。这意味着：<span class="hl-t">即便油价跌至 $40，中海油仍能保持盈利，而 Exxon/Chevron 已亏损</span>。这是"全周期穿越能力"的核心。FY25 油价 -13.4%、产量 +7%、桶油成本 -2.2%——三者对冲后净利仅 -11.5%（如果是 Exxon 同样油价跌幅可能净利 -30%+）。</p>
+
+      <p><strong>二、产量 7 连增 + 储量替代率 100%+ = 罕见的"成长型石油股"。</strong>FY18→FY25 产量 CAGR 约 6%，是<span class="hl-t">全球石油大公司中唯一持续高速增产的</span>（Exxon CAGR 1%、Chevron CAGR 3%、Shell 持平）。Q1 26 单季产量 205.1 百万桶，超过 FY25 全年 26%——证明产量增长动能强劲。圭亚那 Stabroek 区块继续爆发，国内渤海+南海持续发力。</p>
+
+      <p><strong>三、AH 折价 35% + 4.34% 股息率 = 港股极致低估。</strong>H 股 HKD 28.98 vs A 股 ¥40.93（折算 HKD 44.6）——<span class="hl-t">H 股相对 A 股折价 35%</span>。同样资产，港股投资者花同样的钱可以多买 35% 的股份。配合 4.34% 股息率（vs 中国移动 6.4% / 中国电信 5.83% 略低，但产量增长更快），是"高股息 + 周期赔率"组合最佳的港股。</p>
+
+      <p><strong>四、Q1 26 强势反弹打破"周期股"刻板印象。</strong>Q1 营收 +8.6%、净利 +7.1%、产量 +8.6%、销售费用 -86.8% 大降——<span class="hl-t">这是标准的"量价齐升 + 成本控制"教科书案例</span>。Q1 平均实现油价 $72.5（vs FY25 $66.47 反弹 +9%）。如果 FY26 油价维持在 $65-75 区间（OPEC+ 配额维持、需求恢复），<strong>FY26 净利可能 +5-10%</strong>。</p>
+
+      <p><strong>五、12 个月目标价 HKD 35，上行 +21%。</strong>悲观 HKD 22（-24%，油价跌至 $50）、基准 HKD 35（+21%，油价 $65-75 + 产量 +5%）、乐观 HKD 48（+66%，油价 $80+ + 派息率升至 50%）。<strong>当前价 HKD 28.98 已位于"首仓"附近 —— 是合理建仓窗口</strong>。海图的判断：未来 3-5 年预期年化回报 8-15%（含股息），优于绝大多数大盘股。</p>
+
+      <h4>海图研判</h4>
+
+      <p><strong>评级：买入</strong>（高股息 + 周期防御 + AH 大幅折价的三轮组合）。12 个月概率加权目标价 <strong>HKD 35</strong>（+21%）。</p>
+
+      <p>操作建议（独立估值中位数 HKD 35，加权公允 HKD 33）：当前价 HKD 28.98 已位于"首仓"附近。建议首仓 HKD 28（× 80%，已过）、二仓 HKD 24.5（× 70%，距现价 -15%）、三仓 HKD 21（× 60%，极端机会）。止盈三档 HKD 38 / HKD 44 / HKD 52，每档减仓 25%，最后 25% 作为"长期债券替代品"长期持有。建议总仓位 <strong>5-10%</strong>（核心仓配置 · 周期防御）。持有周期 3-5 年。</p>
+
+      <h4>风险提示</h4>
+
+      <p>OPEC+ 增产油价跌至 $50 / 全球衰退能源需求骤降 / 美国对中海油新一轮制裁 / 电动车渗透率超预期 / 资源税大幅上调 / 储量减值——任一项都可能让股价回调 15-30%。但 ¥1,050 亿真实净现金 + 国资委 64.4% 控股 + 桶油成本 $27.9 全球最低让破产概率为零，每股净资产 HKD 20 提供下行支撑。</p>
+
+      <p>关键叙事：<strong>"全球桶油成本最低 + 产量 7 连增 + AH 折价 35% + 4.34% 股息率"的稀有组合</strong>。在 NVIDIA/Lumentum 估值过热、阿里管理层缺乏资本纪律的当下，中海油是港股大蓝筹中"周期防御 + 价值机会"组合最佳的之一——不是给追求 AI 主题的人，而是给追求"低估值 + 高股息 + 全周期穿越"的耐心投资者。下次催化剂：2026-08-15 H1 中报。</p>
+
+      <p class="haitu-sign">—— 海图，灯下落笔，明日再观风浪。</p>
+
+      <p class="haitu-disc">⚠️ 免责声明：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，不构成任何投资建议。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div>《海图夜读》 · CNOOC 中海油 0883 FY2025 海图研判</div>
+  <div style="margin-top:6px;">数据来源：中海油 FY2025 年报（2026-03-27）+ Q1 2026 业绩公告（2026-04-28）· 港交所披露易官方文件</div>
+  <div style="margin-top:6px;">价值投资 · 长期主义</div>
+</footer>
+
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  const cur = html.getAttribute('data-theme');
+  html.setAttribute('data-theme', cur === 'dark' ? 'light' : 'dark');
+  localStorage.setItem('theme', html.getAttribute('data-theme'));
+  renderCharts();
+}
+(function() {
+  const t = localStorage.getItem('theme');
+  if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+})();
+
+function gc(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+
+let charts = {};
+function renderCharts() {
+  Object.values(charts).forEach(c => c && c.destroy && c.destroy());
+  charts = {};
+  const txt2 = gc('--text2'), txt3 = gc('--text3'), grid = gc('--chart-grid');
+  const accent = gc('--accent'), accent2 = gc('--accent2'), accent3 = gc('--accent3');
+  const green = gc('--green'), gold = gc('--gold'), rose = gc('--rose'), red = gc('--red');
+
+  Chart.defaults.color = txt2;
+  Chart.defaults.font.family = 'Segoe UI, sans-serif';
+  Chart.defaults.font.size = 11;
+
+  charts.rev = new Chart(document.getElementById('revenueChart'), {
+    type: 'bar',
+    data: { labels: ['Q1 25', 'Q2 25', 'Q3 25', 'Q4 25', 'Q1 26'],
+      datasets: [{ label: 'Revenue', data: [1069, 904, 800, 584, 1161], backgroundColor: [accent3, gold, accent2, accent, green], borderRadius: 4 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+      scales: { y: { grid: { color: grid }, ticks: { color: txt3 } }, x: { grid: { display: false }, ticks: { color: txt3 } } } }
+  });
+
+  charts.profit = new Chart(document.getElementById('profitChart'), {
+    type: 'line',
+    data: { labels: ['Q1 25', 'Q2 25', 'Q3 25', 'Q4 25', 'Q1 26'],
+      datasets: [{ label: 'Net Profit', data: [366, 307, 312, 236, 391], borderColor: green, backgroundColor: 'rgba(122,154,122,0.1)', tension: 0.3, fill: true, pointBackgroundColor: green, pointRadius: 5 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+      scales: { y: { grid: { color: grid }, ticks: { color: txt3 } }, x: { grid: { display: false }, ticks: { color: txt3 } } } }
+  });
+
+  charts.seg = new Chart(document.getElementById('segmentChart'), {
+    type: 'doughnut',
+    data: { labels: ['原油销售', '天然气销售', '贸易及其他', '海外业务'],
+      datasets: [{ data: [2520, 600, 237, 1100], backgroundColor: [accent3, accent, gold, accent2], borderColor: gc('--card'), borderWidth: 2 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { color: txt2, font: { size: 11 } } } } }
+  });
+
+  charts.capex = new Chart(document.getElementById('capexChart'), {
+    type: 'bar',
+    data: { labels: ['FY19', 'FY20', 'FY21', 'FY22', 'FY23', 'FY24', 'FY25'],
+      datasets: [
+        { label: '油气产量（百万桶）', data: [507, 528, 573, 624, 678, 727, 777], backgroundColor: green, borderRadius: 4 }
+      ] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top', labels: { color: txt2, font: { size: 11 } } } },
+      scales: { y: { grid: { color: grid }, ticks: { color: txt3 } }, x: { grid: { display: false }, ticks: { color: txt3 } } } }
+  });
+
+  buildSankey();
+}
+
+function buildSankey() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const txt = isDark ? '#d4ccc4' : '#4a4340';
+  const cardBg = isDark ? '#2e2a25' : '#ffffff';
+
+  const sankeyData = [{
+    type: 'sankey', orientation: 'h', arrangement: 'snap', valueformat: ',.0f', valuesuffix: ' 亿',
+    node: {
+      pad: 22, thickness: 22, line: { color: 'transparent', width: 0 },
+      label: ['营收 3,357', '营业成本 1,400', '毛利 1,957', '销售&管理 200', '折旧摊销 800', '其他 200', '营业利润 757', '所得税+其他 -464', '净利 1,221', '非现金调整 +869', '经营现金流 2,090', 'Capex 1,205', '自由现金流 974'],
+      color: ['#7b8fa0', '#b87070', '#8a9a8e', '#b9a06a', '#c09090', '#a89f98', '#b08d7a', '#b87070', '#7a9a7a', '#7b8fa0', '#b08d7a', '#b87070', '#7a9a7a']
+    },
+    link: {
+      source: [0, 0, 2, 2, 2, 2, 6, 6, 8, 9, 10, 10],
+      target: [1, 2, 3, 4, 5, 6, 7, 8, 10, 10, 11, 12],
+      value:  [1400, 1957, 200, 800, 200, 757, -464, 1221, 1221, 869, 1205, 974],
+      color: ['rgba(184,112,112,0.30)', 'rgba(138,154,142,0.45)', 'rgba(185,160,106,0.30)', 'rgba(192,144,144,0.30)', 'rgba(168,159,152,0.30)', 'rgba(176,141,122,0.45)', 'rgba(184,112,112,0.30)', 'rgba(122,154,122,0.45)', 'rgba(122,154,122,0.40)', 'rgba(123,143,160,0.40)', 'rgba(184,112,112,0.30)', 'rgba(122,154,122,0.50)']
+    }
+  }];
+
+  const layout = { font: { family: 'Segoe UI, sans-serif', size: 11, color: txt }, paper_bgcolor: cardBg, plot_bgcolor: cardBg, margin: { l: 10, r: 10, t: 10, b: 10 } };
+  Plotly.react('sankey', sankeyData, layout, { displayModeBar: false, responsive: true });
+}
+
+document.addEventListener('DOMContentLoaded', renderCharts);
+</script>
+
+</body>
+</html>
