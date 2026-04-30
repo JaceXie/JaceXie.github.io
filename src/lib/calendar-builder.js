@@ -19,13 +19,16 @@ export function buildCalendar(fetchResults, todayStr) {
     if (!data) continue;
     const t = ticker;
 
+    // displayName 优先（中文名），fallback 到 xueqiuCode
+    const displayName = t.displayName || t.xueqiuCode;
+
     // ── 1. 下次财报 (earnings) ──
     if (data.nextEarningsDate && data.nextEarningsDate >= sevenAgoStr) {
       const isPast = data.nextEarningsDate < todayStr;
       const isToday = data.nextEarningsDate === todayStr;
       events.push({
         date: data.nextEarningsDate,
-        ticker: t.xueqiuCode,
+        ticker: displayName,
         type: 'earnings',
         typeLabel: isPast
           ? `${guessPeriodLabel(t)} 财报(已发)`
@@ -46,7 +49,7 @@ export function buildCalendar(fetchResults, todayStr) {
     ) {
       events.push({
         date: data.lastEarningsDate,
-        ticker: t.xueqiuCode,
+        ticker: displayName,
         type: 'earnings',
         typeLabel: `${guessPrevPeriodLabel(t)} 财报(已发)`,
         detail: `${getCompanyShortName(t)} — 已发布，详见<a href="${t.lastReportFile}" style="color:var(--accent-gold);">海图研判</a>`,
@@ -63,7 +66,7 @@ export function buildCalendar(fetchResults, todayStr) {
 
       events.push({
         date: data.exDividendDate,
-        ticker: t.xueqiuCode,
+        ticker: displayName,
         type: 'ex-div',
         typeLabel: isPast ? '除权日(已过)' : '除权日',
         detail: `${getCompanyShortName(t)} — 股息 ${amount ? `<strong>${sym} ${formatMoney(amount, currency)}/股</strong>` : '（金额待披露）'}`,
@@ -80,7 +83,7 @@ export function buildCalendar(fetchResults, todayStr) {
 
       events.push({
         date: data.dividendPaymentDate,
-        ticker: t.xueqiuCode,
+        ticker: displayName,
         type: 'payment',
         typeLabel: isPast ? '派息日(已发)' : '派息日',
         detail: `${getCompanyShortName(t)} — 股息派付 ${amount ? `<strong>${sym} ${formatMoney(amount, currency)}/股</strong>` : ''}`,

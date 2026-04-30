@@ -86,7 +86,7 @@ const calendar = [];
 /* HAITU:CALENDAR:END */`;
   }
 
-  // 按 ticker 分组添加注释（更可读）
+  // 按 displayName/ticker 分组添加注释（更可读）
   const byTicker = {};
   for (const e of events) {
     if (!byTicker[e.ticker]) byTicker[e.ticker] = [];
@@ -95,12 +95,14 @@ const calendar = [];
 
   const lines = [];
   for (const [ticker, list] of Object.entries(byTicker)) {
-    lines.push(`  /* ${ticker} */`);
+    const xueqiu = list[0].xueqiu;
+    lines.push(`  /* ${ticker} (${xueqiu}) */`);
     for (const e of list) {
       const detail = escapeJsString(e.detail);
       const typeLabel = escapeJsString(e.typeLabel);
+      const tickerStr = escapeJsString(e.ticker);
       lines.push(
-        `  { date: "${e.date}", ticker: "${e.ticker}", type: "${e.type}", typeLabel: "${typeLabel}", detail: "${detail}", xueqiu: "${e.xueqiu}" },`
+        `  { date: "${e.date}", ticker: "${tickerStr}", type: "${e.type}", typeLabel: "${typeLabel}", detail: "${detail}", xueqiu: "${e.xueqiu}" },`
       );
     }
   }
