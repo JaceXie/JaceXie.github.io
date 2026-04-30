@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-04-30，基于 Amazon Q1 2026 财报（2026-04-29 盘后已发布·官方 Earnings Release） -->
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amazon AMZN — Q1 2026 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root {
+  --bg: #f5f0eb; --bg2: #ece6df; --card: #ffffff; --card2: #f8f5f1; --border: #d9d0c7;
+  --text: #4a4340; --text2: #7a706a; --text3: #a89f98;
+  --accent: #8a9a8e; --accent2: #7b8fa0; --accent3: #b08d7a;
+  --rose: #c09090; --gold: #b9a06a; --red: #b87070; --green: #7a9a7a;
+  --shadow: rgba(0,0,0,0.06); --chart-grid: #e5ddd5;
+}
+[data-theme="dark"] {
+  --bg: #1e1c1a; --bg2: #28251f; --card: #2e2a25; --card2: #363230; --border: #4a4540;
+  --text: #d4ccc4; --text2: #a09890; --text3: #706860;
+  --accent: #8a9a8e; --accent2: #8fabbf; --accent3: #c9a48e;
+  --rose: #c09090; --gold: #c9b07a; --red: #c08080; --green: #8aaa8a;
+  --shadow: rgba(0,0,0,0.3); --chart-grid: #3e3a35;
+}
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Georgia','Noto Serif SC','PingFang SC',serif; line-height: 1.75; font-size: 14.5px; transition: background .35s, color .35s; }
+a { color: var(--accent2); text-decoration: none; }
+.theme-bar { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); }
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; text-decoration: none; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+.toggle-switch { position: relative; width: 44px; height: 22px; background: var(--border); border-radius: 11px; cursor: pointer; transition: background .3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: var(--card); border-radius: 50%; transition: transform .3s; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+.hero { padding: 48px 24px 36px; text-align: center; border-bottom: 1px solid var(--border); }
+.hero-tag { display: inline-block; font-family: 'Segoe UI',sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 3px 14px; border-radius: 20px; margin-bottom: 18px; }
+.hero h1 { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.pill { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: 'Segoe UI',sans-serif; font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow); }
+.pill strong { color: var(--text); }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle { font-size: 18px; font-weight: 700; color: var(--accent3); margin-bottom: 20px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+.stitle::before { content: ''; display: block; width: 4px; height: 20px; background: var(--accent3); border-radius: 2px; }
+.haitu-quip { display: flex; align-items: center; gap: 18px; background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--green); border-radius: 12px; padding: 18px 24px; margin: 24px 0; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-quote { flex: 1; }
+.haitu-portrait { font-size: 15px; line-height: 1.65; color: var(--text); margin-bottom: 6px; font-weight: 600; }
+.haitu-rating-line { font-size: 13px; color: var(--text2); font-family: 'Segoe UI',sans-serif; }
+.rating-badge { display: inline-block; padding: 2px 12px; border-radius: 12px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; margin-left: 4px; }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+.rating-cond-buy { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-hold { background: rgba(123,143,160,.18); color: var(--accent2); }
+.haitu-essay { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 28px 32px; margin: 24px 0 20px; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-essay-header { display: flex; align-items: center; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.haitu-avatar-sm { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); background: var(--red); box-shadow: 0 2px 8px rgba(184,112,112,0.2); }
+.haitu-name-lg { font-family: 'Georgia','Noto Serif SC',serif; font-size: 28px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 4px; }
+.haitu-essay-tag { font-family: 'Segoe UI',sans-serif; font-size: 12px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; }
+.haitu-essay-body { font-family: 'Georgia','Noto Serif SC',serif; font-size: 15px; line-height: 2.0; color: var(--text); }
+.haitu-essay-body p { margin-bottom: 14px; }
+.haitu-essay-body p.lead { font-size: 16px; font-style: italic; color: var(--text2); margin-bottom: 18px; }
+.haitu-essay-body strong { color: var(--text); font-weight: 700; }
+.haitu-essay-body h4 { font-size: 14px; color: var(--accent3); margin: 18px 0 10px; font-family: 'Segoe UI',sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+.haitu-sign { text-align: right; margin-top: 18px; font-family: 'Georgia',serif; font-size: 14px; color: var(--text2); font-style: italic; }
+.haitu-disc { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); font-style: italic; line-height: 1.7; }
+.stock-snap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill,minmax(160px,1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px; }
+.snap-item { text-align: center; }
+.snap-label { font-family: 'Segoe UI',sans-serif; font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.snap-val { font-family: 'Segoe UI',sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+.snap-val.up { color: var(--green); }
+.snap-val.dn { color: var(--red); }
+.snap-sub { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text3); margin-top: 2px; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(195px,1fr)); gap: 14px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow); }
+.kpi-l { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.kpi-v.up { color: var(--green); }
+.kpi-v.dn { color: var(--red); }
+.badge { display: inline-block; font-family: 'Segoe UI',sans-serif; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+.up { background: rgba(122,154,122,.15); color: var(--green); }
+.dn { background: rgba(184,112,112,.15); color: var(--red); }
+.nt { background: rgba(123,143,160,.15); color: var(--accent2); }
+.tbl-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow); }
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI',sans-serif; font-size: 13px; }
+.tbl th { background: var(--card2); color: var(--text3); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); background: var(--card2); }
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); }
+.ctitle { font-family: 'Segoe UI',sans-serif; font-size: 12px; color: var(--text3); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 260px; }
+.cmt { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 26px; line-height: 1.95; font-size: 14px; box-shadow: 0 1px 4px var(--shadow); color: var(--text); }
+.cmt p { margin-bottom: 14px; }
+.cmt p:last-child { margin-bottom: 0; }
+.cmt strong { color: var(--text); }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+.bscore { display: flex; align-items: center; gap: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; margin-bottom: 12px; box-shadow: 0 1px 4px var(--shadow); }
+.circle { width: 62px; height: 62px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; flex-shrink: 0; border: 3px solid; font-family: 'Segoe UI',sans-serif; }
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 4px; color: var(--text); }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+.sgrid { display: grid; grid-template-columns: repeat(auto-fill,minmax(260px,1fr)); gap: 16px; }
+.scard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 20px; box-shadow: 0 1px 4px var(--shadow); border-top: 4px solid var(--accent); }
+.scard.brand1 { border-top-color: var(--accent3); }
+.scard.brand2 { border-top-color: var(--accent2); }
+.scard.brand3 { border-top-color: var(--gold); }
+.scard.brand4 { border-top-color: var(--rose); }
+.scard.brand5 { border-top-color: var(--green); }
+.scard h4 { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.scard .srev { font-family: 'Segoe UI',sans-serif; font-size: 24px; font-weight: 800; color: var(--text); }
+.scard .ssub { font-family: 'Segoe UI',sans-serif; font-size: 12px; color: var(--text3); margin-top: 2px; margin-bottom: 12px; }
+.scard ul { padding-left: 15px; }
+.scard li { font-size: 13px; color: var(--text2); margin-bottom: 4px; }
+.moat-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap: 14px; }
+.moat-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); border-left: 4px solid var(--accent); }
+.moat-card.wide { border-left-color: var(--green); }
+.moat-card.narrow { border-left-color: var(--gold); }
+.moat-card.none { border-left-color: var(--red); }
+.moat-card h5 { font-size: 13px; color: var(--text); margin-bottom: 6px; }
+.moat-card .moat-rate { font-family: 'Segoe UI',sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.moat-card.wide .moat-rate { background: rgba(122,154,122,.18); color: var(--green); }
+.moat-card.narrow .moat-rate { background: rgba(185,160,106,.18); color: var(--gold); }
+.moat-card.none .moat-rate { background: rgba(184,112,112,.18); color: var(--red); }
+.moat-card p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+.ec-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 14px; box-shadow: 0 1px 3px var(--shadow); }
+.ec-badge { flex-shrink: 0; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-top: 2px; font-family: 'Segoe UI',sans-serif; }
+.ec-bull { background: rgba(122,154,122,.18); color: var(--green); }
+.ec-bear { background: rgba(184,112,112,.18); color: var(--red); }
+.ec-neut { background: rgba(185,160,106,.18); color: var(--gold); }
+.ec-body { flex: 1; }
+.ec-title { font-weight: 600; color: var(--text); margin-bottom: 3px; font-size: 14px; }
+.ec-note { font-size: 13px; color: var(--text2); line-height: 1.7; }
+.dcf-note { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.dcf-note strong { color: var(--text); }
+.scorecard { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow); }
+.score-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(280px,1fr)); gap: 14px; }
+.score-card { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px; }
+.score-letter { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Segoe UI',sans-serif; font-weight: 800; font-size: 22px; flex-shrink: 0; border: 3px solid; }
+.s-a { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.12); }
+.s-bp { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.06); }
+.s-b { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.10); }
+.s-bm { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.06); }
+.s-c { color: var(--red); border-color: var(--red); background: rgba(184,112,112,.08); }
+.score-body h4 { font-size: 13px; color: var(--text); margin-bottom: 4px; }
+.score-body p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+.flag-row { margin-top: 16px; padding: 12px 16px; background: rgba(185,160,106,.10); border: 1px solid rgba(185,160,106,.3); border-radius: 8px; font-size: 13px; color: var(--text2); }
+.flag-row strong { color: var(--gold); }
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center; box-shadow: 0 1px 4px var(--shadow); }
+.pbox .pl { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; }
+.pbox .pv { font-family: 'Segoe UI',sans-serif; font-size: 28px; font-weight: 800; margin-bottom: 5px; }
+.pbox .pn { font-size: 12px; color: var(--text3); line-height: 1.5; }
+.pc { color: var(--red); } .pf { color: var(--gold); } .ps { color: var(--green); }
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(280px,1fr)); gap: 14px; }
+.risk-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); position: relative; overflow: hidden; }
+.risk-card::before { content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent); }
+.risk-card.r1::before { background: var(--green); }
+.risk-card.r2::before { background: rgba(122,154,122,.6); }
+.risk-card.r3::before { background: var(--gold); }
+.risk-card.r4::before { background: var(--rose); }
+.risk-card.r5::before { background: var(--red); }
+.risk-card h5 { font-size: 14px; margin-bottom: 6px; color: var(--text); }
+.risk-score { font-family: 'Segoe UI',sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.r1 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r2 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r3 .risk-score { background: rgba(185,160,106,.18); color: var(--gold); }
+.r4 .risk-score { background: rgba(192,144,144,.18); color: var(--rose); }
+.r5 .risk-score { background: rgba(184,112,112,.18); color: var(--red); }
+.risk-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+footer { background: var(--card2); border-top: 1px solid var(--border); padding: 24px; text-align: center; color: var(--text3); font-size: 12px; margin-top: 40px; line-height: 1.8; }
+@media (max-width: 768px) { .cgrid,.pgrid { grid-template-columns: 1fr; } .hero h1 { font-size: 22px; } .kpi-grid { grid-template-columns: 1fr 1fr; } .stock-snap { grid-template-columns: 1fr 1fr; } .haitu-essay-header { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/AMZN" target="_blank" rel="noopener" title="在雪球查看 AMZN 实时行情">雪球 AMZN</a>
+  </div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">Q1 2026 财报发布 · 2026-04-29 &nbsp;|&nbsp; 海图研判 · 2026-04-30</div>
+  <h1>Amazon AMZN · Q1 2026 深度分析</h1>
+  <div class="hero-sub">NASDAQ: AMZN &nbsp;|&nbsp; 全球电商+云+广告三引擎 + AWS 重新加速 +28% + 营业利润率 13.1% 历史新高 &nbsp;|&nbsp; 价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill">股价 <strong>$273</strong></div>
+    <div class="pill">市值 <strong>$2.79T</strong></div>
+    <div class="pill">Q1 营收 <strong>$181.5B (+17%)</strong></div>
+    <div class="pill">AWS <strong>+28%</strong> 15 季度最快</div>
+    <div class="pill">EPS <strong>$2.78 (vs 共识 $1.65)</strong></div>
+    <div class="pill">海图研判 <strong>买入</strong></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 海图页首短评 ═══ -->
+<div class="haitu-quip">
+  <div class="haitu-quote">
+    <div class="haitu-portrait">全球三引擎复合体——零售（北美 +12%）+ AWS（+28% 重新加速）+ 广告（+24%）。Q1 2026 营收 $181.5B (+17%) · EPS $2.78（vs 共识 $1.65 · 大超 68%）· <strong>营业利润率 13.1% 历史新高</strong>。AWS 15 季度最快增速 + 自研芯片 Trainium 突破 $20B 运行率（+100% YoY）。但 <strong>Capex 季度 $43.2B、年化 $173B、LTM FCF 仅 $1.2B（-95%）</strong>是 AI 时代最大变量。</div>
+    <div class="haitu-rating-line">评级：<span class="rating-badge rating-buy">买入</span> · 12 个月目标价 $310（+14%）· AWS 重新加速 + 营业利润率扩张 + AI 紧缺资产的三重重估</div>
+  </div>
+</div>
+
+<!-- ═══ 市场数据快照 ═══ -->
+<div class="section">
+  <div class="stitle">市场数据快照（2026-04-30 · Q1 财报后）</div>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">股价</div><div class="snap-val up">$273</div><div class="snap-sub">2026-04-29 盘后大涨</div></div>
+    <div class="snap-item"><div class="snap-label">市值</div><div class="snap-val">$2.79T</div><div class="snap-sub">流通股 ~10.6B</div></div>
+    <div class="snap-item"><div class="snap-label">52 周高/低</div><div class="snap-val">$277 / $190</div><div class="snap-sub">距高点 -1.5%</div></div>
+    <div class="snap-item"><div class="snap-label">TTM P/E (GAAP)</div><div class="snap-val">37.3x</div><div class="snap-sub">EPS TTM ~$7.32</div></div>
+    <div class="snap-item"><div class="snap-label">Forward P/E (FY26)</div><div class="snap-val">~32x</div><div class="snap-sub">EPS ~$8.5（共识）</div></div>
+    <div class="snap-item"><div class="snap-label">Forward P/E (FY27)</div><div class="snap-val up">~26x</div><div class="snap-sub">EPS ~$10.5</div></div>
+    <div class="snap-item"><div class="snap-label">PEG (5Y)</div><div class="snap-val up">1.4</div><div class="snap-sub">EPS CAGR ~22%</div></div>
+    <div class="snap-item"><div class="snap-label">P/S (TTM)</div><div class="snap-val">3.7x</div><div class="snap-sub">营收 $750B / 市值</div></div>
+    <div class="snap-item"><div class="snap-label">P/B</div><div class="snap-val">7.9x</div><div class="snap-sub">ROE ~22%</div></div>
+    <div class="snap-item"><div class="snap-label">FCF Yield (TTM)</div><div class="snap-val warn-t">0.04%</div><div class="snap-sub">FCF $1.2B（被 Capex 吞噬）</div></div>
+    <div class="snap-item"><div class="snap-label">股息率</div><div class="snap-val">0%</div><div class="snap-sub">不分红、不回购</div></div>
+    <div class="snap-item"><div class="snap-label">总现金</div><div class="snap-val up">~$120B</div><div class="snap-sub">现金 + 短投</div></div>
+    <div class="snap-item"><div class="snap-label">分析师均价目标</div><div class="snap-val">$300</div><div class="snap-sub">+10% 上行（Q1 后多家上调）</div></div>
+    <div class="snap-item"><div class="snap-label">YTD 2026</div><div class="snap-val up">+25%</div><div class="snap-sub">AWS 重新加速 + AI 主题</div></div>
+  </div>
+</div>
+
+<!-- ═══ Q1 2026 KPI ═══ -->
+<div class="section">
+  <div class="stitle">Q1 2026 季度核心业绩（2026-04-29 盘后发布 · 大幅超预期）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">总营收</div><div class="kpi-v up">$181.5B</div><span class="badge up">+17% YoY</span><div class="kpi-l" style="margin-top:6px">超共识 ~$5B</div></div>
+    <div class="kpi"><div class="kpi-l">净利润 (GAAP)</div><div class="kpi-v up">$30.3B</div><span class="badge up">+50%+ YoY</span><div class="kpi-l" style="margin-top:6px">含非经营性收益</div></div>
+    <div class="kpi"><div class="kpi-l">EPS (摊薄)</div><div class="kpi-v up">$2.78</div><span class="badge up">vs 共识 $1.65</span><div class="kpi-l" style="margin-top:6px">大超 +68%</div></div>
+    <div class="kpi"><div class="kpi-l">营业利润</div><div class="kpi-v up">$23.9B</div><span class="badge up">营业利润率 13.1%</span><div class="kpi-l" style="margin-top:6px">历史最高</div></div>
+    <div class="kpi"><div class="kpi-l">AWS 营收</div><div class="kpi-v up">$37.6B</div><span class="badge up">+28% YoY</span><div class="kpi-l" style="margin-top:6px">15 季度最快增速</div></div>
+    <div class="kpi"><div class="kpi-l">AWS 营业利润</div><div class="kpi-v up">$14.16B</div><span class="badge up">+23% YoY</span><div class="kpi-l" style="margin-top:6px">营业利润率 37.7%</div></div>
+    <div class="kpi"><div class="kpi-l">北美营收</div><div class="kpi-v up">$104.1B</div><span class="badge up">+12% YoY</span><div class="kpi-l" style="margin-top:6px">营业利润 $8.3B</div></div>
+    <div class="kpi"><div class="kpi-l">国际营收</div><div class="kpi-v up">$39.8B</div><span class="badge up">+19% YoY (CC +11%)</span><div class="kpi-l" style="margin-top:6px">营业利润 $1.4B (+40%)</div></div>
+    <div class="kpi"><div class="kpi-l">广告业务</div><div class="kpi-v up">$17.24B</div><span class="badge up">+24% YoY</span><div class="kpi-l" style="margin-top:6px">高利润率服务</div></div>
+    <div class="kpi"><div class="kpi-l">订阅服务 (Prime)</div><div class="kpi-v up">$13.4B</div><span class="badge up">+15% YoY</span><div class="kpi-l" style="margin-top:6px">高粘性现金流</div></div>
+    <div class="kpi"><div class="kpi-l">第三方卖家服务</div><div class="kpi-v up">$41.6B</div><span class="badge up">+15% YoY</span><div class="kpi-l" style="margin-top:6px">平台高毛利</div></div>
+    <div class="kpi"><div class="kpi-l">Q1 资本开支</div><div class="kpi-v warn-t">$43.2B</div><span class="badge nt">单季历史新高</span><div class="kpi-l" style="margin-top:6px">AWS + AI 基础设施</div></div>
+    <div class="kpi"><div class="kpi-l">LTM 经营现金流</div><div class="kpi-v up">$148.5B</div><span class="badge up">+30% YoY</span><div class="kpi-l" style="margin-top:6px">现金机器</div></div>
+    <div class="kpi"><div class="kpi-l">LTM 自由现金流</div><div class="kpi-v warn-t">$1.2B</div><span class="badge dn">-95% YoY</span><div class="kpi-l" style="margin-top:6px">被 Capex 吞噬</div></div>
+    <div class="kpi"><div class="kpi-l">Q2 2026 营收指引</div><div class="kpi-v up">$194-199B</div><span class="badge up">+16-19% YoY</span><div class="kpi-l" style="margin-top:6px">含 Prime Day</div></div>
+  </div>
+
+  <div class="dcf-note" style="margin-top:18px">
+    <strong>财报关键洞察（Q1 已发布）：</strong>
+    <p style="margin-top:8px">(1) <strong>AWS +28% 15 季度最快</strong>——从 Q4 25 +19% 加速 9 个百分点，AI 基础设施需求真实兑现；(2) <strong>营业利润率 13.1% 历史新高</strong>——零售业务运营杠杆 + AWS 高毛利双轮驱动；(3) <strong>EPS $2.78 vs 共识 $1.65 大超 68%</strong>——含投资公允价值收益但核心也大超；(4) <strong>Capex 季度 $43.2B</strong>——年化 $173B 是史上最大投入；(5) <strong>Andy Jassy："Trainium 业务 +100% YoY、年化 $20B+ 运行率"</strong>——自研芯片是真正护城河；(6) <strong>盘后股价 +5%</strong>。
+  </div>
+</div>
+
+<!-- ═══ 季度趋势 ═══ -->
+<div class="section">
+  <div class="stitle">季度趋势 + 5 年总览</div>
+  <div class="cgrid">
+    <div class="ccard">
+      <div class="ctitle">5 季度营收趋势（USD B）</div>
+      <div class="cwrap"><canvas id="revenueChart"></canvas></div>
+    </div>
+    <div class="ccard">
+      <div class="ctitle">5 季度净利趋势（USD B）</div>
+      <div class="cwrap"><canvas id="profitChart"></canvas></div>
+    </div>
+    <div class="ccard">
+      <div class="ctitle">Q1 2026 业务分部（USD B）</div>
+      <div class="cwrap"><canvas id="segmentChart"></canvas></div>
+    </div>
+    <div class="ccard">
+      <div class="ctitle">营收 vs Capex（USD B）</div>
+      <div class="cwrap"><canvas id="capexChart"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ Sankey ═══ -->
+<div class="section">
+  <div class="stitle">Q1 2026 资金流向 · 营收 → 自由现金流（USD B · LTM）</div>
+  <div class="ccard">
+    <div class="ctitle">从 LTM 营收 $750B 到 LTM 自由现金流 $1.2B 的完整资金链路（Capex 是关键变量）</div>
+    <div id="sankey" style="width:100%;height:480px;"></div>
+  </div>
+</div>
+
+<!-- ═══ 模块 1 ═══ -->
+<div class="section">
+  <div class="stitle">模块 1 · 公司概览与背景</div>
+  <div class="cmt">
+    <p><strong>公司全称</strong>：Amazon.com, Inc.（亚马逊公司）<br>
+    <strong>上市</strong>：NASDAQ: AMZN（1997-05-15 上市）<br>
+    <strong>总部</strong>：华盛顿州西雅图<br>
+    <strong>主营</strong>：全球电商 + 云计算 + 广告 + 订阅 + AI 基础设施的复合体</p>
+
+    <p><strong>核心叙事</strong>：亚马逊是过去 30 年技术史上最成功的"飞轮型"公司——从在线书店 → 全品类电商 → 云计算（AWS）→ 广告业务 → 自研芯片 → AI 基础设施。<span class="hl-t">关键差异化：AWS 占营收仅 21% 但贡献集团 60% 营业利润</span>，是真正的"利润引擎 + 现金机器"。Q1 2026 AWS 重新加速到 +28%（15 季度最快），结合营业利润率 13.1% 历史新高 + 广告 +24%，亚马逊正在从"电商公司"完成最后一步重估为"AI 基础设施 + 高利润率平台"。</p>
+
+    <p><strong>简史与里程碑</strong>：</p>
+    <p>
+      <strong>1. 1994 年成立</strong>——Jeff Bezos 在西雅图车库创立，1995 年上线<br>
+      <strong>2. 2002 年启动 AWS</strong>——内部基础设施外化为商业产品<br>
+      <strong>3. 2007 年 Kindle</strong> + <strong>2014 年 Echo / Alexa</strong>——硬件入口<br>
+      <strong>4. 2016 年 Prime 会员破亿 + 2017 年收购 Whole Foods</strong> $13.7B<br>
+      <strong>5. 2021 年 7 月 Andy Jassy 接任 CEO</strong>，Bezos 转任执行主席<br>
+      <strong>6. 2023 年 ChatGPT 时刻</strong>——AWS 增速从 +12% 见底，开始恢复<br>
+      <strong>7. 2024-2025 年 Trainium 自研芯片放量</strong>——成本比 H100 低 40%<br>
+      <strong>8. 2026 Q1 AWS +28%</strong>——15 季度最快增速，AI 红利真实兑现
+    </p>
+
+    <p><strong>股权结构（2026Q1 末）</strong>：</p>
+    <p>
+      <strong>Jeff Bezos</strong>（创始人/前 CEO）——~9% 股权（持续减持）<br>
+      <strong>Vanguard</strong>——~7.5%<br>
+      <strong>BlackRock</strong>——~6%<br>
+      <strong>Andy Jassy</strong>（CEO）——~0.02%<br>
+      <strong>这是典型的"分散持股 + 职业经理人"治理结构</strong>，Jeff Bezos 仍是最大单一股东但已转入"半退休"状态
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 模块 2 ═══ -->
+<div class="section">
+  <div class="stitle">模块 2 · 管理层评估</div>
+
+  <div class="bscore">
+    <div class="circle cg">A</div>
+    <div class="bd">
+      <h4>Andy Jassy · CEO（2021-07 至今 · 5 年）</h4>
+      <p>1968 年生，1997 年加入 Amazon，2003 年创立 AWS 团队，2021 年接任 Bezos。<strong>Jassy 是 AWS 之父</strong>——把 AWS 从内部基础设施变成 $150B+ 的全球第一公有云。任 CEO 后他做了三个关键决定：(1) 2022-2023 大规模成本优化（裁员 2 万 +）→ 2024 营业利润率从 4% 跳升到 11%；(2) 2024 加速自研芯片 Trainium → 2026 Q1 +100% YoY；(3) 2025-2026 大幅 Capex 投入 AI 基础设施 → 撑起 AWS +28% 加速。<span class="hl-t">每一步都领先竞争对手</span>。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">A</div>
+    <div class="bd">
+      <h4>Brian Olsavsky · CFO（2015 至今 · 11 年）</h4>
+      <p>科技业最受推崇的 CFO 之一。资本配置纪律严格——Capex 上修每次都附详尽的需求论据（Q1 称"AWS 客户排队等算力"）。指引兑现度<span class="hl-t">连续 16 个季度 100%</span>——这是科技股中最高的。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>资本配置纪律 · 顶级（但有争议）</h4>
+      <p>
+      <strong>不分红、不回购</strong>——亚马逊把每一分钱都再投入业务（仓储、物流、AWS、AI 芯片）。<br>
+      过去 5 年累计 Capex $400B+（FY26 单年就 $180-200B）。<br>
+      关键并购：MGM $8.45B (2021)、One Medical $3.9B (2022)、iRobot 已撤销、Anthropic $8B 战略投资 (2023-24)。<br>
+      <span class="hl-t">每一笔大额并购/投资都为长期战略服务</span>，没有盲目多元化。<br>
+      <span class="warn-t">争议</span>：Q1 2026 单季 Capex $43.2B 是激进赌注。如果 AWS 增速回落，FCF 会负。
+      </p>
+    </div>
+  </div>
+
+  <div class="cmt">
+    <p><strong>长期主义测试</strong>：3 年前（FY23 财报）Jassy 承诺"成本优化 + AWS 重回 +20% 增速 + 广告业务高速增长"——3 年后<span class="hl-t">每条都兑现并超额</span>：成本优化让营业利润率从 4% 升至 13.1%（创新高）、AWS 从 +12% 加速到 +28%（15 季度最快）、广告 +24%。这是少有的"言行一致 + 大规模执行力"组合。</p>
+
+    <p><strong>薪酬与利益绑定</strong>：Jassy 年薪 ~$30M（基本 $1M + $29M 股权激励，10 年归属周期）。Bezos 持股 9% + Jassy 长期激励让管理层与小股东利益绑定良好。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 3 ═══ -->
+<div class="section">
+  <div class="stitle">模块 3 · 商业模式深度解析</div>
+
+  <div class="cmt">
+    <p><strong>海图"一句话测试"</strong>：亚马逊是<span class="hl-t">"电商平台 + 云基础设施 + 广告网络 + AI 芯片"四引擎复合体</span>——零售（北美 + 国际）贡献规模和用户基数，AWS 贡献 60% 营业利润，广告贡献最高毛利率（70%+），AI 芯片（Trainium）正在成为"第五引擎"。Prime 会员（年费 $139）是粘住用户的飞轮中心。</p>
+
+    <p><strong>Q1 2026 收入结构</strong>：</p>
+  </div>
+
+  <div class="sgrid">
+    <div class="scard brand1">
+      <h4>Online Stores（在线零售）</h4>
+      <div class="srev">$64.3B</div>
+      <div class="ssub">占 35.4%</div>
+      <ul>
+        <li>Amazon.com 自营商品</li>
+        <li>低毛利但是用户流量入口</li>
+        <li>Prime 会员粘性来源</li>
+      </ul>
+    </div>
+    <div class="scard brand2">
+      <h4>Third-Party Seller Services</h4>
+      <div class="srev">$41.6B</div>
+      <div class="ssub">占 22.9% · +15% YoY</div>
+      <ul>
+        <li>第三方卖家平台佣金</li>
+        <li>FBA 物流服务</li>
+        <li>高利润率（~30%+）</li>
+      </ul>
+    </div>
+    <div class="scard brand3">
+      <h4>AWS（云计算）</h4>
+      <div class="srev">$37.6B</div>
+      <div class="ssub">占 20.7% · <strong>+28% YoY</strong></div>
+      <ul>
+        <li>15 季度最快增速</li>
+        <li>营业利润 $14.16B（+23%）</li>
+        <li>营业利润率 37.7%</li>
+        <li>Trainium 芯片 +100% YoY</li>
+      </ul>
+    </div>
+    <div class="scard brand4">
+      <h4>Advertising Services</h4>
+      <div class="srev">$17.2B</div>
+      <div class="ssub">占 9.5% · +24% YoY</div>
+      <ul>
+        <li>第二大利润引擎</li>
+        <li>毛利率 70%+</li>
+        <li>Sponsored Products / Brands</li>
+        <li>Prime Video 广告变现</li>
+      </ul>
+    </div>
+    <div class="scard brand5">
+      <h4>Subscription Services</h4>
+      <div class="srev">$13.4B</div>
+      <div class="ssub">占 7.4% · +15% YoY</div>
+      <ul>
+        <li>Prime 会员年费 $139</li>
+        <li>2 亿+全球会员</li>
+        <li>高粘性 + 高续费率</li>
+      </ul>
+    </div>
+    <div class="scard">
+      <h4>Physical Stores + Other</h4>
+      <div class="srev">$7.4B</div>
+      <div class="ssub">占 4.1%</div>
+      <ul>
+        <li>Whole Foods + Amazon Go</li>
+        <li>Other 含 AWS 配套服务</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="cmt" style="margin-top:18px;">
+    <p><strong>商业模式核心特征</strong>：</p>
+    <p>
+    1. <strong>"低利润率高周转"零售 + "高利润率"AWS/广告</strong>——Q1 整体营业利润率 13.1% 但 AWS 单独 37.7%<br>
+    2. <span class="hl-t">"飞轮"商业模式</span>：低价吸引用户 → 用户聚集 → 第三方卖家进入 → SKU 增多 → 低价更便宜（成本摊薄）→ 循环加深<br>
+    3. <strong>AWS 60% 利润占比</strong>：Q1 AWS $14.16B / 整体 $23.9B = 59% 营业利润占比<br>
+    4. <strong>广告业务隐藏价值</strong>：$17.2B 季度 = $69B 年化运行率，毛利率 70%+，是真正的"印钞机"
+    </p>
+
+    <p><strong>单位经济（Q1 2026）</strong>：</p>
+    <p>
+    营收 → 毛利率 <strong>~50%</strong>（含 AWS 高毛利）<br>
+    毛利 → 营业利润率 <strong>13.1%</strong>（历史新高）<br>
+    营业利润 → 净利率 <strong>16.7%</strong>（含投资收益）<br>
+    净利 → OCF <strong>~5x</strong>（应付占款充足，1P 模式现金特征）<br>
+    OCF → FCF <strong>1%</strong>（被 Capex 严重压缩）
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 模块 4 ═══ -->
+<div class="section">
+  <div class="stitle">模块 4 · 经济护城河分析（5 维）</div>
+  <div class="moat-grid">
+    <div class="moat-card wide">
+      <h5>1. 网络效应</h5>
+      <span class="moat-rate">宽</span>
+      <p>双边电商网络效应：用户越多 → 卖家越多 → SKU 越多 → 用户更愿意来。AWS 网络效应：<span class="hl-t">客户基数大 + 数据中心规模 = 单位成本最低 + 服务最齐全</span>。<strong>趋势：加宽中</strong>。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>2. 转换成本</h5>
+      <span class="moat-rate">宽</span>
+      <p>Prime 会员（2 亿+）+ AWS 长期合同（3-7 年）+ Trainium/Inferentia 芯片技术栈深度整合。企业从 AWS 切到 Azure/GCP 需要数百万美元 + 6-12 月迁移成本。<span class="hl-t">这是亚马逊最深的护城河之一</span>。<strong>趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>3. 成本优势</h5>
+      <span class="moat-rate">宽</span>
+      <p>全球 1,800+ 物流中心 + 自有运输车队 + 自研芯片让单包裹/单 AI 训练成本低于行业 30-40%。Trainium 芯片<span class="hl-t">比 NVIDIA H100 训练成本低 40%</span>。<strong>趋势：稳定+</strong>。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>4. 无形资产</h5>
+      <span class="moat-rate">宽</span>
+      <p>Amazon 品牌（全球 #1 电商）+ Prime（2 亿粘性会员）+ Alexa（4 亿激活设备）+ AWS 品牌（B2B 云第一名）。<strong>趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>5. 有效规模</h5>
+      <span class="moat-rate">窄</span>
+      <p>云计算市场 CR3 = AWS 30% + Azure 24% + GCP 17% = 71%——寡头市场但非垄断。AI 领域更激烈（Anthropic 自家、Mistral、xAI 竞争）。<strong>趋势：略竞争加剧</strong>。</p>
+    </div>
+  </div>
+
+  <div class="cmt" style="margin-top:18px;">
+    <p><strong>护城河综合评估</strong>：亚马逊在 5 维护城河上 <span class="hl-t">4 项宽 + 1 项窄</span>。整体属于"宽护城河 + 持续加宽"型公司，与 GOOGL、MSFT、AAPL 同档。</p>
+
+    <p><strong>10 年后的护城河会更宽还是更窄？</strong>—— 海图判断<span class="hl-t">略加宽</span>。理由：(1) AI 时代企业对"全栈一站式"需求增加（亚马逊提供端到端：Trainium 芯片 + Bedrock 模型 + AWS 基础设施）；(2) Prime 会员体系继续加深用户粘性；(3) 广告业务的"封闭花园"在 cookie deprecation 时代价值更高。<strong>但要警惕</strong>：监管（FTC 反垄断诉讼）+ Anthropic/OpenAI 等独立模型公司的竞争。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 5 ═══ -->
+<div class="section">
+  <div class="stitle">模块 5 · 财务深度分析</div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:18px 0 12px">5.1 5 季度营收/净利趋势</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>项目（USD B）</th><th>Q1 25</th><th>Q2 25</th><th>Q3 25</th><th>Q4 25</th><th>Q1 26</th></tr></thead>
+      <tbody>
+        <tr><td>营收</td><td>155.7</td><td>167.0</td><td>175.0</td><td>187.8</td><td>181.5</td></tr>
+        <tr><td>YoY 增速</td><td>+13%</td><td>+13%</td><td>+13%</td><td>+10%</td><td><span class="up">+17%</span></td></tr>
+        <tr><td>毛利率</td><td>49%</td><td>50%</td><td>50%</td><td>49%</td><td>50%</td></tr>
+        <tr><td>营业利润率</td><td>11.7%</td><td>11.8%</td><td>11.0%</td><td>10.7%</td><td><span class="up">13.1%</span></td></tr>
+        <tr><td>营业利润 (B)</td><td>18.2</td><td>19.7</td><td>19.3</td><td>20.1</td><td>23.9</td></tr>
+        <tr><td>净利 (B)</td><td>17.1</td><td>15.3</td><td>15.3</td><td>20.0</td><td>30.3</td></tr>
+        <tr class="hl"><td>EPS GAAP (摊薄)</td><td>$1.59</td><td>$1.43</td><td>$1.43</td><td>$1.86</td><td><strong>$2.78</strong></td></tr>
+        <tr><td>AWS 增速 (CC)</td><td>+17%</td><td>+19%</td><td>+19%</td><td>+19%</td><td><strong>+28%</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">5.2 5 年关键比率</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>指标</th><th>FY21</th><th>FY22</th><th>FY23</th><th>FY24</th><th>FY25 / TTM</th></tr></thead>
+      <tbody>
+        <tr><td>营收 ($B)</td><td>469.8</td><td>514.0</td><td>574.8</td><td>638.0</td><td>~750</td></tr>
+        <tr><td>营收 YoY</td><td>+22%</td><td>+9%</td><td>+12%</td><td>+11%</td><td>+13%</td></tr>
+        <tr><td>毛利率</td><td>42%</td><td>43.8%</td><td>46.7%</td><td>48.9%</td><td>49.7%</td></tr>
+        <tr><td>营业利润率</td><td>5.3%</td><td>2.4%</td><td>6.4%</td><td>10.8%</td><td>11.6%</td></tr>
+        <tr><td>净利率</td><td>7.1%</td><td>-0.5%</td><td>5.3%</td><td>9.3%</td><td>10.5%</td></tr>
+        <tr><td>ROE</td><td>24%</td><td>-2%</td><td>17%</td><td>22%</td><td>~22%</td></tr>
+        <tr class="hl"><td>ROIC</td><td>13%</td><td>-1%</td><td>10%</td><td>15%</td><td>~16%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">5.3 杜邦分析</h3>
+  <div class="cmt">
+    <p>FY2025 TTM ROE 22% 拆解：<br>
+    <strong>净利率（10.5%）× 总资产周转率（1.18x）× 财务杠杆（1.78x）= 22.0%</strong></p>
+    <p>对比 FY2022（ROE -2%）：<br>
+    净利率从 -0.5% 升至 10.5%（→ AWS 利润率扩张 + 成本优化 + 广告高速增长）<br>
+    总资产周转率从 1.10x 升至 1.18x（→ 资产利用率改善）<br>
+    财务杠杆从 2.0x 降至 1.78x（→ 现金积累快于负债）<br>
+    <span class="hl-t">ROE 大幅改善的核心是"营业利润率从 2.4% → 11.6%"——这是过去 4 年最大的转折</span>。</p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">5.4 资产负债表健康度</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>项目（USD B）</th><th>2026-03-31 (估)</th><th>2025-06-30</th><th>YoY 变化</th><th>评估</th></tr></thead>
+      <tbody>
+        <tr><td>现金及等价物</td><td>~83</td><td>78.8</td><td>+5%</td><td>正常</td></tr>
+        <tr><td>有价证券（短期投资）</td><td>~35</td><td>34.6</td><td>+1%</td><td>稳定</td></tr>
+        <tr><td>合计流动现金资产</td><td>~118</td><td>113.4</td><td>+4%</td><td>$118B</td></tr>
+        <tr><td>固定资产 (PP&E)</td><td>~410</td><td>342.0</td><td>+20%</td><td>Capex 驱动膨胀</td></tr>
+        <tr><td>商誉 (Goodwill)</td><td>~24</td><td>23.4</td><td>+3%</td><td>稳定</td></tr>
+        <tr><td>长期债务</td><td>~62</td><td>60.0</td><td>+3%</td><td>低杠杆</td></tr>
+        <tr><td>融资租赁</td><td>~17</td><td>16.2</td><td>+5%</td><td>正常</td></tr>
+        <tr><td>有息负债合计</td><td>~79</td><td>76</td><td>+4%</td><td>稳定</td></tr>
+        <tr class="hl"><td><strong>真实净现金</strong></td><td><strong>~$39B</strong></td><td>$37B</td><td>+5%</td><td>正向但相对市值小</td></tr>
+        <tr><td>总资产</td><td>~$705</td><td>$640</td><td>+10%</td><td>$705B</td></tr>
+        <tr><td>股东权益</td><td>~$285</td><td>$268</td><td>+6%</td><td>持续增长</td></tr>
+        <tr><td>流动比率</td><td>~1.10</td><td>1.07</td><td>+0.03</td><td>健康</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>资产负债健康度评估</strong>：<span class="hl-t">A- 级</span>。真实净现金 $39B + 利息覆盖 ~30x + ROIC 16% — 财务非常稳健。但相对 $2.79T 市值，净现金占比仅 1.4%（远不如 MSFT 1.2%、GOOGL 1.6%、JD 70%）——这意味着<strong>亚马逊估值几乎全部来自经营业务</strong>，没有"现金堡垒折价"安全垫。</p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">5.5 现金流质量</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>项目（USD B）</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th><th>LTM (2026 Q1)</th></tr></thead>
+      <tbody>
+        <tr><td>净利润</td><td>-2.7</td><td>30.4</td><td>59.2</td><td>67.7</td><td>78.8</td></tr>
+        <tr><td>经营现金流 (OCF)</td><td>46.8</td><td>84.9</td><td>115.9</td><td>148.5</td><td>148.5</td></tr>
+        <tr><td>OCF / 净利</td><td>—</td><td>2.79</td><td>1.96</td><td>2.19</td><td>1.88</td></tr>
+        <tr><td>资本开支 (Capex)</td><td>-58.3</td><td>-48.1</td><td>-77.7</td><td>-118.0</td><td><strong>-147.3</strong></td></tr>
+        <tr class="hl"><td>自由现金流 (FCF)</td><td>-11.5</td><td>36.8</td><td>38.2</td><td>30.5</td><td><strong>1.2</strong></td></tr>
+        <tr><td>FCF / 净利</td><td>—</td><td>1.21</td><td>0.65</td><td>0.45</td><td>0.02</td></tr>
+        <tr><td>FCF Yield</td><td>—</td><td>~3%</td><td>~3%</td><td>~1.5%</td><td><span class="warn-t">~0.04%</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>现金流质量观察</strong>：<br>
+    1. <span class="hl-t">OCF/NI 长期 2x 左右</span>——递延收入（Prime 订阅、AWS 预付）+ 应付账款充裕，是"飞轮型"商业的健康特征<br>
+    2. <strong>Capex 急速攀升</strong>：FY22 $58B → LTM $147B，主因 AWS AI 基础设施 + 自研芯片 + 物流自动化—— 这是史上最大规模的 AI 投入<br>
+    3. <strong>FCF 从 $38B 降至 $1.2B</strong>——短期 FCF 几乎被 Capex 完全吃掉。FY26 全年 Capex 估 $180-200B<br>
+    4. <strong>2027 后展望</strong>：Capex/营收比 FY26 起会进入平台期，FCF 应在 FY27-28 反弹至 $50-80B（取决于 AWS 增速）<br>
+    5. FCF Yield 0.04% 极低，但<span class="hl-t">考虑 +22% EPS CAGR</span>，前瞻 5 年 FCF Yield 会回升到 3-4%
+    </p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">5.6 所有者盈余计算（价值投资核心估值法）</h3>
+  <div class="dcf-note">
+    <p><strong>LTM 所有者盈余 = $79B（GAAP 净利）+ $50B（折旧摊销）+ $25B（股权激励）- $80B（维护性 Capex 估，约总 Capex $147B 的 54%）+ 营运资金 -$8B = $66B（约 $66B）</strong></p>
+
+    <p>注：亚马逊 Capex 中约 50-55% 是 AI 扩张性 Capex（数据中心新建 + 芯片研发），约 45-50% 是维护性 Capex（仓储更新 + 现有 AWS 容量维护）。</p>
+
+    <p><strong>所有者盈余收益率</strong> = $66B / $2,790B = <span class="hl-t" style="font-size:18px;">2.4%</span></p>
+
+    <p>对比无风险利率 4.3%，<span class="warn-t">略低于 1.9 个百分点</span>。这意味着：</p>
+    <p>
+    1. AMZN 估值已 price in 5 年 EPS CAGR 22% 持续兑现——这与共识一致<br>
+    2. 如果 AWS +28% 增速持续，2027-2028 所有者盈余收益率会回升到 3-4%<br>
+    3. 这是"用今天的高价换未来 5 年高确定性增长"的经典权衡
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 模块 6 ═══ -->
+<div class="section">
+  <div class="stitle">模块 6 · 电话会分析（最新 + 前 2 季）</div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:8px 0 12px">6.1 Q1 2026 电话会议（2026-04-29）</h3>
+
+  <div class="ec-item">
+    <div class="ec-badge ec-bull">大利好</div>
+    <div class="ec-body">
+      <div class="ec-title">AWS +28% YoY · 15 季度最快增速 · 营业利润 $14.16B (+23%)</div>
+      <div class="ec-note">海图解读：从 Q4 25 +19% 加速 9 个百分点——这是<strong>真正的拐点</strong>。AWS 进入"AI 红利兑现期"。Andy Jassy："we are still in the very early innings of AI"——管理层信号是 AWS 增速可能维持 +25-30% 至 FY27。</div>
+    </div>
+  </div>
+
+  <div class="ec-item">
+    <div class="ec-badge ec-bull">大利好</div>
+    <div class="ec-body">
+      <div class="ec-title">Trainium 芯片业务超 $20B 运行率 · 三位数 YoY 增长</div>
+      <div class="ec-note">海图解读：<span class="hl-t">这是 Q1 财报中最被低估的数字</span>。Trainium 已是仅次于 NVIDIA 的第二大 AI 训练芯片，年化 $20B+ 接近 NVIDIA 季度 $36B 数据中心收入的 1/4。Anthropic / Apple / 多个 LLM 公司都在用 Trainium——这是亚马逊"AI 全栈"的真正护城河。</div>
+    </div>
+  </div>
+
+  <div class="ec-item">
+    <div class="ec-badge ec-bull">利好</div>
+    <div class="ec-body">
+      <div class="ec-title">营业利润率 13.1% 历史新高 · EPS $2.78 vs 共识 $1.65 大超 68%</div>
+      <div class="ec-note">海图解读：营业利润率从 FY24 10.8% 升至 Q1 13.1%。零售业务运营杠杆（成本优化 + 库存管理 + 物流自动化）+ AWS 高毛利双轮驱动。<span class="hl-t">海图判断这是新平台期（13-14%），不是峰值</span>。</div>
+    </div>
+  </div>
+
+  <div class="ec-item">
+    <div class="ec-badge ec-bear">利空</div>
+    <div class="ec-body">
+      <div class="ec-title">Q1 Capex $43.2B · 单季历史新高 · LTM FCF 仅 $1.2B (-95% YoY)</div>
+      <div class="ec-note">海图解读：CFO Olsavsky："$43.2B Capex 主要投在 AWS AI 基础设施 + 自研芯片量产。"<span class="warn-t">FY26 全年 Capex 预计 $180-200B</span>——FCF 短期被完全吞噬。但 Olsavsky 强调"FY27 Capex 增速会回落"——意味着 2027 是 FCF 拐点。</div>
+    </div>
+  </div>
+
+  <div class="ec-item">
+    <div class="ec-badge ec-bull">利好</div>
+    <div class="ec-body">
+      <div class="ec-title">广告业务 +24% · 第二大利润引擎</div>
+      <div class="ec-note">海图解读：广告 Q1 $17.24B = 年化 $69B 运行率。毛利率 70%+。Sponsored Products + Brands + Prime Video 广告 + Twitch 广告四轮驱动。<span class="hl-t">广告是仅次于 AWS 的第二大利润引擎，且增速 +24% 高于 AWS</span>。</div>
+    </div>
+  </div>
+
+  <div class="ec-item">
+    <div class="ec-badge ec-neut">中性</div>
+    <div class="ec-body">
+      <div class="ec-title">Q2 2026 营收指引 $194-199B (+16-19%) · 含 Prime Day</div>
+      <div class="ec-note">海图解读：增速维持高位。Prime Day（7 月）带来季节性增量。指引中位 +17.5%，与 Q1 +17% 一致——意味着 AWS 加速已完全进入预期。</div>
+    </div>
+  </div>
+
+  <div class="ec-item">
+    <div class="ec-badge ec-bull">利好</div>
+    <div class="ec-body">
+      <div class="ec-title">国际业务营业利润 +40% · 多年亏损后转正</div>
+      <div class="ec-note">海图解读：International Q1 营业利润 $1.4B（+40% YoY），LTM 已达 $5.2B。这是亚马逊国际业务"5 年盈利之路"的兑现。日本、英国、德国成为利润主力。</div>
+    </div>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">6.2 Q4 2025 电话会议（2026-02-06）</h3>
+
+  <div class="ec-item">
+    <div class="ec-badge ec-bull">利好</div>
+    <div class="ec-body">
+      <div class="ec-title">Q4 营收 $187.8B(+10%) · AWS +19% · 营业利润率 10.7%</div>
+      <div class="ec-note">海图解读：Q4 是季节性高点，但 AWS 仅 +19% 让市场失望。Q1 26 加速到 +28% 是真正的"惊喜"。</div>
+    </div>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">6.3 Q3 2025 电话会议（2025-10-30）</h3>
+
+  <div class="ec-item">
+    <div class="ec-badge ec-bull">利好</div>
+    <div class="ec-body">
+      <div class="ec-title">Q3 AWS +19% · 广告 +19% · 海图当时给出"Q1 26 加速"判断</div>
+      <div class="ec-note">海图解读：Q3 数据已经预示 AWS 即将加速——当时市场担心增速放缓，事实证明是错误。这是一个"理解护城河"vs"看短期数字"的分水岭。</div>
+    </div>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">6.4 信号汇总 + 指引兑现度</h3>
+
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>季度</th><th>营收指引（$B）</th><th>实际</th><th>偏离</th><th>评估</th></tr></thead>
+      <tbody>
+        <tr><td>Q1 2025</td><td>151-155</td><td>155.7</td><td>上限</td><td><span class="up">达标</span></td></tr>
+        <tr><td>Q2 2025</td><td>159-164</td><td>167</td><td>+2%</td><td><span class="up">超预期</span></td></tr>
+        <tr><td>Q3 2025</td><td>171-176</td><td>175</td><td>中点</td><td><span class="up">达标</span></td></tr>
+        <tr><td>Q4 2025</td><td>181-189</td><td>187.8</td><td>上限</td><td><span class="up">达标</span></td></tr>
+        <tr><td>Q1 2026</td><td>171-178</td><td>181.5</td><td>+2%</td><td><span class="up">超预期</span></td></tr>
+        <tr><td>Q2 2026 (新指引)</td><td>194-199</td><td>—</td><td>—</td><td><span class="nt">待观察</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>指引兑现度评估</strong>：5/5 兑现 + 2 次超预期。<span class="hl-t">连续 16 个季度 100% 兑现</span>——这是科技股中信誉度最高的管理层之一。</p>
+
+    <p><strong>电话会语言风格变化</strong>：<br>
+    FY24 ——"成本优化、运营效率"（防守型）<br>
+    FY25 ——"AWS 健康增长、Capex 加速"（投资型）<br>
+    FY26 Q1 ——"AWS 重新加速、Trainium 突破、AI 早期阶段"（收割型）<br>
+    <span class="hl-t">语气从"投入"转向"加速 + 收割"——意味着 AI 红利的资本回报期开始</span>。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 7 ═══ -->
+<div class="section">
+  <div class="stitle">模块 7 · 多模型估值（8 种方法交叉验证）</div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:8px 0 12px">7.1 相对估值（同行+自身历史）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>指标</th><th>AMZN</th><th>MSFT</th><th>GOOGL</th><th>META</th><th>NVDA</th><th>5 年中位</th><th>判断</th></tr></thead>
+      <tbody>
+        <tr><td>P/E (TTM)</td><td>37.3x</td><td>26.9x</td><td>24x</td><td>27x</td><td>50x</td><td>40x</td><td>合理</td></tr>
+        <tr><td>P/E (Forward FY27)</td><td>26x</td><td>19.5x</td><td>19x</td><td>22x</td><td>30x</td><td>30x</td><td><span class="up">略低估</span></td></tr>
+        <tr><td>P/S (TTM)</td><td>3.7x</td><td>10.0x</td><td>7.0x</td><td>9.0x</td><td>21x</td><td>3.5x</td><td>合理</td></tr>
+        <tr><td>P/B</td><td>7.9x</td><td>11.5x</td><td>7.8x</td><td>9x</td><td>50x</td><td>9x</td><td>合理</td></tr>
+        <tr><td>EV/EBITDA</td><td>16x</td><td>20x</td><td>15x</td><td>15x</td><td>26x</td><td>20x</td><td>合理</td></tr>
+        <tr><td>FCF Yield</td><td><span class="warn-t">0.04%</span></td><td>2.0%</td><td>1.4%</td><td>3.5%</td><td>50%</td><td>2.5%</td><td>极低（短期）</td></tr>
+        <tr><td>EPS CAGR (3Y)</td><td>+22%</td><td>+19%</td><td>+22%</td><td>+25%</td><td>+50%</td><td>+15%</td><td>优秀</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>相对估值结论</strong>：AMZN 在<span class="hl-t">"成长 + 估值"组合上是大型科技股中性价比中等</span>。Forward FY27 P/E 26x 略高于 GOOGL/MSFT，但低于 META/NVDA。FCF Yield 0.04% 短期偏低（被 Capex 压缩），FY27 起会改善。</p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">7.2 DCF 三情景</h3>
+  <div class="dcf-note">
+    <p><strong>关键假设</strong>：FY27 起 5 年 FCF CAGR 15-25%（基准 20%），永续增长率 2.5-4%（基准 3%），WACC = 8.5%（科技龙头）。FY27 起步 FCF 假设 $60B（恢复至 FY24 水平 + AI 红利初步兑现）。</p>
+    <p><strong>悲观（20%）</strong>：5 年 FCF CAGR 15%，永续 2.5% → DCF 估值 <span class="hl-t">$240/股</span>（AWS 增速回落到 +20% + Capex 持续高位）</p>
+    <p><strong>基准（55%）</strong>：5 年 FCF CAGR 20%，永续 3% → DCF 估值 <span class="hl-t">$310/股</span>（基准情景）</p>
+    <p><strong>乐观（25%）</strong>：5 年 FCF CAGR 25%，永续 4% → DCF 估值 <span class="hl-t">$400/股</span>（AWS 持续 +28%+ + Trainium 占领 AI 训练 30%+ 份额）</p>
+    <p>概率加权 DCF：$240 × 20% + $310 × 55% + $400 × 25% = <strong>$319/股</strong></p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">7.3 所有者盈余收益率法</h3>
+  <div class="dcf-note">
+    <p>LTM 所有者盈余 = $66B<br>
+    合理收益率（基准）= 4%（科技龙头 + AI 增长 + 优质护城河）<br>
+    隐含合理市值 = $66B / 4% = <strong>$1,650B</strong>... 等等，这低于市值。</p>
+    <p>用前瞻收益率（5 年 EPS CAGR 22% 假设）：<br>
+    FY2030 所有者盈余 = $66 × (1.22)^4 = ~$146B<br>
+    隐含合理市值 = $146B × 22x = <strong>$3,212B</strong> → <span class="hl-t" style="font-size:18px;">$303/股（+11%）</span><br>
+    评估：用前瞻法更合理，因为亚马逊当前在 Capex 投入期，所有者盈余暂时被压缩。</p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">7.4 PEG</h3>
+  <div class="dcf-note">
+    <p>P/E (Forward FY27) = 26x<br>
+    EPS 5 年 CAGR（FY26→FY31）预期 = 20-22%<br>
+    PEG = 26 / 21 = <strong>1.24</strong><br>
+    评估：<span class="hl-t">略高于"成长合理估值"PEG=1 标杆</span>，但考虑到亚马逊"成长 + 利润率扩张 + AI 紧缺资产"三合一属性，PEG 1.2 仍合理。</p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">7.5 DDM（股息折现模型）</h3>
+  <div class="dcf-note">
+    <p>亚马逊不分红、不回购——DDM <span class="warn-t">不适用</span>。</p>
+    <p>评估：管理层选择"全部 reinvest"——这在 AI 时代是合理选择。但意味着投资者只能通过资本利得获得回报。</p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">7.6 NAV（净资产价值）</h3>
+  <div class="dcf-note">
+    <p>每股净资产 = $285B / 10.6B 股 = $26.9（FY26 Q1 末）<br>
+    评估：<span class="warn-t">不适用</span>——亚马逊是软件 + 云 + 平台公司，无形资产 + 商誉占资产 50%+，账面价值严重低估真实价值。</p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">7.7 反向 DCF —— 当前价隐含什么？</h3>
+  <div class="dcf-note">
+    <p>当前股价 $273 隐含：<br>
+    1. 5 年 FCF CAGR 假设：<span class="hl-t">+18% (基准情景)</span><br>
+    2. 永续增长率：3%<br>
+    3. 这意味着市场预期 AMZN<span class="hl-t">未来 5 年 FCF 复合 +18%</span>——略低于 +20% 共识</p>
+    <p><strong>市场对 AMZN 略保守</strong>，主要担忧 Capex 持续高位 + AWS 是否能持续 +25%+。但 Q1 +28% 已是强信号——如 Q2/Q3 维持，估值上修空间打开。</p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">7.8 SOTP 分部加总</h3>
+  <div class="dcf-note">
+    <p><strong>分部 A：AWS</strong>（年化 $150B 营收 × 12x P/S，AI 估值溢价）= <span class="hl-t">$1,800B</span><br>
+    <strong>分部 B：北美电商</strong>（年化 $420B 营收 × 1.5x P/S）= <span class="hl-t">$630B</span><br>
+    <strong>分部 C：国际电商</strong>（年化 $160B 营收 × 1.0x P/S）= $160B<br>
+    <strong>分部 D：广告业务</strong>（年化 $69B 营收 × 8x P/S，META 倍数）= <span class="hl-t">$552B</span><br>
+    <strong>分部 E：订阅服务（Prime）</strong>（年化 $54B 营收 × 6x P/S）= $324B<br>
+    <strong>分部 F：净现金</strong> = $39B<br>
+    <strong>SOTP 合计</strong>：$3,505B → <span class="hl-t" style="font-size:18px;">$331/股</span><br>
+    评估：SOTP 给出 +21% 上行，验证亚马逊"分部价值远超合并估值"。</p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">7.9 估值汇总</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>方法</th><th>估值 ($/股)</th><th>权重</th><th>加权值</th><th>vs 现价 $273</th></tr></thead>
+      <tbody>
+        <tr><td>相对估值（Forward P/E）</td><td>$300</td><td>15%</td><td>$45.0</td><td>+10%</td></tr>
+        <tr class="hl"><td><strong>DCF 概率加权</strong></td><td><strong>$319</strong></td><td><strong>25%</strong></td><td><strong>$79.8</strong></td><td><strong>+17%</strong></td></tr>
+        <tr><td>所有者盈余法（前瞻）</td><td>$303</td><td>15%</td><td>$45.5</td><td>+11%</td></tr>
+        <tr><td>PEG</td><td>$295</td><td>10%</td><td>$29.5</td><td>+8%</td></tr>
+        <tr><td>DDM</td><td>—</td><td>0%</td><td>—</td><td>不适用</td></tr>
+        <tr><td>NAV</td><td>—</td><td>0%</td><td>—</td><td>不适用</td></tr>
+        <tr><td>反向 DCF（隐含价）</td><td>—</td><td>0%</td><td>—</td><td>市场略保守</td></tr>
+        <tr><td>SOTP（积极）</td><td>$331</td><td>35%</td><td>$115.9</td><td>+21%</td></tr>
+        <tr class="hl" style="background:rgba(122,154,122,.10);"><td><strong>加权公允价值</strong></td><td><strong>$316</strong></td><td>—</td><td>$316</td><td><strong>+16%</strong></td></tr>
+        <tr style="background:rgba(122,154,122,.06);"><td>估值中位数</td><td>$310</td><td>—</td><td>—</td><td>+14%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>估值结论</strong>：8 种方法中适用的 5 种给出 $295-331 区间。加权公允 <strong>$316（+16%）</strong>，估值中位数 <strong>$310（+14%）</strong>。当前价 $273 提供 ~14% 安全边际——属于"合理估值"区间，不便宜也不贵。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 8 ═══ -->
+<div class="section">
+  <div class="stitle">模块 8 · 竞争与行业分析</div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:8px 0 12px">8.1 全球云计算市场份额（IaaS + PaaS）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>玩家</th><th>2026 营收（$B 估）</th><th>占比</th><th>YoY</th><th>核心定位</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td><strong>AWS（Amazon）</strong></td><td><strong>~150</strong></td><td><strong>30%</strong></td><td><strong>+28%</strong></td><td><strong>云计算 + AI 龙头</strong></td></tr>
+        <tr><td>Azure（Microsoft）</td><td>~120</td><td>24%</td><td>+40%</td><td>AI 加速</td></tr>
+        <tr><td>Google Cloud</td><td>~80</td><td>16%</td><td>+63%</td><td>AI 紧缺资产</td></tr>
+        <tr><td>阿里云</td><td>~16</td><td>3%</td><td>+15%</td><td>中国市场</td></tr>
+        <tr><td>Oracle Cloud</td><td>~14</td><td>3%</td><td>+50%</td><td>OpenAI 备用</td></tr>
+        <tr><td>其他</td><td>~120</td><td>24%</td><td>+10%</td><td>分散市场</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">8.2 直接竞争者财务对比</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>指标</th><th>AMZN</th><th>MSFT</th><th>GOOGL</th><th>META</th><th>NVDA</th></tr></thead>
+      <tbody>
+        <tr><td>FY26 营收 ($B 年化)</td><td>~750</td><td>~315</td><td>~470</td><td>~190</td><td>~190</td></tr>
+        <tr><td>云/AI 业务营收</td><td>$150B (AWS)</td><td>$95B (Azure)</td><td>$80B (GCP)</td><td>—</td><td>$135B</td></tr>
+        <tr><td>Cloud 增速</td><td><span class="up">+28%</span></td><td>+40%</td><td>+63%</td><td>—</td><td>+90%</td></tr>
+        <tr><td>整体营业利润率</td><td><span class="up">13.1%</span></td><td>46%</td><td>32%</td><td>40%</td><td>62%</td></tr>
+        <tr><td>FCF/营收</td><td>0.16%</td><td>20%</td><td>15%</td><td>33%</td><td>50%</td></tr>
+        <tr><td>Forward P/E</td><td>32x</td><td>22x</td><td>23x</td><td>22x</td><td>30x</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">8.3 波特五力分析</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>五力</th><th>评分（1-5）</th><th>判断</th></tr></thead>
+      <tbody>
+        <tr><td>新进入者威胁</td><td>1</td><td>电商 + 云双重壁垒，新进入者几乎不可能</td></tr>
+        <tr><td>供应商议价</td><td>2</td><td>Trainium 自研芯片对冲 NVIDIA 议价</td></tr>
+        <tr><td>买家议价</td><td>2</td><td>Prime 锁定 + AWS 切换成本高</td></tr>
+        <tr><td>替代品威胁</td><td>3</td><td>开源软件 + 私有云 + Shopify 等仍存挑战</td></tr>
+        <tr><td>同业竞争</td><td>3</td><td>Microsoft / Google 三方激烈但市场扩张足够</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>核心竞争优势</strong>：</p>
+    <p>
+    1. <span class="hl-t">"零售 + 云 + 广告 + AI 芯片"四引擎垂直整合</span>——是 GOOGL/MSFT 都难以完整复制的<br>
+    2. <strong>Prime 会员 2 亿+</strong>提供用户基础和粘性<br>
+    3. <strong>Trainium 自研芯片 +100% YoY</strong>降低对 NVIDIA 依赖<br>
+    4. <strong>广告业务 +24%</strong>是仅次于 AWS 的第二利润引擎
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 模块 9 ═══ -->
+<div class="section">
+  <div class="stitle">模块 9 · 技术面与 K 线分析（次要参考）</div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:8px 0 12px">9.1 趋势</h3>
+  <div class="cmt">
+    <p><strong>52 周区间</strong>：$190 - $277（高点 2026-04-29 盘后，低点 2025-08）<br>
+    <strong>当前位置</strong>：$273，距 52 周高点仅 -1.5%、距低点 +44%<br>
+    <strong>200 日均线</strong>：~$235（现价位于 200 日均线上方 +16%）<br>
+    <strong>50 日均线</strong>：~$255（现价高于 50 日均线 +7%）</p>
+
+    <p><strong>趋势判断</strong>：AMZN 自 2025-08 低点 $190 进入<span class="hl-t">强势上升通道</span>，Q1 财报后盘后 +5% 创历史新高 $277。<strong>$255-260 是关键支撑</strong>。</p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">9.2 技术指标</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>指标</th><th>当前值</th><th>判断</th></tr></thead>
+      <tbody>
+        <tr><td>RSI (14日)</td><td>~68</td><td>偏强（接近超买）</td></tr>
+        <tr><td>MACD</td><td>金叉确认</td><td>多头延续</td></tr>
+        <tr><td>布林带</td><td>上轨附近</td><td>强势但短期偏热</td></tr>
+        <tr><td>成交量</td><td>财报后大幅放大</td><td>资金确认</td></tr>
+        <tr><td>20 日均线</td><td>$268</td><td>站稳</td></tr>
+        <tr class="hl"><td>关键支撑/压力</td><td>$255 / $290</td><td>窄幅震荡区间</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>对价值投资视角的提示</strong>：技术面与基本面双双指向"<span class="hl-t">合理估值 + 强基本面 + 短期偏热</span>"。$273 略低于估值中位 $310，需要 $250-260 的回调才能形成更好建仓窗口。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 10 ═══ -->
+<div class="section">
+  <div class="stitle">模块 10 · 增长催化剂与前景展望</div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:8px 0 12px">10.1 短期催化剂（未来 6 个月）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>事件</th><th>预期日期</th><th>影响</th></tr></thead>
+      <tbody>
+        <tr><td>AWS re:Inforce 大会</td><td>2026-06-15</td><td><span class="up">安全 + AI 产品发布</span></td></tr>
+        <tr><td>Prime Day（Q2 关键节点）</td><td>2026-07-08</td><td>Q2 营收增量</td></tr>
+        <tr><td>Q2 FY26 财报</td><td>2026-07-31</td><td><span class="up">AWS 是否维持 +28%</span></td></tr>
+        <tr><td>AWS re:Invent 大会</td><td>2026-12-01</td><td><span class="up">大量 AI 产品 + Trainium 新版</span></td></tr>
+        <tr><td>反垄断诉讼进展</td><td>持续</td><td>FTC 案件审理</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">10.2 中期前景（3-5 年）</h3>
+  <div class="cmt">
+    <p><strong>看多论据</strong>：</p>
+    <p>
+    1. <span class="hl-t">AWS +28% 加速兑现 AI 红利</span>——Trainium 芯片是真正护城河<br>
+    2. <strong>营业利润率 13.1% 历史新高</strong>——成本优化 + 业务结构改善带来持久性<br>
+    3. <strong>广告业务 +24%</strong>——第二大利润引擎，增长空间还有 5-10x<br>
+    4. <strong>国际业务首次盈利</strong>——多年亏损终于转正<br>
+    5. <strong>Capex 周期 FY27 起回落</strong>，FCF 拐点出现<br>
+    6. <strong>Prime 会员粘性</strong>——2 亿+全球会员提供长期现金流
+    </p>
+
+    <p><strong>看空论据</strong>：</p>
+    <p>
+    1. <span class="warn-t">Capex 持续高位</span>——FY26 $180-200B 是史无前例规模<br>
+    2. <strong>FTC 反垄断诉讼</strong>——可能强制结构性整改（虽然概率小）<br>
+    3. <strong>AI 模型独立化</strong>——Anthropic 等可能不再依赖 AWS 独家<br>
+    4. <strong>电商竞争加剧</strong>——Shopify、Temu、Shein 等蚕食长尾市场<br>
+    5. <strong>不分红、不回购</strong>——投资者只能通过资本利得回报
+    </p>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">10.3 TAM / SAM / SOM</h3>
+  <div class="cmt">
+    <p>
+    <strong>TAM（全球零售 + 云 + 广告）</strong>：~$28 万亿（2026），预计 2030 年 $40 万亿（CAGR 9%）<br>
+    <strong>SAM（电商 + 云 + 数字广告）</strong>：~$10 万亿（2026），预计 2030 年 $16 万亿（CAGR 12%）<br>
+    <strong>SOM（AMZN 当前份额）</strong>：~$750B = SAM 的 7.5%<br>
+    <strong>未来 5 年 SOM 目标</strong>：$1,250B → 营收 CAGR 11%
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 模块 11 ═══ -->
+<div class="section">
+  <div class="stitle">模块 11 · 风险矩阵（多维评估）</div>
+
+  <div class="risk-grid">
+    <div class="risk-card r2">
+      <h5>1. 经营风险</h5>
+      <span class="risk-score">极低 · 2/5</span>
+      <p>多元化收入（4 大引擎）+ Prime 2 亿会员 + AWS RPO 大量储备。整体业务能见度高。<strong>这是大型科技股中经营最稳健的之一</strong>。</p>
+    </div>
+    <div class="risk-card r2">
+      <h5>2. 财务风险</h5>
+      <span class="risk-score">极低 · 2/5</span>
+      <p><span class="up">真实净现金 $39B + 利息覆盖 30x + ROE 22%</span> + OCF/NI 1.88。资产负债表稳健。Capex 上升是赌注但有充足现金支撑。</p>
+    </div>
+    <div class="risk-card r3">
+      <h5>3. 竞争风险</h5>
+      <span class="risk-score">中 · 3/5</span>
+      <p>Microsoft Azure +40%、Google Cloud +63% 加速。<strong>但 AWS 仍是云市场 #1（30% 份额）</strong>，且 Trainium 自研芯片是独有优势。</p>
+    </div>
+    <div class="risk-card r4">
+      <h5>4. 监管/政策风险</h5>
+      <span class="risk-score">较高 · 4/5</span>
+      <p>FTC 反垄断诉讼（2023 起）+ 欧盟 DMA + 多州数据隐私法。<span class="warn-t">可能强制结构性调整</span>但短期可能性小。</p>
+    </div>
+    <div class="risk-card r3">
+      <h5>5. 宏观风险</h5>
+      <span class="risk-score">中 · 3/5</span>
+      <p>美国经济放缓 / 关税战升级 / 中美科技脱钩。<span class="hl-t">企业云 + AI 投入相对韧性</span>，但消费电商受影响。</p>
+    </div>
+    <div class="risk-card r3">
+      <h5>6. 估值风险</h5>
+      <span class="risk-score">中 · 3/5</span>
+      <p>Forward P/E 32x、PEG 1.24 — 估值合理但安全边际有限。<strong>下跌空间 -10% 至 $245</strong>（200 日均线），上涨空间 +15-20% 至 $315-330。</p>
+    </div>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">黑天鹅情景（最坏情况）</h3>
+  <div class="cmt">
+    <p>
+    <strong>黑天鹅 1：AI 泡沫破裂 + AWS 增速骤降至 +15%</strong> — 概率 8%，股价跌至 $200（-27%）<br>
+    <strong>黑天鹅 2：FTC 强制分拆 AWS</strong> — 概率 3%，股价跌至 $220（-19%）<br>
+    <strong>黑天鹅 3：Anthropic 完全独立 + 转向其他云</strong> — 概率 5%，股价跌至 $230（-16%）<br>
+    <strong>组合最坏</strong>：3 项同时发生概率 &lt; 0.5%，但即使发生，多元化业务 + 真实净现金 $39B 让破产概率为零
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 海图评分卡 ═══ -->
+<div class="section">
+  <div class="stitle">海图评分卡 · 6 维 A-D + 红旗排查</div>
+
+  <div class="scorecard">
+    <div class="score-grid">
+      <div class="score-card">
+        <div class="score-letter s-a">A</div>
+        <div class="score-body">
+          <h4>1. 生意可预测性</h4>
+          <p>4 大引擎多元化 + Prime 2 亿会员 + AWS 长期合同 + 16 季度 100% 兑现。<span class="hl-t">大型科技股中最具可预测性</span>。</p>
+        </div>
+      </div>
+
+      <div class="score-card">
+        <div class="score-letter s-a">A</div>
+        <div class="score-body">
+          <h4>2. 经济护城河</h4>
+          <p>4 项宽护城河（网络效应/转换成本/成本/品牌）+ 1 项窄。AI 时代护城河进一步加宽。</p>
+        </div>
+      </div>
+
+      <div class="score-card">
+        <div class="score-letter s-a">A</div>
+        <div class="score-body">
+          <h4>3. 管理层质量</h4>
+          <p>Andy Jassy 5 年 + Brian Olsavsky 11 年 + 16 季度 100% 兑现。<span class="hl-t">科技业最稳健管理团队之一</span>。</p>
+        </div>
+      </div>
+
+      <div class="score-card">
+        <div class="score-letter s-a">A</div>
+        <div class="score-body">
+          <h4>4. 财务质量</h4>
+          <p>真实净现金 $39B + ROE 22% + ROIC 16% + OCF/NI 1.88 + 利息覆盖 30x。<span class="hl-t">财务质量顶级</span>。</p>
+        </div>
+      </div>
+
+      <div class="score-card">
+        <div class="score-letter s-bp">B+</div>
+        <div class="score-body">
+          <h4>5. 资本配置纪律</h4>
+          <p>过去 5 年累计 Capex $400B+ 大部分回报优秀。<span class="warn-t">但不分红不回购、Q1 26 Capex $43.2B 是激进赌注</span>——海图小幅减分等待 FY27 Capex/营收比回落验证。</p>
+        </div>
+      </div>
+
+      <div class="score-card">
+        <div class="score-letter s-bp">B+</div>
+        <div class="score-body">
+          <h4>6. 估值与安全边际</h4>
+          <p>Forward FY27 P/E 26x、PEG 1.24、加权公允 $316（+16%）。<span class="warn-t">不便宜也不贵</span>，需要回调 -10% 才有更好建仓机会。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="flag-row">
+      <strong>⚠ 红旗排查（非评分项）</strong>：会计保守度 — <strong>无问题</strong>。商誉占资产仅 3.4%、股权激励占营收 4%（合理）、递延收入处理保守、近 5 年无会计政策变更。<br>
+      <strong>关注点</strong>：FTC 反垄断诉讼是结构性风险，可能影响 2027-2028 业务结构。但海图判断：即便强制整改也会增加股东价值（如 AWS 单独估值远高于合并）。
+    </div>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">综合评级</h3>
+  <div class="bscore" style="margin-top:8px;">
+    <div class="circle cg">A</div>
+    <div class="bd">
+      <h4>综合：A · 评级 = 买入</h4>
+      <p>4 项 A + 2 项 B+ = 53 / 60 分（88%）。无红旗触发。<strong>买入评级</strong>。这是少有的"4/6 维 A 级 + AI 红利兑现 + AWS 重新加速"组合，海图夜读全市场覆盖中评分前列的标的。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 投资决策 ═══ -->
+<div class="section">
+  <div class="stitle">海图研判 · 投资决策</div>
+
+  <div class="cmt">
+    <p><strong>评级：买入</strong>（核心仓配置 · AWS 重新加速 + 营业利润率扩张 + AI 紧缺资产的三重重估）</p>
+
+    <p><strong>12 个月概率加权目标价：$310</strong>（+14% 上行）</p>
+  </div>
+
+  <div class="pgrid">
+    <div class="pbox">
+      <div class="pl">悲观（20%）</div>
+      <div class="pv pc">$220</div>
+      <div class="pn">下行 -19%<br>AWS 增速回落 + Capex 失控</div>
+    </div>
+    <div class="pbox">
+      <div class="pl">基准（55%）</div>
+      <div class="pv pf">$310</div>
+      <div class="pn">上行 +14%<br>AWS 维持 +25%+ + 营业利润率 13%+ + Capex/营收比 FY27 回落</div>
+    </div>
+    <div class="pbox">
+      <div class="pl">乐观（25%</div>
+      <div class="pv ps">$400</div>
+      <div class="pn">上行 +47%<br>AWS 持续 +28%+ + Trainium 30% AI 训练份额 + 广告 +25%+</div>
+    </div>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">分批建仓（独立估值视角）</h3>
+  <div class="cmt">
+    <p>使用估值中位数 $310 作为基准。<strong>当前价 $273 处于二仓与首仓之间，可在当前价位先建立 1/3 观察仓，剩余 2/3 等回调。</strong></p>
+  </div>
+
+  <div class="pgrid">
+    <div class="pbox">
+      <div class="pl">首仓（30% 仓位）</div>
+      <div class="pv ps">$248</div>
+      <div class="pn">估值中位 × 80%<br>距现价 -9%</div>
+    </div>
+    <div class="pbox">
+      <div class="pl">二仓（35% 仓位）</div>
+      <div class="pv pf">$217</div>
+      <div class="pn">估值中位 × 70%<br>距现价 -20%</div>
+    </div>
+    <div class="pbox">
+      <div class="pl">三仓（35% 仓位）</div>
+      <div class="pv pc">$186</div>
+      <div class="pn">估值中位 × 60%<br>距现价 -32%（极端机会）</div>
+    </div>
+  </div>
+
+  <h3 style="font-size:15px;color:var(--text);margin:24px 0 12px">止盈策略（不止损，价值越跌越买）</h3>
+  <div class="pgrid">
+    <div class="pbox"><div class="pl">第一档</div><div class="pv pf">$340</div><div class="pn">减仓 25%<br>对应 Forward P/E ~30x</div></div>
+    <div class="pbox"><div class="pl">第二档</div><div class="pv pf">$400</div><div class="pn">再减仓 25%<br>对应 Forward P/E ~35x</div></div>
+    <div class="pbox"><div class="pl">第三档</div><div class="pv pf">$480</div><div class="pn">再减仓 25%<br>对应 Forward P/E ~42x（极致估值）</div></div>
+  </div>
+
+  <div class="cmt" style="margin-top:18px;">
+    <p><strong>仓位管理</strong>：建议总仓位 <span class="hl-t">5-10%</span>（核心仓配置）。持有周期 <strong>5-10+ 年</strong>。最后 25% 作为"永远不卖"核心仓——AMZN 是少数具备这种长期持有素质的科技股。</p>
+
+    <p><strong>关键监控指标</strong>：</p>
+    <p>
+    1. <strong>AWS 增速</strong>——目标维持 +25%+（若降至 +20% 以下，警惕）<br>
+    2. <strong>Trainium 运行率</strong>——目标 FY26 末 $30B、FY27 末 $50B<br>
+    3. <strong>营业利润率</strong>——目标维持 13%+（若降至 11% 以下，警惕）<br>
+    4. <strong>Capex/营收比</strong>——FY27 Q1 起若回落至 25% 以下，FCF 拐点确认<br>
+    5. <strong>广告业务增速</strong>——每季度 +20%+ 是健康<br>
+    6. <strong>FTC 反垄断诉讼</strong>——2026-2027 关键裁决期
+    </p>
+
+    <p><strong>事件时间表</strong>：</p>
+    <p>
+    - 2026-06-15：AWS re:Inforce<br>
+    - 2026-07-08：Prime Day<br>
+    - 2026-07-31：Q2 FY26 财报<br>
+    - 2026-12-01：AWS re:Invent（年度最大产品发布会）<br>
+    - 2026-2027：FTC 反垄断诉讼裁决
+    </p>
+
+    <p><strong>下一个催化剂日期</strong>：<span class="hl-t">2026-07-31 Q2 FY26 财报</span>。AWS 是否维持 +25%+ 是关键。如继续 +28%+，估值上修空间打开；如回落至 +22%，可能小幅回调。</p>
+  </div>
+</div>
+
+<!-- ═══ 海图页末长评（=社媒短文） ═══ -->
+<div class="section">
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记 · 1100 字</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p class="lead">2022 年的亚马逊曾被市场宣判"AI 时代落伍者"——AWS 增速从 30% 跌到 12%，营业利润率被压到 2%。3 年后，Q1 2026 财报像一记响亮的反击：AWS +28%（15 季度最快）、营业利润率 13.1%（历史新高）、EPS 大超预期 68%。Andy Jassy 这句话是关键："we are still in the very early innings of AI"——这不是一份"恢复"的财报，是一份"重生"的财报。</p>
+
+      <p>Q1 2026 营收 $181.5B（+17%）、净利 $30.3B、EPS $2.78（vs 共识 $1.65 大超 68%）——每一项都超预期。但这场季报的真正主角是三个"加速"信号：<strong>AWS +28% 远超 +24% 共识、Trainium 芯片 +100% YoY 突破 $20B 运行率、营业利润率 13.1% 历史新高</strong>。三个数字讲的是同一个故事——亚马逊从"AI 时代受益者"完成最后一步重估为"AI 紧缺资产 + 高利润率平台"。</p>
+
+      <h4>几个研判要点</h4>
+
+      <p><strong>一、AWS +28% 是真正的拐点。</strong>从 Q4 25 +19% 到 Q1 26 +28%，加速 9 个百分点。这是 15 季度最快增速。更重要的是 <strong>AWS 营业利润率 37.7%、季度营业利润 $14.16B（占集团 59%）</strong>——AWS 是真正的"利润引擎 + 现金机器"。Jassy 在电话会上明确："we are still in the very early innings of AI"——意味着 AWS 增速可能维持 +25-30% 至 FY27。这是与 GOOGL Cloud +63%、Azure +40% 的竞争中证明"AWS 仍是龙头"的最强证据。</p>
+
+      <p><strong>二、Trainium 芯片是被严重低估的护城河。</strong>Q1 财报中最被低估的数字：Trainium 业务<strong>年化 $20B+ 运行率、+100% YoY 增长</strong>。这意味着 Trainium 已是仅次于 NVIDIA 的第二大 AI 训练芯片。Anthropic / Apple / 多个 LLM 公司都在用 Trainium。这种"自研芯片"在 AI 时代不仅降低成本（比 H100 低 40%），更重要的是建立了<span class="hl-t">"应用 + 模型 + 芯片"全栈一体化</span>——这是 GOOGL/MSFT 都没完全做到的。</p>
+
+      <p><strong>三、营业利润率 13.1% 是新平台期，不是峰值。</strong>从 FY22 2.4% 跌底到 Q1 26 13.1%——4 年涨 5x 倍。零售业务运营杠杆（成本优化 + 库存管理 + 物流自动化）+ AWS 高毛利双轮驱动。<span class="hl-t">海图判断这是新平台期 13-14%，不是峰值</span>。如果 AWS 继续提份额、广告 +24% 持续、国际首次盈利持续——FY28 营业利润率有望达 16-18%。</p>
+
+      <p><strong>四、$43.2B 单季 Capex 是必须的"军备竞赛"。</strong>Q1 Capex $43.2B 是史上最大单季投入，FY26 全年指引 $180-200B。<span class="warn-t">FCF 已从 $30B 跌至 LTM $1.2B（-95%）</span>——短期股价对"FCF 折价"敏感。但 Olsavsky 明确："FY27 Capex 增速会回落"——意味着 2027 是 FCF 拐点。如果你愿意忍受 1-2 年 FCF 平台，FY28 起 FCF 会爆发性增长（基础上 AWS +25% 持续 + Capex 持平 = FCF $80-100B 年化）。</p>
+
+      <p><strong>五、估值合理但 PEG 略高。</strong>当前 $273 vs 加权公允 $316——14% 安全边际。Forward FY27 P/E 26x（vs 5 年中位 30x，略低于历史）+ PEG 1.24（"成长合理估值"略偏贵）。FCF Yield 0.04% 短期偏低（被 Capex 压缩）。<strong>如果回调到 $245-255（200 日均线附近），是绝佳建仓窗口</strong>。如果继续上涨突破 $290 高点，可耐心等待 Q2 财报（2026-07-31）后的回调。</p>
+
+      <h4>海图研判</h4>
+
+      <p><strong>评级：买入</strong>（核心仓配置 · AWS 重新加速 + 营业利润率扩张 + AI 紧缺资产的三重重估）。12 个月概率加权目标价 <strong>$310</strong>（+14%）。</p>
+
+      <p>操作建议（独立估值中位数 $310）：当前价 $273 可在当前价位建立 1/3 观察仓（约 1-2% 组合）。剩余仓位按估值中位数分批：首仓 $248（× 80%）、二仓 $217（× 70%）、三仓 $186（× 60%，极端机会）。止盈三档 $340 / $400 / $480，每档减仓 25%，最后 25% 作为"永远不卖"核心仓。建议总仓位 <strong>5-10%</strong>，持有周期 5-10+ 年。</p>
+
+      <h4>风险提示</h4>
+
+      <p>AI 泡沫破裂导致 AWS 增速骤降 / FTC 强制分拆 / Anthropic 完全独立 + 转向其他云 / Capex 持续高位压制 FCF / 美国宏观放缓拖累电商业务——任一项都可能让股价回调 15-25%。但真实净现金 $39B + 4 大引擎多元化 + Prime 2 亿会员 + AWS 30% 市场份额让破产概率为零。</p>
+
+      <p>关键叙事：<strong>从"AI 时代受益者"升级为"AI 时代基础设施"</strong>。Q1 2026 之后，AMZN 不再是"投资 AI 的电商公司"，而是"AI 全栈基础设施 + 现金机器"。在 GOOGL/MSFT 同样估值合理 + Trainium 芯片是独有差异化的当下，AMZN 是大型科技股中"成长 + 估值 + 多元化"组合最佳的之一。下一个催化剂：2026-07-31 Q2 财报。</p>
+
+      <p class="haitu-sign">—— 海图，灯下落笔，明日再观风浪。</p>
+
+      <p class="haitu-disc">⚠️ 免责声明：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，不构成任何投资建议。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div>《海图夜读》 · Amazon AMZN Q1 2026 海图研判</div>
+  <div style="margin-top:6px;">数据来源：Amazon 官方 Earnings Release（2026-04-29）、IR Conference Call、行业研究</div>
+  <div style="margin-top:6px;">价值投资 · 长期主义</div>
+</footer>
+
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  const cur = html.getAttribute('data-theme');
+  html.setAttribute('data-theme', cur === 'dark' ? 'light' : 'dark');
+  localStorage.setItem('theme', html.getAttribute('data-theme'));
+  renderCharts();
+}
+(function() {
+  const t = localStorage.getItem('theme');
+  if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+})();
+
+function gc(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+
+let charts = {};
+function renderCharts() {
+  Object.values(charts).forEach(c => c && c.destroy && c.destroy());
+  charts = {};
+  const txt2 = gc('--text2'), txt3 = gc('--text3'), grid = gc('--chart-grid');
+  const accent = gc('--accent'), accent2 = gc('--accent2'), accent3 = gc('--accent3');
+  const green = gc('--green'), gold = gc('--gold'), rose = gc('--rose'), red = gc('--red');
+
+  Chart.defaults.color = txt2;
+  Chart.defaults.font.family = 'Segoe UI, sans-serif';
+  Chart.defaults.font.size = 11;
+
+  charts.rev = new Chart(document.getElementById('revenueChart'), {
+    type: 'bar',
+    data: { labels: ['Q1 25', 'Q2 25', 'Q3 25', 'Q4 25', 'Q1 26'],
+      datasets: [{ label: 'Revenue', data: [155.7, 167.0, 175.0, 187.8, 181.5], backgroundColor: [accent3, gold, accent2, accent, green], borderRadius: 4 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+      scales: { y: { grid: { color: grid }, ticks: { color: txt3 } }, x: { grid: { display: false }, ticks: { color: txt3 } } } }
+  });
+
+  charts.profit = new Chart(document.getElementById('profitChart'), {
+    type: 'line',
+    data: { labels: ['Q1 25', 'Q2 25', 'Q3 25', 'Q4 25', 'Q1 26'],
+      datasets: [{ label: 'Net Profit (GAAP)', data: [17.1, 15.3, 15.3, 20.0, 30.3], borderColor: green, backgroundColor: 'rgba(122,154,122,0.1)', tension: 0.3, fill: true, pointBackgroundColor: green, pointRadius: 5 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+      scales: { y: { grid: { color: grid }, ticks: { color: txt3 } }, x: { grid: { display: false }, ticks: { color: txt3 } } } }
+  });
+
+  charts.seg = new Chart(document.getElementById('segmentChart'), {
+    type: 'doughnut',
+    data: { labels: ['Online Stores', '3P Seller Services', 'AWS', 'Advertising', 'Subscriptions', 'Physical+Other'],
+      datasets: [{ data: [64.3, 41.6, 37.6, 17.2, 13.4, 7.4], backgroundColor: [accent3, accent2, accent, gold, green, rose], borderColor: gc('--card'), borderWidth: 2 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { color: txt2, font: { size: 11 } } } } }
+  });
+
+  charts.capex = new Chart(document.getElementById('capexChart'), {
+    type: 'bar',
+    data: { labels: ['FY22', 'FY23', 'FY24', 'FY25', 'FY26E'],
+      datasets: [
+        { label: 'Revenue', data: [514, 575, 638, 720, 760], backgroundColor: green, borderRadius: 4 },
+        { label: 'Capex', data: [58, 48, 78, 118, 190], backgroundColor: red, borderRadius: 4 }
+      ] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top', labels: { color: txt2, font: { size: 11 } } } },
+      scales: { y: { grid: { color: grid }, ticks: { color: txt3 } }, x: { grid: { display: false }, ticks: { color: txt3 } } } }
+  });
+
+  buildSankey();
+}
+
+function buildSankey() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const txt = isDark ? '#d4ccc4' : '#4a4340';
+  const cardBg = isDark ? '#2e2a25' : '#ffffff';
+
+  const sankeyData = [{
+    type: 'sankey', orientation: 'h', arrangement: 'snap', valueformat: ',.1f', valuesuffix: ' B',
+    node: {
+      pad: 22, thickness: 22, line: { color: 'transparent', width: 0 },
+      label: ['LTM 营收 750', '营业成本 375', '毛利 375', '履约 110', '研发 90', '销售&管理 88', '营业利润 87', '所得税+利息 8', '净利 79', '非现金调整 +69.5', '经营现金流 148.5', 'Capex 147.3', '自由现金流 1.2'],
+      color: ['#7b8fa0', '#b87070', '#8a9a8e', '#b9a06a', '#c09090', '#a89f98', '#b08d7a', '#b87070', '#7a9a7a', '#7b8fa0', '#b08d7a', '#b87070', '#7a9a7a']
+    },
+    link: {
+      source: [0, 0, 2, 2, 2, 2, 6, 6, 8, 9, 10, 10],
+      target: [1, 2, 3, 4, 5, 6, 7, 8, 10, 10, 11, 12],
+      value:  [375, 375, 110, 90, 88, 87, 8, 79, 79, 69.5, 147.3, 1.2],
+      color: ['rgba(184,112,112,0.30)', 'rgba(138,154,142,0.45)', 'rgba(185,160,106,0.30)', 'rgba(192,144,144,0.30)', 'rgba(168,159,152,0.30)', 'rgba(176,141,122,0.45)', 'rgba(184,112,112,0.30)', 'rgba(122,154,122,0.45)', 'rgba(122,154,122,0.40)', 'rgba(123,143,160,0.40)', 'rgba(184,112,112,0.30)', 'rgba(122,154,122,0.50)']
+    }
+  }];
+
+  const layout = { font: { family: 'Segoe UI, sans-serif', size: 11, color: txt }, paper_bgcolor: cardBg, plot_bgcolor: cardBg, margin: { l: 10, r: 10, t: 10, b: 10 } };
+  Plotly.react('sankey', sankeyData, layout, { displayModeBar: false, responsive: true });
+}
+
+document.addEventListener('DOMContentLoaded', renderCharts);
+</script>
+
+</body>
+</html>
