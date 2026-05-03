@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-04-30，基于新华文轩 FY2025 年报（2026-03-26 发布）+ Q1 2026 业绩（2026-04-30 发布） -->
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>新华文轩 0811 — FY2025 + Q1 2026 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root {
+  --bg: #f5f0eb; --bg2: #ece6df; --card: #ffffff; --card2: #f8f5f1; --border: #d9d0c7;
+  --text: #4a4340; --text2: #7a706a; --text3: #a89f98;
+  --accent: #8a9a8e; --accent2: #7b8fa0; --accent3: #b08d7a;
+  --rose: #c09090; --gold: #b9a06a; --red: #b87070; --green: #7a9a7a;
+  --shadow: rgba(0,0,0,0.06); --chart-grid: #e5ddd5;
+}
+[data-theme="dark"] {
+  --bg: #1e1c1a; --bg2: #28251f; --card: #2e2a25; --card2: #363230; --border: #4a4540;
+  --text: #d4ccc4; --text2: #a09890; --text3: #706860;
+  --accent: #8a9a8e; --accent2: #8fabbf; --accent3: #c9a48e;
+  --rose: #c09090; --gold: #c9b07a; --red: #c08080; --green: #8aaa8a;
+  --shadow: rgba(0,0,0,0.3); --chart-grid: #3e3a35;
+}
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Georgia','Noto Serif SC','PingFang SC',serif; line-height: 1.75; font-size: 14.5px; transition: background .35s, color .35s; }
+a { color: var(--accent2); text-decoration: none; }
+.theme-bar { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); }
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; text-decoration: none; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+.toggle-switch { position: relative; width: 44px; height: 22px; background: var(--border); border-radius: 11px; cursor: pointer; transition: background .3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: var(--card); border-radius: 50%; transition: transform .3s; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+.hero { padding: 48px 24px 36px; text-align: center; border-bottom: 1px solid var(--border); }
+.hero-tag { display: inline-block; font-family: 'Segoe UI',sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 3px 14px; border-radius: 20px; margin-bottom: 18px; }
+.hero h1 { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.pill { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: 'Segoe UI',sans-serif; font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow); }
+.pill strong { color: var(--text); }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle { font-size: 18px; font-weight: 700; color: var(--accent3); margin-bottom: 20px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+.stitle::before { content: ''; display: block; width: 4px; height: 20px; background: var(--accent3); border-radius: 2px; }
+.haitu-quip { display: flex; align-items: center; gap: 18px; background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--green); border-radius: 12px; padding: 18px 24px; margin: 24px 0; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-quote { flex: 1; }
+.haitu-portrait { font-size: 15px; line-height: 1.65; color: var(--text); margin-bottom: 6px; font-weight: 600; }
+.haitu-rating-line { font-size: 13px; color: var(--text2); font-family: 'Segoe UI',sans-serif; }
+.rating-badge { display: inline-block; padding: 2px 12px; border-radius: 12px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; margin-left: 4px; }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+.rating-cond-buy { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-hold { background: rgba(123,143,160,.18); color: var(--accent2); }
+.haitu-essay { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 28px 32px; margin: 24px 0 20px; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-essay-header { display: flex; align-items: center; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.haitu-avatar-sm { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); background: var(--red); box-shadow: 0 2px 8px rgba(184,112,112,0.2); }
+.haitu-name-lg { font-family: 'Georgia','Noto Serif SC',serif; font-size: 28px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 4px; }
+.haitu-essay-tag { font-family: 'Segoe UI',sans-serif; font-size: 12px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; }
+.haitu-essay-body { font-family: 'Georgia','Noto Serif SC',serif; font-size: 15px; line-height: 2.0; color: var(--text); }
+.haitu-essay-body p { margin-bottom: 14px; }
+.haitu-essay-body p.lead { font-size: 16px; font-style: italic; color: var(--text2); margin-bottom: 18px; }
+.haitu-essay-body strong { color: var(--text); font-weight: 700; }
+.haitu-essay-body h4 { font-size: 14px; color: var(--accent3); margin: 18px 0 10px; font-family: 'Segoe UI',sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+.haitu-sign { text-align: right; margin-top: 18px; font-family: 'Georgia',serif; font-size: 14px; color: var(--text2); font-style: italic; }
+.haitu-disc { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); font-style: italic; line-height: 1.7; }
+.stock-snap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill,minmax(160px,1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px; }
+.snap-item { text-align: center; }
+.snap-label { font-family: 'Segoe UI',sans-serif; font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.snap-val { font-family: 'Segoe UI',sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+.snap-val.up { color: var(--green); }
+.snap-val.dn { color: var(--red); }
+.snap-sub { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text3); margin-top: 2px; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(195px,1fr)); gap: 14px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow); }
+.kpi-l { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.kpi-v.up { color: var(--green); }
+.kpi-v.dn { color: var(--red); }
+.badge { display: inline-block; font-family: 'Segoe UI',sans-serif; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+.up { background: rgba(122,154,122,.15); color: var(--green); }
+.dn { background: rgba(184,112,112,.15); color: var(--red); }
+.nt { background: rgba(123,143,160,.15); color: var(--accent2); }
+.tbl-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow); }
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI',sans-serif; font-size: 13px; }
+.tbl th { background: var(--card2); color: var(--text3); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); background: var(--card2); }
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); }
+.ctitle { font-size: 13px; color: var(--text2); margin-bottom: 12px; font-weight: 600; }
+.cwrap { position: relative; height: 240px; }
+.cmt { font-size: 14px; color: var(--text2); line-height: 1.85; }
+.cmt p { margin-bottom: 12px; }
+.cmt strong { color: var(--text); }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+.bscore { display: flex; gap: 16px; padding: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 12px; box-shadow: 0 1px 4px var(--shadow); }
+.bscore .circle { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; color: white; flex-shrink: 0; }
+.cg { background: var(--green); }
+.cw { background: var(--gold); }
+.co { background: var(--rose); }
+.cr { background: var(--red); }
+.cb { background: var(--accent2); }
+.bd h4 { font-size: 14px; color: var(--text); margin-bottom: 6px; font-family: 'Segoe UI',sans-serif; letter-spacing: 0.5px; }
+.bd p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+.pgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.dcf-note { background: var(--card2); border-left: 3px solid var(--accent2); padding: 14px 18px; border-radius: 6px; font-size: 13.5px; color: var(--text2); line-height: 1.85; }
+.dcf-note p { margin-bottom: 8px; }
+.dcf-note strong { color: var(--text); }
+.tag-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap: 12px; margin-top: 14px; }
+.tag-card { background: var(--card); border: 1px solid var(--border); border-left: 3px solid var(--accent2); padding: 12px 16px; border-radius: 6px; }
+.tag-card.pos { border-left-color: var(--green); }
+.tag-card.neg { border-left-color: var(--red); }
+.tag-card.neu { border-left-color: var(--accent2); }
+.tag-card h5 { font-size: 13px; color: var(--text); margin-bottom: 6px; font-family: 'Segoe UI',sans-serif; }
+.tag-card p { font-size: 12px; color: var(--text2); line-height: 1.7; }
+.tag-card .tag-bd { font-family: 'Segoe UI',sans-serif; font-size: 10px; padding: 1px 6px; border-radius: 4px; margin-left: 4px; }
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap: 12px; }
+.risk-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 14px 18px; position: relative; box-shadow: 0 1px 3px var(--shadow); }
+.risk-card::before { content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent); }
+.risk-card.r1::before { background: var(--green); }
+.risk-card.r2::before { background: rgba(122,154,122,.6); }
+.risk-card.r3::before { background: var(--gold); }
+.risk-card.r4::before { background: var(--rose); }
+.risk-card.r5::before { background: var(--red); }
+.risk-card h5 { font-size: 14px; margin-bottom: 6px; color: var(--text); }
+.risk-score { font-family: 'Segoe UI',sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.r1 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r2 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r3 .risk-score { background: rgba(185,160,106,.18); color: var(--gold); }
+.r4 .risk-score { background: rgba(192,144,144,.18); color: var(--rose); }
+.r5 .risk-score { background: rgba(184,112,112,.18); color: var(--red); }
+.risk-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+footer { background: var(--card2); border-top: 1px solid var(--border); padding: 24px; text-align: center; color: var(--text3); font-size: 12px; margin-top: 40px; line-height: 1.8; }
+@media (max-width: 768px) { .cgrid,.pgrid { grid-template-columns: 1fr; } .hero h1 { font-size: 22px; } .kpi-grid { grid-template-columns: 1fr 1fr; } .stock-snap { grid-template-columns: 1fr 1fr; } .haitu-essay-header { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/00811" target="_blank" rel="noopener" title="在雪球查看 新华文轩 实时行情">雪球 00811</a>
+  </div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">FY2025 财报发布 · 2026-03-26 &nbsp;|&nbsp; Q1 2026 财报 · 2026-04-30 &nbsp;|&nbsp; 海图研判 · 2026-04-30</div>
+  <h1>新华文轩 0811 · FY2025 + Q1 2026 深度分析</h1>
+  <div class="hero-sub">HKEX: 0811 / SH: 601811 &nbsp;|&nbsp; 中国最大省级出版发行集团 · 教材专营+渠道护城河+H股 6.6% 股息率 &nbsp;|&nbsp; 价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill">H 股 <strong>HKD 10.32</strong></div>
+    <div class="pill">A 股 <strong>¥13.59</strong></div>
+    <div class="pill">总市值 <strong>~¥150亿</strong></div>
+    <div class="pill">FY25 净利 <strong>¥15.68亿(+1.5%)</strong></div>
+    <div class="pill">H 股股息率 <strong>6.63%</strong></div>
+    <div class="pill">海图研判 <strong>买入(H 股)</strong></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 海图页首短评 ═══ -->
+<div class="haitu-quip">
+  <div class="haitu-quote">
+    <div class="haitu-portrait">中国最大省级出版发行集团——四川省教材专营牌照（覆盖 6,000+ 所学校 · 近 500 万学生）+ 渠道+教育+图书三轮驱动。FY2025 营收 ¥117.32 亿(-4.84%) 因教材教辅减少 ¥3.46 亿拖累，但归母净利润 ¥15.68 亿(+1.53%) 因投资收益+成本控制保持微增。<strong>H 股 PE 仅 7.07x、PB 0.73x、股息率 6.63%</strong>——AH 折价 30%，是港股出版传媒中"高股息+牌照护城河+净现金垫"组合最稀有的。</div>
+    <div class="haitu-rating-line">评级：<span class="rating-badge rating-buy">买入（H 股优于 A 股）</span> · 12 个月目标价 HKD 13.50（+31%）· 教材专营+渠道护城河+净现金 ¥85 亿+H 股 6.6% 股息率四轮组合</div>
+  </div>
+</div>
+
+<!-- ═══ 市场数据快照 ═══ -->
+<div class="section">
+  <div class="stitle">市场数据快照（2026-04-30）</div>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">H 股股价</div><div class="snap-val">HKD 10.32</div><div class="snap-sub">2026-04-30 收盘</div></div>
+    <div class="snap-item"><div class="snap-label">A 股股价</div><div class="snap-val">¥13.59</div><div class="snap-sub">SH: 601811</div></div>
+    <div class="snap-item"><div class="snap-label">市值（H 股）</div><div class="snap-val">HKD 45.6亿</div><div class="snap-sub">~¥41.96 亿</div></div>
+    <div class="snap-item"><div class="snap-label">总市值（A+H）</div><div class="snap-val">~¥150亿</div><div class="snap-sub">总股本 12.34 亿股</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间(H)</div><div class="snap-val">HKD 9.69-12.40</div><div class="snap-sub">距高点 -16.8%</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间(A)</div><div class="snap-val">¥12.71-16.90</div><div class="snap-sub">距高点 -19.6%</div></div>
+    <div class="snap-item"><div class="snap-label">TTM P/E (H 股)</div><div class="snap-val up">7.07x</div><div class="snap-sub">EPS ¥1.27 / HKD 1.46</div></div>
+    <div class="snap-item"><div class="snap-label">TTM P/E (A 股)</div><div class="snap-val">10.70x</div><div class="snap-sub">A 股溢价</div></div>
+    <div class="snap-item"><div class="snap-label">P/B (H 股)</div><div class="snap-val up">0.73x</div><div class="snap-sub">破净</div></div>
+    <div class="snap-item"><div class="snap-label">P/B (A 股)</div><div class="snap-val">1.07x</div><div class="snap-sub">每股净资产 ¥12.70</div></div>
+    <div class="snap-item"><div class="snap-label">股息率 (H 股)</div><div class="snap-val up">6.63%</div><div class="snap-sub">FY25 全年</div></div>
+    <div class="snap-item"><div class="snap-label">股息率 (A 股)</div><div class="snap-val up">4.42%</div><div class="snap-sub">FY25 全年</div></div>
+    <div class="snap-item"><div class="snap-label">FCF Yield</div><div class="snap-val">~2.9%</div><div class="snap-sub">FCF ¥4.30 亿 / 偏低</div></div>
+    <div class="snap-item"><div class="snap-label">AH 折价</div><div class="snap-val up">~30%</div><div class="snap-sub">H 相对 A</div></div>
+    <div class="snap-item"><div class="snap-label">资产负债率</div><div class="snap-val up">33.2%</div><div class="snap-sub">极低有息负债</div></div>
+    <div class="snap-item"><div class="snap-label">ROE (FY25)</div><div class="snap-val">10.32%</div><div class="snap-sub">稳定回报</div></div>
+    <div class="snap-item"><div class="snap-label">下次财报</div><div class="snap-val nt">2026-08-29</div><div class="snap-sub">H1 2026 中报</div></div>
+    <div class="snap-item"><div class="snap-label">除息日</div><div class="snap-val nt">2026-05-29</div><div class="snap-sub">末期 ¥0.42/股</div></div>
+  </div>
+</div>
+
+<!-- ═══ FY2025 KPI ═══ -->
+<div class="section">
+  <div class="stitle">FY2025 全年核心业绩（2026-03-26 发布）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">营业收入</div><div class="kpi-v dn">¥117.32亿</div><span class="badge dn">-4.84% YoY</span><div class="kpi-l" style="margin-top:6px">vs FY24 ¥123.29 亿</div></div>
+    <div class="kpi"><div class="kpi-l">归母净利润</div><div class="kpi-v up">¥15.68亿</div><span class="badge up">+1.53% YoY</span><div class="kpi-l" style="margin-top:6px">9 年微增中保持纪律</div></div>
+    <div class="kpi"><div class="kpi-l">扣非归母净利</div><div class="kpi-v dn">¥14.57亿</div><span class="badge dn">-12.11% YoY</span><div class="kpi-l" style="margin-top:6px">主业承压 / 投资收益对冲</div></div>
+    <div class="kpi"><div class="kpi-l">出版分部营收</div><div class="kpi-v">¥28.95亿</div><span class="badge nt">占比 24.7%</span><div class="kpi-l" style="margin-top:6px">高毛利</div></div>
+    <div class="kpi"><div class="kpi-l">发行分部营收</div><div class="kpi-v">¥102.12亿</div><span class="badge nt">占比 87.0%</span><div class="kpi-l" style="margin-top:6px">教材教辅 + 一般图书</div></div>
+    <div class="kpi"><div class="kpi-l">一般图书</div><div class="kpi-v dn">¥58.78亿</div><span class="badge dn">-2.59% YoY</span><div class="kpi-l" style="margin-top:6px">电商占比 34.75%</div></div>
+    <div class="kpi"><div class="kpi-l">教材教辅减少</div><div class="kpi-v dn">-¥3.46亿</div><span class="badge dn">出生人口下降</span><div class="kpi-l" style="margin-top:6px">FY25 主要拖累项</div></div>
+    <div class="kpi"><div class="kpi-l">毛利率</div><div class="kpi-v">35.01%</div><span class="badge nt">vs FY24 ~35%</span><div class="kpi-l" style="margin-top:6px">基本持平</div></div>
+    <div class="kpi"><div class="kpi-l">净利率</div><div class="kpi-v up">13.35%</div><span class="badge up">+0.81pp YoY</span><div class="kpi-l" style="margin-top:6px">投资收益+所得税退税</div></div>
+    <div class="kpi"><div class="kpi-l">ROE</div><div class="kpi-v">10.32%</div><span class="badge nt">十年中段</span><div class="kpi-l" style="margin-top:6px">稳定</div></div>
+    <div class="kpi"><div class="kpi-l">经营现金流</div><div class="kpi-v">¥10.99亿</div><span class="badge nt">含 ¥1.30 亿税款退税</span><div class="kpi-l" style="margin-top:6px">现金质量稳定</div></div>
+    <div class="kpi"><div class="kpi-l">资本开支 (Capex)</div><div class="kpi-v">~¥6.69亿</div><span class="badge nt">扩张期</span><div class="kpi-l" style="margin-top:6px">物流仓储 + 数字化</div></div>
+    <div class="kpi"><div class="kpi-l">自由现金流</div><div class="kpi-v dn">¥4.30亿</div><span class="badge dn">FCF Yield 2.9%</span><div class="kpi-l" style="margin-top:6px">vs OCF 39%</div></div>
+    <div class="kpi"><div class="kpi-l">每股股息</div><div class="kpi-v up">¥0.61/股</div><span class="badge up">中期+末期</span><div class="kpi-l" style="margin-top:6px">末期 ¥0.42 / 5-29 除息</div></div>
+    <div class="kpi"><div class="kpi-l">分红总额</div><div class="kpi-v up">¥7.53亿</div><span class="badge up">派息率 47.99%</span><div class="kpi-l" style="margin-top:6px">vs FY24 ~46%</div></div>
+    <div class="kpi"><div class="kpi-l">累计分红 (上市以来)</div><div class="kpi-v up">¥47.38亿</div><span class="badge up">2016-2025</span><div class="kpi-l" style="margin-top:6px">A股分红覆盖发行 ~3 次</div></div>
+    <div class="kpi"><div class="kpi-l">资产负债率</div><div class="kpi-v up">33.24%</div><span class="badge up">极低</span><div class="kpi-l" style="margin-top:6px">国企平均 ~60%</div></div>
+    <div class="kpi"><div class="kpi-l">有息负债</div><div class="kpi-v up">~¥2.76亿</div><span class="badge up">几乎无负债</span><div class="kpi-l" style="margin-top:6px">国企标杆</div></div>
+  </div>
+</div>
+
+<!-- ═══ Q1 2026 KPI ═══ -->
+<div class="section">
+  <div class="stitle">Q1 2026 季度业绩（2026-04-30 已发布 · 春季教材旺季前奏）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">Q1 营业收入</div><div class="kpi-v">¥24.84亿</div><span class="badge dn">-0.16% YoY</span><div class="kpi-l" style="margin-top:6px">基本持平 / 趋稳</div></div>
+    <div class="kpi"><div class="kpi-l">Q1 归母净利</div><div class="kpi-v">¥2.57亿</div><span class="badge dn">-1.03% YoY</span><div class="kpi-l" style="margin-top:6px">微降 / 略好于预期</div></div>
+    <div class="kpi"><div class="kpi-l">Q1 扣非净利</div><div class="kpi-v">¥2.45亿</div><span class="badge dn">-0.17% YoY</span><div class="kpi-l" style="margin-top:6px">主业基本企稳</div></div>
+    <div class="kpi"><div class="kpi-l">Q1 毛利率</div><div class="kpi-v">34.21%</div><span class="badge dn">-0.55pp YoY</span><div class="kpi-l" style="margin-top:6px">略降 / 行业压力</div></div>
+    <div class="kpi"><div class="kpi-l">Q1 净利率</div><div class="kpi-v up">10.76%</div><span class="badge up">+0.82pp YoY</span><div class="kpi-l" style="margin-top:6px">成本控制良好</div></div>
+    <div class="kpi"><div class="kpi-l">Q1 三费占比</div><div class="kpi-v">23.55%</div><span class="badge nt">销售+管理+研发</span><div class="kpi-l" style="margin-top:6px">教材业务费用季节性</div></div>
+    <div class="kpi"><div class="kpi-l">Q1 EPS</div><div class="kpi-v">¥0.208</div><span class="badge dn">-1.0% YoY</span><div class="kpi-l" style="margin-top:6px">~HKD 0.226</div></div>
+    <div class="kpi"><div class="kpi-l">Q1 占全年比例</div><div class="kpi-v">~16.4%</div><span class="badge nt">教材发行旺季在 Q3</span><div class="kpi-l" style="margin-top:6px">秋季新学期 8-9 月</div></div>
+    <div class="kpi"><div class="kpi-l">下次财报</div><div class="kpi-v">2026-08-29</div><span class="badge nt">H1 2026 中报</span><div class="kpi-l" style="margin-top:6px">业绩拐点观察期</div></div>
+  </div>
+
+  <div class="dcf-note" style="margin-top:18px">
+    <strong>Q1 2026 关键洞察 · 趋稳但增长压力仍在：</strong>
+    <p style="margin-top:8px">(1) <span class="hl-t">营收 -0.16% / 净利 -1.03%</span>—— 与 FY25 全年 -4.84% / +1.53% 相比，Q1 营收降幅大幅收窄但净利转负，说明<strong>主业仍在低谷期但已显趋稳</strong>；(2) <strong>净利率 +0.82pp</strong>—— 成本管控发挥作用；(3) Q1 是教材业务的低谷季（秋季 8-9 月新学期才是高峰），所以 Q1 仅占全年 ~16%；(4) <span class="hl-t">扣非净利 -0.17%</span> 显示主业基本企稳，未见进一步恶化；(5) 海图判断：FY26 全年净利大概率持平至微增（+0% 至 +3%），<strong>主要看 Q3 秋季教材发行的实际订单</strong>，下一关键节点是 8-29 中报。
+  </div>
+</div>
+
+<!-- ═══ 季度趋势 ═══ -->
+<div class="section">
+  <div class="stitle">季度趋势 + 5 年总览</div>
+  <div class="cgrid">
+    <div class="ccard">
+      <div class="ctitle">5 季度营收趋势（¥亿）</div>
+      <div class="cwrap"><canvas id="revenueChart"></canvas></div>
+    </div>
+    <div class="ccard">
+      <div class="ctitle">5 季度净利趋势（¥亿）</div>
+      <div class="cwrap"><canvas id="profitChart"></canvas></div>
+    </div>
+    <div class="ccard">
+      <div class="ctitle">FY2025 业务分部（¥亿）</div>
+      <div class="cwrap"><canvas id="segmentChart"></canvas></div>
+    </div>
+    <div class="ccard">
+      <div class="ctitle">10 年股息+净利演变（¥亿）</div>
+      <div class="cwrap"><canvas id="capexChart"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ Sankey ═══ -->
+<div class="section">
+  <div class="stitle">FY2025 资金流向 · 营收 → 自由现金流（¥ 亿）</div>
+  <div class="ccard">
+    <div class="ctitle">从 ¥117.32 亿营收到 ¥4.30 亿自由现金流的完整资金链路</div>
+    <div id="sankey" style="width:100%;height:480px;"></div>
+  </div>
+</div>
+
+<!-- ═══ 模块 1 ═══ -->
+<div class="section">
+  <div class="stitle">模块 1 · 公司概览与背景</div>
+  <div class="cmt">
+    <p><strong>公司全称</strong>：新华文轩出版传媒股份有限公司 / Xinhua Winshare Publishing and Media Co., Ltd.<br>
+    <strong>上市</strong>：HKEX: 0811（2007-05-30 香港上市）+ SH: 601811（2016-06-09 A 股上市）<br>
+    <strong>总部</strong>：四川省成都市<br>
+    <strong>主营</strong>：出版（图书+电子出版物+数字出版）+ 发行（教材教辅+一般图书+电商）+ 印刷+物资贸易+教育服务+物流</p>
+
+    <p><strong>核心叙事</strong>：新华文轩是<span class="hl-t">中国最大的省级出版发行集团</span>，依托四川省教材专营权和 6,500+ 家新华书店渠道，覆盖近 500 万学生（仅四川省）+ 全国出版分销。<span class="hl-t">这是一家"政策牌照护城河 + 渠道网络 + 高股息防御"三位一体的国企</span>——FY25 营收 -4.84% 因教材教辅减少 ¥3.46 亿（出生人口下降的结构性逆风），但归母净利润仍 +1.53% 显示成本控制和投资收益对冲能力。资产负债率 33.24%（行业最低）+ 累计分红 ¥47.38 亿（A股发行 ¥15 亿，分红覆盖 3 倍）+ H股 PE 7.07x / PB 0.73x / 股息率 6.63%——<strong>这是港股出版传媒中"破净 + 高股息 + 国资委背书"组合最稀有的标的</strong>。</p>
+
+    <p><strong>简史与里程碑</strong>：</p>
+    <p>
+      <strong>1. 2005 年成立</strong>——四川出版集团 + 新华书店集团合并改制<br>
+      <strong>2. 2007-05-30 港股上市</strong>——HKEX: 0811，发行价 HKD 4.34<br>
+      <strong>3. 2016-06-09 A 股上市</strong>——SH: 601811，发行价 ¥9.20，募集 ¥15 亿<br>
+      <strong>4. 2018 年图书市占率全国第 11、地方第 7</strong>——稳居出版头部<br>
+      <strong>5. 2020-2024 教材专营权续签</strong>——四川省教育厅授权延续<br>
+      <strong>6. 2024 年累计分红超 ¥40 亿</strong>——成为 A 股出版股分红最稳健的之一<br>
+      <strong>7. 2025-2026 数字化转型</strong>——电商占一般图书 34.75% / 电子书+有声书 1,000+ 种<br>
+      <strong>8. 2026 Q1 业绩趋稳</strong>——营收降幅 -4.84% → -0.16% 大幅收窄
+    </p>
+
+    <p><strong>股权结构（2025-12-31 末）</strong>：</p>
+    <p>
+      <strong>四川省国资委（实际控制人）</strong>——通过新华文轩集团持有约 67% 股权（A 股+H 股穿透）<br>
+      <strong>香港公众股东（H 股）</strong>——~36% H 股流通（4.42 亿股）<br>
+      <strong>A 股公众股东</strong>——~33% A 股流通（7.92 亿股）<br>
+      <strong>总股本 12.34 亿股 = A 股 7.92 亿 + H 股 4.42 亿</strong><br>
+      这是典型的"地方国资委监管 + AH 双上市"治理结构，四川省政府关于教育、出版的"基础公共服务"代理人
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 模块 2 ═══ -->
+<div class="section">
+  <div class="stitle">模块 2 · 管理层评估</div>
+
+  <div class="bscore">
+    <div class="circle cw">B+</div>
+    <div class="bd">
+      <h4>何志勇 · 董事长（地方国资轮换制）</h4>
+      <p>新华文轩管理层属于四川省国资委轮换体系——董事长/总裁 5 年一换，没有"创始人主义"。但出版主业、教材专营权、分红纪律、资产负债率控制都在管理层轮换中保持一致。<strong>海图判断这是"制度优于个人"的治理结构</strong>——任何 CEO 上任后都要执行"教材专营 + 主业稳健 + 高分红回报"三重要求。这是一类"政策代理人"型公司，管理层个人空间有限，但风险也有限。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>资本配置纪律 · 国企稀有标杆</h4>
+      <p>
+      <strong>FY2025 派息率 47.99%、累计分红 ¥47.38 亿</strong>——这是出版传媒行业"最高分红率国企"之一。<br>
+      过去 9 年股息保持稳定（中期 + 末期合计），FY25 派息率从 ~46% 提升至 ~48%。<br>
+      A 股发行 ¥15 亿，分红已覆盖 3 倍（¥47.38 / ¥15）—— 真正"善待股东"的国企。<br>
+      Capex 长期保持 ¥6-8 亿区间（FY25 ¥6.69 亿），<span class="warn-t">未启动股票回购</span>，仅靠股息回报股东。<br>
+      <span class="warn-t">不足之处</span>：在二级市场上未见过任何主动护盘动作，AH 折价 30% 长期未受管理层关注。
+      </p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B</div>
+    <div class="bd">
+      <h4>战略执行能力 · 防御 > 进攻</h4>
+      <p>FY25 营收 -4.84% 主要因教材教辅减少 ¥3.46 亿（出生人口结构性逆风）+ 一般图书 -2.59%。管理层通过<strong>成本控制和投资收益</strong>对冲，让归母净利润仍 +1.53%。<span class="hl-t">这是典型的"防御型国企"</span>——在主业承压时通过财务工具维持股东回报。新业务（数字化、电商）增速良好但占比仍低（一般图书电商 ¥20.42 亿 / 占一般图书 34.75%）。<strong>海图评价：管理层能守住基本盘，但缺乏"二次曲线"</strong>。</p>
+    </div>
+  </div>
+
+  <div class="cmt">
+    <p><strong>长期主义测试</strong>：3 年前（FY22 财报）管理层承诺"分红率不低于 40% + 教材专营权续签 + 数字化转型推进"——3 年后<span class="hl-t">每条都兑现</span>：分红率 FY22 41% → FY25 48%（+7pp）、教材专营权连续续签、数字化产品 1,000+ 种。这是国企运营中"言行一致"的代表。</p>
+
+    <p><strong>薪酬与利益绑定</strong>：管理层薪酬遵循国企"限薪令"，董事长年薪 ~¥80-100 万 + 业绩奖金。<span class="warn-t">激励机制极弱</span>，但战略执行力稳定。无管理层持股或股权激励——这是典型的"治理型国企"问题。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 3 ═══ -->
+<div class="section">
+  <div class="stitle">模块 3 · 商业模式深度解析</div>
+
+  <div class="cmt">
+    <p><strong>海图"一句话测试"</strong>：<span class="hl-t">向四川省 6,000+ 所学校的近 500 万学生供应教材教辅（专营牌照），并通过 6,500+ 家新华书店发行一般图书，毛利率 35%、净利率 13.35%、年净利 ¥15.68 亿、年分红 ¥7.53 亿。</span></p>
+
+    <p><strong>收入模型与分部拆解</strong>：</p>
+    <table class="tbl"><thead><tr><th>分部</th><th>FY25 营收(¥亿)</th><th>占比</th><th>YoY</th><th>毛利率</th><th>护城河</th></tr></thead>
+    <tbody>
+      <tr><td>发行（教材教辅）</td><td>~43</td><td>36.7%</td><td>-7.5%</td><td>~30%</td><td>★★★★★ 牌照</td></tr>
+      <tr><td>发行（一般图书）</td><td>58.78</td><td>50.1%</td><td>-2.59%</td><td>~30%</td><td>★★★ 渠道</td></tr>
+      <tr><td>出版（图书+电子+数字）</td><td>28.95</td><td>24.7%</td><td>+2.4%</td><td>~50%</td><td>★★★★ 内容</td></tr>
+      <tr><td>印刷+物资+物流</td><td>~15</td><td>12.8%</td><td>持平</td><td>~15%</td><td>★★ 配套</td></tr>
+      <tr><td>教育服务（C/B 端）</td><td>~5-10</td><td>4-9%</td><td>+10%+</td><td>~40%</td><td>★★★ 渠道</td></tr>
+      <tr><td>抵销</td><td>(~30)</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+      <tr class="hl"><td>合计</td><td>117.32</td><td>100%</td><td>-4.84%</td><td>35.01%</td><td>-</td></tr>
+    </tbody></table>
+
+    <p style="margin-top:14px"><strong>单位经济（uPodučn Economics）</strong>：教材教辅按学生人数定价（受出生人口和学位数双重影响）。一般图书按销售折扣定价（普通 60-70% 出版社折扣）。出版分部毛利率约 50%（内容版权高利润），发行分部毛利率约 30%（渠道+物流薄利），合并毛利率 35%。</p>
+
+    <p><strong>产业链定位</strong>：</p>
+    <p>
+      <strong>上游</strong>：作者+造纸厂+印刷厂+电子出版商<br>
+      <strong>中游（公司）</strong>：出版分部（自有内容 + 引进版权）→ 发行分部（教材+一般图书）→ 销售网络（书店 + 电商 + 馆配）<br>
+      <strong>下游</strong>：四川 + 全国学校 / 个人读者 / 图书馆 / 政府采购 / 教育机构<br>
+      <strong>议价能力</strong>：上游议价能力中等（造纸价格波动）；下游对学校议价能力极强（教材专营牌照），对读者议价能力弱（电商比价）
+    </p>
+
+    <p><strong>关键商业模式特点</strong>：</p>
+    <p>
+      <strong>1. 政策牌照护城河</strong>：四川省教材专营权（6,000+ 学校 / 500 万学生）由省教育厅授权，每 5 年续签一次。这是"准公共服务"性质，竞争对手无法进入。<br>
+      <strong>2. 物理渠道网络</strong>：6,500+ 家新华书店是中国最大的出版发行物理渠道，覆盖四川 + 周边省份。在电商时代仍有价值（馆配+学校采购+教辅）。<br>
+      <strong>3. 现金流稳定 + 高分红</strong>：教材业务订单可预测、现金回款好。FY25 OCF ¥10.99 亿 + ¥1.30 亿税款退税显示现金流质量优秀。<br>
+      <strong>4. 净现金垫</strong>：货币资金 ¥85 亿 + 投资资产 ~¥50-60 亿，<span class="warn-t">合计净金融资产超过 ¥130 亿</span>——这是市值 ¥150 亿股票的超大安全边际。<br>
+      <strong>5. 成长性弱</strong>：受出生人口下降影响，主业难有 5%+ 高增长。增长来自数字化（电子书 + 有声书 + 教育服务）但占比仍低。
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 模块 4 ═══ -->
+<div class="section">
+  <div class="stitle">模块 4 · 经济护城河分析（5 维）</div>
+
+  <div class="bscore">
+    <div class="circle cg">A</div>
+    <div class="bd">
+      <h4>1. 无形资产（牌照）· <strong>宽护城河</strong></h4>
+      <p>四川省教材发行专营权——由省教育厅授权，每 5 年续签一次。这是<strong>新华文轩最强护城河</strong>：覆盖 6,000+ 学校 / 近 500 万学生 / 教材+教辅业务约 ¥43 亿 / 占总营收 36.7%。<span class="hl-t">竞争对手即便资金充裕也无法进入</span>——这是"准垄断"型护城河，与中国移动 5G 频谱牌照、中海油海上石油专营权同类型。<br>持久性：连续续签 20+ 年，未来 5-10 年大概率持续。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B+</div>
+    <div class="bd">
+      <h4>2. 成本优势（渠道规模）· <strong>窄护城河</strong></h4>
+      <p>6,500+ 家新华书店是中国最大物理书店网络。规模效应让单店配送成本显著低于其他出版物流公司。<span class="hl-t">但电商时代物理渠道边际优势在缩小</span>——一般图书 -2.59% YoY 显示电商挤压持续。教材专营仍受益渠道，但一般图书会逐步从物理向电商迁移（电商占比已 34.75%）。<br>持久性：未来 3-5 年仍有价值，但 10 年后可能边缘化。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B</div>
+    <div class="bd">
+      <h4>3. 转换成本（C 端弱、B 端强）· <strong>窄护城河</strong></h4>
+      <p>对个人读者：转换成本极低（电商比价、京东+当当随时切换）。对学校 B 端：转换成本极高（每个省内的教材发行体系都与教育厅深度绑定，学校无法跨省采购）。<span class="hl-t">综合判断：B 端护城河强，C 端护城河弱</span>。教材+教辅业务 ¥43 亿是"高黏性"，一般图书 ¥58.78 亿是"低黏性"。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle co">C+</div>
+    <div class="bd">
+      <h4>4. 网络效应 · <strong>无</strong></h4>
+      <p>出版业本身没有网络效应——读者数量增多并不让出版物对其他读者更有价值。<span class="hl-t">这是新华文轩最弱的护城河维度</span>。Amazon Kindle 有微弱网络效应（评论+推荐），但新华文轩无。教育服务可能有弱网络效应（更多学校用 → 更多内容 → 更多学校用）但占比小。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B</div>
+    <div class="bd">
+      <h4>5. 有效规模（地理垄断）· <strong>窄护城河</strong></h4>
+      <p>四川省内出版发行行业有"自然垄断"特征——一个省一个新华文轩。但全国市场有 30+ 个新华系（中信 / 凤凰 / 北方 / 上海 / 山东等）—— 各省互不竞争。<span class="hl-t">这是地理 + 政策双重垄断</span>。新华文轩在四川省的有效规模优势明确，但跨省竞争力不强。<br>持久性：未来 5-10 年地理护城河持续，10 年后教育数字化可能打破地理边界。</p>
+    </div>
+  </div>
+
+  <div class="cmt">
+    <p style="margin-top:18px"><strong>护城河趋势 · 整体微微侵蚀（教辅压力 + 电商挤压）但牌照仍稳</strong>：5 大维度综合评分 = 1A + 2B+ + 1B + 1C+ ≈ <strong>窄至中护城河</strong>。无形资产（牌照）极强，成本优势中，转换成本中，网络效应弱，有效规模中。<span class="hl-t">10 年后会更窄还是更宽？海图判断：会"略变窄"</span>—— 教材业务受益人口下降会缩水（-3% 至 -5%/年），但渠道护城河和成本优势稳定。这是一家"护城河窄但极稳"的公司，不会被颠覆但也不会爆发增长。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 5 ═══ -->
+<div class="section">
+  <div class="stitle">模块 5 · 财务深度分析</div>
+
+  <h3 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">5.1 三张表概览（FY2025）</h3>
+  <div class="tbl-wrap" style="margin-bottom:14px">
+    <table class="tbl"><thead><tr><th>项目</th><th>FY2024</th><th>FY2025</th><th>YoY</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td>利润表</td><td></td><td></td><td></td></tr>
+      <tr><td>营业收入（¥亿）</td><td>123.29</td><td>117.32</td><td>-4.84%</td></tr>
+      <tr><td>毛利率</td><td>~35%</td><td>35.01%</td><td>持平</td></tr>
+      <tr><td>销售费用（¥亿）</td><td>~14</td><td>~13</td><td>-7%</td></tr>
+      <tr><td>管理费用（¥亿）</td><td>~9</td><td>~8.7</td><td>-3%</td></tr>
+      <tr><td>研发费用（¥亿）</td><td>~0.4</td><td>~0.4</td><td>持平</td></tr>
+      <tr><td>投资收益（¥亿）</td><td>~3.5</td><td>~3.8</td><td>+8%</td></tr>
+      <tr><td>归母净利润（¥亿）</td><td>15.44</td><td>15.68</td><td>+1.53%</td></tr>
+      <tr><td>扣非归母净利（¥亿）</td><td>16.58</td><td>14.57</td><td>-12.11%</td></tr>
+      <tr class="hl"><td>资产负债表（期末）</td><td></td><td></td><td></td></tr>
+      <tr><td>货币资金（¥亿）</td><td>~80</td><td>~85.09</td><td>+6.4%</td></tr>
+      <tr><td>交易性金融资产（¥亿）</td><td>~50</td><td>~50</td><td>持平</td></tr>
+      <tr><td>应收账款（¥亿）</td><td>~25</td><td>~26</td><td>+4%</td></tr>
+      <tr><td>存货（¥亿）</td><td>~30</td><td>~32</td><td>+7%</td></tr>
+      <tr><td>短期借款+长期借款（¥亿）</td><td>~3</td><td>~2.76</td><td>-8%</td></tr>
+      <tr><td>归母净资产（¥亿）</td><td>~152</td><td>~157</td><td>+3.3%</td></tr>
+      <tr><td>资产负债率</td><td>~33%</td><td>33.24%</td><td>持平</td></tr>
+      <tr class="hl"><td>现金流量表</td><td></td><td></td><td></td></tr>
+      <tr><td>经营活动现金流（¥亿）</td><td>~12</td><td>10.99</td><td>-8%</td></tr>
+      <tr><td>投资活动现金流（¥亿）</td><td>~-7</td><td>~-6</td><td>改善</td></tr>
+      <tr><td>筹资活动现金流（¥亿）</td><td>~-7</td><td>~-7.5</td><td>分红</td></tr>
+      <tr><td>资本开支（¥亿）</td><td>~7</td><td>~6.69</td><td>-4%</td></tr>
+      <tr><td>自由现金流（¥亿）</td><td>~5</td><td>4.30</td><td>-14%</td></tr>
+    </tbody></table>
+  </div>
+
+  <h3 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">5.2 5 年关键比率趋势</h3>
+  <div class="tbl-wrap" style="margin-bottom:14px">
+    <table class="tbl"><thead><tr><th>比率</th><th>FY21</th><th>FY22</th><th>FY23</th><th>FY24</th><th>FY25</th></tr></thead>
+    <tbody>
+      <tr><td>营收增速</td><td>+12%</td><td>+8%</td><td>+5%</td><td>-2%</td><td>-4.84%</td></tr>
+      <tr><td>归母净利增速</td><td>+5%</td><td>+8%</td><td>+10%</td><td>+5%</td><td>+1.53%</td></tr>
+      <tr><td>毛利率</td><td>34%</td><td>35%</td><td>35%</td><td>35%</td><td>35.01%</td></tr>
+      <tr><td>净利率</td><td>11%</td><td>12%</td><td>12.5%</td><td>12.5%</td><td>13.35%</td></tr>
+      <tr><td>ROE</td><td>10.5%</td><td>11%</td><td>11.5%</td><td>10.5%</td><td>10.32%</td></tr>
+      <tr><td>ROA</td><td>~6%</td><td>~6.5%</td><td>~7%</td><td>~6.8%</td><td>~6.5%</td></tr>
+      <tr><td>资产负债率</td><td>34%</td><td>33%</td><td>33%</td><td>33%</td><td>33.24%</td></tr>
+      <tr><td>派息率</td><td>~40%</td><td>~41%</td><td>~43%</td><td>~46%</td><td>47.99%</td></tr>
+    </tbody></table>
+  </div>
+
+  <h3 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">5.3 杜邦分析（FY2025）</h3>
+  <div class="cmt">
+    <p><strong>ROE = 净利率 × 资产周转 × 权益乘数</strong></p>
+    <p>= 13.35% × (¥117.32 / ¥235) × (¥235 / ¥157)<br>
+    = <strong>13.35% × 0.499 × 1.497</strong><br>
+    = <strong>10.32%</strong></p>
+    <p style="margin-top:10px"><strong>解读</strong>：ROE 由 3 项构成——<span class="hl-t">净利率 13.35%（中等偏好）+ 资产周转 0.499（出版业典型，慢于消费品快于地产）+ 权益乘数 1.50（极保守，反映低杠杆）</span>。<strong>提升 ROE 的关键在权益乘数（杠杆）和资产周转</strong>——但国企不会加杠杆，所以 ROE 长期稳定在 10-12% 区间，难有突破。</p>
+  </div>
+
+  <h3 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">5.4 资产负债健康度</h3>
+  <div class="cmt">
+    <p>
+      <strong>有息负债 ¥2.76 亿（短期借款 + 长期借款）</strong>——极低，几乎可以忽略<br>
+      <strong>货币资金 ¥85.09 亿</strong>——充裕<br>
+      <strong>交易性金融资产 ~¥50 亿</strong>——含基金、债券、股票投资<br>
+      <strong>真实净金融资产 = ¥85 + ¥50 - ¥2.76 = ~¥132 亿</strong><br>
+      <strong>占总市值（A+H）¥150 亿的比例 = 88%</strong><br>
+      <span class="hl-t">这意味着：扣除净金融资产后，市场对纯运营业务的估值仅 ¥18 亿，对应 ¥15.68 亿净利的核心 P/E 仅 1.15x</span>—— 极端低估！<br>
+      流动比率 ~3.0、利息覆盖倍数 N/A（几乎无利息支出）<br>
+      <strong>资产负债健康度评级：A+</strong>（行业最优）
+    </p>
+  </div>
+
+  <h3 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">5.5 现金流质量</h3>
+  <div class="cmt">
+    <p>
+      <strong>OCF/NI = ¥10.99 / ¥15.68 = 70%</strong>——略低于 100%（投资收益不产生现金）<br>
+      <strong>FCF/OCF = ¥4.30 / ¥10.99 = 39%</strong>——偏低，因 Capex 占 OCF 60%<br>
+      <strong>FCF Yield = ¥4.30 / ¥150 = 2.87%</strong>——一般水平<br>
+      <strong>维护性 Capex 估算 ¥4-5 亿，扩张性 Capex ¥2-3 亿</strong>——后者主要投向数字化和物流仓储<br>
+      <strong>评价</strong>：现金流质量中等。<span class="hl-t">投资收益（¥3.8 亿）不产生现金，所以 OCF 略低于 NI</span>，但仍是"稳定可预测"的现金流。
+    </p>
+  </div>
+
+  <h3 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">5.6 所有者盈余计算（核心）</h3>
+  <div class="cmt">
+    <p>所有者盈余 = 净利 + 折旧摊销 - 维护性 Capex ± 营运资金变动</p>
+    <p>
+      = ¥15.68亿 + ¥4亿 (折旧摊销估算) - ¥4.5亿 (维护性Capex)<br>
+      = <strong>¥15.18亿</strong>
+    </p>
+    <p style="margin-top:8px"><strong>OE Yield = ¥15.18 / ¥150 = 10.12%</strong>——非常优秀</p>
+    <p>这是"长期债券替代品"的核心论据——10% 的所有者盈余收益率（vs 10 年期国债 4%、银行理财 3%、A 股大盘 5-6%），且管理层愿意以 48% 派息率分给股东（即净 4-5% 现金股息）。<span class="hl-t">如果你能拿 10 年，这相当于一个 10% 收益率 + 通胀对冲的债券</span>。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 6 ═══ -->
+<div class="section">
+  <div class="stitle">模块 6 · 电话会分析（最新 + 前 2 季）</div>
+
+  <p style="font-size:13px; color: var(--text2); margin-bottom:18px;">注：新华文轩为 A+H 双上市国企，不举行类似美股的 quarterly earnings call，但有<strong>季度业绩公告 + 业绩说明会（A 股证券时报）</strong>。本节基于 FY25 年报+ Q1 2026 季报+ 2026-04-22 H 股临时股东会公告分析。</p>
+
+  <div class="tag-grid">
+    <div class="tag-card pos">
+      <h5>FY25 年报（2026-03-26）<span class="tag-bd up">利好</span></h5>
+      <p>"在出生人口下降的逆风下，归母净利润仍 +1.53%，分红总额 ¥7.53 亿创历史新高，派息率提升至 47.99%。" → <strong>说明管理层在主业承压时仍坚持高分红纪律，给股东返还现金</strong>。</p>
+    </div>
+    <div class="tag-card neg">
+      <h5>FY25 年报（2026-03-26）<span class="tag-bd dn">利空</span></h5>
+      <p>"教材教辅业务收入较上年同期减少 ¥3.46 亿，一般图书销售收入 -2.59%。" → <strong>主业增长承压</strong>是结构性问题（出生人口下降 + 电商挤压），未来 3-5 年仍会持续。</p>
+    </div>
+    <div class="tag-card neu">
+      <h5>FY25 年报（2026-03-26）<span class="tag-bd nt">中性</span></h5>
+      <p>"推出 1,000+ 种电子书+有声书产品，电商占一般图书 34.75%。" → 数字化转型在推进，但占比仍低，<strong>无法对冲传统业务下滑</strong>。这是"探索性投资"而非"成长引擎"。</p>
+    </div>
+    <div class="tag-card pos">
+      <h5>Q1 2026 季报（2026-04-30）<span class="tag-bd up">利好</span></h5>
+      <p>"营收 -0.16% / 净利 -1.03%——较 FY25 全年 -4.84% / +1.53% 大幅改善，主业基本企稳。" → <strong>Q1 是教材业务低谷季，能保持持平已是好消息</strong>，秋季 Q3 才是业绩真正考验。</p>
+    </div>
+    <div class="tag-card neu">
+      <h5>Q1 2026 季报<span class="tag-bd nt">中性</span></h5>
+      <p>"毛利率 34.21%（-0.55pp）+ 净利率 10.76%（+0.82pp）。" → <strong>毛利率小幅下降但成本控制让净利率上升</strong>。说明管理层在压缩费用，但产品定价权在弱化。</p>
+    </div>
+    <div class="tag-card pos">
+      <h5>2026-04-22 H 股临时股东会<span class="tag-bd up">利好</span></h5>
+      <p>"H 股末期股息 ¥0.42/股（含税），除息日 2026-05-29。" → <strong>分红正常发放</strong>，是国企纪律的体现。H 股股东即将获得 ¥1.85 亿（H 股 4.42 亿股 × ¥0.42）的现金分红。</p>
+    </div>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">6.1 信号汇总</h4>
+  <div class="cmt">
+    <p><strong>利好信号（3）</strong>：(1) 派息率提升至 47.99%；(2) Q1 营收降幅大幅收窄；(3) H 股股息正常发放。</p>
+    <p><strong>利空信号（2）</strong>：(1) 教材教辅减少 ¥3.46 亿；(2) 一般图书 -2.59%。</p>
+    <p><strong>中性信号（2）</strong>：(1) 数字化探索；(2) 毛利率小幅下降。</p>
+    <p>综合评估：<strong>正面</strong>——管理层沟通诚实，承认主业压力，但用分红纪律和成本控制来对冲。无"画饼"和"过度乐观"。</p>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">6.2 指引兑现度追踪</h4>
+  <div class="tbl-wrap">
+    <table class="tbl"><thead><tr><th>承诺时间</th><th>承诺内容</th><th>实际兑现</th><th>评分</th></tr></thead>
+    <tbody>
+      <tr><td>FY22 年报</td><td>派息率不低于 40%</td><td>FY25 47.99%</td><td>A+</td></tr>
+      <tr><td>FY22 年报</td><td>教材专营权续签</td><td>已续签至 2027</td><td>A</td></tr>
+      <tr><td>FY23 年报</td><td>数字化产品 500+ 种</td><td>FY25 已达 1,000+ 种</td><td>A+</td></tr>
+      <tr><td>FY24 年报</td><td>FY25 营收企稳</td><td>FY25 -4.84%（不达预期）</td><td>C</td></tr>
+      <tr><td>FY24 年报</td><td>FY25 净利稳健</td><td>FY25 +1.53%（基本兑现）</td><td>B</td></tr>
+    </tbody></table>
+  </div>
+</div>
+
+<!-- ═══ 模块 7 ═══ -->
+<div class="section">
+  <div class="stitle">模块 7 · 多模型估值（8 种方法交叉验证）</div>
+
+  <p style="margin-bottom: 16px; color: var(--text2); font-size:14px;">下表估值<strong>不锚定当前市价</strong>，独立基于财报数据 + 行业研究推导。中位数取 8 种方法估值的中点，最终目标价用概率加权（基准 55% / 乐观 20% / 悲观 25%）。<span class="warn-t">特别说明：因 H 股 AH 折价 30%，本节 8 种估值默认输出"H 股目标价"</span>，A 股可按 H 股目标价 ÷ 0.92（HKD/RMB）× 1.30 (AH 溢价) 计算。</p>
+
+  <div class="tbl-wrap" style="margin-bottom:14px">
+    <table class="tbl"><thead><tr><th>方法</th><th>关键假设</th><th>H 股估值（HKD）</th><th>vs HKD 10.32 现价</th></tr></thead>
+    <tbody>
+      <tr><td>1. 相对估值 P/E</td><td>EPS ¥1.27, P/E 10x（行业平均 12-15x）</td><td>HKD 13.83</td><td><span class="badge up">+34%</span></td></tr>
+      <tr><td>2. DCF（基准）</td><td>FY26-30 净利 ¥14-16 亿稳态, WACC 8%, g=0%</td><td>HKD 14.20</td><td><span class="badge up">+38%</span></td></tr>
+      <tr><td>3. 所有者盈余</td><td>OE ¥15.18 亿, 合理 P/OE 9-10x</td><td>HKD 12.50</td><td><span class="badge up">+21%</span></td></tr>
+      <tr><td>4. PEG</td><td>g≈0%——不适用</td><td>N/A</td><td><span class="badge nt">不适用</span></td></tr>
+      <tr><td>5. DDM 戈登模型</td><td>股息 ¥0.61, k=8%, g=2%</td><td>HKD 11.07</td><td><span class="badge up">+7%</span></td></tr>
+      <tr><td>6. NAV（每股净资产）</td><td>归母净资产 ¥12.70/股</td><td>HKD 13.83</td><td><span class="badge up">+34%</span></td></tr>
+      <tr><td>7. 反向 DCF</td><td>当前 HKD 10.32 隐含 r=14%, g=0% (过度悲观)</td><td>HKD 16.50</td><td><span class="badge up">+60%</span></td></tr>
+      <tr><td>8. SOTP 分部加总</td><td>主业 ¥18 亿 + 净金融资产 ¥132 亿 = ¥150 亿</td><td>HKD 13.20</td><td><span class="badge up">+28%</span></td></tr>
+      <tr class="hl"><td>中位数</td><td>—</td><td><strong>HKD 13.50</strong></td><td><strong>+31%</strong></td></tr>
+      <tr class="hl"><td>加权公允（基准 55% / 乐观 20% / 悲观 25%）</td><td>—</td><td><strong>HKD 12.80</strong></td><td><strong>+24%</strong></td></tr>
+    </tbody></table>
+  </div>
+
+  <h4 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">7.X · 估值方法适用性说明</h4>
+  <div class="dcf-note">
+    <p><strong>最适用 3 种</strong>：DCF（稳态现金流）、所有者盈余（核心 OE Yield 10.12%）、SOTP（净金融资产占市值 88%，扣除后核心 P/E 仅 1.15x）。</p>
+    <p><strong>次要 2 种</strong>：NAV（破净的安全边际）、相对估值 P/E（行业横向对比）。</p>
+    <p><strong>不适用 2 种</strong>：PEG（增长率 0%）、PE 多档透视（公司净利稳定，无周期性扰动）。</p>
+    <p><strong>最重要的洞察</strong>：<span class="hl-t">SOTP 分部加总告诉你：扣除净金融资产 ¥132 亿后，市场对纯运营业务的估值仅 ¥18 亿，对应 ¥15.68 亿净利的核心 P/E 仅 1.15x</span>——这是极端低估。即便假设主业未来 5 年净利每年下滑 5%，5 年后净利 ¥12 亿，对应 ¥18 亿核心估值的 P/E 仅 1.5x，仍是低估。</p>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">7.1 三情景敏感性分析</h4>
+  <div class="tbl-wrap">
+    <table class="tbl"><thead><tr><th>情景</th><th>关键假设</th><th>FY26 净利估算</th><th>H 股目标价</th><th>vs 现价</th><th>概率</th></tr></thead>
+    <tbody>
+      <tr><td>悲观</td><td>主业下滑 -5%/年, 派息率持平</td><td>¥14 亿</td><td>HKD 8.00</td><td><span class="badge dn">-22%</span></td><td>25%</td></tr>
+      <tr><td>基准</td><td>主业持平, 派息率 50%</td><td>¥15.5 亿</td><td>HKD 13.50</td><td><span class="badge up">+31%</span></td><td>55%</td></tr>
+      <tr><td>乐观</td><td>数字化贡献 +10%, 派息率 60%</td><td>¥17 亿</td><td>HKD 16.00</td><td><span class="badge up">+55%</span></td><td>20%</td></tr>
+    </tbody></table>
+  </div>
+</div>
+
+<!-- ═══ 模块 8 ═══ -->
+<div class="section">
+  <div class="stitle">模块 8 · 竞争与行业分析</div>
+
+  <h4 style="margin-bottom:10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">8.1 出版发行行业市场份额</h4>
+  <div class="tbl-wrap" style="margin-bottom:14px">
+    <table class="tbl"><thead><tr><th>公司</th><th>市值</th><th>FY25 营收</th><th>FY25 净利</th><th>P/E</th><th>股息率</th></tr></thead>
+    <tbody>
+      <tr><td>中国出版（601949）</td><td>~¥100亿</td><td>~¥80亿</td><td>~¥7亿</td><td>~14x</td><td>~3%</td></tr>
+      <tr><td>凤凰传媒（601928）</td><td>~¥350亿</td><td>~¥150亿</td><td>~¥25亿</td><td>~14x</td><td>~3.5%</td></tr>
+      <tr class="hl"><td>新华文轩（601811/0811）</td><td><strong>~¥150亿</strong></td><td><strong>¥117亿</strong></td><td><strong>¥15.68亿</strong></td><td><strong>10.7x(A) / 7.07x(H)</strong></td><td><strong>4.42%(A) / 6.63%(H)</strong></td></tr>
+      <tr><td>中信出版（300788）</td><td>~¥45亿</td><td>~¥18亿</td><td>~¥3亿</td><td>~15x</td><td>~2%</td></tr>
+      <tr><td>城市传媒（600229）</td><td>~¥45亿</td><td>~¥40亿</td><td>~¥4亿</td><td>~11x</td><td>~3%</td></tr>
+      <tr><td>新华传媒（600825）</td><td>~¥50亿</td><td>~¥40亿</td><td>~¥3亿</td><td>~17x</td><td>~2%</td></tr>
+    </tbody></table>
+  </div>
+  <div class="cmt">
+    <p><strong>新华文轩在出版股中相对低估</strong>：H 股 P/E 7.07x 是行业最低（vs 凤凰传媒 14x、中国出版 14x），股息率 6.63% 是行业最高之一（vs 凤凰传媒 3.5%）。市值 ¥150 亿 / 营收 ¥117 亿（P/S 1.28）比行业平均（P/S 1.5-2.0）也低。<span class="hl-t">这是同行业中"被忽视的高股息低估值标的"</span>。</p>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">8.2 波特五力分析</h4>
+  <div class="tbl-wrap">
+    <table class="tbl"><thead><tr><th>力量</th><th>评级</th><th>分析</th></tr></thead>
+    <tbody>
+      <tr><td>1. 现有竞争者</td><td>低</td><td>各省新华系互不竞争，地理垄断</td></tr>
+      <tr><td>2. 新进入者威胁</td><td>极低</td><td>教材专营权牌照壁垒</td></tr>
+      <tr><td>3. 替代品威胁</td><td>中等</td><td>电子书 + 短视频教育内容（B站、抖音）</td></tr>
+      <tr><td>4. 供应商议价</td><td>中等</td><td>造纸厂周期性涨价</td></tr>
+      <tr><td>5. 客户议价</td><td>高（C端）/ 低（B端）</td><td>个人读者电商比价；学校无替代</td></tr>
+    </tbody></table>
+  </div>
+  <div class="cmt" style="margin-top:14px">
+    <p>整体行业吸引力：<span class="hl-t">中等偏好</span>。现有竞争者和新进入者威胁极低（牌照壁垒），但替代品威胁（数字化）和 C 端客户议价能力是长期挑战。<strong>对国企而言，这是相对舒适的赛道</strong>——有牌照保护、有政策支持、不需要拼杀竞争。</p>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">8.3 行业增长率与 TAM</h4>
+  <div class="cmt">
+    <p>
+      <strong>中国出版业 TAM</strong>：~¥1,500 亿（图书+数字出版+教材教辅）<br>
+      <strong>SAM（新华文轩可触及市场）</strong>：四川省+周边教材教辅 ¥80 亿 + 全国一般图书 ~¥800 亿<br>
+      <strong>SOM（公司实际占有）</strong>：~¥117 亿（市占率 7.8%，地方第 7）<br>
+      <strong>行业增长率</strong>：-2% 至 +1%/年（出生人口下降 + 电子化挤压）<br>
+      <strong>颠覆风险</strong>：中——AI+短视频教育是 5-10 年的潜在颠覆者。如 B 站教育、网易有道、新东方在线等平台可能侵蚀传统教材的"知识传递"功能。
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 模块 9 ═══ -->
+<div class="section">
+  <div class="stitle">模块 9 · 技术面与 K 线分析（次要参考）</div>
+
+  <div class="cmt">
+    <p><strong>H 股 0811.HK</strong>：</p>
+    <p>
+      当前价 HKD 10.32（2026-04-30 收盘）。52 周区间 HKD 9.69-12.40。<br>
+      <strong>日 K 线趋势</strong>：4 月走势震荡下行——4-24 HKD 10.48 → 4-30 HKD 10.32（-1.5%）。<br>
+      <strong>30 日均价 ~HKD 10.5、50 日均价 ~HKD 10.3</strong>——价格处于均线附近。<br>
+      <strong>支撑位</strong>：HKD 9.50-9.70（52 周低区）<br>
+      <strong>阻力位</strong>：HKD 11.00（30 日均线上方）/ HKD 12.40（52 周高）<br>
+      <strong>RSI</strong>：~50（中性）<br>
+      <strong>判断</strong>：H 股技术面中性偏弱，但远未触及支撑位。<span class="hl-t">由于 H 股 AH 折价 30%，技术面下行空间较小</span>。
+    </p>
+
+    <p><strong>A 股 601811.SH</strong>：</p>
+    <p>
+      当前价 ¥13.59（2026-04-30 收盘）。52 周区间 ¥12.71-16.90。<br>
+      <strong>4 月走势</strong>：4-7 日大涨后震荡下行。4-21 ¥13.88 → 4-30 ¥13.59（-2.1%）。<br>
+      <strong>支撑位</strong>：¥12.71（52 周低）<br>
+      <strong>阻力位</strong>：¥14.50 / ¥16.00<br>
+      <strong>判断</strong>：A 股因散户交投活跃，波动较大。但<span class="warn-t">A 股 P/E 10.7x 已较 H 股贵 50%</span>，性价比明显低于 H 股。
+    </p>
+
+    <p><strong>南向资金动态</strong>：FY25 全年南向持股小幅增加 H 股，反映长期资金对高股息标的的兴趣。但 H 股流通盘小（4.42 亿股），南向单日交易量较小，<strong>不存在被资金"快速推高"的可能</strong>。</p>
+
+    <p><strong>注意</strong>：技术面作为补充参考，不影响"基于估值的买入决策"。当前 H 股 PB 0.73x、PE 7.07x、股息率 6.63% 已是 5 年估值低位区，<strong>基本面已严重低估，技术面只是确认底部区间的工具</strong>。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 10 ═══ -->
+<div class="section">
+  <div class="stitle">模块 10 · 增长催化剂与前景展望</div>
+
+  <h4 style="margin-bottom:10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">10.1 短期催化剂（未来 6 个月）</h4>
+  <div class="tag-grid">
+    <div class="tag-card pos">
+      <h5>2026-05-29 H 股除息日<span class="tag-bd up">利好</span></h5>
+      <p>H 股股东获得 ¥0.42/股 末期分红（约 HKD 0.46/股，对应当前 HKD 10.32 股息收益率约 4.5% 一次性）。<strong>除息后股价回调，长期持有者继续滚动收息</strong>。</p>
+    </div>
+    <div class="tag-card pos">
+      <h5>2026-08-29 H1 中报<span class="tag-bd up">利好</span></h5>
+      <p>关键节点。FY25 H1 净利 ¥8.57 亿（+19.6% 同比，基数高），<strong>FY26 H1 同比增长压力大</strong>。但市场已预期，只要不大幅低于预期就是利好。中期分红可能正常发放（~¥2.5 亿）。</p>
+    </div>
+    <div class="tag-card neu">
+      <h5>2026 年秋季教材发行<span class="tag-bd nt">中性</span></h5>
+      <p>Q3 是教材业务最大旺季。秋季订单决定全年 50%+ 营收。<strong>2026 年小学新生人数继续下降（出生人口 2018-2023 持续下降的传导效应）</strong>，秋季订单大概率持平至略降。</p>
+    </div>
+    <div class="tag-card pos">
+      <h5>港股通 / 沪港通流入<span class="tag-bd up">利好</span></h5>
+      <p>H 股 6.63% 股息率在港股通标的中名列前茅，吸引南向资金长期配置。<strong>FY25 末南向持股已显示稳定增加</strong>，未来 6 个月继续累积。</p>
+    </div>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">10.2 长期展望（3-5 年）</h4>
+  <div class="cmt">
+    <p><strong>未来 3-5 年三大主题</strong>：</p>
+    <p>
+      <strong>1. 教材业务结构性下滑</strong>：出生人口 2018 年开始持续下降，传导到小学新生约 6 年后（2024-2025），传导到初中约 12 年后（2030-2031）。FY26-30 教材教辅大概率每年 -3% 至 -5%。<br>
+      <strong>2. 数字化转型加速</strong>：电子书+有声书+教育服务占比从 FY25 ~5% 提升到 FY30 ~15%，但毛利率（~50%）高于传统出版（~35%），整体利润影响中性。<br>
+      <strong>3. 高分红 + 净金融资产释放</strong>：净金融资产 ¥132 亿继续累积现金股息（年股息 ~¥7-8 亿），<strong>派息率有望从 48% 升至 55-60%</strong>（国资委政策导向）。
+    </p>
+
+    <p><strong>FY26-30 营收 / 净利预测</strong>：</p>
+    <table class="tbl" style="margin-top:10px"><thead><tr><th>年度</th><th>营收（¥亿）</th><th>YoY</th><th>净利（¥亿）</th><th>YoY</th><th>派息率</th></tr></thead>
+    <tbody>
+      <tr><td>FY25 实际</td><td>117.32</td><td>-4.84%</td><td>15.68</td><td>+1.53%</td><td>47.99%</td></tr>
+      <tr><td>FY26 预测</td><td>116.00</td><td>-1.1%</td><td>15.50</td><td>-1.1%</td><td>50%</td></tr>
+      <tr><td>FY27 预测</td><td>115.00</td><td>-0.9%</td><td>15.30</td><td>-1.3%</td><td>55%</td></tr>
+      <tr><td>FY28 预测</td><td>114.00</td><td>-0.9%</td><td>15.20</td><td>-0.7%</td><td>55%</td></tr>
+      <tr><td>FY29 预测</td><td>113.50</td><td>-0.4%</td><td>15.30</td><td>+0.7%</td><td>60%</td></tr>
+      <tr><td>FY30 预测</td><td>114.00</td><td>+0.4%</td><td>15.50</td><td>+1.3%</td><td>60%</td></tr>
+    </tbody></table>
+
+    <p style="margin-top:10px"><strong>5 年累计股息</strong>：~¥40 亿（H 股股东可分得 ~¥14 亿，按当前 HKD 45.6 亿市值算 5 年累计股息收益率 30%+）<span class="hl-t">这是"长期债券替代品"的核心论据</span>。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 11 ═══ -->
+<div class="section">
+  <div class="stitle">模块 11 · 风险矩阵（多维评估）</div>
+
+  <div class="risk-grid">
+    <div class="risk-card r3">
+      <h5>1. 经营风险（教辅减少）</h5>
+      <span class="risk-score">3 / 5</span>
+      <p>出生人口下降是结构性逆风，FY26-30 每年 -3% 至 -5%。但管理层已通过分红和投资收益对冲。</p>
+    </div>
+    <div class="risk-card r2">
+      <h5>2. 财务风险</h5>
+      <span class="risk-score">2 / 5</span>
+      <p>有息负债 ¥2.76 亿 + 净金融资产 ¥132 亿——基本无财务风险。资产负债率 33.24% 行业最低。</p>
+    </div>
+    <div class="risk-card r3">
+      <h5>3. 竞争风险（电商挤压）</h5>
+      <span class="risk-score">3 / 5</span>
+      <p>一般图书 -2.59%，电商占比已 34.75% 但仍在持续侵蚀。物理书店渠道价值在缩小。</p>
+    </div>
+    <div class="risk-card r2">
+      <h5>4. 监管/政策风险</h5>
+      <span class="risk-score">2 / 5</span>
+      <p>教材专营权 5 年续签机制，国资委监管，政策风险低。但教材定价改革可能压低毛利率。</p>
+    </div>
+    <div class="risk-card r3">
+      <h5>5. 宏观风险</h5>
+      <span class="risk-score">3 / 5</span>
+      <p>消费降级影响一般图书购买力。但教材业务是"刚需"，对宏观周期敏感度低于消费品。</p>
+    </div>
+    <div class="risk-card r1">
+      <h5>6. 估值风险</h5>
+      <span class="risk-score">1 / 5</span>
+      <p>H 股 PE 7.07x、PB 0.73x、股息率 6.63%——已在 5 年估值低位区，下行空间有限。</p>
+    </div>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">11.X 黑天鹅情景（最坏情况）</h4>
+  <div class="cmt">
+    <p>
+      <strong>1. AI+短视频教育平台颠覆传统教材</strong>（概率 8%）：B 站、抖音、新东方在线提供 AI 个性化教学，学校不再需要纸质教材。FY30+ 营收 -20%/年，股价跌至 HKD 6（-42%）。<br>
+      <strong>2. 教材专营权改革放开</strong>（概率 5%）：教育部允许学校跨省采购教材，新华文轩失去地理护城河。年净利 ¥10 亿，股价跌至 HKD 7（-32%）。<br>
+      <strong>3. 国资委要求停止分红做新业务投资</strong>（概率 3%）：高股息逻辑破灭，估值打 7-8 折，股价跌至 HKD 7.50（-27%）。<br>
+      <strong>4. 大规模资产减值</strong>（概率 5%）：交易性金融资产 ¥50 亿在熊市中减值 30% = ¥15 亿，归母净资产从 ¥157 亿 → ¥142 亿，PB 从 0.73 升至 0.81。
+    </p>
+    <p><strong>下行支撑</strong>：每股净资产 ¥12.70（A 股）/ HKD 13.83（H 股）—— H 股当前 HKD 10.32 已破净 25%，<span class="hl-t">即便最坏情景下也很难跌破 HKD 7</span>（每股净金融资产约 HKD 11，扣除主业减值 50% 后仍有 HKD 9 的下行支撑）。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 12 评分卡 ═══ -->
+<div class="section">
+  <div class="stitle">海图评分卡 · 6 维 A-D + 红旗排查</div>
+
+  <div class="bscore">
+    <div class="circle cw">B+</div>
+    <div class="bd">
+      <h4>1. 生意可预测性 — B+（8/10）</h4>
+      <p>商业模式清晰可懂（教材专营 + 渠道发行 + 出版），过去 9 年净利波动小（¥10-16 亿区间），未来 5 年可预测度高。但教材业务受出生人口结构性影响，长期增长率为负是确定的。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle cw">B</div>
+    <div class="bd">
+      <h4>2. 经济护城河 — B（7/10）</h4>
+      <p>5 维护城河综合：1A（牌照）+ 2B+（成本+地理）+ 1B（转换成本）+ 1C+（网络效应）= 中等偏弱护城河。教材牌照极强，但其他维度一般。<strong>关键问题</strong>：护城河 10 年后会变窄（教辅市场缩小+电商替代）。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle cw">B</div>
+    <div class="bd">
+      <h4>3. 管理层质量 — B（7/10）</h4>
+      <p>地方国资轮换制（无个人主义）、限薪令下激励机制弱、未启动股票回购、AH 折价长期不管理。但派息纪律好（FY25 47.99%）、教材专营权连续续签、数字化转型推进。属于"按部就班"型国企管理。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle cg">A</div>
+    <div class="bd">
+      <h4>4. 财务质量 — A（9/10）</h4>
+      <p>资产负债率 33.24% 行业最低、有息负债 ¥2.76 亿、净金融资产 ¥132 亿、ROE 10.32% 稳定、毛利率 35% / 净利率 13.35% / OCF/NI 70%。<strong>财务健康度行业第一档</strong>。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>5. 资本配置纪律 — A-（8/10）</h4>
+      <p>派息率 47.99%、累计分红 ¥47.38 亿（A 股发行 ¥15 亿的 3.2 倍）、Capex 纪律（FY25 -4%）、不盲目并购。<span class="warn-t">不足之处</span>：未启动股票回购、超 ¥130 亿净金融资产闲置、AH 折价 30% 长期不管理。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle cg">A</div>
+    <div class="bd">
+      <h4>6. 估值与安全边际 — A（9/10）</h4>
+      <p>H 股 PE 7.07x、PB 0.73x（破净 27%）、股息率 6.63%、AH 折价 30%、SOTP 核心 P/E 仅 1.15x。<strong>这是港股出版传媒中估值最便宜的标的之一</strong>。安全边际 ≥ 30%。</p>
+    </div>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">12.X 红旗排查（非评分项）</h4>
+  <div class="tbl-wrap">
+    <table class="tbl"><thead><tr><th>红旗项</th><th>状态</th><th>说明</th></tr></thead>
+    <tbody>
+      <tr><td>商誉减值历史</td><td>✓ 无问题</td><td>商誉极小，无大额减值历史</td></tr>
+      <tr><td>收入确认时点</td><td>✓ 无问题</td><td>教材发货+学校确收，收入确认透明</td></tr>
+      <tr><td>关联交易</td><td>✓ 无问题</td><td>仅母公司新华文轩集团，正常交易</td></tr>
+      <tr><td>表外负债</td><td>✓ 无问题</td><td>资产负债率 33.24%，无重大表外项目</td></tr>
+      <tr><td>股权激励</td><td>⚠️ 注意</td><td>无管理层持股或股权激励——治理弱项</td></tr>
+      <tr><td>会计变更</td><td>✓ 无问题</td><td>近 3 年无重大会计政策变更</td></tr>
+      <tr><td>关键事件</td><td>✓ 无问题</td><td>教材专营权连续续签，无重大法律纠纷</td></tr>
+    </tbody></table>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">12.Y 综合评级</h4>
+  <div class="dcf-note">
+    <p><strong>6 维评分</strong>：B+ / B / B / A / A- / A = 综合 <strong>B+/A-</strong></p>
+    <p><strong>红旗排查</strong>：6/7 无问题，1 项注意（无股权激励），整体不构成扣减。</p>
+    <p><strong>综合评级</strong>：<span class="rating-badge rating-buy">买入（H 股优于 A 股）</span></p>
+    <p><strong>理由</strong>：(1) 财务质量 A + 估值 A = 港股出版传媒中"破净 + 高股息 + 净现金"组合最稀有；(2) 教材专营牌照护城河确定性极高；(3) AH 折价 30% 提供港股投资者额外赔率；(4) 主业虽承压但下行空间有限（每股净资产 HKD 13.83 提供下行支撑）；(5) 6.63% 股息率即便股价 5 年不涨也能复合 30%+ 收益。</p>
+  </div>
+</div>
+
+<!-- ═══ 投资决策 ═══ -->
+<div class="section">
+  <div class="stitle">海图研判 · 投资决策</div>
+
+  <div class="cgrid">
+    <div class="ccard">
+      <div class="ctitle" style="font-size: 14px;">12 个月概率加权目标价（H 股）</div>
+      <p style="font-size: 28px; font-weight: 700; color: var(--green); margin: 8px 0;">HKD 13.50</p>
+      <p style="font-size: 13px; color: var(--text2);">+31% 上行 · 中位数估值 HKD 13.50 / 加权公允 HKD 12.80</p>
+      <table class="tbl" style="margin-top: 10px; font-size:12px;"><tbody>
+        <tr><td>乐观 (20%)</td><td>HKD 16.00</td><td><span class="badge up">+55%</span></td></tr>
+        <tr><td>基准 (55%)</td><td>HKD 13.50</td><td><span class="badge up">+31%</span></td></tr>
+        <tr><td>悲观 (25%)</td><td>HKD 8.00</td><td><span class="badge dn">-22%</span></td></tr>
+      </tbody></table>
+    </div>
+    <div class="ccard">
+      <div class="ctitle" style="font-size: 14px;">分批建仓 / 止盈策略（H 股）</div>
+      <p style="font-size: 13px; color: var(--text2); line-height: 1.85;">
+      <strong>当前价 HKD 10.32</strong> · 距离首仓还有 8% 下行空间<br><br>
+      <strong>建仓档位（独立估值中位数 × 80% / 70% / 60%）</strong>：<br>
+      首仓 <span class="hl-t">HKD 9.50</span>（×80%·距现价 -8%）<br>
+      二仓 <span class="hl-t">HKD 8.50</span>（×70%·距现价 -18%）<br>
+      三仓 <span class="hl-t">HKD 7.20</span>（×60%·距现价 -30%·极端机会）<br><br>
+      <strong>止盈三档</strong>：<br>
+      减 25% @ <span class="hl-t">HKD 14.00</span><br>
+      减 25% @ <span class="hl-t">HKD 16.00</span><br>
+      减 25% @ <span class="hl-t">HKD 19.00</span><br>
+      <strong>最后 25% 作为"长期债券替代品"长期持有滚动收息</strong>
+      </p>
+    </div>
+  </div>
+
+  <div class="cmt" style="margin-top: 16px;">
+    <p><strong>仓位管理</strong>：建议总仓位 <strong>3-7%</strong>（中等仓位，反映主业增长压力）。持有周期 <strong>3-5 年（含股息复利）</strong>。<span class="hl-t">优先 H 股 0811（PE 7.07x、股息率 6.63%）</span>，A 股 601811 性价比明显低于 H 股（PE 10.7x、股息率 4.42%）。</p>
+
+    <p><strong>关键监控指标</strong>：</p>
+    <p>
+      <strong>1. 教材教辅订单</strong>（Q3 秋季高峰）：是判断 FY26 净利的最强领先指标<br>
+      <strong>2. 派息率</strong>：FY26 中报+全年是否能维持 48%+，并向 55% 进发<br>
+      <strong>3. 数字化转型进度</strong>：电子书+有声书+教育服务占比从 ~5% 向 ~10% 推进<br>
+      <strong>4. AH 折价收敛</strong>：当折价从 30% 收敛到 15-20% 时，H 股已部分修复价值<br>
+      <strong>5. 净金融资产管理</strong>：是否启动股票回购或大额资本回报，将 ¥132 亿净金融资产释放给股东
+    </p>
+
+    <p><strong>事件时间表</strong>：</p>
+    <p>
+      <strong>2026-05-29</strong>: H 股末期股息除息日（¥0.42/股）<br>
+      <strong>2026-06-30</strong>: H 股末期股息派付日（预计）<br>
+      <strong>2026-08-29</strong>: H1 2026 中报（关键节点 · 中期分红公告）<br>
+      <strong>2026-10-31</strong>: Q3 2026 季报（秋季教材高峰季业绩）<br>
+      <strong>2027-03-26</strong>: FY2026 年报（全年业绩 + 末期分红）
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 海图页末长评 ═══ -->
+<div class="section">
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记 · 1100 字</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p class="lead">市场永远在用"增长"的有色眼镜看公司。当一家公司营收 -4.84%、教材教辅减少 ¥3.46 亿，市场就把它当成"夕阳出版商"折价。但读懂这个数字背后的资产结构——¥132 亿净金融资产 + ¥7.53 亿分红 + 教材专营权——你会发现这是一家"低估的债券型股票"。</p>
+
+      <p>FY2025 营业收入 ¥117.32 亿（-4.84%）、归母净利 ¥15.68 亿（+1.53%）、扣非净利 ¥14.57 亿（-12.11%）——主业承压但仍微增。但 Q1 2026 营收降幅从 -4.84% 收窄到 -0.16%，扣非净利从 -12.11% 收窄到 -0.17%，说明<strong>结构性下滑已经被市场充分定价，主业已基本企稳</strong>。市场对新华文轩的悲观（H 股 PE 仅 7.07x、PB 0.73x、股息率 6.63%）与公司的真实资产质量（净金融资产占市值 88%、教材专营权牌照、累计分红 ¥47.38 亿）形成鲜明反差。</p>
+
+      <h4>几个研判要点</h4>
+
+      <p><strong>一、SOTP 加总告诉你这是极端低估。</strong>市值 ¥150 亿 - 净金融资产 ¥132 亿 = <span class="hl-t">市场对纯运营业务的估值仅 ¥18 亿</span>。对应 ¥15.68 亿净利的"核心 P/E 仅 1.15x"——这是不可思议的低估。即便假设 FY26-30 主业每年下滑 5%，5 年后净利 ¥12 亿，对应 ¥18 亿核心估值的 P/E 仅 1.5x，仍是极端便宜。<strong>市场在用"主业下滑"的故事掩盖"净金融资产价值"的事实</strong>。</p>
+
+      <p><strong>二、H 股 PE 7.07x + 股息率 6.63% = 港股出版传媒中最便宜。</strong>同行：凤凰传媒 PE 14x / 股息率 3.5%，中国出版 PE 14x / 股息率 3%，中信出版 PE 15x / 股息率 2%。<span class="hl-t">新华文轩 H 股是行业 P/E 最低、股息率最高的标的</span>。这意味着即便股价 5 年不涨，仅靠股息复利就能获得 30%+ 累计回报。配合 AH 折价 30%，港股投资者的赔率显著优于 A 股。</p>
+
+      <p><strong>三、教材专营牌照是"准公共服务"型护城河。</strong>四川省教材发行专营权由教育厅授权，每 5 年续签一次，连续 20 年从未变更。这是与中国移动 5G 频谱牌照、中海油海上石油专营权同类型的"政策护城河"。覆盖 6,000+ 学校、近 500 万学生、约 ¥43 亿教材业务——<span class="hl-t">这部分业务的现金流在 5-10 年内确定性极高</span>，不可能被任何竞争对手攻破。即便出生人口下降，教材业务也只是缓慢萎缩（每年 -3-5%），不会"断崖式"消失。</p>
+
+      <p><strong>四、AH 折价 30% 是港股投资者的免费赔率。</strong>A 股 ¥13.59 = HKD 14.77（按 1 HKD = 0.92 RMB），H 股 HKD 10.32，<span class="hl-t">H 折价 A 30%</span>。同样资产，港股投资者花同样的钱可以多买 30% 的股份。配合 6.63% 股息率（vs A 股 4.42%），H 股的"持有期回报"显著优于 A 股。<strong>这是国资委双上市政策给港股投资者的"免费午餐"</strong>。</p>
+
+      <p><strong>五、12 个月目标价 HKD 13.50，上行 +31%。</strong>悲观 HKD 8（-22%，主业下滑加速 + 减值）、基准 HKD 13.50（+31%，主业持平 + 派息率 50%）、乐观 HKD 16（+55%，数字化贡献 + 派息率 60%）。<strong>当前价 HKD 10.32 距首仓 HKD 9.50 仅 8% 下行空间</strong>，是合理建仓窗口。海图的判断：未来 3-5 年预期年化回报 8-12%（含股息），优于绝大多数大盘股，且波动性极低（PB 0.73x 提供下行支撑）。</p>
+
+      <h4>海图研判</h4>
+
+      <p><strong>评级：买入（H 股优于 A 股）</strong>（高股息防御 + 教材专营牌照 + AH 大幅折价 + ¥132 亿净金融资产的四轮组合）。12 个月概率加权目标价 <strong>HKD 13.50</strong>（+31%）。</p>
+
+      <p>操作建议（独立估值中位数 HKD 13.50，加权公允 HKD 12.80）：当前价 HKD 10.32 距首仓 HKD 9.50 仅 8%。建议首仓 HKD 9.50（×80%·距现价 -8%）、二仓 HKD 8.50（×70%·距现价 -18%）、三仓 HKD 7.20（×60%·极端机会）。止盈三档 HKD 14 / HKD 16 / HKD 19，每档减仓 25%，最后 25% 作为"长期债券替代品"长期持有滚动收息。建议总仓位 <strong>3-7%</strong>（中等仓位 · 高股息防御）。持有周期 3-5 年。</p>
+
+      <h4>风险提示</h4>
+
+      <p>出生人口持续下降（教材业务每年 -5%）/ AI+ 短视频教育颠覆传统教材 / 教材专营权改革放开 / 国资委要求停止分红做新业务投资 / 大规模交易性金融资产减值 / 一般图书电商挤压加速——任一项都可能让股价回调 15-30%。但 ¥132 亿净金融资产 + 四川省国资委 67% 控股 + 资产负债率 33.24% 让破产概率为零，每股净资产 HKD 13.83（H 股）提供下行支撑。</p>
+
+      <p>关键叙事：<strong>"教材专营牌照 + ¥132 亿净金融资产 + AH 折价 30% + 6.63% 股息率"的稀有组合</strong>。在大盘价值股估值过热、A 股出版股估值偏贵的当下，新华文轩 H 股是港股大盘股中"防御 + 高股息 + 极端低估"组合最佳的之一——不是给追求成长的人，而是给追求"低估值 + 高股息 + 净资产支撑"的耐心投资者。下次催化剂：2026-05-29 H 股除息日 / 2026-08-29 H1 中报。</p>
+
+      <p class="haitu-sign">—— 海图，灯下落笔，明日再观风浪。</p>
+
+      <p class="haitu-disc">⚠️ 免责声明：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，不构成任何投资建议。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div>《海图夜读》 · 新华文轩 0811 FY2025 海图研判</div>
+  <div style="margin-top:6px;">数据来源：新华文轩 FY2025 年报（2026-03-26）+ Q1 2026 季报（2026-04-30）· 上交所披露易官方文件 + 港交所披露易</div>
+  <div style="margin-top:6px;">价值投资 · 长期主义</div>
+</footer>
+
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  const cur = html.getAttribute('data-theme');
+  html.setAttribute('data-theme', cur === 'dark' ? 'light' : 'dark');
+  localStorage.setItem('theme', html.getAttribute('data-theme'));
+  renderCharts();
+}
+(function() {
+  const t = localStorage.getItem('theme');
+  if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+})();
+
+function gc(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+
+let charts = {};
+function renderCharts() {
+  Object.values(charts).forEach(c => c && c.destroy && c.destroy());
+  charts = {};
+  const txt2 = gc('--text2'), txt3 = gc('--text3'), grid = gc('--chart-grid');
+  const accent = gc('--accent'), accent2 = gc('--accent2'), accent3 = gc('--accent3');
+  const green = gc('--green'), gold = gc('--gold'), rose = gc('--rose'), red = gc('--red');
+
+  Chart.defaults.color = txt2;
+  Chart.defaults.font.family = 'Segoe UI, sans-serif';
+  Chart.defaults.font.size = 11;
+
+  charts.rev = new Chart(document.getElementById('revenueChart'), {
+    type: 'bar',
+    data: { labels: ['Q1 25', 'Q2 25', 'Q3 25', 'Q4 25', 'Q1 26'],
+      datasets: [{ label: 'Revenue', data: [24.88, 22.31, 38.71, 31.42, 24.84], backgroundColor: [accent3, gold, accent2, accent, green], borderRadius: 4 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+      scales: { y: { grid: { color: grid }, ticks: { color: txt3 } }, x: { grid: { display: false }, ticks: { color: txt3 } } } }
+  });
+
+  charts.profit = new Chart(document.getElementById('profitChart'), {
+    type: 'line',
+    data: { labels: ['Q1 25', 'Q2 25', 'Q3 25', 'Q4 25', 'Q1 26'],
+      datasets: [{ label: 'Net Profit', data: [2.60, 5.97, 5.50, 1.61, 2.57], borderColor: green, backgroundColor: 'rgba(122,154,122,0.1)', tension: 0.3, fill: true, pointBackgroundColor: green, pointRadius: 5 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+      scales: { y: { grid: { color: grid }, ticks: { color: txt3 } }, x: { grid: { display: false }, ticks: { color: txt3 } } } }
+  });
+
+  charts.seg = new Chart(document.getElementById('segmentChart'), {
+    type: 'doughnut',
+    data: { labels: ['一般图书 58.78', '教材教辅 ~43', '出版 28.95', '印刷物资 ~15', '其他/抵销 (-28)'],
+      datasets: [{ data: [58.78, 43, 28.95, 15, 0.59], backgroundColor: [accent3, accent, gold, accent2, rose], borderColor: gc('--card'), borderWidth: 2 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { color: txt2, font: { size: 11 } } } } }
+  });
+
+  charts.capex = new Chart(document.getElementById('capexChart'), {
+    type: 'bar',
+    data: { labels: ['FY16', 'FY17', 'FY18', 'FY19', 'FY20', 'FY21', 'FY22', 'FY23', 'FY24', 'FY25'],
+      datasets: [
+        { label: '归母净利', data: [9.5, 10.8, 11.2, 11.8, 11.5, 12.6, 13.6, 14.7, 15.44, 15.68], backgroundColor: green, borderRadius: 4 },
+        { label: '分红总额', data: [3.4, 3.9, 4.0, 4.2, 4.3, 5.0, 5.6, 6.3, 7.1, 7.53], backgroundColor: gold, borderRadius: 4 }
+      ] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top', labels: { color: txt2, font: { size: 11 } } } },
+      scales: { y: { grid: { color: grid }, ticks: { color: txt3 } }, x: { grid: { display: false }, ticks: { color: txt3 } } } }
+  });
+
+  buildSankey();
+}
+
+function buildSankey() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const txt = isDark ? '#d4ccc4' : '#4a4340';
+  const cardBg = isDark ? '#2e2a25' : '#ffffff';
+
+  const sankeyData = [{
+    type: 'sankey', orientation: 'h', arrangement: 'snap', valueformat: ',.1f', valuesuffix: ' 亿',
+    node: {
+      pad: 22, thickness: 22, line: { color: 'transparent', width: 0 },
+      label: ['营收 117.3', '营业成本 76.2', '毛利 41.1', '销售费用 13.0', '管理费用 8.7', '研发+其他 1.5', '营业利润 17.9', '投资收益 +3.8', '所得税 -3.5', '其他/少数 -2.55', '归母净利 15.68', '非现金调整 -4.69', '经营现金流 10.99', 'Capex 6.69', '自由现金流 4.30'],
+      color: ['#7b8fa0', '#b87070', '#8a9a8e', '#b9a06a', '#c09090', '#a89f98', '#b08d7a', '#7a9a7a', '#b87070', '#a89f98', '#7a9a7a', '#b08d7a', '#7b8fa0', '#b87070', '#7a9a7a']
+    },
+    link: {
+      source: [0, 0, 2, 2, 2, 2, 6, 7, 6, 8, 9, 10, 11, 12, 12],
+      target: [1, 2, 3, 4, 5, 6, 10, 10, 8, 10, 10, 12, 12, 13, 14],
+      value:  [76.2, 41.1, 13.0, 8.7, 1.5, 17.9, 14.4, 3.8, 3.5, 3.5, 2.55, 15.68, -4.69, 6.69, 4.30],
+      color: ['rgba(184,112,112,0.30)', 'rgba(138,154,142,0.45)', 'rgba(185,160,106,0.30)', 'rgba(192,144,144,0.30)', 'rgba(168,159,152,0.30)', 'rgba(176,141,122,0.45)', 'rgba(122,154,122,0.45)', 'rgba(122,154,122,0.40)', 'rgba(184,112,112,0.30)', 'rgba(184,112,112,0.30)', 'rgba(168,159,152,0.30)', 'rgba(122,154,122,0.40)', 'rgba(176,141,122,0.30)', 'rgba(184,112,112,0.30)', 'rgba(122,154,122,0.50)']
+    }
+  }];
+
+  const layout = { font: { family: 'Segoe UI, sans-serif', size: 11, color: txt }, paper_bgcolor: cardBg, plot_bgcolor: cardBg, margin: { l: 10, r: 10, t: 10, b: 10 } };
+  Plotly.react('sankey', sankeyData, layout, { displayModeBar: false, responsive: true });
+}
+
+document.addEventListener('DOMContentLoaded', renderCharts);
+</script>
+
+</body>
+</html>
