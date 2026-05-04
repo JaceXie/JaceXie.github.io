@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-05-05，基于 Veeva Systems Q4 FY2026 财报（2026-03-04 发布） -->
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Veeva Systems VEEV — Q4 FY2026 + FY2026 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root {
+  --bg: #f5f0eb; --bg2: #ece6df; --card: #ffffff; --card2: #f8f5f1; --border: #d9d0c7;
+  --text: #4a4340; --text2: #7a706a; --text3: #a89f98;
+  --accent: #8a9a8e; --accent2: #7b8fa0; --accent3: #b08d7a;
+  --rose: #c09090; --gold: #b9a06a; --red: #b87070; --green: #7a9a7a;
+  --shadow: rgba(0,0,0,0.06); --chart-grid: #e5ddd5;
+}
+[data-theme="dark"] {
+  --bg: #1e1c1a; --bg2: #28251f; --card: #2e2a25; --card2: #363230; --border: #4a4540;
+  --text: #d4ccc4; --text2: #a09890; --text3: #706860;
+  --accent: #8a9a8e; --accent2: #8fabbf; --accent3: #c9a48e;
+  --rose: #c09090; --gold: #c9b07a; --red: #c08080; --green: #8aaa8a;
+  --shadow: rgba(0,0,0,0.3); --chart-grid: #3e3a35;
+}
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Georgia','Noto Serif SC','PingFang SC',serif; line-height: 1.75; font-size: 14.5px; transition: background .35s, color .35s; }
+a { color: var(--accent2); text-decoration: none; }
+.theme-bar { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); }
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; text-decoration: none; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+.toggle-switch { position: relative; width: 44px; height: 22px; background: var(--border); border-radius: 11px; cursor: pointer; transition: background .3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: var(--card); border-radius: 50%; transition: transform .3s; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+.hero { padding: 48px 24px 36px; text-align: center; border-bottom: 1px solid var(--border); }
+.hero-tag { display: inline-block; font-family: 'Segoe UI',sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 3px 14px; border-radius: 20px; margin-bottom: 18px; }
+.hero h1 { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.pill { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: 'Segoe UI',sans-serif; font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow); }
+.pill strong { color: var(--text); }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle { font-size: 18px; font-weight: 700; color: var(--accent3); margin-bottom: 20px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+.stitle::before { content: ''; display: block; width: 4px; height: 20px; background: var(--accent3); border-radius: 2px; }
+.haitu-quip { display: flex; align-items: center; gap: 18px; background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--green); border-radius: 12px; padding: 18px 24px; margin: 24px 0; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-quote { flex: 1; }
+.haitu-portrait { font-size: 15px; line-height: 1.65; color: var(--text); margin-bottom: 6px; font-weight: 600; }
+.haitu-rating-line { font-size: 13px; color: var(--text2); font-family: 'Segoe UI',sans-serif; }
+.rating-badge { display: inline-block; padding: 2px 12px; border-radius: 12px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; margin-left: 4px; }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+.rating-cond-buy { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-hold { background: rgba(123,143,160,.18); color: var(--accent2); }
+.haitu-essay { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 28px 32px; margin: 24px 0 20px; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-essay-header { display: flex; align-items: center; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.haitu-avatar-sm { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); background: var(--red); box-shadow: 0 2px 8px rgba(184,112,112,0.2); }
+.haitu-name-lg { font-family: 'Georgia','Noto Serif SC',serif; font-size: 28px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 4px; }
+.haitu-essay-tag { font-family: 'Segoe UI',sans-serif; font-size: 12px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; }
+.haitu-essay-body { font-family: 'Georgia','Noto Serif SC',serif; font-size: 15px; line-height: 2.0; color: var(--text); }
+.haitu-essay-body p { margin-bottom: 14px; }
+.haitu-essay-body p.lead { font-size: 16px; font-style: italic; color: var(--text2); margin-bottom: 18px; }
+.haitu-essay-body strong { color: var(--text); font-weight: 700; }
+.haitu-essay-body h4 { font-size: 14px; color: var(--accent3); margin: 18px 0 10px; font-family: 'Segoe UI',sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+.haitu-sign { text-align: right; margin-top: 18px; font-family: 'Georgia',serif; font-size: 14px; color: var(--text2); font-style: italic; }
+.haitu-disc { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); font-style: italic; line-height: 1.7; }
+.stock-snap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill,minmax(160px,1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px; }
+.snap-item { text-align: center; }
+.snap-label { font-family: 'Segoe UI',sans-serif; font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.snap-val { font-family: 'Segoe UI',sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+.snap-val.up { color: var(--green); }
+.snap-val.dn { color: var(--red); }
+.snap-sub { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text3); margin-top: 2px; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(195px,1fr)); gap: 14px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow); }
+.kpi-l { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.kpi-v.up { color: var(--green); }
+.kpi-v.dn { color: var(--red); }
+.badge { display: inline-block; font-family: 'Segoe UI',sans-serif; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+.up { background: rgba(122,154,122,.15); color: var(--green); }
+.dn { background: rgba(184,112,112,.15); color: var(--red); }
+.nt { background: rgba(123,143,160,.15); color: var(--accent2); }
+.tbl-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow); }
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI',sans-serif; font-size: 13px; }
+.tbl th { background: var(--card2); color: var(--text3); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); background: var(--card2); }
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); }
+.ctitle { font-size: 13px; color: var(--text2); margin-bottom: 12px; font-weight: 600; }
+.cwrap { position: relative; height: 240px; }
+.cmt { font-size: 14px; color: var(--text2); line-height: 1.85; }
+.cmt p { margin-bottom: 12px; }
+.cmt strong { color: var(--text); }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+.bscore { display: flex; gap: 16px; padding: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 12px; box-shadow: 0 1px 4px var(--shadow); }
+.bscore .circle { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; color: white; flex-shrink: 0; }
+.cg { background: var(--green); }
+.cw { background: var(--gold); }
+.co { background: var(--rose); }
+.cr { background: var(--red); }
+.cb { background: var(--accent2); }
+.bd h4 { font-size: 14px; color: var(--text); margin-bottom: 6px; font-family: 'Segoe UI',sans-serif; letter-spacing: 0.5px; }
+.bd p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+.pgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.dcf-note { background: var(--card2); border-left: 3px solid var(--accent2); padding: 14px 18px; border-radius: 6px; font-size: 13.5px; color: var(--text2); line-height: 1.85; }
+.dcf-note p { margin-bottom: 8px; }
+.dcf-note strong { color: var(--text); }
+.tag-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap: 12px; margin-top: 14px; }
+.tag-card { background: var(--card); border: 1px solid var(--border); border-left: 3px solid var(--accent2); padding: 12px 16px; border-radius: 6px; }
+.tag-card.pos { border-left-color: var(--green); }
+.tag-card.neg { border-left-color: var(--red); }
+.tag-card.neu { border-left-color: var(--accent2); }
+.tag-card h5 { font-size: 13px; color: var(--text); margin-bottom: 6px; font-family: 'Segoe UI',sans-serif; }
+.tag-card p { font-size: 12px; color: var(--text2); line-height: 1.7; }
+.tag-card .tag-bd { font-family: 'Segoe UI',sans-serif; font-size: 10px; padding: 1px 6px; border-radius: 4px; margin-left: 4px; }
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap: 12px; }
+.risk-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 14px 18px; position: relative; box-shadow: 0 1px 3px var(--shadow); }
+.risk-card::before { content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent); }
+.risk-card.r1::before { background: var(--green); }
+.risk-card.r2::before { background: rgba(122,154,122,.6); }
+.risk-card.r3::before { background: var(--gold); }
+.risk-card.r4::before { background: var(--rose); }
+.risk-card.r5::before { background: var(--red); }
+.risk-card h5 { font-size: 14px; margin-bottom: 6px; color: var(--text); }
+.risk-score { font-family: 'Segoe UI',sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.r1 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r2 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r3 .risk-score { background: rgba(185,160,106,.18); color: var(--gold); }
+.r4 .risk-score { background: rgba(192,144,144,.18); color: var(--rose); }
+.r5 .risk-score { background: rgba(184,112,112,.18); color: var(--red); }
+.risk-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+footer { background: var(--card2); border-top: 1px solid var(--border); padding: 24px; text-align: center; color: var(--text3); font-size: 12px; margin-top: 40px; line-height: 1.8; }
+@media (max-width: 768px) { .cgrid,.pgrid { grid-template-columns: 1fr; } .hero h1 { font-size: 22px; } .kpi-grid { grid-template-columns: 1fr 1fr; } .stock-snap { grid-template-columns: 1fr 1fr; } .haitu-essay-header { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/VEEV" target="_blank" rel="noopener" title="在雪球查看 Veeva 实时行情">雪球 VEEV</a>
+  </div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">FY2026 财报发布 · 2026-03-04 &nbsp;|&nbsp; Q1 FY2027 财报预告 · 2026-05-27 &nbsp;|&nbsp; 海图研判 · 2026-05-05</div>
+  <h1>Veeva Systems VEEV · Q4 FY2026 + FY2026 深度分析</h1>
+  <div class="hero-sub">NYSE: VEEV &nbsp;|&nbsp; 全球生命科学行业垂直 SaaS 龙头 · 1,552 客户 + 14/20 大型生物制药 + Non-GAAP 营业利润率 44.9% &nbsp;|&nbsp; 价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill">股价 <strong>$170.88</strong></div>
+    <div class="pill">市值 <strong>$28.1B</strong></div>
+    <div class="pill">FY26 营收 <strong>$3.20B(+16%)</strong></div>
+    <div class="pill">Non-GAAP 营业利润率 <strong>44.9%</strong></div>
+    <div class="pill">P/E TTM <strong>21x (Non-GAAP)</strong></div>
+    <div class="pill">海图研判 <strong>买入</strong></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 海图页首短评 ═══ -->
+<div class="haitu-quip">
+  <div class="haitu-quote">
+    <div class="haitu-portrait">全球生命科学行业垂直 SaaS 龙头——服务 1,552 家制药+生物科技+医疗器械客户，几乎所有 top 20 大型药企（14/20 已承诺 Vault CRM）都是用户。FY26 营收 $3.20B（+16%）+ Non-GAAP 营业利润 $1.43B（+24%）+ 营业利润率 44.9% + Non-GAAP EPS $8.10（+23%）+ FCF $1.39B + 净现金 $6.46B（占市值 23%）。<strong>股价从 52 周高 $310 跌至 $170（-45%）</strong>—— 被 SaaS 板块情绪 + 增长放缓预期错杀。AI Agents 战略 + Vault CRM 替换 Salesforce 转型加速是 FY27-30 最大期权价值。</div>
+    <div class="haitu-rating-line">评级：<span class="rating-badge rating-buy">买入</span> · 12 个月目标价 $220（+29%）· 高质量护城河 + 增长稳健 + 估值修复至 5 年低位的稀有组合</div>
+  </div>
+</div>
+
+<!-- ═══ 市场数据快照 ═══ -->
+<div class="section">
+  <div class="stitle">市场数据快照（2026-05-05）</div>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">股价</div><div class="snap-val">$170.88</div><div class="snap-sub">2026-05-05 收盘</div></div>
+    <div class="snap-item"><div class="snap-label">市值</div><div class="snap-val">$28.1B</div><div class="snap-sub">流通股 1.633亿</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间</div><div class="snap-val dn">$148-310</div><div class="snap-sub">距高点 -45%</div></div>
+    <div class="snap-item"><div class="snap-label">TTM P/E (GAAP)</div><div class="snap-val">31.4x</div><div class="snap-sub">EPS $5.44</div></div>
+    <div class="snap-item"><div class="snap-label">TTM P/E (Non-GAAP)</div><div class="snap-val up">21.1x</div><div class="snap-sub">EPS $8.10 / 5 年最低</div></div>
+    <div class="snap-item"><div class="snap-label">Forward P/E (FY27)</div><div class="snap-val up">19.3x</div><div class="snap-sub">EPS 共识 $8.85</div></div>
+    <div class="snap-item"><div class="snap-label">P/B</div><div class="snap-val">3.88x</div><div class="snap-sub">每股净资产 $44.05</div></div>
+    <div class="snap-item"><div class="snap-label">P/S (TTM)</div><div class="snap-val">8.8x</div><div class="snap-sub">营收 $3.20B</div></div>
+    <div class="snap-item"><div class="snap-label">EV/EBITDA</div><div class="snap-val up">~22x</div><div class="snap-sub">EBITDA $985M</div></div>
+    <div class="snap-item"><div class="snap-label">毛利率</div><div class="snap-val up">75.5%</div><div class="snap-sub">SaaS 顶级</div></div>
+    <div class="snap-item"><div class="snap-label">净利率（TTM）</div><div class="snap-val up">28.4%</div><div class="snap-sub">行业领先</div></div>
+    <div class="snap-item"><div class="snap-label">Non-GAAP 营业利润率</div><div class="snap-val up">44.9%</div><div class="snap-sub">vs FY25 42%</div></div>
+    <div class="snap-item"><div class="snap-label">FCF</div><div class="snap-val up">$1.39B</div><div class="snap-sub">FCF 利润率 43%</div></div>
+    <div class="snap-item"><div class="snap-label">FCF Yield</div><div class="snap-val up">5.0%</div><div class="snap-sub">vs 利率 4.3%</div></div>
+    <div class="snap-item"><div class="snap-label">现金+短投</div><div class="snap-val up">$6.56B</div><div class="snap-sub">2026-01-31 末</div></div>
+    <div class="snap-item"><div class="snap-label">总有息负债</div><div class="snap-val up">$96M</div><div class="snap-sub">几乎零负债</div></div>
+    <div class="snap-item"><div class="snap-label">净现金</div><div class="snap-val up">$6.46B</div><div class="snap-sub">占市值 23%</div></div>
+    <div class="snap-item"><div class="snap-label">下次财报</div><div class="snap-val nt">2026-05-27</div><div class="snap-sub">Q1 FY2027</div></div>
+  </div>
+</div>
+
+<!-- ═══ FY2026 KPI ═══ -->
+<div class="section">
+  <div class="stitle">FY2026 全年核心业绩（2026-03-04 发布 · 营收 +16% 利润 +24%）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">总营收</div><div class="kpi-v up">$3,195M</div><span class="badge up">+16% YoY</span><div class="kpi-l" style="margin-top:6px">vs FY25 $2,755M</div></div>
+    <div class="kpi"><div class="kpi-l">订阅营收</div><div class="kpi-v up">$2,684M</div><span class="badge up">+17% YoY</span><div class="kpi-l" style="margin-top:6px">占比 84%</div></div>
+    <div class="kpi"><div class="kpi-l">专业服务营收</div><div class="kpi-v">$511M</div><span class="badge nt">+11%</span><div class="kpi-l" style="margin-top:6px">占比 16%</div></div>
+    <div class="kpi"><div class="kpi-l">商业云营收</div><div class="kpi-v up">$1,447M</div><span class="badge up">+13%</span><div class="kpi-l" style="margin-top:6px">CRM+营销+客户参与</div></div>
+    <div class="kpi"><div class="kpi-l">R&D 云营收</div><div class="kpi-v up">$1,748M</div><span class="badge up">+19%</span><div class="kpi-l" style="margin-top:6px">Vault 临床+质量+监管</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 营业利润</div><div class="kpi-v up">$916M</div><span class="badge up">+33% YoY</span><div class="kpi-l" style="margin-top:6px">营业利润率 28.7%</div></div>
+    <div class="kpi"><div class="kpi-l">Non-GAAP 营业利润</div><div class="kpi-v up">$1,434M</div><span class="badge up">+24% YoY</span><div class="kpi-l" style="margin-top:6px">营业利润率 44.9%</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 净利</div><div class="kpi-v up">$909M</div><span class="badge up">+27% YoY</span><div class="kpi-l" style="margin-top:6px">净利率 28.4%</div></div>
+    <div class="kpi"><div class="kpi-l">Non-GAAP 净利</div><div class="kpi-v up">$1,353M</div><span class="badge up">+24% YoY</span><div class="kpi-l" style="margin-top:6px">净利率 42.3%</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP EPS</div><div class="kpi-v up">$5.44</div><span class="badge up">+26% YoY</span><div class="kpi-l" style="margin-top:6px">vs FY25 $4.32</div></div>
+    <div class="kpi"><div class="kpi-l">Non-GAAP EPS</div><div class="kpi-v up">$8.10</div><span class="badge up">+23% YoY</span><div class="kpi-l" style="margin-top:6px">vs FY25 $6.60</div></div>
+    <div class="kpi"><div class="kpi-l">毛利率</div><div class="kpi-v up">75.5%</div><span class="badge up">+0.5pp</span><div class="kpi-l" style="margin-top:6px">SaaS 顶级</div></div>
+    <div class="kpi"><div class="kpi-l">经营活动现金流</div><div class="kpi-v up">$1,415M</div><span class="badge up">+25% YoY</span><div class="kpi-l" style="margin-top:6px">现金转换强</div></div>
+    <div class="kpi"><div class="kpi-l">资本开支 (Capex)</div><div class="kpi-v up">$29M</div><span class="badge up">极轻资产</span><div class="kpi-l" style="margin-top:6px">仅占营收 0.9%</div></div>
+    <div class="kpi"><div class="kpi-l">自由现金流</div><div class="kpi-v up">$1,386M</div><span class="badge up">FCF 利润率 43%</span><div class="kpi-l" style="margin-top:6px">SaaS 行业最高之一</div></div>
+    <div class="kpi"><div class="kpi-l">总客户数</div><div class="kpi-v up">1,552</div><span class="badge up">扩展中</span><div class="kpi-l" style="margin-top:6px">R&D 1,196 / 商业 767</div></div>
+    <div class="kpi"><div class="kpi-l">Vault CRM 上线客户</div><div class="kpi-v up">125+</div><span class="badge up">含 2 家 Top 20</span><div class="kpi-l" style="margin-top:6px">Salesforce 替换战</div></div>
+    <div class="kpi"><div class="kpi-l">Top 20 大型药企承诺</div><div class="kpi-v up">14/20</div><span class="badge up">行业渗透</span><div class="kpi-l" style="margin-top:6px">FY27 目标</div></div>
+  </div>
+</div>
+
+<!-- ═══ Q4 FY2026 KPI ═══ -->
+<div class="section">
+  <div class="stitle">Q4 FY2026 季度业绩（2026-03-04 发布 · 单季加速）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">Q4 总营收</div><div class="kpi-v up">$836M</div><span class="badge up">+16% YoY</span><div class="kpi-l" style="margin-top:6px">vs Q4 25 $720.9M</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 订阅营收</div><div class="kpi-v up">$707.7M</div><span class="badge up">+16% YoY</span><div class="kpi-l" style="margin-top:6px">占 85%</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 GAAP 营业利润</div><div class="kpi-v up">$245.9M</div><span class="badge up">+31% YoY</span><div class="kpi-l" style="margin-top:6px">营业利润率 29.4%</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 Non-GAAP 营业利润</div><div class="kpi-v up">$366.5M</div><span class="badge up">+19% YoY</span><div class="kpi-l" style="margin-top:6px">营业利润率 43.8%</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 GAAP 净利</div><div class="kpi-v up">$244.2M</div><span class="badge up">+25% YoY</span><div class="kpi-l" style="margin-top:6px">vs Q4 25 $195.6M</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 Non-GAAP 净利</div><div class="kpi-v up">$346.1M</div><span class="badge up">+20% YoY</span><div class="kpi-l" style="margin-top:6px">vs Q4 25 $287.9M</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 GAAP EPS</div><div class="kpi-v up">$1.45</div><span class="badge up">+23% YoY</span><div class="kpi-l" style="margin-top:6px">vs Q4 25 $1.18</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 Non-GAAP EPS</div><div class="kpi-v up">$2.06</div><span class="badge up">+18% YoY</span><div class="kpi-l" style="margin-top:6px">vs Q4 25 $1.74</div></div>
+    <div class="kpi"><div class="kpi-l">Q1 FY27 指引</div><div class="kpi-v">$855-858M</div><span class="badge nt">营收</span><div class="kpi-l" style="margin-top:6px">+9-10% YoY</div></div>
+    <div class="kpi"><div class="kpi-l">Q1 FY27 EPS 指引</div><div class="kpi-v">$2.13-2.14</div><span class="badge nt">Non-GAAP</span><div class="kpi-l" style="margin-top:6px">+5% YoY</div></div>
+    <div class="kpi"><div class="kpi-l">FY27 营收指引</div><div class="kpi-v up">$3,585-3,600M</div><span class="badge up">+12-13% YoY</span><div class="kpi-l" style="margin-top:6px">中位 $3,592M</div></div>
+    <div class="kpi"><div class="kpi-l">FY27 Non-GAAP EPS 指引</div><div class="kpi-v">$8.85</div><span class="badge nt">+9.3% YoY</span><div class="kpi-l" style="margin-top:6px">vs FY26 $8.10</div></div>
+  </div>
+
+  <div class="dcf-note" style="margin-top:18px">
+    <strong>Q4 FY2026 关键洞察 · 业绩好但市场怀疑增速</strong>
+    <p style="margin-top:8px">(1) <span class="hl-t">Q4 营收 +16% / 利润 +20-31%</span>—— 各项指标超指引，是连续 8 个季度超预期；(2) <strong>Vault CRM 转型加速</strong>—— 125+ 客户上线（含 2 家 top 20 药企），目标 14/20 大型药企承诺；(3) <span class="hl-t">Non-GAAP 营业利润率 44.9%</span>—— SaaS 行业顶级（vs Salesforce 33%、ServiceNow 30%、Workday 28%）；(4) <strong>FY27 指引 +12-13%</strong> 是市场担忧的减速信号，但仍在管理层"持续中等双位数增长"承诺范围内；(5) AI Agents 战略：FY26 12 月发布首个 CRM AI Agent，多个客户已上线，FY26-27 跨平台扩展。海图判断：Veeva 是<strong>"高质量护城河 + 增长虽减速但稳健 + 估值已修复至 5 年低位"</strong>的稀有组合。
+  </div>
+</div>
+
+<!-- ═══ 季度趋势 ═══ -->
+<div class="section">
+  <div class="stitle">季度趋势 + 5 年总览</div>
+  <div class="cgrid">
+    <div class="ccard">
+      <div class="ctitle">5 季度营收趋势（$M）</div>
+      <div class="cwrap"><canvas id="revenueChart"></canvas></div>
+    </div>
+    <div class="ccard">
+      <div class="ctitle">5 季度 Non-GAAP 营业利润率（%）</div>
+      <div class="cwrap"><canvas id="profitChart"></canvas></div>
+    </div>
+    <div class="ccard">
+      <div class="ctitle">FY2026 营收结构（$M）</div>
+      <div class="cwrap"><canvas id="segmentChart"></canvas></div>
+    </div>
+    <div class="ccard">
+      <div class="ctitle">5 年营收+净利演变（$M）</div>
+      <div class="cwrap"><canvas id="capexChart"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ Sankey ═══ -->
+<div class="section">
+  <div class="stitle">FY2026 资金流向 · 营收 → 自由现金流（$M）</div>
+  <div class="ccard">
+    <div class="ctitle">从 $3,195M 总营收到 $1,386M 自由现金流的完整资金链路</div>
+    <div id="sankey" style="width:100%;height:480px;"></div>
+  </div>
+</div>
+
+<!-- ═══ 模块 1 ═══ -->
+<div class="section">
+  <div class="stitle">模块 1 · 公司概览与背景</div>
+  <div class="cmt">
+    <p><strong>公司全称</strong>：Veeva Systems Inc.<br>
+    <strong>上市</strong>：NYSE: VEEV（2013-10-16 IPO，发行价 $20）<br>
+    <strong>总部</strong>：加州 Pleasanton, CA<br>
+    <strong>财年</strong>：2 月 1 日 - 1 月 31 日（与日历年错开）<br>
+    <strong>主营</strong>：全球生命科学行业垂直 SaaS——制药+生物科技+医疗器械的<strong>商业云（CRM+营销+客户参与）+ R&D 云（临床试验+质量+监管+主数据管理）</strong></p>
+
+    <p><strong>核心叙事</strong>：Veeva 是<span class="hl-t">"全球唯一专注生命科学行业的 SaaS 龙头"</span>。从 2007 年成立至今，已成为全球 1,552 家制药+生物科技+医疗器械客户的关键系统供应商——<strong>14 家 top 20 大型药企（辉瑞、强生、罗氏、诺华、默克、礼来、阿斯利康、葛兰素史克、赛诺菲等）已承诺 Vault CRM</strong>。商业模式：<span class="hl-t">高黏性订阅费 + 极强护城河 + 客户预算稳定（生命科学行业研发支出 +5-7%/年）</span>。FY26 营收 $3.20B（+16%）、Non-GAAP 营业利润率 44.9%、FCF $1.39B、净现金 $6.46B（占市值 23%）—— 财务质量是 SaaS 中最优秀的之一。<strong>当前股价 $170.88 距 52 周高 $310 -45%，被 SaaS 板块情绪 + 增长放缓预期错杀</strong>。AI Agents 战略 + Vault CRM 替换 Salesforce + 全球药企数字化转型是 FY27-30 最大期权价值。</p>
+
+    <p><strong>简史与里程碑</strong>：</p>
+    <p>
+      <strong>1. 2007 年成立</strong>——CEO Peter Gassner（前 Salesforce 高管）创立，专注生命科学 CRM<br>
+      <strong>2. 2013-10-16 NYSE IPO</strong>——发行价 $20、市值 $2.5B、当时最热门 SaaS IPO 之一<br>
+      <strong>3. 2014 年发布 Vault 平台</strong>——内容管理 + 临床试验数据，进入 R&D 云市场<br>
+      <strong>4. 2018 年首次实现 GAAP 盈利</strong>——SaaS 中较早盈利的<br>
+      <strong>5. 2021 年成为公益企业 (Public Benefit Corporation)</strong>——独特治理结构<br>
+      <strong>6. 2022 年宣布自研 Vault CRM</strong>——挑战 Salesforce 在生命科学行业的主导地位<br>
+      <strong>7. 2023-2024 Salesforce 法律纠纷</strong>——双方达成和解，VEEV 加速自研 Vault CRM<br>
+      <strong>8. 2025-2026 Vault CRM 客户大规模迁移</strong>——14/20 大型药企承诺，125+ 客户上线<br>
+      <strong>9. 2025-12 发布首个 AI Agents</strong>——FY26 已有客户上线，FY27 跨平台扩展<br>
+      <strong>10. 2026-03-04 发布 FY26 业绩</strong>——营收 +16%，利润率 44.9% 创历史新高
+    </p>
+
+    <p><strong>股权结构（2026-01-31 末）</strong>：</p>
+    <p>
+      <strong>Peter Gassner（CEO 创始人）</strong>——~3% 股权（持续小幅减持）<br>
+      <strong>Capital Group（资管机构）</strong>——~10% 股权<br>
+      <strong>Vanguard / BlackRock / Fidelity 等被动指数</strong>——合计 ~30%<br>
+      <strong>其他公众股东</strong>——~57%<br>
+      <strong>公益企业（PBC）治理</strong>：董事会需平衡股东+客户+员工+社区利益。<span class="hl-t">这是 SaaS 中独特的治理结构</span>，让公司更长期主义。<br>
+      <strong>无控股股东、无双重股权结构、无毒丸条款</strong>——公司治理透明度高
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 模块 2 ═══ -->
+<div class="section">
+  <div class="stitle">模块 2 · 管理层评估</div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>Peter Gassner · CEO 创始人（2007 至今 · 19 年）</h4>
+      <p>1965 年生，德国出身，前 Salesforce CTO（2003-2005）、前 PeopleSoft CTO。<strong>19 年长期任职，是 SaaS 行业极罕见的"创始人 CEO 持续掌舵"案例</strong>。海图判断：Peter Gassner 是<span class="hl-t">"技术派 + 长期主义 + 行业聚焦"的典型创始人</span>，类似 Adobe 的 Shantanu Narayen 或 ServiceNow 的 Bill McDermott。其个人持股 ~3%（按市值 $28B = ~$840M），利益绑定极强。从 2007 至今坚持<strong>"只服务生命科学行业 + 不做横向扩张 + 长期建护城河"</strong>的战略，这种克制是稀缺品质。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B+</div>
+    <div class="bd">
+      <h4>Brent Bowman · CFO（2024 至今）</h4>
+      <p>2024 年加入，前 Salesforce CFO Bret Taylor 的同事。<strong>稳健财务管理 + 现金回报开始萌芽</strong>——FY26 现金回报开始（小规模回购），但还未启动大规模派息。海图判断：Bowman 接管后<strong>财务报告透明度提升</strong>，Non-GAAP 调整项目更保守，这是好信号。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B</div>
+    <div class="bd">
+      <h4>资本配置纪律 · 现金充裕但未大规模回报</h4>
+      <p>
+      <strong>FY26 末净现金 $6.46B（占市值 23%）</strong>—— 资金充裕但<span class="warn-t">未启动大规模回购或派息</span>。<br>
+      <strong>FY26 仅小规模回购 ~$50M</strong>—— 远低于现金生成能力 FCF $1.39B。<br>
+      管理层逻辑：保留现金为未来 AI 投资 + 国际扩张 + 战略并购。<br>
+      <span class="warn-t">不足之处</span>：股价从高点 -45% 时未启动大规模回购支撑股价。如启动 $1-2B 回购，可立即增加 EPS 5%+。<br>
+      但<strong>无大规模并购的"乱花钱"行为</strong>，资本配置纪律仍属 B 级。
+      </p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">A</div>
+    <div class="bd">
+      <h4>战略执行能力 · Vault CRM 替换 Salesforce 是史诗级胜利</h4>
+      <p>2022 年 Veeva 宣布自研 Vault CRM 时，市场普遍认为"难以替换 Salesforce"。<span class="hl-t">3 年后：125+ 客户上线，14/20 大型药企承诺，包括最难撬动的辉瑞、强生、默克</span>。<strong>这是 SaaS 行业 21 世纪以来最大的"颠覆战胜在位者"案例之一</strong>。海图评价：管理层在战略+产品+销售+客户成功四个维度都做到了一流执行。AI Agents 战略也已落地（FY26 12 月发布首个产品）。</p>
+    </div>
+  </div>
+
+  <div class="cmt">
+    <p><strong>长期主义测试</strong>：3 年前（FY23 财报）管理层承诺"Vault CRM 替换 Salesforce + AI 战略 + 持续盈利"——3 年后<span class="hl-t">每条都超额兑现</span>：(1) Vault CRM 14/20 大型药企承诺 ✓；(2) AI Agents 已发布并有客户上线 ✓；(3) Non-GAAP 营业利润率从 41% → 44.9% 持续提升 ✓。这是创始人 CEO 长期主义的胜利。</p>
+
+    <p><strong>薪酬与利益绑定</strong>：Peter Gassner 持股 ~3%（$840M），无大规模减持记录。其他高管合计持股 ~5%。<strong>利益绑定极强</strong>。SBC 占营收 ~12%（SaaS 行业较高但合理，因生命科学领域人才稀缺需要股权激励）。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 3 ═══ -->
+<div class="section">
+  <div class="stitle">模块 3 · 商业模式深度解析</div>
+
+  <div class="cmt">
+    <p><strong>海图"一句话测试"</strong>：<span class="hl-t">向全球 1,552 家制药+生物科技+医疗器械客户提供"行业垂直 SaaS"—— 商业云（CRM+营销）替代 Salesforce、R&D 云（临床试验+质量+监管）建立行业标准，靠订阅费 84% 高毛利+客户黏性极强变现，FY26 营收 $3.20B、Non-GAAP 营业利润率 44.9%、FCF $1.39B。</span></p>
+
+    <p><strong>FY2026 收入模型与分部拆解</strong>：</p>
+    <table class="tbl"><thead><tr><th>分部</th><th>FY26 营收($M)</th><th>占比</th><th>YoY</th><th>关键产品</th><th>战略</th></tr></thead>
+    <tbody>
+      <tr><td>商业云（Commercial Solutions）</td><td>1,447</td><td>45.3%</td><td>+13%</td><td>Vault CRM、Veeva CRM、Crossix</td><td>★★★★★ 替换 Salesforce</td></tr>
+      <tr><td>R&D 云（R&D Solutions）</td><td>1,748</td><td>54.7%</td><td>+19%</td><td>Vault Clinical+Quality+Regulatory</td><td>★★★★★ 行业标准</td></tr>
+      <tr class="hl"><td>合计</td><td>3,195</td><td>100%</td><td>+16%</td><td>—</td><td>—</td></tr>
+    </tbody></table>
+
+    <p style="margin-top:14px"><strong>按订阅 vs 服务</strong>：</p>
+    <table class="tbl"><thead><tr><th>类型</th><th>FY26 营收($M)</th><th>占比</th><th>YoY</th><th>毛利率</th></tr></thead>
+    <tbody>
+      <tr><td>订阅营收（高黏性）</td><td>2,684</td><td>84.0%</td><td>+17%</td><td>~85%</td></tr>
+      <tr><td>专业服务营收</td><td>511</td><td>16.0%</td><td>+11%</td><td>~30%</td></tr>
+      <tr class="hl"><td>合计</td><td>3,195</td><td>100%</td><td>+16%</td><td>75.5%</td></tr>
+    </tbody></table>
+
+    <p style="margin-top:14px"><strong>单位经济（Unit Economics）</strong>：FY26 营收 $3,195M / 客户 1,552 家 = <strong>每客户年均 $2.06M</strong>（超大客户）。Top 客户（辉瑞、强生、默克）年消费可能 $50-100M。<span class="hl-t">极少看到 SaaS 公司有如此高的单客户 ARR</span>—— 这反映了生命科学客户的预算和黏性。NRR（净留存率）：~120%（管理层未直接披露，但行业基准），即每年现有客户消费扩张 20%。</p>
+
+    <p><strong>产业链定位</strong>：</p>
+    <p>
+      <strong>上游</strong>：AWS / Azure（云基础设施）+ Salesforce（已分手 + 法律纠纷已和解）<br>
+      <strong>中游（公司）</strong>：Veeva（行业垂直 SaaS + 数据 + AI 模型）<br>
+      <strong>下游</strong>：1,552 家生命科学客户（药企+生物科技+医疗器械+CRO+OEM）<br>
+      <strong>议价能力</strong>：对客户议价能力极强（行业标准+替换成本极高）；对供应商议价能力中（AWS 等替代品多）；<span class="hl-t">护城河来自行业领域专业 + 监管合规</span>—— 制药行业的合规要求让 Veeva 成为唯一选择
+    </p>
+
+    <p><strong>关键商业模式特点</strong>：</p>
+    <p>
+      <strong>1. 行业垂直 vs 横向 SaaS</strong>：与 Salesforce/Workday/ServiceNow 不同，Veeva 只服务生命科学行业。<span class="hl-t">这是"窄但深"的差异化</span>—— 横向 SaaS 给所有行业一个工具，Veeva 给一个行业 N 个工具（CRM+临床+质量+监管）。<br>
+      <strong>2. 监管合规护城河</strong>：FDA + EMA + 国家药监局对临床试验+质量+监管的要求极严，Veeva 的产品在合规层面无对手。<br>
+      <strong>3. 长期合同 + 客户黏性</strong>：3-5 年订阅合同，迁移成本极高（数据+流程+培训+合规重新认证）。客户流失率 < 5%/年。<br>
+      <strong>4. 高 SaaS 经济效率</strong>：营收 $3.2B / 员工约 8,000 = 每人年产出 $400K（vs Salesforce $385K、ServiceNow $440K）。<br>
+      <strong>5. 低客户获取成本</strong>：客户极少（1,552 家全球总数），口碑+行业关系网比销售更重要。<span class="hl-t">销售费用占营收仅 22%（vs Salesforce 40%）</span>。
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 模块 4 ═══ -->
+<div class="section">
+  <div class="stitle">模块 4 · 经济护城河分析（5 维）</div>
+
+  <div class="bscore">
+    <div class="circle cg">A+</div>
+    <div class="bd">
+      <h4>1. 转换成本（极高）· <strong>宽护城河</strong></h4>
+      <p>生命科学客户从 Veeva 迁出意味着：(1) 重新认证 FDA/EMA 监管系统（2-3 年）；(2) 数据迁移（10+ 年临床数据）；(3) 全球员工重新培训；(4) 业务流程重做。<span class="hl-t">迁出成本 = 几亿美元 + 2-3 年业务中断</span>。这是 Veeva 最强的护城河维度——<strong>客户流失率 <5%/年是行业最低</strong>。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">A</div>
+    <div class="bd">
+      <h4>2. 无形资产（行业专业 + 监管合规）· <strong>宽护城河</strong></h4>
+      <p>"Veeva 是生命科学 SaaS"已是行业共识，品牌认知度 90%+。<strong>FDA/EMA 监管合规是 Veeva 产品的核心壁垒</strong>—— 横向 SaaS 厂商（Salesforce/Microsoft/Oracle）需要 5-10 年才能达到 Veeva 当前的合规水平。<span class="hl-t">监管风险让客户不敢冒险换厂商</span>。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B+</div>
+    <div class="bd">
+      <h4>3. 网络效应（行业数据飞轮）· <strong>窄至中护城河</strong></h4>
+      <p>1,552 家客户的行业数据（药品试验+营销效果+合规标准）反过来训练 Veeva 的 AI 模型 + 行业最佳实践。<span class="hl-t">客户越多 → 行业数据越全 → AI 越强 → 客户体验越好</span>。但<strong>数据隐私和客户合同限制让网络效应较弱</strong>—— 不像 Meta/Google 可以聚合全部用户数据。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>4. 成本优势（规模效应 + AI 摊薄）· <strong>宽护城河</strong></h4>
+      <p>Veeva 的研发+销售+服务团队（约 8,000 人）摊薄到 1,552 家客户上 = 每客户极低边际成本。<span class="hl-t">毛利率 75.5% + Non-GAAP 营业利润率 44.9% = SaaS 行业最高之一</span>。AI 模型训练成本是固定的，覆盖到 1,552 家客户后，每客户 AI 增量成本极低。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>5. 有效规模（行业垄断）· <strong>宽护城河</strong></h4>
+      <p>全球生命科学 SaaS 市场是<span class="hl-t">"自然垄断市场"</span>—— 客户极少（top 20 药企+ 中型药企+ 生物科技 ~2,000 家全球总数）。Veeva 已渗透 ~75%（1,552/2,000）。<strong>剩余 25% 市场不足以养活第二个全球玩家</strong>。横向 SaaS（Salesforce/Microsoft）可能局部进入，但无法挑战核心地位。</p>
+    </div>
+  </div>
+
+  <div class="cmt">
+    <p style="margin-top:18px"><strong>护城河趋势 · 持续加宽（AI 时代深化 + Vault CRM 转型完成）</strong>：5 大维度综合评分 = 1A+ + 2A + 1A- + 1B+ ≈ <strong>极宽护城河</strong>。最强项是转换成本和监管合规，最弱项是网络效应（受数据隐私限制）。<span class="hl-t">10 年后会更宽还是更窄？海图判断：会"明显加宽"</span>—— Vault CRM 替换 Salesforce 完成（FY28-30）+ AI Agents 嵌入更深 + 行业数据积累更多。这是一家"护城河 A 级且持续加宽"的 SaaS 公司，类似 ServiceNow（IT 服务管理）和 Adobe（设计工具）的护城河强度。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 5 ═══ -->
+<div class="section">
+  <div class="stitle">模块 5 · 财务深度分析</div>
+
+  <h3 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">5.1 三张表概览（FY2026 vs FY2025）</h3>
+  <div class="tbl-wrap" style="margin-bottom:14px">
+    <table class="tbl"><thead><tr><th>项目（$M）</th><th>FY2025</th><th>FY2026</th><th>YoY</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td>利润表</td><td></td><td></td><td></td></tr>
+      <tr><td>总营收</td><td>2,755</td><td>3,195</td><td>+16%</td></tr>
+      <tr><td>订阅营收</td><td>2,294</td><td>2,684</td><td>+17%</td></tr>
+      <tr><td>毛利</td><td>2,068</td><td>2,413</td><td>+17%</td></tr>
+      <tr><td>毛利率</td><td>75.0%</td><td>75.5%</td><td>+0.5pp</td></tr>
+      <tr><td>研发费用</td><td>660</td><td>770</td><td>+17%</td></tr>
+      <tr><td>销售费用</td><td>510</td><td>590</td><td>+16%</td></tr>
+      <tr><td>管理费用</td><td>207</td><td>137</td><td>-34%（重组）</td></tr>
+      <tr><td>GAAP 营业利润</td><td>691</td><td>916</td><td>+33%</td></tr>
+      <tr><td>Non-GAAP 营业利润</td><td>1,152</td><td>1,434</td><td>+24%</td></tr>
+      <tr><td>GAAP 净利</td><td>714</td><td>909</td><td>+27%</td></tr>
+      <tr><td>Non-GAAP 净利</td><td>1,090</td><td>1,353</td><td>+24%</td></tr>
+      <tr class="hl"><td>资产负债表（2026-01-31 末）</td><td></td><td></td><td></td></tr>
+      <tr><td>现金及等价物</td><td>~1,200</td><td>1,421</td><td>+18%</td></tr>
+      <tr><td>短期投资</td><td>~3,800</td><td>5,140</td><td>+35%</td></tr>
+      <tr><td>应收账款</td><td>~950</td><td>1,260</td><td>+33%</td></tr>
+      <tr><td>总资产</td><td>~7,800</td><td>8,979</td><td>+15%</td></tr>
+      <tr><td>有息负债（短借+长借+租赁）</td><td>~80</td><td>96</td><td>+20%</td></tr>
+      <tr><td>递延收入</td><td>~1,290</td><td>1,489</td><td>+15%</td></tr>
+      <tr><td>归母股东权益</td><td>~6,200</td><td>7,215</td><td>+16%</td></tr>
+      <tr class="hl"><td>现金流量表（FY26）</td><td></td><td></td><td></td></tr>
+      <tr><td>经营活动现金流 (OCF)</td><td>1,134</td><td>1,415</td><td>+25%</td></tr>
+      <tr><td>资本开支 (Capex)</td><td>22</td><td>29</td><td>+32%</td></tr>
+      <tr><td>自由现金流 (FCF)</td><td>1,112</td><td>1,386</td><td>+25%</td></tr>
+    </tbody></table>
+  </div>
+
+  <h3 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">5.2 5 年关键比率趋势</h3>
+  <div class="tbl-wrap" style="margin-bottom:14px">
+    <table class="tbl"><thead><tr><th>比率</th><th>FY22</th><th>FY23</th><th>FY24</th><th>FY25</th><th>FY26</th></tr></thead>
+    <tbody>
+      <tr><td>营收增速</td><td>+25%</td><td>+16%</td><td>+10%</td><td>+16%</td><td>+16%</td></tr>
+      <tr><td>订阅营收增速</td><td>+24%</td><td>+18%</td><td>+12%</td><td>+18%</td><td>+17%</td></tr>
+      <tr><td>毛利率</td><td>72%</td><td>74%</td><td>74%</td><td>75%</td><td>75.5%</td></tr>
+      <tr><td>Non-GAAP 营业利润率</td><td>40%</td><td>40%</td><td>41%</td><td>42%</td><td>44.9%</td></tr>
+      <tr><td>GAAP 净利率</td><td>15%</td><td>17%</td><td>20%</td><td>26%</td><td>28.4%</td></tr>
+      <tr><td>ROE</td><td>11%</td><td>12%</td><td>11%</td><td>12%</td><td>13.9%</td></tr>
+      <tr><td>FCF/营收</td><td>40%</td><td>33%</td><td>40%</td><td>40%</td><td>43%</td></tr>
+      <tr><td>FCF Yield</td><td>~3%</td><td>~3%</td><td>~3%</td><td>~3%</td><td>5.0%</td></tr>
+    </tbody></table>
+  </div>
+
+  <h3 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">5.3 杜邦分析（FY2026）</h3>
+  <div class="cmt">
+    <p><strong>ROE = 净利率 × 资产周转 × 权益乘数</strong></p>
+    <p>= 28.4% × ($3,195 / $8,500 平均) × ($8,500 / $7,000 平均)<br>
+    = <strong>28.4% × 0.376 × 1.214</strong><br>
+    = <strong>13.0%（杜邦计算）</strong>vs yfinance ROE 13.9%（基本吻合）</p>
+    <p style="margin-top:10px"><strong>解读</strong>：ROE 由 3 项构成——<span class="hl-t">净利率 28.4%（SaaS 顶级）+ 资产周转 0.376（SaaS 标准，资产含大量现金）+ 权益乘数 1.21（极保守，几乎无杠杆）</span>。<strong>ROE 偏低的原因是"过多现金资产"</strong>—— 净现金 $6.46B 占总资产 72%，拉低资产周转率。如果用"扣除净现金后的 ROE"，则 = $909M / ($7,215M - $6,460M) = <strong>120%</strong>—— 这才是核心业务的真实回报水平。</p>
+  </div>
+
+  <h3 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">5.4 资产负债健康度</h3>
+  <div class="cmt">
+    <p>
+      <strong>有息负债 $96M（短借+长借+租赁）</strong>—— 极低，几乎可忽略<br>
+      <strong>现金及等价物 $1,421M + 短期投资 $5,140M = 流动金融资产 $6,561M</strong><br>
+      <strong>真实净金融资产 = $6,561M - $96M = $6,465M = $6.46B</strong><br>
+      <strong>占总市值 $28.1B 的比例 = 23%</strong><br>
+      <span class="hl-t">这意味着扣除净现金后，市场对纯运营业务（FY26 Non-GAAP 净利 $1.35B）的估值是 $21.6B，对应核心 P/E 仅 16x</span>—— 对一家 75% 毛利、44.9% 营业利润率、+16% 增长的 SaaS 来说极便宜<br>
+      流动比率 ~5.0、利息覆盖倍数 N/A（几乎无利息支出）<br>
+      <strong>资产负债健康度评级：A+</strong>（SaaS 行业第一档）
+    </p>
+  </div>
+
+  <h3 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">5.5 现金流质量</h3>
+  <div class="cmt">
+    <p>
+      <strong>OCF/NI = $1,415 / $909 = 156%</strong>—— 极优秀（SaaS 递延收入特性）<br>
+      <strong>FCF/OCF = $1,386 / $1,415 = 98%</strong>—— 极优秀（轻资产）<br>
+      <strong>FCF/营收 = 43%</strong>—— SaaS 行业最高之一<br>
+      <strong>FCF Yield = $1,386 / $28,089 = 4.93%</strong>—— 低于 10 年期国债 4.3% 的合理区间<br>
+      <strong>维护性 Capex 仅 $29M</strong>—— 占营收 0.9%，几乎全是 SaaS 平台维护，无大额数据中心投入（用 AWS）<br>
+      <strong>评价</strong>：现金流质量 A+。<span class="hl-t">Veeva 是真正的"轻资产高现金流"SaaS 印钞机</span>。
+    </p>
+  </div>
+
+  <h3 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">5.6 所有者盈余计算（核心）</h3>
+  <div class="cmt">
+    <p>所有者盈余 = 净利 + 折旧摊销 + 股权激励 - 维护性 Capex ± 营运资金变动</p>
+    <p>
+      = $909M + $35M (折旧摊销) + $440M (股权激励 SBC) - $29M (维护性 Capex)<br>
+      = <strong>$1,355M（FY26）</strong>
+    </p>
+    <p style="margin-top:8px"><strong>OE Yield = $1,355 / $28,089 = 4.83%</strong>—— 中等偏上（SaaS 行业较高）</p>
+    <p>注意：SBC $440M 占营收 13.8% 是 Veeva 财务的关键扣减项。<strong>真正的"现金所有者盈余"= GAAP 净利 + 折旧 - SBC - Capex = $475M</strong>—— Cash OE Yield 仅 1.7%。<span class="hl-t">这是 SaaS 公司的争议点</span>—— SBC 是真实的股东稀释成本，但管理层倾向于把它从 Non-GAAP 中剔除。海图判断：保守估值应使用 GAAP 净利 $909M 作为正常化盈利。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 6 ═══ -->
+<div class="section">
+  <div class="stitle">模块 6 · 电话会分析（最新 + 前 2 季）</div>
+
+  <div class="tag-grid">
+    <div class="tag-card pos">
+      <h5>Q4 FY2026 电话会（2026-03-04）<span class="tag-bd up">利好</span></h5>
+      <p>CEO Peter Gassner："我们的 'Agentic Transformation' 是 Veeva 在生命科学行业的重大机会，行业专属 AI 集成进核心应用是我们的竞争优势。" → <strong>AI 战略明确，已开始落地</strong>。</p>
+    </div>
+    <div class="tag-card pos">
+      <h5>Q4 FY2026 电话会<span class="tag-bd up">利好</span></h5>
+      <p>"Vault CRM 已有 125+ 客户上线，包括 2 家 top-20 大型药企，14/20 已承诺。" → <strong>这是 SaaS 行业 21 世纪最大的"颠覆战胜在位者"案例</strong>，Salesforce 失去最大客户群之一。</p>
+    </div>
+    <div class="tag-card neu">
+      <h5>Q4 FY2026 电话会<span class="tag-bd nt">中性</span></h5>
+      <p>"FY27 营收指引 $3,585-3,600M（+12-13%），低于 FY26 +16%。" → <strong>市场失望增速放缓</strong>。但 Non-GAAP 营业利润 $1,590M 仍 +11%，盈利能力持续。</p>
+    </div>
+    <div class="tag-card pos">
+      <h5>Q3 FY2026 电话会（2025-12-04）<span class="tag-bd up">利好</span></h5>
+      <p>"R&D 云增长 +19% YoY，临床+质量+监管全面加速。" → <strong>R&D 云成为最强增长引擎</strong>，受益于全球药企研发数字化趋势。</p>
+    </div>
+    <div class="tag-card pos">
+      <h5>Q2 FY2026 电话会（2025-08-29）<span class="tag-bd up">利好</span></h5>
+      <p>"Non-GAAP 营业利润率提升至 45%（季度）+ FCF $400M。" → <strong>盈利能力达到 SaaS 顶级水平</strong>。</p>
+    </div>
+    <div class="tag-card neg">
+      <h5>FY27 指引<span class="tag-bd dn">利空</span></h5>
+      <p>"FY27 增速放缓至 12-13%，主要因汇率影响和大型合同时间分布。" → <strong>市场对增长放缓担忧</strong>是 FY26 H2 股价下跌的核心原因。</p>
+    </div>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">6.1 信号汇总</h4>
+  <div class="cmt">
+    <p><strong>利好信号（4）</strong>：(1) AI Agents 战略落地；(2) Vault CRM 转型加速（14/20 大型药企承诺）；(3) R&D 云增长 +19%；(4) Non-GAAP 营业利润率 44.9% 创新高。</p>
+    <p><strong>利空信号（2）</strong>：(1) FY27 增速放缓至 12-13%；(2) Non-GAAP EPS 增速 +9.3% 远低于 FY26 +23%。</p>
+    <p><strong>中性信号（1）</strong>：管理层未启动大规模回购或派息，现金继续累积。</p>
+    <p>综合评估：<strong>正面</strong>——管理层沟通诚实，承认增长放缓但用 AI Agents + Vault CRM 转型对冲。增长放缓是<strong>"业务成熟期 + 大客户合同时间"自然现象</strong>，不是经营恶化。</p>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">6.2 指引兑现度追踪</h4>
+  <div class="tbl-wrap">
+    <table class="tbl"><thead><tr><th>承诺时间</th><th>承诺内容</th><th>实际兑现</th><th>评分</th></tr></thead>
+    <tbody>
+      <tr><td>FY24 财报</td><td>FY25 营收 +13%</td><td>FY25 +16% / 超预期</td><td>A+</td></tr>
+      <tr><td>FY25 财报</td><td>FY26 营收 +14%</td><td>FY26 +16% / 超预期</td><td>A</td></tr>
+      <tr><td>FY24 财报</td><td>Vault CRM 5 年内替换 Salesforce</td><td>FY26 14/20 大型药企承诺</td><td>A+</td></tr>
+      <tr><td>FY25 财报</td><td>AI Agents 上线</td><td>FY26 12 月发布 / 兑现</td><td>A</td></tr>
+      <tr><td>FY26 财报</td><td>FY27 营收 $3.585-3.600B</td><td>待 FY27 验证</td><td>待观察</td></tr>
+    </tbody></table>
+  </div>
+</div>
+
+<!-- ═══ 模块 7 ═══ -->
+<div class="section">
+  <div class="stitle">模块 7 · 多模型估值（8 种方法交叉验证）</div>
+
+  <p style="margin-bottom: 16px; color: var(--text2); font-size:14px;">下表估值<strong>不锚定当前市价</strong>，独立基于财报数据 + 行业研究推导。中位数取 8 种方法估值的中点，最终目标价用概率加权（基准 50% / 乐观 30% / 悲观 20%）。<span class="warn-t">特别注意：VEEV 是高质量稳健成长 SaaS，估值需要用 FY27-28 中周期正常化盈利</span>。</p>
+
+  <div class="tbl-wrap" style="margin-bottom:14px">
+    <table class="tbl"><thead><tr><th>方法</th><th>关键假设</th><th>估值（$/股）</th><th>vs $170.88 现价</th></tr></thead>
+    <tbody>
+      <tr><td>1. 相对估值 P/E</td><td>FY27 Non-GAAP EPS $8.85, P/E 25x（5 年中位 35x）</td><td>$221</td><td><span class="badge up">+29%</span></td></tr>
+      <tr><td>2. DCF（基准）</td><td>FY27-30 营收 +13%, FCF margin 44%, WACC 9%, g=4%</td><td>$230</td><td><span class="badge up">+35%</span></td></tr>
+      <tr><td>3. 所有者盈余</td><td>FY27 OE $1.5B, 合理 P/OE 18x</td><td>$165</td><td><span class="badge dn">-3%</span></td></tr>
+      <tr><td>4. PEG</td><td>g=14% (Non-GAAP), P/E Forward 19.3x → PEG 1.4 合理</td><td>$200</td><td><span class="badge up">+17%</span></td></tr>
+      <tr><td>5. DDM 戈登模型</td><td>无股息 / 不适用</td><td>N/A</td><td><span class="badge nt">不适用</span></td></tr>
+      <tr><td>6. NAV（每股净资产）</td><td>归母净资产 $44.05/股</td><td>$44</td><td><span class="badge dn">-74%</span></td></tr>
+      <tr><td>7. 反向 DCF</td><td>当前 $170.88 隐含 FY30 营收 $4.3B（+8% CAGR），过度悲观</td><td>$215</td><td><span class="badge up">+26%</span></td></tr>
+      <tr><td>8. SOTP 分部加总</td><td>商业云 $13B + R&D 云 $14B + 净金融 $6.5B = $33.5B</td><td>$205</td><td><span class="badge up">+20%</span></td></tr>
+      <tr class="hl"><td>中位数</td><td>—</td><td><strong>$220</strong></td><td><strong>+29%</strong></td></tr>
+      <tr class="hl"><td>加权公允（基准 50% / 乐观 30% / 悲观 20%）</td><td>—</td><td><strong>$220</strong></td><td><strong>+29%</strong></td></tr>
+    </tbody></table>
+  </div>
+
+  <h4 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">7.X · P/E 多档透视表（GAAP vs Non-GAAP 差异 49%）</h4>
+  <div class="tbl-wrap" style="margin-bottom: 14px;">
+    <table class="tbl"><thead><tr><th>计算口径</th><th>每股盈利</th><th>P/E</th><th>是否最可信</th></tr></thead>
+    <tbody>
+      <tr><td>TTM GAAP P/E</td><td>$5.44</td><td>31.4x</td><td>★★★ 含 SBC 真实成本</td></tr>
+      <tr><td>TTM Non-GAAP P/E</td><td>$8.10</td><td>21.1x</td><td>★★★★ 业界标准</td></tr>
+      <tr><td>Forward FY27 GAAP P/E</td><td>~$6.20</td><td>27.6x</td><td>★★★★ 共识</td></tr>
+      <tr><td><strong>Forward FY27 Non-GAAP P/E</strong></td><td><strong>$8.85</strong></td><td><strong>19.3x</strong></td><td>★★★★★ <strong>最可信</strong></td></tr>
+      <tr><td>5 年历史中位 P/E</td><td>—</td><td>35x</td><td>★★★ 历史对照</td></tr>
+      <tr><td>核心业务 P/E（剔除净现金 $6.46B）</td><td>—</td><td><strong>16x（FY27 Non-GAAP）</strong></td><td>★★★★★ <strong>极端低估</strong></td></tr>
+    </tbody></table>
+  </div>
+  <div class="dcf-note">
+    <p><strong>核心业务 P/E 16x 的解读</strong>：市值 $28.1B - 净金融资产 $6.46B = $21.6B。FY27 Non-GAAP 净利 $1.45B → 核心 P/E 仅 14.9x。<span class="hl-t">这与同类 SaaS 公司对比：Salesforce 25x、ServiceNow 60x、Workday 30x、Adobe 22x</span>—— Veeva 是 SaaS 行业头部公司中估值最便宜的之一，且利润率最高。<strong>历史 5 年 P/E 区间 30-60x，当前 21x（Non-GAAP）已是 5 年最低</strong>。</p>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">7.1 估值方法适用性说明</h4>
+  <div class="dcf-note">
+    <p><strong>最适用 4 种</strong>：DCF（稳定成长 SaaS）、相对估值（vs 同类 SaaS）、SOTP（双业务分别估值）、Forward P/E（成长股）。</p>
+    <p><strong>次要 2 种</strong>：所有者盈余（含 SBC 后的真实盈利）、反向 DCF（揭示市场过度悲观）。</p>
+    <p><strong>不适用 2 种</strong>：DDM（无股息）、NAV（仅作下限参考）。</p>
+    <p><strong>PEG 1.4 解读</strong>：增长率 14%（Non-GAAP EPS）+ Forward P/E 19.3x → PEG 1.38。SaaS 行业 PEG 中位 2.0，<strong>Veeva PEG 1.4 已比中位低 30%</strong>。</p>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">7.2 三情景敏感性分析</h4>
+  <div class="tbl-wrap">
+    <table class="tbl"><thead><tr><th>情景</th><th>关键假设</th><th>FY27 Non-GAAP EPS</th><th>目标价</th><th>vs 现价</th><th>概率</th></tr></thead>
+    <tbody>
+      <tr><td>悲观</td><td>增速降至 8-10%, AI 商业化失败, 制药行业研发支出下滑</td><td>$8.30</td><td>$145</td><td><span class="badge dn">-15%</span></td><td>20%</td></tr>
+      <tr><td>基准</td><td>增速 12-14%, AI Agents 顺利推进, Vault CRM 持续替换</td><td>$8.85</td><td>$220</td><td><span class="badge up">+29%</span></td><td>50%</td></tr>
+      <tr><td>乐观</td><td>增速 15%+, AI 商业化爆发, 大规模回购启动</td><td>$9.50</td><td>$280</td><td><span class="badge up">+64%</span></td><td>30%</td></tr>
+    </tbody></table>
+  </div>
+</div>
+
+<!-- ═══ 模块 8 ═══ -->
+<div class="section">
+  <div class="stitle">模块 8 · 竞争与行业分析</div>
+
+  <h4 style="margin-bottom:10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">8.1 SaaS 行业横向对比</h4>
+  <div class="tbl-wrap" style="margin-bottom:14px">
+    <table class="tbl"><thead><tr><th>公司</th><th>市值</th><th>FY 营收</th><th>营收增速</th><th>Non-GAAP 营业利润率</th><th>P/E (Forward)</th></tr></thead>
+    <tbody>
+      <tr><td>Salesforce (CRM)</td><td>$280B</td><td>$38B</td><td>+9%</td><td>33%</td><td>25x</td></tr>
+      <tr><td>ServiceNow (NOW)</td><td>$200B</td><td>$11B</td><td>+22%</td><td>30%</td><td>60x</td></tr>
+      <tr><td>Workday (WDAY)</td><td>$70B</td><td>$8.5B</td><td>+15%</td><td>28%</td><td>30x</td></tr>
+      <tr><td>Adobe (ADBE)</td><td>$220B</td><td>$22B</td><td>+10%</td><td>46%</td><td>22x</td></tr>
+      <tr><td>Intuit (INTU)</td><td>$170B</td><td>$17B</td><td>+13%</td><td>40%</td><td>30x</td></tr>
+      <tr class="hl"><td>Veeva (VEEV)</td><td><strong>$28B</strong></td><td><strong>$3.2B</strong></td><td><strong>+16%</strong></td><td><strong>44.9%</strong></td><td><strong>19.3x</strong></td></tr>
+      <tr><td>Salesforce 核心 (Sales/Service Cloud)</td><td>—</td><td>~$25B</td><td>+8%</td><td>33%</td><td>—</td></tr>
+    </tbody></table>
+  </div>
+  <div class="cmt">
+    <p><strong>Veeva 是 SaaS 头部公司中估值最便宜的之一</strong>：Forward P/E 19.3x 是行业最低（vs ServiceNow 60x、Workday 30x、Intuit 30x、Salesforce 25x、Adobe 22x）。<span class="hl-t">且 Veeva 的利润率最高（44.9% vs 同行 28-46%）+ 增速中等（+16% vs 同行 8-22%）+ FCF/营收 最高（43%）</span>。<strong>从"质量+估值"双维度看，Veeva 是 SaaS 头部公司中性价比最佳的</strong>。</p>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">8.2 波特五力分析</h4>
+  <div class="tbl-wrap">
+    <table class="tbl"><thead><tr><th>力量</th><th>评级</th><th>分析</th></tr></thead>
+    <tbody>
+      <tr><td>1. 现有竞争者</td><td>低</td><td>生命科学垂直 SaaS 几乎独占市场</td></tr>
+      <tr><td>2. 新进入者威胁</td><td>极低</td><td>FDA/EMA 合规壁垒 + 行业专业 + 数据积累</td></tr>
+      <tr><td>3. 替代品威胁</td><td>低</td><td>横向 SaaS（Salesforce）已被反向替代</td></tr>
+      <tr><td>4. 供应商议价（AWS）</td><td>中等</td><td>云基础设施可议价</td></tr>
+      <tr><td>5. 客户议价</td><td>极低</td><td>转换成本极高 + 客户极少（top 客户极依赖）</td></tr>
+    </tbody></table>
+  </div>
+  <div class="cmt" style="margin-top:14px">
+    <p>整体行业吸引力：<span class="hl-t">极强</span>。Veeva 在生命科学垂直 SaaS 几乎是<strong>"自然垄断"</strong>—— 客户极少（<2,000 家全球总数）、合规壁垒极高、转换成本极高。<strong>这是 SaaS 行业中最佳的竞争结构之一</strong>。</p>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">8.3 行业增长率与 TAM</h4>
+  <div class="cmt">
+    <p>
+      <strong>全球生命科学 IT 支出 TAM</strong>：~$200B/年（2025 年）<br>
+      <strong>SAM（生命科学 SaaS）</strong>：~$25B/年<br>
+      <strong>SOM（Veeva 实际营收）</strong>：$3.2B（市占率 ~13%）<br>
+      <strong>行业增长率</strong>：FY26-30 +12-15%/年（生命科学研发支出 +5-7% + 数字化转型 +5-8%）<br>
+      <strong>颠覆风险</strong>：低——AI 大模型可能改变 CRM 但 Veeva 已主动整合 AI Agents。
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 模块 9 ═══ -->
+<div class="section">
+  <div class="stitle">模块 9 · 技术面与 K 线分析（次要参考）</div>
+
+  <div class="cmt">
+    <p><strong>VEEV（NYSE）</strong>：</p>
+    <p>
+      当前价 $170.88（2026-05-05 收盘）。52 周区间 $148.05-$310.50（距高点 -45%）。<br>
+      <strong>4 月走势</strong>：4 月初 $185 → 5-05 $170.88（-7.6%）。<br>
+      <strong>30 日均价 ~$178、50 日均价 ~$190</strong>—— 价格已破 50 日均线。<br>
+      <strong>支撑位</strong>：$148（52 周低）/ $130（2024 年低点）<br>
+      <strong>阻力位</strong>：$200（前期密集成交）/ $235（200 日均线）/ $310（52 周高）<br>
+      <strong>RSI</strong>：~35（超卖区域）<br>
+      <strong>MACD</strong>：负值<br>
+      <strong>判断</strong>：技术面偏弱但已接近 52 周底部 + RSI 超卖。<span class="hl-t">从均值回归角度，反弹概率较高</span>。Q1 FY27 财报（5-27）将是关键催化剂——管理层指引营收 $855-858M（+9-10%）已较保守，<strong>实际数据如超指引（+11-12%）→ 反弹</strong>。
+    </p>
+
+    <p><strong>注意</strong>：技术面作为补充参考，不影响"基于估值的买入决策"。当前 Forward P/E 19.3x 已是 5 年最低（历史中位 35x），<strong>基本面已严重低估，技术面只是确认底部区间的工具</strong>。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 10 ═══ -->
+<div class="section">
+  <div class="stitle">模块 10 · 增长催化剂与前景展望</div>
+
+  <h4 style="margin-bottom:10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">10.1 短期催化剂（未来 6 个月）</h4>
+  <div class="tag-grid">
+    <div class="tag-card pos">
+      <h5>2026-05-27 Q1 FY2027 财报<span class="tag-bd up">关键</span></h5>
+      <p>市场预期营收 $855-858M、Non-GAAP EPS $2.13-2.14。<strong>关键看 Vault CRM 客户上线进度 + AI Agents 客户数据</strong>。如超指引 → 反弹。</p>
+    </div>
+    <div class="tag-card pos">
+      <h5>2026-06 Veeva Summit Europe 大会<span class="tag-bd up">利好</span></h5>
+      <p>每年 6 月在欧洲举办的客户峰会，预计宣布更多 AI Agents + Vault CRM 大客户合同。<strong>是行业内最重要的大会之一</strong>。</p>
+    </div>
+    <div class="tag-card neu">
+      <h5>大规模回购可能<span class="tag-bd nt">不确定</span></h5>
+      <p>市值 $28B + 净现金 $6.46B 的低估状态下，<strong>逻辑上回购应该启动</strong>。但管理层 5 年从未启动大规模回购，需观察 FY27 是否转变。</p>
+    </div>
+    <div class="tag-card neu">
+      <h5>制药行业 AI 投资爆发<span class="tag-bd nt">不确定</span></h5>
+      <p>2026 年制药公司预计加大 AI 投资（Eli Lilly、Pfizer、Novartis 等已明确）。<strong>Veeva 是 AI 工具的主要受益者之一</strong>，但商业化时间不确定。</p>
+    </div>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">10.2 长期展望（3-5 年）</h4>
+  <div class="cmt">
+    <p><strong>未来 3-5 年三大主题</strong>：</p>
+    <p>
+      <strong>1. Vault CRM 完成替换 Salesforce</strong>：FY27-30 完成 18-20/20 大型药企迁移，全球生命科学 CRM 市场基本独占。<span class="hl-t">单 Vault CRM 业务可能从 FY26 ~$500M → FY30 $2B+</span>。<br>
+      <strong>2. AI Agents 商业化爆发</strong>：FY26 12 月发布首个 AI Agent，FY27-29 跨 CRM+R&D 平台扩展。<strong>AI 是 Veeva 价格上调的主要工具</strong>—— 每客户年消费可能从 $2M → $3-5M。<br>
+      <strong>3. 国际扩张 + 新行业</strong>：欧洲+亚洲生命科学市场+消费品（CPG）行业（已开始尝试）。FY30 国际营收占比可能从 30% → 45%。
+    </p>
+
+    <p><strong>FY27-FY30 营收 / 净利预测</strong>：</p>
+    <table class="tbl" style="margin-top:10px"><thead><tr><th>年度</th><th>营收（$M）</th><th>YoY</th><th>Non-GAAP 净利（$M）</th><th>YoY</th><th>Non-GAAP EPS</th></tr></thead>
+    <tbody>
+      <tr><td>FY26 实际</td><td>3,195</td><td>+16%</td><td>1,353</td><td>+24%</td><td>$8.10</td></tr>
+      <tr><td>FY27 指引</td><td>3,592</td><td>+12.4%</td><td>1,450</td><td>+7%</td><td>$8.85</td></tr>
+      <tr><td>FY28 预测</td><td>4,090</td><td>+13.9%</td><td>1,710</td><td>+18%</td><td>$10.50</td></tr>
+      <tr><td>FY29 预测</td><td>4,650</td><td>+13.7%</td><td>1,990</td><td>+16%</td><td>$12.20</td></tr>
+      <tr><td>FY30 预测</td><td>5,250</td><td>+12.9%</td><td>2,300</td><td>+16%</td><td>$14.10</td></tr>
+    </tbody></table>
+
+    <p style="margin-top:10px"><strong>5 年累计 EPS 增长：FY26 $8.10 → FY30 $14.10（+74%）</strong>。<span class="hl-t">假设 P/E 维持 25x，FY30 股价目标 $350</span>—— 5 年回报 +105%（年化 +15%）+ 启动股息后约 +18%/年。这是稳健 SaaS 龙头的合理回报。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 11 ═══ -->
+<div class="section">
+  <div class="stitle">模块 11 · 风险矩阵（多维评估）</div>
+
+  <div class="risk-grid">
+    <div class="risk-card r2">
+      <h5>1. 经营风险（增长放缓）</h5>
+      <span class="risk-score">2 / 5</span>
+      <p>FY27 增速放缓至 12-13% vs FY26 +16%。但仍是 SaaS 中等双位数增长，且利润率持续提升。</p>
+    </div>
+    <div class="risk-card r1">
+      <h5>2. 财务风险</h5>
+      <span class="risk-score">1 / 5</span>
+      <p>有息负债 $96M 几乎为零 + 净现金 $6.46B + FCF $1.39B = SaaS 行业最健康的财务结构之一。</p>
+    </div>
+    <div class="risk-card r3">
+      <h5>3. 竞争风险</h5>
+      <span class="risk-score">3 / 5</span>
+      <p>Salesforce 法律纠纷已和解，但 AI 时代横向 SaaS（Microsoft Dynamics+AI、Salesforce Einstein）可能再战。</p>
+    </div>
+    <div class="risk-card r2">
+      <h5>4. 监管/政策风险</h5>
+      <span class="risk-score">2 / 5</span>
+      <p>制药行业监管反而是 Veeva 的护城河。但 FDA 对 AI 在医药的监管可能影响 AI Agents 推进速度。</p>
+    </div>
+    <div class="risk-card r3">
+      <h5>5. 宏观风险（制药行业）</h5>
+      <span class="risk-score">3 / 5</span>
+      <p>美国药价改革（IRA Inflation Reduction Act）压制制药公司利润，可能影响其 IT 支出。</p>
+    </div>
+    <div class="risk-card r2">
+      <h5>6. 估值风险</h5>
+      <span class="risk-score">2 / 5</span>
+      <p>Forward P/E 19.3x 已是 5 年最低（历史中位 35x），下行空间有限。</p>
+    </div>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">11.X 黑天鹅情景（最坏情况）</h4>
+  <div class="cmt">
+    <p>
+      <strong>1. 增长大幅放缓至 5-8%</strong>（概率 12%）：制药行业研发支出大幅下降 + AI 商业化失败 → FY27-28 增速降至个位数，估值 P/E 降至 15x，股价跌至 $130（-24%）。<br>
+      <strong>2. Microsoft/Salesforce 反击 AI 工具</strong>（概率 10%）：Microsoft Dynamics + Copilot AI 进入生命科学，部分客户回流 → Vault CRM 替换战进度放缓，股价跌至 $145（-15%）。<br>
+      <strong>3. 美国药价改革深化</strong>（概率 15%）：药企利润大幅压制 → IT 支出 -10% → Veeva 营收增速降至 8%，股价跌至 $140（-18%）。<br>
+      <strong>4. AI 大模型商业化失败</strong>（概率 15%）：Veeva AI Agents 客户体验不达预期，价格上调失败 → FY28-30 利润率从 45% 下滑，股价跌至 $135（-21%）。<br>
+      <strong>5. CEO 创始人 Peter Gassner 离任</strong>（概率 5%）：长期主义文化可能受影响，估值打折 → 股价跌至 $150（-12%）。
+    </p>
+    <p><strong>下行支撑</strong>：每股净资产 $44.05 + 净现金 $39.6/股—— 当前 $170.88 距 NAV $44 远，但<span class="hl-t">即便最坏情景下也很难跌破 $130</span>（5 年历史 P/E 低位 25x × FY27 EPS $8.30 = $208 已是悲观情景目标价的下限）。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 12 评分卡 ═══ -->
+<div class="section">
+  <div class="stitle">海图评分卡 · 6 维 A-D + 红旗排查</div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>1. 生意可预测性 — A-（8/10）</h4>
+      <p>商业模式清晰（生命科学 SaaS），过去 12 年营收+15%+/年稳健增长，订阅模式 84% 高可见度。<strong>5 年盈利波动度极小</strong>。FY27 增速放缓但仍是中等双位数。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle cg">A+</div>
+    <div class="bd">
+      <h4>2. 经济护城河 — A+（10/10）</h4>
+      <p>5 维护城河综合：1A+（转换成本）+ 2A（无形资产+成本优势+有效规模）+ 1A-（成本优势/有效规模）+ 1B+（网络效应）= <strong>极宽护城河</strong>。10 年后会持续加宽。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>3. 管理层质量 — A-（8.5/10）</h4>
+      <p>Peter Gassner 19 年创始人 CEO + 持股 ~3% 利益绑定 + 长期主义 + Vault CRM 战略胜利 + AI Agents 战略落地。<strong>SaaS 行业最优秀创始人之一</strong>。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle cg">A+</div>
+    <div class="bd">
+      <h4>4. 财务质量 — A+（10/10）</h4>
+      <p>毛利率 75.5% + Non-GAAP 营业利润率 44.9% + FCF/营收 43% + 净现金 $6.46B + 几乎零负债。<strong>财务健康度 SaaS 行业最优</strong>。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle cw">B</div>
+    <div class="bd">
+      <h4>5. 资本配置纪律 — B（7/10）</h4>
+      <p>无大规模回购或派息（FY26 仅 $50M 小规模回购）+ 无大规模并购"乱花钱"。<span class="warn-t">现金过度累积</span>是减分项。如启动 $2B 回购，立即升至 A 级。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>6. 估值与安全边际 — A-（8/10）</h4>
+      <p>Forward P/E 19.3x（5 年最低）+ 核心 P/E 仅 16x（剔除净现金）+ PEG 1.4 + 距 52 周高 -45%。<strong>估值已在 5 年最低区间</strong>。安全边际 ~30%。</p>
+    </div>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">12.X 红旗排查（非评分项）</h4>
+  <div class="tbl-wrap">
+    <table class="tbl"><thead><tr><th>红旗项</th><th>状态</th><th>说明</th></tr></thead>
+    <tbody>
+      <tr><td>商誉减值历史</td><td>✓ 无问题</td><td>商誉规模小，从未大额减值</td></tr>
+      <tr><td>收入确认时点</td><td>✓ 无问题</td><td>SaaS 订阅按服务期分摊，透明</td></tr>
+      <tr><td>关联交易</td><td>✓ 无问题</td><td>无重大关联交易</td></tr>
+      <tr><td>表外负债</td><td>✓ 无问题</td><td>无重大表外项目</td></tr>
+      <tr><td>股权激励</td><td>⚠️ 注意</td><td>SBC 占营收 13.8%，SaaS 行业较高但合理</td></tr>
+      <tr><td>会计变更</td><td>✓ 无问题</td><td>近 5 年无重大会计政策变更</td></tr>
+      <tr><td>诉讼/监管</td><td>✓ 已和解</td><td>Salesforce 法律纠纷已 2024 和解</td></tr>
+    </tbody></table>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">12.Y 综合评级</h4>
+  <div class="dcf-note">
+    <p><strong>6 维评分</strong>：A- / A+ / A- / A+ / B / A- = 综合 <strong>A-</strong>（拖累项是资本配置纪律 B）</p>
+    <p><strong>红旗排查</strong>：6/7 无问题，1 项注意（SBC）。<strong>红旗未达"有疑问"门槛</strong>，不构成评级降级。</p>
+    <p><strong>综合评级</strong>：<span class="rating-badge rating-buy">买入</span></p>
+    <p><strong>理由</strong>：(1) 护城河 A+ + 财务 A+ + 估值 A- = SaaS 头部公司中"高质量+合理估值"组合最佳；(2) Vault CRM 替换 Salesforce 的史诗级胜利已确认；(3) AI Agents 战略落地，FY27-30 是商业化期；(4) 净现金 $6.46B + Forward P/E 19.3x 提供下行支撑；(5) 创始人 19 年长期主义。<strong>建议买入</strong>—— 这是 SaaS 头部公司中难得的"质量+估值"双低位机会。</p>
+  </div>
+</div>
+
+<!-- ═══ 投资决策 ═══ -->
+<div class="section">
+  <div class="stitle">海图研判 · 投资决策</div>
+
+  <div class="cgrid">
+    <div class="ccard">
+      <div class="ctitle" style="font-size: 14px;">12 个月概率加权目标价</div>
+      <p style="font-size: 28px; font-weight: 700; color: var(--green); margin: 8px 0;">$220</p>
+      <p style="font-size: 13px; color: var(--text2);">+29% 上行 · 中位数估值 $220 / 加权公允 $220</p>
+      <table class="tbl" style="margin-top: 10px; font-size:12px;"><tbody>
+        <tr><td>乐观 (30%)</td><td>$280</td><td><span class="badge up">+64%</span></td></tr>
+        <tr><td>基准 (50%)</td><td>$220</td><td><span class="badge up">+29%</span></td></tr>
+        <tr><td>悲观 (20%)</td><td>$145</td><td><span class="badge dn">-15%</span></td></tr>
+      </tbody></table>
+    </div>
+    <div class="ccard">
+      <div class="ctitle" style="font-size: 14px;">分批建仓 / 止盈策略</div>
+      <p style="font-size: 13px; color: var(--text2); line-height: 1.85;">
+      <strong>当前价 $170.88</strong> · 已位于"首仓"附近<br><br>
+      <strong>建仓档位（独立估值中位数 × 80% / 70% / 60%）</strong>：<br>
+      首仓 <span class="hl-t">$176</span>（×80%·距现价 +3%·已过）<br>
+      二仓 <span class="hl-t">$154</span>（×70%·距现价 -10%）<br>
+      三仓 <span class="hl-t">$132</span>（×60%·距现价 -23%·极端机会）<br><br>
+      <strong>止盈三档</strong>：<br>
+      减 25% @ <span class="hl-t">$240</span><br>
+      减 25% @ <span class="hl-t">$280</span><br>
+      减 25% @ <span class="hl-t">$340</span><br>
+      <strong>最后 25% 作为"高质量 SaaS 长期持仓"长期持有</strong>
+      </p>
+    </div>
+  </div>
+
+  <div class="cmt" style="margin-top: 16px;">
+    <p><strong>仓位管理</strong>：建议总仓位 <strong>5-10%</strong>（中等仓位，反映高质量+成长稳健）。持有周期 <strong>5 年+（含 Vault CRM 完成 + AI Agents 商业化）</strong>。<span class="hl-t">这是少有的"质量 A+ + 估值 5 年低位"机会</span>。</p>
+
+    <p><strong>关键监控指标</strong>：</p>
+    <p>
+      <strong>1. Vault CRM 客户数</strong>：从 125+ 是否能升至 200+ → 反映 Salesforce 替换战进度<br>
+      <strong>2. AI Agents 客户数</strong>：管理层未公开，但电话会暗示在加速<br>
+      <strong>3. R&D 云增速</strong>：能否维持 +18-20%？这是最强增长引擎<br>
+      <strong>4. Non-GAAP 营业利润率</strong>：能否从 44.9% → 47%+？<br>
+      <strong>5. 客户净留存率（NRR）</strong>：管理层未直接披露，但行业基准 ~120%<br>
+      <strong>6. 大规模回购</strong>：剩余授权 ~$200M，能否扩大至 $1-2B？<br>
+      <strong>7. 制药行业研发支出</strong>：宏观环境对 IT 预算的影响
+    </p>
+
+    <p><strong>事件时间表</strong>：</p>
+    <p>
+      <strong>2026-05-27</strong>: Q1 FY2027 财报（关键节点 · Vault CRM 进度）<br>
+      <strong>2026-06-XX</strong>: Veeva Summit Europe 大会（客户合同公告）<br>
+      <strong>2026-08-中</strong>: Q2 FY2027 财报（H1 业绩）<br>
+      <strong>2026-09-XX</strong>: Veeva Summit Americas 大会（年度产品+战略公告）<br>
+      <strong>2026-12-中</strong>: Q3 FY2027 财报（FY28 早期指引）<br>
+      <strong>2027-03-中</strong>: FY2027 年报（全年业绩 + FY28 指引）
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 海图页末长评 ═══ -->
+<div class="section">
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记 · 1100 字</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p class="lead">市场最钟情的不是"故事最诱人"的公司，而是"质量被低估"的公司。当一家服务全球生命科学行业 19 年的垂直 SaaS 龙头，刚刚完成史诗级"反向替换 Salesforce"战役，营收+利润率持续创新高，却被市场打到 5 年估值最低位时——这不是基本面问题，是市场情绪问题。Veeva 的 Q4 FY2026 财报就是这样一份"被错杀"的成绩单。</p>
+
+      <p>FY2026 总营收 $3.20B（+16%）、Non-GAAP 营业利润 $1.43B（+24%）、Non-GAAP 营业利润率 44.9%（创历史新高）、Non-GAAP EPS $8.10（+23%）、FCF $1.39B（FCF 利润率 43%）、净现金 $6.46B（占市值 23%）。Q4 单季营收 +16% / 利润 +20-31%，是连续 8 个季度超指引。<strong>Vault CRM 替换 Salesforce 已 14/20 大型药企承诺、AI Agents 已发布并有客户上线、R&D 云 +19% 加速</strong>。市场对 Veeva 的悲观（股价从 52 周高 $310 跌至 $170，-45%、Forward P/E 19.3x 是 5 年最低）与公司的真实业务增长（每个指标都创新高）形成<strong>鲜明反差</strong>。</p>
+
+      <h4>几个研判要点</h4>
+
+      <p><strong>一、Forward P/E 19.3x 是 5 年最低，且在 SaaS 头部公司中最便宜。</strong>对比同行：Salesforce P/E 25x、ServiceNow 60x、Workday 30x、Adobe 22x、Intuit 30x。<span class="hl-t">Veeva 是 SaaS 头部公司中估值最便宜，且利润率最高（44.9% Non-GAAP 营业利润率）的</span>。Forward P/E 19.3x 对应 FY27 共识 EPS $8.85，且 Veeva 5 年历史 P/E 区间 30-60x。<strong>剔除净金融资产 $6.46B 后，核心 P/E 仅 16x</strong>—— 一家 75% 毛利、44.9% 营业利润率、+13% 增长的 SaaS 龙头给 16x 是市场的明显错杀。</p>
+
+      <p><strong>二、Vault CRM 替换 Salesforce 是 SaaS 21 世纪最大颠覆案例。</strong>2022 年 Veeva 宣布自研 Vault CRM 时，市场普遍认为"难以替换 Salesforce"。<span class="hl-t">3 年后：125+ 客户上线、14/20 大型药企承诺（含辉瑞、强生、默克）、目标 FY30 完成 18-20/20</span>。这是 SaaS 行业 21 世纪以来最大的"颠覆战胜在位者"案例。<strong>Salesforce 失去最大客户群之一</strong>—— 生命科学行业曾是 Salesforce 在垂直领域最大的现金牛。</p>
+
+      <p><strong>三、AI Agents 战略落地是 FY27-30 最大期权价值。</strong>FY26 12 月发布首个 AI Agent for CRM，多个客户已上线。FY27 跨 R&D 平台扩展。<strong>AI 是 Veeva 价格上调的主要工具</strong>—— 每客户年消费可能从 $2M → $3-5M（+50-150%），不需新增客户。如果 AI Agents 商业化爆发（FY28-29 概率 30%），Veeva 可能重回 +20%+ 增长，估值从 P/E 19.3x → 35x，股价 $250-300 不是问题。</p>
+
+      <p><strong>四、护城河 A+ 级 + 财务 A+ 级 + 19 年创始人 CEO = 罕见的"高质量 SaaS 龙头"。</strong>5 维护城河综合：A+（转换成本）+ A（无形资产+监管合规）+ A-（成本优势）+ A-（有效规模）+ B+（网络效应）= 极宽护城河。Peter Gassner 19 年长期任职 + 持股 ~3% 利益绑定 + 拒绝横向扩张 + 战略克制。<span class="hl-t">这种"质量 A+ + 估值 5 年低位"组合是市场上极稀缺的</span>。</p>
+
+      <p><strong>五、12 个月目标价 $220，上行 +29%。</strong>悲观 $145（-15%，增速降至个位数 + AI 失败）、基准 $220（+29%，FY27 投资见效 + 持续 +13% 增长）、乐观 $280（+64%，AI 商业化爆发 + 大规模回购）。<strong>当前价 $170.88 距首仓 $176 已过</strong>，已位于"首仓"附近。海图的判断：未来 5 年预期年化回报 12-18%（含 EPS 增长 + 估值修复），<strong>这是 SaaS 头部公司中难得的"质量+估值"双低位机会</strong>。</p>
+
+      <h4>海图研判</h4>
+
+      <p><strong>评级：买入</strong>（高质量护城河 + 增长稳健 + 估值修复至 5 年低位的稀有组合）。12 个月概率加权目标价 <strong>$220</strong>（+29%）。</p>
+
+      <p>操作建议（独立估值中位数 $220，加权公允 $220）：当前价 $170.88 已位于"首仓"附近。建议首仓 $176（×80%·已过）、二仓 $154（×70%·距现价 -10%）、三仓 $132（×60%·极端机会）。止盈三档 $240 / $280 / $340，每档减仓 25%，最后 25% 作为"高质量 SaaS 长期持仓"长期持有。建议总仓位 <strong>5-10%</strong>（中等仓位 · 高质量 SaaS 龙头）。持有周期 5 年+。</p>
+
+      <h4>风险提示</h4>
+
+      <p>FY27-28 增速继续放缓至 8-10% / Microsoft+Salesforce AI 反击 / 美国药价改革深化 / AI 大模型商业化失败 / Peter Gassner 离任 / 制药行业研发支出下降——任一项都可能让股价回调 15-25%。但 $6.46B 净现金 + 75.5% 毛利率 + 44.9% 营业利润率 + 转换成本 A+ 级让破产概率为零，每股净资产 $44 提供 NAV 下限支撑。</p>
+
+      <p>关键叙事：<strong>"全球生命科学垂直 SaaS 龙头 + Vault CRM 完成替换 Salesforce + AI Agents 战略落地 + Forward P/E 19.3x 5 年最低 + 净现金 $6.46B + 创始人 19 年长期主义"的稀有组合</strong>。在 NVIDIA 估值过热、Meta 估值高位、ServiceNow P/E 60x 偏贵的当下，Veeva 是 SaaS 头部公司中"高质量 + 合理估值 + 长期成长"组合最佳的之一——不是给追求短期暴涨的人，而是给追求"长期持有 + 复利增长 + 行业垄断"的耐心价值投资者。下次催化剂：2026-05-27 Q1 FY2027 财报。</p>
+
+      <p class="haitu-sign">—— 海图，灯下落笔，明日再观风浪。</p>
+
+      <p class="haitu-disc">⚠️ 免责声明：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，不构成任何投资建议。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div>《海图夜读》 · Veeva Systems VEEV Q4 FY2026 海图研判</div>
+  <div style="margin-top:6px;">数据来源：Veeva Systems Q4 FY2026 财报新闻稿（PR Newswire 2026-03-04）+ 投资者关系页 + 电话会 + yfinance 实时市场数据</div>
+  <div style="margin-top:6px;">价值投资 · 长期主义</div>
+</footer>
+
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  const cur = html.getAttribute('data-theme');
+  html.setAttribute('data-theme', cur === 'dark' ? 'light' : 'dark');
+  localStorage.setItem('theme', html.getAttribute('data-theme'));
+  renderCharts();
+}
+(function() {
+  const t = localStorage.getItem('theme');
+  if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+})();
+
+function gc(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+
+let charts = {};
+function renderCharts() {
+  Object.values(charts).forEach(c => c && c.destroy && c.destroy());
+  charts = {};
+  const txt2 = gc('--text2'), txt3 = gc('--text3'), grid = gc('--chart-grid');
+  const accent = gc('--accent'), accent2 = gc('--accent2'), accent3 = gc('--accent3');
+  const green = gc('--green'), gold = gc('--gold'), rose = gc('--rose'), red = gc('--red');
+
+  Chart.defaults.color = txt2;
+  Chart.defaults.font.family = 'Segoe UI, sans-serif';
+  Chart.defaults.font.size = 11;
+
+  charts.rev = new Chart(document.getElementById('revenueChart'), {
+    type: 'bar',
+    data: { labels: ['Q4 FY25', 'Q1 FY26', 'Q2 FY26', 'Q3 FY26', 'Q4 FY26'],
+      datasets: [{ label: 'Revenue', data: [720.9, 759.0, 783.5, 816.8, 836.0], backgroundColor: [accent3, gold, accent2, accent, green], borderRadius: 4 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+      scales: { y: { grid: { color: grid }, ticks: { color: txt3 } }, x: { grid: { display: false }, ticks: { color: txt3 } } } }
+  });
+
+  charts.profit = new Chart(document.getElementById('profitChart'), {
+    type: 'line',
+    data: { labels: ['Q4 FY25', 'Q1 FY26', 'Q2 FY26', 'Q3 FY26', 'Q4 FY26'],
+      datasets: [{ label: 'Non-GAAP Op Margin %', data: [42.7, 45.5, 45.0, 45.4, 43.8], borderColor: green, backgroundColor: 'rgba(122,154,122,0.1)', tension: 0.3, fill: true, pointBackgroundColor: green, pointRadius: 5 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+      scales: { y: { grid: { color: grid }, ticks: { color: txt3 } }, x: { grid: { display: false }, ticks: { color: txt3 } } } }
+  });
+
+  charts.seg = new Chart(document.getElementById('segmentChart'), {
+    type: 'doughnut',
+    data: { labels: ['R&D 云 1,748', '商业云 1,447'],
+      datasets: [{ data: [1748, 1447], backgroundColor: [accent3, accent], borderColor: gc('--card'), borderWidth: 2 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { color: txt2, font: { size: 11 } } } } }
+  });
+
+  charts.capex = new Chart(document.getElementById('capexChart'), {
+    type: 'bar',
+    data: { labels: ['FY22', 'FY23', 'FY24', 'FY25', 'FY26'],
+      datasets: [
+        { label: '营收 ($M)', data: [1850, 2155, 2364, 2755, 3195], backgroundColor: green, borderRadius: 4 },
+        { label: 'Non-GAAP 净利 ($M)', data: [620, 700, 850, 1090, 1353], backgroundColor: gold, borderRadius: 4 }
+      ] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top', labels: { color: txt2, font: { size: 11 } } } },
+      scales: { y: { grid: { color: grid }, ticks: { color: txt3 } }, x: { grid: { display: false }, ticks: { color: txt3 } } } }
+  });
+
+  buildSankey();
+}
+
+function buildSankey() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const txt = isDark ? '#d4ccc4' : '#4a4340';
+  const cardBg = isDark ? '#2e2a25' : '#ffffff';
+
+  const sankeyData = [{
+    type: 'sankey', orientation: 'h', arrangement: 'snap', valueformat: ',.0f', valuesuffix: ' M',
+    node: {
+      pad: 22, thickness: 22, line: { color: 'transparent', width: 0 },
+      label: ['总营收 3,195', '营业成本 782', '毛利 2,413', '研发 770', '销售 590', '管理 137', 'GAAP 营业利润 916', '所得税+其他 -7', 'GAAP 净利 909', '非现金调整 +506', '经营现金流 1,415', 'Capex 29', '自由现金流 1,386'],
+      color: ['#7b8fa0', '#b87070', '#8a9a8e', '#b9a06a', '#c09090', '#a89f98', '#b08d7a', '#b87070', '#7a9a7a', '#7b8fa0', '#b08d7a', '#b87070', '#7a9a7a']
+    },
+    link: {
+      source: [0, 0, 2, 2, 2, 2, 6, 6, 8, 9, 10, 10],
+      target: [1, 2, 3, 4, 5, 6, 7, 8, 10, 10, 11, 12],
+      value:  [782, 2413, 770, 590, 137, 916, 7, 909, 909, 506, 29, 1386],
+      color: ['rgba(184,112,112,0.30)', 'rgba(138,154,142,0.45)', 'rgba(185,160,106,0.30)', 'rgba(192,144,144,0.30)', 'rgba(168,159,152,0.30)', 'rgba(176,141,122,0.45)', 'rgba(184,112,112,0.30)', 'rgba(122,154,122,0.45)', 'rgba(122,154,122,0.40)', 'rgba(123,143,160,0.40)', 'rgba(184,112,112,0.30)', 'rgba(122,154,122,0.50)']
+    }
+  }];
+
+  const layout = { font: { family: 'Segoe UI, sans-serif', size: 11, color: txt }, paper_bgcolor: cardBg, plot_bgcolor: cardBg, margin: { l: 10, r: 10, t: 10, b: 10 } };
+  Plotly.react('sankey', sankeyData, layout, { displayModeBar: false, responsive: true });
+}
+
+document.addEventListener('DOMContentLoaded', renderCharts);
+</script>
+
+</body>
+</html>
