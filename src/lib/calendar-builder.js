@@ -3,17 +3,17 @@ import { logger } from './logger.js';
 /**
  * 把 yfinance fetch 结果 + tickers.json 转成日历事件数组。
  *
- * 时间窗口：过去 7 天 + 全部未来。
+ * 时间窗口：过去 30 天 + 全部未来。
  * 事件类型：earnings | ex-div | payment（match index.html 现有 type 集）
  *
- * 同时保留"已发布的最近一次财报 + 派息已发"事件 7 天内（标记 已发 / 已过）。
+ * 同时保留"已发布的最近一次财报 + 派息已发"事件 30 天内（标记 已发 / 已过）。
  */
 export function buildCalendar(fetchResults, todayStr) {
   const events = [];
   const todayDate = new Date(todayStr);
-  const sevenDaysAgo = new Date(todayDate);
-  sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
-  const sevenAgoStr = sevenDaysAgo.toISOString().slice(0, 10);
+  const pastCutoff = new Date(todayDate);
+  pastCutoff.setDate(pastCutoff.getDate() - 30);
+  const sevenAgoStr = pastCutoff.toISOString().slice(0, 10);
 
   for (const { ticker, data } of fetchResults) {
     if (!data) continue;
@@ -59,7 +59,7 @@ export function buildCalendar(fetchResults, todayStr) {
       });
     }
 
-    // ── 2. 上次财报（如果还在 7 天窗口内）──
+    // ── 2. 上次财报（如果还在 30 天窗口内）──
     if (
       data.lastEarningsDate &&
       data.lastEarningsDate >= sevenAgoStr &&

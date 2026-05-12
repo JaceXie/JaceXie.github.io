@@ -8,7 +8,7 @@
  * 1. 加载 data/tickers.json
  * 2. 并行调用 yfinance Python 脚本拉取每个 ticker 的财报/派息日期
  * 3. 检测新财报 → pending.json + 桌面通知
- * 4. 构建日历事件（窗口：过去 7 天 + 全部未来）
+ * 4. 构建日历事件（窗口：过去 30 天 + 全部未来）
  * 5. 注入 index.html 三处 marker
  * 6. 如有 git diff，commit + push
  *
@@ -93,7 +93,7 @@ async function main() {
   }
 
   // 4. 构建日历
-  logger.step('Building calendar (window: -7d to future)');
+  logger.step('Building calendar (window: -30d to future)');
   const calendarEvents = buildCalendar(fetchResults, today);
 
   // 5. 注入 index.html
