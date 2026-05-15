@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-05-13，基于中国移动 FY2025 年报（2026-03-27 发布）+ Q1 2026 季报（2026-04-20 发布）-->
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中国移动 China Mobile 0941 Q1 2026 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root {
+  --bg: #f5f0eb; --bg2: #ece6df; --card: #ffffff; --card2: #f8f5f1; --border: #d9d0c7;
+  --text: #4a4340; --text2: #7a706a; --text3: #a89f98;
+  --accent: #8a9a8e; --accent2: #7b8fa0; --accent3: #b08d7a;
+  --rose: #c09090; --gold: #b9a06a; --red: #b87070; --green: #7a9a7a;
+  --shadow: rgba(0,0,0,0.06); --chart-grid: #e5ddd5;
+}
+[data-theme="dark"] {
+  --bg: #1e1c1a; --bg2: #28251f; --card: #2e2a25; --card2: #363230; --border: #4a4540;
+  --text: #d4ccc4; --text2: #a09890; --text3: #706860;
+  --accent: #8a9a8e; --accent2: #8fabbf; --accent3: #c9a48e;
+  --rose: #c09090; --gold: #c9b07a; --red: #c08080; --green: #8aaa8a;
+  --shadow: rgba(0,0,0,0.3); --chart-grid: #3e3a35;
+}
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Georgia','Noto Serif SC','PingFang SC',serif; line-height: 1.75; font-size: 14.5px; transition: background .35s, color .35s; }
+a { color: var(--accent2); text-decoration: none; }
+.theme-bar { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); }
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; text-decoration: none; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+.toggle-switch { position: relative; width: 44px; height: 22px; background: var(--border); border-radius: 11px; cursor: pointer; transition: background .3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: var(--card); border-radius: 50%; transition: transform .3s; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+.hero { padding: 48px 24px 36px; text-align: center; border-bottom: 1px solid var(--border); }
+.hero-tag { display: inline-block; font-family: 'Segoe UI',sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 3px 14px; border-radius: 20px; margin-bottom: 18px; }
+.hero h1 { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.pill { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: 'Segoe UI',sans-serif; font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow); }
+.pill strong { color: var(--text); }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle { font-size: 18px; font-weight: 700; color: var(--accent3); margin-bottom: 20px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+.stitle::before { content: ''; display: block; width: 4px; height: 20px; background: var(--accent3); border-radius: 2px; }
+.haitu-quip { display: flex; align-items: center; gap: 18px; background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--green); border-radius: 12px; padding: 18px 24px; margin: 24px 0; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-quote { flex: 1; }
+.haitu-portrait { font-size: 15px; line-height: 1.65; color: var(--text); margin-bottom: 6px; font-weight: 600; }
+.haitu-rating-line { font-size: 13px; color: var(--text2); font-family: 'Segoe UI',sans-serif; }
+.rating-badge { display: inline-block; padding: 2px 12px; border-radius: 12px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; margin-left: 4px; }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+.rating-cond-buy { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-hold { background: rgba(123,143,160,.18); color: var(--accent2); }
+.haitu-essay { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 28px 32px; margin: 24px 0 20px; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-essay-header { display: flex; align-items: center; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.haitu-avatar-sm { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); background: var(--red); box-shadow: 0 2px 8px rgba(184,112,112,0.2); }
+.haitu-name-lg { font-family: 'Georgia','Noto Serif SC',serif; font-size: 28px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 4px; }
+.haitu-essay-tag { font-family: 'Segoe UI',sans-serif; font-size: 12px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; }
+.haitu-essay-body { font-family: 'Georgia','Noto Serif SC',serif; font-size: 15px; line-height: 2.0; color: var(--text); }
+.haitu-essay-body p { margin-bottom: 14px; }
+.haitu-essay-body p.lead { font-size: 16px; font-style: italic; color: var(--text2); margin-bottom: 18px; }
+.haitu-essay-body strong { color: var(--text); font-weight: 700; }
+.haitu-essay-body h4 { font-size: 14px; color: var(--accent3); margin: 18px 0 10px; font-family: 'Segoe UI',sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+.haitu-sign { text-align: right; margin-top: 18px; font-family: 'Georgia',serif; font-size: 14px; color: var(--text2); font-style: italic; }
+.haitu-disc { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); font-style: italic; line-height: 1.7; }
+.stock-snap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill,minmax(160px,1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px; }
+.snap-item { text-align: center; }
+.snap-label { font-family: 'Segoe UI',sans-serif; font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.snap-val { font-family: 'Segoe UI',sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+.snap-val.up { color: var(--green); }
+.snap-val.dn { color: var(--red); }
+.snap-sub { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text3); margin-top: 2px; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(195px,1fr)); gap: 14px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow); }
+.kpi-l { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.kpi-v.up { color: var(--green); }
+.kpi-v.dn { color: var(--red); }
+.badge { display: inline-block; font-family: 'Segoe UI',sans-serif; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+.up { background: rgba(122,154,122,.15); color: var(--green); }
+.dn { background: rgba(184,112,112,.15); color: var(--red); }
+.nt { background: rgba(123,143,160,.15); color: var(--accent2); }
+.tbl-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow); }
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI',sans-serif; font-size: 13px; }
+.tbl th { background: var(--card2); color: var(--text3); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); background: var(--card2); }
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); }
+.ctitle { font-size: 13px; color: var(--text2); margin-bottom: 12px; font-weight: 600; }
+.cwrap { position: relative; height: 240px; }
+.cmt { font-size: 14px; color: var(--text2); line-height: 1.85; }
+.cmt p { margin-bottom: 12px; }
+.cmt strong { color: var(--text); }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+.bscore { display: flex; gap: 16px; padding: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 12px; box-shadow: 0 1px 4px var(--shadow); }
+.bscore .circle { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; color: white; flex-shrink: 0; }
+.cg { background: var(--green); }
+.cw { background: var(--gold); }
+.co { background: var(--rose); }
+.cr { background: var(--red); }
+.cb { background: var(--accent2); }
+.bd h4 { font-size: 14px; color: var(--text); margin-bottom: 6px; font-family: 'Segoe UI',sans-serif; letter-spacing: 0.5px; }
+.bd p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+.pgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.dcf-note { background: var(--card2); border-left: 3px solid var(--accent2); padding: 14px 18px; border-radius: 6px; font-size: 13.5px; color: var(--text2); line-height: 1.85; }
+.dcf-note p { margin-bottom: 8px; }
+.dcf-note strong { color: var(--text); }
+.tag-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap: 12px; margin-top: 14px; }
+.tag-card { background: var(--card); border: 1px solid var(--border); border-left: 3px solid var(--accent2); padding: 12px 16px; border-radius: 6px; }
+.tag-card.pos { border-left-color: var(--green); }
+.tag-card.neg { border-left-color: var(--red); }
+.tag-card.neu { border-left-color: var(--accent2); }
+.tag-card h5 { font-size: 13px; color: var(--text); margin-bottom: 6px; font-family: 'Segoe UI',sans-serif; }
+.tag-card p { font-size: 12px; color: var(--text2); line-height: 1.7; }
+.tag-card .tag-bd { font-family: 'Segoe UI',sans-serif; font-size: 10px; padding: 1px 6px; border-radius: 4px; margin-left: 4px; }
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap: 12px; }
+.risk-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 14px 18px; position: relative; box-shadow: 0 1px 3px var(--shadow); }
+.risk-card::before { content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent); }
+.risk-card.r1::before { background: var(--green); }
+.risk-card.r2::before { background: rgba(122,154,122,.6); }
+.risk-card.r3::before { background: var(--gold); }
+.risk-card.r4::before { background: var(--rose); }
+.risk-card.r5::before { background: var(--red); }
+.risk-card h5 { font-size: 14px; margin-bottom: 6px; color: var(--text); }
+.risk-score { font-family: 'Segoe UI',sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.r1 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r2 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r3 .risk-score { background: rgba(185,160,106,.18); color: var(--gold); }
+.r4 .risk-score { background: rgba(192,144,144,.18); color: var(--rose); }
+.r5 .risk-score { background: rgba(184,112,112,.18); color: var(--red); }
+.risk-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+footer { background: var(--card2); border-top: 1px solid var(--border); padding: 24px; text-align: center; color: var(--text3); font-size: 12px; margin-top: 40px; line-height: 1.8; }
+@media (max-width: 768px) { .cgrid,.pgrid { grid-template-columns: 1fr; } .hero h1 { font-size: 22px; } .kpi-grid { grid-template-columns: 1fr 1fr; } .stock-snap { grid-template-columns: 1fr 1fr; } .haitu-essay-header { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/00941" target="_blank" rel="noopener" title="在雪球查看 中国移动 实时行情">雪球 00941</a>
+  </div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">FY2025 财报发布 · 2026-03-27 &nbsp;|&nbsp; Q1 2026 财报发布 · 2026-04-20 &nbsp;|&nbsp; 海图研判 · 2026-05-13</div>
+  <h1>中国移动 China Mobile 0941 · Q1 2026 深度分析</h1>
+  <div class="hero-sub">HKEX: 0941 / SH: 600941 &nbsp;|&nbsp; 中国最大通信运营商 · 5G 客户 6.22 亿 · 全年股息 HKD 5.27(+3.5%) · 经营现金流 +128% · 增值税短期冲击但主业稳定 &nbsp;|&nbsp; 价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill">H 股 <strong>HKD 86.40</strong></div>
+    <div class="pill">A 股 <strong>¥98.95</strong></div>
+    <div class="pill">市值 <strong>HKD 1.87 万亿</strong></div>
+    <div class="pill">Q1 净利 <strong>¥293亿(-4.2%)</strong></div>
+    <div class="pill">股息率 <strong>6.10%</strong></div>
+    <div class="pill">海图研判 <strong>买入</strong></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 海图页首短评 ═══ -->
+<div class="haitu-quip">
+  <div class="haitu-quote">
+    <div class="haitu-portrait">中国最大通信运营商——5G 套餐客户 6.22 亿 + 移动客户 ~10 亿 + 数字化业务 +12.7% + 净现金 ¥2,428 亿。<strong>FY2025 营收 +1% / 营运利润 +4.4% / 归母净利 ¥1,371 亿（同口径 +2.0%）</strong>。Q1 2026 净利 -4.2% 主因增值税 6%→9% 政策冲击（行业性 / 一次性），但经营现金流 +128% 显示底层经营持续改善。<strong>市值 HKD 1.87 万亿 / TTM P/E 11.9x / PB 1.14x / 股息率 6.10%（全年 HKD 5.27/股）/ 派息率 74%</strong>——港股大蓝筹中最稀有的"高股息债券替代品"。下次催化剂：2026-08 中报。</div>
+    <div class="haitu-rating-line">评级：<span class="rating-badge rating-buy">买入</span> · 12 个月目标价 HKD 100（+16%）· 6.10% 股息率 + 5G 渗透 + 数字化转型 + 行业寡头 + AH 折价 24% 的五轮组合</div>
+  </div>
+</div>
+
+<!-- ═══ 市场数据快照 ═══ -->
+<div class="section">
+  <div class="stitle">市场数据快照（2026-05-13）· 货币：HKD/RMB ≈ 0.92</div>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">H 股股价</div><div class="snap-val">HKD 86.40</div><div class="snap-sub">2026-05-12 收盘</div></div>
+    <div class="snap-item"><div class="snap-label">A 股股价</div><div class="snap-val">¥98.95</div><div class="snap-sub">SH: 600941</div></div>
+    <div class="snap-item"><div class="snap-label">市值（H 股）</div><div class="snap-val">HKD 1.87 万亿</div><div class="snap-sub">~¥1.72 万亿</div></div>
+    <div class="snap-item"><div class="snap-label">总市值（A+H）</div><div class="snap-val">~¥2.13 万亿</div><div class="snap-sub">总股本 ~213 亿股</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间（H）</div><div class="snap-val">HKD 75.85-90.60</div><div class="snap-sub">距高点 -4.6% / 距低点 +14%</div></div>
+    <div class="snap-item"><div class="snap-label">TTM P/E (H)</div><div class="snap-val up">11.88x</div><div class="snap-sub">vs A 股 15.71x</div></div>
+    <div class="snap-item"><div class="snap-label">Forward P/E (H)</div><div class="snap-val up">11.24x</div><div class="snap-sub">FY27 共识</div></div>
+    <div class="snap-item"><div class="snap-label">P/B (H)</div><div class="snap-val up">1.14x</div><div class="snap-sub">每股净资产 HKD 76.0</div></div>
+    <div class="snap-item"><div class="snap-label">EV/EBITDA</div><div class="snap-val up">~5.5x</div><div class="snap-sub">EBITDA ¥2,798 亿</div></div>
+    <div class="snap-item"><div class="snap-label">股息率 (H)</div><div class="snap-val up">6.10%</div><div class="snap-sub">全年 HKD 5.27/股</div></div>
+    <div class="snap-item"><div class="snap-label">股息率 (A)</div><div class="snap-val">5.08%</div><div class="snap-sub">A 股溢价压低收益率</div></div>
+    <div class="snap-item"><div class="snap-label">FCF Yield (TTM)</div><div class="snap-val up">9.3%</div><div class="snap-sub">FCF ¥1,556 亿</div></div>
+    <div class="snap-item"><div class="snap-label">毛利率</div><div class="snap-val">28.4%</div><div class="snap-sub">通信行业典型</div></div>
+    <div class="snap-item"><div class="snap-label">净利率</div><div class="snap-val">12.9%</div><div class="snap-sub">FY25 利润率</div></div>
+    <div class="snap-item"><div class="snap-label">ROE</div><div class="snap-val">9.64%</div><div class="snap-sub">稳定</div></div>
+    <div class="snap-item"><div class="snap-label">真实净现金</div><div class="snap-val up">¥2,428亿</div><div class="snap-sub">$337亿 / 占市值 14%</div></div>
+    <div class="snap-item"><div class="snap-label">AH 折溢价</div><div class="snap-val up">H 折价 -24%</div><div class="snap-sub">港股投资者优势</div></div>
+    <div class="snap-item"><div class="snap-label">下次财报</div><div class="snap-val nt">2026-08 中</div><div class="snap-sub">H1 2026 中报</div></div>
+  </div>
+</div>
+
+<!-- ═══ Q1 2026 KPI ═══ -->
+<div class="section">
+  <div class="stitle">Q1 2026 季度业绩（2026-04-20 发布 · 增值税冲击 + OCF +128% 大涨）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">Q1 营业收入</div><div class="kpi-v up">¥2,665亿</div><span class="badge up">+1.0% YoY</span><div class="kpi-l" style="margin-top:6px">$370亿 / 主业承压但 OCF 大涨</div></div>
+    <div class="kpi"><div class="kpi-l">Q1 主营业务收入</div><div class="kpi-v dn">¥2,199亿</div><span class="badge dn">-1.1% YoY</span><div class="kpi-l" style="margin-top:6px">通信主业小幅下滑</div></div>
+    <div class="kpi"><div class="kpi-l">Q1 其他业务收入</div><div class="kpi-v up">¥466亿</div><span class="badge up">+12.7% YoY</span><div class="kpi-l" style="margin-top:6px">数字化业务(移动云+AI)驱动</div></div>
+    <div class="kpi"><div class="kpi-l">Q1 归母净利</div><div class="kpi-v dn">¥293亿</div><span class="badge dn">-4.2% YoY</span><div class="kpi-l" style="margin-top:6px">增值税 6%→9% 政策冲击</div></div>
+    <div class="kpi"><div class="kpi-l">Q1 EBITDA</div><div class="kpi-v dn">¥767亿</div><span class="badge dn">-5.0% YoY</span><div class="kpi-l" style="margin-top:6px">EBITDA 率 34.9%</div></div>
+    <div class="kpi"><div class="kpi-l">Q1 经营现金流</div><div class="kpi-v up">¥714亿</div><span class="badge up">+128.1% YoY</span><div class="kpi-l" style="margin-top:6px">现金流大幅改善</div></div>
+    <div class="kpi"><div class="kpi-l">Q1 净利率</div><div class="kpi-v">11.0%</div><span class="badge dn">vs Q1 25 11.6%</span><div class="kpi-l" style="margin-top:6px">同比 -0.6pp</div></div>
+    <div class="kpi"><div class="kpi-l">Q1 EPS</div><div class="kpi-v dn">¥1.38</div><span class="badge dn">-4.2% YoY</span><div class="kpi-l" style="margin-top:6px">~HKD 1.50</div></div>
+    <div class="kpi"><div class="kpi-l">下次财报</div><div class="kpi-v nt">2026-08 中</div><span class="badge nt">H1 2026 中报</span><div class="kpi-l" style="margin-top:6px">中期股息公告</div></div>
+  </div>
+
+  <div class="dcf-note" style="margin-top:18px">
+    <strong>Q1 2026 关键洞察 · 增值税"一次性"冲击 + 现金流强劲：</strong>
+    <p style="margin-top:8px">(1) <strong>营收 +1.0% / 主营 -1.1% / 数字化业务 +12.7%</strong>—— 显示三大趋势：传统通信主业小幅压力 + 数字化业务（移动云、AI、政企）双位数增长 + 整体营收勉强保持正增长；(2) <span class="hl-t">净利 -4.2% 主因增值税率从 6% 上调至 9%</span>（2026-01-01 起对整个通信行业一次性影响）—— 这与中国电信 Q1 -17.1% 同一原因，但中国移动因主营基数大、其他业务占比上升，受冲击较小；(3) <strong>经营现金流 +128.1% 是最大亮点</strong>—— 反映应收账款回款改善 + 客户预付增加，是"现金为王"叙事的体现；(4) Q1 是季节性低点（春节假期），下半年 H1 中报+全年才是关键；(5) 海图判断：<strong>FY26 全年净利可能 -5% 至 -8%，但 FY27 增值税基数效应消退后回到 +2-4% 正增长</strong>。
+  </div>
+</div>
+
+<!-- ═══ FY2025 全年回顾 ═══ -->
+<div class="section">
+  <div class="stitle">FY2025 全年（2026-03-27 发布）回顾</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">FY25 营业收入</div><div class="kpi-v up">¥10,440亿</div><span class="badge up">+1% YoY 估</span><div class="kpi-l" style="margin-top:6px">$1,450亿 / 历史新高</div></div>
+    <div class="kpi"><div class="kpi-l">FY25 营运利润</div><div class="kpi-v up">¥1,489亿</div><span class="badge up">+4.4% YoY</span><div class="kpi-l" style="margin-top:6px">运营效率提升</div></div>
+    <div class="kpi"><div class="kpi-l">FY25 归母净利</div><div class="kpi-v">¥1,371亿</div><span class="badge nt">-0.9% (同口径 +2.0%)</span><div class="kpi-l" style="margin-top:6px">$190亿 / 调整口径增长</div></div>
+    <div class="kpi"><div class="kpi-l">FY25 末期股息</div><div class="kpi-v up">HKD 2.52/股</div><span class="badge up">已宣布</span><div class="kpi-l" style="margin-top:6px">除息 2026-05-29</div></div>
+    <div class="kpi"><div class="kpi-l">FY25 全年股息</div><div class="kpi-v up">HKD 5.27/股</div><span class="badge up">+3.5% YoY</span><div class="kpi-l" style="margin-top:6px">中期 HKD 2.75 + 末期 HKD 2.52</div></div>
+    <div class="kpi"><div class="kpi-l">FY25 派息率</div><div class="kpi-v up">~74%</div><span class="badge up">高派息纪律</span><div class="kpi-l" style="margin-top:6px">¥1,015亿 / ¥1,371亿</div></div>
+    <div class="kpi"><div class="kpi-l">FY25 Capex</div><div class="kpi-v up">¥1,509亿</div><span class="badge up">-8.0% YoY</span><div class="kpi-l" style="margin-top:6px">5G 建设高峰已过</div></div>
+    <div class="kpi"><div class="kpi-l">FY25 5G 套餐客户</div><div class="kpi-v up">6.22亿户</div><span class="badge up">+15%+ YoY</span><div class="kpi-l" style="margin-top:6px">渗透率创新高</div></div>
+    <div class="kpi"><div class="kpi-l">FY25 移动 ARPU</div><div class="kpi-v">¥48.0/月</div><span class="badge nt">小幅承压</span><div class="kpi-l" style="margin-top:6px">数字化客户高 ARPU</div></div>
+    <div class="kpi"><div class="kpi-l">FY25 总移动客户</div><div class="kpi-v up">~10亿户</div><span class="badge up">行业第一</span><div class="kpi-l" style="margin-top:6px">市占 ~57%</div></div>
+    <div class="kpi"><div class="kpi-l">FY25 宽带客户</div><div class="kpi-v up">~3.2亿户</div><span class="badge up">+3% YoY</span><div class="kpi-l" style="margin-top:6px">家庭/政企双轨</div></div>
+    <div class="kpi"><div class="kpi-l">FY26 共识全年净利</div><div class="kpi-v dn">~¥1,290亿</div><span class="badge dn">-6%（增值税冲击）</span><div class="kpi-l" style="margin-top:6px">FY27 共识反弹至 ¥1,400亿</div></div>
+  </div>
+</div>
+
+<!-- ═══ 季度趋势 ═══ -->
+<div class="section">
+  <div class="stitle">季度趋势 + 5 年总览</div>
+  <div class="cgrid">
+    <div class="ccard">
+      <div class="ctitle">5 季度营收趋势（¥亿）</div>
+      <div class="cwrap"><canvas id="revenueChart"></canvas></div>
+    </div>
+    <div class="ccard">
+      <div class="ctitle">5 季度归母净利趋势（¥亿）</div>
+      <div class="cwrap"><canvas id="profitChart"></canvas></div>
+    </div>
+    <div class="ccard">
+      <div class="ctitle">FY2025 业务结构（¥亿）</div>
+      <div class="cwrap"><canvas id="segmentChart"></canvas></div>
+    </div>
+    <div class="ccard">
+      <div class="ctitle">5 年股息+派息率（HKD/股 · %）</div>
+      <div class="cwrap"><canvas id="capexChart"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ Sankey ═══ -->
+<div class="section">
+  <div class="stitle">Q1 2026 资金流向 · 营收 → 经营现金流（¥ 亿）</div>
+  <div class="ccard">
+    <div class="ctitle">从 ¥2,665 亿单季营收到 ¥714 亿经营现金流的完整链路（OCF +128% 大涨）</div>
+    <div id="sankey" style="width:100%;height:480px;"></div>
+  </div>
+</div>
+
+<!-- ═══ 模块 1 ═══ -->
+<div class="section">
+  <div class="stitle">模块 1 · 公司概览与背景</div>
+  <div class="cmt">
+    <p><strong>公司全称</strong>：中国移动通信集团有限公司（控股母公司）/ 中国移动有限公司（上市主体）<br>
+    <strong>上市</strong>：HKEX: 0941（1997-10-23 港股上市，发行价 HKD 11.68）+ SH: 600941（2022-01-05 A 股回归，发行价 ¥57.58）<br>
+    <strong>总部</strong>：北京<br>
+    <strong>财年</strong>：1 月 1 日 - 12 月 31 日<br>
+    <strong>主营</strong>：移动通信（10 亿+ 客户）+ 宽带（3.2 亿户）+ 政企业务（中国 5G 政企第一）+ 数字化业务（移动云 + AI + 中国算力网络）+ 国际业务</p>
+
+    <p><strong>核心叙事</strong>：中国移动是<span class="hl-t">中国最大、全球第二大通信运营商</span>（按用户数）。<strong>本身就是中国 5G + 算力 + 数字化基础设施的"国家级骨干"</strong>。FY2025 营业收入 ¥10,440 亿、归母净利 ¥1,371 亿（同口径 +2.0%）、5G 套餐客户 6.22 亿（渗透率 62%+）、年度股息 HKD 5.27/股（+3.5%）、派息率 ~74%。Q1 2026 净利 -4.2% 主要因增值税 6%→9% 政策一次性冲击（行业性），但经营现金流 +128% 显示底层经营持续改善。<strong>当前 H 股 HKD 86.40 距 52 周高 HKD 90.60 仅 -4.6%</strong>，但股息率仍 6.10% + AH 折价 24%——是"债券化大蓝筹"的最佳代表之一。</p>
+
+    <p><strong>简史与里程碑</strong>：</p>
+    <p>
+      <strong>1. 1997-10-23 港股上市</strong>——HKEX: 0941，发行价 HKD 11.68，发行 H 股 33.32 亿股<br>
+      <strong>2. 2000-2010 黄金十年</strong>——从 GSM 到 3G，移动客户从 0.8 亿增至 5.6 亿<br>
+      <strong>3. 2014-04 启动 4G 商用</strong>——TD-LTE，全球最大 4G 网络<br>
+      <strong>4. 2019-06 颁发 5G 牌照</strong>——全球最早商用 5G 国家之一<br>
+      <strong>5. 2022-01-05 A 股回归</strong>——SH: 600941，发行价 ¥57.58<br>
+      <strong>6. 2023-2025 5G + 算力网络战略</strong>——"东数西算" + 移动云 + AI 大模型<br>
+      <strong>7. 2025-12 5G 套餐客户破 6.22 亿</strong>——渗透率超 60%<br>
+      <strong>8. 2026-01 增值税率从 6% 调整至 9%</strong>——行业性政策冲击<br>
+      <strong>9. 2026-04-20 Q1 2026 财报</strong>——OCF +128% / 净利 -4.2%
+    </p>
+
+    <p><strong>股权结构（2025-12-31 末）</strong>：</p>
+    <p>
+      <strong>中国移动通信集团（母公司）</strong>——~70.9% 股权（国资委 100% 控股）<br>
+      <strong>香港公众股东（H 股）</strong>——~14% H 股流通<br>
+      <strong>A 股公众股东</strong>——~15.1% A 股流通<br>
+      <strong>总股本约 213.7 亿股</strong>（H 股 ~205 亿 + A 股 ~9 亿）<br>
+      <strong>注</strong>：H 股流通盘占比远超 A 股，使港股是中国移动主要的国际资本通道。<strong>南向资金通过港股通持有比例已超 15%</strong>
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 模块 2 ═══ -->
+<div class="section">
+  <div class="stitle">模块 2 · 管理层评估</div>
+
+  <div class="bscore">
+    <div class="circle cw">B+</div>
+    <div class="bd">
+      <h4>杨杰 · 董事长（2018-至今 · 国资委轮换制）</h4>
+      <p>1962 年生，国资委 5 年轮换制下任期较长（2018-至今）。前中国电信总经理，行业资深。<strong>主导了 5G 商用、A 股回归、算力网络战略、提升派息率从 50% → 74%</strong>。海图判断：<span class="hl-t">杨杰是国企最务实的"长期规划者"</span>—— 把中国移动从"传统通信运营商"转型为"数字化+算力基础设施服务商"。但创新决策仍受国资委顶层架构影响。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>资本配置纪律 · 行业最高派息</h4>
+      <p>
+      <strong>FY25 派息率 74%（HKD 5.27/股 / EPS ~HKD 7.10）</strong>——比 FY21 50% 提升 24pp，<strong>是中国国企中派息率提升最快的之一</strong>。<br>
+      <strong>5 年股息 CAGR ~10%</strong>——HKD 3.30 (FY20) → HKD 5.27 (FY25)<br>
+      <strong>Capex 高峰已过</strong>：FY24 ¥1,640 亿 → FY25 ¥1,509 亿（-8%）→ FY26 指引 ¥1,400 亿。这意味着 FCF 持续释放，未来派息率可能进一步提升至 80%+<br>
+      <strong>主动剥离</strong>：缩减低 ROIC 业务，聚焦数字化和算力网络<br>
+      <span class="warn-t">不足之处</span>：未启动股票回购计划（国企限制）、A 股发行后 IPO 资金运用相对保守。
+      </p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>战略执行能力 · 数字化转型 + 算力网络</h4>
+      <p>5 大战略支柱兑现：(1) <strong>5G 套餐客户 6.22 亿创纪录</strong>；(2) 移动云保持高速增长（具体数字未披露但占其他业务大头）；(3) 政企客户突破 2,910 万户（FY25 +18%）；(4) 国际业务"一带一路"扩张；(5) AI 大模型"九天"在政企场景落地。<span class="hl-t">海图判断：中国移动是"通信运营商 → 数字化基础设施运营商"转型最成功的</span>。Q1 数字化 +12.7% vs 主业 -1.1% 已证明转型正在兑现。</p>
+    </div>
+  </div>
+
+  <div class="cmt">
+    <p><strong>长期主义测试</strong>：3 年前（FY22 财报）管理层承诺"派息率提升 + Capex 下降 + 数字化转型 + 政企突破"——3 年后<span class="hl-t">每一项都超额兑现</span>：派息率 FY22 70% → FY25 74%（+4pp）、Capex FY22 1,852 亿 → FY25 1,509 亿（-18%）、数字化业务 FY22 ~¥1,500 亿 → FY25 ~¥2,000 亿（+33%）、政企客户 FY22 1,800 万 → FY25 2,910 万（+62%）。<strong>言行一致度极高</strong>。</p>
+
+    <p><strong>薪酬与利益绑定</strong>：管理层薪酬遵循国企"限薪令"，董事长年薪 ~¥120 万 + 业绩奖金。<span class="warn-t">激励机制弱</span>，但战略执行力强。无管理层持股或股权激励——这是国企治理通病。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 3 ═══ -->
+<div class="section">
+  <div class="stitle">模块 3 · 商业模式深度解析</div>
+
+  <div class="cmt">
+    <p><strong>海图"一句话测试"</strong>：<span class="hl-t">向中国 10 亿+ 移动客户和 3.2 亿宽带家庭提供通信服务（移动+宽带）+ 向 2,910 万政企客户提供数字化解决方案（移动云+AI+算力网络），靠月套餐费+流量费+宽带费+企业服务费多元变现，FY25 营收 ¥10,440 亿、净利 ¥1,371 亿、净利率 13%、股息率 6.1%。</span></p>
+
+    <p><strong>FY2025 收入模型与分部拆解</strong>：</p>
+    <table class="tbl"><thead><tr><th>分部</th><th>FY25 营收(¥亿)</th><th>占比</th><th>YoY</th><th>毛利率</th><th>战略地位</th></tr></thead>
+    <tbody>
+      <tr><td>个人市场（移动通信）</td><td>~5,400</td><td>52%</td><td>+0%</td><td>~30%</td><td>★★★★★ 现金奶牛</td></tr>
+      <tr><td>家庭市场（宽带）</td><td>~1,400</td><td>13%</td><td>+5%</td><td>~25%</td><td>★★★★ 稳定增长</td></tr>
+      <tr><td>政企市场（数字化）</td><td>~2,500</td><td>24%</td><td>+10%</td><td>~25%</td><td>★★★★★ 增长引擎</td></tr>
+      <tr><td>新兴市场（国际+创新）</td><td>~700</td><td>7%</td><td>+15%</td><td>~30%</td><td>★★★ 长期布局</td></tr>
+      <tr><td>销售商品及其他</td><td>~440</td><td>4%</td><td>持平</td><td>~5%</td><td>★ 终端销售</td></tr>
+      <tr class="hl"><td>合计</td><td>10,440</td><td>100%</td><td>+1%</td><td>~28.4%</td><td>—</td></tr>
+    </tbody></table>
+
+    <p style="margin-top:14px"><strong>单位经济（Unit Economics）</strong>：</p>
+    <p>
+      <strong>每移动用户 ARPU</strong>：¥48/月 × 12 月 = ¥576/年。10 亿移动用户 → 移动业务营收 ¥5,400+ 亿，吻合。<br>
+      <strong>每宽带户 ARPU</strong>：~¥40/月。3.2 亿用户 × 12 月 = ¥1,400 亿，吻合。<br>
+      <strong>每政企客户营收</strong>：¥2,500 亿 / 2,910 万 = ¥8.6 万/客户/年。<br>
+      <strong>5G 客户增量价值</strong>：5G ARPU 比 4G 高 ~15%，6.22 亿 5G 套餐客户带来的"质量提升"效应贡献 ARPU 稳定。
+    </p>
+
+    <p><strong>产业链定位</strong>：</p>
+    <p>
+      <strong>上游</strong>：电信设备商（华为、中兴、爱立信、诺基亚）+ 算力芯片商（华为昇腾、海光、寒武纪）<br>
+      <strong>中游（公司）</strong>：中国移动（基础设施网络 + 频谱牌照 + 算力网络 + 客户基础）<br>
+      <strong>下游</strong>：10 亿+ 个人用户 + 3.2 亿家庭 + 2,910 万政企客户<br>
+      <strong>议价能力</strong>：对消费者议价能力极强（中国移动 + 联通 + 电信三寡头）；对政企客户议价能力中（华为/阿里云竞争）；对设备商议价能力极强（采购量大、订单稀缺）
+    </p>
+
+    <p><strong>关键商业模式特点</strong>：</p>
+    <p>
+      <strong>1. 寡头垄断的"准公用事业"</strong>：中国通信三寡头（移动 57% + 联通 + 电信），新进入者极少。<strong>这是与水电煤同类型的"基础设施"业务</strong>。<br>
+      <strong>2. 5G 频谱牌照护城河</strong>：5G 频谱牌照由工信部分配，移动占有最大频段。这是不可复制的"无形资产"。<br>
+      <strong>3. 高 Capex + 高折旧 = 高 EBITDA / 低净利率</strong>：通信行业典型——重资产 + 高折旧。但 5G 建设高峰已过，未来 Capex 持续下降 → FCF 释放<br>
+      <strong>4. 高派息纪律</strong>：国资委要求的"现金分红"传统让中国移动派息率从 50% 升至 74%。<strong>这是港股大蓝筹中最稀有的高股息债券替代品</strong>。<br>
+      <strong>5. 数字化转型（移动云+AI+算力）</strong>：政企市场 +10%、其他业务 +12.7% 显示新增长引擎。但护城河比传统通信弱（与阿里云、华为云竞争）。
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 模块 4 ═══ -->
+<div class="section">
+  <div class="stitle">模块 4 · 经济护城河分析（5 维）</div>
+
+  <div class="bscore">
+    <div class="circle cg">A</div>
+    <div class="bd">
+      <h4>1. 无形资产（5G 频谱牌照）· <strong>极宽护城河</strong></h4>
+      <p>5G 频谱牌照由工信部分配，<span class="hl-t">中国移动占有 2.6GHz + 4.9GHz + 700MHz 三段最优频谱</span>，覆盖中国所有人口和地理。这是"政策牌照型"护城河——比 Apple/Microsoft 的品牌+技术护城河更稳固。<br>持久性：未来 20 年这都是中国移动最强护城河。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">A</div>
+    <div class="bd">
+      <h4>2. 成本优势（规模 + 网络密度）· <strong>极宽护城河</strong></h4>
+      <p>10 亿+ 移动客户的边际成本极低 + 100+ 万个基站 + 全国数据中心网络。<strong>这是"规模经济+网络密度"的双重护城河</strong>。新进入者要复制这个网络需要至少 ¥5,000+ 亿投资和 10+ 年时间，几乎不可能。<br>持久性：未来 10 年仍稳。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B+</div>
+    <div class="bd">
+      <h4>3. 转换成本（携号转网政策放宽中）· <strong>中等护城河</strong></h4>
+      <p>2019 起"携号转网"政策放宽，用户可保留手机号转网络服务商。<span class="warn-t">这是中国移动唯一变弱的护城河维度</span>。但实际转网用户占比仍 <5%，主因：(1) 套餐和家庭/家人组合让转网麻烦；(2) 移动信号覆盖更广（农村+山区优势）。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle co">C+</div>
+    <div class="bd">
+      <h4>4. 网络效应 · <strong>窄至无</strong></h4>
+      <p>通信服务本身的网络效应已基本消失（在 4G/5G 时代）—— 用户在哪家运营商都能给所有人打电话。<span class="hl-t">网络效应不是中国移动的主要护城河</span>。但"通信生态"（移动云+和家亲+和包支付）有微弱的家庭网络效应。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>5. 有效规模（三寡头格局）· <strong>宽护城河</strong></h4>
+      <p>中国通信三寡头：移动 57%、联通 ~23%、电信 ~20%。<strong>这是"政策保护型寡头垄断"</strong>。中央政府不允许更多运营商进入（频谱有限+反规模浪费）。<br>持久性：未来 30 年都是三寡头格局。<span class="hl-t">这是与水电煤同类型的稳定结构</span>。</p>
+    </div>
+  </div>
+
+  <div class="cmt">
+    <p style="margin-top:18px"><strong>护城河趋势 · 整体极宽且稳定</strong>：5 大维度综合评分 = 3A + 1B+ + 1C+ ≈ <strong>极宽护城河（但有窄项）</strong>。最强项是无形资产+成本优势+有效规模，最弱项是转换成本（携号转网放宽）和网络效应（无）。<span class="hl-t">10 年后会更宽还是更窄？海图判断：会"基本稳定"</span>—— 5G/6G 频谱壁垒持续，但数字化业务（移动云）的护城河比传统通信弱，需建立。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 5 ═══ -->
+<div class="section">
+  <div class="stitle">模块 5 · 财务深度分析</div>
+
+  <h3 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">5.1 三张表概览（FY2025 vs FY2024）</h3>
+  <div class="tbl-wrap" style="margin-bottom:14px">
+    <table class="tbl"><thead><tr><th>项目（¥亿）</th><th>FY2024</th><th>FY2025</th><th>YoY</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td>利润表</td><td></td><td></td><td></td></tr>
+      <tr><td>总营收</td><td>10,345</td><td>10,440</td><td>+1.0%</td></tr>
+      <tr><td>毛利</td><td>~2,950</td><td>~2,970</td><td>+0.7%</td></tr>
+      <tr><td>毛利率</td><td>28.5%</td><td>28.4%</td><td>持平</td></tr>
+      <tr><td>营业费用</td><td>~1,520</td><td>~1,480</td><td>-2.6%</td></tr>
+      <tr><td>营运利润</td><td>1,426</td><td>1,489</td><td>+4.4%</td></tr>
+      <tr><td>营运利润率</td><td>13.8%</td><td>14.3%</td><td>+0.5pp</td></tr>
+      <tr><td>归母净利润</td><td>1,384</td><td>1,371</td><td>-0.9% (同口径 +2.0%)</td></tr>
+      <tr><td>净利率</td><td>13.4%</td><td>13.1%</td><td>-0.3pp</td></tr>
+      <tr class="hl"><td>资产负债表（2025-12-31 末）</td><td></td><td></td><td></td></tr>
+      <tr><td>货币资金 + 短期投资</td><td>~3,300</td><td>~3,451</td><td>+4.6%</td></tr>
+      <tr><td>应收账款</td><td>~500</td><td>~530</td><td>+6%</td></tr>
+      <tr><td>固定资产</td><td>~6,800</td><td>~6,950</td><td>+2.2%</td></tr>
+      <tr><td>有息负债（短借+长债）</td><td>~1,200</td><td>~1,023</td><td>-15%</td></tr>
+      <tr><td>归母股东权益</td><td>~14,500</td><td>~15,000</td><td>+3.4%</td></tr>
+      <tr><td>每股净资产（HKD/股）</td><td>HKD 73.4</td><td>HKD 76.0</td><td>+3.5%</td></tr>
+      <tr><td>资产负债率</td><td>~32%</td><td>~32%</td><td>持平</td></tr>
+      <tr class="hl"><td>现金流量表（FY2025）</td><td></td><td></td><td></td></tr>
+      <tr><td>经营活动现金流 (OCF)</td><td>~2,650</td><td>~2,730</td><td>+3.0%</td></tr>
+      <tr><td>资本开支 (Capex)</td><td>1,640</td><td>1,509</td><td>-8.0%</td></tr>
+      <tr><td>自由现金流 (FCF)</td><td>~1,010</td><td>~1,556</td><td>+54%</td></tr>
+      <tr><td>派息 + 回购（HKD 亿）</td><td>~1,090</td><td>~1,130</td><td>+3.7%</td></tr>
+    </tbody></table>
+  </div>
+
+  <h3 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">5.2 5 年关键比率趋势</h3>
+  <div class="tbl-wrap" style="margin-bottom:14px">
+    <table class="tbl"><thead><tr><th>比率</th><th>FY21</th><th>FY22</th><th>FY23</th><th>FY24</th><th>FY25</th></tr></thead>
+    <tbody>
+      <tr><td>营收增速</td><td>+10.4%</td><td>+10.5%</td><td>+7.7%</td><td>+3.1%</td><td>+1.0%</td></tr>
+      <tr><td>归母净利增速</td><td>+7.5%</td><td>+8.0%</td><td>+5.0%</td><td>+5.2%</td><td>-0.9%</td></tr>
+      <tr><td>毛利率</td><td>33%</td><td>32%</td><td>30%</td><td>28.5%</td><td>28.4%</td></tr>
+      <tr><td>净利率</td><td>14.5%</td><td>13.9%</td><td>13.5%</td><td>13.4%</td><td>13.1%</td></tr>
+      <tr><td>ROE</td><td>11.2%</td><td>10.8%</td><td>10.5%</td><td>10.1%</td><td>9.6%</td></tr>
+      <tr><td>OCF/NI</td><td>180%</td><td>185%</td><td>190%</td><td>192%</td><td>199%</td></tr>
+      <tr><td>FCF Yield</td><td>~5%</td><td>~5.5%</td><td>~6%</td><td>~7%</td><td>~9.3%</td></tr>
+      <tr><td>派息率</td><td>50%</td><td>67%</td><td>71%</td><td>72%</td><td>74%</td></tr>
+      <tr><td>股息（HKD/股）</td><td>4.06</td><td>4.40</td><td>4.83</td><td>5.09</td><td>5.27</td></tr>
+    </tbody></table>
+  </div>
+
+  <h3 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">5.3 杜邦分析（FY2025）</h3>
+  <div class="cmt">
+    <p><strong>ROE = 净利率 × 资产周转 × 权益乘数</strong></p>
+    <p>= 13.1% × (¥10,440 / ¥21,500) × (¥21,500 / ¥15,000)<br>
+    = <strong>13.1% × 0.486 × 1.43</strong><br>
+    = <strong>~9.1%（杜邦）</strong>vs yfinance ROE 9.64%（接近）</p>
+    <p style="margin-top:10px"><strong>解读</strong>：ROE 由 3 项构成——<span class="hl-t">净利率 13.1%（通信行业偏高）+ 资产周转 0.486（重资产典型）+ 权益乘数 1.43（极保守 / 低杠杆）</span>。<strong>提升 ROE 的关键不是加杠杆（已极保守），而是提升净利率和资产周转</strong>。FY26 增值税冲击让净利率短期下降至 12%，ROE 跌至 9%。FY27 起增值税基数效应消退，ROE 重回 10%。</p>
+  </div>
+
+  <h3 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">5.4 资产负债健康度</h3>
+  <div class="cmt">
+    <p>
+      <strong>有息负债 ¥1,023 亿（短借+长债）</strong>—— 极低<br>
+      <strong>货币资金 + 短期投资 ¥3,451 亿</strong>（$478 亿）<br>
+      <strong>真实净现金 = ¥3,451 - ¥1,023 = ¥2,428 亿</strong>（$337 亿）<br>
+      <strong>占总市值 HKD 1.87 万亿 = ¥1.72 万亿 的比例 = 14%</strong><br>
+      流动比率 ~1.5、利息覆盖倍数 ~80x（极安全）<br>
+      <strong>资产负债健康度评级：A+</strong>（行业最优）
+    </p>
+  </div>
+
+  <h3 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">5.5 现金流质量</h3>
+  <div class="cmt">
+    <p>
+      <strong>OCF/NI = ¥2,730 / ¥1,371 = 199%</strong>—— 极优秀（含高折旧摊销 ¥1,300 亿非现金）<br>
+      <strong>FCF/OCF = ¥1,556 / ¥2,730 = 57%</strong>—— 中等（Capex 占 OCF 55%，5G 建设期）<br>
+      <strong>FCF Yield (FY25) = ¥1,556 / ¥1.72 万亿 = 9.3%</strong>—— 优秀<br>
+      <strong>Capex 下降趋势</strong>：FY24 ¥1,640 → FY25 ¥1,509（-8%）→ FY26 ¥1,400（-7% 指引）—— FCF 将持续释放<br>
+      <strong>评价</strong>：现金流质量 A。<span class="hl-t">FY27 后预期 FCF 突破 ¥1,800 亿，FCF Yield 升至 10%+</span>。
+    </p>
+  </div>
+
+  <h3 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">5.6 所有者盈余计算（核心）</h3>
+  <div class="cmt">
+    <p>所有者盈余 = 净利 + 折旧摊销 + 其他非现金 - 维护性 Capex ± 营运资金变动</p>
+    <p>
+      = ¥1,371 亿 + ¥1,300 亿 (折旧摊销) - ¥1,200 亿 (维护性 Capex 估算)<br>
+      = <strong>¥1,471 亿（FY25）</strong> = $204 亿
+    </p>
+    <p style="margin-top:8px"><strong>OE Yield (FY25) = $204 / $237（市值）= 8.6%</strong>—— 优秀</p>
+    <p>FY26 因增值税冲击，OE 可能短期降至 ¥1,400 亿，OE Yield 8.1%。FY27 起增值税基数效应消退，OE 回到 ¥1,500+ 亿。<span class="hl-t">这是"长期债券替代品"的核心论据</span>——8.6% 所有者盈余收益率（vs 10 年期国债 4.3%、Apple OE Yield 4%、Meta OE Yield 5%）。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 6 ═══ -->
+<div class="section">
+  <div class="stitle">模块 6 · 电话会分析（最新 + 前 2 季）</div>
+
+  <div class="tag-grid">
+    <div class="tag-card pos">
+      <h5>Q1 2026 业绩说明会（2026-04-20）<span class="tag-bd up">利好</span></h5>
+      <p>"营业收入 +1.0% / 主营 -1.1% / 其他业务（数字化）+12.7% / 经营现金流 +128.1%。" → <strong>数字化转型加速 + 现金流大幅改善</strong>。</p>
+    </div>
+    <div class="tag-card neg">
+      <h5>Q1 2026 业绩说明会<span class="tag-bd dn">利空</span></h5>
+      <p>"归母净利 -4.2%，主因增值税率从 6% 上调至 9% 的政策性一次性影响。" → <strong>FY26 全年净利将受持续影响</strong>，预计 -5% 至 -8%。</p>
+    </div>
+    <div class="tag-card pos">
+      <h5>FY2025 年报业绩说明会（2026-03-27）<span class="tag-bd up">利好</span></h5>
+      <p>"营运利润 +4.4% / 派息率 74%（HKD 5.27 全年股息 +3.5%）/ Capex -8.0% / 5G 客户 6.22 亿。" → <strong>派息提升 + Capex 下降 + 5G 持续渗透</strong>，是"长期债券替代品"叙事的兑现。</p>
+    </div>
+    <div class="tag-card pos">
+      <h5>FY2025 业绩说明会<span class="tag-bd up">利好</span></h5>
+      <p>"政企客户达 2,910 万户（+18%）/ 移动云、AI 大模型九天落地、东数西算算力网络建设。" → <strong>数字化转型"二次曲线"逐步兑现</strong>。</p>
+    </div>
+    <div class="tag-card neu">
+      <h5>FY2026 全年指引<span class="tag-bd nt">中性</span></h5>
+      <p>"FY26 营收增速保持小幅正增长 + 主营业务受增值税短期承压 + 数字化业务 +10%+ + 派息率维持 74%+。" → <strong>稳健指引</strong>，但 FY26 净利暂时下滑确定。</p>
+    </div>
+    <div class="tag-card pos">
+      <h5>2026-05-29 末期股息除息日<span class="tag-bd up">关键</span></h5>
+      <p>末期股息 HKD 2.52/股 将于 2026-05-29 除息。<strong>这是港股大蓝筹股息率最高的之一</strong>。</p>
+    </div>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">6.1 信号汇总</h4>
+  <div class="cmt">
+    <p><strong>利好信号（4）</strong>：(1) 经营现金流 +128.1%；(2) 数字化业务 +12.7%；(3) 派息率提升至 74%；(4) Capex 持续下降。</p>
+    <p><strong>利空信号（1）</strong>：增值税率 6%→9% 一次性冲击净利 -4.2% YoY。</p>
+    <p><strong>中性信号（1）</strong>：FY26 全年净利预计 -5% 至 -8%。</p>
+    <p>综合评估：<strong>偏正面</strong>—— 主业稳健 + 数字化转型加速 + 现金流强劲 + 高派息纪律 vs 短期增值税冲击。这是典型的"政策一次性 vs 长期基本面"对比。</p>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">6.2 指引兑现度追踪</h4>
+  <div class="tbl-wrap">
+    <table class="tbl"><thead><tr><th>承诺时间</th><th>承诺内容</th><th>实际兑现</th><th>评分</th></tr></thead>
+    <tbody>
+      <tr><td>FY22 年报</td><td>派息率提升至 70%+</td><td>FY25 74% / 兑现并超额</td><td>A+</td></tr>
+      <tr><td>FY23 年报</td><td>Capex 高峰已过</td><td>FY24 -3%, FY25 -8% / 兑现</td><td>A+</td></tr>
+      <tr><td>FY24 年报</td><td>政企客户 +15%</td><td>FY25 +18% / 兑现</td><td>A</td></tr>
+      <tr><td>FY24 年报</td><td>FY25 净利保持正增长</td><td>FY25 -0.9%（同口径 +2.0%）</td><td>B</td></tr>
+      <tr><td>FY25 年报</td><td>FY26 受增值税冲击 -5% 至 -8%</td><td>Q1 -4.2% / 兑现中</td><td>A</td></tr>
+    </tbody></table>
+  </div>
+</div>
+
+<!-- ═══ 模块 7 ═══ -->
+<div class="section">
+  <div class="stitle">模块 7 · 多模型估值（8 种方法交叉验证）</div>
+
+  <p style="margin-bottom: 16px; color: var(--text2); font-size:14px;">下表估值<strong>不锚定当前市价</strong>，独立基于财报数据 + 行业研究推导。中位数取 8 种方法估值的中点，最终目标价用概率加权（基准 60% / 乐观 25% / 悲观 15%）。<span class="warn-t">特别注意：FY26 增值税冲击是一次性的，估值需要用 FY27-28 中周期正常化盈利（净利 ¥1,400-1,500 亿）而非 FY26 谷底</span>。</p>
+
+  <div class="tbl-wrap" style="margin-bottom:14px">
+    <table class="tbl"><thead><tr><th>方法</th><th>关键假设</th><th>估值（HKD/股）</th><th>vs HKD 86.40 现价</th></tr></thead>
+    <tbody>
+      <tr><td>1. 相对估值 P/E</td><td>FY27 EPS HKD 7.30, P/E 14x（公用事业行业典型）</td><td>HKD 102</td><td><span class="badge up">+18%</span></td></tr>
+      <tr><td>2. DCF（基准）</td><td>FY27-30 净利 ¥1,400-1,600 亿稳态, WACC 8%, g=2%</td><td>HKD 105</td><td><span class="badge up">+22%</span></td></tr>
+      <tr><td>3. 所有者盈余</td><td>FY27 OE $210 亿, 合理 P/OE 11x</td><td>HKD 100</td><td><span class="badge up">+16%</span></td></tr>
+      <tr><td>4. PEG</td><td>g≈3% (FY27+ 中周期), P/E 12-14x → PEG 4x（不适用）</td><td>N/A</td><td><span class="badge nt">不适用</span></td></tr>
+      <tr><td>5. DDM 戈登模型 (★ 最适用)</td><td>股息 HKD 5.27, k=8%, g=4%</td><td>HKD 137</td><td><span class="badge up">+59%</span></td></tr>
+      <tr><td>6. NAV（每股净资产）</td><td>归母净资产 HKD 76.0/股</td><td>HKD 76</td><td><span class="badge dn">-12%（下限）</span></td></tr>
+      <tr><td>7. 反向 DCF</td><td>当前 HKD 86.40 隐含 r=8%, g=2% (中性偏悲观)</td><td>HKD 105</td><td><span class="badge up">+22%</span></td></tr>
+      <tr><td>8. SOTP 分部加总</td><td>个人 ¥7,000 亿 + 家庭 ¥1,500 亿 + 政企 ¥4,000 亿 + 净现金 ¥2,428 亿 = ¥14,928 亿</td><td>HKD 76</td><td><span class="badge dn">-12%</span></td></tr>
+      <tr class="hl"><td>中位数</td><td>—</td><td><strong>HKD 102</strong></td><td><strong>+18%</strong></td></tr>
+      <tr class="hl"><td>加权公允（基准 60% / 乐观 25% / 悲观 15%）</td><td>—</td><td><strong>HKD 100</strong></td><td><strong>+16%</strong></td></tr>
+    </tbody></table>
+  </div>
+
+  <h4 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">7.X · P/E 多档透视表（FY26 增值税短期冲击）</h4>
+  <div class="tbl-wrap" style="margin-bottom: 14px;">
+    <table class="tbl"><thead><tr><th>计算口径</th><th>每股盈利 (HKD)</th><th>P/E</th><th>是否最可信</th></tr></thead>
+    <tbody>
+      <tr><td>TTM P/E</td><td>HKD 7.27</td><td>11.88x</td><td>★★★ 含 Q1 26 增值税冲击</td></tr>
+      <tr><td>FY25 实际 P/E</td><td>HKD 7.05</td><td>12.3x</td><td>★★★★ 历史基准</td></tr>
+      <tr><td>FY26 共识 P/E（增值税冲击谷底）</td><td>HKD 6.65</td><td>13.0x</td><td>★★ 短期谷底</td></tr>
+      <tr><td>FY27 共识 P/E（恢复正增长）</td><td>HKD 7.30</td><td>11.8x</td><td>★★★★★ <strong>最可信</strong></td></tr>
+      <tr><td>FY28 中周期 P/E</td><td>HKD 7.70</td><td>11.2x</td><td>★★★★ 长期</td></tr>
+      <tr><td>核心业务 P/E（剔除净现金 ¥2,428 亿）</td><td>—</td><td><strong>10.0x（FY27）</strong></td><td>★★★★ 修正后</td></tr>
+    </tbody></table>
+  </div>
+  <div class="dcf-note">
+    <p><strong>核心业务 P/E 10x 的解读</strong>：市值 ¥17,200 亿 - 净现金 ¥2,428 亿 = ¥14,772 亿。FY27 共识净利 ¥1,400 亿 → 核心 P/E 10.5x。<span class="hl-t">这与全球电信运营商对标基本吻合</span>（AT&T P/E 9x、Verizon P/E 8x、Vodafone P/E 11x、Deutsche Telekom P/E 13x）。<strong>不算"显著低估"，但有 6.10% 股息率作"债券化"溢价</strong>—— 整体估值合理偏低。</p>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">7.1 估值方法适用性说明</h4>
+  <div class="dcf-note">
+    <p><strong>最适用 3 种</strong>：<strong>DDM（高分红公司必备）</strong>、相对估值 vs 全球电信、Forward P/E（FY27 共识）。</p>
+    <p><strong>次要 3 种</strong>：DCF（稳健现金流）、所有者盈余（OE Yield 8.6%）、反向 DCF（揭示市场中性）。</p>
+    <p><strong>不适用 2 种</strong>：PEG（增长率 < 5%）、SOTP（业务分部相对均一，不需要拆解）。</p>
+    <p><strong>NAV 仅供下限</strong>：每股净资产 HKD 76.0 是绝对底部支撑。</p>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">7.2 三情景敏感性分析</h4>
+  <div class="tbl-wrap">
+    <table class="tbl"><thead><tr><th>情景</th><th>关键假设</th><th>FY27 净利估算</th><th>目标价</th><th>vs 现价</th><th>概率</th></tr></thead>
+    <tbody>
+      <tr><td>悲观</td><td>增值税持续 + 数字化转型失败 + 携号转网加速 + 派息率被压制</td><td>¥1,200 亿</td><td>HKD 75</td><td><span class="badge dn">-13%</span></td><td>15%</td></tr>
+      <tr><td>基准</td><td>FY26 增值税短期冲击, FY27 恢复 +2-4% 增长, 派息率 75%+</td><td>¥1,400 亿</td><td>HKD 100</td><td><span class="badge up">+16%</span></td><td>60%</td></tr>
+      <tr><td>乐观</td><td>数字化业务大爆发 + 派息率升至 80% + AH 折价收窄</td><td>¥1,500 亿</td><td>HKD 120</td><td><span class="badge up">+39%</span></td><td>25%</td></tr>
+    </tbody></table>
+  </div>
+</div>
+
+<!-- ═══ 模块 8 ═══ -->
+<div class="section">
+  <div class="stitle">模块 8 · 竞争与行业分析</div>
+
+  <h4 style="margin-bottom:10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">8.1 中国通信三寡头横向对比</h4>
+  <div class="tbl-wrap" style="margin-bottom:14px">
+    <table class="tbl"><thead><tr><th>公司</th><th>市值</th><th>FY25 营收</th><th>FY25 净利</th><th>P/E</th><th>股息率</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td>中国移动 (0941)</td><td><strong>HKD 1.87 万亿</strong></td><td><strong>¥10,440亿</strong></td><td><strong>¥1,371亿</strong></td><td><strong>11.88x</strong></td><td><strong>6.10%</strong></td></tr>
+      <tr><td>中国电信 (0728)</td><td>HKD 4,800 亿</td><td>¥5,300 亿</td><td>¥330 亿</td><td>~14x</td><td>5.83%</td></tr>
+      <tr><td>中国联通 (0762)</td><td>HKD 2,500 亿</td><td>¥3,900 亿</td><td>¥90 亿</td><td>~12x</td><td>4.5%</td></tr>
+    </tbody></table>
+  </div>
+  <div class="cmt">
+    <p><strong>中国移动是中国通信三寡头中最大、最赚钱、股息最高的</strong>：营收 ¥10,440 亿是电信 2 倍、联通 2.7 倍。净利 ¥1,371 亿是电信 4 倍、联通 15 倍。<span class="hl-t">市值占三大运营商合计 70%+</span>。但 P/E 11.88x 是三家中最低（vs 电信 14x），股息率 6.10% 是三家中最高（vs 联通 4.5%）。<strong>这是港股大蓝筹中最便宜+股息最高的稳定股</strong>。</p>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">8.2 全球电信运营商对比</h4>
+  <div class="tbl-wrap">
+    <table class="tbl"><thead><tr><th>公司</th><th>市值</th><th>P/E</th><th>股息率</th><th>5G 客户</th><th>FCF Yield</th></tr></thead>
+    <tbody>
+      <tr><td>AT&T (T)</td><td>~$200B</td><td>9x</td><td>~5.5%</td><td>~80M</td><td>~8%</td></tr>
+      <tr><td>Verizon (VZ)</td><td>~$170B</td><td>8x</td><td>~6.5%</td><td>~150M</td><td>~10%</td></tr>
+      <tr><td>T-Mobile (TMUS)</td><td>~$280B</td><td>18x</td><td>~2%</td><td>~120M</td><td>~5%</td></tr>
+      <tr><td>Vodafone (VOD)</td><td>~$30B</td><td>11x</td><td>~10%</td><td>~50M</td><td>~7%</td></tr>
+      <tr><td>Deutsche Telekom (DTE)</td><td>~$160B</td><td>13x</td><td>~3%</td><td>~70M</td><td>~6%</td></tr>
+      <tr class="hl"><td>中国移动 (0941)</td><td><strong>$237B</strong></td><td><strong>11.88x</strong></td><td><strong>6.10%</strong></td><td><strong>622M</strong></td><td><strong>9.3%</strong></td></tr>
+    </tbody></table>
+  </div>
+  <div class="cmt" style="margin-top:14px">
+    <p><strong>中国移动是全球最大电信运营商（按用户数和 5G 客户）</strong>：5G 客户 6.22 亿是 Verizon 4 倍、AT&T 8 倍。<span class="hl-t">估值角度，中国移动 P/E 11.88x 处于全球电信中位</span>—— 略高于 AT&T/Verizon（8-9x）但低于 T-Mobile（18x）和 Deutsche Telekom（13x）。<strong>股息率 6.10% 是全球大型电信中第三高</strong>（仅次于 Vodafone 10% 和 Verizon 6.5%）。FCF Yield 9.3% 是全球第一档。</p>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">8.3 行业 TAM 与增长率</h4>
+  <div class="cmt">
+    <p>
+      <strong>中国通信服务市场 TAM</strong>：~¥1.8 万亿（2025 年）→ ¥2.0 万亿（2030 预测）<br>
+      <strong>中国移动主要市场份额</strong>：移动通信 57%、宽带 47%、5G 套餐 60%+、政企 ToB 数字化 ~35%<br>
+      <strong>行业增长率</strong>：通信主业 +1-3%/年（成熟期）、数字化业务 +15-20%/年、AI/算力 +30%/年<br>
+      <strong>颠覆风险</strong>：携号转网政策放宽 + 卫星互联网（Starlink）+ 5G/6G 替代但暂时影响有限。
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 模块 9 ═══ -->
+<div class="section">
+  <div class="stitle">模块 9 · 技术面与 K 线分析（次要参考）</div>
+
+  <div class="cmt">
+    <p><strong>0941.HK</strong>：</p>
+    <p>
+      当前价 HKD 86.40（2026-05-12 收盘）。52 周区间 HKD 75.85-90.60（距高点 -4.6%、距低点 +14%）。<br>
+      <strong>近期走势</strong>：5 月初 HKD 88 → 5-12 HKD 86.40（-1.8%）。FY25 年报后稳健盘整。<br>
+      <strong>30 日均价 ~HKD 87、50 日均价 ~HKD 85</strong>—— 价格在均线上下震荡。<br>
+      <strong>支撑位</strong>：HKD 80（前期密集成交区）/ HKD 75.85（52 周低）<br>
+      <strong>阻力位</strong>：HKD 90（30 日均线上方）/ HKD 90.60（52 周高）<br>
+      <strong>RSI</strong>：~50（中性）<br>
+      <strong>判断</strong>：技术面中性。<span class="hl-t">价格已接近 52 周高，但股息率 6.10% 提供下行保护</span>。除息日（2026-05-29）后股价将下调 HKD 2.52，给二仓机会。
+    </p>
+
+    <p><strong>南向资金动态</strong>：中国移动是港股通最大持仓股之一，南向资金累计持股已超 15%。<strong>FY25 持续净流入</strong>。Q1 财报后港股通增持 ~¥50 亿。</p>
+
+    <p><strong>注意</strong>：技术面作为补充参考，不影响"基于估值的买入决策"。当前 P/E 11.88x、股息率 6.10%、PB 1.14x 已是合理估值，<strong>基本面稳健，技术面只是确认入场时点的工具</strong>。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 10 ═══ -->
+<div class="section">
+  <div class="stitle">模块 10 · 增长催化剂与前景展望</div>
+
+  <h4 style="margin-bottom:10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">10.1 短期催化剂（未来 6 个月）</h4>
+  <div class="tag-grid">
+    <div class="tag-card pos">
+      <h5>2026-05-29 末期股息除息<span class="tag-bd up">利好</span></h5>
+      <p>末期股息 HKD 2.52/股 将于 2026-05-29 除息。<strong>是港股大蓝筹股息率最高的之一</strong>。</p>
+    </div>
+    <div class="tag-card pos">
+      <h5>2026-08 H1 中报<span class="tag-bd up">关键</span></h5>
+      <p>关键节点：(1) 增值税冲击是否在 H1 充分释放？(2) 数字化业务能否维持 +12% 增长？(3) 中期股息能否进一步提升？</p>
+    </div>
+    <div class="tag-card pos">
+      <h5>派息率进一步提升<span class="tag-bd up">利好</span></h5>
+      <p>Capex 持续下降 + FCF 释放 → FY26 全年股息率有望从 6.10% 升至 6.5%+。</p>
+    </div>
+    <div class="tag-card neu">
+      <h5>政府消费补贴 / 5G 渗透<span class="tag-bd nt">中性</span></h5>
+      <p>5G 套餐客户 6.22 亿渗透率 60%+，未来 2 年继续增长但增速放缓。手机以旧换新政策对移动客户 ARPU 有正面影响。</p>
+    </div>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">10.2 长期展望（3-5 年）</h4>
+  <div class="cmt">
+    <p><strong>未来 3-5 年三大主题</strong>：</p>
+    <p>
+      <strong>1. 数字化业务（移动云+AI）爆发</strong>：政企数字化 +10%、移动云 +30%、AI 算力网络持续投资。FY30 数字化业务占比有望从 FY25 ~24% → 35%+，这是中国移动的"二次曲线"。<br>
+      <strong>2. 高派息 + Capex 下降释放 FCF</strong>：FY24 Capex ¥1,640 亿 → FY30 ~¥1,200 亿（-27%），对应 FCF 从 ¥1,500 亿 → ¥2,200 亿（+47%）。派息率持续提升至 80%+。<br>
+      <strong>3. 6G 商用 + 算力主导新基建</strong>：2027-2028 启动 6G 试商用、"东数西算"算力网络 + AI 大模型九天落地，让中国移动从"通信运营商"转型为"数字化基础设施运营商"。
+    </p>
+
+    <p><strong>FY26-FY30 营收 / 净利预测</strong>：</p>
+    <table class="tbl" style="margin-top:10px"><thead><tr><th>年度</th><th>营收（¥亿）</th><th>YoY</th><th>归母净利（¥亿）</th><th>YoY</th><th>股息（HKD/股）</th></tr></thead>
+    <tbody>
+      <tr><td>FY25 实际</td><td>10,440</td><td>+1%</td><td>1,371</td><td>-0.9%</td><td>5.27</td></tr>
+      <tr><td>FY26 预测（增值税谷底）</td><td>10,580</td><td>+1.3%</td><td>1,290</td><td>-6%</td><td>5.10</td></tr>
+      <tr><td>FY27 预测</td><td>10,800</td><td>+2%</td><td>1,400</td><td>+8.5%</td><td>5.50</td></tr>
+      <tr><td>FY28 预测</td><td>11,000</td><td>+1.8%</td><td>1,450</td><td>+3.6%</td><td>5.80</td></tr>
+      <tr><td>FY29 预测</td><td>11,200</td><td>+1.8%</td><td>1,500</td><td>+3.4%</td><td>6.10</td></tr>
+      <tr><td>FY30 预测</td><td>11,400</td><td>+1.8%</td><td>1,550</td><td>+3.3%</td><td>6.40</td></tr>
+    </tbody></table>
+
+    <p style="margin-top:10px"><strong>5 年累计股息</strong>：HKD 5.10 + 5.50 + 5.80 + 6.10 + 6.40 = <strong>HKD 28.90/股</strong>。占当前股价 HKD 86.40 的 <span class="hl-t">33%</span>——<strong>5 年累计股息收益率 33%</strong>（不含资本利得），相当于年化 ~7%。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 11 ═══ -->
+<div class="section">
+  <div class="stitle">模块 11 · 风险矩阵（多维评估）</div>
+
+  <div class="risk-grid">
+    <div class="risk-card r2">
+      <h5>1. 经营风险（增值税短期冲击）</h5>
+      <span class="risk-score">2 / 5</span>
+      <p>FY26 增值税 6%→9% 一次性冲击 -5% 至 -8%。但 FY27 起基数效应消退。</p>
+    </div>
+    <div class="risk-card r1">
+      <h5>2. 财务风险</h5>
+      <span class="risk-score">1 / 5</span>
+      <p>真实净现金 ¥2,428 亿 + 利息覆盖 80x + 资产负债率 32%。<strong>财务风险几乎为零</strong>。</p>
+    </div>
+    <div class="risk-card r2">
+      <h5>3. 竞争风险</h5>
+      <span class="risk-score">2 / 5</span>
+      <p>中国电信/联通同行竞争 + 携号转网放宽。但三寡头格局极稳定。</p>
+    </div>
+    <div class="risk-card r3">
+      <h5>4. 监管/政策风险</h5>
+      <span class="risk-score">3 / 5</span>
+      <p>5G 频谱牌照费 + 增值税政策 + 国资委要求降低派息（极低概率）。当前增值税 9% 是最大政策不确定性。</p>
+    </div>
+    <div class="risk-card r2">
+      <h5>5. 宏观风险</h5>
+      <span class="risk-score">2 / 5</span>
+      <p>中国消费降级影响 ARPU。但通信是"刚需"，对宏观周期敏感度低。汇率（RMB→HKD 财报）波动。</p>
+    </div>
+    <div class="risk-card r2">
+      <h5>6. 估值风险</h5>
+      <span class="risk-score">2 / 5</span>
+      <p>P/E 11.88x、PB 1.14x、股息率 6.10% 已是合理估值。下行空间有限。</p>
+    </div>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">11.X 黑天鹅情景（最坏情况）</h4>
+  <div class="cmt">
+    <p>
+      <strong>1. 增值税进一步上调（9% → 13%）</strong>（概率 3%）：政策再次冲击净利 -10% 持续。股价跌至 HKD 70（-19%）。<br>
+      <strong>2. 国资委要求大幅降低派息率</strong>（概率 2%）：派息率从 74% → 50%（要求保留资金做"政策性投资"）。股息率从 6.10% → 4%，估值打 7-8 折。<br>
+      <strong>3. 携号转网政策大幅放宽</strong>（概率 5%）：用户黏性大幅下降，移动 ARPU 跌 10%。FY26-27 净利 -15%，股价跌至 HKD 72（-17%）。<br>
+      <strong>4. 数字化业务（移动云）大幅减值</strong>（概率 5%）：移动云投资 ROIC 失败，¥2,000 亿数字化资产减值 30% = ¥600 亿减值。短期一次性冲击。<br>
+      <strong>5. Starlink 等卫星互联网商用化</strong>（概率 8%）：长期挑战传统通信，但 5-10 年内影响有限。
+    </p>
+    <p><strong>下行支撑</strong>：每股净资产 HKD 76.0 + 每股净现金 HKD 12.40 + FCF Yield 9.3% → 当前 HKD 86.40 距 NAV HKD 76 仅 -12% 折价。<span class="hl-t">即便最坏情景下也很难跌破 HKD 75</span>（52 周低 HKD 75.85 也是技术支撑位）。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 12 评分卡 ═══ -->
+<div class="section">
+  <div class="stitle">海图评分卡 · 6 维 A-D + 红旗排查</div>
+
+  <div class="bscore">
+    <div class="circle cg">A</div>
+    <div class="bd">
+      <h4>1. 生意可预测性 — A（9/10）</h4>
+      <p>商业模式清晰（通信运营商 + 数字化转型），过去 10 年净利稳定。FY26 增值税短期冲击可预测，FY27 恢复增长可预测度高。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>2. 经济护城河 — A-（8.5/10）</h4>
+      <p>5 维护城河综合：3A + 1B+ + 1C+ ≈ <strong>极宽护城河</strong>。最强项是无形资产（5G 频谱牌照）+ 成本优势（规模）+ 有效规模（三寡头）。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle cw">B+</div>
+    <div class="bd">
+      <h4>3. 管理层质量 — B+（8/10）</h4>
+      <p>杨杰董事长务实稳健 + 国资委治理 + 派息率从 50% → 74% 提升纪律强。<span class="warn-t">国企限薪+无股权激励</span>是减分项。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle cg">A</div>
+    <div class="bd">
+      <h4>4. 财务质量 — A（9/10）</h4>
+      <p>净利率 13.1% + ROE 9.6% + OCF/NI 199% + FCF Yield 9.3% + 资产负债率 32% + 真实净现金 ¥2,428 亿。<strong>财务健康度行业第一档</strong>。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>5. 资本配置纪律 — A-（8.5/10）</h4>
+      <p>5 年派息率 50% → 74%（+24pp）+ Capex 持续下降 + 数字化精准投入。<span class="warn-t">不足之处</span>：无股票回购、超 ¥2,400 亿净现金部分闲置。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>6. 估值与安全边际 — A-（8/10）</h4>
+      <p>P/E 11.88x（vs 历史均值 12-14x）+ 股息率 6.10%（港股大蓝筹最高之一）+ AH 折价 24%（港股投资者优势）+ 反向 DCF 隐含合理 r=8%。</p>
+    </div>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">12.X 红旗排查（非评分项）</h4>
+  <div class="tbl-wrap">
+    <table class="tbl"><thead><tr><th>红旗项</th><th>状态</th><th>说明</th></tr></thead>
+    <tbody>
+      <tr><td>商誉减值历史</td><td>✓ 无问题</td><td>无大额商誉减值</td></tr>
+      <tr><td>收入确认时点</td><td>✓ 无问题</td><td>通信服务按月确认，透明</td></tr>
+      <tr><td>关联交易</td><td>⚠️ 注意</td><td>与母公司中国移动集团关联交易需关注，但已规范</td></tr>
+      <tr><td>表外负债</td><td>✓ 无问题</td><td>无重大表外项目</td></tr>
+      <tr><td>股权激励</td><td>✓ 无问题</td><td>国企无大规模 SBC</td></tr>
+      <tr><td>会计变更</td><td>✓ 无问题</td><td>近 3 年无重大会计政策变更</td></tr>
+      <tr><td>VIE 结构</td><td>✓ 无问题</td><td>无 VIE，直接持股</td></tr>
+    </tbody></table>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">12.Y 综合评级</h4>
+  <div class="dcf-note">
+    <p><strong>6 维评分</strong>：A / A- / B+ / A / A- / A- = 综合 <strong>A-</strong></p>
+    <p><strong>红旗排查</strong>：6/7 无问题，1 项注意（关联交易，但已规范）。<strong>无红旗触发</strong>。</p>
+    <p><strong>综合评级</strong>：<span class="rating-badge rating-buy">买入</span></p>
+    <p><strong>理由</strong>：(1) 6 维评分 6 项 A 或 B+，是港股大蓝筹中评分最稳的之一；(2) 6.10% 股息率是港股大蓝筹中最高之一；(3) 5G 频谱牌照护城河无可替代；(4) 真实净现金 ¥2,428 亿（占市值 14%）+ 资产负债率 32% = 财务弹性极强；(5) 增值税短期冲击已被市场充分定价；(6) AH 折价 24% 让港股投资者享有"免费溢价"。<strong>这是港股"长期债券替代品"的最佳代表之一</strong>。</p>
+  </div>
+</div>
+
+<!-- ═══ 投资决策 ═══ -->
+<div class="section">
+  <div class="stitle">海图研判 · 投资决策</div>
+
+  <div class="cgrid">
+    <div class="ccard">
+      <div class="ctitle" style="font-size: 14px;">12 个月概率加权目标价</div>
+      <p style="font-size: 28px; font-weight: 700; color: var(--green); margin: 8px 0;">HKD 100</p>
+      <p style="font-size: 13px; color: var(--text2);">+16% 上行 · 中位数估值 HKD 102 / 加权公允 HKD 100</p>
+      <table class="tbl" style="margin-top: 10px; font-size:12px;"><tbody>
+        <tr><td>乐观 (25%)</td><td>HKD 120</td><td><span class="badge up">+39%</span></td></tr>
+        <tr><td>基准 (60%)</td><td>HKD 100</td><td><span class="badge up">+16%</span></td></tr>
+        <tr><td>悲观 (15%)</td><td>HKD 75</td><td><span class="badge dn">-13%</span></td></tr>
+      </tbody></table>
+    </div>
+    <div class="ccard">
+      <div class="ctitle" style="font-size: 14px;">分批建仓 / 止盈策略</div>
+      <p style="font-size: 13px; color: var(--text2); line-height: 1.85;">
+      <strong>当前价 HKD 86.40</strong> · 已位于"首仓"附近<br><br>
+      <strong>建仓档位（独立估值中位数 × 80% / 70% / 60%）</strong>：<br>
+      首仓 <span class="hl-t">HKD 82</span>（×80%·距现价 -5%）<br>
+      二仓 <span class="hl-t">HKD 72</span>（×70%·距现价 -17%）<br>
+      三仓 <span class="hl-t">HKD 62</span>（×60%·距现价 -28%·极端机会）<br><br>
+      <strong>止盈三档</strong>：<br>
+      减 25% @ <span class="hl-t">HKD 105</span><br>
+      减 25% @ <span class="hl-t">HKD 120</span><br>
+      减 25% @ <span class="hl-t">HKD 135</span><br>
+      <strong>最后 25% 作为"长期债券替代品"长期持有滚动收息</strong>
+      </p>
+    </div>
+  </div>
+
+  <div class="cmt" style="margin-top: 16px;">
+    <p><strong>仓位管理</strong>：建议总仓位 <strong>5-10%</strong>（核心仓位 · 高股息防御）。持有周期 <strong>5-10 年（含 5G/6G 渗透 + 数字化转型 + 派息复利）</strong>。<span class="hl-t">优先 HKEX: 0941</span>（H 股折价 24% + 股息率 6.10% 最优），A 股 600941 性价比明显低于 H 股。</p>
+
+    <p><strong>关键监控指标</strong>：</p>
+    <p>
+      <strong>1. 净利同比变化</strong>：FY26 是否能控制在 -8% 以内？FY27 是否能恢复 +3%+ 增长？<br>
+      <strong>2. 派息率</strong>：FY26-FY27 能否维持 74%+ 并向 80% 进发<br>
+      <strong>3. 数字化业务增速</strong>：移动云、AI、算力网络业务能否维持 +10%+<br>
+      <strong>4. 5G 套餐客户增量</strong>：从 6.22 亿向 7 亿迈进<br>
+      <strong>5. Capex 下降趋势</strong>：FY26 是否能继续降至 ¥1,400 亿<br>
+      <strong>6. AH 折价</strong>：当折价从 24% 收敛到 15% 时，H 股已部分修复
+    </p>
+
+    <p><strong>事件时间表</strong>：</p>
+    <p>
+      <strong>2026-05-29</strong>: 末期股息除息日（HKD 2.52/股）<br>
+      <strong>2026-06-XX</strong>: 末期股息派付日<br>
+      <strong>2026-08 中</strong>: H1 2026 中报（关键节点 · 中期股息公告）<br>
+      <strong>2026-10 中</strong>: Q3 2026 季报<br>
+      <strong>2027-03 中</strong>: FY2026 年报（全年业绩 + 末期股息）
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 海图页末长评 ═══ -->
+<div class="section">
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记 · 1100 字</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p class="lead">市场永远在用短期的数字判断长期的故事。中国移动 Q1 2026 净利 -4.2% 是 5 年最差季度，市场反应是把它当成"夕阳运营商"折价。但读懂这个数字背后的政策机制——增值税率从 6% 上调至 9% 的行业一次性冲击——你会发现这不是基本面恶化，是"政策性短期阵痛"。真正的故事在经营现金流 +128%、数字化业务 +12.7%、派息率 74%、5G 客户 6.22 亿。</p>
+
+      <p>Q1 2026 总营收 ¥2,665 亿（+1.0%）、主营 ¥2,199 亿（-1.1%）、其他业务（数字化）¥466 亿（+12.7%）、归母净利 ¥293 亿（-4.2%）、经营活动现金流 ¥714 亿（+128.1%）。<strong>FY25 全年：营业收入 ¥10,440 亿 + 营运利润 +4.4% + 归母净利 ¥1,371 亿（同口径 +2.0%）+ 全年股息 HKD 5.27/股（+3.5%）+ 派息率 74%</strong>—— 这是一份"稳中有进"的全年财报。市场对中国移动的悲观（H 股 PE 11.88x、PB 1.14x）与公司真实表现（高派息纪律 + 数字化转型 + Capex 下降释放 FCF）形成<strong>清晰反差</strong>。</p>
+
+      <h4>几个研判要点</h4>
+
+      <p><strong>一、6.10% 股息率 + 派息率 74% 是港股大蓝筹中最稀有的"长期债券替代品"。</strong>当前 H 股 HKD 86.40，全年股息 HKD 5.27（+3.5%）。<span class="hl-t">5 年股息 CAGR 10%</span>——HKD 3.30 (FY20) → HKD 5.27 (FY25)。<strong>5 年累计股息收益率达 33%</strong>（不含资本利得）。在 10 年期国债 4.3% 的背景下，6.10% 股息率提供 180 bps "超额票息"，比中国电信 5.83% 略高。FY26-30 派息率有望从 74% 升至 80%+。</p>
+
+      <p><strong>二、Q1 -4.2% 是政策一次性冲击，不是经营恶化。</strong>增值税率 6%→9% 是 2026-01-01 起的行业政策性一次性冲击（与中国电信 Q1 -17.1% 同一原因）。<strong>FY26 全年净利可能 -5% 至 -8%，但 FY27 起回归正常增长 +2-4%</strong>。从经营现金流 +128.1% + EBITDA 率维持 34.9% + 三项费用全部下降可以看出，<strong>底层经营能力没有恶化，反而成本控制能力良好</strong>。这是与"基本面下滑"截然不同的"政策影响"，市场误读是低估机会。</p>
+
+      <p><strong>三、数字化业务 +12.7% 是真正的"AI 受益者"。</strong>移动云国内市占第三（仅次于阿里云、华为云），政企客户 2,910 万户（+18%）。AI 大模型"九天"在政企场景落地，"东数西算"算力网络持续布局。<span class="hl-t">FY30 数字化业务占比有望从 FY25 ~24% → 35%+</span>，这是中国移动的"二次曲线"。即便传统通信业务 ARPU 持续承压，数字化业务的 +15%+ 增速将对冲影响。</p>
+
+      <p><strong>四、Capex 下降 + FCF 释放 + AH 折价 = 三轮叙事齐现。</strong>FY24 Capex ¥1,640 亿 → FY25 ¥1,509 亿（-8%）→ FY26 指引 ¥1,400 亿。<strong>5G 建设高峰已过</strong>，对应 FCF 从 FY24 ¥1,010 亿 → FY25 ¥1,556 亿（+54%）→ FY27 ~¥1,800 亿。FCF Yield 9.3% 是全球电信运营商第一档。配合 AH 折价 24%，港股投资者花同样的钱可多买 24% 股份——是"免费溢价"。</p>
+
+      <p><strong>五、12 个月目标价 HKD 100，上行 +16%。</strong>悲观 HKD 75（-13%，增值税持续 + 数字化转型失败）、基准 HKD 100（+16%，FY26 增值税短期冲击 + FY27 恢复 + 派息率 75%+）、乐观 HKD 120（+39%，数字化大爆发 + 派息率升至 80%）。<strong>当前价 HKD 86.40 距首仓 HKD 82 仅 -5%</strong>，是合理建仓窗口。海图判断：未来 5-10 年预期年化回报 8-12%（含股息），<strong>是"长期债券替代品"的教科书案例</strong>，优于绝大多数港股大盘股。</p>
+
+      <h4>海图研判</h4>
+
+      <p><strong>评级：买入</strong>（6.10% 股息率 + 5G/数字化转型 + 行业寡头 + AH 折价 24% + 真实净现金 ¥2,428 亿的五轮组合）。12 个月概率加权目标价 <strong>HKD 100</strong>（+16%）。</p>
+
+      <p>操作建议（独立估值中位数 HKD 102，加权公允 HKD 100）：当前价 HKD 86.40 距首仓 HKD 82 仅 5%。建议首仓 HKD 82（×80%·距现价 -5%）、二仓 HKD 72（×70%·距现价 -17%）、三仓 HKD 62（×60%·极端机会）。止盈三档 HKD 105 / 120 / 135，每档减仓 25%，最后 25% 作为"长期债券替代品"长期持有滚动收息。建议总仓位 <strong>5-10%</strong>（核心仓位 · 高股息防御）。持有周期 5-10 年。优先 HKEX: 0941（AH 折价 24%）。</p>
+
+      <h4>风险提示</h4>
+
+      <p>增值税率进一步上调 / 国资委要求大幅降低派息 / 携号转网政策大幅放宽 / 数字化业务大幅减值 / Starlink 卫星互联网商用化 / 中国消费降级深化——任一项都可能让股价回调 10-20%。但 ¥2,428 亿真实净现金 + 国资委 70.9% 控股 + 资产负债率 32% 让破产概率为零，每股净资产 HKD 76.0 提供下行支撑。</p>
+
+      <p>关键叙事：<strong>"6.10% 股息率 + 派息率 74% + 5G 客户 6.22 亿 + 数字化转型 +12.7% + AH 折价 24% + 真实净现金 ¥2,428 亿（占市值 14%）"的稀有组合</strong>。在 NVIDIA/科技股估值过热、阿里管理层投资 ROIC 不明的当下，中国移动是港股大蓝筹中"防御 + 高股息 + 数字化期权"组合最佳的之一——不是给追求短期回报的人，而是给追求"年化 6-8% 股息 + 长期复利 + 通胀对冲"的耐心价值投资者。下次催化剂：2026-05-29 末期股息除息 / 2026-08 H1 中报。</p>
+
+      <p class="haitu-sign">—— 海图，灯下落笔，明日再观风浪。</p>
+
+      <p class="haitu-disc">⚠️ 免责声明：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，不构成任何投资建议。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div>《海图夜读》 · 中国移动 China Mobile 0941 Q1 2026 海图研判</div>
+  <div style="margin-top:6px;">数据来源：中国移动 FY2025 年报（2026-03-27）+ Q1 2026 季报（2026-04-20）· 港交所披露易官方文件 + 上交所公告 + yfinance 实时市场数据</div>
+  <div style="margin-top:6px;">价值投资 · 长期主义</div>
+</footer>
+
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  const cur = html.getAttribute('data-theme');
+  html.setAttribute('data-theme', cur === 'dark' ? 'light' : 'dark');
+  localStorage.setItem('theme', html.getAttribute('data-theme'));
+  renderCharts();
+}
+(function() {
+  const t = localStorage.getItem('theme');
+  if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+})();
+
+function gc(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+
+let charts = {};
+function renderCharts() {
+  Object.values(charts).forEach(c => c && c.destroy && c.destroy());
+  charts = {};
+  const txt2 = gc('--text2'), txt3 = gc('--text3'), grid = gc('--chart-grid');
+  const accent = gc('--accent'), accent2 = gc('--accent2'), accent3 = gc('--accent3');
+  const green = gc('--green'), gold = gc('--gold'), rose = gc('--rose'), red = gc('--red');
+
+  Chart.defaults.color = txt2;
+  Chart.defaults.font.family = 'Segoe UI, sans-serif';
+  Chart.defaults.font.size = 11;
+
+  charts.rev = new Chart(document.getElementById('revenueChart'), {
+    type: 'bar',
+    data: { labels: ['Q1 25', 'Q2 25', 'Q3 25', 'Q4 25', 'Q1 26'],
+      datasets: [{ label: 'Revenue', data: [2638, 2660, 2690, 2452, 2665], backgroundColor: [accent3, gold, accent2, accent, green], borderRadius: 4 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+      scales: { y: { grid: { color: grid }, ticks: { color: txt3 } }, x: { grid: { display: false }, ticks: { color: txt3 } } } }
+  });
+
+  charts.profit = new Chart(document.getElementById('profitChart'), {
+    type: 'line',
+    data: { labels: ['Q1 25', 'Q2 25', 'Q3 25', 'Q4 25', 'Q1 26'],
+      datasets: [{ label: 'Net Profit (¥亿)', data: [306, 360, 370, 335, 293], borderColor: green, backgroundColor: 'rgba(122,154,122,0.1)', tension: 0.3, fill: true, pointBackgroundColor: green, pointRadius: 5 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+      scales: { y: { grid: { color: grid }, ticks: { color: txt3 } }, x: { grid: { display: false }, ticks: { color: txt3 } } } }
+  });
+
+  charts.seg = new Chart(document.getElementById('segmentChart'), {
+    type: 'doughnut',
+    data: { labels: ['个人 5,400', '政企 2,500', '家庭 1,400', '新兴 700', '其他 440'],
+      datasets: [{ data: [5400, 2500, 1400, 700, 440], backgroundColor: [accent3, accent, gold, accent2, rose], borderColor: gc('--card'), borderWidth: 2 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { color: txt2, font: { size: 11 } } } } }
+  });
+
+  charts.capex = new Chart(document.getElementById('capexChart'), {
+    type: 'bar',
+    data: { labels: ['FY21', 'FY22', 'FY23', 'FY24', 'FY25'],
+      datasets: [
+        { label: '股息 (HKD/股)', data: [4.06, 4.40, 4.83, 5.09, 5.27], backgroundColor: green, borderRadius: 4 },
+        { label: '派息率 (%)', data: [50, 67, 71, 72, 74], backgroundColor: gold, borderRadius: 4 }
+      ] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top', labels: { color: txt2, font: { size: 11 } } } },
+      scales: { y: { grid: { color: grid }, ticks: { color: txt3 } }, x: { grid: { display: false }, ticks: { color: txt3 } } } }
+  });
+
+  buildSankey();
+}
+
+function buildSankey() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const txt = isDark ? '#d4ccc4' : '#4a4340';
+  const cardBg = isDark ? '#2e2a25' : '#ffffff';
+
+  const sankeyData = [{
+    type: 'sankey', orientation: 'h', arrangement: 'snap', valueformat: ',.0f', valuesuffix: ' 亿',
+    node: {
+      pad: 22, thickness: 22, line: { color: 'transparent', width: 0 },
+      label: ['Q1 营收 2,665', '营业成本 1,898', '毛利 767', '销售费用 200', '管理费用 150', '增值税新增 80', '营业利润 337', '所得税+其他 -44', '归母净利 293', '非现金调整 +421', '经营现金流 714'],
+      color: ['#7b8fa0', '#b87070', '#8a9a8e', '#b9a06a', '#c09090', '#b87070', '#b08d7a', '#b87070', '#7a9a7a', '#7b8fa0', '#b08d7a']
+    },
+    link: {
+      source: [0, 0, 2, 2, 2, 2, 6, 6, 8, 9],
+      target: [1, 2, 3, 4, 5, 6, 7, 8, 10, 10],
+      value:  [1898, 767, 200, 150, 80, 337, 44, 293, 293, 421],
+      color: ['rgba(184,112,112,0.30)', 'rgba(138,154,142,0.45)', 'rgba(185,160,106,0.30)', 'rgba(192,144,144,0.30)', 'rgba(184,112,112,0.30)', 'rgba(176,141,122,0.45)', 'rgba(184,112,112,0.30)', 'rgba(122,154,122,0.45)', 'rgba(122,154,122,0.40)', 'rgba(123,143,160,0.40)']
+    }
+  }];
+
+  const layout = { font: { family: 'Segoe UI, sans-serif', size: 11, color: txt }, paper_bgcolor: cardBg, plot_bgcolor: cardBg, margin: { l: 10, r: 10, t: 10, b: 10 } };
+  Plotly.react('sankey', sankeyData, layout, { displayModeBar: false, responsive: true });
+}
+
+document.addEventListener('DOMContentLoaded', renderCharts);
+</script>
+
+</body>
+</html>
