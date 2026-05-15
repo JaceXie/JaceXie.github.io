@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-05-13，基于腾讯 Q1 2026 财报（2026-05-13 港股盘后发布）-->
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>腾讯 Tencent 0700 Q1 2026 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root {
+  --bg: #f5f0eb; --bg2: #ece6df; --card: #ffffff; --card2: #f8f5f1; --border: #d9d0c7;
+  --text: #4a4340; --text2: #7a706a; --text3: #a89f98;
+  --accent: #8a9a8e; --accent2: #7b8fa0; --accent3: #b08d7a;
+  --rose: #c09090; --gold: #b9a06a; --red: #b87070; --green: #7a9a7a;
+  --shadow: rgba(0,0,0,0.06); --chart-grid: #e5ddd5;
+}
+[data-theme="dark"] {
+  --bg: #1e1c1a; --bg2: #28251f; --card: #2e2a25; --card2: #363230; --border: #4a4540;
+  --text: #d4ccc4; --text2: #a09890; --text3: #706860;
+  --accent: #8a9a8e; --accent2: #8fabbf; --accent3: #c9a48e;
+  --rose: #c09090; --gold: #c9b07a; --red: #c08080; --green: #8aaa8a;
+  --shadow: rgba(0,0,0,0.3); --chart-grid: #3e3a35;
+}
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Georgia','Noto Serif SC','PingFang SC',serif; line-height: 1.75; font-size: 14.5px; transition: background .35s, color .35s; }
+a { color: var(--accent2); text-decoration: none; }
+.theme-bar { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); }
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; text-decoration: none; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+.toggle-switch { position: relative; width: 44px; height: 22px; background: var(--border); border-radius: 11px; cursor: pointer; transition: background .3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: var(--card); border-radius: 50%; transition: transform .3s; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+.hero { padding: 48px 24px 36px; text-align: center; border-bottom: 1px solid var(--border); }
+.hero-tag { display: inline-block; font-family: 'Segoe UI',sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 3px 14px; border-radius: 20px; margin-bottom: 18px; }
+.hero h1 { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.pill { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: 'Segoe UI',sans-serif; font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow); }
+.pill strong { color: var(--text); }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle { font-size: 18px; font-weight: 700; color: var(--accent3); margin-bottom: 20px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+.stitle::before { content: ''; display: block; width: 4px; height: 20px; background: var(--accent3); border-radius: 2px; }
+.haitu-quip { display: flex; align-items: center; gap: 18px; background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--green); border-radius: 12px; padding: 18px 24px; margin: 24px 0; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-quote { flex: 1; }
+.haitu-portrait { font-size: 15px; line-height: 1.65; color: var(--text); margin-bottom: 6px; font-weight: 600; }
+.haitu-rating-line { font-size: 13px; color: var(--text2); font-family: 'Segoe UI',sans-serif; }
+.rating-badge { display: inline-block; padding: 2px 12px; border-radius: 12px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; margin-left: 4px; }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+.rating-cond-buy { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-hold { background: rgba(123,143,160,.18); color: var(--accent2); }
+.haitu-essay { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 28px 32px; margin: 24px 0 20px; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-essay-header { display: flex; align-items: center; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.haitu-avatar-sm { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); background: var(--red); box-shadow: 0 2px 8px rgba(184,112,112,0.2); }
+.haitu-name-lg { font-family: 'Georgia','Noto Serif SC',serif; font-size: 28px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 4px; }
+.haitu-essay-tag { font-family: 'Segoe UI',sans-serif; font-size: 12px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; }
+.haitu-essay-body { font-family: 'Georgia','Noto Serif SC',serif; font-size: 15px; line-height: 2.0; color: var(--text); }
+.haitu-essay-body p { margin-bottom: 14px; }
+.haitu-essay-body p.lead { font-size: 16px; font-style: italic; color: var(--text2); margin-bottom: 18px; }
+.haitu-essay-body strong { color: var(--text); font-weight: 700; }
+.haitu-essay-body h4 { font-size: 14px; color: var(--accent3); margin: 18px 0 10px; font-family: 'Segoe UI',sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+.haitu-sign { text-align: right; margin-top: 18px; font-family: 'Georgia',serif; font-size: 14px; color: var(--text2); font-style: italic; }
+.haitu-disc { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); font-style: italic; line-height: 1.7; }
+.stock-snap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill,minmax(160px,1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px; }
+.snap-item { text-align: center; }
+.snap-label { font-family: 'Segoe UI',sans-serif; font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.snap-val { font-family: 'Segoe UI',sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+.snap-val.up { color: var(--green); }
+.snap-val.dn { color: var(--red); }
+.snap-sub { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text3); margin-top: 2px; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(195px,1fr)); gap: 14px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow); }
+.kpi-l { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.kpi-v.up { color: var(--green); }
+.kpi-v.dn { color: var(--red); }
+.badge { display: inline-block; font-family: 'Segoe UI',sans-serif; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+.up { background: rgba(122,154,122,.15); color: var(--green); }
+.dn { background: rgba(184,112,112,.15); color: var(--red); }
+.nt { background: rgba(123,143,160,.15); color: var(--accent2); }
+.tbl-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow); }
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI',sans-serif; font-size: 13px; }
+.tbl th { background: var(--card2); color: var(--text3); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); background: var(--card2); }
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); }
+.ctitle { font-size: 13px; color: var(--text2); margin-bottom: 12px; font-weight: 600; }
+.cwrap { position: relative; height: 240px; }
+.cmt { font-size: 14px; color: var(--text2); line-height: 1.85; }
+.cmt p { margin-bottom: 12px; }
+.cmt strong { color: var(--text); }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+.bscore { display: flex; gap: 16px; padding: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 12px; box-shadow: 0 1px 4px var(--shadow); }
+.bscore .circle { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; color: white; flex-shrink: 0; }
+.cg { background: var(--green); }
+.cw { background: var(--gold); }
+.co { background: var(--rose); }
+.cr { background: var(--red); }
+.cb { background: var(--accent2); }
+.bd h4 { font-size: 14px; color: var(--text); margin-bottom: 6px; font-family: 'Segoe UI',sans-serif; letter-spacing: 0.5px; }
+.bd p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+.pgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.dcf-note { background: var(--card2); border-left: 3px solid var(--accent2); padding: 14px 18px; border-radius: 6px; font-size: 13.5px; color: var(--text2); line-height: 1.85; }
+.dcf-note p { margin-bottom: 8px; }
+.dcf-note strong { color: var(--text); }
+.tag-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap: 12px; margin-top: 14px; }
+.tag-card { background: var(--card); border: 1px solid var(--border); border-left: 3px solid var(--accent2); padding: 12px 16px; border-radius: 6px; }
+.tag-card.pos { border-left-color: var(--green); }
+.tag-card.neg { border-left-color: var(--red); }
+.tag-card.neu { border-left-color: var(--accent2); }
+.tag-card h5 { font-size: 13px; color: var(--text); margin-bottom: 6px; font-family: 'Segoe UI',sans-serif; }
+.tag-card p { font-size: 12px; color: var(--text2); line-height: 1.7; }
+.tag-card .tag-bd { font-family: 'Segoe UI',sans-serif; font-size: 10px; padding: 1px 6px; border-radius: 4px; margin-left: 4px; }
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap: 12px; }
+.risk-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 14px 18px; position: relative; box-shadow: 0 1px 3px var(--shadow); }
+.risk-card::before { content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent); }
+.risk-card.r1::before { background: var(--green); }
+.risk-card.r2::before { background: rgba(122,154,122,.6); }
+.risk-card.r3::before { background: var(--gold); }
+.risk-card.r4::before { background: var(--rose); }
+.risk-card.r5::before { background: var(--red); }
+.risk-card h5 { font-size: 14px; margin-bottom: 6px; color: var(--text); }
+.risk-score { font-family: 'Segoe UI',sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.r1 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r2 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r3 .risk-score { background: rgba(185,160,106,.18); color: var(--gold); }
+.r4 .risk-score { background: rgba(192,144,144,.18); color: var(--rose); }
+.r5 .risk-score { background: rgba(184,112,112,.18); color: var(--red); }
+.risk-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+footer { background: var(--card2); border-top: 1px solid var(--border); padding: 24px; text-align: center; color: var(--text3); font-size: 12px; margin-top: 40px; line-height: 1.8; }
+@media (max-width: 768px) { .cgrid,.pgrid { grid-template-columns: 1fr; } .hero h1 { font-size: 22px; } .kpi-grid { grid-template-columns: 1fr 1fr; } .stock-snap { grid-template-columns: 1fr 1fr; } .haitu-essay-header { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/00700" target="_blank" rel="noopener" title="在雪球查看 腾讯 实时行情">雪球 00700</a>
+  </div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">Q1 2026 财报发布 · 2026-05-13 &nbsp;|&nbsp; 海图研判 · 2026-05-13 · 财报次日</div>
+  <h1>腾讯 Tencent 0700 · Q1 2026 深度分析</h1>
+  <div class="hero-sub">HKEX: 0700 &nbsp;|&nbsp; 微信 14.3 亿 MAU · 国内游戏 +6% · 国际游戏 +13% · 广告 +20% · AI 投入翻倍至 ¥360+ 亿 · 全方位超预期 &nbsp;|&nbsp; 价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill">股价 <strong>HKD 460.20</strong></div>
+    <div class="pill">市值 <strong>HKD 4.16万亿</strong></div>
+    <div class="pill">Q1 营收 <strong>¥1,965亿(+9%)</strong></div>
+    <div class="pill">Q1 IFRS 净利 <strong>¥594亿(+19%)</strong></div>
+    <div class="pill">Forward P/E <strong>11.9x</strong></div>
+    <div class="pill">海图研判 <strong>买入</strong></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 海图页首短评 ═══ -->
+<div class="haitu-quip">
+  <div class="haitu-quote">
+    <div class="haitu-portrait">中国互联网最稳的"现金奶牛"——微信 14.32 亿 MAU + 国内游戏 ¥454 亿（+6%）+ 国际游戏 ¥188 亿（+13%）+ 广告 ¥382 亿（+20% AI 驱动）+ 金融科技 ¥599 亿（+9%）。<strong>Q1 2026 营收 +9% / IFRS 净利 +19% / Non-IFRS 净利 +11% / FCF +20%</strong> —— 全方位超预期。AI 投入从 2025 ¥180 亿 → 2026 ¥360+ 亿翻倍，元宝助手+混元大模型形成中国 AI 三巨头之一。<strong>市值 HKD 4.16 万亿 / Forward P/E 11.9x（vs 历史均值 25x）/ 股价距 52 周高 -33% 距低点仅 +1.4%</strong>—— 中概互联网龙头中估值最便宜的之一。</div>
+    <div class="haitu-rating-line">评级：<span class="rating-badge rating-buy">买入</span> · 12 个月目标价 HKD 580（+26%）· 微信生态护城河 + AI 投入翻倍 + 大规模回购 + 估值历史低位的四轮组合</div>
+  </div>
+</div>
+
+<!-- ═══ 市场数据快照 ═══ -->
+<div class="section">
+  <div class="stitle">市场数据快照（2026-05-13）· 货币：HKD/RMB ≈ 0.90 / USD/HKD ≈ 7.78</div>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">股价</div><div class="snap-val">HKD 460.20</div><div class="snap-sub">2026-05-12 收盘</div></div>
+    <div class="snap-item"><div class="snap-label">市值</div><div class="snap-val">HKD 4.16万亿</div><div class="snap-sub">~$534B / ~¥3.84 万亿</div></div>
+    <div class="snap-item"><div class="snap-label">流通股</div><div class="snap-val">90.4 亿</div><div class="snap-sub">含 H 股+港股通</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间</div><div class="snap-val">HKD 454-683</div><div class="snap-sub">距高点 -33% / 距低点 +1.4%</div></div>
+    <div class="snap-item"><div class="snap-label">TTM P/E (IFRS)</div><div class="snap-val up">16.53x</div><div class="snap-sub">EPS HKD 27.84</div></div>
+    <div class="snap-item"><div class="snap-label">Forward P/E</div><div class="snap-val up">11.90x</div><div class="snap-sub">FY27 共识</div></div>
+    <div class="snap-item"><div class="snap-label">P/B</div><div class="snap-val">3.20x</div><div class="snap-sub">每股净资产 HKD 143.92</div></div>
+    <div class="snap-item"><div class="snap-label">EV/EBITDA</div><div class="snap-val up">~14x</div><div class="snap-sub">EBITDA HKD 2,842 亿</div></div>
+    <div class="snap-item"><div class="snap-label">股息率</div><div class="snap-val up">1.15%</div><div class="snap-sub">HKD 4.76/股 年度</div></div>
+    <div class="snap-item"><div class="snap-label">FCF Yield (TTM)</div><div class="snap-val up">3.6%</div><div class="snap-sub">FCF HKD 1,487 亿</div></div>
+    <div class="snap-item"><div class="snap-label">毛利率</div><div class="snap-val up">56.4%</div><div class="snap-sub">软件平台典型</div></div>
+    <div class="snap-item"><div class="snap-label">净利率 (TTM)</div><div class="snap-val up">30.6%</div><div class="snap-sub">中国互联网最高之一</div></div>
+    <div class="snap-item"><div class="snap-label">ROE (TTM)</div><div class="snap-val up">20.5%</div><div class="snap-sub">高质量复利</div></div>
+    <div class="snap-item"><div class="snap-label">现金+短投</div><div class="snap-val up">HKD 4,597 亿</div><div class="snap-sub">~$590 亿</div></div>
+    <div class="snap-item"><div class="snap-label">总有息负债</div><div class="snap-val">HKD 4,055 亿</div><div class="snap-sub">含可换股+长期票据</div></div>
+    <div class="snap-item"><div class="snap-label">净现金（公司公告）</div><div class="snap-val up">¥1,469 亿</div><div class="snap-sub">+63% YoY</div></div>
+    <div class="snap-item"><div class="snap-label">长期投资组合 NAV</div><div class="snap-val up">~$200B+</div><div class="snap-sub">PDD/Meituan/Spotify 等</div></div>
+    <div class="snap-item"><div class="snap-label">下次财报</div><div class="snap-val nt">2026-08-12</div><div class="snap-sub">Q2 2026 + 中报</div></div>
+  </div>
+</div>
+
+<!-- ═══ Q1 2026 KPI ═══ -->
+<div class="section">
+  <div class="stitle">Q1 2026 季度业绩（2026-05-13 发布 · 全方位超预期）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">Q1 总营收</div><div class="kpi-v up">¥1,965 亿</div><span class="badge up">+9% YoY</span><div class="kpi-l" style="margin-top:6px">$272 亿 / 超共识 +7%</div></div>
+    <div class="kpi"><div class="kpi-l">Q1 增值服务（VAS）</div><div class="kpi-v up">¥961 亿</div><span class="badge up">+4% YoY</span><div class="kpi-l" style="margin-top:6px">游戏+社交 / 占比 49%</div></div>
+    <div class="kpi"><div class="kpi-l">Q1 国内游戏</div><div class="kpi-v up">¥454 亿</div><span class="badge up">+6% YoY</span><div class="kpi-l" style="margin-top:6px">王者+和平+地下城驱动</div></div>
+    <div class="kpi"><div class="kpi-l">Q1 国际游戏</div><div class="kpi-v up">¥188 亿</div><span class="badge up">+13% YoY</span><div class="kpi-l" style="margin-top:6px">Supercell+Brawl Stars 持续</div></div>
+    <div class="kpi"><div class="kpi-l">Q1 广告（营销服务）</div><div class="kpi-v up">¥382 亿</div><span class="badge up">+20% YoY</span><div class="kpi-l" style="margin-top:6px">AI 驱动 + 视频号崛起</div></div>
+    <div class="kpi"><div class="kpi-l">Q1 金融科技+企业服务</div><div class="kpi-v up">¥599 亿</div><span class="badge up">+9% YoY</span><div class="kpi-l" style="margin-top:6px">支付+理财+云+ToB</div></div>
+    <div class="kpi"><div class="kpi-l">Q1 毛利</div><div class="kpi-v up">¥1,113 亿</div><span class="badge up">+11% YoY</span><div class="kpi-l" style="margin-top:6px">毛利率 56.6% +1pp</div></div>
+    <div class="kpi"><div class="kpi-l">Q1 营业利润</div><div class="kpi-v up">¥674 亿</div><span class="badge up">+17% YoY</span><div class="kpi-l" style="margin-top:6px">营业利润率 34.3%</div></div>
+    <div class="kpi"><div class="kpi-l">Q1 IFRS 净利</div><div class="kpi-v up">¥594 亿</div><span class="badge up">+19% YoY</span><div class="kpi-l" style="margin-top:6px">$82 亿 / 含投资公允价值</div></div>
+    <div class="kpi"><div class="kpi-l">Q1 Non-IFRS 净利</div><div class="kpi-v up">¥698 亿</div><span class="badge up">+11% YoY</span><div class="kpi-l" style="margin-top:6px">$97 亿 / 核心经营</div></div>
+    <div class="kpi"><div class="kpi-l">Q1 IFRS EPS（摊薄）</div><div class="kpi-v up">¥6.302</div><span class="badge up">+19% YoY</span><div class="kpi-l" style="margin-top:6px">~HKD 7.00</div></div>
+    <div class="kpi"><div class="kpi-l">Q1 Non-IFRS EPS（摊薄）</div><div class="kpi-v up">¥7.364</div><span class="badge up">+11% YoY</span><div class="kpi-l" style="margin-top:6px">~HKD 8.18</div></div>
+    <div class="kpi"><div class="kpi-l">Q1 经营现金流</div><div class="kpi-v up">~¥888 亿</div><span class="badge up">+15% YoY</span><div class="kpi-l" style="margin-top:6px">FCF 转换强劲</div></div>
+    <div class="kpi"><div class="kpi-l">Q1 资本开支</div><div class="kpi-v up">¥319 亿</div><span class="badge up">+16% YoY</span><div class="kpi-l" style="margin-top:6px">AI 算力大幅投入</div></div>
+    <div class="kpi"><div class="kpi-l">Q1 自由现金流</div><div class="kpi-v up">¥567 亿</div><span class="badge up">+20% YoY</span><div class="kpi-l" style="margin-top:6px">$79 亿</div></div>
+    <div class="kpi"><div class="kpi-l">Q1 净现金</div><div class="kpi-v up">¥1,469 亿</div><span class="badge up">+63% YoY</span><div class="kpi-l" style="margin-top:6px">$204 亿 / 现金狂涨</div></div>
+    <div class="kpi"><div class="kpi-l">微信 MAU</div><div class="kpi-v up">14.32 亿</div><span class="badge up">+2% YoY</span><div class="kpi-l" style="margin-top:6px">几乎是中国所有人</div></div>
+    <div class="kpi"><div class="kpi-l">QQ Mobile MAU</div><div class="kpi-v dn">5.16 亿</div><span class="badge dn">-3% YoY</span><div class="kpi-l" style="margin-top:6px">年轻用户向小红书/抖音</div></div>
+    <div class="kpi"><div class="kpi-l">Q1 回购规模</div><div class="kpi-v up">HKD 76 亿</div><span class="badge up">1,270 万股</span><div class="kpi-l" style="margin-top:6px">vs FY25 全年 HKD 360+ 亿</div></div>
+    <div class="kpi"><div class="kpi-l">FY26 AI 投入指引</div><div class="kpi-v up">¥360+ 亿</div><span class="badge up">+100% YoY vs FY25 ¥180亿</span><div class="kpi-l" style="margin-top:6px">混元+元宝助手</div></div>
+    <div class="kpi"><div class="kpi-l">下次财报</div><div class="kpi-v nt">2026-08-12</div><span class="badge nt">Q2 2026 + 中报</span><div class="kpi-l" style="margin-top:6px">中期分红公告</div></div>
+  </div>
+
+  <div class="dcf-note" style="margin-top:18px">
+    <strong>Q1 2026 关键洞察 · 全方位超预期 + AI 投入翻倍：</strong>
+    <p style="margin-top:8px">(1) <span class="hl-t">营收 +9% / IFRS 净利 +19% / Non-IFRS 净利 +11%</span> —— 三大利润口径全部正增长且超共识；(2) <strong>广告 +20% 是最大亮点</strong>—— AI 驱动的精准投放 + 视频号崛起让广告业务从 FY22 -7% → FY25 +18% → Q1 26 +20%，已成为腾讯第二增长引擎；(3) <strong>国际游戏 +13%</strong>—— Supercell + Brawl Stars + Path of Exile 2 + Honor of Kings World 全球扩张持续，是国内游戏成熟期之外的增量；(4) <span class="hl-t">FCF +20% / 净现金 ¥1,469 亿（+63% YoY）</span>—— 现金流质量持续改善，财务弹性极强；(5) <strong>FY26 AI 投入翻倍至 ¥360+ 亿</strong>（vs FY25 ¥180 亿）—— 元宝助手 + 混元大模型让腾讯成为中国 AI 三巨头之一（与字节豆包+阿里通义并列）；(6) Q1 回购 HKD 76 亿延续 FY25 大规模回购节奏。<strong>这是腾讯近 4 年最好的季度财报</strong>。
+  </div>
+</div>
+
+<!-- ═══ FY2025 + 9M FY26 全年回顾 ═══ -->
+<div class="section">
+  <div class="stitle">FY2025 全年（2026-03-18 发布）回顾</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">FY25 总营收</div><div class="kpi-v up">¥6,602 亿</div><span class="badge up">+8% YoY</span><div class="kpi-l" style="margin-top:6px">$916 亿</div></div>
+    <div class="kpi"><div class="kpi-l">FY25 VAS 营收</div><div class="kpi-v up">¥3,250 亿</div><span class="badge up">+5%</span><div class="kpi-l" style="margin-top:6px">游戏+社交</div></div>
+    <div class="kpi"><div class="kpi-l">FY25 广告营收</div><div class="kpi-v up">¥1,300 亿</div><span class="badge up">+18%</span><div class="kpi-l" style="margin-top:6px">AI 驱动 / 视频号</div></div>
+    <div class="kpi"><div class="kpi-l">FY25 金融+企业服务</div><div class="kpi-v up">¥2,050 亿</div><span class="badge up">+7%</span><div class="kpi-l" style="margin-top:6px">支付+云</div></div>
+    <div class="kpi"><div class="kpi-l">FY25 归母净利 (IFRS)</div><div class="kpi-v up">¥2,250 亿</div><span class="badge up">+68% YoY</span><div class="kpi-l" style="margin-top:6px">含投资公允价值</div></div>
+    <div class="kpi"><div class="kpi-l">FY25 Non-IFRS 净利</div><div class="kpi-v up">¥2,510 亿</div><span class="badge up">+22%</span><div class="kpi-l" style="margin-top:6px">核心经营利润</div></div>
+    <div class="kpi"><div class="kpi-l">FY25 自由现金流</div><div class="kpi-v up">¥1,800 亿</div><span class="badge up">+30%</span><div class="kpi-l" style="margin-top:6px">$250 亿 / FCF Yield 4.7%</div></div>
+    <div class="kpi"><div class="kpi-l">FY25 回购规模</div><div class="kpi-v up">HKD 360+ 亿</div><span class="badge up">~$46 亿</span><div class="kpi-l" style="margin-top:6px">摧毁流通股 1.5%+</div></div>
+    <div class="kpi"><div class="kpi-l">FY25 年度股息</div><div class="kpi-v up">HKD 4.50/股</div><span class="badge up">+33% YoY</span><div class="kpi-l" style="margin-top:6px">总额 ~HKD 410 亿</div></div>
+    <div class="kpi"><div class="kpi-l">FY25 累计股东回报</div><div class="kpi-v up">HKD 770+ 亿</div><span class="badge up">回购+派息合计</span><div class="kpi-l" style="margin-top:6px">~2% 市值</div></div>
+    <div class="kpi"><div class="kpi-l">FY26 共识全年营收</div><div class="kpi-v up">~¥7,200 亿</div><span class="badge up">+9%</span><div class="kpi-l" style="margin-top:6px">$1,000B 等量</div></div>
+    <div class="kpi"><div class="kpi-l">FY26 共识 Non-IFRS 净利</div><div class="kpi-v up">~¥2,800 亿</div><span class="badge up">+12%</span><div class="kpi-l" style="margin-top:6px">$388 亿</div></div>
+  </div>
+</div>
+
+<!-- ═══ 季度趋势 ═══ -->
+<div class="section">
+  <div class="stitle">季度趋势 + 5 年总览</div>
+  <div class="cgrid">
+    <div class="ccard">
+      <div class="ctitle">5 季度营收趋势（¥亿）</div>
+      <div class="cwrap"><canvas id="revenueChart"></canvas></div>
+    </div>
+    <div class="ccard">
+      <div class="ctitle">5 季度 Non-IFRS 净利趋势（¥亿）</div>
+      <div class="cwrap"><canvas id="profitChart"></canvas></div>
+    </div>
+    <div class="ccard">
+      <div class="ctitle">Q1 2026 营收结构（¥亿）</div>
+      <div class="cwrap"><canvas id="segmentChart"></canvas></div>
+    </div>
+    <div class="ccard">
+      <div class="ctitle">5 年股东回报（HKD 亿）</div>
+      <div class="cwrap"><canvas id="capexChart"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ Sankey ═══ -->
+<div class="section">
+  <div class="stitle">Q1 2026 资金流向 · 营收 → 自由现金流（¥ 亿）</div>
+  <div class="ccard">
+    <div class="ctitle">从 ¥1,965 亿单季营收到 ¥567 亿自由现金流的完整资金链路</div>
+    <div id="sankey" style="width:100%;height:480px;"></div>
+  </div>
+</div>
+
+<!-- ═══ 模块 1 ═══ -->
+<div class="section">
+  <div class="stitle">模块 1 · 公司概览与背景</div>
+  <div class="cmt">
+    <p><strong>公司全称</strong>：腾讯控股有限公司 / Tencent Holdings Limited<br>
+    <strong>上市</strong>：HKEX: 0700（2004-06-16 IPO，发行价 HKD 3.70 → 现价 HKD 460 涨幅 124 倍）+ OTC: TCEHY（美股 ADR）<br>
+    <strong>总部</strong>：深圳<br>
+    <strong>财年</strong>：1 月 1 日 - 12 月 31 日（自然年）<br>
+    <strong>主营</strong>：增值服务（VAS - 游戏+社交+订阅）+ 营销服务（广告）+ 金融科技与企业服务（FBS - 支付+云+ToB）+ 投资组合（含 PDD/Meituan/Spotify/Reddit/Tesla 等大量上市投资）</p>
+
+    <p><strong>核心叙事</strong>：腾讯是<span class="hl-t">中国互联网最稳的"现金奶牛"</span>—— 微信 14.32 亿 MAU（中国几乎所有人）+ 游戏（中国 + 国际市占第一）+ 广告（AI+视频号崛起）+ 金融科技（支付+云+ToB）+ 庞大投资组合（~$200B 上市股权）。<span class="hl-t">这是与 Meta+Google+Visa+Goldman 的复合体</span>。Q1 2026 营收 +9% / IFRS 净利 +19% / Non-IFRS 净利 +11% / 广告 +20% / FCF +20% —— 全方位超预期，是腾讯近 4 年最好的季度。<strong>当前股价 HKD 460 接近 52 周低 HKD 454</strong>（距 52 周高 -33%），市场对中概股的悲观情绪让腾讯估值跌至历史低位（Forward P/E 11.9x vs 历史均值 25x）。最关键的问题：(1) 微信能否在抖音/小红书冲击下持续增长？(2) AI 投入翻倍 ¥360+ 亿能否带来"AI agent + 元宝助手"的商业化突破？(3) 庞大投资组合的真实 NAV 何时被市场重新认识？</p>
+
+    <p><strong>简史与里程碑</strong>：</p>
+    <p>
+      <strong>1. 1998 年深圳成立</strong>—— 马化腾创立"腾讯计算机系统有限公司"<br>
+      <strong>2. 1999 年 QQ 上线</strong>—— 起家产品，仿 ICQ<br>
+      <strong>3. 2004-06-16 港股 IPO</strong>—— HKEX: 0700, 发行价 HKD 3.70<br>
+      <strong>4. 2011 年微信上线</strong>—— 改变中国移动互联网格局的产品<br>
+      <strong>5. 2016 年 86 亿美元收购 Supercell</strong>—— 国际游戏巨头化<br>
+      <strong>6. 2017 年游戏王者荣耀爆发</strong>—— 中国移动游戏霸主<br>
+      <strong>7. 2020-2022 反垄断 + 监管寒冬</strong>—— 股价从 HKD 760 跌至 HKD 200<br>
+      <strong>8. 2023-2024 视频号崛起</strong>—— 广告业务恢复 + AI 战略启动<br>
+      <strong>9. 2024 PRT 计划 + 大规模回购</strong>—— $7B 回购计划<br>
+      <strong>10. 2025-2026 AI 投入翻倍</strong>—— 元宝助手 + 混元大模型<br>
+      <strong>11. 2026-05-13 Q1 财报</strong>—— 全方位超预期 + FY26 AI 翻倍指引
+    </p>
+
+    <p><strong>股权结构（2025-12-31 末）</strong>：</p>
+    <p>
+      <strong>南非 Naspers / Prosus</strong>—— ~24% 股权（持续减持中，2018 起从 33% 降至 24%）<br>
+      <strong>马化腾（创始人/CEO）</strong>—— ~8% 股权 + 投票权<br>
+      <strong>张志东、刘炽平等创始团队</strong>—— 合计 ~4%<br>
+      <strong>公众股东（H 股 + 港股通）</strong>—— ~64%<br>
+      <strong>注</strong>：马化腾自 1998 任 CEO，27 年连续在位——这是中国互联网公司中"创始人 CEO 任期最长"的之一。<strong>南向资金通过港股通持有腾讯比例已超 20%</strong>，是港股通最大持仓股之一
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 模块 2 ═══ -->
+<div class="section">
+  <div class="stitle">模块 2 · 管理层评估</div>
+
+  <div class="bscore">
+    <div class="circle cg">A</div>
+    <div class="bd">
+      <h4>马化腾 · 创始人/CEO（1998 至今 · 27 年）</h4>
+      <p>1971 年生，深圳大学计算机出身。1998 年创立腾讯，<strong>27 年连续担任 CEO</strong>—— 是中国互联网公司中任期最长的创始人 CEO。<span class="hl-t">海图判断：马化腾是中国互联网最稳健的"长期主义者"</span>—— 比起马云、李彦宏、王兴的"频繁公开发声"，马化腾更像"看不见的舵手"。资本配置极其严谨（27 年没有失败的大并购），战略眼光极强（早期投资 PDD/Meituan/Spotify 等都成功）。<strong>2020-2022 监管寒冬中保持冷静，没有像其他互联网巨头那样"主动剥离/拆分"，反而是用大规模回购对应市场恐慌</strong>—— 证明其对长期价值的判断力。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>刘炽平 · 总裁（2005 至今 · 20 年）</h4>
+      <p>1972 年生，斯坦福 MBA + Goldman Sachs 出身。2005 年加入腾讯，主导战略并购+投资+海外扩张。<strong>是腾讯庞大投资组合（含 PDD、Meituan、Spotify、Reddit、Tesla 等）的总设计师</strong>。刘炽平的资本运作 + 马化腾的产品执行 = 腾讯 27 年护城河持续加宽。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">A</div>
+    <div class="bd">
+      <h4>资本配置纪律 · 中概股回购+派息最强</h4>
+      <p>
+      <strong>FY24-25 累计回购 HKD 720+ 亿</strong> = $92 亿 = 摧毁流通股 3%+。<br>
+      <strong>FY25 股息 HKD 4.50/股（+33% YoY）+ 计划进一步提升</strong><br>
+      <strong>主动剥离</strong>：腾讯持续减持其投资公司（如 2021 减持 JD ~$16B、2022 减持 Meituan、2024 减持 Sea Limited），将资金用于自身回购<br>
+      <strong>资本投入聚焦</strong>：FY26 AI Capex ¥360+ 亿（翻倍 vs FY25 ¥180 亿）—— 是腾讯历史最大单年 AI 投入。<br>
+      <strong>评价</strong>：<span class="hl-t">这是中概股中"资本配置纪律最强"的公司</span>—— 27 年来没有败笔。
+      </p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>战略执行能力 · AI 时代再加速</h4>
+      <p>Q1 2026 营收 +9% / 净利 +19% / 广告 +20% / 国际游戏 +13% —— <strong>所有业务线全部正增长，且增速加速</strong>。这是腾讯近 4 年最好的财报。<span class="hl-t">"AI + 视频号 + 国际游戏 + 海外扩张" 4 个新增长引擎全部跑通</span>。海图判断：<strong>马化腾是中国互联网中最像 Mark Zuckerberg / Sundar Pichai 的"产品工程师 CEO"</strong>，在 AI 时代有比国内同行更强的执行力。</p>
+    </div>
+  </div>
+
+  <div class="cmt">
+    <p><strong>长期主义测试</strong>：3 年前（FY22 财报）管理层承诺"广告业务恢复 + 视频号崛起 + AI 投入 + 大规模回购 + 国际游戏扩张"——3 年后<span class="hl-t">每一项都超额兑现</span>：广告 FY22 -7% → FY25 +18% → Q1 26 +20%、视频号已成大平台、AI 投入翻倍、累计回购 HKD 720+ 亿、国际游戏从 FY22 持平 → Q1 26 +13%。<strong>这是中概股中言行一致度最高的公司</strong>。</p>
+
+    <p><strong>薪酬与利益绑定</strong>：马化腾 ~8% 股权，价值 HKD 3,300+ 亿（$425 亿）。<strong>个人利益与股东高度绑定</strong>。无大规模减持记录，反而是定期捐赠（2018 年捐 1 亿股做慈善）。<span class="hl-t">这是中国互联网最理想的创始人持股结构</span>。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 3 ═══ -->
+<div class="section">
+  <div class="stitle">模块 3 · 商业模式深度解析</div>
+
+  <div class="cmt">
+    <p><strong>海图"一句话测试"</strong>：<span class="hl-t">通过微信（14.3 亿 MAU）+ QQ（5.16 亿 MAU）+ 王者荣耀/PUBG/Supercell/Brawl Stars 等游戏 + 视频号广告 + 微信支付 + 腾讯云 + 庞大上市投资组合（PDD/Meituan/Spotify/Reddit 等），服务中国 + 全球用户，靠游戏付费 + 广告 + 支付佣金 + 云订阅 + 投资公允价值变动多元变现，FY25 营收 ¥6,602 亿、净利 ¥2,510 亿（Non-IFRS）、净利率 38%。</span></p>
+
+    <p><strong>Q1 2026 收入模型与分部拆解</strong>：</p>
+    <table class="tbl"><thead><tr><th>分部</th><th>Q1 26 营收(¥亿)</th><th>占比</th><th>YoY</th><th>毛利率</th><th>战略地位</th></tr></thead>
+    <tbody>
+      <tr><td>增值服务 (VAS)</td><td>961</td><td>49%</td><td>+4%</td><td>~57%</td><td>★★★★★ 现金奶牛</td></tr>
+      <tr><td>　- 国内游戏</td><td>454</td><td>23%</td><td>+6%</td><td>~58%</td><td>★★★★★ 王者+和平+DNF</td></tr>
+      <tr><td>　- 国际游戏</td><td>188</td><td>10%</td><td>+13%</td><td>~55%</td><td>★★★★★ Supercell+PoE2</td></tr>
+      <tr><td>　- 社交网络（订阅）</td><td>319</td><td>16%</td><td>持平</td><td>~50%</td><td>★★★ 视频号付费+音乐</td></tr>
+      <tr><td>营销服务（广告）</td><td>382</td><td>19%</td><td>+20%</td><td>~58%</td><td>★★★★★ AI+视频号驱动</td></tr>
+      <tr><td>金融科技+企业服务</td><td>599</td><td>30%</td><td>+9%</td><td>~50%</td><td>★★★★ 支付+云+ToB</td></tr>
+      <tr><td>其他+抵销</td><td>23</td><td>2%</td><td>—</td><td>—</td><td>—</td></tr>
+      <tr class="hl"><td>合计</td><td>1,965</td><td>100%</td><td>+9%</td><td>56.6%</td><td>—</td></tr>
+    </tbody></table>
+
+    <p style="margin-top:14px"><strong>单位经济（Unit Economics）</strong>：</p>
+    <p>
+      <strong>每微信 MAU 月度 ARPU</strong>：FY25 营收 ¥6,602 亿 / 14.32 亿 MAU / 12 个月 = <strong>¥38/MAU/月</strong>。<br>
+      对比同行：Meta ARPU $14/MAU/月、字节抖音 ¥18/MAU/月、微博 ¥1.5/MAU/月、小红书 ¥10/MAU/月。<br>
+      <span class="hl-t">腾讯的微信 ARPU 是中国社交平台中最高之一</span>—— 反映微信的"超级 App"价值（社交+支付+小程序+视频号+游戏入口）。<br>
+      <strong>游戏 ARPU</strong>：王者荣耀月活 ~1 亿，月流水 ~¥35 亿，ARPU ~¥35/MAU/月。这是全球最赚钱的手游之一。
+    </p>
+
+    <p><strong>产业链定位</strong>：</p>
+    <p>
+      <strong>上游</strong>：游戏开发者（自营+收购+投资）+ 内容创作者（视频号+音乐+长视频）+ 商家（微信支付+小程序+广告主）<br>
+      <strong>中游（公司）</strong>：腾讯（微信+QQ 双社交基础设施 + 游戏+广告+支付+云 4 大变现引擎 + 庞大投资组合）<br>
+      <strong>下游</strong>：14.3 亿微信用户 + 5.16 亿 QQ 用户 + 全球游戏玩家 + 几乎所有中国 B 端商家<br>
+      <strong>议价能力</strong>：对消费者议价能力极强（社交无替代）；对商家议价能力极强（支付+广告+小程序无替代）；对内容创作者议价能力强（流量稀缺）；对游戏开发者议价能力中（自营+收购+投资三轮策略）
+    </p>
+
+    <p><strong>关键商业模式特点</strong>：</p>
+    <p>
+      <strong>1. 微信"超级 App"网络效应</strong>：14.3 亿 MAU + 100% 中国互联网用户覆盖 + 小程序生态 + 视频号 + 支付 + 公众号 = <strong>无可替代的"国家级基础设施"</strong>。这是腾讯最强护城河。<br>
+      <strong>2. 多元变现引擎</strong>：游戏+广告+支付+云+订阅+投资组合 6 路变现，每路都是 ¥1,000+ 亿规模业务。<strong>风险高度分散</strong>。<br>
+      <strong>3. 高毛利率 + 高净利率</strong>：毛利率 56.6%、营业利润率 34.3%、净利率 30.6%。<span class="hl-t">是中国互联网中最赚钱的公司</span>。<br>
+      <strong>4. 庞大投资组合（NAV ~$200B+）</strong>：含 PDD 17%、Meituan 16%、Spotify 8.5%、Reddit、Tesla、Sea Limited 等。<strong>"隐藏价值"巨大</strong>。<br>
+      <strong>5. 净现金 ¥1,469 亿 + 大规模回购 + 派息</strong>：财务弹性极强。
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 模块 4 ═══ -->
+<div class="section">
+  <div class="stitle">模块 4 · 经济护城河分析（5 维）</div>
+
+  <div class="bscore">
+    <div class="circle cg">A+</div>
+    <div class="bd">
+      <h4>1. 网络效应（微信超级 App）· <strong>极宽护城河</strong></h4>
+      <p>14.32 亿 MAU + 中国 100% 互联网用户覆盖 + 小程序生态 + 视频号 + 支付 + 公众号 = <strong>无可替代的"中国国家级基础设施"</strong>。<span class="hl-t">这是腾讯最强护城河，也是全球最深的网络效应之一</span>（仅次于 Meta 30亿用户但中国独占）。即便抖音/小红书冲击信息流，微信"国民通讯+支付+小程序入口"地位无法替代。<br>持久性：未来 20 年仍是中国互联网基础设施。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">A</div>
+    <div class="bd">
+      <h4>2. 转换成本（微信+游戏）· <strong>极宽护城河</strong></h4>
+      <p>对微信：转换成本极高——所有联系人+聊天记录+支付绑定+小程序授权都在微信。<strong>用户根本不可能迁移到其他社交平台</strong>。对游戏：王者荣耀+PUBG 等用户的角色等级、皮肤、社交关系都绑定在腾讯游戏 ID。<span class="hl-t">这是与 Facebook/Apple Pay 同类型的护城河</span>。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">A</div>
+    <div class="bd">
+      <h4>3. 成本优势（规模 + 数据 + AI）· <strong>宽护城河</strong></h4>
+      <p>14.3 亿用户的边际成本极低 + 数据规模 + 自建数据中心 + AI 算力 = 强成本优势。<strong>毛利率 56.6% / 营业利润率 34.3% / 净利率 30.6%</strong> 反映极强规模效应。即便 AI 投入翻倍 ¥360 亿，因营收规模 ¥6,600+ 亿，对利润率冲击仅 5pp。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">A</div>
+    <div class="bd">
+      <h4>4. 无形资产（品牌+数据+AI 模型）· <strong>极宽护城河</strong></h4>
+      <p>"腾讯/微信/QQ/王者荣耀/和平精英" 在中国家喻户晓。数据资产（14 亿用户多年消费/社交/支付数据）+ AI 模型（混元大模型 + 元宝助手）+ 游戏 IP 库（自研 + Supercell + Riot Games + Epic Games 等投资）= <strong>难以复制的无形资产组合</strong>。<span class="hl-t">这是 AI 时代最稀缺的护城河</span>。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>5. 有效规模（中国社交+游戏双寡头）· <strong>宽护城河</strong></h4>
+      <p>中国社交：微信+QQ 月活合计 19.5 亿（同一公司双品牌覆盖），<strong>是真正的"单寡头"</strong>。中国游戏：腾讯+网易+米哈游 3 强格局，腾讯市占 ~50%。<span class="hl-t">微信的"单寡头"地位是中国互联网最稳的护城河</span>。</p>
+    </div>
+  </div>
+
+  <div class="cmt">
+    <p style="margin-top:18px"><strong>护城河趋势 · 持续加宽（AI 时代受益）</strong>：5 大维度综合评分 = 2A+ + 3A ≈ <strong>极宽护城河</strong>。这是中国所有互联网公司中护城河最深的之一（与阿里、字节并列前三）。<span class="hl-t">10 年后会更宽还是更窄？海图判断：会"明显加宽"</span>—— 微信的"超级 App"地位不可替代，AI 时代腾讯的"用户+数据+模型"组合让护城河持续深化。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 5 ═══ -->
+<div class="section">
+  <div class="stitle">模块 5 · 财务深度分析</div>
+
+  <h3 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">5.1 三张表概览（FY2025 vs FY2024）</h3>
+  <div class="tbl-wrap" style="margin-bottom:14px">
+    <table class="tbl"><thead><tr><th>项目（¥亿）</th><th>FY2024</th><th>FY2025</th><th>YoY</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td>利润表</td><td></td><td></td><td></td></tr>
+      <tr><td>总营收</td><td>6,110</td><td>6,602</td><td>+8%</td></tr>
+      <tr><td>毛利</td><td>3,300</td><td>3,720</td><td>+13%</td></tr>
+      <tr><td>毛利率</td><td>54%</td><td>56.4%</td><td>+2.4pp</td></tr>
+      <tr><td>营业利润</td><td>2,080</td><td>2,330</td><td>+12%</td></tr>
+      <tr><td>营业利润率</td><td>34%</td><td>35%</td><td>+1pp</td></tr>
+      <tr><td>归母净利润 (IFRS)</td><td>1,340</td><td>2,250</td><td>+68%</td></tr>
+      <tr><td>Non-IFRS 净利</td><td>2,063</td><td>2,510</td><td>+22%</td></tr>
+      <tr class="hl"><td>资产负债表（2025-12-31 末）</td><td></td><td></td><td></td></tr>
+      <tr><td>现金及等价物 + 短投</td><td>~3,800</td><td>~4,100</td><td>+8%</td></tr>
+      <tr><td>长期投资组合（上市股权）</td><td>~7,000</td><td>~8,500</td><td>+21%</td></tr>
+      <tr><td>非上市投资</td><td>~2,000</td><td>~2,200</td><td>+10%</td></tr>
+      <tr><td>有息负债（短借+长债）</td><td>~3,400</td><td>~3,650</td><td>+7%</td></tr>
+      <tr><td>归母股东权益</td><td>~10,500</td><td>~13,000</td><td>+24%</td></tr>
+      <tr><td>每股净资产（HKD/股）</td><td>HKD 120</td><td>HKD 144</td><td>+20%</td></tr>
+      <tr class="hl"><td>现金流量表（FY2025）</td><td></td><td></td><td></td></tr>
+      <tr><td>经营活动现金流 (OCF)</td><td>~2,700</td><td>~2,950</td><td>+9%</td></tr>
+      <tr><td>资本开支 (Capex)</td><td>~770</td><td>~1,150</td><td>+49%</td></tr>
+      <tr><td>自由现金流 (FCF)</td><td>~1,400</td><td>~1,800</td><td>+30%</td></tr>
+      <tr><td>派息 + 回购</td><td>HKD ~620 亿</td><td>HKD ~770 亿</td><td>+24%</td></tr>
+    </tbody></table>
+  </div>
+
+  <h3 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">5.2 5 年关键比率趋势</h3>
+  <div class="tbl-wrap" style="margin-bottom:14px">
+    <table class="tbl"><thead><tr><th>比率</th><th>FY21</th><th>FY22</th><th>FY23</th><th>FY24</th><th>FY25</th></tr></thead>
+    <tbody>
+      <tr><td>营收增速</td><td>+16%</td><td>-1%</td><td>+10%</td><td>+8%</td><td>+8%</td></tr>
+      <tr><td>归母净利增速 (IFRS)</td><td>+41%</td><td>-16%</td><td>+38%</td><td>+62%</td><td>+68%</td></tr>
+      <tr><td>Non-IFRS 净利增速</td><td>+1%</td><td>+7%</td><td>+36%</td><td>+41%</td><td>+22%</td></tr>
+      <tr><td>毛利率</td><td>44%</td><td>43%</td><td>48%</td><td>54%</td><td>56.4%</td></tr>
+      <tr><td>营业利润率</td><td>29%</td><td>23%</td><td>27%</td><td>34%</td><td>35%</td></tr>
+      <tr><td>ROE</td><td>14%</td><td>12%</td><td>13%</td><td>14%</td><td>20.5%</td></tr>
+      <tr><td>OCF/NI</td><td>140%</td><td>110%</td><td>120%</td><td>130%</td><td>130%</td></tr>
+      <tr><td>FCF Yield</td><td>~2%</td><td>~3%</td><td>~4%</td><td>~4%</td><td>~4.7%</td></tr>
+      <tr><td>派息率</td><td>~8%</td><td>~10%</td><td>~12%</td><td>~15%</td><td>~18%</td></tr>
+    </tbody></table>
+  </div>
+
+  <h3 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">5.3 杜邦分析（FY2025）</h3>
+  <div class="cmt">
+    <p><strong>ROE = 净利率 × 资产周转 × 权益乘数</strong></p>
+    <p>= 30.6% × (¥6,602 / ¥17,000) × (¥17,000 / ¥13,000)<br>
+    = <strong>30.6% × 0.388 × 1.31</strong><br>
+    = <strong>~15.6%（杜邦保守）</strong>vs yfinance ROE 20.5%（含投资公允价值收益）</p>
+    <p style="margin-top:10px"><strong>解读</strong>：ROE 由 3 项构成——<span class="hl-t">净利率 30.6%（中国互联网最高之一）+ 资产周转 0.388（控股型公司典型 / 含大量投资组合）+ 权益乘数 1.31（极保守）</span>。<strong>腾讯 ROE 高质量</strong>—— 不靠杠杆，靠极高净利率和投资公允价值。FY26 AI 投入翻倍可能让 FY26 ROE 略降至 18-19%，但 FY27-28 投资见效后 ROE 重回 22%+。</p>
+  </div>
+
+  <h3 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">5.4 资产负债健康度</h3>
+  <div class="cmt">
+    <p>
+      <strong>有息负债 ¥3,650 亿（短借+长债）</strong>—— 适中<br>
+      <strong>现金 ¥3,000 亿 + 短投 ¥1,100 亿 = 流动金融资产 ¥4,100 亿</strong>（$570 亿）<br>
+      <strong>长期投资（上市股权 NAV）¥8,500 亿</strong>—— 含 PDD 17%、Meituan 16%、Spotify 8.5%、Reddit、Tesla、Sea Limited 等。<strong>市值估算 ~$200B+</strong><br>
+      <strong>非上市投资 ¥2,200 亿</strong>—— 含游戏开发商等私有股权<br>
+      <strong>真实净金融资产（含上市投资）= ¥4,100 + ¥8,500 - ¥3,650 = ¥8,950 亿</strong> = $1,243 亿<br>
+      <strong>公司公告"净现金"= ¥1,469 亿</strong>（这是"流动金融资产 - 总有息负债"的口径，不含长期投资）<br>
+      <strong>占总市值 HKD 4.16 万亿 = $534B 的比例 = 23%（保守净现金）至 38%（含上市投资）</strong><br>
+      流动比率 ~1.5、利息覆盖倍数 ~40x（极安全）<br>
+      <strong>资产负债健康度评级：A+</strong>（净金融资产充裕 + 庞大上市投资组合）
+    </p>
+  </div>
+
+  <h3 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">5.5 现金流质量</h3>
+  <div class="cmt">
+    <p>
+      <strong>OCF/NI = ¥2,950 / ¥2,250 = 131%</strong>—— 优秀（含投资公允价值非现金调整）<br>
+      <strong>FCF/OCF = ¥1,800 / ¥2,950 = 61%</strong>—— 中等偏好<br>
+      <strong>FCF Yield (FY25) = ¥1,800 / ¥3.84 万亿 = 4.7%</strong>—— 优秀<br>
+      <strong>维护性 Capex 估算 ¥400 亿，扩张性 Capex ¥750 亿</strong>—— 后者主要投向 AI 算力 + 数据中心 + 视频号基础设施<br>
+      <strong>评价</strong>：现金流质量 A+。<span class="hl-t">即便 FY26 AI Capex 翻倍至 ¥1,500+ 亿，FCF 仍可维持 ¥1,500 亿+</span>—— 财务弹性极强。
+    </p>
+  </div>
+
+  <h3 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">5.6 所有者盈余计算（核心）</h3>
+  <div class="cmt">
+    <p>所有者盈余 = 净利 + 折旧摊销 + 股权激励 - 维护性 Capex ± 营运资金变动</p>
+    <p>
+      = ¥2,510 亿 (Non-IFRS) + ¥350 亿 (折旧摊销) + ¥180 亿 (SBC) - ¥400 亿 (维护性 Capex)<br>
+      = <strong>¥2,640 亿（FY25）</strong> = $367 亿
+    </p>
+    <p style="margin-top:8px"><strong>OE Yield (FY25) = $367 / $534 = 6.9%</strong>—— 优秀（vs 10 年期国债 4.3%、Apple OE Yield 4%、Meta OE Yield 5%）</p>
+    <p>FY26 OE 预计 ¥3,000 亿（+14%），OE Yield 升至 7.8%。<span class="hl-t">这意味着腾讯当前股价提供了"债券化"6.9% 收益率，且增长率 10%+/年</span>—— 这是价值投资式"以合理价格买伟大公司"的教科书案例。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 6 ═══ -->
+<div class="section">
+  <div class="stitle">模块 6 · 电话会分析（最新 + 前 2 季）</div>
+
+  <div class="tag-grid">
+    <div class="tag-card pos">
+      <h5>Q1 2026 电话会（2026-05-13）<span class="tag-bd up">利好</span></h5>
+      <p>"营收 +9% / IFRS 净利 +19% / Non-IFRS 净利 +11% / 广告 +20% / 国际游戏 +13% / FCF +20% / 净现金 +63%。" → <strong>全方位超预期</strong>，是近 4 年最好的季度财报。</p>
+    </div>
+    <div class="tag-card pos">
+      <h5>Q1 2026 电话会<span class="tag-bd up">利好</span></h5>
+      <p>"FY26 AI 投入将从 2025 ¥180 亿 翻倍至 ¥360+ 亿。元宝助手已是中国 AI 助手前列。" → <strong>明确 AI 战略加速</strong>，混元大模型 + 元宝助手是中国 AI 三巨头之一。</p>
+    </div>
+    <div class="tag-card pos">
+      <h5>Q1 2026 电话会<span class="tag-bd up">利好</span></h5>
+      <p>"Q1 回购 HKD 76 亿（1,270 万股）。" → 延续 FY25 大规模回购节奏。如全年延续 → FY26 累计回购 HKD 300+ 亿。</p>
+    </div>
+    <div class="tag-card pos">
+      <h5>Q4 2025 电话会（2026-03-18）<span class="tag-bd up">利好</span></h5>
+      <p>"FY25 营收 +8% / Non-IFRS 净利 +22%、广告 +18%、国际游戏 +9%、FCF +30%、股息 +33% YoY。" → <strong>核心经营加速 + 股东回报全面提升</strong>。</p>
+    </div>
+    <div class="tag-card pos">
+      <h5>Q3 2025 电话会<span class="tag-bd up">利好</span></h5>
+      <p>"视频号广告占比已达 30%+，毛利率高于传统广告。AI 驱动广告主精准投放。" → <strong>视频号是腾讯下一个 ¥1,000+ 亿业务</strong>。</p>
+    </div>
+    <div class="tag-card neu">
+      <h5>FY26 全年指引<span class="tag-bd nt">中性</span></h5>
+      <p>"FY26 营收增速 +8-10%，Non-IFRS 净利增速 +10-15%，FY26 AI Capex ¥1,500+ 亿。" → <strong>稳健增长指引</strong>。</p>
+    </div>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">6.1 信号汇总</h4>
+  <div class="cmt">
+    <p><strong>利好信号（5）</strong>：(1) Q1 营收+净利+FCF 全面超预期；(2) AI 投入翻倍；(3) 大规模回购延续；(4) 广告 +20% 加速；(5) 国际游戏 +13%。</p>
+    <p><strong>利空信号（0）</strong>：无明显利空，QQ MAU -3% 是结构性。</p>
+    <p><strong>中性信号（1）</strong>：FY26 Capex 翻倍可能短期压利润率 1-2pp。</p>
+    <p>综合评估：<strong>极正面</strong>—— 这是近 4 年最好的电话会，所有业务线全部正增长，且 AI 战略加速兑现。</p>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">6.2 指引兑现度追踪</h4>
+  <div class="tbl-wrap">
+    <table class="tbl"><thead><tr><th>承诺时间</th><th>承诺内容</th><th>实际兑现</th><th>评分</th></tr></thead>
+    <tbody>
+      <tr><td>FY22 财报</td><td>广告业务恢复</td><td>FY23 +23% → FY25 +18% → Q1 26 +20%</td><td>A+</td></tr>
+      <tr><td>FY23 财报</td><td>启动大规模回购 + 派息</td><td>FY24-25 累计 HKD 720+ 亿</td><td>A+</td></tr>
+      <tr><td>FY24 财报</td><td>国际游戏 +10%+</td><td>FY25 +9% / Q1 26 +13%</td><td>A</td></tr>
+      <tr><td>FY24 财报</td><td>AI 战略推进</td><td>元宝助手发布 + AI 翻倍投入</td><td>A+</td></tr>
+      <tr><td>Q4 FY25</td><td>FY26 AI 翻倍至 ¥360 亿</td><td>Q1 26 已宣布 / 兑现中</td><td>A</td></tr>
+    </tbody></table>
+  </div>
+</div>
+
+<!-- ═══ 模块 7 ═══ -->
+<div class="section">
+  <div class="stitle">模块 7 · 多模型估值（8 种方法交叉验证）</div>
+
+  <p style="margin-bottom: 16px; color: var(--text2); font-size:14px;">下表估值<strong>不锚定当前市价</strong>，独立基于财报数据 + 行业研究推导。中位数取 8 种方法估值的中点，最终目标价用概率加权（基准 55% / 乐观 30% / 悲观 15%）。<span class="warn-t">特别注意：腾讯是控股型公司，含 ¥8,500 亿长期投资组合（PDD/Meituan/Spotify 等上市股权）+ ¥2,200 亿非上市投资，SOTP 是最重要的估值方法</span>。</p>
+
+  <div class="tbl-wrap" style="margin-bottom:14px">
+    <table class="tbl"><thead><tr><th>方法</th><th>关键假设</th><th>估值（HKD/股）</th><th>vs HKD 460 现价</th></tr></thead>
+    <tbody>
+      <tr><td>1. 相对估值 P/E</td><td>FY27 Non-IFRS EPS HKD 35.5（共识），P/E 17x（中位 vs 历史 25x）</td><td>HKD 603</td><td><span class="badge up">+31%</span></td></tr>
+      <tr><td>2. DCF（基准）</td><td>FY26-30 净利 ¥2,800-3,500 亿稳态, WACC 10%, g=4%</td><td>HKD 590</td><td><span class="badge up">+28%</span></td></tr>
+      <tr><td>3. 所有者盈余</td><td>FY27 OE $400 亿, 合理 P/OE 13x</td><td>HKD 595</td><td><span class="badge up">+29%</span></td></tr>
+      <tr><td>4. PEG</td><td>g≈10%, P/E 17x → PEG 1.7（合理）</td><td>HKD 600</td><td><span class="badge up">+30%</span></td></tr>
+      <tr><td>5. DDM 戈登模型</td><td>股息 HKD 4.76, k=10%, g=8% / 增长股不适用</td><td>HKD 230</td><td><span class="badge dn">-50%（下限）</span></td></tr>
+      <tr><td>6. NAV（每股净资产）</td><td>归母净资产 HKD 144/股 + 投资资产升值</td><td>HKD 144</td><td><span class="badge dn">-69%（下限）</span></td></tr>
+      <tr><td>7. 反向 DCF</td><td>当前 HKD 460 隐含 r=10%, g=6% (偏悲观)</td><td>HKD 600</td><td><span class="badge up">+30%</span></td></tr>
+      <tr><td>8. SOTP 分部加总</td><td>核心业务 ¥3 万亿 + 上市投资 NAV ¥8,500 亿 + 非上市投资 ¥2,200 亿 + 净现金 ¥1,469 亿 = ¥4.6 万亿</td><td>HKD 565</td><td><span class="badge up">+23%</span></td></tr>
+      <tr class="hl"><td>中位数</td><td>—</td><td><strong>HKD 595</strong></td><td><strong>+29%</strong></td></tr>
+      <tr class="hl"><td>加权公允（基准 55% / 乐观 30% / 悲观 15%）</td><td>—</td><td><strong>HKD 580</strong></td><td><strong>+26%</strong></td></tr>
+    </tbody></table>
+  </div>
+
+  <h4 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">7.X · P/E 多档透视表（控股型公司 · IFRS vs Non-IFRS 差异显著）</h4>
+  <div class="tbl-wrap" style="margin-bottom: 14px;">
+    <table class="tbl"><thead><tr><th>计算口径</th><th>每股盈利 (HKD)</th><th>P/E</th><th>是否最可信</th></tr></thead>
+    <tbody>
+      <tr><td>TTM IFRS P/E</td><td>HKD 27.84</td><td>16.53x</td><td>★★ 含投资公允价值</td></tr>
+      <tr><td>TTM Non-IFRS P/E</td><td>HKD 27.50</td><td>16.7x</td><td>★★★★★ <strong>最可信</strong></td></tr>
+      <tr><td>Q1 2026 单季年化 Non-IFRS</td><td>HKD 32.7</td><td>14.1x</td><td>★★★★ 当前趋势</td></tr>
+      <tr><td>Forward FY26 P/E</td><td>HKD 31.0</td><td>14.8x</td><td>★★★★ 共识</td></tr>
+      <tr><td>FY27 共识 P/E</td><td>HKD 35.0</td><td>13.1x</td><td>★★★★ 长期</td></tr>
+      <tr><td>核心业务 P/E（剔除上市投资 NAV）</td><td>—</td><td><strong>~11x</strong></td><td>★★★★★ <strong>最揭示价值</strong></td></tr>
+    </tbody></table>
+  </div>
+  <div class="dcf-note">
+    <p><strong>核心业务 P/E 11x 的解读</strong>：市值 HKD 4.16 万亿 - 净现金 ¥1,469 亿(HKD 1,610 亿) - 上市投资 NAV $200B(HKD 1.56 万亿) - 非上市投资 ¥2,200 亿 (HKD 2,440 亿) = 核心业务市值 ~HKD 2.2 万亿。FY26 Non-IFRS 净利 ¥2,800 亿 ≈ HKD 3,100 亿 → 核心 P/E 7.1x。<span class="hl-t">如果按 Non-IFRS 净利单独估值，核心业务仅 7x 估值</span> —— 这相当于市场把"微信+游戏+广告+云"复合体当成"夕阳行业"在卖。<strong>这是极端低估</strong>，仅次于 2022 监管寒冬时的低位。</p>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">7.1 估值方法适用性说明</h4>
+  <div class="dcf-note">
+    <p><strong>最适用 4 种</strong>：SOTP（控股型公司必备）、DCF（稳健现金流）、相对估值 vs Meta/Google、所有者盈余（OE Yield 6.9%）。</p>
+    <p><strong>次要 3 种</strong>：Forward P/E（投资期）、PEG（合理）、反向 DCF（揭示市场偏悲观）。</p>
+    <p><strong>不适用 1 种</strong>：DDM（股息率 1.15% 低，腾讯主要靠回购回报）。</p>
+    <p><strong>NAV 仅供下限</strong>：每股净资产 HKD 144 是下行支撑，但腾讯是运营+控股复合公司，NAV 不是主估值方法。</p>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">7.2 三情景敏感性分析</h4>
+  <div class="tbl-wrap">
+    <table class="tbl"><thead><tr><th>情景</th><th>关键假设</th><th>FY27 Non-IFRS 净利</th><th>目标价</th><th>vs 现价</th><th>概率</th></tr></thead>
+    <tbody>
+      <tr><td>悲观</td><td>监管再收紧 / 广告增长放缓 / 中概股深度折价</td><td>¥2,700 亿</td><td>HKD 400</td><td><span class="badge dn">-13%</span></td><td>15%</td></tr>
+      <tr><td>基准</td><td>FY26-27 营收 +9% / 净利 +12% / AI 投入持续 / 大规模回购延续</td><td>¥3,200 亿</td><td>HKD 580</td><td><span class="badge up">+26%</span></td><td>55%</td></tr>
+      <tr><td>乐观</td><td>AI 商业化突破 / 视频号 +30% / 国际游戏 +20% / 投资组合大幅升值</td><td>¥3,600 亿</td><td>HKD 750</td><td><span class="badge up">+63%</span></td><td>30%</td></tr>
+    </tbody></table>
+  </div>
+</div>
+
+<!-- ═══ 模块 8 ═══ -->
+<div class="section">
+  <div class="stitle">模块 8 · 竞争与行业分析</div>
+
+  <h4 style="margin-bottom:10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">8.1 中国互联网巨头横向对比</h4>
+  <div class="tbl-wrap" style="margin-bottom:14px">
+    <table class="tbl"><thead><tr><th>公司</th><th>市值</th><th>FY25 营收</th><th>FY25 净利</th><th>P/E</th><th>护城河</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td>腾讯 (0700)</td><td><strong>HKD 4.16 万亿 ($534B)</strong></td><td><strong>¥6,602亿</strong></td><td><strong>¥2,510亿 (Non-IFRS)</strong></td><td><strong>16.5x / Forward 11.9x</strong></td><td><strong>微信+游戏+广告+云+投资</strong></td></tr>
+      <tr><td>阿里巴巴 (BABA)</td><td>$324B</td><td>¥9,963亿</td><td>¥1,260亿</td><td>23x</td><td>电商+云+AI</td></tr>
+      <tr><td>拼多多 (PDD)</td><td>~$130B</td><td>¥2,600亿</td><td>¥510亿</td><td>~10x</td><td>下沉+低价</td></tr>
+      <tr><td>京东 (JD)</td><td>~$42B</td><td>¥1,158亿</td><td>¥350亿</td><td>16x</td><td>自营+物流</td></tr>
+      <tr><td>美团 (3690)</td><td>~$80B</td><td>¥3,400亿</td><td>¥130亿</td><td>~30x</td><td>外卖+本地</td></tr>
+      <tr><td>字节跳动（未上市）</td><td>~$300B（估）</td><td>¥1.55 万亿</td><td>~¥350亿</td><td>~30x（按估值）</td><td>抖音+TikTok</td></tr>
+    </tbody></table>
+  </div>
+  <div class="cmt">
+    <p><strong>腾讯在中国互联网巨头中估值最便宜</strong>：Forward P/E 11.9x 是行业最低（vs 阿里 23x、美团 30x、字节估值 30x）。<span class="hl-t">从"市值/Non-IFRS 净利"看，腾讯 16.5x 仅高于 PDD 10x、JD 16x</span>。但腾讯的护城河（微信超级 App + 游戏霸主 + 庞大投资组合）远超 PDD/JD。<strong>这是"最便宜的护城河最深公司"</strong>—— 是腾讯当前估值的核心矛盾。</p>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">8.2 全球互联网巨头对比</h4>
+  <div class="tbl-wrap">
+    <table class="tbl"><thead><tr><th>公司</th><th>市值</th><th>FY25 营收</th><th>P/E</th><th>用户/MAU</th><th>AI 战略</th></tr></thead>
+    <tbody>
+      <tr><td>Meta</td><td>~$1,500B</td><td>$170B</td><td>~25x</td><td>30 亿</td><td>LLaMA + Reality Labs</td></tr>
+      <tr><td>Alphabet (Google)</td><td>~$2,000B</td><td>$370B</td><td>~23x</td><td>30 亿</td><td>Gemini + DeepMind</td></tr>
+      <tr><td>Microsoft</td><td>~$3,000B</td><td>$280B</td><td>~35x</td><td>20 亿</td><td>OpenAI 战略合作</td></tr>
+      <tr class="hl"><td>腾讯 (0700)</td><td><strong>$534B</strong></td><td><strong>$916亿</strong></td><td><strong>16.5x</strong></td><td><strong>14 亿 (微信)</strong></td><td><strong>混元+元宝助手</strong></td></tr>
+      <tr><td>NetEase (网易)</td><td>~$60B</td><td>$15B</td><td>~13x</td><td>—</td><td>有限</td></tr>
+    </tbody></table>
+  </div>
+  <div class="cmt" style="margin-top:14px">
+    <p><strong>腾讯估值是全球互联网巨头中最便宜的之一</strong>：P/E 16.5x 是 Meta 25x 的 66%、Google 23x 的 72%、Microsoft 35x 的 47%。<span class="hl-t">但腾讯的"微信超级 App"网络效应深度不输 Meta 30 亿用户的 Facebook+Instagram+WhatsApp 组合</span>—— 因为微信在中国的"国家级基础设施"地位是 Meta 在美国都不具备的（Meta 不是支付/小程序的基础设施）。<strong>这是"被严重折价的全球级护城河"</strong>。</p>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">8.3 行业 TAM 与增长率</h4>
+  <div class="cmt">
+    <p>
+      <strong>中国数字广告 TAM</strong>：~¥9,000 亿（2025 年） → ¥1.2 万亿（2030）<br>
+      <strong>中国移动游戏 TAM</strong>：~¥2,500 亿 GMV / 腾讯市占 ~50%<br>
+      <strong>中国支付 TAM</strong>：~¥30 万亿 GMV / 腾讯+蚂蚁双寡头<br>
+      <strong>中国云计算 TAM</strong>：~¥3,000 亿（2025） → ¥1.5 万亿（2030）<br>
+      <strong>腾讯主要市场份额</strong>：社交 100%（微信+QQ）、移动游戏 50%、广告 ~15%、支付 40%、云 ~10%<br>
+      <strong>颠覆风险</strong>：抖音/小红书对信息流的挤压；字节豆包对元宝助手的 AI 竞争；蚂蚁集团 IPO 重启对支付的竞争。
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 模块 9 ═══ -->
+<div class="section">
+  <div class="stitle">模块 9 · 技术面与 K 线分析（次要参考）</div>
+
+  <div class="cmt">
+    <p><strong>0700.HK</strong>：</p>
+    <p>
+      当前价 HKD 460.20（2026-05-12 收盘）。52 周区间 HKD 454-683（距高点 -33%、距低点 +1.4%）。<br>
+      <strong>5 月走势</strong>：5 月初 HKD 480 → 5-12 HKD 460（-4%）。Q1 财报当晚（5-13）港股盘后发布。<br>
+      <strong>30 日均价 ~HKD 478、50 日均价 ~HKD 490</strong>—— 价格已破 30/50 日均线。<br>
+      <strong>支撑位</strong>：HKD 454（52 周低 · 极强支撑）/ HKD 430（前期密集成交区）<br>
+      <strong>阻力位</strong>：HKD 490（30 日均线上方）/ HKD 550（前期高位）/ HKD 683（52 周高）<br>
+      <strong>RSI</strong>：~35（接近超卖）<br>
+      <strong>MACD</strong>：负值<br>
+      <strong>判断</strong>：技术面偏弱，但<span class="hl-t">距 52 周低 HKD 454 仅 1.4%</span>—— 这是近 1 年最强支撑位。Q1 财报全方位超预期，<strong>反弹概率极高</strong>。
+    </p>
+
+    <p><strong>南向资金动态</strong>：腾讯是港股通最大持仓股之一，南向资金累计持股已超 20%。<strong>FY25 持续净流入</strong>，是港股通最受欢迎的标的。Q1 财报超预期后预期南向资金加速流入。</p>
+
+    <p><strong>注意</strong>：技术面作为补充参考，不影响"基于估值的买入决策"。当前 Forward P/E 11.9x、距 52 周低 1.4%、核心业务 P/E 7.1x 已是 3 年估值最低区间，<strong>基本面已严重低估，技术面只是确认底部区间的工具</strong>。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 10 ═══ -->
+<div class="section">
+  <div class="stitle">模块 10 · 增长催化剂与前景展望</div>
+
+  <h4 style="margin-bottom:10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">10.1 短期催化剂（未来 6 个月）</h4>
+  <div class="tag-grid">
+    <div class="tag-card pos">
+      <h5>2026-05-15 末期股息除息<span class="tag-bd up">利好</span></h5>
+      <p>FY25 末期股息 HKD 5.30/股 除息日 2026-05-15。<strong>股东实际拿到现金</strong>。</p>
+    </div>
+    <div class="tag-card pos">
+      <h5>大规模回购加速<span class="tag-bd up">利好</span></h5>
+      <p>Q1 已回购 HKD 76 亿。FY26 预期 HKD 300+ 亿。<strong>低估值时回购加速会显著支撑股价</strong>。</p>
+    </div>
+    <div class="tag-card pos">
+      <h5>2026-06 王者荣耀世界<span class="tag-bd up">利好</span></h5>
+      <p>《王者荣耀世界》（MMO 大作）预计 2026 Q2-Q3 公测。<strong>这是腾讯近 5 年最大的游戏新品</strong>，可能给国内游戏带来 +20-30% 增量。</p>
+    </div>
+    <div class="tag-card pos">
+      <h5>2026-08-12 Q2 财报<span class="tag-bd up">关键</span></h5>
+      <p>关键节点：(1) 广告 +20% 是否能维持？(2) AI 投入翻倍是否影响利润率？(3) 国际游戏 +13% 能否加速？<strong>如三项全部正面 → 估值快速修复</strong>。</p>
+    </div>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">10.2 长期展望（3-5 年）</h4>
+  <div class="cmt">
+    <p><strong>未来 3-5 年三大主题</strong>：</p>
+    <p>
+      <strong>1. AI 时代护城河深化</strong>：腾讯的"微信用户数据 + 游戏数据 + 支付数据 + 视频号内容数据 + 混元大模型"组合是中国最稀缺的 AI 训练数据。元宝助手 + 微信内置 AI 可能成为中国 14 亿用户的"个人助手"。<br>
+      <strong>2. 国际游戏全球化</strong>：Supercell + Riot Games + Epic Games + Honor of Kings World 让腾讯成为全球最大游戏公司。FY30 国际游戏营收有望从 FY25 ¥700 亿 → ¥1,200 亿+。<br>
+      <strong>3. 投资组合 NAV 释放</strong>：PDD/Meituan/Spotify 等长期投资 NAV ~$200B 持续升值。腾讯继续通过减持+回购把"投资资产"转化为"股东回报"。
+    </p>
+
+    <p><strong>FY26-FY30 营收 / 净利预测</strong>：</p>
+    <table class="tbl" style="margin-top:10px"><thead><tr><th>年度</th><th>营收（¥亿）</th><th>YoY</th><th>Non-IFRS 净利（¥亿）</th><th>YoY</th><th>股东回报（HKD 亿）</th></tr></thead>
+    <tbody>
+      <tr><td>FY25 实际</td><td>6,602</td><td>+8%</td><td>2,510</td><td>+22%</td><td>770</td></tr>
+      <tr><td>FY26 预测</td><td>7,200</td><td>+9%</td><td>2,800</td><td>+12%</td><td>900</td></tr>
+      <tr><td>FY27 预测</td><td>7,800</td><td>+8%</td><td>3,200</td><td>+14%</td><td>1,100</td></tr>
+      <tr><td>FY28 预测</td><td>8,500</td><td>+9%</td><td>3,600</td><td>+13%</td><td>1,300</td></tr>
+      <tr><td>FY29 预测</td><td>9,300</td><td>+9%</td><td>4,000</td><td>+11%</td><td>1,500</td></tr>
+      <tr><td>FY30 预测</td><td>10,100</td><td>+9%</td><td>4,400</td><td>+10%</td><td>1,700</td></tr>
+    </tbody></table>
+
+    <p style="margin-top:10px"><strong>5 年累计股东回报</strong>：~HKD 6,500+ 亿（按当前节奏）<span class="hl-t">这相当于当前市值 HKD 4.16 万亿 的 16%——5 年股东回报可消化 1/6 市值</span>。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 11 ═══ -->
+<div class="section">
+  <div class="stitle">模块 11 · 风险矩阵（多维评估）</div>
+
+  <div class="risk-grid">
+    <div class="risk-card r2">
+      <h5>1. 经营风险（业务多元化）</h5>
+      <span class="risk-score">2 / 5</span>
+      <p>6 路变现引擎极度分散。即便某一业务下滑 30%，整体净利受影响也只有 5pp。</p>
+    </div>
+    <div class="risk-card r1">
+      <h5>2. 财务风险</h5>
+      <span class="risk-score">1 / 5</span>
+      <p>净现金 ¥1,469 亿 + 上市投资 NAV $200B + 利息覆盖 40x。<strong>财务风险几乎为零</strong>。</p>
+    </div>
+    <div class="risk-card r3">
+      <h5>3. 竞争风险</h5>
+      <span class="risk-score">3 / 5</span>
+      <p>抖音/小红书挤压信息流广告；字节豆包 vs 元宝助手 AI 竞争；蚂蚁支付竞争。但微信"国家级基础设施"地位无替代。</p>
+    </div>
+    <div class="risk-card r3">
+      <h5>4. 监管/政策风险</h5>
+      <span class="risk-score">3 / 5</span>
+      <p>2021-2022 监管寒冬后已大幅好转。但游戏版号、未成年人保护、平台经济新规仍是潜在不确定性。</p>
+    </div>
+    <div class="risk-card r3">
+      <h5>5. 宏观风险</h5>
+      <span class="risk-score">3 / 5</span>
+      <p>中国消费降级影响游戏付费；汇率（RMB→HKD 财报）波动；中美贸易战 2.0；港股通流入持续性。</p>
+    </div>
+    <div class="risk-card r1">
+      <h5>6. 估值风险</h5>
+      <span class="risk-score">1 / 5</span>
+      <p>Forward P/E 11.9x、距 52 周低 1.4%、核心业务 P/E 7.1x、PB 3.2x。<strong>已是 3 年估值最低，下行空间有限</strong>。</p>
+    </div>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">11.X 黑天鹅情景（最坏情况）</h4>
+  <div class="cmt">
+    <p>
+      <strong>1. 监管二次寒冬</strong>（概率 5%）：类 2021 "未成年人游戏限令" 加强版 / 反垄断罚款 / 拆分腾讯。短期股价跌至 HKD 350（-24%）。但长期价值不变，监管寒冬经验已证明。<br>
+      <strong>2. 微信受新进入者挑战</strong>（概率 3%）：类 X(Twitter) 中文版 / WhatsApp 在中国可访问 / 字节推出"飞书+抖音"超级 App。但概率极低，因政策+用户黏性。<br>
+      <strong>3. AI 投入 ROIC 失败</strong>（概率 10%）：FY26 ¥360 亿 AI 投入未带来商业化突破，市场失去信心，股价跌至 HKD 400（-13%）。<br>
+      <strong>4. 中美贸易战 2.0</strong>（概率 10%）：美国限制腾讯海外业务（Riot Games / Epic Games），短期股价跌至 HKD 420（-9%）。<br>
+      <strong>5. 中国消费降级深化</strong>（概率 15%）：游戏付费 -10%/年持续 2 年，FY26-27 营收增速跌至 +5%，估值 P/E 修正至 13x，股价跌至 HKD 430（-7%）。
+    </p>
+    <p><strong>下行支撑</strong>：每股净资产 HKD 144 + 上市投资 NAV HKD 173/股（$200B / 90 亿股 / 0.13 USD/HKD = HKD 173）—— 当前 HKD 460 距"净金融资产 + 上市投资 NAV" HKD 317 仍有 31% 折价。<span class="hl-t">即便最坏情景下也很难跌破 HKD 350</span>（核心业务深度折价 + 上市投资 NAV 也打 7 折后仍有 HKD 350 下行支撑）。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 12 评分卡 ═══ -->
+<div class="section">
+  <div class="stitle">海图评分卡 · 6 维 A-D + 红旗排查</div>
+
+  <div class="bscore">
+    <div class="circle cg">A</div>
+    <div class="bd">
+      <h4>1. 生意可预测性 — A（9/10）</h4>
+      <p>商业模式清晰（社交+游戏+广告+支付+云+投资），过去 10 年净利稳定（除 2022 监管寒冬）。FY26-27 可预测度高（共识营收 +9%、净利 +12%）。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle cg">A+</div>
+    <div class="bd">
+      <h4>2. 经济护城河 — A+（10/10）</h4>
+      <p>5 维护城河综合：2A+ + 3A = 极宽护城河。<strong>这是中国互联网中护城河最深的公司之一</strong>（与阿里、字节并列前三）。10 年后会"明显加宽"（AI 时代深化）。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle cg">A</div>
+    <div class="bd">
+      <h4>3. 管理层质量 — A（9/10）</h4>
+      <p>马化腾 27 年 CEO + 刘炽平 20 年总裁 + 8% 创始人持股 + 27 年没有败笔。<strong>这是中国互联网最理想的管理层结构</strong>。利益绑定极强。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle cg">A+</div>
+    <div class="bd">
+      <h4>4. 财务质量 — A+（10/10）</h4>
+      <p>毛利率 56.4% + 净利率 30.6% + ROE 20.5% + OCF/NI 130% + FCF +30% + 净现金 ¥1,469 亿 + 上市投资 NAV $200B。<strong>财务质量在中国互联网中最强</strong>。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle cg">A+</div>
+    <div class="bd">
+      <h4>5. 资本配置纪律 — A+（10/10）</h4>
+      <p>FY24-25 累计回购 HKD 720+ 亿 + 股息提升 33% + 主动剥离投资（JD、Meituan、Sea Limited）+ AI 投入翻倍。<strong>27 年资本配置无败笔</strong>。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle cg">A</div>
+    <div class="bd">
+      <h4>6. 估值与安全边际 — A（9/10）</h4>
+      <p>Forward P/E 11.9x、核心业务 P/E 7.1x、距 52 周低 1.4%、距历史均值 P/E 25x -52%、上市投资 NAV $200B 隐藏价值。<strong>这是中国互联网中估值最便宜+护城河最深的标的</strong>。安全边际 ~26%+。</p>
+    </div>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">12.X 红旗排查（非评分项）</h4>
+  <div class="tbl-wrap">
+    <table class="tbl"><thead><tr><th>红旗项</th><th>状态</th><th>说明</th></tr></thead>
+    <tbody>
+      <tr><td>商誉减值历史</td><td>✓ 无问题</td><td>商誉规模合理，无大额减值</td></tr>
+      <tr><td>收入确认时点</td><td>✓ 无问题</td><td>游戏按月确认，广告按曝光，支付按交易</td></tr>
+      <tr><td>关联交易</td><td>✓ 无问题</td><td>无重大关联交易，投资组合透明</td></tr>
+      <tr><td>表外负债</td><td>✓ 无问题</td><td>无重大表外项目</td></tr>
+      <tr><td>股权激励</td><td>✓ 无问题</td><td>SBC 占营收 ~3%，行业正常</td></tr>
+      <tr><td>会计变更</td><td>✓ 无问题</td><td>近 3 年无重大会计政策变更</td></tr>
+      <tr><td>投资组合复杂度</td><td>⚠️ 注意</td><td>含 PDD/Meituan/Spotify 等大量股权，需要 SOTP 估值</td></tr>
+    </tbody></table>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">12.Y 综合评级</h4>
+  <div class="dcf-note">
+    <p><strong>6 维评分</strong>：A / A+ / A / A+ / A+ / A = 综合 <strong>A+/A</strong></p>
+    <p><strong>红旗排查</strong>：6/7 无问题，1 项注意（投资组合复杂度，但已在 SOTP 估值中处理）。<strong>无红旗触发</strong>。</p>
+    <p><strong>综合评级</strong>：<span class="rating-badge rating-buy">买入</span></p>
+    <p><strong>理由</strong>：(1) 6 维全部 A 或 A+，是海图夜读分析过的所有公司中评分最高的；(2) Q1 2026 财报全方位超预期；(3) 微信"国家级基础设施"网络效应无替代；(4) 庞大投资组合 NAV $200B+ 是隐藏价值；(5) AI 投入翻倍 + 国际游戏 +13% + 广告 +20% 三大新增长引擎全部跑通；(6) Forward P/E 11.9x 是 3 年估值最低，距 52 周低 1.4%。<strong>这是价值投资式"以合理价格买伟大公司"的教科书案例</strong>。</p>
+  </div>
+</div>
+
+<!-- ═══ 投资决策 ═══ -->
+<div class="section">
+  <div class="stitle">海图研判 · 投资决策</div>
+
+  <div class="cgrid">
+    <div class="ccard">
+      <div class="ctitle" style="font-size: 14px;">12 个月概率加权目标价</div>
+      <p style="font-size: 28px; font-weight: 700; color: var(--green); margin: 8px 0;">HKD 580</p>
+      <p style="font-size: 13px; color: var(--text2);">+26% 上行 · 中位数估值 HKD 595 / 加权公允 HKD 580</p>
+      <table class="tbl" style="margin-top: 10px; font-size:12px;"><tbody>
+        <tr><td>乐观 (30%)</td><td>HKD 750</td><td><span class="badge up">+63%</span></td></tr>
+        <tr><td>基准 (55%)</td><td>HKD 580</td><td><span class="badge up">+26%</span></td></tr>
+        <tr><td>悲观 (15%)</td><td>HKD 400</td><td><span class="badge dn">-13%</span></td></tr>
+      </tbody></table>
+    </div>
+    <div class="ccard">
+      <div class="ctitle" style="font-size: 14px;">分批建仓 / 止盈策略</div>
+      <p style="font-size: 13px; color: var(--text2); line-height: 1.85;">
+      <strong>当前价 HKD 460.20</strong> · 已位于"首仓"附近<br><br>
+      <strong>建仓档位（独立估值中位数 × 80% / 70% / 60%）</strong>：<br>
+      首仓 <span class="hl-t">HKD 475</span>（×80%·距现价 +3%·几乎已过）<br>
+      二仓 <span class="hl-t">HKD 415</span>（×70%·距现价 -10%）<br>
+      三仓 <span class="hl-t">HKD 355</span>（×60%·距现价 -23%·极端机会）<br><br>
+      <strong>止盈三档</strong>：<br>
+      减 25% @ <span class="hl-t">HKD 620</span><br>
+      减 25% @ <span class="hl-t">HKD 720</span><br>
+      减 25% @ <span class="hl-t">HKD 850</span><br>
+      <strong>最后 25% 作为"中国互联网核心持仓"长期持有 10 年+</strong>
+      </p>
+    </div>
+  </div>
+
+  <div class="cmt" style="margin-top: 16px;">
+    <p><strong>仓位管理</strong>：建议总仓位 <strong>10-15%</strong>（重仓 · 中国互联网核心持仓）。持有周期 <strong>5-10 年（含 AI 时代深化 + 微信生态扩张）</strong>。<span class="hl-t">优先 HKEX: 0700</span>（流动性最好，纳入港股通），ADR: TCEHY 是替代选项但流动性弱。</p>
+
+    <p><strong>关键监控指标</strong>：</p>
+    <p>
+      <strong>1. 微信 MAU + DAU/MAU</strong>：14.32 亿 MAU 能否持续增长？DAU/MAU 黏性<br>
+      <strong>2. 广告增速</strong>：能否维持 +20%+？视频号广告占比能否升至 50%+<br>
+      <strong>3. 国际游戏增速</strong>：能否从 +13% 升至 +20%+？<br>
+      <strong>4. AI 商业化进展</strong>：元宝助手 DAU/付费率、混元大模型企业客户数<br>
+      <strong>5. 大规模回购</strong>：FY26 全年回购规模能否达 HKD 300+ 亿？<br>
+      <strong>6. 派息率</strong>：从 FY25 18% 升至 25%+ 是估值修复催化剂<br>
+      <strong>7. 投资组合 NAV</strong>：PDD/Meituan/Spotify 等股价波动
+    </p>
+
+    <p><strong>事件时间表</strong>：</p>
+    <p>
+      <strong>2026-05-15</strong>: 末期股息除息日（HKD 5.30/股）<br>
+      <strong>2026-06</strong>: 王者荣耀世界公测（关键游戏催化剂）<br>
+      <strong>2026-08-12</strong>: Q2 2026 财报 + 中报（关键节点 · AI 投入影响利润率验证）<br>
+      <strong>2026-11-中</strong>: Q3 2026 财报<br>
+      <strong>2027-03-中</strong>: FY2026 年报（全年业绩 + 年度股息）
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 海图页末长评 ═══ -->
+<div class="section">
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记 · 1200 字</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p class="lead">真正的好公司有一个共同特征——它们的财报让人看完后内心平静。腾讯的 Q1 2026 财报就是这种感觉：营收 +9%、IFRS 净利 +19%、Non-IFRS 净利 +11%、广告 +20%、国际游戏 +13%、FCF +20%、净现金 +63%、AI 投入翻倍、Q1 回购 76 亿——你不需要看图表，就能感觉到这家公司的节奏：稳健、清晰、不焦虑。</p>
+
+      <p>Q1 2026 总营收 ¥1,965 亿（+9%）、IFRS 净利 ¥594 亿（+19%）、Non-IFRS 净利 ¥698 亿（+11%）—— 三个利润口径全部超共识。<strong>这是腾讯近 4 年最好的季度财报</strong>。拆开看：广告 ¥382 亿（+20%）是 AI 驱动+视频号崛起的最大亮点；国际游戏 ¥188 亿（+13%）是 Supercell + Brawl Stars + PoE2 全球扩张的兑现；FCF ¥567 亿（+20%）+ 净现金 ¥1,469 亿（+63%）证明财务弹性。<strong>市场对腾讯的悲观</strong>（股价 HKD 460 距 52 周低 HKD 454 仅 1.4%、Forward P/E 11.9x vs 历史均值 25x）与公司的真实经营（全方位超预期 + AI 翻倍投入 + 大规模回购延续）形成<strong>巨大反差</strong>。</p>
+
+      <h4>几个研判要点</h4>
+
+      <p><strong>一、Forward P/E 11.9x + 核心业务 P/E 7.1x = 中国互联网最便宜的护城河最深公司。</strong>对比同行：阿里 Forward P/E 17.7x、字节估值 30x、美团 30x、Meta 25x、Google 23x、Microsoft 35x。<span class="hl-t">腾讯是全球大型互联网平台中估值最便宜的</span>。剔除净现金 ¥1,469 亿 + 上市投资 NAV $200B 后，<strong>核心业务 P/E 仅 7.1x</strong>—— 这相当于市场把"微信超级 App + 游戏霸主 + 广告 + 云"复合体当成"夕阳行业"在卖。这是 2022 监管寒冬之后腾讯估值最低的时刻。</p>
+
+      <p><strong>二、AI 投入翻倍 ¥360+ 亿 = 中国 AI 三巨头之一。</strong>2025 ¥180 亿 → 2026 ¥360+ 亿翻倍。<span class="hl-t">腾讯的"微信用户数据 + 游戏数据 + 支付数据 + 视频号内容数据 + 混元大模型"组合是中国最稀缺的 AI 训练数据</span>。元宝助手已经成为中国 AI 助手前列，未来嵌入微信内置后，将成为 14.32 亿用户的"个人助手"。这是马化腾在 AI 时代的"第二次微信"——重塑中国互联网格局的可能性。</p>
+
+      <p><strong>三、微信"国家级基础设施"网络效应无可替代。</strong>14.32 亿 MAU + 100% 中国互联网用户覆盖 + 小程序生态 + 视频号 + 支付 + 公众号 = 全球最深的网络效应之一（仅次于 Meta 30 亿用户的 Facebook+Instagram+WhatsApp 组合）。<span class="hl-t">即便抖音/小红书冲击信息流，微信"国民通讯+支付+小程序入口"地位无法替代</span>。这是腾讯 27 年来最大的护城河，未来 10 年只会更深。</p>
+
+      <p><strong>四、庞大投资组合 NAV $200B+ 是隐藏价值。</strong>腾讯持有 PDD 17%、Meituan 16%、Spotify 8.5%、Reddit、Tesla、Sea Limited 等上市股权，按市场价值估算 NAV ~$200B+（HKD 1.56 万亿）。<strong>这部分占当前市值 HKD 4.16 万亿 的 38%</strong>。市场在估值时倾向于打折——这是腾讯估值修复最大杠杆。即便按 50% 折价计算，仍有 HKD 0.78 万亿 隐藏价值。</p>
+
+      <p><strong>五、马化腾 27 年 CEO + 资本配置无败笔 = 中国最稳的管理层。</strong>1998 至今从未离任。<span class="hl-t">27 年没有失败的大并购</span>，反而是早期投资 PDD/Meituan/Spotify/Riot Games 都成功。FY24-25 累计回购 HKD 720+ 亿、股息 +33%、AI 投入翻倍——<strong>资本配置纪律是中概股最强</strong>。这是价值投资经典最强调的"以诚实和能干的人在合理价格买入"的教科书案例。</p>
+
+      <p><strong>六、12 个月目标价 HKD 580，上行 +26%。</strong>悲观 HKD 400（-13%，监管再寒冬 + 广告放缓）、基准 HKD 580（+26%，FY26 营收 +9% + Non-IFRS 净利 +12% + 回购延续）、乐观 HKD 750（+63%，AI 商业化突破 + 投资组合大幅升值）。<strong>当前价 HKD 460 距首仓 HKD 475 仅 3%（几乎已过）</strong>，是历史性建仓窗口。海图的判断：未来 5-10 年预期年化回报 15-25%（含回购 + 利润增长 + 估值修复），<strong>这是中国互联网中"伟大公司在合理价格"的教科书机会</strong>。</p>
+
+      <h4>海图研判</h4>
+
+      <p><strong>评级：买入</strong>（微信生态护城河 + AI 投入翻倍 + 大规模回购 + 估值历史低位 + 庞大投资组合 NAV 的五轮组合）。12 个月概率加权目标价 <strong>HKD 580</strong>（+26%）。</p>
+
+      <p>操作建议（独立估值中位数 HKD 595，加权公允 HKD 580）：当前价 HKD 460 距首仓 HKD 475 仅 3% 几乎已过。建议首仓 HKD 475（×80%·已过）、二仓 HKD 415（×70%·距现价 -10%）、三仓 HKD 355（×60%·极端机会）。止盈三档 HKD 620 / 720 / 850，每档减仓 25%，最后 25% 作为"中国互联网核心持仓"长期持有 10 年+。建议总仓位 <strong>10-15%</strong>（重仓 · 中国互联网核心）。持有周期 5-10 年。优先 HKEX: 0700。</p>
+
+      <h4>风险提示</h4>
+
+      <p>监管二次寒冬 / 微信受新进入者挑战 / AI 投入 ROIC 失败 / 中美贸易战 2.0 / 中国消费降级深化 / 港股通流入逆转 / 投资组合大幅减值——任一项都可能让股价回调 15-30%。但 ¥1,469 亿净现金 + $200B 上市投资 NAV + 微信"国家级基础设施"地位 + 27 年无败笔的管理层让破产概率为零，每股净资产 HKD 144 + 上市投资 NAV HKD 173/股提供下行支撑。</p>
+
+      <p>关键叙事：<strong>"微信 14.3 亿 MAU + Forward P/E 11.9x + 核心业务 P/E 7.1x + AI 投入翻倍 + 大规模回购 + 庞大投资组合 NAV $200B+ + 距 52 周低仅 1.4%"的稀有组合</strong>。在 NVIDIA 估值过热、Meta/Google 估值偏高、阿里管理层投资 ROIC 不明的当下，腾讯是全球大型互联网平台中"伟大公司+合理价格"组合最佳的——不是给追求短期表现的人，而是给追求"长期复利 + 中国互联网龙头 + AI 时代护城河深化"的耐心价值投资者。下次催化剂：2026-05-15 末期股息除息 / 2026-06 王者荣耀世界公测 / 2026-08-12 Q2 财报 + 中报。</p>
+
+      <p class="haitu-sign">—— 海图，灯下落笔，明日再观风浪。</p>
+
+      <p class="haitu-disc">⚠️ 免责声明：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，不构成任何投资建议。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div>《海图夜读》 · 腾讯 Tencent 0700 Q1 2026 海图研判</div>
+  <div style="margin-top:6px;">数据来源：腾讯 Q1 2026 财报新闻稿（PR Newswire 2026-05-13）+ 投资者关系页 + 电话会披露 + yfinance 实时市场数据</div>
+  <div style="margin-top:6px;">价值投资 · 长期主义</div>
+</footer>
+
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  const cur = html.getAttribute('data-theme');
+  html.setAttribute('data-theme', cur === 'dark' ? 'light' : 'dark');
+  localStorage.setItem('theme', html.getAttribute('data-theme'));
+  renderCharts();
+}
+(function() {
+  const t = localStorage.getItem('theme');
+  if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+})();
+
+function gc(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+
+let charts = {};
+function renderCharts() {
+  Object.values(charts).forEach(c => c && c.destroy && c.destroy());
+  charts = {};
+  const txt2 = gc('--text2'), txt3 = gc('--text3'), grid = gc('--chart-grid');
+  const accent = gc('--accent'), accent2 = gc('--accent2'), accent3 = gc('--accent3');
+  const green = gc('--green'), gold = gc('--gold'), rose = gc('--rose'), red = gc('--red');
+
+  Chart.defaults.color = txt2;
+  Chart.defaults.font.family = 'Segoe UI, sans-serif';
+  Chart.defaults.font.size = 11;
+
+  charts.rev = new Chart(document.getElementById('revenueChart'), {
+    type: 'bar',
+    data: { labels: ['Q1 25', 'Q2 25', 'Q3 25', 'Q4 25', 'Q1 26'],
+      datasets: [{ label: 'Revenue', data: [1800, 1610, 1650, 1542, 1965], backgroundColor: [accent3, gold, accent2, accent, green], borderRadius: 4 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+      scales: { y: { grid: { color: grid }, ticks: { color: txt3 } }, x: { grid: { display: false }, ticks: { color: txt3 } } } }
+  });
+
+  charts.profit = new Chart(document.getElementById('profitChart'), {
+    type: 'line',
+    data: { labels: ['Q1 25', 'Q2 25', 'Q3 25', 'Q4 25', 'Q1 26'],
+      datasets: [{ label: 'Non-IFRS Net Income (¥亿)', data: [629, 573, 598, 710, 698], borderColor: green, backgroundColor: 'rgba(122,154,122,0.1)', tension: 0.3, fill: true, pointBackgroundColor: green, pointRadius: 5 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+      scales: { y: { grid: { color: grid }, ticks: { color: txt3 } }, x: { grid: { display: false }, ticks: { color: txt3 } } } }
+  });
+
+  charts.seg = new Chart(document.getElementById('segmentChart'), {
+    type: 'doughnut',
+    data: { labels: ['国内游戏 454', '国际游戏 188', '社交订阅 319', '广告 382', '金融+企业 599', '其他 23'],
+      datasets: [{ data: [454, 188, 319, 382, 599, 23], backgroundColor: [accent3, accent, gold, accent2, rose, '#a89f98'], borderColor: gc('--card'), borderWidth: 2 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { color: txt2, font: { size: 11 } } } } }
+  });
+
+  charts.capex = new Chart(document.getElementById('capexChart'), {
+    type: 'bar',
+    data: { labels: ['FY21', 'FY22', 'FY23', 'FY24', 'FY25'],
+      datasets: [
+        { label: '回购（HKD 亿）', data: [25, 280, 480, 360, 410], backgroundColor: green, borderRadius: 4 },
+        { label: '派息（HKD 亿）', data: [140, 180, 200, 260, 360], backgroundColor: gold, borderRadius: 4 }
+      ] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top', labels: { color: txt2, font: { size: 11 } } } },
+      scales: { y: { grid: { color: grid }, ticks: { color: txt3 } }, x: { grid: { display: false }, ticks: { color: txt3 } } } }
+  });
+
+  buildSankey();
+}
+
+function buildSankey() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const txt = isDark ? '#d4ccc4' : '#4a4340';
+  const cardBg = isDark ? '#2e2a25' : '#ffffff';
+
+  const sankeyData = [{
+    type: 'sankey', orientation: 'h', arrangement: 'snap', valueformat: ',.0f', valuesuffix: ' 亿',
+    node: {
+      pad: 22, thickness: 22, line: { color: 'transparent', width: 0 },
+      label: ['Q1 营收 1,965', '营业成本 852', '毛利 1,113', '销售费用 100', '研发费用 200', '管理+其他 139', '营业利润 674', '投资收益+其他 +20', '所得税 -100', '归母净利 594', '少数股东 0', '非现金调整 +294', '经营现金流 888', 'Capex 319', '自由现金流 567'],
+      color: ['#7b8fa0', '#b87070', '#8a9a8e', '#b9a06a', '#c09090', '#a89f98', '#b08d7a', '#7a9a7a', '#b87070', '#7a9a7a', '#a89f98', '#b08d7a', '#7b8fa0', '#b87070', '#7a9a7a']
+    },
+    link: {
+      source: [0, 0, 2, 2, 2, 2, 6, 7, 6, 8, 9, 10, 11, 12, 12],
+      target: [1, 2, 3, 4, 5, 6, 9, 9, 8, 9, 12, 12, 12, 13, 14],
+      value:  [852, 1113, 100, 200, 139, 674, 574, 20, 100, 100, 0, 294, 0, 319, 567],
+      color: ['rgba(184,112,112,0.30)', 'rgba(138,154,142,0.45)', 'rgba(185,160,106,0.30)', 'rgba(192,144,144,0.30)', 'rgba(168,159,152,0.30)', 'rgba(176,141,122,0.45)', 'rgba(122,154,122,0.45)', 'rgba(122,154,122,0.40)', 'rgba(184,112,112,0.30)', 'rgba(184,112,112,0.30)', 'rgba(168,159,152,0.30)', 'rgba(176,141,122,0.30)', 'rgba(168,159,152,0.30)', 'rgba(184,112,112,0.30)', 'rgba(122,154,122,0.50)']
+    }
+  }];
+
+  const layout = { font: { family: 'Segoe UI, sans-serif', size: 11, color: txt }, paper_bgcolor: cardBg, plot_bgcolor: cardBg, margin: { l: 10, r: 10, t: 10, b: 10 } };
+  Plotly.react('sankey', sankeyData, layout, { displayModeBar: false, responsive: true });
+}
+
+document.addEventListener('DOMContentLoaded', renderCharts);
+</script>
+
+</body>
+</html>
