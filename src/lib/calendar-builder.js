@@ -60,14 +60,17 @@ export function buildCalendar(fetchResults, todayStr) {
     }
 
     // ── 2. 上次财报（如果还在 30 天窗口内）──
+    // yfinance 对部分港股（如 0811 新华文轩）不返回财报日期，
+    // 此时回退到 tickers.json 已记录的 lastEarningsReleaseDate。
+    const lastEarnings = data.lastEarningsDate || t.lastEarningsReleaseDate;
     if (
-      data.lastEarningsDate &&
-      data.lastEarningsDate >= sevenAgoStr &&
-      data.lastEarningsDate < todayStr &&
-      data.lastEarningsDate !== data.nextEarningsDate
+      lastEarnings &&
+      lastEarnings >= sevenAgoStr &&
+      lastEarnings < todayStr &&
+      lastEarnings !== data.nextEarningsDate
     ) {
       events.push({
-        date: data.lastEarningsDate,
+        date: lastEarnings,
         ticker: displayName,
         type: 'earnings',
         typeLabel: `${guessPrevPeriodLabel(t)} 财报(已发)`,
