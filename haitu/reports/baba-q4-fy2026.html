@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-05-13，基于阿里巴巴 Q4 FY2026 + FY2026 全年财报（2026-05-13 发布） -->
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>阿里巴巴 Alibaba BABA Q4 FY2026 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root {
+  --bg: #f5f0eb; --bg2: #ece6df; --card: #ffffff; --card2: #f8f5f1; --border: #d9d0c7;
+  --text: #4a4340; --text2: #7a706a; --text3: #a89f98;
+  --accent: #8a9a8e; --accent2: #7b8fa0; --accent3: #b08d7a;
+  --rose: #c09090; --gold: #b9a06a; --red: #b87070; --green: #7a9a7a;
+  --shadow: rgba(0,0,0,0.06); --chart-grid: #e5ddd5;
+}
+[data-theme="dark"] {
+  --bg: #1e1c1a; --bg2: #28251f; --card: #2e2a25; --card2: #363230; --border: #4a4540;
+  --text: #d4ccc4; --text2: #a09890; --text3: #706860;
+  --accent: #8a9a8e; --accent2: #8fabbf; --accent3: #c9a48e;
+  --rose: #c09090; --gold: #c9b07a; --red: #c08080; --green: #8aaa8a;
+  --shadow: rgba(0,0,0,0.3); --chart-grid: #3e3a35;
+}
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Georgia','Noto Serif SC','PingFang SC',serif; line-height: 1.75; font-size: 14.5px; transition: background .35s, color .35s; }
+a { color: var(--accent2); text-decoration: none; }
+.theme-bar { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); }
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; text-decoration: none; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+.toggle-switch { position: relative; width: 44px; height: 22px; background: var(--border); border-radius: 11px; cursor: pointer; transition: background .3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: var(--card); border-radius: 50%; transition: transform .3s; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+.hero { padding: 48px 24px 36px; text-align: center; border-bottom: 1px solid var(--border); }
+.hero-tag { display: inline-block; font-family: 'Segoe UI',sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 3px 14px; border-radius: 20px; margin-bottom: 18px; }
+.hero h1 { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.pill { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: 'Segoe UI',sans-serif; font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow); }
+.pill strong { color: var(--text); }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle { font-size: 18px; font-weight: 700; color: var(--accent3); margin-bottom: 20px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+.stitle::before { content: ''; display: block; width: 4px; height: 20px; background: var(--accent3); border-radius: 2px; }
+.haitu-quip { display: flex; align-items: center; gap: 18px; background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--gold); border-radius: 12px; padding: 18px 24px; margin: 24px 0; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-quote { flex: 1; }
+.haitu-portrait { font-size: 15px; line-height: 1.65; color: var(--text); margin-bottom: 6px; font-weight: 600; }
+.haitu-rating-line { font-size: 13px; color: var(--text2); font-family: 'Segoe UI',sans-serif; }
+.rating-badge { display: inline-block; padding: 2px 12px; border-radius: 12px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; margin-left: 4px; }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+.rating-cond-buy { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-hold { background: rgba(123,143,160,.18); color: var(--accent2); }
+.haitu-essay { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 28px 32px; margin: 24px 0 20px; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-essay-header { display: flex; align-items: center; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.haitu-avatar-sm { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); background: var(--red); box-shadow: 0 2px 8px rgba(184,112,112,0.2); }
+.haitu-name-lg { font-family: 'Georgia','Noto Serif SC',serif; font-size: 28px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 4px; }
+.haitu-essay-tag { font-family: 'Segoe UI',sans-serif; font-size: 12px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; }
+.haitu-essay-body { font-family: 'Georgia','Noto Serif SC',serif; font-size: 15px; line-height: 2.0; color: var(--text); }
+.haitu-essay-body p { margin-bottom: 14px; }
+.haitu-essay-body p.lead { font-size: 16px; font-style: italic; color: var(--text2); margin-bottom: 18px; }
+.haitu-essay-body strong { color: var(--text); font-weight: 700; }
+.haitu-essay-body h4 { font-size: 14px; color: var(--accent3); margin: 18px 0 10px; font-family: 'Segoe UI',sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+.haitu-sign { text-align: right; margin-top: 18px; font-family: 'Georgia',serif; font-size: 14px; color: var(--text2); font-style: italic; }
+.haitu-disc { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); font-style: italic; line-height: 1.7; }
+.stock-snap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill,minmax(160px,1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px; }
+.snap-item { text-align: center; }
+.snap-label { font-family: 'Segoe UI',sans-serif; font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.snap-val { font-family: 'Segoe UI',sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+.snap-val.up { color: var(--green); }
+.snap-val.dn { color: var(--red); }
+.snap-sub { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text3); margin-top: 2px; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(195px,1fr)); gap: 14px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow); }
+.kpi-l { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.kpi-v.up { color: var(--green); }
+.kpi-v.dn { color: var(--red); }
+.badge { display: inline-block; font-family: 'Segoe UI',sans-serif; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+.up { background: rgba(122,154,122,.15); color: var(--green); }
+.dn { background: rgba(184,112,112,.15); color: var(--red); }
+.nt { background: rgba(123,143,160,.15); color: var(--accent2); }
+.tbl-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow); }
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI',sans-serif; font-size: 13px; }
+.tbl th { background: var(--card2); color: var(--text3); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); background: var(--card2); }
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); }
+.ctitle { font-size: 13px; color: var(--text2); margin-bottom: 12px; font-weight: 600; }
+.cwrap { position: relative; height: 240px; }
+.cmt { font-size: 14px; color: var(--text2); line-height: 1.85; }
+.cmt p { margin-bottom: 12px; }
+.cmt strong { color: var(--text); }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+.bscore { display: flex; gap: 16px; padding: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 12px; box-shadow: 0 1px 4px var(--shadow); }
+.bscore .circle { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; color: white; flex-shrink: 0; }
+.cg { background: var(--green); }
+.cw { background: var(--gold); }
+.co { background: var(--rose); }
+.cr { background: var(--red); }
+.cb { background: var(--accent2); }
+.bd h4 { font-size: 14px; color: var(--text); margin-bottom: 6px; font-family: 'Segoe UI',sans-serif; letter-spacing: 0.5px; }
+.bd p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+.pgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.dcf-note { background: var(--card2); border-left: 3px solid var(--accent2); padding: 14px 18px; border-radius: 6px; font-size: 13.5px; color: var(--text2); line-height: 1.85; }
+.dcf-note p { margin-bottom: 8px; }
+.dcf-note strong { color: var(--text); }
+.tag-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap: 12px; margin-top: 14px; }
+.tag-card { background: var(--card); border: 1px solid var(--border); border-left: 3px solid var(--accent2); padding: 12px 16px; border-radius: 6px; }
+.tag-card.pos { border-left-color: var(--green); }
+.tag-card.neg { border-left-color: var(--red); }
+.tag-card.neu { border-left-color: var(--accent2); }
+.tag-card h5 { font-size: 13px; color: var(--text); margin-bottom: 6px; font-family: 'Segoe UI',sans-serif; }
+.tag-card p { font-size: 12px; color: var(--text2); line-height: 1.7; }
+.tag-card .tag-bd { font-family: 'Segoe UI',sans-serif; font-size: 10px; padding: 1px 6px; border-radius: 4px; margin-left: 4px; }
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap: 12px; }
+.risk-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 14px 18px; position: relative; box-shadow: 0 1px 3px var(--shadow); }
+.risk-card::before { content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent); }
+.risk-card.r1::before { background: var(--green); }
+.risk-card.r2::before { background: rgba(122,154,122,.6); }
+.risk-card.r3::before { background: var(--gold); }
+.risk-card.r4::before { background: var(--rose); }
+.risk-card.r5::before { background: var(--red); }
+.risk-card h5 { font-size: 14px; margin-bottom: 6px; color: var(--text); }
+.risk-score { font-family: 'Segoe UI',sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.r1 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r2 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r3 .risk-score { background: rgba(185,160,106,.18); color: var(--gold); }
+.r4 .risk-score { background: rgba(192,144,144,.18); color: var(--rose); }
+.r5 .risk-score { background: rgba(184,112,112,.18); color: var(--red); }
+.risk-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+footer { background: var(--card2); border-top: 1px solid var(--border); padding: 24px; text-align: center; color: var(--text3); font-size: 12px; margin-top: 40px; line-height: 1.8; }
+@media (max-width: 768px) { .cgrid,.pgrid { grid-template-columns: 1fr; } .hero h1 { font-size: 22px; } .kpi-grid { grid-template-columns: 1fr 1fr; } .stock-snap { grid-template-columns: 1fr 1fr; } .haitu-essay-header { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/BABA" target="_blank" rel="noopener" title="在雪球查看 阿里巴巴 实时行情">雪球 BABA</a>
+  </div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">Q4 FY2026 + FY2026 财报发布 · 2026-05-13 &nbsp;|&nbsp; 海图研判 · 2026-05-13 · 财报当日</div>
+  <h1>阿里巴巴 Alibaba BABA · Q4 FY2026 + 全年深度分析</h1>
+  <div class="hero-sub">NYSE: BABA / HKEX: 9988 &nbsp;|&nbsp; 中国电商+云+AI 三引擎复合体 · 云智能 +38% 加速 · AI 收入单季 ¥90 亿 · 即时零售烧钱致 Non-GAAP 净利崩塌 &nbsp;|&nbsp; 价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill">股价 <strong>$141.12</strong></div>
+    <div class="pill">市值 <strong>$339B</strong></div>
+    <div class="pill">Q4 营收 <strong>¥2,434亿(+3%)</strong></div>
+    <div class="pill">Q4 云智能 <strong>+38%</strong></div>
+    <div class="pill">Q4 Non-GAAP 净利 <strong>¥0.86亿(-100%)</strong></div>
+    <div class="pill">海图研判 <strong>有条件买入</strong></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 海图页首短评 ═══ -->
+<div class="haitu-quip">
+  <div class="haitu-quote">
+    <div class="haitu-portrait">中国电商+云+AI 三引擎复合体——淘天集团 ¥1,222 亿 + 云智能 ¥416 亿(+38% 持续加速) + AIDC ¥354 亿(+6%) + 即时零售 ¥200 亿(+57%)。<strong>Q4 FY26 营收 +3%，但 Non-GAAP 净利崩塌至 ¥0.86 亿(-100% YoY)、调整后 EBITA -84%</strong>——即时零售烧钱补贴 + AI/云大规模投资让核心利润短期归零。但 GAAP 净利 +96%（投资公允价值收益）。<strong>市值 $339B、TTM P/E 21.8x、Forward P/E 15.1x、净现金+投资 ¥5,208 亿($755B 等量)</strong>——市场看穿短期利润崩塌（财报日股价 +7-8%），云加速 +38% 是真正的长期价值。</div>
+    <div class="haitu-rating-line">评级：<span class="rating-badge rating-cond-buy">有条件买入</span> · 12 个月目标价 $165（+17%）· 云 AI 加速 +38% + 巨额净金融资产 + 淘宝整合 Qwen 的三轮组合，但即时零售烧钱 ROIC 待证明</div>
+  </div>
+</div>
+
+<!-- ═══ 市场数据快照 ═══ -->
+<div class="section">
+  <div class="stitle">市场数据快照（2026-05-13）· 货币：USD/RMB ≈ 6.90</div>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">股价（ADS）</div><div class="snap-val">$141.12</div><div class="snap-sub">2026-05-13 盘中</div></div>
+    <div class="snap-item"><div class="snap-label">H 股 (9988)</div><div class="snap-val">HKD 137</div><div class="snap-sub">~$17.6/普通股</div></div>
+    <div class="snap-item"><div class="snap-label">市值</div><div class="snap-val">$339B</div><div class="snap-sub">~RMB 2.34 万亿</div></div>
+    <div class="snap-item"><div class="snap-label">流通股</div><div class="snap-val">24.0 亿 ADS</div><div class="snap-sub">~192 亿普通股</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间</div><div class="snap-val">$103.71-192.67</div><div class="snap-sub">距高点 -27%</div></div>
+    <div class="snap-item"><div class="snap-label">TTM P/E (GAAP)</div><div class="snap-val">21.78x</div><div class="snap-sub">EPS/ADS $6.38</div></div>
+    <div class="snap-item"><div class="snap-label">Forward P/E</div><div class="snap-val up">15.11x</div><div class="snap-sub">FY27 共识</div></div>
+    <div class="snap-item"><div class="snap-label">P/B</div><div class="snap-val up">2.10x</div><div class="snap-sub">每股净资产 $67.27</div></div>
+    <div class="snap-item"><div class="snap-label">EV/EBITDA</div><div class="snap-val">~17x</div><div class="snap-sub">投资期 EBITDA 受压</div></div>
+    <div class="snap-item"><div class="snap-label">股息率</div><div class="snap-val">0.74%</div><div class="snap-sub">$1.05/ADS 年度</div></div>
+    <div class="snap-item"><div class="snap-label">毛利率</div><div class="snap-val">39.8%</div><div class="snap-sub">含云+商业</div></div>
+    <div class="snap-item"><div class="snap-label">净利率 (FY26)</div><div class="snap-val dn">10.0%</div><div class="snap-sub">投资期压利润</div></div>
+    <div class="snap-item"><div class="snap-label">ROE (TTM)</div><div class="snap-val dn">9.2%</div><div class="snap-sub">投资期低于历史 14%</div></div>
+    <div class="snap-item"><div class="snap-label">净现金+投资</div><div class="snap-val up">¥5,208亿</div><div class="snap-sub">$755亿 / 占市值 22%</div></div>
+    <div class="snap-item"><div class="snap-label">Q4 自由现金流</div><div class="snap-val dn">-¥173亿</div><div class="snap-sub">投资期流出</div></div>
+    <div class="snap-item"><div class="snap-label">FY26 Capex</div><div class="snap-val dn">¥1,261亿</div><div class="snap-sub">$183亿 / AI 军备竞赛</div></div>
+    <div class="snap-item"><div class="snap-label">下次财报</div><div class="snap-val nt">2026-08 中</div><div class="snap-sub">Q1 FY2027</div></div>
+  </div>
+</div>
+
+<!-- ═══ Q4 FY2026 KPI ═══ -->
+<div class="section">
+  <div class="stitle">Q4 FY2026 季度业绩（2026-05-13 发布 · 云加速但核心利润崩塌）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">Q4 总营收</div><div class="kpi-v up">¥2,433.8亿</div><span class="badge up">+3% YoY</span><div class="kpi-l" style="margin-top:6px">$352.8亿 / 略低于共识</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 淘天集团</div><div class="kpi-v">¥1,222.2亿</div><span class="badge nt">中国电商</span><div class="kpi-l" style="margin-top:6px">EBITA ¥240亿(-40% 投资致)</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 云智能营收</div><div class="kpi-v up">¥416.3亿</div><span class="badge up">+38% YoY</span><div class="kpi-l" style="margin-top:6px">$60.4亿 / 持续加速</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 云智能 EBITA</div><div class="kpi-v up">¥38.0亿</div><span class="badge up">+57% YoY</span><div class="kpi-l" style="margin-top:6px">云利润率改善</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 AI 产品收入</div><div class="kpi-v up">¥90亿</div><span class="badge up">三位数增长 第 11 季</span><div class="kpi-l" style="margin-top:6px">$13亿 / 占云外部收入 25%+</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 AIDC 国际数字商业</div><div class="kpi-v up">¥354.3亿</div><span class="badge up">+6% YoY</span><div class="kpi-l" style="margin-top:6px">EBITA 亏损大幅收窄 / 接近盈亏平衡</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 即时零售</div><div class="kpi-v up">¥199.9亿</div><span class="badge up">+57% YoY</span><div class="kpi-l" style="margin-top:6px">淘宝闪购 / 烧钱补贴</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 GAAP 净利</div><div class="kpi-v up">¥235.0亿</div><span class="badge up">+96% YoY</span><div class="kpi-l" style="margin-top:6px">$34.1亿 / 含投资公允价值收益</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 Non-GAAP 净利</div><div class="kpi-v dn">¥0.86亿</div><span class="badge dn">-100% YoY</span><div class="kpi-l" style="margin-top:6px">核心利润短期归零</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 调整后 EBITA</div><div class="kpi-v dn">¥51.0亿</div><span class="badge dn">-84% YoY</span><div class="kpi-l" style="margin-top:6px">即时零售+AI 投资拖累</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 GAAP EPS/ADS</div><div class="kpi-v up">¥10.36</div><span class="badge up">$1.50</span><div class="kpi-l" style="margin-top:6px">含投资收益</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 Non-GAAP EPS</div><div class="kpi-v dn">¥0.08/股</div><span class="badge dn">-95% YoY</span><div class="kpi-l" style="margin-top:6px">~¥0.64/ADS</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 经营现金流</div><div class="kpi-v dn">¥94.1亿</div><span class="badge dn">-66% YoY</span><div class="kpi-l" style="margin-top:6px">投资期现金流承压</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 自由现金流</div><div class="kpi-v dn">-¥173.0亿</div><span class="badge dn">流出 vs 去年 +¥37亿</span><div class="kpi-l" style="margin-top:6px">Capex ¥269亿</div></div>
+    <div class="kpi"><div class="kpi-l">下次财报</div><div class="kpi-v nt">2026-08 中</div><span class="badge nt">Q1 FY2027</span><div class="kpi-l" style="margin-top:6px">即时零售 ROIC 验证</div></div>
+  </div>
+
+  <div class="dcf-note" style="margin-top:18px">
+    <strong>Q4 FY2026 关键洞察 · 云加速 +38% vs 核心利润崩塌的极端分化：</strong>
+    <p style="margin-top:8px">(1) <span class="hl-t">云智能 +38% 持续加速</span>（FY25 +11% → Q1 FY26 +26% → Q2 +34% → Q3 +36% → Q4 +38%）—— 五个季度逐季加速，AI 产品收入单季 ¥90 亿（连续 11 季度三位数增长），云 EBITA +57% 利润率改善；(2) <strong>Non-GAAP 净利崩塌至 ¥0.86 亿（-100% YoY）+ 调整后 EBITA -84%</strong>—— 这是即时零售（淘宝闪购）烧钱补贴 + AI/云大规模投资的"主动选择"，淘天 EBITA -40%；(3) <span class="hl-t">GAAP 净利 +96% 是投资公允价值收益</span>（含上市股权升值），不是经营利润，需用 Non-GAAP 看核心；(4) <strong>淘宝天猫整合进 Qwen App</strong>—— AI + 电商协同的战略想象空间打开；(5) FY26 全年 FCF -¥466 亿（流出），Capex ¥1,261 亿创历史新高；(6) <strong>市场反应：财报当日股价 +7-8% 上涨</strong>—— 市场看穿"短期利润崩塌 vs 长期云价值"，云加速才是关键。
+  </div>
+</div>
+
+<!-- ═══ FY2026 全年 KPI ═══ -->
+<div class="section">
+  <div class="stitle">FY2026 全年业绩（财年截至 2026-03-31）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">FY26 总营收</div><div class="kpi-v up">¥10,236.7亿</div><span class="badge up">+3% YoY</span><div class="kpi-l" style="margin-top:6px">$1,484亿 / 历史新高</div></div>
+    <div class="kpi"><div class="kpi-l">FY26 淘天集团营收</div><div class="kpi-v">¥5,542.2亿</div><span class="badge nt">中国电商核心</span><div class="kpi-l" style="margin-top:6px">EBITA ¥1,075亿(-44%)</div></div>
+    <div class="kpi"><div class="kpi-l">FY26 云智能营收</div><div class="kpi-v up">¥1,581.3亿</div><span class="badge up">+34% YoY</span><div class="kpi-l" style="margin-top:6px">EBITA ¥142.7亿(+35%)</div></div>
+    <div class="kpi"><div class="kpi-l">FY26 AIDC 营收</div><div class="kpi-v up">¥1,441.7亿</div><span class="badge up">+9% YoY</span><div class="kpi-l" style="margin-top:6px">国际数字商业</div></div>
+    <div class="kpi"><div class="kpi-l">FY26 即时零售营收</div><div class="kpi-v up">¥785.2亿</div><span class="badge up">+47% YoY</span><div class="kpi-l" style="margin-top:6px">淘宝闪购高速扩张</div></div>
+    <div class="kpi"><div class="kpi-l">FY26 GAAP 净利</div><div class="kpi-v dn">¥1,021.3亿</div><span class="badge dn">-19% YoY</span><div class="kpi-l" style="margin-top:6px">$148亿</div></div>
+    <div class="kpi"><div class="kpi-l">FY26 Non-GAAP 净利</div><div class="kpi-v dn">¥606.6亿</div><span class="badge dn">-62% YoY</span><div class="kpi-l" style="margin-top:6px">$88亿 / 投资期谷底</div></div>
+    <div class="kpi"><div class="kpi-l">FY26 调整后 EBITA</div><div class="kpi-v dn">¥764.2亿</div><span class="badge dn">-56% YoY</span><div class="kpi-l" style="margin-top:6px">即时零售+AI 投入</div></div>
+    <div class="kpi"><div class="kpi-l">FY26 GAAP EPS/ADS</div><div class="kpi-v">¥44.00</div><span class="badge nt">$6.38</span><div class="kpi-l" style="margin-top:6px">含投资公允价值</div></div>
+    <div class="kpi"><div class="kpi-l">FY26 Non-GAAP EPS/ADS</div><div class="kpi-v dn">¥26.80</div><span class="badge dn">-59% YoY</span><div class="kpi-l" style="margin-top:6px">$3.88 / 核心经营</div></div>
+    <div class="kpi"><div class="kpi-l">FY26 经营现金流</div><div class="kpi-v dn">¥762.1亿</div><span class="badge dn">-53% YoY</span><div class="kpi-l" style="margin-top:6px">投资期现金流大降</div></div>
+    <div class="kpi"><div class="kpi-l">FY26 自由现金流</div><div class="kpi-v dn">-¥466.1亿</div><span class="badge dn">流出 vs 去年 +¥739亿</span><div class="kpi-l" style="margin-top:6px">AI 军备竞赛</div></div>
+    <div class="kpi"><div class="kpi-l">FY26 总 Capex</div><div class="kpi-v">¥1,260.6亿</div><span class="badge nt">$183亿 / 历史新高</span><div class="kpi-l" style="margin-top:6px">AI 算力+数据中心</div></div>
+    <div class="kpi"><div class="kpi-l">净现金+投资</div><div class="kpi-v up">¥5,208.2亿</div><span class="badge up">$755亿</span><div class="kpi-l" style="margin-top:6px">占市值 22%</div></div>
+    <div class="kpi"><div class="kpi-l">FY26 年度股息</div><div class="kpi-v up">$1.05/ADS</div><span class="badge up">总额 ~$25亿</span><div class="kpi-l" style="margin-top:6px">董事会已批准</div></div>
+  </div>
+</div>
+
+<!-- ═══ 季度趋势 ═══ -->
+<div class="section">
+  <div class="stitle">季度趋势 + 5 年总览</div>
+  <div class="cgrid">
+    <div class="ccard">
+      <div class="ctitle">5 季度营收趋势（¥亿）</div>
+      <div class="cwrap"><canvas id="revenueChart"></canvas></div>
+    </div>
+    <div class="ccard">
+      <div class="ctitle">云智能加速增长（YoY %）</div>
+      <div class="cwrap"><canvas id="profitChart"></canvas></div>
+    </div>
+    <div class="ccard">
+      <div class="ctitle">FY2026 营收结构（¥亿）</div>
+      <div class="cwrap"><canvas id="segmentChart"></canvas></div>
+    </div>
+    <div class="ccard">
+      <div class="ctitle">调整后 EBITA 投资期下行（¥亿）</div>
+      <div class="cwrap"><canvas id="capexChart"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ Sankey ═══ -->
+<div class="section">
+  <div class="stitle">FY2026 全年资金流向 · 营收 → 自由现金流（¥ 亿）</div>
+  <div class="ccard">
+    <div class="ctitle">从 ¥10,237 亿营收到 -¥466 亿自由现金流的完整资金链路（投资期 FCF 转负）</div>
+    <div id="sankey" style="width:100%;height:480px;"></div>
+  </div>
+</div>
+
+<!-- ═══ 模块 1 ═══ -->
+<div class="section">
+  <div class="stitle">模块 1 · 公司概览与背景</div>
+  <div class="cmt">
+    <p><strong>公司全称</strong>：阿里巴巴集团控股有限公司 / Alibaba Group Holding Limited<br>
+    <strong>上市</strong>：NYSE: BABA（2014-09-19 IPO，发行价 $68）+ HKEX: 9988（2019-11-26 港股二次上市，2024-08-28 双重主要上市）<br>
+    <strong>总部</strong>：杭州 / 上海<br>
+    <strong>财年</strong>：4 月 1 日 - 3 月 31 日（与自然年错开）· FY2026 = 2025-04 至 2026-03<br>
+    <strong>主营</strong>：电商（淘天 + 国际数字商业 AIDC）+ 云智能（阿里云 + AI）+ 即时零售（淘宝闪购 + 饿了么）+ 大文娱（优酷）+ 菜鸟物流</p>
+
+    <p><strong>核心叙事</strong>：阿里巴巴是<span class="hl-t">中国最大的电商+云+AI 复合体</span>。FY2026 营收 ¥10,237 亿（$1,484 亿）—— 但这是一份"极端分化"的财报：<strong>云智能 +38% 五季度逐季加速、AI 产品收入单季 ¥90 亿连续 11 季度三位数增长</strong>，与<strong>核心利润崩塌（Non-GAAP 净利 -100%、调整后 EBITA -84%）</strong>形成强烈反差。<span class="hl-t">这是阿里管理层主动选择的"投资期"</span>—— 即时零售（淘宝闪购）烧钱补贴 + AI/云大规模 Capex（FY26 ¥1,261 亿创纪录）让短期利润归零。GAAP 净利 +96% 是投资公允价值收益，不是经营利润。<strong>市场已看穿这一点</strong>—— 财报当日股价 +7-8% 上涨，因为云 +38% 加速 + 淘宝天猫整合进 Qwen App 是真正的长期价值。最关键的问题：(1) 即时零售烧钱何时见顶、ROIC 能否兑现？(2) FY27 利润能否反弹？(3) 云 +38% 增速能否持续？</p>
+
+    <p><strong>简史与里程碑</strong>：</p>
+    <p>
+      <strong>1. 1999 年成立</strong>——马云在杭州创立，B2B 起家<br>
+      <strong>2. 2003 年淘宝网上线</strong>——后成为中国最大 C2C 平台<br>
+      <strong>3. 2009 年阿里云成立</strong>——王坚力推<br>
+      <strong>4. 2014-09-19 NYSE IPO</strong>——发行价 $68、当时美国最大 IPO<br>
+      <strong>5. 2019-11-26 港股二次上市</strong>——HKEX: 9988<br>
+      <strong>6. 2020-2023 蚂蚁 IPO 暂停 + 反垄断 + 监管寒冬</strong><br>
+      <strong>7. 2024-08-28 港股双重主要上市</strong>——纳入港股通<br>
+      <strong>8. 2024-2025 蔡崇信 + 吴泳铭时代</strong>——重组 + 聚焦 AI/云<br>
+      <strong>9. 2025-2026 即时零售大举投入</strong>——淘宝闪购 + 饿了么<br>
+      <strong>10. 2026-05-13 Q4 FY26 财报</strong>——云 +38% 加速 / Non-GAAP 净利崩塌 / 淘宝整合 Qwen
+    </p>
+
+    <p><strong>股权结构（2026-03-31 末）</strong>：</p>
+    <p>
+      <strong>软银（SoftBank）</strong>——~14% 股权（已大幅减持）<br>
+      <strong>蔡崇信、马云等创始人/合伙人</strong>——合计 ~10%<br>
+      <strong>阿里合伙人制度</strong>——合伙人有 CEO/董事会提名权<br>
+      <strong>公众股东</strong>——~76%<br>
+      <strong>注</strong>：蔡崇信任董事会主席，吴泳铭任 CEO 兼阿里云董事长。马云仍持有 ~4.3% 股权但已不实控
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 模块 2 ═══ -->
+<div class="section">
+  <div class="stitle">模块 2 · 管理层评估</div>
+
+  <div class="bscore">
+    <div class="circle cw">B+</div>
+    <div class="bd">
+      <h4>蔡崇信 · 董事会主席（2023-至今）</h4>
+      <p>1964 年生，耶鲁经济+JD。1999 年加入阿里。2023-09 接任董事会主席。<strong>主导 2024-2026 的"重组 + 聚焦 + 回购"战略</strong>。Q4 FY26 财报中的"即时零售投资"是蔡崇信+吴泳铭对"长期市占 vs 短期利润"的主动选择。<span class="hl-t">海图判断：蔡崇信是务实的"资本配置师"</span>，但 FY26 即时零售烧钱的 ROIC 是其最大考验。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B+</div>
+    <div class="bd">
+      <h4>吴泳铭 · CEO（2023-至今）+ 阿里云董事长</h4>
+      <p>1975 年生，浙江大学计算机出身，阿里 18 罗汉之一。<strong>CEO 兼管云业务——云成为公司战略最高优先级</strong>。云智能五季度逐季加速（+26%→+34%→+36%→+38%）是吴泳铭的直接成绩。<span class="hl-t">淘宝天猫整合进 Qwen App 是 FY26 最大战略动作</span>—— AI + 电商协同。但即时零售烧钱让淘天 EBITA -40%，是吴泳铭的执行考验。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B</div>
+    <div class="bd">
+      <h4>资本配置纪律 · 投资期 FCF 转负</h4>
+      <p>
+      <strong>FY26 Capex ¥1,261 亿创历史新高</strong>（vs FY25 ~¥860 亿，+47%），全部投入 AI 算力 + 数据中心。<br>
+      <strong>FY26 FCF -¥466 亿（流出）</strong>—— vs FY25 +¥739 亿，这是"投资期"的代价。<br>
+      <strong>年度股息 $1.05/ADS（~$25 亿）</strong>—— 维持但不增加。<br>
+      <span class="warn-t">关键不确定性</span>：FY26 大规模回购明显放缓（filing 未披露 Q4 回购数据），即时零售烧钱 ROIC 不明。<br>
+      <strong>评价</strong>：FY26 是阿里"资本配置最激进"的一年——把利润和 FCF 全部投入 AI/云+即时零售，<strong>赌的是 FY27-28 的市占和长期回报</strong>。
+      </p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B+</div>
+    <div class="bd">
+      <h4>战略执行能力 · 云加速验证 vs 即时零售存疑</h4>
+      <p>Q4 FY26 战略执行<span class="hl-t">两极分化</span>：(1) 云 +38% 五季度逐季加速 + AI 收入 ¥90 亿/季——<strong>云战略完全兑现，超出市场预期</strong>；(2) 即时零售 +57% 但烧钱让淘天 EBITA -40%——<strong>市占抢到了，但单位经济和 ROIC 还看不到</strong>。海图判断：<strong>云的执行力是 A 级，即时零售的执行力是 C 级</strong>，综合 B+。</p>
+    </div>
+  </div>
+
+  <div class="cmt">
+    <p><strong>长期主义测试</strong>：3 年前（FY23 财报）管理层承诺"重组+聚焦核心+提升股东回报"——FY26 <span class="hl-t">部分兑现部分背离</span>：(1) 云加速 ✓✓（超额）；(2) AIDC 接近盈亏平衡 ✓；(3) 但"提升股东回报"在 FY26 背离——FCF 转负、回购放缓、利润崩塌。<strong>FY26 管理层选择了"长期投资"而非"股东回报"</strong>，这个选择对错要 FY27-28 验证。</p>
+
+    <p><strong>薪酬与利益绑定</strong>：合伙人 + 软银 + 创始人合计持股 ~25%。利益绑定相对强，但单一管理层个人持股不大。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 3 ═══ -->
+<div class="section">
+  <div class="stitle">模块 3 · 商业模式深度解析</div>
+
+  <div class="cmt">
+    <p><strong>海图"一句话测试"</strong>：<span class="hl-t">通过淘天电商 + 阿里云 + 国际数字商业 + 即时零售 + 菜鸟物流，服务中国 9 亿+ 用户和全球 3 亿+ 跨境用户，靠交易佣金+广告费+云订阅+云 AI+物流费多元变现，FY26 营收 ¥10,237 亿、Non-GAAP 净利 ¥607 亿（投资期谷底）。</span></p>
+
+    <p><strong>FY2026 收入模型与分部拆解</strong>：</p>
+    <table class="tbl"><thead><tr><th>分部</th><th>FY26 营收(¥亿)</th><th>占比</th><th>YoY</th><th>调整后 EBITA</th><th>战略地位</th></tr></thead>
+    <tbody>
+      <tr><td>淘天集团（中国电商）</td><td>5,542</td><td>54%</td><td>+1%</td><td>¥1,075亿(-44%)</td><td>★★★★★ 现金奶牛（投资期）</td></tr>
+      <tr><td>云智能集团</td><td>1,581</td><td>15%</td><td>+34%</td><td>¥143亿(+35%)</td><td>★★★★★ 增长引擎 / AI 受益</td></tr>
+      <tr><td>国际数字商业（AIDC）</td><td>1,442</td><td>14%</td><td>+9%</td><td>接近盈亏平衡</td><td>★★★★ 全球扩张</td></tr>
+      <tr><td>即时零售（淘宝闪购）</td><td>785</td><td>8%</td><td>+47%</td><td>大幅亏损</td><td>★★★★ 烧钱抢市占</td></tr>
+      <tr><td>菜鸟+大文娱+其他</td><td>~1,400</td><td>14%</td><td>持平</td><td>微利/亏损</td><td>★★ 配套业务</td></tr>
+      <tr><td>抵销</td><td>(~512)</td><td>-5%</td><td>—</td><td>—</td><td>—</td></tr>
+      <tr class="hl"><td>合计</td><td>10,237</td><td>100%</td><td>+3%</td><td>¥764亿(-56%)</td><td>—</td></tr>
+    </tbody></table>
+
+    <p style="margin-top:14px"><strong>海图核心拆解 · 为什么 Non-GAAP 净利会崩塌到 ¥0.86 亿？</strong></p>
+    <p>
+      <strong>1. 即时零售烧钱</strong>：淘宝闪购 +57% 抢市占，单季补贴+履约亏损可能达 ¥150-200 亿，直接拖累淘天 EBITA -40%。<br>
+      <strong>2. AI/云大规模投入</strong>：FY26 Capex ¥1,261 亿，新增折旧 + 研发费用化部分压制利润。<br>
+      <strong>3. 这是"主动选择"</strong>：管理层把淘天的现金牛利润 + 云利润，全部"再投资"到即时零售和 AI 算力。<br>
+      <strong>结论</strong>：Non-GAAP 净利 ¥0.86 亿不是"经营失败"，是<span class="hl-t">"利润被主动转化为长期投资"</span>。GAAP 净利 +96% 因投资公允价值收益虚高，两者都不反映"正常化盈利"。
+    </p>
+
+    <p><strong>关键商业模式特点</strong>：</p>
+    <p>
+      <strong>1. 双轮驱动转型</strong>：电商（成熟+现金牛）+ 云（高增长+AI 受益）。云占比从 FY25 13% → FY26 15%，持续上升。<br>
+      <strong>2. 淘宝整合 Qwen App</strong>：FY26 最大战略动作——AI 助手 + 电商的协同想象空间。<br>
+      <strong>3. 巨额投资期</strong>：FY26 Capex ¥1,261 亿历史新高，FCF -¥466 亿。这是与 Microsoft/Google/Meta 的 AI 军备竞赛。<br>
+      <strong>4. 即时零售烧钱抢市占</strong>：淘宝闪购 +57%，但 ROIC 不明，是估值最大不确定性。<br>
+      <strong>5. 净现金+投资 ¥5,208 亿（$755 亿）</strong>：财务弹性极强，可承受多年投资周期。
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 模块 4 ═══ -->
+<div class="section">
+  <div class="stitle">模块 4 · 经济护城河分析（5 维）</div>
+
+  <div class="bscore">
+    <div class="circle cg">A</div>
+    <div class="bd">
+      <h4>1. 网络效应（电商+云双重）· <strong>宽护城河</strong></h4>
+      <p>淘天：9 亿消费者 + 千万级商家 = 中国最强电商网络效应。云：阿里云亚太最大 + AI 模型生态（通义千问 + Qwen App）。<span class="hl-t">淘宝整合 Qwen App 让"AI 助手 + 电商"形成新的网络效应</span>。这是 BABA 最强护城河。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B+</div>
+    <div class="bd">
+      <h4>2. 转换成本（B 端云）· <strong>窄至中护城河</strong></h4>
+      <p>对 C 端电商用户：转换成本中（多平台共存）。对 B 端云客户：转换成本高（数据迁移、API 改造）。<span class="hl-t">阿里云的"中国数据合规+AI 模型生态"让海外巨头难替代</span>，但华为云/腾讯云国内竞争激烈。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>3. 成本优势（规模效应）· <strong>宽护城河</strong></h4>
+      <p>9 亿用户 + 阿里云算力 + 菜鸟物流 = 极强规模效应。<span class="hl-t">AI 模型训练 + 推理算力的边际成本极低</span>，规模越大越便宜。FY26 ¥1,261 亿 Capex 建立的算力基础设施是未来 5 年的成本护城河。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">A</div>
+    <div class="bd">
+      <h4>4. 无形资产（品牌+数据+AI 模型）· <strong>宽护城河</strong></h4>
+      <p>"阿里巴巴/淘宝/天猫/阿里云/通义千问" 品牌 + 数据资产（10 亿+ 用户多年消费数据）+ AI 模型（通义千问 Qwen 系列，全球开源模型下载量第一梯队）。<span class="hl-t">这是 AI 时代最稀缺的护城河</span>。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B+</div>
+    <div class="bd">
+      <h4>5. 有效规模（中国电商寡头）· <strong>窄至中护城河</strong></h4>
+      <p>中国电商 CR4：阿里 + 拼多多 + 京东 + 抖音电商 = 4 强格局。<strong>不是单寡头</strong>。云：阿里云+华为云+腾讯云 3 强。<span class="warn-t">竞争激烈但仍是寡头格局</span>—— 新进入者无法复制网络+数据+技术。</p>
+    </div>
+  </div>
+
+  <div class="cmt">
+    <p style="margin-top:18px"><strong>护城河趋势 · AI 时代加宽（云+AI）但电商成熟</strong>：5 大维度综合评分 = 2A + 1A- + 2B+ ≈ <strong>宽护城河</strong>。最强项是网络效应、成本优势、无形资产。<span class="hl-t">10 年后会更宽还是更窄？海图判断：会"明显加宽"</span>—— AI 时代云+AI 模型的护城河越来越深，淘宝整合 Qwen 让电商+AI 协同。这是一家"护城河宽且持续加宽"的公司。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 5 ═══ -->
+<div class="section">
+  <div class="stitle">模块 5 · 财务深度分析</div>
+
+  <h3 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">5.1 三张表概览（FY2026 vs FY2025）</h3>
+  <div class="tbl-wrap" style="margin-bottom:14px">
+    <table class="tbl"><thead><tr><th>项目（¥亿）</th><th>FY2025</th><th>FY2026</th><th>YoY</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td>利润表</td><td></td><td></td><td></td></tr>
+      <tr><td>总营收</td><td>9,963</td><td>10,237</td><td>+3%</td></tr>
+      <tr><td>毛利率</td><td>~40%</td><td>39.8%</td><td>持平</td></tr>
+      <tr><td>调整后 EBITA</td><td>1,728</td><td>764</td><td>-56%</td></tr>
+      <tr><td>归母净利润 (GAAP)</td><td>1,260</td><td>1,021</td><td>-19%</td></tr>
+      <tr><td>Non-GAAP 净利</td><td>1,580</td><td>607</td><td>-62%</td></tr>
+      <tr><td>Non-GAAP 净利率</td><td>15.9%</td><td>5.9%</td><td>-10pp</td></tr>
+      <tr class="hl"><td>资产负债表（2026-03-31 末）</td><td></td><td></td><td></td></tr>
+      <tr><td>净现金+投资合计</td><td>~5,500</td><td>5,208</td><td>-5%</td></tr>
+      <tr><td>归母股东权益</td><td>~10,200</td><td>~11,150</td><td>+9%</td></tr>
+      <tr><td>每股净资产 ($/ADS)</td><td>$65.59</td><td>$67.27</td><td>+3%</td></tr>
+      <tr class="hl"><td>现金流量表（FY2026）</td><td></td><td></td><td></td></tr>
+      <tr><td>经营活动现金流 (OCF)</td><td>~1,640</td><td>762</td><td>-53%</td></tr>
+      <tr><td>资本开支 (Capex)</td><td>~860</td><td>1,261</td><td>+47%</td></tr>
+      <tr><td>自由现金流 (FCF)</td><td>+739</td><td>-466</td><td>转负</td></tr>
+      <tr><td>年度股息</td><td>$1.05/ADS</td><td>$1.05/ADS</td><td>持平</td></tr>
+    </tbody></table>
+  </div>
+
+  <h3 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">5.2 5 年关键比率趋势</h3>
+  <div class="tbl-wrap" style="margin-bottom:14px">
+    <table class="tbl"><thead><tr><th>比率</th><th>FY22</th><th>FY23</th><th>FY24</th><th>FY25</th><th>FY26</th></tr></thead>
+    <tbody>
+      <tr><td>营收增速</td><td>+19%</td><td>+2%</td><td>+8%</td><td>+6%</td><td>+3%</td></tr>
+      <tr><td>Non-GAAP 净利增速</td><td>-21%</td><td>+17%</td><td>+11%</td><td>+1%</td><td>-62%</td></tr>
+      <tr><td>毛利率</td><td>37%</td><td>36%</td><td>37%</td><td>40%</td><td>39.8%</td></tr>
+      <tr><td>调整后 EBITA 率</td><td>13%</td><td>15%</td><td>16%</td><td>17%</td><td>7.5%</td></tr>
+      <tr><td>ROE</td><td>5%</td><td>9%</td><td>8%</td><td>14%</td><td>9.2%</td></tr>
+      <tr><td>云增速</td><td>+23%</td><td>+4%</td><td>+3%</td><td>+11%</td><td>+34%</td></tr>
+      <tr><td>FCF（¥亿）</td><td>~1,000</td><td>~1,500</td><td>~1,050</td><td>+739</td><td>-466</td></tr>
+      <tr><td>Capex（¥亿）</td><td>~480</td><td>~430</td><td>~770</td><td>~860</td><td>1,261</td></tr>
+    </tbody></table>
+  </div>
+
+  <h3 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">5.3 杜邦分析（FY2026）</h3>
+  <div class="cmt">
+    <p><strong>ROE = 净利率 × 资产周转 × 权益乘数</strong></p>
+    <p>= 10.0% × (¥10,237 / ¥18,500) × (¥18,500 / ¥11,150)<br>
+    = <strong>10.0% × 0.553 × 1.659</strong><br>
+    = <strong>~9.2%（杜邦）</strong>与 yfinance ROE 9.2% 吻合</p>
+    <p style="margin-top:10px"><strong>解读</strong>：ROE 由 3 项构成——<span class="hl-t">GAAP 净利率 10.0%（含投资收益虚高）+ 资产周转 0.553 + 权益乘数 1.66</span>。<strong>但用 Non-GAAP 看，FY26 核心净利率仅 5.9%</strong>——这是投资期的"利润压缩"。FY27 即时零售投资见顶后，Non-GAAP 净利率有望回到 10%+，ROE 重回 13%+。</p>
+  </div>
+
+  <h3 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">5.4 资产负债健康度</h3>
+  <div class="cmt">
+    <p>
+      <strong>净现金 + 投资合计 ¥5,208 亿（$755 亿）</strong>—— 公司公告口径，含现金+短期投资+长期投资<br>
+      <strong>有息负债</strong>：可换股票据 + 高级票据 + 长期借款，约 ¥2,800 亿（行权价远高于现价）<br>
+      <strong>占总市值 $339B 的比例 = 22%</strong>—— 即扣除净金融资产后，市场对运营业务估值 $264B<br>
+      流动比率 ~1.4、利息覆盖倍数充裕<br>
+      <strong>资产负债健康度评级：A</strong>（净金融资产充裕，财务弹性足以支撑多年投资期）
+    </p>
+  </div>
+
+  <h3 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">5.5 现金流质量</h3>
+  <div class="cmt">
+    <p>
+      <strong>OCF/Non-GAAP NI = ¥762 / ¥607 = 126%</strong>—— 看似优秀，但绝对值大降<br>
+      <strong>FY26 FCF -¥466 亿（流出）</strong>—— vs FY25 +¥739 亿，因 Capex ¥1,261 亿暴增<br>
+      <strong>FCF Yield (FY26) = 负值</strong>—— 投资期典型<br>
+      <strong>评价</strong>：现金流质量 B。<span class="warn-t">FY26 FCF 转负是"AI 军备竞赛 + 即时零售烧钱"的代价</span>。FY27 即时零售投资见顶 + 云利润释放后，FCF 有望转正回到 +¥500-800 亿。但<strong>这是当前最大的不确定性</strong>。
+    </p>
+  </div>
+
+  <h3 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">5.6 所有者盈余计算（核心）</h3>
+  <div class="cmt">
+    <p>所有者盈余 = Non-GAAP 净利 + 折旧摊销 - 维护性 Capex ± 营运资金变动</p>
+    <p>
+      = ¥607 亿 (Non-GAAP) + ¥450 亿 (折旧摊销) - ¥400 亿 (维护性 Capex 估算)<br>
+      = <strong>¥657 亿（FY26 投资期谷底）</strong> = $95 亿
+    </p>
+    <p style="margin-top:8px"><strong>OE Yield (FY26) = $95 / $339 = 2.8%</strong>—— 偏低（投资期谷底）</p>
+    <p><span class="warn-t">FY26 是所有者盈余的谷底</span>。如果用 FY27-28 中周期正常化 OE（即时零售投资见顶后回到 ¥1,500 亿+），OE Yield 升至 6.4%+。<strong>关键看 FY27 即时零售烧钱能否见顶</strong>——这是估值的核心变量。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 6 ═══ -->
+<div class="section">
+  <div class="stitle">模块 6 · 电话会分析（最新 + 前 2 季）</div>
+
+  <div class="tag-grid">
+    <div class="tag-card pos">
+      <h5>Q4 FY2026 电话会（2026-05-13）<span class="tag-bd up">利好</span></h5>
+      <p>"云智能 +38%、AI 产品收入 ¥90 亿、连续 11 季度三位数增长、云 EBITA +57%。" → <strong>云加速验证 AI 战略</strong>，超出市场预期。</p>
+    </div>
+    <div class="tag-card neg">
+      <h5>Q4 FY2026 电话会<span class="tag-bd dn">利空</span></h5>
+      <p>"Non-GAAP 净利 ¥0.86 亿(-100%)、调整后 EBITA -84%、FY26 FCF -¥466 亿。" → <strong>核心利润崩塌</strong>，即时零售烧钱+AI 投资让短期盈利归零。</p>
+    </div>
+    <div class="tag-card pos">
+      <h5>Q4 FY2026 电话会<span class="tag-bd up">利好</span></h5>
+      <p>"淘宝天猫电商服务整合进 Qwen App，扩大 Qwen 用户覆盖 + 为淘宝天猫客户带来 AI 驱动新体验。" → <strong>AI + 电商协同的战略想象空间打开</strong>。</p>
+    </div>
+    <div class="tag-card neu">
+      <h5>Q3 FY2026 电话会（2026-03-19）<span class="tag-bd nt">中性</span></h5>
+      <p>"Q3 云 +36%、即时零售 +56%、Q3 GAAP 净利 -66%。" → <strong>Q3 已显示投资期特征</strong>，Q4 延续并加深。</p>
+    </div>
+    <div class="tag-card pos">
+      <h5>Q2 FY2026 电话会（2025-12-09）<span class="tag-bd up">利好</span></h5>
+      <p>"Q2 云 +34%、AI 产品连续 9 季度三位数增长。" → AI 战略持续兑现。</p>
+    </div>
+    <div class="tag-card neu">
+      <h5>FY2027 展望<span class="tag-bd nt">中性</span></h5>
+      <p>"继续大规模投资 AI 基础设施 + 即时零售。" → <strong>FY27 仍是投资期</strong>，利润反弹时点不明确，需观察即时零售烧钱见顶信号。</p>
+    </div>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">6.1 信号汇总</h4>
+  <div class="cmt">
+    <p><strong>利好信号（3）</strong>：(1) 云 +38% 五季度逐季加速；(2) AI 产品 ¥90 亿/季连续 11 季度三位数；(3) 淘宝整合 Qwen App。</p>
+    <p><strong>利空信号（2）</strong>：(1) Non-GAAP 净利崩塌 -100%；(2) FY26 FCF -¥466 亿转负。</p>
+    <p><strong>中性信号（1）</strong>：FY27 仍是投资期，利润反弹时点不明。</p>
+    <p>综合评估：<strong>分化</strong>—— 云加速是 A 级利好，即时零售烧钱是 C 级隐忧。市场财报日 +7-8% 上涨说明<strong>市场选择相信"云价值 > 短期利润崩塌"</strong>。</p>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">6.2 指引兑现度追踪</h4>
+  <div class="tbl-wrap">
+    <table class="tbl"><thead><tr><th>承诺时间</th><th>承诺内容</th><th>实际兑现</th><th>评分</th></tr></thead>
+    <tbody>
+      <tr><td>FY24 财报</td><td>云加速增长</td><td>FY26 +34% / Q4 +38% 大幅加速</td><td>A+</td></tr>
+      <tr><td>FY25 财报</td><td>FY26 利润改善</td><td>FY26 Non-GAAP -62% / 主动转向投资</td><td>D</td></tr>
+      <tr><td>Q1 FY26</td><td>FY26 Capex >$50B</td><td>FY26 ¥1,261 亿(~$183亿) / 兑现</td><td>B</td></tr>
+      <tr><td>Q3 FY26</td><td>即时零售扩张</td><td>FY26 +47% / 兑现但烧钱</td><td>B-</td></tr>
+      <tr><td>Q3 FY26</td><td>AIDC 减亏</td><td>FY26 接近盈亏平衡 / 兑现</td><td>A</td></tr>
+    </tbody></table>
+  </div>
+</div>
+
+<!-- ═══ 模块 7 ═══ -->
+<div class="section">
+  <div class="stitle">模块 7 · 多模型估值（8 种方法交叉验证）</div>
+
+  <p style="margin-bottom: 16px; color: var(--text2); font-size:14px;">下表估值<strong>不锚定当前市价</strong>，独立基于财报数据 + 行业研究推导。<span class="warn-t">特别注意：FY26 是"投资期利润谷底"，估值必须用 FY27-28 中周期正常化盈利（Non-GAAP 净利反弹至 $130-160 亿）而非 FY26 谷底 $88 亿</span>。最终目标价用概率加权（基准 50% / 乐观 30% / 悲观 20%）。</p>
+
+  <div class="tbl-wrap" style="margin-bottom:14px">
+    <table class="tbl"><thead><tr><th>方法</th><th>关键假设</th><th>估值（$/ADS）</th><th>vs $141.12 现价</th></tr></thead>
+    <tbody>
+      <tr><td>1. 相对估值 P/E</td><td>FY27 Non-GAAP EPS/ADS $5.4（即时零售见顶）, P/E 25x（云高增长溢价）</td><td>$135</td><td><span class="badge dn">-4%</span></td></tr>
+      <tr><td>2. DCF（基准）</td><td>FY27-30 Non-GAAP 净利 $130-180 亿稳态, WACC 11%, g=3%</td><td>$170</td><td><span class="badge up">+20%</span></td></tr>
+      <tr><td>3. 所有者盈余</td><td>FY27 中周期 OE $130 亿, 合理 P/OE 17x</td><td>$160</td><td><span class="badge up">+13%</span></td></tr>
+      <tr><td>4. PEG</td><td>FY27 利润反弹 g≈50%（谷底回升）, 不适用常规 PEG</td><td>N/A</td><td><span class="badge nt">不适用</span></td></tr>
+      <tr><td>5. DDM 戈登模型</td><td>股息 $1.05, 增长股不适用</td><td>N/A</td><td><span class="badge nt">不适用</span></td></tr>
+      <tr><td>6. NAV（每股净资产）</td><td>归母净资产 $67.27/ADS</td><td>$67</td><td><span class="badge dn">-52%（下限）</span></td></tr>
+      <tr><td>7. 反向 DCF</td><td>当前 $141 隐含 r=11%, g=3% (中性偏悲观)</td><td>$168</td><td><span class="badge up">+19%</span></td></tr>
+      <tr><td>8. SOTP 分部加总（★ 最适用）</td><td>淘天 $1,246亿 + 云 $1,146亿 + AIDC $314亿 + 即时零售+本地 $114亿 + 菜鸟+其他 $100亿 + 净金融 $755亿 = $3,675亿</td><td>$165</td><td><span class="badge up">+17%</span></td></tr>
+      <tr class="hl"><td>中位数</td><td>—</td><td><strong>$165</strong></td><td><strong>+17%</strong></td></tr>
+      <tr class="hl"><td>加权公允（基准 50% / 乐观 30% / 悲观 20%）</td><td>—</td><td><strong>$165</strong></td><td><strong>+17%</strong></td></tr>
+    </tbody></table>
+  </div>
+
+  <h4 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">7.X · P/E 多档透视表（投资期 · GAAP 与 Non-GAAP 极端分化）</h4>
+  <div class="tbl-wrap" style="margin-bottom: 14px;">
+    <table class="tbl"><thead><tr><th>计算口径</th><th>每股盈利 / ADS</th><th>P/E</th><th>是否最可信</th></tr></thead>
+    <tbody>
+      <tr><td>TTM GAAP P/E</td><td>$6.38</td><td>22.1x</td><td>★ 含投资公允价值收益虚高</td></tr>
+      <tr><td>TTM Non-GAAP P/E</td><td>$3.88</td><td>36.4x</td><td>★★ FY26 是投资期谷底，失真</td></tr>
+      <tr><td>Forward FY27 P/E（共识）</td><td>$9.34</td><td>15.1x</td><td>★★★ 卖方共识（含 GAAP 投资收益）</td></tr>
+      <tr><td>FY27 Non-GAAP P/E（即时零售见顶）</td><td>$5.40</td><td>26x</td><td>★★★★ <strong>核心经营修复后</strong></td></tr>
+      <tr><td>FY28 中周期 Non-GAAP P/E</td><td>$6.80</td><td>21x</td><td>★★★★ 长期正常化</td></tr>
+      <tr><td>核心业务 P/E（剔除净金融资产 $755亿）</td><td>—</td><td>~20x（FY27）</td><td>★★★★★ <strong>最揭示价值</strong></td></tr>
+    </tbody></table>
+  </div>
+  <div class="dcf-note">
+    <p><strong>核心业务 P/E 的解读</strong>：市值 $339B - 净金融资产 $75.5B = $263.5B。FY27 Non-GAAP 净利预计反弹至 $130 亿（即时零售投资见顶 + 云利润释放）→ 核心 P/E ~20x。<span class="hl-t">这相对 Amazon P/E 35x、Microsoft 35x 仍便宜，但不再是"白菜价"</span>—— 因为 FY26 利润崩塌后，市场需要看到 FY27 利润反弹的实锤才会重估。<strong>SOTP 是最可靠的方法</strong>：云业务单独按 5x P/S 估值就值 $1,146 亿，接近当前市值 1/3。</p>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">7.1 估值方法适用性说明</h4>
+  <div class="dcf-note">
+    <p><strong>最适用 3 种</strong>：SOTP（投资期+多业务必备）、DCF（中周期正常化）、反向 DCF（揭示市场预期）。</p>
+    <p><strong>次要 2 种</strong>：所有者盈余（FY27 修正）、相对估值 P/E（FY27 共识）。</p>
+    <p><strong>不适用 3 种</strong>：PEG（FY27 利润谷底回升 g 失真）、DDM（股息率 0.74% 太低）、NAV（运营公司，仅作下限）。</p>
+    <p><strong>核心提醒</strong>：FY26 Non-GAAP 净利 $88 亿是"投资期谷底"，<span class="warn-t">绝不能用 FY26 数字直接乘 P/E 估值</span>，必须用 FY27-28 中周期正常化盈利。</p>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">7.2 三情景敏感性分析</h4>
+  <div class="tbl-wrap">
+    <table class="tbl"><thead><tr><th>情景</th><th>关键假设</th><th>FY27 Non-GAAP 净利</th><th>目标价</th><th>vs 现价</th><th>概率</th></tr></thead>
+    <tbody>
+      <tr><td>悲观</td><td>即时零售烧钱无止境 / 云增速放缓 / 利润持续承压</td><td>$80 亿</td><td>$105</td><td><span class="badge dn">-26%</span></td><td>20%</td></tr>
+      <tr><td>基准</td><td>FY27 即时零售投资见顶 / 云持续 +30% / 利润反弹</td><td>$130 亿</td><td>$165</td><td><span class="badge up">+17%</span></td><td>50%</td></tr>
+      <tr><td>乐观</td><td>云 +40% / AI 商业化爆发 / 即时零售 FY27 扭亏 / Qwen 协同兑现</td><td>$170 亿</td><td>$220</td><td><span class="badge up">+56%</span></td><td>30%</td></tr>
+    </tbody></table>
+  </div>
+</div>
+
+<!-- ═══ 模块 8 ═══ -->
+<div class="section">
+  <div class="stitle">模块 8 · 竞争与行业分析</div>
+
+  <h4 style="margin-bottom:10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">8.1 中国互联网巨头横向对比</h4>
+  <div class="tbl-wrap" style="margin-bottom:14px">
+    <table class="tbl"><thead><tr><th>公司</th><th>市值</th><th>FY 营收</th><th>FY Non-GAAP 净利</th><th>P/E</th><th>护城河</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td>阿里巴巴（BABA）</td><td><strong>$339B</strong></td><td><strong>¥10,237亿</strong></td><td><strong>¥607亿（投资期谷底）</strong></td><td><strong>22x / Forward 15x</strong></td><td><strong>电商+云+AI</strong></td></tr>
+      <tr><td>腾讯（0700）</td><td>~$534B</td><td>¥6,602亿</td><td>¥2,510亿</td><td>~16x</td><td>社交+游戏+广告</td></tr>
+      <tr><td>拼多多（PDD）</td><td>~$130B</td><td>¥2,600亿</td><td>¥510亿</td><td>~10x</td><td>下沉+低价</td></tr>
+      <tr><td>京东（JD）</td><td>~$42B</td><td>¥1,158亿</td><td>¥500亿</td><td>~16x</td><td>自营+物流</td></tr>
+      <tr><td>美团（3690）</td><td>~$80B</td><td>¥3,400亿</td><td>¥130亿</td><td>~30x</td><td>外卖+本地</td></tr>
+    </tbody></table>
+  </div>
+  <div class="cmt">
+    <p><strong>BABA 是中国唯一"电商+云+AI 三引擎"复合体</strong>。FY26 利润谷底让 P/E 看似偏高（22x），但这是"投资期失真"。<span class="hl-t">从 SOTP 看，阿里云单独按 5x P/S 就值 $1,146 亿——这部分被市场严重低估</span>（AWS 估值倍数远高于此）。即时零售烧钱是阿里与美团/京东的"三国杀"，短期拖累利润但抢占了 +47% 增速的市占。</p>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">8.2 全球云计算竞争对比</h4>
+  <div class="tbl-wrap">
+    <table class="tbl"><thead><tr><th>云厂商</th><th>2026 营收</th><th>YoY</th><th>AI 战略</th></tr></thead>
+    <tbody>
+      <tr><td>AWS（Amazon）</td><td>$115B</td><td>+20%</td><td>Anthropic 投资 + Trainium 芯片</td></tr>
+      <tr><td>Microsoft Azure</td><td>$85B</td><td>+30%</td><td>OpenAI 战略合作</td></tr>
+      <tr><td>Google Cloud</td><td>$55B</td><td>+30%</td><td>Gemini + TPU</td></tr>
+      <tr class="hl"><td>阿里云（BABA）</td><td><strong>$229亿(¥1,581亿)</strong></td><td><strong>+34% → Q4 +38% 加速</strong></td><td><strong>通义千问 Qwen + Qwen App</strong></td></tr>
+      <tr><td>华为云</td><td>~$16B</td><td>+25%</td><td>盘古大模型</td></tr>
+    </tbody></table>
+  </div>
+  <div class="cmt" style="margin-top:14px">
+    <p><strong>阿里云增速已超越美国三大云</strong>：Q4 +38% 高于 Azure +30%、Google Cloud +30%、AWS +20%。<span class="hl-t">这是 BABA 估值修复最重要的杠杆</span>—— 阿里云是亚太最大、全球第四，AI 产品收入单季 ¥90 亿（连续 11 季度三位数）。如果阿里云保持 +35% 增速 4-5 年，FY30 营收可达 $60B+，单云业务市值可达 $250-350B。</p>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">8.3 行业 TAM 与增长率</h4>
+  <div class="cmt">
+    <p>
+      <strong>中国电商 TAM</strong>：~¥16 万亿 GMV<br>
+      <strong>中国云计算 TAM</strong>：~¥3,500 亿（2026）→ ¥1.5 万亿（2030 预测）<br>
+      <strong>中国即时零售 TAM</strong>：~¥1.2 万亿 GMV → ¥4 万亿（2030 预测）<br>
+      <strong>BABA 主要份额</strong>：电商 GMV ~30%、云 ~30% 国内市场<br>
+      <strong>颠覆风险</strong>：拼多多/抖音电商对淘天的挤压；美团对即时零售的反击；华为云对阿里云的竞争。
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 模块 9 ═══ -->
+<div class="section">
+  <div class="stitle">模块 9 · 技术面与 K 线分析（次要参考）</div>
+
+  <div class="cmt">
+    <p><strong>BABA（NYSE）</strong>：</p>
+    <p>
+      当前价 $141.12（2026-05-13 财报日盘中）。52 周区间 $103.71-$192.67。<br>
+      <strong>财报日走势</strong>：财报后股价 +7-8%（从前收 $145.81 区间波动，盘中 $138.64-$143.98）。<br>
+      <strong>30 日均价 ~$140、50 日均价 ~$138</strong>—— 价格在均线附近。<br>
+      <strong>支撑位</strong>：$130（前期密集成交区）/ $103.71（52 周低）<br>
+      <strong>阻力位</strong>：$155（前期高位）/ $170 / $192.67（52 周高）<br>
+      <strong>RSI</strong>：~52（中性）<br>
+      <strong>判断</strong>：技术面中性。<span class="hl-t">财报日市场用 +7-8% 的上涨表态——"相信云价值 > 短期利润崩塌"</span>。Q1 FY27 财报（8 月）是即时零售 ROIC 验证的关键节点。
+    </p>
+
+    <p><strong>BABA（HKEX 9988）</strong>：港股双重主要上市，纳入港股通。当前 HKD 137。南向资金持续流入。</p>
+
+    <p><strong>注意</strong>：技术面作为补充参考。当前 Forward P/E 15.1x、SOTP $165、距 52 周高 -27%，<strong>基本面已合理偏低估，技术面只是确认入场时点</strong>。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 10 ═══ -->
+<div class="section">
+  <div class="stitle">模块 10 · 增长催化剂与前景展望</div>
+
+  <h4 style="margin-bottom:10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">10.1 短期催化剂（未来 6 个月）</h4>
+  <div class="tag-grid">
+    <div class="tag-card pos">
+      <h5>2026-08 Q1 FY2027 财报<span class="tag-bd up">关键</span></h5>
+      <p>关键节点：(1) 即时零售烧钱是否见顶？(2) 云能否维持 +35%+？(3) Non-GAAP 净利能否环比反弹？<strong>如三项正面 → 估值快速修复</strong>。</p>
+    </div>
+    <div class="tag-card pos">
+      <h5>淘宝整合 Qwen App 进展<span class="tag-bd up">利好</span></h5>
+      <p>淘宝天猫电商整合进 Qwen App，AI 助手 + 电商协同。如带动 Qwen DAU + 淘宝转化率提升，是估值重估催化剂。</p>
+    </div>
+    <div class="tag-card neu">
+      <h5>即时零售竞争格局<span class="tag-bd nt">不确定</span></h5>
+      <p>淘宝闪购 +57% vs 美团/京东外卖。<strong>三方烧钱大战的"停战"时点</strong>决定 FY27 利润弹性。</p>
+    </div>
+    <div class="tag-card pos">
+      <h5>云 AI 收入持续<span class="tag-bd up">利好</span></h5>
+      <p>AI 产品收入 ¥90 亿/季，连续 11 季度三位数增长。如 FY27 占云外部收入超 40%，云估值倍数将上修。</p>
+    </div>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">10.2 长期展望（3-5 年）</h4>
+  <div class="cmt">
+    <p><strong>未来 3-5 年三大主题</strong>：</p>
+    <p>
+      <strong>1. 云成为利润主引擎</strong>：阿里云 FY26 EBITA ¥143 亿 → FY30 ¥500-800 亿，云利润占比从 ~10% → 30%+。这是估值最大重估机会。<br>
+      <strong>2. 即时零售扭亏</strong>：淘宝闪购从 FY26 大幅亏损 → FY28 盈亏平衡 → FY30 盈利。这是另一大利润释放空间，但也是最大不确定性。<br>
+      <strong>3. Qwen App + 电商协同</strong>：淘宝整合进 Qwen App 后，AI 助手成为新的流量入口，可能重塑阿里的"AI + 电商"商业模式。
+    </p>
+
+    <p><strong>FY26-FY30 营收 / Non-GAAP 净利预测</strong>：</p>
+    <table class="tbl" style="margin-top:10px"><thead><tr><th>年度</th><th>营收（¥亿）</th><th>YoY</th><th>Non-GAAP 净利（¥亿）</th><th>YoY</th><th>云增速</th></tr></thead>
+    <tbody>
+      <tr><td>FY26 实际（投资期谷底）</td><td>10,237</td><td>+3%</td><td>607</td><td>-62%</td><td>+34%</td></tr>
+      <tr><td>FY27 预测</td><td>11,000</td><td>+7%</td><td>900</td><td>+48%</td><td>+32%</td></tr>
+      <tr><td>FY28 预测</td><td>11,900</td><td>+8%</td><td>1,200</td><td>+33%</td><td>+28%</td></tr>
+      <tr><td>FY29 预测</td><td>12,800</td><td>+8%</td><td>1,450</td><td>+21%</td><td>+24%</td></tr>
+      <tr><td>FY30 预测</td><td>13,700</td><td>+7%</td><td>1,650</td><td>+14%</td><td>+20%</td></tr>
+    </tbody></table>
+
+    <p style="margin-top:10px"><strong>关键变量</strong>：<span class="hl-t">FY27 Non-GAAP 净利能否从 FY26 的 ¥607 亿反弹至 ¥900 亿（+48%）</span>，取决于即时零售烧钱见顶。这是基准情景的核心假设。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 11 ═══ -->
+<div class="section">
+  <div class="stitle">模块 11 · 风险矩阵（多维评估）</div>
+
+  <div class="risk-grid">
+    <div class="risk-card r4">
+      <h5>1. 经营风险（即时零售烧钱）</h5>
+      <span class="risk-score">4 / 5</span>
+      <p>即时零售烧钱让 FY26 调整后 EBITA -84%。如 ROIC 失败 / 烧钱无止境，FY27-28 利润反弹弱于预期。</p>
+    </div>
+    <div class="risk-card r2">
+      <h5>2. 财务风险</h5>
+      <span class="risk-score">2 / 5</span>
+      <p>净现金+投资 ¥5,208 亿（$755 亿）= 财务弹性极强。即便 FCF 连续转负 3 年也能撑住。</p>
+    </div>
+    <div class="risk-card r4">
+      <h5>3. 竞争风险</h5>
+      <span class="risk-score">4 / 5</span>
+      <p>电商：拼多多/抖音挤压淘天。云：华为云/腾讯云竞争。即时零售：美团/京东三国杀。</p>
+    </div>
+    <div class="risk-card r4">
+      <h5>4. 监管/政策风险</h5>
+      <span class="risk-score">4 / 5</span>
+      <p>反垄断 + 数据安全 + VIE 结构 + 中概股退市。蚂蚁集团 IPO 可能性低。</p>
+    </div>
+    <div class="risk-card r3">
+      <h5>5. 宏观风险</h5>
+      <span class="risk-score">3 / 5</span>
+      <p>中国消费降级影响 GMV。汇率波动。中美贸易战 2.0。</p>
+    </div>
+    <div class="risk-card r3">
+      <h5>6. 估值风险</h5>
+      <span class="risk-score">3 / 5</span>
+      <p>FY26 利润崩塌让 TTM P/E 22x 看似偏高。如 FY27 利润不反弹，估值有下修压力。但 SOTP $165 提供支撑。</p>
+    </div>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">11.X 黑天鹅情景（最坏情况）</h4>
+  <div class="cmt">
+    <p>
+      <strong>1. 即时零售烧钱无止境</strong>（概率 20%）：淘宝闪购+美团+京东三方烧钱大战持续 2-3 年，FY27-28 Non-GAAP 净利持续低于 $100 亿，股价跌至 $100（-29%）。<br>
+      <strong>2. 中概股大规模退市</strong>（概率 5%）：SEC 强制 PCAOB 不通过 → BABA 从 NYSE 退市，仅留 HKEX 9988。短期股价跌至 $90（-36%）。<br>
+      <strong>3. 中国消费降级深化</strong>（概率 20%）：淘天 GMV -10%/年，估值 P/E 修正，股价跌至 $110（-22%）。<br>
+      <strong>4. 云增速放缓</strong>（概率 12%）：阿里云从 +38% 跌回 +20%，估值重估机会消失，股价跌至 $115（-19%）。<br>
+      <strong>5. 中美贸易战 2.0</strong>（概率 10%）：阿里云海外业务受限，股价跌至 $110（-22%）。
+    </p>
+    <p><strong>下行支撑</strong>：每股净资产 $67.27 + 净金融资产 $31.5/ADS（$755 亿 / 24 亿 ADS）—— 当前 $141 距 NAV 仍有空间。<span class="hl-t">即便最坏情景下也很难跌破 $90</span>（净金融资产 + 云业务保守估值已提供 $100+ 下行支撑）。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 12 评分卡 ═══ -->
+<div class="section">
+  <div class="stitle">海图评分卡 · 6 维 A-D + 红旗排查</div>
+
+  <div class="bscore">
+    <div class="circle cw">B</div>
+    <div class="bd">
+      <h4>1. 生意可预测性 — B（7/10）</h4>
+      <p>商业模式清晰（电商+云+AI），但 FY26 投资期 + 即时零售烧钱让 FY27 利润可预测度低。云业务可见度高（+38% 加速），即时零售 ROIC 不明。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>2. 经济护城河 — A-（8.5/10）</h4>
+      <p>5 维护城河综合：2A + 1A- + 2B+ = 宽护城河。<strong>护城河 10 年后会加宽</strong>（AI/云驱动 + Qwen 协同）。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle cw">B</div>
+    <div class="bd">
+      <h4>3. 管理层质量 — B（7/10）</h4>
+      <p>蔡崇信 + 吴泳铭 + 合伙人制度。云执行力 A 级，但即时零售烧钱的 ROIC + FY26 "利润改善"承诺背离是减分项。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle cw">B</div>
+    <div class="bd">
+      <h4>4. 财务质量 — B（7/10）</h4>
+      <p>毛利率 39.8% + 净现金 $755 亿是优势。但 FY26 Non-GAAP 净利 -62%、FCF -¥466 亿、调整后 EBITA -56%——<strong>投资期财务质量明显下降</strong>。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle cw">B</div>
+    <div class="bd">
+      <h4>5. 资本配置纪律 — B（7/10）</h4>
+      <p>FY26 把利润+FCF 全部投入 AI/云+即时零售。云投资 ROIC 已验证（+38%），但即时零售烧钱 ROIC 不明。回购明显放缓。<strong>这是"高风险高赔率"的资本配置</strong>。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle cw">B+</div>
+    <div class="bd">
+      <h4>6. 估值与安全边际 — B+（8/10）</h4>
+      <p>Forward P/E 15.1x、SOTP $165、净金融资产/市值 22%、云业务单独估值 $1,146 亿。<strong>估值合理偏低</strong>，但 FY26 利润崩塌让安全边际不如 Q3 分析时清晰。安全边际 ~17%。</p>
+    </div>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">12.X 红旗排查（非评分项）</h4>
+  <div class="tbl-wrap">
+    <table class="tbl"><thead><tr><th>红旗项</th><th>状态</th><th>说明</th></tr></thead>
+    <tbody>
+      <tr><td>商誉减值历史</td><td>⚠️ 注意</td><td>FY22-23 有大额商誉+无形资产减值历史</td></tr>
+      <tr><td>收入确认时点</td><td>✓ 无问题</td><td>电商按完成确认，云按订阅期</td></tr>
+      <tr><td>关联交易</td><td>⚠️ 注意</td><td>蚂蚁集团关联交易需关注</td></tr>
+      <tr><td>表外负债</td><td>✓ 无问题</td><td>无重大表外项目</td></tr>
+      <tr><td>GAAP vs Non-GAAP 巨大差异</td><td>⚠️ 注意</td><td>Q4 GAAP +96% vs Non-GAAP -100%，差异极大需警惕投资收益虚高</td></tr>
+      <tr><td>股权激励</td><td>⚠️ 注意</td><td>SBC 占营收 ~3-4%，行业较高</td></tr>
+      <tr><td>VIE 结构 / 监管</td><td>⚠️ 注意</td><td>中概股共性问题</td></tr>
+    </tbody></table>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">12.Y 综合评级</h4>
+  <div class="dcf-note">
+    <p><strong>6 维评分</strong>：B / A- / B / B / B / B+ = 综合 <strong>B+</strong></p>
+    <p><strong>红旗排查</strong>：3/7 无问题，4 项注意（商誉减值历史 + 关联交易 + GAAP/Non-GAAP 巨大差异 + VIE）。<strong>多项红旗触发"有疑问"</strong> → 综合评级强制降至「<strong>有条件买入</strong>」。</p>
+    <p><strong>综合评级</strong>：<span class="rating-badge rating-cond-buy">有条件买入</span></p>
+    <p><strong>理由</strong>：(1) 云 +38% 五季度逐季加速是真正的长期价值，是 BABA 估值修复的核心引擎；(2) 净金融资产 $755 亿 + 财务弹性极强；(3) SOTP $165 提供估值支撑（云业务单独就值 $1,146 亿）；(4) 淘宝整合 Qwen App 打开 AI+电商协同想象空间。<strong>但</strong>：FY26 Non-GAAP 净利崩塌 -100% + 即时零售烧钱 ROIC 不明 + FCF 转负 + GAAP/Non-GAAP 极端分化 → 需要分批 + 严格仓位 5-10% + 等待 FY27 即时零售见顶信号。</p>
+  </div>
+</div>
+
+<!-- ═══ 投资决策 ═══ -->
+<div class="section">
+  <div class="stitle">海图研判 · 投资决策</div>
+
+  <div class="cgrid">
+    <div class="ccard">
+      <div class="ctitle" style="font-size: 14px;">12 个月概率加权目标价</div>
+      <p style="font-size: 28px; font-weight: 700; color: var(--gold); margin: 8px 0;">$165</p>
+      <p style="font-size: 13px; color: var(--text2);">+17% 上行 · 中位数估值 $165 / 加权公允 $165</p>
+      <table class="tbl" style="margin-top: 10px; font-size:12px;"><tbody>
+        <tr><td>乐观 (30%)</td><td>$220</td><td><span class="badge up">+56%</span></td></tr>
+        <tr><td>基准 (50%)</td><td>$165</td><td><span class="badge up">+17%</span></td></tr>
+        <tr><td>悲观 (20%)</td><td>$105</td><td><span class="badge dn">-26%</span></td></tr>
+      </tbody></table>
+    </div>
+    <div class="ccard">
+      <div class="ctitle" style="font-size: 14px;">分批建仓 / 止盈策略</div>
+      <p style="font-size: 13px; color: var(--text2); line-height: 1.85;">
+      <strong>当前价 $141.12</strong> · 已位于"首仓"附近<br><br>
+      <strong>建仓档位（独立估值中位数 × 80% / 70% / 60%）</strong>：<br>
+      首仓 <span class="hl-t">$132</span>（×80%·距现价 -6%）<br>
+      二仓 <span class="hl-t">$116</span>（×70%·距现价 -18%）<br>
+      三仓 <span class="hl-t">$99</span>（×60%·距现价 -30%·极端机会）<br><br>
+      <strong>止盈三档</strong>：<br>
+      减 25% @ <span class="hl-t">$175</span><br>
+      减 25% @ <span class="hl-t">$205</span><br>
+      减 25% @ <span class="hl-t">$240</span><br>
+      <strong>最后 25% 作为"AI+云长期持仓"长期持有</strong>
+      </p>
+    </div>
+  </div>
+
+  <div class="cmt" style="margin-top: 16px;">
+    <p><strong>仓位管理</strong>：建议总仓位 <strong>5-10%</strong>（中等仓位，反映 FY26 投资期 + 即时零售烧钱不确定性）。持有周期 <strong>3-5 年（含 AI/云加速 + FY27-28 利润反弹）</strong>。<span class="hl-t">优先 NYSE: BABA（流动性最好）</span>，HKEX: 9988 适合港股账户（已纳入港股通）。</p>
+
+    <p><strong>关键监控指标</strong>：</p>
+    <p>
+      <strong>1. 即时零售烧钱见顶信号</strong>：淘天 EBITA 何时止跌回升？这是 FY27 利润反弹最关键变量<br>
+      <strong>2. 阿里云增速</strong>：能否维持 +35%+？<br>
+      <strong>3. AI 产品收入占比</strong>：从 25%+ 向 40%+ 推进<br>
+      <strong>4. Non-GAAP 净利环比</strong>：Q1 FY27 能否环比反弹？<br>
+      <strong>5. FCF 转正时点</strong>：FY27 能否从 -¥466 亿回到正值<br>
+      <strong>6. Qwen App + 淘宝协同数据</strong>：DAU、转化率<br>
+      <strong>7. 大规模回购是否重启</strong>
+    </p>
+
+    <p><strong>事件时间表</strong>：</p>
+    <p>
+      <strong>2026-08 中</strong>: Q1 FY2027 财报（关键节点 · 即时零售 ROIC 验证）<br>
+      <strong>2026-11 中</strong>: Q2 FY2027 财报（双 11 季节性）<br>
+      <strong>2027-02 中</strong>: Q3 FY2027 财报<br>
+      <strong>2027-05 中</strong>: FY2027 年报（全年业绩 + 利润反弹确认）
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 海图页末长评 ═══ -->
+<div class="section">
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记 · 1150 字</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p class="lead">一份财报里同时藏着两个故事：一个让人兴奋，一个让人不安。阿里巴巴 Q4 FY2026 就是这样——云智能 +38% 五季度逐季加速、AI 收入单季 ¥90 亿，这是兴奋的故事；Non-GAAP 净利崩塌到 ¥0.86 亿、调整后 EBITA -84%、FCF 全年 -¥466 亿，这是不安的故事。读懂阿里，要先学会同时握住这两个故事。</p>
+
+      <p>Q4 FY2026 总营收 ¥2,434 亿（+3%），云智能 ¥416 亿（+38%）、AIDC ¥354 亿（+6%）、即时零售 ¥200 亿（+57%）。GAAP 净利 ¥235 亿（+96%，含投资公允价值收益），但 <strong>Non-GAAP 净利仅 ¥0.86 亿（-100% YoY）</strong>。全年 FY2026：营收 ¥10,237 亿（+3%）、Non-GAAP 净利 ¥607 亿（-62%）、调整后 EBITA ¥764 亿（-56%）、FCF -¥466 亿。<strong>这是阿里近年最分化的一份财报</strong>——市场用财报当日 +7-8% 的上涨投了票：相信云的长期价值，看穿短期利润崩塌。</p>
+
+      <h4>几个研判要点</h4>
+
+      <p><strong>一、Non-GAAP 净利崩塌到 ¥0.86 亿，是"主动选择"不是"经营失败"。</strong>核心证据：(1) 营收 +3% 仍正增长；(2) 毛利率 39.8% 稳定；(3) 利润崩塌来自即时零售（淘宝闪购）烧钱补贴 + AI/云 ¥1,261 亿 Capex。<span class="hl-t">管理层把淘天的现金牛利润 + 云利润，全部"再投资"到即时零售和 AI 算力</span>。GAAP 净利 +96% 是投资公允价值收益虚高，Non-GAAP -100% 是核心被主动转化为投资——两个数字都不反映"正常化盈利"。FY26 是利润谷底，FY27-28 才是验证期。</p>
+
+      <p><strong>二、云智能 +38% 五季度逐季加速，是真正的长期价值。</strong>FY25 +11% → Q1 FY26 +26% → Q2 +34% → Q3 +36% → Q4 +38%——<span class="hl-t">五个季度逐季加速，没有一次回落</span>。AI 产品收入单季 ¥90 亿，连续 11 季度三位数增长，云 EBITA +57% 利润率改善。阿里云增速已超越 AWS（+20%）、Azure（+30%）、Google Cloud（+30%）。<strong>从 SOTP 看，阿里云单独按 5x P/S 估值就值 $1,146 亿——接近当前总市值的 1/3</strong>。这是估值修复最强杠杆。</p>
+
+      <p><strong>三、即时零售烧钱是最大不确定性。</strong>淘宝闪购 FY26 +47%（Q4 +57%），抢到了市占，但烧钱让淘天 EBITA -40%、调整后 EBITA 全年 -56%。<span class="warn-t">这是阿里与美团、京东的"即时零售三国杀"</span>——三方都在烧钱，谁先停谁吃亏。海图判断：<strong>即时零售烧钱见顶的时点，就是阿里利润反弹的起点</strong>。这个时点最可能在 FY27（2026 年下半年至 2027 年）。在见到这个信号前，估值难有大幅修复。</p>
+
+      <p><strong>四、淘宝天猫整合进 Qwen App，是被低估的战略动作。</strong>FY26 阿里把淘宝天猫电商服务整合进 Qwen App——<span class="hl-t">这意味着 AI 助手成为电商的新入口</span>。如果 Qwen App 能成为中国用户的"个人 AI 助手"，淘宝就有了一个独立于"搜索+推荐"之外的全新流量来源。这是阿里"AI + 电商协同"的想象空间，目前市场尚未定价。</p>
+
+      <p><strong>五、12 个月目标价 $165，上行 +17%。</strong>悲观 $105（-26%，即时零售烧钱无止境）、基准 $165（+17%，FY27 即时零售见顶 + 云持续 +30%）、乐观 $220（+56%，AI 商业化爆发 + Qwen 协同兑现）。<strong>当前价 $141 距首仓 $132 仅 6%</strong>。海图的判断：未来 3-5 年预期年化回报 12-18%（含云加速 + 利润反弹），<strong>这是一笔"赔率不错但需要耐心"的投资</strong>——你买的是云的确定性 + 即时零售的期权。</p>
+
+      <h4>海图研判</h4>
+
+      <p><strong>评级：有条件买入</strong>（云 AI 加速 +38% + 巨额净金融资产 $755 亿 + 淘宝整合 Qwen 的三轮组合，但即时零售烧钱 ROIC 待证明 + FY26 利润崩塌）。12 个月概率加权目标价 <strong>$165</strong>（+17%）。</p>
+
+      <p>操作建议（独立估值中位数 $165，加权公允 $165）：当前价 $141.12 距首仓 $132 仅 6%。建议首仓 $132（×80%·距现价 -6%）、二仓 $116（×70%·距现价 -18%）、三仓 $99（×60%·极端机会）。止盈三档 $175 / $205 / $240，每档减仓 25%，最后 25% 作为"AI+云长期持仓"长期持有。建议总仓位 <strong>5-10%</strong>（中等仓位 · 中概股 AI 龙头 · 投资期）。持有周期 3-5 年。优先 NYSE: BABA。</p>
+
+      <h4>风险提示</h4>
+
+      <p>即时零售烧钱无止境 / 中概股大规模退市 / 中国消费降级深化 / 云增速放缓 / 中美贸易战 2.0 / 监管再收紧——任一项都可能让股价回调 20-35%。但 $755 亿净金融资产 + 合伙人制度 + 云 +38% 加速让破产概率为零，每股净资产 $67.27 提供下行支撑。</p>
+
+      <p>关键叙事：<strong>"云智能 +38% 五季度逐季加速 + AI 收入 ¥90 亿/季 + 净金融资产 $755 亿 + 淘宝整合 Qwen App"的稀有组合 vs "Non-GAAP 净利崩塌 -100% + 即时零售烧钱 ROIC 不明 + FCF 转负"的隐忧</strong>。在 NVIDIA 估值过热、Meta/Google 估值偏高的当下，BABA 是全球大型互联网平台中"云加速确定性 + 投资期估值压制"组合的代表——不是给追求短期确定性的人，而是给追求"云长期价值 + 即时零售期权 + 中概股估值修复"且能忍受 1-2 年利润谷底的耐心价值投资者。下次催化剂：2026-08 Q1 FY2027 财报（即时零售 ROIC 验证）。</p>
+
+      <p class="haitu-sign">—— 海图，灯下落笔，明日再观风浪。</p>
+
+      <p class="haitu-disc">⚠️ 免责声明：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，不构成任何投资建议。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div>《海图夜读》 · 阿里巴巴 Alibaba BABA Q4 FY2026 + 全年 海图研判</div>
+  <div style="margin-top:6px;">数据来源：阿里巴巴 Q4 FY2026 + FY2026 全年财报新闻稿（BusinessWire 2026-05-13）+ SEC 6-K 文件 + 投资者关系页 + 电话会 + yfinance 实时市场数据</div>
+  <div style="margin-top:6px;">价值投资 · 长期主义</div>
+</footer>
+
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  const cur = html.getAttribute('data-theme');
+  html.setAttribute('data-theme', cur === 'dark' ? 'light' : 'dark');
+  localStorage.setItem('theme', html.getAttribute('data-theme'));
+  renderCharts();
+}
+(function() {
+  const t = localStorage.getItem('theme');
+  if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+})();
+
+function gc(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+
+let charts = {};
+function renderCharts() {
+  Object.values(charts).forEach(c => c && c.destroy && c.destroy());
+  charts = {};
+  const txt2 = gc('--text2'), txt3 = gc('--text3'), grid = gc('--chart-grid');
+  const accent = gc('--accent'), accent2 = gc('--accent2'), accent3 = gc('--accent3');
+  const green = gc('--green'), gold = gc('--gold'), rose = gc('--rose'), red = gc('--red');
+
+  Chart.defaults.color = txt2;
+  Chart.defaults.font.family = 'Segoe UI, sans-serif';
+  Chart.defaults.font.size = 11;
+
+  charts.rev = new Chart(document.getElementById('revenueChart'), {
+    type: 'bar',
+    data: { labels: ['Q4 25', 'Q1 26', 'Q2 26', 'Q3 26', 'Q4 26'],
+      datasets: [{ label: 'Revenue', data: [2365, 2470, 2478, 2848, 2434], backgroundColor: [accent3, gold, accent2, accent, green], borderRadius: 4 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+      scales: { y: { grid: { color: grid }, ticks: { color: txt3 } }, x: { grid: { display: false }, ticks: { color: txt3 } } } }
+  });
+
+  charts.profit = new Chart(document.getElementById('profitChart'), {
+    type: 'line',
+    data: { labels: ['FY25', 'Q1 FY26', 'Q2 FY26', 'Q3 FY26', 'Q4 FY26'],
+      datasets: [{ label: 'Cloud YoY %', data: [11, 26, 34, 36, 38], borderColor: green, backgroundColor: 'rgba(122,154,122,0.1)', tension: 0.3, fill: true, pointBackgroundColor: green, pointRadius: 5 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+      scales: { y: { grid: { color: grid }, ticks: { color: txt3 } }, x: { grid: { display: false }, ticks: { color: txt3 } } } }
+  });
+
+  charts.seg = new Chart(document.getElementById('segmentChart'), {
+    type: 'doughnut',
+    data: { labels: ['淘天 5,542', '云智能 1,581', 'AIDC 1,442', '即时零售 785', '菜鸟+其他 1,400', '抵销 (-512)'],
+      datasets: [{ data: [5542, 1581, 1442, 785, 1400, 1], backgroundColor: [accent3, accent, accent2, gold, rose, '#a89f98'], borderColor: gc('--card'), borderWidth: 2 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { color: txt2, font: { size: 10 } } } } }
+  });
+
+  charts.capex = new Chart(document.getElementById('capexChart'), {
+    type: 'bar',
+    data: { labels: ['FY23', 'FY24', 'FY25', 'FY26'],
+      datasets: [
+        { label: '调整后 EBITA ($亿)', data: [165, 175, 240, 110], backgroundColor: green, borderRadius: 4 },
+        { label: 'Capex ($亿)', data: [62, 110, 124, 183], backgroundColor: rose, borderRadius: 4 }
+      ] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top', labels: { color: txt2, font: { size: 11 } } } },
+      scales: { y: { grid: { color: grid }, ticks: { color: txt3 } }, x: { grid: { display: false }, ticks: { color: txt3 } } } }
+  });
+
+  buildSankey();
+}
+
+function buildSankey() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const txt = isDark ? '#d4ccc4' : '#4a4340';
+  const cardBg = isDark ? '#2e2a25' : '#ffffff';
+
+  const sankeyData = [{
+    type: 'sankey', orientation: 'h', arrangement: 'snap', valueformat: ',.0f', valuesuffix: ' 亿',
+    node: {
+      pad: 22, thickness: 22, line: { color: 'transparent', width: 0 },
+      label: ['FY26 营收 10,237', '营业成本 6,163', '毛利 4,074', '销售费用 1,400', '研发费用 600', '管理+即时零售投入 1,310', '调整后 EBITA 764', '投资收益+其他 +650', '所得税+其他 -393', '归母净利 1,021', '非现金调整 -259', '经营现金流 762', 'Capex 1,261', '自由现金流 -466'],
+      color: ['#7b8fa0', '#b87070', '#8a9a8e', '#b9a06a', '#c09090', '#a89f98', '#b08d7a', '#7a9a7a', '#b87070', '#7a9a7a', '#b87070', '#7b8fa0', '#b87070', '#b87070']
+    },
+    link: {
+      source: [0, 0, 2, 2, 2, 2, 6, 7, 6, 8, 9, 10, 11, 11],
+      target: [1, 2, 3, 4, 5, 6, 9, 9, 8, 9, 11, 11, 12, 13],
+      value:  [6163, 4074, 1400, 600, 1310, 764, 764, 650, 393, 393, 1021, -259, 1261, -466],
+      color: ['rgba(184,112,112,0.30)', 'rgba(138,154,142,0.45)', 'rgba(185,160,106,0.30)', 'rgba(192,144,144,0.30)', 'rgba(168,159,152,0.30)', 'rgba(176,141,122,0.45)', 'rgba(122,154,122,0.45)', 'rgba(122,154,122,0.40)', 'rgba(184,112,112,0.30)', 'rgba(184,112,112,0.30)', 'rgba(122,154,122,0.40)', 'rgba(184,112,112,0.30)', 'rgba(184,112,112,0.30)', 'rgba(184,112,112,0.40)']
+    }
+  }];
+
+  const layout = { font: { family: 'Segoe UI, sans-serif', size: 11, color: txt }, paper_bgcolor: cardBg, plot_bgcolor: cardBg, margin: { l: 10, r: 10, t: 10, b: 10 } };
+  Plotly.react('sankey', sankeyData, layout, { displayModeBar: false, responsive: true });
+}
+
+document.addEventListener('DOMContentLoaded', renderCharts);
+</script>
+
+</body>
+</html>
