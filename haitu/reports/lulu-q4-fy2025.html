@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-05-19，基于 Lululemon Q4 FY2025 + 全年财报（2026-03-18 发布） -->
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lululemon LULU Q4 FY2025 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root {
+  --bg: #f5f0eb; --bg2: #ece6df; --card: #ffffff; --card2: #f8f5f1; --border: #d9d0c7;
+  --text: #4a4340; --text2: #7a706a; --text3: #a89f98;
+  --accent: #8a9a8e; --accent2: #7b8fa0; --accent3: #b08d7a;
+  --rose: #c09090; --gold: #b9a06a; --red: #b87070; --green: #7a9a7a;
+  --shadow: rgba(0,0,0,0.06); --chart-grid: #e5ddd5;
+}
+[data-theme="dark"] {
+  --bg: #1e1c1a; --bg2: #28251f; --card: #2e2a25; --card2: #363230; --border: #4a4540;
+  --text: #d4ccc4; --text2: #a09890; --text3: #706860;
+  --accent: #8a9a8e; --accent2: #8fabbf; --accent3: #c9a48e;
+  --rose: #c09090; --gold: #c9b07a; --red: #c08080; --green: #8aaa8a;
+  --shadow: rgba(0,0,0,0.3); --chart-grid: #3e3a35;
+}
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Georgia','Noto Serif SC','PingFang SC',serif; line-height: 1.75; font-size: 14.5px; transition: background .35s, color .35s; }
+a { color: var(--accent2); text-decoration: none; }
+.theme-bar { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); }
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; text-decoration: none; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+.toggle-switch { position: relative; width: 44px; height: 22px; background: var(--border); border-radius: 11px; cursor: pointer; transition: background .3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: var(--card); border-radius: 50%; transition: transform .3s; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+.hero { padding: 48px 24px 36px; text-align: center; border-bottom: 1px solid var(--border); }
+.hero-tag { display: inline-block; font-family: 'Segoe UI',sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 3px 14px; border-radius: 20px; margin-bottom: 18px; }
+.hero h1 { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.pill { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: 'Segoe UI',sans-serif; font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow); }
+.pill strong { color: var(--text); }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle { font-size: 18px; font-weight: 700; color: var(--accent3); margin-bottom: 20px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+.stitle::before { content: ''; display: block; width: 4px; height: 20px; background: var(--accent3); border-radius: 2px; }
+.haitu-quip { display: flex; align-items: center; gap: 18px; background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--gold); border-radius: 12px; padding: 18px 24px; margin: 24px 0; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-quote { flex: 1; }
+.haitu-portrait { font-size: 15px; line-height: 1.65; color: var(--text); margin-bottom: 6px; font-weight: 600; }
+.haitu-rating-line { font-size: 13px; color: var(--text2); font-family: 'Segoe UI',sans-serif; }
+.rating-badge { display: inline-block; padding: 2px 12px; border-radius: 12px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; margin-left: 4px; }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+.rating-cond-buy { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-hold { background: rgba(123,143,160,.18); color: var(--accent2); }
+.haitu-essay { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 28px 32px; margin: 24px 0 20px; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-essay-header { display: flex; align-items: center; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.haitu-avatar-sm { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); background: var(--red); box-shadow: 0 2px 8px rgba(184,112,112,0.2); }
+.haitu-name-lg { font-family: 'Georgia','Noto Serif SC',serif; font-size: 28px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 4px; }
+.haitu-essay-tag { font-family: 'Segoe UI',sans-serif; font-size: 12px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; }
+.haitu-essay-body { font-family: 'Georgia','Noto Serif SC',serif; font-size: 15px; line-height: 2.0; color: var(--text); }
+.haitu-essay-body p { margin-bottom: 14px; }
+.haitu-essay-body p.lead { font-size: 16px; font-style: italic; color: var(--text2); margin-bottom: 18px; }
+.haitu-essay-body strong { color: var(--text); font-weight: 700; }
+.haitu-essay-body h4 { font-size: 14px; color: var(--accent3); margin: 18px 0 10px; font-family: 'Segoe UI',sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+.haitu-sign { text-align: right; margin-top: 18px; font-family: 'Georgia',serif; font-size: 14px; color: var(--text2); font-style: italic; }
+.haitu-disc { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); font-style: italic; line-height: 1.7; }
+.stock-snap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill,minmax(160px,1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px; }
+.snap-item { text-align: center; }
+.snap-label { font-family: 'Segoe UI',sans-serif; font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.snap-val { font-family: 'Segoe UI',sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+.snap-val.up { color: var(--green); }
+.snap-val.dn { color: var(--red); }
+.snap-sub { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text3); margin-top: 2px; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(195px,1fr)); gap: 14px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow); }
+.kpi-l { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.kpi-v.up { color: var(--green); }
+.kpi-v.dn { color: var(--red); }
+.badge { display: inline-block; font-family: 'Segoe UI',sans-serif; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+.up { background: rgba(122,154,122,.15); color: var(--green); }
+.dn { background: rgba(184,112,112,.15); color: var(--red); }
+.nt { background: rgba(123,143,160,.15); color: var(--accent2); }
+.tbl-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow); }
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI',sans-serif; font-size: 13px; }
+.tbl th { background: var(--card2); color: var(--text3); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); background: var(--card2); }
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); }
+.ctitle { font-size: 13px; color: var(--text2); margin-bottom: 12px; font-weight: 600; }
+.cwrap { position: relative; height: 240px; }
+.cmt { font-size: 14px; color: var(--text2); line-height: 1.85; }
+.cmt p { margin-bottom: 12px; }
+.cmt strong { color: var(--text); }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+.bscore { display: flex; gap: 16px; padding: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 12px; box-shadow: 0 1px 4px var(--shadow); }
+.bscore .circle { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; color: white; flex-shrink: 0; }
+.cg { background: var(--green); }
+.cw { background: var(--gold); }
+.co { background: var(--rose); }
+.cr { background: var(--red); }
+.cb { background: var(--accent2); }
+.bd h4 { font-size: 14px; color: var(--text); margin-bottom: 6px; font-family: 'Segoe UI',sans-serif; letter-spacing: 0.5px; }
+.bd p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+.pgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.dcf-note { background: var(--card2); border-left: 3px solid var(--accent2); padding: 14px 18px; border-radius: 6px; font-size: 13.5px; color: var(--text2); line-height: 1.85; }
+.dcf-note p { margin-bottom: 8px; }
+.dcf-note strong { color: var(--text); }
+.tag-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap: 12px; margin-top: 14px; }
+.tag-card { background: var(--card); border: 1px solid var(--border); border-left: 3px solid var(--accent2); padding: 12px 16px; border-radius: 6px; }
+.tag-card.pos { border-left-color: var(--green); }
+.tag-card.neg { border-left-color: var(--red); }
+.tag-card.neu { border-left-color: var(--accent2); }
+.tag-card h5 { font-size: 13px; color: var(--text); margin-bottom: 6px; font-family: 'Segoe UI',sans-serif; }
+.tag-card p { font-size: 12px; color: var(--text2); line-height: 1.7; }
+.tag-card .tag-bd { font-family: 'Segoe UI',sans-serif; font-size: 10px; padding: 1px 6px; border-radius: 4px; margin-left: 4px; }
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap: 12px; }
+.risk-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 14px 18px; position: relative; box-shadow: 0 1px 3px var(--shadow); }
+.risk-card::before { content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent); }
+.risk-card.r1::before { background: var(--green); }
+.risk-card.r2::before { background: rgba(122,154,122,.6); }
+.risk-card.r3::before { background: var(--gold); }
+.risk-card.r4::before { background: var(--rose); }
+.risk-card.r5::before { background: var(--red); }
+.risk-card h5 { font-size: 14px; margin-bottom: 6px; color: var(--text); }
+.risk-score { font-family: 'Segoe UI',sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.r1 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r2 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r3 .risk-score { background: rgba(185,160,106,.18); color: var(--gold); }
+.r4 .risk-score { background: rgba(192,144,144,.18); color: var(--rose); }
+.r5 .risk-score { background: rgba(184,112,112,.18); color: var(--red); }
+.risk-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+footer { background: var(--card2); border-top: 1px solid var(--border); padding: 24px; text-align: center; color: var(--text3); font-size: 12px; margin-top: 40px; line-height: 1.8; }
+@media (max-width: 768px) { .cgrid,.pgrid { grid-template-columns: 1fr; } .hero h1 { font-size: 22px; } .kpi-grid { grid-template-columns: 1fr 1fr; } .stock-snap { grid-template-columns: 1fr 1fr; } .haitu-essay-header { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/LULU" target="_blank" rel="noopener" title="在雪球查看 Lululemon 实时行情">雪球 LULU</a>
+  </div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">Q4 FY2025 + 全年财报发布 · 2026-03-18 &nbsp;|&nbsp; 海图研判 · 2026-05-19</div>
+  <h1>Lululemon LULU · Q4 FY2025 + 全年深度分析</h1>
+  <div class="hero-sub">NASDAQ: LULU &nbsp;|&nbsp; 全球高端瑜伽运动服饰龙头 · 北美增长停滞 + 中国 +29% + CEO 离任 · 从 $340 跌至 $120 的昔日成长股 &nbsp;|&nbsp; 价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill">股价 <strong>$120.03</strong></div>
+    <div class="pill">市值 <strong>$14.35B</strong></div>
+    <div class="pill">FY25 营收 <strong>$11.1B(+5%)</strong></div>
+    <div class="pill">FY25 EPS <strong>$13.26</strong></div>
+    <div class="pill">P/E TTM <strong>9.05x</strong></div>
+    <div class="pill">海图研判 <strong>有条件买入</strong></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 海图页首短评 ═══ -->
+<div class="haitu-quip">
+  <div class="haitu-quote">
+    <div class="haitu-portrait">全球高端瑜伽运动服饰龙头——811 家直营门店 + 56.6% 毛利率 + 34% ROE 的品牌生意。FY2025 营收 $11.1B（+5%）、净利 $15.79 亿、EPS $13.26。但<strong>核心市场北美同店销售 -3%、Q4 毛利率骤降 550bps、FY2026 EPS 指引下调至 $12.10-12.30（首次下滑）、CEO 离任、存货 +18%</strong>——成长叙事已破。唯一亮点是中国大陆 +29% / 同店 +20%。<strong>股价从 $340 跌至 $120（-65%）、P/E 仅 9x、FCF Yield 5.7%、近乎零有息负债 + $18 亿现金</strong>——这是经典的"昔日成长股跌成价值股"。</div>
+    <div class="haitu-rating-line">评级：<span class="rating-badge rating-cond-buy">有条件买入</span> · 12 个月目标价 $155（+29%）· 9x P/E 极致低估 + 中国引擎 + 巨额回购的三轮组合，但北美结构性疑虑 + CEO 真空待解</div>
+  </div>
+</div>
+
+<!-- ═══ 市场数据快照 ═══ -->
+<div class="section">
+  <div class="stitle">市场数据快照（2026-05-19）· 货币：USD</div>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">股价</div><div class="snap-val">$120.03</div><div class="snap-sub">2026-05-19 收盘</div></div>
+    <div class="snap-item"><div class="snap-label">市值</div><div class="snap-val">$14.35B</div><div class="snap-sub">流通股 1.093 亿</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间</div><div class="snap-val dn">$118-340</div><div class="snap-sub">距高点 -65% / 距低点 +1.7%</div></div>
+    <div class="snap-item"><div class="snap-label">TTM P/E</div><div class="snap-val up">9.05x</div><div class="snap-sub">EPS $13.26</div></div>
+    <div class="snap-item"><div class="snap-label">Forward P/E</div><div class="snap-val up">9.07x</div><div class="snap-sub">FY26 指引 EPS ~$12.20</div></div>
+    <div class="snap-item"><div class="snap-label">P/B</div><div class="snap-val">2.82x</div><div class="snap-sub">每股净资产 $42.59</div></div>
+    <div class="snap-item"><div class="snap-label">EV/EBITDA</div><div class="snap-val up">~5.4x</div><div class="snap-sub">EBITDA $2.71B</div></div>
+    <div class="snap-item"><div class="snap-label">股息率</div><div class="snap-val">0%</div><div class="snap-sub">不派息 / 全靠回购</div></div>
+    <div class="snap-item"><div class="snap-label">FCF Yield</div><div class="snap-val up">5.7%</div><div class="snap-sub">FCF $824M</div></div>
+    <div class="snap-item"><div class="snap-label">毛利率</div><div class="snap-val up">56.6%</div><div class="snap-sub">高端品牌典型</div></div>
+    <div class="snap-item"><div class="snap-label">营业利润率</div><div class="snap-val up">19.9%</div><div class="snap-sub">FY25 / Q4 降至 22.3%</div></div>
+    <div class="snap-item"><div class="snap-label">ROE</div><div class="snap-val up">34.0%</div><div class="snap-sub">资本回报极强</div></div>
+    <div class="snap-item"><div class="snap-label">现金</div><div class="snap-val up">$1.81B</div><div class="snap-sub">2026-02-01 末</div></div>
+    <div class="snap-item"><div class="snap-label">真实有息负债</div><div class="snap-val up">$0</div><div class="snap-sub">无银行借款/债券（仅租赁负债）</div></div>
+    <div class="snap-item"><div class="snap-label">回购剩余授权</div><div class="snap-val up">~$1.6B</div><div class="snap-sub">2025-12 扩大 +$10亿</div></div>
+    <div class="snap-item"><div class="snap-label">门店数</div><div class="snap-val">811 家</div><div class="snap-sub">FY25 净新增 44 家</div></div>
+    <div class="snap-item"><div class="snap-label">下次财报</div><div class="snap-val nt">2026-06 初</div><div class="snap-sub">Q1 FY2026</div></div>
+  </div>
+</div>
+
+<!-- ═══ FY2025 KPI ═══ -->
+<div class="section">
+  <div class="stitle">FY2025 全年核心业绩（财年截至 2026-02-01 · 2026-03-18 发布）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">全年营收</div><div class="kpi-v up">$11.1B</div><span class="badge up">+5% YoY</span><div class="kpi-l" style="margin-top:6px">增速创上市以来最低</div></div>
+    <div class="kpi"><div class="kpi-l">毛利率</div><div class="kpi-v up">56.6%</div><span class="badge dn">关税 + 折价压力</span><div class="kpi-l" style="margin-top:6px">vs FY24 ~58.5%</div></div>
+    <div class="kpi"><div class="kpi-l">营业利润率</div><div class="kpi-v">19.9%</div><span class="badge dn">vs FY24 ~23.7%</span><div class="kpi-l" style="margin-top:6px">关税冲击 ~$210M 营业利润</div></div>
+    <div class="kpi"><div class="kpi-l">归母净利</div><div class="kpi-v">$1,579.2M</div><span class="badge dn">-10% YoY 估</span><div class="kpi-l" style="margin-top:6px">利润首次同比下滑</div></div>
+    <div class="kpi"><div class="kpi-l">摊薄 EPS</div><div class="kpi-v">$13.26</div><span class="badge nt">回购支撑 EPS</span><div class="kpi-l" style="margin-top:6px">FY26 指引下调至 $12.10-12.30</div></div>
+    <div class="kpi"><div class="kpi-l">美洲营收</div><div class="kpi-v dn">-1% YoY</div><span class="badge dn">同店 -3%</span><div class="kpi-l" style="margin-top:6px">核心市场 ~70% 营收 / 停滞</div></div>
+    <div class="kpi"><div class="kpi-l">中国大陆营收</div><div class="kpi-v up">+29% YoY</div><span class="badge up">同店 +20%</span><div class="kpi-l" style="margin-top:6px">唯一高增长引擎</div></div>
+    <div class="kpi"><div class="kpi-l">其他国际营收</div><div class="kpi-v up">+16% YoY</div><span class="badge up">同店 +9%</span><div class="kpi-l" style="margin-top:6px">欧洲/亚太扩张</div></div>
+    <div class="kpi"><div class="kpi-l">存货</div><div class="kpi-v dn">$1.7B</div><span class="badge dn">+18% YoY</span><div class="kpi-l" style="margin-top:6px">增速远超营收 / 红旗</div></div>
+    <div class="kpi"><div class="kpi-l">经营现金流</div><div class="kpi-v up">$1.6B</div><span class="badge up">现金流稳健</span><div class="kpi-l" style="margin-top:6px">OCF/NI ~101%</div></div>
+    <div class="kpi"><div class="kpi-l">自由现金流</div><div class="kpi-v up">$824M</div><span class="badge up">FCF Yield 5.7%</span><div class="kpi-l" style="margin-top:6px">Capex ~$776M 门店扩张</div></div>
+    <div class="kpi"><div class="kpi-l">股票回购</div><div class="kpi-v up">$1.2B</div><span class="badge up">回购 500 万股</span><div class="kpi-l" style="margin-top:6px">剩余授权 ~$16 亿</div></div>
+    <div class="kpi"><div class="kpi-l">门店数</div><div class="kpi-v">811 家</div><span class="badge nt">净新增 44 家</span><div class="kpi-l" style="margin-top:6px">国际占比持续上升</div></div>
+    <div class="kpi"><div class="kpi-l">ROE</div><div class="kpi-v up">34.0%</div><span class="badge up">资本回报极强</span><div class="kpi-l" style="margin-top:6px">轻资产高周转</div></div>
+  </div>
+</div>
+
+<!-- ═══ Q4 FY2025 KPI ═══ -->
+<div class="section">
+  <div class="stitle">Q4 FY2025 季度业绩（2025-11 至 2026-02 · 营收勉强增长 / 利润率骤降）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">Q4 营收</div><div class="kpi-v">$3.6B</div><span class="badge nt">+1% YoY</span><div class="kpi-l" style="margin-top:6px">剔除额外一周 +6%</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 毛利率</div><div class="kpi-v dn">54.9%</div><span class="badge dn">-550bps YoY</span><div class="kpi-l" style="margin-top:6px">关税 + 折价清库存</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 营业利润率</div><div class="kpi-v dn">22.3%</div><span class="badge dn">-660bps YoY</span><div class="kpi-l" style="margin-top:6px">利润率大幅压缩</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 净利</div><div class="kpi-v dn">$586.9M</div><span class="badge dn">-21.6% YoY</span><div class="kpi-l" style="margin-top:6px">vs Q4 FY24 $748.4M</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 摊薄 EPS</div><div class="kpi-v dn">$5.01</div><span class="badge dn">-19% YoY 估</span><div class="kpi-l" style="margin-top:6px">回购部分对冲</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 中国大陆</div><div class="kpi-v up">+28% YoY</div><span class="badge up">同店 +26%</span><div class="kpi-l" style="margin-top:6px">中国势头延续</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 北美</div><div class="kpi-v dn">持平</div><span class="badge dn">同店 -2%</span><div class="kpi-l" style="margin-top:6px">恒定汇率口径</div></div>
+    <div class="kpi"><div class="kpi-l">Q1 FY26 指引</div><div class="kpi-v">$2.40-2.43B</div><span class="badge nt">+1% ~ +3%</span><div class="kpi-l" style="margin-top:6px">低个位数增长</div></div>
+    <div class="kpi"><div class="kpi-l">下次财报</div><div class="kpi-v nt">2026-06 初</div><span class="badge nt">Q1 FY2026</span><div class="kpi-l" style="margin-top:6px">新 CEO 进展观察</div></div>
+  </div>
+
+  <div class="dcf-note" style="margin-top:18px">
+    <strong>Q4 FY2025 关键洞察 · 成长叙事破裂、价值叙事尚未确立：</strong>
+    <p style="margin-top:8px">(1) <span class="hl-t">营收 +1%（剔除额外一周 +6%）</span>—— 北美同店 -2%，靠中国 +28% 和门店扩张撑住整体增长；(2) <strong>毛利率骤降 550bps 至 54.9%、营业利润率降 660bps</strong>—— 三重压力：关税（FY25 累计冲击 ~$210M 营业利润）+ 折价清库存 + 北美需求疲软；(3) <span class="hl-t">存货 +18% 远超营收 +5%</span> —— 这是典型的"卖不动"信号，预示未来还要折价去库存；(4) <strong>FY2026 EPS 指引 $12.10-12.30，低于 FY25 的 $13.26</strong>—— 这是 Lululemon 上市以来罕见的 EPS 同比下滑指引；(5) CEO Calvin McDonald 已宣布 2026 年初离任，CFO + 首席商务官任临时联席 CEO——<strong>领导层真空叠加基本面转弱</strong>。海图判断：成长股的故事讲完了，现在是"用价值股的尺子重新量"的时刻。
+  </div>
+</div>
+
+<!-- ═══ 季度趋势 ═══ -->
+<div class="section">
+  <div class="stitle">季度趋势 + 5 年总览</div>
+  <div class="cgrid">
+    <div class="ccard">
+      <div class="ctitle">5 季度营收趋势（$M）</div>
+      <div class="cwrap"><canvas id="revenueChart"></canvas></div>
+    </div>
+    <div class="ccard">
+      <div class="ctitle">5 季度净利趋势（$M）</div>
+      <div class="cwrap"><canvas id="profitChart"></canvas></div>
+    </div>
+    <div class="ccard">
+      <div class="ctitle">FY2025 分地区营收结构（$B）</div>
+      <div class="cwrap"><canvas id="segmentChart"></canvas></div>
+    </div>
+    <div class="ccard">
+      <div class="ctitle">5 年营收增速放缓（%）</div>
+      <div class="cwrap"><canvas id="capexChart"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ Sankey ═══ -->
+<div class="section">
+  <div class="stitle">FY2025 资金流向 · 营收 → 自由现金流（$ 亿）</div>
+  <div class="ccard">
+    <div class="ctitle">从 $111 亿营收到 $8.24 亿自由现金流的完整资金链路</div>
+    <div id="sankey" style="width:100%;height:480px;"></div>
+  </div>
+</div>
+
+<!-- ═══ 模块 1 ═══ -->
+<div class="section">
+  <div class="stitle">模块 1 · 公司概览与背景</div>
+  <div class="cmt">
+    <p><strong>公司全称</strong>：露露乐蒙 / lululemon athletica inc.<br>
+    <strong>上市</strong>：NASDAQ: LULU（2007-07-27 IPO，发行价 $18）<br>
+    <strong>总部</strong>：加拿大温哥华（运营总部美国）<br>
+    <strong>财年</strong>：2 月初结束（FY2025 截至 2026-02-01）<br>
+    <strong>主营</strong>：高端瑜伽/运动/休闲服饰设计与零售——女装（瑜伽裤 Align/紧身裤）+ 男装 + 配饰 + 鞋履；直营门店 + 电商 + 批发</p>
+
+    <p><strong>核心叙事</strong>：Lululemon 是<span class="hl-t">全球高端运动服饰（athleisure）的开创者和龙头</span>——靠"瑜伽裤"这一品类把价格带从大众抬到高端（一条 Align 紧身裤卖 $98-128），毛利率 56.6%、ROE 34%。<span class="hl-t">但这家公司正处在"从成长股变成价值股"的转折点</span>。FY2025 营收 +5%（上市以来最低增速）、北美同店 -3%、Q4 毛利率骤降 550bps、FY2026 EPS 指引首次下滑。<strong>过去 18 个月股价从 $340 跌到 $120（-65%）</strong>——市场已经把"成长股溢价"全部抹掉。问题的核心：(1) 北美市场（~70% 营收）是触顶饱和还是暂时疲软？(2) Alo Yoga、Vuori 等新锐品牌的竞争是否结构性侵蚀 Lululemon 的"酷"？(3) 中国 +29% 能否成为新的增长支柱？(4) 离任的 CEO 之后，谁来掌舵？</p>
+
+    <p><strong>简史与里程碑</strong>：</p>
+    <p>
+      <strong>1. 1998 年温哥华成立</strong>——Chip Wilson 创立，从瑜伽裤起家<br>
+      <strong>2. 2007-07-27 NASDAQ IPO</strong>——发行价 $18<br>
+      <strong>3. 2013 年"瑜伽裤透视门"危机</strong>——产品质量丑闻 + 创始人争议言论<br>
+      <strong>4. 2018 年 Calvin McDonald 任 CEO</strong>——开启"Power of Three"增长战略<br>
+      <strong>5. 2020-2023 疫情红利 + 高速增长</strong>——居家健身潮，股价冲上 $485 历史高点<br>
+      <strong>6. 2023 年收购 Mirror 智能健身镜失败减记</strong><br>
+      <strong>7. 2024-2025 北美增长见顶</strong>——同店转负，股价从 $340 跌至 $120<br>
+      <strong>8. 2025-12 CEO 宣布离任</strong>——Calvin McDonald 将于 2026 年初卸任<br>
+      <strong>9. 2026-03-18 FY2025 财报</strong>——EPS 指引首次下滑，成长叙事破裂
+    </p>
+
+    <p><strong>股权结构（2026-02-01 末）</strong>：</p>
+    <p>
+      <strong>机构投资者</strong>——~85%（Vanguard、BlackRock、富达等被动 + 主动基金）<br>
+      <strong>创始人 Chip Wilson</strong>——~8%（已离开董事会多年，但仍是大股东，偶有公开批评管理层）<br>
+      <strong>公众及其他</strong>——~7%<br>
+      <strong>注</strong>：Lululemon 是<strong>典型的"无控股股东"美股公司</strong>，治理由独立董事会主导。CEO 离任后由 CFO Meghan Frank + 首席商务官 André Maestrini 任临时联席 CEO，正在全球搜寻新 CEO——<span class="warn-t">这是当前最大的不确定性</span>。
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 模块 2 ═══ -->
+<div class="section">
+  <div class="stitle">模块 2 · 管理层评估</div>
+
+  <div class="bscore">
+    <div class="circle co">C+</div>
+    <div class="bd">
+      <h4>CEO 真空 · Calvin McDonald 离任（2018-2026）</h4>
+      <p>Calvin McDonald 2018 年起任 CEO，主导"Power of Three"战略——男装、电商、国际三大支柱。<strong>任内前 5 年（2018-2023）业绩辉煌，营收翻 3 倍</strong>；但后期（2024-2025）北美增长见顶、Mirror 收购失败、品牌"变旧"。2025-12 宣布离任。<span class="warn-t">目前由 CFO Meghan Frank + 首席商务官 André Maestrini 任临时联席 CEO</span>。海图判断：<strong>没有掌舵人是当前最大风险</strong>——一家品牌公司在关键转型期缺少 CEO，战略连续性和品牌定位都悬而未决。新 CEO 的人选与到位时间，将直接决定 Lululemon 是"困境反转"还是"持续沉沦"。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B</div>
+    <div class="bd">
+      <h4>资本配置纪律 · 大规模回购但无并购败笔修复</h4>
+      <p>
+      <strong>FY2025 回购 500 万股 / $12 亿</strong>，2025-12 又扩大授权 +$10 亿，剩余约 $16 亿。<br>
+      在股价 $120（P/E 9x）回购，<span class="hl-t">$16 亿授权可回收约 1,300 万股 = 当前流通股的 12%</span>——低估值回购对每股价值是高效的。<br>
+      <strong>不派息</strong>，所有股东回报靠回购。<br>
+      <span class="warn-t">历史败笔</span>：2020 年 $5 亿收购智能健身镜 Mirror，2023 年基本全额减记——这是管理层资本配置的污点。
+      </p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle co">C+</div>
+    <div class="bd">
+      <h4>战略执行能力 · 北美失速暴露产品与品牌问题</h4>
+      <p>管理层自己承认"对美国业务结果和部分产品执行感到失望"。<span class="warn-t">核心问题</span>：(1) 北美女装新品迭代乏力，老客复购下降；(2) 存货 +18% 说明"备了货卖不掉"；(3) Alo Yoga、Vuori 在"时尚感"上抢走年轻客群。海图判断：<strong>这不是宏观问题，是产品和品牌的执行问题</strong>——而执行问题最终要靠新 CEO 和产品团队来解。中国 +29% 证明品牌力在新市场仍有效，问题集中在成熟的北美。</p>
+    </div>
+  </div>
+
+  <div class="cmt">
+    <p><strong>长期主义测试</strong>：3 年前（FY22 财报）管理层"Power of Three ×2"计划承诺到 FY26 营收翻倍至 $125 亿。<span class="warn-t">实际 FY25 仅 $111 亿，FY26 指引 $113-115 亿——明显不达标</strong>。男装和电商有进展，但北美核心市场失速让整体目标落空。这是一次<strong>未兑现的长期承诺</strong>。</p>
+
+    <p><strong>薪酬与利益绑定</strong>：管理层薪酬以股票为主，与股价绑定。但 CEO 离任、临时联席 CEO 模式下，<span class="warn-t">利益绑定的连续性被打断</span>。创始人 Chip Wilson 持股 ~8%，是场外的"清醒旁观者"，多次公开批评管理层让品牌"失去灵魂"。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 3 ═══ -->
+<div class="section">
+  <div class="stitle">模块 3 · 商业模式深度解析</div>
+
+  <div class="cmt">
+    <p><strong>海图"一句话测试"</strong>：<span class="hl-t">设计高端瑜伽/运动服饰，通过 811 家直营门店 + 电商以接近无折扣的高价直接卖给消费者，毛利率 56.6%、营业利润率 19.9%、ROE 34%——靠"品牌溢价 + 直营零售"赚钱。</span></p>
+
+    <p><strong>FY2025 收入模型与拆解</strong>：</p>
+    <table class="tbl"><thead><tr><th>维度</th><th>FY25 占比</th><th>YoY</th><th>同店</th><th>关键特征</th></tr></thead>
+    <tbody>
+      <tr><td>美洲（北美为主）</td><td>~70%</td><td>-1%</td><td>-3%</td><td>核心市场 / 已饱和失速</td></tr>
+      <tr><td>中国大陆</td><td>~15%</td><td>+29%</td><td>+20%</td><td>★ 唯一高增长引擎</td></tr>
+      <tr><td>其他国际（欧洲+亚太）</td><td>~15%</td><td>+16%</td><td>+9%</td><td>渗透率仍低 / 扩张期</td></tr>
+      <tr class="hl"><td>合计</td><td>100%</td><td>+5%</td><td>—</td><td>$111 亿</td></tr>
+    </tbody></table>
+
+    <p style="margin-top:14px"><strong>渠道结构</strong>：直营门店 ~45% + 电商 ~40% + 批发/其他 ~15%。<span class="hl-t">Lululemon 是"直接面向消费者"（DTC）模式的典范</span>——超过 85% 营收来自自有门店和官网，几乎不依赖第三方批发。这让它能控制品牌形象、定价、客户数据，但也意味着<strong>每家门店都是重资产投入 + 经营租赁负债</strong>。</p>
+
+    <p><strong>单位经济（Unit Economics）</strong>：</p>
+    <p>
+      <strong>单店模型</strong>：一家成熟门店年销售 ~$1,000 万+，门店层面利润率 ~35-40%。这是零售业顶级的单店效率。<br>
+      <strong>产品定价</strong>：核心产品 Align 紧身裤 $98-128、ABC 长裤 $128，<span class="hl-t">几乎从不打折</span>——这是品牌力的直接体现。但 FY25 起折价增多，是品牌力松动的警讯。<br>
+      <strong>客单价</strong>：北美客单 ~$130-150，会员（约 2,400 万）复购率高。
+    </p>
+
+    <p><strong>产业链定位与议价能力</strong>：</p>
+    <p>
+      <strong>上游</strong>：代工厂集中在越南、柬埔寨、斯里兰卡（轻资产，不自建工厂）——<span class="warn-t">这也是美国关税的直接受冲击点</span><br>
+      <strong>中游（公司）</strong>：设计 + 品牌 + 直营零售网络<br>
+      <strong>下游</strong>：高端消费者（女性为主，男装占比上升中）<br>
+      <strong>议价能力</strong>：对代工厂议价强（订单量大）；对消费者议价能力<span class="warn-t">正在下降</span>——这是 Lululemon 投资逻辑的核心变量，定价权一旦松动，56.6% 毛利率就守不住。
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 模块 4 ═══ -->
+<div class="section">
+  <div class="stitle">模块 4 · 经济护城河分析（5 维）</div>
+
+  <div class="bscore">
+    <div class="circle cw">B</div>
+    <div class="bd">
+      <h4>1. 无形资产（品牌）· <strong>窄至中护城河（侵蚀中）</strong></h4>
+      <p>"Lululemon" 品牌曾是高端瑜伽服的代名词，支撑近乎无折扣的定价。<span class="warn-t">但护城河正在侵蚀</span>——Alo Yoga（更时尚）、Vuori（更休闲）抢走年轻和男性客群，北美同店 -3% 是品牌"变旧"的直接证据。FY25 折价增多说明定价权松动。<strong>品牌仍有价值，但不再是"不可替代"</strong>。中国市场 +29% 证明品牌在新市场仍灵，问题集中在过度成熟的北美。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle co">C+</div>
+    <div class="bd">
+      <h4>2. 转换成本 · <strong>无</strong></h4>
+      <p>服饰是低转换成本品类——消费者随时可以转向 Alo、Vuori、Nike、Athleta。<span class="warn-t">这是 Lululemon 最弱的护城河维度</span>。会员体系（2,400 万会员）提供一点黏性，但远不构成"锁定"。时尚潮流一旦转向，客群流失极快。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B</div>
+    <div class="bd">
+      <h4>3. 成本优势（规模 + 直营）· <strong>窄护城河</strong></h4>
+      <p>$111 亿营收规模 + DTC 直营模式让 Lululemon 在采购、物流上有规模效应，毛利率 56.6% 远高于多数服饰公司。<span class="hl-t">但成本优势不是来自"更便宜地生产"，而是"卖得更贵"</span>——本质是品牌溢价而非成本护城河。关税冲击 ~$210M 说明成本端是脆弱的。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle co">C+</div>
+    <div class="bd">
+      <h4>4. 网络效应 · <strong>无</strong></h4>
+      <p>服饰品牌没有网络效应——多一个用户不会让产品对其他用户更有价值。Lululemon 的社区营销（瑜伽课、门店活动、大使计划）营造了"社群感"，但这是营销手段，不是真正的网络效应护城河。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B-</div>
+    <div class="bd">
+      <h4>5. 有效规模 · <strong>无至窄</strong></h4>
+      <p>高端运动服饰市场容量大、玩家众多（Nike、Adidas、Alo、Vuori、Athleta、On 昂跑等）——<span class="warn-t">不是"只能容纳少数玩家"的市场</span>。Lululemon 在"女性高端瑜伽裤"细分曾近乎垄断，但这个细分正被多个新锐品牌瓜分。</p>
+    </div>
+  </div>
+
+  <div class="cmt">
+    <p style="margin-top:18px"><strong>护城河趋势 · 整体侵蚀中</strong>：5 大维度综合 = 3B/B- + 2C+ ≈ <strong>窄护城河且在收窄</strong>。Lululemon 的护城河本质上只有一项——<strong>品牌无形资产</strong>，而这一项正在被新锐竞品侵蚀。<span class="warn-t">10 年后会更宽还是更窄？海图判断：北美护城河会继续收窄，但中国和国际市场可能重建一条新的品牌护城河</span>。这是一家"护城河不深、且核心市场护城河在收缩"的公司——投资它本质上是<strong>赌品牌能否在新 CEO 手里重新"变酷"</strong>。这也是评级只能给"有条件买入"而非"买入"的根本原因。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 5 ═══ -->
+<div class="section">
+  <div class="stitle">模块 5 · 财务深度分析</div>
+
+  <h3 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">5.1 三张表概览（FY2025 vs FY2024）</h3>
+  <div class="tbl-wrap" style="margin-bottom:14px">
+    <table class="tbl"><thead><tr><th>项目（$M）</th><th>FY2024</th><th>FY2025</th><th>YoY</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td>利润表</td><td></td><td></td><td></td></tr>
+      <tr><td>营业收入</td><td>10,588</td><td>11,103</td><td>+5%</td></tr>
+      <tr><td>毛利</td><td>~6,194</td><td>~6,284</td><td>+1.5%</td></tr>
+      <tr><td>毛利率</td><td>58.5%</td><td>56.6%</td><td>-1.9pp</td></tr>
+      <tr><td>营业利润</td><td>~2,508</td><td>~2,210</td><td>-12%</td></tr>
+      <tr><td>营业利润率</td><td>23.7%</td><td>19.9%</td><td>-3.8pp</td></tr>
+      <tr><td>归母净利润</td><td>~1,755</td><td>1,579</td><td>-10%</td></tr>
+      <tr><td>摊薄 EPS</td><td>~13.79</td><td>13.26</td><td>-4%（回购对冲）</td></tr>
+      <tr class="hl"><td>资产负债表（2026-02-01 末）</td><td></td><td></td><td></td></tr>
+      <tr><td>现金及等价物</td><td>~1,980</td><td>1,807</td><td>-9%</td></tr>
+      <tr><td>存货</td><td>~1,442</td><td>1,700</td><td>+18%</td></tr>
+      <tr><td>真实有息负债（银行借款/债券）</td><td>0</td><td>0</td><td>无</td></tr>
+      <tr><td>经营租赁负债（非金融负债）</td><td>~1,700</td><td>~1,800</td><td>+6%</td></tr>
+      <tr><td>股东权益</td><td>~5,150</td><td>~4,656</td><td>-10%（回购消耗）</td></tr>
+      <tr><td>每股净资产</td><td>~$40</td><td>$42.59</td><td>+6%</td></tr>
+      <tr class="hl"><td>现金流量表（FY2025）</td><td></td><td></td><td></td></tr>
+      <tr><td>经营活动现金流 (OCF)</td><td>~1,880</td><td>1,602</td><td>-15%</td></tr>
+      <tr><td>资本开支 (Capex)</td><td>~700</td><td>~778</td><td>+11%</td></tr>
+      <tr><td>自由现金流 (FCF)</td><td>~1,180</td><td>824</td><td>-30%</td></tr>
+      <tr><td>股票回购</td><td>~$1,600</td><td>1,200</td><td>-25%</td></tr>
+    </tbody></table>
+  </div>
+
+  <h3 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">5.2 5 年关键比率趋势</h3>
+  <div class="tbl-wrap" style="margin-bottom:14px">
+    <table class="tbl"><thead><tr><th>比率</th><th>FY21</th><th>FY22</th><th>FY23</th><th>FY24</th><th>FY25</th></tr></thead>
+    <tbody>
+      <tr><td>营收增速</td><td>+42%</td><td>+30%</td><td>+19%</td><td>+10%</td><td>+5%</td></tr>
+      <tr><td>毛利率</td><td>57.7%</td><td>55.4%</td><td>58.3%</td><td>58.5%</td><td>56.6%</td></tr>
+      <tr><td>营业利润率</td><td>22.0%</td><td>15.5%</td><td>22.2%</td><td>23.7%</td><td>19.9%</td></tr>
+      <tr><td>净利率</td><td>16.1%</td><td>10.5%</td><td>15.4%</td><td>16.6%</td><td>14.2%</td></tr>
+      <tr><td>ROE</td><td>37%</td><td>30%</td><td>39%</td><td>42%</td><td>34%</td></tr>
+      <tr><td>FCF Yield</td><td>~2%</td><td>~2.5%</td><td>~3%</td><td>~3.5%</td><td>5.7%</td></tr>
+      <tr><td>P/E（年末）</td><td>~55x</td><td>~38x</td><td>~30x</td><td>~22x</td><td>9.1x</td></tr>
+    </tbody></table>
+  </div>
+
+  <h3 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">5.3 杜邦分析（FY2025）</h3>
+  <div class="cmt">
+    <p><strong>ROE = 净利率 × 资产周转 × 权益乘数</strong></p>
+    <p>= 14.2% × ($11,103 / $9,300) × ($9,300 / $4,656)<br>
+    = <strong>14.2% × 1.194 × 1.997</strong><br>
+    = <strong>~33.9%</strong>（与 yfinance ROE 34.0% 吻合）</p>
+    <p style="margin-top:10px"><strong>解读</strong>：ROE 34% 在零售业是顶级——由 3 项构成：<span class="hl-t">净利率 14.2%（高端品牌）+ 资产周转 1.19（直营零售高周转）+ 权益乘数 2.0（含经营租赁负债，但无金融杠杆）</span>。<strong>注意：ROE 从 FY24 的 42% 降到 34%，主要是净利率下滑（关税+折价）+ 回购缩减权益基数后又因利润降导致分子缩水</strong>。即便如此，34% ROE 仍证明这是一门"资本回报极强的好生意"——问题在增长，不在盈利质量。</p>
+  </div>
+
+  <h3 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">5.4 资产负债健康度</h3>
+  <div class="cmt">
+    <p>
+      <strong>真实有息负债 = $0</strong>——Lululemon 没有银行借款、没有发行债券。<br>
+      <strong>yfinance 显示的"总负债 $1.80B" 实为经营租赁负债</strong>（811 家门店的租约，ASC 842 准则下计入负债）——这是<span class="hl-t">运营性负债，不是金融杠杆</span>。<br>
+      <strong>现金及等价物 $1.81B</strong>——与"总债务"口径上几乎相等，但本质上公司是<strong>净现金、零金融负债</strong>。<br>
+      <strong>真实净现金 ≈ $1.81B（现金）</strong>，占市值 $14.35B 的 12.6%<br>
+      流动比率 ~2.0、利息覆盖 N/A（几乎无利息支出）<br>
+      <strong>资产负债健康度评级：A</strong>（零金融负债 + $18 亿现金，财务极稳健）
+    </p>
+  </div>
+
+  <h3 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">5.5 现金流质量</h3>
+  <div class="cmt">
+    <p>
+      <strong>OCF/NI = $1,602 / $1,579 = 101%</strong>—— 健康（利润有现金支撑）<br>
+      <strong>FCF/OCF = $824 / $1,602 = 51%</strong>—— 中等，因 Capex（门店扩张）占 OCF 约半<br>
+      <strong>FCF Yield = $824 / $14,350 = 5.7%</strong>—— 对一个 56% 毛利率的品牌，这是有吸引力的<br>
+      <strong>维护性 Capex vs 扩张性 Capex</strong>：FY25 Capex ~$778M，其中维护性（现有门店翻新+IT）约 $350M，扩张性（44 家新店+物流中心）约 $428M。<span class="hl-t">若停止扩张，FCF 可立即提升至 $1.2B+</span><br>
+      <span class="warn-t">警讯</span>：存货 +18% 占用营运资金，是 FY25 OCF 下滑 15% 的主因。存货去化前，现金流仍承压。
+    </p>
+  </div>
+
+  <h3 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">5.6 所有者盈余计算（核心）</h3>
+  <div class="cmt">
+    <p>所有者盈余 = 净利 + 折旧摊销 + 股权激励 - 维护性 Capex ± 营运资金变动</p>
+    <p>
+      = $1,579M + $400M (折旧摊销) + $150M (股权激励 SBC) - $350M (维护性 Capex) - $200M (存货占用营运资金)<br>
+      = <strong>$1,579M（FY25 所有者盈余，与净利接近）</strong>
+    </p>
+    <p style="margin-top:8px"><strong>OE Yield = $1,579M / $14,350M = 11.0%</strong>—— 优秀</p>
+    <p>11% 的所有者盈余收益率（vs 10 年期美债 ~4.3%）意味着<span class="hl-t">即便 Lululemon 零增长，持有它的"内在回报率"也有 11%</span>。如果剔除扩张性 Capex（公司选择不开新店），正常化 OE Yield 可达 13-14%。<strong>这是"价值股"叙事的核心数据支撑</strong>——但前提是品牌不进一步衰退。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 6 ═══ -->
+<div class="section">
+  <div class="stitle">模块 6 · 电话会分析（最新 + 前 2 季）</div>
+
+  <div class="tag-grid">
+    <div class="tag-card neg">
+      <h5>Q4 FY2025 电话会（2026-03-18）<span class="tag-bd dn">利空</span></h5>
+      <p>"FY2026 EPS 指引 $12.10-12.30，低于 FY25 的 $13.26。" → <strong>上市以来罕见的 EPS 下滑指引</strong>，正式确认成长周期结束。</p>
+    </div>
+    <div class="tag-card pos">
+      <h5>Q4 FY2025 电话会<span class="tag-bd up">利好</span></h5>
+      <p>"中国大陆 Q4 营收 +28%、同店 +26%；其他国际 +16%。" → <strong>国际引擎强劲</strong>，证明品牌在新市场仍有强大吸引力。</p>
+    </div>
+    <div class="tag-card neg">
+      <h5>Q4 FY2025 电话会<span class="tag-bd dn">利空</span></h5>
+      <p>"毛利率下降 550bps，关税 FY25 累计冲击营业利润约 $210M。" → <strong>关税 + 折价的双重挤压</strong>，FY26 仍是逆风。</p>
+    </div>
+    <div class="tag-card neg">
+      <h5>Q3 FY2025 电话会（2025-12-11）<span class="tag-bd dn">利空</span></h5>
+      <p>CEO McDonald 宣布将于 2026 年初离任，同时管理层"对美国业务结果和部分产品执行感到失望"。 → <strong>领导层动荡 + 自承产品问题</strong>。</p>
+    </div>
+    <div class="tag-card pos">
+      <h5>Q3 FY2025 电话会<span class="tag-bd up">利好</span></h5>
+      <p>"Q3 营收 +7% 至 $26 亿、回购授权扩大 +$10 亿。" → 在低估值时加码回购，是<strong>对内在价值有信心的信号</strong>。</p>
+    </div>
+    <div class="tag-card neu">
+      <h5>FY2026 全年指引<span class="tag-bd nt">中性</span></h5>
+      <p>"营收 $113.5-115 亿（+2-4%）、EPS $12.10-12.30。" → <strong>低个位数增长 + 利润小幅下滑</strong>，是"稳住、不恶化"的保守指引。</p>
+    </div>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">6.1 信号汇总</h4>
+  <div class="cmt">
+    <p><strong>利好信号（2）</strong>：(1) 中国 +28-29% / 国际 +16%；(2) 低估值大规模回购。</p>
+    <p><strong>利空信号（4）</strong>：(1) FY26 EPS 指引首次下滑；(2) 毛利率骤降 550bps；(3) CEO 离任；(4) 管理层自承产品/北美执行问题。</p>
+    <p><strong>中性信号（1）</strong>：FY26 保守指引。</p>
+    <p>综合评估：<strong>偏负面</strong>——电话会基调坦诚但沉重，管理层没有粉饰北美的疲软。<span class="hl-t">值得肯定的是诚实度高</span>，但基本面信号确实弱。这是一份"承认问题、但还看不到解药"的电话会。</p>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">6.2 指引兑现度追踪</h4>
+  <div class="tbl-wrap">
+    <table class="tbl"><thead><tr><th>承诺时间</th><th>承诺内容</th><th>实际兑现</th><th>评分</th></tr></thead>
+    <tbody>
+      <tr><td>FY22 财报</td><td>"Power of Three ×2"：FY26 营收翻倍至 $125 亿</td><td>FY26 指引仅 $113-115 亿 / 大幅不达标</td><td>D</td></tr>
+      <tr><td>FY23 财报</td><td>北美维持中个位数增长</td><td>FY25 北美 -1% / 未兑现</td><td>D</td></tr>
+      <tr><td>FY24 财报</td><td>国际市场翻倍扩张</td><td>中国 +29% / 国际 +16% / 兑现</td><td>A</td></tr>
+      <tr><td>FY24 财报</td><td>毛利率维持 58%+</td><td>FY25 56.6% / 未兑现（关税）</td><td>C</td></tr>
+      <tr><td>Q3 FY25</td><td>持续大规模回购</td><td>FY25 $12 亿 + 授权 +$10 亿 / 兑现</td><td>A</td></tr>
+    </tbody></table>
+  </div>
+</div>
+
+<!-- ═══ 模块 7 ═══ -->
+<div class="section">
+  <div class="stitle">模块 7 · 多模型估值（8 种方法交叉验证）</div>
+
+  <p style="margin-bottom: 16px; color: var(--text2); font-size:14px;">下表估值<strong>不锚定当前市价</strong>，独立基于财报数据 + 行业研究推导。中位数取 8 种方法估值的中点，最终目标价用概率加权（基准 50% / 乐观 25% / 悲观 25%）。<span class="warn-t">特别说明：Lululemon 处于"成长转价值"的拐点，估值用 FY26 指引中点 EPS $12.20 + 中周期正常化口径，而非历史峰值。</span></p>
+
+  <div class="tbl-wrap" style="margin-bottom:14px">
+    <table class="tbl"><thead><tr><th>方法</th><th>关键假设</th><th>估值（$/股）</th><th>vs $120.03 现价</th></tr></thead>
+    <tbody>
+      <tr><td>1. 相对估值 P/E</td><td>FY26 EPS $12.20, P/E 13x（成熟优质零售商区间 12-18x）</td><td>$159</td><td><span class="badge up">+32%</span></td></tr>
+      <tr><td>2. DCF（基准）</td><td>FY26-30 净利 $14-16 亿稳态, WACC 9%, g=2.5%</td><td>$165</td><td><span class="badge up">+37%</span></td></tr>
+      <tr><td>3. 所有者盈余</td><td>OE $1,579M, 合理 P/OE 10x</td><td>$144</td><td><span class="badge up">+20%</span></td></tr>
+      <tr><td>4. PEG</td><td>FY26 EPS 下滑——不适用</td><td>N/A</td><td><span class="badge nt">不适用</span></td></tr>
+      <tr><td>5. DDM 戈登模型</td><td>不派息——不适用</td><td>N/A</td><td><span class="badge nt">不适用</span></td></tr>
+      <tr><td>6. NAV（每股净资产）</td><td>每股净资产 $42.59（品牌价值未入账）</td><td>$43</td><td><span class="badge dn">-64%（下限参考）</span></td></tr>
+      <tr><td>7. 反向 DCF</td><td>当前 $120 隐含永续增长 ≈ 0%（市场定价"永久停滞"）</td><td>$158</td><td><span class="badge up">+32%</span></td></tr>
+      <tr><td>8. SOTP 分部加总</td><td>北美成熟业务 $90 + 中国高增长 $35 + 国际 $20 + 净现金 $16 = $161</td><td>$161</td><td><span class="badge up">+34%</span></td></tr>
+      <tr class="hl"><td>中位数</td><td>—</td><td><strong>$159</strong></td><td><strong>+32%</strong></td></tr>
+      <tr class="hl"><td>加权公允（基准 50% / 乐观 25% / 悲观 25%）</td><td>—</td><td><strong>$155</strong></td><td><strong>+29%</strong></td></tr>
+    </tbody></table>
+  </div>
+
+  <h4 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">7.X · P/E 多档透视表（FY26 利润下滑 + 周期拐点）</h4>
+  <div class="tbl-wrap" style="margin-bottom: 14px;">
+    <table class="tbl"><thead><tr><th>计算口径</th><th>每股盈利</th><th>P/E</th><th>是否最可信</th></tr></thead>
+    <tbody>
+      <tr><td>TTM GAAP P/E</td><td>$13.26</td><td>9.05x</td><td>★★★ 含 FY25 高基数</td></tr>
+      <tr><td>Forward FY26 P/E（指引中点）</td><td>$12.20</td><td>9.84x</td><td>★★★★★ <strong>最可信</strong></td></tr>
+      <tr><td>FY26 指引下限 P/E</td><td>$12.10</td><td>9.92x</td><td>★★★★ 保守下限</td></tr>
+      <tr><td>Q4 单季年化 P/E</td><td>$20.04</td><td>5.99x</td><td>★★ 含旺季 + 额外一周失真</td></tr>
+      <tr><td>核心业务 P/E（剔除净现金 $16 亿）</td><td>—</td><td>~8.5x（FY26）</td><td>★★★★ 修正后</td></tr>
+    </tbody></table>
+  </div>
+  <div class="dcf-note">
+    <p><strong>核心业务 P/E 8.5x 的解读</strong>：市值 $14.35B - 净现金 $1.81B = $12.54B。FY26 指引净利 ~$13 亿 → 核心业务 P/E ~8.5x。<span class="hl-t">这相当于市场对一个 56.6% 毛利率、34% ROE、中国 +29% 的品牌只给 8.5 倍估值</span>——隐含假设是"品牌将持续衰退、北美继续萎缩"。对比 Nike P/E ~22x、On 昂跑 P/E ~40x，Lululemon 的估值已 price-in 大量悲观。<strong>但低估值本身不是买入理由——关键看北美能否止跌、新 CEO 能否重塑品牌</strong>。</p>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">7.1 估值方法适用性说明</h4>
+  <div class="dcf-note">
+    <p><strong>最适用 4 种</strong>：相对估值 P/E（vs 同业）、DCF（中周期正常化）、反向 DCF（揭示市场已定价"永久停滞"）、SOTP（北美 vs 中国分部价值差异大）。</p>
+    <p><strong>次要 1 种</strong>：所有者盈余（OE Yield 11%）。</p>
+    <p><strong>不适用 3 种</strong>：PEG（FY26 EPS 下滑，增长率为负）、DDM（不派息）、NAV（品牌价值不在账面，仅作绝对下限 $43）。</p>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">7.2 三情景敏感性分析</h4>
+  <div class="tbl-wrap">
+    <table class="tbl"><thead><tr><th>情景</th><th>关键假设</th><th>FY27 净利估算</th><th>目标价</th><th>vs 现价</th><th>概率</th></tr></thead>
+    <tbody>
+      <tr><td>悲观</td><td>北美持续萎缩 / 品牌结构性衰退 / 中国增速放缓</td><td>$11 亿</td><td>$95</td><td><span class="badge dn">-21%</span></td><td>25%</td></tr>
+      <tr><td>基准</td><td>北美止跌企稳 / 中国 +20%+ / 新 CEO 稳住品牌</td><td>$14 亿</td><td>$155</td><td><span class="badge up">+29%</span></td><td>50%</td></tr>
+      <tr><td>乐观</td><td>北美恢复增长 / 中国 +25%+ / 品牌重塑成功 + 估值修复</td><td>$17 亿</td><td>$215</td><td><span class="badge up">+79%</span></td><td>25%</td></tr>
+    </tbody></table>
+  </div>
+</div>
+
+<!-- ═══ 模块 8 ═══ -->
+<div class="section">
+  <div class="stitle">模块 8 · 竞争与行业分析</div>
+
+  <h4 style="margin-bottom:10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">8.1 全球运动服饰行业横向对比</h4>
+  <div class="tbl-wrap" style="margin-bottom:14px">
+    <table class="tbl"><thead><tr><th>公司</th><th>市值</th><th>营收</th><th>营收增速</th><th>毛利率</th><th>P/E</th></tr></thead>
+    <tbody>
+      <tr><td>Nike（NKE）</td><td>~$95B</td><td>$48B</td><td>-3%</td><td>~43%</td><td>~22x</td></tr>
+      <tr><td>Adidas（ADS）</td><td>~$45B</td><td>$26B</td><td>+8%</td><td>~51%</td><td>~25x</td></tr>
+      <tr class="hl"><td>Lululemon（LULU）</td><td><strong>$14.4B</strong></td><td><strong>$11.1B</strong></td><td><strong>+5%</strong></td><td><strong>56.6%</strong></td><td><strong>9.1x</strong></td></tr>
+      <tr><td>On 昂跑（ONON）</td><td>~$15B</td><td>~$3.0B</td><td>+30%</td><td>~61%</td><td>~40x</td></tr>
+      <tr><td>Deckers/HOKA（DECK）</td><td>~$18B</td><td>~$5.5B</td><td>+15%</td><td>~57%</td><td>~18x</td></tr>
+      <tr><td>Vuori（未上市）</td><td>~$5.5B（估）</td><td>~$1.5B</td><td>+40%</td><td>—</td><td>—</td></tr>
+      <tr><td>Alo Yoga（未上市）</td><td>~$10B（估）</td><td>~$2.0B</td><td>+30%</td><td>—</td><td>—</td></tr>
+    </tbody></table>
+  </div>
+  <div class="cmt">
+    <p><strong>Lululemon 估值是同业最低、毛利率最高</strong>：P/E 9.1x 远低于 Nike 22x、Adidas 25x、On 40x。<span class="hl-t">56.6% 毛利率仍是上市运动服饰公司中最高之一</span>。但增速 +5% 落在中游——快不过 On（+30%）、Adidas（+8%），只略好于 Nike（-3%）。<strong>真正的威胁来自未上市的 Alo Yoga 和 Vuori</strong>——这两个品牌增速 30-40%，专门从 Lululemon 的核心客群（北美高端瑜伽/休闲）抢份额。这是北美同店 -3% 的直接原因。</p>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">8.2 波特五力分析</h4>
+  <div class="tbl-wrap">
+    <table class="tbl"><thead><tr><th>力量</th><th>评级</th><th>分析</th></tr></thead>
+    <tbody>
+      <tr><td>1. 现有竞争者</td><td>高</td><td>Nike/Adidas/Alo/Vuori/Athleta/On 多线夹击</td></tr>
+      <tr><td>2. 新进入者威胁</td><td>高</td><td>Alo、Vuori 证明新品牌可快速崛起</td></tr>
+      <tr><td>3. 替代品威胁</td><td>中</td><td>普通运动服 / 快时尚均可替代</td></tr>
+      <tr><td>4. 供应商议价</td><td>低</td><td>代工厂分散，公司订单量大</td></tr>
+      <tr><td>5. 客户议价</td><td>中高</td><td>消费者转换成本低，定价权在松动</td></tr>
+    </tbody></table>
+  </div>
+  <div class="cmt" style="margin-top:14px">
+    <p>整体行业吸引力：<span class="warn-t">中等偏弱</span>。高端运动服饰是一个<strong>"低进入壁垒、高时尚风险"的赛道</strong>——Lululemon 自己就是 20 年前的"新进入者"，如今 Alo、Vuori 在重演同样的剧本。<strong>这个行业没有持久护城河，只有"当下是否够酷"</strong>。这决定了 Lululemon 永远是一笔"需要持续观察品牌热度"的投资。</p>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">8.3 行业 TAM 与增长率</h4>
+  <div class="cmt">
+    <p>
+      <strong>全球运动服饰 TAM</strong>：~$4,500 亿（2025）→ ~$6,000 亿（2030 预测，CAGR ~6%）<br>
+      <strong>中国运动服饰市场</strong>：~$600 亿，CAGR ~10%——这是 Lululemon 中国 +29% 的行业基础<br>
+      <strong>Lululemon 全球市占</strong>：~2.5%（按营收）——份额不高，理论上仍有渗透空间<br>
+      <strong>颠覆风险</strong>：高——时尚潮流的转向 + 新锐 DTC 品牌的崛起，是这个行业永恒的颠覆来源。
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 模块 9 ═══ -->
+<div class="section">
+  <div class="stitle">模块 9 · 技术面与 K 线分析（次要参考）</div>
+
+  <div class="cmt">
+    <p><strong>LULU（NASDAQ）</strong>：</p>
+    <p>
+      当前价 $120.03（2026-05-19 收盘）。52 周区间 $118.07-$340.25。<br>
+      <strong>长期走势</strong>：从 2024 年初 $480 历史高位一路下跌，过去 12 个月从 $340 跌至 $120（-65%）。<span class="warn-t">这是一轮典型的"成长股戴维斯双杀"</span>——盈利下滑 + 估值倍数从 30x 压缩到 9x。<br>
+      <strong>当前价距 52 周低 $118 仅 +1.7%</strong>——几乎在最低点。<br>
+      <strong>支撑位</strong>：$118（52 周低）/ $100（心理整数关口）<br>
+      <strong>阻力位</strong>：$145（前期成交密集区）/ $180 / $250<br>
+      <strong>RSI</strong>：~32（接近超卖）<br>
+      <strong>MACD</strong>：负值但下行动能减弱<br>
+      <strong>判断</strong>：技术面处于深度下跌后的低位，RSI 接近超卖。<span class="hl-t">但"接近 52 周低"不等于"见底"</span>——下跌中继的可能性仍存。技术面只能确认"市场情绪极度悲观"，不能确认拐点。Q1 FY2026 财报（6 月初）+ 新 CEO 任命是潜在的情绪反转催化剂。
+    </p>
+
+    <p><strong>注意</strong>：技术面作为补充参考，不影响"基于估值的买入决策"。当前 P/E 9x、FCF Yield 5.7% 已是历史极端低位，<strong>估值面已极度便宜，但基本面拐点未现——这正是"有条件买入"而非"买入"的原因</strong>。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 10 ═══ -->
+<div class="section">
+  <div class="stitle">模块 10 · 增长催化剂与前景展望</div>
+
+  <h4 style="margin-bottom:10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">10.1 短期催化剂（未来 6 个月）</h4>
+  <div class="tag-grid">
+    <div class="tag-card pos">
+      <h5>2026-06 初 Q1 FY2026 财报<span class="tag-bd up">关键</span></h5>
+      <p>关键节点：北美同店能否止跌？中国能否维持 +25%+？<strong>若北美同店转正或降幅收窄 → 情绪反转</strong>。</p>
+    </div>
+    <div class="tag-card neu">
+      <h5>新 CEO 任命<span class="tag-bd nt">关键不确定</span></h5>
+      <p>临时联席 CEO 模式不可持续。<strong>新 CEO 的人选（零售老兵 vs 品牌创意型）将定义未来 5 年战略</strong>。任命时点和人选是最大变量。</p>
+    </div>
+    <div class="tag-card pos">
+      <h5>大规模回购<span class="tag-bd up">利好</span></h5>
+      <p>$16 亿剩余授权，在 $120（P/E 9x）回购可回收约 12% 流通股。<strong>低估值回购对每股价值高效</strong>。</p>
+    </div>
+    <div class="tag-card neg">
+      <h5>关税与去库存<span class="tag-bd dn">逆风</span></h5>
+      <p>FY26 关税仍是 ~$200M+ 营业利润逆风；存货 +18% 需折价去化——<strong>毛利率短期难回 58%</strong>。</p>
+    </div>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">10.2 长期展望（3-5 年）</h4>
+  <div class="cmt">
+    <p><strong>未来 3-5 年三大主题</strong>：</p>
+    <p>
+      <strong>1. 中国成为第二增长支柱</strong>：中国 FY25 占比 ~15%、+29% 增长。若维持 +20%+，FY30 中国营收可从 ~$17 亿增至 $40 亿+，占比升至 25%+——<span class="hl-t">这是 Lululemon 最确定的增长来源</span>。<br>
+      <strong>2. 北美能否止跌是成败手</strong>：北美 ~70% 营收，同店 -3%。北美只要从 -3% 回到 0%，整体增速就能回到 +7-8%。这取决于新 CEO + 产品团队能否让品牌"重新变酷"。<br>
+      <strong>3. 品类与男装扩张</strong>：男装、鞋履、网球/高尔夫等运动场景仍有渗透空间。男装目前占比 ~25%，长期目标 35%+。
+    </p>
+
+    <p><strong>FY26-FY30 营收 / EPS 预测</strong>：</p>
+    <table class="tbl" style="margin-top:10px"><thead><tr><th>年度</th><th>营收（$B）</th><th>YoY</th><th>摊薄 EPS（$）</th><th>YoY</th><th>关键假设</th></tr></thead>
+    <tbody>
+      <tr><td>FY25 实际</td><td>11.1</td><td>+5%</td><td>13.26</td><td>-4%</td><td>北美失速</td></tr>
+      <tr><td>FY26 指引</td><td>11.4</td><td>+3%</td><td>12.20</td><td>-8%</td><td>关税 + 去库存谷底</td></tr>
+      <tr><td>FY27 预测</td><td>12.0</td><td>+5%</td><td>13.50</td><td>+11%</td><td>北美止跌 + 中国持续</td></tr>
+      <tr><td>FY28 预测</td><td>12.8</td><td>+7%</td><td>15.20</td><td>+13%</td><td>新 CEO 战略见效</td></tr>
+      <tr><td>FY29 预测</td><td>13.6</td><td>+6%</td><td>16.80</td><td>+11%</td><td>中国占比上升</td></tr>
+      <tr><td>FY30 预测</td><td>14.4</td><td>+6%</td><td>18.50</td><td>+10%</td><td>品牌企稳 + 回购累积</td></tr>
+    </tbody></table>
+
+    <p style="margin-top:10px"><strong>关键变量</strong>：<span class="hl-t">FY26 是利润谷底（EPS $12.20），FY27 能否反弹至 $13.50+ 取决于北美止跌</span>。这是基准情景的核心假设，也是本次评级给"有条件买入"的"条件"所在。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 11 ═══ -->
+<div class="section">
+  <div class="stitle">模块 11 · 风险矩阵（多维评估）</div>
+
+  <div class="risk-grid">
+    <div class="risk-card r4">
+      <h5>1. 经营风险（北美失速）</h5>
+      <span class="risk-score">4 / 5</span>
+      <p>北美 ~70% 营收、同店 -3%。若持续萎缩，整体增长全靠中国独木难支。这是最核心风险。</p>
+    </div>
+    <div class="risk-card r1">
+      <h5>2. 财务风险</h5>
+      <span class="risk-score">1 / 5</span>
+      <p>零金融负债 + $18 亿现金 + FCF $8.24 亿。财务极稳健，破产风险为零。</p>
+    </div>
+    <div class="risk-card r4">
+      <h5>3. 竞争风险</h5>
+      <span class="risk-score">4 / 5</span>
+      <p>Alo Yoga、Vuori 高速崛起，专抢 Lululemon 核心客群。时尚行业无持久护城河。</p>
+    </div>
+    <div class="risk-card r3">
+      <h5>4. 监管/政策风险</h5>
+      <span class="risk-score">3 / 5</span>
+      <p>美国对越南/柬埔寨进口关税直接冲击成本，FY25 已损 ~$210M 营业利润。</p>
+    </div>
+    <div class="risk-card r3">
+      <h5>5. 宏观风险</h5>
+      <span class="risk-score">3 / 5</span>
+      <p>高端可选消费对经济周期敏感。美国消费降级会冲击 $128 一条的紧身裤需求。</p>
+    </div>
+    <div class="risk-card r1">
+      <h5>6. 估值风险</h5>
+      <span class="risk-score">1 / 5</span>
+      <p>P/E 9x、FCF Yield 5.7%、距 52 周低 1.7%。估值已极端便宜，下行空间有限。</p>
+    </div>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">11.X 黑天鹅情景（最坏情况）</h4>
+  <div class="cmt">
+    <p>
+      <strong>1. 品牌结构性衰退</strong>（概率 25%）：北美同店连续 3 年负增长，Lululemon 沦为"上一代品牌"（类似 Under Armour 的轨迹）。FY28 EPS 跌至 $9-10，股价跌至 $80（-33%）。<br>
+      <strong>2. 新 CEO 选错人</strong>（概率 15%）：新 CEO 战略失误（过度折价/盲目扩张），品牌定位进一步模糊。股价跌至 $90（-25%）。<br>
+      <strong>3. 关税大幅升级</strong>（概率 12%）：美国对东南亚关税进一步加码，毛利率跌破 53%。FY27 EPS 受压至 $11，股价跌至 $95（-21%）。<br>
+      <strong>4. 中国增长熄火</strong>（概率 10%）：中国市场竞争加剧 / 消费疲软，中国增速从 +29% 降至个位数——失去唯一增长引擎，股价跌至 $90（-25%）。<br>
+      <strong>5. 存货减值</strong>（概率 10%）：$17 亿存货中部分滞销品大幅减值，一次性冲击当季利润。
+    </p>
+    <p><strong>下行支撑</strong>：每股净资产 $42.59（不含品牌价值）+ 每股净现金 $16.5 + FCF Yield 在 $90 时高达 7.6%。<span class="hl-t">即便最坏情景，$80-90 是较硬的估值底</span>——一个 $8 亿+ FCF、零负债、34% ROE 的品牌，市场很难给到 $80 以下（那意味着 FCF Yield 9%+、核心 P/E 6x）。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 12 评分卡 ═══ -->
+<div class="section">
+  <div class="stitle">海图评分卡 · 6 维 A-D + 红旗排查</div>
+
+  <div class="bscore">
+    <div class="circle cw">B-</div>
+    <div class="bd">
+      <h4>1. 生意可预测性 — B-（6/10）</h4>
+      <p>商业模式简单清晰（设计+直营卖服饰），但时尚行业的"品牌热度"本质上不可预测。北美失速 + CEO 真空让 FY26-27 可预测度低。中国增长相对可见。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle co">C+</div>
+    <div class="bd">
+      <h4>2. 经济护城河 — C+（5/10）</h4>
+      <p>5 维护城河只有"品牌无形资产"一项有效，且正被 Alo/Vuori 侵蚀。转换成本、网络效应、有效规模均弱。<strong>护城河窄且收窄</strong>——这是最大短板。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle co">C+</div>
+    <div class="bd">
+      <h4>3. 管理层质量 — C+（5/10）</h4>
+      <p>CEO 离任、临时联席 CEO、"Power of Three ×2"长期目标大幅落空、Mirror 收购败笔。回购纪律是唯一亮点。<strong>领导层真空是当前最大不确定性</strong>。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>4. 财务质量 — A-（8.5/10）</h4>
+      <p>毛利率 56.6% + ROE 34% + 零金融负债 + $18 亿现金 + OCF/NI 101% + FCF Yield 5.7%。<strong>财务质量是 6 维中最强的</strong>——这门生意"赚钱能力"没问题，问题在"增长"。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle cw">B</div>
+    <div class="bd">
+      <h4>5. 资本配置纪律 — B（7/10）</h4>
+      <p>低估值大规模回购（FY25 $12 亿 + 授权 +$10 亿）是加分项；轻资产、不乱并购。<span class="warn-t">减分项</span>：Mirror 收购 $5 亿全额减记的历史败笔。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle cg">A</div>
+    <div class="bd">
+      <h4>6. 估值与安全边际 — A（9/10）</h4>
+      <p>P/E 9x、Forward P/E 9.8x、核心业务 P/E 8.5x、FCF Yield 5.7%、距 52 周低 1.7%。<strong>估值已极端便宜</strong>，安全边际 ≥ 29%。这是 6 维中第二强。</p>
+    </div>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">12.X 红旗排查（非评分项）</h4>
+  <div class="tbl-wrap">
+    <table class="tbl"><thead><tr><th>红旗项</th><th>状态</th><th>说明</th></tr></thead>
+    <tbody>
+      <tr><td>商誉减值历史</td><td>⚠️ 注意</td><td>2023 年 Mirror 收购 ~$5 亿基本全额减记</td></tr>
+      <tr><td>收入确认时点</td><td>✓ 无问题</td><td>零售按交付确认，简单透明</td></tr>
+      <tr><td>关联交易</td><td>✓ 无问题</td><td>无重大关联交易</td></tr>
+      <tr><td>表外负债</td><td>✓ 无问题</td><td>经营租赁已入表，无隐藏负债</td></tr>
+      <tr><td>存货异常</td><td>⚠️ 注意</td><td>存货 +18% 远超营收 +5%，未来折价压力</td></tr>
+      <tr><td>股权激励</td><td>✓ 无问题</td><td>SBC 占营收 ~1.4%，行业正常</td></tr>
+      <tr><td>管理层稳定性</td><td>⚠️ 注意</td><td>CEO 离任 + 临时联席 CEO，领导层动荡</td></tr>
+    </tbody></table>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">12.Y 综合评级</h4>
+  <div class="dcf-note">
+    <p><strong>6 维评分</strong>：B- / C+ / C+ / A- / B / A = 综合 <strong>B-</strong></p>
+    <p><strong>红旗排查</strong>：4/7 无问题，3 项注意（商誉减值历史 + 存货异常 + 管理层动荡）。<strong>多项红旗触发"有疑问"</strong> → 综合评级强制压制在「有条件买入」，不上"买入"。</p>
+    <p><strong>综合评级</strong>：<span class="rating-badge rating-cond-buy">有条件买入</span></p>
+    <p><strong>理由</strong>：(1) 估值 A + 财务 A- = 极端便宜（P/E 9x）+ 财务极稳健（零负债 + $18 亿现金）；(2) 中国 +29% 证明品牌力在新市场仍有效；(3) 低估值大规模回购对每股价值高效。<strong>但</strong>：护城河 C+（品牌侵蚀中）+ 管理层 C+（CEO 真空）+ 生意可预测性 B-（北美失速）= 这不是一笔"高枕无忧"的投资。<span class="hl-t">"条件"在于：北美同店必须止跌、新 CEO 必须到位且靠谱</span>。在这两个条件兑现前，只能小仓位试探性建仓。</p>
+  </div>
+</div>
+
+<!-- ═══ 投资决策 ═══ -->
+<div class="section">
+  <div class="stitle">海图研判 · 投资决策</div>
+
+  <div class="cgrid">
+    <div class="ccard">
+      <div class="ctitle" style="font-size: 14px;">12 个月概率加权目标价</div>
+      <p style="font-size: 28px; font-weight: 700; color: var(--gold); margin: 8px 0;">$155</p>
+      <p style="font-size: 13px; color: var(--text2);">+29% 上行 · 中位数估值 $159 / 加权公允 $155</p>
+      <table class="tbl" style="margin-top: 10px; font-size:12px;"><tbody>
+        <tr><td>乐观 (25%)</td><td>$215</td><td><span class="badge up">+79%</span></td></tr>
+        <tr><td>基准 (50%)</td><td>$155</td><td><span class="badge up">+29%</span></td></tr>
+        <tr><td>悲观 (25%)</td><td>$95</td><td><span class="badge dn">-21%</span></td></tr>
+      </tbody></table>
+    </div>
+    <div class="ccard">
+      <div class="ctitle" style="font-size: 14px;">分批建仓 / 止盈策略</div>
+      <p style="font-size: 13px; color: var(--text2); line-height: 1.85;">
+      <strong>当前价 $120.03</strong> · 已位于"首仓"附近<br><br>
+      <strong>建仓档位（独立估值中位数 × 80% / 70% / 60%）</strong>：<br>
+      首仓 <span class="hl-t">$127</span>（×80%·距现价 +6%·已过）<br>
+      二仓 <span class="hl-t">$111</span>（×70%·距现价 -8%）<br>
+      三仓 <span class="hl-t">$95</span>（×60%·距现价 -21%·极端机会）<br><br>
+      <strong>止盈三档</strong>：<br>
+      减 25% @ <span class="hl-t">$165</span><br>
+      减 25% @ <span class="hl-t">$200</span><br>
+      减 25% @ <span class="hl-t">$245</span><br>
+      <strong>最后 25% 视品牌反转进展决定去留</strong>
+      </p>
+    </div>
+  </div>
+
+  <div class="cmt" style="margin-top: 16px;">
+    <p><strong>仓位管理</strong>：建议总仓位 <strong>3-7%</strong>（中等偏低仓位，反映护城河侵蚀 + CEO 真空 + 北美结构性疑虑）。持有周期 <strong>2-4 年（等待品牌反转验证）</strong>。<span class="hl-t">这是一笔"困境反转"型投资，不是"高枕无忧"型</span>——建议先小仓位试探，待北美同店止跌 + 新 CEO 到位后再加仓。</p>
+
+    <p><strong>关键监控指标</strong>：</p>
+    <p>
+      <strong>1. 北美同店销售</strong>：从 -3% 能否回到 0% 甚至转正——这是最核心的反转信号<br>
+      <strong>2. 新 CEO 任命</strong>：人选背景（零售 vs 品牌创意）、到位时间<br>
+      <strong>3. 中国增速</strong>：能否维持 +20%+<br>
+      <strong>4. 毛利率</strong>：能否从 56.6% 企稳回升（关税 + 去库存进展）<br>
+      <strong>5. 存货增速</strong>：$17 亿存货能否回到与营收匹配的增速<br>
+      <strong>6. 回购执行</strong>：$16 亿授权的执行节奏
+    </p>
+
+    <p><strong>事件时间表</strong>：</p>
+    <p>
+      <strong>2026-06 初</strong>: Q1 FY2026 财报（关键节点 · 北美同店 + 中国增速）<br>
+      <strong>2026 年中</strong>: 新 CEO 任命（预期）<br>
+      <strong>2026-09 初</strong>: Q2 FY2026 财报<br>
+      <strong>2026-12 初</strong>: Q3 FY2026 财报（旺季前瞻）<br>
+      <strong>2027-03 中</strong>: FY2026 年报（全年业绩 + FY27 指引）
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 海图页末长评 ═══ -->
+<div class="section">
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记 · 1150 字</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p class="lead">一只股票从 $340 跌到 $120，跌掉 65%，市场在说一件事：这家公司的故事变了。Lululemon 曾是华尔街最爱的成长股之一——瑜伽裤卖出科技股的估值。如今 P/E 只有 9 倍。问题不是"它便不便宜"，而是"它还是不是一门好生意"。</p>
+
+      <p>FY2025 营收 $111 亿（+5%，上市以来最低增速）、净利 $15.79 亿、EPS $13.26。但拆开看：北美（约 70% 营收）同店销售 -3%、Q4 毛利率骤降 550bps、FY2026 EPS 指引下调至 $12.10-12.30（上市以来罕见的下滑）、CEO 离任、存货 +18%。唯一的亮点是中国大陆 +29% / 同店 +20%。<strong>这是一份"成长叙事破裂"的财报</strong>。市场对 Lululemon 的悲观（P/E 9x、距 52 周低仅 1.7%）与它仍然优秀的盈利质量（毛利率 56.6%、ROE 34%、零负债 + $18 亿现金）形成强烈反差。</p>
+
+      <h4>几个研判要点</h4>
+
+      <p><strong>一、9x P/E 已 price-in"永久停滞"，但低估值不等于买入理由。</strong>反向 DCF 显示：当前 $120 隐含的永续增长率约等于 0%——市场认为 Lululemon 会永远停在这里。<span class="hl-t">剔除 $16 亿净现金后，核心业务 P/E 仅 8.5x</span>。对比 Nike 22x、On 昂跑 40x，Lululemon 的估值已极度悲观。但海图要提醒：<strong>便宜本身从来不是买入理由</strong>——Under Armour 也曾"便宜"了很多年。关键看品牌能否止跌。</p>
+
+      <p><strong>二、北美失速是结构问题还是周期问题，决定一切。</strong>北美同店 -3%，管理层自己承认"对美国业务和产品执行失望"。<span class="warn-t">这不是宏观问题——是 Alo Yoga、Vuori 这些新锐品牌在"时尚感"上抢走了年轻客群</span>。Lululemon 自己 20 年前就是这样崛起的，如今轮到它被颠覆。但北美只要从 -3% 回到 0%，整体增速就能回到 +7-8%。这是基准情景的关键，也是最大的不确定性。</p>
+
+      <p><strong>三、中国 +29% 证明品牌力还在，只是用错了地方。</strong>同样的 Lululemon 品牌，在北美同店 -3%，在中国 +29%、同店 +20%。<span class="hl-t">这说明品牌的"内核"没坏，坏的是北美市场的过度成熟和产品迭代乏力</span>。中国占比已 ~15%，若维持 +20%+，5 年后能到 25%+，成为实打实的第二增长支柱。中国是这笔投资里最确定的一块。</p>
+
+      <p><strong>四、CEO 真空是悬在头上的剑。</strong>Calvin McDonald 已离任，目前 CFO + 首席商务官任临时联席 CEO。<strong>一家品牌公司在转型关键期没有掌舵人，是危险的</strong>。新 CEO 的人选——是找零售运营老兵，还是找品牌创意型领袖——会定义未来 5 年。在新 CEO 到位并证明自己之前，这笔投资的"条件"就没有兑现。</p>
+
+      <p><strong>五、12 个月目标价 $155，上行 +29%。</strong>悲观 $95（-21%，品牌结构性衰退）、基准 $155（+29%，北美止跌 + 中国持续 + 新 CEO 稳住品牌）、乐观 $215（+79%，品牌重塑成功 + 估值修复）。<strong>当前价 $120 距首仓 $127 已过</strong>，已在合理建仓窗口。海图的判断：这是一笔"困境反转"型投资——赔率不错（9x P/E + 财务零风险），但胜率取决于品牌能否重新"变酷"，而这件事没人能打包票。</p>
+
+      <h4>海图研判</h4>
+
+      <p><strong>评级：有条件买入</strong>（9x P/E 极致低估 + 中国 +29% 引擎 + 巨额回购的三轮组合，但护城河侵蚀 + CEO 真空 + 北美结构性疑虑）。12 个月概率加权目标价 <strong>$155</strong>（+29%）。</p>
+
+      <p>操作建议（独立估值中位数 $159，加权公允 $155）：当前价 $120 已位于"首仓"附近。建议首仓 $127（×80%·已过）、二仓 $111（×70%·距现价 -8%）、三仓 $95（×60%·极端机会）。止盈三档 $165 / $200 / $245，每档减仓 25%，最后 25% 视品牌反转进展决定。建议总仓位 <strong>3-7%</strong>（中等偏低 · 困境反转）。持有周期 2-4 年。<span class="hl-t">"条件"在于：先小仓位试探，待北美同店止跌 + 新 CEO 到位后再加仓</span>。</p>
+
+      <h4>风险提示</h4>
+
+      <p>北美品牌结构性衰退（沦为上一代品牌）/ 新 CEO 选错人 / 关税大幅升级 / 中国增长熄火 / 存货大幅减值 / Alo·Vuori 加速抢份额——任一项都可能让股价回调 20-35%。但零金融负债 + $18 亿现金 + FCF $8.24 亿 + 34% ROE 让破产概率为零，每股净资产 $42.59 + 净现金 $16.5/股提供下行支撑，$80-90 是较硬的估值底。</p>
+
+      <p>关键叙事：<strong>"P/E 9x 极致低估 + 56.6% 毛利率 + 中国 +29% + 零负债 $18 亿现金 + 距 52 周低仅 1.7%"的稀有组合，对垒"北美失速 + CEO 真空 + 护城河侵蚀"的隐忧</strong>。在多数优质零售品牌估值不菲的当下，Lululemon 是一笔"昔日成长股跌成深度价值股"的困境反转标的——不是给追求确定性的人，而是给愿意用小仓位赌"品牌能否重新变酷"、并有耐心等北美止跌信号的逆向投资者。下次催化剂：2026-06 初 Q1 FY2026 财报 + 新 CEO 任命。</p>
+
+      <p class="haitu-sign">—— 海图，灯下落笔，明日再观风浪。</p>
+
+      <p class="haitu-disc">⚠️ 免责声明：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，不构成任何投资建议。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div>《海图夜读》 · Lululemon LULU Q4 FY2025 + 全年 海图研判</div>
+  <div style="margin-top:6px;">数据来源：Lululemon Q4 FY2025 + 全年财报新闻稿（2026-03-18）+ 投资者关系页 + 电话会 transcript + yfinance 实时市场数据</div>
+  <div style="margin-top:6px;">价值投资 · 长期主义</div>
+</footer>
+
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  const cur = html.getAttribute('data-theme');
+  html.setAttribute('data-theme', cur === 'dark' ? 'light' : 'dark');
+  localStorage.setItem('theme', html.getAttribute('data-theme'));
+  renderCharts();
+}
+(function() {
+  const t = localStorage.getItem('theme');
+  if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+})();
+
+function gc(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+
+let charts = {};
+function renderCharts() {
+  Object.values(charts).forEach(c => c && c.destroy && c.destroy());
+  charts = {};
+  const txt2 = gc('--text2'), txt3 = gc('--text3'), grid = gc('--chart-grid');
+  const accent = gc('--accent'), accent2 = gc('--accent2'), accent3 = gc('--accent3');
+  const green = gc('--green'), gold = gc('--gold'), rose = gc('--rose'), red = gc('--red');
+
+  Chart.defaults.color = txt2;
+  Chart.defaults.font.family = 'Segoe UI, sans-serif';
+  Chart.defaults.font.size = 11;
+
+  charts.rev = new Chart(document.getElementById('revenueChart'), {
+    type: 'bar',
+    data: { labels: ['Q4 24', 'Q1 25', 'Q2 25', 'Q3 25', 'Q4 25'],
+      datasets: [{ label: 'Revenue', data: [3610, 2370, 2530, 2600, 3610], backgroundColor: [accent3, gold, accent2, accent, green], borderRadius: 4 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+      scales: { y: { grid: { color: grid }, ticks: { color: txt3 } }, x: { grid: { display: false }, ticks: { color: txt3 } } } }
+  });
+
+  charts.profit = new Chart(document.getElementById('profitChart'), {
+    type: 'line',
+    data: { labels: ['Q4 24', 'Q1 25', 'Q2 25', 'Q3 25', 'Q4 25'],
+      datasets: [{ label: 'Net Income', data: [748, 315, 393, 285, 587], borderColor: green, backgroundColor: 'rgba(122,154,122,0.1)', tension: 0.3, fill: true, pointBackgroundColor: green, pointRadius: 5 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+      scales: { y: { grid: { color: grid }, ticks: { color: txt3 } }, x: { grid: { display: false }, ticks: { color: txt3 } } } }
+  });
+
+  charts.seg = new Chart(document.getElementById('segmentChart'), {
+    type: 'doughnut',
+    data: { labels: ['美洲 7.8', '中国大陆 1.7', '其他国际 1.6'],
+      datasets: [{ data: [7.8, 1.7, 1.6], backgroundColor: [accent3, accent, gold], borderColor: gc('--card'), borderWidth: 2 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { color: txt2, font: { size: 11 } } } } }
+  });
+
+  charts.capex = new Chart(document.getElementById('capexChart'), {
+    type: 'bar',
+    data: { labels: ['FY21', 'FY22', 'FY23', 'FY24', 'FY25'],
+      datasets: [
+        { label: '营收增速 (%)', data: [42, 30, 19, 10, 5], backgroundColor: [accent, accent, gold, rose, red], borderRadius: 4 }
+      ] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top', labels: { color: txt2, font: { size: 11 } } } },
+      scales: { y: { grid: { color: grid }, ticks: { color: txt3 } }, x: { grid: { display: false }, ticks: { color: txt3 } } } }
+  });
+
+  buildSankey();
+}
+
+function buildSankey() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const txt = isDark ? '#d4ccc4' : '#4a4340';
+  const cardBg = isDark ? '#2e2a25' : '#ffffff';
+
+  const sankeyData = [{
+    type: 'sankey', orientation: 'h', arrangement: 'snap', valueformat: ',.1f', valuesuffix: ' 亿',
+    node: {
+      pad: 22, thickness: 22, line: { color: 'transparent', width: 0 },
+      label: ['营收 111.0', '营业成本 48.2', '毛利 62.8', '销售及行政费用 40.7', '营业利润 22.1', '所得税+其他 -6.3', '净利润 15.8', '折旧+股权激励 +5.5', '营运资金占用 -2.0', '经营现金流 16.0', '资本开支 7.8', '自由现金流 8.2'],
+      color: ['#7b8fa0', '#b87070', '#8a9a8e', '#c09090', '#b08d7a', '#b87070', '#7a9a7a', '#7b8fa0', '#b87070', '#b08d7a', '#b87070', '#7a9a7a']
+    },
+    link: {
+      source: [0, 0, 2, 2, 4, 4, 6, 7, 8, 9, 9],
+      target: [1, 2, 3, 4, 5, 6, 9, 9, 9, 10, 11],
+      value:  [48.2, 62.8, 40.7, 22.1, 6.3, 15.8, 15.8, 5.5, -2.0, 7.8, 8.2],
+      color: ['rgba(184,112,112,0.30)', 'rgba(138,154,142,0.45)', 'rgba(192,144,144,0.30)', 'rgba(176,141,122,0.40)', 'rgba(184,112,112,0.30)', 'rgba(122,154,122,0.45)', 'rgba(122,154,122,0.40)', 'rgba(123,143,160,0.40)', 'rgba(184,112,112,0.30)', 'rgba(184,112,112,0.30)', 'rgba(122,154,122,0.50)']
+    }
+  }];
+
+  const layout = { font: { family: 'Segoe UI, sans-serif', size: 11, color: txt }, paper_bgcolor: cardBg, plot_bgcolor: cardBg, margin: { l: 10, r: 10, t: 10, b: 10 } };
+  Plotly.react('sankey', sankeyData, layout, { displayModeBar: false, responsive: true });
+}
+
+document.addEventListener('DOMContentLoaded', renderCharts);
+</script>
+
+</body>
+</html>
