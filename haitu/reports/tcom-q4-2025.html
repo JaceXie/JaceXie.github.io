@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-05-19，基于携程集团 Q4 2025 + 全年财报（2026-02 发布） -->
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>携程集团 Trip.com TCOM Q4 2025 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root {
+  --bg: #f5f0eb; --bg2: #ece6df; --card: #ffffff; --card2: #f8f5f1; --border: #d9d0c7;
+  --text: #4a4340; --text2: #7a706a; --text3: #a89f98;
+  --accent: #8a9a8e; --accent2: #7b8fa0; --accent3: #b08d7a;
+  --rose: #c09090; --gold: #b9a06a; --red: #b87070; --green: #7a9a7a;
+  --shadow: rgba(0,0,0,0.06); --chart-grid: #e5ddd5;
+}
+[data-theme="dark"] {
+  --bg: #1e1c1a; --bg2: #28251f; --card: #2e2a25; --card2: #363230; --border: #4a4540;
+  --text: #d4ccc4; --text2: #a09890; --text3: #706860;
+  --accent: #8a9a8e; --accent2: #8fabbf; --accent3: #c9a48e;
+  --rose: #c09090; --gold: #c9b07a; --red: #c08080; --green: #8aaa8a;
+  --shadow: rgba(0,0,0,0.3); --chart-grid: #3e3a35;
+}
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Georgia','Noto Serif SC','PingFang SC',serif; line-height: 1.75; font-size: 14.5px; transition: background .35s, color .35s; }
+a { color: var(--accent2); text-decoration: none; }
+.theme-bar { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); }
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; text-decoration: none; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+.toggle-switch { position: relative; width: 44px; height: 22px; background: var(--border); border-radius: 11px; cursor: pointer; transition: background .3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: var(--card); border-radius: 50%; transition: transform .3s; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+.hero { padding: 48px 24px 36px; text-align: center; border-bottom: 1px solid var(--border); }
+.hero-tag { display: inline-block; font-family: 'Segoe UI',sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 3px 14px; border-radius: 20px; margin-bottom: 18px; }
+.hero h1 { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.pill { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: 'Segoe UI',sans-serif; font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow); }
+.pill strong { color: var(--text); }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle { font-size: 18px; font-weight: 700; color: var(--accent3); margin-bottom: 20px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+.stitle::before { content: ''; display: block; width: 4px; height: 20px; background: var(--accent3); border-radius: 2px; }
+.haitu-quip { display: flex; align-items: center; gap: 18px; background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--gold); border-radius: 12px; padding: 18px 24px; margin: 24px 0; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-quote { flex: 1; }
+.haitu-portrait { font-size: 15px; line-height: 1.65; color: var(--text); margin-bottom: 6px; font-weight: 600; }
+.haitu-rating-line { font-size: 13px; color: var(--text2); font-family: 'Segoe UI',sans-serif; }
+.rating-badge { display: inline-block; padding: 2px 12px; border-radius: 12px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; margin-left: 4px; }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+.rating-cond-buy { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-hold { background: rgba(123,143,160,.18); color: var(--accent2); }
+.haitu-essay { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 28px 32px; margin: 24px 0 20px; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-essay-header { display: flex; align-items: center; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.haitu-avatar-sm { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); background: var(--red); box-shadow: 0 2px 8px rgba(184,112,112,0.2); }
+.haitu-name-lg { font-family: 'Georgia','Noto Serif SC',serif; font-size: 28px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 4px; }
+.haitu-essay-tag { font-family: 'Segoe UI',sans-serif; font-size: 12px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; }
+.haitu-essay-body { font-family: 'Georgia','Noto Serif SC',serif; font-size: 15px; line-height: 2.0; color: var(--text); }
+.haitu-essay-body p { margin-bottom: 14px; }
+.haitu-essay-body p.lead { font-size: 16px; font-style: italic; color: var(--text2); margin-bottom: 18px; }
+.haitu-essay-body strong { color: var(--text); font-weight: 700; }
+.haitu-essay-body h4 { font-size: 14px; color: var(--accent3); margin: 18px 0 10px; font-family: 'Segoe UI',sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+.haitu-sign { text-align: right; margin-top: 18px; font-family: 'Georgia',serif; font-size: 14px; color: var(--text2); font-style: italic; }
+.haitu-disc { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); font-style: italic; line-height: 1.7; }
+.stock-snap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill,minmax(160px,1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px; }
+.snap-item { text-align: center; }
+.snap-label { font-family: 'Segoe UI',sans-serif; font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.snap-val { font-family: 'Segoe UI',sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+.snap-val.up { color: var(--green); }
+.snap-val.dn { color: var(--red); }
+.snap-sub { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text3); margin-top: 2px; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(195px,1fr)); gap: 14px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow); }
+.kpi-l { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.kpi-v.up { color: var(--green); }
+.kpi-v.dn { color: var(--red); }
+.badge { display: inline-block; font-family: 'Segoe UI',sans-serif; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+.up { background: rgba(122,154,122,.15); color: var(--green); }
+.dn { background: rgba(184,112,112,.15); color: var(--red); }
+.nt { background: rgba(123,143,160,.15); color: var(--accent2); }
+.tbl-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow); }
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI',sans-serif; font-size: 13px; }
+.tbl th { background: var(--card2); color: var(--text3); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); background: var(--card2); }
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); }
+.ctitle { font-size: 13px; color: var(--text2); margin-bottom: 12px; font-weight: 600; }
+.cwrap { position: relative; height: 240px; }
+.cmt { font-size: 14px; color: var(--text2); line-height: 1.85; }
+.cmt p { margin-bottom: 12px; }
+.cmt strong { color: var(--text); }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+.bscore { display: flex; gap: 16px; padding: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 12px; box-shadow: 0 1px 4px var(--shadow); }
+.bscore .circle { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; color: white; flex-shrink: 0; }
+.cg { background: var(--green); }
+.cw { background: var(--gold); }
+.co { background: var(--rose); }
+.cr { background: var(--red); }
+.cb { background: var(--accent2); }
+.bd h4 { font-size: 14px; color: var(--text); margin-bottom: 6px; font-family: 'Segoe UI',sans-serif; letter-spacing: 0.5px; }
+.bd p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+.pgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.dcf-note { background: var(--card2); border-left: 3px solid var(--accent2); padding: 14px 18px; border-radius: 6px; font-size: 13.5px; color: var(--text2); line-height: 1.85; }
+.dcf-note p { margin-bottom: 8px; }
+.dcf-note strong { color: var(--text); }
+.tag-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap: 12px; margin-top: 14px; }
+.tag-card { background: var(--card); border: 1px solid var(--border); border-left: 3px solid var(--accent2); padding: 12px 16px; border-radius: 6px; }
+.tag-card.pos { border-left-color: var(--green); }
+.tag-card.neg { border-left-color: var(--red); }
+.tag-card.neu { border-left-color: var(--accent2); }
+.tag-card h5 { font-size: 13px; color: var(--text); margin-bottom: 6px; font-family: 'Segoe UI',sans-serif; }
+.tag-card p { font-size: 12px; color: var(--text2); line-height: 1.7; }
+.tag-card .tag-bd { font-family: 'Segoe UI',sans-serif; font-size: 10px; padding: 1px 6px; border-radius: 4px; margin-left: 4px; }
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap: 12px; }
+.risk-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 14px 18px; position: relative; box-shadow: 0 1px 3px var(--shadow); }
+.risk-card::before { content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent); }
+.risk-card.r1::before { background: var(--green); }
+.risk-card.r2::before { background: rgba(122,154,122,.6); }
+.risk-card.r3::before { background: var(--gold); }
+.risk-card.r4::before { background: var(--rose); }
+.risk-card.r5::before { background: var(--red); }
+.risk-card h5 { font-size: 14px; margin-bottom: 6px; color: var(--text); }
+.risk-score { font-family: 'Segoe UI',sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.r1 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r2 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r3 .risk-score { background: rgba(185,160,106,.18); color: var(--gold); }
+.r4 .risk-score { background: rgba(192,144,144,.18); color: var(--rose); }
+.r5 .risk-score { background: rgba(184,112,112,.18); color: var(--red); }
+.risk-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+footer { background: var(--card2); border-top: 1px solid var(--border); padding: 24px; text-align: center; color: var(--text3); font-size: 12px; margin-top: 40px; line-height: 1.8; }
+@media (max-width: 768px) { .cgrid,.pgrid { grid-template-columns: 1fr; } .hero h1 { font-size: 22px; } .kpi-grid { grid-template-columns: 1fr 1fr; } .stock-snap { grid-template-columns: 1fr 1fr; } .haitu-essay-header { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/TCOM" target="_blank" rel="noopener" title="在雪球查看 携程 实时行情">雪球 TCOM</a>
+  </div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">Q4 2025 + 全年财报发布 · 2026-02 &nbsp;|&nbsp; 海图研判 · 2026-05-19</div>
+  <h1>携程集团 Trip.com TCOM · Q4 2025 + 全年深度分析</h1>
+  <div class="hero-sub">NASDAQ: TCOM / HKEX: 9961 &nbsp;|&nbsp; 中国最大在线旅游平台 · 80.7% 毛利率 + 出境游/国际化双引擎 · 反垄断调查待解 &nbsp;|&nbsp; 价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill">股价 <strong>$49.89</strong></div>
+    <div class="pill">市值 <strong>$31.4B</strong></div>
+    <div class="pill">FY25 营收 <strong>¥624亿(+17%)</strong></div>
+    <div class="pill">调整后 EBITDA <strong>¥189亿(30%)</strong></div>
+    <div class="pill">P/E TTM <strong>7.1x（投资收益扭曲）</strong></div>
+    <div class="pill">海图研判 <strong>有条件买入</strong></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 海图页首短评 ═══ -->
+<div class="haitu-quip">
+  <div class="haitu-quote">
+    <div class="haitu-portrait">中国最大在线旅游平台（OTA）——住宿预订 + 交通票务 + 旅游度假 + 商旅，80.7% 毛利率、调整后 EBITDA 利润率 30% 的轻资产撮合生意。FY2025 营收 ¥624 亿（+17%）、调整后 EBITDA ¥189 亿、Q4 营收 +21%。出境游恢复 + Trip.com 国际平台扩张是双增长引擎。<strong>但 GAAP 净利 ¥334 亿被 ¥199 亿投资收益严重扭曲——TTM P/E 7.1x 是假象，核心经营要看调整后 EBITDA</strong>。当前股价 $49.89 接近 52 周低（距高点 -37%），净现金 ¥751 亿、Forward P/E 10.7x——是优质 OTA 龙头的合理偏低估值，但反垄断调查是头顶的剑。</div>
+    <div class="haitu-rating-line">评级：<span class="rating-badge rating-cond-buy">有条件买入</span> · 12 个月目标价 $67（+34%）· 中国 OTA 龙头 + 出境游/国际化双引擎 + 巨额净现金的组合，但反垄断调查待解 + GAAP 利润需看穿</div>
+  </div>
+</div>
+
+<!-- ═══ 市场数据快照 ═══ -->
+<div class="section">
+  <div class="stitle">市场数据快照（2026-05-19）· 货币：USD/RMB ≈ 7.0</div>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">股价（ADS）</div><div class="snap-val">$49.89</div><div class="snap-sub">2026-05-19 收盘</div></div>
+    <div class="snap-item"><div class="snap-label">H 股 (9961)</div><div class="snap-val">HKD 388</div><div class="snap-sub">~平价 · 1 ADS = 1 普通股</div></div>
+    <div class="snap-item"><div class="snap-label">市值</div><div class="snap-val">$31.4B</div><div class="snap-sub">~RMB 2,200 亿</div></div>
+    <div class="snap-item"><div class="snap-label">流通股</div><div class="snap-val">6.30 亿 ADS</div><div class="snap-sub">NASDAQ + 港股</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间</div><div class="snap-val dn">$48-79</div><div class="snap-sub">距高点 -37% / 距低点 +2.9%</div></div>
+    <div class="snap-item"><div class="snap-label">TTM P/E (GAAP)</div><div class="snap-val">7.1x</div><div class="snap-sub">被 ¥199亿投资收益扭曲</div></div>
+    <div class="snap-item"><div class="snap-label">Forward P/E</div><div class="snap-val up">10.7x</div><div class="snap-sub">FY26 共识 · 较可信</div></div>
+    <div class="snap-item"><div class="snap-label">P/B</div><div class="snap-val up">1.31x</div><div class="snap-sub">每股净资产 $38.08</div></div>
+    <div class="snap-item"><div class="snap-label">EV/EBITDA</div><div class="snap-val up">~8x</div><div class="snap-sub">调整后 EBITDA ¥189亿</div></div>
+    <div class="snap-item"><div class="snap-label">股息率</div><div class="snap-val">0.57%</div><div class="snap-sub">小额派息 / 主靠回购</div></div>
+    <div class="snap-item"><div class="snap-label">毛利率</div><div class="snap-val up">80.7%</div><div class="snap-sub">OTA 撮合模式典型</div></div>
+    <div class="snap-item"><div class="snap-label">调整后 EBITDA 利润率</div><div class="snap-val up">30%</div><div class="snap-sub">核心经营盈利能力</div></div>
+    <div class="snap-item"><div class="snap-label">ROE</div><div class="snap-val up">21.1%</div><div class="snap-sub">含投资收益</div></div>
+    <div class="snap-item"><div class="snap-label">现金+投资</div><div class="snap-val up">¥1,058亿</div><div class="snap-sub">$151亿 / 含短投+HTM</div></div>
+    <div class="snap-item"><div class="snap-label">有息负债</div><div class="snap-val">¥307亿</div><div class="snap-sub">短债 ¥193 + 长债 ¥114</div></div>
+    <div class="snap-item"><div class="snap-label">真实净现金</div><div class="snap-val up">¥751亿</div><div class="snap-sub">$107亿 / 占市值 34%</div></div>
+    <div class="snap-item"><div class="snap-label">下次财报</div><div class="snap-val nt">2026-05-25</div><div class="snap-sub">Q1 2026（6 天后）</div></div>
+  </div>
+</div>
+
+<!-- ═══ FY2025 KPI ═══ -->
+<div class="section">
+  <div class="stitle">FY2025 全年核心业绩（2026-02 发布）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">全年净营收</div><div class="kpi-v up">¥624亿</div><span class="badge up">+17% YoY</span><div class="kpi-l" style="margin-top:6px">$89亿 / 历史新高</div></div>
+    <div class="kpi"><div class="kpi-l">住宿预订</div><div class="kpi-v up">¥261亿</div><span class="badge up">+21% YoY</span><div class="kpi-l" style="margin-top:6px">占营收 42% / 第一大业务</div></div>
+    <div class="kpi"><div class="kpi-l">交通票务</div><div class="kpi-v up">¥225亿</div><span class="badge up">+11% YoY</span><div class="kpi-l" style="margin-top:6px">占营收 36%</div></div>
+    <div class="kpi"><div class="kpi-l">旅游度假</div><div class="kpi-v up">¥47亿</div><span class="badge up">+8% YoY</span><div class="kpi-l" style="margin-top:6px">占营收 7%</div></div>
+    <div class="kpi"><div class="kpi-l">商旅管理</div><div class="kpi-v up">¥28亿</div><span class="badge up">+13% YoY</span><div class="kpi-l" style="margin-top:6px">占营收 5%</div></div>
+    <div class="kpi"><div class="kpi-l">毛利率</div><div class="kpi-v up">80.7%</div><span class="badge up">轻资产撮合</span><div class="kpi-l" style="margin-top:6px">毛利 ¥503亿</div></div>
+    <div class="kpi"><div class="kpi-l">调整后 EBITDA</div><div class="kpi-v up">¥189亿</div><span class="badge up">利润率 30%</span><div class="kpi-l" style="margin-top:6px">核心经营盈利</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 归母净利</div><div class="kpi-v up">¥334亿</div><span class="badge nt">含 ¥199亿投资收益</span><div class="kpi-l" style="margin-top:6px">vs FY24 ¥172亿 / 失真</div></div>
+    <div class="kpi"><div class="kpi-l">Non-GAAP 净利</div><div class="kpi-v">¥318亿</div><span class="badge nt">$45亿 / 仍含投资收益</span><div class="kpi-l" style="margin-top:6px">非核心经营口径</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 摊薄 EPS/ADS</div><div class="kpi-v">¥47.67</div><span class="badge nt">$6.82</span><div class="kpi-l" style="margin-top:6px">投资收益虚高</div></div>
+    <div class="kpi"><div class="kpi-l">Non-GAAP EPS/ADS</div><div class="kpi-v">¥45.59</div><span class="badge nt">$6.52</span><div class="kpi-l" style="margin-top:6px">摊薄</div></div>
+    <div class="kpi"><div class="kpi-l">投资收益（一次性）</div><div class="kpi-v dn">¥199亿</div><span class="badge dn">vs FY24 仅 ¥11亿</span><div class="kpi-l" style="margin-top:6px">含 MakeMyTrip/同程等公允价值</div></div>
+    <div class="kpi"><div class="kpi-l">经营活动现金流</div><div class="kpi-v up">~¥144亿</div><span class="badge up">现金流稳健</span><div class="kpi-l" style="margin-top:6px">轻资产 / Capex 极小</div></div>
+    <div class="kpi"><div class="kpi-l">真实净现金</div><div class="kpi-v up">¥751亿</div><span class="badge up">$107亿</span><div class="kpi-l" style="margin-top:6px">占市值 34%</div></div>
+  </div>
+</div>
+
+<!-- ═══ Q4 2025 KPI ═══ -->
+<div class="section">
+  <div class="stitle">Q4 2025 季度业绩（2025 年 10-12 月 · 营收加速 +21%）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">Q4 净营收</div><div class="kpi-v up">¥154亿</div><span class="badge up">+21% YoY</span><div class="kpi-l" style="margin-top:6px">$22亿 / 增速高于全年</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 GAAP 净利</div><div class="kpi-v up">¥43亿</div><span class="badge nt">含投资收益</span><div class="kpi-l" style="margin-top:6px">$6.1亿</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 Non-GAAP 净利</div><div class="kpi-v">¥35亿</div><span class="badge nt">$5.0亿</span><div class="kpi-l" style="margin-top:6px">仍含部分投资收益</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 调整后 EBITDA</div><div class="kpi-v up">¥34亿</div><span class="badge up">利润率 22%</span><div class="kpi-l" style="margin-top:6px">淡季利润率低于全年 30%</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 GAAP EPS/ADS</div><div class="kpi-v">¥6.11</div><span class="badge nt">$0.87</span><div class="kpi-l" style="margin-top:6px">摊薄</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 毛利率</div><div class="kpi-v up">78.9%</div><span class="badge nt">vs 全年 80.7%</span><div class="kpi-l" style="margin-top:6px">淡季略低</div></div>
+    <div class="kpi"><div class="kpi-l">出境游</div><div class="kpi-v up">超疫情前</div><span class="badge up">机酒预订恢复 120%+</span><div class="kpi-l" style="margin-top:6px">出境游全面修复</div></div>
+    <div class="kpi"><div class="kpi-l">Trip.com 国际平台</div><div class="kpi-v up">高速增长</div><span class="badge up">亚太为主战场</span><div class="kpi-l" style="margin-top:6px">国际营收占比上升</div></div>
+    <div class="kpi"><div class="kpi-l">下次财报</div><div class="kpi-v nt">2026-05-25</div><span class="badge nt">Q1 2026</span><div class="kpi-l" style="margin-top:6px">6 天后 · 关注反垄断进展</div></div>
+  </div>
+
+  <div class="dcf-note" style="margin-top:18px">
+    <strong>关键数据洞察 · 必须看穿 GAAP 利润的"投资收益假象"：</strong>
+    <p style="margin-top:8px">(1) <span class="warn-t">FY2025 GAAP 净利 ¥334 亿（+94%）看似爆发，实则其中 ¥199 亿是投资收益</span>——主要来自携程持有的 MakeMyTrip（印度 OTA）、同程旅行等股权的公允价值变动。FY24 投资收益仅 ¥11 亿，今年的 ¥199 亿是一次性巨额波动；(2) <strong>真实经营盈利要看调整后 EBITDA ¥189 亿（利润率 30%）</strong>——这才是携程 OTA 主业的核心赚钱能力；(3) <span class="hl-t">营收 +17%（Q4 +21%）是干净的经营增长</span>——住宿 +21%、交通 +11%，由出境游恢复和 Trip.com 国际平台扩张驱动；(4) <strong>所以 TTM P/E 7.1x 是估值假象</strong>——按核心经营计算，真实 P/E 在 15-17x（详见模块 7 多档透视表）；(5) Q1 2026 财报将于 5-25 发布，市场关注反垄断调查进展。<strong>海图提醒：携程是好生意，但不要被 7x P/E 的"便宜"误导——它没那么便宜，但也确实不贵。</strong>
+  </div>
+</div>
+
+<!-- ═══ 季度趋势 ═══ -->
+<div class="section">
+  <div class="stitle">季度趋势 + 5 年总览</div>
+  <div class="cgrid">
+    <div class="ccard">
+      <div class="ctitle">5 季度营收趋势（¥亿）</div>
+      <div class="cwrap"><canvas id="revenueChart"></canvas></div>
+    </div>
+    <div class="ccard">
+      <div class="ctitle">5 季度调整后 EBITDA 趋势（¥亿）</div>
+      <div class="cwrap"><canvas id="profitChart"></canvas></div>
+    </div>
+    <div class="ccard">
+      <div class="ctitle">FY2025 营收结构（¥亿）</div>
+      <div class="cwrap"><canvas id="segmentChart"></canvas></div>
+    </div>
+    <div class="ccard">
+      <div class="ctitle">5 年营收恢复轨迹（¥亿）</div>
+      <div class="cwrap"><canvas id="capexChart"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ Sankey ═══ -->
+<div class="section">
+  <div class="stitle">FY2025 资金流向 · 营收 → 自由现金流（¥ 亿）</div>
+  <div class="ccard">
+    <div class="ctitle">从 ¥624 亿营收到核心经营现金流的资金链路（剔除投资收益看真实经营）</div>
+    <div id="sankey" style="width:100%;height:480px;"></div>
+  </div>
+</div>
+
+<!-- ═══ 模块 1 ═══ -->
+<div class="section">
+  <div class="stitle">模块 1 · 公司概览与背景</div>
+  <div class="cmt">
+    <p><strong>公司全称</strong>：携程集团有限公司 / Trip.com Group Limited<br>
+    <strong>上市</strong>：NASDAQ: TCOM（2003-12-09 IPO，原名 Ctrip）+ HKEX: 9961（2021-04-19 港股二次上市）<br>
+    <strong>总部</strong>：上海<br>
+    <strong>财年</strong>：1 月 1 日 - 12 月 31 日<br>
+    <strong>主营</strong>：在线旅游服务（OTA）——住宿预订 + 交通票务（机票/火车票）+ 旅游度假（跟团游/自由行）+ 商旅管理；旗下品牌：携程、去哪儿、Trip.com（国际）、Skyscanner（机票比价）</p>
+
+    <p><strong>核心叙事</strong>：携程是<span class="hl-t">中国最大、亚洲领先的在线旅游平台</span>——撮合酒店、航司与旅客，赚取佣金。这是一门<strong>80.7% 毛利率、30% 调整后 EBITDA 利润率、几乎不需要重资产投入的撮合生意</strong>。FY2025 营收 ¥624 亿（+17%）。<span class="hl-t">两大增长引擎</span>：(1) 中国出境游全面恢复并超过疫情前水平；(2) Trip.com 国际平台在亚太市场高速扩张。<strong>但这份财报有一个必须看穿的陷阱</strong>——GAAP 净利 ¥334 亿里有 ¥199 亿是投资收益（持有的 MakeMyTrip、同程等股权公允价值变动），不是经营利润。真实经营盈利要看调整后 EBITDA ¥189 亿。当前股价 $49.89 接近 52 周低、净现金 ¥751 亿、Forward P/E 10.7x——估值合理偏低。最大的不确定性是<span class="warn-t">中国市场监管机构对携程的反垄断调查</span>。</p>
+
+    <p><strong>简史与里程碑</strong>：</p>
+    <p>
+      <strong>1. 1999 年上海创立</strong>——梁建章等"携程四君子"创立，从酒店/机票预订起家<br>
+      <strong>2. 2003-12-09 NASDAQ IPO</strong>——原名 Ctrip<br>
+      <strong>3. 2015 年与去哪儿合并</strong>——百度换股，结束惨烈价格战，奠定中国 OTA 霸主<br>
+      <strong>4. 2016-2017 收购 Skyscanner</strong>——切入全球机票比价<br>
+      <strong>5. 2019 年更名 Trip.com Group</strong>——国际化战略明确<br>
+      <strong>6. 2021-04-19 港股二次上市</strong>——HKEX: 9961<br>
+      <strong>7. 2023-2025 出境游恢复 + 国际平台爆发</strong>——后疫情时代的强劲反弹<br>
+      <strong>8. 2025 年反垄断调查</strong>——中国监管机构启动对携程的调查<br>
+      <strong>9. 2026-02 FY2025 财报</strong>——营收 +17%、调整后 EBITDA ¥189 亿
+    </p>
+
+    <p><strong>股权结构（2025-12-31 末）</strong>：</p>
+    <p>
+      <strong>百度（Baidu）</strong>——~11% 股权（2015 去哪儿合并换股而来）<br>
+      <strong>梁建章、范敏等创始人/管理层</strong>——合计 ~5%<br>
+      <strong>机构投资者及公众</strong>——~84%<br>
+      <strong>注</strong>：携程<strong>无单一控股股东</strong>，治理由董事会主导。梁建章任董事会主席兼"灵魂人物"——这位人口经济学家长期身兼两职，对公司战略影响深远。CEO 孙洁负责日常运营。
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 模块 2 ═══ -->
+<div class="section">
+  <div class="stitle">模块 2 · 管理层评估</div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>梁建章 · 董事会主席（联合创始人）</h4>
+      <p>1969 年生，复旦少年班 + 斯坦福经济学博士。1999 年联合创立携程，是公司的"灵魂人物"。<span class="hl-t">梁建章的独特之处</span>：他既是企业家，又是知名人口经济学家——长期研究中国人口与消费趋势。携程"出境游 + 国际化"的长期押注，与他对中国中产消费升级的判断一脉相承。<strong>海图判断：梁建章是少有的"创始人 + 战略思想家"双重身份的掌舵人</strong>，27 年深耕一个行业，长期主义底色浓厚。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B+</div>
+    <div class="bd">
+      <h4>孙洁 · CEO（2016 至今 · 长期稳定）</h4>
+      <p>孙洁 2005 年加入携程，2016 年起任 CEO，已稳定执掌 10 年。<strong>任内主导了去哪儿整合、Skyscanner 收购、国际化转型、后疫情恢复</strong>。携程在过去 10 年从"中国 OTA"变成"亚洲领先的全球 OTA"，孙洁的执行力是关键。管理层团队（梁建章 + 孙洁 + 范敏）<span class="hl-t">极其稳定，是中概互联网中罕见的"原班人马"</span>。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B</div>
+    <div class="bd">
+      <h4>资本配置纪律 · 投资收益是双刃剑</h4>
+      <p>
+      <strong>携程持有大量旅游产业链股权</strong>——MakeMyTrip（印度最大 OTA）、同程旅行、华住等。FY25 这些投资贡献 ¥199 亿公允价值收益。<br>
+      <span class="hl-t">优点</span>：用闲置现金布局全球旅游生态，MakeMyTrip 投资已是经典成功案例。<br>
+      <span class="warn-t">缺点</span>：投资收益让 GAAP 利润大幅波动（FY24 仅 ¥11 亿、FY25 ¥199 亿），<strong>财报"看不清"</strong>，给估值带来困扰。<br>
+      回购 + 小额派息（股息率 0.57%）——股东回报力度温和，不如部分中概同行激进。
+      </p>
+    </div>
+  </div>
+
+  <div class="cmt">
+    <p><strong>长期主义测试</strong>：3 年前（FY22，疫情低谷）管理层坚持"国际化 + 出境游恢复"战略不动摇——3 年后<span class="hl-t">完全兑现</span>：FY25 营收 ¥624 亿创历史新高、出境游超疫情前、Trip.com 国际平台高速增长。在行业最黑暗的 2022 年没有收缩战略，是管理层长期主义的有力证明。</p>
+
+    <p><strong>薪酬与利益绑定</strong>：创始人 + 管理层合计持股 ~5%，叠加百度 11% 的战略股东。利益绑定中等。梁建章身为人口经济学家而非"职业经理人"，<span class="hl-t">对公司的情感投入和长期视角超出一般 CEO</span>。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 3 ═══ -->
+<div class="section">
+  <div class="stitle">模块 3 · 商业模式深度解析</div>
+
+  <div class="cmt">
+    <p><strong>海图"一句话测试"</strong>：<span class="hl-t">作为旅客与酒店/航司之间的撮合平台，携程从每一笔住宿和交通预订中抽取佣金，靠 80.7% 毛利率的轻资产模式赚钱——FY25 营收 ¥624 亿、调整后 EBITDA ¥189 亿、利润率 30%。</span></p>
+
+    <p><strong>FY2025 收入模型与分部拆解</strong>：</p>
+    <table class="tbl"><thead><tr><th>分部</th><th>FY25 营收(¥亿)</th><th>占比</th><th>YoY</th><th>商业模式</th></tr></thead>
+    <tbody>
+      <tr><td>住宿预订</td><td>261</td><td>42%</td><td>+21%</td><td>酒店佣金（按间夜抽佣）</td></tr>
+      <tr><td>交通票务</td><td>225</td><td>36%</td><td>+11%</td><td>机票/火车票代理费</td></tr>
+      <tr><td>旅游度假</td><td>47</td><td>7%</td><td>+8%</td><td>跟团游/自由行打包</td></tr>
+      <tr><td>商旅管理</td><td>28</td><td>5%</td><td>+13%</td><td>企业差旅 SaaS + 服务</td></tr>
+      <tr><td>其他（含广告/金融）</td><td>~63</td><td>10%</td><td>—</td><td>广告 + 金融服务等</td></tr>
+      <tr class="hl"><td>合计</td><td>624</td><td>100%</td><td>+17%</td><td>$89 亿</td></tr>
+    </tbody></table>
+
+    <p style="margin-top:14px"><strong>单位经济（Unit Economics）</strong>：</p>
+    <p>
+      <strong>住宿</strong>：携程从酒店收取佣金，通常为间夜价的 8-15%。<span class="hl-t">高毛利、无库存风险</span>——这是 OTA 模式的精髓。<br>
+      <strong>交通票务</strong>：机票代理费率较低（航司压缩佣金），但火车票、退改签增值服务贡献利润。<br>
+      <strong>整体毛利率 80.7%</strong>——成本主要是技术、客服、营销，几乎没有"商品成本"。这是比制造业、零售业都优越的轻资产生意。
+    </p>
+
+    <p><strong>产业链定位与议价能力</strong>：</p>
+    <p>
+      <strong>上游</strong>：酒店（议价能力强——携程掌握流量入口）、航司（议价能力弱——航司有官网直销，压缩 OTA 佣金）<br>
+      <strong>中游（公司）</strong>：流量聚合 + 交易撮合 + 履约服务平台<br>
+      <strong>下游</strong>：中国及亚太旅客（年活跃用户数亿级）<br>
+      <strong>议价能力</strong>：<span class="hl-t">对中小酒店议价能力极强</span>（流量稀缺）；对大型连锁酒店、航司议价能力中等；对消费者议价能力中（用户多平台比价，但携程的"全品类 + 服务"形成黏性）
+    </p>
+
+    <p><strong>关键商业模式特点</strong>：</p>
+    <p>
+      <strong>1. 轻资产撮合 + 高毛利</strong>：80.7% 毛利率，几乎无库存、无重资产，是最优质的商业模式之一。<br>
+      <strong>2. 双增长引擎</strong>：国内出境游恢复 + Trip.com 国际平台扩张——前者是"修复"，后者是"开疆"。<br>
+      <strong>3. 全品类 + 服务护城河</strong>：机酒车一站式 + 7×24 客服 + 会员体系，构成转换成本。<br>
+      <strong>4. 投资收益是"副业噪音"</strong>：携程的投资组合让 GAAP 利润失真，分析时必须剔除看核心经营。<br>
+      <strong>5. 巨额净现金 ¥751 亿</strong>：占市值 34%，财务弹性极强。
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 模块 4 ═══ -->
+<div class="section">
+  <div class="stitle">模块 4 · 经济护城河分析（5 维）</div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>1. 网络效应 · <strong>宽护城河</strong></h4>
+      <p>携程是典型的双边平台——<span class="hl-t">更多酒店/航司入驻 → 对旅客更有吸引力 → 更多旅客 → 对酒店更有吸引力</span>。中国数亿旅客 + 百万级酒店供给形成强网络效应。这是携程最强护城河，也是 2015 年与去哪儿合并后近乎垄断的根基。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B+</div>
+    <div class="bd">
+      <h4>2. 转换成本 · <strong>窄至中护城河</strong></h4>
+      <p>对消费者：会员等级、积分、历史订单、行程管理形成一定黏性，但用户仍会多平台比价（美团、飞猪、抖音）。<span class="hl-t">"全品类一站式 + 优质客服"是携程留客的核心</span>——尤其在出境游、复杂行程场景，携程的服务能力难以替代。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>3. 成本优势（规模效应）· <strong>宽护城河</strong></h4>
+      <p>$89 亿营收规模 + 轻资产模式 = 极强规模效应。<span class="hl-t">技术研发、客服中心、营销是固定成本，规模越大单位成本越低</span>。80.7% 毛利率、30% EBITDA 利润率证明规模优势。新进入者要复制携程的供给网络和服务体系，需要巨额且长期的投入。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B+</div>
+    <div class="bd">
+      <h4>4. 无形资产（品牌）· <strong>窄至中护城河</strong></h4>
+      <p>"携程"在中国是在线旅游的代名词，品牌信任度高（尤其出境游、复杂行程的"安全感"）。Trip.com 国际品牌在亚太逐步建立。<span class="warn-t">但品牌不是不可替代的</span>——美团靠本地生活流量、抖音靠内容种草都在分流。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>5. 有效规模（中国 OTA 寡头）· <strong>宽护城河</strong></h4>
+      <p>中国在线旅游市场 CR3：携程系（携程+去哪儿）+ 美团 + 飞猪（阿里）。<span class="hl-t">携程在机票、中高端酒店、出境游、商旅领域占绝对主导</span>。在线旅游是规模经济显著的行业，市场只能容纳少数几个全国性玩家——这是有效规模护城河。</p>
+    </div>
+  </div>
+
+  <div class="cmt">
+    <p style="margin-top:18px"><strong>护城河趋势 · 整体宽且稳定（监管是唯一变数）</strong>：5 大维度综合 = 3A- + 2B+ ≈ <strong>宽护城河</strong>。携程的护城河来自网络效应 + 规模优势 + 有效规模三重叠加，是中概互联网中护城河较深、较稳的标的。<span class="hl-t">10 年后会更宽还是更窄？海图判断：基本稳定，国际化甚至可能加宽</span>——出境游和 Trip.com 国际平台让携程从"中国 OTA"成长为"亚洲 OTA"。唯一的变数是反垄断监管——若监管限制携程的"二选一""佣金率"等做法，护城河的"变现能力"会被削弱（但护城河本身不会消失）。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 5 ═══ -->
+<div class="section">
+  <div class="stitle">模块 5 · 财务深度分析</div>
+
+  <h3 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">5.1 三张表概览（FY2025 vs FY2024）</h3>
+  <div class="tbl-wrap" style="margin-bottom:14px">
+    <table class="tbl"><thead><tr><th>项目（¥亿）</th><th>FY2024</th><th>FY2025</th><th>YoY</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td>利润表</td><td></td><td></td><td></td></tr>
+      <tr><td>净营收</td><td>533</td><td>624</td><td>+17%</td></tr>
+      <tr><td>毛利</td><td>~432</td><td>~503</td><td>+16%</td></tr>
+      <tr><td>毛利率</td><td>81.0%</td><td>80.7%</td><td>-0.3pp</td></tr>
+      <tr><td>调整后 EBITDA</td><td>~165</td><td>189</td><td>+15%</td></tr>
+      <tr><td>调整后 EBITDA 利润率</td><td>31%</td><td>30%</td><td>-1pp</td></tr>
+      <tr><td>投资收益（非经营）</td><td>11</td><td>199</td><td>+1709%</td></tr>
+      <tr><td>GAAP 归母净利</td><td>172</td><td>334</td><td>+94%（投资收益拉动）</td></tr>
+      <tr><td>Non-GAAP 净利</td><td>~180</td><td>318</td><td>+77%（仍含投资收益）</td></tr>
+      <tr class="hl"><td>资产负债表（2025-12-31 末）</td><td></td><td></td><td></td></tr>
+      <tr><td>现金+短投+受限+持有至到期</td><td>~920</td><td>1,058</td><td>+15%</td></tr>
+      <tr><td>短期借款</td><td>~180</td><td>193</td><td>+7%</td></tr>
+      <tr><td>长期借款</td><td>~140</td><td>114</td><td>-19%</td></tr>
+      <tr><td>真实净现金</td><td>~600</td><td>751</td><td>+25%</td></tr>
+      <tr><td>股东权益</td><td>~2,000</td><td>~2,400</td><td>+20%</td></tr>
+      <tr><td>每股净资产（$/ADS）</td><td>~$32</td><td>$38.08</td><td>+19%</td></tr>
+      <tr class="hl"><td>现金流量表（FY2025）</td><td></td><td></td><td></td></tr>
+      <tr><td>经营活动现金流 (OCF)</td><td>~135</td><td>~144</td><td>+7%</td></tr>
+      <tr><td>资本开支 (Capex)</td><td>~13</td><td>~15</td><td>轻资产 / 占营收 2.4%</td></tr>
+      <tr><td>自由现金流 (FCF, 核心经营)</td><td>~122</td><td>~129</td><td>+6%</td></tr>
+    </tbody></table>
+  </div>
+
+  <h3 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">5.2 5 年关键比率趋势</h3>
+  <div class="tbl-wrap" style="margin-bottom:14px">
+    <table class="tbl"><thead><tr><th>比率</th><th>FY21</th><th>FY22</th><th>FY23</th><th>FY24</th><th>FY25</th></tr></thead>
+    <tbody>
+      <tr><td>营收增速</td><td>+9%</td><td>0%</td><td>+122%</td><td>+20%</td><td>+17%</td></tr>
+      <tr><td>毛利率</td><td>78%</td><td>78%</td><td>81%</td><td>81%</td><td>80.7%</td></tr>
+      <tr><td>调整后 EBITDA 利润率</td><td>~8%</td><td>~10%</td><td>~28%</td><td>~31%</td><td>30%</td></tr>
+      <tr><td>GAAP 净利率</td><td>4%</td><td>3%</td><td>23%</td><td>32%</td><td>53%（投资收益虚高）</td></tr>
+      <tr><td>ROE</td><td>~2%</td><td>~2%</td><td>~14%</td><td>~12%</td><td>21%（投资收益拉动）</td></tr>
+      <tr><td>真实净现金（¥亿）</td><td>~400</td><td>~420</td><td>~520</td><td>~600</td><td>751</td></tr>
+    </tbody></table>
+  </div>
+
+  <h3 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">5.3 杜邦分析（FY2025）</h3>
+  <div class="cmt">
+    <p><strong>ROE = 净利率 × 资产周转 × 权益乘数</strong></p>
+    <p>= 53.5%（GAAP，投资收益虚高）× ($624 / ?) × (?)<br>
+    = yfinance 计算 <strong>ROE 21.1%</strong></p>
+    <p style="margin-top:10px"><strong>解读</strong>：<span class="warn-t">携程的杜邦分析必须打一个大问号</span>——GAAP 净利率 53.5% 是被 ¥199 亿投资收益严重扭曲的，不反映真实经营。<strong>剔除投资收益看核心经营</strong>：核心经营净利约 ¥130 亿 / 营收 ¥624 亿 = 核心净利率约 21%；ROE（核心）约 6-8%。<span class="hl-t">这才是携程真实的"经营性资本回报"</span>——一个 21% 核心净利率的轻资产平台是优质生意，但不是 GAAP 数字显示的"超级印钞机"。投资收益是锦上添花的"副业"，不应计入主业估值。</p>
+  </div>
+
+  <h3 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">5.4 资产负债健康度</h3>
+  <div class="cmt">
+    <p>
+      <strong>现金 + 短期投资 + 受限现金 + 持有至到期产品 = ¥1,058 亿</strong>（$151 亿）<br>
+      <strong>有息负债 = 短期借款 ¥193 亿 + 长期借款 ¥114 亿 = ¥307 亿</strong>（$44 亿）<br>
+      <strong>真实净现金 = ¥1,058 - ¥307 = ¥751 亿</strong>（$107 亿）<br>
+      <strong>占总市值 $31.4B 的比例 = 34%</strong>——即扣除净现金后，市场对核心 OTA 业务的估值仅 $20.7B<br>
+      <strong>此外</strong>：携程还持有 MakeMyTrip、同程等上市公司股权（账面 + 浮盈），是额外的隐藏资产<br>
+      流动比率 ~1.3、利息覆盖倍数充裕<br>
+      <strong>资产负债健康度评级：A</strong>（净现金 ¥751 亿 + 上市股权投资组合，财务极稳健）
+    </p>
+  </div>
+
+  <h3 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">5.5 现金流质量</h3>
+  <div class="cmt">
+    <p>
+      <strong>OCF ≈ ¥144 亿</strong>——稳健，与核心经营利润匹配<br>
+      <strong>Capex ≈ ¥15 亿</strong>——极轻（占营收仅 2.4%），OTA 是轻资产模式的典范<br>
+      <strong>核心经营 FCF ≈ ¥129 亿</strong>——FCF Yield = ¥129 / ¥2,200 = 5.9%<br>
+      <span class="warn-t">注意</span>：yfinance 显示的 FCF ¥21.9 亿偏低，因其"Capex"项混入了证券投资性现金流——<strong>携程作为轻资产 OTA，真实维护性 Capex 极小，核心经营 FCF 应在 ¥120-130 亿区间</strong>。<br>
+      <strong>评价</strong>：现金流质量 A。轻资产 + 高毛利 + 低 Capex = 优质的现金生成机器。
+    </p>
+  </div>
+
+  <h3 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">5.6 所有者盈余计算（核心）</h3>
+  <div class="cmt">
+    <p>所有者盈余 = 核心经营净利 + 折旧摊销 + 股权激励 - 维护性 Capex（剔除投资收益）</p>
+    <p>
+      = ¥130 亿（核心经营净利，剔除 ¥199 亿投资收益后估算）+ ¥30 亿（折旧摊销）+ ¥25 亿（股权激励）- ¥15 亿（维护性 Capex）<br>
+      = <strong>¥170 亿（FY25 核心所有者盈余）</strong> = $24 亿
+    </p>
+    <p style="margin-top:8px"><strong>OE Yield = $24 / $31.4 = 7.6%</strong>—— 良好</p>
+    <p>7.6% 的核心所有者盈余收益率（剔除投资收益的"干净"口径）对一个 +17% 增长、80% 毛利率、宽护城河的 OTA 龙头是有吸引力的。<span class="hl-t">如果再剔除净现金 $107 亿，核心业务的 OE Yield 升至 ~11.6%</span>——这是携程估值真正便宜的部分。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 6 ═══ -->
+<div class="section">
+  <div class="stitle">模块 6 · 电话会分析（最新 + 前 2 季）</div>
+
+  <div class="tag-grid">
+    <div class="tag-card pos">
+      <h5>Q4 2025 财报（2026-02）<span class="tag-bd up">利好</span></h5>
+      <p>"Q4 营收 +21%、住宿全年 +21%、出境游机酒预订恢复并超过疫情前水平。" → <strong>核心经营持续强劲</strong>，出境游修复完成。</p>
+    </div>
+    <div class="tag-card pos">
+      <h5>Q4 2025 财报<span class="tag-bd up">利好</span></h5>
+      <p>"Trip.com 国际平台在亚太市场高速增长，国际营收占比持续上升。" → <strong>国际化第二曲线兑现</strong>，打开长期空间。</p>
+    </div>
+    <div class="tag-card neg">
+      <h5>Q4 2025 财报<span class="tag-bd dn">利空</span></h5>
+      <p>财报披露公司正接受反垄断调查，称"业务运营保持正常"。 → <strong>监管不确定性</strong>，是当前最大的悬念。</p>
+    </div>
+    <div class="tag-card neu">
+      <h5>FY2025 投资收益 ¥199 亿<span class="tag-bd nt">中性</span></h5>
+      <p>持有的 MakeMyTrip、同程等股权公允价值大涨。 → <strong>资产增值是好事，但让 GAAP 利润失真</strong>，需要看穿。</p>
+    </div>
+    <div class="tag-card pos">
+      <h5>Q3 2025 财报<span class="tag-bd up">利好</span></h5>
+      <p>"暑期旺季营收强劲，国内游 + 出境游双旺，AI 行程助手用户增长。" → <strong>旺季验证 + AI 应用落地</strong>。</p>
+    </div>
+    <div class="tag-card neu">
+      <h5>Q1 2026 展望<span class="tag-bd nt">中性</span></h5>
+      <p>市场共识 Q1 2026 营收约 $23.5 亿。 → <strong>低基数下增速可能放缓</strong>，5-25 财报验证。</p>
+    </div>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">6.1 信号汇总</h4>
+  <div class="cmt">
+    <p><strong>利好信号（3）</strong>：(1) 营收 +17%（Q4 +21%）；(2) 出境游超疫情前；(3) Trip.com 国际平台高速增长。</p>
+    <p><strong>利空信号（1）</strong>：反垄断调查启动。</p>
+    <p><strong>中性信号（2）</strong>：(1) ¥199 亿投资收益让 GAAP 失真；(2) Q1 低基数下增速或放缓。</p>
+    <p>综合评估：<strong>偏正面</strong>——核心经营信号清晰强劲（营收双位数增长、出境游修复、国际化兑现）。唯一的实质性利空是反垄断调查，这是评级被压制在"有条件买入"的关键。</p>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">6.2 指引兑现度追踪</h4>
+  <div class="tbl-wrap">
+    <table class="tbl"><thead><tr><th>承诺时间</th><th>承诺内容</th><th>实际兑现</th><th>评分</th></tr></thead>
+    <tbody>
+      <tr><td>FY22 财报</td><td>坚持国际化 + 出境游恢复战略</td><td>FY25 营收创新高 / 出境游超疫情前</td><td>A+</td></tr>
+      <tr><td>FY23 财报</td><td>Trip.com 国际平台双位数增长</td><td>FY25 国际平台高速增长 / 兑现</td><td>A</td></tr>
+      <tr><td>FY24 财报</td><td>FY25 营收维持双位数增长</td><td>FY25 +17% / 兑现</td><td>A</td></tr>
+      <tr><td>FY24 财报</td><td>调整后 EBITDA 利润率维持 30%+</td><td>FY25 30% / 兑现</td><td>A</td></tr>
+      <tr><td>历史</td><td>—</td><td>过去 3 年指引兑现度高，管理层可信</td><td>A</td></tr>
+    </tbody></table>
+  </div>
+</div>
+
+<!-- ═══ 模块 7 ═══ -->
+<div class="section">
+  <div class="stitle">模块 7 · 多模型估值（8 种方法交叉验证）</div>
+
+  <p style="margin-bottom: 16px; color: var(--text2); font-size:14px;">下表估值<strong>不锚定当前市价</strong>，独立基于财报数据 + 行业研究推导。<span class="warn-t">关键：携程 GAAP 净利被 ¥199 亿投资收益严重扭曲，估值必须用"核心经营盈利"口径——调整后 EBITDA ¥189 亿、核心经营净利约 ¥130 亿，而非 GAAP 净利 ¥334 亿。</span>最终目标价用概率加权（基准 55% / 乐观 25% / 悲观 20%）。</p>
+
+  <div class="tbl-wrap" style="margin-bottom:14px">
+    <table class="tbl"><thead><tr><th>方法</th><th>关键假设</th><th>估值（$/ADS）</th><th>vs $49.89 现价</th></tr></thead>
+    <tbody>
+      <tr><td>1. 相对估值 P/E</td><td>核心经营 EPS ~$3.0, P/E 18x（vs Booking 25x / Expedia 15x）</td><td>$54</td><td><span class="badge up">+8%</span></td></tr>
+      <tr><td>2. DCF（基准）</td><td>核心经营 FCF $18 亿, 增长 12% 渐降, WACC 11%, g=3%</td><td>$68</td><td><span class="badge up">+36%</span></td></tr>
+      <tr><td>3. 所有者盈余</td><td>核心 OE $24 亿, 合理 P/OE 16x</td><td>$61</td><td><span class="badge up">+22%</span></td></tr>
+      <tr><td>4. PEG</td><td>核心利润增长 ~13%, P/E 18x → PEG 1.4（合理）</td><td>$62</td><td><span class="badge up">+24%</span></td></tr>
+      <tr><td>5. DDM</td><td>股息率仅 0.57% —— 不适用</td><td>N/A</td><td><span class="badge nt">不适用</span></td></tr>
+      <tr><td>6. NAV（每股净资产）</td><td>每股净资产 $38.08（含投资组合）</td><td>$38</td><td><span class="badge dn">-24%（下限参考）</span></td></tr>
+      <tr><td>7. 反向 DCF</td><td>当前 $49.89 隐含核心增长 ≈ 4%（市场过度悲观）</td><td>$70</td><td><span class="badge up">+40%</span></td></tr>
+      <tr><td>8. SOTP 分部加总</td><td>核心 OTA EV $21B(EBITDA $2.7B×8x) + 净现金 $10.7B + 投资组合 $7B = $39B</td><td>$72</td><td><span class="badge up">+44%</span></td></tr>
+      <tr class="hl"><td>中位数</td><td>—</td><td><strong>$63</strong></td><td><strong>+26%</strong></td></tr>
+      <tr class="hl"><td>加权公允（基准 55% / 乐观 25% / 悲观 20%）</td><td>—</td><td><strong>$67</strong></td><td><strong>+34%</strong></td></tr>
+    </tbody></table>
+  </div>
+
+  <h4 style="margin: 14px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">7.X · P/E 多档透视表（GAAP 被投资收益严重扭曲 · 必读）</h4>
+  <div class="tbl-wrap" style="margin-bottom: 14px;">
+    <table class="tbl"><thead><tr><th>计算口径</th><th>每股盈利 / ADS</th><th>P/E</th><th>是否最可信</th></tr></thead>
+    <tbody>
+      <tr><td>TTM GAAP P/E</td><td>$6.82</td><td>7.3x</td><td>★ <strong>失真</strong>（含 ¥199亿投资收益）</td></tr>
+      <tr><td>TTM Non-GAAP P/E</td><td>$6.52</td><td>7.7x</td><td>★★ 仍含投资收益，不够干净</td></tr>
+      <tr><td>核心经营 P/E（剔除投资收益）</td><td>~$2.95</td><td>~16.9x</td><td>★★★★★ <strong>最可信</strong></td></tr>
+      <tr><td>Forward FY26 共识 P/E</td><td>~$4.67</td><td>10.7x</td><td>★★★ 卖方共识（口径含部分投资收益）</td></tr>
+      <tr><td>核心业务 P/E（剔除投资收益 + 净现金 $10.7B）</td><td>—</td><td>~11x</td><td>★★★★ <strong>揭示真实便宜度</strong></td></tr>
+    </tbody></table>
+  </div>
+  <div class="dcf-note">
+    <p><strong>P/E 多档透视的核心结论</strong>：携程<span class="warn-t">表面 TTM P/E 7.3x，是一个"假便宜"</span>——GAAP 净利 $4.8B 里有 $2.8B 是投资收益。<span class="hl-t">真实核心经营 P/E 约 16.9x</span>。再剔除 $10.7B 净现金后，核心业务 P/E 约 11x。<strong>结论</strong>：携程不是"7 倍 P/E 的白菜价"，而是"核心业务 11-17x P/E 的合理优质成长股"——对一个 80% 毛利率、+17% 增长、宽护城河的 OTA 龙头，11x 核心 P/E 是有吸引力的，但远没有 7x 看起来那么夸张。<strong>看穿这一点，是分析携程不犯错的关键。</strong></p>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">7.1 估值方法适用性说明</h4>
+  <div class="dcf-note">
+    <p><strong>最适用 4 种</strong>：SOTP（核心 OTA + 净现金 + 投资组合三块分开估值，最契合携程结构）、DCF（核心经营现金流）、核心经营 P/E（剔除投资收益）、反向 DCF（揭示市场预期）。</p>
+    <p><strong>次要 2 种</strong>：所有者盈余（核心口径）、PEG（核心利润增速）。</p>
+    <p><strong>不适用 2 种</strong>：DDM（股息率仅 0.57%）、相对估值直接套 GAAP P/E（会被投资收益误导，必须用核心口径）。</p>
+    <p><strong>NAV 仅供下限</strong>：每股净资产 $38.08 是绝对底部参考。</p>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">7.2 三情景敏感性分析</h4>
+  <div class="tbl-wrap">
+    <table class="tbl"><thead><tr><th>情景</th><th>关键假设</th><th>FY26 核心净利</th><th>目标价</th><th>vs 现价</th><th>概率</th></tr></thead>
+    <tbody>
+      <tr><td>悲观</td><td>反垄断重罚 / 佣金率受限 / 出境游放缓</td><td>$16 亿</td><td>$40</td><td><span class="badge dn">-20%</span></td><td>20%</td></tr>
+      <tr><td>基准</td><td>反垄断温和罚款了结 / 营收 +12-15% / 国际化持续</td><td>$22 亿</td><td>$67</td><td><span class="badge up">+34%</span></td><td>55%</td></tr>
+      <tr><td>乐观</td><td>反垄断快速无重大影响了结 / 国际平台爆发 / 估值修复</td><td>$26 亿</td><td>$88</td><td><span class="badge up">+76%</span></td><td>25%</td></tr>
+    </tbody></table>
+  </div>
+</div>
+
+<!-- ═══ 模块 8 ═══ -->
+<div class="section">
+  <div class="stitle">模块 8 · 竞争与行业分析</div>
+
+  <h4 style="margin-bottom:10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">8.1 全球 OTA 行业横向对比</h4>
+  <div class="tbl-wrap" style="margin-bottom:14px">
+    <table class="tbl"><thead><tr><th>公司</th><th>市值</th><th>营收</th><th>营收增速</th><th>毛利率</th><th>核心 P/E</th></tr></thead>
+    <tbody>
+      <tr><td>Booking Holdings（BKNG）</td><td>~$170B</td><td>$25B</td><td>+9%</td><td>~86%</td><td>~25x</td></tr>
+      <tr><td>Airbnb（ABNB）</td><td>~$80B</td><td>$12B</td><td>+11%</td><td>~83%</td><td>~30x</td></tr>
+      <tr><td>Expedia（EXPE）</td><td>~$22B</td><td>$14B</td><td>+6%</td><td>~89%</td><td>~15x</td></tr>
+      <tr class="hl"><td>携程 Trip.com（TCOM）</td><td><strong>$31.4B</strong></td><td><strong>¥624亿($89亿)</strong></td><td><strong>+17%</strong></td><td><strong>80.7%</strong></td><td><strong>~17x（核心口径）</strong></td></tr>
+      <tr><td>同程旅行（0780.HK）</td><td>~$6B</td><td>¥180亿</td><td>+13%</td><td>~65%</td><td>~13x</td></tr>
+      <tr><td>美团（旅游业务）</td><td>—（含在美团内）</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+    </tbody></table>
+  </div>
+  <div class="cmt">
+    <p><strong>携程在全球 OTA 中是"增速最快、估值偏低"的组合</strong>：营收增速 +17% 高于 Booking（+9%）、Airbnb（+11%）、Expedia（+6%）。<span class="hl-t">但核心 P/E ~17x 低于 Booking 25x、Airbnb 30x</span>，仅略高于 Expedia 15x。这个估值差反映了"中概股折价 + 反垄断不确定性"。<strong>从生意质量看，携程不输全球巨头</strong>——80.7% 毛利率、寡头地位、双增长引擎。中概折价是机会也是风险。</p>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">8.2 波特五力分析</h4>
+  <div class="tbl-wrap">
+    <table class="tbl"><thead><tr><th>力量</th><th>评级</th><th>分析</th></tr></thead>
+    <tbody>
+      <tr><td>1. 现有竞争者</td><td>中</td><td>美团、飞猪国内竞争；Booking/Agoda 国际竞争</td></tr>
+      <tr><td>2. 新进入者威胁</td><td>低</td><td>网络效应+规模壁垒高，但抖音以内容切入</td></tr>
+      <tr><td>3. 替代品威胁</td><td>中</td><td>酒店/航司官网直销、抖音种草分流</td></tr>
+      <tr><td>4. 供应商议价（酒店/航司）</td><td>中</td><td>对中小酒店强、对大型连锁和航司弱</td></tr>
+      <tr><td>5. 客户议价</td><td>中</td><td>用户多平台比价，但携程服务黏性强</td></tr>
+    </tbody></table>
+  </div>
+  <div class="cmt" style="margin-top:14px">
+    <p>整体行业吸引力：<span class="hl-t">中等偏好</span>。在线旅游是规模经济显著、寡头格局稳定的行业——这点好于服饰、好于多数零售。<strong>携程在中国机酒、出境游、商旅领域的主导地位是真实的护城河</strong>。最大变量是抖音以"内容种草 + 流量"切入旅游，以及反垄断对"二选一"等做法的限制。</p>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">8.3 行业 TAM 与增长率</h4>
+  <div class="cmt">
+    <p>
+      <strong>中国旅游市场 TAM</strong>：~¥6 万亿（2025），在线渗透率约 40%，仍有提升空间<br>
+      <strong>中国出境游</strong>：2025 年已恢复并超过疫情前，长期受益中产消费升级<br>
+      <strong>亚太在线旅游（Trip.com 国际平台战场）</strong>：CAGR ~10%+，是携程国际化的核心增量<br>
+      <strong>携程市占</strong>：中国机票/中高端酒店/出境游领域绝对主导，整体在线旅游 ~40%+<br>
+      <strong>颠覆风险</strong>：抖音等内容平台以"种草 + 闭环交易"切入旅游，是中期需关注的颠覆者。
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 模块 9 ═══ -->
+<div class="section">
+  <div class="stitle">模块 9 · 技术面与 K 线分析（次要参考）</div>
+
+  <div class="cmt">
+    <p><strong>TCOM（NASDAQ）</strong>：</p>
+    <p>
+      当前价 $49.89（2026-05-19 收盘）。52 周区间 $48.48-$78.99。<br>
+      <strong>近期走势</strong>：从 2025 年高点 $79 一路下跌，过去数月跌至 $50 附近，<span class="warn-t">距 52 周低 $48.48 仅 +2.9%</span>。<br>
+      <strong>下跌主因</strong>：反垄断调查 + 中概股整体情绪疲软 + GAAP 利润"看不清"。<br>
+      <strong>支撑位</strong>：$48（52 周低）/ $45（前期密集区）<br>
+      <strong>阻力位</strong>：$58（前期成交密集区）/ $68 / $79（52 周高）<br>
+      <strong>RSI</strong>：~38（偏弱，接近超卖）<br>
+      <strong>判断</strong>：技术面处于深跌后的低位区。<span class="hl-t">距 52 周低仅 3%，悲观情绪已充分释放</span>。Q1 2026 财报（5-25）+ 反垄断调查的进展是潜在的情绪反转催化剂。
+    </p>
+
+    <p><strong>TCOM（HKEX 9961）</strong>：港股二次上市，纳入港股通，南向资金可买。AH 基本平价（1 ADS = 1 普通股）。</p>
+
+    <p><strong>注意</strong>：技术面作为补充参考。当前核心 P/E ~17x、距 52 周低 3%、净现金占市值 34%——<strong>估值面已合理偏低，但反垄断的"达摩克利斯之剑"未落地前，情绪难以彻底反转</strong>。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 10 ═══ -->
+<div class="section">
+  <div class="stitle">模块 10 · 增长催化剂与前景展望</div>
+
+  <h4 style="margin-bottom:10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">10.1 短期催化剂（未来 6 个月）</h4>
+  <div class="tag-grid">
+    <div class="tag-card pos">
+      <h5>2026-05-25 Q1 2026 财报<span class="tag-bd up">关键</span></h5>
+      <p>6 天后发布。关注：营收增速、出境游数据、国际平台进展、管理层对反垄断的表态。<strong>若经营数据稳健 → 情绪修复</strong>。</p>
+    </div>
+    <div class="tag-card neu">
+      <h5>反垄断调查进展<span class="tag-bd nt">关键不确定</span></h5>
+      <p>调查结果（罚款金额、经营整改要求）是最大变量。<strong>参照过往中国平台反垄断——多以罚款 + 整改了结，少有结构性处罚</strong>，但结果未定前是悬念。</p>
+    </div>
+    <div class="tag-card pos">
+      <h5>2026 暑期出境游旺季<span class="tag-bd up">利好</span></h5>
+      <p>Q2-Q3 是出境游旺季。中国居民出境游持续升温 + 签证便利化，是确定性的顺风。</p>
+    </div>
+    <div class="tag-card pos">
+      <h5>Trip.com 国际平台 + AI<span class="tag-bd up">利好</span></h5>
+      <p>国际平台在亚太高速扩张；AI 行程规划助手提升用户体验与转化。<strong>第二曲线持续兑现</strong>。</p>
+    </div>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">10.2 长期展望（3-5 年）</h4>
+  <div class="cmt">
+    <p><strong>未来 3-5 年三大主题</strong>：</p>
+    <p>
+      <strong>1. 国际化是最大长期空间</strong>：Trip.com 国际平台在亚太（日韩、东南亚）高速增长。若国际营收占比从当前 ~15-20% 提升到 30%+，携程就从"中国 OTA"变成真正的"亚洲 OTA"——这是估值重估的核心。<br>
+      <strong>2. 出境游结构性升级</strong>：中国出境游已超疫情前，长期受益中产消费升级 + 签证便利化。携程在出境游领域市占领先。<br>
+      <strong>3. AI 重塑旅游体验</strong>：AI 行程规划、智能客服、个性化推荐——携程的海量数据 + AI 能提升转化率和客单价。
+    </p>
+
+    <p><strong>FY26-FY30 营收 / 核心净利预测</strong>：</p>
+    <table class="tbl" style="margin-top:10px"><thead><tr><th>年度</th><th>营收（¥亿）</th><th>YoY</th><th>核心经营净利（¥亿）</th><th>YoY</th><th>关键驱动</th></tr></thead>
+    <tbody>
+      <tr><td>FY25 实际</td><td>624</td><td>+17%</td><td>~130</td><td>—</td><td>出境游修复</td></tr>
+      <tr><td>FY26 预测</td><td>710</td><td>+14%</td><td>155</td><td>+19%</td><td>国际化 + 出境游</td></tr>
+      <tr><td>FY27 预测</td><td>800</td><td>+13%</td><td>180</td><td>+16%</td><td>Trip.com 平台放量</td></tr>
+      <tr><td>FY28 预测</td><td>890</td><td>+11%</td><td>205</td><td>+14%</td><td>国际占比提升</td></tr>
+      <tr><td>FY29 预测</td><td>980</td><td>+10%</td><td>230</td><td>+12%</td><td>规模效应</td></tr>
+      <tr><td>FY30 预测</td><td>1,070</td><td>+9%</td><td>255</td><td>+11%</td><td>亚洲 OTA 龙头确立</td></tr>
+    </tbody></table>
+
+    <p style="margin-top:10px"><strong>注</strong>：以上为<span class="hl-t">核心经营口径</span>预测，不含投资收益（投资收益本质不可预测，不应纳入主业估值）。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 11 ═══ -->
+<div class="section">
+  <div class="stitle">模块 11 · 风险矩阵（多维评估）</div>
+
+  <div class="risk-grid">
+    <div class="risk-card r2">
+      <h5>1. 经营风险</h5>
+      <span class="risk-score">2 / 5</span>
+      <p>核心 OTA 经营稳健，营收双位数增长，出境游已修复。经营层面风险低。</p>
+    </div>
+    <div class="risk-card r2">
+      <h5>2. 财务风险</h5>
+      <span class="risk-score">2 / 5</span>
+      <p>净现金 ¥751 亿 + 轻资产 + 高毛利。财务极稳健，破产风险为零。</p>
+    </div>
+    <div class="risk-card r3">
+      <h5>3. 竞争风险</h5>
+      <span class="risk-score">3 / 5</span>
+      <p>美团、飞猪国内竞争；抖音以内容种草切入旅游；国际市场对垒 Booking/Agoda。</p>
+    </div>
+    <div class="risk-card r4">
+      <h5>4. 监管/政策风险</h5>
+      <span class="risk-score">4 / 5</span>
+      <p><strong>反垄断调查进行中</strong>——罚款金额、对"二选一"/佣金率的整改要求是最大不确定性。</p>
+    </div>
+    <div class="risk-card r3">
+      <h5>5. 宏观风险</h5>
+      <span class="risk-score">3 / 5</span>
+      <p>旅游是可选消费，对经济周期敏感。中国消费疲软 / 地缘政治影响出境游。</p>
+    </div>
+    <div class="risk-card r2">
+      <h5>6. 估值风险</h5>
+      <span class="risk-score">2 / 5</span>
+      <p>核心 P/E ~17x、距 52 周低 3%、净现金占市值 34%。估值合理偏低，下行有限。</p>
+    </div>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">11.X 黑天鹅情景（最坏情况）</h4>
+  <div class="cmt">
+    <p>
+      <strong>1. 反垄断重罚 + 经营整改</strong>（概率 20%）：监管对携程处以大额罚款，并限制"二选一"、强制降低佣金率。核心盈利能力受损，FY27 核心净利降至 $16 亿，股价跌至 $38（-24%）。<br>
+      <strong>2. 中概股大规模退市</strong>（概率 5%）：SEC 强制 PCAOB 审计不通过 → TCOM 从 NASDAQ 退市，仅留 HKEX 9961。短期股价跌至 $35（-30%）。<br>
+      <strong>3. 中国消费深度衰退</strong>（概率 15%）：经济下行导致旅游需求萎缩，出境游回落，营收增速跌至个位数。股价跌至 $40（-20%）。<br>
+      <strong>4. 抖音等内容平台颠覆</strong>（概率 12%）：抖音"种草 + 闭环交易"大规模分流酒店预订，携程获客成本飙升、佣金率承压。中长期估值压制。<br>
+      <strong>5. 投资组合大幅减值</strong>（概率 10%）：持有的 MakeMyTrip、同程等股权若大跌，GAAP 利润将出现大额账面亏损（虽不影响核心经营，但冲击市场情绪）。
+    </p>
+    <p><strong>下行支撑</strong>：每股净资产 $38.08 + 每股净现金 $17 + 核心业务（剔除投资收益）仍年赚 $18-20 亿。<span class="hl-t">即便反垄断重罚情景，$38-40 是较硬的估值底</span>——一个净现金占市值 34%、80% 毛利率的 OTA 龙头，市场很难给到 $38 以下。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 12 评分卡 ═══ -->
+<div class="section">
+  <div class="stitle">海图评分卡 · 6 维 A-D + 红旗排查</div>
+
+  <div class="bscore">
+    <div class="circle cw">B+</div>
+    <div class="bd">
+      <h4>1. 生意可预测性 — B+（8/10）</h4>
+      <p>核心 OTA 商业模式清晰、营收增长稳定（剔除疫情扰动后双位数）。<span class="warn-t">扣分项</span>：GAAP 利润被投资收益严重扭曲，财报"看不清"；反垄断结果不可预测。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>2. 经济护城河 — A-（8.5/10）</h4>
+      <p>5 维护城河综合 3A-+2B+ = 宽护城河。网络效应 + 规模优势 + 寡头地位三重叠加，是中概互联网中护城河较深的标的。国际化甚至可能加宽护城河。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>3. 管理层质量 — A-（8.5/10）</h4>
+      <p>梁建章（创始人 + 人口经济学家）+ 孙洁（10 年 CEO）的"原班人马"，团队极稳定、长期主义底色浓。疫情低谷坚持战略，FY25 完全兑现。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>4. 财务质量 — A-（8.5/10）</h4>
+      <p>毛利率 80.7% + 调整后 EBITDA 利润率 30% + 净现金 ¥751 亿 + 轻资产高现金流。<strong>财务质量优秀</strong>，唯一瑕疵是投资收益让 GAAP 报表波动大。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle cw">B</div>
+    <div class="bd">
+      <h4>5. 资本配置纪律 — B（7/10）</h4>
+      <p>投资组合（MakeMyTrip 等）有成功案例，但让财报失真。回购 + 派息力度温和（股息率 0.57%）。<span class="warn-t">海图希望看到更清晰的核心经营聚焦 + 更积极的股东回报</span>。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle cw">B+</div>
+    <div class="bd">
+      <h4>6. 估值与安全边际 — B+（8/10）</h4>
+      <p>核心 P/E ~17x、核心业务 P/E（剔净现金）~11x、Forward P/E 10.7x、净现金占市值 34%。<strong>估值合理偏低</strong>——但不是 GAAP 7x 显示的"白菜价"。安全边际 ~26%。</p>
+    </div>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">12.X 红旗排查（非评分项）</h4>
+  <div class="tbl-wrap">
+    <table class="tbl"><thead><tr><th>红旗项</th><th>状态</th><th>说明</th></tr></thead>
+    <tbody>
+      <tr><td>商誉减值历史</td><td>✓ 无问题</td><td>无重大商誉减值</td></tr>
+      <tr><td>收入确认时点</td><td>✓ 无问题</td><td>佣金按交易完成确认，透明</td></tr>
+      <tr><td>关联交易</td><td>✓ 无问题</td><td>无重大关联交易</td></tr>
+      <tr><td>表外负债</td><td>✓ 无问题</td><td>无重大表外项目</td></tr>
+      <tr><td>投资收益扭曲利润</td><td>⚠️ 注意</td><td>¥199亿投资收益让 GAAP 利润严重失真，须看穿</td></tr>
+      <tr><td>股权激励</td><td>✓ 无问题</td><td>SBC 占营收 ~4%，行业正常</td></tr>
+      <tr><td>反垄断调查</td><td>⚠️ 重大注意</td><td>监管调查进行中，结果未定</td></tr>
+      <tr><td>VIE 结构 / 中概退市</td><td>⚠️ 注意</td><td>中概股共性问题</td></tr>
+    </tbody></table>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">12.Y 综合评级</h4>
+  <div class="dcf-note">
+    <p><strong>6 维评分</strong>：B+ / A- / A- / A- / B / B+ = 综合 <strong>A-/B+</strong></p>
+    <p><strong>红旗排查</strong>：5/8 无问题，3 项注意（投资收益扭曲利润 + 反垄断调查 + VIE/中概退市）。<strong>"反垄断调查"是重大红旗，触发"有疑问"</strong> → 综合评级强制压制在「有条件买入」，不上"买入"。</p>
+    <p><strong>综合评级</strong>：<span class="rating-badge rating-cond-buy">有条件买入</span></p>
+    <p><strong>理由</strong>：(1) 护城河 A- + 管理层 A- + 财务 A- = 这是一门真正的好生意，质量明显优于多数中概标的；(2) 营收 +17%、出境游修复、国际化双引擎，核心经营信号清晰；(3) 净现金占市值 34%，财务零风险。<strong>但</strong>：反垄断调查是悬而未决的重大不确定性 + GAAP 利润被投资收益扭曲需要专业看穿——前者触发红旗降级，后者要求投资者别被"7x P/E"误导。<span class="hl-t">"条件"在于：反垄断调查需以温和方式（罚款 + 整改，无结构性处罚）了结</span>。在此之前，控制仓位、分批建仓。</p>
+  </div>
+</div>
+
+<!-- ═══ 投资决策 ═══ -->
+<div class="section">
+  <div class="stitle">海图研判 · 投资决策</div>
+
+  <div class="cgrid">
+    <div class="ccard">
+      <div class="ctitle" style="font-size: 14px;">12 个月概率加权目标价</div>
+      <p style="font-size: 28px; font-weight: 700; color: var(--gold); margin: 8px 0;">$67</p>
+      <p style="font-size: 13px; color: var(--text2);">+34% 上行 · 中位数估值 $63 / 加权公允 $67</p>
+      <table class="tbl" style="margin-top: 10px; font-size:12px;"><tbody>
+        <tr><td>乐观 (25%)</td><td>$88</td><td><span class="badge up">+76%</span></td></tr>
+        <tr><td>基准 (55%)</td><td>$67</td><td><span class="badge up">+34%</span></td></tr>
+        <tr><td>悲观 (20%)</td><td>$40</td><td><span class="badge dn">-20%</span></td></tr>
+      </tbody></table>
+    </div>
+    <div class="ccard">
+      <div class="ctitle" style="font-size: 14px;">分批建仓 / 止盈策略</div>
+      <p style="font-size: 13px; color: var(--text2); line-height: 1.85;">
+      <strong>当前价 $49.89</strong> · 已位于"首仓"附近<br><br>
+      <strong>建仓档位（独立估值中位数 × 80% / 70% / 60%）</strong>：<br>
+      首仓 <span class="hl-t">$50</span>（×80%·距现价 +0%·已到）<br>
+      二仓 <span class="hl-t">$44</span>（×70%·距现价 -12%）<br>
+      三仓 <span class="hl-t">$38</span>（×60%·距现价 -24%·极端机会）<br><br>
+      <strong>止盈三档</strong>：<br>
+      减 25% @ <span class="hl-t">$70</span><br>
+      减 25% @ <span class="hl-t">$85</span><br>
+      减 25% @ <span class="hl-t">$102</span><br>
+      <strong>最后 25% 作为"亚洲 OTA 龙头"长期持有</strong>
+      </p>
+    </div>
+  </div>
+
+  <div class="cmt" style="margin-top: 16px;">
+    <p><strong>仓位管理</strong>：建议总仓位 <strong>4-8%</strong>（中等仓位，反映反垄断不确定性）。持有周期 <strong>3-5 年（含出境游 + 国际化兑现）</strong>。<span class="hl-t">优先 NASDAQ: TCOM（流动性好）</span>，HKEX: 9961 适合港股账户（已纳入港股通）。建议待反垄断调查明朗后再加仓至上限。</p>
+
+    <p><strong>关键监控指标</strong>：</p>
+    <p>
+      <strong>1. 反垄断调查结果</strong>：罚款金额、对佣金率/"二选一"的整改要求——决定性变量<br>
+      <strong>2. 核心经营营收增速</strong>：能否维持双位数（剔除投资收益看干净增长）<br>
+      <strong>3. 国际营收占比</strong>：Trip.com 平台占比能否从 ~15-20% 持续提升<br>
+      <strong>4. 出境游数据</strong>：机酒预订量、客单价<br>
+      <strong>5. 调整后 EBITDA 利润率</strong>：能否守住 30%<br>
+      <strong>6. 抖音等内容平台的旅游业务进展</strong>
+    </p>
+
+    <p><strong>事件时间表</strong>：</p>
+    <p>
+      <strong>2026-05-25</strong>: Q1 2026 财报（关键节点 · 6 天后）<br>
+      <strong>2026 暑期</strong>: 出境游旺季数据<br>
+      <strong>2026-08 下旬</strong>: Q2 2026 财报<br>
+      <strong>2026-11 中</strong>: Q3 2026 财报（暑期旺季业绩）<br>
+      <strong>反垄断调查</strong>: 结果公布时点不定，是最大催化剂/风险
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 海图页末长评 ═══ -->
+<div class="section">
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记 · 1150 字</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p class="lead">财报里最危险的数字，往往是看起来最漂亮的那个。携程 FY2025 GAAP 净利 ¥334 亿、增长 94%、TTM P/E 只有 7 倍——一眼望去像捡钱。但夜读财报的人会先问一句：这 ¥334 亿里，有多少是真的赚来的？答案是：¥199 亿来自投资收益。看穿这一点，才算真正读懂了携程。</p>
+
+      <p>FY2025 净营收 ¥624 亿（+17%）、住宿 +21%、交通 +11%、调整后 EBITDA ¥189 亿（利润率 30%）、Q4 营收 +21%。这些是干净的经营数字，扎实而强劲。但 GAAP 净利 ¥334 亿里塞进了 ¥199 亿投资收益（持有的 MakeMyTrip、同程等股权公允价值变动，FY24 这一项才 ¥11 亿）。<strong>所以 TTM P/E 7.1x 是估值假象——按核心经营算，真实 P/E 在 17x 左右</strong>。市场对携程的悲观（股价距 52 周高 -37%、接近 52 周低）与公司扎实的核心经营形成反差，但这个反差没有"7 倍 P/E"看起来那么夸张。</p>
+
+      <h4>几个研判要点</h4>
+
+      <p><strong>一、必须看穿 GAAP 利润的"投资收益假象"。</strong>携程是一家"OTA 主业 + 投资组合"的复合体。¥199 亿投资收益是真实的资产增值，但它<span class="hl-t">不可预测、不可持续，不应计入主业估值</span>。真实的携程，要用调整后 EBITDA ¥189 亿、核心经营净利约 ¥130 亿来衡量。看穿这层，你会发现携程不是"7x 白菜价"，而是"核心 17x、剔净现金后 11x 的合理优质成长股"。这个认知差，是分析携程不犯错的第一关。</p>
+
+      <p><strong>二、这是一门真正的好生意。</strong>80.7% 毛利率、30% 调整后 EBITDA 利润率、Capex 占营收仅 2.4%——<span class="hl-t">在线旅游撮合是商业模式的优等生</span>。携程的护城河来自网络效应（双边平台）+ 规模优势 + 中国 OTA 寡头地位三重叠加，是中概互联网里护城河较深、较稳的标的。梁建章 + 孙洁的"原班人马"团队极稳定，疫情低谷坚持国际化战略，FY25 完全兑现。生意质量这一项，携程不输 Booking、Airbnb 这些全球巨头。</p>
+
+      <p><strong>三、双增长引擎仍在加速。</strong>出境游已恢复并超过疫情前——中国中产的消费升级是结构性顺风；Trip.com 国际平台在亚太高速扩张——这是携程从"中国 OTA"变成"亚洲 OTA"的第二曲线。<strong>营收 +17%、Q4 +21% 的增速，在全球 OTA 中是最快的</strong>（Booking +9%、Airbnb +11%、Expedia +6%），但估值（核心 17x）反而低于它们。这个差，是中概折价 + 反垄断不确定性造成的。</p>
+
+      <p><strong>四、反垄断调查是头顶的剑。</strong>财报披露携程正接受反垄断调查。这是评级无法给到"买入"、只能给"有条件买入"的根本原因。<span class="warn-t">参照过往中国平台反垄断——多以罚款 + 经营整改了结，少有结构性处罚</span>，但在结果落地前，这把剑就悬着。如果监管限制"二选一"、强制压低佣金率，携程核心盈利能力会受损。这是必须用仓位来对冲的风险。</p>
+
+      <p><strong>五、12 个月目标价 $67，上行 +34%。</strong>悲观 $40（-20%，反垄断重罚）、基准 $67（+34%，反垄断温和了结 + 营收双位数 + 国际化持续）、乐观 $88（+76%，反垄断无重大影响 + 国际平台爆发）。<strong>当前价 $49.89 已到首仓 $50 附近</strong>。海图的判断：这是一笔"好生意 + 合理估值 + 一个明确悬念"的投资——质量没问题，价格不贵，就看反垄断这只靴子怎么落地。</p>
+
+      <h4>海图研判</h4>
+
+      <p><strong>评级：有条件买入</strong>（中国 OTA 龙头 + 出境游/国际化双引擎 + 净现金占市值 34% 的组合，但反垄断调查待解 + GAAP 利润需看穿）。12 个月概率加权目标价 <strong>$67</strong>（+34%）。</p>
+
+      <p>操作建议（独立估值中位数 $63，加权公允 $67）：当前价 $49.89 已到"首仓"。建议首仓 $50（×80%·已到）、二仓 $44（×70%·距现价 -12%）、三仓 $38（×60%·极端机会）。止盈三档 $70 / $85 / $102，每档减仓 25%，最后 25% 作为"亚洲 OTA 龙头"长期持有。建议总仓位 <strong>4-8%</strong>（中等仓位 · 反垄断不确定性）。持有周期 3-5 年。<span class="hl-t">建议待反垄断调查明朗后再加仓至上限</span>。</p>
+
+      <h4>风险提示</h4>
+
+      <p>反垄断重罚 + 佣金率受限 / 中概股大规模退市 / 中国消费深度衰退 / 抖音等内容平台颠覆旅游预订 / 投资组合大幅减值——任一项都可能让股价回调 20-30%。但净现金 ¥751 亿 + 80.7% 毛利率 + 宽护城河让破产概率为零，每股净资产 $38.08 + 净现金 $17/股提供下行支撑，$38-40 是较硬的估值底。</p>
+
+      <p>关键叙事：<strong>"中国 OTA 龙头 + 80.7% 毛利率 + 营收 +17% 全球最快 + 净现金占市值 34% + 核心 P/E 17x 合理偏低"的组合，对垒"反垄断调查 + GAAP 利润被投资收益扭曲"的隐忧</strong>。在多数优质平台估值不菲的当下，携程是一笔"好生意被中概折价 + 反垄断阴云双重压制"的标的——不是给只看 7x P/E 表象的人，而是给愿意看穿 GAAP 利润、理解核心经营价值、并能承受反垄断不确定性的耐心投资者。下次催化剂：2026-05-25 Q1 2026 财报 + 反垄断调查进展。</p>
+
+      <p class="haitu-sign">—— 海图，灯下落笔，明日再观风浪。</p>
+
+      <p class="haitu-disc">⚠️ 免责声明：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，不构成任何投资建议。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div>《海图夜读》 · 携程集团 Trip.com TCOM Q4 2025 + 全年 海图研判</div>
+  <div style="margin-top:6px;">数据来源：携程集团 Q4 2025 + 全年财报新闻稿（SEC 6-K · 2026-02）+ FY2025 年报 20-F + 投资者关系页 + yfinance 实时市场数据</div>
+  <div style="margin-top:6px;">价值投资 · 长期主义</div>
+</footer>
+
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  const cur = html.getAttribute('data-theme');
+  html.setAttribute('data-theme', cur === 'dark' ? 'light' : 'dark');
+  localStorage.setItem('theme', html.getAttribute('data-theme'));
+  renderCharts();
+}
+(function() {
+  const t = localStorage.getItem('theme');
+  if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+})();
+
+function gc(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+
+let charts = {};
+function renderCharts() {
+  Object.values(charts).forEach(c => c && c.destroy && c.destroy());
+  charts = {};
+  const txt2 = gc('--text2'), txt3 = gc('--text3'), grid = gc('--chart-grid');
+  const accent = gc('--accent'), accent2 = gc('--accent2'), accent3 = gc('--accent3');
+  const green = gc('--green'), gold = gc('--gold'), rose = gc('--rose'), red = gc('--red');
+
+  Chart.defaults.color = txt2;
+  Chart.defaults.font.family = 'Segoe UI, sans-serif';
+  Chart.defaults.font.size = 11;
+
+  charts.rev = new Chart(document.getElementById('revenueChart'), {
+    type: 'bar',
+    data: { labels: ['Q4 24', 'Q1 25', 'Q2 25', 'Q3 25', 'Q4 25'],
+      datasets: [{ label: 'Revenue', data: [127, 138, 149, 178, 154], backgroundColor: [accent3, gold, accent2, accent, green], borderRadius: 4 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+      scales: { y: { grid: { color: grid }, ticks: { color: txt3 } }, x: { grid: { display: false }, ticks: { color: txt3 } } } }
+  });
+
+  charts.profit = new Chart(document.getElementById('profitChart'), {
+    type: 'line',
+    data: { labels: ['Q4 24', 'Q1 25', 'Q2 25', 'Q3 25', 'Q4 25'],
+      datasets: [{ label: 'Adjusted EBITDA', data: [32, 42, 47, 66, 34], borderColor: green, backgroundColor: 'rgba(122,154,122,0.1)', tension: 0.3, fill: true, pointBackgroundColor: green, pointRadius: 5 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+      scales: { y: { grid: { color: grid }, ticks: { color: txt3 } }, x: { grid: { display: false }, ticks: { color: txt3 } } } }
+  });
+
+  charts.seg = new Chart(document.getElementById('segmentChart'), {
+    type: 'doughnut',
+    data: { labels: ['住宿预订 261', '交通票务 225', '其他 63', '旅游度假 47', '商旅管理 28'],
+      datasets: [{ data: [261, 225, 63, 47, 28], backgroundColor: [accent3, accent, gold, accent2, rose], borderColor: gc('--card'), borderWidth: 2 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { color: txt2, font: { size: 11 } } } } }
+  });
+
+  charts.capex = new Chart(document.getElementById('capexChart'), {
+    type: 'bar',
+    data: { labels: ['FY21', 'FY22', 'FY23', 'FY24', 'FY25'],
+      datasets: [
+        { label: '净营收（¥亿）', data: [200, 200, 445, 533, 624], backgroundColor: [rose, rose, accent2, accent, green], borderRadius: 4 }
+      ] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top', labels: { color: txt2, font: { size: 11 } } } },
+      scales: { y: { grid: { color: grid }, ticks: { color: txt3 } }, x: { grid: { display: false }, ticks: { color: txt3 } } } }
+  });
+
+  buildSankey();
+}
+
+function buildSankey() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const txt = isDark ? '#d4ccc4' : '#4a4340';
+  const cardBg = isDark ? '#2e2a25' : '#ffffff';
+
+  const sankeyData = [{
+    type: 'sankey', orientation: 'h', arrangement: 'snap', valueformat: ',.0f', valuesuffix: ' 亿',
+    node: {
+      pad: 22, thickness: 22, line: { color: 'transparent', width: 0 },
+      label: ['净营收 624', '营业成本 121', '毛利 503', '销售费用 130', '研发费用 145', '管理费用 65', '核心营业利润 163', '所得税+少数 -33', '核心经营净利 130', '折旧+股权激励 +55', '维护性 Capex 15', '核心经营 FCF 129'],
+      color: ['#7b8fa0', '#b87070', '#8a9a8e', '#c09090', '#b9a06a', '#a89f98', '#b08d7a', '#b87070', '#7a9a7a', '#7b8fa0', '#b87070', '#7a9a7a']
+    },
+    link: {
+      source: [0, 0, 2, 2, 2, 2, 6, 6, 8, 9, 11],
+      target: [1, 2, 3, 4, 5, 6, 7, 8, 11, 11, 10],
+      value:  [121, 503, 130, 145, 65, 163, 33, 130, 130, 55, 15],
+      color: ['rgba(184,112,112,0.30)', 'rgba(138,154,142,0.45)', 'rgba(192,144,144,0.30)', 'rgba(185,160,106,0.30)', 'rgba(168,159,152,0.30)', 'rgba(176,141,122,0.45)', 'rgba(184,112,112,0.30)', 'rgba(122,154,122,0.45)', 'rgba(122,154,122,0.40)', 'rgba(123,143,160,0.40)', 'rgba(184,112,112,0.30)']
+    }
+  }];
+
+  const layout = { font: { family: 'Segoe UI, sans-serif', size: 11, color: txt }, paper_bgcolor: cardBg, plot_bgcolor: cardBg, margin: { l: 10, r: 10, t: 10, b: 10 } };
+  Plotly.react('sankey', sankeyData, layout, { displayModeBar: false, responsive: true });
+}
+
+document.addEventListener('DOMContentLoaded', renderCharts);
+</script>
+
+</body>
+</html>
