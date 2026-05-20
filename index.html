@@ -236,6 +236,48 @@ body {
   overflow: hidden;
   box-shadow: var(--shadow);
 }
+.cal-filter-bar {
+  display: flex;
+  gap: 8px;
+  padding: 12px 22px;
+  background: var(--bg-alt);
+  border-bottom: 1px solid var(--border);
+  align-items: center;
+  flex-wrap: wrap;
+}
+.cal-filter-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 5px 14px;
+  border-radius: 14px;
+  font-size: 0.78rem;
+  font-family: 'Noto Sans SC', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.5px;
+}
+.cal-filter-btn:hover {
+  border-color: var(--accent-gold);
+  color: var(--text);
+}
+.cal-filter-btn.active {
+  background: var(--accent-gold);
+  border-color: var(--accent-gold);
+  color: white;
+}
+.cal-filter-count {
+  margin-left: auto;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  font-family: 'Noto Sans SC', sans-serif;
+}
+.cal-empty {
+  padding: 32px 22px;
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+}
 .cal-header {
   display: grid;
   grid-template-columns: 110px 100px 130px 1fr 130px;
@@ -421,6 +463,12 @@ footer p { margin-bottom: 6px; }
   <section class="section first">
     <div class="section-title">🗓 海图日历 · 报告标的关键事件</div>
     <div class="calendar-panel">
+      <div class="cal-filter-bar">
+        <button class="cal-filter-btn active" data-filter="all">全部</button>
+        <button class="cal-filter-btn" data-filter="earnings">📊 财报</button>
+        <button class="cal-filter-btn" data-filter="dividend">💰 分红</button>
+        <span class="cal-filter-count" id="calFilterCount"></span>
+      </div>
       <div class="cal-header">
         <div>日期</div>
         <div>标的</div>
@@ -773,6 +821,8 @@ const calendar = [
 ];
 /* HAITU:CALENDAR:END */
 
+let currentCalFilter = 'all';
+
 function renderCalendar() {
   const container = document.getElementById('calendarRows');
   if (!calendar.length) {
@@ -786,12 +836,28 @@ function renderCalendar() {
 
   calendar.sort((a, b) => new Date(a.date) - new Date(b.date));
 
-  // Filter: 显示过去 30 天 + 未来全部
-  const filtered = calendar.filter(e => {
+  // 窗口筛选：过去 30 天 + 未来全部
+  let filtered = calendar.filter(e => {
     const d = new Date(e.date);
     const diffDays = (d - today) / (1000 * 60 * 60 * 24);
-    return diffDays >= -30; // 显示过去 30 天 + 未来
+    return diffDays >= -30;
   });
+
+  // 类型筛选：财报 / 分红 / 全部
+  if (currentCalFilter === 'earnings') {
+    filtered = filtered.filter(e => e.type === 'earnings');
+  } else if (currentCalFilter === 'dividend') {
+    filtered = filtered.filter(e => e.type === 'ex-div' || e.type === 'payment');
+  }
+
+  // 更新事件计数
+  const countEl = document.getElementById('calFilterCount');
+  if (countEl) countEl.textContent = `${filtered.length} 个事件`;
+
+  if (!filtered.length) {
+    container.innerHTML = '<div class="cal-empty">没有符合筛选条件的事件</div>';
+    return;
+  }
 
   const dayNames = ['周日','周一','周二','周三','周四','周五','周六'];
 
@@ -818,6 +884,16 @@ function renderCalendar() {
     `;
   }).join('');
 }
+// 事件类型筛选 — 按钮点击
+document.querySelectorAll('.cal-filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.cal-filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentCalFilter = btn.dataset.filter;
+    renderCalendar();
+  });
+});
+
 renderCalendar();
 
 /* ── THEME TOGGLE ── */
