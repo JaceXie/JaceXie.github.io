@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-05-20，基于 Alphabet Q1 2026 财报（2026-04-29 发布）-->
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alphabet GOOGL Q1 2026 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+<meta name="description" content="全球搜索 + YouTube + 云 + AI 平台龙头——Q1 2026 营收 $109.9B(+22%)、净利 $62.58B(+81%)、Cloud 营收 $20.0B(+63%) · 营业利润率 36.1% 创新高，但 FY2026 资本开支飙升至 $185B（Q1 单季 $35.7B），FCF 暴跌至 $10.1B，股票回购首次暂停。市值 $4.81T 紧邻历史高位，反垄断救济判决悬而未决。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Alphabet GOOGL Q1 2026 海图研判 · 海图夜读">
+<meta property="og:description" content="全球搜索 + YouTube + 云 + AI 平台龙头——Q1 2026 营收 $109.9B(+22%)、净利 $62.58B(+81%)、Cloud 营收 $20.0B(+63%) · 营业利润率 36.1% 创新高，但 FY2026 资本开支飙升至 $185B（Q1 单季 $35.7B），FCF 暴跌至 $10.1B，股票回购首次暂停。市值 $4.81T 紧邻历史高位，反垄断救济判决悬而未决。">
+<meta property="og:image" content="https://jacexie.github.io/haitu/assets/og/googl-q1-2026.png">
+<meta property="og:url" content="https://jacexie.github.io/haitu/reports/googl-q1-2026.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Alphabet GOOGL Q1 2026 海图研判 · 海图夜读">
+<meta name="twitter:description" content="全球搜索 + YouTube + 云 + AI 平台龙头——Q1 2026 营收 $109.9B(+22%)、净利 $62.58B(+81%)、Cloud 营收 $20.0B(+63%) · 营业利润率 36.1% 创新高，但 FY2026 资本开支飙升至 $185B（Q1 单季 $35.7B），FCF 暴跌至 $10.1B，股票回购首次暂停。市值 $4.81T 紧邻历史高位，反垄断救济判决悬而未决。">
+<meta name="twitter:image" content="https://jacexie.github.io/haitu/assets/og/googl-q1-2026.png">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root {
+  --bg: #f5f0eb; --bg2: #ece6df; --card: #ffffff; --card2: #f8f5f1; --border: #d9d0c7;
+  --text: #4a4340; --text2: #7a706a; --text3: #a89f98;
+  --accent: #8a9a8e; --accent2: #7b8fa0; --accent3: #b08d7a;
+  --rose: #c09090; --gold: #b9a06a; --red: #b87070; --green: #7a9a7a;
+  --shadow: rgba(0,0,0,0.06); --chart-grid: #e5ddd5;
+}
+[data-theme="dark"] {
+  --bg: #1e1c1a; --bg2: #28251f; --card: #2e2a25; --card2: #363230; --border: #4a4540;
+  --text: #d4ccc4; --text2: #a09890; --text3: #706860;
+  --accent: #8a9a8e; --accent2: #8fabbf; --accent3: #c9a48e;
+  --rose: #c09090; --gold: #c9b07a; --red: #c08080; --green: #8aaa8a;
+  --shadow: rgba(0,0,0,0.3); --chart-grid: #3e3a35;
+}
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Georgia','Noto Serif SC','PingFang SC',serif; line-height: 1.75; font-size: 14.5px; transition: background .35s, color .35s; }
+a { color: var(--accent2); text-decoration: none; }
+.theme-bar { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); }
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; text-decoration: none; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+.toggle-switch { position: relative; width: 44px; height: 22px; background: var(--border); border-radius: 11px; cursor: pointer; transition: background .3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: var(--card); border-radius: 50%; transition: transform .3s; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+.hero { padding: 48px 24px 36px; text-align: center; border-bottom: 1px solid var(--border); }
+.hero-tag { display: inline-block; font-family: 'Segoe UI',sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 3px 14px; border-radius: 20px; margin-bottom: 18px; }
+.hero h1 { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.pill { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: 'Segoe UI',sans-serif; font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow); }
+.pill strong { color: var(--text); }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle { font-size: 18px; font-weight: 700; color: var(--accent3); margin-bottom: 20px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+.stitle::before { content: ''; display: block; width: 4px; height: 20px; background: var(--accent3); border-radius: 2px; }
+.haitu-quip { display: flex; align-items: center; gap: 18px; background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--gold); border-radius: 12px; padding: 18px 24px; margin: 24px 0; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-quote { flex: 1; }
+.haitu-portrait { font-size: 15px; line-height: 1.65; color: var(--text); margin-bottom: 6px; font-weight: 600; }
+.haitu-rating-line { font-size: 13px; color: var(--text2); font-family: 'Segoe UI',sans-serif; }
+.rating-badge { display: inline-block; padding: 2px 12px; border-radius: 12px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; margin-left: 4px; }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+.rating-cond-buy { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-hold { background: rgba(123,143,160,.18); color: var(--accent2); }
+.rating-sell { background: rgba(184,112,112,.18); color: var(--red); }
+.haitu-essay { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 28px 32px; margin: 24px 0 20px; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-essay-header { display: flex; align-items: center; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.haitu-avatar-sm { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); background: var(--red); box-shadow: 0 2px 8px rgba(184,112,112,0.2); }
+.haitu-name-lg { font-family: 'Georgia','Noto Serif SC',serif; font-size: 28px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 4px; }
+.haitu-essay-tag { font-family: 'Segoe UI',sans-serif; font-size: 12px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; }
+.haitu-essay-body { font-family: 'Georgia','Noto Serif SC',serif; font-size: 15px; line-height: 2.0; color: var(--text); }
+.haitu-essay-body p { margin-bottom: 14px; }
+.haitu-essay-body p.lead { font-size: 16px; font-style: italic; color: var(--text2); margin-bottom: 18px; }
+.haitu-essay-body strong { color: var(--text); font-weight: 700; }
+.haitu-essay-body h4 { font-size: 14px; color: var(--accent3); margin: 18px 0 10px; font-family: 'Segoe UI',sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+.haitu-sign { text-align: right; margin-top: 18px; font-family: 'Georgia',serif; font-size: 14px; color: var(--text2); font-style: italic; }
+.haitu-disc { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); font-style: italic; line-height: 1.7; }
+.stock-snap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill,minmax(160px,1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px; }
+.snap-item { text-align: center; }
+.snap-label { font-family: 'Segoe UI',sans-serif; font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.snap-val { font-family: 'Segoe UI',sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+.snap-val.up { color: var(--green); }
+.snap-val.dn { color: var(--red); }
+.snap-sub { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text3); margin-top: 2px; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(195px,1fr)); gap: 14px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow); }
+.kpi-l { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.kpi-v.up { color: var(--green); }
+.kpi-v.dn { color: var(--red); }
+.badge { display: inline-block; font-family: 'Segoe UI',sans-serif; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+.up { background: rgba(122,154,122,.15); color: var(--green); }
+.dn { background: rgba(184,112,112,.15); color: var(--red); }
+.nt { background: rgba(123,143,160,.15); color: var(--accent2); }
+.tbl-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow); }
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI',sans-serif; font-size: 13px; }
+.tbl th { background: var(--card2); color: var(--text3); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); background: var(--card2); }
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); }
+.ctitle { font-size: 13px; color: var(--text2); margin-bottom: 12px; font-weight: 600; }
+.cwrap { position: relative; height: 240px; }
+.cmt { font-size: 14px; color: var(--text2); line-height: 1.85; }
+.cmt p { margin-bottom: 12px; }
+.cmt strong { color: var(--text); }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+.bscore { display: flex; gap: 16px; padding: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 12px; box-shadow: 0 1px 4px var(--shadow); }
+.bscore .circle { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; color: white; flex-shrink: 0; }
+.cg { background: var(--green); }
+.cw { background: var(--gold); }
+.co { background: var(--rose); }
+.cr { background: var(--red); }
+.cb { background: var(--accent2); }
+.bd h4 { font-size: 14px; color: var(--text); margin-bottom: 6px; font-family: 'Segoe UI',sans-serif; letter-spacing: 0.5px; }
+.bd p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+.pgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.dcf-note { background: var(--card2); border-left: 3px solid var(--accent2); padding: 14px 18px; border-radius: 6px; font-size: 13.5px; color: var(--text2); line-height: 1.85; }
+.dcf-note p { margin-bottom: 8px; }
+.dcf-note strong { color: var(--text); }
+.tag-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap: 12px; margin-top: 14px; }
+.tag-card { background: var(--card); border: 1px solid var(--border); border-left: 3px solid var(--accent2); padding: 12px 16px; border-radius: 6px; }
+.tag-card.pos { border-left-color: var(--green); }
+.tag-card.neg { border-left-color: var(--red); }
+.tag-card.neu { border-left-color: var(--accent2); }
+.tag-card h5 { font-size: 13px; color: var(--text); margin-bottom: 6px; font-family: 'Segoe UI',sans-serif; }
+.tag-card p { font-size: 12px; color: var(--text2); line-height: 1.7; }
+.tag-card .tag-bd { font-family: 'Segoe UI',sans-serif; font-size: 10px; padding: 1px 6px; border-radius: 4px; margin-left: 4px; }
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap: 12px; }
+.risk-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 14px 18px; position: relative; box-shadow: 0 1px 3px var(--shadow); }
+.risk-card::before { content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent); }
+.risk-card.r1::before { background: var(--green); }
+.risk-card.r2::before { background: rgba(122,154,122,.6); }
+.risk-card.r3::before { background: var(--gold); }
+.risk-card.r4::before { background: var(--rose); }
+.risk-card.r5::before { background: var(--red); }
+.risk-card h5 { font-size: 14px; margin-bottom: 6px; color: var(--text); }
+.risk-score { font-family: 'Segoe UI',sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.r1 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r2 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r3 .risk-score { background: rgba(185,160,106,.18); color: var(--gold); }
+.r4 .risk-score { background: rgba(192,144,144,.18); color: var(--rose); }
+.r5 .risk-score { background: rgba(184,112,112,.18); color: var(--red); }
+.risk-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+footer { background: var(--card2); border-top: 1px solid var(--border); padding: 24px; text-align: center; color: var(--text3); font-size: 12px; margin-top: 40px; line-height: 1.8; }
+@media (max-width: 768px) { .cgrid,.pgrid { grid-template-columns: 1fr; } .hero h1 { font-size: 22px; } .kpi-grid { grid-template-columns: 1fr 1fr; } .stock-snap { grid-template-columns: 1fr 1fr; } .haitu-essay-header { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/GOOGL" target="_blank" rel="noopener" title="在雪球查看 Alphabet 实时行情">雪球 GOOGL</a>
+  </div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">Q1 2026 财报发布 · 2026-04-29 &nbsp;|&nbsp; 海图研判 · 2026-05-20</div>
+  <h1>Alphabet GOOGL · Q1 2026 深度分析</h1>
+  <div class="hero-sub">NASDAQ: GOOGL / GOOG &nbsp;|&nbsp; 全球搜索 + YouTube + Cloud + AI 平台龙头 · 市值 $4.81T &nbsp;|&nbsp; 价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill">股价 <strong>$398.80</strong></div>
+    <div class="pill">市值 <strong>$4.81T</strong></div>
+    <div class="pill">Q1 营收 <strong>$109.9B(+22%)</strong></div>
+    <div class="pill">净利 <strong>$62.58B(+81%)</strong></div>
+    <div class="pill">营业利润率 <strong>36.1%</strong></div>
+    <div class="pill">海图研判 <strong>持有观望</strong></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 海图页首短评 ═══ -->
+<div class="haitu-quip">
+  <div class="haitu-quote">
+    <div class="haitu-portrait">全球数字广告 + 云计算 + AI 平台龙头——靠 Google Search（占营收 55%）+ YouTube 广告 + Google Cloud + 订阅与设备四大支柱赚钱，<strong>Q1 2026 营收 $109.9B（+22%）、净利 $62.58B（+81%）、Cloud 营收 $20.0B（+63%）、Cloud 营业利润率从 17.8% 跃升至 32.9%</strong>——经营层面是无可挑剔的强势。但<strong>FY2026 资本开支飙至 $185B（Q1 单季已 $35.7B），FCF 暴跌至 $10.1B，Q1 股票回购首次暂停</strong>。市值 $4.81T 紧贴历史高位（距高点 -1%），P/E 30x，反垄断救济判决悬而未决——好公司在好价格，但不再是好的进场点。</div>
+    <div class="haitu-rating-line">评级：<span class="rating-badge rating-hold">持有观望</span> · 12 个月概率加权目标价 $410（+3%）· 顶级护城河 + 经营加速 vs 历史最高估值 + 资本开支吞 FCF + 反垄断悬剑——已持仓继续持有，新仓等回调 $360 或催化事件落地</div>
+  </div>
+</div>
+
+<!-- ═══ 市场数据快照 ═══ -->
+<div class="section">
+  <div class="stitle">市场数据快照（2026-05-19）· 货币：USD</div>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">股价 (GOOGL)</div><div class="snap-val">$398.80</div><div class="snap-sub">2026-05-19 收盘</div></div>
+    <div class="snap-item"><div class="snap-label">市值</div><div class="snap-val">$4.81T</div><div class="snap-sub">全球第 3 大上市公司</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间</div><div class="snap-val">$162.00-$408.61</div><div class="snap-sub">距高 -2.4% / 距低 +146%</div></div>
+    <div class="snap-item"><div class="snap-label">历史最高</div><div class="snap-val">$402.62</div><div class="snap-sub">2026-05-13 收盘</div></div>
+    <div class="snap-item"><div class="snap-label">TTM P/E</div><div class="snap-val">~30.4x</div><div class="snap-sub">基于 TTM EPS ~$13.11</div></div>
+    <div class="snap-item"><div class="snap-label">Forward P/E</div><div class="snap-val">~30x</div><div class="snap-sub">基于 FY26E EPS ~$13.30</div></div>
+    <div class="snap-item"><div class="snap-label">P/B</div><div class="snap-val">~9x</div><div class="snap-sub">高质量软件资产</div></div>
+    <div class="snap-item"><div class="snap-label">股息率</div><div class="snap-val">0.22%</div><div class="snap-sub">$0.88/年 · 象征性</div></div>
+    <div class="snap-item"><div class="snap-label">营业利润率</div><div class="snap-val up">36.1%</div><div class="snap-sub">Q1 2026 创新高</div></div>
+    <div class="snap-item"><div class="snap-label">现金 + 短投</div><div class="snap-val up">$126.8B</div><div class="snap-sub">2026-03-31 末</div></div>
+    <div class="snap-item"><div class="snap-label">长期债务</div><div class="snap-val">$77.5B</div><div class="snap-sub">融资增加</div></div>
+    <div class="snap-item"><div class="snap-label">净现金</div><div class="snap-val up">~$49.3B</div><div class="snap-sub">仍是净现金，但收窄</div></div>
+    <div class="snap-item"><div class="snap-label">Q1 资本开支</div><div class="snap-val dn">$35.7B</div><div class="snap-sub">FY26 指引 $180-190B</div></div>
+    <div class="snap-item"><div class="snap-label">Q1 FCF</div><div class="snap-val dn">$10.1B</div><div class="snap-sub">YoY 大幅下降</div></div>
+    <div class="snap-item"><div class="snap-label">回购状态</div><div class="snap-val dn">Q1 暂停</div><div class="snap-sub">首次暂停</div></div>
+    <div class="snap-item"><div class="snap-label">下次财报</div><div class="snap-val nt">2026-07-24</div><div class="snap-sub">Q2 2026</div></div>
+  </div>
+  <div class="dcf-note" style="margin-top:18px">
+    <strong>关键数据洞察 · 经营加速但资本开支吞掉 FCF：</strong>
+    <p style="margin-top:8px">(1) <span class="hl-t">Q1 2026 营收 +22%、净利 +81%、营业利润率 36.1% 创新高、Cloud +63% 且利润率从 17.8% 跃升至 32.9%</span>——经营层面是 Alphabet 多年来最强势的一个季度；(2) <span class="warn-t">资本开支飙升：Q1 $35.7B（同比近翻倍）、FY26 指引 $180-190B</span>——这是 Alphabet 历史性的 AI 基础设施豪赌，体量超过 Microsoft、Meta、Amazon 三家任一家；(3) <strong>FCF 暴跌至 $10.1B</strong>（vs OCF $45.8B 减 Capex $35.7B）——回购被迫首次暂停，资本配置优先级从"还股东"转向"建 AI 基建"；(4) Cloud 积压订单 <strong>$460B+</strong>（环比近翻倍）+ Gemini API 16B tokens/分钟 + Waymo 50 万单/周——AI 飞轮已转动；(5) <strong>市值 $4.81T 紧贴历史高位 + P/E ~30x + 反垄断救济判决悬而未决</strong>——这是"质量满分、价格已贵、催化模糊"的典型组合。<strong>海图提醒：Alphabet 仍是 FAANG 最深护城河的公司，但当下不是新仓的好进场点。</strong></p>
+  </div>
+</div>
+
+<!-- ═══ Q1 2026 KPI ═══ -->
+<div class="section">
+  <div class="stitle">Q1 2026 季度核心业绩（2026 年 1-3 月 · 2026-04-29 发布）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">总营收</div><div class="kpi-v up">$109.9B</div><span class="badge up">+22% YoY</span><div class="kpi-l" style="margin-top:6px">+19% 恒定汇率</div></div>
+    <div class="kpi"><div class="kpi-l">Google Services</div><div class="kpi-v up">$89.6B</div><span class="badge up">+16% YoY</span><div class="kpi-l" style="margin-top:6px">占营收 81.5%</div></div>
+    <div class="kpi"><div class="kpi-l">Google Search</div><div class="kpi-v up">$60.4B</div><span class="badge up">+19% YoY</span><div class="kpi-l" style="margin-top:6px">AI Overview 提振</div></div>
+    <div class="kpi"><div class="kpi-l">YouTube 广告</div><div class="kpi-v up">$9.88B</div><span class="badge up">+11% YoY</span><div class="kpi-l" style="margin-top:6px">vs Q1 25 $8.93B</div></div>
+    <div class="kpi"><div class="kpi-l">Google Network</div><div class="kpi-v dn">$6.97B</div><span class="badge dn">-4% YoY</span><div class="kpi-l" style="margin-top:6px">AdSense 持续承压</div></div>
+    <div class="kpi"><div class="kpi-l">订阅+平台+设备</div><div class="kpi-v up">$12.38B</div><span class="badge up">+19% YoY</span><div class="kpi-l" style="margin-top:6px">YouTube Premium / Pixel</div></div>
+    <div class="kpi"><div class="kpi-l">Google Cloud</div><div class="kpi-v up">$20.03B</div><span class="badge up">+63% YoY</span><div class="kpi-l" style="margin-top:6px">vs Q1 25 $12.26B</div></div>
+    <div class="kpi"><div class="kpi-l">Cloud 营业利润率</div><div class="kpi-v up">32.9%</div><span class="badge up">vs 17.8% YoY</span><div class="kpi-l" style="margin-top:6px">规模效益显著</div></div>
+    <div class="kpi"><div class="kpi-l">Services 营业利润率</div><div class="kpi-v up">45.3%</div><span class="badge up">vs 42.3% YoY</span><div class="kpi-l" style="margin-top:6px">Search 利润机器</div></div>
+    <div class="kpi"><div class="kpi-l">Other Bets 营收</div><div class="kpi-v">$411M</div><span class="badge dn">营业亏损 -$2.1B</span><div class="kpi-l" style="margin-top:6px">Waymo / Verily 等</div></div>
+    <div class="kpi"><div class="kpi-l">合并营业利润</div><div class="kpi-v up">$39.69B</div><span class="badge up">+30% YoY</span><div class="kpi-l" style="margin-top:6px">营业利润率 36.1%</div></div>
+    <div class="kpi"><div class="kpi-l">净利润</div><div class="kpi-v up">$62.58B</div><span class="badge up">+81% YoY</span><div class="kpi-l" style="margin-top:6px">vs Q1 25 $34.54B</div></div>
+    <div class="kpi"><div class="kpi-l">摊薄 EPS</div><div class="kpi-v up">$5.11</div><span class="badge up">+82% YoY</span><div class="kpi-l" style="margin-top:6px">vs Q1 25 ~$2.81</div></div>
+    <div class="kpi"><div class="kpi-l">经营活动现金流</div><div class="kpi-v up">$45.8B</div><span class="badge up">YoY 提升</span><div class="kpi-l" style="margin-top:6px">业务现金流强劲</div></div>
+    <div class="kpi"><div class="kpi-l">资本开支</div><div class="kpi-v dn">$35.7B</div><span class="badge dn">YoY 近翻倍</span><div class="kpi-l" style="margin-top:6px">AI 基础设施豪赌</div></div>
+    <div class="kpi"><div class="kpi-l">自由现金流</div><div class="kpi-v dn">$10.1B</div><span class="badge dn">YoY 大幅下降</span><div class="kpi-l" style="margin-top:6px">Capex 吞 78% OCF</div></div>
+  </div>
+</div>
+
+<!-- ═══ FY2025 全年 KPI ═══ -->
+<div class="section">
+  <div class="stitle">FY2025 全年业绩对照（2026-02-04 年报发布）· 历史最佳</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">FY25 营收</div><div class="kpi-v up">$402.8B</div><span class="badge up">+15% YoY</span><div class="kpi-l" style="margin-top:6px">vs FY24 $350.0B</div></div>
+    <div class="kpi"><div class="kpi-l">FY25 净利润</div><div class="kpi-v up">$132.2B</div><span class="badge up">+32% YoY</span><div class="kpi-l" style="margin-top:6px">vs FY24 $100.1B</div></div>
+    <div class="kpi"><div class="kpi-l">FY25 摊薄 EPS</div><div class="kpi-v up">$10.81</div><span class="badge up">+34% YoY</span><div class="kpi-l" style="margin-top:6px">vs FY24 $8.04</div></div>
+    <div class="kpi"><div class="kpi-l">FY25 营业利润</div><div class="kpi-v up">$129.0B</div><span class="badge up">+15% YoY</span><div class="kpi-l" style="margin-top:6px">营业利润率 32%</div></div>
+    <div class="kpi"><div class="kpi-l">FY25 现金分红</div><div class="kpi-v">~$10.3B</div><span class="badge nt">$0.21 × 4 季</span><div class="kpi-l" style="margin-top:6px">5% 股息提升</div></div>
+    <div class="kpi"><div class="kpi-l">FY25 股票回购</div><div class="kpi-v up">~$67B</div><span class="badge up">激进回购</span><div class="kpi-l" style="margin-top:6px">注销缩股本</div></div>
+    <div class="kpi"><div class="kpi-l">摊薄股本</div><div class="kpi-v">~12.27B</div><span class="badge nt">同比 -0.7%</span><div class="kpi-l" style="margin-top:6px">SBC 抵消大部分</div></div>
+    <div class="kpi"><div class="kpi-l">Cloud FY25 营收</div><div class="kpi-v up">~$58B</div><span class="badge up">+45% YoY</span><div class="kpi-l" style="margin-top:6px">业务规模化</div></div>
+    <div class="kpi"><div class="kpi-l">FY26 Capex 指引</div><div class="kpi-v dn">$180-190B</div><span class="badge dn">"AI 豪赌"</span><div class="kpi-l" style="margin-top:6px">史无前例量级</div></div>
+  </div>
+</div>
+
+<!-- ═══ 季度趋势 ═══ -->
+<div class="section">
+  <div class="stitle">5 年趋势 + Q1 2026 经营加速</div>
+  <div class="cgrid">
+    <div class="ccard">
+      <div class="ctitle">5 年营收增长（$B）</div>
+      <div class="cwrap"><canvas id="revenueChart"></canvas></div>
+    </div>
+    <div class="ccard">
+      <div class="ctitle">5 年净利润（$B）</div>
+      <div class="cwrap"><canvas id="profitChart"></canvas></div>
+    </div>
+    <div class="ccard">
+      <div class="ctitle">Q1 2026 营收构成（$B）</div>
+      <div class="cwrap"><canvas id="segmentChart"></canvas></div>
+    </div>
+    <div class="ccard">
+      <div class="ctitle">5 年资本开支（$B）· AI 时代的"军备竞赛"</div>
+      <div class="cwrap"><canvas id="capexChart"></canvas></div>
+    </div>
+  </div>
+  <div class="dcf-note" style="margin-top:16px">
+    <p>过去 5 年 Alphabet 营收从 ~$182B 跃升至 ~$403B（CAGR ~22%）、净利从 ~$40B 升至 ~$132B（CAGR ~27%）——这是大型科技公司里最稳健的复合增长曲线之一。<span class="hl-t">但 5 年趋势的第三条曲线在 2024 后骤然斜率改变</span>：Capex 从 FY21 ~$25B → FY24 $52B → FY25 ~$77B → <strong>FY26 指引 $185B</strong>，3 年内翻 7 倍。这是一场"用现金流养未来"的豪赌——它把 Alphabet 从"高 FCF 的现金奶牛"暂时变成"高资本开支的科技建设者"，对估值锚定方式有根本性影响。</p>
+  </div>
+</div>
+
+<!-- ═══ Sankey ═══ -->
+<div class="section">
+  <div class="stitle">Q1 2026 资金流向 · 营收 → 自由现金流（$B）</div>
+  <div class="ccard">
+    <div class="ctitle">从 $109.9B 营收到 $10.1B 自由现金流的链路 —— 资本开支吞掉 78% 经营现金流</div>
+    <div id="sankey" style="width:100%;height:480px;"></div>
+  </div>
+</div>
+
+<!-- ═══ 模块 1 ═══ -->
+<div class="section">
+  <div class="stitle">模块 1 · 公司概览与背景</div>
+  <div class="cmt">
+    <p><strong>公司全称</strong>：Alphabet Inc.（Google 母公司）<br>
+    <strong>上市</strong>：NASDAQ: GOOGL（A 类股，1 票/股，2004-08-19 IPO）+ GOOG（C 类股，0 票，2014 分拆）+ 内部 B 类股（10 票/股，创始人持有，不上市流通）<br>
+    <strong>总部</strong>：加州 Mountain View<br>
+    <strong>财年</strong>：1 月 1 日 - 12 月 31 日<br>
+    <strong>主营</strong>：互联网搜索（Google Search）+ 视频（YouTube）+ 广告网络（AdSense / Google Network）+ 移动操作系统（Android）+ 浏览器（Chrome）+ 云计算（Google Cloud Platform）+ 订阅与硬件（YouTube Premium、Pixel、Google One、Workspace）+ AI 模型（Gemini）+ 自动驾驶（Waymo）+ 生命科学（Verily）+ 其他探索（Wing、X Lab）。</p>
+
+    <p><strong>核心叙事</strong>：Alphabet 是<span class="hl-t">全球互联网的"基础设施 + 应用层"双重龙头</span>——10 亿+ 月活的产品有 9 个（Search、Chrome、Android、Maps、Gmail、YouTube、Drive、Play、Photos），全球搜索市占率约 90%。其商业模式核心是"用免费产品换取注意力，用注意力卖广告"——但过去 3 年正在演化：(1) Google Cloud 从亏损到 +33% 营业利润率，<strong>已成全球第三大公有云</strong>；(2) Gemini AI 模型在 2.5/3.0 时代追上甚至超过 OpenAI/Anthropic 在多项基准上；(3) Waymo 已在 4 个城市运营商业化无人出租，<strong>每周 50 万单</strong>。Q1 2026 营收 +22% / 净利 +81% 是 Alphabet 多年来最强一个季度——但代价是 FY2026 资本开支飙升至 $185B、FCF 暴跌、回购暂停。这是一场"用今天的 FCF 换明天的 AI 主导权"的豪赌。</p>
+
+    <p><strong>简史与里程碑</strong>：</p>
+    <p>
+      <strong>1. 1998 年斯坦福创立 Google</strong>——Larry Page + Sergey Brin 在车库创业<br>
+      <strong>2. 2004-08-19 IPO</strong>——NASDAQ，开盘价 $85，开创"荷兰式拍卖"<br>
+      <strong>3. 2006 年收购 YouTube</strong>（$16.5 亿）——视频垄断的奠基<br>
+      <strong>4. 2008 年发布 Android</strong>——移动端统治<br>
+      <strong>5. 2015 年成立 Alphabet 控股结构</strong>——Sundar Pichai 任 Google CEO<br>
+      <strong>6. 2019 年 Pichai 升任 Alphabet CEO</strong>，Page + Brin 退居董事 + 超级投票股<br>
+      <strong>7. 2022 年发布 PaLM、 2023 年发布 Gemini</strong>——加入 AI 大模型竞赛<br>
+      <strong>8. 2024-04 反垄断败诉</strong>——Mehta 法官判定 Google 搜索垄断违法<br>
+      <strong>9. 2024-04-25 首次分红 + $70B 回购授权</strong>——里程碑级资本返还<br>
+      <strong>10. 2024-08 Anat Ashkenazi 任 CFO</strong>（接替 Ruth Porat）<br>
+      <strong>11. 2025-04 反垄断救济试听</strong>——可能强制剥离 Chrome / 限制默认搜索协议<br>
+      <strong>12. 2026-04 Q1 业绩</strong>——营收 +22% / Cloud +63% / AI 飞轮启动，但 Capex $185B 指引震惊市场
+    </p>
+
+    <p><strong>股权结构（双层股权 · 创始人控制）</strong>：</p>
+    <p>
+      <strong>Class B 股（10 票/股）</strong>：Larry Page + Sergey Brin 控制——约 50%+ 投票权<br>
+      <strong>Class A 股（GOOGL，1 票/股）</strong>：公众持有，标普 500 成分<br>
+      <strong>Class C 股（GOOG，0 票）</strong>：公众持有，2014 分拆<br>
+      <strong>注</strong>：<span class="warn-t">Alphabet 的双层股权让 Page + Brin 在退出日常运营后仍掌控公司</span>——这是创始人主导 vs 职业管理层的混合模式。Sundar Pichai 是 CEO，但战略最终决策仍要走董事会。
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 模块 2 ═══ -->
+<div class="section">
+  <div class="stitle">模块 2 · 管理层评估</div>
+
+  <div class="bscore">
+    <div class="circle cg">A</div>
+    <div class="bd">
+      <h4>Sundar Pichai · CEO（Google 2015 · Alphabet 2019）</h4>
+      <p>印度裔工程师出身，2004 年加入 Google 主导 Chrome 浏览器，2015 年升任 Google CEO，2019 年接替 Page 任 Alphabet CEO。<span class="hl-t">10 年掌舵期完成几个关键转型</span>：(1) Cloud 从亏损到盈利领先；(2) AI 从落后追赶到 Gemini 与 OpenAI 并驾齐驱；(3) 维持 Search 在 AI 浪潮中的市场份额。<strong>但作为"职业管理层"而非创始人，Pichai 在做大胆资本配置决策时受到 Page + Brin 的最终牵制</strong>——FY26 Capex $185B 应是 Page/Brin 拍板的，不是 Pichai 独立决定。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B+</div>
+    <div class="bd">
+      <h4>Anat Ashkenazi · CFO（2024-08 至今 · 接替 Ruth Porat）</h4>
+      <p>来自礼来制药（Eli Lilly），2024-08 接任 CFO。Ruth Porat 转任 President / Chief Investment Officer。Ashkenazi 上任后<span class="warn-t">面对的是 Alphabet 历史上最激进的资本开支扩张周期</span>——FY26 Capex 指引 $185B 是她任内宣布的。任期尚短，<strong>资本配置纪律的真正考验在 FY27-28：AI capex 的 ROI 能否兑现</strong>。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>资本配置 · 历史顶级 + 当前 AI 大豪赌</h4>
+      <p>
+      <strong>历史回购整合记录顶级</strong>：2024 年首次分红 + $70B 回购授权、2025 年再加 $70B 授权。FY24 + FY25 累计回购约 $129B，<strong>真正注销股本</strong>（含金量 A 级）。<br>
+      <strong>大额并购成功率混合</strong>：YouTube ($16.5亿, 2006) 是史诗级成功；Motorola ($125亿, 2012, 后亏损出售) 是失败；Nest, DeepMind 等中等。整体并购纪律好于多数美股巨头。<br>
+      <strong>当前 AI 豪赌</strong>：FY26 Capex 指引 $180-190B——<span class="warn-t">超过 Microsoft (~$80B) + Meta (~$70B) + Amazon (~$100B) 任一家</span>，是 Alphabet 历史上最大的资本配置赌注。Q1 2026 已花 $35.7B，FCF 仅剩 $10.1B（vs FY24 同期 ~$23B），<strong>回购被迫暂停</strong>。<br>
+      整体看：<strong>这是一场押注 AI 是真正生产力革命的豪赌——若 AI 流量 / Cloud / Gemini 持续兑现，Capex ROI 会很高；若 AI 收入跑不赢 D&A 折旧，营业利润率将面临持续压力。</strong>
+      </p>
+    </div>
+  </div>
+
+  <div class="cmt">
+    <p><strong>长期主义测试</strong>：3 年前（2023 年）Alphabet 在 OpenAI ChatGPT 突袭后被市场认定为"AI 落后者"，股价大幅承压。3 年后 Gemini 2.5 在多项 LLM 基准上反超 GPT-5、Cloud +63%、AI Overview 让 Search 仍保持 +19% 增长——<span class="hl-t">管理层用 3 年时间证明"老巨头不晚"</span>。这是 Alphabet 管理层最重要的兑现。</p>
+    <p><strong>利益绑定</strong>：Page + Brin 通过 B 类股控制 50%+ 投票权 + 他们的财富 80% 在 GOOGL 股票里——<span class="hl-t">利益深度绑定</span>。Pichai 持股较少（~$2B 规模）但通过 SBC 持续受益。这是创始人型 + 职业经理人的良性结合。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 3 ═══ -->
+<div class="section">
+  <div class="stitle">模块 3 · 商业模式深度解析</div>
+
+  <div class="cmt">
+    <p><strong>海图"一句话测试"</strong>：<span class="hl-t">Alphabet 靠 Search 在全球互联网入口位置（90% 搜索份额、Chrome 65% 浏览器份额、Android 70% 移动端份额）卖广告（占营收 71%）；同时把 AI/数据中心能力打包卖给企业（Cloud +63%）；还在 Other Bets 押 Waymo 等下一代基础设施——Q1 2026 营收 $109.9B，营业利润率 36.1%，是数字时代最强的"流量收税官"。</span></p>
+
+    <p><strong>收入结构（Q1 2026）</strong>：</p>
+  </div>
+
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>业务板块</th><th>Q1 2026 收入</th><th>占比</th><th>YoY</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td>Google Search & other</td><td>$60.4B</td><td>54.9%</td><td>+19%</td><td>核心利润引擎 · AI Overview 提振</td></tr>
+        <tr><td>YouTube 广告</td><td>$9.88B</td><td>9.0%</td><td>+11%</td><td>视频广告 · TikTok 竞争中保持增长</td></tr>
+        <tr><td>Google Network</td><td>$6.97B</td><td>6.3%</td><td>-4%</td><td>AdSense / AdMob · 持续承压</td></tr>
+        <tr><td>订阅 + 平台 + 设备</td><td>$12.38B</td><td>11.3%</td><td>+19%</td><td>YouTube Premium / Pixel / Google One · 增长引擎</td></tr>
+        <tr class="hl"><td>Google Services 小计</td><td>$89.6B</td><td>81.5%</td><td>+16%</td><td>营业利润率 45.3%（创新高）</td></tr>
+        <tr><td>Google Cloud</td><td>$20.03B</td><td>18.2%</td><td>+63%</td><td>营业利润率 32.9%（vs 17.8%）· Cloud 飞轮启动</td></tr>
+        <tr><td>Other Bets</td><td>$411M</td><td>0.4%</td><td>—</td><td>Waymo（50 万单/周）/ Verily / Wing · 营业亏损 $2.1B</td></tr>
+        <tr><td>对冲调整</td><td>-$22M</td><td>-</td><td>—</td><td>汇率对冲</td></tr>
+        <tr class="hl"><td>合计</td><td>$109.9B</td><td>100%</td><td>+22%</td><td>营业利润 $39.69B（+30%）</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px">
+    <p><strong>商业模式的核心优势</strong>：(1) <span class="hl-t">Search 是数字时代的"高速公路收费站"</span>——90% 全球搜索份额 + 几乎无变动 + 90%+ 毛利率 + 利润率持续提升（Services 45.3%），这是商业史上最强的现金机器之一；(2) <span class="hl-t">AI 整合反而<strong>加强</strong>了 Search</span>——市场担心 AI Overview 会"吃掉"传统 Search 广告，但 Q1 2026 Search +19% 数据完全反驳——AI 实际上提升了查询质量 + 增加用户黏性 + 创造新广告形态；(3) <strong>Cloud 飞轮启动</strong>——Cloud 营业利润率从亏损 → 17.8% → 32.9%，规模效益显著；(4) <strong>双护城河叠加</strong>：Search 是消费端流量护城河，Cloud + AI 是企业端基础设施护城河。</p>
+    <p><strong>单位经济</strong>：Search 是<span class="hl-t">极致的"接近零边际成本"业务</span>——每次额外搜索几乎不增加成本，但每次广告点击 = 真金白银。Cloud 是<span class="warn-t">"重资本基础设施 + 中等毛利"业务</span>——需要持续投入服务器/数据中心/网络，毛利率随规模上升。两块业务的合并营业利润率 36.1% 是数字平台公司里最高之一。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 4 ═══ -->
+<div class="section">
+  <div class="stitle">模块 4 · 经济护城河分析（5 维）</div>
+
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>护城河来源</th><th>评级</th><th>评估</th></tr></thead>
+      <tbody>
+        <tr><td>网络效应</td><td>宽</td><td><strong>Search 越多用户 → 越多数据 → 算法越优 → 用户体验更好</strong>。YouTube 双边市场：观众多 → 创作者多 → 内容多 → 观众更多。Android / Chrome 同样有网络效应。<span class="hl-t">是科技公司里网络效应最强的之一</span></td></tr>
+        <tr><td>转换成本</td><td>窄</td><td>消费者切换搜索引擎几乎零成本（Bing / DuckDuckGo / Perplexity 一键即换）；但 <span class="hl-t">Android / Gmail / Drive / Photos 整合带来生态锁定</span>；企业 Cloud 客户有真实迁移成本</td></tr>
+        <tr><td>成本优势</td><td>宽</td><td><strong>自研 TPU 芯片 + 全球 100+ 数据中心 + 网络基础设施</strong>——单位算力成本远低于多数同行；规模化优势让 Alphabet 能用更低成本服务相同流量</td></tr>
+        <tr><td>无形资产</td><td>宽</td><td>"Google" 已成动词（"google it"）；YouTube / Android / Chrome / Maps 都是品牌级资产；多年积累的搜索算法 / 用户数据 / 内容索引——<span class="hl-t">这些资产难以在 10 年内复制</span></td></tr>
+        <tr><td>有效规模</td><td>宽</td><td>全球前 3 大云（AWS / Azure / GCP）+ 全球前 2 大广告平台（Meta、Google）。<span class="hl-t">数字广告基础设施 + 全球级数据中心</span>对新进入者是几乎不可逾越的门槛</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px">
+    <p><strong>综合判断：宽护城河，且 5 维全部宽——这是商业史上最深护城河之一。</strong>但<span class="warn-t">10 年后会更宽还是更窄？</span>取决于两件事：(1) <strong>AI 是否颠覆 Search</strong>——目前看 AI Overview 提升 Search 而非颠覆，但 ChatGPT / Perplexity 等 AI 搜索仍在分流年轻用户；(2) <strong>反垄断救济判决</strong>——若强制剥离 Chrome 或限制默认搜索协议（Apple $20B/年支付），Search 入口护城河可能被切口。<span class="hl-t">基准情景：护城河稳定到略微收窄，但 Cloud + AI 新护城河弥补；悲观情景：反垄断重创 Search 分发优势</span>。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 5 ═══ -->
+<div class="section">
+  <div class="stitle">模块 5 · 财务深度分析</div>
+
+  <p style="font-size:13px;color:var(--text2);margin-bottom:10px"><strong>① 利润表（Q1 2026 + FY2025 · $B）</strong></p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>项目</th><th>Q1 2026</th><th>Q1 2025</th><th>FY2025</th><th>点评</th></tr></thead>
+      <tbody>
+        <tr><td>营收</td><td>109.9</td><td>90.2</td><td>402.8</td><td>Q1 +22% · FY +15%</td></tr>
+        <tr><td>营业利润</td><td>39.69</td><td>30.5</td><td>129.0</td><td>Q1 +30% · 营业利润率 36.1% 创新高</td></tr>
+        <tr><td>营业利润率</td><td>36.1%</td><td>33.8%</td><td>32.0%</td><td>持续扩张</td></tr>
+        <tr><td>净利润</td><td>62.58</td><td>34.54</td><td>132.2</td><td>Q1 +81%（含一次性税收 / 投资收益）</td></tr>
+        <tr><td>摊薄 EPS（$）</td><td>5.11</td><td>~2.81</td><td>10.81</td><td>—</td></tr>
+        <tr><td>Cloud 营业利润率</td><td>32.9%</td><td>17.8%</td><td>~24%</td><td><span class="hl-t">规模效益显著</span></td></tr>
+        <tr><td>Services 营业利润率</td><td>45.3%</td><td>42.3%</td><td>~42%</td><td>Search 是利润机器</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p style="font-size:13px;color:var(--text2);margin:16px 0 10px"><strong>② 资产负债表（2026-03-31 末 · $B）</strong></p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>项目</th><th>金额</th><th>点评</th></tr></thead>
+      <tbody>
+        <tr><td>现金 + 有价证券</td><td>126.8</td><td>资产负债表稳健</td></tr>
+        <tr><td>长期债务</td><td>77.5</td><td>近年明显上升（为 AI Capex 融资）</td></tr>
+        <tr class="hl"><td>净现金</td><td>~49.3</td><td><span class="hl-t">仍是净现金</span>，但从此前 ~$80B 显著收窄</td></tr>
+        <tr><td>资产负债表整体</td><td>稳健</td><td>但杠杆方向向上</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p style="font-size:13px;color:var(--text2);margin:16px 0 10px"><strong>③ 现金流量表（Q1 2026 · $B）</strong></p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>项目</th><th>Q1 2026</th><th>点评</th></tr></thead>
+      <tbody>
+        <tr><td>经营活动现金流（OCF）</td><td>45.8</td><td><span class="hl-t">YoY 提升</span> · 业务现金流极强</td></tr>
+        <tr><td>资本开支（Capex）</td><td>35.7</td><td><span class="warn-t">同比近翻倍</span> · 占 OCF 78%</td></tr>
+        <tr class="hl"><td>自由现金流（FCF）</td><td>10.1</td><td><span class="warn-t">同比从 ~$23B 暴跌</span></td></tr>
+        <tr><td>股票回购</td><td>0</td><td><span class="warn-t">Q1 首次暂停</span></td></tr>
+        <tr><td>现金分红</td><td>~$2.7B</td><td>$0.22/股 · 维持</td></tr>
+        <tr><td>FCF Yield（年化）</td><td>~0.8%</td><td><span class="warn-t">极低</span> · 因 Capex 飙升</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:16px">
+    <p><strong>关键比率</strong>：<strong>ROE FY25 ~33%</strong>（净利 $132B / 股东权益 ~$400B）；<strong>ROIC ~30%</strong>；<strong>资产负债率 ~35%</strong>（极健康）；<strong>OCF / 净利 1.34x</strong>（FY25 现金质量好于会计利润）。<span class="warn-t">但 Q1 2026 FCF Yield 仅 0.8%（年化）——Capex 把 FCF 吃掉了大半</span>。</p>
+    <p><strong>所有者盈余</strong>：净利润 $132B + 折旧摊销 ~$30B + SBC ~$24B − 维护性 Capex（估约 1/4 总 Capex ≈ $20B）± 营运资金 = <span class="hl-t">所有者盈余约 $165B/年</span>。按总市值 $4.81T 计，所有者盈余收益率 ~3.4%——<strong>不便宜，但符合 A+ 质量公司</strong>。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 6 ═══ -->
+<div class="section">
+  <div class="stitle">模块 6 · 电话会分析（最新 + 前 2 季）</div>
+
+  <div class="tag-grid">
+    <div class="tag-card pos"><h5>Q3 2025 电话会（2025-10-29）<span class="tag-bd up">利好</span></h5><p>Cloud +35%、Search 增速企稳、AI 整合进展顺利。FY26 Capex 初步指引 $75-95B（事后证明远低于实际）。管理层语气坚定。</p></div>
+    <div class="tag-card pos"><h5>Q4 2025 电话会（2026-02-04）<span class="tag-bd up">利好</span></h5><p>FY25 营收 $402.8B、净利 $132.2B 均创历史新高。Cloud 全年 +45%。<strong>$70B 新回购授权 + 股息提升至 $0.21</strong>。但<span class="warn-t">FY26 Capex 指引上调至 $115-125B</span>——市场震惊。</p></div>
+    <div class="tag-card neu"><h5>Q1 2026 电话会（2026-04-29）<span class="tag-bd nt">中性偏多</span></h5><p>营收 +22%、Cloud +63%、营业利润率 36.1%——经营全面超预期。<strong>但 FY26 Capex 进一步上调至 $180-190B</strong>，回购首次暂停。管理层强调"Cloud backlog $460B+ + Gemini API +60% QoQ + Waymo 50 万单/周"——AI 需求兑现得越来越清晰。</p></div>
+  </div>
+
+  <div class="cmt" style="margin-top:16px">
+    <p><strong>信号汇总</strong>：管理层的核心叙事在 3 季内有<span class="hl-t">显著转向</span>——从"AI 落后者"到"AI 飞轮启动"。语气从 Q3 2025 的"小心"到 Q1 2026 的"全力以赴"。但同时 Capex 指引<span class="warn-t">3 个季度内从 $75-95B → $115-125B → $180-190B 翻倍</span>——这是 Alphabet 历史上最快的资本配置变更，反映 AI 需求兑现快于预期。</p>
+    <p><strong>指引兑现度</strong>：FY25 业务指标（营收、Cloud 增速、利润率）全部达成或超预期。但 <span class="warn-t">Capex 指引连续 3 季大幅上调</span>——这虽然反映需求兑现，但<strong>对股东而言意味着回购停滞 + FCF 暴跌</strong>。<strong>所以这次 Q1 2026 的"$185B AI Capex"叙事，海图倾向于相信底层需求，但担忧资本配置的实际 ROI</strong>。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 7 ═══ -->
+<div class="section">
+  <div class="stitle">模块 7 · 多模型估值（8 种方法交叉验证）</div>
+
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>方法</th><th>测算</th><th>对应价</th><th>适用性</th></tr></thead>
+      <tbody>
+        <tr><td>① 相对估值（P/E）</td><td>TTM EPS $13.11 × 历史区间 P/E 22-32x = $288-$420</td><td>$350-420</td><td><span class="hl-t">最适用</span></td></tr>
+        <tr><td>② DCF（5 年 + 终值）</td><td>FCF 起点 $80B（Capex normalize 后），增长 10-12%，WACC 9%，终值 g=4%。EV/股权值 ≈ $4.6-5.0T</td><td>$375-410</td><td>适用（但 Capex 正常化假设关键）</td></tr>
+        <tr><td>③ 所有者盈余收益率</td><td>所有者盈余 $165B / 市值 $4.81T = 3.4%。要 5% 收益率，需到 $3.3T（-32%）；要 3% 收益率，可到 $5.5T（+14%）</td><td>$340-450</td><td>适用</td></tr>
+        <tr><td>④ PEG</td><td>P/E 30 ÷ EPS 增长 25%（FY26 估） = 1.2x，合理</td><td>$400</td><td>适用</td></tr>
+        <tr><td>⑤ DDM（股息折现）</td><td>$0.88 股息 × 8% 增长 / (9%-8%) = $88——但股息只占总回报小头，单独看不重要</td><td>—</td><td>不适用（股息太少）</td></tr>
+        <tr><td>⑥ NAV</td><td>不适用——主要是品牌 + 算法资产</td><td>—</td><td>不适用</td></tr>
+        <tr><td>⑦ 反向 DCF</td><td>当前 $398.80 隐含永续增长 5-6%——对一个 +22% 营收增长 + 36% 营业利润率的公司，<span class="hl-t">是公允定价</span></td><td>—</td><td>诊断</td></tr>
+        <tr><td>⑧ SOTP</td><td>Search ($300B/年营收 × 8x = $2.4T) + Cloud ($80B × 12x = $1T) + YouTube ($60B × 6x = $0.36T) + 净现金 $50B + Other Bets (option value)，合计 ~$4-4.5T</td><td>$330-380</td><td>适用</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:16px">
+    <p><strong>估值结论</strong>：8 种方法的<span class="hl-t">中位数落在 $375-410 区间</span>，与当前 $398.80 几乎重合。<strong>这是公允定价的典型特征：上有 +10-15% 空间、下有 -10-15% 空间</strong>。<span class="warn-t">关键洞察</span>：Alphabet 不再是 2023 年初那个 P/E 18x 的"AI 落后者捡漏价"——经过 2 年 +146% 上涨后，估值已经反映了 AI 飞轮启动 + Cloud 加速 + 经营持续提升的预期。<strong>现在买 = 在赌 AI Capex ROI 超预期 + 反垄断救济温和；现在等 = 等更好价位或事件清晰</strong>。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 8 ═══ -->
+<div class="section">
+  <div class="stitle">模块 8 · 竞争与行业分析</div>
+
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>公司</th><th>市值</th><th>FY25 营收</th><th>云营收</th><th>AI Capex（FY26）</th><th>P/E TTM</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td>Alphabet（GOOGL）</td><td>$4.81T</td><td>$402.8B</td><td>~$58B(+45%)</td><td><strong>$180-190B</strong></td><td>~30x</td></tr>
+        <tr><td>Microsoft（MSFT）</td><td>~$3.8T</td><td>~$270B</td><td>~$130B(Azure +35%)</td><td>~$80B</td><td>~33x</td></tr>
+        <tr><td>Amazon（AMZN）</td><td>~$2.4T</td><td>~$650B</td><td>~$120B(AWS +20%)</td><td>~$100B</td><td>~38x</td></tr>
+        <tr><td>Meta（META）</td><td>~$1.9T</td><td>~$170B</td><td>—</td><td>~$70B</td><td>~22x</td></tr>
+        <tr><td>Apple（AAPL）</td><td>~$3.0T</td><td>~$390B</td><td>—</td><td>~$15B</td><td>~32x</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px">
+    <p><strong>波特五力</strong>：(1) 现有竞争——Search 几乎独占；Cloud 三强争夺（AWS 32% / Azure 23% / GCP 13%）；广告与 Meta / TikTok 竞争；(2) 供应商议价——Nvidia GPU 是当前所有云厂商共同的"上游税"，但 Google 自研 TPU 部分对冲；(3) 客户议价——消费者无替代（搜索习惯），企业客户在多云策略中有议价但被生态绑定；(4) 替代品——OpenAI / Anthropic 的 AI 搜索是最大威胁；(5) <strong>进入壁垒——极高</strong>，数据中心规模 + AI 模型训练 + 用户数据是新进入者无法跨越的鸿沟。</p>
+    <p><strong>核心洞察</strong>：Alphabet 在<span class="hl-t">"AI 时代基础设施"赛道上是 FAANG 里 Capex 最猛、Cloud 增速最快的</span>。但<strong>市场定价已经反映了这一点</strong>——P/E 30x 高于 Meta 的 22x，反映 Alphabet 的"AI 溢价"。与同行比，Alphabet 的优势是"自研 TPU + 全栈整合"，劣势是"Search 反垄断阴影"。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 9 ═══ -->
+<div class="section">
+  <div class="stitle">模块 9 · 技术面与 K 线分析（次要参考）</div>
+  <div class="cmt">
+    <p><strong>价格位置</strong>：当前 $398.80（2026-05-19），<span class="warn-t">距 52 周高 $408.61 仅 -2.4%</span>，距 5 月 13 日历史最高 $402.62 仅 -1%。过去 12 个月从 $162 低位反弹 +146%——是大型科技股里涨幅最大的之一。</p>
+    <p><strong>趋势与形态</strong>：长期趋势强劲向上，过去 12 个月几乎单边上涨；最近 1 个月在 $390-410 区间高位震荡。Q1 财报后 2 日小幅回调，市场对 $185B Capex 指引仍在消化。</p>
+    <p><strong>支撑与阻力</strong>：下方支撑 $375、$360、$340；上方阻力 $410、$420。<span class="hl-t">技术面给出"高位震荡，等回调"信号</span>——但仍以基本面（AI 兑现 + 反垄断）为主导。</p>
+    <p><strong>对应海图判断</strong>：技术面 + 估值同时指向"<strong>当前价位非新仓最佳进场点</strong>"。已持仓继续持有；新仓等回调至 $360 以下、或反垄断救济清晰后再考虑。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 10 ═══ -->
+<div class="section">
+  <div class="stitle">模块 10 · 增长催化剂与前景展望</div>
+  <div class="cmt">
+    <p><strong>短期催化剂（未来 6-12 个月）</strong>：</p>
+    <p>
+      <strong>1. 反垄断救济判决</strong>——最大不确定性。可能强制剥离 Chrome / 限制 Apple 默认搜索协议。判决结果是头号催化剂。<br>
+      <strong>2. Cloud +60%+ 持续</strong>——Q1 backlog $460B+ 已锁定多个季度增长；Q2-Q3 数据将持续兑现。<br>
+      <strong>3. Gemini 3.0 发布</strong>——预期 2026 下半年，能否在多项基准超越 GPT-5 决定 AI 叙事。<br>
+      <strong>4. Waymo 扩张</strong>——目前 4 城运营，2026 预计扩至 8-10 城，50 万单/周→100 万单/周。<br>
+      <strong>5. Q2-Q3 2026 财报</strong>——能否维持营收 +20% / Cloud +50%+ 是关键。
+    </p>
+    <p><strong>中长期展望（3-5 年）</strong>：<span class="hl-t">Alphabet 是 AI 时代 FAANG 里基础设施投入最深、AI 整合最快、生态最完整的公司</span>。3-5 年内 Cloud 可能成为第二大业务（如 Cloud +40% / Services +10%，Cloud 占比 5 年后约 30%）。<strong>但所有增长都取决于 AI Capex ROI</strong>——若 AI 收入跑赢 $180B+/年的 D&A 折旧，营业利润率可维持；若跑不赢，利润率会面临持续压力。</p>
+    <p><strong>逆风</strong>：<span class="warn-t">反垄断救济（最大）/ AI 搜索分流 / Capex ROI 不达预期 / 监管对 AI 训练数据的限制 / 全球数字广告增速放缓</span>。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 11 ═══ -->
+<div class="section">
+  <div class="stitle">模块 11 · 风险矩阵（多维评估）</div>
+
+  <div class="risk-grid">
+    <div class="risk-card r2">
+      <h5>1. 经营风险</h5>
+      <span class="risk-score">2 / 5</span>
+      <p>Q1 经营全面超预期，业务多元化（Search + YouTube + Cloud + 订阅）。经营风险低。</p>
+    </div>
+    <div class="risk-card r2">
+      <h5>2. 财务风险</h5>
+      <span class="risk-score">2 / 5</span>
+      <p>净现金 $49B + OCF $45.8B/季度 + 投资级信用。<span class="warn-t">但 Capex 飙升让财务弹性收窄</span>。</p>
+    </div>
+    <div class="risk-card r3">
+      <h5>3. 竞争风险</h5>
+      <span class="risk-score">3 / 5</span>
+      <p>Search 受 ChatGPT / Perplexity 长期威胁；Cloud 与 AWS / Azure 竞争激烈；AI 搜索分流年轻用户。</p>
+    </div>
+    <div class="risk-card r5">
+      <h5>4. 监管 / 反垄断风险</h5>
+      <span class="risk-score">5 / 5</span>
+      <p><strong>2024 年搜索垄断败诉后救济判决悬而未决</strong>——若强制剥离 Chrome / 禁默认搜索协议，是公司历史上最大冲击。</p>
+    </div>
+    <div class="risk-card r3">
+      <h5>5. 宏观 / Capex ROI 风险</h5>
+      <span class="risk-score">3 / 5</span>
+      <p>$185B AI Capex 是巨额赌注。若 AI 收入跑不赢 D&A 折旧 + 利息，FY27-28 利润率会被显著压制。</p>
+    </div>
+    <div class="risk-card r3">
+      <h5>6. 估值风险</h5>
+      <span class="risk-score">3 / 5</span>
+      <p>P/E 30x + 距历史高仅 -2.4% + 过去 2 年 +146% 涨幅——估值已 price-in 多数好消息。</p>
+    </div>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">11.X 黑天鹅情景（最坏情况）</h4>
+  <div class="cmt">
+    <p>
+      <strong>1. 反垄断救济严厉</strong>（概率 25%）：法官强制剥离 Chrome 或 Android、禁止默认搜索协议（断 Apple $20B/年）。Search 分发优势重创，营收增速降至个位数，<strong>股价跌至 $280-310（-25%）</strong>。<br>
+      <strong>2. AI Capex ROI 不达预期 + Cloud 增速失速</strong>（概率 20%）：FY27 Cloud 增速降至 +25%、整体营收 +10%，叠加 $185B Capex 形成的 D&A 包袱，营业利润率从 36% 跌至 28%，<strong>股价跌至 $320</strong>。<br>
+      <strong>3. AI 搜索（ChatGPT / Perplexity）真正分流 Search</strong>（概率 15%）：Search 增速降至 +5% 甚至负，整个广告基本盘动摇，估值大幅下行至 P/E 22x。<br>
+      <strong>4. 大额商誉 / Other Bets 减值</strong>（概率 10%）：Waymo / Verily / Wing 等若长期回报率不达预期，可能减值 $20-50B。
+    </p>
+    <p><span class="hl-t">下行支撑</span>：净现金 $49B + 历史最低 P/E 在 ~18-20x（FY25 EPS $10.81 × 20 = $216）+ Search 业务即便受反垄断冲击也仍是数十亿用户的入口。<strong>HKD $280-300 是估值底</strong>（按 22x × FY25 EPS $13）。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 12 股东回报分析 ═══ -->
+<div class="section">
+  <div class="stitle">模块 12 · 股东回报分析</div>
+
+  <div class="cmt">
+    <p>Alphabet 的股东回报故事在 2026 Q1 出现<span class="hl-t">历史性拐点</span>——从 2024 年首次分红 + 持续大额回购的"现金奶牛"模式，转为 Q1 2026 首次暂停回购的"Capex 优先"模式。下面用三个问题拆开：<strong>给了多少 → 给的方式好不好 → 能不能继续给</strong>。</p>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">12.1 公司给了股东多少？</h4>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>财年</th><th>每股股息</th><th>股息总额</th><th>派息率</th><th>回购金额</th><th>股东总回报</th></tr></thead>
+      <tbody>
+        <tr><td>FY2023</td><td>—</td><td>—</td><td>—</td><td>~$62B</td><td>~$62B</td></tr>
+        <tr><td>FY2024</td><td>$0.20 × 3 季</td><td>~$7.4B</td><td>~7%</td><td>~$62B</td><td>~$69.4B</td></tr>
+        <tr><td>FY2025</td><td>$0.21 × 4 季</td><td>~$10.3B</td><td>~8%</td><td>~$67B</td><td>~$77.3B</td></tr>
+        <tr><td>Q1 2026</td><td>$0.22</td><td>~$2.7B</td><td>—</td><td><span class="warn-t">$0（暂停）</span></td><td>~$2.7B（仅分红）</td></tr>
+        <tr class="hl"><td>2024-2025 累计</td><td>—</td><td>~$17.7B</td><td>—</td><td>~$129B</td><td>~$147B</td></tr>
+        <tr><td>FY2026 全年指引</td><td>$0.88（估）</td><td>~$10.8B</td><td>—</td><td><span class="warn-t">待定</span></td><td>取决于 Capex 强度</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:13px;color:var(--text2);margin-top:8px"><strong>Trailing Shareholder Yield</strong> = FY25 股息 $10.3B + 回购 $67B ≈ $77.3B / 市值 $4.81T ≈ <strong>1.6%</strong>。Alphabet 历史上是美股最大回购公司之一（2018-2023 累计回购 $250B+）。<span class="warn-t">但 Q1 2026 暂停回购是 6+ 年来首次</span>，trailing yield 在 2026 内可能从 1.6% 降至 0.4%（仅分红）。</p>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">12.2 给的方式好不好？</h4>
+  <div class="cmt">
+    <p>Alphabet 的回购方式<span class="hl-t">含金量 A 级</span>，但稀释抵消问题真实存在：</p>
+    <p>
+      <strong>① 注销 vs 库存股</strong>：Alphabet 回购的股份<strong>全部注销</strong>（真实减少股本）——这是美股顶级的高含金量回购方式，含金量 A 级。<br>
+      <strong>② 摊薄股数 3 年趋势——硬指标</strong>：FY23 ~12.46B → FY24 ~12.36B → FY25 ~12.27B → Q1 2026 ~12.25B。<span class="warn-t">3 年累计 $191B 回购只换来 1.7% 的股本减少</span>——核心原因是 SBC（股权激励）每年消耗 $22-25B，相当于"回购大部分钱用来抵消 SBC 稀释"。<br>
+      <strong>③ 多市场差异</strong>：Alphabet 是 NASDAQ 上市的美股公司，回购按美国证券法注销股份（与多数美股不同——Alphabet 选择注销而非留作库存股，含金量更高）。
+    </p>
+    <p><strong>结论</strong>：Alphabet 的回购<span class="hl-t">个体含金量 A 级（注销）</span>，但<span class="warn-t">效率 B 级</span>（SBC 吃掉大部分）。3 年累计 $191B 真金白银，<strong>实际只让每股价值提升约 1.7%</strong>——投资者要清醒看到 SBC 这一隐性成本。</p>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">12.3 能不能继续给、给多少？</h4>
+  <div class="cmt">
+    <p>
+      <strong>① 已授权未执行额度</strong>：截至 Q1 2026 末，2024-04 的 $70B 授权 + 2025-04 的 $70B 授权累计 $140B，FY24-FY25 共用 ~$129B，剩余 ~$11B。<span class="warn-t">但 Q1 2026 已暂停回购</span>——授权额度不等于会执行。约束力低（董事会授权只是上限）。<br>
+      <strong>② 未来股息 + 回购指引</strong>：管理层未明确说"暂停回购"是结构性的——他们的语言是"<span class="hl-t">优先投入 AI 基础设施</span>"。FY26 Capex $185B 直接吞掉了原本回购的钱。股息维持小幅提升（每年 +5%）。但回购何时恢复——<strong>取决于 Capex 节奏在 FY27 是否减速</strong>。<br>
+      <strong>③ (股息 + 回购) / FCF 覆盖度</strong>：<span class="warn-t">这是核心警示信号</span>。Q1 2026 FCF 仅 $10.1B，股息 $2.7B 占 FCF 27% 健康。但<strong>若恢复回购</strong>（按 FY25 $67B 节奏年化）+ 股息 $10.8B = $77.8B 需求，而 FY26 全年 FCF（按 Capex $185B 估算）可能仅 $40-60B——<strong>(股息+回购) / FCF 会 > 130%</strong>。这意味着要继续 FY25 级别的回购，要么动用现金储备、要么举债。<br>
+      <strong>④ 借债回购检验</strong>：Alphabet 长期债务从 ~$30B 升至 $77.5B——<span class="warn-t">资本结构明显在加杠杆</span>。这部分债务有相当比例用于支撑回购 + Capex 双线开支。低利率环境下合理，利率上行环境下风险加大。
+    </p>
+    <p><strong>模块小结</strong>：<span class="hl-t">从"积极且高含金量"暂时切换到"暂停 + 待观察"</span>——Alphabet 历史回购质量 A 级（全注销），但 Q1 2026 因 $185B AI Capex 优先而暂停回购，使 trailing Shareholder Yield 从 1.6% 大幅收窄。<strong>短期股东回报模糊，长期取决于 AI Capex ROI 兑现速度</strong>。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 13 评分卡 ═══ -->
+<div class="section">
+  <div class="stitle">海图评分卡 · 6 维 A-D + 红旗排查</div>
+
+  <div class="bscore">
+    <div class="circle cg">A</div>
+    <div class="bd">
+      <h4>1. 生意可预测性 — A（9/10）</h4>
+      <p>核心 Search 业务可预测性极强（10+ 年 +15-20% 年增长，几乎从未下滑）；Cloud 在加速；YouTube 稳健。<span class="hl-t">是大型科技股里能见度最高的公司之一</span>。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle cg">A+</div>
+    <div class="bd">
+      <h4>2. 经济护城河 — A+（9.5/10）</h4>
+      <p>5 维护城河全部"宽"——网络效应（Search、YouTube、Android）+ 转换成本（生态锁定）+ 成本优势（自研 TPU + 全球数据中心）+ 无形资产（品牌 + 算法）+ 有效规模（全球前 3 云）。<strong>商业史上最深护城河之一</strong>。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle cg">A</div>
+    <div class="bd">
+      <h4>3. 管理层质量 — A（9/10）</h4>
+      <p>Pichai 10 年掌舵期完成 AI / Cloud / 收购整合三大转型；创始人 Page + Brin 仍在董事会通过 B 类股保持长期主义影响力。<span class="hl-t">"职业经理人 + 创始人"混合治理模式经过考验</span>。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>4. 财务质量 — A-（8.5/10）</h4>
+      <p>ROE 33% + ROIC 30% + 净现金 $49B + 营业利润率 36.1%（Q1 创新高）。<span class="warn-t">但</span> Capex 飙升让 FCF Yield 从 4-5% 暴跌至 0.8%，长期债务从 $30B 增至 $77.5B——<strong>财务弹性正在收窄</strong>。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle cw">B+</div>
+    <div class="bd">
+      <h4>5. 资本配置纪律 — B+（8/10）</h4>
+      <p>详见模块 12 股东回报分析。<strong>历史回购质量 A 级（全注销） + 首次分红 + 2 次 $70B 授权</strong>是优等生记录。但<span class="warn-t">Q1 2026 暂停回购 + FY26 Capex $185B 大豪赌</span>是历史性转向——资本配置正确性<strong>等 FY27 AI Capex ROI 兑现才能定论</strong>。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle co">B</div>
+    <div class="bd">
+      <h4>6. 估值与安全边际 — B（7/10）</h4>
+      <p>P/E TTM 30x + 距 52 周高仅 -2.4% + 过去 2 年 +146% 涨幅。<span class="warn-t">估值已 price-in 大部分好消息</span>，安全边际不足 10%。这是 FAANG 里目前估值压力最大的标的之一（仅次于 Apple）。</p>
+    </div>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">13.X 红旗排查（非评分项）</h4>
+  <div class="tbl-wrap">
+    <table class="tbl"><thead><tr><th>红旗项</th><th>状态</th><th>说明</th></tr></thead>
+    <tbody>
+      <tr><td>商誉减值历史</td><td>✓ 无问题</td><td>Motorola 失败已计入历史，无近期重大减值</td></tr>
+      <tr><td>收入确认时点</td><td>✓ 无问题</td><td>广告 / 订阅按月确认，透明</td></tr>
+      <tr><td>关联交易</td><td>✓ 无问题</td><td>无重大关联交易</td></tr>
+      <tr><td>表外负债</td><td>✓ 无问题</td><td>经营租赁已纳入</td></tr>
+      <tr><td>股权激励比例</td><td>⚠️ 注意</td><td>SBC ~$22-25B/年，相对营收较低（6%）但绝对值大</td></tr>
+      <tr><td>反垄断救济判决</td><td>⚠️ 重大注意</td><td>2024-08 败诉，救济判决悬而未决——头号外部风险</td></tr>
+      <tr><td>AI Capex 真实 ROI</td><td>⚠️ 注意</td><td>$185B/年 Capex 的 ROI 要 3-5 年才能验证</td></tr>
+      <tr><td>双层股权</td><td>⚠️ 注意</td><td>Page + Brin 通过 B 类股控制 50%+ 投票权——小股东无制衡</td></tr>
+    </tbody></table>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">13.Y 综合评级</h4>
+  <div class="dcf-note">
+    <p><strong>6 维评分</strong>：A / A+ / A / A- / B+ / B = 综合 <strong>A-</strong>（高质量 + 高估值）</p>
+    <p><strong>红旗排查</strong>：4 项无问题，4 项注意，其中"反垄断救济判决"为<span class="warn-t">重大红旗</span>。<strong>重大红旗触发"有疑问"</strong> → 综合评级从"买入"降至「持有观望」。</p>
+    <p><strong>综合评级</strong>：<span class="rating-badge rating-hold">持有观望</span></p>
+    <p><strong>理由</strong>：(1) 业务质量 A 级（5 维 A 或以上）——这是商业史上最强护城河公司之一；(2) Q1 2026 经营加速 + Cloud 飞轮 + AI 兑现，运营层面无可挑剔；(3) <strong>但</strong>估值已紧贴历史最高（P/E 30x，距 52 周高 -2.4%），安全边际不足；(4) <span class="warn-t">反垄断救济判决 + AI Capex ROI 双重不确定性</span> 让"现价进新仓"风险/回报不对称；(5) 已持仓继续持有；新仓等回调至 $360 以下或反垄断事件落地。<span class="hl-t">这是一笔"质量满分但当下不是好进场点"的标的</span>。</p>
+  </div>
+</div>
+
+<!-- ═══ 投资决策 ═══ -->
+<div class="section">
+  <div class="stitle">海图研判 · 投资决策</div>
+
+  <div class="cgrid">
+    <div class="ccard">
+      <div class="ctitle" style="font-size: 14px;">12 个月概率加权目标价</div>
+      <p style="font-size: 28px; font-weight: 700; color: var(--accent2); margin: 8px 0;">$410</p>
+      <p style="font-size: 13px; color: var(--text2);">+3% 上行 · 中位数估值 $395 / 加权公允 $410</p>
+    </div>
+    <div class="ccard">
+      <div class="ctitle" style="font-size: 14px;">海图评级</div>
+      <p style="font-size: 24px; font-weight: 700; color: var(--accent2); margin: 8px 0;">持有观望</p>
+      <p style="font-size: 13px; color: var(--text2);">质量满分 + 价格已贵 + 反垄断悬剑——已持仓持有，新仓等回调</p>
+    </div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>情景</th><th>假设</th><th>目标价</th><th>概率</th></tr></thead>
+      <tbody>
+        <tr><td>乐观</td><td>反垄断救济温和 + AI Capex ROI 兑现 + Cloud +50% 持续 + 估值重估至 P/E 35x</td><td>$490</td><td>25%</td></tr>
+        <tr><td>基准</td><td>反垄断有限影响 + AI 兑现进度符合预期 + 估值维持 P/E 30x</td><td>$420</td><td>50%</td></tr>
+        <tr><td>悲观</td><td>反垄断严厉判决（Chrome 剥离 / 默认搜索禁止）或 AI Capex ROI 大幅不达预期</td><td>$290</td><td>25%</td></tr>
+        <tr class="hl"><td>概率加权</td><td>—</td><td>$410</td><td>100%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:16px">
+    <p><strong>操作建议</strong>（独立估值中位数 $395，加权公允 $410）：当前价 $398.80<span class="warn-t">已超过机械首仓位 $316（中位数 × 80%），暂不在买入区间</span>。但 Alphabet 是少数"必须长期配置"的公司，已持仓的不应卖。</p>
+    <p>
+      · 机械首仓 <strong>$316</strong>（估值中位数 × 80%，距现价 -21%，回调进场）<br>
+      · 二仓 <strong>$277</strong>（× 70%，距现价 -31%，深度回调）<br>
+      · 三仓 <strong>$237</strong>（× 60%，距现价 -41%，极端机会——反垄断重判时）<br>
+      · 止盈三档 <strong>$450 / $490 / $550</strong>（每档减仓 25%，最后 25% 永远不卖）
+    </p>
+    <p><strong>仓位管理</strong>：建议总仓位 <strong>5-10%</strong>（核心仓 · FAANG 必配 · 已持仓继续持有 · 新仓等回调至 $360 以下或反垄断事件落地）。<strong>持有逻辑</strong>：长期看 Alphabet 是数字时代的"基础设施收税官"，AI 时代继续主导；短期看估值已贵 + 反垄断悬剑，给不出强买入信号。<strong>持有周期 5-10 年</strong>。</p>
+    <p><strong>关键监控指标</strong>：① 反垄断救济判决（最重要）；② Cloud 增速能否维持 +50%+；③ Q2-Q3 2026 Capex 实际花费 vs $185B 指引；④ AI Overview / Gemini 用户增长；⑤ Search 营收是否维持 +15%+；⑥ 回购何时恢复。<strong>下一个催化剂</strong>：2026-07-24 Q2 2026 财报 + 反垄断救济判决（预计 2026 H2）。</p>
+  </div>
+</div>
+
+<!-- ═══ 海图页末长评 ═══ -->
+<div class="section">
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记 · 1150 字</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p class="lead">10 年前你买 Google 是买一台印钞机；今天你买 Alphabet 是买一座正在被改造的 AI 工厂。Q1 2026 营收 $109.9B（+22%）、净利 $62.58B（+81%）、Cloud +63%、营业利润率 36.1% 创新高——经营无可挑剔。但同一份财报里，Capex 飙到 $35.7B、FY26 指引 $180-190B、FCF 暴跌至 $10.1B、股票回购首次暂停。市值 $4.81T 紧贴历史最高。</p>
+
+      <p>这是一家从"现金奶牛"暂时切换成"AI 基建狂魔"的公司——它仍是商业史上最深护城河公司之一，但当下不是新仓的好进场点。</p>
+
+      <h4>几个研判要点</h4>
+
+      <p><strong>一、经营是无可挑剔的，估值是已经反映的。</strong> 营收 +22%、Cloud 营业利润率从 17.8% 跃升至 32.9%、Search +19%（AI Overview 没分流反而提振）、Cloud backlog $460B+、Gemini API +60% QoQ、Waymo 50 万单/周——AI 飞轮已经转动。但 P/E 30x、距 52 周高仅 -2.4%、过去 2 年 +146%——<span class="hl-t">市场已经把这些好消息算进价里了</span>。Alphabet 不再是 2023 年那个 P/E 18x 的"AI 落后者捡漏价"。</p>
+
+      <p><strong>二、$185B Capex 是公司历史上最大豪赌。</strong> 这个数字比 Microsoft、Meta、Amazon 任一家都多。Alphabet 在用今天的 FCF 换明天的 AI 主导权。<span class="warn-t">短期代价显而易见</span>：FCF 从 ~$23B/季度暴跌至 $10.1B、回购被迫暂停、长期债务从 $30B 升至 $77.5B。<strong>长期回报取决于一件事</strong>：AI 收入能不能跑赢 $180B+/年的 D&A 折旧。Cloud 已经在加速，Gemini API 在爆发——但要 3-5 年才能真正定论。</p>
+
+      <p><strong>三、反垄断是头顶悬着的剑。</strong> 2024 年 Mehta 法官已判定 Google 搜索垄断违法，救济判决预计 2026 H2 落地。最坏情况：强制剥离 Chrome / 禁止 Apple 默认搜索协议（断 $20B/年）。<span class="warn-t">这是评级无法上调至"买入"的根本原因</span>。参考微软 2001 年反垄断和解——美国反垄断救济多数是"罚款 + 行为限制"，少有结构性拆分。但在判决落地前，这把剑就悬着。</p>
+
+      <p><strong>四、回购暂停是历史性信号，但不是结构性的。</strong> Alphabet 是美股 6+ 年来最大回购方之一，FY24-FY25 累计 $129B 全部注销股本（含金量 A 级）。Q1 2026 首次暂停回购是 Capex 优先级倾斜的体现——并非"回购不再"，而是"等 Capex 节奏稳定后恢复"。<span class="hl-t">trailing Shareholder Yield 从 1.6% 暂时收窄至 0.4%</span>，对短期股东回报敏感的投资者是负面信号。</p>
+
+      <p><strong>五、12 个月目标价 $410，上行 +3%。</strong> 悲观 $290（-27%，反垄断严厉）、基准 $420（+5%，温和情景）、乐观 $490（+23%，AI 大兑现 + 估值重估）。概率加权 $410——<strong>几乎与当前价持平</strong>。这是公允定价的典型特征：上下空间对称，没有明确的不对称机会。<strong>持有观望是诚实的评级</strong>——质量满分但价格已贵，不强求"必须买入"或"必须卖出"。</p>
+
+      <h4>海图研判</h4>
+
+      <p><strong>评级：持有观望</strong>（业务 A 级 + 经营加速 + AI 飞轮 vs 估值贵 + 反垄断悬剑 + Capex 吞 FCF + 回购暂停 = 公允定价但风险因子未释放）。12 个月概率加权目标价 <strong>$410</strong>（+3%）。</p>
+
+      <p>操作建议：已持仓继续持有；新仓等回调至 <strong>$360</strong> 以下、或反垄断救济判决落地后再评估。机械首仓 $316（×80%·距现价 -21%·回调进场）、二仓 $277（×70%）、三仓 $237（×60%·极端机会）。止盈三档 $450 / $490 / $550，每档减仓 25%，最后 25% 永远不卖。<strong>建议总仓位 5-10%（核心仓 · FAANG 必配 · 长期持有）。持有周期 5-10 年</strong>。</p>
+
+      <h4>风险提示</h4>
+
+      <p>反垄断救济严厉判决（强制剥离 Chrome / 禁默认搜索协议） / AI Capex ROI 不达预期 / ChatGPT 等 AI 搜索真正分流 Search / Cloud 增速失速 / 大额商誉减值——任一项都可能让股价回调 20-30%。但净现金 + FCF Yield 即便降至 0.8% 仍正 + Search 数十亿用户入口构成<strong>硬底</strong>，$280-310 是估值底（22x × FY25 EPS）。</p>
+
+      <p>关键叙事：<strong>"5 维 A+ 护城河 + 经营全面加速 + Cloud 飞轮 + Gemini AI 兑现"的强势组合，对垒"P/E 30x 估值已贵 + $185B Capex 吞 FCF + 反垄断救济悬剑 + 回购首次暂停"的隐忧</strong>。Alphabet 是必须长期配置的公司——但当下不是新仓的好进场点。下次催化剂：2026-07-24 Q2 2026 财报 + 反垄断救济判决（预计 2026 H2）。</p>
+
+      <p class="haitu-sign">—— 海图，灯下落笔，明日再观风浪。</p>
+
+      <p class="haitu-disc">⚠️ 免责声明：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，不构成任何投资建议。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div>《海图夜读》 · Alphabet GOOGL Q1 2026 海图研判</div>
+  <div style="margin-top:6px;">数据来源：Alphabet Q1 2026 财报新闻稿（abc.xyz/investor · 2026-04-29）+ FY2025 年报（2026-02-04）+ SEC 8-K + 投资者关系页 + 公开市场数据</div>
+  <div style="margin-top:6px;">价值投资 · 长期主义</div>
+</footer>
+
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  const cur = html.getAttribute('data-theme');
+  html.setAttribute('data-theme', cur === 'dark' ? 'light' : 'dark');
+  localStorage.setItem('theme', html.getAttribute('data-theme'));
+  renderCharts();
+}
+(function() {
+  const t = localStorage.getItem('theme');
+  if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+})();
+
+function gc(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+
+let charts = {};
+function renderCharts() {
+  Object.values(charts).forEach(c => c && c.destroy && c.destroy());
+  charts = {};
+  const txt2 = gc('--text2'), txt3 = gc('--text3'), grid = gc('--chart-grid');
+  const accent = gc('--accent'), accent2 = gc('--accent2'), accent3 = gc('--accent3');
+  const green = gc('--green'), gold = gc('--gold'), rose = gc('--rose'), red = gc('--red');
+
+  Chart.defaults.color = txt2;
+  Chart.defaults.font.family = 'Segoe UI, sans-serif';
+  Chart.defaults.font.size = 11;
+
+  charts.rev = new Chart(document.getElementById('revenueChart'), {
+    type: 'bar',
+    data: { labels: ['FY21', 'FY22', 'FY23', 'FY24', 'FY25'],
+      datasets: [{ label: '营收（$B）', data: [258, 283, 307, 350, 403], backgroundColor: [accent3, gold, accent2, accent, green], borderRadius: 4 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+      scales: { y: { grid: { color: grid }, ticks: { color: txt3 } }, x: { grid: { display: false }, ticks: { color: txt3 } } } }
+  });
+
+  charts.profit = new Chart(document.getElementById('profitChart'), {
+    type: 'line',
+    data: { labels: ['FY21', 'FY22', 'FY23', 'FY24', 'FY25'],
+      datasets: [{ label: '净利润（$B）', data: [76, 60, 74, 100, 132], borderColor: green, backgroundColor: 'rgba(122,154,122,0.1)', tension: 0.3, fill: true, pointBackgroundColor: green, pointRadius: 5 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+      scales: { y: { grid: { color: grid }, ticks: { color: txt3 } }, x: { grid: { display: false }, ticks: { color: txt3 } } } }
+  });
+
+  charts.seg = new Chart(document.getElementById('segmentChart'), {
+    type: 'doughnut',
+    data: { labels: ['Search 60.4', 'Cloud 20.0', '订阅+设备 12.4', 'YouTube 9.9', 'Network 7.0', 'Other Bets 0.4'],
+      datasets: [{ data: [60.4, 20.0, 12.4, 9.9, 7.0, 0.4], backgroundColor: [accent3, accent, gold, accent2, rose, red], borderColor: gc('--card'), borderWidth: 2 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { color: txt2, font: { size: 11 } } } } }
+  });
+
+  charts.capex = new Chart(document.getElementById('capexChart'), {
+    type: 'bar',
+    data: { labels: ['FY22', 'FY23', 'FY24', 'FY25', 'FY26E'],
+      datasets: [
+        { label: '资本开支（$B）', data: [31, 32, 52, 77, 185], backgroundColor: [accent2, accent, gold, rose, red], borderRadius: 4 }
+      ] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top', labels: { color: txt2, font: { size: 11 } } } },
+      scales: { y: { grid: { color: grid }, ticks: { color: txt3 } }, x: { grid: { display: false }, ticks: { color: txt3 } } } }
+  });
+
+  buildSankey();
+}
+
+function buildSankey() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const txt = isDark ? '#d4ccc4' : '#4a4340';
+  const cardBg = isDark ? '#2e2a25' : '#ffffff';
+
+  const sankeyData = [{
+    type: 'sankey', orientation: 'h', arrangement: 'snap', valueformat: ',.1f', valuesuffix: ' B美元',
+    node: {
+      pad: 22, thickness: 22, line: { color: 'transparent', width: 0 },
+      label: ['营收 109.9', 'TAC+成本 46.4', '毛利 63.5', '研发+销售 23.8', '营业利润 39.7', '所得税 +其他 -22.9', '净利润 62.6', '折旧+SBC +13', '资本开支 35.7', '自由现金流 10.1'],
+      color: ['#7b8fa0', '#b87070', '#8a9a8e', '#b9a06a', '#b08d7a', '#7a9a7a', '#7a9a7a', '#7b8fa0', '#b87070', '#7a9a7a']
+    },
+    link: {
+      source: [0, 0, 2, 2, 4, 4, 6, 7, 6],
+      target: [1, 2, 3, 4, 5, 6, 9, 9, 8],
+      value:  [46.4, 63.5, 23.8, 39.7, -22.9, 62.6, 10.1, 13, 35.7],
+      color: ['rgba(184,112,112,0.30)', 'rgba(138,154,142,0.45)', 'rgba(185,160,106,0.32)', 'rgba(176,141,122,0.45)', 'rgba(122,154,122,0.30)', 'rgba(122,154,122,0.45)', 'rgba(122,154,122,0.40)', 'rgba(123,143,160,0.40)', 'rgba(184,112,112,0.50)']
+    }
+  }];
+
+  const layout = { font: { family: 'Segoe UI, sans-serif', size: 11, color: txt }, paper_bgcolor: cardBg, plot_bgcolor: cardBg, margin: { l: 10, r: 10, t: 10, b: 10 } };
+  Plotly.react('sankey', sankeyData, layout, { displayModeBar: false, responsive: true });
+}
+
+document.addEventListener('DOMContentLoaded', renderCharts);
+</script>
+
+</body>
+</html>
