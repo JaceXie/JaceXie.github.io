@@ -354,6 +354,9 @@ body {
   box-shadow: 0 1px 4px rgba(184,112,112,0.25);
 }
 .cal-type.earnings::before { content: '📊 '; font-size: 0.85em; }
+.cal-type.earnings-notice { background: rgba(212,145,74,0.16); color: #c08040; }
+.cal-type.earnings-notice::before { content: '📋 '; font-size: 0.85em; }
+[data-theme="dark"] .cal-type.earnings-notice { background: rgba(212,145,74,0.18); color: #d4a070; }
 .cal-type.ex-div { background: rgba(176,141,82,0.13); color: var(--gold); }
 .cal-type.record { background: rgba(74,98,128,0.10); color: var(--accent-soft); }
 .cal-type.payment { background: rgba(90,128,104,0.13); color: var(--green); }
@@ -814,6 +817,8 @@ const calendar = [
   { date: "2026-05-13", ticker: "腾讯", type: "earnings", typeLabel: "Q1 2026 财报(已发)", detail: "腾讯 — 已发布，详见<a href=\"haitu/reports/tencent-q1-2026.html\" style=\"color:var(--accent-gold);\">海图研判</a>", xueqiu: "00700" },
   { date: "2026-05-15", ticker: "腾讯", type: "ex-div", typeLabel: "除权日(已过)", detail: "腾讯 — 股息 <strong>HKD 5.30/股</strong>", xueqiu: "00700" },
   { date: "2026-08-12", ticker: "腾讯", type: "earnings", typeLabel: "Q2 2026 财报(估)", detail: "腾讯 — 来源 yfinance 共识，关注 <a href=\"https://xueqiu.com/S/00700\" target=\"_blank\" style=\"color:var(--accent-gold);\">雪球行情</a>", xueqiu: "00700" },
+  /* 名创优品 (09896) */
+  { date: "2026-05-13", ticker: "名创优品", type: "earnings-notice", typeLabel: "Q1 2026 正面盈利预告(已发)", detail: "公告截至 2026-03-31 止季度业绩较去年同期显著增长 · 董事会会议拟于 2026-05-26 召开审议季度业绩 · <a href=\"https://stockn.xueqiu.com/09896/20260513073911.pdf\" target=\"_blank\" style=\"color:var(--accent-gold);\">公告原文</a>", xueqiu: "09896" },
   /* Bitdeer (BTDR) */
   { date: "2026-05-14", ticker: "Bitdeer", type: "earnings", typeLabel: "Q1 2026 财报(已发)", detail: "Bitdeer — 已发布，详见<a href=\"haitu/reports/btdr-q1-2026.html\" style=\"color:var(--accent-gold);\">海图研判</a>", xueqiu: "BTDR" },
   { date: "2026-08-17", ticker: "Bitdeer", type: "earnings", typeLabel: "Q2 2026 财报(估)", detail: "Bitdeer — 来源 yfinance 共识，关注 <a href=\"https://xueqiu.com/S/BTDR\" target=\"_blank\" style=\"color:var(--accent-gold);\">雪球行情</a>", xueqiu: "BTDR" },
@@ -853,9 +858,9 @@ function renderCalendar() {
     return diffDays >= -30;
   });
 
-  // 类型筛选：财报 / 分红 / 全部
+  // 类型筛选：财报（含业绩预告）/ 分红 / 全部
   if (currentCalFilter === 'earnings') {
-    filtered = filtered.filter(e => e.type === 'earnings');
+    filtered = filtered.filter(e => e.type === 'earnings' || e.type === 'earnings-notice');
   } else if (currentCalFilter === 'dividend') {
     filtered = filtered.filter(e => e.type === 'ex-div' || e.type === 'payment');
   }
@@ -877,7 +882,7 @@ function renderCalendar() {
     const isToday = d.getTime() === today.getTime();
     const cls = [
       isPast ? 'past' : (isToday ? 'today' : 'upcoming'),
-      e.type === 'earnings' ? 'is-earnings' : ''
+      (e.type === 'earnings' || e.type === 'earnings-notice') ? 'is-earnings' : ''
     ].filter(Boolean).join(' ');
     const dow = dayNames[d.getDay()];
     const todayLabel = isToday ? ' <span style="color:var(--accent-gold);font-weight:700;">· 今天</span>' : '';

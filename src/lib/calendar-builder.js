@@ -1,10 +1,20 @@
+import { existsSync, readFileSync } from 'node:fs';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { logger } from './logger.js';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const NOTICES_PATH = resolve(__dirname, '..', '..', 'data', 'earnings-notices.json');
 
 /**
  * 把 yfinance fetch 结果 + tickers.json 转成日历事件数组。
  *
  * 时间窗口：过去 30 天 + 全部未来。
- * 事件类型：earnings | ex-div | payment（match index.html 现有 type 集）
+ * 事件类型：
+ *   - earnings：实际财报发布日（yfinance 抓）
+ *   - earnings-notice：业绩预告 / 盈利预告 / 盈利警告（从 data/earnings-notices.json 手工维护读取）
+ *   - ex-div：除权日（yfinance 抓）
+ *   - payment：派息日（yfinance 抓）
  *
  * 同时保留"已发布的最近一次财报 + 派息已发"事件 30 天内（标记 已发 / 已过）。
  */
@@ -111,6 +121,35 @@ export function buildCalendar(fetchResults, todayStr) {
         detail: `${getCompanyShortName(t)} — 股息派付 ${amount ? `<strong>${sym} ${formatMoney(amount, currency)}/股</strong>` : ''}`,
         xueqiu: t.xueqiuCode
       });
+    }
+  }
+
+  // ── 5. 业绩预告 / 盈利预告 (earnings-notice) — 手工维护，从 data/earnings-notices.json 读取 ──
+  if (existsSync(NOTICES_PATH)) {
+    try {
+      const raw = JSON.parse(readFileSync(NOTICES_PATH, 'utf-8'));
+      const notices = Array.isArray(raw.notices) ? raw.notices : [];
+      let added = 0;
+      for (const n of notices) {
+        if (!n.noticeDate || n.noticeDate < sevenAgoStr) continue;
+        const isPast = n.noticeDate < todayStr;
+        const isToday = n.noticeDate === todayStr;
+        const tail = isPast ? '(已发)' : isToday ? '(今日)' : '';
+        const headline = n.headline || '业绩预告';
+        const period = n.period ? `${n.period} ` : '';
+        events.push({
+          date: n.noticeDate,
+          ticker: n.displayName || n.ticker || '',
+          type: 'earnings-notice',
+          typeLabel: `${period}${headline}${tail}`.trim(),
+          detail: `${n.summary || ''}${n.sourceUrl ? ` · <a href="${n.sourceUrl}" target="_blank" style="color:var(--accent-gold);">公告原文</a>` : ''}`,
+          xueqiu: n.xueqiu || n.ticker || ''
+        });
+        added++;
+      }
+      logger.info(`Loaded ${added} earnings-notice events from earnings-notices.json`);
+    } catch (e) {
+      logger.warn(`earnings-notices.json 读取失败：${e.message}`);
     }
   }
 
