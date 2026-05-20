@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-05-20，基于 Miniso 名创优品 Q4 2025 + 全年财报（2026-03-31 发布） -->
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Miniso 名创优品 9896 Q4 2025 + 全年 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root {
+  --bg: #f5f0eb; --bg2: #ece6df; --card: #ffffff; --card2: #f8f5f1; --border: #d9d0c7;
+  --text: #4a4340; --text2: #7a706a; --text3: #a89f98;
+  --accent: #8a9a8e; --accent2: #7b8fa0; --accent3: #b08d7a;
+  --rose: #c09090; --gold: #b9a06a; --red: #b87070; --green: #7a9a7a;
+  --shadow: rgba(0,0,0,0.06); --chart-grid: #e5ddd5;
+}
+[data-theme="dark"] {
+  --bg: #1e1c1a; --bg2: #28251f; --card: #2e2a25; --card2: #363230; --border: #4a4540;
+  --text: #d4ccc4; --text2: #a09890; --text3: #706860;
+  --accent: #8a9a8e; --accent2: #8fabbf; --accent3: #c9a48e;
+  --rose: #c09090; --gold: #c9b07a; --red: #c08080; --green: #8aaa8a;
+  --shadow: rgba(0,0,0,0.3); --chart-grid: #3e3a35;
+}
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Georgia','Noto Serif SC','PingFang SC',serif; line-height: 1.75; font-size: 14.5px; transition: background .35s, color .35s; }
+a { color: var(--accent2); text-decoration: none; }
+.theme-bar { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); }
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; text-decoration: none; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+.toggle-switch { position: relative; width: 44px; height: 22px; background: var(--border); border-radius: 11px; cursor: pointer; transition: background .3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: var(--card); border-radius: 50%; transition: transform .3s; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+.hero { padding: 48px 24px 36px; text-align: center; border-bottom: 1px solid var(--border); }
+.hero-tag { display: inline-block; font-family: 'Segoe UI',sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 3px 14px; border-radius: 20px; margin-bottom: 18px; }
+.hero h1 { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.pill { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: 'Segoe UI',sans-serif; font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow); }
+.pill strong { color: var(--text); }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle { font-size: 18px; font-weight: 700; color: var(--accent3); margin-bottom: 20px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+.stitle::before { content: ''; display: block; width: 4px; height: 20px; background: var(--accent3); border-radius: 2px; }
+.haitu-quip { display: flex; align-items: center; gap: 18px; background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--gold); border-radius: 12px; padding: 18px 24px; margin: 24px 0; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-quote { flex: 1; }
+.haitu-portrait { font-size: 15px; line-height: 1.65; color: var(--text); margin-bottom: 6px; font-weight: 600; }
+.haitu-rating-line { font-size: 13px; color: var(--text2); font-family: 'Segoe UI',sans-serif; }
+.rating-badge { display: inline-block; padding: 2px 12px; border-radius: 12px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; margin-left: 4px; }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+.rating-cond-buy { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-hold { background: rgba(123,143,160,.18); color: var(--accent2); }
+.rating-sell { background: rgba(184,112,112,.18); color: var(--red); }
+.haitu-essay { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 28px 32px; margin: 24px 0 20px; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-essay-header { display: flex; align-items: center; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.haitu-avatar-sm { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); background: var(--red); box-shadow: 0 2px 8px rgba(184,112,112,0.2); }
+.haitu-name-lg { font-family: 'Georgia','Noto Serif SC',serif; font-size: 28px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 4px; }
+.haitu-essay-tag { font-family: 'Segoe UI',sans-serif; font-size: 12px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; }
+.haitu-essay-body { font-family: 'Georgia','Noto Serif SC',serif; font-size: 15px; line-height: 2.0; color: var(--text); }
+.haitu-essay-body p { margin-bottom: 14px; }
+.haitu-essay-body p.lead { font-size: 16px; font-style: italic; color: var(--text2); margin-bottom: 18px; }
+.haitu-essay-body strong { color: var(--text); font-weight: 700; }
+.haitu-essay-body h4 { font-size: 14px; color: var(--accent3); margin: 18px 0 10px; font-family: 'Segoe UI',sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+.haitu-sign { text-align: right; margin-top: 18px; font-family: 'Georgia',serif; font-size: 14px; color: var(--text2); font-style: italic; }
+.haitu-disc { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); font-style: italic; line-height: 1.7; }
+.stock-snap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill,minmax(160px,1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px; }
+.snap-item { text-align: center; }
+.snap-label { font-family: 'Segoe UI',sans-serif; font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.snap-val { font-family: 'Segoe UI',sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+.snap-val.up { color: var(--green); }
+.snap-val.dn { color: var(--red); }
+.snap-sub { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text3); margin-top: 2px; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(195px,1fr)); gap: 14px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow); }
+.kpi-l { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.kpi-v.up { color: var(--green); }
+.kpi-v.dn { color: var(--red); }
+.badge { display: inline-block; font-family: 'Segoe UI',sans-serif; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+.up { background: rgba(122,154,122,.15); color: var(--green); }
+.dn { background: rgba(184,112,112,.15); color: var(--red); }
+.nt { background: rgba(123,143,160,.15); color: var(--accent2); }
+.tbl-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow); }
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI',sans-serif; font-size: 13px; }
+.tbl th { background: var(--card2); color: var(--text3); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); background: var(--card2); }
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); }
+.ctitle { font-size: 13px; color: var(--text2); margin-bottom: 12px; font-weight: 600; }
+.cwrap { position: relative; height: 240px; }
+.cmt { font-size: 14px; color: var(--text2); line-height: 1.85; }
+.cmt p { margin-bottom: 12px; }
+.cmt strong { color: var(--text); }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+.bscore { display: flex; gap: 16px; padding: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 12px; box-shadow: 0 1px 4px var(--shadow); }
+.bscore .circle { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; color: white; flex-shrink: 0; }
+.cg { background: var(--green); }
+.cw { background: var(--gold); }
+.co { background: var(--rose); }
+.cr { background: var(--red); }
+.cb { background: var(--accent2); }
+.bd h4 { font-size: 14px; color: var(--text); margin-bottom: 6px; font-family: 'Segoe UI',sans-serif; letter-spacing: 0.5px; }
+.bd p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+.pgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.dcf-note { background: var(--card2); border-left: 3px solid var(--accent2); padding: 14px 18px; border-radius: 6px; font-size: 13.5px; color: var(--text2); line-height: 1.85; }
+.dcf-note p { margin-bottom: 8px; }
+.dcf-note strong { color: var(--text); }
+.tag-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap: 12px; margin-top: 14px; }
+.tag-card { background: var(--card); border: 1px solid var(--border); border-left: 3px solid var(--accent2); padding: 12px 16px; border-radius: 6px; }
+.tag-card.pos { border-left-color: var(--green); }
+.tag-card.neg { border-left-color: var(--red); }
+.tag-card.neu { border-left-color: var(--accent2); }
+.tag-card h5 { font-size: 13px; color: var(--text); margin-bottom: 6px; font-family: 'Segoe UI',sans-serif; }
+.tag-card p { font-size: 12px; color: var(--text2); line-height: 1.7; }
+.tag-card .tag-bd { font-family: 'Segoe UI',sans-serif; font-size: 10px; padding: 1px 6px; border-radius: 4px; margin-left: 4px; }
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap: 12px; }
+.risk-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 14px 18px; position: relative; box-shadow: 0 1px 3px var(--shadow); }
+.risk-card::before { content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent); }
+.risk-card.r1::before { background: var(--green); }
+.risk-card.r2::before { background: rgba(122,154,122,.6); }
+.risk-card.r3::before { background: var(--gold); }
+.risk-card.r4::before { background: var(--rose); }
+.risk-card.r5::before { background: var(--red); }
+.risk-card h5 { font-size: 14px; margin-bottom: 6px; color: var(--text); }
+.risk-score { font-family: 'Segoe UI',sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.r1 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r2 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r3 .risk-score { background: rgba(185,160,106,.18); color: var(--gold); }
+.r4 .risk-score { background: rgba(192,144,144,.18); color: var(--rose); }
+.r5 .risk-score { background: rgba(184,112,112,.18); color: var(--red); }
+.risk-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+footer { background: var(--card2); border-top: 1px solid var(--border); padding: 24px; text-align: center; color: var(--text3); font-size: 12px; margin-top: 40px; line-height: 1.8; }
+@media (max-width: 768px) { .cgrid,.pgrid { grid-template-columns: 1fr; } .hero h1 { font-size: 22px; } .kpi-grid { grid-template-columns: 1fr 1fr; } .stock-snap { grid-template-columns: 1fr 1fr; } .haitu-essay-header { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/09896" target="_blank" rel="noopener" title="在雪球查看 Miniso 实时行情">雪球 09896</a>
+  </div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">FY2025 财报发布 · 2026-03-31 &nbsp;|&nbsp; 海图研判 · 2026-05-20</div>
+  <h1>Miniso 名创优品 9896 · Q4 2025 + 全年 深度分析</h1>
+  <div class="hero-sub">HKEX: 9896 / NYSE: MNSO &nbsp;|&nbsp; 全球生活方式品牌 · IP 战略 · TOP TOY 高速增长 · 永辉超市 29.4% 战略股权 · MiniMax 早期投资 &nbsp;|&nbsp; 价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill">股价 <strong>HKD 27.74</strong></div>
+    <div class="pill">市值 <strong>~$4.5B</strong></div>
+    <div class="pill">FY25 营收 <strong>¥214亿(+26%)</strong></div>
+    <div class="pill">调整净利 <strong>¥29亿(+6.5%)</strong></div>
+    <div class="pill">GAAP 净利 <strong>¥12亿(-54%)</strong></div>
+    <div class="pill">海图研判 <strong>有条件买入</strong></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 海图页首短评 ═══ -->
+<div class="haitu-quip">
+  <div class="haitu-quote">
+    <div class="haitu-portrait">Miniso 是一家正在"双线作战"的全球生活方式品牌——主业（8,485 家 MINISO + TOP TOY 门店）FY2025 营收 ¥214亿(+26%)、调整后净利 ¥29亿(+6.5%)、海外门店净增 465 家、TOP TOY 营收 +95%——经营层面稳健强劲。<strong>但创始人叶国富 2024-09 用 ¥62.7 亿（其中 ¥40 亿银行借款）增持永辉超市 29.4%，押注"胖东来"式重塑——FY2025 仅永辉权益法亏损就拖累 ¥8.1 亿，让 GAAP 净利暴跌 -54%</strong>。叠加 MiniMax IPO 带来的 Q1 2026 一次性公允价值收益 ¥8.7 亿，GAAP 利润已严重失真。真实的 Miniso 在调整后净利里：稳健成长 + 资本返还慷慨（FY25 ¥19 亿，占调整净利 66%）+ 估值合理（调整 P/E ~11x，前瞻 ~9.5x）+ 一道是非题：永辉能否真的翻身。</div>
+    <div class="haitu-rating-line">评级：<span class="rating-badge rating-cond-buy">有条件买入</span> · 12 个月概率加权目标价 HKD 35（+26%）· "条件" = 永辉重整持续兑现 + 调整净利双位数 + 资本返还慷慨延续；当前 HKD 27.74 已逼近首仓位 HKD 28</div>
+  </div>
+</div>
+
+<!-- ═══ 市场数据快照 ═══ -->
+<div class="section">
+  <div class="stitle">市场数据快照（2026-05-19）· 货币：HKD / RMB ≈ 0.91 · USD/RMB ≈ 7.07</div>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">股价（HK）</div><div class="snap-val">HKD 27.74</div><div class="snap-sub">2026-05-19 收盘</div></div>
+    <div class="snap-item"><div class="snap-label">市值</div><div class="snap-val">~HKD 34.8B</div><div class="snap-sub">~$4.5B · ~¥31.6亿</div></div>
+    <div class="snap-item"><div class="snap-label">流通股</div><div class="snap-val">12.38 亿</div><div class="snap-sub">普通股 · ADS:普通 = 1:4</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间</div><div class="snap-val dn">HKD 27.7-51.95</div><div class="snap-sub">距高点 -47% / 近 52 周低点</div></div>
+    <div class="snap-item"><div class="snap-label">TTM P/E (GAAP)</div><div class="snap-val dn">~25.8x</div><div class="snap-sub">被永辉权益法亏损扭曲</div></div>
+    <div class="snap-item"><div class="snap-label">TTM P/E (调整后)</div><div class="snap-val up">~10.7x</div><div class="snap-sub"><strong>更可信口径</strong></div></div>
+    <div class="snap-item"><div class="snap-label">Forward P/E</div><div class="snap-val up">~9.5x</div><div class="snap-sub">FY26 共识 ¥33亿</div></div>
+    <div class="snap-item"><div class="snap-label">P/B</div><div class="snap-val">~2.9x</div><div class="snap-sub">每股净资产 ¥8.68</div></div>
+    <div class="snap-item"><div class="snap-label">EV/Adj EBITDA</div><div class="snap-val up">~6.7x</div><div class="snap-sub">调整后口径</div></div>
+    <div class="snap-item"><div class="snap-label">股息率（trailing）</div><div class="snap-val up">~4.4%</div><div class="snap-sub">FY25 ¥13.6亿派息</div></div>
+    <div class="snap-item"><div class="snap-label">股东总回报率</div><div class="snap-val up">~6.1%</div><div class="snap-sub">股息+回购 ¥19亿/市值</div></div>
+    <div class="snap-item"><div class="snap-label">FCF Yield</div><div class="snap-val up">~5.0%</div><div class="snap-sub">FY25 FCF ¥15.8亿</div></div>
+    <div class="snap-item"><div class="snap-label">现金 + 受限 + 存款</div><div class="snap-val up">¥70.9亿</div><div class="snap-sub">$10.0亿</div></div>
+    <div class="snap-item"><div class="snap-label">有息负债</div><div class="snap-val dn">¥71.7亿</div><div class="snap-sub">短债 ¥17.5 + 长债 ¥54.2</div></div>
+    <div class="snap-item"><div class="snap-label">永辉投资账面值</div><div class="snap-val">¥54.9亿</div><div class="snap-sub">29.4% 股权 · 持续亏损中</div></div>
+    <div class="snap-item"><div class="snap-label">下次催化剂</div><div class="snap-val nt">2026-05-26</div><div class="snap-sub">Q1 2026 完整业绩</div></div>
+  </div>
+  <div class="dcf-note" style="margin-top:18px">
+    <strong>关键数据洞察 · 看穿 GAAP 利润的两层扭曲：</strong>
+    <p style="margin-top:8px">(1) <span class="warn-t">FY2025 GAAP 净利 ¥12.1 亿（-54%）的"暴跌"是会计错觉</span>——主要拖累来自永辉超市 29.4% 股权按权益法记入的 <strong>¥8.1 亿亏损</strong>（这是新增的非现金账面损失）；真实主业用调整后净利 ¥29.0 亿（+6.5%）衡量；(2) <span class="hl-t">Q1 2026 业绩快报却走向另一个极端</span>——MiniMax 香港 IPO 带来一笔 ¥8.7-8.8 亿不可重复的公允价值收益，把 Q1 GAAP 净利推高 +195-200%，但剔除这笔后调整净利仅 +7-10%；(3) <strong>主业经营信号扎实</strong>：营收 +26%、海外 +29%、TOP TOY +95%、Q4 中国同店中双位数复苏；(4) 资本返还慷慨：FY25 派息 ¥13.6 亿 + 回购 ¥5.5 亿 = ¥19 亿（占调整净利 66%）；(5) <strong>下一个催化剂</strong>：2026-05-26 Q1 2026 完整业绩 + 永辉重整的下半场。<strong>海图提醒：Miniso 不能看 GAAP P/E，要看调整后 ~11x 的真实价格——同时盯永辉这道是非题。</strong></p>
+  </div>
+</div>
+
+<!-- ═══ FY2025 KPI ═══ -->
+<div class="section">
+  <div class="stitle">FY2025 全年核心业绩（2026 财年 1-12 月 · 2026-03-31 发布）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">总营收</div><div class="kpi-v up">¥214.4亿</div><span class="badge up">+26.2% YoY</span><div class="kpi-l" style="margin-top:6px">$30.7亿 · 历史新高</div></div>
+    <div class="kpi"><div class="kpi-l">MINISO 品牌营收</div><div class="kpi-v up">¥195.2亿</div><span class="badge up">+22.0% YoY</span><div class="kpi-l" style="margin-top:6px">中国 +16.8% / 海外 +29.3%</div></div>
+    <div class="kpi"><div class="kpi-l">TOP TOY 营收</div><div class="kpi-v up">¥19.2亿</div><span class="badge up">+94.8% YoY</span><div class="kpi-l" style="margin-top:6px">高速增长 · 拆分 IPO 在即</div></div>
+    <div class="kpi"><div class="kpi-l">毛利</div><div class="kpi-v up">¥96.5亿</div><span class="badge up">毛利率 45.0%</span><div class="kpi-l" style="margin-top:6px">微涨 +0.1 ppts</div></div>
+    <div class="kpi"><div class="kpi-l">营业利润</div><div class="kpi-v">¥33.0亿</div><span class="badge nt">营业利润率 15.4%</span><div class="kpi-l" style="margin-top:6px">vs FY24 ¥33.2亿</div></div>
+    <div class="kpi"><div class="kpi-l">调整后营业利润</div><div class="kpi-v up">¥36.7亿</div><span class="badge up">+7.9% YoY</span><div class="kpi-l" style="margin-top:6px">利润率 17.1%</div></div>
+    <div class="kpi"><div class="kpi-l">永辉权益法亏损</div><div class="kpi-v dn">-¥8.1亿</div><span class="badge dn">非现金 · FY24 无</span><div class="kpi-l" style="margin-top:6px">2024-09 起并表</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 归母净利</div><div class="kpi-v dn">¥12.1亿</div><span class="badge dn">-54% YoY</span><div class="kpi-l" style="margin-top:6px">vs FY24 ¥26.4亿</div></div>
+    <div class="kpi"><div class="kpi-l">调整后归母净利</div><div class="kpi-v up">¥29.0亿</div><span class="badge up">+6.5% YoY</span><div class="kpi-l" style="margin-top:6px"><strong>核心口径</strong></div></div>
+    <div class="kpi"><div class="kpi-l">GAAP EPS（普通股）</div><div class="kpi-v">¥0.98</div><span class="badge nt">摊薄</span><div class="kpi-l" style="margin-top:6px">vs 调整 ¥2.36</div></div>
+    <div class="kpi"><div class="kpi-l">调整 EPS / ADS</div><div class="kpi-v up">¥9.44</div><span class="badge up">+8.3% YoY</span><div class="kpi-l" style="margin-top:6px">1 ADS = 4 普通股</div></div>
+    <div class="kpi"><div class="kpi-l">经营活动现金流</div><div class="kpi-v up">¥25.8亿</div><span class="badge up">88.9% / 调整净利</span><div class="kpi-l" style="margin-top:6px">现金流质量稳健</div></div>
+    <div class="kpi"><div class="kpi-l">资本开支 Capex</div><div class="kpi-v">¥10.0亿</div><span class="badge nt">扩张性为主</span><div class="kpi-l" style="margin-top:6px">门店 + IT</div></div>
+    <div class="kpi"><div class="kpi-l">自由现金流</div><div class="kpi-v up">¥15.8亿</div><span class="badge up">FCF Yield ~5%</span><div class="kpi-l" style="margin-top:6px">OCF − Capex</div></div>
+  </div>
+</div>
+
+<!-- ═══ Q4 2025 KPI ═══ -->
+<div class="section">
+  <div class="stitle">Q4 2025 季度业绩（2025 年 10-12 月 · 营收加速 +32.7%）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">Q4 总营收</div><div class="kpi-v up">¥62.5亿</div><span class="badge up">+32.7% YoY</span><div class="kpi-l" style="margin-top:6px">超指引上限 25-30%</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 MINISO 品牌</div><div class="kpi-v up">¥56.5亿</div><span class="badge up">+27.7% YoY</span><div class="kpi-l" style="margin-top:6px">中国 +25.0% / 海外 +30.5%</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 TOP TOY</div><div class="kpi-v up">¥6.0亿</div><span class="badge up">+111.8% YoY</span><div class="kpi-l" style="margin-top:6px">爆发性增长</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 毛利率</div><div class="kpi-v">46.4%</div><span class="badge nt">vs Q4 24 47.0%</span><div class="kpi-l" style="margin-top:6px">微降 -0.6 ppts</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 调整后营业利润</div><div class="kpi-v up">¥10.6亿</div><span class="badge up">+11.7% YoY</span><div class="kpi-l" style="margin-top:6px">利润率 17.0%</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 永辉权益法亏损</div><div class="kpi-v dn">-¥5.5亿</div><span class="badge dn">较前季加大</span><div class="kpi-l" style="margin-top:6px">闭店改造一次性损失</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 GAAP 净利</div><div class="kpi-v dn">-¥1.4亿</div><span class="badge dn">Q4 GAAP 亏损</span><div class="kpi-l" style="margin-top:6px">永辉拖累所致</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 调整后净利</div><div class="kpi-v up">¥8.5亿</div><span class="badge up">+7.6% YoY</span><div class="kpi-l" style="margin-top:6px">主业仍稳健</div></div>
+    <div class="kpi"><div class="kpi-l">中国同店</div><div class="kpi-v up">中双位数</div><span class="badge up">8 季度最佳</span><div class="kpi-l" style="margin-top:6px">复苏信号清晰</div></div>
+  </div>
+  <div class="dcf-note" style="margin-top:14px">
+    <p><strong>Q4 2025 主旋律</strong>：营收 +32.7% 超指引上限，<span class="hl-t">中国同店达到 8 季度最佳的中双位数水平</span>，海外门店净增 465 家、TOP TOY +112%——主业增长在 Q4 全面加速。但同期 <span class="warn-t">永辉权益法 Q4 亏损 ¥5.5 亿</span>（叠加门店闭店改造的一次性减值）让 Q4 GAAP 转亏 ¥1.4 亿，扭曲了财报标题数字。<strong>Q4 调整后净利 ¥8.5 亿 +7.6% 才是主业的真实状态</strong>。</p>
+  </div>
+</div>
+
+<!-- ═══ Q1 2026 业绩快报 ═══ -->
+<div class="section">
+  <div class="stitle">Q1 2026 业绩快报（2026-05-13 发布 · 完整业绩 5-26 出炉）</div>
+  <div class="cmt">
+    <p><strong>2026-05-13 名创优品发布 Q1 2026 (2026 年 1-3 月) 正面盈利警示（profit alert）</strong>：</p>
+    <div class="tbl-wrap" style="margin:10px 0">
+      <table class="tbl">
+        <thead><tr><th>指标</th><th>Q1 2026 预估</th><th>YoY 变动</th><th>说明</th></tr></thead>
+        <tbody>
+          <tr><td>营收</td><td>¥56.78-57.28 亿</td><td>+28-29%</td><td>延续 Q4 加速势头</td></tr>
+          <tr><td>归母净利（GAAP）</td><td>¥12.28-12.48 亿</td><td>+195-200%</td><td>"翻三倍"标题</td></tr>
+          <tr><td>MiniMax 公允价值收益（含一次性）</td><td>¥8.7-8.8 亿</td><td>—</td><td><span class="warn-t">占净利 70%+ · 一次性、不可重复</span></td></tr>
+          <tr><td>调整后归母净利（剔除 MiniMax + 汇兑）</td><td>—</td><td>+7-10%</td><td><strong>核心经营真实增速</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>MiniMax 投资始末</strong>：名创于 2023 年前作为早期投资人入股了 MiniMax（中国 AI/LLM 公司，旗下"Hailuo"模型）。MiniMax 于 <strong>2026-01-09 港交所 IPO</strong>，募资 ~HK$55 亿、上市首日市值突破 $115 亿美元。名创持股比例未单独披露（低于 5% 港股披露门槛），但按 Q1 公允价值变动反推：<span class="hl-t">这笔早期投资目前账面价值约 $1.5-2 亿，是一笔"无心插柳"的 AI 红利</span>。但作为公允价值会计项，未来季度的波动同样可能向下——既能把 GAAP 利润"吹大"，也能"吹小"。</p>
+    <p><strong>海图研判（Q1 快报）</strong>：营收 +28% 的主业增长是<span class="hl-t">真东西</span>；净利 +200% 是<span class="warn-t">数字游戏</span>——70% 来自 MiniMax 的一次性 mark-to-market。<strong>真实的核心增速 +7-10%</strong>，与 FY2025 节奏一致。5-26 完整业绩会同步披露永辉权益法损益的最新进展——那才是估值的关键变量。</p>
+  </div>
+</div>
+
+<!-- ═══ 季度趋势 ═══ -->
+<div class="section">
+  <div class="stitle">趋势图（4 年总览 · 营收 / 调整净利 / 分部 / 门店）</div>
+  <div class="cgrid">
+    <div class="ccard">
+      <div class="ctitle">FY 营收增长（¥亿）</div>
+      <div class="cwrap"><canvas id="revenueChart"></canvas></div>
+    </div>
+    <div class="ccard">
+      <div class="ctitle">调整后归母净利（¥亿）</div>
+      <div class="cwrap"><canvas id="profitChart"></canvas></div>
+    </div>
+    <div class="ccard">
+      <div class="ctitle">FY2025 营收结构（¥亿）</div>
+      <div class="cwrap"><canvas id="segmentChart"></canvas></div>
+    </div>
+    <div class="ccard">
+      <div class="ctitle">全球门店数（年末 · 家）</div>
+      <div class="cwrap"><canvas id="capexChart"></canvas></div>
+    </div>
+  </div>
+  <div class="dcf-note" style="margin-top:16px">
+    <p>四张图共同讲述一件事——<strong>主业从 2022 到 2025 在持续、稳健地扩张</strong>：营收从 ¥100 亿增至 ¥214 亿（4 年翻倍）、调整后净利从 ¥15 亿增至 ¥29 亿、全球门店从约 5,440 家扩至 8,485 家（净增 3,045）。<span class="hl-t">FY2025 营收结构里，海外 MINISO（¥86亿）已接近中国 MINISO（¥109亿）的八成</span>——国际化是结构性顺风；TOP TOY ¥19 亿虽然占比只 9%，但增速 +95%、规模在两年里翻了 3 倍多。这是一家"主业不出问题，故事自己会讲"的公司。</p>
+  </div>
+</div>
+
+<!-- ═══ Sankey ═══ -->
+<div class="section">
+  <div class="stitle">FY2025 资金流向 · 营收 → 自由现金流（¥ 亿）</div>
+  <div class="ccard">
+    <div class="ctitle">¥214 亿营收 → ¥16 亿自由现金流；永辉权益法亏损 ¥8.1 亿独立支出，是 GAAP 净利失真的根源</div>
+    <div id="sankey" style="width:100%;height:480px;"></div>
+  </div>
+</div>
+
+<!-- ═══ 模块 1 ═══ -->
+<div class="section">
+  <div class="stitle">模块 1 · 公司概览与背景</div>
+  <div class="cmt">
+    <p><strong>公司全称</strong>：名创优品集团控股有限公司 / MINISO Group Holding Limited<br>
+    <strong>上市</strong>：NYSE: MNSO（2020-10-15 IPO）+ HKEX: 9896（2022-07-13 二次上市）<br>
+    <strong>总部</strong>：广州<br>
+    <strong>注册地</strong>：开曼群岛<br>
+    <strong>财年</strong>：1 月 1 日 - 12 月 31 日（2023 年从原 6 月底财年制变更为日历年）<br>
+    <strong>主营</strong>：全球生活方式产品零售（家居、文具、美妆、零食、玩具）——以加盟 / 经销为主、自营少量旗舰店；旗下两大品牌：<strong>MINISO</strong>（全球 8,151 家门店，主品牌）+ <strong>TOP TOY</strong>（334 家，潮玩 / 盲盒 / 收藏品集合店）。</p>
+
+    <p><strong>核心叙事</strong>：MINISO 是<span class="hl-t">"东方小杂货 + 全球 IP 联名"的零售范式</span>——它把宜家的"低价好看"、无印良品的"性冷淡风"、迪士尼的"IP 内容"做了一次中国式重组，靠加盟扩张 + 全球供应链反向定制，把 SKU 数量、价格带、上新速度都压到极致。FY2025 营收 ¥214 亿（+26%）、调整后净利 ¥29 亿（+6.5%）。<strong>两条第二曲线</strong>：(1) 国际化——海外 MINISO 营收已占品牌的 44.2%（¥86 亿），美国同店 Q4 录得低双位数；(2) TOP TOY——潮玩集合店模式 +95% 增长，且<strong>已传出 2026 年港股拆分 IPO 计划</strong>。<span class="warn-t">最大的争议</span>：2024-09 公司动用 ¥62.7 亿（含 ~¥40 亿银行借款）增持永辉超市 29.4% 股权，押注"胖东来"式重塑大卖场——FY2025 永辉权益法亏损 ¥8.1 亿，让 GAAP 利润暴跌 -54%。</p>
+
+    <p><strong>简史与里程碑</strong>：</p>
+    <p>
+      <strong>1. 2013 年广州创立</strong>——叶国富（前"哎呀呀"创始人）联合日本设计师三宅顺也共创，定位"全球十元店"<br>
+      <strong>2. 2015-2020 加盟扩张 + 全球开店</strong>——靠加盟 + 标准化 SKU 高速复制，进入 100+ 国家<br>
+      <strong>3. 2020-10-15 NYSE 上市</strong>——IPO 募资约 $6.8 亿，市值约 $80 亿<br>
+      <strong>4. 2022-07-13 港股二次上市</strong>——HKEX: 9896<br>
+      <strong>5. 2023 起 IP 战略提速</strong>——与 Chiikawa、三丽鸥、迪士尼、NBA、宝可梦、芭比等签长期 IP 合作<br>
+      <strong>6. 2023-07 启动股息政策</strong>——派息 ≥ 调整净利 50%，开启系统性资本返还<br>
+      <strong>7. 2024-09-23 增持永辉超市 29.4%</strong>——RMB 62.7 亿（部分银行借款融资），CEO 亲自挂帅永辉重整<br>
+      <strong>8. 2026-01-09 MiniMax 港股 IPO</strong>——名创早期投资市值随之兑现公允价值收益<br>
+      <strong>9. 2026-03-31 FY2025 财报</strong>——营收 +26%、调整净利 +6.5%、GAAP -54%（永辉拖累）
+    </p>
+
+    <p><strong>股权结构（2025-12-31 末）</strong>：</p>
+    <p>
+      <strong>叶国富 + 杨云云夫妇</strong>（创始人）——通过 YGF Trust 持有<span class="hl-t">全部 B 类股（每股 3 票超级投票权）</span>，经济权益约 <strong>62%</strong>，牢牢掌握控制权<br>
+      <strong>其他机构与公众</strong>——其余约 38%<br>
+      <strong>注</strong>：双层股权（dual-class）结构 + 创始人深度控盘——好处是决策果断、长期一致；<span class="warn-t">坏处是小股东对永辉这种大额非主营投资的制衡能力有限</span>。
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 模块 2 ═══ -->
+<div class="section">
+  <div class="stitle">模块 2 · 管理层评估</div>
+
+  <div class="bscore">
+    <div class="circle cw">B+</div>
+    <div class="bd">
+      <h4>叶国富 · 创始人 / 董事长 / CEO（2013 至今）</h4>
+      <p>1977 年生，湖北人，前"哎呀呀"饰品连锁创始人。2013 年与日本设计师三宅顺也共创 MINISO，是公司的<span class="hl-t">绝对灵魂人物</span>。优点：12 年深耕同一行业、对零售供应链与全球加盟体系有深刻直觉；2023 年起主导 IP 战略升级 + 调整后净利持续增长，证明经营能力；2024 年起亲自挂帅永辉重整，"All-in" 长期主义底色明显。<span class="warn-t">扣分项</span>：2024-09 永辉 ¥62.7 亿+ 借款的大额非主营投资<strong>偏离了"专注主业"的纪律</strong>，是一次有争议的资本配置赌博；双层股权下小股东对此几乎无制衡能力。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>杨云云 · 联合创始人 / 总裁</h4>
+      <p>叶国富之妻，公司联合创始人，主管运营与门店体系。低调、与叶国富搭档稳定。<span class="hl-t">夫妻档共同控盘 + 长期持股</span>——决策一致性高，长期主义可信。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B+</div>
+    <div class="bd">
+      <h4>张靖京（Eason Zhang）· 副总裁 / CFO（2023-01 起）</h4>
+      <p>普华永道出身，CFA。任内主导了股息政策制定、多次回购计划、永辉收购的财务结构设计。<strong>对资本市场沟通职业、披露透明度高</strong>——但永辉收购的债务融资也在他任内显著抬升财务杠杆。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B</div>
+    <div class="bd">
+      <h4>资本配置纪律 · 慷慨返还 + 一次有争议的大额收购</h4>
+      <p>
+      <strong>慷慨返还</strong>：FY2025 派息 ¥13.6 亿 + 回购 ¥5.5 亿 = <strong>¥19 亿（占调整净利 66%）</strong>；股息政策明确 ≥ 50% 调整净利；FY2025 末再公告 HK$1.8 亿自动回购计划。<br>
+      <strong>有争议的大手笔</strong>：<span class="warn-t">2024-09 用 ¥62.7 亿（含 ~¥40 亿银行借款）增持永辉超市 29.4%</span>——把一家本来"净现金充裕、生意聚焦"的公司，变成了"轻度净负债 + 携带大型权益法亏损"的复合体。<br>
+      <strong>结论</strong>：核心主业的资本配置纪律是 A 级（高比例返还 + 主业稳健再投资），但永辉收购把整体评分拉到 B——这次收购<strong>对错要看 5-10 年</strong>。详见模块 12 股东回报分析。
+      </p>
+    </div>
+  </div>
+
+  <div class="cmt">
+    <p><strong>长期主义测试</strong>：叶国富 12 年坚持"全球生活方式品牌"愿景未动摇——IP 战略 5 年酝酿 + 海外 7 年扩张 + 永辉 5-10 年押注，<span class="hl-t">说话与行动一致</span>。但长期主义与"赌性"只有一线之隔——永辉是这条线的考验。</p>
+    <p><strong>薪酬与利益绑定</strong>：创始人持股 62%、双层股权，与公司利益深度绑定。<strong>这是创始人控盘型公司的典型治理</strong>——做对了能很好，做错了纠错难。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 3 ═══ -->
+<div class="section">
+  <div class="stitle">模块 3 · 商业模式深度解析</div>
+
+  <div class="cmt">
+    <p><strong>海图"一句话测试"</strong>：<span class="hl-t">名创优品做的是"低价 + 高频上新 + IP 联名"的生活方式杂货零售——靠加盟（贡献门店增长）+ 自营反向供应链定制（贡献低成本）+ IP 内容（贡献溢价）三件套，赚 45% 毛利、17% 调整后营业利润率的薄利但快周转生意，单店投资回收周期约 1.5-2 年。</span></p>
+
+    <p><strong>收入结构（FY2025，总营收 ¥214.4 亿）</strong>：</p>
+  </div>
+
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>业务板块</th><th>FY2025 营收</th><th>占比</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td>MINISO 中国</td><td>¥109 亿</td><td>51%</td><td>+16.8% YoY · 首次破百亿 · 同店 Q4 中双位数复苏</td></tr>
+        <tr><td>MINISO 海外</td><td>¥86 亿</td><td>40%</td><td>+29.3% YoY · 海外 3,583 家门店 · 美国 Q4 同店低双位数</td></tr>
+        <tr><td>TOP TOY</td><td>¥19 亿</td><td>9%</td><td>+94.8% YoY · 潮玩集合店 · 已传出 2026 港股拆分 IPO</td></tr>
+        <tr class="hl"><td>合计</td><td>¥214.4 亿</td><td>100%</td><td>+26.2% YoY · 历史新高</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px">
+    <p><strong>单位经济</strong>：MINISO 主品牌单店年均营收约 ¥240 万（¥195 亿 / 8,151 店），加盟模式下名创赚的是<span class="hl-t">"商品销售毛利 + 加盟费 + IP 授权费"</span>。45% 毛利、17% 调整后营业利润率、25%+ 调整 ROE——属于"轻资产 + 强品牌 + 慢复制"模式中较优等的一档。</p>
+
+    <p><strong>护城河来源（详见模块 4）</strong>：(1) <strong>规模优势</strong>——全球 8,485 家门店带来供应链反向定制能力；(2) <strong>无形资产</strong>——MINISO 品牌 + Chiikawa/三丽鸥/迪士尼等 50+ IP 长期合作权益；(3) <strong>有限的转换成本</strong>——客户对零售品牌粘性弱，但 IP 内容形成"必去的种草点"。</p>
+
+    <p><strong>商业模式风险</strong>：(1) 加盟模式的<span class="warn-t">单店收入依赖客流而非黏性</span>；(2) IP 联名是双刃剑——Chiikawa 之后的"下一个 Chiikawa"能否持续？(3) TOP TOY 直接对垒 Pop Mart（IP 自有 vs IP 授权 ≈ 苹果 vs 安卓），<strong>护城河浅一档</strong>。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 4 ═══ -->
+<div class="section">
+  <div class="stitle">模块 4 · 经济护城河分析（5 维）</div>
+
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>护城河来源</th><th>评级</th><th>评估</th></tr></thead>
+      <tbody>
+        <tr><td>网络效应</td><td>无</td><td>零售品牌没有典型的网络效应——多一个客户不会让 SKU 更值钱</td></tr>
+        <tr><td>转换成本</td><td>窄</td><td>客户对生活方式杂货的品牌粘性中等——MINISO 通过 IP 联名 + 高频上新创造了"必逛"心智，但不是"非用不可"</td></tr>
+        <tr><td>成本优势</td><td>窄</td><td><span class="hl-t">最实在的护城河</span>——8,485 家全球门店 + 反向定制供应链让单品成本低于多数零售对手；但任何规模到一定的零售商都能复制（Decathlon、Daiso 等都有）</td></tr>
+        <tr><td>无形资产</td><td>窄</td><td>MINISO 品牌全球知名度（IPO 后加速）+ 50+ 全球 IP（Chiikawa、三丽鸥、Disney、NBA、宝可梦、芭比等）长期授权——属于"租来的护城河"，授权可续可不续</td></tr>
+        <tr><td>有效规模</td><td>窄</td><td>低线城市、海外新兴市场存在"先发优势"——某些海外地区已不容易再容下第二家同类大型连锁；但中国一二线城市竞争充分</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px">
+    <p><strong>综合判断：窄护城河，但持续加宽中</strong>。MINISO 的护城河不像高毛利消费品（贵州茅台、可口可乐）那样宽阔，但<span class="hl-t">在"低价生活方式杂货"这个细分赛道，MINISO 是全球少数能 8,000+ 店规模的公司</span>——规模 + IP 矩阵 + 品牌认知三件套，让对手追赶成本越来越高。</p>
+    <p><strong>护城河趋势</strong>：<span class="hl-t">缓慢加宽</span>。理由：(1) IP 矩阵从单一 Chiikawa 走向 50+ 多元化，单一 IP 失效风险下降；(2) 海外门店密度上升带来反向供应链优势放大；(3) TOP TOY 进入潮玩这条更有 IP 经济学的赛道。<strong>5-10 年护城河会更宽，但永远不会成为"宽护城河"</strong>——零售是个相对薄的生意。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 5 ═══ -->
+<div class="section">
+  <div class="stitle">模块 5 · 财务深度分析</div>
+
+  <p style="font-size:13px;color:var(--text2);margin-bottom:10px"><strong>① FY2025 利润表（¥亿，IFRS）</strong></p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>项目</th><th>FY2025</th><th>FY2024</th><th>YoY</th><th>点评</th></tr></thead>
+      <tbody>
+        <tr><td>总营收</td><td>214.4</td><td>169.9</td><td>+26.2%</td><td>历史新高</td></tr>
+        <tr><td>营业成本</td><td>117.9</td><td>93.6</td><td>+26.0%</td><td>同步增长</td></tr>
+        <tr class="hl"><td>毛利润</td><td>96.5</td><td>76.3</td><td>+26.4%</td><td>毛利率 45.0% (+0.1ppt)</td></tr>
+        <tr><td>销售 + 管理 + 研发费用</td><td>63.4</td><td>43.1</td><td>+47%</td><td>门店扩张 + 永辉财务支出</td></tr>
+        <tr class="hl"><td>营业利润</td><td>33.0</td><td>33.2</td><td>flat</td><td>营业利润率 15.4%</td></tr>
+        <tr><td>调整后营业利润</td><td>36.7</td><td>34.0</td><td>+7.9%</td><td><strong>真实主业增长</strong></td></tr>
+        <tr><td>永辉权益法亏损</td><td>-8.1</td><td>0</td><td>新增</td><td>2024-09 起并表</td></tr>
+        <tr><td>利息 + 税 + 其他</td><td>-12.8</td><td>-6.8</td><td>+88%</td><td>新增 ¥40 亿借款利息</td></tr>
+        <tr class="hl"><td>GAAP 归母净利</td><td>12.1</td><td>26.4</td><td>-54%</td><td>被永辉拖累 + 利息</td></tr>
+        <tr class="hl"><td>调整后归母净利</td><td>29.0</td><td>27.2</td><td>+6.5%</td><td><strong>核心口径</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p style="font-size:13px;color:var(--text2);margin:16px 0 10px"><strong>② 资产负债表（2025-12-31 末，¥亿）</strong></p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>项目</th><th>金额</th><th>点评</th></tr></thead>
+      <tbody>
+        <tr><td>现金及等价物</td><td>68.2</td><td>含人民币 + 外币</td></tr>
+        <tr><td>受限现金 + 定期存款</td><td>2.7</td><td>—</td></tr>
+        <tr><td>总流动现金资产</td><td>70.9</td><td>$10.0 亿</td></tr>
+        <tr><td>存货</td><td>36.9</td><td>8,000+ 家门店周转需要</td></tr>
+        <tr><td>应收账款</td><td>35.5</td><td>含加盟商、IP 联营款</td></tr>
+        <tr><td><strong>永辉投资账面值</strong></td><td><strong>54.9</strong></td><td>29.4% 股权 · 权益法</td></tr>
+        <tr><td>总资产</td><td>286.3</td><td>—</td></tr>
+        <tr><td>短期借款</td><td>17.5</td><td><span class="warn-t">永辉收购融资</span></td></tr>
+        <tr><td>长期借款</td><td>54.2</td><td><span class="warn-t">永辉收购融资</span></td></tr>
+        <tr class="hl"><td>总有息负债</td><td>71.7</td><td>新增 ¥40+ 亿源于永辉</td></tr>
+        <tr><td>租赁负债（短 + 长）</td><td>36.6</td><td>8,485 家门店租约</td></tr>
+        <tr><td>总负债</td><td>179.1</td><td>资产负债率 62.6%</td></tr>
+        <tr class="hl"><td>股东权益</td><td>107.2</td><td>每股 ¥8.68</td></tr>
+        <tr class="hl"><td>真实净现金 / (净负债)</td><td>-0.8</td><td><span class="warn-t">轻度净负债</span>（vs 永辉前是净现金）</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p style="font-size:13px;color:var(--text2);margin:16px 0 10px"><strong>③ 现金流量表（FY2025，¥亿）</strong></p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>项目</th><th>FY2025</th><th>点评</th></tr></thead>
+      <tbody>
+        <tr><td>经营活动现金流（OCF）</td><td>25.8</td><td>OCF / 调整净利 = 88.9%（质量稳健）</td></tr>
+        <tr><td>资本开支 Capex</td><td>-10.0</td><td>门店扩张 + IT 系统</td></tr>
+        <tr class="hl"><td>自由现金流（FCF）</td><td>15.8</td><td>FCF Yield ~5.0%</td></tr>
+        <tr><td>派息支出</td><td>-13.6</td><td>2 次（中期 + 末期）</td></tr>
+        <tr><td>股票回购</td><td>-5.5</td><td>历史新高</td></tr>
+        <tr><td>新增借款（永辉融资）</td><td>+40+</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:16px">
+    <p><strong>关键比率 + 杜邦</strong>：
+    <span class="hl-t">调整 ROE ~27%</span>（¥29 亿 / ¥107 亿平均权益）——属于优等生；
+    <span class="hl-t">毛利率 45.0%</span> · 调整后净利率 13.5%；
+    资产负债率 62.6%（含租约负债略高）；
+    有息负债 / 调整后 EBITDA ≈ 1.8x（含息债 ¥71.7 亿 / Adj EBITDA ~¥40 亿）——<strong>负债处于可控区间但已不像"零负债"时代那么宽松</strong>。</p>
+    <p><strong>现金流质量</strong>：OCF/调整净利 = 88.9%，FCF 持续为正且与净利同步——质量过关。Capex 占营收仅 4.7%，属于<span class="hl-t">轻资产模式</span>。</p>
+    <p><strong>所有者盈余</strong>：调整后净利 ¥29 亿 + 折旧摊销估算 ¥10 亿 - 维护性 Capex 估算 ¥6 亿 ± 营运资金小幅调整 ≈ <strong>¥33 亿/年</strong>——所有者盈余收益率 ~10.5%（按 RMB 市值 ¥315 亿），属于<span class="hl-t">合理偏便宜</span>。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 6 ═══ -->
+<div class="section">
+  <div class="stitle">模块 6 · 电话会分析（最新 + 前 2 季）</div>
+
+  <div class="tag-grid">
+    <div class="tag-card pos"><h5>Q3 2025 电话会（2025-11-20）<span class="tag-bd up">利好</span></h5><p>9M 2025 营收 +24% / 调整营业利润 +6%。管理层强调海外加速、TOP TOY 拆分准备启动、永辉重整进入"店内手术"阶段。语气稳健。</p></div>
+    <div class="tag-card neu"><h5>Q4 2025 + FY2025 电话会（2026-04-02）<span class="tag-bd nt">中性偏多</span></h5><p>Q4 营收 +32.7% 超指引、中国同店 8 季度最佳。管理层主动谈及永辉权益法亏损 ¥8.1 亿："这是预期内、必经的过渡"；强调 ROE 仍 27%、资本返还 66%。<span class="hl-t">声明：MiniMax 投资是早期、不参与日常经营、未来公允价值波动较大</span>——为后续 Q1 业绩快报的标题数字做了铺垫。</p></div>
+    <div class="tag-card pos"><h5>Q1 2026 业绩快报（2026-05-13）<span class="tag-bd up">利好</span></h5><p>预告 Q1 营收 +28-29%、净利 +195-200%（含 MiniMax 公允价值 ¥8.7-8.8 亿）。<strong>诚实标注：剔除 MiniMax + 汇兑后调整净利仅 +7-10%</strong>——管理层在"高调好消息"的同时给了"清醒口径"，<span class="hl-t">披露透明度加分</span>。完整业绩 5-26 出炉。</p></div>
+  </div>
+
+  <div class="cmt" style="margin-top:16px">
+    <p><strong>信号汇总</strong>：三个季度连读，呈现"<span class="hl-t">主业稳健加速 + 永辉短期阵痛 + MiniMax 红利兑现</span>"的多层叙事。管理层<strong>对永辉的语气从"投资"到"重整"再到"店内手术"，反映了亲自下场操盘的姿态</strong>。</p>
+    <p><strong>指引兑现度</strong>：FY2025 营收指引 ~25%，实际 +26.2%，<span class="hl-t">指引可信</span>；调整后营业利润指引"稳健增长"，实际 +7.9%，<span class="hl-t">兑现</span>。对叶国富团队的指引信任度可以维持在中上水平。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 7 ═══ -->
+<div class="section">
+  <div class="stitle">模块 7 · 多模型估值（8 种方法交叉验证）</div>
+
+  <div class="cmt">
+    <p><strong>估值的核心难题</strong>：GAAP 利润受两层非经营干扰——<span class="warn-t">永辉权益法亏损（向下）</span>+ <span class="warn-t">MiniMax 公允价值收益（向上）</span>——单一 P/E 必然失真。必须以<span class="hl-t">调整后净利 + 多档透视 + SOTP</span>来交叉验证。</p>
+  </div>
+
+  <p style="font-size:13px;color:var(--text2);margin:6px 0 10px"><strong>7.X P/E 多档透视——为什么 GAAP P/E 在 Miniso 这里几乎没用</strong></p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>口径</th><th>EPS（¥/普通股）</th><th>P/E（HKD 27.74 → RMB 25.24）</th><th>可信度</th></tr></thead>
+      <tbody>
+        <tr><td>TTM GAAP P/E</td><td>0.98</td><td>25.8x</td><td><span class="warn-t">低</span> · 含永辉拖累</td></tr>
+        <tr><td>TTM 调整后 P/E</td><td>2.36</td><td>10.7x</td><td><span class="hl-t">高</span> · 反映核心主业</td></tr>
+        <tr><td>Forward 调整后 P/E（FY26 共识 ¥33亿）</td><td>2.67</td><td>9.5x</td><td><span class="hl-t">高</span> · 卖方共识</td></tr>
+        <tr><td>核心主业 P/E（剔除永辉 + MiniMax）</td><td>~2.50</td><td>~10x</td><td><span class="hl-t">高</span> · 纯主业视角</td></tr>
+        <tr class="hl"><td>"最可信"档</td><td>—</td><td><strong>调整后 TTM 10.7x / Fwd 9.5x</strong></td><td>主业视角合理偏便宜</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p style="font-size:13px;color:var(--text2);margin:16px 0 10px"><strong>8 种估值方法适用性</strong></p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>方法</th><th>结果</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td>① 相对估值</td><td>HKD 32-40</td><td>调整 P/E 12-15x（vs 同业 10-22x） · 主业增长 +20-25% 应享有 PEG ~0.6-0.8</td></tr>
+        <tr><td>② DCF（基准）</td><td>HKD 36</td><td>10% WACC · FY26-30 调整净利 CAGR 12% · 终值增速 3%</td></tr>
+        <tr><td>③ 所有者盈余收益率</td><td>~10.5%</td><td>所有者盈余 ¥33 亿 / 市值 ¥315 亿 · 偏便宜</td></tr>
+        <tr><td>④ PEG</td><td>~0.75</td><td>调整 P/E 10.7x ÷ 调整净利增速 ~14% = 0.76（含 TOP TOY 拆分溢价更低）</td></tr>
+        <tr><td>⑤ DDM</td><td>HKD 33</td><td>股息率 4.4% trailing · 派息率 50% · 增速 6-8% · DDM 给中性 HKD 33</td></tr>
+        <tr><td>⑥ NAV / SOTP</td><td>HKD 38</td><td><span class="hl-t">见下</span> · 主业 + TOP TOY 拆分 + MiniMax + 永辉 - 净债</td></tr>
+        <tr><td>⑦ 反向 DCF</td><td>~5% 永续增速</td><td>当前 HKD 27.74 已隐含"几乎不增长"，与实际 +20% 营收 + 7% 调整净利的现实背离</td></tr>
+        <tr><td>⑧ SOTP 分部加总</td><td>HKD 35-42</td><td><span class="hl-t">最适用</span>——MINISO 主品牌 + TOP TOY + MiniMax + 永辉 - 净债</td></tr>
+        <tr class="hl"><td>独立估值中位数</td><td><strong>HKD 35</strong></td><td>多法交叉中枢</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:16px">
+    <p><strong>SOTP 拆分（独立估值，不锚定现价）</strong>：
+    · <strong>MINISO 主品牌</strong>：调整净利约 ¥26 亿（剔除 TOP TOY），给 12x P/E → ¥312 亿（~HKD 28/股）<br>
+    · <strong>TOP TOY</strong>：FY25 营收 ¥19 亿、增速 +95% · 即将拆分独立 IPO（传闻估值约 HK$100 亿）· 名创持有比例约 90% → 归属 ~HKD 7/股<br>
+    · <strong>MiniMax 投资</strong>：港股市值 $115 亿 × 名创持股估算 1.5-2% = ~$2 亿 = HK$15.6 亿 → HKD 1.3/股<br>
+    · <strong>永辉 29.4% 股权</strong>：账面 ¥55 亿 → 给 0.7x P/B 折扣（不确定性贴水）→ HKD 3-4/股<br>
+    · <strong>减：净有息负债</strong> ~HKD 0.8/股<br>
+    <strong>SOTP 中性 ≈ HKD 38-42</strong> · 悲观 HKD 30 · 乐观 HKD 48</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 8 ═══ -->
+<div class="section">
+  <div class="stitle">模块 8 · 竞争与行业分析</div>
+
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>对手</th><th>市值</th><th>核心定位</th><th>vs Miniso</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Pop Mart 泡泡玛特（9992.HK）</strong></td><td>~$257 亿</td><td>自有 IP 潮玩龙头（Labubu/Molly）</td><td>TOP TOY 在同赛道，但<span class="warn-t">用授权 IP 而非自有 IP</span>，估值溢价远低于 Pop Mart</td></tr>
+        <tr><td>Daiso（日本，未上市）</td><td>—</td><td>百元店鼻祖</td><td>SKU 更多、价格更低、IP 弱 · 体量类似</td></tr>
+        <tr><td>52TOYS、TOP TOY、X11 等中国潮玩</td><td>小</td><td>潮玩 / 盲盒</td><td>TOP TOY 是中国市场#2，与 Pop Mart 差距明显但领先其他</td></tr>
+        <tr><td>无印良品（MUJI）</td><td>~$200 亿</td><td>日系生活方式</td><td>价格更高、SKU 更少 · 不直接竞争但目标客群有重叠</td></tr>
+        <tr><td>永辉超市（601933.SH）</td><td>~¥190 亿</td><td>大卖场（名创第一大股东）</td><td><strong>名创持 29.4%</strong> · 战略协同空间在自有品牌、IP 联名进入卖场</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px">
+    <p><strong>波特五力</strong>：(1) 现有竞争——中等偏激烈，零售低门槛但全球品牌少；(2) 供应商议价——名创对中国供应链的反向定制能力强，议价占优；(3) 客户议价——单客户低（C 端），但 IP 联名提升黏性；(4) 替代品——电商（Temu、SHEIN 等）是潜在替代；(5) 进入壁垒——单店容易、规模化难，特别是 8,000+ 全球门店和 50+ IP 矩阵。</p>
+    <p><strong>核心洞察</strong>：MINISO 主品牌在"低价生活方式杂货"这条赛道<span class="hl-t">市占率全球第一</span>，护城河中等且稳固；TOP TOY 在潮玩赛道是 #2，但<span class="warn-t">和 Pop Mart 的 IP 经济学差距明显——Pop Mart 的市值 = TOP TOY 的 20 倍以上</span>。这个估值差，部分是 TOP TOY 拆分后的潜在催化剂。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 9 ═══ -->
+<div class="section">
+  <div class="stitle">模块 9 · 技术面与 K 线分析（次要参考）</div>
+  <div class="cmt">
+    <p><strong>价格位置</strong>：当前 HKD 27.74，52 周区间 HKD 27.7-51.95。<span class="warn-t">距 52 周高点 -47%、几乎贴着 52 周低点</span>——市场对永辉拖累 + 中国消费疲软的双重悲观已较充分定价。</p>
+    <p><strong>趋势与形态</strong>：从 2024-11 高点 HKD 52 一路阴跌至 2026-05 的 HKD 28，回调持续 6 个月。当前进入<span class="hl-t">技术性筑底区间</span>——HKD 27-30 出现多次密集成交。MACD 死叉但底背离信号初现，RSI 在 30-40 区间。</p>
+    <p><strong>支撑与阻力</strong>：下方支撑 HKD 25（接近账面净资产 + 净有息负债调整后估值底），再下 HKD 22；上方阻力 HKD 32（颈线）、HKD 38（2025-10 中继平台）、HKD 45（2025-Q3 高点）。<strong>技术面对 Miniso 的指示意义有限</strong>——核心驱动因子在永辉重整进度 + 调整净利兑现度 + TOP TOY 拆分 IPO。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 10 ═══ -->
+<div class="section">
+  <div class="stitle">模块 10 · 增长催化剂与前景展望</div>
+  <div class="cmt">
+    <p><strong>短期催化剂（未来 6-12 个月）</strong>：</p>
+    <p>
+      <strong>1. 永辉重整持续兑现</strong>（最大催化剂）——2026-Q1 永辉录得 ¥2.87 亿利润（+94%），是多年来首次盈利。若 Q2/Q3 持续，权益法亏损将转正，<span class="hl-t">直接解放 GAAP 利润</span>。<br>
+      <strong>2. TOP TOY 港股拆分 IPO</strong>——2026 年传闻 IPO，估值传闻 HK$100 亿。拆分后母公司持股仍占大头，<strong>价值发现 + 估值锚定</strong>双重利好。<br>
+      <strong>3. 中国同店持续复苏</strong>——Q4 2025 已达 8 季度最佳的中双位数水平，若 FY2026 延续，将打消"中国消费疲软"叙事。<br>
+      <strong>4. 海外门店扩张</strong>——FY2025 海外净增 465 家，FY2026 目标 500+ 家；美国 Q4 同店低双位数，可能成为下一个增长极。<br>
+      <strong>5. 资本返还延续</strong>——FY25 末期股息 $0.3764/ADS + HK$1.8 亿自动回购计划已生效，构成股价底部支撑。
+    </p>
+    <p><strong>中长期展望（3-5 年）</strong>：(1) 全球门店有望从 8,485 增至 12,000-15,000；(2) 调整后净利从 ¥29 亿增至 ¥45-55 亿；(3) TOP TOY 独立后市值或达 HK$150-200 亿；(4) 永辉重整若 5 年内完成可能贡献年化 ¥10 亿+ 权益法收益（vs 现在 -¥8 亿）——<strong>估值重估的多重弹簧已上紧</strong>。</p>
+    <p><strong>逆风</strong>：<span class="warn-t">中国消费长期低迷、海外地缘 / 关税、潮玩赛道竞争加剧（Pop Mart 全球扩张）、永辉重整失败、债务利率上行</strong>。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 11 ═══ -->
+<div class="section">
+  <div class="stitle">模块 11 · 风险矩阵（多维评估）</div>
+
+  <div class="risk-grid">
+    <div class="risk-card r2">
+      <h5>1. 经营风险</h5>
+      <span class="risk-score">2 / 5</span>
+      <p>主业 +26%、TOP TOY +95%、Q4 中国同店 8 季度最佳。经营层面健康。</p>
+    </div>
+    <div class="risk-card r3">
+      <h5>2. 财务风险</h5>
+      <span class="risk-score">3 / 5</span>
+      <p>新增 ¥40+ 亿借款让净现金变轻度净负债。债务/EBITDA ~1.8x 可控，但已不像过去那么宽裕。</p>
+    </div>
+    <div class="risk-card r3">
+      <h5>3. 竞争风险</h5>
+      <span class="risk-score">3 / 5</span>
+      <p>电商替代 + Pop Mart 在 TOP TOY 赛道的压制 + 全球区域品牌（Daiso 等）。</p>
+    </div>
+    <div class="risk-card r3">
+      <h5>4. 监管 / 政策风险</h5>
+      <span class="risk-score">3 / 5</span>
+      <p>关税 / 地缘冲击海外利润率；中国零售消费政策；港股 / 美股双重监管。</p>
+    </div>
+    <div class="risk-card r4">
+      <h5>5. 永辉执行风险</h5>
+      <span class="risk-score">4 / 5</span>
+      <p><span class="warn-t">最大特异性风险</span>。若胖东来式重塑失败，¥55 亿账面值可能减值；同时持续侵蚀 GAAP 利润。</p>
+    </div>
+    <div class="risk-card r2">
+      <h5>6. 估值风险</h5>
+      <span class="risk-score">2 / 5</span>
+      <p>调整 P/E 10.7x、FCF Yield 5%、Forward 9.5x、距 52 周低 1%——已 price-in 多重悲观，下行有限。</p>
+    </div>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">11.X 黑天鹅情景（最坏情况）</h4>
+  <div class="cmt">
+    <p>
+      <strong>1. 永辉重整失败 + 减值</strong>（概率 20%）：胖东来模式无法跨规模复制，3 年后永辉账面价值减值 50%（¥27 亿一次性减值）。股价跌至 HKD 22（-21%）。<br>
+      <strong>2. 中国消费深度衰退</strong>（概率 15%）：中国同店转负 + 加盟商关店 + 海外消化不良。股价跌至 HKD 20（-28%）。<br>
+      <strong>3. TOP TOY 拆分搁浅 + 潮玩降温</strong>（概率 12%）：Pop Mart 加速全球化挤压 TOP TOY 市场份额。失去重要催化剂，股价跌至 HKD 24（-13%）。<br>
+      <strong>4. MiniMax 大幅减值</strong>（概率 10%）：MiniMax 股价回落 50%，账面公允价值由正转负——影响 GAAP 利润情绪但不动主业。<br>
+      <strong>5. 加盟商系统性退店</strong>（概率 8%）：单店投资回收周期拉长 → 加盟扩张减速。
+    </p>
+    <p><span class="hl-t">下行支撑</span>：每股净资产 ¥8.68（HKD ~9.5）+ 净有息负债极轻 + 调整 ROE 27% + FCF 持续为正 + 资本返还 ~6%——<strong>HKD 22-25 是较硬的估值底</strong>。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 12 股东回报分析 ═══ -->
+<div class="section">
+  <div class="stitle">模块 12 · 股东回报分析</div>
+
+  <div class="cmt">
+    <p>名创优品 2023-07 才正式确立"≥50% 调整净利派息"政策，是中概股里资本返还的"中等晚熟生"——但一旦启动就力度很大。FY2025 ¥19 亿股东回报（占调整净利 66%）是港股零售标的中较慷慨的一档。<span class="warn-t">但与永辉的 ¥62.7 亿大额收购并行</span>，让"返还股东"和"再投资"的资金流形成微妙张力。</p>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">12.1 过去三年股息 + 回购全景</h4>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>财年</th><th>现金股息</th><th>股票回购</th><th>合计返还</th><th>占调整净利</th></tr></thead>
+      <tbody>
+        <tr><td>FY2022（截至 2022-06）</td><td>特别股息 $0.172/ADS（约 ¥1.5亿）</td><td>2022 计划 $1亿（部分执行）</td><td>~¥3 亿</td><td>~21%</td></tr>
+        <tr><td>FY2023 过渡期（截至 2023-06）</td><td>$0.412/ADS，合计 ~¥9.3 亿（首次启动 ≥50% 派息政策）</td><td>2023 计划 $2亿</td><td>~¥10-12 亿</td><td>~50%</td></tr>
+        <tr><td>FY2024（日历年 2024）</td><td>¥12.4 亿</td><td>¥3.3 亿</td><td>¥15.7 亿</td><td>~58%</td></tr>
+        <tr><td><strong>FY2025</strong>（日历年 2025）</td><td><strong>¥13.6 亿</strong></td><td><strong>¥5.5 亿</strong>（历史新高）</td><td><strong>¥19.1 亿</strong></td><td><strong>66%</strong></td></tr>
+        <tr class="hl"><td>三年累计</td><td>~¥35 亿</td><td>~¥10 亿</td><td>~¥45 亿</td><td>趋势上行</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:13px; color: var(--text2); margin-top:8px">注：FY2025 末已公告末期股息 $0.3764/ADS（合计约 ¥8.1 亿，将于 2026-06 派付）+ HK$1.8 亿自动回购计划——为 FY2026 资本返还节奏奠定基础。</p>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">12.2 回购的"含金量"：库存股 vs 注销</h4>
+  <div class="cmt">
+    <p>名创回购的"含金量"是<span class="warn-t">中等偏低</span>——这是个需要拆细看的点：</p>
+    <p>
+      <strong>1. 回购股份的处理</strong>：根据公司公告，名创<strong>回购的股份多数作为库存股保留</strong>（部分用于股权激励计划），<span class="warn-t">而非全部立即注销</span>。这与港股《上市规则》原则上"回购后注销"的精神并不完全一致——名创的 HK 法律结构允许暂存为库存股。<br>
+      <strong>2. 摊薄股数趋势</strong>：FY2023 流通股 ~12.50 亿股 → FY2024 ~12.45 亿 → FY2025 ~12.38 亿。<span class="hl-t">3 年净减少约 1.2%</span>——确实在缩股本，但<strong>幅度被股权激励（SBC）部分抵消</strong>，真实"净回购率"仅 ~0.4%/年。<br>
+      <strong>3. 双层股权下的特殊性</strong>：B 类股不参与回购，所以回购只稀缺度只影响 A 类股，对叶国富控股比例几乎无影响。
+    </p>
+    <p><strong>结论</strong>：名创的回购是"<span class="hl-t">真在花钱、但更像对冲 SBC 稀释 + 信号意义</span>"，含金量比"全额注销"低一档。但派息（占总返还约 70%）是<span class="hl-t">高含金量</span>——直接到股东账户。综合看：股东回报<strong>"高派息 + 中等回购"组合，整体含金量中上</strong>。</p>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">12.3 已授权但未执行的回购额度</h4>
+  <div class="cmt">
+    <p>
+      <strong>2024 回购计划</strong>：HK$2 亿，2024-08-30 批准，12 个月——已于 FY2025 大部分执行。<br>
+      <strong>2025-Q4 末新计划</strong>：<strong>HK$1.8 亿自动回购计划</strong>（automatic share repurchase plan），用于在 FY2026 黑色窗口期持续回购——<span class="hl-t">这是首次采用 ASP 形式，约束力强于普通授权</span>。<br>
+      <strong>剩余可用额度</strong>：HK$1.8 亿，约占市值 0.5%——力度温和但持续。<br>
+      <strong>执行可信度</strong>：过往 3 年公司对授权额度兑现度 80%+，<span class="hl-t">非空头支票型</span>。
+    </p>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">12.4 未来股息 + 回购指引</h4>
+  <div class="cmt">
+    <p>
+      <strong>股息政策明确</strong>：自 2023-07 起承诺<span class="hl-t">≥50% 调整后净利派息</span>。FY2025 实际 ~70%（含特别股息）——超额兑现。<br>
+      <strong>偏好次序</strong>：管理层在电话会明确"派息 > 回购 > 再投资 > 还债"——这是典型成熟期消费股的资本配置思路。<br>
+      <strong>FY2026 预期</strong>：若调整净利达共识 ¥33 亿，按 50% 派息率 → 派息 ¥16.5 亿 + 回购 ¥5-8 亿 = 总返还 ¥22-25 亿，对应股东总回报率约 7-8%。
+    </p>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">12.5 股东回报可持续性</h4>
+  <div class="cmt">
+    <p>
+      <strong>当前股东总回报率（trailing Shareholder Yield）</strong>：股息 ¥13.6 亿 + 回购 ¥5.5 亿 = ¥19.1 亿，市值 ¥315 亿，<strong>~6.1%</strong>——属于港股零售较慷慨的一档。<br>
+      <strong>覆盖度健康</strong>：(股息 + 回购) ¥19 亿 / FCF ¥15.8 亿 = <span class="warn-t">120%</span>——FY2025 实际"超额返还"，超出部分来自现金储备而非借债。<strong>不可持续的部分是"超额"</strong>，但回归至 80-90% 覆盖（FY26 预期）仍属于慷慨稳健。<br>
+      <strong>借债回购？</strong>名创的 ¥40 亿借款明确用于永辉收购，不是为了回购股东——<span class="hl-t">没有"借债回购"问题</span>。<br>
+      <strong>择时</strong>：FY2025 回购均价 HK$30-45 区间——在股价回落至 HK$28 后启动 ASP，<span class="hl-t">表明管理层认为当前估值有吸引力</span>。
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 模块 13 评分卡 ═══ -->
+<div class="section">
+  <div class="stitle">海图评分卡 · 6 维 A-D + 红旗排查</div>
+
+  <div class="bscore">
+    <div class="circle cw">B+</div>
+    <div class="bd">
+      <h4>1. 生意可预测性 — B+（8/10）</h4>
+      <p>主业增速、毛利率、门店净增可见度高；但 <span class="warn-t">永辉权益法 + MiniMax 公允价值</span>让 GAAP 利润难以预测，需用调整后口径看。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle cw">B</div>
+    <div class="bd">
+      <h4>2. 经济护城河 — B（7/10）</h4>
+      <p>窄护城河（成本优势 + IP 矩阵 + 全球规模），但持续加宽中。不如 Pop Mart 的自有 IP 护城河深；与 Daiso、MUJI 平级或略强。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle cw">B+</div>
+    <div class="bd">
+      <h4>3. 管理层质量 — B+（8/10）</h4>
+      <p>叶国富 12 年专注 + 双层股权深度绑定 + 指引兑现度高 + 披露透明（主动标注 MiniMax 一次性）。<span class="warn-t">扣分项</span>：永辉收购是有争议的资本配置赌博。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>4. 财务质量 — A-（8.5/10）</h4>
+      <p>毛利率 45% + 调整 ROE 27% + OCF/净利 88.9% + FCF 持续为正——质量优等。<span class="warn-t">轻度净负债</span>是减分项但仍可控（债务/EBITDA 1.8x）。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle cw">B</div>
+    <div class="bd">
+      <h4>5. 资本配置纪律 — B（7/10）</h4>
+      <p>主业资本配置 A-（66% 慷慨返还 + 高 ROIC 主业再投资），但<span class="warn-t">永辉 ¥62.7 亿 + 借款的大额非主营收购</span>把整体拉至 B（详见模块 12 股东回报分析）。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle cw">B+</div>
+    <div class="bd">
+      <h4>6. 估值与安全边际 — B+（8/10）</h4>
+      <p>调整 P/E 10.7x、Forward 9.5x、FCF Yield 5%、股东总回报率 6.1%、距 52 周低 1%——<strong>价格合理偏便宜</strong>。安全边际约 25%（HKD 35 vs 27.74）。</p>
+    </div>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">13.X 红旗排查（非评分项）</h4>
+  <div class="tbl-wrap">
+    <table class="tbl"><thead><tr><th>红旗项</th><th>状态</th><th>说明</th></tr></thead>
+    <tbody>
+      <tr><td>商誉减值历史</td><td>✓ 无重大问题</td><td>历史商誉减值不重大</td></tr>
+      <tr><td>收入确认时点</td><td>✓ 无问题</td><td>商品销售按交付确认，透明</td></tr>
+      <tr><td>关联交易</td><td>✓ 无问题</td><td>无重大关联交易</td></tr>
+      <tr><td>大额非主营投资（永辉）</td><td>⚠️ 注意</td><td>¥62.7 亿 + 借款 · 当前 5-10 年验证期</td></tr>
+      <tr><td>投资收益扭曲利润</td><td>⚠️ 注意</td><td>永辉权益法 + MiniMax 双重扭曲 GAAP，须用调整口径</td></tr>
+      <tr><td>双层股权</td><td>⚠️ 注意</td><td>创始人 62% 经济 + 全部超级投票权</td></tr>
+      <tr><td>股权激励比例</td><td>✓ 无重大问题</td><td>SBC 占营收 ~1-2%，行业偏低</td></tr>
+      <tr><td>表外负债 / 担保</td><td>✓ 无问题</td><td>无重大表外项目（已含租约负债 ¥36.6 亿）</td></tr>
+    </tbody></table>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">13.Y 综合评级</h4>
+  <div class="dcf-note">
+    <p><strong>6 维评分</strong>：B+ / B / B+ / A- / B / B+ = 综合 <strong>B+</strong></p>
+    <p><strong>红旗排查</strong>：5/8 无问题，3 项注意（永辉 + 投资收益扭曲 + 双层股权）。<strong>"永辉大额收购"红旗触发"有疑问"</strong> → 综合评级强制压制在「有条件买入」，不上"买入"。</p>
+    <p><strong>综合评级</strong>：<span class="rating-badge rating-cond-buy">有条件买入</span></p>
+    <p><strong>理由</strong>：(1) 主业增长真实强劲（+26% 营收 + 调整后净利 +6.5% + 海外 +29% + TOP TOY +95%）；(2) 资本返还慷慨（66% 调整净利返还）+ 估值合理偏便宜（调整 P/E 10.7x、Forward 9.5x、FCF Yield 5%、距 52 周低 1%）；(3) 创始人 12 年深耕 + 指引兑现度高。<strong>但</strong>：永辉 29.4% 大额非主营收购是悬而未决的重大不确定性 + GAAP 利润被永辉/MiniMax 双重扭曲需要专业看穿——前者触发红旗降级，后者要求投资者别被"GAAP -54%"或"GAAP +200%"任一标题数字误导。<span class="hl-t">"条件"在于：永辉重整持续兑现（Q1 2026 已盈利是好开局）+ 调整净利双位数兑现 + 资本返还慷慨延续</span>。</p>
+  </div>
+</div>
+
+<!-- ═══ 投资决策 ═══ -->
+<div class="section">
+  <div class="stitle">海图研判 · 投资决策</div>
+
+  <div class="cgrid">
+    <div class="ccard">
+      <div class="ctitle" style="font-size: 14px;">12 个月概率加权目标价</div>
+      <p style="font-size: 28px; font-weight: 700; color: var(--gold); margin: 8px 0;">HKD 35</p>
+      <p style="font-size: 13px; color: var(--text2);">+26% 上行 · 中位数估值 HKD 35 / SOTP HKD 38-42</p>
+    </div>
+    <div class="ccard">
+      <div class="ctitle" style="font-size: 14px;">海图评级</div>
+      <p style="font-size: 24px; font-weight: 700; color: var(--gold); margin: 8px 0;">有条件买入</p>
+      <p style="font-size: 13px; color: var(--text2);">条件 = 永辉重整持续兑现 + 调整净利双位数</p>
+    </div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>情景</th><th>假设</th><th>目标价</th><th>概率</th></tr></thead>
+      <tbody>
+        <tr><td>乐观</td><td>永辉重整明显兑现 + TOP TOY 拆分 IPO 顺利 + 海外提速</td><td>HKD 42</td><td>30%</td></tr>
+        <tr><td>基准</td><td>主业延续 +20% 营收 + 调整净利 +10% + 永辉缓慢转正</td><td>HKD 35</td><td>50%</td></tr>
+        <tr><td>悲观</td><td>永辉重整缓慢 + 中国消费疲软 + TOP TOY 拆分搁浅</td><td>HKD 24</td><td>20%</td></tr>
+        <tr class="hl"><td>概率加权</td><td>—</td><td><strong>HKD 35</strong></td><td>100%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:16px">
+    <p><strong>操作建议</strong>（独立估值中位数 HKD 35，加权公允 HKD 35）：<span class="hl-t">当前价 HKD 27.74 已极度接近首仓位 HKD 28——是建仓的合理窗口</span>。</p>
+    <p>
+      · 首仓 <strong>HKD 28</strong>（估值中位数 × 80%，距现价 +1%，已到）<br>
+      · 二仓 <strong>HKD 24.5</strong>（× 70%，距现价 -12%）<br>
+      · 三仓 <strong>HKD 21</strong>（× 60%，距现价 -24%，极端机会）<br>
+      · 止盈三档 <strong>HKD 38 / 45 / 55</strong>（每档减仓 25%，最后 25% 作为"中国零售出海龙头"长期持有）
+    </p>
+    <p><strong>仓位管理</strong>：建议总仓位 <strong>3-7%</strong>（中等仓位，反映永辉不确定性）。持有周期 3-5 年（与永辉重整周期匹配）。<strong>优先 HKEX: 9896</strong>（流动性 + 港股通），NYSE: MNSO 适合美股账户。<span class="hl-t">建议待 Q1 2026 完整业绩（5-26）+ 永辉 Q2 重整数据确认后再加仓至上限</span>。</p>
+    <p><strong>关键监控指标</strong>：① 永辉每季权益法损益（首要）；② TOP TOY 拆分 IPO 进展；③ 中国 / 海外同店；④ 调整后净利兑现度；⑤ MiniMax 公允价值变动（次要 · 信号噪声）；⑥ 资本返还节奏。<strong>下一个催化剂</strong>：2026-05-26 Q1 2026 完整业绩 + 永辉 Q2 损益更新。</p>
+  </div>
+</div>
+
+<!-- ═══ 海图页末长评 ═══ -->
+<div class="section">
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记 · 1150 字</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p class="lead">财报里最容易骗人的，往往是"利润"本身。名创优品 FY2025 GAAP 净利 ¥12.1 亿、同比 -54%——标题数字像是经营崩了；几个月后 Q1 2026 业绩快报又称净利 +200%，仿佛突然涅槃。两个数字都不是真的。真的，藏在调整后净利 ¥29 亿（+6.5%）、海外门店净增 465 家、TOP TOY +95% 这些不那么戏剧化的数字里。</p>
+
+      <p>名创是一家正在"双线作战"的全球生活方式品牌。主业稳健：8,485 家门店、45% 毛利率、调整 ROE 27%、海外营收占品牌 44%、TOP TOY 高速增长。同时，创始人叶国富 2024-09 用 ¥62.7 亿 + ¥40 亿银行借款，增持永辉超市 29.4%——押注"胖东来"式重塑中国大卖场。这笔投资在 FY2025 通过权益法吃掉 ¥8.1 亿账面亏损，是 GAAP 净利"暴跌 -54%"的全部原因。</p>
+
+      <h4>几个研判要点</h4>
+
+      <p><strong>一、必须看穿 GAAP 利润的双重扭曲。</strong>FY2025 GAAP 净利被永辉权益法亏损<span class="hl-t">向下扭曲</span>了 ¥8 亿；Q1 2026 又被 MiniMax 公允价值收益<span class="hl-t">向上扭曲</span>了 ¥8.7 亿。把这两层都剥掉，名创真实的主业增速是<strong>调整后净利 +6.5%（FY25 全年）/ +7-10%（Q1 2026 核心）</strong>——稳健，但绝不戏剧。看穿这层，是分析名创不犯错的第一关。</p>
+
+      <p><strong>二、主业是一门继续在变好的好生意。</strong>45% 毛利率、17% 调整后营业利润率、27% 调整 ROE、OCF/净利 88.9%——这是消费股里少有的"高质量增长"组合。FY25 营收 +26% 是过去 4 年最快增速；中国同店 Q4 中双位数（8 季度最佳）+ 海外 +29% + TOP TOY +95% 三条曲线同时加速。<span class="hl-t">护城河虽窄但持续加宽</span>——50+ 个全球 IP 矩阵 + 8,000+ 全球门店反向供应链，让 Daiso、Pop Mart 等单点对手都难以全维度对抗。</p>
+
+      <p><strong>三、资本返还是确定性的红利。</strong>FY25 派息 ¥13.6 亿 + 回购 ¥5.5 亿（历史新高）= ¥19 亿 = 调整净利的 66%；股息政策承诺 ≥50% 调整净利；FY26 末期股息 + HK$1.8 亿自动回购 ASP 已生效——<strong>股东总回报率 6.1% 在港股零售里是慷慨的一档</strong>。当前 HKD 27.74 已贴近 52 周低，意味着每一笔回购都在估值低位下手。</p>
+
+      <p><strong>四、永辉是头顶的剑，也是手里的牌。</strong>这是 Miniso 评级被压制在"有条件买入"的根本原因。永辉 FY25 拖累 ¥8.1 亿、Q1 2026 转正 ¥2.87 亿（94% YoY 增长，多年来首次单季盈利）——<span class="hl-t">重整在生效，但还没有"完成"</span>。若叶国富的胖东来式重塑在 2027 前兑现，权益法损益将由 -¥8 亿 / 年转为 +¥10 亿 / 年——一进一出 ¥18 亿，单这一项就能让 GAAP 利润从 ¥12 亿涨到 ¥40 亿。但若失败，¥55 亿账面值面临减值。这是一道有明显赔率（甚至偏正）但胜负不可知的牌局。</p>
+
+      <p><strong>五、12 个月目标价 HKD 35，上行 +26%。</strong>悲观 HKD 24（-13%，永辉重整缓慢 + 消费疲软）、基准 HKD 35（+26%，主业 +20% 营收 + 调整净利 +10% + 永辉缓慢转正）、乐观 HKD 42（+51%，永辉明显兑现 + TOP TOY 拆分 IPO + 海外提速）。<strong>当前 HKD 27.74 已逼近首仓 HKD 28 附近</strong>——这是合理的建仓窗口。海图的判断：这是一笔"好生意 + 合理估值 + 一个明确悬念"的投资——质量没问题，价格不贵，就看叶国富的"永辉这一手"能不能打出来。</p>
+
+      <h4>海图研判</h4>
+
+      <p><strong>评级：有条件买入。</strong>主业增长真实 + 资本返还慷慨 + 估值合理偏便宜 + 创始人深度绑定的组合，对垒"永辉大额非主营收购 + GAAP 利润被双重扭曲"的隐忧。12 个月概率加权目标价 <strong>HKD 35</strong>（+26%）。建议首仓 HKD 28（×80%，已到）、二仓 HKD 24.5（×70%，-12%）、三仓 HKD 21（×60%，-24% 极端机会）。止盈三档 HKD 38 / 45 / 55，每档减仓 25%，最后 25% 作为"中国零售出海龙头"长期持有。建议总仓位 <strong>3-7%</strong>（中等仓位）。持有周期 3-5 年。<span class="hl-t">优先 HKEX: 9896</span>。等 5-26 Q1 完整业绩 + 永辉 Q2 数据再加仓至上限。</p>
+
+      <h4>风险提示</h4>
+
+      <p>永辉重整失败 + 大额减值 / 中国消费深度衰退 / TOP TOY 拆分搁浅 + 潮玩降温 / MiniMax 大幅减值 / 海外地缘 / 关税冲击——任一项都可能让股价回调 15-25%。但 ¥107 亿净资产 + 调整 ROE 27% + FCF 持续为正 + 6%+ 股东总回报率，让 HKD 22-25 成为较硬的估值底。</p>
+
+      <p>关键叙事：<strong>"中国零售出海龙头 + 调整 P/E 10.7x 合理偏便宜 + 调整 ROE 27% + 股东总回报率 6.1% + 距 52 周低 1%"的组合，对垒"永辉大额非主营收购悬而未决 + GAAP 利润被双重扭曲"的隐忧</strong>。在多数优质消费品估值不菲的当下，名创是一笔"好生意被永辉阴云压制 + 资本返还慷慨垫底"的标的——不是给只看 GAAP 净利标题数字的人，而是给愿意看穿调整后净利、理解永辉这盘 5 年牌局赔率、并有耐心等永辉持续兑现信号的投资者。下次催化剂：2026-05-26 Q1 2026 完整业绩 + 永辉 Q2 进展。</p>
+
+      <p class="haitu-sign">—— 海图，灯下落笔，明日再观风浪。</p>
+
+      <p class="haitu-disc">⚠️ 免责声明：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，不构成任何投资建议。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div>《海图夜读》 · Miniso 名创优品 9896 Q4 2025 + 全年 海图研判</div>
+  <div style="margin-top:6px;">数据来源：名创优品 FY2025 + Q4 2025 财报新闻稿（PR Newswire / SEC 6-K · 2026-03-31）+ Q1 2026 业绩快报（2026-05-13）+ 投资者关系页 + 公开市场数据</div>
+  <div style="margin-top:6px;">价值投资 · 长期主义</div>
+</footer>
+
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  const cur = html.getAttribute('data-theme');
+  html.setAttribute('data-theme', cur === 'dark' ? 'light' : 'dark');
+  localStorage.setItem('theme', html.getAttribute('data-theme'));
+  renderCharts();
+}
+(function() {
+  const t = localStorage.getItem('theme');
+  if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+})();
+
+function gc(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+
+let charts = {};
+function renderCharts() {
+  Object.values(charts).forEach(c => c && c.destroy && c.destroy());
+  charts = {};
+  const txt2 = gc('--text2'), txt3 = gc('--text3'), grid = gc('--chart-grid');
+  const accent = gc('--accent'), accent2 = gc('--accent2'), accent3 = gc('--accent3');
+  const green = gc('--green'), gold = gc('--gold'), rose = gc('--rose'), red = gc('--red');
+
+  Chart.defaults.color = txt2;
+  Chart.defaults.font.family = 'Segoe UI, sans-serif';
+  Chart.defaults.font.size = 11;
+
+  charts.rev = new Chart(document.getElementById('revenueChart'), {
+    type: 'bar',
+    data: { labels: ['FY22', 'FY23过渡', 'FY24', 'FY25'],
+      datasets: [{ label: 'Revenue', data: [100, 138, 170, 214], backgroundColor: [accent3, gold, accent2, green], borderRadius: 4 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+      scales: { y: { grid: { color: grid }, ticks: { color: txt3 } }, x: { grid: { display: false }, ticks: { color: txt3 } } } }
+  });
+
+  charts.profit = new Chart(document.getElementById('profitChart'), {
+    type: 'line',
+    data: { labels: ['FY22', 'FY23过渡', 'FY24', 'FY25'],
+      datasets: [{ label: '调整净利', data: [15, 23, 27, 29], borderColor: green, backgroundColor: 'rgba(122,154,122,0.1)', tension: 0.3, fill: true, pointBackgroundColor: green, pointRadius: 5 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+      scales: { y: { grid: { color: grid }, ticks: { color: txt3 } }, x: { grid: { display: false }, ticks: { color: txt3 } } } }
+  });
+
+  charts.seg = new Chart(document.getElementById('segmentChart'), {
+    type: 'doughnut',
+    data: { labels: ['MINISO 中国 109', 'MINISO 海外 86', 'TOP TOY 19'],
+      datasets: [{ data: [109, 86, 19], backgroundColor: [accent3, accent, gold], borderColor: gc('--card'), borderWidth: 2 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { color: txt2, font: { size: 11 } } } } }
+  });
+
+  charts.capex = new Chart(document.getElementById('capexChart'), {
+    type: 'bar',
+    data: { labels: ['2022', '2023', '2024', '2025'],
+      datasets: [
+        { label: '全球门店（家）', data: [5440, 6420, 7780, 8485], backgroundColor: [rose, accent2, accent, green], borderRadius: 4 }
+      ] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top', labels: { color: txt2, font: { size: 11 } } } },
+      scales: { y: { grid: { color: grid }, ticks: { color: txt3 } }, x: { grid: { display: false }, ticks: { color: txt3 } } } }
+  });
+
+  buildSankey();
+}
+
+function buildSankey() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const txt = isDark ? '#d4ccc4' : '#4a4340';
+  const cardBg = isDark ? '#2e2a25' : '#ffffff';
+
+  const sankeyData = [{
+    type: 'sankey', orientation: 'h', arrangement: 'snap', valueformat: ',.0f', valuesuffix: ' 亿',
+    node: {
+      pad: 22, thickness: 22, line: { color: 'transparent', width: 0 },
+      label: ['营收 214', '营业成本 118', '毛利 96', '销管研费 63', '营业利润 33', '永辉权益法亏损 8', '利息+税+其他 13', 'GAAP 净利 12', '非现金+营运资金 14', '经营现金流 26', '维护性 Capex 10', '自由现金流 16'],
+      color: ['#7b8fa0', '#b87070', '#8a9a8e', '#c09090', '#b08d7a', '#b87070', '#b87070', '#7a9a7a', '#7b8fa0', '#7a9a7a', '#b87070', '#7a9a7a']
+    },
+    link: {
+      source: [0, 0, 2, 2, 4, 4, 4, 7, 8, 9, 9],
+      target: [1, 2, 3, 4, 5, 6, 7, 9, 9, 10, 11],
+      value:  [118, 96, 63, 33, 8, 13, 12, 12, 14, 10, 16],
+      color: ['rgba(184,112,112,0.30)', 'rgba(138,154,142,0.45)', 'rgba(192,144,144,0.30)', 'rgba(176,141,122,0.45)', 'rgba(184,112,112,0.30)', 'rgba(184,112,112,0.30)', 'rgba(122,154,122,0.45)', 'rgba(122,154,122,0.40)', 'rgba(123,143,160,0.40)', 'rgba(184,112,112,0.30)', 'rgba(122,154,122,0.40)']
+    }
+  }];
+
+  const layout = { font: { family: 'Segoe UI, sans-serif', size: 11, color: txt }, paper_bgcolor: cardBg, plot_bgcolor: cardBg, margin: { l: 10, r: 10, t: 10, b: 10 } };
+  Plotly.react('sankey', sankeyData, layout, { displayModeBar: false, responsive: true });
+}
+
+document.addEventListener('DOMContentLoaded', renderCharts);
+</script>
+
+</body>
+</html>
