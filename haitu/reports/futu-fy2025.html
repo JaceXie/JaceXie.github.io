@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-05-20，基于富途控股 Q4 + 全年 2025 财报（2026-03-12 发布）-->
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>富途控股 Futu Holdings FUTU FY2025 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+<meta name="description" content="中国出海最成功的互联网券商——moomoo / 富途牛牛 平台，靠经纪佣金 + 利息收入 + 财富管理赚钱。FY2025 营收 HK$228.5亿(+68%)、净利 HK$113亿(+100%)、净利率 49.5%、入金户 337 万(+40%)、客户资产 HK$1.23 万亿(+66%)。但 12x P/E 是建立在交易量 +89% 的牛市峰值盈利上，叠加中概监管 + Tencent 减持 + 券商周期性。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="富途控股 Futu Holdings FUTU FY2025 海图研判 · 海图夜读">
+<meta property="og:description" content="中国出海最成功的互联网券商——moomoo / 富途牛牛 平台，靠经纪佣金 + 利息收入 + 财富管理赚钱。FY2025 营收 HK$228.5亿(+68%)、净利 HK$113亿(+100%)、净利率 49.5%、入金户 337 万(+40%)、客户资产 HK$1.23 万亿(+66%)。但 12x P/E 是建立在交易量 +89% 的牛市峰值盈利上，叠加中概监管 + Tencent 减持 + 券商周期性。">
+<meta property="og:image" content="https://jacexie.github.io/haitu/assets/og/futu-fy2025.png">
+<meta property="og:url" content="https://jacexie.github.io/haitu/reports/futu-fy2025.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="富途控股 Futu Holdings FUTU FY2025 海图研判 · 海图夜读">
+<meta name="twitter:description" content="中国出海最成功的互联网券商——moomoo / 富途牛牛 平台。FY2025 营收 HK$228.5亿(+68%)、净利 HK$113亿(+100%)、净利率 49.5%、入金户 337 万(+40%)、客户资产 HK$1.23 万亿(+66%)。但 12x P/E 建立在交易量 +89% 的牛市峰值盈利上，叠加中概监管 + Tencent 减持 + 券商周期性。">
+<meta name="twitter:image" content="https://jacexie.github.io/haitu/assets/og/futu-fy2025.png">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root {
+  --bg: #f5f0eb; --bg2: #ece6df; --card: #ffffff; --card2: #f8f5f1; --border: #d9d0c7;
+  --text: #4a4340; --text2: #7a706a; --text3: #a89f98;
+  --accent: #8a9a8e; --accent2: #7b8fa0; --accent3: #b08d7a;
+  --rose: #c09090; --gold: #b9a06a; --red: #b87070; --green: #7a9a7a;
+  --shadow: rgba(0,0,0,0.06); --chart-grid: #e5ddd5;
+}
+[data-theme="dark"] {
+  --bg: #1e1c1a; --bg2: #28251f; --card: #2e2a25; --card2: #363230; --border: #4a4540;
+  --text: #d4ccc4; --text2: #a09890; --text3: #706860;
+  --accent: #8a9a8e; --accent2: #8fabbf; --accent3: #c9a48e;
+  --rose: #c09090; --gold: #c9b07a; --red: #c08080; --green: #8aaa8a;
+  --shadow: rgba(0,0,0,0.3); --chart-grid: #3e3a35;
+}
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Georgia','Noto Serif SC','PingFang SC',serif; line-height: 1.75; font-size: 14.5px; transition: background .35s, color .35s; }
+a { color: var(--accent2); text-decoration: none; }
+.theme-bar { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); }
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; text-decoration: none; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+.toggle-switch { position: relative; width: 44px; height: 22px; background: var(--border); border-radius: 11px; cursor: pointer; transition: background .3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: var(--card); border-radius: 50%; transition: transform .3s; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+.hero { padding: 48px 24px 36px; text-align: center; border-bottom: 1px solid var(--border); }
+.hero-tag { display: inline-block; font-family: 'Segoe UI',sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 3px 14px; border-radius: 20px; margin-bottom: 18px; }
+.hero h1 { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.pill { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: 'Segoe UI',sans-serif; font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow); }
+.pill strong { color: var(--text); }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle { font-size: 18px; font-weight: 700; color: var(--accent3); margin-bottom: 20px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+.stitle::before { content: ''; display: block; width: 4px; height: 20px; background: var(--accent3); border-radius: 2px; }
+.haitu-quip { display: flex; align-items: center; gap: 18px; background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--gold); border-radius: 12px; padding: 18px 24px; margin: 24px 0; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-quote { flex: 1; }
+.haitu-portrait { font-size: 15px; line-height: 1.65; color: var(--text); margin-bottom: 6px; font-weight: 600; }
+.haitu-rating-line { font-size: 13px; color: var(--text2); font-family: 'Segoe UI',sans-serif; }
+.rating-badge { display: inline-block; padding: 2px 12px; border-radius: 12px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; margin-left: 4px; }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+.rating-cond-buy { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-hold { background: rgba(123,143,160,.18); color: var(--accent2); }
+.rating-sell { background: rgba(184,112,112,.18); color: var(--red); }
+.haitu-essay { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 28px 32px; margin: 24px 0 20px; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-essay-header { display: flex; align-items: center; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.haitu-avatar-sm { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); background: var(--red); box-shadow: 0 2px 8px rgba(184,112,112,0.2); }
+.haitu-name-lg { font-family: 'Georgia','Noto Serif SC',serif; font-size: 28px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 4px; }
+.haitu-essay-tag { font-family: 'Segoe UI',sans-serif; font-size: 12px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; }
+.haitu-essay-body { font-family: 'Georgia','Noto Serif SC',serif; font-size: 15px; line-height: 2.0; color: var(--text); }
+.haitu-essay-body p { margin-bottom: 14px; }
+.haitu-essay-body p.lead { font-size: 16px; font-style: italic; color: var(--text2); margin-bottom: 18px; }
+.haitu-essay-body strong { color: var(--text); font-weight: 700; }
+.haitu-essay-body h4 { font-size: 14px; color: var(--accent3); margin: 18px 0 10px; font-family: 'Segoe UI',sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+.haitu-sign { text-align: right; margin-top: 18px; font-family: 'Georgia',serif; font-size: 14px; color: var(--text2); font-style: italic; }
+.haitu-disc { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); font-style: italic; line-height: 1.7; }
+.stock-snap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill,minmax(160px,1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px; }
+.snap-item { text-align: center; }
+.snap-label { font-family: 'Segoe UI',sans-serif; font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.snap-val { font-family: 'Segoe UI',sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+.snap-val.up { color: var(--green); }
+.snap-val.dn { color: var(--red); }
+.snap-sub { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text3); margin-top: 2px; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(195px,1fr)); gap: 14px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow); }
+.kpi-l { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.kpi-v.up { color: var(--green); }
+.kpi-v.dn { color: var(--red); }
+.badge { display: inline-block; font-family: 'Segoe UI',sans-serif; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+.up { background: rgba(122,154,122,.15); color: var(--green); }
+.dn { background: rgba(184,112,112,.15); color: var(--red); }
+.nt { background: rgba(123,143,160,.15); color: var(--accent2); }
+.tbl-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow); }
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI',sans-serif; font-size: 13px; }
+.tbl th { background: var(--card2); color: var(--text3); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); background: var(--card2); }
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); }
+.ctitle { font-size: 13px; color: var(--text2); margin-bottom: 12px; font-weight: 600; }
+.cwrap { position: relative; height: 240px; }
+.cmt { font-size: 14px; color: var(--text2); line-height: 1.85; }
+.cmt p { margin-bottom: 12px; }
+.cmt strong { color: var(--text); }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+.bscore { display: flex; gap: 16px; padding: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 12px; box-shadow: 0 1px 4px var(--shadow); }
+.bscore .circle { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; color: white; flex-shrink: 0; }
+.cg { background: var(--green); }
+.cw { background: var(--gold); }
+.co { background: var(--rose); }
+.cr { background: var(--red); }
+.cb { background: var(--accent2); }
+.bd h4 { font-size: 14px; color: var(--text); margin-bottom: 6px; font-family: 'Segoe UI',sans-serif; letter-spacing: 0.5px; }
+.bd p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+.pgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.dcf-note { background: var(--card2); border-left: 3px solid var(--accent2); padding: 14px 18px; border-radius: 6px; font-size: 13.5px; color: var(--text2); line-height: 1.85; }
+.dcf-note p { margin-bottom: 8px; }
+.dcf-note strong { color: var(--text); }
+.tag-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap: 12px; margin-top: 14px; }
+.tag-card { background: var(--card); border: 1px solid var(--border); border-left: 3px solid var(--accent2); padding: 12px 16px; border-radius: 6px; }
+.tag-card.pos { border-left-color: var(--green); }
+.tag-card.neg { border-left-color: var(--red); }
+.tag-card.neu { border-left-color: var(--accent2); }
+.tag-card h5 { font-size: 13px; color: var(--text); margin-bottom: 6px; font-family: 'Segoe UI',sans-serif; }
+.tag-card p { font-size: 12px; color: var(--text2); line-height: 1.7; }
+.tag-card .tag-bd { font-family: 'Segoe UI',sans-serif; font-size: 10px; padding: 1px 6px; border-radius: 4px; margin-left: 4px; }
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap: 12px; }
+.risk-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 14px 18px; position: relative; box-shadow: 0 1px 3px var(--shadow); }
+.risk-card::before { content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent); }
+.risk-card.r1::before { background: var(--green); }
+.risk-card.r2::before { background: rgba(122,154,122,.6); }
+.risk-card.r3::before { background: var(--gold); }
+.risk-card.r4::before { background: var(--rose); }
+.risk-card.r5::before { background: var(--red); }
+.risk-card h5 { font-size: 14px; margin-bottom: 6px; color: var(--text); }
+.risk-score { font-family: 'Segoe UI',sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.r1 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r2 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r3 .risk-score { background: rgba(185,160,106,.18); color: var(--gold); }
+.r4 .risk-score { background: rgba(192,144,144,.18); color: var(--rose); }
+.r5 .risk-score { background: rgba(184,112,112,.18); color: var(--red); }
+.risk-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+footer { background: var(--card2); border-top: 1px solid var(--border); padding: 24px; text-align: center; color: var(--text3); font-size: 12px; margin-top: 40px; line-height: 1.8; }
+@media (max-width: 768px) { .cgrid,.pgrid { grid-template-columns: 1fr; } .hero h1 { font-size: 22px; } .kpi-grid { grid-template-columns: 1fr 1fr; } .stock-snap { grid-template-columns: 1fr 1fr; } .haitu-essay-header { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/FUTU" target="_blank" rel="noopener" title="在雪球查看富途控股实时行情">雪球 FUTU</a>
+  </div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">Q4 + 全年 2025 财报发布 · 2026-03-12 &nbsp;|&nbsp; 海图研判 · 2026-05-20</div>
+  <h1>富途控股 Futu FUTU · FY2025 + Q4 深度分析</h1>
+  <div class="hero-sub">NASDAQ: FUTU &nbsp;|&nbsp; 中国出海最成功的互联网券商 · moomoo / 富途牛牛 · Tencent 持股 ~33% · 财报本币 HKD（USD/HKD ≈ 7.78）&nbsp;|&nbsp; 价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill">股价 <strong>$124.50</strong></div>
+    <div class="pill">市值 <strong>$17.4B</strong></div>
+    <div class="pill">FY25 营收 <strong>HK$228.5亿(+68%)</strong></div>
+    <div class="pill">净利 <strong>HK$113亿(+100%)</strong></div>
+    <div class="pill">P/E <strong>~12x</strong></div>
+    <div class="pill">海图研判 <strong>有条件买入</strong></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 海图页首短评 ═══ -->
+<div class="haitu-quip">
+  <div class="haitu-quote">
+    <div class="haitu-portrait">中国出海最成功的互联网券商——moomoo（海外）/ 富途牛牛（港澳）平台，靠经纪佣金（46%）+ 利息收入（46%，来自融资融券 + 客户闲置资金）+ 财富管理三块赚钱，<strong>FY2025 营收 HK$228.5 亿（+68%）、净利 HK$113 亿（+100%）、净利率 49.5%、入金客户 337 万（+40%）、客户资产 HK$1.23 万亿（+66%）、全年交易量 HK$14.68 万亿（+89%）</strong>——增长极其凌厉。当前股价 $124.50 距 52 周低仅 +24%、距高点 $202 已 -38%，<strong>P/E 仅 ~12x</strong>。<span class="warn-t">但 12x 是建立在交易量 +89% 的牛市峰值盈利上</span>——叠加中概监管（2022 年被禁止拓展内地新客）+ Tencent 减持 + 券商周期性，便宜是有原因的。</div>
+    <div class="haitu-rating-line">评级：<span class="rating-badge rating-cond-buy">有条件买入</span> · 12 个月概率加权目标价 $160（+28%）· 12x P/E + 全球化兑现 + 首次资本返还，但需能承受券商周期性 + 中概监管 + Tencent 减持的高波动</div>
+  </div>
+</div>
+
+<!-- ═══ 市场数据快照 ═══ -->
+<div class="section">
+  <div class="stitle">市场数据快照（2026-05-19）· 货币：USD / HKD ≈ 7.78</div>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">股价 (FUTU)</div><div class="snap-val">$124.50</div><div class="snap-sub">2026-05-19 收盘</div></div>
+    <div class="snap-item"><div class="snap-label">市值</div><div class="snap-val">$17.4B</div><div class="snap-sub">~1.40 亿 ADS</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间</div><div class="snap-val dn">$100.50-$202.53</div><div class="snap-sub">距高 -38% / 距低 +24%</div></div>
+    <div class="snap-item"><div class="snap-label">TTM P/E (GAAP)</div><div class="snap-val up">~12.1x</div><div class="snap-sub">EPS/ADS $10.31</div></div>
+    <div class="snap-item"><div class="snap-label">TTM P/E (Non-GAAP)</div><div class="snap-val up">~11.7x</div><div class="snap-sub">调整后 EPS $10.62</div></div>
+    <div class="snap-item"><div class="snap-label">Forward P/E</div><div class="snap-val up">~9.6x</div><div class="snap-sub">FY26 共识 · 见模块 7</div></div>
+    <div class="snap-item"><div class="snap-label">P/B</div><div class="snap-val">~3.4x</div><div class="snap-sub">每股净资产 ~$37</div></div>
+    <div class="snap-item"><div class="snap-label">PEG</div><div class="snap-val up">~0.2</div><div class="snap-sub">P/E 12 ÷ 增速 68%</div></div>
+    <div class="snap-item"><div class="snap-label">ROE（FY25）</div><div class="snap-val up">~28%</div><div class="snap-sub">高资本效率</div></div>
+    <div class="snap-item"><div class="snap-label">净利率（FY25）</div><div class="snap-val up">49.5%</div><div class="snap-sub">财务平台典型高利润</div></div>
+    <div class="snap-item"><div class="snap-label">特别股息（2026-04）</div><div class="snap-val up">$2.6/ADS</div><div class="snap-sub">首次派息 · ~$365M</div></div>
+    <div class="snap-item"><div class="snap-label">回购授权</div><div class="snap-val up">$500M</div><div class="snap-sub">ADS 回购计划</div></div>
+    <div class="snap-item"><div class="snap-label">入金客户</div><div class="snap-val up">337 万</div><div class="snap-sub">+39.6% YoY</div></div>
+    <div class="snap-item"><div class="snap-label">客户资产</div><div class="snap-val up">HK$1.23 万亿</div><div class="snap-sub">+65.9% YoY</div></div>
+    <div class="snap-item"><div class="snap-label">Tencent 持股</div><div class="snap-val nt">~33%</div><div class="snap-sub">近期持续减持</div></div>
+    <div class="snap-item"><div class="snap-label">下次财报</div><div class="snap-val nt">2026-05-28</div><div class="snap-sub">Q1 2026（8 天后）</div></div>
+  </div>
+  <div class="dcf-note" style="margin-top:18px">
+    <strong>关键数据洞察 · 必须看穿 12x P/E 的"牛市峰值盈利"：</strong>
+    <p style="margin-top:8px">(1) <span class="hl-t">FY2025 营收 +68%、净利 +100%、入金户 +40%、客户资产 +66%、交易量 +89%</span>——这是全球互联网券商里最凌厉的增长之一；(2) <span class="warn-t">但 FY2025 是港股 / 美股交易的大牛市——交易量 +89% 是周期高点</span>，券商佣金 + 利息收入对市场情绪高度敏感。<strong>12x P/E 是"12 倍峰值盈利"，若 2026 市场降温，这个倍数会被动抬高</strong>；(3) <strong>商业模式正在从"靠佣金"转向"靠利息 + 客户资产"</strong>——FY2025 利息收入 HK$104 亿首次与佣金 HK$106 亿几乎持平，这部分（融资融券 + 闲置资金）更稳定、更黏；(4) <span class="hl-t">2026-04 首次派发特别股息 $2.6/ADS（~$365M）+ $500M 回购授权</span>——从纯成长股迈向"成长 + 资本返还"；(5) <strong>海图提醒：富途是一门高增长 + 高利润 + 便宜估值的好生意，但它带着中概监管 + Tencent 减持 + 券商周期性三重折价——便宜是有原因的。</strong></p>
+  </div>
+</div>
+
+<!-- ═══ FY2025 KPI ═══ -->
+<div class="section">
+  <div class="stitle">FY2025 全年核心业绩（2026-03-12 发布 · 货币 HKD）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">全年总营收</div><div class="kpi-v up">HK$228.5亿</div><span class="badge up">+68.1% YoY</span><div class="kpi-l" style="margin-top:6px">$29.4 亿 / 历史新高</div></div>
+    <div class="kpi"><div class="kpi-l">经纪佣金收入</div><div class="kpi-v up">HK$105.7亿</div><span class="badge up">占营收 46%</span><div class="kpi-l" style="margin-top:6px">交易量 +89% 驱动</div></div>
+    <div class="kpi"><div class="kpi-l">利息收入</div><div class="kpi-v up">HK$104.4亿</div><span class="badge up">占营收 46%</span><div class="kpi-l" style="margin-top:6px">融资融券 + 闲置资金</div></div>
+    <div class="kpi"><div class="kpi-l">其他收入</div><div class="kpi-v up">HK$18.3亿</div><span class="badge up">占营收 8%</span><div class="kpi-l" style="margin-top:6px">财富管理 + 企业服务</div></div>
+    <div class="kpi"><div class="kpi-l">毛利润</div><div class="kpi-v up">HK$199.0亿</div><span class="badge up">毛利率 87.1%</span><div class="kpi-l" style="margin-top:6px">轻资产平台</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 净利润</div><div class="kpi-v up">HK$113.0亿</div><span class="badge up">~+100% YoY</span><div class="kpi-l" style="margin-top:6px">$14.5 亿 / 净利率 49.5%</div></div>
+    <div class="kpi"><div class="kpi-l">Non-GAAP 净利</div><div class="kpi-v up">HK$116.4亿</div><span class="badge up">+101.9% YoY</span><div class="kpi-l" style="margin-top:6px">$15.0 亿</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 摊薄 EPS/ADS</div><div class="kpi-v up">HK$80.24</div><span class="badge up">$10.31</span><div class="kpi-l" style="margin-top:6px">ADS = 8 普通股</div></div>
+    <div class="kpi"><div class="kpi-l">入金客户</div><div class="kpi-v up">336.5 万</div><span class="badge up">+39.6%</span><div class="kpi-l" style="margin-top:6px">全年新增 95 万（超指引 19%）</div></div>
+    <div class="kpi"><div class="kpi-l">客户总资产</div><div class="kpi-v up">HK$1.23 万亿</div><span class="badge up">+65.9%</span><div class="kpi-l" style="margin-top:6px">$1,581 亿</div></div>
+    <div class="kpi"><div class="kpi-l">全年交易量</div><div class="kpi-v up">HK$14.68 万亿</div><span class="badge up">+89.4%</span><div class="kpi-l" style="margin-top:6px">牛市峰值</div></div>
+    <div class="kpi"><div class="kpi-l">融资融券余额</div><div class="kpi-v up">HK$677 亿</div><span class="badge up">+33.1%</span><div class="kpi-l" style="margin-top:6px">利息收入基础</div></div>
+  </div>
+</div>
+
+<!-- ═══ Q4 2025 KPI ═══ -->
+<div class="section">
+  <div class="stitle">Q4 2025 季度业绩（2025 年 10-12 月 · 单季高点）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">Q4 总营收</div><div class="kpi-v up">HK$64.4亿</div><span class="badge up">+45.3% YoY</span><div class="kpi-l" style="margin-top:6px">$8.27 亿</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 经纪佣金</div><div class="kpi-v up">HK$27.7亿</div><span class="badge up">占 43%</span><div class="kpi-l" style="margin-top:6px">$3.56 亿</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 利息收入</div><div class="kpi-v up">HK$30.4亿</div><span class="badge up">超过佣金</span><div class="kpi-l" style="margin-top:6px">$3.90 亿</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 其他收入</div><div class="kpi-v up">HK$6.3亿</div><span class="badge up">+财富管理</span><div class="kpi-l" style="margin-top:6px">$0.81 亿</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 毛利润</div><div class="kpi-v up">HK$57.1亿</div><span class="badge up">毛利率 88.7%</span><div class="kpi-l" style="margin-top:6px">+56.2% YoY</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 GAAP 净利</div><div class="kpi-v up">HK$33.7亿</div><span class="badge up">+80.2% YoY</span><div class="kpi-l" style="margin-top:6px">净利率 52.3%</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 摊薄 EPS/ADS</div><div class="kpi-v up">HK$23.92</div><span class="badge up">$3.07</span><div class="kpi-l" style="margin-top:6px">单季新高</div></div>
+    <div class="kpi"><div class="kpi-l">Q4 交易量</div><div class="kpi-v up">HK$3.98 万亿</div><span class="badge up">+37.8% YoY</span><div class="kpi-l" style="margin-top:6px">高位运行</div></div>
+    <div class="kpi"><div class="kpi-l">下次财报</div><div class="kpi-v nt">2026-05-28</div><span class="badge nt">Q1 2026</span><div class="kpi-l" style="margin-top:6px">管理层预期净流入创纪录</div></div>
+  </div>
+  <div class="dcf-note" style="margin-top:16px">
+    <p><strong>看穿盈利的"周期性"</strong>：富途 Q4 2025 净利率 52.3% 是惊人的数字，但要清醒——<span class="warn-t">FY2025 是港股 IPO 大年 + 美股牛市 + 港股通活跃的多重利好叠加</span>，交易量 +89%。券商的佣金收入与市场情绪高度正相关：牛市时交易频繁、佣金暴增；熊市时交易萎缩、佣金骤降。<strong>所以富途的盈利能力要用"中周期正常化"来看，而不是用 FY2025 这个峰值年外推</strong>。利息收入（占 46%）相对稳定，是商业模式的"压舱石"。</p>
+  </div>
+</div>
+
+<!-- ═══ 季度趋势 ═══ -->
+<div class="section">
+  <div class="stitle">5 年趋势 + 用户增长</div>
+  <div class="cgrid">
+    <div class="ccard">
+      <div class="ctitle">5 年营收增长（HK$ 亿）</div>
+      <div class="cwrap"><canvas id="revenueChart"></canvas></div>
+    </div>
+    <div class="ccard">
+      <div class="ctitle">5 年 GAAP 净利润（HK$ 亿）</div>
+      <div class="cwrap"><canvas id="profitChart"></canvas></div>
+    </div>
+    <div class="ccard">
+      <div class="ctitle">FY2025 营收结构（HK$ 亿）</div>
+      <div class="cwrap"><canvas id="segmentChart"></canvas></div>
+    </div>
+    <div class="ccard">
+      <div class="ctitle">入金客户增长（万户）· 全球化驱动</div>
+      <div class="cwrap"><canvas id="capexChart"></canvas></div>
+    </div>
+  </div>
+  <div class="dcf-note" style="margin-top:16px">
+    <p>富途的成长曲线是"<span class="hl-t">用户复利 + 牛市放大</span>"的双重叠加——入金客户从 2022 年的约 153 万增至 2025 年的 337 万（3 年 +120%），客户资产 +66%，这是<strong>结构性的复利增长（全球化获客）</strong>；而 FY2025 营收 +68% / 净利 +100% 中，<span class="warn-t">有相当部分来自牛市交易量 +89% 的周期性放大</span>。<strong>看富途要把"结构性用户增长"和"周期性交易放大"分开</strong>——前者是长期价值，后者会随市场波动。</p>
+  </div>
+</div>
+
+<!-- ═══ Sankey ═══ -->
+<div class="section">
+  <div class="stitle">FY2025 资金流向 · 营收 → 净利润 → 股东回报（HK$ 亿）</div>
+  <div class="ccard">
+    <div class="ctitle">从 HK$228.5 亿营收到 HK$113 亿净利、再到首次股东回报的链路（轻资产平台，无传统 Capex）</div>
+    <div id="sankey" style="width:100%;height:460px;"></div>
+  </div>
+</div>
+
+<!-- ═══ 模块 1 ═══ -->
+<div class="section">
+  <div class="stitle">模块 1 · 公司概览与背景</div>
+  <div class="cmt">
+    <p><strong>公司全称</strong>：富途控股有限公司 / Futu Holdings Limited<br>
+    <strong>上市</strong>：NASDAQ: FUTU（2019-03-08 IPO，1 ADS = 8 类 A 普通股）<br>
+    <strong>总部</strong>：香港 + 深圳<br>
+    <strong>财年</strong>：1 月 1 日 - 12 月 31 日 · 财报本币 HKD<br>
+    <strong>主营</strong>：互联网券商 + 财富管理平台——经纪交易（港股 / 美股 / A 股通 / 期权 / 期货）+ 融资融券 + 财富管理（基金 / 理财）+ 企业服务（ESOP / IPO 分销 / IR）。海外品牌 <strong>moomoo</strong>，港澳品牌 <strong>富途牛牛</strong>。</p>
+
+    <p><strong>核心叙事</strong>：富途是<span class="hl-t">中国互联网券商出海最成功的代表</span>——由腾讯系出身的工程师李华（Leaf Hua Li）2012 年创立，腾讯持股约 33%。它把"互联网产品体验"带进了传统券商行业（社区 + 行情 + 一站式交易），在港澳建立优势后，<strong>从 2021 年起全力全球化</strong>：moomoo 进入美国、新加坡、澳大利亚、日本、马来西亚、加拿大。FY2025 入金客户 337 万、客户资产 HK$1.23 万亿、营收 +68%、净利 +100%——增长极其凌厉。<span class="warn-t">但富途的故事有一道伤疤</span>：2022 年底中国证监会认定其跨境券商业务违规，富途被迫下架内地 App、停止拓展内地新客——这逼迫它彻底转向香港 + 海外，而它<strong>把这场危机变成了全球化的契机</strong>。</p>
+
+    <p><strong>简史与里程碑</strong>：</p>
+    <p>
+      <strong>1. 2012 年深圳创立</strong>——李华（前腾讯第 18 号员工）创办，腾讯领投<br>
+      <strong>2. 2014 年富途牛牛上线</strong>——港股互联网券商，社区 + 行情 + 交易一体<br>
+      <strong>3. 2019-03-08 纳斯达克 IPO</strong>——发行价 $12<br>
+      <strong>4. 2021 年 moomoo 全球化启动</strong>——进入美国、新加坡<br>
+      <strong>5. 2022-12 中国证监会监管</strong>——认定跨境券商违规，下架内地 App、停拓内地新客<br>
+      <strong>6. 2023-2024 全球化加速</strong>——日本、马来西亚、澳大利亚、加拿大相继落地<br>
+      <strong>7. 2025 全年爆发</strong>——港股 IPO 大年 + 美股牛市，营收 +68% / 净利 +100%<br>
+      <strong>8. 2026-04 首次特别股息 $2.6/ADS + $500M 回购</strong>——资本返还元年
+    </p>
+
+    <p><strong>股权结构（2025 末附近）</strong>：</p>
+    <p>
+      <strong>李华（创始人 / 董事长 / CEO）</strong>——通过 B 类超级投票权股控制公司<br>
+      <strong>腾讯（Tencent）</strong>——约 33% 经济权益，<span class="warn-t">但近期持续减持套现</span><br>
+      <strong>机构与公众</strong>——其余<br>
+      <strong>注</strong>：富途采用<span class="warn-t">双层股权结构</span>，李华通过 B 类股保持控制权。腾讯既是早期投资人也是战略股东，<strong>但 2024-2026 多次减持——这是股价的一个持续性供给压力</strong>。
+    </p>
+  </div>
+</div>
+
+<!-- ═══ 模块 2 ═══ -->
+<div class="section">
+  <div class="stitle">模块 2 · 管理层评估</div>
+
+  <div class="bscore">
+    <div class="circle cw">B+</div>
+    <div class="bd">
+      <h4>李华（Leaf Hua Li）· 创始人 / 董事长 / CEO</h4>
+      <p>前腾讯第 18 号员工、技术背景，2012 年创办富途。<span class="hl-t">产品力是富途最强的标签</span>——把社区 + 行情 + 交易做成中文互联网券商体验天花板，moomoo 在海外也以产品体验取胜。李华通过双层股权牢牢控盘，长期主义底色浓。<span class="warn-t">扣分项</span>：2022 年的中国监管危机暴露了早期"打监管擦边球"的扩张方式；管理层在合规上交了学费。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B+</div>
+    <div class="bd">
+      <h4>全球化执行团队 · 把危机变成转机</h4>
+      <p>2022 年中国监管重击后，管理层迅速把战略重心转向香港 + 全球——3 年内 moomoo 在美国、新加坡、澳大利亚、日本、马来西亚、加拿大相继落地并贡献增量。<span class="hl-t">这是一次教科书级的"危机转型"</span>：被堵死内地市场后，反而逼出了一个更大、更分散、监管风险更低的全球客户基础。执行力 B+。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B+</div>
+    <div class="bd">
+      <h4>资本配置 · 从纯成长到首次资本返还</h4>
+      <p>
+      <strong>过去 13 年富途几乎把所有利润再投入获客 + 全球化</strong>——不分红、不回购，符合高速成长期的逻辑。<br>
+      <strong>2026-04 转折点</strong>：首次派发特别股息 $2.6/ADS（合计约 $365M）+ 启动 $500M ADS 回购授权——<span class="hl-t">从"纯成长股"迈向"成长 + 资本返还"</span>，标志公司进入更成熟的现金生成阶段（详见模块 12）。<br>
+      整体看：<strong>资本配置从"全投入"到"开始返还"的转变是积极信号，但首次返还的可持续性仍需观察（FY25 是峰值年）。</strong>
+      </p>
+    </div>
+  </div>
+
+  <div class="cmt">
+    <p><strong>长期主义测试</strong>：3 年前（2022 年监管危机）市场一度认为富途"故事终结"——内地市场被关闭、股价腰斩。3 年后富途用全球化把营收做到 HK$228 亿、净利 HK$113 亿、客户资产 HK$1.23 万亿，<span class="hl-t">完全证明了"出海"战略的成功</span>。管理层在危机中的韧性 + 转型执行力，是这家公司最被低估的资产。</p>
+    <p><strong>利益绑定</strong>：李华通过 B 类股控制 + 持有大量经济权益，与公司深度绑定。<span class="warn-t">但腾讯持续减持</span>——虽然腾讯减持不改变富途经营，但反映出"早期战略股东在高位套现"，对其他股东是情绪和供给上的压力。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 3 ═══ -->
+<div class="section">
+  <div class="stitle">模块 3 · 商业模式深度解析</div>
+
+  <div class="cmt">
+    <p><strong>海图"一句话测试"</strong>：<span class="hl-t">富途靠一个产品体验领先的互联网券商 App，把全球散户（尤其华人 + 亚太）吸引进来交易港美股，从三个口袋赚钱——交易佣金（46%）、利息（46%，借钱给客户做融资融券 + 客户闲置资金的利差）、财富管理（8%）——FY2025 营收 HK$228.5 亿，净利率 49.5%，是一门轻资产、高利润、但与市场周期强相关的平台生意。</span></p>
+
+    <p><strong>收入结构（FY2025）</strong>：</p>
+  </div>
+
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>收入来源</th><th>FY25 金额</th><th>占比</th><th>性质</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td>经纪佣金 + 手续费</td><td>HK$105.7亿</td><td>46%</td><td><span class="warn-t">周期性</span></td><td>交易量 +89% 驱动 · 与市场情绪强相关</td></tr>
+        <tr><td>利息收入</td><td>HK$104.4亿</td><td>46%</td><td><span class="hl-t">较稳定</span></td><td>融资融券利息 + 客户闲置资金利差 + 证券借贷</td></tr>
+        <tr><td>其他收入</td><td>HK$18.3亿</td><td>8%</td><td>成长性</td><td>财富管理（基金代销）+ 企业服务（ESOP / IPO 分销 / IR）</td></tr>
+        <tr class="hl"><td>合计</td><td>HK$228.5亿</td><td>100%</td><td>+68.1%</td><td>毛利率 87.1% · 净利率 49.5%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px">
+    <p><strong>商业模式的演化——这是关键洞察</strong>：(1) <span class="hl-t">利息收入崛起为"压舱石"</span>——FY2025 利息收入 HK$104 亿首次与佣金 HK$106 亿几乎持平。利息（融资融券利差 + 客户闲置资金）比佣金更稳定、更黏，<strong>不完全依赖交易频率</strong>，随客户资产规模（HK$1.23 万亿）增长而增长；(2) <span class="warn-t">佣金是"周期性引擎"</span>——牛市暴增、熊市萎缩；(3) <strong>财富管理是"第三曲线"</strong>——把客户的"交易账户"升级成"理财账户"，提升 ARPU 和黏性。</p>
+    <p><strong>单位经济</strong>：富途是<span class="hl-t">极致的轻资产平台</span>——获客成本（CAC）一次性投入，之后每个入金客户持续贡献佣金 + 利息 + 财富管理收入。客户资产越大、留存越久，LTV 越高。<strong>但券商的本质是"市场的杠杆"</strong>——牛市时富途比大盘更亢奋，熊市时比大盘更萧条。这是它估值长期被压在 10-20x P/E 的根本原因。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 4 ═══ -->
+<div class="section">
+  <div class="stitle">模块 4 · 经济护城河分析（5 维）</div>
+
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>护城河来源</th><th>评级</th><th>评估</th></tr></thead>
+      <tbody>
+        <tr><td>网络效应</td><td>窄</td><td>富途/moomoo 的<span class="hl-t">投资社区（牛牛社区）</span>有弱网络效应——用户多 → 内容多 → 更吸引用户。但不如社交平台强</td></tr>
+        <tr><td>转换成本</td><td>窄</td><td>转户有一定摩擦（资产转移 + 习惯 + 持仓），但散户切换券商门槛不高；<span class="hl-t">客户资产越大、黏性越高</span></td></tr>
+        <tr><td>成本优势</td><td>窄</td><td>自研技术栈 + 互联网获客效率高于传统券商；但与 Tiger、IBKR、Robinhood 比无绝对成本优势</td></tr>
+        <tr><td>无形资产</td><td>窄</td><td><strong>moomoo / 富途牛牛 品牌 + 多地券商牌照（港、美、新、澳、日等）</strong>——牌照是真实壁垒；产品口碑是软资产</td></tr>
+        <tr><td>有效规模</td><td>窄</td><td>互联网券商是充分竞争行业——Tiger、IBKR、Robinhood、传统券商、银行都在抢。无寡头保护</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px">
+    <p><strong>综合判断：窄护城河（5 维全窄）。</strong>富途的护城河不深——它的优势是<span class="hl-t">"产品体验 + 多地牌照 + 投资社区"的组合</span>，而非任何单一的宽护城河。这意味着富途必须靠<strong>持续的产品迭代 + 全球化获客</strong>来维持增长，而不是躺在垄断地位上收租。<strong>10 年后护城河会更宽还是更窄？</strong>取决于：(1) 客户资产能否持续做大（资产黏性 = 真护城河）；(2) 财富管理 / 资管能否从"交易工具"升级成"财富平台"（提升转换成本）；(3) 全球牌照网络能否扩张。<span class="warn-t">这是一门好生意，但不是一门有宽护城河的生意——所以估值上不该给科技龙头的倍数。</span></p>
+  </div>
+</div>
+
+<!-- ═══ 模块 5 ═══ -->
+<div class="section">
+  <div class="stitle">模块 5 · 财务深度分析</div>
+
+  <p style="font-size:13px;color:var(--text2);margin-bottom:10px"><strong>① 利润表（FY2025 + Q4 2025 · HK$ 亿）</strong></p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>项目</th><th>FY2025</th><th>FY2024</th><th>Q4 2025</th><th>点评</th></tr></thead>
+      <tbody>
+        <tr><td>总营收</td><td>228.5</td><td>135.9</td><td>64.4</td><td>FY +68.1% · Q4 +45.3%</td></tr>
+        <tr><td>毛利润</td><td>199.0</td><td>—</td><td>57.1</td><td>毛利率 87.1% / Q4 88.7%</td></tr>
+        <tr><td>GAAP 净利润</td><td>113.0</td><td>~56</td><td>33.7</td><td>FY ~+100% · 净利率 49.5%</td></tr>
+        <tr><td>Non-GAAP 净利</td><td>116.4</td><td>57.7</td><td>34.6</td><td>+101.9% YoY</td></tr>
+        <tr><td>摊薄 EPS/ADS（HK$）</td><td>80.24</td><td>~40</td><td>23.92</td><td>$10.31 / $3.07</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p style="font-size:13px;color:var(--text2);margin:16px 0 10px"><strong>② 资产负债表（2025-12-31 末 · HK$ 亿）· 券商特殊结构</strong></p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>项目</th><th>金额</th><th>点评</th></tr></thead>
+      <tbody>
+        <tr><td>自有现金及等价物</td><td>104.7</td><td>公司自有资金</td></tr>
+        <tr><td>客户资金（隔离存管）</td><td>1,134.0</td><td><span class="hl-t">客户的钱，不属于富途</span>，但反映规模</td></tr>
+        <tr><td>融资融券应收（客户借款）</td><td>677</td><td>利息收入来源 · 有信用风险</td></tr>
+        <tr><td>总资产</td><td>2,284.4</td><td>含大量客户相关资产</td></tr>
+        <tr><td>借款</td><td>121.4</td><td>用于支撑融资融券业务</td></tr>
+        <tr class="hl"><td>股东权益</td><td>403.2</td><td>每股净资产 ~$37 · P/B ~3.4x</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p style="font-size:13px;color:var(--text2);margin:16px 0 10px"><strong>③ 现金流与资本（券商无传统 Capex / FCF 概念）</strong></p>
+  <div class="cmt">
+    <p>富途是<span class="hl-t">轻资产金融平台——几乎没有传统意义的资本开支</span>（主要是技术 + 办公投入），所以"FCF = OCF - Capex"框架对它意义不大。<strong>对富途，真正的现金衡量是"净利润 ≈ 所有者盈余"</strong>——FY2025 GAAP 净利 HK$113 亿，几乎全部是可分配现金（这也是它能首次派息 + 回购的底气）。券商现金流的特殊性在于<span class="warn-t">大量现金是客户隔离资金（HK$1,134 亿）+ 融资融券占用——这些不是公司可自由支配的钱</span>。</p>
+  </div>
+
+  <div class="cmt" style="margin-top:8px">
+    <p><strong>关键比率</strong>：<strong>ROE ~28%</strong>（净利 HK$113 亿 / 权益 HK$403 亿）——高资本回报；<strong>净利率 49.5%</strong>（财务平台典型高利润）；<strong>毛利率 87.1%</strong>；自有现金充裕、借款主要服务融资融券业务（匹配资产端）。<span class="hl-t">财务质量优秀</span>——这是一份高利润、高 ROE、轻资产的资产负债表。</p>
+    <p><strong>所有者盈余</strong>：净利润 HK$113 亿 + 少量非现金（SBC + 折旧）− 极小维护性投入 ≈ <span class="hl-t">所有者盈余约 HK$115 亿/年</span>（约 $14.8 亿）。按市值 $17.4B 计，所有者盈余收益率 ~8.5%——<strong>对一个 +68% 增长的平台，这个收益率很有吸引力，但要打"周期性峰值"的折扣</strong>。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 6 ═══ -->
+<div class="section">
+  <div class="stitle">模块 6 · 电话会分析（最新 + 前 2 季）</div>
+
+  <div class="tag-grid">
+    <div class="tag-card pos"><h5>Q2 2025 电话会（2025-08）<span class="tag-bd up">利好</span></h5><p>全球化全面发力，海外（新、美、日、马）入金户高增长。客户资产突破历史新高。管理层上调全年入金户指引。</p></div>
+    <div class="tag-card pos"><h5>Q3 2025 电话会（2025-11）<span class="tag-bd up">利好</span></h5><p>港股 IPO 大年带动交易量飙升。利息收入随客户资产增长。管理层强调全球化分散了单一市场风险。</p></div>
+    <div class="tag-card pos"><h5>Q4 + 全年 电话会（2026-03-12）<span class="tag-bd up">利好</span></h5><p>FY2025 营收 +68% / 净利 +100% / 全年新增入金户 95 万（超指引 19%）。<strong>2026 指引新增 80 万入金户</strong>。管理层预期 <span class="hl-t">Q1 2026 净资产流入创季度纪录</span>，但提示市场波动。</p></div>
+  </div>
+
+  <div class="cmt" style="margin-top:16px">
+    <p><strong>信号汇总</strong>：管理层三季叙事高度一致且乐观——<span class="hl-t">"全球化兑现 + 客户资产做大 + 利息收入压舱"</span>。语气从未转保守，但 Q4 电话会<strong>主动提示了"市场波动"</strong>——这是管理层对券商周期性的诚实承认。</p>
+    <p><strong>指引兑现度</strong>：FY2025 新增入金户 95 万，<span class="hl-t">超出年初指引 19%</span>——管理层指引保守、兑现超预期，信用良好。<strong>2026 指引 80 万入金户（低于 2025 的 95 万）——这本身就是管理层对"2025 是高基数 / 牛市峰值"的隐含承认</strong>。海图倾向相信用户增长的结构性，但对交易量驱动的佣金收入保持周期性警惕。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 7 ═══ -->
+<div class="section">
+  <div class="stitle">模块 7 · 多模型估值（8 种方法交叉验证）</div>
+
+  <p style="font-size:13px;color:var(--text2);margin:6px 0 10px"><strong>7.X P/E 多档透视表（券商是周期性行业 · 必查）</strong></p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>计算口径</th><th>P/E</th><th>说明 / 可信度</th></tr></thead>
+      <tbody>
+        <tr><td>TTM GAAP P/E</td><td>~12.1x</td><td>基于 FY25 EPS/ADS $10.31——但 FY25 是牛市峰值</td></tr>
+        <tr><td>TTM Non-GAAP P/E</td><td>~11.7x</td><td>调整后 EPS $10.62</td></tr>
+        <tr><td>Q4 单季年化 P/E</td><td>~10.1x</td><td>Q4 EPS $3.07 × 4——但 Q4 是峰值季度，外推会高估</td></tr>
+        <tr><td>Forward 共识 P/E</td><td>~9.6x</td><td>FY26E EPS ~$13（增速放缓但仍增长）</td></tr>
+        <tr class="hl"><td>中周期正常化 P/E</td><td><span class="warn-t">~16-18x</span></td><td><span class="warn-t">最可信</span>——若用"非牛市"年的正常化盈利（如 FY25 盈利打 7 折），P/E 会回到 16-18x</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:13px;color:var(--text2);margin-top:8px"><strong>关键</strong>：富途的"12x P/E"是表象。<span class="warn-t">FY2025 是交易量 +89% 的牛市峰值年，盈利大概率高于中周期正常水平</span>。用正常化盈利看，富途的真实 P/E 在 16-18x——<strong>仍然不贵（对 +30%+ 结构性增长），但远没有"12x 白菜价"看起来那么诱人</strong>。</p>
+
+  <p style="font-size:13px;color:var(--text2);margin:16px 0 10px"><strong>8 种估值方法</strong></p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>方法</th><th>测算</th><th>对应价</th><th>适用性</th></tr></thead>
+      <tbody>
+        <tr><td>① 相对估值（P/E）</td><td>正常化 EPS ~$11 × 合理 P/E 15x = $165；vs 同行 Tiger（~12x）、IBKR（~28x）、Robinhood（~40x）</td><td>$150-175</td><td><span class="hl-t">最适用</span></td></tr>
+        <tr><td>② DCF</td><td>正常化盈利 $11/ADS、增长 20-25% 衰减、WACC 11%（含中概风险溢价），公允 ~$155-180</td><td>$155-180</td><td>适用</td></tr>
+        <tr><td>③ 所有者盈余收益率</td><td>所有者盈余 $14.8 亿 / 市值 $17.4B = 8.5%——但峰值年，正常化约 6%</td><td>$150-165</td><td>适用</td></tr>
+        <tr><td>④ PEG</td><td>P/E 12 ÷ 增速 68% = 0.18（峰值）；正常化 P/E 17 ÷ 增速 25% = 0.68（合理）</td><td>$160</td><td>适用</td></tr>
+        <tr><td>⑤ DDM</td><td>首次股息 $2.6 是特别股息、非经常性，不适合 DDM 估值</td><td>—</td><td>不适用（股息非经常）</td></tr>
+        <tr><td>⑥ NAV</td><td>每股净资产 ~$37 × 合理 P/B 4x = $148——但券商 NAV 不是核心估值锚</td><td>~$148</td><td>参考</td></tr>
+        <tr><td>⑦ 反向 DCF</td><td>当前 $124.50 隐含"正常化盈利 + 10% 永续增长"——市场已 price-in 周期性回落，定价偏保守</td><td>—</td><td>诊断</td></tr>
+        <tr><td>⑧ SOTP</td><td>佣金业务（周期性，低倍数）+ 利息业务（稳定，中倍数）+ 财富管理（成长，高倍数）分部加总 ~$160</td><td>~$160</td><td>适用</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:16px">
+    <p><strong>估值结论</strong>：8 种方法的<span class="hl-t">中位数落在 $155-170 区间</span>。当前 $124.50 距估值中位数 $160 有约 <strong>28% 上行空间</strong>。<span class="warn-t">关键洞察</span>：富途的"便宜"一半是真的（结构性用户增长 + 全球化），一半是假象（牛市峰值盈利 + 中概折价）。<strong>用正常化盈利 + 中概风险溢价后，富途仍然有吸引力（约 28% 上行），但不是"12x P/E 闭眼买"的无脑便宜货</strong>。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 8 ═══ -->
+<div class="section">
+  <div class="stitle">模块 8 · 竞争与行业分析</div>
+
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>公司</th><th>市值（约）</th><th>定位</th><th>P/E</th><th>vs 富途</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td>富途（FUTU）</td><td>$17.4B</td><td>港美股互联网券商 · 华人 + 亚太</td><td>~12x</td><td>本报告标的</td></tr>
+        <tr><td>老虎证券（TIGR）</td><td>~$25 亿</td><td>直接竞品 · 华人散户重叠</td><td>~12x</td><td>规模小于富途，增速相近</td></tr>
+        <tr><td>Interactive Brokers（IBKR）</td><td>~$1,100 亿</td><td>全球专业 / 机构券商</td><td>~28x</td><td>规模大、估值高、机构为主</td></tr>
+        <tr><td>Robinhood（HOOD）</td><td>~$900 亿</td><td>美国零售 · 加密 + 期权</td><td>~40x</td><td>美国本土 · 估值远高于富途</td></tr>
+        <tr><td>传统香港券商</td><td>—</td><td>耀才 / 辉立等</td><td>低</td><td>互联网体验落后于富途</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px">
+    <p><strong>波特五力</strong>：(1) <span class="warn-t">现有竞争——激烈</span>，Tiger 直接对垒，IBKR / Robinhood 在各自市场强势；(2) 供应商议价——交易所 / 清算 / 数据是成本，议价能力中性；(3) 客户议价——散户对佣金敏感（价格战风险），但富途靠产品体验 + 社区降低纯价格竞争；(4) <span class="warn-t">替代品 / 新进入者</span>——传统券商互联网化 + 银行系券商 + 加密交易所跨界；(5) 进入壁垒——多地金融牌照 + 技术 + 品牌是中等壁垒。</p>
+    <p><strong>核心洞察</strong>：富途在<span class="hl-t">"华人 + 亚太互联网券商"细分赛道上是领先者</span>，估值（12x）介于 Tiger（12x，更小）和 Robinhood（40x，美国溢价）之间。<strong>富途的相对优势是"增长快 + 利润高 + 全球化分散"，相对劣势是"中概身份 + 监管阴影 + 周期性"</strong>——这解释了为什么它的 P/E 远低于美国同行 Robinhood / IBKR。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 9 ═══ -->
+<div class="section">
+  <div class="stitle">模块 9 · 技术面与 K 线分析（次要参考）</div>
+  <div class="cmt">
+    <p><strong>价格位置</strong>：当前 $124.50（2026-05-19），<span class="warn-t">距 52 周高 $202.53 已回落 -38%</span>，距 52 周低 $100.50 高 +24%。FY2025 大牛市中股价从 ~$60 涨到 $202（+230%），之后回调约 38%——典型的"高 Beta 券商股"暴涨暴跌。</p>
+    <p><strong>趋势与形态</strong>：长期上行趋势中的中级回调，目前在 $110-130 区间震荡。Tencent 持续减持是技术面的供给压力。</p>
+    <p><strong>支撑与阻力</strong>：下方支撑 $110、$100（52 周低）；上方阻力 $140、$160、$200。<span class="hl-t">技术面给出"回调到中部、等待方向选择"的信号</span>——但富途的走向几乎完全由两件事决定：港美股市场情绪（决定交易量）、中概监管 / 地缘政治。技术面仅作择时辅助。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 10 ═══ -->
+<div class="section">
+  <div class="stitle">模块 10 · 增长催化剂与前景展望</div>
+  <div class="cmt">
+    <p><strong>短期催化剂（未来 6-12 个月）</strong>：</p>
+    <p>
+      <strong>1. Q1 2026 财报（2026-05-28）</strong>——管理层预期净资产流入创季度纪录，是验证"用户增长结构性"的关键。<br>
+      <strong>2. 全球化持续兑现</strong>——日本、马来西亚、加拿大等新市场入金户增长。<br>
+      <strong>3. 港股 IPO + 交易活跃度</strong>——2026 港股 IPO 管道是否延续 2025 的火热，直接决定佣金收入。<br>
+      <strong>4. 首次资本返还的延续性</strong>——$500M 回购的执行 + 是否转为常规分红。<br>
+      <strong>5. Tencent 减持节奏</strong>——减持告一段落会释放股价压力。
+    </p>
+    <p><strong>中长期展望（3-5 年）</strong>：富途的<span class="hl-t">长期价值 = 全球入金客户复利增长 + 客户资产做大 + 利息 / 财富管理占比提升</span>——若能把"交易工具"升级成"全球华人 + 亚太财富平台"，估值可获得重估。<strong>但券商的周期性意味着，任何一年的盈利都不能简单外推</strong>——投资富途要有"穿越牛熊"的准备。</p>
+    <p><strong>逆风</strong>：<span class="warn-t">港美股熊市（直接打击交易量 + 佣金）/ 中概监管再收紧 / 美国对中概券商的限制 / Tencent 持续减持 / 地缘政治与 ADR 退市风险</span>。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 11 ═══ -->
+<div class="section">
+  <div class="stitle">模块 11 · 风险矩阵（多维评估）</div>
+
+  <div class="risk-grid">
+    <div class="risk-card r3">
+      <h5>1. 经营风险</h5>
+      <span class="risk-score">3 / 5</span>
+      <p>用户增长结构性强，但盈利与交易量（市场情绪）强相关，单年波动大。</p>
+    </div>
+    <div class="risk-card r2">
+      <h5>2. 财务风险</h5>
+      <span class="risk-score">2 / 5</span>
+      <p>净利率 49.5% + ROE 28% + 自有现金充裕。财务稳健。融资融券有信用风险但可控。</p>
+    </div>
+    <div class="risk-card r3">
+      <h5>3. 竞争风险</h5>
+      <span class="risk-score">3 / 5</span>
+      <p>互联网券商充分竞争——Tiger、IBKR、Robinhood、传统券商互联网化都在抢客。</p>
+    </div>
+    <div class="risk-card r4">
+      <h5>4. 监管 / 政策风险</h5>
+      <span class="risk-score">4 / 5</span>
+      <p><strong>2022 年已被中国证监会禁拓内地新客</strong>。中概券商监管 + 美国对华金融限制是结构性悬剑。</p>
+    </div>
+    <div class="risk-card r4">
+      <h5>5. 宏观 / 周期风险</h5>
+      <span class="risk-score">4 / 5</span>
+      <p>盈利与港美股牛熊高度绑定。FY2025 是牛市峰值——市场降温会显著压制佣金收入。</p>
+    </div>
+    <div class="risk-card r3">
+      <h5>6. 估值风险</h5>
+      <span class="risk-score">3 / 5</span>
+      <p>12x 表面便宜，但建立在峰值盈利上；正常化 P/E 16-18x。Tencent 减持是供给压力。</p>
+    </div>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">11.X 黑天鹅情景（最坏情况）</h4>
+  <div class="cmt">
+    <p>
+      <strong>1. 港美股大幅熊市</strong>（概率 25%）：交易量腰斩，佣金收入大跌，FY26 净利可能 -30%+，叠加估值收缩，股价跌至 $90-100（52 周低附近）。<br>
+      <strong>2. 中概监管 / 美国金融限制升级</strong>（概率 15%）：若美国限制中概券商服务美国客户、或中国进一步收紧跨境，全球化逻辑受损，股价跌至 $85。<br>
+      <strong>3. Tencent 大额清仓式减持</strong>（概率 15%）：腾讯若加速减持（持股 33% 是巨大供给），短期股价承压至 $100 以下。<br>
+      <strong>4. 融资融券坏账 / 风控事件</strong>（概率 5%）：极端市场下融资融券爆仓 + 客户穿仓，可能一次性冲击利润与声誉。
+    </p>
+    <p><span class="hl-t">下行支撑</span>：每股净资产 ~$37 + 净利率 49.5% + 即便熊市也仍盈利（利息收入压舱）+ 首次资本返还显示现金充裕。<strong>$90-100 是较硬的估值底</strong>（52 周低 + P/B ~2.5x + 正常化盈利 12x）。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 12 股东回报分析 ═══ -->
+<div class="section">
+  <div class="stitle">模块 12 · 股东回报分析</div>
+
+  <div class="cmt">
+    <p>富途的股东回报故事在 2026 年迎来<span class="hl-t">"零的突破"</span>——上市 7 年来从不分红、不回购的纯成长股，在 2026-04 首次派发特别股息 + 启动回购授权。下面用三个问题拆开：<strong>给了多少 → 给的方式好不好 → 能不能继续给</strong>。</p>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">12.1 公司给了股东多少？</h4>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>财年</th><th>现金股息</th><th>股票回购</th><th>派息率</th><th>股东总回报</th></tr></thead>
+      <tbody>
+        <tr><td>FY2023</td><td>无</td><td>无</td><td>0%</td><td>$0</td></tr>
+        <tr><td>FY2024</td><td>无</td><td>无</td><td>0%</td><td>$0</td></tr>
+        <tr><td>FY2025（2026-04 派付）</td><td><strong>$2.6/ADS · 约 $365M</strong></td><td>$500M 授权（启动）</td><td>~25%</td><td>~$365M+（首次）</td></tr>
+        <tr class="hl"><td>3 年累计</td><td>~$365M</td><td>授权 $500M</td><td>—</td><td>资本返还元年</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:13px;color:var(--text2);margin-top:8px"><strong>Trailing Shareholder Yield</strong> = 特别股息 $365M / 市值 $17.4B ≈ <strong>2.1%</strong>（若 $500M 回购执行，可升至 ~5%）。<span class="warn-t">注意：$2.6/ADS 是"特别股息"非经常性</span>——上市 7 年首次派息，标志公司进入现金充裕阶段，但<strong>不应视为稳定的年度分红承诺</strong>。</p>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">12.2 给的方式好不好？</h4>
+  <div class="cmt">
+    <p>富途首次资本返还的"含金量"需要拆开看：</p>
+    <p>
+      <strong>① 注销 vs 库存股</strong>：$500M ADS 回购计划——美股回购通常注销或入库存股，富途作为开曼公司回购的 ADS 大概率注销。但<span class="warn-t">回购刚启动，实际执行额尚小</span>，含金量待执行验证。<br>
+      <strong>② 摊薄股数趋势——硬指标</strong>：富途历史上股本相对稳定（SBC 适中），不是高稀释公司。$500M 回购（约占市值 2.9%）若执行，可实质减少股本。<br>
+      <strong>③ 特别股息 vs 经常性股息</strong>：这次是<span class="warn-t">"特别股息"——一次性</span>，不是承诺的年度分红。这对追求稳定现金流的投资者要打折扣：它告诉你"公司现金多了"，但没告诉你"每年都会给"。
+    </p>
+    <p><strong>结论</strong>：富途的首次资本返还<span class="hl-t">象征意义 > 实际金额</span>——它标志一家成长公司开始有"还钱给股东"的意识和能力（积极信号）；但"特别股息 + 刚启动的回购"还谈不上高含金量、可持续的股东回报架构。</p>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">12.3 能不能继续给、给多少？</h4>
+  <div class="cmt">
+    <p>
+      <strong>① 已授权未执行额度</strong>：$500M ADS 回购授权（约占市值 2.9%）——刚启动，剩余额度大。约束力中等（董事会授权，非强制）。富途首次回购，<span class="warn-t">没有历史执行记录可参考</span>，需观察实际节奏。<br>
+      <strong>② 未来股息 + 回购指引</strong>：管理层<span class="warn-t">未承诺将特别股息转为经常性分红</span>。富途仍处高速成长期，资本返还优先级低于"全球化获客 + 业务再投资"——这是合理的，但意味着股东回报的可持续性不确定。<br>
+      <strong>③ (股息 + 回购) / 净利润覆盖度</strong>：FY2025 净利 $1.45B，特别股息 $365M + 回购 $500M = $865M，占净利约 60%——<span class="hl-t">完全覆盖得起</span>（券商轻资产，净利接近自由现金）。即便牛市盈利回落，富途也付得起适度返还。<br>
+      <strong>④ 不是借债回购</strong>：富途自有现金充裕，资本返还来自留存利润，不靠举债。
+    </p>
+    <p><strong>模块小结</strong>：<span class="hl-t">象征性回报起步——首次特别股息 + 首次回购授权，标志从纯成长转向"成长 + 返还"</span>。含金量待执行验证，可持续性取决于公司是否把特别股息常态化。<strong>对富途，股东回报是"加分项"而非"投资主逻辑"——买富途主要赌的还是用户增长 + 全球化，不是收息</strong>。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 13 评分卡 ═══ -->
+<div class="section">
+  <div class="stitle">海图评分卡 · 6 维 A-D + 红旗排查</div>
+
+  <div class="bscore">
+    <div class="circle cw">B</div>
+    <div class="bd">
+      <h4>1. 生意可预测性 — B（7/10）</h4>
+      <p>用户增长结构性强、利息收入较稳定，但<span class="warn-t">佣金收入与市场牛熊强相关</span>——单年盈利波动大，FY2025 是峰值年。整体能见度中等。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle cw">B</div>
+    <div class="bd">
+      <h4>2. 经济护城河 — B（7/10）</h4>
+      <p>5 维护城河全"窄"——产品体验 + 多地牌照 + 投资社区的组合，但无任何宽护城河。客户资产黏性是最可能加宽的方向。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle cw">B+</div>
+    <div class="bd">
+      <h4>3. 管理层质量 — B+（8/10）</h4>
+      <p>李华产品力强 + 双层股权长期主义；2022 监管危机后全球化转型是教科书级执行。<span class="warn-t">扣分</span>：早期合规擦边的历史 + Tencent 持续减持。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>4. 财务质量 — A-（8.5/10）</h4>
+      <p>净利率 49.5% + ROE 28% + 毛利率 87% + 轻资产 + 自有现金充裕。<span class="hl-t">财务质量优秀</span>——这是富途最硬的一项。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle cw">B+</div>
+    <div class="bd">
+      <h4>5. 资本配置纪律 — B+（8/10）</h4>
+      <p>详见模块 12。<strong>13 年再投入获客 + 全球化（正确）+ 2026 首次资本返还</strong>。但特别股息非经常、回购刚启动，资本返还架构尚未成型。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>6. 估值与安全边际 — A-（8.5/10）</h4>
+      <p>表观 P/E 12x（PEG 0.2）、正常化 P/E 16-18x、距 52 周低 +24%、距高点 -38%。<span class="hl-t">即便用正常化盈利，仍有约 28% 上行</span>——安全边际充足。</p>
+    </div>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">13.X 红旗排查（非评分项）</h4>
+  <div class="tbl-wrap">
+    <table class="tbl"><thead><tr><th>红旗项</th><th>状态</th><th>说明</th></tr></thead>
+    <tbody>
+      <tr><td>商誉减值历史</td><td>✓ 无问题</td><td>无重大并购商誉</td></tr>
+      <tr><td>收入确认时点</td><td>✓ 无问题</td><td>佣金 / 利息按交易和时间确认，透明</td></tr>
+      <tr><td>关联交易</td><td>✓ 无问题</td><td>与腾讯关联交易合规披露</td></tr>
+      <tr><td>客户资金隔离</td><td>✓ 无问题</td><td>客户资金隔离存管，合规</td></tr>
+      <tr><td>盈利周期性</td><td>⚠️ 注意</td><td>FY25 是牛市峰值盈利，不可简单外推</td></tr>
+      <tr><td>中概监管</td><td>⚠️ 重大注意</td><td>2022 已被禁拓内地新客；中美金融监管悬剑</td></tr>
+      <tr><td>Tencent 减持</td><td>⚠️ 注意</td><td>33% 持股持续减持，是供给压力</td></tr>
+      <tr><td>双层股权 / ADR 退市</td><td>⚠️ 注意</td><td>李华超级投票权 + 中概 ADR 退市尾部风险</td></tr>
+    </tbody></table>
+  </div>
+
+  <h4 style="margin: 22px 0 10px; font-size:15px; color: var(--accent3); font-family: 'Segoe UI', sans-serif;">13.Y 综合评级</h4>
+  <div class="dcf-note">
+    <p><strong>6 维评分</strong>：B / B / B+ / A- / B+ / A- = 综合 <strong>B+</strong></p>
+    <p><strong>红旗排查</strong>：4 项无问题，4 项注意，其中"中概监管"为<span class="warn-t">重大红旗</span>。<strong>重大红旗触发"有疑问"</strong> → 综合评级压制在「有条件买入」，不上"买入"。</p>
+    <p><strong>综合评级</strong>：<span class="rating-badge rating-cond-buy">有条件买入</span></p>
+    <p><strong>理由</strong>：(1) 财务质量 A-（净利率 49.5% + ROE 28%）+ 估值 A-（正常化 P/E 16-18x 仍有 28% 上行）= 量价俱佳；(2) 全球化兑现 + 用户复利增长 + 利息收入压舱 = 结构性增长真实；(3) <span class="warn-t">但</span>盈利有牛市峰值成分 + 中概监管重大红旗 + Tencent 减持 + 券商周期性——这些是"折价有理由"的部分；(4) 首次资本返还是积极信号但尚未成型。<span class="hl-t">"条件"在于：投资者必须能承受券商的周期性大波动 + 中概监管不确定性 + Tencent 减持的供给压力</span>。在此前提下，当前估值有吸引力。</p>
+  </div>
+</div>
+
+<!-- ═══ 投资决策 ═══ -->
+<div class="section">
+  <div class="stitle">海图研判 · 投资决策</div>
+
+  <div class="cgrid">
+    <div class="ccard">
+      <div class="ctitle" style="font-size: 14px;">12 个月概率加权目标价</div>
+      <p style="font-size: 28px; font-weight: 700; color: var(--gold); margin: 8px 0;">$160</p>
+      <p style="font-size: 13px; color: var(--text2);">+28% 上行 · 中位数估值 $160 / 加权公允 $160</p>
+    </div>
+    <div class="ccard">
+      <div class="ctitle" style="font-size: 14px;">海图评级</div>
+      <p style="font-size: 24px; font-weight: 700; color: var(--gold); margin: 8px 0;">有条件买入</p>
+      <p style="font-size: 13px; color: var(--text2);">便宜 + 高增长 + 高利润，但带中概 + 周期性折价</p>
+    </div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>情景</th><th>假设</th><th>目标价</th><th>概率</th></tr></thead>
+      <tbody>
+        <tr><td>乐观</td><td>市场维持活跃 + 全球化加速 + 资本返还常态化 + 估值重估至 16x</td><td>$210</td><td>30%</td></tr>
+        <tr><td>基准</td><td>增速放缓至 +25% + 交易量正常化 + 估值 13-14x 正常化盈利</td><td>$160</td><td>45%</td></tr>
+        <tr><td>悲观</td><td>港美股熊市 + 交易量腰斩 + 中概监管 / Tencent 减持冲击</td><td>$100</td><td>25%</td></tr>
+        <tr class="hl"><td>概率加权</td><td>—</td><td>$160</td><td>100%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:16px">
+    <p><strong>操作建议</strong>（独立估值中位数 $160，加权公允 $160）：当前价 $124.50<span class="hl-t">已低于机械首仓位 $128，进入合理建仓窗口</span>。</p>
+    <p>
+      · 首仓 <strong>$128</strong>（估值中位数 × 80%，距现价 +3%，已到附近——可建仓）<br>
+      · 二仓 <strong>$112</strong>（× 70%，距现价 -10%，回调加仓）<br>
+      · 三仓 <strong>$96</strong>（× 60%，距现价 -23%，熊市极端机会）<br>
+      · 止盈三档 <strong>$185 / $210 / $250</strong>（每档减仓 25%，最后 25% 视全球化进展决定去留）
+    </p>
+    <p><strong>仓位管理</strong>：建议总仓位 <strong>3-6%</strong>（中等偏低 · 反映券商周期性 + 中概监管 + Tencent 减持）。<strong>这是一笔"高 Beta 成长 + 价值"标的</strong>——建议先小仓位建仓，跌到二仓 / 三仓再加。<strong>持有周期 2-4 年</strong>，目标是"穿越一轮牛熊后的用户复利兑现"。<span class="hl-t">关键纪律：不要在牛市峰值用峰值盈利估值买入、不要因周期性回调恐慌割肉</span>。</p>
+    <p><strong>关键监控指标</strong>：① 入金客户净增速（结构性增长）；② 客户资产规模（利息收入基础）；③ 交易量 / 佣金率（周期性）；④ 利息收入占比（稳定性）；⑤ Tencent 减持进度；⑥ 中概 / 美国监管动态。<strong>下一个催化剂</strong>：2026-05-28 Q1 2026 财报（管理层预期净流入创纪录）。</p>
+  </div>
+</div>
+
+<!-- ═══ 海图页末长评 ═══ -->
+<div class="section">
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记 · 1150 字</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p class="lead">财报里最便宜的数字，往往藏着最需要追问的前提。富途 FY2025 净利 +100%、营收 +68%、P/E 只有 12 倍——一眼望去像捡钱。但夜读财报的人会先问一句：这份盈利，有多少是公司赚的，有多少是牛市给的？答案是：FY2025 全年交易量 +89%，是一个不折不扣的峰值年。</p>
+
+      <p>富途是中国互联网券商出海最成功的代表——moomoo 在海外、富途牛牛在港澳，靠交易佣金（46%）、利息（46%）、财富管理（8%）三块赚钱。FY2025 入金客户 337 万（+40%）、客户资产 HK$1.23 万亿（+66%）。这是一门轻资产、49.5% 净利率、28% ROE 的好生意——但它带着三重折价。</p>
+
+      <h4>几个研判要点</h4>
+
+      <p><strong>一、12x P/E 是"12 倍峰值盈利"。</strong>FY2025 是港股 IPO 大年 + 美股牛市 + 港股通活跃的多重叠加，交易量 +89%。券商佣金与市场情绪强相关——牛市暴增、熊市骤降。<span class="hl-t">用中周期正常化盈利看，富途的真实 P/E 在 16-18x</span>——仍不贵（对 +25%+ 结构性增长），但远没有"12x 白菜价"那么诱人。<strong>看富途，必须把"结构性用户增长"和"周期性交易放大"分开</strong>。</p>
+
+      <p><strong>二、商业模式正在从"靠佣金"转向"靠利息 + 客户资产"。</strong>FY2025 利息收入 HK$104 亿首次与佣金 HK$106 亿几乎持平。利息（融资融券 + 闲置资金利差）比佣金稳定得多，随客户资产规模增长而增长——<span class="hl-t">这是富途盈利质量提升的关键</span>，让它没那么"靠天吃饭"。</p>
+
+      <p><strong>三、2022 年的伤疤，变成了全球化的契机。</strong>2022 年底中国证监会禁止富途拓展内地新客，市场一度认为故事终结。3 年后，富途用 moomoo 在美、新、日、马、澳、加的扩张，把营收做到 HK$228 亿。<span class="hl-t">被堵死内地后，反而逼出了一个更大、更分散、监管风险更低的全球客户基础</span>——这是管理层最被低估的执行力。</p>
+
+      <p><strong>四、首次资本返还是"零的突破"，但别当主逻辑。</strong>2026-04 富途首次派特别股息 $2.6/ADS（约 $365M）+ 启动 $500M 回购。这标志一家成长公司开始有"还钱给股东"的意识。<span class="warn-t">但特别股息是一次性的、回购刚启动</span>——含金量待验证。买富途，赌的还是用户增长 + 全球化，不是收息。</p>
+
+      <p><strong>五、12 个月目标价 $160，上行 +28%。</strong>悲观 $100（-20%，熊市 + 监管）、基准 $160（+28%，增速放缓 + 正常化估值）、乐观 $210（+69%，市场活跃 + 估值重估）。概率加权 $160。<strong>当前 $124.50 已低于机械首仓 $128——进入合理建仓窗口</strong>。但这是一只高 Beta 的券商股，建议小仓位起步、回调加仓。</p>
+
+      <h4>海图研判</h4>
+
+      <p><strong>评级：有条件买入</strong>（12x 表观估值 + 49.5% 净利率 + 28% ROE + 全球化兑现 + 首次资本返还，但盈利含牛市峰值成分 + 中概监管 + Tencent 减持 + 券商周期性）。12 个月概率加权目标价 <strong>$160</strong>（+28%）。</p>
+
+      <p>操作建议：当前 $124.50 已到首仓 $128 附近。首仓 $128（×80%·已到）、二仓 $112（×70%·-10%）、三仓 $96（×60%·熊市极端机会）。止盈三档 $185 / $210 / $250，每档减仓 25%。建议总仓位 <strong>3-6%</strong>（中等偏低 · 反映周期性 + 中概不确定性）。持有周期 2-4 年。<span class="hl-t">关键纪律：不在牛市峰值用峰值盈利买入、不因周期性回调恐慌割肉</span>。</p>
+
+      <h4>风险提示</h4>
+
+      <p>港美股大幅熊市（交易量腰斩、佣金大跌）/ 中概监管或美国金融限制升级 / Tencent 大额减持 / 融资融券风控事件 / ADR 退市尾部风险——任一项都可能让股价回调 20-30%。但净利率 49.5% + 即便熊市仍盈利（利息压舱）+ 每股净资产 ~$37 提供下行支撑，$90-100 是较硬的估值底。</p>
+
+      <p>关键叙事：<strong>"中国出海最成功券商 + 营收 +68% + 净利率 49.5% + 客户资产 HK$1.23 万亿 + 12x 表观 P/E + 首次资本返还"的强势组合，对垒"牛市峰值盈利 + 中概监管 + Tencent 减持 + 券商周期性"的三重折价</strong>。富途是一笔"好生意被周期性 + 中概身份双重打折"的标的——不是给追求确定性的人，而是给愿意看穿峰值盈利、能承受高波动、并理解全球化长期价值的逆向投资者。下次催化剂：2026-05-28 Q1 2026 财报。</p>
+
+      <p class="haitu-sign">—— 海图，灯下落笔，明日再观风浪。</p>
+
+      <p class="haitu-disc">⚠️ 免责声明：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，不构成任何投资建议。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div>《海图夜读》 · 富途控股 Futu Holdings FUTU Q4 + 全年 2025 海图研判</div>
+  <div style="margin-top:6px;">数据来源：富途控股 Q4 + 全年 2025 财报新闻稿（GlobeNewswire / SEC 6-K · 2026-03-12）+ 2026-04 特别股息公告 + 投资者关系页 + 公开市场数据</div>
+  <div style="margin-top:6px;">价值投资 · 长期主义</div>
+</footer>
+
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  const cur = html.getAttribute('data-theme');
+  html.setAttribute('data-theme', cur === 'dark' ? 'light' : 'dark');
+  localStorage.setItem('theme', html.getAttribute('data-theme'));
+  renderCharts();
+}
+(function() {
+  const t = localStorage.getItem('theme');
+  if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+})();
+
+function gc(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+
+let charts = {};
+function renderCharts() {
+  Object.values(charts).forEach(c => c && c.destroy && c.destroy());
+  charts = {};
+  const txt2 = gc('--text2'), txt3 = gc('--text3'), grid = gc('--chart-grid');
+  const accent = gc('--accent'), accent2 = gc('--accent2'), accent3 = gc('--accent3');
+  const green = gc('--green'), gold = gc('--gold'), rose = gc('--rose'), red = gc('--red');
+
+  Chart.defaults.color = txt2;
+  Chart.defaults.font.family = 'Segoe UI, sans-serif';
+  Chart.defaults.font.size = 11;
+
+  charts.rev = new Chart(document.getElementById('revenueChart'), {
+    type: 'bar',
+    data: { labels: ['FY21', 'FY22', 'FY23', 'FY24', 'FY25'],
+      datasets: [{ label: '营收（HK$亿）', data: [70.6, 71.9, 93.6, 135.9, 228.5], backgroundColor: [accent3, gold, accent2, accent, green], borderRadius: 4 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+      scales: { y: { grid: { color: grid }, ticks: { color: txt3 } }, x: { grid: { display: false }, ticks: { color: txt3 } } } }
+  });
+
+  charts.profit = new Chart(document.getElementById('profitChart'), {
+    type: 'line',
+    data: { labels: ['FY21', 'FY22', 'FY23', 'FY24', 'FY25'],
+      datasets: [{ label: 'GAAP 净利（HK$亿）', data: [22.8, 27.4, 45.3, 56.0, 113.0], borderColor: green, backgroundColor: 'rgba(122,154,122,0.1)', tension: 0.3, fill: true, pointBackgroundColor: green, pointRadius: 5 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+      scales: { y: { grid: { color: grid }, ticks: { color: txt3 } }, x: { grid: { display: false }, ticks: { color: txt3 } } } }
+  });
+
+  charts.seg = new Chart(document.getElementById('segmentChart'), {
+    type: 'doughnut',
+    data: { labels: ['经纪佣金 105.7', '利息收入 104.4', '其他 18.3'],
+      datasets: [{ data: [105.7, 104.4, 18.3], backgroundColor: [accent3, accent2, gold], borderColor: gc('--card'), borderWidth: 2 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { color: txt2, font: { size: 11 } } } } }
+  });
+
+  charts.capex = new Chart(document.getElementById('capexChart'), {
+    type: 'bar',
+    data: { labels: ['FY22', 'FY23', 'FY24', 'FY25'],
+      datasets: [
+        { label: '入金客户（万户）', data: [153, 191, 241, 337], backgroundColor: [accent2, accent, gold, green], borderRadius: 4 }
+      ] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top', labels: { color: txt2, font: { size: 11 } } } },
+      scales: { y: { grid: { color: grid }, ticks: { color: txt3 } }, x: { grid: { display: false }, ticks: { color: txt3 } } } }
+  });
+
+  buildSankey();
+}
+
+function buildSankey() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const txt = isDark ? '#d4ccc4' : '#4a4340';
+  const cardBg = isDark ? '#2e2a25' : '#ffffff';
+
+  const sankeyData = [{
+    type: 'sankey', orientation: 'h', arrangement: 'snap', valueformat: ',.1f', valuesuffix: ' 亿',
+    node: {
+      pad: 22, thickness: 22, line: { color: 'transparent', width: 0 },
+      label: ['营收 228.5', '营业成本 29.5', '毛利 199.0', '营业费用 65.6', '营业利润 133.4', '所得税 20.4', '净利润 113.0', '特别股息 28.5', '留存收益 84.5'],
+      color: ['#7b8fa0', '#b87070', '#8a9a8e', '#b9a06a', '#b08d7a', '#b87070', '#7a9a7a', '#b9a06a', '#7a9a7a']
+    },
+    link: {
+      source: [0, 0, 2, 2, 4, 4, 6, 6],
+      target: [1, 2, 3, 4, 5, 6, 7, 8],
+      value:  [29.5, 199.0, 65.6, 133.4, 20.4, 113.0, 28.5, 84.5],
+      color: ['rgba(184,112,112,0.30)', 'rgba(138,154,142,0.45)', 'rgba(185,160,106,0.32)', 'rgba(176,141,122,0.45)', 'rgba(184,112,112,0.30)', 'rgba(122,154,122,0.45)', 'rgba(185,160,106,0.40)', 'rgba(122,154,122,0.40)']
+    }
+  }];
+
+  const layout = { font: { family: 'Segoe UI, sans-serif', size: 11, color: txt }, paper_bgcolor: cardBg, plot_bgcolor: cardBg, margin: { l: 10, r: 10, t: 10, b: 10 } };
+  Plotly.react('sankey', sankeyData, layout, { displayModeBar: false, responsive: true });
+}
+
+document.addEventListener('DOMContentLoaded', renderCharts);
+</script>
+
+</body>
+</html>
