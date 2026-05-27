@@ -47,24 +47,29 @@ export function buildCalendar(fetchResults, todayStr) {
       );
     }
 
-    // ── 1. 下次财报 (earnings) — 排除过时预测后才加入 ──
-    if (
-      data.nextEarningsDate &&
-      data.nextEarningsDate >= sevenAgoStr &&
-      !nextStaleSuspect
-    ) {
-      const isPast = data.nextEarningsDate < todayStr;
-      const isToday = data.nextEarningsDate === todayStr;
+    // ── yfinance 漏数据兜底：tickers.json 的 manualNextEarningsDate 优先级低于 yfinance，
+    // 仅在 yfinance 没数据（或被判定为过时）时启用。适用于港股新上市/披露不全等情况。
+    const yfNext = data.nextEarningsDate && !nextStaleSuspect ? data.nextEarningsDate : null;
+    const nextEarnings = yfNext || t.manualNextEarningsDate || null;
+    const isManualNext = !yfNext && !!t.manualNextEarningsDate;
+
+    // ── 1. 下次财报 (earnings) ──
+    if (nextEarnings && nextEarnings >= sevenAgoStr) {
+      const isPast = nextEarnings < todayStr;
+      const isToday = nextEarnings === todayStr;
+      const tail = isPast ? '(已发)' : isToday ? '(今日)' : (isManualNext ? '(确认)' : '(估)');
+      const name = getCompanyShortName(t);
+      const detail = isPast
+        ? `${name} — 详见<a href="${t.lastReportFile}" style="color:var(--accent-gold);">海图研判</a>`
+        : isManualNext
+          ? `${name} — 公司已确认发布日期，关注 <a href="https://xueqiu.com/S/${t.xueqiuCode}" target="_blank" style="color:var(--accent-gold);">雪球行情</a>`
+          : `${name} — 来源 yfinance 共识，关注 <a href="https://xueqiu.com/S/${t.xueqiuCode}" target="_blank" style="color:var(--accent-gold);">雪球行情</a>`;
       events.push({
-        date: data.nextEarningsDate,
+        date: nextEarnings,
         ticker: displayName,
         type: 'earnings',
-        typeLabel: isPast
-          ? `${guessPeriodLabel(t)} 财报(已发)`
-          : isToday
-            ? `${guessPeriodLabel(t)} 财报(今日)`
-            : `${guessPeriodLabel(t)} 财报(估)`,
-        detail: buildEarningsDetail(t, data, isPast),
+        typeLabel: `${guessPeriodLabel(t)} 财报${tail}`,
+        detail,
         xueqiu: t.xueqiuCode
       });
     }
