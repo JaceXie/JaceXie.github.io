@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-05-27 · PDD Q1 2026 财报已于 2026-05-27 发布 -->
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PDD Holdings 拼多多 — Q1 2026 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+<meta name="description" content="经营利润 +22% 与净利润 -17% 的剪刀差：核心业务在盈利，但 ¥600 亿现金的投资收益率断崖式下滑 + 千亿首创品牌投入接踵而至。一家在&quot;主动放慢&quot;的电商巨头。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PDD Holdings 拼多多 — Q1 2026 海图研判 · 海图夜读">
+<meta property="og:description" content="经营利润 +22% 与净利润 -17% 的剪刀差：核心业务在盈利，但 ¥600 亿现金的投资收益率断崖式下滑 + 千亿首创品牌投入接踵而至。一家在&quot;主动放慢&quot;的电商巨头。">
+<meta property="og:image" content="https://jacexie.github.io/haitu/assets/og/pdd-q1-2026.png">
+<meta property="og:url" content="https://jacexie.github.io/haitu/reports/pdd-q1-2026.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="PDD Holdings 拼多多 — Q1 2026 海图研判 · 海图夜读">
+<meta name="twitter:description" content="经营利润 +22% 与净利润 -17% 的剪刀差：核心业务在盈利，但 ¥600 亿现金的投资收益率断崖式下滑 + 千亿首创品牌投入接踵而至。一家在&quot;主动放慢&quot;的电商巨头。">
+<meta name="twitter:image" content="https://jacexie.github.io/haitu/assets/og/pdd-q1-2026.png">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root {
+  --bg:        #f5f0eb;
+  --bg2:       #ece6df;
+  --card:      #ffffff;
+  --card2:     #f8f5f1;
+  --border:    #d9d0c7;
+  --text:      #4a4340;
+  --text2:     #7a706a;
+  --text3:     #a89f98;
+  --accent:    #8a9a8e;
+  --accent2:   #7b8fa0;
+  --accent3:   #b08d7a;
+  --rose:      #c09090;
+  --gold:      #b9a06a;
+  --red:       #b87070;
+  --green:     #7a9a7a;
+  --shadow:    rgba(0,0,0,0.06);
+  --chart-grid:#e5ddd5;
+}
+[data-theme="dark"] {
+  --bg:        #1e1c1a;
+  --bg2:       #28251f;
+  --card:      #2e2a25;
+  --card2:     #363230;
+  --border:    #4a4540;
+  --text:      #d4ccc4;
+  --text2:     #a09890;
+  --text3:     #706860;
+  --accent:    #8a9a8e;
+  --accent2:   #8fabbf;
+  --accent3:   #c9a48e;
+  --rose:      #c09090;
+  --gold:      #c9b07a;
+  --red:       #c08080;
+  --green:     #8aaa8a;
+  --shadow:    rgba(0,0,0,0.3);
+  --chart-grid:#3e3a35;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', serif; line-height: 1.75; font-size: 14.5px; transition: background .35s, color .35s; }
+a { color: var(--accent2); text-decoration: none; }
+.theme-bar { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); }
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; text-decoration: none; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+.toggle-switch { position: relative; width: 44px; height: 22px; background: var(--border); border-radius: 11px; cursor: pointer; transition: background .3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: var(--card); border-radius: 50%; transition: transform .3s; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+
+.hero { padding: 48px 24px 36px; text-align: center; border-bottom: 1px solid var(--border); }
+.hero-tag { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 3px 14px; border-radius: 20px; margin-bottom: 18px; }
+.hero h1 { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.pill { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: 'Segoe UI', sans-serif; font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow); }
+.pill strong { color: var(--text); }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle { font-size: 18px; font-weight: 700; color: var(--accent3); margin-bottom: 20px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+.stitle::before { content: ''; display: block; width: 4px; height: 20px; background: var(--accent3); border-radius: 2px; }
+
+.haitu-quip { display: flex; align-items: center; gap: 18px; background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 18px 24px; margin: 24px 0; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-quote { flex: 1; }
+.haitu-portrait { font-size: 15px; line-height: 1.65; color: var(--text); margin-bottom: 6px; font-weight: 600; }
+.haitu-rating-line { font-size: 13px; color: var(--text2); font-family: 'Segoe UI', sans-serif; }
+.rating-badge { display: inline-block; padding: 2px 12px; border-radius: 12px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; margin-left: 4px; }
+.rating-cond-buy { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+
+.haitu-essay { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 28px 32px; margin: 24px 0 20px; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-essay-header { display: flex; align-items: center; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.haitu-avatar-sm { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); background: var(--red); box-shadow: 0 2px 8px rgba(184,112,112,0.2); }
+.haitu-name-lg { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 28px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 4px; }
+.haitu-essay-tag { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; }
+.haitu-essay-body { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 15px; line-height: 2.0; color: var(--text); }
+.haitu-essay-body p { margin-bottom: 14px; }
+.haitu-essay-body p.lead { font-size: 16px; font-style: italic; color: var(--text2); margin-bottom: 18px; }
+.haitu-essay-body strong { color: var(--text); font-weight: 700; }
+.haitu-essay-body h4 { font-size: 14px; color: var(--accent3); margin: 18px 0 10px; font-family: 'Segoe UI', sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+.haitu-sign { text-align: right; margin-top: 18px; font-family: 'Georgia', serif; font-size: 14px; color: var(--text2); font-style: italic; }
+.haitu-disc { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); font-style: italic; line-height: 1.7; }
+
+.stock-snap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px; }
+.snap-item { text-align: center; }
+.snap-label { font-family: 'Segoe UI', sans-serif; font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.snap-val { font-family: 'Segoe UI', sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+.snap-val.up { color: var(--green); }
+.snap-val.dn { color: var(--red); }
+.snap-sub { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow); }
+.kpi-l { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.badge { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+.up { background: rgba(122,154,122,.15); color: var(--green); }
+.dn { background: rgba(184,112,112,.15); color: var(--red); }
+.nt { background: rgba(123,143,160,.15); color: var(--accent2); }
+
+.tbl-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow); }
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI', sans-serif; font-size: 13px; }
+.tbl th { background: var(--card2); color: var(--text3); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); background: var(--card2); }
+
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); }
+.ctitle { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 260px; }
+
+.cmt { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 26px; line-height: 1.95; font-size: 14px; box-shadow: 0 1px 4px var(--shadow); color: var(--text); }
+.cmt p { margin-bottom: 14px; }
+.cmt p:last-child { margin-bottom: 0; }
+.cmt strong { color: var(--text); }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+
+.bscore { display: flex; align-items: center; gap: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; margin-bottom: 12px; box-shadow: 0 1px 4px var(--shadow); }
+.circle { width: 62px; height: 62px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; flex-shrink: 0; border: 3px solid; font-family: 'Segoe UI', sans-serif; }
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 4px; color: var(--text); }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.moat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+.moat-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); border-left: 4px solid var(--accent); }
+.moat-card.wide { border-left-color: var(--green); }
+.moat-card.narrow { border-left-color: var(--gold); }
+.moat-card.none { border-left-color: var(--red); }
+.moat-card h5 { font-size: 13px; color: var(--text); margin-bottom: 6px; }
+.moat-card .moat-rate { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.moat-card.wide .moat-rate { background: rgba(122,154,122,.18); color: var(--green); }
+.moat-card.narrow .moat-rate { background: rgba(185,160,106,.18); color: var(--gold); }
+.moat-card.none .moat-rate { background: rgba(184,112,112,.18); color: var(--red); }
+.moat-card p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+
+.ec-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 14px; box-shadow: 0 1px 3px var(--shadow); }
+.ec-badge { flex-shrink: 0; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-top: 2px; font-family: 'Segoe UI', sans-serif; }
+.ec-bull { background: rgba(122,154,122,.18); color: var(--green); }
+.ec-bear { background: rgba(184,112,112,.18); color: var(--red); }
+.ec-neut { background: rgba(185,160,106,.18); color: var(--gold); }
+.ec-body { flex: 1; }
+.ec-title { font-weight: 600; color: var(--text); margin-bottom: 3px; font-size: 14px; }
+.ec-note { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.dcf-note { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.dcf-note strong { color: var(--text); }
+
+.scorecard { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow); }
+.score-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.score-card { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px; }
+.score-letter { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Segoe UI', sans-serif; font-weight: 800; font-size: 22px; flex-shrink: 0; border: 3px solid; }
+.s-a { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.12); }
+.s-bp { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.06); }
+.s-b { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.10); }
+.s-bm { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.06); }
+.s-c { color: var(--red); border-color: var(--red); background: rgba(184,112,112,.08); }
+.score-body h4 { font-size: 13px; color: var(--text); margin-bottom: 4px; }
+.score-body p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+.flag-row { margin-top: 16px; padding: 12px 16px; background: rgba(184,112,112,.08); border: 1px solid rgba(184,112,112,.3); border-radius: 8px; font-size: 13px; color: var(--text2); }
+.flag-row strong { color: var(--red); }
+
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center; box-shadow: 0 1px 4px var(--shadow); }
+.pbox .pl { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; }
+.pbox .pv { font-family: 'Segoe UI', sans-serif; font-size: 28px; font-weight: 800; margin-bottom: 5px; }
+.pbox .pn { font-size: 12px; color: var(--text3); line-height: 1.5; }
+.pc { color: var(--red); } .pf { color: var(--gold); } .ps { color: var(--green); }
+
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.risk-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); position: relative; overflow: hidden; }
+.risk-card::before { content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent); }
+.risk-card.r1::before { background: var(--green); }
+.risk-card.r2::before { background: rgba(122,154,122,.6); }
+.risk-card.r3::before { background: var(--gold); }
+.risk-card.r4::before { background: var(--rose); }
+.risk-card.r5::before { background: var(--red); }
+.risk-card h5 { font-size: 14px; margin-bottom: 6px; color: var(--text); }
+.risk-score { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.r1 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r2 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r3 .risk-score { background: rgba(185,160,106,.18); color: var(--gold); }
+.r4 .risk-score { background: rgba(192,144,144,.18); color: var(--rose); }
+.r5 .risk-score { background: rgba(184,112,112,.18); color: var(--red); }
+.risk-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+footer { background: var(--card2); border-top: 1px solid var(--border); padding: 24px; text-align: center; color: var(--text3); font-size: 12px; margin-top: 40px; line-height: 1.8; }
+@media (max-width: 768px) { .cgrid,.pgrid { grid-template-columns: 1fr; } .hero h1 { font-size: 22px; } .kpi-grid { grid-template-columns: 1fr 1fr; } .stock-snap { grid-template-columns: 1fr 1fr; } .haitu-essay-header { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/PDD" target="_blank" rel="noopener" title="在雪球查看 PDD 实时行情">雪球 PDD</a>
+  </div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">Q1 2026 财报发布 · 2026-05-27 &nbsp;|&nbsp; 海图研判 · 2026-05-27</div>
+  <h1>PDD Holdings 拼多多 · Q1 2026 财报深度分析</h1>
+  <div class="hero-sub">NASDAQ: PDD &nbsp;|&nbsp; 2026年 一季度业绩 &nbsp;|&nbsp; 价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill">股价 <strong>$88.51</strong> <span style="color:var(--red)">盘前 -8.4%</span></div>
+    <div class="pill">市值 <strong>$124B</strong></div>
+    <div class="pill">Q1 营收 <strong>¥1,062 亿</strong> <span style="color:var(--green)">+11%</span></div>
+    <div class="pill">Q1 经营利润 <strong>¥196 亿</strong> <span style="color:var(--green)">+22%</span></div>
+    <div class="pill">Non-GAAP 净利 <strong>¥141 亿</strong> <span style="color:var(--red)">-17%</span></div>
+    <div class="pill">现金 <strong>¥6,074 亿</strong> <span style="color:var(--accent3)">占市值 71%</span></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 海图页首短评 ═══ -->
+<div class="haitu-quip">
+  <div class="haitu-quote">
+    <div class="haitu-portrait">经营利润 +22% 与净利润 -17% 的剪刀差：核心业务在盈利，但 ¥600 亿现金的投资收益率断崖式下滑 + 千亿首创品牌投入接踵而至——这是一家在"主动放慢"的电商巨头。</div>
+    <div class="haitu-rating-line">评级：<span class="rating-badge rating-cond-buy">有条件买入</span> · 12 个月目标价 $115（+30%）</div>
+  </div>
+</div>
+
+<!-- ═══ 市场数据快照 ═══ -->
+<div class="section">
+  <div class="stitle">市场数据快照（2026-05-27 盘前）</div>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">股价（美元）</div><div class="snap-val">88.51</div><div class="snap-sub">盘前 -8.4% · 接近 52 周低点</div></div>
+    <div class="snap-item"><div class="snap-label">市值</div><div class="snap-val">$124B</div><div class="snap-sub">≈ ¥8,565 亿</div></div>
+    <div class="snap-item"><div class="snap-label">TTM GAAP P/E</div><div class="snap-val">8.8x</div><div class="snap-sub">Non-GAAP: 8.2x</div></div>
+    <div class="snap-item"><div class="snap-label">核心业务 P/E</div><div class="snap-val up">~3.7x</div><div class="snap-sub">剔净现金后</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间</div><div class="snap-val dn">$87 - $145</div><div class="snap-sub">距高点 -39%</div></div>
+    <div class="snap-item"><div class="snap-label">P/B</div><div class="snap-val">~2.0x</div><div class="snap-sub">基于 ¥4,234 亿权益</div></div>
+    <div class="snap-item"><div class="snap-label">FCF Yield (TTM)</div><div class="snap-val up">~11%</div><div class="snap-sub">FCF ~$14B</div></div>
+    <div class="snap-item"><div class="snap-label">总现金</div><div class="snap-val">¥6,074 亿</div><div class="snap-sub">≈ $88B（市值 71%）</div></div>
+    <div class="snap-item"><div class="snap-label">有息负债</div><div class="snap-val up">¥0</div><div class="snap-sub">连续 5 年零负债</div></div>
+    <div class="snap-item"><div class="snap-label">分红/回购</div><div class="snap-val dn">无</div><div class="snap-sub">连续 7 年无任何股东回报</div></div>
+    <div class="snap-item"><div class="snap-label">ROE (TTM)</div><div class="snap-val">~24%</div><div class="snap-sub">FY25: 28% · 下行</div></div>
+    <div class="snap-item"><div class="snap-label">股本（ADS / 普通股）</div><div class="snap-val">1.40B / 5.6B</div><div class="snap-sub">每 ADS = 4 普通股 · VIE</div></div>
+  </div>
+  <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">数据时点：股价 2026-05-27 盘前 · 财务数据来源 PDD Q1 2026 官方新闻稿（SEC 6-K Form, 2026-05-27 发布）· RMB/USD = 6.898</p>
+</div>
+
+<!-- ═══ Q1 2026 KPI ═══ -->
+<div class="section">
+  <div class="stitle">Q1 2026 核心业绩（RMB 亿元 · 截至 2026-03-31）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">总营收</div><div class="kpi-v">¥1,062</div><span class="badge up">+11% YoY</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">vs Q1 2025: ¥957 · 增速从 Q4 +12% 微降</div></div>
+    <div class="kpi"><div class="kpi-l">在线营销服务</div><div class="kpi-v">¥499</div><span class="badge nt">+2.5%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">vs Q1 2025: ¥487 · 显著放缓</div></div>
+    <div class="kpi"><div class="kpi-l">交易服务（含 Temu）</div><div class="kpi-v">¥563</div><span class="badge up">+20%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">vs Q1 2025: ¥470 · 增速从 Q4 +29% 放缓</div></div>
+    <div class="kpi"><div class="kpi-l">毛利</div><div class="kpi-v">¥593</div><span class="badge nt">+7.5%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">毛利率 55.9% · 同比下降 ~2pp</div></div>
+    <div class="kpi"><div class="kpi-l">销售&营销费用</div><div class="kpi-v">¥338</div><span class="badge up">+1.2%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">vs Q1 2025: ¥334 · 大幅放缓（Q4 +47%）</div></div>
+    <div class="kpi"><div class="kpi-l">研发费用</div><div class="kpi-v">¥44</div><span class="badge dn">+22%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">投入加速 · 首创品牌技术</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 经营利润</div><div class="kpi-v">¥196</div><span class="badge up">+22%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">vs Q1 2025: ¥161 · 经营利润率 18.4%</div></div>
+    <div class="kpi"><div class="kpi-l">Non-GAAP 经营利润</div><div class="kpi-v">¥211</div><span class="badge up">+15%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">vs Q1 2025: ¥183 · Non-GAAP OPM 19.9%</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 净利润</div><div class="kpi-v">¥125</div><span class="badge dn">-15%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">vs Q1 2025: ¥147 · 净利率 11.8%</div></div>
+    <div class="kpi"><div class="kpi-l">Non-GAAP 净利润</div><div class="kpi-v">¥141</div><span class="badge dn">-17%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">vs Q1 2025: ¥169 · Non-GAAP 净利率 13.3%</div></div>
+    <div class="kpi"><div class="kpi-l">Non-GAAP 摊薄 EPS</div><div class="kpi-v">¥9.51 / ADS</div><span class="badge dn">-17%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">≈ $1.38 vs 共识 $2.13（-35% miss）</div></div>
+    <div class="kpi"><div class="kpi-l">经营现金流</div><div class="kpi-v">¥164</div><span class="badge up">+6%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">vs Q1 2025: ¥155 · OCF/NI 131%</div></div>
+  </div>
+</div>
+
+<!-- ═══ 季度趋势图 ═══ -->
+<div class="section">
+  <div class="stitle">5 季度关键指标趋势（Q1 25 → Q1 26）</div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">营收（¥亿）& YoY 增速</div><div class="cwrap"><canvas id="chartRev"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">经营利润 vs 净利润（¥亿，剪刀差）</div><div class="cwrap"><canvas id="chartProfit"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">营收分部（¥亿 · 在线营销 vs 交易服务）</div><div class="cwrap"><canvas id="chartSegment"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">现金 + 短期投资（¥亿，季度末）</div><div class="cwrap"><canvas id="chartCash"></canvas></div></div>
+  </div>
+</div>
+
+<!-- ═══ 资金流向桑基图 ═══ -->
+<div class="section">
+  <div class="stitle">Q1 2026 资金流向桑基图（¥亿）</div>
+  <div class="ccard">
+    <div id="sankey" style="width:100%;height:480px;"></div>
+    <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">说明：营收 ¥1,062 → 营业成本 ¥469 + 毛利 ¥593 → 运营费用 ¥398（S&M ¥338 + R&D ¥44 + G&A ¥16）+ 经营利润 ¥196 → 所得税 ¥71 + 非经营性损失 ¥0 = GAAP 净利 ¥125。注：非经营项目（投资 / 利息收入 / 公允价值损益）净 ~-¥0 亿（同比 +¥14 → -¥0），是 Q1 净利下滑的主因；调整非现金项后经营现金流 ¥164 亿。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 1 ═══ -->
+<div class="section">
+  <div class="stitle">模块 1 · 公司概览与背景</div>
+  <div class="cmt">
+    <p><strong>PDD Holdings Inc.</strong>（NASDAQ: PDD，2018-07 上市），开曼注册，总部双中心 Dublin / Shanghai。前身为 2015 年黄峥创立的拼多多，2023 年完成 PDD Holdings 重组后总部迁至爱尔兰。旗下两大平台：<strong>拼多多</strong>（国内电商主体，"低价拼团"基础设施）+ <strong>Temu</strong>（2022-09 上线的全球出海平台，已覆盖 50+ 国家）。</p>
+
+    <p><strong>本季关键变化</strong>：Q1 2026 是黄峥退出后第 4 个完整经营季度。本次电话会，联席 CEO <strong>赵佳臻</strong>开篇即明确："<span class="hl-t">这一年标志着拼多多进入第二个十年</span>"——以此宣告 2026 起战略重心从"千亿扶持"转向"千亿首创品牌"，将再投入 ¥150 亿 + 未来 3 年 ¥1,000 亿打造平台自有品牌。这是黄峥时代以来最重大的资本配置转向。</p>
+
+    <p><strong>股东结构</strong>：黄峥（创始人）持股 ~25%、腾讯持股 ~14%、高榕资本 ~6%、Sequoia ~3%、机构合计 ~65%。黄峥仍是绝对控股股东 + 单一最大投票人。<strong>VIE 架构</strong>——美股 ADR 模式，中概股共性风险。</p>
+
+    <p><strong>能力圈检验</strong>：商业模式相对清晰（电商平台 + 跨境零售），但黑箱在两处：<span class="warn-t">(1) Temu 的真实单位经济（运费 / 流量成本 / GMV 转化率从未单独披露）；(2) 跨境物流补贴具体规模与可持续性</span>。这两点决定了 Temu 是不是"另一个亚马逊"，目前外部很难独立评估。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 2 ═══ -->
+<div class="section">
+  <div class="stitle">模块 2 · 管理层评估</div>
+  <div class="cmt">
+    <p><strong>核心团队</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>陈磊（Lei Chen）</strong>，联席 CEO 兼联席董事长 · 拼多多 18 号员工 · 技术派 · 主管供应链</li>
+      <li><strong>赵佳臻（Jiazhen Zhao）</strong>，联席 CEO 兼联席董事长 · 主管平台运营 / Temu / 战略</li>
+      <li><strong>刘珺（Jun Liu）</strong>，财务副总裁 · 2018 上市以来 CFO · 风格保守</li>
+      <li><strong>黄峥</strong>，2023 退任董事长后转向投资 + 学术，但仍是最大股东 · 长期主义象征</li>
+    </ul>
+
+    <p><strong>资本配置历史</strong>（满分 5 分制）：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>不分红 / 不回购</strong>：连续 7 年（2018 上市至今）零股东回报——评 <span class="warn-t">2 分</span>。¥600 亿现金堆积 · 资本闲置成本巨大</li>
+      <li><strong>主要并购</strong>：无（不像阿里、腾讯收购成风）—— 评 <span class="hl-t">4 分</span> · 避免低 ROIC 烧钱</li>
+      <li><strong>Temu 出海</strong>：2022-09 启动 · 累计投入 ~$15B · 3 年做到 GMV $92B —— 评 <span class="hl-t">4 分</span> · 资本回报率难评，但 GMV 增速世界级</li>
+      <li><strong>"千亿扶持" 2024-2025</strong>：明确披露 ¥100B 商家补贴 · 短期利润换长期生态 · 评 <span class="hl-t">4 分</span></li>
+      <li><strong>"千亿首创品牌" 2026 起</strong>：本季首次明确 · ¥150 亿启动 + 3 年 ¥1,000 亿 · 评级 <span class="hl-t">待验证（3 分）</span></li>
+    </ul>
+
+    <p><strong>长期主义测试</strong>：✅ 黄峥退任后，新管理层依然延续"放弃短期利润换平台护城河"的资本配置——Q1 2026 主动让净利下滑 17% 而非市场预期的指引修复，证明<span class="hl-t">管理层愿意承担市场惩罚</span>。这是中概股最难得的品质。</p>
+
+    <p><strong>坦诚度</strong>：电话会上明确承认"利润将继续承压"、不规避问题；但对 Temu 单位经济、千亿扶持的精确投入金额、新加坡 / 欧洲监管成本等具体数据始终拒绝披露——<span class="warn-t">透明度不及亚马逊 / 谷歌等成熟平台</span>。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 3 ═══ -->
+<div class="section">
+  <div class="stitle">模块 3 · 商业模式深度解析</div>
+  <div class="cmt">
+    <p><strong>海图"一句话测试"</strong>：拼多多是"中国低线市场最低价基础设施 + Temu 是其向全球的延伸 + ¥600 亿现金等待 Temu 第二曲线兑现"——核心生意是<strong>拒绝中间商赚差价</strong>的工厂-消费者直连平台。</p>
+
+    <p><strong>Q1 2026 收入拆分</strong>（¥亿）：</p>
+
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>板块</th><th>Q1 2025</th><th>Q1 2026</th><th>YoY</th><th>占比</th></tr>
+        <tr><td>在线营销服务及其他（CPC 广告等）</td><td>¥487</td><td>¥499</td><td><span class="badge nt">+2.5%</span></td><td>47%</td></tr>
+        <tr><td>交易服务（含 Temu 佣金 + 国内拼多多 0.6% 服务费）</td><td>¥470</td><td>¥563</td><td><span class="badge up">+20%</span></td><td>53%</td></tr>
+        <tr class="hl"><td>总营收</td><td>¥957</td><td>¥1,062</td><td><span class="badge up">+11%</span></td><td>100%</td></tr>
+      </table>
+    </div>
+
+    <p style="margin-top:14px;"><strong>关键观察</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>在线营销服务首次几乎零增长</strong>（+2.5%）—— 中国电商广告市场的结构性疲软 + 拼多多商家投放意愿下滑</li>
+      <li><strong>交易服务 +20%</strong> —— 仍是增长引擎，但比 Q4 2025 的 +29% 明显放缓</li>
+      <li><strong>"商品销售"（自营 / 1P）一项保持为 0</strong> —— 即使宣布千亿首创品牌，财报口径上 1P 还未启动 · 是 Q2-Q4 即将出现的新收入类目</li>
+    </ul>
+
+    <p><strong>单位经济 vs 阿里淘天</strong>（剖析平台模式优劣）：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li>拼多多平台 take rate ~6-7%（含广告 + 佣金）vs 阿里 ~3-4% · 拼多多<strong>价值压榨能力 ~2 倍</strong>（业内最高）</li>
+      <li>拼多多 GMV/SKU 远低于阿里，但单 SKU 流量集中度高 · "爆款 + 低价"逻辑</li>
+      <li>Temu 的 take rate 估算 ~30%（含运费补贴）· 短期亏损是必经之路 · 等待规模化拐点</li>
+    </ul>
+
+    <p><strong>议价能力</strong>：对商家（强 · take rate ~6-7% 全行业最高）· 对用户（中 · 价格敏感型消费者粘性靠"百亿补贴"维系）· 对供应商（自营业务尚未规模化前，议价能力暂无）。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 4 ═══ -->
+<div class="section">
+  <div class="stitle">模块 4 · 经济护城河分析</div>
+  <div class="moat-grid">
+    <div class="moat-card wide">
+      <h5>1. 网络效应</h5>
+      <span class="moat-rate">宽</span>
+      <p>9 亿活跃买家 + 1300 万商家 · 用户越多商家越多 · 双边网络效应顶级。<br><strong>趋势：稳定。</strong></p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>2. 转换成本</h5>
+      <span class="moat-rate">窄</span>
+      <p>消费者切换至阿里 / 京东无技术摩擦 · 仅"低价心智 + 拼团社交"形成软门槛。<br><strong>趋势：略侵蚀</strong>（淘天百亿补贴 + 京东低价同步抗压）。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>3. 成本优势</h5>
+      <span class="moat-rate">宽</span>
+      <p>白牌工厂直供 + 极简组织 · 单位订单营销成本 ~ ¥10 vs 阿里 ¥30 · <strong>结构性优势</strong>。<br><strong>趋势：略压缩</strong>（千亿扶持削成本优势）。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>4. 无形资产</h5>
+      <span class="moat-rate">窄</span>
+      <p>"拼多多 = 低价"心智强大但易被复制 · 无监管牌照 / 专利护城河。<br><strong>趋势：稳定。</strong></p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>5. 有效规模</h5>
+      <span class="moat-rate">窄</span>
+      <p>中国电商市场 CR3（阿里 / 京东 / 拼多多）~70%，三家共存 · 不是赢家通吃市场。Temu 在海外仍是新进入者。<br><strong>趋势：海外扩张中。</strong></p>
+    </div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>10 年后护城河会更宽还是更窄？</strong> <span class="hl-t">中性偏窄</span>——网络效应顶级 + 成本优势宽，但<span class="warn-t">阿里以同等或更高利润率 + 字节抖音电商崛起 + 京东 1P 加速</span>正在让"低价"心智优势从 100% 独占下降到 60-70%。Temu 海外的护城河尚未形成（亚马逊 / 拼多多 / SHEIN 三足鼎立）。</p>
+
+    <p><strong>定价权</strong>：薄。拼多多模式本质是"为用户压低价格"，所以对消费者议价能力被设计为有限。对商家议价能力强（take rate 全行业最高）。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 5 ═══ -->
+<div class="section">
+  <div class="stitle">模块 5 · 财务深度分析</div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 12px 0; font-family: 'Segoe UI',sans-serif;">5.1 关键比率（Q1 2026 vs Q1 2025）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>指标</th><th>Q1 2025</th><th>Q1 2026</th><th>变化</th><th>含义</th></tr>
+      <tr><td>毛利率</td><td>57.3%</td><td>55.9%</td><td><span class="badge dn">-1.4pp</span></td><td>Temu 跨境运费成本拉低</td></tr>
+      <tr><td>GAAP 经营利润率</td><td>16.8%</td><td>18.4%</td><td><span class="badge up">+1.6pp</span></td><td>S&M 控制 + 规模效应释放</td></tr>
+      <tr><td>Non-GAAP 经营利润率</td><td>19.2%</td><td>19.9%</td><td><span class="badge up">+0.7pp</span></td><td>核心业务在转好</td></tr>
+      <tr><td>GAAP 净利率</td><td>15.4%</td><td>11.8%</td><td><span class="badge dn">-3.6pp</span></td><td>非经营性损益 / 投资收益拖累</td></tr>
+      <tr><td>Non-GAAP 净利率</td><td>17.7%</td><td>13.3%</td><td><span class="badge dn">-4.4pp</span></td><td>投资收益 ↓ 是核心拖累</td></tr>
+      <tr><td>S&M / 营收</td><td>34.9%</td><td>31.8%</td><td><span class="badge up">-3.1pp</span></td><td>大幅放缓（Q4 还在加速 +47%）</td></tr>
+      <tr><td>R&D / 营收</td><td>3.8%</td><td>4.2%</td><td><span class="badge nt">+0.4pp</span></td><td>首创品牌技术投入</td></tr>
+      <tr><td>OCF / 净利</td><td>105%</td><td>131%</td><td><span class="badge up">+26pp</span></td><td>盈利质量改善</td></tr>
+      <tr><td>有效税率</td><td>~12%</td><td>~26%</td><td><span class="badge dn">+14pp</span></td><td>跨境业务税务结构 + 国际税务调整</td></tr>
+    </table>
+  </div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.2 资产负债健康度（2026-03-31 末）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>2025-12-31 末</th><th>2026-03-31 末</th><th>QoQ 变化</th></tr>
+      <tr><td>现金及等价物</td><td>¥1,134</td><td>¥1,230</td><td><span class="badge up">+8.5%</span></td></tr>
+      <tr><td>受限现金</td><td>¥732</td><td>¥762</td><td><span class="badge up">+4.1%</span></td></tr>
+      <tr><td>短期投资</td><td>¥2,357</td><td>¥3,130</td><td><span class="badge up">+32.8%</span></td></tr>
+      <tr class="hl"><td>流动现金总额</td><td>¥4,223</td><td>¥4,361</td><td><span class="badge up">+3.3%</span></td></tr>
+      <tr><td>长期时间存款 + 证券</td><td>¥1,300</td><td>¥952</td><td><span class="badge dn">-27%（转流动）</span></td></tr>
+      <tr class="hl"><td>总现金等价物</td><td>¥5,523</td><td>¥5,313</td><td><span class="badge dn">-3.8%</span></td></tr>
+      <tr><td>有息负债（短期借款 + 长期借款 + 经营租赁）</td><td>¥0</td><td>¥0</td><td>不变</td></tr>
+      <tr class="hl"><td><strong>真实净现金</strong></td><td><strong>¥5,523</strong></td><td><strong>¥5,313</strong></td><td>≈ $77B · 占市值 62%</td></tr>
+      <tr><td>应收账款</td><td>¥147</td><td>¥154</td><td><span class="badge nt">+4.8%</span></td></tr>
+      <tr><td>预付费用 + 其他</td><td>¥98</td><td>¥118</td><td><span class="badge nt">+20%</span></td></tr>
+      <tr><td>商家应付款</td><td>¥1,832</td><td>¥1,798</td><td><span class="badge nt">-1.9%</span></td></tr>
+      <tr><td>预收 / 合同负债</td><td>¥168</td><td>¥179</td><td><span class="badge nt">+6.5%</span></td></tr>
+      <tr><td>总资产</td><td>¥6,180</td><td>¥6,377</td><td><span class="badge up">+3.2%</span></td></tr>
+      <tr><td>股东权益</td><td>¥4,109</td><td>¥4,234</td><td><span class="badge up">+3.0%</span></td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">注：数据基于 PDD Q1 2026 官方新闻稿资产负债表。GAAP 现金 + 受限现金 + 短期投资合计 ¥4,361 亿（流动）+ 长期时间存款 ¥952 亿 = 总 ¥5,313 亿。<strong>有息负债零</strong>——已查所有 line item（短期借款、长期借款、经营租赁），不是从"长期负债 = 0"推论。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.3 现金流量（Q1 2026 vs Q1 2025）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>Q1 2025</th><th>Q1 2026</th><th>YoY</th></tr>
+      <tr><td>净利润</td><td>¥147</td><td>¥125</td><td><span class="badge dn">-15%</span></td></tr>
+      <tr><td>＋ 折旧摊销</td><td>¥3.0</td><td>¥3.2</td><td><span class="badge up">+7%</span></td></tr>
+      <tr><td>＋ 股权激励 SBC</td><td>¥22</td><td>¥15</td><td><span class="badge up">-32%</span></td></tr>
+      <tr><td>＋ 营运资金变动 / 其他</td><td>-¥16.5</td><td>+¥20.8</td><td>正向贡献</td></tr>
+      <tr class="hl"><td>经营现金流（OCF）</td><td>¥155</td><td>¥164</td><td><span class="badge up">+6%</span></td></tr>
+      <tr><td>- Capex（购置 PP&E）</td><td>~¥3</td><td>~¥4</td><td>极小 · 平台轻资产</td></tr>
+      <tr class="hl"><td>自由现金流（FCF）</td><td>¥152</td><td>¥160</td><td><span class="badge up">+5%</span></td></tr>
+      <tr><td>FCF / 净利</td><td>104%</td><td>128%</td><td>盈利质量上升</td></tr>
+    </table>
+  </div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.4 所有者盈余（价值投资口径 · Q1 2026 季度）</h3>
+  <div class="dcf-note">
+    <p><strong>所有者盈余 = 净利润 + 折旧摊销 + 股权激励 − 维护性 Capex ± 营运资金变动</strong></p>
+    <p>= ¥125 + ¥3.2 + ¥15 − ¥4 + ¥20.8（实际营运资金净流入）</p>
+    <p>= <strong>¥160 亿（季度）</strong> ≈ <strong>$23.2 亿</strong></p>
+    <p>年化所有者盈余 ≈ ¥640 亿 ≈ $93 亿 · <strong>所有者盈余收益率 = $93B / $124B 市值 ≈ 7.5%</strong>。剔除净现金后核心业务所有者盈余收益率 ≈ $93B / $36B EV ≈ <span class="hl-t">26%</span>——这是格雷厄姆"用低价买现金机器"的当代版本。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 6 ═══ -->
+<div class="section">
+  <div class="stitle">模块 6 · 电话会分析（Q1 2026 + 前 2 季度）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">Q1 2026 电话会（2026-05-27）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"经营利润增长 22%，反映核心业务韧性"——刘珺</div><div class="ec-note">CFO 直接定调 Q1 业绩亮点：扣除非经营项目后，主营业务实际在改善（OPM +1.6pp）。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"利润将继续承压，因为我们坚定投资供应链"——陈磊</div><div class="ec-note">明确未来几个季度净利还会下滑。给市场最直白的预期管理。但这种坦诚度在中概股里反而是加分项。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"启动 ¥150 亿初始投入 + 未来 3 年 ¥1,000 亿打造首创品牌"——赵佳臻</div><div class="ec-note">这是黄峥时代以来最重大的资本配置宣言。从"撮合平台 + 千亿扶持"升级为"平台 + 自营 1P 品牌"。如果成功，TAM 翻倍。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"农村免运费 / 直达村庄物流网络"——赵佳臻</div><div class="ec-note">下沉市场基础设施升级 · 短期增加成本但锁定长期 9 亿用户的购物频次。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">对 Temu 单位经济、投资收益下滑具体规模、回购计划"不予置评"</div><div class="ec-note">透明度不足 · 这是 PDD 的一贯风格——选择性披露。市场厌恶不透明。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q4 2025 电话会（2026-03-26）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"我们已不再追求增长速度，而是投资生态健康度"——陈磊</div><div class="ec-note">Q4 已经明确"主动放慢" · 不是被动的。但市场仍按"年增长 30%+"的高速电商定价 · 估值持续修正。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"千亿扶持商家"——重申不分红 / 不回购的立场</div><div class="ec-note">FY2025 已将利润全部投入生态建设。但 ¥600 亿现金的闲置成本依然是市场质疑的焦点。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q3 2025 电话会（2025-11-19）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"Temu 进入欧美关税挑战期，预期短期利润承压"</div><div class="ec-note">特朗普 2.0 关税开始影响 Temu 跨境运营 · 但管理层未给具体数字。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">指引兑现度追踪</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>指引（来自）</th><th>实际 Q1 2026</th><th>评价</th></tr>
+      <tr><td>"利润将继续承压"（Q4 2025）</td><td>Non-GAAP NI -17%</td><td><span class="badge up">兑现 · 与指引一致</span></td></tr>
+      <tr><td>"加大供应链投入"（Q3-Q4 2025）</td><td>R&D +22%、千亿首创品牌启动</td><td><span class="badge up">兑现</span></td></tr>
+      <tr><td>"Temu 海外仍有较大增长空间"（Q3 2025）</td><td>跨境交易服务 +20%</td><td><span class="badge nt">部分兑现 · 但增速从 +30%+ 放缓</span></td></tr>
+      <tr><td>"S&M 优化"（Q4 隐含）</td><td>S&M +1.2%（vs Q4 +47%）</td><td><span class="badge up">大幅好于预期</span></td></tr>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>信号汇总</strong>：Q1 2026 是 PDD 主动 + 透明 + 战略一致性兑现的一季。<span class="hl-t">管理层用经营利润 +22% 证明了主业能盈利</span>，同时用净利 -17% 兑现了"利润将下滑"的指引。这是市场可信赖的执行力。但市场不为"长期主义溢价"买单——交易日盘前 -8.4% 跌至 52 周低点附近，是<span class="warn-t">短期投票机 vs 长期称重机</span>的典型案例。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 7 ═══ -->
+<div class="section">
+  <div class="stitle">模块 7 · 多模型估值（8 种方法）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">7.1 估值汇总表（独立估值，与现价无关）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>估值方法</th><th>每 ADS 公允价</th><th>假设要点</th><th>权重</th></tr>
+      <tr><td>1. 相对估值（P/E）</td><td>$118</td><td>Forward Non-GAAP NI ~$13B × 12.5x P/E（接近阿里 / 京东中枢）</td><td>15%</td></tr>
+      <tr><td>2. DCF（基准）</td><td>$132</td><td>未来 5 年 NI CAGR -3%（衰减期），WACC 11%，永续 2%</td><td>20%</td></tr>
+      <tr><td>3. 所有者盈余收益率</td><td>$135</td><td>年化所有者盈余 $93亿 × 10x（标的非成长，标的成熟）= $930亿 → +净现金 $88亿</td><td>15%</td></tr>
+      <tr><td>4. PEG</td><td>不适用</td><td>NI 增速为负，PEG 概念失效</td><td>0%</td></tr>
+      <tr><td>5. DDM</td><td>不适用</td><td>无分红</td><td>0%</td></tr>
+      <tr><td>6. NAV</td><td>$95</td><td>净现金 $88B / 1.4B ADS = $63/ADS + 国内主业 $40 + Temu 价值 -$8（亏损中）</td><td>10%</td></tr>
+      <tr><td>7. 反向 DCF</td><td>当前价隐含 NI CAGR <strong>-7%</strong> / 10 年</td><td>$88.51 隐含市场认为"10 年内业务衰退 50%+"</td><td>10%</td></tr>
+      <tr><td>8. SOTP 分部加总</td><td>$118</td><td>国内主业 $80 + Temu 长期价值 $20 + 净现金 $63 - 监管 / VIE 折价 -$45</td><td>30%</td></tr>
+      <tr class="hl"><td><strong>加权公允价中位数</strong></td><td><strong>$120</strong></td><td>3 种方法估值范围 $95-$135 · 中位数 $118</td><td>100%</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.8;"><strong>与现价对照</strong>：当前 $88.51 vs 加权公允 $120 · <span class="hl-t">折价 26%</span>。即使不考虑 Temu 价值，仅"国内主业 $80 + 净现金 $63 = $143"也已远高于现价。市场把 Temu 给的是<strong>负值</strong>。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.2 P/E 多档透视表</h3>
+  <p style="margin-bottom:10px; font-size:13px; color:var(--text2);">PDD 同时满足三个触发条件：① GAAP 与 Non-GAAP 差异 ~14%；② Q1 2026 净利与 4 季均值偏离 -25%；③ 含大额投资组合（¥600 亿现金）。多档对照如下：</p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>口径</th><th>EPS / 净利</th><th>P/E (基于 $88.51 / 1.4B ADS = 市值 $124B)</th><th>读数说明</th></tr>
+      <tr><td>TTM GAAP P/E</td><td>$10.10 / ADS (¥97.3B 年化)</td><td><strong>8.8x</strong></td><td>含投资收益 · 历史趋势</td></tr>
+      <tr><td>TTM Non-GAAP P/E</td><td>$10.82 / ADS (¥104.5B)</td><td><strong>8.2x</strong></td><td>剔除 SBC 等非现金项</td></tr>
+      <tr><td>Q1 2026 年化 P/E</td><td>$5.52 / ADS (Q1 ¥9.51 × 4 ÷ 6.898)</td><td><strong>16.0x</strong></td><td><span class="warn-t">最悲观 · 假设 -17% 趋势永续</span></td></tr>
+      <tr><td>Forward 共识 P/E</td><td>$8.50 / ADS（FY26E）</td><td><strong>10.4x</strong></td><td>卖方共识下年</td></tr>
+      <tr class="hl"><td><strong>核心业务 P/E（剔净现金）</strong></td><td>同上 GAAP</td><td><strong>3.7x</strong></td><td>市值 $124B - 净现金 $88B = 核心 EV $36B / TTM GAAP NI $14B</td></tr>
+      <tr><td>FY2025 全年 P/E（参考）</td><td>$10.21 / ADS</td><td><strong>8.7x</strong></td><td>已折射 NI -12%</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3);"><strong>最可信档</strong>：Forward Non-GAAP P/E ~10x · 核心业务 P/E 3.7x。前者反映"如果业务企稳"、后者反映"如果你只买核心业务而非现金堆"。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.3 12 个月目标价（概率加权）</h3>
+  <div class="pgrid">
+    <div class="pbox"><div class="pl">悲观情景 · 30%</div><div class="pv pc">$80</div><div class="pn">Temu 亏损扩大 + 国内业务再下滑 + 监管升级<br>等同 P/E ~7x</div></div>
+    <div class="pbox"><div class="pl">基准情景 · 50%</div><div class="pv pf">$115</div><div class="pn">FY26 利润止跌 + Temu 单位经济改善 + 估值小修复<br>等同 P/E ~10x</div></div>
+    <div class="pbox"><div class="pl">乐观情景 · 20%</div><div class="pv ps">$165</div><div class="pn">Temu 实现盈亏平衡 + 首创品牌验证 + 估值回到 15x<br>+ 现金可能启动回购</div></div>
+  </div>
+  <p style="font-size:13px; color:var(--text2);"><strong>概率加权公允价</strong>：30%×$80 + 50%×$115 + 20%×$165 = <strong>$115</strong>。从 $88.51 上行 +30%。</p>
+</div>
+
+<!-- ═══ 模块 8 ═══ -->
+<div class="section">
+  <div class="stitle">模块 8 · 竞争与行业分析</div>
+  <div class="cmt">
+    <p><strong>中国电商市场份额（GMV，2025）</strong>：阿里 ~33% / 拼多多 ~22% / 京东 ~18% / 字节抖音电商 ~12% / 美团 + 其他 ~15%。CR3 = 73%。</p>
+
+    <p><strong>直接竞争者财务对比（Q1 2026 / TTM）</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>公司</th><th>市值</th><th>TTM 营收</th><th>TTM Non-GAAP 净利</th><th>P/E</th><th>核心 P/E</th><th>FCF Yield</th></tr>
+        <tr><td>拼多多 PDD</td><td>$124B</td><td>$63B</td><td>$15B</td><td>8.2x</td><td><strong>3.7x</strong></td><td>11%</td></tr>
+        <tr><td>阿里 BABA</td><td>$308B</td><td>$130B</td><td>$22B</td><td>14x</td><td>~9x</td><td>6%</td></tr>
+        <tr><td>京东 JD</td><td>$58B</td><td>$160B</td><td>$5B</td><td>11x</td><td>~7x</td><td>9%</td></tr>
+        <tr><td>美团 03690.HK</td><td>$110B</td><td>$48B</td><td>$5B</td><td>22x</td><td>~16x</td><td>4%</td></tr>
+      </table>
+    </div>
+
+    <p style="margin-top:14px;"><strong>波特五力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>新进入者威胁：</strong>中（字节抖音电商持续蚕食 + 小红书种草电商起势）</li>
+      <li><strong>供应商议价：</strong>低（白牌工厂高度依赖平台流量）</li>
+      <li><strong>买家议价：</strong>中高（消费者切换零成本，但低价心智已形成）</li>
+      <li><strong>替代品威胁：</strong>中（实体零售 + 抖音 + 阿里 1688 + Temu 自身海外分流）</li>
+      <li><strong>同业竞争：</strong>极高（阿里 / 京东 / 抖音都在抢"低价" / "百亿补贴"心智）</li>
+    </ul>
+
+    <p><strong>颠覆风险</strong>：AI 时代电商范式可能变化（如 Agent 直购、Live Commerce 进化）—— 但拼多多<span class="hl-t">已在 R&D 加码（+22%）以应对</span>，主动追赶而非被颠覆。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 9 ═══ -->
+<div class="section">
+  <div class="stitle">模块 9 · 技术面与 K 线分析（次要参考）</div>
+  <div class="cmt">
+    <p><strong>趋势</strong>：股价从 2024-02 高点 $164、2025-04 二高 $145 持续回落至 $88，<span class="warn-t">2 年下行通道未破</span>。Q1 2026 财报盘前 -8.4% 击穿前期支撑 $95。</p>
+
+    <p><strong>关键价位</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>支撑</strong>：$87（52 周低）/ $80（2022 年底新冠后低点）/ $70（IPO 后中长期底部）</li>
+      <li><strong>阻力</strong>：$95（前期颈线）/ $110（200 日均线）/ $130（200 周均线）</li>
+    </ul>
+
+    <p><strong>指标信号</strong>：日线 RSI ~28（超卖）/ MACD 死叉但即将钝化 / 布林带下轨贴附——<span class="hl-t">技术面短期反弹概率上升</span>，但中线不破颈线 $95 不算反转。</p>
+
+    <p><strong>注意</strong>：技术面是补充工具。<strong>真正的"称重机"是核心 P/E 3.7x + 现金占市值 71% + 经营利润 +22%——这些基本面在不断改善</strong>。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 10 ═══ -->
+<div class="section">
+  <div class="stitle">模块 10 · 增长催化剂与前景展望</div>
+  <div class="cmt">
+    <p><strong>短期催化剂（未来 6 个月）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>2026-Q2 财报（8 月）</strong>：首批"千亿首创品牌"产品上线 · 1P 业务首次贡献 · ¥150 亿初始投入兑现度</li>
+      <li><strong>美国关税政策变化</strong>：Temu de minimis 漏洞争议持续 · 若关税升至 30%+ 则负面 · 若维持 7% 则中性</li>
+      <li><strong>千亿首创品牌 KPI 透明度</strong>：管理层可能下次电话会公布 1P 品牌进展（GMV / 单位经济 / 用户复购）</li>
+      <li><strong>潜在催化剂：首次股东返还</strong>—— ¥600 亿现金已是市值 71%，市场持续质疑 · <span class="hl-t">如果 2026 H2 启动哪怕 $5B 回购，估值修复幅度可观</span></li>
+    </ul>
+
+    <p><strong>长期展望（3-5 年）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>Temu 实现 GMV $200B</strong>（vs 当前 ~$92B） + 利润转正 —— 30% 概率事件</li>
+      <li><strong>"千亿首创品牌"做出 5-10 个全国知名自有品牌</strong> —— 类似 Costco Kirkland 模式</li>
+      <li><strong>资本配置转向</strong>：FY27-28 开始系统性回购 + 派息 —— 触发估值重估至 P/E 12-15x</li>
+      <li><strong>风险情景</strong>：Temu 海外被强力监管 / 关闭主力市场 —— 拖累整体增长 50%</li>
+    </ul>
+
+    <p><strong>TAM 扩展</strong>：国内电商 GMV TAM 已 ~¥17 万亿（接近饱和）· Temu 全球 TAM 预估 $5 万亿（西方零售）· 加自营品牌 TAM 翻倍。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 11 ═══ -->
+<div class="section">
+  <div class="stitle">模块 11 · 风险矩阵</div>
+  <div class="risk-grid">
+    <div class="risk-card r5"><h5>1. Temu 跨境监管 / 关税</h5><span class="risk-score">5 / 5 极高</span><p>美国 / 欧盟若取消 de minimis 漏洞或加征 30%+ 关税 · Temu 单位经济崩塌 · 概率 25%</p></div>
+    <div class="risk-card r4"><h5>2. 中概股 ADR 退市</h5><span class="risk-score">4 / 5 高</span><p>PCAOB 审计冲突 / 中美金融脱钩 · VIE 结构尾部风险 · 概率 15%</p></div>
+    <div class="risk-card r4"><h5>3. 持续利润下滑</h5><span class="risk-score">4 / 5 高</span><p>千亿首创品牌投入持续 + 经济疲软 · FY26 NI -20% / FY27 -10% · 估值反复下修</p></div>
+    <div class="risk-card r3"><h5>4. 国内电商竞争加剧</h5><span class="risk-score">3 / 5 中</span><p>抖音电商 / 阿里淘宝百亿补贴 / 京东 1P · 市占率 22% 维持难度上升</p></div>
+    <div class="risk-card r3"><h5>5. 黄峥 + 创始团队套现</h5><span class="risk-score">3 / 5 中</span><p>黄峥持股 25% 是巨大供给压力 · 一旦减持触发市场恐慌</p></div>
+    <div class="risk-card r2"><h5>6. 估值修复（机会）</h5><span class="risk-score">2 / 5 反向</span><p>核心 P/E 3.7x 已极致 · 一旦市场情绪转换可快速重估</p></div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>3 个黑天鹅情景</strong>：</p>
+    <ol style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>Temu 被美国主要市场封杀</strong>（类比 TikTok）—— 概率 10% · 股价跌至 $60-65（基本只剩国内主业 + 现金）</li>
+      <li><strong>中概股集体 ADR 退市</strong> —— 概率 10% · 但 PDD 港股 / 香港主要上市的概率较高（已建议为应急选项）</li>
+      <li><strong>2008 式中国消费深度衰退</strong> —— 概率 5% · 拼多多核心业务受冲击 + 现金贬值</li>
+    </ol>
+
+    <p style="margin-top:10px;"><strong>下行支撑</strong>：净现金 $88B（市值 71%）+ 零负债 + Q1 OCF $24亿——即使股价跌至 $60 也意味着市场把整个核心业务的估值给到 -$4B（不可能成立）。<span class="hl-t">$70-$75 是基本面硬底</span>（净现金 $63 + 核心业务残值 $10-12）。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 12 ═══ -->
+<div class="section">
+  <div class="stitle">模块 12 · 股东回报分析</div>
+  <div class="cmt">
+    <p><strong>PDD 在股东回报上是中概股的"另类"——连续 7 年（2018 上市至今）零分红、零回购、零股东返还。</strong>这在 $124B 市值 + 70%+ 现金占比 + Non-GAAP 净利率 24% 的公司里堪称<span class="warn-t">极端</span>。下面用三个问题拆开评估：</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 18px 0 10px; font-family: 'Segoe UI',sans-serif;">12.1 公司给了股东多少？</h3>
+
+    <p>过去 3 年的资本返还表（来自现金流量表 line item "Dividends paid" / "Repurchase of common shares"）：</p>
+
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>财年</th><th>现金股息</th><th>每股股息</th><th>派息率（占净利 / 占 FCF）</th><th>回购金额</th><th>回购股数</th><th>股东总回报</th></tr>
+        <tr><td>FY2023</td><td>¥0</td><td>¥0</td><td>0% / 0%</td><td>¥0</td><td>0</td><td><span class="warn-t">¥0</span></td></tr>
+        <tr><td>FY2024</td><td>¥0</td><td>¥0</td><td>0% / 0%</td><td>¥0</td><td>0</td><td><span class="warn-t">¥0</span></td></tr>
+        <tr class="hl"><td>FY2025</td><td>¥0</td><td>¥0</td><td>0% / 0%</td><td>¥0</td><td>0</td><td><span class="warn-t">¥0</span></td></tr>
+        <tr><td>3 年累计</td><td><strong>¥0</strong></td><td>—</td><td>—</td><td><strong>¥0</strong></td><td>0</td><td><strong>¥0</strong></td></tr>
+      </table>
+    </div>
+
+    <p style="margin-top:14px;"><strong>Trailing Shareholder Yield</strong> = (FY2025 现金股息 ¥0 + 净回购 ¥0) / 市值 $124B = <strong>0.0%</strong>。</p>
+
+    <p>对照同业：阿里 FY2025 股东总回报 ~$25B（占市值 7.5%）· 京东 ~$5B（占市值 8.6%）· 美团 ~$2.5B（占市值 2.3%）。<span class="warn-t">PDD 是 4 巨头里唯一零返还的</span>。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.2 给的方式好不好？</h3>
+
+    <p>因为<strong>过去 3 年零回购、零股息</strong>，"质量"问题不存在——但需要审视"<span class="hl-t">不返还</span>是不是更有效率的资本配置"。</p>
+
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>摊薄股数 3 年趋势</strong>：FY2023 5,348M → FY2024 5,498M → FY2025 5,600M → Q1 2026 5,616M（流通）/ 5,920M（摊薄）—— <span class="warn-t">摊薄股数 3 年上升 5%</span>，主要来自 SBC 增发，并被零回购"放任"</li>
+      <li><strong>SBC 趋势</strong>：FY2025 ¥80 亿 / Q1 2026 ¥15 亿（同比 -32% · 好的方向） · 即便如此，<strong>每年 SBC 仍稀释流通股 ~1.5%</strong></li>
+      <li><strong>资本闲置成本</strong>：¥600 亿现金按 10% 内部 ROIC 应能创造 ¥60 亿/年价值 · 现实中投资收益率仅 2-3%（短期国债 / 货币基金）· <span class="warn-t">每年隐形损失 ~¥40 亿</span></li>
+    </ul>
+
+    <p>对比：美股普通公司用回购对冲 SBC 是标配。PDD 不做 = <strong>资本配置纪律得分大幅打折</strong>。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.3 能不能继续给、给多少？</h3>
+
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>已授权未执行额度</strong>：<span class="warn-t">无任何回购授权</span> · 董事会从未启动过 · 历史执行率 0%</li>
+      <li><strong>管理层指引</strong>：Q1 2026 电话会再次明确"暂无回购 / 分红计划，资源优先用于供应链与首创品牌投入"</li>
+      <li><strong>(股息 + 回购) / FCF 覆盖度</strong>：长期 0% · FCF ~$14B / 年全部留存 · 累积现金 $88B 不释放</li>
+      <li><strong>潜在催化时点</strong>：<span class="hl-t">2026 H2 或 2027 是市场最期待的资本返还窗口</span> · 一旦黄峥 / 陈磊态度松动 · 估值修复幅度可观</li>
+    </ul>
+
+    <p><strong>周期择时</strong>：当前股价位于 52 周低、4 年低、核心业务 P/E 3.7x —— 是<strong>历史上最佳回购时机</strong>。但 PDD 选择继续观望，<span class="warn-t">资本配置纪律评分最低</span>。</p>
+
+    <p><strong>模块小结</strong>：<span class="warn-t">几乎无股东回报</span>——连续 7 年零分红、零回购、SBC 稀释自由放任、¥600 亿现金闲置。这是 PDD 海图评分卡上唯一拖到 C 的维度。管理层逻辑是"现金留作 Temu / 首创品牌 / 极端市场保险"，但<strong>当核心业务 P/E 仅 3.7x 时不启动回购，等于把所有者盈余的兑现权交给了不知道何时来的"未来 ROIC 机会"</strong>。这是市场最大的不满，也是估值长期被压制的核心原因之一。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 13 ═══ -->
+<div class="section">
+  <div class="stitle">模块 13 · 海图评分卡 + 投资决策</div>
+
+  <div class="scorecard">
+    <h3 style="font-size:15px; color:var(--text); margin-bottom: 16px; font-family: 'Segoe UI',sans-serif;">海图评分卡（6 维 A-D）</h3>
+    <div class="score-grid">
+      <div class="score-card"><div class="score-letter s-bm">B-</div><div class="score-body"><h4>1. 生意可预测性</h4><p>电商平台模式清晰，但 Temu 黑箱 + 千亿首创品牌不确定性高 · 5 年 NI 波动度大。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">B+</div><div class="score-body"><h4>2. 经济护城河</h4><p>网络效应 + 成本优势宽 · 但定价权薄 · 被字节 / 阿里持续蚕食 · 10 年后中性偏窄。</p></div></div>
+      <div class="score-card"><div class="score-letter s-b">B</div><div class="score-body"><h4>3. 管理层质量</h4><p>长期主义 + 坦诚 · 但黑箱过多 + Temu 单位经济从未披露 · 整体保守评 B。</p></div></div>
+      <div class="score-card"><div class="score-letter s-a">A</div><div class="score-body"><h4>4. 财务质量</h4><p>零负债 + 净现金 $88B + ROE ~24% + OCF/NI 131% + FCF Yield 11% · 财务堡垒级。</p></div></div>
+      <div class="score-card"><div class="score-letter s-c">C+</div><div class="score-body"><h4>5. 资本配置纪律</h4><p>0 分红 0 回购连续 7 年 + ¥600 亿现金闲置 + SBC 稀释 5% 无对冲 · 业内最差。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">B+</div><div class="score-body"><h4>6. 估值与安全边际</h4><p>核心 P/E 3.7x · TTM P/E 8.2x · 折现公允价 $120 · 安全边际 26%。</p></div></div>
+    </div>
+
+    <div class="flag-row">
+      <strong>红旗排查</strong>：VIE 架构 + ADR 退市尾部风险 + Temu 单位经济不透明 + SBC 自由放任 · 触发"<span class="warn-t">有疑问</span>"标志 → 综合评级<strong>降级</strong>到<strong>有条件买入</strong>。
+    </div>
+
+    <p style="margin-top:18px; font-size:14px; color:var(--text); line-height:1.85;"><strong>综合评级</strong>：<span class="rating-badge rating-cond-buy" style="font-size:14px;">有条件买入</span>。6 维平均接近 B+，但红旗强制降级。</p>
+  </div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">投资决策（精确价格）</h3>
+
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>项目</th><th>价格</th><th>说明</th></tr>
+      <tr><td>12 个月目标价（基准）</td><td><strong>$115</strong> (+30%)</td><td>FY26 利润止跌 + 估值小修复至 P/E 10x</td></tr>
+      <tr><td>悲观目标（30% 概率）</td><td>$80 (-10%)</td><td>Temu 监管升级 + 国内业务再下滑</td></tr>
+      <tr><td>乐观目标（20% 概率）</td><td>$165 (+86%)</td><td>Temu 盈亏平衡 + 启动回购 + P/E 至 15x</td></tr>
+      <tr class="hl"><td>首仓建仓（公允 × 80%）</td><td><strong>$92</strong></td><td>距现价 +4% · 已接近 · 可建仓</td></tr>
+      <tr><td>二仓建仓（× 70%）</td><td>$80</td><td>-10% · 回调加仓</td></tr>
+      <tr><td>三仓建仓（× 60%）</td><td>$69</td><td>-22% · 熊市极端机会 · 净现金底</td></tr>
+      <tr><td>止盈一档</td><td>$140</td><td>+58% · 减仓 25%</td></tr>
+      <tr><td>止盈二档</td><td>$170</td><td>+92% · 再减 25%</td></tr>
+      <tr><td>止盈三档</td><td>$210</td><td>+137% · 再减 25% · 最后 25% 视战略兑现</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.85;"><strong>建议总仓位</strong>：<strong>2-5%</strong>（中低仓位 · 反映中概身份 + Temu 不确定性 + 资本配置纪律差三重折价）。<strong>持有周期</strong>：3-5 年（等待 Temu 兑现 + 首次资本返还）。<strong>关键监控指标</strong>：① 季度 Temu GMV / 1P 商品销售；② 是否启动回购；③ Non-GAAP 经营利润率趋势；④ 美国 / 欧盟跨境监管动向。<strong>下次催化剂</strong>：2026-08 Q2 2026 财报。</p>
+</div>
+
+<!-- ═══ 海图页末长评 ═══ -->
+<div class="section">
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记 · 1150 字</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p class="lead">财报里最难解的，是同一家公司同一份季报里两个相反方向的故事。拼多多 Q1 2026 经营利润 +22%，净利润 -17%，市场盘前跌 8.4%——这是一份"主业在改善、市场却跌得更狠"的财报。把这个剪刀差掰开，能看到一家中概股巨头主动放弃增速、把利润换长期资产的真实姿态。</p>
+
+      <p>拼多多是"中国低线消费的低价基础设施 + Temu 是它向全球的延伸 + ¥600 亿现金等待 Temu 第二曲线兑现"。Q1 2026 营收 ¥1,062 亿（+11%）· 经营利润 ¥196 亿（+22%）· Non-GAAP 净利润 ¥141 亿（-17%）· EPS 共识 miss 35%。但同一份财报里，<strong>现金堆从 ¥4,223 亿涨到 ¥5,313 亿（含长期定存）= $88B = 市值 71%</strong>，核心业务 P/E 跌到 <strong>3.7 倍</strong>。</p>
+
+      <h4>几个研判要点</h4>
+
+      <p><strong>一、经营利润 +22% 与净利 -17% 的剪刀差，根本不是业务恶化。</strong> 核心主业实际改善——GAAP 经营利润率从 16.8% 升到 18.4%、Non-GAAP OPM 升至 19.9%、S&M 增速从 Q4 的 +47% 大幅放缓到 +1.2%。<span class="hl-t">真正拖累 Non-GAAP 净利的是非经营性项目——¥600 亿现金的投资收益从 +¥14 亿降到接近 0</span>。这是中国 LPR 持续下调 + 美债收益率下行 + 公允价值波动叠加的财务结果，不是商业模式恶化。</p>
+
+      <p><strong>二、千亿首创品牌战略宣告 PDD 走出"撮合平台"舒适圈。</strong> Q1 2026 首次明确：¥150 亿初始投入 + 未来 3 年 ¥1,000 亿做平台自有品牌（类 Costco Kirkland 模式）。这是黄峥退任以来最大的资本配置转向——<span class="hl-t">从 3P 撮合升级为 3P + 1P 混合模式</span>，TAM 翻倍但短期净利会持续承压。"利润换长期资产"的节奏明确，市场在为长期视角支付短期折价。</p>
+
+      <p><strong>三、连续 7 年零分红、零回购、SBC 自由稀释，是 PDD 最大的硬伤。</strong> 阿里 / 京东 / 美团 FY2025 股东总回报 $25B / $5B / $2.5B，<span class="warn-t">PDD 是 4 巨头唯一零返还</span>。¥600 亿现金按 2-3% 货币基金回报，每年隐形损失 ¥40 亿。Q1 2026 电话会再次明确"暂无回购计划"——这是<strong>资本配置纪律的最大败笔</strong>，也是估值长期被压制的核心原因。当核心业务 P/E 仅 3.7x 时不回购，等于把所有者盈余的兑现权交给了不知道何时来的"未来 ROIC 机会"。</p>
+
+      <p><strong>四、核心业务 P/E 3.7 倍 + 8 种估值法中位数 $120，安全边际 26%。</strong> 反向 DCF 显示，当前 $88.51 隐含 NI 永续 -7%/年 的衰退假设——<span class="hl-t">这等于市场认为 PDD 10 年内业务衰退 50%+</span>。但 Q1 经营利润已经 +22%、市占率 22% 稳定、Temu 仍在 +20% 增长——市场定价过度悲观。SOTP 给 $118（国内主业 $80 + Temu $20 + 净现金 $63 - 监管折价 $45），权重最高的估值方法。</p>
+
+      <p><strong>五、12 个月目标价 $115，上行 +30%。</strong> 悲观 $80（-10%，Temu 监管 + 业务恶化）、基准 $115（+30%，利润止跌 + 估值小修复至 10x）、乐观 $165（+86%，启动回购 + 战略兑现 + P/E 15x）。概率加权 $115。<strong>当前 $88.51 已低于机械首仓 $92——已进入合理建仓窗口</strong>，但需要小仓位 + 长期持有的耐心。</p>
+
+      <h4>海图研判</h4>
+
+      <p><strong>评级：有条件买入</strong>（核心 P/E 3.7x + 现金占市值 71% + 零负债 + 经营利润 +22% + 8 种估值法折价 26% 的极致组合，但连续 7 年零股东返还 + Temu 单位经济黑箱 + 中概 ADR + VIE 三重折价）。12 个月概率加权目标价 <strong>$115</strong>（+30%）。</p>
+
+      <p>操作建议：当前 $88.51 已低于机械首仓 $92。首仓 $92（×80%·距现价 +4%·可建仓）、二仓 $80（×70%·-10%）、三仓 $69（×60%·-22%·熊市极端机会）。止盈三档 $140 / $170 / $210，每档减仓 25%，最后 25% 视战略兑现定。<strong>建议总仓位 2-5%</strong>（中低仓位 · 反映中概身份 + Temu 不确定性 + 资本配置纪律差三重折价）。持有周期 3-5 年。<span class="hl-t">关键纪律：不在 Temu 监管利空时恐慌割肉、不因短期 EPS miss 重仓、等待 2027 可能的首次资本返还</span>。</p>
+
+      <h4>风险提示</h4>
+
+      <p>Temu 跨境监管加码（关税 + de minimis 漏洞）/ 中概 ADR 退市 / 持续利润下滑 / 国内电商竞争加剧 / 黄峥团队套现 / 千亿首创品牌兑现风险——任一项都可能让股价跌至 $70-80。但净现金 $88B（市值 71%）+ 零负债 + Q1 OCF $24亿 构成<strong>硬底</strong>，$70-75 是较硬的估值底（净现金 $63 + 核心业务残值 $10-12）。</p>
+
+      <p>关键叙事：<strong>"核心 P/E 3.7x + 现金占市值 71% + 零负债 + 经营利润 +22% + 安全边际 26% + 价值投资经典格雷厄姆样本"的极致深度价值，对垒"连续 7 年零股东返还 + Temu 单位经济黑箱 + 中概 ADR + VIE + 资本配置纪律行业最差"的真实风险</strong>。拼多多不是一笔好成长股，是一只"低价电商基础设施 + 全球出海期权 + 现金堡垒"组合——给愿意承受"主业改善但市场视而不见"的耐心投资者，也给愿意为"未来某天的资本返还"提前买单的格雷厄姆式投资者。下次催化剂：2026-08 Q2 2026 财报，关注千亿首创品牌首批商品销售 + 是否启动回购。</p>
+
+      <p class="haitu-sign">—— 海图，灯下落笔，明日再观风浪。</p>
+
+      <p class="haitu-disc">⚠️ 免责声明：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，不构成任何投资建议。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div>《海图夜读》 · PDD Holdings 拼多多 Q1 2026 海图研判</div>
+  <div style="margin-top:6px;">发布日 2026-05-27 · 研判日 2026-05-27 · 数据来源 PDD Q1 2026 官方新闻稿（SEC 6-K, 2026-05-27 发布）+ 电话会议 transcript</div>
+</footer>
+
+<script>
+let curTheme = 'light';
+function toggleTheme() {
+  curTheme = curTheme === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', curTheme);
+  renderCharts();
+}
+
+const palette = {
+  light: { accent: '#8a9a8e', accent2: '#7b8fa0', accent3: '#b08d7a', gold: '#b9a06a', red: '#b87070', green: '#7a9a7a', grid: '#e5ddd5', text: '#7a706a' },
+  dark:  { accent: '#8a9a8e', accent2: '#8fabbf', accent3: '#c9a48e', gold: '#c9b07a', red: '#c08080', green: '#8aaa8a', grid: '#3e3a35', text: '#a09890' }
+};
+
+let charts = {};
+function renderCharts() {
+  Object.values(charts).forEach(c => c && c.destroy && c.destroy());
+  charts = {};
+  const p = palette[curTheme];
+  Chart.defaults.color = p.text;
+  Chart.defaults.borderColor = p.grid;
+
+  // 1. 营收 + YoY
+  const quarters = ['Q1 25','Q2 25','Q3 25','Q4 25','Q1 26'];
+  const rev = [957, 1040, 1098, 1239, 1062];
+  const yoy = [10, 8, 11, 12, 11];
+  charts.rev = new Chart(document.getElementById('chartRev'), {
+    type: 'bar',
+    data: {
+      labels: quarters,
+      datasets: [
+        { type: 'bar', label: '营收（¥亿）', data: rev, backgroundColor: p.accent + 'CC', yAxisID: 'y' },
+        { type: 'line', label: 'YoY %', data: yoy, borderColor: p.red, backgroundColor: p.red, tension: 0.3, yAxisID: 'y1' }
+      ]
+    },
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true }, y1: { position: 'right', grid: { drawOnChartArea: false }, ticks: { callback: v => v + '%' } } } }
+  });
+
+  // 2. 经营利润 vs 净利润
+  const op = [161, 175, 173, 168, 196];
+  const ni = [147, 156, 154, 95, 125];
+  charts.profit = new Chart(document.getElementById('chartProfit'), {
+    type: 'line',
+    data: {
+      labels: quarters,
+      datasets: [
+        { label: 'GAAP 经营利润', data: op, borderColor: p.green, backgroundColor: p.green + '33', fill: true, tension: 0.3 },
+        { label: 'GAAP 净利润', data: ni, borderColor: p.red, backgroundColor: p.red + '33', fill: true, tension: 0.3 }
+      ]
+    },
+    options: { responsive: true, maintainAspectRatio: false }
+  });
+
+  // 3. 收入分部
+  const onlineMkt = [487, 491, 498, 506, 499];
+  const transSvc = [470, 549, 600, 733, 563];
+  charts.segment = new Chart(document.getElementById('chartSegment'), {
+    type: 'bar',
+    data: {
+      labels: quarters,
+      datasets: [
+        { label: '在线营销服务', data: onlineMkt, backgroundColor: p.accent2 + 'CC', stack: 'a' },
+        { label: '交易服务（含 Temu）', data: transSvc, backgroundColor: p.gold + 'CC', stack: 'a' }
+      ]
+    },
+    options: { responsive: true, maintainAspectRatio: false, scales: { x: { stacked: true }, y: { stacked: true } } }
+  });
+
+  // 4. 现金 + 短期投资
+  const cash = [3850, 3984, 4108, 4223, 4361];
+  charts.cash = new Chart(document.getElementById('chartCash'), {
+    type: 'line',
+    data: {
+      labels: quarters,
+      datasets: [
+        { label: '现金 + 短期投资（¥亿）', data: cash, borderColor: p.accent3, backgroundColor: p.accent3 + '33', fill: true, tension: 0.3 }
+      ]
+    },
+    options: { responsive: true, maintainAspectRatio: false }
+  });
+
+  buildSankey();
+}
+
+function buildSankey() {
+  const p = palette[curTheme];
+  const labels = ['营收 ¥1,062', '营业成本 ¥469', '毛利 ¥593', 'S&M ¥338', 'R&D ¥44', 'G&A ¥16', '经营利润 ¥196', '所得税 ¥71', '净利 ¥125', '折旧&SBC ¥18', '营运资金 +¥21', '经营现金流 ¥164'];
+  const data = {
+    type: 'sankey',
+    orientation: 'h',
+    node: { pad: 14, thickness: 18, line: { color: p.grid, width: 0.5 }, label: labels, color: [p.accent, p.red, p.green, p.gold, p.accent2, p.accent3, p.green, p.red, p.green, p.accent, p.gold, p.accent3] },
+    link: {
+      source: [0, 0, 2, 2, 2, 2, 6, 6, 8, 8, 8],
+      target: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+      value:  [469, 593, 338, 44, 16, 196, 71, 125, 18, 21, 125],
+      color: [p.red+'55', p.green+'55', p.gold+'55', p.accent2+'55', p.accent3+'55', p.green+'66', p.red+'55', p.green+'55', p.accent+'55', p.gold+'55', p.accent3+'66']
+    }
+  };
+  const layout = { font: { size: 12, color: p.text }, paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)', margin: { l: 10, r: 10, t: 10, b: 10 } };
+  Plotly.react('sankey', [data], layout, { displayModeBar: false, responsive: true });
+}
+
+renderCharts();
+</script>
+
+</body>
+</html>
