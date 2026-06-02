@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-06-02 · JNJ Q1 2026 财报已于 2026-04-14 发布 -->
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Johnson &amp; Johnson JNJ Q1 2026 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+<meta name="description" content="64 年连续增息的&quot;股息之王&quot; + 制药 +11% + Tremfya 顺利接棒 Stelara + 上调全年指引——一年涨 43% 的避险香饽饽，但 Forward P/E 20x + 9 万件 Talc 诉讼未决，已不再是格雷厄姆式便宜货。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Johnson &amp; Johnson JNJ Q1 2026 海图研判 · 海图夜读">
+<meta property="og:description" content="64 年连续增息的&quot;股息之王&quot; + 制药 +11% + Tremfya 顺利接棒 Stelara + 上调全年指引——一年涨 43% 的避险香饽饽，但 Forward P/E 20x + 9 万件 Talc 诉讼未决，已不再是格雷厄姆式便宜货。">
+<meta property="og:image" content="https://jacexie.github.io/haitu/assets/og/jnj-q1-2026.png">
+<meta property="og:url" content="https://jacexie.github.io/haitu/reports/jnj-q1-2026.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Johnson &amp; Johnson JNJ Q1 2026 海图研判 · 海图夜读">
+<meta name="twitter:description" content="64 年连续增息的&quot;股息之王&quot; + 制药 +11% + Tremfya 顺利接棒 Stelara + 上调全年指引——一年涨 43% 的避险香饽饽，但 Forward P/E 20x + 9 万件 Talc 诉讼未决，已不再是格雷厄姆式便宜货。">
+<meta name="twitter:image" content="https://jacexie.github.io/haitu/assets/og/jnj-q1-2026.png">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root { --bg:#f5f0eb; --bg2:#ece6df; --card:#ffffff; --card2:#f8f5f1; --border:#d9d0c7; --text:#4a4340; --text2:#7a706a; --text3:#a89f98; --accent:#8a9a8e; --accent2:#7b8fa0; --accent3:#b08d7a; --rose:#c09090; --gold:#b9a06a; --red:#b87070; --green:#7a9a7a; --shadow:rgba(0,0,0,0.06); --chart-grid:#e5ddd5; }
+[data-theme="dark"] { --bg:#1e1c1a; --bg2:#28251f; --card:#2e2a25; --card2:#363230; --border:#4a4540; --text:#d4ccc4; --text2:#a09890; --text3:#706860; --accent:#8a9a8e; --accent2:#8fabbf; --accent3:#c9a48e; --rose:#c09090; --gold:#c9b07a; --red:#c08080; --green:#8aaa8a; --shadow:rgba(0,0,0,0.3); --chart-grid:#3e3a35; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', serif; line-height: 1.75; font-size: 14.5px; transition: background .35s, color .35s; }
+a { color: var(--accent2); text-decoration: none; }
+.theme-bar { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); }
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+.toggle-switch { position: relative; width: 44px; height: 22px; background: var(--border); border-radius: 11px; cursor: pointer; transition: background .3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: var(--card); border-radius: 50%; transition: transform .3s; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+
+.hero { padding: 48px 24px 36px; text-align: center; border-bottom: 1px solid var(--border); }
+.hero-tag { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 3px 14px; border-radius: 20px; margin-bottom: 18px; }
+.hero h1 { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.pill { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: 'Segoe UI', sans-serif; font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow); }
+.pill strong { color: var(--text); }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle { font-size: 18px; font-weight: 700; color: var(--accent3); margin-bottom: 20px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+.stitle::before { content: ''; display: block; width: 4px; height: 20px; background: var(--accent3); border-radius: 2px; }
+
+.haitu-quip { display: flex; align-items: center; gap: 18px; background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 18px 24px; margin: 24px 0; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-quote { flex: 1; }
+.haitu-portrait { font-size: 15px; line-height: 1.65; color: var(--text); margin-bottom: 6px; font-weight: 600; }
+.haitu-rating-line { font-size: 13px; color: var(--text2); font-family: 'Segoe UI', sans-serif; }
+.rating-badge { display: inline-block; padding: 2px 12px; border-radius: 12px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; margin-left: 4px; }
+.rating-hold { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+
+.haitu-essay { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 28px 32px; margin: 24px 0 20px; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-essay-header { display: flex; align-items: center; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.haitu-avatar-sm { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); background: var(--red); box-shadow: 0 2px 8px rgba(184,112,112,0.2); }
+.haitu-name-lg { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 28px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 4px; }
+.haitu-essay-tag { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; }
+.haitu-essay-body { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 15px; line-height: 2.0; color: var(--text); }
+.haitu-essay-body p { margin-bottom: 14px; }
+.haitu-essay-body p.lead { font-size: 16px; font-style: italic; color: var(--text2); margin-bottom: 18px; }
+.haitu-essay-body strong { color: var(--text); font-weight: 700; }
+.haitu-essay-body h4 { font-size: 14px; color: var(--accent3); margin: 18px 0 10px; font-family: 'Segoe UI', sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+.haitu-sign { text-align: right; margin-top: 18px; font-family: 'Georgia', serif; font-size: 14px; color: var(--text2); font-style: italic; }
+.haitu-disc { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); font-style: italic; line-height: 1.7; }
+
+.stock-snap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px; }
+.snap-item { text-align: center; }
+.snap-label { font-family: 'Segoe UI', sans-serif; font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.snap-val { font-family: 'Segoe UI', sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+.snap-val.up { color: var(--green); }
+.snap-val.dn { color: var(--red); }
+.snap-sub { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow); }
+.kpi-l { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.badge { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+.up { background: rgba(122,154,122,.15); color: var(--green); }
+.dn { background: rgba(184,112,112,.15); color: var(--red); }
+.nt { background: rgba(123,143,160,.15); color: var(--accent2); }
+
+.tbl-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow); }
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI', sans-serif; font-size: 13px; }
+.tbl th { background: var(--card2); color: var(--text3); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); background: var(--card2); }
+
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); }
+.ctitle { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 260px; }
+
+.cmt { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 26px; line-height: 1.95; font-size: 14px; box-shadow: 0 1px 4px var(--shadow); color: var(--text); }
+.cmt p { margin-bottom: 14px; }
+.cmt p:last-child { margin-bottom: 0; }
+.cmt strong { color: var(--text); }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+
+.moat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+.moat-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); border-left: 4px solid var(--accent); }
+.moat-card.wide { border-left-color: var(--green); }
+.moat-card.narrow { border-left-color: var(--gold); }
+.moat-card.none { border-left-color: var(--red); }
+.moat-card h5 { font-size: 13px; color: var(--text); margin-bottom: 6px; }
+.moat-card .moat-rate { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.moat-card.wide .moat-rate { background: rgba(122,154,122,.18); color: var(--green); }
+.moat-card.narrow .moat-rate { background: rgba(185,160,106,.18); color: var(--gold); }
+.moat-card.none .moat-rate { background: rgba(184,112,112,.18); color: var(--red); }
+.moat-card p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+
+.ec-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 14px; box-shadow: 0 1px 3px var(--shadow); }
+.ec-badge { flex-shrink: 0; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-top: 2px; font-family: 'Segoe UI', sans-serif; }
+.ec-bull { background: rgba(122,154,122,.18); color: var(--green); }
+.ec-bear { background: rgba(184,112,112,.18); color: var(--red); }
+.ec-neut { background: rgba(185,160,106,.18); color: var(--gold); }
+.ec-body { flex: 1; }
+.ec-title { font-weight: 600; color: var(--text); margin-bottom: 3px; font-size: 14px; }
+.ec-note { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.dcf-note { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.dcf-note strong { color: var(--text); }
+
+.scorecard { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow); }
+.score-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.score-card { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px; }
+.score-letter { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Segoe UI', sans-serif; font-weight: 800; font-size: 22px; flex-shrink: 0; border: 3px solid; }
+.s-a { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.12); }
+.s-bp { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.06); }
+.s-b { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.10); }
+.s-bm { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.06); }
+.s-c { color: var(--red); border-color: var(--red); background: rgba(184,112,112,.08); }
+.score-body h4 { font-size: 13px; color: var(--text); margin-bottom: 4px; }
+.score-body p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+.flag-row { margin-top: 16px; padding: 12px 16px; background: rgba(184,112,112,.08); border: 1px solid rgba(184,112,112,.3); border-radius: 8px; font-size: 13px; color: var(--text2); }
+.flag-row strong { color: var(--red); }
+
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center; box-shadow: 0 1px 4px var(--shadow); }
+.pbox .pl { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; }
+.pbox .pv { font-family: 'Segoe UI', sans-serif; font-size: 28px; font-weight: 800; margin-bottom: 5px; }
+.pbox .pn { font-size: 12px; color: var(--text3); line-height: 1.5; }
+.pc { color: var(--red); } .pf { color: var(--gold); } .ps { color: var(--green); }
+
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.risk-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); position: relative; overflow: hidden; }
+.risk-card::before { content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent); }
+.risk-card.r1::before { background: var(--green); }
+.risk-card.r2::before { background: rgba(122,154,122,.6); }
+.risk-card.r3::before { background: var(--gold); }
+.risk-card.r4::before { background: var(--rose); }
+.risk-card.r5::before { background: var(--red); }
+.risk-card h5 { font-size: 14px; margin-bottom: 6px; color: var(--text); }
+.risk-score { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.r1 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r2 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r3 .risk-score { background: rgba(185,160,106,.18); color: var(--gold); }
+.r4 .risk-score { background: rgba(192,144,144,.18); color: var(--rose); }
+.r5 .risk-score { background: rgba(184,112,112,.18); color: var(--red); }
+.risk-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+footer { background: var(--card2); border-top: 1px solid var(--border); padding: 24px; text-align: center; color: var(--text3); font-size: 12px; margin-top: 40px; line-height: 1.8; }
+@media (max-width: 768px) { .cgrid,.pgrid { grid-template-columns: 1fr; } .hero h1 { font-size: 22px; } .kpi-grid { grid-template-columns: 1fr 1fr; } .stock-snap { grid-template-columns: 1fr 1fr; } .haitu-essay-header { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/JNJ" target="_blank" rel="noopener" title="在雪球查看 JNJ 实时行情">雪球 JNJ</a>
+  </div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">Q1 2026 财报发布 · 2026-04-14 &nbsp;|&nbsp; 海图研判 · 2026-06-02</div>
+  <h1>Johnson &amp; Johnson JNJ · Q1 2026 财报深度分析</h1>
+  <div class="hero-sub">NYSE: JNJ &nbsp;|&nbsp; 2026年 一季度业绩 &nbsp;|&nbsp; 价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill">股价 <strong>$234.34</strong> <span style="color:var(--green)">1 年 +43%</span></div>
+    <div class="pill">市值 <strong>$564B</strong></div>
+    <div class="pill">Q1 营收 <strong>$24.06B</strong> <span style="color:var(--green)">+9.9%</span></div>
+    <div class="pill">调整 EPS <strong>$2.70</strong> <span style="color:var(--green)">超预期</span></div>
+    <div class="pill">股息 <strong>$1.34/季</strong> <span style="color:var(--accent3)">64 年连增</span></div>
+    <div class="pill">Forward P/E <strong>20.3x</strong></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 海图页首短评 ═══ -->
+<div class="haitu-quip">
+  <div class="haitu-quote">
+    <div class="haitu-portrait">连续 64 年增息的"股息之王" + 制药 +11.2% + Tremfya（+63.8%）顺利接棒 Stelara + 上调全年指引——一年涨 43% 后的避险香饽饽，但 Forward P/E 20.3x + 9 万件 Talc 诉讼未决 + 净债务 $33B 累积，已不再是格雷厄姆式便宜货。</div>
+    <div class="haitu-rating-line">评级：<span class="rating-badge rating-hold">持有观望</span> · 12 个月目标价 $245（+5%）+ 2.3% 股息 = 总回报 ~7%</div>
+  </div>
+</div>
+
+<!-- ═══ 市场数据快照 ═══ -->
+<div class="section">
+  <div class="stitle">市场数据快照（2026-06-02 收盘）</div>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">股价（美元）</div><div class="snap-val">$234.34</div><div class="snap-sub">52 周 +43%</div></div>
+    <div class="snap-item"><div class="snap-label">市值</div><div class="snap-val">$564B</div><div class="snap-sub">医药龙头</div></div>
+    <div class="snap-item"><div class="snap-label">TTM GAAP P/E</div><div class="snap-val">~37x</div><div class="snap-sub">Talc 一次性诉讼拖累</div></div>
+    <div class="snap-item"><div class="snap-label">TTM 调整 P/E</div><div class="snap-val">~21.7x</div><div class="snap-sub">剔除诉讼一次性</div></div>
+    <div class="snap-item"><div class="snap-label">Forward P/E</div><div class="snap-val nt">~20.3x</div><div class="snap-sub">基于 FY26 指引 $11.55</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间</div><div class="snap-val">$149 - $252</div><div class="snap-sub">接近高点</div></div>
+    <div class="snap-item"><div class="snap-label">P/S (TTM)</div><div class="snap-val">5.6x</div><div class="snap-sub">健康偏高端</div></div>
+    <div class="snap-item"><div class="snap-label">前瞻股息率</div><div class="snap-val up">2.29%</div><div class="snap-sub">$5.36/年</div></div>
+    <div class="snap-item"><div class="snap-label">FCF Yield (TTM)</div><div class="snap-val nt">~3.5%</div><div class="snap-sub">FCF $19B 估</div></div>
+    <div class="snap-item"><div class="snap-label">总现金</div><div class="snap-val">$21.69B</div><div class="snap-sub">现金 + 有价证券</div></div>
+    <div class="snap-item"><div class="snap-label">长期债务</div><div class="snap-val dn">$39.4B</div><div class="snap-sub">+28.7% YoY</div></div>
+    <div class="snap-item"><div class="snap-label">净债务</div><div class="snap-val dn">~$33B</div><div class="snap-sub">AAA 评级（极少数）</div></div>
+  </div>
+  <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">数据时点：股价 2026-06-02 · 财务数据来源 Johnson &amp; Johnson Q1 2026 官方新闻稿（投资者关系页 + SEC 8-K, 2026-04-14 发布）· 货币 USD。TTM GAAP P/E 因 Talc 诉讼一次性指控大幅低估盈利能力，应以调整 P/E 21.7x 与 Forward P/E 20.3x 为主参考。</p>
+</div>
+
+<!-- ═══ Q1 2026 KPI ═══ -->
+<div class="section">
+  <div class="stitle">Q1 2026 核心业绩（USD · 截至 2026-03-31）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">总销售</div><div class="kpi-v">$24.06B</div><span class="badge up">+9.9% 报告</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">运营 +6.4% · 调整运营 +5.3%</div></div>
+    <div class="kpi"><div class="kpi-l">创新医药（Pharma）</div><div class="kpi-v">$15.43B</div><span class="badge up">+11.2%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">运营 +7.4% · 占总营收 64%</div></div>
+    <div class="kpi"><div class="kpi-l">医疗科技（MedTech）</div><div class="kpi-v">$8.64B</div><span class="badge up">+7.7%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">运营 +4.6% · 占总营收 36%</div></div>
+    <div class="kpi"><div class="kpi-l">美国销售</div><div class="kpi-v">$13.33B</div><span class="badge up">55.4%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">本土主导</div></div>
+    <div class="kpi"><div class="kpi-l">国际销售</div><div class="kpi-v">$10.73B</div><span class="badge nt">44.6%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">全球化均衡</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 净利润</div><div class="kpi-v">$5.24B</div><span class="badge dn">-52.4%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">vs Q1 25 $11.0B · Q1 25 含 $7.3B 一次性收益</div></div>
+    <div class="kpi"><div class="kpi-l">调整后 EPS</div><div class="kpi-v">$2.70</div><span class="badge nt">-2.5%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">真实经营轻微下滑 · 超预期 $2.68</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 摊薄 EPS</div><div class="kpi-v">$2.14</div><span class="badge dn">-52.9%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">含 ~$330M 诉讼指控</div></div>
+    <div class="kpi"><div class="kpi-l">经营现金流</div><div class="kpi-v">~$1.5B</div><span class="badge dn">-56%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">vs Q1 25 $3.38B · 营运资金扰动</div></div>
+    <div class="kpi"><div class="kpi-l">税前利润</div><div class="kpi-v">$5.99B</div><span class="badge nt">24.9% 销售</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">运营利润率维持稳健</div></div>
+    <div class="kpi"><div class="kpi-l">季度股息</div><div class="kpi-v">$1.34</div><span class="badge up">+3.1%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;"><strong>第 64 年连续增息</strong></div></div>
+    <div class="kpi"><div class="kpi-l">FY26 销售指引</div><div class="kpi-v">$100.8B</div><span class="badge up">+7.0% 上调</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">调整 EPS $11.55 · +7.1%</div></div>
+  </div>
+</div>
+
+<!-- ═══ 趋势图 ═══ -->
+<div class="section">
+  <div class="stitle">关键指标趋势</div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">季度营收（$B）& 运营增速 (Q1 25 → Q1 26)</div><div class="cwrap"><canvas id="chartRev"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">Q1 2026 创新医药关键药物（$M）</div><div class="cwrap"><canvas id="chartDrugs"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">连续 5 年股息（$ / 季 · 64 年增息）</div><div class="cwrap"><canvas id="chartDiv"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">Q1 2026 板块销售（$B · Pharma vs MedTech）</div><div class="cwrap"><canvas id="chartSegment"></canvas></div></div>
+  </div>
+</div>
+
+<!-- ═══ 桑基图 ═══ -->
+<div class="section">
+  <div class="stitle">Q1 2026 资金流向桑基图（$B）</div>
+  <div class="ccard">
+    <div id="sankey" style="width:100%;height:480px;"></div>
+    <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">说明：营收 $24.06 → 创新医药 $15.43 + 医疗科技 $8.64 → 营业成本 + 运营费用 $18.07 + 税前利润 $5.99 → 所得税 + 营业外项 $0.75 + 净利 $5.24 → 季度股息 ~$3.2 + 留存 ~$2.0。注：Q1 GAAP 净利下滑 52% 主因是 Q1 25 含 $7.3B 一次性"其他收益"基数（与 Kenvue 分拆 / 资产处置相关），并非运营恶化；调整 EPS 仅 -2.5% 反映真实经营轻微放缓。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 1 ═══ -->
+<div class="section">
+  <div class="stitle">模块 1 · 公司概览与背景</div>
+  <div class="cmt">
+    <p><strong>Johnson &amp; Johnson</strong>（NYSE: JNJ，1944 上市），总部新泽西 New Brunswick，成立于 1886 年——<strong>140 年历史的医疗健康巨头</strong>，全球最大的综合医疗公司之一。</p>
+
+    <p><strong>业务版图（2023 重组后）</strong>：聚焦两大分部——<strong>Innovative Medicine（创新医药）</strong>占营收 64%，主营处方药（肿瘤、免疫、神经、传染病、肺动脉高压）+ <strong>MedTech（医疗科技）</strong>占营收 36%，含心血管 / 骨科 / 外科手术 / 视力（Ethicon、DePuy Synthes、Acuvue、Shockwave）。<span class="hl-t">2023-08 完成消费健康（Kenvue）分拆</span>——剥离了泰诺、邦迪、强生宝宝等低增长品牌，成为更纯粹的"高利润制药 + 医疗器械"公司。</p>
+
+    <p><strong>近期重大并购</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>2024 收购 Shockwave Medical（$13.1B）</strong>：心血管钙化干预龙头，强化 MedTech 心血管线</li>
+      <li><strong>2024 收购 V-Wave</strong>：心衰治疗技术</li>
+      <li>持续围绕"高增长、高 ROIC 治疗领域"做精准并购</li>
+    </ul>
+
+    <p><strong>股权结构</strong>：高度分散——无单一控股股东，机构持股 ~73%（先锋 / 贝莱德 / 道富前三），管理层持股 <1%。<strong>AAA 信用评级</strong>——美国仅有的 2 家 AAA 公司之一（另一家是 Microsoft）。</p>
+
+    <p><strong>能力圈检验</strong>：商业模式相对清晰（专利药专卖 + 高端医疗器械），是典型的<strong>"看得懂的好生意"</strong>。但<span class="warn-t">两块黑箱：(1) 制药管线 + 临床试验成功率，普通投资者无法独立验证；(2) 多年 Talc 致癌诉讼的最终成本，仍在 90,000+ 件未决索赔中</span>。前者靠"分散管线 + 历史成功率"对冲，后者是结构性尾部风险。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 2 ═══ -->
+<div class="section">
+  <div class="stitle">模块 2 · 管理层评估</div>
+  <div class="cmt">
+    <p><strong>核心团队</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>Joaquin Duato</strong>，董事长 + CEO（自 2022 年初）· 30+ 年 JNJ 老兵 · 主导 Kenvue 分拆 + Shockwave 并购</li>
+      <li><strong>Joseph Wolk</strong>，CFO（自 2018 年）· 财务保守派 · 资本配置纪律明确</li>
+      <li><strong>Tim Schmid</strong>，MedTech CEO · 推动 Shockwave 整合 + 心血管增长</li>
+      <li><strong>Jennifer Taubert</strong>，Innovative Medicine CEO · Stelara 接棒 Tremfya 关键设计师</li>
+    </ul>
+
+    <p><strong>资本配置历史</strong>（满分 5 分制）：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>连续 64 年增息</strong>：<span class="hl-t">全球极少数"股息之王"</span> · 标普 500 仅 50 余家 · 评 <span class="hl-t">5 分</span></li>
+      <li><strong>2023 Kenvue 分拆</strong>：用 $14.4B 现金 + Kenvue 股权置换 + 资产优化 · 评 <span class="hl-t">5 分</span>（典型"资产精炼"经典案例）</li>
+      <li><strong>2024 Shockwave 收购（$13.1B）</strong>：估值偏高（30x P/S）但战略价值清晰 · 评 <span class="hl-t">4 分</span></li>
+      <li><strong>持续回购</strong>：FY24-25 累计回购 ~$15B · 含金量稳定 · 评 <span class="hl-t">4 分</span></li>
+      <li><strong>Talc 诉讼三轮破产策略失败</strong>：Texas Two-Step 三次被法院驳回 · <span class="warn-t">资本配置策略失误</span> · 评 <span class="warn-t">2 分</span></li>
+    </ul>
+
+    <p><strong>长期主义测试</strong>：✅ Duato 是典型的"长期主义守门员"——64 年增息记录、Kenvue 分拆释放股东价值、Shockwave 等并购围绕高 ROIC 领域。但<span class="warn-t">Talc 诉讼的处理（连续三次 Texas Two-Step 破产分拆失败）反映了资本配置在"逃避责任"与"长期股东利益"之间的紧张</span>。</p>
+
+    <p><strong>坦诚度</strong>：电话会披露详尽（分部 + 关键药物 YoY）。但对 Talc 诉讼最终规模、Stelara 生物类似药侵蚀确切节奏始终模糊处理——这是大型药企的共性。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 3 ═══ -->
+<div class="section">
+  <div class="stitle">模块 3 · 商业模式深度解析</div>
+  <div class="cmt">
+    <p><strong>海图"一句话测试"</strong>：JNJ 是"用专利保护 + 临床证据 + 医保支付链锁定全球处方药需求"的医疗工厂——制药是利润机器（毛利率 70%+），MedTech 是稳定基本盘，配合 64 年增息构成"防御 + 复利"经典组合。</p>
+
+    <p><strong>Q1 2026 创新医药关键药物</strong>（运营增速）：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>药物</th><th>Q1 2026 销售</th><th>运营 YoY</th><th>治疗领域</th><th>关键意义</th></tr>
+        <tr><td><strong>Darzalex</strong> 达雷妥尤单抗</td><td>$3.96B</td><td><span class="badge up">+17.8%</span></td><td>多发性骨髓瘤</td><td>第一大单品 · 稳定增长</td></tr>
+        <tr><td><strong>Tremfya</strong> 古塞奇尤单抗</td><td>$1.61B</td><td><span class="badge up">+63.8%</span></td><td>银屑病 / IBD</td><td><span class="hl-t">Stelara 接棒星 · 关键</span></td></tr>
+        <tr><td><strong>Erleada</strong> 阿帕鲁胺</td><td>$0.95B</td><td><span class="badge up">+16.2%</span></td><td>前列腺癌</td><td>口服肿瘤稳定增长</td></tr>
+        <tr><td><strong>Imbruvica</strong> 伊布替尼</td><td>$0.66B</td><td><span class="badge dn">-13.9%</span></td><td>白血病 / 淋巴瘤</td><td>BTK 类竞争 · 缓慢下滑</td></tr>
+        <tr><td><strong>Stelara</strong> 乌司奴单抗</td><td>$0.66B</td><td><span class="badge dn">-61.7%</span></td><td>免疫病</td><td><span class="warn-t">生物类似药侵蚀 · 已预期</span></td></tr>
+        <tr><td><strong>Carvykti</strong> 西达基奥仑赛</td><td>$0.60B</td><td><span class="badge up">+57.4%</span></td><td>骨髓瘤 CAR-T</td><td><span class="hl-t">未来 5 年增长引擎</span></td></tr>
+        <tr><td><strong>Spravato</strong> 艾司氯胺酮</td><td>$0.47B</td><td><span class="badge up">+44.5%</span></td><td>难治性抑郁</td><td>神经精神品牌</td></tr>
+        <tr><td><strong>Talvey</strong> 塔奎妥单抗</td><td>$0.15B</td><td><span class="badge up">+72.8%</span></td><td>骨髓瘤双抗</td><td>新品快速放量</td></tr>
+      </table>
+    </div>
+
+    <p style="margin-top:14px;"><strong>关键观察</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>Stelara 断崖 -61.7% 完全在预期内</strong>——2025 年起在美国/欧洲遭遇生物类似药 · <span class="hl-t">Tremfya +63.8% 几乎完美对冲</span>，IBD 适应症扩展是关键</li>
+      <li><strong>CAR-T 三剑客（Carvykti、Talvey、Tecvayli）</strong>合计 Q1 ~$1B · 同比 +60%+ · 是 2027-2030 的核心增长引擎</li>
+      <li><strong>Imbruvica 缓慢下滑 -13.9%</strong>——BTK 类竞争（Calquence、Brukinsa）持续抢市场 · 已 plateau</li>
+      <li><strong>MedTech +4.6% 运营</strong>——稳定但增速落后制药 · Shockwave 整合贡献加速</li>
+    </ul>
+
+    <p><strong>议价能力</strong>：对患者（极强 · 专利药无替代品）· 对支付方（中 · Medicare 谈判权扩大但仍可接受）· 对供应商（强 · 规模效应）。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 4 ═══ -->
+<div class="section">
+  <div class="stitle">模块 4 · 经济护城河分析</div>
+  <div class="moat-grid">
+    <div class="moat-card wide">
+      <h5>1. 无形资产（专利 + 临床证据）</h5>
+      <span class="moat-rate">宽</span>
+      <p>FDA 批准 + 20 年专利 + 临床试验积累 · 单个新药 R&D 成本 ~$2-3B、成功率 ~10% · 替代品准入极难。<strong>趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>2. 转换成本（医生 + 患者）</h5>
+      <span class="moat-rate">宽</span>
+      <p>医生熟悉用药习惯 + 患者治疗连续性 + 医保报销限制 · 切换风险高 · 临床证据复购粘性。<strong>趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>3. 成本优势</h5>
+      <span class="moat-rate">宽</span>
+      <p>制药毛利率 70%+ · 规模效应分摊 R&D · 一流销售网络 · 边际成本极低。<strong>趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>4. 有效规模</h5>
+      <span class="moat-rate">窄</span>
+      <p>制药市场 CR10 ~50% · 治疗领域细分化 · 不是单赢家通吃。<strong>趋势：略稀释</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>5. 网络效应</h5>
+      <span class="moat-rate">无</span>
+      <p>不适用——医药品类无网络效应。<strong>趋势：N/A</strong>。</p>
+    </div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>10 年后护城河会更宽还是更窄？</strong> <span class="hl-t">稳定偏宽</span>——专利 + 临床证据 + 医保渠道这些核心壁垒不会变。真正的长期风险在<span class="warn-t">三类</span>：(1) 生物类似药持续侵蚀（Stelara 后还有 Darzalex 2030+ LoE）；(2) IRA 药价谈判扩大；(3) 突破性技术替代（如 GLP-1 → 心血管 / 肥胖治疗范式转换）。但 JNJ 的<strong>多元化 + 持续 R&D（FY25 R&D ~$15B、占营收 16%）</strong>能持续填补管线。</p>
+
+    <p><strong>定价权</strong>：中高。专利期内对患者强定价权，但 IRA + 欧洲医保谈判限制提价上限。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 5 ═══ -->
+<div class="section">
+  <div class="stitle">模块 5 · 财务深度分析</div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 12px 0; font-family: 'Segoe UI',sans-serif;">5.1 关键比率（Q1 2026 vs Q1 2025）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>指标</th><th>Q1 2025</th><th>Q1 2026</th><th>变化</th><th>含义</th></tr>
+      <tr><td>营收增速（报告）</td><td>+2.3%</td><td>+9.9%</td><td><span class="badge up">+7.6pp</span></td><td>Shockwave 并表 + 制药</td></tr>
+      <tr><td>营收增速（运营）</td><td>+4.2%</td><td>+6.4%</td><td><span class="badge up">+2.2pp</span></td><td>核心业务真实增速</td></tr>
+      <tr><td>调整营业利润率</td><td>~32%</td><td>~31%</td><td><span class="badge nt">-1pp</span></td><td>Shockwave 摊薄</td></tr>
+      <tr><td>GAAP 净利率</td><td>43%</td><td>22%</td><td><span class="badge dn">-21pp</span></td><td>基数效应 + Talc 指控</td></tr>
+      <tr><td>调整 EPS YoY</td><td>+2.2%</td><td>-2.5%</td><td><span class="badge dn">-4.7pp</span></td><td>Stelara 急速侵蚀</td></tr>
+      <tr><td>OCF / 营收</td><td>15%</td><td>6%</td><td><span class="badge dn">-9pp</span></td><td>Talc 法律支出 + 营运资金</td></tr>
+      <tr><td>R&D / 营收</td><td>~16%</td><td>~16%</td><td><span class="badge nt">持平</span></td><td>研发投入坚定</td></tr>
+    </table>
+  </div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.2 资产负债健康度（2026-03-29 末）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>金额（$）</th><th>说明</th></tr>
+      <tr><td>现金 + 有价证券</td><td>$21.69B</td><td>流动性储备</td></tr>
+      <tr class="hl"><td>长期债务</td><td>$39.44B</td><td>+28.7% YoY · 含 Shockwave 融资</td></tr>
+      <tr><td>非流动负债（含长债）</td><td>$37.53B</td><td>整体债务结构</td></tr>
+      <tr class="hl"><td><strong>净债务</strong></td><td><strong>~$33B</strong></td><td>= 长债 $39.4 − 现金 $21.7 + 其他短债 ≈ $33</td></tr>
+      <tr><td>AAA 信用评级</td><td>—</td><td>美国仅 2 家 AAA 公司之一</td></tr>
+      <tr><td>资产负债率</td><td>~65%</td><td>医药行业中性偏高</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">⚠️ <strong>债务结构变化</strong>：长期债务从 ~$30B 增至 $39.44B（+28.7% YoY），主要为 2024 Shockwave 收购融资。AAA 评级让 JNJ 融资成本极低（~4% 加权），杠杆增加在可控范围内。<strong>但需关注</strong>：若 Talc 最终设算超 $15B，可能进一步推高净债务，影响 AAA 评级。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.3 现金流量（Q1 2026 vs Q1 2025）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>Q1 2025</th><th>Q1 2026</th><th>YoY</th></tr>
+      <tr><td>经营现金流（OCF）</td><td>$3.38B</td><td>~$1.5B</td><td><span class="badge dn">-56%</span></td></tr>
+      <tr class="hl"><td>自由现金流（FCF）</td><td>~$3.0B</td><td>~$1.5B</td><td><span class="badge dn">-50%</span></td></tr>
+      <tr><td>季度股息支出</td><td>~$3.1B</td><td>~$3.2B</td><td><span class="badge up">+3.1%</span></td></tr>
+      <tr><td>股票回购（净）</td><td>~$2.5B</td><td>未独立披露</td><td>持续</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">⚠️ <strong>Q1 OCF 异常低需关注</strong>：JNJ Q1 OCF $1.5B 大幅低于 Q1 25 的 $3.38B。可能原因：(1) Talc 法律支付集中；(2) 营运资金扰动；(3) Shockwave 整合相关付款。<strong>FY25 全年 FCF ~$19B 仍正常</strong>——单季度异常不改变长期产生能力，但需持续监控。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.4 所有者盈余（价值投资口径 · FY2026 估）</h3>
+  <div class="dcf-note">
+    <p><strong>所有者盈余 = 净利润 + 折旧摊销 + 一次性指控 − 维护性 Capex ± 营运资金</strong></p>
+    <p>FY26 调整后净利估 ≈ $28B（基于 EPS $11.55 × 2.42B 股）· D&A ~$8B · 维护性 Capex ~$4B（总 Capex ~$5B 中维护性占 80%，因制药轻资产）。</p>
+    <p>FY26 所有者盈余 ≈ $28 + $8 − $4 = <strong>~$32B</strong>。</p>
+    <p><strong>所有者盈余收益率 = $32B / $564B 市值 ≈ 5.7%</strong>——对一个 7% 增长 + 64 年增息 + AAA 评级的防御性医药龙头，这是<span class="hl-t">合理但不便宜</span>的水平。如果 Talc 最终设算 $5-10B 一次性出清，所有者盈余收益率会被压回 ~5%——但<strong>"出清"也意味着估值不确定性消失</strong>，反而是利好。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 6 ═══ -->
+<div class="section">
+  <div class="stitle">模块 6 · 电话会分析（Q1 2026 + 前 2 季度）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">Q1 2026 电话会（2026-04-14）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"上调全年指引——销售 $100.8B、调整 EPS $11.55"——CFO Joseph Wolk</div><div class="ec-note">1 月给出后第一次上调 · 中点 +$0.5B / +$0.10 EPS · 反映 Q1 momentum。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"Tremfya 增长 +63.8%、Carvykti +57.4%、Talvey +72.8%"</div><div class="ec-note">三个新品组合远超预期 · Tremfya 完美对冲 Stelara · 表明管线接棒成功。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"Stelara 下滑 -61.7%"——已在生物类似药正面冲击下</div><div class="ec-note">美国 / 欧洲 IL-23 类生物类似药 7 家 +1 · 速度比 1 年前预期更快 · 但管线接棒在执行中。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"Q1 GAAP 净利 -52.4% / OCF -56%"</div><div class="ec-note">主因是基数效应（Q1 25 含 $7.3B 一次性"其他收益"）+ 营运资金扰动 · <span class="warn-t">不代表基本面恶化，但需持续看</span>。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"第 64 年连续增息——股息提至 $1.34/季 (+3.1%)"</div><div class="ec-note">2026 是连续增息纪录的延续 · 全球极少数 · 标志资本配置纪律。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">Talc 诉讼：未给最新和解或破产策略指引</div><div class="ec-note">9 万件未决索赔仍在 MDL 进程 · 全球性和解未达成 · 强生维持"不进行综合和解"立场。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q4 2025 电话会（2026-01-22）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"FY25 总销售 $89B (+5.2%)，调整 EPS $10.77 (+8.7%)，FCF $19B"</div><div class="ec-note">收官稳定 · 给出 FY26 指引 $100.3B / EPS $11.45（后续上调）。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q3 2025 电话会（2025-10-15）</h3>
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"Texas Two-Step 第三次破产分拆方案被法院驳回"</div><div class="ec-note">法官 Lopez 拒绝 $8B 破产和解 · 9 万件索赔继续 MDL 法院程序 · Talc 风险悬而未决。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">指引兑现度追踪</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>历史指引</th><th>Q1 2026 实际</th><th>评价</th></tr>
+      <tr><td>FY26 销售 $100.3B（Q4 25）</td><td>上调至 $100.8B</td><td><span class="badge up">超兑现</span></td></tr>
+      <tr><td>FY26 调整 EPS $11.45（Q4 25）</td><td>上调至 $11.55</td><td><span class="badge up">超兑现</span></td></tr>
+      <tr><td>"Tremfya / Carvykti 加速放量"（Q3 25）</td><td>Tremfya +63.8%, Carvykti +57.4%</td><td><span class="badge up">远超预期</span></td></tr>
+      <tr><td>"Stelara 持续承压"（Q3 25）</td><td>-61.7% · 速度更快</td><td><span class="badge dn">略差于预期</span></td></tr>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>信号汇总</strong>：Q1 2026 是 JNJ 的<span class="hl-t">"管线接棒成功 + 战略一致性兑现"</span>的一季——Tremfya/Carvykti/Talvey 三剑客增速远超预期、上调全年指引、第 64 年增息维持。但调整 EPS -2.5% 反映 Stelara 侵蚀速度超预期、OCF 单季异常低、Talc 9 万件未决索赔——这些是<span class="warn-t">"防御性医药"叙事的暗影</span>。市场对此的反应是"温和买入"——股价一年涨 43%，已部分定价上述利好。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 7 ═══ -->
+<div class="section">
+  <div class="stitle">模块 7 · 多模型估值（8 种方法）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">7.1 估值汇总表（独立估值 · USD）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>估值方法</th><th>每股公允价</th><th>假设要点</th><th>权重</th></tr>
+      <tr><td>1. 相对估值（P/E）</td><td>$242</td><td>FY26 调整 EPS $11.55 × 21x（成熟药企中枢）</td><td>20%</td></tr>
+      <tr><td>2. DCF（基准）</td><td>$250</td><td>未来 5 年 FCF CAGR 6%，WACC 7%（防御 + AAA），永续 2.5%</td><td>15%</td></tr>
+      <tr><td>3. 所有者盈余收益率</td><td>$240</td><td>所有者盈余 $32B / 5.5% 目标收益率 = $582B / 2.42B 股</td><td>15%</td></tr>
+      <tr><td>4. PEG</td><td>$245</td><td>P/E 20x ÷ 增速 7% = PEG 2.9（防御类合理）</td><td>10%</td></tr>
+      <tr><td>5. DDM</td><td>$220</td><td>DPS $5.36 × Gordon 模型（增 5%、要求回报 7.5%）</td><td>15%</td></tr>
+      <tr><td>6. NAV</td><td>不适用</td><td>非资产型公司</td><td>0%</td></tr>
+      <tr><td>7. 反向 DCF</td><td>当前价隐含 FCF 增长 <strong>~5%</strong></td><td>$234 隐含市场已定价 5% 长期 FCF 增长——基本合理</td><td>5%</td></tr>
+      <tr><td>8. SOTP 分部加总</td><td>$260</td><td>Pharma $420B（EV $100B × 4.2x）+ MedTech $140B + 现金 $22B − 债务 $39 − Talc 准备 $10B</td><td>20%</td></tr>
+      <tr class="hl"><td><strong>加权公允价中位数</strong></td><td><strong>$245</strong></td><td>估值区间 $220-260 · 中位 ~$245</td><td>100%</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.8;"><strong>与现价对照</strong>：当前 $234.34 vs 加权公允 $245 · <span class="nt">折价仅 4.4%</span>——<strong>已基本反映合理价值，不是格雷厄姆式便宜货</strong>。安全边际明显不足 25% 阈值。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.2 P/E 多档透视表</h3>
+  <p style="margin-bottom:10px; font-size:13px; color:var(--text2);">JNJ Q1 GAAP vs 调整 EPS 差异 26%（含 Talc 诉讼指控 + Stelara 侵蚀基数效应），触发多档透视：</p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>口径</th><th>EPS</th><th>P/E (基于 $234.34)</th><th>读数说明</th></tr>
+      <tr><td>TTM GAAP P/E</td><td>~$6.30</td><td><strong>~37x</strong></td><td>含 Talc 大幅指控 · 被压扁</td></tr>
+      <tr><td>TTM 调整 P/E</td><td>~$10.80</td><td><strong>~21.7x</strong></td><td>剔除一次性 · 真实经营</td></tr>
+      <tr class="hl"><td><strong>Forward 调整 P/E</strong></td><td><strong>$11.55</strong></td><td><strong>20.3x</strong></td><td>最可信档 · FY26 指引</td></tr>
+      <tr><td>FY27 共识 P/E</td><td>~$12.30</td><td>~19.0x</td><td>持续 7% 增长假设</td></tr>
+      <tr><td>10 年中周期 P/E</td><td>~$10</td><td>~23.4x</td><td>跨越 LoE 周期</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3);"><strong>最可信档</strong>：Forward 调整 P/E 20.3x（基于 FY26 指引）。对一个 +7% 增长、64 年增息、AAA 评级、Talc 风险悬而未决的成熟药企，<strong>20-22x 是合理估值带，但偏向上端</strong>。同业对比：辉瑞 PFE 11x、默克 MRK 12x（同业明显折价）；礼来 LLY 50x（GLP-1 溢价）。JNJ 在大型药企里属于"质量溢价合理"。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.3 12 个月目标价（概率加权）</h3>
+  <div class="pgrid">
+    <div class="pbox"><div class="pl">悲观情景 · 25%</div><div class="pv pc">$200</div><div class="pn">Talc 设算 > $15B + Stelara 侵蚀超预期 + 估值压缩至 P/E 18x<br>距现价 -15%</div></div>
+    <div class="pbox"><div class="pl">基准情景 · 50%</div><div class="pv pf">$245</div><div class="pn">FY26 EPS $11.55 兑现 + 估值维持 21x + 64 年增息延续<br>距现价 +5%</div></div>
+    <div class="pbox"><div class="pl">乐观情景 · 25%</div><div class="pv ps">$275</div><div class="pn">Carvykti 加速 + Talc 全面和解 + 估值升至 P/E 23x<br>距现价 +17%</div></div>
+  </div>
+  <p style="font-size:13px; color:var(--text2);"><strong>概率加权公允价</strong>：25%×$200 + 50%×$245 + 25%×$275 = <strong>$241</strong> ≈ $245。<strong>叠加 2.3% 股息 = 总回报 ~7%</strong>——稳健但不令人激动。安全边际不足 25%，意味着<span class="warn-t">现价没有显著低估，新买入应等回调</span>。</p>
+</div>
+
+<!-- ═══ 模块 8 ═══ -->
+<div class="section">
+  <div class="stitle">模块 8 · 竞争与行业分析</div>
+  <div class="cmt">
+    <p><strong>全球医药市场（FY2025）</strong>：~$1.6T。CR10 ~50%。JNJ 市占率 ~5.5%（全球第 4-5 大）。MedTech 市场 ~$580B，JNJ ~6%。</p>
+
+    <p><strong>大型药企同业对比（截至 2026-06）</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>公司</th><th>市值</th><th>FY26 增速</th><th>Forward P/E</th><th>股息率</th><th>核心评价</th></tr>
+        <tr class="hl"><td><strong>JNJ</strong></td><td>$564B</td><td>+7%</td><td><strong>20.3x</strong></td><td>2.3%</td><td>多元化 + 股息王</td></tr>
+        <tr><td>Eli Lilly LLY</td><td>$800B</td><td>+25%</td><td>~50x</td><td>0.6%</td><td>GLP-1 溢价</td></tr>
+        <tr><td>Merck MRK</td><td>$300B</td><td>+3%</td><td>~12x</td><td>3.5%</td><td>Keytruda LoE 风险</td></tr>
+        <tr><td>Pfizer PFE</td><td>$170B</td><td>+2%</td><td>~11x</td><td>6.5%</td><td>COVID 后遗症 · 高息</td></tr>
+        <tr><td>AbbVie ABBV</td><td>$320B</td><td>+5%</td><td>~16x</td><td>3.4%</td><td>Humira 接棒中</td></tr>
+        <tr><td>Novartis NVS</td><td>$220B</td><td>+6%</td><td>~15x</td><td>3.4%</td><td>欧洲药企</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:10px; font-size:12px; color:var(--text3);">注：JNJ 在大型药企里 Forward P/E 仅次于 LLY（GLP-1 溢价），明显高于 PFE/MRK/ABBV。质量溢价合理但已充分定价。</p>
+
+    <p style="margin-top:14px;"><strong>波特五力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>新进入者：</strong>极低（FDA 审批 + 临床成本 + 销售网络 = $10B+ 准入门槛）</li>
+      <li><strong>替代品：</strong>中（同类生物类似药 + 治疗范式转换如 GLP-1）</li>
+      <li><strong>供应商议价：</strong>中（API 原料、CRO 服务）</li>
+      <li><strong>买家议价：</strong>中高（Medicare 谈判 + 欧洲医保 + IRA）</li>
+      <li><strong>同业竞争：</strong>中（治疗领域细分化，但每个领域 CR3 集中）</li>
+    </ul>
+
+    <p><strong>颠覆风险</strong>：(1) GLP-1 减肥药扩展至心血管 / 糖尿病并发症，可能重塑 MedTech 心血管市场；(2) AI 加速药物发现可能稀释专利价值；(3) IRA 药价谈判 2027 扩大。但 JNJ 多元化（25+ 治疗领域）+ R&D $15B/年 是对冲。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 9 ═══ -->
+<div class="section">
+  <div class="stitle">模块 9 · 技术面与 K 线分析（次要参考）</div>
+  <div class="cmt">
+    <p><strong>趋势</strong>：JNJ 一年涨 43%（vs 标普 +20% 同期），从 $164 的 2025-06 低点持续上行 · 当前 $234.34 距 52 周高 $251.71 仅 -7%。<span class="warn-t">已是上行通道中后段</span>。</p>
+
+    <p><strong>关键价位</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>支撑</strong>：$220（50 日均线）/ $205（200 日均线 + 心理位）/ $180（前期颈线）</li>
+      <li><strong>阻力</strong>：$251.71（52 周高）/ $260（公允价目标）/ $275（乐观情景）</li>
+    </ul>
+
+    <p><strong>指标信号</strong>：日线 RSI ~63（偏强未超买）/ MACD 多头排列 / 布林带上轨 · <span class="hl-t">上行动能仍在，但回调可能性上升</span>。</p>
+
+    <p><strong>注意</strong>：JNJ 的核心驱动是 Forward P/E + 管线接棒 + 股息可持续性，技术面是次要参考。买入时机更应等基本面回调（如 Talc 意外不利、季度增速放缓）而非技术信号。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 10 ═══ -->
+<div class="section">
+  <div class="stitle">模块 10 · 增长催化剂与前景展望</div>
+  <div class="cmt">
+    <p><strong>短期催化剂（未来 6 个月）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>2026-07-15 Q2 财报</strong>：Tremfya / Carvykti / Talvey 持续兑现 + 全年指引再上调</li>
+      <li><strong>Talc 全球和解</strong>：MDL 庭审进程 · 一旦达成（估算 $5-10B）将出清最大不确定性</li>
+      <li><strong>新药 FDA 批准</strong>：Carvykti 适应症扩展、Shockwave 新心血管器械</li>
+      <li><strong>Shockwave 整合</strong>：MedTech 心血管线增速回升至 +6-8%</li>
+    </ul>
+
+    <p><strong>长期展望（3-5 年）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>FY28 销售突破 $115B</strong>（vs FY25 $89B）+ 调整 EPS 突破 $14</li>
+      <li><strong>CAR-T 三剑客年销 $5B+</strong>：Carvykti + Talvey + Tecvayli 骨髓瘤组合</li>
+      <li><strong>Tremfya 突破 $10B</strong>：IBD 适应症扩展 · 接棒 Stelara 鼎峰</li>
+      <li><strong>Shockwave 心血管整合 +$2B 营收</strong>：钙化干预成 MedTech 主增长</li>
+      <li><strong>风险情景</strong>：Talc 设算超 $15B / Darzalex 2030 LoE / GLP-1 颠覆心血管市场</li>
+    </ul>
+
+    <p><strong>TAM 扩展</strong>：全球医药 ~$1.6T · 5 年 CAGR 5-6% · JNJ 通过多治疗领域布局可保持市占稳定，依靠新药接棒维持 5-7% 营收增速。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 11 ═══ -->
+<div class="section">
+  <div class="stitle">模块 11 · 风险矩阵</div>
+  <div class="risk-grid">
+    <div class="risk-card r4"><h5>1. Talc 诉讼最终成本</h5><span class="risk-score">4 / 5 高</span><p>9 万件未决索赔 + 三次破产策略失败 + 全球性和解未达成 · 估算 $5-15B · 极端情况 $20B+</p></div>
+    <div class="risk-card r3"><h5>2. Stelara 持续侵蚀</h5><span class="risk-score">3 / 5 中</span><p>Q1 -61.7% 超出预期 · Tremfya 接棒但需 2-3 年完全替代 · 短期收入波动</p></div>
+    <div class="risk-card r3"><h5>3. IRA 药价谈判扩大</h5><span class="risk-score">3 / 5 中</span><p>2027 起 IRA 谈判范围扩大 · Darzalex / Carvykti 可能进入 · 影响 5-8% 收入</p></div>
+    <div class="risk-card r3"><h5>4. 估值偏高 + 1 年涨 43%</h5><span class="risk-score">3 / 5 中</span><p>Forward P/E 20.3x 已是同业上端 · 安全边际不足 · 回调风险</p></div>
+    <div class="risk-card r2"><h5>5. GLP-1 颠覆心血管市场</h5><span class="risk-score">2 / 5 低</span><p>礼来 / 诺和的减肥药扩展可能减少心血管器械需求 · Shockwave 受影响</p></div>
+    <div class="risk-card r2"><h5>6. AAA 评级风险</h5><span class="risk-score">2 / 5 低</span><p>债务从 $30B → $39B + Talc 准备金可能 · 评级机构监控中</p></div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>3 个黑天鹅情景</strong>：</p>
+    <ol style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>Talc 设算 $25B+ 一次性集中</strong>——概率 8% · 股价跌至 $180-190 · AAA 评级丢失</li>
+      <li><strong>FDA 重大召回 / 主力药品停售</strong>——概率 3% · 股价跌至 $200</li>
+      <li><strong>GLP-1 类药完全替代 MedTech 心血管</strong>——概率 5% · MedTech 估值减半 · 股价跌至 $190</li>
+    </ol>
+
+    <p style="margin-top:10px;"><strong>下行支撑</strong>：年化 FCF $19B + 调整 EPS $11.55 + Forward P/E 17x 下限 = $196。<span class="hl-t">$195-205 是较硬的估值底</span>（200 日均线 + 心理位 + DDM 下限）。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 12 ═══ -->
+<div class="section">
+  <div class="stitle">模块 12 · 股东回报分析</div>
+  <div class="cmt">
+    <p><strong>JNJ 是全球极少数的"股息之王"——连续 64 年现金分红增长。</strong>这在标普 500 仅有 ~50 家做到，是资本配置纪律的极致体现。下面用三个问题拆开评估：</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 18px 0 10px; font-family: 'Segoe UI',sans-serif;">12.1 公司给了股东多少？</h3>
+    <p>过去 3 年股东回报全景：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>财年</th><th>现金股息（$）</th><th>每股股息</th><th>回购金额</th><th>派息率（占调整 EPS）</th><th>股东总回报</th></tr>
+        <tr><td>FY2023</td><td>$11.8B</td><td>$4.70</td><td>$5.0B</td><td>~46%</td><td>$16.8B</td></tr>
+        <tr><td>FY2024</td><td>$12.2B</td><td>$4.96</td><td>$7.0B</td><td>~47%</td><td>$19.2B</td></tr>
+        <tr class="hl"><td>FY2025</td><td>$12.6B</td><td>$5.20</td><td>$8.0B</td><td>~48%</td><td>$20.6B</td></tr>
+        <tr><td>FY2026E</td><td>~$12.9B</td><td>$5.36</td><td>~$8B</td><td>~46%</td><td>~$20.9B</td></tr>
+        <tr><td>3 年累计</td><td>~$36.6B</td><td>—</td><td>~$20B</td><td>稳定 46-48%</td><td>~$56.6B</td></tr>
+      </table>
+    </div>
+
+    <p style="margin-top:14px;"><strong>Trailing Shareholder Yield</strong> = FY25 ($20.6B) / 市值 $564B = <strong>3.65%</strong>（其中股息 2.23% + 净回购 1.42%）。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.2 给的方式好不好？</h3>
+
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>美股回购入库存股</strong>：JNJ 回购主要对冲 SBC 稀释 · 含金量打折，但 SBC 规模相对小（占营收 1.5%）· 净减股效应仍明显</li>
+      <li><strong>摊薄股数 3 年趋势</strong>：FY23 2.43B → FY24 2.42B → FY25 2.41B → Q1 26 2.42B · <span class="hl-t">3 年净减少 ~20M 股 (~0.8%)</span> · 回购效率不高，主要对冲 SBC</li>
+      <li><strong>分红 vs 回购优先级</strong>：JNJ 明显偏好"分红 + 增息"为主，回购为辅 · 这是<span class="hl-t">股息文化驱动</span>，符合 64 年连续增息纪律</li>
+    </ul>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.3 能不能继续给、给多少？</h3>
+
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>已授权未执行回购额度</strong>：FY24 董事会授权 $20B 累计余额 · 5-7 年内执行 · 节奏稳定</li>
+      <li><strong>分红政策</strong>：明确"年度增息" · 64 年纪录 · 历史增速 5-7%/年</li>
+      <li><strong>(股息 + 回购) / FCF 覆盖度</strong>：FY25 $20.6B / FY25 FCF ~$19B = <strong>108%</strong>——略超 FCF · 主要靠现金储备 + 借债适度补充</li>
+      <li><strong>借债回购检验</strong>：长期债务从 $30B → $39B 主要因 Shockwave，不是回购融资。这是健康的</li>
+      <li><strong>Talc 影响</strong>：如果 Talc 设算 $5-10B，会暂时压缩股东回报 1-2 年。但 64 年增息纪录管理层会用尽一切努力维持</li>
+    </ul>
+
+    <p><strong>周期择时</strong>：JNJ 回购时机基本随机分散（季度均匀执行）· 不挑择时 · 历史回购均价与股价基本同步——<span class="nt">中性</span>。</p>
+
+    <p><strong>模块小结</strong>：<span class="hl-t">积极且高含金量</span>——64 年连续增息 + 派息率稳定 46-48% + FCF 覆盖率 108% + AAA 评级支撑 · 股东回报是 JNJ 最强护城河之一。但<span class="warn-t">Talc 不确定性 + 1.42% 净回购占比偏低</span>限制了"格雷厄姆式高股东收益率"的吸引力。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 13 ═══ -->
+<div class="section">
+  <div class="stitle">模块 13 · 海图评分卡 + 投资决策</div>
+
+  <div class="scorecard">
+    <h3 style="font-size:15px; color:var(--text); margin-bottom: 16px; font-family: 'Segoe UI',sans-serif;">海图评分卡（6 维 A-D）</h3>
+    <div class="score-grid">
+      <div class="score-card"><div class="score-letter s-bp">B+</div><div class="score-body"><h4>1. 生意可预测性</h4><p>制药 + MedTech 双轮稳定 · 5 年盈利波动小 · 但 Stelara/Imbruvica LoE 周期 + Talc 增加不确定性。</p></div></div>
+      <div class="score-card"><div class="score-letter s-a">A</div><div class="score-body"><h4>2. 经济护城河</h4><p>专利 + 临床证据 + 医保渠道宽护城河 · 制药毛利率 70%+ · 难复制。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">B+</div><div class="score-body"><h4>3. 管理层质量</h4><p>64 年增息执行力顶级 · Duato 主导 Kenvue 分拆成功 · 但 Talc 处理多次失败拖累。</p></div></div>
+      <div class="score-card"><div class="score-letter s-a">A</div><div class="score-body"><h4>4. 财务质量</h4><p>AAA 评级 · OCF/调整 NI ~70% · FCF $19B · 财务堡垒级。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">B+</div><div class="score-body"><h4>5. 资本配置纪律</h4><p>64 年增息 + 派息率 47% 稳定 + AAA 评级 · 但回购效率低 · Texas Two-Step 失败拖累。</p></div></div>
+      <div class="score-card"><div class="score-letter s-b">B</div><div class="score-body"><h4>6. 估值与安全边际</h4><p>Forward P/E 20.3x 已合理偏高 · 折价仅 4% · 安全边际明显不足 25% 阈值。</p></div></div>
+    </div>
+
+    <div class="flag-row">
+      <strong>红旗排查</strong>：9 万件 Talc 索赔未决 · 三次 Texas Two-Step 破产分拆策略失败 · 估算潜在赔付 $5-25B 范围极宽 · <strong>触发"有疑问"</strong>——综合评级强制降至"持有观望"。
+    </div>
+
+    <p style="margin-top:18px; font-size:14px; color:var(--text); line-height:1.85;"><strong>综合评级</strong>：<span class="rating-badge rating-hold" style="font-size:14px;">持有观望</span>。基础质量是 A-（股息王 + AAA + 制药 +11%），但估值不便宜（Forward P/E 20.3x、安全边际不足）+ Talc 红旗触发降级。新买入应等回调至 $200-210。</p>
+  </div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">投资决策（精确价格 · USD）</h3>
+
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>项目</th><th>价格</th><th>说明</th></tr>
+      <tr><td>12 个月目标价（基准）</td><td><strong>$245</strong> (+5%)</td><td>FY26 EPS $11.55 × 估值 21x + 持续增息</td></tr>
+      <tr><td>悲观目标（25% 概率）</td><td>$200 (-15%)</td><td>Talc 设算 > $15B + 估值压缩</td></tr>
+      <tr><td>乐观目标（25% 概率）</td><td>$275 (+17%)</td><td>Carvykti 加速 + Talc 出清 + P/E 至 23x</td></tr>
+      <tr class="hl"><td>首仓建仓（估值中位数 $245 × 80%）</td><td><strong>$196</strong></td><td>距现价 -16% · 耐心等待回调</td></tr>
+      <tr><td>二仓建仓（× 70%）</td><td>$172</td><td>-27% · 大幅回调机会</td></tr>
+      <tr><td>三仓建仓（× 60%）</td><td>$147</td><td>-37% · 黑天鹅级机会（接近 52 周低）</td></tr>
+      <tr><td>止盈一档</td><td>$260</td><td>+11% · 减仓 25%</td></tr>
+      <tr><td>止盈二档</td><td>$285</td><td>+22% · 再减 25%</td></tr>
+      <tr><td>止盈三档</td><td>$310</td><td>+32% · 再减 25% · 最后 25% 长期持有收息</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.85;"><strong>建议总仓位</strong>：<strong>3-5%</strong>（中等仓位 · 防御性核心配置，但当前位置不进取，应小仓位 + 等回调）。<strong>持有周期</strong>：5-10 年（长期收息复利 + 穿越 Talc 周期）。<strong>关键监控指标</strong>：① Talc 诉讼进展（每次 MDL 法庭裁决）；② Tremfya / Carvykti 季度增速持续性；③ FY27 调整 EPS 指引节奏；④ AAA 评级维持；⑤ 是否启动更激进回购。<strong>下次催化剂</strong>：2026-07-15 Q2 2026 财报。</p>
+</div>
+
+<!-- ═══ 海图页末长评 ═══ -->
+<div class="section">
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记 · 1150 字</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p class="lead">市场总在动荡中寻找避险锚。2025-2026 这一轮 AI 与利率的双重不确定下，"股息之王"成了热钱新去处——JNJ 一年涨了 43%。但当一只防御股一年涨成"成长股"的姿态时，价值投资者需要先停下来问：它还安全吗？JNJ Q1 2026 调整 EPS 仅 -2.5%、上调全年指引、第 64 年增息——这些都是好事。但 Forward P/E 已经 20.3x，对一个 +7% 增长的成熟药企，安全边际几乎被一年涨幅吃光了。</p>
+
+      <p>JNJ 是"用专利保护 + 临床证据 + 医保支付链锁定全球处方药需求"的医疗工厂。Q1 2026 营收 $24.06B（+9.9% 报告 / +6.4% 运营）· 创新医药 $15.43B（+11.2%，Tremfya +63.8%、Carvykti +57.4%）· MedTech $8.64B（+7.7%）· 调整 EPS $2.70 超预期 · 第 64 年连续增息至 $1.34/季 · FY26 指引上调至 $100.8B / $11.55。这是一份扎实但不惊艳的财报。</p>
+
+      <h4>几个研判要点</h4>
+
+      <p><strong>一、Tremfya 顺利接棒 Stelara 是 Q1 最重要的信号。</strong> Stelara 同比 -61.7%（生物类似药正面冲击），但 Tremfya 同比 +63.8% 几乎完美对冲。这意味着 <span class="hl-t">JNJ 的管线接棒能力得到了实战验证</span>。加上 Carvykti +57.4% / Talvey +72.8% / Spravato +44.5% 的"三剑客"放量，FY27-28 的增长引擎清晰可见。这是一个"专利悬崖能被自家管线消化"的难得案例。</p>
+
+      <p><strong>二、第 64 年增息、AAA 评级、$32B 年化所有者盈余——质量端无可挑剔。</strong> 标普 500 里能连续 64 年增息的公司不到 10 家、AAA 评级仅 JNJ 和微软两家。FY25 股东总回报 $20.6B（股息 $12.6B + 回购 $8B），派息率 47%，FCF 覆盖率 108%。这是一台稳定运转的复利机器，让长期持有者每年收 2.3% 股息 + 自动增息 5-7%。</p>
+
+      <p><strong>三、Forward P/E 20.3x + 距高点仅 -7%，估值已不便宜。</strong> 一年涨 43% 后，JNJ 在大型药企里的估值仅次于 LLY（GLP-1 溢价），明显高于 PFE 11x / MRK 12x / ABBV 16x。<span class="warn-t">质量溢价合理，但已被充分定价</span>。8 种估值法中位数 $245，对当前 $234 的折价仅 4.4%，远低于价值投资 25% 安全边际的标准。反向 DCF 显示市场已定价 ~5% 长期 FCF 增长，刚好等于历史趋势——不便宜也不贵的"合理价"。</p>
+
+      <p><strong>四、9 万件 Talc 诉讼是悬在头上的剑。</strong> 三次 Texas Two-Step 破产分拆方案被法院驳回，9 万件未决索赔继续 MDL 程序，全球性和解未达成。市场目前定价的是 $5-10B 设算，但<span class="warn-t">极端情况可能 $20B+</span>。这是触发"红旗"的关键——足以让本应 A- 评级的标的强制降至持有观望。</p>
+
+      <p><strong>五、12 个月目标价 $245，上行仅 +5% + 2.3% 股息 = 总回报 ~7%。</strong> 概率加权：悲观 $200（25%，Talc + Stelara 双击）、基准 $245（50%）、乐观 $275（25%，Carvykti + Talc 出清）。<strong>当前 $234.34 已远高于首仓 $196</strong>——新买入不在合理建仓窗口。</p>
+
+      <h4>海图研判</h4>
+
+      <p><strong>评级：持有观望</strong>（基础质量是 A- 等级——64 年增息 + AAA 评级 + Pharma +11% + Tremfya 接棒成功，但 Forward P/E 20.3x + 安全边际仅 4% + 9 万件 Talc 诉讼触发红旗强制降级）。12 个月概率加权目标价 <strong>$245</strong>（+5%）+ 2.3% 股息 = 总回报 ~7%。</p>
+
+      <p>操作建议：当前 $234.34 高于机械首仓 $196 约 20%，<strong>不在合理建仓窗口</strong>。耐心等待回调至 $196 建首仓、$172 加二仓、$147 极端机会三仓。止盈三档 $260 / $285 / $310。<strong>建议总仓位 3-5%</strong>（防御性核心配置 · 但当前不进取）。持有周期 5-10 年。<span class="hl-t">关键纪律：现有持仓者继续持有收息；新买入者必须等回调或 Talc 出清明朗后</span>。</p>
+
+      <h4>风险提示</h4>
+
+      <p>Talc 诉讼设算 > $15B / Stelara 侵蚀超预期 / IRA 药价谈判扩大 / GLP-1 颠覆心血管市场 / 估值压缩 / 单季 OCF 异常持续——任一项都可能让股价跌至 $195-205。但 FY25 FCF $19B + 调整 EPS $11.55 + Forward P/E 17x 下限 = $196 是较硬的估值底，<strong>$195-205 是基本面 + 技术面共同支撑区</strong>。</p>
+
+      <p>关键叙事：<strong>"64 年连续增息（股息之王）+ AAA 评级 + Pharma +11% + Tremfya 接棒成功 + AAA 评级 + 多元化护城河"的质量端无可挑剔，对垒"Forward P/E 20.3x（一年涨 43%）+ 安全边际仅 4% + 9 万件 Talc 诉讼未决 + Stelara 急速侵蚀 + Imbruvica 持续下滑"的估值与风险</strong>。JNJ 不是给追求格雷厄姆式便宜货的人，是给已经持有的长期收息者继续持有、给新买入者耐心等回调的人。下次催化剂：2026-07-15 Q2 2026 财报 + Talc MDL 进展。</p>
+
+      <p class="haitu-sign">—— 海图，灯下落笔，明日再观风浪。</p>
+
+      <p class="haitu-disc">⚠️ 免责声明：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，不构成任何投资建议。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div>《海图夜读》 · Johnson &amp; Johnson JNJ Q1 2026 海图研判</div>
+  <div style="margin-top:6px;">发布日 2026-04-14 · 研判日 2026-06-02 · 数据来源 JNJ Q1 2026 官方新闻稿（投资者关系页 + SEC 8-K + 10-Q）</div>
+</footer>
+
+<script>
+let curTheme = 'light';
+function toggleTheme() {
+  curTheme = curTheme === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', curTheme);
+  renderCharts();
+}
+
+const palette = {
+  light: { accent: '#8a9a8e', accent2: '#7b8fa0', accent3: '#b08d7a', gold: '#b9a06a', red: '#b87070', green: '#7a9a7a', grid: '#e5ddd5', text: '#7a706a' },
+  dark:  { accent: '#8a9a8e', accent2: '#8fabbf', accent3: '#c9a48e', gold: '#c9b07a', red: '#c08080', green: '#8aaa8a', grid: '#3e3a35', text: '#a09890' }
+};
+
+let charts = {};
+function renderCharts() {
+  Object.values(charts).forEach(c => c && c.destroy && c.destroy());
+  charts = {};
+  const p = palette[curTheme];
+  Chart.defaults.color = p.text;
+  Chart.defaults.borderColor = p.grid;
+
+  const quarters = ['Q1 25','Q2 25','Q3 25','Q4 25','Q1 26'];
+  const rev = [21.89, 22.45, 23.04, 22.52, 24.06];
+  const opGrowth = [4.2, 5.1, 5.8, 5.0, 6.4];
+  charts.rev = new Chart(document.getElementById('chartRev'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { type:'bar', label: '营收 ($B)', data: rev, backgroundColor: p.accent + 'CC', yAxisID: 'y' },
+      { type: 'line', label: '运营增速 %', data: opGrowth, borderColor: p.red, backgroundColor: p.red, tension: 0.3, yAxisID: 'y1' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false }, y1: { position: 'right', grid: { drawOnChartArea: false }, ticks: { callback: v => v + '%' } } } }
+  });
+
+  charts.drugs = new Chart(document.getElementById('chartDrugs'), {
+    type: 'bar',
+    data: {
+      labels: ['Darzalex', 'Tremfya', 'Erleada', 'Stelara', 'Imbruvica', 'Carvykti', 'Spravato', 'Talvey'],
+      datasets: [{ label: 'Q1 26 销售 ($M)', data: [3964, 1608, 949, 656, 660, 597, 468, 152], backgroundColor: [p.green, p.accent3, p.green, p.red, p.gold, p.green, p.green, p.green].map(c => c + 'CC') }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', plugins: { legend: { display: false } } }
+  });
+
+  const years = ['2022','2023','2024','2025','2026'];
+  charts.div = new Chart(document.getElementById('chartDiv'), {
+    type: 'bar',
+    data: { labels: years, datasets: [
+      { label: '每季度股息 ($)', data: [1.13, 1.19, 1.24, 1.30, 1.34], backgroundColor: p.green + 'CC' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false } } }
+  });
+
+  charts.segment = new Chart(document.getElementById('chartSegment'), {
+    type: 'doughnut',
+    data: {
+      labels: ['创新医药 Pharma', '医疗科技 MedTech'],
+      datasets: [{ data: [15.43, 8.64], backgroundColor: [p.accent2, p.gold] }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { font: { size: 12 } } } } }
+  });
+
+  buildSankey();
+}
+
+function buildSankey() {
+  const p = palette[curTheme];
+  const labels = ['营收 $24.06', '创新医药 $15.43', '医疗科技 $8.64', '营业成本+费用 $18.07', '税前利润 $5.99', '所得税&其他 $0.75', '净利润 $5.24', '股息 $3.2', '留存 $2.0'];
+  const data = {
+    type: 'sankey',
+    orientation: 'h',
+    node: { pad: 14, thickness: 18, line: { color: p.grid, width: 0.5 }, label: labels, color: [p.accent, p.accent2, p.gold, p.red, p.green, p.red, p.green, p.accent3, p.accent] },
+    link: {
+      source: [0, 0, 1, 1, 2, 2, 4, 4, 6, 6],
+      target: [1, 2, 3, 4, 3, 4, 5, 6, 7, 8],
+      value:  [15.43, 8.64, 11.6, 3.83, 6.47, 2.16, 0.75, 5.24, 3.2, 2.04],
+      color: [p.accent2+'66', p.gold+'66', p.red+'55', p.green+'55', p.red+'55', p.green+'55', p.red+'55', p.green+'66', p.accent3+'66', p.accent+'55']
+    }
+  };
+  const layout = { font: { size: 11, color: p.text }, paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)', margin: { l: 10, r: 10, t: 10, b: 10 } };
+  Plotly.react('sankey', [data], layout, { displayModeBar: false, responsive: true });
+}
+
+renderCharts();
+</script>
+
+</body>
+</html>
