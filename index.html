@@ -76,7 +76,7 @@ body {
   transition: background 0.4s, color 0.3s;
   -webkit-font-smoothing: antialiased;
 }
-.container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+.container { max-width: 1700px; margin: 0 auto; padding: 0 28px; }
 
 /* ── HERO（压缩版） ── */
 .hero {
@@ -174,7 +174,7 @@ body {
   align-items: center;
 }
 .calendar-col .cal-header { display: grid; padding: 10px 14px; }
-.calendar-col .cal-row { padding: 9px 14px; }
+.calendar-col .cal-row { padding: 9px 14px; color: inherit; text-decoration: none; cursor: pointer; }
 .calendar-col .cal-date { white-space: nowrap; font-size: 0.74rem; }
 .calendar-col .cal-date .day-of-week { display: none; }
 .calendar-col .cal-ticker,
@@ -973,7 +973,15 @@ function renderCalendar() {
     return;
   }
 
-  const dayNames = ['周日','周一','周二','周三','周四','周五','周六'];
+  // 映射：该股票分析页 —— 先从「已发布」事件 detail 提取报告链接，再按名称回退匹配 reports[]
+  const reportByXueqiu = {};
+  calendar.forEach(ev => {
+    const m = (ev.detail || '').match(/href="(haitu\/reports\/[^"]+\.html)"/);
+    if (m) reportByXueqiu[ev.xueqiu] = m[1];
+  });
+  const findReport = (e) => reportByXueqiu[e.xueqiu]
+    || ((reports || []).find(r => r.title && e.ticker && r.title.includes(e.ticker)) || {}).file
+    || null;
 
   container.innerHTML = filtered.map(e => {
     const d = new Date(e.date);
@@ -983,21 +991,32 @@ function renderCalendar() {
       isPast ? 'past' : (isToday ? 'today' : 'upcoming'),
       (e.type === 'earnings' || e.type === 'earnings-notice') ? 'is-earnings' : ''
     ].filter(Boolean).join(' ');
-    const dow = dayNames[d.getDay()];
-    const todayLabel = isToday ? ' <span style="color:var(--accent-gold);font-weight:700;">· 今天</span>' : '';
+    // 整行可点击 → 该股票分析页；无分析页则回退到雪球行情（新标签打开）
+    const report = findReport(e);
+    const href = report || ('https://xueqiu.com/S/' + e.xueqiu);
+    const ext = report ? '' : ' target="_blank" rel="noopener"';
+    const tip = report ? '查看海图研判' : '雪球行情';
     return `
-      <div class="cal-row ${cls}">
-        <div class="cal-date">${e.date}<span class="day-of-week">${dow}${todayLabel}</span></div>
+      <a class="cal-row ${cls}" href="${href}"${ext} title="${e.ticker} · ${tip}">
+        <div class="cal-date">${e.date}</div>
         <div class="cal-ticker">${e.ticker}</div>
         <div><span class="cal-type ${e.type}">${e.typeLabel}</span></div>
-        <div class="cal-detail">${e.detail}</div>
-        <div class="cal-action">
-          <a href="https://xueqiu.com/S/${e.xueqiu}" target="_blank" rel="noopener">雪球 →</a>
-        </div>
-      </div>
+      </a>
     `;
   }).join('');
+
+  scrollCalToToday();
 }
+
+// 把日历滚动到「今天」（过去事件仍在上方，可向上滚动）
+function scrollCalToToday() {
+  const container = document.getElementById('calendarRows');
+  if (!container) return;
+  const anchor = container.querySelector('.cal-row.today') || container.querySelector('.cal-row.upcoming');
+  if (!anchor) return;
+  container.scrollTop += anchor.getBoundingClientRect().top - container.getBoundingClientRect().top;
+}
+window.addEventListener('load', scrollCalToToday);
 // 事件类型筛选 — 按钮点击
 document.querySelectorAll('.cal-filter-btn').forEach(btn => {
   btn.addEventListener('click', () => {
