@@ -166,15 +166,22 @@ body {
   overflow: hidden;
 }
 .calendar-col #calendarRows { overflow-y: auto; }
-/* 窄侧栏：日历行改为紧凑竖排 */
-.calendar-col .cal-header { display: none; }
+/* 侧栏日历：每条一行 · 时间 / 股票 / 事件 */
+.calendar-col .cal-header,
 .calendar-col .cal-row {
-  grid-template-columns: 1fr;
-  gap: 5px;
-  padding: 12px 18px;
+  grid-template-columns: 80px 64px 1fr;
+  gap: 8px;
+  align-items: center;
 }
-.calendar-col .cal-action { text-align: left; }
-.calendar-col .cal-detail { font-size: 0.82rem; }
+.calendar-col .cal-header { display: grid; padding: 10px 14px; }
+.calendar-col .cal-row { padding: 9px 14px; }
+.calendar-col .cal-date { white-space: nowrap; font-size: 0.74rem; }
+.calendar-col .cal-date .day-of-week { display: none; }
+.calendar-col .cal-ticker,
+.calendar-col .cal-row.is-earnings .cal-ticker { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.75rem; }
+.calendar-col .cal-type { font-size: 0.66rem; padding: 2px 7px; white-space: nowrap; }
+.calendar-col .cal-detail,
+.calendar-col .cal-action { display: none; }
 @media (max-width: 900px) {
   .main-layout { grid-template-columns: 1fr; gap: 0; }
   .calendar-col { position: static; }
@@ -511,11 +518,9 @@ footer p { margin-bottom: 6px; }
           <span class="cal-filter-count" id="calFilterCount"></span>
         </div>
         <div class="cal-header">
-          <div>日期</div>
-          <div>标的</div>
+          <div>时间</div>
+          <div>股票</div>
           <div>事件</div>
-          <div>说明</div>
-          <div style="text-align:right;">链接</div>
         </div>
         <div id="calendarRows"></div>
       </div>
