@@ -150,10 +150,41 @@ body {
   border-radius: 2px;
 }
 
+/* ── 两栏主布局：报告卡片在左 · 时间列表在右 ── */
+.main-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 30px;
+  align-items: start;
+}
+.main-layout > .section { padding-top: 32px; }
+.calendar-col { position: sticky; top: 16px; }
+.calendar-col .calendar-panel {
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 120px);
+  overflow: hidden;
+}
+.calendar-col #calendarRows { overflow-y: auto; }
+/* 窄侧栏：日历行改为紧凑竖排 */
+.calendar-col .cal-header { display: none; }
+.calendar-col .cal-row {
+  grid-template-columns: 1fr;
+  gap: 5px;
+  padding: 12px 18px;
+}
+.calendar-col .cal-action { text-align: left; }
+.calendar-col .cal-detail { font-size: 0.82rem; }
+@media (max-width: 900px) {
+  .main-layout { grid-template-columns: 1fr; gap: 0; }
+  .calendar-col { position: static; }
+  .calendar-col .calendar-panel { max-height: none; }
+}
+
 /* ── REPORT CARDS ── */
 .report-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 22px;
 }
 .report-card {
@@ -463,30 +494,34 @@ footer p { margin-bottom: 6px; }
 
 <div class="container">
 
-  <section class="section first">
-    <div class="section-title">🗓 海图日历 · 报告标的关键事件</div>
-    <div class="calendar-panel">
-      <div class="cal-filter-bar">
-        <button class="cal-filter-btn active" data-filter="all">全部</button>
-        <button class="cal-filter-btn" data-filter="earnings">📊 财报</button>
-        <button class="cal-filter-btn" data-filter="dividend">💰 分红</button>
-        <span class="cal-filter-count" id="calFilterCount"></span>
-      </div>
-      <div class="cal-header">
-        <div>日期</div>
-        <div>标的</div>
-        <div>事件</div>
-        <div>说明</div>
-        <div style="text-align:right;">链接</div>
-      </div>
-      <div id="calendarRows"></div>
-    </div>
-  </section>
+  <div class="main-layout">
 
-  <section class="section">
-    <div class="section-title">🌙 海图研判 · 按发布时间排序</div>
-    <div class="report-grid" id="reportGrid"></div>
-  </section>
+    <section class="section first reports-col">
+      <div class="section-title">🌙 海图研判 · 按发布时间排序</div>
+      <div class="report-grid" id="reportGrid"></div>
+    </section>
+
+    <aside class="section first calendar-col">
+      <div class="section-title">🗓 海图日历 · 关键事件</div>
+      <div class="calendar-panel">
+        <div class="cal-filter-bar">
+          <button class="cal-filter-btn active" data-filter="all">全部</button>
+          <button class="cal-filter-btn" data-filter="earnings">📊 财报</button>
+          <button class="cal-filter-btn" data-filter="dividend">💰 分红</button>
+          <span class="cal-filter-count" id="calFilterCount"></span>
+        </div>
+        <div class="cal-header">
+          <div>日期</div>
+          <div>标的</div>
+          <div>事件</div>
+          <div>说明</div>
+          <div style="text-align:right;">链接</div>
+        </div>
+        <div id="calendarRows"></div>
+      </div>
+    </aside>
+
+  </div>
 
   <section class="section">
     <div class="section-title">📜 关于海图夜读</div>
@@ -773,11 +808,27 @@ function renderReports() {
     return;
   }
   reports.sort((a, b) => b.modTime - a.modTime);
+  // 卡片描述只取一句话：剥离 HTML、去掉与标题重复的「公司名 Period：」前缀、截到首句并压缩为紧凑一行
+  const oneSentence = (html) => {
+    let text = (html || '').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+    const colon = text.indexOf('：');
+    if (colon > 0 && colon <= 20) text = text.slice(colon + 1).trim();
+    const m = text.match(/^[^。]*。/);
+    let s = m ? m[0] : text;
+    const MAX = 42;
+    if (s.length > MAX) {
+      let cut = s.slice(0, MAX);
+      const b = Math.max(cut.lastIndexOf('·'), cut.lastIndexOf('，'), cut.lastIndexOf('、'));
+      if (b >= 24) cut = cut.slice(0, b);
+      s = cut.replace(/[·，、（\s]+$/, '') + '…';
+    }
+    return s;
+  };
   grid.innerHTML = reports.map(r => `
     <a class="report-card" href="${r.file}">
       <div class="ticker">${r.ticker}</div>
       <h3>${r.title}</h3>
-      <div class="desc">${r.desc}</div>
+      <div class="desc">${oneSentence(r.desc)}</div>
       <div class="meta">
         <span class="tag ${r.tagClass}">${r.tag}</span>
         <span>${r.date}</span>
