@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-07-10 · WB Q1 2026 财报已于 2026-05-28 发布 -->
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>微博 Weibo WB Q1 2026 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+<meta name="description" content="中国第一'公共讨论场'——MAU 5.62 亿 + DAU 2.54 亿，类 X(Twitter) 开放社交平台。Q1 广告 +9% 转正拐点，但 GAAP 净利 -68%（投资减值）、Non-GAAP -23%、利润率 33%→28%、年度股息砍 26%。Forward P/E 6.8x + P/B 0.5x + 8% 股息的深度价值，但盈利质量恶化正侵蚀该逻辑。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微博 Weibo WB Q1 2026 海图研判 · 海图夜读">
+<meta property="og:description" content="中国第一'公共讨论场'——MAU 5.62 亿 + DAU 2.54 亿，类 X(Twitter) 开放社交平台。Q1 广告 +9% 转正拐点，但 GAAP 净利 -68%（投资减值）、Non-GAAP -23%、利润率 33%→28%、年度股息砍 26%。Forward P/E 6.8x + P/B 0.5x + 8% 股息的深度价值，但盈利质量恶化正侵蚀该逻辑。">
+<meta property="og:image" content="https://jacexie.github.io/haitu/assets/og/wb-q1-2026.png">
+<meta property="og:url" content="https://jacexie.github.io/haitu/reports/wb-q1-2026.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="微博 Weibo WB Q1 2026 海图研判 · 海图夜读">
+<meta name="twitter:description" content="中国第一'公共讨论场'——MAU 5.62 亿 + DAU 2.54 亿，类 X(Twitter) 开放社交平台。Q1 广告 +9% 转正拐点，但 GAAP 净利 -68%（投资减值）、Non-GAAP -23%、利润率 33%→28%、年度股息砍 26%。Forward P/E 6.8x + P/B 0.5x + 8% 股息的深度价值，但盈利质量恶化正侵蚀该逻辑。">
+<meta name="twitter:image" content="https://jacexie.github.io/haitu/assets/og/wb-q1-2026.png">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root { --bg:#f5f0eb; --bg2:#ece6df; --card:#ffffff; --card2:#f8f5f1; --border:#d9d0c7; --text:#4a4340; --text2:#7a706a; --text3:#a89f98; --accent:#8a9a8e; --accent2:#7b8fa0; --accent3:#b08d7a; --rose:#c09090; --gold:#b9a06a; --red:#b87070; --green:#7a9a7a; --shadow:rgba(0,0,0,0.06); --chart-grid:#e5ddd5; }
+[data-theme="dark"] { --bg:#1e1c1a; --bg2:#28251f; --card:#2e2a25; --card2:#363230; --border:#4a4540; --text:#d4ccc4; --text2:#a09890; --text3:#706860; --accent:#8a9a8e; --accent2:#8fabbf; --accent3:#c9a48e; --rose:#c09090; --gold:#c9b07a; --red:#c08080; --green:#8aaa8a; --shadow:rgba(0,0,0,0.3); --chart-grid:#3e3a35; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', serif; line-height: 1.75; font-size: 14.5px; transition: background .35s, color .35s; }
+a { color: var(--accent2); text-decoration: none; }
+.theme-bar { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); }
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+.toggle-switch { position: relative; width: 44px; height: 22px; background: var(--border); border-radius: 11px; cursor: pointer; transition: background .3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: var(--card); border-radius: 50%; transition: transform .3s; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+
+.hero { padding: 48px 24px 36px; text-align: center; border-bottom: 1px solid var(--border); }
+.hero-tag { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 3px 14px; border-radius: 20px; margin-bottom: 18px; }
+.hero h1 { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.pill { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: 'Segoe UI', sans-serif; font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow); }
+.pill strong { color: var(--text); }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle { font-size: 18px; font-weight: 700; color: var(--accent3); margin-bottom: 20px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+.stitle::before { content: ''; display: block; width: 4px; height: 20px; background: var(--accent3); border-radius: 2px; }
+
+.haitu-quip { display: flex; align-items: center; gap: 18px; background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 18px 24px; margin: 24px 0; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-quote { flex: 1; }
+.haitu-portrait { font-size: 15px; line-height: 1.65; color: var(--text); margin-bottom: 6px; font-weight: 600; }
+.haitu-rating-line { font-size: 13px; color: var(--text2); font-family: 'Segoe UI', sans-serif; }
+.rating-badge { display: inline-block; padding: 2px 12px; border-radius: 12px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; margin-left: 4px; }
+.rating-cond-buy { background: rgba(185,160,106,.18); color: var(--gold); }
+
+.haitu-essay { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 28px 32px; margin: 24px 0 20px; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-essay-header { display: flex; align-items: center; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.haitu-avatar-sm { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); background: var(--red); box-shadow: 0 2px 8px rgba(184,112,112,0.2); }
+.haitu-name-lg { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 28px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 4px; }
+.haitu-essay-tag { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; }
+.haitu-essay-body { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 15px; line-height: 2.0; color: var(--text); }
+.haitu-essay-body p { margin-bottom: 14px; }
+.haitu-essay-body p.lead { font-size: 16px; font-style: italic; color: var(--text2); margin-bottom: 18px; }
+.haitu-essay-body strong { color: var(--text); font-weight: 700; }
+.haitu-essay-body h4 { font-size: 14px; color: var(--accent3); margin: 18px 0 10px; font-family: 'Segoe UI', sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+.haitu-sign { text-align: right; margin-top: 18px; font-family: 'Georgia', serif; font-size: 14px; color: var(--text2); font-style: italic; }
+.haitu-disc { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); font-style: italic; line-height: 1.7; }
+
+.stock-snap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px; }
+.snap-item { text-align: center; }
+.snap-label { font-family: 'Segoe UI', sans-serif; font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.snap-val { font-family: 'Segoe UI', sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+.snap-val.up { color: var(--green); }
+.snap-val.dn { color: var(--red); }
+.snap-sub { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow); }
+.kpi-l { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.badge { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+.up { background: rgba(122,154,122,.15); color: var(--green); }
+.dn { background: rgba(184,112,112,.15); color: var(--red); }
+.nt { background: rgba(123,143,160,.15); color: var(--accent2); }
+
+.tbl-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow); }
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI', sans-serif; font-size: 13px; }
+.tbl th { background: var(--card2); color: var(--text3); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); background: var(--card2); }
+
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); }
+.ctitle { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 260px; }
+
+.cmt { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 26px; line-height: 1.95; font-size: 14px; box-shadow: 0 1px 4px var(--shadow); color: var(--text); }
+.cmt p { margin-bottom: 14px; }
+.cmt p:last-child { margin-bottom: 0; }
+.cmt strong { color: var(--text); }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+
+.moat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+.moat-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); border-left: 4px solid var(--accent); }
+.moat-card.wide { border-left-color: var(--green); }
+.moat-card.narrow { border-left-color: var(--gold); }
+.moat-card.none { border-left-color: var(--red); }
+.moat-card h5 { font-size: 13px; color: var(--text); margin-bottom: 6px; }
+.moat-card .moat-rate { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.moat-card.wide .moat-rate { background: rgba(122,154,122,.18); color: var(--green); }
+.moat-card.narrow .moat-rate { background: rgba(185,160,106,.18); color: var(--gold); }
+.moat-card.none .moat-rate { background: rgba(184,112,112,.18); color: var(--red); }
+.moat-card p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+
+.ec-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 14px; box-shadow: 0 1px 3px var(--shadow); }
+.ec-badge { flex-shrink: 0; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-top: 2px; font-family: 'Segoe UI', sans-serif; }
+.ec-bull { background: rgba(122,154,122,.18); color: var(--green); }
+.ec-bear { background: rgba(184,112,112,.18); color: var(--red); }
+.ec-neut { background: rgba(185,160,106,.18); color: var(--gold); }
+.ec-body { flex: 1; }
+.ec-title { font-weight: 600; color: var(--text); margin-bottom: 3px; font-size: 14px; }
+.ec-note { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.dcf-note { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.dcf-note strong { color: var(--text); }
+
+.scorecard { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow); }
+.score-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.score-card { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px; }
+.score-letter { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Segoe UI', sans-serif; font-weight: 800; font-size: 22px; flex-shrink: 0; border: 3px solid; }
+.s-a { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.12); }
+.s-bp { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.06); }
+.s-b { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.10); }
+.s-bm { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.06); }
+.s-c { color: var(--red); border-color: var(--red); background: rgba(184,112,112,.08); }
+.score-body h4 { font-size: 13px; color: var(--text); margin-bottom: 4px; }
+.score-body p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+.flag-row { margin-top: 16px; padding: 12px 16px; background: rgba(184,112,112,.08); border: 1px solid rgba(184,112,112,.3); border-radius: 8px; font-size: 13px; color: var(--text2); }
+.flag-row strong { color: var(--red); }
+
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center; box-shadow: 0 1px 4px var(--shadow); }
+.pbox .pl { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; }
+.pbox .pv { font-family: 'Segoe UI', sans-serif; font-size: 28px; font-weight: 800; margin-bottom: 5px; }
+.pbox .pn { font-size: 12px; color: var(--text3); line-height: 1.5; }
+.pc { color: var(--red); } .pf { color: var(--gold); } .ps { color: var(--green); }
+
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.risk-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); position: relative; overflow: hidden; }
+.risk-card::before { content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent); }
+.risk-card.r1::before { background: var(--green); }
+.risk-card.r2::before { background: rgba(122,154,122,.6); }
+.risk-card.r3::before { background: var(--gold); }
+.risk-card.r4::before { background: var(--rose); }
+.risk-card.r5::before { background: var(--red); }
+.risk-card h5 { font-size: 14px; margin-bottom: 6px; color: var(--text); }
+.risk-score { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.r1 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r2 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r3 .risk-score { background: rgba(185,160,106,.18); color: var(--gold); }
+.r4 .risk-score { background: rgba(192,144,144,.18); color: var(--rose); }
+.r5 .risk-score { background: rgba(184,112,112,.18); color: var(--red); }
+.risk-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+footer { background: var(--card2); border-top: 1px solid var(--border); padding: 24px; text-align: center; color: var(--text3); font-size: 12px; margin-top: 40px; line-height: 1.8; }
+@media (max-width: 768px) { .cgrid,.pgrid { grid-template-columns: 1fr; } .hero h1 { font-size: 22px; } .kpi-grid { grid-template-columns: 1fr 1fr; } .stock-snap { grid-template-columns: 1fr 1fr; } .haitu-essay-header { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/WB" target="_blank" rel="noopener" title="在雪球查看 WB 实时行情">雪球 WB</a>
+  </div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">Q1 2026 财报发布 · 2026-05-28 &nbsp;|&nbsp; 海图研判 · 2026-07-10</div>
+  <h1>微博 Weibo WB · Q1 2026 财报深度分析</h1>
+  <div class="hero-sub">NASDAQ: WB &nbsp;|&nbsp; 财季截至 2026-03-31 &nbsp;|&nbsp; 价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill">股价 <strong>$7.40</strong> <span style="color:var(--red)">逼近 52 周低</span></div>
+    <div class="pill">市值 <strong>~$1.9B</strong></div>
+    <div class="pill">Q1 营收 <strong>$421M</strong> <span style="color:var(--green)">+6%</span></div>
+    <div class="pill">广告 <strong>$370M</strong> <span style="color:var(--green)">+9% 拐点</span></div>
+    <div class="pill">GAAP 净利 <strong>$35M</strong> <span style="color:var(--red)">-68% 投资减值</span></div>
+    <div class="pill">Forward P/E <strong>~6.8x</strong> <span style="color:var(--accent3)">P/B 0.5x</span></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 海图页首短评 ═══ -->
+<div class="haitu-quip">
+  <div class="haitu-quote">
+    <div class="haitu-portrait">中国第一"公共讨论场"——MAU 5.62 亿 + DAU 2.54 亿，类 X(Twitter) 的开放式社交平台。Q1 广告 +9% 是营收拐点向上，但 GAAP 净利 -68%（投资减值噪音）、Non-GAAP -23%、Non-GAAP 营业利润率 33%→28%、年度股息砍 26%——盈利质量正在恶化，侵蚀"深度价值 + 高息 + 破净"逻辑。Forward P/E 6.8x + P/B 0.5x + 8% 股息仍是全球社交股最低区。</div>
+    <div class="haitu-rating-line">评级：<span class="rating-badge rating-cond-buy">有条件买入</span>（从买入下调）· 12 个月目标价 $9（+22%）· 广告拐点 + 深度价值 + 高息，对垒利润质量恶化 + 股息缩水 + 用户缓降 + 中概监管</div>
+  </div>
+</div>
+
+<!-- ═══ 市场数据快照 ═══ -->
+<div class="section">
+  <div class="stitle">市场数据快照（2026-07-10）</div>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">ADS 股价（美元）</div><div class="snap-val">$7.40</div><div class="snap-sub">逼近 52 周低 · 财报后走弱</div></div>
+    <div class="snap-item"><div class="snap-label">市值</div><div class="snap-val">~$1.9B</div><div class="snap-sub">EV 更低 ~$1.5B</div></div>
+    <div class="snap-item"><div class="snap-label">TTM GAAP P/E</div><div class="snap-val">~5.7x</div><div class="snap-sub">投资减值放大波动</div></div>
+    <div class="snap-item"><div class="snap-label">Forward P/E</div><div class="snap-val up">~6.8x</div><div class="snap-sub">Non-GAAP ~4-5x</div></div>
+    <div class="snap-item"><div class="snap-label">P/B</div><div class="snap-val up">~0.5x</div><div class="snap-sub">破净约 50%</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间</div><div class="snap-val dn">$7.4 - $13.0</div><div class="snap-sub">最低区间</div></div>
+    <div class="snap-item"><div class="snap-label">股息率</div><div class="snap-val up">~8%</div><div class="snap-sub">FY25 $0.61/ADS · 砍 26%</div></div>
+    <div class="snap-item"><div class="snap-label">FCF Yield</div><div class="snap-val up">~20%</div><div class="snap-sub">轻资产</div></div>
+    <div class="snap-item"><div class="snap-label">现金 + 短投</div><div class="snap-val">$2.59B</div><div class="snap-sub">但有息负债 $1.87B</div></div>
+    <div class="snap-item"><div class="snap-label">真实净现金</div><div class="snap-val nt">+$0.73B</div><div class="snap-sub">⚠️非"现金堡垒"</div></div>
+    <div class="snap-item"><div class="snap-label">EV/EBITDA</div><div class="snap-val up">~3x</div><div class="snap-sub">全球社交最低</div></div>
+  </div>
+  <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">数据时点：股价约 2026-07 上旬 · 财务数据来源 Weibo Q1 2026 官方新闻稿（SEC 6-K Ex-99.1，2026-05-28 发布）· 财报本币人民币，汇率约 RMB7.25=US$1，本报告以官方美元口径为主。⚠️ Weibo 有息负债 $1.87B（长期贷款 $795M + 无担保优先票据 $746M + 可转债 $325M），净现金仅 +$0.73B——不是"现金堡垒"。</p>
+</div>
+
+<!-- ═══ Q1 KPI ═══ -->
+<div class="section">
+  <div class="stitle">Q1 2026 核心业绩（USD · 截至 2026-03-31）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">总净营收</div><div class="kpi-v">$421.3M</div><span class="badge up">+6.2% YoY</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">恒定汇率仅 +1% · 汇率放大</div></div>
+    <div class="kpi"><div class="kpi-l">广告及营销</div><div class="kpi-v">$369.8M</div><span class="badge up">+9.0%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">占 88% · 拐点向上</div></div>
+    <div class="kpi"><div class="kpi-l">增值服务 VAS</div><div class="kpi-v">$51.6M</div><span class="badge dn">-10.7%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">游戏疲软 · 持续萎缩</div></div>
+    <div class="kpi"><div class="kpi-l">非阿里广告</div><div class="kpi-v">$326.5M</div><span class="badge up">+10%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">主体 · 阿里广告仅 +2%</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 营业利润</div><div class="kpi-v">$110.9M</div><span class="badge nt">26% 利润率</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">经营基本盘稳</div></div>
+    <div class="kpi"><div class="kpi-l">Non-GAAP 营业利润</div><div class="kpi-v">$119.8M</div><span class="badge dn">28% 利润率</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">去年 33% · 压缩 5pct</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 净利润</div><div class="kpi-v">$34.7M</div><span class="badge dn">-67.5%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">⚠️投资减值噪音 · 非经营恶化</div></div>
+    <div class="kpi"><div class="kpi-l">Non-GAAP 净利润</div><div class="kpi-v">$91.9M</div><span class="badge dn">-23.1%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">真实经营口径</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP EPS/ADS</div><div class="kpi-v">$0.14</div><span class="badge dn">去年 $0.41</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">Non-GAAP $0.34（去年 $0.45）</div></div>
+    <div class="kpi"><div class="kpi-l">MAU（月活）</div><div class="kpi-v">5.62 亿</div><span class="badge dn">缓降</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">567→562M</div></div>
+    <div class="kpi"><div class="kpi-l">DAU（日活）</div><div class="kpi-v">2.54 亿</div><span class="badge up">环比回升</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">DAU/MAU 45.2%（黏性升）</div></div>
+    <div class="kpi"><div class="kpi-l">经营现金流</div><div class="kpi-v">~$164M</div><span class="badge up">稳健</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">Capex 仅 $11.9M</div></div>
+  </div>
+</div>
+
+<!-- ═══ 看穿框 ═══ -->
+<div class="section">
+  <div class="stitle">本季必看 · 广告拐点向上 vs 盈利质量拐点向下</div>
+  <div class="cmt">
+    <p><strong>Weibo Q1 是"营收拐点向上、盈利质量拐点向下"的一份分裂财报——两个方向必须分开看。</strong></p>
+    <p><strong>好消息：广告增速拐点向上。</strong> FY2025 全年广告持平 → Q1 2026 广告 <span class="hl-t">+9%（恒定汇率 +3%）</span>，非阿里广告 +10%，驱动来自互联网服务/软件、汽车、本地生活（外卖大战）。这是从"企稳"转为"明显回升"的正面拐点，也是本季最大亮点。AI 生成广告素材消费占比约 40%、信息流 eCPM 双位数增长。</p>
+    <p><strong>坏消息一：GAAP 净利 -68% 是投资减值噪音，但真实经营也在弱化。</strong> GAAP 净利 $34.7M（-68%）暴跌，主因非经营性：<span class="warn-t">投资公允价值损失 -$35M + 权益法投资损失 -$22M + 净利息及其他损失 -$25M</span>（去年这三项为正收益，同比逆转约 -$82M）。剔除后 Non-GAAP 净利 $91.9M，但仍 -23%——<span class="warn-t">Non-GAAP 营业利润率从 33% 压到 28%</span>，总成本 +13%（加大变现投入），"增长换利润率"。</p>
+    <p><strong>坏消息二：年度股息砍 26%。</strong> FY2025 年度股息 $0.61/ADS（约 $149.7M），较 FY2024 的 $0.82/ADS（约 $200M）<span class="warn-t">下调 26%</span>。上次报告以"稳定 30% 利润率 + 高息"为基石，本季被利润率压缩 + 股息缩水双双打破。这是本次从"买入"下调至"有条件买入"的核心原因——<strong>深度价值逻辑还在，但支撑它的盈利质量和股息在恶化。</strong></p>
+  </div>
+</div>
+
+<!-- ═══ 趋势图 ═══ -->
+<div class="section">
+  <div class="stitle">关键指标趋势</div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">广告 vs 增值服务营收（$M · 分裂）</div><div class="cwrap"><canvas id="chartRev"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">GAAP vs Non-GAAP 净利（$M · 投资噪音）</div><div class="cwrap"><canvas id="chartProfit"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">MAU/DAU 趋势（亿）</div><div class="cwrap"><canvas id="chartUsers"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">年度每股股息（$/ADS · 砍 26%）</div><div class="cwrap"><canvas id="chartDiv"></canvas></div></div>
+  </div>
+</div>
+
+<!-- ═══ 桑基图 ═══ -->
+<div class="section">
+  <div class="stitle">Q1 2026 资金流向桑基图（$M）</div>
+  <div class="ccard">
+    <div id="sankey" style="width:100%;height:480px;"></div>
+    <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">说明：总营收 $421.3 → 广告 $369.8 + 增值服务 $51.6 → 营业成本+费用 $310.4 + 营业利润 $110.9 → 非经营损失 $84.9（投资 FV -$35 + 权益法 -$22 + 利息其他 -$25）+ 税 $15.7 + GAAP 净利 $34.7。注：GAAP 净利 -68% 几乎全部由非经营性投资损失造成（去年同期为收益，高基数逆转），Non-GAAP 净利实为 $91.9M。Capex 仅 $11.9M，FCF ~$152M（轻资产）。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 1 ═══ -->
+<div class="section">
+  <div class="stitle">模块 1 · 公司概览与背景</div>
+  <div class="cmt">
+    <p><strong>微博公司 / Weibo Corporation</strong>（NASDAQ: WB，2014 IPO；HKEX 二次上市），中国最大的开放式社交媒体平台——<strong>类 X(Twitter) 的"公共讨论场"</strong>，MAU 5.62 亿、DAU 2.54 亿。由新浪（SINA）分拆，阿里巴巴为战略股东。财年为日历年。</p>
+    <p><strong>核心叙事</strong>：Weibo 是<span class="hl-t">中国唯一具规模的公开广场式社交平台</span>——追星、突发新闻、公共讨论的主场，靠广告（88% 营收）+ 增值服务（会员/直播/游戏）赚钱。这是一门 <span class="hl-t">~72% 毛利率、28% Non-GAAP 营业利润率、轻资产（Capex 极低）、FCF 转化极高</span>的生意。<span class="warn-t">但它带着三重折价</span>：中概监管/退市尾部风险、用户被抖音/小红书结构性缓慢蚕食、以及本季新增的盈利质量恶化。当前 Forward P/E 6.8x、P/B 0.5x（破净）、股息率 8%——是全球社交/广告股最便宜的之一。</p>
+    <p><strong>股权结构</strong>：新浪（SINA）控股 + 阿里巴巴战略持股（阿里广告本季仅 +2%，偏弱）。<span class="warn-t">关联方结构复杂</span>——需留意与新浪的往来款、阿里广告投放意愿。</p>
+    <p><strong>能力圈检验</strong>：广告社交生意相对清晰（看得懂）。但<span class="warn-t">两块黑箱：(1) 战略投资组合的公允价值波动直接冲击 GAAP 利润与"净金融资产"缓冲（本季 -$35M FV 损失 + -$22M 权益法损失）；(2) MAU 缓降是否会加速——公共讨论场护城河窄而稳，但抖音/小红书持续挤压</span>。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 2 ═══ -->
+<div class="section">
+  <div class="stitle">模块 2 · 管理层评估</div>
+  <div class="bscore">
+    <div class="circle cw">B+</div>
+    <div class="bd">
+      <h4>王高飞 · CEO（长期稳定）</h4>
+      <p>王高飞长期执掌微博，团队稳定。本季表态新产品发布有望驱动广告收入，并把 AI 用于广告素材生成与定向投放、上线"AI 内容创作中心"。<span class="hl-t">务实但坦诚承认"AIGC 内容公众接受度仍在评估，尚未大规模商业化"</span>。管理层在守住公共讨论场基本盘 + 广告变现上执行稳健，但本季利润率压缩 + 股息缩水反映在"增长与股东回报"间的权衡趋于保守。</p>
+    </div>
+  </div>
+  <div class="bscore">
+    <div class="circle cw">B</div>
+    <div class="bd">
+      <h4>资本配置 · 高息但股息缩水 + 无回购</h4>
+      <p>Weibo 派高股息（FY2025 $0.61/ADS，约 $149.7M），但<span class="warn-t">较 FY2024 的 $0.82 砍 26%</span>——股息缩水是本季重要负面。本季<strong>无股票回购执行、无新回购授权</strong>，管理层仅表示"在股东回报与 AI/内容生态投入间平衡"。<span class="warn-t">资本返还节奏未加速，反而在收缩</span>——对深度价值 + 高息投资逻辑是打击。</p>
+    </div>
+  </div>
+  <div class="cmt">
+    <p><strong>长期主义测试</strong>：中——广告变现 + AI 应用方向对，但战略投资的公允价值波动侵蚀利润与净金融资产缓冲，管理层对股东回报趋于保守。<strong>利益绑定</strong>：新浪 + 阿里控股结构，中小股东利益排序需关注。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 3 ═══ -->
+<div class="section">
+  <div class="stitle">模块 3 · 商业模式深度解析</div>
+  <div class="cmt">
+    <p><strong>海图"一句话测试"</strong>：<span class="hl-t">Weibo 靠 5.62 亿月活的公开讨论场卖广告——把明星/新闻/公共话题的注意力变现给广告主，赚 72% 毛利率的钱。</span></p>
+    <p><strong>Q1 2026 收入拆分</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>分部</th><th>Q1 25</th><th>Q1 26</th><th>YoY</th><th>占比</th></tr>
+        <tr><td>广告及营销</td><td>$339.1M</td><td>$369.8M</td><td><span class="badge up">+9.0%</span></td><td>87.8%</td></tr>
+        <tr><td>　其中非阿里广告</td><td>—</td><td>$326.5M</td><td><span class="badge up">+10%</span></td><td>77.5%</td></tr>
+        <tr><td>　其中阿里广告</td><td>—</td><td>$43.3M</td><td><span class="badge nt">+2%</span></td><td>10.3%</td></tr>
+        <tr><td>增值服务 VAS</td><td>$57.7M</td><td>$51.6M</td><td><span class="badge dn">-10.7%</span></td><td>12.2%</td></tr>
+        <tr class="hl"><td>合计</td><td>$396.9M</td><td>$421.3M</td><td><span class="badge up">+6.2%</span></td><td>100%</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:14px;"><strong>关键观察</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>广告 +9% 是拐点</strong>——非阿里广告 +10% 是主体，驱动来自互联网服务/软件、汽车、本地生活；阿里广告仅 +2% 偏弱</li>
+      <li><strong>增值服务 -11% 持续萎缩</strong>——游戏缺爆款，是营收结构的拖累项</li>
+      <li><strong>行业分化</strong>：互联网/AI 类客户强、汽车双位数、本地生活快增（外卖大战）；手机厂商仅温和（芯片/存储涨价压制）、网游下滑</li>
+    </ul>
+    <p><strong>议价能力</strong>：对广告主（中——公共讨论场是独特媒介，但抖音/小红书分流预算）· 对用户（弱——用户可多平台）· 内容监管是外部约束。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 4 ═══ -->
+<div class="section">
+  <div class="stitle">模块 4 · 经济护城河分析（5 维）</div>
+  <div class="moat-grid">
+    <div class="moat-card narrow">
+      <h5>1. 网络效应</h5>
+      <span class="moat-rate">中（趋弱）</span>
+      <p>公开讨论场的双边网络（用户-用户、KOL-粉丝）。<span class="warn-t">但抖音/小红书持续挤压，MAU 缓降</span>。DAU 环比回升是短期改善。<strong>趋势：缓萎</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>2. 无形资产/独特定位</h5>
+      <span class="moat-rate">中</span>
+      <p>中国唯一规模化"公共讨论场"（追星/突发新闻/公共话题）——独特而难替代，但护城河窄。<strong>趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>3. 转换成本</h5>
+      <span class="moat-rate">窄</span>
+      <p>用户社交关系 + 内容历史形成软黏性，但迁移门槛低。<strong>趋势：略侵蚀</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>4. 成本优势</h5>
+      <span class="moat-rate">中</span>
+      <p>轻资产 + 72% 毛利率 + Capex 极低 + FCF 转化高。<span class="warn-t">但本季利润率压缩</span>。<strong>趋势：变现投入压制</strong>。</p>
+    </div>
+    <div class="moat-card none">
+      <h5>5. 有效规模</h5>
+      <span class="moat-rate">窄</span>
+      <p>社交媒体竞争充分（抖音/小红书/微信），非寡头独占。<strong>趋势：竞争加剧</strong>。</p>
+    </div>
+  </div>
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>10 年后护城河会更宽还是更窄？</strong> <span class="warn-t">偏窄且缓萎</span>——公共讨论场的独特定位（追星/突发新闻）是窄而稳的护城河，短期难被完全替代，但抖音/小红书对用户时长和广告预算的挤压是长期趋势。<strong>MAU 结构性缓降（590M FY24 → 567M FY25 → 562M Q1'26）是最需警惕的信号</strong>。广告变现 + AI 应用能延缓，但难逆转用户端的缓萎。</p>
+    <p><strong>定价权</strong>：弱-中。广告 eCPM 双位数增长是好信号，但整体受抖音/小红书的预算竞争压制。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 5 ═══ -->
+<div class="section">
+  <div class="stitle">模块 5 · 财务深度分析</div>
+  <h3 style="font-size:15px; color:var(--text); margin: 12px 0; font-family: 'Segoe UI',sans-serif;">5.1 关键比率（Q1 2026 vs Q1 2025）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>指标</th><th>Q1 25</th><th>Q1 26</th><th>变化</th><th>含义</th></tr>
+      <tr><td>营收增速（美元）</td><td>—</td><td>+6.2%</td><td><span class="badge up">拐点</span></td><td>恒定汇率仅 +1%</td></tr>
+      <tr><td>广告增速</td><td>持平</td><td>+9.0%</td><td><span class="badge up">回升</span></td><td>非阿里 +10%</td></tr>
+      <tr><td>Non-GAAP 营业利润率</td><td>32.6%</td><td>28.4%</td><td><span class="badge dn">-4.2pp</span></td><td>变现投入加大</td></tr>
+      <tr><td>GAAP 净利率</td><td>27.0%</td><td>8.2%</td><td><span class="badge dn">-18.8pp</span></td><td>投资减值扭曲</td></tr>
+      <tr><td>Non-GAAP 净利率</td><td>30.1%</td><td>21.8%</td><td><span class="badge dn">-8.3pp</span></td><td>真实弱化</td></tr>
+      <tr><td>总成本 YoY</td><td>—</td><td>+13%</td><td><span class="badge dn">超营收</span></td><td>增长换利润率</td></tr>
+      <tr><td>调整后 EBITDA</td><td>$139.7M</td><td>$126.8M</td><td><span class="badge dn">-9%</span></td><td>—</td></tr>
+    </table>
+  </div>
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.2 资产负债健康度（2026-03-31 末 · $M）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>金额</th><th>说明</th></tr>
+      <tr><td>现金及等价物</td><td>$1,516.5M</td><td>季内大量现金转短投</td></tr>
+      <tr><td>短期投资</td><td>$1,077.7M</td><td>合计流动性 $2,594M</td></tr>
+      <tr class="hl"><td>短期借款</td><td>$0</td><td>逐项核对负债端全部科目确认</td></tr>
+      <tr class="hl"><td>长期贷款</td><td>$794.9M</td><td>银团/银行贷款</td></tr>
+      <tr class="hl"><td>无担保优先票据</td><td>$745.9M</td><td>长期计息</td></tr>
+      <tr class="hl"><td>可转换优先票据</td><td>$324.7M</td><td>独立计息</td></tr>
+      <tr class="hl"><td>有息负债合计</td><td>$1,865.5M</td><td>三项加总</td></tr>
+      <tr class="hl"><td><strong>真实净现金</strong></td><td><strong>+$728.7M</strong></td><td>$2,594 − $1,866 · 保守扣股利 ~$579M</td></tr>
+      <tr><td>应付股利</td><td>$149.7M</td><td>FY25 年度股息 · 4 月派付</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">⚠️ <strong>"净现金堡垒"叙事需修正（中概易错点）</strong>：流动性总额 $2.59B 很漂亮，但<strong>有息负债达 $1.87B</strong>（长期贷款 $795M + 无担保优先票据 $746M + 可转债 $325M），<strong>真实净现金仅 +$0.73B</strong>（保守扣已宣派股利后 ~$0.58B）。不能只看现金忽视债务。上次报告"净金融资产 $2.21B>市值"主要含长期战略股权投资（非流动、按市价波动），本季已因减值缩水——<span class="warn-t">安全垫比表面薄且在恶化</span>。</p>
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.3 现金流量（Q1 2026）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>Q1 2026</th><th>说明</th></tr>
+      <tr><td>经营现金流（OCF）</td><td>~$164M</td><td>稳健</td></tr>
+      <tr><td>- Capex</td><td>$11.9M</td><td>极轻资产</td></tr>
+      <tr class="hl"><td>自由现金流（FCF）</td><td>~$152M</td><td>FCF≈OCF · 高转化</td></tr>
+      <tr><td>年度股利支出</td><td>$149.7M</td><td>FCF 覆盖有余</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">✅ <strong>现金流仍强</strong>：Capex 仅 $11.9M，FCF ~$152M，季度 FCF 覆盖年度股利有余。FCF Yield ~20% 是深度价值逻辑的核心支撑——但盈利质量恶化是否会传导到 OCF 需持续观察。</p>
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.4 所有者盈余（价值投资口径）</h3>
+  <div class="dcf-note">
+    <p><strong>所有者盈余 ≈ Non-GAAP 净利 + D&amp;A − 维护性 Capex ≈ FCF</strong></p>
+    <p>Weibo 极轻资产，FCF ~$152M/季 ≈ 年化 ~$500-600M（考虑季节性）· Capex 仅 $11.9M。</p>
+    <p><strong>所有者盈余收益率 = 年化 FCF ~$550M / 市值 $1.9B ≈ 20%+</strong> · 剔除净现金后核心 = ~$550M / ($1.9B − $0.73B) ≈ <span class="hl-t">30%+</span>——这是极高的核心所有者盈余收益率，深度价值特征鲜明。<span class="warn-t">但前提是 FCF 不随盈利质量恶化而下滑，且用户不加速流失。当前 20% FCF Yield 反映市场对"缓萎 + 中概折价 + 盈利质量恶化"的三重定价。</span></p>
+  </div>
+</div>
+
+<!-- ═══ 模块 6 ═══ -->
+<div class="section">
+  <div class="stitle">模块 6 · 电话会分析（Q1 2026 + 前 2 季度）</div>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"广告 +9% 至 $369.8M（非阿里 +10%、阿里 +2%），驱动为互联网服务/软件、汽车、本地生活"——CEO 王高飞</div><div class="ec-note">增速较 FY2025 全年持平/+5% 明显回升，是本季最大亮点。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-neut">中性偏多</div><div class="ec-body"><div class="ec-title">"AI 用于广告素材生成与定向投放、上线 AI 内容创作中心，但 AIGC 尚未大规模商业化"</div><div class="ec-note">AI 生成广告素材消费占比约 40%、信息流 eCPM 双位数增长；但商业化仍在评估用户接受度。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"DAU 环比回升至 2.54 亿（视频时长双位数增长），但 MAU 5.62 亿继续缓降"</div><div class="ec-note">管理层归因"渠道投放策略调整 + 聚焦用户体验"而非需求恶化。DAU/MAU 45.2% 黏性微升。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"Non-GAAP 营业利润率降至 28%（去年 33%），总成本 +13% 至 $301.5M"</div><div class="ec-note">因"加大变现相关投入"——增长以牺牲利润率换取。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"GAAP 净利骤降 68% 至 $34.7M"</div><div class="ec-note">主因投资 FV 损失 $35M + 权益法损失 $22M + 利息其他损失 $25M 等非经营性拖累；Non-GAAP $91.9M（-23%）。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"未提供数字指引（惯例）；广告呈企稳趋势，Q2 关注新能源车集中上市 + 世界杯营销"</div><div class="ec-note">继续投入 AI 创作工具/内容生态/视频；宏观仍受手机、网游拖累。</div></div></div>
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>信号汇总</strong>：Q1 2026 是 Weibo "<span class="hl-t">广告拐点向上、但盈利质量与股东回报拐点向下</span>"的分裂一季。广告 +9% 是真实改善，但 Non-GAAP 利润率压缩 5pct、GAAP 净利 -68%、年度股息砍 26% 打破了上次报告"稳定 30% 利润率 + 高息"的基石。<strong>深度价值逻辑仍在（Forward P/E 6.8x、P/B 0.5x、FCF Yield 20%），但支撑它的盈利质量在恶化——这是下调评级的核心。</strong></p>
+  </div>
+</div>
+
+<!-- ═══ 模块 7 ═══ -->
+<div class="section">
+  <div class="stitle">模块 7 · 多模型估值（8 种方法）</div>
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">7.1 估值汇总表（独立估值 · 每 ADS · USD）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>估值方法</th><th>每 ADS 公允价</th><th>假设要点</th><th>权重</th></tr>
+      <tr><td>1. 相对估值（P/E）</td><td>$9</td><td>Non-GAAP TTM EPS ~$1.35 × 6.5x（深度价值中枢）+ 净现金</td><td>20%</td></tr>
+      <tr><td>2. DCF（基准）</td><td>$9.5</td><td>FCF 长期 0-2% 增长（缓萎），WACC 13%（中概+缓萎），永续 0%</td><td>15%</td></tr>
+      <tr><td>3. 所有者盈余收益率</td><td>$9</td><td>核心 FCF $550M / 高目标收益率 + 净现金 $0.73B → /2.45 亿股</td><td>15%</td></tr>
+      <tr><td>4. DDM</td><td>$8</td><td>股息 $0.61 × Gordon（增长 -5% 缩水、要求回报 12%）</td><td>10%</td></tr>
+      <tr><td>5. P/B</td><td>$10</td><td>每股净资产 ~$14 × 0.7x（合理破净修复）</td><td>10%</td></tr>
+      <tr><td>6. NAV</td><td>不适用</td><td>—</td><td>0%</td></tr>
+      <tr><td>7. 反向 DCF</td><td>当前价隐含 <strong>永久负增长</strong></td><td>$7.4 隐含市场认为长期萎缩——极度悲观</td><td>15%</td></tr>
+      <tr><td>8. SOTP</td><td>$9.5</td><td>广告核心业务 + 净现金 $0.73B − 战略投资折价</td><td>15%</td></tr>
+      <tr class="hl"><td><strong>加权公允价中位数</strong></td><td><strong>$9</strong></td><td>估值区间 $8-10 · 中位 ~$9</td><td>100%</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.8;"><strong>与现价对照</strong>：当前 $7.40 vs 加权公允 $9 · <span class="hl-t">折价 18%</span>。反向 DCF 显示市场已定价永久负增长——过度悲观（无视广告 +9% 拐点）。但盈利质量恶化 + 股息缩水 + 用户缓萎让"深度价值"的确定性下降，故评级从买入下调至有条件买入。</p>
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.2 P/E 多档透视表</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>口径</th><th>P/E (基于 $7.40)</th><th>说明</th></tr>
+      <tr><td>TTM GAAP P/E</td><td>~5.7x</td><td>投资减值放大波动 · 失真</td></tr>
+      <tr><td>TTM Non-GAAP P/E</td><td>~4-5x</td><td>剔除投资噪音 · 较可信</td></tr>
+      <tr class="hl"><td><strong>Forward P/E</strong></td><td><strong>~6.8x</strong></td><td>最可信 · 含利润率压缩</td></tr>
+      <tr><td>P/B</td><td>~0.5x</td><td>破净约 50%</td></tr>
+      <tr><td>EV/EBITDA</td><td>~3x</td><td>全球社交最低</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3);"><strong>最可信档</strong>：Forward P/E 6.8x + P/B 0.5x。对比 Meta 24x、Baidu 9x、Pinterest 18x——<span class="hl-t">Weibo 以极端折价交易</span>，反映中概监管 + 地缘 + 用户流失 + 盈利质量恶化的多重折价。便宜是真便宜，但便宜的原因也在增加。</p>
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.3 12 个月目标价（概率加权 · 每 ADS）</h3>
+  <div class="pgrid">
+    <div class="pbox"><div class="pl">悲观情景 · 30%</div><div class="pv pc">$6</div><div class="pn">利润率继续压缩 + 用户加速流失 + 中概折价<br>距现价 -19%</div></div>
+    <div class="pbox"><div class="pl">基准情景 · 45%</div><div class="pv pf">$9</div><div class="pn">广告增速延续 + 利润率企稳 + 破净小修复<br>距现价 +22%</div></div>
+    <div class="pbox"><div class="pl">乐观情景 · 25%</div><div class="pv ps">$12</div><div class="pn">广告加速 + AI 变现 + 中概情绪回暖 + 估值重估<br>距现价 +62%</div></div>
+  </div>
+  <p style="font-size:13px; color:var(--text2);"><strong>概率加权公允价</strong>：30%×$6 + 45%×$9 + 25%×$12 = <strong>$8.85</strong> ≈ $9（+22%）+ 8% 股息 = 总回报 ~30%。<strong>当前 $7.40 已接近机械首仓 $7.2</strong>——进入建仓窗口，但盈利质量恶化令评级降至有条件买入。</p>
+</div>
+
+<!-- ═══ 模块 8 ═══ -->
+<div class="section">
+  <div class="stitle">模块 8 · 竞争与行业分析</div>
+  <div class="cmt">
+    <p><strong>中国社交媒体格局</strong>：微信（腾讯）是熟人社交霸主，抖音是短视频娱乐主场，小红书是种草社区，<span class="hl-t">Weibo 独占"公开讨论场"生态位</span>——追星、突发新闻、公共话题。但抖音/小红书持续挤压用户时长与广告预算。</p>
+    <p><strong>同业对比（Forward P/E · 截至 2026-07）</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>公司</th><th>Forward P/E</th><th>P/B</th><th>股息率</th><th>核心评价</th></tr>
+        <tr class="hl"><td><strong>微博 WB</strong></td><td><strong>~6.8x</strong></td><td>0.5x</td><td>~8%</td><td>全球社交最便宜 · 破净</td></tr>
+        <tr><td>Meta META</td><td>~24x</td><td>6x+</td><td>~0.3%</td><td>成长基准</td></tr>
+        <tr><td>Baidu BIDU</td><td>~9x</td><td>~0.8x</td><td>—</td><td>同为低估中概</td></tr>
+        <tr><td>Pinterest PINS</td><td>~18x</td><td>—</td><td>—</td><td>西方社交</td></tr>
+        <tr><td>Snap SNAP</td><td>亏损</td><td>—</td><td>—</td><td>仍亏损</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:10px; font-size:12px; color:var(--text3);">Weibo 以类 X(Twitter) 定位却享全球社交最低估值，反映中概监管 + 地缘 + 用户缓萎的三重折价。深度价值特征鲜明，但催化剂稀缺。</p>
+    <p style="margin-top:14px;"><strong>波特五力</strong>：新进入者（低——社交格局已定）· 替代品（高——抖音/小红书）· 供应商议价（低）· 买家议价（中——广告主多平台分配预算）· 同业竞争（高）。</p>
+    <p><strong>颠覆风险</strong>：用户时长向短视频/种草社区迁移是长期趋势，Weibo 的公共讨论场定位提供缓冲，但难逆转缓萎。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 9 ═══ -->
+<div class="section">
+  <div class="stitle">模块 9 · 技术面与 K 线分析（次要参考）</div>
+  <div class="cmt">
+    <p><strong>趋势</strong>：WB 从 52 周高 $13.0 跌至 $7.40，<span class="warn-t">逼近 52 周低</span>，负向动能明显。财报后进一步走弱。较上次分析价 $8.36 下跌约 -11%。</p>
+    <p><strong>关键价位</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>支撑</strong>：$7.0（心理位）/ $6.5（破净深化）/ $6（悲观目标）</li>
+      <li><strong>阻力</strong>：$9（公允价）/ $10.5（前期平台）/ $13（52 周高）</li>
+    </ul>
+    <p><strong>指标信号</strong>：深度超卖 + 破净 0.5x，<span class="hl-t">技术面下行空间有限（净现金 + FCF 支撑）</span>，但反转需广告持续 + 盈利质量企稳。</p>
+    <p><strong>注意</strong>：WB 的核心是广告增速 + 利润率企稳 + 用户止跌 + 中概情绪，技术面次要。深度价值需耐心等催化剂。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 10 ═══ -->
+<div class="section">
+  <div class="stitle">模块 10 · 增长催化剂与前景展望</div>
+  <div class="cmt">
+    <p><strong>短期催化剂（未来 6 个月）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>Q2 广告</strong>——新能源车集中上市 + 世界杯营销带来的投放机会</li>
+      <li><strong>利润率企稳</strong>——变现投入见效、Non-GAAP 利润率能否止跌于 28%</li>
+      <li><strong>AI 内容工具商业化</strong>——若 AIGC 广告工具规模化变现，是新叙事</li>
+      <li><strong>中概情绪 / 恒生科技回暖</strong>——估值修复的 beta</li>
+    </ul>
+    <p><strong>长期展望（3-5 年）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>广告变现效率提升</strong>——AI 定向 + eCPM 提升对冲用户缓萎</li>
+      <li><strong>DAU 黏性维系</strong>——视频时长增长 + 核心用户留存</li>
+      <li><strong>股东回报</strong>——若恢复股息增长 + 启动回购，深度价值逻辑强化</li>
+      <li><strong>风险情景</strong>：MAU 加速流失 + 广告预算持续被短视频抢占 + 投资减值扩大</li>
+    </ul>
+    <p><strong>展望</strong>：Weibo 的长期问题是"缓慢萎缩 vs 变现效率提升"的赛跑——广告 AI 化能延缓，但难逆转用户端趋势。深度价值 + 高息在提供保护，但需盈利质量止跌。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 11 ═══ -->
+<div class="section">
+  <div class="stitle">模块 11 · 风险矩阵</div>
+  <div class="risk-grid">
+    <div class="risk-card r4"><h5>1. 盈利质量恶化</h5><span class="risk-score">4 / 5 高</span><p>Non-GAAP 利润率 33%→28% + 投资减值 + 股息砍 26% · 侵蚀深度价值逻辑的根基</p></div>
+    <div class="risk-card r4"><h5>2. 用户结构性缓萎</h5><span class="risk-score">4 / 5 高</span><p>MAU 590→567→562M · 抖音/小红书持续挤压 · 长期趋势难逆转</p></div>
+    <div class="risk-card r4"><h5>3. 中概监管 / 退市</h5><span class="risk-score">4 / 5 高</span><p>HFCAA 尾部风险 + 娱乐内容监管收紧 · ADS 折价</p></div>
+    <div class="risk-card r3"><h5>4. 投资组合波动</h5><span class="risk-score">3 / 5 中</span><p>战略股权公允价值波动直接冲击 GAAP 利润与净金融资产缓冲</p></div>
+    <div class="risk-card r3"><h5>5. 关联方 / 阿里减持</h5><span class="risk-score">3 / 5 中</span><p>新浪/阿里控股结构 · 阿里广告仅 +2% 偏弱 · 减持供给压力</p></div>
+    <div class="risk-card r2"><h5>6. 估值（机会）</h5><span class="risk-score">2 / 5 反向</span><p>Forward P/E 6.8x + P/B 0.5x + 8% 股息 + FCF Yield 20% · 深度价值下限</p></div>
+  </div>
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>3 个黑天鹅情景</strong>：</p>
+    <ol style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>MAU 加速流失 + 广告失速</strong>——概率 15% · 股价跌至 $5 · 价值陷阱确认</li>
+      <li><strong>中概 ADR 退市</strong>——概率 10% · 但港股二次上市对冲</li>
+      <li><strong>大额投资减值 + 股息取消</strong>——概率 10% · 深度价值逻辑崩塌 · 股价 $5.5</li>
+    </ol>
+    <p style="margin-top:10px;"><strong>下行支撑</strong>：真实净现金 $0.73B + FCF Yield 20% + P/B 0.5x + 8% 股息构成质量底。<span class="hl-t">$6-6.5 是较硬的估值底</span>（破净深化 + 高息托底）。但要注意 Weibo 的"底"随盈利质量恶化在下移。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 12 ═══ -->
+<div class="section">
+  <div class="stitle">模块 12 · 股东回报分析</div>
+  <div class="cmt">
+    <p><strong>Weibo 是"高股息、少回购"的中概资本返还结构——但本季股息缩水 + 无回购，是深度价值逻辑的关键裂痕。</strong></p>
+    <h3 style="font-size:15px; color:var(--text); margin: 18px 0 10px; font-family: 'Segoe UI',sans-serif;">12.1 公司给了股东多少？</h3>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>财年</th><th>年度股息/ADS</th><th>股息总额</th><th>回购</th><th>股东总回报</th></tr>
+        <tr><td>FY2024</td><td>$0.82</td><td>~$200M</td><td>无新执行</td><td>~$200M</td></tr>
+        <tr class="hl"><td>FY2025（2026-03 宣派）</td><td><span class="warn-t">$0.61（-26%）</span></td><td>~$149.7M</td><td>无</td><td>~$149.7M</td></tr>
+        <tr><td>Q1 2026 单季</td><td>—</td><td>应付股利 $149.7M</td><td>$0</td><td>本季无新回购</td></tr>
+      </table>
+    </div>
+    <p style="font-size:13px; color: var(--text2); margin-top:8px"><strong>Trailing Shareholder Yield</strong> = FY2025 股息 $149.7M / 市值 $1.9B ≈ <strong>~8%</strong>（纯股息，无回购）。当前低市值推高股息率至 8%——高息仍是深度价值核心，<span class="warn-t">但股息额同比砍 26%（$200M→$150M）是重要负面</span>。</p>
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.2 给的方式好不好？</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>纯股息、无回购</strong>：Weibo 主要靠年度股息返还，本季 <span class="warn-t">无股票回购执行、无新回购授权</span>——对破净 0.5x 的股票，不回购是错过的低价缩股机会</li>
+      <li><strong>股息缩水</strong>：$0.82 → $0.61（-26%）· 反映管理层对现金留存 + 投资的偏好上升，股东回报趋于保守</li>
+      <li><strong>摊薄股数大致稳定</strong>：无回购下靠 SBC 归属 + 可转债潜在稀释，股数无实质收缩</li>
+    </ul>
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.3 能不能继续给、给多少？</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>股息政策</strong>：年度股息随年报公布，<span class="warn-t">不承诺累进（已砍 26%）</span> · 未来股息取决于盈利与投资需求</li>
+      <li><strong>无回购授权</strong>：本季未披露新回购 · 破净时不回购是资本配置的可改进项</li>
+      <li><strong>(股息) / FCF 覆盖度</strong>：$149.7M / 年化 FCF ~$550M ≈ 27%——覆盖充分，有加派空间，但管理层选择缩水</li>
+      <li><strong>净现金支撑</strong>：真实净现金 $0.73B，分红能力有支撑，但管理层偏好留存 + 投资</li>
+    </ul>
+    <p><strong>模块小结</strong>：<span class="warn-t">象征性偏保守 · 且在收缩</span>——高股息（8%）曾是深度价值核心，但本季股息砍 26% + 无回购 + 破净不缩股，反映管理层股东回报意愿趋弱。这是本次从"买入"下调至"有条件买入"的重要依据：<strong>深度价值需要股东回报的确定性，而 Weibo 的这一维度正在恶化。</strong></p>
+  </div>
+</div>
+
+<!-- ═══ 模块 13 ═══ -->
+<div class="section">
+  <div class="stitle">模块 13 · 海图评分卡 + 投资决策</div>
+  <div class="scorecard">
+    <h3 style="font-size:15px; color:var(--text); margin-bottom: 16px; font-family: 'Segoe UI',sans-serif;">海图评分卡（6 维 A-D）</h3>
+    <div class="score-grid">
+      <div class="score-card"><div class="score-letter s-b">B</div><div class="score-body"><h4>1. 生意可预测性</h4><p>广告社交模式清晰，但盈利被投资减值扭曲 + 用户缓萎，可预测性中等。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bm">B-</div><div class="score-body"><h4>2. 经济护城河</h4><p>公共讨论场独特但护城河窄且缓萎，抖音/小红书挤压。</p></div></div>
+      <div class="score-card"><div class="score-letter s-b">B</div><div class="score-body"><h4>3. 管理层质量</h4><p>王高飞稳定、广告变现执行稳，但股东回报趋保守（股息砍 26%、无回购）。</p></div></div>
+      <div class="score-card"><div class="score-letter s-b">B</div><div class="score-body"><h4>4. 财务质量</h4><p>FCF Yield 20% + 轻资产，但真实净现金仅 $0.73B（有息负债 $1.87B）+ 投资减值。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bm">B-</div><div class="score-body"><h4>5. 资本配置纪律</h4><p>股息砍 26% + 破净不回购 + 战略投资减值 · 资本配置从此前下调。</p></div></div>
+      <div class="score-card"><div class="score-letter s-a">A</div><div class="score-body"><h4>6. 估值与安全边际</h4><p>Forward P/E 6.8x + P/B 0.5x + 8% 股息 + 折价 18%。极端深度价值。</p></div></div>
+    </div>
+    <div class="flag-row">
+      <strong>红旗排查</strong>：盈利质量恶化（Non-GAAP 利润率 -5pct + GAAP 净利 -68%）+ 年度股息砍 26% + 用户结构性缓萎 + 投资减值侵蚀净金融资产 + 中概监管。触发"<span class="warn-t">有疑问（深度价值确定性下降）</span>"——综合评级从「买入」下调至「有条件买入」。
+    </div>
+    <p style="margin-top:18px; font-size:14px; color:var(--text); line-height:1.85;"><strong>综合评级</strong>：<span class="rating-badge rating-cond-buy" style="font-size:14px;">有条件买入</span>（从买入下调）。极端便宜（Forward P/E 6.8x、破净、8% 股息）+ 广告拐点向上，但盈利质量恶化 + 股息缩水 + 用户缓萎让深度价值的确定性下降。"条件"明确：仅适合能承受中概折价 + 盈利质量恶化、且看重深度价值 + 高息的逆向投资者，小仓位。</p>
+  </div>
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">投资决策（精确价格 · 每 ADS · USD）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>项目</th><th>价格</th><th>说明</th></tr>
+      <tr><td>12 个月目标价（基准）</td><td><strong>$9</strong> (+22%)</td><td>广告延续 + 利润率企稳 + 破净小修复</td></tr>
+      <tr><td>悲观目标（30% 概率）</td><td>$6 (-19%)</td><td>利润率继续压缩 + 用户流失</td></tr>
+      <tr><td>乐观目标（25% 概率）</td><td>$12 (+62%)</td><td>广告加速 + AI 变现 + 中概回暖</td></tr>
+      <tr class="hl"><td>首仓建仓（估值中位数 $9 × 80%）</td><td><strong>$7.2</strong></td><td>距现价 -3% · 已接近 · 可小仓建仓</td></tr>
+      <tr><td>二仓建仓（× 70%）</td><td>$6.3</td><td>-15% · 破净深化 · 加仓</td></tr>
+      <tr><td>三仓建仓（× 60%）</td><td>$5.4</td><td>-27% · 极端机会</td></tr>
+      <tr><td>止盈一档</td><td>$10.5</td><td>+42% · 减仓 25%</td></tr>
+      <tr><td>止盈二档</td><td>$12</td><td>+62% · 再减 25%</td></tr>
+      <tr><td>止盈三档</td><td>$14</td><td>+89% · 再减 25% · 最后 25% 收息持有</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.85;"><strong>建议总仓位</strong>：<strong>1-3%</strong>（小仓位深度价值 · 反映盈利质量恶化 + 用户缓萎 + 中概三重折价）。<strong>持有周期</strong>：2-3 年（收息 + 等广告变现兑现 + 中概情绪修复）。<strong>关键监控指标</strong>：① Non-GAAP 营业利润率是否止跌于 28%；② MAU 缓降是否加速；③ 广告增速持续性；④ 股息是否恢复增长 + 是否启动回购；⑤ 投资减值规模。<strong>下次催化剂</strong>：2026-08 Q2 2026 财报。</p>
+</div>
+
+<!-- ═══ 海图页末长评 ═══ -->
+<div class="section">
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记 · 1150 字</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p class="lead">深度价值最怕的不是便宜，而是"便宜的理由越来越多"。微博 Forward P/E 6.8 倍、破净 0.5 倍、股息率 8%——一眼望去是全球社交股里最便宜的烟蒂。但这一季，支撑这份便宜的东西正在松动：广告增速虽然拐点向上，但 Non-GAAP 利润率从 33% 压到 28%、GAAP 净利被投资减值砸掉 68%、年度股息还砍了 26%。便宜依旧，但便宜的根基在动摇。</p>
+      <p>微博是中国唯一规模化的"公共讨论场"——MAU 5.62 亿、DAU 2.54 亿，类 X(Twitter) 的开放社交平台，靠广告（88% 营收）赚 72% 毛利率的钱。Q1 2026 营收 $421M（+6.2% 美元 / +1% 恒定汇率）· 广告 $370M（+9%）· 增值服务 $52M（-11%）· GAAP 净利 $35M（-68%）· Non-GAAP 净利 $92M（-23%）。这是一份分裂的财报。</p>
+      <h4>几个研判要点</h4>
+      <p><strong>一、广告 +9% 是营收拐点向上，这是真实的好消息。</strong> FY2025 全年广告持平 → Q1 广告 +9%（非阿里 +10%），驱动来自互联网服务/软件、汽车、本地生活（外卖大战）。AI 生成广告素材消费占比约 40%、eCPM 双位数增长。<span class="hl-t">用户端 DAU 环比回升、DAU/MAU 升到 45.2%，黏性小幅改善</span>。经营基本盘没垮。</p>
+      <p><strong>二、但盈利质量拐点向下，是这份财报的暗线。</strong> GAAP 净利 -68% 主要是投资减值噪音（FV 损失 -$35M + 权益法 -$22M + 利息 -$25M，去年为收益的高基数逆转），Non-GAAP -23% 才是真相。更关键：<span class="warn-t">Non-GAAP 营业利润率从 33% 压到 28%，总成本 +13%</span>——"增长换利润率"。上次报告以"稳定 30% 利润率 + $449M 净利"为基石，本季被打破。</p>
+      <p><strong>三、"净现金堡垒"叙事需要修正——它没那么厚。</strong> 流动性 $2.59B 很漂亮，但<span class="warn-t">有息负债达 $1.87B</span>（长期贷款 + 优先票据 + 可转债），真实净现金仅 +$0.73B。上次"净金融资产 >市值"主要含长期战略股权投资，本季已因减值缩水——安全垫比表面薄且在恶化。深度价值投资者最忌讳的就是把毛现金当净现金。</p>
+      <p><strong>四、年度股息砍 26%，是深度价值逻辑的关键裂痕。</strong> FY2025 股息 $0.61/ADS（约 $150M），较 FY2024 的 $0.82（约 $200M）<span class="warn-t">砍了 26%</span>，且本季无回购。破净 0.5x 却不回购、股息还缩水——<strong>深度价值需要股东回报的确定性，而这一维度正在恶化</strong>。这是我把评级从"买入"下调至"有条件买入"的核心依据。</p>
+      <p><strong>五、12 个月目标价 $9，上行 +22% + 8% 股息 = 总回报 ~30%。</strong> 悲观 $6（30%，利润率继续压缩）、基准 $9（45%，广告延续 + 利润率企稳）、乐观 $12（25%，广告加速 + 中概回暖）。概率加权 $9。<strong>当前 $7.40 已接近机械首仓 $7.2</strong>——反向 DCF 显示市场已定价永久负增长，过度悲观，但盈利质量的裂痕是真实的。</p>
+      <h4>海图研判</h4>
+      <p><strong>评级：有条件买入（从买入下调）</strong>（Forward P/E 6.8x + P/B 0.5x + 8% 股息 + FCF Yield 20% + 广告 +9% 拐点的深度价值组合，对垒 Non-GAAP 利润率 33%→28% + GAAP 净利 -68% + 年度股息砍 26% + 用户缓萎 + 中概监管的真实恶化）。12 个月目标价 <strong>$9</strong>（+22%）+ 8% 股息 = 总回报 ~30%。</p>
+      <p>操作建议：当前 $7.40 已接近机械首仓 $7.2。首仓 $7.2（×80%·可小仓建仓）、二仓 $6.3（×70%·破净深化）、三仓 $5.4（×60%·极端机会）。止盈三档 $10.5 / $12 / $14，最后 25% 收息持有。<strong>建议总仓位 1-3%</strong>（小仓位深度价值 · 反映盈利质量恶化 + 用户缓萎 + 中概三重折价）。持有周期 2-3 年。<span class="hl-t">关键纪律：这是深度价值烟蒂，不重仓；密切盯 Non-GAAP 利润率是否止跌、股息是否恢复——若这两项继续恶化，深度价值就滑向价值陷阱。</span></p>
+      <h4>风险提示</h4>
+      <p>盈利质量继续恶化 / 用户加速流失 / 中概退市 / 投资减值扩大 / 股息取消——任一项都可能让股价跌至 $5-6。但真实净现金 $0.73B + FCF Yield 20% + P/B 0.5x + 8% 股息构成质量底，$6-6.5 是较硬的估值底（破净深化 + 高息托底）。但要注意 Weibo 的"底"随盈利质量恶化在下移。</p>
+      <p>关键叙事：<strong>"Forward P/E 6.8x + P/B 0.5x（破净）+ 8% 股息 + FCF Yield 20% + 广告 +9% 拐点"的极端深度价值，对垒"Non-GAAP 利润率 33%→28% + GAAP 净利 -68% + 年度股息砍 26% + 用户缓萎 + 中概监管"的盈利质量恶化</strong>。微博是一只"越来越便宜、但便宜理由也越来越多"的烟蒂——给能承受中概折价、看重深度价值与高息、且愿意小仓位耐心等广告变现兑现的逆向投资者。下次催化剂：2026-08 Q2 2026 财报，关注利润率能否止跌。</p>
+      <p class="haitu-sign">—— 海图，灯下落笔，明日再观风浪。</p>
+      <p class="haitu-disc">⚠️ 免责声明：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，不构成任何投资建议。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div>《海图夜读》 · 微博 Weibo WB Q1 2026 海图研判</div>
+  <div style="margin-top:6px;">发布日 2026-05-28 · 研判日 2026-07-10 · 数据来源 Weibo Q1 2026 官方新闻稿（SEC 6-K Ex-99.1）+ 电话会</div>
+</footer>
+
+<script>
+let curTheme = 'light';
+function toggleTheme() {
+  curTheme = curTheme === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', curTheme);
+  renderCharts();
+}
+const palette = {
+  light: { accent: '#8a9a8e', accent2: '#7b8fa0', accent3: '#b08d7a', gold: '#b9a06a', red: '#b87070', green: '#7a9a7a', grid: '#e5ddd5', text: '#7a706a' },
+  dark:  { accent: '#8a9a8e', accent2: '#8fabbf', accent3: '#c9a48e', gold: '#c9b07a', red: '#c08080', green: '#8aaa8a', grid: '#3e3a35', text: '#a09890' }
+};
+let charts = {};
+function renderCharts() {
+  Object.values(charts).forEach(c => c && c.destroy && c.destroy());
+  charts = {};
+  const p = palette[curTheme];
+  Chart.defaults.color = p.text; Chart.defaults.borderColor = p.grid;
+  const q = ['Q1 25','Q2 25','Q3 25','Q4 25','Q1 26'];
+  charts.rev = new Chart(document.getElementById('chartRev'), {
+    type: 'bar',
+    data: { labels: q, datasets: [
+      { label: '广告 ($M)', data: [339, 400, 430, 388, 370], backgroundColor: p.accent+'CC', stack:'a' },
+      { label: '增值服务 ($M)', data: [58, 55, 53, 52, 52], backgroundColor: p.gold+'CC', stack:'a' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales:{x:{stacked:true},y:{stacked:true}} }
+  });
+  charts.profit = new Chart(document.getElementById('chartProfit'), {
+    type: 'line',
+    data: { labels: q, datasets: [
+      { label: 'GAAP 净利 ($M)', data: [107, 130, 120, 92, 35], borderColor: p.red, backgroundColor: p.red+'22', fill:true, tension: 0.3 },
+      { label: 'Non-GAAP 净利 ($M)', data: [120, 125, 118, 100, 92], borderColor: p.green, backgroundColor: p.green+'22', fill:true, tension: 0.3 }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false }
+  });
+  charts.users = new Chart(document.getElementById('chartUsers'), {
+    type: 'line',
+    data: { labels: q, datasets: [
+      { label: 'MAU (亿)', data: [5.90, 5.87, 5.83, 5.67, 5.62], borderColor: p.accent2, backgroundColor: p.accent2+'22', fill:true, tension: 0.3 },
+      { label: 'DAU (亿)', data: [2.60, 2.58, 2.56, 2.52, 2.54], borderColor: p.accent3, tension: 0.3 }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales:{y:{beginAtZero:false}} }
+  });
+  charts.div = new Chart(document.getElementById('chartDiv'), {
+    type: 'bar',
+    data: { labels: ['FY2023','FY2024','FY2025'], datasets: [
+      { label: '每股股息 ($/ADS)', data: [0, 0.82, 0.61], backgroundColor: [p.text3, p.green, p.red].map(c=>c+'CC') }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, plugins:{legend:{display:false}} }
+  });
+  buildSankey();
+}
+function buildSankey() {
+  const p = palette[curTheme];
+  const labels = ['总营收 $421','广告 $370','增值服务 $52','营业成本+费用 $310','营业利润 $111','非经营损失 $85','税 $16','GAAP 净利 $35'];
+  const data = { type: 'sankey', orientation: 'h',
+    node: { pad: 14, thickness: 18, line: { color: p.grid, width: 0.5 }, label: labels, color: [p.accent, p.accent2, p.gold, p.red, p.green, p.red, p.red, p.green] },
+    link: { source: [0,0,1,2,1,2,4,4,4], target: [1,2,3,3,4,4,5,6,7], value: [370,52,272,38,98,13,85,16,35],
+      color: [p.accent2+'55', p.gold+'55', p.red+'44', p.red+'44', p.green+'44', p.green+'44', p.red+'55', p.red+'44', p.green+'66'] } };
+  const layout = { font: { size: 11, color: p.text }, paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)', margin: { l: 10, r: 10, t: 10, b: 10 } };
+  Plotly.react('sankey', [data], layout, { displayModeBar: false, responsive: true });
+}
+renderCharts();
+</script>
+</body>
+</html>
