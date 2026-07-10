@@ -57,6 +57,7 @@ def fetch(symbol):
         "dividendPaymentDate": None,
         "dividendAmount": None,
         "currency": None,
+        "price": None,
         "warnings": warnings
     }
 
@@ -79,6 +80,9 @@ def fetch(symbol):
         result["currency"] = info.get("currency")
         if info.get("dividendRate"):
             result["dividendAmount"] = info.get("dividendRate")
+        p = info.get("regularMarketPrice") or info.get("currentPrice") or info.get("previousClose")
+        if isinstance(p, (int, float)) and p > 0:
+            result["price"] = round(float(p), 3)
     except Exception as e:
         warnings.append(f"info fetch failed: {e}")
         info = {}

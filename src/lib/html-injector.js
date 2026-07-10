@@ -59,13 +59,22 @@ function renderReportsBlock(tickers) {
       const desc = escapeJsString(t.desc);
       const title = escapeJsString(t.title);
       const tag = escapeJsString(t.tag);
+      const displayName = escapeJsString(t.displayName || t.name || t.ticker);
+      const rating = escapeJsString(t.rating || '');
+      const num = (v) => (typeof v === 'number' && isFinite(v) ? v : 'null');
       return `  {
     file: "${t.lastReportFile}",
     ticker: "${t.marketSymbol}",
+    name: "${displayName}",
     title: "${title}",
     desc: "${desc}",
     tag: "${tag}",
     tagClass: "${t.ratingClass}",
+    rating: "${rating}",
+    currentPrice: ${num(t.currentPrice)},
+    targetPrice: ${num(t.targetPrice)},
+    currency: "${escapeJsString(t.targetCurrency || t.priceCurrency || 'USD')}",
+    period: "${escapeJsString(t.lastReportPeriod || '')}",
     date: "${t.lastAnalyzedDate}",
     modTime: ${t.modTime}
   }`;

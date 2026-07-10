@@ -55,7 +55,8 @@ async function main() {
     logger.error(`tickers.json not found at ${TICKERS_PATH}. Run 'npm run bootstrap' first.`);
     process.exit(1);
   }
-  const { tickers } = JSON.parse(readFileSync(TICKERS_PATH, 'utf-8'));
+  const tickersDoc = JSON.parse(readFileSync(TICKERS_PATH, 'utf-8'));
+  const { tickers } = tickersDoc;
   logger.info(`Loaded ${tickers.length} tickers from data/tickers.json`);
 
   // 2. 拉取所有 ticker 数据
@@ -67,6 +68,21 @@ async function main() {
   if (successCount === 0) {
     logger.error('All yfinance fetches failed. Aborting to avoid wiping calendar.');
     process.exit(2);
+  }
+
+  // 2.5 写回最新股价（供门户列表计算目标价差距）
+  let priceCount = 0;
+  for (const r of fetchResults) {
+    if (r.data && typeof r.data.price === 'number') {
+      r.ticker.currentPrice = r.data.price;
+      if (r.data.currency) r.ticker.priceCurrency = r.data.currency;
+      r.ticker.priceUpdatedAt = today;
+      priceCount++;
+    }
+  }
+  logger.info(`Updated currentPrice for ${priceCount}/${tickers.length} tickers`);
+  if (!DRY_RUN && priceCount > 0) {
+    writeFileSync(TICKERS_PATH, JSON.stringify(tickersDoc, null, 2) + '\n');
   }
 
   // 3. 检测新财报

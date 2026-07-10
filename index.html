@@ -188,71 +188,81 @@ body {
   .calendar-col .calendar-panel { max-height: none; }
 }
 
-/* ── REPORT CARDS ── */
-.report-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 22px;
-}
-.report-card {
+/* ── STOCK LIST（可排序估值列表）── */
+.stock-table-wrap {
   background: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: 14px;
-  padding: 26px;
-  text-decoration: none;
-  color: var(--text);
-  transition: all 0.25s ease;
-  display: flex;
-  flex-direction: column;
   box-shadow: var(--shadow);
-  position: relative;
-  overflow: hidden;
+  overflow-x: auto;
 }
-.report-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: var(--accent-gold);
-  opacity: 0.6;
-}
-.report-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--accent-gold);
-  box-shadow: var(--shadow-lg);
-}
-.report-card .ticker {
+.stock-table {
+  width: 100%;
+  border-collapse: collapse;
   font-family: 'Noto Sans SC', sans-serif;
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: var(--accent);
-  letter-spacing: 1.5px;
-  margin-bottom: 8px;
+  font-size: 0.9rem;
+  min-width: 640px;
 }
-.report-card h3 {
-  font-family: 'Noto Serif SC', serif;
-  font-size: 1.18rem;
+.stock-table th {
+  background: var(--bg-alt);
+  color: var(--text-dim);
+  font-size: 0.74rem;
   font-weight: 600;
-  margin-bottom: 10px;
-  line-height: 1.45;
+  letter-spacing: 0.8px;
+  text-align: right;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.2s;
+}
+.stock-table th:hover { color: var(--accent-gold); }
+.stock-table th.sorted { color: var(--accent-gold); }
+.stock-table th:first-child { text-align: left; }
+.stock-table th .arrow { font-size: 0.65rem; margin-left: 3px; opacity: 0.9; }
+.stock-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  text-align: right;
+  white-space: nowrap;
+  color: var(--text);
+}
+.stock-table td:first-child { text-align: left; }
+.stock-table tbody tr { cursor: pointer; transition: background 0.15s; }
+.stock-table tbody tr:hover { background: var(--tag-bg); }
+.stock-table tbody tr:last-child td { border-bottom: none; }
+.stock-name { display: flex; flex-direction: column; gap: 2px; }
+.stock-name .nm {
+  font-weight: 600;
   color: var(--heading);
+  font-size: 0.94rem;
 }
-.report-card .desc {
-  color: var(--text-secondary);
-  font-size: 0.91rem;
-  line-height: 1.65;
-  flex: 1;
-  margin-bottom: 16px;
+.stock-name .tk {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  letter-spacing: 0.5px;
 }
-.report-card .meta {
+.stock-table .px { font-variant-numeric: tabular-nums; }
+.stock-table .gap {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+.gap.up { color: var(--green); }
+.gap.dn { color: var(--red); }
+.gap.na { color: var(--text-dim); font-weight: 400; }
+.stock-table .dt { font-size: 0.78rem; color: var(--text-dim); }
+.list-toolbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.8rem;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+  font-size: 0.78rem;
   color: var(--text-dim);
-  padding-top: 12px;
-  border-top: 1px solid var(--border);
 }
+.list-hint { letter-spacing: 0.3px; }
 .tag {
   display: inline-block;
   background: var(--tag-bg);
@@ -263,6 +273,7 @@ body {
   letter-spacing: 0.3px;
 }
 .tag.buy { color: var(--green); background: rgba(90,128,104,0.13); }
+.tag.cond-buy { color: var(--accent); background: rgba(122,143,160,0.15); }
 .tag.hold { color: var(--gold); background: rgba(176,141,82,0.13); }
 .tag.sell { color: var(--red); background: rgba(184,112,112,0.13); }
 
@@ -504,8 +515,17 @@ footer p { margin-bottom: 6px; }
   <div class="main-layout">
 
     <section class="section first reports-col">
-      <div class="section-title">🌙 海图研判 · 按发布时间排序</div>
-      <div class="report-grid" id="reportGrid"></div>
+      <div class="section-title">🌙 海图研判 · 估值一览</div>
+      <div class="list-toolbar">
+        <span class="list-hint">点击表头排序 · 差距% =（目标价 − 现价）/ 现价，正值 = 低估，负值 = 高估</span>
+        <span class="list-hint" id="priceAsOf"></span>
+      </div>
+      <div class="stock-table-wrap">
+        <table class="stock-table">
+          <thead><tr id="stockHead"></tr></thead>
+          <tbody id="stockBody"></tbody>
+        </table>
+      </div>
     </section>
 
     <aside class="section first calendar-col">
@@ -821,47 +841,77 @@ const reports = [
 ];
 /* HAITU:REPORTS:END */
 
-function renderReports() {
-  const grid = document.getElementById('reportGrid');
-  if (reports.length === 0) {
-    grid.innerHTML = `
-      <div class="empty-state" style="grid-column: 1 / -1;">
-        <div class="empty-icon">🌊</div>
-        <p>第一份海图研判正在准备中……</p>
-      </div>
-    `;
+/* ── 估值列表：现价 / 目标价 / 差距% · 可排序 ── */
+const CCY_SYMBOL = { USD: '$', HKD: 'HK$', CNY: '¥', HKG: 'HK$' };
+const RATING_ORDER = { '强力买入': 6, '买入': 5, '有条件买入': 4, '持有观望': 3, '卖出': 2, '强烈卖出': 1 };
+
+function gapPct(r) {
+  if (typeof r.currentPrice !== 'number' || typeof r.targetPrice !== 'number' || r.currentPrice <= 0) return null;
+  return (r.targetPrice - r.currentPrice) / r.currentPrice * 100;
+}
+
+const COLS = [
+  { key: 'name',   label: '公司',   sort: (a, b) => a.name.localeCompare(b.name, 'zh') },
+  { key: 'rating', label: '评级',   sort: (a, b) => (RATING_ORDER[b.rating] || 0) - (RATING_ORDER[a.rating] || 0) },
+  { key: 'price',  label: '现价',   sort: (a, b) => (b.currentPrice ?? -1) - (a.currentPrice ?? -1) },
+  { key: 'target', label: '目标价', sort: (a, b) => (b.targetPrice ?? -1) - (a.targetPrice ?? -1) },
+  { key: 'gap',    label: '差距%',  sort: (a, b) => (gapPct(b) ?? -1e9) - (gapPct(a) ?? -1e9) },
+  { key: 'date',   label: '研判',   sort: (a, b) => b.modTime - a.modTime }
+];
+let sortKey = 'gap', sortAsc = false;
+
+function fmtPrice(v, ccy) {
+  if (typeof v !== 'number') return '—';
+  const sym = CCY_SYMBOL[ccy] || '';
+  const s = v >= 100 ? v.toFixed(0) : v >= 10 ? v.toFixed(1) : v.toFixed(2);
+  return sym + s;
+}
+
+function renderStockList() {
+  const head = document.getElementById('stockHead');
+  const body = document.getElementById('stockBody');
+  if (!reports.length) {
+    body.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:40px;">🌊 第一份海图研判正在准备中……</td></tr>';
     return;
   }
-  reports.sort((a, b) => b.modTime - a.modTime);
-  // 卡片描述只取一句话：剥离 HTML、去掉与标题重复的「公司名 Period：」前缀、截到首句并压缩为紧凑一行
-  const oneSentence = (html) => {
-    let text = (html || '').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
-    const colon = text.indexOf('：');
-    if (colon > 0 && colon <= 20) text = text.slice(colon + 1).trim();
-    const m = text.match(/^[^。]*。/);
-    let s = m ? m[0] : text;
-    const MAX = 42;
-    if (s.length > MAX) {
-      let cut = s.slice(0, MAX);
-      const b = Math.max(cut.lastIndexOf('·'), cut.lastIndexOf('，'), cut.lastIndexOf('、'));
-      if (b >= 24) cut = cut.slice(0, b);
-      s = cut.replace(/[·，、（\s]+$/, '') + '…';
-    }
-    return s;
-  };
-  grid.innerHTML = reports.map(r => `
-    <a class="report-card" href="${r.file}">
-      <div class="ticker">${r.ticker}</div>
-      <h3>${r.title}</h3>
-      <div class="desc">${oneSentence(r.desc)}</div>
-      <div class="meta">
-        <span class="tag ${r.tagClass}">${r.tag}</span>
-        <span>${r.date}</span>
-      </div>
-    </a>
-  `).join('');
+
+  head.innerHTML = COLS.map(c => {
+    const sorted = c.key === sortKey;
+    const arrow = sorted ? `<span class="arrow">${sortAsc ? '▲' : '▼'}</span>` : '';
+    return `<th class="${sorted ? 'sorted' : ''}" data-key="${c.key}">${c.label}${arrow}</th>`;
+  }).join('');
+  head.querySelectorAll('th').forEach(th => {
+    th.onclick = () => {
+      const k = th.dataset.key;
+      if (sortKey === k) { sortAsc = !sortAsc; } else { sortKey = k; sortAsc = false; }
+      renderStockList();
+    };
+  });
+
+  const col = COLS.find(c => c.key === sortKey);
+  const rows = [...reports].sort((a, b) => (sortAsc ? -1 : 1) * col.sort(a, b));
+
+  body.innerHTML = rows.map(r => {
+    const g = gapPct(r);
+    const gapCell = g == null
+      ? '<span class="gap na">—</span>'
+      : `<span class="gap ${g >= 0 ? 'up' : 'dn'}">${g >= 0 ? '+' : ''}${g.toFixed(1)}%</span>`;
+    return `
+    <tr onclick="location.href='${r.file}'">
+      <td><div class="stock-name"><span class="nm">${r.name}</span><span class="tk">${r.ticker}</span></div></td>
+      <td><span class="tag ${r.tagClass}">${r.rating || r.tag}</span></td>
+      <td class="px">${fmtPrice(r.currentPrice, r.currency)}</td>
+      <td class="px">${fmtPrice(r.targetPrice, r.currency)}</td>
+      <td>${gapCell}</td>
+      <td class="dt">${r.period ? r.period + '<br>' : ''}${r.date}</td>
+    </tr>`;
+  }).join('');
+
+  const asOf = reports.map(r => r.date).sort().pop();
+  const el = document.getElementById('priceAsOf');
+  if (el) el.textContent = `共 ${reports.length} 家 · 现价随每日更新刷新`;
 }
-renderReports();
+renderStockList();
 
 /* ── CALENDAR DATA ── */
 /* HAITU:CALENDAR:START -- 自动生成区域，请勿手工编辑 -- 由 src/daily-update.js 每日 6am 更新 */
