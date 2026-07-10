@@ -1,0 +1,47 @@
+# 海图夜读 · claude-progress
+
+更新时间：2026-07-11
+
+## 当前大任务：标普前 100 全覆盖分析 + 门户估值列表
+
+用户指令（2026-07-11）：
+1. 用 /haitu 分析标普前 100 的公司 ✦ 进行中
+2. 门户重构为可排序列表（现价/目标价/差距%），用于找最低估/最高估 ✅ 已完成
+
+## 已完成
+
+- 门户重构（commit 2561e99）：index.html 卡片网格 → 可排序估值表格；
+  tickers.json 新增 targetPrice/targetCurrency（27 只回填）+ currentPrice（daily-update 每日写回）；
+  fetch_calendar_events.py 拉 regularMarketPrice；html-injector 注入新字段。
+  已预览验证（排序/暗色/无 console 错误）并推送。
+- 4 只已跟踪股票财报更新（commit 036ea25）：LULU/WB/VIPS/LITE。
+- 标普 100 花名册：data/sp100-roster.json（100 家；6 家已有近期报告：GOOGL/MSFT/AMZN/META/JNJ/V；
+  BRK.B 跳过——品牌禁词冲突；93 家 pending，按市值序处理）。
+
+## 进行中
+
+- Wave 1（10 家）：NVDA AAPL AVGO TSLA MU LLY JPM AMD XOM INTC
+  Workflow 三段流水线：research（官方 PR/SEC 数据包）→ verify（对抗核验 10 个关键数字）→ author（13 模块 HTML + social.md）
+  脚本：~/.claude/projects/.../workflows/scripts/haitu-sp100-wave-wf_2500d72a-ffe.js（可复用，args 传 companies+today）
+  注意：args 可能以字符串到达，脚本已做 JSON.parse 兜底。
+
+## 每波收尾流程（勿省略）
+
+1. QC grep 全批：禁词=0 / 模块=13 / 12.1-12.3+模块小结 / og:image=0（已停用 OG 截图——用户 2026-07-11 指令，twitter:card=summary）
+2. 抽查 1-2 份预览渲染（4 图 + 桑基 + essay + quip，0 console 错误）
+3. tickersEntry 合并进 data/tickers.json（modTime=Date.now() 递增错开）+ sp100-roster.json 标 done
+4. npm run update（拉现价 + 重注入门户 + 自动 commit/push index+tickers）
+5. git add 新报告文件 + roster + 本文件，commit "feat(haitu): 标普100 Wave N（TICKERS）"
+
+## 已知约束
+
+- 不再生成 OG 截图 / og:image / twitter:image（用户指令，见 memory haitu-skip-og-screenshots）
+- 禁词：巴菲特/沃伦/伯克希尔/Buffett/Berkshire/Warren = 0
+- 金融股（JPM/BAC/GS/MS/WFC/C/AXP/COF/USB/BNY/SCHW/BLK）：NII/CET1/ROTCE/P/TBV 适配，FCF 法标不适用
+- 评级与目标价必须一致；安全边际≥25% 才买入
+- 静态预览：Claude Preview MCP "haitu-static" localhost:8910，文档根=JaceXie.github.io/
+
+## 下一步
+
+Wave 1 完成后收尾提交，然后按 roster pending 顺序继续 Wave 2（WMT AMAT CSCO ABBV LRCX CAT MA COST UNH BAC）…
+直至 93 家全部 done。每波 ~10 家。
