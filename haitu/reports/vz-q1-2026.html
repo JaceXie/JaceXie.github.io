@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-07-10 · Verizon Q1 2026 财报已于 2026-04-27 发布 -->
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verizon VZ Q1 2026 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+<meta name="description" content="美国无线通信双雄之一 · 靠全国网络+频谱牌照向 1.26 亿后付费用户收月租的高股息现金牛。前瞻 P/E 8.5x + 股息率 6.7% + FCF 收益率约 12% + 连续 20 年增息。Q1 交出 2013 年以来首个正的一季度后付费手机净增 + 创纪录调整后 EBITDA $134 亿 + 上调全年指引。但 $1725 亿总债务 + Frontier 并表推高短债至 $282 亿 + 无线市场饱和零和竞争——便宜的高息现金牛，重杠杆是最大心结。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Verizon VZ Q1 2026 海图研判 · 海图夜读">
+<meta property="og:description" content="美国无线通信双雄之一 · 靠全国网络+频谱牌照向 1.26 亿后付费用户收月租的高股息现金牛。前瞻 P/E 8.5x + 股息率 6.7% + FCF 收益率约 12% + 连续 20 年增息。Q1 交出 2013 年以来首个正的一季度后付费手机净增 + 创纪录调整后 EBITDA $134 亿 + 上调全年指引。但 $1725 亿总债务 + Frontier 并表推高短债至 $282 亿 + 无线市场饱和零和竞争——便宜的高息现金牛，重杠杆是最大心结。">
+<meta property="og:url" content="https://jacexie.github.io/haitu/reports/vz-q1-2026.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Verizon VZ Q1 2026 海图研判 · 海图夜读">
+<meta name="twitter:description" content="美国无线通信双雄之一 · 靠全国网络+频谱牌照向 1.26 亿后付费用户收月租的高股息现金牛。前瞻 P/E 8.5x + 股息率 6.7% + FCF 收益率约 12% + 连续 20 年增息。Q1 转型初见成效但 $1725 亿债务高杠杆是最大心结。">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root { --bg:#f5f0eb; --bg2:#ece6df; --card:#ffffff; --card2:#f8f5f1; --border:#d9d0c7; --text:#4a4340; --text2:#7a706a; --text3:#a89f98; --accent:#8a9a8e; --accent2:#7b8fa0; --accent3:#b08d7a; --rose:#c09090; --gold:#b9a06a; --red:#b87070; --green:#7a9a7a; --shadow:rgba(0,0,0,0.06); --chart-grid:#e5ddd5; }
+[data-theme="dark"] { --bg:#1e1c1a; --bg2:#28251f; --card:#2e2a25; --card2:#363230; --border:#4a4540; --text:#d4ccc4; --text2:#a09890; --text3:#706860; --accent:#8a9a8e; --accent2:#8fabbf; --accent3:#c9a48e; --rose:#c09090; --gold:#c9b07a; --red:#c08080; --green:#8aaa8a; --shadow:rgba(0,0,0,0.3); --chart-grid:#3e3a35; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', serif; line-height: 1.75; font-size: 14.5px; transition: background .35s, color .35s; }
+a { color: var(--accent2); text-decoration: none; }
+.theme-bar { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); }
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+.toggle-switch { position: relative; width: 44px; height: 22px; background: var(--border); border-radius: 11px; cursor: pointer; transition: background .3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: var(--card); border-radius: 50%; transition: transform .3s; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+
+.hero { padding: 48px 24px 36px; text-align: center; border-bottom: 1px solid var(--border); }
+.hero-tag { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 3px 14px; border-radius: 20px; margin-bottom: 18px; }
+.hero h1 { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.pill { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: 'Segoe UI', sans-serif; font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow); }
+.pill strong { color: var(--text); }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle { font-size: 18px; font-weight: 700; color: var(--accent3); margin-bottom: 20px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+.stitle::before { content: ''; display: block; width: 4px; height: 20px; background: var(--accent3); border-radius: 2px; }
+
+.haitu-quip { display: flex; align-items: center; gap: 18px; background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 18px 24px; margin: 24px 0; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-quote { flex: 1; }
+.haitu-portrait { font-size: 15px; line-height: 1.65; color: var(--text); margin-bottom: 6px; font-weight: 600; }
+.haitu-rating-line { font-size: 13px; color: var(--text2); font-family: 'Segoe UI', sans-serif; }
+.rating-badge { display: inline-block; padding: 2px 12px; border-radius: 12px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; margin-left: 4px; }
+.rating-hold { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+.rating-cond { background: rgba(122,154,122,.14); color: var(--green); }
+
+.haitu-essay { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 28px 32px; margin: 24px 0 20px; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-essay-header { display: flex; align-items: center; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.haitu-avatar-sm { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); background: var(--red); box-shadow: 0 2px 8px rgba(184,112,112,0.2); }
+.haitu-name-lg { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 28px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 4px; }
+.haitu-essay-tag { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; }
+.haitu-essay-body { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 15px; line-height: 2.0; color: var(--text); }
+.haitu-essay-body p { margin-bottom: 14px; }
+.haitu-essay-body p.lead { font-size: 16px; font-style: italic; color: var(--text2); margin-bottom: 18px; }
+.haitu-essay-body strong { color: var(--text); font-weight: 700; }
+.haitu-essay-body h4 { font-size: 14px; color: var(--accent3); margin: 18px 0 10px; font-family: 'Segoe UI', sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+.haitu-sign { text-align: right; margin-top: 18px; font-family: 'Georgia', serif; font-size: 14px; color: var(--text2); font-style: italic; }
+.haitu-disc { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); font-style: italic; line-height: 1.7; }
+
+.stock-snap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px; }
+.snap-item { text-align: center; }
+.snap-label { font-family: 'Segoe UI', sans-serif; font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.snap-val { font-family: 'Segoe UI', sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+.snap-val.up { color: var(--green); }
+.snap-val.dn { color: var(--red); }
+.snap-sub { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow); }
+.kpi-l { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.badge { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+.up { background: rgba(122,154,122,.15); color: var(--green); }
+.dn { background: rgba(184,112,112,.15); color: var(--red); }
+.nt { background: rgba(123,143,160,.15); color: var(--accent2); }
+
+.tbl-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow); }
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI', sans-serif; font-size: 13px; }
+.tbl th { background: var(--card2); color: var(--text3); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); background: var(--card2); }
+
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); }
+.ctitle { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 260px; }
+
+.cmt { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 26px; line-height: 1.95; font-size: 14px; box-shadow: 0 1px 4px var(--shadow); color: var(--text); }
+.cmt p { margin-bottom: 14px; }
+.cmt p:last-child { margin-bottom: 0; }
+.cmt strong { color: var(--text); }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+
+.bscore { display: flex; align-items: center; gap: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; margin-bottom: 12px; box-shadow: 0 1px 4px var(--shadow); }
+.circle { width: 62px; height: 62px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; flex-shrink: 0; border: 3px solid; font-family: 'Segoe UI', sans-serif; }
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 4px; color: var(--text); }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.moat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+.moat-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); border-left: 4px solid var(--accent); }
+.moat-card.wide { border-left-color: var(--green); }
+.moat-card.narrow { border-left-color: var(--gold); }
+.moat-card.none { border-left-color: var(--red); }
+.moat-card h5 { font-size: 13px; color: var(--text); margin-bottom: 6px; }
+.moat-card .moat-rate { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.moat-card.wide .moat-rate { background: rgba(122,154,122,.18); color: var(--green); }
+.moat-card.narrow .moat-rate { background: rgba(185,160,106,.18); color: var(--gold); }
+.moat-card.none .moat-rate { background: rgba(184,112,112,.18); color: var(--red); }
+.moat-card p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+
+.ec-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 14px; box-shadow: 0 1px 3px var(--shadow); }
+.ec-badge { flex-shrink: 0; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-top: 2px; font-family: 'Segoe UI', sans-serif; }
+.ec-bull { background: rgba(122,154,122,.18); color: var(--green); }
+.ec-bear { background: rgba(184,112,112,.18); color: var(--red); }
+.ec-neut { background: rgba(185,160,106,.18); color: var(--gold); }
+.ec-body { flex: 1; }
+.ec-title { font-weight: 600; color: var(--text); margin-bottom: 3px; font-size: 14px; }
+.ec-note { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.dcf-note { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.dcf-note strong { color: var(--text); }
+
+.scorecard { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow); }
+.score-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.score-card { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px; }
+.score-letter { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Segoe UI', sans-serif; font-weight: 800; font-size: 22px; flex-shrink: 0; border: 3px solid; }
+.s-a { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.12); }
+.s-bp { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.06); }
+.s-b { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.10); }
+.s-bm { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.06); }
+.s-c { color: var(--red); border-color: var(--red); background: rgba(184,112,112,.08); }
+.score-body h4 { font-size: 13px; color: var(--text); margin-bottom: 4px; }
+.score-body p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+.flag-row { margin-top: 16px; padding: 12px 16px; background: rgba(184,112,112,.08); border: 1px solid rgba(184,112,112,.3); border-radius: 8px; font-size: 13px; color: var(--text2); }
+.flag-row strong { color: var(--red); }
+
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center; box-shadow: 0 1px 4px var(--shadow); }
+.pbox .pl { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; }
+.pbox .pv { font-family: 'Segoe UI', sans-serif; font-size: 28px; font-weight: 800; margin-bottom: 5px; }
+.pbox .pn { font-size: 12px; color: var(--text3); line-height: 1.5; }
+.pc { color: var(--red); } .pf { color: var(--gold); } .ps { color: var(--green); }
+
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.risk-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); position: relative; overflow: hidden; }
+.risk-card::before { content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent); }
+.risk-card.r1::before { background: var(--green); }
+.risk-card.r2::before { background: rgba(122,154,122,.6); }
+.risk-card.r3::before { background: var(--gold); }
+.risk-card.r4::before { background: var(--rose); }
+.risk-card.r5::before { background: var(--red); }
+.risk-card h5 { font-size: 14px; margin-bottom: 6px; color: var(--text); }
+.risk-score { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.r1 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r2 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r3 .risk-score { background: rgba(185,160,106,.18); color: var(--gold); }
+.r4 .risk-score { background: rgba(192,144,144,.18); color: var(--rose); }
+.r5 .risk-score { background: rgba(184,112,112,.18); color: var(--red); }
+.risk-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+footer { background: var(--card2); border-top: 1px solid var(--border); padding: 24px; text-align: center; color: var(--text3); font-size: 12px; margin-top: 40px; line-height: 1.8; }
+@media (max-width: 768px) { .cgrid,.pgrid { grid-template-columns: 1fr; } .hero h1 { font-size: 22px; } .kpi-grid { grid-template-columns: 1fr 1fr; } .stock-snap { grid-template-columns: 1fr 1fr; } .haitu-essay-header { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/VZ" target="_blank" rel="noopener" title="在雪球查看 VZ 实时行情">雪球 VZ</a>
+  </div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">Q1 2026 财报发布 · 2026-04-27 &nbsp;|&nbsp; 海图研判 · 2026-07-11</div>
+  <h1>Verizon VZ · 2026 Q1 财报深度分析</h1>
+  <div class="hero-sub">NYSE: VZ &nbsp;|&nbsp; 财季截至 2026-03-31 &nbsp;|&nbsp; 价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill">股价 <strong>$42.24</strong> <span style="color:var(--red)">距高点 -18%</span></div>
+    <div class="pill">市值 <strong>$177B</strong></div>
+    <div class="pill">Q1 总营收 <strong>$34.44B</strong> <span style="color:var(--green)">+2.9%</span></div>
+    <div class="pill">调整后 EPS <strong>$1.28</strong> <span style="color:var(--green)">+7.6%</span></div>
+    <div class="pill">股息率 <strong>6.7%</strong></div>
+    <div class="pill">前瞻 P/E <strong>~8.5x</strong> <span style="color:var(--green)">深度低估</span></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 海图页首短评 ═══ -->
+<div class="haitu-quip">
+  <div class="haitu-quote">
+    <div class="haitu-portrait">美国无线通信双雄之一——靠全国网络与频谱牌照，向 1.26 亿后付费用户收月租的高股息现金牛。前瞻 P/E 8.5x + 股息率 6.7% + FCF 收益率约 12% + 连续 20 年增息。Q1 交出 2013 年以来首个正的一季度后付费手机净增（+5.5 万）+ 创纪录调整后 EBITDA $134 亿 + 上调全年指引 + 首次启动 $250 亿回购，转型初见成效。但 $1725 亿总债务 + Frontier 并表推高短债至 $282 亿 + 无线市场饱和零和竞争——便宜的高息现金牛，重杠杆是最大心结。</div>
+    <div class="haitu-rating-line">评级：<span class="rating-badge rating-cond">有条件买入</span> · 12 个月目标价 $49（+16%）· 低估值 + 厚股息 + 转型初见成效的现金牛，对垒 $1725 亿债务高杠杆 + 转型仍在早期 + 无线市场零和竞争</div>
+  </div>
+</div>
+
+<!-- ═══ 市场数据快照 ═══ -->
+<div class="section">
+  <div class="stitle">市场数据快照（2026-07-10 收盘）</div>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">股价（美元）</div><div class="snap-val">$42.24</div><div class="snap-sub">2026-07-10 · 距 52 周高 -18%</div></div>
+    <div class="snap-item"><div class="snap-label">市值</div><div class="snap-val">$177B</div><div class="snap-sub">4176M 股 × $42.24</div></div>
+    <div class="snap-item"><div class="snap-label">TTM P/E（GAAP）</div><div class="snap-val">~10.3x</div><div class="snap-sub">TTM GAAP EPS ~$4.10</div></div>
+    <div class="snap-item"><div class="snap-label">前瞻 P/E</div><div class="snap-val nt">~8.5x</div><div class="snap-sub">FY2026 调整 EPS ~$4.97</div></div>
+    <div class="snap-item"><div class="snap-label">P/S (TTM)</div><div class="snap-val">~1.3x</div><div class="snap-sub">营收 ~$138B</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间</div><div class="snap-val">$38.4 - $51.7</div><div class="snap-sub">接近低端</div></div>
+    <div class="snap-item"><div class="snap-label">股息率</div><div class="snap-val up">~6.7%</div><div class="snap-sub">$2.83/年 · 连续 20 年增息</div></div>
+    <div class="snap-item"><div class="snap-label">FCF Yield</div><div class="snap-val up">~12%</div><div class="snap-sub">FY26 指引 FCF ≥$21.5B</div></div>
+    <div class="snap-item"><div class="snap-label">现金及等价物</div><div class="snap-val">$8.37B</div><div class="snap-sub">2026-03-31 末</div></div>
+    <div class="snap-item"><div class="snap-label">总债务</div><div class="snap-val dn">$172.5B</div><div class="snap-sub">短债 28.2 + 长债 144.2</div></div>
+    <div class="snap-item"><div class="snap-label">真实净负债</div><div class="snap-val dn">-$164.1B</div><div class="snap-sub">⚠️ 净负债非净现金</div></div>
+    <div class="snap-item"><div class="snap-label">调整后 EBITDA 利润率</div><div class="snap-val up">38.9%</div><div class="snap-sub">Q1 · 公司史上单季最高</div></div>
+  </div>
+  <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">数据时点：股价 2026-07-10 收盘 $42.24 · 财务数据来源 Verizon Q1 2026 官方 FOI 财务与运营信息表 + SEC 8-K Exhibit 99 + 新闻稿（2026-04-27 盘前发布，财季截至 2026-03-31）· 货币 USD 单口径。Verizon 财年与自然年一致（12 月底止）。Frontier Communications 并购于 2026-01-20 交割，其业绩自该日起并入。⚠️ Verizon 是典型的<strong>重资产高杠杆电信股</strong>——现金 $8.37B 远小于总债务 $172.5B，<strong>真实净负债 -$164.1B</strong>，"净现金"概念完全不适用。</p>
+</div>
+
+<!-- ═══ Q1 2026 KPI ═══ -->
+<div class="section">
+  <div class="stitle">Q1 2026 核心业绩（USD · 财季截至 2026-03-31）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">总营收</div><div class="kpi-v">$34.44B</div><span class="badge up">+2.9% YoY</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">略低于市场预期 ~$348 亿</div></div>
+    <div class="kpi"><div class="kpi-l">消费者分部营收</div><div class="kpi-v">$26.45B</div><span class="badge up">+3.3%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">营业利润率 29.2%</div></div>
+    <div class="kpi"><div class="kpi-l">商业分部营收</div><div class="kpi-v">$7.42B</div><span class="badge up">+1.8%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">营业利润率 11.9%</div></div>
+    <div class="kpi"><div class="kpi-l">营业利润</div><div class="kpi-v">$8.24B</div><span class="badge up">+3.3%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">营业利润率 23.9%</div></div>
+    <div class="kpi"><div class="kpi-l">调整后 EBITDA</div><div class="kpi-v">$13.40B</div><span class="badge up">+6.7%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">利润率 38.9% · 史上单季最高</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 净利（归属）</div><div class="kpi-v">$5.05B</div><span class="badge up">+3.3%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">合并口径 $5.15B</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 摊薄 EPS</div><div class="kpi-v">$1.20</div><span class="badge up">+4.3%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">含收购相关摊销</div></div>
+    <div class="kpi"><div class="kpi-l">调整后 EPS</div><div class="kpi-v">$1.28</div><span class="badge up">+7.6%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">2021 以来最快增速 · 最可信口径</div></div>
+    <div class="kpi"><div class="kpi-l">自由现金流</div><div class="kpi-v">$3.78B</div><span class="badge up">+4%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">OCF $7.98B − Capex $4.20B</div></div>
+    <div class="kpi"><div class="kpi-l">后付费手机净增</div><div class="kpi-v">+5.5 万</div><span class="badge up">同比 +34 万</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">2013 以来首个正的 Q1</div></div>
+    <div class="kpi"><div class="kpi-l">宽带净增</div><div class="kpi-v">+34.1 万</div><span class="badge up">光纤 +12.7 万 / FWA +21.4 万</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">总宽带连接 1676 万</div></div>
+    <div class="kpi"><div class="kpi-l">消费者手机流失率</div><div class="kpi-v">0.90%</div><span class="badge up">环比 -5bp</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">3 月已降至 0.85% 以下</div></div>
+  </div>
+</div>
+
+<!-- ═══ 看穿桥接 高亮框 ═══ -->
+<div class="section">
+  <div class="stitle">本季必看 · 两个"看穿"：营收增速 vs 利润质量、GAAP vs 调整后 EPS</div>
+  <div class="cmt">
+    <p><strong>Verizon 的这份财报有两个必须"看穿"的地方，看不穿就会误判它的转型成色。</strong></p>
+    <p><strong>看穿一：营收只增 +2.9%、还略低于预期，但利润质量在实质改善。</strong> 表面看总营收 $344.4 亿仅 +2.9%、且低于市场约 $348 亿的预期，似乎平淡。但拆开看，<span class="hl-t">调整后 EBITDA $134 亿（+6.7%）创下公司史上单季最高、利润率同比 +140bp 至 38.9%</span>——利润增速远快于营收增速。原因是新任 CEO 舒尔曼把打法从"昂贵促销抢用户"转向"客户体验 + 成本纪律"，获客留客成本较去年 Q4 下降约 35%。这是"以价换量"退潮、"以质换利"登场的信号，营收增速慢反而是主动收敛低毛利促销的结果。</p>
+    <div class="tbl-wrap" style="margin:14px 0;">
+      <table class="tbl">
+        <tr><th>利润桥接（$M）</th><th>Q1 2026</th><th>YoY / 说明</th></tr>
+        <tr><td>总营收</td><td>34,440</td><td>+2.9%</td></tr>
+        <tr><td><span class="warn-t">减：服务成本 + 设备成本</span></td><td><span class="warn-t">(13,673)</span></td><td>服务 7,167 + 设备 6,506</td></tr>
+        <tr><td>减：SG&amp;A</td><td>(7,633)</td><td>销售及管理费用</td></tr>
+        <tr><td>减：折旧摊销</td><td>(4,892)</td><td>重资产网络折旧</td></tr>
+        <tr class="hl"><td><strong>营业利润</strong></td><td><strong>8,242</strong></td><td><strong>+3.3% · 利润率 23.9%</strong></td></tr>
+        <tr class="hl"><td>调整后 EBITDA</td><td>13,395</td><td>+6.7% · 利润率 38.9%（纪录）</td></tr>
+      </table>
+    </div>
+    <p><strong>看穿二：GAAP EPS $1.20 与调整后 EPS $1.28 差 6.7%，但更要看 4Q25 的"深坑"。</strong> 本季 GAAP EPS $1.20（+4.3%）与调整后 $1.28（+7.6%）差距不大，差额主要是<span class="hl-t">收购相关无形摊销 + Frontier 并购整合费 $261M</span>。但把镜头拉到上一季更重要：<span class="warn-t">4Q25 GAAP EPS 骤降至 $0.55</span>，是因为约 $23 亿特殊费用（裁员遣散 $1,715M + 资产合理化 $583M）——这正是舒尔曼"$50 亿成本削减 + 裁员 1.3 万人"转型计划的一次性代价。理解这一点，才能读懂为什么 Q1 的调整后 EBITDA 能创纪录：<strong>先付转型的"痛"，再收利润率的"果"。</strong></p>
+  </div>
+</div>
+
+<!-- ═══ 趋势图 ═══ -->
+<div class="section">
+  <div class="stitle">关键指标趋势</div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">净营收（$B）& 调整后 EBITDA 利润率（近 5 季）</div><div class="cwrap"><canvas id="chartRev"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">利润率趋势（营业利润率 vs 调整后 EBITDA 利润率，%）</div><div class="cwrap"><canvas id="chartMargin"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">Q1 2026 分部营收拆分（$B）</div><div class="cwrap"><canvas id="chartSegment"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">每股收益趋势（GAAP vs 调整后，近 5 季）</div><div class="cwrap"><canvas id="chartEps"></canvas></div></div>
+  </div>
+</div>
+
+<!-- ═══ 桑基图 ═══ -->
+<div class="section">
+  <div class="stitle">Q1 2026 资金流向桑基图（$B）</div>
+  <div class="ccard">
+    <div id="sankey" style="width:100%;height:480px;"></div>
+    <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">说明：总营收 $34.44 → 服务成本 $7.17 + 设备成本 $6.51 + 毛利 $20.77 → SG&amp;A $7.63 + 折旧摊销 $4.89 + 营业利润 $8.24 → 利息支出 $1.94 + 税项及其他 $1.16 + 净利润（合并）$5.15。注：每季利息支出高达 $1.94B（约占营业利润 24%），是重杠杆电信股利润表上永远的"重力"。派生毛利率 60.3%（营收 − 服务与设备成本，仅供参考，电信业不报传统毛利率）。本季自由现金流 $3.78B，另为 Frontier 并购净付现金 $9.48B。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 1 ═══ -->
+<div class="section">
+  <div class="stitle">模块 1 · 公司概览与背景</div>
+  <div class="cmt">
+    <p><strong>Verizon Communications Inc.</strong>（NYSE: VZ），总部纽约。前身可追溯至贝尔系统拆分后的 Bell Atlantic，2000 年与 GTE 合并成立 Verizon，2000-07 上市。财年与自然年一致（12 月底止）。当前市值约 <strong>$177B</strong>，员工约 9.96 万人（FTE）。</p>
+
+    <p><strong>核心叙事</strong>：Verizon 是<span class="hl-t">美国无线通信"三巨头"之一（与 AT&T、T-Mobile 三分天下）</span>，本质是一门"靠全国无线网络 + 频谱牌照，向 1.26 亿后付费用户按月收租"的高股息现金牛。它不追求高增长，追求的是现金流与派息的确定性——这是一门 <strong>38.9% 调整后 EBITDA 利润率、23.9% 营业利润率、连续 20 年增息、FCF 指引 ≥$215 亿的成熟公用事业型生意</strong>。</p>
+
+    <p><strong>两大经营分部</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>消费者（Consumer）</strong>——营收 $264.5 亿（占比 78%），含移动服务、宽带（光纤 Fios + 固定无线接入 FWA）+ 设备。营业利润率 29.2%、EBITDA 利润率 43.3%，是绝对基本盘</li>
+      <li><strong>商业（Business）</strong>——营收 $74.2 亿（占比 22%），面向企业/政府客户。营业利润率仅 11.9%，是低利润率、增长更慢的一条腿</li>
+    </ul>
+
+    <p><strong>转型与并购</strong>：2025 年下半年原 PayPal CEO <span class="hl-t">丹·舒尔曼（Dan Schulman）接任 CEO</span>，启动以"客户体验 + 成本纪律"为核心的转型。<strong>Frontier Communications 并购于 2026-01-20 交割</strong>并表——一举把光纤连接从 774 万跃升至 1076 万、总宽带连接从 1347 万跃升至 1676 万，同时也带来了额外债务负担。目标 2026 年底光纤覆盖 3200 万户（中期目标 4000-5000 万）。</p>
+
+    <p><strong>能力圈检验</strong>：无线收月租的生意极其清晰（看得懂的成熟好生意）。但<span class="warn-t">两块需要盯紧的地方：(1) $1725 亿总债务 + Frontier 并表后一年内到期债务飙至 $282 亿——高杠杆下的再融资与降杠杆执行；(2) 无线市场已高度饱和，三巨头零和博弈，Verizon 能否靠"客户体验"而非"促销降价"持续留住用户，是转型能否走通的关键</span>。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 2 ═══ -->
+<div class="section">
+  <div class="stitle">模块 2 · 管理层评估</div>
+
+  <div class="bscore">
+    <div class="circle cw">B</div>
+    <div class="bd">
+      <h4>Dan Schulman · CEO（2025 下半年至今）</h4>
+      <p>原 PayPal 掌门人，2025 年下半年接任 Verizon CEO。Schulman 上任即启动"重塑"转型：把增长逻辑从"依赖昂贵促销"转向"客户体验 + 成本纪律"，推动 <span class="hl-t">$50 亿运营成本削减 + 裁员 1.3 万人</span>，并加速 AI 技术栈（85% 网络问题自主解决、节能 $2 亿）。Q1 2026 是其战略首个显现成效的季度——2013 年以来首个正的一季度后付费手机净增、流失率降至 0.90%、上调全年指引。海图判断：方向清晰、执行初见成效，但转型仍在早期，且掌舵不足一年、履历跨界（支付→电信），需更长时间验证一致性，暂给 B。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B</div>
+    <div class="bd">
+      <h4>资本配置 · 高含金量股息 + 去杠杆优先 + 回购刚起步</h4>
+      <p>
+      <strong>连续 20 年提高年度股息</strong>——1Q26 季度股息升至 $0.7075（年化约 $2.83），派息率约 57% 调整后 EPS，是美股高息蓝筹的代表。<br>
+      <strong>回购刚起步</strong>：2026-01-30 首次授权 $250 亿多年回购计划（属 $550 亿总股东回报计划一部分），1Q26 执行首笔 $25 亿，把期末流通股从 4217M 压到 4176M；全年回购目标仅 ≥$30 亿，节奏温和。<br>
+      <span class="warn-t">最大的资本配置约束是债务</span>：Frontier 并购推高杠杆，管理层明确把<strong>降杠杆列为第一优先</strong>——已偿还约半数 Frontier 债务、计划年底基本还清。这与"借债做杠杆化回购"相反，是"去杠杆优先、返还量力而行"的保守打法。
+      </p>
+    </div>
+  </div>
+
+  <div class="cmt">
+    <p><strong>长期主义测试</strong>：✅ 转型战略着眼"持久性经常性服务收入"、远离低毛利高促销，是长期视角；先承担裁员/资产合理化的一次性阵痛（4Q25 GAAP EPS 因此骤降至 $0.55），再收利润率之果，体现长期取舍。<strong>坦诚度</strong>：新任 CEO 在 3Q25 电话会主动点名流失率问题并列出四大驱动因素，不回避；指引上调有据。<strong>利益绑定</strong>：成熟大盘股，管理层持股比例不高（行业常态），薪酬与调整后 EPS / 服务收入挂钩。<strong>历史记录</strong>：Verizon 长期以"稳派息"著称，但过去也因大额并购（Verizon Wireless 收购、Vodafone 权益回购、Frontier）反复推高杠杆，这是需要持续监督的资本配置底色。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 3 ═══ -->
+<div class="section">
+  <div class="stitle">模块 3 · 商业模式深度解析</div>
+  <div class="cmt">
+    <p><strong>海图"一句话测试"</strong>：<span class="hl-t">Verizon 是美国最大的无线网络运营商之一——靠数十年积累的频谱牌照和全国基站，向 1.26 亿后付费用户按月收订阅费，再叠加光纤/固定无线宽带，赚的是"月租现金流"的钱。</span></p>
+
+    <p><strong>收入模型</strong>：核心是<strong>无线服务订阅（后付费为主）</strong>——1.265 亿后付费连接 × 月租，后付费手机 ARPA（每账户平均收入）$166.66。叠加宽带（光纤 Fios + FWA 固定无线接入）+ 无线设备销售（低毛利，$56.8 亿/季，多为手机分期）+ 商业/政府服务。收入具备<span class="hl-t">极强的经常性与可预测性</span>——月租按月复现，是典型公用事业型现金流。</p>
+
+    <p><strong>Q1 2026 分部营收模型</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>分部 / 项目</th><th>Q1 2026</th><th>YoY</th><th>利润率</th></tr>
+        <tr><td>消费者 Consumer</td><td>$26.45B</td><td>+3.3%</td><td>营业 29.2% / EBITDA 43.3%</td></tr>
+        <tr><td>&nbsp;&nbsp;├ 移动+宽带服务</td><td>$19.18B</td><td>—</td><td>高毛利核心</td></tr>
+        <tr><td>&nbsp;&nbsp;├ 无线设备</td><td>$4.82B</td><td>—</td><td>低毛利（手机分期）</td></tr>
+        <tr><td>&nbsp;&nbsp;└ 其他</td><td>$2.45B</td><td>—</td><td>—</td></tr>
+        <tr><td>商业 Business</td><td>$7.42B</td><td>+1.8%</td><td>营业 11.9% / EBITDA 26.5%</td></tr>
+      </table>
+    </div>
+
+    <p style="margin-top:14px;"><strong>单位经济与议价能力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>后付费用户是利润皇冠</strong>——ARPA $166.66、流失率仅 0.90%（消费者手机），黏性高、现金流稳。这是 Verizon 最值钱的资产</li>
+      <li><strong>对用户议价能力</strong>：中——无线是准同质化服务，三巨头竞争激烈，Verizon 靠网络质量口碑维持溢价，但涨价空间受竞争压制（3Q25 涨价曾引发流失）</li>
+      <li><strong>对设备供应商</strong>：设备（手机）是过手低毛利业务，赚的不是这块钱</li>
+      <li><strong>网络效应弱、规模/牌照壁垒强</strong>：无线没有双边网络效应，但频谱牌照稀缺 + 全国基站的重资产壁垒极高，构成"有效规模"护城河</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══ 模块 4 ═══ -->
+<div class="section">
+  <div class="stitle">模块 4 · 经济护城河分析（5 维）</div>
+  <div class="moat-grid">
+    <div class="moat-card narrow">
+      <h5>1. 网络效应</h5>
+      <span class="moat-rate">窄 / 弱</span>
+      <p>无线订阅本身无双边网络效应——用户之间不因彼此使用而增值。这是 Verizon 护城河中最弱的一维。<strong>趋势：稳定（本就不强）</strong>。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>2. 有效规模（牌照+基站）</h5>
+      <span class="moat-rate">宽</span>
+      <p>频谱牌照稀缺（账面 $1571 亿）+ 全国基站重资产（PP&E 净值 $1260 亿），新进入者几无空间。美国无线是三寡头格局。<strong>趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>3. 转换成本</h5>
+      <span class="moat-rate">中</span>
+      <p>手机分期合约 + 携号转网摩擦 + 家庭套餐捆绑提供一定黏性，消费者流失率 0.90% 印证。但号码可携、竞争促销降低了切换门槛。<strong>趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>4. 无形资产（品牌/牌照）</h5>
+      <span class="moat-rate">中-宽</span>
+      <p>Verizon 品牌以"网络质量最优"著称，支撑价格溢价 + 数十年监管牌照。<span class="warn-t">但溢价正被 T-Mobile 性价比策略侵蚀</span>。<strong>趋势：温和承压</strong>。</p>
+    </div>
+    <div class="moat-card none">
+      <h5>5. 成本优势</h5>
+      <span class="moat-rate">无 / 弱</span>
+      <p>三巨头成本结构相近，无线是资本密集、价格竞争的准同质化行业，Verizon 无显著成本优势。<span class="warn-t">高杠杆反而抬高其资金成本</span>。<strong>趋势：稳定</strong>。</p>
+    </div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>10 年后护城河会更宽还是更窄？</strong> <span class="hl-t">核心是"有效规模"护城河（频谱 + 基站 + 三寡头格局）足够宽且稳定</span>，这保证了 Verizon 不会消失、现金流可预测。但它<span class="warn-t">缺乏"加宽"的引擎</span>：无网络效应、成本优势弱、品牌溢价被 T-Mobile 蚕食。护城河的性质更像"公用事业的稳定壁垒"而非"能持续扩张的复利壁垒"。Frontier 光纤并表是少数能"加宽"的动作——用光纤 + 无线融合（FWA）提高家庭黏性、扩大宽带份额。<strong>结论：护城河宽但静态，是"守成型"而非"进攻型"护城河。</strong></p>
+    <p><strong>定价权</strong>：弱-中。无线准同质化 + 三寡头竞争，涨价必须谨慎（3Q25 涨价曾引发流失）。转型的核心正是从"降价抢量"转向"体验留客"，以减少对价格战的依赖。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 5 ═══ -->
+<div class="section">
+  <div class="stitle">模块 5 · 财务深度分析</div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 12px 0; font-family: 'Segoe UI',sans-serif;">5.1 近 5 季核心指标趋势（$M / $）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>指标</th><th>1Q25</th><th>2Q25</th><th>3Q25</th><th>4Q25</th><th>1Q26</th></tr>
+      <tr><td>总营收</td><td>33,485</td><td>34,504</td><td>33,821</td><td>36,381</td><td>34,440</td></tr>
+      <tr><td>营业利润</td><td>7,978</td><td>8,172</td><td>8,105</td><td>5,004</td><td>8,242</td></tr>
+      <tr><td>营业利润率</td><td>23.8%</td><td>23.7%</td><td>24.0%</td><td>13.8%</td><td>23.9%</td></tr>
+      <tr><td>归属净利</td><td>4,879</td><td>5,003</td><td>4,950</td><td>2,342</td><td>5,045</td></tr>
+      <tr><td>GAAP 摊薄 EPS</td><td>1.15</td><td>1.18</td><td>1.17</td><td>0.55</td><td>1.20</td></tr>
+      <tr><td>调整后 EPS</td><td>1.19</td><td>1.22</td><td>1.21</td><td>1.09</td><td>1.28</td></tr>
+      <tr class="hl"><td>调整后 EBITDA</td><td>12,555</td><td>12,807</td><td>12,775</td><td>11,860</td><td>13,395</td></tr>
+      <tr><td>调整后 EBITDA 利润率</td><td>37.5%</td><td>37.1%</td><td>37.8%</td><td>32.6%</td><td>38.9%</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">⚠️ <strong>读表要点</strong>：4Q25 是"转型阵痛坑"——营业利润率骤降至 13.8%、GAAP EPS $0.55，源于约 $23 亿特殊费用（裁员遣散 $1,715M + 资产合理化 $583M）；调整后 EPS $1.09、调整后 EBITDA 利润率 32.6%（同样受一次性影响）。1Q26 全面回弹并创下调整后 EBITDA $13,395M 与利润率 38.9% 的<strong>公司史上单季纪录</strong>。GAAP 与调整后 EPS 单季差异在 4Q25 高达 98%、TTM 口径约 17%（>10%），触发模块 7 的 P/E 多档透视。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.2 资产负债健康度（2026-03-31 末 · $M）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>2026-03-31</th><th>说明</th></tr>
+      <tr><td>现金及等价物</td><td>8,366</td><td>短期投资未单列</td></tr>
+      <tr class="hl"><td>一年内到期债务（短债）</td><td>28,229</td><td>环比大增（4Q25 为 18,618），因 Frontier 并表 + 资产支持借款</td></tr>
+      <tr class="hl"><td>长期债务</td><td>144,231</td><td>—</td></tr>
+      <tr class="hl"><td>总债务合计</td><td>172,460</td><td>官方口径（无担保 + 担保 + 融资租赁）</td></tr>
+      <tr><td>&nbsp;&nbsp;├ 无担保债务</td><td>142,498</td><td>净无担保债务 $130,053M</td></tr>
+      <tr><td>&nbsp;&nbsp;└ 担保债务（估）</td><td>~29,962</td><td>Frontier 资产支持债 + 融资租赁 · 计划年底基本还清</td></tr>
+      <tr class="hl"><td><strong>真实净负债</strong></td><td><strong>-164,094</strong></td><td>⚠️ 现金 − 总债务 · 深度净负债</td></tr>
+      <tr><td>经营租赁负债（合计）</td><td>23,412</td><td>流动 4,720 + 非流动 18,692</td></tr>
+      <tr><td>无线牌照</td><td>157,082</td><td>占总资产 38%</td></tr>
+      <tr><td>商誉</td><td>30,628</td><td>—</td></tr>
+      <tr><td>物业及设备净值</td><td>125,972</td><td>重资产网络</td></tr>
+      <tr><td>总资产</td><td>417,882</td><td>—</td></tr>
+      <tr><td>股东权益</td><td>104,622</td><td>每股账面 ~$25</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">⚠️ <strong>净负债非净现金——铁律提示</strong>：Verizon 现金仅 $8.37B，总债务高达 $172.46B（短债 $28.23B + 长债 $144.23B，官方口径），<strong>真实净负债 -$164.1B</strong>；若再计入经营租赁负债 $23.41B，净负债约 -$187.5B。这是典型的重资产高杠杆电信股，"现金堡垒"叙事完全不适用。关键正面：<strong>净无担保债务 / 调整后 EBITDA = 2.6 倍</strong>，仍在投资级区间（VZ 评级 BBB+/Baa1 级别），且管理层已偿还约半数 Frontier 债务、计划年底基本还清，降杠杆是首要资本配置目标。短债从 $186 亿飙至 $282 亿是本季资产负债表最需盯紧的变化，主因 Frontier 并表及资产支持借款重分类。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.3 现金流量（Q1 2026 三个月 · $M）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>Q1 2025</th><th>Q1 2026</th><th>说明</th></tr>
+      <tr><td>经营活动现金流（OCF）</td><td>7,782</td><td>7,984</td><td>+2.6%</td></tr>
+      <tr><td>- Capex（含资本化软件）</td><td>—</td><td>4,201</td><td>网络及光纤建设按计划</td></tr>
+      <tr class="hl"><td>自由现金流（FCF）</td><td>3,637</td><td>3,783</td><td>+4.0%</td></tr>
+      <tr><td>股息支付</td><td>—</td><td>2,910</td><td>$0.7075/股</td></tr>
+      <tr><td>股份回购</td><td>0</td><td>2,500</td><td>新授权首笔</td></tr>
+      <tr><td>Frontier 并购净付现金</td><td>—</td><td>9,480</td><td>2026-01-20 交割</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;"><strong>FCF 覆盖度</strong>：Q1 FCF $3.78B 覆盖股息 $2.91B（覆盖率 130%），但同时执行 $2.5B 回购后为负缺口——单季受季节性（Capex 前置、Frontier 现金支付）影响，应看全年：FY2026 指引 OCF $375-380 亿、Capex $160-165 亿、<strong>FCF ≥$215 亿</strong>（同比增约 7%+，为 2020 年以来最高）。全年 FCF $215 亿可充分覆盖股息 ~$116 亿（覆盖率 185%）+ 回购 ~$30 亿，且有余量还债——这是判断股息可持续性的关键。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.4 所有者盈余（价值投资口径 · FY2026 指引）</h3>
+  <div class="dcf-note">
+    <p><strong>所有者盈余 = 净利润 + 折旧摊销 + 非现金费用 − 维护性 Capex ± 营运资金 ≈ FCF</strong></p>
+    <p>Verizon 是重资产电信，D&amp;A 巨大（$4.89B/季），但 Capex 也高（FY2026 指引 $160-165 亿）。其 FCF（OCF − Capex，已扣除利息与税）本身就是很好的所有者盈余近似——FY2026 指引 FCF ≥$215 亿。注意：这里的 Capex 大部分是维护 + 光纤扩张混合，若按纯维护口径，所有者盈余会略高于 FCF。</p>
+    <p><strong>所有者盈余收益率 = FCF ~$215 亿 / 市值 $177B ≈ 12.1%</strong>——这是一个<span class="hl-t">"深度低估 + 高杠杆"的收益率</span>：12% 的 FCF 收益率对一个成熟稳定的现金牛非常高，反映市场担心的是<strong>杠杆与终局衰退</strong>，而非现金创造能力。<strong>换句话说：Verizon 的问题从来不是能不能赚现金，而是这些现金要先还 $1725 亿的债、市场怕它长期衰退——这正是低估的来源，也是修复的空间。</strong></p>
+  </div>
+</div>
+
+<!-- ═══ 模块 6 ═══ -->
+<div class="section">
+  <div class="stitle">模块 6 · 电话会分析（Q1 2026 + 前 2 季度）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">Q1 2026 电话会（2026-04-27）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"2013 年以来首个正的一季度后付费手机净增（+5.5 万，同比改善 34.4 万）；消费者流失率降至 0.90%、3 月低于 0.85%"——CEO Schulman</div><div class="ec-note">Schulman 称"不再主要依赖昂贵促销驱动增长"。这是转型从"以价换量"转向"以质留客"的最硬证据。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"上调 FY2026 调整后 EPS 指引至 +5-6%（原 +4-5%），为四年来最快增速；创纪录单季调整后 EBITDA $134 亿"</div><div class="ec-note">指引区间从 $4.90-4.95 上调至 $4.95-4.99。后付费手机净增全年目标上调至 75 万-100 万区间上半部（约为 2025 报告值的 2-3 倍）。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"FCF 同比 +4% 至 $38 亿；完成 $25 亿回购 + 连续 20 年提高股息（年化 +$0.07）"</div><div class="ec-note">资本回报明显加强——首次启动回购 + 20 年增息，全年 FCF 指引 ≥$215 亿（2020 以来最高）。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-neut">中性偏好</div><div class="ec-body"><div class="ec-title">"Frontier 整合按计划推进，目标 2028 年实现 $10 亿运营成本协同；年底覆盖 3200 万光纤户；AI 技术栈 7 月基本完成"</div><div class="ec-note">AI 已能自主解决 85% 网络问题、节能 $2 亿。光纤 + 无线融合是少数能"加宽护城河"的动作。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"获客与留客成本从 Q4 到 3 月下降约 35%，战略转向持久性经常性服务收入、远离低毛利高促销"</div><div class="ec-note">成本纪律是利润率创纪录的直接来源，但也意味着营收增速会主动收敛（Q1 营收 +2.9% 略低于预期）。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q4 2025 电话会（2026-01-30）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"移动 + 宽带合计净增超 100 万，为 2019 以来最强单季；后付费手机净增 +61.6 万"</div><div class="ec-note">宣布 $250 亿回购授权 + $550 亿总股东回报计划，第 20 年连续提高股息。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"GAAP EPS 仅 $0.55（调整后 $1.09），因约 $23 亿特殊费用——$50 亿 OpEx 削减计划、裁员 1.3 万人（遣散 $17.15 亿）"</div><div class="ec-note">初始 FY2026 调整后 EPS 指引 $4.90-4.95（+4-5%）、Capex $160-165 亿（较 VZ+Frontier 合计 2025 水平减约 $40 亿）。转型阵痛一次性入账。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q3 2025 电话会（2025-10-29）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"营收仅 +1.5% 至 $338 亿；消费者后付费手机用户流失，新任 CEO 点名流失率问题"</div><div class="ec-note">Schulman 列出四大驱动因素（涨价、体验摩擦、价值感知、竞争加剧）。全年调整后 EPS 增长指引仅 +1-3%，为近年最弱——这是转型前的"至暗时刻"。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-neut">中性偏好</div><div class="ec-body"><div class="ec-title">"提出'重塑'/转型计划——以客户为中心的文化、成本结构大改；Frontier + Starry 并购扩大光纤融合能力"</div><div class="ec-note">转型蓝图在 3Q25 提出，4Q25 承担阵痛，1Q26 显现成效——三季连读能看清完整弧线。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">指引兑现度追踪</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>历史指引</th><th>Q1 2026 实际/更新</th><th>评价</th></tr>
+      <tr><td>FY2026 调整后 EPS +4-5%（Q4 初始）</td><td>上调至 +5-6%（$4.95-4.99）</td><td><span class="badge up">上调</span></td></tr>
+      <tr><td>后付费手机净增转正（转型目标）</td><td>+5.5 万（2013 以来首个正 Q1）</td><td><span class="badge up">兑现</span></td></tr>
+      <tr><td>成本纪律降本</td><td>获客留客成本 -35%、调整后 EBITDA 创纪录</td><td><span class="badge up">超预期</span></td></tr>
+      <tr><td>FY2026 FCF</td><td>指引 ≥$215 亿（2020 以来最高）</td><td><span class="badge nt">推进中</span></td></tr>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>信号汇总</strong>：三季连读是一条清晰的转型弧线——<span class="warn-t">3Q25 承认流失问题（至暗）</span> → <span class="warn-t">4Q25 承担 $23 亿裁员/资产合理化阵痛（GAAP EPS 坑）</span> → <span class="hl-t">1Q26 后付费净增转正 + 利润率创纪录 + 上调指引（初见成效）</span>。核心判断：Schulman 的"体验 + 成本纪律"打法确实开始起效，势头在加速。但要清醒——<strong>转型才走了一个季度，能否持续、营收增速能否随利润率一起抬升、Frontier 整合与降杠杆能否兑现，才是决定这台现金牛能否重估的关键。</strong></p>
+  </div>
+</div>
+
+<!-- ═══ 模块 7 ═══ -->
+<div class="section">
+  <div class="stitle">模块 7 · 多模型估值（8 种方法）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">7.1 估值汇总表（独立估值 · 不锚定现价 · USD）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>估值方法</th><th>每股公允价</th><th>假设要点</th><th>权重</th></tr>
+      <tr><td>1. 相对估值（P/E）</td><td>$50</td><td>FY2026 调整 EPS $4.97 × 10x（介于 AT&T 11x 与历史低位之间，反映稳健但高杠杆）</td><td>25%</td></tr>
+      <tr><td>2. DCF（基准）</td><td>$52</td><td>FCFE 两阶段：未来 5 年 FCF +3%、永续 +1.5%，贴现率 9%（含高杠杆风险溢价），并对再融资风险打折</td><td>20%</td></tr>
+      <tr><td>3. 所有者盈余收益率</td><td>$49</td><td>FCF ~$215 亿 / 10.5% 目标收益率 = $205B → /4.176B 股（要求收益率高，反映杠杆）</td><td>15%</td></tr>
+      <tr><td>4. PEG / PEGY</td><td>$50</td><td>前瞻 P/E 8.5 ÷ EPS 增速 5.5% = PEG 1.55（低增速偏贵）；但含 6.7% 股息的 PEGY = 8.5/(5.5+6.7) = 0.70（深度便宜）</td><td>5%</td></tr>
+      <tr><td>5. DDM</td><td>$48</td><td>DPS $2.83，增长 2.5%，要求回报 8.5% → $2.90/(0.085−0.025)。高息 20 年增息，DDM 高度适用</td><td>15%</td></tr>
+      <tr><td>6. NAV</td><td>参考</td><td>每股账面 ~$25（牌照按成本计，低估真实价值）；重资产运营公司，NAV 参考意义有限</td><td>0%</td></tr>
+      <tr><td>7. 反向 DCF</td><td>当前价隐含 FCF 增长 <strong>~-3%</strong></td><td>$42.24 隐含市场认为 FCF 永续<span class="warn-t">衰退</span> ~3%/年——只要现实是零到低增长，价格里就有修复空间</td><td>5%</td></tr>
+      <tr><td>8. SOTP（分部 EV/EBITDA）</td><td>$50</td><td>调整后 EBITDA 年化 ~$53.6B × 7x = EV $375B − 净债 $164B = $211B → /4.176B</td><td>15%</td></tr>
+      <tr class="hl"><td><strong>加权公允价中位数</strong></td><td><strong>$50</strong></td><td>估值区间 $48-52 · 中位 ~$50</td><td>100%</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.8;"><strong>与现价对照</strong>：当前 $42.24 vs 加权公允 $50 · <span class="nt">折价 15.5%</span>——<strong>低于价值投资 25% 安全边际的门槛</strong>。多数方法（P/E $50、DCF $52、SOTP $50、DDM $48）指向高 $40 至低 $50 区间，与分析师共识目标 ~$51.9 吻合。反向 DCF 显示市场已定价 ~-3% 长期 FCF 衰退——这是明显偏悲观的假设，也是低估的核心来源。<span class="hl-t">Verizon 是"便宜但杠杆高"，不是"极端便宜或极端贵"——安全边际不足 25% 是它够不上"买入"、只能"有条件买入"的关键。</span></p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.2 P/E 多档透视表</h3>
+  <p style="margin-bottom:10px; font-size:13px; color:var(--text2);">GAAP vs 调整后差异（收购摊销 + 整合费 + 一次性重组）+ 4Q25 单季净利大幅偏离 → 触发多档透视：</p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>口径</th><th>EPS</th><th>P/E (基于 $42.24)</th><th>读数说明</th></tr>
+      <tr><td>TTM GAAP P/E</td><td>~$4.10</td><td>~10.3x</td><td>含 4Q25 一次性重组坑</td></tr>
+      <tr><td>TTM 调整后 P/E</td><td>~$4.80</td><td>~8.8x</td><td>剔一次性 · 较可信</td></tr>
+      <tr class="hl"><td><strong>FY2026 指引调整后 P/E</strong></td><td><strong>~$4.97</strong></td><td><strong>~8.5x</strong></td><td>最可信档 · 与共识吻合</td></tr>
+      <tr><td>FY2027 前瞻 P/E（估 +5%）</td><td>~$5.22</td><td>~8.1x</td><td>指引外推</td></tr>
+      <tr><td>P/S (TTM)</td><td>营收 ~$138B</td><td>~1.3x</td><td>成熟电信</td></tr>
+      <tr><td>FCF Yield</td><td>FCF ~$215 亿</td><td>~12.1%</td><td>深度低估 + 高杠杆</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3);"><strong>最可信档</strong>：FY2026 指引调整后 P/E ~8.5x。同业对比：AT&T ~11x（更低杠杆改善叙事）、T-Mobile ~19x（增速 5.5% 溢价）。<span class="hl-t">Verizon 是三大电信中估值最低的</span>——与 AT&T 增速接近（2.5% vs 2.8%）却便宜约 20%，市场折价主要针对其更高的杠杆与转型执行不确定性。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.3 12 个月目标价（概率加权）</h3>
+  <div class="pgrid">
+    <div class="pbox"><div class="pl">悲观情景 · 25%</div><div class="pv pc">$38</div><div class="pn">转型停滞 + 后付费净增重回负值 + 估值压至 ~8x<br>距现价 -10%</div></div>
+    <div class="pbox"><div class="pl">基准情景 · 50%</div><div class="pv pf">$50</div><div class="pn">指引兑现（调整 EPS ~$4.97）+ 估值温和重估至 ~10x + 稳派息<br>距现价 +18%</div></div>
+    <div class="pbox"><div class="pl">乐观情景 · 25%</div><div class="pv ps">$58</div><div class="pn">转型加速 + Frontier 协同 + 降杠杆兑现 + 估值向 ~11.5x 修复<br>距现价 +37%</div></div>
+  </div>
+  <p style="font-size:13px; color:var(--text2);"><strong>概率加权公允价</strong>：25%×$38 + 50%×$50 + 25%×$58 = <strong>$49</strong>。<strong>叠加 6.7% 股息 = 一年期总回报预期 ~+23%</strong>——对高息价值股有吸引力。<span class="nt">当前 $42.24 略高于机械首仓 $40（公允 $50 × 80%）——在合理建仓窗口的边缘，可小仓位介入、回调补仓。</span></p>
+</div>
+
+<!-- ═══ 模块 8 ═══ -->
+<div class="section">
+  <div class="stitle">模块 8 · 竞争与行业分析</div>
+  <div class="cmt">
+    <p><strong>美国无线通信格局</strong>：Verizon、AT&T、T-Mobile 三巨头三分天下（CR3 覆盖绝大部分后付费市场），是高度成熟、准同质化、资本密集的寡头行业。真正的竞争变量是 <span class="hl-t">T-Mobile 以性价比 + 5G 中频优势持续抢份额</span>，以及固定无线接入（FWA）对传统有线宽带的替代。</p>
+
+    <p><strong>三大电信同业对比（截至 2026-07 初）</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>公司</th><th>TTM P/E</th><th>前瞻 P/E</th><th>FY2025 营收</th><th>营收增速</th><th>核心评价</th></tr>
+        <tr class="hl"><td><strong>Verizon VZ</strong></td><td>8.9x</td><td><strong>8.5x</strong></td><td>$138.2B</td><td>+2.5%</td><td>规模最大 · 估值最低 · 杠杆最高</td></tr>
+        <tr><td>AT&T (T)</td><td>11.1x</td><td>—</td><td>$125.6B</td><td>+2.8%</td><td>降杠杆叙事更受认可 · 估值居中</td></tr>
+        <tr><td>T-Mobile (TMUS)</td><td>19.3x</td><td>—</td><td>—</td><td>+5.5%</td><td>增速最高（+5-6%）· 估值溢价显著</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:10px; font-size:12px; color:var(--text3);">VZ vs T 是核心对照：营收规模 VZ 更大（$138B vs $126B）、增速接近（2.5% vs 2.8%），但 <strong>VZ 估值明显更低（8.5x vs 11x）</strong>——市场对 VZ 折价，主要因其杠杆更高、转型才刚起步，而 AT&T 的降杠杆故事讲得更早、更被认可。T-Mobile 是"成长溢价"标的，用近 2.3 倍于 VZ 的估值买它 5-6% 的增速。</p>
+
+    <p style="margin-top:14px;"><strong>波特五力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>新进入者：</strong>极低（频谱牌照稀缺 + 全国基站重资产壁垒几不可复制）</li>
+      <li><strong>替代品：</strong>中（Wi-Fi、卫星直连手机、有线宽带 vs FWA 相互侵蚀，但无线刚需难替代）</li>
+      <li><strong>供应商议价：</strong>中（设备商如爱立信/诺基亚、苹果/三星手机有一定议价力）</li>
+      <li><strong>买家议价：</strong>中高（号码可携 + 三家激烈促销，用户切换成本被压低）</li>
+      <li><strong>同业竞争：</strong>高（T-Mobile 主动打性价比，价格战风险始终存在）</li>
+    </ul>
+
+    <p><strong>颠覆风险</strong>：中等偏低。无线是刚需基础设施，短期难被颠覆。中期变量是 T-Mobile 份额侵蚀 + FWA/光纤宽带的此消彼长；长期需关注卫星直连手机（如 Starlink Direct-to-Cell）对偏远地区覆盖溢价的稀释。整体是"慢变量"行业，格局稳定。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 9 ═══ -->
+<div class="section">
+  <div class="stitle">模块 9 · 技术面与 K 线分析（次要参考）</div>
+  <div class="cmt">
+    <p><strong>趋势</strong>：VZ 当前 $42.24，处于 52 周区间 $38.39-$51.68 的<span class="hl-t">偏低端（约低端上方 10%、距高点 -18%）</span>。过去一年整体承压下行，反映市场对高杠杆 + 转型执行的谨慎。这是一只低波动、高股息的防御型蓝筹，股价弹性主要来自估值修复与股息，而非成长。</p>
+
+    <p><strong>关键价位</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>支撑</strong>：$40（机械首仓 / 心理关口）/ $38.39（52 周低）/ $35（二仓机会位）</li>
+      <li><strong>阻力</strong>：$45（近期区间上沿）/ $50（公允价 / 前高密集区）/ $51.68（52 周高）</li>
+    </ul>
+
+    <p><strong>指标信号</strong>：股价处于 52 周低端、估值处历史低位、股息率 6.7% 处历史高位——<span class="hl-t">这些通常是价值股的"底部特征"</span>，但需转型持续兑现 + 降杠杆推进作为催化。技术面无明显破位，横盘筑底为主。</p>
+
+    <p><strong>注意</strong>：Verizon 的核心驱动是转型兑现度（后付费净增 + 流失率）+ 降杠杆进度 + 股息安全性 + 估值修复，技术面是次要参考。价值投资者应关注 $40 以下的建仓窗口，而非追逐短期波动。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 10 ═══ -->
+<div class="section">
+  <div class="stitle">模块 10 · 增长催化剂与前景展望</div>
+  <div class="cmt">
+    <p><strong>短期催化剂（未来 6 个月）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>2026-07-24 Q2 2026 财报</strong>——转型成效能否延续（后付费净增、流失率）+ 指引兑现度，是最近的关键验证点</li>
+      <li><strong>Frontier 整合与降杠杆</strong>——年底前偿清 Frontier 债务、光纤覆盖达 3200 万户的进度</li>
+      <li><strong>回购放量</strong>——$250 亿授权、全年目标 ≥$30 亿，虽温和但方向正确</li>
+      <li><strong>估值修复</strong>——若转型持续兑现，前瞻 P/E 从 8.5x 向 AT&T 的 11x 靠拢，即有 ~30% 空间</li>
+    </ul>
+
+    <p><strong>长期展望（3-5 年）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>现金流 + 股息复利</strong>——FCF 从 $215 亿向更高攀升，支撑连续增息 + 逐步回购缩股</li>
+      <li><strong>光纤 + 无线融合</strong>——Frontier 并表后，用光纤 + FWA 提高家庭黏性、扩大宽带份额（中期光纤覆盖 4000-5000 万户）</li>
+      <li><strong>成本协同</strong>——Frontier 目标 2028 年 $10 亿运营成本协同 + AI 降本（85% 网络问题自主解决）</li>
+      <li><strong>降杠杆重估</strong>——若净债/EBITDA 持续下行，市场对高杠杆的折价有望收窄，是最大的估值修复引擎</li>
+      <li><strong>风险情景</strong>：转型半途而废 / 价格战重燃 / 利率高企推高再融资成本 / 宏观衰退压制消费</li>
+    </ul>
+
+    <p><strong>TAM 展望</strong>：美国无线是成熟饱和市场，增长主要来自 ARPA 提升 + FWA 抢有线宽带份额 + 融合套餐提黏性，而非用户数扩张。核心不是"增长空间"，而是"能否在守住份额的同时把利润率与现金流做厚、把债务降轻"——这是一门收租 + 去杠杆 + 派息的生意。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 11 ═══ -->
+<div class="section">
+  <div class="stitle">模块 11 · 风险矩阵</div>
+  <div class="risk-grid">
+    <div class="risk-card r5"><h5>1. 高杠杆 / 再融资风险</h5><span class="risk-score">5 / 5 极高</span><p>总债务 $172.5B、真实净负债 -$164.1B、一年内到期债务飙至 $282 亿。利率高企下再融资成本上升，每季利息支出 $19.4 亿是持续重力。降杠杆执行是头号变量</p></div>
+    <div class="risk-card r4"><h5>2. 转型执行风险</h5><span class="risk-score">4 / 5 高</span><p>Schulman 转型才走一个季度，后付费净增转正能否持续存疑；若重回负值 + 流失率反弹，估值修复逻辑瓦解</p></div>
+    <div class="risk-card r4"><h5>3. 竞争 / 价格战</h5><span class="risk-score">4 / 5 高</span><p>T-Mobile 性价比策略持续抢份额 · 三巨头促销战随时可能重燃 · 无线准同质化限制定价权（3Q25 涨价曾致流失）</p></div>
+    <div class="risk-card r3"><h5>4. Frontier 整合风险</h5><span class="risk-score">3 / 5 中</span><p>并购带来额外债务 + 短债重分类 · $10 亿协同目标到 2028 · 整合不及预期会拖累 FCF 与降杠杆</p></div>
+    <div class="risk-card r3"><h5>5. 宏观 / 利率</h5><span class="risk-score">3 / 5 中</span><p>衰退压制消费与设备升级 · 高利率抬高巨额债务的再融资成本 · 对利率最敏感的高杠杆板块之一</p></div>
+    <div class="risk-card r2"><h5>6. 估值 / 股息（机会）</h5><span class="risk-score">2 / 5 反向</span><p>前瞻 P/E 8.5x + 股息率 6.7% + FCF 收益率 12% · 深度低估 + 厚股息本身是最大的安全垫</p></div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>3 个黑天鹅情景</strong>：</p>
+    <ol style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>信用评级下调 + 债务成本飙升</strong>——概率 10% · 若降杠杆失败叠加利率高企，评级承压、再融资成本上升 · 股价跌至 $32-35</li>
+      <li><strong>股息被迫削减</strong>——概率 <5% · 极端情形下若 FCF 大幅恶化威胁 20 年增息记录，将引发高息投资者恐慌抛售 · 股价跌至 $30 以下（当前 FCF 覆盖充分，概率很低）</li>
+      <li><strong>价格战全面重燃</strong>——概率 15% · T-Mobile/AT&T 激进促销迫使 VZ 重回降价抢量，利润率与转型逻辑双杀 · 股价跌至 $35</li>
+    </ol>
+
+    <p style="margin-top:10px;"><strong>下行支撑</strong>：连续 20 年增息的现金牛属性 + 投资级评级 + FCF 指引 $215 亿 + 频谱/基站硬资产构成质量底。<span class="hl-t">$38-40 是较硬的估值底</span>（52 周低 $38.39 + 股息率 7% 上限 + 前瞻 P/E ~7.5x 下限）。高股息在下行中提供"收息等待"的缓冲，这是防御型价值股的特点。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 12 ═══ -->
+<div class="section">
+  <div class="stitle">模块 12 · 股东回报分析</div>
+  <div class="cmt">
+    <p><strong>Verizon 是美股"高含金量股息"的典型——20 年连续增息，而回购刚刚起步。</strong>但要区分授权、执行，以及它与"借债回购"截然相反的"去杠杆优先"性质。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 18px 0 10px; font-family: 'Segoe UI',sans-serif;">12.1 公司给了股东多少？</h3>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>期间</th><th>现金股息总额</th><th>回购金额</th><th>股东总回报</th><th>说明</th></tr>
+        <tr><td>FY2023</td><td>$11,020M</td><td>$0</td><td>$11,020M</td><td>纯股息 · 无回购</td></tr>
+        <tr><td>FY2024</td><td>$11,249M</td><td>$0</td><td>$11,249M</td><td>纯股息 · 无回购</td></tr>
+        <tr><td>FY2025</td><td>$11,481M</td><td>$0</td><td>$11,481M</td><td>纯股息 · 无回购</td></tr>
+        <tr class="hl"><td>1Q26 单季</td><td>$2,910M</td><td>$2,500M</td><td>$5,410M</td><td>首次启动回购</td></tr>
+      </table>
+    </div>
+    <p style="font-size:13px; color: var(--text2); margin-top:8px"><strong>每股股息（季度）</strong>：1Q25 $0.6775 → 3Q25 $0.69 → 1Q26 $0.7075（年化约 $2.83）。<strong>Trailing Shareholder Yield</strong> ≈ FY2025 股息 $11.48B / 市值 $177B ≈ <strong>6.5%</strong>（几乎全部是股息）；加上 2026 全年回购目标 ≥$30 亿，2026 前瞻股东收益率约 <strong>8.2%</strong>。<span class="hl-t">Verizon 是"高股息为主、回购为辅"的资本返还结构</span>——与 Visa 那种"大额回购为主、低股息为辅"正好相反。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.2 给的方式好不好？</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>股息含金量极高</strong>：连续 20 年真金白银增息，是穿越疫情从未削减的成熟蓝筹典范；派息率约 57% 调整后 EPS / 53% FCF，可持续</li>
+      <li><span class="warn-t">摊薄股数 3 年趋势曾上升</span>：年度摊薄加权股数 FY2023 4,205M → FY2024 4,223M → FY2025 4,231M，<strong>逐年微升</strong>——因过去三年零回购、且有小幅 SBC 稀释。直到 1Q26 才首次以 $25 亿回购把期末流通股从 4,217M 压到 4,176M（-41M），缩股刚刚开始</li>
+      <li><strong>回购性质待观察</strong>：美股回购多入库存股用于对冲 SBC，但 Verizon 回购规模（全年 ≥$30 亿）相对股息（~$116 亿）仍小，方向正确但增量弹性有限，目前更多是"象征转向"而非主力返还</li>
+    </ul>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.3 能不能继续给、给多少？</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>已授权额度充裕但执行温和</strong>：2026-01-30 授权 $250 亿多年回购（属 $550 亿总股东回报计划），1Q26 已执行 $25 亿，剩余约 <strong>$225 亿</strong>（约占市值 13%）。但全年目标仅 ≥$30 亿——授权大、执行慢，是"多年计划"而非激进回购</li>
+      <li><strong>连续 20 年增息</strong>：1Q26 季度股息升至 $0.7075，派息率约 57% 调整后 EPS · 增息可持续，是股东回报的主菜</li>
+      <li><strong>(股息 + 回购) / FCF 覆盖度</strong>：FY2026（股息 ~$116 亿 + 回购 ~$30 亿）/ FCF $215 亿 ≈ <strong>68%</strong>——覆盖充分，还留有约 $70 亿余量还债，健康且可持续</li>
+      <li><strong>与"借债回购"相反</strong>：Verizon 资本配置优先级是<strong>去杠杆 &gt; 股息 &gt; 回购</strong>。Frontier 并购推高债务后，管理层明确优先降杠杆（已还约半数 Frontier 债、计划年底基本还清），返还不以加杠杆为代价——这是保守而负责的取向</li>
+    </ul>
+    <p><strong>模块小结</strong>：<span class="hl-t">积极且股息高含金量、回购温和起步</span>——20 年连续增息 + 派息率健康 + FCF 68% 覆盖度充分 + 去杠杆优先，股息是可靠的主菜；回购刚启动、规模温和，是加分项但弹性有限。整体是"稳健厚实的现金返还 + 去杠杆纪律"，可持续性强，但缺乏 Visa 那种激进缩股的复利弹性。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 13 ═══ -->
+<div class="section">
+  <div class="stitle">模块 13 · 海图评分卡 + 投资决策</div>
+
+  <div class="scorecard">
+    <h3 style="font-size:15px; color:var(--text); margin-bottom: 16px; font-family: 'Segoe UI',sans-serif;">海图评分卡（6 维 A-D）</h3>
+    <div class="score-grid">
+      <div class="score-card"><div class="score-letter s-bp">B+</div><div class="score-body"><h4>1. 生意可预测性</h4><p>无线收月租 + 宽带，经常性收入极稳、能见度高、5 年盈利波动小。但成熟饱和、低增长，且 4Q25 有转型一次性扰动。</p></div></div>
+      <div class="score-card"><div class="score-letter s-b">B</div><div class="score-body"><h4>2. 经济护城河</h4><p>有效规模（频谱 + 基站 + 三寡头）宽而稳，但无网络效应、成本优势弱、品牌溢价被 T-Mobile 蚕食。守成型而非进攻型。</p></div></div>
+      <div class="score-card"><div class="score-letter s-b">B</div><div class="score-body"><h4>3. 管理层质量</h4><p>Schulman 转型初见成效 + 20 年增息 + 去杠杆优先，方向清晰。但掌舵不足一年、跨界履历、并购推高杠杆的底色需观察。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bm">B-</div><div class="score-body"><h4>4. 财务质量</h4><p>创纪录调整后 EBITDA + FCF $215 亿 + 派息覆盖充分，但 $172.5B 债务 / -$164B 净负债 / $19.4 亿季利息，是最大拖累。</p></div></div>
+      <div class="score-card"><div class="score-letter s-b">B</div><div class="score-body"><h4>5. 资本配置纪律</h4><p>20 年增息 + FCF 68% 覆盖 + 去杠杆优先，纪律稳健。但过去三年股数微升、回购刚起步、历史并购推高杠杆是扣分项。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">B+</div><div class="score-body"><h4>6. 估值与安全边际</h4><p>前瞻 P/E 8.5x + 股息 6.7% + FCF 收益率 12% · 深度低估，但折价 15% <strong>未达 25% 安全边际门槛</strong>。</p></div></div>
+    </div>
+
+    <div class="flag-row">
+      <strong>红旗排查</strong>：会计质量<strong>无疑点</strong>（数据来自官方 FOI + SEC 8-K，三源交叉吻合；4Q25 的 GAAP 坑是已披露的转型一次性费用，非会计操纵）· 治理<strong>无问题</strong> · 估值<strong>非极端</strong>（是便宜而非泡沫）。<span class="warn-t">唯一结构性隐忧是 $1725 亿高杠杆</span>——但这是电信业已披露的商业模式特征，净无担保债务/EBITDA 2.6x 仍在投资级区间，<strong>不构成强制降级的硬红旗</strong>。评级由 6 维加权 + 安全边际不足决定。
+    </div>
+
+    <p style="margin-top:18px; font-size:14px; color:var(--text); line-height:1.85;"><strong>综合评级</strong>：<span class="rating-badge rating-cond" style="font-size:14px;">有条件买入</span>。6 维基础扎实（多为 B/B+），估值深度低估且股息厚实，但<strong>安全边际 15% 未达 25% 买入门槛 + $1725 亿高杠杆 + 转型仅一个季度</strong>，够不上清晰"买入"，落在"有条件买入"。核心判断：<strong>Verizon 便宜是真的便宜，转型也确有起色——但杠杆待解、转型待验证，适合能接受高杠杆、看重现金流与股息的投资者在 $40 附近分批介入，而非追求成长弹性者。</strong></p>
+  </div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">投资决策（精确价格 · USD）</h3>
+
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>项目</th><th>价格</th><th>说明</th></tr>
+      <tr><td>12 个月目标价（概率加权）</td><td><strong>$49</strong> (+16%)</td><td>基准 $50 · 叠加 6.7% 股息 = 总回报 ~+23%</td></tr>
+      <tr><td>悲观目标（25% 概率）</td><td>$38 (-10%)</td><td>转型停滞 + 估值压至 ~8x</td></tr>
+      <tr><td>乐观目标（25% 概率）</td><td>$58 (+37%)</td><td>转型加速 + 降杠杆兑现 + 估值修复</td></tr>
+      <tr class="hl"><td>首仓建仓（估值中位数 $50 × 80%）</td><td><strong>$40</strong></td><td>距现价 -5% · 略作等待或小仓位介入</td></tr>
+      <tr><td>二仓建仓（× 70%）</td><td>$35</td><td>-17% · 明显回调机会</td></tr>
+      <tr><td>三仓建仓（× 60%）</td><td>$30</td><td>-29% · 黑天鹅级机会</td></tr>
+      <tr><td>止盈一档</td><td>$53</td><td>+25% · 减仓 25%</td></tr>
+      <tr><td>止盈二档</td><td>$58</td><td>+37% · 再减 25%</td></tr>
+      <tr><td>止盈三档</td><td>$64</td><td>+52% · 再减 25% · 最后 25% 长期收息复利持有</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.85;"><strong>建议总仓位</strong>：<strong>3-5%</strong>（高息价值卫星仓 · 当前 $42.24 略高于首仓 $40，可小仓位介入、回调分批补仓）。<strong>持有周期</strong>：3-5 年（赚"低估修复 + 转型兑现 + 厚股息复利"三重钱）。<strong>关键监控指标</strong>：① 后付费手机净增趋势 + 流失率（转型成色）；② 净债/调整后 EBITDA 与 Frontier 债务偿还进度（降杠杆）；③ FCF 与股息覆盖度（股息安全性）；④ 调整后 EPS 指引兑现；⑤ 前瞻 P/E 是否向 AT&T 的 11x 修复（估值机会）。<strong>下次催化剂</strong>：2026-07-24 Q2 2026 财报。</p>
+</div>
+
+<!-- ═══ 海图页末长评 ═══ -->
+<div class="section">
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记 · 1180 字</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p class="lead">价值投资里有两类最难的标的。一类好到无可挑剔、贵到没有余地；另一类正相反——便宜到让人起疑，好到不敢相信这么便宜。Verizon 属于后者：8.5 倍前瞻市盈率、6.7% 股息率、约 12% 的自由现金流收益率，连续 20 年增息。市场几乎是用"永续衰退"的价格在给它定价，可它刚刚交出 2013 年以来第一个正的一季度后付费手机净增，还顺手上调了全年指引。它的问题从来不是便不便宜，而是那座 1725 亿美元的债务大山，会不会在转型走完之前先把人压垮。</p>
+
+      <p>Verizon 是美国无线通信双雄之一（与 AT&T、T-Mobile 三分天下），本质是一门"靠全国无线网络加频谱牌照，向 1.26 亿后付费用户按月收租"的高股息现金牛。它不追求高增长，只追求现金流与派息的确定性。Q1 2026 总营收 $344.4 亿（+2.9%）、营业利润 $82.4 亿（+3.3%）、创纪录单季调整后 EBITDA $134 亿（+6.7%）、调整后 EPS $1.28（+7.6%）、自由现金流 $37.8 亿（+4%）。</p>
+
+      <h4>几个研判要点</h4>
+
+      <p><strong>一、这是新 CEO 转型战略首个"见效"的季度。</strong> 原 PayPal CEO 舒尔曼 2025 年下半年接掌 Verizon，把打法从"靠昂贵促销抢用户"转向"客户体验加成本纪律"。成效是实的：<span class="hl-t">2013 年以来首个正的一季度后付费手机净增（+5.5 万，同比改善 34 万）</span>，消费者手机流失率降到 0.90%、3 月已低于 0.85%，获客留客成本较去年 Q4 下降约 35%。管理层因此把全年调整后 EPS 指引从 +4-5% 上调到 +5-6%，是四年来最快增速。三季连读能看清完整弧线：3Q25 承认流失问题、4Q25 承担 23 亿裁员阵痛（GAAP EPS 骤降至 $0.55）、1Q26 利润率创纪录——先付痛，再收果。</p>
+
+      <p><strong>二、便宜是真的便宜——但要看清便宜的来源。</strong> 前瞻市盈率 8.5 倍、股息率 6.7%、FCF 收益率约 12%，三个数字都指向深度低估。反向 DCF 更直白：<span class="hl-t">当前股价隐含市场认为它的自由现金流将以每年约 3% 的速度"永续衰退"</span>。只要现实是零增长到低个位数增长，价格里就有修复空间。分析师共识目标价约 $51.9（+23%）也印证了这一点。它是三大电信里估值最低的——和 AT&T 增速接近却便宜约 20%。</p>
+
+      <p><strong>三、但杠杆是绕不过去的心结。</strong> 别把"现金牛"误读成"现金堡垒"——Verizon 现金仅 83.7 亿，总债务却高达 <span class="warn-t">1725 亿，真实净负债 -1641 亿</span>，是典型的重资产高杠杆电信股。Frontier 并购今年 1 月交割并表后，一年内到期债务从 186 亿飙到 282 亿。每季 19.4 亿的利息支出，是它利润表上永远的重力。好在净无担保债务/调整后 EBITDA 为 2.6 倍，仍在投资级区间，且管理层把降杠杆列为第一优先——已偿还约半数 Frontier 债务，计划年底基本还清。</p>
+
+      <p><strong>四、股东回报是高含金量的股息，回购刚起步。</strong> 连续 20 年增息，季度股息升至 $0.7075（年化 $2.83），派息率约 57% 的调整后 EPS、53% 的 FCF——覆盖充分、可持续。值得注意的是，过去三年 Verizon 完全靠股息、零回购，摊薄股数还从 42.05 亿微升到 42.31 亿；直到 2026 年 1 月才首次授权 250 亿回购，Q1 执行 25 亿，把期末股数压到 41.76 亿。与"借债做杠杆化回购"相反，Verizon 是"去杠杆优先、回购温和起步"，方向对，但增量弹性有限。</p>
+
+      <p><strong>五、独立估值中位数 $50，12 个月目标价 $49。</strong> 相对估值（10 倍 × 调整 EPS $4.97）$50、DCF $52、所有者盈余收益率 $49、DDM $48、分部 EV/EBITDA $50，加权中位约 $50。悲观 $38（转型停滞加估值压缩，25%）、基准 $50（指引兑现加温和重估，50%）、乐观 $58（转型加速加去杠杆兑现，25%），概率加权约 $49。对现价 $42.24 的安全边际约 15%，够不上 25% 的买入门槛，但叠加 6.7% 股息，一年期总回报预期仍有约 +23% 的吸引力。</p>
+
+      <h4>海图研判</h4>
+
+      <p><strong>评级：有条件买入。</strong> 便宜的高息现金牛，低估值与厚股息，对垒 1725 亿债务的高杠杆、仍在早期的转型、以及无线市场的零和竞争。12 个月概率加权目标价 <strong>$49</strong>（+16%），叠加 6.7% 股息，一年期总回报预期约 +23%。</p>
+
+      <p>操作建议：当前 $42.24 略高于机械首仓 $40（估值中位 $50 × 80%），可小仓位介入，回调至 $40 补首仓、$35 加二仓、$30 极端机会三仓。止盈三档 $53 / $58 / $64，每档减 25%，最后 25% 长期收息复利持有。<strong>建议总仓位 3-5%</strong>（高息卫星仓）。持有周期 3-5 年，赚"低估修复 + 转型兑现 + 厚股息复利"三重钱。<span class="hl-t">适合能接受高杠杆、看重现金流与股息的价值投资者；不适合追求高成长弹性的人。</span></p>
+
+      <h4>风险提示</h4>
+
+      <p>转型半途而废（后付费净增重新转负）、Frontier 整合不及预期、利率上行推高再融资成本、无线价格战重燃、宏观衰退压制消费——任一项都可能让股价重回 $38 附近（52 周低 $38.39）。但连续 20 年增息的现金牛属性 + 投资级评级 + 215 亿自由现金流指引，构成较硬的估值底，高股息在下行中提供"收息等待"的缓冲。</p>
+
+      <p>关键叙事：<strong>"美国无线双雄之一 + 8.5 倍前瞻市盈率 + 6.7% 股息 + 转型初见成效"的低估现金牛，对垒"1725 亿债务高杠杆 + Frontier 并表压力 + 无线市场饱和零和竞争"的结构性风险</strong>。Verizon 不是给追求性感成长的人——它几乎从不性感；它是给愿意收着厚股息、等一台重杠杆现金牛慢慢把债还轻、把估值修复的耐心投资者。下次催化剂：2026-07-24 Q2 2026 财报。</p>
+
+      <p class="haitu-sign">—— 海图，灯下落笔，明日再观风浪。</p>
+
+      <p class="haitu-disc">⚠️ 免责声明：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，不构成任何投资建议。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div>《海图夜读》 · Verizon VZ Q1 2026 海图研判</div>
+  <div style="margin-top:6px;">发布日 2026-04-27 · 研判日 2026-07-11 · 数据来源 Verizon Q1 2026 官方 FOI 财务与运营信息表 + SEC 8-K Exhibit 99 + 新闻稿 + 电话会 transcript</div>
+</footer>
+
+<script>
+let curTheme = 'light';
+function toggleTheme() {
+  curTheme = curTheme === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', curTheme);
+  renderCharts();
+}
+
+const palette = {
+  light: { accent: '#8a9a8e', accent2: '#7b8fa0', accent3: '#b08d7a', gold: '#b9a06a', red: '#b87070', green: '#7a9a7a', grid: '#e5ddd5', text: '#7a706a' },
+  dark:  { accent: '#8a9a8e', accent2: '#8fabbf', accent3: '#c9a48e', gold: '#c9b07a', red: '#c08080', green: '#8aaa8a', grid: '#3e3a35', text: '#a09890' }
+};
+
+let charts = {};
+function renderCharts() {
+  Object.values(charts).forEach(c => c && c.destroy && c.destroy());
+  charts = {};
+  const p = palette[curTheme];
+  Chart.defaults.color = p.text;
+  Chart.defaults.borderColor = p.grid;
+
+  const quarters = ['1Q25','2Q25','3Q25','4Q25','1Q26'];
+  const rev = [33.49, 34.50, 33.82, 36.38, 34.44];
+  const ebitdaMargin = [37.5, 37.1, 37.8, 32.6, 38.9];
+  charts.rev = new Chart(document.getElementById('chartRev'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { type:'bar', label: '净营收 ($B)', data: rev, backgroundColor: p.accent + 'CC', yAxisID: 'y' },
+      { type: 'line', label: '调整后 EBITDA 利润率 %', data: ebitdaMargin, borderColor: p.red, backgroundColor: p.red, tension: 0.3, yAxisID: 'y1' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false }, y1: { position: 'right', grid: { drawOnChartArea: false }, ticks: { callback: v => v + '%' } } } }
+  });
+
+  const opMargin = [23.8, 23.7, 24.0, 13.8, 23.9];
+  charts.margin = new Chart(document.getElementById('chartMargin'), {
+    type: 'line',
+    data: { labels: quarters, datasets: [
+      { label: '营业利润率 %', data: opMargin, borderColor: p.accent2, backgroundColor: p.accent2 + '22', tension: 0.3, fill: true },
+      { label: '调整后 EBITDA 利润率 %', data: ebitdaMargin, borderColor: p.green, backgroundColor: p.green + '22', tension: 0.3, fill: true }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false, ticks: { callback: v => v + '%' } } } }
+  });
+
+  charts.segment = new Chart(document.getElementById('chartSegment'), {
+    type: 'doughnut',
+    data: {
+      labels: ['消费者 Consumer', '商业 Business', '公司及抵消'],
+      datasets: [{ data: [26.45, 7.42, 0.57], backgroundColor: [p.accent, p.accent3, p.gold] }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { font: { size: 11 } } } } }
+  });
+
+  const epsGaap = [1.15, 1.18, 1.17, 0.55, 1.20];
+  const epsAdj = [1.19, 1.22, 1.21, 1.09, 1.28];
+  charts.eps = new Chart(document.getElementById('chartEps'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { label: 'GAAP 摊薄 EPS ($)', data: epsGaap, backgroundColor: p.accent2 + 'CC' },
+      { label: '调整后 EPS ($)', data: epsAdj, backgroundColor: p.green + 'CC' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true } } }
+  });
+
+  buildSankey();
+}
+
+function buildSankey() {
+  const p = palette[curTheme];
+  const labels = ['总营收 $34.44','服务成本 $7.17','设备成本 $6.51','毛利 $20.77','SG&A $7.63','折旧摊销 $4.89','营业利润 $8.24','利息支出 $1.94','税项及其他 $1.16','净利润 $5.15'];
+  const data = {
+    type: 'sankey',
+    orientation: 'h',
+    node: { pad: 15, thickness: 20, line: { color: p.grid, width: 0.5 }, label: labels, color: [p.accent, p.red, p.red, p.green, p.red, p.red, p.green, p.red, p.red, p.green] },
+    link: {
+      source: [0, 0, 0, 3, 3, 3, 6, 6, 6],
+      target: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      value:  [7.17, 6.51, 20.77, 7.63, 4.89, 8.24, 1.94, 1.16, 5.15],
+      color: [p.red+'55', p.red+'55', p.green+'66', p.red+'55', p.red+'55', p.green+'66', p.red+'55', p.red+'55', p.green+'66']
+    }
+  };
+  const layout = { font: { size: 12, color: p.text }, paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)', margin: { l: 10, r: 10, t: 10, b: 10 } };
+  Plotly.react('sankey', [data], layout, { displayModeBar: false, responsive: true });
+}
+
+renderCharts();
+</script>
+
+</body>
+</html>

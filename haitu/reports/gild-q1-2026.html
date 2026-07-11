@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-07-10 · Gilead Q1 2026 财报已于 2026-05-07 发布 -->
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gilead Sciences GILD Q1 2026 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+<meta name="description" content="全球 HIV 治疗的收费桥 · Biktarvy 撑起 $143 亿年销售、占美国治疗市场半壁江山 · 87.5% 毛利率 + 每年约 $95 亿自由现金流 + 连年增息。Q1 底层产品销售 +8%、HIV +10%、Yeztugo 首个完整年度即冲击 $10 亿。但报告 EPS 因 $115 亿并购 IPR&D 假象转亏（底层 Non-GAAP EPS $8.45-8.85 不变）+ 净负债 -$135 亿 + 喜忧参半的并购记录 + 仅约 2% 安全边际——好生意,估值合理但不够便宜。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Gilead Sciences GILD Q1 2026 海图研判 · 海图夜读">
+<meta property="og:description" content="全球 HIV 治疗的收费桥 · Biktarvy 撑起 $143 亿年销售、占美国治疗市场半壁江山 · 87.5% 毛利率 + 每年约 $95 亿自由现金流 + 连年增息。Q1 底层产品销售 +8%、HIV +10%、Yeztugo 首个完整年度即冲击 $10 亿。但报告 EPS 因 $115 亿并购 IPR&D 假象转亏（底层 Non-GAAP EPS $8.45-8.85 不变）+ 净负债 -$135 亿 + 喜忧参半的并购记录 + 仅约 2% 安全边际——好生意,估值合理但不够便宜。">
+<meta property="og:url" content="https://jacexie.github.io/haitu/reports/gild-q1-2026.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Gilead Sciences GILD Q1 2026 海图研判 · 海图夜读">
+<meta name="twitter:description" content="全球 HIV 治疗收费桥 · Biktarvy $143 亿 + Yeztugo 开新曲线 · 底层 Forward P/E ~15x。但报告 EPS 因 $115 亿并购 IPR&D 假象转亏 + 净负债 -$135 亿 + 仅约 2% 安全边际——好生意,估值合理但不够便宜。">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root { --bg:#f5f0eb; --bg2:#ece6df; --card:#ffffff; --card2:#f8f5f1; --border:#d9d0c7; --text:#4a4340; --text2:#7a706a; --text3:#a89f98; --accent:#8a9a8e; --accent2:#7b8fa0; --accent3:#b08d7a; --rose:#c09090; --gold:#b9a06a; --red:#b87070; --green:#7a9a7a; --shadow:rgba(0,0,0,0.06); --chart-grid:#e5ddd5; }
+[data-theme="dark"] { --bg:#1e1c1a; --bg2:#28251f; --card:#2e2a25; --card2:#363230; --border:#4a4540; --text:#d4ccc4; --text2:#a09890; --text3:#706860; --accent:#8a9a8e; --accent2:#8fabbf; --accent3:#c9a48e; --rose:#c09090; --gold:#c9b07a; --red:#c08080; --green:#8aaa8a; --shadow:rgba(0,0,0,0.3); --chart-grid:#3e3a35; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', serif; line-height: 1.75; font-size: 14.5px; transition: background .35s, color .35s; }
+a { color: var(--accent2); text-decoration: none; }
+.theme-bar { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); }
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+.toggle-switch { position: relative; width: 44px; height: 22px; background: var(--border); border-radius: 11px; cursor: pointer; transition: background .3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: var(--card); border-radius: 50%; transition: transform .3s; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+
+.hero { padding: 48px 24px 36px; text-align: center; border-bottom: 1px solid var(--border); }
+.hero-tag { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 3px 14px; border-radius: 20px; margin-bottom: 18px; }
+.hero h1 { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.pill { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: 'Segoe UI', sans-serif; font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow); }
+.pill strong { color: var(--text); }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle { font-size: 18px; font-weight: 700; color: var(--accent3); margin-bottom: 20px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+.stitle::before { content: ''; display: block; width: 4px; height: 20px; background: var(--accent3); border-radius: 2px; }
+
+.haitu-quip { display: flex; align-items: center; gap: 18px; background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 18px 24px; margin: 24px 0; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-quote { flex: 1; }
+.haitu-portrait { font-size: 15px; line-height: 1.65; color: var(--text); margin-bottom: 6px; font-weight: 600; }
+.haitu-rating-line { font-size: 13px; color: var(--text2); font-family: 'Segoe UI', sans-serif; }
+.rating-badge { display: inline-block; padding: 2px 12px; border-radius: 12px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; margin-left: 4px; }
+.rating-hold { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+.rating-condbuy { background: rgba(138,154,142,.20); color: var(--accent); }
+
+.haitu-essay { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 28px 32px; margin: 24px 0 20px; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-essay-header { display: flex; align-items: center; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.haitu-avatar-sm { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); background: var(--red); box-shadow: 0 2px 8px rgba(184,112,112,0.2); }
+.haitu-name-lg { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 28px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 4px; }
+.haitu-essay-tag { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; }
+.haitu-essay-body { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 15px; line-height: 2.0; color: var(--text); }
+.haitu-essay-body p { margin-bottom: 14px; }
+.haitu-essay-body p.lead { font-size: 16px; font-style: italic; color: var(--text2); margin-bottom: 18px; }
+.haitu-essay-body strong { color: var(--text); font-weight: 700; }
+.haitu-essay-body h4 { font-size: 14px; color: var(--accent3); margin: 18px 0 10px; font-family: 'Segoe UI', sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+.haitu-sign { text-align: right; margin-top: 18px; font-family: 'Georgia', serif; font-size: 14px; color: var(--text2); font-style: italic; }
+.haitu-disc { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); font-style: italic; line-height: 1.7; }
+
+.stock-snap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px; }
+.snap-item { text-align: center; }
+.snap-label { font-family: 'Segoe UI', sans-serif; font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.snap-val { font-family: 'Segoe UI', sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+.snap-val.up { color: var(--green); }
+.snap-val.dn { color: var(--red); }
+.snap-sub { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow); }
+.kpi-l { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.badge { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+.up { background: rgba(122,154,122,.15); color: var(--green); }
+.dn { background: rgba(184,112,112,.15); color: var(--red); }
+.nt { background: rgba(123,143,160,.15); color: var(--accent2); }
+
+.tbl-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow); }
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI', sans-serif; font-size: 13px; }
+.tbl th { background: var(--card2); color: var(--text3); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); background: var(--card2); }
+
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); }
+.ctitle { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 260px; }
+
+.cmt { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 26px; line-height: 1.95; font-size: 14px; box-shadow: 0 1px 4px var(--shadow); color: var(--text); }
+.cmt p { margin-bottom: 14px; }
+.cmt p:last-child { margin-bottom: 0; }
+.cmt strong { color: var(--text); }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+
+.bscore { display: flex; align-items: center; gap: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; margin-bottom: 12px; box-shadow: 0 1px 4px var(--shadow); }
+.circle { width: 62px; height: 62px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; flex-shrink: 0; border: 3px solid; font-family: 'Segoe UI', sans-serif; }
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 4px; color: var(--text); }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.moat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+.moat-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); border-left: 4px solid var(--accent); }
+.moat-card.wide { border-left-color: var(--green); }
+.moat-card.narrow { border-left-color: var(--gold); }
+.moat-card.none { border-left-color: var(--red); }
+.moat-card h5 { font-size: 13px; color: var(--text); margin-bottom: 6px; }
+.moat-card .moat-rate { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.moat-card.wide .moat-rate { background: rgba(122,154,122,.18); color: var(--green); }
+.moat-card.narrow .moat-rate { background: rgba(185,160,106,.18); color: var(--gold); }
+.moat-card.none .moat-rate { background: rgba(184,112,112,.18); color: var(--red); }
+.moat-card p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+
+.ec-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 14px; box-shadow: 0 1px 3px var(--shadow); }
+.ec-badge { flex-shrink: 0; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-top: 2px; font-family: 'Segoe UI', sans-serif; }
+.ec-bull { background: rgba(122,154,122,.18); color: var(--green); }
+.ec-bear { background: rgba(184,112,112,.18); color: var(--red); }
+.ec-neut { background: rgba(185,160,106,.18); color: var(--gold); }
+.ec-body { flex: 1; }
+.ec-title { font-weight: 600; color: var(--text); margin-bottom: 3px; font-size: 14px; }
+.ec-note { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.dcf-note { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.dcf-note strong { color: var(--text); }
+
+.scorecard { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow); }
+.score-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.score-card { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px; }
+.score-letter { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Segoe UI', sans-serif; font-weight: 800; font-size: 22px; flex-shrink: 0; border: 3px solid; }
+.s-a { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.12); }
+.s-bp { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.06); }
+.s-b { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.10); }
+.s-bm { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.06); }
+.s-c { color: var(--red); border-color: var(--red); background: rgba(184,112,112,.08); }
+.score-body h4 { font-size: 13px; color: var(--text); margin-bottom: 4px; }
+.score-body p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+.flag-row { margin-top: 16px; padding: 12px 16px; background: rgba(184,112,112,.08); border: 1px solid rgba(184,112,112,.3); border-radius: 8px; font-size: 13px; color: var(--text2); }
+.flag-row strong { color: var(--red); }
+
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center; box-shadow: 0 1px 4px var(--shadow); }
+.pbox .pl { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; }
+.pbox .pv { font-family: 'Segoe UI', sans-serif; font-size: 28px; font-weight: 800; margin-bottom: 5px; }
+.pbox .pn { font-size: 12px; color: var(--text3); line-height: 1.5; }
+.pc { color: var(--red); } .pf { color: var(--gold); } .ps { color: var(--green); }
+
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.risk-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); position: relative; overflow: hidden; }
+.risk-card::before { content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent); }
+.risk-card.r1::before { background: var(--green); }
+.risk-card.r2::before { background: rgba(122,154,122,.6); }
+.risk-card.r3::before { background: var(--gold); }
+.risk-card.r4::before { background: var(--rose); }
+.risk-card.r5::before { background: var(--red); }
+.risk-card h5 { font-size: 14px; margin-bottom: 6px; color: var(--text); }
+.risk-score { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.r1 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r2 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r3 .risk-score { background: rgba(185,160,106,.18); color: var(--gold); }
+.r4 .risk-score { background: rgba(192,144,144,.18); color: var(--rose); }
+.r5 .risk-score { background: rgba(184,112,112,.18); color: var(--red); }
+.risk-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+footer { background: var(--card2); border-top: 1px solid var(--border); padding: 24px; text-align: center; color: var(--text3); font-size: 12px; margin-top: 40px; line-height: 1.8; }
+@media (max-width: 768px) { .cgrid,.pgrid { grid-template-columns: 1fr; } .hero h1 { font-size: 22px; } .kpi-grid { grid-template-columns: 1fr 1fr; } .stock-snap { grid-template-columns: 1fr 1fr; } .haitu-essay-header { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/GILD" target="_blank" rel="noopener" title="在雪球查看 GILD 实时行情">雪球 GILD</a>
+  </div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">Q1 2026 财报发布 · 2026-05-07 &nbsp;|&nbsp; 海图研判 · 2026-07-11</div>
+  <h1>Gilead Sciences GILD · 2026 Q1 财报深度分析</h1>
+  <div class="hero-sub">NASDAQ: GILD &nbsp;|&nbsp; 财季截至 2026-03-31 &nbsp;|&nbsp; 价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill">股价 <strong>$129.83</strong> <span style="color:var(--red)">当日 -3.72%</span></div>
+    <div class="pill">市值 <strong>$161B</strong></div>
+    <div class="pill">Q1 总营收 <strong>$6.96B</strong> <span style="color:var(--green)">+4%</span></div>
+    <div class="pill">底层产品销售 <span style="color:var(--green)">+8%</span></div>
+    <div class="pill">Non-GAAP EPS <strong>$2.03</strong> <span style="color:var(--green)">+12%</span></div>
+    <div class="pill">Forward P/E（底层）<strong>~15x</strong> <span style="color:var(--gold)">合理不便宜</span></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 海图页首短评 ═══ -->
+<div class="haitu-quip">
+  <div class="haitu-quote">
+    <div class="haitu-portrait">全球 HIV 治疗的"收费桥"——Biktarvy 一款撑起 $143 亿年销售、占美国治疗市场半壁江山,靠 87.5% 毛利率 + 每年约 $95 亿自由现金流 + 至 2036 年无重大专利到期,把确定性变成一台连年加派股息的现金机器。Q1 底层产品销售 +8%、HIV +10%、Yeztugo 首个完整年度即冲击 $10 亿。但报告 EPS 因 $115 亿并购 IPR&D 会计假象转亏（底层 Non-GAAP EPS $8.45-8.85 分文未改）+ 净负债 -$135 亿 + 喜忧参半的并购记录 + 仅约 2% 安全边际。</div>
+    <div class="haitu-rating-line">评级：<span class="rating-badge rating-condbuy">有条件买入</span> · 12 个月目标价 $141（+9%）· 以股息为核心的 HIV 现金牛 + Yeztugo 与史上最强管线的期权,对垒净负债 + 喜忧参半的并购记录 + 尚不足安全边际的估值</div>
+  </div>
+</div>
+
+<!-- ═══ 市场数据快照 ═══ -->
+<div class="section">
+  <div class="stitle">市场数据快照（2026-07-10 收盘）</div>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">股价（美元）</div><div class="snap-val">$129.83</div><div class="snap-sub">2026-07-10 收盘 · 当日 -3.72%</div></div>
+    <div class="snap-item"><div class="snap-label">市值</div><div class="snap-val">$161B</div><div class="snap-sub">1,242M 股 × $129.83</div></div>
+    <div class="snap-item"><div class="snap-label">Forward P/E（底层）</div><div class="snap-val nt">~15.0x</div><div class="snap-sub">$129.83 / 底层 $8.65</div></div>
+    <div class="snap-item"><div class="snap-label">报告 P/E</div><div class="snap-val dn">不适用</div><div class="snap-sub">⚠️ 指引为亏损（IPR&D）</div></div>
+    <div class="snap-item"><div class="snap-label">TTM Non-GAAP P/E</div><div class="snap-val">~15.5x</div><div class="snap-sub">TTM EPS $8.37</div></div>
+    <div class="snap-item"><div class="snap-label">P/S (TTM)</div><div class="snap-val">~5.4x</div><div class="snap-sub">TTM 营收 $29.7B</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间</div><div class="snap-val">$107.75 - $157.29</div><div class="snap-sub">现价居中偏下</div></div>
+    <div class="snap-item"><div class="snap-label">股息率</div><div class="snap-val up">~2.5%</div><div class="snap-sub">$3.28/年 · 连年增息</div></div>
+    <div class="snap-item"><div class="snap-label">FCF Yield</div><div class="snap-val nt">~5.9%</div><div class="snap-sub">FY2025 FCF $9.46B</div></div>
+    <div class="snap-item"><div class="snap-label">现金 + 可售债券</div><div class="snap-val">$8.63B</div><div class="snap-sub">2026-03-31 末</div></div>
+    <div class="snap-item"><div class="snap-label">有息负债</div><div class="snap-val dn">$22.17B</div><div class="snap-sub">全为高级无担保票据</div></div>
+    <div class="snap-item"><div class="snap-label">真实净负债</div><div class="snap-val dn">-$13.55B</div><div class="snap-sub">⚠️ 净负债非净现金</div></div>
+    <div class="snap-item"><div class="snap-label">Non-GAAP 毛利率</div><div class="snap-val up">87.5%</div><div class="snap-sub">Q1 2026 · 极高</div></div>
+    <div class="snap-item"><div class="snap-label">Non-GAAP 营业利润率</div><div class="snap-val up">46.9%</div><div class="snap-sub">Q1 2026</div></div>
+  </div>
+  <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">数据时点：股价 2026-07-10 收盘 $129.83（当日 -3.72%）· 财务数据来源 Gilead Q1 2026 官方财报新闻稿（SEC 8-K + IR PDF，2026-05-07 发布，财季截至 2026-03-31）+ SEC 10-Q · 货币 USD 单口径。Gilead 财年为日历年（12/31 止）。⚠️ 两处铁律：(1) Gilead 是<strong>净负债</strong>（有息负债 $22.17B > 现金+可售债券 $8.63B）而非净现金；(2) FY2026 报告 EPS 指引为<strong>亏损</strong>，纯因三笔并购的 $115 亿已收购在研（IPR&D）费用，<strong>估值须锚定底层 Non-GAAP EPS $8.45-8.85</strong>，不能用报告负值。</p>
+</div>
+
+<!-- ═══ Q1 2026 KPI ═══ -->
+<div class="section">
+  <div class="stitle">Q1 2026 核心业绩（USD · 财季截至 2026-03-31）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">总营收</div><div class="kpi-v">$6.96B</div><span class="badge up">+4% YoY</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">被 Veklury 拖累</div></div>
+    <div class="kpi"><div class="kpi-l">产品销售</div><div class="kpi-v">$6.95B</div><span class="badge up">+5%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">占总营收 99.8%</div></div>
+    <div class="kpi"><div class="kpi-l">产品销售（除 Veklury）</div><div class="kpi-v">$6.80B</div><span class="badge up">+8%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">底层真实动能</div></div>
+    <div class="kpi"><div class="kpi-l">HIV 板块</div><div class="kpi-v">$5.03B</div><span class="badge up">+10%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">占产品销售 72%</div></div>
+    <div class="kpi"><div class="kpi-l">Biktarvy</div><div class="kpi-v">$3.36B</div><span class="badge up">+7%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">单药 · HIV 治疗龙头</div></div>
+    <div class="kpi"><div class="kpi-l">Yeztugo（PrEP）</div><div class="kpi-v">$0.17B</div><span class="badge nt">新品</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">FY 指引约 $10 亿</div></div>
+    <div class="kpi"><div class="kpi-l">肿瘤板块</div><div class="kpi-v">$0.81B</div><span class="badge up">+7%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">Trodelvy +37% / 细胞疗法 -12%</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 营业利润</div><div class="kpi-v">$2.59B</div><span class="badge up">营业利润率 37.2%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">含 IPR&D $107M</div></div>
+    <div class="kpi"><div class="kpi-l">Non-GAAP 营业利润</div><div class="kpi-v">$3.27B</div><span class="badge up">营业利润率 46.9%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">真实经营口径</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 净利润</div><div class="kpi-v">$2.02B</div><span class="badge up">EPS $1.61 (+55%)</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">其他收入摆动 +$563M 助推</div></div>
+    <div class="kpi"><div class="kpi-l">Non-GAAP 净利润</div><div class="kpi-v">$2.55B</div><span class="badge up">EPS $2.03 (+12%)</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">最可信口径</div></div>
+    <div class="kpi"><div class="kpi-l">自由现金流</div><div class="kpi-v">$2.43B</div><span class="badge up">OCF $2.54B − Capex $0.12B</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">Capex 仅占营收 1.7%</div></div>
+  </div>
+</div>
+
+<!-- ═══ 看穿高亮框 ═══ -->
+<div class="section">
+  <div class="stitle">本季必看 · 两个"看穿"：报告亏损 vs 底层盈利、总营收 vs 底层增速</div>
+  <div class="cmt">
+    <p><strong>Gilead 这份财报有两个必须"看穿"的地方，看不穿就会把一台稳健的现金机器误读成"亏损公司"或"停滞公司"。</strong></p>
+
+    <p><strong>看穿一：FY2026 报告 EPS 是"亏损"，但那是并购 IPR&D 的会计浮尘，底层每股收益分文未改。</strong> 5 月 7 日 Gilead 把 FY2026 GAAP EPS 指引从 $6.75-7.15 砍到 <span class="warn-t">-$3.25 至 -$2.85</span>、Non-GAAP 从 $8.45-8.85 砍到 <span class="warn-t">-$1.05 至 -$0.65</span>——看似业绩崩塌，实则<span class="hl-t">纯因 Arcellx（$78 亿）、Ouro、Tubulis 三笔并购带来的约 $115 亿"已收购在研（IPR&D）"费用及融资成本，合计约 -$9.50/股，且 IPR&D 不可抵税</span>。剔除这三笔一次性并购费用后，<strong>底层 Non-GAAP EPS 指引维持 $8.45-8.85 不变</strong>（与 2 月一致），底层非 GAAP 经营利润指引反而从 $138-143 亿上调至 <strong>$140-145 亿</strong>。<span class="warn-t">估值与前瞻 P/E 必须锚定底层 $8.45-8.85，用报告负值算 P/E 是最典型的认知陷阱。</span></p>
+
+    <div class="tbl-wrap" style="margin:14px 0;">
+      <table class="tbl">
+        <tr><th>FY2026 指引口径</th><th>5/7 更新</th><th>2 月原指引</th><th>变化本质</th></tr>
+        <tr><td>产品销售</td><td>$300-304 亿</td><td>$296-300 亿</td><td><span class="badge up">上调</span></td></tr>
+        <tr><td>HIV 销售增速</td><td>+8%</td><td>+6%</td><td><span class="badge up">上调</span></td></tr>
+        <tr><td><span class="warn-t">报告 Non-GAAP EPS</span></td><td><span class="warn-t">-$1.05 ~ -$0.65</span></td><td>$8.45-8.85</td><td>并购 IPR&D 一次性</td></tr>
+        <tr class="hl"><td><strong>底层 Non-GAAP EPS（剔并购）</strong></td><td><strong>$8.45-8.85</strong></td><td>$8.45-8.85</td><td><strong>维持不变</strong></td></tr>
+        <tr><td>底层 Non-GAAP 经营利润</td><td>$140-145 亿</td><td>$138-143 亿</td><td><span class="badge up">上调 $2 亿</span></td></tr>
+      </table>
+    </div>
+
+    <p><strong>看穿二：总营收 +4% 平淡，是被衰减的 Veklury 拖累；底层产品销售 +8%、HIV +10% 才是真相。</strong> 头条"总营收 $6.96B（+4%）"很容易让人以为 Gilead 停滞了。但<span class="hl-t">新冠药 Veklury 本季 -52%（$144M）是纯粹的疫情正常化拖累</span>，剔除 Veklury 后底层产品销售 <strong>+8%</strong>、HIV 板块 <strong>+10%</strong>。真实经营动能远好于表面：Biktarvy +7%、Descovy +38%、Livdelzi（肝病）同比逾 3 倍、Trodelvy（肿瘤）+37%——多个引擎同时点火。管理层甚至据此上调了全年产品销售与 HIV 指引。<strong>看穿这两层，Gilead 就从"亏损 + 停滞"还原成"稳健现金牛 + 若干高增新星"。</strong></p>
+  </div>
+</div>
+
+<!-- ═══ 趋势图 ═══ -->
+<div class="section">
+  <div class="stitle">关键指标趋势</div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">营收（$B）& Non-GAAP EPS（$）· 近 5 季（双轴）</div><div class="cwrap"><canvas id="chartRev"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">营业利润率趋势（GAAP vs Non-GAAP · %）</div><div class="cwrap"><canvas id="chartMargin"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">Q1 2026 产品销售分部拆分（$M）</div><div class="cwrap"><canvas id="chartSegment"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">GAAP vs Non-GAAP 摊薄 EPS（$）· 近 5 季</div><div class="cwrap"><canvas id="chartEps"></canvas></div></div>
+  </div>
+</div>
+
+<!-- ═══ 桑基图 ═══ -->
+<div class="section">
+  <div class="stitle">Q1 2026 资金流向桑基图（GAAP · $B）</div>
+  <div class="ccard">
+    <div id="sankey" style="width:100%;height:480px;"></div>
+    <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">说明：总营收 $6.96 → 营业成本 $1.45 + 毛利 $5.52 → 研发+在研 $1.48（R&D $1.37 + IPR&D $0.11）+ 销售管理 $1.45 + 营业利润 $2.59；营业利润 $2.59 + 其他净收入 $0.24（含权益证券未实现收益 $142M）→ 利息支出 $0.24 + 所得税 $0.56 + GAAP 净利 $2.02。注：本季自由现金流 $2.43B（OCF $2.54B − Capex $0.12B），向股东返还逾 $1.4B（回购 $0.42B + 股息 $1.04B，约占 FCF 60%）+ 偿债 $2.77B。Capex 仅占营收 1.7%，极致轻资产。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 1 ═══ -->
+<div class="section">
+  <div class="stitle">模块 1 · 公司概览与背景</div>
+  <div class="cmt">
+    <p><strong>Gilead Sciences, Inc.</strong>（NASDAQ: GILD），总部加州 Foster City，成立 1987 年，1992 年上市。财年为日历年（12/31 止）。从早期抗病毒起家，Gilead 先后靠丙肝（Sovaldi/Harvoni，2014-2015 曾创造超 $190 亿单年销售的神话，后自然衰减）与 HIV 建立起制药巨头地位。</p>
+
+    <p><strong>核心叙事</strong>：今天的 Gilead 是<span class="hl-t">全球 HIV 治疗与预防的绝对龙头，一门以"专利药收费桥"为本质的高毛利现金牛生意</span>——它靠少数几款重磅药（Biktarvy、Descovy、Yeztugo 等）在受专利保护的窗口内，以 87.5% 的非 GAAP 毛利率抽取现金，再把其中约四成连年加派给股东。FY2025 总营收 $294 亿、产品销售 $289 亿、自由现金流 $95 亿。这是一门<strong>高毛利、高现金转化、Capex 仅占营收约 2% 的轻资产生意</strong>——但与支付网络不同，它的护城河由专利到期时钟界定。</p>
+
+    <p><strong>四大业务板块</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>HIV（$50.3 亿/季，+10%，占产品销售 72%）</strong>——绝对基本盘。Biktarvy（$33.6 亿/季）是 HIV 治疗全球龙头，美国治疗市场份额约 50%+；Descovy +38%；新星 Yeztugo（lenacapavir）开辟 HIV 预防新品类</li>
+      <li><strong>肝病（$7.7 亿/季，+1%）</strong>——丙肝 Epclusa + 乙肝 Vemlidy 稳定，新星 Livdelzi（原发性胆汁性胆管炎）同比逾 3 倍</li>
+      <li><strong>肿瘤（$8.1 亿/季，+7%）</strong>——Trodelvy（三阴乳腺癌 ADC）+37% 高歌猛进；细胞疗法 Yescarta/Tecartus（-12%）承压于竞争</li>
+      <li><strong>Veklury（$1.4 亿/季，-52%）</strong>——新冠药，疫情正常化下持续衰减，管理层已给 FY2026 仅 $6 亿的低指引</li>
+    </ul>
+
+    <p><strong>股权结构</strong>：普通股约 12.42 亿股（2026-03-31），单一股权结构，无双重投票权。机构持股为主，管理层持股比例较低（成熟大盘股常态）。</p>
+
+    <p><strong>能力圈检验</strong>：HIV 收费桥生意清晰（看得懂：靠 Biktarvy 等重磅药在专利期内高毛利收现金）。但<span class="warn-t">两块需要专业判断的地方：(1) 管线兑现——BIC/LEN、anito-cel 等在研药能否按期上市并放量，涉及临床与监管黑箱；(2) 专利悬崖时钟——虽然 Biktarvy 至 2036 年无重大到期，但制药护城河终究由专利期界定，长期须持续用新药接棒</span>。这两点决定 Gilead 是"永续现金牛"还是"周期性专利资产"。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 2 ═══ -->
+<div class="section">
+  <div class="stitle">模块 2 · 管理层评估</div>
+
+  <div class="bscore">
+    <div class="circle cg">B+</div>
+    <div class="bd">
+      <h4>Daniel O'Day · 董事长兼 CEO（2019 至今）</h4>
+      <p>2019 年从罗氏制药加盟。O'Day 任内把 Gilead 从"丙肝退潮 + HIV 一条腿"重新做厚：一手巩固 HIV 龙头（Biktarvy 放量 + Yeztugo 开辟预防新品类），一手用并购搭建肿瘤第二曲线（Immunomedics/Trodelvy、Kite/细胞疗法、CymaBay/Livdelzi、Arcellx）。<span class="hl-t">2026 年管理层把在研管线称为"公司史上最强"</span>——2026 年至多 4 项潜在上市、5 项 3 期数据更新，至 2033 年约 10 项潜在上市。海图判断：这是一位守住 HIV 现金牛、并积极用外延并购补管线的掌舵人，执行力可圈可点，但并购定价纪律是其最大争议点。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B</div>
+    <div class="bd">
+      <h4>资本配置纪律 · 股息稳健，但并购手笔喜忧参半</h4>
+      <p>
+      <strong>股息端是教科书</strong>：自 2015 年起连年增息，2026 Q2 季度股息升至 $0.82/股（年化约 $3.28，+3.8%），派息率仅约底层净利四成，覆盖充分。<br>
+      <strong>回购端温和</strong>：2025 年 9 月授权 $60 亿回购计划，但执行节奏克制（Q3'25 $4.35 亿、Q4'25 $2.30 亿、Q1'26 $4.19 亿），摊薄股数三年几乎不动（12.58 亿→12.54 亿），回购基本仅抵消股权激励稀释。<br>
+      <span class="warn-t">争议在并购</span>：Kite 细胞疗法（2017 年 $119 亿）如今 -12% 节节败退；而 Immunomedics/Trodelvy（$210 亿）与 CymaBay/Livdelzi 则在兑现。<strong>连年巨额 IPR&D 冲销</strong>（FY2024 CymaBay 把 GAAP EPS 压到 $0.38、FY2026 三笔并购 $115 亿）——是资本配置纪律上一枚需要长期盯的黄旗。
+      </p>
+    </div>
+  </div>
+
+  <div class="cmt">
+    <p><strong>长期主义测试</strong>：✅ 管理层以"HIV 龙头 + 肿瘤/肝病第二曲线 + 史上最强管线"的长期布局为主线，坚持连年增息与研发投入（R&D 约占营收 20%），不做短期财报博弈。<strong>坦诚度</strong>：电话会主动披露 Medicaid 降价、ACA 变化拖累约 2%、细胞疗法竞争逆风、Veklury 衰减，不粉饰。<strong>利益绑定</strong>：管理层持股比例不高（成熟大盘股常态），薪酬与产品销售 / 底层 Non-GAAP 指标挂钩。<span class="warn-t">最需监督的是并购定价——历史上有 Kite 的教训，也有 Trodelvy 的成功，纪律尚未证明稳定。</span></p>
+  </div>
+</div>
+
+<!-- ═══ 模块 3 ═══ -->
+<div class="section">
+  <div class="stitle">模块 3 · 商业模式深度解析</div>
+  <div class="cmt">
+    <p><strong>海图"一句话测试"</strong>：<span class="hl-t">Gilead 是一台"HIV 收费桥"——用 Biktarvy 等少数几款专利重磅药，在专利保护窗口内以 87.5% 的毛利率向全球 HIV 患者收取治疗费，把现金流做厚，再用并购和研发不断为专利到期后的下一段路铺桥。</span></p>
+
+    <p><strong>盈利模型</strong>：Gilead 的收入几乎全部来自自有产品销售（Q1 产品销售占总营收 99.8%），而非授权或代工。核心是<strong>"专利 + 高毛利 + 医保准入"三位一体</strong>：一款药在专利期内定价权极强（Biktarvy 毛利率极高），医保/PBM 谈判决定放量，专利到期则面临仿制药悬崖。这与支付网络"永续收费站"不同——制药的护城河有到期时钟。</p>
+
+    <p><strong>Q1 2026 产品销售拆分（$M）</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>板块 / 产品</th><th>Q1'26</th><th>YoY</th><th>驱动</th></tr>
+        <tr class="hl"><td><strong>HIV 合计</strong></td><td><strong>5,030</strong></td><td><strong>+10%</strong></td><td>基本盘 · 占产品销售 72%</td></tr>
+        <tr><td>&nbsp;&nbsp;Biktarvy</td><td>3,361</td><td>+7%</td><td>HIV 治疗龙头 · 美国份额 50%+</td></tr>
+        <tr><td>&nbsp;&nbsp;Descovy</td><td>807</td><td>+38%</td><td>PrEP 预防 · 强劲放量</td></tr>
+        <tr><td>&nbsp;&nbsp;Yeztugo（lenacapavir）</td><td>166</td><td>新品</td><td>每年两次 HIV 预防 · 首个完整年</td></tr>
+        <tr><td>&nbsp;&nbsp;其他 HIV（Genvoya/Odefsey 等）</td><td>696</td><td>—</td><td>老组合稳定/微降</td></tr>
+        <tr class="hl"><td><strong>肿瘤合计</strong></td><td><strong>810</strong></td><td><strong>+7%</strong></td><td>第二曲线</td></tr>
+        <tr><td>&nbsp;&nbsp;Trodelvy</td><td>402</td><td>+37%</td><td>三阴乳腺癌 ADC · 高增</td></tr>
+        <tr><td>&nbsp;&nbsp;细胞疗法（Yescarta/Tecartus）</td><td>407</td><td>-12%</td><td>竞争逆风</td></tr>
+        <tr class="hl"><td><strong>肝病合计</strong></td><td><strong>767</strong></td><td><strong>+1%</strong></td><td>Livdelzi 逾 3 倍抵消丙肝衰减</td></tr>
+        <tr><td>Veklury（remdesivir）</td><td>144</td><td>-52%</td><td>新冠药 · 疫情正常化衰减</td></tr>
+        <tr><td>其他</td><td>196</td><td>-6%</td><td>—</td></tr>
+      </table>
+    </div>
+
+    <p style="margin-top:14px;"><strong>单位经济与议价能力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>毛利率皇冠</strong>——非 GAAP 产品毛利率 87.5%，专利药定价权极强，边际生产成本极低</li>
+      <li><strong>对支付方（医保/PBM）议价能力</strong>：中——HIV 是必需治疗、Biktarvy 疗效领先给予溢价空间，但 Medicaid 降价协议 + ACA 变化本季拖累约 2%</li>
+      <li><strong>对患者黏性</strong>：极强——HIV 是终身治疗，换药风险高，Biktarvy 的单片方案 + 安全性构成强转换成本</li>
+      <li><strong>地理结构</strong>：美国 $49.3 亿（占产品销售 71%）· 欧洲 $11.4 亿 · 其他 $8.8 亿——高度依赖美国市场与美国药价政策</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══ 模块 4 ═══ -->
+<div class="section">
+  <div class="stitle">模块 4 · 经济护城河分析（5 维）</div>
+  <div class="moat-grid">
+    <div class="moat-card wide">
+      <h5>1. 无形资产 / 专利</h5>
+      <span class="moat-rate">宽</span>
+      <p>Biktarvy 等核心专利至 2036 年无重大到期 + FDA 批文 + 数十年抗病毒研发积累。<span class="warn-t">但制药护城河由专利期界定，非永续</span>。<strong>趋势：稳定</strong>（靠新药接棒维持）。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>2. 转换成本</h5>
+      <span class="moat-rate">宽</span>
+      <p>HIV 是终身治疗，患者一旦稳定于 Biktarvy 单片方案，换药需重新评估耐受与安全，医患都倾向不动。<strong>趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>3. 成本 / 规模优势</h5>
+      <span class="moat-rate">中</span>
+      <p>87.5% 毛利来自专利定价而非成本领先，规模优势主要体现在研发与商业化平台复用。<strong>趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>4. 网络效应</h5>
+      <span class="moat-rate">无-弱</span>
+      <p>处方药不具典型网络效应。仅有品牌信任 + 医生处方惯性的软性黏性。<strong>趋势：弱</strong>。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>5. 有效规模（HIV 龙头）</h5>
+      <span class="moat-rate">宽</span>
+      <p>HIV 治疗市场事实上由 Gilead（份额 50%+）与 GSK/ViiV 双寡头主导，研发与准入壁垒高，新进入者空间有限。<strong>趋势：稳定</strong>（Yeztugo 巩固预防端）。</p>
+    </div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>10 年后护城河会更宽还是更窄？</strong> <span class="hl-t">HIV 核心护城河仍宽，但两个变量决定长期走向</span>：(1) <span class="hl-t">Yeztugo/lenacapavir 若成 HIV 预防的重磅平台</span>，将把护城河从"治疗"延伸到"预防"、显著加宽并延长专利周期；(2) <span class="warn-t">2036 年后 Biktarvy 专利悬崖</span>——届时若无足够新药接棒，护城河会随仿制药侵蚀。肿瘤（Trodelvy）与细胞疗法是想加的第二曲线，但细胞疗法当前 -12% 说明竞争激烈、并非稳赢。<strong>Gilead 的护城河"当下宽、远端有到期时钟"，10 年维度取决于管线兑现率。</strong></p>
+    <p><strong>定价权</strong>：强但受美国药价政策（IRA、Medicaid、ACA）与 340B 计划压制。本季约 2% 增长被政策定价拖累即是明证。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 5 ═══ -->
+<div class="section">
+  <div class="stitle">模块 5 · 财务深度分析</div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 12px 0; font-family: 'Segoe UI',sans-serif;">5.1 关键比率（Q1 2026 vs Q1 2025）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>指标</th><th>Q1 2025</th><th>Q1 2026</th><th>变化</th><th>含义</th></tr>
+      <tr><td>总营收增速</td><td>—</td><td>+4%</td><td><span class="badge nt">Veklury 拖累</span></td><td>底层除 Veklury +8%</td></tr>
+      <tr><td>Non-GAAP 毛利率</td><td>~87%</td><td>87.5%</td><td><span class="badge nt">稳定</span></td><td>专利药定价 · 极高</td></tr>
+      <tr><td>GAAP 营业利润率</td><td>33.6%</td><td>37.2%</td><td><span class="badge up">+3.6pp</span></td><td>其他收入由负转正</td></tr>
+      <tr><td>Non-GAAP 营业利润率</td><td>43.4%</td><td>46.9%</td><td><span class="badge up">+3.5pp</span></td><td>经营杠杆释放</td></tr>
+      <tr><td>GAAP 有效税率</td><td>—</td><td>21.7%</td><td><span class="badge nt">—</span></td><td>IPR&D 不可抵税推高</td></tr>
+      <tr><td>Non-GAAP 有效税率</td><td>—</td><td>18.3%</td><td><span class="badge nt">—</span></td><td>正常化口径</td></tr>
+      <tr><td>摊薄股数（百万）</td><td>1,255</td><td>1,254</td><td><span class="badge nt">-0.1%</span></td><td>回购仅抵消 SBC</td></tr>
+      <tr><td>GAAP 摊薄 EPS</td><td>$1.04</td><td>$1.61</td><td><span class="badge up">+55%</span></td><td>其他收入摆动 +$563M</td></tr>
+      <tr><td>Non-GAAP 摊薄 EPS</td><td>$1.81</td><td>$2.03</td><td><span class="badge up">+12%</span></td><td>真实经营口径</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">杜邦视角：Gilead 的高 ROE（FY2025 GAAP 净利约 $85 亿 / 平均权益约 $235 亿 ≈ <strong>36%</strong>）由三部分驱动——极高净利率（专利药）× 中等资产周转 × 中等财务杠杆（净负债 + 持续回购压低权益）。ROIC 约 15-18%，高于 WACC（约 8%），价值创造为正。利息覆盖倍数（GAAP 营业利润 $2.59B / 利息 $0.24B ≈ <strong>10.8x</strong>）安全。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.2 资产负债健康度（2026-03-31 末 · $M）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>2025-12-31</th><th>2026-03-31</th><th>说明</th></tr>
+      <tr><td>现金及等价物</td><td>—</td><td>7,628</td><td>—</td></tr>
+      <tr><td>可售债券（流动+非流动）</td><td>—</td><td>998</td><td>短期 $15 + 长期 $983</td></tr>
+      <tr class="hl"><td>现金 + 可售债券合计</td><td>10,605</td><td>8,626</td><td>偿债 + 回购 + 派息消耗</td></tr>
+      <tr><td>应收账款</td><td>—</td><td>4,741</td><td>—</td></tr>
+      <tr><td>存货（含长期）</td><td>—</td><td>4,339</td><td>—</td></tr>
+      <tr class="hl"><td>短期债务（长债当期到期）</td><td>2,807</td><td>1,313</td><td>Q1 偿还 $27.5 亿到期 3.65% 票据</td></tr>
+      <tr class="hl"><td>长期债务</td><td>—</td><td>20,861</td><td>—</td></tr>
+      <tr class="hl"><td>有息负债合计</td><td>—</td><td>22,174</td><td>全为高级无担保票据 · 票息 1.2%-5.25%</td></tr>
+      <tr><td>经营租赁负债</td><td>—</td><td>605</td><td>计入其他负债 · 取自 10-K 附注</td></tr>
+      <tr class="hl"><td><strong>真实净负债</strong></td><td><strong>-5,995*</strong></td><td><strong>-13,548</strong></td><td>⚠️ 净负债非净现金</td></tr>
+      <tr><td>无形资产净额</td><td>—</td><td>16,382</td><td>收购形成</td></tr>
+      <tr><td>商誉</td><td>—</td><td>8,314</td><td>占总资产 15%</td></tr>
+      <tr><td>总资产</td><td>—</td><td>56,278</td><td>—</td></tr>
+      <tr><td>股东权益（归母）</td><td>—</td><td>23,515</td><td>含少数股东权益 -$84M</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">*2025-12-31 净负债系用现金+投资 $10,605M 减当时有息负债估算，仅供趋势参考。⚠️ <strong>净负债非净现金——铁律提示</strong>：Gilead 有息负债 $22.17B（短债 $1.31B + 长债 $20.86B，全为高级无担保票据，最早到期 2027 年）> 现金+可售债券 $8.63B，<strong>真实净负债 -$13.55B</strong>（含经营租赁负债 $0.61B 则约 -$14.15B）。这与"现金堡垒"叙事不同。但相对每年约 $95 亿自由现金流仅约 <strong>1.4 倍</strong>，杠杆安全、可控。Q1 现金减少主因偿债 $27.7 亿 + 派息 $10.4 亿 + 回购 $4.2 亿。无形资产 + 商誉合计 $247 亿（占总资产 44%），来自历年并购——制药巨头的资产负债表天然由收购无形资产构成。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.3 现金流量（Q1 2026 · $M）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>Q1 2026</th><th>FY2025 全年</th><th>说明</th></tr>
+      <tr><td>经营活动现金流（OCF）</td><td>2,544</td><td>10,019</td><td>—</td></tr>
+      <tr><td>− Capex（购建 PP&E）</td><td>117</td><td>563</td><td>官方现金流量表 line item</td></tr>
+      <tr class="hl"><td>自由现金流（FCF）</td><td>2,427</td><td>9,456</td><td>OCF − Capex（与公司披露一致）</td></tr>
+      <tr><td>Capex / 营收</td><td>1.7%</td><td>1.9%</td><td>极致轻资产</td></tr>
+      <tr><td>折旧</td><td>93</td><td>—</td><td>—</td></tr>
+      <tr><td>摊销（主要为收购无形资产）</td><td>596</td><td>—</td><td>非现金 · 反映 IP 消耗</td></tr>
+      <tr><td>股权激励（SBC）</td><td>218</td><td>—</td><td>年化约 $0.87B</td></tr>
+      <tr><td>股息支付</td><td>1,040</td><td>4,003</td><td>—</td></tr>
+      <tr><td>股份回购</td><td>419</td><td>1,922</td><td>—</td></tr>
+      <tr><td>偿还债务</td><td>2,766</td><td>—</td><td>Q1 偿还到期 3.65% 票据</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">现金流质量：OCF/净利转化良好，FCF 极为稳定（FY2025 $94.6 亿、转化率 94%）。<strong>Capex 仅占营收 1.9%——比多数消费与工业公司更轻</strong>，因为制药的"资本"是研发与专利，费用化在 R&D（约占营收 20%）而非资本化。这也意味着 GAAP 利润被大额收购无形资产摊销（$596M/季）压低，看现金流比看 GAAP 利润更能反映真实盈利能力。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.4 所有者盈余（价值投资口径）</h3>
+  <div class="dcf-note">
+    <p><strong>所有者盈余 = 净利润 + 折旧摊销 + SBC − 维护性 Capex ± 营运资金 ≈ 自由现金流</strong></p>
+    <p>Gilead 是极轻资产、高现金转化的专利药生意，FCF 是所有者盈余的良好近似。FY2025 FCF $94.6 亿（Capex 仅 $5.6 亿、占营收 1.9%）。注意：摊销 $596M/季主要为<strong>收购无形资产摊销</strong>——它代表已付出并购对价对应 IP 的真实消耗，严格看不宜简单加回；因此底层所有者盈余约 <strong>$90-100 亿/年</strong>。</p>
+    <p><strong>所有者盈余收益率 = FCF $94.6 亿 / 市值 $161B ≈ 5.9%</strong>——这是一个<span class="hl-t">"稳健质量 + 合理估值"</span>的收益率：对一个 87.5% 毛利、净负债可控、连年增息、但仅约 4% 产品销售增速的公司，5.9% 的 FCF Yield 谈不上便宜也不算贵，处于合理区间。<strong>换句话说：Gilead 当前既没有明显泡沫，也没有 25% 安全边际的深度折价——它是一台定价大致公允的稳健现金机器。</strong></p>
+  </div>
+</div>
+
+<!-- ═══ 模块 6 ═══ -->
+<div class="section">
+  <div class="stitle">模块 6 · 电话会分析（Q1 2026 + 前 2 季度）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">Q1 2026 电话会（2026-05-07）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"Yeztugo 上市超预期，FY2026 指引上调至约 $10 亿，或首个完整年度即成重磅药；HIV 预防品类持久性最佳"</div><div class="ec-note">全球首个每年两次 HIV 预防疗法开局强劲，管理层对其长期天花板信心高。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"上调全年收入与 HIV 指引（HIV 由 +6% 上调至 +8%），产品销售指引升至 $300-304 亿；Q1 底层业务 +8%、HIV +10%"</div><div class="ec-note">剔除 Veklury 后底层动能强劲，全年指引全面上修——业绩基本盘无虞。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"因 Arcellx（$78 亿）/Ouro/Tubulis 三笔并购约 $115 亿 IPR&D 费用，GAAP 及 Non-GAAP EPS 指引降至亏损（约 -$9.50/股）；但剔除后底层 EPS 维持 $8.45-8.85"</div><div class="ec-note">这是本季最大的"会计噪音"——报告亏损纯为并购一次性，底层盈利能力未变。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-neut">中性偏多</div><div class="ec-body"><div class="ec-title">"Trodelvy +37%，1L 转移性三阴乳腺癌监管决定预计 2H26；anito-cel（PDUFA 12/23）有望成骨髓瘤基石疗法"</div><div class="ec-note">肿瘤第二曲线的两个关键催化剂在路上，管线兑现是估值重估的前提。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"约 2% 增长受 Medicaid 降价协议及 ACA 变化拖累；Veklury -52%、细胞疗法 -12%（竞争压力）"</div><div class="ec-note">美国药价政策 + 细胞疗法竞争 + 新冠药衰减是三个持续的拖累项。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q4 2025 电话会（2026-02-10）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"Yeztugo 美国成功上市；Biktarvy 全年 $143 亿（+7%）、Descovy +33%；肝病组合 Q4 +17%（Livdelzi 驱动）"</div><div class="ec-note">HIV 龙头地位稳固 + 新星放量 + 肝病复苏，FY2025 收官强劲。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"Non-GAAP EPS $1.86 同比小幅下滑，因 IPR&D 费用上升；含 MYR 收购资产 IPR&D 减值"</div><div class="ec-note">IPR&D 波动是 Gilead GAAP/Non-GAAP 利润的持续噪音源——并购活跃期尤甚。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q3 2025 电话会（2025-10-30）</h3>
+  <div class="ec-item"><div class="ec-badge ec-neut">利好但含一次性</div><div class="ec-body"><div class="ec-title">"GAAP EPS $2.43 大增，主因去年 $17.5 亿 IPR&D 减值不复现 + 约 $4 亿一次性 IP 出售相关收入"</div><div class="ec-note">Q3'25 EPS 异常高含两项一次性，不可持续——横向对比须剔除。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"产品销售 -2%（Veklury 与细胞疗法下滑），细胞疗法竞争逆风持续"</div><div class="ec-note">细胞疗法（Kite 收购资产）的竞争压力是结构性的，非短期扰动。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">指引兑现度追踪</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>历史指引</th><th>Q1 2026 实际 / 更新</th><th>评价</th></tr>
+      <tr><td>FY2026 产品销售 $296-300 亿（2 月）</td><td>上调至 $300-304 亿</td><td><span class="badge up">上调</span></td></tr>
+      <tr><td>FY2026 HIV 增速 +6%（2 月）</td><td>上调至 +8%</td><td><span class="badge up">上调</span></td></tr>
+      <tr><td>Yeztugo 全年指引</td><td>上调至约 $10 亿</td><td><span class="badge up">上调</span></td></tr>
+      <tr><td>底层 Non-GAAP EPS $8.45-8.85（2 月）</td><td>维持 $8.45-8.85（剔并购）</td><td><span class="badge nt">兑现</span></td></tr>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>信号汇总</strong>：Q1 2026 是 Gilead "<span class="hl-t">底层业务全面上调 + 一次性并购费用制造账面亏损噪音</span>"的一季。剔除会计噪音后，产品销售、HIV、Yeztugo 三条指引全部上修，底层盈利维持。<strong>业绩基本盘没有问题——真正的看点在管线兑现（BIC/LEN 8/27、anito-cel 12/23 两次 PDUFA）与估值是否给出安全边际。</strong>需要长期盯的是并购定价纪律与细胞疗法的竞争走向。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 7 ═══ -->
+<div class="section">
+  <div class="stitle">模块 7 · 多模型估值（8 种方法）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">7.1 估值汇总表（独立估值 · 锚定底层盈利 · USD）</h3>
+  <p style="margin-bottom:10px; font-size:12px; color:var(--text3);">⚠️ 所有估值均基于<strong>底层 Non-GAAP EPS $8.45-8.85（共识约 $8.65）</strong>与底层现金流，剔除三笔并购一次性 IPR&D，绝不使用报告亏损值。估值独立推导，不锚定现价。</p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>估值方法</th><th>每股公允价</th><th>假设要点</th><th>权重</th></tr>
+      <tr><td>1. 相对估值（P/E）</td><td>$138</td><td>底层 EPS $8.65 × 16x（HIV 耐久 + 2.5% 股息支撑，但 ~4-6% 增速封顶倍数；参照 ABBV 15-16x）</td><td>25%</td></tr>
+      <tr><td>2. DCF（基准）</td><td>$138</td><td>FCF $95 亿，5 年 CAGR 5-6%（Yeztugo/管线抵消 Veklury/细胞疗法衰减），WACC 8%，永续 2%，减净负债 $13.5B</td><td>25%</td></tr>
+      <tr><td>3. 所有者盈余收益率</td><td>$122</td><td>FCF $95 亿 / 目标收益率 6.25% = $151B 权益 → /1,242M 股（成熟药企要求收益率）</td><td>15%</td></tr>
+      <tr><td>4. PEG</td><td>$130</td><td>Forward P/E 15x ÷（EPS 增速 ~7% + 股息 2.5%）= 股息调整 PEG ~1.5（合理）</td><td>10%</td></tr>
+      <tr><td>5. DDM</td><td>$100</td><td>DPS $3.28、增长 5%、要求回报 8.5% → Gordon $98；仅捕捉股息（约四成回报），系数偏低</td><td>5%</td></tr>
+      <tr><td>6. NAV</td><td>不适用</td><td>非资产型公司——制药价值在专利药收费与在研管线现金流，账面权益 $23.5B（≈$19/股）远低于盈利法，印证 IP 生意</td><td>0%</td></tr>
+      <tr><td>7. 反向 DCF</td><td>当前价隐含 FCF 增长 <strong>~4%</strong></td><td>$129.83 隐含市场认为 FCF 长期增 ~4%——与产品销售 +4% 指引一致，未对 Yeztugo/管线给额外溢价</td><td>15%</td></tr>
+      <tr><td>8. SOTP 分部加总</td><td>$135</td><td>HIV ~$125B + 肿瘤 ~$22B + 肝病 ~$16B + Veklury ~$3B + 管线期权 ~$8B − 净负债 $13.5B</td><td>5%</td></tr>
+      <tr class="hl"><td><strong>加权公允价中位数</strong></td><td><strong>$133</strong></td><td>估值区间 $122-138 · 中位 ~$133</td><td>100%</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.8;"><strong>与现价对照</strong>：当前 $129.83 vs 加权公允 $133 · <span class="nt">折价仅约 2.4%</span>——<strong>远不足价值投资 25% 安全边际的门槛</strong>。Gilead 是一台定价大致公允的稳健现金机器：既没有明显泡沫，也没有深度折价。反向 DCF 显示市场只定价了 ~4% 的长期 FCF 增长（与指引一致），<span class="hl-t">意味着 Yeztugo 放量与管线兑现的期权基本没被计入——这是上行的来源，也是不确定性所在</span>。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.2 P/E 多档透视表</h3>
+  <p style="margin-bottom:10px; font-size:13px; color:var(--text2);">Gilead 报告 EPS 因并购 IPR&D 转为亏损、GAAP vs Non-GAAP 差异巨大，且 Q3'25 含一次性——单一 P/E 会严重误导，必须多档透视并标注"最可信档"：</p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>口径</th><th>EPS / 倍数</th><th>P/E（基于 $129.83）</th><th>读数说明</th></tr>
+      <tr><td>FY2026 报告 GAAP EPS</td><td>-$3.05（中值）</td><td><span class="warn-t">不适用（亏损）</span></td><td>纯 IPR&D 会计假象 · 勿用</td></tr>
+      <tr><td>FY2026 报告 Non-GAAP EPS</td><td>-$0.85（中值）</td><td><span class="warn-t">不适用（亏损）</span></td><td>含约 -$9.50/股并购一次性</td></tr>
+      <tr class="hl"><td><strong>FY2026 底层 Non-GAAP EPS</strong></td><td><strong>$8.65</strong></td><td><strong>~15.0x</strong></td><td><strong>★ 最可信档 · 剔并购</strong></td></tr>
+      <tr><td>TTM Non-GAAP P/E</td><td>$8.37</td><td>~15.5x</td><td>含 Q3'25 一次性偏高</td></tr>
+      <tr><td>TTM GAAP P/E</td><td>$7.34</td><td>~17.7x</td><td>含各季 IPR&D 波动</td></tr>
+      <tr><td>FY2027 共识 EPS</td><td>$9.66</td><td>~13.4x</td><td>单一分析师（Erste）· 仅参考</td></tr>
+      <tr><td>P/S (TTM)</td><td>营收 $29.7B</td><td>~5.4x</td><td>专利药溢价</td></tr>
+      <tr><td>FCF Yield</td><td>FCF $9.46B</td><td>~5.9%</td><td>稳健质量 + 合理估值</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3);"><strong>最可信档</strong>：底层 Forward P/E ~15.0x（FY2026）/ ~13.4x（FY2027）。同业对比：Vertex(VRTX) ~22.6x（更快增速溢价）、AbbVie(ABBV) ~15-16x（免疫双子星接棒 Humira）、Bristol-Myers(BMY) ~9-10x（传统组合衰退）。<span class="hl-t">Gilead 便宜于 VRTX、与 ABBV 相当、贵于处于专利悬崖的 BMY</span>——反映其"稳健但增速温和"的定位，估值合理、无泡沫、亦无深度折价。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.3 12 个月目标价（概率加权）</h3>
+  <div class="pgrid">
+    <div class="pbox"><div class="pl">悲观情景 · 30%</div><div class="pv pc">$110</div><div class="pn">Yeztugo 放量不及 + PDUFA 生变 + 估值压缩至 12.7x<br>距现价 -15%</div></div>
+    <div class="pbox"><div class="pl">基准情景 · 45%</div><div class="pv pf">$145</div><div class="pn">底层 EPS $8.65 兑现 + Yeztugo 约 $10 亿 + 两次 PDUFA 通过 + 16.5x<br>距现价 +12%</div></div>
+    <div class="pbox"><div class="pl">乐观情景 · 25%</div><div class="pv ps">$172</div><div class="pn">Yeztugo 放量超预期 + 管线重估至 18x（2027 EPS $9.66）<br>距现价 +32%</div></div>
+  </div>
+  <p style="font-size:13px; color:var(--text2);"><strong>概率加权公允价</strong>：30%×$110 + 45%×$145 + 25%×$172 = <strong>$141</strong>。<strong>叠加 2.5% 股息 = 总回报约 11%</strong>——稳健，上行温和。<span class="hl-t">当前 $129.83 已接近独立公允 $133，只宜以观察仓起步；真正的加仓窗口在回调至机械首仓 $106（≈52 周低）附近</span>。</p>
+</div>
+
+<!-- ═══ 模块 8 ═══ -->
+<div class="section">
+  <div class="stitle">模块 8 · 竞争与行业分析</div>
+  <div class="cmt">
+    <p><strong>格局定位</strong>：Gilead 在 <strong>HIV 领域是全球龙头</strong>（治疗市场份额 50%+，与 GSK/ViiV 构成双寡头），在丙肝领域曾是绝对王者（现自然衰减），在肿瘤（ADC + 细胞疗法）是追赶者。真正的同业比较应放在"大盘制药股的资本回报与增长质量"维度。</p>
+
+    <p><strong>大盘制药同业对比（截至 2026-07，估值为二手来源 · medium 置信度）</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>公司</th><th>Forward P/E</th><th>2026 营收增速</th><th>核心评价</th></tr>
+        <tr class="hl"><td><strong>Gilead GILD</strong></td><td><strong>~15x（底层）</strong></td><td>产品销售 ~+4%</td><td>HIV 现金牛 + Yeztugo 期权 · 增速温和</td></tr>
+        <tr><td>Vertex VRTX</td><td>~22.6x</td><td>+8~9%</td><td>囊性纤维化垄断 · 增速溢价</td></tr>
+        <tr><td>AbbVie ABBV</td><td>~15-16x</td><td>~+8.5%（运营）</td><td>免疫双子星接棒 Humira · 重债</td></tr>
+        <tr><td>Bristol-Myers BMY</td><td>~9-10x</td><td>下滑（-12~-16% 传统组合）</td><td>专利悬崖 · 深度折让</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:10px; font-size:12px; color:var(--text3);">GILD 的相对定位：<strong>估值居中（15x），介于成长溢价的 VRTX/ABBV 与专利悬崖折让的 BMY 之间</strong>。它不像 VRTX 有高确定性高增长，也不像 BMY 面临即期悬崖——是一个"确定性中上、增速中下、估值公允"的稳健标的。ABBV 是最接近的镜像（同样重净负债、GAAP 被 IPR&D/摊销压低、靠免疫组合接棒），但 ABBV 增速更快。</p>
+
+    <p style="margin-top:14px;"><strong>波特五力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>新进入者：</strong>低（HIV 研发 + 临床 + 准入壁垒高）——但仿制药在专利到期后是确定性威胁</li>
+      <li><strong>替代品：</strong>中（HIV 领域 GSK/ViiV 的长效注射剂 cabotegravir 是直接竞品，Yeztugo 需正面竞争）</li>
+      <li><strong>供应商议价：</strong>低（原料药供应商议价力弱）</li>
+      <li><strong>买家议价：</strong>中高（美国 PBM/医保 + IRA 药价谈判 + Medicaid/ACA 政策持续压制定价）</li>
+      <li><strong>同业竞争：</strong>中（HIV 双寡头理性，但肿瘤/细胞疗法竞争激烈，Yescarta 已 -14%）</li>
+    </ul>
+
+    <p><strong>颠覆风险</strong>：短期是 GSK/ViiV 长效注射剂在 HIV 预防/治疗端的正面竞争；长期是 2036 年 Biktarvy 专利悬崖 + 管线接棒的兑现率。行业顺风是全球 HIV 患者基数稳定增长 + 预防（PrEP）品类扩容（Yeztugo 的 TAM）。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 9 ═══ -->
+<div class="section">
+  <div class="stitle">模块 9 · 技术面与 K 线分析（次要参考）</div>
+  <div class="cmt">
+    <p><strong>趋势</strong>：GILD 过去一年在 $107.75-$157.29 的宽幅区间运行，当前 $129.83 <span class="hl-t">处于区间中部偏下</span>，距 52 周高点 $157.29 约 -17%、距低点 $107.75 约 +19%。2026-07-10 当日 -3.72%，显示近期有回调压力（部分或与生物科技板块情绪、药价政策担忧有关）。</p>
+
+    <p><strong>关键价位</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>支撑</strong>：$120（心理关口）/ $110-108（52 周低区，较硬估值底）</li>
+      <li><strong>阻力</strong>：$140（公允价上沿）/ $157（52 周高）/ $172（乐观情景）</li>
+    </ul>
+
+    <p><strong>指标信号</strong>：处于区间中部、当日下挫，短期动能偏弱。$107-110（52 周低 + 底层 P/E ~12.5x）是价值投资者眼中较硬的下方支撑区。</p>
+
+    <p><strong>注意</strong>：Gilead 的核心驱动是底层 Non-GAAP EPS + Yeztugo 放量 + 两次 PDUFA（8/27、12/23）+ 药价政策，技术面是次要参考。<span class="warn-t">两次 PDUFA 结果会造成事件性波动</span>——耐心者可等回调至 $106-115 区间建仓，而非在事件前追高。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 10 ═══ -->
+<div class="section">
+  <div class="stitle">模块 10 · 增长催化剂与前景展望</div>
+  <div class="cmt">
+    <p><strong>短期催化剂（未来 6 个月）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>2026-08-06 Q2 2026 财报</strong>——Yeztugo 放量进度 + 底层指引兑现度（据历年节奏推断，未正式公告）</li>
+      <li><strong>2026-08-27 BIC/LEN PDUFA</strong>——比克替拉韦+来那卡帕韦口服单片方案，若获批延长 HIV 治疗护城河</li>
+      <li><strong>2026-12-23 anito-cel PDUFA</strong>——BCMA CAR-T（4L+ 复发难治多发性骨髓瘤），有望成骨髓瘤基石疗法</li>
+      <li><strong>Trodelvy 1L 转移性三阴乳腺癌监管决定（预计 2H26）</strong>——打开肿瘤放量空间</li>
+    </ul>
+
+    <p><strong>长期展望（3-5 年）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>HIV 双轮驱动</strong>——治疗（Biktarvy 至 2036 无重大到期）+ 预防（Yeztugo/lenacapavir 的重磅平台潜力）</li>
+      <li><strong>史上最强管线兑现</strong>——2026 年至多 4 项上市、5 项 3 期数据，至 2033 年约 10 项潜在上市</li>
+      <li><strong>肿瘤第二曲线</strong>——Trodelvy 扩适应症 + anito-cel/细胞疗法企稳（当前 -12% 需扭转）</li>
+      <li><strong>风险情景</strong>：Yeztugo 竞争不及 GSK 长效剂 / 管线兑现率低 / 2036 专利悬崖临近 / 美国药价持续压制</li>
+    </ul>
+
+    <p><strong>TAM 展望</strong>：全球 HIV 治疗与预防、丙肝/乙肝、肿瘤 ADC 与细胞疗法的可寻址市场广阔，其中 HIV 预防（PrEP）随 Yeztugo 的长效便利性有显著扩容潜力。核心问题不是市场空间，而是管线能否持续接棒专利到期、把"当下宽护城河"延续到 2036 年之后。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 11 ═══ -->
+<div class="section">
+  <div class="stitle">模块 11 · 风险矩阵</div>
+  <div class="risk-grid">
+    <div class="risk-card r4"><h5>1. 管线兑现风险</h5><span class="risk-score">4 / 5 高</span><p>估值上行依赖 Yeztugo 放量 + BIC/LEN（8/27）+ anito-cel（12/23）两次 PDUFA + Trodelvy 扩适应症。任一受挫会压制重估 · 制药管线本质不确定</p></div>
+    <div class="risk-card r4"><h5>2. 美国药价政策</h5><span class="risk-score">4 / 5 高</span><p>IRA 谈判 + Medicaid 降价协议 + ACA 变化 + 340B · 本季已拖累约 2% 增长 · 美国占产品销售 71%，政策敞口大</p></div>
+    <div class="risk-card r3"><h5>3. 并购定价 / IPR&D</h5><span class="risk-score">3 / 5 中</span><p>Kite($119 亿)细胞疗法 -12% 是教训 · 连年巨额 IPR&D 冲销($115 亿)扭曲 GAAP · 资本配置纪律待证明</p></div>
+    <div class="risk-card r3"><h5>4. 2036 专利悬崖</h5><span class="risk-score">3 / 5 中</span><p>Biktarvy 至 2036 无重大到期是近期利好,但制药护城河终有到期时钟 · 长期须靠新药接棒,否则仿制药侵蚀</p></div>
+    <div class="risk-card r3"><h5>5. 竞争 / 细胞疗法</h5><span class="risk-score">3 / 5 中</span><p>GSK/ViiV 长效注射剂正面竞争 HIV · 细胞疗法(Yescarta -14%)竞争逆风结构性 · Veklury -52% 衰减</p></div>
+    <div class="risk-card r2"><h5>6. 估值（近中性）</h5><span class="risk-score">2 / 5 中低</span><p>底层 15x / FCF Yield 5.9% / 折价仅 2% · 无泡沫亦无深度折价 · 主要风险是"没有安全边际缓冲"而非高估</p></div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>3 个黑天鹅情景</strong>：</p>
+    <ol style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>Yeztugo 被 GSK 长效剂压制 + BIC/LEN 或 anito-cel 被拒</strong>——概率 12% · 股价跌至 $95-105 · 增长叙事受损</li>
+      <li><strong>美国药价政策大幅收紧（IRA 扩围 + HIV 类被纳入谈判）</strong>——概率 10% · HIV 高毛利被侵蚀 · 长期估值下移</li>
+      <li><strong>再现大额并购减值（Arcellx 类资产失败）</strong>——概率 8% · GAAP 再度大额亏损 · 资本配置信任受损</li>
+    </ol>
+
+    <p style="margin-top:10px;"><strong>下行支撑</strong>：HIV 护城河 + 87.5% 毛利 + FCF $95 亿 + 连年增息构成质量底。<span class="hl-t">$107-110（52 周低 + 底层 P/E ~12.5x + FCF Yield ~7%）是较硬的估值底</span>。相比高估值成长股，Gilead 的下行空间相对有限——但也正因估值不贵，向上弹性同样温和。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 12 ═══ -->
+<div class="section">
+  <div class="stitle">模块 12 · 股东回报分析</div>
+  <div class="cmt">
+    <p><strong>Gilead 是"高股息为核心 + 温和回购"的资本返还结构——与 Visa 那种"回购主菜"式美股不同,它的主菜是连年增长、覆盖充分的现金股息。</strong>要点在于分清:股息是稳健可持续的,回购是温和且基本只抵消 SBC 稀释的。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 18px 0 10px; font-family: 'Segoe UI',sans-serif;">12.1 公司给了股东多少？</h3>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>年度</th><th>现金股息</th><th>股份回购</th><th>股东总回报</th><th>回报 / FCF</th></tr>
+        <tr><td>FY2023</td><td>$3,809M</td><td>$1,000M</td><td>$4,809M</td><td>—</td></tr>
+        <tr><td>FY2024</td><td>$3,918M</td><td>$1,150M</td><td>$5,068M</td><td>~49%</td></tr>
+        <tr><td>FY2025</td><td>$4,003M</td><td>$1,922M</td><td>$5,925M</td><td>~63%</td></tr>
+        <tr class="hl"><td><strong>三年合计</strong></td><td><strong>$11,730M</strong></td><td><strong>$4,072M</strong></td><td><strong>$15,802M</strong></td><td>—</td></tr>
+      </table>
+    </div>
+    <p style="font-size:13px; color: var(--text2); margin-top:8px"><strong>Trailing Shareholder Yield</strong> ≈ FY2025 返还 $5,925M / 市值 $161B ≈ <strong>3.7%</strong>（其中股息 ~2.5% + 回购 ~1.2%）。<span class="hl-t">Gilead 是"高股息 + 温和回购"的典型——股息是主菜（三年 $117 亿，是回购 $41 亿的近 3 倍）</span>。派息率：FY2025 股息 / GAAP 净利约 47%、股息 / FCF 约 42%——覆盖充分、可持续。2026 Q2 季度股息升至 $0.82/股（年化约 $3.28，+3.8%），自 2015 年起连年增息。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.2 给的方式好不好？</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>股息含金量高</strong>：连年增息 + 派息率仅约底层净利四成 + FCF 充分覆盖 = 稳健可持续,是这台现金牛最可信的股东回报</li>
+      <li><span class="warn-t">回购含金量中等</span>：<strong>摊薄股数三年几乎不动</strong>（FY2023 12.58 亿 → FY2024/25 12.55 亿 → Q1'26 12.54 亿）——回购基本只抵消 SBC 稀释（FY2025 回购 $19.2 亿 vs SBC 约 $8.7 亿,净缩股有限）,而非大幅增厚每股内在价值。这是"用现金对冲股权激励"的美股常见模式,含金量打折</li>
+      <li><strong>回购节奏温和</strong>：$60 亿授权下执行克制（Q3'25 $4.35 亿、Q4'25 $2.30 亿、Q1'26 $4.19 亿）——不激进、择时中性,资金优先用于股息 + 并购 + 偿债</li>
+    </ul>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.3 能不能继续给、给多少？</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>股息可持续性强</strong>：派息率约四成 + FCF $95 亿稳定 + 连年增息记录 = 股息增长空间充足,是最硬的承诺</li>
+      <li><strong>回购授权充裕但执行温和</strong>：2025 年 9 月授权 $60 亿（Q1'26 10-Q 未单列剩余精确额度）· 历史执行节奏温和,授权更像"上限"而非"必然足额执行"——不宜高估回购支撑力度</li>
+      <li><strong>(股息 + 回购) / FCF 覆盖度</strong>：FY2025 约 <strong>63%</strong>——<span class="hl-t">远低于 100%,留有充裕余地</span>,不靠借债回购。资本返还的约束不是 FCF,而是管理层把余钱优先投向并购</li>
+      <li><strong>资金优先级</strong>：研发（R&D 约占营收 20%）+ 并购补管线 + 股息 > 回购。并购是最大的现金去向,也是最大的不确定性（见模块 2/11）</li>
+    </ul>
+    <p><strong>模块小结</strong>：<span class="hl-t">积极且可持续,但以股息为主、回购力度温和含金量中等</span>——连年增息 + 派息率四成 + FCF 覆盖仅 63% 使股息高度可信;但回购基本只抵消 SBC、摊薄股数三年几乎不降,回购的每股增厚作用有限。总体是一台"高股息稳健返还"的现金牛,资本配置的真正变量不在返还端,而在并购定价纪律。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 13 ═══ -->
+<div class="section">
+  <div class="stitle">模块 13 · 海图评分卡 + 投资决策</div>
+
+  <div class="scorecard">
+    <h3 style="font-size:15px; color:var(--text); margin-bottom: 16px; font-family: 'Segoe UI',sans-serif;">海图评分卡（6 维 A-D）</h3>
+    <div class="score-grid">
+      <div class="score-card"><div class="score-letter s-bp">A-</div><div class="score-body"><h4>1. 生意可预测性</h4><p>HIV 收费桥清晰、Biktarvy 至 2036 无重大到期、能见度高。但 Veklury/细胞疗法波动 + IPR&D 制造 GAAP 噪音,略打折。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">A-</div><div class="score-body"><h4>2. 经济护城河</h4><p>HIV 无形资产 + 转换成本 + 有效规模(份额 50%+)宽。但制药护城河有专利到期时钟,网络效应弱。</p></div></div>
+      <div class="score-card"><div class="score-letter s-b">B+</div><div class="score-body"><h4>3. 管理层质量</h4><p>O'Day 守住 HIV + Yeztugo 开新曲线 + 史上最强管线,执行力强。但并购定价喜忧参半(Kite 教训)是争议点。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">A-</div><div class="score-body"><h4>4. 财务质量</h4><p>87.5% 毛利 + FCF $95 亿 + ROE ~36% + 利息覆盖 10.8x。但净负债 -$135 亿 + 大额收购无形资产/商誉。</p></div></div>
+      <div class="score-card"><div class="score-letter s-b">B</div><div class="score-body"><h4>5. 资本配置纪律</h4><p>股息高含金量(连年增息 + 覆盖充分),但回购仅抵消 SBC + 并购定价纪律未证明稳定。</p></div></div>
+      <div class="score-card"><div class="score-letter s-b">B-</div><div class="score-body"><h4>6. 估值与安全边际</h4><p>底层 15x / FCF Yield 5.9% / 折价仅 2% vs 公允 · <strong>估值合理但无 25% 安全边际缓冲</strong>。</p></div></div>
+    </div>
+
+    <div class="flag-row">
+      <strong>红旗排查</strong>：会计层面——报告 EPS 转亏为并购 IPR&D 一次性,<strong>披露透明、核心数字双重核验一致,非会计疑点</strong>。需长期监控的<strong>黄旗</strong>：① 并购定价纪律（Kite 细胞疗法 -12% + 连年 $100 亿级 IPR&D 冲销）；② 估值仅约 2% 折价、无安全边际。综合判断：基础质量稳健（4 个 A-/B+），但估值维度 B-（无安全边际）+ 并购黄旗 → 评级封顶于<strong>「有条件买入」</strong>，不给出无条件「买入」。
+    </div>
+
+    <p style="margin-top:18px; font-size:14px; color:var(--text); line-height:1.85;"><strong>综合评级</strong>：<span class="rating-badge rating-condbuy" style="font-size:14px;">有条件买入</span>。生意质量稳健（HIV 现金牛 + Yeztugo/管线期权 + 连年增息），估值合理无泡沫，但仅约 2% 折价不足安全边际 + 并购纪律待证明 → 定为有条件买入。核心判断：<strong>Gilead 是一台定价公允的稳健现金机器,值得以观察仓起步、在回调至 $106-115 时分批加仓；它需要你先看穿会计浮尘、认领它的确定性,再等市场先生递出折价时才真正下手。</strong></p>
+  </div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">投资决策（精确价格 · USD）</h3>
+
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>项目</th><th>价格</th><th>说明</th></tr>
+      <tr><td>12 个月目标价（概率加权）</td><td><strong>$141</strong> (+9%)</td><td>底层 EPS $8.65 + Yeztugo 放量 + 两次 PDUFA</td></tr>
+      <tr><td>悲观目标（30% 概率）</td><td>$110 (-15%)</td><td>Yeztugo 不及 + PDUFA 生变 + 估值压缩</td></tr>
+      <tr><td>乐观目标（25% 概率）</td><td>$172 (+32%)</td><td>放量超预期 + 管线重估至 18x</td></tr>
+      <tr class="hl"><td>首仓建仓（估值中位数 $133 × 80%）</td><td><strong>$106</strong></td><td>距现价 -18% · ≈52 周低区 · 耐心等回调</td></tr>
+      <tr><td>二仓建仓（× 70%）</td><td>$93</td><td>-28% · 大幅回调机会</td></tr>
+      <tr><td>三仓建仓（× 60%）</td><td>$80</td><td>-38% · 黑天鹅级机会</td></tr>
+      <tr><td>止盈一档</td><td>$165</td><td>+27% · 减仓 25%</td></tr>
+      <tr><td>止盈二档</td><td>$185</td><td>+42% · 再减 25%</td></tr>
+      <tr><td>止盈三档</td><td>$205</td><td>+58% · 再减 25% · 最后 25% 长期持有</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.85;"><strong>建议总仓位</strong>：<strong>3-4%</strong>（中等仓位 · 稳健现金牛 + 股息底 · 当前接近公允,先以观察仓/半仓起步,回调再补）。<strong>持有周期</strong>：3-5 年（穿越两次 PDUFA + Yeztugo 放量周期,收股息等管线兑现）。<strong>关键监控指标</strong>：① Yeztugo 季度放量趋势（能否兑现 $10 亿 → 长期重磅）；② BIC/LEN（8/27）、anito-cel（12/23）两次 PDUFA 结果；③ HIV 增速与 Medicaid/ACA 政策定价拖累；④ 并购与 IPR&D 冲销节奏（资本配置纪律）；⑤ 底层 Non-GAAP EPS 是否守住 $8.45-8.85。<strong>下次催化剂/财报</strong>：2026-08-06 Q2 2026 财报（据历年节奏推断）。</p>
+</div>
+
+<!-- ═══ 海图页末长评 ═══ -->
+<div class="section">
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记 · 1080 字</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p class="lead">一家公司报出"亏损"指引,股价却值得冷静看一眼——这是 2026 年吉利德最耐人寻味的地方。FY2026 的报告每股收益是负数,但那不是生意塌了,而是 Arcellx、Ouro、Tubulis 三笔并购一次性烧掉约 $115 亿"已收购在研（IPR&D）"费用。把这层会计浮尘擦掉,底层 Non-GAAP EPS $8.45-8.85 分文未改。市场先生被"亏损"二字吓退,反倒给冷静的人留了一个观察窗口。</p>
+
+      <p>吉利德是全球 HIV 治疗的"收费桥"——一张 Biktarvy 撑起 $143 亿年销售、占美国治疗市场半壁江山,靠 87.5% 的毛利率、每年约 $95 亿自由现金流、至 2036 年无重大专利到期,把确定性变成一台稳定的现金机器,再把其中约四成连年加派给股东。</p>
+
+      <h4>几个研判要点</h4>
+
+      <p><strong>一、两个"看穿"决定你是否读懂这份财报。</strong> 看穿一：报告 EPS 亏损是并购 IPR&D 的会计假象,<span class="hl-t">估值必须锚定底层 $8.45-8.85,而非负数</span>——这是全季最大的认知陷阱。看穿二：总营收 +4% 平淡,但那是被衰减的 Veklury（-52%）拖累;<span class="hl-t">剔除后底层产品销售 +8%、HIV +10%</span>,真实经营动能远好于表面。看穿这两层,吉利德就从"亏损 + 停滞"还原成"稳健现金牛 + 若干高增新星"。</p>
+
+      <p><strong>二、Yeztugo 正在开出第二条增长曲线。</strong> 这款全球首个每年两次的 HIV 预防针 2025 年 6 月上市,Q1 就录得 $166M,管理层把全年指引上调到约 $10 亿——<span class="hl-t">首个完整年度即冲击重磅炸弹级别</span>。叠加 BIC/LEN 口服单片（PDUFA 8/27）、anito-cel 骨髓瘤 CAR-T（PDUFA 12/23）,管理层称这是公司史上最强管线,至 2033 年约 10 项潜在上市。这些期权,当前估值几乎没有计入。</p>
+
+      <p><strong>三、HIV 现金牛的确定性,是这家公司的底色。</strong> Biktarvy +7%、Descovy +38%、Livdelzi 同比逾三倍、Trodelvy +37%——多个引擎同时点火;而细胞疗法 -12%、Veklury -52% 是拖累项。整体是"稳健基本盘 + 若干高增新星 + 两三个衰减老将"的组合。管理层据此上调了全年产品销售与 HIV 指引,基本盘无虞。</p>
+
+      <p><strong>四、两处必须清醒：净负债与并购记录。</strong> 吉利德是净负债公司——现金+可售债券 $86 亿,有息负债 $222 亿,<span class="warn-t">真实净负债约 -$135 亿</span>;所幸相对每年 $95 亿自由现金流仅 1.4 倍,杠杆安全。更需留意的是它的并购手笔喜忧参半：Kite 细胞疗法（$119 亿）如今节节败退,而 Trodelvy、Livdelzi 则在兑现——<span class="warn-t">连年巨额 IPR&D 冲销,是资本配置纪律上的一枚黄旗</span>。</p>
+
+      <p><strong>五、估值合理,但不够便宜。</strong> 底层 Forward P/E 约 15 倍,比 VRTX（22.6x）便宜、与 ABBV（15-16x）相当、贵于 BMY（9-10x）;独立估值中位数约 $133,较现价 $129.83 仅约 2% 折价,<span class="warn-t">远不到 25% 安全边际</span>。12 个月概率加权目标价约 $141（+9%）,叠加 2.5% 股息,总回报约 11%——稳健,但上行温和。</p>
+
+      <h4>海图研判</h4>
+
+      <p><strong>评级：有条件买入</strong>（以股息为核心的 HIV 现金牛 + Yeztugo 与史上最强管线的期权,对垒净负债、喜忧参半的并购记录、以及尚不足安全边际的估值）。12 个月概率加权目标价 <strong>$141</strong>（+9%）,叠加 2.5% 股息 = 总回报约 11%。</p>
+
+      <p>操作建议：当前 $129.83 已接近独立公允 $133,<strong>只宜以观察仓/半仓起步</strong>;真正的加仓窗口在回调时——机械首仓 $106（≈52 周低）、二仓 $93、三仓 $80。止盈三档 $165 / $185 / $205,每档减 25%,最后 25% 长期持有。<strong>建议总仓位 3-4%</strong>（中等仓位）,持有周期 3-5 年,穿越两次 PDUFA 与 Yeztugo 放量。<span class="hl-t">关键纪律：这是一台好机器,但没有明显折价——先收着股息、看着管线,等市场先生递出安全边际时再加码。</span></p>
+
+      <h4>风险提示</h4>
+
+      <p>Yeztugo 放量不及预期 / 两次 PDUFA 生变 / 细胞疗法竞争加剧 / Medicaid 与 ACA 政策降价 / 并购再现大额减值 / 估值本就无安全边际——任一项都可能让股价回到 $110 附近。但 HIV 护城河 + 87.5% 毛利 + $95 亿自由现金流 + 连年增息构成质量底,<strong>$107-110（52 周低区 + 底层 P/E ~12.5x）是较硬的估值底</strong>。相比高估值成长股,吉利德下行空间有限——但向上弹性同样温和。</p>
+
+      <p>关键叙事：<strong>"全球 HIV 治疗收费桥 + 87.5% 毛利现金牛 + Yeztugo 新曲线 + 史上最强管线 + 连年增息"的确定性组合,对垒"净负债 + 喜忧参半的并购记录 + 报告亏损的会计噪音 + 仅约 2% 安全边际"的估值与配置风险</strong>。吉利德不是给追求便宜货的人——它需要你看穿会计浮尘、认领它的确定性,然后在市场先生递出折价时才真正下手。下次催化剂：2026-08-06 Q2 2026 财报。</p>
+
+      <p class="haitu-sign">—— 海图,灯下落笔,明日再观风浪。</p>
+
+      <p class="haitu-disc">⚠️ 免责声明：本文为《海图夜读》栏目基于公开信息的研究分享,所有观点为作者独立判断,不构成任何投资建议。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称,其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险,投资需谨慎。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div>《海图夜读》 · Gilead Sciences GILD Q1 2026 海图研判</div>
+  <div style="margin-top:6px;">发布日 2026-05-07 · 研判日 2026-07-11 · 数据来源 Gilead Q1 2026 官方财报新闻稿（SEC 8-K + IR PDF）+ SEC 10-Q + FY2025 10-K + 电话会 transcript</div>
+</footer>
+
+<script>
+let curTheme = 'light';
+function toggleTheme() {
+  curTheme = curTheme === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', curTheme);
+  renderCharts();
+}
+
+const palette = {
+  light: { accent: '#8a9a8e', accent2: '#7b8fa0', accent3: '#b08d7a', gold: '#b9a06a', red: '#b87070', green: '#7a9a7a', grid: '#e5ddd5', text: '#7a706a' },
+  dark:  { accent: '#8a9a8e', accent2: '#8fabbf', accent3: '#c9a48e', gold: '#c9b07a', red: '#c08080', green: '#8aaa8a', grid: '#3e3a35', text: '#a09890' }
+};
+
+let charts = {};
+function renderCharts() {
+  Object.values(charts).forEach(c => c && c.destroy && c.destroy());
+  charts = {};
+  const p = palette[curTheme];
+  Chart.defaults.color = p.text;
+  Chart.defaults.borderColor = p.grid;
+
+  const quarters = ['Q1 25','Q2 25','Q3 25','Q4 25','Q1 26'];
+  const rev = [6.667, 7.082, 7.769, 7.925, 6.960];
+  const ngEps = [1.81, 2.01, 2.47, 1.86, 2.03];
+  charts.rev = new Chart(document.getElementById('chartRev'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { type:'bar', label: '总营收 ($B)', data: rev, backgroundColor: p.accent + 'CC', yAxisID: 'y' },
+      { type: 'line', label: 'Non-GAAP EPS ($)', data: ngEps, borderColor: p.accent3, backgroundColor: p.accent3, tension: 0.3, yAxisID: 'y1' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false }, y1: { position: 'right', grid: { drawOnChartArea: false }, ticks: { callback: v => '$' + v } } } }
+  });
+
+  charts.margin = new Chart(document.getElementById('chartMargin'), {
+    type: 'line',
+    data: { labels: quarters, datasets: [
+      { label: 'GAAP 营业利润率 %', data: [33.6, null, 42.8, 25.0, 37.2], borderColor: p.accent2, backgroundColor: p.accent2 + '33', tension: 0.3, spanGaps: true },
+      { label: 'Non-GAAP 营业利润率 %', data: [43.4, null, 50.5, 39.0, 46.9], borderColor: p.green, backgroundColor: p.green + '33', tension: 0.3, spanGaps: true }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false, ticks: { callback: v => v + '%' } } } }
+  });
+
+  charts.segment = new Chart(document.getElementById('chartSegment'), {
+    type: 'doughnut',
+    data: {
+      labels: ['HIV', '肿瘤', '肝病', 'Veklury', '其他'],
+      datasets: [{ data: [5030, 810, 767, 144, 196], backgroundColor: [p.accent, p.accent3, p.accent2, p.gold, p.red] }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { font: { size: 11 } } } } }
+  });
+
+  charts.eps = new Chart(document.getElementById('chartEps'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { label: 'GAAP EPS ($)', data: [1.04, 1.56, 2.43, 1.74, 1.61], backgroundColor: p.accent2 + 'CC' },
+      { label: 'Non-GAAP EPS ($)', data: [1.81, 2.01, 2.47, 1.86, 2.03], backgroundColor: p.green + 'CC' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, ticks: { callback: v => '$' + v } } } }
+  });
+
+  buildSankey();
+}
+
+function buildSankey() {
+  const p = palette[curTheme];
+  const labels = ['总营收 $6.96','营业成本 $1.45','毛利 $5.52','研发+在研 $1.48','销售管理 $1.45','营业利润 $2.59','其他净收入 $0.24','利息支出 $0.24','所得税 $0.56','GAAP 净利 $2.02'];
+  const data = {
+    type: 'sankey',
+    orientation: 'h',
+    node: { pad: 15, thickness: 18, line: { color: p.grid, width: 0.5 }, label: labels, color: [p.accent, p.red, p.green, p.accent2, p.gold, p.green, p.accent, p.red, p.red, p.green] },
+    link: {
+      source: [0, 0, 2, 2, 2, 5, 5, 5, 6],
+      target: [1, 2, 3, 4, 5, 7, 8, 9, 9],
+      value:  [1.445, 5.515, 1.479, 1.451, 2.585, 0.240, 0.559, 1.786, 0.235],
+      color: [p.red+'55', p.green+'66', p.accent2+'55', p.gold+'55', p.green+'66', p.red+'55', p.red+'55', p.green+'66', p.accent+'66']
+    }
+  };
+  const layout = { font: { size: 12, color: p.text }, paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)', margin: { l: 10, r: 10, t: 10, b: 10 } };
+  Plotly.react('sankey', [data], layout, { displayModeBar: false, responsive: true });
+}
+
+renderCharts();
+</script>
+
+</body>
+</html>

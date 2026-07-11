@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-07-10 · American Express Q1 2026 财报已于 2026-04-23 发布 -->
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>American Express AXP Q1 2026 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+<meta name="description" content="美国运通是「自带封闭网络的高端发卡行」——既像 Visa 靠自有网络收刷卡过路费，又像 Capital One 自己放贷赚息、自担信用风险。Q1 2026 营收 +11%、billed business +10%（三年最快）、净卡费 +18%、ROE 35%、ROTCE 约 43%、净核销率仅 2.0%。但总费用 +11% 压利润率 + Forward P/E 19.8x 无安全边际——顶级发卡网络，价格不便宜。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="American Express AXP Q1 2026 海图研判 · 海图夜读">
+<meta property="og:description" content="美国运通是「自带封闭网络的高端发卡行」——既像 Visa 收刷卡过路费，又像 Capital One 自己放贷赚息、自担信用风险。Q1 2026 营收 +11%、billed business +10%（三年最快）、净卡费 +18%、ROE 35%、净核销率 2.0%。但费用 +11% 压利润率 + Forward P/E 19.8x 无安全边际——顶级发卡网络，价格不便宜。">
+<meta property="og:url" content="https://jacexie.github.io/haitu/reports/axp-q1-2026.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="American Express AXP Q1 2026 海图研判 · 海图夜读">
+<meta name="twitter:description" content="美国运通是「自带封闭网络的高端发卡行」——既收刷卡过路费又自己放贷。Q1 2026 营收 +11%、billed business +10%（三年最快）、净卡费 +18%、ROE 35%、净核销率 2.0%。但费用 +11% 压利润率 + Forward P/E 19.8x 无安全边际——顶级发卡网络，价格不便宜。">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root { --bg:#f5f0eb; --bg2:#ece6df; --card:#ffffff; --card2:#f8f5f1; --border:#d9d0c7; --text:#4a4340; --text2:#7a706a; --text3:#a89f98; --accent:#8a9a8e; --accent2:#7b8fa0; --accent3:#b08d7a; --rose:#c09090; --gold:#b9a06a; --red:#b87070; --green:#7a9a7a; --shadow:rgba(0,0,0,0.06); --chart-grid:#e5ddd5; }
+[data-theme="dark"] { --bg:#1e1c1a; --bg2:#28251f; --card:#2e2a25; --card2:#363230; --border:#4a4540; --text:#d4ccc4; --text2:#a09890; --text3:#706860; --accent:#8a9a8e; --accent2:#8fabbf; --accent3:#c9a48e; --rose:#c09090; --gold:#c9b07a; --red:#c08080; --green:#8aaa8a; --shadow:rgba(0,0,0,0.3); --chart-grid:#3e3a35; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', serif; line-height: 1.75; font-size: 14.5px; transition: background .35s, color .35s; }
+a { color: var(--accent2); text-decoration: none; }
+.theme-bar { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); }
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+.toggle-switch { position: relative; width: 44px; height: 22px; background: var(--border); border-radius: 11px; cursor: pointer; transition: background .3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: var(--card); border-radius: 50%; transition: transform .3s; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+
+.hero { padding: 48px 24px 36px; text-align: center; border-bottom: 1px solid var(--border); }
+.hero-tag { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 3px 14px; border-radius: 20px; margin-bottom: 18px; }
+.hero h1 { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.pill { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: 'Segoe UI', sans-serif; font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow); }
+.pill strong { color: var(--text); }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle { font-size: 18px; font-weight: 700; color: var(--accent3); margin-bottom: 20px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+.stitle::before { content: ''; display: block; width: 4px; height: 20px; background: var(--accent3); border-radius: 2px; }
+
+.haitu-quip { display: flex; align-items: center; gap: 18px; background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 18px 24px; margin: 24px 0; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-quote { flex: 1; }
+.haitu-portrait { font-size: 15px; line-height: 1.65; color: var(--text); margin-bottom: 6px; font-weight: 600; }
+.haitu-rating-line { font-size: 13px; color: var(--text2); font-family: 'Segoe UI', sans-serif; }
+.rating-badge { display: inline-block; padding: 2px 12px; border-radius: 12px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; margin-left: 4px; }
+.rating-hold { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+
+.haitu-essay { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 28px 32px; margin: 24px 0 20px; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-essay-header { display: flex; align-items: center; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.haitu-avatar-sm { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); background: var(--red); box-shadow: 0 2px 8px rgba(184,112,112,0.2); }
+.haitu-name-lg { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 28px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 4px; }
+.haitu-essay-tag { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; }
+.haitu-essay-body { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 15px; line-height: 2.0; color: var(--text); }
+.haitu-essay-body p { margin-bottom: 14px; }
+.haitu-essay-body p.lead { font-size: 16px; font-style: italic; color: var(--text2); margin-bottom: 18px; }
+.haitu-essay-body strong { color: var(--text); font-weight: 700; }
+.haitu-essay-body h4 { font-size: 14px; color: var(--accent3); margin: 18px 0 10px; font-family: 'Segoe UI', sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+.haitu-sign { text-align: right; margin-top: 18px; font-family: 'Georgia', serif; font-size: 14px; color: var(--text2); font-style: italic; }
+.haitu-disc { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); font-style: italic; line-height: 1.7; }
+
+.stock-snap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px; }
+.snap-item { text-align: center; }
+.snap-label { font-family: 'Segoe UI', sans-serif; font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.snap-val { font-family: 'Segoe UI', sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+.snap-val.up { color: var(--green); }
+.snap-val.dn { color: var(--red); }
+.snap-sub { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow); }
+.kpi-l { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.badge { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+.up { background: rgba(122,154,122,.15); color: var(--green); }
+.dn { background: rgba(184,112,112,.15); color: var(--red); }
+.nt { background: rgba(123,143,160,.15); color: var(--accent2); }
+
+.tbl-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow); }
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI', sans-serif; font-size: 13px; }
+.tbl th { background: var(--card2); color: var(--text3); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); background: var(--card2); }
+
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); }
+.ctitle { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 260px; }
+
+.cmt { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 26px; line-height: 1.95; font-size: 14px; box-shadow: 0 1px 4px var(--shadow); color: var(--text); }
+.cmt p { margin-bottom: 14px; }
+.cmt p:last-child { margin-bottom: 0; }
+.cmt strong { color: var(--text); }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+
+.bscore { display: flex; align-items: center; gap: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; margin-bottom: 12px; box-shadow: 0 1px 4px var(--shadow); }
+.circle { width: 62px; height: 62px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; flex-shrink: 0; border: 3px solid; font-family: 'Segoe UI', sans-serif; }
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 4px; color: var(--text); }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.moat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+.moat-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); border-left: 4px solid var(--accent); }
+.moat-card.wide { border-left-color: var(--green); }
+.moat-card.narrow { border-left-color: var(--gold); }
+.moat-card.none { border-left-color: var(--red); }
+.moat-card h5 { font-size: 13px; color: var(--text); margin-bottom: 6px; }
+.moat-card .moat-rate { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.moat-card.wide .moat-rate { background: rgba(122,154,122,.18); color: var(--green); }
+.moat-card.narrow .moat-rate { background: rgba(185,160,106,.18); color: var(--gold); }
+.moat-card.none .moat-rate { background: rgba(184,112,112,.18); color: var(--red); }
+.moat-card p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+
+.ec-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 14px; box-shadow: 0 1px 3px var(--shadow); }
+.ec-badge { flex-shrink: 0; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-top: 2px; font-family: 'Segoe UI', sans-serif; }
+.ec-bull { background: rgba(122,154,122,.18); color: var(--green); }
+.ec-bear { background: rgba(184,112,112,.18); color: var(--red); }
+.ec-neut { background: rgba(185,160,106,.18); color: var(--gold); }
+.ec-body { flex: 1; }
+.ec-title { font-weight: 600; color: var(--text); margin-bottom: 3px; font-size: 14px; }
+.ec-note { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.dcf-note { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.dcf-note strong { color: var(--text); }
+
+.scorecard { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow); }
+.score-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.score-card { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px; }
+.score-letter { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Segoe UI', sans-serif; font-weight: 800; font-size: 22px; flex-shrink: 0; border: 3px solid; }
+.s-a { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.12); }
+.s-bp { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.06); }
+.s-b { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.10); }
+.s-bm { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.06); }
+.s-c { color: var(--red); border-color: var(--red); background: rgba(184,112,112,.08); }
+.score-body h4 { font-size: 13px; color: var(--text); margin-bottom: 4px; }
+.score-body p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+.flag-row { margin-top: 16px; padding: 12px 16px; background: rgba(184,112,112,.08); border: 1px solid rgba(184,112,112,.3); border-radius: 8px; font-size: 13px; color: var(--text2); }
+.flag-row strong { color: var(--red); }
+
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center; box-shadow: 0 1px 4px var(--shadow); }
+.pbox .pl { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; }
+.pbox .pv { font-family: 'Segoe UI', sans-serif; font-size: 28px; font-weight: 800; margin-bottom: 5px; }
+.pbox .pn { font-size: 12px; color: var(--text3); line-height: 1.5; }
+.pc { color: var(--red); } .pf { color: var(--gold); } .ps { color: var(--green); }
+
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.risk-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); position: relative; overflow: hidden; }
+.risk-card::before { content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent); }
+.risk-card.r1::before { background: var(--green); }
+.risk-card.r2::before { background: rgba(122,154,122,.6); }
+.risk-card.r3::before { background: var(--gold); }
+.risk-card.r4::before { background: var(--rose); }
+.risk-card.r5::before { background: var(--red); }
+.risk-card h5 { font-size: 14px; margin-bottom: 6px; color: var(--text); }
+.risk-score { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.r1 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r2 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r3 .risk-score { background: rgba(185,160,106,.18); color: var(--gold); }
+.r4 .risk-score { background: rgba(192,144,144,.18); color: var(--rose); }
+.r5 .risk-score { background: rgba(184,112,112,.18); color: var(--red); }
+.risk-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+footer { background: var(--card2); border-top: 1px solid var(--border); padding: 24px; text-align: center; color: var(--text3); font-size: 12px; margin-top: 40px; line-height: 1.8; }
+@media (max-width: 768px) { .cgrid,.pgrid { grid-template-columns: 1fr; } .hero h1 { font-size: 22px; } .kpi-grid { grid-template-columns: 1fr 1fr; } .stock-snap { grid-template-columns: 1fr 1fr; } .haitu-essay-header { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/AXP" target="_blank" rel="noopener" title="在雪球查看 AXP 实时行情">雪球 AXP</a>
+  </div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">Q1 2026 财报发布 · 2026-04-23 &nbsp;|&nbsp; 海图研判 · 2026-07-11</div>
+  <h1>American Express AXP · 2026 Q1 财报深度分析</h1>
+  <div class="hero-sub">NYSE: AXP &nbsp;|&nbsp; 财季截至 2026-03-31 &nbsp;|&nbsp; 价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill">股价 <strong>$348.45</strong> <span style="color:var(--red)">距高点 -10%</span></div>
+    <div class="pill">市值 <strong>$239B</strong></div>
+    <div class="pill">Q1 总营收 <strong>$18.91B</strong> <span style="color:var(--green)">+11%</span></div>
+    <div class="pill">GAAP EPS <strong>$4.28</strong> <span style="color:var(--green)">+18%</span></div>
+    <div class="pill">ROE <strong>35.2%</strong></div>
+    <div class="pill">Forward P/E <strong>~19.8x</strong> <span style="color:var(--gold)">无安全边际</span></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 海图页首短评 ═══ -->
+<div class="haitu-quip">
+  <div class="haitu-quote">
+    <div class="haitu-portrait">美国运通是「自带封闭网络的高端发卡行」——既像 Visa 靠自有网络（GMNS）收刷卡过路费（折扣收入 $95 亿），又像 Capital One 自己发卡放贷、赚利息、自担信用风险（净利息收入 $46.9 亿）。靠高端会员年费（净卡费 +18%）+ 高客单价消费 + 优质信贷（净核销率仅 2.0%）构筑一体化闭环。Q1 billed business +10% 是三年最快增速，可总费用同比 +11%（Card Member services +49%）主动压住了短期利润率。</div>
+    <div class="haitu-rating-line">评级：<span class="rating-badge rating-hold">持有观望</span> · 12 个月目标价 $350（+0.4%）· 一体化闭环 + 高端会员 + 顶级信贷 + 35% ROE 的组合，对垒 Forward P/E 19.8x 无安全边际 + 费用扩张压利润率 + 信贷周期终将正常化</div>
+  </div>
+</div>
+
+<!-- ═══ 市场数据快照 ═══ -->
+<div class="section">
+  <div class="stitle">市场数据快照（2026-07-10 收盘）</div>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">股价（美元）</div><div class="snap-val">$348.45</div><div class="snap-sub">2026-07-10 · 距 52 周高 -10%</div></div>
+    <div class="snap-item"><div class="snap-label">市值</div><div class="snap-val">$239B</div><div class="snap-sub">全球高端发卡龙头</div></div>
+    <div class="snap-item"><div class="snap-label">TTM P/E</div><div class="snap-val">21.7x</div><div class="snap-sub">TTM EPS $16.03</div></div>
+    <div class="snap-item"><div class="snap-label">Forward P/E</div><div class="snap-val nt">~19.8x</div><div class="snap-sub">FY2026 指引中点 $17.60</div></div>
+    <div class="snap-item"><div class="snap-label">P/B 市净率</div><div class="snap-val">7.3x</div><div class="snap-sub">BVPS $47.5</div></div>
+    <div class="snap-item"><div class="snap-label">P/TBV 市有形净值</div><div class="snap-val nt">~8.6x</div><div class="snap-sub">TBVPS 估算 $40.4</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间</div><div class="snap-val">$288 - $387</div><div class="snap-sub">处区间中下部</div></div>
+    <div class="snap-item"><div class="snap-label">股息率</div><div class="snap-val">1.09%</div><div class="snap-sub">$3.80/年 · 低息高回购</div></div>
+    <div class="snap-item"><div class="snap-label">ROE</div><div class="snap-val up">35.2%</div><div class="snap-sub">ROTCE ~43%</div></div>
+    <div class="snap-item"><div class="snap-label">CET1 一级普通股本</div><div class="snap-val up">10.5%</div><div class="snap-sub">目标区间 10-11%</div></div>
+    <div class="snap-item"><div class="snap-label">净核销率（本金）</div><div class="snap-val up">2.0%</div><div class="snap-sub">30天+逾期 1.3% · 优异</div></div>
+    <div class="snap-item"><div class="snap-label">净现金</div><div class="snap-val nt">不适用</div><div class="snap-sub">⚠️ 存款+发债融资型银行</div></div>
+  </div>
+  <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">数据时点：股价 2026-07-10 收盘 $348.45 · 财务数据来源 American Express Q1 2026 官方财报（SEC 8-K Exhibit 99.1/99.2 + 10-Q，2026-04-23 发布，财季截至 2026-03-31）· 货币 USD 单口径。⚠️ <strong>美国运通是银行控股公司（BHC），既有网络刷卡收入、又自己发卡放贷</strong>——因此本报告全程采用金融业口径（NII / NIM / 拨备 / CET1 / ROE-ROTCE / P-B），<strong>FCF、净现金、毛利率等工业口径指标标注为「不适用」或仅供参考</strong>。偿付能力应看资本充足率（CET1 10.5%），而非工业口径的「净现金」。</p>
+</div>
+
+<!-- ═══ Q1 2026 KPI ═══ -->
+<div class="section">
+  <div class="stitle">Q1 2026 核心业绩（USD · 财季截至 2026-03-31）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">总营收（净利息后）</div><div class="kpi-v">$18.91B</div><span class="badge up">+11% YoY</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">FX 调整后 +10%</div></div>
+    <div class="kpi"><div class="kpi-l">折扣收入 Discount</div><div class="kpi-v">$9.51B</div><span class="badge up">+9%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">网络刷卡抽成 · 第一大项</div></div>
+    <div class="kpi"><div class="kpi-l">净卡费 Net card fees</div><div class="kpi-v">$2.75B</div><span class="badge up">+18%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">高端年费引擎</div></div>
+    <div class="kpi"><div class="kpi-l">服务及其他</div><div class="kpi-v">$1.95B</div><span class="badge up">+13%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">—</div></div>
+    <div class="kpi"><div class="kpi-l">净利息收入 NII</div><div class="kpi-v">$4.69B</div><span class="badge up">+13%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">放贷规模 + 利差双升</div></div>
+    <div class="kpi"><div class="kpi-l">信贷拨备 Provision</div><div class="kpi-v">$1.25B</div><span class="badge dn">+9%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">卡余额 1,187 + 其他 64</div></div>
+    <div class="kpi"><div class="kpi-l">总费用</div><div class="kpi-v">$13.88B</div><span class="badge dn">+11%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">Card Member services +49%</div></div>
+    <div class="kpi"><div class="kpi-l">税前利润</div><div class="kpi-v">$3.78B</div><span class="badge up">+13%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">税前利润率 20.0%</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 净利</div><div class="kpi-v">$2.97B</div><span class="badge up">+15%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">净利率 15.7%</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 摊薄 EPS</div><div class="kpi-v">$4.28</div><span class="badge up">+18%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">去年 $3.64 · 缩股加成</div></div>
+    <div class="kpi"><div class="kpi-l">有效税率</div><div class="kpi-v">21.4%</div><span class="badge up">-1.0pp</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">含一次性税收优惠</div></div>
+    <div class="kpi"><div class="kpi-l">billed business</div><div class="kpi-v">$428B</div><span class="badge up">+10%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">三年来最快季度增速</div></div>
+  </div>
+</div>
+
+<!-- ═══ 看穿桥接 高亮框 ═══ -->
+<div class="section">
+  <div class="stitle">本季必看 · 两个"看穿"：混合银行的读法、增长背后的"用利润换会员"</div>
+  <div class="cmt">
+    <p><strong>美国运通的财报有两处必须"看穿"，看不穿就会误判它的生意本质与增长质量。</strong></p>
+    <p><strong>看穿一：它不是纯网络股，是"网络 + 发卡 + 放贷"三合一的银行。</strong> 很多人把 AXP 当成 Visa 的同类——错了一半。它确有类似 Visa 的网络刷卡收入（<span class="hl-t">GMNS 全球网络 + 折扣收入 $95.1 亿</span>），但它同时<span class="hl-t">自己发卡、自己放贷、自担信用风险</span>（净利息收入 $46.9 亿、+13%）。这意味着读它必须用<strong>金融业口径</strong>：NII / NIM（净利息收益率 8.4%）/ 拨备（$12.5 亿）/ 净核销率（2.0%）/ CET1（10.5%）/ ROTCE（~43%），而<strong>不能用 FCF、毛利率、净现金那套工业指标</strong>——放贷型银行的经营现金流被应收与贷款变动主导，FCF 不作估值锚。</p>
+    <div class="tbl-wrap" style="margin:14px 0;">
+      <table class="tbl">
+        <tr><th>营收结构（$M）</th><th>Q1 2026</th><th>YoY</th><th>性质</th></tr>
+        <tr><td>折扣收入 Discount revenue</td><td>9,512</td><td>+9%</td><td>网络刷卡抽成（类 Visa）</td></tr>
+        <tr><td>净卡费 Net card fees</td><td>2,752</td><td>+18%</td><td>高端会员年费</td></tr>
+        <tr><td>服务及其他 Service &amp; other</td><td>1,951</td><td>+13%</td><td>服务收入</td></tr>
+        <tr class="hl"><td>非利息收入合计</td><td>14,215</td><td>+11%</td><td>—</td></tr>
+        <tr><td>总利息收入</td><td>6,665</td><td>+9%</td><td>放贷利息（类 COF）</td></tr>
+        <tr><td><span class="warn-t">减：总利息支出</span></td><td><span class="warn-t">(1,973)</span></td><td>持平</td><td>存款/发债成本</td></tr>
+        <tr class="hl"><td><strong>净利息收入 NII</strong></td><td><strong>4,692</strong></td><td><strong>+13%</strong></td><td>—</td></tr>
+        <tr class="hl"><td><strong>总营收（净利息后）</strong></td><td><strong>18,907</strong></td><td><strong>+11%</strong></td><td>—</td></tr>
+      </table>
+    </div>
+    <p><strong>看穿二：营收加速的这一季，公司主动"用利润换会员"。</strong> Q1 billed business +10%（FX 调整 +9%）是<span class="hl-t">三年来最快季度增速</span>，净卡费 +18%、国际业务 +20%，增长引擎全线走强。但同期<strong>总费用 +11%、其中 Card Member services 费用同比 +49%</strong>（美国白金卡改版 + 旅行/生活方式权益使用增加）——管理层因业绩强劲，主动加大营销与技术投入。代价是短期利润率被压住：<span class="warn-t">美国消费（USCS）分部税前利润仅 +1%、商业（CS）分部税前利润 -2%</span>，与营收两位数增长形成反差。这不是经营恶化，而是一笔用当下利润换长期会员粘性的<strong>主动选择</strong>——读财报时要把"利润率压缩"和"增长引擎发力"分开看，前者是投资、后者是结果。另：EPS +18% 高于净利 +15%，差额来自持续回购缩股（摊薄股数 -2.3%）+ 有效税率降至 21.4%（一次性优惠）。</p>
+  </div>
+</div>
+
+<!-- ═══ 趋势图 ═══ -->
+<div class="section">
+  <div class="stitle">关键指标趋势（近 5 季 · Q1 2025 → Q1 2026）</div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">总营收（$B）& YoY 增速</div><div class="cwrap"><canvas id="chartRev"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">税前利润率 vs 净利率趋势（%）</div><div class="cwrap"><canvas id="chartMargin"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">Q1 2026 四大分部营收拆分（$B）</div><div class="cwrap"><canvas id="chartSegment"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">摊薄 EPS 趋势（$）</div><div class="cwrap"><canvas id="chartEPS"></canvas></div></div>
+  </div>
+  <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">数据来源：AXP Q1 2026 财报及历史季度披露。YoY 增速：Q3 2025 +11%、Q4 2025（FX 调整 +9%，报告口径约 +10%）、Q1 2026 +11% 均为公司披露/电话会确认；Q1-Q2 2025 为报告口径估算。净利率 Q4 2025 回落至 13.0% 因当季费用高企（白金卡改版）。</p>
+</div>
+
+<!-- ═══ 桑基图 ═══ -->
+<div class="section">
+  <div class="stitle">Q1 2026 营收 → 净利分解桑基图（$M）</div>
+  <div class="ccard">
+    <div id="sankey" style="width:100%;height:480px;"></div>
+    <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">说明（金融业口径 · 营收 → 净利分解）：非利息收入 $14,215 + 净利息收入 $4,692 = 总营收（净利息后）$18,907 → 信贷拨备 $1,251 + 运营总费用 $13,878 + 税前利润 $3,778；税前利润 $3,778 → 所得税 $807（有效税率 21.4%）+ GAAP 净利 $2,971。每个中间节点流入 = 流出，流量闭合。注：放贷型银行不列示工业口径的"经营现金流 → 自由现金流"，因 OCF 受应收/贷款变动主导；资本回报由 CET1 资本充足率约束（本季回报股东 $2,316，约占归普净利 78%）。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 1 ═══ -->
+<div class="section">
+  <div class="stitle">模块 1 · 公司概览与背景</div>
+  <div class="cmt">
+    <p><strong>American Express Company</strong>（NYSE: AXP），总部纽约，成立于 1850 年（起家于快递运输，后转型旅行支票与信用卡），是一家<strong>银行控股公司（BHC）</strong>。财年即自然年（截至 12 月 31 日）。</p>
+
+    <p><strong>核心叙事</strong>：美国运通是<span class="hl-t">全球性"支付网络 + 发卡 + 放贷"一体化的闭环（closed-loop）玩家</span>——它与 Visa/Mastercard 的"开放式四方模式"不同：AXP 同时扮演网络、发卡行与收单行三重角色，闭环掌握持卡人与商户两端的完整交易数据。它靠三条腿赚钱：(1) <strong>折扣收入</strong>（向商户收取的刷卡折扣费，类 Visa 的网络费，$95.1 亿）；(2) <strong>净卡费</strong>（高端卡年费，$27.5 亿，+18%）；(3) <strong>净利息收入</strong>（自有卡余额放贷利息，$46.9 亿，类 Capital One）。这是一门 <strong>ROE 35%、ROTCE ~43%、净核销率仅 2.0% 的高端会员制信贷网络生意</strong>。</p>
+
+    <p><strong>四大业务分部</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>美国消费者服务（USCS）</strong>——营收 $91.2 亿（+11%），最大分部，美国高端个人卡</li>
+      <li><strong>商业服务（CS）</strong>——营收 $43.2 亿（+7%），中小企业与大企业商务卡/B2B</li>
+      <li><strong>国际卡服务（ICS）</strong>——营收 $35.3 亿（+20%），税前利润翻倍（+105%），本季最强增长极</li>
+      <li><strong>全球商户与网络服务（GMNS）</strong>——营收 $20.0 亿（+10%），网络与商户收单，税前利润率最高（$11.15 亿）</li>
+    </ul>
+
+    <p><strong>股权结构</strong>：单一类别普通股（NYSE: AXP），期末流通股约 <strong>6.82 亿股</strong>，机构持股比例高。无双重股权结构。</p>
+
+    <p><strong>能力圈检验</strong>：一体化闭环发卡网络的生意清晰可懂——高端会员付年费、刷卡、AXP 从商户抽折扣费 + 从循环余额赚利息，同时用闭环数据做精准风控（净核销率 2.0% 远优于行业）。<span class="warn-t">需要留意的两块：(1) 它是放贷型银行，信贷周期终将正常化——当前 2.0% 核销率处于优异区间，未来会随经济周期回升；(2) 费用扩张的节奏——Card Member services 费用 +49%，权益"军备竞赛"是维系高端会员的必要成本，但也在压利润率。</span></p>
+  </div>
+</div>
+
+<!-- ═══ 模块 2 ═══ -->
+<div class="section">
+  <div class="stitle">模块 2 · 管理层评估</div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>Stephen Squeri · 董事长兼 CEO（2018 至今）</h4>
+      <p>2018 年接任董事长兼 CEO，此前长期负责 AXP 的技术与企业发展。Squeri 的核心战略是<span class="hl-t">"围绕高端会员做深护城河"</span>——持续升级白金卡等旗舰产品的权益、吸引千禧与 Z 世代年轻高端客群、并将年费产品占比推高（全球 70%+ 新账户为付费产品、平均每卡年费 $127、+14%）。本季"因业绩强劲、主动加大营销与技术投入"的表态，体现了他一贯的长期主义打法：宁可短期压利润率，也要在会员心智与消费习惯上加固闭环。海图判断：这是一位深谙"高端品牌 = 定价权 = 复利"的经营者。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>资本配置纪律 · 增息 + 真实缩股</h4>
+      <p>
+      <strong>本季增息约 16% 至季率 $0.95</strong>（全年化 $3.80），派息率仅约 22% 净利，增息空间充足。<br>
+      <strong>持续大额回购缩股</strong>：本季回购 $16.6 亿（530.9 万股 @ $311.04），摊薄股数从 FY2023 的 7.36 亿降至 Q1 2026 的 6.86 亿（年均缩 2.5-3%），<span class="hl-t">真实注销、放大 EPS</span>。三年（FY2023-25）累计回购 $154.8 亿 + 股息 $60.5 亿 = 资本回报 $215.3 亿。<br>
+      <strong>资本回报受 CET1 纪律约束</strong>：管理层明确"在 CET1 维持 10-11% 目标区间并支持资产负债表增长的前提下，把多余资本回馈股东"——本季资本回报 $23.2 亿、约占归普净利 78%，留存约 22% 支撑贷款规模增长。这是放贷型银行应有的资本纪律，而非过度举债回购。
+      </p>
+    </div>
+  </div>
+
+  <div class="cmt">
+    <p><strong>长期主义测试</strong>：✅ 管理层反复以"高端会员生态 + 年费产品 + 优质信贷"的长期复利为主线。本季在业绩强劲时不去粉饰利润、反而主动加码投入（营销 + 技术 + 权益），是典型的"为 10 年后而非下季财报经营"。<strong>坦诚度</strong>：电话会主动披露费用压力来源（白金卡改版 + 权益使用）、分部利润率承压，不回避。<strong>利益绑定</strong>：管理层持股比例为成熟大盘银行常态，薪酬与营收/EPS/信贷指标挂钩。<strong>兑现记录</strong>：FY2025 给出高于市场共识的 FY2026 指引（EPS $17.30-$17.90、中点超共识 $17.41），本季重申（reaffirmed），执行力可信。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 3 ═══ -->
+<div class="section">
+  <div class="stitle">模块 3 · 商业模式深度解析</div>
+  <div class="cmt">
+    <p><strong>海图"一句话测试"</strong>：<span class="hl-t">美国运通是"自带封闭网络的高端发卡行"——高端客户付年费拿一张运通卡，刷卡时 AXP 既从商户抽折扣费（网络端）、又对循环余额收利息（放贷端），再用闭环掌握的完整交易数据做精准风控，把坏账压到行业最低。</span></p>
+
+    <p><strong>闭环模式（Closed-Loop）vs 四方模式</strong>：Visa/Mastercard 是"开放式四方模式"（持卡人-发卡行-网络-收单行-商户，网络只做中间的清算通道，不担信用风险）。<span class="hl-t">AXP 是闭环</span>——它同时是网络、发卡行、收单行，直接面对持卡人和商户两端。好处：(1) 掌握完整闭环数据，风控更精准（净核销率 2.0%）；(2) 对商户的折扣费定价权更强（高端持卡人消费力强，商户愿受理）；(3) 会员年费成为独立收入极（净卡费 +18%）。代价：自担信用风险 + 商户覆盖不如 V/MA 广。</p>
+
+    <p><strong>Q1 2026 分部营收与利润模型</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>分部</th><th>营收</th><th>营收YoY</th><th>税前利润</th><th>税前YoY</th><th>billed business</th></tr>
+        <tr><td>美国消费者 USCS</td><td>$9,123M</td><td>+11%</td><td>$1,757M</td><td>+1%</td><td>$180.2B（+10%）</td></tr>
+        <tr><td>商业服务 CS</td><td>$4,321M</td><td>+7%</td><td>$816M</td><td>-2%</td><td>$134.4B（+4%）</td></tr>
+        <tr><td>国际卡 ICS</td><td>$3,532M</td><td>+20%</td><td>$781M</td><td>+105%</td><td>$111.7B（+20%）</td></tr>
+        <tr><td>全球网络 GMNS</td><td>$2,004M</td><td>+10%</td><td>$1,115M</td><td>+13%</td><td>网络量 $486.3B</td></tr>
+        <tr><td>公司与其他</td><td>-$73M</td><td>—</td><td>-$691M</td><td>—</td><td>—</td></tr>
+        <tr class="hl"><td><strong>合计</strong></td><td><strong>$18,907M</strong></td><td><strong>+11%</strong></td><td><strong>$3,778M</strong></td><td><strong>+13%</strong></td><td>billed $428B（+10%）</td></tr>
+      </table>
+    </div>
+
+    <p style="margin-top:14px;"><strong>单位经济与议价能力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>国际是本季利润皇冠</strong>——ICS 营收 +20%、税前利润从 $381M 翻倍到 $781M（+105%）、billed +20%，海外高端渗透刚起步，是结构性增长极</li>
+      <li><strong>对商户议价力：中-强</strong>——AXP 折扣费率高于 V/MA，靠高消费力高端持卡人换取商户受理；但覆盖广度不如 V/MA（部分小商户不受理运通）</li>
+      <li><strong>对持卡人议价力：强</strong>——白金卡涨费后留存率仍保持高位、消费加速，证明高端会员对价格不敏感（定价权强）</li>
+      <li><strong>闭环数据护城河</strong>——完整掌握两端数据，风控（2.0% 核销率）+ 精准营销 + 权益设计能力，是开放式网络学不来的</li>
+      <li><strong>客群升级</strong>——千禧 + Z 世代消费增长强劲、平均每卡消费 $6,393（+7%）、平均每卡年费 $127（+14%），年轻高端客群是长期复利来源</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══ 模块 4 ═══ -->
+<div class="section">
+  <div class="stitle">模块 4 · 经济护城河分析（5 维）</div>
+  <div class="moat-grid">
+    <div class="moat-card wide">
+      <h5>1. 无形资产 / 品牌</h5>
+      <span class="moat-rate">宽</span>
+      <p>"American Express" 是全球高端支付的顶级品牌信任标志，175 年历史。高端定位 = 定价权（净卡费 +18%、涨费高留存）。<strong>趋势：加宽</strong>（年轻高端客群 + 权益升级）。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>2. 网络效应</h5>
+      <span class="moat-rate">中-宽</span>
+      <p>持卡人-商户双边闭环网络（1.539 亿张卡 + 全球商户），高消费力持卡人吸引商户受理。<span class="warn-t">但覆盖广度不及 V/MA 开放网络</span>。<strong>趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>3. 成本优势 / 数据</h5>
+      <span class="moat-rate">宽</span>
+      <p>闭环掌握两端完整数据，风控精准（净核销率 2.0% 远优于行业）+ 精准营销 + 权益设计。开放式网络学不来。<strong>趋势：加宽</strong>（AI 强化风控）。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>4. 转换成本</h5>
+      <span class="moat-rate">中</span>
+      <p>高端会员积分/权益体系 + 长期用卡习惯形成一定粘性；但换卡门槛低于企业级 SaaS。靠权益"军备竞赛"维系。<strong>趋势：稳定（费用代价上升）</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>5. 有效规模 / 监管牌照</h5>
+      <span class="moat-rate">中</span>
+      <p>银行牌照 + 全球清算许可构成壁垒；高端封闭网络容纳玩家有限。<span class="warn-t">但作为放贷银行受资本监管（CET1）+ interchange 费率监管约束</span>。<strong>趋势：监管约束</strong>。</p>
+    </div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>10 年后护城河会更宽还是更窄？</strong> <span class="hl-t">核心的"高端品牌 + 闭环数据 + 会员生态"护城河仍宽且在加宽</span>——年轻高端客群持续涌入、国际渗透刚起步、闭环数据用 AI 强化风控与营销。但要清醒看到三个约束：(1) <span class="warn-t">V/MA 的开放网络规模碾压</span>——AXP 网络覆盖广度始终追不上双寡头；(2) <span class="warn-t">Capital One 完成收购 Discover</span>（2025），形成一个新的"发卡 + 自有网络"整合体，是 AXP 最直接的发卡/放贷可比与竞争者；(3) <span class="warn-t">信贷周期</span>——作为放贷银行，护城河再宽也躲不过经济下行时的核销率回升。<strong>AXP 的护城河是"高端 + 闭环 + 数据"，不是"规模最大"——它选择做支付世界里最赚钱的那一小块高端客群。</strong></p>
+    <p><strong>定价权</strong>：强（白金卡涨费后高留存 + 消费加速证明高端客户价格不敏感），但商户端折扣费率长期受 interchange 监管环境的天花板压制。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 5 ═══ -->
+<div class="section">
+  <div class="stitle">模块 5 · 财务深度分析（金融业口径）</div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 12px 0; font-family: 'Segoe UI',sans-serif;">5.1 关键比率（Q1 2026 · 金融业指标）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>指标</th><th>Q1 2026</th><th>去年同期 / 对比</th><th>含义</th></tr>
+      <tr><td>总营收增速</td><td>+11%</td><td>去年 ~+7%</td><td><span class="badge up">消费加速至三年最快</span></td></tr>
+      <tr><td>净利息收入 NII 增速</td><td>+13%</td><td>—</td><td>放贷规模 + 利差双升</td></tr>
+      <tr><td>净利息收益率 NIM</td><td>8.4%</td><td>8.2%</td><td><span class="badge up">利差扩张 +0.2pp</span></td></tr>
+      <tr><td>净核销率（本金）</td><td>2.0%</td><td>~1.9%</td><td>信贷温和正常化</td></tr>
+      <tr><td>净核销率（含本息费）</td><td>2.3%</td><td>—</td><td>—</td></tr>
+      <tr><td>30 天以上逾期率</td><td>1.3%</td><td>~1.2%</td><td><span class="badge up">优异</span></td></tr>
+      <tr><td>拨备覆盖 / 卡余额</td><td>2.8%</td><td>—</td><td>准备金 $65 亿 · 覆盖充足</td></tr>
+      <tr><td>税前利润率</td><td>20.0%</td><td>19.6%</td><td>小幅改善</td></tr>
+      <tr><td>有效税率</td><td>21.4%</td><td>22.4%</td><td>含一次性优惠</td></tr>
+      <tr><td>ROE / ROTCE</td><td>35.2% / ~43%</td><td>—</td><td><span class="badge up">资本效率顶级</span></td></tr>
+      <tr><td>摊薄股数（百万）</td><td>686</td><td>702</td><td><span class="badge up">-2.3% 持续缩股</span></td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">杜邦拆解（简）：ROE 35.2% = 净利率 15.7% × 资产周转（营收/资产 ~24%）× 权益乘数（总资产 $308.9B / 权益 $34.0B ≈ 9.1x）。高 ROE 由高净利率 + 适度杠杆共同驱动——注意放贷银行的权益乘数天然较高，偿付能力看 CET1 而非乘数。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.2 资产负债健康度（2026-03-31 末 · $M）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>2026-03-31</th><th>说明</th></tr>
+      <tr><td>现金及等价物</td><td>53,757</td><td>流动性充裕</td></tr>
+      <tr><td>投资证券</td><td>2,625</td><td>—</td></tr>
+      <tr class="hl"><td>现金 + 短投合计</td><td>56,382</td><td>可用流动性</td></tr>
+      <tr><td>卡余额及其他贷款（总）</td><td>224,160</td><td>核心生息资产</td></tr>
+      <tr><td>总资产</td><td>308,894</td><td>—</td></tr>
+      <tr><td>客户存款</td><td>157,948</td><td>主要低成本资金来源</td></tr>
+      <tr class="hl"><td>短期借款</td><td>1,692</td><td>已独立核对</td></tr>
+      <tr class="hl"><td>长期借款</td><td>58,750</td><td>已独立核对</td></tr>
+      <tr class="hl"><td>有息负债合计</td><td>60,442</td><td>短借 + 长债</td></tr>
+      <tr><td>其他负债（含应付）</td><td>56,509</td><td>—</td></tr>
+      <tr><td>总负债</td><td>274,899</td><td>—</td></tr>
+      <tr class="hl"><td>股东权益</td><td>33,995</td><td>含优先股 1,584</td></tr>
+      <tr><td>普通股权益</td><td>32,411</td><td>BVPS $47.5</td></tr>
+      <tr><td>商誉</td><td>4,872</td><td>—</td></tr>
+      <tr class="hl"><td>有形普通股权益（估算）</td><td>27,539</td><td>剔商誉 · TBVPS 估算 $40.4</td></tr>
+      <tr class="hl"><td><strong>CET1 一级普通股本比率</strong></td><td><strong>10.5%</strong></td><td>目标 10-11% · Tier1 11.1% / 总资本 13.2%</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">⚠️ <strong>净现金不适用——铁律提示</strong>：美国运通是<strong>存款 + 发债融资的放贷型银行</strong>，有息负债 $60,442M（短借 $1,692M + 长债 $58,750M，已逐项核对）+ 客户存款 $157,948M 是它放贷的资金来源，不存在工业口径的"净现金"概念。<strong>偿付能力应看资本充足率</strong>：CET1 10.5%（目标区间 10-11%，CET1 资本 $27,523M / 风险加权资产 $262,924M）、Tier1 杠杆率 9.7%、补充杠杆率 SLR 8.2%——资本充足、在目标区间内。信贷损失准备总额 $65 亿（卡余额准备 $6,065M + 其他贷款 $314M + 其他应收 $121M），占卡余额 2.8%，覆盖充足。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.3 现金流与资本回报（Q1 2026 · $M）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>Q1 2026</th><th>去年同期</th><th>说明</th></tr>
+      <tr><td>经营活动现金流 OCF</td><td>3,804</td><td>—</td><td>受应收/贷款变动主导</td></tr>
+      <tr><td>- Capex（购置物业与设备）</td><td>1,149</td><td>430</td><td>同比大增 · 技术/自建投入</td></tr>
+      <tr class="hl"><td>FCF（OCF - Capex）</td><td>2,655</td><td>—</td><td><span class="badge nt">仅供参考 · 非估值锚</span></td></tr>
+      <tr><td>本季回购（回购计划口径）</td><td>1,664</td><td>—</td><td>530.9 万股 @ $311.04</td></tr>
+      <tr><td>本季股息（宣派）</td><td>652</td><td>—</td><td>$0.95/股 · 优先股股息 $14</td></tr>
+      <tr class="hl"><td><strong>本季资本回报合计</strong></td><td><strong>2,316</strong></td><td>—</td><td>约占归普净利 78%</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">⚠️ <strong>FCF 不作估值锚</strong>：对放贷型金融机构，经营现金流受应收账款与贷款余额变动主导，FCF 不作为工业口径的估值锚，也不作 FCF Yield 解读。Capex 本季从去年 $430M 跳增至 $1,149M（+167%），反映技术平台与自建投入加大——需持续观察其 ROIC 兑现。资本回报能力由 CET1 资本充足率约束：本季 CET1 10.5%（目标 10-11% 内），故有余力把约 78% 归普净利回馈股东，留存约 22% 支撑贷款规模增长。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.4 所有者盈余（金融业口径适配）</h3>
+  <div class="dcf-note">
+    <p><strong>所有者盈余 / FCF 对放贷型银行不适用作估值锚</strong>——银行的"经营现金流"被应收与贷款余额变动主导，无法像工业企业那样用 OCF − 维护性 Capex 近似所有者盈余。</p>
+    <p>金融业衡量真实资本回报应改用 <strong>ROTCE（有形普通股本回报）~43%</strong> 与 <strong>ROE 35.2%</strong>——这是 AXP 每一元有形股本每年创造的回报，属全球银行顶级水平（多数大行 ROTCE 在 12-18%）。偿付与再投资能力则看 CET1 10.5%（目标 10-11%）。</p>
+    <p><strong>换句话说：AXP 的"真实盈利能力"体现在 43% 的 ROTCE 上，而非某个 FCF 数字。它每年赚到的钱，约 78% 通过增息 + 回购返还股东，约 22% 留存去做更多高回报的高端信贷——这是一台高 ROTCE 的复利机器。</strong>问题从来不是它赚不赚钱，而是当前 P/TBV 8.6x / Forward P/E 19.8x 的价格给不给安全边际。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 6 ═══ -->
+<div class="section">
+  <div class="stitle">模块 6 · 电话会分析（Q1 2026 + 前 2 季度）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">Q1 2026 电话会（2026-04-23）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"卡会员消费增速加速至 10%（FX 调整 +9%），为三年来最高季度增速，商品服务与旅行娱乐双线走强"</div><div class="ec-note">billed business $428B（+10%）· 商品服务占 71%（+10%）/ 旅行娱乐占 29%（+12%）· 消费全面回暖，是本季最核心的利好信号。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"美国白金卡改版后消费加速且高留存，涨费后表现良好；全球 70%+ 新账户为付费产品，千禧/Z 世代消费强劲；净卡费 +18%"</div><div class="ec-note">高端会员生态的核心飞轮在加速——涨费不掉客、年轻高端客群持续涌入，验证定价权。平均每卡年费 $127（+14%）。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"重申 FY2026 指引（营收 +9-10%，EPS $17.30-$17.90）；信贷表现优异，净核销率 2.0%"</div><div class="ec-note">指引中点 $17.60 高于市场共识 $17.41。信贷质量是这家银行的定海神针——2.0% 核销率 + 1.3% 逾期率处优异区间。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-neut">中性偏空</div><div class="ec-body"><div class="ec-title">"主动加大营销与技术投入，总费用 +11%，Card Member services 费用同比 +49%（白金卡改版 + 权益使用），压缩短期利润率"</div><div class="ec-note">USCS 分部税前利润仅 +1%、CS 分部 -2%——用当下利润换长期会员粘性的主动选择。短期利润率承压是需要关注的代价。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"成为 NFL 全球官方支付合作伙伴、续约 NBA；推出 Graphite 商务现金卡；发布 Amex Agentic Commerce 开发者套件"</div><div class="ec-note">品牌营销 + 新产品 + AI 代理商务布局——为长期会员增长与新场景铺路。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q4 2025 / FY2025 电话会（2026-01-30）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"FY2025 营收 $72.2B（+10%），净利 $10.8B，摊薄 EPS $15.38（+10%）；billed business $1,669.8B（+8%）"</div><div class="ec-note">全年稳健收官，并发布高于预期的 2026 指引（EPS $17.30-$17.90，中点超共识 $17.41）+ 季度股息上调约 16% 至 $0.95。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-neut">中性偏空</div><div class="ec-body"><div class="ec-title">"Q4 EPS $3.53 略低于部分预期，费用（尤其 Card Member services）偏高，财报后股价小幅回落"</div><div class="ec-note">Q4 净利率回落至 13.0%——费用扩张的压力在 Q4 已显现，Q1 延续。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q3 2025 电话会（2025-10-17）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"创纪录 Q3 营收 $18.4B（+11%），EPS $4.14（+19%），超预期；上调 FY2025 指引"</div><div class="ec-note">美国白金卡新账户获取较改版前翻倍；净卡费 +18%（2019 年来 17% CAGR）；拨备从 $1.4B 回落至 $1.3B，核销率稳定 1.9%。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">指引兑现度追踪</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>历史指引</th><th>Q1 2026 实际 / 状态</th><th>评价</th></tr>
+      <tr><td>FY2026 营收增速 +9-10%</td><td>Q1 +11%（略超区间上限）</td><td><span class="badge up">超预期</span></td></tr>
+      <tr><td>FY2026 EPS $17.30-$17.90</td><td>本季重申（reaffirmed）· Q1 EPS $4.28</td><td><span class="badge nt">在轨</span></td></tr>
+      <tr><td>信贷指引"核销率稳健"</td><td>净核销率 2.0% · 逾期 1.3%</td><td><span class="badge up">优异</span></td></tr>
+      <tr><td>净卡费加速</td><td>净卡费 +18%</td><td><span class="badge up">兑现</span></td></tr>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>信号汇总</strong>：Q1 2026 是 AXP "<span class="hl-t">消费加速（三年最快）+ 净卡费/国际双引擎超预期 + 信贷优异 + 重申强指引</span>"的强势一季。唯一的"噪音"是<span class="warn-t">主动的费用扩张（Card Member services +49%）压住了短期利润率</span>——但这是管理层在业绩强劲时的主动投资，而非经营恶化。<strong>业绩几乎无可挑剔——问题永远在估值（无安全边际）与信贷周期（终将正常化）上。</strong>下次财报 2026-07-24（Q2 2026）就在眼前，是最近的催化剂。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 7 ═══ -->
+<div class="section">
+  <div class="stitle">模块 7 · 多模型估值（8 种方法 · 金融业口径）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">7.1 估值汇总表（独立估值 · 不锚定现价 · USD）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>估值方法</th><th>每股公允价</th><th>假设要点</th><th>权重</th></tr>
+      <tr><td>1. 相对估值（Forward P/E）</td><td>$326</td><td>FY2026 EPS $17.60 × 18.5x（介于纯网络 V/MA 24-28x 与纯发卡 COF 13-14x 之间，含信贷周期折价）</td><td>25%</td></tr>
+      <tr><td>2. P/TBV（有形账面）</td><td>$323</td><td>TBVPS $40.4 × 8.0x（ROTCE ~43% 支撑高倍数，但周期性打折）</td><td>20%</td></tr>
+      <tr><td>3. P/B（账面）</td><td>$318</td><td>BVPS $47.5 × 6.7x（历史区间 5-7x 中上部）</td><td>10%</td></tr>
+      <tr><td>4. DDM（两阶段）</td><td>$312</td><td>DPS $3.80，前 5 年增 13%、永续 7%，要求回报 9.5%（低派息，参考意义有限）</td><td>5%</td></tr>
+      <tr><td>5. PEG</td><td>$306</td><td>Forward P/E 18.8x ÷ EPS 增速 14.5% = PEG 1.30；给 PEG 1.2 隐含 17.4x × $17.60</td><td>5%</td></tr>
+      <tr><td>6. 剩余收益 / ROTCE 折现</td><td>$340</td><td>可持续 ROTCE ~32%（跨周期正常化）、g 8%、r 10% 的合理 P/TBV，估值偏上限并封顶</td><td>10%</td></tr>
+      <tr><td>7. 反向 P/E</td><td>当前价隐含 EPS 增长 <strong>~14%</strong></td><td>$348 隐含市场认为 EPS 长期增 ~14%——与指引/共识一致，估值合理但不打折</td><td>10%</td></tr>
+      <tr><td>8. SOTP 分部加总</td><td>$350</td><td>GMNS 网络（类 V/MA 给高倍数）+ USCS/CS/ICS 发卡放贷（给较低倍数）− 公司费用</td><td>15%</td></tr>
+      <tr><td>— DCF / 所有者盈余</td><td><span class="warn-t">不适用</span></td><td>放贷型金融机构 · OCF 受应收/贷款变动主导，FCF 不作估值锚</td><td>0%</td></tr>
+      <tr><td>— EV/EBITDA</td><td><span class="warn-t">不适用</span></td><td>金融业不适用 EV 与 EBITDA 口径（负债是经营原料而非资本结构）</td><td>0%</td></tr>
+      <tr class="hl"><td><strong>加权公允价中位数</strong></td><td><strong>$328</strong></td><td>估值区间 $306-350 · 中位 ~$328</td><td>100%</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.8;"><strong>与现价对照</strong>：当前 $348.45 vs 加权公允 ~$328 · <span class="warn-t">现价溢价约 6%（无折价）</span>——<strong>远不足价值投资 25% 安全边际的门槛</strong>。AXP 是一门 35% ROE、43% ROTCE 的顶级发卡网络生意，但当前价格已充分（甚至略微超前）反映其质量。反向 P/E 显示市场已定价 ~14% 长期 EPS 增长，与公司指引/分析师共识一致——不便宜也不算极贵，是"合理偏满价"。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.2 P/E 多档透视表</h3>
+  <p style="margin-bottom:10px; font-size:13px; color:var(--text2);">AXP 仅披露 GAAP 口径（无单独 Non-GAAP EPS），但季度净利有波动（Q4 2025 EPS 因费用高企回落至 $3.53），故用多档 EPS 基数透视，标注"最可信档"：</p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>口径</th><th>EPS / 基数</th><th>P/E（基于 $348.45）</th><th>读数说明</th></tr>
+      <tr><td>TTM GAAP P/E</td><td>$16.03</td><td>21.7x</td><td>过去 12 个月 · 含费用高峰季</td></tr>
+      <tr class="hl"><td><strong>FY2026 指引 P/E（中点 $17.60）</strong></td><td><strong>$17.60</strong></td><td><strong>~19.8x</strong></td><td>最可信档 · 公司重申指引</td></tr>
+      <tr><td>FY2026 共识 P/E（Zacks $17.65）</td><td>$17.65</td><td>~19.7x</td><td>卖方共识 · 与指引一致</td></tr>
+      <tr><td>FY2027 前瞻 P/E（估 ~$20）</td><td>~$20</td><td>~17.4x</td><td>按 ~14% 增速外推</td></tr>
+      <tr><td>P/B 市净率</td><td>BVPS $47.5</td><td>7.3x</td><td>银行常用</td></tr>
+      <tr><td>P/TBV 市有形净值</td><td>TBVPS $40.4</td><td>~8.6x</td><td>ROTCE 43% 支撑</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3);"><strong>最可信档</strong>：Forward P/E ~19.8x（FY2026 指引中点）。同业对比：Mastercard ~27.7x、Visa ~24.4x（纯网络轻资产溢价）、Capital One ~13-14x（纯发卡放贷、整合 Discover）。<span class="hl-t">AXP 19.8x 介于纯网络与纯发卡之间——比 V/MA 便宜（含信贷周期性），比 COF 贵（含品牌与高端溢价）</span>，定位合理，但绝对估值仍在满价区，无安全边际。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.3 12 个月目标价（概率加权）</h3>
+  <div class="pgrid">
+    <div class="pbox"><div class="pl">悲观情景 · 25%</div><div class="pv pc">$285</div><div class="pn">信贷周期正常化（核销率升破 2.5%）+ 消费走弱 + 估值压缩至 ~15.5x<br>距现价 -18%</div></div>
+    <div class="pbox"><div class="pl">基准情景 · 50%</div><div class="pv pf">$352</div><div class="pn">兑现 FY2026 EPS $17.60 + 市场给 FY2027 EPS ~$20 约 17.5x + 持续回购<br>距现价 +1%</div></div>
+    <div class="pbox"><div class="pl">乐观情景 · 25%</div><div class="pv ps">$410</div><div class="pn">消费加速延续 + EPS beat 至 $18+ + 估值扩张至 ~20x<br>距现价 +18%</div></div>
+  </div>
+  <p style="font-size:13px; color:var(--text2);"><strong>概率加权公允价</strong>：25%×$285 + 50%×$352 + 25%×$410 = <strong>$350</strong>。<strong>叠加 1.1% 股息 = 总回报仅 ~1.5%</strong>——稳健但不激动。<span class="warn-t">当前 $348 远高于机械首仓 $262（估值中位数 $328×80%）——不在合理建仓窗口</span>。</p>
+</div>
+
+<!-- ═══ 模块 8 ═══ -->
+<div class="section">
+  <div class="stitle">模块 8 · 竞争与行业分析</div>
+  <div class="cmt">
+    <p><strong>全球支付格局中的独特定位</strong>：Visa 与 Mastercard 是开放式卡网络双寡头（只做网络、不担信用风险）；Capital One 是纯发卡放贷行（2025 完成收购 Discover，获得自有网络）；美国运通则是<span class="hl-t">"网络 + 发卡 + 放贷"闭环一体的高端玩家</span>——它不追求覆盖最广，而是锁定支付世界里最赚钱的高端客群。</p>
+
+    <p><strong>支付龙头同业对比（远期 P/E 与 2026 EPS 增速）</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>公司</th><th>Forward P/E</th><th>EPS 增速</th><th>定位</th><th>核心评价</th></tr>
+        <tr class="hl"><td><strong>American Express AXP</strong></td><td><strong>~19.8x</strong></td><td>~14-15%</td><td>网络+发卡+放贷一体</td><td>高端闭环 · 估值居中</td></tr>
+        <tr><td>Mastercard MA</td><td>~27.7x</td><td>~15.9%</td><td>纯支付网络</td><td>估值最高 · 成长溢价</td></tr>
+        <tr><td>Visa V</td><td>~24.4x</td><td>~13%</td><td>纯支付网络</td><td>轻资产高利润率</td></tr>
+        <tr><td>Capital One COF</td><td>~13-14x</td><td>整合 Discover 协同</td><td>发卡放贷行</td><td>AXP 最直接可比 · 倍数最低</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:10px; font-size:12px; color:var(--text3);">行业平均 Forward P/E 约 19.8x。<strong>AXP 的估值恰好落在行业均值——比纯网络 V/MA 便宜（因它自担信用风险、有周期性），比纯发卡 COF 贵（因高端品牌 + 闭环数据 + 45% 更高的 ROTCE）</strong>。这是市场给一个"介于网络股与发卡行之间"的混合体的合理定价。真正的直接竞争者是 Capital One（同为发卡放贷、且刚整合 Discover 拿到自有网络），需持续关注其协同兑现对 AXP 高端客群的冲击。</p>
+
+    <p style="margin-top:14px;"><strong>波特五力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>新进入者：</strong>低（高端品牌 + 银行牌照 + 闭环数据壁垒高，175 年积累难复制）</li>
+      <li><strong>替代品：</strong>中（V/MA 联名高端卡、金融科技新贵、稳定币/A2A 长期轨道）</li>
+      <li><strong>供应商议价：</strong>低（资金来源以低成本存款为主）</li>
+      <li><strong>买家议价：</strong>中（高端持卡人价格不敏感 = 定价权强；商户端受 interchange 监管压制）</li>
+      <li><strong>同业竞争：</strong>中-高（V/MA 规模碾压 + COF 整合 Discover + 各行高端卡军备竞赛）</li>
+    </ul>
+
+    <p><strong>颠覆风险</strong>：短期看，AXP 的高端会员生态 + 闭环数据护城河稳固；中长期需关注：(1) COF-Discover 整合体对发卡/放贷格局的重塑；(2) 稳定币/A2A 支付轨道对卡网络的长期脱媒（对 AXP 与 V/MA 都是慢变量）；(3) 高端权益"军备竞赛"持续推高获客与维护成本。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 9 ═══ -->
+<div class="section">
+  <div class="stitle">模块 9 · 技术面与 K 线分析（次要参考）</div>
+  <div class="cmt">
+    <p><strong>趋势</strong>：AXP 当前 $348.45，处于 52 周区间 $288.34-$387.49 的<span class="hl-t">中下部</span>——距 52 周高 $387 约 -10%，距 52 周低 $288 约 +21%。财报强劲但股价未创新高，市场似乎已把强业绩与满估值对冲，进入震荡消化区间。</p>
+
+    <p><strong>关键价位</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>支撑</strong>：$311（本季回购均价附近）/ $288（52 周低）/ $262（估值首仓位）</li>
+      <li><strong>阻力</strong>：$387（52 周高）/ $410（乐观情景 + 止盈一档）/ $460（止盈二档）</li>
+    </ul>
+
+    <p><strong>指标信号</strong>：股价处区间中下部、非超买。<span class="hl-t">回购均价 $311 是一条相对硬的心理支撑</span>——公司在此价位以下更愿意加大回购。</p>
+
+    <p><strong>注意</strong>：AXP 的核心驱动是 billed business 增速 + 净核销率（信贷周期）+ 费用率 + Forward P/E 估值，技术面是次要参考。价值投资者应等基本面回调（如信贷恶化、消费走弱触发估值压缩）到 $260-290 区间，而非在满估值追高。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 10 ═══ -->
+<div class="section">
+  <div class="stitle">模块 10 · 增长催化剂与前景展望</div>
+  <div class="cmt">
+    <p><strong>短期催化剂（未来 6 个月）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>2026-07-24 Q2 2026 财报</strong>——最近催化剂（就在研判日后两周）：消费增速能否延续 +10%、费用率是否见顶、信贷是否仍优异</li>
+      <li><strong>白金卡改版红利延续</strong>——涨费高留存 + 新账户加速的持续性</li>
+      <li><strong>国际业务（ICS）高增</strong>——+20% 营收 / +105% 税前利润能否延续</li>
+      <li><strong>持续回购缩股</strong>——$185 亿剩余授权（约值）+ 增息后的资本回报节奏</li>
+    </ul>
+
+    <p><strong>长期展望（3-5 年）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>高端会员复利</strong>——年轻高端客群（千禧/Z 世代）持续涌入 + 平均每卡消费与年费双升，是核心增长引擎</li>
+      <li><strong>国际渗透</strong>——海外高端市场渗透刚起步，是最大的结构性增长空间</li>
+      <li><strong>年费产品占比提升</strong>——全球 70%+ 新账户为付费产品，净卡费长期 17% CAGR 提升收入质量</li>
+      <li><strong>Agentic commerce（AI 代理商务）</strong>——发布开发者套件，为 AI 时代新支付场景布局</li>
+      <li><strong>风险情景</strong>：信贷周期正常化 / 消费衰退 / V-MA-COF 竞争加剧 / 高端权益成本持续攀升</li>
+    </ul>
+
+    <p><strong>TAM 展望</strong>：全球高端支付与消费信贷市场仍在扩张，AXP 的可寻址空间来自国际高端渗透 + 商务卡/B2B + 年轻客群升级。核心问题不是增长空间，而是在满估值下能否给出足够的安全边际。管理层重申 FY2026 营收 +9-10%、EPS $17.30-$17.90（中点超共识），前景清晰。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 11 ═══ -->
+<div class="section">
+  <div class="stitle">模块 11 · 风险矩阵</div>
+  <div class="risk-grid">
+    <div class="risk-card r4"><h5>1. 信贷周期正常化</h5><span class="risk-score">4 / 5 高</span><p>作为放贷银行，当前净核销率 2.0% 处优异区间，经济下行时终将回升。核销率升破 2.5-3% 将显著吞噬利润 · 是这门生意最本质的周期风险</p></div>
+    <div class="risk-card r4"><h5>2. 满估值无安全边际</h5><span class="risk-score">4 / 5 高</span><p>Forward P/E 19.8x / P/TBV 8.6x · 现价溢价公允约 6% · 任何增速放缓、信贷恶化或费用超预期都可能触发估值压缩</p></div>
+    <div class="risk-card r3"><h5>3. 费用扩张压利润率</h5><span class="risk-score">3 / 5 中</span><p>Card Member services 费用 +49%、Capex 从 $430M 跳增至 $1,149M · 高端权益"军备竞赛"+ 技术投入是必要成本，但压住短期利润率与分部税前利润</p></div>
+    <div class="risk-card r3"><h5>4. 竞争加剧</h5><span class="risk-score">3 / 5 中</span><p>V/MA 联名高端卡规模碾压 + Capital One 整合 Discover 拿到自有网络 · 发卡放贷赛道最直接竞争者实力增强</p></div>
+    <div class="risk-card r3"><h5>5. 消费/宏观周期</h5><span class="risk-score">3 / 5 中</span><p>billed business 与高端消费强相关 · 衰退会同时压制消费额与信贷质量（双重打击）· 旅行娱乐消费对宏观敏感</p></div>
+    <div class="risk-card r2"><h5>6. 生意质量（机会）</h5><span class="risk-score">2 / 5 反向</span><p>35% ROE + 43% ROTCE + 2.0% 核销率 + CET1 10.5% + 高端会员粘性 · 顶级信贷网络本身是最大的安全垫</p></div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>3 个黑天鹅情景</strong>：</p>
+    <ol style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>深度衰退 + 信贷骤然恶化</strong>——概率 12% · 核销率升破 3.5% + 消费额下滑 · 股价跌至 $240-260 · 双重打击（放贷银行的典型下行）</li>
+      <li><strong>高端消费见顶 + 权益军备竞赛失控</strong>——概率 8% · 获客成本持续攀升但会员增长放缓 · 利润率结构性下移</li>
+      <li><strong>监管加码（interchange / 资本要求）</strong>——概率 8% · 折扣费率天花板下压 + CET1 要求提高约束资本回报 · 估值中枢下移</li>
+    </ol>
+
+    <p style="margin-top:10px;"><strong>下行支撑</strong>：顶级信贷网络 + 35% ROE + 高端会员粘性 + CET1 10.5% 构成质量底。<span class="hl-t">$260-290 是较硬的估值底</span>（52 周低 $288 + P/TBV ~6.5x 下限 + 回购均价 $311 附近的资本支撑）。但要注意：作为放贷银行，AXP 在衰退中的"底"比纯网络股（V/MA）更低、更脆弱——因为它同时承担信用风险。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 12 ═══ -->
+<div class="section">
+  <div class="stitle">模块 12 · 股东回报分析</div>
+  <div class="cmt">
+    <p><strong>美国运通是"增息 + 真实缩股"双管资本返还的稳健范本——且资本回报受 CET1 资本充足率约束，而非过度举债。</strong>本季资本回报 $23.2 亿、约占归普净利 78%，值得细拆。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 18px 0 10px; font-family: 'Segoe UI',sans-serif;">12.1 公司给了股东多少？</h3>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>年度</th><th>回购（执行）</th><th>股息</th><th>股东总回报</th><th>说明</th></tr>
+        <tr><td>FY2023</td><td>$3,650M</td><td>$1,780M</td><td><strong>$5,430M</strong></td><td>—</td></tr>
+        <tr><td>FY2024</td><td>$6,020M</td><td>$1,999M</td><td><strong>$8,019M</strong></td><td>回购显著加码</td></tr>
+        <tr><td>FY2025</td><td>$5,814M</td><td>$2,271M</td><td><strong>$8,085M</strong></td><td>回购 + 增息</td></tr>
+        <tr class="hl"><td><strong>三年合计</strong></td><td><strong>$15,484M</strong></td><td><strong>$6,050M</strong></td><td><strong>$21,534M</strong></td><td>回购占 72%</td></tr>
+      </table>
+    </div>
+    <p style="font-size:13px; color: var(--text2); margin-top:8px"><strong>Trailing Shareholder Yield</strong> ≈ FY2025 返还（回购 $5,814M + 股息 $2,271M）$8,085M / 市值 $239B ≈ <strong>3.4%</strong>（其中回购 ~2.4% + 股息 ~1.0%）。<span class="hl-t">AXP 是"低股息 + 大额回购"的典型美股资本返还结构</span>——本季回购均价 $311.04，低于当前 $348，在相对合理价位持续回购。派息率 FY2025 约 21% 净利（$2,271M / $10,833M），留足空间。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.2 给的方式好不好？</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>真实缩股 · 含金量高</strong>：年度摊薄股数从 FY2023 的 <strong>7.36 亿</strong>→ FY2024 7.13 亿 → FY2025 6.96 亿（年均缩 2.5-3%），期末流通股 Q1 2025 的 7.01 亿降至 Q1 2026 的 <strong>6.82 亿</strong>（-2.7%）。回购是"真减少股本、增厚每股内在价值"，而非仅抵消股权激励稀释——Q1 EPS +18% 高于净利 +15%，差额正是缩股 + 税率优惠的贡献</li>
+      <li><strong>回购择时合理</strong>：本季回购均价 $311.04，低于当前 $348——在低于现价的位置回购，纪律性尚可</li>
+      <li><strong>增息积极</strong>：本季季度股息上调约 16% 至 $0.95（全年化 $3.80），派息率仅约 22%，增息空间充足</li>
+    </ul>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.3 能不能继续给、给多少？</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>已授权额度充裕</strong>：2023-03-08 董事会授权回购至多 1.2 亿股，季末（2026-03-31）剩余 <strong>5,300 万股（按现价约值 $185 亿）</strong>，约占市值 7.7% · 执行历史可信（常年足额回购）</li>
+      <li><strong>资本回报受 CET1 纪律约束</strong>：管理层明确"在 CET1 维持 10-11% 目标区间并支持资产负债表增长的前提下，把多余资本回馈股东"——本季 CET1 10.5%（区间内），故有余力回报约 78% 归普净利，留存约 22% 支撑贷款增长。<span class="hl-t">这是放贷银行应有的资本纪律</span></li>
+      <li><strong>覆盖度（金融业口径）</strong>：FCF 不适用作银行覆盖度指标；改用 资本回报 / 净利 覆盖度——FY2025 返还 $8,085M / 净利 $10,833M ≈ 75%，留存 25% 内生补充资本。<strong>不是靠动用储备或过度举债，而是用赚到的钱返还，可持续</strong></li>
+      <li><strong>非借债回购</strong>：AXP 的有息负债是放贷的资金来源（存款 + 发债对应生息资产），并非为回购而举债 · 资本回报由监管资本盈余驱动，稳健</li>
+    </ul>
+    <p><strong>模块小结</strong>：<span class="hl-t">积极且高含金量</span>——三年累计返还 $215 亿 + 真实注销缩股（年均 -2.7%）+ 增息 16% 且派息率仅 22% 留足空间 + $185 亿剩余授权 + 资本回报受 CET1 纪律约束而非过度举债、由净利充分覆盖（75%）。AXP 是美股"增息 + 真实缩股"复利机器的稳健范本，唯一需留意的是回报节奏受信贷周期与资本充足率牵引——衰退期监管资本盈余收窄时，回报力度会主动收敛。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 13 ═══ -->
+<div class="section">
+  <div class="stitle">模块 13 · 海图评分卡 + 投资决策</div>
+
+  <div class="scorecard">
+    <h3 style="font-size:15px; color:var(--text); margin-bottom: 16px; font-family: 'Segoe UI',sans-serif;">海图评分卡（6 维 A-D）</h3>
+    <div class="score-grid">
+      <div class="score-card"><div class="score-letter s-bp">A-</div><div class="score-body"><h4>1. 生意可预测性</h4><p>一体化闭环模式清晰（高端会员 + 消费 + 放贷）。但含信贷周期性——拨备/核销随周期波动，季度净利有起伏（Q4 2025 EPS 回落）。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">A-</div><div class="score-body"><h4>2. 经济护城河</h4><p>高端品牌 + 闭环数据 + 会员生态是宽护城河且加宽。但网络规模不及 V/MA，且面对 COF 整合 Discover 的竞争。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">A-</div><div class="score-body"><h4>3. 管理层质量</h4><p>资本配置纪律（增息 16% + 真实缩股）+ 主动投资着眼长期 + 坦诚披露费用压力 + 指引兑现可信。</p></div></div>
+      <div class="score-card"><div class="score-letter s-a">A</div><div class="score-body"><h4>4. 财务质量</h4><p>ROE 35% / ROTCE ~43% / CET1 10.5% / 净核销率 2.0% 优异 / 拨备覆盖 2.8% 稳健。信贷质量全球顶级。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">A-</div><div class="score-body"><h4>5. 资本配置纪律</h4><p>积极且高含金量：三年返还 $215 亿 + 真实缩股 -2.7%/年 + 受 CET1 约束。Capex 从 $430M 跳增至 $1,149M 需观察 ROIC。</p></div></div>
+      <div class="score-card"><div class="score-letter s-c">C+</div><div class="score-body"><h4>6. 估值与安全边际</h4><p>Forward P/E 19.8x / P/TBV 8.6x / 现价溢价公允约 6% · <strong>无安全边际，当前价已满价</strong>。</p></div></div>
+    </div>
+
+    <div class="flag-row">
+      <strong>红旗排查</strong>：会计层面<strong>无红旗</strong>——GAAP 口径清晰、信贷指标健康（核销 2.0% / 逾期 1.3% / 拨备覆盖 2.8%）、CET1 达标、无商誉减值或收入确认疑点。唯一关注点：Card Member services 费用 +49% + Capex 激增（属投资期主动压利润率，非会计红旗）。触发降级的是<span class="warn-t">估值维度无安全边际</span>（Forward P/E 19.8x、现价溢价公允约 6%）+ 信贷周期风险——尽管 6 维基础质量优秀，综合评级<strong>降至「持有观望」</strong>。
+    </div>
+
+    <p style="margin-top:18px; font-size:14px; color:var(--text); line-height:1.85;"><strong>综合评级</strong>：<span class="rating-badge rating-hold" style="font-size:14px;">持有观望</span>。生意质量优秀（财务质量 A，其余五维除估值外均 A-），但估值维度 C+（满价无安全边际）+ 信贷周期风险 → 降至持有观望。核心判断：<strong>美国运通的问题从来不是生意好不好，而是价格贵不贵——当前 $348 溢价公允约 6%，没有安全边际。现有持仓者继续复利持有，新买入者应等回调至 $290 以下（估值首仓 $262 附近）。</strong></p>
+  </div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">投资决策（精确价格 · USD）</h3>
+
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>项目</th><th>价格</th><th>说明</th></tr>
+      <tr><td>12 个月目标价（基准）</td><td><strong>$352</strong> (+1%)</td><td>兑现 FY2026 指引 + FY2027 EPS ~$20 × ~17.5x</td></tr>
+      <tr><td>悲观目标（25% 概率）</td><td>$285 (-18%)</td><td>信贷正常化 + 消费走弱 + 估值压缩至 15.5x</td></tr>
+      <tr><td>乐观目标（25% 概率）</td><td>$410 (+18%)</td><td>消费加速延续 + EPS beat 至 $18+ + 估值扩张</td></tr>
+      <tr class="hl"><td>首仓建仓（估值中位数 $328 × 80%）</td><td><strong>$262</strong></td><td>距现价 -25% · 耐心等回调</td></tr>
+      <tr><td>二仓建仓（× 70%）</td><td>$230</td><td>-34% · 大幅回调机会</td></tr>
+      <tr><td>三仓建仓（× 60%）</td><td>$197</td><td>-43% · 黑天鹅/衰退级机会</td></tr>
+      <tr><td>止盈一档</td><td>$410</td><td>+18% · 减仓 25%</td></tr>
+      <tr><td>止盈二档</td><td>$460</td><td>+32% · 再减 25%</td></tr>
+      <tr><td>止盈三档</td><td>$520</td><td>+49% · 再减 25% · 最后 25% 长期复利持有</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.85;"><strong>建议总仓位</strong>：<strong>3-5%</strong>（核心质量仓 · 但当前价满估值，应在回调时建仓，不追高）。<strong>持有周期</strong>：5-10 年（长期复利 · 穿越信贷周期与竞争格局变化）。<strong>关键监控指标</strong>：① 净核销率与 30 天+逾期率（信贷周期最本质的信号，警戒线 2.5%/1.6%）；② billed business 消费增速（能否延续 +10%）；③ 总费用率与 Card Member services 费用（利润率何时见底）；④ CET1 与资本回报节奏；⑤ Forward P/E 是否回落至 16x 以下（估值机会）。<strong>下次催化剂</strong>：<span class="hl-t">2026-07-24 Q2 2026 财报（就在研判日后两周）</span>。</p>
+</div>
+
+<!-- ═══ 海图页末长评 ═══ -->
+<div class="section">
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记 · 约 1150 字</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p class="lead">价值投资里有一种"贵得有道理"的公司：生意好、护城河深、回报率高，可价格里早已写满了所有的好。美国运通就是这样——ROE 35%、连续两位数增长、信贷质量顶级，但 Forward P/E 已到 19.8x，现价比我独立测算的公允价还高约 6%。业绩几乎无可挑剔，问题从来不在生意，在价格。</p>
+
+      <p>美国运通是"自带封闭网络的高端发卡行"——它既像 Visa/Mastercard 靠自有网络（GMNS）收刷卡过路费（折扣收入 $95.1 亿），又像 Capital One 自己发卡放贷、赚利息、自担信用风险（净利息收入 $46.9 亿、+13%）。靠高端会员的年费（净卡费 $27.5 亿、+18%）、高客单价消费、优质信贷（净核销率仅 2.0%）构筑一体化闭环。正因为它同时放贷，读它必须用金融业口径——NII / NIM / 拨备 / CET1 / ROTCE，而不是 FCF、毛利率、净现金那套工业指标。</p>
+
+      <h4>几个研判要点</h4>
+
+      <p><strong>一、消费加速到三年最快，但公司选择"用利润换会员"。</strong> Q1 billed business $428B、+10%（FX 调整 +9%），是三年来最强季度增速；净卡费 +18%、全球 70%+ 新账户是付费产品、千禧与 Z 世代消费强劲。可同期<span class="warn-t">总费用 +11%、其中 Card Member services 费用 +49%</span>（白金卡改版 + 权益使用）——管理层因业绩强劲，主动加大营销与技术投入，短期压住了利润率（美国消费 USCS 分部税前利润仅 +1%、商业 CS 分部 -2%）。这不是经营恶化，而是一笔用当下利润换长期会员粘性的主动选择。读财报时要把"利润率压缩"和"增长引擎发力"分开看。</p>
+
+      <p><strong>二、国际业务是本季最大亮点。</strong> ICS 分部营收 <span class="hl-t">+20%、税前利润从 $381M 翻倍到 $781M（+105%）、billed business +20%</span>。海外高端渗透才刚展开，是未来几年最确定的结构性增长极。</p>
+
+      <p><strong>三、信贷质量是这家银行的定海神针。</strong> 净核销率 2.0%（含利息费 2.3%）、30 天以上逾期率 1.3%、拨备覆盖占卡余额 2.8%、CET1 10.5%（目标 10-11%）。在放贷型金融机构里，这是教科书级的稳健。ROE 35.2%、ROTCE 约 43%——每一元有形股本每年创造 43% 回报，是全球银行顶级水平。但要清醒：作为放贷银行，2.0% 的核销率处于周期优异区间，经济下行时终将回升，这是这门生意最本质的风险。</p>
+
+      <p><strong>四、股东回报积极且高含金量。</strong> 三年（FY2023-25）累计回购 $154.8 亿 + 股息 $60.5 亿、合计 <span class="hl-t">$215.3 亿</span>；摊薄股数从 7.36 亿真实注销到 6.96 亿（年均 -2.7%）；本季增息 16% 到 $0.95，派息率仅 22% 留足空间。关键是——资本回报受 CET1 纪律约束、由净利充分覆盖（75%），而非过度举债，含金量高。</p>
+
+      <p><strong>五、估值没有安全边际。</strong> Forward P/E 19.8x（FY2026 指引中点 $17.60）、P/TBV 8.6x、现价 $348 比我独立测算的公允中位数 $328 高约 6%。它比 Visa（24x）、Mastercard（28x）便宜，但比同为发卡放贷的 Capital One（13-14x）贵——市场给它的是"网络 + 发卡"之间的中间估值，合理，但不打折。反向 P/E 显示市场已定价 ~14% 长期 EPS 增长，与指引/共识一致。</p>
+
+      <h4>海图研判</h4>
+
+      <p><strong>评级：持有观望</strong>（一体化闭环 + 高端会员 + 顶级信贷 + 35% ROE 的组合，对垒费用扩张压利润率 + 信贷周期终将正常化 + Forward P/E 19.8x 无安全边际）。12 个月概率加权目标价 <strong>$350</strong>（悲观 $285 / 25% · 基准 $352 / 50% · 乐观 $410 / 25%），叠加 1.1% 股息 = 总回报约 1.5%——稳健但不激动。</p>
+
+      <p>操作建议：现价 $348 远高于机械首仓 $262（估值中位数 $328×80%），<strong>不在合理建仓窗口</strong>。耐心等回调——首仓 $262、二仓 $230、三仓 $197。止盈三档 $410 / $460 / $520，最后 25% 长期复利持有。<strong>建议总仓位 3-5%</strong>（核心质量仓 · 回调时建，不追高），持有周期 5-10 年。<span class="hl-t">关键纪律：现有持仓者继续让它复利，新买入者必须等价格给出安全边际——好生意也要好价格，何况它还是一家承担信用风险的放贷银行。</span></p>
+
+      <h4>风险提示</h4>
+
+      <p>信贷周期正常化（净核销率升破 2.5%）/ 消费衰退压制 billed business / 费用持续扩张吞噬利润率 / V-MA 网络规模碾压 + Capital One 整合 Discover 的竞争 / 满估值下的多重压缩——任一项都可能让股价回到 $260-290。但 35% ROE + 2.0% 核销率 + CET1 10.5% + 高端会员粘性构成质量底，<strong>$260-290 是较硬的估值底</strong>（52 周低 $288 + P/TBV 6.5x 下限 + 回购均价 $311 支撑）。但要记住：放贷银行在衰退里的"底"比纯网络股更低、更脆弱，因为它同时承担信用风险。</p>
+
+      <p>关键叙事：<strong>"自带网络的高端发卡行 + 顶级信贷 + 35% ROE + 真实缩股复利"的一体化闭环，对垒"费用扩张压利润 + 信贷周期正常化 + Forward P/E 19.8x 无安全边际"的估值与周期风险</strong>。美国运通不是给追便宜货的人——它的好早已标进价格；它是给愿意在回调时耐心建仓、再让一台高端复利机器慢慢滚雪球的长期投资者。下次催化剂：2026-07-24 Q2 2026 财报，就在眼前。</p>
+
+      <p class="haitu-sign">—— 海图，灯下落笔，明日再观风浪。</p>
+
+      <p class="haitu-disc">⚠️ 免责声明：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，不构成任何投资建议。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div>《海图夜读》 · American Express AXP Q1 2026 海图研判</div>
+  <div style="margin-top:6px;">发布日 2026-04-23 · 研判日 2026-07-11 · 数据来源 American Express Q1 2026 官方财报（SEC 8-K Exhibit 99.1/99.2 + 10-Q）+ 电话会 transcript + FY2025 10-K</div>
+</footer>
+
+<script>
+let curTheme = 'light';
+function toggleTheme() {
+  curTheme = curTheme === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', curTheme);
+  renderCharts();
+}
+
+const palette = {
+  light: { accent: '#8a9a8e', accent2: '#7b8fa0', accent3: '#b08d7a', gold: '#b9a06a', red: '#b87070', green: '#7a9a7a', grid: '#e5ddd5', text: '#7a706a' },
+  dark:  { accent: '#8a9a8e', accent2: '#8fabbf', accent3: '#c9a48e', gold: '#c9b07a', red: '#c08080', green: '#8aaa8a', grid: '#3e3a35', text: '#a09890' }
+};
+
+let charts = {};
+function renderCharts() {
+  Object.values(charts).forEach(c => c && c.destroy && c.destroy());
+  charts = {};
+  const p = palette[curTheme];
+  Chart.defaults.color = p.text;
+  Chart.defaults.borderColor = p.grid;
+
+  const quarters = ['Q1 25','Q2 25','Q3 25','Q4 25','Q1 26'];
+  const rev = [16.97, 17.86, 18.43, 18.98, 18.91];
+  const yoy = [8, 9, 11, 10, 11];
+  charts.rev = new Chart(document.getElementById('chartRev'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { type:'bar', label: '总营收 ($B)', data: rev, backgroundColor: p.accent + 'CC', yAxisID: 'y' },
+      { type: 'line', label: 'YoY %', data: yoy, borderColor: p.red, backgroundColor: p.red, tension: 0.3, yAxisID: 'y1' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false }, y1: { position: 'right', grid: { drawOnChartArea: false }, ticks: { callback: v => v + '%' } } } }
+  });
+
+  charts.margin = new Chart(document.getElementById('chartMargin'), {
+    type: 'line',
+    data: { labels: quarters, datasets: [
+      { label: '税前利润率 %', data: [19.6, 19.9, 20.8, 16.3, 20.0], borderColor: p.accent3, backgroundColor: p.accent3 + '22', tension: 0.3, fill: false },
+      { label: '净利率 %', data: [15.2, 16.2, 15.8, 13.0, 15.7], borderColor: p.green, backgroundColor: p.green + '22', tension: 0.3, fill: false }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false, ticks: { callback: v => v + '%' } } } }
+  });
+
+  charts.segment = new Chart(document.getElementById('chartSegment'), {
+    type: 'doughnut',
+    data: {
+      labels: ['美国消费 USCS', '商业服务 CS', '国际卡 ICS', '全球网络 GMNS'],
+      datasets: [{ data: [9.123, 4.321, 3.532, 2.004], backgroundColor: [p.accent, p.accent2, p.accent3, p.gold] }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { font: { size: 11 } } } } }
+  });
+
+  charts.eps = new Chart(document.getElementById('chartEPS'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { label: '摊薄 EPS ($)', data: [3.64, 4.08, 4.14, 3.53, 4.28], backgroundColor: p.accent2 + 'CC' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: false } } }
+  });
+
+  buildSankey();
+}
+
+function buildSankey() {
+  const p = palette[curTheme];
+  const labels = ['非利息收入 14,215','净利息收入 4,692','总营收 18,907','信贷拨备 1,251','运营费用 13,878','税前利润 3,778','所得税 807','GAAP 净利 2,971'];
+  const data = {
+    type: 'sankey',
+    orientation: 'h',
+    node: { pad: 16, thickness: 20, line: { color: p.grid, width: 0.5 }, label: labels, color: [p.accent, p.accent2, p.green, p.red, p.red, p.green, p.red, p.green] },
+    link: {
+      source: [0, 1, 2, 2, 2, 5, 5],
+      target: [2, 2, 3, 4, 5, 6, 7],
+      value:  [14215, 4692, 1251, 13878, 3778, 807, 2971],
+      color: [p.accent+'55', p.accent2+'55', p.red+'55', p.red+'55', p.green+'66', p.red+'55', p.green+'66']
+    }
+  };
+  const layout = { font: { size: 12, color: p.text }, paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)', margin: { l: 10, r: 10, t: 10, b: 10 } };
+  Plotly.react('sankey', [data], layout, { displayModeBar: false, responsive: true });
+}
+
+renderCharts();
+</script>
+
+</body>
+</html>

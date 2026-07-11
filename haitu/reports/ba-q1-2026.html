@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-07-10 · Boeing Q1 2026 财报已于 2026-04-22 发布 -->
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boeing BA Q1 2026 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+<meta name="description" content="全球商用航空双寡头之一（与空客对垒）· 造飞机+卖零件+修飞机+造武器的重资产长周期生意 · $695B 创纪录订单 + 认证壁垒几十年。Q1 净营收 $22.2B（+14%）· 防务扭亏(3.1%) + 服务 18% 高毛利托底 · 全年重申正 FCF $1B–$3B 指引。但经营利润 $448M 几乎被 $616M 利息吞噬 · $47B 有息债务 + $26B 净负债 + 薄权益 + 认证反复跳票 · 复苏已被 $222 股价提前定价——伟大生意，但股价已替它买好返程票。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Boeing BA Q1 2026 海图研判 · 海图夜读">
+<meta property="og:description" content="全球商用航空双寡头之一 · $695B 创纪录订单 + 认证壁垒。Q1 净营收 $22.2B（+14%）· 防务扭亏 + 服务高毛利托底 · 重申正 FCF 指引。但经营利润 $448M 几乎被 $616M 利息吞噬 · $47B 债务 + $26B 净负债 · 复苏已被 $222 股价提前定价——伟大生意，但股价已替它买好返程票。">
+<meta property="og:url" content="https://jacexie.github.io/haitu/reports/ba-q1-2026.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Boeing BA Q1 2026 海图研判 · 海图夜读">
+<meta name="twitter:description" content="全球商用航空双寡头 · $695B 订单 + 认证壁垒。Q1 净营收 $22.2B（+14%）· 防务扭亏 + 服务托底 · 重申正 FCF。但经营利润几乎被利息吞噬 · $47B 债务 + $26B 净负债 · 复苏已被 $222 股价提前定价。">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root { --bg:#f5f0eb; --bg2:#ece6df; --card:#ffffff; --card2:#f8f5f1; --border:#d9d0c7; --text:#4a4340; --text2:#7a706a; --text3:#a89f98; --accent:#8a9a8e; --accent2:#7b8fa0; --accent3:#b08d7a; --rose:#c09090; --gold:#b9a06a; --red:#b87070; --green:#7a9a7a; --shadow:rgba(0,0,0,0.06); --chart-grid:#e5ddd5; }
+[data-theme="dark"] { --bg:#1e1c1a; --bg2:#28251f; --card:#2e2a25; --card2:#363230; --border:#4a4540; --text:#d4ccc4; --text2:#a09890; --text3:#706860; --accent:#8a9a8e; --accent2:#8fabbf; --accent3:#c9a48e; --rose:#c09090; --gold:#c9b07a; --red:#c08080; --green:#8aaa8a; --shadow:rgba(0,0,0,0.3); --chart-grid:#3e3a35; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', serif; line-height: 1.75; font-size: 14.5px; transition: background .35s, color .35s; }
+a { color: var(--accent2); text-decoration: none; }
+.theme-bar { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); }
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+.toggle-switch { position: relative; width: 44px; height: 22px; background: var(--border); border-radius: 11px; cursor: pointer; transition: background .3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: var(--card); border-radius: 50%; transition: transform .3s; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+
+.hero { padding: 48px 24px 36px; text-align: center; border-bottom: 1px solid var(--border); }
+.hero-tag { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 3px 14px; border-radius: 20px; margin-bottom: 18px; }
+.hero h1 { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.pill { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: 'Segoe UI', sans-serif; font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow); }
+.pill strong { color: var(--text); }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle { font-size: 18px; font-weight: 700; color: var(--accent3); margin-bottom: 20px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+.stitle::before { content: ''; display: block; width: 4px; height: 20px; background: var(--accent3); border-radius: 2px; }
+
+.haitu-quip { display: flex; align-items: center; gap: 18px; background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 18px 24px; margin: 24px 0; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-quote { flex: 1; }
+.haitu-portrait { font-size: 15px; line-height: 1.65; color: var(--text); margin-bottom: 6px; font-weight: 600; }
+.haitu-rating-line { font-size: 13px; color: var(--text2); font-family: 'Segoe UI', sans-serif; }
+.rating-badge { display: inline-block; padding: 2px 12px; border-radius: 12px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; margin-left: 4px; }
+.rating-hold { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+
+.haitu-essay { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 28px 32px; margin: 24px 0 20px; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-essay-header { display: flex; align-items: center; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.haitu-avatar-sm { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); background: var(--red); box-shadow: 0 2px 8px rgba(184,112,112,0.2); }
+.haitu-name-lg { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 28px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 4px; }
+.haitu-essay-tag { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; }
+.haitu-essay-body { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 15px; line-height: 2.0; color: var(--text); }
+.haitu-essay-body p { margin-bottom: 14px; }
+.haitu-essay-body p.lead { font-size: 16px; font-style: italic; color: var(--text2); margin-bottom: 18px; }
+.haitu-essay-body strong { color: var(--text); font-weight: 700; }
+.haitu-essay-body h4 { font-size: 14px; color: var(--accent3); margin: 18px 0 10px; font-family: 'Segoe UI', sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+.haitu-sign { text-align: right; margin-top: 18px; font-family: 'Georgia', serif; font-size: 14px; color: var(--text2); font-style: italic; }
+.haitu-disc { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); font-style: italic; line-height: 1.7; }
+
+.stock-snap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px; }
+.snap-item { text-align: center; }
+.snap-label { font-family: 'Segoe UI', sans-serif; font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.snap-val { font-family: 'Segoe UI', sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+.snap-val.up { color: var(--green); }
+.snap-val.dn { color: var(--red); }
+.snap-sub { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow); }
+.kpi-l { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.badge { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+.up { background: rgba(122,154,122,.15); color: var(--green); }
+.dn { background: rgba(184,112,112,.15); color: var(--red); }
+.nt { background: rgba(123,143,160,.15); color: var(--accent2); }
+
+.tbl-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow); }
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI', sans-serif; font-size: 13px; }
+.tbl th { background: var(--card2); color: var(--text3); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); background: var(--card2); }
+
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); }
+.ctitle { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 260px; }
+
+.cmt { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 26px; line-height: 1.95; font-size: 14px; box-shadow: 0 1px 4px var(--shadow); color: var(--text); }
+.cmt p { margin-bottom: 14px; }
+.cmt p:last-child { margin-bottom: 0; }
+.cmt strong { color: var(--text); }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+
+.bscore { display: flex; align-items: center; gap: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; margin-bottom: 12px; box-shadow: 0 1px 4px var(--shadow); }
+.circle { width: 62px; height: 62px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; flex-shrink: 0; border: 3px solid; font-family: 'Segoe UI', sans-serif; }
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 4px; color: var(--text); }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.moat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+.moat-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); border-left: 4px solid var(--accent); }
+.moat-card.wide { border-left-color: var(--green); }
+.moat-card.narrow { border-left-color: var(--gold); }
+.moat-card.none { border-left-color: var(--red); }
+.moat-card h5 { font-size: 13px; color: var(--text); margin-bottom: 6px; }
+.moat-card .moat-rate { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.moat-card.wide .moat-rate { background: rgba(122,154,122,.18); color: var(--green); }
+.moat-card.narrow .moat-rate { background: rgba(185,160,106,.18); color: var(--gold); }
+.moat-card.none .moat-rate { background: rgba(184,112,112,.18); color: var(--red); }
+.moat-card p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+
+.ec-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 14px; box-shadow: 0 1px 3px var(--shadow); }
+.ec-badge { flex-shrink: 0; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-top: 2px; font-family: 'Segoe UI', sans-serif; }
+.ec-bull { background: rgba(122,154,122,.18); color: var(--green); }
+.ec-bear { background: rgba(184,112,112,.18); color: var(--red); }
+.ec-neut { background: rgba(185,160,106,.18); color: var(--gold); }
+.ec-body { flex: 1; }
+.ec-title { font-weight: 600; color: var(--text); margin-bottom: 3px; font-size: 14px; }
+.ec-note { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.dcf-note { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.dcf-note strong { color: var(--text); }
+
+.scorecard { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow); }
+.score-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.score-card { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px; }
+.score-letter { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Segoe UI', sans-serif; font-weight: 800; font-size: 22px; flex-shrink: 0; border: 3px solid; }
+.s-a { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.12); }
+.s-bp { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.06); }
+.s-b { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.10); }
+.s-bm { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.06); }
+.s-c { color: var(--red); border-color: var(--red); background: rgba(184,112,112,.08); }
+.score-body h4 { font-size: 13px; color: var(--text); margin-bottom: 4px; }
+.score-body p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+.flag-row { margin-top: 16px; padding: 12px 16px; background: rgba(184,112,112,.08); border: 1px solid rgba(184,112,112,.3); border-radius: 8px; font-size: 13px; color: var(--text2); }
+.flag-row strong { color: var(--red); }
+
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center; box-shadow: 0 1px 4px var(--shadow); }
+.pbox .pl { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; }
+.pbox .pv { font-family: 'Segoe UI', sans-serif; font-size: 28px; font-weight: 800; margin-bottom: 5px; }
+.pbox .pn { font-size: 12px; color: var(--text3); line-height: 1.5; }
+.pc { color: var(--red); } .pf { color: var(--gold); } .ps { color: var(--green); }
+
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.risk-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); position: relative; overflow: hidden; }
+.risk-card::before { content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent); }
+.risk-card.r1::before { background: var(--green); }
+.risk-card.r2::before { background: rgba(122,154,122,.6); }
+.risk-card.r3::before { background: var(--gold); }
+.risk-card.r4::before { background: var(--rose); }
+.risk-card.r5::before { background: var(--red); }
+.risk-card h5 { font-size: 14px; margin-bottom: 6px; color: var(--text); }
+.risk-score { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.r1 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r2 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r3 .risk-score { background: rgba(185,160,106,.18); color: var(--gold); }
+.r4 .risk-score { background: rgba(192,144,144,.18); color: var(--rose); }
+.r5 .risk-score { background: rgba(184,112,112,.18); color: var(--red); }
+.risk-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+footer { background: var(--card2); border-top: 1px solid var(--border); padding: 24px; text-align: center; color: var(--text3); font-size: 12px; margin-top: 40px; line-height: 1.8; }
+@media (max-width: 768px) { .cgrid,.pgrid { grid-template-columns: 1fr; } .hero h1 { font-size: 22px; } .kpi-grid { grid-template-columns: 1fr 1fr; } .stock-snap { grid-template-columns: 1fr 1fr; } .haitu-essay-header { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/BA" target="_blank" rel="noopener" title="在雪球查看 BA 实时行情">雪球 BA</a>
+  </div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">Q1 2026 (自然季，2026年3月31日止) 财报发布 · 2026-04-22 &nbsp;|&nbsp; 海图研判 · 2026-07-11</div>
+  <h1>Boeing BA · 2026 Q1 财报深度分析</h1>
+  <div class="hero-sub">NYSE: BA &nbsp;|&nbsp; 自然季截至 2026-03-31 &nbsp;|&nbsp; 价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill">股价 <strong>$222.28</strong> <span style="color:var(--red)">距高 -13%</span></div>
+    <div class="pill">市值 <strong>~$175B</strong></div>
+    <div class="pill">Q1 净营收 <strong>$22.2B</strong> <span style="color:var(--green)">+14%</span></div>
+    <div class="pill">核心 EPS <strong>($0.20)</strong> <span style="color:var(--green)">亏损收窄</span></div>
+    <div class="pill">GAAP 经营利润率 <strong>2.0%</strong></div>
+    <div class="pill">净负债 <strong>-$26.3B</strong> <span style="color:var(--red)">重杠杆</span></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 海图页首短评 ═══ -->
+<div class="haitu-quip">
+  <div class="haitu-quote">
+    <div class="haitu-portrait">全球商用航空双寡头之一（与空客对垒）——一门造飞机 + 卖零件 + 修飞机 + 造武器的重资产长周期生意。$695B 创纪录订单 + 认证壁垒几十年，护城河极深；但过去七年被 737 MAX 两起空难、门塞事故、罢工反复击穿，如今在废墟上重建现金流。Q1 净营收 $22.2B（+14%）+ 防务扭亏（3.1%）+ 服务 18% 高毛利托底 + 重申全年正 FCF $1B–$3B 指引。但经营利润 $448M 几乎被 $616M 利息吞噬，$47B 有息债务 + $26B 净负债 + 薄权益 + 认证反复跳票——复苏已被 $222 股价提前定价。</div>
+    <div class="haitu-rating-line">评级：<span class="rating-badge rating-hold">持有观望</span> · 12 个月概率加权目标价 $214（-4%）· 会赢的伟大生意，对垒重净负债 + 认证跳票 + 复苏已被现价买单的满估值——好生意，但股价已替它买好返程票</div>
+  </div>
+</div>
+
+<!-- ═══ 市场数据快照 ═══ -->
+<div class="section">
+  <div class="stitle">市场数据快照（2026-07-10 收盘）</div>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">股价（美元）</div><div class="snap-val">$222.28</div><div class="snap-sub">2026-07-10 · 距 52 周高 -13%</div></div>
+    <div class="snap-item"><div class="snap-label">市值</div><div class="snap-val">~$175B</div><div class="snap-sub">787.9M 股 × $222.28</div></div>
+    <div class="snap-item"><div class="snap-label">TTM GAAP P/E</div><div class="snap-val nt">~108x</div><div class="snap-sub">⚠️ 被一次性项目严重扭曲</div></div>
+    <div class="snap-item"><div class="snap-label">Forward P/E (2027E)</div><div class="snap-val nt">~52x</div><div class="snap-sub">2028E ~27x · 复苏定价</div></div>
+    <div class="snap-item"><div class="snap-label">P/S (TTM)</div><div class="snap-val">~1.9x</div><div class="snap-sub">EV/Sales ~2.2x</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间</div><div class="snap-val">$176.77 - $254.35</div><div class="snap-sub">中位偏上</div></div>
+    <div class="snap-item"><div class="snap-label">股息率</div><div class="snap-val dn">0%</div><div class="snap-sub">2020-03 起停发普通股股息</div></div>
+    <div class="snap-item"><div class="snap-label">FCF Yield (TTM)</div><div class="snap-val dn">负</div><div class="snap-sub">2026E 指引正 $1-3B → ~0.6-1.7%</div></div>
+    <div class="snap-item"><div class="snap-label">现金 + 可交易证券</div><div class="snap-val">$20.9B</div><div class="snap-sub">2026-03-31 末</div></div>
+    <div class="snap-item"><div class="snap-label">有息负债合计</div><div class="snap-val dn">$47.2B</div><div class="snap-sub">短债 2.86 + 长债 44.35</div></div>
+    <div class="snap-item"><div class="snap-label">真实净负债</div><div class="snap-val dn">-$26.3B</div><div class="snap-sub">⚠️ 净负债，绝非零负债</div></div>
+    <div class="snap-item"><div class="snap-label">总 backlog（订单）</div><div class="snap-val up">$695B</div><div class="snap-sub">创纪录 · 6,100+ 架待交付</div></div>
+  </div>
+  <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">数据时点：股价 <strong>$222.28（2026-07-10 收盘）</strong>· 财务数据来源 Boeing Q1 2026 官方财报（SEC 8-K Ex-99.1 新闻稿 + Form 10-Q，2026-04-22 发布，自然季截至 <strong>2026-03-31</strong>）· 货币 USD 单口径。波音财年即自然年（12 月 31 日止），无财年错位。⚠️ 波音是<strong>显著净负债</strong>（有息负债 $47.2B ≫ 现金+证券 $20.9B，真实净负债 -$26.3B），股东权益仅 $6.0B 薄如纸——与"现金堡垒"叙事截然相反。TTM/GAAP P/E 因 2025Q3 的 $4.9B 777X 计提与 2025Q4 的 $9.6B 卖 Jeppesen 收益而严重失真，不具参考意义。</p>
+</div>
+
+<!-- ═══ Q1 2026 KPI ═══ -->
+<div class="section">
+  <div class="stitle">Q1 2026 核心业绩（USD · 自然季截至 2026-03-31）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">总营收</div><div class="kpi-v">$22.22B</div><span class="badge up">+14% YoY</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">产品 $19.0B + 服务 $3.2B</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 经营利润</div><div class="kpi-v">$448M</div><span class="badge dn">-3%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">经营利润率 2.0%（vs 2.4%）</div></div>
+    <div class="kpi"><div class="kpi-l">核心经营利润(NonGAAP)</div><div class="kpi-v">$293M</div><span class="badge up">+47%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">核心利润率 1.3%（vs 1.0%）</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 净亏损（合并）</div><div class="kpi-v">($7M)</div><span class="badge nt">近盈亏平衡</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">归属普通股 ($90M)（扣优先股息）</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 摊薄 EPS</div><div class="kpi-v">($0.11)</div><span class="badge up">vs ($0.16)</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">同比收窄</div></div>
+    <div class="kpi"><div class="kpi-l">核心 EPS(NonGAAP)</div><div class="kpi-v">($0.20)</div><span class="badge up">vs ($0.49)</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">剔 FAS/CAS 养老金项</div></div>
+    <div class="kpi"><div class="kpi-l">利息与债务费用</div><div class="kpi-v">($616M)</div><span class="badge up">-13%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">随降债下降（vs $708M）</div></div>
+    <div class="kpi"><div class="kpi-l">研发费用</div><div class="kpi-v">$903M</div><span class="badge nt">民机 $603M</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">防务 $174M + 服务 $22M</div></div>
+    <div class="kpi"><div class="kpi-l">经营现金流 OCF</div><div class="kpi-v">($179M)</div><span class="badge up">大幅改善</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">vs Q1 2025 ($1,616M)</div></div>
+    <div class="kpi"><div class="kpi-l">自由现金流 FCF</div><div class="kpi-v">($1.45B)</div><span class="badge up">vs ($2.29B)</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">Capex $1.28B 加大投产</div></div>
+    <div class="kpi"><div class="kpi-l">民机交付</div><div class="kpi-v">143 架</div><span class="badge up">+10%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">737:114 / 787:15 / 777:8</div></div>
+    <div class="kpi"><div class="kpi-l">摊薄加权股数</div><div class="kpi-v">788.0M</div><span class="badge dn">+4.6%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">2024 增发稀释（vs 753.4M）</div></div>
+  </div>
+</div>
+
+<!-- ═══ 看穿桥接 高亮框 ═══ -->
+<div class="section">
+  <div class="stitle">本季必看 · 两个"看穿"：利息吞噬经营利润、别被一次性烟花晃眼</div>
+  <div class="cmt">
+    <p><strong>波音这份财报有两个必须"看穿"的地方，看不穿就会把"复苏"读成"已经好了"，或把"盈亏平衡"读成"崩塌"。</strong></p>
+    <p><strong>看穿一：本季经营利润 $448M 几乎被 $616M 利息整个吃掉——这就是 $47B 债务的代价。</strong> 很多人看到"GAAP 净亏损仅 ($7M)、近盈亏平衡"就松一口气，却没意识到：<span class="hl-t">波音的经营层面本季确实赚了 $448M，但债务利息一项就要 $616M</span>，加回其他收入 $194M 后税前仅剩 $26M，扣所得税 $33M 就翻成合并净亏损 ($7M)。波音的问题从来不是单季盈亏，而是它背着一座债务大山在爬坡——每一分经营利润先要交给债主。好消息是本季实打实偿债 $6.95B，去杠杆是真金白银在推进。</p>
+    <div class="tbl-wrap" style="margin:14px 0;">
+      <table class="tbl">
+        <tr><th>利润桥接（$M）</th><th>Q1 2026</th><th>说明</th></tr>
+        <tr><td>总营收</td><td>22,217</td><td>+14% YoY</td></tr>
+        <tr><td><span class="warn-t">减：营业成本</span></td><td><span class="warn-t">(19,671)</span></td><td>毛利约 11.5%</td></tr>
+        <tr class="hl"><td>毛利（营收−总成本）</td><td>2,546</td><td>—</td></tr>
+        <tr><td>减：研发 + 销管及其他</td><td>(2,098)</td><td>研发 $903 + 期间费用 $1,195</td></tr>
+        <tr class="hl"><td>GAAP 经营利润</td><td>448</td><td>经营利润率 2.0%</td></tr>
+        <tr><td>加：其他收入净额</td><td>194</td><td>投资收益等</td></tr>
+        <tr><td><span class="warn-t">减：利息与债务费用</span></td><td><span class="warn-t">(616)</span></td><td>⚠️ 几乎吞掉全部经营利润</td></tr>
+        <tr><td>减：所得税</td><td>(33)</td><td>税前仅 $26M</td></tr>
+        <tr class="hl"><td><strong>GAAP 合并净亏损</strong></td><td><strong>(7)</strong></td><td><strong>实质盈亏平衡线上</strong></td></tr>
+      </table>
+    </div>
+    <p><strong>看穿二：近 5 季 EPS 从 -7.14 到 +10.23 的过山车，全是一次性烟花，别被晃眼。</strong> <span class="hl-t">2025 Q3 计提 $4.9B 税前 777X 费用（EPS 影响 -$6.45），2025 Q4 确认卖 Digital Aviation Solutions（Jeppesen）给 Thoma Bravo 的 $9.6B 税前处置收益（EPS 影响 +$11.83）</span>——一负一正都是烟花。剔掉这两笔，FY2025 核心 EPS 只有约 $1.19，底层仍在盈亏平衡线上挣扎。<strong>所以看波音，别看单季 GAAP 净利，要看：① 经营利润率的方向（核心利润率 1.0%→1.3% 在改善）；② 现金流（FCF 从 -$2.29B 收窄到 -$1.45B）；③ 交付与产率（143 架、+10%，737 向 47/月爬）。</strong>这三条才是复苏的真信号。</p>
+  </div>
+</div>
+
+<!-- ═══ 趋势图 ═══ -->
+<div class="section">
+  <div class="stitle">关键指标趋势</div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">总营收（$B）& YoY 增速（近 5 季）</div><div class="cwrap"><canvas id="chartRev"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">GAAP 经营利润率趋势（%，一次性项目致剧烈波动）</div><div class="cwrap"><canvas id="chartMargin"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">Q1 2026 三大分部营收拆分（$B）</div><div class="cwrap"><canvas id="chartSegment"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">摊薄 EPS：GAAP vs 核心（近 5 季 · $）</div><div class="cwrap"><canvas id="chartEPS"></canvas></div></div>
+  </div>
+</div>
+
+<!-- ═══ 桑基图 ═══ -->
+<div class="section">
+  <div class="stitle">Q1 2026 资金流向桑基图（$B）</div>
+  <div class="ccard">
+    <div id="sankey" style="width:100%;height:480px;"></div>
+    <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">说明：总营收 $22.22B → 营业成本 $19.67B（抵减）+ 毛利 $2.55B → 研发 $0.90B + 期间费用（销管及其他）$1.20B + 经营利润 $0.45B。经营利润 $0.45B 加回其他收入净额 $0.19B，得税前池 $0.64B → <strong>利息费用 $0.62B（几乎吞掉全部经营利润）</strong>+ 税前净额 $0.026B。该 $26M 税前结余扣除所得税 $33M 后为合并净亏损 ($7M)——即所得税略高于税前利润，本季实质在盈亏平衡线上。这张图最刺眼的一条流量就是<strong>经营利润几乎等额流向利息</strong>：这正是波音 $47B 有息债务 / $26B 净负债沉重资本结构的直接体现，也是"去杠杆 + 恢复 FCF"必须放在股东回报之前的根本原因。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 1 ═══ -->
+<div class="section">
+  <div class="stitle">模块 1 · 公司概览与背景</div>
+  <div class="cmt">
+    <p><strong>The Boeing Company</strong>（NYSE: BA），总部弗吉尼亚阿灵顿，行业 Industrials / 航空航天与防务。成立于 1916 年（西雅图），是全球最大的航空航天企业之一，财年即自然年（12 月 31 日止），无财年错位。最新已发布财报为 <strong>2026 年第一季度（截至 2026-03-31，2026-04-22 盘前发布）</strong>，CEO Kelly Ortberg（2024-08 上任）、CFO 由 Brian West 交棒 Jay Malave。</p>
+
+    <p><strong>核心叙事</strong>：波音与<span class="hl-t">空客（Airbus）构成全球商用干线客机双寡头</span>——这是一门"造飞机（BCA 民机）+ 造武器（BDS 防务航天）+ 修飞机卖零件（BGS 全球服务）"的重资产、长周期、认证壁垒极高的生意。护城河本应极深，但<span class="warn-t">过去七年，波音被自身反复击穿</span>：2018/2019 两起 737 MAX 空难（346 人罹难、全球停飞）、2024-01 阿拉斯加航空 737 门塞脱落事故、2024 年 9-11 月 IAM 机械师大罢工——把 2024 年推入危机深渊（全年经营亏损 ($10,707M)、净亏 ($11,829M)）。如今波音正在这片废墟上，<strong>用"安全与质量优先 + 去杠杆 + 恢复自由现金流"的路线，一步步重建。</strong></p>
+
+    <p><strong>三大业务分部</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>商用飞机（BCA）</strong>——737/787/777/777X，Q1 营收 $9.20B（+13%），仍亏损（-6.1%），是复苏成败的核心变量，$575B 订单、6,100+ 架待交付</li>
+      <li><strong>防务、航天与安全（BDS）</strong>——Q1 营收 $7.60B（+21%），经营利润 $233M（+50%），利润率 3.1% 持续扭亏企稳；Artemis II（SLS 核心级）、PAC-3、MQ-28 等</li>
+      <li><strong>全球服务（BGS）</strong>——Q1 营收 $5.37B（+6%），经营利润 $971M，利润率 <span class="hl-t">18.1% 高毛利现金奶牛</span>；已剥离数字航空解决方案（Jeppesen）</li>
+    </ul>
+
+    <p><strong>股权结构</strong>：单一类别普通股，当前在外普通股 <strong>787.9M</strong> 股（已发行 1,012.26M − 库存股 224.34M）。<span class="warn-t">2024-10 大额增发约 $24B 股权（约 1.125 亿普通股 + $5.75B 6.00% 强制可转换优先股）以补充流动性度过危机</span>——这是摊薄股数从 FY2023 约 6.0 亿飙升至当前 7.88 亿的原因，老股东被稀释近 30%。</p>
+
+    <p><strong>能力圈检验</strong>：生意本身极清晰（全球就两家能造干线客机，认证壁垒几十年，需求由航空客运长期增长驱动）。但<span class="warn-t">两块难点：(1) 产率爬坡与认证节点的执行确定性——737-7/-10 与 777X 首交付已第三次推迟到 2027，历史上波音在"承诺时间表"上信誉不佳；(2) 薄如纸的股东权益（$6.0B）+ $26B 净负债，使得任何一次新的质量/安全事故或宏观冲击都会被资本结构放大。</span>能看懂生意，但复苏路径的时点难测——这是典型的"好生意 + 难时点"。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 2 ═══ -->
+<div class="section">
+  <div class="stitle">模块 2 · 管理层评估</div>
+
+  <div class="bscore">
+    <div class="circle cw">B</div>
+    <div class="bd">
+      <h4>Kelly Ortberg · CEO（2024-08 至今）</h4>
+      <p>航空业老兵（Rockwell Collins 前 CEO，工程师出身），2024-08 临危受命接替 Dave Calhoun。上任后确立<span class="hl-t">"安全与质量优先、稳定产率、修复文化、去杠杆恢复现金流"</span>的秩序恢复路线，主导 2024-10 的 $24B 增发续命、并购并表 Spirit AeroSystems（回收关键机身供应链）、剥离非核心的 Jeppesen 换回现金。海图判断：方向明确、执行务实，是把波音从"深渊"拉回"爬坡"的合适人选。但他继承的是一个被前任们（MAX 危机、门塞事故）反复透支信誉的烂摊子，且认证节点仍在跳票——<strong>方向给 B+，但历史包袱与执行兑现度尚待时间检验，综合 B。</strong></p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cr">C</div>
+    <div class="bd">
+      <h4>资本配置纪律 · 危机模式下的"先止血"</h4>
+      <p>
+      <strong>股东回报三年为零、且大额稀释</strong>：普通股股息自 2020-03 停发、股票回购自 2019 年停，至今未恢复；2024-10 反而增发约 $24B，摊薄股数从约 6.0 亿升至 7.88 亿（+近 30%）。<br>
+      <strong>当前唯一优先级是修复资产负债表</strong>：本季偿债 $6.95B、利息费用随降债从 $708M 降至 $616M，全年重申正 FCF $1B–$3B 指引（若达成将是 2018 年以来首个全年正 FCF）。<br>
+      <span class="warn-t">评价</span>：在危机语境下，"先止血、先去杠杆、先修现金流"是<strong>正确的资本配置排序</strong>——不派息不回购是负责任的。但从"股东实际拿到多少"的冷冰冰口径看，过去三年是<strong>净负回报（大额稀释 + 零分红）</strong>，资本配置纪律维度只能给 C。看点在于：管理层能否兑现产率与 FCF 承诺，把"止血"变成"造血"。
+      </p>
+    </div>
+  </div>
+
+  <div class="cmt">
+    <p><strong>长期主义测试</strong>：✅ Ortberg 把"安全/质量/稳定产率"置于短期交付冲量之上（本季主动披露 25 架受线束不合规影响的 737 返工，不掩饰），体现对长期声誉的重建意识。<strong>坦诚度</strong>：电话会披露详尽、指引偏保守不粉饰（主动说明 Q2 仍将净流出、Spirit 并表 -$1B 现金拖累）。<strong>利益绑定</strong>：Ortberg 薪酬与安全里程碑、产率、FCF 强挂钩，方向正确。<span class="warn-t">历史记录扣分</span>：波音管理层在"认证时间表"上长期兑现不佳（777X 首交付从 2020 一路推到 2027），这是评估其承诺可信度时必须打折的地方。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 3 ═══ -->
+<div class="section">
+  <div class="stitle">模块 3 · 商业模式深度解析</div>
+  <div class="cmt">
+    <p><strong>海图"一句话测试"</strong>：<span class="hl-t">波音是全球仅有的两家能造大型干线客机的公司之一——航空公司排队多年、预付定金、锁定几十年机队；波音靠"卖飞机赚利润 + 几十年卖零件/维修/升级赚高毛利现金流 + 造武器航天赚政府长约"三条腿吃饭，是一门订单能见度以十年计、但执行极难、资本极重的生意。</span></p>
+
+    <p><strong>三分部收入模型（Q1 2026）</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>分部</th><th>Q1 营收</th><th>YoY</th><th>经营利润率</th><th>角色</th></tr>
+        <tr><td>商用飞机 BCA（民机）</td><td>$9.20B</td><td>+13%</td><td><span class="warn-t">-6.1%</span></td><td>成长引擎 · 仍亏 · 复苏核心</td></tr>
+        <tr><td>防务航天 BDS（防务）</td><td>$7.60B</td><td>+21%</td><td>3.1%</td><td>扭亏企稳 · 政府长约压舱</td></tr>
+        <tr><td>全球服务 BGS（服务）</td><td>$5.37B</td><td>+6%</td><td><span class="hl-t">18.1%</span></td><td>现金奶牛 · 高毛利托底</td></tr>
+        <tr><td>未分配及其他</td><td>$0.05B</td><td>—</td><td>亏 ($348M)</td><td>FAS/CAS 调整等</td></tr>
+      </table>
+    </div>
+
+    <p style="margin-top:14px;"><strong>单位经济与议价能力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>民机是"先亏后赚"的长周期模型</strong>——新机型前期研发/认证/产能爬坡巨额投入（会计上用"项目会计 program accounting"摊销），交付放量后靠规模与后市场服务回本。当前 BCA 仍亏，是产率未达经济规模 + 777X 等在投入期</li>
+      <li><strong>服务（BGS）是真正的现金皇冠</strong>——机队一旦交付，几十年的备件、维修、改装、培训、数字化都是波音的高毛利后市场（18.1% 利润率），需求刚性、与新机交付强绑定</li>
+      <li><strong>对航司议价能力</strong>：中高——全球干线客机只有波音/空客二选一，但航司靠"转单空客"施压，波音近年因交付延误在议价上处守势</li>
+      <li><strong>对供应链议价</strong>：中——并购 Spirit AeroSystems 正是为了把关键机身供应链收回内部、掌控质量与节奏（代价是 2026 约 -$1B 现金拖累）</li>
+      <li><strong>需求护城河</strong>：$695B 创纪录订单、6,100+ 架待交付——<span class="hl-t">订单能见度以十年计</span>，这是波音最硬的底牌，也是复苏叙事的地基</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══ 模块 4 ═══ -->
+<div class="section">
+  <div class="stitle">模块 4 · 经济护城河分析（5 维）</div>
+  <div class="moat-grid">
+    <div class="moat-card wide">
+      <h5>1. 有效规模（双寡头）</h5>
+      <span class="moat-rate">宽</span>
+      <p>全球干线客机只有波音/空客两家，新进入者需数十年 + 数百亿投入 + 认证壁垒，几无空间（中国 COMAC 尚在早期）。<strong>趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>2. 无形资产/认证壁垒</h5>
+      <span class="moat-rate">宽</span>
+      <p>FAA/EASA 型号合格证、几十年适航数据、军工安全资质——认证壁垒是最深的护城河。<span class="warn-t">但也因自身质量事故被监管加码审查</span>。<strong>趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>3. 转换成本</h5>
+      <span class="moat-rate">宽</span>
+      <p>航司一旦选定机型，飞行员培训、维修体系、备件库存、机队通用性全部锁定，切换成本极高、以十年计。后市场服务因此刚性。<strong>趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>4. 成本优势</h5>
+      <span class="moat-rate">窄（受损）</span>
+      <p>本应有规模成本优势，但<span class="warn-t">近年因产率不稳、返工、罢工、供应链断点，单位成本反被空客拉开</span>。产率提至 47→52/月 后才可能修复。<strong>趋势：修复中</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>5. 网络效应</h5>
+      <span class="moat-rate">中</span>
+      <p>机队规模越大，后市场服务网络与飞行员/维修人才池越厚，间接强化黏性。但弱于纯网络型生意。<strong>趋势：稳定</strong>。</p>
+    </div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>10 年后护城河会更宽还是更窄？</strong> <span class="hl-t">结构性护城河（双寡头 + 认证壁垒 + 转换成本）极难被侵蚀，10 年后大概率仍在</span>——这是波音"会赢"的根本理由：需求还在（$695B 订单）、对手只有一个（空客也有产能瓶颈）、新玩家进不来。<span class="warn-t">但护城河的"成本优势"这一维被自身反复损伤</span>：产率不稳、质量事故、认证跳票让波音把本该赚的利润和市场份额拱手让给空客。<strong>护城河没塌，但"护城河里的水被自己放掉了不少"——复苏的本质，就是把成本优势与执行力这两块重新蓄满。</strong>定价权：中——双寡头格局本应有定价权，但交付信誉受损使波音近年在与航司谈判中处守势。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 5 ═══ -->
+<div class="section">
+  <div class="stitle">模块 5 · 财务深度分析</div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 12px 0; font-family: 'Segoe UI',sans-serif;">5.1 关键比率（Q1 2026 vs Q1 2025）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>指标</th><th>Q1 2025</th><th>Q1 2026</th><th>变化</th><th>含义</th></tr>
+      <tr><td>总营收</td><td>$19,496M</td><td>$22,217M</td><td><span class="badge up">+14%</span></td><td>交付放量驱动</td></tr>
+      <tr><td>GAAP 经营利润率</td><td>2.4%</td><td>2.0%</td><td><span class="badge dn">-0.4pt</span></td><td>民机亏损拖累</td></tr>
+      <tr><td>核心经营利润率(NonGAAP)</td><td>1.0%</td><td>1.3%</td><td><span class="badge up">+0.3pt</span></td><td>底层在改善</td></tr>
+      <tr><td>核心 EPS</td><td>($0.49)</td><td>($0.20)</td><td><span class="badge up">+$0.29</span></td><td>亏损明显收窄</td></tr>
+      <tr><td>利息与债务费用</td><td>$708M</td><td>$616M</td><td><span class="badge up">-13%</span></td><td>去杠杆见效</td></tr>
+      <tr><td>民机交付</td><td>130 架</td><td>143 架</td><td><span class="badge up">+10%</span></td><td>737 产率提升</td></tr>
+      <tr><td>摊薄加权股数</td><td>753.4M</td><td>788.0M</td><td><span class="badge dn">+4.6%</span></td><td>2024 增发稀释</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;"><strong>ROE / ROIC / 杜邦分析</strong>：本季近盈亏平衡（合并净亏 $7M）、股东权益仅 $5,987M 且含 ($10,266M) 累计其他综合损失扭曲，<strong>ROE / ROIC 在复苏期不具分析意义（分子近零、分母失真）</strong>——强行计算只会误导。波音当前应看的是"经营利润率方向 + 现金流 + 交付/产率"，而非静态回报率。待 2027-2028 盈利正常化后，正常化 ROIC 才有参考价值。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.2 资产负债健康度（2026-03-31 末 · $M）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>2025-12-31 季初</th><th>2026-03-31</th><th>说明</th></tr>
+      <tr><td>现金及等价物</td><td>—</td><td>9,441</td><td>—</td></tr>
+      <tr><td>短期及其他投资（可交易证券）</td><td>—</td><td>11,464</td><td>1 年内到期定存为主</td></tr>
+      <tr class="hl"><td>现金 + 可交易证券合计</td><td>~29,400</td><td>20,905</td><td>偿债 + FCF 流出消耗 $8.5B</td></tr>
+      <tr class="hl"><td>短期借款及长债当期部分</td><td>8,461</td><td>2,855</td><td>本季大幅偿还</td></tr>
+      <tr class="hl"><td>长期债务</td><td>45,637</td><td>44,354</td><td>—</td></tr>
+      <tr class="hl"><td>有息债务合计</td><td>~54,098</td><td>47,209</td><td>本季偿债 $6.95B</td></tr>
+      <tr class="hl"><td><strong>真实净负债</strong></td><td><strong>~-24,698</strong></td><td><strong>-26,304</strong></td><td>⚠️ 净负债非净现金</td></tr>
+      <tr><td>存货（含未交付机在制品）</td><td>—</td><td>87,225</td><td>庞大 · 项目会计特征</td></tr>
+      <tr><td>预收款与进度款（无息负债）</td><td>—</td><td>62,591</td><td>客户预付 · 无息 · 类"浮存"</td></tr>
+      <tr><td>应付账款</td><td>—</td><td>13,713</td><td>—</td></tr>
+      <tr><td>商誉</td><td>—</td><td>17,633</td><td>—</td></tr>
+      <tr><td>股东权益</td><td>5,454</td><td>5,987</td><td>已转正但极薄</td></tr>
+      <tr><td>留存收益 / 累计其他综合损失</td><td>—</td><td>17,162 / (10,266)</td><td>库存股 (27,647)</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">⚠️ <strong>净负债非净现金 · 且本季净负债不降反升——铁律提示</strong>：波音有息负债 $47,209M（短债 $2,855M + 长债 $44,354M，已逐项核对）≫ 现金+证券 $20,905M，<strong>真实净负债 -$26,304M</strong>。注意一个反直觉细节：<span class="warn-t">本季偿债 $6.95B，但净负债从约 -$24.7B 恶化到 -$26.3B</span>——因为现金消耗（-$8.5B）快于债务下降（-$6.9B），根子是 FCF 仍在净流出。另需注意：$62.6B 的"预收款与进度款"是客户预付的无息负债（类"浮存"），是波音重要的运营资金来源，但它对应的是未来必须交付的飞机义务，不能当成净现金。表面无"经营租赁负债"单列科目（作为承租人金额较小、约 $1B 级，分散计入其他负债，本季 10-Q 未单列精确值）；Note 8 的"经营租赁设备净额 $389M"是波音作为出租方的资产，非负债。未动用循环信贷 $10.0B 提供流动性缓冲。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.3 现金流质量（Q1 2026 单季 + FY2025 全年）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>Q1 2025</th><th>Q1 2026</th><th>FY2025 全年</th></tr>
+      <tr><td>经营活动现金流（OCF）</td><td>($1,616M)</td><td>($179M)</td><td>$1,065M</td></tr>
+      <tr><td>- 资本开支 Capex</td><td>($674M)</td><td>($1,275M)</td><td>~$3.0B</td></tr>
+      <tr class="hl"><td>自由现金流（FCF）</td><td>($2,290M)</td><td>($1,454M)</td><td>~-$1.9B（仍净流出）</td></tr>
+      <tr><td>偿还债务</td><td>—</td><td>($6,950M)</td><td>—</td></tr>
+      <tr><td>普通股股息 / 回购</td><td>$0 / $0</td><td>$0 / $0</td><td>$0 / $0</td></tr>
+      <tr><td>优先股股息</td><td>—</td><td>($86M)</td><td>~($345M)</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;"><strong>现金流是波音复苏最真的温度计。</strong> Q1 OCF 从去年同期 ($1,616M) 大幅改善到 ($179M)、FCF 从 ($2,290M) 收窄到 ($1,454M)——方向对。但要清醒：<span class="warn-t">H1 仍将净流出，Q2 预计仍小幅流出"低数亿美元级"，全年正 FCF $1B–$3B 完全押注在下半年 737 产率放量</span>。Capex 本季 $1,275M（大增，投向 Charleston/St. Louis 厂区）是"为未来产能投入"的扩张性支出，不是维护性。若 737 产率如期提到 47/月（夏季）并向 52/月 迈进，全年正 FCF 可期；若产率或认证再跳票，指引就会落空。<strong>这是全年最关键的单一变量。</strong></p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.4 所有者盈余（价值投资口径）</h3>
+  <div class="dcf-note">
+    <p><strong>所有者盈余 = 净利润 + 折旧摊销 + 非现金费用 − 维护性 Capex ± 营运资金 ≈ 正常化 FCF</strong></p>
+    <p>波音当前<span class="warn-t">所有者盈余仍为负</span>：FY2025 报告净利 $2,238M 大幅受 $9.6B 一次性 Jeppesen 处置收益推高（剔除后核心近盈亏平衡），全年 FCF 仍约 -$1.9B。用价值投资口径看，波音<strong>现在还没有真正的"所有者盈余"可分配</strong>——它正处在"把负的所有者盈余修回正"的过程中。</p>
+    <p><strong>正常化展望</strong>：若 737 达 52/月、787 稳 8/月、777X 2027 首交付、防务与服务维持当前利润率，市场共识 2027E EPS $4.25、2028E EPS $8.19，对应正常化 FCF 有望从 2026 的 $1-3B 爬向 2028-2030 的 $8-11B。<span class="hl-t">所有者盈余收益率当期为负 / N.M.，是投资波音"必须用前瞻正常化盈利、而非当期数字"来估值的根本原因</span>——这也是把它归为"复苏期权式标的"的核心。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 6 ═══ -->
+<div class="section">
+  <div class="stitle">模块 6 · 电话会分析（Q1 2026 + 前 2 季度）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">Q1 2026 电话会（2026-04-22）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"重申 2026 全年正自由现金流 $1B–$3B 指引；737 夏季提产至 47/月，中期经 Everett 北线激活向 52/月 迈进"</div><div class="ec-note">若达成将是自 2018 年以来首个全年正 FCF。737 产率路径是全年现金流指引能否兑现的唯一关键杠杆，2026 全年 737 交付目标约 500 架（vs 2025 约 440+ 架，+约 12%）。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"三大分部 backlog 均创纪录，合计 $695B；防务恢复盈利（3.1%）、服务维持 18%+ 高利润率"</div><div class="ec-note">防务经营利润 +50%、服务经营利润率 18.1%——两条"压舱"业务的现金流与盈利为民机爬坡争取了时间与空间。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"25 架受线束不合规影响的 737 已返工并多数交付，不改全年交付目标"</div><div class="ec-note">主动披露质量执行提醒——体现"安全/质量优先"的坦诚，但也提示产率爬坡过程中质量把控与产量的持续张力。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"Q1 FCF 仍 -$1.5B、OCF -$0.2B；现金从 $29.4B 降至 $20.9B（本季偿债 $6.95B），Q2 预计仍净流出"</div><div class="ec-note">上半年仍是净流出，正 FCF 全押下半年。现金消耗快于降债导致净负债不降反升——去杠杆是真的，但节奏受 FCF 制约。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"Spirit 并表 2026 约 -$1B 现金拖累；737-7/-10 与 777X 首交付仍推至 2027（认证反复风险）"</div><div class="ec-note">收回 Spirit 供应链是战略正确但短期烧钱；认证节点第三次推迟，是波音"承诺时间表"信誉的又一次考验，也是复苏叙事的主要下行风险。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q4 2025 电话会（2026-01-27）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"卖 Digital Aviation Solutions（Jeppesen）给 Thoma Bravo 确认 $9.6B 税前收益，Q4 GAAP EPS $10.23 / 核心 $9.92，Q4 FCF 转正 +$0.4B；FY2025 营收 $89.5B（+34%）、全年民机净订单 1,173 架、backlog 创 $682B 纪录"</div><div class="ec-note">Q4 的靓丽数字主要靠一次性处置收益推高，剔除后 FY2025 核心 EPS 仅约 $1.19，底层仍弱。剥离 Jeppesen 使 BGS 未来营收基数缩小。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q3 2025 电话会（2025-10-29）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"777X 计提 $4.9B 税前费用，GAAP LPS ($7.14) / 核心 ($7.47)，777X 首交付推迟至 2027"</div><div class="ec-note">重大项目减值，是近 5 季 EPS 过山车的"负烟花"来源（EPS 影响 -$6.45）。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"季度 OCF 转正 +$1.1B、FCF +$0.2B（近年少见的季度正 FCF）；营收 $23.3B 同比 +30%，737 向 42/月 推进，backlog 升至 $636B"</div><div class="ec-note">罢工后产线恢复、现金状况改善、流动性充裕（信贷额度未动用）——底层复苏轨道在延续。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">指引兑现度追踪</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>历史指引 / 承诺</th><th>最新进展</th><th>评价</th></tr>
+      <tr><td>2026 全年正 FCF $1B–$3B</td><td>Q1 FCF -$1.5B，重申指引、全押下半年</td><td><span class="badge nt">在途</span></td></tr>
+      <tr><td>737 产率 42 → 47（夏季）→ 52/月</td><td>报告期稳定 42/月，夏季目标 47/月</td><td><span class="badge nt">爬坡中</span></td></tr>
+      <tr><td>777X 首交付时间表</td><td>从 2020 一路推迟至 <strong>2027</strong></td><td><span class="badge dn">反复跳票</span></td></tr>
+      <tr><td>737-7/-10 取证</td><td>预计 2026 年内取证、2027 首交付</td><td><span class="badge nt">待兑现</span></td></tr>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>信号汇总</strong>：三季连读，波音是"<span class="hl-t">底层复苏轨道清晰（营收放量 + 防务/服务托底 + 现金流方向改善）+ 一次性项目剧烈扰动 GAAP + 认证节点反复跳票</span>"的组合。管理层坦诚度与方向值得肯定，但<strong>核心悬念只有一个：737 产率能否如期爬到 47→52/月，把全年正 FCF 从"指引"变成"事实"。</strong>这个变量在 2026-07-29 的 Q2 财报里会有第一次关键读数。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 7 ═══ -->
+<div class="section">
+  <div class="stitle">模块 7 · 多模型估值（8 种方法）</div>
+
+  <p style="margin-bottom:14px; font-size:13px; color:var(--text2); line-height:1.8;"><strong>估值前提</strong>：波音当期 EPS 为负、GAAP 利润被一次性项目严重扭曲，<span class="warn-t">常规 P/E 完全失效</span>。市场实际用 2027-2028 复苏 EPS 给它"期权式"定价。以下估值<strong>完全独立推导（基于财报 + 前瞻正常化趋势 + 分部资产），绝不锚定现价</strong>，周期性行业用中周期正常化盈利。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">7.1 估值汇总表（独立估值 · USD · 每股）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>估值方法</th><th>每股公允价</th><th>假设要点</th><th>权重</th></tr>
+      <tr><td>1. 相对估值（P/E）</td><td>$200</td><td>2028E 正常化 EPS $8.19 × 24x 航空复苏倍数（空客约 27x），轻度贴现回当下</td><td>20%</td></tr>
+      <tr><td>2. DCF（基准）</td><td>$160</td><td>FCF 爬坡 2026 ~$2B → 2030 ~$11B，WACC 9-10%，永续 3-3.5%，减净负债 $26.3B</td><td>20%</td></tr>
+      <tr><td>3. 所有者盈余收益率</td><td>$200</td><td>正常化 FCF ~$8B / 5% 要求收益率 = $160B 权益价值 / 788M 股</td><td>12%</td></tr>
+      <tr><td>4. PEG</td><td>不适用</td><td>当期 EPS 为负，PEG 数学上失效；且复苏期增长是"从坑里爬出"，非有机成长</td><td>0%</td></tr>
+      <tr><td>5. DDM</td><td>不适用</td><td>普通股股息自 2020-03 停发，短期不会恢复，无股息可折现</td><td>0%</td></tr>
+      <tr><td>6. NAV / 净资产</td><td>不适用</td><td>股东权益仅 $6B 且被累计综合损失扭曲，工业股价值在特许经营/订单而非净资产</td><td>0%</td></tr>
+      <tr><td>7. 反向 DCF</td><td>现价隐含正常化 FCF <strong>~$10-11B</strong></td><td>$222 → EV ~$201B 隐含波音恢复到近 2018 峰值 FCF 并维持——已定价近乎完全复苏</td><td>18%</td></tr>
+      <tr><td>8. SOTP 分部加总</td><td>$185</td><td>BCA ~$80B（1.5x 复苏营收）+ BDS ~$30B（1x 营收/14x 正常化 EBIT）+ BGS ~$62B（高毛利服务 16-18x）− 净负债 $26.3B</td><td>30%</td></tr>
+      <tr class="hl"><td><strong>加权公允价中位数</strong></td><td><strong>~$200</strong></td><td>估值区间 $160-215 · 中位 ~$200</td><td>100%</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.8;"><strong>与现价对照</strong>：当前 $222.28 vs 加权公允中位 ~$200 · <span class="warn-t">现价溢价约 11%（无折价、无安全边际）</span>——<strong>远不满足价值投资 25% 安全边际门槛，反而在公允价之上</strong>。反向 DCF 是最刺眼的一档：$222 的现价隐含市场认为波音要恢复到接近 2018 年 ~$10-11B 的 FCF 峰值并长期维持。这不是不可能——$695B 订单与双寡头格局支持终局，但需要 737 产率、777X 认证、质量把控每一个节点都不再跳票。<span class="hl-t">换句话说：波音"会赢"是大概率，但当前股价已经把"赢"的大部分果实提前买单了。</span></p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.2 P/E 多档透视表（GAAP 严重失真 → 必做）</h3>
+  <p style="margin-bottom:10px; font-size:13px; color:var(--text2);">波音近 5 季 GAAP EPS 从 -7.14 到 +10.23、GAAP vs 核心口径差异巨大、当期利润为负——完全满足多档透视触发条件：</p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>口径</th><th>EPS / 基数</th><th>P/E（基于 $222.28）</th><th>读数说明</th></tr>
+      <tr><td>TTM GAAP P/E</td><td>TTM EPS ~$2.06</td><td>~108x</td><td>被 Q3 计提 / Q4 处置收益严重扭曲 · <span class="warn-t">失真</span></td></tr>
+      <tr><td>FY2025 GAAP P/E</td><td>$2.48</td><td>~90x</td><td>含 $9.6B 一次性 DAS 收益 · 失真</td></tr>
+      <tr><td>FY2025 核心 P/E</td><td>~$1.19</td><td>~187x</td><td>剔一次性后底层仍微利 · 近乎无意义</td></tr>
+      <tr><td>2026E Forward P/E</td><td>共识 ($0.41)</td><td>N/M（负）</td><td>共识 2026 仍微亏</td></tr>
+      <tr><td>2027E Forward P/E</td><td>共识 $4.25</td><td>~52x</td><td>复苏定价档</td></tr>
+      <tr class="hl"><td><strong>2028E Forward P/E</strong></td><td><strong>共识 $8.19</strong></td><td><strong>~27x</strong></td><td>正常化盈利锚 · 最能反映"期权式估值"</td></tr>
+      <tr><td>P/S (TTM)</td><td>营收 ~$92.2B</td><td>~1.9x</td><td>EV/Sales ~2.2x</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3);"><strong>最可信档</strong>：由于当期盈利为负/失真，波音的合理锚是 <strong>2028E ~27x（正常化）</strong>与 <strong>2027E ~52x（在途复苏）</strong>。对比：空客 Forward P/E ~27x（产率与认证领先）、RTX ~25x、Lockheed ~16.75x、GE Aerospace ~35-40x（纯发动机高毛利高估值）。<span class="hl-t">波音 2028E 27x 与空客当前 27x 相当，但波音在产率、认证进度、资产负债表（净负债 $26B + 薄权益）上明显处劣势——即同样的倍数，波音承担了更大的执行与财务风险。</span></p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.3 12 个月目标价（概率加权）</h3>
+  <div class="pgrid">
+    <div class="pbox"><div class="pl">悲观情景 · 30%</div><div class="pv pc">$150</div><div class="pn">认证再跳票 + FCF 指引落空 + 新质量/安全事故 + 估值压缩<br>距现价 -33%</div></div>
+    <div class="pbox"><div class="pl">基准情景 · 45%</div><div class="pv pf">$215</div><div class="pn">复苏按计划、737 提至 47/月、FY2026 正 FCF 兑现，但估值随去风险而压缩，大致持平<br>距现价 -3%</div></div>
+    <div class="pbox"><div class="pl">乐观情景 · 25%</div><div class="pv ps">$290</div><div class="pn">全面执行 + 737 至 52/月 + FCF 冲向 $8-10B + 市场外推峰值盈利<br>距现价 +30%</div></div>
+  </div>
+  <p style="font-size:13px; color:var(--text2);"><strong>概率加权公允价</strong>：30%×$150 + 45%×$215 + 25%×$290 = <strong>$214</strong>（-4% vs 现价 $222）。无股息叠加（停发）。<span class="warn-t">当前 $222 高于机械首仓 $160、且已在公允中位 $200 之上——不在合理建仓窗口</span>。与卖方共识目标价 $261-273（Buy）相比，海图更谨慎：卖方定价复苏动量，价值投资框架则强调"公允价之上、无安全边际"这一事实。</p>
+</div>
+
+<!-- ═══ 模块 8 ═══ -->
+<div class="section">
+  <div class="stitle">模块 8 · 竞争与行业分析</div>
+  <div class="cmt">
+    <p><strong>全球航空航天与防务格局</strong>：商用干线客机是波音（BA）与空客（Airbus）的<strong>双寡头</strong>——空客近年在产率、交付、认证进度上全面领先，市场份额与净订单占优。发动机端 GE Aerospace / RT'(Pratt) / Safran 主导；防务端与 Lockheed Martin、RTX、Northrop 竞争。真正的长期新变量是中国 COMAC（C919/C929），但短期规模与全球认证尚不构成实质威胁。</p>
+
+    <p><strong>航空航天与防务同业对比（截至 2026-06/07）</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>公司</th><th>Forward P/E</th><th>2026 营收增速</th><th>NTM EV/EBITDA</th><th>核心评价</th></tr>
+        <tr class="hl"><td><strong>Boeing BA</strong></td><td>2027E ~52x / 2028E ~27x</td><td>中双位数（复苏）</td><td>—</td><td>复苏期权 · 重净负债 · 弹性大</td></tr>
+        <tr><td>Airbus（AIR.PA）</td><td>~27x</td><td>中个位数</td><td>—</td><td>民机双寡头领先方 · 产率/认证占优</td></tr>
+        <tr><td>RTX</td><td>~25x</td><td>+6%（~$90.1B）</td><td>~16.7x</td><td>发动机 + 防务 · 稳健</td></tr>
+        <tr><td>Lockheed Martin</td><td>~16.75x</td><td>+5%（~$79.1B）</td><td>~11.85x</td><td>纯防务 · 板块偏低估值</td></tr>
+        <tr><td>GE Aerospace</td><td>~35-40x</td><td>FY25 +18.5%（~$45.9B）</td><td>—</td><td>纯发动机 · 高毛利高估值</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:10px; font-size:12px; color:var(--text3);"><strong>波音的相对定位</strong>：当期近盈亏平衡使常规 P/E 失效，市场按 2027-2028 复苏 EPS 给"期权式"估值。相对空客，波音在产率、认证进度、资产负债表（净负债 $26B + 薄权益）三项上均处劣势——<span class="hl-t">但正因为落后，波音的"复苏弹性"更大（从低基数往上修），加上 $695B 订单与双寡头终局，是多头的核心逻辑</span>。这是一个"追赶者的期权"，赔率取决于执行。</p>
+
+    <p style="margin-top:14px;"><strong>波特五力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>新进入者：</strong>极低（认证 + 资本 + 规模壁垒几十年，COMAC 仍在早期）</li>
+      <li><strong>替代品：</strong>低（干线客机无实质替代，铁路/其他运输不构成竞争）</li>
+      <li><strong>供应商议价：</strong>中（发动机双寡头 GE/RTX 议价强；波音并购 Spirit 正是收回机身供应链话语权）</li>
+      <li><strong>买家议价：</strong>中高（航司靠"转单空客"施压，波音因交付延误处守势）</li>
+      <li><strong>同业竞争：</strong>中（双寡头理性，但空客当前明显占上风，波音在补课）</li>
+    </ul>
+
+    <p><strong>行业顺风</strong>：全球航空客运长期增长（RPK 恢复并超疫情前）、机队更新换代（燃油效率 + 减排）、防务开支上行（地缘紧张）——需求端是波音最坚实的地基，问题在供给端的自我修复。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 9 ═══ -->
+<div class="section">
+  <div class="stitle">模块 9 · 技术面与 K 线分析（次要参考）</div>
+  <div class="cmt">
+    <p><strong>趋势</strong>：BA 从危机低谷震荡修复，当前 $222.28 处于 52 周区间 $176.77–$254.35 的中位偏上，<span class="hl-t">距 52 周高 $254.35 约 -13%、距 52 周低 $176.77 约 +26%</span>。是一只跟随"复苏兑现度"波动的高 beta 大盘股，情绪与消息（认证、事故、产率数据）驱动明显。</p>
+
+    <p><strong>关键价位</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>支撑</strong>：$200（心理 + 公允中位附近）/ $177（52 周低）/ $160（海图首仓机械价）</li>
+      <li><strong>阻力</strong>：$254（52 周高）/ $261-273（卖方共识目标带）/ $290（乐观情景）</li>
+    </ul>
+
+    <p><strong>指标信号</strong>：处于区间中上部，无极端超买超卖；<span class="warn-t">由于股价对认证/产率/事故消息高度敏感，波动率显著高于蓝筹平均</span>。任何一次 Q2 产率不及预期或认证跳票，都可能快速回落至 $180-200。</p>
+
+    <p><strong>注意</strong>：波音的核心驱动是 737 产率爬坡、正 FCF 兑现、777X/737-7/-10 认证节点、以及新的安全/质量事件——技术面完全次要于这些基本面里程碑。价值投资者应以基本面（产率数据 + FCF）为锚，等价格回到有安全边际的区间（$160 附近）而非追高。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 10 ═══ -->
+<div class="section">
+  <div class="stitle">模块 10 · 增长催化剂与前景展望</div>
+  <div class="cmt">
+    <p><strong>短期催化剂（未来 6 个月）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>约 2026-07-29 Q2 2026 财报</strong>——第一次验证 737 是否提到 47/月、H1 FCF 流出幅度、正 FCF 全年指引是否重申（最关键读数）</li>
+      <li><strong>737 产率提至 47/月（夏季）</strong>——FAA 放行产率上限是硬约束，达标是全年正 FCF 的地基</li>
+      <li><strong>737-7 / 737-10 年内取证进展</strong>——若如期，2027 首交付预期强化</li>
+      <li><strong>防务与服务持续盈利</strong>——防务 3.1%、服务 18.1% 若维持，为民机爬坡持续托底</li>
+    </ul>
+
+    <p><strong>长期展望（3-5 年）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>产率满负荷</strong>——737 至 52/月（~624 架/年）、787 稳 8/月、777X 2027 首交付并爬坡，是营收与利润率正常化的核心</li>
+      <li><strong>自由现金流回归峰值</strong>——从 2026 的 $1-3B 向 2028-2030 的 $8-11B 修复，逼近 2018 年水平</li>
+      <li><strong>去杠杆 + 恢复股东回报</strong>——先还债、后（数年内）可能恢复股息/回购，是长期股东价值的关键拐点</li>
+      <li><strong>Spirit 整合兑现</strong>——收回机身供应链后，质量与成本控制改善（短期 -$1B 现金拖累）</li>
+      <li><strong>风险情景</strong>：认证再跳票 / 新质量事故 / 产率爬坡失败 / 宏观衰退压制航司订单</li>
+    </ul>
+
+    <p><strong>TAM 展望</strong>：未来 20 年全球需交付超 4 万架新机（波音/空客各自预测），叠加防务开支上行与万亿级后市场服务，波音的可寻址市场极其广阔。<span class="hl-t">核心问题从来不是"有没有需求"（订单 $695B 已锁定十年），而是"波音能不能把飞机造出来、按时交出去、不再出事"——供给端的自我修复，而非需求端的天花板。</span></p>
+  </div>
+</div>
+
+<!-- ═══ 模块 11 ═══ -->
+<div class="section">
+  <div class="stitle">模块 11 · 风险矩阵</div>
+  <div class="risk-grid">
+    <div class="risk-card r5"><h5>1. 认证与产率执行跳票</h5><span class="risk-score">5 / 5 极高</span><p>737-7/-10、777X 首交付已第三次推至 2027；737 产率 47→52/月 受 FAA 上限与供应链约束。任一跳票直接击穿正 FCF 全年指引，是最大单一风险</p></div>
+    <div class="risk-card r5"><h5>2. 财务/资产负债脆弱性</h5><span class="risk-score">5 / 5 极高</span><p>$47.2B 有息债务 + $26.3B 净负债 + 仅 $6.0B 薄权益 · 利息 $616M/季 几乎吞掉经营利润 · 高利率下再融资压力 · 任何冲击被杠杆放大</p></div>
+    <div class="risk-card r4"><h5>3. 新质量/安全事故</h5><span class="risk-score">4 / 5 高</span><p>门塞事故的阴影未散 · 产率爬坡与质量把控存在天然张力 · 一旦再出事，停飞/监管加码/订单流失会重创复苏叙事</p></div>
+    <div class="risk-card r4"><h5>4. 估值无安全边际</h5><span class="risk-score">4 / 5 高</span><p>现价 $222 高于公允中位 ~$200 · 反向 DCF 已隐含近乎完全复苏（~$10-11B FCF）· 任何不及预期都可能触发估值压缩至 $150-180</p></div>
+    <div class="risk-card r3"><h5>5. 宏观 / 航司周期</h5><span class="risk-score">3 / 5 中</span><p>交付与订单和全球客运、航司资本开支挂钩 · 深度衰退会推迟交付与新订单 · 但 $695B 在手订单提供缓冲</p></div>
+    <div class="risk-card r2"><h5>6. 需求护城河（机会）</h5><span class="risk-score">2 / 5 反向</span><p>$695B 创纪录订单 + 双寡头 + 认证壁垒 + 服务高毛利现金流 · 结构性护城河是复苏的地基与下行的质量底</p></div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>3 个黑天鹅情景</strong>：</p>
+    <ol style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>新的重大安全事故 + 机型停飞</strong>——概率 12% · 股价跌至 $140-160 · 复苏叙事重置、监管加码、订单流失</li>
+      <li><strong>产率爬坡失败 + 正 FCF 指引连续落空 + 评级下调</strong>——概率 15% · 股价跌至 $150-170 · 债务再融资成本上升、稀释风险重现</li>
+      <li><strong>全球深度衰退 + 航司大规模推迟/取消订单</strong>——概率 10% · 股价跌至 $160 · 交付放缓拖累现金流修复</li>
+    </ol>
+
+    <p style="margin-top:10px;"><strong>下行支撑</strong>：$695B 订单 + 双寡头格局 + 认证壁垒 + 防务/服务现金流构成质量底。<span class="hl-t">$176-180（52 周低附近）是较硬的估值支撑</span>。但要清醒：波音不同于稳态蓝筹，它的"底"取决于复苏叙事是否被证伪——若认证/产率/安全出现结构性问题，$140 也并非不可能。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 12 ═══ -->
+<div class="section">
+  <div class="stitle">模块 12 · 股东回报分析</div>
+  <div class="cmt">
+    <p><strong>波音是股东回报分析里最"干净"也最"刺眼"的样本——过去三年，它没有给股东派一分钱股息、没有回购一股，反而在 2024 年大额增发稀释了近 30%。</strong>这不是吝啬，而是危机模式下的必然选择：一家净负债 $26B、经营利润几乎被利息吞噬的公司，第一要务是活下来、还债、修现金流，而不是回报股东。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 18px 0 10px; font-family: 'Segoe UI',sans-serif;">12.1 公司给了股东多少？（量）</h3>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>年度</th><th>普通股股息</th><th>股票回购</th><th>优先股股息</th><th>普通股东总回报</th></tr>
+        <tr><td>FY2023</td><td>$0</td><td>$0</td><td>$0</td><td><span class="warn-t">$0</span></td></tr>
+        <tr><td>FY2024</td><td>$0</td><td>$0</td><td>~$18M</td><td><span class="warn-t">$0（反而增发 $24B 稀释）</span></td></tr>
+        <tr><td>FY2025</td><td>$0</td><td>$0</td><td>~$345M</td><td><span class="warn-t">$0</span></td></tr>
+        <tr><td>Q1 2026</td><td>$0</td><td>$0</td><td>$86M</td><td><span class="warn-t">$0</span></td></tr>
+      </table>
+    </div>
+    <p style="font-size:13px; color: var(--text2); margin-top:8px"><strong>Trailing Shareholder Yield（普通股）≈ 0%</strong>——普通股股息自 2020-03 停发、回购自 2019 年停，过去三年对普通股东的现金回报为零。<span class="warn-t">更严峻的是"负回报"：2024-10 增发约 $24B（约 1.125 亿普通股 + $5.75B 强制可转换优先股），摊薄股数从 FY2023 约 6.0 亿升至当前 7.88 亿，老股东权益被稀释近 30%。</span>当前唯一在支付的是 6.00% 强制可转换优先股股息（$5.75B 本金，Q1 $86M / 年化约 $345M），这是增发续命的固定成本，且优先于普通股。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.2 给的方式好不好？（质）</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>无回购可评质量</strong>：三年零回购，谈不上"注销 vs 库存股"的含金量——直接跳过</li>
+      <li><span class="warn-t">摊薄股数 3 年单调恶化</span>：FY2023 约 6.04 亿 → FY2024 约 6.16 亿 → FY2025 约 7.50 亿 → Q1 2026 <strong>7.88 亿</strong>。这是股东回报的"反向指标"——不是回购缩股，而是增发扩股，每股内在价值被摊薄。这也是投资波音必须用"未来股数"（含优先股转股）而非当前股数估值的原因</li>
+      <li><strong>强制可转换优先股是"悬顶的稀释"</strong>：$5.75B 6.00% 优先股在条件满足时将转为普通股，进一步摊薄——估值时须按 as-converted 口径考虑</li>
+    </ul>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.3 能不能继续给、给多少？（前瞻）</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>已授权回购额度</strong>：<span class="warn-t">无生效回购授权</span>（2019 年起暂停）——潜在回购支撑力度为零</li>
+      <li><strong>股息政策</strong>：管理层明确表示<strong>优先"去杠杆 + 恢复自由现金流"，短期不会恢复普通股股息或回购</strong>。资本返还优先级排序清晰：还债 &gt; 修复现金流 &gt; （数年后）恢复股东回报</li>
+      <li><strong>(股息+回购) / FCF 覆盖度</strong>：分子为零、FCF 仍净流出——当前根本无从谈"覆盖度"。恢复股东回报的前提是：先兑现全年正 FCF、把净负债从 $26B 降到可控区间（管理层长期目标降至约 $30B 总债务以下并逐步回落）、且经营现金流稳定</li>
+      <li><strong>时间表推演</strong>：若 2026 兑现正 FCF $1-3B、2027-2028 FCF 爬向 $6-10B，市场普遍预期波音<strong>最早 2027-2028 才可能重启股息/回购</strong>——这将是股价的一个重要长期催化剂，但目前尚无承诺</li>
+    </ul>
+    <p><strong>模块小结</strong>：<span class="warn-t">几乎无股东回报（且过去三年为负回报）</span>——三年零股息、零回购、大额增发稀释近 30%。这在危机语境下是"正确但残酷"的资本配置：把现金全部用于还债与修复现金流，是对的；但从股东实际拿到多少的冷口径看，波音当前是"负分往零分修"。真正的看点是<strong>未来的拐点</strong>：一旦正 FCF 稳定、净负债回落，恢复股东回报将成为价值重估的重要一环——但那至少还要等 2-3 年，且以执行兑现为前提。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 13 ═══ -->
+<div class="section">
+  <div class="stitle">模块 13 · 海图评分卡 + 投资决策</div>
+
+  <div class="scorecard">
+    <h3 style="font-size:15px; color:var(--text); margin-bottom: 16px; font-family: 'Segoe UI',sans-serif;">海图评分卡（6 维 A-D）</h3>
+    <div class="score-grid">
+      <div class="score-card"><div class="score-letter s-c">C+</div><div class="score-body"><h4>1. 生意可预测性</h4><p>长周期民机 + 认证/产率高度不确定 + 5 年盈利剧烈波动（EPS 从 -7.14 到 +10.23）+ 一次性项目频繁。订单能见度以十年计，但短期盈利极难预测。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">A-</div><div class="score-body"><h4>2. 经济护城河</h4><p>双寡头 + $695B 订单 + 认证壁垒极深 + 转换成本高。结构性护城河难被侵蚀，但"成本优势"一维被自身质量/产率问题损伤。</p></div></div>
+      <div class="score-card"><div class="score-letter s-b">B</div><div class="score-body"><h4>3. 管理层质量</h4><p>Ortberg 聚焦安全/质量/去杠杆，方向对、坦诚度改善；但历史治理（MAX 危机、认证反复跳票、增发稀释）拖累，兑现度待检验。</p></div></div>
+      <div class="score-card"><div class="score-letter s-c">C</div><div class="score-body"><h4>4. 财务质量</h4><p>净负债 $26.3B + 薄权益 $6.0B + 仍烧 FCF + 利息吞噬经营利润 + ROE/ROIC 无意义。防务/服务现金流托底是唯一亮点。</p></div></div>
+      <div class="score-card"><div class="score-letter s-c">C</div><div class="score-body"><h4>5. 资本配置纪律</h4><p>三年零股息零回购 + 大额增发稀释近 30%。危机下"先止血"排序正确，但股东回报维度得分低。</p></div></div>
+      <div class="score-card"><div class="score-letter s-c">C</div><div class="score-body"><h4>6. 估值与安全边际</h4><p>公允中位 ~$200 vs 现价 $222，溢价 11%，<strong>无安全边际、复苏已提前定价</strong>。反向 DCF 隐含近乎完全复苏。</p></div></div>
+    </div>
+
+    <div class="flag-row">
+      <strong>红旗排查</strong>：触发多项——<strong>极端估值</strong>（当期负 EPS，2027E 52x，现价高于公允）+ <strong>财务脆弱性</strong>（$47B 债务 / $26B 净负债 / 薄权益 $6B / 利息吞噬经营利润）+ <strong>治理与执行记录</strong>（737 MAX 两起空难、门塞事故、777X 首交付从 2020 推至 2027 的反复跳票、增发稀释近 30%）。任一红旗即强制降级——<strong>综合评级降至「持有观望」</strong>。
+    </div>
+
+    <p style="margin-top:18px; font-size:14px; color:var(--text); line-height:1.85;"><strong>综合评级</strong>：<span class="rating-badge rating-hold" style="font-size:14px;">持有观望</span>。护城河维度尚可（A-），管理层方向正确（B），但财务质量、资本配置、估值三维均为 C，叠加多项红旗 → 降至持有观望。核心判断：<strong>波音是一门"会赢"的伟大生意（$695B 订单 + 双寡头终局），但当前 $222 已高于公允中位 ~$200、无安全边际，复苏的果实已被现价提前买单。现有持仓者可耐心持有等复苏兑现；新买入者应等一次执行跳票或宏观回调，把价格打回 $160 附近有安全边际的区间再动手。</strong></p>
+  </div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">投资决策（精确价格 · USD）</h3>
+
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>项目</th><th>价格</th><th>说明</th></tr>
+      <tr><td>12 个月目标价（基准）</td><td><strong>$215</strong> (-3%)</td><td>复苏按计划 + 737 至 47/月 + 正 FCF 兑现，估值随去风险压缩</td></tr>
+      <tr><td>悲观目标（30% 概率）</td><td>$150 (-33%)</td><td>认证再跳票 + FCF 落空 + 估值压缩</td></tr>
+      <tr><td>乐观目标（25% 概率）</td><td>$290 (+30%)</td><td>全面执行 + 737 至 52/月 + FCF 冲向 $8-10B</td></tr>
+      <tr class="hl"><td>概率加权 12 个月目标价</td><td><strong>$214</strong> (-4%)</td><td>0.30×150 + 0.45×215 + 0.25×290</td></tr>
+      <tr class="hl"><td>首仓建仓（公允中位 $200 × 80%）</td><td><strong>$160</strong></td><td>距现价 -28% · 耐心等回调</td></tr>
+      <tr><td>二仓建仓（× 70%）</td><td>$140</td><td>-37% · 大幅回调机会</td></tr>
+      <tr><td>三仓建仓（× 60%）</td><td>$120</td><td>-46% · 黑天鹅级机会</td></tr>
+      <tr><td>止盈一档</td><td>$270</td><td>+21% · 减仓 25%</td></tr>
+      <tr><td>止盈二档</td><td>$310</td><td>+39% · 再减 25%</td></tr>
+      <tr><td>止盈三档</td><td>$360</td><td>+62% · 再减 25% · 最后 25% 陪它走完复苏</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.85;"><strong>建议总仓位</strong>：<strong>2-4%</strong>（轻仓观察仓 · 复苏确认前不重仓；当前价满估值，应在回调时建仓，不追高）。<strong>持有周期</strong>：3-5 年（穿越认证/产率爬坡与现金流修复的完整周期）。<strong>关键监控指标</strong>：① 737 月产率（42→47→52 的实际达成）；② 全年正 FCF 指引兑现度（每季 FCF 与现金余额）；③ 777X / 737-7/-10 认证节点是否再跳票；④ 净负债与再融资成本变化；⑤ 是否出现新的质量/安全事件。<strong>下次催化剂 / 财报日</strong>：约 <strong>2026-07-29 Q2 2026 财报</strong>（官方尚未正式确认）——重点看 737 是否提到 47/月、H1 FCF 流出幅度、正 FCF 全年指引是否重申。</p>
+</div>
+
+<!-- ═══ 海图页末长评 ═══ -->
+<div class="section">
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记 · 1180 字</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p class="lead">价值投资里有两种难题：一种是烂生意披着好价格，一种是好生意标着好价格。波音是第三种，也最考验人——一门正在从深渊往上爬的伟大生意，标着一个已经把复苏兑现了大半的价格。Q1 净营收 $22.2B（+14%）、防务扭亏、服务维持 18% 高毛利、全年重申正自由现金流 $1B–$3B，复苏的证据一条条摆出来。可当你把 $47B 有息债务、$26B 净负债、$6B 薄如纸的权益、还有连续第三次跳票的认证节点放上天平另一端，$222 的股价就显得没有余地了。</p>
+
+      <p>波音是全球商用航空的双寡头之一（与空客对垒），一门"造飞机 + 卖零件 + 修飞机 + 造武器"的重资产长周期生意——护城河极深（6,100+ 架待交付、$695B 创纪录订单、认证壁垒几十年），但过去七年被 737 MAX 两起空难、门塞事故、罢工反复击穿，如今在废墟上重建现金流。</p>
+
+      <h4>几个研判要点</h4>
+
+      <p><strong>一、这一季的真相藏在利息里。</strong> 经营利润 $448M，几乎被 $616M 的利息费用整个吞掉——这就是 $47B 债务的代价。别被"GAAP 净亏损仅 $7M"迷惑，<span class="hl-t">波音的问题从来不是单季盈亏，而是它背着一座债务大山在爬坡</span>，每一分经营利润先要交给债主。好消息是本季偿债 $6.95B，去杠杆是真金白银在做。</p>
+
+      <p><strong>二、三大分部冷热不均。</strong> 民机仍亏（-6.1%，但同比收窄），防务扭亏企稳（3.1%、利润 +50%），服务是现金奶牛（18.1% 高毛利）。真正决定成败的是民机——<span class="hl-t">737 从 42/月 往 47（夏季）再往 52/月 爬，全年交付目标约 500 架。这条产率曲线，就是全年正 FCF 指引能否兑现的唯一杠杆。</span></p>
+
+      <p><strong>三、别被两个一次性数字晃了眼。</strong> Q3'25 的 $4.9B 777X 计提（EPS -$6.45）、Q4'25 的 $9.6B 卖 Jeppesen 收益（EPS +$11.83），一负一正都是烟花。剔掉之后，FY2025 核心 EPS 只有约 $1.19，底层仍在盈亏平衡线上挣扎。看波音，要看经营利润率方向、现金流、交付与产率，而不是单季 GAAP 净利。</p>
+
+      <p><strong>四、股东三年拿到了什么？零。</strong> 普通股股息 2020 年停、回购 2019 年停，至今未复；这三年反而因 2024 年 $24B 增发，<span class="warn-t">摊薄股数从约 6.0 亿涨到 7.88 亿——老股东被稀释了近 30%</span>。波音现在的资本配置只有一个词：先把债还了、把现金流修好。这是对的，但也意味着股东回报在可见的未来是"负分往零分修"。</p>
+
+      <p><strong>五、估值没有安全边际。</strong> 当期 EPS 为负、常规 P/E 失效，市场用 2027E $4.25（52x）、2028E $8.19（27x）的复苏 EPS 给它"期权式"定价。我用相对法、DCF、SOTP、反向 DCF 独立推导，<span class="hl-t">公允价中位数落在 ~$200 附近，$222 的现价已把复苏兑现了大半</span>——反向 DCF 显示市场隐含波音要恢复到接近 2018 年 ~$10B 的 FCF 峰值。这不是不可能，但需要每一个节点都不再跳票。</p>
+
+      <h4>海图研判</h4>
+
+      <p><strong>评级：持有观望</strong>（会赢的伟大生意——$695B 订单 + 双寡头 + 认证壁垒 + 防务/服务现金流托底，对垒 $47B 债务 + $26B 净负债 + 薄权益 + 认证反复跳票 + 复苏已被 $222 股价提前定价的满估值）。12 个月概率加权目标价 <strong>$214</strong>（悲观 $150 / 基准 $215 / 乐观 $290），几乎与现价持平，上行空间被复苏预期提前透支。</p>
+
+      <p>操作建议：当前 $222 高于机械首仓 $160、且在公允中位 $200 之上，<strong>不在合理建仓窗口</strong>。耐心等一次执行跳票或宏观回调把价格打回 $160（公允中位 $200×80%）建首仓、$140 加二仓、$120 极端机会三仓。止盈三档 $270 / $310 / $360，最后 25% 陪它走完复苏。<strong>建议总仓位 2-4%</strong>（轻仓观察 · 复苏确认前不重仓）。持有周期 3-5 年。<span class="hl-t">关键纪律：好生意也要好价格——波音会飞回来，但别在它已经替你买好返程票的时候上车。</span></p>
+
+      <h4>风险提示</h4>
+
+      <p>认证再跳票（737-7/-10、777X 已推到 2027）/ 新的质量或安全事故 / 737 产率爬坡不及预期导致 FCF 指引落空 / $26B 净负债在利率高位的再融资压力 / 宏观衰退压制航司订单——任一项都可能把股价打回 $150-170。但 $695B 订单 + 双寡头格局 + 认证壁垒构成质量底，$176-180（52 周低）附近是较硬的支撑。</p>
+
+      <p>关键叙事：<strong>一门"全球民机双寡头 + $695B 创纪录订单 + 防务/服务现金流托底"的伟大生意，正在从"737 MAX + 门塞 + 罢工"的废墟里重建自由现金流；对垒的是"$47B 债务 + $26B 净负债 + 薄权益 + 认证反复跳票 + 复苏已被 $222 股价提前定价"的现实。</strong>波音终会飞回来，但股价已经替它买好了返程票。下次催化剂：约 2026-07-29 Q2 2026 财报（关注 737 产率是否提到 47/月、H1 FCF 流出幅度、正 FCF 全年指引是否重申）。</p>
+
+      <p class="haitu-sign">—— 海图，灯下落笔，明日再观风浪。</p>
+
+      <p class="haitu-disc">⚠️ 免责声明：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，不构成任何投资建议。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div>《海图夜读》 · Boeing BA Q1 2026 海图研判</div>
+  <div style="margin-top:6px;">发布日 2026-04-22 · 研判日 2026-07-11 · 数据来源 Boeing Q1 2026 官方财报（SEC 8-K Ex-99.1 新闻稿 + Form 10-Q）+ Boeing mediaroom + FY2025 年报 + 电话会 transcript</div>
+</footer>
+
+<script>
+let curTheme = 'light';
+function toggleTheme() {
+  curTheme = curTheme === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', curTheme);
+  renderCharts();
+}
+
+const palette = {
+  light: { accent: '#8a9a8e', accent2: '#7b8fa0', accent3: '#b08d7a', gold: '#b9a06a', red: '#b87070', green: '#7a9a7a', grid: '#e5ddd5', text: '#7a706a' },
+  dark:  { accent: '#8a9a8e', accent2: '#8fabbf', accent3: '#c9a48e', gold: '#c9b07a', red: '#c08080', green: '#8aaa8a', grid: '#3e3a35', text: '#a09890' }
+};
+
+let charts = {};
+function renderCharts() {
+  Object.values(charts).forEach(c => c && c.destroy && c.destroy());
+  charts = {};
+  const p = palette[curTheme];
+  Chart.defaults.color = p.text;
+  Chart.defaults.borderColor = p.grid;
+
+  const quarters = ['Q1 25','Q2 25','Q3 25','Q4 25','Q1 26'];
+  const rev = [19.50, 22.75, 23.27, 23.95, 22.22];
+  const yoy = [18, 35, 30, 57, 14];
+  charts.rev = new Chart(document.getElementById('chartRev'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { type:'bar', label: '总营收 ($B)', data: rev, backgroundColor: p.accent + 'CC', yAxisID: 'y' },
+      { type: 'line', label: 'YoY %', data: yoy, borderColor: p.red, backgroundColor: p.red, tension: 0.3, yAxisID: 'y1' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false }, y1: { position: 'right', grid: { drawOnChartArea: false }, ticks: { callback: v => v + '%' } } } }
+  });
+
+  const opm = [2.4, -0.8, -20.5, 36.7, 2.0];
+  charts.margin = new Chart(document.getElementById('chartMargin'), {
+    type: 'line',
+    data: { labels: quarters, datasets: [
+      { label: 'GAAP 经营利润率 %', data: opm, borderColor: p.accent3, backgroundColor: p.accent3 + '33', fill: true, tension: 0.25,
+        pointBackgroundColor: opm.map(v => v < 0 ? p.red : p.green) }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { ticks: { callback: v => v + '%' } } } }
+  });
+
+  charts.segment = new Chart(document.getElementById('chartSegment'), {
+    type: 'doughnut',
+    data: {
+      labels: ['商用飞机 BCA', '防务航天 BDS', '全球服务 BGS'],
+      datasets: [{ data: [9.20, 7.60, 5.37], backgroundColor: [p.accent2, p.accent3, p.green] }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { font: { size: 11 } } } } }
+  });
+
+  const gaapEps = [-0.16, -0.92, -7.14, 10.23, -0.11];
+  const coreEps = [-0.49, -1.24, -7.47, 9.92, -0.20];
+  charts.eps = new Chart(document.getElementById('chartEPS'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { label: 'GAAP 摊薄 EPS', data: gaapEps, backgroundColor: p.accent2 + 'CC' },
+      { label: '核心 EPS (NonGAAP)', data: coreEps, backgroundColor: p.accent3 + 'CC' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { font: { size: 10 } } } }, scales: { y: { ticks: { callback: v => '$' + v } } } }
+  });
+
+  buildSankey();
+}
+
+function buildSankey() {
+  const p = palette[curTheme];
+  const labels = ['总营收 $22.22','营业成本 $19.67','毛利 $2.55','研发 $0.90','期间费用 $1.20','经营利润 $0.45','其他收入 $0.19','税前利润池 $0.64','利息费用 $0.62','税前净额 $0.03'];
+  const data = {
+    type: 'sankey',
+    orientation: 'h',
+    node: { pad: 15, thickness: 20, line: { color: p.grid, width: 0.5 }, label: labels,
+      color: [p.accent, p.red, p.accent2, p.gold, p.red, p.green, p.accent3, p.accent2, p.red, p.green] },
+    link: {
+      source: [0, 0, 2, 2, 2, 5, 6, 7, 7],
+      target: [1, 2, 3, 4, 5, 7, 7, 8, 9],
+      value:  [19.67, 2.55, 0.90, 1.20, 0.45, 0.45, 0.19, 0.616, 0.026],
+      color: [p.red+'55', p.accent2+'55', p.gold+'55', p.red+'55', p.green+'66', p.green+'66', p.accent3+'66', p.red+'55', p.green+'66']
+    }
+  };
+  const layout = { font: { size: 11, color: p.text }, paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)', margin: { l: 10, r: 10, t: 10, b: 10 } };
+  Plotly.react('sankey', [data], layout, { displayModeBar: false, responsive: true });
+}
+
+renderCharts();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-07-11 · Thermo Fisher Q1 2026 财报已于 2026-04-23 发布 -->
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thermo Fisher TMO Q1 2026 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+<meta name="description" content="全球最大的科学服务商——生命科学工具与诊断龙头，从试剂、仪器到 CRO/CDMO 端到端覆盖。Q1 2026 营收 $11.0B(+6%)、调整后 EPS $5.44(+6%)、上调全年指引并完成 $91 亿 Clario 收购。但有机增长仅 +1%、分析仪器有机 -2%、毛利率降至 40.7%(5季最低)、净负债近 $40B、Forward P/E 21x 无安全边际——世界级平台，价格已充分定价。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Thermo Fisher TMO Q1 2026 海图研判 · 海图夜读">
+<meta property="og:description" content="全球最大的科学服务商——生命科学工具与诊断龙头。Q1 2026 营收 $11.0B(+6%)、调整后 EPS $5.44(+6%)、上调全年指引并完成 $91 亿 Clario 收购。但有机增长仅 +1%、毛利率降至 40.7%、净负债近 $40B、Forward P/E 21x 无安全边际——世界级平台，价格已充分定价。">
+<meta property="og:url" content="https://jacexie.github.io/haitu/reports/tmo-q1-2026.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Thermo Fisher TMO Q1 2026 海图研判 · 海图夜读">
+<meta name="twitter:description" content="全球最大的科学服务商——生命科学工具与诊断龙头。Q1 2026 营收 $11.0B(+6%)、调整后 EPS $5.44(+6%)、上调全年指引。但有机增长仅 +1%、净负债近 $40B、Forward P/E 21x 无安全边际。">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root { --bg:#f5f0eb; --bg2:#ece6df; --card:#ffffff; --card2:#f8f5f1; --border:#d9d0c7; --text:#4a4340; --text2:#7a706a; --text3:#a89f98; --accent:#8a9a8e; --accent2:#7b8fa0; --accent3:#b08d7a; --rose:#c09090; --gold:#b9a06a; --red:#b87070; --green:#7a9a7a; --shadow:rgba(0,0,0,0.06); --chart-grid:#e5ddd5; }
+[data-theme="dark"] { --bg:#1e1c1a; --bg2:#28251f; --card:#2e2a25; --card2:#363230; --border:#4a4540; --text:#d4ccc4; --text2:#a09890; --text3:#706860; --accent:#8a9a8e; --accent2:#8fabbf; --accent3:#c9a48e; --rose:#c09090; --gold:#c9b07a; --red:#c08080; --green:#8aaa8a; --shadow:rgba(0,0,0,0.3); --chart-grid:#3e3a35; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', serif; line-height: 1.75; font-size: 14.5px; transition: background .35s, color .35s; }
+a { color: var(--accent2); text-decoration: none; }
+.theme-bar { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); }
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+.toggle-switch { position: relative; width: 44px; height: 22px; background: var(--border); border-radius: 11px; cursor: pointer; transition: background .3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: var(--card); border-radius: 50%; transition: transform .3s; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+
+.hero { padding: 48px 24px 36px; text-align: center; border-bottom: 1px solid var(--border); }
+.hero-tag { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 3px 14px; border-radius: 20px; margin-bottom: 18px; }
+.hero h1 { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.pill { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: 'Segoe UI', sans-serif; font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow); }
+.pill strong { color: var(--text); }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle { font-size: 18px; font-weight: 700; color: var(--accent3); margin-bottom: 20px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+.stitle::before { content: ''; display: block; width: 4px; height: 20px; background: var(--accent3); border-radius: 2px; }
+
+.haitu-quip { display: flex; align-items: center; gap: 18px; background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 18px 24px; margin: 24px 0; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-quote { flex: 1; }
+.haitu-portrait { font-size: 15px; line-height: 1.65; color: var(--text); margin-bottom: 6px; font-weight: 600; }
+.haitu-rating-line { font-size: 13px; color: var(--text2); font-family: 'Segoe UI', sans-serif; }
+.rating-badge { display: inline-block; padding: 2px 12px; border-radius: 12px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; margin-left: 4px; }
+.rating-hold { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+
+.haitu-essay { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 28px 32px; margin: 24px 0 20px; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-essay-header { display: flex; align-items: center; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.haitu-avatar-sm { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); background: var(--red); box-shadow: 0 2px 8px rgba(184,112,112,0.2); }
+.haitu-name-lg { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 28px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 4px; }
+.haitu-essay-tag { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; }
+.haitu-essay-body { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 15px; line-height: 2.0; color: var(--text); }
+.haitu-essay-body p { margin-bottom: 14px; }
+.haitu-essay-body p.lead { font-size: 16px; font-style: italic; color: var(--text2); margin-bottom: 18px; }
+.haitu-essay-body strong { color: var(--text); font-weight: 700; }
+.haitu-essay-body h4 { font-size: 14px; color: var(--accent3); margin: 18px 0 10px; font-family: 'Segoe UI', sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+.haitu-sign { text-align: right; margin-top: 18px; font-family: 'Georgia', serif; font-size: 14px; color: var(--text2); font-style: italic; }
+.haitu-disc { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); font-style: italic; line-height: 1.7; }
+
+.stock-snap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px; }
+.snap-item { text-align: center; }
+.snap-label { font-family: 'Segoe UI', sans-serif; font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.snap-val { font-family: 'Segoe UI', sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+.snap-val.up { color: var(--green); }
+.snap-val.dn { color: var(--red); }
+.snap-sub { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow); }
+.kpi-l { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.badge { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+.up { background: rgba(122,154,122,.15); color: var(--green); }
+.dn { background: rgba(184,112,112,.15); color: var(--red); }
+.nt { background: rgba(123,143,160,.15); color: var(--accent2); }
+
+.tbl-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow); }
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI', sans-serif; font-size: 13px; }
+.tbl th { background: var(--card2); color: var(--text3); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); background: var(--card2); }
+
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); }
+.ctitle { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 260px; }
+
+.cmt { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 26px; line-height: 1.95; font-size: 14px; box-shadow: 0 1px 4px var(--shadow); color: var(--text); }
+.cmt p { margin-bottom: 14px; }
+.cmt p:last-child { margin-bottom: 0; }
+.cmt strong { color: var(--text); }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+
+.bscore { display: flex; align-items: center; gap: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; margin-bottom: 12px; box-shadow: 0 1px 4px var(--shadow); }
+.circle { width: 62px; height: 62px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; flex-shrink: 0; border: 3px solid; font-family: 'Segoe UI', sans-serif; }
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 4px; color: var(--text); }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.moat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+.moat-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); border-left: 4px solid var(--accent); }
+.moat-card.wide { border-left-color: var(--green); }
+.moat-card.narrow { border-left-color: var(--gold); }
+.moat-card.none { border-left-color: var(--red); }
+.moat-card h5 { font-size: 13px; color: var(--text); margin-bottom: 6px; }
+.moat-card .moat-rate { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.moat-card.wide .moat-rate { background: rgba(122,154,122,.18); color: var(--green); }
+.moat-card.narrow .moat-rate { background: rgba(185,160,106,.18); color: var(--gold); }
+.moat-card.none .moat-rate { background: rgba(184,112,112,.18); color: var(--red); }
+.moat-card p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+
+.ec-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 14px; box-shadow: 0 1px 3px var(--shadow); }
+.ec-badge { flex-shrink: 0; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-top: 2px; font-family: 'Segoe UI', sans-serif; }
+.ec-bull { background: rgba(122,154,122,.18); color: var(--green); }
+.ec-bear { background: rgba(184,112,112,.18); color: var(--red); }
+.ec-neut { background: rgba(185,160,106,.18); color: var(--gold); }
+.ec-body { flex: 1; }
+.ec-title { font-weight: 600; color: var(--text); margin-bottom: 3px; font-size: 14px; }
+.ec-note { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.dcf-note { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.dcf-note strong { color: var(--text); }
+
+.scorecard { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow); }
+.score-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.score-card { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px; }
+.score-letter { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Segoe UI', sans-serif; font-weight: 800; font-size: 22px; flex-shrink: 0; border: 3px solid; }
+.s-a { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.12); }
+.s-bp { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.06); }
+.s-b { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.10); }
+.s-bm { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.06); }
+.s-c { color: var(--red); border-color: var(--red); background: rgba(184,112,112,.08); }
+.score-body h4 { font-size: 13px; color: var(--text); margin-bottom: 4px; }
+.score-body p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+.flag-row { margin-top: 16px; padding: 12px 16px; background: rgba(184,112,112,.08); border: 1px solid rgba(184,112,112,.3); border-radius: 8px; font-size: 13px; color: var(--text2); }
+.flag-row strong { color: var(--red); }
+
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center; box-shadow: 0 1px 4px var(--shadow); }
+.pbox .pl { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; }
+.pbox .pv { font-family: 'Segoe UI', sans-serif; font-size: 28px; font-weight: 800; margin-bottom: 5px; }
+.pbox .pn { font-size: 12px; color: var(--text3); line-height: 1.5; }
+.pc { color: var(--red); } .pf { color: var(--gold); } .ps { color: var(--green); }
+
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.risk-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); position: relative; overflow: hidden; }
+.risk-card::before { content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent); }
+.risk-card.r1::before { background: var(--green); }
+.risk-card.r2::before { background: rgba(122,154,122,.6); }
+.risk-card.r3::before { background: var(--gold); }
+.risk-card.r4::before { background: var(--rose); }
+.risk-card.r5::before { background: var(--red); }
+.risk-card h5 { font-size: 14px; margin-bottom: 6px; color: var(--text); }
+.risk-score { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.r1 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r2 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r3 .risk-score { background: rgba(185,160,106,.18); color: var(--gold); }
+.r4 .risk-score { background: rgba(192,144,144,.18); color: var(--rose); }
+.r5 .risk-score { background: rgba(184,112,112,.18); color: var(--red); }
+.risk-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+footer { background: var(--card2); border-top: 1px solid var(--border); padding: 24px; text-align: center; color: var(--text3); font-size: 12px; margin-top: 40px; line-height: 1.8; }
+@media (max-width: 768px) { .cgrid,.pgrid { grid-template-columns: 1fr; } .hero h1 { font-size: 22px; } .kpi-grid { grid-template-columns: 1fr 1fr; } .stock-snap { grid-template-columns: 1fr 1fr; } .haitu-essay-header { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/TMO" target="_blank" rel="noopener" title="在雪球查看 TMO 实时行情">雪球 TMO</a>
+  </div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">Q1 2026 (截至 2026-03-28) 财报发布 · 2026-04-23 &nbsp;|&nbsp; 海图研判 · 2026-07-11</div>
+  <h1>Thermo Fisher Scientific TMO · Q1 2026 财报深度分析</h1>
+  <div class="hero-sub">NYSE: TMO &nbsp;|&nbsp; 财季截至 2026-03-28 &nbsp;|&nbsp; 价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill">股价 <strong>$523.85</strong> <span style="color:var(--red)">距高点 -19%</span></div>
+    <div class="pill">市值 <strong>$196B</strong></div>
+    <div class="pill">Q1 营收 <strong>$11.01B</strong> <span style="color:var(--green)">+6%</span></div>
+    <div class="pill">调整后 EPS <strong>$5.44</strong> <span style="color:var(--green)">+6%</span></div>
+    <div class="pill">毛利率 <strong>40.7%</strong> <span style="color:var(--red)">5 季最低</span></div>
+    <div class="pill">Forward P/E <strong>~21x</strong> <span style="color:var(--gold)">无安全边际</span></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 海图页首短评 ═══ -->
+<div class="haitu-quip">
+  <div class="haitu-quote">
+    <div class="haitu-portrait">全球最大的科学服务商——从试剂、耗材、仪器到临床 CRO 与制药 CDMO 端到端覆盖的生命科学"卖水人"。$1130 亿资产的平台巨舰，40.7% 毛利率、四大分部多元支撑、PPI 运营体系持续挤利润率。Q1 2026 营收 $11.0B(+6%)、调整后 EPS $5.44(+6%)、上调全年指引、完成 $91 亿 Clario 收购、牵手 NVIDIA。但有机增长仅 +1%、分析仪器有机 -2%、毛利率降至 5 季最低、净负债近 $40B——世界级平台，但当前价格已把质量充分定价。</div>
+    <div class="haitu-rating-line">评级：<span class="rating-badge rating-hold">持有观望</span> · 12 个月目标价 $505（-4%）· 顶级科学平台 + 多元护城河的组合，对垒有机增长疲弱 + 高杠杆并购 + Forward P/E 21x 无安全边际</div>
+  </div>
+</div>
+
+<!-- ═══ 市场数据快照 ═══ -->
+<div class="section">
+  <div class="stitle">市场数据快照（2026-07-11 收盘）</div>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">股价（美元）</div><div class="snap-val">$523.85</div><div class="snap-sub">2026-07-11 收盘 · 距 52 周高 -19%</div></div>
+    <div class="snap-item"><div class="snap-label">市值</div><div class="snap-val">$196B</div><div class="snap-sub">生命科学工具龙头</div></div>
+    <div class="snap-item"><div class="snap-label">TTM GAAP P/E</div><div class="snap-val">~28.8x</div><div class="snap-sub">含并购无形摊销拖累</div></div>
+    <div class="snap-item"><div class="snap-label">Forward P/E</div><div class="snap-val nt">~21x</div><div class="snap-sub">FY2026 调整 EPS 指引中值</div></div>
+    <div class="snap-item"><div class="snap-label">P/S (TTM)</div><div class="snap-val">~4.3x</div><div class="snap-sub">TTM 营收 ~$45.2B</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间</div><div class="snap-val">$403 - $644</div><div class="snap-sub">位于中下沿</div></div>
+    <div class="snap-item"><div class="snap-label">股息率</div><div class="snap-val">~0.35%</div><div class="snap-sub">Q1 增息 10% · 以回购为主</div></div>
+    <div class="snap-item"><div class="snap-label">FCF Yield（估）</div><div class="snap-val nt">~3.8%</div><div class="snap-sub">FY2026 FCF 估 ~$7.5B</div></div>
+    <div class="snap-item"><div class="snap-label">现金 + 短投</div><div class="snap-val">$3.26B</div><div class="snap-sub">2026-03-28 末</div></div>
+    <div class="snap-item"><div class="snap-label">有息债务</div><div class="snap-val dn">$43.16B</div><div class="snap-sub">短债 3.09 + 长债 40.07</div></div>
+    <div class="snap-item"><div class="snap-label">真实净负债</div><div class="snap-val dn">-$39.9B</div><div class="snap-sub">⚠️ 净负债非净现金</div></div>
+    <div class="snap-item"><div class="snap-label">GAAP 净利率 (Q1)</div><div class="snap-val up">15.0%</div><div class="snap-sub">调整后经营利润率 21.8%</div></div>
+  </div>
+  <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">数据时点：股价 2026-07-11 收盘 $523.85（当日区间 $522.60-533.08）· 财务数据来源 Thermo Fisher Q1 2026 官方财报（SEC 8-K Ex-99.1 + 10-Q，2026-04-23 发布，财季截至 2026-03-28）+ FY2025 10-K · 货币 USD。⚠️ TMO 是<strong>净负债</strong>公司（有息债务 $43.16B ≫ 现金+短投 $3.26B，真实净负债约 -$39.9B），Q1 因完成 Clario 收购（净现金支出 $8.87B）+ 回购 $3.0B，杠杆明显上升——与"现金堡垒"叙事截然不同。</p>
+</div>
+
+<!-- ═══ Q1 2026 KPI ═══ -->
+<div class="section">
+  <div class="stitle">Q1 2026 核心业绩（USD · 财季截至 2026-03-28）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">营收</div><div class="kpi-v">$11.01B</div><span class="badge up">+6% YoY</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">有机 +1% · 并购 +3% · 汇率 +2%</div></div>
+    <div class="kpi"><div class="kpi-l">毛利</div><div class="kpi-v">$4.48B</div><span class="badge dn">40.7%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">去年 41.6% · 降 0.9pct · 5 季最低</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 经营利润</div><div class="kpi-v">$1.86B</div><span class="badge up">+9%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">经营利润率 16.9%</div></div>
+    <div class="kpi"><div class="kpi-l">调整后经营利润</div><div class="kpi-v">$2.40B</div><span class="badge nt">21.8%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">去年 21.9% · 微降 0.1pct</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 净利润（归母）</div><div class="kpi-v">$1.65B</div><span class="badge up">+9.5%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">净利率 15.0%（去年 14.5%）</div></div>
+    <div class="kpi"><div class="kpi-l">调整后净利润</div><div class="kpi-v">$2.03B</div><span class="badge up">+4%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">真实经营口径</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 摊薄 EPS</div><div class="kpi-v">$4.43</div><span class="badge up">+11%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">缩股再贡献</div></div>
+    <div class="kpi"><div class="kpi-l">调整后 EPS</div><div class="kpi-v">$5.44</div><span class="badge up">+6%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">最可信口径 · $5.15→$5.44</div></div>
+    <div class="kpi"><div class="kpi-l">经营现金流 OCF</div><div class="kpi-v">$1.19B</div><span class="badge up">+65%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">去年 $723M</div></div>
+    <div class="kpi"><div class="kpi-l">自由现金流 FCF</div><div class="kpi-v">$0.83B</div><span class="badge up">+121%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">OCF 1,192 − Capex 376 + 处置 9</div></div>
+    <div class="kpi"><div class="kpi-l">摊薄股数</div><div class="kpi-v">373M</div><span class="badge up">-1.6%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">$3.0B 回购加速缩股</div></div>
+    <div class="kpi"><div class="kpi-l">无形资产摊销</div><div class="kpi-v">$0.43B</div><span class="badge nt">调整项</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">GAAP vs Non-GAAP 主要差额</div></div>
+  </div>
+</div>
+
+<!-- ═══ 看穿桥接 高亮框 ═══ -->
+<div class="section">
+  <div class="stitle">本季必看 · 两个"看穿"：报告增长 vs 有机增长、GAAP vs Non-GAAP</div>
+  <div class="cmt">
+    <p><strong>TMO 的利润表有两个必须"看穿"的地方，看不穿就会把一个"平庸的有机季"误读为"强劲的增长季"。</strong></p>
+    <p><strong>看穿一：营收 +6% 里，真正靠内生只有 +1%。</strong> 报告营收 $11.0B（+6%）看着体面，但拆开来看——<span class="hl-t">有机增长仅 +1%，并购贡献 +3%（主要是 Clario 并入），汇率顺风 +2%</span>。也就是说这一季的增长六成来自"买来的"和"汇率给的"，真正靠原有业务卖出去更多东西只贡献了 1 个百分点。其中分析仪器有机增长为 -2%，终端需求（客户资本开支、政府科研经费）仍偏弱，是全平台最疲软的一块。</p>
+    <div class="tbl-wrap" style="margin:14px 0;">
+      <table class="tbl">
+        <tr><th>营收增长拆解</th><th>Q1 2026</th><th>说明</th></tr>
+        <tr><td>有机增长 Organic</td><td>+1%</td><td>内生 · 真实需求</td></tr>
+        <tr><td>并购 Acquisitions</td><td>+3%</td><td>Clario 等并入</td></tr>
+        <tr><td>汇率 FX</td><td>+2%</td><td>美元走弱顺风</td></tr>
+        <tr class="hl"><td><strong>报告增长 Reported</strong></td><td><strong>+6%</strong></td><td><strong>$10,364M → $11,005M</strong></td></tr>
+      </table>
+    </div>
+    <p><strong>看穿二：GAAP EPS +11% 好看，调整后 EPS +6% 才是真相。</strong> GAAP 摊薄 EPS $4.43（+11%）跑赢调整后 EPS $5.44（+6%）——原因是 GAAP 口径本身被<span class="hl-t">并购无形摊销 $430M、重组 $49M</span>等非现金/一次性项目压低了基数，同比改善看着更快。<strong>调整后口径剔除这些项目后 +6%，才反映真实经营节奏</strong>；而调整后经营利润率 21.8%（去年 21.9%）实际是微降的。EPS +6% 略高于调整后净利 +4%，差额来自 $3.0B 回购缩股。这是一台"有机 +1% + 并购 + 缩股 = 调整 EPS +6%"的组合拳，而非纯内生高增长。</p>
+  </div>
+</div>
+
+<!-- ═══ 趋势图 ═══ -->
+<div class="section">
+  <div class="stitle">关键指标趋势</div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">营收（$B）& YoY 增速（近 5 季 · 报告口径）</div><div class="cwrap"><canvas id="chartRev"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">毛利率 & GAAP 经营利润率趋势（%，近 5 季）</div><div class="cwrap"><canvas id="chartMargin"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">Q1 2026 四大分部营收拆分（$M · 抵消前）</div><div class="cwrap"><canvas id="chartSegment"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">GAAP vs 调整后 EPS（$，近 5 季）</div><div class="cwrap"><canvas id="chartEps"></canvas></div></div>
+  </div>
+</div>
+
+<!-- ═══ 桑基图 ═══ -->
+<div class="section">
+  <div class="stitle">Q1 2026 利润表资金流向桑基图（$B）</div>
+  <div class="ccard">
+    <div id="sankey" style="width:100%;height:480px;"></div>
+    <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">说明：营收 $11.01 → 营业成本 $6.53 + 毛利 $4.48 → SG&A $1.80 + 摊销/研发/重组 $0.82 + 营业利润 $1.86 → 非经营&税 $0.21 + GAAP 净利 $1.65。流量在每个中间节点严格平衡（毛利 4.48 = 1.80+0.82+1.86；营业利润 1.86 = 0.21+1.65）。"非经营&税"含利息净额（利息支出 $354M − 利息收入 $233M）+ 所得税 $70M + 少数股东权益。注：Q1 完成 Clario 收购净现金支出 $8.87B，并回购 $3.0B，均超过当季 GAAP 净利 $1.65B，靠 $5.24B 净发债 + 期初现金支撑——本季是"杠杆化扩张 + 返还"叠加的一季。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 1 ═══ -->
+<div class="section">
+  <div class="stitle">模块 1 · 公司概览与背景</div>
+  <div class="cmt">
+    <p><strong>Thermo Fisher Scientific Inc.</strong>（NYSE: TMO），总部马萨诸塞州沃尔瑟姆。由 Thermo Electron 与 Fisher Scientific 于 <strong>2006 年合并</strong>而来，随后通过 Life Technologies、Patheon、PPD、Clario 等一系列大型并购，成长为<span class="hl-t">全球最大的科学服务商</span>。财年为日历年制（12 月 31 日年末，季度按 13 周划分，Q1 2026 截至 2026-03-28）。</p>
+
+    <p><strong>核心叙事</strong>：TMO 是生命科学与医疗研究领域的"卖水人"与"平台整合者"——<span class="hl-t">从试剂、耗材、色谱质谱仪器，到临床研究 CRO（PPD/Clario）与药品生产 CDMO（Patheon），覆盖科学发现-开发-生产的端到端链条</span>。它不押注单一药物或单一疗法能否成功，而是给所有做实验、做药、做诊断的人卖"铲子和铁锹"。这是一门规模巨大（FY2025 营收 $44.56B）、高度多元、以 <strong>PPI 业务系统</strong>（持续改善方法论）驱动利润率的平台生意。</p>
+
+    <p><strong>四大分部</strong>（Q1 2026 抵消前）：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>实验室产品与生物制药服务（Lab Products &amp; Biopharma Services）</strong>——$6.04B，占比 55%，含 PPD 临床研究、Patheon 药品生产、Clario 临床终点方案，是本季主要有机增长引擎（约 +4%）</li>
+      <li><strong>生命科学解决方案（Life Sciences Solutions）</strong>——$2.64B，占比 24%，试剂/耗材/基因分析，报告 +12.6%（多来自并购），分部利润率最高 36.2%</li>
+      <li><strong>分析仪器（Analytical Instruments）</strong>——$1.72B，占比 16%，色谱/质谱/电镜，有机 -2%，分部利润率降至 20.7%（去年 23.2%），全平台最弱</li>
+      <li><strong>特种诊断（Specialty Diagnostics）</strong>——$1.14B，占比 10%，临床诊断产品，YoY -0.5% 但利润率改善至 27.4%</li>
+    </ul>
+
+    <p><strong>能力圈检验</strong>：TMO 的生意本质清晰（给科学与医药行业卖工具和服务的多元平台，看得懂）。但<span class="warn-t">两块相对复杂：(1) 庞大的并购整合与商誉——总资产 $113B 中商誉 $55.2B + 并购无形资产净额 $19.1B，合计占总资产约 66%，GAAP 利润长期被巨额无形摊销拖累；(2) 需求高度依赖客户资本开支与政府科研经费的周期性，叠加关税/汇率敞口</span>。理解 TMO 必须同时看懂"平台的稳定性"与"并购杠杆的脆弱性"两面。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 2 ═══ -->
+<div class="section">
+  <div class="stitle">模块 2 · 管理层评估</div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>Marc N. Casper · 董事长兼 CEO（2009 至今）</h4>
+      <p>Casper 自 2009 年出任 CEO，执掌 TMO 超过 15 年，是把公司通过 Life Technologies、Patheon、PPD、Clario 等一系列大型并购锻造成全球科学服务龙头的核心人物。<span class="hl-t">PPI 业务系统（持续改善）是其管理哲学的支柱</span>，长期驱动运营效率与利润率扩张。战略上主动布局前沿——本季宣布与 NVIDIA 合作（AI 赋能实验室仪器）、与 SHL Medical 合作（无菌灌装-封装及器械组装），并拟以约 $1.08B 出售微生物业务优化组合。海图判断：这是一位长期主义、执行力强、并购整合经验丰富的掌舵人——但也要清醒，长期"以并购换增长"的路径正推高杠杆。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B+</div>
+    <div class="bd">
+      <h4>资本配置 · 大额并购 + 回购增息的双轨，但杠杆抬升</h4>
+      <p>
+      <strong>并购是主线</strong>：2026 年 Q1 完成 Clario 收购（企业价值约 $9.10B，现金流表并购净流出 $8,872M），强化生物制药临床研究端到端能力——这是典型的"用资产负债表买增长"。<br>
+      <strong>回购 + 增息为辅</strong>：Q1 回购 $3.0B（约 490 万股，均价约 $616）、Q1 宣布股息提高 10%（连续多年提升）。三年（FY2023-2025）累计股息 $1.74B + 回购 $10.0B。<br>
+      <span class="warn-t">一个需留意的信号</span>：Q1 同时做 Clario 收购（$8.87B）+ 回购（$3.0B），两项合计远超当季 FCF（$0.83B），靠 $5.24B 净发债支撑，直接把现金从年初 $9.85B 降到 $3.26B、净负债扩大到近 $40B。对一个现金流稳健的平台，适度杠杆化扩张合理，但当前授权回购仅剩约 $2.0B、杠杆已处高位，未来资本配置的灵活度在收窄。
+      </p>
+    </div>
+  </div>
+
+  <div class="cmt">
+    <p><strong>长期主义测试</strong>：✅ Casper 15 年如一日以"平台规模 + PPI 利润率 + 并购扩张"为主线，战略连续性极强，主动布局 AI/自动化前沿。<strong>坦诚度</strong>：电话会披露详尽（有机 +1%、分析仪器 -2%、分部利润率变化均如实列示，不回避需求疲弱）。<strong>利益绑定</strong>：管理层持股比例不高（成熟大盘常态），薪酬与调整后 EPS、营收增长、ROIC 挂钩。<span class="warn-t">唯一保留</span>：连续大额并购历史意味着商誉不断累积（$55B），一旦某笔并购的整合或终端需求不及预期，减值风险是长期悬在头上的问号。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 3 ═══ -->
+<div class="section">
+  <div class="stitle">模块 3 · 商业模式深度解析</div>
+  <div class="cmt">
+    <p><strong>海图"一句话测试"</strong>：<span class="hl-t">TMO 是科学与医药行业的"综合卖水人"——不赌哪个药能成、哪个疗法会赢，而是给所有做研究、做药、做诊断的机构卖试剂耗材、仪器设备，并承接他们的临床试验与药品代工，从整个行业的研发与生产活动中稳定抽成。</span></p>
+
+    <p><strong>收入结构</strong>：TMO 的收入是"耗材经常性收入 + 仪器一次性销售 + 服务合同收入"的组合。<span class="hl-t">耗材/试剂（生命科学解决方案、部分诊断）具有高重复购买、高毛利、低周期性的特征，是利润的压舱石</span>；仪器（分析仪器）是资本开支属性、周期性最强、当前最疲弱；CRO/CDMO 服务（实验室产品与生物制药服务）是规模最大、绑定制药客户多年合同、当前有机增长最好的一块。</p>
+
+    <p><strong>Q1 2026 分部模型</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>分部</th><th>营收</th><th>占比</th><th>YoY</th><th>分部利润率</th></tr>
+        <tr><td>实验室产品与生物制药服务</td><td>$6.04B</td><td>54.8%</td><td>+7.0%</td><td>12.9%</td></tr>
+        <tr><td>生命科学解决方案</td><td>$2.64B</td><td>23.9%</td><td>+12.6%</td><td>36.2%</td></tr>
+        <tr><td>分析仪器</td><td>$1.72B</td><td>15.6%</td><td>~持平</td><td>20.7%</td></tr>
+        <tr><td>特种诊断</td><td>$1.14B</td><td>10.4%</td><td>-0.5%</td><td>27.4%</td></tr>
+        <tr class="hl"><td>四分部合计（抵消前）</td><td>$11.53B</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td>内部抵消</td><td>-$0.52B</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr class="hl"><td><strong>合并营收</strong></td><td><strong>$11.01B</strong></td><td>100%</td><td><strong>+6%</strong></td><td>—</td></tr>
+      </table>
+    </div>
+
+    <p style="margin-top:14px;"><strong>单位经济与议价能力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>耗材/试剂是利润皇冠</strong>——生命科学解决方案分部利润率 36.2%，重复购买、切换成本高，是最赚钱、最稳定的部分</li>
+      <li><strong>对客户议价能力：中—强</strong>——在色谱质谱、基因分析等领域接近寡头，但仪器采购受客户预算周期强约束，需求弱时议价力下降（本季分析仪器有机 -2%、利润率下滑即是明证）</li>
+      <li><strong>规模采购与分销优势</strong>——作为最大科学服务商，在采购、渠道、客户覆盖上具备规模壁垒，PPI 体系持续压低成本</li>
+      <li><strong>CRO/CDMO 绑定长约</strong>——PPD/Patheon/Clario 与制药客户签多年合同，收入能见度高，但利润率偏低（12.9%）</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══ 模块 4 ═══ -->
+<div class="section">
+  <div class="stitle">模块 4 · 经济护城河分析（5 维）</div>
+  <div class="moat-grid">
+    <div class="moat-card wide">
+      <h5>1. 规模/成本优势</h5>
+      <span class="moat-rate">宽</span>
+      <p>全球最大科学服务商，$44.6B 营收带来采购、渠道、客户覆盖的规模壁垒。PPI 业务系统持续挤成本。<strong>趋势：稳定</strong>（但本季毛利率降至 40.7%，规模优势被并购摊薄 + 成本上升部分抵消）。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>2. 转换成本</h5>
+      <span class="moat-rate">宽</span>
+      <p>实验室一旦标准化在 TMO 的试剂/仪器/软件生态，切换需重新验证方法、培训、合规，成本极高。CRO/CDMO 客户签多年合同。<strong>趋势：稳定—加宽</strong>（AI/自动化深化绑定）。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>3. 无形资产/品牌</h5>
+      <span class="moat-rate">中-宽</span>
+      <p>Thermo Fisher / Invitrogen / Applied Biosystems 等品牌在科研界高度信任 + 数十年专利与方法积累。<span class="warn-t">但巨额价值以商誉形式挂账（$55B），是买来的而非纯内生</span>。<strong>趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>4. 有效规模</h5>
+      <span class="moat-rate">中-宽</span>
+      <p>色谱质谱、电镜、基因分析等高端细分接近寡头（与 Danaher/Agilent/Waters 分食），新进入者难以复制全平台。<strong>趋势：稳定</strong>（分析仪器竞争加剧、利润率下滑是隐忧）。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>5. 网络效应</h5>
+      <span class="moat-rate">窄</span>
+      <p>本质是工具/服务生意，网络效应弱于支付/平台型公司。生态整合（试剂+仪器+软件+数据）带来一定协同，但非典型双边网络。<strong>趋势：随 AI/数据平台略增</strong>。</p>
+    </div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>10 年后护城河会更宽还是更窄？</strong> <span class="hl-t">核心护城河（规模 + 转换成本）10 年后大概率仍在，但宽度取决于两点</span>：(1) <span class="warn-t">分析仪器竞争</span>——利润率从 23.2% 降到 20.7%，若终端需求持续疲弱 + 中国等市场竞争加剧，这块护城河会被侵蚀；(2) <span class="warn-t">并购依赖度</span>——若内生增长长期停在低个位数，护城河的"加宽"就必须靠不断买入，而每笔并购都在消耗资产负债表、累积商誉。TMO 的对冲是 PPI 体系 + AI/自动化（NVIDIA 合作）+ 组合优化（出售微生物业务）——用效率和结构升级弥补内生增长的不足。</p>
+    <p><strong>定价权</strong>：耗材/试剂端强（重复购买、切换成本），仪器端受客户预算周期压制。整体中—强，但非"无视周期"的定价权。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 5 ═══ -->
+<div class="section">
+  <div class="stitle">模块 5 · 财务深度分析</div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 12px 0; font-family: 'Segoe UI',sans-serif;">5.1 关键比率与利润率（Q1 2026 vs Q1 2025）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>指标</th><th>Q1 FY25</th><th>Q1 FY26</th><th>变化</th><th>含义</th></tr>
+      <tr><td>报告营收增速</td><td>—</td><td>+6%</td><td><span class="badge nt">有机仅 +1%</span></td><td>并购+汇率贡献 5pct</td></tr>
+      <tr><td>毛利率</td><td>41.6%</td><td>40.7%</td><td><span class="badge dn">-0.9pct</span></td><td>5 季最低 · 并购摊薄+成本</td></tr>
+      <tr><td>GAAP 经营利润率</td><td>16.6%</td><td>16.9%</td><td><span class="badge up">+0.3pct</span></td><td>费用控制 + 重组回落</td></tr>
+      <tr><td>调整后经营利润率</td><td>21.9%</td><td>21.8%</td><td><span class="badge dn">-0.1pct</span></td><td>核心口径微降</td></tr>
+      <tr><td>GAAP 净利率</td><td>14.5%</td><td>15.0%</td><td><span class="badge up">+0.5pct</span></td><td>—</td></tr>
+      <tr><td>调整后 EPS</td><td>$5.15</td><td>$5.44</td><td><span class="badge up">+6%</span></td><td>增速由 Q3 的 +10% 放缓</td></tr>
+      <tr><td>摊薄股数（百万）</td><td>379</td><td>373</td><td><span class="badge up">-1.6%</span></td><td>回购缩股</td></tr>
+    </table>
+  </div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.2 资产负债健康度（2026-03-28 末 · $M）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>2025-12-31 末</th><th>2026-03-28 末</th><th>说明</th></tr>
+      <tr><td>现金及等价物</td><td>9,852</td><td>3,254</td><td>Clario 收购 + 回购大幅消耗</td></tr>
+      <tr><td>短期投资</td><td>—</td><td>2</td><td>—</td></tr>
+      <tr class="hl"><td>现金 + 短投合计</td><td>~9,852</td><td>3,256</td><td>可用流动性骤降</td></tr>
+      <tr class="hl"><td>短期借款及一年内到期长债</td><td>—</td><td>3,090</td><td>已核对</td></tr>
+      <tr class="hl"><td>长期借款</td><td>—</td><td>40,071</td><td>Q1 净发债 $5.24B</td></tr>
+      <tr class="hl"><td>有息债务合计（含融资租赁）</td><td>—</td><td>43,161</td><td>短 3,090 + 长 40,071</td></tr>
+      <tr class="hl"><td><strong>真实净负债</strong></td><td>—</td><td><strong>-39,905</strong></td><td>⚠️ 净负债非净现金</td></tr>
+      <tr><td>经营租赁负债合计</td><td>1,470</td><td>*未单列</td><td>Q1 10-Q 并入其他负债，此为 12-31 明细</td></tr>
+      <tr><td>应收账款净额</td><td>—</td><td>9,204</td><td>—</td></tr>
+      <tr><td>存货</td><td>—</td><td>5,496</td><td>—</td></tr>
+      <tr><td>商誉</td><td>—</td><td>55,187</td><td>占总资产 48.7%</td></tr>
+      <tr><td>并购无形资产净额</td><td>—</td><td>19,146</td><td>商誉+无形占总资产约 66%</td></tr>
+      <tr><td>总资产</td><td>—</td><td>113,281</td><td>—</td></tr>
+      <tr><td>总权益</td><td>—</td><td>51,940</td><td>—</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">⚠️ <strong>净负债非净现金——铁律提示</strong>：TMO 有息债务 $43.16B（短债 $3.09B + 长债 $40.07B，含融资租赁 $213M，已逐项核对）≫ 现金+短投 $3.26B，<strong>真实净负债约 -$39.9B</strong>。经营租赁负债 $1.47B 另计（Q1 10-Q 未单列，此为 2025-12-31 明细：流动 $275M + 非流动 $1,195M，加权剩余租期 7.9 年、折现率 4.7%）。<strong>杠杆结构提示</strong>：现金从年初 $9.85B 降至 $3.26B，主因 Q1 完成 Clario 收购（净现金支出 $8.87B）+ 回购 $3.0B；同时净发债 $5.24B。商誉 $55.2B + 无形 $19.1B 合计占总资产约 66%——这是理解 TMO"平台价值多为买来"的关键窗口，也是长期减值风险的来源。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.3 现金流量（Q1 2026 单季 · $M）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>Q1 FY25</th><th>Q1 FY26</th><th>说明</th></tr>
+      <tr><td>经营活动现金流（OCF）</td><td>723</td><td>1,192</td><td>+65% · 营运资金改善</td></tr>
+      <tr><td>- 资本开支 Capex</td><td>—</td><td>376</td><td>购建 PP&amp;E</td></tr>
+      <tr><td>+ 处置 PP&amp;E</td><td>—</td><td>9</td><td>官方 FCF 口径</td></tr>
+      <tr class="hl"><td>自由现金流（FCF）</td><td>373</td><td>825</td><td>+121% · 公司官方口径</td></tr>
+      <tr><td>并购净现金支出</td><td>—</td><td>8,872</td><td>完成 Clario 收购</td></tr>
+      <tr><td>回购金额</td><td>—</td><td>3,000</td><td>约 490 万股 @ ~$616</td></tr>
+      <tr><td>股息支付</td><td>—</td><td>162</td><td>Q1 增息 10%</td></tr>
+      <tr><td>债务发行净额</td><td>—</td><td>5,238</td><td>+ 商票 $389M</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">⚠️ <strong>口径说明</strong>：上表为 Q1 2026 单季现金流量表官方 line item。FCF $825M（+121% YoY）虽增速亮眼，但 Q1 是 TMO 季节性最弱的一季，<strong>本季返还股东（回购 $3.0B + 股息 $162M = $3,162M）+ 并购（$8,872M）合计 $12.0B，远超 FCF $825M</strong>，全靠期初现金 + 净发债 $5.24B 支撑——这是"杠杆化扩张 + 返还"叠加，不可用单季外推全年返还能力。全年 FCF 需待后续季度（TMO 现金流后半年更强）。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.4 所有者盈余（价值投资口径 · 估算）</h3>
+  <div class="dcf-note">
+    <p><strong>所有者盈余 = 净利润 + 折旧摊销 + 非现金费用 − 维护性 Capex ± 营运资金</strong></p>
+    <p>TMO 的 GAAP 净利被巨额并购无形摊销（$430M/季，年化约 $1.7B）压低，这部分是非现金费用，应加回；但同时它是"买来的资产在消耗价值"，加回时需保持警惕（TMO 靠持续并购维持增长，摊销并非纯会计噪音）。以 <strong>调整后净利年化约 $9.3B（FY2026 指引中值 EPS $24.88 × 373M 股）</strong>为起点，扣除维护性 Capex（年 Capex 约 $1.5-1.8B，其中维护性约六成）+ 营运资金占用后，<strong>估算所有者盈余 / 全年 FCF ≈ $7.0-7.5B</strong>。</p>
+    <p><strong>所有者盈余收益率 ≈ FCF $7.5B（估）/ 市值 $196B ≈ 3.8%</strong>——这是一个<span class="warn-t">"顶级平台 + 满价估值"</span>的收益率：3.8% 的 FCF Yield，对一个当前有机增长仅 +1%、净负债近 $40B 的公司而言不算便宜。<strong>换句话说：TMO 的问题不在于生意好不好，而在于当前有机增速偏弱之下，21x Forward P/E 的价格是否留有余地——答案是几乎没有安全边际。</strong>（注：FCF 为估算值，标注"估"，全年实际以后续季度披露为准。）</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 6 ═══ -->
+<div class="section">
+  <div class="stitle">模块 6 · 电话会分析（Q1 2026 + 前 2 季度）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">Q1 2026 电话会（2026-04-23）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"上调 FY2026 全年指引：营收升至 $47.3-48.1B、调整后 EPS 升至 $24.64-25.12"——CEO Marc Casper</div><div class="ec-note">随强劲开局 + Clario 并入，从 Q4 初始指引（营收 $46.3-47.2B、EPS $24.22-24.80）上调。中值营收 $47.7B、EPS ~$24.88，对应约 6-8% 营收 / 8-10% EPS 增长。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"完成 Clario 收购（企业价值约 $9.1B），强化生物制药临床研究端到端能力"</div><div class="ec-note">Clario 提供临床研究终点数据方案，并入实验室产品与生物制药服务分部——是本季并购 +3% 增长的主力，也是杠杆抬升的原因。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"宣布与 NVIDIA（AI 赋能实验室仪器）、SHL Medical（无菌灌装-封装）战略合作"</div><div class="ec-note">前沿布局：AI + 自动化提升仪器与实验室生产力，是护城河的科技延伸。新品密集（Glacios 3 冷冻电镜、TSQ Certis 质谱、Gibco CTS Compleo 灌装系统）。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"有机增长仅 +1%，分析仪器有机 -2%，终端需求（客户 capex + 政府经费）仍偏弱；毛利率降至 40.7%"</div><div class="ec-note">增长质量是本季核心隐忧——报告 +6% 里五成靠并购+汇率。分析仪器利润率从 23.2% 降到 20.7%，是全平台最弱环节。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"尽管营收/EPS 双超预期，财报当日股价下跌"</div><div class="ec-note">市场对增长质量（有机仅 +1%）与杠杆上升（Clario 收购后净负债扩大）保持谨慎——超预期主要靠并购与汇率，而非内生动能。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q4 2025 电话会（2026-01-29）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"Q4 营收 $12.21B(+7%)、调整后 EPS $6.57(+8%) 超预期；FY2025 营收 $44.56B(+4%)、调整后 EPS $22.87(+5%)"</div><div class="ec-note">Q4 GAAP 经营利润率升至 18.5%（全年最高），PPI 持续驱动利润率扩张；生物制药/制药服务需求回暖，PPD 临床与 Patheon 产能利用率改善。给出 FY2026 初始指引。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q3 2025 电话会（2025-10 月）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"Q3 营收 $11.12B(+5%)、有机 +3%，调整后 EPS $5.79(+10%) 大幅超预期（市场估 $5.50）"</div><div class="ec-note">多数终端市场恢复增长，公司上调/收窄全年指引。GAAP 摊薄 EPS $4.27 基本持平（并购无形摊销拖累 GAAP 口径）。注：Q3 有机 +3% 明显强于本季 Q1 的 +1%——内生动能环比放缓值得关注。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">指引兑现度追踪</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>历史指引</th><th>Q1 2026 实际/更新</th><th>评价</th></tr>
+      <tr><td>FY2026 营收初始 $46.3-47.2B</td><td>上调至 $47.3-48.1B</td><td><span class="badge up">上调</span></td></tr>
+      <tr><td>FY2026 调整后 EPS 初始 $24.22-24.80</td><td>上调至 $24.64-25.12</td><td><span class="badge up">上调</span></td></tr>
+      <tr><td>Q1 营收/EPS 共识</td><td>营收 $11.0B / 调整 EPS $5.44 双超预期</td><td><span class="badge up">超预期</span></td></tr>
+      <tr><td>有机增长动能</td><td>Q3 +3% → Q1 2026 +1%</td><td><span class="badge dn">放缓</span></td></tr>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>信号汇总</strong>：Q1 2026 是 TMO "<span class="hl-t">指引上调 + 并购落地 + 前沿合作</span>"与"<span class="warn-t">有机放缓 + 毛利率承压 + 杠杆抬升</span>"并存的一季。管理层执行力和资本运作没问题，指引连续上调、财务口径超预期；但增长质量是软肋——报告 +6% 里内生只有 +1%，分析仪器有机 -2%、毛利率 5 季最低、内生动能从 Q3 的 +3% 环比放缓。<strong>业绩的"面子"很好，但"里子"（有机增长与利润率）需要终端需求真正回暖才能验证。这也是财报当日股价下跌的原因。</strong></p>
+  </div>
+</div>
+
+<!-- ═══ 模块 7 ═══ -->
+<div class="section">
+  <div class="stitle">模块 7 · 多模型估值（8 种方法）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">7.1 估值汇总表（独立估值 · 不锚定现价 · USD）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>估值方法</th><th>每股公允价</th><th>假设要点</th><th>权重</th></tr>
+      <tr><td>1. 相对估值（P/E）</td><td>$500</td><td>FY2026 调整 EPS $24.88 × 20.1x（略低于同业中枢，反映有机 +1% 偏弱）</td><td>20%</td></tr>
+      <tr><td>2. DCF（基准）</td><td>$465</td><td>FCF₀≈$7.3B，未来 5 年 FCF CAGR +8%，WACC 8%，永续 3.5%，扣净负债 $39.9B</td><td>20%</td></tr>
+      <tr><td>3. 所有者盈余收益率</td><td>$479</td><td>FCF（杠杆后，归股东）$7.6B ÷ 目标收益率 4.25% = $178.8B / 373M 股</td><td>15%</td></tr>
+      <tr><td>4. PEG</td><td>$455</td><td>Forward P/E 21x ÷ EPS 增速 ~9% = PEG 2.3（优质但偏贵）；给 PEG 2.0 → 隐含合理价</td><td>10%</td></tr>
+      <tr><td>5. DDM</td><td>参考有限（~$320）</td><td>DPS 约 $1.85、股息率仅 0.35%，以回购为主，DDM 参考意义有限</td><td>5%</td></tr>
+      <tr><td>6. NAV</td><td>不适用</td><td>非资产型公司（商誉 $55B + 无形 $19B 为主，非重估地产/金融资产）</td><td>0%</td></tr>
+      <tr><td>7. 反向 DCF</td><td>当前价隐含 FCF 增长 <strong>~10%</strong></td><td>$523.85 隐含市场认为 FCF 长期增 ~10%——高于当前有机 +1%，需终端需求回暖兑现</td><td>15%</td></tr>
+      <tr><td>8. SOTP 分部加总</td><td>$455</td><td>四分部按各自利润率/成长给 EV/EBIT 13-16x，合计 EV 后扣净负债 $39.9B</td><td>15%</td></tr>
+      <tr class="hl"><td><strong>加权公允价中位数</strong></td><td><strong>$470</strong></td><td>估值区间 $455-500 · 中位 ~$470</td><td>100%</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.8;"><strong>与现价对照</strong>：当前 $523.85 vs 加权公允中位 $470 · <span class="warn-t">溢价约 11%（即现价高于内在价值）</span>——<strong>不仅没有 25% 安全边际，反而是估值溢价状态</strong>。TMO 是世界级科学平台，但在有机增长仅 +1%、净负债近 $40B 的当下，当前价格已把平台质量与未来复苏充分定价。反向 DCF 显示市场已定价 ~10% 长期 FCF 增长，远高于当前有机 +1%——这需要终端需求真正回暖才站得住。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.2 P/E 多档透视表（GAAP vs Non-GAAP 差异 27% · 必做）</h3>
+  <p style="margin-bottom:10px; font-size:13px; color:var(--text2);">TMO 的 GAAP 摊薄 EPS（TTM $18.19）与调整后 EPS（TTM $23.16）相差约 27%（主因并购无形摊销 $1.7B/年 + 重组），触发多档透视：</p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>口径</th><th>EPS</th><th>P/E (基于 $523.85)</th><th>读数说明</th></tr>
+      <tr><td>TTM GAAP P/E</td><td>$18.19</td><td>~28.8x</td><td>含并购无形摊销拖累（虚高）</td></tr>
+      <tr><td>TTM Non-GAAP（调整后）P/E</td><td>$23.16</td><td>~22.6x</td><td>剔一次性 · 较可信</td></tr>
+      <tr class="hl"><td><strong>FY2026 Forward P/E（调整 EPS 中值 $24.88）</strong></td><td><strong>$24.88</strong></td><td><strong>~21.1x</strong></td><td>最可信档 · 市场惯用</td></tr>
+      <tr><td>FY2027 Forward P/E（调整 EPS 估 ~$27）</td><td>~$27</td><td>~19.4x</td><td>按指引 +8-10% 外推</td></tr>
+      <tr><td>Q1 2026 单季年化 GAAP P/E</td><td>$4.43×4=$17.72</td><td>~29.6x</td><td>季节性最弱季外推（偏保守）</td></tr>
+      <tr><td>P/S (TTM)</td><td>营收 ~$45.2B</td><td>~4.3x</td><td>平台型溢价</td></tr>
+      <tr><td>FCF Yield（估）</td><td>FCF 估 ~$7.5B</td><td>~3.8%</td><td>顶级平台 + 满价估值</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3);"><strong>最可信档</strong>：Forward P/E ~21x（FY2026）/ ~19x（FY2027）。同业对比：Danaher ~20-22x、Agilent ~20x、Waters ~21-23x。<span class="hl-t">TMO Forward P/E ~21x 与同业相近、略高于 Danaher</span>——作为龙头享受规模与多元溢价合理，但当前有机增速（+1%）暂低于同业指引（+3-6%），溢价缺乏内生增长支撑，绝对估值仍在满价区、无安全边际。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.3 12 个月目标价（概率加权）</h3>
+  <div class="pgrid">
+    <div class="pbox"><div class="pl">悲观情景 · 30%</div><div class="pv pc">$430</div><div class="pn">有机增长停在 +1% + 分析仪器持续弱 + 估值压缩至 ~16x FY2027<br>距现价 -18%</div></div>
+    <div class="pbox"><div class="pl">基准情景 · 45%</div><div class="pv pf">$505</div><div class="pn">FY2026 指引兑现 + 有机温和回暖至低个位数 + 估值 ~19x FY2027 $27<br>距现价 -4%</div></div>
+    <div class="pbox"><div class="pl">乐观情景 · 25%</div><div class="pv ps">$600</div><div class="pn">有机重回中个位数 + Clario/NVIDIA 协同 + 估值重估至 ~22x<br>距现价 +15%</div></div>
+  </div>
+  <p style="font-size:13px; color:var(--text2);"><strong>概率加权公允价</strong>：30%×$430 + 45%×$505 + 25%×$600 = <strong>$506</strong> ≈ $505。<strong>叠加 0.35% 股息 = 12 个月总回报约 -3%</strong>——不激动。<span class="warn-t">当前 $523.85 略高于概率加权目标 $505，且远高于机械首仓 $376——不在合理建仓窗口</span>。（注：卖方分析师 12 个月目标均值约 $596，隐含更乐观的复苏假设；本栏独立估值更保守，以有机 +1% 的当前动能为锚。）</p>
+</div>
+
+<!-- ═══ 模块 8 ═══ -->
+<div class="section">
+  <div class="stitle">模块 8 · 竞争与行业分析</div>
+  <div class="cmt">
+    <p><strong>生命科学工具与诊断格局</strong>：TMO 是全球最大的科学服务商，与 Danaher（生命科学+诊断综合体，规模最接近）、Agilent（分析仪器/质谱直接对手）、Waters（液相色谱/质谱）等构成寡头竞争。TMO 的差异化在于<span class="hl-t">最全的端到端覆盖（试剂→仪器→CRO→CDMO）+ 最大的规模</span>，但也因此最"重"、最依赖并购整合。</p>
+
+    <p><strong>同业对比（截至 2026-07）</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>公司</th><th>Forward P/E</th><th>2026 增长指引</th><th>核心评价</th></tr>
+        <tr class="hl"><td><strong>Thermo Fisher TMO</strong></td><td><strong>~21x</strong></td><td>营收 +6-8% / 有机当前 +1%</td><td>规模与多元之王 · 有机暂弱</td></tr>
+        <tr><td>Danaher DHR</td><td>~20-22x</td><td>核心营收 +3% 至 +6%</td><td>生命科学+诊断综合体 · 规模最近</td></tr>
+        <tr><td>Agilent A</td><td>~20x</td><td>营收 +6.3% 至 +7.8%（核心 +4.5-6%）</td><td>分析仪器/质谱直接对手</td></tr>
+        <tr><td>Waters WAT</td><td>~21-23x</td><td>中个位数增长</td><td>色谱/质谱 · 2025 与 BD 生科合并</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:10px; font-size:12px; color:var(--text3);">TMO Forward P/E ~21x 与 Agilent/Waters 相近、略高于 Danaher。作为行业龙头享受规模与多元化溢价合理，但 <strong>2026 有机增速（+1%）暂低于 Danaher（+3-6%）、Agilent（核心 +4.5-6%）的同业指引</strong>——溢价目前缺乏内生增长支撑，是估值最需要警惕的点。</p>
+
+    <p style="margin-top:14px;"><strong>波特五力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>新进入者：</strong>低（全平台规模 + 品牌 + 方法验证壁垒难复制）</li>
+      <li><strong>替代品：</strong>中（单一细分有专业厂商替代，但全链条一站式难被取代）</li>
+      <li><strong>供应商议价：</strong>低—中（多元采购，规模压制供应商）</li>
+      <li><strong>买家议价：</strong>中（大型制药/科研客户有议价力，仪器采购受预算周期约束）</li>
+      <li><strong>同业竞争：</strong>中—高（Danaher/Agilent/Waters 在高端细分竞争激烈，分析仪器利润率已现下滑）</li>
+    </ul>
+
+    <p><strong>行业与颠覆风险</strong>：生命科学工具是长期结构性增长赛道（研发投入、精准医疗、生物制药扩产），TAM 广阔。核心风险不是被颠覆，而是<span class="warn-t">周期性——终端需求（客户 capex、政府科研经费、生物技术融资）在高利率/预算收紧环境下疲弱，直接压制仪器销售与有机增长</span>。这是 TMO 当前有机 +1% 的根源，也是短期最大的不确定性。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 9 ═══ -->
+<div class="section">
+  <div class="stitle">模块 9 · 技术面与 K 线分析（次要参考）</div>
+  <div class="cmt">
+    <p><strong>趋势</strong>：TMO 当前 $523.85，处于 52 周区间 <span class="hl-t">$403.36 - $643.99 的中下沿</span>，距高点回落约 19%、距低点反弹约 30%。过去一年经历了从高点的显著回调（终端需求疲弱 + 加息环境压制成长股估值），近期在 $500-535 区间震荡。这是一只从高位回落、正在寻找基本面拐点的大盘蓝筹。</p>
+
+    <p><strong>关键价位</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>支撑</strong>：$500（近期震荡下沿）/ $470（内在价值中位）/ $403（52 周低）</li>
+      <li><strong>阻力</strong>：$535（当日高点附近）/ $600（乐观情景/前期密集区）/ $644（52 周高）</li>
+    </ul>
+
+    <p><strong>指标信号</strong>：股价距 52 周高 -19%，估值已从峰值回落，但仍未进入价值区（内在价值 $470 &lt; 现价 $523）。<span class="warn-t">技术面处于"跌下来但没跌到便宜"的中间地带</span>——下有支撑、上有压力，缺乏明确方向。</p>
+
+    <p><strong>注意</strong>：TMO 的核心驱动是有机增长能否回暖 + 毛利率能否企稳 + Clario 整合 + 下季指引，技术面是次要参考。价值投资者应等基本面（有机增速回升）或价格（回落至 $400-470 给出安全边际）出现明确信号，而非在 $523 的满价区追入。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 10 ═══ -->
+<div class="section">
+  <div class="stitle">模块 10 · 增长催化剂与前景展望</div>
+  <div class="cmt">
+    <p><strong>短期催化剂（未来 6 个月）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>2026-07-23 Q2 2026 财报</strong>——有机增长是否从 +1% 回暖、毛利率能否企稳、分析仪器能否止跌，是验证复苏的第一个关键数据点</li>
+      <li><strong>Clario 整合进度</strong>——$9.1B 收购的协同兑现与利润率贡献</li>
+      <li><strong>微生物业务出售（约 $1.08B）落地</strong>——组合优化 + 回笼现金降杠杆</li>
+      <li><strong>NVIDIA / SHL Medical 合作商业化</strong>——AI 仪器与灌装封装的新品放量</li>
+    </ul>
+
+    <p><strong>长期展望（3-5 年）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>终端需求正常化</strong>——生物制药扩产、精准医疗、科研投入是长期顺风，有机增长有望回归中个位数</li>
+      <li><strong>PPI 利润率扩张</strong>——持续改善体系推动调整后经营利润率向 23%+ 迈进</li>
+      <li><strong>并购整合复利</strong>——PPD/Patheon/Clario 端到端服务能力深化，绑定制药客户全生命周期</li>
+      <li><strong>AI/自动化赋能</strong>——NVIDIA 合作 + 实验室数字化，提升仪器与服务附加值</li>
+      <li><strong>风险情景</strong>：终端需求持续疲弱 / 关税与地缘扰动 / 大额商誉减值 / 高杠杆约束资本灵活度</li>
+    </ul>
+
+    <p><strong>TAM 展望</strong>：全球生命科学工具 + 诊断 + CRO/CDMO 市场规模巨大且长期增长，TMO 作为最大平台可寻址市场远未饱和。核心问题不是天花板，而是<strong>短期终端需求何时回暖、有机增长何时从 +1% 重回中个位数——这决定了当前 21x Forward P/E 的溢价能否站稳。</strong></p>
+  </div>
+</div>
+
+<!-- ═══ 模块 11 ═══ -->
+<div class="section">
+  <div class="stitle">模块 11 · 风险矩阵</div>
+  <div class="risk-grid">
+    <div class="risk-card r4"><h5>1. 有机增长疲弱 / 增长质量</h5><span class="risk-score">4 / 5 高</span><p>有机仅 +1%、分析仪器有机 -2% · 报告 +6% 五成靠并购+汇率 · 内生动能从 Q3 的 +3% 环比放缓 · 溢价缺内生支撑</p></div>
+    <div class="risk-card r4"><h5>2. 高杠杆 / 商誉减值</h5><span class="risk-score">4 / 5 高</span><p>净负债近 $40B（Clario 收购后扩大）· 商誉 $55.2B + 无形 $19.1B 占总资产 66% · 若某并购整合不及预期，减值是长期悬剑</p></div>
+    <div class="risk-card r4"><h5>3. 满估值无安全边际</h5><span class="risk-score">4 / 5 高</span><p>Forward P/E 21x / FCF Yield 3.8% · 现价 $523 高于内在价值 $470 约 11%（溢价而非折价）· 任何有机走弱或利空都可能触发压缩</p></div>
+    <div class="risk-card r3"><h5>4. 终端需求 / 宏观周期</h5><span class="risk-score">3 / 5 中</span><p>依赖客户资本开支 + 政府科研经费 + 生物技术融资 · 高利率/预算收紧压制仪器采购 · 关税/汇率敞口</p></div>
+    <div class="risk-card r3"><h5>5. 毛利率承压</h5><span class="risk-score">3 / 5 中</span><p>毛利率降至 40.7%（5 季最低）· 并购摊薄 + 成本上升 + 分析仪器利润率下滑（23.2%→20.7%）· PPI 能否抵消待观察</p></div>
+    <div class="risk-card r2"><h5>6. 平台质量（机会）</h5><span class="risk-score">2 / 5 反向</span><p>全球最大科学服务商 + 多元四分部 + 高毛利耗材压舱 + PPI 体系 · 长期结构性成长赛道 · 世界级平台本身是安全垫</p></div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>3 个黑天鹅情景</strong>：</p>
+    <ol style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>大额商誉/无形减值</strong>——概率 10% · 若某笔并购（如 PPD/Clario）整合或终端需求长期不及预期，$55B 商誉的减值将重击 GAAP 利润与权益 · 股价可能跌至 $400 以下</li>
+      <li><strong>终端需求深度衰退 + 有机负增长</strong>——概率 12% · 生物技术融资寒冬 + 政府科研经费削减 + 关税冲击 · 有机转负、利润率下滑 · 股价跌至 $420 附近</li>
+      <li><strong>高杠杆遭遇再融资/评级压力</strong>——概率 8% · 净负债近 $40B 在高利率下再融资成本上升，约束回购与并购灵活度</li>
+    </ol>
+
+    <p style="margin-top:10px;"><strong>下行支撑</strong>：世界级平台 + 多元四分部 + 高毛利耗材经常性收入 + 长期成长赛道构成质量底。<span class="hl-t">$400-420 是较硬的估值底</span>（52 周低 $403 + Forward P/E ~16x 下限）。TMO 的"底"由平台质量支撑，但当前价格离这个底还有相当距离——这正是"好生意 + 贵价格"的典型两难。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 12 ═══ -->
+<div class="section">
+  <div class="stitle">模块 12 · 股东回报分析</div>
+  <div class="cmt">
+    <p><strong>TMO 是"以并购为主、回购增息为辅"的资本配置结构——股东回报真实但体量相对温和，且本季被大额并购与杠杆抬升"分流"。</strong>用三个递进问题拆开看。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 18px 0 10px; font-family: 'Segoe UI',sans-serif;">12.1 公司给了股东多少？</h3>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>年度</th><th>现金股息</th><th>回购金额</th><th>股东总回报</th><th>说明</th></tr>
+        <tr><td>FY2023</td><td>$523M</td><td>$3,000M</td><td>$3,523M</td><td>回购占 85%</td></tr>
+        <tr><td>FY2024</td><td>$583M</td><td>$4,000M</td><td>$4,583M</td><td>回购加码</td></tr>
+        <tr><td>FY2025</td><td>$636M</td><td>$3,000M</td><td>$3,636M</td><td>股息连续提升</td></tr>
+        <tr class="hl"><td><strong>三年合计</strong></td><td><strong>$1,742M</strong></td><td><strong>$10,000M</strong></td><td><strong>$11,742M</strong></td><td>回购占 85%</td></tr>
+        <tr><td>Q1 2026 单季</td><td>$162M</td><td>$3,000M</td><td>$3,162M</td><td>回购加速（均价 ~$616）</td></tr>
+      </table>
+    </div>
+    <p style="font-size:13px; color: var(--text2); margin-top:8px"><strong>Trailing Shareholder Yield</strong> ≈ FY2025 返还 $3,636M / 市值 $196B ≈ <strong>1.9%</strong>（其中回购 ~1.5% + 股息 ~0.35%）。<span class="hl-t">TMO 是"低股息 + 中等回购 + 大额并购"的资本配置结构</span>——回购与增息是辅线，主线资金投向并购（Q1 单 Clario 就 $8.87B，是三年回购总额的 88%）。相较 Visa 等纯回购机器，TMO 的股东现金回报体量温和，钱主要用来"买增长"。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.2 给的方式好不好？</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>真实缩股 · 含金量中高</strong>：摊薄股数从 FY2023 的 388M → FY2024 383M → FY2025 378M → Q1 2026 373M，三年降约 2.6%（含 Q1 约 -3.9%）。<span class="hl-t">回购确实压过了股权激励稀释、真实减少了股本</span>，而非只替 SBC"接盘"——Q1 调整后 EPS +6% 略高于调整后净利 +4%，差额即缩股贡献。含金量中高（美股回购多入库存股，非注销，但股数真实下降）</li>
+      <li><strong>回购择时中性</strong>：Q1 回购均价约 $616，高于当前 $523——本季回购买在了相对高位（52 周高 $644 附近），择时并不占优，是一个瑕疵</li>
+      <li><span class="warn-t">杠杆化返还 + 并购分流</span>：Q1 回购 $3.0B + 并购 $8.87B 合计远超 FCF $0.83B，靠净发债 $5.24B 支撑，净负债扩大到近 $40B。股东回报"含金量"被高杠杆与择时不佳打了折扣</li>
+    </ul>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.3 能不能继续给、给多少？</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>授权额度偏紧</strong>：2025-11-06 董事会授权 $5.0B 新回购计划，Q1 2026 已用 $3.0B，截至 2026-05-01 <strong>剩余可用仅约 $2.0B</strong>（约占市值 1%）——相较部分同行的大额多年授权，当前回购"弹药"不宽裕</li>
+      <li><strong>股息可持续、但基数低</strong>：Q1 宣布增息 10%（连续多年提升），派息率极低（股息率约 0.35%），增息空间充足但对总回报贡献有限</li>
+      <li><strong>(股息 + 回购) / FCF 覆盖度</strong>：FY2025 返还 $3,636M / 全年 FCF 估约 $7B ≈ 52%——<strong>FCF 充分覆盖常态回报</strong>，可持续性好。但 Q1 因叠加 Clario 收购，返还+并购远超 FCF，靠发债补充</li>
+      <li><strong>需留意借债扩张</strong>：净负债因 Clario 收购 + 回购上升到近 $40B，短期资本配置优先级会向"整合 + 降杠杆"倾斜，回购力度可能阶段性收敛</li>
+    </ul>
+    <p><strong>模块小结</strong>：<span class="hl-t">积极但含金量中等</span>——连续增息 + 三年真实缩股 2.6%（回购压过 SBC）是加分项，常态 FCF 覆盖度健康（~52%）；但股息率极低（回报体量温和）、Q1 回购择时偏高位（均价 $616）、授权仅剩 $2.0B、且本季资金主要投向 $8.87B 的杠杆化并购而非股东回报。总体是一家"把钱主要用于买增长、股东现金回报为辅"的公司——回报真实，但既非高含金量的纯注销机器，也谈不上慷慨。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 13 ═══ -->
+<div class="section">
+  <div class="stitle">模块 13 · 海图评分卡 + 投资决策</div>
+
+  <div class="scorecard">
+    <h3 style="font-size:15px; color:var(--text); margin-bottom: 16px; font-family: 'Segoe UI',sans-serif;">海图评分卡（6 维 A-D）</h3>
+    <div class="score-grid">
+      <div class="score-card"><div class="score-letter s-bp">A-</div><div class="score-body"><h4>1. 生意可预测性</h4><p>多元科学平台、耗材经常性收入压舱、收入能见度高；但有机增长受终端需求周期扰动，波动于 +1% 至中个位数之间。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">A-</div><div class="score-body"><h4>2. 经济护城河</h4><p>规模 + 转换成本 + 品牌宽护城河；但网络效应弱、分析仪器竞争加剧利润率下滑、护城河部分靠并购"买来"。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">A-</div><div class="score-body"><h4>3. 管理层质量</h4><p>Casper 执掌 15 年、PPI 体系、战略连续；但长期"以并购换增长"推高杠杆与商誉，资本配置纪律有隐忧。</p></div></div>
+      <div class="score-card"><div class="score-letter s-b">B+</div><div class="score-body"><h4>4. 财务质量</h4><p>OCF +65%、40.7% 毛利、调整经营利润率 21.8%；但净负债近 $40B、商誉+无形占总资产 66%、有机仅 +1%、毛利率 5 季最低。</p></div></div>
+      <div class="score-card"><div class="score-letter s-b">B+</div><div class="score-body"><h4>5. 资本配置纪律</h4><p>真实缩股 2.6%/3年 + 连续增息 + 常态 FCF 覆盖 52%；但 Q1 回购择时偏高位、授权仅剩 $2.0B、大额杠杆化并购。</p></div></div>
+      <div class="score-card"><div class="score-letter s-c">C+</div><div class="score-body"><h4>6. 估值与安全边际</h4><p>Forward P/E 21x / FCF Yield 3.8% / 现价 $523 高于内在价值 $470 约 11% · <strong>非但无安全边际，反呈估值溢价</strong>。</p></div></div>
+    </div>
+
+    <div class="flag-row">
+      <strong>红旗排查</strong>：<strong>商誉 + 无形占总资产 66%（$74B）</strong>（长期减值风险）+ <strong>净负债近 $40B、杠杆随 Clario 收购上升</strong> + <strong>有机增长仅 +1%（增长质量存疑，报告 +6% 五成靠并购+汇率）</strong> + <strong>估值无安全边际（现价高于内在价值 11%）</strong>。触发"<span class="warn-t">增长质量存疑 + 满估值溢价</span>"——尽管平台质量优秀（6 维多为 A-/B+），综合评级<strong>定为「持有观望」</strong>。
+    </div>
+
+    <p style="margin-top:18px; font-size:14px; color:var(--text); line-height:1.85;"><strong>综合评级</strong>：<span class="rating-badge rating-hold" style="font-size:14px;">持有观望</span>。平台质量是世界级（6 维多为 A-/B+），但估值维度 C+（现价高于内在价值 11%、无安全边际）+ 有机增长仅 +1% 的增长质量红旗 → 定为持有观望。核心判断：<strong>TMO 的问题不是生意好不好，而是"当前有机增速偏弱 + 价格偏贵"的组合——现价 $523 没有安全边际，现有持仓者可继续持有等待有机增长回暖，新买入者应等回调至 $400-470 或有机增速回升的确认信号。</strong></p>
+  </div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">投资决策（精确价格 · USD）</h3>
+
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>项目</th><th>价格</th><th>说明</th></tr>
+      <tr><td>12 个月目标价（概率加权/基准）</td><td><strong>$505</strong> (-4%)</td><td>FY2026 指引兑现 + 有机温和回暖 + 估值 ~19x FY2027</td></tr>
+      <tr><td>悲观目标（30% 概率）</td><td>$430 (-18%)</td><td>有机停在 +1% + 估值压缩至 ~16x</td></tr>
+      <tr><td>乐观目标（25% 概率）</td><td>$600 (+15%)</td><td>有机重回中个位数 + 协同 + 估值重估</td></tr>
+      <tr class="hl"><td>首仓建仓（估值中位数 $470 × 80%）</td><td><strong>$376</strong></td><td>距现价 -28% · 耐心等回调</td></tr>
+      <tr><td>二仓建仓（× 70%）</td><td>$329</td><td>-37% · 大幅回调机会</td></tr>
+      <tr><td>三仓建仓（× 60%）</td><td>$282</td><td>-46% · 黑天鹅级机会</td></tr>
+      <tr><td>止盈一档</td><td>$600</td><td>+15% · 减仓 25%</td></tr>
+      <tr><td>止盈二档</td><td>$660</td><td>+26% · 再减 25%（近 52 周高）</td></tr>
+      <tr><td>止盈三档</td><td>$720</td><td>+37% · 再减 25% · 最后 25% 长期持有</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.85;"><strong>建议总仓位</strong>：<strong>0-3%</strong>（观察仓 · 当前满估值 + 有机偏弱，不宜追高；等回调或有机回暖再逐步建仓）。<strong>持有周期</strong>：5-10 年（长期成长赛道 · 穿越需求周期 + 并购整合）。<strong>关键监控指标</strong>：① 有机增长能否从 +1% 回升至中个位数（最核心）；② 毛利率能否企稳回升（当前 40.7% 5 季最低）；③ 分析仪器利润率是否止跌；④ Clario 整合协同与净负债去化；⑤ Forward P/E 是否回落至 17x 以下（估值机会）。<strong>下次催化剂/财报</strong>：2026-07-23 Q2 2026 财报（盘前）。</p>
+</div>
+
+<!-- ═══ 海图页末长评 ═══ -->
+<div class="section">
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记 · 约 1120 字</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p class="lead">价值投资里有一种最容易被财报标题骗过去的情形——数字全线超预期，股票却在当天下跌。Thermo Fisher 这一季就是标本：营收超了、EPS 超了、全年指引上调了，可市场看穿了里子，用一根阴线投票。原因很朴素：报告增长 +6%，真正靠自己长出来的只有 +1%，剩下五个百分点是买来的、和汇率给的。</p>
+
+      <p>TMO 是全球最大的科学服务商——它不赌哪个药能成、哪个疗法会赢，而是给所有做研究、做药、做诊断的人卖试剂、耗材、仪器，再承接他们的临床试验与药品代工，从整个行业的研发与生产活动里稳定抽成。这是一门 $1130 亿资产、四大分部多元支撑、40.7% 毛利率、以 PPI 持续改善体系挤利润率的平台生意。Q1 2026 营收 $11.0B(+6%)、调整后 EPS $5.44(+6%)、GAAP 净利率 15.0%——面子体面，里子需要细看。</p>
+
+      <h4>几个研判要点</h4>
+
+      <p><strong>一、两个"看穿"，是读懂这一季增长质量的钥匙。</strong> 看穿一：营收 +6% 拆开是<span class="hl-t">有机 +1% + 并购 +3% + 汇率 +2%</span>——真正的内生动能只有 1 个百分点，其中分析仪器有机 -2%，是全平台最弱的一块。看穿二：GAAP EPS +11% 跑赢调整后 EPS +6%，不是经营更强，而是 GAAP 基数被并购无形摊销压低了；<span class="hl-t">调整后经营利润率 21.8% 实际是微降的（去年 21.9%）</span>，毛利率更是降到 40.7%、5 季最低。业绩的"超预期"主要靠并购与汇率，而非内生加速。</p>
+
+      <p><strong>二、这是一家"用资产负债表买增长"的公司，杠杆正在抬升。</strong> Q1 完成 Clario 收购花掉 $8.87B、同时回购 $3.0B，两项远超当季自由现金流 $0.83B，靠净发债 $5.24B 补上，现金从年初 $9.85B 骤降到 $3.26B。<span class="warn-t">TMO 是净负债公司——有息债务 $43.16B，真实净负债近 $40B，绝非"现金堡垒"</span>。更要紧的是，总资产 $113B 里商誉 $55.2B + 无形 $19.1B，合计约 66% 是"买来的价值"，这是长期减值风险的来源。</p>
+
+      <p><strong>三、管理层执行力强，但护城河的"加宽"越来越依赖并购。</strong> Casper 执掌 15 年，PPI 体系、战略连续、主动牵手 NVIDIA 做 AI 仪器、出售微生物业务优化组合——这些都是加分。但当内生增长长期停在低个位数，护城河的拓宽就必须靠不断买入，而每一次买入都在消耗资产负债表、累积商誉。规模与转换成本的护城河 10 年后大概率还在，但分析仪器利润率从 23.2% 降到 20.7%，提醒我们它并非无懈可击。</p>
+
+      <p><strong>四、股东回报真实，但体量温和、且被并购分流。</strong> 三年（FY2023-25）股息 $1.74B + 回购 $10.0B，摊薄股数从 388M 真实降到 373M（回购压过了股权激励稀释，含金量中高）；常态 FCF 覆盖度约 52%，可持续。但股息率仅 0.35%、Q1 回购均价 $616 买在高位、授权仅剩 $2.0B，而同期一笔 Clario 就花了 $8.87B。<span class="hl-t">这是一家把钱主要用于买增长、股东现金回报为辅的公司</span>——真实，但谈不上慷慨。</p>
+
+      <p><strong>五、独立估值 $470，现价 $523，是溢价而非折价。</strong> 八种方法加权中位约 $470：相对 P/E $500、DCF $465、所有者盈余 $479、SOTP $455。当前 $523.85 高出内在价值约 11%——<strong>不仅没有 25% 安全边际，反而处于估值溢价</strong>。反向 DCF 显示市场已定价 ~10% 的长期 FCF 增长，可当前有机才 +1%，这份溢价需要终端需求真正回暖才站得住。卖方均值目标 $596 更乐观，但那是押注复苏；我以当下的 +1% 动能为锚，更保守。</p>
+
+      <h4>海图研判</h4>
+
+      <p><strong>评级：持有观望</strong>（世界级科学平台 + 多元四分部 + 高毛利耗材压舱 + PPI 利润率体系的顶级组合，对垒有机增长仅 +1% 的增长质量存疑 + 净负债近 $40B 的高杠杆并购 + 商誉占总资产 66% 的减值风险 + Forward P/E 21x 无安全边际的满估值溢价）。12 个月概率加权目标价 <strong>$505</strong>（-4%），叠加 0.35% 股息，总回报约 -3%。</p>
+
+      <p>操作建议：当前 $523.85 略高于目标 $505、远高于机械首仓 $376，<strong>不在合理建仓窗口</strong>。耐心等回调至 $376（估值中位 ×80%）建首仓、$329 加二仓、$282 极端机会三仓；或等有机增速从 +1% 回升的确认信号。止盈三档 $600 / $660 / $720，最后 25% 长期持有。<strong>建议总仓位 0-3%</strong>（观察仓，不追高）。持有周期 5-10 年。<span class="hl-t">关键纪律：现有持仓者可继续持有、等待有机增长回暖；新买入者必须等价格给出安全边际或基本面拐点——好平台也要好价格，尤其在它有机只长 1% 的时候。</span></p>
+
+      <h4>风险提示</h4>
+
+      <p>有机增长持续疲弱 / 大额商誉减值 / 高杠杆再融资压力 / 终端需求衰退 / 毛利率进一步承压——任一项都可能让股价跌向 $400-420。但世界级平台 + 多元四分部 + 高毛利耗材经常性收入 + 长期成长赛道构成质量底，<strong>$400-420 是较硬的估值底</strong>（52 周低 $403 + Forward P/E ~16x 下限）。TMO 的"底"由平台质量支撑，只是现价离这个底还有相当距离——这正是"好生意 + 贵价格"的典型两难。</p>
+
+      <p>关键叙事：<strong>"全球最大科学服务商 + 端到端平台 + 多元护城河 + PPI 利润率复利"的世界级生意，对垒"有机增长仅 +1% + 净负债近 $40B + 商誉占总资产 66% + Forward P/E 21x 无安全边际"的增长质量与估值风险</strong>。TMO 不是给追热度的人——它的超预期是并购拼出来的；它是给愿意等一个更好价格、或等有机增长真正回暖，然后让一台顶级科学平台慢慢复利的长期投资者。下次催化剂：2026-07-23 Q2 2026 财报。</p>
+
+      <p class="haitu-sign">—— 海图，灯下落笔，明日再观风浪。</p>
+
+      <p class="haitu-disc">⚠️ 免责声明：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，不构成任何投资建议。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div>《海图夜读》 · Thermo Fisher Scientific TMO Q1 2026 海图研判</div>
+  <div style="margin-top:6px;">发布日 2026-04-23 · 研判日 2026-07-11 · 数据来源 Thermo Fisher Q1 2026 官方财报（SEC 8-K Ex-99.1 + 10-Q）+ FY2025 10-K + 电话会 transcript · 货币 USD</div>
+</footer>
+
+<script>
+let curTheme = 'light';
+function toggleTheme() {
+  curTheme = curTheme === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', curTheme);
+  renderCharts();
+}
+
+const palette = {
+  light: { accent: '#8a9a8e', accent2: '#7b8fa0', accent3: '#b08d7a', gold: '#b9a06a', red: '#b87070', green: '#7a9a7a', grid: '#e5ddd5', text: '#7a706a' },
+  dark:  { accent: '#8a9a8e', accent2: '#8fabbf', accent3: '#c9a48e', gold: '#c9b07a', red: '#c08080', green: '#8aaa8a', grid: '#3e3a35', text: '#a09890' }
+};
+
+let charts = {};
+function renderCharts() {
+  Object.values(charts).forEach(c => c && c.destroy && c.destroy());
+  charts = {};
+  const p = palette[curTheme];
+  Chart.defaults.color = p.text;
+  Chart.defaults.borderColor = p.grid;
+
+  const quarters = ['Q1 25','Q2 25','Q3 25','Q4 25','Q1 26'];
+
+  const rev = [10.36, 10.86, 11.12, 12.22, 11.01];
+  const yoy = [0, 3, 5, 7, 6];
+  charts.rev = new Chart(document.getElementById('chartRev'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { type:'bar', label: '营收 ($B)', data: rev, backgroundColor: p.accent + 'CC', yAxisID: 'y' },
+      { type: 'line', label: 'YoY %', data: yoy, borderColor: p.red, backgroundColor: p.red, tension: 0.3, yAxisID: 'y1' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false }, y1: { position: 'right', grid: { drawOnChartArea: false }, ticks: { callback: v => v + '%' } } } }
+  });
+
+  const gm = [41.6, 41.2, 41.8, 41.5, 40.7];
+  const om = [16.6, 16.9, 17.4, 18.5, 16.9];
+  charts.margin = new Chart(document.getElementById('chartMargin'), {
+    type: 'line',
+    data: { labels: quarters, datasets: [
+      { label: '毛利率 %', data: gm, borderColor: p.accent3, backgroundColor: p.accent3 + '22', tension: 0.3, yAxisID: 'y' },
+      { label: 'GAAP 经营利润率 %', data: om, borderColor: p.accent2, backgroundColor: p.accent2 + '22', tension: 0.3, yAxisID: 'y1' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { position: 'left', ticks: { callback: v => v + '%' }, min: 38, max: 44 }, y1: { position: 'right', grid: { drawOnChartArea: false }, ticks: { callback: v => v + '%' }, min: 14, max: 20 } } }
+  });
+
+  charts.segment = new Chart(document.getElementById('chartSegment'), {
+    type: 'doughnut',
+    data: {
+      labels: ['实验室产品&生物制药服务', '生命科学解决方案', '分析仪器', '特种诊断'],
+      datasets: [{ data: [6036, 2636, 1716, 1142], backgroundColor: [p.accent, p.accent2, p.accent3, p.gold] }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { font: { size: 10 } } } } }
+  });
+
+  const gaapEps = [3.98, 4.28, 4.27, 5.21, 4.43];
+  const adjEps = [5.15, 5.36, 5.79, 6.57, 5.44];
+  charts.eps = new Chart(document.getElementById('chartEps'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { label: 'GAAP 摊薄 EPS ($)', data: gaapEps, backgroundColor: p.accent2 + 'CC' },
+      { label: '调整后 EPS ($)', data: adjEps, backgroundColor: p.green + 'CC' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true } } }
+  });
+
+  buildSankey();
+}
+
+function buildSankey() {
+  const p = palette[curTheme];
+  const labels = ['营收 $11.01','营业成本 $6.53','毛利 $4.48','SG&A $1.80','摊销/研发/重组 $0.82','营业利润 $1.86','非经营&税 $0.21','GAAP 净利 $1.65'];
+  const data = {
+    type: 'sankey',
+    orientation: 'h',
+    node: { pad: 16, thickness: 20, line: { color: p.grid, width: 0.5 }, label: labels, color: [p.accent, p.red, p.green, p.red, p.red, p.green, p.red, p.green] },
+    link: {
+      source: [0, 0, 2, 2, 2, 5, 5],
+      target: [1, 2, 3, 4, 5, 6, 7],
+      value:  [6.529, 4.476, 1.798, 0.815, 1.863, 0.212, 1.651],
+      color: [p.red+'55', p.green+'66', p.red+'55', p.red+'55', p.green+'66', p.red+'55', p.green+'66']
+    }
+  };
+  const layout = { font: { size: 12, color: p.text }, paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)', margin: { l: 10, r: 10, t: 10, b: 10 } };
+  Plotly.react('sankey', [data], layout, { displayModeBar: false, responsive: true });
+}
+
+renderCharts();
+</script>
+
+</body>
+</html>
