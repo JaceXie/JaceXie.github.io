@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 研判日 2026-07-11 · Booking Holdings Q1 2026 财报已于 2026-04-28 发布 -->
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Booking Holdings BKNG Q1 2026 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+<meta name="description" content="全球在线旅游平台绝对龙头——Booking.com／Priceline／Agoda／KAYAK／OpenTable 五大品牌连起供给与需求，从每笔预订抽佣。Q1 营收 +16%、间夜 +6%（中东冲突拖累约 2pp）、单季回报股东创纪录 $40 亿；调整后 EBITDA 利润率 37% + FCF 转化 96% + 三年缩股 15%。25 拆 1 后股价 $178、Forward P/E 仅 17x——生意顶级、价格从满估值回落到合理，但内在价值 ~$208 仅约 14% 安全边际，未到 25% 深度折让。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Booking Holdings BKNG Q1 2026 海图研判 · 海图夜读">
+<meta property="og:description" content="全球在线旅游平台绝对龙头——五大品牌连起供给与需求，从每笔预订抽佣。Q1 营收 +16%、单季回报股东创纪录 $40 亿；调整后 EBITDA 利润率 37% + FCF 转化 96% + 三年缩股 15%。25 拆 1 后 Forward P/E 仅 17x——生意顶级、价格合理但未到 25% 深度折让。">
+<meta property="og:url" content="https://jacexie.github.io/haitu/reports/bkng-q1-2026.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Booking Holdings BKNG Q1 2026 海图研判 · 海图夜读">
+<meta name="twitter:description" content="全球 OTA 绝对龙头 · 五品牌收费网络 · 调整后 EBITDA 利润率 37% + 三年缩股 15%。Q1 营收 +16%、单季回报股东 $40 亿。Forward P/E 17x——好生意，价格合理但未到深度折让。">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root { --bg:#f5f0eb; --bg2:#ece6df; --card:#ffffff; --card2:#f8f5f1; --border:#d9d0c7; --text:#4a4340; --text2:#7a706a; --text3:#a89f98; --accent:#8a9a8e; --accent2:#7b8fa0; --accent3:#b08d7a; --rose:#c09090; --gold:#b9a06a; --red:#b87070; --green:#7a9a7a; --shadow:rgba(0,0,0,0.06); --chart-grid:#e5ddd5; }
+[data-theme="dark"] { --bg:#1e1c1a; --bg2:#28251f; --card:#2e2a25; --card2:#363230; --border:#4a4540; --text:#d4ccc4; --text2:#a09890; --text3:#706860; --accent:#8a9a8e; --accent2:#8fabbf; --accent3:#c9a48e; --rose:#c09090; --gold:#c9b07a; --red:#c08080; --green:#8aaa8a; --shadow:rgba(0,0,0,0.3); --chart-grid:#3e3a35; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', serif; line-height: 1.75; font-size: 14.5px; transition: background .35s, color .35s; }
+a { color: var(--accent2); text-decoration: none; }
+.theme-bar { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); }
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+.toggle-switch { position: relative; width: 44px; height: 22px; background: var(--border); border-radius: 11px; cursor: pointer; transition: background .3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: var(--card); border-radius: 50%; transition: transform .3s; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+
+.hero { padding: 48px 24px 36px; text-align: center; border-bottom: 1px solid var(--border); }
+.hero-tag { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 3px 14px; border-radius: 20px; margin-bottom: 18px; }
+.hero h1 { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.pill { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: 'Segoe UI', sans-serif; font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow); }
+.pill strong { color: var(--text); }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle { font-size: 18px; font-weight: 700; color: var(--accent3); margin-bottom: 20px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+.stitle::before { content: ''; display: block; width: 4px; height: 20px; background: var(--accent3); border-radius: 2px; }
+
+.haitu-quip { display: flex; align-items: center; gap: 18px; background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 18px 24px; margin: 24px 0; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-quote { flex: 1; }
+.haitu-portrait { font-size: 15px; line-height: 1.65; color: var(--text); margin-bottom: 6px; font-weight: 600; }
+.haitu-rating-line { font-size: 13px; color: var(--text2); font-family: 'Segoe UI', sans-serif; }
+.rating-badge { display: inline-block; padding: 2px 12px; border-radius: 12px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; margin-left: 4px; }
+.rating-hold { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+.rating-cond { background: rgba(123,143,160,.20); color: var(--accent2); }
+
+.haitu-essay { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 28px 32px; margin: 24px 0 20px; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-essay-header { display: flex; align-items: center; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.haitu-avatar-sm { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); background: var(--red); box-shadow: 0 2px 8px rgba(184,112,112,0.2); }
+.haitu-name-lg { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 28px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 4px; }
+.haitu-essay-tag { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; }
+.haitu-essay-body { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 15px; line-height: 2.0; color: var(--text); }
+.haitu-essay-body p { margin-bottom: 14px; }
+.haitu-essay-body p.lead { font-size: 16px; font-style: italic; color: var(--text2); margin-bottom: 18px; }
+.haitu-essay-body strong { color: var(--text); font-weight: 700; }
+.haitu-essay-body h4 { font-size: 14px; color: var(--accent3); margin: 18px 0 10px; font-family: 'Segoe UI', sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+.haitu-sign { text-align: right; margin-top: 18px; font-family: 'Georgia', serif; font-size: 14px; color: var(--text2); font-style: italic; }
+.haitu-disc { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); font-style: italic; line-height: 1.7; }
+
+.stock-snap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px; }
+.snap-item { text-align: center; }
+.snap-label { font-family: 'Segoe UI', sans-serif; font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.snap-val { font-family: 'Segoe UI', sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+.snap-val.up { color: var(--green); }
+.snap-val.dn { color: var(--red); }
+.snap-sub { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow); }
+.kpi-l { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.badge { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+.up { background: rgba(122,154,122,.15); color: var(--green); }
+.dn { background: rgba(184,112,112,.15); color: var(--red); }
+.nt { background: rgba(123,143,160,.15); color: var(--accent2); }
+
+.tbl-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow); }
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI', sans-serif; font-size: 13px; }
+.tbl th { background: var(--card2); color: var(--text3); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); background: var(--card2); }
+
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); }
+.ctitle { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 260px; }
+
+.cmt { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 26px; line-height: 1.95; font-size: 14px; box-shadow: 0 1px 4px var(--shadow); color: var(--text); }
+.cmt p { margin-bottom: 14px; }
+.cmt p:last-child { margin-bottom: 0; }
+.cmt strong { color: var(--text); }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+
+.bscore { display: flex; align-items: center; gap: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; margin-bottom: 12px; box-shadow: 0 1px 4px var(--shadow); }
+.circle { width: 62px; height: 62px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; flex-shrink: 0; border: 3px solid; font-family: 'Segoe UI', sans-serif; }
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 4px; color: var(--text); }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.moat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+.moat-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); border-left: 4px solid var(--accent); }
+.moat-card.wide { border-left-color: var(--green); }
+.moat-card.narrow { border-left-color: var(--gold); }
+.moat-card.none { border-left-color: var(--red); }
+.moat-card h5 { font-size: 13px; color: var(--text); margin-bottom: 6px; }
+.moat-card .moat-rate { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.moat-card.wide .moat-rate { background: rgba(122,154,122,.18); color: var(--green); }
+.moat-card.narrow .moat-rate { background: rgba(185,160,106,.18); color: var(--gold); }
+.moat-card.none .moat-rate { background: rgba(184,112,112,.18); color: var(--red); }
+.moat-card p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+
+.ec-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 14px; box-shadow: 0 1px 3px var(--shadow); }
+.ec-badge { flex-shrink: 0; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-top: 2px; font-family: 'Segoe UI', sans-serif; }
+.ec-bull { background: rgba(122,154,122,.18); color: var(--green); }
+.ec-bear { background: rgba(184,112,112,.18); color: var(--red); }
+.ec-neut { background: rgba(185,160,106,.18); color: var(--gold); }
+.ec-body { flex: 1; }
+.ec-title { font-weight: 600; color: var(--text); margin-bottom: 3px; font-size: 14px; }
+.ec-note { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.dcf-note { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.dcf-note strong { color: var(--text); }
+
+.scorecard { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow); }
+.score-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.score-card { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px; }
+.score-letter { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Segoe UI', sans-serif; font-weight: 800; font-size: 22px; flex-shrink: 0; border: 3px solid; }
+.s-a { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.12); }
+.s-bp { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.06); }
+.s-b { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.10); }
+.s-bm { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.06); }
+.s-c { color: var(--red); border-color: var(--red); background: rgba(184,112,112,.08); }
+.score-body h4 { font-size: 13px; color: var(--text); margin-bottom: 4px; }
+.score-body p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+.flag-row { margin-top: 16px; padding: 12px 16px; background: rgba(184,112,112,.08); border: 1px solid rgba(184,112,112,.3); border-radius: 8px; font-size: 13px; color: var(--text2); }
+.flag-row strong { color: var(--red); }
+
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center; box-shadow: 0 1px 4px var(--shadow); }
+.pbox .pl { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; }
+.pbox .pv { font-family: 'Segoe UI', sans-serif; font-size: 28px; font-weight: 800; margin-bottom: 5px; }
+.pbox .pn { font-size: 12px; color: var(--text3); line-height: 1.5; }
+.pc { color: var(--red); } .pf { color: var(--gold); } .ps { color: var(--green); }
+
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.risk-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); position: relative; overflow: hidden; }
+.risk-card::before { content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent); }
+.risk-card.r1::before { background: var(--green); }
+.risk-card.r2::before { background: rgba(122,154,122,.6); }
+.risk-card.r3::before { background: var(--gold); }
+.risk-card.r4::before { background: var(--rose); }
+.risk-card.r5::before { background: var(--red); }
+.risk-card h5 { font-size: 14px; margin-bottom: 6px; color: var(--text); }
+.risk-score { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.r1 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r2 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r3 .risk-score { background: rgba(185,160,106,.18); color: var(--gold); }
+.r4 .risk-score { background: rgba(192,144,144,.18); color: var(--rose); }
+.r5 .risk-score { background: rgba(184,112,112,.18); color: var(--red); }
+.risk-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+footer { background: var(--card2); border-top: 1px solid var(--border); padding: 24px; text-align: center; color: var(--text3); font-size: 12px; margin-top: 40px; line-height: 1.8; }
+@media (max-width: 768px) { .cgrid,.pgrid { grid-template-columns: 1fr; } .hero h1 { font-size: 22px; } .kpi-grid { grid-template-columns: 1fr 1fr; } .stock-snap { grid-template-columns: 1fr 1fr; } .haitu-essay-header { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/BKNG" target="_blank" rel="noopener" title="在雪球查看 BKNG 实时行情">雪球 BKNG</a>
+  </div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">Q1 2026 (三个月止于 2026-03-31) 财报发布 · 2026-04-28 &nbsp;|&nbsp; 海图研判 · 2026-07-11</div>
+  <h1>Booking Holdings BKNG · Q1 2026 财报深度分析</h1>
+  <div class="hero-sub">NASDAQ: BKNG &nbsp;|&nbsp; 财季截至 2026-03-31 &nbsp;|&nbsp; 25 拆 1 后口径 &nbsp;|&nbsp; 价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill">股价 <strong>$178.39</strong> <span style="color:var(--red)">距高点 -23%</span></div>
+    <div class="pill">市值 <strong>$139B</strong></div>
+    <div class="pill">Q1 营收 <strong>$5.53B</strong> <span style="color:var(--green)">+16%</span></div>
+    <div class="pill">调整后 EPS <strong>$1.14</strong> <span style="color:var(--green)">+14%</span></div>
+    <div class="pill">调整后 EBITDA 利润率 <strong>23.3%</strong></div>
+    <div class="pill">Forward P/E <strong>~17x</strong> <span style="color:var(--accent2)">估值回落到合理</span></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 海图页首短评 ═══ -->
+<div class="haitu-quip">
+  <div class="haitu-quote">
+    <div class="haitu-portrait">全球在线旅游平台绝对龙头——每一晚酒店预订、每一段旅程都抽一道佣金的全球最大 OTA 收费网络。Booking.com／Priceline／Agoda／KAYAK／OpenTable 五大品牌连起供给与需求，37% 调整后 EBITDA 利润率 + 96% FCF 转化 + 三年缩股 15% + 单季回报股东创纪录 $40 亿。Q1 营收 +16%、Merchant 收入 +26.7% 领跑，商业模式向"自处理支付"迁移。25 拆 1 后股价 $178、Forward P/E 仅 17x——生意顶级、价格从满估值回落到合理区间，但对内在价值 ~$208 仅约 14% 安全边际，尚未给到 25% 深度折让，叠加 Q2 增速换挡 + 中东冲突短期拖累。</div>
+    <div class="haitu-rating-line">评级：<span class="rating-badge rating-cond">有条件买入</span> · 12 个月概率加权目标价 $215（+21%）· 全球 OTA 收费网络 + 五品牌护城河 + 极致资本返还的复利机器，对垒增速换挡 + 中东冲突 + Forward P/E 17x 尚不足 25% 深度折让的价格</div>
+  </div>
+</div>
+
+<!-- ═══ 市场数据快照 ═══ -->
+<div class="section">
+  <div class="stitle">市场数据快照（2026-07-10 收盘）</div>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">股价（美元）</div><div class="snap-val">$178.39</div><div class="snap-sub">2026-07-10 收盘 · 距 52 周高 -23%</div></div>
+    <div class="snap-item"><div class="snap-label">市值</div><div class="snap-val">$139B</div><div class="snap-sub">780M 流通股 × $178.39</div></div>
+    <div class="snap-item"><div class="snap-label">Forward P/E</div><div class="snap-val nt">~17.1x</div><div class="snap-sub">FY26 共识 Adj EPS $10.44</div></div>
+    <div class="snap-item"><div class="snap-label">TTM GAAP P/E</div><div class="snap-val">~23.4x</div><div class="snap-sub">EPS TTM $7.61 · 含外汇噪音</div></div>
+    <div class="snap-item"><div class="snap-label">TTM 调整后 P/E</div><div class="snap-val">~19.2x</div><div class="snap-sub">EPS TTM $9.29 · 较可信</div></div>
+    <div class="snap-item"><div class="snap-label">P/S (TTM)</div><div class="snap-val">~5.0x</div><div class="snap-sub">营收 TTM $27.7B</div></div>
+    <div class="snap-item"><div class="snap-label">FCF Yield</div><div class="snap-val up">~6.5%</div><div class="snap-sub">FY25 FCF $9.09B / 市值</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间</div><div class="snap-val">$150.14 - $231.80</div><div class="snap-sub">拆股后 · 处区间中下部</div></div>
+    <div class="snap-item"><div class="snap-label">股息率</div><div class="snap-val">~0.94%</div><div class="snap-sub">$1.68/年 · 低息高回购</div></div>
+    <div class="snap-item"><div class="snap-label">现金 + 长期投资</div><div class="snap-val">$16.5B</div><div class="snap-sub">2026-03-31 末</div></div>
+    <div class="snap-item"><div class="snap-label">有息负债</div><div class="snap-val dn">$18.4B</div><div class="snap-sub">短债 3.0 + 长债 15.4</div></div>
+    <div class="snap-item"><div class="snap-label">真实净负债</div><div class="snap-val dn">-$1.9B</div><div class="snap-sub">⚠️ 净负债非净现金</div></div>
+    <div class="snap-item"><div class="snap-label">经营利润率 (Q1)</div><div class="snap-val up">23.0%</div><div class="snap-sub">Adj EBITDA 利润率 23.3%</div></div>
+    <div class="snap-item"><div class="snap-label">递延商户预订款</div><div class="snap-val up">$8.2B</div><div class="snap-sub">客户预付浮存 · 正营运资金</div></div>
+  </div>
+  <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">数据时点：股价 2026-07-10 收盘 $178.39（前一交易日 07-09 约 $175.52）· 财务数据来源 Booking Holdings Q1 2026 官方财报新闻稿（SEC 8-K EX-99.1，2026-04-28 发布，财季截至 2026-03-31）+ 10-Q · 货币 USD 单口径。<strong>2026-04-02 公司实施 25 拆 1（25-for-1）普通股拆股</strong>，所有股份数与每股数据均已按拆股追溯调整，当前股价 $178.39、季度 Adj EPS $1.14 均为拆股后口径。⚠️ BKNG 是<strong>净负债</strong>（有息负债 $18.4B > 现金+长期投资 $16.5B）而非净现金，股东权益因常年大额回购呈 -$87 亿赤字——这是理解其资本结构的关键。</p>
+</div>
+
+<!-- ═══ FY2025 全年 KPI ═══ -->
+<div class="section">
+  <div class="stitle">FY2025 全年业绩（USD · 强季节性，宜以全年看盈利体量）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">全年营收</div><div class="kpi-v">$26.92B</div><span class="badge up">+13% YoY</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">FY24 $23.74B</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 净利润</div><div class="kpi-v">$5.40B</div><span class="badge nt">FY24 $5.88B</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">含一次性减值波动</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP EPS（拆股后）</div><div class="kpi-v">$6.62</div><span class="badge up">缩股增厚</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">拆股前 $165.57</div></div>
+    <div class="kpi"><div class="kpi-l">调整后 EPS（拆股后）</div><div class="kpi-v">$9.12</div><span class="badge up">FY24 $7.48</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">+22% · 拆股前 $228.06</div></div>
+    <div class="kpi"><div class="kpi-l">经营利润</div><div class="kpi-v">$8.83B</div><span class="badge up">利润率 32.8%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">GAAP 口径</div></div>
+    <div class="kpi"><div class="kpi-l">调整后 EBITDA</div><div class="kpi-v">~$9.9B</div><span class="badge up">+20%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">利润率 36.9%（+193bps）</div></div>
+    <div class="kpi"><div class="kpi-l">自由现金流</div><div class="kpi-v">$9.09B</div><span class="badge up">转化率 96.6%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">OCF $9.41B − Capex $0.32B</div></div>
+    <div class="kpi"><div class="kpi-l">间夜数</div><div class="kpi-v">超 12 亿</div><span class="badge up">+8%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">全年住宿需求</div></div>
+  </div>
+</div>
+
+<!-- ═══ Q1 2026 KPI ═══ -->
+<div class="section">
+  <div class="stitle">Q1 2026 核心业绩（USD · 财季截至 2026-03-31）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">总营收</div><div class="kpi-v">$5.53B</div><span class="badge up">+16.2% YoY</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">恒定汇率约 +10%</div></div>
+    <div class="kpi"><div class="kpi-l">Merchant 商户收入</div><div class="kpi-v">$3.70B</div><span class="badge up">+26.7%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">占营收 66.8% · 自处理支付</div></div>
+    <div class="kpi"><div class="kpi-l">Agency 代理收入</div><div class="kpi-v">$1.53B</div><span class="badge dn">-2.3%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">占营收 27.6% · 到店付</div></div>
+    <div class="kpi"><div class="kpi-l">广告及其他</div><div class="kpi-v">$0.31B</div><span class="badge up">+9.3%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">KAYAK / OpenTable 等</div></div>
+    <div class="kpi"><div class="kpi-l">经营利润</div><div class="kpi-v">$1.27B</div><span class="badge up">+19.7%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">利润率 23.0%（+0.7pp）</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 净利润</div><div class="kpi-v">$1.08B</div><span class="badge up">+225%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">含外汇重估收益 · 有水分</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 摊薄 EPS</div><div class="kpi-v">$1.36</div><span class="badge up">+239%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">Q1 25 基数偏低</div></div>
+    <div class="kpi"><div class="kpi-l">调整后净利润</div><div class="kpi-v">$0.90B</div><span class="badge nt">真实经营口径</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">剔外汇/权益/诉讼</div></div>
+    <div class="kpi"><div class="kpi-l">调整后 EPS</div><div class="kpi-v">$1.14</div><span class="badge up">+14%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">最可信口径</div></div>
+    <div class="kpi"><div class="kpi-l">调整后 EBITDA</div><div class="kpi-v">$1.29B</div><span class="badge up">+19%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">快于营收 · 运营杠杆</div></div>
+    <div class="kpi"><div class="kpi-l">间夜数</div><div class="kpi-v">338M</div><span class="badge up">+5.9%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">中东冲突拖累约 2pp</div></div>
+    <div class="kpi"><div class="kpi-l">预订总额</div><div class="kpi-v">$53.8B</div><span class="badge up">+15.2%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">恒定汇率约 +8%</div></div>
+  </div>
+</div>
+
+<!-- ═══ 看穿高亮框 ═══ -->
+<div class="section">
+  <div class="stitle">本季必看 · 三个"看穿"：Merchant 迁移、GAAP 外汇水分、季节性陷阱</div>
+  <div class="cmt">
+    <p><strong>缤客的利润表有三个必须"看穿"的地方，看不穿就会误读它的增长质量。</strong></p>
+    <p><strong>看穿一：Merchant vs Agency 的分化，是商业模式迁移，不是简单此消彼长。</strong> 本季 <span class="hl-t">Merchant（商户/自处理支付）收入 +26.7%、Agency（代理/到店付）收入 -2.3%</span>。缤客正把交易从"代理只收佣"搬到"自己处理支付"——Merchant 已占营收 66.8%、对应预订总额 $38.7B（+24.3%），而 Agency 预订总额 $15.0B（-3.1%）。自处理支付让缤客能做 Connected Trip（连接式旅程编排）、金融科技变现、更高转化与更强控盘，是护城河向"支付 + 行程编排"延伸的信号，而非单纯的渠道搬家。</p>
+    <div class="tbl-wrap" style="margin:14px 0;">
+      <table class="tbl">
+        <tr><th>收入结构（$M）</th><th>Q1 2026</th><th>占比</th><th>YoY</th></tr>
+        <tr><td>Merchant 商户（自处理支付）</td><td>3,698</td><td>66.8%</td><td>+26.7%</td></tr>
+        <tr><td>Agency 代理（到店付）</td><td>1,528</td><td>27.6%</td><td>-2.3%</td></tr>
+        <tr><td>广告及其他 Advertising & other</td><td>306</td><td>5.5%</td><td>+9.3%</td></tr>
+        <tr class="hl"><td><strong>总营收 Total revenue</strong></td><td><strong>5,532</strong></td><td>100%</td><td><strong>+16.2%</strong></td></tr>
+      </table>
+    </div>
+    <p><strong>看穿二：GAAP 净利 +225% 有水分，调整后 +14% 才是真相。</strong> GAAP 净利从 $333M 跳到 $1,083M、GAAP EPS +239% 看着惊艳，但其中一大块来自<span class="hl-t">欧元计价债务的外汇重估收益（约 +$333M，非现金）</span>，而去年同期基数又被外汇/权益证券损失压低。剔除外汇重估、权益证券损益（本季 -$107M）、结算诉讼收益（+$89M）、无形摊销、转型成本等一次性项后，<strong>调整后净利 $902M、调整后 EPS $1.14（+14%）才反映真实经营</strong>。有意思的是——本季 GAAP 净利（$1,083M）反而<em>高于</em>调整后（$902M），正是外汇顺风推高了 GAAP。看财报要盯调整后，不被外汇噪音牵着走。</p>
+    <p><strong>看穿三：季节性决定了不能用单季 EPS × 4。</strong> 缤客的营收在旅客<span class="hl-t">入住/退房时确认</span>，而非预订时。故 Q1 虽是预订旺季，却是营收季节性最低的一季（$5.5B）；Q3（暑期入住高峰）才是营收/利润峰值（$9.0B、经营利润率 38.7%）。用单季 $1.14 的 Adj EPS × 4 = $4.56 会严重低估——真实盈利体量看全年：FY2025 调整后 EPS $9.12。这是读缤客季报最容易踩的陷阱。</p>
+  </div>
+</div>
+
+<!-- ═══ 趋势图 ═══ -->
+<div class="section">
+  <div class="stitle">关键指标趋势</div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">总营收（$B）& YoY 增速（近 5 季 · 强季节性）</div><div class="cwrap"><canvas id="chartRev"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">经营利润率趋势（%，Q3 暑期为峰值）</div><div class="cwrap"><canvas id="chartMargin"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">Q1 2026 营收按类型拆分（$M）</div><div class="cwrap"><canvas id="chartSegment"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">GAAP vs 调整后 EPS（近 5 季 · 拆股后 $）</div><div class="cwrap"><canvas id="chartEPS"></canvas></div></div>
+  </div>
+  <p style="margin-top:4px; font-size:12px; color:var(--text3); line-height:1.6;">季节性提示：营收/利润率在 Q3（暑期入住旺季）冲高、Q1 季节性最低——因营收在旅客入住/退房时确认，切勿以单季数据年化。GAAP EPS 的 Q1 2026 跳升含外汇重估顺风，调整后 EPS 曲线更平滑、更能反映真实经营节奏。</p>
+</div>
+
+<!-- ═══ 桑基图 ═══ -->
+<div class="section">
+  <div class="stitle">Q1 2026 资金流向桑基图（$M）</div>
+  <div class="ccard">
+    <div id="sankey" style="width:100%;height:480px;"></div>
+    <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">说明：总营收 $5,532 → 总经营费用 $4,261（营销 $2,068 + 销售及其他 $804 + 人员 $893 + 其他运营 $496〔含 G&A $100 + IT $240 + 折旧摊销 $131 + 转型成本 $25〕）+ 经营利润 $1,271 → 叠加非经营净收入 $128（利息费用 -$253 + 利息及股息收入 $187 + 其他净收入 $194）= 税前利润 $1,399 → 所得税 $316 + GAAP 净利 $1,083。每个中间节点流入 = 流出，流量闭合。注：本季向股东返还创纪录 $40 亿（回购 $36 亿 + 股息 $3.4 亿）> 单季自由现金流 $31 亿——因 Q1 是营收季节性最低季，回购力度靠全年 FCF 与充裕现金支撑。极轻资产：Q1 Capex 仅 $107M（占营收 1.9%），FCF 转化率 96.6%。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 1 ═══ -->
+<div class="section">
+  <div class="stitle">模块 1 · 公司概览与背景</div>
+  <div class="cmt">
+    <p><strong>Booking Holdings Inc.</strong>（NASDAQ: BKNG），总部康涅狄格州诺沃克。前身为 1997 年创立的 Priceline.com，2005 年收购欧洲 Booking.com 奠定全球酒店预订霸主地位，2018 年更名 Booking Holdings。财年为自然年（截至 12 月 31 日）。</p>
+
+    <p><strong>核心叙事</strong>：缤客是<span class="hl-t">全球最大的在线旅游（OTA）收费网络，旗下五大品牌</span>——Booking.com（全球酒店/民宿）、Priceline（美国折扣旅游）、Agoda（亚洲酒店）、KAYAK（元搜索）、OpenTable（餐厅预订）。它不持有一间客房、不承担库存与信用风险，而是把全球酒店/民宿/机票/租车/餐厅的<strong>供给</strong>，与全球旅客的<strong>需求</strong>撮合在平台上，从每一笔完成的预订中抽取佣金。FY2025 全年预订总额巨大、间夜超 12 亿——这是一门<strong>36.9% 调整后 EBITDA 利润率、约 96% FCF 转化（FCF/OCF）、Capex 仅占营收 1-1.2% 的极致轻资产收费网络生意</strong>。</p>
+
+    <p><strong>重大事项 · 25 拆 1 股票分拆</strong>：<span class="warn-t">2026-04-02 公司实施 25-for-1 普通股拆股</span>，把长期高达四位数的股价降至更亲民区间（拆股后 $178）。本报告所有股份数、EPS、股价均为<strong>拆股后口径</strong>（历史季度已按 ÷25 换算以保证可比）。示例：FY2025 GAAP EPS 拆股前 $165.57 → 拆股后 $6.62；调整后 EPS 拆股前 $228.06 → 拆股后 $9.12。</p>
+
+    <p><strong>三大增长引擎</strong>（管理层战略框架）：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>核心住宿（Accommodations）</strong>——酒店 + 另类住宿（民宿/公寓）的间夜增长，是基本盘。另类住宿间夜本季 +5.5%（Booking.com），持续抢 Airbnb 份额</li>
+      <li><strong>Connected Trip（连接式旅程）</strong>——把住宿 + 机票 + 租车 + 景点 + 支付串成一次预订，多要素交易同比增长约 20%，提升客单价与黏性</li>
+      <li><strong>GenAI / Agentic（生成式与代理式 AI）</strong>——Priceline 的对话助手 Penny、Agentic Service Flows 自动化售后，重构获客与服务经济学</li>
+    </ul>
+
+    <p><strong>股权与治理</strong>：单一类别普通股，无双重股权。拆股后已发行 1,618M 股、库存股 838M 股、在外流通 <strong>780M 股</strong>。<span class="warn-t">股东权益呈 -$87 亿赤字——不是经营亏损，而是常年大额回购把库存股堆到 -$583 亿所致</span>（留存收益仍有 +$414 亿）。这是美股激进回购公司的常见资产负债表形态。</p>
+
+    <p><strong>能力圈检验</strong>：OTA 收费网络生意极其清晰（一句话能说清怎么赚钱）。两块需持续跟踪的变量：(1) <span class="warn-t">AI 搜索与流量入口变化</span>——Google/Meta 广告依赖、以及 AI 搜索是否改变旅客的预订路径；(2) <span class="warn-t">地缘/宏观对旅行需求的周期性冲击</span>——本季中东冲突已拖累间夜约 2pp。这两点决定了缤客的护城河是加宽还是被侵蚀。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 2 ═══ -->
+<div class="section">
+  <div class="stitle">模块 2 · 管理层评估</div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>Glenn Fogel · CEO（2017 至今）</h4>
+      <p>2000 年加入 Priceline，2017 年出任 CEO 至今，是深谙全球旅游平台经济学的老将。Fogel 把公司从"美国折扣旅游 + Booking.com 酒店"重构为"核心住宿 + Connected Trip + GenAI"三引擎框架，并主导了 Transformation Program（转型计划）——通过组织与技术效率化释放固定费用杠杆，全程目标上调至 <span class="hl-t">$500-550M 运行率成本节省</span>。对 AI 的态度是主动"重构而非防守"：把 GenAI 变成获客、转化、售后的新工具。海图判断：这是一位既守住 OTA 收费网络基本盘、又主动押注下一代旅程编排与 AI 的稳健掌舵人。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>资本配置纪律 · 回购机器 + 2024 起首度派息</h4>
+      <p>
+      <strong>持续大额回购缩股</strong>：三年回购累计 $233 亿（FY2023 $104 亿 + FY2024 $65 亿 + FY2025 $64 亿），摊薄股数从 FY2023 的 9.13 亿降至当前加权 <strong>7.94 亿（约 -15%）</strong>，真实增厚每股价值。<br>
+      <strong>2024 年首度派息并累进</strong>：Q2 2026 季度股息升至拆股后 $0.42/股（拆股前 $10.50，较前季 +9.4%），确立"回购为主、股息为辅"的返还结构。<br>
+      <strong>单季返还创纪录</strong>：Q1 2026 回报股东 $40 亿（回购 $36 亿 + 股息 $3.4 亿），季末仍有 <strong>$182 亿</strong>回购授权额度。<br>
+      <span class="warn-t">一个需留意点</span>：单季返还 $40 亿 > 单季 FCF $31 亿，但 Q1 是营收季节性最低季，以全年 FCF $90 亿看返还完全在能力圈内；净负债仅 -$19 亿，杠杆极轻。
+      </p>
+    </div>
+  </div>
+
+  <div class="cmt">
+    <p><strong>长期主义测试</strong>：✅ 管理层以"住宿间夜 + Connected Trip + GenAI"的长期复利为主线，2026 年主动投入约 $700M 于 GenAI/连接式旅程/亚洲与美国增长/金融科技与忠诚度（预计带来约 $400M 增量营收、约 $300M 净 EBITDA 收益），是"为未来花钱"而非短期财报博弈。<strong>坦诚度</strong>：电话会主动披露中东冲突拖累间夜约 2pp、Q2 增速换挡至 +2%~+4%，不粉饰。<strong>利益绑定</strong>：管理层持股比例不高（成熟大盘股常态），薪酬与营收/调整后 EBITDA/EPS 增长挂钩。综合给 A-。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 3 ═══ -->
+<div class="section">
+  <div class="stitle">模块 3 · 商业模式深度解析</div>
+  <div class="cmt">
+    <p><strong>海图"一句话测试"</strong>：<span class="hl-t">缤客是全球在线旅游的收费网络——把全球酒店/民宿/机票/租车/餐厅的供给，与全球旅客的需求撮合在五大品牌平台上，从每一笔完成的预订里抽取佣金，自己不持有客房、不担库存与信用风险，靠双边网络效应赚钱。</span></p>
+
+    <p><strong>两种收入模式（本质差异）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>Agency 代理模式（到店付）</strong>——旅客到店付款给酒店，缤客事后收取佣金。缤客不碰资金流，轻但控盘弱。本季收入 -2.3%、占比降至 27.6%</li>
+      <li><strong>Merchant 商户模式（自处理支付）</strong>——缤客先向旅客收款、再结算给酒店，掌握资金流。可叠加支付货币化、Connected Trip 打包、更强转化。本季收入 +26.7%、占比升至 <span class="hl-t">66.8%</span>，是结构性主引擎</li>
+    </ul>
+
+    <p><strong>Q1 2026 预订总额（Gross Bookings）拆分</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>预订总额</th><th>Q1 2026</th><th>YoY</th><th>驱动</th></tr>
+        <tr><td>Merchant 商户</td><td>$38.7B</td><td>+24.3%</td><td>自处理支付渗透 + 打包</td></tr>
+        <tr><td>Agency 代理</td><td>$15.0B</td><td>-3.1%</td><td>结构性向 Merchant 迁移</td></tr>
+        <tr class="hl"><td><strong>预订总额合计</strong></td><td><strong>$53.8B</strong></td><td><strong>+15.2%</strong></td><td>恒定汇率约 +8%</td></tr>
+      </table>
+    </div>
+
+    <p style="margin-top:14px;"><strong>单位经济与议价能力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>营销费用占预订总额 3.8%</strong>（与去年持平）——绩效营销（Google/Meta 竞价）是最大成本项，效率是核心竞争力；直接渠道占比 TTM 约 55%（mid-fifties），降低对付费流量依赖</li>
+      <li><strong>对酒店/民宿供给议价能力</strong>：强——缤客是最大的需求入口，中小酒店高度依赖其客流；但连锁大酒店集团有直营 App 抗衡</li>
+      <li><strong>对旅客的转换成本</strong>：中——Genius 忠诚度计划提升复购与黏性，但比价习惯与元搜索让旅客可多平台横跳</li>
+      <li><strong>浮存优势</strong>：$82 亿递延商户预订款（客户预付款）构成正向营运资金——先收钱后结算，是收费网络的隐性财务红利</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══ 模块 4 ═══ -->
+<div class="section">
+  <div class="stitle">模块 4 · 经济护城河分析（5 维）</div>
+  <div class="moat-grid">
+    <div class="moat-card wide">
+      <h5>1. 网络效应</h5>
+      <span class="moat-rate">宽</span>
+      <p>供给（数百万酒店/民宿）与需求（全球旅客）互相吸引的双边平台——供给越全旅客越来，旅客越多供给越离不开。另类住宿 + Connected Trip 扩大品类。<strong>趋势：稳定偏加宽</strong>。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>2. 规模/成本优势</h5>
+      <span class="moat-rate">宽</span>
+      <p>全球最大预订量摊薄技术、绩效营销与运营固定成本，36.9% 调整后 EBITDA 利润率碾压中小 OTA；转型计划再释放 $500M+ 节省。<strong>趋势：加宽</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>3. 转换成本</h5>
+      <span class="moat-rate">中</span>
+      <p>Genius 忠诚度 + 历史订单 + 支付信息提升黏性，但旅客比价习惯强、可多平台横跳，转换成本弱于支付网络。<strong>趋势：靠忠诚度缓慢加固</strong>。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>4. 无形资产/品牌</h5>
+      <span class="moat-rate">宽</span>
+      <p>Booking.com 全球信任 + Agoda 亚洲 + Priceline 美国 + KAYAK/OpenTable 的多品牌矩阵，是数十年积累的旅游心智。<strong>趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>5. 有效规模</h5>
+      <span class="moat-rate">中-宽</span>
+      <p>全球 OTA 呈"缤客 + Expedia + Airbnb + Trip.com"寡头格局，规模玩家有限；但流量入口（Google/AI 搜索）握在体系外，是有效规模的不确定源。<strong>趋势：受流量入口变量牵制</strong>。</p>
+    </div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>10 年后护城河会更宽还是更窄？</strong> <span class="hl-t">核心网络 + 规模 + 品牌护城河仍宽，但两个体系外变量决定长期走向</span>：(1) <span class="warn-t">流量入口与 AI 搜索</span>——缤客高度依赖 Google/Meta 绩效营销获客，若 AI 搜索/代理式购物改变旅客的预订路径，获客经济学可能被重塑（也可能是机会——缤客自建 GenAI 代理反向卡位）；(2) <span class="warn-t">直营与另类住宿竞争</span>——大连锁酒店直营 App + Airbnb 的另类住宿。缤客的对冲是 Connected Trip（把单一预订升级为全程编排，抬高转换成本）+ 自处理支付（掌握资金与数据）+ 直接渠道占比升至约 55%。<strong>定价权</strong>：中等偏强——佣金率相对稳定，但受供给端议价与监管（欧盟数字市场法案）约束。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 5 ═══ -->
+<div class="section">
+  <div class="stitle">模块 5 · 财务深度分析</div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 12px 0; font-family: 'Segoe UI',sans-serif;">5.1 近 5 季度趋势（USD · 强季节性）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>指标</th><th>Q1 25</th><th>Q2 25</th><th>Q3 25</th><th>Q4 25</th><th>Q1 26</th></tr>
+      <tr><td>总营收（$M）</td><td>4,762</td><td>6,798</td><td>9,008</td><td>6,349</td><td>5,532</td></tr>
+      <tr><td>营收 YoY（%）</td><td>+7.9</td><td>+16.0</td><td>+12.7</td><td>+16.1</td><td>+16.2</td></tr>
+      <tr><td>经营利润（$M）</td><td>1,062</td><td>2,250</td><td>3,483</td><td>2,030</td><td>1,271</td></tr>
+      <tr><td>经营利润率（%）</td><td>22.3</td><td>33.1</td><td>38.7</td><td>32.0</td><td>23.0</td></tr>
+      <tr><td>GAAP 净利（$M）</td><td>333</td><td>895</td><td>2,748</td><td>1,428</td><td>1,083</td></tr>
+      <tr><td>GAAP EPS（拆股后 $）</td><td>0.40</td><td>1.10</td><td>3.38</td><td>1.77</td><td>1.36</td></tr>
+      <tr class="hl"><td>调整后 EPS（拆股后 $）</td><td>0.99</td><td>2.22</td><td>3.98</td><td>1.95</td><td>1.14</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">读表提示：<strong>强季节性</strong>——Q3（暑期入住旺季）营收 $9.0B、经营利润率 38.7% 为全年峰值；Q1 营收 $5.5B 季节性最低（因营收在入住/退房时确认，Q1 虽预订旺但确认营收低）。故<strong>不宜用单季 EPS × 4 年化</strong>。Q1 2026 GAAP EPS $1.36 高于调整后 $1.14，是外汇重估顺风所致，非经营改善。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.2 资产负债健康度（2026-03-31 末 · $M）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>2026-03-31 末</th><th>说明</th></tr>
+      <tr><td>现金及现金等价物</td><td>16,024</td><td>流动性充裕</td></tr>
+      <tr><td>长期投资</td><td>473</td><td>—</td></tr>
+      <tr class="hl"><td>现金 + 长期投资合计</td><td>16,497</td><td>可用流动性</td></tr>
+      <tr><td>应收账款净额</td><td>3,520</td><td>—</td></tr>
+      <tr class="hl"><td>短期借款 Short-term debt</td><td>3,015</td><td>独立列示</td></tr>
+      <tr class="hl"><td>长期借款 Long-term debt</td><td>15,398</td><td>独立列示</td></tr>
+      <tr class="hl"><td>有息借款合计</td><td>18,413</td><td>短债 + 长债</td></tr>
+      <tr class="hl"><td><strong>真实净负债</strong></td><td><strong>-1,916</strong></td><td>⚠️ 净负债非净现金</td></tr>
+      <tr><td>递延商户预订款（浮存）</td><td>8,189</td><td>客户预付 · 正向营运资金</td></tr>
+      <tr><td>商誉</td><td>2,662</td><td>占总资产较低</td></tr>
+      <tr><td>无形资产净额</td><td>882</td><td>—</td></tr>
+      <tr><td>总资产</td><td>27,720</td><td>—</td></tr>
+      <tr><td>总负债</td><td>36,444</td><td>含浮存与借款</td></tr>
+      <tr><td>留存收益</td><td>41,420</td><td>盈利积累</td></tr>
+      <tr><td>库存股</td><td>-58,337</td><td>常年回购堆积</td></tr>
+      <tr class="hl"><td><strong>股东权益（赤字）</strong></td><td><strong>-8,724</strong></td><td>回购 > 留存所致 · 非亏损</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">⚠️ <strong>两个"反直觉"必须看穿</strong>：其一，<strong>股东权益 -$87 亿赤字不是经营亏损</strong>——留存收益仍有 +$414 亿，赤字纯粹因库存股 -$583 亿（常年回购）> 留存。这是美股激进回购公司的常见形态（同类如麦当劳、家得宝）。其二，<strong>净负债非净现金</strong>：现金+长期投资 $16.5B < 有息借款 $18.4B，真实净负债 -$19 亿（含非流动租赁负债 $530M 则约 -$24 亿）。但 $82 亿递延商户预订款是客户预付浮存、$90 亿年 FCF——这点杠杆毫无压力。经营租赁明细见 10-Q，经营租赁资产 $607M。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.3 现金流量（Q1 2026 单季 + FY2025 全年）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>Q1 2025</th><th>Q1 2026</th><th>FY2025 全年</th></tr>
+      <tr><td>经营活动现金流（OCF）</td><td>$3,283M</td><td>$3,215M</td><td>$9,409M</td></tr>
+      <tr><td>- Capex（购置物业及设备）</td><td>$121M</td><td>$107M</td><td>$322M</td></tr>
+      <tr class="hl"><td>自由现金流（FCF）</td><td>$3,162M</td><td>$3,108M</td><td>$9,087M</td></tr>
+      <tr><td>Capex / 营收</td><td>—</td><td>1.9%</td><td>1.2%</td></tr>
+      <tr><td>FCF / OCF 转化率</td><td>96.3%</td><td>96.7%</td><td>96.6%</td></tr>
+      <tr><td>回购（现金流口径）</td><td>—</td><td>$3,770M</td><td>$6,440M</td></tr>
+      <tr><td>股息支付</td><td>—</td><td>$343M</td><td>$1,248M</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">Q1 2026 OCF $3,215M（占营收 58.1%）、FCF $3,108M（占营收 56.2%，同比 -2%）——极致轻资产，Capex 仅占营收 1.9%。全年 FCF $9,087M（转化率 96.6%），验证收费网络的现金创造力。本季回购 $3,770M（不含消费税 $3,600M）+ 股息 $343M = 返还 $40 亿，本季无偿债。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.4 所有者盈余（价值投资口径 · FY2025）</h3>
+  <div class="dcf-note">
+    <p><strong>所有者盈余 = 净利润 + 折旧摊销 + 股权激励 − 维护性 Capex ± 营运资金 ≈ FCF</strong></p>
+    <p>缤客是极轻资产、极高现金转化的收费网络，FCF 几乎等于所有者盈余。FY2025 FCF $9,087M（Capex 仅 $322M、占营收 1.2%）。加上 $82 亿递延商户预订款浮存带来的正向营运资金红利，所有者盈余质量极高。</p>
+    <p><strong>所有者盈余收益率 = FCF $9.09B / 市值 $139B ≈ 6.5%</strong>——对一个营收高个位数增长、调整后 EPS 中双位数增长（含缩股）、37% EBITDA 利润率、双边网络护城河的公司，<span class="hl-t">6.5% 的 FCF Yield 属于"高质量 + 合理估值"</span>，明显优于同类顶级平台的 3-4%。这也是缤客当前估值相对其质量并不昂贵的核心证据——问题在于安全边际是否够厚（见模块 7）。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 6 ═══ -->
+<div class="section">
+  <div class="stitle">模块 6 · 电话会分析（Q1 2026 + 前 2 季度）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">Q1 2026 电话会（2026-04-28）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"美国间夜增长达低两位数（low-teens），连续第四季度加速，国内需求强劲"</div><div class="ec-note">最大单一市场需求端扎实向上——在全球增速换挡的背景下，美国的持续加速是本季最重要的底色。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"中东冲突拖累间夜与预订总额增长约 2 个百分点，还原后间夜约 +8%；假设影响持续至 6 月底"</div><div class="ec-note">地缘冲突压制跨境与欧洲需求。管理层主动量化拖累幅度并纳入 Q2 指引前提（未纳入更广泛经济外溢）。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"调整后 EBITDA +19% 快于营收 +16%，固定费用运营杠杆显现；总运营费用 +15% 慢于营收"</div><div class="ec-note">转型计划持续释放固定成本杠杆——收入增速 > 费用增速，是利润率扩张的结构性来源。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"Connected Trip 愿景推进，GenAI 驱动创新——Priceline 的 Penny 对话助手、Agentic Service Flows 自动化售后"</div><div class="ec-note">把 AI 变成获客、转化与售后的新工具，抬高客单价与黏性，是长期护城河延伸。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"单季回报股东创纪录 $40 亿（回购 $36 亿 + 股息 $3.4 亿）"</div><div class="ec-note">资本返还力度空前，季末仍有 $182 亿回购授权——持续缩股放大每股价值。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q4 2025 电话会（2026-02-18）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"FY2025 营收 +13%、预订总额 +12%、间夜 +8%（超 12 亿），调整后 EBITDA +20% 至超 $9.9B，利润率 36.9%（+193bps）"</div><div class="ec-note">全年全面达标，利润率扩张近 2pp，验证运营杠杆兑现。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"宣布 25 拆 1 股票分拆 + 季度股息上调 9.4% 至拆股前 $10.50/股"</div><div class="ec-note">拆股降低每股名义价格、扩大投资者基础；股息累进强化资本返还结构。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"2026 年计划再投资约 $700M 于 GenAI/Connected Trip/亚洲及美国增长/金融科技与忠诚度"</div><div class="ec-note">预计带来约 $400M 增量营收、约 $300M 净 EBITDA 收益——为未来花钱，短期压制利润率但长期正确。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q3 2025 电话会（2025-10-28）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"Q3 间夜 3.23 亿（+8%）超预期，各大区需求健康，美国加速至高个位数；预订总额 +14%、营收 +13%"</div><div class="ec-note">暑期旺季全面超预期，需求端广泛健康。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"转型计划 Q3 节省约 $70M，年化运行率约 $450M，目标上调至 $500-550M 运行率节省"</div><div class="ec-note">成本节省目标持续上调，是利润率的结构性支撑。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"Q3 计提一次性减值 $457M（记入 GAAP，已在调整后口径剔除）"</div><div class="ec-note">GAAP 波动的一次性项——不影响调整后与现金流，但提示读 GAAP 需还原。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">指引兑现度追踪</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>历史指引</th><th>Q1 2026 实际</th><th>评价</th></tr>
+      <tr><td>Q1 2026 营收增长 14-16%（Q4 会给出）</td><td>+16.2%</td><td><span class="badge up">达标上沿</span></td></tr>
+      <tr><td>Q1 2026 调整后 EBITDA +10-14%</td><td>+19%</td><td><span class="badge up">超预期</span></td></tr>
+      <tr><td>间夜增长</td><td>+5.9%（还原冲突约 +8%）</td><td><span class="badge nt">受地缘拖累</span></td></tr>
+      <tr><td>转型计划成本节省</td><td>运营费用 +15% 慢于营收</td><td><span class="badge up">兑现</span></td></tr>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>信号汇总</strong>：Q1 2026 是缤客"<span class="hl-t">核心稳健 + 运营杠杆兑现 + 美国持续加速 + 极致资本返还</span>"的强势一季，营收与 EBITDA 均超或达指引上沿。但两条软化信号需关注：<span class="warn-t">中东冲突拖累间夜约 2pp、Q2 指引增速换挡至间夜 +2%~+4%</span>。管理层的定调是"短期地缘扰动 + 下半年复苏"，全年指引仍是营收高个位数、调整后 EPS 低到中双位数。<strong>业绩底子扎实——短期矛盾在增速换挡，长期矛盾在流量入口与 AI 搜索。</strong></p>
+  </div>
+</div>
+
+<!-- ═══ 模块 7 ═══ -->
+<div class="section">
+  <div class="stitle">模块 7 · 多模型估值（8 种方法 · 独立推导）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">7.1 估值汇总表（不锚定现价 · USD · 拆股后每股）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>估值方法</th><th>每股公允价</th><th>假设要点</th><th>权重</th></tr>
+      <tr><td>1. 相对估值（P/E）</td><td>$205</td><td>FY2026 Adj EPS $10.44 × ~19.5x（回归历史均值中枢，高于当前 17x）</td><td>25%</td></tr>
+      <tr><td>2. DCF（基准）</td><td>$218</td><td>未来 5 年 FCF CAGR ~8-9%，WACC 9.3%，永续 2.75%，减净负债 $1.9B</td><td>25%</td></tr>
+      <tr><td>3. 所有者盈余收益率</td><td>$222</td><td>FCF $9.09B / 5.25% 目标收益率 = $173B → /780M 股</td><td>15%</td></tr>
+      <tr><td>4. PEG</td><td>$224</td><td>Forward P/E 17x ÷ EPS 增速 14.5% = PEG 1.17（优质且不贵）；合理 PEG 1.5 → P/E 21.75x</td><td>10%</td></tr>
+      <tr><td>5. DDM</td><td>$55（参考）</td><td>DPS $1.68、派息率极低（2024 才派息），股息太小、参考意义有限</td><td>5%</td></tr>
+      <tr><td>6. NAV</td><td>不适用</td><td>轻资产平台，价值在网络/品牌/无形而非有形资产，NAV 无意义</td><td>0%</td></tr>
+      <tr><td>7. 反向 DCF</td><td>现价隐含 FCF 增长 <strong>~5-6%</strong></td><td>$178 隐含市场仅定价 ~5-6% 长期 FCF 增长，低于公司高个位数营收 + 中双位数 EPS 增长 → 偏保守，正常化对应 ~$215</td><td>15%</td></tr>
+      <tr><td>8. SOTP 分部加总</td><td>$210（近似）</td><td>公司不披露品牌分部营收，仅能近似：Booking.com 主导 + Agoda 亚洲 + KAYAK/OpenTable − 净负债</td><td>5%</td></tr>
+      <tr class="hl"><td><strong>加权公允价中位数</strong></td><td><strong>~$208</strong></td><td>估值区间 $200-225 · 中位 ~$208</td><td>100%</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.8;"><strong>与现价对照</strong>：当前 $178.39 vs 加权公允 ~$208 · <span class="nt">安全边际约 14%</span>——<strong>低于价值投资 25% 的门槛</strong>。缤客是世界级好生意，Forward P/E 17x、FCF Yield 6.5% 对其质量并不昂贵（明显比同类顶级平台便宜），但当前价格给出的折让还不够厚。反向 DCF 显示市场仅定价 ~5-6% 长期 FCF 增长，明显低于公司的增长潜力——这是被低估的证据，但"合理偏低"尚未到"深度折让"。<strong>结论：好生意 + 合理偏低估值，但安全边际不足 25%，宜等更好价格分批建。</strong></p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.2 P/E 多档透视表</h3>
+  <p style="margin-bottom:10px; font-size:13px; color:var(--text2);">缤客 GAAP vs 调整后差异大（外汇重估、权益证券损益、一次性减值/诉讼）+ 单季利润受强季节性与外汇扰动，故必做多档透视：</p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>口径</th><th>EPS / 基数</th><th>P/E (基于 $178.39)</th><th>读数说明</th></tr>
+      <tr><td>TTM GAAP P/E</td><td>$7.61</td><td>~23.4x</td><td>含外汇重估 + 一次性减值噪音</td></tr>
+      <tr><td>TTM 调整后 P/E</td><td>$9.29</td><td>~19.2x</td><td>剔一次性 · 较可信</td></tr>
+      <tr class="hl"><td><strong>Forward P/E（FY2026 共识 $10.44）</strong></td><td><strong>$10.44</strong></td><td><strong>~17.1x</strong></td><td>最可信档 · 市场惯用</td></tr>
+      <tr><td>Forward P/E（FY2027 估 ~$11.8）</td><td>~$11.8</td><td>~15.1x</td><td>前瞻外推 · 中双位数 EPS 增长</td></tr>
+      <tr><td>P/S (TTM)</td><td>营收 $27.7B</td><td>~5.0x</td><td>OTA 平台估值</td></tr>
+      <tr><td>EV / 调整后 EBITDA</td><td>EBITDA ~$9.9B</td><td>~14.2x</td><td>EV = 市值 $139B + 净负债 $1.9B</td></tr>
+      <tr><td>FCF Yield</td><td>FCF $9.09B</td><td>~6.5%</td><td>高质量 + 合理估值</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3);"><strong>最可信档</strong>：Forward P/E ~17x（FY2026）/ ~15x（FY2027）。同业对比：Airbnb ~27-29x（另类住宿溢价）、Expedia ~10x（折价 OTA）、Trip.com ~12-14x（中国复苏）。<span class="hl-t">缤客 17x 介于同业之间——比 Airbnb 便宜近四成、比 Expedia 贵、与 Trip.com 相近，考虑其规模与 37% EBITDA 利润率之王地位，17x 属"优质但估值回到合理区"</span>，只是绝对折让尚不足 25%。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.3 12 个月目标价（概率加权）</h3>
+  <div class="pgrid">
+    <div class="pbox"><div class="pl">悲观情景 · 25%</div><div class="pv pc">$160</div><div class="pn">中东冲突延续 + H2 复苏不及 + 估值压缩至 15x FY26<br>距现价 -10%</div></div>
+    <div class="pbox"><div class="pl">基准情景 · 50%</div><div class="pv pf">$220</div><div class="pn">FY26 营收高个位数 + 中双位数 EPS + 估值温和重估至 19x FY27<br>距现价 +23%</div></div>
+    <div class="pbox"><div class="pl">乐观情景 · 25%</div><div class="pv ps">$260</div><div class="pn">冲突消退 + 间夜回加速至 +8-10% + Connected Trip/GenAI 兑现 + 估值至 21x<br>距现价 +46%</div></div>
+  </div>
+  <p style="font-size:13px; color:var(--text2);"><strong>概率加权目标价</strong>：25%×$160 + 50%×$220 + 25%×$260 = <strong>$215</strong>（+21%）。<span class="hl-t">上行 +21%，但对内在价值 ~$208 的安全边际仅约 14%，未达 25% 门槛</span>——故给"有条件买入"而非无条件买入。机械首仓价 $166（内在价值 × 80%）略低于现价 $178，当前可小仓试水、回调分批加。</p>
+</div>
+
+<!-- ═══ 模块 8 ═══ -->
+<div class="section">
+  <div class="stitle">模块 8 · 竞争与行业分析</div>
+  <div class="cmt">
+    <p><strong>全球在线旅游格局</strong>：缤客（全球酒店龙头）、Expedia（美国强、含 Vrbo 民宿）、Airbnb（另类住宿龙头）、Trip.com（亚洲/中国龙头）构成 OTA 寡头；此外还有大连锁酒店的直营渠道、以及 Google/AI 搜索这类"体系外流量入口"。真正的长期变量来自流量入口的重新分配，而非某一家 OTA 的份额争夺。</p>
+
+    <p><strong>OTA 龙头同业对比（2026 年年中口径 · P/E 与增速为二手参考）</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>公司</th><th>Forward P/E</th><th>营收增速</th><th>定位与评价</th></tr>
+        <tr class="hl"><td><strong>Booking BKNG</strong></td><td><strong>~17x</strong></td><td>Q1 +16% / FY26 高个位数</td><td>全球酒店龙头 · 37% EBITDA 利润率之王</td></tr>
+        <tr><td>Airbnb ABNB</td><td>~27-29x</td><td>约 +12-13%（Q1 +12.6%）</td><td>另类住宿龙头 · 估值溢价</td></tr>
+        <tr><td>Expedia EXPE</td><td>~10x（TTM ~13x）</td><td>高个位数（Q1 偏强）</td><td>OTA 直接竞争者 · 估值折价明显</td></tr>
+        <tr><td>Trip.com TCOM</td><td>~12-14x</td><td>中双位数（中国复苏）</td><td>亚洲/中国 OTA 龙头</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:10px; font-size:12px; color:var(--text3);">核心看点：缤客是<strong>规模最大、利润率最高（36.9% 调整后 EBITDA）</strong>的 OTA，估值 17x 介于 Airbnb 溢价与 Expedia 折价之间。它不像 Airbnb 那样单押另类住宿，也不像 Expedia 那样偏美国——全球化 + 全品类 + 自处理支付迁移是它相对同业的结构优势。同业 P/E 与增速为 gurufocus/financecharts/chartmill 二手数据，仅作相对参考。</p>
+
+    <p style="margin-top:14px;"><strong>波特五力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>新进入者：</strong>中低（双边网络 + 规模 + 品牌壁垒高，但资本充足的科技巨头/AI 搜索可从流量入口切入）</li>
+      <li><strong>替代品：</strong>中（酒店直营 App、元搜索比价、AI 代理式购物是潜在分流）</li>
+      <li><strong>供应商议价（酒店/民宿）：</strong>中（中小酒店依赖缤客客流，但大连锁集团有直营筹码）</li>
+      <li><strong>买家议价（旅客）：</strong>中高（比价习惯强、可多平台横跳，靠 Genius 忠诚度维系）</li>
+      <li><strong>同业竞争：</strong>中（缤客/Expedia/Airbnb/Trip.com 理性寡头，靠营销与产品而非价格战）</li>
+    </ul>
+
+    <p><strong>颠覆风险</strong>：最核心的长期风险不是同业，而是<span class="warn-t">流量入口的重新分配</span>——Google/Meta 绩效营销依赖 + AI 搜索/代理式购物改变旅客预订路径。缤客的对冲是自建 GenAI 代理、Connected Trip 抬高转换成本、直接渠道占比升至约 55%。这是 5-10 年维度的慢变量。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 9 ═══ -->
+<div class="section">
+  <div class="stitle">模块 9 · 技术面与 K 线分析（次要参考）</div>
+  <div class="cmt">
+    <p><strong>趋势</strong>：拆股后股价 $178.39，处于 52 周区间 $150.14-$231.80 的<span class="hl-t">中下部，距 52 周高点回撤约 -23%</span>（部分口径称年内回撤约 -27%）。从高点显著回调后，当前处在"高位回落、寻底企稳"的阶段，而非追高区。</p>
+
+    <p><strong>关键价位</strong>（拆股后）：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>支撑</strong>：$166（内在价值 × 80% 首仓区）/ $150（52 周低附近）/ $146（二仓区）</li>
+      <li><strong>阻力</strong>：$200（前期密集区）/ $215（12 个月目标）/ $231.80（52 周高）</li>
+    </ul>
+
+    <p><strong>指标信号</strong>：回撤 23% 后估值与情绪均已降温，RSI 中性偏弱，属"利空已部分消化"的位置。若 Q2 财报确认中东冲突影响见顶 + 间夜回加速，是情绪修复的催化点。</p>
+
+    <p><strong>注意</strong>：缤客的核心驱动是间夜增速、Merchant 迁移、调整后 EBITDA 利润率与 Forward P/E，技术面仅次要参考。价值投资者应盯基本面与安全边际（$166 以下分批），而非追逐短期 K 线。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 10 ═══ -->
+<div class="section">
+  <div class="stitle">模块 10 · 增长催化剂与前景展望</div>
+  <div class="cmt">
+    <p><strong>短期催化剂（未来 6 个月）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>2026-08-04 Q2 2026 财报</strong>——验证中东冲突影响是否如管理层假设于 6 月底见顶、间夜是否回加速、H2 复苏路径</li>
+      <li><strong>暑期旺季 Q3</strong>——全年营收/利润峰值季，间夜与预订总额的旺季成色</li>
+      <li><strong>$182 亿回购授权放量</strong>——持续缩股放大每股价值</li>
+      <li><strong>Connected Trip 多要素交易（+约 20%）与 GenAI 落地</strong>——若加速是新叙事</li>
+    </ul>
+
+    <p><strong>长期展望（3-5 年）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>结构性现金转卡/线下转线上</strong>——全球旅游持续向线上迁移，间夜中个位数增长的基本盘</li>
+      <li><strong>Merchant 自处理支付渗透</strong>——从 66.8% 继续提升，带动支付货币化与 Connected Trip 打包</li>
+      <li><strong>另类住宿抢占 Airbnb 份额</strong>——Booking.com 民宿间夜持续增长</li>
+      <li><strong>GenAI / Agentic 重构获客与服务</strong>——自建 AI 代理反向卡位流量入口，是机会也是防守</li>
+      <li><strong>风险情景</strong>：AI 搜索改变预订路径 / 地缘与宏观冲击旅行需求 / 监管（欧盟 DMA）压制平台</li>
+    </ul>
+
+    <p><strong>TAM 展望</strong>：全球旅游是数万亿美元级市场，线上渗透率仍有提升空间；叠加支付货币化、Connected Trip 打包、餐厅/景点等新品类，缤客的可寻址市场远未饱和。核心问题不是增长空间，而是流量入口是否被 AI 搜索重新分配。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 11 ═══ -->
+<div class="section">
+  <div class="stitle">模块 11 · 风险矩阵</div>
+  <div class="risk-grid">
+    <div class="risk-card r4"><h5>1. 流量入口 / AI 搜索脱媒</h5><span class="risk-score">4 / 5 高</span><p>高度依赖 Google/Meta 绩效营销获客 · AI 搜索/代理式购物可能改变旅客预订路径 · 是 5-10 年维度最核心的长期变量</p></div>
+    <div class="risk-card r4"><h5>2. 地缘 / 旅行需求周期</h5><span class="risk-score">4 / 5 高</span><p>本季中东冲突已拖累间夜约 2pp · 战争/疫情/衰退直接压制跨境与欧洲旅行需求 · 强周期敏感</p></div>
+    <div class="risk-card r3"><h5>3. 安全边际不足</h5><span class="risk-score">3 / 5 中</span><p>内在价值 ~$208 对现价 $178 仅约 14% 安全边际 · 未达 25% 门槛 · 增速换挡期估值仍有压缩空间</p></div>
+    <div class="risk-card r3"><h5>4. 竞争与佣金压力</h5><span class="risk-score">3 / 5 中</span><p>Airbnb/Expedia/Trip.com + 酒店直营 App 竞争 · 大连锁供给端议价 · 长期佣金率承压</p></div>
+    <div class="risk-card r3"><h5>5. 监管（欧盟 DMA 等）</h5><span class="risk-score">3 / 5 中</span><p>欧盟数字市场法案将 Booking.com 列为"看门人" · 平台规则/排名/捆绑受约束 · 各国旅游监管趋严</p></div>
+    <div class="risk-card r2"><h5>6. 生意质量（机会）</h5><span class="risk-score">2 / 5 反向</span><p>37% 调整后 EBITDA 利润率 + 96% FCF 转化 + 双边网络护城河 + 浮存优势 · 世界级好生意本身是最大安全垫</p></div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>3 个黑天鹅情景</strong>：</p>
+    <ol style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>AI 搜索/代理式购物大规模脱媒 OTA</strong>——概率 15%（5 年维度）· 获客经济学被重塑 · 长期估值重置至 12x 以下</li>
+      <li><strong>全球旅行需求深度衰退（战争扩大/疫情/衰退）</strong>——概率 10% · 间夜与预订总额骤降 · 股价跌至 $130-140</li>
+      <li><strong>欧盟/多国监管重罚或强制改变平台规则</strong>——概率 8% · 佣金率与捆绑能力受限 · 利润率承压</li>
+    </ol>
+
+    <p style="margin-top:10px;"><strong>下行支撑</strong>：世界级 OTA 网络 + 37% EBITDA 利润率 + FCF $90 亿 + $182 亿回购授权构成质量底。<span class="hl-t">$150（52 周低）/ $146（二仓区）是较硬的估值底</span>（对应 Forward P/E ~14x）。缤客的"底"因质量溢价而相对扎实，但强周期属性使其波动大于支付网络类公司。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 12 ═══ -->
+<div class="section">
+  <div class="stitle">模块 12 · 股东回报分析</div>
+  <div class="cmt">
+    <p><strong>缤客是"大额回购为主 + 2024 起首度派息"的美股资本返还标杆——但要区分授权、执行，以及回购的注销质量。</strong>本季返还股东创纪录 $40 亿，值得细拆。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 18px 0 10px; font-family: 'Segoe UI',sans-serif;">12.1 公司给了股东多少？</h3>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>年度</th><th>回购金额</th><th>现金股息</th><th>股东总回报</th><th>股息 / FCF</th></tr>
+        <tr><td>FY2023</td><td>$10,377M</td><td>$0（尚未派息）</td><td><strong>$10,377M</strong></td><td>—</td></tr>
+        <tr><td>FY2024</td><td>$6,509M</td><td>$1,174M</td><td><strong>$7,683M</strong></td><td>~14%</td></tr>
+        <tr><td>FY2025</td><td>$6,440M</td><td>$1,248M</td><td><strong>$7,688M</strong></td><td>~14%</td></tr>
+        <tr class="hl"><td><strong>3 年合计</strong></td><td><strong>$23,326M</strong></td><td><strong>$2,422M</strong></td><td><strong>$25,748M</strong></td><td>—</td></tr>
+        <tr><td>Q1 2026 单季</td><td>$3,770M</td><td>$343M</td><td>$4,113M（创纪录）</td><td>—</td></tr>
+      </table>
+    </div>
+    <p style="font-size:13px; color: var(--text2); margin-top:8px"><strong>Trailing Shareholder Yield</strong> ≈ FY2025 返还 $7,688M / 市值 $139B ≈ <strong>5.5%</strong>（其中回购 ~4.6% + 股息 ~0.9%）。<span class="hl-t">缤客是"大额回购为主、股息为辅"的典型美股结构</span>——2024 年才首度派息，回购是绝对主菜。三年股东总回报 $257 亿，力度极强。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.2 给的方式好不好？</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>真实缩股 · 含金量高</strong>：摊薄股数（拆股后）从 FY2023 的 <strong>9.13 亿</strong>降至 FY2024 8.52 亿、FY2025 8.16 亿、Q1 2026 加权 <strong>7.94 亿</strong>——三年缩股约 15%。回购是"真减少股本、增厚每股内在价值"，而非仅抵消股权激励（本季 SBC 仅 $141M，远小于回购 $3,770M）</li>
+      <li><strong>回购择时中性偏优</strong>：股价从 52 周高 $231.80 回落至 $178（-23%）后仍在持续回购，在相对合理价位买入，纪律性可信；但历史上高位（如 FY2023 巨额 $104 亿）也曾在较高价回购，择时非完美</li>
+      <li><span class="warn-t">库存股口径（美股常态）</span>：美股回购多入库存股（treasury stock，-$583 亿）而非强制注销，含金量略低于港股强制注销；但从摊薄股数三年降 15% 看，实质缩股效果确凿，非只替 SBC 接盘</li>
+    </ul>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.3 能不能继续给、给多少？</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>已授权额度充裕</strong>：截至 2026-03-31 剩余回购授权 <strong>$182 亿</strong>（约占市值 13%）· 执行历史可信（常年足额回购）</li>
+      <li><strong>股息累进</strong>：2024 首度派息，Q2 2026 季率升至拆股后 $0.42（+9.4%）· 派息率仅约占 FCF 14%，增息与加码空间充足</li>
+      <li><strong>(股息 + 回购) / FCF 覆盖度</strong>：FY2025 返还 $7,688M / FCF $9,087M ≈ <strong>85%</strong>——<span class="hl-t">低于 100%，用当年赚的现金即可覆盖</span>，可持续性强，无需靠举债</li>
+      <li><strong>非借债回购</strong>：净负债仅 -$19 亿、相对 $90 亿年 FCF 极轻，返还主要靠自身 FCF 而非杠杆，资本结构健康</li>
+    </ul>
+    <p><strong>模块小结</strong>：<span class="hl-t">积极且高含金量</span>——三年缩股约 15%（真实减少股本）+ 回购覆盖度 85%（用 FCF 覆盖、非借债）+ $182 亿可用授权 + 2024 起股息累进。缤客是美股"大额回购 + 起步派息"复利机器的标杆，唯一小折扣是美股库存股口径（非强制注销），但摊薄股数三年降 15% 已证明缩股实效确凿。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 13 ═══ -->
+<div class="section">
+  <div class="stitle">模块 13 · 海图评分卡 + 投资决策</div>
+
+  <div class="scorecard">
+    <h3 style="font-size:15px; color:var(--text); margin-bottom: 16px; font-family: 'Segoe UI',sans-serif;">海图评分卡（6 维 A-D）</h3>
+    <div class="score-grid">
+      <div class="score-card"><div class="score-letter s-bp">A-</div><div class="score-body"><h4>1. 生意可预测性</h4><p>OTA 收费网络模式极清晰、一句话能说清；但强季节性 + 旅行需求对地缘/宏观敏感，能见度略逊纯收费网络。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">A-</div><div class="score-body"><h4>2. 经济护城河</h4><p>双边网络 + 规模 + 品牌宽护城河；但转换成本中等、流量入口握在体系外（Google/AI 搜索）。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">A-</div><div class="score-body"><h4>3. 管理层质量</h4><p>Fogel 三引擎战略 + 转型计划兑现成本节省 + 极致资本返还 + 主动押注 GenAI。坦诚披露地缘拖累。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">A-</div><div class="score-body"><h4>4. 财务质量</h4><p>37% EBITDA 利润率 + 96% FCF 转化 + Capex 仅 1.2% 营收 + 浮存优势。净负债 -$19 亿（轻）+ 股东权益赤字（回购所致，非亏损）。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">A-</div><div class="score-body"><h4>5. 资本配置纪律</h4><p>三年缩股 15% + 回购覆盖度 85%（FCF 覆盖非借债）+ $182 亿授权 + 股息累进。美股库存股口径小折扣。</p></div></div>
+      <div class="score-card"><div class="score-letter s-b">B</div><div class="score-body"><h4>6. 估值与安全边际</h4><p>Forward P/E 17x / FCF Yield 6.5% 对质量不贵，但内在价值 ~$208 对现价仅约 14% 安全边际 · <strong>未达 25% 门槛</strong>。</p></div></div>
+    </div>
+
+    <div class="flag-row">
+      <strong>红旗排查</strong>：会计与治理<strong>无重大红旗</strong>——股东权益赤字系常年回购（留存收益仍 +$414 亿）、非经营亏损；净负债 -$19 亿相对 $90 亿 FCF 极轻；GAAP 波动来自外汇重估/一次性减值，调整后与现金流清晰。<span class="warn-t">唯一约束是估值维度</span>：安全边际约 14% < 25%，叠加 Q2 增速换挡 + 中东冲突短期不确定 → 综合评级从"买入"下调一档至<strong>「有条件买入」</strong>（并非降至持有观望，因生意质量与资本纪律均为 A- 且无治理红旗）。
+    </div>
+
+    <p style="margin-top:18px; font-size:14px; color:var(--text); line-height:1.85;"><strong>综合评级</strong>：<span class="rating-badge rating-cond" style="font-size:14px;">有条件买入</span>。生意质量顶级（5 维 A-）、资本配置纪律优秀，但估值维度 B（安全边际约 14% 未达 25%）。核心判断：<strong>缤客的问题不是生意好不好，而是价格是否给到足够厚的折让——当前 $178 是合理偏低、但还不是"深度打折"。条件是：回调至 $166 以下分批建仓，或 Q2 确认中东冲突见顶、间夜回加速再加码；不追高。</strong></p>
+  </div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">投资决策（精确价格 · USD · 拆股后）</h3>
+
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>项目</th><th>价格</th><th>说明</th></tr>
+      <tr><td>12 个月目标价（概率加权）</td><td><strong>$215</strong> (+21%)</td><td>基准 $220 · 温和重估至 19x FY27</td></tr>
+      <tr><td>悲观目标（25% 概率）</td><td>$160 (-10%)</td><td>冲突延续 + 估值压缩至 15x</td></tr>
+      <tr><td>乐观目标（25% 概率）</td><td>$260 (+46%)</td><td>间夜回加速 + Connected Trip/GenAI 兑现</td></tr>
+      <tr class="hl"><td>首仓建仓（内在价值 $208 × 80%）</td><td><strong>$166</strong></td><td>距现价 -7% · 略等回调</td></tr>
+      <tr><td>二仓建仓（× 70%）</td><td>$146</td><td>-18% · 明显回调机会</td></tr>
+      <tr><td>三仓建仓（× 60%）</td><td>$125</td><td>-30% · 黑天鹅级机会</td></tr>
+      <tr><td>止盈一档</td><td>$240</td><td>+35% · 减仓 25%</td></tr>
+      <tr><td>止盈二档</td><td>$270</td><td>+51% · 再减 25%</td></tr>
+      <tr><td>止盈三档</td><td>$300</td><td>+68% · 再减 25% · 最后 25% 长期复利持有</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.85;"><strong>建议总仓位</strong>：<strong>3-5%</strong>（中等质量仓 · 当前价合理偏低，可小仓试水、回调至 $166 以下分批加，不追高）。<strong>持有周期</strong>：3-7 年（长期复利 · 穿越地缘周期与 AI 搜索范式变化）。<strong>关键监控指标</strong>：① 间夜增速与中东冲突影响是否见顶；② Merchant 收入占比与自处理支付渗透；③ 调整后 EBITDA 利润率与转型计划节省兑现；④ Google/Meta 营销效率与直接渠道占比；⑤ Forward P/E 是否回落至 14x 以下（估值机会）。<strong>下次催化剂</strong>：2026-08-04 Q2 2026 财报。</p>
+</div>
+
+<!-- ═══ 海图页末长评 ═══ -->
+<div class="section">
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记 · 1180 字</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p class="lead">价值投资里有一类标的，是"世界级的生意，遇上了并不世界级的价格折让"。缤客控股就是这样——它是全球最大的在线旅游平台，每一晚被预订的酒店、每一段被规划的旅程，它都在中间抽一道佣金。37% 的调整后 EBITDA 利润率、96% 的现金转化、三年回购把股本削去 15%。可正因为它太好，市场很少给它深度折让。25 拆 1 之后股价 $178，Forward P/E 只有 17 倍——从满估值回落到合理，但离"安全边际 25%"还差一口气。</p>
+
+      <p>缤客是全球在线旅游的收费网络——Booking.com、Priceline、Agoda、KAYAK、OpenTable 五大品牌连起供给（酒店/民宿/机票/租车/餐厅）与需求（全球旅客），从每一笔预订里抽取佣金，自己不持有一间客房、不承担库存风险，靠平台的双边网络效应赚钱。</p>
+
+      <h4>几个研判要点</h4>
+
+      <p><strong>一、Merchant 与 Agency 的分化，是读懂缤客的钥匙。</strong> 本季 Merchant（商户/自处理支付）收入 +26.7%、Agency（代理/到店付）收入 -2.3%。这不是简单的此消彼长，而是一场商业模式迁移：缤客正把交易从"代理只收佣"搬到"自己处理支付"——<span class="hl-t">Merchant 已占营收 66.8%、占预订总额 $38.7B（+24.3%）</span>。自处理支付让它能做 Connected Trip（连接式旅程）、金融科技变现、更强的转化与控盘，是护城河向"支付 + 行程编排"延伸的信号。</p>
+
+      <p><strong>二、GAAP 净利 +225% 有水分，调整后 +14% 才是真相。</strong> GAAP 净利从 $3.33 亿跳到 $10.83 亿看着惊艳，但里面有一笔约 $3.33 亿的<span class="warn-t">欧元计价债务外汇重估收益（非现金）</span>，去年同期基数又被外汇/权益损失压低。剔除外汇、权益证券损益、诉讼收益等一次性项后，调整后净利 $9.02 亿、调整后 EPS $1.14（+14%）才反映真实经营。看财报要盯调整后，不被 GAAP 的外汇噪音牵着走。</p>
+
+      <p><strong>三、季节性决定了不能用单季 EPS × 4。</strong> 缤客的营收在旅客入住/退房时确认，Q1 是预订旺季却是营收季节性最低的一季（$5.5B），Q3 暑期入住高峰才是峰值（$9.0B，经营利润率 38.7%）。全年营收 $269 亿、调整后 EPS $9.12，才是它真实的盈利体量。用单季 $1.14 × 4 会严重低估——这是读缤客季报最容易踩的陷阱。</p>
+
+      <p><strong>四、资产负债表要看穿两个"反直觉"。</strong> 其一，股东权益是 -$87 亿的赤字——<span class="warn-t">不是因为亏损，而是常年大额回购把库存股堆到 -$583 亿</span>（留存收益仍有 +$414 亿）；其二，它不是净现金公司：现金 $160 亿 + 长期投资，减去有息负债 $184 亿，真实是约 -$19 亿净负债。但别慌——$82 亿的递延商户预订款是客户预付的"浮存"，构成正向营运资金，$90 亿年 FCF 让这点杠杆毫无压力。</p>
+
+      <p><strong>五、增长在减速，但减速是暂时的。</strong> Q2 指引间夜只增 +2%~+4%、营收 +4%~+6%，比本季 +16% 明显放缓——主因是管理层假设中东冲突影响持续到 6 月底（本季已拖累间夜约 2pp，还原后约 +8%）。全年指引仍是营收高个位数、调整后 EPS 低到中双位数，叠加 $182 亿回购额度继续缩股。美国间夜连续第四季度加速到低两位数，是需求端最扎实的底色。</p>
+
+      <h4>海图研判</h4>
+
+      <p><strong>评级：有条件买入。</strong> 缤客是全球 OTA 绝对龙头、五品牌网络效应、37% 调整后 EBITDA 利润率、96% FCF 转化、纪律性极强的回购机器——生意质量顶级。但独立估值给出的内在价值中枢约 $208，对当前 $178 只有约 14% 的安全边际，没到价值投资 25% 的门槛；加上 Q2 增速换挡、中东冲突的短期不确定，故给"有条件买入"而非无条件买入。</p>
+
+      <p>12 个月概率加权目标价 <strong>$215</strong>（悲观 $160 · 25%／基准 $220 · 50%／乐观 $260 · 25%），对应约 +21% 空间。操作上：首仓 $166（内在价值 × 80%）、二仓 $146、三仓 $125，耐心等更好的价格给出更厚的边际；当前 $178 略高于机械首仓，可小仓试水、回调加码。止盈三档 $240／$270／$300，各减 25%，最后 25% 长期复利持有。<span class="hl-t">建议仓位 3%~5%（中等质量仓），持有周期 3~7 年。</span></p>
+
+      <h4>风险提示</h4>
+
+      <p>中东/地缘冲突拖累跨境与欧洲需求；宏观消费走弱压制间夜与预订总额；Google/Meta 流量入口与 AI 搜索改变获客经济学；Airbnb、Expedia、Trip.com 及酒店直营的竞争；欧盟数字市场法案（DMA）对平台的约束；估值端——Forward P/E 17x 虽不贵，但一旦增速持续低于高个位数，估值仍有压缩空间。任一项都可能把股价打回 $146~$160 区。<strong>但世界级 OTA 网络 + 37% EBITDA 利润率 + FCF $90 亿 + $182 亿回购授权构成质量底，$150 附近是较硬的估值底。</strong></p>
+
+      <p>关键叙事：<strong>全球在线旅游收费网络 + 五品牌双边护城河 + 37% 利润率 + 三年缩股 15% 的复利机器，对垒中东冲突短期拖累 + 增速换挡 + Forward P/E 17x 尚不足 25% 深度折让的价格</strong>。缤客不是"便宜货"，它几乎从不便宜；它是给愿意在回调时耐心建仓、然后让一台顶级 OTA 复利机器慢慢滚雪球的长期投资者。下次催化剂：2026-08-04 Q2 2026 财报。</p>
+
+      <p class="haitu-sign">—— 海图，灯下落笔，明日再观风浪。</p>
+
+      <p class="haitu-disc">⚠️ 免责声明：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，不构成任何投资建议。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div>《海图夜读》 · Booking Holdings BKNG Q1 2026 海图研判</div>
+  <div style="margin-top:6px;">发布日 2026-04-28 · 研判日 2026-07-11 · 数据来源 Booking Holdings Q1 2026 官方财报新闻稿（SEC 8-K EX-99.1）+ 10-Q + FY2025 年报 + 电话会 transcript · 货币 USD · 25 拆 1 后口径</div>
+</footer>
+
+<script>
+let curTheme = 'light';
+function toggleTheme() {
+  curTheme = curTheme === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', curTheme);
+  renderCharts();
+}
+
+const palette = {
+  light: { accent: '#8a9a8e', accent2: '#7b8fa0', accent3: '#b08d7a', gold: '#b9a06a', red: '#b87070', green: '#7a9a7a', grid: '#e5ddd5', text: '#7a706a' },
+  dark:  { accent: '#8a9a8e', accent2: '#8fabbf', accent3: '#c9a48e', gold: '#c9b07a', red: '#c08080', green: '#8aaa8a', grid: '#3e3a35', text: '#a09890' }
+};
+
+let charts = {};
+function renderCharts() {
+  Object.values(charts).forEach(c => c && c.destroy && c.destroy());
+  charts = {};
+  const p = palette[curTheme];
+  Chart.defaults.color = p.text;
+  Chart.defaults.borderColor = p.grid;
+
+  const quarters = ['Q1 25','Q2 25','Q3 25','Q4 25','Q1 26'];
+  const rev = [4.76, 6.80, 9.01, 6.35, 5.53];
+  const yoy = [7.9, 16.0, 12.7, 16.1, 16.2];
+  charts.rev = new Chart(document.getElementById('chartRev'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { type:'bar', label: '总营收 ($B)', data: rev, backgroundColor: p.accent + 'CC', yAxisID: 'y' },
+      { type: 'line', label: 'YoY %', data: yoy, borderColor: p.red, backgroundColor: p.red, tension: 0.3, yAxisID: 'y1' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false }, y1: { position: 'right', grid: { drawOnChartArea: false }, ticks: { callback: v => v + '%' } } } }
+  });
+
+  const opm = [22.3, 33.1, 38.7, 32.0, 23.0];
+  charts.margin = new Chart(document.getElementById('chartMargin'), {
+    type: 'line',
+    data: { labels: quarters, datasets: [
+      { label: '经营利润率 %', data: opm, borderColor: p.accent3, backgroundColor: p.accent3 + '33', fill: true, tension: 0.3 }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: false, ticks: { callback: v => v + '%' } } } }
+  });
+
+  charts.segment = new Chart(document.getElementById('chartSegment'), {
+    type: 'doughnut',
+    data: {
+      labels: ['Merchant 商户', 'Agency 代理', '广告及其他'],
+      datasets: [{ data: [3698, 1528, 306], backgroundColor: [p.accent, p.accent2, p.gold] }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { font: { size: 11 } } } } }
+  });
+
+  const gaapEps = [0.40, 1.10, 3.38, 1.77, 1.36];
+  const adjEps  = [0.99, 2.22, 3.98, 1.95, 1.14];
+  charts.eps = new Chart(document.getElementById('chartEPS'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { label: 'GAAP EPS', data: gaapEps, backgroundColor: p.accent2 + 'CC' },
+      { label: '调整后 EPS', data: adjEps, backgroundColor: p.green + 'CC' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, ticks: { callback: v => '$' + v } } } }
+  });
+
+  buildSankey();
+}
+
+function buildSankey() {
+  const p = palette[curTheme];
+  const labels = ['总营收 $5,532','总经营费用 $4,261','营销 $2,068','销售及其他 $804','人员 $893','其他运营 $496','经营利润 $1,271','非经营净收入 $128','税前利润 $1,399','所得税 $316','GAAP 净利 $1,083'];
+  const data = {
+    type: 'sankey',
+    orientation: 'h',
+    node: { pad: 15, thickness: 20, line: { color: p.grid, width: 0.5 }, label: labels,
+      color: [p.accent, p.red, p.red, p.red, p.red, p.red, p.green, p.accent2, p.gold, p.red, p.green] },
+    link: {
+      source: [0, 0, 1, 1, 1, 1, 6, 7, 8, 8],
+      target: [1, 6, 2, 3, 4, 5, 8, 8, 9, 10],
+      value:  [4261, 1271, 2068, 804, 893, 496, 1271, 128, 316, 1083],
+      color: [p.red+'55', p.green+'66', p.red+'44', p.red+'44', p.red+'44', p.red+'44', p.green+'66', p.accent2+'66', p.red+'55', p.green+'66']
+    }
+  };
+  const layout = { font: { size: 11, color: p.text }, paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)', margin: { l: 10, r: 10, t: 10, b: 10 } };
+  Plotly.react('sankey', [data], layout, { displayModeBar: false, responsive: true });
+}
+
+renderCharts();
+</script>
+
+</body>
+</html>

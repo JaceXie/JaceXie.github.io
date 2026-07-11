@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-07-10 · Pfizer Q1 2026 财报已于 2026-05-05 发布 -->
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>辉瑞 PFE Q1 2026 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+<meta name="description" content="全球制药巨头 · 8.4 倍前瞻 PE 派 7.1% 高股息的深度价值样本。Q1 2026 营收 +5%（剔除新冠经营性 +7%），肿瘤 ADC + 专科强劲；但 Eliquis/Vyndaqel/Ibrance/Xtandi 2026-2031 专利悬崖 + $514 亿净负债 + 减肥药未兑现三重压制——便宜有便宜的理由，安全边际不足 25%。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="辉瑞 PFE Q1 2026 海图研判 · 海图夜读">
+<meta property="og:description" content="全球制药巨头 · 8.4 倍前瞻 PE 派 7.1% 高股息的深度价值样本。Q1 2026 营收 +5%（剔除新冠经营性 +7%），肿瘤 ADC + 专科强劲；但 Eliquis/Vyndaqel/Ibrance/Xtandi 2026-2031 专利悬崖 + $514 亿净负债 + 减肥药未兑现三重压制——便宜有便宜的理由，安全边际不足 25%。">
+<meta property="og:url" content="https://jacexie.github.io/haitu/reports/pfe-q1-2026.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="辉瑞 PFE Q1 2026 海图研判 · 海图夜读">
+<meta name="twitter:description" content="全球制药巨头 · 8.4 倍前瞻 PE 派 7.1% 高股息的深度价值样本。核心业务剔除新冠经营性 +7%，但 2026-2031 专利悬崖 + $514 亿净负债 + 减肥药未兑现三重压制——便宜有便宜的理由。">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root { --bg:#f5f0eb; --bg2:#ece6df; --card:#ffffff; --card2:#f8f5f1; --border:#d9d0c7; --text:#4a4340; --text2:#7a706a; --text3:#a89f98; --accent:#8a9a8e; --accent2:#7b8fa0; --accent3:#b08d7a; --rose:#c09090; --gold:#b9a06a; --red:#b87070; --green:#7a9a7a; --shadow:rgba(0,0,0,0.06); --chart-grid:#e5ddd5; }
+[data-theme="dark"] { --bg:#1e1c1a; --bg2:#28251f; --card:#2e2a25; --card2:#363230; --border:#4a4540; --text:#d4ccc4; --text2:#a09890; --text3:#706860; --accent:#8a9a8e; --accent2:#8fabbf; --accent3:#c9a48e; --rose:#c09090; --gold:#c9b07a; --red:#c08080; --green:#8aaa8a; --shadow:rgba(0,0,0,0.3); --chart-grid:#3e3a35; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', serif; line-height: 1.75; font-size: 14.5px; transition: background .35s, color .35s; }
+a { color: var(--accent2); text-decoration: none; }
+.theme-bar { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); }
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+.toggle-switch { position: relative; width: 44px; height: 22px; background: var(--border); border-radius: 11px; cursor: pointer; transition: background .3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: var(--card); border-radius: 50%; transition: transform .3s; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+
+.hero { padding: 48px 24px 36px; text-align: center; border-bottom: 1px solid var(--border); }
+.hero-tag { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 3px 14px; border-radius: 20px; margin-bottom: 18px; }
+.hero h1 { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.pill { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: 'Segoe UI', sans-serif; font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow); }
+.pill strong { color: var(--text); }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle { font-size: 18px; font-weight: 700; color: var(--accent3); margin-bottom: 20px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+.stitle::before { content: ''; display: block; width: 4px; height: 20px; background: var(--accent3); border-radius: 2px; }
+
+.haitu-quip { display: flex; align-items: center; gap: 18px; background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 18px 24px; margin: 24px 0; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-quote { flex: 1; }
+.haitu-portrait { font-size: 15px; line-height: 1.65; color: var(--text); margin-bottom: 6px; font-weight: 600; }
+.haitu-rating-line { font-size: 13px; color: var(--text2); font-family: 'Segoe UI', sans-serif; }
+.rating-badge { display: inline-block; padding: 2px 12px; border-radius: 12px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; margin-left: 4px; }
+.rating-hold { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+
+.haitu-essay { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 28px 32px; margin: 24px 0 20px; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-essay-header { display: flex; align-items: center; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.haitu-avatar-sm { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); background: var(--red); box-shadow: 0 2px 8px rgba(184,112,112,0.2); }
+.haitu-name-lg { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 28px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 4px; }
+.haitu-essay-tag { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; }
+.haitu-essay-body { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 15px; line-height: 2.0; color: var(--text); }
+.haitu-essay-body p { margin-bottom: 14px; }
+.haitu-essay-body p.lead { font-size: 16px; font-style: italic; color: var(--text2); margin-bottom: 18px; }
+.haitu-essay-body strong { color: var(--text); font-weight: 700; }
+.haitu-essay-body h4 { font-size: 14px; color: var(--accent3); margin: 18px 0 10px; font-family: 'Segoe UI', sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+.haitu-sign { text-align: right; margin-top: 18px; font-family: 'Georgia', serif; font-size: 14px; color: var(--text2); font-style: italic; }
+.haitu-disc { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); font-style: italic; line-height: 1.7; }
+
+.stock-snap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px; }
+.snap-item { text-align: center; }
+.snap-label { font-family: 'Segoe UI', sans-serif; font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.snap-val { font-family: 'Segoe UI', sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+.snap-val.up { color: var(--green); }
+.snap-val.dn { color: var(--red); }
+.snap-sub { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow); }
+.kpi-l { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.badge { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+.up { background: rgba(122,154,122,.15); color: var(--green); }
+.dn { background: rgba(184,112,112,.15); color: var(--red); }
+.nt { background: rgba(123,143,160,.15); color: var(--accent2); }
+
+.tbl-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow); }
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI', sans-serif; font-size: 13px; }
+.tbl th { background: var(--card2); color: var(--text3); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); background: var(--card2); }
+
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); }
+.ctitle { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 260px; }
+
+.cmt { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 26px; line-height: 1.95; font-size: 14px; box-shadow: 0 1px 4px var(--shadow); color: var(--text); }
+.cmt p { margin-bottom: 14px; }
+.cmt p:last-child { margin-bottom: 0; }
+.cmt strong { color: var(--text); }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+
+.bscore { display: flex; align-items: center; gap: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; margin-bottom: 12px; box-shadow: 0 1px 4px var(--shadow); }
+.circle { width: 62px; height: 62px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; flex-shrink: 0; border: 3px solid; font-family: 'Segoe UI', sans-serif; }
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 4px; color: var(--text); }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.moat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+.moat-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); border-left: 4px solid var(--accent); }
+.moat-card.wide { border-left-color: var(--green); }
+.moat-card.narrow { border-left-color: var(--gold); }
+.moat-card.none { border-left-color: var(--red); }
+.moat-card h5 { font-size: 13px; color: var(--text); margin-bottom: 6px; }
+.moat-card .moat-rate { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.moat-card.wide .moat-rate { background: rgba(122,154,122,.18); color: var(--green); }
+.moat-card.narrow .moat-rate { background: rgba(185,160,106,.18); color: var(--gold); }
+.moat-card.none .moat-rate { background: rgba(184,112,112,.18); color: var(--red); }
+.moat-card p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+
+.ec-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 14px; box-shadow: 0 1px 3px var(--shadow); }
+.ec-badge { flex-shrink: 0; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-top: 2px; font-family: 'Segoe UI', sans-serif; }
+.ec-bull { background: rgba(122,154,122,.18); color: var(--green); }
+.ec-bear { background: rgba(184,112,112,.18); color: var(--red); }
+.ec-neut { background: rgba(185,160,106,.18); color: var(--gold); }
+.ec-body { flex: 1; }
+.ec-title { font-weight: 600; color: var(--text); margin-bottom: 3px; font-size: 14px; }
+.ec-note { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.dcf-note { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.dcf-note strong { color: var(--text); }
+
+.scorecard { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow); }
+.score-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.score-card { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px; }
+.score-letter { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Segoe UI', sans-serif; font-weight: 800; font-size: 22px; flex-shrink: 0; border: 3px solid; }
+.s-a { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.12); }
+.s-bp { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.06); }
+.s-b { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.10); }
+.s-bm { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.06); }
+.s-c { color: var(--red); border-color: var(--red); background: rgba(184,112,112,.08); }
+.score-body h4 { font-size: 13px; color: var(--text); margin-bottom: 4px; }
+.score-body p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+.flag-row { margin-top: 16px; padding: 12px 16px; background: rgba(184,112,112,.08); border: 1px solid rgba(184,112,112,.3); border-radius: 8px; font-size: 13px; color: var(--text2); }
+.flag-row strong { color: var(--red); }
+
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center; box-shadow: 0 1px 4px var(--shadow); }
+.pbox .pl { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; }
+.pbox .pv { font-family: 'Segoe UI', sans-serif; font-size: 28px; font-weight: 800; margin-bottom: 5px; }
+.pbox .pn { font-size: 12px; color: var(--text3); line-height: 1.5; }
+.pc { color: var(--red); } .pf { color: var(--gold); } .ps { color: var(--green); }
+
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.risk-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); position: relative; overflow: hidden; }
+.risk-card::before { content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent); }
+.risk-card.r1::before { background: var(--green); }
+.risk-card.r2::before { background: rgba(122,154,122,.6); }
+.risk-card.r3::before { background: var(--gold); }
+.risk-card.r4::before { background: var(--rose); }
+.risk-card.r5::before { background: var(--red); }
+.risk-card h5 { font-size: 14px; margin-bottom: 6px; color: var(--text); }
+.risk-score { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.r1 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r2 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r3 .risk-score { background: rgba(185,160,106,.18); color: var(--gold); }
+.r4 .risk-score { background: rgba(192,144,144,.18); color: var(--rose); }
+.r5 .risk-score { background: rgba(184,112,112,.18); color: var(--red); }
+.risk-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+footer { background: var(--card2); border-top: 1px solid var(--border); padding: 24px; text-align: center; color: var(--text3); font-size: 12px; margin-top: 40px; line-height: 1.8; }
+@media (max-width: 768px) { .cgrid,.pgrid { grid-template-columns: 1fr; } .hero h1 { font-size: 22px; } .kpi-grid { grid-template-columns: 1fr 1fr; } .stock-snap { grid-template-columns: 1fr 1fr; } .haitu-essay-header { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/PFE" target="_blank" rel="noopener" title="在雪球查看 PFE 实时行情">雪球 PFE</a>
+  </div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">Q1 2026 财报发布 · 2026-05-05 &nbsp;|&nbsp; 海图研判 · 2026-07-11</div>
+  <h1>辉瑞 Pfizer PFE · 2026 Q1 财报深度分析</h1>
+  <div class="hero-sub">NYSE: PFE &nbsp;|&nbsp; 财季截至 2026-03-29 &nbsp;|&nbsp; 价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill">股价 <strong>$24.30</strong> <span style="color:var(--red)">距高点 -15%</span></div>
+    <div class="pill">市值 <strong>$138B</strong></div>
+    <div class="pill">Q1 营收 <strong>$14.45B</strong> <span style="color:var(--green)">+5%</span></div>
+    <div class="pill">调整后 EPS <strong>$0.75</strong> <span style="color:var(--red)">-18%</span></div>
+    <div class="pill">股息率 <strong>7.1%</strong></div>
+    <div class="pill">Forward P/E <strong>~8.4x</strong> <span style="color:var(--gold)">深度价值</span></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 海图页首短评 ═══ -->
+<div class="haitu-quip">
+  <div class="haitu-quote">
+    <div class="haitu-portrait">全球最大的制药巨头之一——不发明"永动"药，而是靠处方药 + 疫苗 + 肿瘤 ADC + 专科药的组合，收取专利期内的定价权租金。8.4 倍前瞻 PE、7.1% 股息率、连续 345+ 季度派息，账面像捡钱。Q1 2026 营收 +5%（剔除新冠核心经营性 +7%），肿瘤（Padcev +39%）与专科（Vyndaqel）强劲；但 Eliquis / Vyndaqel / Ibrance / Xtandi 从 2026 到 2031 陆续走下专利悬崖 + $514 亿净负债去杠杆 + 减肥药还在 Ph1/2——便宜有便宜的理由。</div>
+    <div class="haitu-rating-line">评级：<span class="rating-badge rating-hold">持有观望</span> · 12 个月目标价 $26（+7%）· 8.4 倍 PE 的 7.1% 高股息现金机器，对垒专利悬崖 + 去杠杆约束 + 减肥药未兑现，安全边际不足 25%</div>
+  </div>
+</div>
+
+<!-- ═══ 市场数据快照 ═══ -->
+<div class="section">
+  <div class="stitle">市场数据快照（2026-07-10 收盘）</div>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">股价（美元）</div><div class="snap-val">$24.30</div><div class="snap-sub">2026-07-10 · 距 52 周高 -15%</div></div>
+    <div class="snap-item"><div class="snap-label">市值</div><div class="snap-val">$138.4B</div><div class="snap-sub">大型制药股</div></div>
+    <div class="snap-item"><div class="snap-label">TTM GAAP P/E</div><div class="snap-val">~18.6x</div><div class="snap-sub">含摊销/减值噪音</div></div>
+    <div class="snap-item"><div class="snap-label">Forward P/E</div><div class="snap-val nt">~8.4x</div><div class="snap-sub">2026 Adj EPS $2.90</div></div>
+    <div class="snap-item"><div class="snap-label">P/S (TTM)</div><div class="snap-val">~2.2x</div><div class="snap-sub">营收 ~$62.6B</div></div>
+    <div class="snap-item"><div class="snap-label">P/B</div><div class="snap-val">~1.5x</div><div class="snap-sub">权益 $90.4B</div></div>
+    <div class="snap-item"><div class="snap-label">股息率（前瞻）</div><div class="snap-val up">7.1%</div><div class="snap-sub">$1.72/年 · 高股息</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间</div><div class="snap-val">$23.11 - $28.74</div><div class="snap-sub">接近区间下沿</div></div>
+    <div class="snap-item"><div class="snap-label">现金 + 短投</div><div class="snap-val">$13.08B</div><div class="snap-sub">2026-03-29 末</div></div>
+    <div class="snap-item"><div class="snap-label">有息负债</div><div class="snap-val dn">$64.46B</div><div class="snap-sub">短债 3.89 + 长债 60.57</div></div>
+    <div class="snap-item"><div class="snap-label">真实净负债</div><div class="snap-val dn">-$51.38B</div><div class="snap-sub">⚠️ 净负债非净现金</div></div>
+    <div class="snap-item"><div class="snap-label">Q1 自由现金流</div><div class="snap-val nt">$2.18B</div><div class="snap-sub">OCF 2.62 − Capex 0.44</div></div>
+  </div>
+  <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">数据时点：股价 2026-07-10 收盘 $24.30（52 周区间 $23.11-28.74）· 财务数据来源 Pfizer Q1 2026 官方财报新闻稿（SEC 8-K + IR PDF + 10-Q，2026-05-05 发布，财季美国子公司截至 2026-03-29）· 货币 USD 单口径。辉瑞财年为日历年（12 月 31 日止）。⚠️ 辉瑞是<strong>净负债 -$51.4B</strong>（有息负债 $64.5B > 现金+短投 $13.1B）而非净现金——高杠杆源自 2023 年 $430 亿收购 Seagen 与 2025 年收购 Metsera，公司已明确<strong>优先去杠杆、暂停回购</strong>。</p>
+</div>
+
+<!-- ═══ Q1 2026 KPI ═══ -->
+<div class="section">
+  <div class="stitle">Q1 2026 核心业绩（USD · 财季截至 2026-03-29）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">总营收</div><div class="kpi-v">$14.45B</div><span class="badge up">+5% YoY</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">经营性 +2% · 汇率 +3pt</div></div>
+    <div class="kpi"><div class="kpi-l">产品收入</div><div class="kpi-v">$11.72B</div><span class="badge nt">主体</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">联盟 $2.34B + 特许 $0.40B</div></div>
+    <div class="kpi"><div class="kpi-l">剔除新冠经营性增速</div><div class="kpi-v">+7%</div><span class="badge up">核心强劲</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">已上市&收购产品 +22%</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 毛利率</div><div class="kpi-v">75.4%</div><span class="badge dn">-3.9pt</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">去年一次性有利项未重演</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 净利</div><div class="kpi-v">$2.69B</div><span class="badge dn">-9%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">归母口径</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 摊薄 EPS</div><div class="kpi-v">$0.47</div><span class="badge dn">-10%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">去年 $0.52</div></div>
+    <div class="kpi"><div class="kpi-l">调整后净利</div><div class="kpi-v">$4.29B</div><span class="badge dn">-18%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">去年含有利税收结算</div></div>
+    <div class="kpi"><div class="kpi-l">调整后 EPS</div><div class="kpi-v">$0.75</div><span class="badge dn">-18%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">最核心经营口径</div></div>
+    <div class="kpi"><div class="kpi-l">经营现金流</div><div class="kpi-v">$2.62B</div><span class="badge nt">Q1</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">季节性偏低</div></div>
+    <div class="kpi"><div class="kpi-l">自由现金流</div><div class="kpi-v">$2.18B</div><span class="badge nt">OCF−Capex</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">Capex $0.44B</div></div>
+    <div class="kpi"><div class="kpi-l">有效税率</div><div class="kpi-v">14.6%</div><span class="badge nt">GAAP</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">调整后 16.9%</div></div>
+    <div class="kpi"><div class="kpi-l">现金股息（Q1）</div><div class="kpi-v">$2.45B</div><span class="badge nt">$0.43/股</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">回购 $0</div></div>
+  </div>
+</div>
+
+<!-- ═══ 看穿高亮框 ═══ -->
+<div class="section">
+  <div class="stitle">本季必看 · 两个"看穿"：GAAP vs 调整后、营收增长的三股力量</div>
+  <div class="cmt">
+    <p><strong>辉瑞的利润表有两个必须"看穿"的地方，看不穿就会误读它的盈利质量与增长成色。</strong></p>
+    <p><strong>看穿一：调整后净利 $42.9 亿是 GAAP $26.9 亿的 1.6 倍，差额主要是无形资产摊销——但这笔摊销对辉瑞不是纯"纸面费用"。</strong> GAAP 净利 $26.9 亿，加回<span class="hl-t">无形资产摊销 $11.83 亿/季</span>（来自 Seagen $430 亿、Metsera 等收购形成的无形资产）+ 收购在研 IPR&D $1.37 亿 + 重组等，得到调整后净利 $42.9 亿。<span class="warn-t">关键洞察</span>：Visa 那类公司的"摊销加回"是真·纸面费用；但辉瑞不同——<strong>专利悬崖意味着这些收购来的药物资产真的会随专利到期而贬值失效</strong>，摊销正是这种价值消耗的会计体现。所以调整后利润在专利悬崖临近时，有<span class="warn-t">高估可持续盈利</span>之嫌。看辉瑞，两个口径都要盯，且要问一句：加回的摊销，未来会不会变成真实的现金损失。</p>
+    <div class="tbl-wrap" style="margin:14px 0;">
+      <table class="tbl">
+        <tr><th>利润桥接（$M）</th><th>Q1 2026</th><th>YoY</th></tr>
+        <tr><td>GAAP 归母净利</td><td>2,687</td><td>-9%</td></tr>
+        <tr><td>+ 无形资产摊销</td><td>1,183</td><td>—</td></tr>
+        <tr><td>+ 收购在研 IPR&D</td><td>137</td><td>—</td></tr>
+        <tr><td>+ 重组&收购相关等其他调整</td><td>~283</td><td>—</td></tr>
+        <tr class="hl"><td><strong>调整后净利 Adjusted income</strong></td><td><strong>4,290</strong></td><td><strong>-18%</strong></td></tr>
+      </table>
+    </div>
+    <p><strong>看穿二：营收 +5% 是"新冠退坡 − 汇率顺风 + 核心加速"三股力量的净结果。</strong> <span class="hl-t">+5% 总增长 = 经营性 +2% + 汇率有利 +3pt（$4.31 亿 FX 顺风）</span>。经营性 +2% 看着乏力，但拆开看：Comirnaty 经营性 -59%、Paxlovid -63%，新冠产品单季就吃掉几个百分点；<strong>剔除新冠后经营性 +7%，"已上市及收购产品"经营性 +22%</strong>。即真实内生增长被退潮的新冠拖累，但核心业务（肿瘤 / 专科 / 医院）在加速。这一季的增长成色，取决于你把它当"下滑的公司"还是"底层在长、被新冠遮住"的公司——海图倾向后者，但悬崖仍在前方。</p>
+  </div>
+</div>
+
+<!-- ═══ 趋势图 ═══ -->
+<div class="section">
+  <div class="stitle">关键指标趋势</div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">营收（$B）& 调整后 EPS（近 5 季 · Q4 疫苗旺季峰值）</div><div class="cwrap"><canvas id="chartRev"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">利润率：GAAP vs 调整后（Q1 2026 · %）</div><div class="cwrap"><canvas id="chartMargin"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">Q1 2026 五大产品类别营收占比（$B）</div><div class="cwrap"><canvas id="chartSegment"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">GAAP vs 调整后摊薄 EPS（近 5 季 · Q4 GAAP 亏损）</div><div class="cwrap"><canvas id="chartEps"></canvas></div></div>
+  </div>
+</div>
+
+<!-- ═══ 桑基图 ═══ -->
+<div class="section">
+  <div class="stitle">Q1 2026 利润表资金流向桑基图（$B）</div>
+  <div class="ccard">
+    <div id="sankey" style="width:100%;height:480px;"></div>
+    <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">说明：总营收 $14.45 → 营业成本 $3.55 + 毛利 $10.90 → 销售&行政 $2.96 + 研发 $2.49 + 摊销/IPR&D/重组 $1.42 + 营业利润 $4.03 → 其他净支出 $0.86 + 税前利润 $3.17 → 所得税 $0.46 + 持续经营净利 $2.71 → 归母净利 $2.69 + 终止经营&少数股东 $0.02。每个中间节点流入 = 流出，流量闭合。注：本季 GAAP 经营利润率约 27.9%（营业利润 $4.03B ÷ 营收）；单季自由现金流 $2.18B，而现金股息支付 $2.45B —— <strong>Q1 派息已超过 Q1 自由现金流</strong>（Q1 现金流季节性偏低，但凸显股息对现金流的重压）。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 1 ═══ -->
+<div class="section">
+  <div class="stitle">模块 1 · 公司概览与背景</div>
+  <div class="cmt">
+    <p><strong>Pfizer Inc.</strong>（NYSE: PFE），总部纽约，1849 年创立，是全球历史最悠久、规模最大的制药企业之一。财年为<strong>日历年</strong>（12 月 31 日止，美国子公司 Q1 截至 2026-03-29、海外子公司截至 2026-02-22）。最新已发布财报为 <strong>Q1 2026，2026-05-05 发布</strong>（8-K/新闻稿 + 同日提交的 10-Q）。</p>
+
+    <p><strong>核心叙事</strong>：辉瑞是一家<span class="hl-t">"专利租金 + 高股息"的现金机器</span>——它不靠一款永动产品，而是靠<strong>处方药 + 疫苗 + 肿瘤 ADC + 专科药</strong>组成的一篮子专利资产，在专利保护期内收取全球医保与自费市场的定价权租金。FY2025 营收 $626 亿。新冠期间靠 Comirnaty/Paxlovid 冲上千亿营收峰值，如今正走在"新冠退潮 + 老药专利到期 + 新管线接棒"的青黄不接换挡期。</p>
+
+    <p><strong>五大产品组合（2026 Q1 起商业架构调整，新设"医院与生物类似药")</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>基础医疗 Primary Care</strong>（$55.4 亿，-6% 经营性）——Eliquis 抗凝、Prevnar 肺炎疫苗、Nurtec 偏头痛、Comirnaty/Paxlovid 新冠、Abrysvo RSV。含新冠退坡与 Eliquis 专利担忧，是拖累项</li>
+      <li><strong>肿瘤 Oncology</strong>（$38.3 亿，+7% 经营性）——Ibrance、Padcev（+39%）、Xtandi、Lorbrena（+32%）、Adcetris、Tukysa。<span class="hl-t">Seagen 的 ADC 平台是当前增长核心</span></li>
+      <li><strong>专科 Specialty Care</strong>（$29.4 亿，+8% 经营性）——Vyndaqel 家族（ATTR 心肌病，$16 亿）、Xeljanz、Cibinqo</li>
+      <li><strong>医院与生物类似药</strong>（$18.5 亿，+10% 经营性）——肿瘤生物类似药（+52%）、抗感染、Inflectra</li>
+      <li><strong>Pfizer CentreOne（CDMO 代工）</strong>（$2.9 亿，+6%）——为第三方代工原料药</li>
+    </ul>
+
+    <p><strong>股权结构与公司治理</strong>：单一 A 类普通股，约 <strong>57 亿股</strong>流通，机构持股为主，无双重股权。CEO Albert Bourla（2019 至今）主导了新冠疫苗研发、Seagen $430 亿收购与近期 Metsera 减肥药并购。近三年因无回购 + 股权激励，<span class="warn-t">摊薄股数缓慢上升（轻微稀释）</span>。</p>
+
+    <p><strong>能力圈检验</strong>：制药生意的商业模式清晰（研发新药 → 专利保护期收租 → 专利到期后被仿制/生物类似药侵蚀），但<span class="warn-t">两块黑箱难度极高：(1) 药物研发的二元结果（临床 III 期成败）——减肥药 Metsera 尚在 Ph1/2，肿瘤管线成败无法用财务外推；(2) 专利悬崖的精确冲击时点与幅度——Eliquis/Vyndaqel/Ibrance/Xtandi 陆续到期，新药能否填平缺口是 5 年维度的判断题</span>。这决定了辉瑞的盈利可预测性远低于一般消费龙头——便宜的估值正是市场对这种不确定性的定价。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 2 ═══ -->
+<div class="section">
+  <div class="stitle">模块 2 · 管理层评估</div>
+
+  <div class="bscore">
+    <div class="circle cw">B</div>
+    <div class="bd">
+      <h4>Albert Bourla · 董事长兼 CEO（2019 至今）</h4>
+      <p>兽医出身，1993 年加入辉瑞，2019 年出任 CEO。执掌期内最大功绩是<span class="hl-t">新冠疫苗 Comirnaty 的极速研发与商业化</span>（一度贡献千亿营收），并用新冠现金流做了两笔重注：2023 年 $430 亿收购 Seagen（ADC 肿瘤平台，如今是增长核心，验证成功）+ 2025 年 $80 亿收购 Metsera（重返减肥药，结果未定）。<span class="warn-t">争议点</span>：新冠高峰期以高价收购、2025 年 4 月终止自研减肥药 danuglipron 后再花大钱外购 Metsera，被质疑资本配置"追风口"。海图判断：Bourla 是一位有魄力、敢下重注的掌舵人，但重注的胜率还需时间检验，去杠杆纪律是当前最大考验。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B-</div>
+    <div class="bd">
+      <h4>资本配置 · 从"新冠盛宴并购"转向"去杠杆 + 守股息"</h4>
+      <p>
+      <strong>股息之王</strong>：连续 <strong>345+ 个季度派息</strong>，多年增息（2023 $1.64 → 2024 $1.68 → 2025 $1.72，年增约 $0.04），当前季率 $0.43、前瞻股息率 7.1%——股息是唯一的资本回报渠道。<br>
+      <strong>暂停回购去杠杆</strong>：2023-2026 连续多年<span class="warn-t">零回购</span>，$33 亿回购授权按兵不动，全力偿还 Seagen/Metsera 并购形成的债务。2026 全年指引<strong>不含任何回购</strong>。<br>
+      <span class="warn-t">核心张力</span>：净负债 $514 亿需要用 FCF 去还，而 7.1% 的高股息（年约 $98 亿）已吞掉近九成自由现金流——<strong>还债与守股息在抢同一笔现金</strong>。管理层称去杠杆完成后"未来"才考虑恢复回购。
+      </p>
+    </div>
+  </div>
+
+  <div class="cmt">
+    <p><strong>长期主义测试</strong>：✅ 管理层用新冠现金买入 Seagen ADC 平台与 Metsera 减肥药资产，是着眼 5-10 年后专利悬崖之后增长的长期布局，而非短期财报博弈。<strong>坦诚度</strong>：电话会披露详尽——主动说明新冠退坡幅度（Comirnaty -59%）、Adj EPS -18% 的高基数原因（去年含一次性有利税收结算）、专利悬崖已含约 $15 亿仿制冲击于指引，不粉饰。<strong>利益绑定</strong>：管理层持股比例不高（成熟大盘股常态），薪酬与营收/Adj EPS 挂钩。<strong>历史记录</strong>：Seagen 收购已兑现为增长核心（Padcev +39%），是加分项；danuglipron 折戟后转购 Metsera，胜负待定。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 3 ═══ -->
+<div class="section">
+  <div class="stitle">模块 3 · 商业模式深度解析</div>
+  <div class="cmt">
+    <p><strong>海图"一句话测试"</strong>：<span class="hl-t">辉瑞是全球最大的"专利药收租人"——投入巨额研发（或高价收购）拿下一款药的专利，在 10-20 年保护期内以定价权收取全球处方与医保的租金，专利到期后收入被仿制药/生物类似药侵蚀，于是必须不断用新药填补到期老药的缺口。</span>这是一场"研发管线 vs 专利悬崖"的永续赛跑。</p>
+
+    <p><strong>盈利飞轮</strong>：研发/并购 → 专利药上市 → 专利期内高毛利收租（毛利率 75%+）→ 现金流反哺研发与并购 → 补充下一批专利药。飞轮的命门在于<span class="warn-t">研发产出率</span>：能否用可控的研发投入，持续产出足以覆盖到期老药的新重磅。</p>
+
+    <p><strong>Q1 2026 营收结构（五大产品类别 · 全球口径）</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>产品类别</th><th>Q1 2026</th><th>YoY(总)</th><th>经营性</th><th>核心驱动/拖累</th></tr>
+        <tr><td>基础医疗 Primary Care</td><td>$5.54B</td><td>-3%</td><td>-6%</td><td>Eliquis $2.17B、Prevnar $1.69B；新冠退坡拖累</td></tr>
+        <tr><td>肿瘤 Oncology</td><td>$3.83B</td><td>+9%</td><td>+7%</td><td>Padcev +39%、Lorbrena +32%、ADC 平台放量</td></tr>
+        <tr><td>专科 Specialty Care</td><td>$2.94B</td><td>+12%</td><td>+8%</td><td>Vyndaqel 家族 $1.60B、Xeljanz +34%</td></tr>
+        <tr><td>医院与生物类似药</td><td>$1.85B</td><td>+13%</td><td>+10%</td><td>肿瘤生物类似药 +52%</td></tr>
+        <tr><td>Pfizer CentreOne (CDMO)</td><td>$0.29B</td><td>+6%</td><td>—</td><td>第三方代工</td></tr>
+        <tr class="hl"><td><strong>合计</strong></td><td><strong>$14.45B</strong></td><td><strong>+5%</strong></td><td><strong>+2%</strong></td><td>剔除新冠经营性 +7%</td></tr>
+      </table>
+    </div>
+
+    <p style="margin-top:14px;"><strong>单位经济与议价能力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>毛利率 75%+</strong>——专利药边际成本极低，定价权来自专利垄断，是典型高毛利收租生意</li>
+      <li><strong>对支付方（医保/PBM）议价能力：中且受政策压制</strong>——美国 IRA 医保谈判、MFN 最惠国定价、TrumpRx.gov 降价施压专利药定价权天花板</li>
+      <li><strong>对仿制药/生物类似药：无议价能力</strong>——专利一旦到期，收入断崖式下滑（Comirnaty/Paxlovid 是"需求退坡版"的预演）</li>
+      <li><strong>研发是最大成本项与胜负手</strong>——Q1 R&D $24.9 亿（经营性 +12%，肿瘤与肥胖管线加码），R&D 的产出效率决定飞轮能否转下去</li>
+    </ul>
+    <p><strong>与 Visa 类"收费桥"的本质区别</strong>：Visa 的护城河（网络效应）不会到期；辉瑞的护城河（专利）<span class="warn-t">有法定倒计时</span>。这是理解辉瑞估值折价的钥匙——它的每一份利润里，都嵌着一个"何时失效"的日期。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 4 ═══ -->
+<div class="section">
+  <div class="stitle">模块 4 · 经济护城河分析（5 维）</div>
+  <div class="moat-grid">
+    <div class="moat-card narrow">
+      <h5>1. 无形资产（专利/品牌）</h5>
+      <span class="moat-rate">中 · 有倒计时</span>
+      <p>专利是核心护城河，但<span class="warn-t">法定到期</span>：Eliquis(美~2028)、Vyndaqel(2031)、Ibrance/Xtandi 陆续到期。品牌信任度高但难阻仿制。<strong>趋势：2026-2031 侵蚀</strong>。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>2. 规模/成本优势</h5>
+      <span class="moat-rate">宽</span>
+      <p>全球最大制药产能 + 分销网络 + 采购规模，新药商业化边际成本低。企业级成本优化计划推进降本。<strong>趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>3. 转换成本</h5>
+      <span class="moat-rate">窄-中</span>
+      <p>处方药医患黏性有限——一旦有仿制药/生物类似药，支付方会强力引导替换。专利期内有黏性，专利后即崩。<strong>趋势：受监管削弱</strong>。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>4. 研发&监管壁垒</h5>
+      <span class="moat-rate">宽</span>
+      <p>数十年研发积累 + 全球临床/注册能力 + FDA 关系是真壁垒。<span class="hl-t">Seagen ADC 平台、mRNA、GLP-1 布局</span>是延续护城河的关键。<strong>趋势：取决于研发产出</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>5. 有效规模</h5>
+      <span class="moat-rate">中</span>
+      <p>大型药企寡头格局（辉瑞/默沙东/艾伯维/BMS/诺华），但每个治疗领域都有多个强竞争者，非独占市场。<strong>趋势：稳定但拥挤</strong>。</p>
+    </div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>10 年后护城河会更宽还是更窄？</strong> <span class="warn-t">这是辉瑞与 Visa 最本质的不同</span>：Visa 的护城河没有到期日，辉瑞的护城河（专利）每一款都有法定倒计时。10 年后的辉瑞护城河，<strong>完全取决于研发/并购管线能否用新专利填平老专利的到期</strong>。当前的填坑弹药：① Seagen ADC 平台（已验证，Padcev/肿瘤生物类似药放量）；② Metsera 减肥药（重返 GLP-1，但还在 Ph1/2，落后诺和诺德/礼来数年）；③ 本季多项 Ph3 阳性读出（Braftovi 结直肠癌全批准、Elrexfio 多发性骨髓瘤、Talzenna 前列腺癌、Padcev 膀胱癌围手术期降风险 47%）。<strong>定价权</strong>：专利期内强，但被美国药价政策（IRA/MFN）持续压低天花板。<strong>结论：辉瑞的护城河是"可再生但需持续投入"的——不像 Visa 那样躺着变宽，而是要靠研发一次次重建。</strong></p>
+  </div>
+</div>
+
+<!-- ═══ 模块 5 ═══ -->
+<div class="section">
+  <div class="stitle">模块 5 · 财务深度分析</div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 12px 0; font-family: 'Segoe UI',sans-serif;">5.1 近 5 季度趋势（营收 / EPS / 利润率）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>季度</th><th>营收($M)</th><th>GAAP EPS</th><th>调整后 EPS</th><th>GAAP 毛利率</th><th>备注</th></tr>
+      <tr><td>Q1 2025</td><td>13,715</td><td>$0.52</td><td>$0.92</td><td>79.3%</td><td>含有利税收结算高基数</td></tr>
+      <tr><td>Q2 2025</td><td>~14,700</td><td>$0.51</td><td>$0.78</td><td>—</td><td>经营性 +10%</td></tr>
+      <tr><td>Q3 2025</td><td>~16,700</td><td>$0.62</td><td>$0.87</td><td>—</td><td>经营性 -7%（新冠高基数）</td></tr>
+      <tr><td>Q4 2025</td><td>~17,600</td><td><span class="warn-t">-$0.29</span></td><td>$0.66</td><td>—</td><td>GAAP 亏损（减值/重组）· 疫苗旺季营收峰值</td></tr>
+      <tr class="hl"><td><strong>Q1 2026</strong></td><td><strong>14,451</strong></td><td><strong>$0.47</strong></td><td><strong>$0.75</strong></td><td><strong>75.4%</strong></td><td>+5%（经营性 +2%）</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">⚠️ 说明：辉瑞营收有<strong>明显季节性</strong>（Q4 呼吸道疫苗旺季营收最高，Q1 最低）。Q2-Q4 2025 营收为新闻稿口径（十亿美元近似）。Q4 2025 GAAP 每股亏损 $(0.29) 是计提减值/重组等费用所致，但调整后 EPS 仍为 $0.66 正值——这正是"GAAP 波动大、需看调整后"的典型季度。GAAP 毛利率从 Q1 2025 的 79.3% 降至 Q1 2026 的 75.4%（-3.9pt），因去年 Q1 有一次性有利的应计特许权使用费冲回未重演 + 汇率不利。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.2 关键比率与杜邦分析</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>指标</th><th>数值</th><th>口径/说明</th></tr>
+      <tr><td>GAAP 毛利率</td><td>75.4%</td><td>Q1 2026（调整后 76.4%）</td></tr>
+      <tr><td>GAAP 经营利润率</td><td>~27.9%</td><td>营业利润 $4.03B ÷ 营收</td></tr>
+      <tr><td>GAAP 净利率</td><td>18.6%</td><td>调整后净利率 29.7%</td></tr>
+      <tr><td>GAAP ROE（约）</td><td>~8.6%</td><td>FY2025 GAAP 净利 ÷ 权益（调整后 ROE ~20%）</td></tr>
+      <tr><td>GAAP ROA（约）</td><td>~3.7%</td><td>资产周转仅 0.30x（重资产/大额商誉）</td></tr>
+      <tr><td>杜邦：净利率 × 周转 × 杠杆</td><td>12.4% × 0.30 × 2.30</td><td>= ROE ~8.6%（FY2025 GAAP）</td></tr>
+      <tr><td>有效税率</td><td>14.6% / 16.9%</td><td>GAAP / 调整后</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">杜邦拆解显示：辉瑞的 GAAP ROE（~8.6%）被<strong>低资产周转（0.30x，因 $714 亿商誉 + $526 亿无形资产占总资产近六成）</strong>和<strong>2.30x 的高权益乘数（高杠杆）</strong>共同塑造——即"高毛利被重资产负债表稀释"。调整后 ROE ~20% 更亮眼，但同样受"摊销加回是否可持续"的质疑（见看穿一）。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.3 资产负债健康度（2026-03-29 末 · $M）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>2026-03-29 末</th><th>说明</th></tr>
+      <tr><td>现金及等价物</td><td>1,703</td><td>—</td></tr>
+      <tr><td>短期投资</td><td>11,372</td><td>—</td></tr>
+      <tr class="hl"><td>现金 + 短投合计</td><td>13,075</td><td>可用流动性</td></tr>
+      <tr><td>长期投资</td><td>1,626</td><td>—</td></tr>
+      <tr class="hl"><td>短期借款（含一年内到期长债）</td><td>3,890</td><td>其中当期到期长债 $3,861</td></tr>
+      <tr class="hl"><td>长期债务（非流动）</td><td>60,565</td><td>Seagen/Metsera 并购负债</td></tr>
+      <tr class="hl"><td>有息负债合计</td><td>64,455</td><td>逐项核对</td></tr>
+      <tr class="hl"><td><strong>真实净负债</strong></td><td><strong>-51,380</strong></td><td>⚠️ 净负债非净现金（加长投仍 -$49.75B）</td></tr>
+      <tr><td>商誉</td><td>71,409</td><td>多来自 Seagen 收购</td></tr>
+      <tr><td>无形资产净额</td><td>52,559</td><td>专利药资产（有摊销倒计时）</td></tr>
+      <tr><td>总资产</td><td>207,618</td><td>商誉+无形占近 60%</td></tr>
+      <tr class="hl"><td>辉瑞股东权益</td><td>90,101</td><td>总权益 $90,404</td></tr>
+      <tr><td>债务/权益</td><td>0.71</td><td>投资级但杠杆偏高</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">⚠️ <strong>净负债非净现金——铁律提示</strong>：辉瑞有息负债 $64.46B（短债 $3.89B + 长债 $60.57B，已逐项核对）> 现金+短投 $13.08B，<strong>真实净负债 -$51.38B</strong>（若加长期投资 $1.63B 仍约 -$49.75B）。高杠杆源自 2023 年 $430 亿收购 Seagen + 2025 年 $80 亿收购 Metsera。经营租赁负债：Q1 2026 10-Q 未单独列示（合并计入"其他流动/非流动负债"，据 FY2025 10-K 约 $15-18 亿量级）。<strong>去杠杆是当前财务的第一约束</strong>——它既压制回购，也限制股息增长空间。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.4 现金流质量（Q1 2026 三个月 · $M）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>Q1 2026</th><th>说明</th></tr>
+      <tr><td>经营活动现金流（OCF）</td><td>2,615</td><td>Q1 季节性偏低</td></tr>
+      <tr><td>- Capex（购建 PP&E）</td><td>436</td><td>现金流量表官方口径</td></tr>
+      <tr class="hl"><td>自由现金流（FCF）</td><td>2,179</td><td>OCF − Capex</td></tr>
+      <tr><td>现金股息支付</td><td>2,445</td><td>$0.43/股</td></tr>
+      <tr><td>股票回购</td><td>0</td><td>连续多年零回购</td></tr>
+      <tr class="hl"><td><strong>Q1 股息 / Q1 FCF</strong></td><td><strong>112%</strong></td><td>⚠️ Q1 派息已超 Q1 FCF</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">Q1 2026 单季自由现金流 $2.18B，而现金股息支付 $2.45B——<strong>Q1 派息占 Q1 FCF 的 112%</strong>。Q1 是辉瑞现金流季节性最弱的季度（下半年回补），全年 FCF 通常足以覆盖约 $98 亿的年股息，但覆盖度已相当紧张。这解释了为何辉瑞在去杠杆期"守住股息、暂停回购"——现金要在还债与派息之间精打细算。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.5 所有者盈余（价值投资口径）</h3>
+  <div class="dcf-note">
+    <p><strong>所有者盈余 = 净利润 + 折旧摊销 + 非现金费用 − 维护性 Capex ± 营运资金</strong></p>
+    <p>辉瑞的所有者盈余测算有一个<span class="warn-t">特殊陷阱</span>：调整后净利（FY2025 约 $183 亿）把 $47 亿/年的无形资产摊销全额加回，得到"看起来很高"的盈利。但<strong>对制药公司，无形资产摊销不是纯纸面费用——它对应的是收购来的专利药随时间贬值失效</strong>。当 Eliquis/Vyndaqel/Ibrance 走下专利悬崖，加回的摊销就会变成真实的收入损失。</p>
+    <p>因此，海图对辉瑞取<strong>更保守的所有者盈余口径 ≈ FCF</strong>（自由现金流已扣除维护性资本开支，是最诚实的"落袋"盈利）。以 FY2025 约 $100-110 亿量级的 FCF 计，<strong>所有者盈余收益率 ≈ FCF ~$105 亿 / 市值 $138.4B ≈ 7.6%</strong>——这个收益率对一个"7.1% 股息 + 专利悬崖"的公司是合理的：不便宜到闭眼买，也不贵，充分反映了专利到期风险。<strong>关键判断：辉瑞的所有者盈余里，有一部分是"正在被专利倒计时侵蚀的租金"——用调整后利润会高估，用 FCF 才诚实。</strong></p>
+  </div>
+</div>
+
+<!-- ═══ 模块 6 ═══ -->
+<div class="section">
+  <div class="stitle">模块 6 · 电话会分析（Q1 2026 + 前 2 季度）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">Q1 2026 电话会（2026-05-05）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"'已上市及收购产品'经营性营收 +22%，剔除新冠后经营性 +7%——肿瘤与专科强劲"——管理层</div><div class="ec-note">Padcev +39%、肿瘤生物类似药 +52%、Lorbrena +32%、Vyndaqel 家族 $16 亿、Xeljanz +34%。底层业务在新冠退坡的遮盖下持续加速。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"重申全年 2026 全部指引（营收 $595-625 亿、Adj EPS $2.80-3.00），对肥胖与肿瘤领导地位有信心"——CEO Bourla</div><div class="ec-note">Q1 全数重申、未上调也未下调，稳定预期。指引已含约 $15 亿仿制/生物类似药竞争冲击。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"多项 Ph3 阳性读出建立管线动能，2026 将启动约 20 项关键注册性研究"</div><div class="ec-note">Braftovi（BREAKWATER 结直肠癌全批准）、Elrexfio（多发性骨髓瘤 Ph3）、Talzenna（前列腺癌 Ph3）、Padcev（膀胱癌围手术期降风险 47%）、atirmociclib（乳腺癌 Ph2 HR 0.60）。填补专利悬崖的弹药在积累。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"新冠产品大幅下滑：Comirnaty 经营性 -59%、Paxlovid -63%，拖累整体增速"</div><div class="ec-note">新冠从盈利引擎退成拖累项，是经营性增速仅 +2% 的主因。这一退坡还将延续数季。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"Adj EPS 同比 -18%、COGS 占比升 3.8pt、有效税率上升"——去年同期高基数</div><div class="ec-note">去年 Q1 含一次性有利税收结算 + 有利的应计特许权冲回，形成高基数；今年汇率对成本不利。盈利同比"变差"很大程度是基数效应而非经营恶化。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q4 FY2025 电话会（2026-02-03）</h3>
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"FY2025 营收 $626 亿，剔除新冠经营性 +6%；首次给出并强调 2026 指引"</div><div class="ec-note">Adj EPS FY2025 $3.22。2026 指引首度落地：营收 $595-625 亿、Adj EPS $2.80-3.00（隐含同比双降）。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"企业级成本优化（制造优化 + 成本重整）计划推进，降本目标兑现中；完成 Metsera 收购切入 GLP-1"</div><div class="ec-note">降本对冲专利悬崖对利润的侵蚀；Metsera 加码高增长减肥赛道布局。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"Q4 GAAP 摊薄每股亏损 $(0.29)（计提减值与重组等项），Adj EPS $0.66"</div><div class="ec-note">GAAP 亏损是减值/重组噪音，非经营性；但提示了辉瑞 GAAP 利润的高波动特征。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q3 2025 电话会（2025-11-04）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"Q3 营收 $167 亿超预期，上调并收窄全年 Adj EPS 指引至 $3.00-3.15"</div><div class="ec-note">非新冠核心业务强劲、肿瘤 ADC（Seagen 资产）放量；推进 Metsera 收购（9 月宣布），加速肥胖战略。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"新冠产品同比高基数致整体经营性 -7%"</div><div class="ec-note">新冠退坡的季度扰动，与 Q1 2026 同源。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">指引兑现度追踪</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>历史指引</th><th>最新进展</th><th>评价</th></tr>
+      <tr><td>Q3 2025 上调 FY2025 Adj EPS 至 $3.00-3.15</td><td>FY2025 实际 Adj EPS $3.22</td><td><span class="badge up">超上限兑现</span></td></tr>
+      <tr><td>FY2026 营收 $595-625 亿</td><td>Q1 全数重申</td><td><span class="badge nt">维持</span></td></tr>
+      <tr><td>FY2026 Adj EPS $2.80-3.00</td><td>Q1 全数重申（未上调）</td><td><span class="badge nt">维持</span></td></tr>
+      <tr><td>剔除新冠经营性增长</td><td>Q1 2026 +7%</td><td><span class="badge up">兑现</span></td></tr>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>信号汇总</strong>：Q1 2026 是辉瑞"<span class="hl-t">核心加速 + 新冠退坡 + 高基数拖累 + 管线阳性读出</span>"交织的一季。好消息是底层业务（肿瘤/专科/医院经营性 +7-10%）与管线动能在积累；坏消息是新冠退坡 + 去年高基数使 Adj EPS 同比 -18%、指引隐含全年双降。<span class="warn-t">管理层选择"重申而非上调"指引</span>，透露出对 2026 专利悬崖冲击与政策不确定性的谨慎。<strong>业绩没有崩，但也谈不上惊喜——这是一家在换挡期稳住方向盘的公司。</strong></p>
+  </div>
+</div>
+
+<!-- ═══ 模块 7 ═══ -->
+<div class="section">
+  <div class="stitle">模块 7 · 多模型估值（8 种方法）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">7.1 估值汇总表（独立估值 · 不锚定现价 · USD）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>估值方法</th><th>每股公允价</th><th>假设要点</th><th>权重</th></tr>
+      <tr><td>1. 相对估值（P/E）</td><td>$26</td><td>2026 Adj EPS $2.90 × 9.0x（略高于 BMY 8.7x，反映减肥/肿瘤期权价值；专利悬崖压制倍数）</td><td>25%</td></tr>
+      <tr><td>2. DCF（基准）</td><td>$26</td><td>常态化 FCF ~$105 亿，近端因专利悬崖平缓、后期管线回补，WACC ~8%、永续 0.5%</td><td>20%</td></tr>
+      <tr><td>3. 所有者盈余收益率</td><td>$25</td><td>FCF ~$105 亿 / 7.6% 目标收益率 = $138B → /57 亿股（要求收益率高，反映专利风险）</td><td>10%</td></tr>
+      <tr><td>4. PEG</td><td>不适用</td><td><span class="warn-t">2026 Adj EPS 同比 -10%（负增长），PEG 无意义</span>——增长阶段不匹配 PEG 框架</td><td>0%</td></tr>
+      <tr><td>5. DDM（股利折现）</td><td>$23</td><td><span class="hl-t">高股息适用</span>：DPS $1.72、长期增长 ~1.5%、要求回报 ~9% → $1.746/(0.09-0.015) ≈ $23</td><td>20%</td></tr>
+      <tr><td>6. NAV</td><td>不适用</td><td>非资产型公司（商誉/无形资产为主，无可独立变现的实物资产池）</td><td>0%</td></tr>
+      <tr><td>7. 反向 DCF</td><td>当前价隐含 FCF 增长 <strong>~0%</strong></td><td>$24.30 隐含市场认为长期 FCF 近乎零增长——<span class="warn-t">市场已定价专利悬崖后的停滞</span></td><td>15%</td></tr>
+      <tr><td>8. SOTP 分部加总</td><td>$28</td><td>肿瘤（成长，给高倍数）+ 专科 + 医院/生物类似药 + 基础医疗（衰减，给低倍数）− 净负债 $51.4B</td><td>10%</td></tr>
+      <tr class="hl"><td><strong>加权公允价中位数</strong></td><td><strong>$26</strong></td><td>估值区间 $23-28 · 中位 ~$26</td><td>100%</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.8;"><strong>与现价对照</strong>：当前 $24.30 vs 加权公允 $26 · <span class="nt">折价约 6.5%</span>——<strong>远不足价值投资 25% 安全边际门槛</strong>。辉瑞确实便宜（8.4x 前瞻 PE、7.1% 股息），但它是"<span class="hl-t">合理偏低估</span>"而非"深度打折"：多数方法把公允价钉在 $23-28，反向 DCF 显示市场已把专利悬崖后的近零增长计入价格。<strong>结论：不是击球区，但有下行缓冲——便宜有便宜的理由，也有便宜的底。</strong></p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.2 P/E 多档透视表</h3>
+  <p style="margin-bottom:10px; font-size:13px; color:var(--text2);">辉瑞 GAAP vs 调整后差异极大（调整后净利是 GAAP 的 1.6 倍，触发多档透视）+ Q4 2025 单季 GAAP 亏损 → 单一 P/E 会严重误导，必须分档并标注最可信档：</p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>口径</th><th>EPS / 指标</th><th>P/E (基于 $24.30)</th><th>读数说明</th></tr>
+      <tr><td>TTM GAAP P/E</td><td>EPS ~$1.31</td><td>~18.6x</td><td>含减值/重组/摊销噪音 · 失真</td></tr>
+      <tr><td>FY2025 GAAP P/E</td><td>$1.36</td><td>~17.9x</td><td>Q4 亏损压低全年 GAAP</td></tr>
+      <tr><td>FY2025 调整后 P/E</td><td>$3.22</td><td>~7.5x</td><td>剔一次性 · 但含"可疑摊销加回"</td></tr>
+      <tr class="hl"><td><strong>Forward P/E（FY2026 Adj 中值 $2.90）</strong></td><td><strong>$2.90</strong></td><td><strong>~8.4x</strong></td><td>最可信档 · 市场惯用</td></tr>
+      <tr><td>P/S (TTM)</td><td>营收 ~$62.6B</td><td>~2.2x</td><td>大型制药常态区间</td></tr>
+      <tr><td>FCF Yield</td><td>FCF ~$105 亿</td><td>~7.6%</td><td>诚实的"落袋"收益率</td></tr>
+      <tr><td>股息率</td><td>DPS $1.72</td><td>7.1%</td><td>同业最高</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3);"><strong>最可信档</strong>：Forward P/E ~8.4x（FY2026 调整后）。<span class="warn-t">警示</span>：调整后 P/E 7.5x 看着更便宜，但它把每年 $47 亿摊销全额加回，而专利悬崖会让部分摊销变真损失——所以<strong>用调整后 P/E 会系统性高估辉瑞的便宜程度</strong>。海图更看重 FCF Yield 7.6% 与股息率 7.1% 这两个"现金落袋"口径。同业对比见模块 8：辉瑞与 BMS 同处 8-9x 估值洼地，反映共同的专利悬崖担忧。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.3 12 个月目标价（概率加权）</h3>
+  <div class="pgrid">
+    <div class="pbox"><div class="pl">悲观情景 · 30%</div><div class="pv pc">$19</div><div class="pn">专利悬崖加剧 + 减肥药失败 + 股息承压 · PE 压至 6.5x<br>距现价 -22%</div></div>
+    <div class="pbox"><div class="pl">基准情景 · 45%</div><div class="pv pf">$27</div><div class="pn">指引兑现 + 去杠杆推进 + 股息维持 · PE ~9.3x<br>距现价 +11%</div></div>
+    <div class="pbox"><div class="pl">乐观情景 · 25%</div><div class="pv ps">$33</div><div class="pn">减肥药/肿瘤管线兑现 + 重估至 11x + 增长回归<br>距现价 +36%</div></div>
+  </div>
+  <p style="font-size:13px; color:var(--text2);"><strong>概率加权公允价</strong>：30%×$19 + 45%×$27 + 25%×$33 = <strong>$26.1</strong> ≈ $26。<strong>叠加 7.1% 股息 = 12 个月总回报约 +14%</strong>——收息者尚可，价值买家嫌不够。<span class="warn-t">当前 $24.30 高于机械首仓 $20.8（估值中位 $26 × 80%）——不在合理建仓窗口，但已接近 52 周低 $23.11，下行空间被股息与低估值缓冲。</span></p>
+</div>
+
+<!-- ═══ 模块 8 ═══ -->
+<div class="section">
+  <div class="stitle">模块 8 · 竞争与行业分析</div>
+  <div class="cmt">
+    <p><strong>大型制药格局</strong>：辉瑞与默沙东（MRK）、艾伯维（ABBV）、百时美施贵宝（BMY）、诺华、强生、礼来、诺和诺德等构成全球大型药企阵营。竞争维度是<span class="hl-t">研发管线的产出率 + 专利悬崖的填坑能力</span>——每家都在赛跑"新药填补老药到期"。辉瑞的差异化在于：新冠退坡包袱最重、专利悬崖 2026-2031 最密集，因而估值折价也最深。</p>
+
+    <p><strong>大型制药同业对比（截至 2026-06 下旬 · 二手估值仅作相对参考）</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>公司</th><th>Forward P/E</th><th>2026 EPS YoY</th><th>2026 营收 YoY</th><th>股息率</th><th>核心评价</th></tr>
+        <tr class="hl"><td><strong>辉瑞 PFE</strong></td><td><strong>~8.4x</strong></td><td>~-10%</td><td>-2.5%</td><td><strong>7.1%</strong></td><td>专利悬崖+新冠退坡 · 估值洼地 · 股息最高</td></tr>
+        <tr><td>百时美施贵宝 BMY</td><td>~8.7x</td><td>+2.8%</td><td>+2.7%</td><td>4.3%</td><td>同处洼地 · 专利悬崖担忧</td></tr>
+        <tr><td>默沙东 MRK</td><td>~9.5x</td><td>-42.4%</td><td>+2.7%</td><td>—</td><td>EPS 大降含 Keytruda 动态/一次性项</td></tr>
+        <tr><td>艾伯维 ABBV</td><td>~16x</td><td>+43%</td><td>+10.1%</td><td>—</td><td>强增长享溢价（Humira 悬崖已过）</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:10px; font-size:12px; color:var(--text3);">辉瑞与 BMS 同属大型药企估值洼地（Forward P/E 8-9x、高股息），反映专利悬崖 + 新冠退坡担忧；艾伯维凭强增长（Humira 悬崖已成功穿越、Skyrizi/Rinvoq 放量）享 16x 溢价——<strong>这正是辉瑞的机会与风险：市场担心它是"下一个悬崖前的公司"，若管线成功穿越，估值有向 ABBV 靠拢的重估空间；若失败，则可能长期困在洼地。</strong>辉瑞 7.1% 股息率为同业最高，是持有期间的"票息安慰"。</p>
+
+    <p style="margin-top:14px;"><strong>波特五力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>新进入者：</strong>低（研发/注册壁垒极高）——但生物科技 biotech + 中国创新药是新药源头的搅局者</li>
+      <li><strong>替代品：</strong>高（专利到期后仿制药/生物类似药即刻替代，是结构性威胁）</li>
+      <li><strong>供应商议价：</strong>低（CDMO/原料供应商议价力弱）</li>
+      <li><strong>买家议价：</strong>中高（美国 PBM/医保 + IRA 谈判 + MFN 定价压制药价天花板）</li>
+      <li><strong>同业竞争：</strong>高（各治疗领域多强并立，肿瘤/减肥赛道尤其拥挤）</li>
+    </ul>
+
+    <p><strong>颠覆风险与 TAM</strong>：肿瘤（ADC）、减肥（GLP-1）、疫苗是三大高增长 TAM。辉瑞在肿瘤 ADC 已卡位（Seagen），在减肥赛道<span class="warn-t">起步晚、落后诺和诺德/礼来数年</span>（Metsera 还在 Ph1/2）。核心问题：辉瑞能否在这些万亿级 TAM 里从"追赶者"变成"分羹者"。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 9 ═══ -->
+<div class="section">
+  <div class="stitle">模块 9 · 技术面与 K 线分析（次要参考）</div>
+  <div class="cmt">
+    <p><strong>趋势</strong>：PFE 当前 $24.30，处于 52 周区间 $23.11-28.74 的<span class="warn-t">下沿</span>，距 52 周高 -15%、距 52 周低仅 +5%。这是一只长期弱势、在低位横盘的价值股——新冠退坡后股价从高位回落，如今在专利悬崖阴影下寻底。</p>
+
+    <p><strong>关键价位</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>支撑</strong>：$23.11（52 周低）/ $22（心理关口 + 8% 股息率位）/ $20.8（首仓机械价）</li>
+      <li><strong>阻力</strong>：$26（公允价目标）/ $28.74（52 周高）/ $30（止盈一档）</li>
+    </ul>
+
+    <p><strong>指标信号</strong>：低位横盘、高股息提供下方买盘支撑（股价越跌股息率越高，7.1% 已具吸引力），但缺乏上行催化——需管线或减肥药突破点燃。<span class="hl-t">7.1% 股息率是一道"技术性地板"</span>：跌向 $22 时股息率近 8%，会吸引收息资金入场。</p>
+
+    <p><strong>注意</strong>：辉瑞的核心驱动是专利悬崖节奏 + 管线读出 + 减肥药进展 + 药价政策，技术面仅为次要参考。价值投资者应盯基本面（管线成败）而非 K 线，在股息率 ≥ 8%（约 $21.5 以下）时更具安全边际。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 10 ═══ -->
+<div class="section">
+  <div class="stitle">模块 10 · 增长催化剂与前景展望</div>
+  <div class="cmt">
+    <p><strong>短期催化剂（未来 6 个月）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>2026-08-04 Q2 2026 财报（估计）</strong>——指引兑现度 + 含 ViiV 退出约 $16.5 亿现金入账（2026-03 完成退出所持 11.7% ViiV 权益，计入 Q2）</li>
+      <li><strong>2026 约 20 项关键注册性研究启动/读出</strong>——肿瘤（Padcev/Elrexfio/Talzenna）+ 减肥（Metsera GLP-1 早期数据）</li>
+      <li><strong>去杠杆进度</strong>——净负债 $514 亿的偿还节奏，决定股息安全与未来回购重启的时点</li>
+      <li><strong>美国药价政策落地</strong>——MFN 最惠国定价、TrumpRx.gov、232 关税、IRA 谈判的具体条款（双向催化：利空或靴子落地利好）</li>
+    </ul>
+
+    <p><strong>长期展望（3-5 年）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>肿瘤 ADC 成第一增长极</strong>——Seagen 平台（Padcev/Adcetris/Tukysa）+ 生物类似药持续放量</li>
+      <li><strong>减肥药能否咸鱼翻身</strong>——Metsera GLP-1（MET-097i 等）是远期最大期权，但落后行业龙头数年，成败未定</li>
+      <li><strong>专利悬崖填坑赛跑</strong>——2026-2031 Eliquis/Vyndaqel/Ibrance/Xtandi 到期缺口，能否被新管线覆盖是核心命题</li>
+      <li><strong>成本优化提利润率</strong>——制造优化 + 成本重整对冲收入端压力</li>
+      <li><strong>风险情景</strong>：管线失败 / 减肥药掉队 / 药价政策超预期打击 / 去杠杆挤压股息</li>
+    </ul>
+
+    <p><strong>核心判断</strong>：辉瑞的前景是一道"<span class="hl-t">填坑赛跑</span>"——不是能不能增长的问题，而是新管线能否跑赢老药到期的速度。乐观情景（管线兑现 + 减肥药突破）下它是被低估的重估标的；悲观情景（管线不足 + 减肥药掉队）下它是慢性衰减的高股息陷阱。<strong>这道题今天无解，只能靠时间和管线数据一季季验证。</strong></p>
+  </div>
+</div>
+
+<!-- ═══ 模块 11 ═══ -->
+<div class="section">
+  <div class="stitle">模块 11 · 风险矩阵</div>
+  <div class="risk-grid">
+    <div class="risk-card r5"><h5>1. 专利悬崖（2026-2031）</h5><span class="risk-score">5 / 5 极高</span><p>Eliquis(美~2028)、Vyndaqel/Vyndamax(2031-06)、Ibrance、Xtandi、Xeljanz 陆续到期 · 2026 指引已含约 $15 亿仿制/生物类似药冲击 · 结构性收入缺口</p></div>
+    <div class="risk-card r4"><h5>2. 减肥药管线未兑现</h5><span class="risk-score">4 / 5 高</span><p>Metsera GLP-1 尚在 Ph1/2 · 落后诺和诺德/礼来数年 · 2025 自研 danuglipron 已折戟 · $80 亿并购的回报高度不确定</p></div>
+    <div class="risk-card r4"><h5>3. 高杠杆去杠杆约束</h5><span class="risk-score">4 / 5 高</span><p>净负债 $514 亿 · 还债与 7.1% 高股息抢现金 · 去杠杆约束回购与股息增长 · 利率/信用敏感</p></div>
+    <div class="risk-card r3"><h5>4. 美国药价政策</h5><span class="risk-score">3 / 5 中</span><p>MFN 最惠国定价 / TrumpRx.gov 降价 / 232 关税 / IRA 医保谈判 · 压制专利药定价权天花板</p></div>
+    <div class="risk-card r3"><h5>5. 新冠继续退坡</h5><span class="risk-score">3 / 5 中</span><p>Comirnaty -59%、Paxlovid -63% 经营性 · 持续拖累整体增速与利润率 · 但基数越来越低，影响递减</p></div>
+    <div class="risk-card r2"><h5>6. 估值与股息（缓冲）</h5><span class="risk-score">2 / 5 缓冲</span><p>8.4x 前瞻 PE + 7.1% 股息 + 7.6% FCF Yield · 低估值与高股息构成下行缓冲，是最大的安全垫</p></div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>3 个黑天鹅情景</strong>：</p>
+    <ol style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>核心管线连续失败 + 减肥药彻底掉队</strong>——概率 15% · 专利悬崖缺口无法填补 · 股价跌至 $17-18 · 长期衰减陷阱坐实</li>
+      <li><strong>去杠杆压力下削减股息</strong>——概率 10% · 若 FCF 恶化 + 债务到期集中，管理层被迫削息（打破 345 季纪律）· 股价与"股息叙事"双杀至 $18</li>
+      <li><strong>美国药价政策超预期打击</strong>——概率 10% · MFN/IRA 大幅压低专利药价 · 利润率结构性下移 · 股价跌至 $19</li>
+    </ol>
+
+    <p style="margin-top:10px;"><strong>下行支撑</strong>：7.1% 股息（跌向 $22 时近 8%）+ 8.4x 低估值 + 剔新冠核心 +7% + 肿瘤 ADC 兑现，构成较硬的估值底。<span class="hl-t">$22-23 是较硬支撑</span>（52 周低 $23.11 + 8% 股息率位 $21.5）。辉瑞的"底"由高股息托住——只要股息不削，收息资金会在低位承接。<strong>但注意：这个"底"的前提是股息安全，而股息安全的前提是去杠杆与 FCF 稳定——三者是一根链条。</strong></p>
+  </div>
+</div>
+
+<!-- ═══ 模块 12 ═══ -->
+<div class="section">
+  <div class="stitle">模块 12 · 股东回报分析</div>
+  <div class="cmt">
+    <p><strong>辉瑞是"高股息 + 零回购 + 去杠杆"的资本返还样本——与 Visa 的"大额回购 + 低股息"恰好相反。</strong>它把唯一的资本回报渠道压在股息上，而股息又与去杠杆抢现金——这三者的平衡，是理解辉瑞股东回报可持续性的关键。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 18px 0 10px; font-family: 'Segoe UI',sans-serif;">12.1 公司给了股东多少？</h3>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>年度</th><th>每股股息</th><th>现金股息总额</th><th>股票回购</th><th>股东总回报</th><th>说明</th></tr>
+        <tr><td>2023</td><td>$1.64</td><td>~$9.2B</td><td>$0</td><td>~$9.2B</td><td>零回购起始</td></tr>
+        <tr><td>2024</td><td>$1.68</td><td>$9.5B</td><td>$0</td><td>$9.5B</td><td>全力去杠杆</td></tr>
+        <tr><td>2025</td><td>$1.72</td><td>~$9.8B</td><td>$0</td><td>~$9.8B</td><td>连续多年零回购</td></tr>
+        <tr class="hl"><td><strong>2026(年化)</strong></td><td><strong>$1.72</strong></td><td>~$9.8B</td><td>$0</td><td>~$9.8B</td><td>季率 $0.43 · 增息几近停滞</td></tr>
+      </table>
+    </div>
+    <p style="font-size:13px; color: var(--text2); margin-top:8px"><strong>Trailing Shareholder Yield</strong> ≈ FY2025 返还约 $9.8B / 市值 $138.4B ≈ <strong>7.1%</strong>——<span class="hl-t">全部来自股息，回购为零</span>。这是"纯股息型"资本返还结构，与 Visa 的"回购为主"截然相反。派息率：占 FY2025 调整后净利（~$183 亿）约 <strong>53%</strong>（看着安全）；但占 FY2025 GAAP 净利（~$77 亿）约 <strong>127%</strong>（GAAP 口径已覆盖不住）；占 FCF（~$105 亿）约 <strong>93%</strong>（吞掉近九成自由现金流）。三个口径讲了同一件事：股息安全依赖于"调整后利润与 FCF 都不恶化"。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.2 给的方式好不好？</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><span class="warn-t">股数不降反升（含金量打折的另一面）</span>：因连续零回购 + 股权激励，摊薄股数逐年<strong>缓慢上升</strong>——这与 Visa 的"真实缩股"正相反：<br>
+      <div class="tbl-wrap" style="margin:8px 0;">
+        <table class="tbl">
+          <tr><th>摊薄加权股数(百万)</th><th>FY2023</th><th>FY2024</th><th>FY2025</th><th>Q1 2026</th></tr>
+          <tr><td>股数</td><td>~5,645</td><td>~5,672</td><td>~5,690</td><td>5,731</td></tr>
+        </table>
+      </div>
+      股数年年小升，说明股权激励在稀释、且无回购对冲——<strong>每股价值被轻微稀释，股息增长的"每股含金量"打折</strong></li>
+      <li><strong>股息是"现金真发放"，含金量本身高</strong>：不同于回购的间接性，股息是直接落袋的现金，7.1% 的高绝对水平对收息投资者有实打实价值</li>
+      <li><span class="warn-t">增息几近停滞</span>：2023→2026 每股股息仅从 $1.64 升至 $1.72（年增约 $0.04 ≈ 2.4%），远低于历史增速——去杠杆优先，股息"守成"多于"增长"</li>
+    </ul>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.3 能不能继续给、给多少？</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>回购授权形同虚设</strong>：截至 2026-05-05 剩余回购授权 $33 亿，但<span class="warn-t">2026 全年指引明确不含任何回购</span>——授权是空头支票，去杠杆完成前不会动用。执行率：连续多年 0%</li>
+      <li><strong>股息可持续但增长受限</strong>：占调整后利润 53%、占 FCF 约 93% · <span class="warn-t">FCF 覆盖度已相当紧张（Q1 派息甚至超过 Q1 FCF）</span> · 只要 FCF 不显著恶化，股息可维持，但大幅增息空间被去杠杆锁死</li>
+      <li><strong>(股息 + 回购) / FCF 覆盖度</strong>：约 93%（全为股息）· 长期贴近 100% 意味着几乎无余粮同时还债——这是"守股息"与"去杠杆"的零和博弈</li>
+      <li><strong>非借债派息，但杠杆本已高</strong>：股息由 FCF 支付（非举债），但 $514 亿存量净负债本身就是并购遗留 · 资本返还优先级明确为：<strong>还债 &gt; 守股息 &gt; 恢复回购</strong></li>
+    </ul>
+    <p><strong>模块小结</strong>：<span class="hl-t">象征性偏积极——高绝对股息、但含金量打折且增长停滞</span>。辉瑞给了股东一张 7.1% 的高息票，绝对水平诱人、且是真金白银的现金发放；但零回购下股数不降反升（每股价值轻微稀释），增息几近停滞（年增 2.4%），股息还吞掉近九成 FCF、与去杠杆抢现金。它不是 Visa 那种"真实缩股 + 增息"的复利机器，而是"守住高息、等待去杠杆完成"的防御型返还——<strong>适合收息，不适合期待股东回报的复利成长</strong>。这一定性将直接反映在评分卡第 5 维"资本配置纪律"。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 13 ═══ -->
+<div class="section">
+  <div class="stitle">模块 13 · 海图评分卡 + 投资决策</div>
+
+  <div class="scorecard">
+    <h3 style="font-size:15px; color:var(--text); margin-bottom: 16px; font-family: 'Segoe UI',sans-serif;">海图评分卡（6 维 A-D）</h3>
+    <div class="score-grid">
+      <div class="score-card"><div class="score-letter s-bm">B-</div><div class="score-body"><h4>1. 生意可预测性</h4><p>商业模式易懂（研发→专利收租），但 5 年盈利能见度低——专利悬崖 + 管线二元结果 + 新冠退坡 + GAAP 高波动（Q4 曾亏损）。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bm">B-</div><div class="score-body"><h4>2. 经济护城河</h4><p>专利/规模/研发是真壁垒，但专利有法定倒计时——护城河"可再生但需持续投入"，不像 Visa 躺着变宽。</p></div></div>
+      <div class="score-card"><div class="score-letter s-b">B</div><div class="score-body"><h4>3. 管理层质量</h4><p>Bourla 敢下重注（Seagen 成功、Metsera 待定），披露坦诚；但被质疑"追风口"，去杠杆纪律是当前考验。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bm">B-</div><div class="score-body"><h4>4. 财务质量</h4><p>毛利率 75% 优秀，但净负债 $514 亿、EPS 双降、资产周转仅 0.30x、商誉+无形占资产近六成。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bm">B-</div><div class="score-body"><h4>5. 资本配置纪律</h4><p>345 季派息是加分，但零回购致股数不降反升、增息停滞、股息吞九成 FCF；Seagen 成功/Metsera 待定。</p></div></div>
+      <div class="score-card"><div class="score-letter s-b">B</div><div class="score-body"><h4>6. 估值与安全边际</h4><p>8.4x 前瞻 PE + 7.1% 股息，是六维中最强项（与 Visa 相反）；但折价仅约 6.5% vs 公允，不足 25% 安全边际。</p></div></div>
+    </div>
+
+    <div class="flag-row">
+      <strong>红旗排查</strong>：会计层面无造假疑点，但<strong>调整后利润全额加回 $47 亿/年无形资产摊销</strong>——在专利悬崖临近时，这笔加回有系统性高估可持续盈利之嫌（列为"需警惕的会计口径"而非造假红旗，海图已在估值中改用更保守的 FCF 口径）。治理无重大问题。估值非极端（偏便宜而非偏贵）。<strong>无强制降级红旗</strong>，评级由六维加权（多为 B-/B）+ 安全边际不足 25% 共同决定 → <span class="warn-t">持有观望</span>。
+    </div>
+
+    <p style="margin-top:18px; font-size:14px; color:var(--text); line-height:1.85;"><strong>综合评级</strong>：<span class="rating-badge rating-hold" style="font-size:14px;">持有观望</span>。六维多为 B-/B（无 A，与 Visa 的"多 A 但估值 C"恰成镜像——辉瑞是"估值不错但生意有悬崖"）。核心判断：<strong>辉瑞的问题不是贵，而是便宜得有理由——8.4x PE、7.1% 股息看着诱人，但专利悬崖 + 减肥药未兑现 + 去杠杆约束让安全边际不足 25%。收息型投资者可在 $23 以下持有吃息；价值买入者应等回调至 $20.8 附近，用更厚的安全边际下注"管线填平悬崖"这道未解之题。</strong></p>
+  </div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">投资决策（精确价格 · USD）</h3>
+
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>项目</th><th>价格</th><th>说明</th></tr>
+      <tr><td>12 个月目标价（概率加权）</td><td><strong>$26</strong> (+7%)</td><td>基准 PE ~9.3x × Adj EPS $2.90 + 股息</td></tr>
+      <tr><td>悲观目标（30% 概率）</td><td>$19 (-22%)</td><td>专利悬崖加剧 + 减肥药失败 + PE 压至 6.5x</td></tr>
+      <tr><td>乐观目标（25% 概率）</td><td>$33 (+36%)</td><td>管线兑现 + 减肥药突破 + 重估至 11x</td></tr>
+      <tr class="hl"><td>首仓建仓（估值中位数 $26 × 80%）</td><td><strong>$20.8</strong></td><td>距现价 -14% · 耐心等回调</td></tr>
+      <tr><td>二仓建仓（× 70%）</td><td>$18.2</td><td>-25% · 悲观情景附近 · 股息率约 9.4%</td></tr>
+      <tr><td>三仓建仓（× 60%）</td><td>$15.6</td><td>-36% · 黑天鹅级机会 · 股息率约 11%</td></tr>
+      <tr><td>止盈一档</td><td>$30</td><td>+23% · 减仓 25%</td></tr>
+      <tr><td>止盈二档</td><td>$34</td><td>+40% · 再减 25%</td></tr>
+      <tr><td>止盈三档</td><td>$40</td><td>+65% · 再减 25% · 最后 25% 长期持有</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.85;"><strong>建议总仓位</strong>：<strong>0-3%</strong>（观察/收息仓 · 当前价不在价值买入窗口，回调至 $20-21 可加至 3-5%）。<strong>持有周期</strong>：3-5 年（赌管线与减肥药填平专利悬崖 · 期间吃 7.1% 股息票息）。<strong>关键监控指标</strong>：① 专利悬崖节奏（Eliquis/Vyndaqel/Ibrance 到期收入冲击）；② 减肥药 Metsera GLP-1 临床进展；③ 肿瘤管线读出（Padcev/Elrexfio/Talzenna）；④ 去杠杆进度与股息覆盖度（FCF / 股息）；⑤ 美国药价政策（MFN/IRA/关税）落地条款。<strong>下次催化剂</strong>：2026-08-04 Q2 2026 财报（估计，含 ViiV 退出 $16.5 亿现金入账）。</p>
+</div>
+
+<!-- ═══ 海图页末长评 ═══ -->
+<div class="section">
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记 · 1160 字</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p class="lead">价值投资里有另一类难题，与"好生意贵价格"正相反——便宜得晃眼，却便宜得有理由。辉瑞就是这样一台机器：8.4 倍前瞻市盈率、7.1% 股息率、连续 345+ 个季度派息，账面上像捡钱。可市场从不无缘无故给一家大药厂打折——Eliquis、Vyndaqel、Ibrance、Xtandi 从 2026 到 2031 陆续走下专利悬崖，新冠红利退成负担，$514 亿净负债压着资本回报的手脚。Q1 2026 营收 +5%、剔除新冠核心经营性 +7%，业绩不差；问题从来不在这一季，而在悬崖那一侧。</p>
+
+      <p>辉瑞是全球最大的制药巨头之一——不发明一种"永动"药，而是靠一篮子处方药、疫苗、肿瘤 ADC 与专科药的组合，从全球医保与自费市场收取专利期内的定价权租金。Q1 2026 营收 $144.5 亿（+5%，经营性 +2%）· GAAP 净利 $26.9 亿（-9%）· 调整后 EPS $0.75（-18%）· 毛利率 75.4%。它不是成长股，是一台"专利租金 + 高股息"的现金机器，正走在青黄不接的换挡期。</p>
+
+      <h4>几个研判要点</h4>
+
+      <p><strong>一、两个"看穿"。</strong> 看穿一：调整后净利 $42.9 亿是 GAAP $26.9 亿的 1.6 倍，差额主要是每季 $11.8 亿的无形资产摊销（来自 Seagen 等收购）。但对辉瑞，<span class="warn-t">这笔摊销不是纯纸面费用</span>——专利悬崖意味着这些收购来的资产真的会贬值，调整后利润有高估可持续盈利之嫌。看穿二：营收 +5% = 经营性 +2% + 汇率顺风 +3%（$4.31 亿 FX）。剔除新冠后经营性 +7%，"已上市及收购产品"经营性 +22%——真实内生增长被新冠退坡拖累，但核心（肿瘤/专科/医院）在加速。</p>
+
+      <p><strong>二、核心业务其实在长。</strong> 肿瘤 +9%（Padcev +39%、肿瘤生物类似药 +52%、Lorbrena +32%）、专科 +12%（Vyndaqel 家族 $16 亿）、医院与生物类似药 +13%。<span class="hl-t">Seagen 的 ADC 平台正兑现成增长核心</span>。拖累项集中在新冠：Comirnaty 经营性 -59%、Paxlovid -63%。把新冠这块"退潮的沙"拨开，辉瑞的底层生意并不衰。</p>
+
+      <p><strong>三、真正的空头逻辑是专利悬崖，不是这一季。</strong> Eliquis（美国约 2028）、Vyndaqel/Vyndamax（和解延至 2031-06）、Ibrance、Xtandi、Xeljanz 在 2026-2031 陆续到期，2026 指引已含约 $15 亿仿制/生物类似药冲击。管理层的对冲是肿瘤管线（本季 Braftovi/Elrexfio/Talzenna/Padcev 多项 Ph3 阳性）+ 重返减肥药（$80 亿收购 Metsera 的 GLP-1）。<span class="warn-t">但减肥药还在 Ph1/2，诺和诺德与礼来遥遥领先</span>——这是一张远期彩票，不是近期底牌。</p>
+
+      <p><strong>四、别把辉瑞当"现金堡垒"——它是净负债 $514 亿。</strong> 现金+短投 $131 亿远小于有息负债 $645 亿，源自 2023 年 $430 亿收购 Seagen 与 2025 年收购 Metsera。公司把去杠杆列为第一优先，连续多年零回购，$33 亿回购授权按兵不动。7.1% 的股息看着诱人，但 <span class="warn-t">Q1 派息 $24.45 亿已超过 Q1 自由现金流 $21.79 亿</span>——全年股息吞掉近九成 FCF，与还债抢现金。股息安全（占调整后利润约 53%），但增长空间被锁死，近年年增仅约 $0.04。</p>
+
+      <p><strong>五、便宜，但安全边际不足 25%。</strong> 八法估值中位约 $26，当前 $24.30 折价仅约 7%。DDM 给 $23、相对 PE（9x×$2.90）给 $26、反向 DCF 显示市场已定价专利悬崖后的近零增长。这是一只"合理偏低估"的股票，不是"深度打折"。7.1% 股息 + 小幅价差，12 个月总回报约 14%——<span class="hl-t">收息者的菜，不是价值买家的击球区</span>。</p>
+
+      <h4>海图研判</h4>
+
+      <p><strong>评级：持有观望</strong>（8.4 倍前瞻 PE 的 7.1% 高股息深度价值 + 剔除新冠核心 +7% + 肿瘤 ADC 兑现 + 345 季派息的现金机器，对垒 2026-2031 专利悬崖 + $514 亿净负债去杠杆约束 + 减肥药未兑现 + 美国药价政策，安全边际不足 25%）。12 个月概率加权目标价 <strong>$26</strong>（+7%），叠加 7.1% 股息 ≈ 总回报 14%。</p>
+
+      <p>操作建议：当前 $24.30 高于机械首仓 $20.8（估值中位 $26×80%），<strong>不在价值买入窗口</strong>。收息型投资者可持有并在跌向 $23（52 周低）以下小额吸纳；价值买入者耐心等 $20.8 建首仓、$18.2 加二仓、$15.6 极端机会三仓。止盈三档 $30 / $34 / $40，各减 25%，最后 25% 长期持有。<strong>建议仓位 0-3%</strong>（观察/收息仓，回调至 $20-21 可加至 3-5%）。持有周期 3-5 年，赌的是专利悬崖被管线与减肥药填平。</p>
+
+      <h4>风险提示</h4>
+
+      <p>专利悬崖加速 / 减肥药管线失败 / 新冠继续退坡 / $514 亿净负债去杠杆挤压股息 / 美国 MFN 最惠国定价、IRA 医保谈判、232 关税——任一项都可能把股价压向 $19-20。但 7.1% 股息 + 8.4 倍 PE + 剔新冠核心 +7% 构成估值底，<strong>$22-23 附近（52 周低）是较硬支撑</strong>。辉瑞的下行有股息垫，上行靠管线，中间隔着一道悬崖——但要记住，这个"底"的前提是股息不被削。</p>
+
+      <p>关键叙事：<strong>"全球制药巨头 + 肿瘤 ADC 兑现 + 7.1% 高股息 + 345 季派息现金机器"的深度价值，对垒"2026-2031 专利悬崖 + $514 亿净负债 + 减肥药未兑现 + 药价政策"的结构性逆风</strong>。辉瑞不是给追成长的人，也不是给要 25% 安全边际的价值猎手——它是给愿意收着 7.1% 股息、赌管理层用管线填平悬崖的耐心持有者。下次催化剂：2026-08-04 Q2 2026 财报。</p>
+
+      <p class="haitu-sign">—— 海图，灯下落笔，明日再观风浪。</p>
+
+      <p class="haitu-disc">⚠️ 免责声明：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，不构成任何投资建议。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div>《海图夜读》 · 辉瑞 Pfizer PFE Q1 2026 海图研判</div>
+  <div style="margin-top:6px;">发布日 2026-05-05 · 研判日 2026-07-11 · 数据来源 Pfizer Q1 2026 官方财报新闻稿（SEC 8-K + IR PDF）+ 10-Q + FY2025 10-K + 电话会 transcript</div>
+</footer>
+
+<script>
+let curTheme = 'light';
+function toggleTheme() {
+  curTheme = curTheme === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', curTheme);
+  renderCharts();
+}
+
+const palette = {
+  light: { accent: '#8a9a8e', accent2: '#7b8fa0', accent3: '#b08d7a', gold: '#b9a06a', red: '#b87070', green: '#7a9a7a', grid: '#e5ddd5', text: '#7a706a' },
+  dark:  { accent: '#8a9a8e', accent2: '#8fabbf', accent3: '#c9a48e', gold: '#c9b07a', red: '#c08080', green: '#8aaa8a', grid: '#3e3a35', text: '#a09890' }
+};
+
+let charts = {};
+function renderCharts() {
+  Object.values(charts).forEach(c => c && c.destroy && c.destroy());
+  charts = {};
+  const p = palette[curTheme];
+  Chart.defaults.color = p.text;
+  Chart.defaults.borderColor = p.grid;
+
+  const quarters = ['Q1 25','Q2 25','Q3 25','Q4 25','Q1 26'];
+  const rev = [13.72, 14.70, 16.70, 17.60, 14.45];
+  const adjEps = [0.92, 0.78, 0.87, 0.66, 0.75];
+  charts.rev = new Chart(document.getElementById('chartRev'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { type:'bar', label: '营收 ($B)', data: rev, backgroundColor: p.accent + 'CC', yAxisID: 'y' },
+      { type: 'line', label: '调整后 EPS ($)', data: adjEps, borderColor: p.red, backgroundColor: p.red, tension: 0.3, yAxisID: 'y1' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false, title: { display: true, text: '$B' } }, y1: { position: 'right', grid: { drawOnChartArea: false }, ticks: { callback: v => '$' + v } } } }
+  });
+
+  charts.margin = new Chart(document.getElementById('chartMargin'), {
+    type: 'bar',
+    data: {
+      labels: ['毛利率', '净利率', '有效税率'],
+      datasets: [
+        { label: 'GAAP', data: [75.4, 18.6, 14.6], backgroundColor: p.accent2 + 'CC' },
+        { label: '调整后', data: [76.4, 29.7, 16.9], backgroundColor: p.accent3 + 'CC' }
+      ]
+    },
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, ticks: { callback: v => v + '%' } } } }
+  });
+
+  charts.segment = new Chart(document.getElementById('chartSegment'), {
+    type: 'doughnut',
+    data: {
+      labels: ['基础医疗', '肿瘤', '专科', '医院&生物类似药', 'CentreOne'],
+      datasets: [{ data: [5.54, 3.83, 2.94, 1.85, 0.29], backgroundColor: [p.accent2, p.green, p.accent3, p.gold, p.text] }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { font: { size: 11 } } } } }
+  });
+
+  charts.eps = new Chart(document.getElementById('chartEps'), {
+    type: 'bar',
+    data: {
+      labels: quarters,
+      datasets: [
+        { label: 'GAAP EPS', data: [0.52, 0.51, 0.62, -0.29, 0.47], backgroundColor: p.accent2 + 'CC' },
+        { label: '调整后 EPS', data: [0.92, 0.78, 0.87, 0.66, 0.75], backgroundColor: p.green + 'CC' }
+      ]
+    },
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, ticks: { callback: v => '$' + v } } } }
+  });
+
+  buildSankey();
+}
+
+function buildSankey() {
+  const p = palette[curTheme];
+  const labels = ['总营收 $14.45','营业成本 $3.55','毛利 $10.90','销售&行政 $2.96','研发 $2.49','摊销/IPR&D/重组 $1.42','营业利润 $4.03','其他净支出 $0.86','税前利润 $3.17','所得税 $0.46','持续经营净利 $2.71','归母净利 $2.69','终止经营&少数股东 $0.02'];
+  const data = {
+    type: 'sankey',
+    orientation: 'h',
+    node: { pad: 14, thickness: 18, line: { color: p.grid, width: 0.5 }, label: labels, color: [p.accent, p.red, p.green, p.red, p.red, p.red, p.green, p.red, p.green, p.red, p.green, p.green, p.red] },
+    link: {
+      source: [0, 0, 2, 2, 2, 2, 6, 6, 8, 8, 10, 10],
+      target: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+      value:  [3.55, 10.90, 2.96, 2.49, 1.42, 4.03, 0.86, 3.17, 0.46, 2.71, 2.69, 0.02],
+      color: [p.red+'55', p.green+'55', p.red+'55', p.red+'55', p.red+'55', p.green+'66', p.red+'55', p.green+'66', p.red+'55', p.green+'66', p.green+'66', p.red+'55']
+    }
+  };
+  const layout = { font: { size: 11, color: p.text }, paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)', margin: { l: 10, r: 10, t: 10, b: 10 } };
+  Plotly.react('sankey', [data], layout, { displayModeBar: false, responsive: true });
+}
+
+renderCharts();
+</script>
+
+</body>
+</html>
