@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 研判日 2026-07-11 · IBM Q1 FY2026 财报已于 2026-04-22 发布 -->
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IBM IBM Q1 FY2026 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+<meta name="description" content="百年老店的第二次青春——混合云软件 + 企业咨询 + 大型主机 + 融资租赁四位一体。Q1 营收 $15.9B（+9%）· 软件 +11%（Red Hat +13%、Data +19%）· 基础设施 +15%（IBM Z 主机 +51%）· Operating EPS $1.91（+19%）· FY26 FCF 指引约 $15.7B。但净负债 -$54.5B + 零公开回购且股数年年稀释 + 前瞻 23x 满估值——好生意，这次市场先给了掌声。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IBM IBM Q1 FY2026 海图研判 · 海图夜读">
+<meta property="og:description" content="百年老店的第二次青春——混合云软件 + 企业咨询 + 大型主机 + 融资租赁四位一体。Q1 营收 $15.9B（+9%）· 软件 +11%（Red Hat +13%、Data +19%）· 基础设施 +15%（IBM Z 主机 +51%）· Operating EPS $1.91（+19%）· FY26 FCF 指引约 $15.7B。但净负债 -$54.5B + 零公开回购且股数年年稀释 + 前瞻 23x 满估值——好生意，这次市场先给了掌声。">
+<meta property="og:url" content="https://jacexie.github.io/haitu/reports/ibm-q1-fy2026.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="IBM IBM Q1 FY2026 海图研判 · 海图夜读">
+<meta name="twitter:description" content="百年老店的第二次青春——混合云软件 + 企业咨询 + 大型主机 + 融资租赁四位一体。Q1 营收 $15.9B（+9%）· 软件 +11% · 基础设施 +15%（IBM Z 主机 +51%）· Operating EPS $1.91（+19%）。但净负债 -$54.5B + 零公开回购持续稀释 + 前瞻 23x 满估值——好生意，这次市场先给了掌声。">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root { --bg:#f5f0eb; --bg2:#ece6df; --card:#ffffff; --card2:#f8f5f1; --border:#d9d0c7; --text:#4a4340; --text2:#7a706a; --text3:#a89f98; --accent:#8a9a8e; --accent2:#7b8fa0; --accent3:#b08d7a; --rose:#c09090; --gold:#b9a06a; --red:#b87070; --green:#7a9a7a; --shadow:rgba(0,0,0,0.06); --chart-grid:#e5ddd5; }
+[data-theme="dark"] { --bg:#1e1c1a; --bg2:#28251f; --card:#2e2a25; --card2:#363230; --border:#4a4540; --text:#d4ccc4; --text2:#a09890; --text3:#706860; --accent:#8a9a8e; --accent2:#8fabbf; --accent3:#c9a48e; --rose:#c09090; --gold:#c9b07a; --red:#c08080; --green:#8aaa8a; --shadow:rgba(0,0,0,0.3); --chart-grid:#3e3a35; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', serif; line-height: 1.75; font-size: 14.5px; transition: background .35s, color .35s; }
+a { color: var(--accent2); text-decoration: none; }
+.theme-bar { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); }
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+.toggle-switch { position: relative; width: 44px; height: 22px; background: var(--border); border-radius: 11px; cursor: pointer; transition: background .3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: var(--card); border-radius: 50%; transition: transform .3s; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+
+.hero { padding: 48px 24px 36px; text-align: center; border-bottom: 1px solid var(--border); }
+.hero-tag { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 3px 14px; border-radius: 20px; margin-bottom: 18px; }
+.hero h1 { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.pill { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: 'Segoe UI', sans-serif; font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow); }
+.pill strong { color: var(--text); }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle { font-size: 18px; font-weight: 700; color: var(--accent3); margin-bottom: 20px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+.stitle::before { content: ''; display: block; width: 4px; height: 20px; background: var(--accent3); border-radius: 2px; }
+
+.haitu-quip { display: flex; align-items: center; gap: 18px; background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 18px 24px; margin: 24px 0; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-quote { flex: 1; }
+.haitu-portrait { font-size: 15px; line-height: 1.65; color: var(--text); margin-bottom: 6px; font-weight: 600; }
+.haitu-rating-line { font-size: 13px; color: var(--text2); font-family: 'Segoe UI', sans-serif; }
+.rating-badge { display: inline-block; padding: 2px 12px; border-radius: 12px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; margin-left: 4px; }
+.rating-hold { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+
+.haitu-essay { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 28px 32px; margin: 24px 0 20px; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-essay-header { display: flex; align-items: center; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.haitu-avatar-sm { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); background: var(--red); box-shadow: 0 2px 8px rgba(184,112,112,0.2); }
+.haitu-name-lg { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 28px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 4px; }
+.haitu-essay-tag { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; }
+.haitu-essay-body { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 15px; line-height: 2.0; color: var(--text); }
+.haitu-essay-body p { margin-bottom: 14px; }
+.haitu-essay-body p.lead { font-size: 16px; font-style: italic; color: var(--text2); margin-bottom: 18px; }
+.haitu-essay-body strong { color: var(--text); font-weight: 700; }
+.haitu-essay-body h4 { font-size: 14px; color: var(--accent3); margin: 18px 0 10px; font-family: 'Segoe UI', sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+.haitu-sign { text-align: right; margin-top: 18px; font-family: 'Georgia', serif; font-size: 14px; color: var(--text2); font-style: italic; }
+.haitu-disc { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); font-style: italic; line-height: 1.7; }
+
+.stock-snap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px; }
+.snap-item { text-align: center; }
+.snap-label { font-family: 'Segoe UI', sans-serif; font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.snap-val { font-family: 'Segoe UI', sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+.snap-val.up { color: var(--green); }
+.snap-val.dn { color: var(--red); }
+.snap-sub { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow); }
+.kpi-l { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.badge { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+.up { background: rgba(122,154,122,.15); color: var(--green); }
+.dn { background: rgba(184,112,112,.15); color: var(--red); }
+.nt { background: rgba(123,143,160,.15); color: var(--accent2); }
+
+.tbl-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow); }
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI', sans-serif; font-size: 13px; }
+.tbl th { background: var(--card2); color: var(--text3); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); background: var(--card2); }
+
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); }
+.ctitle { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 260px; }
+
+.cmt { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 26px; line-height: 1.95; font-size: 14px; box-shadow: 0 1px 4px var(--shadow); color: var(--text); }
+.cmt p { margin-bottom: 14px; }
+.cmt p:last-child { margin-bottom: 0; }
+.cmt strong { color: var(--text); }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+
+.bscore { display: flex; align-items: center; gap: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; margin-bottom: 12px; box-shadow: 0 1px 4px var(--shadow); }
+.circle { width: 62px; height: 62px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; flex-shrink: 0; border: 3px solid; font-family: 'Segoe UI', sans-serif; }
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 4px; color: var(--text); }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.moat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+.moat-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); border-left: 4px solid var(--accent); }
+.moat-card.wide { border-left-color: var(--green); }
+.moat-card.narrow { border-left-color: var(--gold); }
+.moat-card.none { border-left-color: var(--red); }
+.moat-card h5 { font-size: 13px; color: var(--text); margin-bottom: 6px; }
+.moat-card .moat-rate { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.moat-card.wide .moat-rate { background: rgba(122,154,122,.18); color: var(--green); }
+.moat-card.narrow .moat-rate { background: rgba(185,160,106,.18); color: var(--gold); }
+.moat-card.none .moat-rate { background: rgba(184,112,112,.18); color: var(--red); }
+.moat-card p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+
+.ec-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 14px; box-shadow: 0 1px 3px var(--shadow); }
+.ec-badge { flex-shrink: 0; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-top: 2px; font-family: 'Segoe UI', sans-serif; }
+.ec-bull { background: rgba(122,154,122,.18); color: var(--green); }
+.ec-bear { background: rgba(184,112,112,.18); color: var(--red); }
+.ec-neut { background: rgba(185,160,106,.18); color: var(--gold); }
+.ec-body { flex: 1; }
+.ec-title { font-weight: 600; color: var(--text); margin-bottom: 3px; font-size: 14px; }
+.ec-note { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.dcf-note { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.dcf-note strong { color: var(--text); }
+
+.scorecard { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow); }
+.score-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.score-card { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px; }
+.score-letter { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Segoe UI', sans-serif; font-weight: 800; font-size: 22px; flex-shrink: 0; border: 3px solid; }
+.s-a { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.12); }
+.s-bp { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.06); }
+.s-b { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.10); }
+.s-bm { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.06); }
+.s-c { color: var(--red); border-color: var(--red); background: rgba(184,112,112,.08); }
+.score-body h4 { font-size: 13px; color: var(--text); margin-bottom: 4px; }
+.score-body p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+.flag-row { margin-top: 16px; padding: 12px 16px; background: rgba(184,112,112,.08); border: 1px solid rgba(184,112,112,.3); border-radius: 8px; font-size: 13px; color: var(--text2); }
+.flag-row strong { color: var(--red); }
+
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center; box-shadow: 0 1px 4px var(--shadow); }
+.pbox .pl { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; }
+.pbox .pv { font-family: 'Segoe UI', sans-serif; font-size: 28px; font-weight: 800; margin-bottom: 5px; }
+.pbox .pn { font-size: 12px; color: var(--text3); line-height: 1.5; }
+.pc { color: var(--red); } .pf { color: var(--gold); } .ps { color: var(--green); }
+
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.risk-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); position: relative; overflow: hidden; }
+.risk-card::before { content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent); }
+.risk-card.r1::before { background: var(--green); }
+.risk-card.r2::before { background: rgba(122,154,122,.6); }
+.risk-card.r3::before { background: var(--gold); }
+.risk-card.r4::before { background: var(--rose); }
+.risk-card.r5::before { background: var(--red); }
+.risk-card h5 { font-size: 14px; margin-bottom: 6px; color: var(--text); }
+.risk-score { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.r1 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r2 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r3 .risk-score { background: rgba(185,160,106,.18); color: var(--gold); }
+.r4 .risk-score { background: rgba(192,144,144,.18); color: var(--rose); }
+.r5 .risk-score { background: rgba(184,112,112,.18); color: var(--red); }
+.risk-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+footer { background: var(--card2); border-top: 1px solid var(--border); padding: 24px; text-align: center; color: var(--text3); font-size: 12px; margin-top: 40px; line-height: 1.8; }
+@media (max-width: 768px) { .cgrid,.pgrid { grid-template-columns: 1fr; } .hero h1 { font-size: 22px; } .kpi-grid { grid-template-columns: 1fr 1fr; } .stock-snap { grid-template-columns: 1fr 1fr; } .haitu-essay-header { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/IBM" target="_blank" rel="noopener" title="在雪球查看 IBM 实时行情">雪球 IBM</a>
+  </div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">Q1 FY2026（截至2026年3月31日） 财报发布 · 2026-04-22 &nbsp;|&nbsp; 海图研判 · 2026-07-11</div>
+  <h1>IBM · FY2026 Q1 财报深度分析</h1>
+  <div class="hero-sub">NYSE: IBM &nbsp;|&nbsp; 财季截至 2026-03-31 &nbsp;|&nbsp; 价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill">股价 <strong>$289.86</strong> <span style="color:var(--red)">距高点 -13%</span></div>
+    <div class="pill">市值 <strong>~$271B</strong></div>
+    <div class="pill">Q1 营收 <strong>$15.92B</strong> <span style="color:var(--green)">+9%</span></div>
+    <div class="pill">Operating EPS <strong>$1.91</strong> <span style="color:var(--green)">+19%</span></div>
+    <div class="pill">Non-GAAP 毛利率 <strong>57.7%</strong></div>
+    <div class="pill">Forward P/E <strong>~23x</strong> <span style="color:var(--gold)">满估值</span></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 海图页首短评 ═══ -->
+<div class="haitu-quip">
+  <div class="haitu-quote">
+    <div class="haitu-portrait">百年老店的第二次青春——一家「混合云软件 + 企业咨询 + 大型主机 + 融资租赁」四位一体的转型企业。靠 Red Hat 开源订阅、银行政府离不开的大型机、以及 watsonx 的 AI 栈赚钱。Q1 营收 $15.9B（+9%）· 软件 +11%（Red Hat +13%、Data +19%）· 基础设施 +15%（IBM Z 主机 +51%）· Operating EPS $1.91（+19%）· 利润率扩张 140bps。但净负债 -$54.5B + 零公开回购且股数年年稀释 + 前瞻 23x 满估值——生意在变好，价格已不便宜。</div>
+    <div class="haitu-rating-line">评级：<span class="rating-badge rating-hold">持有观望</span> · 12 个月概率加权目标价 $265（−9%）· 「转型见效的百年机器 + 大型机/关键任务软件宽护城河 + 强 FCF」，对垒「咨询无护城河 + 零回购持续稀释 + 净负债 $54.5B + 满估值无安全边际」</div>
+  </div>
+</div>
+
+<!-- ═══ 市场数据快照 ═══ -->
+<div class="section">
+  <div class="stitle">市场数据快照（研判日 2026-07-11）</div>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">股价（美元）</div><div class="snap-val">$289.86</div><div class="snap-sub">2026-07 上旬 · 距 52 周高 -13%</div></div>
+    <div class="snap-item"><div class="snap-label">市值</div><div class="snap-val">~$271B</div><div class="snap-sub">科技老牌蓝筹</div></div>
+    <div class="snap-item"><div class="snap-label">TTM Operating P/E</div><div class="snap-val">~24.4x</div><div class="snap-sub">十年来高位</div></div>
+    <div class="snap-item"><div class="snap-label">Forward P/E</div><div class="snap-val nt">~23x</div><div class="snap-sub">FY26 共识 EPS $12.55</div></div>
+    <div class="snap-item"><div class="snap-label">P/S (TTM)</div><div class="snap-val">~3.9x</div><div class="snap-sub">TTM 营收 ~$68.9B</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间</div><div class="snap-val">$212 - $332</div><div class="snap-sub">位于区间中上部</div></div>
+    <div class="snap-item"><div class="snap-label">股息率</div><div class="snap-val">~2.3%</div><div class="snap-sub">$6.76/年 · 连续 31 年增息</div></div>
+    <div class="snap-item"><div class="snap-label">FCF Yield</div><div class="snap-val up">~5.8%</div><div class="snap-sub">FY26 FCF 指引 ~$15.7B</div></div>
+    <div class="snap-item"><div class="snap-label">现金 + 有价证券</div><div class="snap-val">$11.83B</div><div class="snap-sub">2026-03-31 末</div></div>
+    <div class="snap-item"><div class="snap-label">总有息负债</div><div class="snap-val dn">$66.36B</div><div class="snap-sub">含 Financing $12.8B</div></div>
+    <div class="snap-item"><div class="snap-label">真实净负债</div><div class="snap-val dn">-$54.53B</div><div class="snap-sub">⚠️ 净负债非净现金</div></div>
+    <div class="snap-item"><div class="snap-label">分析师 1 年目标价</div><div class="snap-val">$301.07</div><div class="snap-sub">卖方共识（略高于现价）</div></div>
+  </div>
+  <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">数据时点：财务数据来源 IBM Q1 FY2026 官方财报（SEC 8-K EX-99.1 + newsroom / PR Newswire 新闻稿，2026-04-22 发布，财季截至 2026-03-31）· 货币 USD 单口径。IBM 财年为日历年（12 月 31 日止）。<strong>股价口径说明</strong>：$289.86 为二手行情聚合的 2026-07 上旬水平（研究员标注为 2026-07-08，经独立核对，2026-07-08 实际收盘约 $302.05，$289.86 更接近 2026-07-02 收盘 $289.52 / 最新 2026-07-10 收盘约 $287.56）——故本报告以 $289.86 作为「近期现价」参照，不锚定单一交易日。⚠️ <strong>IBM 是净负债公司</strong>（总有息负债 $66.4B &gt; 现金+有价证券 $11.8B，真实净负债 -$54.5B），与「科技巨头现金堡垒」叙事完全不同——这是 Red Hat / HashiCorp / Confluent 系列大额并购承担的高杠杆。</p>
+</div>
+
+<!-- ═══ Q1 FY2026 KPI ═══ -->
+<div class="section">
+  <div class="stitle">Q1 FY2026 核心业绩（USD · 财季截至 2026-03-31）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">总营收</div><div class="kpi-v">$15.92B</div><span class="badge up">+9% YoY</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">固定汇率 +6% · 各分部广泛增长</div></div>
+    <div class="kpi"><div class="kpi-l">软件 Software</div><div class="kpi-v">$7.05B</div><span class="badge up">+11%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">最大分部 · 毛利率 82.8%</div></div>
+    <div class="kpi"><div class="kpi-l">咨询 Consulting</div><div class="kpi-v">$5.27B</div><span class="badge up">+4%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">最软板块 · 固定汇率 +0.9%</div></div>
+    <div class="kpi"><div class="kpi-l">基础设施 Infrastructure</div><div class="kpi-v">$3.33B</div><span class="badge up">+15%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">IBM Z 主机 +51%（z17 周期）</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 毛利率</div><div class="kpi-v">56.2%</div><span class="badge up">+100bps</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">Non-GAAP 57.7%（+110bps）</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 净利润</div><div class="kpi-v">$1.22B</div><span class="badge up">+15%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">有效税率 12.4%</div></div>
+    <div class="kpi"><div class="kpi-l">Non-GAAP 净利润</div><div class="kpi-v">$1.82B</div><span class="badge up">+20%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">真实经营口径</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 摊薄 EPS</div><div class="kpi-v">$1.28</div><span class="badge up">+14%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">摊薄股数 952.1M</div></div>
+    <div class="kpi"><div class="kpi-l">Operating EPS</div><div class="kpi-v">$1.91</div><span class="badge up">+19%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">最可信口径</div></div>
+    <div class="kpi"><div class="kpi-l">Operating 税前利润率</div><div class="kpi-v">13.4%</div><span class="badge up">+140bps</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">GAAP 税前利润率 8.7%</div></div>
+    <div class="kpi"><div class="kpi-l">经营现金流 OCF</div><div class="kpi-v">$5.17B</div><span class="badge up">+$0.8B</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">同比改善</div></div>
+    <div class="kpi"><div class="kpi-l">自由现金流（官方口径）</div><div class="kpi-v">$2.22B</div><span class="badge up">+$0.3B</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">已剔融资应收款回收</div></div>
+  </div>
+</div>
+
+<!-- ═══ 本季必看 高亮框 ═══ -->
+<div class="section">
+  <div class="stitle">本季必看 · 三个"看穿"：GAAP vs Operating、双引擎 vs 一条软腿、FCF 的两种口径</div>
+  <div class="cmt">
+    <p><strong>IBM 这份财报有三个必须"看穿"的地方，看不穿就会误读它的增长质量与现金含金量。</strong></p>
+    <p><strong>看穿一：GAAP EPS 有季节噪音，Operating EPS $1.91（+19%）才是主线。</strong> Q1 GAAP 摊薄 EPS $1.28（+14%）没有问题，但要提醒的是<span class="hl-t">上一季 Q4 2025 的 GAAP EPS $5.86 异常高——因含约 $4B+ 的一次性税务审计和解利得</span>，这让 IBM 的 TTM GAAP 盈利被抬高、TTM GAAP P/E 失真。IBM 官方主推 Operating（Non-GAAP）口径：本季 Operating EPS $1.91（+19%）、Operating 税前利润率扩张 140bps 至 13.4%——这才是反映真实经营的读数。</p>
+    <p><strong>看穿二：这是"软件 + 基础设施"双引擎强、"咨询"一条软腿的一季。</strong> 软件 +11%（Red Hat +13%、Data +19%、Automation +10%）、基础设施 +15%（IBM Z 主机 +51%）两台发动机全速运转；但<span class="warn-t">咨询仅 +4%（固定汇率 +0.9%）</span>——这是 IBM 里最没有护城河、最随企业可自由支配 IT 支出摆动的板块。它是整体增速的天花板，也是本季唯一的软点。</p>
+    <div class="tbl-wrap" style="margin:14px 0;">
+      <table class="tbl">
+        <tr><th>分部（$M）</th><th>Q1 FY2026 营收</th><th>YoY</th><th>固定汇率</th><th>分部利润</th><th>分部利润率</th></tr>
+        <tr><td>软件 Software</td><td>7,052</td><td>+11.3%</td><td>+7.9%</td><td>2,099</td><td>29.8%</td></tr>
+        <tr><td>咨询 Consulting</td><td>5,272</td><td>+4.0%</td><td>+0.9%</td><td>558</td><td>10.6%</td></tr>
+        <tr><td>基础设施 Infrastructure</td><td>3,326</td><td>+15.3%</td><td>+11.7%</td><td>524</td><td>15.8%</td></tr>
+        <tr><td>融资 Financing</td><td>220</td><td>+14.8%</td><td>+10.2%</td><td>118</td><td>53.8%</td></tr>
+        <tr><td>其他 Other</td><td>48</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr class="hl"><td><strong>合计</strong></td><td><strong>15,917</strong></td><td><strong>+9%</strong></td><td><strong>+6%</strong></td><td><strong>~3,299</strong></td><td>—</td></tr>
+      </table>
+    </div>
+    <p><strong>看穿三：IBM 的"自由现金流"有两种口径，差了一倍多。</strong> 若按最朴素的 FCF = OCF − 毛 Capex = $5,169M − $391M = <span class="hl-t">$4,778M</span>，会高估真实自由现金流；因为 IBM 季度 OCF 里含大额<strong>融资应收款回收</strong>的现金流入。IBM 官方 FCF 口径把这块剔除：OCF $5,169M − 融资应收款变动 $2,565M − 净 Capex $384M = <strong>$2,220M</strong>（同比 +$0.3B）。<span class="warn-t">读 IBM 现金流，务必以官方 $2.22B 为准，不要口算单季。</span>全年 FCF 才是更干净的观察窗口（FY2025 $14.7B，FY2026 指引约 $15.7B）。</p>
+  </div>
+</div>
+
+<!-- ═══ 趋势图 ═══ -->
+<div class="section">
+  <div class="stitle">关键指标趋势</div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">营收（$B）& YoY 增速（近 5 季）</div><div class="cwrap"><canvas id="chartRev"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">利润率趋势（GAAP 毛利率 vs Operating 税前利润率，%）</div><div class="cwrap"><canvas id="chartMargin"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">Q1 FY2026 分部营收拆分（$B）</div><div class="cwrap"><canvas id="chartSegment"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">每股收益（GAAP vs Operating EPS，近 5 季）</div><div class="cwrap"><canvas id="chartEps"></canvas></div></div>
+  </div>
+  <p style="margin-top:4px; font-size:12px; color:var(--text3); line-height:1.6;">注：Q4 2025 GAAP EPS $5.86 异常高，因含一次性税务审计和解利得（约 $4B+ 离散税收利得），Operating EPS $4.52 更能反映经营；营收呈典型 Q4 高峰季节性（z17 主机 + 软件年末结算）。</p>
+</div>
+
+<!-- ═══ 桑基图 ═══ -->
+<div class="section">
+  <div class="stitle">Q1 FY2026 资金流向桑基图（$B）</div>
+  <div class="ccard">
+    <div id="sankey" style="width:100%;height:480px;"></div>
+    <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">说明：总营收 $15.92 → 营业成本 $6.97 + 毛利 $8.95 → 销售管理费 SG&amp;A $5.09 + 研发 R&amp;D $2.17 + 其他&amp;利息 $0.30 + 税前利润 $1.39 → 所得税 $0.17 + GAAP 净利 $1.22。流量已闭合（每个中间节点流入=流出）。注：本季经营现金流 $5.17B、官方自由现金流 $2.22B（已剔融资应收款回收 $2.57B + 净 Capex $0.38B）；同期完成 Confluent 收购付现约 $10.5B，商誉一次涨约 $70 亿、债务增 $51 亿——本季现金流被这笔并购显著改写。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 1 ═══ -->
+<div class="section">
+  <div class="stitle">模块 1 · 公司概览与背景</div>
+  <div class="cmt">
+    <p><strong>International Business Machines Corporation（NYSE: IBM）</strong>，总部纽约 Armonk。<strong>1911 年</strong>由三家公司合并成立（CTR），<strong>1924 年更名 IBM</strong>，<span class="hl-t">1916 年起连续派息、连续 31 年提高股息</span>——是全球现存最悠久的科技上市公司之一。它见过大型机的黄金年代、PC 的兴衰、也曾在云时代一度掉队，如今带着 z17 主机强周期与生成式 AI 签约簿重回聚光灯下。财年为日历年（12 月 31 日止）。</p>
+
+    <p><strong>核心叙事</strong>：现在的 IBM 是一家<span class="hl-t">"混合云软件 + 企业咨询 + 大型主机 + 融资租赁"四位一体的企业 IT 平台</span>——2019 年 $340 亿收购 Red Hat 定调"混合云"战略，2021 年把托管基础设施服务分拆为 Kyndryl 甩掉低利润拖累，随后以 HashiCorp、Apptio、StreamSets、Confluent 一系列并购补齐软件与数据/AI 栈。四大分部：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>软件（Software，约 44% 营收）</strong>——Red Hat 混合云 + 自动化 + 数据 + 交易处理（大机软件），毛利率 82.8%、订阅化、是价值中枢</li>
+      <li><strong>咨询（Consulting，约 33% 营收）</strong>——企业数字化转型/AI 落地咨询，直接对标 Accenture，毛利率仅 27.5%、无护城河</li>
+      <li><strong>基础设施（Infrastructure，约 21% 营收）</strong>——IBM Z 大型机 + 分布式服务器 + 存储，z17 周期驱动本季 +15%</li>
+      <li><strong>融资（Financing，约 1% 营收）</strong>——为客户购买 IBM 产品提供融资，自偿性、利润率 53.8%</li>
+    </ul>
+
+    <p><strong>能力圈检验</strong>：软件订阅 + 大型机 + 咨询的商业模式清晰可懂（<span class="hl-t">一句话：卖企业离不开的软件与主机，再派人帮客户把它们用起来</span>）。<span class="warn-t">两块相对黑箱：(1) watsonx / 生成式 AI 签约簿（>$12.5B）里软件与咨询的真实变现节奏与利润率；(2) Confluent 等大额并购的整合成效与商誉减值风险（商誉已升至 $747 亿，占总资产近半）。</span>这两点决定了 IBM 这一轮转型是"真加速"还是"并购堆量"。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 2 ═══ -->
+<div class="section">
+  <div class="stitle">模块 2 · 管理层评估</div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>Arvind Krishna · 董事长兼 CEO（2020 至今）</h4>
+      <p>研发出身（曾主导 IBM 云与认知软件、是 Red Hat 收购的关键推手），2020-04 接任 CEO、2021 兼任董事长。他把 IBM 从"营收长期停滞的老 IT 巨头"重构为"混合云 + AI"聚焦型公司：<span class="hl-t">分拆 Kyndryl 甩掉低利润业务、连续并购补齐软件/数据栈、把 watsonx 做成 AI 落地入口</span>。成效是实的——集团营收从疫情前的停滞回到 FY2025 +8%、软件占比与整体利润率持续提升。海图判断：这是一位真正把大象重新拉动起来的掌舵人，战略清晰、执行到位。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B</div>
+    <div class="bd">
+      <h4>资本配置 · "重并购 + 重股息 + 降杠杆"，但回购缺席</h4>
+      <p>
+      <strong>并购导向的成长</strong>：Red Hat（转型定调，事后看很成功）+ HashiCorp/Apptio/Confluent 补软件栈——Krishna 用并购换增长，Q1 又付现约 $10.5B 收 Confluent 押注 AI 数据流。<br>
+      <strong>连续 31 年增息</strong>：Q1 2026 季度股息升至 $1.69/股（此前 $1.68），自 1916 年从未间断派息。<br>
+      <span class="warn-t">两个纪律瑕疵</span>：一是<strong>增息幅度极小</strong>（$1.68→$1.69，仅 +0.6%），象征意义大于实质；二是<strong>公开市场回购实质暂停</strong>——自 2021 年 Kyndryl 分拆后基本停止自主回购，摊薄股数反而以约 1%/年上升（股权激励持续稀释）。资本返还以"股息 + 降杠杆 + 并购"为主，回购几乎缺席，这与多数科技股"缩股增厚 EPS"的路径相反。
+      </p>
+    </div>
+  </div>
+
+  <div class="cmt">
+    <p><strong>长期主义测试</strong>：✅ Krishna 以"混合云 + AI"的多年主线重塑 IBM，敢于分拆低利润业务、连续押注数据/AI 并购，是长期视角。<strong>坦诚度</strong>：电话会披露分部与固定汇率增速详尽，主动点名咨询是最软板块、明确 Q1 现金消耗来自 Confluent，不粉饰。<strong>利益绑定</strong>：管理层持股比例不高（成熟大盘股常态），薪酬与营收增长 / Operating EPS / FCF 强挂钩。海图给 Krishna 战略与执行 A-，但资本返还结构（零回购 + 微增息 + 持续稀释）拖累整体资本配置评分至 B。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 3 ═══ -->
+<div class="section">
+  <div class="stitle">模块 3 · 商业模式深度解析</div>
+  <div class="cmt">
+    <p><strong>海图"一句话测试"</strong>：<span class="hl-t">IBM 卖的是"企业离不开的东西"——银行政府跑核心业务的大型主机、Red Hat 的混合云操作系统与数据/AI 软件订阅，再派几万名咨询师帮客户把这些技术真正用起来。软件赚高毛利订阅钱，主机赚周期性硬件钱，咨询赚人力服务钱。</span></p>
+
+    <p><strong>三层利润结构</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>软件（价值中枢）</strong>——毛利率 82.8%、分部利润率 29.8%，越来越订阅化（Red Hat ARR、watsonx、交易处理软件年费）。Data 子板块 +19%（Confluent/watsonx 数据栈拉动）、Red Hat +13%、Automation +10%、Transaction Processing +6%（大机软件即使"传统"也因切换成本高而稳增）</li>
+      <li><strong>基础设施（周期引擎）</strong>——IBM Z 大型机是核心，本季 +51%（z17 新机型周期）、Q4 2025 曾 +67%。毛利率 56.9%、分部利润率 15.8%。周期性强：主机每 2-3 年一个换机潮，Infrastructure Support -2% 提示存量维护在缩</li>
+      <li><strong>咨询（人力杠杆）</strong>——毛利率仅 27.5%、分部利润率 10.6%，本季 +4%（固定汇率 +0.9%）。它随宏观可自由支配 IT 支出摆动，是最没有护城河、最赚"辛苦钱"的一层，但它是软件与 AI 落地的重要拉动渠道</li>
+    </ul>
+
+    <p style="margin-top:14px;"><strong>议价能力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>大型机客户</strong>：<span class="hl-t">议价能力极强</span>——银行/保险/政府的核心系统跑在 IBM Z 上，几十年 COBOL 应用迁移成本天文数字，几乎是"锁定"，IBM 掌握定价权</li>
+      <li><strong>软件客户</strong>：强——Red Hat/OpenShift 深度嵌入客户 IT 底座，交易处理软件是大机的"配套税"，切换成本高</li>
+      <li><strong>咨询客户</strong>：弱——直面 Accenture、Deloitte、TCS、Infosys 的激烈价格竞争，靠规模与 IBM 技术捆绑维系</li>
+      <li><strong>GenAI 签约簿 >$12.5B</strong>（含软件 + 咨询累计签约，从 Q2 2025 的 $7.5B、Q3 的 $9.5B 快速累积）——是 AI 时代把三层结构串起来的新叙事</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══ 模块 4 ═══ -->
+<div class="section">
+  <div class="stitle">模块 4 · 经济护城河分析（5 维）</div>
+  <div class="moat-grid">
+    <div class="moat-card wide">
+      <h5>1. 转换成本</h5>
+      <span class="moat-rate">极宽</span>
+      <p>大型机跑银行/政府核心系统，几十年 COBOL 应用 + 关键任务负载迁移成本天文数字；Red Hat/OpenShift 深嵌客户 IT 底座。<strong>趋势：稳定</strong>（IBM 最硬的护城河）。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>2. 无形资产</h5>
+      <span class="moat-rate">宽</span>
+      <p>IBM 品牌全球企业/政府信任 + 数十年专利积累（长期居美国专利榜前列）+ 大型机 IP + Red Hat 开源领导地位 + 安全合规资质。<strong>趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>3. 网络效应</h5>
+      <span class="moat-rate">中-窄</span>
+      <p>Red Hat/OpenShift 开源生态 + 大型机 ISV 生态 + watsonx 开发者社区有一定网络效应，但远弱于平台型公司。<strong>趋势：AI 生态或增强</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>4. 成本优势</h5>
+      <span class="moat-rate">窄</span>
+      <p>IBM 是溢价定价者而非低成本生产者——软件 82.8% 毛利率来自定价权而非成本领先；咨询在成本上无优势，直面印度系外包低价竞争。<strong>趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>5. 有效规模</h5>
+      <span class="moat-rate">宽（限主机）</span>
+      <p>IBM Z 是全球唯一可用的商用大型机——事实垄断，新进入者几无空间；但云/咨询是充分竞争市场。<strong>趋势：主机稳定，云受超大规模厂商压制</strong>。</p>
+    </div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>10 年后护城河会更宽还是更窄？</strong> <span class="hl-t">IBM 的护城河高度"分层"——大型机 + 关键任务软件极宽且稳定，咨询几乎无护城河，混合云介于两者之间</span>。加宽的变量：(1) 软件占比持续提升（订阅化 + Red Hat + watsonx AI），把集团利润结构往高毛利、高粘性挪；(2) AI 落地若真让 IBM 成为"企业级混合 AI"的首选平台，网络效应与转换成本会同步增强。侵蚀的变量：(1) <span class="warn-t">超大规模云厂商（Azure/AWS/Google）在云与 AI 上的碾压式投入</span>——IBM 只能做"混合/私有"的差异化 niche；(2) 咨询长期是价格战红海；(3) 大型机是慢速结构性下行的存量市场（靠换机周期与软件年费维系，而非增长）。</p>
+    <p><strong>定价权</strong>：大型机与大机软件强（客户被锁定）、Red Hat 中强、咨询弱。综合是"一半宽护城河 + 一半无护城河"的混合体——这决定了 IBM 值一个中等偏上、但不该是顶级平台股的估值倍数。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 5 ═══ -->
+<div class="section">
+  <div class="stitle">模块 5 · 财务深度分析</div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 12px 0; font-family: 'Segoe UI',sans-serif;">5.1 关键比率（Q1 FY2026 vs Q1 FY2025）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>指标</th><th>Q1 FY25</th><th>Q1 FY26</th><th>变化</th><th>含义</th></tr>
+      <tr><td>营收增速（YoY）</td><td>+1%</td><td>+9%</td><td><span class="badge up">+8pp</span></td><td>转型加速 · 各分部广泛增长</td></tr>
+      <tr><td>GAAP 毛利率</td><td>55.2%</td><td>56.2%</td><td><span class="badge up">+100bps</span></td><td>软件占比提升</td></tr>
+      <tr><td>Non-GAAP 毛利率</td><td>~56.6%</td><td>57.7%</td><td><span class="badge up">+110bps</span></td><td>结构性改善</td></tr>
+      <tr><td>Operating 税前利润率</td><td>12.0%</td><td>13.4%</td><td><span class="badge up">+140bps</span></td><td>经营杠杆释放</td></tr>
+      <tr><td>GAAP 净利率</td><td>~7.3%</td><td>7.6%</td><td><span class="badge up">+0.3pp</span></td><td>—</td></tr>
+      <tr><td>Operating 净利率</td><td>~10.4%</td><td>~11.4%</td><td><span class="badge up">+1.0pp</span></td><td>剔一次性后核心提升</td></tr>
+      <tr><td>摊薄股数（M）</td><td>~926</td><td>952.1</td><td><span class="badge dn">+2.8%</span></td><td>⚠️ 股权激励持续稀释</td></tr>
+      <tr><td>Adjusted EBITDA</td><td>—</td><td>$4.0B</td><td><span class="badge nt">25% 利润率</span></td><td>现金盈利能力扎实</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;"><strong>杜邦拆解（FY2025 Operating 口径近似）</strong>：净利率 ~16% × 资产周转 ~0.43x × 权益乘数 ~4.7x ≈ ROE ~32%。<span class="warn-t">ROE 看着高，但主要由 4.7 倍的高杠杆驱动</span>——总资产 $156B / 股东权益仅 $33B（权益被历年大额派息 + 并购商誉挤薄）。资产周转仅 0.43x（大量商誉/无形资产拖累）。这是一台"高杠杆 + 高毛利软件"混合出来的高 ROE，读的时候要知道杠杆的贡献。ROIC 在正常化口径下约 10-12%，被 $747 亿商誉稀释。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.2 资产负债健康度（2026-03-31 末 · $M）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>2025-12-31</th><th>2026-03-31</th><th>说明</th></tr>
+      <tr><td>现金及等价物</td><td>~13,400</td><td>10,819</td><td>Confluent 付现消耗</td></tr>
+      <tr><td>受限现金 + 有价证券</td><td>—</td><td>1,009</td><td>受限 45 + 有价证券 964</td></tr>
+      <tr class="hl"><td>现金 + 有价证券合计</td><td>~14,400</td><td>11,828</td><td>较 2025 末降 $2.6B</td></tr>
+      <tr class="hl"><td>短期债务</td><td>—</td><td>8,655</td><td>已独立核对</td></tr>
+      <tr class="hl"><td>长期债务</td><td>—</td><td>57,706</td><td>Confluent 并购推高</td></tr>
+      <tr class="hl"><td>总有息负债</td><td>~61,300</td><td>66,361</td><td>较 2025 末增 $5.1B</td></tr>
+      <tr><td>其中：Financing 债务（自偿性）</td><td>—</td><td>~12,800</td><td>由 ~$12.8B 融资应收款支撑</td></tr>
+      <tr class="hl"><td><strong>真实净负债</strong></td><td>—</td><td><strong>-54,533</strong></td><td>⚠️ 净负债非净现金</td></tr>
+      <tr><td>经营租赁负债（流动+非流动）</td><td>—</td><td>3,441</td><td>加计后总杠杆更高</td></tr>
+      <tr><td>商誉</td><td>67,717</td><td>74,709</td><td>Confluent 一次增约 $70 亿</td></tr>
+      <tr><td>无形资产</td><td>11,391</td><td>14,624</td><td>同因 Confluent</td></tr>
+      <tr><td>预付养老金资产</td><td>—</td><td>7,578</td><td>养老金计划超额充足</td></tr>
+      <tr><td>总资产</td><td>—</td><td>156,229</td><td>—</td></tr>
+      <tr><td>股东权益</td><td>—</td><td>33,056</td><td>IBM 权益 32,974 + 少数股东 82</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">⚠️ <strong>净负债非净现金——铁律提示</strong>：IBM 总有息负债 $66.36B（短债 $8.66B + 长债 $57.71B，已逐项核对）远大于现金+有价证券 $11.83B，<strong>真实净负债 -$54.53B</strong>。其中约 $12.8B 是 Financing 分部债务，由约 $12.8B 融资应收款支撑、属自偿性；<span class="hl-t">剔除后核心有息净负债约 -$41.7B</span>；再加计经营租赁负债 $3.44B，总杠杆更高。<strong>商誉 $74.7B + 无形资产 $14.6B 合计约占总资产 57%</strong>——若 Confluent 等并购整合不及预期，未来存在减值风险。养老金一侧是加分项：预付养老金资产 $7.58B，计划超额充足，非负担。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.3 现金流量（Q1 单季 + FY2025 全年）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>Q1 FY26</th><th>FY2025 全年</th><th>说明</th></tr>
+      <tr><td>经营活动现金流（OCF）</td><td>$5.17B</td><td>$13.19B</td><td>Q1 同比 +$0.8B</td></tr>
+      <tr><td>- 毛 Capex（PP&E $232M + 软件 $159M）</td><td>$0.39B</td><td>~$1.6B</td><td>轻资产（分拆 Kyndryl 后）</td></tr>
+      <tr><td>- 融资应收款变动（官方剔除项）</td><td>$2.57B</td><td>—</td><td>季度 OCF 含大额回收</td></tr>
+      <tr class="hl"><td><strong>自由现金流（IBM 官方口径）</strong></td><td><strong>$2.22B</strong></td><td><strong>$14.73B</strong></td><td>Q1 +$0.3B · FY25 +$2.0B</td></tr>
+      <tr><td>（参考）FCF = OCF − 毛 Capex</td><td>$4.78B</td><td>—</td><td>⚠️ 单季高估，不采用</td></tr>
+      <tr><td>Confluent 并购净付现</td><td>-$10.47B</td><td>—</td><td>推高商誉与债务、消耗现金</td></tr>
+      <tr><td>股息支付</td><td>-$1.58B</td><td>-$6.26B</td><td>连续 31 年增息</td></tr>
+      <tr><td>公开市场回购</td><td>$0</td><td>$0</td><td>仅代扣税回购 $350M（非自主）</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">⚠️ <strong>口径说明</strong>：IBM 季度 OCF 含大额融资应收款回收，故官方 FCF（$2.22B）显著低于"OCF−Capex"（$4.78B），<strong>禁止用单季口算 FCF</strong>。全年是更干净的窗口：FY2025 FCF $14.73B（+$2.0B YoY，高于当年 OCF $13.19B——因融资应收款净回收 + 递延项贡献），FY2026 指引再增约 $1B → 约 $15.7B。Q1 现金被 Confluent $10.5B 付现主导，现金降 $2.6B、债务增 $5.1B。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.4 所有者盈余（价值投资口径 · FY2025 → FY2026）</h3>
+  <div class="dcf-note">
+    <p><strong>所有者盈余 = 净利润 + 折旧摊销 + SBC − 维护性 Capex ± 营运资金 ≈ 自由现金流</strong></p>
+    <p>IBM 分拆 Kyndryl 后已相当轻资产（Capex 仅占营收约 2-3%），全年 FCF 接近所有者盈余口径。FY2025 官方 FCF $14.73B，FY2026 指引约 $15.7B。<strong>所有者盈余收益率 = FY26 FCF ~$15.7B / 市值 ~$271B ≈ 5.8%</strong>——对一个 ~7-8% EPS 增速的公司，这是一个"合理但不便宜"的收益率。</p>
+    <p><span class="warn-t">但有一个关键的"落袋"缺口</span>：5.8% 的 FCF 收益率并不等于股东实际拿到的回报。IBM 把大部分 FCF 用于<strong>股息（~$6.3B/年）+ 降杠杆 + 并购（Confluent $10.5B）</strong>，公开市场回购为 $0，而股数还以约 1%/年稀释。<span class="hl-t">净股东收益率 ≈ 2.3% 股息 − 约 1% 稀释 ≈ 1.3%</span>——这意味着股东的回报几乎全部要靠生意本身增长与估值，而非现金返还。这是 IBM 与"回购缩股"型科技股最大的结构差异，也是本报告给它保留而非买入评级的核心之一。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 6 ═══ -->
+<div class="section">
+  <div class="stitle">模块 6 · 电话会分析（Q1 FY2026 + 前 2 季度）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">Q1 FY2026 电话会（2026-04-22）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"营收 $15.9B（+9%），各分部广泛增长；Operating EPS $1.91（+19%），Operating 税前利润率扩张 140bps 至 13.4%"</div><div class="ec-note">转型加速的一季，利润率结构性改善，软件占比提升带动整体质量上台阶。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"基础设施 +15%（IBM Z +51%，z17 主机周期）、软件 +11%（Data +19%、Red Hat +13%）——双引擎强劲"</div><div class="ec-note">z17 换机潮 + 数据/AI 软件栈是本季两台主发动机；Data 子板块受 Confluent、watsonx 拉动加速。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"完成 Confluent 数据流平台收购，扩充数据/AI 栈；但付现约 $10.5B 致现金降 $2.6B、债务增 $5.1B、商誉增约 $70 亿"</div><div class="ec-note">战略上补齐 AI 时代的数据管道，财务上推高杠杆与商誉——中性偏留意，看后续整合与变现。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"重申全年 &gt;5% 固定汇率增长 + FCF 再增约 $1B；连续第 31 年提高股息至 $1.69/季"</div><div class="ec-note">Q1 业绩后管理层重申全年指引（未上调也未下调），资本返还以股息 + 降杠杆为主。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"咨询仅 +4%（固定汇率 +0.9%），为最软板块，反映宏观可自由支配 IT 支出承压"</div><div class="ec-note">咨询是整体增速的天花板与最大软点，直接受企业 IT 预算收紧拖累。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q4 FY2025 电话会（2026-01-28）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"Q4 营收 $19.7B（+12%）为近年最强增速；Software +14%、Infrastructure +21%（IBM Z +67%）"</div><div class="ec-note">以"动能与强势地位"进入 2026；FY2025 营收 $67.5B（+8%）、Operating EPS $11.59、毛利率扩张 170bps。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"FY2025 FCF 达 $14.7B（+$2.0B YoY），GenAI 累计签约超 $12.5B"</div><div class="ec-note">现金生成能力与 AI 商业化势头是两大亮点；指引 FY2026 &gt;5% 固定汇率增长 + FCF 再增约 $1B。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"Q4 GAAP 净利 $5.6B / EPS $5.86 含税务审计和解带来的一次性税收利得"</div><div class="ec-note">非经常——需还原看 Operating EPS $4.52 才反映真实经营；提醒 TTM GAAP 盈利被抬高。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q3 FY2025 电话会（2025-10-22）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"各分部全面加速，营收 $16.3B（+9%）；上调全年营收与 FCF 展望（FCF 约 $14B）"</div><div class="ec-note">Infrastructure +17%（z17 上市前 IBM Z 动能）、Software +10%、Operating EPS $2.65 超预期、Operating 税前利润率 18.6%（+2.0pts）。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"GenAI 累计签约超 $9.5B（较 Q2 的 $7.5B 加速）"</div><div class="ec-note">AI 签约簿快速累积，是把软件与咨询串起来的新增长曲线。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-neut">中性偏软</div><div class="ec-body"><div class="ec-title">"咨询仅 +3%，可自由支配支出仍偏软"</div><div class="ec-note">咨询疲软是贯穿三个季度的一致主题——结构性软点，非一次性。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">指引兑现度追踪</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>历史指引</th><th>Q1 FY2026 实际 / 现状</th><th>评价</th></tr>
+      <tr><td>FY2026 营收 &gt;5% 固定汇率增长</td><td>Q1 固定汇率 +6% · 重申全年</td><td><span class="badge up">达标</span></td></tr>
+      <tr><td>FY2026 FCF 再增约 $1B（→ ~$15.7B）</td><td>Q1 官方 FCF $2.22B（+$0.3B）· 重申</td><td><span class="badge nt">在途</span></td></tr>
+      <tr><td>"软件 + 基础设施双引擎"</td><td>软件 +11% / 基础设施 +15%</td><td><span class="badge up">兑现</span></td></tr>
+      <tr><td>GenAI 签约簿累积</td><td>&gt;$12.5B（vs Q3 $9.5B / Q2 $7.5B）</td><td><span class="badge up">加速</span></td></tr>
+      <tr><td>咨询回暖（此前预期）</td><td>仍仅 +4%（固定汇率 +0.9%）</td><td><span class="badge dn">未兑现</span></td></tr>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>信号汇总</strong>：Q1 FY2026 是 IBM "<span class="hl-t">双引擎强 + 利润率扩张 + 重申指引 + Confluent 大并购</span>"的一季。软件 +11% 与基础设施 +15%（IBM Z +51%）证明转型见效、z17 周期真实。但三个季度一致的软点是<span class="warn-t">咨询疲软</span>（+0.9% cc），以及 Q1 现金被 Confluent $10.5B 付现主导、杠杆走高。<strong>业绩方向没问题——问题在估值（前瞻 23x）、资本返还结构（零回购持续稀释）和高杠杆上。</strong></p>
+  </div>
+</div>
+
+<!-- ═══ 模块 7 ═══ -->
+<div class="section">
+  <div class="stitle">模块 7 · 多模型估值（8 种方法）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">7.1 估值汇总表（独立估值 · 不锚定现价 · USD）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>估值方法</th><th>每股公允价</th><th>假设要点</th><th>权重</th></tr>
+      <tr><td>1. 相对估值（P/E）</td><td>$255</td><td>FY2026 Operating EPS $12.55 × 20.3x（软件占比提升给的溢价高于 Accenture 12x，折价于 MSFT 30x）</td><td>25%</td></tr>
+      <tr><td>2. DCF（基准）</td><td>$268</td><td>FY26 FCF $15.7B，未来 5 年 +6%，WACC 8.5%，永续 3%，减核心净负债 ~$42B</td><td>25%</td></tr>
+      <tr><td>3. 所有者盈余收益率</td><td>$255</td><td>FY26 FCF ~$15.7B / 6.2% 要求收益率（反映高杠杆 + 中速增长）</td><td>15%</td></tr>
+      <tr><td>4. PEG</td><td>$215</td><td>Forward P/E 23x ÷ EPS 增速 8% = PEG 2.9（偏贵）；给 17x 合理倍数 × $12.55</td><td>5%</td></tr>
+      <tr><td>5. DDM</td><td>$130</td><td>DPS $6.76、增长仅 ~1.5%、要求回报 8% → 股息太慢，参考意义有限</td><td>5%</td></tr>
+      <tr><td>6. NAV</td><td>不适用</td><td>非资产型公司（商誉 $74.7B + 无形 $14.6B 主导，有形净资产为负）</td><td>0%</td></tr>
+      <tr><td>7. 反向 DCF</td><td>当前价隐含 FCF 增长 <strong>~6%</strong></td><td>$289.86 隐含市场认为 FCF 长期增 ~6%——与指引/历史一致，估值合理但不打折（marker ~$270）</td><td>15%</td></tr>
+      <tr><td>8. SOTP 分部加总</td><td>$210</td><td>软件（高倍数）+ 咨询（对标 ACN 低倍数）+ 基础设施（周期）+ 融资 − 核心净负债 ~$42B</td><td>10%</td></tr>
+      <tr class="hl"><td><strong>加权公允价中位数</strong></td><td><strong>~$255</strong></td><td>估值区间 $210-268 · 中位 ~$255</td><td>100%</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.8;"><strong>与现价对照</strong>：当前 $289.86 vs 加权公允 ~$255 · <span class="warn-t">溢价约 +14%</span>——<strong>不但没有价值投资 25% 安全边际，反而在公允价之上</strong>。IBM 是一台转型见效的百年机器，但当前价格已充分（甚至略过度）反映其 AI/主机的重估。反向 DCF 显示市场已定价 ~6% 长期 FCF 增长——与指引一致，说明 23x 前瞻倍数把好消息基本兑现了。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.2 P/E 多档透视表（GAAP vs Non-GAAP 差异 + Q4 一次性税项触发）</h3>
+  <p style="margin-bottom:10px; font-size:13px; color:var(--text2);">IBM 的 GAAP 盈利被 Q4 2025 一次性税收利得（约 $4B+）抬高、且 GAAP 与 Operating EPS 差异大，单一 TTM P/E 会误导，必须多档透视：</p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>口径</th><th>EPS / 指标</th><th>P/E（基于 $289.86）</th><th>读数说明</th></tr>
+      <tr><td>TTM GAAP P/E</td><td>~$11.30</td><td>~25.7x</td><td>含 Q4 一次性税收利得 · 失真</td></tr>
+      <tr><td>TTM Operating P/E</td><td>~$11.90</td><td>~24.4x</td><td>剔一次性 · 较可信</td></tr>
+      <tr class="hl"><td><strong>Forward P/E（FY2026 共识 $12.55）</strong></td><td><strong>~$12.55</strong></td><td><strong>~23.1x</strong></td><td>最可信档 · 市场惯用</td></tr>
+      <tr><td>Forward P/E（FY2027 估 ~$13.4）</td><td>~$13.4</td><td>~21.6x</td><td>再往后一年</td></tr>
+      <tr><td>"还原一次性"GAAP P/E</td><td>~$7.0（剔 Q4 税利得）</td><td>~41x</td><td>说明一次性税项对 GAAP 的扭曲</td></tr>
+      <tr><td>P/S (TTM)</td><td>营收 ~$68.9B</td><td>~3.9x</td><td>软硬混合 · 中等</td></tr>
+      <tr><td>FCF Yield</td><td>FCF ~$15.7B</td><td>~5.8%</td><td>但净股东收益率仅 ~1.3%</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3);"><strong>最可信档</strong>：Forward P/E ~23x（FY2026）/ ~21.6x（FY2027）。同业对比：Accenture ~12x（更便宜、更慢、纯咨询）、Oracle ~24x（云驱动更快）、Microsoft ~30x（成长更快、平台更强）。<span class="hl-t">IBM 23x 的前瞻倍数已把它定价到"介于低估值咨询股与高估值云股之间"</span>——反映软件占比提升 + AI/主机顺风的重估，但对 ~8% 的 EPS 增速与薄净股东收益率而言，绝对估值已进入满价区。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.3 12 个月目标价（概率加权）</h3>
+  <div class="pgrid">
+    <div class="pbox"><div class="pl">悲观情景 · 30%</div><div class="pv pc">$228</div><div class="pn">AI 叙事降温 + 咨询持续疲软 + 倍数压缩至 18x FY26 EPS<br>距现价 -21%</div></div>
+    <div class="pbox"><div class="pl">基准情景 · 45%</div><div class="pv pf">$262</div><div class="pn">FY26 兑现 $12.55、FY27 ~$13.1 × 20x + 主机/软件顺风延续<br>距现价 -10%</div></div>
+    <div class="pbox"><div class="pl">乐观情景 · 25%</div><div class="pv ps">$315</div><div class="pn">GenAI 签约簿加速 + 咨询回暖 + FY27 EPS $13.7 × 23x 重估<br>距现价 +9%</div></div>
+  </div>
+  <p style="font-size:13px; color:var(--text2);"><strong>概率加权公允价</strong>：30%×$228 + 45%×$262 + 25%×$315 = <strong>$265</strong>。<strong>叠加 2.3% 股息 = 12 个月总回报约 -6%</strong>——<span class="warn-t">概率加权目标价低于现价，当前 $289.86 不在合理建仓窗口</span>。机械首仓价（估值中位数 $255 × 80%）= $204，需回调至 52 周低区（$212）附近才出现安全边际。</p>
+</div>
+
+<!-- ═══ 模块 8 ═══ -->
+<div class="section">
+  <div class="stitle">模块 8 · 竞争与行业分析</div>
+  <div class="cmt">
+    <p><strong>IBM 横跨三个不同格局的战场，没有单一完全可比对象</strong>：混合云/AI 软件（面对超大规模云厂商 Azure/AWS/Google + Oracle）、企业咨询（面对 Accenture/Deloitte/TCS/Infosys）、大型机（事实垄断，无对手）。取咨询龙头 Accenture、企业软件/云龙头 Oracle、平台巨头 Microsoft 作对照。</p>
+
+    <p><strong>可比同业对比（截至 2026-06/07）</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>公司</th><th>TTM P/E</th><th>Forward P/E</th><th>营收增速</th><th>角色定位</th></tr>
+        <tr class="hl"><td><strong>IBM</strong></td><td>~24.4x</td><td><strong>~23x</strong></td><td>+5~8%（FY26 指引 &gt;5% cc）</td><td>混合云 + AI + 咨询 + 主机</td></tr>
+        <tr><td>Accenture ACN</td><td>~12.8x</td><td>~12.0x</td><td>+4~6%（本币）· EPS +9~11%</td><td>IT 咨询直接对手</td></tr>
+        <tr><td>Oracle ORCL</td><td>~24x</td><td>偏高</td><td>云（OCI）驱动 · 约中双位数</td><td>企业软件/云基础设施对手</td></tr>
+        <tr><td>Microsoft MSFT</td><td>~32-34x</td><td>~30x</td><td>约 +14%</td><td>云 + 企业软件对手（估值锚，成长更快）</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:10px; font-size:12px; color:var(--text3);">IBM 估值（fwd ~23x）介于低估值咨询股 Accenture（~12x）与高估值云股 Oracle/Microsoft 之间；增速（~5-8%）低于 Oracle/Microsoft 但高于纯咨询同业。<strong>核心张力：Accenture 便宜一半却增速接近、EPS 增速更快</strong>——如果只看咨询这条腿，IBM 相对 Accenture 是贵的；IBM 的溢价完全靠"软件占比提升 + 大型机垄断 + AI 叙事"支撑。</p>
+
+    <p style="margin-top:14px;"><strong>波特五力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>新进入者：</strong>主机极低（无人能重造大型机）；云/咨询中高（超大规模厂商与外包商持续涌入）</li>
+      <li><strong>替代品：</strong>中高（公有云替代私有基础设施、SaaS 替代传统软件、AI 自动化替代部分咨询工时）</li>
+      <li><strong>供应商议价：</strong>低（技术/硬件供应链议价力弱）</li>
+      <li><strong>买家议价：</strong>主机客户低（被锁定）；咨询客户高（价格战 + 多方比价）</li>
+      <li><strong>同业竞争：</strong>软件/云/咨询均激烈；仅主机是"无竞争"孤岛</li>
+    </ul>
+
+    <p><strong>颠覆风险</strong>：最大结构性逆风是<span class="warn-t">超大规模云厂商在云与 AI 上的碾压式资本投入</span>——IBM 只能守"混合/私有/受监管行业"的差异化 niche。AI 自动化长期也可能压缩咨询工时价值。大型机是慢速结构性下行的存量市场。但这些都是 3-10 年的慢变量，短期 z17 周期与软件订阅提供了坚实的现金缓冲。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 9 ═══ -->
+<div class="section">
+  <div class="stitle">模块 9 · 技术面与 K 线分析（次要参考）</div>
+  <div class="cmt">
+    <p><strong>趋势</strong>：IBM 过去一年经历一轮显著重估，从 52 周低 $212.34 攀升至高点 $332.46，当前 $289.86 <span class="hl-t">距高点约 -13%、距低点约 +37%</span>，处于 52 周区间的中上部。这是一轮由 AI/主机叙事驱动的估值扩张，而非单纯业绩线性外推。</p>
+
+    <p><strong>关键价位</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>支撑</strong>：$270（近期整理区）/ $250（前期平台）/ $212（52 周低 · 硬支撑）</li>
+      <li><strong>阻力</strong>：$301（分析师 1 年目标价附近）/ $310（前高台阶）/ $332（52 周高）</li>
+    </ul>
+
+    <p><strong>指标信号</strong>：股价位于高位区间，卖方共识 1 年目标 $301.07 仅略高于现价，暗示<span class="warn-t">上行空间已被市场大幅定价、追涨性价比低</span>。</p>
+
+    <p><strong>注意</strong>：IBM 的核心驱动是 Forward P/E 估值 + 软件/主机增速 + GenAI 签约簿 + Confluent 整合，技术面是次要参考。价值投资者应等基本面回调（如咨询继续拖累、主机周期见顶、并购减值）到 $210-215 区间，而非在满估值追高。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 10 ═══ -->
+<div class="section">
+  <div class="stitle">模块 10 · 增长催化剂与前景展望</div>
+  <div class="cmt">
+    <p><strong>短期催化剂（未来 6 个月）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>2026-07-22 Q2 FY2026 财报</strong>——z17 主机周期持续性、GenAI 签约簿增速、咨询是否回暖、FCF 指引兑现</li>
+      <li><strong>Confluent 整合进展</strong>——数据流平台并入 watsonx 数据栈的变现节奏 + 是否推高软件增速</li>
+      <li><strong>GenAI 签约簿</strong>——&gt;$12.5B 累计签约的软件/咨询转化率</li>
+      <li><strong>是否重启回购</strong>——若管理层表态恢复自主回购，是资本返还结构的重要改善信号</li>
+    </ul>
+
+    <p><strong>长期展望（3-5 年）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>软件占比持续提升</strong>——Red Hat + 自动化 + Data + watsonx 把利润结构往高毛利、高粘性挪，是估值中枢上移的核心</li>
+      <li><strong>企业级混合 AI 平台</strong>——押注"受监管行业 + 私有/混合部署"的差异化 AI 需求，避开与超大规模厂商正面拼公有云</li>
+      <li><strong>大型机现代化</strong>——z17 及后续机型 + 大机软件订阅，把存量优势延续为稳定现金牛</li>
+      <li><strong>风险情景</strong>：咨询长期疲软 / 主机周期见顶 / 并购整合不及预期或减值 / 超大规模厂商挤压混合云空间</li>
+    </ul>
+
+    <p><strong>TAM 展望</strong>：混合云 + 企业 AI + 数据现代化的可寻址市场巨大，但 IBM 只能拿其中"混合/私有/受监管"的一块，且要与超大规模厂商与咨询同业分食。增长的空间不缺，缺的是"IBM 能否守住并扩大自己那一份"的确定性。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 11 ═══ -->
+<div class="section">
+  <div class="stitle">模块 11 · 风险矩阵</div>
+  <div class="risk-grid">
+    <div class="risk-card r4"><h5>1. 咨询疲软 / 宏观 IT 支出</h5><span class="risk-score">4 / 5 高</span><p>咨询仅 +0.9%（固定汇率），是三个季度一致软点 · 直面 Accenture/外包低价竞争 · 企业可自由支配 IT 预算收紧直接拖累整体增速天花板</p></div>
+    <div class="risk-card r4"><h5>2. 满估值无安全边际</h5><span class="risk-score">4 / 5 高</span><p>Forward P/E ~23x / 概率加权目标价 $265 低于现价 · 溢价约 +14% vs 公允 ~$255 · 任何增速放缓或 AI 叙事降温都可能触发倍数压缩</p></div>
+    <div class="risk-card r3"><h5>3. 高杠杆 + 大额并购</h5><span class="risk-score">3 / 5 中</span><p>净负债 -$54.5B · 商誉 $74.7B + 无形 $14.6B 占总资产 ~57% · Confluent $10.5B 整合与减值风险 · 利率上行下再融资成本敏感</p></div>
+    <div class="risk-card r3"><h5>4. 大型机周期性</h5><span class="risk-score">3 / 5 中</span><p>IBM Z +51% 是 z17 换机周期驱动，属周期高点 · 周期回落后 Infrastructure 增速会显著下滑 · Infrastructure Support 已 -2%（存量维护在缩）</p></div>
+    <div class="risk-card r3"><h5>5. 超大规模厂商挤压</h5><span class="risk-score">3 / 5 中</span><p>Azure/AWS/Google 在云与 AI 上碾压式投入 · IBM 只能守混合/私有 niche · AI 自动化长期或压缩咨询工时价值</p></div>
+    <div class="risk-card r2"><h5>6. 零回购 + 持续稀释</h5><span class="risk-score">2 / 5 低中</span><p>公开市场回购为 $0，股数以 ~1%/年稀释 · 净股东收益率仅 ~1.3%（2.3% 股息 − 1% 稀释）· 回报几乎全靠生意增长</p></div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>3 个黑天鹅情景</strong>：</p>
+    <ol style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>AI 资本开支泡沫破裂 + 叙事降温</strong>——概率 15% · 前瞻倍数压缩至 15x → 股价跌至 $190 · IBM 的重估被打回原形</li>
+      <li><strong>咨询深度衰退 + 大额商誉减值</strong>——概率 10% · 若 Confluent/近年并购整合失败触发减值，叠加咨询滑坡 · 股价跌至 $200 以下</li>
+      <li><strong>主机周期急速见顶</strong>——概率 10% · z17 换机潮提前退潮，Infrastructure 从 +15% 转负 · 拖累整体增速与情绪</li>
+    </ol>
+
+    <p style="margin-top:10px;"><strong>下行支撑</strong>：连续 31 年增息 + FY26 FCF ~$15.7B + 大型机/关键任务软件宽护城河构成质量底。<span class="hl-t">$210-215 是较硬的估值底</span>（52 周低 $212 + FCF 支撑 + ~2.3% 股息在低位提供保护）。但要清楚：IBM 的"底"没有那么高，因为它相对 Accenture 一倍的估值溢价本身就是可被证伪的。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 12 ═══ -->
+<div class="section">
+  <div class="stitle">模块 12 · 股东回报分析</div>
+  <div class="cmt">
+    <p><strong>IBM 是一个"重股息、零回购、还在稀释"的另类资本返还样本——恰好与多数科技股"缩股增厚 EPS"的路径相反。</strong>要把"授权""执行""稀释"三件事分开看，才能算清股东真实拿到多少。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 18px 0 10px; font-family: 'Segoe UI',sans-serif;">12.1 公司给了股东多少？</h3>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>年度</th><th>现金股息总额</th><th>每股股息（年化）</th><th>公开市场回购</th><th>股东总回报</th><th>说明</th></tr>
+        <tr><td>FY2023</td><td>$6,040M</td><td>~$6.60</td><td>$0</td><td><strong>$6.04B</strong></td><td>仅股息</td></tr>
+        <tr><td>FY2024</td><td>$6,147M</td><td>~$6.68</td><td>$0</td><td><strong>$6.15B</strong></td><td>仅股息</td></tr>
+        <tr><td>FY2025</td><td>$6,255M</td><td>~$6.72</td><td>$0</td><td><strong>$6.26B</strong></td><td>仅股息</td></tr>
+        <tr class="hl"><td><strong>3 年合计</strong></td><td><strong>$18,442M</strong></td><td>—</td><td><strong>$0</strong></td><td><strong>$18.44B</strong></td><td>回购三年为零</td></tr>
+      </table>
+    </div>
+    <p style="font-size:13px; color: var(--text2); margin-top:8px"><strong>Trailing Shareholder Yield</strong> ≈ FY2025 返还 $6.26B（全为股息）/ 市值 ~$271B ≈ <strong>2.3%</strong>——<span class="warn-t">全部来自股息，回购贡献为 0</span>。派息率：股息 $6.26B / FY25 GAAP 净利 $10.6B ≈ 59%（但 GAAP 净利含一次性税利得，失真）；更稳的口径是股息 / FCF $14.7B ≈ 43%——派息占 FCF 不到一半，股息本身可持续，但公司选择把另一半 FCF 用于降杠杆与并购，而非回购。Q1 2026 股息升至 $1.69/季（年化 ~$6.76）。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.2 给的方式好不好？</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><span class="warn-t">摊薄股数不降反升——回购缺席被 SBC 稀释拖累</span>：加权摊薄股数 FY2023 911.2M → FY2024 921.8M → FY2025 932.3M → Q1 2026 <strong>952.1M</strong>，年年上升约 1%。这是股东回报质量最硬的证据：<strong>没有回购接盘，股权激励每年稀释每股价值</strong>。与"注销缩股增厚 EPS"的美股典范完全相反</li>
+      <li><strong>股息含金量高但增速极慢</strong>：连续 31 年增息、自 1916 年从未间断，是稳定性顶级的股息贵族；但近期增幅极小（$1.68→$1.69，仅 +0.6%），象征意义大于实质回报</li>
+      <li><strong>残余回购授权基本休眠</strong>：约 $1.4B 残余授权自 2021 年 10 月授权后基本未动用——"授权 ≠ 执行"的典型，管理层明确优先股息与降杠杆，未表态重启大规模回购</li>
+    </ul>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.3 能不能继续给、给多少？</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>股息可持续</strong>：股息 / FCF ≈ 43%，覆盖充分；FY26 FCF 指引 ~$15.7B（再增约 $1B），股息继续温和增长（每年小幅提升）几无压力</li>
+      <li><strong>回购前景不明</strong>：残余授权仅 $1.4B（约占市值 0.5%）· 管理层资本返还优先级明确为"<strong>股息 &gt; 降杠杆 &gt; 并购 &gt; 回购</strong>"，短期看不到大规模自主回购重启的迹象</li>
+      <li><strong>(股息 + 回购) / FCF 覆盖度</strong>：FY2025 $6.26B / $14.7B ≈ 43%——远低于 100%，返还本身极可持续；但这也说明<span class="hl-t">IBM 有充足 FCF 却选择不回购</span>，把钱用于降杠杆（净负债 $54.5B 需要压降）与并购（Confluent $10.5B）</li>
+      <li><strong>不是借债回购</strong>：债务上升源于 Confluent 并购而非回购；杠杆用于成长而非返还——性质与"借钱回购推 EPS"不同</li>
+    </ul>
+    <p><strong>模块小结</strong>：<span class="warn-t">积极但含金量打折——重股息、零回购、持续稀释</span>。IBM 是稳定性顶级的股息贵族（连续 31 年增息、自 1916 年派息），但股息增速极慢（+0.6%）、公开回购三年为零、摊薄股数以 ~1%/年上升，净股东收益率仅约 1.3%（2.3% 股息 − 1% 稀释）。它的资本返还纪律在"稳定"上得分高、在"含金量与增厚每股价值"上得分低——股东的回报几乎必须全部来自生意本身增长，而非现金返还。这一定性直接压制评分卡第 5 维「资本配置纪律」。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 13 ═══ -->
+<div class="section">
+  <div class="stitle">模块 13 · 海图评分卡 + 投资决策</div>
+
+  <div class="scorecard">
+    <h3 style="font-size:15px; color:var(--text); margin-bottom: 16px; font-family: 'Segoe UI',sans-serif;">海图评分卡（6 维 A-D）</h3>
+    <div class="score-grid">
+      <div class="score-card"><div class="score-letter s-b">B</div><div class="score-body"><h4>1. 生意可预测性</h4><p>软件订阅 + 大机可见度较高，但咨询随宏观波动、主机有换机周期性、GAAP 盈利被一次性税项/并购扰动。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">B+</div><div class="score-body"><h4>2. 经济护城河</h4><p>大型机 + 关键任务软件转换成本极宽、品牌/专利无形资产宽；但咨询无护城河、混合云受超大规模厂商压制。分层护城河。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">B+</div><div class="score-body"><h4>3. 管理层质量</h4><p>Krishna 转型成功（增速回升、mix 改善、Red Hat 押注兑现）；但零回购 + 微增息 + 持续稀释是资本返还短板。</p></div></div>
+      <div class="score-card"><div class="score-letter s-b">B</div><div class="score-body"><h4>4. 财务质量</h4><p>FCF 强（FY26 ~$15.7B）、软件毛利 82.8%；但净负债 -$54.5B、杠杆 4.7x、商誉占总资产近半、ROE 靠杠杆。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bm">B-</div><div class="score-body"><h4>5. 资本配置纪律</h4><p>连续 31 年增息 + 纪律性并购（Red Hat 成功）；但公开回购三年为零 + ~1%/年稀释 + 微增息 + Confluent 推高杠杆。</p></div></div>
+      <div class="score-card"><div class="score-letter s-c">C</div><div class="score-body"><h4>6. 估值与安全边际</h4><p>Forward P/E ~23x / 概率加权目标价 $265 &lt; 现价 · 溢价约 +14% vs 公允 ~$255 · <strong>无安全边际，已在满价之上</strong>。</p></div></div>
+    </div>
+
+    <div class="flag-row">
+      <strong>红旗排查</strong>：会计层面——Q4 2025 一次性税务审计和解利得（约 $4B+）夸大 GAAP 盈利（<strong>已充分披露，非造假，但读 GAAP EPS 须还原</strong>）；商誉大幅升至 $74.7B（占总资产近半，Confluent 等并购整合不佳存<strong>减值风险</strong>）；股权激励持续稀释。这些属"<span class="warn-t">需留意</span>"而非严重会计疑点。真正的降级因子是<strong>估值维度 C（目标价低于现价、无安全边际）</strong>——尽管 6 维基础质量不差（2 个 B+），综合评级<strong>降至「持有观望」</strong>。
+    </div>
+
+    <p style="margin-top:18px; font-size:14px; color:var(--text); line-height:1.85;"><strong>综合评级</strong>：<span class="rating-badge rating-hold" style="font-size:14px;">持有观望</span>。IBM 是一台转型见效、护城河在大型机与关键任务软件上很宽、FCF 强劲的百年机器，但估值维度 C（前瞻 23x、目标价低于现价）+ 资本返还含金量打折（零回购 + 持续稀释）→ 降至持有观望。核心判断：<strong>IBM 的生意在变好，但当前 $289.86 已在独立公允价 ~$255 之上约 14%，没有安全边际——现有持仓者可持有收息，新买入者应等回调至 $210-215 附近再建仓。</strong></p>
+  </div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">投资决策（精确价格 · USD）</h3>
+
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>项目</th><th>价格</th><th>说明</th></tr>
+      <tr><td>12 个月概率加权目标价</td><td><strong>$265</strong> (-9%)</td><td>FY26 兑现 + FY27 ~$13.1 × 20x</td></tr>
+      <tr><td>悲观目标（30% 概率）</td><td>$228 (-21%)</td><td>AI 降温 + 咨询疲软 + 18x 压缩</td></tr>
+      <tr><td>乐观目标（25% 概率）</td><td>$315 (+9%)</td><td>GenAI 加速 + 咨询回暖 + 23x 重估</td></tr>
+      <tr class="hl"><td>首仓建仓（估值中位数 $255 × 80%）</td><td><strong>$204</strong></td><td>距现价 -30% · 耐心等回调至 52 周低区</td></tr>
+      <tr><td>二仓建仓（× 70%）</td><td>$179</td><td>-38% · 大幅回调机会</td></tr>
+      <tr><td>三仓建仓（× 60%）</td><td>$153</td><td>-47% · 黑天鹅级机会</td></tr>
+      <tr><td>止盈一档</td><td>$310</td><td>+7% · 减仓 25%</td></tr>
+      <tr><td>止盈二档</td><td>$340</td><td>+17% · 再减 25%</td></tr>
+      <tr><td>止盈三档</td><td>$370</td><td>+28% · 再减 25% · 最后 25% 长期持有</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.85;"><strong>建议总仓位</strong>：<strong>2-4%</strong>（观察仓 · 当前满估值不建仓，回调至安全边际再分批介入）。<strong>持有周期</strong>：3-5 年（穿越 z17 主机周期 + Confluent 整合 + AI 变现）。<strong>关键监控指标</strong>：① 咨询能否回暖（固定汇率转正）；② GenAI 签约簿增速；③ 是否重启公开市场回购（资本返还结构改善信号）；④ z17 主机周期持续性 + Infrastructure Support 趋势；⑤ 商誉/无形是否减值；⑥ Forward P/E 是否回落至 18x 以下（估值机会）。<strong>下次催化剂</strong>：2026-07-22 Q2 FY2026 财报。</p>
+</div>
+
+<!-- ═══ 海图页末长评 ═══ -->
+<div class="section">
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记 · 1150 字</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p class="lead">科技史上没有第二家公司像 IBM 这样，把自己拆了又拼、拼了又拆，活过了整整一个世纪。1916 年就开始派息，31 年连续增息，见过大型机的黄金年代、也差点在云时代掉队。如今它带着 z17 主机的强周期和一份超过 $125 亿的生成式 AI 签约簿，重新站到了聚光灯下——市场给了它 23 倍前瞻市盈率，是十年来最贵的估值。问题从来不在生意有没有变好，而在于：这个价格，还留了多少安全边际？</p>
+
+      <p>今天的 IBM 是一家"混合云软件 + 企业咨询 + 大型主机 + 融资租赁"四位一体的百年企业——靠 Red Hat 的开源订阅、银行政府离不开的大型机、以及 watsonx 的 AI 栈赚钱。Q1 FY2026 营收 $15.9B（+9%，固定汇率 +6%）· Operating EPS $1.91（+19%）· Operating 税前利润率扩张 140bps 至 13.4%——这是一份转型见效的季报。</p>
+
+      <h4>几个研判要点</h4>
+
+      <p><strong>一、双引擎强，一条软腿弱。</strong> 软件 +11%（Red Hat +13%、Data +19%、Automation +10%）与基础设施 +15%（<span class="hl-t">IBM Z 主机 +51%，z17 换机周期</span>）两台发动机全速运转；但咨询仅 +4%、固定汇率只有 +0.9%——这是 IBM 里最没有护城河、最随企业可自由支配 IT 支出摆动的一层，直接对标 Accenture，是整体增速的天花板，也是连续三个季度一致的软点。</p>
+
+      <p><strong>二、Confluent 是 $105 亿的大赌注。</strong> Q1 付现约 $10.5B 收购数据流平台，商誉一次涨约 $70 亿到 $747 亿、债务增 $51 亿、现金降 $26 亿。这是 Krishna "以并购换增长"策略的又一步——赌 AI 时代的数据管道，但也把杠杆推得更高。<span class="hl-t">Red Hat 事后看很成功，Confluent 能否复制，是未来两年的关键观察点</span>，也埋下了商誉减值的尾部风险。</p>
+
+      <p><strong>三、别把 IBM 当"现金堡垒"——它是净负债 -$54.5B。</strong> 现金 + 有价证券 $11.8B、总有息负债 $66.4B。剔除自偿性的 Financing 债务 $12.8B 后，核心净负债仍约 -$41.7B。这是 Red Hat / HashiCorp / Confluent 系列大额并购的代价。养老金一侧倒是加分项（预付养老金资产 $7.6B，超额充足），但整体杠杆（权益乘数 4.7x）不低。</p>
+
+      <p><strong>四、股东回报是"重股息、零回购、还在稀释"。</strong> 连续 31 年增息（季度升到 $1.69），是稳定性顶级的股息贵族；<span class="warn-t">但过去三年公开市场回购实质为 $0，摊薄股数反而以约 1%/年上升</span>（股权激励稀释）。净股东收益率其实很薄——约 2.3% 股息减去 1% 稀释，只剩 1.3%。这与多数科技股"缩股增厚 EPS"的路径完全相反：IBM 股东的回报，几乎必须全部来自生意本身增长。</p>
+
+      <p><strong>五、独立估值 ~$255，现价 $289.86 在它之上约 14%。</strong> 我用相对估值、DCF、所有者盈余、SOTP 等八种方法交叉，加权公允价中位数约 $255；反向 DCF 显示当前价已隐含 ~6% 的长期 FCF 增长，与公司指引一致。也就是说，市场把 AI/主机的好消息基本兑现了。12 个月概率加权目标价 $265，低于现价——<strong>没有安全边际。</strong></p>
+
+      <h4>海图研判</h4>
+
+      <p><strong>评级：持有观望</strong>（转型见效的百年机器 + 大型机/关键任务软件宽护城河 + 强 FCF 的组合，对垒咨询无护城河 + 零回购持续稀释 + 净负债 $54.5B + 前瞻 23x 满估值无安全边际）。12 个月概率加权目标价 <strong>$265</strong>（-9%），叠加 2.3% 股息，12 个月总回报约 -6%。</p>
+
+      <p>操作建议：当前 $289.86 已在独立公允价之上，<strong>不在合理建仓窗口</strong>。耐心等回调——机械首仓价（估值中位数 $255 × 80%）= $204，接近 52 周低 $212 附近才出现安全边际；二仓 $179、三仓 $153。止盈三档 $310 / $340 / $370，最后 25% 长期持有。<strong>建议总仓位 2-4%</strong>（观察仓 · 回调时分批介入，不追高）。持有周期 3-5 年。<span class="hl-t">关键纪律：现有持仓者可持有收息，新买入者必须等价格给出安全边际——好生意也要好价格，尤其当这门好生意的回报还得几乎全靠自身增长。</span></p>
+
+      <h4>风险提示</h4>
+
+      <p>咨询持续疲软 / 主机周期见顶回落 / 大额并购整合不及预期或商誉减值 / 满估值下的多重压缩 / 高杠杆下利率或再融资压力——任一项都可能让股价回到 $210-228 区间，极端情形（AI 叙事破裂、倍数压至 15x）可至 $190。但连续 31 年增息 + FY26 FCF ~$15.7B + 大型机宽护城河构成质量底，<strong>$210-215 是较硬的估值底</strong>（52 周低 $212 + FCF 支撑）。只是要清楚：IBM 相对 Accenture 一倍的估值溢价本身就是可被证伪的。</p>
+
+      <p>关键叙事：<strong>一家"混合云软件 + AI + 主机 + 咨询"的百年转型企业，护城河在大型机与关键任务软件上很宽、FCF 强劲，对垒"前瞻 23x 满估值无安全边际 + 咨询无护城河 + 零回购且持续稀释 + 净负债 $54.5B"的估值与结构性弱点</strong>。好生意，但这一次，市场先给了掌声。下次催化剂：2026-07-22 Q2 FY2026 财报。</p>
+
+      <p class="haitu-sign">—— 海图，灯下落笔，明日再观风浪。</p>
+
+      <p class="haitu-disc">⚠️ 免责声明：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，不构成任何投资建议。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div>《海图夜读》 · IBM IBM Q1 FY2026（截至2026年3月31日） 海图研判</div>
+  <div style="margin-top:6px;">发布日 2026-04-22 · 研判日 2026-07-11 · 数据来源 IBM Q1 FY2026 官方财报（SEC 8-K EX-99.1 + newsroom / PR Newswire 新闻稿）+ FY2025 全年数据 + 电话会 transcript</div>
+</footer>
+
+<script>
+let curTheme = 'light';
+function toggleTheme() {
+  curTheme = curTheme === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', curTheme);
+  renderCharts();
+}
+
+const palette = {
+  light: { accent: '#8a9a8e', accent2: '#7b8fa0', accent3: '#b08d7a', gold: '#b9a06a', red: '#b87070', green: '#7a9a7a', grid: '#e5ddd5', text: '#7a706a' },
+  dark:  { accent: '#8a9a8e', accent2: '#8fabbf', accent3: '#c9a48e', gold: '#c9b07a', red: '#c08080', green: '#8aaa8a', grid: '#3e3a35', text: '#a09890' }
+};
+
+let charts = {};
+function renderCharts() {
+  Object.values(charts).forEach(c => c && c.destroy && c.destroy());
+  charts = {};
+  const p = palette[curTheme];
+  Chart.defaults.color = p.text;
+  Chart.defaults.borderColor = p.grid;
+
+  const quarters = ['Q1 25','Q2 25','Q3 25','Q4 25','Q1 26'];
+  const rev = [14.54, 16.98, 16.33, 19.69, 15.92];
+  const yoy = [1, 8, 9, 12, 9];
+  charts.rev = new Chart(document.getElementById('chartRev'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { type:'bar', label: '营收 ($B)', data: rev, backgroundColor: p.accent + 'CC', yAxisID: 'y' },
+      { type: 'line', label: 'YoY %', data: yoy, borderColor: p.red, backgroundColor: p.red, tension: 0.3, yAxisID: 'y1' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false }, y1: { position: 'right', grid: { drawOnChartArea: false }, ticks: { callback: v => v + '%' } } } }
+  });
+
+  charts.margin = new Chart(document.getElementById('chartMargin'), {
+    type: 'line',
+    data: { labels: quarters, datasets: [
+      { label: 'GAAP 毛利率 %', data: [55.2, 58.8, 57.3, 60.6, 56.2], borderColor: p.accent2, backgroundColor: p.accent2 + '22', tension: 0.3, fill: false },
+      { label: 'Operating 税前利润率 %', data: [12, 18.8, 18.6, 24.1, 13.4], borderColor: p.accent3, backgroundColor: p.accent3 + '22', tension: 0.3, fill: false }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false, ticks: { callback: v => v + '%' } } } }
+  });
+
+  charts.segment = new Chart(document.getElementById('chartSegment'), {
+    type: 'doughnut',
+    data: {
+      labels: ['软件', '咨询', '基础设施', '融资', '其他'],
+      datasets: [{ data: [7.05, 5.27, 3.33, 0.22, 0.05], backgroundColor: [p.accent, p.accent2, p.accent3, p.gold, p.grid] }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { font: { size: 11 } } } } }
+  });
+
+  charts.eps = new Chart(document.getElementById('chartEps'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { label: 'GAAP 摊薄 EPS ($)', data: [1.12, 2.31, 1.84, 5.86, 1.28], backgroundColor: p.accent2 + 'CC' },
+      { label: 'Operating EPS ($)', data: [1.60, 2.80, 2.65, 4.52, 1.91], backgroundColor: p.green + 'CC' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true } } }
+  });
+
+  buildSankey();
+}
+
+function buildSankey() {
+  const p = palette[curTheme];
+  const labels = ['总营收 $15.92','营业成本 $6.97','毛利 $8.95','销售管理 $5.09','研发 $2.17','其他&利息 $0.30','税前利润 $1.39','所得税 $0.17','GAAP 净利 $1.22'];
+  const data = {
+    type: 'sankey',
+    orientation: 'h',
+    node: { pad: 15, thickness: 20, line: { color: p.grid, width: 0.5 }, label: labels, color: [p.accent, p.red, p.green, p.red, p.accent2, p.red, p.green, p.red, p.green] },
+    link: {
+      source: [0, 0, 2, 2, 2, 2, 6, 6],
+      target: [1, 2, 3, 4, 5, 6, 7, 8],
+      value:  [6.97, 8.95, 5.09, 2.17, 0.30, 1.39, 0.17, 1.22],
+      color: [p.red+'55', p.green+'66', p.red+'44', p.accent2+'44', p.red+'44', p.green+'55', p.red+'55', p.green+'66']
+    }
+  };
+  const layout = { font: { size: 12, color: p.text }, paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)', margin: { l: 10, r: 10, t: 10, b: 10 } };
+  Plotly.react('sankey', [data], layout, { displayModeBar: false, responsive: true });
+}
+
+renderCharts();
+</script>
+
+</body>
+</html>

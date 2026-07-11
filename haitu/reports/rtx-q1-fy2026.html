@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-07-10 · RTX Corporation Q1 2026 财报已于 2026-04-21 发布 -->
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RTX Corporation RTX Q1 2026 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+<meta name="description" content="全球最大航空航天与国防集团之一——Collins（航电/机电）+ Pratt（发动机）踩商用航空，Raytheon（导弹/防空）踩国防。Q1 2026 有机增长 +10% + 调整后 EPS $1.78（+21%）+ 创纪录订单 $271B（+25%）+ 连续 6+ 季度分部利润率扩张并上调全年指引。但净负债 $30.6B + Pratt 利润率仅 8.7% 受粉末金属拖累 + Q1 已缴 $500M 关税 + Forward P/E 28x 无安全边际——世界级订单簿，价格已充分定价。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RTX Corporation RTX Q1 2026 海图研判 · 海图夜读">
+<meta property="og:description" content="全球最大航空航天与国防集团之一——Collins + Pratt 踩商用航空，Raytheon 踩国防。Q1 2026 有机 +10% + 调整后 EPS $1.78（+21%）+ 创纪录订单 $271B（+25%）+ 上调全年指引。但净负债 $30.6B + Pratt 粉末金属拖累 + Forward P/E 28x 无安全边际——世界级订单簿，价格已充分定价。">
+<meta property="og:url" content="https://jacexie.github.io/haitu/reports/rtx-q1-fy2026.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RTX Corporation RTX Q1 2026 海图研判 · 海图夜读">
+<meta name="twitter:description" content="全球最大航空航天与国防集团之一。有机 +10% + 调整后 EPS $1.78（+21%）+ 创纪录订单 $271B（+25%）。但净负债 $30.6B + Pratt 粉末金属拖累 + Forward P/E 28x 无安全边际——世界级订单簿，价格已充分定价。">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root { --bg:#f5f0eb; --bg2:#ece6df; --card:#ffffff; --card2:#f8f5f1; --border:#d9d0c7; --text:#4a4340; --text2:#7a706a; --text3:#a89f98; --accent:#8a9a8e; --accent2:#7b8fa0; --accent3:#b08d7a; --rose:#c09090; --gold:#b9a06a; --red:#b87070; --green:#7a9a7a; --shadow:rgba(0,0,0,0.06); --chart-grid:#e5ddd5; }
+[data-theme="dark"] { --bg:#1e1c1a; --bg2:#28251f; --card:#2e2a25; --card2:#363230; --border:#4a4540; --text:#d4ccc4; --text2:#a09890; --text3:#706860; --accent:#8a9a8e; --accent2:#8fabbf; --accent3:#c9a48e; --rose:#c09090; --gold:#c9b07a; --red:#c08080; --green:#8aaa8a; --shadow:rgba(0,0,0,0.3); --chart-grid:#3e3a35; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', serif; line-height: 1.75; font-size: 14.5px; transition: background .35s, color .35s; }
+a { color: var(--accent2); text-decoration: none; }
+.theme-bar { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); }
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+.toggle-switch { position: relative; width: 44px; height: 22px; background: var(--border); border-radius: 11px; cursor: pointer; transition: background .3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: var(--card); border-radius: 50%; transition: transform .3s; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+
+.hero { padding: 48px 24px 36px; text-align: center; border-bottom: 1px solid var(--border); }
+.hero-tag { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 3px 14px; border-radius: 20px; margin-bottom: 18px; }
+.hero h1 { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.pill { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: 'Segoe UI', sans-serif; font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow); }
+.pill strong { color: var(--text); }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle { font-size: 18px; font-weight: 700; color: var(--accent3); margin-bottom: 20px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+.stitle::before { content: ''; display: block; width: 4px; height: 20px; background: var(--accent3); border-radius: 2px; }
+
+.haitu-quip { display: flex; align-items: center; gap: 18px; background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 18px 24px; margin: 24px 0; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-quote { flex: 1; }
+.haitu-portrait { font-size: 15px; line-height: 1.65; color: var(--text); margin-bottom: 6px; font-weight: 600; }
+.haitu-rating-line { font-size: 13px; color: var(--text2); font-family: 'Segoe UI', sans-serif; }
+.rating-badge { display: inline-block; padding: 2px 12px; border-radius: 12px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; margin-left: 4px; }
+.rating-hold { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+
+.haitu-essay { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 28px 32px; margin: 24px 0 20px; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-essay-header { display: flex; align-items: center; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.haitu-avatar-sm { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); background: var(--red); box-shadow: 0 2px 8px rgba(184,112,112,0.2); }
+.haitu-name-lg { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 28px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 4px; }
+.haitu-essay-tag { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; }
+.haitu-essay-body { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 15px; line-height: 2.0; color: var(--text); }
+.haitu-essay-body p { margin-bottom: 14px; }
+.haitu-essay-body p.lead { font-size: 16px; font-style: italic; color: var(--text2); margin-bottom: 18px; }
+.haitu-essay-body strong { color: var(--text); font-weight: 700; }
+.haitu-essay-body h4 { font-size: 14px; color: var(--accent3); margin: 18px 0 10px; font-family: 'Segoe UI', sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+.haitu-sign { text-align: right; margin-top: 18px; font-family: 'Georgia', serif; font-size: 14px; color: var(--text2); font-style: italic; }
+.haitu-disc { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); font-style: italic; line-height: 1.7; }
+
+.stock-snap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px; }
+.snap-item { text-align: center; }
+.snap-label { font-family: 'Segoe UI', sans-serif; font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.snap-val { font-family: 'Segoe UI', sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+.snap-val.up { color: var(--green); }
+.snap-val.dn { color: var(--red); }
+.snap-sub { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow); }
+.kpi-l { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.badge { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+.up { background: rgba(122,154,122,.15); color: var(--green); }
+.dn { background: rgba(184,112,112,.15); color: var(--red); }
+.nt { background: rgba(123,143,160,.15); color: var(--accent2); }
+
+.tbl-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow); }
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI', sans-serif; font-size: 13px; }
+.tbl th { background: var(--card2); color: var(--text3); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); background: var(--card2); }
+
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); }
+.ctitle { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 260px; }
+
+.cmt { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 26px; line-height: 1.95; font-size: 14px; box-shadow: 0 1px 4px var(--shadow); color: var(--text); }
+.cmt p { margin-bottom: 14px; }
+.cmt p:last-child { margin-bottom: 0; }
+.cmt strong { color: var(--text); }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+
+.bscore { display: flex; align-items: center; gap: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; margin-bottom: 12px; box-shadow: 0 1px 4px var(--shadow); }
+.circle { width: 62px; height: 62px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; flex-shrink: 0; border: 3px solid; font-family: 'Segoe UI', sans-serif; }
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 4px; color: var(--text); }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.moat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+.moat-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); border-left: 4px solid var(--accent); }
+.moat-card.wide { border-left-color: var(--green); }
+.moat-card.narrow { border-left-color: var(--gold); }
+.moat-card.none { border-left-color: var(--red); }
+.moat-card h5 { font-size: 13px; color: var(--text); margin-bottom: 6px; }
+.moat-card .moat-rate { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.moat-card.wide .moat-rate { background: rgba(122,154,122,.18); color: var(--green); }
+.moat-card.narrow .moat-rate { background: rgba(185,160,106,.18); color: var(--gold); }
+.moat-card.none .moat-rate { background: rgba(184,112,112,.18); color: var(--red); }
+.moat-card p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+
+.ec-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 14px; box-shadow: 0 1px 3px var(--shadow); }
+.ec-badge { flex-shrink: 0; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-top: 2px; font-family: 'Segoe UI', sans-serif; }
+.ec-bull { background: rgba(122,154,122,.18); color: var(--green); }
+.ec-bear { background: rgba(184,112,112,.18); color: var(--red); }
+.ec-neut { background: rgba(185,160,106,.18); color: var(--gold); }
+.ec-body { flex: 1; }
+.ec-title { font-weight: 600; color: var(--text); margin-bottom: 3px; font-size: 14px; }
+.ec-note { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.dcf-note { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.dcf-note strong { color: var(--text); }
+
+.scorecard { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow); }
+.score-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.score-card { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px; }
+.score-letter { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Segoe UI', sans-serif; font-weight: 800; font-size: 22px; flex-shrink: 0; border: 3px solid; }
+.s-a { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.12); }
+.s-bp { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.06); }
+.s-b { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.10); }
+.s-bm { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.06); }
+.s-c { color: var(--red); border-color: var(--red); background: rgba(184,112,112,.08); }
+.score-body h4 { font-size: 13px; color: var(--text); margin-bottom: 4px; }
+.score-body p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+.flag-row { margin-top: 16px; padding: 12px 16px; background: rgba(184,112,112,.08); border: 1px solid rgba(184,112,112,.3); border-radius: 8px; font-size: 13px; color: var(--text2); }
+.flag-row strong { color: var(--red); }
+
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center; box-shadow: 0 1px 4px var(--shadow); }
+.pbox .pl { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; }
+.pbox .pv { font-family: 'Segoe UI', sans-serif; font-size: 28px; font-weight: 800; margin-bottom: 5px; }
+.pbox .pn { font-size: 12px; color: var(--text3); line-height: 1.5; }
+.pc { color: var(--red); } .pf { color: var(--gold); } .ps { color: var(--green); }
+
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.risk-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); position: relative; overflow: hidden; }
+.risk-card::before { content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent); }
+.risk-card.r1::before { background: var(--green); }
+.risk-card.r2::before { background: rgba(122,154,122,.6); }
+.risk-card.r3::before { background: var(--gold); }
+.risk-card.r4::before { background: var(--rose); }
+.risk-card.r5::before { background: var(--red); }
+.risk-card h5 { font-size: 14px; margin-bottom: 6px; color: var(--text); }
+.risk-score { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.r1 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r2 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r3 .risk-score { background: rgba(185,160,106,.18); color: var(--gold); }
+.r4 .risk-score { background: rgba(192,144,144,.18); color: var(--rose); }
+.r5 .risk-score { background: rgba(184,112,112,.18); color: var(--red); }
+.risk-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+footer { background: var(--card2); border-top: 1px solid var(--border); padding: 24px; text-align: center; color: var(--text3); font-size: 12px; margin-top: 40px; line-height: 1.8; }
+@media (max-width: 768px) { .cgrid,.pgrid { grid-template-columns: 1fr; } .hero h1 { font-size: 22px; } .kpi-grid { grid-template-columns: 1fr 1fr; } .stock-snap { grid-template-columns: 1fr 1fr; } .haitu-essay-header { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/RTX" target="_blank" rel="noopener" title="在雪球查看 RTX 实时行情">雪球 RTX</a>
+  </div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">Q1 2026 财报发布 · 2026-04-21 &nbsp;|&nbsp; 海图研判 · 2026-07-11</div>
+  <h1>RTX Corporation · 2026 Q1 财报深度分析</h1>
+  <div class="hero-sub">NYSE: RTX &nbsp;|&nbsp; 财季截至 2026-03-31 &nbsp;|&nbsp; 价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill">股价 <strong>$193.24</strong> <span style="color:var(--red)">距高点 -10%</span></div>
+    <div class="pill">市值 <strong>$261B</strong></div>
+    <div class="pill">Q1 净销售 <strong>$22.08B</strong> <span style="color:var(--green)">+9%（有机 +10%）</span></div>
+    <div class="pill">调整后 EPS <strong>$1.78</strong> <span style="color:var(--green)">+21%</span></div>
+    <div class="pill">订单簿 <strong>$271B</strong> <span style="color:var(--green)">+25%</span></div>
+    <div class="pill">Forward P/E <strong>~28x</strong> <span style="color:var(--gold)">无安全边际</span></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 海图页首短评 ═══ -->
+<div class="haitu-quip">
+  <div class="haitu-quote">
+    <div class="haitu-portrait">全球最大航空航天与国防集团之一——Collins（航电/机电）+ Pratt（发动机）两条腿踩商用航空，Raytheon（导弹/防空/雷达）一条腿踩国防。它卖设备、卖发动机、卖导弹，更靠装机后数十年的高毛利售后维修赚年金。Q1 2026 有机增长 +10%、创纪录订单 $271B（+25%）、调整后 EPS $1.78（+21%）、连续 6+ 季度分部利润率扩张并上调全年指引。但净负债 $30.6B、Pratt 利润率仅 8.7% 受粉末金属拖累、Q1 已缴 $500M 关税、Forward P/E 28x 无安全边际——世界级订单簿，价格已充分定价。</div>
+    <div class="haitu-rating-line">评级：<span class="rating-badge rating-hold">持有观望</span> · 12 个月目标价 $180（-7%）· 创纪录 $271B 订单簿 + 国防超级周期 + GTF 售后年金的组合，对垒 净负债 $30.6B + Pratt 粉末金属拖累 + Forward P/E 28x 无安全边际</div>
+  </div>
+</div>
+
+<!-- ═══ 市场数据快照 ═══ -->
+<div class="section">
+  <div class="stitle">市场数据快照（2026-07-10 收盘）</div>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">股价（美元）</div><div class="snap-val">$193.24</div><div class="snap-sub">2026-07-10 收盘 · 距 52 周高 -10%</div></div>
+    <div class="snap-item"><div class="snap-label">市值</div><div class="snap-val">$261B</div><div class="snap-sub">航空航天与国防龙头</div></div>
+    <div class="snap-item"><div class="snap-label">TTM GAAP P/E</div><div class="snap-val">~36x</div><div class="snap-sub">EPS $5.33 · 含收购摊销</div></div>
+    <div class="snap-item"><div class="snap-label">TTM 调整后 P/E</div><div class="snap-val">~29x</div><div class="snap-sub">EPS $6.59 · 较可信</div></div>
+    <div class="snap-item"><div class="snap-label">Forward P/E</div><div class="snap-val nt">~28x</div><div class="snap-sub">FY2026 共识 EPS $6.85</div></div>
+    <div class="snap-item"><div class="snap-label">P/S (TTM)</div><div class="snap-val">~2.9x</div><div class="snap-sub">营收 $90.4B</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间</div><div class="snap-val">$143.56 - $214.50</div><div class="snap-sub">52 周 +38% · 高位</div></div>
+    <div class="snap-item"><div class="snap-label">股息率</div><div class="snap-val">~1.4%</div><div class="snap-sub">$2.72/年 · 分红为主</div></div>
+    <div class="snap-item"><div class="snap-label">FCF Yield</div><div class="snap-val nt">~3.3%</div><div class="snap-sub">FY2026 指引 FCF $8.5B</div></div>
+    <div class="snap-item"><div class="snap-label">现金及等价物</div><div class="snap-val">$6.82B</div><div class="snap-sub">2026-03-31 末</div></div>
+    <div class="snap-item"><div class="snap-label">有息负债</div><div class="snap-val dn">$37.41B</div><div class="snap-sub">短债 0.23 + 长债当期 4.21 + 长债 32.97</div></div>
+    <div class="snap-item"><div class="snap-label">真实净负债</div><div class="snap-val dn">-$30.6B</div><div class="snap-sub">⚠️ 净负债非净现金</div></div>
+    <div class="snap-item"><div class="snap-label">订单簿 Backlog</div><div class="snap-val up">$271B</div><div class="snap-sub">+25% · 创纪录</div></div>
+    <div class="snap-item"><div class="snap-label">GAAP 营业利润率</div><div class="snap-val">11.6%</div><div class="snap-sub">Q1 2026 · 调整后分部 ~12.6%</div></div>
+  </div>
+  <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">数据时点：股价 2026-07-10 收盘约 $193.24（盘中开 $195.01 / 高 $195.04 / 低 $193.10，延迟报价，下跌 $2.69）· 财务数据来源 RTX Q1 2026 官方财报新闻稿（PR Newswire + SEC 8-K，2026-04-21 发布，财季截至 2026-03-31）· 货币 USD 单口径。RTX 财年为日历年（12 月 31 日止），故 Q1 2026 = 2026-01-01 至 2026-03-31。⚠️ RTX 是<strong>显著净负债</strong>公司（有息负债 $37.4B > 现金 $6.82B，真实净负债 $30.6B），另有约 $34B 商誉/无形资产在表内，并非"零负债现金堡垒"。</p>
+</div>
+
+<!-- ═══ Q1 2026 KPI ═══ -->
+<div class="section">
+  <div class="stitle">Q1 2026 核心业绩（USD · 财季截至 2026-03-31）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">净销售额</div><div class="kpi-v">$22.08B</div><span class="badge up">+9% YoY</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">有机增长 +10%</div></div>
+    <div class="kpi"><div class="kpi-l">毛利</div><div class="kpi-v">$4.59B</div><span class="badge nt">毛利率 20.8%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">成本 $17.48B</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 营业利润</div><div class="kpi-v">$2.56B</div><span class="badge nt">营业利润率 11.6%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">三分部均增长</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 净利（归母）</div><div class="kpi-v">$2.06B</div><span class="badge nt">净利率 9.3%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">含收购会计调整</div></div>
+    <div class="kpi"><div class="kpi-l">调整后净利</div><div class="kpi-v">$2.43B</div><span class="badge up">+22%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">核心经营口径</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 摊薄 EPS</div><div class="kpi-v">$1.51</div><span class="badge up">+33% YoY</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">含 $0.27 收购摊销</div></div>
+    <div class="kpi"><div class="kpi-l">调整后 EPS</div><div class="kpi-v">$1.78</div><span class="badge up">+21%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">最可信口径</div></div>
+    <div class="kpi"><div class="kpi-l">有效税率</div><div class="kpi-v">14.4%</div><span class="badge nt">稳定</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">净利息支出 $390M</div></div>
+    <div class="kpi"><div class="kpi-l">经营现金流</div><div class="kpi-v">$1.86B</div><span class="badge nt">Q1 季节性偏低</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">全年指引 FCF $8.25-8.75B</div></div>
+    <div class="kpi"><div class="kpi-l">自由现金流</div><div class="kpi-v">$1.31B</div><span class="badge nt">Capex $0.55B</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">Q1 是全年 FCF 最弱季</div></div>
+    <div class="kpi"><div class="kpi-l">订单簿 Backlog</div><div class="kpi-v">$271B</div><span class="badge up">+25%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">商用 $162B + 国防 $109B</div></div>
+    <div class="kpi"><div class="kpi-l">三分部净销售</div><div class="kpi-v">C/P/R</div><span class="badge up">+5% / +11% / +10%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">Collins 7.60 / Pratt 8.17 / Raytheon 6.95</div></div>
+  </div>
+</div>
+
+<!-- ═══ 看穿桥接 高亮框 ═══ -->
+<div class="section">
+  <div class="stitle">本季必看 · 两个"看穿"：名义 vs 有机、GAAP vs 调整后</div>
+  <div class="cmt">
+    <p><strong>RTX 的利润表有两个必须"看穿"的地方，看不穿就会误读它的增长质量与真实盈利能力。</strong></p>
+    <p><strong>看穿一：名义 +9% 低于有机 +10%——底层需求比表面更强。</strong> 净销售 $22.08B 同比 +9%（名义），但<span class="hl-t">有机增长 +10%</span>——名义低于有机，说明剥离与汇率对表面增速有轻微拖累，剔除这些一次性因素后，三大分部的底层需求增长更快。这与很多"名义虚高、有机注水"的公司恰好相反，是增长质量偏好的信号。</p>
+    <p><strong>看穿二：GAAP EPS $1.51 与调整后 $1.78 差 $0.27，差额是收购会计的非现金摊销。</strong> 2020 年 UTC 与 Raytheon 合并，在表内留下约 $34B 商誉/无形资产。<span class="hl-t">每季约 $0.27/股（约 $366M）的收购会计调整（acquisition accounting adjustments，主要是无形资产摊销）</span>会把 GAAP EPS 压低——它是非现金项，不影响现金流，但会让 GAAP 净利（归母 $2.06B）显著低于调整后净利（$2.43B）。理解这个差，就理解了为什么 RTX 的 TTM GAAP P/E（~36x）远高于调整后 P/E（~29x）。</p>
+    <div class="tbl-wrap" style="margin:14px 0;">
+      <table class="tbl">
+        <tr><th>GAAP → 调整后桥接（Q1 2026）</th><th>数值</th><th>说明</th></tr>
+        <tr><td>GAAP 摊薄 EPS</td><td>$1.51</td><td>+33% YoY</td></tr>
+        <tr><td><span class="hl-t">加：收购会计调整（非现金摊销）</span></td><td><span class="hl-t">+$0.27</span></td><td>UTC-Raytheon 合并无形摊销</td></tr>
+        <tr class="hl"><td><strong>调整后摊薄 EPS</strong></td><td><strong>$1.78</strong></td><td><strong>+21% YoY · 最可信口径</strong></td></tr>
+        <tr><td>GAAP 净利（归母）</td><td>$2,059M</td><td>净利率 9.3%</td></tr>
+        <tr class="hl"><td><strong>调整后净利</strong></td><td><strong>$2,425M</strong></td><td><strong>+22% · 净利率 11.0%</strong></td></tr>
+      </table>
+    </div>
+    <p><strong>第三个隐藏看点：分部利润率高度分化。</strong> Collins 调整后营业利润率 17.1%、Raytheon 12.2%、<span class="warn-t">Pratt & Whitney 仅 8.7%</span>——Pratt 被粉末金属（powder metal）客户补偿与运营成本压制，是全公司利润率最大的拖累项，也是未来利润率修复空间最大的地方。看懂了这三条腿的分化，才看懂 RTX 利润率故事的一半是"已兑现"、一半是"在路上"。</p>
+  </div>
+</div>
+
+<!-- ═══ 趋势图 ═══ -->
+<div class="section">
+  <div class="stitle">关键指标趋势</div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">净销售额（$B）& YoY 增速（近 5 季）</div><div class="cwrap"><canvas id="chartRev"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">各分部调整后营业利润率（Q1 2026）</div><div class="cwrap"><canvas id="chartMargin"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">Q1 2026 三分部净销售拆分（$B）</div><div class="cwrap"><canvas id="chartSegment"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">摊薄 EPS：GAAP vs 调整后（近 5 季，$）</div><div class="cwrap"><canvas id="chartEps"></canvas></div></div>
+  </div>
+</div>
+
+<!-- ═══ 桑基图 ═══ -->
+<div class="section">
+  <div class="stitle">Q1 2026 利润流向桑基图（$B）</div>
+  <div class="ccard">
+    <div id="sankey" style="width:100%;height:480px;"></div>
+    <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">说明：净销售 $22.08 → 营业成本 $17.48 + 毛利 $4.59 → 期间费用（研发/管理/其他）$2.04 + 营业利润 $2.56 → 所得税/净利息/少数股东权益等（净额）$0.50 + 归母净利 $2.06。现金侧：Q1 经营现金流 $1.86 − Capex $0.55 = 自由现金流 $1.31；派息 $0.92、回购 $0（Q1 无回购）、偿债 $0.50。⚠️ Q1 是 RTX 全年自由现金流最弱季（季节性），全年指引 FCF $8.25–8.75B——不可用单季口算全年。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 1 ═══ -->
+<div class="section">
+  <div class="stitle">模块 1 · 公司概览与背景</div>
+  <div class="cmt">
+    <p><strong>RTX Corporation</strong>（NYSE: RTX），总部弗吉尼亚州阿灵顿。前身为 2020 年<strong>联合技术公司（UTC）与雷神公司（Raytheon）合并</strong>而成的 Raytheon Technologies，2023 年更名 RTX。财年为日历年（12 月 31 日止）。约 13.5 亿股流通（Q1 2026 摊薄股数 13.646 亿）。</p>
+
+    <p><strong>核心叙事</strong>：RTX 是<span class="hl-t">全球最大的航空航天与国防公司之一</span>，通过三大分部横跨商用航空与国防两大终端：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>Collins Aerospace（柯林斯航空）</strong>——航空电子、机电系统、机舱系统，服务商用飞机与国防平台，Q1 净销售 $7.60B（+5%），调整后利润率 17.1%（三分部最高）</li>
+      <li><strong>Pratt &amp; Whitney（普惠）</strong>——商用及军用发动机，核心产品 <strong>GTF 齿轮传动涡扇</strong>，Q1 净销售 $8.17B（+11%），但利润率仅 8.7%（粉末金属拖累）</li>
+      <li><strong>Raytheon（雷神）</strong>——导弹、防空、雷达系统，核心产品爱国者（Patriot）、SM-6、AMRAAM，Q1 净销售 $6.95B（+10%），利润率 12.2%</li>
+    </ul>
+
+    <p><strong>生意本质</strong>：RTX 是"<strong>装备 + 年金</strong>"的双层生意——前端卖飞机零部件、发动机、导弹（原始设备 OE 与国防合同），后端靠装机后数十年的<span class="hl-t">高毛利售后维修（MRO/aftermarket）</span>持续赚年金。GTF 在役满 10 年、超 5000 万飞行小时、约 8000 台发动机订单，装机基数决定了未来几十年的售后现金流。国防端则是长周期政府合同，能见度极高。</p>
+
+    <p><strong>能力圈检验</strong>：RTX 的生意本质清晰（卖装备 + 赚售后年金 + 政府国防合同），但有几处<span class="warn-t">复杂性需要专业判断</span>：(1) 粉末金属（powder metal）质量事件的补偿节奏与残余逆风；(2) GAAP 与调整后利润因收购会计有约 $0.27/季的持续差异；(3) $30.6B 净负债 + $34B 商誉/无形资产的资产负债表结构；(4) 关税对 Collins 供应链的逆风。这不是一门"两句话说清、零复杂度"的生意，但订单簿的可预测性给了它极高的业务能见度。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 2 ═══ -->
+<div class="section">
+  <div class="stitle">模块 2 · 管理层评估</div>
+
+  <div class="bscore">
+    <div class="circle cw">B+</div>
+    <div class="bd">
+      <h4>管理层 · 去杠杆 + 恢复分红增长 + 利润率扩张的执行者</h4>
+      <p>RTX 管理层过去两年的主线是"<span class="hl-t">修复 + 去杠杆 + 兑现订单簿</span>"：连续 6+ 个季度实现调整后分部利润率扩张，FY2025 自由现金流 $7.94B（同比 +$3.4B），Q1 2026 上调全年销售与 EPS 指引。对 GTF 粉末金属这一重大质量事件，管理层选择主动披露补偿节奏（2026 年约 $700M 现金流出）而非掩盖，坦诚度值得肯定。海图判断：这是一支在复杂修复周期里稳扎稳打、把订单簿逐季转化为利润与现金的团队。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B</div>
+    <div class="bd">
+      <h4>资本配置 · 2023 年 $10B ASR 择时教科书，但当前回购停摆</h4>
+      <p>
+      <strong>亮点</strong>：2023 年 10 月执行 <strong>$10B 加速回购（ASR）</strong>，初始交割约 1.084 亿股 @ $78.38——如今股价 $193，这是一次教科书级的低位择时（回报约 +146%），摊薄股数由约 14.7 亿骤降至 13.4 亿。<br>
+      <span class="warn-t">但此后回购基本停摆</span>：FY2025 全年仅回购 $50M，Q1 2026 回购为零。当前资本返还<strong>以分红为主</strong>（Q1 派息 $915M，$2.72/年），现金优先用于去杠杆（Q1 偿债 $500M）。股权激励稀释导致摊薄股数从 13.4 亿缓升至 13.646 亿。<br>
+      资本配置纪律整体<strong>合格但偏保守</strong>：去杠杆方向正确，2023 ASR 择时优秀，但当前缺乏注销式回购的"复利放大器"。
+      </p>
+    </div>
+  </div>
+
+  <div class="cmt">
+    <p><strong>长期主义测试</strong>：✅ 管理层以"订单簿兑现 + 利润率修复 + 去杠杆"的多年主线为纲，而非短期财报博弈。对 GTF 粉末金属这种负面事件主动披露补偿现金流出节奏，体现坦诚。<strong>利益绑定</strong>：成熟大盘股常态，管理层持股比例不高，薪酬与调整后 EPS / 分部利润率 / 自由现金流强挂钩。<strong>需留意</strong>：合并后的整合复杂度高、$34B 商誉/无形资产的减值风险、粉末金属补偿的执行不确定性——这些是评估管理层执行力的关键观察点。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 3 ═══ -->
+<div class="section">
+  <div class="stitle">模块 3 · 商业模式深度解析</div>
+  <div class="cmt">
+    <p><strong>海图"一句话测试"</strong>：<span class="hl-t">RTX 是"卖装备 + 收年金 + 拿国防合同"的三层收费机器——前端卖发动机/航电/导弹赚一次性钱，装机之后靠数十年高毛利售后维修赚年金，另有长周期政府国防订单提供能见度。</span></p>
+
+    <p><strong>三分部收入模型（Q1 2026）</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>分部</th><th>净销售</th><th>YoY</th><th>调整后营业利润</th><th>利润率</th><th>驱动</th></tr>
+        <tr><td>Collins Aerospace</td><td>$7.60B</td><td>+5%</td><td>$1,298M</td><td>17.1%</td><td>商用售后 + OE 需求强劲；关税约 130bps 逆风</td></tr>
+        <tr><td>Pratt &amp; Whitney</td><td>$8.17B</td><td>+11%</td><td>$711M</td><td class="warn-t">8.7%</td><td>有机 +10%；售后 +19% / 军用 +7%；粉末金属压制</td></tr>
+        <tr><td>Raytheon</td><td>$6.95B</td><td>+10%</td><td>$845M</td><td>12.2%</td><td>国际爱国者、SM-6、导弹项目量增</td></tr>
+        <tr class="hl"><td><strong>合计（分部口径）</strong></td><td><strong>$22.72B</strong></td><td><strong>—</strong></td><td><strong>$2,854M</strong></td><td><strong>~12.6%</strong></td><td>分部间抵销后合并净销售 $22.08B</td></tr>
+      </table>
+    </div>
+
+    <p style="margin-top:14px;"><strong>单位经济与议价能力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>售后年金是利润皇冠</strong>——商用发动机与航电的售后维修毛利远高于原始设备（OE）。Pratt 售后 +19% 就是这条年金曲线在放量；GTF 约 8000 台装机是未来数十年 MRO 现金流的水库</li>
+      <li><strong>对航空公司客户议价能力</strong>：中高——发动机/航电存在深度绑定与认证壁垒，但大客户（波音/空客/航司）有一定筹码，且粉末金属补偿正是 Pratt 对客户让利的成本</li>
+      <li><strong>对国防客户（政府）议价能力</strong>：中——成本加成/固定价合同混合，量增（地缘冲突驱动）强，但利润率受合同类型约束</li>
+      <li><strong>进入壁垒</strong>：极强——航空发动机与防空导弹是全球寥寥数家玩家的高认证、高资本、高技术门槛行业</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══ 模块 4 ═══ -->
+<div class="section">
+  <div class="stitle">模块 4 · 经济护城河分析（5 维）</div>
+  <div class="moat-grid">
+    <div class="moat-card wide">
+      <h5>1. 无形资产/技术认证</h5>
+      <span class="moat-rate">宽</span>
+      <p>航空发动机、防空导弹、航电系统需数十年技术积累 + 严苛适航/军用认证。GTF、爱国者、SM-6 是难以复制的技术资产。<strong>趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>2. 转换成本</h5>
+      <span class="moat-rate">宽</span>
+      <p>发动机/航电一旦装机，售后维修、备件、认证深度绑定原厂，航司切换成本极高。这是售后年金护城河的根基。<strong>趋势：加宽</strong>（GTF 装机基数扩大）。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>3. 成本优势</h5>
+      <span class="moat-rate">中</span>
+      <p>规模带来采购与研发摊薄，但 Pratt 利润率仅 8.7%、Collins 受关税 130bps 逆风，说明成本优势并非全分部一致。<strong>趋势：修复中</strong>（粉末金属逆风消退后有扩张空间）。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>4. 有效规模（寡头）</h5>
+      <span class="moat-rate">宽</span>
+      <p>大型商用发动机（普惠/GE/罗罗）、防空导弹（RTX/洛马）都是全球寡头格局，市场只容得下极少数玩家。<strong>趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>5. 网络效应/装机基数</h5>
+      <span class="moat-rate">中-宽</span>
+      <p>严格说非网络效应，而是"装机基数飞轮"：装机越多，售后年金与数据越厚，越能反哺下一代产品。<strong>趋势：加宽</strong>（8000 台 GTF 订单）。</p>
+    </div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>10 年后护城河会更宽还是更窄？</strong> <span class="hl-t">大概率更宽</span>——GTF 装机基数持续扩大（8000 台订单、超 5000 万飞行小时）会把售后年金水库越蓄越深；国防超级周期（地缘冲突驱动爱国者/SM-6/导弹需求）提供长周期能见度；创纪录订单簿 $271B（+25%）相当于把未来近三年收入提前锁定。<span class="warn-t">但两个变量决定护城河的"当下含金量"</span>：(1) 粉末金属补偿何时出清、Pratt 利润率能否从 8.7% 修复到双位数；(2) 关税与供应链成本能否被消化。护城河的宽度不是问题，问题是利润率何时把护城河的宽度兑现成现金。</p>
+    <p><strong>定价权</strong>：售后端强（认证绑定），OE 与国防端受合同类型与客户议价约束，属"结构性偏强但非无上限"。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 5 ═══ -->
+<div class="section">
+  <div class="stitle">模块 5 · 财务深度分析</div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 12px 0; font-family: 'Segoe UI',sans-serif;">5.1 关键比率与利润表（Q1 2026 vs Q1 2025）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>指标</th><th>Q1 FY25</th><th>Q1 FY26</th><th>变化</th><th>含义</th></tr>
+      <tr><td>净销售额</td><td>$20.31B</td><td>$22.08B</td><td><span class="badge up">+9%</span></td><td>有机 +10%</td></tr>
+      <tr><td>毛利率</td><td>—</td><td>20.8%</td><td><span class="badge nt">—</span></td><td>成本 $17.48B</td></tr>
+      <tr><td>GAAP 营业利润率</td><td>—</td><td>11.6%</td><td><span class="badge nt">—</span></td><td>三分部均增长</td></tr>
+      <tr><td>调整后 EPS</td><td>$1.47</td><td>$1.78</td><td><span class="badge up">+21%</span></td><td>核心经营口径</td></tr>
+      <tr><td>GAAP EPS</td><td>$1.14</td><td>$1.51</td><td><span class="badge up">+33%</span></td><td>含收购摊销</td></tr>
+      <tr><td>调整后净利率</td><td>~10%</td><td>11.0%</td><td><span class="badge up">+1pp</span></td><td>利润率扩张</td></tr>
+      <tr><td>有效税率</td><td>—</td><td>14.4%</td><td><span class="badge nt">—</span></td><td>净利息 $390M</td></tr>
+      <tr><td>利息覆盖倍数</td><td>—</td><td>~6.5x</td><td><span class="badge nt">—</span></td><td>营业利润 $2.56B / 净利息 $0.39B</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">杜邦拆解（简化）：净利率修复（调整后 11.0%）× 资产周转（营收年化 $90B / 总资产 $170B ≈ 0.53x）× 权益乘数（净负债结构，权益约 $61B 估算，杠杆偏高）。<strong>ROE 约 13–15%（估算</strong>——本次新闻稿资产负债表未单列股东权益，取近似 $61B 权益基数，年化调整后净利约 $9.3B）。<strong>ROIC 约 9–10%（估算</strong>——NOPAT ≈ 营业利润年化 × (1−14.4%) ≈ $8.7B / 投入资本约 $92B），略高于估算 WACC ~8%，价值仍在被创造但溢价不大。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.2 资产负债健康度（2026-03-31 末 · $M）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>2026-03-31</th><th>说明</th></tr>
+      <tr><td>现金及等价物</td><td>6,818</td><td>官方新闻稿未单列重大短期投资</td></tr>
+      <tr class="hl"><td>短期借款</td><td>226</td><td>逐项核对</td></tr>
+      <tr class="hl"><td>长期债务当期部分</td><td>4,213</td><td>一年内到期</td></tr>
+      <tr class="hl"><td>长期债务</td><td>32,974</td><td>—</td></tr>
+      <tr class="hl"><td>有息负债合计</td><td>37,413</td><td>226 + 4,213 + 32,974</td></tr>
+      <tr class="hl"><td><strong>真实净负债</strong></td><td><strong>-30,595</strong></td><td>⚠️ 现金 6,818 − 有息负债 37,413</td></tr>
+      <tr><td>非流动经营租赁负债</td><td>1,522</td><td>流动部分未单列（10-K 约再 +$0.4B）</td></tr>
+      <tr><td>商誉 + 无形资产（约）</td><td>~34,000</td><td>UTC-Raytheon 合并遗产</td></tr>
+      <tr><td>总资产</td><td>170,431</td><td>—</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">⚠️ <strong>净负债非净现金——铁律提示</strong>：RTX 有息负债 $37.41B（短债 $0.23B + 长债当期 $4.21B + 长期 $32.97B，逐项核对）远大于现金 $6.82B，<strong>真实净负债 $30.6B</strong>。这是合并后的资产负债表结构，需要靠 $8.5B/年的自由现金流逐步去杠杆。利息覆盖 ~6.5x 尚安全，但净负债 $30.6B 相对市值 $261B（约 12%）不算轻，且约 $34B 的商誉/无形资产是潜在减值风险点。<strong>RTX 不是"现金堡垒"，评估其安全性必须把这 $30.6B 净负债计入。</strong></p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.3 现金流量（Q1 2026 · $M）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>Q1 2026</th><th>FY2026 指引（全年）</th></tr>
+      <tr><td>经营活动现金流（OCF）</td><td>1,855</td><td>—</td></tr>
+      <tr><td>- Capex</td><td>546</td><td>—</td></tr>
+      <tr class="hl"><td>自由现金流（FCF）</td><td>1,309</td><td>8,250 - 8,750</td></tr>
+      <tr><td>派息</td><td>915</td><td>约 3,700（全年）</td></tr>
+      <tr><td>股份回购</td><td>0</td><td>FY2025 全年仅 $50M</td></tr>
+      <tr><td>偿还债务</td><td>500</td><td>去杠杆优先</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">⚠️ <strong>季节性提示</strong>：Q1 是 RTX 全年自由现金流最弱的季度（营运资金季节性占用），$1.31B 单季 FCF <strong>不可年化</strong>——全年指引 FCF $8.25–8.75B（中点 $8.5B）主要在下半年实现。OCF/净利 ≈ 0.90x（Q1 季节性偏低），全年现金转化正常。<strong>注意：2026 年预计约 $700M 粉末金属客户补偿现金流出，是压制全年 FCF 的关键项。</strong></p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.4 所有者盈余（价值投资口径 · FY2026 指引）</h3>
+  <div class="dcf-note">
+    <p><strong>所有者盈余 = 净利润 + 折旧摊销 + 非现金费用 − 维护性 Capex ± 营运资金 ≈ 自由现金流</strong></p>
+    <p>RTX 的收购会计摊销（约 $1.5B/年非现金）会压低 GAAP 净利，但不影响现金；因此自由现金流是更贴近所有者盈余的口径。FY2026 指引 FCF 中点 $8.5B，剔除约 $700M 一次性粉末金属补偿后，<strong>正常化所有者盈余约 $9.2B</strong>。</p>
+    <p><strong>所有者盈余收益率 = FCF $8.5B / 市值 $261B ≈ 3.3%</strong>（正常化口径约 3.5%）——对一个 5–6% 有机增长、净负债 $30.6B、利润率仍在修复中的工业集团，<span class="warn-t">3.3% 的 FCF 收益率并不便宜</span>。它意味着市场已把 RTX 的订单簿与售后年金充分定价，安全边际有限。<strong>换句话说：RTX 的订单簿质量没问题，问题在于当前价格已经把未来几年的好消息提前透支。</strong></p>
+  </div>
+</div>
+
+<!-- ═══ 模块 6 ═══ -->
+<div class="section">
+  <div class="stitle">模块 6 · 电话会分析（Q1 2026 + 前 2 季度）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">Q1 2026 电话会（2026-04-21）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"创纪录订单 $271B（+25%）、有机销售 +10%、三大分部营收与调整后营业利润均增长、调整后 EPS $1.78（+21%），上调全年销售与 EPS 指引"</div><div class="ec-note">销售指引由 $92.0–93.0B 上调至 $92.5–93.5B，调整后 EPS 由 $6.60–6.80 上调至 $6.70–6.90，自由现金流维持 $8.25–8.75B。全面强势的一季。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"GTF 项目在役满 10 年、超 5000 万飞行小时、约 8000 台发动机订单；Pratt 售后 +19%、军用 +7%，营业利润同比 +$121M"</div><div class="ec-note">GTF 售后年金曲线在放量，PW1100 停场飞机（AOG）持续下降，MRO 产出 Q4'25 同比 +39%——修复在路上。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"关税：Q1 已缴约 $500M 并寻求退款（尚未入账），对 Collins 利润率约 130bps 逆风；缓解措施带来约 $75M 同比顺风，全年关税展望不变"</div><div class="ec-note">关税是可管理但真实的成本逆风，管理层主动量化影响，未改全年展望。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"Pratt 利润率仍仅 8.7%，受粉末金属补偿与运营成本压制；GAAP EPS $1.51 含 $0.27 收购会计调整；财报后股价一度下跌"</div><div class="ec-note">尽管调整后 EPS 强劲，但 Pratt 利润率修复慢于预期 + GAAP 与调整后的差，触发财报后获利回吐。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q4 2025 电话会（2026-01-27）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"创纪录订单 $268B（+23%，商用 $161B / 国防 $107B）；全年 book-to-bill 1.56；FY2025 自由现金流 $7.94B 同比 +$3.4B"</div><div class="ec-note">连续第 6+ 个季度调整后分部利润率扩张；2026 指引有机增长 5–6%、各分部利润率扩张、调整后 EPS $6.60–6.80、FCF $8.25–8.75B。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"GTF 复苏：PW1100 AOG 下降，Q4 MRO 产出同比 +39%；但 2026 年预计约 $700M 粉末金属补偿流出，之后仍残留数亿美元逆风"</div><div class="ec-note">复苏方向确认，但粉末金属现金逆风将持续压制利润率与 FCF。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"Q4 调整后 EPS $1.55 仅同比 +1%（高基数）、GAAP EPS $1.19"</div><div class="ec-note">高基数下增速放缓，提示单季波动。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q3 2025 电话会（2025-10-21）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"三大分部均实现两位数有机增长；连续第 6 个季度调整后分部利润率扩张；调整后 EPS $1.70（+17%）"</div><div class="ec-note">Raytheon 斩获超 $80 亿弹药合同（含 $2.5B GEM-T、$2.1B AMRAAM），营业利润 +33% 至 $859M（国际爱国者组合驱动）。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"经营现金流 $4.6B、自由现金流 $4.0B，现金生成强劲"</div><div class="ec-note">印证 RTX 全年 FCF 高度集中在下半年的季节性。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">指引兑现度追踪</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>历史指引</th><th>Q1 2026 实际/更新</th><th>评价</th></tr>
+      <tr><td>FY2026 调整后销售 $92.0–93.0B（Q4'25 给出）</td><td>上调至 $92.5–93.5B</td><td><span class="badge up">上调</span></td></tr>
+      <tr><td>FY2026 调整后 EPS $6.60–6.80（Q4'25 给出）</td><td>上调至 $6.70–6.90</td><td><span class="badge up">上调</span></td></tr>
+      <tr><td>FY2026 自由现金流 $8.25–8.75B</td><td>维持 $8.25–8.75B</td><td><span class="badge nt">维持</span></td></tr>
+      <tr><td>连续分部利润率扩张</td><td>连续 6+ 季度扩张延续</td><td><span class="badge up">兑现</span></td></tr>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>信号汇总</strong>：Q1 2026 是 RTX "<span class="hl-t">创纪录订单 + 有机双位数增长 + 利润率连续扩张 + 上调全年指引</span>"的强势一季。三条腿都在跑，Raytheon 的国防超级周期 + Pratt 的售后年金放量是核心引擎。<strong>但两处提醒</strong>：(1) Pratt 利润率仍仅 8.7%，粉末金属补偿（2026 约 $700M）压制利润率与 FCF；(2) 关税 130bps 逆风与 GAAP-调整后差异是持续噪音。<strong>业绩几乎没有问题——问题永远在估值：当前 Forward P/E 28x 已把订单簿的好消息充分定价。</strong></p>
+  </div>
+</div>
+
+<!-- ═══ 模块 7 ═══ -->
+<div class="section">
+  <div class="stitle">模块 7 · 多模型估值（8 种方法）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">7.1 估值汇总表（独立估值 · 不锚定现价 · USD）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>估值方法</th><th>每股公允价</th><th>假设要点</th><th>权重</th></tr>
+      <tr><td>1. 相对估值（P/E）</td><td>$168</td><td>FY2027 共识 EPS ~$7.65 × 22x（国防 18x 与 GE 40x 之间的混合公允倍数）</td><td>22%</td></tr>
+      <tr><td>2. DCF（基准）</td><td>$145</td><td>FCF $8.5B 起，5 年 CAGR +9%，WACC 8%，永续 3%，减净负债 $30.6B</td><td>22%</td></tr>
+      <tr><td>3. 所有者盈余收益率</td><td>$135</td><td>正常化 FCF ~$9.2B / 5% 目标收益率 = $184B → /13.65 亿股</td><td>12%</td></tr>
+      <tr><td>4. PEG</td><td>$168</td><td>公允 PEG 2.0 × EPS 增速 ~11% = 22x × FY2027 EPS $7.65</td><td>10%</td></tr>
+      <tr><td>5. DDM</td><td>$130</td><td>DPS $2.72，增长 6%，要求回报 8.5%（股息占比小，参考意义有限）</td><td>4%</td></tr>
+      <tr><td>6. NAV</td><td>不适用</td><td>制造/装备型公司，非资产持有型（商誉/无形为主），NAV 不适用</td><td>0%</td></tr>
+      <tr><td>7. 反向 DCF</td><td>当前价隐含 FCF 增长 <strong>~13%</strong></td><td>$193 隐含市场预期长期 FCF 增 ~13%，高于 5–6% 有机指引——市场乐观（对应更合理 ~8-9% 增速的公允价约 $155）</td><td>20%</td></tr>
+      <tr><td>8. SOTP 分部加总</td><td>$150</td><td>Collins EBIT×19x + Pratt EBIT×18x + Raytheon EBIT×18x − 净负债 $30.6B</td><td>10%</td></tr>
+      <tr class="hl"><td><strong>加权公允价中位数</strong></td><td><strong>~$160</strong></td><td>估值区间 $135–168 · 加权中位 ~$160</td><td>100%</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.8;"><strong>与现价对照</strong>：当前 $193.24 vs 独立加权公允 $160 · <span class="warn-t">现价高出内在价值约 21%</span>——<strong>不仅没有 25% 安全边际，反而是负安全边际</strong>。值得注意的是：现金流类方法（DCF $145 / 所有者盈余 $135 / SOTP $150）明显低于市价，只有相对估值与 PEG（$168）靠近但仍低于 $193。反向 DCF 显示市场已定价 ~13% 长期 FCF 增速，远高于 5–6% 有机增长指引——<strong>市场把订单簿与国防超级周期的好消息充分甚至略微透支地定价了。</strong></p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.2 P/E 多档透视表</h3>
+  <p style="margin-bottom:10px; font-size:13px; color:var(--text2);">RTX GAAP vs 调整后 EPS 差异（$1.51 vs $1.78，差约 18% > 10% 阈值，收购会计摊销所致）触发多档透视：</p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>口径</th><th>EPS / 指标</th><th>P/E (基于 $193.24)</th><th>读数说明</th></tr>
+      <tr><td>TTM GAAP P/E</td><td>$5.33</td><td>~36x</td><td>含 $0.27/季收购摊销 · 偏高</td></tr>
+      <tr><td>TTM 调整后 P/E</td><td>$6.59</td><td>~29x</td><td>剔收购摊销 · 较可信</td></tr>
+      <tr><td>FY2026 调整后 P/E（指引中点）</td><td>$6.80</td><td>~28x</td><td>本财年在途</td></tr>
+      <tr class="hl"><td><strong>Forward P/E（FY2026 共识 $6.85）</strong></td><td><strong>$6.85</strong></td><td><strong>~28x</strong></td><td><strong>最可信档 · 市场惯用</strong></td></tr>
+      <tr><td>Forward P/E（FY2027 共识 ~$7.65）</td><td>~$7.65</td><td>~25x</td><td>次年前瞻</td></tr>
+      <tr><td>P/S (TTM)</td><td>营收 $90.4B</td><td>~2.9x</td><td>工业集团口径</td></tr>
+      <tr><td>FCF Yield</td><td>FCF $8.5B</td><td>~3.3%</td><td>净负债结构 · 不便宜</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3);"><strong>最可信档</strong>：Forward P/E ~28x（FY2026）/ ~25x（FY2027）。同业对比：GE Aerospace ~40x（纯商用发动机高增长）、Northrop ~20.7x、Lockheed ~17x。<span class="hl-t">RTX 28x 处于纯国防（17–21x）与纯商用航空（GE 40x）之间</span>——作为"商用 + 国防"混合体，这个倍数不算离谱，但对比 LMT/NOC 明显偏贵，绝对估值仍在满价区，无安全边际。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.3 12 个月目标价（概率加权）</h3>
+  <div class="pgrid">
+    <div class="pbox"><div class="pl">悲观情景 · 35%</div><div class="pv pc">$155</div><div class="pn">粉末金属/关税逆风超预期 + Pratt 利润率停滞 + 估值压缩至 ~20x FY2027<br>距现价 -20%</div></div>
+    <div class="pbox"><div class="pl">基准情景 · 45%</div><div class="pv pf">$185</div><div class="pn">指引兑现 + 订单簿稳步转化 + 估值回归 ~23–24x FY2027 EPS $7.65<br>距现价 -4%</div></div>
+    <div class="pbox"><div class="pl">乐观情景 · 20%</div><div class="pv ps">$215</div><div class="pn">国防超级周期加速 + GTF 售后放量 + 利润率修复 + 估值维持 ~28x<br>距现价 +11%</div></div>
+  </div>
+  <p style="font-size:13px; color:var(--text2);"><strong>概率加权 12 个月目标价</strong>：35%×$155 + 45%×$185 + 20%×$215 = <strong>$180</strong>（-7%）。<strong>叠加 1.4% 股息 = 总回报约 -6%</strong>——即便在基准情景下也几无上行空间。<span class="warn-t">当前 $193 高于独立公允 $160、也高于概率加权目标 $180——不在合理建仓窗口</span>。独立估值中位数 $160，机械首仓 $128（$160×80%），距现价 -34%。</p>
+</div>
+
+<!-- ═══ 模块 8 ═══ -->
+<div class="section">
+  <div class="stitle">模块 8 · 竞争与行业分析</div>
+  <div class="cmt">
+    <p><strong>航空航天与国防格局</strong>：RTX 是横跨商用航空与国防的综合巨头，独特之处在于"两栖"——既在商用发动机（普惠 vs GE/罗罗）、航电（Collins）竞争，又在防空导弹（Raytheon vs 洛马）竞争。纯国防同业（洛马、诺斯罗普）估值折价，纯商用航空（GE Aerospace）估值溢价，RTX 处于两者之间。</p>
+
+    <p><strong>航空航天与国防同业对比（前瞻 2026）</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>公司</th><th>Forward P/E</th><th>增长特征</th><th>核心评价</th></tr>
+        <tr class="hl"><td><strong>RTX（本公司）</strong></td><td><strong>~28x</strong></td><td>有机销售 +5–6% / 调整后 EPS 中高个位数至双位数</td><td>商用+国防混合体 · 订单簿 $271B</td></tr>
+        <tr><td>GE Aerospace (GE)</td><td>~40x</td><td>2026 EPS 共识 ~$7.48（+17.4%）</td><td>纯商用发动机 · 高增长高估值</td></tr>
+        <tr><td>Northrop Grumman (NOC)</td><td>~20.7x</td><td>中个位数销售增长（B-21 加速）</td><td>纯国防 · 估值中等</td></tr>
+        <tr><td>Lockheed Martin (LMT)</td><td>~17x</td><td>低个位数增长，股息率 ~3%</td><td>纯国防 · 估值折价 · $545.70</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:10px; font-size:12px; color:var(--text3);">RTX 的 28x 在同业里处于<strong>中偏高</strong>：低于 GE（40x，纯商用发动机成长溢价），但显著高于 LMT（17x）与 NOC（20.7x）。市场用这个倍数为 RTX 的"商用航空敞口 + 创纪录订单 + 售后年金"付费。<span class="hl-t">相对纯国防同业，RTX 需要更快的利润率修复与 FCF 增长来支撑这个溢价</span>。</p>
+
+    <p style="margin-top:14px;"><strong>波特五力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>新进入者：</strong>极低（航空发动机/防空导弹的认证、资本、技术壁垒极高）</li>
+      <li><strong>替代品：</strong>低（发动机/导弹无近距替代；无人化是长期缓变量）</li>
+      <li><strong>供应商议价：</strong>中（航空供应链紧张 + 关税推高成本，Collins 受 130bps 逆风）</li>
+      <li><strong>买家议价：</strong>中（航司与政府是大客户，有议价力；但认证绑定与售后年金削弱其筹码）</li>
+      <li><strong>同业竞争：</strong>中（寡头理性竞争，商用发动机与防空导弹均为少数玩家）</li>
+    </ul>
+
+    <p><strong>行业顺风</strong>：国防超级周期（地缘冲突驱动导弹/防空补库存）+ 商用航空后周期复苏（售后维修放量）双重顺风。<strong>逆风</strong>：关税与供应链成本、粉末金属补偿、政府预算不确定性。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 9 ═══ -->
+<div class="section">
+  <div class="stitle">模块 9 · 技术面与 K 线分析（次要参考）</div>
+  <div class="cmt">
+    <p><strong>趋势</strong>：RTX 过去 52 周 <span class="hl-t">+38%</span>，从 $143.56 低点强势攀升至 52 周高 $214.50，当前 $193.24 距高点约 -10%，处于历史高位区间的中上部。这是一只被国防超级周期与商用复苏双重重估的大盘股。</p>
+
+    <p><strong>关键价位</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>支撑</strong>：$180（近期整理平台）/ $160（独立公允价附近）/ $143.56（52 周低）</li>
+      <li><strong>阻力</strong>：$195（近期回落起点）/ $214.50（52 周高）/ $220（乐观情景）</li>
+    </ul>
+
+    <p><strong>指标信号</strong>：处于高位、7/10 收盘小幅下跌 $2.69。52 周 +38% 后，<span class="warn-t">技术面处高位意味着回调风险 > 追涨空间</span>，与基本面"满估值无安全边际"的判断一致。</p>
+
+    <p><strong>注意</strong>：RTX 的核心驱动是订单簿转化、Pratt 利润率修复、国防预算、关税与 Forward P/E 估值，技术面是次要参考。价值投资者应等基本面消化（利润率修复兑现或估值回落）到独立公允 $160 以下，而非在 52 周高附近追高。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 10 ═══ -->
+<div class="section">
+  <div class="stitle">模块 10 · 增长催化剂与前景展望</div>
+  <div class="cmt">
+    <p><strong>短期催化剂（未来 6 个月）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>2026-07-22 Q2 2026 财报（预计/待公司确认）</strong>——分析师共识调整后 EPS $1.67；关注 Pratt 利润率修复与全年指引</li>
+      <li><strong>Pratt 利润率修复</strong>——从 8.7% 向双位数修复是最大的利润率弹性来源</li>
+      <li><strong>国防订单持续</strong>——爱国者、SM-6、AMRAAM 在地缘冲突下的新合同</li>
+      <li><strong>关税退款</strong>——Q1 已缴 $500M 若成功退款将是一次性顺风</li>
+    </ul>
+
+    <p><strong>长期展望（3–5 年）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>GTF 售后年金放量</strong>——8000 台装机 + 超 5000 万飞行小时，未来数十年高毛利 MRO 现金流</li>
+      <li><strong>国防超级周期</strong>——全球防务开支上行，Raytheon 导弹/防空长周期订单</li>
+      <li><strong>利润率修复</strong>——粉末金属逆风消退后（机队处理完成），Pratt 利润率有显著扩张空间</li>
+      <li><strong>去杠杆完成后</strong>——$30.6B 净债务逐步下降，未来或重启注销式回购</li>
+      <li><strong>风险情景</strong>：粉末金属补偿超预期 / 关税升级 / 国防预算削减 / 商用航空周期逆转</li>
+    </ul>
+
+    <p><strong>TAM 展望</strong>：全球商用航空机队更新与售后维修、国防现代化开支构成数千亿美元的长期可寻址市场。$271B 创纪录订单簿（+25%）+ book-to-bill 1.56 提供了行业里罕见的收入能见度。核心问题不是增长空间，而是利润率何时把订单簿兑现成现金、以及当前估值是否已透支这份确定性。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 11 ═══ -->
+<div class="section">
+  <div class="stitle">模块 11 · 风险矩阵</div>
+  <div class="risk-grid">
+    <div class="risk-card r4"><h5>1. 估值无安全边际</h5><span class="risk-score">4 / 5 高</span><p>Forward P/E 28x / FCF Yield 3.3% · 现价 $193 高于独立公允 $160 约 21% · 反向 DCF 隐含 ~13% FCF 增速 · 任何指引下修或利润率停滞都可能触发估值压缩</p></div>
+    <div class="risk-card r4"><h5>2. 粉末金属与 Pratt 利润率</h5><span class="risk-score">4 / 5 高</span><p>2026 约 $700M 补偿现金流出，机队处理完后仍残留数亿美元逆风 · Pratt 利润率仅 8.7% · 修复慢于预期将拖累利润与 FCF</p></div>
+    <div class="risk-card r3"><h5>3. 净负债与商誉</h5><span class="risk-score">3 / 5 中</span><p>真实净负债 $30.6B（非净现金）+ 约 $34B 商誉/无形资产 · 去杠杆需时间 · 商誉减值是潜在风险点 · 限制回购弹性</p></div>
+    <div class="risk-card r3"><h5>4. 关税与供应链</h5><span class="risk-score">3 / 5 中</span><p>Q1 已缴 $500M 关税寻求退款（未入账）· Collins 毛利约 130bps 逆风 · 航空供应链紧张推高成本</p></div>
+    <div class="risk-card r3"><h5>5. 国防预算/政策</h5><span class="risk-score">3 / 5 中</span><p>国防收入依赖政府预算 · 预算冻结/削减、合同节奏、地缘局势缓和都可能影响订单转化</p></div>
+    <div class="risk-card r2"><h5>6. 订单簿质量（机会）</h5><span class="risk-score">2 / 5 反向</span><p>$271B 创纪录订单（+25%）+ book-to-bill 1.56 + GTF 售后年金 · 罕见的收入能见度是最大的安全垫</p></div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>3 个黑天鹅情景</strong>：</p>
+    <ol style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>粉末金属/GTF 质量事件二次恶化</strong>——概率 12% · 补偿远超 $700M · Pratt 利润率停滞 · 股价跌至 $150 以下</li>
+      <li><strong>大额商誉/无形资产减值</strong>——概率 8% · $34B 无形资产中某分部减值 · GAAP 净利大幅冲击 · 市场信心受损</li>
+      <li><strong>国防预算逆转 + 关税升级双杀</strong>——概率 8% · 订单转化放缓 + 成本逆风 · 估值压缩至 20x · 股价跌至 $140–150</li>
+    </ol>
+
+    <p style="margin-top:10px;"><strong>下行支撑</strong>：$271B 订单簿 + 国防刚需 + GTF 售后年金构成质量底。<span class="hl-t">$145–155 是相对较硬的估值支撑区</span>（52 周低 $143.56 + Forward P/E ~20x 下限）。但要注意：RTX 的"底"因净负债 $30.6B 而不如纯现金公司稳固——利润率修复不及预期时，下行空间可能被杠杆放大。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 12 ═══ -->
+<div class="section">
+  <div class="stitle">模块 12 · 股东回报分析</div>
+  <div class="cmt">
+    <p><strong>RTX 当前是一台"以分红为主、回购停摆"的稳健回报机器——但要把 2023 年那笔教科书级的 $10B 回购、当前的去杠杆优先、以及股权激励导致的股数缓升三件事分开看。</strong></p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 18px 0 10px; font-family: 'Segoe UI',sans-serif;">12.1 公司给了股东多少？</h3>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>年度</th><th>现金股息</th><th>股份回购</th><th>股东总回报</th><th>数据口径</th></tr>
+        <tr><td>FY2025</td><td>$3,574M</td><td>$50M</td><td><strong>~$3.62B</strong></td><td>一手（Q4'25 新闻稿）</td></tr>
+        <tr><td>FY2024</td><td>$3,400M</td><td class="warn-t">待核</td><td>≥$3.4B</td><td>二手/待核（回购金额来源分歧）</td></tr>
+        <tr><td>FY2023</td><td>$3,200M</td><td>$12,900M</td><td>~$16.1B</td><td>二手/待核（含 2023-10 $10B ASR）</td></tr>
+      </table>
+    </div>
+    <p style="font-size:13px; color: var(--text2); margin-top:8px"><strong>Trailing Shareholder Yield</strong> ≈ FY2025 返还约 $3.62B / 市值 $261B ≈ <strong>1.4%</strong>——<span class="warn-t">几乎全部来自股息，回购贡献可忽略</span>。这与 2023 年（含 $10B ASR，股东收益率一度极高）形成鲜明对比：RTX 的资本返还重心已从"大额回购"转向"稳健分红 + 去杠杆"。<span style="font-size:12px; color:var(--text3);">注：FY2023/FY2024 回购数据来自二手汇总，口径可能混淆"现金支付"与"ASR 授权/交割"，以 10-K 为准。</span></p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.2 给的方式好不好？</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>2023 年 ASR 是教科书级择时 · 含金量高</strong>：2023-10 执行 $10B 加速回购，初始交割约 1.084 亿股 @ $78.38。如今股价 $193——这笔回购回报约 +146%，且真实减少股本，把摊薄股数从约 14.7 亿（Q1'23 14.742 亿）压至约 13.4 亿（Q1'24 13.373 亿）。低位、大额、真实缩股，含金量极高</li>
+      <li><span class="warn-t">当前回购停摆 · 股数因股权激励缓升</span>：此后回购基本停摆（FY2025 仅 $50M，Q1'26 为零），股权激励稀释导致摊薄股数从 13.373 亿缓升至 <strong>13.646 亿</strong>（FY2025 约 13.60 亿）。当前"股息机器"而非"回购+注销复利机器"</li>
+      <li><strong>库存股口径</strong>：美股回购多入库存股（treasury stock），2023 ASR 实质减少了流通股。当前无实质回购，摊薄股数由 SBC 主导缓升——这是评估"给的方式"时最硬的检验：<strong>近两年回购未能抵消股权激励稀释</strong></li>
+    </ul>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.3 能不能继续给、给多少？</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><span class="warn-t">回购授权近乎耗尽</span>：截至 2025-09-30 约 <strong>$0.6B 剩余回购授权</strong>（二手/待 10-Q 核实），仅占市值约 0.2%——除非新授权，否则短期无实质回购支撑力度</li>
+      <li><strong>分红可持续</strong>：股息 $2.72/年，派息占 FY2026 调整后净利（约 $9.3B）约 <strong>39%</strong>、占 FCF（$8.5B）约 <strong>42%</strong>，覆盖充分，增息空间存在</li>
+      <li><strong>(股息 + 回购) / FCF 覆盖度</strong>：FY2025 =（$3,574M + $50M）/ $7,940M ≈ <strong>46%</strong>——远低于 100%，返还有充分余量，<span class="hl-t">并非借债回购</span>（Q1'26 反而偿债 $500M，净负债在下降）</li>
+      <li><strong>资本返还优先级</strong>：明确为 <strong>去杠杆 &gt; 分红 &gt; 回购</strong>。管理层当前把 FCF 优先用于降低 $30.6B 净负债 + 粉末金属补偿（2026 约 $700M），回购让位</li>
+    </ul>
+    <p><strong>模块小结</strong>：<span class="hl-t">稳健但保守——以分红为主的可持续回报</span>。连续增长的股息 + 46% 的返还/FCF 覆盖度（有充分余量、非借债回购）是加分项；2023 年 $10B ASR 在 $78 低位是教科书级择时。但当前回购几近停摆、授权额度仅剩 $0.6B、摊薄股数因股权激励缓升——RTX 现在是"股息机器"而非"回购+注销复利机器"。资本返还的含金量取决于去杠杆完成后能否重启注销式回购。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 13 ═══ -->
+<div class="section">
+  <div class="stitle">模块 13 · 海图评分卡 + 投资决策</div>
+
+  <div class="scorecard">
+    <h3 style="font-size:15px; color:var(--text); margin-bottom: 16px; font-family: 'Segoe UI',sans-serif;">海图评分卡（6 维 A-D）</h3>
+    <div class="score-grid">
+      <div class="score-card"><div class="score-letter s-bp">A-</div><div class="score-body"><h4>1. 生意可预测性</h4><p>$271B 订单簿 + book-to-bill 1.56 给了罕见的收入能见度。但 Pratt 利润率波动、GAAP-调整后差、商用航空周期性略降能见度。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">A-</div><div class="score-body"><h4>2. 经济护城河</h4><p>技术认证 + 转换成本 + 寡头 + GTF 装机年金，护城河宽且加宽。成本优势因粉末金属/关税暂被压制。</p></div></div>
+      <div class="score-card"><div class="score-letter s-b">B+</div><div class="score-body"><h4>3. 管理层质量</h4><p>去杠杆 + 恢复分红增长 + 连续利润率扩张 + 主动披露粉末金属。2023 ASR 择时优秀，但当前回购停摆。</p></div></div>
+      <div class="score-card"><div class="score-letter s-b">B</div><div class="score-body"><h4>4. 财务质量</h4><p>订单簿 + FCF 增长强，但净负债 $30.6B（非净现金）+ Pratt 利润率 8.7% + $34B 商誉/无形 + GAAP 净利被摊销压低。</p></div></div>
+      <div class="score-card"><div class="score-letter s-b">B</div><div class="score-body"><h4>5. 资本配置纪律</h4><p>去杠杆方向正确 + 2023 ASR 择时教科书 + 分红 FCF 覆盖充分。但当前回购停摆、股数因 SBC 缓升。</p></div></div>
+      <div class="score-card"><div class="score-letter s-c">C</div><div class="score-body"><h4>6. 估值与安全边际</h4><p>Forward P/E 28x / FCF Yield 3.3% / 现价高于公允 $160 约 21% · <strong>负安全边际，满估值</strong>。</p></div></div>
+    </div>
+
+    <div class="flag-row">
+      <strong>红旗排查</strong>：<strong>估值无安全边际</strong>（Forward P/E 28x、现价 $193 高于独立公允 $160 约 21%、反向 DCF 隐含 ~13% FCF 增速透支）是主要红旗。会计层面，GAAP 与调整后差（$0.27/季收购摊销）+ $34B 商誉/无形资产是合并会计的合法遗产、非激进会计，但减值风险需持续关注；净负债 $30.6B 是结构性特征。触发"<span class="warn-t">满估值 + 负安全边际</span>"——尽管 6 维基础质量优良（两个 A-），综合评级<strong>降至「持有观望」</strong>。
+    </div>
+
+    <p style="margin-top:18px; font-size:14px; color:var(--text); line-height:1.85;"><strong>综合评级</strong>：<span class="rating-badge rating-hold" style="font-size:14px;">持有观望</span>。生意质量优良（订单簿 + 护城河两个 A-，管理层 B+），但估值维度 C（满价、负安全边际）+ 满估值红旗 → 降至持有观望。核心判断：<strong>RTX 的订单簿与售后年金没问题，问题是当前 $193 已把未来几年的确定性充分定价——现有持仓者可让订单簿慢慢兑现，新买入者应等回调至独立公允 $160 以下、给出安全边际再考虑。</strong></p>
+  </div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">投资决策（精确价格 · USD）</h3>
+
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>项目</th><th>价格</th><th>说明</th></tr>
+      <tr><td>独立估值中位数（8 法加权）</td><td><strong>$160</strong></td><td>不锚定现价 · 现价高出约 21%</td></tr>
+      <tr><td>12 个月目标价（概率加权）</td><td><strong>$180</strong> (-7%)</td><td>悲观 $155 / 基准 $185 / 乐观 $215</td></tr>
+      <tr><td>悲观目标（35% 概率）</td><td>$155 (-20%)</td><td>逆风超预期 + 估值压缩至 ~20x</td></tr>
+      <tr><td>乐观目标（20% 概率）</td><td>$215 (+11%)</td><td>国防超级周期 + 售后放量 + 估值维持</td></tr>
+      <tr class="hl"><td>首仓建仓（中位数 $160 × 80%）</td><td><strong>$128</strong></td><td>距现价 -34% · 耐心等回调</td></tr>
+      <tr><td>二仓建仓（× 70%）</td><td>$112</td><td>-42% · 大幅回调机会</td></tr>
+      <tr><td>三仓建仓（× 60%）</td><td>$96</td><td>-50% · 黑天鹅级机会</td></tr>
+      <tr><td>止盈一档</td><td>$210</td><td>+9% · 近 52 周高 · 减仓 25%</td></tr>
+      <tr><td>止盈二档</td><td>$235</td><td>+22% · 再减 25%</td></tr>
+      <tr><td>止盈三档</td><td>$260</td><td>+35% · 再减 25% · 最后 25% 长期持有</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.85;"><strong>建议总仓位</strong>：<strong>2–4%</strong>（质量观察仓 · 当前满估值，应在回调时建仓，不追高）。<strong>持有周期</strong>：5–10 年（穿越粉末金属出清 + 国防超级周期 + 利润率修复）。<strong>关键监控指标</strong>：① Pratt 分部利润率能否从 8.7% 修复至双位数；② 粉末金属补偿现金流出是否超 $700M；③ 订单簿转化与 book-to-bill；④ 关税退款与 Collins 利润率；⑤ 净负债去化节奏与回购是否重启；⑥ Forward P/E 是否回落至 20x 以下（估值机会）。<strong>下次催化剂</strong>：2026-07-22 Q2 2026 财报（预计/待公司确认）。</p>
+</div>
+
+<!-- ═══ 海图页末长评 ═══ -->
+<div class="section">
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记 · 约 1090 字</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p class="lead">有一类公司，订单簿厚得让人安心，估值却贵得让人下不去手。RTX 就是这样——手握 $271B 创纪录订单（近三年营收），国防超级周期与 GTF 数十年的售后年金源源不断，可当市场把它的好一次性定价到 Forward P/E 28x 时，留给新买家的安全边际就所剩无几。Q1 有机增长 +10%、调整后 EPS +21%、连续第 6 个季度分部利润率扩张、还上调了全年指引——业绩挑不出毛病，问题从来不在生意，在价格。</p>
+
+      <p>RTX 是全球最大的航空航天与国防集团之一——Collins（航电/机电）+ Pratt &amp; Whitney（发动机）踩商用航空，Raytheon（导弹/防空/雷达）踩国防。它卖装备赚一次性钱，更靠装机后数十年的高毛利售后维修赚年金。Q1 2026 净销售 $22.08B（+9%，有机 +10%）、调整后 EPS $1.78（+21%）、创纪录订单 $271B（+25%）。</p>
+
+      <h4>几个研判要点</h4>
+
+      <p><strong>一、订单簿是这家公司最硬的资产。</strong> $271B backlog（商用 $162B + 国防 $109B）、book-to-bill 1.56、同比 +25%，相当于把未来近三年收入提前锁定。国防端爱国者、SM-6、AMRAAM 量价齐升，商用端 Collins 售后与 OE 强劲。<span class="hl-t">这份罕见的业务能见度</span>，是我给它可预测性 A- 的核心理由。</p>
+
+      <p><strong>二、GTF 是一枚"先苦后甜"的年金。</strong> Pratt 的齿轮传动涡扇在役满 10 年、超 5000 万飞行小时、约 8000 台订单，装机基数决定未来几十年的售后年金。但眼下 <span class="warn-t">Pratt 利润率仅 8.7%</span>，被粉末金属（powder metal）压制：2026 年约 $700M 客户补偿现金流出，之后仍残留数亿美元逆风。售后 +19%、营业利润 +$121M，复苏在路上，但修复需要耐心。</p>
+
+      <p><strong>三、别把 RTX 当"现金堡垒"——它是显著净负债。</strong> 现金 $6.82B，有息负债 $37.41B，<span class="warn-t">真实净负债 $30.6B</span>，另有约 $34B 商誉/无形资产（UTC-Raytheon 合并遗产）——这也是 GAAP EPS $1.51 与调整后 $1.78 差 $0.27 收购摊销的来源。管理层当前把现金优先用于去杠杆和分红，Q1 回购为零、FY2025 仅回购 $50M，股数还因股权激励缓升。2023 年那笔 $10B 加速回购（$78 低位）是教科书级择时，可惜此后停摆。</p>
+
+      <p><strong>四、关税与粉末金属是两道近期逆风。</strong> Q1 已缴约 $500M 关税并寻求退款（未入账），对 Collins 毛利约 130bps 逆风，全年关税展望不变。这些是可管理的成本，但提醒我们：利润率扩张并非一路坦途。</p>
+
+      <p><strong>五、12 个月目标价 $180，低于现价。</strong> 悲观 $155（35%）、基准 $185（45%）、乐观 $215（20%），概率加权 $180。而独立估值中位数（8 法加权）约 $160——当前 $193 高出内在价值约 21%。现金流类方法（DCF $145 / 所有者盈余 $135 / SOTP $150）明显低于市价，反向 DCF 隐含约 13% 长期 FCF 增速，高于 5–6% 有机指引——<span class="hl-t">市场已相当乐观</span>。</p>
+
+      <h4>海图研判</h4>
+
+      <p><strong>评级：持有观望</strong>（创纪录 $271B 订单簿 + 国防超级周期 + GTF 售后年金 + 连续 6+ 季度利润率扩张的顶级组合，对垒 净负债 $30.6B + Pratt 粉末金属拖累 + 关税逆风 + Forward P/E 28x 无安全边际的估值风险）。12 个月概率加权目标价 <strong>$180</strong>（-7%），叠加 1.4% 股息约总回报 -6%。</p>
+
+      <p>操作建议：当前 $193 远高于机械首仓（公允 $160 × 80% = $128），<strong>不在合理建仓窗口</strong>。耐心等回调至 $128 建首仓、$112 加二仓、$96 极端机会三仓。止盈三档 $210 / $235 / $260 分批减仓，最后 25% 长期持有。<strong>建议总仓位 2–4%</strong>，持有周期 5–10 年。<span class="hl-t">关键纪律：好订单簿也要好价格——RTX 的确定性值得尊重，但当前价格已经替它把未来几年的好消息付了账。</span></p>
+
+      <h4>风险提示</h4>
+
+      <p>粉末金属补偿超预期 / 关税升级 / Pratt 利润率修复不及 / 商誉减值 / 国防预算或商用航空周期逆转 / 满估值多重压缩——任一都可能让股价回到 $150–160。但 $271B 订单簿 + 国防刚需 + 售后年金构成质量底，<strong>$145–155 是相对较硬的支撑区</strong>（52 周低 $143.56 + Forward P/E 20x 下限）。但因净负债 $30.6B，RTX 的"底"不如纯现金公司稳固。</p>
+
+      <p>关键叙事：<strong>"全球最大航空航天与国防集团之一 + $271B 创纪录订单 + 国防超级周期 + GTF 售后年金"的世界级生意，对垒"净负债 $30.6B + Pratt 粉末金属拖累 + Forward P/E 28x 无安全边际"的估值与结构性风险</strong>。RTX 不是给追便宜货的人——它的确定性已被充分定价；它是给愿意在回调时耐心建仓、再等年金兑现的长期投资者。下次催化剂：2026-07-22 Q2 2026 财报（预计/待公司确认）。</p>
+
+      <p class="haitu-sign">—— 海图，灯下落笔，明日再观风浪。</p>
+
+      <p class="haitu-disc">⚠️ 免责声明：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，不构成任何投资建议。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div>《海图夜读》 · RTX Corporation RTX Q1 2026 海图研判</div>
+  <div style="margin-top:6px;">发布日 2026-04-21 · 研判日 2026-07-11 · 数据来源 RTX Q1 2026 官方财报新闻稿（PR Newswire + SEC 8-K）+ Q4/Q3 2025 财报 + 电话会 transcript · 货币 USD</div>
+</footer>
+
+<script>
+let curTheme = 'light';
+function toggleTheme() {
+  curTheme = curTheme === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', curTheme);
+  renderCharts();
+}
+
+const palette = {
+  light: { accent: '#8a9a8e', accent2: '#7b8fa0', accent3: '#b08d7a', gold: '#b9a06a', red: '#b87070', green: '#7a9a7a', grid: '#e5ddd5', text: '#7a706a' },
+  dark:  { accent: '#8a9a8e', accent2: '#8fabbf', accent3: '#c9a48e', gold: '#c9b07a', red: '#c08080', green: '#8aaa8a', grid: '#3e3a35', text: '#a09890' }
+};
+
+let charts = {};
+function renderCharts() {
+  Object.values(charts).forEach(c => c && c.destroy && c.destroy());
+  charts = {};
+  const p = palette[curTheme];
+  Chart.defaults.color = p.text;
+  Chart.defaults.borderColor = p.grid;
+
+  const quarters = ['Q1 25','Q2 25','Q3 25','Q4 25','Q1 26'];
+  const rev = [20.31, 21.58, 22.48, 24.24, 22.08];
+  const yoy = [5, 9, 12, 12, 9];
+  charts.rev = new Chart(document.getElementById('chartRev'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { type:'bar', label: '净销售 ($B)', data: rev, backgroundColor: p.accent + 'CC', yAxisID: 'y' },
+      { type: 'line', label: 'YoY %', data: yoy, borderColor: p.red, backgroundColor: p.red, tension: 0.3, yAxisID: 'y1' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false }, y1: { position: 'right', grid: { drawOnChartArea: false }, ticks: { callback: v => v + '%' } } } }
+  });
+
+  charts.margin = new Chart(document.getElementById('chartMargin'), {
+    type: 'bar',
+    data: {
+      labels: ['Collins Aerospace', 'Raytheon', 'Pratt & Whitney'],
+      datasets: [{ label: '调整后营业利润率 %', data: [17.1, 12.2, 8.7], backgroundColor: [p.green, p.accent2, p.red].map(c => c + 'CC') }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true, ticks: { callback: v => v + '%' } } } }
+  });
+
+  charts.segment = new Chart(document.getElementById('chartSegment'), {
+    type: 'doughnut',
+    data: {
+      labels: ['Pratt & Whitney', 'Collins Aerospace', 'Raytheon'],
+      datasets: [{ data: [8.17, 7.60, 6.95], backgroundColor: [p.accent3, p.accent, p.accent2] }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { font: { size: 11 } } } } }
+  });
+
+  const epsGaap = [1.14, 1.22, 1.41, 1.19, 1.51];
+  const epsAdj = [1.47, 1.56, 1.70, 1.55, 1.78];
+  charts.eps = new Chart(document.getElementById('chartEps'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { label: 'GAAP EPS', data: epsGaap, backgroundColor: p.accent2 + 'AA' },
+      { label: '调整后 EPS', data: epsAdj, backgroundColor: p.accent3 + 'CC' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, ticks: { callback: v => '$' + v } } } }
+  });
+
+  buildSankey();
+}
+
+function buildSankey() {
+  const p = palette[curTheme];
+  const labels = ['净销售 $22.08','营业成本 $17.48','毛利 $4.59','期间费用 $2.04','营业利润 $2.56','税息及其他(净) $0.50','归母净利 $2.06'];
+  const data = {
+    type: 'sankey',
+    orientation: 'h',
+    node: { pad: 16, thickness: 20, line: { color: p.grid, width: 0.5 }, label: labels, color: [p.accent, p.red, p.green, p.red, p.green, p.red, p.green] },
+    link: {
+      source: [0, 0, 2, 2, 4, 4],
+      target: [1, 2, 3, 4, 5, 6],
+      value:  [17.48, 4.59, 2.04, 2.56, 0.50, 2.06],
+      color: [p.red+'55', p.green+'66', p.red+'55', p.green+'66', p.red+'55', p.green+'66']
+    }
+  };
+  const layout = { font: { size: 12, color: p.text }, paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)', margin: { l: 10, r: 10, t: 10, b: 10 } };
+  Plotly.react('sankey', [data], layout, { displayModeBar: false, responsive: true });
+}
+
+renderCharts();
+</script>
+
+</body>
+</html>

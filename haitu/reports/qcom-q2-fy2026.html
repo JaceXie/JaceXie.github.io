@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-07-10 · Qualcomm Q2 FY2026 财报已于 2026-04-29 发布 -->
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Qualcomm QCOM Q2 FY2026 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+<meta name="description" content="全球手机 SoC 与无线专利双龙头——一手卖芯片、一手向全行业收专利过路费。Q2 手机 -13%（苹果自研基带流失 + 中国内存涨价去库存），但汽车 +38% 创纪录、Auto+IoT +20%、数据中心定制芯片 12 月首发、QTL 授权 72% EBT 高毛利年金稳定。GAAP 净利被 $57 亿一次性税收利益虚增（真实 Non-GAAP -10%）+ 净负债 -$55 亿。Forward P/E 17x 看似便宜——是深度价值还是价值陷阱，取决于数据中心能否补上苹果的洞。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Qualcomm QCOM Q2 FY2026 海图研判 · 海图夜读">
+<meta property="og:description" content="全球手机 SoC 与无线专利双龙头。Q2 手机 -13%（苹果基带流失 + 中国内存去库存），但汽车 +38% 创纪录、数据中心定制芯片 12 月首发、QTL 授权 72% EBT 稳定。GAAP 净利被 $57 亿一次性税收利益虚增（真实 Non-GAAP -10%）。Forward P/E 17x——是深度价值还是价值陷阱，看数据中心能否补上苹果的洞。">
+<meta property="og:url" content="https://jacexie.github.io/haitu/reports/qcom-q2-fy2026.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Qualcomm QCOM Q2 FY2026 海图研判 · 海图夜读">
+<meta name="twitter:description" content="全球手机 SoC 与无线专利双龙头。手机 -13% 承压，汽车 +38% 创纪录、数据中心 12 月首发。GAAP 净利被一次性税收利益虚增，Forward P/E 17x——深度价值还是价值陷阱？">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root { --bg:#f5f0eb; --bg2:#ece6df; --card:#ffffff; --card2:#f8f5f1; --border:#d9d0c7; --text:#4a4340; --text2:#7a706a; --text3:#a89f98; --accent:#8a9a8e; --accent2:#7b8fa0; --accent3:#b08d7a; --rose:#c09090; --gold:#b9a06a; --red:#b87070; --green:#7a9a7a; --shadow:rgba(0,0,0,0.06); --chart-grid:#e5ddd5; }
+[data-theme="dark"] { --bg:#1e1c1a; --bg2:#28251f; --card:#2e2a25; --card2:#363230; --border:#4a4540; --text:#d4ccc4; --text2:#a09890; --text3:#706860; --accent:#8a9a8e; --accent2:#8fabbf; --accent3:#c9a48e; --rose:#c09090; --gold:#c9b07a; --red:#c08080; --green:#8aaa8a; --shadow:rgba(0,0,0,0.3); --chart-grid:#3e3a35; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', serif; line-height: 1.75; font-size: 14.5px; transition: background .35s, color .35s; }
+a { color: var(--accent2); text-decoration: none; }
+.theme-bar { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); }
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+.toggle-switch { position: relative; width: 44px; height: 22px; background: var(--border); border-radius: 11px; cursor: pointer; transition: background .3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: var(--card); border-radius: 50%; transition: transform .3s; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+
+.hero { padding: 48px 24px 36px; text-align: center; border-bottom: 1px solid var(--border); }
+.hero-tag { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 3px 14px; border-radius: 20px; margin-bottom: 18px; }
+.hero h1 { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.pill { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: 'Segoe UI', sans-serif; font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow); }
+.pill strong { color: var(--text); }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle { font-size: 18px; font-weight: 700; color: var(--accent3); margin-bottom: 20px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+.stitle::before { content: ''; display: block; width: 4px; height: 20px; background: var(--accent3); border-radius: 2px; }
+
+.haitu-quip { display: flex; align-items: center; gap: 18px; background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 18px 24px; margin: 24px 0; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-quote { flex: 1; }
+.haitu-portrait { font-size: 15px; line-height: 1.65; color: var(--text); margin-bottom: 6px; font-weight: 600; }
+.haitu-rating-line { font-size: 13px; color: var(--text2); font-family: 'Segoe UI', sans-serif; }
+.rating-badge { display: inline-block; padding: 2px 12px; border-radius: 12px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; margin-left: 4px; }
+.rating-hold { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+
+.haitu-essay { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 28px 32px; margin: 24px 0 20px; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-essay-header { display: flex; align-items: center; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.haitu-avatar-sm { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); background: var(--red); box-shadow: 0 2px 8px rgba(184,112,112,0.2); }
+.haitu-name-lg { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 28px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 4px; }
+.haitu-essay-tag { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; }
+.haitu-essay-body { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 15px; line-height: 2.0; color: var(--text); }
+.haitu-essay-body p { margin-bottom: 14px; }
+.haitu-essay-body p.lead { font-size: 16px; font-style: italic; color: var(--text2); margin-bottom: 18px; }
+.haitu-essay-body strong { color: var(--text); font-weight: 700; }
+.haitu-essay-body h4 { font-size: 14px; color: var(--accent3); margin: 18px 0 10px; font-family: 'Segoe UI', sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+.haitu-sign { text-align: right; margin-top: 18px; font-family: 'Georgia', serif; font-size: 14px; color: var(--text2); font-style: italic; }
+.haitu-disc { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); font-style: italic; line-height: 1.7; }
+
+.stock-snap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px; }
+.snap-item { text-align: center; }
+.snap-label { font-family: 'Segoe UI', sans-serif; font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.snap-val { font-family: 'Segoe UI', sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+.snap-val.up { color: var(--green); }
+.snap-val.dn { color: var(--red); }
+.snap-sub { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow); }
+.kpi-l { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.badge { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+.up { background: rgba(122,154,122,.15); color: var(--green); }
+.dn { background: rgba(184,112,112,.15); color: var(--red); }
+.nt { background: rgba(123,143,160,.15); color: var(--accent2); }
+
+.tbl-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow); }
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI', sans-serif; font-size: 13px; }
+.tbl th { background: var(--card2); color: var(--text3); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); background: var(--card2); }
+
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); }
+.ctitle { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 260px; }
+
+.cmt { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 26px; line-height: 1.95; font-size: 14px; box-shadow: 0 1px 4px var(--shadow); color: var(--text); }
+.cmt p { margin-bottom: 14px; }
+.cmt p:last-child { margin-bottom: 0; }
+.cmt strong { color: var(--text); }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+
+.bscore { display: flex; align-items: center; gap: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; margin-bottom: 12px; box-shadow: 0 1px 4px var(--shadow); }
+.circle { width: 62px; height: 62px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; flex-shrink: 0; border: 3px solid; font-family: 'Segoe UI', sans-serif; }
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 4px; color: var(--text); }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.moat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+.moat-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); border-left: 4px solid var(--accent); }
+.moat-card.wide { border-left-color: var(--green); }
+.moat-card.narrow { border-left-color: var(--gold); }
+.moat-card.none { border-left-color: var(--red); }
+.moat-card h5 { font-size: 13px; color: var(--text); margin-bottom: 6px; }
+.moat-card .moat-rate { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.moat-card.wide .moat-rate { background: rgba(122,154,122,.18); color: var(--green); }
+.moat-card.narrow .moat-rate { background: rgba(185,160,106,.18); color: var(--gold); }
+.moat-card.none .moat-rate { background: rgba(184,112,112,.18); color: var(--red); }
+.moat-card p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+
+.ec-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 14px; box-shadow: 0 1px 3px var(--shadow); }
+.ec-badge { flex-shrink: 0; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-top: 2px; font-family: 'Segoe UI', sans-serif; }
+.ec-bull { background: rgba(122,154,122,.18); color: var(--green); }
+.ec-bear { background: rgba(184,112,112,.18); color: var(--red); }
+.ec-neut { background: rgba(185,160,106,.18); color: var(--gold); }
+.ec-body { flex: 1; }
+.ec-title { font-weight: 600; color: var(--text); margin-bottom: 3px; font-size: 14px; }
+.ec-note { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.dcf-note { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.dcf-note strong { color: var(--text); }
+
+.scorecard { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow); }
+.score-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.score-card { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px; }
+.score-letter { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Segoe UI', sans-serif; font-weight: 800; font-size: 22px; flex-shrink: 0; border: 3px solid; }
+.s-a { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.12); }
+.s-bp { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.06); }
+.s-b { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.10); }
+.s-bm { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.06); }
+.s-c { color: var(--red); border-color: var(--red); background: rgba(184,112,112,.08); }
+.score-body h4 { font-size: 13px; color: var(--text); margin-bottom: 4px; }
+.score-body p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+.flag-row { margin-top: 16px; padding: 12px 16px; background: rgba(184,112,112,.08); border: 1px solid rgba(184,112,112,.3); border-radius: 8px; font-size: 13px; color: var(--text2); }
+.flag-row strong { color: var(--red); }
+
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center; box-shadow: 0 1px 4px var(--shadow); }
+.pbox .pl { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; }
+.pbox .pv { font-family: 'Segoe UI', sans-serif; font-size: 28px; font-weight: 800; margin-bottom: 5px; }
+.pbox .pn { font-size: 12px; color: var(--text3); line-height: 1.5; }
+.pc { color: var(--red); } .pf { color: var(--gold); } .ps { color: var(--green); }
+
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.risk-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); position: relative; overflow: hidden; }
+.risk-card::before { content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent); }
+.risk-card.r1::before { background: var(--green); }
+.risk-card.r2::before { background: rgba(122,154,122,.6); }
+.risk-card.r3::before { background: var(--gold); }
+.risk-card.r4::before { background: var(--rose); }
+.risk-card.r5::before { background: var(--red); }
+.risk-card h5 { font-size: 14px; margin-bottom: 6px; color: var(--text); }
+.risk-score { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.r1 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r2 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r3 .risk-score { background: rgba(185,160,106,.18); color: var(--gold); }
+.r4 .risk-score { background: rgba(192,144,144,.18); color: var(--rose); }
+.r5 .risk-score { background: rgba(184,112,112,.18); color: var(--red); }
+.risk-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+footer { background: var(--card2); border-top: 1px solid var(--border); padding: 24px; text-align: center; color: var(--text3); font-size: 12px; margin-top: 40px; line-height: 1.8; }
+@media (max-width: 768px) { .cgrid,.pgrid { grid-template-columns: 1fr; } .hero h1 { font-size: 22px; } .kpi-grid { grid-template-columns: 1fr 1fr; } .stock-snap { grid-template-columns: 1fr 1fr; } .haitu-essay-header { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/QCOM" target="_blank" rel="noopener" title="在雪球查看 QCOM 实时行情">雪球 QCOM</a>
+  </div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">Q2 FY2026 财报发布 · 2026-04-29 &nbsp;|&nbsp; 海图研判 · 2026-07-11</div>
+  <h1>Qualcomm QCOM · FY2026 Q2 财报深度分析</h1>
+  <div class="hero-sub">NASDAQ: QCOM &nbsp;|&nbsp; 财季截至 2026-03-29 &nbsp;|&nbsp; 价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill">股价 <strong>$189.16</strong> <span style="color:var(--red)">距 52 周高 -27%</span></div>
+    <div class="pill">市值 <strong>~$200B</strong></div>
+    <div class="pill">Q2 营收 <strong>$10.60B</strong> <span style="color:var(--red)">-3%</span></div>
+    <div class="pill">Non-GAAP EPS <strong>$2.65</strong> <span style="color:var(--red)">-7%</span></div>
+    <div class="pill">QTL 授权 EBT 利润率 <strong>72%</strong></div>
+    <div class="pill">Forward P/E <strong>~17x</strong> <span style="color:var(--gold)">看似便宜</span></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 海图页首短评 ═══ -->
+<div class="haitu-quip">
+  <div class="haitu-quote">
+    <div class="haitu-portrait">全球手机 SoC 与无线专利双龙头——一手卖芯片、一手向全行业收专利过路费。Q2 手机业务 -13%（苹果自研基带结构性流失 + 中国内存涨价致 OEM 去库存），但汽车 +38% 创纪录、Auto+IoT 合计 +20%、数据中心定制芯片 12 月首发、QTL 授权 72% EBT 高毛利年金稳定；三年回馈股东 $268 亿、$219 亿回购授权在手。但 GAAP 净利被 $57 亿一次性递延税收利益虚增（真实 Non-GAAP -10%）+ 净负债 -$55 亿——Forward P/E 17x 看似便宜，是深度价值还是价值陷阱，取决于数据中心能否补上苹果的洞。</div>
+    <div class="haitu-rating-line">评级：<span class="rating-badge rating-hold">持有观望</span> · 12 个月概率加权目标价 $194（+3%）· "收费芯片 + 专利年金 + 汽车/数据中心新引擎 + 极致资本返还"，对垒"苹果基带结构性流失 + 中国内存周期 + 数据中心未兑现 + 无安全边际的合理估值"</div>
+  </div>
+</div>
+
+<!-- ═══ 市场数据快照 ═══ -->
+<div class="section">
+  <div class="stitle">市场数据快照（2026-07-10 收盘）</div>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">股价（美元）</div><div class="snap-val">$189.16</div><div class="snap-sub">2026-07-10 收盘 · 距 52 周高 -27%</div></div>
+    <div class="snap-item"><div class="snap-label">市值</div><div class="snap-val">~$200B</div><div class="snap-sub">1,059M 股 × $189.16</div></div>
+    <div class="snap-item"><div class="snap-label">TTM Non-GAAP P/E</div><div class="snap-val">~15.9x</div><div class="snap-sub">EPS $11.92（近 4 季）</div></div>
+    <div class="snap-item"><div class="snap-label">Forward P/E</div><div class="snap-val nt">~17x</div><div class="snap-sub">FY26 Non-GAAP EPS ~$10.7</div></div>
+    <div class="snap-item"><div class="snap-label">P/S (TTM)</div><div class="snap-val">~4.5x</div><div class="snap-sub">营收 ~$44.5B</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间</div><div class="snap-val">$122 - $260</div><div class="snap-sub">现价处中段偏下</div></div>
+    <div class="snap-item"><div class="snap-label">股息率</div><div class="snap-val">~1.88%</div><div class="snap-sub">$3.56/年 · 回购为主</div></div>
+    <div class="snap-item"><div class="snap-label">FCF Yield</div><div class="snap-val nt">~6%</div><div class="snap-sub">FY25 FCF ~$12.8B 基准</div></div>
+    <div class="snap-item"><div class="snap-label">股东收益率</div><div class="snap-val up">~6.3%</div><div class="snap-sub">FY25 回购+股息 $12.6B</div></div>
+    <div class="snap-item"><div class="snap-label">现金 + 短投</div><div class="snap-val">$9.80B</div><div class="snap-sub">2026-03-29 末</div></div>
+    <div class="snap-item"><div class="snap-label">有息负债</div><div class="snap-val dn">$15.27B</div><div class="snap-sub">短债 0.50 + 长债 14.77</div></div>
+    <div class="snap-item"><div class="snap-label">真实净负债</div><div class="snap-val dn">-$5.47B</div><div class="snap-sub">⚠️ 净负债非净现金</div></div>
+  </div>
+  <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">数据时点：股价 2026-07-10 收盘 $189.16（-1.02%，7-11 为周六休市，7-09 收 $191.11）· 财务数据来源 Qualcomm Q2 FY2026 官方财报新闻稿（IR PDF + SEC 8-K EX99.1 + 10-Q，2026-04-29 发布，财季截至 2026-03-29）· 货币 USD。Qualcomm 财年截至 9 月底，故 <strong>FY2026 = 2025-10 至 2026-09</strong>，Q2 FY2026 = 2026-01 至 2026-03-29。⚠️ 高通已从"净现金"转为<strong>净负债 -$5.47B</strong>（有息负债 $15.27B > 现金+短投 $9.80B）——H1 用受限现金 $23.2 亿完成 Alphawave 收购 + 大额回购所致。</p>
+</div>
+
+<!-- ═══ Q2 FY2026 KPI ═══ -->
+<div class="section">
+  <div class="stitle">Q2 FY2026 核心业绩（USD · 财季截至 2026-03-29）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">总营收</div><div class="kpi-v">$10.60B</div><span class="badge dn">-3% YoY</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">可比口径 -2% · 手机拖累</div></div>
+    <div class="kpi"><div class="kpi-l">设备与服务（QCT+QSI）</div><div class="kpi-v">$9.06B</div><span class="badge dn">-4%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">芯片业务</div></div>
+    <div class="kpi"><div class="kpi-l">授权收入（QTL）</div><div class="kpi-v">$1.54B</div><span class="badge up">+5%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">专利年金 · 72% EBT</div></div>
+    <div class="kpi"><div class="kpi-l">Non-GAAP 毛利率</div><div class="kpi-v">54.7%</div><span class="badge nt">高位稳定</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">GAAP 53.8%</div></div>
+    <div class="kpi"><div class="kpi-l">Non-GAAP 营业利润</div><div class="kpi-v">$3.28B</div><span class="badge nt">30.9% 利润率</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">GAAP $2.31B / 21.8%</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 净利润</div><div class="kpi-v">$7.37B</div><span class="badge up">+162%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">⚠️ 含 $5.7B 一次性税收利益</div></div>
+    <div class="kpi"><div class="kpi-l">Non-GAAP 净利润</div><div class="kpi-v">$2.84B</div><span class="badge dn">-10%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">真实经营口径</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 摊薄 EPS</div><div class="kpi-v">$6.88</div><span class="badge nt">失真</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">剔一次性 $5.33 后 ≈ $1.55</div></div>
+    <div class="kpi"><div class="kpi-l">Non-GAAP 摊薄 EPS</div><div class="kpi-v">$2.65</div><span class="badge dn">-7%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">落指引高端 ($2.45-2.65)</div></div>
+    <div class="kpi"><div class="kpi-l">QCT 汽车</div><div class="kpi-v">$1.33B</div><span class="badge up">+38%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">季度创纪录</div></div>
+    <div class="kpi"><div class="kpi-l">QCT 手机</div><div class="kpi-v">$6.02B</div><span class="badge dn">-13%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">苹果流失 + 中国去库存</div></div>
+    <div class="kpi"><div class="kpi-l">QCT IoT</div><div class="kpi-v">$1.73B</div><span class="badge up">+9%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">工业/边缘回暖</div></div>
+  </div>
+</div>
+
+<!-- ═══ 看穿桥接 高亮框 ═══ -->
+<div class="section">
+  <div class="stitle">本季必看 · 两个"看穿"：GAAP 净利虚增、总营收掩盖内部剧烈分化</div>
+  <div class="cmt">
+    <p><strong>Qualcomm 本季的利润表有两个必须"看穿"的地方——看不穿，就会把一份承压的季报读成一份"净利翻倍"的盛世，或把一个正在转型的公司读成一个正在衰退的公司。</strong></p>
+
+    <p><strong>看穿一：GAAP 净利 +162% 是会计幻觉，Non-GAAP -10% 才是真相。</strong> GAAP 净利 $7.37B、EPS $6.88 看着惊艳，但其中<span class="hl-t">整整 $5.7B（$5.33/股）来自一次性递延所得税估值备抵转回</span>——这是去年 Q4 FY2025 计提的 $5.7B 联邦递延税估值备抵（当时把 GAAP 打成亏损），本季转回。它是<span class="warn-t">非现金、非经营、一进一出的会计科目</span>，与本季真实赚钱能力无关。剔除后 GAAP 经营性 EPS 仅约 $1.55；而<strong>Non-GAAP 净利 $2.84B（-10%）、EPS $2.65（-7%）才反映真实经营</strong>——同比是<strong>下滑</strong>的。有意思的是：Q4 计提 -$5.7B 与本季转回 +$5.7B 在 TTM 口径上大致对冲，所以看 TTM 反而比看单季 GAAP 更干净。</p>
+
+    <div class="tbl-wrap" style="margin:14px 0;">
+      <table class="tbl">
+        <tr><th>GAAP → Non-GAAP 净利拆解（Q2 FY26）</th><th>$M / 每股</th><th>性质</th></tr>
+        <tr><td>GAAP 净利 / EPS</td><td>7,370 / $6.88</td><td>报表口径</td></tr>
+        <tr><td><span class="warn-t">减：一次性递延税估值备抵转回</span></td><td><span class="warn-t">~(5,700) / ($5.33)</span></td><td>非经营 · 非现金</td></tr>
+        <tr><td>GAAP 经营性净利 / EPS（约）</td><td>~1,660 / ~$1.55</td><td>剔一次性</td></tr>
+        <tr><td>± Non-GAAP 调整（SBC/无形摊销/收购项 + 固定 12.5% 税率）</td><td>净额差异</td><td>口径调节</td></tr>
+        <tr class="hl"><td><strong>Non-GAAP 净利 / EPS</strong></td><td><strong>2,840 / $2.65</strong></td><td><strong>真实经营 · -10% YoY</strong></td></tr>
+      </table>
+    </div>
+
+    <p><strong>看穿二：总营收仅 -3%，掩盖了内部"退潮 vs 涨潮"的剧烈分化。</strong> 表面看总营收 $10.60B（-3%）只是小幅回落，但内部是两股相反的力量在拉扯——<span class="warn-t">手机 $6.02B（-13%）在退潮</span>（苹果自研基带结构性流失 + 中国 OEM 因内存涨价砍单去库存，公司主动少发货），<span class="hl-t">而汽车 $1.33B（+38% 创纪录）+ IoT $1.73B（+9%）在涨潮</span>。这正是理解高通的钥匙：<strong>它不是一家在整体衰退的公司，而是一家旧引擎（手机）在减速、新引擎（汽车/IoT/数据中心）在加速的转型期公司</strong>。管理层称中国手机为暂时性低谷，预计 7 月季度（Q3）见底后环比回升。</p>
+
+    <div class="tbl-wrap" style="margin:14px 0;">
+      <table class="tbl">
+        <tr><th>分部营收拆分（Q2 FY26 · $M）</th><th>金额</th><th>YoY</th><th>解读</th></tr>
+        <tr><td>QCT 手机 Handsets</td><td>6,024</td><td><span class="warn-t">-13%</span></td><td>苹果流失 + 中国去库存（退潮）</td></tr>
+        <tr><td>QCT 汽车 Automotive</td><td>1,326</td><td><span class="hl-t">+38%</span></td><td>季度创纪录（涨潮）</td></tr>
+        <tr><td>QCT IoT</td><td>1,726</td><td><span class="hl-t">+9%</span></td><td>工业/边缘回暖（涨潮）</td></tr>
+        <tr><td>QCT 小计</td><td>9,076</td><td>-4%</td><td>EBT 利润率 27%（去年 30%）</td></tr>
+        <tr><td>QTL 授权 Licensing</td><td>1,382</td><td>+5%</td><td>EBT 利润率 72% · 高毛利年金</td></tr>
+        <tr><td>QSI / 其他</td><td>141</td><td>—</td><td>战略投资等</td></tr>
+        <tr class="hl"><td><strong>总营收</strong></td><td><strong>10,599</strong></td><td><strong>-3%</strong></td><td><strong>内部剧烈分化</strong></td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 趋势图 ═══ -->
+<div class="section">
+  <div class="stitle">关键指标趋势</div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">总营收（$B）& Non-GAAP EPS（$，近 5 季）</div><div class="cwrap"><canvas id="chartRev"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">Non-GAAP 净利率趋势（%，近 5 季）</div><div class="cwrap"><canvas id="chartMargin"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">Q2 FY2026 营收分部拆分（$B）</div><div class="cwrap"><canvas id="chartSegment"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">GAAP vs Non-GAAP EPS（$，近 5 季 · GAAP 被税项扭曲）</div><div class="cwrap"><canvas id="chartEPS"></canvas></div></div>
+  </div>
+</div>
+
+<!-- ═══ 桑基图 ═══ -->
+<div class="section">
+  <div class="stitle">Q2 FY2026 利润表资金流向桑基图（$B · GAAP 口径）</div>
+  <div class="ccard">
+    <div id="sankey" style="width:100%;height:480px;"></div>
+    <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">说明：总营收 $10.60 → 营业成本 $4.90 + 毛利 $5.70 → 研发 $2.46 + 销管&其他 $0.93 + 营业利润 $2.31 → 非经营净支出 $0.08（净利息等）+ 税前利润 $2.23 → GAAP 净利 $7.37。<strong>注意：GAAP 净利 $7.37B &gt; 税前利润 $2.23B</strong>——差额 $5.14B 来自图中单独标注的<span class="warn-t">一次性递延税收利益 $5.14B（含 $5.7B 估值备抵转回，非经营）</span>注入。剔除该一次性项，本季真实经营净利仅约 $1.66B（Non-GAAP 口径 $2.84B）。桑基图刻意保留这个"税收利益注入"节点，正是为了让读者一眼看穿 GAAP 净利的虚增来源。研发占营收 23%（$2.46B/季）是高通护城河的持续投入。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 1 ═══ -->
+<div class="section">
+  <div class="stitle">模块 1 · 公司概览与背景</div>
+  <div class="cmt">
+    <p><strong>Qualcomm Inc.</strong>（NASDAQ: QCOM），总部圣迭戈，1985 年创立。<strong>1991 年 IPO</strong>。它是全球移动通信技术的奠基者之一——CDMA、3G/4G/5G 的核心专利大量出自高通，也是全球最大的智能手机应用处理器（SoC）与基带供应商之一。财年截至 9 月最后一个周日（FY2026 = 2025-10 至 2026-09）。</p>
+
+    <p><strong>核心叙事</strong>：高通是一门<span class="hl-t">"芯片 + 专利"的双引擎生意</span>——(1) <strong>QCT</strong>（芯片）设计并销售手机、汽车、IoT 的 Snapdragon SoC 与基带；(2) <strong>QTL</strong>（授权）向几乎所有手机厂商收取无线专利许可费，是一门 72% EBT 利润率的"全行业过路费"年金。这个双引擎结构历史上让高通"既卖铲子、又收矿税"。但当下正处在关键转型：<span class="warn-t">最大客户苹果正转向自研基带，手机芯片这条腿在结构性收缩</span>，高通必须用<strong>汽车（+38% 创纪录）、IoT、以及全新的数据中心（Alphawave/Ventana）</strong>三条新腿补上苹果留下的洞。</p>
+
+    <p><strong>三大成长支柱</strong>（管理层战略框架）：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>手机 SoC（基本盘 · 承压）</strong>——非苹果安卓旗舰 SoC 龙头，非苹果 QCT 营收 5 年 CAGR ~15%、近两年 +17%/+18%，用以对冲苹果流失</li>
+      <li><strong>汽车 + IoT（新引擎 · 高增长）</strong>——汽车连续多季 +35% 以上、Q2 +38% 创纪录；工业 IoT 用户超 3000 万（含 Arduino）；Auto+IoT 合计 +20%</li>
+      <li><strong>数据中心（未来数十亿美元期权）</strong>——收购 Alphawave（CPU/加速器/连接 IP）+ Ventana（RISC-V CPU），已确认与一家领先超大规模厂商多年定制芯片合作，<span class="hl-t">首批出货预计 2026 年 12 月</span></li>
+    </ul>
+
+    <p><strong>能力圈检验</strong>：芯片 + 专利的双引擎结构清晰可懂（看得懂的好生意）。但<span class="warn-t">三块不确定：(1) 苹果基带流失的斜率与终点——这是决定手机业务下限的关键；(2) 数据中心定制芯片能否兑现（首批出货才 2026-12，客户与量产节奏未完全披露）；(3) QTL 专利授权的长期续约风险——每一轮许可到期（如历史上与苹果、华为的争端）都是估值的达摩克利斯之剑</span>。这三点决定了 5 年后高通是"成功转型的多元芯片平台"还是"手机周期退潮里的价值陷阱"。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 2 ═══ -->
+<div class="section">
+  <div class="stitle">模块 2 · 管理层评估</div>
+
+  <div class="bscore">
+    <div class="circle cg">B+</div>
+    <div class="bd">
+      <h4>Cristiano Amon · CEO（2021 至今）</h4>
+      <p>工程师出身，2021 年接任 CEO 后<span class="hl-t">主导了高通从"手机一条腿"向"手机 + 汽车 + IoT + 数据中心"多元化的战略重构</span>。面对苹果自研基带这一结构性逆风，Amon 的应对是主动押注三条新增长曲线——汽车（连续创纪录）、边缘 AI/IoT、以及通过收购 Alphawave + Ventana 切入数据中心 CPU/加速器/RISC-V。他把代理式 AI（agentic AI）定位为智能手机/PC/汽车/工业 IoT 下一轮换机催化，并勾勒 2028-2030 的 6G 路线图。海图判断：这是一位<strong>清醒面对旧引擎减速、主动布局新引擎的掌舵人</strong>——方向正确，但数据中心/Alphawave 是一次尚未兑现的重注，执行结果仍需观察。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>资本配置纪律 · 回购 + 增息双管，近 100% FCF 回馈</h4>
+      <p>
+      <strong>持续加速回购</strong>：FY2023 $29.7 亿 → FY2024 $41.2 亿 → FY2025 $87.9 亿，三年回购 $158.9 亿；摊薄股数从 FY2023 的 11.26 亿降至 Q2 FY26 的 10.72 亿。<br>
+      <strong>连年增息</strong>：季度股息 $0.89（年化 $3.56），三年股息合计 $109.5 亿。FY2025 自由现金流约 $128 亿，<span class="hl-t">近 100% 回馈股东</span>（$126 亿）。2026-03-17 新授权 <strong>$200 亿</strong>回购计划（叠加旧计划剩余 $21 亿 = 可用 $219 亿，约占市值 11%，无到期日）。<br>
+      <span class="warn-t">两个需留意</span>：(1) 回购在 FY2025 大幅提速，而当年股价处相对高位，择时不算最优；(2) 高通已从净现金转为<strong>净负债 -$5.5B</strong>——H1 用受限现金 $23.2 亿完成 Alphawave 收购 + 大额回购。对 FCF 强劲的公司这是可接受的资本结构，但"近 100% FCF 回馈 + 同时并购 + 转净负债"意味着安全垫在变薄。
+      </p>
+    </div>
+  </div>
+
+  <div class="cmt">
+    <p><strong>长期主义测试</strong>：✅ Amon 团队以"多元化对冲苹果流失 + 押注数据中心/6G 长期期权"为主线，而非粉饰单季财报——本季主动、清晰地披露苹果基带逆风与中国去库存低谷，坦诚度高。<strong>坦诚度</strong>：电话会对"中国手机因内存涨价砍单、公司主动少发货于终端需求"直言不讳，并给出"Q3 见底、下季环比回升"的具体判断，不回避短期承压。<strong>利益绑定</strong>：管理层持股比例为成熟大盘股常态（不高），薪酬与 Non-GAAP EPS/营收强挂钩。海图评价：<span class="hl-t">方向感强、坦诚度高、资本返还纪律好，但 Alphawave/数据中心是一次结果未知的重注</span>——管理层质量给 B+。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 3 ═══ -->
+<div class="section">
+  <div class="stitle">模块 3 · 商业模式深度解析</div>
+  <div class="cmt">
+    <p><strong>海图"一句话测试"</strong>：<span class="hl-t">高通一手卖手机/汽车/IoT 芯片（QCT，赚设备的钱），一手向几乎所有手机厂商收无线专利许可费（QTL，赚全行业的过路费）——芯片是规模引擎、专利是高毛利年金，两者相加是一门"卖铲子又收矿税"的双引擎生意。</span></p>
+
+    <p><strong>双引擎结构</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>QCT（芯片，占营收 ~86%）</strong>——手机 SoC/基带 + 汽车数字座舱/ADAS + IoT/边缘 AI 芯片。这是规模引擎，Q2 EBT 利润率 27%。手机受苹果流失 + 周期拖累，汽车/IoT 是增量。</li>
+      <li><strong>QTL（授权，占营收 ~13%）</strong>——向手机厂商收取 3G/4G/5G 无线专利许可费。这是<span class="hl-t">72% EBT 利润率的高毛利年金</span>，几乎纯利润，是高通"矿税"般的护城河核心。</li>
+      <li><strong>QSI（战略投资，占营收 ~1%）</strong>——风险投资性质，规模小。</li>
+    </ul>
+
+    <p><strong>单位经济与议价能力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>QTL 是利润皇冠</strong>——72% EBT 利润率、按手机售价的一定比例收费，几乎不需增量投入，是最赚钱、最"轻"的业务。但它的天花板是全球智能手机出货量与售价（成熟市场），且面临逐轮续约的价格谈判压力。</li>
+      <li><strong>对手机厂商议价能力</strong>：QCT 强（安卓旗舰基本离不开 Snapdragon）但<span class="warn-t">对苹果失去了议价权（苹果自研基带）</span>；QTL 强（无线专利是标准必要专利，绕不开）但受各国监管与反垄断审视。</li>
+      <li><strong>对汽车客户议价能力</strong>：中-强（数字座舱/ADAS 设计周期长、切换成本高、订单能见度好，多季 +35% 以上增长与在手设计管线印证）。</li>
+      <li><strong>研发密度</strong>：Q2 研发 $2.46B（占营收 23%）——高研发是维持芯片与专利领先的必要成本，也是护城河的来源。</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══ 模块 4 ═══ -->
+<div class="section">
+  <div class="stitle">模块 4 · 经济护城河分析（5 维）</div>
+  <div class="moat-grid">
+    <div class="moat-card wide">
+      <h5>1. 无形资产（专利/技术）</h5>
+      <span class="moat-rate">宽</span>
+      <p>3G/4G/5G 标准必要专利组合是全行业绕不开的"过路费"，QTL 72% EBT 印证定价权。<span class="warn-t">但每轮续约（苹果/华为历史争端）都是风险点</span>。<strong>趋势：稳定偏承压</strong>（手机单元成熟）。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>2. 转换成本</h5>
+      <span class="moat-rate">中-宽</span>
+      <p>安卓旗舰深度绑定 Snapdragon 平台、汽车座舱/ADAS 设计周期数年切换成本极高。<span class="warn-t">但苹果证明了大客户可自研绕过</span>。<strong>趋势：手机端侵蚀 / 汽车端加宽</strong>。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>3. 规模/成本优势</h5>
+      <span class="moat-rate">宽</span>
+      <p>全球最大非苹果手机 SoC + 领先基带研发规模，$2.46B/季研发摊薄单位成本，中小玩家难以追赶先进制程 + 调制解调技术。<strong>趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>4. 网络效应</h5>
+      <span class="moat-rate">窄</span>
+      <p>芯片本身网络效应弱；生态（开发者、参考设计、Arduino 3000 万 IoT 用户）有一定粘性但非强网络效应。<strong>趋势：IoT 端渐强</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>5. 有效规模</h5>
+      <span class="moat-rate">中</span>
+      <p>手机基带是少数玩家（高通/联发科/苹果自研）；汽车/数据中心是竞争激烈的红海（NXP/TXN/AVGO/NVDA）。<strong>趋势：手机端寡头 / 新赛道分散</strong>。</p>
+    </div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>10 年后护城河会更宽还是更窄？</strong> <span class="hl-t">取决于两个方向的赛跑</span>：(1) <span class="warn-t">旧护城河在收窄</span>——苹果自研基带凿开了手机芯片最赚钱的大客户，全球智能手机出货成熟也压制 QTL 长期天花板；(2) <span class="hl-t">新护城河在尝试拓宽</span>——汽车（设计周期长、粘性高、+38% 创纪录）已是实打实的第二增长极，数据中心（Alphawave CPU/加速器 + Ventana RISC-V）是尚未兑现的第三极。<strong>核心判断：高通的护城河不是加宽也不是简单侵蚀，而是"重心转移"——从手机专利/芯片，转向汽车 + 边缘 AI + 数据中心。转移能否成功，是这只股票 5-10 年的胜负手。</strong></p>
+    <p><strong>定价权</strong>：QTL 端强（标准必要专利）但受手机单元成熟与续约谈判压制；QCT 端在安卓/汽车强、对苹果已失。综合评级护城河 <strong>B</strong>——真实存在但正处在结构性重心转移期。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 5 ═══ -->
+<div class="section">
+  <div class="stitle">模块 5 · 财务深度分析</div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 12px 0; font-family: 'Segoe UI',sans-serif;">5.1 近 5 季核心趋势（Non-GAAP 为主 · GAAP 被税项扭曲）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>季度</th><th>总营收 $M</th><th>Non-GAAP EPS</th><th>GAAP EPS</th><th>Non-GAAP 净利率</th><th>QCT $M</th><th>汽车 $M</th></tr>
+      <tr><td>Q2 FY25 (Mar'25)</td><td>10,979</td><td>$2.85</td><td>$2.52</td><td>28.9%</td><td>9,469</td><td>959</td></tr>
+      <tr><td>Q3 FY25 (Jun'25)</td><td>10,365</td><td>$2.77</td><td>$2.43</td><td>29.3%</td><td>8,993</td><td>984</td></tr>
+      <tr><td>Q4 FY25 (Sep'25)</td><td>11,270</td><td>$3.00</td><td><span class="warn-t">-$2.89</span></td><td>28.9%</td><td>9,821</td><td>1,053</td></tr>
+      <tr><td>Q1 FY26 (Dec'25)</td><td><span class="hl-t">12,252</span></td><td><span class="hl-t">$3.50</span></td><td>$2.78</td><td>30.9%</td><td>10,613</td><td>1,101</td></tr>
+      <tr class="hl"><td>Q2 FY26 (Mar'26)</td><td>10,599</td><td>$2.65</td><td>$6.88</td><td>26.8%</td><td>9,076</td><td>1,326</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">⚠️ <strong>GAAP EPS 严重失真</strong>：Q4 FY25 因计提 $5.7B 递延税估值备抵而 GAAP 亏损 -$2.89、Q2 FY26 因转回而 GAAP 暴增 $6.88——两者一进一出，趋势必须看 Non-GAAP。真实故事：Q1 FY26 营收 $12.25B/EPS $3.50 双创纪录（旗舰强劲），Q2 因手机去库存回落至 $2.65。<strong>汽车营收（959 → 1,326）连续 5 季稳步攀升，是最亮的结构性增量</strong>。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.2 关键比率（Q2 FY2026）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>指标</th><th>数值</th><th>读数</th></tr>
+      <tr><td>Non-GAAP 毛利率</td><td>54.7%</td><td>高位稳定（GAAP 53.8%）</td></tr>
+      <tr><td>Non-GAAP 营业利润率</td><td>30.9%</td><td>芯片+专利混合（GAAP 21.8%）</td></tr>
+      <tr><td>QCT EBT 利润率</td><td>27%</td><td>去年 30% · 手机拖累下滑</td></tr>
+      <tr><td>QTL EBT 利润率</td><td><span class="hl-t">72%</span></td><td>去年 70% · 高毛利年金</td></tr>
+      <tr><td>ROE（Non-GAAP TTM）</td><td>~47%</td><td>TTM 净利 ~$12.9B / 权益 $27.3B</td></tr>
+      <tr><td>研发 / 营收</td><td>23%</td><td>$2.46B/季 · 高研发密度</td></tr>
+      <tr><td>Non-GAAP 有效税率</td><td>12.5%</td><td>固定税率（GAAP 因税收利益为负）</td></tr>
+    </table>
+  </div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.3 资产负债健康度（2026-03-29 末 · $M）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>金额</th><th>说明</th></tr>
+      <tr><td>现金及等价物</td><td>5,435</td><td>—</td></tr>
+      <tr><td>短期有价证券（流动）</td><td>4,364</td><td>—</td></tr>
+      <tr class="hl"><td>现金 + 短期投资合计</td><td>9,799</td><td>可用流动性</td></tr>
+      <tr><td>受限现金</td><td>0</td><td>FY25 末 $2,323M 已用于 Alphawave 收购</td></tr>
+      <tr class="hl"><td>短期债务</td><td>498</td><td>已独立核对</td></tr>
+      <tr class="hl"><td>长期债务</td><td>14,772</td><td>已独立核对</td></tr>
+      <tr class="hl"><td>有息负债合计</td><td>15,270</td><td>逐项核对</td></tr>
+      <tr><td>经营租赁负债</td><td>832</td><td>FY25 10-K 口径（流动 102 + 非流动 730）</td></tr>
+      <tr class="hl"><td><strong>真实净负债</strong></td><td><strong>-5,471</strong></td><td>⚠️ 含租赁则 -6,303 · 净负债非净现金</td></tr>
+      <tr><td>存货</td><td>7,368</td><td>由 FY25 末 6,526 升至 7,368 · 主动建库存</td></tr>
+      <tr><td>应收账款</td><td>4,347</td><td>—</td></tr>
+      <tr><td>商誉</td><td>14,251</td><td>由 11,358 增至 14,251 · Alphawave 收购</td></tr>
+      <tr><td>递延所得税资产</td><td>5,968</td><td>估值备抵转回后确认</td></tr>
+      <tr><td>总资产 / 总负债 / 股东权益</td><td>57,136 / 29,858 / 27,278</td><td>—</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">⚠️ <strong>净负债非净现金——铁律提示</strong>：高通有息负债 $15.27B（短债 $0.50B + 长债 $14.77B，已逐项核对）> 现金+短投 $9.80B，<strong>真实净负债 -$5.47B</strong>（含经营租赁 -$6.30B）。<span class="hl-t">这是本季一个关键变化</span>：高通历史上接近净现金，H1 FY2026 因(1)用受限现金 $23.2 亿完成 Alphawave 收购（商誉从 $113.6 亿增至 $142.5 亿）、(2)大额回购，转为净负债。此外<strong>存货主动从 $65.3 亿升至 $73.7 亿</strong>——在手机去库存周期主动建库存，赌 Q3 见底后回补需求，是一个需跟踪的信号（回补对则顺周期、回补错则减值风险）。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.4 现金流量（Q2 单季 + H1 六个月 · $M）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>Q1 FY26（官方）</th><th>Q2 FY26（H1−Q1 推导）</th><th>H1 FY26 六个月（官方）</th></tr>
+      <tr><td>经营活动现金流（OCF）</td><td>4,965</td><td>2,449</td><td>7,414</td></tr>
+      <tr><td>- Capex</td><td>549</td><td>533</td><td>1,082</td></tr>
+      <tr class="hl"><td>自由现金流（FCF）</td><td>4,416</td><td>1,916</td><td>6,332</td></tr>
+      <tr><td>回购</td><td>2,650</td><td>2,792（1,900 万股）</td><td>5,442</td></tr>
+      <tr><td>股息</td><td>949</td><td>946（$0.89/股）</td><td>1,895</td></tr>
+      <tr class="hl"><td>回馈股东合计</td><td>3,599</td><td>3,738</td><td>7,337</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">⚠️ <strong>口径说明</strong>：高通季度现金流量表按 H1（六个月）累计列报，无单季 Q2 现金流量表，故 Q2 单季值 = H1 六个月官方数 − Q1 三个月官方数推导，回购/股息与新闻稿披露（$2.8B/$946M）吻合。<span class="warn-t">关键观察</span>：<strong>Q2 FCF $1.92B &lt; 回馈股东 $3.74B</strong>——差额 $1.8B 动用了资产负债表资金（现金/发债）。且 <strong>H1 Capex $10.8 亿是去年 H1 $4.91 亿的 2.2 倍</strong>——数据中心/AI 投资推动资本开支翻倍，这既是新增长的投入，也是短期挤压 FCF 的原因。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.5 所有者盈余（价值投资口径 · FY2025）</h3>
+  <div class="dcf-note">
+    <p><strong>所有者盈余 = 净利润 + 折旧摊销 + SBC − 维护性 Capex ± 营运资金 ≈ 正常化 FCF</strong></p>
+    <p>FY2025 高通 FCF 约 $12.8B（正常化基准）；FY2026 因数据中心 Capex 翻倍（H1 $10.8 亿）+ 手机去库存，FCF 短期承压。剔除数据中心"扩张性 Capex"（约 $5-10 亿）后，正常化所有者盈余约 <strong>$11.5-12.5B</strong>。</p>
+    <p><strong>所有者盈余收益率 = 正常化所有者盈余 ~$12B / 市值 ~$200B ≈ 6%</strong>——对一个 FY2026 盈利同比<strong>下滑</strong>、但有汽车/数据中心新引擎期权的转型期半导体公司，6% 的收益率<span class="hl-t">"不贵，但也谈不上深度便宜"</span>。它反映市场既没有给成长溢价、也没给深度价值折价——一个"合理估值 + 转型未定"的中性定价。<strong>换句话说：高通的问题不是估值太贵，而是增长的方向未定——苹果的洞能不能被数据中心补上，是这 6% 收益率能否变成 8%（若转型成功）还是 4%（若转型失败）的分水岭。</strong></p>
+  </div>
+</div>
+
+<!-- ═══ 模块 6 ═══ -->
+<div class="section">
+  <div class="stitle">模块 6 · 电话会分析（Q2 FY2026 + 前 2 季度）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">Q2 FY2026 电话会（2026-04-29）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"营收 $10.6B、Non-GAAP EPS $2.65 落在指引高端；汽车 +38% 创纪录，Auto+IoT 合计 +20%"</div><div class="ec-note">在手机承压的季度，业绩仍守在指引高端，汽车/IoT 双位数增长证明多元化对冲开始显效。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"确认与一家领先超大规模厂商多年定制芯片合作，首批出货预计 2026 年 12 月"——采用 Alphawave 的 CPU/加速器/连接 IP</div><div class="ec-note">这是数据中心第三增长曲线的关键里程碑，管理层称"定制产品"并将同时布局商用与 ASIC。若兑现，是新叙事；但首批出货才年底，量产节奏未完全披露。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"中国手机因内存涨价致 OEM 砍单去库存，公司大幅少发货于终端需求"——称为暂时性低谷，预计 Q3（7 月季度）见底后环比回升</div><div class="ec-note">内存厂商将产能转向 AI 数据中心 HBM，收紧消费电子 DRAM 供应，是本季手机 -13% 的直接原因。是周期性还是结构性叠加，Q3 数据是关键验证。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"GAAP 净利含 $5.7B 一次性递延税估值备抵转回（非经营）"——Non-GAAP 净利同比 -10% 反映真实经营承压</div><div class="ec-note">管理层清楚区分一次性税项与经营，坦诚度高。但也提醒：真实经营是下滑的，别被 GAAP 净利 +162% 误导。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"Amon 将代理式 AI 定位为智能手机/PC/汽车/工业 IoT 下一轮换机催化，并勾勒 2028-2030 的 6G 路线图"</div><div class="ec-note">6G：2028 首批硅片/演示、2029 早期商用、2030 规模化——长期专利 + 芯片期权，但兑现在数年后。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q1 FY2026 电话会（2026-02-04）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"总营收 $12.3B 创纪录、Non-GAAP EPS $3.50；QCT 营收 $10.6B 创纪录，旗舰手机强劲"</div><div class="ec-note">节前旗舰周期强劲，汽车再创纪录，预计全年汽车营收同比 +35% 以上。与 Q2 的回落形成鲜明对比——印证手机的周期性。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"完成 Alphawave Semi 收购 + Ventana，深化数据中心与 RISC-V CPU 路线图，看好数据中心成未来数十亿美元营收"</div><div class="ec-note">数据中心战略正式落子。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"内存厂商将产能转向 AI 数据中心 HBM，收紧消费电子 DRAM 供应，促使中国手机 OEM 砍单去库存"</div><div class="ec-note">这一逆风在 Q1 已被点名，Q2 兑现为手机 -13%——管理层预警到位。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q4 FY2025 电话会（2025-11-05）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"FY25 Non-GAAP 营收 $44B（+13%）、Non-GAAP EPS $12.03（+18%）创纪录；QCT 全年营收创纪录（IoT +22%、汽车 +36%）"</div><div class="ec-note">非苹果 QCT 营收 5 年 CAGR ~15%、近两年 +17%/+18%，对冲苹果基带份额流失。FY25 是高点，FY26 转入调整。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"Q4 计提 $5.7B 联邦递延税估值备抵致 GAAP 净亏损 -$3.1B / EPS -$2.89，Non-GAAP 不受影响 $3.00"</div><div class="ec-note">与 Q2 FY26 的转回一进一出——理解本轮 GAAP 剧烈波动的源头。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">指引兑现度追踪 + Q3 FY2026 指引</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>项目</th><th>Q3 FY2026 指引</th><th>评价</th></tr>
+      <tr><td>总营收</td><td>$9.2B - $10.0B（中值 $9.6B）</td><td><span class="badge dn">环比/同比双降</span></td></tr>
+      <tr><td>QCT 营收</td><td>$7.9B - $8.5B</td><td><span class="badge dn">手机见底季</span></td></tr>
+      <tr><td>QTL 营收</td><td>$1.15B - $1.35B</td><td><span class="badge nt">高毛利稳定</span></td></tr>
+      <tr><td>Non-GAAP 摊薄 EPS</td><td>$2.10 - $2.30（中值 $2.20）</td><td><span class="badge dn">全年最低季</span></td></tr>
+      <tr><td>GAAP 摊薄 EPS</td><td>$1.26 - $1.46</td><td><span class="badge nt">回归正常口径</span></td></tr>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>信号汇总</strong>：Q2 FY2026 是高通"<span class="warn-t">手机退潮 + 汽车/IoT 涨潮 + GAAP 净利被税项虚增 + 数据中心里程碑确认</span>"的转型期一季。管理层预警到位（Q1 已点名内存去库存）、坦诚度高。<strong>Q3 指引是全年最低季</strong>（EPS 中值 $2.20），管理层称手机 Q3 见底、下季环比回升——<span class="hl-t">Q3 财报（2026-07-29）是验证"低谷是否真的见底"的关键节点</span>。业绩本身没有会计问题，问题在于：真实经营是下滑的，转型的新引擎能否在苹果流失加速前接棒。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 7 ═══ -->
+<div class="section">
+  <div class="stitle">模块 7 · 多模型估值（8 种方法）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">7.1 估值汇总表（独立估值 · 不锚定现价 · USD）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>估值方法</th><th>每股公允价</th><th>假设要点</th><th>权重</th></tr>
+      <tr><td>1. 相对估值（P/E）</td><td>$180</td><td>正常化 Non-GAAP EPS ~$11 × 16.5x（介于 NXP 15-19x 与半导体均值，反映转型期不确定性）</td><td>20%</td></tr>
+      <tr><td>2. DCF（基准）</td><td>$188</td><td>正常化所有者盈余 $12B，5 年 FCF CAGR +5%，WACC 9.5%，永续 2.5%，减净负债 $5.5B</td><td>25%</td></tr>
+      <tr><td>3. 所有者盈余收益率</td><td>$181</td><td>正常化所有者盈余 $12B / 目标收益率 6.5% = $185B → /1,059M 股</td><td>15%</td></tr>
+      <tr><td>4. PEG</td><td>$150</td><td>Forward P/E 17x ÷ 正常化增速 7% = PEG 2.4（转型期偏贵，FY26 EPS 实为下滑，PEG 参考意义有限）</td><td>5%</td></tr>
+      <tr><td>5. DDM</td><td>$110</td><td>DPS $3.56，增长 6%，要求回报 9% → $126（股息占比低，DDM 严重低估，仅参考）</td><td>5%</td></tr>
+      <tr><td>6. NAV</td><td>不适用</td><td>非资产型公司（芯片+专利轻资产，无形/商誉不构成清算价值基础）</td><td>0%</td></tr>
+      <tr><td>7. 反向 DCF</td><td>当前价隐含 FCF 增长 <strong>~3.5%</strong></td><td>$189 隐含市场只要求长期 FCF 增 ~3.5%——定价偏保守/悲观，若数据中心+汽车能超此门槛则有上行</td><td>15%</td></tr>
+      <tr><td>8. SOTP 分部加总</td><td>$176</td><td>QCT EBT ~$10.3B ×11x + QTL EBT ~$3.9B ×14x + 数据中心期权 $10-15B − 净负债 $5.5B</td><td>20%</td></tr>
+      <tr class="hl"><td><strong>加权公允价中位数</strong></td><td><strong>$185</strong></td><td>估值区间 $176-188 · 中位 ~$185</td><td>100%</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.8;"><strong>与现价对照</strong>：当前 $189.16 vs 加权公允 $185 · <span class="warn-t">溢价约 2%（无安全边际）</span>——<strong>远未达价值投资 25% 安全边际门槛</strong>。高通不像 Visa 那样是"世界级生意 + 满价"，而是"合理生意 + 合理价格 + 转型未定"。反向 DCF 显示市场只定价了 ~3.5% 长期 FCF 增长（偏悲观），意味着<span class="hl-t">如果数据中心/汽车能兑现更高增长，当前价有上行空间；如果苹果流失快于新引擎接棒，当前价没有下行保护</span>。这是一个"期权价值"型标的——现价合理，赔率取决于转型。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.2 P/E 多档透视表</h3>
+  <p style="margin-bottom:10px; font-size:13px; color:var(--text2);">高通 GAAP vs Non-GAAP 差异极大（Q2 GAAP EPS $6.88 vs Non-GAAP $2.65，差 &gt;150%，因一次性税项）+ 单季利润大幅波动 → 强制多档透视：</p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>口径</th><th>EPS</th><th>P/E (基于 $189.16)</th><th>读数说明</th></tr>
+      <tr><td>TTM GAAP P/E</td><td>~$9.20</td><td>~20.6x</td><td>两次一次性税项大致对冲，仍含噪音</td></tr>
+      <tr class="hl"><td><strong>TTM Non-GAAP P/E</strong></td><td><strong>~$11.92</strong></td><td><strong>~15.9x</strong></td><td>最可信档 · 近 4 季实际</td></tr>
+      <tr><td>Forward P/E（FY26 Non-GAAP）</td><td>~$10.7</td><td>~17.7x</td><td>FY26 盈利下滑 · H1 $6.15 + H2 指引外推</td></tr>
+      <tr><td>Forward P/E（FY27 正常化）</td><td>~$11.0</td><td>~17.2x</td><td>假设手机企稳 + 数据中心起量</td></tr>
+      <tr><td>P/S (TTM)</td><td>营收 ~$44.5B</td><td>~4.5x</td><td>芯片+专利混合估值</td></tr>
+      <tr><td>FCF Yield（正常化）</td><td>FCF ~$12B</td><td>~6%</td><td>不贵不便宜</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3);"><strong>最可信档</strong>：TTM Non-GAAP ~15.9x / Forward ~17x。<span class="warn-t">注意二手聚合源出现的 $7.96 EPS、20.9x 等数字口径不一（疑混合 GAAP 或 FY27），不予采信</span>——高通公司仅给单季指引，未给全年 EPS 指引，FY26 全年 Non-GAAP EPS ~$10.7 为 H1 实际 $6.15 + Q3 指引中值 $2.20 + Q4 市场预期 ~$2.3-2.5 推导。同业对比：AVGO ~30-37x（AI 数据中心高增长溢价）、TXN ~25-30x、MediaTek ~20-25x、NXP ~15-19x。<span class="hl-t">高通估值最接近 NXP（同为周期底部的汽车/工业芯片），显著低于 AI 溢价的 AVGO——市场没把它当 AI 成长股，而当周期芯片股</span>。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.3 12 个月目标价（概率加权）</h3>
+  <div class="pgrid">
+    <div class="pbox"><div class="pl">悲观情景 · 30%</div><div class="pv pc">$150</div><div class="pn">中国去库存超预期 + 苹果流失加速 + 数据中心延迟 + 估值压缩至 14x<br>距现价 -21%</div></div>
+    <div class="pbox"><div class="pl">基准情景 · 45%</div><div class="pv pf">$195</div><div class="pn">手机 Q3 见底后回升 + 汽车/IoT 延续 + 数据中心 12 月按期首发 + EPS 企稳 ~$10.7-11 × 17-18x<br>距现价 +3%</div></div>
+    <div class="pbox"><div class="pl">乐观情景 · 25%</div><div class="pv ps">$245</div><div class="pn">数据中心放量 + 中国强复苏 + 重估至 20x（FY27 ~$12 EPS）<br>距现价 +30%</div></div>
+  </div>
+  <p style="font-size:13px; color:var(--text2);"><strong>概率加权目标价</strong>：30%×$150 + 45%×$195 + 25%×$245 = <strong>$194</strong>。<strong>叠加 1.88% 股息 = 总回报约 +5%</strong>——期望回报为正但薄，且分布很宽（悲观 -21% / 乐观 +30%），<span class="hl-t">典型的"赔率对称、胜负取决于数据中心与苹果赛跑"的转型期标的</span>。当前 $189 高于独立公允 $185、更远高于机械首仓 $148——<span class="warn-t">不在提供安全边际的建仓窗口</span>。</p>
+</div>
+
+<!-- ═══ 模块 8 ═══ -->
+<div class="section">
+  <div class="stitle">模块 8 · 竞争与行业分析</div>
+  <div class="cmt">
+    <p><strong>格局</strong>：高通身处三个不同竞争强度的战场——(1) <strong>手机 SoC/基带</strong>：与联发科（MediaTek）正面竞争安卓，苹果自研基带已退出高通体系；(2) <strong>汽车/工业</strong>：与 NXP、TXN、英飞凌竞争；(3) <strong>数据中心</strong>：新入局，正面对垒 Broadcom（AVGO）、NVIDIA 的定制 ASIC/连接生态。</p>
+
+    <p><strong>半导体同业对比（截至 2026-06 · 二手聚合源，口径不一，仅供相对参考）</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>公司</th><th>Forward P/E</th><th>增长/驱动</th><th>与高通关系</th></tr>
+        <tr class="hl"><td><strong>Qualcomm QCOM</strong></td><td><strong>~17x</strong></td><td>FY26 承压（内存/苹果逆风），靠汽车 +38%/数据中心新引擎</td><td>本报告标的</td></tr>
+        <tr><td>Broadcom AVGO</td><td>~30-37x</td><td>AI 数据中心驱动高增长（Q3 指引营收 +84% YoY），估值显著溢价</td><td>连接/定制 ASIC · 数据中心正面竞争</td></tr>
+        <tr><td>MediaTek 2454.TW</td><td>~20-25x</td><td>手机 SoC，受同样内存周期影响（6 月 gurufocus 67.8x 疑异常）</td><td>手机 SoC 正面竞争</td></tr>
+        <tr><td>NXP Semi NXPI</td><td>~15-19x</td><td>汽车/工业为主，增速温和，周期底部</td><td>汽车/IoT 竞争（估值最接近 QCOM）</td></tr>
+        <tr><td>Texas Instruments TXN</td><td>~25-30x</td><td>模拟/嵌入式，产能扩张期利润率承压</td><td>汽车/工业模拟竞争</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:10px; font-size:12px; color:var(--text3);">核心看点：<strong>高通估值（~17x）介于周期底部的 NXP（15-19x）与手机 SoC 同行 MediaTek（20-25x）之间，显著低于 AI 溢价的 AVGO（30-37x）</strong>。市场把高通定价为"周期芯片股"而非"AI 成长股"——这既是它便宜的原因，也是它的机会：<span class="hl-t">若数据中心兑现，估值可能向 AVGO 方向重估；若兑现失败，则维持 NXP 式的周期估值</span>。</p>
+
+    <p style="margin-top:14px;"><strong>波特五力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>新进入者：</strong>手机基带极低（技术+专利壁垒）；数据中心高（高通自己是新进入者，面对 AVGO/NVDA 的护城河）</li>
+      <li><strong>替代品：</strong>中高（大客户自研——苹果基带已成现实，是最大威胁）</li>
+      <li><strong>供应商议价：</strong>中（依赖台积电/三星先进制程 + 内存供应，本季内存涨价即是供应端冲击）</li>
+      <li><strong>买家议价：</strong>手机端高（苹果自研、中国 OEM 砍单）；汽车端低（设计锁定）</li>
+      <li><strong>同业竞争：</strong>手机中（高通/联发科双雄）；数据中心高（红海）</li>
+    </ul>
+
+    <p><strong>颠覆风险</strong>：最大的颠覆已经发生并在进行中——<span class="warn-t">苹果自研基带（约 $5-6B 手机营收结构性流失）</span>。次要风险是安卓大厂（如三星、小米）加速自研 SoC。高通的对冲是把重心转向汽车 + 数据中心 + 边缘 AI，用非手机增长补上手机的洞。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 9 ═══ -->
+<div class="section">
+  <div class="stitle">模块 9 · 技术面与 K 线分析（次要参考）</div>
+  <div class="cmt">
+    <p><strong>趋势</strong>：QCOM 当前 $189.16，处于 52 周区间 $122-$260 的<span class="hl-t">中段偏下（距高点 -27%、距低点 +55%）</span>。过去一年经历了从高位（$260）到低位（$122）的大幅波动后修复到中段——反映市场在"苹果流失/手机周期"悲观与"汽车/数据中心"乐观之间反复定价。这是一只波动显著高于 Visa 类蓝筹的周期成长股。</p>
+
+    <p><strong>关键价位（参考）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>支撑</strong>：$150（本报告独立首仓/悲观情景附近）/ $122（52 周低）</li>
+      <li><strong>阻力</strong>：$195（基准公允/目标）/ $245（乐观情景）/ $260（52 周高）</li>
+    </ul>
+
+    <p><strong>指标信号</strong>：现价处区间中段，无极端超买超卖。<span class="warn-t">由于 Q3（2026-07-29）是全年最低季 + 手机见底验证节点，财报前后波动率可能放大</span>。</p>
+
+    <p><strong>注意</strong>：高通的核心驱动是手机去库存能否见底 + 数据中心 12 月能否按期首发 + 苹果流失斜率 + QTL 续约，技术面是次要参考。价值投资者应看基本面拐点（Q3 手机数据 + 数据中心出货确认）与安全边际，而非追逐区间波动。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 10 ═══ -->
+<div class="section">
+  <div class="stitle">模块 10 · 增长催化剂与前景展望</div>
+  <div class="cmt">
+    <p><strong>短期催化剂（未来 6 个月）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>2026-07-29 Q3 FY2026 财报</strong>——验证"手机 Q3 见底、下季环比回升"是否成立，是最近的关键节点</li>
+      <li><strong>2026 年 12 月 数据中心定制芯片首批出货</strong>——第三增长曲线的兑现里程碑，若按期是新叙事催化</li>
+      <li><strong>汽车持续创纪录</strong>——连续多季 +35% 以上，在手设计管线兑现</li>
+      <li><strong>$219 亿回购授权放量</strong>——持续缩股 + 股价低位时的资本返还支撑</li>
+      <li><strong>中国内存供应缓解</strong>——若 DRAM 供应紧张缓解，手机去库存结束、OEM 回补</li>
+    </ul>
+
+    <p><strong>长期展望（3-5 年）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>汽车成第二增长极</strong>——数字座舱 + ADAS 长设计周期、高粘性，从 $1.3B/季向更高攀升</li>
+      <li><strong>数据中心从 0 到数十亿</strong>——Alphawave CPU/加速器/连接 IP + Ventana RISC-V，若拿下更多超大规模客户是重估催化</li>
+      <li><strong>边缘/终端 AI 换机潮</strong>——代理式 AI 驱动手机/PC/汽车/工业新一轮升级</li>
+      <li><strong>6G 期权</strong>——2028 首批硅片/演示、2029 早期商用、2030 规模化（专利 + 芯片双收）</li>
+      <li><strong>风险情景</strong>：苹果流失快于新引擎接棒 / 数据中心兑现失败 / QTL 续约降价 / 手机单元长期萎缩</li>
+    </ul>
+
+    <p><strong>TAM 展望</strong>：手机基带是成熟存量市场（承压），但<span class="hl-t">汽车半导体、边缘 AI、数据中心定制芯片是数千亿美元的增量 TAM</span>。核心问题不是市场空间，而是高通作为"新进入者"能否在 AVGO/NVDA 主导的数据中心、以及 NXP/TXN 竞争的汽车市场中拿下足够份额——TAM 巨大，但执行与竞争是变量。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 11 ═══ -->
+<div class="section">
+  <div class="stitle">模块 11 · 风险矩阵</div>
+  <div class="risk-grid">
+    <div class="risk-card r5"><h5>1. 苹果基带结构性流失</h5><span class="risk-score">5 / 5 极高</span><p>苹果转自研基带，约 $5-6B 手机营收结构性流失且不可逆。这是手机业务下限的核心决定项，也是本季 -13% 的部分原因</p></div>
+    <div class="risk-card r4"><h5>2. 数据中心兑现风险</h5><span class="risk-score">4 / 5 高</span><p>作为新进入者对垒 AVGO/NVDA · 首批出货才 2026-12 · Alphawave 收购 $28.9 亿商誉 · 若兑现失败则维持周期芯片估值、并购减值风险</p></div>
+    <div class="risk-card r4"><h5>3. 中国手机周期/去库存</h5><span class="risk-score">4 / 5 高</span><p>内存涨价致中国 OEM 砍单，公司主动少发货 · 是周期性还是结构性叠加待验证 · 存货主动升至 $73.7 亿赌回补，回补错则减值</p></div>
+    <div class="risk-card r3"><h5>4. QTL 授权续约/监管</h5><span class="risk-score">3 / 5 中</span><p>标准必要专利续约的价格谈判压力（历史与苹果/华为争端）+ 各国反垄断审视 · 72% EBT 年金是估值支柱，任何续约降价冲击大</p></div>
+    <div class="risk-card r3"><h5>5. 估值/宏观周期</h5><span class="risk-score">3 / 5 中</span><p>现价溢价公允 ~2%，无安全边际 · 半导体强周期，衰退会同时压制手机/汽车/IoT 需求 · 但 17x 估值已不高，压缩空间有限</p></div>
+    <div class="risk-card r2"><h5>6. 资本返还 + 便宜估值（机会）</h5><span class="risk-score">2 / 5 反向</span><p>近 100% FCF 回馈 + $219 亿授权 + 17x 便宜估值 + 反向 DCF 只隐含 3.5% 增长——低预期本身是一种下行缓冲</p></div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>3 个黑天鹅情景</strong>：</p>
+    <ol style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>数据中心大客户流失 / 定制芯片推迟或取消</strong>——概率 15% · 股价跌至 $130-140 · 第三增长曲线证伪，重回纯周期芯片估值</li>
+      <li><strong>QTL 关键授权续约大幅降价 / 重大反垄断裁决</strong>——概率 10% · 72% EBT 年金受冲击 · 估值支柱动摇，跌至 $120-140</li>
+      <li><strong>安卓大厂加速自研 SoC + 手机深度衰退</strong>——概率 10% · 手机第二条腿也松动 · 跌至 $130</li>
+    </ol>
+
+    <p style="margin-top:10px;"><strong>下行支撑</strong>：$219 亿回购授权（约占市值 11%）+ 近 100% FCF 回馈 + 17x 已属便宜 + 反向 DCF 仅隐含 3.5% 增长（低预期）+ QTL 高毛利年金现金流，构成一定下行缓冲。<span class="hl-t">$120-150 是较硬的估值底</span>（52 周低 $122 + 悲观情景 $150 + 独立首仓 $148 区间）。与 Visa"底比大多数股票高"相反，高通的"底"来自便宜的估值本身——它不是靠质量溢价撑着，而是靠低预期撑着。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 12 ═══ -->
+<div class="section">
+  <div class="stitle">模块 12 · 股东回报分析</div>
+  <div class="cmt">
+    <p><strong>高通是"回购 + 增息"双管资本返还的强执行者——三年回馈股东 $268 亿、FY2025 近 100% FCF 回馈。</strong>但要区分授权与执行、以及"回购加速期正逢股价高位"的择时，并检验它是否在转净负债的同时透支返还。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 18px 0 10px; font-family: 'Segoe UI',sans-serif;">12.1 公司给了股东多少？</h3>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>财年</th><th>回购（执行）</th><th>股息</th><th>股东总回报</th><th>说明</th></tr>
+        <tr><td>FY2023</td><td>$2,973M</td><td>$3,462M</td><td>$6,435M</td><td>股息为主</td></tr>
+        <tr><td>FY2024</td><td>$4,121M</td><td>$3,687M</td><td>$7,808M</td><td>回购提速</td></tr>
+        <tr><td>FY2025</td><td><span class="hl-t">$8,791M</span></td><td>$3,805M</td><td><strong>$12,596M</strong></td><td>回购翻倍 · 近 100% FCF</td></tr>
+        <tr class="hl"><td><strong>三年合计</strong></td><td><strong>$15,885M</strong></td><td><strong>$10,954M</strong></td><td><strong>$26,839M</strong></td><td>回购占 59%</td></tr>
+      </table>
+    </div>
+    <p style="font-size:13px; color: var(--text2); margin-top:8px"><strong>Trailing Shareholder Yield</strong> ≈ FY2025 返还 $12.6B / 市值 $200B ≈ <strong>6.3%</strong>（其中回购 ~4.4% + 股息 ~1.9%）。<span class="hl-t">这是一个相当慷慨的股东收益率</span>——远高于 Visa 的 3.4%，因为高通估值更低（分母小）+ FY2025 回购大幅提速。回购是主菜（占三年返还 59%）、股息是稳定辅菜（连年增至 $0.89/季）。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.2 给的方式好不好？</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>真实缩股 · 含金量高</strong>：摊薄股数从 FY2023 的 <strong>11.26 亿</strong>→ FY2024 11.30 亿 → FY2025 11.05 亿 → Q2 FY26 <strong>10.72 亿</strong>（在外流通股 10.59 亿）。<span class="hl-t">FY24→FY25 回购提速带动股数明显下降</span>，说明回购是"真减少股本"而非仅抵消 SBC——含金量高（美股常入库存股，但净股数确实在降）</li>
+      <li><span class="warn-t">回购择时中性偏弱</span>：FY2025 回购从 $41 亿骤增至 $88 亿，而 FY2025 正是营收/EPS 创纪录、股价相对高位的年份——<strong>在高位加速回购，择时不算最优</strong>。理想的资本配置纪律是"低谷多买、高位少买"，高通的节奏偏顺周期</li>
+      <li><span class="warn-t">杠杆化 + 并购挤压</span>：Q2 返还 $3.74B &gt; FCF $1.92B，H1 又用受限现金 $23.2 亿并购 Alphawave，导致<strong>从净现金转为净负债 -$5.5B</strong>。对 FCF 强劲的公司可接受，但"近 100% FCF 回馈 + 大额并购 + 转净负债"三者叠加，意味着安全垫在变薄</li>
+    </ul>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.3 能不能继续给、给多少？</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>已授权额度充裕</strong>：2026-03-17 新授权 <strong>$200 亿</strong> + 旧计划剩余 $21 亿 = 可用约 <strong>$219 亿</strong>（约占市值 11%）· 无到期日 · 执行历史可信（常年足额回购）</li>
+      <li><strong>连年增息</strong>：季度股息升至 $0.89（年化 $3.56），派息率约占 Non-GAAP 净利 30%、占 FCF ~30%——<span class="hl-t">股息覆盖充分，增息空间足</span></li>
+      <li><strong>(股息 + 回购) / FCF 覆盖度</strong>：FY2025 返还 $12.6B / FCF $12.8B ≈ <strong>98%</strong>——几乎全部 FCF 用于返还，可持续但无缓冲。<span class="warn-t">FY2026 因 Capex 翻倍（数据中心）+ 手机去库存，FCF 短期承压，返还力度可能需在"投资新引擎"与"回馈股东"间再平衡</span></li>
+      <li><strong>周期择时提醒</strong>：当前股价 $189 处 52 周中段偏下，若继续回购则是相对合理价位——比 FY2025 高位回购更划算。管理层若能在低谷加大回购，才是资本配置纪律的加分项</li>
+    </ul>
+    <p><strong>模块小结</strong>：<span class="hl-t">积极且高含金量，但需盯住可持续性</span>——三年返还 $268 亿、真实缩股（10.72 亿股）、$219 亿授权在手、股息覆盖充分。唯二瑕疵：(1) FY2025 在高位加速回购、择时偏顺周期；(2) 近 100% FCF 回馈 + 并购 Alphawave 已使高通转为净负债，FY2026 数据中心 Capex 翻倍会挤压返还空间。总体是"慷慨且真实缩股，但安全垫在变薄、择时可更纪律"的股东回报。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 13 ═══ -->
+<div class="section">
+  <div class="stitle">模块 13 · 海图评分卡 + 投资决策</div>
+
+  <div class="scorecard">
+    <h3 style="font-size:15px; color:var(--text); margin-bottom: 16px; font-family: 'Segoe UI',sans-serif;">海图评分卡（6 维 A-D）</h3>
+    <div class="score-grid">
+      <div class="score-card"><div class="score-letter s-bm">B-</div><div class="score-body"><h4>1. 生意可预测性</h4><p>QTL 授权年金可预测，但手机受苹果流失+中国周期拖累、GAAP 被税项剧烈扭曲、数据中心未兑现，整体能见度中等偏弱。</p></div></div>
+      <div class="score-card"><div class="score-letter s-b">B</div><div class="score-body"><h4>2. 经济护城河</h4><p>无线专利（QTL 72% EBT）+ 安卓/汽车芯片规模是宽护城河，但苹果自研证明大客户可绕过，护城河处结构性重心转移期。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">B+</div><div class="score-body"><h4>3. 管理层质量</h4><p>Amon 主动多元化、坦诚度高、资本返还纪律好。Alphawave/数据中心是尚未兑现的重注。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">B+</div><div class="score-body"><h4>4. 财务质量</h4><p>ROE ~47%、毛利率 54.7%、FCF 强。但转为净负债 -$5.5B、GAAP 被税项扭曲、存货主动建库存需跟踪。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">B+</div><div class="score-body"><h4>5. 资本配置纪律</h4><p>三年返还 $268 亿、真实缩股、$219 亿授权。但 FY25 高位加速回购择时偏顺周期 + 并购转净负债。</p></div></div>
+      <div class="score-card"><div class="score-letter s-b">B-</div><div class="score-body"><h4>6. 估值与安全边际</h4><p>现价 $189 溢价公允 $185 约 2%，<strong>无安全边际</strong>；但 17x 已属便宜、反向 DCF 仅隐含 3.5% 增长，不算贵。</p></div></div>
+    </div>
+
+    <div class="flag-row">
+      <strong>红旗排查</strong>：会计口径干净——$5.7B 递延税估值备抵转回是合法、充分披露的非现金税项，非激进会计（Non-GAAP 口径清晰）；<strong>无强制降级红旗</strong>。真正压制评级的是<strong>估值无安全边际（溢价公允 2%）+ 生意可预测性偏弱（苹果流失 + 数据中心未兑现的双重不确定）</strong>。触发"<span class="warn-t">无安全边际 + 转型未定</span>"——尽管基础质量尚可（多个 B+），综合评级定为<strong>「持有观望」</strong>。
+    </div>
+
+    <p style="margin-top:18px; font-size:14px; color:var(--text); line-height:1.85;"><strong>综合评级</strong>：<span class="rating-badge rating-hold" style="font-size:14px;">持有观望</span>。高通是一门合理的芯片+专利双引擎生意（多个维度 B+），估值也不贵（17x），但<strong>现价 $189 已略高于独立公允 $185，没有 25% 安全边际</strong>，且核心矛盾——苹果流失能否被数据中心/汽车补上——尚未有答案。核心判断：<strong>高通不是"贵得离谱"（不像满价蓝筹），而是"价格合理、方向未定"。它是一只赔率对称的转型期期权——现价不提供安全边际，应等回调至 $148 附近（提供边际）或等数据中心/手机拐点被确认（提供确定性）再出手。</strong></p>
+  </div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">投资决策（精确价格 · USD）</h3>
+
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>项目</th><th>价格</th><th>说明</th></tr>
+      <tr><td>12 个月概率加权目标价</td><td><strong>$194</strong> (+3%)</td><td>基准 $195 · 手机企稳 + 数据中心按期首发</td></tr>
+      <tr><td>悲观目标（30% 概率）</td><td>$150 (-21%)</td><td>去库存超预期 + 数据中心延迟 + 压缩至 14x</td></tr>
+      <tr><td>乐观目标（25% 概率）</td><td>$245 (+30%)</td><td>数据中心放量 + 重估至 20x</td></tr>
+      <tr class="hl"><td>首仓建仓（估值中位数 $185 × 80%）</td><td><strong>$148</strong></td><td>距现价 -22% · 耐心等回调</td></tr>
+      <tr><td>二仓建仓（× 70%）</td><td>$130</td><td>-31% · 近 52 周低 $122</td></tr>
+      <tr><td>三仓建仓（× 60%）</td><td>$111</td><td>-41% · 黑天鹅级机会</td></tr>
+      <tr><td>止盈一档</td><td>$230</td><td>+22% · 减仓 25%</td></tr>
+      <tr><td>止盈二档</td><td>$265</td><td>+40% · 再减 25%</td></tr>
+      <tr><td>止盈三档</td><td>$300</td><td>+59% · 再减 25% · 最后 25% 长期持有</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.85;"><strong>建议总仓位</strong>：<strong>2-3%</strong>（轻仓观察 · 现价无安全边际，等回调或拐点确认再加仓）。<strong>持有周期</strong>：3-5 年（穿越手机周期 + 等待数据中心/汽车转型兑现）。<strong>关键监控指标</strong>：① 手机业务是否 Q3 见底、下季环比回升（2026-07-29 财报）；② 数据中心定制芯片是否 2026-12 按期首发 + 客户数量；③ 苹果基带流失斜率与终点；④ QTL 授权续约进展（有无降价）；⑤ 存货是否顺利回补（$73.7 亿建库存的赌注）；⑥ Forward P/E 是否回落至 13-14x（估值机会）。<strong>下次催化剂</strong>：2026-07-29 Q3 FY2026 财报。</p>
+</div>
+
+<!-- ═══ 海图页末长评 ═══ -->
+<div class="section">
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记 · 约 1080 字</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p class="lead">有一类公司，报表上写着"净利翻倍"，真实经营却在退潮；表面只跌 3%，内部却是一半在退、一半在涨。高通就是这样一份需要"看穿"两次才能读懂的季报——看穿 GAAP 净利的会计幻觉，也看穿总营收掩盖的剧烈分化。它不是一家在衰退的公司，而是一家旧引擎减速、新引擎试图接棒的转型期公司。</p>
+
+      <p>高通是全球手机 SoC 与无线专利的双龙头——一手卖芯片（QCT，占营收 86%），一手向几乎所有手机厂商收专利过路费（QTL，72% EBT 的高毛利年金）。Q2 FY2026 总营收 $10.60B（-3%）· Non-GAAP EPS $2.65（-7%，落指引高端）· GAAP EPS $6.88（含 $5.33 一次性税收利益，虚增）· 汽车 $1.33B（+38% 创纪录）· 手机 $6.02B（-13%）。</p>
+
+      <h4>几个研判要点</h4>
+
+      <p><strong>一、两个"看穿"是读懂高通的钥匙。</strong> 看穿一：GAAP 净利 +162% 是幻觉——其中 $5.7B（$5.33/股）来自<span class="hl-t">一次性递延税估值备抵转回</span>（去年 Q4 计提、本季转回，一进一出、非现金），剔除后真实经营 EPS 仅约 $1.55，<span class="warn-t">Non-GAAP -10% 才是真相</span>。看穿二：总营收只跌 3%，却掩盖了内部"手机 -13% 退潮 vs 汽车 +38%/IoT +9% 涨潮"的剧烈分化——这是一家在换引擎的公司，不是在衰退。</p>
+
+      <p><strong>二、苹果的洞，是高通最大的故事。</strong> 手机 -13% 有两个原因：中国 OEM 因内存涨价砍单去库存（周期性，管理层称 Q3 见底），以及<span class="warn-t">苹果转自研基带带来约 $5-6B 的结构性流失（不可逆）</span>。高通的对冲，是用汽车（连续多季 +35% 以上）、IoT、以及全新的数据中心（Alphawave CPU/加速器 + Ventana RISC-V，定制芯片 12 月首发）三条腿补上这个洞。<span class="hl-t">转型能否成功，是这只股票 5-10 年的胜负手。</span></p>
+
+      <p><strong>三、别把"净现金"安在高通头上——它已是净负债。</strong> 高通历史上接近净现金，但 H1 用受限现金 $23.2 亿并购 Alphawave + 大额回购，如今<span class="warn-t">有息负债 $15.27B &gt; 现金+短投 $9.80B，真实净负债 -$5.47B</span>。同时存货主动从 $65 亿建到 $74 亿，赌 Q3 手机回补——赌对则顺周期，赌错则减值。安全垫在变薄。</p>
+
+      <p><strong>四、股东回报慷慨且真实缩股，但择时偏顺周期。</strong> 三年回馈股东 $268 亿，FY2025 近 100% FCF 回馈，摊薄股数从 11.26 亿真实降至 10.72 亿，$219 亿授权在手（占市值 11%）。瑕疵是 FY2025 在营收创纪录、股价高位时把回购从 $41 亿骤增至 $88 亿——高位加速回购，纪律可以更好。</p>
+
+      <p><strong>五、估值合理，但没有安全边际。</strong> 独立多法估值中位 $185，现价 $189 溢价约 2%。Forward P/E 17x 看似便宜（介于周期底部的 NXP 与手机同行 MediaTek 之间，远低于 AI 溢价的 AVGO），反向 DCF 只隐含 3.5% 长期增长——<span class="hl-t">市场把它当周期芯片股，而非 AI 成长股</span>。这既是它便宜的原因，也是它的机会：数据中心兑现则向上重估，兑现失败则维持周期估值。但当前价没有 25% 安全边际。</p>
+
+      <h4>海图研判</h4>
+
+      <p><strong>评级：持有观望</strong>（收费芯片 + 专利年金 + 汽车/数据中心新引擎 + 极致资本返还的组合，对垒苹果基带结构性流失 + 中国内存周期 + 数据中心未兑现 + 无安全边际的合理估值）。12 个月概率加权目标价 <strong>$194</strong>（+3%，悲观 $150 / 基准 $195 / 乐观 $245），叠加 1.88% 股息 = 总回报约 +5%——期望为正但薄，分布很宽。</p>
+
+      <p>操作建议：当前 $189 略高于独立公允 $185、远高于机械首仓 $148，<strong>不在提供安全边际的建仓窗口</strong>。耐心等回调至 $148 建首仓、$130（近 52 周低）加二仓、$111 极端机会三仓。止盈三档 $230 / $265 / $300，最后 25% 长期持有。<strong>建议总仓位 2-3%</strong>（轻仓观察 · 等回调或拐点确认）。持有周期 3-5 年。<span class="hl-t">关键纪律：这是一只赔率对称的转型期期权——现价不给安全边际，要么等价格回调、要么等数据中心与手机拐点被确认，别在方向未定时追高。</span></p>
+
+      <h4>风险提示</h4>
+
+      <p>苹果流失快于新引擎接棒 / 数据中心兑现失败或推迟 / QTL 授权续约降价 / 中国手机深度衰退 / 存货回补落空——任一项都可能让股价跌至 $120-150。但 $219 亿回购授权（占市值 11%）+ 近 100% FCF 回馈 + 17x 便宜估值 + 反向 DCF 仅隐含 3.5% 增长（低预期），构成一定下行缓冲。<strong>$120-150 是较硬的估值底</strong>（52 周低 $122 + 悲观 $150）。与满价蓝筹相反，高通的"底"来自便宜的估值本身，而非质量溢价。</p>
+
+      <p>关键叙事：<strong>"手机 SoC + 无线专利双龙头 + 汽车/数据中心新引擎 + 慷慨资本返还"的转型期芯片公司，对垒"苹果基带结构性流失 + 中国内存周期 + 数据中心未兑现 + 无安全边际的合理估值"</strong>。高通不是给追逐 AI 成长溢价的人，也不是给要极致安全边际的人——它是给愿意在合理价格下、押注一次"新引擎接棒旧引擎"的转型、并在回调时耐心加仓的长期投资者。下次催化剂：2026-07-29 Q3 FY2026 财报（验证手机是否见底）。</p>
+
+      <p class="haitu-sign">—— 海图，灯下落笔，明日再观风浪。</p>
+
+      <p class="haitu-disc">⚠️ 免责声明：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，不构成任何投资建议。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div>《海图夜读》 · Qualcomm QCOM Q2 FY2026 海图研判</div>
+  <div style="margin-top:6px;">发布日 2026-04-29 · 研判日 2026-07-11 · 数据来源 Qualcomm Q2 FY2026 官方财报新闻稿（IR PDF + SEC 8-K EX99.1 + 10-Q qcom-20260329）+ FY2025 10-K + 电话会 transcript</div>
+</footer>
+
+<script>
+let curTheme = 'light';
+function toggleTheme() {
+  curTheme = curTheme === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', curTheme);
+  renderCharts();
+}
+
+const palette = {
+  light: { accent: '#8a9a8e', accent2: '#7b8fa0', accent3: '#b08d7a', gold: '#b9a06a', red: '#b87070', green: '#7a9a7a', grid: '#e5ddd5', text: '#7a706a' },
+  dark:  { accent: '#8a9a8e', accent2: '#8fabbf', accent3: '#c9a48e', gold: '#c9b07a', red: '#c08080', green: '#8aaa8a', grid: '#3e3a35', text: '#a09890' }
+};
+
+let charts = {};
+function renderCharts() {
+  Object.values(charts).forEach(c => c && c.destroy && c.destroy());
+  charts = {};
+  const p = palette[curTheme];
+  Chart.defaults.color = p.text;
+  Chart.defaults.borderColor = p.grid;
+
+  const quarters = ['Q2 25','Q3 25','Q4 25','Q1 26','Q2 26'];
+  const rev = [10.98, 10.37, 11.27, 12.25, 10.60];
+  const ngEPS = [2.85, 2.77, 3.00, 3.50, 2.65];
+  charts.rev = new Chart(document.getElementById('chartRev'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { type:'bar', label: '总营收 ($B)', data: rev, backgroundColor: p.accent + 'CC', yAxisID: 'y' },
+      { type: 'line', label: 'Non-GAAP EPS ($)', data: ngEPS, borderColor: p.accent3, backgroundColor: p.accent3, tension: 0.3, yAxisID: 'y1' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false }, y1: { position: 'right', grid: { drawOnChartArea: false }, ticks: { callback: v => '$' + v } } } }
+  });
+
+  const nm = [28.9, 29.3, 28.9, 30.9, 26.8];
+  charts.margin = new Chart(document.getElementById('chartMargin'), {
+    type: 'line',
+    data: { labels: quarters, datasets: [
+      { label: 'Non-GAAP 净利率 (%)', data: nm, borderColor: p.green, backgroundColor: p.green + '33', fill: true, tension: 0.3 }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false, ticks: { callback: v => v + '%' } } } }
+  });
+
+  charts.segment = new Chart(document.getElementById('chartSegment'), {
+    type: 'doughnut',
+    data: {
+      labels: ['手机 Handsets', '汽车 Auto', 'IoT', 'QTL 授权', 'QSI/其他'],
+      datasets: [{ data: [6.02, 1.33, 1.73, 1.38, 0.14], backgroundColor: [p.accent2, p.green, p.accent, p.gold, p.red] }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { font: { size: 11 } } } } }
+  });
+
+  const gaapEPS = [2.52, 2.43, -2.89, 2.78, 6.88];
+  charts.eps = new Chart(document.getElementById('chartEPS'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { label: 'GAAP EPS ($)', data: gaapEPS, backgroundColor: p.red + 'AA' },
+      { label: 'Non-GAAP EPS ($)', data: ngEPS, backgroundColor: p.accent + 'CC' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, ticks: { callback: v => '$' + v } } } }
+  });
+
+  buildSankey();
+}
+
+function buildSankey() {
+  const p = palette[curTheme];
+  const labels = ['总营收 $10.60','营业成本 $4.90','毛利 $5.70','研发 $2.46','销管&其他 $0.93','营业利润 $2.31','非经营净支出 $0.08','税前利润 $2.23','一次性税收利益 $5.14','GAAP 净利 $7.37'];
+  const data = {
+    type: 'sankey',
+    orientation: 'h',
+    node: { pad: 15, thickness: 20, line: { color: p.grid, width: 0.5 }, label: labels, color: [p.accent, p.red, p.green, p.accent3, p.accent3, p.green, p.red, p.green, p.gold, p.green] },
+    link: {
+      source: [0, 0, 2, 2, 2, 5, 5, 7, 8],
+      target: [1, 2, 3, 4, 5, 6, 7, 9, 9],
+      value:  [4.90, 5.70, 2.46, 0.93, 2.31, 0.08, 2.23, 2.23, 5.14],
+      color: [p.red+'55', p.green+'66', p.accent3+'55', p.accent3+'55', p.green+'66', p.red+'55', p.green+'66', p.green+'66', p.gold+'77']
+    }
+  };
+  const layout = { font: { size: 12, color: p.text }, paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)', margin: { l: 10, r: 10, t: 10, b: 10 } };
+  Plotly.react('sankey', [data], layout, { displayModeBar: false, responsive: true });
+}
+
+renderCharts();
+</script>
+
+</body>
+</html>
