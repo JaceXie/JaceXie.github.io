@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-07-10 · UnitedHealth Q1 2026 财报已于 2026-04-21 发布 -->
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UnitedHealth Group UNH Q1 2026 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+<meta name="description" content="全美最大健康保险（UnitedHealthcare 服务 4910 万人）+ 最大医疗服务/PBM 平台（Optum）的垂直整合巨头，正从 2025 年盈利腰斩危机中复苏。Q1 2026 调整后 EPS $7.23 超共识 9.7%、MCR 回落至 83.9%、上调全年指引至 >$18.25——但管理层自认 Q1 利好 H2 消退、全年 MCR 仍指引 ~88.8%，叠加 DOJ 对其 Medicare Advantage 编码的刑事调查悬顶 + Forward P/E 22.5x（同业 2 倍）无安全边际。顶级 franchise，复苏真实，但价格与红旗都不容忽视。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UnitedHealth Group UNH Q1 2026 海图研判 · 海图夜读">
+<meta property="og:description" content="全美最大健康保险 + Optum 医疗服务的垂直整合巨头，正从 2025 盈利腰斩危机中复苏。Q1 2026 调整后 EPS $7.23 超共识 9.7% + MCR 回落至 83.9% + 上调全年指引，但管理层自认 Q1 利好 H2 消退、全年 MCR 仍 ~88.8%，叠加 DOJ 刑事调查 + Forward P/E 22.5x 无安全边际。">
+<meta property="og:url" content="https://jacexie.github.io/haitu/reports/unh-q1-2026.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="UnitedHealth Group UNH Q1 2026 海图研判 · 海图夜读">
+<meta name="twitter:description" content="全美医保龙头 + Optum 垂直整合，从 2025 盈利腰斩危机复苏。Q1 调整后 EPS $7.23 超预期 9.7%，但 H2 MCR 抬升 + DOJ 刑事调查 + Forward P/E 22.5x 无安全边际——评级持有观望，12 个月目标价 $380。">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root { --bg:#f5f0eb; --bg2:#ece6df; --card:#ffffff; --card2:#f8f5f1; --border:#d9d0c7; --text:#4a4340; --text2:#7a706a; --text3:#a89f98; --accent:#8a9a8e; --accent2:#7b8fa0; --accent3:#b08d7a; --rose:#c09090; --gold:#b9a06a; --red:#b87070; --green:#7a9a7a; --shadow:rgba(0,0,0,0.06); --chart-grid:#e5ddd5; }
+[data-theme="dark"] { --bg:#1e1c1a; --bg2:#28251f; --card:#2e2a25; --card2:#363230; --border:#4a4540; --text:#d4ccc4; --text2:#a09890; --text3:#706860; --accent:#8a9a8e; --accent2:#8fabbf; --accent3:#c9a48e; --rose:#c09090; --gold:#c9b07a; --red:#c08080; --green:#8aaa8a; --shadow:rgba(0,0,0,0.3); --chart-grid:#3e3a35; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', serif; line-height: 1.75; font-size: 14.5px; transition: background .35s, color .35s; }
+a { color: var(--accent2); text-decoration: none; }
+.theme-bar { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); }
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+.toggle-switch { position: relative; width: 44px; height: 22px; background: var(--border); border-radius: 11px; cursor: pointer; transition: background .3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: var(--card); border-radius: 50%; transition: transform .3s; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+
+.hero { padding: 48px 24px 36px; text-align: center; border-bottom: 1px solid var(--border); }
+.hero-tag { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 3px 14px; border-radius: 20px; margin-bottom: 18px; }
+.hero h1 { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.pill { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: 'Segoe UI', sans-serif; font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow); }
+.pill strong { color: var(--text); }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle { font-size: 18px; font-weight: 700; color: var(--accent3); margin-bottom: 20px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+.stitle::before { content: ''; display: block; width: 4px; height: 20px; background: var(--accent3); border-radius: 2px; }
+
+.haitu-quip { display: flex; align-items: center; gap: 18px; background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 18px 24px; margin: 24px 0; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-quote { flex: 1; }
+.haitu-portrait { font-size: 15px; line-height: 1.65; color: var(--text); margin-bottom: 6px; font-weight: 600; }
+.haitu-rating-line { font-size: 13px; color: var(--text2); font-family: 'Segoe UI', sans-serif; }
+.rating-badge { display: inline-block; padding: 2px 12px; border-radius: 12px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; margin-left: 4px; }
+.rating-hold { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+.rating-sell { background: rgba(184,112,112,.18); color: var(--red); }
+
+.haitu-essay { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 28px 32px; margin: 24px 0 20px; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-essay-header { display: flex; align-items: center; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.haitu-avatar-sm { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); background: var(--red); box-shadow: 0 2px 8px rgba(184,112,112,0.2); }
+.haitu-name-lg { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 28px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 4px; }
+.haitu-essay-tag { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; }
+.haitu-essay-body { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 15px; line-height: 2.0; color: var(--text); }
+.haitu-essay-body p { margin-bottom: 14px; }
+.haitu-essay-body p.lead { font-size: 16px; font-style: italic; color: var(--text2); margin-bottom: 18px; }
+.haitu-essay-body strong { color: var(--text); font-weight: 700; }
+.haitu-essay-body h4 { font-size: 14px; color: var(--accent3); margin: 18px 0 10px; font-family: 'Segoe UI', sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+.haitu-sign { text-align: right; margin-top: 18px; font-family: 'Georgia', serif; font-size: 14px; color: var(--text2); font-style: italic; }
+.haitu-disc { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); font-style: italic; line-height: 1.7; }
+
+.stock-snap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px; }
+.snap-item { text-align: center; }
+.snap-label { font-family: 'Segoe UI', sans-serif; font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.snap-val { font-family: 'Segoe UI', sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+.snap-val.up { color: var(--green); }
+.snap-val.dn { color: var(--red); }
+.snap-sub { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow); }
+.kpi-l { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.badge { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+.up { background: rgba(122,154,122,.15); color: var(--green); }
+.dn { background: rgba(184,112,112,.15); color: var(--red); }
+.nt { background: rgba(123,143,160,.15); color: var(--accent2); }
+
+.tbl-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow); }
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI', sans-serif; font-size: 13px; }
+.tbl th { background: var(--card2); color: var(--text3); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); background: var(--card2); }
+
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); }
+.ctitle { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 260px; }
+
+.cmt { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 26px; line-height: 1.95; font-size: 14px; box-shadow: 0 1px 4px var(--shadow); color: var(--text); }
+.cmt p { margin-bottom: 14px; }
+.cmt p:last-child { margin-bottom: 0; }
+.cmt strong { color: var(--text); }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+
+.bscore { display: flex; align-items: center; gap: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; margin-bottom: 12px; box-shadow: 0 1px 4px var(--shadow); }
+.circle { width: 62px; height: 62px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; flex-shrink: 0; border: 3px solid; font-family: 'Segoe UI', sans-serif; }
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 4px; color: var(--text); }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.moat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+.moat-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); border-left: 4px solid var(--accent); }
+.moat-card.wide { border-left-color: var(--green); }
+.moat-card.narrow { border-left-color: var(--gold); }
+.moat-card.none { border-left-color: var(--red); }
+.moat-card h5 { font-size: 13px; color: var(--text); margin-bottom: 6px; }
+.moat-card .moat-rate { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.moat-card.wide .moat-rate { background: rgba(122,154,122,.18); color: var(--green); }
+.moat-card.narrow .moat-rate { background: rgba(185,160,106,.18); color: var(--gold); }
+.moat-card.none .moat-rate { background: rgba(184,112,112,.18); color: var(--red); }
+.moat-card p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+
+.ec-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 14px; box-shadow: 0 1px 3px var(--shadow); }
+.ec-badge { flex-shrink: 0; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-top: 2px; font-family: 'Segoe UI', sans-serif; }
+.ec-bull { background: rgba(122,154,122,.18); color: var(--green); }
+.ec-bear { background: rgba(184,112,112,.18); color: var(--red); }
+.ec-neut { background: rgba(185,160,106,.18); color: var(--gold); }
+.ec-body { flex: 1; }
+.ec-title { font-weight: 600; color: var(--text); margin-bottom: 3px; font-size: 14px; }
+.ec-note { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.dcf-note { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.dcf-note strong { color: var(--text); }
+
+.scorecard { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow); }
+.score-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.score-card { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px; }
+.score-letter { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Segoe UI', sans-serif; font-weight: 800; font-size: 22px; flex-shrink: 0; border: 3px solid; }
+.s-a { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.12); }
+.s-bp { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.06); }
+.s-b { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.10); }
+.s-bm { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.06); }
+.s-c { color: var(--red); border-color: var(--red); background: rgba(184,112,112,.08); }
+.score-body h4 { font-size: 13px; color: var(--text); margin-bottom: 4px; }
+.score-body p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+.flag-row { margin-top: 16px; padding: 12px 16px; background: rgba(184,112,112,.08); border: 1px solid rgba(184,112,112,.3); border-radius: 8px; font-size: 13px; color: var(--text2); }
+.flag-row strong { color: var(--red); }
+
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center; box-shadow: 0 1px 4px var(--shadow); }
+.pbox .pl { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; }
+.pbox .pv { font-family: 'Segoe UI', sans-serif; font-size: 28px; font-weight: 800; margin-bottom: 5px; }
+.pbox .pn { font-size: 12px; color: var(--text3); line-height: 1.5; }
+.pc { color: var(--red); } .pf { color: var(--gold); } .ps { color: var(--green); }
+
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.risk-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); position: relative; overflow: hidden; }
+.risk-card::before { content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent); }
+.risk-card.r1::before { background: var(--green); }
+.risk-card.r2::before { background: rgba(122,154,122,.6); }
+.risk-card.r3::before { background: var(--gold); }
+.risk-card.r4::before { background: var(--rose); }
+.risk-card.r5::before { background: var(--red); }
+.risk-card h5 { font-size: 14px; margin-bottom: 6px; color: var(--text); }
+.risk-score { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.r1 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r2 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r3 .risk-score { background: rgba(185,160,106,.18); color: var(--gold); }
+.r4 .risk-score { background: rgba(192,144,144,.18); color: var(--rose); }
+.r5 .risk-score { background: rgba(184,112,112,.18); color: var(--red); }
+.risk-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+footer { background: var(--card2); border-top: 1px solid var(--border); padding: 24px; text-align: center; color: var(--text3); font-size: 12px; margin-top: 40px; line-height: 1.8; }
+@media (max-width: 768px) { .cgrid,.pgrid { grid-template-columns: 1fr; } .hero h1 { font-size: 22px; } .kpi-grid { grid-template-columns: 1fr 1fr; } .stock-snap { grid-template-columns: 1fr 1fr; } .haitu-essay-header { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/UNH" target="_blank" rel="noopener" title="在雪球查看 UNH 实时行情">雪球 UNH</a>
+  </div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">Q1 2026 财报发布 · 2026-04-21 &nbsp;|&nbsp; 海图研判 · 2026-07-11</div>
+  <h1>UnitedHealth Group UNH · 2026 Q1 财报深度分析</h1>
+  <div class="hero-sub">NYSE: UNH &nbsp;|&nbsp; 财季截至 2026-03-31（财年 = 日历年） &nbsp;|&nbsp; 价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill">股价 <strong>$424.62</strong> <span style="color:var(--red)">距高点 -2%</span></div>
+    <div class="pill">市值 <strong>$386B</strong></div>
+    <div class="pill">Q1 营收 <strong>$111.7B</strong> <span style="color:var(--green)">+2%</span></div>
+    <div class="pill">调整后 EPS <strong>$7.23</strong> <span style="color:var(--green)">超预期 +9.7%</span></div>
+    <div class="pill">MCR <strong>83.9%</strong> <span style="color:var(--green)">-90bp</span></div>
+    <div class="pill">Forward P/E <strong>~22.5x</strong> <span style="color:var(--gold)">无安全边际</span></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 海图页首短评 ═══ -->
+<div class="haitu-quip">
+  <div class="haitu-quote">
+    <div class="haitu-portrait">全美最大健康保险（UnitedHealthcare 服务 4910 万人）+ 最大医疗服务/PBM 平台（Optum）的垂直整合巨头——从 2025 盈利腰斩（调整后 EPS $27.66→$16.35）危机中复苏的转折验证季。Q1 调整后 EPS $7.23 超共识 9.7% + MCR 回落至 83.9% + 上调全年指引至 &gt;$18.25。但管理层自认 Q1 利好（准备金释放 + 温和呼吸道季节）H2 消退、全年 MCR 仍指引 ~88.8%，叠加 DOJ 对其 Medicare Advantage 编码的刑事调查悬顶 + Forward P/E 22.5x（同业 2 倍）无安全边际——顶级 franchise，复苏真实，但价格与红旗都不容忽视。</div>
+    <div class="haitu-rating-line">评级：<span class="rating-badge rating-hold">持有观望</span> · 12 个月概率加权目标价 $380（-11%）· 复苏中的医保龙头，对垒 DOJ Medicare Advantage 刑事调查 + H2 医疗赔付率必须大幅抬升 + 满估值无安全边际</div>
+  </div>
+</div>
+
+<!-- ═══ 市场数据快照 ═══ -->
+<div class="section">
+  <div class="stitle">市场数据快照（2026-07-10 收盘）</div>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">股价（美元）</div><div class="snap-val">$424.62</div><div class="snap-sub">2026-07-10 · 距 52 周高 -2%</div></div>
+    <div class="snap-item"><div class="snap-label">市值</div><div class="snap-val">$386B</div><div class="snap-sub">全美医保龙头</div></div>
+    <div class="snap-item"><div class="snap-label">TTM GAAP P/E</div><div class="snap-val">~32x</div><div class="snap-sub">含 2025 危机低谷季</div></div>
+    <div class="snap-item"><div class="snap-label">TTM 调整后 P/E</div><div class="snap-val">~26x</div><div class="snap-sub">剔调整项 · 仍含危机季</div></div>
+    <div class="snap-item"><div class="snap-label">Forward P/E</div><div class="snap-val nt">~22.5x</div><div class="snap-sub">FY26 调整 EPS &gt;$18.25</div></div>
+    <div class="snap-item"><div class="snap-label">P/S (TTM)</div><div class="snap-val">~0.86x</div><div class="snap-sub">保险薄利 · 5.6% 净利率</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间</div><div class="snap-val">$234.6 - $434.3</div><div class="snap-sub">从危机低点强反弹</div></div>
+    <div class="snap-item"><div class="snap-label">股息率</div><div class="snap-val">~2.08%</div><div class="snap-sub">$8.84/年 · 连续增息</div></div>
+    <div class="snap-item"><div class="snap-label">现金 + 短投</div><div class="snap-val">$31.2B</div><div class="snap-sub">2026-03-31 末</div></div>
+    <div class="snap-item"><div class="snap-label">有息负债</div><div class="snap-val dn">$77.9B</div><div class="snap-sub">短债 6.5 + 长债 71.4</div></div>
+    <div class="snap-item"><div class="snap-label">真实净负债</div><div class="snap-val dn">-$46.7B</div><div class="snap-sub">⚠️ 净负债非净现金</div></div>
+    <div class="snap-item"><div class="snap-label">经营现金流 (Q1)</div><div class="snap-val up">$8.9B</div><div class="snap-sub">~1.4x 净利 · FCF $8.1B</div></div>
+    <div class="snap-item"><div class="snap-label">医疗赔付率 MCR</div><div class="snap-val up">83.9%</div><div class="snap-sub">去年 84.8% · 全年指引 ~88.8%</div></div>
+    <div class="snap-item"><div class="snap-label">债务 / 资本</div><div class="snap-val dn">42.9%</div><div class="snap-sub">回购暂停以修复此项</div></div>
+  </div>
+  <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">数据时点：股价 2026-07-10 收盘 $424.62（52 周区间 $234.60-$434.30）· 财务数据来源 UnitedHealth Q1 2026 官方财报新闻稿 + SEC 10-Q（2026-04-21 发布，财季截至 2026-03-31）· 货币 USD 单口径。UNH 财年 = 日历年，故 Q1 2026 = 2026-01-01 至 2026-03-31。⚠️ UNH 是<strong>净负债</strong>（有息负债 $77.9B &gt; 现金+短投 $31.2B，真实净负债 -$46.7B），并非"现金堡垒"。那 $56.8B 长期投资组合为受监管的保险准备金资产，不可自由分配。</p>
+</div>
+
+<!-- ═══ Q1 2026 KPI ═══ -->
+<div class="section">
+  <div class="stitle">Q1 2026 核心业绩（USD · 财季截至 2026-03-31）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">总营收</div><div class="kpi-v">$111.7B</div><span class="badge up">+2% YoY</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">去年 $109.6B · 会员收缩下低增</div></div>
+    <div class="kpi"><div class="kpi-l">经营利润</div><div class="kpi-v">$9.0B</div><span class="badge nt">利润率 8.0%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">去年 $9.1B · 利润率修复</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 净利（归母）</div><div class="kpi-v">$6.28B</div><span class="badge nt">-0.2% YoY</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">去年 $6.29B · 基本持平</div></div>
+    <div class="kpi"><div class="kpi-l">调整后净利（推算）</div><div class="kpi-v">~$6.58B</div><span class="badge up">EPS 口径</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">$7.23×~910M 股推算</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 摊薄 EPS</div><div class="kpi-v">$6.90</div><span class="badge nt">+0.7%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">去年 $6.85</div></div>
+    <div class="kpi"><div class="kpi-l">调整后摊薄 EPS</div><div class="kpi-v">$7.23</div><span class="badge up">超共识 +9.7%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">vs 共识 ~$6.59 · 最可信口径</div></div>
+    <div class="kpi"><div class="kpi-l">净利率</div><div class="kpi-v">5.6%</div><span class="badge nt">去年 5.7%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">保险薄利模式常态</div></div>
+    <div class="kpi"><div class="kpi-l">医疗赔付率 MCR</div><div class="kpi-v">83.9%</div><span class="badge up">-90bp YoY</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">去年 84.8% · 全年最好一季</div></div>
+    <div class="kpi"><div class="kpi-l">运营成本率</div><div class="kpi-v">13.8%</div><span class="badge dn">+140bp</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">激励薪酬计提 ~$900M（去年 $35M）</div></div>
+    <div class="kpi"><div class="kpi-l">UnitedHealthcare 营收</div><div class="kpi-v">$86.3B</div><span class="badge up">经营利润率 6.6%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">较去年 6.2% 扩张 40bp</div></div>
+    <div class="kpi"><div class="kpi-l">Optum 营收</div><div class="kpi-v">$63.7B</div><span class="badge nt">经营利润率 5.2%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">Health / Insight / Rx 三块</div></div>
+    <div class="kpi"><div class="kpi-l">经营现金流 / FCF</div><div class="kpi-v">$8.9B / $8.1B</div><span class="badge up">~1.4x 净利</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">回购 $0 · 股息 $2.0B</div></div>
+  </div>
+</div>
+
+<!-- ═══ 看穿桥接 高亮框 ═══ -->
+<div class="section">
+  <div class="stitle">本季必看 · 两个"看穿"：超预期从哪来、83.9% 的 MCR 能不能外推</div>
+  <div class="cmt">
+    <p><strong>UNH 这份 Q1 财报有两个必须"看穿"的地方，看不穿就会把一个"利润率修复的季节性好季"误读成"重新加速"。</strong></p>
+    <p><strong>看穿一：营收只 +2%，但调整后 EPS 超预期 9.7%——超预期全部来自利润率修复，不是增长。</strong> 很多人只看"调整后 EPS $7.23、大超共识"，却没注意<span class="hl-t">营收同比只有 +2%（$109.6B→$111.7B），而且会员在收缩</span>：UnitedHealthcare 服务人数降到 4910 万（较年末 4980 万、Q3 的 5010 万下滑）、Medicare Advantage 单季少 96.5 万、Optum Rx 处方量从 4.08 亿降到 3.83 亿。超预期靠的是 <span class="hl-t">MCR 从 84.8% 回落到 83.9%（改善 90bp）+ 约 $500M+ 有利的既往期准备金释放</span>。这是一个主动"利润优先于规模"的季度——管理层刻意退出部分亏损的 MA 市场、砍福利来修复利润率，不是需求重新加速。</p>
+    <div class="tbl-wrap" style="margin:14px 0;">
+      <table class="tbl">
+        <tr><th>Q1 2026 增长质量拆解</th><th>数值</th><th>读数</th></tr>
+        <tr><td>总营收 YoY</td><td>+2%</td><td>会员收缩下低速增长</td></tr>
+        <tr><td>UnitedHealthcare 服务人数</td><td>49.1M</td><td>较年末 49.8M / Q3 50.1M 下降</td></tr>
+        <tr><td>Medicare Advantage 单季净减</td><td>-96.5 万</td><td>全年计划缩减 ~130 万</td></tr>
+        <tr><td>Optum Rx 处方量</td><td>3.83 亿</td><td>去年 4.08 亿 · UHC 会员流失拖累</td></tr>
+        <tr class="hl"><td><strong>调整后 EPS 超预期幅度</strong></td><td><strong>+9.7%</strong></td><td><strong>全部来自 MCR 修复 + 准备金释放</strong></td></tr>
+      </table>
+    </div>
+    <p><strong>看穿二：83.9% 的 MCR 是全年最好的一季，管理层自己说不可持续。</strong> 全年 MCR 指引仍是 <span class="warn-t">~88.8%（±50bp）</span>，意味着<span class="warn-t">下半年医疗赔付率要比 Q1 的 83.9% 抬升近 5 个百分点</span>。Q1 的两个利好——约 $500M+ 有利既往期准备金释放、温和的呼吸道季节——都会在 Q2 消退；Optum Health 的全年盈利也前置在上半年。把 83.9% 外推到全年，是本季最容易踩的坑。<strong>近 5 个季度的 MCR 轨迹（84.8 → 89.4 → 89.9 → ~92 → 83.9）本身就是一部"危机—深谷—Q1 反弹"的实录，Q1 的漂亮读数恰恰站在一个季节性高点上。</strong></p>
+    <div class="tbl-wrap" style="margin:14px 0;">
+      <table class="tbl">
+        <tr><th>MCR 轨迹与全年缺口</th><th>MCR</th><th>说明</th></tr>
+        <tr><td>Q1 2025</td><td>84.8%</td><td>危机前最后的正常季</td></tr>
+        <tr><td>Q2 / Q3 2025</td><td>89.4% / 89.9%</td><td>医疗成本失控 · 中途撤回指引</td></tr>
+        <tr><td>Q4 2025（估）</td><td>~92%</td><td>GAAP 净利仅 $10M · EPS $0.02 危机谷底</td></tr>
+        <tr class="hl"><td><strong>Q1 2026</strong></td><td><strong>83.9%</strong></td><td><strong>全年最好一季（含准备金释放利好）</strong></td></tr>
+        <tr><td><span class="warn-t">FY2026 全年指引</span></td><td><span class="warn-t">~88.8%</span></td><td><span class="warn-t">隐含 H2 需较 Q1 抬升近 500bp</span></td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 趋势图 ═══ -->
+<div class="section">
+  <div class="stitle">关键指标趋势</div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">总营收（$B）& 净利率（%，近 5 季 · 双轴）</div><div class="cwrap"><canvas id="chartRev"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">医疗赔付率 MCR & 经营利润率（%，近 5 季）</div><div class="cwrap"><canvas id="chartMargin"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">Q1 2026 分部营收（$B · 抵消前）</div><div class="cwrap"><canvas id="chartSegment"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">GAAP vs 调整后摊薄 EPS（$，近 5 季）</div><div class="cwrap"><canvas id="chartEps"></canvas></div></div>
+  </div>
+</div>
+
+<!-- ═══ 桑基图 ═══ -->
+<div class="section">
+  <div class="stitle">Q1 2026 资金流向桑基图（$B）</div>
+  <div class="ccard">
+    <div id="sankey" style="width:100%;height:480px;"></div>
+    <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">说明：总营收 $111.7B → 医疗与产品成本 $87.3B（保险模式的最大成本，对应保费口径的医疗赔付率 MCR 83.9%）+ 运营成本 $15.4B（运营成本率 13.8%，含激励薪酬 ~$900M）+ 营业利润 $9.0B → 税·利息·少数股东权益 $2.7B + 归母净利 $6.28B。流量已在每个中间节点闭合平衡。这是一门<strong>净利率仅 5.6% 的薄利保险 + 服务模式</strong>——利润的分毫都取决于 MCR 与运营效率之间的差；本季经营现金流 $8.9B（~1.4x 净利）、FCF $8.1B，现金转化受益于保险浮存（medical claims payable $39.7B）的时点效应。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 1 ═══ -->
+<div class="section">
+  <div class="stitle">模块 1 · 公司概览与背景</div>
+  <div class="cmt">
+    <p><strong>UnitedHealth Group Inc.</strong>（NYSE: UNH），总部明尼苏达州明尼通卡（Minnetonka）。成立于 1977 年，是<strong>全美（按营收计）最大的医疗保健公司</strong>，2025 财年营收超 $4000 亿。财年 = 日历年，故 Q1 2026 = 2026-01-01 至 2026-03-31。</p>
+
+    <p><strong>核心叙事</strong>：UNH 是<span class="hl-t">"保险 + 医疗服务"垂直整合的双引擎巨头</span>——它不是单纯的保险公司，而是把承保、药品、诊疗、数据、风险调整全链条内化：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>UnitedHealthcare（保险）</strong>——Q1 营收 $86.3B，服务 4910 万人，涵盖商业雇主、Medicare Advantage（政府补贴的老年医保）、Medicaid（低收入医保）。它收保费、承接医疗风险，赚的是"保费 − 赔付 − 运营"的薄利差</li>
+      <li><strong>Optum（医疗服务/PBM）</strong>——Q1 营收 $63.7B，三块：<strong>Optum Health</strong>（价值医疗 VBC 诊疗，服务 9300 万人，$24.1B）+ <strong>Optum Insight</strong>（医疗数据与技术，$5.1B）+ <strong>Optum Rx</strong>（药品福利管理 PBM，$35.7B）</li>
+    </ul>
+    <p>两大板块分部营收合计 $150.0B，经约 $38.3B 分部间抵消（如 Optum Rx 为 UnitedHealthcare 会员管理药品）后，得合并营收 $111.7B。这个"左手保险、右手服务"的结构，既是它的护城河，也是 DOJ 调查的焦点——垂直整合让它有动力也有能力优化 Medicare Advantage 的诊断编码。</p>
+
+    <p><strong>2024-2025 的危机背景（读懂本报告的前提）</strong>：<span class="warn-t">2024 年 12 月，UnitedHealthcare CEO Brian Thompson 遇害</span>，把公司推到舆论风口；2025 年医疗成本（尤其 Medicare Advantage）超预期飙升，导致公司<span class="warn-t">年中一度撤回全年指引、CEO Andrew Witty 离任、创始元老 Stephen Hemsley 回归掌舵</span>；<span class="warn-t">FY2025 调整后 EPS 从 2024 年的 $27.66 腰斩至 $16.35</span>，单季 GAAP 净利一度只剩 $10M（Q4 2025 EPS $0.02）。Q1 2026 正是"这场危机能否触底反转"的第一个验证季。</p>
+
+    <p><strong>能力圈检验</strong>：保险 + 服务的商业模式本身清晰（收保费、控赔付、赚差价），但<span class="warn-t">两块黑箱：(1) 医疗成本趋势（MCR）的可预测性——2025 年已证明它能在一年内失控并腰斩利润；(2) DOJ 对 Medicare Advantage 风险调整/诊断编码的刑事 + 民事调查——直指这家公司最赚钱业务的盈利质量是否"干净"</span>。这两点，是 UNH 与"看得懂的顶级好生意"之间的距离。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 2 ═══ -->
+<div class="section">
+  <div class="stitle">模块 2 · 管理层评估</div>
+
+  <div class="bscore">
+    <div class="circle cw">B</div>
+    <div class="bd">
+      <h4>Stephen Hemsley · CEO（2025 回归掌舵）· 董事长</h4>
+      <p>Hemsley 是 UNH 的传奇元老，曾任 CEO（2006-2017），把公司从早期保险商打造成保险 + Optum 的巨头。2025 年危机中<span class="hl-t">从董事长位置回归 CEO 救火</span>，把 2025 定位为"重置年"，以保守的"先证明（prove-it）"假设给出 FY2026 谨慎指引（营收 &gt;$439B、初始调整 EPS &gt;$17.75，后上调至 &gt;$18.25）。他推动的"利润优先于规模"战略——主动缩减 MA 会员 ~130 万、退出亏损市场、削减福利以修复利润率——是一条务实但痛苦的多年修复路径。海图判断：这是一位懂这门生意、有信誉、且愿意牺牲短期规模换利润质量的掌舵人。<span class="warn-t">但危机恰恰发生在管理层任内（医疗成本趋势严重误判），且 DOJ 调查直指其 MA 编码实践，治理与信誉都需要时间重建。</span></p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B-</div>
+    <div class="bd">
+      <h4>资本配置纪律 · 股息稳健，但回购择时不佳且已暂停</h4>
+      <p>
+      <strong>股息连续多年增长</strong>（历经危机未削减，Q1 2026 派息 $2.0B，年化约 $8.84/股、股息率 ~2.1%，2026 年 6 月再度上调）。<br>
+      <strong>回购处于暂停修复期</strong>：过去 3 年（FY2023-2025）回购合计 $225 亿，但<span class="warn-t">多在 2023-2024 年股价 $450-550 的高位执行——随后股价 2025 年崩至 $234.60，是典型的"高位回购"择时失误</span>；2025 年起<strong>回购暂停以重建资本与信用指标</strong>，Q1 2026 回购为 $0，计划 Q2 末前恢复至少 $20 亿。<br>
+      <span class="warn-t">资本结构提示</span>：债务/资本比 42.9%（2026-03-31），真实净负债 -$46.7B。修复这一比率、恢复信用指标，是管理层暂停回购的核心原因——这是危机后合理的防御姿态，但也说明当前不是"用赚的钱大手笔返还"的阶段。
+      </p>
+    </div>
+  </div>
+
+  <div class="cmt">
+    <p><strong>长期主义测试</strong>：✅ 偏正面——Hemsley 主动牺牲短期规模（缩减 MA 会员 130 万）换取利润率与定价纪律，是长期视角而非短期财报博弈。<strong>坦诚度</strong>：电话会披露相对详尽（主动提示 Q1 准备金释放利好不可持续、全年 MCR 仍 ~88.8%、Optum Health 盈利前置 H1），不粉饰 H2 压力。<strong>利益绑定</strong>：Hemsley 作为元老持股与声誉深度绑定。<span class="warn-t">但红旗不容忽视</span>：危机在管理层任内爆发（成本趋势误判致利润腰斩）+ DOJ 对 MA 编码的刑事调查，使"管理层质量"这一维度必须打折——给 B。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 3 ═══ -->
+<div class="section">
+  <div class="stitle">模块 3 · 商业模式深度解析</div>
+  <div class="cmt">
+    <p><strong>海图"一句话测试"</strong>：<span class="hl-t">UNH 一边通过 UnitedHealthcare 收保费、承接近 5000 万人的医疗风险，一边通过 Optum 把药品、诊疗、数据全链条内化——它赚的是"医疗赔付率与运营效率之间的薄利差"，净利率常年只有 5-6%，靠 $4500 亿营收的巨大体量和 Optum 的高质量服务撑起利润。</span></p>
+
+    <p><strong>两大板块与单位经济</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>分部（Q1 2026）</th><th>营收</th><th>经营利润</th><th>利润率</th><th>关键读数</th></tr>
+        <tr><td>UnitedHealthcare（保险）</td><td>$86.3B</td><td>$5.7B</td><td>6.6%</td><td>服务 49.1M · 较去年 6.2% 扩张 40bp</td></tr>
+        <tr class="hl"><td>Optum 合计</td><td>$63.7B</td><td>$3.3B</td><td>5.2%</td><td>Health + Insight + Rx</td></tr>
+        <tr><td>· Optum Health（价值医疗）</td><td>$24.1B</td><td>$1.1B</td><td>4.7%</td><td>YoY -3% · 服务 93M（去年 ~95M）</td></tr>
+        <tr><td>· Optum Insight（数据技术）</td><td>$5.1B</td><td>$1.0B</td><td>~20%</td><td>去年营收 $5.0B / 利润 $1.2B</td></tr>
+        <tr><td>· Optum Rx（药品福利 PBM）</td><td>$35.7B</td><td>~$1.2B</td><td>~3.4%</td><td>YoY +2% · 专科药驱动 · 处方量 383M（降）</td></tr>
+      </table>
+    </div>
+
+    <p style="margin-top:14px;"><strong>产业链定位与议价能力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>对政府（Medicare/Medicaid）</strong>：<span class="warn-t">议价能力弱且受政策摆布</span>——CMS 对 MA 的资金费率、Star 评级、风险调整规则直接决定盈利。CMS 削减 + IRA 对 Part D 的重构是结构性逆风</li>
+      <li><strong>对医院/药企</strong>：<span class="hl-t">议价能力强</span>——凭近 5000 万会员的规模，UnitedHealthcare 对医疗网络、Optum Rx 对药企都有强议价力</li>
+      <li><strong>垂直整合的自我强化</strong>：Optum 服务 UnitedHealthcare 的会员（药品、诊疗），利润在体系内循环，且 Optum Health 的价值医疗（VBC）能主动管理成本——这是 UNH 区别于纯保险商的核心。但<span class="warn-t">整合也让它有动力"优化"MA 诊断编码，正是 DOJ 调查的焦点</span></li>
+      <li><strong>薄利模式的脆弱性</strong>：净利率仅 5.6%，意味着 MCR 抬升 1-2 个百分点就能吞掉大半利润——2025 年正是如此</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══ 模块 4 ═══ -->
+<div class="section">
+  <div class="stitle">模块 4 · 经济护城河分析（5 维）</div>
+  <div class="moat-grid">
+    <div class="moat-card wide">
+      <h5>1. 规模/成本优势</h5>
+      <span class="moat-rate">宽</span>
+      <p>全美最大医保（4910 万会员）+ 最大 PBM（Optum Rx）。规模带来对医院/药企的强议价力 + 数据优势。<strong>趋势：稳定</strong>（但受监管压制）。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>2. 垂直整合（无形/结构）</h5>
+      <span class="moat-rate">宽</span>
+      <p>保险 + Optum 服务/数据/PBM 全链条内化，成本可主动管理、利润体系内循环，竞争对手难以复制。<strong>趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>3. 转换成本</h5>
+      <span class="moat-rate">中</span>
+      <p>雇主/会员每年可换保险；但雇主计划粘性 + 网络深度集成提供中等黏性。<span class="warn-t">MA 会员因福利缩减主动流失</span>。<strong>趋势：略降</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>4. 监管牌照/护城河变量</h5>
+      <span class="moat-rate">中 · 受攻击</span>
+      <p>保险牌照 + MA 合同是壁垒，<span class="warn-t">但也正因龙头地位招致 DOJ 反垄断/编码刑事调查 + CMS 资金削减</span>。<strong>趋势：监管压制</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>5. 网络效应</h5>
+      <span class="moat-rate">窄-中</span>
+      <p>会员越多对医疗网络议价越强、数据越丰富，有一定飞轮，但弱于支付/平台型网络效应。<strong>趋势：稳定</strong>。</p>
+    </div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>10 年后护城河会更宽还是更窄？</strong> <span class="hl-t">核心的规模 + 垂直整合护城河仍宽，但护城河的"含金量"正被两股力量侵蚀</span>：(1) <span class="warn-t">监管的持续压制</span>——CMS 对 MA 资金削减、IRA 对 Part D 重构、DOJ 对编码实践的刑事调查，都在压缩这门生意的超额利润空间；(2) <span class="warn-t">医疗成本趋势的不可控</span>——2025 年证明了 MCR 能在一年内失控，护城河再宽也挡不住利润腰斩。UNH 的护城河更像是"规模带来的定价与议价优势"，而非"不可撼动的收费站"——它的利润，永远悬在医疗成本趋势与监管态度这两把剑之下。</p>
+    <p><strong>定价权</strong>：中等——商业险有年度调价能力（MA 约 10% 提价进入 2026），但 Medicare/Medicaid 端受政府费率约束，且提价会加速会员流失（"利润 vs 规模"的两难）。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 5 ═══ -->
+<div class="section">
+  <div class="stitle">模块 5 · 财务深度分析</div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 12px 0; font-family: 'Segoe UI',sans-serif;">5.1 关键比率与近 5 季趋势</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>指标</th><th>Q1 25</th><th>Q2 25</th><th>Q3 25</th><th>Q4 25</th><th>Q1 26</th></tr>
+      <tr><td>总营收（$B）</td><td>109.6</td><td>111.6</td><td>113.2</td><td>113.2</td><td>111.7</td></tr>
+      <tr><td>GAAP 净利（$B）</td><td>6.29</td><td>3.41</td><td>2.35</td><td>0.01</td><td>6.28</td></tr>
+      <tr><td>GAAP 摊薄 EPS（$）</td><td>6.85</td><td>3.74</td><td>2.59</td><td>0.02</td><td>6.90</td></tr>
+      <tr><td>调整后 EPS（$）</td><td>7.20</td><td>4.08</td><td>2.92</td><td>2.15</td><td>7.23</td></tr>
+      <tr><td>经营利润率（%）</td><td>8.3</td><td>4.6</td><td>3.8</td><td>0.3</td><td>8.0</td></tr>
+      <tr><td>净利率（%）</td><td>5.7</td><td>3.1</td><td>2.1</td><td>~0</td><td>5.6</td></tr>
+      <tr class="hl"><td><strong>医疗赔付率 MCR（%）</strong></td><td>84.8</td><td>89.4</td><td>89.9</td><td>~92</td><td>83.9</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">⚠️ <strong>利润波动极端 · 铁律提示</strong>：过去 5 个季度 GAAP 净利从 $6.29B → $0.01B（Q4 2025 谷底）→ $6.28B，净利率从 5.7% 崩到近 0 再回 5.6%。<span class="warn-t">这种极端波动使单一 TTM P/E 严重失真，是模块 7 必须做多档 P/E 透视的原因</span>。核心驱动是 MCR：它决定了这门薄利生意的生死。Q4 2025 MCR ~92% 为估算（FY2025 调整后全年 88.9%，前三季 84.8/89.4/89.9），Q4 GAAP 净利仅 $10M 是危机谷底季。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.2 杜邦分析（ROE 拆解）</h3>
+  <div class="dcf-note">
+    <p><strong>ROE = 净利率 × 资产周转率 × 权益乘数</strong></p>
+    <p>· <strong>Q1 2026 年化口径</strong>：净利率 5.6% × 资产周转 ~1.44x（TTM 营收 $449.7B / 总资产 $312.6B）× 权益乘数 ~3.0x（总资产 / 权益 $105.3B）≈ <span class="hl-t">ROE ~24%</span>——但这是用"全年最好一季"年化的乐观口径。</p>
+    <p>· <strong>TTM 真实口径（含 2025 危机季）</strong>：TTM GAAP 净利约 $12.0B / 权益 ~$95-105B ≈ <span class="warn-t">ROE ~12-14%</span>。</p>
+    <p>ROE 从 2024 年的 ~24%+ 腰斩到危机 TTM 的 ~13%，正是这场利润危机的镜像。杜邦拆解显示：UNH 的 ROE 靠<strong>高资产周转（薄利多销）+ 中等杠杆</strong>撑起，净利率本身极薄（5-6%），所以 MCR 的一点点波动会被资产周转与杠杆放大成 ROE 的剧烈摆动。</p>
+  </div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.3 资产负债健康度（2026-03-31 末 · $M）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>2026-03-31</th><th>说明</th></tr>
+      <tr><td>现金及等价物</td><td>28,001</td><td>—</td></tr>
+      <tr><td>短期投资</td><td>3,228</td><td>—</td></tr>
+      <tr class="hl"><td>现金 + 短投合计</td><td>31,229</td><td>可用流动性</td></tr>
+      <tr><td>长期投资组合</td><td>56,788</td><td>⚠️ 受监管保险准备金资产 · 不可自由分配</td></tr>
+      <tr class="hl"><td>短期借款 + 长债当期</td><td>6,477</td><td>SEC 标签 DebtCurrent</td></tr>
+      <tr class="hl"><td>长期债务（非流动）</td><td>71,440</td><td>—</td></tr>
+      <tr><td>经营租赁负债</td><td>~4,615</td><td>2025-12-31 末口径（估计相近）</td></tr>
+      <tr class="hl"><td><strong>有息负债合计</strong></td><td><strong>77,917</strong></td><td>逐项核对</td></tr>
+      <tr class="hl"><td><strong>真实净负债</strong></td><td><strong>-46,688</strong></td><td>⚠️ 净负债非净现金</td></tr>
+      <tr><td>医疗赔付准备金 Medical claims payable</td><td>39,659</td><td>保险浮存 · 现金流质量的关键</td></tr>
+      <tr><td>总资产</td><td>312,644</td><td>—</td></tr>
+      <tr><td>总负债</td><td>207,325</td><td>—</td></tr>
+      <tr><td>股东权益（含少数股东）</td><td>105,319</td><td>债务/资本 42.9%</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">⚠️ <strong>净负债非净现金——铁律提示</strong>：UNH 有息负债 $77.9B（短债 $6.5B + 长债 $71.4B，已逐项核对）&gt; 现金+短投 $31.2B，<strong>真实净负债 -$46.7B</strong>。即便把 $56.8B 长期投资组合计入后账面为 +$10.1B，但<strong>该组合是受监管的保险准备金资产（支撑法定资本与赔付准备），不可自由动用</strong>——不能当作"现金堡垒"。债务/资本比 42.9%，正是管理层暂停回购、优先修复资本的原因。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.4 现金流质量（Q1 2026）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>Q1 2026</th><th>说明</th></tr>
+      <tr><td>经营活动现金流（OCF）</td><td>$8.91B</td><td>约 1.4x GAAP 净利</td></tr>
+      <tr><td>- Capex（物业/设备/资本化软件）</td><td>$0.76B</td><td>现金流量表官方 line item</td></tr>
+      <tr class="hl"><td>自由现金流（FCF）</td><td>$8.15B</td><td>OCF − Capex</td></tr>
+      <tr><td>股票回购</td><td>$0</td><td>暂停以重建资本</td></tr>
+      <tr><td>已付股息</td><td>$2.00B</td><td>~$2.21/股（年化 ~$8.84）</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">OCF/净利 ~1.4x 看似优秀，但需注意<strong>保险浮存效应</strong>：医疗赔付准备金（$39.7B）的时点变动会放大单季 OCF，Q1 通常是现金流强季。真实的"所有者盈余"应剔除浮存增长，更接近调整后净利水平（见 5.5）。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.5 所有者盈余（价值投资口径）</h3>
+  <div class="dcf-note">
+    <p><strong>所有者盈余 = 净利润 + 折旧摊销 + 非现金费用 − 维护性 Capex ± 营运资金（剔除浮存）</strong></p>
+    <p>对保险公司，账面 FCF 会被浮存（medical claims payable）的增长虚高，因此不能把 Q1 的 $8.1B FCF 年化当作真实所有者盈余。更稳健的口径是<strong>以正常化调整后净利为锚</strong>：FY2026 调整后净利指引 &gt;$18.25 EPS × ~910M 股 ≈ <span class="hl-t">$16.6B 正常化所有者盈余</span>（这已隐含 H2 MCR 抬升至全年 ~88.8%）。</p>
+    <p><strong>所有者盈余收益率 = ~$16.6B / 市值 $386B ≈ 4.3%</strong>——对一个<span class="warn-t">净利率仅 5.6%、悬着 DOJ 刑事调查、且刚从利润腰斩危机中恢复</span>的公司，4.3% 的收益率<strong>不算便宜</strong>。它反映市场已把"完全复苏"提前定价。相比之下，纯保险同业（ELV/CI）的所有者盈余收益率普遍在 7-9%（前瞻 P/E 10-13x 的倒数）——UNH 的溢价，需要复苏与 DOJ 都走向好结果才撑得住。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 6 ═══ -->
+<div class="section">
+  <div class="stitle">模块 6 · 电话会分析（Q1 2026 + 前 2 季度）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">Q1 2026 电话会（2026-04-21）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"各分部全面超内部计划（尤以 Medicare 与 Optum Health 突出），调整后 EPS $7.23 超共识 ~$6.59 约 9.7%，上调 FY2026 调整后 EPS 指引至 &gt;$18.25"</div><div class="ec-note">从 Q4 2025 给出的 &gt;$17.75 上调——是危机后第一次"敢于上调"，转折信号明确。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"MCR 改善至 83.9%（去年 84.8%），受益于纪律化定价（MA 约 10% 提价进入 2026）及约 $500M+ 有利既往期准备金释放"</div><div class="ec-note">定价重置见效 + 亏损合同准备金 20bp 正贡献——利润率修复是本季的核心叙事。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"Q1 的准备金释放与温和呼吸道季节利好将在 Q2 减弱；全年 MCR 仍指引 ~88.8%，隐含 H2 大幅抬升；Optum Health 盈利前置 H1"——管理层主动警示</div><div class="ec-note">这是最重要的一条——管理层亲口说 Q1 的漂亮不可持续，是理解全年的钥匙。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"会员持续流失：UHC 降至 49.1M，MA 全年缩减 ~130 万，Optum Rx 处方量从 408M 降至 383M"</div><div class="ec-note">"利润优先于规模"的代价——营收增长被压到 +2%，Optum Health 营收甚至 -3%。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"Q1 回购仍为 $0，计划 Q2 末前恢复至少 $20 亿；优先重建资本与信用指标"</div><div class="ec-note">资本返还处于防御修复期——不是不返还，是先修复资产负债表。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q4 2025 / FY2025 电话会（2026-01-27）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"FY2025 调整后 EPS 暴跌至 $16.35（2024 为 $27.66），调整后 MCR 升至 88.9%（2024 为 85.5%），Q4 近乎盈亏平衡（GAAP 净利 $10M）"</div><div class="ec-note">危机的完整暴露——利润腰斩、MCR 失控，这是复苏叙事的起点低基数。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"回归掌舵的 CEO Hemsley 将 2025 定位为'重置年'，以保守'先证明'假设给出 FY2026 谨慎指引（营收 &gt;$439B、调整后 EPS &gt;$17.75）"</div><div class="ec-note">强调 2026 定价重置、退出部分 MA 市场/削减福利以修复利润率，多年路径恢复 MA 利润率。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"结构性压力：CMS 对 Medicare 资金削减、IRA 对 Part D 的重构、及加速的医疗成本趋势"</div><div class="ec-note">这些是无法靠一季好数据消除的长期逆风。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q3 2025 电话会（2025-10-28）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"Q3 净利降至 $2.3B，MCR 89.9%（同比 +470bp），经营利润仅 $4.3B"</div><div class="ec-note">危机深谷——医疗成本趋势仍在恶化。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"确认正配合 DOJ 对其 Medicare Advantage 计费/风险调整的刑事与民事调查"</div><div class="ec-note">这是本报告最重的红旗——直指最赚钱业务的盈利质量是否合规。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"指引 2026 年 MA 会员主动缩减约 100 万，以'利润优先于规模'策略修复利润率"</div><div class="ec-note">在年中撤回指引后首次企稳，重设 FY2025 调整后 EPS 底线（~$16+）。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">指引兑现度追踪</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>历史指引</th><th>Q1 2026 实际 / 更新</th><th>评价</th></tr>
+      <tr><td>FY2026 调整后 EPS &gt;$17.75（Q4 2025 给出）</td><td>上调至 &gt;$18.25</td><td><span class="badge up">上调</span></td></tr>
+      <tr><td>FY2026 营收 &gt;$439B</td><td>维持</td><td><span class="badge nt">维持</span></td></tr>
+      <tr><td>Q1 调整后 EPS 共识 ~$6.59</td><td>$7.23（+9.7%）</td><td><span class="badge up">超预期</span></td></tr>
+      <tr><td>FY2026 MCR ~88.8%</td><td>维持（Q1 83.9%，隐含 H2 大幅抬升）</td><td><span class="badge dn">H2 待考</span></td></tr>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>信号汇总</strong>：三个季度的电话会连起来读，是一部完整的"<span class="warn-t">危机（Q3 2025 深谷 + DOJ 确认）→ 重置（Q4 2025 谨慎指引）→ 验证（Q1 2026 超预期 + 上调）</span>"叙事。Q1 是明确的转折验证季，定价重置见效、MCR 回落、敢于上调指引。<span class="hl-t">但管理层的坦诚恰恰是最大的提醒</span>：他们亲口说 Q1 利好 H2 消退、全年 MCR 仍 ~88.8%、Optum Health 盈利前置 H1。<strong>换句话说，市场看到的是"复苏确认"，管理层说的是"别急，H2 才是真考验"。DOJ 调查则始终悬在头顶，未有进展披露。</strong></p>
+  </div>
+</div>
+
+<!-- ═══ 模块 7 ═══ -->
+<div class="section">
+  <div class="stitle">模块 7 · 多模型估值（8 种方法）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">7.1 估值汇总表（独立估值 · 不锚定现价 · USD）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>估值方法</th><th>每股公允价</th><th>假设要点</th><th>权重</th></tr>
+      <tr><td>1. 相对估值（P/E）</td><td>$295</td><td>同业前瞻 10-13x，给龙头 + Optum 溢价至 16x × FY2026 调整 EPS ~$18.5</td><td>20%</td></tr>
+      <tr><td>2. DCF（基准）</td><td>$320</td><td>正常化所有者盈余 ~$16.5B，增长 6-7%/5 年，WACC 8.5-9%，永续 2.5-3%，减净负债 $46.7B</td><td>22%</td></tr>
+      <tr><td>3. 所有者盈余收益率</td><td>$300</td><td>~$16.6B / 5.5% 目标收益率（反映 DOJ + 复苏不确定性）</td><td>13%</td></tr>
+      <tr><td>4. PEG</td><td>$290</td><td>合理 PEG ~1.2 × 增速 13% = 15.6x × FY2026 调整 EPS ~$18.5</td><td>10%</td></tr>
+      <tr><td>5. DDM（两阶段）</td><td>$300</td><td>DPS ~$8.84，5 年增 11% 后永续 5%，要求回报 9%（真实分红 · 参考意义中等）</td><td>8%</td></tr>
+      <tr><td>6. NAV</td><td>不适用</td><td>非资产型公司；投资组合为保险浮存支撑负债，无可分配 NAV（账面 P/B ~3.7x 仅供参考）</td><td>0%</td></tr>
+      <tr><td>7. 反向 DCF</td><td>当前价隐含 ~9-10% 永续增长</td><td>$424.62 隐含市场认为正常化盈余长期增 9-10%——对悬着 DOJ + MA 削减的公司偏乐观</td><td>12%</td></tr>
+      <tr><td>8. SOTP 分部加总</td><td>$315</td><td>UnitedHealthcare（~9-10x 经营利润）+ Optum（服务属性给 ~12x）− 净负债 $46.7B</td><td>15%</td></tr>
+      <tr class="hl"><td><strong>加权公允价中位数</strong></td><td><strong>~$310</strong></td><td>估值区间 $290-320 · 中枢 ~$310</td><td>100%</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.8;"><strong>与现价对照</strong>：当前 $424.62 vs 独立估值中枢 ~$310 · <span class="warn-t">现价比内在价值高约 37%（即内在价值较现价折让约 27%）</span>——<strong>不仅没有 25% 安全边际，反而是负安全边际</strong>。市场给 UNH 的是 22.5x 前瞻 P/E，是纯保险同业（10-13x）的近两倍。这个溢价建立在"完全复苏 + DOJ 温和收场"的双重乐观假设上。反向 DCF 显示：现价已定价 ~9-10% 的永续盈余增长，对一个净利率 5.6%、悬着刑事调查、且刚经历利润腰斩的公司，这是"把最好结果当默认"的定价。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.2 P/E 多档透视表（利润极端波动 · 必做）</h3>
+  <p style="margin-bottom:10px; font-size:13px; color:var(--text2);">UNH 近 5 季 GAAP 净利从 $6.29B 崩到 $0.01B 再回 $6.28B（波动远超 20% 阈值），单一 TTM P/E 严重失真，必须多档透视：</p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>口径</th><th>EPS</th><th>P/E (基于 $424.62)</th><th>读数说明</th></tr>
+      <tr><td>TTM GAAP P/E</td><td>~$13.25</td><td>~32x</td><td>被 2025 危机季（Q4 EPS $0.02）压低分母 · 虚高</td></tr>
+      <tr><td>TTM 调整后 P/E</td><td>~$16.38</td><td>~26x</td><td>剔调整项 · 仍含危机季</td></tr>
+      <tr><td>Q1 2026 单季年化 P/E</td><td>$27.60（$6.90×4）</td><td>~15x</td><td><span class="warn-t">严重误导——Q1 是全年最好季，H2 MCR 抬升会大幅拉低</span></td></tr>
+      <tr class="hl"><td><strong>FY2026 Forward P/E（调整 EPS &gt;$18.25）</strong></td><td><strong>~$18.3</strong></td><td><strong>~23x</strong></td><td><strong>最可信档 · 已含 H2 MCR 抬升</strong></td></tr>
+      <tr><td>FY2027 共识 Forward P/E</td><td>~$20.80</td><td>~20x</td><td>完全复苏假设 · 卖方共识</td></tr>
+      <tr><td>核心业务 P/E（含净负债 EV 口径）</td><td>调整 NI ~$16.4B</td><td>EV/NI ~26x</td><td>市值 $386B + 净负债 $46.7B = EV $433B</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3);"><strong>最可信档</strong>：Forward P/E ~23x（FY2026）/ ~20x（FY2027）。<span class="warn-t">陷阱提示</span>：Q1 单季年化 P/E ~15x 看着便宜，但那是把"全年最好一季"当常态——全年 MCR 指引 ~88.8% 意味着 H2 盈利会明显低于 Q1，真实全年 P/E 是 23x，不是 15x。同业对比：ELV ~12.6x、CI ~9.6-12x、CVS ~11-12x——<span class="hl-t">UNH 的 23x 是同业的近两倍</span>，龙头 + Optum 溢价合理，但两倍溢价是"满价 + 定价了复苏"。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.3 12 个月目标价（概率加权）</h3>
+  <div class="pgrid">
+    <div class="pbox"><div class="pl">悲观情景 · 35%</div><div class="pv pc">$300</div><div class="pn">H2 MCR 大幅抬升超指引 + DOJ 升级 + 估值压缩至 ~16x<br>距现价 -29%</div></div>
+    <div class="pbox"><div class="pl">基准情景 · 45%</div><div class="pv pf">$400</div><div class="pn">FY2026 兑现 &gt;$18.25 + 回购恢复 + 2027 共识 $20.80 + 估值回落至 ~19-20x<br>距现价 -6%</div></div>
+    <div class="pbox"><div class="pl">乐观情景 · 20%</div><div class="pv ps">$490</div><div class="pn">DOJ 温和收场 + H2 MCR 受控 + 完全复苏重估至 ~23x × $20.80<br>距现价 +15%</div></div>
+  </div>
+  <p style="font-size:13px; color:var(--text2);"><strong>概率加权目标价</strong>：35%×$300 + 45%×$400 + 20%×$490 = <strong>$383 ≈ $380</strong>（-11%）。<span class="warn-t">概率加权 12 个月目标价低于现价，叠加独立估值中枢仅 $310——当前 $424.62 无论用哪个口径都是"贵"</span>。注意：这里 12 个月目标价（$380）高于内在价值中枢（$310），是因为前者承认市场在 12 个月内可能维持一部分复苏溢价，但两者一致指向"不在买入区"。</p>
+</div>
+
+<!-- ═══ 模块 8 ═══ -->
+<div class="section">
+  <div class="stitle">模块 8 · 竞争与行业分析</div>
+  <div class="cmt">
+    <p><strong>美国管理式医疗（Managed Care）格局</strong>：UNH 是营收与市值双料龙头，凭 UnitedHealthcare（最大保险）+ Optum（最大 PBM + 服务）的垂直整合，规模碾压同业。主要对手：Elevance（ELV，前 Anthem）、Cigna（CI，PBM Evernorth 驱动）、Humana（HUM，MA 纯玩家）、CVS Health（CVS，Aetna + 药房 + PBM）。</p>
+
+    <p><strong>医保龙头同业对比（截至 2026-06 · 前瞻 P/E）</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>公司</th><th>Forward P/E</th><th>增速/看点</th><th>核心评价</th></tr>
+        <tr class="hl"><td><strong>UnitedHealth UNH</strong></td><td><strong>~22.5x</strong></td><td>FY26 调整 EPS +12% / FY27 +13.5%（复苏）</td><td>龙头 + Optum 整合 · 估值显著高于同业</td></tr>
+        <tr><td>Elevance ELV</td><td>~12.6x</td><td>MA 为主的多元险企</td><td>估值仅 UNH 一半</td></tr>
+        <tr><td>Cigna CI</td><td>~9.6-12x</td><td>PBM（Evernorth）驱动</td><td>板块估值最低</td></tr>
+        <tr><td>Humana HUM</td><td>~18-21x</td><td>FY26 调整 EPS ≥$9.00（同比下滑）</td><td>受 Star 评级下滑冲击 · 高 P/E 是盈利被压低的假象</td></tr>
+        <tr><td>CVS Health CVS</td><td>~11-12x</td><td>营收 +7.6% · Aetna 利润承压</td><td>药房 + 保险 + PBM 三合一</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:10px; font-size:12px; color:var(--text3);">核心看点：<strong>UNH 以 ~22.5x 前瞻 P/E 显著高于同业（多为 10-13x）</strong>，反映市场对其从 2025 低谷复苏的溢价定价及行业龙头地位；唯一同样高 P/E 的 HUM，是因盈利被 Star 评级崩塌压低才显得贵（分母小）。<span class="warn-t">UNH 的两倍溢价意味着估值缓冲极其有限——同业 12x 的估值给了 UNH 一个清晰的"向下参照系"</span>。</p>
+
+    <p style="margin-top:14px;"><strong>波特五力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>新进入者：</strong>低（规模 + 牌照 + 网络壁垒高）——但科技巨头/亚马逊药房是潜在搅局者</li>
+      <li><strong>替代品：</strong>中（直接雇主医保、公共选项政策威胁 MA/商业险）</li>
+      <li><strong>供应商（医院/药企）议价：</strong>UNH 强（规模压制）</li>
+      <li><strong>买家（雇主/政府）议价：</strong>中高（政府端受 CMS 费率摆布，雇主端年度可切换）</li>
+      <li><strong>同业竞争：</strong>中高（ELV/CI/HUM/CVS 激烈争夺 MA 与商业险份额）</li>
+    </ul>
+
+    <p><strong>颠覆/政策风险</strong>：这门生意的最大变量不是竞争对手，而是<span class="warn-t">政府</span>——CMS 对 MA 的资金费率、IRA 对 Part D 的重构、DOJ 对编码的调查、乃至"全民医保/公共选项"的政治周期，都能直接改写行业盈利池。这是一个"利润取决于监管态度"的行业。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 9 ═══ -->
+<div class="section">
+  <div class="stitle">模块 9 · 技术面与 K 线分析（次要参考）</div>
+  <div class="cmt">
+    <p><strong>趋势</strong>：UNH 2025 年因盈利崩塌 + CEO 更替 + DOJ 调查从 ~$600 高位<span class="warn-t">崩至 $234.60 低点</span>，此后强劲反弹至当前 $424.62，<span class="hl-t">接近 52 周高 $434.30（距高点仅 -2%）</span>。这是一条"深 V 反弹"——从危机恐慌到复苏乐观的完整情绪切换，当前已站在反弹的高位区间。</p>
+
+    <p><strong>关键价位</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>支撑</strong>：$380（前期平台）/ $310（独立估值中枢）/ $234.60（52 周低 · 危机底）</li>
+      <li><strong>阻力</strong>：$434.30（52 周高）/ $450-500（危机前估值区）</li>
+    </ul>
+
+    <p><strong>指标信号</strong>：接近 52 周高位、反弹幅度已大（从 $234 到 $424，+81%），<span class="warn-t">技术面处于"反弹兑现区"，追高的风险回报比不佳</span>。RSI 大概率中性偏强，短期动能仍在，但估值面（Forward P/E 23x）已透支了大部分复苏预期。</p>
+
+    <p><strong>注意</strong>：UNH 的核心驱动是 H2 MCR 兑现 + DOJ 进展 + 复苏可持续性，技术面是次要参考。价值投资者应等基本面给出安全边际（如 H2 MCR 超指引、DOJ 升级导致回调至 $250-310 区间），而非在接近 52 周高点、Forward P/E 23x 时追入。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 10 ═══ -->
+<div class="section">
+  <div class="stitle">模块 10 · 增长催化剂与前景展望</div>
+  <div class="cmt">
+    <p><strong>短期催化剂（未来 6 个月）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>2026-07-16 Q2 2026 财报（盘前）</strong>——最关键验证点：Q1 利好消退后 MCR 是否如管理层警示般抬升，是复苏叙事的第一次压力测试</li>
+      <li><strong>回购恢复</strong>——管理层计划 Q2 末前恢复至少 $20 亿回购，是资本修复完成的信号</li>
+      <li><strong>DOJ 调查进展</strong>——任何起诉/和解/撤案消息都是股价的重大变量（双向）</li>
+      <li><strong>2026 年 CMS 政策/MA 费率信号</strong>——影响 2027 定价与会员策略</li>
+    </ul>
+
+    <p><strong>长期展望（3-5 年）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>MA 利润率的多年修复</strong>——通过定价重置 + 主动缩减亏损会员，管理层目标是把 MA 利润率修复到健康水平，这是一条 2-3 年的路径</li>
+      <li><strong>Optum 的高质量增长</strong>——Optum Insight（数据技术）+ Optum Rx（专科药）是软件/服务属性更强的第二引擎，但 Optum Health（价值医疗）当前会员在流失（-3%）</li>
+      <li><strong>复苏后的盈利常态</strong>——若完全复苏，FY2027 共识调整 EPS $20.80，对应 ~13.5% 增速</li>
+      <li><strong>风险情景</strong>：DOJ 起诉 / H2 MCR 再失控 / CMS 持续削减 / IRA Part D 重构继续压制盈利</li>
+    </ul>
+
+    <p><strong>TAM 展望</strong>：美国医疗支出占 GDP 近 18%、总量数万亿美元且持续增长，UNH 作为最大参与者的可寻址市场巨大。但核心问题不是市场空间，而是<span class="warn-t">在监管持续压制超额利润 + 医疗成本趋势不可控的背景下，这门薄利生意的利润率能否稳定回到危机前水平</span>。增长空间从不是 UNH 的问题，利润质量与监管才是。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 11 ═══ -->
+<div class="section">
+  <div class="stitle">模块 11 · 风险矩阵</div>
+  <div class="risk-grid">
+    <div class="risk-card r5"><h5>1. DOJ Medicare Advantage 刑事调查</h5><span class="risk-score">5 / 5 极高</span><p>司法部对其 MA 风险调整/诊断编码的刑事 + 民事调查（2025 披露），核心指控是否夸大诊断套取更高 Medicare 支付 · 针对约 $139B 的 MA 业务 · 重大持续监管红旗</p></div>
+    <div class="risk-card r5"><h5>2. H2 医疗赔付率抬升</h5><span class="risk-score">5 / 5 极高</span><p>全年 MCR 指引 ~88.8% 隐含 H2 需较 Q1 的 83.9% 抬升近 500bp · 若失控则重演 2025 利润腰斩 · 净利率仅 5.6%，MCR 一点点波动就吞噬大半利润</p></div>
+    <div class="risk-card r4"><h5>3. 满估值无安全边际</h5><span class="risk-score">4 / 5 高</span><p>Forward P/E 22.5x 是同业（10-13x）近两倍 · 现价比内在价值高约 37% · 定价了完全复苏 + DOJ 温和收场 · 任何失望都触发估值压缩</p></div>
+    <div class="risk-card r4"><h5>4. CMS 削减 + IRA 结构性逆风</h5><span class="risk-score">4 / 5 高</span><p>CMS 对 MA 资金费率削减 + IRA 对 Part D 重构 · 长期压制这门生意的超额利润空间 · 政策周期不可控</p></div>
+    <div class="risk-card r3"><h5>5. 会员流失 / 规模收缩</h5><span class="risk-score">3 / 5 中</span><p>"利润优先于规模"主动缩减 MA ~130 万、UHC 降至 49.1M、Optum Rx 处方量降 · 短期营收仅 +2% · 若流失超预期则复苏质量存疑</p></div>
+    <div class="risk-card r3"><h5>6. 财务/资本结构</h5><span class="risk-score">3 / 5 中</span><p>真实净负债 -$46.7B · 债务/资本 42.9% · 回购暂停修复中 · 非"现金堡垒" · 但 OCF 与保险浮存提供缓冲</p></div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>3 个黑天鹅情景</strong>：</p>
+    <ol style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>DOJ 正式起诉 + 巨额和解/编码整改</strong>——概率 20% · 股价跌至 $250-290 · MA 盈利质量叙事被重创，且直接冲击最赚钱业务</li>
+      <li><strong>H2 MCR 再度失控（超 90%）</strong>——概率 20% · 复苏叙事破产 · 重演 2025 · 股价回到 $250-300</li>
+      <li><strong>公共选项/全民医保政策升温</strong>——概率 10%（政治周期）· 行业盈利池长期重估 · 估值系统性压缩</li>
+    </ol>
+
+    <p style="margin-top:10px;"><strong>下行支撑</strong>：龙头地位 + $4500 亿营收体量 + Optum 垂直整合 + 真实分红构成质量底。<span class="hl-t">$234.60（52 周低 · 危机底）与独立估值中枢 $310 之间</span>是较硬的价值区间。但要注意：UNH 与 Visa 那类"质量底极高"的收费站不同——它的利润被 MCR 与监管两把剑悬着，危机时利润能腰斩，所以它的"底"没有想象中稳。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 12 ═══ -->
+<div class="section">
+  <div class="stitle">模块 12 · 股东回报分析</div>
+  <div class="cmt">
+    <p><strong>UNH 曾是"稳健增息 + 大额回购"的资本返还标杆，但 2025 危机打断了节奏——回购已暂停以修复资本，且历史回购择时不佳。</strong>本模块用三个递进问题把它拆到可验证的颗粒度。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 18px 0 10px; font-family: 'Segoe UI',sans-serif;">12.1 公司给了股东多少？</h3>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>年度</th><th>现金股息</th><th>回购</th><th>股东总回报</th><th>说明</th></tr>
+        <tr><td>FY2023</td><td>$6.76B</td><td>$8.00B</td><td>$14.76B</td><td>满额回购（高位）</td></tr>
+        <tr><td>FY2024</td><td>$7.53B</td><td>$9.00B</td><td>$16.53B</td><td>回购峰值（股价 $450-550）</td></tr>
+        <tr><td>FY2025</td><td>$7.92B</td><td>$5.55B</td><td>$13.46B</td><td>危机年回购收缩</td></tr>
+        <tr class="hl"><td><strong>3 年合计（FY23-25）</strong></td><td><strong>$22.21B</strong></td><td><strong>$22.55B</strong></td><td><strong>~$44.8B</strong></td><td>回购与股息约各半</td></tr>
+        <tr><td>Q1 2026</td><td>$2.01B</td><td>$0</td><td>$2.01B</td><td>回购暂停重建资本</td></tr>
+      </table>
+    </div>
+    <p style="font-size:13px; color: var(--text2); margin-top:8px"><strong>Trailing Shareholder Yield</strong> ≈ FY2025 返还 $13.46B / 市值 $386B ≈ <strong>3.5%</strong>（回购 ~1.4% + 股息 ~2.1%）。<span class="warn-t">但这是"回望"</span>——Q1 2026 回购已为 $0，<strong>当前的实际前瞻收益率几乎只剩股息 ~2.1%</strong>，直到回购恢复（计划 Q2 末至少 $20 亿）。派息率：FY2025 股息 $7.92B / GAAP 净利 ~$12.06B ≈ 66%（危机年被压低的净利抬高了比率）；按调整后净利 ~$14.9B ≈ 53%，正常水平。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.2 给的方式好不好？</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>真实注销 · 但缩股幅度已放缓</strong>：美股回购多注销/构造性注销，UNH 的回购真实减少股本。摊薄股数 3 年趋势：<strong>FY2023 938M → FY2024 929M → FY2025 911M → Q1 2026 910M</strong>——3 年降约 3%，但<span class="warn-t">2025 年后回购暂停使降幅几近停滞（FY2025 到 Q1 2026 仅少 1M）</span></li>
+      <li><span class="warn-t">回购择时不佳（关键瑕疵）</span>：FY2023-2024 每年 $8-9B 回购，多在股价 $450-550 的高位执行；随后股价 2025 年崩至 $234.60——这是典型的"高位买入"，资本配置纪律的一次明显失分。真正该大手笔回购的 $234 危机底，却因要修复资本而暂停</li>
+      <li><strong>股息含金量高</strong>：连续多年增息、历经危机未削减、2026 年 6 月再度上调——股息端是稳健可信的</li>
+    </ul>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.3 能不能继续给、给多少？</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>授权额度</strong>：2026-03-31 董事会授权剩余约 <strong>1930 万股</strong>（按股数授权，非美元额度；按 ~$424 股价约合 $8.2B 等值）· 但当前执行率为零（暂停中）</li>
+      <li><strong>回购恢复指引</strong>：计划 Q2 2026 末前恢复至少 $20 亿——是资本修复完成的信号，但力度远低于危机前的 $8-9B/年</li>
+      <li><strong>股息可持续</strong>：年化 ~$8.84（~2.1% 收益率），调整后派息率 ~53%，正常化 FCF（~$16-20B）充分覆盖股息（~$8B/年）· 增息空间仍在</li>
+      <li><strong>(股息 + 回购) / FCF 覆盖度</strong>：正常年份返还 $13-16B vs 正常化 FCF ~$16-20B，覆盖度约 80-100%，可持续；<span class="hl-t">当前不是借债回购</span>——回购已暂停，净负债 -$46.7B 来自保险资本结构而非回购杠杆，管理层正优先修复债务/资本比 42.9%</li>
+    </ul>
+    <p><strong>模块小结</strong>：<span class="hl-t">积极但节奏被危机打断、含金量打折</span>——股息端稳健可信（连续增息、危机未削、可持续），但回购端处修复暂停期、历史择时明显不佳（高位买入 $450-550、危机底 $234 反而停手）、缩股幅度已放缓。当前前瞻股东收益率实际只剩 ~2.1% 股息，回购恢复力度也将远弱于危机前。这不是 Visa 那种"教科书级复利返还"，而是"稳健分红 + 待修复的回购"。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 13 ═══ -->
+<div class="section">
+  <div class="stitle">模块 13 · 海图评分卡 + 投资决策</div>
+
+  <div class="scorecard">
+    <h3 style="font-size:15px; color:var(--text); margin-bottom: 16px; font-family: 'Segoe UI',sans-serif;">海图评分卡（6 维 A-D）</h3>
+    <div class="score-grid">
+      <div class="score-card"><div class="score-letter s-bm">B-</div><div class="score-body"><h4>1. 生意可预测性</h4><p>保险 + 服务模式清晰，但 2025 证明 MCR 能在一年内失控、利润腰斩、单季 EPS 崩到 $0.02——业务能见度被医疗成本趋势严重削弱。</p></div></div>
+      <div class="score-card"><div class="score-letter s-b">B+</div><div class="score-body"><h4>2. 经济护城河</h4><p>规模（4910 万会员）+ 垂直整合宽护城河，但正被 DOJ + CMS 削减 + 医疗成本不可控侵蚀，含金量下降。</p></div></div>
+      <div class="score-card"><div class="score-letter s-b">B</div><div class="score-body"><h4>3. 管理层质量</h4><p>Hemsley 回归救火 + "利润优先"纪律可信，但危机发生在任内（成本误判）+ DOJ 编码调查，信誉需重建。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bm">B-</div><div class="score-body"><h4>4. 财务质量</h4><p>OCF 强（$8.9B，1.4x 净利）但含浮存虚高；净利率仅 5.6%、真实净负债 -$46.7B、债务/资本 42.9%、危机 ROE 腰斩至 ~13%。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bm">B-</div><div class="score-body"><h4>5. 资本配置纪律</h4><p>股息稳健增长，但回购高位买入（$450-550）后暴跌、危机底反停手、当前暂停——择时明显失分。</p></div></div>
+      <div class="score-card"><div class="score-letter s-c">C</div><div class="score-body"><h4>6. 估值与安全边际</h4><p>Forward P/E 22.5x（同业 2 倍）· 现价比内在价值高约 37% · <strong>负安全边际，满价定价了完全复苏。</strong></p></div></div>
+    </div>
+
+    <div class="flag-row">
+      <strong>红旗排查</strong>：<strong>DOJ 对 Medicare Advantage 风险调整/诊断编码的刑事 + 民事调查</strong>（直指最赚钱业务的盈利质量是否合规，是治理 + 会计层面的重大红旗）+ <strong>估值无安全边际</strong>（Forward P/E 22.5x、现价高于内在价值 37%）+ H2 MCR 必须大幅抬升的经营红旗。触发"<span class="warn-t">有疑问（DOJ 刑事调查）+ 满估值</span>"——即便 6 维基础质量不弱（护城河 B+），综合评级<strong>强制降至「持有观望」</strong>。
+    </div>
+
+    <p style="margin-top:18px; font-size:14px; color:var(--text); line-height:1.85;"><strong>综合评级</strong>：<span class="rating-badge rating-hold" style="font-size:14px;">持有观望</span>。生意质量不弱（龙头 + Optum 整合），复苏也真实（Q1 超预期 + 上调指引），<strong>但估值维度 C（满价、负安全边际）+ DOJ 刑事调查红旗 + H2 MCR 待考 → 强制降至持有观望</strong>。核心判断：<strong>UNH 的生意从来不用怀疑，要怀疑的是两件事——这一季的好是结构性还是季节性，以及你为这份好付了多贵的价。当前 $424.62 既无安全边际，又头顶 DOJ 之剑，现有持仓者可继续持有观察，新买入者应等回调至独立估值区间（$250-310）再考虑。</strong></p>
+  </div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">投资决策（精确价格 · USD）</h3>
+
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>项目</th><th>价格</th><th>说明</th></tr>
+      <tr><td>12 个月概率加权目标价</td><td><strong>$380</strong> (-11%)</td><td>低于现价 · 不在买入区</td></tr>
+      <tr><td>悲观目标（35% 概率）</td><td>$300 (-29%)</td><td>H2 MCR 超指引 + DOJ 升级 + 估值压缩</td></tr>
+      <tr><td>乐观目标（20% 概率）</td><td>$490 (+15%)</td><td>DOJ 温和收场 + 完全复苏重估</td></tr>
+      <tr class="hl"><td>首仓建仓（估值中位数 $310 × 80%）</td><td><strong>$248</strong></td><td>距现价 -42% · 危机低点附近 · 才有安全边际</td></tr>
+      <tr><td>二仓建仓（× 70%）</td><td>$217</td><td>-49% · 深度回调机会</td></tr>
+      <tr><td>三仓建仓（× 60%）</td><td>$186</td><td>-56% · 黑天鹅级机会（低于 52 周低）</td></tr>
+      <tr><td>止盈一档（对现有持仓）</td><td>$455</td><td>+7% · 减仓 25%</td></tr>
+      <tr><td>止盈二档</td><td>$500</td><td>+18% · 再减 25%</td></tr>
+      <tr><td>止盈三档</td><td>$560</td><td>+32% · 再减 25% · 最后 25% 长期持有</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.85;"><strong>建议总仓位</strong>：<strong>0-2%</strong>（观察仓 · 当前满估值 + DOJ 红旗，新资金不建议追高；仅在回调至 $250 以下、给出安全边际时启动）。<strong>持有周期</strong>：3-5 年（穿越 DOJ 调查与 MCR 正常化）。<strong>关键监控指标</strong>：① 2026-07-16 Q2 财报 MCR 是否如管理层警示抬升；② DOJ 调查进展（起诉/和解/撤案）；③ 全年 MCR 是否守住 ~88.8%；④ 回购是否恢复及力度；⑤ CMS/IRA 政策与 MA 费率信号；⑥ Forward P/E 是否回落至 15x 以下（估值机会）。<strong>下次催化剂 / 重新审视日期</strong>：2026-07-16 盘前 Q2 2026 财报。</p>
+</div>
+
+<!-- ═══ 海图页末长评 ═══ -->
+<div class="section">
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记 · 约 1150 字</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p class="lead">价值投资里有一种最考验纪律的处境：一家真正的好公司，刚从一场几乎要人命的危机里爬出来，报表开始回暖，所有人都松了口气、抢着重新定价它的"复苏"。UnitedHealth 就站在这个位置。2025 年它的调整后 EPS 从 $27.66 腰斩到 $16.35、单季 GAAP 净利一度只剩 $10M（EPS $0.02）、CEO 换人、元老 Hemsley 回锅救火。而 2026 年一季度，它交出了一份漂亮的转折答卷——可越漂亮，越要冷静地问：这份漂亮，能持续吗？价格，配得上吗？</p>
+
+      <p>UnitedHealth 是全美最大的健康保险公司（UnitedHealthcare，服务 4910 万人）与最大的医疗服务/PBM 平台（Optum）的垂直整合体——一边收保费、承接近 5000 万人的医疗风险，一边用 Optum 把药品、数据、诊疗、风险调整编码全链条内化。它赚的是"医疗赔付率（MCR）与运营效率之间的薄利差"，净利率常年只有 5-6%，靠 4500 亿营收的巨大体量和 Optum 的高质量服务撑起利润。</p>
+
+      <h4>几个研判要点</h4>
+
+      <p><strong>一、Q1 的漂亮，来自利润率修复，不是增长。</strong> 营收 $111.7B 同比只 +2%，但调整后 EPS $7.23 超共识 $6.59 达 9.7%——超预期<span class="hl-t">全部来自 MCR 从 84.8% 回落到 83.9%（改善 90bp）+ 约 $500M+ 有利的既往期准备金释放</span>。与此同时会员在收缩：UHC 降到 4910 万、Medicare Advantage 单季少 96.5 万、Optum Rx 处方量从 4.08 亿降到 3.83 亿。这是一个主动"利润优先于规模"的季度，不是重新加速。</p>
+
+      <p><strong>二、83.9% 的 MCR 是全年最好的一季，管理层自己说不可持续。</strong> 全年 MCR 指引仍是 ~88.8%，<span class="warn-t">意味着 H2 医疗赔付率要比 Q1 抬升近 5 个百分点</span>。Q1 的两个利好——准备金释放、温和呼吸道季节——都会在 Q2 消退，Optum Health 的盈利也前置在上半年。把 83.9% 外推到全年，是本季最容易踩的坑。</p>
+
+      <p><strong>三、头顶悬着一把 DOJ 的刑事之剑。</strong> 司法部对其 Medicare Advantage 的风险调整/诊断编码同时展开刑事与民事调查，核心指控是<span class="warn-t">是否通过夸大诊断套取更高的 Medicare 支付</span>——针对约 $139B 的 MA 业务，是这家公司最赚钱、也最受质疑的部分。这不是普通监管噪音，是能改写盈利质量叙事的红旗。</p>
+
+      <p><strong>四、别把它当"现金堡垒"——它是净负债 $46.7B。</strong> 现金+短投 $31.2B，有息负债却有 $77.9B，债务/资本比 42.9%。那 $568 亿长期投资组合是受监管的保险准备金资产，不可自由分配。回购已从 2025 年起暂停以重建资本，Q1 回购为 $0，计划 Q2 末才恢复至少 $20 亿——且历史回购择时不佳（$450-550 高位买入，$234 危机底反停手）。</p>
+
+      <p><strong>五、独立估值 ~$310，现价 $424.62 贵了约三成。</strong> 用同业前瞻 P/E（10-13x）给龙头溢价、DCF、SOTP、所有者盈余多法交叉，内在价值中枢约 $310。而市场给的是 22.5x 前瞻 P/E——<span class="warn-t">同业的两倍</span>。概率加权 12 个月目标价 $380，仍比现价低 11%。这不是生意不好，是价格已经把复苏、甚至持续 9-10% 的长期增长都定价进去了，没有留任何安全边际。</p>
+
+      <h4>海图研判</h4>
+
+      <p><strong>评级：持有观望</strong>（顶级 franchise + 真实复苏 + Optum 垂直整合 + 稳健股息，对垒 DOJ 刑事调查 + H2 MCR 必须大幅抬升 + Forward P/E 22.5x 同业两倍、无安全边际）。12 个月概率加权目标价 <strong>$380</strong>（-11%）。独立估值中枢 $310，机械首仓 = $310×80% = <strong>$248</strong>、二仓 $217、三仓 $186——都在 2025 危机低点（52 周低 $234.60）附近，等于说：<strong>只有价格重回危机级别，才谈得上安全边际建仓</strong>。当前 $424.62 不在任何建仓窗口。</p>
+
+      <p>操作建议：新资金不建议追高，<strong>建议总仓位 0-2%</strong>（观察仓，回调至 $250 以下再启动）。现有持仓者可继续持有观察，止盈三档 $455 / $500 / $560，各减 25%，最后 25% 长期持有。持有周期 3-5 年，穿越 DOJ 调查与 MCR 正常化。<span class="hl-t">关键纪律：好生意也要好价格——UNH 的生意不用怀疑，但当前的价格与红旗都不容忽视。</span></p>
+
+      <h4>风险提示</h4>
+
+      <p>H2 MCR 大幅抬升超指引 / DOJ 调查升级或正式起诉 / CMS 对 MA 持续削减资金 / IRA 重构 Part D / 满估值下的多重压缩——任一项都可能让股价回到 $300 甚至危机低点 $234。反过来，若 DOJ 温和收场 + H2 MCR 受控 + 回购强力恢复，则有向 $490+ 重估的空间。但要记住：UNH 不是"质量底极高"的收费站，它的利润被 MCR 与监管两把剑悬着，危机时能腰斩，所以它的"底"没有想象中稳。</p>
+
+      <p>关键叙事：<strong>"全美医保龙头 + Optum 垂直整合 + 从 2025 腰斩危机中复苏"的顶级生意，对垒"DOJ Medicare Advantage 刑事调查 + H2 医疗赔付率必须大幅抬升 + Forward P/E 同业两倍、无安全边际"的红旗与估值</strong>。UNH 的生意从来不用怀疑，要怀疑的永远是两件事：这一季的好，是结构性的还是季节性的；以及，你为这份好，付了多贵的价。下一个验证点：2026-07-16 盘前的 Q2 2026 财报。</p>
+
+      <p class="haitu-sign">—— 海图，灯下落笔，明日再观风浪。</p>
+
+      <p class="haitu-disc">⚠️ 免责声明：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，不构成任何投资建议。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div>《海图夜读》 · UnitedHealth Group UNH Q1 2026 海图研判</div>
+  <div style="margin-top:6px;">发布日 2026-04-21 · 研判日 2026-07-11 · 数据来源 UnitedHealth Q1 2026 官方财报新闻稿（SEC 8-K + 10-Q）+ SEC XBRL 一手数据 + 电话会 transcript · 下次财报 2026-07-16（Q2 2026）</div>
+</footer>
+
+<script>
+let curTheme = 'light';
+function toggleTheme() {
+  curTheme = curTheme === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', curTheme);
+  renderCharts();
+}
+
+const palette = {
+  light: { accent: '#8a9a8e', accent2: '#7b8fa0', accent3: '#b08d7a', gold: '#b9a06a', red: '#b87070', green: '#7a9a7a', grid: '#e5ddd5', text: '#7a706a' },
+  dark:  { accent: '#8a9a8e', accent2: '#8fabbf', accent3: '#c9a48e', gold: '#c9b07a', red: '#c08080', green: '#8aaa8a', grid: '#3e3a35', text: '#a09890' }
+};
+
+let charts = {};
+function renderCharts() {
+  Object.values(charts).forEach(c => c && c.destroy && c.destroy());
+  charts = {};
+  const p = palette[curTheme];
+  Chart.defaults.color = p.text;
+  Chart.defaults.borderColor = p.grid;
+
+  const quarters = ['Q1 25','Q2 25','Q3 25','Q4 25','Q1 26'];
+
+  // 1. 营收 + 净利率双轴
+  const rev = [109.6, 111.6, 113.2, 113.2, 111.7];
+  const netMargin = [5.7, 3.1, 2.1, 0, 5.6];
+  charts.rev = new Chart(document.getElementById('chartRev'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { type:'bar', label: '总营收 ($B)', data: rev, backgroundColor: p.accent + 'CC', yAxisID: 'y' },
+      { type: 'line', label: '净利率 (%)', data: netMargin, borderColor: p.red, backgroundColor: p.red, tension: 0.3, yAxisID: 'y1' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false, title: { display: true, text: '$B' } }, y1: { position: 'right', beginAtZero: true, grid: { drawOnChartArea: false }, ticks: { callback: v => v + '%' } } } }
+  });
+
+  // 2. MCR + 经营利润率
+  const mcr = [84.8, 89.4, 89.9, 92.0, 83.9];
+  const opMargin = [8.3, 4.6, 3.8, 0.3, 8.0];
+  charts.margin = new Chart(document.getElementById('chartMargin'), {
+    type: 'line',
+    data: { labels: quarters, datasets: [
+      { label: '医疗赔付率 MCR (%)', data: mcr, borderColor: p.red, backgroundColor: p.red + '22', tension: 0.3, yAxisID: 'y' },
+      { label: '经营利润率 (%)', data: opMargin, borderColor: p.green, backgroundColor: p.green + '22', tension: 0.3, yAxisID: 'y1' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { position: 'left', beginAtZero: false, ticks: { callback: v => v + '%' }, title: { display: true, text: 'MCR' } }, y1: { position: 'right', beginAtZero: true, grid: { drawOnChartArea: false }, ticks: { callback: v => v + '%' } } } }
+  });
+
+  // 3. 分部营收环形（抵消前）
+  charts.segment = new Chart(document.getElementById('chartSegment'), {
+    type: 'doughnut',
+    data: {
+      labels: ['UnitedHealthcare', 'Optum Rx', 'Optum Health', 'Optum Insight'],
+      datasets: [{ data: [86.3, 35.7, 24.1, 5.1], backgroundColor: [p.accent2, p.accent3, p.accent, p.gold] }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { font: { size: 11 } } } } }
+  });
+
+  // 4. GAAP vs 调整后 EPS
+  const gaapEps = [6.85, 3.74, 2.59, 0.02, 6.90];
+  const adjEps = [7.20, 4.08, 2.92, 2.15, 7.23];
+  charts.eps = new Chart(document.getElementById('chartEps'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { label: 'GAAP 摊薄 EPS ($)', data: gaapEps, backgroundColor: p.red + 'CC' },
+      { label: '调整后 EPS ($)', data: adjEps, backgroundColor: p.green + 'CC' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, ticks: { callback: v => '$' + v } } } }
+  });
+
+  buildSankey();
+}
+
+function buildSankey() {
+  const p = palette[curTheme];
+  const labels = ['总营收 $111.7','医疗与产品成本 $87.3','运营成本 $15.4','营业利润 $9.0','税·利息·少数股东 $2.7','归母净利 $6.28'];
+  const data = {
+    type: 'sankey',
+    orientation: 'h',
+    node: { pad: 16, thickness: 20, line: { color: p.grid, width: 0.5 }, label: labels, color: [p.accent, p.red, p.gold, p.green, p.red, p.green] },
+    link: {
+      source: [0, 0, 0, 3, 3],
+      target: [1, 2, 3, 4, 5],
+      value:  [87.33, 15.42, 8.99, 2.71, 6.28],
+      color: [p.red+'55', p.gold+'55', p.green+'66', p.red+'55', p.green+'66']
+    }
+  };
+  const layout = { font: { size: 12, color: p.text }, paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)', margin: { l: 10, r: 10, t: 10, b: 10 } };
+  Plotly.react('sankey', [data], layout, { displayModeBar: false, responsive: true });
+}
+
+renderCharts();
+</script>
+
+</body>
+</html>

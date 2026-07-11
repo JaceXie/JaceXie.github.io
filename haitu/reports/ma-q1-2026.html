@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 研判日 2026-07-11 · Mastercard Q1 2026 财报已于 2026-04-30 发布 -->
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mastercard MA Q1 2026 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+<meta name="description" content="全球支付网络双寡头之一——不发卡、不担信用风险的'刷卡收费桥'。58.4% 营业利润率 + 增值服务有机 +18% + 常年增息缩股。Q1 净营收 +16%（货币中性 +12%）、调整后 EPS $4.60（+23%）全面超预期 + 收购稳定币基建 BVNK。但 Forward P/E 26.9x 无安全边际 + 真实净负债 -$107 亿 + 中东跨境逆风 + 稳定币长期脱媒——世界级生意，价格仍不便宜。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mastercard MA Q1 2026 海图研判 · 海图夜读">
+<meta property="og:description" content="全球支付网络双寡头之一——不发卡、不担信用风险的'刷卡收费桥'。58.4% 营业利润率 + 增值服务有机 +18% + 常年增息缩股。Q1 净营收 +16%（货币中性 +12%）、调整后 EPS $4.60（+23%）全面超预期 + 收购稳定币基建 BVNK。但 Forward P/E 26.9x 无安全边际 + 真实净负债 -$107 亿 + 中东跨境逆风 + 稳定币长期脱媒——世界级生意，价格仍不便宜。">
+<meta property="og:url" content="https://jacexie.github.io/haitu/reports/ma-q1-2026.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mastercard MA Q1 2026 海图研判 · 海图夜读">
+<meta name="twitter:description" content="全球支付网络双寡头之一——不发卡、不担信用风险的'刷卡收费桥'。Q1 净营收 +16%、调整后 EPS +23% 全面超预期，但 Forward P/E 26.9x 无安全边际 + 净负债 + 稳定币长期脱媒。世界级生意，价格仍不便宜。">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root { --bg:#f5f0eb; --bg2:#ece6df; --card:#ffffff; --card2:#f8f5f1; --border:#d9d0c7; --text:#4a4340; --text2:#7a706a; --text3:#a89f98; --accent:#8a9a8e; --accent2:#7b8fa0; --accent3:#b08d7a; --rose:#c09090; --gold:#b9a06a; --red:#b87070; --green:#7a9a7a; --shadow:rgba(0,0,0,0.06); --chart-grid:#e5ddd5; }
+[data-theme="dark"] { --bg:#1e1c1a; --bg2:#28251f; --card:#2e2a25; --card2:#363230; --border:#4a4540; --text:#d4ccc4; --text2:#a09890; --text3:#706860; --accent:#8a9a8e; --accent2:#8fabbf; --accent3:#c9a48e; --rose:#c09090; --gold:#c9b07a; --red:#c08080; --green:#8aaa8a; --shadow:rgba(0,0,0,0.3); --chart-grid:#3e3a35; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', serif; line-height: 1.75; font-size: 14.5px; transition: background .35s, color .35s; }
+a { color: var(--accent2); text-decoration: none; }
+.theme-bar { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); }
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+.toggle-switch { position: relative; width: 44px; height: 22px; background: var(--border); border-radius: 11px; cursor: pointer; transition: background .3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: var(--card); border-radius: 50%; transition: transform .3s; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+
+.hero { padding: 48px 24px 36px; text-align: center; border-bottom: 1px solid var(--border); }
+.hero-tag { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 3px 14px; border-radius: 20px; margin-bottom: 18px; }
+.hero h1 { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.pill { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: 'Segoe UI', sans-serif; font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow); }
+.pill strong { color: var(--text); }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle { font-size: 18px; font-weight: 700; color: var(--accent3); margin-bottom: 20px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+.stitle::before { content: ''; display: block; width: 4px; height: 20px; background: var(--accent3); border-radius: 2px; }
+
+.haitu-quip { display: flex; align-items: center; gap: 18px; background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 18px 24px; margin: 24px 0; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-quote { flex: 1; }
+.haitu-portrait { font-size: 15px; line-height: 1.65; color: var(--text); margin-bottom: 6px; font-weight: 600; }
+.haitu-rating-line { font-size: 13px; color: var(--text2); font-family: 'Segoe UI', sans-serif; }
+.rating-badge { display: inline-block; padding: 2px 12px; border-radius: 12px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; margin-left: 4px; }
+.rating-hold { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+
+.haitu-essay { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 28px 32px; margin: 24px 0 20px; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-essay-header { display: flex; align-items: center; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.haitu-avatar-sm { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); background: var(--red); box-shadow: 0 2px 8px rgba(184,112,112,0.2); }
+.haitu-name-lg { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 28px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 4px; }
+.haitu-essay-tag { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; }
+.haitu-essay-body { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 15px; line-height: 2.0; color: var(--text); }
+.haitu-essay-body p { margin-bottom: 14px; }
+.haitu-essay-body p.lead { font-size: 16px; font-style: italic; color: var(--text2); margin-bottom: 18px; }
+.haitu-essay-body strong { color: var(--text); font-weight: 700; }
+.haitu-essay-body h4 { font-size: 14px; color: var(--accent3); margin: 18px 0 10px; font-family: 'Segoe UI', sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+.haitu-sign { text-align: right; margin-top: 18px; font-family: 'Georgia', serif; font-size: 14px; color: var(--text2); font-style: italic; }
+.haitu-disc { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); font-style: italic; line-height: 1.7; }
+
+.stock-snap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px; }
+.snap-item { text-align: center; }
+.snap-label { font-family: 'Segoe UI', sans-serif; font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.snap-val { font-family: 'Segoe UI', sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+.snap-val.up { color: var(--green); }
+.snap-val.dn { color: var(--red); }
+.snap-sub { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow); }
+.kpi-l { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.badge { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+.up { background: rgba(122,154,122,.15); color: var(--green); }
+.dn { background: rgba(184,112,112,.15); color: var(--red); }
+.nt { background: rgba(123,143,160,.15); color: var(--accent2); }
+
+.tbl-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow); }
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI', sans-serif; font-size: 13px; }
+.tbl th { background: var(--card2); color: var(--text3); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); background: var(--card2); }
+
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); }
+.ctitle { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 260px; }
+
+.cmt { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 26px; line-height: 1.95; font-size: 14px; box-shadow: 0 1px 4px var(--shadow); color: var(--text); }
+.cmt p { margin-bottom: 14px; }
+.cmt p:last-child { margin-bottom: 0; }
+.cmt strong { color: var(--text); }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+
+.bscore { display: flex; align-items: center; gap: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; margin-bottom: 12px; box-shadow: 0 1px 4px var(--shadow); }
+.circle { width: 62px; height: 62px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; flex-shrink: 0; border: 3px solid; font-family: 'Segoe UI', sans-serif; }
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 4px; color: var(--text); }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.moat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+.moat-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); border-left: 4px solid var(--accent); }
+.moat-card.wide { border-left-color: var(--green); }
+.moat-card.narrow { border-left-color: var(--gold); }
+.moat-card.none { border-left-color: var(--red); }
+.moat-card h5 { font-size: 13px; color: var(--text); margin-bottom: 6px; }
+.moat-card .moat-rate { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.moat-card.wide .moat-rate { background: rgba(122,154,122,.18); color: var(--green); }
+.moat-card.narrow .moat-rate { background: rgba(185,160,106,.18); color: var(--gold); }
+.moat-card.none .moat-rate { background: rgba(184,112,112,.18); color: var(--red); }
+.moat-card p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+
+.ec-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 14px; box-shadow: 0 1px 3px var(--shadow); }
+.ec-badge { flex-shrink: 0; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-top: 2px; font-family: 'Segoe UI', sans-serif; }
+.ec-bull { background: rgba(122,154,122,.18); color: var(--green); }
+.ec-bear { background: rgba(184,112,112,.18); color: var(--red); }
+.ec-neut { background: rgba(185,160,106,.18); color: var(--gold); }
+.ec-body { flex: 1; }
+.ec-title { font-weight: 600; color: var(--text); margin-bottom: 3px; font-size: 14px; }
+.ec-note { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.dcf-note { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.dcf-note strong { color: var(--text); }
+
+.scorecard { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow); }
+.score-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.score-card { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px; }
+.score-letter { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Segoe UI', sans-serif; font-weight: 800; font-size: 22px; flex-shrink: 0; border: 3px solid; }
+.s-a { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.12); }
+.s-bp { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.06); }
+.s-b { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.10); }
+.s-bm { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.06); }
+.s-c { color: var(--red); border-color: var(--red); background: rgba(184,112,112,.08); }
+.score-body h4 { font-size: 13px; color: var(--text); margin-bottom: 4px; }
+.score-body p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+.flag-row { margin-top: 16px; padding: 12px 16px; background: rgba(184,112,112,.08); border: 1px solid rgba(184,112,112,.3); border-radius: 8px; font-size: 13px; color: var(--text2); }
+.flag-row strong { color: var(--red); }
+
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center; box-shadow: 0 1px 4px var(--shadow); }
+.pbox .pl { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; }
+.pbox .pv { font-family: 'Segoe UI', sans-serif; font-size: 28px; font-weight: 800; margin-bottom: 5px; }
+.pbox .pn { font-size: 12px; color: var(--text3); line-height: 1.5; }
+.pc { color: var(--red); } .pf { color: var(--gold); } .ps { color: var(--green); }
+
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.risk-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); position: relative; overflow: hidden; }
+.risk-card::before { content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent); }
+.risk-card.r1::before { background: var(--green); }
+.risk-card.r2::before { background: rgba(122,154,122,.6); }
+.risk-card.r3::before { background: var(--gold); }
+.risk-card.r4::before { background: var(--rose); }
+.risk-card.r5::before { background: var(--red); }
+.risk-card h5 { font-size: 14px; margin-bottom: 6px; color: var(--text); }
+.risk-score { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.r1 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r2 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r3 .risk-score { background: rgba(185,160,106,.18); color: var(--gold); }
+.r4 .risk-score { background: rgba(192,144,144,.18); color: var(--rose); }
+.r5 .risk-score { background: rgba(184,112,112,.18); color: var(--red); }
+.risk-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+footer { background: var(--card2); border-top: 1px solid var(--border); padding: 24px; text-align: center; color: var(--text3); font-size: 12px; margin-top: 40px; line-height: 1.8; }
+@media (max-width: 768px) { .cgrid,.pgrid { grid-template-columns: 1fr; } .hero h1 { font-size: 22px; } .kpi-grid { grid-template-columns: 1fr 1fr; } .stock-snap { grid-template-columns: 1fr 1fr; } .haitu-essay-header { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/MA" target="_blank" rel="noopener" title="在雪球查看 MA 实时行情">雪球 MA</a>
+  </div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">Q1 2026 财报发布 · 2026-04-30 &nbsp;|&nbsp; 海图研判 · 2026-07-11</div>
+  <h1>Mastercard MA · 2026 Q1 财报深度分析</h1>
+  <div class="hero-sub">NYSE: MA &nbsp;|&nbsp; 财季截至 2026-03-31 &nbsp;|&nbsp; 价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill">股价 <strong>$526.74</strong> <span style="color:var(--red)">距高点 -12%</span></div>
+    <div class="pill">市值 <strong>$461B</strong></div>
+    <div class="pill">Q1 净营收 <strong>$8.40B</strong> <span style="color:var(--green)">+16%</span></div>
+    <div class="pill">调整后 EPS <strong>$4.60</strong> <span style="color:var(--green)">+23%</span></div>
+    <div class="pill">营业利润率 <strong>58.4%</strong></div>
+    <div class="pill">Forward P/E <strong>~26.9x</strong> <span style="color:var(--gold)">无安全边际</span></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 海图页首短评 ═══ -->
+<div class="haitu-quip">
+  <div class="haitu-quote">
+    <div class="haitu-portrait">全球支付网络双寡头之一——不发卡、不担持卡人信用风险的"刷卡收费桥"。58.4% 营业利润率 + 增值服务纯有机 +18% + 常年增息缩股，是比 Visa 更快的那台复利机器。Q1 净营收 +16%（货币中性 +12%）、调整后 EPS $4.60（+23%）全面超预期，几乎所有卡片已支持 Agent Pay，并以 $15 亿收购稳定币基建商 BVNK 押注 agentic 商务。但 Forward P/E 26.9x 无安全边际 + 真实净负债 -$107 亿（非净现金）+ 4 月中东跨境逆风 + 稳定币长期脱媒——世界级生意，价格仍不便宜。</div>
+    <div class="haitu-rating-line">评级：<span class="rating-badge rating-hold">持有观望</span> · 12 个月概率加权目标价 $560（+6%）· 全球支付双雄中增速更快的一方 + 极致资本返还，对垒满估值无安全边际 + 中东跨境短期逆风 + 稳定币长期脱媒</div>
+  </div>
+</div>
+
+<!-- ═══ 市场数据快照 ═══ -->
+<div class="section">
+  <div class="stitle">市场数据快照（2026-07-11 收盘）</div>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">股价（美元）</div><div class="snap-val">$526.74</div><div class="snap-sub">2026-07-11 · 距 52 周高 -12%</div></div>
+    <div class="snap-item"><div class="snap-label">市值</div><div class="snap-val">$461B</div><div class="snap-sub">全球支付第二大网络</div></div>
+    <div class="snap-item"><div class="snap-label">TTM GAAP P/E</div><div class="snap-val">~30x</div><div class="snap-sub">高质量溢价</div></div>
+    <div class="snap-item"><div class="snap-label">Forward P/E</div><div class="snap-val nt">~26.9x</div><div class="snap-sub">2026E 调整 EPS $19.58</div></div>
+    <div class="snap-item"><div class="snap-label">P/S (TTM)</div><div class="snap-val">~13.6x</div><div class="snap-sub">TTM 净营收 ~$34B</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间</div><div class="snap-val">$464 - $602</div><div class="snap-sub">中部 · 200 日线下方</div></div>
+    <div class="snap-item"><div class="snap-label">股息率</div><div class="snap-val">~0.66%</div><div class="snap-sub">$3.48/年 · 低息高回购</div></div>
+    <div class="snap-item"><div class="snap-label">FCF Yield</div><div class="snap-val nt">~3.3%</div><div class="snap-sub">TTM FCF ~$15B（估）</div></div>
+    <div class="snap-item"><div class="snap-label">现金 + 短投</div><div class="snap-val">$8.22B</div><div class="snap-sub">2026-03-31 末</div></div>
+    <div class="snap-item"><div class="snap-label">有息负债</div><div class="snap-val dn">$18.96B</div><div class="snap-sub">短债 1.75 + 长债 17.21</div></div>
+    <div class="snap-item"><div class="snap-label">真实净负债</div><div class="snap-val dn">-$10.74B</div><div class="snap-sub">⚠️ 净负债非净现金</div></div>
+    <div class="snap-item"><div class="snap-label">营业利润率 (GAAP)</div><div class="snap-val up">58.4%</div><div class="snap-sub">调整口径 60.8%</div></div>
+  </div>
+  <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">数据时点：股价 $526.74（2026-07-11 收盘，年内约 -12.6%，处 52 周区间 $464.52-$601.77 中部、200 日均线下方）· 财务数据来源 Mastercard Q1 2026 官方财报新闻稿（IR PDF + SEC 8-K/10-Q，2026-04-30 发布，财季截至 2026-03-31）· 货币 USD 单口径。<strong>Mastercard 财季对齐日历年，Q1 2026 = 2026-01-01 至 2026-03-31。</strong>⚠️ MA 虽归类金融业，但<strong>不是银行</strong>——无存款、贷款、净利息收入、信贷拨备或 CET1 资本比率（银行指标一律 N/A），应看支付网络专属 KPI（GDV / 跨境量 / 切换交易 / VAS / FCF）。另需注意 MA 是<strong>净负债 -$107 亿</strong>而非净现金，因常年巨额回购使库存股累计达 -$873 亿、账面股东权益仅 $67 亿。</p>
+</div>
+
+<!-- ═══ Q1 2026 KPI ═══ -->
+<div class="section">
+  <div class="stitle">Q1 2026 核心业绩（USD · 财季截至 2026-03-31）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">净营收</div><div class="kpi-v">$8.40B</div><span class="badge up">+16% YoY</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">货币中性 +12% · 超共识 $8.25B</div></div>
+    <div class="kpi"><div class="kpi-l">支付网络净营收</div><div class="kpi-v">$4.95B</div><span class="badge up">+12%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">货币中性 +8% · 交易量驱动</div></div>
+    <div class="kpi"><div class="kpi-l">增值服务 VAS</div><div class="kpi-v">$3.45B</div><span class="badge up">+22%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">货币中性 +18% · 纯有机零并购</div></div>
+    <div class="kpi"><div class="kpi-l">返利与激励（抵减）</div><div class="kpi-v">-$5.64B</div><span class="badge dn">+23%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">contra-revenue · 占毛营收 40%</div></div>
+    <div class="kpi"><div class="kpi-l">运营费用</div><div class="kpi-v">$3.49B</div><span class="badge nt">+13%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">含重组费用 $202M</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 营业利润</div><div class="kpi-v">$4.91B</div><span class="badge up">+18%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">营业利润率 58.4%</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 净利润</div><div class="kpi-v">$3.88B</div><span class="badge up">+18%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">有效税率 19.3%</div></div>
+    <div class="kpi"><div class="kpi-l">调整后净利润</div><div class="kpi-v">$4.10B</div><span class="badge up">+20%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">剔重组 + 股权投资损益</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 摊薄 EPS</div><div class="kpi-v">$4.35</div><span class="badge up">+21%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">缩股贡献 ~2-3pp</div></div>
+    <div class="kpi"><div class="kpi-l">调整后摊薄 EPS</div><div class="kpi-v">$4.60</div><span class="badge up">+23%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">货币中性 +18% · 最可信口径</div></div>
+    <div class="kpi"><div class="kpi-l">经营现金流</div><div class="kpi-v">$3.00B</div><span class="badge up">+26%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">上年 $2.38B</div></div>
+    <div class="kpi"><div class="kpi-l">切换交易笔数</div><div class="kpi-v">52.3B</div><span class="badge up">+8.5%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">跨境量 +13%（本币）</div></div>
+  </div>
+</div>
+
+<!-- ═══ 看穿桥接 高亮框 ═══ -->
+<div class="section">
+  <div class="stitle">本季必看 · 两个"看穿"：毛营收 vs 净营收、GAAP vs 调整后</div>
+  <div class="cmt">
+    <p><strong>Mastercard 的利润表有两个必须"看穿"的地方，看不穿就会误读它的增长质量。</strong></p>
+    <p><strong>看穿一：返利与激励是巨额 contra-revenue（抵减项），不是费用。</strong> 很多人只看"净营收 $8.40B（+16%）"，却不知道这是<span class="hl-t">毛营收 $14.04B 减去返利与激励 $5.64B（占毛营收 40.2%）</span>之后的净额。返利与激励是 MA 支付给大发卡行/大商户的返点（争夺网络份额、绑定长约的成本），以 contra-revenue 形式直接抵减营收。本季这一项 +23%（货币中性 +19%），增速快于净营收——反映网络竞争激烈、MA 用激励换取长期交易份额，是理解"毛增速 vs 净增速"差异的关键。</p>
+    <div class="tbl-wrap" style="margin:14px 0;">
+      <table class="tbl">
+        <tr><th>营收桥接（$M）</th><th>Q1 2026</th><th>YoY</th></tr>
+        <tr><td>支付网络（毛）</td><td>10,587</td><td>—</td></tr>
+        <tr><td>增值服务 VAS（净）</td><td>3,450</td><td>+22%</td></tr>
+        <tr class="hl"><td>毛营收合计</td><td>14,037</td><td>—</td></tr>
+        <tr><td><span class="warn-t">减：支付网络返利与激励</span></td><td><span class="warn-t">(5,639)</span></td><td>+23%</td></tr>
+        <tr class="hl"><td><strong>净营收 Net revenue</strong></td><td><strong>8,398</strong></td><td><strong>+16%</strong></td></tr>
+      </table>
+    </div>
+    <p><strong>看穿二：GAAP EPS $4.35 vs 调整后 EPS $4.60，差在两项一次性。</strong> 本季 GAAP→Non-GAAP 有两项调整：<span class="hl-t">(1) 重组费用 $202M 税前（税后 $158M，EPS $0.18）</span>——为支持长期增长机会再投资的重组行动；<span class="hl-t">(2) 剔除股权投资净损失 $66M 税前（税后 $63M，EPS $0.07）</span>。GAAP EPS $4.35 + $0.18 + $0.07 = 调整后 EPS $4.60。调整后净利 +20%、调整后 EPS +23% 高于净利，差额来自持续回购（摊薄股数 893M，同比 -2.3%）。<strong>这是一台"净营收 +16% + 缩股 +2.3% + 利润率扩张 = 调整后 EPS +23%"的复利机器。</strong></p>
+  </div>
+</div>
+
+<!-- ═══ 趋势图 ═══ -->
+<div class="section">
+  <div class="stitle">关键指标趋势</div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">净营收（$B）& YoY 增速（近 5 季）</div><div class="cwrap"><canvas id="chartRev"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">利润率趋势（%，营业利润率 vs 净利率）</div><div class="cwrap"><canvas id="chartMargin"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">Q1 2026 净营收分部拆分（$B）</div><div class="cwrap"><canvas id="chartSegment"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">摊薄 EPS 趋势（$，GAAP vs 调整后）</div><div class="cwrap"><canvas id="chartEps"></canvas></div></div>
+  </div>
+</div>
+
+<!-- ═══ 桑基图 ═══ -->
+<div class="section">
+  <div class="stitle">Q1 2026 资金流向桑基图（$B）</div>
+  <div class="ccard">
+    <div id="sankey" style="width:100%;height:480px;"></div>
+    <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">说明：毛营收 $14.04 → 返利与激励 $5.64（抵减）+ 净营收 $8.40 → 运营费用 $3.49（G&A $3.04 + 广告营销 $0.15 + 折旧摊销 $0.30）+ 营业利润 $4.91 → 非经营净支出 $0.10 + 税前利润 $4.81 → 所得税 $0.93 + GAAP 净利 $3.88。注：本季向股东返还 $4.8B（回购 $4.04B + 股息 $0.78B），约为季度 FCF $2.66B 的 180%——差额靠现金余额 + 杠杆支撑，是"杠杆化资本返还"。极轻资产（Q1 Capex $335M 仅占营收 4%，FCF 利润率约 32%）。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 1 ═══ -->
+<div class="section">
+  <div class="stitle">模块 1 · 公司概览与背景</div>
+  <div class="cmt">
+    <p><strong>Mastercard Inc.</strong>（NYSE: MA），总部纽约州 Purchase。源自 1966 年一批银行组建的 Interbank Card Association（后称 Master Charge），1979 年更名 Mastercard，<strong>2006-05 IPO</strong>。财季对齐日历年（12 月 31 日结束）。</p>
+
+    <p><strong>核心叙事</strong>：Mastercard 是<span class="hl-t">全球第二大开放式（open-loop）支付网络，与 Visa 构成双寡头</span>——它不是银行、不发卡、不承担持卡人信用风险，而是连接发卡行、收单行、商户与持卡人的"四方模式收费桥"，从每一笔交易的金额中抽取极小比例的网络费。本季全球总交易额（GDV）$2.7 万亿、Mastercard/Maestro 品牌卡 37 亿张。这是一门<strong>58.4% 营业利润率（调整 60.8%）、Capex 仅占营收 4%、季度 FCF 利润率约 32% 的极致轻资产收费桥生意</strong>——与 Visa 同属全球商业模式质量最高的一档。</p>
+
+    <p><strong>三大增长引擎</strong>（管理层战略框架）：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>消费支付（Consumer Payments）</strong>——全球"现金转卡"结构性迁移 + 切换交易占比已升至 70%+（2020 年约 60%），"点对点"策略持续把交易量收进自有网络</li>
+      <li><strong>新支付流（New Payment Flows）</strong>——B2B / 汇款 / 政企支付等卡以外的资金流，打开数十万亿美元 TAM</li>
+      <li><strong>增值服务与解决方案（Value-Added Services & Solutions, VAS）</strong>——安全解决方案、数字认证、商业洞察、咨询等，<span class="hl-t">本季 $3.45B、约占净营收 41%，货币中性有机 +18%（零并购贡献）</span>，是增速最快、被 AI 强化、软件属性最强的护城河延伸</li>
+    </ul>
+
+    <p><strong>股权与治理</strong>：单一类别普通股（无 Visa 那样的 Class B 诉讼稀释机制），A+/A1 高信用评级，董事会长期奉行"低股息 + 大额回购"的资本返还政策。CEO Michael Miebach（2021 年起）、CFO Sachin Mehra。</p>
+
+    <p><strong>能力圈检验</strong>：收费桥生意极其清晰（看得懂的顶级好生意，一句话能说清）。但<span class="warn-t">两块黑箱：(1) 稳定币 / A2A（账户到账户）支付轨道对卡网络的长期脱媒威胁——MA 以 $15 亿收购稳定币基建商 BVNK "收编"应对；(2) agentic 商务（AI 代理代人交易）会如何重塑支付授权与费率结构</span>。这两点决定 10 年后 MA 的护城河是加宽还是被侵蚀。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 2 ═══ -->
+<div class="section">
+  <div class="stitle">模块 2 · 管理层评估</div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>Michael Miebach · CEO（2021 至今）</h4>
+      <p>2016 年加入 Mastercard，历任首席产品官，2021 年 1 月出任 CEO。Miebach 把 MA 从"消费支付一条腿"重构为"消费支付 + 新支付流 + 增值服务"三引擎，<span class="hl-t">尤其押注 VAS 与数据/安全能力的软件化</span>——本季 VAS 货币中性有机增长 +18%、零并购贡献，是这一战略的直接兑现。对稳定币/AI 态度务实："收编"而非对抗——几乎所有 Mastercard 卡已支持 Agent Pay、推出被 FIDO 联盟采纳的 "verifiable intent" 防篡改授权标准、并以 $15 亿收购 BVNK 切入稳定币收发/兑换/存储。海图判断：这是一位守住收费桥基本盘、又主动应对范式变化的掌舵人。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">A</div>
+    <div class="bd">
+      <h4>资本配置纪律 · 回购 + 增息双管的复利机器</h4>
+      <p>
+      <strong>常年增息</strong>：2025 年 12 月季度股息上调 14% 至 $0.87（自 $0.76），年化 $3.48。派息率仅约净利 20%，增息空间充足。<br>
+      <strong>持续大额回购缩股</strong>：本季回购 780 万股、耗资 $4.0B；全年加权摊薄股数从 FY2023 的 944M 降至 Q1 2026 的 893M（年均缩 1.5-2.3%），直接放大 EPS。过去 3 年累计回购 $317 亿。2025 年 12 月董事会新批准 <strong>$140 亿回购计划</strong>（将在现有 $120 亿计划完成后生效），截至 2026-04-27 尚余约 $117 亿额度。<br>
+      <span class="warn-t">一个纪律注脚</span>：本季返还股东 $4.8B > 季度 FCF $2.66B（约 180%），靠现金余额 + 杠杆支撑——<strong>是杠杆化资本返还</strong>，也是 MA 呈净负债 -$107 亿的原因。对一台 FCF 极强、融资成本极低（A+/A1）的收费桥，有意维持约 0.5x 净负债/EBITDA 的杠杆以最大化股东回报，是合理的资本结构优化，但要清楚这不是"全用赚的钱返还"。
+      </p>
+    </div>
+  </div>
+
+  <div class="cmt">
+    <p><strong>长期主义测试</strong>：✅ MA 管理层始终以"网络规模 + 增值服务 + 新支付流"的长期复利为主线，而非短期财报博弈；VAS 坚持有机增长（本季零并购贡献）体现内生能力。对稳定币这种潜在颠覆者选择"收编而非对抗"，体现长期视角。<strong>坦诚度</strong>：电话会主动披露 4 月跨境因中东冲突软化、Q2 逆风最大、$202M 重组费用等负面信息，不粉饰。<strong>利益绑定</strong>：管理层持股比例不高（成熟大盘股常态），薪酬与净营收/调整后 EPS 增长强挂钩。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 3 ═══ -->
+<div class="section">
+  <div class="stitle">模块 3 · 商业模式深度解析</div>
+  <div class="cmt">
+    <p><strong>海图"一句话测试"</strong>：<span class="hl-t">Mastercard 是全球刷卡交易的"收费桥"——每当有人用 Mastercard 卡消费，它就从交易金额里抽取极小比例的网络费，不承担信用风险、不持有应收账款，靠 58% 营业利润率的极致轻资产模式赚钱，再叠加一层增速更快、软件属性的增值服务。</span></p>
+
+    <p><strong>四方模式（Four-Party Model）</strong>：持卡人 → 发卡行 → <strong>Mastercard 网络（授权 + 清算 + 结算）</strong> → 收单行 → 商户。MA 处于中间，向发卡行 + 收单行两端收取网络费（交易切换费 + 基于交易额的费用 + 跨境费）。<span class="hl-t">关键：MA 不承担信用风险</span>——坏账是发卡行的事，MA 只赚"过路费"。这是它区别于 American Express（闭环、自担信用）的根本，也是它无净利息收入/信贷拨备的原因。</p>
+
+    <p><strong>Q1 2026 营收模型（净营收口径）</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>收入板块</th><th>Q1 2026</th><th>YoY（美元 / 货币中性）</th><th>驱动</th></tr>
+        <tr><td>支付网络 Payment network</td><td>$4.95B</td><td>+12% / +8%</td><td>切换交易 +8.5%、跨境量 +13%、GDV $2.7万亿</td></tr>
+        <tr><td>增值服务 VAS</td><td>$3.45B</td><td>+22% / +18%</td><td>安全、数字认证、商业洞察 · 纯有机</td></tr>
+        <tr class="hl"><td><strong>净营收合计</strong></td><td><strong>$8.40B</strong></td><td><strong>+16% / +12%</strong></td><td>超共识 $8.25B</td></tr>
+      </table>
+    </div>
+
+    <p style="margin-top:14px;"><strong>单位经济与议价能力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>跨境交易是利润皇冠</strong>——跨境费率远高于境内，本季跨境量（本币）+13%，是 MA 最赚钱的业务；但 4 月因中东冲突软化，管理层指 Q2 逆风最大随后逐步恢复</li>
+      <li><strong>增值服务是估值放大器</strong>——VAS 占净营收 41%、有机 +18%、软件属性高，把 MA 从"刷卡收费站"抬升为"支付 + 数据/安全平台"</li>
+      <li><strong>对发卡行议价能力</strong>：中——大发卡行有 Visa/Mastercard 二选一筹码，MA 用巨额返利与激励（$5.64B/季）留住它们</li>
+      <li><strong>网络效应</strong>：极强——持卡人越多商户越愿受理，商户越多持卡人越离不开，双边飞轮自我强化；切换交易占比升至 70%+ 进一步内化交易量</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══ 模块 4 ═══ -->
+<div class="section">
+  <div class="stitle">模块 4 · 经济护城河分析（5 维）</div>
+  <div class="moat-grid">
+    <div class="moat-card wide">
+      <h5>1. 网络效应</h5>
+      <span class="moat-rate">极宽</span>
+      <p>37 亿张卡 + 数千万商户 + 200+ 国家的双边网络。持卡人-商户互相吸引，飞轮几乎不可复制。<strong>趋势：稳定</strong>（稳定币/A2A 是唯一潜在替代轨道）。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>2. 规模/成本优势</h5>
+      <span class="moat-rate">宽</span>
+      <p>季度切换交易 52.3B 笔，边际成本趋近于零。58.4% 营业利润率 + Capex 仅 4% 营收，规模碾压。<strong>趋势：加宽</strong>（VAS + AI 强化）。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>3. 转换成本</h5>
+      <span class="moat-rate">宽</span>
+      <p>发卡行/收单行深度集成 MA 的授权清算结算基础设施 + 反欺诈/代币化/数字认证服务，切换成本极高。<strong>趋势：稳定偏加宽</strong>（VAS 绑定加深）。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>4. 无形资产/监管牌照</h5>
+      <span class="moat-rate">中-宽</span>
+      <p>Mastercard 品牌全球信任 + 网络规则 + 数十年清算许可。<span class="warn-t">但寡头地位招致全球 interchange 费率监管与反垄断关注</span>。<strong>趋势：监管压制</strong>。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>5. 有效规模</h5>
+      <span class="moat-rate">宽</span>
+      <p>全球开放式卡网络本质是双寡头（Visa/Mastercard），新进入者几无空间。<strong>趋势：稳定</strong>（威胁来自体系外的稳定币，非体系内新玩家）。</p>
+    </div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>10 年后护城河会更宽还是更窄？</strong> <span class="hl-t">核心网络护城河仍宽，VAS 还在加宽转换成本，但一个体系外变量决定长期走向</span>：<span class="warn-t">稳定币 / A2A 脱媒</span>——稳定币链上处理量已在高毛利跨境与借记轨道构成长期潜在替代。MA 的对冲是"收编"——收购 BVNK 把自己变成稳定币收发/兑换/存储的基础设施层，并用 Agent Pay + verifiable intent 卡住 agentic 商务的授权入口。<strong>信用卡的授信 + 积分、借记的反欺诈保障，是稳定币短期难以替代的缓冲。</strong>相比 Visa，MA 少了 DOJ 借记反垄断诉讼这一近期悬剑（那是 Visa 独有的美国借记路由风险），但同样受全球 interchange 费率监管压制。</p>
+    <p><strong>定价权</strong>：强但受监管天花板压制。全球多地 interchange 与跨境费率监管持续压制费率上行空间，MA 靠交易量增长 + VAS 结构升级消化。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 5 ═══ -->
+<div class="section">
+  <div class="stitle">模块 5 · 财务深度分析</div>
+
+  <div class="dcf-note" style="margin-bottom:16px;">
+    <p><strong>⚠️ 行业适配说明（重要）</strong>：Mastercard 虽被归类为金融业，但<strong>并非银行/保险公司</strong>——没有存款、贷款账簿、净利息收入（NII/NIM）、信贷拨备或 CET1 资本比率，这些银行专属指标<strong>一律不适用（N/A）</strong>。本模块改用支付网络专属指标：营业利润率、ROIC、FCF/OCF、增值服务增速、切换交易量。与银行不同，MA 是极轻资产、高毛利、强自由现金流公司，<strong>FCF 类指标完全适用且表现优异</strong>——故本报告全程使用 FCF / 所有者盈余口径，而非银行的 P/TBV / DDM 主导框架。</p>
+  </div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 12px 0; font-family: 'Segoe UI',sans-serif;">5.1 关键比率（Q1 2026 vs Q1 2025）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>指标</th><th>Q1 2025</th><th>Q1 2026</th><th>变化</th><th>含义</th></tr>
+      <tr><td>净营收增速（美元）</td><td>+14%</td><td>+16%</td><td><span class="badge up">+2pp</span></td><td>货币中性 +12%</td></tr>
+      <tr><td>VAS / 净营收</td><td>38.9%</td><td>41.1%</td><td><span class="badge up">+2.2pp</span></td><td>软件属性占比升</td></tr>
+      <tr><td>GAAP 营业利润率</td><td>57.2%</td><td>58.4%</td><td><span class="badge up">+1.2pp</span></td><td>规模效应</td></tr>
+      <tr><td>调整后营业利润率</td><td>59.3%</td><td>60.8%</td><td><span class="badge up">+1.5pp</span></td><td>剔重组后更高</td></tr>
+      <tr><td>GAAP 有效税率</td><td>18.6%</td><td>19.3%</td><td><span class="badge nt">+0.7pp</span></td><td>指引 20-21%</td></tr>
+      <tr><td>摊薄股数（百万）</td><td>914</td><td>893</td><td><span class="badge up">-2.3%</span></td><td>持续回购缩股</td></tr>
+      <tr><td>经营现金流</td><td>$2.38B</td><td>$3.00B</td><td><span class="badge up">+26%</span></td><td>现金转化强劲</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;"><strong>ROE / ROIC 说明</strong>：MA 账面股东权益仅 $6.72B（因累计库存股 -$87.34B），机械 ROE ≈ TTM 净利 ~$15.6B / $6.7B ≈ <strong>230%+，已失真无意义</strong>。更有意义的是 ROIC：投入资本 ≈ 权益 $6.7B + 有息负债 $18.96B ≈ $25.7B，NOPAT ≈ TTM 营业利润 ~$19B ×(1-19.3%) ≈ $15.3B，<strong>ROIC ≈ 55-60%</strong>——典型"负商誉式"轻资产平台特征（账面净值极低、资本回报率极高）。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.2 资产负债健康度（2026-03-31 末 · $M）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>2026-03-31 末</th><th>说明</th></tr>
+      <tr><td>现金及等价物</td><td>7,906</td><td>—</td></tr>
+      <tr><td>短期投资</td><td>313</td><td>—</td></tr>
+      <tr><td>受限现金</td><td>551</td><td>—</td></tr>
+      <tr class="hl"><td>现金 + 短期投资合计</td><td>8,219</td><td>可用流动性</td></tr>
+      <tr><td>流动资产合计</td><td>22,498</td><td>—</td></tr>
+      <tr class="hl"><td>短期债务/借款</td><td>1,748</td><td>已独立核对</td></tr>
+      <tr class="hl"><td>长期债务</td><td>17,212</td><td>已独立核对</td></tr>
+      <tr class="hl"><td>有息负债合计</td><td>18,960</td><td>短债 + 长债</td></tr>
+      <tr><td>经营租赁负债</td><td>~1,400</td><td>估算 · 计入"其他负债"，对 MA 属低重要性</td></tr>
+      <tr class="hl"><td><strong>真实净负债</strong></td><td><strong>-10,741</strong></td><td>⚠️ 净负债非净现金</td></tr>
+      <tr><td>商誉</td><td>9,525</td><td>—</td></tr>
+      <tr><td>其他无形资产净额</td><td>5,495</td><td>—</td></tr>
+      <tr><td>应计诉讼</td><td>339</td><td>相对轻</td></tr>
+      <tr><td>库存股（成本）</td><td>-87,342</td><td>常年巨额回购累计</td></tr>
+      <tr><td>留存收益</td><td>88,146</td><td>—</td></tr>
+      <tr><td>总资产 / 总负债</td><td>52,449 / 45,727</td><td>—</td></tr>
+      <tr class="hl"><td>股东权益（MA）</td><td>6,719</td><td>库存股压低 · 账面净值极低</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">⚠️ <strong>净负债非净现金——铁律提示</strong>：MA 有息负债 $18.96B（短债 $1.75B + 长债 $17.21B，已逐项核对）> 现金+短投 $8.22B，<strong>真实净负债 -$10.74B</strong>。这与"科技巨头现金堡垒"叙事不同——MA 作为极轻资产网络，<strong>有意维持杠杆（净负债/EBITDA 约 0.5x）以最大化股东回报</strong>，同时保持 A+/A1 高信用评级。股东权益仅 $67 亿（因长期巨额回购使库存股累计达 -$873 亿），账面净值极低但 ROE/ROIC 极高——这是理解 MA "负商誉式轻资产平台"财务特征的关键，也意味着 P/B、P/TBV 等账面类估值对 MA <strong>无意义</strong>。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.3 现金流量（Q1 2026 单季）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>Q1 2025</th><th>Q1 2026</th><th>YoY / 说明</th></tr>
+      <tr><td>经营活动现金流（OCF）</td><td>$2.38B</td><td>$3.00B</td><td>+26%</td></tr>
+      <tr><td>- Capex（PP&E $154M + 资本化软件 $181M）</td><td>—</td><td>$0.34B</td><td>仅占营收 4%</td></tr>
+      <tr class="hl"><td>自由现金流（FCF = OCF - Capex）</td><td>—</td><td>$2.66B</td><td>季度 FCF 利润率 ~32%</td></tr>
+      <tr><td>回购普通股</td><td>—</td><td>$4.04B</td><td>7.8M 股</td></tr>
+      <tr><td>支付股息</td><td>—</td><td>$0.78B</td><td>$0.87/股</td></tr>
+      <tr><td>融资活动净现金</td><td>—</td><td>-$5.01B</td><td>回购 + 股息主导</td></tr>
+      <tr class="hl"><td>回购 + 股息 / FCF</td><td>—</td><td><strong>~180%</strong></td><td>超 FCF · 靠现金 + 杠杆</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;"><strong>现金流质量</strong>：OCF +26% 强于净利 +18%，现金转化优异；Capex $335M（PP&E + 资本化软件）仅占营收 4%，验证 MA 极致轻资产。本季返还股东 $4.8B（回购 $4.04B + 股息 $0.78B）约为季度 FCF 的 180%——这是杠杆化返还的直接体现（详见模块 12）。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.4 所有者盈余（价值投资口径）</h3>
+  <div class="dcf-note">
+    <p><strong>所有者盈余 = 净利润 + 折旧摊销 + SBC − 维护性 Capex ± 营运资金 ≈ FCF</strong></p>
+    <p>MA 是极轻资产、极高现金转化的收费桥，FCF 几乎等于所有者盈余。Q1 单季 FCF $2.66B（Capex 仅 $335M、占营收 4%）。按 TTM 口径（近 4 季净营收约 $34B）估算 <strong>TTM FCF 约 $15B</strong>（MA FCF 长期约等于甚至略高于净利润；此为基于季度数据的合理估算，非官方全年披露值）。</p>
+    <p><strong>所有者盈余收益率 = TTM FCF ~$15B / 市值 $461B ≈ 3.3%</strong>——这是一个<span class="warn-t">"顶级质量 + 顶级估值"</span>的收益率：3.3% 的 FCF Yield 对一个货币中性 +12% 营收增长、58% 营业利润率、双寡头护城河、VAS 有机 +18% 的公司不算便宜。它反映市场已充分认可 MA 的质量。<strong>换句话说：MA 的问题从来不是生意好不好，而是价格贵不贵——当前 3.3% 的 FCF Yield 意味着几乎没有安全边际。</strong></p>
+  </div>
+</div>
+
+<!-- ═══ 模块 6 ═══ -->
+<div class="section">
+  <div class="stitle">模块 6 · 电话会分析（Q1 2026 + 前 2 季度）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">Q1 2026 电话会（2026-04-30）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"营收 +16%、调整后 EPS +23% 全面超预期；VAS 货币中性有机增长 +18%（零并购贡献）"</div><div class="ec-note">安全解决方案、数字认证、商业洞察需求强劲——VAS 已成为增速最快、软件属性最强的第二增长极，直接把 MA 从"刷卡收费站"抬升为"支付 + 数据/安全平台"。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"Agentic 商务提速：几乎所有 Mastercard 卡已支持 Agent Pay；'verifiable intent' 防篡改授权记录被 FIDO 联盟采纳为安全标准"</div><div class="ec-note">MA 抢占 AI 代理商务的授权入口——把潜在范式变化变成自己的标准，护城河向 agentic 时代延伸。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"宣布以 $15 亿（另加最多 $3 亿或有对价）收购稳定币基础设施商 BVNK，切入稳定币收发/兑换/存储"</div><div class="ec-note">拓展未被服务的可寻址市场——对稳定币"收编而非对抗"，把潜在颠覆者变为增量轨道。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"4 月跨境趋势因中东冲突软化；管理层指 Q2 逆风最大随后逐步恢复"</div><div class="ec-note">GCC 与以色列占跨境量比例不高，但短期拖累高毛利跨境。Q2 指引为"低双位数区间的低端"；若剔除中东影响，Q2 增速将与 Q1 大致持平。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"计提 $202M 重组费用（$0.18/股）以支持长期增长再投资；切换交易 +9%（剔除 Capital One 借记卡组合迁移则为 +10%）"</div><div class="ec-note">重组是为长期机会再投资、短期拖累 GAAP EPS；Capital One 借记迁移是一次性组合流失，底层交易增速健康。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q4 2025 电话会（2026-01-29）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"营收 +18%、调整后 EPS +25%；2025 全年在不确定背景下各业务线均表现强劲"</div><div class="ec-note">全年收官强势。董事会同期新批 $140 亿回购计划 + 季度股息上调 14% 至 $0.87。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"跨境非现场（CNP）非旅游环比放缓，主因去年欧洲份额赢取及加密购买高基数的困难同比"</div><div class="ec-note">高基数带来的同比困难，非需求走弱；2026 年 1 月前三周指标与 Q4 大致持平。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q3 2025 电话会（2025-10-30）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"营收 +17%（货币中性 +15%）；VAS 货币中性 +22%；跨境量全球 +15%、切换交易 +10%、GDV +9%、发卡 +6% 至 36 亿张"</div><div class="ec-note">增值服务 + 战略合作 + Commerce Media（利用自有消费数据的个性化广告）驱动，广告主与发布商反响积极。指引 Q4 营收增长低双位数高端。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">指引兑现度追踪</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>历史指引 / 共识</th><th>Q1 2026 实际</th><th>评价</th></tr>
+      <tr><td>Q1 营收共识 ~$8.25B</td><td>$8.40B（+16%）</td><td><span class="badge up">超预期</span></td></tr>
+      <tr><td>Q1 调整后 EPS 共识 $4.41</td><td>$4.60（+23%）</td><td><span class="badge up">超预期</span></td></tr>
+      <tr><td>"VAS 保持强劲有机增长"</td><td>VAS 货币中性 +18%（零并购）</td><td><span class="badge up">兑现</span></td></tr>
+      <tr><td>FY2026 净营收增速指引</td><td>"低双位数区间的高端"（货币中性）</td><td><span class="badge nt">维持</span></td></tr>
+      <tr><td>Q2 2026 净营收增速</td><td>"低双位数区间的低端"（中东逆风最大）</td><td><span class="badge nt">偏软</span></td></tr>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>信号汇总</strong>：Q1 2026 是 MA "<span class="hl-t">核心稳健 + VAS 有机超预期 + 全面超共识 + 稳定币/agentic 布局提速</span>"的强势一季。VAS 货币中性有机 +18%、零并购贡献，证明 MA 不只是"消费支付一条腿"，且内生能力强。但 Q2 指引偏软（低双位数低端，中东逆风最大）+ $202M 重组费用提示，短期增速会从本季高位小幅回落。<strong>业绩没有任何问题——问题永远在估值和长期脱媒变量上。</strong></p>
+  </div>
+</div>
+
+<!-- ═══ 模块 7 ═══ -->
+<div class="section">
+  <div class="stitle">模块 7 · 多模型估值（8 种方法）</div>
+
+  <p style="margin-bottom:14px; font-size:13px; color:var(--text2); line-height:1.8;"><strong>估值方法适用性说明</strong>：MA 是支付网络而非银行，因此银行主导的 <strong>P/TBV、DDM 不作主力</strong>（MA 有形账面为负、股息占比极低）；而作为极轻资产、高 FCF 公司，<strong>DCF / 所有者盈余 / 反向 DCF 等 FCF 类方法完全适用且为主力</strong>。以下估值完全基于财报与前瞻趋势独立推导，<span class="hl-t">不锚定现价 $526.74</span>。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">7.1 估值汇总表（独立估值 · USD）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>估值方法</th><th>每股公允价</th><th>假设要点</th><th>权重</th></tr>
+      <tr><td>1. 相对估值（P/E）</td><td>$563</td><td>FY2027E 调整 EPS ~$22.5 × 25x（优质 15% 成长给合理倍数，略高于 Visa 反映更快增速）</td><td>25%</td></tr>
+      <tr><td>2. DCF（基准）</td><td>$560</td><td>TTM FCF ~$15B，未来 5 年 FCF CAGR +13%，WACC 8%，永续 3.5%（护城河溢价）</td><td>25%</td></tr>
+      <tr><td>3. 所有者盈余收益率</td><td>$570</td><td>TTM FCF ~$15B / 2.9% 目标收益率 = $517B → /~893M 股</td><td>15%</td></tr>
+      <tr><td>4. PEG</td><td>$558</td><td>合理 PEG 1.9 × 调整 EPS 增速 15% = 合理 P/E 28.5x × FY2026E $19.58</td><td>10%</td></tr>
+      <tr><td>5. DDM</td><td>$300（仅参考）</td><td>DPS $3.48、派息率仅 20%——股息太小，严重低估内在价值，仅作参考不主导</td><td>5%</td></tr>
+      <tr><td>6. NAV / P-TBV</td><td>不适用</td><td>非资产型公司；有形账面为负（库存股 -$873 亿），账面类估值无意义</td><td>0%</td></tr>
+      <tr><td>7. 反向 DCF</td><td>当前价隐含 FCF 增长 <strong>~11.5%</strong></td><td>$526.74 隐含市场认为 FCF 长期增 ~11.5%——低于 MA 实际 +13-15% 趋势，暗示轻度低估</td><td>10%</td></tr>
+      <tr><td>8. SOTP 分部加总</td><td>$580</td><td>支付网络（25x 稳定网络）+ VAS（软件属性 +18% 有机给高倍数）− 净负债 $10.7B</td><td>10%</td></tr>
+      <tr class="hl"><td><strong>加权公允价中位数</strong></td><td><strong>~$560</strong></td><td>估值区间 $555-580 · 中位 ~$560（DDM 低配拖累后）</td><td>100%</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.8;"><strong>与现价对照</strong>：当前 $526.74 vs 加权公允 ~$560 · <span class="nt">折价约 6%</span>——<strong>远不足价值投资 25% 安全边际的门槛</strong>。MA 是世界级好生意（增速比 Visa 更快），年内已回调 -12.6%、跌破 200 日线，估值从峰值有所修复，但当前价格仍充分反映其质量，几乎没有安全边际。反向 DCF 显示市场已定价 ~11.5% 长期 FCF 增长，略低于 MA 实际趋势——是"合理满价、微幅折让"。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.2 P/E 多档透视表</h3>
+  <p style="margin-bottom:10px; font-size:13px; color:var(--text2);">MA GAAP vs 调整后 EPS 存在差异（重组费用 + 股权投资损益），且不同 forward 口径倍数差异较大，触发多档透视：</p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>口径</th><th>EPS / 分母</th><th>P/E (基于 $526.74)</th><th>读数说明</th></tr>
+      <tr><td>TTM GAAP P/E</td><td>~$17.3</td><td>~30x</td><td>含重组 + 股权投资损益波动</td></tr>
+      <tr><td>TTM 调整后 P/E</td><td>~$17.9</td><td>~29x</td><td>剔一次性 · 较可信</td></tr>
+      <tr class="hl"><td><strong>Forward P/E（FY2026E 调整 $19.58）</strong></td><td><strong>~$19.58</strong></td><td><strong>~26.9x</strong></td><td>最可信档 · 市场惯用</td></tr>
+      <tr><td>Forward P/E（FY2027E 调整 ~$22.5）</td><td>~$22.5</td><td>~23.4x</td><td>再往前一年 · 成长消化估值</td></tr>
+      <tr><td>P/S (TTM)</td><td>净营收 ~$34B</td><td>~13.6x</td><td>支付网络溢价</td></tr>
+      <tr><td>FCF Yield</td><td>TTM FCF ~$15B</td><td>~3.3%</td><td>顶级质量 + 顶级估值</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3);"><strong>最可信档</strong>：Forward P/E ~26.9x（FY2026）/ ~23.4x（FY2027）。同业对比：Visa ~24.9x（增速更慢、利润率更高）、American Express ~22x（闭环含信贷）、PayPal ~8.5x（数字钱包减速）。<span class="hl-t">MA 比 Visa 略贵（26.9x vs 24.9x），是"用更高估值买更快增速（VAS 拉动）"</span>——两者是全球支付双雄，MA 增速略胜、Visa 利润率略胜，但 MA 绝对估值仍在满价区，无安全边际。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.3 12 个月目标价（概率加权）</h3>
+  <div class="pgrid">
+    <div class="pbox"><div class="pl">悲观情景 · 30%</div><div class="pv pc">$455</div><div class="pn">中东跨境逆风延续 + 稳定币恐慌 + 估值压缩至 ~22x<br>距现价 -14%</div></div>
+    <div class="pbox"><div class="pl">基准情景 · 45%</div><div class="pv pf">$575</div><div class="pn">中双位数 EPS 增长延续 + 估值维持 ~27x + 持续回购<br>距现价 +9%</div></div>
+    <div class="pbox"><div class="pl">乐观情景 · 25%</div><div class="pv ps">$660</div><div class="pn">VAS/跨境再加速 + 稳定币/BVNK 兑现 + 估值重估至 30x<br>距现价 +25%</div></div>
+  </div>
+  <p style="font-size:13px; color:var(--text2);"><strong>概率加权公允价</strong>：30%×$455 + 45%×$575 + 25%×$660 = <strong>$560</strong>。<strong>叠加 0.66% 股息 = 总回报约 +7%</strong>——稳健但不激动。<span class="warn-t">当前 $526.74 高于机械首仓 $448——不在最优机械建仓窗口，但已较峰值明显回调</span>。</p>
+</div>
+
+<!-- ═══ 模块 8 ═══ -->
+<div class="section">
+  <div class="stitle">模块 8 · 竞争与行业分析</div>
+  <div class="cmt">
+    <p><strong>全球支付网络格局</strong>：Visa 与 Mastercard 构成开放式卡网络双寡头（合计处理全球绝大部分刷卡交易），American Express 是闭环玩家（自发卡 + 自担信用 + 自有网络），中国银联在境内主导。真正的长期威胁来自体系外——稳定币 / A2A 支付轨道。</p>
+
+    <p><strong>支付龙头同业对比（截至 2026-07）</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>公司</th><th>营收增速</th><th>Forward P/E</th><th>Trailing P/E</th><th>核心评价</th></tr>
+        <tr class="hl"><td><strong>Mastercard MA</strong></td><td>+16%（货币中性 +12%）</td><td><strong>~26.9x</strong></td><td>~29x</td><td>增速之王 · VAS 拉动 · 估值溢价</td></tr>
+        <tr><td>Visa V</td><td>+10-11%</td><td>~24.9x</td><td>~29x</td><td>利润率之王 · 略便宜</td></tr>
+        <tr><td>American Express AXP</td><td>+8-9%</td><td>N/A</td><td>~22x</td><td>闭环 + 自担信贷 · 不同赛道</td></tr>
+        <tr><td>PayPal PYPL</td><td>+7%</td><td>N/A</td><td>~8.5x</td><td>数字钱包 · 减速 · 深度折让</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:10px; font-size:12px; color:var(--text3);">MA vs Visa 是核心看点：商业模式相同（收费桥），但 <strong>MA 增速更快（+16% vs +10-11%，VAS 有机 +18% 拉动）、估值略高（26.9x vs 24.9x）；Visa 利润率更高（~67% vs 58.4%）</strong>。市场用略高的估值买 MA 的更快成长。两者共同垄断全球开放式卡网络，是全球商业模式质量最高的一档。</p>
+
+    <p style="margin-top:14px;"><strong>波特五力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>新进入者：</strong>极低（双边网络 + 规模壁垒几不可复制）——但稳定币是"从体系外绕过"的新路径</li>
+      <li><strong>替代品：</strong>中高（稳定币 / A2A / 央行数字货币是长期替代轨道）</li>
+      <li><strong>供应商议价：</strong>低（技术/数据供应商议价力弱）</li>
+      <li><strong>买家议价：</strong>中（大发卡行有二选一筹码，靠返利与激励维系；商户受监管保护）</li>
+      <li><strong>同业竞争：</strong>中（Visa/Mastercard 理性双寡头，不打价格战，靠 VAS 差异化）</li>
+    </ul>
+
+    <p><strong>颠覆风险</strong>：稳定币 / A2A 在跨境（MA 最赚钱业务）与借记轨道的长期脱媒是核心风险。但 MA 的"收编"策略（收购 BVNK + Agent Pay）+ 信用卡授信/积分 + 反欺诈保障提供缓冲。这是 10 年维度的慢变量，不是明年的事。相较 Visa，MA 少了美国 DOJ 借记反垄断诉讼这一近期监管悬剑。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 9 ═══ -->
+<div class="section">
+  <div class="stitle">模块 9 · 技术面与 K 线分析（次要参考）</div>
+  <div class="cmt">
+    <p><strong>趋势</strong>：MA 年内回调 -12.6%，当前 $526.74 处于 52 周区间 $464.52-$601.77 <span class="hl-t">中部、200 日均线下方</span>，距 52 周高点 -12%、距低点 +13%。不同于 Visa 接近高点，MA 已从峰值明显回落，技术位置相对更中性。</p>
+
+    <p><strong>关键价位</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>支撑</strong>：$500（心理整数 + 近期盘整）/ $480 / $464（52 周低）</li>
+      <li><strong>阻力</strong>：$560（公允价目标 + 200 日线附近）/ $602（52 周高）/ $660（乐观情景）</li>
+    </ul>
+
+    <p><strong>指标信号</strong>：股价在 200 日线下方、年内下行，动能偏弱；处 52 周中部、无明显超买超卖。<span class="warn-t">跌破 200 日线意味着中期趋势转弱，但也提供了比高位追涨更好的观察窗口</span>。</p>
+
+    <p><strong>注意</strong>：MA 的核心驱动是 Forward P/E 估值 + VAS/跨境增速 + 稳定币/agentic 进展 + 中东逆风消退节奏，技术面是次要参考。价值投资者应盯基本面与估值——若继续回调至 $448（机械首仓）附近，才进入更舒适的建仓区。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 10 ═══ -->
+<div class="section">
+  <div class="stitle">模块 10 · 增长催化剂与前景展望</div>
+  <div class="cmt">
+    <p><strong>短期催化剂（未来 6 个月）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>2026-07-30 前后 Q2 2026 财报</strong>——中东逆风最大季，指引兑现度 + 跨境恢复节奏 + VAS 持续性</li>
+      <li><strong>中东冲突消退</strong>——管理层假设 Q2 结束，若兑现则 Q3 起跨境逐步恢复，增速回到 Q1 水平</li>
+      <li><strong>BVNK 稳定币收购落地</strong>——切入稳定币收发/兑换/存储，若整合顺利是新叙事</li>
+      <li><strong>$140 亿新回购放量</strong>——现有 $120 亿计划完成后生效，持续缩股放大 EPS</li>
+    </ul>
+
+    <p><strong>长期展望（3-5 年）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>三引擎复利</strong>——消费支付（现金转卡 + 切换占比升）+ 新支付流（B2B 数十万亿 TAM）+ 增值服务（AI 强化）驱动净营收货币中性中双位数增长</li>
+      <li><strong>增值服务成第二增长极</strong>——从 41% 营收占比向更高攀升，软件属性提升估值中枢</li>
+      <li><strong>Agentic 商务</strong>——Agent Pay + verifiable intent 标准卡住 AI 代理商务的授权入口，管理层押注为下一增长引擎</li>
+      <li><strong>稳定币"收编"兑现</strong>——BVNK 把潜在颠覆者变为增量轨道</li>
+      <li><strong>风险情景</strong>：稳定币脱媒加速 / 全球 interchange 费率持续被压 / 消费衰退</li>
+    </ul>
+
+    <p><strong>TAM 展望</strong>：全球现金 + 支票 + A2A 仍有数十万亿美元待电子化，加上新支付流（B2B）+ 增值服务，MA 的可寻址市场远未饱和。核心问题不是增长空间，而是稳定币是否会绕过卡网络分食这块 TAM——MA 的应对是把自己变成稳定币的基础设施层。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 11 ═══ -->
+<div class="section">
+  <div class="stitle">模块 11 · 风险矩阵</div>
+  <div class="risk-grid">
+    <div class="risk-card r4"><h5>1. 满估值无安全边际</h5><span class="risk-score">4 / 5 高</span><p>Forward P/E 26.9x / FCF Yield 3.3% · 折价仅 6% vs 公允 $560 · 任何增速放缓或利空都可能触发估值压缩</p></div>
+    <div class="risk-card r4"><h5>2. 稳定币/A2A 长期脱媒</h5><span class="risk-score">4 / 5 高</span><p>稳定币链上量长期威胁高毛利跨境与借记轨道 · MA 靠收购 BVNK + Agent Pay "收编"对冲 · 10 年维度慢变量</p></div>
+    <div class="risk-card r3"><h5>3. 中东冲突 / 跨境逆风</h5><span class="risk-score">3 / 5 中</span><p>4 月跨境软化，Q2 逆风最大 · GCC + 以色列占跨境量比例不高 · 管理层假设 Q2 结束后逐步恢复</p></div>
+    <div class="risk-card r3"><h5>4. interchange 费率监管</h5><span class="risk-score">3 / 5 中</span><p>全球多地 interchange 与跨境费率监管持续压制费率上行 · 靠交易量 + VAS 结构升级消化</p></div>
+    <div class="risk-card r3"><h5>5. 消费/宏观周期</h5><span class="risk-score">3 / 5 中</span><p>支付量与消费支出挂钩 · 衰退会压制交易额与跨境旅游 · 美国 GDV 本币仅 +4.2% 已偏软</p></div>
+    <div class="risk-card r2"><h5>6. 生意质量（机会）</h5><span class="risk-score">2 / 5 反向</span><p>58% 营业利润率 + ROIC ~55-60% + 双寡头护城河 + VAS 有机 +18% · 世界级好生意本身是最大的安全垫</p></div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>3 个黑天鹅情景</strong>：</p>
+    <ol style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>稳定币在跨境轨道加速脱媒</strong>——概率 12%（5 年维度）· 高毛利跨境业务受侵蚀 · 长期估值重置至 $400 下方</li>
+      <li><strong>全球深度衰退</strong>——概率 10% · 支付量与跨境旅游骤降 · 股价跌至 $420-450</li>
+      <li><strong>重大反垄断/费率监管冲击</strong>——概率 8% · 全球监管同步收紧网络费率 · 长期盈利中枢下移</li>
+    </ol>
+
+    <p style="margin-top:10px;"><strong>下行支撑</strong>：世界级生意 + 58% 营业利润率 + ROIC ~55-60% + TTM FCF ~$15B + 双寡头护城河构成质量底。<span class="hl-t">$460-465 是较硬的估值底</span>（52 周低 $464.52 + Forward P/E ~22x 下限）。但要注意：MA 的"底"比大多数股票高，因为质量溢价难以完全消失。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 12 ═══ -->
+<div class="section">
+  <div class="stitle">模块 12 · 股东回报分析</div>
+  <div class="cmt">
+    <p><strong>Mastercard 是"回购 + 增息"双管资本返还的复利机器——但要区分授权、执行，以及"用杠杆做加码返还"的性质。</strong>本季返还股东 $4.8B，约为季度 FCF $2.66B 的 180%，值得细拆。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 18px 0 10px; font-family: 'Segoe UI',sans-serif;">12.1 公司给了股东多少？</h3>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>年度</th><th>回购（执行）</th><th>股息</th><th>股东总回报</th><th>说明</th></tr>
+        <tr><td>FY2023</td><td>$9,032M</td><td>$2,158M</td><td>$11,190M</td><td>—</td></tr>
+        <tr><td>FY2024</td><td>$10,954M</td><td>$2,448M</td><td>$13,402M</td><td>—</td></tr>
+        <tr><td>FY2025</td><td>$11,700M（~21.1M 股）</td><td>$2,756M</td><td>$14,456M</td><td>逐年加码</td></tr>
+        <tr class="hl"><td><strong>3 年累计</strong></td><td><strong>$31,686M</strong></td><td><strong>$7,362M</strong></td><td><strong>$39,048M</strong></td><td>占同期净利约 90%+</td></tr>
+        <tr><td>Q1 2026 单季</td><td>$4,035M（7.8M 股）</td><td>$777M</td><td>$4,812M</td><td>约 180% 季度 FCF</td></tr>
+      </table>
+    </div>
+    <p style="font-size:13px; color: var(--text2); margin-top:8px"><strong>Trailing Shareholder Yield</strong> ≈ FY2025 返还 $14.46B / 市值 $461B ≈ <strong>3.1%</strong>（其中回购 ~2.5% + 股息 ~0.66%）。<span class="hl-t">MA 是"低股息 + 大额回购"的典型美股资本返还结构</span>——回购是主菜、股息是辅。过去 3 年累计返还约 $390 亿，占同期净利润约 90%+，是一台高股东回报的复利机器。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.2 给的方式好不好？</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>真实缩股 · 含金量较高</strong>：全年加权摊薄股数从 FY2023 的 944M → FY2024 927M → FY2025 913M → Q1 2026 893M（年均缩 1.5-2.3%）。虽然美股回购多入库存股（用于对冲 SBC），但 MA 摊薄股数<strong>连年实打实下降</strong>，说明回购力度远超 SBC 稀释、真实增厚每股内在价值。Q1 调整后 EPS +23% 高于净利 +20%，差额正是缩股贡献</li>
+      <li><strong>回购择时中性</strong>：MA 常年匀速回购，不刻意择时；本季 $4.0B 回购于股价从峰值回落区间执行，均价好于 52 周高点，纪律性尚可</li>
+      <li><span class="warn-t">杠杆化返还</span>：本季返还 $4.8B > 季度 FCF $2.66B（约 180%），靠现金余额 + 杠杆支撑，是 MA 呈净负债 -$107 亿、股东权益仅 $67 亿的原因。对 FCF 极强、融资成本极低（A+/A1）的收费桥，这是有意的资本结构优化（维持约 0.5x 净负债/EBITDA），但不是"全用赚的钱返还"</li>
+    </ul>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.3 能不能继续给、给多少？</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>已授权额度充裕</strong>：截至 2026-04-27 现有计划尚余约 <strong>$117 亿</strong> + 2025 年 12 月新批 <strong>$140 亿</strong>（现有 $120 亿完成后生效）= 可用约 $257 亿（约占市值 5.6%）· 执行历史可信（常年足额回购）</li>
+      <li><strong>常年增息</strong>：2025 年 12 月季度股息上调 14% 至 $0.87（年化 $3.48）· 派息率仅约净利 20%，增息空间充足</li>
+      <li><strong>(股息 + 回购) / FCF 覆盖度</strong>：FY2025 返还 $14.46B vs 全年 FCF（约 $14-15B）≈ 100% 左右；Q1 单季返还约 180% 季度 FCF——<strong>季度看略超 FCF，靠现金 + 杠杆补充</strong>。对融资成本极低、FCF 中双位数增长的公司，杠杆化返还可持续</li>
+      <li><strong>不是被动借债回购</strong>：MA 主动优化资本结构（低成本发债 + 缩股），而非因经营不善举债。净负债 -$107 亿相对 ~$15B 年 FCF 极轻（净负债/EBITDA 约 0.5x），杠杆安全，A+/A1 评级稳固</li>
+    </ul>
+    <p><strong>模块小结</strong>：<span class="hl-t">积极且高含金量</span>——常年增息（2025 年 +14%）+ 真实缩股（年均 1.5-2.3%）+ 3 年累计返还约 $390 亿（占净利 90%+）+ 约 $257 亿可用额度 + FCF 大体覆盖。MA 是美股"回购 + 增息"复利机器的标杆，唯一需注意的是杠杆化返还（季度返还超 FCF、呈净负债），但对这种融资成本极低、ROIC ~55-60% 的顶级收费桥完全可持续。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 13 ═══ -->
+<div class="section">
+  <div class="stitle">模块 13 · 海图评分卡 + 投资决策</div>
+
+  <div class="scorecard">
+    <h3 style="font-size:15px; color:var(--text); margin-bottom: 16px; font-family: 'Segoe UI',sans-serif;">海图评分卡（6 维 A-D）</h3>
+    <div class="score-grid">
+      <div class="score-card"><div class="score-letter s-a">A</div><div class="score-body"><h4>1. 生意可预测性</h4><p>收费桥模式极清晰、支付量与 GDP/消费强相关、盈利波动极小、业务能见度顶级、一句话说得清。</p></div></div>
+      <div class="score-card"><div class="score-letter s-a">A</div><div class="score-body"><h4>2. 经济护城河</h4><p>网络效应极宽 + 规模 + 转换成本 + 双寡头 + VAS 加宽转换成本。稳定币是 10 年维度的护城河变量。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">A-</div><div class="score-body"><h4>3. 管理层质量</h4><p>Miebach 三引擎战略 + VAS 有机增长 + 对稳定币务实"收编"（BVNK）+ 极致资本返还纪律。杠杆化返还需留意。</p></div></div>
+      <div class="score-card"><div class="score-letter s-a">A</div><div class="score-body"><h4>4. 财务质量</h4><p>58.4% 营业利润率 + ROIC ~55-60% + OCF +26% + Capex 仅 4%。但净负债 -$107 亿（非净现金）+ 负股东权益（库存股）。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">A-</div><div class="score-body"><h4>5. 资本配置纪律</h4><p>常年增息 + 真实缩股 1.5-2.3%/年 + $140 亿新授权 + 3 年返还 $390 亿。季度返还超 FCF（杠杆化）。</p></div></div>
+      <div class="score-card"><div class="score-letter s-c">C+</div><div class="score-body"><h4>6. 估值与安全边际</h4><p>Forward P/E 26.9x / FCF Yield 3.3% / 折价仅 6% vs 公允 $560 · <strong>无安全边际，当前价已满价</strong>。</p></div></div>
+    </div>
+
+    <div class="flag-row">
+      <strong>红旗排查</strong>：会计层面无重大疑点（无 Visa 式 Class B 诉讼稀释、应计诉讼仅 $339M 相对轻）。主要红旗为 <strong>估值无安全边际</strong>（Forward P/E 26.9x、折价仅 6%）+ 稳定币/A2A 长期脱媒威胁 + 中东跨境短期逆风 + <strong>净负债/负股东权益</strong>（库存股 -$873 亿导致账面净值极低）。触发"<span class="warn-t">满估值 + 结构性长期变量</span>"——尽管 6 维基础质量顶级（3 个 A），综合评级<strong>降至「持有观望」</strong>。
+    </div>
+
+    <p style="margin-top:18px; font-size:14px; color:var(--text); line-height:1.85;"><strong>综合评级</strong>：<span class="rating-badge rating-hold" style="font-size:14px;">持有观望</span>。生意质量是全球顶级（6 维有 3 个 A、增速比 Visa 更快），但估值维度 C+（满价、安全边际仅 6%）→ 降至持有观望。核心判断：<strong>MA 的问题从来不是生意好不好，而是价格贵不贵——当前 $526.74 没有 25% 安全边际，现有持仓者继续复利持有，新买入者应等回调至 $448-500 区间再分批建仓。</strong></p>
+  </div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">投资决策（精确价格 · USD）</h3>
+
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>项目</th><th>价格</th><th>说明</th></tr>
+      <tr><td>12 个月目标价（概率加权）</td><td><strong>$560</strong> (+6%)</td><td>中双位数 EPS 增长 + 估值维持 ~27x</td></tr>
+      <tr><td>悲观目标（30% 概率）</td><td>$455 (-14%)</td><td>中东逆风延续 + 估值压缩至 22x</td></tr>
+      <tr><td>乐观目标（25% 概率）</td><td>$660 (+25%)</td><td>VAS/跨境再加速 + 稳定币兑现 + 重估至 30x</td></tr>
+      <tr class="hl"><td>首仓建仓（估值中位数 $560 × 80%）</td><td><strong>$448</strong></td><td>距现价 -15% · 耐心等回调</td></tr>
+      <tr><td>二仓建仓（× 70%）</td><td>$392</td><td>-26% · 大幅回调机会</td></tr>
+      <tr><td>三仓建仓（× 60%）</td><td>$336</td><td>-36% · 黑天鹅级机会</td></tr>
+      <tr><td>止盈一档</td><td>$620</td><td>+18% · 减仓 25%</td></tr>
+      <tr><td>止盈二档</td><td>$680</td><td>+29% · 再减 25%</td></tr>
+      <tr><td>止盈三档</td><td>$740</td><td>+40% · 再减 25% · 最后 25% 长期复利持有</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.85;"><strong>建议总仓位</strong>：<strong>3-5%</strong>（核心质量仓 · 当前价满估值，应在回调至 $448-500 时分批建仓，不追高）。<strong>持有周期</strong>：5-10 年（长期复利 · 穿越中东逆风 + 稳定币范式变化）。<strong>关键监控指标</strong>：① 跨境量恢复节奏（中东逆风是否 Q2 消退）；② VAS 有机增速能否维持 +18%；③ 稳定币结算/BVNK 整合进展；④ Forward P/E 是否回落至 22x 以下（估值机会）；⑤ 切换交易与 GDV 本币增速。<strong>下次催化剂</strong>：2026-07-30 前后 Q2 2026 财报。</p>
+</div>
+
+<!-- ═══ 海图页末长评 ═══ -->
+<div class="section">
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记 · 1120 字</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p class="lead">支付双雄里，若说 Visa 是利润率之王，Mastercard 就是增速之王。它们是同一门生意的两个侧影：全球每一笔刷卡都抽一点过路费，58% 营业利润率、ROIC 逼近 60%、常年增息缩股。可正因为所有人都看懂了它的好，市场从不给它打折。Q1 净营收 +16%、调整后 EPS +23%、增值服务纯有机 +18%，业绩挑不出毛病——问题从来不在生意，在价格。</p>
+
+      <p>Mastercard 是全球第二大开放式支付网络，与 Visa 构成双寡头——它不发卡、不担持卡人信用风险，只做四方模式中间的"收费桥"。Q1 2026 净营收 $8.40B（+16%、货币中性 +12%）· 支付网络 +12% / VAS +22% 双板块 · GAAP EPS $4.35（+21%）· 调整后 EPS $4.60（+23%）· 营业利润率 58.4%。这是一门商业模式质量位居全球前列的生意。</p>
+
+      <h4>几个研判要点</h4>
+
+      <p><strong>一、两个"看穿"是读懂 MA 增长质量的钥匙。</strong> 看穿一：净营收 $8.40B 是<span class="hl-t">毛营收 $14.04B 减去返利与激励 $5.64B（占毛营收 40%）</span>后的净额——返利是 MA 支付给大发卡行的返点，以 contra-revenue 抵减营收，这一项 +23% 反映网络竞争激烈。看穿二：GAAP EPS $4.35 与调整后 $4.60 的差，来自重组费用 $0.18 + 股权投资净损失 $0.07。<span class="hl-t">调整后 EPS +23% 高于净利 +20%</span>，差额来自缩股 -2.3%——这是"净营收 +16% + 缩股 + 利润率扩张 = EPS +23%"的复利机器。</p>
+
+      <p><strong>二、增值服务是 MA 与 Visa 拉开身位的引擎。</strong> VAS 本季 $3.45B、约占净营收 41%、货币中性有机增长 +18%，<span class="hl-t">而且几乎零并购贡献——纯内生</span>。安全解决方案、数字认证、商业洞察需求强劲，把 MA 从"刷卡收费站"抬升为"支付 + 数据/安全平台"。这层软件属性正是市场给 MA 略高于 Visa 估值（26.9x vs 24.9x）的原因：用更高的价，买更快的增速。</p>
+
+      <p><strong>三、别把"净现金"安在 MA 头上——它是净负债。</strong> 很多人以为支付龙头都是现金堡垒，其实 MA<span class="warn-t">有息负债 $18.96B > 现金+短投 $8.22B，真实净负债 -$107 亿</span>，股东权益仅 $67 亿（因累计库存股 -$873 亿）。本季返还股东 $4.8B、约为季度 FCF 的 180%，靠现金 + 杠杆支撑。对一台融资成本极低（A+/A1）、ROIC 近 60% 的收费桥，有意维持约 0.5x 净负债/EBITDA 的杠杆是合理的资本结构优化，但要清楚这不是"全用赚的钱返还"，P/B 类账面估值对它也毫无意义。</p>
+
+      <p><strong>四、真正的长期变量是稳定币，短期变量是中东。</strong> 4 月跨境因中东冲突软化，管理层指 Q2 逆风最大、随后逐步恢复——这是短期噪音。更远的是稳定币/A2A 对高毛利跨境轨道的脱媒。MA 的对冲是"收编"：以 $15 亿收购稳定币基建商 BVNK，几乎所有卡已支持 Agent Pay，推出被 FIDO 采纳的 verifiable intent 标准卡住 agentic 商务的授权入口。相比 Visa，MA 少了 DOJ 借记诉讼这把近期悬剑，但同样受全球 interchange 费率监管压制。这些是 10 年维度的慢变量，却决定终局。</p>
+
+      <p><strong>五、12 个月目标价 $560，上行仅 +6%。</strong> 悲观 $455（30%，中东逆风 + 估值压缩）、基准 $575（45%，中双位数增长 + 估值维持）、乐观 $660（25%，VAS/跨境加速 + 稳定币兑现）。概率加权 $560。<strong>当前 $526.74 折价仅 6%，虽已从峰值回调 -12.6%、跌破 200 日线，但仍高于机械首仓 $448——没有 25% 安全边际。</strong>反向 DCF 显示市场已定价 ~11.5% 长期 FCF 增长，略低于实际趋势，是"合理满价、微幅折让"。</p>
+
+      <h4>海图研判</h4>
+
+      <p><strong>评级：持有观望</strong>（全球支付双雄中增速更快的一方 + 58% 营业利润率 + VAS 有机 +18% + 常年增息缩股的顶级组合，对垒 Forward P/E 26.9x 无安全边际 + 净负债 -$107 亿 + 中东跨境短期逆风 + 稳定币长期脱媒）。12 个月概率加权目标价 <strong>$560</strong>（+6%），叠加 0.66% 股息 = 总回报约 +7%。</p>
+
+      <p>操作建议：当前 $526.74 高于机械首仓 $448，<strong>不在最优机械建仓窗口</strong>，但已较峰值明显回调。耐心等回调至 $448-500 区间分批建首仓、$392 加二仓、$336 极端机会三仓。止盈三档 $620 / $680 / $740，最后 25% 长期复利持有。<strong>建议总仓位 3-5%</strong>（核心质量仓 · 回调时建，不追高）。持有周期 5-10 年。<span class="hl-t">关键纪律：现有持仓者继续让它复利，新买入者必须等价格给出安全边际——好生意也要好价格，MA 尤其如此。</span></p>
+
+      <h4>风险提示</h4>
+
+      <p>稳定币加速脱媒 / 中东逆风延续 / 满估值下的多重压缩 / interchange 费率监管 / 消费衰退——任一项都可能让股价跌至 $420-460。但世界级生意 + 58% 营业利润率 + ROIC 近 60% + TTM FCF ~$15B + 双寡头护城河构成质量底，<strong>$460-465 是较硬的估值底</strong>（52 周低 $464.52 + Forward P/E 22x 下限）。MA 的"底"比多数股票高，因为质量溢价难以完全消失。</p>
+
+      <p>关键叙事：<strong>"全球支付双寡头中增速更快的一方 + 58% 营业利润率 + 增值服务有机 +18% + 常年增息缩股复利"的世界级生意，对垒"Forward P/E 26.9x 无安全边际 + 净负债 -$107 亿 + 稳定币长期脱媒"的估值与结构性风险</strong>。MA 不是给追求便宜货的人——它几乎从不便宜；它是给愿意在回调时耐心建仓、然后让一台顶级复利机器慢慢滚雪球的长期投资者。下次催化剂：2026-07-30 前后 Q2 2026 财报。</p>
+
+      <p class="haitu-sign">—— 海图，灯下落笔，明日再观风浪。</p>
+
+      <p class="haitu-disc">⚠️ 免责声明：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，不构成任何投资建议。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div>《海图夜读》 · Mastercard MA Q1 2026 海图研判</div>
+  <div style="margin-top:6px;">发布日 2026-04-30 · 研判日 2026-07-11 · 数据来源 Mastercard Q1 2026 官方财报新闻稿（IR PDF + SEC 8-K/10-Q）+ 电话会 transcript</div>
+</footer>
+
+<script>
+let curTheme = 'light';
+function toggleTheme() {
+  curTheme = curTheme === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', curTheme);
+  renderCharts();
+}
+
+const palette = {
+  light: { accent: '#8a9a8e', accent2: '#7b8fa0', accent3: '#b08d7a', gold: '#b9a06a', red: '#b87070', green: '#7a9a7a', grid: '#e5ddd5', text: '#7a706a' },
+  dark:  { accent: '#8a9a8e', accent2: '#8fabbf', accent3: '#c9a48e', gold: '#c9b07a', red: '#c08080', green: '#8aaa8a', grid: '#3e3a35', text: '#a09890' }
+};
+
+let charts = {};
+function renderCharts() {
+  Object.values(charts).forEach(c => c && c.destroy && c.destroy());
+  charts = {};
+  const p = palette[curTheme];
+  Chart.defaults.color = p.text;
+  Chart.defaults.borderColor = p.grid;
+
+  const quarters = ['Q1 25','Q2 25','Q3 25','Q4 25','Q1 26'];
+  const rev = [7.25, 8.13, 8.61, 8.83, 8.40];
+  const yoy = [14, 17, 17, 18, 16];
+  charts.rev = new Chart(document.getElementById('chartRev'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { type:'bar', label: '净营收 ($B)', data: rev, backgroundColor: p.accent + 'CC', yAxisID: 'y' },
+      { type: 'line', label: 'YoY %', data: yoy, borderColor: p.red, backgroundColor: p.red, tension: 0.3, yAxisID: 'y1' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false }, y1: { position: 'right', grid: { drawOnChartArea: false }, ticks: { callback: v => v + '%' } } } }
+  });
+
+  const opMargin = [57.2, 57.0, 59.0, 57.0, 58.4];
+  const netMargin = [45.3, 46.0, 45.9, 46.2, 46.2];
+  charts.margin = new Chart(document.getElementById('chartMargin'), {
+    type: 'line',
+    data: { labels: quarters, datasets: [
+      { label: 'GAAP 营业利润率 %', data: opMargin, borderColor: p.green, backgroundColor: p.green + '22', tension: 0.3, fill: false },
+      { label: 'GAAP 净利率 %', data: netMargin, borderColor: p.accent2, backgroundColor: p.accent2 + '22', tension: 0.3, fill: false }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false, ticks: { callback: v => v + '%' } } } }
+  });
+
+  charts.segment = new Chart(document.getElementById('chartSegment'), {
+    type: 'doughnut',
+    data: {
+      labels: ['支付网络（净）', '增值服务 VAS'],
+      datasets: [{ data: [4.95, 3.45], backgroundColor: [p.accent, p.accent3] }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { font: { size: 11 } } } } }
+  });
+
+  const gaapEps = [3.59, 4.07, 4.34, 4.52, 4.35];
+  const adjEps = [3.73, 4.15, 4.38, 4.76, 4.60];
+  charts.eps = new Chart(document.getElementById('chartEps'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { label: 'GAAP 摊薄 EPS', data: gaapEps, backgroundColor: p.accent2 + 'CC' },
+      { label: '调整后摊薄 EPS', data: adjEps, backgroundColor: p.green + 'CC' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false, ticks: { callback: v => '$' + v } } } }
+  });
+
+  buildSankey();
+}
+
+function buildSankey() {
+  const p = palette[curTheme];
+  const labels = ['毛营收 $14.04','返利与激励 $5.64','净营收 $8.40','运营费用 $3.49','营业利润 $4.91','非经营净支出 $0.10','税前利润 $4.81','所得税 $0.93','GAAP 净利 $3.88'];
+  const data = {
+    type: 'sankey',
+    orientation: 'h',
+    node: { pad: 16, thickness: 20, line: { color: p.grid, width: 0.5 }, label: labels, color: [p.accent, p.red, p.green, p.red, p.green, p.red, p.accent2, p.red, p.green] },
+    link: {
+      source: [0, 0, 2, 2, 4, 4, 6, 6],
+      target: [1, 2, 3, 4, 5, 6, 7, 8],
+      value:  [5.64, 8.40, 3.49, 4.91, 0.10, 4.81, 0.93, 3.88],
+      color: [p.red+'55', p.green+'66', p.red+'55', p.green+'66', p.red+'55', p.green+'66', p.red+'55', p.green+'66']
+    }
+  };
+  const layout = { font: { size: 12, color: p.text }, paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)', margin: { l: 10, r: 10, t: 10, b: 10 } };
+  Plotly.react('sankey', [data], layout, { displayModeBar: false, responsive: true });
+}
+
+renderCharts();
+</script>
+
+</body>
+</html>

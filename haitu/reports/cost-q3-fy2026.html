@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-07-10 · Costco Q3 FY2026 财报已于 2026-05-28 发布 -->
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Costco COST Q3 FY2026 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+<meta name="description" content="全球会员制仓储零售之王 · 用极致低毛利换会员忠诚，靠 92% 续费率的会员费当'浮存收费机'赚走近半营业利润。Q3 营收 +11.6% / EPS +15.2% 连续三季加速 · 数字化 +21.5% · 净现金逾 140 亿美元。但 46x TTM 市盈率 / 2.2% FCF 收益率 / 现价高于内在价值约两成——顶级生意，极致估值，几无安全边际。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Costco COST Q3 FY2026 海图研判 · 海图夜读">
+<meta property="og:description" content="全球会员制仓储零售之王 · 用极致低毛利换会员忠诚，靠 92% 续费率的会员费当'浮存收费机'赚走近半营业利润。Q3 营收 +11.6% / EPS +15.2% 连续三季加速 · 数字化 +21.5% · 净现金逾 140 亿美元。但 46x TTM 市盈率 / 2.2% FCF 收益率 / 现价高于内在价值约两成——顶级生意，极致估值，几无安全边际。">
+<meta property="og:url" content="https://jacexie.github.io/haitu/reports/cost-q3-fy2026.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Costco COST Q3 FY2026 海图研判 · 海图夜读">
+<meta name="twitter:description" content="全球会员制仓储零售之王 · 92% 续费率的会员费浮存收费机 · Q3 营收 +11.6% / EPS +15.2% 连续三季加速 · 净现金逾 140 亿美元。但 46x TTM 市盈率、几无安全边际——顶级生意，极致估值。">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root { --bg:#f5f0eb; --bg2:#ece6df; --card:#ffffff; --card2:#f8f5f1; --border:#d9d0c7; --text:#4a4340; --text2:#7a706a; --text3:#a89f98; --accent:#8a9a8e; --accent2:#7b8fa0; --accent3:#b08d7a; --rose:#c09090; --gold:#b9a06a; --red:#b87070; --green:#7a9a7a; --shadow:rgba(0,0,0,0.06); --chart-grid:#e5ddd5; }
+[data-theme="dark"] { --bg:#1e1c1a; --bg2:#28251f; --card:#2e2a25; --card2:#363230; --border:#4a4540; --text:#d4ccc4; --text2:#a09890; --text3:#706860; --accent:#8a9a8e; --accent2:#8fabbf; --accent3:#c9a48e; --rose:#c09090; --gold:#c9b07a; --red:#c08080; --green:#8aaa8a; --shadow:rgba(0,0,0,0.3); --chart-grid:#3e3a35; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', serif; line-height: 1.75; font-size: 14.5px; transition: background .35s, color .35s; }
+a { color: var(--accent2); text-decoration: none; }
+.theme-bar { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); }
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+.toggle-switch { position: relative; width: 44px; height: 22px; background: var(--border); border-radius: 11px; cursor: pointer; transition: background .3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: var(--card); border-radius: 50%; transition: transform .3s; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+
+.hero { padding: 48px 24px 36px; text-align: center; border-bottom: 1px solid var(--border); }
+.hero-tag { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 3px 14px; border-radius: 20px; margin-bottom: 18px; }
+.hero h1 { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.pill { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: 'Segoe UI', sans-serif; font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow); }
+.pill strong { color: var(--text); }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle { font-size: 18px; font-weight: 700; color: var(--accent3); margin-bottom: 20px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+.stitle::before { content: ''; display: block; width: 4px; height: 20px; background: var(--accent3); border-radius: 2px; }
+
+.haitu-quip { display: flex; align-items: center; gap: 18px; background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 18px 24px; margin: 24px 0; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-quote { flex: 1; }
+.haitu-portrait { font-size: 15px; line-height: 1.65; color: var(--text); margin-bottom: 6px; font-weight: 600; }
+.haitu-rating-line { font-size: 13px; color: var(--text2); font-family: 'Segoe UI', sans-serif; }
+.rating-badge { display: inline-block; padding: 2px 12px; border-radius: 12px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; margin-left: 4px; }
+.rating-hold { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+
+.haitu-essay { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 28px 32px; margin: 24px 0 20px; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-essay-header { display: flex; align-items: center; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.haitu-avatar-sm { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); background: var(--red); box-shadow: 0 2px 8px rgba(184,112,112,0.2); }
+.haitu-name-lg { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 28px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 4px; }
+.haitu-essay-tag { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; }
+.haitu-essay-body { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 15px; line-height: 2.0; color: var(--text); }
+.haitu-essay-body p { margin-bottom: 14px; }
+.haitu-essay-body p.lead { font-size: 16px; font-style: italic; color: var(--text2); margin-bottom: 18px; }
+.haitu-essay-body strong { color: var(--text); font-weight: 700; }
+.haitu-essay-body h4 { font-size: 14px; color: var(--accent3); margin: 18px 0 10px; font-family: 'Segoe UI', sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+.haitu-sign { text-align: right; margin-top: 18px; font-family: 'Georgia', serif; font-size: 14px; color: var(--text2); font-style: italic; }
+.haitu-disc { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); font-style: italic; line-height: 1.7; }
+
+.stock-snap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px; }
+.snap-item { text-align: center; }
+.snap-label { font-family: 'Segoe UI', sans-serif; font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.snap-val { font-family: 'Segoe UI', sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+.snap-val.up { color: var(--green); }
+.snap-val.dn { color: var(--red); }
+.snap-sub { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow); }
+.kpi-l { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.badge { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+.up { background: rgba(122,154,122,.15); color: var(--green); }
+.dn { background: rgba(184,112,112,.15); color: var(--red); }
+.nt { background: rgba(123,143,160,.15); color: var(--accent2); }
+
+.tbl-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow); }
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI', sans-serif; font-size: 13px; }
+.tbl th { background: var(--card2); color: var(--text3); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); background: var(--card2); }
+
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); }
+.ctitle { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 260px; }
+
+.cmt { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 26px; line-height: 1.95; font-size: 14px; box-shadow: 0 1px 4px var(--shadow); color: var(--text); }
+.cmt p { margin-bottom: 14px; }
+.cmt p:last-child { margin-bottom: 0; }
+.cmt strong { color: var(--text); }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+
+.bscore { display: flex; align-items: center; gap: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; margin-bottom: 12px; box-shadow: 0 1px 4px var(--shadow); }
+.circle { width: 62px; height: 62px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; flex-shrink: 0; border: 3px solid; font-family: 'Segoe UI', sans-serif; }
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 4px; color: var(--text); }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.moat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+.moat-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); border-left: 4px solid var(--accent); }
+.moat-card.wide { border-left-color: var(--green); }
+.moat-card.narrow { border-left-color: var(--gold); }
+.moat-card.none { border-left-color: var(--red); }
+.moat-card h5 { font-size: 13px; color: var(--text); margin-bottom: 6px; }
+.moat-card .moat-rate { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.moat-card.wide .moat-rate { background: rgba(122,154,122,.18); color: var(--green); }
+.moat-card.narrow .moat-rate { background: rgba(185,160,106,.18); color: var(--gold); }
+.moat-card.none .moat-rate { background: rgba(184,112,112,.18); color: var(--red); }
+.moat-card p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+
+.ec-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 14px; box-shadow: 0 1px 3px var(--shadow); }
+.ec-badge { flex-shrink: 0; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-top: 2px; font-family: 'Segoe UI', sans-serif; }
+.ec-bull { background: rgba(122,154,122,.18); color: var(--green); }
+.ec-bear { background: rgba(184,112,112,.18); color: var(--red); }
+.ec-neut { background: rgba(185,160,106,.18); color: var(--gold); }
+.ec-body { flex: 1; }
+.ec-title { font-weight: 600; color: var(--text); margin-bottom: 3px; font-size: 14px; }
+.ec-note { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.dcf-note { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.dcf-note strong { color: var(--text); }
+
+.scorecard { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow); }
+.score-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.score-card { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px; }
+.score-letter { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Segoe UI', sans-serif; font-weight: 800; font-size: 22px; flex-shrink: 0; border: 3px solid; }
+.s-a { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.12); }
+.s-bp { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.06); }
+.s-b { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.10); }
+.s-bm { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.06); }
+.s-c { color: var(--red); border-color: var(--red); background: rgba(184,112,112,.08); }
+.score-body h4 { font-size: 13px; color: var(--text); margin-bottom: 4px; }
+.score-body p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+.flag-row { margin-top: 16px; padding: 12px 16px; background: rgba(184,112,112,.08); border: 1px solid rgba(184,112,112,.3); border-radius: 8px; font-size: 13px; color: var(--text2); }
+.flag-row strong { color: var(--red); }
+
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center; box-shadow: 0 1px 4px var(--shadow); }
+.pbox .pl { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; }
+.pbox .pv { font-family: 'Segoe UI', sans-serif; font-size: 28px; font-weight: 800; margin-bottom: 5px; }
+.pbox .pn { font-size: 12px; color: var(--text3); line-height: 1.5; }
+.pc { color: var(--red); } .pf { color: var(--gold); } .ps { color: var(--green); }
+
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.risk-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); position: relative; overflow: hidden; }
+.risk-card::before { content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent); }
+.risk-card.r1::before { background: var(--green); }
+.risk-card.r2::before { background: rgba(122,154,122,.6); }
+.risk-card.r3::before { background: var(--gold); }
+.risk-card.r4::before { background: var(--rose); }
+.risk-card.r5::before { background: var(--red); }
+.risk-card h5 { font-size: 14px; margin-bottom: 6px; color: var(--text); }
+.risk-score { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.r1 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r2 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r3 .risk-score { background: rgba(185,160,106,.18); color: var(--gold); }
+.r4 .risk-score { background: rgba(192,144,144,.18); color: var(--rose); }
+.r5 .risk-score { background: rgba(184,112,112,.18); color: var(--red); }
+.risk-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+footer { background: var(--card2); border-top: 1px solid var(--border); padding: 24px; text-align: center; color: var(--text3); font-size: 12px; margin-top: 40px; line-height: 1.8; }
+@media (max-width: 768px) { .cgrid,.pgrid { grid-template-columns: 1fr; } .hero h1 { font-size: 22px; } .kpi-grid { grid-template-columns: 1fr 1fr; } .stock-snap { grid-template-columns: 1fr 1fr; } .haitu-essay-header { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/COST" target="_blank" rel="noopener" title="在雪球查看 COST 实时行情">雪球 COST</a>
+  </div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">Q3 FY2026 财报发布 · 2026-05-28 &nbsp;|&nbsp; 海图研判 · 2026-07-11</div>
+  <h1>Costco 好市多 · FY2026 Q3 财报深度分析</h1>
+  <div class="hero-sub">NASDAQ: COST &nbsp;|&nbsp; 财季截至 2026-05-10（12 周） &nbsp;|&nbsp; 价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill">股价 <strong>$913.94</strong> <span style="color:var(--red)">距高点 -17%</span></div>
+    <div class="pill">市值 <strong>$405B</strong></div>
+    <div class="pill">Q3 净销售 <strong>$69.15B</strong> <span style="color:var(--green)">+11.6%</span></div>
+    <div class="pill">GAAP EPS <strong>$4.93</strong> <span style="color:var(--green)">+15.2%</span></div>
+    <div class="pill">会员续费率 <strong>92.2%</strong>（美加）</div>
+    <div class="pill">TTM P/E <strong>~46x</strong> <span style="color:var(--gold)">无安全边际</span></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 海图页首短评 ═══ -->
+<div class="haitu-quip">
+  <div class="haitu-quote">
+    <div class="haitu-portrait">全球会员制仓储零售之王——它几乎以成本价把货卖给你，只为收你一年一百多美元的会员费；而全球 8290 万个家庭心甘情愿续着，续费率 92%。这是一台靠"浮存收费机"赚走近半营业利润的复利机器。Q3 营收 +11.6% / EPS +15.2% 连续三季加速，数字化 +21.5%，净现金逾 140 亿美元。但 46x TTM 市盈率、2.2% FCF 收益率、现价高于内在价值约两成——顶级生意，极致估值，几无安全边际。</div>
+    <div class="haitu-rating-line">评级：<span class="rating-badge rating-hold">持有观望</span> · 12 个月概率加权目标价 $845（−8%）· 会员制护城河 + 高 ROIC 复利机器，对垒 46x 市盈率的满估值与近乎完美的定价，几无容错空间</div>
+  </div>
+</div>
+
+<!-- ═══ 市场数据快照 ═══ -->
+<div class="section">
+  <div class="stitle">市场数据快照（2026-07-10 收盘）</div>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">股价（美元）</div><div class="snap-val">$913.94</div><div class="snap-sub">2026-07-10 收盘 · 距 52 周高 -17%</div></div>
+    <div class="snap-item"><div class="snap-label">市值</div><div class="snap-val">$405B</div><div class="snap-sub">全球会员制零售龙头</div></div>
+    <div class="snap-item"><div class="snap-label">TTM P/E</div><div class="snap-val dn">~46x</div><div class="snap-sub">TTM EPS $19.88</div></div>
+    <div class="snap-item"><div class="snap-label">Forward P/E</div><div class="snap-val nt">~44.6x / 40.3x</div><div class="snap-sub">FY26 / FY27 共识</div></div>
+    <div class="snap-item"><div class="snap-label">P/S (TTM)</div><div class="snap-val">~1.4x</div><div class="snap-sub">薄利多销 · 看 P/E 非 P/S</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间</div><div class="snap-val">$844 - $1,097</div><div class="snap-sub">已从高点回落 17%</div></div>
+    <div class="snap-item"><div class="snap-label">股息率</div><div class="snap-val">~0.64%</div><div class="snap-sub">$5.88/年 · 低息 + 特别股息</div></div>
+    <div class="snap-item"><div class="snap-label">FCF Yield</div><div class="snap-val dn">~2.2%</div><div class="snap-sub">TTM FCF ~$8.8B</div></div>
+    <div class="snap-item"><div class="snap-label">现金 + 短投</div><div class="snap-val">$20.0B</div><div class="snap-sub">2026-05-10 末</div></div>
+    <div class="snap-item"><div class="snap-label">有息负债</div><div class="snap-val">$5.78B</div><div class="snap-sub">长债 5.68 + 短借 0.10</div></div>
+    <div class="snap-item"><div class="snap-label">真实净现金</div><div class="snap-val up">+$14.2B</div><div class="snap-sub">含租赁后仍 +$11.5B</div></div>
+    <div class="snap-item"><div class="snap-label">TTM ROIC / ROE</div><div class="snap-val up">~30% / ~27%</div><div class="snap-sub">资本回报顶级</div></div>
+  </div>
+  <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">数据时点：股价 <strong>$913.94（2026-07-10 收盘）</strong>· 财务数据来源 Costco Q3 FY2026 官方财报（SEC 8-K，2026-05-28 发布 + 10-Q，2026-06-03 备案，财季 12 周截至 2026-05-10）· 货币 USD 单口径。Costco 财年截至 8 月最后一个周日，FY2026 止于 2026-08-30。<strong>关键提醒</strong>：Costco 仅披露 GAAP 口径，不披露 Non-GAAP 净利/EPS，亦无重大少数股东损益——<span class="hl-t">GAAP = 唯一口径</span>。资产负债表科目标注"2026-05-10 末"。</p>
+</div>
+
+<!-- ═══ Q3 FY2026 KPI ═══ -->
+<div class="section">
+  <div class="stitle">Q3 FY2026 核心业绩（USD · 12 周截至 2026-05-10）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">净销售额</div><div class="kpi-v">$69.15B</div><span class="badge up">+11.6% YoY</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">连续三季加速</div></div>
+    <div class="kpi"><div class="kpi-l">会员费收入</div><div class="kpi-v">$1,373M</div><span class="badge up">+10.7%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">占营收 1.9% · 占营业利润 ~49%</div></div>
+    <div class="kpi"><div class="kpi-l">总营收</div><div class="kpi-v">$70.53B</div><span class="badge up">+11.6%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">净销售 + 会员费</div></div>
+    <div class="kpi"><div class="kpi-l">经营利润</div><div class="kpi-v">$2,815M</div><span class="badge up">+11.3%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">经营利润率 3.99%（占总营收）</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 净利润</div><div class="kpi-v">$2,192M</div><span class="badge up">+15.2%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">净利增速 > 营收增速</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 摊薄 EPS</div><div class="kpi-v">$4.93</div><span class="badge up">+15.2%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">基本 EPS $4.94</div></div>
+    <div class="kpi"><div class="kpi-l">毛利率（商品口径）</div><div class="kpi-v">11.04%</div><span class="badge dn">-21bps</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">油价拖累 · 剔油价 +1bp</div></div>
+    <div class="kpi"><div class="kpi-l">SG&A 率</div><div class="kpi-v">8.96%</div><span class="badge up">-20bps</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">经营杠杆持续释放</div></div>
+    <div class="kpi"><div class="kpi-l">全球同店 comp</div><div class="kpi-v">+9.8%</div><span class="badge up">ex-油汇 +6.6%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">美国 +9.4% / 加 +10.7%</div></div>
+    <div class="kpi"><div class="kpi-l">数字化 comp</div><div class="kpi-v">+21.5%</div><span class="badge up">流量 +37%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">个性化推荐带 ~$50 亿电商</div></div>
+    <div class="kpi"><div class="kpi-l">付费会员（百万）</div><div class="kpi-v">82.9</div><span class="badge up">+4.1%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">行政会员 41.2M（+9.6%）</div></div>
+    <div class="kpi"><div class="kpi-l">美加续费率</div><div class="kpi-v">92.2%</div><span class="badge up">环比 +10bps</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">全球 89.7% 持平</div></div>
+  </div>
+</div>
+
+<!-- ═══ 看穿桥接 高亮框 ═══ -->
+<div class="section">
+  <div class="stitle">本季必看 · 两个"看穿"：会员费才是利润引擎、毛利率 -21bps 别误读</div>
+  <div class="cmt">
+    <p><strong>Costco 的利润表有两个必须"看穿"的地方，看不穿就会把它误读成一家"3% 净利率的普通超市"。</strong></p>
+    <p><strong>看穿一：会员费才是真正的利润引擎，商品零售基本"以成本价卖货换客流"。</strong> 很多人看到 Costco 净利率只有约 3%，就以为它是薄利的普通零售商。真相是——<span class="hl-t">会员费仅占营收 1.9%，却贡献了约 49% 的营业利润，且几乎 100% 落入利润</span>。剔除会员费后，商品零售的经营利润率只有约 2%。Costco 的本质是"用近乎成本价的商品供养一家会员费订阅公司"，$31.57 亿递延会员费更是一笔类似保险浮存的无息负债。</p>
+    <div class="tbl-wrap" style="margin:14px 0;">
+      <table class="tbl">
+        <tr><th>利润拆解（$M）</th><th>Q3 FY2026</th><th>说明</th></tr>
+        <tr><td>净销售额（商品零售）</td><td>69,154</td><td>+11.6%</td></tr>
+        <tr><td><span class="hl-t">商品零售经营利润（估算）</span></td><td><span class="hl-t">~1,442</span></td><td>经营利润 − 会员费</td></tr>
+        <tr><td>商品零售经营利润率</td><td>~2.1%</td><td>薄如刀锋</td></tr>
+        <tr><td><span class="hl-t">＋ 会员费收入</span></td><td><span class="hl-t">1,373</span></td><td>近 100% 毛利 · 占营业利润 ~49%</td></tr>
+        <tr class="hl"><td><strong>经营利润合计</strong></td><td><strong>2,815</strong></td><td><strong>+11.3%</strong></td></tr>
+      </table>
+    </div>
+    <p><strong>看穿二：报告毛利率 -21bps 看着走低，真相是"经营杠杆压过了毛利微降"。</strong> 报告口径商品毛利率 11.04% 同比 -21bps，容易被误读成"利润率恶化"。但拆开看：<span class="hl-t">-21bps 主因是油价拖累（低毛利、高单价的加油业务稀释毛利率），剔除油价后反而 +1bp</span>；真正反映商品经营的 core-on-core 仅 -9bps（生鲜/食品杂货毛利走低 + 油价推高运输成本），LIFO 还贡献 +14bps 利好。同时 <strong>SG&A 率压降 20bps</strong> 体现清晰的经营杠杆——于是经营利润仍 +11.3%、净利 +15.2%、EPS +15.2%。营收与 EPS 增速连续三季加速（营收 +8.2%→+9.1%→+11.6%；EPS +11.4%→+13.9%→+15.2%），这是一台运转极顺的复利机器，而非利润率恶化的普通超市。</p>
+  </div>
+</div>
+
+<!-- ═══ 趋势图 ═══ -->
+<div class="section">
+  <div class="stitle">关键指标趋势</div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">净销售额（$B）& 同比增速（近 5 季）</div><div class="cwrap"><canvas id="chartRev"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">三条利润率曲线（%，经营杠杆可视化）</div><div class="cwrap"><canvas id="chartMargin"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">销售地区结构（估算 · 占净销售）</div><div class="cwrap"><canvas id="chartSegment"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">摊薄 EPS（$ · 近 5 季）</div><div class="cwrap"><canvas id="chartEps"></canvas></div></div>
+  </div>
+  <p style="margin-top:4px; font-size:12px; color:var(--text3); line-height:1.6;">＊ Q4 FY2025 为 16 周财季（其余为 12 周），规模非同口径，图中已标注；同比增速仅列示可比的 FY2026 三季。地区结构为管理层披露的粗略销售占比（美国约 73% / 加拿大约 14% / 其他国际约 13%），Costco 不单列分部销售额。</p>
+</div>
+
+<!-- ═══ 桑基图 ═══ -->
+<div class="section">
+  <div class="stitle">Q3 FY2026 资金流向桑基图（$B）</div>
+  <div class="ccard">
+    <div id="sankey" style="width:100%;height:480px;"></div>
+    <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">说明（$M 精确值）：净销售 $69,154 + 会员费 $1,373 → 总营收 $70,527 → 商品成本 $61,519 + SG&A $6,193 + 经营利润 $2,815；经营利润 $2,815 + 净利息及其他 +$123（利息收入及其他 $155 − 利息费用 $32）→ 税前利润 $2,938 → 所得税 $746（有效税率 25.4%）+ GAAP 净利 $2,192。<span class="hl-t">每个中间节点流入=流出，闭合平衡</span>。注意：会员费 $1,373 虽仅占总营收 1.9%，却近乎全额转化为利润——这是理解 Costco 盈利结构的钥匙。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 1 ═══ -->
+<div class="section">
+  <div class="stitle">模块 1 · 公司概览与背景</div>
+  <div class="cmt">
+    <p><strong>Costco Wholesale Corporation 好市多</strong>（NASDAQ: COST），总部华盛顿州 Issaquah。前身 Price Club（1976）与 Costco（1983）于 1993 年合并，是全球最大的会员制仓储量贩零售商。财年截至 8 月最后一个周日，<strong>FY2026 止于 2026-08-30</strong>；本报告为 Q3 FY2026（12 周截至 2026-05-10）。</p>
+
+    <p><strong>核心叙事</strong>：Costco 的生意可以用一句话说清——<span class="hl-t">它几乎以成本价把海量精选商品卖给会员，只为收取一年一交的会员费，再靠 92% 的续费率把这笔会员费变成一台"浮存收费机"</span>。截至发布日 <strong>931 家门店</strong>（美国及波多黎各 639、加拿大 115、墨西哥 43、日本 37、英国 29、韩国 20、澳大利亚 15、台湾 14、中国 7 等），付费会员 8290 万、持卡人总数 1.49 亿。这是一门商品毛利率被死死压在约 11%、净利率仅约 3%、却靠会员费 + 极高周转 + ~30% ROIC 实现长期复利的独特零售模式。</p>
+
+    <p><strong>三大增长引擎</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>同店销售（Comp）</strong>——全公司 comp +9.8%（剔除油价/汇率 +6.6%），客流 +2.4% + 客单 +7.3% 双轮驱动，是基本盘</li>
+      <li><strong>会员费（Membership）</strong>——+10.7% 至 $13.73 亿，行政会员 +9.6%、续费率 92.2%，是高毛利现金流核心</li>
+      <li><strong>数字化 / 电商</strong>——数字化 comp +21.5%、站点/App 流量 +37%、AI 搜索三位数增长，给实体护城河装上新引擎</li>
+    </ul>
+
+    <p><strong>股权与治理</strong>：单一 A 类普通股结构，无双重股权，摊薄股数常年稳定在约 4.445 亿股。2019 年已回购台湾子公司少数权益，故全部净利归属于 Costco。治理稳健、无关联交易疑点、无 VIE 结构（美股直接持股）。</p>
+
+    <p><strong>能力圈检验</strong>：会员制仓储零售是极清晰、极易理解的顶级好生意（一句话能说清怎么赚钱）。<span class="warn-t">唯一的"黑箱"不在生意本身，而在价格</span>——市场长期给予 Costco 40-50x 的市盈率，任何对"该给多少倍"的判断都带有主观性。此外，Section 301 关税退款、油价波动对毛利率的短期扰动，是需持续跟踪的次要变量。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 2 ═══ -->
+<div class="section">
+  <div class="stitle">模块 2 · 管理层评估</div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>Ron Vachris · CEO（2024 年 1 月至今） + Gary Millerchip · CFO</h4>
+      <p>Vachris 1982 年从加油站员工起步、40 余年内部晋升至 CEO，是 Costco"从内部培养、文化极稳"传统的化身，接替传奇 CEO Craig Jelinek。CFO Millerchip 2023 年由 Kroger 加入。<span class="hl-t">管理层务实、克制、不喜促销式沟通</span>——电话会坦诚披露 core-on-core 毛利走低、付费会员增速"正常化"至 +4.1%、门店下调等中性信息，不粉饰。战略上专注"性价比飞轮 + 会员价值 + 有节奏的全球开店（每年净新开 30+ 家目标）+ 数字化补强"，几十年如一日不追风口。海图判断：这是一支把"守住会员信任"置于短期财报之上的经理人团队。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>资本配置 · 高 ROIC 再投资 + 克制回购 + 周期性特别股息</h4>
+      <p>
+      <strong>再投资优先</strong>：把绝大多数现金投入高 ROIC（~30%）的新店扩张与供应链，FY2026 资本开支约 $65 亿，这是最好的资本用途。<br>
+      <strong>回购极其克制</strong>：过去三年摊薄股数几乎不变（4.445 亿股），回购规模仅够抵消 RSU 稀释——<span class="hl-t">Costco 刻意不在高估值下大额回购自家股票，这是纪律而非缺陷</span>。<br>
+      <strong>分红为主 + 特别股息</strong>：常规季度股息刚从 $1.30 上调至 $1.47（+13%），并有派发大额特别股息传统（2024 年 1 月派 $15/股，约 $67 亿）。当现金堆积时以特别股息一次性返还，而非高位回购——教科书式的资本配置克制。
+      </p>
+    </div>
+  </div>
+
+  <div class="cmt">
+    <p><strong>长期主义测试</strong>：✅ Costco 是长期主义的标杆——数十年坚持"把省下的钱还给会员"的低毛利飞轮，宁可牺牲短期毛利也要维护会员信任（Q2 曾主动承诺将 Section 301 关税退款返还会员）。<strong>坦诚度</strong>：电话会披露详尽，主动说明毛利结构、增速正常化、门店节奏调整。<strong>利益绑定</strong>：管理层持股比例不高（成熟大盘股常态），但内部晋升文化 + 长期薪酬与经营指标挂钩，价值观高度一致。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 3 ═══ -->
+<div class="section">
+  <div class="stitle">模块 3 · 商业模式深度解析</div>
+  <div class="cmt">
+    <p><strong>海图"一句话测试"</strong>：<span class="hl-t">Costco 几乎以成本价把精选商品卖给会员——商品零售只赚约 2% 的经营利润率，真正的钱来自一年一交、续费率 92% 的会员费，这笔近乎 100% 毛利的"浮存收费"贡献了约一半营业利润。</span></p>
+
+    <p><strong>飞轮机制</strong>：低价 → 吸引会员 → 会员费 + 巨大采购量 → 向供应商压价 → 更低价 → 更多会员。Costco 把商品加价率硬性封顶（多数 ≤14%、Kirkland 自有品牌更低），主动放弃商品毛利，用"极致性价比"锁住会员，再从会员费和规模周转里赚钱。<span class="hl-t">SKU 精简（约 3,800 个 vs 沃尔玛数万个）+ 大包装 + 寻宝式陈列</span>带来极高的单店周转和存货效率（存货 $194 亿、周转极快）。</p>
+
+    <p><strong>Q3 FY2026 收入结构</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>收入项</th><th>Q3 FY26</th><th>YoY</th><th>性质</th></tr>
+        <tr><td>净销售额 Net sales</td><td>$69.15B</td><td>+11.6%</td><td>商品零售 · 薄利（经营利润率 ~2%）</td></tr>
+        <tr><td>会员费 Membership fees</td><td>$1.37B</td><td>+10.7%</td><td>近 100% 毛利 · 占营业利润 ~49%</td></tr>
+        <tr class="hl"><td>总营收 Total revenue</td><td>$70.53B</td><td>+11.6%</td><td>—</td></tr>
+      </table>
+    </div>
+
+    <p style="margin-top:14px;"><strong>单位经济与议价能力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>会员费是利润皇冠</strong>——一年一交、预收递延、近乎无成本，续费率 92%（美加）意味着极高的收入可预测性与现金前置</li>
+      <li><strong>对供应商议价能力</strong>：极强——巨大采购量 + SKU 精简 + Kirkland 自有品牌，让 Costco 拿到全行业最低进货价</li>
+      <li><strong>对会员"议价"</strong>：靠让利维系——Costco 主动把利润让给会员（涨价谨慎、关税退款返还），换取黏性而非榨取</li>
+      <li><strong>行政会员</strong>——4120 万（+9.6%），贡献绝大部分销售额，增速显著高于普通会员，是消费升级的核心</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══ 模块 4 ═══ -->
+<div class="section">
+  <div class="stitle">模块 4 · 经济护城河分析（5 维）</div>
+  <div class="moat-grid">
+    <div class="moat-card wide">
+      <h5>1. 成本/规模优势</h5>
+      <span class="moat-rate">极宽</span>
+      <p>约 $2,880 亿年采购量 + SKU 精简 + Kirkland 自有品牌 → 全行业最低进货价，别人无法在同等价格下盈利。<strong>趋势：加宽</strong>（规模仍在增长）。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>2. 转换成本 / 会员黏性</h5>
+      <span class="moat-rate">宽</span>
+      <p>92% 续费率 + 会员费沉没成本 + "回本心理"驱动多消费。会员一旦习惯即极难离开。<strong>趋势：稳定偏加宽</strong>（数字化提升黏性）。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>3. 无形资产 / 品牌</h5>
+      <span class="moat-rate">宽</span>
+      <p>"Costco = 极致性价比 + 品质可信"的品牌认知 + Kirkland 已成独立强品牌。信任是数十年让利积累的结果。<strong>趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>4. 网络效应</h5>
+      <span class="moat-rate">中</span>
+      <p>会员规模 → 采购议价 → 更低价 → 更多会员的"准网络效应"，但弱于平台型双边网络。<strong>趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>5. 有效规模</h5>
+      <span class="moat-rate">宽</span>
+      <p>仓储会员制赛道在多数市场只能容纳少数玩家（美国 Costco/Sam's Club/BJ's），Costco 单店效率碾压。<strong>趋势：稳定</strong>。</p>
+    </div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>10 年后护城河会更宽还是更窄？</strong> <span class="hl-t">大概率更宽</span>。成本优势随采购规模扩大而增强，会员黏性随数字化（个性化推荐带 ~$50 亿电商、转化率 3 倍）而加深，Kirkland 品牌力持续上行。与许多零售商被电商颠覆不同，Costco 的"寻宝式线下体验 + 极致低价 + 会员费商业模式"很难被亚马逊等纯电商复制——<strong>亚马逊可以更便利，但难以更便宜，而 Costco 把"便宜 + 品质"做到了极致</strong>。真正的慢变量是海外扩张（中国、日本仍处早期）能否复制美国的单店经济。</p>
+    <p><strong>定价权</strong>：独特——Costco 的"定价权"体现在<strong>克制不涨价</strong>上（主动让利换黏性），会员费涨价谨慎（2024 年 9 月美加涨价，约贡献会员收入增长的 1/4 强，剔除后仍 +7%）。这种"反向定价权"正是其护城河最深的地方。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 5 ═══ -->
+<div class="section">
+  <div class="stitle">模块 5 · 财务深度分析</div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 12px 0; font-family: 'Segoe UI',sans-serif;">5.1 近 5 季度趋势（口径：Q4 为 16 周，其余 12 周）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>指标</th><th>Q3 FY25</th><th>Q4 FY25*</th><th>Q1 FY26</th><th>Q2 FY26</th><th>Q3 FY26</th></tr>
+      <tr><td>净销售额（$M）</td><td>61,965</td><td>84,432</td><td>65,978</td><td>68,242</td><td>69,154</td></tr>
+      <tr><td>净销售 YoY</td><td>—</td><td>—</td><td>+8.2%</td><td>+9.1%</td><td>+11.6%</td></tr>
+      <tr><td>经营利润（$M）</td><td>2,530</td><td>3,341</td><td>2,463</td><td>2,606</td><td>2,815</td></tr>
+      <tr><td>经营利润率（占总营收）</td><td>4.00%</td><td>3.88%</td><td>3.66%</td><td>3.74%</td><td>3.99%</td></tr>
+      <tr><td>毛利率（商品口径）</td><td>11.25%</td><td>11.13%</td><td>11.32%</td><td>11.02%</td><td>11.04%</td></tr>
+      <tr><td>SG&A 率（占净销售）</td><td>9.16%</td><td>9.21%</td><td>9.60%</td><td>9.19%</td><td>8.96%</td></tr>
+      <tr><td>摊薄 EPS（$）</td><td>4.28</td><td>5.87</td><td>4.50</td><td>4.58</td><td>4.93</td></tr>
+      <tr class="hl"><td>EPS YoY</td><td>—</td><td>—</td><td>+11.4%</td><td>+13.9%</td><td>+15.2%</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">＊ Q4 FY2025 为 16 周财季，规模非同口径。趋势关键读数：<strong>营收与 EPS 增速连续三季加速</strong>（营收 +8.2%→+11.6%；EPS +11.4%→+15.2%），SG&A 率从 Q1 的 9.60% 压降至 Q3 的 8.96%，是经营杠杆持续释放的直接证据。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.2 关键比率与杜邦拆解（TTM / Q3 FY2026）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>指标</th><th>数值</th><th>说明</th></tr>
+      <tr><td>ROE（TTM）</td><td>~27%</td><td>净利 $8.84B / 平均权益 ~$32B</td></tr>
+      <tr><td>ROIC（TTM）</td><td>~30%</td><td>剔净现金后投入资本回报极高</td></tr>
+      <tr><td>净利率（占总营收）</td><td>~3.0%</td><td>薄利多销的典型</td></tr>
+      <tr><td>经营利润率（占总营收）</td><td>3.99%（Q3）</td><td>会员费贡献约一半</td></tr>
+      <tr><td>杜邦：净利率 × 周转 × 杠杆</td><td>3.0% × ~3.6x × ~2.6x ≈ 27%</td><td><span class="hl-t">高周转 + 适度杠杆驱动高 ROE</span></td></tr>
+      <tr><td>有效税率</td><td>25.4%</td><td>$746M / $2,938M</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">杜邦洞察：Costco 的高 ROE <strong>不靠高利润率（仅 3%）</strong>，而靠<span class="hl-t">极高的资产周转（薄利多销 + 存货快速周转 + 应付账款浮存）</span>——供应商货款（应付 $223.63 亿）常在商品卖出后才支付，形成负营运资金的"免费融资"，这是理解 Costco 资本效率的关键。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.3 资产负债健康度（2026-05-10 末 · 对比 2025-08-31 末 · $M）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>2025-08-31 末</th><th>2026-05-10 末</th><th>说明</th></tr>
+      <tr><td>现金及现金等价物</td><td>14,161</td><td>18,946</td><td>OCF 强劲 + 季节性</td></tr>
+      <tr><td>短期投资</td><td>1,123</td><td>1,050</td><td>—</td></tr>
+      <tr class="hl"><td>现金 + 短投合计</td><td>15,284</td><td>19,996</td><td>可用流动性</td></tr>
+      <tr><td>存货</td><td>—</td><td>19,418</td><td>周转极快</td></tr>
+      <tr><td>应付账款</td><td>—</td><td>22,363</td><td>&gt; 存货 · 负营运资金浮存</td></tr>
+      <tr><td>递延会员费（浮存）</td><td>2,854</td><td>3,157</td><td>无息负债 · 类保险浮存</td></tr>
+      <tr class="hl"><td>短期借款</td><td>不重大</td><td>96</td><td>银行授信项下</td></tr>
+      <tr class="hl"><td>长期债务（账面总额）</td><td>—</td><td>5,684</td><td>1.375%-3.0% 优先票据为主</td></tr>
+      <tr class="hl"><td>有息负债合计</td><td>—</td><td>5,780</td><td>短借 96 + 长债 5,684</td></tr>
+      <tr class="hl"><td><strong>真实净现金（不含租赁）</strong></td><td>—</td><td><strong>+14,216</strong></td><td>✅ 净现金非净负债</td></tr>
+      <tr><td>经营租赁负债（总计约）</td><td>—</td><td>~2,700</td><td>含租赁后净现金 ~+11.5B</td></tr>
+      <tr><td>总资产</td><td>—</td><td>86,430</td><td>—</td></tr>
+      <tr><td>股东权益</td><td>—</td><td>33,509</td><td>留存收益 $26,482M</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">✅ <strong>净现金非净负债——铁律提示</strong>：Costco 现金+短投 $19,996M &gt; 有息负债 $5,780M（长债 $5,684M + 短借 $96M，已逐项核对），<strong>真实净现金 +$14,216M</strong>；即使叠加约 $27 亿经营租赁负债，仍为净现金约 +$11.5B。长期债务明细：3.0% 票据（2027-05 到期）$1,000M、1.375% 票据（2027-06）$1,250M、1.6% 票据（2030-04）$1,750M、1.75% 票据（2032-04）$1,000M、日本子公司担保票据 $684M——利率极低、期限分散。<span class="hl-t">资产负债表极为稳健</span>：负营运资金（应付 $223.63 亿 &gt; 存货 $194.18 亿）+ 递延会员费浮存，等于供应商与会员在为 Costco 的运营免费融资。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.4 现金流质量（YTD 36 周 FY2026）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>YTD FY25（36 周）</th><th>YTD FY26（36 周）</th><th>说明</th></tr>
+      <tr><td>经营活动现金流（OCF）</td><td>$9,468M</td><td>$11,133M</td><td><span class="badge up">+17.6%</span></td></tr>
+      <tr><td>− 资本开支 Capex</td><td>$3,532M</td><td>$4,228M</td><td>全年指引 ~$6.5B</td></tr>
+      <tr class="hl"><td>自由现金流（FCF）</td><td>$5,936M</td><td>$6,905M</td><td>+16.3%</td></tr>
+      <tr><td>折旧摊销 D&A</td><td>—</td><td>$1,791M</td><td>—</td></tr>
+      <tr><td>股权激励 SBC</td><td>—</td><td>$771M</td><td>—</td></tr>
+      <tr><td>营运资本变化</td><td>—</td><td>+$2,086M</td><td>浮存扩张贡献现金</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">现金流质量极高：OCF/净利 &gt; 1（$11,133M OCF vs $6,228M YTD 净利），因 D&A、SBC 与负营运资金浮存均贡献现金。<strong>需注意</strong>：Capex 大部分是<span class="hl-t">扩张性（新店 + 供应链）</span>而非维护性——这压低了报告 FCF，但换来高 ROIC 的未来增长，与"零增长收费桥"不同。TTM 口径：OCF ~$15.0B、Capex ~$6.19B、FCF ~$8.8B。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.5 所有者盈余（价值投资口径 · FY2026E）</h3>
+  <div class="dcf-note">
+    <p><strong>所有者盈余 = 净利润 + 折旧摊销 + SBC − 维护性 Capex ± 营运资金变动</strong></p>
+    <p>FY2026E 净利 ~$9.1B + D&A ~$2.6B + SBC ~$1.05B − <strong>维护性</strong> Capex ~$2.5B（总 Capex ~$6.5B 中约 $3.7B 为扩张性新店）± 营运资金 ≈ <strong>所有者盈余 ~$9.5-10.0B</strong>。这明显高于报告 FCF ~$8.8B——差额正是被"高 ROIC 扩张性 Capex"消耗的部分。</p>
+    <p><strong>所有者盈余收益率 = ~$9.5B / 市值 $405B ≈ 2.35%</strong>——这是一个<span class="warn-t">"顶级质量 + 极致估值"</span>的收益率。2.35% 的收益率对一个 +12% 营收、~30% ROIC、会员浮存护城河的公司，反映市场已把未来十年近乎完美的执行提前定价。<strong>换句话说：Costco 的问题从来不是生意好不好，而是价格贵不贵——当前 2.35% 的所有者盈余收益率意味着几乎没有安全边际。</strong></p>
+  </div>
+</div>
+
+<!-- ═══ 模块 6 ═══ -->
+<div class="section">
+  <div class="stitle">模块 6 · 电话会分析（Q3 FY2026 + 前 2 季度）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">Q3 FY2026 电话会（2026-05-28）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"营收 +11.6% 加速增长、EPS +15% 至 $4.93；加油站油量创公司历史新高（末 5 周为史上最高）"</div><div class="ec-note">营收与 EPS 连续三季加速，客流 +2.4% + 客单 +7.3% 双轮驱动，动能强劲。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"数字化 comp +21.5%、站点/App 流量 +37%；个性化推荐带来约 $50 亿电商销售（转化率 3 倍）、AI 搜索流量三位数增长"</div><div class="ec-note">数字化正在给实体护城河装上新引擎，且是高转化、高黏性的增量。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"会员费收入 +10.7%，行政会员 +9.6% 至 4120 万；美加续费率 92.2% 环比 +10bps"</div><div class="ec-note">会员费引擎稳健，行政会员（贡献绝大部分销售）增速显著更高，消费升级在延续。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"付费会员增速放缓至 +4.1%，管理层称属'更正常增速'（无新市场进入）"</div><div class="ec-note">增速正常化——不是需求走弱，而是缺少新市场开业带来的一次性会员跳升。需持续跟踪。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"core-on-core 毛利率同比 -9bps（生鲜/食品杂货毛利走低 + 油价推高运输）；报告毛利率 11.04% 同比 -21bps"</div><div class="ec-note">毛利端出现边际压力，但被 SG&A 率 -20bps 的经营杠杆抵消，净利仍 +15.2%。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"全年净新开门店下调至 26 家（原 28 家，2 家推迟至 FY2027）；全年 Capex 约 $65 亿"</div><div class="ec-note">开店节奏微调（长期目标仍每年 30+ 家），非趋势性问题。Section 301 关税退款申请已提交。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q2 FY2026 电话会（2026-03-05）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"净利 +13.9% 至 $20.35 亿、EPS $4.58 超预期；会员费收入 +13.6%；core-on-core 毛利率 +22bps 广泛改善"</div><div class="ec-note">上季毛利是改善的（+22bps），本季 -9bps 属边际波动而非趋势。管理层承诺关税退款返还会员。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q1 FY2026 电话会（2025-12-11）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"EPS $4.50 超预期（含 $0.16/股股权激励税收优惠）、营收 $67.3 亿超预期；会员费 +14%；数字化 comp +20.5%"</div><div class="ec-note">数字化连续三季 20%+ 增长（Q1 +20.5% → Q2 → Q3 +21.5%），是稳定的新增长曲线。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">指引兑现度追踪</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>观察项</th><th>三季趋势</th><th>评价</th></tr>
+      <tr><td>营收增速</td><td>+8.2% → +9.1% → +11.6%</td><td><span class="badge up">连续加速</span></td></tr>
+      <tr><td>EPS 增速</td><td>+11.4% → +13.9% → +15.2%</td><td><span class="badge up">连续加速</span></td></tr>
+      <tr><td>数字化 comp</td><td>+20.5% → 强劲 → +21.5%</td><td><span class="badge up">稳定 20%+</span></td></tr>
+      <tr><td>美加续费率</td><td>92.2% → 92.1% → 92.2%</td><td><span class="badge nt">高位企稳</span></td></tr>
+      <tr><td>付费会员增速</td><td>+5.2% → +4.x% → +4.1%</td><td><span class="badge nt">正常化放缓</span></td></tr>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>信号汇总</strong>：Q3 FY2026 是 Costco "<span class="hl-t">营收 EPS 双加速 + 数字化强劲 + 会员费稳健 + 经营杠杆释放</span>"的强势一季。<strong>最新月度销售（2026 年 6 月 5 周止于 2026-07-05）净销售 $292.4 亿（+10.6%），全公司 comp +8.8%（剔除油汇 +7.0%），FY2026 前 44 周净销售 $2,504.3 亿（+10.1%）——Q4 开局强劲，动能延续。</strong>唯二需留意：core-on-core 毛利 -9bps 的边际压力、付费会员增速正常化至 +4.1%。但都不改变基本面向好——<strong>业绩没有任何问题，问题永远在估值上。</strong></p>
+  </div>
+</div>
+
+<!-- ═══ 模块 7 ═══ -->
+<div class="section">
+  <div class="stitle">模块 7 · 多模型估值（8 种方法）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">7.1 估值汇总表（独立估值 · 不锚定现价 · USD）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>估值方法</th><th>每股公允价</th><th>假设要点</th><th>权重</th></tr>
+      <tr><td>1. 相对估值（P/E）</td><td>$770</td><td>FY2027 EPS $22.66 × 34x（给予会员制护城河的premium，但低于当前 40x）</td><td>25%</td></tr>
+      <tr><td>2. DCF（基准）</td><td>$763</td><td>所有者盈余 $9.3B 起，前 5 年 +11%、后 5 年 +7%、永续 4%，WACC 8.5% + 净现金 $14.2B</td><td>30%</td></tr>
+      <tr><td>3. 所有者盈余收益率</td><td>$655</td><td>所有者盈余 ~$9.5B / 3.2% 目标收益率 ≈ $297B → /443.9M 股（对成长股偏保守）</td><td>10%</td></tr>
+      <tr><td>4. PEG</td><td>$634</td><td>目标 PEG 2.0（宽护城河复利机器）× EPS 增速 14% = 28x × FY27 EPS $22.66</td><td>10%</td></tr>
+      <tr><td>5. DDM</td><td>$630</td><td>DPS $5.88，含周期性特别股息调整，长期增 7%，要求回报 8%（股息占比小，参考有限）</td><td>5%</td></tr>
+      <tr><td>6. NAV / 重置价值</td><td>不适用</td><td>价值在会员franchise与盈利能力，非账面资产；但自有约 80% 地产提供隐性下行支撑</td><td>0%</td></tr>
+      <tr><td>7. 反向 DCF</td><td>当前价隐含 <strong>~13-14%</strong></td><td>$914 隐含市场预期所有者盈余长期增 ~13-14% 持续十年——近乎完美定价，容错极薄</td><td>5%</td></tr>
+      <tr><td>8. SOTP 分部加总</td><td>$685</td><td>会员费流（$5.5B×35x pretax ≈ $189B）+ 商品零售（税后 $4.2B×22x ≈ $92B）+ 净现金 $14B</td><td>15%</td></tr>
+      <tr class="hl"><td><strong>加权公允价中位数（内在价值）</strong></td><td><strong>~$745</strong></td><td>估值区间 $630-770 · 中位 ~$745</td><td>100%</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.8;"><strong>与现价对照</strong>：当前 $913.94 vs 加权内在价值 ~$745 · <span class="warn-t">溢价约 +23%（即现价高出内在价值约两成）</span>——<strong>不仅没有价值投资 25% 安全边际，反而是负安全边际</strong>。Costco 是世界级好生意，但当前价格已充分（甚至过度）反映其质量。反向 DCF 显示市场已定价 ~13-14% 的长期所有者盈余增速持续十年，等于要求 Costco 十年不出任何差错——这是"为完美付费"。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.2 P/E 多档透视表</h3>
+  <p style="margin-bottom:10px; font-size:13px; color:var(--text2);">Costco 仅有 GAAP 单一口径（无 Non-GAAP 调整），故多档透视聚焦"不同盈利基数 × 不同倍数"，帮助判断哪一档最可信：</p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>口径</th><th>EPS 基数</th><th>P/E（基于 $913.94）</th><th>读数说明</th></tr>
+      <tr><td>TTM GAAP P/E</td><td>$19.88</td><td>~46.0x</td><td>滚动 12 个月实际</td></tr>
+      <tr><td>Q3 单季年化 P/E</td><td>$4.93×~4.3 ≈ $21.2</td><td>~43x</td><td>最新单季外推（含季节性，仅参考）</td></tr>
+      <tr class="hl"><td><strong>Forward P/E（FY2026 共识 $20.5）</strong></td><td><strong>$20.5</strong></td><td><strong>~44.6x</strong></td><td>本财年在途 · 较可信</td></tr>
+      <tr class="hl"><td><strong>Forward P/E（FY2027 共识 $22.66）</strong></td><td><strong>$22.66</strong></td><td><strong>~40.3x</strong></td><td>市场惯用锚 · 最可信档</td></tr>
+      <tr><td>核心业务 P/E（剔净现金 $14.2B）</td><td>—</td><td>~44x</td><td>净现金占市值仅 3.5%，剔除后变化不大</td></tr>
+      <tr><td>FCF Yield</td><td>FCF ~$8.8B</td><td>~2.2%</td><td>所有者盈余收益率 ~2.35%</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3);"><strong>最可信档</strong>：Forward P/E ~40x（FY2027）/ ~44.6x（FY2026）。同业对比：Walmart ~40-47x（增速更慢）、BJ's Wholesale ~21x（最直接会员制同业、估值仅 Costco 一半）、Target ~16-17x（增长停滞）。<span class="warn-t">Costco 40x 的前瞻估值显著高于所有同业</span>——市场用一倍于 BJ's 的估值买 Costco 的执行力与续费率黏性，反映其质量被充分（甚至过度）认可。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.3 12 个月目标价（概率加权）</h3>
+  <div class="pgrid">
+    <div class="pbox"><div class="pl">悲观情景 · 30%</div><div class="pv pc">$710</div><div class="pn">增速放缓 / 消费降级 + 估值压缩至 ~32x FY26<br>距现价 -22%</div></div>
+    <div class="pbox"><div class="pl">基准情景 · 45%</div><div class="pv pf">$850</div><div class="pn">EPS 增至 ~$22 + 估值温和回落至 ~38x + 会员费稳健<br>距现价 -7%</div></div>
+    <div class="pbox"><div class="pl">乐观情景 · 25%</div><div class="pv ps">$1,010</div><div class="pn">增速持续加速 + 溢价维持 ~44x + 特别股息催化<br>距现价 +11%</div></div>
+  </div>
+  <p style="font-size:13px; color:var(--text2);"><strong>概率加权 12 个月目标价</strong>：30%×$710 + 45%×$850 + 25%×$1,010 = <strong>$848 ≈ $845</strong>。<strong>叠加 0.64% 股息 = 预期总回报约 −7%</strong>——<span class="warn-t">目标价低于现价，预期回报为负</span>。区分两个数字：内在价值中位 <strong>~$745</strong>（用于建仓锚点），12 个月目标价 <strong>~$845</strong>（反映满估值下市场短期大概率仍给溢价，但仍低于现价）。两者都指向同一结论——<strong>当前 $914 无安全边际，不在合理建仓窗口</strong>。</p>
+</div>
+
+<!-- ═══ 模块 8 ═══ -->
+<div class="section">
+  <div class="stitle">模块 8 · 竞争与行业分析</div>
+  <div class="cmt">
+    <p><strong>会员制仓储零售格局</strong>：美国市场 Costco 与 Sam's Club（沃尔玛旗下）、BJ's Wholesale 三家主导，Costco 单店销售额与会员黏性均遥遥领先。更广义的零售竞争来自沃尔玛（价格 + 供应链）与亚马逊（便利 + 电商），但两者都难以在"极致低价 + 会员制 + 寻宝体验"的组合上复制 Costco。</p>
+
+    <p><strong>同业对比（估值与增速 · 截至 2026-07）</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>公司</th><th>Forward P/E</th><th>营收增速</th><th>EPS 增速</th><th>核心评价</th></tr>
+        <tr class="hl"><td><strong>Costco COST</strong></td><td><strong>~40-45x</strong></td><td>+11.6%（Q3）</td><td>+15%</td><td>会员制之王 · 续费率 92%+ · 估值最贵</td></tr>
+        <tr><td>Walmart WMT</td><td>~40-47x</td><td>中个位数</td><td>高个位数~10%</td><td>规模最大 · 增速更慢</td></tr>
+        <tr><td>BJ's Wholesale BJ</td><td>~21x</td><td>中个位数</td><td>~8-10%</td><td>最直接会员制同业 · 估值仅 Costco 一半</td></tr>
+        <tr><td>Target TGT</td><td>~16-17x</td><td>持平至负</td><td>下滑/持平</td><td>增长停滞 · FY26 EPS 指引 $7.50-8.50</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:10px; font-size:12px; color:var(--text3);">核心看点：Costco 以 <strong>40x 前瞻估值 vs BJ's 21x</strong>——同为会员制仓储，估值溢价一倍。这个溢价买的是 Costco 的续费率（92% vs BJ's ~90%）、单店经济、增速（+11.6% vs 中个位数）与全球扩张空间。溢价<strong>合理但已充分</strong>，安全边际为负。</p>
+
+    <p style="margin-top:14px;"><strong>波特五力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>新进入者：</strong>低（规模采购 + 会员信任 + 单店经济需数十年积累）</li>
+      <li><strong>替代品：</strong>中（亚马逊/沃尔玛便利，但难更便宜；电商难复制寻宝体验）</li>
+      <li><strong>供应商议价：</strong>极低（Costco 巨量采购 + Kirkland 自有品牌拥有绝对议价力）</li>
+      <li><strong>买家（会员）议价：</strong>低（Costco 主动让利，会员黏性极高、续费率 92%）</li>
+      <li><strong>同业竞争：</strong>中（Sam's/BJ's 存在，但 Costco 单店效率碾压，理性竞争）</li>
+    </ul>
+
+    <p><strong>颠覆风险</strong>：低。Costco 的护城河（成本 + 会员黏性 + 品牌）在电商时代反而加深——数字化 +21.5% 证明它能把线上作为增量而非被颠覆。核心风险不在竞争，而在<strong>估值</strong>与短期消费周期。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 9 ═══ -->
+<div class="section">
+  <div class="stitle">模块 9 · 技术面与 K 线分析（次要参考）</div>
+  <div class="cmt">
+    <p><strong>趋势</strong>：COST 长期稳定上行，但已从 52 周高 $1,096.50 <span class="warn-t">回落约 17% 至 $913.94</span>，52 周低 $844.06。当前处于高位区间的中下沿——<strong>已有一轮估值消化，但绝对估值仍高</strong>。这是一只低波动、长期向上的超级复利蓝筹。</p>
+
+    <p><strong>关键价位</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>支撑</strong>：$844（52 周低）/ ~$800（心理关口 + 前期平台）/ $745（内在价值中枢）</li>
+      <li><strong>阻力</strong>：$1,000（整数关 + 回购均价 $997 附近）/ $1,097（52 周高）</li>
+    </ul>
+
+    <p><strong>指标信号</strong>：从高点回落后处于中性区间，无明显超买；成交温和。<span class="warn-t">技术面的回调尚不足以创造基本面意义上的安全边际</span>——$914 距内在价值 $745 仍有 23% 溢价。</p>
+
+    <p><strong>注意</strong>：Costco 的核心驱动是 comp 增速 + 会员费/续费率 + 数字化 + 估值倍数，技术面是次要参考。价值投资者应等基本面或情绪触发的更深回调（如消费降级、增速放缓）到 $745 以下，而非在 40x+ 估值追高。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 10 ═══ -->
+<div class="section">
+  <div class="stitle">模块 10 · 增长催化剂与前景展望</div>
+  <div class="cmt">
+    <p><strong>短期催化剂（未来 6 个月）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>2026-09-25 前后 Q4/FY2026 财报</strong>（16 周止于 2026-08-30）——全年收官，6 月 5 周销售 +10.6% 已预示强劲开局</li>
+      <li><strong>月度销售披露</strong>——Costco 每月公布 comp，是高频动能验证窗口</li>
+      <li><strong>Section 301 关税退款</strong>——申请已提交，预计 2-3 个月内处理，可能返还会员（利好口碑）</li>
+      <li><strong>潜在特别股息</strong>——现金持续堆积（净现金 $14.2B），历史上每 2-4 年派一次大额特别股息，是重要催化</li>
+    </ul>
+
+    <p><strong>长期展望（3-5 年）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>开店复利</strong>——长期目标每年净新开 30+ 家，全球（尤其中国、日本）仍处早期，单店经济可复制</li>
+      <li><strong>会员费提价周期</strong>——2024 年 9 月刚涨价，历史约每 5-6 年一轮，每次为会员收入注入结构性增量</li>
+      <li><strong>数字化第二曲线</strong>——数字化 comp 稳定 20%+，个性化推荐 + AI 搜索把线上做成高转化增量</li>
+      <li><strong>行政会员升级</strong>——+9.6% 增速远超普通会员，是客单与忠诚度的持续引擎</li>
+      <li><strong>风险情景</strong>：消费深度衰退 / 海外扩张单店经济不及美国 / 估值多重压缩</li>
+    </ul>
+
+    <p><strong>TAM 展望</strong>：全球零售市场规模巨大，Costco 当前 931 家门店渗透率仍低，会员制仓储在多数国际市场仍是蓝海。核心问题从来不是增长空间，而是<strong>市场愿意为这份确定性付多少倍市盈率</strong>。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 11 ═══ -->
+<div class="section">
+  <div class="stitle">模块 11 · 风险矩阵</div>
+  <div class="risk-grid">
+    <div class="risk-card r5"><h5>1. 估值风险（无安全边际）</h5><span class="risk-score">5 / 5 极高</span><p>46x TTM / 40x 前瞻 / FCF Yield 2.2% · 现价高于内在价值 ~23% · 反向 DCF 隐含 13-14% 十年增速 · 任何增速放缓或情绪逆转都可能触发多重压缩</p></div>
+    <div class="risk-card r3"><h5>2. 消费/宏观周期</h5><span class="risk-score">3 / 5 中</span><p>会员消费与就业/收入挂钩 · 深度衰退会压制客流与客单 · 但会员制刚需属性 + 性价比定位在衰退中相对抗跌</p></div>
+    <div class="risk-card r3"><h5>3. 毛利率与油价波动</h5><span class="risk-score">3 / 5 中</span><p>core-on-core 毛利 -9bps · 油价拖累报告毛利 -21bps · 生鲜/食品杂货毛利走低 · 靠经营杠杆对冲但需持续</p></div>
+    <div class="risk-card r2"><h5>4. 会员增速正常化</h5><span class="risk-score">2 / 5 偏低</span><p>付费会员增速降至 +4.1%（无新市场）· 续费率 92% 高位企稳 · 属正常化而非需求走弱，风险可控</p></div>
+    <div class="risk-card r2"><h5>5. 关税与供应链</h5><span class="risk-score">2 / 5 偏低</span><p>Section 301 关税影响 · 但 Costco 议价力 + 全球采购 + Kirkland 自有品牌缓冲能力强 · 退款申请已提交</p></div>
+    <div class="risk-card r1"><h5>6. 生意质量（机会）</h5><span class="risk-score">1 / 5 反向</span><p>会员制护城河 + 92% 续费率 + ~30% ROIC + 净现金 $14.2B + 浮存 · 世界级好生意本身是最大的安全垫</p></div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>3 个黑天鹅情景</strong>：</p>
+    <ol style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>估值向历史均值/同业回归</strong>——概率 25%（12-24 月维度）· 若市盈率从 40x 压至 30x，股价跌至 $680-720 · 生意不变、估值消化</li>
+      <li><strong>全球深度消费衰退</strong>——概率 10% · comp 转负 + 客单下滑 · 股价可能跌至 $650-700 · 但会员刚需属性提供缓冲</li>
+      <li><strong>海外扩张单店经济不及预期</strong>——概率 10%（多年维度）· 长期增长叙事受损 · 估值中枢下移</li>
+    </ol>
+
+    <p style="margin-top:10px;"><strong>下行支撑</strong>：世界级生意 + ~30% ROIC + 净现金 $14.2B + 会员浮存 + 自有约 80% 地产（隐性资产）构成质量底。<span class="hl-t">$700-745 是内在价值支撑区</span>（对应 ~31-33x FY26 EPS，接近历史正常premium下限）。但要注意：Costco 的"底"比多数股票高，因为市场对其质量的溢价难以完全消失——这既是保护，也意味着"便宜"的机会很稀少。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 12 ═══ -->
+<div class="section">
+  <div class="stitle">模块 12 · 股东回报分析</div>
+  <div class="cmt">
+    <p><strong>Costco 的股东回报有一个独特结构：回购极其克制（仅抵消稀释），真正的返还靠分红——常规增息 + 周期性大额特别股息。</strong>理解这一点，才能正确评估它的"含金量"。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 18px 0 10px; font-family: 'Segoe UI',sans-serif;">12.1 公司给了股东多少？</h3>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>财年</th><th>现金股息</th><th>股票回购</th><th>股东总回报</th><th>说明</th></tr>
+        <tr><td>FY2023</td><td>$1,251M</td><td>$676M</td><td>$1,927M</td><td>常规节奏</td></tr>
+        <tr><td>FY2024</td><td>$9,041M</td><td>$700M</td><td>$9,741M</td><td><span class="hl-t">含 $15/股特别股息（~$6.7B）</span></td></tr>
+        <tr><td>FY2025</td><td>$2,183M</td><td>$903M</td><td>$3,086M</td><td>常规节奏</td></tr>
+        <tr class="hl"><td><strong>3 年合计</strong></td><td><strong>~$12,475M</strong></td><td><strong>~$2,279M</strong></td><td><strong>~$14,754M</strong></td><td>股息占 85% · 尤以特别股息为大头</td></tr>
+      </table>
+    </div>
+    <p style="font-size:13px; color: var(--text2); margin-top:8px"><strong>Trailing Shareholder Yield</strong>（常规口径）≈ FY2025 返还 $3,086M / 市值 $405B ≈ <strong>0.76%</strong>（股息 ~0.54% + 回购 ~0.22%）——<span class="warn-t">常规年度的股东收益率偏低</span>。但这低估了真实返还：Costco 的返还是"平时低、隔几年一次大额特别股息"的脉冲式结构（FY2024 含 $15/股特别股息，当年总返还 $97 亿）。当前常规季度股息刚从 $1.30 上调至 $1.47（+13%），年化 $5.88/股。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.2 给的方式好不好？</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><span class="warn-t">回购含金量打折</span>：摊薄股数 FY2023 444,452k → FY2024 444,759k → FY2025 444,803k → Q3 FY2026 444,430k——<strong>常年几乎不变</strong>。回购规模仅够抵消 RSU 稀释，<span class="hl-t">Costco 并不通过回购缩股</span>，本质是"用现金对冲 SBC 稀释"，而非真实减少股本。这一点上，回购的含金量确实打折。</li>
+      <li><strong>但克制是纪律，不是缺陷</strong>：关键在于——Costco 刻意<strong>不在 40x+ 的高估值下大额回购自家股票</strong>。FY2025 回购均价 $945、Q3 回购均价 $997.47 都在高位小额进行。对一家股价常年高估的公司，"少回购、把现金投入高 ROIC 新店 + 用特别股息返还"是更聪明的资本配置，避免了高位回购摧毁股东价值。</li>
+      <li><strong>股息才是主菜</strong>：常规股息累进增长（+13%）+ 周期性大额特别股息（$15/股 in 2024、历史多次），这部分是真金白银、含金量高。分红型返还 + 高 ROIC 再投资，是 Costco 返还结构的本质。</li>
+    </ul>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.3 能不能继续给、给多少？</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>可持续性极强</strong>：常规股息年化约 $2.6B vs FCF ~$8.8B——<span class="hl-t">(股息+回购)/FCF 覆盖度仅约 40%</span>，覆盖极其充分，增息与特别股息空间巨大。净现金 $14.2B 是特别股息的"弹药库"。</li>
+      <li><strong>非借债回购</strong>：净现金 +$14.2B，返还完全来自内生 FCF 与现金储备，绝非举债——与"杠杆化返还"的公司截然不同，安全度极高。</li>
+      <li><strong>回购授权（约束力有限）</strong>：剩余授权 $1,359M（总授权 $4,000M，2027 年 1 月到期）——额度不大，也印证 Costco 并不把回购当主要工具。真正的"大招"是特别股息。</li>
+      <li><strong>周期择时优</strong>：把现金留到堆积后以特别股息一次性派发，而非在高位持续回购，择时纪律优秀。</li>
+    </ul>
+    <p><strong>模块小结</strong>：<span class="hl-t">积极且高含金量，但结构特殊——分红为主、回购象征性</strong></span>。常规年度股东收益率偏低（~0.76%），回购仅抵消稀释（含金量打折），但这恰是"不在高估值下摧毁价值"的资本配置纪律；真正的返还靠常规增息（+13%）+ 周期性大额特别股息 + 高 ROIC 再投资，且 FCF 覆盖度仅约 40%、净现金 $14.2B、无任何借债——可持续性在全市场居前列。对价值投资者而言，这是一份"克制、诚实、可持续"的资本配置答卷。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 13 ═══ -->
+<div class="section">
+  <div class="stitle">模块 13 · 海图评分卡 + 投资决策</div>
+
+  <div class="scorecard">
+    <h3 style="font-size:15px; color:var(--text); margin-bottom: 16px; font-family: 'Segoe UI',sans-serif;">海图评分卡（6 维 A-D）</h3>
+    <div class="score-grid">
+      <div class="score-card"><div class="score-letter s-a">A</div><div class="score-body"><h4>1. 生意可预测性</h4><p>会员制模式极清晰、续费率 92% 稳定、comp 高能见度、5 年盈利波动极小、月度销售可高频验证。业务能见度顶级。</p></div></div>
+      <div class="score-card"><div class="score-letter s-a">A</div><div class="score-body"><h4>2. 经济护城河</h4><p>成本/规模优势极宽 + 会员黏性 + Kirkland 品牌 + 有效规模。数字化在加宽护城河，10 年后大概率更宽。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">A-</div><div class="score-body"><h4>3. 管理层质量</h4><p>内部培养、务实克制、坦诚沟通 + 高 ROIC 再投资 + 特别股息的资本配置。价值观与股东高度一致。</p></div></div>
+      <div class="score-card"><div class="score-letter s-a">A</div><div class="score-body"><h4>4. 财务质量</h4><p>ROIC ~30% + ROE ~27% + 净现金 $14.2B + 负营运资金浮存 + 会员浮存。资产负债表极为稳健。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">A-</div><div class="score-body"><h4>5. 资本配置纪律</h4><p>高 ROIC 再投资 + 不在高位摧毁价值式回购 + 累进增息 + 特别股息 + 无借债。回购象征性、常规收益率偏低。</p></div></div>
+      <div class="score-card"><div class="score-letter s-c">C-</div><div class="score-body"><h4>6. 估值与安全边际</h4><p>46x TTM / 40x 前瞻 / FCF Yield 2.2% · 现价高于内在价值 ~23%（<strong>负安全边际</strong>）。这是唯一的短板。</p></div></div>
+    </div>
+
+    <div class="flag-row">
+      <strong>红旗排查</strong>：会计层面<strong>无疑点</strong>（GAAP 单一口径、无 Non-GAAP 调整、无关联交易、无 VIE、无商誉减值史、无收入确认时点问题）。治理<strong>无疑点</strong>（单一股权、内部培养、无争议）。唯一红旗是<strong>极致估值</strong>——46x TTM 市盈率、FCF Yield 2.2%、现价高于内在价值约两成，触发"<span class="warn-t">极端估值</span>"红旗。尽管 6 维基础质量顶级（4 个 A / A-），综合评级<strong>强制降至「持有观望」</strong>。
+    </div>
+
+    <p style="margin-top:18px; font-size:14px; color:var(--text); line-height:1.85;"><strong>综合评级</strong>：<span class="rating-badge rating-hold" style="font-size:14px;">持有观望</span>。生意质量全球顶级（6 维有 4 个 A/A-），但估值维度 C-（负安全边际）+ 极端估值红旗 → 强制降至持有观望。核心判断：<strong>Costco 的问题从来不是生意好不好，而是价格贵不贵——当前 $913.94 高于内在价值约两成，没有任何安全边际。现有持仓者可继续让它复利，新买入者应耐心等回调至内在价值 $745 以下再建仓。</strong></p>
+  </div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">投资决策（精确价格 · USD）</h3>
+
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>项目</th><th>价格</th><th>说明</th></tr>
+      <tr><td>内在价值中位（估值锚点）</td><td><strong>~$745</strong></td><td>8 法加权 · 区间 $630-770</td></tr>
+      <tr><td>12 个月概率加权目标价</td><td><strong>$845</strong> (−8%)</td><td>反映满估值下短期仍溢价，但低于现价</td></tr>
+      <tr><td>悲观目标（30% 概率）</td><td>$710 (-22%)</td><td>增速放缓 + 估值压缩至 32x</td></tr>
+      <tr><td>乐观目标（25% 概率）</td><td>$1,010 (+11%)</td><td>动能延续 + 溢价维持 + 特别股息</td></tr>
+      <tr class="hl"><td>首仓建仓（内在价值 $745 × 80%）</td><td><strong>$596</strong></td><td>距现价 -35% · 耐心等深度回调</td></tr>
+      <tr><td>二仓建仓（× 70%）</td><td>$522</td><td>-43% · 大幅回调机会</td></tr>
+      <tr><td>三仓建仓（× 60%）</td><td>$447</td><td>-51% · 黑天鹅级机会</td></tr>
+      <tr><td>止盈一档</td><td>$1,020</td><td>+12% · 减仓 25%</td></tr>
+      <tr><td>止盈二档</td><td>$1,120</td><td>+23% · 再减 25%</td></tr>
+      <tr><td>止盈三档</td><td>$1,220</td><td>+33% · 再减 25% · 最后 25% 长期复利持有</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.85;"><strong>建议总仓位</strong>：<strong>0-2%</strong>（观察仓 · 当前价满估值，不追高；现有持仓者可继续持有，新建仓等回调）。<strong>持有周期</strong>：5-10 年（长期复利 · 让会员制飞轮慢慢滚雪球）。<strong>关键监控指标</strong>：① 月度 comp 与客流/客单趋势；② 会员续费率（美加 92% 是否维持）与付费会员增速；③ core-on-core 毛利率方向；④ Forward P/E 是否回落至 30x 以下（估值机会窗口）；⑤ 特别股息公告（重要催化）。<strong>下次财报</strong>：2026-09-25 前后（Q4/FY2026，16 周止于 2026-08-30）。</p>
+</div>
+
+<!-- ═══ 海图页末长评 ═══ -->
+<div class="section">
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记 · 1150 字</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p class="lead">价值投资里最难的一课，不是看懂烂生意，而是面对一门好到极致的生意时，忍住不为它付任何价格。好市多就是这样一台机器：它几乎以成本价把货卖给你，只为收你一年一百多美元的会员费——而全球有 8290 万个家庭心甘情愿地续着，续费率 92%。Q3 营收 +11.6%、EPS +15.2%，连续三个季度加速，数字化 +21.5%，手握逾 140 亿美元净现金。业绩挑不出任何毛病。问题，永远只在价格。</p>
+
+      <p>好市多是全球最大的会员制仓储零售商。它的生意可以用一句话说清：用极致低毛利（商品加价率被死死压在约 11%）换取会员的绝对忠诚，再靠一年一交的会员费当"浮存收费机"，赚走近一半的营业利润。Q3 FY2026 净销售 $691.5 亿（+11.6%）、会员费 $13.73 亿（+10.7%）、经营利润 $28.15 亿（+11.3%）、GAAP 净利 $21.92 亿（+15.2%）、摊薄 EPS $4.93。</p>
+
+      <h4>几个研判要点</h4>
+
+      <p><strong>一、会员费才是利润引擎，别被 3% 的净利率骗了。</strong> 好市多商品零售的经营利润率只有约 2%——它基本是"以接近成本价卖货换客流"。真正赚钱的是会员费：<span class="hl-t">仅占营收 1.9%，却贡献了约 49% 的营业利润，且几乎 100% 落到利润</span>。$31.57 亿递延会员费是一笔无息"浮存"，加上应付账款大于存货的负营运资金，等于供应商和会员在为它的运营免费融资。理解好市多，要把它看成一家"用零售流量供养的会员费订阅公司"。</p>
+
+      <p><strong>二、毛利率 -21bps 别误读，真相是经营杠杆压过了毛利微降。</strong> 报告口径毛利率 11.04% 同比 -21bps 看着走低，但主因是油价拖累——剔除油价后 +1bp，核心 core-on-core 仅 -9bps。同时 SG&A 率压降 20bps 体现经营杠杆，于是经营利润仍 +11.3%、EPS +15.2%。营收与 EPS 增速<span class="hl-t">连续三季加速</span>（营收 +8.2%→+11.6%；EPS +11.4%→+15.2%），这是一台运转极顺的复利机器，而非利润率恶化的普通超市。</p>
+
+      <p><strong>三、这是"净现金"公司，且资本配置克制得罕见。</strong> 剔除会员浮存与租赁后，好市多仍手握逾 140 亿美元净现金。但它几乎不用回购缩股——过去三年摊薄股数稳定在 4.445 亿股几乎不变，回购规模仅够抵消 RSU 稀释。它的返还主要靠分红：常规季度股息刚上调 13% 至 $1.47，外加周期性大额特别股息（2024 年 1 月派过 $15/股）。<span class="hl-t">管理层把绝大多数现金再投入高 ROIC（约 30%）的新店扩张，而不是在 40 倍估值下回购自家昂贵股票——这恰恰是资本配置纪律的体现，而非缺陷。</span></p>
+
+      <p><strong>四、护城河在加宽，不是在收窄。</strong> 规模采购 + 会员锁定 + Kirkland 自有品牌 + "寻宝式"体验构成宽护城河。数字化 comp +21.5%、站点/App 流量 +37%、个性化推荐带来约 $50 亿电商销售（转化率三倍）、AI 搜索三位数增长——数字化正在给这条实体护城河装上新引擎。行政会员 +9.6% 至 4120 万，续费率 92.2% 环比还在 +10bps。<strong>亚马逊可以更便利，但难以更便宜；而好市多把"便宜 + 品质"做到了极致。</strong></p>
+
+      <p><strong>五、内在价值约 $745，现价 $914——溢价约两成，负安全边际。</strong> 我用 8 种方法独立估值（DCF 基准 $763、相对 P/E $770、SOTP $685、所有者盈余收益率 $655……），加权中位约 $745。当前 46x TTM 市盈率 / 40x 前瞻 / 2.2% FCF 收益率——这是把"近乎完美的十年执行"提前定价的水平。反向 DCF 显示现价隐含约 13-14% 的所有者盈余增速要持续十年，容错空间极薄。股价虽已从 $1,096 的高点回落 17%，但对价值投资者仍不够便宜。</p>
+
+      <h4>海图研判</h4>
+
+      <p><strong>评级：持有观望</strong>（全球会员制零售之王 + 92% 续费率的浮存收费机 + 高 ROIC 复利 + 逾 140 亿净现金的顶级组合，对垒 46x TTM 市盈率、2.2% FCF 收益率、现价高于内在价值约两成的极致估值）。12 个月概率加权目标价 <strong>$845</strong>（−8%），叠加 0.64% 股息，预期总回报为负——业绩会继续好，但价格已透支。</p>
+
+      <p>操作建议：当前 $913.94 不在合理建仓窗口。以内在价值中位 $745 为锚，<strong>首仓 $596（×80%）、二仓 $522（×70%）、三仓 $447（×60%）</strong>——耐心等一次真正的估值回归或市场恐慌。止盈三档 $1,020 / $1,120 / $1,220，最后 25% 长期复利持有。<strong>建议观察仓位 0-2%</strong>，现有持仓者可继续持有让它复利，新买入者必须等安全边际。持有周期 5-10 年。<span class="hl-t">关键纪律：好生意也要好价格，好市多尤其如此——它极少便宜。</span></p>
+
+      <h4>风险提示</h4>
+
+      <p>消费降级 / 油价与生鲜毛利波动 / 关税 / 会员增速放缓至 +4% 的"正常化" / 最重要的——满估值下任何增速放缓都可能触发多重压缩，股价回落 $700 附近并不夸张。但净现金 $14.2 亿美元、强劲 FCF、会员浮存与自有约 80% 地产构成较硬的质量底，<strong>$700-745 是内在价值支撑区</strong>。好市多的"底"比多数股票高，因为市场对其质量的溢价难以完全消失——这既是保护，也意味着"便宜"的机会很稀少。</p>
+
+      <p>关键叙事：<strong>一门几乎无可挑剔的会员制复利生意，对垒一个几乎无可辩护的估值</strong>。好市多的问题从来不是生意好不好，而是价格贵不贵——它极少便宜，而现在依然不便宜。它不是给追求便宜货的人，而是给愿意在回调时耐心建仓、然后让一台顶级复利机器慢慢滚雪球的长期投资者。下次催化剂：2026-09-25 前后 Q4/FY2026 财报。</p>
+
+      <p class="haitu-sign">—— 海图，灯下落笔，明日再观风浪。</p>
+
+      <p class="haitu-disc">⚠️ 免责声明：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，不构成任何投资建议。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div>《海图夜读》 · Costco 好市多 COST Q3 FY2026 海图研判</div>
+  <div style="margin-top:6px;">发布日 2026-05-28 · 研判日 2026-07-11 · 数据来源 Costco Q3 FY2026 官方财报（SEC 8-K + 10-Q）+ GlobeNewswire 新闻稿 + 电话会 transcript · 货币 USD 单口径</div>
+</footer>
+
+<script>
+let curTheme = 'light';
+function toggleTheme() {
+  curTheme = curTheme === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', curTheme);
+  renderCharts();
+}
+
+const palette = {
+  light: { accent: '#8a9a8e', accent2: '#7b8fa0', accent3: '#b08d7a', gold: '#b9a06a', red: '#b87070', green: '#7a9a7a', grid: '#e5ddd5', text: '#7a706a' },
+  dark:  { accent: '#8a9a8e', accent2: '#8fabbf', accent3: '#c9a48e', gold: '#c9b07a', red: '#c08080', green: '#8aaa8a', grid: '#3e3a35', text: '#a09890' }
+};
+
+let charts = {};
+function renderCharts() {
+  Object.values(charts).forEach(c => c && c.destroy && c.destroy());
+  charts = {};
+  const p = palette[curTheme];
+  Chart.defaults.color = p.text;
+  Chart.defaults.borderColor = p.grid;
+
+  const quarters = ['Q3 FY25','Q4 FY25*','Q1 FY26','Q2 FY26','Q3 FY26'];
+  const netSales = [61.97, 84.43, 65.98, 68.24, 69.15];
+  const yoy = [null, null, 8.2, 9.1, 11.6];
+  charts.rev = new Chart(document.getElementById('chartRev'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { type:'bar', label: '净销售额 ($B)', data: netSales, backgroundColor: p.accent + 'CC', yAxisID: 'y' },
+      { type: 'line', label: '净销售 YoY %', data: yoy, borderColor: p.red, backgroundColor: p.red, tension: 0.3, yAxisID: 'y1', spanGaps: true }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false }, y1: { position: 'right', grid: { drawOnChartArea: false }, ticks: { callback: v => v + '%' } } } }
+  });
+
+  const marginQ = ['Q3 FY25','Q4 FY25*','Q1 FY26','Q2 FY26','Q3 FY26'];
+  charts.margin = new Chart(document.getElementById('chartMargin'), {
+    type: 'line',
+    data: { labels: marginQ, datasets: [
+      { label: '毛利率(商品) %', data: [11.25, 11.13, 11.32, 11.02, 11.04], borderColor: p.accent3, backgroundColor: p.accent3 + '22', tension: 0.3 },
+      { label: 'SG&A率 %', data: [9.16, 9.21, 9.60, 9.19, 8.96], borderColor: p.accent2, backgroundColor: p.accent2 + '22', tension: 0.3 },
+      { label: '经营利润率 %', data: [4.00, 3.88, 3.66, 3.74, 3.99], borderColor: p.green, backgroundColor: p.green + '22', tension: 0.3 }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false, ticks: { callback: v => v + '%' } } }, plugins: { legend: { labels: { font: { size: 10 } } } } }
+  });
+
+  charts.segment = new Chart(document.getElementById('chartSegment'), {
+    type: 'doughnut',
+    data: {
+      labels: ['美国', '加拿大', '其他国际'],
+      datasets: [{ data: [73, 14, 13], backgroundColor: [p.accent, p.accent2, p.accent3] }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { font: { size: 11 } } } } }
+  });
+
+  const eps = [4.28, 5.87, 4.50, 4.58, 4.93];
+  charts.eps = new Chart(document.getElementById('chartEps'), {
+    type: 'bar',
+    data: { labels: ['Q3 FY25','Q4 FY25*','Q1 FY26','Q2 FY26','Q3 FY26'], datasets: [
+      { label: '摊薄 EPS ($)', data: eps, backgroundColor: [p.accent2, p.gold, p.accent2, p.accent2, p.green].map(c => c + 'CC') }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: false } } }
+  });
+
+  buildSankey();
+}
+
+function buildSankey() {
+  const p = palette[curTheme];
+  const labels = ['净销售 $69.15','会员费 $1.37','总营收 $70.52','商品成本 $61.52','SG&A $6.19','经营利润 $2.81','净利息及其他 $0.13','税前利润 $2.94','所得税 $0.75','净利润 $2.19'];
+  const data = {
+    type: 'sankey',
+    orientation: 'h',
+    node: { pad: 15, thickness: 20, line: { color: p.grid, width: 0.5 }, label: labels, color: [p.accent, p.gold, p.accent2, p.red, p.red, p.green, p.gold, p.accent2, p.red, p.green] },
+    link: {
+      source: [0, 1, 2, 2, 2, 5, 6, 7, 7],
+      target: [2, 2, 3, 4, 5, 7, 7, 8, 9],
+      value:  [69.15, 1.37, 61.52, 6.19, 2.81, 2.81, 0.13, 0.75, 2.19],
+      color: [p.accent+'55', p.gold+'66', p.red+'44', p.red+'44', p.green+'66', p.green+'66', p.gold+'55', p.red+'44', p.green+'66']
+    }
+  };
+  const layout = { font: { size: 11, color: p.text }, paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)', margin: { l: 10, r: 10, t: 10, b: 10 } };
+  Plotly.react('sankey', [data], layout, { displayModeBar: false, responsive: true });
+}
+
+renderCharts();
+</script>
+
+</body>
+</html>

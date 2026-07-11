@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-07-10 收盘 · Cisco Q3 FY2026 财报已于 2026-05-13 发布 · 研判日 2026-07-11 -->
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>思科 CSCO Q3 FY2026 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+<meta name="description" content="企业与运营商网络世界的收费桥——交换机、路由器、安全，如今再加 AI 后端网络与硅光，一台被 AI 换机潮重新点燃的成熟现金机器。Q3 FY2026 营收 $158.4 亿（+12%，创纪录）、非 GAAP 经营利润率 34.2% 创纪录、超大规模客户 AI 订单 YTD $53 亿提前打穿全年目标、全年 AI 订单目标上调至约 $90 亿。但非 GAAP 毛利率连降四季至 66.0% + 真实净负债 $146.6 亿（非净现金）+ SBC 抵消回购致三年仅缩股 3% + Forward P/E 25x 远高历史无安全边际——好生意，但价格已把 AI 剧本付了大半。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="思科 CSCO Q3 FY2026 海图研判 · 海图夜读">
+<meta property="og:description" content="企业与运营商网络世界的收费桥——交换机、路由器、安全，如今再加 AI 后端网络与硅光，一台被 AI 换机潮重新点燃的成熟现金机器。Q3 FY2026 营收 $158.4 亿（+12%，创纪录）、非 GAAP 经营利润率 34.2% 创纪录、AI 订单 YTD $53 亿提前打穿全年目标。但非 GAAP 毛利率连降四季至 66.0% + 真实净负债 $146.6 亿 + Forward P/E 25x 无安全边际——好生意，但价格已把 AI 剧本付了大半。">
+<meta property="og:url" content="https://jacexie.github.io/haitu/reports/csco-q3-fy2026.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="思科 CSCO Q3 FY2026 海图研判 · 海图夜读">
+<meta name="twitter:description" content="被 AI 换机潮重新点燃的老牌网络收费桥。Q3 营收 $158.4 亿（+12%）、非 GAAP 经营利润率 34.2% 创纪录、AI 订单目标上调至约 $90 亿。但非 GAAP 毛利率连降四季 + 真实净负债 $146.6 亿 + Forward P/E 25x 无安全边际——好生意，价格已付大半。">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root { --bg:#f5f0eb; --bg2:#ece6df; --card:#ffffff; --card2:#f8f5f1; --border:#d9d0c7; --text:#4a4340; --text2:#7a706a; --text3:#a89f98; --accent:#8a9a8e; --accent2:#7b8fa0; --accent3:#b08d7a; --rose:#c09090; --gold:#b9a06a; --red:#b87070; --green:#7a9a7a; --shadow:rgba(0,0,0,0.06); --chart-grid:#e5ddd5; }
+[data-theme="dark"] { --bg:#1e1c1a; --bg2:#28251f; --card:#2e2a25; --card2:#363230; --border:#4a4540; --text:#d4ccc4; --text2:#a09890; --text3:#706860; --accent:#8a9a8e; --accent2:#8fabbf; --accent3:#c9a48e; --rose:#c09090; --gold:#c9b07a; --red:#c08080; --green:#8aaa8a; --shadow:rgba(0,0,0,0.3); --chart-grid:#3e3a35; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', serif; line-height: 1.75; font-size: 14.5px; transition: background .35s, color .35s; }
+a { color: var(--accent2); text-decoration: none; }
+.theme-bar { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); }
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+.toggle-switch { position: relative; width: 44px; height: 22px; background: var(--border); border-radius: 11px; cursor: pointer; transition: background .3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: var(--card); border-radius: 50%; transition: transform .3s; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+
+.hero { padding: 48px 24px 36px; text-align: center; border-bottom: 1px solid var(--border); }
+.hero-tag { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 3px 14px; border-radius: 20px; margin-bottom: 18px; }
+.hero h1 { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.pill { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: 'Segoe UI', sans-serif; font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow); }
+.pill strong { color: var(--text); }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle { font-size: 18px; font-weight: 700; color: var(--accent3); margin-bottom: 20px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+.stitle::before { content: ''; display: block; width: 4px; height: 20px; background: var(--accent3); border-radius: 2px; }
+
+.haitu-quip { display: flex; align-items: center; gap: 18px; background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 18px 24px; margin: 24px 0; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-quote { flex: 1; }
+.haitu-portrait { font-size: 15px; line-height: 1.65; color: var(--text); margin-bottom: 6px; font-weight: 600; }
+.haitu-rating-line { font-size: 13px; color: var(--text2); font-family: 'Segoe UI', sans-serif; }
+.rating-badge { display: inline-block; padding: 2px 12px; border-radius: 12px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; margin-left: 4px; }
+.rating-hold { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+
+.haitu-essay { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 28px 32px; margin: 24px 0 20px; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-essay-header { display: flex; align-items: center; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.haitu-avatar-sm { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); background: var(--red); box-shadow: 0 2px 8px rgba(184,112,112,0.2); }
+.haitu-name-lg { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 28px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 4px; }
+.haitu-essay-tag { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; }
+.haitu-essay-body { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 15px; line-height: 2.0; color: var(--text); }
+.haitu-essay-body p { margin-bottom: 14px; }
+.haitu-essay-body p.lead { font-size: 16px; font-style: italic; color: var(--text2); margin-bottom: 18px; }
+.haitu-essay-body strong { color: var(--text); font-weight: 700; }
+.haitu-essay-body h4 { font-size: 14px; color: var(--accent3); margin: 18px 0 10px; font-family: 'Segoe UI', sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+.haitu-sign { text-align: right; margin-top: 18px; font-family: 'Georgia', serif; font-size: 14px; color: var(--text2); font-style: italic; }
+.haitu-disc { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); font-style: italic; line-height: 1.7; }
+
+.stock-snap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px; }
+.snap-item { text-align: center; }
+.snap-label { font-family: 'Segoe UI', sans-serif; font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.snap-val { font-family: 'Segoe UI', sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+.snap-val.up { color: var(--green); }
+.snap-val.dn { color: var(--red); }
+.snap-sub { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow); }
+.kpi-l { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.badge { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+.up { background: rgba(122,154,122,.15); color: var(--green); }
+.dn { background: rgba(184,112,112,.15); color: var(--red); }
+.nt { background: rgba(123,143,160,.15); color: var(--accent2); }
+
+.tbl-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow); }
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI', sans-serif; font-size: 13px; }
+.tbl th { background: var(--card2); color: var(--text3); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); background: var(--card2); }
+
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); }
+.ctitle { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 260px; }
+
+.cmt { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 26px; line-height: 1.95; font-size: 14px; box-shadow: 0 1px 4px var(--shadow); color: var(--text); }
+.cmt p { margin-bottom: 14px; }
+.cmt p:last-child { margin-bottom: 0; }
+.cmt strong { color: var(--text); }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+
+.bscore { display: flex; align-items: center; gap: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; margin-bottom: 12px; box-shadow: 0 1px 4px var(--shadow); }
+.circle { width: 62px; height: 62px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; flex-shrink: 0; border: 3px solid; font-family: 'Segoe UI', sans-serif; }
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 4px; color: var(--text); }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.moat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+.moat-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); border-left: 4px solid var(--accent); }
+.moat-card.wide { border-left-color: var(--green); }
+.moat-card.narrow { border-left-color: var(--gold); }
+.moat-card.none { border-left-color: var(--red); }
+.moat-card h5 { font-size: 13px; color: var(--text); margin-bottom: 6px; }
+.moat-card .moat-rate { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.moat-card.wide .moat-rate { background: rgba(122,154,122,.18); color: var(--green); }
+.moat-card.narrow .moat-rate { background: rgba(185,160,106,.18); color: var(--gold); }
+.moat-card.none .moat-rate { background: rgba(184,112,112,.18); color: var(--red); }
+.moat-card p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+
+.ec-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 14px; box-shadow: 0 1px 3px var(--shadow); }
+.ec-badge { flex-shrink: 0; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-top: 2px; font-family: 'Segoe UI', sans-serif; }
+.ec-bull { background: rgba(122,154,122,.18); color: var(--green); }
+.ec-bear { background: rgba(184,112,112,.18); color: var(--red); }
+.ec-neut { background: rgba(185,160,106,.18); color: var(--gold); }
+.ec-body { flex: 1; }
+.ec-title { font-weight: 600; color: var(--text); margin-bottom: 3px; font-size: 14px; }
+.ec-note { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.dcf-note { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.dcf-note strong { color: var(--text); }
+
+.scorecard { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow); }
+.score-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.score-card { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px; }
+.score-letter { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Segoe UI', sans-serif; font-weight: 800; font-size: 22px; flex-shrink: 0; border: 3px solid; }
+.s-a { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.12); }
+.s-bp { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.06); }
+.s-b { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.10); }
+.s-bm { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.06); }
+.s-c { color: var(--red); border-color: var(--red); background: rgba(184,112,112,.08); }
+.score-body h4 { font-size: 13px; color: var(--text); margin-bottom: 4px; }
+.score-body p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+.flag-row { margin-top: 16px; padding: 12px 16px; background: rgba(184,112,112,.08); border: 1px solid rgba(184,112,112,.3); border-radius: 8px; font-size: 13px; color: var(--text2); }
+.flag-row strong { color: var(--red); }
+
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center; box-shadow: 0 1px 4px var(--shadow); }
+.pbox .pl { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; }
+.pbox .pv { font-family: 'Segoe UI', sans-serif; font-size: 28px; font-weight: 800; margin-bottom: 5px; }
+.pbox .pn { font-size: 12px; color: var(--text3); line-height: 1.5; }
+.pc { color: var(--red); } .pf { color: var(--gold); } .ps { color: var(--green); }
+
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.risk-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); position: relative; overflow: hidden; }
+.risk-card::before { content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent); }
+.risk-card.r1::before { background: var(--green); }
+.risk-card.r2::before { background: rgba(122,154,122,.6); }
+.risk-card.r3::before { background: var(--gold); }
+.risk-card.r4::before { background: var(--rose); }
+.risk-card.r5::before { background: var(--red); }
+.risk-card h5 { font-size: 14px; margin-bottom: 6px; color: var(--text); }
+.risk-score { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.r1 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r2 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r3 .risk-score { background: rgba(185,160,106,.18); color: var(--gold); }
+.r4 .risk-score { background: rgba(192,144,144,.18); color: var(--rose); }
+.r5 .risk-score { background: rgba(184,112,112,.18); color: var(--red); }
+.risk-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+footer { background: var(--card2); border-top: 1px solid var(--border); padding: 24px; text-align: center; color: var(--text3); font-size: 12px; margin-top: 40px; line-height: 1.8; }
+@media (max-width: 768px) { .cgrid,.pgrid { grid-template-columns: 1fr; } .hero h1 { font-size: 22px; } .kpi-grid { grid-template-columns: 1fr 1fr; } .stock-snap { grid-template-columns: 1fr 1fr; } .haitu-essay-header { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/CSCO" target="_blank" rel="noopener" title="在雪球查看 CSCO 实时行情">雪球 CSCO</a>
+  </div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">Q3 FY2026 财报发布 · 2026-05-13 &nbsp;|&nbsp; 海图研判 · 2026-07-11</div>
+  <h1>思科 Cisco CSCO · FY2026 Q3 财报深度分析</h1>
+  <div class="hero-sub">NASDAQ: CSCO &nbsp;|&nbsp; 财季截至 2026-04-25 &nbsp;|&nbsp; 价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill">股价 <strong>$121.31</strong> <span style="color:var(--red)">距高点 -7%</span></div>
+    <div class="pill">市值 <strong>$478B</strong></div>
+    <div class="pill">Q3 营收 <strong>$15.84B</strong> <span style="color:var(--green)">+12%</span></div>
+    <div class="pill">Non-GAAP EPS <strong>$1.06</strong> <span style="color:var(--green)">+10%</span></div>
+    <div class="pill">非GAAP经营利润率 <strong>34.2%</strong> <span style="color:var(--green)">纪录</span></div>
+    <div class="pill">Forward P/E <strong>~25x</strong> <span style="color:var(--gold)">无安全边际</span></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 海图页首短评 ═══ -->
+<div class="haitu-quip">
+  <div class="haitu-quote">
+    <div class="haitu-portrait">企业与运营商网络世界的收费桥——交换机、路由器、安全，如今再加 AI 后端网络与硅光，一台被 AI 换机潮重新点燃的成熟现金机器。Q3 营收 +12% 创纪录、非 GAAP 经营利润率 34.2% 创纪录、超大规模客户 AI 订单 YTD $53 亿提前打穿全年目标、FY26 AI 订单目标上调至约 $90 亿。但非 GAAP 毛利率连降四季至 66.0% + 真实净负债 $146.6 亿（非净现金）+ SBC 抵消回购致三年仅缩股 3% + Forward P/E 25x 远高历史无安全边际——好生意，但价格已把 AI 剧本付了大半。</div>
+    <div class="haitu-rating-line">评级：<span class="rating-badge rating-hold">持有观望</span> · 12 个月概率加权目标价 $115（-5%）· AI 网络换机潮 + 纪录经营利润率 + 可靠资本返还的老牌收费桥，对垒 毛利率连降四季 + 净负债非净现金 + Forward P/E 25x 满估值</div>
+  </div>
+</div>
+
+<!-- ═══ 市场数据快照 ═══ -->
+<div class="section">
+  <div class="stitle">市场数据快照（2026-07-10 收盘）</div>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">股价（美元）</div><div class="snap-val">$121.31</div><div class="snap-sub">2026-07-10 收盘 · 距 52 周高 -7%</div></div>
+    <div class="snap-item"><div class="snap-label">市值</div><div class="snap-val">$478B</div><div class="snap-sub">网络设备龙头</div></div>
+    <div class="snap-item"><div class="snap-label">TTM GAAP P/E</div><div class="snap-val">~39.4x</div><div class="snap-sub">含 SBC/摊销/重组</div></div>
+    <div class="snap-item"><div class="snap-label">TTM Non-GAAP P/E</div><div class="snap-val">~29.7x</div><div class="snap-sub">TTM EPS $4.09</div></div>
+    <div class="snap-item"><div class="snap-label">Forward P/E (FY26)</div><div class="snap-val nt">~28.3x</div><div class="snap-sub">指引 EPS $4.28</div></div>
+    <div class="snap-item"><div class="snap-label">Forward P/E (FY27)</div><div class="snap-val nt">~25.2x</div><div class="snap-sub">共识 EPS $4.82</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间</div><div class="snap-val">$65.75 - $130.37</div><div class="snap-sub">一年内近乎翻倍</div></div>
+    <div class="snap-item"><div class="snap-label">股息率</div><div class="snap-val">~1.4%</div><div class="snap-sub">$1.68/年 · 低息大回购</div></div>
+    <div class="snap-item"><div class="snap-label">FCF Yield (FY26E)</div><div class="snap-val nt">~2.3%</div><div class="snap-sub">FCF ~$11B / 市值</div></div>
+    <div class="snap-item"><div class="snap-label">现金 + 短投</div><div class="snap-val">$16.64B</div><div class="snap-sub">2026-04-25 末</div></div>
+    <div class="snap-item"><div class="snap-label">有息负债</div><div class="snap-val dn">$31.30B</div><div class="snap-sub">短债 11.93 + 长债 19.37</div></div>
+    <div class="snap-item"><div class="snap-label">真实净负债</div><div class="snap-val dn">-$14.66B</div><div class="snap-sub">⚠️ 净负债非净现金</div></div>
+    <div class="snap-item"><div class="snap-label">非GAAP经营利润率</div><div class="snap-val up">34.2%</div><div class="snap-sub">Q3 创纪录 · 净利率 26.7%</div></div>
+  </div>
+  <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">数据时点：股价 <strong>2026-07-10 收盘 $121.31</strong>（盘后约 $121.66，Google Finance）· 财务数据来源 Cisco Q3 FY2026 官方财报新闻稿（SEC 8-K Exhibit 99.1 + IR PDF，2026-05-13 发布，财季截至 2026-04-25）+ 2026-05-19 提交的 10-Q · 货币 USD 单口径。思科财年止于 7 月最后一个周六，故 Q3 FY2026 = 2026-01-25 至 2026-04-25。⚠️ 思科是<strong>净负债</strong>（有息负债 $31.3B &gt; 现金+短投 $16.6B）而非净现金——与"零负债现金堡垒"叙事不符，含经营租赁则真实净负债约 -$16.4B。</p>
+</div>
+
+<!-- ═══ Q3 FY2026 KPI ═══ -->
+<div class="section">
+  <div class="stitle">Q3 FY2026 核心业绩（USD · 财季截至 2026-04-25）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">总营收</div><div class="kpi-v">$15.84B</div><span class="badge up">+12% YoY</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">创单季纪录 · 超指引上限</div></div>
+    <div class="kpi"><div class="kpi-l">产品营收</div><div class="kpi-v">$12.12B</div><span class="badge up">+17%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">AI + 网络换机驱动</div></div>
+    <div class="kpi"><div class="kpi-l">服务营收</div><div class="kpi-v">$3.72B</div><span class="badge dn">-1%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">增速最弱 · 需关注</div></div>
+    <div class="kpi"><div class="kpi-l">Networking 网络</div><div class="kpi-v">$8.82B</div><span class="badge up">+25%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">最大分部 · 加速</div></div>
+    <div class="kpi"><div class="kpi-l">Security 安全</div><div class="kpi-v">$2.01B</div><span class="badge nt">持平</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">Splunk 整合承压</div></div>
+    <div class="kpi"><div class="kpi-l">Collaboration 协作</div><div class="kpi-v">$1.02B</div><span class="badge dn">-1%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">成熟衰退业务</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 经营利润</div><div class="kpi-v">$3.96B</div><span class="badge up">+24%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">经营利润率 25.0%</div></div>
+    <div class="kpi"><div class="kpi-l">Non-GAAP 经营利润</div><div class="kpi-v">$5.41B</div><span class="badge up">+11%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">利润率 34.2% 纪录</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 净利润</div><div class="kpi-v">$3.37B</div><span class="badge up">+35%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">低基数 + 税率助推</div></div>
+    <div class="kpi"><div class="kpi-l">Non-GAAP 净利润</div><div class="kpi-v">$4.23B</div><span class="badge up">+10%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">真实经营口径</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 摊薄 EPS</div><div class="kpi-v">$0.85</div><span class="badge up">+37%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">GAAP 口径有水分</div></div>
+    <div class="kpi"><div class="kpi-l">Non-GAAP 摊薄 EPS</div><div class="kpi-v">$1.06</div><span class="badge up">+10%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">最可信口径</div></div>
+    <div class="kpi"><div class="kpi-l">非GAAP毛利率</div><div class="kpi-v">66.0%</div><span class="badge dn">-260bp</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">连降四季 · 核心矛盾</div></div>
+    <div class="kpi"><div class="kpi-l">RPO 剩余履约义务</div><div class="kpi-v">$43.5B</div><span class="badge up">+4%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">产品 RPO $22.1B (+6%)</div></div>
+  </div>
+</div>
+
+<!-- ═══ 看穿桥接 高亮框 ═══ -->
+<div class="section">
+  <div class="stitle">本季必看 · 两个"看穿"：GAAP vs Non-GAAP、纪录经营利润率背后的毛利率滑坡</div>
+  <div class="cmt">
+    <p><strong>思科这份财报有两个必须"看穿"的地方，看不穿就会把一份"好但有裂缝"的季报读成"完美无瑕"。</strong></p>
+    <p><strong>看穿一：GAAP EPS +37% 有水分，Non-GAAP +10% 才是真相。</strong> GAAP 净利 +35%、GAAP EPS +37% 看着惊艳，但其中一大块来自<span class="hl-t">去年同期低基数 + 税率因素</span>——GAAP 净利从 Q3FY25 的 $24.9 亿升到 $33.7 亿。剔除股权激励（单季 SBC 高达 <strong>$9.14 亿</strong>）、收购无形摊销、重组与收购相关费用后，<strong>Non-GAAP 净利 +10%、Non-GAAP EPS $1.06（+10%）才反映真实经营</strong>。两个口径差 $8.54 亿，其中 SBC 是最大且最真实的经济成本项——它是股东被稀释的真金白银，Non-GAAP 却把它剔掉了。</p>
+    <div class="tbl-wrap" style="margin:14px 0;">
+      <table class="tbl">
+        <tr><th>GAAP → Non-GAAP 净利桥接（Q3, $M）</th><th>金额</th><th>性质</th></tr>
+        <tr><td>GAAP 净利</td><td>3,373</td><td>+35% YoY</td></tr>
+        <tr><td><span class="warn-t">+ 股权激励 SBC</span></td><td><span class="warn-t">~914（税前）</span></td><td>真实稀释成本</td></tr>
+        <tr><td>+ 收购无形摊销 + 重组/收购相关</td><td>净额约 −60</td><td>非现金 / 一次性</td></tr>
+        <tr class="hl"><td><strong>Non-GAAP 净利</strong></td><td><strong>4,227</strong></td><td><strong>+10% YoY</strong></td></tr>
+      </table>
+    </div>
+    <p><strong>看穿二：非 GAAP 经营利润率 34.2% 创纪录，却掩盖了毛利率连降四季。</strong> 头条是"非 GAAP 经营利润 $54.1 亿、利润率 34.2% 创纪录"。但把镜头拉近，<span class="warn-t">非 GAAP 毛利率已从一年前的 68.6% 连续四季滑到 66.0%（-260bp）</span>，GAAP 毛利率更从 65.6% 掉到 63.6%。原因是结构性的：内存等元器件涨价、关税、以及超大规模客户占比上升——AI 那部分生意本身更低毛利。经营杠杆（费用增速慢于收入）暂时把经营利润率顶在纪录位，但毛利率的方向，才是这台机器质量的第一道裂缝。<strong>思科在用毛利率换增长——这是这份季报最需要盯住的一行字。</strong></p>
+  </div>
+</div>
+
+<!-- ═══ 趋势图 ═══ -->
+<div class="section">
+  <div class="stitle">关键指标趋势</div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">总营收（$B）& YoY 增速（近 5 季）</div><div class="cwrap"><canvas id="chartRev"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">毛利率与经营利润率趋势（%，非GAAP毛利率连降四季）</div><div class="cwrap"><canvas id="chartMargin"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">Q3 FY2026 营收分部拆分（$B）</div><div class="cwrap"><canvas id="chartSegment"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">GAAP vs Non-GAAP 摊薄 EPS（近 5 季）</div><div class="cwrap"><canvas id="chartEps"></canvas></div></div>
+  </div>
+</div>
+
+<!-- ═══ 桑基图 ═══ -->
+<div class="section">
+  <div class="stitle">Q3 FY2026 利润流向桑基图（$B · GAAP 口径）</div>
+  <div class="ccard">
+    <div id="sankey" style="width:100%;height:480px;"></div>
+    <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">说明：营收 $15.84 → 营业成本 $5.77（GAAP 毛利率 63.6%）+ 毛利 $10.07 → 研发 $2.38 + 销售&营销 $2.86 + 管理及其他 $0.87 + 营业利润 $3.96；营业利润 + 净利息及其他 $0.08 = 税前 $4.04 → 所得税 $0.67（税率 16.5%）+ GAAP 净利 $3.37。注：本季经营现金流 $3.76B、Capex $0.41B、自由现金流 $3.34B；向股东返还 $29.1 亿（股息 $16.6 亿 + 回购 $12.5 亿），略低于 GAAP 净利。存货一年 +49%（为 AI 订单备货）拖累经营现金流同比 -7%。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 1 ═══ -->
+<div class="section">
+  <div class="stitle">模块 1 · 公司概览与背景</div>
+  <div class="cmt">
+    <p><strong>Cisco Systems, Inc.（思科）</strong>（NASDAQ: CSCO），总部加州圣何塞，创立于 1984 年、1990 年 IPO。<strong>财年止于 7 月最后一个周六</strong>，FY2026 Q3 止于 2026-04-25、2026-05-13 盘后发布。曾在 2000 年互联网泡沫顶峰是全球市值最高的公司，此后二十余年被贴上"增长见顶的收费站"标签——但过去一年被 AI 基建潮重新点燃，股价从 $65.75 一路涨到 $121（一年近乎翻倍）。</p>
+
+    <p><strong>核心叙事</strong>：思科是<span class="hl-t">企业与运营商网络世界的收费桥</span>——把办公室、数据中心、运营商骨干连起来的交换机、路由器、无线，加上安全（含 Splunk 可观测性）、协作。它卖的是"网络基础设施 + 越来越多的订阅软件与服务"，靠庞大的安装基础、深度集成的操作系统（IOS）与运维习惯锁定客户。FY2026 全年营收指引 $628-630 亿。这是一门<strong>非 GAAP 经营利润率 34%、强 FCF、每年返还百亿美元的成熟现金机器</strong>——但增长正从"低个位数的成熟收费站"被 AI 换机潮临时抬升到低两位数。</p>
+
+    <p><strong>四大产品分部（Q3 FY2026）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>Networking 网络（$8.82B，+25%）</strong>——绝对主力（占产品营收约 73%），园区交换、数据中心交换、无线、企业/运营商路由全面加速，AI 后端网络是新引擎</li>
+      <li><strong>Security 安全（$2.01B，持平）</strong>——含 2024 年 $280 亿收购的 Splunk，整合基数与执行拖累，是最需要证明的一块</li>
+      <li><strong>Collaboration 协作（$1.02B，-1%）</strong>——Webex 等，成熟衰退</li>
+      <li><strong>Observability 可观测性（$0.27B，+3%）</strong>——最小但有软件属性</li>
+    </ul>
+
+    <p><strong>治理与股权</strong>：<strong>Chuck Robbins</strong> 任董事长兼 CEO（2015 至今），CFO 为 Mark Patterson。机构持股为主的成熟大盘股，无控股股东。<span class="warn-t">自 FY2026 起，思科在新闻稿中不再披露 ARR / 订阅收入占比</span>——这降低了软件转型进度的透明度，是一个需要留意的披露口径变化。</p>
+
+    <p><strong>能力圈检验</strong>：网络收费桥生意清晰易懂（看得懂的成熟好生意）。但<span class="warn-t">两块需谨慎：(1) 增长的可持续性——本轮加速高度依赖波动性极大的超大规模客户 AI 订单，单一客户 capex 决策就能改写一个季度；(2) Splunk $280 亿并购的整合与 ROIC——安全分部至今持平，协同尚待兑现</span>。这两点决定了当前低两位数增长是"新常态"还是"周期性高点"。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 2 ═══ -->
+<div class="section">
+  <div class="stitle">模块 2 · 管理层评估</div>
+
+  <div class="bscore">
+    <div class="circle cw">B+</div>
+    <div class="bd">
+      <h4>Chuck Robbins · 董事长兼 CEO（2015 至今）</h4>
+      <p>掌舵思科十余年，把公司从"卖硬件盒子"推向"网络 + 软件 + 订阅"的转型，并在 AI 浪潮中务实转向：自研 <span class="hl-t">Silicon One 芯片 + Acacia 光学</span>的垂直整合被强调为供应链掌控优势，把思科重新定位为 AI 数据中心网络的核心供应商。战略判断力在线——顺势把 FY26 AI 订单目标从 $50 亿上调到约 $90 亿。<span class="warn-t">但记录并非无瑕</span>：2024 年 $280 亿收购 Splunk 是思科史上最大并购，至今安全分部仍持平、协同待证；且本轮增长的加速高度倚重超大规模客户，管理层的"能见度"叙事需用后续订单持续性检验。海图判断：一位稳健、务实、资本返还有纪律的掌舵人，但正带着一笔巨额并购和一轮周期性 AI 顺风前行。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B</div>
+    <div class="bd">
+      <h4>资本配置 · 大额返还有纪律，但缩股被 SBC 抵消</h4>
+      <p>
+      <strong>连续增息</strong>：季度股息 2026 年 2 月上调 1 美分至 $0.42（年化 $1.68），派息稳健。<br>
+      <strong>大额回购</strong>：过去三年回购累计 $161 亿、股息累计 $191 亿；剩余回购授权 $96 亿（无到期日）。<br>
+      <span class="warn-t">一个含金量瑕疵</span>：过去三年摊薄股数仅从 40.6 亿降到 39.8 亿（<strong>缩股约 3%</strong>），因为单季 <strong>$9.14 亿的股权激励（SBC）</strong>几乎把回购的缩股效果对冲掉了——很大一部分回购只是在替 SBC"接盘"，而非真实增厚每股价值。<br>
+      <span class="warn-t">另一处</span>：本季末短期借款从 FY25 年末的 $52 亿飙到 $119 亿，思科是<strong>净负债 -$146.6 亿</strong>——大额返还部分靠资产负债表与发债支撑，需留意。
+      </p>
+    </div>
+  </div>
+
+  <div class="cmt">
+    <p><strong>长期主义测试</strong>：✅ 管理层以"网络 + 安全 + AI 基础设施 + 垂直整合芯片"的长期框架布局，$10 亿重组也是把资源转投硅芯片/光学/安全/AI 的主动取舍，体现长期视角。<strong>坦诚度</strong>：电话会披露详尽（毛利率压力、CEMEA 需求、AI 订单季度波动都主动说明）；但<span class="warn-t">自 FY26 起停披 ARR/订阅占比，透明度略降</span>。<strong>利益绑定</strong>：管理层持股比例不高（成熟大盘股常态），薪酬与营收/非 GAAP 利润挂钩。综合给 <strong>B+/B</strong>——稳健有纪律，但巨额并购整合 + 缩股含金量打折 + 停披 ARR 让评分未达 A 档。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 3 ═══ -->
+<div class="section">
+  <div class="stitle">模块 3 · 商业模式深度解析</div>
+  <div class="cmt">
+    <p><strong>海图"一句话测试"</strong>：<span class="hl-t">思科是企业与运营商网络的"收费桥"——它卖连接一切的交换机、路由器、无线与安全，再靠庞大的安装基础、深度集成的网络操作系统和运维习惯，把客户长期锁在自己的生态里持续收硬件更新 + 订阅软件 + 服务的钱。</span></p>
+
+    <p><strong>收入模型</strong>：产品营收（$12.12B，占 76%，含网络/安全/协作/可观测性硬件与软件）+ 服务营收（$3.72B，占 24%，技术支持与订阅服务）。近年思科力推"从一次性卖盒子转向订阅 + 经常性收入"，但<span class="warn-t">自 FY26 停披 ARR，转型进度透明度下降</span>。产品营收 +17% 领跑、服务营收 -1% 疲软，是本季的结构分化。</p>
+
+    <p><strong>Q3 FY2026 分地域拆分（毛利率差异显著）</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>地域</th><th>营收</th><th>YoY</th><th>毛利率</th></tr>
+        <tr><td>Americas 美洲</td><td>$9.57B</td><td>+14%</td><td>63.7%</td></tr>
+        <tr><td>EMEA 欧非中东</td><td>$4.05B</td><td>+9%</td><td>71.3%</td></tr>
+        <tr><td>APJC 亚太日本大中华</td><td>$2.22B</td><td>+9%</td><td>66.1%</td></tr>
+      </table>
+    </div>
+
+    <p style="margin-top:14px;"><strong>单位经济与议价能力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>对企业客户议价力：强</strong>——庞大安装基础 + IOS 生态 + 运维习惯形成高转换成本，企业换网络设备是"伤筋动骨"的工程</li>
+      <li><strong>对超大规模云客户议价力：弱</strong>——云巨头体量大、自研能力强、可用白盒/自研交换，AI 那部分生意毛利率被压是结构性的</li>
+      <li><strong>垂直整合优势</strong>——自研 Silicon One 芯片 + Acacia 光学，在 AI 网络供应链紧张时是掌控力，也是差异化</li>
+      <li><strong>周期性</strong>——网络设备与企业/运营商 capex 挂钩，本轮 AI + 园区换机是顺风，但订单（尤其超大规模客户）波动大</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══ 模块 4 ═══ -->
+<div class="section">
+  <div class="stitle">模块 4 · 经济护城河分析（5 维）</div>
+  <div class="moat-grid">
+    <div class="moat-card narrow">
+      <h5>1. 网络效应</h5>
+      <span class="moat-rate">窄</span>
+      <p>思科的护城河主要不是双边网络效应，而是生态与集成。开发者/合作伙伴/认证工程师（CCIE）生态有一定网络效应，但弱于支付/平台型公司。<strong>趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>2. 转换成本</h5>
+      <span class="moat-rate">宽</span>
+      <p>企业深度部署思科网络设备 + IOS 操作系统 + 运维流程 + 认证人才，切换要重构网络架构、重训团队，成本极高。<strong>这是思科最硬的护城河。趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>3. 成本/规模优势</h5>
+      <span class="moat-rate">中</span>
+      <p>规模采购 + 自研 Silicon One/Acacia 垂直整合带来成本与供应掌控。但<span class="warn-t">毛利率连降四季说明成本优势正被元器件涨价、关税、云客户压价侵蚀</span>。<strong>趋势：承压</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>4. 无形资产/品牌</h5>
+      <span class="moat-rate">中-宽</span>
+      <p>思科品牌 = 企业网络的默认选项 + 数千项专利 + CCIE 认证体系。安全靠 Splunk 补强。<strong>趋势：稳定但被白盒/开源软件蚕食边缘</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>5. 有效规模</h5>
+      <span class="moat-rate">中</span>
+      <p>企业网络设备市场思科长期第一，但非独占——Arista、华为、HPE(Juniper)、白盒厂商在数据中心/云侧持续分食。<strong>趋势：份额被侵蚀</strong>。</p>
+    </div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>10 年后护城河会更宽还是更窄？</strong> <span class="hl-t">核心的转换成本护城河（企业侧）仍宽且稳定，但两个方向的侵蚀不可忽视</span>：(1) <span class="warn-t">云与数据中心侧</span>——超大规模客户自研 + 白盒 + Arista 的以太网方案持续分食，思科在这块的定价权弱、毛利率被压；(2) <span class="warn-t">成本护城河承压</span>——毛利率连降四季是实打实的信号。思科的对冲是垂直整合（Silicon One + Acacia）+ 向软件/订阅转型 + 抓住 AI 后端网络的换机窗口。<strong>结论：企业收费桥的墙还在，但护城河整体是"稳定偏窄、局部承压"，不是加宽中——这与市场当前给的 25x Forward P/E 所隐含的乐观并不完全匹配。</strong></p>
+    <p><strong>定价权</strong>：企业侧中强、云侧弱。整体毛利率的方向（下行）是定价权在部分领域被侵蚀的直接证据。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 5 ═══ -->
+<div class="section">
+  <div class="stitle">模块 5 · 财务深度分析</div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 12px 0; font-family: 'Segoe UI',sans-serif;">5.1 关键比率（Q3 FY2026 vs Q3 FY2025）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>指标</th><th>Q3 FY25</th><th>Q3 FY26</th><th>变化</th><th>含义</th></tr>
+      <tr><td>总营收增速</td><td>+11%</td><td>+12%</td><td><span class="badge up">+1pp</span></td><td>创纪录 · 加速中</td></tr>
+      <tr><td>GAAP 毛利率</td><td>65.6%</td><td>63.6%</td><td><span class="badge dn">-200bp</span></td><td>结构性下行</td></tr>
+      <tr><td>非GAAP 毛利率</td><td>68.6%</td><td>66.0%</td><td><span class="badge dn">-260bp</span></td><td>连降四季 · 核心矛盾</td></tr>
+      <tr><td>非GAAP 经营利润率</td><td>34.5%</td><td>34.2%</td><td><span class="badge nt">-0.3pp</span></td><td>经营杠杆撑住</td></tr>
+      <tr><td>非GAAP 净利率</td><td>~27.1%</td><td>26.7%</td><td><span class="badge nt">稳定</span></td><td>—</td></tr>
+      <tr><td>GAAP 有效税率</td><td>~19%</td><td>16.5%</td><td><span class="badge up">下降</span></td><td>助推 GAAP 净利</td></tr>
+      <tr><td>摊薄股数（亿）</td><td>39.9</td><td>39.82</td><td><span class="badge nt">-0.2%</span></td><td>缩股被 SBC 抵消</td></tr>
+      <tr><td>TTM ROE（GAAP）</td><td>—</td><td>~25%</td><td><span class="badge up">高</span></td><td>净利 $122 亿 / 权益 $489 亿</td></tr>
+    </table>
+  </div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.2 资产负债健康度（2026-04-25 末 · $M）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>金额</th><th>说明</th></tr>
+      <tr><td>现金及等价物</td><td>7,083</td><td>—</td></tr>
+      <tr><td>短期投资</td><td>9,557</td><td>—</td></tr>
+      <tr class="hl"><td>现金 + 短投合计</td><td>16,640</td><td>可用流动性</td></tr>
+      <tr class="hl"><td>短期借款</td><td>11,932</td><td>⚠️ 较 FY25 末 5,232 飙升 · 含商票及一年内到期长债</td></tr>
+      <tr class="hl"><td>长期借款</td><td>19,371</td><td>—</td></tr>
+      <tr class="hl"><td>有息负债合计</td><td>31,303</td><td>逐项核对</td></tr>
+      <tr class="hl"><td><strong>真实净负债</strong></td><td><strong>-14,663</strong></td><td>⚠️ 净负债非净现金（含租赁约 -16,361）</td></tr>
+      <tr><td>经营租赁负债</td><td>1,698</td><td>流动 410 + 非流动 1,288（来自 10-Q）</td></tr>
+      <tr><td>存货</td><td>4,708</td><td>⚠️ 较 FY25 末 3,164 增 49% · 为 AI 订单备货</td></tr>
+      <tr><td>商誉</td><td>59,292</td><td>占总资产 47% · 多来自 Splunk 等并购</td></tr>
+      <tr><td>递延收入合计</td><td>28,599</td><td>+2% · 订阅/服务预收</td></tr>
+      <tr><td>总资产</td><td>125,546</td><td>—</td></tr>
+      <tr><td>股东权益</td><td>48,861</td><td>—</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">⚠️ <strong>净负债非净现金——铁律提示</strong>：思科有息负债 $31.3B（短债 $11.93B + 长债 $19.37B，已逐项核对）&gt; 现金+短投 $16.6B，<strong>真实净负债 -$14.66B</strong>（含经营租赁则约 -$16.36B）。这与"科技巨头零负债现金堡垒"叙事完全不同。<strong>两个异动值得盯</strong>：① 短期借款一年内从 $52 亿飙到 $119 亿；② 存货因 AI 备货一年 +49% 至 $47 亿，直接拖累经营现金流。$593 亿商誉（含 Splunk）占总资产 47%，是资产端最大的"软资产"，需持续检验是否减值。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.3 现金流量（Q3 单季 + 9 个月累计）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>Q3 FY26 单季</th><th>9 个月 FY26 累计</th><th>说明</th></tr>
+      <tr><td>经营活动现金流（OCF）</td><td>$3.76B</td><td>$8.79B</td><td>单季同比 -7%（存货 + 税款节奏）</td></tr>
+      <tr><td>- Capex（购置固定资产）</td><td>$0.41B</td><td>$1.02B</td><td>现金流量表官方口径</td></tr>
+      <tr class="hl"><td>自由现金流（FCF）</td><td>$3.34B</td><td>$7.77B</td><td>OCF − Capex</td></tr>
+      <tr><td>回购</td><td>$1.25B</td><td>$4.61B</td><td>Q3 约 1,600 万股</td></tr>
+      <tr><td>股息</td><td>$1.66B</td><td>$4.89B</td><td>$0.42/季</td></tr>
+      <tr class="hl"><td>股东返还合计</td><td>$2.91B</td><td>$9.50B</td><td>9 个月返还略超 FCF</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">⚠️ <strong>现金流质量</strong>：单季 OCF 同比 -7% <strong>不是盈利质量恶化</strong>，主因是<strong>存货增加（9 个月营运资金 -$15.5 亿）+ 税款缴付节奏</strong>——为 AI 订单备货的垫资。Capex 极轻（9 个月仅 $10.2 亿），FCF 转化健康。但要注意：<strong>9 个月股东返还 $95 亿 &gt; 9 个月 FCF $77.7 亿</strong>——差额靠资产负债表与发债补充，与短期借款飙升相互印证，是"部分杠杆化返还"。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.4 所有者盈余（价值投资口径 · FY2026E）</h3>
+  <div class="dcf-note">
+    <p><strong>所有者盈余 = 净利润 + 折旧摊销 + 非现金费用（含 SBC）− 维护性 Capex ± 营运资金</strong></p>
+    <p>思科 Capex 极轻（9 个月仅 $10.2 亿、年化约 $14 亿，占营收约 2.2%），FCF 接近所有者盈余的核心部分。但<span class="warn-t">SBC 年化约 $36 亿（单季 $9.14 亿）是真实的稀释成本，价值投资口径应视作真实费用扣除</span>。FY2026 自由现金流预计约 <strong>$11B</strong>（9 个月 $7.77B + 强劲 Q4）。</p>
+    <p><strong>所有者盈余收益率 = FCF ~$11B / 市值 $478B ≈ 2.3%</strong>——这是一个<span class="warn-t">"质量不错 + 估值偏贵"</span>的收益率：2.3% 的收益率对一个 +11% 营收增长、但毛利率在滑、增长倚重波动性大的超大规模客户订单的公司，安全边际明显不足。它反映市场已把 AI 换机潮的乐观充分计入。<strong>换句话说：思科的问题不是生意不好，而是当前 2.3% 的所有者盈余收益率几乎没有安全边际。</strong></p>
+  </div>
+</div>
+
+<!-- ═══ 模块 6 ═══ -->
+<div class="section">
+  <div class="stitle">模块 6 · 电话会分析（Q3 FY2026 + 前 2 季度）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">Q3 FY2026 电话会（2026-05-13）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"超大规模客户 AI 订单 Q3 达 $19 亿（上年同期约 $6 亿），YTD $53 亿提前超全年 $50 亿目标"——管理层</div><div class="ec-note">FY26 AI 订单目标上调至约 $90 亿（FY25 的 4.5 倍）、AI 收入上调至约 $40 亿。Acacia 光学单季订单超 $10 亿，FY26 有望增长超 200%。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"网络订单增速加速至 &gt;50%：服务商路由与计算三位数增长，数据中心/园区交换、无线、企业路由均双位数"</div><div class="ec-note">园区刷新周期启动，新一代产品爬坡快于以往；网络组合订单连续 7 个季度双位数增长。总产品订单 +35%（剔除超大规模客户仍 +19%）。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"营收 $15.8B 创纪录、超指引上限，非 GAAP 经营利润创纪录；Q4 指引 $16.7-16.9B 大超彼时市场预期"</div><div class="ec-note">全年营收指引三次上调至 $628-630 亿（+11%），非 GAAP EPS 指引 $4.27-4.29。业绩面强势。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"非 GAAP 毛利率 66.0% 同比降 260bp，受内存成本上涨、关税及超大规模客户占比结构性拖累"</div><div class="ec-note">Q4 毛利率指引区间 65.5-66.5%，中值继续承压。这是本季最需要盯的负面信号——增长的一部分是用毛利率换来的。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"宣布最高 $10 亿重组（约 4,000 岗位，第三方口径），转投硅芯片/光学/安全/AI"——同日公告</div><div class="ec-note">Q4 FY26 确认约 $4.5 亿、余下 FY27。自研 Silicon One + Acacia 垂直整合被强调为供应链掌控优势。裁员人数为媒体报道，官方口径为"最高 $10 亿税前费用"。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q2 FY2026 电话会（2026-02-11）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"营收 $15.3B（+10%）创当季纪录，非 GAAP EPS $1.04 超指引；FY26 营收指引上调至 $61.2-61.7B"</div><div class="ec-note">超大规模客户 AI 订单 $21 亿（Q1 为 $13 亿）显著加速，FY26 AI 订单目标上调至超 $50 亿；季度股息上调 1 美分至 $0.42（连续增息）。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"非 GAAP 毛利率 67.5% 同比降 120bp，管理层明确提示内存等元器件成本上行压力将持续"</div><div class="ec-note">安全业务营收下滑 5%（Splunk 整合后基数与执行问题），管理层称订单趋势改善——毛利率与安全是当时两条隐忧。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q1 FY2026 电话会（2025-11-12）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"Q1 营收 $14.9B（+8%）与非 GAAP EPS $1.00（+10%）双双超指引，创 Q1 纪录；盘后涨约 3%"</div><div class="ec-note">超大规模客户 AI 订单 $13 亿显著加速，总产品订单 +13%；上调 FY26 全年指引至营收 $60.2-61.0B。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"服务营收仅 +2%，安全营收同比下降（Q1 -2%）；毛利率 68.1% 仍同比下滑"</div><div class="ec-note">管理层将全年利润率压力归因于产品结构与投入——毛利率下行趋势从 Q1 就已埋线。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">指引兑现度追踪</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>历史指引</th><th>Q3 FY2026 实际 / 更新</th><th>评价</th></tr>
+      <tr><td>FY26 营收指引（年初 $59-60B）</td><td>三次上调至 $62.8-63.0B</td><td><span class="badge up">连续上调</span></td></tr>
+      <tr><td>FY26 AI 订单目标（原 $50 亿）</td><td>上调至约 $90 亿</td><td><span class="badge up">大幅上调</span></td></tr>
+      <tr><td>Q3 营收指引上限</td><td>$15.84B 超上限</td><td><span class="badge up">超预期</span></td></tr>
+      <tr><td>非 GAAP 毛利率</td><td>66.0%（连降四季）</td><td><span class="badge dn">持续承压</span></td></tr>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>信号汇总</strong>：Q3 FY2026 是思科"<span class="hl-t">营收创纪录 + AI 订单提前打穿目标 + 全年三次上调指引 + 经营利润率纪录</span>"的强势一季，业绩面几乎无可挑剔。但两条隐忧贯穿三个季度：<span class="warn-t">(1) 非 GAAP 毛利率从 68.1%→67.5%→66.0% 连降，是结构性、非一次性；(2) 安全业务（Splunk）持续疲软、服务营收停滞</span>。加上停披 ARR、超大规模客户订单波动大，<strong>业绩强势的另一面是"增长质量的裂缝"——这决定了它是"新成长股"还是"周期性顺风的成熟股"。</strong></p>
+  </div>
+</div>
+
+<!-- ═══ 模块 7 ═══ -->
+<div class="section">
+  <div class="stitle">模块 7 · 多模型估值（8 种方法）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">7.1 估值汇总表（独立估值 · 不锚定现价 · USD）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>估值方法</th><th>每股公允价</th><th>假设要点</th><th>权重</th></tr>
+      <tr><td>1. 相对估值（P/E）</td><td>$101</td><td>FY27 非 GAAP EPS $4.82 × 21x（高于历史十几倍、低于当前 25x，给 AI 顺风溢价但不给满）</td><td>25%</td></tr>
+      <tr><td>2. DCF（基准）</td><td>$88</td><td>FCF $11B、未来 5 年 CAGR +8~9%、WACC 8~8.5%、永续 3.5~4%</td><td>20%</td></tr>
+      <tr><td>3. 所有者盈余收益率</td><td>$92</td><td>FCF $11B / 3.2% 目标收益率 = $344B → /3.98B 股（收益率要求略高于顶级质量，反映毛利率下行）</td><td>15%</td></tr>
+      <tr><td>4. PEG</td><td>$96</td><td>目标 PEG 2.0 × EPS 增速 10% = P/E 20x × FY27 $4.82</td><td>10%</td></tr>
+      <tr><td>5. DDM</td><td>不适用（参考 ~$40）</td><td>DPS $1.68、增速 ~3%、要求回报 8% → 股息太小，仅参考</td><td>5%</td></tr>
+      <tr><td>6. NAV</td><td>不适用</td><td>非资产型公司（商誉/无形为主，$593 亿商誉非可变现资产）</td><td>0%</td></tr>
+      <tr><td>7. 反向 DCF</td><td>当前价隐含 FCF 增长 <strong>~12-13%</strong></td><td>$121 隐含市场认为思科能持续低两位数 FCF 增长——对毛利率在滑、增长倚重超大规模客户的公司偏乐观</td><td>15%</td></tr>
+      <tr><td>8. SOTP 分部加总</td><td>$105</td><td>网络（高倍数）+ 安全（软件属性）+ 协作（低倍数）+ 可观测性 + 服务，减净负债</td><td>10%</td></tr>
+      <tr class="hl"><td><strong>加权公允价中位数</strong></td><td><strong>$110</strong></td><td>估值区间 $88-125 · 中位 ~$110</td><td>100%</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.8;"><strong>与现价对照</strong>：当前 $121 vs 加权公允 $110 · <span class="warn-t">现价高出公允约 10%（负安全边际）</span>——<strong>远不满足价值投资 25% 安全边际的门槛</strong>。思科是不错的成熟收费桥 + AI 顺风，但当前价格已把这份乐观充分反映，几乎没有安全边际。反向 DCF 显示市场已定价 ~12-13% 长期 FCF 增长，对一家毛利率下行、增长倚重波动性大的超大规模客户订单的公司，这份定价偏满。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.2 P/E 多档透视表</h3>
+  <p style="margin-bottom:10px; font-size:13px; color:var(--text2);">思科 GAAP vs Non-GAAP 差异巨大（TTM GAAP EPS $3.08 vs Non-GAAP $4.09，差约 33% &gt; 10% 阈值，主因 SBC + Splunk 无形摊销 + 重组），触发多档透视：</p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>口径</th><th>EPS</th><th>P/E (基于 $121.31)</th><th>读数说明</th></tr>
+      <tr><td>TTM GAAP P/E</td><td>$3.08</td><td>~39.4x</td><td>含 SBC/摊销/重组 · 偏高</td></tr>
+      <tr><td>TTM Non-GAAP P/E</td><td>$4.09</td><td>~29.7x</td><td>剔一次性 · 较可信</td></tr>
+      <tr><td>FY2026 指引 P/E</td><td>$4.28</td><td>~28.3x</td><td>本财年在途（指引中值）</td></tr>
+      <tr class="hl"><td><strong>Forward P/E（FY2027 共识 $4.82）</strong></td><td><strong>$4.82</strong></td><td><strong>~25.2x</strong></td><td>最可信档 · 市场惯用</td></tr>
+      <tr><td>历史常态 P/E（AI 前）</td><td>—</td><td>~14-17x</td><td>作为"收费站"时的长期区间</td></tr>
+      <tr><td>FCF Yield (FY26E)</td><td>FCF ~$11B</td><td>~2.3%</td><td>估值偏贵的直接读数</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3);"><strong>最可信档</strong>：Forward P/E ~25x（FY2027）/ ~28x（FY2026）。<span class="warn-t">关键对照：思科作为成熟"收费站"时历史长期只有 14-17x，如今被 AI 换机潮重估到 25x</span>——重估已经发生。同业：Arista(ANET) ~64x（增速 +35% 溢价）、HPE ~45x（GAAP 受并购摊销扭曲）、Palo Alto(PANW) ~268x（GAAP 严重扭曲）。思科估值远低于纯 AI 网络对手，但对自身历史与增长质量而言，25x 已在满价区，无安全边际。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.3 12 个月目标价（概率加权）</h3>
+  <div class="pgrid">
+    <div class="pbox"><div class="pl">悲观情景 · 35%</div><div class="pv pc">$93</div><div class="pn">AI 订单消化 + 毛利率继续下行 + 估值压缩至 ~20x FY27<br>距现价 -23%</div></div>
+    <div class="pbox"><div class="pl">基准情景 · 40%</div><div class="pv pf">$115</div><div class="pn">低两位数增长延续 + 估值维持 ~24x + 持续回购<br>距现价 -5%</div></div>
+    <div class="pbox"><div class="pl">乐观情景 · 25%</div><div class="pv ps">$145</div><div class="pn">AI 订单持续加速 + 毛利率企稳 + 估值重估至 ~30x + FY27 EPS 超预期<br>距现价 +20%</div></div>
+  </div>
+  <p style="font-size:13px; color:var(--text2);"><strong>概率加权目标价</strong>：35%×$93 + 40%×$115 + 25%×$145 = <strong>$114.8 ≈ $115</strong>。<strong>叠加 1.4% 股息 = 总回报约 -4%</strong>——不激动。<span class="warn-t">当前 $121 高于概率加权目标 $115、更高于独立公允 $110 与机械首仓 $88——不在合理建仓窗口</span>。目标价低于现价，评级自然落在持有观望，逻辑一致。</p>
+</div>
+
+<!-- ═══ 模块 8 ═══ -->
+<div class="section">
+  <div class="stitle">模块 8 · 竞争与行业分析</div>
+  <div class="cmt">
+    <p><strong>网络设备格局</strong>：思科是企业与运营商网络设备长期第一，但在快速增长的 AI 数据中心以太网侧，直接对手 Arista 势头凶猛；HPE 于 2025 年 7 月收购 Juniper 后成为园区/数据中心网络第二极；安全侧则对标 Palo Alto。思科的优势在广度与安装基础，短板在云/数据中心侧的定价权与增速。</p>
+
+    <p><strong>核心同业对比（2026-07-10 收盘）</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>公司</th><th>市值</th><th>最近季度营收增速</th><th>TTM P/E</th><th>核心评价</th></tr>
+        <tr class="hl"><td><strong>Cisco CSCO</strong></td><td>$478B</td><td>+12%</td><td><strong>~39x GAAP / ~30x 非GAAP</strong></td><td>广度 + 安装基础之王 · 增速最慢</td></tr>
+        <tr><td>Arista ANET</td><td>$235B</td><td>+35.1%</td><td>~64x</td><td>AI 数据中心以太网直接对手 · 增速估值双高</td></tr>
+        <tr><td>HPE</td><td>$64B</td><td>+29~33%(含Juniper)</td><td>~45x(GAAP扭曲)</td><td>收购 Juniper 后园区/数据中心第二极 · 增速多为并购贡献</td></tr>
+        <tr><td>Palo Alto PANW</td><td>$266B</td><td>+31%</td><td>~268x(GAAP扭曲)</td><td>安全对标 · 思科 Security 本季持平 vs PANW 高增长</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:10px; font-size:12px; color:var(--text3);">看点：思科市值最大、增速最慢（+12% vs ANET +35%、HPE +29~33%、PANW +31%），但也最"便宜"（Forward P/E 25x vs ANET 64x）。<strong>市场用增速给对手估值溢价，用体量给思科估值折价</strong>——思科的看多逻辑是"AI 换机潮把慢公司的增速临时抬起来 + 便宜"，看空逻辑是"份额被侵蚀 + 毛利率下行 + 增长不可持续"。</p>
+
+    <p style="margin-top:14px;"><strong>波特五力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>新进入者：</strong>企业侧低（转换成本高）· 云/数据中心侧中（白盒 + 云自研可绕过）</li>
+      <li><strong>替代品：</strong>中（白盒交换 + 开源网络软件 + 云自研芯片）</li>
+      <li><strong>供应商议价：</strong>中（内存等元器件涨价正压毛利率 · 思科靠 Silicon One/Acacia 垂直整合对冲）</li>
+      <li><strong>买家议价：</strong>企业弱、超大规模云客户强（后者压毛利率）</li>
+      <li><strong>同业竞争：</strong>中高（Arista/HPE/华为/白盒在数据中心侧持续分食）</li>
+    </ul>
+
+    <p><strong>颠覆风险</strong>：白盒交换 + 云自研 + Arista 的以太网方案在高增长的数据中心/AI 侧持续侵蚀思科份额与定价权。思科的对冲是垂直整合芯片 + 抓住 AI 后端网络换机窗口 + 企业侧的高转换成本堡垒。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 9 ═══ -->
+<div class="section">
+  <div class="stitle">模块 9 · 技术面与 K 线分析（次要参考）</div>
+  <div class="cmt">
+    <p><strong>趋势</strong>：CSCO 过去一年是一波强劲上行，从 52 周低 $65.75 涨到当前 $121.31（<span class="hl-t">近乎翻倍</span>），距 52 周高 $130.37 仅 -7%，处于历史高位区间。AI 换机叙事 + 连续超预期财报是主推力。</p>
+
+    <p><strong>关键价位</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>支撑</strong>：$110（前期平台）/ $95-100（估值底 · FY27 P/E ~20x）/ $65.75（52 周低）</li>
+      <li><strong>阻力</strong>：$130.37（52 周高）/ $145（乐观情景）</li>
+    </ul>
+
+    <p><strong>指标信号</strong>：处于历史高位、一年翻倍后<span class="warn-t">技术面处高位意味着回调风险 &gt; 追涨空间</span>，RSI 中性偏强。财报日（8 月中下旬）前后波动可能放大。</p>
+
+    <p><strong>注意</strong>：思科的核心驱动是 AI 订单兑现 + 毛利率方向 + Forward P/E 估值，技术面是次要参考。价值投资者应等基本面回调（如 AI 订单降温、毛利率继续下行触发估值压缩）到 $95-100 甚至更低的安全边际区，而非在一年翻倍后的高位追涨。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 10 ═══ -->
+<div class="section">
+  <div class="stitle">模块 10 · 增长催化剂与前景展望</div>
+  <div class="cmt">
+    <p><strong>短期催化剂（未来 6 个月）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>2026-08-19 前后 Q4 FY2026 财报</strong>（第三方预估日，公司尚未正式公告）——全年收官季，Q4 指引营收 $16.7-16.9B（隐含 +14~15%）、AI 订单与收入兑现、毛利率区间中值是焦点</li>
+      <li><strong>超大规模客户 AI 订单持续性</strong>——FY26 目标约 $90 亿，YTD $53 亿，Q4 能否延续是关键</li>
+      <li><strong>$10 亿重组执行</strong>——Q4 确认约 $4.5 亿，资源转投硅光/安全/AI</li>
+      <li><strong>Acacia 光学放量</strong>——单季订单超 $10 亿，FY26 有望增长超 200%</li>
+    </ul>
+
+    <p><strong>长期展望（3-5 年）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>AI 后端网络换机窗口</strong>——AI 数据中心的以太网/光互联需求是最大顺风，Silicon One + Acacia 垂直整合是差异化</li>
+      <li><strong>园区换机周期</strong>——多年期园区刷新周期启动，订单 &gt;+25%，是企业侧的稳定拉动</li>
+      <li><strong>软件/订阅转型</strong>——向经常性收入迁移提升估值中枢，但<span class="warn-t">停披 ARR 降低了可验证性</span></li>
+      <li><strong>风险情景</strong>：AI capex 周期反转 / 毛利率继续下行 / Splunk 协同不及预期 / 份额被 Arista 白盒侵蚀</li>
+    </ul>
+
+    <p><strong>关键判断</strong>：思科当前的增长加速，本质是"成熟收费站叠加了一轮周期性 AI capex 顺风 + 园区换机窗口"。核心问题不是短期增长空间，而是<span class="warn-t">这轮低两位数增速是"新常态"还是"周期高点"——市场给的 25x 估值押的是前者，而毛利率下行与超大规模客户集中度提示后者的风险</span>。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 11 ═══ -->
+<div class="section">
+  <div class="stitle">模块 11 · 风险矩阵</div>
+  <div class="risk-grid">
+    <div class="risk-card r4"><h5>1. 估值无安全边际</h5><span class="risk-score">4 / 5 高</span><p>Forward P/E 25x（FY27）远高历史 14-17x · 现价高于独立公允 $110 约 10% · 任何增速放缓或毛利率利空都可能触发估值压缩</p></div>
+    <div class="risk-card r4"><h5>2. 毛利率结构性下行</h5><span class="risk-score">4 / 5 高</span><p>非 GAAP 毛利率连降四季（68.6%→66.0%，-260bp）· 内存成本 + 关税 + 超大规模客户占比 · 是结构性非一次性</p></div>
+    <div class="risk-card r4"><h5>3. AI 订单集中与波动</h5><span class="risk-score">4 / 5 高</span><p>增长加速高度倚重超大规模客户 AI 订单（YTD $53 亿）· 订单季度间波动大（$13→$21→$19 亿）· 单一客户 capex 决策可改写一季</p></div>
+    <div class="risk-card r3"><h5>4. 净负债 & Splunk 商誉</h5><span class="risk-score">3 / 5 中</span><p>真实净负债 -$146.6 亿（非净现金）· 短债一年飙至 $119 亿 · $593 亿商誉（含 Splunk $280 亿并购）· 安全分部持平 · 减值/整合风险</p></div>
+    <div class="risk-card r3"><h5>5. 竞争与份额侵蚀</h5><span class="risk-score">3 / 5 中</span><p>Arista(+35%)/白盒/云自研在数据中心侧持续分食 · HPE 收购 Juniper 加剧园区竞争 · 服务营收 -1% 停滞</p></div>
+    <div class="risk-card r2"><h5>6. 生意质量（机会）</h5><span class="risk-score">2 / 5 反向</span><p>34% 纪录经营利润率 + 强 FCF + 高转换成本企业堡垒 + AI/园区换机顺风 · 成熟收费桥本身是安全垫</p></div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>3 个黑天鹅情景</strong>：</p>
+    <ol style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>AI capex 周期反转 + 超大规模客户订单骤降</strong>——概率 20% · 增速回落至个位数 · 估值压缩至 ~18x · 股价跌至 $85-90</li>
+      <li><strong>毛利率跌破 65% + 经营杠杆失效</strong>——概率 15% · 市场重新按"低毛利硬件商"定价 · 股价跌至 $90 附近</li>
+      <li><strong>Splunk 商誉减值 / 安全分部持续失血</strong>——概率 10% · $593 亿商誉的信任裂缝 · 一次性冲击 GAAP 利润</li>
+    </ol>
+
+    <p style="margin-top:10px;"><strong>下行支撑</strong>：成熟收费桥 + 34% 经营利润率 + 强 FCF + 企业侧高转换成本构成质量底。<span class="hl-t">$95-100 是相对硬的估值底</span>（FY27 P/E ~20x + 历史支撑）。但要注意：思科一年内曾低至 $65.75，说明在悲观情景下回撤空间不小——高位买入的下行风险不可低估。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 12 ═══ -->
+<div class="section">
+  <div class="stitle">模块 12 · 股东回报分析</div>
+  <div class="cmt">
+    <p><strong>思科是"增息 + 大额回购"的成熟资本返还机器——但要区分授权、执行、以及回购是否真的转化成缩股。</strong>本季返还股东 $29.1 亿（股息 $16.6 亿 + 回购 $12.5 亿），过去三年累计返还超 $350 亿，值得细拆。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 18px 0 10px; font-family: 'Segoe UI',sans-serif;">12.1 公司给了股东多少？</h3>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>年度</th><th>股息总额</th><th>回购金额</th><th>股东总回报</th><th>说明</th></tr>
+        <tr><td>FY2023</td><td>$63.0 亿</td><td>$42.9 亿</td><td>$105.9 亿</td><td>—</td></tr>
+        <tr><td>FY2024</td><td>$63.8 亿</td><td>$57.9 亿</td><td>$121.7 亿</td><td>回购放量</td></tr>
+        <tr><td>FY2025</td><td>$64.4 亿</td><td>$60.0 亿</td><td>$124.4 亿</td><td>—</td></tr>
+        <tr class="hl"><td>3 年合计</td><td>$191.2 亿</td><td>$160.8 亿</td><td><strong>$352.0 亿</strong></td><td>股息略多于回购</td></tr>
+        <tr><td>Q3 FY26 单季</td><td>$16.6 亿</td><td>$12.5 亿（~1,600 万股）</td><td>$29.1 亿</td><td>回购占 43%</td></tr>
+      </table>
+    </div>
+    <p style="font-size:13px; color: var(--text2); margin-top:8px"><strong>Trailing Shareholder Yield</strong> ≈ FY2025 返还 $124.4 亿 / 市值 $478B ≈ <strong>2.6%</strong>（回购 ~1.3% + 股息 ~1.3%）。<span class="hl-t">思科是"股息与回购并重"的成熟美股返还结构</span>——过去三年股息累计（$191 亿）甚至略多于回购（$161 亿），股息可靠性顶级，连续多年增息。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.2 给的方式好不好？</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><span class="warn-t">缩股含金量打折</span>：摊薄股数三年仅从 <strong>40.6 亿（FY23）降到 39.8 亿（Q3FY26）</strong>，缩股约 3%。原因是单季 <strong>SBC 高达 $9.14 亿</strong>（年化约 $36 亿），回购的缩股效果被股权激励稀释<strong>大部分对冲</strong>——美股常见的"用现金对冲 SBC 稀释"，含金量比"真实注销缩股"打折</li>
+      <li><strong>回购入库存股</strong>：美股口径回购多入库存股，用于员工股权激励，实质是对冲 SBC，而非纯粹增厚每股内在价值</li>
+      <li><strong>回购择时</strong>：本季回购约 1,600 万股、金额 $12.5 亿（公司披露均价约 $80）——若属实则在相对低位执行、择时不差；但缩股绝对幅度仍被 SBC 抵消</li>
+    </ul>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.3 能不能继续给、给多少？</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>已授权额度</strong>：剩余回购授权 <strong>$96 亿</strong>（无到期日，约占市值 2%）· 执行历史可信（常年足额回购）· 但额度相对市值不算大，缺乏"大手笔加码"的信号</li>
+      <li><strong>股息政策</strong>：连续增息，2026 年 2 月上调至 $0.42/季（年化 $1.68），但<span class="warn-t">增速偏慢（近年每年仅加 1 美分，约 +2.5%/年）</span>——是稳健派息而非累进式高增长</li>
+      <li><strong>(股息 + 回购) / FCF 覆盖度</strong>：FY2025 返还 $124.4 亿 / FCF 约 $110-120 亿 ≈ <strong>100%+</strong>；9 个月 FY26 返还 $95 亿 &gt; FCF $77.7 亿——<span class="warn-t">返还略超 FCF，靠动用现金 + 发债补充</span>，与短期借款一年飙至 $119 亿相互印证</li>
+      <li><strong>借债回购检验</strong>：思科是净负债 -$146.6 亿，返还部分为杠杆化。对 FCF 强、融资成本可控的成熟公司尚可持续，但已无"净现金加持"的余裕，扩张返还空间有限</li>
+    </ul>
+    <p><strong>模块小结</strong>：<span class="hl-t">积极但靠库存股、含金量打折</span>——连续增息 + 大额返还 + 授权可信，可靠性顶级；但摊薄股数三年仅缩 3%（SBC 抵消大部分回购）+ 增息偏慢 + 返还略超 FCF 呈净负债，使其达不到"真实缩股高含金量"的最高档。这是一台可靠但不惊艳的资本返还机器，会自然反映在评分卡第 5 维"资本配置纪律"的 B 评级中。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 13 ═══ -->
+<div class="section">
+  <div class="stitle">模块 13 · 海图评分卡 + 投资决策</div>
+
+  <div class="scorecard">
+    <h3 style="font-size:15px; color:var(--text); margin-bottom: 16px; font-family: 'Segoe UI',sans-serif;">海图评分卡（6 维 A-D）</h3>
+    <div class="score-grid">
+      <div class="score-card"><div class="score-letter s-bp">B+</div><div class="score-body"><h4>1. 生意可预测性</h4><p>收费桥模式清晰，但增长现倚重波动性大的超大规模客户 AI 订单 + 毛利率在滑，能见度中上而非顶级。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">A-</div><div class="score-body"><h4>2. 经济护城河</h4><p>企业侧转换成本宽 + 安装基础 + Silicon One/Acacia 垂直整合。但云/数据中心侧被 Arista/白盒侵蚀，毛利率下行=成本护城河承压。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">B+</div><div class="score-body"><h4>3. 管理层质量</h4><p>Robbins 稳健务实 + 资本返还有纪律 + 转向 AI/硅光。但 Splunk $280 亿并购整合待证 + 停披 ARR。</p></div></div>
+      <div class="score-card"><div class="score-letter s-b">B</div><div class="score-body"><h4>4. 财务质量</h4><p>34% 纪录经营利润率 + 强 FCF + 高 ROE 25%。但净负债 -$146.6 亿（非净现金）+ 毛利率连降 + 存货 +49% + $593 亿商誉。</p></div></div>
+      <div class="score-card"><div class="score-letter s-b">B</div><div class="score-body"><h4>5. 资本配置纪律</h4><p>连续增息 + 大额返还 + 授权可信，可靠性顶级。但缩股仅 3%/3年（SBC 抵消）+ 增息偏慢 + 返还略超 FCF。</p></div></div>
+      <div class="score-card"><div class="score-letter s-c">C</div><div class="score-body"><h4>6. 估值与安全边际</h4><p>Forward P/E 25x 远高历史 14-17x · 现价高于公允 $110 约 10% · <strong>负安全边际，满价。</strong></p></div></div>
+    </div>
+
+    <div class="flag-row">
+      <strong>红旗排查</strong>：<strong>非 GAAP 毛利率连降四季</strong>（结构性下行 · 增长质量裂缝）+ <strong>净负债非净现金</strong>（-$146.6 亿 · 短债一年飙至 $119 亿 · 叙事误区）+ <strong>估值无安全边际</strong>（Forward P/E 25x、现价高于公允 10%）。三项触发"<span class="warn-t">增长质量存疑 + 满估值</span>"——尽管 6 维基础质量不错（护城河 A-、管理层/生意可预测性 B+），综合评级<strong>降至「持有观望」</strong>。
+    </div>
+
+    <p style="margin-top:18px; font-size:14px; color:var(--text); line-height:1.85;"><strong>综合评级</strong>：<span class="rating-badge rating-hold" style="font-size:14px;">持有观望</span>。生意是不错的成熟收费桥（护城河 A-），但估值维度 C（满价负安全边际）+ 毛利率下行 + 净负债三项红旗 → 降至持有观望。核心判断：<strong>思科的问题不是生意行不行——订单簿已经回答了；而是 $121 的价格里，市场已经为那个 AI 明天预付了多少。现有持仓者可继续持有让它复利，新买入者应等回调至 $88 以下的安全边际区，而非在一年翻倍后的高位追涨。</strong></p>
+  </div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">投资决策（精确价格 · USD）</h3>
+
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>项目</th><th>价格</th><th>说明</th></tr>
+      <tr><td>12 个月概率加权目标价</td><td><strong>$115</strong> (-5%)</td><td>悲观$93/35% + 基准$115/40% + 乐观$145/25%</td></tr>
+      <tr><td>独立估值加权公允（8 法中位）</td><td>$110</td><td>估值区间 $88-125</td></tr>
+      <tr><td>悲观目标（35% 概率）</td><td>$93 (-23%)</td><td>AI 订单消化 + 毛利率下行 + 压至 20x FY27</td></tr>
+      <tr><td>乐观目标（25% 概率）</td><td>$145 (+20%)</td><td>AI 加速 + 毛利率企稳 + 重估至 30x</td></tr>
+      <tr class="hl"><td>首仓建仓（公允 $110 × 80%）</td><td><strong>$88</strong></td><td>距现价 -27% · 耐心等回调 · 对应 FY27 P/E ~18x</td></tr>
+      <tr><td>二仓建仓（× 70%）</td><td>$77</td><td>-37% · 大幅回调机会</td></tr>
+      <tr><td>三仓建仓（× 60%）</td><td>$66</td><td>-46% · 52 周低附近黑天鹅级机会</td></tr>
+      <tr><td>止盈一档</td><td>$145</td><td>+20% · 减仓 25%</td></tr>
+      <tr><td>止盈二档</td><td>$165</td><td>+36% · 再减 25%</td></tr>
+      <tr><td>止盈三档</td><td>$185</td><td>+53% · 再减 25% · 最后 25% 视 AI 兑现度长期持有</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.85;"><strong>建议总仓位</strong>：<strong>2-4%</strong>（质量观察仓 · 当前满估值，应在回调至 $88 以下时建仓，不追高）。<strong>持有周期</strong>：3-5 年（穿越一轮 AI capex 周期 + 验证毛利率与增长可持续性）。<strong>关键监控指标</strong>：① 8 月中下旬 Q4 FY26 财报（AI 订单与收入兑现、毛利率区间中值）；② 非 GAAP 毛利率能否止跌企稳（跌破 65% 是警报）；③ 超大规模客户 AI 订单的连续性；④ Splunk/安全业务能否止跌；⑤ $10 亿重组执行；⑥ Forward P/E 是否回落至 20x 以下（估值机会）。<strong>下次催化剂</strong>：2026-08-19 前后 Q4 FY2026 财报（第三方预估日，公司尚未正式公告）。</p>
+</div>
+
+<!-- ═══ 海图页末长评 ═══ -->
+<div class="section">
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记 · 1160 字</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p class="lead">华尔街曾经给思科贴的标签是"增长见顶的收费站、买它就是买那点股息"。可过去一年，这只老牌网络股股价从 $65 一路翻到 $121——把它从冷宫里拉出来的，是那场席卷全球机房的 AI 基建潮。Q3 营收 +12% 创纪录、超大规模客户 AI 订单 YTD 已达 $53 亿、全年 AI 订单目标从 $50 亿上调到约 $90 亿。业绩这一面无可挑剔。但夜读财报，我盯住的是另外两行字：非 GAAP 毛利率连降四个季度（68.6%→66.0%），以及资产负债表上那笔被很多人忽略的——净负债 $146.6 亿。热闹的季度里，脚注往往比头条更诚实。</p>
+
+      <p>先把生意说清：思科是<strong>企业与运营商网络世界的收费桥</strong>——交换机、路由器、安全，如今再加上 AI 后端网络与硅光，一台被 AI 换机潮重新点燃的成熟现金机器。Q3 FY2026：营收 $158.4 亿（+12%，创纪录）、非 GAAP 经营利润 $54.1 亿（利润率 34.2%，创纪录）、非 GAAP EPS $1.06（+10%）、9 个月自由现金流 $77.7 亿。</p>
+
+      <h4>五个研判要点</h4>
+
+      <p><strong>一、增长是真的，而且在加速。</strong> 营收增速五个季度 +11%→+8%→+8%→+10%→+12%，Q4 指引隐含 +14~15%；网络订单 &gt;+50% 且连续七个季度双位数，园区换机周期启动、数据中心交换订单 &gt;+40%。最亮的是 AI：超大规模客户 AI 订单 Q1 $13 亿→Q2 $21 亿→Q3 $19 亿，YTD $53 亿提前打穿全年 $50 亿目标，管理层顺势把 <span class="hl-t">FY26 AI 订单目标上调到约 $90 亿（FY25 的 4.5 倍）</span>、AI 收入上调到约 $40 亿。全年营收指引已三次上调至 $628-630 亿。能见度不靠故事，靠订单簿。</p>
+
+      <p><strong>二、毛利率连降四季，是这份财报的核心矛盾。</strong> 非 GAAP 毛利率 68.6%→68.4%→68.1%→67.5%→66.0%，一年掉了 260bp。原因是结构性的：<span class="warn-t">内存等元器件涨价、关税、以及超大规模客户占比上升</span>——AI 那部分生意本身就更低毛利。经营杠杆暂时把经营利润率顶在 34.2% 的纪录位，但毛利率的方向，是这台机器质量的第一道裂缝。<strong>思科在用毛利率换增长。</strong></p>
+
+      <p><strong>三、思科不是"净现金"公司，别被叙事骗了。</strong> 现金加短投 $166.4 亿，有息负债却有 $313 亿（短期借款从 FY25 年末的 $52 亿飙到 $119 亿），<span class="warn-t">真实净负债 $146.6 亿</span>；再算上经营租赁，接近 -$164 亿。存货为 AI 订单备货一年增加 49% 到 $47 亿，经营现金流因此同比 -7%——是垫资、不是盈利恶化，但这张表比"零负债现金堡垒"的印象紧得多。商誉 $593 亿（Splunk 等并购）也压在资产端。</p>
+
+      <p><strong>四、股东回报可靠，但含金量打了折。</strong> 过去三年股息累计 $191 亿、回购累计 $161 亿，连续增息、季度股息刚上调到 $0.42；剩余回购授权 $96 亿。可硬指标是摊薄股数——三年仅从 40.6 亿降到 39.8 亿，<span class="warn-t">缩了约 3%</span>。原因是单季 $9.14 亿的股权激励（SBC）几乎把回购的缩股效果对冲掉了。给了钱，是真的；但很大一部分回购只是在替 SBC 接盘。</p>
+
+      <p><strong>五、估值：AI 的剧本，价格已经付了大半。</strong> 海图独立八法加权公允约 <strong>$110</strong>（相对 P/E、DCF、所有者盈余、PEG、SOTP 等），现价 $121 溢价约 10%，够不着 25% 安全边际的门槛。Forward P/E：FY26 约 28x、FY27 约 25x——而思科历史上长期是十几倍的低增长收费站。<span class="hl-t">反向 DCF 显示，$121 已隐含市场相信思科能持续低两位数增长</span>；对一家毛利率在滑、增长又倚重波动性极大的超大规模客户订单的公司，这份乐观并不便宜。买在这里，赚的是超预期的部分，扛的是不及预期的全部。</p>
+
+      <h4>海图研判</h4>
+
+      <p><strong>评级：持有观望</strong>（"AI 网络换机潮 + 订单加速 + 34% 纪录经营利润率 + 可靠资本返还"的老牌收费桥，对垒"毛利率连降四季 + $146.6 亿净负债 + SBC 抵消回购 + Forward P/E 25x 无安全边际"的质量与价格风险）。12 个月概率加权目标价 <strong>$115</strong>（悲观 $93 / 35%、基准 $115 / 40%、乐观 $145 / 25%，较现价约 -5%）。</p>
+
+      <p>操作建议：现价 $121 不追。机械建仓三档：<strong>首仓 $88</strong>（公允 $110×80%，对应 FY27 P/E ~18x）、<strong>二仓 $77</strong>、<strong>三仓 $66</strong>（52 周低附近的黑天鹅价）。止盈三档：$145 / $165 / $185 各减 25%，最后 25% 视 AI 兑现度长期持有。建议仓位 <strong>2-4%</strong>（质量观察仓），持有周期 3-5 年。关键监控：8 月中下旬 Q4 财报（AI 订单与收入兑现、毛利率区间中值）、超大规模客户订单的连续性、Splunk/安全业务能否止跌、$10 亿重组的执行、Forward P/E 是否回落到 20x 以下。</p>
+
+      <h4>风险提示</h4>
+
+      <p>超大规模客户 AI 订单波动（单一客户 capex 决策可改写一个季度）、毛利率继续下行、安全业务（Splunk 整合）持续疲软、$10 亿重组扰动、净负债与 $593 亿商誉、满估值下的戴维斯双杀——一年内股价低点 $65.75 就是波动率的预演。$95-100 附近是相对硬的估值底（FY27 P/E ~20x + 历史支撑）。</p>
+
+      <p>关键叙事：<strong>思科的问题从来不是生意行不行——订单簿已经回答了；而是 $4780 亿市值里，市场为那个 AI 明天预付了多少。</strong>好生意也要好价格，尤其是一台刚被重新定价、毛利率却在悄悄滑落的老机器。把它放进观察列表的最上方，然后——等一次它跌给你看的机会。下次催化剂：2026-08-19 前后 Q4 FY2026 财报（第三方预估日，公司尚未正式公告）。</p>
+
+      <p class="haitu-sign">—— 海图，灯下落笔，明日再观风浪。</p>
+
+      <p class="haitu-disc">⚠️ 免责声明：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，不构成任何投资建议。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div>《海图夜读》 · 思科 Cisco CSCO Q3 FY2026 海图研判</div>
+  <div style="margin-top:6px;">发布日 2026-05-13 · 研判日 2026-07-11 · 数据来源 Cisco Q3 FY2026 官方财报新闻稿（SEC 8-K Exhibit 99.1 + IR PDF）+ 10-Q（csco-20260425）+ 电话会 transcript · 股价 2026-07-10 收盘</div>
+</footer>
+
+<script>
+let curTheme = 'light';
+function toggleTheme() {
+  curTheme = curTheme === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', curTheme);
+  renderCharts();
+}
+
+const palette = {
+  light: { accent: '#8a9a8e', accent2: '#7b8fa0', accent3: '#b08d7a', gold: '#b9a06a', red: '#b87070', green: '#7a9a7a', grid: '#e5ddd5', text: '#7a706a' },
+  dark:  { accent: '#8a9a8e', accent2: '#8fabbf', accent3: '#c9a48e', gold: '#c9b07a', red: '#c08080', green: '#8aaa8a', grid: '#3e3a35', text: '#a09890' }
+};
+
+let charts = {};
+function renderCharts() {
+  Object.values(charts).forEach(c => c && c.destroy && c.destroy());
+  charts = {};
+  const p = palette[curTheme];
+  Chart.defaults.color = p.text;
+  Chart.defaults.borderColor = p.grid;
+
+  const quarters = ['Q3 25','Q4 25','Q1 26','Q2 26','Q3 26'];
+  const rev = [14.149, 14.673, 14.883, 15.349, 15.841];
+  const yoy = [11, 8, 8, 10, 12];
+  charts.rev = new Chart(document.getElementById('chartRev'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { type:'bar', label: '总营收 ($B)', data: rev, backgroundColor: p.accent + 'CC', yAxisID: 'y' },
+      { type: 'line', label: 'YoY %', data: yoy, borderColor: p.red, backgroundColor: p.red, tension: 0.3, yAxisID: 'y1' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false }, y1: { position: 'right', grid: { drawOnChartArea: false }, ticks: { callback: v => v + '%' } } } }
+  });
+
+  charts.margin = new Chart(document.getElementById('chartMargin'), {
+    type: 'line',
+    data: { labels: quarters, datasets: [
+      { label: '非GAAP毛利率 %', data: [68.6, 68.4, 68.1, 67.5, 66.0], borderColor: p.red, backgroundColor: p.red + '22', tension: 0.3, fill: false },
+      { label: 'GAAP毛利率 %', data: [65.6, 65.7, 65.5, 65.0, 63.6], borderColor: p.accent3, backgroundColor: p.accent3 + '22', tension: 0.3, fill: false },
+      { label: '非GAAP经营利润率 %', data: [34.5, 34.3, 34.4, 34.6, 34.2], borderColor: p.green, backgroundColor: p.green + '22', tension: 0.3, fill: false }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false, ticks: { callback: v => v + '%' } } }, plugins: { legend: { labels: { font: { size: 10 } } } } }
+  });
+
+  charts.segment = new Chart(document.getElementById('chartSegment'), {
+    type: 'doughnut',
+    data: {
+      labels: ['Networking 网络', '服务 Service', 'Security 安全', 'Collaboration 协作', 'Observability 可观测性'],
+      datasets: [{ data: [8.815, 3.724, 2.008, 1.024, 0.269], backgroundColor: [p.accent, p.accent2, p.accent3, p.gold, p.red] }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { font: { size: 10 } } } } }
+  });
+
+  charts.eps = new Chart(document.getElementById('chartEps'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { label: 'GAAP EPS', data: [0.62, 0.71, 0.72, 0.80, 0.85], backgroundColor: p.accent3 + 'CC' },
+      { label: 'Non-GAAP EPS', data: [0.96, 0.99, 1.00, 1.04, 1.06], backgroundColor: p.green + 'CC' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, ticks: { callback: v => '$' + v } } } }
+  });
+
+  buildSankey();
+}
+
+function buildSankey() {
+  const p = palette[curTheme];
+  const labels = ['营收 $15.84','营业成本 $5.77','毛利 $10.07','研发 $2.38','销售&营销 $2.86','管理及其他 $0.87','营业利润 $3.96','净利息及其他 $0.08','税前 $4.04','所得税 $0.67','GAAP净利 $3.37'];
+  const data = {
+    type: 'sankey',
+    orientation: 'h',
+    node: { pad: 15, thickness: 18, line: { color: p.grid, width: 0.5 }, label: labels, color: [p.accent, p.red, p.green, p.accent2, p.accent2, p.accent2, p.green, p.gold, p.accent, p.red, p.green] },
+    link: {
+      source: [0, 0, 2, 2, 2, 2, 6, 7, 8, 8],
+      target: [1, 2, 3, 4, 5, 6, 8, 8, 9, 10],
+      value:  [5.77, 10.07, 2.38, 2.86, 0.87, 3.96, 3.96, 0.08, 0.67, 3.37],
+      color: [p.red+'55', p.green+'66', p.accent2+'55', p.accent2+'55', p.accent2+'55', p.green+'66', p.green+'66', p.gold+'66', p.red+'55', p.green+'66']
+    }
+  };
+  const layout = { font: { size: 11, color: p.text }, paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)', margin: { l: 10, r: 10, t: 10, b: 10 } };
+  Plotly.react('sankey', [data], layout, { displayModeBar: false, responsive: true });
+}
+
+renderCharts();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-07-11 · Caterpillar Q1 FY2026 财报已于 2026-04-30 发布 -->
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caterpillar CAT Q1 FY2026 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+<meta name="description" content="全球工程机械与矿山设备之王——如今被 AI 数据中心发电需求重估的百年周期股。record backlog $63B（+79%）+ 发电业务 +41% + 连续 31 年增息（Dividend Aristocrat）；Q1 营收 +22% / 调整后 EPS +30% 全面超预期。但 Forward P/E 38.5x 给一台周期机器戴上成长股估值皇冠，经销商补库存推高的销量 + 关税压制的采矿利润 + 周期顶部高价回购——世界级生意，泡沫化价格。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Caterpillar CAT Q1 FY2026 海图研判 · 海图夜读">
+<meta property="og:description" content="全球工程机械与矿山设备之王——如今被 AI 数据中心发电需求重估的百年周期股。record backlog $63B（+79%）+ 发电业务 +41% + 连续 31 年增息。Q1 营收 +22% / 调整后 EPS +30% 全面超预期。但 Forward P/E 38.5x 给一台周期机器戴上成长股估值皇冠——世界级生意，泡沫化价格。">
+<meta property="og:url" content="https://jacexie.github.io/haitu/reports/cat-q1-fy2026.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Caterpillar CAT Q1 FY2026 海图研判 · 海图夜读">
+<meta name="twitter:description" content="全球工程机械与矿山设备之王，被 AI 数据中心发电需求重估。record backlog $63B（+79%）+ Q1 营收 +22% / 调整后 EPS +30%。但 Forward P/E 38.5x 无安全边际——世界级生意，泡沫化价格。">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root { --bg:#f5f0eb; --bg2:#ece6df; --card:#ffffff; --card2:#f8f5f1; --border:#d9d0c7; --text:#4a4340; --text2:#7a706a; --text3:#a89f98; --accent:#8a9a8e; --accent2:#7b8fa0; --accent3:#b08d7a; --rose:#c09090; --gold:#b9a06a; --red:#b87070; --green:#7a9a7a; --shadow:rgba(0,0,0,0.06); --chart-grid:#e5ddd5; }
+[data-theme="dark"] { --bg:#1e1c1a; --bg2:#28251f; --card:#2e2a25; --card2:#363230; --border:#4a4540; --text:#d4ccc4; --text2:#a09890; --text3:#706860; --accent:#8a9a8e; --accent2:#8fabbf; --accent3:#c9a48e; --rose:#c09090; --gold:#c9b07a; --red:#c08080; --green:#8aaa8a; --shadow:rgba(0,0,0,0.3); --chart-grid:#3e3a35; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', serif; line-height: 1.75; font-size: 14.5px; transition: background .35s, color .35s; }
+a { color: var(--accent2); text-decoration: none; }
+.theme-bar { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); }
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+.toggle-switch { position: relative; width: 44px; height: 22px; background: var(--border); border-radius: 11px; cursor: pointer; transition: background .3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: var(--card); border-radius: 50%; transition: transform .3s; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+
+.hero { padding: 48px 24px 36px; text-align: center; border-bottom: 1px solid var(--border); }
+.hero-tag { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 3px 14px; border-radius: 20px; margin-bottom: 18px; }
+.hero h1 { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.pill { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: 'Segoe UI', sans-serif; font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow); }
+.pill strong { color: var(--text); }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle { font-size: 18px; font-weight: 700; color: var(--accent3); margin-bottom: 20px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+.stitle::before { content: ''; display: block; width: 4px; height: 20px; background: var(--accent3); border-radius: 2px; }
+
+.haitu-quip { display: flex; align-items: center; gap: 18px; background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 18px 24px; margin: 24px 0; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-quote { flex: 1; }
+.haitu-portrait { font-size: 15px; line-height: 1.65; color: var(--text); margin-bottom: 6px; font-weight: 600; }
+.haitu-rating-line { font-size: 13px; color: var(--text2); font-family: 'Segoe UI', sans-serif; }
+.rating-badge { display: inline-block; padding: 2px 12px; border-radius: 12px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; margin-left: 4px; }
+.rating-hold { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+
+.haitu-essay { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 28px 32px; margin: 24px 0 20px; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-essay-header { display: flex; align-items: center; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.haitu-avatar-sm { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); background: var(--red); box-shadow: 0 2px 8px rgba(184,112,112,0.2); }
+.haitu-name-lg { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 28px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 4px; }
+.haitu-essay-tag { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; }
+.haitu-essay-body { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 15px; line-height: 2.0; color: var(--text); }
+.haitu-essay-body p { margin-bottom: 14px; }
+.haitu-essay-body p.lead { font-size: 16px; font-style: italic; color: var(--text2); margin-bottom: 18px; }
+.haitu-essay-body strong { color: var(--text); font-weight: 700; }
+.haitu-essay-body h4 { font-size: 14px; color: var(--accent3); margin: 18px 0 10px; font-family: 'Segoe UI', sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+.haitu-sign { text-align: right; margin-top: 18px; font-family: 'Georgia', serif; font-size: 14px; color: var(--text2); font-style: italic; }
+.haitu-disc { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); font-style: italic; line-height: 1.7; }
+
+.stock-snap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px; }
+.snap-item { text-align: center; }
+.snap-label { font-family: 'Segoe UI', sans-serif; font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.snap-val { font-family: 'Segoe UI', sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+.snap-val.up { color: var(--green); }
+.snap-val.dn { color: var(--red); }
+.snap-sub { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow); }
+.kpi-l { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.badge { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+.up { background: rgba(122,154,122,.15); color: var(--green); }
+.dn { background: rgba(184,112,112,.15); color: var(--red); }
+.nt { background: rgba(123,143,160,.15); color: var(--accent2); }
+
+.tbl-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow); }
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI', sans-serif; font-size: 13px; }
+.tbl th { background: var(--card2); color: var(--text3); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); background: var(--card2); }
+
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); }
+.ctitle { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 260px; }
+
+.cmt { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 26px; line-height: 1.95; font-size: 14px; box-shadow: 0 1px 4px var(--shadow); color: var(--text); }
+.cmt p { margin-bottom: 14px; }
+.cmt p:last-child { margin-bottom: 0; }
+.cmt strong { color: var(--text); }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+
+.bscore { display: flex; align-items: center; gap: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; margin-bottom: 12px; box-shadow: 0 1px 4px var(--shadow); }
+.circle { width: 62px; height: 62px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; flex-shrink: 0; border: 3px solid; font-family: 'Segoe UI', sans-serif; }
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 4px; color: var(--text); }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.moat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+.moat-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); border-left: 4px solid var(--accent); }
+.moat-card.wide { border-left-color: var(--green); }
+.moat-card.narrow { border-left-color: var(--gold); }
+.moat-card.none { border-left-color: var(--red); }
+.moat-card h5 { font-size: 13px; color: var(--text); margin-bottom: 6px; }
+.moat-card .moat-rate { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.moat-card.wide .moat-rate { background: rgba(122,154,122,.18); color: var(--green); }
+.moat-card.narrow .moat-rate { background: rgba(185,160,106,.18); color: var(--gold); }
+.moat-card.none .moat-rate { background: rgba(184,112,112,.18); color: var(--red); }
+.moat-card p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+
+.ec-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 14px; box-shadow: 0 1px 3px var(--shadow); }
+.ec-badge { flex-shrink: 0; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-top: 2px; font-family: 'Segoe UI', sans-serif; }
+.ec-bull { background: rgba(122,154,122,.18); color: var(--green); }
+.ec-bear { background: rgba(184,112,112,.18); color: var(--red); }
+.ec-neut { background: rgba(185,160,106,.18); color: var(--gold); }
+.ec-body { flex: 1; }
+.ec-title { font-weight: 600; color: var(--text); margin-bottom: 3px; font-size: 14px; }
+.ec-note { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.dcf-note { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.dcf-note strong { color: var(--text); }
+
+.scorecard { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow); }
+.score-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.score-card { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px; }
+.score-letter { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Segoe UI', sans-serif; font-weight: 800; font-size: 22px; flex-shrink: 0; border: 3px solid; }
+.s-a { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.12); }
+.s-bp { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.06); }
+.s-b { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.10); }
+.s-bm { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.06); }
+.s-c { color: var(--red); border-color: var(--red); background: rgba(184,112,112,.08); }
+.s-d { color: var(--red); border-color: var(--red); background: rgba(184,112,112,.14); }
+.score-body h4 { font-size: 13px; color: var(--text); margin-bottom: 4px; }
+.score-body p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+.flag-row { margin-top: 16px; padding: 12px 16px; background: rgba(184,112,112,.08); border: 1px solid rgba(184,112,112,.3); border-radius: 8px; font-size: 13px; color: var(--text2); }
+.flag-row strong { color: var(--red); }
+
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center; box-shadow: 0 1px 4px var(--shadow); }
+.pbox .pl { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; }
+.pbox .pv { font-family: 'Segoe UI', sans-serif; font-size: 28px; font-weight: 800; margin-bottom: 5px; }
+.pbox .pn { font-size: 12px; color: var(--text3); line-height: 1.5; }
+.pc { color: var(--red); } .pf { color: var(--gold); } .ps { color: var(--green); }
+
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.risk-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); position: relative; overflow: hidden; }
+.risk-card::before { content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent); }
+.risk-card.r1::before { background: var(--green); }
+.risk-card.r2::before { background: rgba(122,154,122,.6); }
+.risk-card.r3::before { background: var(--gold); }
+.risk-card.r4::before { background: var(--rose); }
+.risk-card.r5::before { background: var(--red); }
+.risk-card h5 { font-size: 14px; margin-bottom: 6px; color: var(--text); }
+.risk-score { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.r1 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r2 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r3 .risk-score { background: rgba(185,160,106,.18); color: var(--gold); }
+.r4 .risk-score { background: rgba(192,144,144,.18); color: var(--rose); }
+.r5 .risk-score { background: rgba(184,112,112,.18); color: var(--red); }
+.risk-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+footer { background: var(--card2); border-top: 1px solid var(--border); padding: 24px; text-align: center; color: var(--text3); font-size: 12px; margin-top: 40px; line-height: 1.8; }
+@media (max-width: 768px) { .cgrid,.pgrid { grid-template-columns: 1fr; } .hero h1 { font-size: 22px; } .kpi-grid { grid-template-columns: 1fr 1fr; } .stock-snap { grid-template-columns: 1fr 1fr; } .haitu-essay-header { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/CAT" target="_blank" rel="noopener" title="在雪球查看 CAT 实时行情">雪球 CAT</a>
+  </div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">Q1 FY2026 财报发布 · 2026-04-30 &nbsp;|&nbsp; 海图研判 · 2026-07-11</div>
+  <h1>Caterpillar CAT · FY2026 Q1 财报深度分析</h1>
+  <div class="hero-sub">NYSE: CAT &nbsp;|&nbsp; 财季截至 2026-03-31 &nbsp;|&nbsp; 价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill">股价 <strong>$952.65</strong> <span style="color:var(--red)">距高点 -11%</span></div>
+    <div class="pill">市值 <strong>~$429B</strong></div>
+    <div class="pill">Q1 营收 <strong>$17.42B</strong> <span style="color:var(--green)">+22%</span></div>
+    <div class="pill">调整后 EPS <strong>$5.54</strong> <span style="color:var(--green)">+30%</span></div>
+    <div class="pill">Backlog <strong>$63B</strong> <span style="color:var(--green)">+79%</span></div>
+    <div class="pill">Forward P/E <strong>~38.5x</strong> <span style="color:var(--gold)">极端估值</span></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 海图页首短评 ═══ -->
+<div class="haitu-quip">
+  <div class="haitu-quote">
+    <div class="haitu-portrait">全球工程机械与矿山设备之王——如今被 AI 数据中心发电需求重新定价的百年周期股。创纪录 backlog $63B（+79%）+ 发电业务 +41% + 连续 31 年增息（Dividend Aristocrat）+ Q1 营收 +22% / 调整后 EPS +30% 全面超预期。但 Forward P/E 38.5x 给一台周期机器戴上成长股估值皇冠——经销商补库存推高的销量、关税压制的采矿利润、周期顶部高价大额回购，共同提示这不是可以闭眼买的价格。世界级生意，泡沫化定价。</div>
+    <div class="haitu-rating-line">评级：<span class="rating-badge rating-hold">持有观望</span> · 12 个月目标价 $835（-12%）· 世界级机械龙头 + 数据中心发电顺风，对垒 38.5x 极端估值 + 补库存透支 + 关税逆风——好生意等好价格</div>
+  </div>
+</div>
+
+<!-- ═══ 市场数据快照 ═══ -->
+<div class="section">
+  <div class="stitle">市场数据快照（2026-07-11 收盘）</div>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">股价（美元）</div><div class="snap-val">$952.65</div><div class="snap-sub">2026-07-11 收盘 · 距 52 周高 -11%</div></div>
+    <div class="snap-item"><div class="snap-label">市值</div><div class="snap-val">~$429B</div><div class="snap-sub">工程机械全球龙头</div></div>
+    <div class="snap-item"><div class="snap-label">TTM GAAP P/E</div><div class="snap-val dn">~47x</div><div class="snap-sub">TTM EPS ~$20.1</div></div>
+    <div class="snap-item"><div class="snap-label">Forward P/E (FY26)</div><div class="snap-val dn">~38.5x</div><div class="snap-sub">共识 EPS ~$24.7</div></div>
+    <div class="snap-item"><div class="snap-label">P/S (TTM)</div><div class="snap-val">~6.1x</div><div class="snap-sub">远高于历史 2-3x</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间</div><div class="snap-val">$402 - $1,073</div><div class="snap-sub">历史高 $1,065（06-30）</div></div>
+    <div class="snap-item"><div class="snap-label">股息率（远期）</div><div class="snap-val">~0.68%</div><div class="snap-sub">$6.52/年 · 连增 31 年</div></div>
+    <div class="snap-item"><div class="snap-label">FCF Yield</div><div class="snap-val nt">~2.2%</div><div class="snap-sub">ME&T FCF ~$9.5B（FY25）</div></div>
+    <div class="snap-item"><div class="snap-label">现金及等价物</div><div class="snap-val">$4.07B</div><div class="snap-sub">2026-03-31 末</div></div>
+    <div class="snap-item"><div class="snap-label">有息负债合计</div><div class="snap-val dn">$43.1B</div><div class="snap-sub">其中金融子公司 $32.4B</div></div>
+    <div class="snap-item"><div class="snap-label">工业净负债</div><div class="snap-val dn">-$6.6B</div><div class="snap-sub">⚠️ 非零负债非净现金</div></div>
+    <div class="snap-item"><div class="snap-label">调整后经营利润率</div><div class="snap-val up">18.0%</div><div class="snap-sub">Q1 FY26 · 目标区间内</div></div>
+  </div>
+  <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">数据时点：股价 $952.65（2026-07-11 收盘）· 财务数据来源 Caterpillar 1Q26 官方财报 PDF + SEC 8-K Exhibit 99.1（2026-04-30 发布，财季截至 2026-03-31）+ FY2025 10-K · 货币 USD 单口径。CAT 财年即日历年（12-31 结束），无财年错位。市值口径 $428-443B（按 465.3M 期末股 × $952.65 约 $443B，因 H1 2026 持续回购实时股数递减，取 ~$429B）。⚠️ CAT <strong>不是零负债、也不是净现金</strong>：合并有息负债 $43.1B > 现金 $4.07B，但其中 $32.4B 为 Cat Financial 捕获式金融子公司借款（对应约 $24.8B 金融应收款），属正常业务结构；工业（Machinery, P&E）口径有息负债仅 $10.7B，扣现金后<strong>工业净负债 -$6.6B</strong>，杠杆温和。</p>
+</div>
+
+<!-- ═══ Q1 FY2026 KPI ═══ -->
+<div class="section">
+  <div class="stitle">Q1 FY2026 核心业绩（USD · 财季截至 2026-03-31）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">总营收</div><div class="kpi-v">$17.42B</div><span class="badge up">+22% YoY</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">销量 +$2.3B / 价格 +$426M / 汇率 +$351M</div></div>
+    <div class="kpi"><div class="kpi-l">机械/动力与能源销售</div><div class="kpi-v">$16.47B</div><span class="badge up">+23%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">工业主业口径</div></div>
+    <div class="kpi"><div class="kpi-l">金融产品收入</div><div class="kpi-v">$0.94B</div><span class="badge up">+9%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">Cat Financial（对外）</div></div>
+    <div class="kpi"><div class="kpi-l">经营利润（GAAP）</div><div class="kpi-v">$3.09B</div><span class="badge up">+20%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">利润率 17.7%</div></div>
+    <div class="kpi"><div class="kpi-l">调整后经营利润</div><div class="kpi-v">$3.13B</div><span class="badge up">—</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">利润率 18.0% · 目标区间内</div></div>
+    <div class="kpi"><div class="kpi-l">税前利润</div><div class="kpi-v">$3.21B</div><span class="badge up">—</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">含其他收入 $260M</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 净利润（归母）</div><div class="kpi-v">$2.55B</div><span class="badge up">+30%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">有效税率 20.9%</div></div>
+    <div class="kpi"><div class="kpi-l">调整后净利润</div><div class="kpi-v">$2.58B</div><span class="badge up">—</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">重组费用后 EPS 影响 $0.07</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 摊薄 EPS</div><div class="kpi-v">$5.47</div><span class="badge up">+30%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">去年同期 $4.20</div></div>
+    <div class="kpi"><div class="kpi-l">调整后摊薄 EPS</div><div class="kpi-v">$5.54</div><span class="badge up">+30.4%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">最可信口径 · 去年 $4.25</div></div>
+    <div class="kpi"><div class="kpi-l">Backlog 订单储备</div><div class="kpi-v">$63B</div><span class="badge up">+79%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">创历史纪录 · 数据中心驱动</div></div>
+    <div class="kpi"><div class="kpi-l">摊薄股数</div><div class="kpi-v">465.8M</div><span class="badge up">-1.4%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">持续回购缩股</div></div>
+  </div>
+</div>
+
+<!-- ═══ 本季必看 高亮框 ═══ -->
+<div class="section">
+  <div class="stitle">本季必看 · 三个"看穿"：营收拆解、销量含金量、关税分部错位</div>
+  <div class="cmt">
+    <p><strong>Caterpillar 这份 Q1 太漂亮了——营收 +22%、调整后 EPS +30%、backlog +79% 创纪录，几乎每一行都超预期。但漂亮的财报最需要"看穿"，否则会把周期性的爆发误读成永续的成长。</strong></p>
+
+    <p><strong>看穿一：营收 +22% 里，"量"是主角，而量里有一半是经销商补库存。</strong> 管理层把 $3.17B 的营收增量拆成：<span class="hl-t">销量 +$2.3B（主因经销商库存增加 + 终端设备销量上升）、价格 +$426M、汇率 +$351M、金融产品 +$71M</span>。其中 Construction Industries 一个分部的销量增量就有 +$1.5B 来自经销商库存变动。经销商补库存是<span class="warn-t">典型的周期放大器</span>——它会在需求向上时透支未来几个季度的出货，在需求见顶时反向抽血。真实终端需求没有 +22% 这么猛。</p>
+
+    <div class="tbl-wrap" style="margin:14px 0;">
+      <table class="tbl">
+        <tr><th>营收增量桥接（YoY · $M）</th><th>贡献</th><th>性质</th></tr>
+        <tr><td>销量（含经销商补库存）</td><td>+2,300</td><td><span class="warn-t">部分为周期性补库存</span></td></tr>
+        <tr><td>有利价格实现</td><td>+426</td><td>定价权 · 可持续</td></tr>
+        <tr><td>汇率</td><td>+351</td><td>非经营 · 不可控</td></tr>
+        <tr><td>金融产品</td><td>+71</td><td>—</td></tr>
+        <tr class="hl"><td><strong>总营收增量</strong></td><td><strong>+3,166</strong></td><td><strong>17,415 vs 14,249（+22%）</strong></td></tr>
+      </table>
+    </div>
+
+    <p><strong>看穿二：三大工业分部冷热不均，采矿被关税打了 -39%。</strong> Construction +38%（销量 + 价格双驱）、Power &amp; Energy +22%（数据中心发电引擎），但 <span class="warn-t">Resource Industries（采矿）分部利润 -39%、利润率从两位数掉到 10.0%，主因关税推高不利制造成本</span>。同一家公司，一边是数据中心的烈火烹油，一边是采矿被关税冷水浇头——这提示 CAT 的"超级周期"叙事并非全面开花，且关税是实打实的利润腐蚀剂（FY2026 全年关税成本指引 $2.2-2.4B）。</p>
+
+    <p><strong>看穿三：GAAP 与调整后差距很小，这份利润"水分"低——但估值"水分"极高。</strong> 与很多公司不同，CAT 的调整项非常干净：调整后经营利润 $3,126M vs GAAP $3,085M，仅差 $41M（重组费用，税后 $32M、EPS 影响 $0.07）。<span class="hl-t">利润质量高，是真金白银</span>。问题从来不在利润表——而在于市场用 38.5x 远期 P/E 去买一台周期机器：<strong>好业绩 × 坏价格 = 危险组合</strong>。</p>
+  </div>
+</div>
+
+<!-- ═══ 趋势图 ═══ -->
+<div class="section">
+  <div class="stitle">关键指标趋势</div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">总营收（$B）& YoY 增速（近 5 季）</div><div class="cwrap"><canvas id="chartRev"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">经营利润率趋势（GAAP vs 调整后，%）</div><div class="cwrap"><canvas id="chartMargin"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">Q1 FY2026 分部对外销售拆分（$B）</div><div class="cwrap"><canvas id="chartSegment"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">摊薄 EPS 趋势（GAAP vs 调整后，$）</div><div class="cwrap"><canvas id="chartEps"></canvas></div></div>
+  </div>
+</div>
+
+<!-- ═══ 桑基图 ═══ -->
+<div class="section">
+  <div class="stitle">Q1 FY2026 资金流向桑基图（$M）</div>
+  <div class="ccard">
+    <div id="sankey" style="width:100%;height:480px;"></div>
+    <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">说明：总营收 $17,415 → 营业成本 $11,306 + 毛利 $6,109 → SG&amp;A $1,816 + 研发 $537 + 其他营业费用 $671（含金融产品利息/折旧等）+ 营业利润 $3,085；营业利润 + 其他收入净额 $126（其他收入 $260 − 非金融利息 $134）= 税前利润 $3,211 → 所得税 $670 + 净利润 $2,541（归属股东 $2,549，含少数股东权益约 −$8）。每个中间节点流入 = 流出，流量闭合。<strong>注</strong>：本季向股东返还 $5,731M（回购 $5,028M + 股息 $703M）> 本季净利 $2,549M 且远 > 本季企业自由现金流 $819M——差额靠资产负债表现金 + 举债支撑，是"周期顶部的杠杆化返还"（详见模块 12）。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 1 ═══ -->
+<div class="section">
+  <div class="stitle">模块 1 · 公司概览与背景</div>
+  <div class="cmt">
+    <p><strong>Caterpillar Inc.</strong>（NYSE: CAT），总部美国德州（原伊利诺伊皮奥里亚），成立于 1925 年，是<strong>全球最大的建筑工程机械、矿山设备、柴油/天然气发动机与工业燃气轮机制造商</strong>。财年即日历年（12-31 结束），无财年错位。董事长兼 CEO 为 <strong>Joe Creed</strong>。百年历史、道琼斯工业平均指数成分股、标志性"CAT 黄"。</p>
+
+    <p><strong>核心叙事</strong>：CAT 是一门<span class="hl-t">重资产、强周期、深护城河的实体工业生意</span>——它卖的是挖掘机、矿卡、发电机组、发动机这些"经济周期的血肉"。传统上，CAT 的股价随全球建筑、采矿、油气资本开支周期潮起潮落。但 2024-2026 年，一条全新的结构性主线把它重新定价：<span class="hl-t">AI 数据中心的电力饥渴</span>——数据中心需要海量备用/主用发电机组，而 CAT 的大型往复式发动机与燃气轮机正是这块蛋糕的核心供应商。这让市场把一台周期机器,当成了 AI 基建的"卖铲人"来估值。</p>
+
+    <p><strong>三大工业分部（2026 年起口径）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>Power &amp; Energy（动力与能源，原 Energy &amp; Transportation 更名）</strong>——发电机组、发动机、油气、工业燃气轮机。<span class="hl-t">数据中心发电的直接受益者</span>，Q1 发电业务 +41%。</li>
+      <li><strong>Construction Industries（建筑工程）</strong>——挖掘机、装载机等，与全球基建/地产周期挂钩，本季 +38%（北美 +48%）。</li>
+      <li><strong>Resource Industries（资源/采矿）</strong>——矿卡、大型采矿设备、铁路，本季利润被关税拖累 -39%。</li>
+    </ul>
+    <p style="margin-top:-4px;">另加 <strong>Financial Products（Cat Financial）</strong>——为设备销售提供融资的捕获式金融子公司；以及 All Other Segment。</p>
+
+    <p><strong>能力圈检验</strong>：CAT 的生意用一句话能说清（造并卖重型机械、发动机、发电设备，并提供融资），在能力圈之内。<span class="warn-t">但两块变量决定它值多少钱</span>：(1) 数据中心发电需求是"十年超级周期"还是"两三年的资本开支脉冲"？backlog +79% 很猛，但 AI 资本开支的可持续性是最大问号；(2) 传统建筑/采矿周期 + 关税成本，随时可能反向。CAT 是看得懂的好生意——难的从来不是理解它，而是判断当前这个价格是否已经透支了最乐观的假设。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 2 ═══ -->
+<div class="section">
+  <div class="stitle">模块 2 · 管理层评估</div>
+
+  <div class="bscore">
+    <div class="circle cg">B+</div>
+    <div class="bd">
+      <h4>Joe Creed · 董事长兼 CEO</h4>
+      <p>2025 年接任 CEO（继 Jim Umpleby 后），2026 年起兼任董事长。Creed 是 CAT 内部成长的老将（财务与运营背景），上任后延续"服务化 + 高利润产品组合 + 目标经营利润率区间管理"的既有战略，并抓住数据中心发电这一结构性机遇：宣布将<span class="hl-t">大型往复式发动机产能扩至 2024 年的约 3 倍（新增约 15GW 年产能）</span>，增量资本开支集中在 2027-2029 年，预计十年末前实现正现金回收。海图判断：这是一位稳健、纪律性强、抓住了时代顺风的守成型 CEO——战略方向对，执行可信，但尚未经历一次完整下行周期的考验。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B-</div>
+    <div class="bd">
+      <h4>资本配置 · 增息教科书 + 回购择时的明显瑕疵</h4>
+      <p>
+      <strong>连续 31 年提高股息</strong>（Dividend Aristocrat），2026-06 宣布季度股息从 $1.51 升至 $1.63（+8%），全年化 $6.52——这是穿越无数周期从未削减的纪律，含金量极高。<br>
+      <strong>但回购择时是明显瑕疵</strong>：<span class="warn-t">Q1 FY2026 单季回购 $5,028M，几乎等于 FY2025 全年回购 $5.2B</span>——在股价逼近历史高点（06-30 收 $1,065）、Forward P/E 38.5x 的<strong>周期顶部 + 估值高位</strong>大额回购。价值投资的铁律是"低买",管理层却在最贵的时候花掉几乎一整年的回购额度。真实缩股是好事，但在 38x 估值上缩股，每一美元回购增厚的每股内在价值远低于在低估时回购。<span class="warn-t">这是一次资本配置纪律的失分</span>。
+      </p>
+    </div>
+  </div>
+
+  <div class="cmt">
+    <p><strong>长期主义测试</strong>：✅ 产能扩张（3x 往复发动机）着眼 2027-2029 兑现、十年末回本，是长期视角而非短期财报博弈。<strong>坦诚度</strong>：电话会披露详尽，主动说明 Resource Industries 被关税拖累 -39%、Q1 关税实际 $600M、全年关税指引 $2.2-2.4B，不回避利空。<strong>利益绑定</strong>：管理层持股比例不高（成熟大盘工业股常态），薪酬与经营利润率区间、ROIC 挂钩。<strong>历史记录</strong>：全年调整后经营利润率 17.2% 稳在目标区间内、ME&amp;T 自由现金流常年落在承诺区间——运营执行力可信。综合：运营 A、资本返还的力度 A、但回购择时 C——加权 B。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 3 ═══ -->
+<div class="section">
+  <div class="stitle">模块 3 · 商业模式深度解析</div>
+  <div class="cmt">
+    <p><strong>海图"一句话测试"</strong>：<span class="hl-t">Caterpillar 造并卖全球最强的挖掘机、矿卡、发电机组和发动机，靠"新机销售 + 高毛利后市场零配件/服务 + 设备融资"三层收入赚钱，本质是一台随全球资本开支周期起伏、但拥有无可替代经销商网络与安装基数的重型机械收费机器。</span></p>
+
+    <p><strong>三层收入模型</strong>：(1) <strong>新设备销售</strong>——周期性最强、毛利中等；(2) <strong>后市场（aftermarket）零配件与服务</strong>——CAT 全球庞大的存量设备（安装基数）持续产生零配件、维修、再制造需求，<span class="hl-t">这是穿越周期的高毛利、高黏性收入</span>，是 CAT 利润率的稳定器；(3) <strong>Cat Financial 融资</strong>——为经销商与终端客户提供设备贷款/租赁，赚取利差并促进设备销售，本季逾期率仅 1.39%（去年 1.58%），信用质量健康。</p>
+
+    <p><strong>Q1 FY2026 分部营收模型（对外销售口径）</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>分部</th><th>对外销售</th><th>YoY</th><th>分部利润</th><th>利润率</th><th>驱动</th></tr>
+        <tr><td>Construction 建筑工程</td><td>$7.10B</td><td>+38%</td><td>$1,535M</td><td>21.4%</td><td>销量+$1.5B(补库存)+价格+$356M</td></tr>
+        <tr><td>Power &amp; Energy 动力与能源</td><td>$5.71B</td><td>+22%</td><td>$1,450M</td><td>20.6%</td><td>发电 +41%（数据中心）</td></tr>
+        <tr><td>Resource 资源/采矿</td><td>$3.71B</td><td>+4%</td><td>$378M</td><td>10.0%</td><td><span class="warn-t">关税推高成本，利润 -39%</span></td></tr>
+        <tr><td>Financial Products 金融</td><td>$0.94B</td><td>+9%</td><td>$245M</td><td>—</td><td>逾期率 1.39% 健康</td></tr>
+      </table>
+    </div>
+
+    <p style="margin-top:14px;"><strong>单位经济与议价能力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>定价权：中强</strong>——本季有利价格实现 +$426M，CAT 与 Komatsu 等寡头理性竞争，能把通胀/关税部分转嫁；但采矿分部关税成本转嫁滞后，短期吞噬利润。</li>
+      <li><strong>对经销商网络：强绑定</strong>——CAT 的独立经销商网络是其护城河核心，覆盖 190+ 国家，提供销售、融资、零配件、服务全链条，几乎不可复制。经销商库存是周期放大器，但网络本身是资产。</li>
+      <li><strong>后市场黏性：强</strong>——一台 CAT 设备寿命内产生数倍于新机价格的零配件与服务收入，客户被"原厂件 + 认证服务"锁定。</li>
+      <li><strong>Power &amp; Energy 是新皇冠</strong>——数据中心备用/主用电源需求把发电业务从周期配角推成结构性增长引擎，ProPower 已宣布 2.1GW 燃气发电订单。</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══ 模块 4 ═══ -->
+<div class="section">
+  <div class="stitle">模块 4 · 经济护城河分析（5 维）</div>
+  <div class="moat-grid">
+    <div class="moat-card wide">
+      <h5>1. 无形资产 / 品牌</h5>
+      <span class="moat-rate">宽</span>
+      <p>百年 "CAT 黄" 全球信任 + 可靠性口碑 + 质量标准。在采矿/发电等停机成本极高的场景，客户为可靠性付溢价。<strong>趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>2. 经销商网络 / 转换成本</h5>
+      <span class="moat-rate">极宽</span>
+      <p>190+ 国家独立经销商网络 + 安装基数锁定的后市场零配件/服务，是最难复制的护城河。换品牌意味着放弃全生命周期服务网。<strong>趋势：稳定至加宽</strong>。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>3. 规模 / 成本优势</h5>
+      <span class="moat-rate">宽</span>
+      <p>全球最大产销规模 + 垂直制造 + 采购议价。18% 调整后经营利润率、record backlog $63B 印证规模碾压。<span class="warn-t">但关税侵蚀部分成本优势</span>。<strong>趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>4. 有效规模</h5>
+      <span class="moat-rate">中-宽</span>
+      <p>重型机械/矿卡是寡头市场（CAT / Komatsu / 小松/日立/Deere），新进入者需巨额资本 + 经销网 + 品牌，几无空间。<strong>趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>5. 网络效应</h5>
+      <span class="moat-rate">窄</span>
+      <p>非典型网络效应生意——但安装基数越大，后市场规模经济与二手设备残值网络越强，形成"准网络"正循环。<strong>趋势：稳定</strong>。</p>
+    </div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>10 年后护城河会更宽还是更窄？</strong> <span class="hl-t">核心护城河（经销网 + 品牌 + 安装基数 + 后市场）稳固且难被撼动</span>，Power &amp; Energy 的数据中心顺风还可能加宽它。真正的护城河变量不在竞争对手，而在两处：(1) <span class="warn-t">周期性</span>——护城河再宽，也挡不住全球资本开支周期下行时的销量与利润回撤，CAT 永远是周期股；(2) <span class="warn-t">电动化/自动化</span>——采矿与建筑设备的电动化、自动驾驶矿卡是长期技术变量，CAT 目前领先但需持续投入。总体：<strong>护城河宽且稳，这从来不是 CAT 的问题——问题是你为这条护城河付了多贵的门票。</strong></p>
+    <p><strong>定价权</strong>：中强但受关税与周期双向牵制。有利价格 +$426M 显示转嫁能力，但采矿分部利润 -39% 显示成本压力也真实。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 5 ═══ -->
+<div class="section">
+  <div class="stitle">模块 5 · 财务深度分析</div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 12px 0; font-family: 'Segoe UI',sans-serif;">5.1 关键比率与近 5 季趋势</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>季度</th><th>营收($B)</th><th>GAAP EPS</th><th>调整后 EPS</th><th>经营利润率</th><th>调整后经营利润率</th></tr>
+      <tr><td>Q1 2025</td><td>14.25</td><td>$4.20</td><td>$4.25</td><td>18.1%</td><td>18.3%</td></tr>
+      <tr><td>Q2 2025</td><td>16.57</td><td>$4.62</td><td>$4.72</td><td>17.3%</td><td>17.6%</td></tr>
+      <tr><td>Q3 2025</td><td>17.64</td><td>$4.88</td><td>$4.95</td><td>17.3%</td><td>17.5%</td></tr>
+      <tr><td>Q4 2025</td><td>19.13</td><td>$5.12</td><td>$5.16</td><td>13.9%</td><td>15.6%</td></tr>
+      <tr class="hl"><td><strong>Q1 2026</strong></td><td><strong>17.42</strong></td><td><strong>$5.47</strong></td><td><strong>$5.54</strong></td><td><strong>17.7%</strong></td><td><strong>18.0%</strong></td></tr>
+    </table>
+  </div>
+  <div class="tbl-wrap" style="margin-top:14px;">
+    <table class="tbl">
+      <tr><th>核心比率（Q1 FY2026 / TTM）</th><th>数值</th><th>含义</th></tr>
+      <tr><td>毛利率（机械/动力与能源口径）</td><td>31.4%</td><td>(16,473−11,306)/16,473；以总营收为分母则 35.1%</td></tr>
+      <tr><td>GAAP 净利率</td><td>14.6%</td><td>2,549 / 17,415</td></tr>
+      <tr><td>有效税率</td><td>20.9%</td><td>调整后年度有效税率约 23%</td></tr>
+      <tr><td>ROE（TTM 估算）</td><td>~48%</td><td><span class="warn-t">被回购压低的低股本基数放大</span>，看高不看绝对</td></tr>
+      <tr><td>工业口径 债务/权益</td><td>0.57x</td><td>工业债务 $10.7B / 权益 $18.66B · 温和</td></tr>
+      <tr><td>利息覆盖（工业）</td><td>~23x</td><td>营业利润 3,085 / 非金融利息 134 · 极强</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">注意 Q4 2025 经营利润率骤降至 13.9%（调整后 15.6%）——这是 FY2025 全年 $1.7B 关税逆风集中体现的季度，提示 CAT 单季利润率会因关税、产品组合、经销商发货节奏而剧烈波动。Q1 2026 反弹至 17.7% / 18.0%（目标区间内），部分得益于关税成本优于预期（$600M vs $800M）。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.2 资产负债健康度（2026-03-31 末 · $M）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>2026-03-31 末</th><th>说明</th></tr>
+      <tr><td>现金及等价物</td><td>4,072</td><td>企业口径现金约 $4.1B</td></tr>
+      <tr><td>应收账款（贸易及其他，流动）</td><td>11,447</td><td>—</td></tr>
+      <tr><td>金融应收款（流动）</td><td>10,443</td><td>Cat Financial 客户融资</td></tr>
+      <tr><td>存货</td><td>19,626</td><td>补库存周期下存货偏高</td></tr>
+      <tr><td>金融应收款（长期）</td><td>14,341</td><td>—</td></tr>
+      <tr><td>物业厂房设备（净）</td><td>15,249</td><td>重资产工业</td></tr>
+      <tr><td>商誉</td><td>5,865</td><td>占总资产仅 6%，会计保守</td></tr>
+      <tr class="hl"><td>总资产</td><td>95,550</td><td>—</td></tr>
+      <tr class="hl"><td>短期借款（金融产品）</td><td>4,729</td><td>逐项核对</td></tr>
+      <tr class="hl"><td>一年内到期长债（工业 35 + 金融 7,660）</td><td>7,695</td><td>—</td></tr>
+      <tr class="hl"><td>非流动长期债务（工业 10,671 + 金融 19,971）</td><td>30,642</td><td>—</td></tr>
+      <tr class="hl"><td><strong>有息负债合计</strong></td><td><strong>43,066</strong></td><td>工业 $10.7B + 金融 $32.4B</td></tr>
+      <tr><td>员工退休后福利负债</td><td>3,659</td><td>—</td></tr>
+      <tr><td>经营租赁负债（FY25 末口径）</td><td>728</td><td>流动 158 + 非流动 570（简明表未单列）</td></tr>
+      <tr class="hl"><td>总负债</td><td>76,890</td><td>—</td></tr>
+      <tr class="hl"><td>股东权益</td><td>18,660</td><td>回购 + 派息 > 留存，股本被压缩</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">⚠️ <strong>净负债铁律提示</strong>：CAT 合并有息负债 $43.1B > 现金 $4.07B，<strong>合并净负债约 -$39.0B</strong>。<span class="warn-t">但切勿笼统称 CAT "高杠杆"或"零负债"</span>——其中 <strong>$32.4B 是 Cat Financial 金融子公司借款</strong>，用于支撑约 $24.8B 金融应收款（$10,443M 流动 + $14,341M 长期），是捕获式金融业务的正常结构，与工业主业杠杆无关。剔除金融后，<strong>工业（Machinery, P&amp;E）口径有息负债仅 $10.7B</strong>，扣现金 $4.07B 后<strong>工业净负债约 -$6.6B</strong>，相对约 $9.5-10B 的年 ME&amp;T 自由现金流，杠杆温和、利息覆盖 ~23x，工业资产负债表健康。商誉仅占总资产 6%（$5.87B），会计相当保守。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.3 现金流量（Q1 FY2026 · $M）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>Q1 FY2026</th><th>说明</th></tr>
+      <tr><td>经营活动现金流（OCF · 企业口径）</td><td>1,870</td><td>Q1 季节性偏弱（存货占用）</td></tr>
+      <tr><td>折旧与摊销</td><td>595</td><td>—</td></tr>
+      <tr><td>资本开支（不含出租设备）</td><td>728</td><td>现金流量表 line item</td></tr>
+      <tr><td>出租设备资本开支</td><td>323</td><td>—</td></tr>
+      <tr class="hl"><td>总资本开支</td><td>1,051</td><td>—</td></tr>
+      <tr class="hl"><td><strong>自由现金流（OCF − 总 Capex）</strong></td><td><strong>819</strong></td><td>仅扣设备 Capex 则 $1,142M</td></tr>
+      <tr><td>股息支付</td><td>703</td><td>—</td></tr>
+      <tr><td>股份回购</td><td>5,028</td><td><span class="warn-t">≈ FY2025 全年回购</span></td></tr>
+      <tr class="hl"><td>本季股东返还合计</td><td>5,731</td><td><span class="warn-t">远超本季 FCF $819M</span></td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">⚠️ <strong>口径说明</strong>：CAT 的 Q1 现金流有强季节性（存货与营运资金占用使 Q1 通常最弱），单季 FCF $819M 不代表全年能力。<strong>公司主用 ME&amp;T（工业）自由现金流口径</strong>——FY2025 全年为 <strong>$9.5B</strong>，FY2026 指引高于此。本季返还股东 $5,731M（回购 $5,028M + 股息 $703M）远超本季 FCF $819M 与净利 $2,549M，缺口靠现金 + 举债补足（详见模块 12）。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.4 所有者盈余（价值投资口径）</h3>
+  <div class="dcf-note">
+    <p><strong>所有者盈余 = 净利润 + 折旧摊销 + 非现金费用 − 维护性 Capex ± 营运资金 ≈ ME&amp;T 自由现金流</strong></p>
+    <p>CAT 是重资产工业公司，Capex 与营运资金（存货）占用大，所有者盈余最好用<strong>工业（ME&amp;T）自由现金流</strong>近似。FY2025 ME&amp;T FCF <strong>$9.5B</strong>（全年折旧摊销约 $2.3B、总 Capex 显著）。</p>
+    <p><strong>所有者盈余收益率 = ME&amp;T FCF $9.5B / 市值 ~$429B ≈ 2.2%</strong>——<span class="warn-t">这是一个"顶级周期资产 + 顶级估值"的极低收益率</span>。2.2% 的 FCF Yield 对一台会随周期回撤的重型机械公司，意味着市场已把最乐观的数据中心超级周期假设充分（甚至过度）定价。<strong>换句话说：CAT 的问题从来不是生意好不好，而是价格贵不贵——当前 2.2% 的所有者盈余收益率几乎没有安全边际，且尚未计入下一次周期下行。</strong></p>
+  </div>
+</div>
+
+<!-- ═══ 模块 6 ═══ -->
+<div class="section">
+  <div class="stitle">模块 6 · 电话会分析（Q1 FY2026 + 前 2 季度）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">Q1 FY2026 电话会（2026-04-30）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"创纪录 backlog $63B（+79% YoY），Q1 订单为历史新高，数据中心驱动发电需求 +48%"</div><div class="ec-note">订单动能极强，Power &amp; Energy 终端销售 +32%、发电业务 +41%。这是市场给 CAT 高估值的核心叙事支撑。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"上调 FY2026 营收指引至低双位数增长；ME&amp;T 自由现金流预计高于 2025 的 $9.5B"</div><div class="ec-note">由前次指引上调，反映管理层对全年需求的信心。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"关税成本指引下修至 $2.2-2.4B（前值 $2.6B）；Q1 实际关税 $600M 优于 $800M 预期"</div><div class="ec-note">关税逆风好于预期，是本季利润率反弹至 18% 的重要助推。但绝对额仍高，全年侵蚀显著。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"宣布 ProPower 2.1GW 燃气发电订单（第 6 单超 1GW 协议）；大型往复发动机产能扩至 2024 年约 3 倍（+~15GW），资本开支集中 2027-2029"</div><div class="ec-note">押注数据中心发电长期需求，是十年维度的产能布局，也意味着未来几年 Capex 抬升。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"Resource Industries 分部利润 -39% YoY，利润率降至 10.0%，主因关税推高的不利制造成本"</div><div class="ec-note">采矿分部被关税重击，提示"超级周期"并非全面开花，成本压力真实存在。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q4 FY2025 电话会（2026-01-29）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"全年营收创纪录 $67.6B，单季 $19.1B（+18%）创历史新高；年末 backlog 创纪录 $51B（+71%）"</div><div class="ec-note">2025 发电业务销售突破 $10B；获 Monarch Compute Campus 2GW 发电机组大单。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"Q4 调整后经营利润率降至 15.6%（去年同期 18.3%），受全年 $1.7B 关税逆风拖累"</div><div class="ec-note">关税是 2025 年利润率的最大压制项，单季利润率波动明显。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"2026 关税成本初步指引 $2.6B，管理层预计下半年随缓解措施改善"</div><div class="ec-note">后被 Q1 下修至 $2.2-2.4B，兑现了改善预期。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q3 FY2025 电话会（2025-10-29）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"Q3 营收创纪录 $17.6B（+10%），调整后 EPS $4.95 超预期；backlog 创历史新高（E&amp;T 主导）"</div><div class="ec-note">发电业务 +33%（数据中心往复发动机需求），Energy &amp; Transportation 终端销售 +25%，上调全年指引。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"当季关税影响约 $600M，调整后经营利润率 17.5%（去年同期 20.0%）"</div><div class="ec-note">关税持续压制利润率约 2.5pp。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">指引兑现度追踪</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>历史指引</th><th>Q1 FY2026 实际</th><th>评价</th></tr>
+      <tr><td>2026 关税成本初步 $2.6B（Q4 给出）</td><td>下修至 $2.2-2.4B，Q1 实际 $600M &lt; $800M</td><td><span class="badge up">优于</span></td></tr>
+      <tr><td>FY2026 营收增速（前次指引）</td><td>上调至"低双位数增长"</td><td><span class="badge up">上调</span></td></tr>
+      <tr><td>ME&amp;T FCF（对标 2025 $9.5B）</td><td>指引高于 $9.5B</td><td><span class="badge up">上调</span></td></tr>
+      <tr><td>backlog 动能（Q4 创纪录 $51B）</td><td>Q1 再创纪录 $63B（+79%）</td><td><span class="badge up">超预期</span></td></tr>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>信号汇总</strong>：Q1 FY2026 是 CAT "<span class="hl-t">数据中心订单爆发 + 关税优于预期 + 上调全年指引 + record backlog</span>"的强势一季，管理层坦诚披露采矿被关税拖累 -39%。措辞上，信心度从 2025 年的"关税防御"转为 2026 年的"产能进攻"（3x 发动机扩产）。<strong>业绩与叙事都无可挑剔——所有的问题，都集中在估值：38.5x 远期 P/E 已把这些好消息透支殆尽。市场是投票机，现在票都投给了"AI 发电超级周期"，而称重机要到下一次周期下行才会开秤。</strong></p>
+  </div>
+</div>
+
+<!-- ═══ 模块 7 ═══ -->
+<div class="section">
+  <div class="stitle">模块 7 · 多模型估值（8 种方法）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">7.1 估值汇总表（独立估值 · 不锚定现价 · USD）</h3>
+  <p style="margin-bottom:10px; font-size:13px; color:var(--text2);">价值投资原则：估值基于财报与前瞻趋势独立推导，<strong>周期股用中周期正常化盈利，不用峰值</strong>。基准取 FY2026 共识调整后 EPS ~$24.7，但对经销商补库存带来的销量增量做谨慎折让；每股股数按 ~465M 摊薄股计。</p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>估值方法</th><th>每股公允价</th><th>假设要点</th><th>权重</th></tr>
+      <tr><td>1. 相对估值（P/E）</td><td>$543</td><td>FY2026 调整 EPS ~$24.7 × 22x（周期股给数据中心顺风溢价，但远低于当前 38.5x；同业 Komatsu 14.7x / Deere 34.5x）</td><td>20%</td></tr>
+      <tr><td>2. DCF（基准）</td><td>$470</td><td>ME&amp;T FCF 基数 ~$10B，未来 5 年 CAGR +8-10%（数据中心前段强、后段正常化），WACC 9%，永续 3%</td><td>25%</td></tr>
+      <tr><td>3. 所有者盈余收益率</td><td>$477</td><td>ME&amp;T FCF ~$10B / 4.5% 目标收益率（周期股要求收益率高于低周期公用）= $222B → /465M 股</td><td>15%</td></tr>
+      <tr><td>4. PEG</td><td>$494</td><td>可持续增速取 ~18-20%（数据中心 + 正常化建筑），合理 P/E 20x × $24.7；近端 PEG(38.5/29.4)=1.31 仅在补库存增速下勉强合理</td><td>10%</td></tr>
+      <tr><td>5. DDM</td><td>$430</td><td>DPS $6.52、增长 7%、要求回报 9%（低派息率 ~34%，DDM 显著低估，参考意义有限）</td><td>5%</td></tr>
+      <tr><td>6. NAV</td><td>不适用</td><td>CAT 为运营型工业公司（非地产/控股/资产持有型）；账面每股权益仅 ~$40（P/B 23x），NAV 对制造企业无意义</td><td>0%</td></tr>
+      <tr><td>7. 反向 DCF</td><td>当前价隐含 FCF 长期增长 <strong>~13-14%</strong></td><td>$952.65 隐含市场认为 ME&amp;T FCF 未来十年年增 13-14%——<span class="warn-t">远高于 CAT 历史中周期个位数 FCF 增速</span>，意味需数据中心超级周期持续十年</td><td>15%</td></tr>
+      <tr><td>8. SOTP 分部加总</td><td>$473</td><td>P&amp;E 年化利润 ~$5.8B×20x（数据中心溢价）+ CI 正常化 ~$5.5B×13x + RI 正常化 ~$2.5B×12x + 金融 ~$1B×9x − 工业净负债</td><td>10%</td></tr>
+      <tr class="hl"><td><strong>加权公允价中位数</strong></td><td><strong>~$500</strong></td><td>估值区间 $460-545 · 中位 ~$500</td><td>100%</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.8;"><strong>与现价对照</strong>：当前 $952.65 vs 加权内在公允 <strong>~$500</strong> · <span class="warn-t">溢价约 +90%（现价约为内在价值的 1.9 倍）</span>——<strong>不仅没有安全边际，而是处于内在价值近两倍的泡沫区</strong>。反向 DCF 揭示市场已定价约 13-14% 的长期 FCF 增速，把"AI 发电超级周期持续十年"当成基准情形。这是典型的"市场先生过度乐观"——生意质量顶级，但价格把最好的假设透支到极致。价值投资的机械首仓（内在中位数 $500 × 80% = $400）距现价 -58%，清楚说明<strong>当前不在任何合理建仓窗口</strong>。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.2 P/E 多档透视表</h3>
+  <p style="margin-bottom:10px; font-size:13px; color:var(--text2);">触发原因：CAT 是<strong>周期股</strong>（最新季度净利与历史正常化偏离大）+ GAAP/调整后虽差异小但估值对 EPS 口径敏感，必须多档呈现并标注最可信档：</p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>口径</th><th>EPS / 指标</th><th>P/E (基于 $952.65)</th><th>读数说明</th></tr>
+      <tr><td>TTM GAAP P/E</td><td>~$20.1</td><td>~47x</td><td>含关税拖累的 TTM，最高</td></tr>
+      <tr><td>TTM 调整后 P/E</td><td>~$20.4</td><td>~47x</td><td>调整项极小，与 GAAP 几乎一致</td></tr>
+      <tr><td>Q1 2026 单季年化 P/E</td><td>$5.54×4=$22.2</td><td>~43x</td><td>单季外推（含补库存顺风，偏乐观）</td></tr>
+      <tr class="hl"><td><strong>Forward P/E（FY2026 共识 ~$24.7）</strong></td><td><strong>~$24.7</strong></td><td><strong>~38.5x</strong></td><td>最可信档 · 市场惯用 · <span class="warn-t">周期股极端高位</span></td></tr>
+      <tr><td>Forward P/E（FY2027 共识 ~$30.7）</td><td>~$30.7</td><td>~31x</td><td>共识 +24.4% 再增长后仍 31x</td></tr>
+      <tr><td>P/S (TTM)</td><td>营收 ~$70.8B</td><td>~6.1x</td><td>远高于历史 2-3x</td></tr>
+      <tr><td>FCF Yield（ME&amp;T）</td><td>FCF ~$9.5B</td><td>~2.2%</td><td>顶级周期资产 + 顶级估值</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3);"><strong>最可信档</strong>：Forward P/E ~38.5x（FY2026）/ ~31x（FY2027）。<span class="warn-t">这是把周期机器当成长股定价</span>——CAT 历史中周期 P/E 多在 15-20x。同业对比：Komatsu 14.7x、Terex 13.65x、行业中位 13.68x，Deere 34.5x（同样偏贵）。<strong>CAT 以约 38.5x 交易，是重工同业中最高，相对 Komatsu 有近 2.6 倍溢价，甚至高于 Deere。</strong>市场以其数据中心发电订单动能、更强盈利能力与 ROE、更优预期修正趋势为溢价理由，但估值已计入海量增长预期，需警惕周期回摆与关税/宏观风险。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.3 12 个月目标价（概率加权）</h3>
+  <p style="margin-bottom:6px; font-size:12px; color:var(--text3);">说明：12 个月目标价是"市场价"预测（市场短期未必回归内在价值 ~$500），三情景基于估值中枢与盈利路径分别推演。</p>
+  <div class="pgrid">
+    <div class="pbox"><div class="pl">悲观情景 · 35%</div><div class="pv pc">$620</div><div class="pn">补库存反转 + 建筑周期下行 + 数据中心资本开支消化，估值压缩至 ~25x<br>距现价 -35%</div></div>
+    <div class="pbox"><div class="pl">基准情景 · 40%</div><div class="pv pf">$830</div><div class="pn">FY26 EPS 达共识 ~$24.7，估值温和去泡沫至 ~34x + 持续回购<br>距现价 -13%</div></div>
+    <div class="pbox"><div class="pl">乐观情景 · 25%</div><div class="pv ps">$1,150</div><div class="pn">数据中心超级周期叙事延续，FY27 预期上修，估值维持 ~38x<br>距现价 +21%</div></div>
+  </div>
+  <p style="font-size:13px; color:var(--text2);"><strong>概率加权 12 个月目标价</strong>：35%×$620 + 40%×$830 + 25%×$1,150 = <strong>$836.5 ≈ $835</strong>（较现价 <strong>-12%</strong>）。<span class="warn-t">即使在市场情绪加持下，12 个月风险回报仍下行倾斜</span>；而内在价值 ~$500 更是远低于现价。叠加 0.68% 微薄股息，改变不了"当前买入无安全边际"的结论。</p>
+</div>
+
+<!-- ═══ 模块 8 ═══ -->
+<div class="section">
+  <div class="stitle">模块 8 · 竞争与行业分析</div>
+  <div class="cmt">
+    <p><strong>全球工程机械/矿山设备格局</strong>：CAT 是全球最大玩家，与日本 Komatsu（小松）构成第一梯队双雄，其后为日立建机、Deere（约翰迪尔，偏农机 + 建筑）、Volvo CE、Terex、Sany（三一）、XCMG（徐工）等。发动机/动力侧与 Cummins（康明斯）竞争。真正把 CAT 重新定价的，是数据中心发电这条<strong>新战线</strong>——把它和"AI 电力基建卖铲人"绑在一起。</p>
+
+    <p><strong>重工同业估值对比（截至 2026-07）</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>公司</th><th>Forward P/E</th><th>增速/评价</th></tr>
+        <tr class="hl"><td><strong>Caterpillar CAT</strong></td><td><strong>~38.5x</strong></td><td>FY26 EPS 增速 29.4% · <span class="warn-t">同业最贵</span> · AI 发电叙事驱动重估</td></tr>
+        <tr><td>Deere DE</td><td>~34.5x</td><td>农机 + 重型龙头 · 同样偏高（远高于行业中位）· 部分模型评高估</td></tr>
+        <tr><td>Komatsu 小松</td><td>~14.7x</td><td>采矿/工程机械龙头 · 截至 2026-03 季 EPS -18% · 估值远低于 CAT</td></tr>
+        <tr><td>Terex TEX</td><td>~13.65x</td><td>工程机械同业 · 低估值低增速</td></tr>
+        <tr><td>Cummins CMI</td><td>—</td><td>动力系统同业（发动机）· 本次未取得远期 P/E</td></tr>
+        <tr><td>行业中位</td><td>~13.68x</td><td>—</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:10px; font-size:12px; color:var(--text3);">核心看点：CAT 以约 38.5x 远期 P/E 交易，为同业中最高，相对 Komatsu（14.7x）、Terex（13.7x）有<strong>近 2.6-2.8 倍溢价</strong>，甚至高于同样被视为偏贵的 Deere（34.5x）。市场以 CAT 更强的盈利能力、ROE、数据中心发电订单动能与更优的预期修正趋势为溢价理由；但这也意味着，一旦数据中心叙事降温或周期反转，CAT 的估值回摆空间远大于低估值同业。</p>
+
+    <p style="margin-top:14px;"><strong>波特五力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>新进入者：</strong>极低（资本 + 经销网 + 品牌 + 安装基数壁垒）</li>
+      <li><strong>替代品：</strong>中（电动化/自动化设备、区域性低价品牌是长期变量）</li>
+      <li><strong>供应商议价：</strong>中（钢材/零部件成本 + 关税，本季已侵蚀采矿利润）</li>
+      <li><strong>买家议价：</strong>中（大型矿企/租赁商有议价力，但被 CAT 服务网黏住）</li>
+      <li><strong>同业竞争：</strong>中（CAT/Komatsu 理性寡头，中国品牌在新兴市场价格竞争）</li>
+    </ul>
+
+    <p><strong>行业顺风/逆风</strong>：顺风——AI 数据中心电力资本开支、美国基建/回流制造、能源转型设备。逆风——全球利率与建筑周期、采矿资本开支波动、关税成本、中国需求疲软。TAM 上，数据中心发电是新增量，但其可持续性是估值的最大不确定源。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 9 ═══ -->
+<div class="section">
+  <div class="stitle">模块 9 · 技术面与 K 线分析（次要参考）</div>
+  <div class="cmt">
+    <p><strong>趋势</strong>：CAT 过去 12 个月<span class="hl-t">上涨 150%+</span>，从 52 周低 $401.70 一路飙升，2026-06-30 创历史收盘高 $1,064.90，当前 $952.65 距高点约 -11%。这是一轮由"AI 发电叙事 + 补库存 + 指引上调"驱动的强势重估行情，斜率陡峭。</p>
+
+    <p><strong>关键价位</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>阻力</strong>：$1,065（历史高）/ $1,073（52 周高）/ 心理位 $1,000</li>
+      <li><strong>支撑</strong>：$900（近期整理）/ $800（前期平台）/ $620（悲观情景 · 估值去泡沫）</li>
+    </ul>
+
+    <p><strong>指标信号</strong>：过去一年近乎单边上行，处历史高位区，<span class="warn-t">技术面严重超买、乖离率大</span>，任何叙事降温或周期数据走弱都可能触发剧烈回调。150% 的年涨幅本身就是均值回归的引力源。</p>
+
+    <p><strong>注意</strong>：CAT 的核心驱动是数据中心发电订单、周期数据、关税与估值，技术面是次要参考。价值投资者不应在 38.5x 的高位追涨，而应等基本面周期回摆 + 估值消化到内在价值区（$460-545）附近再考虑。<strong>技术面明确次要于基本面，此处仅提示高位风险。</strong></p>
+  </div>
+</div>
+
+<!-- ═══ 模块 10 ═══ -->
+<div class="section">
+  <div class="stitle">模块 10 · 增长催化剂与前景展望</div>
+  <div class="cmt">
+    <p><strong>短期催化剂（未来 6 个月）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>2026-08-04 Q2 FY2026 财报</strong>——backlog 与数据中心订单持续性、关税成本兑现、补库存是否延续</li>
+      <li><strong>数据中心发电大单</strong>——ProPower/超大单落地节奏，是叙事的燃料</li>
+      <li><strong>关税缓解措施</strong>——若全年关税进一步低于 $2.2-2.4B，利润率有上修空间</li>
+      <li><strong>回购 + 增息</strong>——季度股息升至 $1.63（2026-08-19 支付），持续缩股</li>
+    </ul>
+
+    <p><strong>长期展望（3-5 年）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>Power &amp; Energy 结构性增长</strong>——数据中心备用/主用电源 + 大型往复发动机产能 3x 扩张（+~15GW），2027-2029 兑现，是最确定的增量</li>
+      <li><strong>后市场服务复利</strong>——不断扩大的安装基数带来穿越周期的高毛利零配件/服务收入</li>
+      <li><strong>基建 + 能源转型</strong>——美国基建、回流制造、电网升级的长期设备需求</li>
+      <li><strong>自动化/电动化设备</strong>——自动驾驶矿卡、电动设备的技术领先转化为长期份额</li>
+      <li><strong>风险情景</strong>：数据中心资本开支见顶 / 建筑周期下行 / 关税升级 / 中国需求持续疲软 / 采矿资本开支收缩</li>
+    </ul>
+
+    <p><strong>TAM 展望</strong>：传统工程机械 + 采矿 + 发动机 TAM 巨大但周期性强；数据中心发电是新增量赛道，可寻址市场在 AI 资本开支高峰期快速扩张。<strong>核心问题不是增长空间，而是当前 38.5x 估值已把多少年的增长提前兑现——以及这轮数据中心资本开支高峰能持续多久。</strong></p>
+  </div>
+</div>
+
+<!-- ═══ 模块 11 ═══ -->
+<div class="section">
+  <div class="stitle">模块 11 · 风险矩阵</div>
+  <div class="risk-grid">
+    <div class="risk-card r5"><h5>1. 估值风险（极端高位）</h5><span class="risk-score">5 / 5 极高</span><p>Forward P/E 38.5x（周期股）· 过去一年 +150% · 现价约为内在价值 1.9 倍 · 无任何安全边际 · 任何叙事降温都可能触发大幅估值压缩</p></div>
+    <div class="risk-card r4"><h5>2. 周期 + 补库存透支</h5><span class="risk-score">4 / 5 高</span><p>Q1 销量 +$2.3B 含大量经销商补库存（Construction 一部 +$1.5B）· 补库存反转会在需求见顶时反向抽血 · 真实终端需求弱于报表</p></div>
+    <div class="risk-card r4"><h5>3. 关税 / 成本压力</h5><span class="risk-score">4 / 5 高</span><p>FY2026 关税成本指引 $2.2-2.4B · Resource Industries 利润已被关税打 -39%（利润率降至 10%）· 转嫁滞后侵蚀利润</p></div>
+    <div class="risk-card r3"><h5>4. 数据中心需求可持续性</h5><span class="risk-score">3 / 5 中</span><p>backlog +79% 集中于数据中心发电 · AI 资本开支若见顶/消化，订单可能取消或延后 · 估值高度依赖该叙事延续</p></div>
+    <div class="risk-card r3"><h5>5. 宏观 / 建筑周期 / 利率</h5><span class="risk-score">3 / 5 中</span><p>全球利率、地产/基建周期、采矿资本开支、中国需求疲软都会压制销量 · CAT 永远是周期股</p></div>
+    <div class="risk-card r2"><h5>6. 生意质量（机会/安全垫）</h5><span class="risk-score">2 / 5 反向</span><p>宽护城河 + record backlog + 18% 利润率 + 连增 31 年股息 + 工业净负债仅 -$6.6B · 世界级生意本身是下行时的质量底</p></div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>3 个黑天鹅情景</strong>：</p>
+    <ol style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>数据中心发电资本开支骤停（AI 资本开支消化）</strong>——概率 20% · backlog 取消/延后 · 估值杀回 20-25x · 股价 →$550-650</li>
+      <li><strong>经销商补库存反转 + 建筑周期下行</strong>——概率 15% · 销量与利润双降 · 股价 →$600</li>
+      <li><strong>全球衰退 + 采矿资本开支收缩 + 关税升级</strong>——概率 10% · 周期股典型深跌 · 估值 + 盈利双杀 · 股价 →$500 或以下</li>
+    </ol>
+
+    <p style="margin-top:10px;"><strong>下行支撑</strong>：宽护城河 + record backlog + 后市场高毛利收入 + 工业资产负债表健康 + 连增 31 年股息构成质量底。<span class="hl-t">$460-545 是内在价值区，$400 附近（内在中位 × 80%）才是有安全边际的建仓带</span>。但要清楚：CAT 是周期股，在真正的周期下行中，它的"底"可以远低于当前价——过去它曾在周期底部只值当前价的三分之一。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 12 ═══ -->
+<div class="section">
+  <div class="stitle">模块 12 · 股东回报分析</div>
+  <div class="cmt">
+    <p><strong>Caterpillar 是"增息 + 回购"双管资本返还的老牌标杆——但本报告要点名一个明显瑕疵：在周期顶部、38.5x 估值、股价逼近历史高点时大额回购。</strong>返还力度大、方式（真实缩股）好，唯独择时差。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 18px 0 10px; font-family: 'Segoe UI',sans-serif;">12.1 公司给了股东多少？</h3>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>年度</th><th>回购</th><th>股息</th><th>股东总回报</th><th>说明</th></tr>
+        <tr><td>FY2023</td><td>$4.98B</td><td>$2.55B</td><td>$7.53B</td><td>—</td></tr>
+        <tr><td>FY2024</td><td>$7.70B</td><td>$2.60B</td><td>$10.30B</td><td>回购高峰</td></tr>
+        <tr><td>FY2025</td><td>$5.20B</td><td>$2.70B</td><td>$7.90B</td><td>—</td></tr>
+        <tr class="hl"><td><strong>3 年合计</strong></td><td><strong>$17.9B</strong></td><td><strong>$7.85B</strong></td><td><strong>$25.75B</strong></td><td>回购占 70%</td></tr>
+        <tr><td>Q1 FY2026 单季</td><td><span class="warn-t">$5.03B</span></td><td>$0.70B</td><td>$5.73B</td><td><span class="warn-t">单季回购≈FY25 全年</span></td></tr>
+      </table>
+    </div>
+    <p style="font-size:13px; color: var(--text2); margin-top:8px"><strong>Trailing Shareholder Yield</strong>：FY2025 返还 $7.9B / 市值 ~$429B ≈ <strong>1.84%</strong>（回购 ~1.2% + 股息 ~0.63%）。<span class="hl-t">这是"低股息 + 大额回购"的典型美股结构</span>——回购是主菜。但 Q1 2026 单季突然回购 $5.03B（≈ FY2025 全年），在股价冲向历史高点时把弹药几乎打光，trailing 口径会被大幅推高，却是<span class="warn-t">高价买入</span>的隐忧。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.2 给的方式好不好？</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>真实缩股 · 结构上含金量高</strong>：摊薄股数逐年递减——FY2023 513.6M → FY2024 489.4M → FY2025 472.3M → Q1 2026 465.8M；期末在外股 499.4M（2023）→ 465.3M（2025）。回购是"真减少股本、增厚每股内在价值"，而非仅抵消 SBC——这一点上含金量高。</li>
+      <li><span class="warn-t">但择时差 · 含金量打折</span>：<strong>Q1 2026 单季 $5.03B 回购发生在股价约 $850-1,000、Forward P/E 38.5x、逼近历史高点的区间</strong>。价值投资铁律是"低买"——在 38x 估值上回购，每一美元回购增厚的每股内在价值，远低于在低估时回购。真实缩股是好事，高价缩股是资本配置纪律的失分。</li>
+      <li><strong>增息含金量极高</strong>：连续 31 年提高股息（Dividend Aristocrat），穿越无数周期从未削减，2026-06 升至 $1.63（+8%）· 派息率仅约 34% 调整后 EPS，增息空间充足、可持续。</li>
+    </ul>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.3 能不能继续给、给多少？</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>已授权额度充裕</strong>：2024 年授权 $20B（无到期日），截至 2025-12-31 剩余 <strong>$14.937B</strong>（约占市值 3.5%）· 2022 年 $15B 授权已用完 · 执行历史可信（常年足额回购）。</li>
+      <li><strong>指引与优先级</strong>：管理层承诺长期将 ME&amp;T 自由现金流<strong>基本全部</strong>通过股息 + 回购返还股东；FY2026 ME&amp;T FCF 指引高于 2025 的 $9.5B。</li>
+      <li><span class="warn-t">(股息 + 回购) / FCF 覆盖度</span>：FY2025 返还 $7.9B / ME&amp;T FCF $9.5B ≈ <strong>83%</strong>，可持续。但 <strong>Q1 2026 单季返还 $5.73B 远超单季 FCF $819M（约 7 倍）</strong>——靠动用现金 + 举债做了前置的杠杆化返还。全年若维持此节奏将超 FCF，需观察是否为一次性前置。</li>
+      <li><strong>周期择时是关键瑕疵</strong>：CAT 在<strong>周期顶部 + 估值高位</strong>大额回购，是资本配置纪律的明显减分项——与"周期底部低价回购"的教科书做法相反。</li>
+    </ul>
+    <p><strong>模块小结</strong>：<span class="hl-t">积极且真实缩股，但周期顶部高价回购拖累含金量</span>——返还力度大（3 年 $25.75B）、方式好（真实注销缩股 + 连增 31 年股息），唯独择时差：在 38.5x 远期估值、股价逼近历史高点时把一整年的回购弹药单季打光。对一台周期机器，这不是"低买",而是"追高"。资本返还纪律：力度 A、方式 A、择时 C。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 13 ═══ -->
+<div class="section">
+  <div class="stitle">模块 13 · 海图评分卡 + 投资决策</div>
+
+  <div class="scorecard">
+    <h3 style="font-size:15px; color:var(--text); margin-bottom: 16px; font-family: 'Segoe UI',sans-serif;">海图评分卡（6 维 A-D）</h3>
+    <div class="score-grid">
+      <div class="score-card"><div class="score-letter s-b">B</div><div class="score-body"><h4>1. 生意可预测性</h4><p>模式一句话说清，但本质周期股——盈利随全球资本开支周期波动，能见度受关税/宏观影响；backlog 提供近期能见度。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">A-</div><div class="score-body"><h4>2. 经济护城河</h4><p>经销网 + 品牌 + 安装基数 + 后市场 + 规模，宽且稳；数据中心发电还在加宽。但周期与电动化是长期变量。</p></div></div>
+      <div class="score-card"><div class="score-letter s-b">B+</div><div class="score-body"><h4>3. 管理层质量</h4><p>Creed 稳健、战略对（3x 发动机扩产）、坦诚披露利空；但周期顶部高价大额回购拖累资本配置。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">A-</div><div class="score-body"><h4>4. 财务质量</h4><p>18% 调整经营利润率 + record backlog + 工业净负债仅 -$6.6B + 商誉占比仅 6%。但重资产、Q1 FCF 季节性弱。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bm">B-</div><div class="score-body"><h4>5. 资本配置纪律</h4><p>连增 31 年股息 + 真实缩股，力度足；但周期顶部/38x 高价回购是明显择时瑕疵，单季返还远超 FCF。</p></div></div>
+      <div class="score-card"><div class="score-letter s-d">D</div><div class="score-body"><h4>6. 估值与安全边际</h4><p>Forward P/E 38.5x（周期股）/ FCF Yield 2.2% / 现价约内在价值 1.9 倍 · <strong>无安全边际，极端高估</strong>。</p></div></div>
+    </div>
+
+    <div class="flag-row">
+      <strong>红旗排查</strong>：<strong>极端估值</strong>（周期股 Forward P/E 38.5x、过去一年 +150%、现价约为内在价值 1.9 倍、FCF Yield 仅 2.2%）+ <strong>周期顶部高价回购</strong>（Q1 单季回购≈全年、逼近历史高点）+ <strong>补库存透支销量</strong>（销量增量含大量经销商补库存）。会计层面干净（商誉占比 6%、调整项极小、无收入确认疑点），治理无问题；但<span class="warn-t">极端估值红旗</span>触发强制降级——尽管生意质量与护城河顶级（多项 A-/B+），综合评级<strong>降至「持有观望」</strong>（估值维度 D + 安全边际为负）。
+    </div>
+
+    <p style="margin-top:18px; font-size:14px; color:var(--text); line-height:1.85;"><strong>综合评级</strong>：<span class="rating-badge rating-hold" style="font-size:14px;">持有观望</span>（偏向减仓）。生意质量是全球顶级、护城河宽稳、数据中心顺风真实（6 维基础质量优良），但估值维度 D（38.5x 周期股、无安全边际）+ 周期顶部高价回购红旗 → 降至持有观望。核心判断：<strong>CAT 的问题从来不是生意好不好，而是价格贵不贵——当前 $952.65 约为内在价值（~$500）的 1.9 倍，泡沫化定价。现有持仓者可逢高减仓、锁定利润，新买入者应耐心等周期回摆 + 估值消化至 $400-500 区间，而非在历史高位追涨。</strong></p>
+  </div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">投资决策（精确价格 · USD）</h3>
+
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>项目</th><th>价格</th><th>说明</th></tr>
+      <tr><td>内在价值中位数（独立估值）</td><td><strong>~$500</strong></td><td>区间 $460-545 · 现价溢价约 +90%</td></tr>
+      <tr><td>12 个月概率加权目标价</td><td><strong>$835</strong> (-12%)</td><td>悲观 $620(35%)/基准 $830(40%)/乐观 $1,150(25%)</td></tr>
+      <tr class="hl"><td>首仓建仓（内在中位 $500 × 80%）</td><td><strong>$400</strong></td><td>距现价 -58% · 需周期回摆 + 估值消化</td></tr>
+      <tr><td>二仓建仓（× 70%）</td><td>$350</td><td>-63% · 深度回调机会</td></tr>
+      <tr><td>三仓建仓（× 60%）</td><td>$300</td><td>-69% · 周期底部/黑天鹅级机会</td></tr>
+      <tr><td>止盈一档（现有持仓者）</td><td>$1,075</td><td>+13% · 近历史高 · 减仓 25%</td></tr>
+      <tr><td>止盈二档</td><td>$1,180</td><td>+24% · 再减 25%</td></tr>
+      <tr><td>止盈三档</td><td>$1,300</td><td>+37% · 再减 25% · 最后 25% 长期持有</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.85;"><strong>建议总仓位</strong>：<strong>0%（新买入）/ 现有持仓者降至 ≤2-3% 并逢高减仓</strong>——当前价无任何安全边际，不构成新建仓机会。<strong>持有周期</strong>：若在 $400-500 区间建仓，5-10 年（穿越一个完整周期 + 数据中心产能兑现）。<strong>关键监控指标</strong>：① backlog 与数据中心订单趋势（是否见顶）；② 经销商库存变动（补库存是否反转）；③ 关税成本兑现（vs $2.2-2.4B 指引）；④ 各分部利润率（尤其 Resource Industries 关税修复）；⑤ Forward P/E 是否回落至 20x 以下（估值机会窗口）。<strong>下次催化剂</strong>：2026-08-04 Q2 FY2026 财报。</p>
+</div>
+
+<!-- ═══ 海图页末长评 ═══ -->
+<div class="section">
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记 · 约 1120 字</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p class="lead">价值投资里最考验定力的，不是看懂一门坏生意，而是看懂一门好生意在什么价格上变成了坏投资。Caterpillar 就是这样一台机器：全球每一处工地、矿山、数据中心的电力枢纽，都可能站着一台 "CAT 黄"。它的财报几乎无可挑剔——Q1 营收 +22%、调整后 EPS +30%、backlog +79% 创纪录。可正因为所有人都看懂了它踩中了 AI 发电的时代顺风，市场把一台百年周期机器，戴上了 38.5 倍远期市盈率的成长股皇冠。问题从来不在生意，在价格。</p>
+
+      <p>Caterpillar 造并卖全球最强的挖掘机、矿卡、发电机组和发动机，靠"新机销售 + 高毛利后市场零配件/服务 + 设备融资"三层收入赚钱，本质是一台随全球资本开支周期起伏、但拥有无可替代经销商网络与安装基数的重型机械收费机器。Q1 FY2026：总营收 $17.42B（+22%）· 经营利润 $3.09B（利润率 17.7%，调整后 18.0%）· GAAP 净利 $2.55B · 调整后 EPS $5.54（+30.4%）· backlog $63B（+79%）。这是一门宽护城河、真金白银的顶级工业生意。</p>
+
+      <h4>几个研判要点</h4>
+
+      <p><strong>一、营收 +22% 里，"量"是主角，而量里有一半是经销商补库存。</strong> 管理层把 $3.17B 的营收增量拆成销量 +$2.3B、价格 +$426M、汇率 +$351M。其中 Construction 一个分部的销量增量就有 <span class="hl-t">+$1.5B 来自经销商库存变动</span>。补库存是周期放大器——它在需求向上时透支未来、在需求见顶时反向抽血。真实终端需求，没有报表上 +22% 这么猛。</p>
+
+      <p><strong>二、同一家公司，一边烈火烹油，一边冷水浇头。</strong> Power &amp; Energy 靠数据中心发电 +41%、Construction +38%，但 <span class="warn-t">Resource Industries（采矿）分部利润 -39%，利润率从两位数掉到 10.0%，主因关税推高制造成本</span>。全年关税成本指引 $2.2-2.4B。所谓"超级周期"并非全面开花，关税是实打实的利润腐蚀剂。</p>
+
+      <p><strong>三、这份利润"水分"很低，但估值"水分"极高。</strong> CAT 的调整项极干净（调整后经营利润仅比 GAAP 多 $41M），利润是真金白银。可反向 DCF 告诉我们：<span class="warn-t">当前 $952.65 隐含市场认为它的自由现金流未来十年年增 13-14%</span>——远高于历史中周期的个位数增速，等于把"数据中心超级周期持续十年"当成了基准情形。ME&amp;T 自由现金流收益率只有 2.2%，对一台会随周期回撤的机器，这几乎没有安全边际。</p>
+
+      <p><strong>四、别把"净现金"或"零负债"安在 CAT 头上。</strong> 它合并有息负债 $43.1B、合并净负债约 -$39.0B；但其中 $32.4B 是 Cat Financial 金融子公司借款，对应 $24.8B 金融应收款，是捕获式金融的正常结构。剔除后<span class="hl-t">工业口径有息负债仅 $10.7B，工业净负债约 -$6.6B</span>，杠杆温和、利息覆盖 23 倍、商誉只占总资产 6%——工业资产负债表其实很健康。</p>
+
+      <p><strong>五、管理层在最贵的时候，花掉了几乎一整年的回购弹药。</strong> CAT 连续 31 年增息，是 Dividend Aristocrat，真实缩股（摊薄股数 513.6M→465.8M），这些都是高含金量的资本返还。但 <span class="warn-t">Q1 2026 单季回购 $5.03B，几乎等于 FY2025 全年，且发生在股价逼近历史高点、38.5x 估值的周期顶部</span>。价值投资的铁律是低买，管理层却在追高。方式对，力度足，唯独择时差。</p>
+
+      <h4>海图研判</h4>
+
+      <p><strong>评级：持有观望（偏向减仓）</strong>（世界级工程机械龙头 + 宽护城河 + 数据中心发电顺风 + record backlog $63B + 连增 31 年股息的顶级组合，对垒 Forward P/E 38.5x 极端估值 + 经销商补库存透支 + 关税逆风 + 周期顶部高价回购的结构性风险）。独立估值内在价值中位数 <strong>~$500</strong>（区间 $460-545），当前 $952.65 溢价约 +90%、约为内在价值的 1.9 倍，泡沫化定价。12 个月概率加权目标价 <strong>$835</strong>（-12%）。</p>
+
+      <p>操作建议：当前价无任何安全边际，<strong>不构成新建仓机会</strong>。机械首仓 $400（内在中位 $500 × 80%）距现价 -58%，需周期回摆 + 估值消化才可能触及；二仓 $350、三仓 $300 为深度回调/周期底部机会。现有持仓者可在止盈档 $1,075 / $1,180 / $1,300 逐档减仓 25%，锁定这轮重估的利润，最后 25% 长期持有。<strong>建议新买入仓位 0%，现有持仓降至 ≤2-3%。</strong>持有周期（若低位建仓）5-10 年。<span class="hl-t">关键纪律：好生意也要好价格——CAT 尤其如此，因为它是周期股，周期下行时它的"底"可以远低于今天的价格。</span></p>
+
+      <h4>风险提示</h4>
+
+      <p>数据中心发电资本开支骤停 / 经销商补库存反转 + 建筑周期下行 / 全球衰退 + 采矿资本开支收缩 + 关税升级 / 估值单独去泡沫——任一项都可能让股价跌向 $500-650。宽护城河 + record backlog + 后市场高毛利 + 健康工业资产负债表 + 连增 31 年股息构成质量底，但要清楚：<strong>CAT 是周期股，过去它曾在周期底部只值当前价的三分之一</strong>。质量能决定它值得拥有，但不能决定它此刻值这个价。</p>
+
+      <p>关键叙事：<strong>"全球工程机械与矿山设备之王 + 宽护城河 + 数据中心发电超级顺风 + 连增 31 年股息 + 真实缩股"的世界级生意，对垒"Forward P/E 38.5x 极端估值 + 补库存透支 + 关税逆风 + 周期顶部高价回购"的估值与周期风险</strong>。CAT 不是给追高的人——它是给愿意在周期回摆、估值消化后，于 $400-500 区间耐心建仓，然后让一台百年复利机器慢慢滚雪球的长期投资者。下次催化剂：2026-08-04 Q2 FY2026 财报。</p>
+
+      <p class="haitu-sign">—— 海图，灯下落笔，明日再观风浪。</p>
+
+      <p class="haitu-disc">⚠️ 免责声明：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，不构成任何投资建议。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div>《海图夜读》 · Caterpillar CAT Q1 FY2026 海图研判</div>
+  <div style="margin-top:6px;">发布日 2026-04-30 · 研判日 2026-07-11 · 数据来源 Caterpillar 1Q26 官方财报 PDF（SEC 8-K Exhibit 99.1）+ FY2025 10-K + 电话会 transcript</div>
+</footer>
+
+<script>
+let curTheme = 'light';
+function toggleTheme() {
+  curTheme = curTheme === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', curTheme);
+  renderCharts();
+}
+
+const palette = {
+  light: { accent: '#8a9a8e', accent2: '#7b8fa0', accent3: '#b08d7a', gold: '#b9a06a', red: '#b87070', green: '#7a9a7a', grid: '#e5ddd5', text: '#7a706a' },
+  dark:  { accent: '#8a9a8e', accent2: '#8fabbf', accent3: '#c9a48e', gold: '#c9b07a', red: '#c08080', green: '#8aaa8a', grid: '#3e3a35', text: '#a09890' }
+};
+
+let charts = {};
+function renderCharts() {
+  Object.values(charts).forEach(c => c && c.destroy && c.destroy());
+  charts = {};
+  const p = palette[curTheme];
+  Chart.defaults.color = p.text;
+  Chart.defaults.borderColor = p.grid;
+
+  const quarters = ['Q1 25','Q2 25','Q3 25','Q4 25','Q1 26'];
+  const rev = [14.25, 16.57, 17.64, 19.13, 17.42];
+  const yoy = [-10, -1, 10, 18, 22];
+  charts.rev = new Chart(document.getElementById('chartRev'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { type:'bar', label: '总营收 ($B)', data: rev, backgroundColor: p.accent + 'CC', yAxisID: 'y' },
+      { type: 'line', label: 'YoY %', data: yoy, borderColor: p.red, backgroundColor: p.red, tension: 0.3, yAxisID: 'y1' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false }, y1: { position: 'right', grid: { drawOnChartArea: false }, ticks: { callback: v => v + '%' } } } }
+  });
+
+  charts.margin = new Chart(document.getElementById('chartMargin'), {
+    type: 'line',
+    data: { labels: quarters, datasets: [
+      { label: 'GAAP 经营利润率 %', data: [18.1, 17.3, 17.3, 13.9, 17.7], borderColor: p.accent2, backgroundColor: p.accent2 + '22', tension: 0.3, fill: false },
+      { label: '调整后经营利润率 %', data: [18.3, 17.6, 17.5, 15.6, 18.0], borderColor: p.green, backgroundColor: p.green + '22', tension: 0.3, fill: false }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false, ticks: { callback: v => v + '%' } } } }
+  });
+
+  charts.segment = new Chart(document.getElementById('chartSegment'), {
+    type: 'doughnut',
+    data: {
+      labels: ['建筑工程 CI', '动力与能源 P&E', '资源/采矿 RI', '金融产品'],
+      datasets: [{ data: [7.10, 5.71, 3.71, 0.94], backgroundColor: [p.accent, p.accent2, p.accent3, p.gold] }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { font: { size: 11 } } } } }
+  });
+
+  charts.eps = new Chart(document.getElementById('chartEps'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { label: 'GAAP 摊薄 EPS', data: [4.20, 4.62, 4.88, 5.12, 5.47], backgroundColor: p.accent2 + 'CC' },
+      { label: '调整后 EPS', data: [4.25, 4.72, 4.95, 5.16, 5.54], backgroundColor: p.accent3 + 'CC' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false, ticks: { callback: v => '$' + v } } } }
+  });
+
+  buildSankey();
+}
+
+function buildSankey() {
+  const p = palette[curTheme];
+  const labels = ['总营收 $17,415','营业成本 $11,306','毛利 $6,109','SG&A $1,816','研发 $537','其他营业费用 $671','营业利润 $3,085','其他收入净额 $126','税前利润 $3,211','所得税 $670','净利润 $2,541'];
+  const data = {
+    type: 'sankey',
+    orientation: 'h',
+    node: { pad: 15, thickness: 18, line: { color: p.grid, width: 0.5 }, label: labels,
+      color: [p.accent, p.red, p.green, p.red, p.red, p.red, p.green, p.accent2, p.green, p.red, p.green] },
+    link: {
+      source: [0, 0, 2, 2, 2, 2, 6, 7, 8, 8],
+      target: [1, 2, 3, 4, 5, 6, 8, 8, 9, 10],
+      value:  [11306, 6109, 1816, 537, 671, 3085, 3085, 126, 670, 2541],
+      color: [p.red+'55', p.green+'55', p.red+'55', p.red+'55', p.red+'55', p.green+'66', p.green+'66', p.accent2+'66', p.red+'55', p.green+'66']
+    }
+  };
+  const layout = { font: { size: 11, color: p.text }, paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)', margin: { l: 10, r: 10, t: 10, b: 10 } };
+  Plotly.react('sankey', [data], layout, { displayModeBar: false, responsive: true });
+}
+
+renderCharts();
+</script>
+
+</body>
+</html>

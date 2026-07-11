@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 研判日 2026-07-11 · Bank of America Q1 FY2026 财报已于 2026-04-15 发布 -->
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>美国银行 BAC Q1 FY2026 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+<meta name="description" content="美国消费银行之王 · 3.5 万亿总资产、连续 29 季净增支票账户、消费存款全美第一的关系型银行。Q1 EPS $1.11 创近二十年新高（+25%），NII +9% 触发全年指引上调、销售交易连续 16 季增长、股票交易史上最佳、季度返还股东 $9.3B。但股价逼近 52 周高、P/TBV 2.05x 处自身估值高位、返还已超当期盈利——优质改善型银行，价格已至公允。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="美国银行 BAC Q1 FY2026 海图研判 · 海图夜读">
+<meta property="og:description" content="美国消费银行之王 · 3.5 万亿总资产、连续 29 季净增支票账户、消费存款全美第一的关系型银行。Q1 EPS $1.11 创近二十年新高（+25%），NII +9% 触发全年指引上调、销售交易连续 16 季增长、股票交易史上最佳、季度返还股东 $9.3B。但股价逼近 52 周高、P/TBV 2.05x 处自身估值高位、返还已超当期盈利——优质改善型银行，价格已至公允。">
+<meta property="og:url" content="https://jacexie.github.io/haitu/reports/bac-q1-fy2026.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="美国银行 BAC Q1 FY2026 海图研判 · 海图夜读">
+<meta name="twitter:description" content="美国消费银行之王 · 连续 29 季净增支票账户、消费存款全美第一。Q1 EPS $1.11 创近二十年新高（+25%），NII +9% 触发全年指引上调、季度返还股东 $9.3B。但 P/TBV 2.05x 处估值高位、返还已超当期盈利——优质改善型银行，价格已至公允。">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root { --bg:#f5f0eb; --bg2:#ece6df; --card:#ffffff; --card2:#f8f5f1; --border:#d9d0c7; --text:#4a4340; --text2:#7a706a; --text3:#a89f98; --accent:#8a9a8e; --accent2:#7b8fa0; --accent3:#b08d7a; --rose:#c09090; --gold:#b9a06a; --red:#b87070; --green:#7a9a7a; --shadow:rgba(0,0,0,0.06); --chart-grid:#e5ddd5; }
+[data-theme="dark"] { --bg:#1e1c1a; --bg2:#28251f; --card:#2e2a25; --card2:#363230; --border:#4a4540; --text:#d4ccc4; --text2:#a09890; --text3:#706860; --accent:#8a9a8e; --accent2:#8fabbf; --accent3:#c9a48e; --rose:#c09090; --gold:#c9b07a; --red:#c08080; --green:#8aaa8a; --shadow:rgba(0,0,0,0.3); --chart-grid:#3e3a35; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', serif; line-height: 1.75; font-size: 14.5px; transition: background .35s, color .35s; }
+a { color: var(--accent2); text-decoration: none; }
+.theme-bar { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); }
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+.toggle-switch { position: relative; width: 44px; height: 22px; background: var(--border); border-radius: 11px; cursor: pointer; transition: background .3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: var(--card); border-radius: 50%; transition: transform .3s; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+
+.hero { padding: 48px 24px 36px; text-align: center; border-bottom: 1px solid var(--border); }
+.hero-tag { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 3px 14px; border-radius: 20px; margin-bottom: 18px; }
+.hero h1 { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.pill { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: 'Segoe UI', sans-serif; font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow); }
+.pill strong { color: var(--text); }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle { font-size: 18px; font-weight: 700; color: var(--accent3); margin-bottom: 20px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+.stitle::before { content: ''; display: block; width: 4px; height: 20px; background: var(--accent3); border-radius: 2px; }
+
+.haitu-quip { display: flex; align-items: center; gap: 18px; background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 18px 24px; margin: 24px 0; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-quote { flex: 1; }
+.haitu-portrait { font-size: 15px; line-height: 1.65; color: var(--text); margin-bottom: 6px; font-weight: 600; }
+.haitu-rating-line { font-size: 13px; color: var(--text2); font-family: 'Segoe UI', sans-serif; }
+.rating-badge { display: inline-block; padding: 2px 12px; border-radius: 12px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; margin-left: 4px; }
+.rating-hold { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+
+.haitu-essay { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 28px 32px; margin: 24px 0 20px; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-essay-header { display: flex; align-items: center; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.haitu-avatar-sm { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); background: var(--red); box-shadow: 0 2px 8px rgba(184,112,112,0.2); }
+.haitu-name-lg { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 28px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 4px; }
+.haitu-essay-tag { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; }
+.haitu-essay-body { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 15px; line-height: 2.0; color: var(--text); }
+.haitu-essay-body p { margin-bottom: 14px; }
+.haitu-essay-body p.lead { font-size: 16px; font-style: italic; color: var(--text2); margin-bottom: 18px; }
+.haitu-essay-body strong { color: var(--text); font-weight: 700; }
+.haitu-essay-body h4 { font-size: 14px; color: var(--accent3); margin: 18px 0 10px; font-family: 'Segoe UI', sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+.haitu-sign { text-align: right; margin-top: 18px; font-family: 'Georgia', serif; font-size: 14px; color: var(--text2); font-style: italic; }
+.haitu-disc { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); font-style: italic; line-height: 1.7; }
+
+.stock-snap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px; }
+.snap-item { text-align: center; }
+.snap-label { font-family: 'Segoe UI', sans-serif; font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.snap-val { font-family: 'Segoe UI', sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+.snap-val.up { color: var(--green); }
+.snap-val.dn { color: var(--red); }
+.snap-sub { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow); }
+.kpi-l { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.badge { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+.up { background: rgba(122,154,122,.15); color: var(--green); }
+.dn { background: rgba(184,112,112,.15); color: var(--red); }
+.nt { background: rgba(123,143,160,.15); color: var(--accent2); }
+
+.tbl-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow); }
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI', sans-serif; font-size: 13px; }
+.tbl th { background: var(--card2); color: var(--text3); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); background: var(--card2); }
+
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); }
+.ctitle { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 260px; }
+
+.cmt { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 26px; line-height: 1.95; font-size: 14px; box-shadow: 0 1px 4px var(--shadow); color: var(--text); }
+.cmt p { margin-bottom: 14px; }
+.cmt p:last-child { margin-bottom: 0; }
+.cmt strong { color: var(--text); }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+
+.bscore { display: flex; align-items: center; gap: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; margin-bottom: 12px; box-shadow: 0 1px 4px var(--shadow); }
+.circle { width: 62px; height: 62px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; flex-shrink: 0; border: 3px solid; font-family: 'Segoe UI', sans-serif; }
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 4px; color: var(--text); }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.moat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+.moat-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); border-left: 4px solid var(--accent); }
+.moat-card.wide { border-left-color: var(--green); }
+.moat-card.narrow { border-left-color: var(--gold); }
+.moat-card.none { border-left-color: var(--red); }
+.moat-card h5 { font-size: 13px; color: var(--text); margin-bottom: 6px; }
+.moat-card .moat-rate { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.moat-card.wide .moat-rate { background: rgba(122,154,122,.18); color: var(--green); }
+.moat-card.narrow .moat-rate { background: rgba(185,160,106,.18); color: var(--gold); }
+.moat-card.none .moat-rate { background: rgba(184,112,112,.18); color: var(--red); }
+.moat-card p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+
+.ec-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 14px; box-shadow: 0 1px 3px var(--shadow); }
+.ec-badge { flex-shrink: 0; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-top: 2px; font-family: 'Segoe UI', sans-serif; }
+.ec-bull { background: rgba(122,154,122,.18); color: var(--green); }
+.ec-bear { background: rgba(184,112,112,.18); color: var(--red); }
+.ec-neut { background: rgba(185,160,106,.18); color: var(--gold); }
+.ec-body { flex: 1; }
+.ec-title { font-weight: 600; color: var(--text); margin-bottom: 3px; font-size: 14px; }
+.ec-note { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.dcf-note { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.dcf-note strong { color: var(--text); }
+
+.scorecard { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow); }
+.score-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.score-card { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px; }
+.score-letter { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Segoe UI', sans-serif; font-weight: 800; font-size: 22px; flex-shrink: 0; border: 3px solid; }
+.s-a { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.12); }
+.s-bp { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.06); }
+.s-b { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.10); }
+.s-bm { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.06); }
+.s-c { color: var(--red); border-color: var(--red); background: rgba(184,112,112,.08); }
+.score-body h4 { font-size: 13px; color: var(--text); margin-bottom: 4px; }
+.score-body p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+.flag-row { margin-top: 16px; padding: 12px 16px; background: rgba(184,112,112,.08); border: 1px solid rgba(184,112,112,.3); border-radius: 8px; font-size: 13px; color: var(--text2); }
+.flag-row strong { color: var(--red); }
+
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center; box-shadow: 0 1px 4px var(--shadow); }
+.pbox .pl { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; }
+.pbox .pv { font-family: 'Segoe UI', sans-serif; font-size: 28px; font-weight: 800; margin-bottom: 5px; }
+.pbox .pn { font-size: 12px; color: var(--text3); line-height: 1.5; }
+.pc { color: var(--red); } .pf { color: var(--gold); } .ps { color: var(--green); }
+
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.risk-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); position: relative; overflow: hidden; }
+.risk-card::before { content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent); }
+.risk-card.r1::before { background: var(--green); }
+.risk-card.r2::before { background: rgba(122,154,122,.6); }
+.risk-card.r3::before { background: var(--gold); }
+.risk-card.r4::before { background: var(--rose); }
+.risk-card.r5::before { background: var(--red); }
+.risk-card h5 { font-size: 14px; margin-bottom: 6px; color: var(--text); }
+.risk-score { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.r1 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r2 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r3 .risk-score { background: rgba(185,160,106,.18); color: var(--gold); }
+.r4 .risk-score { background: rgba(192,144,144,.18); color: var(--rose); }
+.r5 .risk-score { background: rgba(184,112,112,.18); color: var(--red); }
+.risk-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+footer { background: var(--card2); border-top: 1px solid var(--border); padding: 24px; text-align: center; color: var(--text3); font-size: 12px; margin-top: 40px; line-height: 1.8; }
+@media (max-width: 768px) { .cgrid,.pgrid { grid-template-columns: 1fr; } .hero h1 { font-size: 22px; } .kpi-grid { grid-template-columns: 1fr 1fr; } .stock-snap { grid-template-columns: 1fr 1fr; } .haitu-essay-header { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/BAC" target="_blank" rel="noopener" title="在雪球查看 BAC 实时行情">雪球 BAC</a>
+  </div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">Q1 FY2026 财报发布 · 2026-04-15 &nbsp;|&nbsp; 海图研判 · 2026-07-11</div>
+  <h1>美国银行 BAC · FY2026 Q1 财报深度分析</h1>
+  <div class="hero-sub">NYSE: BAC &nbsp;|&nbsp; 财季截至 2026-03-31 &nbsp;|&nbsp; 价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill">股价 <strong>$59.25</strong> <span style="color:var(--red)">距高点 -2.6%</span></div>
+    <div class="pill">市值 <strong>$423B</strong></div>
+    <div class="pill">Q1 净利 <strong>$8.58B</strong> <span style="color:var(--green)">+16.6%</span></div>
+    <div class="pill">摊薄 EPS <strong>$1.11</strong> <span style="color:var(--green)">+24.7%</span></div>
+    <div class="pill">ROTCE <strong>16.0%</strong></div>
+    <div class="pill">P/TBV <strong>2.05x</strong> <span style="color:var(--gold)">自身估值高位</span></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 海图页首短评 ═══ -->
+<div class="haitu-quip">
+  <div class="haitu-quote">
+    <div class="haitu-portrait">美国消费银行之王——3.5 万亿总资产、连续 29 季净增支票账户、消费存款全美第一的"关系型银行"。Q1 EPS $1.11 创近二十年新高（+25%），NII $15.9B（+9%）触发全年指引上调至 +6~8%，销售交易连续 16 季同比增长、股票交易"史上最佳单季"（+30%），单季返还股东 $9.3B。但股价 $59.25 逼近 52 周高、P/TBV 2.05x 处自身估值高位、返还已超当期盈利——优质改善型银行，价格已至公允。</div>
+    <div class="haitu-rating-line">评级：<span class="rating-badge rating-hold">持有观望</span> · 12 个月目标价 $60（+1%）· "消费银行之王 + 证券再投资的结构性 NII 顺风 + 约 7% 股东收益率"的改善型堡垒，对垒"P/TBV 2.05x 估值高位 + 返还超当期盈利 + 信贷周期晚期"</div>
+  </div>
+</div>
+
+<!-- ═══ 市场数据快照 ═══ -->
+<div class="section">
+  <div class="stitle">市场数据快照（2026-07-10 收盘）</div>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">股价（美元）</div><div class="snap-val">$59.25</div><div class="snap-sub">2026-07-10 收盘 · 距 52 周高 -2.6%</div></div>
+    <div class="snap-item"><div class="snap-label">市值</div><div class="snap-val">$423B</div><div class="snap-sub">7.13B 股 × $59.25</div></div>
+    <div class="snap-item"><div class="snap-label">TTM P/E</div><div class="snap-val">~14.7x</div><div class="snap-sub">TTM EPS $4.03</div></div>
+    <div class="snap-item"><div class="snap-label">Forward P/E</div><div class="snap-val nt">~13.3x</div><div class="snap-sub">FY2026E EPS $4.47</div></div>
+    <div class="snap-item"><div class="snap-label">P/TBV</div><div class="snap-val dn">2.05x</div><div class="snap-sub">TBVPS $28.84 · 自身高位区</div></div>
+    <div class="snap-item"><div class="snap-label">P/B</div><div class="snap-val">1.53x</div><div class="snap-sub">BVPS $38.66</div></div>
+    <div class="snap-item"><div class="snap-label">ROTCE（Q1）</div><div class="snap-val up">16.0%</div><div class="snap-sub">ROE 11.95% · ROA 0.99%</div></div>
+    <div class="snap-item"><div class="snap-label">CET1 比率（标准法）</div><div class="snap-val up">11.2%</div><div class="snap-sub">资本 $199.7B · 高级法 12.5%</div></div>
+    <div class="snap-item"><div class="snap-label">NIM（FTE）</div><div class="snap-val">2.07%</div><div class="snap-sub">ex-Markets 2.55% · +8bp YoY</div></div>
+    <div class="snap-item"><div class="snap-label">股息率</div><div class="snap-val">~1.9%</div><div class="snap-sub">$1.12/年 · $0.28/季</div></div>
+    <div class="snap-item"><div class="snap-label">股东收益率（trailing）</div><div class="snap-val up">~7.0%</div><div class="snap-sub">FY25 返还 $29.5B / 市值</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间</div><div class="snap-val">$44.75 - $60.83</div><div class="snap-sub">现价处区间上沿</div></div>
+  </div>
+  <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">数据时点：股价 2026-07-10 收盘 $59.25（与市值 $423B、期末普通股 7.13B 三者自洽）· 财务数据来源 SEC EDGAR 8-K Ex-99.1/99.2/99.3 + 10-Q 原文（2026-04-15 发布，财季截至 2026-03-31）· 货币 USD 单口径（美股，非中概股）。⚠️ 银行以负债（存款 $2.04T + 借款）驱动资产是商业模式本身，"净现金 = 现金 − 有息负债"等制造业指标<strong>不适用</strong>——按该框架任何银行都是"巨额净负债"，是无意义读数；替代观察：CET1 资本 $199.7B（比率 11.2%）、平均全球流动性来源 $960B、SLR 5.5%。OCF/Capex/FCF 对银行同样不适用（现金流量表不反映经营实质），本报告以资本生成与资本返还能力替代。</p>
+</div>
+
+<!-- ═══ Q1 FY2026 KPI ═══ -->
+<div class="section">
+  <div class="stitle">Q1 FY2026 核心业绩（USD · 财季截至 2026-03-31）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">总营收（扣息后）</div><div class="kpi-v">$30.27B</div><span class="badge up">+7.2% YoY</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">FTE 口径 $30.4B</div></div>
+    <div class="kpi"><div class="kpi-l">净利息收入 NII（GAAP）</div><div class="kpi-v">$15.75B</div><span class="badge up">+9.0%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">FTE $15.9B · 占营收 52%</div></div>
+    <div class="kpi"><div class="kpi-l">非利息收入</div><div class="kpi-v">$14.53B</div><span class="badge up">+5.2%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">财富/投行/交易费</div></div>
+    <div class="kpi"><div class="kpi-l">信贷拨备</div><div class="kpi-v">$1.34B</div><span class="badge up">-9.7%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">去年同期 $1.48B · 温和</div></div>
+    <div class="kpi"><div class="kpi-l">非利息费用</div><div class="kpi-v">$18.53B</div><span class="badge dn">+4.3%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">效率比 61.2%（改善 ~170bp）</div></div>
+    <div class="kpi"><div class="kpi-l">拨备前营业利润 PTPI</div><div class="kpi-v">$11.74B</div><span class="badge up">正经营杠杆 +2.9%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">营收增速快于费用增速</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 净利润</div><div class="kpi-v">$8.58B</div><span class="badge up">+16.6%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">归属普通股 $8.16B</div></div>
+    <div class="kpi"><div class="kpi-l">摊薄 EPS</div><div class="kpi-v">$1.11</div><span class="badge up">+24.7%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">近二十年最高单季</div></div>
+    <div class="kpi"><div class="kpi-l">ROTCE / ROE</div><div class="kpi-v">16.0% / 12.0%</div><span class="badge up">五季最高</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">ROA 0.99%</div></div>
+    <div class="kpi"><div class="kpi-l">CET1（标准法）</div><div class="kpi-v">11.2%</div><span class="badge nt">QoQ -14bp</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">因资本返还超盈利 · 高级法 12.5%</div></div>
+    <div class="kpi"><div class="kpi-l">净核销率 NCO</div><div class="kpi-v">0.48%</div><span class="badge up">-6bp YoY</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">信用卡核销 3.64%（去年 4.05%）</div></div>
+    <div class="kpi"><div class="kpi-l">单季返还股东</div><div class="kpi-v">$9.3B</div><span class="badge nt">超当期盈利</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">回购 $7.2B + 股息 $2.0B</div></div>
+  </div>
+</div>
+
+<!-- ═══ 看穿桥接 高亮框 ═══ -->
+<div class="section">
+  <div class="stitle">本季必看 · 两个"看穿"：银行没有 FCF、EPS +25% 的三个来源</div>
+  <div class="cmt">
+    <p><strong>读银行的利润表，有两个必须"看穿"的地方，看不穿就会用错框架、误判增长质量。</strong></p>
+    <p><strong>看穿一：银行没有"自由现金流"，别拿制造业尺子量它。</strong> 很多人习惯性去算 BAC 的 OCF / Capex / FCF、或"现金 − 有息负债 = 净现金"——对银行这些数字<span class="warn-t">全部不适用</span>。银行的"原料"就是负债：$2.04 万亿存款 + 长短期借款不是"要还的债"，而是它赚利差的资金池；现金流量表也不反映经营实质。银行真正要看的是三样：<span class="hl-t">利差质量（NIM 2.07% / ex-Markets 2.55%）、成本效率（效率比 61.2%）、风控（NCO 率 0.48%）</span>，偿付能力看资本（CET1 11.2%）与流动性（$960B），而非"净现金"。本报告全程用银行口径。</p>
+    <div class="tbl-wrap" style="margin:14px 0;">
+      <table class="tbl">
+        <tr><th>营收桥接（$B · 扣息后）</th><th>Q1 FY2026</th><th>YoY</th></tr>
+        <tr><td>净利息收入 NII（GAAP）</td><td>15.75</td><td>+9.0%</td></tr>
+        <tr><td>非利息收入 Noninterest income</td><td>14.53</td><td>+5.2%</td></tr>
+        <tr class="hl"><td><strong>总营收（扣息后）</strong></td><td><strong>30.27</strong></td><td><strong>+7.2%</strong></td></tr>
+        <tr><td><span class="warn-t">减：非利息费用</span></td><td><span class="warn-t">(18.53)</span></td><td>+4.3%</td></tr>
+        <tr><td><span class="warn-t">减：信贷拨备</span></td><td><span class="warn-t">(1.34)</span></td><td>-9.7%</td></tr>
+        <tr class="hl"><td>税前利润</td><td>10.40</td><td>—</td></tr>
+        <tr><td><span class="warn-t">减：所得税（有效税率 17.5%）</span></td><td><span class="warn-t">(1.82)</span></td><td>含股权激励归属折抵</td></tr>
+        <tr class="hl"><td><strong>GAAP 净利润</strong></td><td><strong>8.58</strong></td><td><strong>+16.6%</strong></td></tr>
+      </table>
+    </div>
+    <p><strong>看穿二：EPS +25% 快于净利 +16.6%，差额来自三处叠加。</strong> 净利 +16.6% 已经很强，但 EPS 跳到 +24.7%（$1.11，近二十年最高单季），差额来自：(1) <span class="hl-t">摊薄股数持续缩减</span>——从 1Q25 的 7,770.8M 降至 1Q26 的 7,417.5M（-4.5%），持续回购放大每股；(2) <span class="hl-t">正经营杠杆</span>——营收 +7.2% 快于费用 +4.3%，效率比降至 61.2%（改善约 170bp）；(3) 拨备同比下降（$1.34B vs $1.48B）+ 本季有效税率 17.5%（含年度股权激励归属的一次性折抵）。<strong>其中缩股 + 经营杠杆是可持续的结构性来源，税率折抵是一次性的——把税率还原到 ~19-20%，"干净"的 EPS 增速仍在 +18-20% 区间，依然强劲。</strong></p>
+    <p style="font-size:12px; color:var(--text3);">注：银行不使用制造业式 Non-GAAP 净利/EPS 概念。BAC 披露的管理口径主要是 FTE 收入/NII、PTPI、ROTCE、TBV/share，与 GAAP 差异极小（FTE 调整仅 $162M，<0.6%），因此不触发"GAAP vs Non-GAAP 差 ≥10%"的双口径拆分；但银行盈利具周期性（拨备/交易波动），估值仍以多档 P/E + P/TBV 透视（见模块 7）。</p>
+  </div>
+</div>
+
+<!-- ═══ 趋势图 ═══ -->
+<div class="section">
+  <div class="stitle">关键指标趋势（近 5 季 · 追溯口径）</div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">总营收（$B · 扣息后）与 ROTCE（%，右轴 · 1Q26 ROTCE 16%）</div><div class="cwrap"><canvas id="chartRev"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">NIM（银行"利润率"，左轴 %）与 效率比（成本收入比，右轴 %）</div><div class="cwrap"><canvas id="chartNim"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">Q1 2026 四大分部营收拆分（$B · 扣息 FTE 口径）</div><div class="cwrap"><canvas id="chartSegment"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">摊薄 EPS（$ · 1Q26 $1.11 近二十年新高）</div><div class="cwrap"><canvas id="chartEps"></canvas></div></div>
+  </div>
+  <p style="margin-top:4px; font-size:12px; color:var(--text3); line-height:1.6;">口径说明：4Q25 起对某税务相关权益投资采用新会计方法并追溯调整，使部分前期季度净利/EPS 较原披露略有下修（如 3Q25 原 EPS $1.06/净利 $8.5B → 追溯后 $1.04/$8,332M）。趋势数组统一采用<strong>追溯后口径</strong>以保持一致。</p>
+</div>
+
+<!-- ═══ 桑基图 ═══ -->
+<div class="section">
+  <div class="stitle">Q1 FY2026 资金流向桑基图（$B · 银行营收→净利分解）</div>
+  <div class="ccard">
+    <div id="sankey" style="width:100%;height:480px;"></div>
+    <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">说明：净利息收入 $15.75 + 非利息收入 $14.53 → 总营收 $30.27 → 非利息费用 $18.53 + 信贷拨备 $1.34 + 税前利润 $10.40 → 所得税 $1.82 + GAAP 净利 $8.58。每个节点流入 = 流出，流量闭合。注：本季向股东返还 $9.3B（回购 $7.2B + 股息 $2.0B）> 归属普通股净利 $8.16B——差额由超额 CET1 缓冲（11.2% vs 监管下限约 10.0-10.7%）支撑，是"释放超额资本做返还"，也是本季 CET1 环比降 14bp 的原因。银行不适用 FCF 桑基分解，故以营收→净利口径呈现。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 1 ═══ -->
+<div class="section">
+  <div class="stitle">模块 1 · 公司概览与背景</div>
+  <div class="cmt">
+    <p><strong>Bank of America Corporation</strong>（NYSE: BAC），总部北卡罗来纳州夏洛特。源自 1904 年旧金山的意大利银行、1998 年 NationsBank 与 BankAmerica 合并成今日框架，2008-2009 危机中收购 Countrywide（住房贷款）与 Merrill Lynch（财富管理 + 投行），奠定"零售 + 财富 + 投行"三位一体版图。财年即日历年（12 月 31 日结束）。CEO 布莱恩·莫伊尼汉（Brian Moynihan，2010 至今）、CFO Alastair Borthwick。</p>
+
+    <p><strong>核心叙事</strong>：BAC 是<span class="hl-t">美国货币中心大行中"消费银行 + 财富管理"最强的关系型银行</span>——总资产 $3.5 万亿（2026-03-31 末，美国第二）、美国消费者存款份额<strong>连续多年全美第一</strong>、小企业贷款连续 19 季全美第一。它不是一条腿走路的利差银行，而是四台引擎的组合体：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>消费银行 Consumer Banking</strong>——3,850 万支票账户（91% 为主账户）、连续 29 季净增，是低成本存款与循环卡息的基本盘；Q1 净利 $3.06B（+21%）、ROAC 27%</li>
+      <li><strong>全球财富与投资管理 GWIM</strong>——Merrill + Private Bank，客户余额 $4.6 万亿、AUM $2.1 万亿，费收驱动、抗周期；Q1 净利 $1.33B（+32%）、ROAC 24%</li>
+      <li><strong>全球银行 Global Banking</strong>——企业信贷 + 投行（Q1 投行费 $1.8B，+21%）；Q1 净利 $2.09B（+8%）、ROAC 16%</li>
+      <li><strong>全球市场 Global Markets</strong>——做市与交易，销售交易收入 $6.4B（+13%，连续 16 季同比增长）、股票交易 +30%"史上最佳单季"；Q1 净利 $2.01B（+3%）、ROAC 15%</li>
+    </ul>
+
+    <p><strong>股权与治理</strong>：单一类别普通股（无双重股权），期末普通股 7.13B 股（1Q25 7.56B → 4Q25 7.21B → 1Q26 7.13B，持续回购缩股）。优先股 $25.0B（分层）。治理成熟规范，董事会独立性高。<span class="hl-t">巴克希尔系资本长期为其最大股东之一</span>（本报告按品牌规范不展开该股东叙事）——机构持股集中、稳定。</p>
+
+    <p><strong>能力圈检验</strong>：BAC 的生意可用两句话说清——<span class="hl-t">用全美最庞大的低成本消费存款做资金池赚利差，再用 Merrill 财富平台 + 投行 + 做市赚手续费</span>。清晰、可理解。<span class="warn-t">两块需要盯的暗箱</span>：(1) 巨额持有至到期（HTM）证券组合 $5,147 亿——2020-2021 低利率时买入、账面存在未实现损失（历史 AOCI 拖累），如今随到期滚动以高约 150-200bps 再投资，是未来数年 NII 的结构性顺风，但利率路径决定其修复速度；(2) 信贷周期位置——当前 NCO 0.48%、商业地产办公敞口在改善，但处周期低位，只有上行空间。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 2 ═══ -->
+<div class="section">
+  <div class="stitle">模块 2 · 管理层评估</div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>Brian Moynihan · 董事长兼 CEO（2010 至今）</h4>
+      <p>危机后临危受命，用十五年时间把一家背着 Countrywide 诉讼、濒临崩溃的银行重塑为盈利稳定的关系型堡垒。核心战略是<span class="hl-t">"负责任的增长"（Responsible Growth）</span>——不追风口、不做不理解的业务、以客户关系深化（主账户、交叉销售、数字化）而非资产规模扩张为增长源。任内把消费者存款做到全美第一、支票账户连续 29 季净增、数字银行活跃用户 5,000 万。海图判断：这是一位把"活下来 + 慢慢变好"刻进企业基因的守成型掌舵人，风格与激进扩张相反，正是危机后大行最需要的性格。CFO Borthwick 沉稳，指引记录可信。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>资本配置纪律 · 回购三级跳 + 连续增息</h4>
+      <p>
+      <strong>持续大额回购缩股</strong>：回购规模三年三级跳（FY2023 $4.58B → FY2024 $13.10B → FY2025 $21.43B），摊薄股数从 FY2022 的 81.7 亿降至 1Q26 的 74.2 亿（累计缩约 9%）。2025-07 新批 <strong>$40B 普通股回购授权</strong>（2025-08-01 生效）+ 同步<strong>上调股息 8% 至 $0.28/季</strong>。<br>
+      <strong>危机式并购眼光</strong>：2008-2009 在别人恐惧时收购 Countrywide + Merrill Lynch，虽背了多年诉讼包袱，但 Merrill 财富平台成为今日最抗周期的利润引擎——事后看是顶级的逆周期资本配置。<br>
+      <span class="warn-t">一个纪律观察点</span>：FY2025 合计返还 $29.5B ≈ 当年归属普通股净利的约 100%，1Q26 单季返还 $9.3B 更超当期盈利，靠释放超额 CET1 支撑（本季 CET1 环比降 14bp）——这对资本充裕的银行是合理的超额资本释放，但不是"用赚的钱返还"，是模块 12 的关键检验点。
+      </p>
+    </div>
+  </div>
+
+  <div class="cmt">
+    <p><strong>长期主义测试</strong>：✅ Moynihan 的"负责任增长"本质是长期主义——常年维持超额资本缓冲、不为平滑短期 EPS 而牺牲风控、危机中出手而非退缩。<strong>坦诚度</strong>：电话会详尽，主动披露分部 ROAC、NCO 细项、利率敏感度（远期曲线再降 100bp → 未来 12 个月 NII 减少约 $2.0B），并在业绩最好的季度仍提示"对不断演变的风险保持警惕"。<strong>利益绑定</strong>：管理层持股比例不高（成熟大盘股常态），薪酬与 ROTCE / 负责任增长指标挂钩，结构合理。<strong>历史兑现</strong>：4Q25 首次给出 FY2026 NII +5~7% 指引，1Q26 即因超预期上调至 +6~8%——指引偏保守、兑现度高。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 3 ═══ -->
+<div class="section">
+  <div class="stitle">模块 3 · 商业模式深度解析</div>
+  <div class="cmt">
+    <p><strong>海图"一句话测试"</strong>：<span class="hl-t">美国银行是一台"存款引擎 + 费收引擎"的双缸机器——用全美最大的低成本消费存款池赚利差（NII，占营收 52%），再用 Merrill 财富管理、投行、做市交易赚不占用信用风险的手续费（占 48%），两缸互补、穿越周期。</span></p>
+
+    <p><strong>营收模型（Q1 FY2026 · 扣息后）</strong>：净利息收入 NII 与非利息收入近乎一半一半，这是 BAC 相对纯利差银行的抗周期优势——降息压 NII 时，财富/投行/交易费可对冲；市场清淡压费收时，存贷利差是压舱石。</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>收入引擎</th><th>Q1 FY26</th><th>占比</th><th>驱动</th></tr>
+        <tr><td>净利息收入 NII</td><td>$15.75B</td><td>52%</td><td>存贷利差 + 证券再投资（NIM 2.07% · 量增 + HTM 滚动再投）</td></tr>
+        <tr><td>非利息收入（费收）</td><td>$14.53B</td><td>48%</td><td>财富管理费 $4.2B + 投行费 $1.8B + 销售交易 $6.4B + 卡/服务费</td></tr>
+      </table>
+    </div>
+
+    <p style="margin-top:14px;"><strong>分部经济与议价能力</strong>：银行的"单位经济"就是三个比率——<span class="hl-t">NIM 2.07%（ex-Markets 2.55%，资金成本优势）、效率比 61.2%（规模效率，改善约 170bp）、NCO 率 0.48%（风控质量）</span>。</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>对存款人议价力：强</strong>——消费者存款份额全美第一，3,850 万支票账户（91% 主账户），黏性极高、成本极低，是 NII 的护城河源头</li>
+      <li><strong>对企业/财富客户议价力：中-强</strong>——Merrill + Private Bank 一站式绑定，客户余额 $4.6 万亿、AUM $2.1 万亿，转换成本高</li>
+      <li><strong>对监管：零议价力</strong>——资本要求（CET1）、压力测试、Basel 规则是这门生意唯一不可谈判的成本；BAC 曾长期受"沃尔克规则 + 危机后监管"约束</li>
+      <li><strong>规模与网络</strong>：数字银行活跃用户 5,000 万、综合卡消费 $2,450 亿/季（+7%）——数字化把服务边际成本压低，是效率比持续改善的引擎</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══ 模块 4 ═══ -->
+<div class="section">
+  <div class="stitle">模块 4 · 经济护城河分析（5 维 · 金融业适配）</div>
+  <div class="moat-grid">
+    <div class="moat-card wide">
+      <h5>1. 成本优势（低成本存款）</h5>
+      <span class="moat-rate">宽</span>
+      <p>美国消费者存款份额全美第一、$2.04 万亿存款、3,850 万支票账户（91% 主账户）。极低资金成本是 NIM 与 ROTCE 的根基。<strong>趋势：稳定偏加宽</strong>（数字化 + 主账户深化）。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>2. 转换成本</h5>
+      <span class="moat-rate">宽</span>
+      <p>支票账户 + 房贷 + 卡 + Merrill 财富账户深度绑定，账户迁移摩擦大。GWIM 客户余额 $4.6 万亿黏性极高。<strong>趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>3. 规模/有效规模</h5>
+      <span class="moat-rate">中-宽</span>
+      <p>$3.5 万亿资产、四大 GSIB 之一，全国分行 + 数字网络规模效应显著（效率比改善 170bp）。但美国大行是"寡头竞争"而非独占，JPM 份额更强。<strong>趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>4. 无形资产/监管牌照</h5>
+      <span class="moat-rate">中-宽</span>
+      <p>百年品牌信任 + 全国银行牌照 + GSIB 地位构成极高准入壁垒。<span class="warn-t">但同一监管地位也带来资本要求、压力测试、Basel 加码的"税"</span>。<strong>趋势：监管压制</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>5. 网络效应</h5>
+      <span class="moat-rate">中</span>
+      <p>支付、Zelle、财富平台有一定网络属性，但弱于卡组织/交易所。银行护城河主要来自成本 + 转换成本而非网络效应。<strong>趋势：稳定</strong>。</p>
+    </div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>10 年后护城河会更宽还是更窄？</strong> <span class="hl-t">核心判断：核心存款护城河更宽，但"税"更重、体系外渗漏加剧。</span>头部化是银行业的长期物理规律——每一轮危机（2008、2023 区域银行危机）都让存款与人才向 BAC/JPM 这样的大行集中。但三个侵蚀变量：(1) <span class="warn-t">私募信贷</span>把最优质的企业信贷从银行资产负债表撬走；(2) <span class="warn-t">金融科技 / 稳定币 / 支付新轨道</span>分流支付与低成本存款；(3) <span class="warn-t">监管资本加码（Basel III Endgame）</span>不侵蚀份额但压 ROTCE 天花板。<strong>定价权</strong>：存款端强（份额第一、低息揽储）、贷款端中（面对私募信贷竞争）、费收端中-强（财富/投行份额稳定）。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 5 ═══ -->
+<div class="section">
+  <div class="stitle">模块 5 · 财务深度分析（金融业适配：NII/NIM/拨备/CET1/ROTCE）</div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 12px 0; font-family: 'Segoe UI',sans-serif;">5.1 关键比率（Q1 FY2026）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>指标</th><th>Q1 FY2026</th><th>对照/去年</th><th>含义</th></tr>
+      <tr><td>ROTCE</td><td>16.00%</td><td>1Q25 13.97%</td><td>五季最高 · 结构性改善</td></tr>
+      <tr><td>ROE / ROA</td><td>11.95% / 0.99%</td><td>ROA 接近 1% 门槛</td><td>大行第一梯队</td></tr>
+      <tr><td>NIM / NIM ex-Markets（FTE）</td><td>2.07% / 2.55%</td><td>1Q25 1.99%（+8bp）</td><td>证券再投资顺风逐步显现</td></tr>
+      <tr><td>效率比 Efficiency Ratio</td><td>61.22%</td><td>1Q25 62.91%（改善 ~170bp）</td><td>正经营杠杆 +2.9%</td></tr>
+      <tr><td>NCO 率 / 信用卡核销率</td><td>0.48% / 3.64%</td><td>1Q25 0.54% / 4.05%</td><td>信用温和改善</td></tr>
+      <tr><td>拨备覆盖（ACL / 贷款）</td><td>1.09%</td><td>ACL $14.31B</td><td>覆盖充分</td></tr>
+      <tr><td>CET1（标准法 / 高级法）</td><td>11.2% / 12.5%</td><td>下限约 10.0-10.7%</td><td>超额资本充裕</td></tr>
+      <tr><td>摊薄股数（百万）</td><td>7,417.5</td><td>1Q25 7,770.8（-4.5%）</td><td>持续回购缩股</td></tr>
+    </table>
+  </div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.2 五季趋势（追溯口径）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>指标</th><th>1Q25</th><th>2Q25</th><th>3Q25</th><th>4Q25</th><th>1Q26</th></tr>
+      <tr><td>总营收（$B）</td><td>28.2</td><td>27.4</td><td>29.0</td><td>28.4</td><td class="hl-t">30.3</td></tr>
+      <tr><td>净利（$M）</td><td>7,360</td><td>7,170</td><td>8,332</td><td>7,647</td><td class="hl-t">8,584</td></tr>
+      <tr><td>摊薄 EPS（$）</td><td>0.89</td><td>0.90</td><td>1.04</td><td>0.98</td><td class="hl-t">1.11</td></tr>
+      <tr><td>ROTCE（%）</td><td>13.97</td><td>13.61</td><td>15.29</td><td>13.97</td><td class="hl-t">16.00</td></tr>
+      <tr><td>NIM FTE（%）</td><td>1.99</td><td>1.94</td><td>2.01</td><td>2.08</td><td>2.07</td></tr>
+      <tr><td>效率比（%）</td><td>62.91</td><td>62.61</td><td>59.70</td><td>61.47</td><td>61.22</td></tr>
+      <tr><td>平均存款（$B）</td><td>1,958</td><td>1,974</td><td>1,991</td><td>2,013</td><td>2,017</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3);">读数：ROTCE 五季从 14% 抬升到 16%、NIM 从 1.99% 拾级而上、平均存款连续 11 季环比增长——三条线共同讲述"证券再投资顺风 + 存款量增 + 效率改善"的结构性改善故事。TBVPS 同比 +7%（$26.90 → $28.84），是银行"内在价值刻度尺"最直观读数。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.3 资产负债健康度（2026-03-31 末 · $M）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>2026-03-31 末</th><th>说明</th></tr>
+      <tr><td>现金及等价物</td><td>242,479</td><td>含存放美联储 215,354</td></tr>
+      <tr><td>债务证券合计</td><td>901,127</td><td>AFS 386,389 + HTM 514,738</td></tr>
+      <tr><td>贷款与租赁（总额）</td><td>1,205,035</td><td>每个分部均增长（+9% YoY）</td></tr>
+      <tr><td>贷款损失准备</td><td>(13,148)</td><td>净额贷款 1,191,887</td></tr>
+      <tr><td>商誉</td><td>69,021</td><td>多来自 Merrill/Countrywide</td></tr>
+      <tr class="hl"><td><strong>总资产</strong></td><td><strong>3,496,186</strong></td><td>美国第二大行</td></tr>
+      <tr><td>总存款</td><td>2,037,663</td><td>无息 $544B + 有息 $1,494B</td></tr>
+      <tr><td>长期债务 / 短期借款</td><td>325,964 / 57,630</td><td>银行资金来源（非"净负债"）</td></tr>
+      <tr><td>回购融资 / 交易性负债</td><td>353,020 / 129,833</td><td>做市与融资</td></tr>
+      <tr class="hl"><td>普通股股东权益</td><td>275,700</td><td>BVPS $38.66</td></tr>
+      <tr class="hl"><td>有形普通股权益 TCE</td><td>205,700</td><td>TBVPS $28.84（+7% YoY）</td></tr>
+      <tr><td>优先股</td><td>24,996</td><td>分层优先股</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">⚠️ <strong>金融业适配说明</strong>：银行以负债（存款 + 借款 + 回购融资）驱动资产是商业模式本身，"净现金 = 现金 − 有息负债"的制造业框架<strong>不适用</strong>。银行偿付能力看三样：<span class="hl-t">资本（CET1 $199.7B、比率 11.2% vs 下限约 10.0-10.7%）、流动性（平均全球流动性来源 $960B）、损失吸收（ACL $14.31B、对不良覆盖约 2.5 倍、SLR 5.5%）</span>。经营租赁负债未在表面单列，含于"应计与其他负债 $247,470M"内，据历史 10-K 约 $9-10B 量级（本季未单独披露，为估计值，未逐笔核对）。巨额 HTM 组合 $514.7B 是历史低利率买入的存量，其未实现损失通过 AOCI 影响权益但不进损益，随到期滚动再投资（高约 150-200bps）是未来数年 NII 顺风。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.4 现金流与资本生成（银行版所有者盈余）</h3>
+  <div class="dcf-note">
+    <p><strong>银行不适用 OCF/Capex/FCF 框架</strong>（现金流量表不反映经营实质），价值投资的"所有者盈余"对银行需改写为：<strong>可分配盈余 ≈ GAAP 净利 − 维持资本充足所需的留存</strong>（银行的"维护性 Capex"是随 RWA 增长必须补充的监管资本）。</p>
+    <p>Q1 净利 $8.58B → 年化约 $34B（含 Q1 季节性交易强 + 一次性税率折抵，正常化约 $30-32B）。按 RWA 温和增长、CET1 目标维持约 11% 估算，维持性资本留存约 $3-5B/年 → <strong>可分配所有者盈余约 $28-30B/年</strong>——与 FY2025 实际返还 $29.5B 高度吻合，说明管理层实际就是按"可分配盈余"打满返还。</p>
+    <p><strong>所有者盈余收益率 ≈ $29B / 市值 $423B ≈ 6.8%</strong>——对一家 ROTCE 16%、盈利结构性改善的大行，这个收益率<span class="hl-t">谈不上便宜，但明显优于同业中估值最高的 JPM（约 5.4%）</span>：BAC 是货币中心大行里"质量改善 + 估值相对合理"的组合，而非"顶级质量 + 顶级估值"。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 6 ═══ -->
+<div class="section">
+  <div class="stitle">模块 6 · 电话会分析（Q1 FY2026 + 前 2 季度）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">Q1 FY2026 电话会（2026-04-15）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"NII（FTE）$15.9B 同比 +9%，超我们自身预期——据此把 FY2026 NII 增速指引由 5-7% 上调至 6-8%"</div><div class="ec-note">因 1Q NII 超预期 + 市场对降息预期下调。NII 是 BAC 最大营收引擎（占 52%），指引上调是本季最重的利好信号。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"创纪录销售交易收入 $6.3B(ex-DVA) +12%，股票交易'史上最佳单季'+30%；投行费 +21% 至 $1.8B"</div><div class="ec-note">全球市场引擎点火，销售交易连续 16 季同比增长。市场波动红利 + 份额提升共同贡献，但交易收入带环境属性、有均值回归风险。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"EPS $1.11 同比 +25%，近二十年最高；290bps 经营杠杆，ROTCE 16%，效率比降至 61%"</div><div class="ec-note">正经营杠杆 + 缩股 + 拨备回落三者叠加。管理层强调全年将维持 200+bps 正经营杠杆——这是 BAC"负责任增长"最直观的兑现。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"本季返还股东 $9.3B（回购 $7.2B + 股息 $2.0B）；CET1 11.2% 环比降 14bp，因资本返还超过盈利但仍远高于监管下限"</div><div class="ec-note">积极的资本返还，但节奏已超当期盈利、靠释放超额资本——可持续性取决于 CET1 缓冲厚度与 Basel 走向（见模块 12）。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"拨备 $1.3B 同比下降，信用温和（NCO 率 0.48%，商业地产办公敞口改善），但对不断演变的风险保持警惕"</div><div class="ec-note">信用质量处周期低位、暂无恶化迹象；但管理层措辞留有余地——拨备只有上行空间，是信贷周期晚期的标准审慎表态。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q4 FY2025 电话会（2026-01-14）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"EPS $0.98 超预期 $0.96；营收 $28.4B 超 $27.55B；净利 $7.6B 同比 +12%"</div><div class="ec-note">首次给出 FY2026 NII 增速指引 5-7%（基于含 2 次降息的曲线，后于 1Q 上调）。每季约 $12-15B MBS/按揭到期以高 150-200bps 再投资，为 NII 提供结构性顺风。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"尽管业绩超预期，盘前股价一度跌约 2.4%（估值/获利了结）"</div><div class="ec-note">典型的"好业绩 + 已充分定价"反应——提示市场对 BAC 的预期已不低，超预期才是维持股价的门槛。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q3 FY2025 电话会（2025-10-15）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"净利约 $8.3B、EPS $1.04（原披露 $1.06/$8.5B，后因会计方法变更追溯下修）大幅超约 $0.94 预期；NII $15.2B 创纪录"</div><div class="ec-note">投行费同比激增约 43% 至约 $2.0B、股票交易 +14%。财报后股价涨约 5% 逼近 52 周高点。4Q25 起对某税务相关权益投资采用新会计方法并追溯调整。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">指引兑现度追踪</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>历史指引</th><th>Q1 FY2026 实际 / 更新</th><th>评价</th></tr>
+      <tr><td>FY2026 NII 增速（4Q25 给 5-7%）</td><td>上调至 6-8%</td><td><span class="badge up">上调</span></td></tr>
+      <tr><td>FY2026 全年正经营杠杆</td><td>预计 200+bps</td><td><span class="badge up">兑现中</span></td></tr>
+      <tr><td>销售交易增长可持续性</td><td>+13%（连续 16 季）</td><td><span class="badge up">超预期</span></td></tr>
+      <tr><td>信用成本温和</td><td>NCO 0.48%（-6bp YoY）</td><td><span class="badge up">符合</span></td></tr>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>信号汇总</strong>：Q1 FY2026 是 BAC "<span class="hl-t">NII 超预期上调指引 + 交易/投行双强 + 正经营杠杆 + 极致资本返还</span>"的强势一季，EPS 创近二十年新高。<strong>底层的量在全面增长</strong>——存款、账户、客户资产、卡消费四线齐升。但两点需留意：交易收入带市场环境属性（有均值回归风险）、资本返还已超当期盈利（靠 CET1 缓冲）。<strong>业绩没有任何硬伤——问题在估值是否已把这份改善充分定价，以及信贷周期晚期的时点。</strong>下季财报 2026-07-14，是本报告的第一块试金石（卖方共识 EPS ~$1.10、营收 ~$30.26B）。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 7 ═══ -->
+<div class="section">
+  <div class="stitle">模块 7 · 多模型估值（8 种方法 · 金融业以 P/TBV、DDM、P/E 为主）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">7.1 估值汇总表（独立推导 · 不锚定现价 · USD）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>估值方法</th><th>每股公允价</th><th>假设要点</th><th>权重</th></tr>
+      <tr><td>1. P/TBV–ROTCE 模型（合理市净率）</td><td>$60</td><td>正常化 ROTCE 15.5%、COE 10%、g 4.5% → 合理 P/TBV =(0.155−0.045)/(0.10−0.045)≈2.0x × 前瞻 TBVPS ~$30.7</td><td>30%</td></tr>
+      <tr><td>2. 相对估值（P/E）</td><td>$60</td><td>FY2026E EPS $4.47 × 13.3x（介于 WFC 11x 与 JPM 15x 之间，反映改善型溢价但低于份额龙头）</td><td>20%</td></tr>
+      <tr><td>3. DDM（股息 + 回购总派息口径）</td><td>$54</td><td>一致性 g 4.5% 下可持续总派息 ~$18-19B、r 10%；纯股息 DDM 仅约 $21（派息率仅 25%，只反映"股息底"，参考意义有限）</td><td>15%</td></tr>
+      <tr><td>4. PEG</td><td>$60</td><td>Forward P/E 13.3x ÷ FY2026E EPS 增速 ~17% = 0.78（&lt;1，优质不贵）→ 合理 P/E ~13x</td><td>10%</td></tr>
+      <tr><td>5. 所有者盈余收益率（银行版）</td><td>$62</td><td>可分配盈余 ~$29B / 目标收益率 6.5% ≈ $446B → /7.13B 股</td><td>10%</td></tr>
+      <tr><td>6. SOTP 分部加总</td><td>$63</td><td>消费银行(27% ROAC 给高倍)+GWIM(费收给高倍)+全球银行(16%)+全球市场(15% 给低倍)−优先股</td><td>15%</td></tr>
+      <tr><td>7. NAV</td><td>底价 $28.84</td><td>TBVPS 为清算刻度而非公允价值——持续 16% ROTCE 的特许经营权理应远高于净资产交易</td><td>0%</td></tr>
+      <tr><td>8. 反向估值（银行版反向 DCF）</td><td>诊断项</td><td>现价 $59.25 = 2.05x TBV，按 COE 10%/g 4.5% 反推，隐含市场定价<strong>约 15.8% 永续 ROTCE</strong>——与实际 16% 几乎持平，"公允"而非"泡沫"</td><td>0%</td></tr>
+      <tr class="hl"><td><strong>加权公允价中位数</strong></td><td><strong>$60</strong></td><td>估值区间 $54-63 · 中位 ~$60</td><td>100%</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.8;"><strong>与现价对照</strong>：当前 $59.25（2026-07-10 收盘）vs 加权公允 ~$60 · <span class="nt">安全边际近零（约 +1%）</span>——距价值投资 25% 安全边际的买入门槛（$60 × 75% ≈ $45）相去甚远。<strong>反向估值是最直白的一句话</strong>：市场给 BAC 定价的隐含永续 ROTCE 约 15.8%，几乎等于它当前实际的 16%——这与 JPM 被定价"永续 22% ROTCE"（远高于实际 20%）形成鲜明对比。<span class="hl-t">BAC 是货币中心大行里估值最"诚实"的一个：没把峰值盈利当永续定价，但也没有折价。</span></p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.2 P/E 多档透视表（银行盈利周期性 → 多档呈现）</h3>
+  <p style="margin-bottom:10px; font-size:13px; color:var(--text2);">银行盈利具周期性（拨备/交易波动），单一 TTM P/E 会误导；GAAP 与 Non-GAAP 差异极小（FTE 调整 $162M &lt;0.6%，不触发双口径拆分），故用 trailing / forward / 年化 / P-TBV 多档透视：</p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>口径</th><th>EPS / 指标</th><th>倍数（基于 $59.25）</th><th>读数说明</th></tr>
+      <tr><td>TTM P/E</td><td>EPS $4.03</td><td>~14.7x</td><td>含 4Q25 追溯下修 · 银行常态 10-14x</td></tr>
+      <tr><td>1Q26 单季年化 P/E</td><td>$1.11×4 = $4.44</td><td>~13.3x</td><td>本季偏强（交易 + 税率折抵）· 略高估</td></tr>
+      <tr class="hl"><td><strong>Forward P/E（FY2026E $4.47）</strong></td><td><strong>$4.47</strong></td><td><strong>~13.3x</strong></td><td>最可信档 · 市场惯用</td></tr>
+      <tr><td>Forward P/E（FY2027E $5.09）</td><td>$5.09</td><td>~11.6x</td><td>次年 · 反映 NII 顺风延续</td></tr>
+      <tr><td>P/TBV</td><td>TBVPS $28.84</td><td>2.05x</td><td><span class="warn-t">自身估值高位区 · 隐含 ROTCE 15.8%</span></td></tr>
+      <tr><td>P/B</td><td>BVPS $38.66</td><td>1.53x</td><td>含商誉/无形</td></tr>
+      <tr><td>股东收益率（trailing）</td><td>返还 $29.5B</td><td>~7.0%</td><td>股息 1.9% + 回购 5.1%</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3);"><strong>最可信档</strong>：Forward ~13.3x（FY2026E）/ ~11.6x（FY2027E）。银行估值关键不是 P/E 绝对值，而是 <span class="hl-t">P/TBV 与 ROTCE 的匹配</span>：2.05x TBV 需要约 15.8% 永续 ROTCE 支撑，而 BAC 实际 Q1 就是 16%、穿越周期约 14-15%——<strong>估值与盈利能力基本匹配，无明显透支也无明显折价</strong>。同业对照见模块 8。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.3 12 个月目标价（概率加权）</h3>
+  <div class="pgrid">
+    <div class="pbox"><div class="pl">悲观情景 · 25%</div><div class="pv pc">$48</div><div class="pn">NII 顺风不及预期 / 衰退推高拨备 + 交易回落 + ROTCE 降至 13-14% + P/TBV 压缩至 ~1.6x<br>距现价 -19%</div></div>
+    <div class="pbox"><div class="pl">基准情景 · 50%</div><div class="pv pf">$61</div><div class="pn">FY2026 NII +6~8% 兑现 + ROTCE ~15.5% + TBVPS 增至 ~$31 + P/TBV ~1.95x<br>距现价 +3%</div></div>
+    <div class="pbox"><div class="pl">乐观情景 · 25%</div><div class="pv ps">$68</div><div class="pn">证券再投资 + 经营杠杆推 ROTCE 至 16-17% + P/TBV 重估至 ~2.2x<br>距现价 +15%</div></div>
+  </div>
+  <p style="font-size:13px; color:var(--text2);"><strong>概率加权公允价</strong>：25%×$48 + 50%×$61 + 25%×$68 = <strong>约 $59.5 ≈ $60</strong>（+1%）。<strong>叠加约 1.9% 股息 = 预期总回报仅约 +3%</strong>——稳健但不激动。情景对称性优于 JPM（BAC 下行 -19% / 上行 +15%，估值起点更公允）。<span class="warn-t">当前 $59.25 远高于机械首仓 $48——不在合理建仓窗口。</span></p>
+</div>
+
+<!-- ═══ 模块 8 ═══ -->
+<div class="section">
+  <div class="stitle">模块 8 · 竞争与行业分析</div>
+  <div class="cmt">
+    <p><strong>美国货币中心大行格局</strong>：JPM（规模/盈利/份额三料之王）、BAC（消费 + 财富最强）、Citi（全球化转型 + 低基数）、Wells Fargo（资产上限解除后修复）构成四大行。真正的长期威胁来自体系外——私募信贷、金融科技、稳定币/支付新轨道。</p>
+
+    <p><strong>货币中心大行同业对比（截至 2026 年年中）</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>公司</th><th>Forward P/E</th><th>EPS 增速(FY26E)</th><th>P/TBV</th><th>核心评价</th></tr>
+        <tr class="hl"><td><strong>美国银行 BAC</strong></td><td><strong>~13.3x</strong></td><td>~+17%</td><td><strong>~2.05x</strong></td><td>16% ROTCE · 消费/财富最强 · 估值公允</td></tr>
+        <tr><td>摩根大通 JPM</td><td>~14.8-15.0x</td><td>低-中个位数(高基数)</td><td>~3.1x</td><td>行业估值溢价龙头 · 满价</td></tr>
+        <tr><td>花旗 Citigroup C</td><td>~13.4x</td><td>强劲(转型+回购,低基数)</td><td>&lt;1x TBV(折价)</td><td>转型弹性 · 深度折让</td></tr>
+        <tr><td>富国 Wells Fargo WFC</td><td>~11.3x</td><td>~+7.5%(Q2)</td><td>—</td><td>资产上限解除后估值最低</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:10px; font-size:12px; color:var(--text3);">读法：BAC 的 2.05x P/TBV 对 JPM 的 3.1x，是同一行业内约 33% 的估值折让——<span class="hl-t">BAC 的 16% ROTCE 略低于 JPM 的 23%，但估值折让幅度大于 ROTCE 差距</span>，因此 BAC 是"质量次优、估值更实惠"的选择。与 Citi 的深度折价（&lt;1x TBV）相比，BAC 是"确定性溢价"；与 WFC 相比，BAC 的财富/交易引擎更强、增长故事更完整。四大行里 BAC 处"中间偏优"的性价比位置。</p>
+
+    <p style="margin-top:14px;"><strong>波特五力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>新进入者：</strong>极低（GSIB 资本壁垒 + 全国牌照 + 存款规模几不可复制）——但金融科技/稳定币是"从体系外绕过"的新路径</li>
+      <li><strong>替代品：</strong>中（私募信贷替代银行贷款、稳定币/A2A 替代支付与存款——10 年维度慢变量）</li>
+      <li><strong>供应商议价：</strong>低（技术/资金供应商议价力弱，存款人分散）</li>
+      <li><strong>买家议价：</strong>中（大企业客户有多银行选择，但消费/财富客户转换成本高）</li>
+      <li><strong>同业竞争：</strong>中（四大行理性竞争 + 区域行 + 金融科技，价格战风险低）</li>
+    </ul>
+
+    <p><strong>颠覆风险</strong>：私募信贷把优质企业信贷撬离银行表、稳定币/金融科技分流支付与低成本存款，是核心长期风险。但 BAC 的对冲是消费存款的极强黏性 + 财富平台的转换成本 + 大行的规模/合规优势。这是 10 年维度的慢变量，不是明年的事。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 9 ═══ -->
+<div class="section">
+  <div class="stitle">模块 9 · 技术面与 K 线分析（次要参考）</div>
+  <div class="cmt">
+    <p><strong>趋势</strong>：BAC 长期稳健上行，当前 $59.25 接近 52 周高 $60.83，<span class="hl-t">距高点仅 -2.6%</span>，处于历史高位区间。全年从 $44.75 的低点稳步攀升（区间振幅约 +32%）。这是一只低波动、稳健向上的大盘蓝筹银行股。</p>
+
+    <p><strong>关键价位</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>支撑</strong>：$54（前期平台 / 约 1.9x TBV）/ $48（机械首仓 / 约 1.6x TBV）/ $44.75（52 周低）</li>
+      <li><strong>阻力</strong>：$60.83（52 周高）/ $61（公允价目标）/ $68（乐观情景 / 约 2.2x TBV）</li>
+    </ul>
+
+    <p><strong>指标信号</strong>：处于高位区间、RSI 中性偏强、无极端超买超卖。<span class="warn-t">技术面处 52 周高位意味着短期回调风险 &gt; 追涨空间</span>；但银行股高位盘整常伴随基本面改善，需与 NII 兑现、信贷走向共同研判。</p>
+
+    <p><strong>注意</strong>：BAC 的核心驱动是 NII 兑现（指引 +6~8%）+ ROTCE 趋势 + 信贷成本 + P/TBV 估值，技术面是次要参考。价值投资者应等基本面回调（如信贷成本上行、交易收入回落、宏观转弱）到 $48-54 区间，而非在 52 周高位追高。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 10 ═══ -->
+<div class="section">
+  <div class="stitle">模块 10 · 增长催化剂与前景展望</div>
+  <div class="cmt">
+    <p><strong>短期催化剂（未来 6 个月）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>2026-07-14 Q2 FY2026 财报</strong>（研判后 3 天）——NII 指引兑现度 + 交易/投行持续性 + 信贷成本走向，本报告第一块试金石（共识 EPS ~$1.10、营收 ~$30.26B）</li>
+      <li><strong>NII 结构性顺风</strong>——每季约 $12-15B MBS/按揭到期，以高约 150-200bps 收益率再投资，逐季抬升 NII 与 NIM</li>
+      <li><strong>$40B 回购授权放量</strong>——2025-08 生效，估算剩余约 $20B，持续缩股放大 EPS</li>
+      <li><strong>年度压力测试 + 资本计划</strong>——Fed CCAR 结果影响股息/回购空间</li>
+    </ul>
+
+    <p><strong>长期展望（3-5 年）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>NII + 财富 + 交易三引擎复利</strong>——证券再投资顺风支撑 NII 数年、GWIM 费收随市场增长、交易份额稳固，驱动 ROTCE 向 16-17% 结构性抬升</li>
+      <li><strong>正经营杠杆常态化</strong>——数字化 + 效率改善把效率比从 61% 向 55-58% 压，是 EPS 的持续引擎</li>
+      <li><strong>TBVPS 复利 + 缩股 + 股息</strong>——TBVPS +7%/年 + 股数缩约 3%/年 + 股息 1.9%，构成约 11-13% 的"内生股东回报率"</li>
+      <li><strong>风险情景</strong>：信贷周期转向 / 深度降息压 NII / 私募信贷分流 / Basel 资本加码压 ROTCE 天花板</li>
+    </ul>
+
+    <p><strong>TAM 视角</strong>：银行业没有"TAM 扩张"的性感故事，BAC 的增长公式是<span class="hl-t">份额稳固 × 证券再投资顺风 × 资本返还 × TBVPS 复利</span>。问题从来不是这台机器好不好，而是 2.05x TBV 的门票价是否已把这份改善充分定价——目前看是"公允定价"，既未透支也无折价。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 11 ═══ -->
+<div class="section">
+  <div class="stitle">模块 11 · 风险矩阵</div>
+  <div class="risk-grid">
+    <div class="risk-card r4"><h5>1. 信贷周期转向</h5><span class="risk-score">4 / 5 高</span><p>NCO 0.48%、拨备 $1.34B 均处周期低位，只有上行空间；消费卡核销 3.64%、商业地产办公敞口虽改善但仍是尾部风险。信贷成本一旦正常化，直接压 ROTCE 与 EPS</p></div>
+    <div class="risk-card r3"><h5>2. 估值处自身高位</h5><span class="risk-score">3-4 / 5 中高</span><p>P/TBV 2.05x 处自身历史高位区、股价逼近 52 周高、安全边际近零。虽隐含 ROTCE(15.8%)≈实际(16%)不算泡沫，但任何盈利 miss 或宏观转弱都可能触发向 1.6-1.8x TBV 回归（-15~20%）</p></div>
+    <div class="risk-card r4"><h5>3. 利率与 NII 敏感度</h5><span class="risk-score">4 / 5 高</span><p>较远期曲线再降 100bp → 未来 12 个月 NII 减少约 $2.0B（升 100bp 仅增不足 $500M，非对称）。深度降息是 NII 顺风叙事的最大威胁；巨额 HTM 组合的 AOCI 敞口对利率敏感</p></div>
+    <div class="risk-card r3"><h5>4. 监管资本加码</h5><span class="risk-score">3 / 5 中</span><p>Basel III Endgame / GSIB 附加费若严格落地，需多备资本、直接压 ROTCE 与回购空间；CET1 11.2% 缓冲尚可（对下限约 +50-120bp），当前监管风向偏松是缓冲</p></div>
+    <div class="risk-card r3"><h5>5. 交易/投行收入回落</h5><span class="risk-score">3 / 5 中</span><p>Q1 交易 + 投行创纪录含市场波动红利；股票交易"史上最佳"是高基数。做市与投行费的均值回归会冲击"超预期"叙事与费收占比</p></div>
+    <div class="risk-card r2"><h5>6. 生意质量（机会）</h5><span class="risk-score">2 / 5 反向</span><p>消费存款全美第一 + 双引擎抗周期 + ROTCE 结构性改善 + 约 7% 股东收益率 · 改善型堡垒本身是最大的安全垫，估值又低于 JPM</p></div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>3 个黑天鹅情景</strong>：</p>
+    <ol style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>深度衰退 + 信贷周期急转</strong>——概率 ~10% · 拨备骤增、NCO 翻倍、交易回落，ROTCE 降至 11-12%、P/TBV 压至 1.4x，股价或至 $40-44（约 52 周低）</li>
+      <li><strong>美联储激进降息（曲线大幅下移）</strong>——概率 ~10% · NII 顺风逆转（每 100bp 约 -$2.0B），改善叙事破灭，股价或至 $46-50</li>
+      <li><strong>私募信贷/影子银行连锁违约传导</strong>——概率 ~7% · 批发信贷 + NBFI 敞口同时承压，拨备与市场情绪双杀，股价或至 $44-48</li>
+    </ol>
+    <p style="margin-top:10px;"><strong>下行支撑</strong>：堡垒资产负债表（CET1 $199.7B / 11.2%、ACL 对不良覆盖约 2.5 倍、流动性 $960B）意味着 BAC 在任何情景下的"生存问题"都不存在，风险全部集中在<span class="warn-t">盈利预期与估值层面</span>。$44.75（52 周低，约 1.55x TBV）是第一道较硬支撑，$40 附近（约 1.4x TBV）是恐慌底参考。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 12 ═══ -->
+<div class="section">
+  <div class="stitle">模块 12 · 股东回报分析</div>
+  <div class="cmt">
+    <p><strong>BAC 是美股银行里资本返还持续加码的样本——三年返还约 $62B、回购三级跳、股数真实缩减、连续增息。</strong>用三个递进问题拆到可验证的颗粒度：给了多少 → 给的方式好不好 → 能不能继续给。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 18px 0 10px; font-family: 'Segoe UI',sans-serif;">12.1 公司给了股东多少？</h3>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>年度</th><th>普通股股息</th><th>回购（毛额）</th><th>股东总回报（普通股）</th><th>优先股股息</th></tr>
+        <tr><td>FY2023</td><td>$7.37B</td><td>$4.58B</td><td>$11.95B</td><td>$1.65B</td></tr>
+        <tr><td>FY2024</td><td>$7.82B</td><td>$13.10B</td><td>$20.93B</td><td>$1.61B</td></tr>
+        <tr class="hl"><td>FY2025</td><td>$8.08B</td><td>$21.43B</td><td><strong>$29.52B</strong></td><td>$1.45B</td></tr>
+        <tr><td>三年合计</td><td>$23.28B</td><td>$39.11B</td><td><strong>约 $62.4B</strong></td><td>$4.71B</td></tr>
+        <tr><td>1Q26 单季</td><td>$2.0B（$0.28/股）</td><td>$7.2B</td><td>约 $9.3B</td><td>$0.43B</td></tr>
+      </table>
+    </div>
+    <p style="font-size:13px; color: var(--text2); margin-top:8px"><strong>Trailing Shareholder Yield</strong> = FY2025（股息 $8.08B + 回购毛额 $21.43B）/ 当前市值 $423B ≈ <strong>7.0%</strong>（股息 ~1.9% + 回购 ~5.1%）。<span class="hl-t">这是一个很高的股东收益率，甚至高于 JPM 的约 5.3%</span>——反映 BAC 的返还力度与更低的估值双重作用。返还节奏在加速：回购从 FY2023 $4.6B → FY2025 $21.4B，三年翻近 5 倍（数据源：SEC 10-K 现金流量表 + XBRL companyconcept 一手口径）。数据源：一手 SEC 10-K/XBRL（PaymentsForRepurchaseOfCommonStock、DividendsCommonStockCash）。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.2 给的方式好不好？</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>真实缩股 · 含金量高</strong>：美股回购多入库存股（treasury stock），检验含金量的硬指标是摊薄股数——BAC 年度摊薄股数 <span class="hl-t">FY2022 8,167.5M → FY2023 8,080.5M → FY2024 7,935.8M → FY2025 7,680.9M → 1Q26 单季 7,417.5M</span>，累计缩约 9% 且在加速；期末普通股 1Q25 7.56B → 4Q25 7.21B → 1Q26 7.13B。回购规模远超股权激励稀释，不是"替 SBC 接盘"，是真金白银的每股价值增厚——这也是 EPS +25% 快于净利 +16.6% 的重要来源</li>
+      <li><strong>股息纪律干净</strong>：2025-07 上调股息 8% 至 $0.28/季（年化 $1.12），派息率仅约 25% 净利，留足信贷周期缓冲——银行股息可持续性看的正是"低派息率 + 高覆盖"</li>
+      <li><span class="warn-t">回购择时是观察点</span>：FY2025-1Q26 回购放量恰逢股价与 P/TBV 走高，1Q26 的 $7.2B 买在约 2.0x TBV（自身高位区）。相比 JPM 在 3.1x TBV 满价回购，BAC 的 2.0x 还算合理，但已非"低估回购"——用格雷厄姆的语言，公司在略高于内在价值处替股东回购</li>
+    </ul>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.3 能不能继续给、给多少？</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>授权额度</strong>：2025-07-23 董事会批准<strong>全新 $40B 普通股回购授权</strong>（2025-08-01 生效，取代旧计划）。自生效至 1Q26 已执行约 $18B（3Q25 部分 + 4Q25 + 1Q26 $7.2B），<strong>估算剩余约 $20B</strong>（约占市值 4.7%；此为推算、非一手逐笔核对，供参考），按每季约 $5-7B 节奏可再持续约 3-4 季</li>
+      <li><strong>股息指引</strong>：现行 $0.28/季（年化 $1.12），前瞻股息率约 1.9%；以 FY2026E EPS $4.47 计派息率仅约 25%，增息空间充足</li>
+      <li><strong>覆盖度（银行版）</strong>：FCF 覆盖度指标<strong>不适用（金融业）</strong>，替代检验：<span class="warn-t">FY2025 返还 $29.5B ≈ 归属普通股净利约 100%、1Q26 单季返还 $9.3B 更超当期盈利</span>——返还已用满甚至略超当期盈利，靠释放超额 CET1（本季环比降 14bp）支撑。这不同于 JPM 的 82% 净派出率仍有余量：BAC 的返还节奏更接近"打满"，可持续性更依赖 CET1 缓冲厚度（11.2% 对下限约 +50-120bp）与 Basel 走向</li>
+      <li><strong>不是被动借债回购</strong>：返还来自超额资本释放而非举债，资本充裕度仍远高于监管下限；但"返还超盈利"意味着 CET1 会缓慢下行，若 Basel 加码或信贷成本上行，回购是第一个被调节的阀门</li>
+    </ul>
+    <p><strong>模块小结</strong>：<span class="hl-t">积极且高含金量，但节奏已近"打满"</span>——三年返还 $62B、股数真实缩减约 9% 且加速、约 7% 的 trailing 股东收益率高于 JPM、派息率低留有缓冲、$40B 授权支撑未来数季。唯一需盯的是返还已达/略超当期盈利、靠 CET1 缓冲，可持续性对 Basel 与信贷周期更敏感——不是含金量问题，是"打满后没有多少加码空间"的问题。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 13 ═══ -->
+<div class="section">
+  <div class="stitle">模块 13 · 海图评分卡 + 投资决策</div>
+
+  <div class="scorecard">
+    <h3 style="font-size:15px; color:var(--text); margin-bottom: 16px; font-family: 'Segoe UI',sans-serif;">海图评分卡（6 维 A-D）</h3>
+    <div class="score-grid">
+      <div class="score-card"><div class="score-letter s-b">B+</div><div class="score-body"><h4>1. 生意可预测性</h4><p>双引擎（NII + 费收）分散化让盈利远稳于纯利差银行，指引兑现度高；但信贷周期与交易收入波动是天然噪音，单季 EPS 有周期属性。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">A-</div><div class="score-body"><h4>2. 经济护城河</h4><p>低成本存款（全美第一）+ 转换成本 + 有效规模皆宽；扣分：网络效应弱于卡组织，监管既是壁垒也是税，私募信贷/金融科技体系外渗漏。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">A-</div><div class="score-body"><h4>3. 管理层质量</h4><p>Moynihan 十五年"负责任增长"把危机银行重塑为改善型堡垒 + 坦诚度高 + 危机式并购（Merrill）眼光顶级。持股绑定一般是保留项。</p></div></div>
+      <div class="score-card"><div class="score-letter s-b">B+</div><div class="score-body"><h4>4. 财务质量</h4><p>ROTCE 16%（五季最高）、CET1 11.2%、效率比改善 170bp、NCO 0.48% 温和、TBVPS +7%。银行固有杠杆 + 巨额 HTM 未实现损失使其到不了 A。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">A-</div><div class="score-body"><h4>5. 资本配置纪律</h4><p>三年 $62B 返还 + 股数真实缩减约 9% + 连续增息 + 危机式并购眼光；扣分：返还已达/略超当期盈利、靠 CET1 缓冲，2.0x TBV 高位回购。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bm">B-</div><div class="score-body"><h4>6. 估值与安全边际</h4><p>现价 $59.25 vs 八法加权公允 ~$60，<strong>安全边际近零（约 +1%）</strong>；P/TBV 2.05x 处自身高位区，但隐含 ROTCE(15.8%)≈实际(16%)，属"公允"而非"泡沫"，故给 B- 而非 C。</p></div></div>
+    </div>
+
+    <div class="flag-row">
+      <strong>红旗排查</strong>：会计层面无红旗（净利/EPS 均 GAAP 口径、拨备政策审慎、NCO 温和、4Q25 会计变更已追溯披露且影响可控）。但触发一项强制审慎条款：<strong>估值无安全边际</strong>（现价逼近 52 周高、P/TBV 2.05x 处自身高位、加权公允 ~$60 ≈ 现价）。按评级纪律：<span class="warn-t">安全边际近零（&lt;25%）→ 无论质量多高，评级上限为「持有观望」</span>。
+    </div>
+
+    <p style="margin-top:18px; font-size:14px; color:var(--text); line-height:1.85;"><strong>综合评级</strong>：<span class="rating-badge rating-hold" style="font-size:14px;">持有观望</span>。六维中四维 A-/B+ 以上——这是货币中心大行里"质量改善 + 估值最诚实"的一个；但估值维度 B-（目标价 $60 ≈ 现价、安全边际约 +1%）+ 信贷周期晚期的时点，决定它当下是"值得拥有、不值得追买"的标的。<strong>核心判断：BAC 是四大行里最接近合理价的一个（不像 JPM 那样把峰值盈利当永续定价），但它自己也没有折价——现有持仓者让它继续复利，新资金等市场先生在信贷恐慌或 NII 逆风时打折。</strong></p>
+  </div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">投资决策（精确价格 · USD）</h3>
+
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>项目</th><th>价格</th><th>说明</th></tr>
+      <tr><td>12 个月目标价（概率加权）</td><td><strong>$60</strong> (+1%)</td><td>25%×$48 + 50%×$61 + 25%×$68</td></tr>
+      <tr><td>悲观目标（25% 概率）</td><td>$48 (-19%)</td><td>信贷转向 + NII 逆风 + P/TBV 压至 ~1.6x</td></tr>
+      <tr><td>乐观目标（25% 概率）</td><td>$68 (+15%)</td><td>ROTCE 抬至 16-17% + P/TBV 重估至 ~2.2x</td></tr>
+      <tr class="hl"><td>首仓建仓（估值中位数 $60 × 80%）</td><td><strong>$48</strong></td><td>距现价 -19% · 对应约 1.6x 前瞻 TBV · 耐心等回调</td></tr>
+      <tr><td>二仓建仓（× 70%）</td><td>$42</td><td>-29% · 深度回调 / 衰退定价（近 52 周低下方）</td></tr>
+      <tr><td>三仓建仓（× 60%）</td><td>$36</td><td>-39% · 系统性恐慌级机会（约 1.25x TBV）</td></tr>
+      <tr><td>止盈一档（已持有者）</td><td>$68</td><td>+15% · 减仓 25%（乐观情景兑现）</td></tr>
+      <tr><td>止盈二档</td><td>$75</td><td>+27% · 再减 25%（隐含 &gt;2.4x TBV，估值透支）</td></tr>
+      <tr><td>止盈三档</td><td>$82</td><td>+38% · 再减 25% · 最后 25% 长期持有</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.85;"><strong>建议总仓位</strong>：<strong>3-5%</strong>（金融核心仓；当前估值公允、无安全边际，新资金不追高，等回调分批）。<strong>持有周期</strong>：3-5 年以上（穿越一轮信贷周期 + NII 顺风兑现）。<strong>关键监控指标</strong>：① NII 指引兑现（FY2026 +6~8%）与 NIM 逐季走向；② NCO 率与拨备（0.48% 是基准线，上行是拐点）；③ CET1 是否因返还持续下行、Basel 再提案落地版本；④ P/TBV 是否回落至 1.8x 以下（估值机会区）；⑤ 交易/投行收入的均值回归；⑥ 利率路径（深度降息是 NII 顺风最大威胁）。<strong>下次财报</strong>：2026-07-14（Q2 FY2026，共识 EPS ~$1.10、营收 ~$30.26B）——就在研判后 3 天，本报告的第一块试金石。</p>
+</div>
+
+<!-- ═══ 海图页末长评 ═══ -->
+<div class="section">
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记 · 约 1190 字</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p class="lead">四大行里，摩根大通是那个"太贵的好银行"，花旗是那个"太便宜的问题银行"，而美国银行，恰好卡在中间——一家质量在结构性变好、价格却也刚刚好被市场看清的银行。Q1 EPS $1.11 创近二十年新高、NII 超预期上调全年指引、股票交易史上最佳、单季返还股东 $9.3B，仪表盘几乎全绿。唯一不绿的，是价格：股价站在 52 周高的门槛上，2.05 倍有形账面。</p>
+
+      <p>美国银行是美国的消费银行之王——用全美最大的低成本存款池（$2.04 万亿、连续 29 季净增支票账户）一边赚利差，一边靠 Merrill 财富平台、投行、做市赚不担信用风险的手续费。Q1 2026 营收 $302.7 亿（+7.2%）、净利 $85.8 亿（+16.6%）、ROTCE 16%、CET1 资本 $1,997 亿。NII 与费收几乎一半一半，这是它相对纯利差银行的抗周期底气。</p>
+
+      <h4>五个研判要点</h4>
+
+      <p><strong>一、EPS +25% 快于净利 +16.6%，差额来自三处叠加。</strong> 缩股（摊薄股数一年缩 4.5%）、正经营杠杆（营收 +7.2% 快于费用 +4.3%、效率比降到 61%）、拨备回落 + 本季 17.5% 的一次性税率折抵。<span class="hl-t">前两项是可持续的结构性来源，税率是一次性的</span>——把税率还原到 ~19-20%，"干净"的 EPS 增速仍在 +18-20%，依然强劲。别被 +25% 的表象带跑，缩股 + 经营杠杆这台复利机器才是重点。</p>
+
+      <p><strong>二、NII 指引上调，是这季最重的一块。</strong> NII（FTE）$15.9B（+9%）超公司自己的预期，管理层据此把 FY2026 增速指引从 5-7% 上调到 6-8%。背后是一个结构性顺风：<span class="hl-t">2020-2021 低利率时买入的巨额证券组合，正以每季 $12-15B 的速度到期，再投资收益率高约 150-200bps</span>——这是未来数年 NII 与 ROTCE 的自动抬升器。它的唯一天敌是美联储激进降息（曲线每下移 100bp，未来 12 个月 NII 约减 $2.0B，升息却只增不足 $5 亿）。</p>
+
+      <p><strong>三、交易与投行创纪录，但要看清成色。</strong> 销售交易 $6.4B（+13%，连续 16 季同比增长）、股票交易"史上最佳单季"+30%、投行费 +21%。这是全球市场引擎的漂亮一季，但<span class="warn-t">交易收入带市场波动红利、有均值回归属性</span>——盯住 NII 与消费信贷的"基础转速"，别只盯单季交易高点。</p>
+
+      <p><strong>四、资本返还很猛，但已经"打满"。</strong> 三年返还约 $62B、回购从 FY23 的 $4.6B 三级跳到 FY25 的 $21.4B、股数真实缩减约 9%、trailing 股东收益率约 7%（高于 JPM）。但要看清：<span class="warn-t">FY2025 返还 $29.5B ≈ 当年归属普通股净利的约 100%，1Q26 单季 $9.3B 更超当期盈利</span>，靠释放超额 CET1 支撑（本季 CET1 环比降 14bp）。这对资本充裕的银行合理，但意味着返还已没有多少加码空间。</p>
+
+      <p><strong>五、估值：市场给的隐含 ROTCE，几乎等于它实际的 ROTCE。</strong> 现价 $59.25 = 2.05x TBV，反向推算隐含市场定价约 15.8% 的永续 ROTCE——而 BAC 实际 Q1 就是 16%。<span class="hl-t">这与 JPM 被定价"永续 22%"（远高于实际 20%）形成鲜明对比：BAC 的估值最"诚实"，没把峰值当永续，但也没有折价。</span>八种估值法加权公允约 $60，概率加权 12 个月目标 <strong>$60</strong>，与现价几乎持平——上行 +15%、下行 -19%，情景比 JPM 对称，但当前没有安全边际。</p>
+
+      <h4>海图研判</h4>
+
+      <p><strong>评级：持有观望</strong>（"消费银行之王 + 证券再投资的结构性 NII 顺风 + 约 7% 股东收益率"的改善型堡垒，对垒"P/TBV 2.05x 估值高位 + 返还已超当期盈利 + 信贷周期晚期"）。12 个月概率加权目标价 <strong>$60</strong>（+1%），叠加约 1.9% 股息，预期总回报约 +3%——稳健，但不激动。</p>
+
+      <p>操作建议：当前 $59.25 逼近 52 周高、远高于机械首仓 $48，<strong>不在建仓窗口</strong>。耐心等信贷恐慌、NII 逆风或宏观转弱：首仓 $48（约 1.6x 前瞻 TBV）、二仓 $42、三仓 $36。已持有者不必因估值公允而卖出核心仓：止盈三档 $68 / $75 / $82，各减 25%，最后 25% 长期持有。<strong>建议总仓位 3-5%</strong>，持有周期 3-5 年以上，穿越一轮信贷周期。</p>
+
+      <h4>风险提示</h4>
+
+      <p>信贷周期转向、美联储激进降息逆转 NII 顺风、交易收入从纪录高位回落、Basel 资本加码压 ROTCE——任一项都可能把股价打回 $48-50；$44.75（52 周低，约 1.55x TBV）是第一道较硬支撑。但 CET1 $1,997 亿 + 拨备对不良覆盖约 2.5 倍 + 流动性 $960B，意味着 BAC 的"生存问题"不存在，风险全部集中在盈利预期与估值层面。</p>
+
+      <p>关键叙事：<strong>"消费银行之王 + 结构性 NII 顺风 + 约 7% 股东收益率 + ROTCE 结构性改善"的改善型堡垒，对垒"P/TBV 2.05x 自身估值高位 + 返还已超当期盈利 + 信贷周期晚期"</strong>。美国银行是四大行里最接近合理价的一个——它不像摩根大通那样把最好的年景当成永续，但它自己也没打折。放进观察清单，等市场先生在某个信贷恐慌或降息落地的夜里，给出那 25% 的安全边际。下次财报：2026-07-14，就在三天后。</p>
+
+      <p class="haitu-sign">—— 海图，灯下落笔，明日再观风浪。</p>
+
+      <p class="haitu-disc">⚠️ 免责声明：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，不构成任何投资建议。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div>《海图夜读》 · 美国银行 BAC Q1 FY2026 海图研判</div>
+  <div style="margin-top:6px;">发布日 2026-04-15 · 研判日 2026-07-11 · 数据来源 SEC EDGAR 8-K Ex-99.1/99.2/99.3 + 10-Q 原文 + XBRL companyconcept（一手）+ 官方电话会 transcript + BAC 新闻稿</div>
+</footer>
+
+<script>
+let curTheme = 'light';
+function toggleTheme() {
+  curTheme = curTheme === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', curTheme);
+  renderCharts();
+}
+
+const palette = {
+  light: { accent: '#8a9a8e', accent2: '#7b8fa0', accent3: '#b08d7a', gold: '#b9a06a', red: '#b87070', green: '#7a9a7a', grid: '#e5ddd5', text: '#7a706a' },
+  dark:  { accent: '#8a9a8e', accent2: '#8fabbf', accent3: '#c9a48e', gold: '#c9b07a', red: '#c08080', green: '#8aaa8a', grid: '#3e3a35', text: '#a09890' }
+};
+
+let charts = {};
+function renderCharts() {
+  Object.values(charts).forEach(c => c && c.destroy && c.destroy());
+  charts = {};
+  const p = palette[curTheme];
+  Chart.defaults.color = p.text;
+  Chart.defaults.borderColor = p.grid;
+
+  const quarters = ['1Q25','2Q25','3Q25','4Q25','1Q26'];
+
+  charts.rev = new Chart(document.getElementById('chartRev'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { type:'bar', label: '总营收 ($B)', data: [28.2, 27.4, 29.0, 28.4, 30.3], backgroundColor: p.accent + 'CC', yAxisID: 'y' },
+      { type: 'line', label: 'ROTCE %', data: [13.97, 13.61, 15.29, 13.97, 16.00], borderColor: p.red, backgroundColor: p.red, tension: 0.3, yAxisID: 'y1' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false }, y1: { position: 'right', grid: { drawOnChartArea: false }, ticks: { callback: v => v + '%' } } } }
+  });
+
+  charts.nim = new Chart(document.getElementById('chartNim'), {
+    type: 'line',
+    data: { labels: quarters, datasets: [
+      { label: 'NIM FTE %', data: [1.99, 1.94, 2.01, 2.08, 2.07], borderColor: p.green, backgroundColor: p.green + '33', tension: 0.3, yAxisID: 'y' },
+      { label: '效率比 %', data: [62.91, 62.61, 59.70, 61.47, 61.22], borderColor: p.accent2, backgroundColor: p.accent2 + '33', tension: 0.3, yAxisID: 'y1' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { position: 'left', beginAtZero: false, ticks: { callback: v => v.toFixed(2) + '%' } }, y1: { position: 'right', grid: { drawOnChartArea: false }, beginAtZero: false, ticks: { callback: v => v.toFixed(0) + '%' } } } }
+  });
+
+  charts.segment = new Chart(document.getElementById('chartSegment'), {
+    type: 'doughnut',
+    data: {
+      labels: ['消费银行 Consumer', 'GWIM 财富管理', '全球银行 Global Banking', '全球市场 Global Markets'],
+      datasets: [{ data: [11.05, 6.71, 6.29, 7.11], backgroundColor: [p.accent, p.accent3, p.accent2, p.gold] }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { font: { size: 11 } } } } }
+  });
+
+  charts.eps = new Chart(document.getElementById('chartEps'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { label: '摊薄 EPS ($)', data: [0.89, 0.90, 1.04, 0.98, 1.11], backgroundColor: [p.accent, p.accent, p.accent, p.gold, p.green].map(c => c + 'CC') }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: false } } }
+  });
+
+  buildSankey();
+}
+
+function buildSankey() {
+  const p = palette[curTheme];
+  const labels = ['净利息收入 NII $15.75','非利息收入 $14.53','总营收 $30.27','非利息费用 $18.53','信贷拨备 $1.34','税前利润 $10.40','所得税 $1.82','GAAP 净利 $8.58'];
+  const data = {
+    type: 'sankey',
+    orientation: 'h',
+    node: { pad: 16, thickness: 20, line: { color: p.grid, width: 0.5 }, label: labels, color: [p.accent, p.accent3, p.accent2, p.red, p.gold, p.green, p.red, p.green] },
+    link: {
+      source: [0, 1, 2, 2, 2, 5, 5],
+      target: [2, 2, 3, 4, 5, 6, 7],
+      value:  [15.75, 14.53, 18.53, 1.34, 10.40, 1.82, 8.58],
+      color: [p.accent+'55', p.accent3+'55', p.red+'55', p.gold+'55', p.green+'66', p.red+'55', p.green+'66']
+    }
+  };
+  const layout = { font: { size: 12, color: p.text }, paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)', margin: { l: 10, r: 10, t: 10, b: 10 } };
+  Plotly.react('sankey', [data], layout, { displayModeBar: false, responsive: true });
+}
+
+renderCharts();
+</script>
+
+</body>
+</html>
