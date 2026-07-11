@@ -20,15 +20,15 @@
 
 ## 进行中
 
-- Wave 1 ✅ 完成并推送（commit f15a774 + Wave1 完成 commit）：NVDA(有条件买入$236) AAPL(持有$288) AVGO(持有$445)
-  TSLA(卖出$285) MU(持有$1060) LLY(持有$1240) JPM(持有$318) AMD(持有$540) XOM(持有$127) INTC(卖出$89)
-- Wave 2 ✅ 完成推送：WMT(持有$100) AMAT(持有$520) CSCO(持有$115) ABBV(有条件买入$267) LRCX(持有$290)
-  CAT(持有$835) MA(持有$560) COST(持有$845) UNH(持有$380) BAC(持有$60)
-- 进度：20/93 完成（26 done 含 6 复用；73 pending）。同一个 5h 窗口跑完了 wave1+wave2（约 11M subagent tokens）。
-  下一批 Wave 3（按市值序 pending）：GE PG HD CVX KO NFLX GS MRK PLTR GEV
-  复用脚本 haitu-sp100-wave-wf_2500d72a-ffe.js，新 run（不 resume，新 10 家）。
-  经验：一个 5 小时限额窗口约够 1 个 10 家波次（wave1 用了 ~5.6M subagent tokens）；撞限额后等重置再 resume。
-  合并条目：从 journal.jsonl 提取 type=result 且含 tickersEntry 的行，同 ticker 取最后一条（重写会追加）。
+- Wave 1-4 ✅ 全部完成推送（39 家 + 6 复用 = 45 done）。评级分布：绝大多数「持有观望」，
+  「有条件买入」= NVDA/ABBV/NFLX/WFC/C，「卖出」= TSLA/INTC。大盘蓝筹普遍满估值，无一「买入」。
+- Wave 5 🔄 运行中（run wf_1701c27b-1f9）：AMGN MCD TMO PEP AXP NEE BA VZ DIS GILD
+- HD 家得宝 🔄 单独补写中（前两次限额/结构化输出失败；研究数据存 scratchpad/hd-research.json）
+- 进度：39/93 完成，门户 66 家可排序。
+- 复用脚本 haitu-sp100-wave-wf_2500d72a-ffe.js。新一波用新 run（不 resume）；限额中断后用 resumeFromRunId 续跑。
+- 经验：9:20pm-2am、2pm 等窗口各约够 1.5-2 波；args 以字符串到达时脚本已 JSON.parse 兜底。
+- 合并：从对应 run 的 journal.jsonl 提 type=result 且含 tickersEntry 的行，同 ticker 取最后一条。
+  注意报告文件名 slug 以 tickersEntry.lastReportFile 为准（财年错位导致 q1-fy2026 vs q1-2026 等不一）。
 
 ## 每波收尾流程（勿省略）
 
