@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-07-10 · Nvidia Q1 FY2027 财报已于 2026-05-20 发布 -->
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>英伟达 NVDA Q1 FY2027 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+<meta name="description" content="全球 AI 算力的绝对主导者与'AI 工厂'总承包商 · CUDA 生态 + 全栈系统护城河。Q1 营收 $816 亿（+85%）连续三季加速、数据中心 +92%、净现金 $419 亿、单季 FCF $486 亿、股东回报 $200 亿创纪录。Q2 指引 $910 亿不含中国 + $5,000 亿订单能见度 + Vera CPU 打开 $2,000 亿新 TAM。Forward P/E ~23x 对 +76% 增长不算贵，但 5 万亿市值下安全边际约 14% 不足 25% 门槛——好生意、合理价，等更好的价格。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="英伟达 NVDA Q1 FY2027 海图研判 · 海图夜读">
+<meta property="og:description" content="全球 AI 算力的绝对主导者与'AI 工厂'总承包商 · CUDA 生态 + 全栈系统护城河。Q1 营收 $816 亿（+85%）连续三季加速、数据中心 +92%、净现金 $419 亿、单季 FCF $486 亿、股东回报 $200 亿创纪录。Q2 指引 $910 亿不含中国 + $5,000 亿订单能见度 + Vera CPU 打开 $2,000 亿新 TAM。Forward P/E ~23x 对 +76% 增长不算贵，但 5 万亿市值下安全边际约 14% 不足 25% 门槛——好生意、合理价，等更好的价格。">
+<meta property="og:url" content="https://jacexie.github.io/haitu/reports/nvda-q1-fy2027.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="英伟达 NVDA Q1 FY2027 海图研判 · 海图夜读">
+<meta name="twitter:description" content="全球 AI 算力的绝对主导者与'AI 工厂'总承包商 · CUDA 生态 + 全栈系统护城河。Q1 营收 $816 亿（+85%）连续三季加速、净现金 $419 亿、单季 FCF $486 亿。Q2 指引 $910 亿不含中国 + $5,000 亿订单能见度。Forward P/E ~23x 不算贵，但安全边际约 14% 不足 25% 门槛——好生意、合理价，等更好的价格。">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root { --bg:#f5f0eb; --bg2:#ece6df; --card:#ffffff; --card2:#f8f5f1; --border:#d9d0c7; --text:#4a4340; --text2:#7a706a; --text3:#a89f98; --accent:#8a9a8e; --accent2:#7b8fa0; --accent3:#b08d7a; --rose:#c09090; --gold:#b9a06a; --red:#b87070; --green:#7a9a7a; --shadow:rgba(0,0,0,0.06); --chart-grid:#e5ddd5; }
+[data-theme="dark"] { --bg:#1e1c1a; --bg2:#28251f; --card:#2e2a25; --card2:#363230; --border:#4a4540; --text:#d4ccc4; --text2:#a09890; --text3:#706860; --accent:#8a9a8e; --accent2:#8fabbf; --accent3:#c9a48e; --rose:#c09090; --gold:#c9b07a; --red:#c08080; --green:#8aaa8a; --shadow:rgba(0,0,0,0.3); --chart-grid:#3e3a35; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', serif; line-height: 1.75; font-size: 14.5px; transition: background .35s, color .35s; }
+a { color: var(--accent2); text-decoration: none; }
+.theme-bar { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); }
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+.toggle-switch { position: relative; width: 44px; height: 22px; background: var(--border); border-radius: 11px; cursor: pointer; transition: background .3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: var(--card); border-radius: 50%; transition: transform .3s; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+
+.hero { padding: 48px 24px 36px; text-align: center; border-bottom: 1px solid var(--border); }
+.hero-tag { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 3px 14px; border-radius: 20px; margin-bottom: 18px; }
+.hero h1 { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.pill { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: 'Segoe UI', sans-serif; font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow); }
+.pill strong { color: var(--text); }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle { font-size: 18px; font-weight: 700; color: var(--accent3); margin-bottom: 20px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+.stitle::before { content: ''; display: block; width: 4px; height: 20px; background: var(--accent3); border-radius: 2px; }
+
+.haitu-quip { display: flex; align-items: center; gap: 18px; background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 18px 24px; margin: 24px 0; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-quote { flex: 1; }
+.haitu-portrait { font-size: 15px; line-height: 1.65; color: var(--text); margin-bottom: 6px; font-weight: 600; }
+.haitu-rating-line { font-size: 13px; color: var(--text2); font-family: 'Segoe UI', sans-serif; }
+.rating-badge { display: inline-block; padding: 2px 12px; border-radius: 12px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; margin-left: 4px; }
+.rating-hold { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+.rating-cond { background: rgba(138,154,142,.20); color: var(--accent); }
+
+.haitu-essay { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 28px 32px; margin: 24px 0 20px; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-essay-header { display: flex; align-items: center; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.haitu-avatar-sm { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); background: var(--red); box-shadow: 0 2px 8px rgba(184,112,112,0.2); }
+.haitu-name-lg { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 28px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 4px; }
+.haitu-essay-tag { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; }
+.haitu-essay-body { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 15px; line-height: 2.0; color: var(--text); }
+.haitu-essay-body p { margin-bottom: 14px; }
+.haitu-essay-body p.lead { font-size: 16px; font-style: italic; color: var(--text2); margin-bottom: 18px; }
+.haitu-essay-body strong { color: var(--text); font-weight: 700; }
+.haitu-essay-body h4 { font-size: 14px; color: var(--accent3); margin: 18px 0 10px; font-family: 'Segoe UI', sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+.haitu-sign { text-align: right; margin-top: 18px; font-family: 'Georgia', serif; font-size: 14px; color: var(--text2); font-style: italic; }
+.haitu-disc { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); font-style: italic; line-height: 1.7; }
+
+.stock-snap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px; }
+.snap-item { text-align: center; }
+.snap-label { font-family: 'Segoe UI', sans-serif; font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.snap-val { font-family: 'Segoe UI', sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+.snap-val.up { color: var(--green); }
+.snap-val.dn { color: var(--red); }
+.snap-sub { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow); }
+.kpi-l { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.badge { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+.up { background: rgba(122,154,122,.15); color: var(--green); }
+.dn { background: rgba(184,112,112,.15); color: var(--red); }
+.nt { background: rgba(123,143,160,.15); color: var(--accent2); }
+
+.tbl-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow); }
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI', sans-serif; font-size: 13px; }
+.tbl th { background: var(--card2); color: var(--text3); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); background: var(--card2); }
+
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); }
+.ctitle { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 260px; }
+
+.cmt { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 26px; line-height: 1.95; font-size: 14px; box-shadow: 0 1px 4px var(--shadow); color: var(--text); }
+.cmt p { margin-bottom: 14px; }
+.cmt p:last-child { margin-bottom: 0; }
+.cmt strong { color: var(--text); }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+
+.bscore { display: flex; align-items: center; gap: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; margin-bottom: 12px; box-shadow: 0 1px 4px var(--shadow); }
+.circle { width: 62px; height: 62px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; flex-shrink: 0; border: 3px solid; font-family: 'Segoe UI', sans-serif; }
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 4px; color: var(--text); }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.moat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+.moat-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); border-left: 4px solid var(--accent); }
+.moat-card.wide { border-left-color: var(--green); }
+.moat-card.narrow { border-left-color: var(--gold); }
+.moat-card.none { border-left-color: var(--red); }
+.moat-card h5 { font-size: 13px; color: var(--text); margin-bottom: 6px; }
+.moat-card .moat-rate { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.moat-card.wide .moat-rate { background: rgba(122,154,122,.18); color: var(--green); }
+.moat-card.narrow .moat-rate { background: rgba(185,160,106,.18); color: var(--gold); }
+.moat-card.none .moat-rate { background: rgba(184,112,112,.18); color: var(--red); }
+.moat-card p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+
+.ec-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 14px; box-shadow: 0 1px 3px var(--shadow); }
+.ec-badge { flex-shrink: 0; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-top: 2px; font-family: 'Segoe UI', sans-serif; }
+.ec-bull { background: rgba(122,154,122,.18); color: var(--green); }
+.ec-bear { background: rgba(184,112,112,.18); color: var(--red); }
+.ec-neut { background: rgba(185,160,106,.18); color: var(--gold); }
+.ec-body { flex: 1; }
+.ec-title { font-weight: 600; color: var(--text); margin-bottom: 3px; font-size: 14px; }
+.ec-note { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.dcf-note { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.dcf-note strong { color: var(--text); }
+
+.scorecard { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow); }
+.score-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.score-card { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px; }
+.score-letter { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Segoe UI', sans-serif; font-weight: 800; font-size: 22px; flex-shrink: 0; border: 3px solid; }
+.s-a { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.12); }
+.s-bp { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.06); }
+.s-b { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.10); }
+.s-bm { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.06); }
+.s-c { color: var(--red); border-color: var(--red); background: rgba(184,112,112,.08); }
+.score-body h4 { font-size: 13px; color: var(--text); margin-bottom: 4px; }
+.score-body p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+.flag-row { margin-top: 16px; padding: 12px 16px; background: rgba(184,112,112,.08); border: 1px solid rgba(184,112,112,.3); border-radius: 8px; font-size: 13px; color: var(--text2); }
+.flag-row strong { color: var(--red); }
+
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center; box-shadow: 0 1px 4px var(--shadow); }
+.pbox .pl { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; }
+.pbox .pv { font-family: 'Segoe UI', sans-serif; font-size: 28px; font-weight: 800; margin-bottom: 5px; }
+.pbox .pn { font-size: 12px; color: var(--text3); line-height: 1.5; }
+.pc { color: var(--red); } .pf { color: var(--gold); } .ps { color: var(--green); }
+
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.risk-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); position: relative; overflow: hidden; }
+.risk-card::before { content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent); }
+.risk-card.r1::before { background: var(--green); }
+.risk-card.r2::before { background: rgba(122,154,122,.6); }
+.risk-card.r3::before { background: var(--gold); }
+.risk-card.r4::before { background: var(--rose); }
+.risk-card.r5::before { background: var(--red); }
+.risk-card h5 { font-size: 14px; margin-bottom: 6px; color: var(--text); }
+.risk-score { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.r1 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r2 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r3 .risk-score { background: rgba(185,160,106,.18); color: var(--gold); }
+.r4 .risk-score { background: rgba(192,144,144,.18); color: var(--rose); }
+.r5 .risk-score { background: rgba(184,112,112,.18); color: var(--red); }
+.risk-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+footer { background: var(--card2); border-top: 1px solid var(--border); padding: 24px; text-align: center; color: var(--text3); font-size: 12px; margin-top: 40px; line-height: 1.8; }
+@media (max-width: 768px) { .cgrid,.pgrid { grid-template-columns: 1fr; } .hero h1 { font-size: 22px; } .kpi-grid { grid-template-columns: 1fr 1fr; } .stock-snap { grid-template-columns: 1fr 1fr; } .haitu-essay-header { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/NVDA" target="_blank" rel="noopener" title="在雪球查看 NVDA 实时行情">雪球 NVDA</a>
+  </div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">Q1 FY2027 财报发布 · 2026-05-20 &nbsp;|&nbsp; 海图研判 · 2026-07-11</div>
+  <h1>英伟达 NVDA · Q1 FY2027 财报深度分析</h1>
+  <div class="hero-sub">NASDAQ: NVDA &nbsp;|&nbsp; 财季截至 2026-04-26 &nbsp;|&nbsp; 价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill">股价 <strong>$209.94</strong> <span style="color:var(--text3)">2026-07-10 收盘</span></div>
+    <div class="pill">市值 <strong>$5.08T</strong></div>
+    <div class="pill">Q1 营收 <strong>$81.6B</strong> <span style="color:var(--green)">+85%</span></div>
+    <div class="pill">Non-GAAP EPS <strong>$1.87</strong> <span style="color:var(--green)">+140%</span></div>
+    <div class="pill">营业利润率 <strong>65.6%</strong></div>
+    <div class="pill">Forward P/E <strong>~23x</strong> <span style="color:var(--gold)">边际不足 25%</span></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 海图页首短评 ═══ -->
+<div class="haitu-quip">
+  <div class="haitu-quote">
+    <div class="haitu-portrait">全球 AI 算力的绝对主导者与"AI 工厂"总承包商——GPU + CPU + 网络 + CUDA 软件栈打包成数据中心级系统，按代际升级向全球收"算力税"。Q1 营收 $816 亿（+85%）增速连续第三季加速、数据中心 +92%、净现金 $419 亿、单季 FCF $486 亿、股东回报 $200 亿创纪录。Q2 指引 $910 亿远超预期且不含任何中国收入，$5,000 亿订单能见度 + Vera CPU 打开 $2,000 亿新 TAM。但存货 +21%、供应承诺 $1,190 亿、对客户生态的战略投资，是对需求持续性的重注——好生意、合理价，等更好的价格。</div>
+    <div class="haitu-rating-line">评级：<span class="rating-badge rating-cond">有条件买入</span> · 12 个月目标价 $236（+12%）· CUDA 全栈护城河 + 需求抛物线 + 净现金堡垒，对垒 AI 资本开支周期 + 客户自研 ASIC 分食 + 5 万亿市值下安全边际不足 25%</div>
+  </div>
+</div>
+
+<!-- ═══ 市场数据快照 ═══ -->
+<div class="section">
+  <div class="stitle">市场数据快照（2026-07-10 收盘）</div>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">股价（美元）</div><div class="snap-val">$209.94</div><div class="snap-sub">2026-07-10 收盘</div></div>
+    <div class="snap-item"><div class="snap-label">市值</div><div class="snap-val">$5.08T</div><div class="snap-sub">全球市值第一梯队</div></div>
+    <div class="snap-item"><div class="snap-label">TTM GAAP P/E</div><div class="snap-val">~32.1x</div><div class="snap-sub">含大额股权浮盈</div></div>
+    <div class="snap-item"><div class="snap-label">Forward P/E</div><div class="snap-val nt">~23x</div><div class="snap-sub">FY27 共识 ~$9.0</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间</div><div class="snap-val">$162 - $237</div><div class="snap-sub">距高点 -11%</div></div>
+    <div class="snap-item"><div class="snap-label">股息率</div><div class="snap-val">~0.48%</div><div class="snap-sub">$1.00/年 · 刚提 25 倍</div></div>
+    <div class="snap-item"><div class="snap-label">TTM FCF Yield</div><div class="snap-val nt">~2.3%</div><div class="snap-sub">TTM FCF ~$119B</div></div>
+    <div class="snap-item"><div class="snap-label">现金 + 债券投资</div><div class="snap-val up">$50.3B</div><div class="snap-sub">2026-04-26 末</div></div>
+    <div class="snap-item"><div class="snap-label">有息负债</div><div class="snap-val">$8.5B</div><div class="snap-sub">短债 1.0 + 长债 7.5</div></div>
+    <div class="snap-item"><div class="snap-label">真实净现金</div><div class="snap-val up">$41.9B</div><div class="snap-sub">另有股权投资 $73.6B</div></div>
+    <div class="snap-item"><div class="snap-label">营业利润率（Q1）</div><div class="snap-val up">65.6%</div><div class="snap-sub">GAAP 口径</div></div>
+    <div class="snap-item"><div class="snap-label">分析师目标均值</div><div class="snap-val">~$302</div><div class="snap-sub">60+ 位覆盖 · 参考</div></div>
+  </div>
+  <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">数据时点：股价 $209.94（2026-07-10 收盘，雅虎行情）· 财务数据来源 NVIDIA Q1 FY2027 官方财报新闻稿 + CFO Commentary + 10-Q（SEC 8-K/10-Q，2026-05-20 发布，财季截至 2026-04-26）· 货币 USD。NVDA 财年 1 月底止，故 Q1 FY2027 = 2026-01-26 至 2026-04-26。真实净现金 = 现金 $13.2B + 有价债券 $37.1B − 短债 $1.0B − 长债 $7.5B = <strong>$41.9B</strong>（再扣经营租赁负债 $4.3B 为 $37.5B）；不含上市股权证券 $30.2B 与非上市股权投资 $43.4B。</p>
+</div>
+
+<!-- ═══ Q1 FY2027 KPI ═══ -->
+<div class="section">
+  <div class="stitle">Q1 FY2027 核心业绩（USD · 财季截至 2026-04-26）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">营收</div><div class="kpi-v">$81.6B</div><span class="badge up">+85% YoY</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">环比 +20% · 增速连续三季加速</div></div>
+    <div class="kpi"><div class="kpi-l">数据中心收入</div><div class="kpi-v">$75.2B</div><span class="badge up">+92%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">占营收 92% · 环比 +21%</div></div>
+    <div class="kpi"><div class="kpi-l">DC · Hyperscale</div><div class="kpi-v">$37.9B</div><span class="badge up">+115%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">公有云 + 超大互联网 · 约占 DC 50%</div></div>
+    <div class="kpi"><div class="kpi-l">DC · ACIE</div><div class="kpi-v">$37.4B</div><span class="badge up">+74%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">AI 云/工业/企业/主权 · 环比 +31%</div></div>
+    <div class="kpi"><div class="kpi-l">边缘计算</div><div class="kpi-v">$6.4B</div><span class="badge up">+29%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">PC/游戏机/工作站/机器人/汽车</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 毛利率</div><div class="kpi-v">74.9%</div><span class="badge nt">环比 -0.1pp</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">Non-GAAP 75.0% · mid-70s 兑现</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 营业利润</div><div class="kpi-v">$53.5B</div><span class="badge up">利润率 65.6%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">Opex $7.6B · 极致经营杠杆</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 净利润</div><div class="kpi-v">$58.3B</div><span class="badge up">+211%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">含 $15.9B 股权证券浮盈</div></div>
+    <div class="kpi"><div class="kpi-l">Non-GAAP 净利润</div><div class="kpi-v">$45.5B</div><span class="badge up">+139%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">新口径含 SBC · 真实经营</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 摊薄 EPS</div><div class="kpi-v">$2.39</div><span class="badge up">+214%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">Non-GAAP $1.87（+140%）</div></div>
+    <div class="kpi"><div class="kpi-l">经营现金流 / FCF</div><div class="kpi-v">$50.3B / $48.6B</div><span class="badge up">FCF 率 59%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">Capex 仅 $1.76B</div></div>
+    <div class="kpi"><div class="kpi-l">Q2 FY27 指引</div><div class="kpi-v">$91.0B ±2%</div><span class="badge up">隐含 ~+95%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">不含任何中国 DC 计算收入</div></div>
+  </div>
+</div>
+
+<!-- ═══ 看穿桥接 高亮框 ═══ -->
+<div class="section">
+  <div class="stitle">本季必看 · 两个"看穿"：GAAP 为何反超 Non-GAAP、新分部口径怎么读</div>
+  <div class="cmt">
+    <p><strong>本季利润表有两个必须"看穿"的地方，看不穿就会误读英伟达的盈利质量。</strong></p>
+    <p><strong>看穿一：GAAP 净利 $583 亿 &gt; Non-GAAP 净利 $455 亿——罕见的倒挂，水分在"其他收益"。</strong> 通常 Non-GAAP 高于 GAAP，本季反过来，原因是 GAAP 其他收益 $163.7 亿中含 <span class="warn-t">$159.4 亿股权证券净收益</span>——对 OpenAI、Anthropic 等战略投资组合（上市及非上市持股）的未实现浮盈，按公允价值计入当期损益。这部分随市场波动、与卖芯片无关，Non-GAAP 已剔除。<strong>读英伟达的盈利，请认 Non-GAAP 净利 $455 亿（+139%）</strong>。另一处口径变化值得加分：自本季起<span class="hl-t">非 GAAP 指标不再剔除股票薪酬（SBC $19.3 亿）</span>，历史数据已重述——管理层主动收紧口径，非 GAAP 反而更保守了。</p>
+    <div class="tbl-wrap" style="margin:14px 0;">
+      <table class="tbl">
+        <tr><th>利润桥接（$M · Q1 FY2027）</th><th>金额</th><th>说明</th></tr>
+        <tr><td>GAAP 营业利润</td><td>53,536</td><td>营收 81,615 × 营业利润率 65.6%</td></tr>
+        <tr><td>+ 其他收益净额</td><td>16,367</td><td><span class="warn-t">含股权证券净浮盈 15,936</span></td></tr>
+        <tr class="hl"><td>税前利润</td><td>69,903</td><td>—</td></tr>
+        <tr><td>− 所得税（16.6%）</td><td>(11,582)</td><td>—</td></tr>
+        <tr class="hl"><td><strong>GAAP 净利润</strong></td><td><strong>58,321</strong></td><td>+211% · 被浮盈放大</td></tr>
+        <tr class="hl"><td><strong>Non-GAAP 净利润（剔除浮盈 · 含 SBC）</strong></td><td><strong>45,548</strong></td><td><strong>+139% · 经营真相</strong></td></tr>
+      </table>
+    </div>
+    <p><strong>看穿二：分部口径换了，别拿新旧数字直接对比。</strong> 自本季起，原 Data Center / Gaming / ProViz / Automotive 拆分改为 <span class="hl-t">Data Center（下分 Hyperscale 与 ACIE=AI 云/工业/企业）+ Edge Computing（PC、游戏机、工作站、AI-RAN、机器人、汽车）</span>。新口径的信息增量在客户结构：Hyperscale $378.7 亿（+115%）与 ACIE $373.8 亿（+74%）各占数据中心约一半——<strong>一半收入已来自公有云巨头之外的 AI 云、企业与主权客户</strong>，客户集中度较"四大云厂撑起一切"的刻板印象明显改善。旧口径参考：数据中心网络业务 $148 亿（+199%，InfiniBand/Spectrum-X/NVLink），同比近三倍，是"卖系统而非卖芯片"的最好注脚。</p>
+  </div>
+</div>
+
+<!-- ═══ 趋势图 ═══ -->
+<div class="section">
+  <div class="stitle">关键指标趋势（近 5 季）</div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">营收（$B）& YoY 增速——增速连续三季加速</div><div class="cwrap"><canvas id="chartRev"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">GAAP 毛利率 vs 营业利润率（%）</div><div class="cwrap"><canvas id="chartMargin"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">Q1 FY2027 分部拆分（$B · 新口径）</div><div class="cwrap"><canvas id="chartSegment"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">摊薄 EPS：GAAP vs Non-GAAP（$）</div><div class="cwrap"><canvas id="chartEps"></canvas></div></div>
+  </div>
+  <p style="font-size:12px; color:var(--text3); line-height:1.6;">注：Q1 FY26 毛利率 60.5% 受 $45 亿 H20 中国禁令减值一次性拖累；Non-GAAP EPS 全序列为"含 SBC"新口径可比值（Q1 FY26 0.78、Q4 FY26 1.59 为重述值，Q2/Q3 FY26 为原披露口径，差异约 $0.03）。</p>
+</div>
+
+<!-- ═══ 桑基图 ═══ -->
+<div class="section">
+  <div class="stitle">Q1 FY2027 资金流向桑基图（$B）</div>
+  <div class="ccard">
+    <div id="sankey" style="width:100%;height:480px;"></div>
+    <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">说明：营收 $81.6 → 营业成本 $20.5 + 毛利 $61.1（毛利率 74.9%）→ 运营费用 $7.6 + 营业利润 $53.5（65.6%）；营业利润 + 其他收益 $16.4（<strong>含股权证券浮盈 $15.9，非经营性</strong>）= 税前利润 $69.9 → 所得税 $11.6 + GAAP 净利 $58.3。现金侧：OCF $50.3 − Capex $1.8 = FCF $48.6（FCF/营收 59%）——同季向股东返还约 $200 亿（回购现金 $193 亿 + 股息 $2.4 亿），另以 $186 亿购入非上市股权证券（战略投资）。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 1 ═══ -->
+<div class="section">
+  <div class="stitle">模块 1 · 公司概览与背景</div>
+  <div class="cmt">
+    <p><strong>NVIDIA Corporation</strong>（NASDAQ: NVDA），总部加州圣克拉拉。1993 年由黄仁勋（Jensen Huang）与 Chris Malachowsky、Curtis Priem 创立，1999 年上市并发明 GPU。财年 1 月底止，最新已发布财报为 Q1 FY2027（2026-01-26 至 2026-04-26），2026-05-20 盘后发布，同日提交 10-Q。</p>
+
+    <p><strong>核心叙事</strong>：英伟达已从"显卡公司"完成三级跳——游戏 GPU → 数据中心加速计算 → <span class="hl-t">AI 工厂总承包商</span>。它卖的不是单颗芯片，而是 GPU + Grace/Vera CPU + NVLink/InfiniBand/Spectrum-X 网络 + CUDA 软件栈组成的数据中心级系统，按 Blackwell → Rubin 的年度代际节奏向全球云厂、企业与主权客户收"算力税"。自 ChatGPT 面世以来数据中心业务规模扩大近 13 倍，本季数据中心收入 $752 亿占营收 92%，市值约 $5.08 万亿，居全球最前列。</p>
+
+    <p><strong>报告口径两项变更（Q1 FY27 起，读旧报告需注意）</strong>：(1) 非 GAAP 不再剔除 SBC，历史已重述；(2) 分部改为 Data Center（Hyperscale + ACIE）+ Edge Computing。前者收紧盈利口径，后者展示客户多元化——均属提升透明度的变更。</p>
+
+    <p><strong>股权与治理</strong>：单一股权结构（一股一票），流通 24.2 十亿股（2026-05-15，10-Q 封面）。创始人黄仁勋执掌 33 年，是美股大市值公司中罕见的"创始人仍在一线"样本。</p>
+
+    <p><strong>能力圈检验</strong>：硬件 + 软件生态的商业模式清晰可懂（能一句话说清怎么赚钱）。但<span class="warn-t">两块必须承认的不确定：(1) AI 资本开支的可持续性——需求"抛物线化"能持续几年，没有人真正知道，$5,000 亿订单能见度只覆盖 2025-26 两个日历年；(2) 循环生态的复杂性——英伟达投资 OpenAI/Anthropic/Groq 等客户与伙伴，客户拿融资买英伟达芯片，景气上行时是飞轮、下行时可能互相放大</span>。这两点是本报告估值折扣与仓位纪律的根源。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 2 ═══ -->
+<div class="section">
+  <div class="stitle">模块 2 · 管理层评估</div>
+
+  <div class="bscore">
+    <div class="circle cg">A</div>
+    <div class="bd">
+      <h4>黄仁勋 Jensen Huang · 创始人 & CEO（1993 至今）</h4>
+      <p>执掌 33 年的创始人 CEO，两次豪赌定义了公司：2006 年在无人看好时押注 CUDA 通用计算，2016 年起全力转向 AI。产品节奏从两年一代压缩到<span class="hl-t">一年一代（Hopper → Blackwell → Rubin）</span>，用研发速度当武器让追赶者永远慢一步。本季电话会直言"需求已经抛物线化"，前两季则正面回应"AI 泡沫"质疑（"我们看到的景象截然不同"）——话说得满，但迄今每季都用超指引的交付兑现。海图判断：这是当世罕见的"技术远见 + 执行纪律"兼备的掌舵人，唯一的折扣是其乐观叙事本身构成市场预期的一部分。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>资本配置纪律 · 回购放量 + 股息升级 + 生态投资三线并进</h4>
+      <p>
+      <strong>回购</strong>：FY24-FY26 三年累计回购 $833 亿，本季单季回购 $202 亿（1.08 亿股 · 均价约 $187，低于现价）创纪录；2026-05-18 新增 <strong>$800 亿授权</strong>（无到期日），叠加剩余 $385 亿合计约 $1,185 亿可用。<br>
+      <strong>股息</strong>：同日将季度股息从 $0.01 提高 25 倍至 $0.25/股（年化 $1.00，股息率 ~0.48%）——从"象征性"升级为"有意义"，信号大于收益。<br>
+      <span class="warn-t">需留意</span>：季内另购入 $186 亿非上市股权证券（延续对 Groq $130 亿授权许可 + 投资、对 Anthropic 投资等），生态投资规模已与回购同量级——它强化平台地位，但也制造"投资客户 → 客户买卡"的循环观感，属资本配置中风险最高的一线。
+      </p>
+    </div>
+  </div>
+
+  <div class="cmt">
+    <p><strong>长期主义测试</strong>：✅ 创始人持股 + 30 年一贯的技术路线投入，主人翁属性无争议。<strong>坦诚度</strong>：主动把 SBC 纳入非 GAAP、主动披露中国收入归零与存货/供应承诺激增，指引连续多季"不含中国"从最保守假设出发——加分。<strong>指引兑现</strong>：Q4 FY26 给 Q1 FY27 指引 $780 亿 ±2%，实际 $816 亿超上限约 4.5%；再上季指引 $650 亿，实际 $681 亿——连续大幅 beat，指引可信但系统性偏保守。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 3 ═══ -->
+<div class="section">
+  <div class="stitle">模块 3 · 商业模式深度解析</div>
+  <div class="cmt">
+    <p><strong>海图"一句话测试"</strong>：<span class="hl-t">英伟达卖的不是芯片，是"AI 工厂"——GPU + CPU + 网络 + CUDA 软件栈打包成数据中心级系统，按一年一代的升级节奏，向全球云厂、企业和主权客户收"算力税"。</span></p>
+
+    <p><strong>Q1 FY2027 收入模型（新分部口径）</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>分部</th><th>收入（$M）</th><th>YoY</th><th>QoQ</th><th>驱动</th></tr>
+        <tr class="hl"><td>Data Center 合计</td><td>75,246</td><td>+92%</td><td>+21%</td><td>占营收 92% · Blackwell（含 B300）为主力</td></tr>
+        <tr><td>├ Hyperscale</td><td>37,869</td><td>+115%</td><td>+12%</td><td>公有云 + 超大型消费互联网</td></tr>
+        <tr><td>└ ACIE（AI 云/工业/企业）</td><td>37,377</td><td>+74%</td><td>+31%</td><td>AI 云、企业、主权 AI · 增量主引擎</td></tr>
+        <tr><td>Edge Computing</td><td>6,369</td><td>+29%</td><td>+10%</td><td>Blackwell 工作站强劲 · 消费 PC 受内存涨价压制</td></tr>
+        <tr><td>（旧口径参考）DC 计算</td><td>60,400</td><td>+77%</td><td>+18%</td><td>GPU/CPU 系统</td></tr>
+        <tr><td>（旧口径参考）DC 网络</td><td>14,800</td><td>+199%</td><td>+35%</td><td>InfiniBand / Spectrum-X / NVLink</td></tr>
+      </table>
+    </div>
+
+    <p style="margin-top:14px;"><strong>单位经济与议价能力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>毛利率 74.9%、营业利润率 65.6%</strong>——每 100 元收入 65.6 元变成营业利润，Opex 仅占营收 9.3%，经营杠杆极致。管理层在内存等元器件涨价周期中仍维持 mid-70s 毛利率承诺并兑现</li>
+      <li><strong>对客户议价能力：极强但在被反制</strong>——云厂排队抢产能（前两季"云端 GPU 全部售罄"），但超大客户同步自研 ASIC（谷歌 TPU、亚马逊 Trainium，博通/AMD 承接），用第二供应源压价</li>
+      <li><strong>对供应商：深度绑定台积电</strong>——先进制程与 CoWoS 封装几乎唯一来源，$1,190 亿供应承诺是为需求提前锁产能的重注</li>
+      <li><strong>软件与网络是隐形第二曲线</strong>——CUDA 免费但锁定开发者；网络业务 $148 亿/季（+199%）证明"整机柜系统"销售模式成立；Vera CPU 再打开约 $2,000 亿新 TAM（管理层预期今年 CPU 收入约 $200 亿）</li>
+      <li><strong>推理成本经济学</strong>——Rubin 平台推理 token 成本较 Blackwell 最高降 10 倍：每代大幅降本是客户持续换代的根本动力，也是对自研 ASIC 最有效的防御</li>
+    </ul>
+
+    <p><strong>商业模式的软肋</strong>：<span class="warn-t">客户资本开支的周期性</span>。英伟达的收入 = 全球 AI 资本开支 × 其份额。份额与技术领先可以自己掌控，但 AI capex 总盘子取决于客户的投资回报兑现——代理 AI 落地创造真实价值（管理层原话）是目前最有力的正反馈证据，但这条链上任何一环（模型公司融资、推理需求、电力供给）收紧，订单都会传导回来。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 4 ═══ -->
+<div class="section">
+  <div class="stitle">模块 4 · 经济护城河分析（5 维）</div>
+  <div class="moat-grid">
+    <div class="moat-card wide">
+      <h5>1. 转换成本（CUDA 生态）</h5>
+      <span class="moat-rate">极宽</span>
+      <p>近 20 年积累的 CUDA 开发者生态 + 数百万行客户代码 + 全套 AI 框架优化。迁移到其他平台意味着重写与重训成本。<strong>趋势：稳定</strong>（PyTorch 抽象层与编译器技术在缓慢削弱绑定）。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>2. 无形资产（架构 + 全栈）</h5>
+      <span class="moat-rate">宽</span>
+      <p>一年一代的芯片架构领先（Blackwell → Rubin 六颗新芯片）+ 系统级整合能力（芯片/网络/散热/软件协同设计），专利与 know-how 壁垒深厚。<strong>趋势：加宽</strong>（代际节奏提速）。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>3. 规模/成本优势</h5>
+      <span class="moat-rate">宽</span>
+      <p>研发投入与台积电产能优先权的规模碾压；推理 token 成本每代最高降 10 倍——用降本速度让自研芯片的性价比窗口不断关闭。<strong>趋势：加宽</strong>。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>4. 网络效应</h5>
+      <span class="moat-rate">宽</span>
+      <p>开发者越多 → 软件优化越好 → 客户越买 → 生态越大的飞轮；NVLink/Spectrum-X 让集群规模本身成为锁定。Meta 多年期多代际合作（数百万颗 GPU + Grace CPU）是最新验证。<strong>趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>5. 有效规模</h5>
+      <span class="moat-rate">中-宽</span>
+      <p>通用 AI 加速市场近乎独占，但<span class="warn-t">超大客户自研 ASIC（谷歌 TPU/亚马逊 Trainium，博通承接，FY27 AI 收入指引超 $1,000 亿）在"单一大客户自用"场景撕开缺口</span>。<strong>趋势：局部侵蚀</strong>。</p>
+    </div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>10 年后护城河会更宽还是更窄？</strong> <span class="hl-t">核心判断：通用 AI 计算平台的护城河仍在加宽（全栈整合 + 代际提速 + CPU/网络扩品类），但市场结构会从"近乎独占"走向"主导 + 边缘分食"</span>。自研 ASIC 会在推理与超大客户自用负载中拿走一部分（博通的定制芯片客户已含 Anthropic/Google/Meta/OpenAI），AMD 在性价比端保持压力（MI450/Helios 与 Meta 合作最高 6GW）。英伟达的防御是把战场不断升维：从芯片到系统、从训练到推理、从 GPU 到 CPU（Vera $2,000 亿 TAM）、从云到主权 AI 与机器人。<strong>份额从 90%+ 缓慢滑向 70-80% 但盘子翻数倍</strong>——这是海图的基准情景。</p>
+    <p><strong>定价权</strong>：极强——mid-70s 毛利率在元器件涨价周期中稳如磐石；但定价权的天花板是客户自研的"影子价格"，这决定了毛利率难再向上、大概率高位缓降。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 5 ═══ -->
+<div class="section">
+  <div class="stitle">模块 5 · 财务深度分析</div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 12px 0; font-family: 'Segoe UI',sans-serif;">5.1 近 5 季核心趋势（$M，比率除外）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>指标</th><th>Q1 FY26</th><th>Q2 FY26</th><th>Q3 FY26</th><th>Q4 FY26</th><th>Q1 FY27</th></tr>
+      <tr class="hl"><td>营收</td><td>44,062</td><td>46,743</td><td>57,006</td><td>68,127</td><td><strong>81,615</strong></td></tr>
+      <tr><td>营收 YoY</td><td>+69%</td><td>+56%</td><td>+62%</td><td>+73%</td><td><strong>+85%</strong></td></tr>
+      <tr><td>数据中心收入</td><td>39,112</td><td>41,100</td><td>51,200</td><td>62,314</td><td>75,246</td></tr>
+      <tr><td>GAAP 毛利率</td><td>60.5%*</td><td>72.4%</td><td>73.4%</td><td>75.0%</td><td>74.9%</td></tr>
+      <tr><td>GAAP 营业利润率</td><td>49.1%</td><td>60.8%</td><td>63.2%</td><td>65.0%</td><td>65.6%</td></tr>
+      <tr><td>GAAP 净利润</td><td>18,775</td><td>26,422</td><td>31,910</td><td>42,960</td><td>58,321</td></tr>
+      <tr><td>Non-GAAP 净利润</td><td>19,094</td><td>25,783</td><td>31,767</td><td>38,969</td><td>45,548</td></tr>
+      <tr><td>Non-GAAP EPS（$）</td><td>0.78†</td><td>1.05</td><td>1.30</td><td>1.59†</td><td>1.87</td></tr>
+      <tr><td>OCF</td><td>27,414</td><td>15,365</td><td>23,750</td><td>36,190</td><td>50,344</td></tr>
+      <tr><td>FCF</td><td>26,135</td><td>13,450‡</td><td>22,089</td><td>34,902</td><td>48,554</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">* Q1 FY26 毛利率受 $45 亿 H20 中国禁令减值一次性拖累。† 含 SBC 新口径重述值（原披露 0.81 / 1.62）。‡ Q2 FY26 FCF 为据 FY26 全年官方合计倒算的推导值，其余为官方披露。<strong>环比增量 $135 亿创公司纪录，YoY 增速连续第三季加速（62% → 73% → 85%）</strong>——对一家季营收 $800 亿量级的公司，这在资本市场史上没有先例。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.2 资产负债健康度（2026-04-26 末 · $M）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>金额</th><th>说明</th></tr>
+      <tr><td>现金及等价物</td><td>13,237</td><td>—</td></tr>
+      <tr><td>有价债券投资</td><td>37,098</td><td>现金 + 短期投资合计 50,335</td></tr>
+      <tr><td>上市股权证券</td><td>30,237</td><td>浮盈计入 GAAP 损益（本季 +$159 亿的主要来源）</td></tr>
+      <tr><td>非上市股权投资</td><td>43,364</td><td>OpenAI/Anthropic/Groq 等战略组合 · 季内新购 18,582</td></tr>
+      <tr class="hl"><td>短期债务</td><td>1,000</td><td>3.20% Notes 2026 年到期（10-Q 债务明细）</td></tr>
+      <tr class="hl"><td>长期债务</td><td>7,470</td><td>—</td></tr>
+      <tr><td>经营租赁负债</td><td>4,344</td><td>流动 466 + 非流动 3,878 · 加权剩余租期 10.4 年</td></tr>
+      <tr class="hl"><td><strong>真实净现金</strong></td><td><strong>41,865</strong></td><td>现金 13,237 + 债券 37,098 − 短债 1,000 − 长债 7,470；再扣租赁负债为 37,521</td></tr>
+      <tr><td>应收账款</td><td>40,710</td><td>DSO 45 天（上季 51 天，环比改善 6 天）</td></tr>
+      <tr><td>存货</td><td>25,797</td><td><span class="warn-t">环比 +21%</span> · 为 Rubin 爬坡备货</td></tr>
+      <tr><td>供应相关承诺（表外）</td><td>119,000</td><td><span class="warn-t">$1,190 亿</span> · 提前锁定产能的重注</td></tr>
+      <tr><td>多年期云服务采购承诺</td><td>30,000</td><td>上季 270 亿 · 支持自研/自用需求</td></tr>
+      <tr><td>总资产 / 股东权益</td><td>259,474 / 195,474</td><td>权益比率 75%</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">资产负债表是一座<strong>净现金堡垒</strong>：有息负债合计仅 $84.7 亿，对应季度 FCF $486 亿——理论上一个月的现金流就能清偿全部有息债务。需要盯住的不是负债，而是<strong>需求侧敞口三件套</strong>：存货 $258 亿（+21% QoQ）+ 供应承诺 $1,190 亿 + 云采购承诺 $300 亿。景气持续则全部转化为收入；需求急刹则依次变成减值、违约金与闲置成本。另注意 $736 亿股权投资组合（上市 302 + 非上市 434）与客户生态高度重叠。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.3 现金流质量（Q1 FY2027 + 年度参考）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目（$M）</th><th>FY2024</th><th>FY2025</th><th>FY2026</th><th>Q1 FY27</th></tr>
+      <tr><td>营收</td><td>60,922</td><td>130,497</td><td>215,938</td><td>81,615</td></tr>
+      <tr><td>经营现金流 OCF</td><td>28,090</td><td>64,089</td><td>102,718</td><td>50,344</td></tr>
+      <tr><td>Capex（现金流量表官方 line item）</td><td>—</td><td>3,236</td><td>6,042</td><td>1,757</td></tr>
+      <tr class="hl"><td>自由现金流 FCF</td><td>—</td><td>60,724</td><td>96,575</td><td><strong>48,554</strong></td></tr>
+      <tr><td>FCF / 营收</td><td>—</td><td>46.5%</td><td>44.7%</td><td>59.5%</td></tr>
+      <tr><td>回购（现金实付）</td><td>9,533</td><td>33,706</td><td>40,086</td><td>19,312</td></tr>
+      <tr><td>股息</td><td>395</td><td>834</td><td>974</td><td>243</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">公司口径 FCF = OCF 50,344 − Capex 1,757 − 设备与无形资产本金付款 33 = <strong>48,554</strong>。Capex 仅占营收 2.2%——设计公司模式把重资产留给台积电与云厂，自己拿走利润与现金。OCF/非 GAAP 净利 = 110%，现金含金量极高；DSO 环比降 6 天排除"塞货"疑虑。<span class="warn-t">前瞻警示：公司预警 Q2 现金税支出将大幅增加压制 OCF</span>——单季 FCF 率 59% 不可线性外推，全年中枢按 45-50% 估更稳。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.4 杜邦分析与所有者盈余（价值投资口径）</h3>
+  <div class="dcf-note">
+    <p><strong>杜邦拆解（TTM GAAP）</strong>：净利率 63.0%（TTM 净利 $1,596 亿 / TTM 营收 $2,535 亿，<span class="warn-t">含股权浮盈，剔除后约 56%</span>）× 资产周转 ~1.1x × 权益乘数 1.33 → <strong>ROE ~82%</strong>（TTM 净利 / 期末权益 $1,955 亿）。三项全部健康：高利润率驱动、不靠杠杆、轻资产高周转。</p>
+    <p><strong>所有者盈余（Q1 FY27 年化）</strong>= 非 GAAP 净利 45,548 + 折旧摊销与非现金项 − 维护性 Capex ± 营运资金 ≈ FCF 口径 48,554/季。年化约 $1,800-1,950 亿（考虑 Q2 现金税压制）。<strong>所有者盈余收益率 ≈ $190B / 市值 $5,080B ≈ 3.7%</strong>——对一家增速 +85%、净现金 $419 亿的公司，这个收益率在大型科技股中并不贵；换算成"三年后收益率"（若 FY29 所有者盈余到 $300B+）则超过 6%。<strong>英伟达此刻的问题不是收益率低，而是这台机器的产能利用率（AI capex 景气）能维持多久。</strong></p>
+  </div>
+</div>
+
+<!-- ═══ 模块 6 ═══ -->
+<div class="section">
+  <div class="stitle">模块 6 · 电话会分析（Q1 FY2027 + 前 2 季度）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">Q1 FY2027 电话会（2026-05-20）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"需求已经抛物线化（parabolic）"——黄仁勋；营收同比增速连续第三季加速，环比增量 $135 亿创纪录</div><div class="ec-note">代理 AI 落地创造真实价值是核心论据——训练、推理、代理三重需求叠加，不是单一训练周期。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">Q2 指引 $910 亿 ±2% 远超市场预期，且仍不计任何中国 DC 计算收入</div><div class="ec-note">在中国收入为零的假设下仍隐含约 +95% YoY——指引的保守基座让 beat 概率高。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">Vera CPU 打开约 $2,000 亿新 TAM，"每一家超大规模云商和系统厂商都在合作部署"，今年 CPU 收入预期约 $200 亿——CFO Kress</div><div class="ec-note">从 GPU 单品类扩张到 CPU + 网络的"数据中心全栈"，品类扩张是下一段增长叙事。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">股息提高 25 倍至 $0.25/季 + 新增 $800 亿回购授权，本季股东回报约 $200 亿创纪录</div><div class="ec-note">资本返还从"象征性"升级为"制度化"——管理层对现金流持续性的信心投票。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">新报告框架落地：Hyperscale 与 ACIE 各占 DC 约 50%，客户结构显著多元化</div><div class="ec-note">主权 AI、企业、AI 云对冲了"只靠四大云厂"的集中度担忧——但 ACIE 中 AI 云客户的融资依赖度更高，质量略逊于 Hyperscale。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">存货升至 $258 亿（+21% QoQ）、供应承诺 $1,190 亿；公司预警 Q2 现金税支出大幅增加压制 OCF</div><div class="ec-note">对需求的重注——景气延续则是先见之明，需求刹车则是减值来源。现金税是真金白银的短期拖累。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q4 FY2026 电话会（2026-02-25）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">FY26 收入 $2,159 亿（+65%）、FCF $966 亿；Q4 数据中心收入 $623 亿，自 ChatGPT 面世以来 DC 业务扩大近 13 倍</div><div class="ec-note">与 Meta 签多年期多代际战略合作（数百万颗 Blackwell/Rubin GPU + 大规模 Grace CPU）——下一代需求被顶级客户提前锁定。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">Rubin 平台亮相：六颗芯片、推理 token 成本最高降 10 倍；四大云厂首批部署 Vera Rubin 实例</div><div class="ec-note">代际降本是客户持续换代的根本动力，也是对自研 ASIC 最好的防御。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">宣布非 GAAP 口径自 Q1 FY27 起纳入 SBC；投资并深度合作 Anthropic；斥资 $130 亿与 Groq 达成非排他授权 + 投资</div><div class="ec-note">口径收紧是坦诚加分；生态投资是外延布局推理生态，但加深了"循环营收"观感。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q3 FY2026 电话会（2025-11-19）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"Blackwell 销售爆表，云端 GPU 全部售罄"；确认 Blackwell+Rubin 2025-26 日历年约 $5,000 亿订单可见性，且"数字还会增长"</div><div class="ec-note">Q4 指引 $650 亿大幅高于市场预期 $616.6 亿；订单能见度是本轮周期最硬的锚。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">管理层正面回应"AI 泡沫"质疑：黄仁勋称"我们看到的景象截然不同"——训练+推理+代理 AI 三重需求叠加</div><div class="ec-note">GAAP 毛利率 73.4%，靠成本管理对冲内存涨价，目标 mid-70s（后续两季兑现）。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">中国数据中心计算收入实质归零，指引不再计入；H20 业务被地缘政治锁死</div><div class="ec-note">本季对华 Hopper DC 出货为零（去年同期 $46 亿）——一个曾经的两位数占比市场清零，已计入所有指引基数。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">指引兑现度追踪</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>历史指引</th><th>实际</th><th>评价</th></tr>
+      <tr><td>Q4 FY26 指引 $650 亿 ±2%（Q3 时给）</td><td>$681.3 亿</td><td><span class="badge up">超上限 ~2.8%</span></td></tr>
+      <tr><td>Q1 FY27 指引 $780 亿 ±2%（Q4 时给）</td><td>$816.2 亿</td><td><span class="badge up">超上限 ~4.5%</span></td></tr>
+      <tr><td>毛利率维持 mid-70s（Q3 承诺）</td><td>Q4 75.0% / Q1 74.9%</td><td><span class="badge up">兑现</span></td></tr>
+      <tr><td>Q2 FY27 指引 $910 亿 ±2%（不含中国）</td><td>2026-08-26 验证</td><td><span class="badge nt">待验证</span></td></tr>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>信号汇总</strong>：三季电话会的措辞轨迹是"售罄 → 需求还会增长 → 抛物线化"——<span class="hl-t">管理层信心逐季上行，且每季都用超指引交付兑现</span>。结构性利好在累积（订单 $5,000 亿、Meta 多年协议、Vera CPU 新 TAM、客户多元化），结构性利空也在累积（中国清零、存货与供应承诺激增、现金税拖累）。<strong>关键不对称：指引已不含中国——任何中国政策松动都是纯上行期权；而需求端的下行风险则由存货与承诺放大。</strong></p>
+  </div>
+</div>
+
+<!-- ═══ 模块 7 ═══ -->
+<div class="section">
+  <div class="stitle">模块 7 · 多模型估值（8 种方法）</div>
+
+  <p style="margin-bottom:14px; font-size:13px; color:var(--text2); line-height:1.8;"><strong>估值基础（独立推导，不锚定现价）</strong>：FY2027 营收 = Q1 实际 $816 亿 + Q2 指引 $910 亿 + 下半年按订单能见度与 Rubin 爬坡外推 → 全年约 $3,750-3,850 亿（+75% 左右）；非 GAAP 净利率按 55-57%（毛利率 mid-70s + 经营杠杆 − 现金税）→ 非 GAAP 净利约 $2,100-2,180 亿 → <strong>FY27 非 GAAP EPS 约 $8.8-9.0</strong>（与第三方共识 $8.96-9.34 交叉印证）。FY2028 按 +30% 左右减速假设 → EPS 约 $11.5-12。FCF 全年中枢按营收 47-50% → 约 $1,800-1,900 亿。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">7.1 估值汇总表（独立估值 · USD）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>估值方法</th><th>每股公允价</th><th>假设要点</th><th>权重</th></tr>
+      <tr><td>1. 相对估值（P/E）</td><td>$252</td><td>FY27 非 GAAP EPS $9.0 × 28x（+75% 增速给 28x 已含周期折价；五年均值 72x 仅作上限参考）</td><td>25%</td></tr>
+      <tr><td>2. DCF（基准）</td><td>$241</td><td>FY27 FCF $1,900 亿起步，5 年 CAGR 前高后低（+32% 递减至 +11%），WACC 10%，永续 4.5%；加净现金 $419 亿 + 股权组合 $736 亿</td><td>25%</td></tr>
+      <tr><td>3. 所有者盈余收益率</td><td>$223</td><td>年化所有者盈余 ~$1,900 亿 / 目标收益率 3.5%（对高增长净现金公司的合理要求）</td><td>15%</td></tr>
+      <tr><td>4. PEG</td><td>$270</td><td>EPS $9.0 × 30x = PEG ~0.85（按 2-3 年正常化增速 ~35%）；PEG&lt;1 显示成长折价</td><td>10%</td></tr>
+      <tr><td>5. DDM</td><td>不适用</td><td>股息率仅 0.48%、派息率约 5% 净利——股息刚从象征性升级，DDM 无法捕捉价值主体</td><td>0%</td></tr>
+      <tr><td>6. NAV</td><td>不适用</td><td>非资产型公司；仅注记净现金 + 股权组合合计 $1,155 亿 ≈ $4.7/股，已并入 DCF/SOTP</td><td>0%</td></tr>
+      <tr><td>7. 反向 DCF</td><td>现价隐含 FCF 增速 <strong>~12-14%</strong></td><td>$209.94 → EV ~$4.97T：以 WACC 10%/永续 4% 反推，隐含未来 5 年 FCF CAGR 仅 ~12-14%——远低于订单与指引可见的 30%+，市场在定价"急减速"</td><td>10%</td></tr>
+      <tr><td>8. SOTP 分部加总</td><td>$245</td><td>DC（FY27E 净利贡献 ~$2,000 亿 × 26x）+ Edge（~$80 亿 × 22x）+ CPU/软件期权 + 净现金与股权组合 $1,155 亿</td><td>15%</td></tr>
+      <tr class="hl"><td><strong>加权公允价</strong></td><td><strong>$243</strong></td><td>适用方法区间 $223-270 · 中位数约 $245</td><td>100%</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.8;"><strong>与现价对照</strong>：当前 $209.94 vs 加权公允 $243 · <span class="nt">折价约 13.6%</span>——<strong>低于价值投资 25% 安全边际门槛</strong>。反向 DCF 是本次估值最有信息量的一环：市场定价的是"未来 5 年 FCF 年增仅 12-14%"的急减速情景，而订单能见度支持的近两年增速远高于此——<span class="hl-t">若基准情景兑现，估值有上行空间；但市场折价背后正是 AI capex 周期与 ASIC 分食两大灰犀牛的合理定价</span>。结论：合理偏低，但不够便宜到无脑买。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.2 P/E 多档透视表（GAAP vs Non-GAAP 差 28%，必做）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>口径</th><th>EPS</th><th>P/E（基于 $209.94）</th><th>读数说明</th></tr>
+      <tr><td>TTM GAAP P/E</td><td>$6.53</td><td>~32.1x</td><td><span class="warn-t">含大额股权浮盈，失真偏低</span></td></tr>
+      <tr><td>TTM Non-GAAP P/E（新口径含 SBC）</td><td>~$5.81</td><td>~36.1x</td><td>剔浮盈 · 反映过去四季经营</td></tr>
+      <tr><td>最新单季年化 Non-GAAP</td><td>$1.87×4 = $7.48</td><td>~28.1x</td><td>适合本轮加速拐点中的外推</td></tr>
+      <tr class="hl"><td><strong>Forward P/E（FY27 共识 ~$9.0）</strong></td><td><strong>~$9.0</strong></td><td><strong>~23.3x</strong></td><td>最可信档 · 高盛称 21.7x"具吸引力"（其口径略高些的 EPS）</td></tr>
+      <tr><td>核心业务 Forward P/E</td><td>市值 − 净现金与股权组合 $1,155 亿</td><td>~22.8x</td><td>剔金融资产后的经营估值</td></tr>
+      <tr><td>FY28 前瞻 P/E（EPS ~$11.5-12）</td><td>~$11.75</td><td>~17.9x</td><td>两年维度，若减速温和则显著便宜</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3);"><strong>最可信档</strong>：Forward ~23x。对照：五年均值 forward 72x（历史泡沫化区间不作目标）、标普 500 大盘 ~22x——<span class="hl-t">全球增长最快的巨型公司，估值已与大盘几乎持平</span>。这既可读作"便宜"，也可读作"市场对周期见顶的集体投票"。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.3 12 个月目标价（概率加权）</h3>
+  <div class="pgrid">
+    <div class="pbox"><div class="pl">悲观情景 · 25%</div><div class="pv pc">$160</div><div class="pn">AI capex 进入消化期 + 订单增速失速 + 存货减值，FY28 EPS 下修至 ~$8.9、估值压缩至 18x<br>距现价 -24%</div></div>
+    <div class="pbox"><div class="pl">基准情景 · 50%</div><div class="pv pf">$240</div><div class="pn">FY27 EPS ~$9.0 兑现 + Rubin 顺利爬坡 + FY28 可见性维持，26-27x forward<br>距现价 +14%</div></div>
+    <div class="pbox"><div class="pl">乐观情景 · 25%</div><div class="pv ps">$305</div><div class="pn">订单能见度继续上修 + Vera CPU 放量 + 中国政策松动期权，FY28 EPS ~$12 × 25-26x<br>距现价 +45%</div></div>
+  </div>
+  <p style="font-size:13px; color:var(--text2);"><strong>概率加权 12 个月目标价</strong>：25%×$160 + 50%×$240 + 25%×$305 = <strong>$236</strong>（较现价 +12.5%，另加 0.48% 股息）。<span class="hl-t">上下行不对称尚可（悲观 -24% vs 乐观 +45%），但现价 $209.94 高于机械首仓 $194——差一次像样的回调</span>。</p>
+</div>
+
+<!-- ═══ 模块 8 ═══ -->
+<div class="section">
+  <div class="stitle">模块 8 · 竞争与行业分析</div>
+  <div class="cmt">
+    <p><strong>AI 计算市场格局</strong>：英伟达在通用 AI 加速计算中占绝对主导（数据中心收入 $752 亿/季 vs AMD 数据中心整体约 $60 亿/季量级），真正的竞争来自两个方向——<strong>AMD 的通用 GPU 追赶</strong>与<strong>博通承接的客户自研 ASIC</strong>。</p>
+
+    <p><strong>同业对比（2026-07-10 股价 · 各自最新财报）</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>公司</th><th>股价</th><th>最新季度增长</th><th>Trailing P/E</th><th>Forward P/E</th><th>核心评价</th></tr>
+        <tr class="hl"><td><strong>英伟达 NVDA</strong></td><td>$209.94</td><td>营收 +85% · Q2 指引隐含 ~+95%</td><td>~32x（GAAP 含浮盈）</td><td><strong>~23x</strong></td><td>全栈系统 · 增速最快估值最低</td></tr>
+        <tr><td>AMD</td><td>$554.83</td><td>Q1 营收 $10.3B +38% · DC +57% · Q2 指引 +46%</td><td>~144-178x（数据源分歧）</td><td>~59-77x</td><td>MI450/Helios 超预期 · Meta 合作最高 6GW · 估值远高于 NVDA</td></tr>
+        <tr><td>博通 AVGO</td><td>$400.05</td><td>Q2 营收 $22.2B +48% · AI 半导体 $10.8B +143% · Q3 指引 +84%</td><td>~55-63x</td><td>~20-30x（分歧大）</td><td>定制 ASIC 六大客户含 Anthropic/Google/Meta/OpenAI · 重申 FY27 AI 收入超 $1,000 亿</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:10px; font-size:12px; color:var(--text3);">注：P/E 为第三方数据源 2026 年 7 月初快照，各家因 EPS 口径不同存在差异；增速来自各公司官方财报。<span class="hl-t">耐人寻味的定价：市场给追赶者（AMD forward ~60x+）和分食者（AVGO）的估值倍数都远高于霸主本身（~23x）</span>——追赶者定价的是"从小基数抢份额"的期权，霸主定价的是"从顶峰减速"的担忧。</p>
+
+    <p style="margin-top:14px;"><strong>波特五力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>新进入者：</strong>极低——先进制程产能 + 生态 + 系统整合的三重壁垒，初创芯片公司（如 Groq）反被英伟达以投资/授权方式收编</li>
+      <li><strong>替代品：</strong>中——客户自研 ASIC 是真实存在的替代轨道（谷歌 TPU 已规模化），但仅适用于负载自用且量大的超级客户</li>
+      <li><strong>供应商议价：</strong>中高——台积电近乎唯一，先进封装产能是硬约束；$1,190 亿供应承诺换取优先权</li>
+      <li><strong>买家议价：</strong>中且上升——Hyperscale 约占 DC 收入 50%，头部客户既是最大买家又在自研；客户多元化（ACIE 占 50%）是有效对冲</li>
+      <li><strong>同业竞争：</strong>中——AMD 以性价比进攻，但 CUDA 生态与系统级交付维持了代差</li>
+    </ul>
+
+    <p><strong>行业空间</strong>：管理层框架下，AI 基础设施建设由"训练竞赛"转向"训练 + 推理 + 代理 AI"三重需求，叠加主权 AI（各国自建算力）与 Vera CPU 打开的约 $2,000 亿通用计算换代市场。Blackwell+Rubin 在 2025-26 两个日历年约 $5,000 亿订单能见度是当前最可验证的锚——<span class="warn-t">2027 日历年之后的需求，目前没有任何硬数据，只有叙事</span>。这是估值上必须保留周期折价的根本原因。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 9 ═══ -->
+<div class="section">
+  <div class="stitle">模块 9 · 技术面与 K 线分析（次要参考）</div>
+  <div class="cmt">
+    <p><strong>趋势</strong>：现价 $209.94（2026-07-10 收盘），52 周区间 $161.61 – $236.54——<span class="hl-t">距 52 周高点约 -11%，距低点约 +30%</span>，处于区间中上部。值得注意的反差：Q1 财报（5-20）业绩与指引双双大超预期，但股价此后并未创新高——7 月初一度交易于 $204 附近，<strong>市场用"利好不涨"表达了对 AI capex 持续性的将信将疑</strong>。</p>
+
+    <p><strong>关键价位</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>支撑</strong>：$204（7 月初震荡平台）/ $194（机械首仓位 · 估值中位数 ×80%）/ $162（52 周低 · 强支撑）</li>
+      <li><strong>阻力</strong>：$237（52 周高）/ $243（加权公允价）/ $270（PEG 档估值上沿）</li>
+    </ul>
+
+    <p><strong>形态与筹码</strong>：巨型市值下波动率较 2023-24 年明显收敛，$200-237 箱体震荡数月，筹码在高位充分换手。放量突破 $237 前，宜按箱体思路处理；跌破 $194-200 区域则进入价值买区。</p>
+
+    <p><strong>注意</strong>：英伟达的核心驱动是季度指引、订单能见度与 AI capex 叙事，技术面只是仓位执行的辅助坐标——基本面信号（8-26 财报）的权重远大于任何均线。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 10 ═══ -->
+<div class="section">
+  <div class="stitle">模块 10 · 增长催化剂与前景展望</div>
+  <div class="cmt">
+    <p><strong>短期催化剂（未来 6 个月）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>2026-08-26 Q2 FY2027 财报</strong>——$910 亿指引兑现度 + $5,000 亿订单能见度是否上修（Kress 已预告"数字还会增长"）</li>
+      <li><strong>Rubin 平台爬坡</strong>——AWS/谷歌云/Azure/OCI 首批 Vera Rubin 实例上线节奏；推理 token 成本降 10 倍的实测数据</li>
+      <li><strong>Vera CPU 放量</strong>——今年约 $200 亿 CPU 收入目标的季度验证，新品类从 0 到 1</li>
+      <li><strong>中国政策期权</strong>——指引已完全不含中国 DC 收入，任何出口管制松动都是纯增量</li>
+      <li><strong>回购放量</strong>——约 $1,185 亿可用授权在股价盘整期的托底效应</li>
+    </ul>
+
+    <p><strong>长期展望（3-5 年）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>三重需求叠加</strong>——训练（前沿模型代际竞赛）+ 推理（token 消耗指数增长）+ 代理 AI（企业级落地），推理占比上升让收入从"资本开支型"向"运营开支型"迁移，周期性钝化</li>
+      <li><strong>品类扩张</strong>——GPU → CPU（$2,000 亿 TAM）→ 网络（+199%/季）→ 软件与云服务，单客户钱包份额持续加深</li>
+      <li><strong>主权 AI</strong>——各国自建算力成为独立于美国云厂的第二需求曲线（已计入 ACIE 的 50% 占比）</li>
+      <li><strong>物理 AI 期权</strong>——机器人、AI-RAN、自动驾驶（Edge Computing 分部承载），当前占比小但期权价值大</li>
+      <li><strong>风险情景</strong>——AI 应用变现不及预期导致 capex 消化期；自研 ASIC 在推理端规模化分食；电力与数据中心建设瓶颈约束部署速度</li>
+    </ul>
+
+    <p><strong>海图判断</strong>：未来 12 个月的可见性极高（订单锁定 + 指引保守），真正的分歧在 2027 日历年之后。<span class="hl-t">把英伟达当"永续成长股"定价会犯错，把它当"传统半导体周期股"定价同样会犯错——它是一台周期强度未知的成长机器，对策不是预测，而是仓位纪律。</span></p>
+  </div>
+</div>
+
+<!-- ═══ 模块 11 ═══ -->
+<div class="section">
+  <div class="stitle">模块 11 · 风险矩阵</div>
+  <div class="risk-grid">
+    <div class="risk-card r4"><h5>1. AI 资本开支周期（经营）</h5><span class="risk-score">4 / 5 高</span><p>收入高度依赖全球 AI capex；$5,000 亿能见度只覆盖 2025-26 日历年，之后无硬数据。若模型公司融资收紧或应用变现不及预期，订单增速失速将引发戴维斯双杀</p></div>
+    <div class="risk-card r4"><h5>2. 客户集中 + 自研 ASIC（竞争）</h5><span class="risk-score">4 / 5 高</span><p>Hyperscale 约占 DC 收入 50%，头部客户既是最大买家又在自研（博通 FY27 AI 收入指引超 $1,000 亿，客户含 Google/Meta/OpenAI/Anthropic）——推理端分食最现实</p></div>
+    <div class="risk-card r3"><h5>3. 供应链与存货重注（财务）</h5><span class="risk-score">3 / 5 中</span><p>存货 $258 亿（+21% QoQ）+ 供应承诺 $1,190 亿 + 云采购承诺 $300 亿——需求急刹时依次转化为减值与违约成本；Q2 现金税大增压制 OCF</p></div>
+    <div class="risk-card r3"><h5>4. 地缘政治（监管/政策）</h5><span class="risk-score">3 / 5 中</span><p>中国 DC 收入已归零（下行已出清、上行成期权），但台积电单点依赖是更深的结构性暴露——台海风险无法对冲，只能靠仓位控制</p></div>
+    <div class="risk-card r3"><h5>5. 循环生态观感（治理/宏观）</h5><span class="risk-score">3 / 5 中</span><p>季内购入 $186 亿非上市股权（OpenAI/Anthropic/Groq 等），投资对象同时是客户或客户的客户——景气下行时"飞轮"可能变"漩涡"，且 GAAP 利润随组合估值波动</p></div>
+    <div class="risk-card r3"><h5>6. 估值与预期（估值）</h5><span class="risk-score">3 / 5 中</span><p>Forward ~23x 绝对不贵，但 $5.08T 市值意味着边际买家有限、任何减速信号都被放大；折价 13.6% 不足 25% 安全边际门槛</p></div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>3 个黑天鹅情景</strong>：</p>
+    <ol style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>AI capex 骤停（消化期提前到来）</strong>——概率 ~10% · 订单下修 + 存货减值 + 估值压缩三重打击，股价看 $120-140（forward 15x on 下修 EPS）</li>
+      <li><strong>台海冲突 / 台积电供应中断</strong>——概率 ~5% · 无替代产能，收入断崖，股价腰斩以上；这是持仓上限必须存在的根本原因</li>
+      <li><strong>头部客户自研 ASIC 在训练端突破</strong>——概率 ~10%（3 年维度）· Hyperscale 半壁收入的增速中枢系统性下移，成长股定价框架失效</li>
+    </ol>
+    <p style="margin-top:10px;"><strong>下行支撑</strong>：净现金 $419 亿 + 股权组合 $736 亿 + 年化所有者盈余 ~$1,900 亿 + $1,185 亿回购授权构成质量底。<span class="hl-t">$160-170（悲观情景价 · forward ~18x on $8.9）是较硬的估值底</span>——但要清醒：半导体历史上每一轮"这次不一样"最终都有周期，区别只在振幅。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 12 ═══ -->
+<div class="section">
+  <div class="stitle">模块 12 · 股东回报分析</div>
+  <div class="cmt">
+    <p><strong>本季是英伟达股东回报的"升档季"：股息一次上调 25 倍 + 新增 $800 亿回购授权 + 单季返还约 $200 亿创公司纪录。</strong>但金额巨大不等于含金量高——用三个递进问题拆到可验证的颗粒度。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 18px 0 10px; font-family: 'Segoe UI',sans-serif;">12.1 公司给了股东多少？</h3>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>期间</th><th>回购（现金实付 $M）</th><th>股息（$M）</th><th>股东总回报（$M）</th><th>占净利 / 占 FCF</th></tr>
+        <tr><td>FY2024</td><td>9,533</td><td>395</td><td>9,928</td><td>33% / —</td></tr>
+        <tr><td>FY2025</td><td>33,706</td><td>834</td><td>34,540</td><td>47% / 57%</td></tr>
+        <tr><td>FY2026</td><td>40,086</td><td>974</td><td>41,060</td><td>34% / 43%</td></tr>
+        <tr class="hl"><td><strong>三年合计</strong></td><td><strong>83,325</strong></td><td><strong>2,203</strong></td><td><strong>85,528</strong></td><td>—</td></tr>
+        <tr class="hl"><td>Q1 FY2027 单季</td><td>19,312</td><td>243</td><td>~19,555</td><td>43%（占非 GAAP 净利）/ 40%（占 FCF）</td></tr>
+      </table>
+    </div>
+    <p style="font-size:13px; color: var(--text2); margin-top:8px"><strong>Trailing Shareholder Yield</strong>：FY2026 返还 $410.6 亿 / 当前市值 $5.08 万亿 ≈ <strong>0.81%</strong>（TTM 口径约 0.9%）。绝对金额是全市场最大级别之一，但相对 5 万亿市值只是零头——<span class="hl-t">英伟达的回报主体仍是"利润留在体内高速复利"，而非现金分配</span>。10-Q 口径：本季回购 1.08 亿股、金额 $202 亿（含应计及消费税），回购均价约 <strong>$187/股</strong>，低于现价 $209.94，落在 52 周区间（$162-237）中下部——择时合格。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.2 给的方式好不好？</h3>
+    <div class="tbl-wrap" style="margin-bottom:10px;">
+      <table class="tbl">
+        <tr><th>加权平均摊薄股数（百万股）</th><th>FY2024</th><th>FY2025</th><th>FY2026</th><th>Q1 FY2027</th></tr>
+        <tr class="hl"><td>摊薄股数</td><td>24,940</td><td>24,804</td><td>24,514</td><td><strong>24,391</strong></td></tr>
+        <tr><td>累计变化（自 FY2024）</td><td>—</td><td>-0.5%</td><td>-1.7%</td><td>-2.2%</td></tr>
+      </table>
+    </div>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>美股库存股模式</strong>：回购股份计入库存股而非注销——三年回购 $833 亿，摊薄股数仅缩 <span class="warn-t">2.2%</span>，说明<strong>回购的大部分在对冲 SBC 稀释</strong>（本季 SBC $19.3 亿/季且随人员扩张增长），净缩股是真实的但速度温和</li>
+      <li><strong>择时纪律合格</strong>：本季均价 ~$187 低于现价与 52 周中枢；FY2025-26 的大额回购也多在回调期执行，未见"高位挥霍"</li>
+      <li><span class="warn-t">分流项</span>：季内另以 $186 亿购入非上市股权证券（Groq、Anthropic 等生态投资）——与回购几乎同量级。它买的是平台地位而非每股价值，含金量取决于这些投资未来的战略与财务回报</li>
+    </ul>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.3 能不能继续给、给多少？</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>授权额度史上最厚</strong>：截至季末剩余 $385 亿 + 2026-05-18 新增 $800 亿（无到期日）= 合计约 <strong>$1,185 亿</strong>可用（约占市值 2.3%）。历史执行率高（FY25/FY26 均足额执行 $300-400 亿量级），授权不是空头支票</li>
+      <li><strong>股息从象征性走向制度化</strong>：季度股息 $0.01 → $0.25（25 倍，首派 2026-06-26），年化 $1.00/股 · 总额约 $242 亿/年 · 股息率 ~0.48%。以 FY27E FCF ~$1,850 亿计，股息负担仅 ~13%，增长空间巨大</li>
+      <li><strong>(股息 + 回购) / FCF 覆盖度</strong>：Q1 FY27 返还 $196 亿 / FCF $486 亿 = <strong>40%</strong>；FY2026 全年 43%——<span class="hl-t">全部用赚的钱返还，零举债</span>（净现金 $419 亿），与依赖发债回购的公司有本质区别。即便按年化 $1,000 亿返还节奏，覆盖度仍在 55% 上下，可持续性无忧</li>
+      <li><strong>资本配置排序清晰</strong>：留存再投资（研发 + 供应链锁定）&gt; 生态战略投资 &gt; 回购 &gt; 股息——成长期科技公司的合理排序，股东现金回报是"副产品"而非主菜</li>
+    </ul>
+    <p><strong>模块小结</strong>：<span class="hl-t">积极、升档、且完全由 FCF 覆盖的股东回报——但以库存股模式执行、三年净缩股仅 2.2%，含金量中上而非顶级</span>。$1,185 亿授权 + 25 倍股息升级标志资本返还从"象征性"进入"制度化"阶段；真正的大钱仍流向再投资与生态投资，买英伟达买的是复利机器本身，不是现金奶牛。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 13 ═══ -->
+<div class="section">
+  <div class="stitle">模块 13 · 海图评分卡 + 投资决策</div>
+
+  <div class="scorecard">
+    <h3 style="font-size:15px; color:var(--text); margin-bottom: 16px; font-family: 'Segoe UI',sans-serif;">海图评分卡（6 维 A-D）</h3>
+    <div class="score-grid">
+      <div class="score-card"><div class="score-letter s-bp">B+</div><div class="score-body"><h4>1. 生意可预测性</h4><p>未来 12 个月能见度极高（$5,000 亿订单 + 系统性保守的指引），但 2027 日历年之后只有叙事没有硬数据——半导体周期属性未被证伪。</p></div></div>
+      <div class="score-card"><div class="score-letter s-a">A</div><div class="score-body"><h4>2. 经济护城河</h4><p>CUDA 转换成本极宽 + 全栈系统整合 + 一年一代节奏 + 规模碾压；唯一缺口是超大客户自研 ASIC 的局部侵蚀。</p></div></div>
+      <div class="score-card"><div class="score-letter s-a">A</div><div class="score-body"><h4>3. 管理层质量</h4><p>创始人执掌 33 年、两次改变公司命运的豪赌、指引连续大幅超额兑现、主动收紧非 GAAP 口径——顶级坦诚与执行。</p></div></div>
+      <div class="score-card"><div class="score-letter s-a">A</div><div class="score-body"><h4>4. 财务质量</h4><p>毛利率 74.9% / 营业利润率 65.6% / ROE ~82% / OCF 对非 GAAP 净利 110% / 净现金 $419 亿 · Capex 仅占营收 2.2%。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">A-</div><div class="score-body"><h4>5. 资本配置纪律</h4><p>$1,185 亿授权 + 股息 25 倍升档 + 回购择时合格 + 零举债返还；扣分项：库存股模式净缩股仅 2.2%/三年，生态投资与回购同量级。</p></div></div>
+      <div class="score-card"><div class="score-letter s-b">B-</div><div class="score-body"><h4>6. 估值与安全边际</h4><p>现价 $209.94 vs 加权公允 $243，折价 13.6%——合理偏低但<strong>不足 25% 安全边际门槛</strong>；"E"的周期风险大于"P/E"的倍数风险。</p></div></div>
+    </div>
+
+    <div class="flag-row">
+      <strong>红旗排查</strong>：无强制降级红旗——会计口径主动收紧（SBC 纳入非 GAAP）、无商誉减值史、净现金结构、GAAP/非 GAAP 差异（$159 亿股权浮盈）已充分披露。两个<strong>关注项</strong>（周期放大器，非会计疑点）：① 循环投资生态——投资 OpenAI/Anthropic/Groq 的同时它们又是直接或间接客户；② 需求重注——存货 $258 亿 + 供应承诺 $1,190 亿。<span class="warn-t">评级不因红旗降级，但安全边际不足 25% 使评级止步于「有条件买入」</span>。
+    </div>
+
+    <p style="margin-top:18px; font-size:14px; color:var(--text); line-height:1.85;"><strong>综合评级</strong>：<span class="rating-badge rating-cond" style="font-size:14px;">有条件买入</span>。生意质量接近满分（3 个 A + 2 个含 A- 的高分），但估值维度 B-（折价 13.6% 不足 25% 门槛）+ 周期与循环生态两个关注项 → 不给无条件「买入」。核心判断：<strong>这是一台周期强度未知的超级复利机器——条件就是价格：$194 以下（公允价 ×80%）分批建仓，现价 $209.94 则耐心等待。</strong></p>
+  </div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">投资决策（精确价格 · USD）</h3>
+
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>项目</th><th>价格</th><th>说明</th></tr>
+      <tr><td>12 个月目标价（概率加权）</td><td><strong>$236</strong> (+12%)</td><td>25%×$160 + 50%×$240 + 25%×$305</td></tr>
+      <tr><td>悲观目标（25% 概率）</td><td>$160 (-24%)</td><td>AI capex 消化期 + 估值压缩至 18x</td></tr>
+      <tr><td>基准目标（50% 概率）</td><td>$240 (+14%)</td><td>FY27 EPS ~$9.0 兑现 + 26-27x forward</td></tr>
+      <tr><td>乐观目标（25% 概率）</td><td>$305 (+45%)</td><td>订单上修 + Vera CPU 放量 + 中国期权</td></tr>
+      <tr class="hl"><td>首仓建仓（公允价 $243 × 80%）</td><td><strong>$194</strong></td><td>距现价 -7.6% · 一次像样的回调即达</td></tr>
+      <tr><td>二仓建仓（× 70%）</td><td>$170</td><td>-19% · 接近 52 周低 $162 的强支撑区</td></tr>
+      <tr><td>三仓建仓（× 60%）</td><td>$146</td><td>-30% · 黑天鹅级机会（capex 恐慌）</td></tr>
+      <tr><td>止盈一档</td><td>$270</td><td>+29% · 减仓 25%（PEG 档估值上沿）</td></tr>
+      <tr><td>止盈二档</td><td>$305</td><td>+45% · 再减 25%（乐观情景价）</td></tr>
+      <tr><td>止盈三档</td><td>$340</td><td>+62% · 再减 25%（FY28 EPS ~$12 × 28x）· 最后 25% 长期复利持有</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.85;"><strong>建议总仓位</strong>：<strong>4-6%</strong>（成长核心仓 · 台海尾部风险决定了仓位上限的存在）。<strong>持有周期</strong>：3-5 年，穿越一个完整产品代际周期（Blackwell → Rubin → 下一代）。<strong>关键监控指标</strong>：① 2026-08-26 Q2 财报 $910 亿指引兑现 + $5,000 亿订单能见度是否上修；② 存货/供应承诺增速 vs 收入增速的剪刀差；③ 四大云厂资本开支指引（需求总盘子）；④ 博通定制 ASIC 收入增速（份额分食速度）；⑤ 毛利率能否守住 mid-70s + Vera CPU 放量进度；⑥ 中国出口政策（纯上行期权）。<strong>下次催化剂</strong>：2026-08-26 Q2 FY2027 财报（第三方日历，公司未正式确认）。</p>
+</div>
+
+<!-- ═══ 海图页末长评 ═══ -->
+<div class="section">
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记 · 约 1150 字</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p class="lead">很少有一家公司能把 5 万亿美元的体量与 85% 的增速放进同一张财报，而且增速还在连续第三个季度加速。黄仁勋说"需求已经抛物线化"，市场却只给了它一个与标普大盘几乎持平的市盈率。这道分歧题，就是今晚要读的东西。</p>
+
+      <p>英伟达卖的不是芯片，是"AI 工厂"——GPU、CPU、网络、CUDA 软件栈打包成数据中心级系统，按一年一代的节奏向全球云厂、企业和主权客户收"算力税"。Q1 FY2027 营收 $816 亿（+85%）、数据中心 $752 亿（+92%）、GAAP 毛利率 74.9%、单季 FCF $486 亿、净现金 $419 亿。</p>
+
+      <h4>五个研判要点</h4>
+
+      <p><strong>一、先看穿一笔浮盈。</strong> GAAP 净利 $583 亿反而高于非 GAAP 的 $455 亿——罕见倒挂，原因是 GAAP 其他收益里有 <span class="warn-t">$159 亿股权证券浮盈</span>（对 OpenAI、Anthropic 等持仓的公允价值变动），与卖芯片无关。读英伟达，认非 GAAP 净利 $455 亿（+139%）。加分项：本季起非 GAAP 主动纳入股票薪酬——把口径改得对自己更严的公司，值得多一分信任。</p>
+
+      <p><strong>二、需求与重注同框。</strong> $5,000 亿 Blackwell+Rubin 订单能见度、Q2 指引 $910 亿（同比近翻倍，且不含任何中国收入）是需求；<span class="warn-t">存货 $258 亿（+21%）、供应承诺 $1,190 亿</span>是重注。需求兑现，重注是先见之明；需求失速，这两个数字就是减值的火药库。指引不含中国意味着中国政策任何松动都是纯上行期权——这是本季报表里最好的不对称。</p>
+
+      <p><strong>三、平台在变宽。</strong> Hyperscale 只占数据中心一半，另一半来自 AI 云、企业与主权客户（+74%）；网络业务同比近三倍；<span class="hl-t">Vera CPU 打开约 $2,000 亿新市场、今年 CPU 收入预期约 $200 亿</span>；Rubin 把推理 token 成本最高压低 10 倍——每代大幅降本，是对客户自研芯片最狠的防御。</p>
+
+      <p><strong>四、股东回报升档，含金量中上。</strong> 股息一次提 25 倍、新增 $800 亿回购授权、单季返还约 $200 亿创纪录，FCF 覆盖绰绰有余；但三年摊薄股数仅缩 2.2%，回购大头在对冲股权激励稀释。更该盯的是每季近 $190 亿的战略投资——投资 OpenAI、Anthropic、Groq 的同时它们又是客户，景气上行时是飞轮，下行时可能互相放大。</p>
+
+      <p><strong>五、估值给了折扣，但不到安全边际。</strong> 八种方法加权公允价约 $243，现价 $209.94 折价约 13.6%，不足 25% 门槛。最有信息量的是反向 DCF：<span class="hl-t">当前价只隐含未来五年 FCF 约 12-14% 的复合增速</span>——市场已在定价"急减速"，这既是保护，也是警告。</p>
+
+      <h4>海图研判</h4>
+
+      <p><strong>评级：有条件买入</strong>。12 个月概率加权目标价 <strong>$236</strong>（悲观 $160×25% / 基准 $240×50% / 乐观 $305×25%，较现价 +12%）。建仓纪律：首仓 $194（=公允价 ×80%）、二仓 $170、三仓 $146；止盈三档 $270 / $305 / $340，各减 25%，最后 25% 长期持有。<strong>建议仓位 4-6%</strong>，持有周期 3-5 年，穿越一个完整产品代际。现价高于首仓价约 8%——差一次像样的回调，让子弹先飞。</p>
+
+      <h4>风险提示</h4>
+
+      <p>AI 资本开支周期逆转、头部客户自研 ASIC 分食（博通 FY27 AI 收入指引超千亿）、$1,190 亿供应承诺与存货的减值风险、台积电单点依赖、循环投资生态、5 万亿市值下的预期脆弱性——任一恶化都可能把股价打回 $160 一线。净现金 $419 亿 + 年化所有者盈余 ~$1,900 亿 + $1,185 亿回购授权是质量底。</p>
+
+      <p>关键叙事：<strong>"全栈算力垄断 + 抛物线需求 + 净现金堡垒"的超级生意，对垒"资本开支周期 + ASIC 分食 + 供应链重注"的结构性隐忧</strong>。生意几乎无懈可击，分歧只在周期的位置；而周期，恰是市场先生最容易在两个方向都犯错的地方。下次财报：2026-08-26。</p>
+
+      <p class="haitu-sign">—— 海图，灯下落笔，明日再观风浪。</p>
+
+      <p class="haitu-disc">⚠️ 免责声明：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，不构成任何投资建议。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div>《海图夜读》 · 英伟达 NVDA Q1 FY2027 海图研判</div>
+  <div style="margin-top:6px;">发布日 2026-05-20 · 研判日 2026-07-11 · 数据来源 NVIDIA Q1 FY2027 官方财报新闻稿（SEC 8-K）+ CFO Commentary + 10-Q + 电话会 transcript</div>
+</footer>
+
+<script>
+let curTheme = 'light';
+function toggleTheme() {
+  curTheme = curTheme === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', curTheme);
+  renderCharts();
+}
+
+const palette = {
+  light: { accent: '#8a9a8e', accent2: '#7b8fa0', accent3: '#b08d7a', gold: '#b9a06a', red: '#b87070', green: '#7a9a7a', grid: '#e5ddd5', text: '#7a706a' },
+  dark:  { accent: '#8a9a8e', accent2: '#8fabbf', accent3: '#c9a48e', gold: '#c9b07a', red: '#c08080', green: '#8aaa8a', grid: '#3e3a35', text: '#a09890' }
+};
+
+let charts = {};
+function renderCharts() {
+  Object.values(charts).forEach(c => c && c.destroy && c.destroy());
+  charts = {};
+  const p = palette[curTheme];
+  Chart.defaults.color = p.text;
+  Chart.defaults.borderColor = p.grid;
+
+  const quarters = ['Q1 FY26','Q2 FY26','Q3 FY26','Q4 FY26','Q1 FY27'];
+
+  charts.rev = new Chart(document.getElementById('chartRev'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { type: 'bar', label: '营收 ($B)', data: [44.1, 46.7, 57.0, 68.1, 81.6], backgroundColor: p.accent + 'CC', yAxisID: 'y' },
+      { type: 'line', label: 'YoY %', data: [69, 56, 62, 73, 85], borderColor: p.red, backgroundColor: p.red, tension: 0.3, yAxisID: 'y1' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true }, y1: { position: 'right', grid: { drawOnChartArea: false }, ticks: { callback: v => v + '%' } } } }
+  });
+
+  charts.margin = new Chart(document.getElementById('chartMargin'), {
+    type: 'line',
+    data: { labels: quarters, datasets: [
+      { label: 'GAAP 毛利率 %', data: [60.5, 72.4, 73.4, 75.0, 74.9], borderColor: p.accent2, backgroundColor: p.accent2 + '33', tension: 0.3 },
+      { label: 'GAAP 营业利润率 %', data: [49.1, 60.8, 63.2, 65.0, 65.6], borderColor: p.accent3, backgroundColor: p.accent3 + '33', tension: 0.3 }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false, ticks: { callback: v => v + '%' } } } }
+  });
+
+  charts.segment = new Chart(document.getElementById('chartSegment'), {
+    type: 'doughnut',
+    data: {
+      labels: ['DC · Hyperscale $37.9B', 'DC · ACIE $37.4B', 'Edge Computing $6.4B'],
+      datasets: [{ data: [37.9, 37.4, 6.4], backgroundColor: [p.accent, p.accent2, p.gold] }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { font: { size: 11 } } } } }
+  });
+
+  charts.eps = new Chart(document.getElementById('chartEps'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { label: 'GAAP EPS ($)', data: [0.76, 1.08, 1.30, 1.76, 2.39], backgroundColor: p.accent3 + 'CC' },
+      { label: 'Non-GAAP EPS ($)', data: [0.78, 1.05, 1.30, 1.59, 1.87], backgroundColor: p.green + 'CC' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true } } }
+  });
+
+  buildSankey();
+}
+
+function buildSankey() {
+  const p = palette[curTheme];
+  const labels = ['营收 $81.6B', '营业成本 $20.5B', '毛利 $61.2B', '运营费用 $7.6B', '营业利润 $53.5B', '其他收益 $16.4B（含股权浮盈 $15.9B）', '税前利润 $69.9B', '所得税 $11.6B', 'GAAP 净利 $58.3B'];
+  const data = {
+    type: 'sankey',
+    orientation: 'h',
+    node: { pad: 16, thickness: 20, line: { color: p.grid, width: 0.5 }, label: labels, color: [p.accent, p.red, p.green, p.red, p.green, p.gold, p.accent2, p.red, p.green] },
+    link: {
+      source: [0, 0, 2, 2, 4, 5, 6, 6],
+      target: [1, 2, 3, 4, 6, 6, 7, 8],
+      value:  [20.46, 61.16, 7.62, 53.54, 53.54, 16.37, 11.59, 58.32],
+      color: [p.red+'55', p.green+'66', p.red+'55', p.green+'66', p.green+'66', p.gold+'66', p.red+'55', p.green+'66']
+    }
+  };
+  const layout = { font: { size: 12, color: p.text }, paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)', margin: { l: 10, r: 10, t: 10, b: 10 } };
+  Plotly.react('sankey', [data], layout, { displayModeBar: false, responsive: true });
+}
+
+renderCharts();
+</script>
+
+</body>
+</html>

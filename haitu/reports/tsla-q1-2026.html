@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-07-10 · Tesla Q1 2026 财报已于 2026-04-22 发布 -->
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>特斯拉 TSLA Q1 2026 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+<meta name="description" content="全球电动车与储能双龙头 + 一场用 $1.5 万亿市值预付的 AI 豪赌。Q1 营收 +15.8% 重回增长、汽车毛利率（剔积分）19.2% 五季连升、净现金 $355 亿、Q2 交付 +25% 大超预期——生意在变好。但 TTM GAAP P/E ~376x、Forward ~200x，监管积分退坡、零分红零回购、CEO 奖励恢复带来 ~3 亿股稀释 + SpaceX 关联投资治理红旗。独立估值公允价 ~$160，概率加权目标 $285——好生意撞上透支十年的价格。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="特斯拉 TSLA Q1 2026 海图研判 · 海图夜读">
+<meta property="og:description" content="全球电动车与储能双龙头 + 一场用 $1.5 万亿市值预付的 AI 豪赌。Q1 营收 +15.8% 重回增长、汽车毛利率（剔积分）19.2% 五季连升、净现金 $355 亿、Q2 交付 +25% 大超预期——生意在变好。但 TTM GAAP P/E ~376x、Forward ~200x，估值透支了 Robotaxi 与 Optimus 双双大成的未来。独立估值公允价 ~$160，概率加权目标 $285。">
+<meta property="og:url" content="https://jacexie.github.io/haitu/reports/tsla-q1-2026.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="特斯拉 TSLA Q1 2026 海图研判 · 海图夜读">
+<meta name="twitter:description" content="Q1 营收 +15.8% 重回增长、汽车毛利率（剔积分）19.2%、净现金 $355 亿、Q2 交付 +25% 大超预期——生意在变好。但 TTM GAAP P/E ~376x、零分红零回购、治理红旗成串。独立估值公允价 ~$160，概率加权目标 $285——好生意撞上透支十年的价格。">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root { --bg:#f5f0eb; --bg2:#ece6df; --card:#ffffff; --card2:#f8f5f1; --border:#d9d0c7; --text:#4a4340; --text2:#7a706a; --text3:#a89f98; --accent:#8a9a8e; --accent2:#7b8fa0; --accent3:#b08d7a; --rose:#c09090; --gold:#b9a06a; --red:#b87070; --green:#7a9a7a; --shadow:rgba(0,0,0,0.06); --chart-grid:#e5ddd5; }
+[data-theme="dark"] { --bg:#1e1c1a; --bg2:#28251f; --card:#2e2a25; --card2:#363230; --border:#4a4540; --text:#d4ccc4; --text2:#a09890; --text3:#706860; --accent:#8a9a8e; --accent2:#8fabbf; --accent3:#c9a48e; --rose:#c09090; --gold:#c9b07a; --red:#c08080; --green:#8aaa8a; --shadow:rgba(0,0,0,0.3); --chart-grid:#3e3a35; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', serif; line-height: 1.75; font-size: 14.5px; transition: background .35s, color .35s; }
+a { color: var(--accent2); text-decoration: none; }
+.theme-bar { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); }
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+.toggle-switch { position: relative; width: 44px; height: 22px; background: var(--border); border-radius: 11px; cursor: pointer; transition: background .3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: var(--card); border-radius: 50%; transition: transform .3s; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+
+.hero { padding: 48px 24px 36px; text-align: center; border-bottom: 1px solid var(--border); }
+.hero-tag { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 3px 14px; border-radius: 20px; margin-bottom: 18px; }
+.hero h1 { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.pill { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: 'Segoe UI', sans-serif; font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow); }
+.pill strong { color: var(--text); }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle { font-size: 18px; font-weight: 700; color: var(--accent3); margin-bottom: 20px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+.stitle::before { content: ''; display: block; width: 4px; height: 20px; background: var(--accent3); border-radius: 2px; }
+
+.haitu-quip { display: flex; align-items: center; gap: 18px; background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 18px 24px; margin: 24px 0; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-quote { flex: 1; }
+.haitu-portrait { font-size: 15px; line-height: 1.65; color: var(--text); margin-bottom: 6px; font-weight: 600; }
+.haitu-rating-line { font-size: 13px; color: var(--text2); font-family: 'Segoe UI', sans-serif; }
+.rating-badge { display: inline-block; padding: 2px 12px; border-radius: 12px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; margin-left: 4px; }
+.rating-hold { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+.rating-sell { background: rgba(184,112,112,.18); color: var(--red); }
+
+.haitu-essay { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 28px 32px; margin: 24px 0 20px; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-essay-header { display: flex; align-items: center; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.haitu-avatar-sm { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); background: var(--red); box-shadow: 0 2px 8px rgba(184,112,112,0.2); }
+.haitu-name-lg { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 28px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 4px; }
+.haitu-essay-tag { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; }
+.haitu-essay-body { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 15px; line-height: 2.0; color: var(--text); }
+.haitu-essay-body p { margin-bottom: 14px; }
+.haitu-essay-body p.lead { font-size: 16px; font-style: italic; color: var(--text2); margin-bottom: 18px; }
+.haitu-essay-body strong { color: var(--text); font-weight: 700; }
+.haitu-essay-body h4 { font-size: 14px; color: var(--accent3); margin: 18px 0 10px; font-family: 'Segoe UI', sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+.haitu-sign { text-align: right; margin-top: 18px; font-family: 'Georgia', serif; font-size: 14px; color: var(--text2); font-style: italic; }
+.haitu-disc { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); font-style: italic; line-height: 1.7; }
+
+.stock-snap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px; }
+.snap-item { text-align: center; }
+.snap-label { font-family: 'Segoe UI', sans-serif; font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.snap-val { font-family: 'Segoe UI', sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+.snap-val.up { color: var(--green); }
+.snap-val.dn { color: var(--red); }
+.snap-sub { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow); }
+.kpi-l { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.badge { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+.up { background: rgba(122,154,122,.15); color: var(--green); }
+.dn { background: rgba(184,112,112,.15); color: var(--red); }
+.nt { background: rgba(123,143,160,.15); color: var(--accent2); }
+
+.tbl-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow); }
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI', sans-serif; font-size: 13px; }
+.tbl th { background: var(--card2); color: var(--text3); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); background: var(--card2); }
+
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); }
+.ctitle { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 260px; }
+
+.cmt { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 26px; line-height: 1.95; font-size: 14px; box-shadow: 0 1px 4px var(--shadow); color: var(--text); }
+.cmt p { margin-bottom: 14px; }
+.cmt p:last-child { margin-bottom: 0; }
+.cmt strong { color: var(--text); }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+
+.bscore { display: flex; align-items: center; gap: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; margin-bottom: 12px; box-shadow: 0 1px 4px var(--shadow); }
+.circle { width: 62px; height: 62px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; flex-shrink: 0; border: 3px solid; font-family: 'Segoe UI', sans-serif; }
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 4px; color: var(--text); }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.moat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+.moat-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); border-left: 4px solid var(--accent); }
+.moat-card.wide { border-left-color: var(--green); }
+.moat-card.narrow { border-left-color: var(--gold); }
+.moat-card.none { border-left-color: var(--red); }
+.moat-card h5 { font-size: 13px; color: var(--text); margin-bottom: 6px; }
+.moat-card .moat-rate { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.moat-card.wide .moat-rate { background: rgba(122,154,122,.18); color: var(--green); }
+.moat-card.narrow .moat-rate { background: rgba(185,160,106,.18); color: var(--gold); }
+.moat-card.none .moat-rate { background: rgba(184,112,112,.18); color: var(--red); }
+.moat-card p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+
+.ec-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 14px; box-shadow: 0 1px 3px var(--shadow); }
+.ec-badge { flex-shrink: 0; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-top: 2px; font-family: 'Segoe UI', sans-serif; }
+.ec-bull { background: rgba(122,154,122,.18); color: var(--green); }
+.ec-bear { background: rgba(184,112,112,.18); color: var(--red); }
+.ec-neut { background: rgba(185,160,106,.18); color: var(--gold); }
+.ec-body { flex: 1; }
+.ec-title { font-weight: 600; color: var(--text); margin-bottom: 3px; font-size: 14px; }
+.ec-note { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.dcf-note { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.dcf-note strong { color: var(--text); }
+
+.scorecard { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow); }
+.score-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.score-card { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px; }
+.score-letter { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Segoe UI', sans-serif; font-weight: 800; font-size: 22px; flex-shrink: 0; border: 3px solid; }
+.s-a { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.12); }
+.s-bp { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.06); }
+.s-b { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.10); }
+.s-bm { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.06); }
+.s-c { color: var(--red); border-color: var(--red); background: rgba(184,112,112,.08); }
+.score-body h4 { font-size: 13px; color: var(--text); margin-bottom: 4px; }
+.score-body p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+.flag-row { margin-top: 16px; padding: 12px 16px; background: rgba(184,112,112,.08); border: 1px solid rgba(184,112,112,.3); border-radius: 8px; font-size: 13px; color: var(--text2); }
+.flag-row strong { color: var(--red); }
+
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center; box-shadow: 0 1px 4px var(--shadow); }
+.pbox .pl { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; }
+.pbox .pv { font-family: 'Segoe UI', sans-serif; font-size: 28px; font-weight: 800; margin-bottom: 5px; }
+.pbox .pn { font-size: 12px; color: var(--text3); line-height: 1.5; }
+.pc { color: var(--red); } .pf { color: var(--gold); } .ps { color: var(--green); }
+
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.risk-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); position: relative; overflow: hidden; }
+.risk-card::before { content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent); }
+.risk-card.r1::before { background: var(--green); }
+.risk-card.r2::before { background: rgba(122,154,122,.6); }
+.risk-card.r3::before { background: var(--gold); }
+.risk-card.r4::before { background: var(--rose); }
+.risk-card.r5::before { background: var(--red); }
+.risk-card h5 { font-size: 14px; margin-bottom: 6px; color: var(--text); }
+.risk-score { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.r1 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r2 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r3 .risk-score { background: rgba(185,160,106,.18); color: var(--gold); }
+.r4 .risk-score { background: rgba(192,144,144,.18); color: var(--rose); }
+.r5 .risk-score { background: rgba(184,112,112,.18); color: var(--red); }
+.risk-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+footer { background: var(--card2); border-top: 1px solid var(--border); padding: 24px; text-align: center; color: var(--text3); font-size: 12px; margin-top: 40px; line-height: 1.8; }
+@media (max-width: 768px) { .cgrid,.pgrid { grid-template-columns: 1fr; } .hero h1 { font-size: 22px; } .kpi-grid { grid-template-columns: 1fr 1fr; } .stock-snap { grid-template-columns: 1fr 1fr; } .haitu-essay-header { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/TSLA" target="_blank" rel="noopener" title="在雪球查看 TSLA 实时行情">雪球 TSLA</a>
+  </div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">Q1 2026 财报发布 · 2026-04-22 &nbsp;|&nbsp; 海图研判 · 2026-07-11</div>
+  <h1>特斯拉 TSLA · 2026 Q1 财报深度分析</h1>
+  <div class="hero-sub">NASDAQ: TSLA &nbsp;|&nbsp; 财季 2026-01-01 至 2026-03-31 &nbsp;|&nbsp; 价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill">股价 <strong>$409.48</strong> <span style="color:var(--text3)">2026-07-10 收盘</span></div>
+    <div class="pill">市值 <strong>$1.54T</strong></div>
+    <div class="pill">Q1 营收 <strong>$22.39B</strong> <span style="color:var(--green)">+15.8%</span></div>
+    <div class="pill">Non-GAAP EPS <strong>$0.41</strong> <span style="color:var(--green)">+52%</span></div>
+    <div class="pill">汽车毛利率（剔积分）<strong>19.2%</strong> <span style="color:var(--green)">五季连升</span></div>
+    <div class="pill">TTM GAAP P/E <strong>~376x</strong> <span style="color:var(--red)">极端估值</span></div>
+    <div class="pill">净现金 <strong>$35.5B</strong></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 海图页首短评 ═══ -->
+<div class="haitu-quip">
+  <div class="haitu-quote">
+    <div class="haitu-portrait">全球电动车与储能双龙头 + 一场用 $1.5 万亿市值预付全款的 AI/机器人豪赌。Q1 营收 +15.8% 重回增长、汽车毛利率（剔积分）19.2% 五季连升、净现金 $355 亿、Q2 交付 +25% 大超预期——生意在变好。但 TTM GAAP P/E ~376x / Forward ~200x，利润率回升含一次性收益、监管积分 -36% 走向消亡、零分红零回购、CEO 奖励恢复带来约 3 亿股潜在稀释 + $20 亿 SpaceX 关联投资——财报是车企，估值是 AI 公司，价格已按 Robotaxi 与 Optimus 双双大成接近满概率定价。</div>
+    <div class="haitu-rating-line">评级：<span class="rating-badge rating-sell">卖出</span> · 12 个月概率加权目标价 $285（-30%）· 「利润率修复 + $355 亿净现金 + Robotaxi/Optimus 期权」的真实改善，对垒「376x GAAP P/E + 治理红旗 + 零股东回报」的透支定价</div>
+  </div>
+</div>
+
+<!-- ═══ 市场数据快照 ═══ -->
+<div class="section">
+  <div class="stitle">市场数据快照（2026-07-10 收盘）</div>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">股价（美元）</div><div class="snap-val">$409.48</div><div class="snap-sub">2026-07-10 收盘</div></div>
+    <div class="snap-item"><div class="snap-label">市值</div><div class="snap-val">~$1.54T</div><div class="snap-sub">3,755.7M 股 × $409.48</div></div>
+    <div class="snap-item"><div class="snap-label">TTM GAAP P/E</div><div class="snap-val dn">~376x</div><div class="snap-sub">TTM GAAP EPS $1.09</div></div>
+    <div class="snap-item"><div class="snap-label">TTM Non-GAAP P/E</div><div class="snap-val dn">~226x</div><div class="snap-sub">TTM Non-GAAP EPS $1.81</div></div>
+    <div class="snap-item"><div class="snap-label">Forward P/E</div><div class="snap-val dn">~181-201x</div><div class="snap-sub">第三方口径 · 见 7.2 说明</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间</div><div class="snap-val">$298 - $499</div><div class="snap-sub">现价处区间上半部</div></div>
+    <div class="snap-item"><div class="snap-label">P/S (TTM)</div><div class="snap-val">~15.7x</div><div class="snap-sub">TTM 营收 $97.9B</div></div>
+    <div class="snap-item"><div class="snap-label">P/B</div><div class="snap-val">~18.3x</div><div class="snap-sub">股东权益 $84.1B（2026-03-31 末）</div></div>
+    <div class="snap-item"><div class="snap-label">股息率</div><div class="snap-val">0%</div><div class="snap-sub">上市以来从未派息</div></div>
+    <div class="snap-item"><div class="snap-label">FCF Yield</div><div class="snap-val dn">~0.45%</div><div class="snap-sub">TTM FCF $7.0B</div></div>
+    <div class="snap-item"><div class="snap-label">真实净现金</div><div class="snap-val up">$35.5B</div><div class="snap-sub">追索债务仅 $2M</div></div>
+    <div class="snap-item"><div class="snap-label">市值 / TTM 交付</div><div class="snap-val dn">~$93 万/辆</div><div class="snap-sub">TTM 交付 165.7 万辆</div></div>
+  </div>
+  <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">数据时点：股价 2026-07-10 收盘（Yahoo Finance chart API）· 财务数据来源 Tesla Q1 2026 股东信（SEC 8-K Ex-99.1）+ 10-Q（财季截至 2026-03-31）· 货币 USD。特斯拉财年 = 日历年。净现金 = 现金及短投 $44,743M − 有息负债（含融资租赁）$9,229M = <strong>$35,514M</strong>（2026-03-31 末）；其中 $9,037M 为非追索债务（子公司资产担保 ABS + 中国低息营运贷款），追索债务仅 $2M；若再扣经营租赁负债 $6,661M，净现金为 $28,853M。另有 $5B 未动用循环信贷额度（2028-01 到期）。</p>
+</div>
+
+<!-- ═══ Q1 2026 KPI ═══ -->
+<div class="section">
+  <div class="stitle">Q1 2026 核心业绩（USD · 财季截至 2026-03-31）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">总营收</div><div class="kpi-v">$22.39B</div><span class="badge up">+15.8% YoY</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">FY2025 连续两年下滑后重回增长</div></div>
+    <div class="kpi"><div class="kpi-l">汽车业务收入</div><div class="kpi-v">$16.23B</div><span class="badge up">+16%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">含销售 $15.47B + 租赁 $0.38B</div></div>
+    <div class="kpi"><div class="kpi-l">监管积分收入</div><div class="kpi-v">$380M</div><span class="badge dn">-36%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">近 100% 毛利 · 政策退坡走向消亡</div></div>
+    <div class="kpi"><div class="kpi-l">储能业务收入</div><div class="kpi-v">$2.41B</div><span class="badge dn">-12%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">部署 8.8GWh（-15%）· Q2 已回升</div></div>
+    <div class="kpi"><div class="kpi-l">服务及其他收入</div><div class="kpi-v">$3.75B</div><span class="badge up">+42%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">增速最快分部</div></div>
+    <div class="kpi"><div class="kpi-l">毛利率（GAAP）</div><div class="kpi-v">21.1%</div><span class="badge up">+478bp</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">⚠️ 含保修/关税一次性收益</div></div>
+    <div class="kpi"><div class="kpi-l">汽车毛利率（剔积分）</div><div class="kpi-v">19.2%</div><span class="badge up">vs 12.5%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">五季连升 · 环比 +130bp</div></div>
+    <div class="kpi"><div class="kpi-l">营业利润</div><div class="kpi-v">$941M</div><span class="badge up">+136%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">营业利润率 4.2% · Opex +37%</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 净利润</div><div class="kpi-v">$477M</div><span class="badge up">+17%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">GAAP EPS $0.13</div></div>
+    <div class="kpi"><div class="kpi-l">Non-GAAP 净利润</div><div class="kpi-v">$1.45B</div><span class="badge up">+56%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">Non-GAAP EPS $0.41（+52%）超共识</div></div>
+    <div class="kpi"><div class="kpi-l">自由现金流</div><div class="kpi-v">$1.44B</div><span class="badge up">+117%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">市场原预期为负</div></div>
+    <div class="kpi"><div class="kpi-l">交付量</div><div class="kpi-v">358,023</div><span class="badge up">+6%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">产量 408,386 · 库存天数升至 27 天</div></div>
+    <div class="kpi"><div class="kpi-l">FSD 付费订阅</div><div class="kpi-v">1.28M</div><span class="badge up">+51%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">Q1 净增创纪录 · 转向纯订阅制</div></div>
+    <div class="kpi"><div class="kpi-l">Q2 交付（已先行公布）</div><div class="kpi-v">480,126</div><span class="badge up">+25%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">2026-07-02 公告 · 大超共识 ~40 万</div></div>
+  </div>
+</div>
+
+<!-- ═══ 本季必看 ═══ -->
+<div class="section">
+  <div class="stitle">本季必看 · 三个"看穿"：GAAP vs Non-GAAP、一次性收益、Q2 交付预告</div>
+  <div class="cmt">
+    <p><strong>看穿一：GAAP EPS $0.13 与 Non-GAAP EPS $0.41 差出三倍，楔子是 SBC 与数字资产损失。</strong></p>
+    <div class="tbl-wrap" style="margin:14px 0;">
+      <table class="tbl">
+        <tr><th>GAAP → Non-GAAP 桥接（$M）</th><th>Q1 2026</th><th>说明</th></tr>
+        <tr><td>GAAP 净利润</td><td>477</td><td>GAAP EPS $0.13</td></tr>
+        <tr><td>+ 股权激励 SBC（税后）</td><td>803</td><td>含 2025 CEO 临时奖励 SBC · Opex +37% 的主因之一</td></tr>
+        <tr><td>+ 数字资产损失（税后）</td><td>173</td><td>持仓 $786M 数字资产公允价值波动</td></tr>
+        <tr class="hl"><td><strong>Non-GAAP 净利润</strong></td><td><strong>1,453</strong></td><td><strong>Non-GAAP EPS $0.41（+52%）</strong></td></tr>
+      </table>
+    </div>
+    <p>SBC 不是"假费用"——它以摊薄股数的形式由股东实付。特斯拉摊薄股数三年从 34.85 亿升到 35.38 亿，<span class="warn-t">2018 年 CEO 期权奖励经法院翻案恢复后，还有约 3.04 亿股（~8.6%）潜在稀释在路上</span>。读特斯拉的利润，GAAP 与 Non-GAAP 两个口径都要看，但别忘了稀释是真实成本。</p>
+    <p><strong>看穿二：利润率修复亮眼，但公司自己承认含一次性成分。</strong> 毛利率 21.1%（+478bp）、汽车毛利率（剔积分）19.2%（vs 一年前 12.5%）、营业利润 +136%——这是本季最漂亮的数字。但股东信明确披露：<span class="warn-t">经营利润改善含汽车业务保修与关税相关一次性收益、储能关税一次性收益</span>——利润率回升有一部分不可持续，7-22 的 Q2 财报是验证成色的时刻。同时监管积分收入 $380M（-36%）——这块几乎 100% 毛利的"政策馈赠"正随美国政策退坡走向消亡。</p>
+    <p><strong>看穿三：Q2 交付 480,126 辆（+25%）已于 7-02 先行公布，大超共识（约 39.6-40.6 万辆），储能部署 13.5GWh 强劲回升。</strong> 这说明 Q1 交付 +6% 不是终点、基本盘确实在修复。但交付大超也意味着市场对 7-22 财报的期待已经拉满——<span class="hl-t">利润率能否守住 19.2%（剔积分）且证明不依赖一次性收益，比交付数字更重要</span>。</p>
+  </div>
+</div>
+
+<!-- ═══ 趋势图 ═══ -->
+<div class="section">
+  <div class="stitle">关键指标趋势（近 5 季）</div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">营收（$B）& YoY 增速</div><div class="cwrap"><canvas id="chartRev"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">利润率趋势（%）</div><div class="cwrap"><canvas id="chartMargin"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">Q1 2026 分部营收拆分（$B）</div><div class="cwrap"><canvas id="chartSegment"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">摊薄 EPS：GAAP vs Non-GAAP（$）</div><div class="cwrap"><canvas id="chartEPS"></canvas></div></div>
+  </div>
+  <p style="font-size:12px; color:var(--text3); line-height:1.6;">注：YoY 增速以公司 FY2024 各季度披露营收为基数计算（FY2024 全年 $97.69B，与 FY2025 $94.83B「-3%」交叉吻合）；Q1 2026 +15.8% 与股东信披露一致。Q3-25 高峰含美国 EV 税收抵免 9/30 到期前的抢购透支。</p>
+</div>
+
+<!-- ═══ 桑基图 ═══ -->
+<div class="section">
+  <div class="stitle">Q1 2026 资金流向桑基图（$B）</div>
+  <div class="ccard">
+    <div id="sankey" style="width:100%;height:480px;"></div>
+    <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">说明：营收 $22.39 → 营业成本 $17.67 + 毛利 $4.72 → 经营费用 $3.78 + 营业利润 $0.94；营业利润 $0.94 + 利息收入 $0.43 → 利息支出及其他净支出 $0.63（含数字资产损失 $0.22 与 SpaceX 投资公允价值变动）+ 税前利润 $0.75 → 所得税及少数股东 $0.27 + GAAP 净利 $0.48。现金流侧：OCF $3.94 − Capex $2.49 = FCF $1.44——但 FY2026 全年 Capex 指引已上调至 $25B 以上，FCF 后续将持续承压。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 1 ═══ -->
+<div class="section">
+  <div class="stitle">模块 1 · 公司概览与背景</div>
+  <div class="cmt">
+    <p><strong>Tesla, Inc.</strong>（NASDAQ: TSLA），总部德克萨斯州奥斯汀，2003 年创立，2010 年 IPO。业务四层：<strong>电动车</strong>（Model 3/Y/S/X/Cybertruck，Cybercab、新一代 Roadster、Semi 在途）、<strong>储能与能源</strong>（Megapack/Powerwall，Megapack 3 年内量产）、<strong>服务及其他</strong>（超充网络 8,463 站 / 79,918 桩、保险、二手车、维保）、以及估值真正的主角——<strong>AI 与机器人</strong>（FSD 无监督自动驾驶、Robotaxi 车队、Optimus 人形机器人、AI5 推理芯片 4 月完成流片设计、Cortex 超 23 万 H100e 等效算力集群）。累计交付已达 920 万辆。</p>
+    <p><strong>核心叙事</strong>：2026 年 1 月的 Q4 电话会上，公司把使命更新为「Amazing Abundance」，全面转向 AI/机器人叙事；Model S/X 于 Q2 停产，弗里蒙特产线让位给 Optimus（设计年产能 100 万台，预计 7 月底/8 月投产）。管理层明确表述：长期只造自动驾驶车型，硬件利润之外，「AI、软件与车队服务利润将加速」。<span class="hl-t">这家公司正在把自己从车企重构为 real-world AI 公司——市值 $1.54T 中，按任何传统口径估算，车企部分只占零头</span>。</p>
+    <p><strong>财务背景</strong>：FY2025 营收 $94.8B（-3%），是连续第二年下滑；Q1 2026 以 +15.8% 重回增长。FY2025 GAAP 净利 $3,794M。储能 FY2025 营收 $12.77B（+27%）、毛利创纪录。</p>
+    <p><strong>股权与治理</strong>：流通股 3,755.7M（2026-04-16，10-Q 封面）。2018 年 CEO 期权奖励（约 3.04 亿股）经特拉华最高法院翻案恢复，2026-03-18 终审令生效，2025 临时奖励同步作废（不重复受益），2026-04-21 董事会与马斯克签署实施协议。<span class="warn-t">Q1 以 $20 亿关联投资 SpaceX 普通股（马斯克兼任两家 CEO），4 月又协议以至多 $20 亿股票收购一家 AI 硬件公司——治理层面的关联交易密度显著上升</span>。</p>
+    <p><strong>能力圈检验</strong>：电动车与储能的制造生意看得懂——毛利率、交付量、单位经济都可验证。<span class="warn-t">但决定 $1.54T 市值成立与否的 Robotaxi 单位经济与 Optimus 量产曲线，目前没有任何财务数据可验证（管理层自己说 Optimus 全年产量「字面上不可能预测」、Robotaxi 收入 2026 年「不会非常重大」）。这不只是能力圈问题，是全市场都无法验证的深度不确定性</span>——对这部分，任何人给出的都不是估值，是信仰的定价。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 2 ═══ -->
+<div class="section">
+  <div class="stitle">模块 2 · 管理层评估</div>
+
+  <div class="bscore">
+    <div class="circle cw">B</div>
+    <div class="bd">
+      <h4>Elon Musk · CEO（2008 至今）· 愿景与执行 A / 治理与专注 C</h4>
+      <p>把一家 2008 年濒临破产的公司做成全球市值最大车企，垂直整合、一体压铸、超充标准（NACS）成为北美行业标准——工程与制造执行力是行业级标杆。但硬币另一面：<span class="warn-t">同时执掌 SpaceX/xAI 等多家公司、精力高度分散；Robotaxi/FSD 时间表长期系统性乐观（无监督 FSD 的承诺从 2019 年推到今天）；2018 年 3.04 亿股期权奖励经法院程序恢复 + 新实施协议，薪酬与董事会独立性争议持续</span>。他是特斯拉最大的资产，也是最集中的单点风险。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cr">C</div>
+    <div class="bd">
+      <h4>资本配置 · 全押 AI，股东回报为零，关联交易加密</h4>
+      <p>上市 16 年零分红零回购，10-K 明示可预见未来不派息；FY2026 Capex 指引两度上调至 <strong>$25B 以上</strong>（AI 算力、Optimus 工厂、Cybercab、Semi、Megafactory、锂精炼、半导体研发厂）。成长期公司再投资优先本可辩护——ROIC 若兑现，再投资强于回购。但<span class="warn-t">Q1 动用 $20 亿现金投资 SpaceX（关联方、公允价值选择权计量、持股不足 1%）很难用股东利益最大化解释；至多 $20 亿股票收购 AI 硬件公司同样带关联色彩</span>。CFO Vaibhav Taneja 执行层面稳健，负债结构管理出色（追索债务仅 $2M、中国贷款利率仅 2.01-2.11%）。</p>
+    </div>
+  </div>
+
+  <div class="cmt">
+    <p><strong>长期主义测试</strong>：马斯克无疑以十年为单位下注——问题不是不够长期，而是<span class="hl-t">长期愿景与短期承诺之间的兑现纪律</span>：FSD/Robotaxi 时间表历史上一贯延期，本次「2026 年底 12 个州」「Optimus 7 月底投产」仍需打折验证。<strong>坦诚度</strong>：股东信主动披露利润含一次性收益、Optimus 产量「不可能预测」——这两处披露值得加分。<strong>利益绑定</strong>：马斯克持股比例高、且 3.04 亿股期权与市值/经营里程碑挂钩——绑定极深，但绑定方向是市值叙事而非每股自由现金流。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 3 ═══ -->
+<div class="section">
+  <div class="stitle">模块 3 · 商业模式深度解析</div>
+  <div class="cmt">
+    <p><strong>海图"一句话测试"</strong>：<span class="hl-t">特斯拉今天靠约 19-21% 毛利率的电动车与储能赚钱，握着 $355 亿净现金，把每年超过 $250 亿的资本开支几乎全部押向 FSD、Robotaxi 与 Optimus——财报是车企，估值是 AI 公司。</span></p>
+    <p><strong>Q1 2026 收入模型</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>收入项</th><th>Q1 2026</th><th>YoY</th><th>驱动与性质</th></tr>
+        <tr><td>汽车销售</td><td>$15.47B</td><td>—</td><td>交付 358,023（+6%）· 硬件周期性</td></tr>
+        <tr><td>监管积分</td><td>$0.38B</td><td>-36%</td><td>近 100% 毛利 · 政策退坡走向消亡</td></tr>
+        <tr><td>汽车租赁</td><td>$0.38B</td><td>—</td><td>—</td></tr>
+        <tr><td>储能与能源</td><td>$2.41B</td><td>-12%</td><td>部署 8.8GWh（-15%）· 项目制波动 · Q2 已回升至 13.5GWh</td></tr>
+        <tr><td>服务及其他</td><td>$3.75B</td><td>+42%</td><td>超充开放（NACS）+ 保险 + 维保 · 增速最快</td></tr>
+        <tr class="hl"><td><strong>总营收</strong></td><td><strong>$22.39B</strong></td><td><strong>+15.8%</strong></td><td>汽车业务合计 $16.23B（+16%）</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:14px;"><strong>正在生长的第二模型（软件与车队）</strong>：FSD 付费订阅 128 万（+51%，Q1 净增创纪录、已转向纯订阅制）；Robotaxi 付费里程环比接近翻倍（累计约 160 万英里量级），奥斯汀扩区、达拉斯/休斯顿 4 月开启无监督运营；荷兰 4 月批准 FSD(Supervised)（欧盟破冰）、中国审批推进中。<span class="hl-t">订阅制 FSD 是特斯拉利润表里真正的软件毛利，也是从「卖车」转向「按里程/按月收费」的桥梁</span>——但当前体量对 $1.54T 市值仍是零头。</p>
+    <p><strong>议价能力</strong>：对消费者——品牌与超充网络仍是溢价来源，但中国市场价格战证明定价权有限；对供应商——规模与垂直整合（电池、芯片自研）给了少见的上游议价力；对政策——积分收入与补贴的退坡说明，政策端是它的风险敞口而非议价对象。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 4 ═══ -->
+<div class="section">
+  <div class="stitle">模块 4 · 经济护城河分析（5 维）</div>
+  <div class="moat-grid">
+    <div class="moat-card wide">
+      <h5>1. 成本优势</h5>
+      <span class="moat-rate">宽</span>
+      <p>一体压铸 + 垂直整合 + 4680 电池 + 全球四大工厂规模摊薄。汽车毛利率（剔积分）19.2%，远高于多数纯电同行。<strong>趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>2. 无形资产（品牌/技术）</h5>
+      <span class="moat-rate">中</span>
+      <p>品牌全球认知顶级 + FSD 技术与数据积累 + AI5 芯片自研。<span class="warn-t">但品牌正被创始人政治争议双向撕扯</span>，FSD 领先度需与 Waymo/中国玩家持续对表。<strong>趋势：波动</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>3. 网络效应</h5>
+      <span class="moat-rate">窄 → 潜在宽</span>
+      <p>车队数据飞轮（车越多 → 数据越多 → FSD 越强）+ 超充网络 8,463 站。若 Robotaxi 规模化，会质变为「车队密度 × 等待时间」的双边网络——<strong>但今天尚未验证</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>4. 转换成本</h5>
+      <span class="moat-rate">窄</span>
+      <p>FSD 订阅、超充、生态有一定粘性，但换一辆电动车的痛苦远小于换银行或换 ERP。NACS 开放既是服务收入也稀释独占性。<strong>趋势：稳定偏弱</strong>。</p>
+    </div>
+    <div class="moat-card none">
+      <h5>5. 有效规模</h5>
+      <span class="moat-rate">无</span>
+      <p>全球 EV 市场足以容纳众多玩家，比亚迪以价格战贴身缠斗（其 Q1 营收 -11.8%、净利 -55% 也证明了行业的惨烈），传统车企与新势力持续涌入。<strong>趋势：侵蚀</strong>。</p>
+    </div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>10 年后护城河会更宽还是更窄？</strong> 这是特斯拉分析的真正分水岭。<span class="hl-t">如果 Robotaxi 与 Optimus 兑现，数据飞轮 + 车队网络 + 制造规模会合成一条全新的宽护城河（自动驾驶车队的双边网络效应接近赢家通吃）；如果不兑现，它就是一家护城河中等、竞争极其惨烈的高端车企 + 一家优秀的储能公司</span>。今天的诚实答案：汽车护城河在被侵蚀（份额与定价权双向承压），AI 护城河是期权而非资产。<strong>定价权</strong>：汽车端有限（中国价格战为证）；FSD 订阅端是真实的软件定价权，但规模尚小。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 5 ═══ -->
+<div class="section">
+  <div class="stitle">模块 5 · 财务深度分析</div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 12px 0; font-family: 'Segoe UI',sans-serif;">5.1 近 5 季核心数据全景（$M）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>指标</th><th>Q1-25</th><th>Q2-25</th><th>Q3-25</th><th>Q4-25</th><th>Q1-26</th></tr>
+      <tr><td>营收</td><td>19,335</td><td>22,496</td><td>28,095</td><td>24,901</td><td>22,387</td></tr>
+      <tr><td>毛利率</td><td>16.3%</td><td>17.2%</td><td>18.0%</td><td>20.1%</td><td><strong>21.1%</strong></td></tr>
+      <tr><td>汽车毛利率（剔积分）</td><td>12.5%</td><td>15.0%</td><td>15.4%</td><td>17.9%</td><td><strong>19.2%</strong></td></tr>
+      <tr><td>营业利润率</td><td>2.1%</td><td>4.1%</td><td>5.8%</td><td>5.7%</td><td>4.2%</td></tr>
+      <tr><td>GAAP 净利</td><td>409</td><td>1,172</td><td>1,373</td><td>840</td><td>477</td></tr>
+      <tr><td>Non-GAAP 净利</td><td>934</td><td>1,393</td><td>1,770</td><td>1,761</td><td>1,453</td></tr>
+      <tr><td>OCF</td><td>2,156</td><td>2,540</td><td>6,238</td><td>3,813</td><td>3,937</td></tr>
+      <tr><td>Capex</td><td>1,492</td><td>2,394</td><td>2,248</td><td>2,393</td><td>2,493</td></tr>
+      <tr><td>FCF</td><td>664</td><td>146</td><td>3,990</td><td>1,420</td><td>1,444</td></tr>
+      <tr><td>交付量（辆）</td><td>336,681</td><td>384,122</td><td>497,099</td><td>418,227</td><td>358,023</td></tr>
+      <tr><td>储能部署（GWh）</td><td>10.4</td><td>9.6</td><td>12.5</td><td>14.2</td><td>8.8</td></tr>
+      <tr><td>监管积分（$M）</td><td>595</td><td>439</td><td>417</td><td>542</td><td>380</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">注：Q3-25 的交付/营收/FCF 高峰含美国 EV 税收抵免 9/30 到期前的抢购透支；Q1-26 交付 +6% 与 Q2-26 交付 +25%（已公布）显示真实需求在恢复。毛利率五季连升是最重要的正面趋势——但含一次性收益（见"本季必看"）。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.2 资产负债健康度（2026-03-31 末 · $M）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>2026-03-31 末</th><th>说明</th></tr>
+      <tr class="hl"><td>现金及短期投资</td><td>44,743</td><td>环比 +684（FCF $1.4B + 融资净流入 $1.2B − SpaceX 投资 $2.0B）</td></tr>
+      <tr><td>短期有息负债（含融资租赁）</td><td>1,447</td><td>债务 $1,374M 几乎全部非追索（汽车 ABS $1,319M + 储能 ABS $44M + Cash Equity Debt $11M）+ 融资租赁 $73M</td></tr>
+      <tr><td>长期有息负债（含融资租赁）</td><td>7,782</td><td>债务 $7,645M（中国营运贷款 $5,794M @2.01-2.11% + 汽车 ABS $1,417M + 储能 ABS $331M）+ 融资租赁 $137M · 追索债务仅 $2M</td></tr>
+      <tr class="hl"><td>有息负债合计</td><td>9,229</td><td>其中非追索 $9,037M</td></tr>
+      <tr><td>经营租赁负债</td><td>6,661</td><td>流动 $988M + 非流动 $5,673M</td></tr>
+      <tr class="hl"><td><strong>真实净现金</strong></td><td><strong>35,514</strong></td><td>再扣经营租赁负债后为 $28,853M · 另有 $5B 未动用 RCF（2028-01 到期）+ $1.5B 未提款仓储融资协议</td></tr>
+      <tr><td>存货</td><td>14,434</td><td><span class="warn-t">环比 +$2,042M · 库存天数 27 天（Q4-25 仅 15 天）</span>· Q1 产量超交付约 5 万辆</td></tr>
+      <tr><td>数字资产</td><td>786</td><td>公允价值计量 · Q1 损失 $222M</td></tr>
+      <tr><td>SpaceX 股权投资</td><td>~2,000</td><td>2026-03 购入普通股（持股 &lt;1% · 关联交易 · 公允价值选择权计量）</td></tr>
+      <tr><td>总资产</td><td>143,724</td><td>—</td></tr>
+      <tr><td>股东权益</td><td>84,116</td><td>P/B ~18.3x</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">资产负债表是特斯拉最硬的一张牌：<strong>$355 亿净现金、追索债务仅 $200 万</strong>——极端情形下债权人几乎无法触及母公司资产。两个瑕疵：库存天数 15→27 天的跳升（Q2 交付 480k 应能消化，需 7-22 验证）；以及 $20 亿现金流向关联方 SpaceX 而非股东。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.3 现金流质量</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目（$M）</th><th>Q1-25</th><th>Q1-26</th><th>YoY</th><th>TTM</th></tr>
+      <tr><td>经营现金流 OCF</td><td>2,156</td><td>3,937</td><td>+83%</td><td>16,528</td></tr>
+      <tr><td>Capex（官方 line item · 自 Q1-25 起含储能系统购置）</td><td>1,492</td><td>2,493</td><td>+67%</td><td>9,528</td></tr>
+      <tr class="hl"><td><strong>自由现金流 FCF = OCF − Capex</strong></td><td><strong>664</strong></td><td><strong>1,444</strong></td><td><strong>+117%</strong></td><td><strong>~7,000</strong></td></tr>
+      <tr><td>OCF / GAAP 净利</td><td>5.3x</td><td>8.3x</td><td>—</td><td>4.3x</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">OCF/净利远大于 1（折旧摊销 + SBC 均为非现金），现金流质量本身健康。关键前瞻变量：<span class="warn-t">FY2026 Capex 指引 &gt;$25B（1 月 &gt;$20B → 4 月再上调）</span>——若 OCF 维持 TTM $16.5B 量级，全年 FCF 将转负或近零。市场把这叫"投资未来"，价值投资叫它"所有者盈余归零的年份"。Q1 融资净流入 $1,172M（发债 $4,331M − 还债 $3,530M + 期权行权 $361M）。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.4 杜邦分析（TTM）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>ROE 分解</th><th>数值</th><th>解读</th></tr>
+      <tr><td>净利率（TTM GAAP 净利 $3,862M / 营收 $97,879M）</td><td>3.9%</td><td>车企级净利率 · 远低于软件公司</td></tr>
+      <tr><td>资产周转率（营收 / 总资产 $143,724M）</td><td>0.68x</td><td>重资产制造</td></tr>
+      <tr><td>权益乘数（总资产 / 权益 $84,116M）</td><td>1.71x</td><td>杠杆极低</td></tr>
+      <tr class="hl"><td><strong>ROE（TTM GAAP）</strong></td><td><strong>~4.6%</strong></td><td><strong>P/B 18.3x × ROE 4.6% 的组合极不寻常——市场买的不是现在的资本回报</strong></td></tr>
+    </table>
+  </div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.5 所有者盈余（价值投资口径）</h3>
+  <div class="dcf-note">
+    <p><strong>所有者盈余 = 净利润 + 折旧摊销 + 非现金费用 − 维护性资本开支 ± 营运资金</strong></p>
+    <p>特斯拉当前 Capex 绝大部分是扩张性（AI 算力、Optimus 工厂、Cybercab、锂精炼），维护性占比低。用两个口径夹住真实值：<strong>下限口径 = TTM FCF ≈ $7.0B</strong>（把全部 Capex 当作维持生意所需）；<strong>上限口径 = TTM OCF ≈ $16.5B</strong>（把全部 Capex 当作扩张性投资）。真实所有者盈余在两者之间，中点约 $10-12B。</p>
+    <p><strong>所有者盈余收益率：下限 $7.0B / $1.54T ≈ 0.45%，上限 $16.5B / $1.54T ≈ 1.07%，中点约 0.7%</strong>——即便按最宽容口径，当前市值对应的所有者盈余收益率也只有 1% 量级，远低于无风险利率。<span class="warn-t">这意味着市值的绝大部分定价的不是现有生意，而是 Robotaxi/Optimus 的未来</span>。这是全篇估值分析的起点，也是结论的雏形。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 6 ═══ -->
+<div class="section">
+  <div class="stitle">模块 6 · 电话会分析（Q1 2026 + 前 2 季度）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">Q1 2026 电话会（2026-04-22）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"汽车毛利率（剔积分）升至 19.2%，EPS $0.41 超共识 $0.35-0.37"</div><div class="ec-note">利润率修复是本季最强信号——但公司同时披露含保修及关税相关一次性收益，成色需 Q2 验证、引用时要打折。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"FSD 付费用户约 130 万，Q1 净增创纪录；FSD v14.3 发布，推理延迟降 20%"</div><div class="ec-note">软件订阅曲线陡峭向上（+51% YoY），是从卖车到收订阅费的真实进展。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好（变现延后）</div><div class="ec-body"><div class="ec-title">"Robotaxi 目标年底约 12 个州运营；无监督 FSD/Robotaxi 收入 2026 年不重大、2027 年显著"——马斯克</div><div class="ec-note">路线图比以往任何时候都具体（州数 + 收入时间表）——但变现明确延后到 2027，今年只有里程碑没有收入。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"Optimus 7 月底/8 月在弗里蒙特投产，但初期产量'相当慢'，1 万个独特零件，全年产量'字面上不可能预测'"——马斯克</div><div class="ec-note">称 Optimus 将是"特斯拉史上最大产品"。愿景极大、执行风险极高——管理层自己都拒绝给量产曲线，市场却已给了估值。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"2026 年 Capex 确认超 $25B（1 月指引 &gt;$20B 再度上调）；Q1 Opex 同比 +37%"——CFO Taneja</div><div class="ec-note">重心全面转向 AI/机器人基础设施——短期 FCF 显著承压，全年自由现金流大概率近零或转负。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q4 2025 电话会（2026-01-28）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"EPS $0.50 超预期（共识 $0.45）；汽车毛利率（剔积分）15.4% → 17.9%"</div><div class="ec-note">利润率修复自 Q4 已确立趋势；储能 FY2025 营收 $12.77B（+27%）、毛利创纪录。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-neut">中性偏空</div><div class="ec-body"><div class="ec-title">"宣布 2026 为'巨大投资年'：Capex &gt;$20B，六大工厂并进（锂精炼、LFP、Cybercab、Semi、Megafactory、Optimus）"</div><div class="ec-note">投资高峰期 = FCF 低谷期；FY2025 总营收 -3%、连续第二年下滑的现实同场披露。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"Model S/X 2026 年 Q2 停产；长期只造自动驾驶车型（新一代 Roadster 除外）；使命更新为 Amazing Abundance"</div><div class="ec-note">公司叙事全面 AI 化——估值锚也随之从车企彻底切换为 AI 公司。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q3 2025 电话会（2025-10-22）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好（含透支）</div><div class="ec-body"><div class="ec-title">"创纪录季度：交付 497,099 辆、营收 $28.1B、FCF 约 $4.0B 均创新高；期末现金及投资超 $41B"</div><div class="ec-note">美国 EV 税收抵免 9/30 到期前抢购拉动——次季（Q4）交付回落至 418k 证实了需求前置。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"经营利润同比 -40% 至 $1.6B；关税冲击单季超 $4 亿（汽车与储能各半）"</div><div class="ec-note">当时的关税逆风，到 Q1-26 部分转化为一次性收益回冲——两个方向的波动都提醒：利润率含政策噪音。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"特斯拉处于'关键节点'，real-world AI 临近；重点 FSD/Optimus"——马斯克</div><div class="ec-note">此话正值 2025 CEO 万亿薪酬方案股东投票前——叙事与治理议程在同一时间线上交织。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">指引兑现度追踪</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>承诺 / 指引</th><th>最新状态</th><th>评价</th></tr>
+      <tr><td>FY2026 Capex &gt;$20B（2026-01 指引）</td><td>4 月上调至 &gt;$25B</td><td><span class="badge dn">再上调 · FCF 承压</span></td></tr>
+      <tr><td>Q2 2026 交付（无正式指引 · 共识 39.6-40.6 万）</td><td>480,126（+25%，7-02 公布）</td><td><span class="badge up">大超预期</span></td></tr>
+      <tr><td>Robotaxi 年底 12 个州</td><td>奥斯汀扩区 + 达拉斯/休斯顿无监督 · 付费里程环比近翻倍</td><td><span class="badge nt">推进中</span></td></tr>
+      <tr><td>Optimus 7 月底/8 月投产</td><td>研判日（7-11）尚未投产</td><td><span class="badge nt">待验证</span></td></tr>
+      <tr><td>Cybercab / Semi / Megapack 3 2026 内量产</td><td>公司口径"按计划"</td><td><span class="badge nt">推进中</span></td></tr>
+      <tr><td>无监督 FSD 收入"2027 年显著贡献"</td><td>2026 明确"不会非常重大"</td><td><span class="badge nt">变现延后</span></td></tr>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>信号汇总</strong>：三个季度连起来读，特斯拉的叙事完成了一次干净的切换——<span class="hl-t">从"车卖得怎么样"切到"AI 建得怎么样"</span>。交付与利润率的真实改善给了叙事燃料，Q2 交付 +25% 更是把预期拉满。但管理层自己反复给出的两个坦白值得反复读：利润率改善<strong>含一次性收益</strong>、Robotaxi/Optimus 收入<strong>2026 年不重大</strong>。也就是说：真实业绩在 2026 年支撑不了估值，估值靠的是 2027 年以后的承诺——而这家公司的时间表历史上一贯乐观。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 7 ═══ -->
+<div class="section">
+  <div class="stitle">模块 7 · 多模型估值（8 种方法 · 独立推导，不锚定现价）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">7.1 估值汇总表（USD / 每股 · 摊薄 3,756M 股口径）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>估值方法</th><th>每股公允价</th><th>假设要点</th><th>权重</th></tr>
+      <tr><td>1. 相对估值（P/E）</td><td>$78</td><td>TTM Non-GAAP 净利 $6.4B × 40x（对比亚迪 forward 16-21x 已给足技术/利润率溢价）+ 每股净现金 $9.5</td><td>15%</td></tr>
+      <tr><td>2. DCF（基准）</td><td>$185</td><td>FY2030 营收 ~$210B（4 年 CAGR ~19%：汽车温和增长 + 储能 + FSD/服务放量 + Robotaxi 初步贡献）· 净利率升至 11.5% → 净利 ~$24B · 摊薄 ~40 亿股（含 CEO 奖励稀释）· 退出 45x（AI 属性溢价）· 10% 折现 + 净现金</td><td>25%</td></tr>
+      <tr><td>3. 所有者盈余收益率</td><td>$103</td><td>所有者盈余下限口径 $7.0B / 要求收益率 2%（已给极高成长溢价）= $350B + 净现金 $35.5B</td><td>10%</td></tr>
+      <tr><td>4. PEG</td><td>$125</td><td>FY2027E Non-GAAP EPS ~$2.4 × 52x（= 增速 35% × PEG 1.5，费雪式成长股上限）</td><td>10%</td></tr>
+      <tr><td>5. DDM</td><td>不适用</td><td>上市以来从未派息，10-K 明示可预见未来不派息</td><td>0%</td></tr>
+      <tr><td>6. NAV</td><td>不适用</td><td>每股净资产仅 ~$22.4，对成长型科技制造公司无估值参考意义</td><td>0%</td></tr>
+      <tr><td>7. 反向 DCF</td><td>诊断项（不给价）</td><td>$409 隐含：2032 年前后净利需达 ~$50-55B（当前 Non-GAAP TTM 的 8-9 倍，年均复合 ~40%）且届时仍享 30x 以上——等于按 Robotaxi + Optimus 双双大成接近满概率定价</td><td>—</td></tr>
+      <tr><td>8. SOTP 分部加总</td><td>$204</td><td>汽车 $125B（核心汽车净利 ~$5B × 25x）+ 储能 $60B（~5x P/S）+ 服务/FSD 订阅 $45B + Robotaxi/Optimus 期权价值 $500B（概率加权：中低概率 × 数万亿远期折现）+ 净现金 $35.5B ≈ $766B</td><td>30%</td></tr>
+      <tr class="hl"><td><strong>加权公允价</strong></td><td><strong>~$160</strong></td><td>区间 $78-204 · 已含 $500B 量级的 AI 期权价值</td><td>90%</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.8;"><strong>与现价对照</strong>：当前 $409.48 vs 加权公允价 ~$160 —— <span class="warn-t">现价高出独立估值约 156%，安全边际为深度负值</span>。注意：这个 $160 并不刻薄——SOTP 里已经给了 Robotaxi/Optimus 五千亿美元的期权价值（约等于一家全球大型车企 + 一家大型软件公司的市值总和），DCF 给了四年营收接近翻倍 + 净利率三倍于当前的假设。<strong>即便如此，与 $1.54T 市值之间仍隔着约 $9,400 亿的"信仰溢价"。</strong>价值投资框架对这段溢价无法定价——只能承认它存在、并拒绝为它付费。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.2 P/E 多档透视表（GAAP vs Non-GAAP 差 3 倍 · 强制多档）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>口径</th><th>EPS</th><th>P/E（基于 $409.48）</th><th>读数说明</th></tr>
+      <tr><td>TTM GAAP</td><td>$1.09</td><td>~376x</td><td>含 SBC + 数字资产损失 · 最严苛口径</td></tr>
+      <tr><td>TTM Non-GAAP</td><td>$1.81</td><td>~226x</td><td>公司口径 · 剔 SBC 后仍是三位数</td></tr>
+      <tr><td>Q1-26 单季年化 Non-GAAP</td><td>$1.64</td><td>~250x</td><td>最新季度外推</td></tr>
+      <tr><td>FY2026 卖方共识</td><td>~$1.37</td><td>~299x</td><td>Simply Wall St 口径 · 已从 $1.89 大幅下修</td></tr>
+      <tr class="hl"><td><strong>Forward P/E（第三方汇总）</strong></td><td>NTM ~$2.09（反推）</td><td><strong>~181-201x</strong></td><td>Seeking Alpha 183.9 / valueinvesting.io 196.1 / GuruFocus 201.5（2026-07-10 前后）· 口径或为 Non-GAAP/NTM 混合，与共识 $1.37 差异大，两口径并列供读者自判</td></tr>
+      <tr><td>核心业务 P/E（剔净现金）</td><td>Non-GAAP TTM $6.38B</td><td>~236x</td><td>（市值 − 净现金 $35.5B）/ Non-GAAP TTM 净利</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3);"><strong>结论</strong>：无论选哪一档口径——最宽容的 Forward ~181x 到最严苛的 GAAP ~376x——<span class="warn-t">全部在三位数</span>。同业锚：比亚迪 forward ~16-21x、通用 ~5.9x、福特 ~9.3x。特斯拉相对传统车企的估值倍差是 20-60 倍——这个倍差本身就是市场对"它不是车企"的投票，也是本报告全部风险的来源。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.3 12 个月目标价（三情景 · 概率加权）</h3>
+  <div class="pgrid">
+    <div class="pbox"><div class="pl">悲观情景 · 25%</div><div class="pv pc">$165</div><div class="pn">AI 叙事退潮 / 一次性利润消退 + 积分加速萎缩 / Robotaxi 或 Optimus 明显跳票，估值向基本面公允价回归<br>距现价 -60%</div></div>
+    <div class="pbox"><div class="pl">基准情景 · 50%</div><div class="pv pf">$260</div><div class="pn">交付与利润率继续温和改善（FY2026 Non-GAAP EPS ~$2.0），但估值从 ~200x 压缩至 ~130x forward<br>距现价 -37%</div></div>
+    <div class="pbox"><div class="pl">乐观情景 · 25%</div><div class="pv ps">$460</div><div class="pn">Robotaxi 年底如期 12 州 + Optimus 顺利投产 + 储能回升，市场维持叙事定价（~200x FY2027E EPS ~$2.3）<br>距现价 +12%</div></div>
+  </div>
+  <p style="font-size:13px; color:var(--text2);"><strong>概率加权 12 个月目标价</strong>：25%×$165 + 50%×$260 + 25%×$460 = <strong>$286 ≈ $285（距现价约 -30%）</strong>。目标价（$285）高于基本面公允价（$160）——差额是对"叙事溢价不会在 12 个月内完全出清"的现实承认，但方向明确向下。<span class="warn-t">现价 $409 已贴近乐观情景（$460）的下沿——这意味着此刻买入者押的不是"乐观情景发生"，而是"比乐观更乐观"</span>。</p>
+</div>
+
+<!-- ═══ 模块 8 ═══ -->
+<div class="section">
+  <div class="stitle">模块 8 · 竞争与行业分析</div>
+  <div class="cmt">
+    <p><strong>格局</strong>：全球 EV 双极——特斯拉（高端 + 软件 + 北美/欧洲主场）与比亚迪（全价格带 + 垂直整合 + 中国/新兴市场主场），后面是传统车企电动化转身（GM/福特/大众）与中国新势力群。储能业务的对手是宁德时代系与 Fluence 等系统集成商。Robotaxi 赛道的真正对手是 Waymo（已多城商业化）与百度萝卜快跑（中国）。</p>
+    <p><strong>同业估值与增长对照（2026-07 前后）</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>公司</th><th>P/E（forward）</th><th>最新增长</th><th>核心评价</th></tr>
+        <tr class="hl"><td><strong>特斯拉 TSLA</strong></td><td><strong>~181-201x</strong></td><td>Q1 营收 +15.8% · Q2 交付 +25%</td><td>唯一被当作 AI 公司定价的车企</td></tr>
+        <tr><td>比亚迪 BYDDY/1211.HK</td><td>~16-21x（TTM ~19-26x）</td><td>Q1 营收 -11.8% · 净利 -55%（连续 4 季利润下滑）</td><td>直接对手 · 价格战 + 出海对冲 · 盈利下行期</td></tr>
+        <tr><td>通用汽车 GM</td><td>~5.9x（TTM ~28-32x 受一次性扭曲）</td><td>FY2026 调整后 EPS 指引 $9.75-10.50 · 营收低个位数增长</td><td>传统车企估值锚</td></tr>
+        <tr><td>福特 F</td><td>~9.3x（TTM 为负）</td><td>FY2026 调整后 EBIT 指引 $8-10B · Q1 调整后 EPS $0.66 vs 上年 $0.14</td><td>低估值 + 高股息对照组</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:12px;"><strong>值得注意的镜像</strong>：比亚迪 Q1 营收 -11.8%、净利 -55%，而特斯拉 +15.8%、毛利率五季连升——<span class="hl-t">价格战的代价本轮更多由比亚迪承担，特斯拉以利润率修复胜出一程</span>。但同时要看清结构：比亚迪以 ~20x 的价格提供"盈利下行的全球销量第一"，特斯拉以 ~200x 提供"盈利上行的第二名"——基本面此消彼长，估值风险却完全不对称。</p>
+    <p><strong>波特五力</strong>：新进入者威胁——中（造车门槛高，但中国供应链让门槛持续下降）；替代品——中（自动驾驶时代"拥有车"可能被"叫车"替代——这既是特斯拉的威胁也是它的赌注）；供应商议价——低（垂直整合 + 自研）；买家议价——高（EV 供给过剩、比价透明）；同业竞争——极高（全球价格战）。</p>
+    <p><strong>颠覆风险的双面性</strong>：特斯拉既可能是被颠覆者（比亚迪成本 + Waymo 技术两面夹击），也可能是颠覆者本身（Robotaxi 若跑通，整个出行与物流行业被重构）。$1.54T 的市值已经预付了后一种结局的大部分对价。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 9 ═══ -->
+<div class="section">
+  <div class="stitle">模块 9 · 技术面与 K 线分析（次要参考）</div>
+  <div class="cmt">
+    <p><strong>位置</strong>：现价 $409.48（2026-07-10 收盘）处于 52 周区间 $297.82 – $498.83 的上半部（约 55% 分位）：距 52 周高 -17.9%、距 52 周低 +37.5%。7-02 Q2 交付大超公告后股价一度波动，筹码正押向 7-22 财报。</p>
+    <p><strong>关键价位（以基本面锚校准）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>阻力</strong>：$460（乐观情景目标）/ $499（52 周高，上一轮 AI 叙事高潮的记忆位）</li>
+      <li><strong>支撑</strong>：$400（整数心理关口）/ $298（52 周低）/ $285（概率加权目标）——再往下 $160 才是基本面公允价，中间没有估值意义上的"硬支撑"，只有情绪支撑</li>
+    </ul>
+    <p><strong>事件驱动特征</strong>：特斯拉的 K 线本质是一张叙事事件表——季初交付公告、财报（7-22）、Robotaxi 扩城新闻、Optimus 投产画面，每一个都能造成两位数波动。<span class="warn-t">在 ~200x forward 的估值上，技术分析给不了安全边际，只能给出入场/离场时点的参考</span>。技术面明确次要于基本面——本报告的卖出结论不依赖任何均线。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 10 ═══ -->
+<div class="section">
+  <div class="stitle">模块 10 · 增长催化剂与前景展望</div>
+  <div class="cmt">
+    <p><strong>短期催化剂（未来 6 个月）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>2026-07-22 Q2 财报</strong>——交付 480,126（+25%）已知，焦点是利润率成色（一次性收益是否消退、19.2% 剔积分毛利率能否守住）与 FCF</li>
+      <li><strong>Optimus 投产（7 月底/8 月）</strong>——弗里蒙特产线投产的画面本身就是叙事燃料；反之跳票即利空</li>
+      <li><strong>Robotaxi 扩州进度</strong>——年底 12 个州目标；付费里程已环比近翻倍（累计约 160 万英里量级）</li>
+      <li><strong>FSD 中国审批</strong>——荷兰已破冰（欧盟首例），中国若获批打开最大单一市场</li>
+      <li><strong>Megapack 3 / Cybercab / Semi 量产节点</strong>——储能 Q2 部署 13.5GWh 已回升</li>
+    </ul>
+    <p><strong>长期展望（3-5 年）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>Robotaxi 2027 年"显著贡献收入"</strong>——若单位经济跑通（车队利用率 × 每英里毛利），是从卖硬件到收车队租金的商业模式质变</li>
+      <li><strong>Optimus TAM</strong>——管理层称"史上最大产品"；人形机器人若在制造/物流落地，TAM 以万亿计——但今天连产量都"不可能预测"</li>
+      <li><strong>储能复利</strong>——FY2025 +27%，电网级需求（AI 数据中心供电）是确定性最高的一条增长线</li>
+      <li><strong>FSD 订阅</strong>——128 万订阅 × 提价空间 + AI5 芯片降本，软件毛利占比逐年上升</li>
+    </ul>
+    <p><strong>逆风清单</strong>：监管积分收入退坡（-36% 且趋势不可逆）；美国 EV 补贴取消后的需求真空（Q3-25 抢购已透支一部分）；关税反复；比亚迪价格战外溢；<span class="warn-t">以及最大的逆风——以上催化剂即使全部兑现，也更多是"追认"当前估值，而非抬升它</span>。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 11 ═══ -->
+<div class="section">
+  <div class="stitle">模块 11 · 风险矩阵</div>
+  <div class="risk-grid">
+    <div class="risk-card r5"><h5>1. 估值风险</h5><span class="risk-score">5 / 5 极高</span><p>TTM GAAP ~376x / Forward ~181-201x · 现价高于独立公允价 ~156% · 任何叙事降温都没有估值缓冲——这是全部风险中的主风险</p></div>
+    <div class="risk-card r4"><h5>2. 关键人与治理风险</h5><span class="risk-score">4 / 5 高</span><p>马斯克单点依赖（健康/精力/政治争议反噬品牌）· CEO 奖励 ~3.04 亿股稀释 · SpaceX $20 亿关联投资 + AI 硬件关联收购 · 董事会独立性长期存疑</p></div>
+    <div class="risk-card r4"><h5>3. 执行风险（Robotaxi/Optimus）</h5><span class="risk-score">4 / 5 高</span><p>无监督 FSD 承诺史上多次延期 · Optimus 产量"不可能预测"、1 万个独特零件的爬坡 · 单一安全事故可冻结多州运营许可</p></div>
+    <div class="risk-card r4"><h5>4. 竞争风险</h5><span class="risk-score">4 / 5 高</span><p>比亚迪全球价格战 + Waymo 已在多城商业化运营 Robotaxi + 中国新势力 · 汽车硬件端定价权持续被侵蚀</p></div>
+    <div class="risk-card r3"><h5>5. 监管/政策风险</h5><span class="risk-score">3 / 5 中</span><p>监管积分收入 -36% 走向消亡 · EV 补贴退坡后的需求真空 · 关税双向波动 · FSD 各国审批节奏不可控（也可能转为利好）</p></div>
+    <div class="risk-card r1"><h5>6. 财务风险</h5><span class="risk-score">1 / 5 低</span><p>净现金 $355 亿 + 追索债务仅 $200 万 + $50 亿未动用授信 · TTM FCF $70 亿 · 资产负债表是全公司最硬的一环——偿付风险趋近于零</p></div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>3 个黑天鹅情景</strong>：</p>
+    <ol style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>Robotaxi 重大安全事故 → 多州监管冻结</strong>——概率 ~10%/年 · 叙事核心直接受创，估值压缩可达 -50% 以上</li>
+      <li><strong>关键人风险兑现</strong>（马斯克健康/离任/政治事件深度反噬品牌与需求）——概率 ~5-10% · 特斯拉溢价的很大一部分本质是"马斯克期权"，反向亦然</li>
+      <li><strong>AI 板块整体估值退潮 / 流动性收紧</strong>——概率 ~15% · 特斯拉是全市场对 AI 叙事 beta 最高的巨盘股之一，若板块系统性杀估值，376x 首当其冲，向传统倍数回归意味着 -70% 量级</li>
+    </ol>
+    <p style="margin-top:10px;"><strong>下行支撑</strong>：$355 亿净现金 + 储能/服务的真实盈利 + 品牌与制造资产构成"企业价值底"，但这个底（粗算每股 $100-160）<span class="warn-t">远低于现价——特斯拉的股价底不是基本面底，是情绪底</span>。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 12 ═══ -->
+<div class="section">
+  <div class="stitle">模块 12 · 股东回报分析</div>
+  <div class="cmt">
+    <p><strong>这一模块对特斯拉可以写得很短，但必须写得很清楚：股东回报为零，且方向为负（稀释）。</strong></p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 18px 0 10px; font-family: 'Segoe UI',sans-serif;">12.1 公司给了股东多少？</h3>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>年度</th><th>现金股息</th><th>每股股息</th><th>派息率（净利 / FCF）</th><th>回购金额</th><th>回购股数</th><th>股东总回报</th></tr>
+        <tr><td>FY2023</td><td>$0</td><td>$0</td><td>0% / 0%</td><td>$0</td><td>0</td><td>$0</td></tr>
+        <tr><td>FY2024</td><td>$0</td><td>$0</td><td>0% / 0%</td><td>$0</td><td>0</td><td>$0</td></tr>
+        <tr><td>FY2025</td><td>$0</td><td>$0</td><td>0% / 0%</td><td>$0</td><td>0</td><td>$0</td></tr>
+        <tr class="hl"><td>Q1 2026</td><td>$0</td><td>$0</td><td>0% / 0%</td><td>$0</td><td>0</td><td><strong>$0</strong></td></tr>
+      </table>
+    </div>
+    <p style="font-size:13px; color: var(--text2); margin-top:8px"><strong>Trailing Shareholder Yield = 0.0%</strong>。上市以来从未派息，10-K 明示可预见未来不派息；FY2023-FY2025 及 Q1-2026 现金流量表均无回购一行。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.2 给的方式好不好？</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>无回购可评质量</strong>——注销 vs 库存股的讨论没有对象。真正要看的是反方向：<span class="warn-t">稀释</span></li>
+      <li><strong>摊薄股数 3 年趋势（硬指标）</strong>：FY2023 3,485M → FY2024 3,498M → FY2025 3,528M → Q1-2026 3,538M，三年 +1.5%——SBC 年年净稀释，无任何回购对冲</li>
+      <li><span class="warn-t"><strong>更大的稀释在路上</strong></span>：2018 CEO 期权奖励恢复（约 3.04 亿股，占当前流通股 ~8.6%，2026-03-18 终审令生效 + 2026-04 实施协议）；另有至多 $20 亿股票用于 AI 硬件公司收购（其中约 $1.8B 与服务条件/技术里程碑挂钩）。美股同类公司常见"回购对冲 SBC"，特斯拉连这一层都没有</li>
+    </ul>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.3 能不能继续给、给多少？</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>已授权未执行额度：$0</strong>——无任何回购授权存续</li>
+      <li><strong>未来指引：明确不给</strong>——10-K 白纸黑字"可预见未来不派息"；资本返还优先级排在 AI Capex（&gt;$25B）、六大工厂、算力集群之后，实质上不在议程上</li>
+      <li><strong>能力 vs 意愿</strong>：TTM FCF $7.0B + 净现金 $355 亿，公司<em>有能力</em>做适度回购；但战略选择是全押 AI——投资者必须接受：<span class="hl-t">这是一只所有回报都指望股价本身的股票</span>，而股价又建立在 ~200x forward 的叙事定价上</li>
+      <li><strong>(股息 + 回购) / FCF 覆盖度：0%</strong>——无借债回购问题，也无周期择时可评</li>
+    </ul>
+    <p><strong>模块小结</strong>：<span class="warn-t">几乎无股东回报，且方向为负</span>——零股息、零回购、零授权，SBC 与 CEO 奖励恢复带来持续且将加速的稀释，全部现金流优先供给 AI 资本开支；持有特斯拉的全部回报依赖市场对叙事的定价，而非企业向股东的现金返还。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 13 ═══ -->
+<div class="section">
+  <div class="stitle">模块 13 · 海图评分卡 + 投资决策</div>
+
+  <div class="scorecard">
+    <h3 style="font-size:15px; color:var(--text); margin-bottom: 16px; font-family: 'Segoe UI',sans-serif;">海图评分卡（6 维 A-D）</h3>
+    <div class="score-grid">
+      <div class="score-card"><div class="score-letter s-c">C+</div><div class="score-body"><h4>1. 生意可预测性</h4><p>FY2024-25 营收连续两年下滑后才回增；交付与政策（补贴/积分/关税）强耦合；Robotaxi/Optimus 时间表管理层自己都"不可能预测"。</p></div></div>
+      <div class="score-card"><div class="score-letter s-b">B</div><div class="score-body"><h4>2. 经济护城河</h4><p>制造成本优势宽 + 品牌/FSD 数据中等 + 转换成本窄；汽车端护城河受价格战侵蚀，AI 端护城河是未验证的期权。</p></div></div>
+      <div class="score-card"><div class="score-letter s-c">C+</div><div class="score-body"><h4>3. 管理层质量</h4><p>愿景与工程执行 A 级；但关键人集中 + 时间表长期乐观 + CEO 薪酬案 + SpaceX 关联投资 + 董事会独立性存疑，治理 C 级。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">A-</div><div class="score-body"><h4>4. 财务质量</h4><p>净现金 $355 亿、追索债务 $2M、TTM FCF $7.0B、OCF/净利 4.3x——瑕疵：利润含一次性收益、库存天数 15→27、ROE 仅 4.6%。</p></div></div>
+      <div class="score-card"><div class="score-letter s-c">C</div><div class="score-body"><h4>5. 资本配置纪律</h4><p>零股息零回购零授权 + SBC 持续稀释 + $20 亿关联投资 SpaceX；&gt;$25B AI Capex 的 ROIC 无从验证——全押、且不与股东分账。</p></div></div>
+      <div class="score-card"><div class="score-letter s-c">D</div><div class="score-body"><h4>6. 估值与安全边际</h4><p>现价 $409 vs 独立公允价 ~$160，高出 ~156%；TTM GAAP ~376x；即便乐观情景（$460）也仅 +12% 上行——风险回报深度不对称。</p></div></div>
+    </div>
+
+    <div class="flag-row">
+      <strong>红旗排查</strong>：① <strong>极端估值</strong>（TTM GAAP ~376x，所有口径三位数）；② <strong>治理红旗</strong>（$20 亿 SpaceX 关联投资 + 至多 $20 亿关联色彩 AI 硬件收购 + CEO 奖励案 ~3.04 亿股稀释 + 董事会独立性争议）；③ <strong>利润质量提示</strong>（公司自披利润率改善含保修/关税一次性收益）。三项红旗齐发，按纪律综合评级强制降档；叠加概率加权目标价（$285）显著低于现价（$409），<strong>评级落于「卖出」</strong>。
+    </div>
+
+    <p style="margin-top:18px; font-size:14px; color:var(--text); line-height:1.85;"><strong>综合评级</strong>：<span class="rating-badge rating-sell" style="font-size:14px;">卖出</span>。这不是对生意的否定——交付回升、利润率修复、净现金 $355 亿、储能与 FSD 订阅都是真实的改善；这是对价格的否定：<strong>基本面公允价 ~$160（已含 $500B 的 AI 期权价值），概率加权 12 个月目标 $285，现价 $409 意味着买入者押注的不是乐观情景、而是比乐观更乐观的情景。</strong>价值投资在这里的职责不是预测 Robotaxi 会不会成功，而是拒绝为"必须成功"付全款。</p>
+  </div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">投资决策（精确价格 · USD）</h3>
+
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>项目</th><th>价格</th><th>说明</th></tr>
+      <tr><td>12 个月目标价（概率加权）</td><td><strong>$285</strong> (-30%)</td><td>悲观 $165×25% + 基准 $260×50% + 乐观 $460×25%</td></tr>
+      <tr><td>悲观目标（25% 概率）</td><td>$165 (-60%)</td><td>叙事退潮 + 一次性利润消退 + 估值向公允价回归</td></tr>
+      <tr><td>乐观目标（25% 概率）</td><td>$460 (+12%)</td><td>Robotaxi 12 州 + Optimus 顺利投产 + 叙事定价维持</td></tr>
+      <tr class="hl"><td>首仓建仓（公允价 $160 × 80%）</td><td><strong>$128</strong></td><td>距现价 -69% · 价值投资框架下的合理入场价（历史上特斯拉出现过类似级别回撤）</td></tr>
+      <tr><td>二仓建仓（× 70%）</td><td>$112</td><td>-73% · 深度回调 + AI 期权基本免费</td></tr>
+      <tr><td>三仓建仓（× 60%）</td><td>$96</td><td>-77% · 黑天鹅级机会</td></tr>
+      <tr><td>持仓者减仓一档</td><td>$410（现价区间）</td><td>减仓 30% · 现价已贴近乐观情景下沿</td></tr>
+      <tr><td>持仓者减仓二档</td><td>$460</td><td>再减 30% · 乐观情景目标兑现</td></tr>
+      <tr><td>持仓者减仓三档</td><td>$500（52 周高附近）</td><td>再减 30% · 仅留 10% 追踪 Robotaxi 兑现（跌破 $340 全退）</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.85;"><strong>建议仓位</strong>：<strong>0-2%</strong>（价值投资框架下为 0；至多 2% 给清楚自己在为叙事付费、且能承受 -60% 波动的投机仓）。<strong>持有周期</strong>：对新资金——等待估值回归，无固定周期；对存量持仓——按上表纪律分批离场。<strong>关键监控指标</strong>：① 7-22 财报毛利率成色（剔积分是否守住 ~19%、一次性收益是否消退）；② Robotaxi 州数与付费里程曲线；③ Optimus 投产与初期产量；④ FSD 订阅数与中国审批；⑤ 库存天数（27 天是否回落）；⑥ FY2026 FCF 是否转负；⑦ CEO 股权稀释落地节奏。<strong>下次财报</strong>：2026-07-22（Q2 2026，盘后）。</p>
+</div>
+
+<!-- ═══ 海图页末长评 ═══ -->
+<div class="section">
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记 · 约 1150 字</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p class="lead">研究里最难落笔的一类公司，是生意确实在变好、而价格早已把十年后的故事预支干净的公司。特斯拉正是如此：Q1 营收重回 +15.8%，汽车毛利率（剔积分）从一年前的 12.5% 爬回 19.2%，7 月初公布的 Q2 交付 480,126 辆、同比 +25%，大超市场预期——业绩几乎无可指摘。但 $409 的股价对应约 376 倍 TTM GAAP 市盈率、约 200 倍 Forward 市盈率：市场不是在为一家车企定价，而是在为 Robotaxi 与 Optimus 双双大成的未来预付全款。</p>
+
+      <p>一句话画像：特斯拉今天靠约 19-21% 毛利率的电动车与储能赚钱，账上握着 $355 亿净现金（追索债务仅 $200 万），同时把全年超过 $250 亿的资本开支几乎全部押向 FSD、Robotaxi 与 Optimus——<strong>财报是车企，估值是 AI 公司</strong>。</p>
+
+      <h4>几个研判要点</h4>
+
+      <p><strong>一、利润率修复亮眼，但含一次性成分。</strong>Q1 毛利率 21.1%（同比 +478bp）、营业利润 +136%，但公司自己披露其中含汽车保修与关税相关一次性收益、储能关税一次性收益；监管积分收入 -36%，这块近 100% 毛利的"政策馈赠"正走向消亡。GAAP EPS $0.13 与 Non-GAAP $0.41 差出三倍，SBC（含 CEO 奖励）与数字资产损失是中间的楔子。</p>
+
+      <p><strong>二、交付重回增长是真实的，要给足承认。</strong>Q1 +6%、Q2 +25% 大超共识，储能部署回升至 13.5GWh，FSD 付费订阅 128 万（+51%）单季净增创纪录——基本盘确实在修复，这一点不含糊。</p>
+
+      <p><strong>三、资产负债表是全公司最硬的一环，但现金不是给股东的。</strong>净现金 $355 亿、TTM 自由现金流 $70 亿、另有 $50 亿未动用授信。但 2026 年 Capex 指引两度上调至 $250 亿以上，Q1 库存天数从 15 天跳到 27 天——现金堡垒的用途是给 AI 豪赌供弹药。</p>
+
+      <p><strong>四、治理红旗成串。</strong>2018 年 CEO 期权奖励经法院翻案恢复（约 3.04 亿股、潜在稀释约 8.6%），Q1 又以 $20 亿关联投资 SpaceX（马斯克兼任两家 CEO），4 月再协议以至多 $20 亿股票收购一家 AI 硬件公司；上市 16 年零分红零回购、SBC 年年稀释。股东回报机制不是零，是负。</p>
+
+      <p><strong>五、估值无从安放。</strong>独立八法加权公允价约 $160——注意这不刻薄，其中已给了 Robotaxi/Optimus 五千亿美元量级的期权价值。反向 DCF 显示 $409 要求 2032 年前后净利做到当前（Non-GAAP TTM $64 亿）的 8-9 倍且届时仍享 30 倍以上估值——等于按双重奇迹接近满概率定价。TTM 每交付一辆车对应约 $93 万市值，是传统车企的数十倍。</p>
+
+      <h4>海图研判</h4>
+
+      <p><strong>评级：卖出</strong>。12 个月概率加权目标价 <strong>$285</strong>（悲观 $165×25% / 基准 $260×50% / 乐观 $460×25%），较现价约 -30%——现价甚至已贴近乐观情景的下沿。价值投资框架下不建仓：首仓 $128（公允价 $160×80%）、二仓 $112、三仓 $96。现有持仓者建议分批离场：$410 / $460 / $500 各减 30%，保留一成仓位追踪 Robotaxi 兑现（跌破 $340 全退）。建议仓位 <strong>0-2%</strong>（仅限清楚自己在为叙事付费的投机仓）。下次财报 2026-07-22。</p>
+
+      <h4>风险提示</h4>
+
+      <p>卖出判断最大的风险是叙事继续自我实现：若 Robotaxi 年内如期覆盖 12 个州、Optimus 顺利投产上量、储能与 FSD 订阅加速，估值可以在很长时间里不向基本面回归——清仓者可能先被时间消耗。反过来，若 7-22 财报证实利润率回落、积分收入继续萎缩，或 AI 板块整体退潮，376 倍的市盈率没有任何缓冲。</p>
+
+      <p>关键叙事：<strong>「利润率修复 + $355 亿净现金 + Robotaxi/Optimus 期权」的真实生意改善，对垒「约 376 倍 GAAP 市盈率 + 治理红旗 + 零股东回报」的透支定价</strong>。特斯拉可能真的赢下 real-world AI 之战——但在 $409 这个价格上，赢了未必赚钱，输了则没有底。价值投资在这里的职责，不是预测奇迹会不会发生，而是拒绝为"奇迹必须发生"付全款。</p>
+
+      <p class="haitu-sign">—— 海图，灯下落笔，明日再观风浪。</p>
+
+      <p class="haitu-disc">⚠️ 免责声明：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，不构成任何投资建议。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div>《海图夜读》 · 特斯拉 TSLA Q1 2026 海图研判</div>
+  <div style="margin-top:6px;">财报发布日 2026-04-22 · 研判日 2026-07-11 · 数据来源 Tesla Q1 2026 股东信（SEC 8-K Ex-99.1）+ 10-Q（截至 2026-03-31）+ FY2025 10-K + 2026-07-02 官方交付公告 + 电话会 transcript</div>
+</footer>
+
+<script>
+let curTheme = 'light';
+function toggleTheme() {
+  curTheme = curTheme === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', curTheme);
+  renderCharts();
+}
+
+const palette = {
+  light: { accent: '#8a9a8e', accent2: '#7b8fa0', accent3: '#b08d7a', gold: '#b9a06a', red: '#b87070', green: '#7a9a7a', grid: '#e5ddd5', text: '#7a706a' },
+  dark:  { accent: '#8a9a8e', accent2: '#8fabbf', accent3: '#c9a48e', gold: '#c9b07a', red: '#c08080', green: '#8aaa8a', grid: '#3e3a35', text: '#a09890' }
+};
+
+let charts = {};
+function renderCharts() {
+  Object.values(charts).forEach(c => c && c.destroy && c.destroy());
+  charts = {};
+  const p = palette[curTheme];
+  Chart.defaults.color = p.text;
+  Chart.defaults.borderColor = p.grid;
+
+  const quarters = ['Q1-25','Q2-25','Q3-25','Q4-25','Q1-26'];
+  charts.rev = new Chart(document.getElementById('chartRev'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { type: 'bar', label: '营收 ($B)', data: [19.34, 22.50, 28.10, 24.90, 22.39], backgroundColor: p.accent + 'CC', yAxisID: 'y' },
+      { type: 'line', label: 'YoY %', data: [-9.2, -11.8, 11.6, -3.1, 15.8], borderColor: p.red, backgroundColor: p.red, tension: 0.3, yAxisID: 'y1' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true }, y1: { position: 'right', grid: { drawOnChartArea: false }, ticks: { callback: v => v + '%' } } } }
+  });
+
+  charts.margin = new Chart(document.getElementById('chartMargin'), {
+    type: 'line',
+    data: { labels: quarters, datasets: [
+      { label: '毛利率 %', data: [16.3, 17.2, 18.0, 20.1, 21.1], borderColor: p.green, backgroundColor: p.green + '33', tension: 0.3 },
+      { label: '汽车毛利率（剔积分）%', data: [12.5, 15.0, 15.4, 17.9, 19.2], borderColor: p.accent3, backgroundColor: p.accent3 + '33', tension: 0.3 },
+      { label: '营业利润率 %', data: [2.1, 4.1, 5.8, 5.7, 4.2], borderColor: p.accent2, backgroundColor: p.accent2 + '33', tension: 0.3 }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { ticks: { callback: v => v + '%' } } } }
+  });
+
+  charts.segment = new Chart(document.getElementById('chartSegment'), {
+    type: 'doughnut',
+    data: {
+      labels: ['汽车销售 $15.47B', '监管积分 $0.38B', '汽车租赁 $0.38B', '储能 $2.41B', '服务及其他 $3.75B'],
+      datasets: [{ data: [15.47, 0.38, 0.38, 2.41, 3.75], backgroundColor: [p.accent, p.gold, p.accent3, p.green, p.accent2] }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { font: { size: 11 } } } } }
+  });
+
+  charts.eps = new Chart(document.getElementById('chartEPS'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { label: 'GAAP 摊薄 EPS', data: [0.12, 0.33, 0.39, 0.24, 0.13], backgroundColor: p.red + 'CC' },
+      { label: 'Non-GAAP 摊薄 EPS', data: [0.27, 0.40, 0.50, 0.50, 0.41], backgroundColor: p.green + 'CC' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, ticks: { callback: v => '$' + v.toFixed(2) } } } }
+  });
+
+  buildSankey();
+}
+
+function buildSankey() {
+  const p = palette[curTheme];
+  const labels = ['营收 $22.39B','营业成本 $17.67B','毛利 $4.72B','经营费用 $3.78B','营业利润 $0.94B','利息收入 $0.43B','利息及其他净支出 $0.63B','税前利润 $0.75B','所得税及少数股东 $0.27B','GAAP 净利 $0.48B'];
+  const data = {
+    type: 'sankey',
+    orientation: 'h',
+    node: { pad: 16, thickness: 20, line: { color: p.grid, width: 0.5 }, label: labels, color: [p.accent, p.red, p.green, p.red, p.green, p.accent2, p.red, p.green, p.red, p.green] },
+    link: {
+      source: [0, 0, 2, 2, 4, 4, 5, 7, 7],
+      target: [1, 2, 3, 4, 6, 7, 7, 8, 9],
+      value:  [17.67, 4.72, 3.78, 0.94, 0.62, 0.32, 0.43, 0.27, 0.48],
+      color: [p.red+'55', p.green+'66', p.red+'55', p.green+'66', p.red+'55', p.green+'66', p.accent2+'55', p.red+'55', p.green+'66']
+    }
+  };
+  const layout = { font: { size: 12, color: p.text }, paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)', margin: { l: 10, r: 10, t: 10, b: 10 } };
+  Plotly.react('sankey', [data], layout, { displayModeBar: false, responsive: true });
+}
+
+renderCharts();
+</script>
+
+</body>
+</html>
