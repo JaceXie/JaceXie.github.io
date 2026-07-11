@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-07-10 · The Home Depot Q1 FY2026 财报已于 2026-05-19 发布 -->
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>家得宝 HD Q1 FY2026 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+<meta name="description" content="全美最大的家居改善零售收费站 · 2361 家门店 + Pro 专业客户生态 + 25.4% ROIC。Q1 净销售 $417.7 亿（+4.8%，主要靠 SRS/GMS 并购并表）· 可比销售仅 +0.6% · GAAP EPS $3.30（-4.2%）· 营业利润率降至 11.9%。高利率压制房屋成交与大额装修、回购已暂停、EPS 同比下滑、Forward P/E 约 23x 偏高——世界级龙头，但周期逆风叠加无安全边际。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="家得宝 HD Q1 FY2026 海图研判 · 海图夜读">
+<meta property="og:description" content="全美最大的家居改善零售收费站 · 2361 家门店 + Pro 专业客户生态 + 25.4% ROIC。Q1 净销售 $417.7 亿（+4.8%，主要靠 SRS/GMS 并购并表）· 可比销售仅 +0.6% · GAAP EPS $3.30（-4.2%）· 营业利润率降至 11.9%。高利率压制房屋成交与大额装修、回购已暂停、EPS 同比下滑、Forward P/E 约 23x 偏高——世界级龙头，但周期逆风叠加无安全边际。">
+<meta property="og:url" content="https://jacexie.github.io/haitu/reports/hd-q1-fy2026.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="家得宝 HD Q1 FY2026 海图研判 · 海图夜读">
+<meta name="twitter:description" content="全美最大的家居改善零售收费站 · 2361 家门店 + Pro 生态 + 25.4% ROIC。Q1 净销售 $417.7 亿（+4.8%）· 可比销售仅 +0.6% · GAAP EPS $3.30（-4.2%）· 营业利润率降至 11.9%。高利率压制需求、回购暂停、Forward P/E 约 23x 偏高——世界级龙头，但周期逆风叠加无安全边际。">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root { --bg:#f5f0eb; --bg2:#ece6df; --card:#ffffff; --card2:#f8f5f1; --border:#d9d0c7; --text:#4a4340; --text2:#7a706a; --text3:#a89f98; --accent:#8a9a8e; --accent2:#7b8fa0; --accent3:#b08d7a; --rose:#c09090; --gold:#b9a06a; --red:#b87070; --green:#7a9a7a; --shadow:rgba(0,0,0,0.06); --chart-grid:#e5ddd5; }
+[data-theme="dark"] { --bg:#1e1c1a; --bg2:#28251f; --card:#2e2a25; --card2:#363230; --border:#4a4540; --text:#d4ccc4; --text2:#a09890; --text3:#706860; --accent:#8a9a8e; --accent2:#8fabbf; --accent3:#c9a48e; --rose:#c09090; --gold:#c9b07a; --red:#c08080; --green:#8aaa8a; --shadow:rgba(0,0,0,0.3); --chart-grid:#3e3a35; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', serif; line-height: 1.75; font-size: 14.5px; transition: background .35s, color .35s; }
+a { color: var(--accent2); text-decoration: none; }
+.theme-bar { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); }
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+.toggle-switch { position: relative; width: 44px; height: 22px; background: var(--border); border-radius: 11px; cursor: pointer; transition: background .3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: var(--card); border-radius: 50%; transition: transform .3s; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+
+.hero { padding: 48px 24px 36px; text-align: center; border-bottom: 1px solid var(--border); }
+.hero-tag { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 3px 14px; border-radius: 20px; margin-bottom: 18px; }
+.hero h1 { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.pill { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: 'Segoe UI', sans-serif; font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow); }
+.pill strong { color: var(--text); }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle { font-size: 18px; font-weight: 700; color: var(--accent3); margin-bottom: 20px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+.stitle::before { content: ''; display: block; width: 4px; height: 20px; background: var(--accent3); border-radius: 2px; }
+
+.haitu-quip { display: flex; align-items: center; gap: 18px; background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 18px 24px; margin: 24px 0; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-quote { flex: 1; }
+.haitu-portrait { font-size: 15px; line-height: 1.65; color: var(--text); margin-bottom: 6px; font-weight: 600; }
+.haitu-rating-line { font-size: 13px; color: var(--text2); font-family: 'Segoe UI', sans-serif; }
+.rating-badge { display: inline-block; padding: 2px 12px; border-radius: 12px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; margin-left: 4px; }
+.rating-hold { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+
+.haitu-essay { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 28px 32px; margin: 24px 0 20px; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-essay-header { display: flex; align-items: center; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.haitu-avatar-sm { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); background: var(--red); box-shadow: 0 2px 8px rgba(184,112,112,0.2); }
+.haitu-name-lg { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 28px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 4px; }
+.haitu-essay-tag { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; }
+.haitu-essay-body { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 15px; line-height: 2.0; color: var(--text); }
+.haitu-essay-body p { margin-bottom: 14px; }
+.haitu-essay-body p.lead { font-size: 16px; font-style: italic; color: var(--text2); margin-bottom: 18px; }
+.haitu-essay-body strong { color: var(--text); font-weight: 700; }
+.haitu-essay-body h4 { font-size: 14px; color: var(--accent3); margin: 18px 0 10px; font-family: 'Segoe UI', sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+.haitu-sign { text-align: right; margin-top: 18px; font-family: 'Georgia', serif; font-size: 14px; color: var(--text2); font-style: italic; }
+.haitu-disc { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); font-style: italic; line-height: 1.7; }
+
+.stock-snap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px; }
+.snap-item { text-align: center; }
+.snap-label { font-family: 'Segoe UI', sans-serif; font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.snap-val { font-family: 'Segoe UI', sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+.snap-val.up { color: var(--green); }
+.snap-val.dn { color: var(--red); }
+.snap-sub { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow); }
+.kpi-l { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.badge { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+.up { background: rgba(122,154,122,.15); color: var(--green); }
+.dn { background: rgba(184,112,112,.15); color: var(--red); }
+.nt { background: rgba(123,143,160,.15); color: var(--accent2); }
+
+.tbl-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow); }
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI', sans-serif; font-size: 13px; }
+.tbl th { background: var(--card2); color: var(--text3); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); background: var(--card2); }
+
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); }
+.ctitle { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 260px; }
+
+.cmt { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 26px; line-height: 1.95; font-size: 14px; box-shadow: 0 1px 4px var(--shadow); color: var(--text); }
+.cmt p { margin-bottom: 14px; }
+.cmt p:last-child { margin-bottom: 0; }
+.cmt strong { color: var(--text); }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+
+.bscore { display: flex; align-items: center; gap: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; margin-bottom: 12px; box-shadow: 0 1px 4px var(--shadow); }
+.circle { width: 62px; height: 62px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; flex-shrink: 0; border: 3px solid; font-family: 'Segoe UI', sans-serif; }
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 4px; color: var(--text); }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.moat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+.moat-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); border-left: 4px solid var(--accent); }
+.moat-card.wide { border-left-color: var(--green); }
+.moat-card.narrow { border-left-color: var(--gold); }
+.moat-card.none { border-left-color: var(--red); }
+.moat-card h5 { font-size: 13px; color: var(--text); margin-bottom: 6px; }
+.moat-card .moat-rate { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.moat-card.wide .moat-rate { background: rgba(122,154,122,.18); color: var(--green); }
+.moat-card.narrow .moat-rate { background: rgba(185,160,106,.18); color: var(--gold); }
+.moat-card.none .moat-rate { background: rgba(184,112,112,.18); color: var(--red); }
+.moat-card p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+
+.ec-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 14px; box-shadow: 0 1px 3px var(--shadow); }
+.ec-badge { flex-shrink: 0; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-top: 2px; font-family: 'Segoe UI', sans-serif; }
+.ec-bull { background: rgba(122,154,122,.18); color: var(--green); }
+.ec-bear { background: rgba(184,112,112,.18); color: var(--red); }
+.ec-neut { background: rgba(185,160,106,.18); color: var(--gold); }
+.ec-body { flex: 1; }
+.ec-title { font-weight: 600; color: var(--text); margin-bottom: 3px; font-size: 14px; }
+.ec-note { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.dcf-note { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.dcf-note strong { color: var(--text); }
+
+.scorecard { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow); }
+.score-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.score-card { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px; }
+.score-letter { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Segoe UI', sans-serif; font-weight: 800; font-size: 22px; flex-shrink: 0; border: 3px solid; }
+.s-a { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.12); }
+.s-bp { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.06); }
+.s-b { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.10); }
+.s-bm { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.06); }
+.s-c { color: var(--red); border-color: var(--red); background: rgba(184,112,112,.08); }
+.score-body h4 { font-size: 13px; color: var(--text); margin-bottom: 4px; }
+.score-body p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+.flag-row { margin-top: 16px; padding: 12px 16px; background: rgba(184,112,112,.08); border: 1px solid rgba(184,112,112,.3); border-radius: 8px; font-size: 13px; color: var(--text2); }
+.flag-row strong { color: var(--red); }
+
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center; box-shadow: 0 1px 4px var(--shadow); }
+.pbox .pl { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; }
+.pbox .pv { font-family: 'Segoe UI', sans-serif; font-size: 28px; font-weight: 800; margin-bottom: 5px; }
+.pbox .pn { font-size: 12px; color: var(--text3); line-height: 1.5; }
+.pc { color: var(--red); } .pf { color: var(--gold); } .ps { color: var(--green); }
+
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.risk-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); position: relative; overflow: hidden; }
+.risk-card::before { content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent); }
+.risk-card.r1::before { background: var(--green); }
+.risk-card.r2::before { background: rgba(122,154,122,.6); }
+.risk-card.r3::before { background: var(--gold); }
+.risk-card.r4::before { background: var(--rose); }
+.risk-card.r5::before { background: var(--red); }
+.risk-card h5 { font-size: 14px; margin-bottom: 6px; color: var(--text); }
+.risk-score { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.r1 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r2 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r3 .risk-score { background: rgba(185,160,106,.18); color: var(--gold); }
+.r4 .risk-score { background: rgba(192,144,144,.18); color: var(--rose); }
+.r5 .risk-score { background: rgba(184,112,112,.18); color: var(--red); }
+.risk-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+footer { background: var(--card2); border-top: 1px solid var(--border); padding: 24px; text-align: center; color: var(--text3); font-size: 12px; margin-top: 40px; line-height: 1.8; }
+@media (max-width: 768px) { .cgrid,.pgrid { grid-template-columns: 1fr; } .hero h1 { font-size: 22px; } .kpi-grid { grid-template-columns: 1fr 1fr; } .stock-snap { grid-template-columns: 1fr 1fr; } .haitu-essay-header { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/HD" target="_blank" rel="noopener" title="在雪球查看 HD 实时行情">雪球 HD</a>
+  </div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">Q1 FY2026 财报发布 · 2026-05-19 &nbsp;|&nbsp; 海图研判 · 2026-07-11</div>
+  <h1>The Home Depot HD · FY2026 Q1 财报深度分析</h1>
+  <div class="hero-sub">NYSE: HD &nbsp;|&nbsp; 财季截至 2026-05-03 &nbsp;|&nbsp; 价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill">股价 <strong>$343.30</strong> <span style="color:var(--red)">距高点 -19.5%</span></div>
+    <div class="pill">市值 <strong>$342B</strong></div>
+    <div class="pill">Q1 净销售 <strong>$41.77B</strong> <span style="color:var(--green)">+4.8%</span></div>
+    <div class="pill">可比销售 <strong>+0.6%</strong> <span style="color:var(--gold)">内生停滞</span></div>
+    <div class="pill">GAAP EPS <strong>$3.30</strong> <span style="color:var(--red)">-4.2%</span></div>
+    <div class="pill">Forward P/E <strong>~22.9x</strong> <span style="color:var(--gold)">偏高</span></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 海图页首短评 ═══ -->
+<div class="haitu-quip">
+  <div class="haitu-quote">
+    <div class="haitu-portrait">全美最大的家居改善零售收费站——赚的是存量住宅每一次翻新、维修、扩建的钱。2361 家门店 + Pro 专业客户生态 + 25.4% ROIC。但引擎被高利率死死压住：Q1 净销售 +4.8% 几乎全来自 SRS/GMS 并购并表，可比销售仅 +0.6%，GAAP EPS $3.30 同比 -4.2%，营业利润率降至 11.9%。回购已暂停、摊薄股数不降反升、Forward P/E 约 23x——世界级龙头，但周期逆风叠加无安全边际。</div>
+    <div class="haitu-rating-line">评级：<span class="rating-badge rating-hold">持有观望</span> · 12 个月概率加权目标价 $305（-11%）· 顶级龙头 + Pro 生态扩张，对垒高利率锁死房屋成交 + 内生需求停滞 + 并购稀释利润率 + 回购缺位 + 满估值无安全边际</div>
+  </div>
+</div>
+
+<!-- ═══ 市场数据快照 ═══ -->
+<div class="section">
+  <div class="stitle">市场数据快照（2026-07-10 收盘）</div>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">股价（美元）</div><div class="snap-val">$343.30</div><div class="snap-sub">2026-07-10 收盘 · 距 52 周高 -19.5%</div></div>
+    <div class="snap-item"><div class="snap-label">市值</div><div class="snap-val">$342B</div><div class="snap-sub">约 996mm 股</div></div>
+    <div class="snap-item"><div class="snap-label">TTM GAAP P/E</div><div class="snap-val">24.1x</div><div class="snap-sub">TTM EPS ~$14.08</div></div>
+    <div class="snap-item"><div class="snap-label">Forward P/E</div><div class="snap-val nt">~22.9x</div><div class="snap-sub">FY2026 共识 ~$15.00</div></div>
+    <div class="snap-item"><div class="snap-label">P/S (TTM)</div><div class="snap-val">~2.05x</div><div class="snap-sub">TTM 营收 ~$166.6B</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间</div><div class="snap-val">$289 - $427</div><div class="snap-sub">现价处区间中下部</div></div>
+    <div class="snap-item"><div class="snap-label">股息率</div><div class="snap-val">2.71%</div><div class="snap-sub">$9.32/年 · 自 1987 未断</div></div>
+    <div class="snap-item"><div class="snap-label">FCF Yield</div><div class="snap-val nt">~3.7%</div><div class="snap-sub">FY2025 FCF $12.65B</div></div>
+    <div class="snap-item"><div class="snap-label">现金及等价物</div><div class="snap-val">$1.6B</div><div class="snap-sub">2026-05-03 末</div></div>
+    <div class="snap-item"><div class="snap-label">有息负债</div><div class="snap-val dn">$53.5B</div><div class="snap-sub">短债 3.5 + 长债当期 5.2 + 长债 44.8</div></div>
+    <div class="snap-item"><div class="snap-label">真实净负债</div><div class="snap-val dn">-$51.9B</div><div class="snap-sub">⚠️ 净负债非净现金</div></div>
+    <div class="snap-item"><div class="snap-label">营业利润率 (Q1)</div><div class="snap-val">11.9%</div><div class="snap-sub">净利率 7.9% · ROIC 25.4%</div></div>
+  </div>
+  <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">数据时点：股价 2026-07-10 收盘 $343.30（52 周区间 $289.10-$426.75）· 财务数据来源 The Home Depot Q1 FY2026 官方财报新闻稿（SEC 8-K 附件 99.1 + IR PDF + 电话会 transcript，2026-05-19 发布，财季截至 2026-05-03）· 货币 USD 单口径。⚠️ 家得宝财年错位：Q1 FY2026 = 2026-02-02 至 2026-05-03；"财年 2025"截至 2026-02-01。⚠️ 家得宝为<strong>高杠杆净负债</strong>公司（有息负债 $53.5B ≫ 现金 $1.6B），SRS（约 $182 亿）与 GMS 并购推高杠杆，绝非"零负债现金堡垒"。TTM P/E / Forward P/E / 52 周区间 / 共识 EPS 来自第三方财经站（medium 置信度）。</p>
+</div>
+
+<!-- ═══ Q1 FY2026 KPI ═══ -->
+<div class="section">
+  <div class="stitle">Q1 FY2026 核心业绩（USD · 财季截至 2026-05-03）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">净销售额</div><div class="kpi-v">$41.77B</div><span class="badge up">+4.8% YoY</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">主要靠 SRS/GMS 并表</div></div>
+    <div class="kpi"><div class="kpi-l">可比销售</div><div class="kpi-v">+0.6%</div><span class="badge nt">美国 +0.4%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">内生需求接近停滞</div></div>
+    <div class="kpi"><div class="kpi-l">毛利润</div><div class="kpi-v">$13.78B</div><span class="badge up">+2.4%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">毛利率 33.0%（-75bp）</div></div>
+    <div class="kpi"><div class="kpi-l">营业利润</div><div class="kpi-v">$4.98B</div><span class="badge dn">-3%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">营业利润率 11.9%（上年 12.9%）</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 净利润</div><div class="kpi-v">$3.29B</div><span class="badge dn">-4.2%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">净利率 7.9%</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 摊薄 EPS</div><div class="kpi-v">$3.30</div><span class="badge dn">-4.3%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">上年 $3.45</div></div>
+    <div class="kpi"><div class="kpi-l">调整后摊薄 EPS</div><div class="kpi-v">$3.43</div><span class="badge dn">-3.7%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">剔并购无形摊销 · 最可信</div></div>
+    <div class="kpi"><div class="kpi-l">经营现金流</div><div class="kpi-v">$6.03B</div><span class="badge up">+39%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">上年 $4.33B · 营运资金改善</div></div>
+    <div class="kpi"><div class="kpi-l">自由现金流</div><div class="kpi-v">$5.19B</div><span class="badge up">OCF-Capex</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">Capex $844mm</div></div>
+    <div class="kpi"><div class="kpi-l">客均单价</div><div class="kpi-v">$92.76</div><span class="badge up">可比 +2.2%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">交易笔数可比 -1.3%</div></div>
+    <div class="kpi"><div class="kpi-l">客户交易笔数</div><div class="kpi-v">391.1M</div><span class="badge dn">-1.3% 可比</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">量减价增</div></div>
+    <div class="kpi"><div class="kpi-l">ROIC</div><div class="kpi-v">25.4%</div><span class="badge dn">上年 31.3%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">并购扩大投入资本</div></div>
+  </div>
+</div>
+
+<!-- ═══ 看穿桥接 高亮框 ═══ -->
+<div class="section">
+  <div class="stitle">本季必看 · 两个"看穿"：并购增长 vs 内生停滞、毛利率结构性下移</div>
+  <div class="cmt">
+    <p><strong>家得宝这份财报的关键，藏在"+4.8% 营收增长"与"+0.6% 可比销售"之间的落差里，看不穿这道落差就会高估它的增长质量。</strong></p>
+    <p><strong>看穿一：4.8% 的营收增长，几乎全是并购买来的。</strong> 净销售 +4.8%（$39.86B → $41.77B）里，<span class="hl-t">可比销售只贡献 +0.6%（美国仅 +0.4%）</span>，其余大部分来自 SRS（约 $182 亿收购的专业建材分销）与 GMS（约 $1,000 亿 HVAC 分销市场）的并表——本季 GMS 约贡献 $13 亿。换句话说，剔除并购，家得宝的内生生意几乎原地踏步。这不是做错了什么，而是它绑定的房地产周期还没转向。</p>
+    <div class="tbl-wrap" style="margin:14px 0;">
+      <table class="tbl">
+        <tr><th>增长拆解（Q1 FY2026）</th><th>数值</th><th>读数</th></tr>
+        <tr><td>净销售同比</td><td>+4.8%</td><td>$39.86B → $41.77B</td></tr>
+        <tr><td><span class="hl-t">其中：可比销售（内生）</span></td><td><span class="hl-t">+0.6%</span></td><td>美国 +0.4% · 汇率贡献约 +55bp</td></tr>
+        <tr><td>其中：并购并表（外延）</td><td>大部分增量</td><td>SRS + GMS（本季约 $1.3B）</td></tr>
+        <tr class="hl"><td>逐月可比节奏</td><td>2 月 +0.7% / 3 月 +2.0% / 4 月 -0.5%</td><td>4 月转负 · 大额可选装修承压</td></tr>
+      </table>
+    </div>
+    <p><strong>看穿二：毛利率被并购结构性稀释，利润因此不增反降。</strong> 毛利润 +2.4% 慢于营收 +4.8%，因为 <span class="warn-t">毛利率从上年 33.8% 降到 33.0%（降约 75bp）</span>——主因是 GMS 这类低毛利分销业务并入，拉低了整体产品结构。叠加投入资本扩大，营业利润率从 12.9% 压到 11.9%，营业利润 -3%、GAAP 净利 -4.2%、EPS -4.3%。<strong>家得宝在用并购买营收，代价是利润率下移 + 每股收益同比下滑。</strong>好消息是 Q1 经营现金流 +39% 至 $60.3 亿（营运资金改善），现金创造能力仍强劲。</p>
+  </div>
+</div>
+
+<!-- ═══ 趋势图 ═══ -->
+<div class="section">
+  <div class="stitle">关键指标趋势（近 5 季）</div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">净销售（$B）& 可比销售增速（%）</div><div class="cwrap"><canvas id="chartRev"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">毛利率 & 营业利润率趋势（%）</div><div class="cwrap"><canvas id="chartMargin"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">Q1 FY2026 净销售构成拆分（$B）</div><div class="cwrap"><canvas id="chartSegment"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">摊薄 EPS 趋势（GAAP vs 调整后 · $）</div><div class="cwrap"><canvas id="chartEps"></canvas></div></div>
+  </div>
+</div>
+
+<!-- ═══ 桑基图 ═══ -->
+<div class="section">
+  <div class="stitle">Q1 FY2026 资金流向桑基图（$B）</div>
+  <div class="ccard">
+    <div id="sankey" style="width:100%;height:480px;"></div>
+    <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">说明：净销售 $41.77 → 营业成本 $27.98 + 毛利 $13.78 → 销售&管理费 $7.96 + 折旧摊销 $0.84 + 营业利润 $4.98 → 利息及其他净额 $0.60 + 所得税 $1.09 + GAAP 净利 $3.29。每个中间节点流入 = 流出，流量闭合。注：本季经营现金流 $6.03B（含营运资金回收 $1.34B 与非现金调整）− 资本开支 $0.84B = 自由现金流 $5.19B；本季向股东派息 $2.32B、回购为 $0（已暂停），另偿还短/长期债务合计约 $2.39B。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 1 ═══ -->
+<div class="section">
+  <div class="stitle">模块 1 · 公司概览与背景</div>
+  <div class="cmt">
+    <p><strong>The Home Depot, Inc.</strong>（NYSE: HD），总部亚特兰大，成立于 1978 年，全球最大的家居改善（home improvement）零售商。财年错位——在每年 1 月底/2 月初结束。最新已发布财季为 <strong>Q1 FY2026</strong>（截至 2026-05-03，2026-05-19 发布）。</p>
+
+    <p><strong>核心叙事</strong>：家得宝是<span class="hl-t">给专业施工队（Pro）与 DIY 业主供货的"家居改善收费站"</span>——赚的是全美约 1.4 亿套存量住宅每一次翻新、维修、扩建的钱。<strong>2,361 家零售大卖场 + 1,280+ 个 SRS 分销点</strong>，覆盖全美 50 州及加拿大、墨西哥，约 47 万名员工。FY2025 全年净销售 $1,646.8 亿。这是一门 <strong>25.4% ROIC、密集门店网络 + 强大品牌 + 规模采购</strong> 的宽护城河生意，但天花板由房屋换手率与利率决定。</p>
+
+    <p><strong>增长战略（管理层框架）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>Pro 生态扩张</strong>——以 SRS（屋顶/景观/泳池专业分销）+ GMS（石膏板/建材分销）+ tuck-in 并购切入约 $7,000 亿的 Pro 专业市场，新增 HVAC 分销再打开约 $1,000 亿，总可及市场（TAM）提升至约 $1.2 万亿</li>
+      <li><strong>互联零售（interconnected retail）</strong>——线上与门店打通，本季线上可比 +10% 以上，连续第 4 个季度双位数增长</li>
+      <li><strong>门店密度 + 供应链</strong>——FY2026 计划新开约 15 家门店 + 40-50 个 SRS 网点，持续加密最后一公里配送</li>
+    </ul>
+
+    <p><strong>股权结构与治理</strong>：单一类别普通股，机构持股占绝大多数（Vanguard、BlackRock、State Street 等指数巨头为前列股东），无控股股东、无双层股权，属高度分散的成熟大盘蓝筹。单一可报告分部（家居改善零售），仅按产品线/地区做营收分解。</p>
+
+    <p><strong>能力圈检验</strong>：生意极其清晰（看得懂的顶级零售商）——两句话能说清怎么赚钱。<span class="warn-t">主要不确定性在宏观而非公司：(1) 利率何时回落、房屋成交何时回暖，决定内生需求拐点；(2) SRS/GMS 并购整合与协同兑现节奏，决定利润率能否止跌回升。</span>这两点是研判的核心变量。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 2 ═══ -->
+<div class="section">
+  <div class="stitle">模块 2 · 管理层评估</div>
+
+  <div class="bscore">
+    <div class="circle cg">B+</div>
+    <div class="bd">
+      <h4>Ted Decker · 董事长兼 CEO（2022 至今）</h4>
+      <p>1990 年代末加入家得宝，历任采购、供应链、COO，2022 年接任 CEO。Decker 时代的主线是<span class="hl-t">把家得宝从"以 DIY 为主的大卖场"重构为"Pro 专业客户 + DIY 双轮"</span>——用 SRS（$182 亿）、GMS 及一系列 tuck-in 并购搭建专业建材分销生态，切入更大、更黏、复购更强的施工队市场。战略逻辑清晰、执行坚决。海图判断：这是一位深谙零售运营、以长期市占率扩张为纲的掌舵人，但代价是短期利润率被并购稀释、杠杆抬升。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B</div>
+    <div class="bd">
+      <h4>资本配置纪律 · 进入"防守 + 去杠杆"阶段</h4>
+      <p>
+      <strong>股息：连续派息自 1987 年 6 月从未间断</strong>，2026-02 上调 1.3% 至 $2.33/季（$9.32 年化）——但 1.3% 的增幅是近年最小，反映现金优先去杠杆。<br>
+      <strong>回购：已暂停</strong>。回购从 FY2023 的 $79.5 亿断崖式降至 FY2024 的 $6.5 亿，FY2025 与 Q1 FY2026 直接归零。$150 亿回购授权（2023-08）基本未动用。<span class="warn-t">摊薄股数因此不降反升</span>（FY2024 9.93 亿 → Q1 FY2026 9.96 亿），EPS 少了缩股这条增长腿。<br>
+      <strong>并购：SRS/GMS 逻辑正确但推高杠杆</strong>，真实净负债 -$519 亿。管理层指引杠杆回落至约 2 倍后、FY2026 末前后重启回购。
+      </p>
+    </div>
+  </div>
+
+  <div class="cmt">
+    <p><strong>长期主义测试</strong>：✅ 管理层以 Pro 生态 + 市占率长期扩张为主线，宁可短期牺牲利润率与回购、也要卡位 $1.2 万亿 TAM，是长期视角而非季度博弈。<strong>坦诚度</strong>：电话会披露详尽——逐月可比销售（含 4 月转负）、毛利率稀释来源、ROIC 下滑、回购暂停原因都主动说明，不粉饰。前几季度（尤其 Q3 FY2025）敢于下调指引并归因于"缺乏风暴 + 需求回升未兑现"，诚实度好。<strong>利益绑定</strong>：管理层持股比例不高（成熟大盘股常态），薪酬与营收/营业利润/ROIC 挂钩。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 3 ═══ -->
+<div class="section">
+  <div class="stitle">模块 3 · 商业模式深度解析</div>
+  <div class="cmt">
+    <p><strong>海图"一句话测试"</strong>：<span class="hl-t">家得宝是全美最大的家居改善零售商——通过 2,361 家大卖场 + Pro 专业分销网络，把建材、五金、家电、装修用品卖给专业施工队和 DIY 业主，靠规模采购的成本优势 + 密集门店网络 + 强大品牌赚取零售价差，是全美存量住宅翻新维修的"总供货商"。</span></p>
+
+    <p><strong>收入结构（Q1 FY2026）</strong>：家得宝为单一可报告分部，不按业务分部拆分。本季净销售 $417.7 亿，量价拆解——<span class="hl-t">客均单价 $92.76（可比 +2.2%）+ 客户交易 391.1mm 笔（可比 -1.3%）</span>，是典型的"量减价增"格局，反映通胀传导 + 大额低频装修承压。16 个商品部门中 9 个可比转正（含存储、电动工具、五金、水暖、电气、卫浴、室内园艺、油漆、厨房）。</p>
+
+    <p><strong>需求节奏（Q1 逐月）</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>指标</th><th>Q1 FY26</th><th>读数</th></tr>
+        <tr><td>2 月可比</td><td>+0.7%</td><td>开局平稳</td></tr>
+        <tr><td>3 月可比</td><td>+2.0%</td><td>本季最强</td></tr>
+        <tr><td>4 月可比</td><td>-0.5%</td><td>转负 · 天气 + 大额可选装修承压</td></tr>
+        <tr><td>大件商品可比（>$1000）</td><td>+0.8%</td><td>低迷 · 换厨房/浴室等递延</td></tr>
+        <tr><td>Pro 可比</td><td>转正并跑赢 DIY</td><td>战略验证</td></tr>
+        <tr><td>线上可比</td><td>+10% 以上</td><td>连续第 4 季双位数</td></tr>
+      </table>
+    </div>
+
+    <p style="margin-top:14px;"><strong>单位经济与议价能力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>对供应商议价能力：强</strong>——$1,600 亿+ 采购规模 + 存货周转 4.2 次，对制造商有强议价力，是成本优势的来源</li>
+      <li><strong>对客户定价权：中</strong>——与 Lowe's 双寡头竞争 + 亚马逊在标准品类蚕食，限制了终端加价空间，可比单价靠通胀而非提价</li>
+      <li><strong>Pro 客户黏性：中-强</strong>——专业施工队看重库存深度、信用账期、配送时效与批量供货，SRS/GMS 的分销网络正在提高这部分黏性</li>
+      <li><strong>周期敏感性：高</strong>——生意与房屋换手率、房价、利率强相关，是本模式最大的软肋</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══ 模块 4 ═══ -->
+<div class="section">
+  <div class="stitle">模块 4 · 经济护城河分析（5 维）</div>
+  <div class="moat-grid">
+    <div class="moat-card narrow">
+      <h5>1. 网络效应</h5>
+      <span class="moat-rate">窄</span>
+      <p>零售本身网络效应弱，但 Pro 生态 + 互联零售形成弱双边效应（施工队越多、库存/配送越密、越吸引供应商）。<strong>趋势：Pro 生态缓慢加宽</strong>。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>2. 规模/成本优势</h5>
+      <span class="moat-rate">宽</span>
+      <p>$1,646 亿营收 + 全球采购 + 密集供应链，单位采购与物流成本行业最低。25.4% ROIC 是规模优势的直接证据。<strong>趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>3. 转换成本</h5>
+      <span class="moat-rate">窄-中</span>
+      <p>DIY 客户切换成本极低；Pro 客户因信用账期、库存深度、配送集成有一定黏性。<strong>趋势：Pro 端提升、DIY 端仍低</strong>。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>4. 无形资产/品牌</h5>
+      <span class="moat-rate">宽</span>
+      <p>家得宝品牌是全美家居改善的心智首选 + 橙色大卖场的国民认知度 + 数十年信任积累。<strong>趋势：稳定</strong>（品牌是最硬的护城河）。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>5. 有效规模</h5>
+      <span class="moat-rate">中-宽</span>
+      <p>大卖场家居改善本质是 HD/Lowe's 双寡头，新建全国性门店网络几无经济性。<span class="warn-t">但亚马逊在标准品类、专业分销商在 Pro 端持续蚕食</span>。<strong>趋势：稳定偏承压</strong>。</p>
+    </div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>10 年后护城河会更宽还是更窄？</strong> <span class="hl-t">核心护城河（规模成本 + 品牌 + 门店密度）10 年后大概率仍宽，Pro 生态还可能加宽</span>——家得宝用 SRS/GMS/tuck-in 并购从"卖场"向"专业建材总分销"延伸，这块生意更大、更黏、更抗周期。但两个侵蚀点需盯住：(1) <span class="warn-t">亚马逊与垂直电商</span>在标准五金/家电品类的价格与配送优势；(2) <span class="warn-t">Lowe's 的贴身竞争</span>——LOW 更偏 DIY、估值折让约 15%、增速略快，双寡头理性竞争但边际份额之争持续。总体：护城河宽且稳，趋势中性偏正面，核心变量是执行而非结构性颠覆。</p>
+    <p><strong>定价权</strong>：中等——受双寡头竞争 + 电商比价压制，终端加价空间有限，可比单价增长主要来自通胀传导而非主动提价。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 5 ═══ -->
+<div class="section">
+  <div class="stitle">模块 5 · 财务深度分析</div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 12px 0; font-family: 'Segoe UI',sans-serif;">5.1 五季趋势（净销售 / EPS / 利润率 / 可比销售）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>财季</th><th>净销售($B)</th><th>GAAP EPS</th><th>调整 EPS</th><th>毛利率</th><th>营业利润率</th><th>可比销售</th></tr>
+      <tr><td>Q1 FY2025（2025-05-04）</td><td>39.86</td><td>3.45</td><td>3.56</td><td>33.8%</td><td>12.9%</td><td>-0.3%</td></tr>
+      <tr><td>Q2 FY2025（2025-08-03）</td><td>45.28</td><td>4.58</td><td>4.68</td><td>33.4%</td><td>14.5%</td><td>+1.0%</td></tr>
+      <tr><td>Q3 FY2025（2025-11-02）</td><td>41.35</td><td>3.62</td><td>3.74</td><td>33.4%</td><td>12.9%</td><td>+0.2%</td></tr>
+      <tr><td>Q4 FY2025（2026-02-01）*</td><td>38.20</td><td>2.58</td><td>2.72</td><td>32.6%</td><td>10.1%</td><td>+0.4%</td></tr>
+      <tr class="hl"><td>Q1 FY2026（2026-05-03）</td><td>41.77</td><td>3.30</td><td>3.43</td><td>33.0%</td><td>11.9%</td><td>+0.6%</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">* Q4 FY2025 为 13 周（vs 上年 Q4 的 14 周，少一周约贡献 $25 亿销售），故同比降幅含日历错位。趋势读数：<strong>营业利润率从 FY2025 峰值（Q2 14.5%）回落，Q1 FY2026 的 11.9% 低于上年同期 12.9%</strong>，主因 SRS/GMS 低毛利分销并入的结构性稀释；可比销售连续 5 季在 -0.3% 至 +1.0% 的窄幅低位徘徊，印证内生需求被利率锁住。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.2 关键比率与杜邦分析（FY2025 / Q1 FY2026）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>指标</th><th>数值</th><th>说明</th></tr>
+      <tr><td>ROIC</td><td>25.4%（上年同期 31.3%）</td><td>仍优秀，但并购扩大投入资本基数拉低</td></tr>
+      <tr><td>ROA（FY2025）</td><td>~13.1%</td><td>净利 $14.16B / 总资产 $107.9B</td></tr>
+      <tr><td>ROE（FY2025）</td><td>~100%+（失真）</td><td><span class="warn-t">股东权益仅 $13.9B（常年回购打薄），ROE 被杠杆放大，不宜直接用</span></td></tr>
+      <tr><td>杜邦拆解（FY2025）</td><td>净利率 8.6% × 资产周转 1.53x × 权益乘数 7.78x</td><td>ROE ≈ 102% · <span class="warn-t">高 ROE 主要来自 7.8x 极高财务杠杆</span></td></tr>
+      <tr><td>毛利率（Q1 FY2026）</td><td>33.0%（-75bp）</td><td>GMS 低毛利分销稀释</td></tr>
+      <tr><td>净利率（Q1 FY2026）</td><td>7.9%</td><td>营业利润率 11.9%</td></tr>
+      <tr><td>存货周转</td><td>4.2 次（上年 4.3 次）</td><td>存货 $272.8 亿</td></tr>
+    </table>
+  </div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.3 资产负债健康度（2026-05-03 末 · $M）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>2026-05-03 末</th><th>说明</th></tr>
+      <tr><td>现金及等价物</td><td>1,601</td><td>零售商低现金常态</td></tr>
+      <tr><td>短期投资</td><td>0</td><td>资产负债表无此科目</td></tr>
+      <tr><td>应收账款净额</td><td>6,624</td><td>Pro 客户信用账期</td></tr>
+      <tr><td>存货</td><td>27,280</td><td>周转 4.2 次</td></tr>
+      <tr class="hl"><td>短期借款（商业票据）</td><td>3,503</td><td>已独立核对</td></tr>
+      <tr class="hl"><td>长期债务（当期部分）</td><td>5,178</td><td>已独立核对</td></tr>
+      <tr class="hl"><td>长期债务（非当期）</td><td>44,828</td><td>已独立核对</td></tr>
+      <tr class="hl"><td>有息负债合计</td><td>53,509</td><td>短债 + 长债当期 + 长债</td></tr>
+      <tr><td>经营租赁负债（当期）</td><td>1,484</td><td>独立列示</td></tr>
+      <tr><td>经营租赁负债（非当期）</td><td>8,164</td><td>独立列示</td></tr>
+      <tr class="hl"><td>经营租赁负债合计</td><td>9,648</td><td>ROU 资产 $9,275</td></tr>
+      <tr class="hl"><td><strong>真实净负债</strong></td><td><strong>-51,908</strong></td><td>⚠️ 现金 1,601 − 有息负债 53,509</td></tr>
+      <tr><td>（含租赁的净负债）</td><td>-61,556</td><td>再减经营租赁 9,648</td></tr>
+      <tr><td>商誉 + 无形资产净额</td><td>32,723</td><td>SRS/GMS 并购形成（22,479 + 10,244）</td></tr>
+      <tr><td>总资产</td><td>107,904</td><td>—</td></tr>
+      <tr><td>股东权益</td><td>13,874</td><td>历史上曾为负 · 回购打薄</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">⚠️ <strong>净负债非净现金——铁律提示</strong>：家得宝有息负债 $535 亿（短债 $35.03 亿 + 长债当期 $51.78 亿 + 长债 $448.28 亿，三项独立核对）≫ 现金 $16 亿，<strong>真实净负债 -$519 亿</strong>；若计入经营租赁负债 $96.48 亿，净负债约 -$616 亿。这与"零负债现金堡垒"叙事完全相反——SRS（约 $182 亿）与 GMS 并购推高杠杆，股东权益仅 $139 亿（历史上曾因大额回购转为负值）。<strong>利息覆盖倍数</strong>：Q1 营业利润 $49.81 亿 / 利息费用 $6.11 亿 ≈ 8.1 倍，尚属安全，但杠杆已不低，去杠杆是当前资本配置第一优先级。<strong>流动比率</strong>：流动资产 $371.72 亿 / 流动负债 $355.80 亿 ≈ 1.05，偏薄（零售快周转常态）。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.4 现金流质量（Q1 FY2026 + FY2025 全年）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>Q1 FY2025</th><th>Q1 FY2026</th><th>FY2025 全年</th></tr>
+      <tr><td>经营活动现金流（OCF）</td><td>$4.33B</td><td>$6.03B</td><td>$16.33B</td></tr>
+      <tr><td>- 资本开支（Capex）</td><td>—</td><td>$0.84B</td><td>$3.68B</td></tr>
+      <tr class="hl"><td>自由现金流（FCF）</td><td>—</td><td>$5.19B</td><td>$12.65B</td></tr>
+      <tr><td>OCF / 净利润</td><td>—</td><td>1.83x</td><td>1.15x</td></tr>
+      <tr><td>Capex / 营收</td><td>—</td><td>2.0%</td><td>2.2%</td></tr>
+      <tr><td>派息</td><td>—</td><td>$2.32B</td><td>$9.15B</td></tr>
+      <tr><td>回购</td><td>—</td><td>$0</td><td>$0</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">Q1 FY2026 OCF $60.3 亿（+39% YoY），主要因营运资金回收 $13.37 亿（存货/应付节奏）+ 非现金调整（D&A $9.10 亿 + 并购无形摊销 $1.71 亿 + 股权激励 $1.78 亿）。FCF $51.88 亿（OCF $60.32 亿 − Capex $8.44 亿，官方现金流量表 line item 核对）。<strong>现金流质量高</strong>：FY2025 OCF/净利 1.15x，Capex 仅占营收 2.2%，属轻资产强现金零售模式。但本季 FCF $51.9 亿去向：派息 $23.2 亿 + 偿债约 $23.9 亿（短债净还 $9.61 亿 + 长债还 $14.25 亿）+ 并购 $2.86 亿——<strong>现金优先用于去杠杆与分红，回购让位</strong>。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.5 所有者盈余（价值投资口径 · FY2025）</h3>
+  <div class="dcf-note">
+    <p><strong>所有者盈余 = 净利润 + 折旧摊销 + 股权激励 − 维护性 Capex ± 营运资金 ≈ FCF</strong></p>
+    <p>FY2025：净利 $141.6 亿 + D&A（约 $30 亿）+ SBC（约 $7 亿）− 维护性 Capex（估约 $25 亿，剔除新店扩张部分）± 营运资金 ≈ 自由现金流 $126.5 亿。家得宝 Capex 仅占营收 2.2%，多为维护性，故 FCF 与所有者盈余高度接近。</p>
+    <p><strong>所有者盈余收益率 = FCF $126.5 亿 / 市值约 $3,420 亿 ≈ 3.7%</strong>——这是一个<span class="warn-t">"优质龙头 + 偏满估值"</span>的收益率。3.7% 的 FCF Yield 对一个 EPS 正在同比下滑、可比销售接近停滞、回购暂停的公司并不算便宜，反映市场仍给予家得宝质量溢价 + 提前定价了一场尚未发生的房屋复苏。<strong>换句话说：家得宝的问题不是生意不好，而是当前价格已把复苏预期算了进去，安全边际不足。</strong></p>
+  </div>
+</div>
+
+<!-- ═══ 模块 6 ═══ -->
+<div class="section">
+  <div class="stitle">模块 6 · 电话会分析（Q1 FY2026 + 前 2 季度）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">Q1 FY2026 电话会（2026-05-19）</h3>
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"业绩符合预期，需求环境与 FY2025 大致相似；重申 FY2026 指引，有信心继续抢占市占率"</div><div class="ec-note">可比销售 +0.6%、GAAP EPS $3.30、调整后 $3.43。管理层维持全年销售 +2.5%~4.5%、可比持平~+2%、调整后 EPS 持平~+4% 的指引不变。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"完成 Mingledorff's（HVAC 分销商，东南部 5 州 42 个网点）收购并入 SRS，打开约 $1,000 亿 HVAC 分销市场"</div><div class="ec-note">Pro 生态持续扩张，总可及市场提升至约 $1.2 万亿。SRS/GMS + tuck-in 并购是市占率扩张的核心引擎。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"Pro（专业客户）可比销售转正并跑赢 DIY；油漆 Pro、电动工具、水管配件、热水器强劲；线上 +10% 以上"</div><div class="ec-note">Pro 战略验证 + 线上连续第 4 季双位数增长——两条结构性增长线在低迷需求中依然向上。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"毛利率约 33%、同比降约 75bp，主因 GMS 低毛利分销并入的结构性稀释；营业利润率降至 11.9%（vs 12.9%）"</div><div class="ec-note">并购换来营收增长的代价是利润率结构性下移。调整后经营利润率 12.3%（vs 上年 13.2%）。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-neut">中性偏软</div><div class="ec-body"><div class="ec-title">"可比销售逐月走弱：2 月 +0.7% / 3 月 +2.0% / 4 月 -0.5%；大额可选装修项目仍承压"</div><div class="ec-note">4 月转负 + 大件商品可比仅 +0.8%，天气与高利率下的递延装修需求是短期拖累，管理层未见明确加速催化剂。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"Q1 资本开支约 $845mm、派息约 $23 亿、回购仍为 0；ROIC 降至 25.4%（vs 31.3%）"</div><div class="ec-note">资本配置进入"去杠杆 + 分红优先"阶段，回购让位；ROIC 下滑主要因并购扩大投入资本，绝对水平仍优秀。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q4 FY2025 电话会（2026-02-24）</h3>
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"Q4 销售 $382 亿（-3.8%，但为 13 周 vs 上年 14 周，少一周约 $25 亿）；可比 +0.4%；GAAP EPS $2.58"</div><div class="ec-note">季度股息上调 1.3% 至 $2.33；首次给出 FY2026 指引（销售 +2.5%~4.5%、可比持平~+2%、EPS 持平~+4%）。SRS 全年有机销售低个位数，预计 FY2026 提速至中个位数。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q3 FY2025 电话会（2025-11-18）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"下调 FY2025 指引：全年调整后 EPS 预计同比约 -5%（此前约 -2%）；缺乏风暴 + 需求回升未兑现"</div><div class="ec-note">销售 $414 亿（+2.8%，含 GMS 约 8 周 $9 亿贡献）· 可比仅 +0.2% 逊于预期。CFO McPhail：剔除飓风后需求"稳定"，但"短期难寻加速催化剂"，消费不确定性 + 房市承压。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">指引兑现度追踪</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>历史指引</th><th>最新实际 / 状态</th><th>评价</th></tr>
+      <tr><td>FY2025 调整后 EPS（Q3 下调至 ~-5%）</td><td>FY2025 调整 EPS $14.69（vs FY2024 ~$15.24，约 -3.6%）</td><td><span class="badge nt">大致兑现</span></td></tr>
+      <tr><td>FY2026 销售增速 +2.5%~4.5%</td><td>Q1 净销售 +4.8%（并购驱动）</td><td><span class="badge up">上沿</span></td></tr>
+      <tr><td>FY2026 可比销售 持平~+2%</td><td>Q1 可比 +0.6%</td><td><span class="badge nt">区间内偏下</span></td></tr>
+      <tr><td>FY2026 调整 EPS 持平~+4%</td><td>Q1 调整 EPS -3.7% · 重申全年指引</td><td><span class="badge dn">开局偏软</span></td></tr>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>信号汇总</strong>：过去三季的措辞演变是"<span class="hl-t">从下调预期到低位企稳</span>"——Q3 FY2025 下调全年指引（诚实承认需求未回升），Q4 给出保守的 FY2026 指引，Q1 FY2026 "符合预期 + 重申指引"。核心信息一致：<strong>需求被高利率锁在低位，没有明确的短期加速催化剂，但 Pro 生态 + 线上 + 并购提供结构性增量</strong>。管理层坦诚、执行稳健，业绩没有暴雷，但也谈不上拐点——这是一家"等风来"的公司。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 7 ═══ -->
+<div class="section">
+  <div class="stitle">模块 7 · 多模型估值（8 种方法 · 独立推导，不锚定现价）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">7.1 估值汇总表（独立估值 · USD）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>估值方法</th><th>每股公允价</th><th>假设要点</th><th>权重</th></tr>
+      <tr><td>1. 相对估值（P/E）</td><td>$300</td><td>FY2026 调整 EPS ~$15.00 × 20x（合理龙头倍数，反映低增速 + 周期逆风 + 回购暂停）</td><td>25%</td></tr>
+      <tr><td>2. DCF（基准）</td><td>$295</td><td>FCF $12.65B 起，5 年 CAGR ~5.5%（房屋温和复苏 + Pro），WACC 8.5%，永续 3%，减净负债 $51.9B</td><td>25%</td></tr>
+      <tr><td>3. 所有者盈余收益率</td><td>$301</td><td>FCF $12.65B / 目标收益率 4.2% = $301B ÷ 996mm 股</td><td>15%</td></tr>
+      <tr><td>4. PEG</td><td>$250</td><td>Forward P/E 22.9x ÷ 增速 ~7% = PEG 3.3（偏贵）→ 合理 14x × $15 = $210~250</td><td>5%</td></tr>
+      <tr><td>5. DDM</td><td>$280</td><td>DPS $9.32，增长 5%，要求回报 8.5% → D1/(r-g)（高分红适用）</td><td>10%</td></tr>
+      <tr><td>6. NAV</td><td>不适用</td><td>非资产型公司。<span class="hl-t">约 90% 门店为自有地产，提供下行支撑（重置价值远超账面），但作估值主口径失真；商誉+无形 $327 亿多来自并购</span></td><td>0%</td></tr>
+      <tr><td>7. 反向 DCF</td><td>现价隐含 FCF 增长 <strong>~5.5-6%</strong></td><td>$343 已隐含市场认为 FCF 长期增 ~5.5-6%——高于当前 +0.6% 可比销售，等于提前定价一场尚未发生的房屋复苏</td><td>10%</td></tr>
+      <tr><td>8. SOTP 分部加总</td><td>$285</td><td>核心零售（~$18B EBIT × ~14x）+ SRS/GMS 专业分销（成长给高倍数）− 净负债 $51.9B（单一分部，示意性）</td><td>10%</td></tr>
+      <tr class="hl"><td><strong>加权公允价中位数</strong></td><td><strong>$300</strong></td><td>估值区间 $280-305 · 中位 ~$300</td><td>100%</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.8;"><strong>与现价对照</strong>：当前 $343.30 vs 加权公允 $300 · <span class="warn-t">溢价约 14%（负安全边际）</span>——<strong>远不符合价值投资 25% 安全边际的买入门槛</strong>。家得宝是宽护城河龙头，但当前价格已把 Pro 生态兑现 + 房屋复苏预期充分算入。多个 DCF 假设下的公允值区间 $280-305，均落在现价之下——这是一个"好生意 + 满价格"的典型，须等回调至 $240 附近（中位数 × 80%）才提供合理安全边际。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.2 P/E 多档透视表（基于 $343.30 收盘）</h3>
+  <p style="margin-bottom:10px; font-size:13px; color:var(--text2);">家得宝 EPS 随房屋周期波动 + GAAP/调整口径差异（并购无形摊销）+ 回购暂停，触发多档透视，避免单一 TTM P/E 误导：</p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>口径</th><th>EPS / 指标</th><th>P/E（$343.30）</th><th>读数说明</th></tr>
+      <tr><td>TTM GAAP P/E</td><td>~$14.08</td><td>~24.4x</td><td>近 4 季 GAAP EPS 加总</td></tr>
+      <tr><td>TTM 调整后 P/E</td><td>~$14.57</td><td>~23.6x</td><td>剔并购无形摊销 · 较可信</td></tr>
+      <tr><td>FY2025 GAAP P/E</td><td>$14.23</td><td>~24.1x</td><td>上一完整财年</td></tr>
+      <tr class="hl"><td><strong>Forward P/E（FY2026 共识 ~$15.00）</strong></td><td><strong>~$15.00</strong></td><td><strong>~22.9x</strong></td><td>最可信档 · 市场惯用（隐含 EPS +2.2%）</td></tr>
+      <tr><td>Forward P/E（FY2027 共识 ~$16.2）</td><td>~$16.2</td><td>~21.2x</td><td>复苏预期（隐含 +8%）</td></tr>
+      <tr><td>P/S (TTM)</td><td>营收 ~$166.6B</td><td>~2.05x</td><td>零售龙头</td></tr>
+      <tr><td>FCF Yield</td><td>FCF ~$12.65B</td><td>~3.7%</td><td>优质龙头 + 偏满估值</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3);"><strong>最可信档</strong>：Forward P/E ~22.9x（FY2026）。<span class="hl-t">对一个 EPS 同比下滑、可比销售 +0.6%、回购暂停的公司，22.9x 偏高</span>——历史上家得宝在低增速期通常给 18-21x。同业对比：Lowe's（LOW）远期 P/E ~19.2x（较 HD 折让约 15%、增速略快、更偏 DIY）、Builders FirstSource（BLDR）~17.0x（强周期建材）、Floor & Decor（FND）~30.8x（小体量成长）。HD 享受龙头 + Pro 生态溢价，但溢价已不便宜。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.3 12 个月目标价（概率加权）</h3>
+  <div class="pgrid">
+    <div class="pbox"><div class="pl">悲观情景 · 30%</div><div class="pv pc">$265</div><div class="pn">利率高企 + 房市持续低迷 + 可比转负 + 利润率再压 + 估值降至 ~18x<br>距现价 -23%</div></div>
+    <div class="pbox"><div class="pl">基准情景 · 45%</div><div class="pv pf">$305</div><div class="pn">可比低个位数 + EPS ~$15 + 估值维持 ~20x + 缓慢温和复苏<br>距现价 -11%</div></div>
+    <div class="pbox"><div class="pl">乐观情景 · 25%</div><div class="pv ps">$360</div><div class="pn">降息启动 + 房屋成交回暖 + 可比升至中个位数 + Pro 生态兑现 + 重估至 ~23x<br>距现价 +5%</div></div>
+  </div>
+  <p style="font-size:13px; color:var(--text2);"><strong>概率加权公允价</strong>：30%×$265 + 45%×$305 + 25%×$360 = <strong>$307 ≈ $305</strong>。<span class="warn-t">相对现价 $343.30 为 -11%，预期 12 个月回报为负</span>——即便叠加 2.7% 股息，总回报仍约 -8%。<strong>当前价格不在合理建仓窗口</strong>：三档机械建仓价（$240 / $210 / $180）均在现价大幅下方，须耐心等待房屋周期与估值同时给出安全边际。</p>
+</div>
+
+<!-- ═══ 模块 8 ═══ -->
+<div class="section">
+  <div class="stitle">模块 8 · 竞争与行业分析</div>
+  <div class="cmt">
+    <p><strong>行业格局</strong>：美国家居改善零售是 <span class="hl-t">Home Depot 与 Lowe's 的双寡头</span>（两者合计占据大卖场家居改善的绝大部分份额，CR2 极高），HD 规模更大、更偏 Pro；LOW 更偏 DIY。周边竞争来自亚马逊（标准五金/家电电商）、Menards（区域大卖场）、以及各类专业建材分销商（HD 正通过 SRS/GMS 主动整合这块市场）。</p>
+
+    <p><strong>家居改善 & 建材同业对比（截至 2026-06）</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>公司</th><th>Forward P/E</th><th>营收增速/指引</th><th>定位</th><th>核心评价</th></tr>
+        <tr class="hl"><td><strong>Home Depot HD</strong></td><td><strong>~22.9x</strong></td><td>+2.5%~4.5%（FY2026 指引）</td><td>龙头 · Pro + DIY</td><td>规模与 Pro 生态之王 · 但溢价不便宜</td></tr>
+        <tr><td>Lowe's LOW</td><td>~19.2x</td><td>~3.2%</td><td>更偏 DIY</td><td>估值折让约 15% · 增速略快</td></tr>
+        <tr><td>Builders FirstSource BLDR</td><td>~17.0x</td><td>近期 EPS 同比下滑</td><td>建材分销 · 强周期</td><td>与新屋开工强相关 · 周期性最强</td></tr>
+        <tr><td>Floor & Decor FND</td><td>~30.8x (TTM)</td><td>成长股</td><td>硬地板专业零售</td><td>体量小 · 估值最贵</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:10px; font-size:12px; color:var(--text3);">HD vs LOW 是核心看点：商业模式相近，但 <strong>HD 规模更大（营收 $1,647 亿 vs LOW 约 $840 亿）、更偏 Pro、并购扩张更激进；LOW 估值更便宜（19.2x vs 22.9x）、增速略快、更纯 DIY</strong>。市场用估值折让买 LOW 的性价比，用溢价买 HD 的龙头地位与 Pro 生态。<span class="warn-t">从纯性价比看，当前 LOW 的安全边际略优于 HD。</span></p>
+
+    <p style="margin-top:14px;"><strong>波特五力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>新进入者：</strong>低（全国性门店网络 + 供应链规模壁垒极高）——但电商是"从体系外绕过"的路径</li>
+      <li><strong>替代品：</strong>中（亚马逊/垂直电商在标准品类替代 · 但大件、专业、即时需求仍需实体网络）</li>
+      <li><strong>供应商议价：</strong>低（HD 采购规模巨大，对制造商强势）</li>
+      <li><strong>买家议价：</strong>中（DIY 客户比价容易；Pro 客户看重供货能力与账期，黏性较强）</li>
+      <li><strong>同业竞争：</strong>中（HD/LOW 理性双寡头，不打全面价格战，但边际份额之争持续）</li>
+    </ul>
+
+    <p><strong>颠覆风险</strong>：家居改善的实体属性（大件、即时、专业服务）为 HD 提供了对抗纯电商的天然缓冲，颠覆风险中等偏低。真正的周期风险来自宏观——房屋换手率与利率，而非结构性技术颠覆。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 9 ═══ -->
+<div class="section">
+  <div class="stitle">模块 9 · 技术面与 K 线分析（次要参考）</div>
+  <div class="cmt">
+    <p><strong>趋势</strong>：HD 当前 $343.30，<span class="hl-t">距 52 周高 $426.75 约 -19.5%，距 52 周低 $289.10 约 +18.8%</span>，处于区间中下部。自高点回落主要反映高利率对房屋成交的压制与 EPS 同比下滑，是一段典型的"基本面逆风驱动的估值消化"。</p>
+
+    <p><strong>关键价位</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>支撑</strong>：$310-320（近月盘整区）/ $289（52 周低）/ $280（Forward P/E ~18x 下限 + 估值底）</li>
+      <li><strong>阻力</strong>：$360（乐观情景 + 前期密集成交区）/ $400（前高平台）/ $427（52 周高）</li>
+    </ul>
+
+    <p><strong>指标信号</strong>：中位区间震荡，无极端超买超卖。<span class="warn-t">在利率与房市未见明确拐点前，反弹多为区间上沿的技术性修复，而非趋势反转</span>。</p>
+
+    <p><strong>注意</strong>：家得宝的核心驱动是利率路径 + 房屋成交 + 可比销售拐点 + Pro 生态兑现，技术面是次要参考。价值投资者应等基本面（降息 + 房市回暖）或估值（回调至 $240 附近）给出安全边际，而非在区间中部追入。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 10 ═══ -->
+<div class="section">
+  <div class="stitle">模块 10 · 增长催化剂与前景展望</div>
+  <div class="cmt">
+    <p><strong>短期催化剂（未来 6 个月）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>2026-08-18 Q2 FY2026 财报</strong>——旺季表现 + 可比销售是否随天气/装修季回暖，是最近的验证点（日期基于历史节奏估计，尚未确认）</li>
+      <li><strong>利率路径</strong>——若美联储启动降息、抵押贷款利率回落，房屋成交与大额装修需求有望解冻，是最强的外部催化剂</li>
+      <li><strong>SRS/GMS + HVAC 整合提速</strong>——Mingledorff's 并入、HVAC 分销放量，Pro 生态协同兑现</li>
+      <li><strong>回购重启信号</strong>——若杠杆回落至约 2 倍、管理层宣布重启回购，将补上 EPS 增长的一条腿</li>
+    </ul>
+
+    <p><strong>长期展望（3-5 年）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>房屋周期正常化</strong>——存量住宅老龄化（美国房龄中位数已超 40 年）+ 递延装修需求释放，是长期结构性顺风</li>
+      <li><strong>Pro 生态成第二增长极</strong>——$7,000 亿 Pro 市场 + $1,000 亿 HVAC，SRS/GMS 把 HD 从"卖场"升级为"专业建材总分销"</li>
+      <li><strong>互联零售 + 供应链</strong>——线上双位数增长 + 最后一公里配送密度，提升 Pro 与大件履约能力</li>
+      <li><strong>回购重启</strong>——杠杆正常化后恢复缩股，EPS 增长引擎回归</li>
+      <li><strong>风险情景</strong>：利率长期高企 / 房市持续冰封 / 并购协同不及预期 / 利润率进一步下移</li>
+    </ul>
+
+    <p><strong>TAM 展望</strong>：总可及市场约 <strong>$1.2 万亿</strong>（DIY + Pro $7,000 亿 + HVAC $1,000 亿等），HD 当前 $1,647 亿营收渗透率仍低，长期空间充足。核心问题不是天花板，而是<strong>需求何时随利率解冻、并购协同何时兑现</strong>——增长的时点由宏观决定。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 11 ═══ -->
+<div class="section">
+  <div class="stitle">模块 11 · 风险矩阵</div>
+  <div class="risk-grid">
+    <div class="risk-card r5"><h5>1. 高利率 + 房市冰封</h5><span class="risk-score">5 / 5 极高</span><p>房屋成交低迷、抵押利率高企直接压制大额装修与搬家相关消费 · 可比销售 4 月已转负 · 这是当前最核心、最直接的逆风</p></div>
+    <div class="risk-card r4"><h5>2. 满估值无安全边际</h5><span class="risk-score">4 / 5 高</span><p>Forward P/E ~22.9x / FCF Yield 3.7% · 现价 $343 溢价合理价约 14% · EPS 同比下滑期给高倍数，任何利空都可能触发估值压缩</p></div>
+    <div class="risk-card r4"><h5>3. 并购稀释 + 高杠杆</h5><span class="risk-score">4 / 5 高</span><p>SRS/GMS 拉低毛利率 75bp、营业利润率降至 11.9% · 真实净负债 -$519 亿 · 协同不及预期或利率上行会放大杠杆风险</p></div>
+    <div class="risk-card r3"><h5>4. 回购缺位 + EPS 逆风</h5><span class="risk-score">3 / 5 中</span><p>回购归零 · 摊薄股数不降反升 · EPS 少一条增长腿且同比下滑 · 重启时点取决于去杠杆进度</p></div>
+    <div class="risk-card r3"><h5>5. 竞争与电商蚕食</h5><span class="risk-score">3 / 5 中</span><p>Lowe's 贴身竞争（更便宜）+ 亚马逊在标准品类比价压制定价权 · 边际份额之争持续</p></div>
+    <div class="risk-card r2"><h5>6. 生意质量（机会）</h5><span class="risk-score">2 / 5 反向</span><p>宽护城河 + 25.4% ROIC + 强现金流 + 自 1987 派息 + $1.2 万亿 TAM · 顶级龙头本身是最大的安全垫</p></div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>3 个黑天鹅情景</strong>：</p>
+    <ol style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>利率长期高企 + 房市深度冰封</strong>——概率 20% · 可比转负、EPS 持续下滑 · 股价跌至 $260-280 · 估值降至 18x</li>
+      <li><strong>SRS/GMS 并购整合失败 + 商誉减值</strong>——概率 10% · $327 亿商誉+无形面临减值风险 · 利润率进一步下移 · 股价跌至 $250</li>
+      <li><strong>全球/美国深度消费衰退</strong>——概率 10% · 大额可选装修骤降 · 股价跌至 $240-260</li>
+    </ol>
+
+    <p style="margin-top:10px;"><strong>下行支撑</strong>：宽护城河 + 25.4% ROIC + FCF $126.5 亿 + 约 90% 自有门店地产 + 自 1987 年从未间断的派息，构成质量底。<span class="hl-t">$280-290 是较硬的估值底</span>（52 周低 $289 + Forward P/E ~18x 下限 + 自有地产重置价值）。但要注意：家得宝的"底"比周期建材股高，因为龙头质量溢价难以完全消失。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 12 ═══ -->
+<div class="section">
+  <div class="stitle">模块 12 · 股东回报分析</div>
+  <div class="cmt">
+    <p><strong>家得宝的股东回报正从"分红 + 回购双管"切换到"分红为主、回购暂停"的防守阶段——要区分授权、执行，以及"为并购去杠杆而牺牲回购"的性质。</strong>本季派息 $23.2 亿、回购 $0，值得细拆。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 18px 0 10px; font-family: 'Segoe UI',sans-serif;">12.1 公司给了股东多少？（量 · 过去 3 年 + trailing 收益率）</h3>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>财年</th><th>现金股息</th><th>每股股息</th><th>派息率（净利/FCF）</th><th>回购金额</th><th>股东总回报</th></tr>
+        <tr><td>FY2023（2024-01-28）</td><td>$8,383M</td><td>~$8.37</td><td>~55% / ~66%</td><td>$7,951M</td><td>$16,334M</td></tr>
+        <tr><td>FY2024（2025-02-02）</td><td>$8,929M</td><td>~$8.99</td><td>~59% / ~65%</td><td>$649M</td><td>$9,578M</td></tr>
+        <tr class="hl"><td>FY2025（2026-02-01）</td><td>$9,152M</td><td>~$9.20</td><td>~65% / ~72%</td><td>$0</td><td>$9,152M</td></tr>
+        <tr><td>3 年合计</td><td>$26,464M</td><td>—</td><td>—</td><td>$8,600M</td><td>$35,064M</td></tr>
+      </table>
+    </div>
+    <p style="font-size:13px; color: var(--text2); margin-top:8px"><strong>Trailing Shareholder Yield</strong> ≈（FY2025 股息 $9,152M + 净回购 $0）/ 市值 $342B ≈ <strong>2.7%</strong>——<span class="warn-t">当前几乎全部来自股息，回购贡献为 0</span>。对比 FY2023 股东总回报还有 $163 亿（回购 $79.5 亿占近半），如今只剩分红 $91.5 亿——<strong>股东回报的"回购腿"已折断</strong>。派息率（占净利 65%、占 FCF 72%）已不低，纯靠分红继续加码的空间有限。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.2 给的方式好不好？（质 · 摊薄股数 3 年趋势）</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><span class="warn-t">摊薄股数不降反升</span>——<strong>FY2023 10.02 亿 → FY2024 9.93 亿 → FY2025 9.95 亿 → Q1 FY2026 9.96 亿</strong>。回购停摆后，股权激励（SBC）的稀释无对冲，股数从底部微升。这是硬指标：回购引擎一旦熄火，EPS 就失去"缩股增厚"这条腿，本季 EPS 同比 -4.3% 正是净利下滑 + 股数微升的双重结果</li>
+      <li><strong>注销 vs 库存股</strong>：家得宝美股回购历史上以入库存股为主（部分用于员工持股），含金量本就打折；但当前回购为 0，无回购质量可评——问题不在"方式好不好"，而在"根本没在回购"</li>
+      <li><strong>股息是真金白银</strong>：现金股息直接派发、连续增长，这部分含金量高、可验证；但 2026-02 增幅仅 1.3%（近年最小），反映现金优先去杠杆</li>
+    </ul>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.3 能不能继续给、给多少？（前瞻 · 可持续性）</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>已授权未执行额度</strong>：$150 亿回购计划（2023-08 授权）绝大部分未动用，约占市值 4.4%。<span class="warn-t">约束力弱</span>（董事会授权只是上限，非 ASR/自动注销），且已"授权多年、近两年执行率极低"——是暂时冻结的空头支票，重启前不构成实质支撑</li>
+      <li><strong>股息指引</strong>：连续派息自 1987 年 6 月从未间断，2026-02 上调 1.3% 至 $2.33/季（$9.32 年化）· 累进式分红政策 · 但增幅放缓，派息率已达净利 65%、FCF 72%，进一步大幅增息空间有限</li>
+      <li><strong>(股息 + 回购) / FCF 覆盖度</strong>：FY2025 = $9,152M / $12,646M ≈ <strong>72%</strong>——覆盖充分、<span class="hl-t">无借债回购</span>（现金优先偿债：Q1 净还短债 $9.61 亿 + 还长债 $14.25 亿）· 分红可持续性高</li>
+      <li><strong>回购重启时点</strong>：管理层指引杠杆回落至约 2 倍后、FY2026 末前后重启回购。这是补上 EPS 增长腿的关键，但取决于去杠杆进度 + 现金流</li>
+      <li><strong>周期择时瑕疵</strong>：FY2023 高位大额回购 $79.5 亿后暂停，如今股价回落却无钱回购——<span class="warn-t">高位买、低位停</span>，是资本配置择时的典型瑕疵</li>
+    </ul>
+    <p><strong>模块小结</strong>：<span class="hl-t">积极分红但回购缺位，含金量中等偏防守</span>——自 1987 年从未间断的累进式股息是真金白银的底色（trailing yield 2.7% 全来自分红、FCF 覆盖 72% 可持续），但回购归零、摊薄股数不降反升、$150 亿授权常年未动用，使当前股东回报缺少"缩股增厚"这条腿。这是"为并购去杠杆而主动收缩回报"的阶段性选择——待杠杆正常化、回购重启，含金量有望回升；在此之前，股东回报是"稳定但不完整"的。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 13 ═══ -->
+<div class="section">
+  <div class="stitle">模块 13 · 海图评分卡 + 投资决策</div>
+
+  <div class="scorecard">
+    <h3 style="font-size:15px; color:var(--text); margin-bottom: 16px; font-family: 'Segoe UI',sans-serif;">海图评分卡（6 维 A-D）</h3>
+    <div class="score-grid">
+      <div class="score-card"><div class="score-letter s-bp">B+</div><div class="score-body"><h4>1. 生意可预测性</h4><p>零售模式极清晰、两句话说清；但绑定房屋换手率与利率，近 5 年盈利随周期波动，能见度中上而非顶级。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">A-</div><div class="score-body"><h4>2. 经济护城河</h4><p>规模成本 + 品牌 + 门店密度构成宽护城河，Pro 生态还在加宽；但零售转换成本有限，Lowe's/亚马逊持续竞争。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">B+</div><div class="score-body"><h4>3. 管理层质量</h4><p>Pro 生态战略清晰、SRS/GMS 并购有逻辑、坦诚度好；但杠杆化并购 + 回购暂停 + 利润率下移是瑕疵。</p></div></div>
+      <div class="score-card"><div class="score-letter s-b">B</div><div class="score-body"><h4>4. 财务质量</h4><p>25.4% ROIC 优秀、FCF 强、现金流质量高；但真实净负债 -$519 亿高杠杆、股东权益极薄、利润率压缩。</p></div></div>
+      <div class="score-card"><div class="score-letter s-b">B</div><div class="score-body"><h4>5. 资本配置纪律</h4><p>连续派息自 1987、股息累进、无借债回购；但回购暂停、摊薄股数不降反升、高位回购后停手，进入防守期。</p></div></div>
+      <div class="score-card"><div class="score-letter s-c">C</div><div class="score-body"><h4>6. 估值与安全边际</h4><p>现价 $343 vs 合理 $300、溢价约 14%，Forward P/E 22.9x 对 EPS 下滑期偏高 · <strong>无安全边际</strong>。</p></div></div>
+    </div>
+
+    <div class="flag-row">
+      <strong>红旗排查</strong>：<strong>回购暂停 + 摊薄股数不降反升 + EPS 同比下滑 + 并购稀释利润率（毛利率 -75bp）+ 高杠杆（真实净负债 -$519 亿）</strong>。这些不是会计造假类红旗，而是"周期底部 + 资本配置进入防守去杠杆期 + 满估值"的组合信号。触发"<span class="warn-t">周期逆风 + 满估值无安全边际</span>"——尽管护城河（A-）与生意质量优秀，综合评级<strong>强制降至「持有观望」</strong>。
+    </div>
+
+    <p style="margin-top:18px; font-size:14px; color:var(--text); line-height:1.85;"><strong>综合评级</strong>：<span class="rating-badge rating-hold" style="font-size:14px;">持有观望</span>。生意质量优秀（宽护城河 + 25.4% ROIC + 强现金流），但估值维度 C（现价溢价合理价约 14%、Forward P/E 22.9x 偏高）+ 周期逆风红旗（EPS 下滑、回购暂停、利润率压缩）→ 降至持有观望。核心判断：<strong>家得宝的问题不是生意不好，而是当前 $343.30 已把 Pro 生态兑现 + 房屋复苏预期算入、没有安全边际——现有持仓者可继续持有收息，新买入者应等回调至 $240 附近或利率/房市明确拐点。</strong></p>
+  </div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">投资决策（精确价格 · USD）</h3>
+
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>项目</th><th>价格</th><th>说明</th></tr>
+      <tr><td>12 个月目标价（基准）</td><td><strong>$305</strong> (-11%)</td><td>可比低个位数 + EPS ~$15 + 估值维持 ~20x</td></tr>
+      <tr><td>悲观目标（30% 概率）</td><td>$265 (-23%)</td><td>房市冰封 + 可比转负 + 估值降至 18x</td></tr>
+      <tr><td>乐观目标（25% 概率）</td><td>$360 (+5%)</td><td>降息 + 房屋回暖 + Pro 兑现 + 重估至 23x</td></tr>
+      <tr class="hl"><td>首仓建仓（估值中位数 $300 × 80%）</td><td><strong>$240</strong></td><td>距现价 -30% · 耐心等回调 + 安全边际</td></tr>
+      <tr><td>二仓建仓（× 70%）</td><td>$210</td><td>-39% · 深度回调机会</td></tr>
+      <tr><td>三仓建仓（× 60%）</td><td>$180</td><td>-48% · 黑天鹅级机会</td></tr>
+      <tr><td>止盈一档</td><td>$400</td><td>+17% · 减仓 25%</td></tr>
+      <tr><td>止盈二档</td><td>$440</td><td>+28% · 再减 25%</td></tr>
+      <tr><td>止盈三档</td><td>$480</td><td>+40% · 再减 25% · 最后 25% 长期复利持有</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.85;"><strong>建议总仓位</strong>：<strong>3-5%</strong>（核心质量仓 · 但当前价满估值 + 周期逆风，应在回调时建仓，不追高）。<strong>持有周期</strong>：5-10 年（赌利率回落 + 房屋成交回暖 + Pro 生态兑现 + 回购重启的长期复利）。<strong>关键监控指标</strong>：① 可比销售是否回正/加速（尤其大件商品与 Pro）；② 美联储利率路径 + 抵押贷款利率 + 成屋销售数据；③ 毛利率/营业利润率是否止跌（SRS/GMS 协同）；④ 回购是否重启（去杠杆进度）；⑤ Forward P/E 是否回落至 18-19x（估值机会）。<strong>下次催化剂</strong>：2026-08-18 Q2 FY2026 财报（日期基于历史节奏估计）。</p>
+</div>
+
+<!-- ═══ 海图页末长评 ═══ -->
+<div class="section">
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记 · 1150 字</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p class="lead">价值投资里有一种熟悉的两难——公司足够好，但宏观逆风与并不便宜的价格，让人下不去手。家得宝就是这样一台机器：全美最大的家居改善零售商，2361 家门店 + Pro 专业客户生态 + 25.4% 的 ROIC，可它的引擎正被高利率死死压住。房屋成交低迷、大额装修递延，Q1 可比销售只有 +0.6%，每股收益还在同比下滑。业绩挑不出大错，问题在于：这台机器现在既没顺风，也不便宜。</p>
+
+      <p>家得宝是"给专业施工队和 DIY 业主供货的家居改善收费站"——赚的是全美存量住宅每一次翻新、维修、扩建的钱。Q1 FY2026 净销售 $417.7 亿（+4.8%）· 可比销售 +0.6%（美国 +0.4%）· GAAP EPS $3.30（-4.2%）· 调整后 EPS $3.43（-3.7%）· 营业利润率降至 11.9%（上年 12.9%）。增长几乎全来自并购，内生需求接近停滞。</p>
+
+      <h4>几个研判要点</h4>
+
+      <p><strong>一、4.8% 的营收增长，几乎全是并购买来的。</strong> 这 +4.8% 里，<span class="hl-t">可比销售只贡献 +0.6%</span>，其余大部分来自 SRS（约 $182 亿收购的专业建材分销）和 GMS 的并表，本季 GMS 约贡献 $13 亿。并购同时把毛利率从 33.8% 拉低到 33.0%（降约 75bp，GMS 是低毛利分销），营业利润率从 12.9% 压到 11.9%。家得宝在用并购买营收增长，代价是利润率结构性下移、每股收益同比下滑。这不是坏事，但要清楚：报表上的"增长"含金量，取决于 Pro 生态能否兑现协同。</p>
+
+      <p><strong>二、需求被利率锁住，没有明确的加速催化剂。</strong> 逐月可比暴露了真实节奏——2 月 +0.7%、3 月 +2.0%、4 月 -0.5%。换厨房、翻新浴室这类大额可选装修仍被高利率和房屋低换手压制，大件商品可比只有 +0.8%。亮点是 Pro（专业客户）可比转正并跑赢 DIY、线上 +10% 以上连续第 4 季双位数。<span class="hl-t">家得宝的困境不是自己做错了什么，而是它绑定的房地产周期还没转向</span>——利率一天不下来，装修需求就一天回不来。</p>
+
+      <p><strong>三、别把"净现金"安在它头上——它是高杠杆净负债。</strong> 很多人以为龙头零售商都是现金堡垒，家得宝恰恰相反。现金只有 $16 亿，<span class="warn-t">有息负债却高达 $535 亿（短债 $35 亿 + 长债当期 $52 亿 + 长债 $448 亿），真实净负债 -$519 亿</span>；算上经营租赁负债更接近 -$616 亿。股东权益仅 $139 亿——常年大额回购把账面净资产打得很薄，SRS/GMS 并购进一步推高杠杆。这是一家高杠杆公司，不是零负债神话。好在利息覆盖约 8 倍、FCF 强劲，杠杆尚在安全区。</p>
+
+      <p><strong>四、回购停了，这是信号。</strong> 家得宝过去三年股息稳步增长（FY2023 $83.8 亿 → FY2025 $91.5 亿），但回购从 FY2023 的 $79.5 亿骤降到 FY2024 的 $6.5 亿，FY2025 和 Q1 FY2026 直接归零。原因是并购推高杠杆，管理层优先去杠杆。<span class="warn-t">摊薄股数因此不降反升</span>（FY2024 9.93 亿 → Q1 FY2026 9.96 亿），$150 亿授权基本没动。在杠杆回落、回购重启之前，EPS 少了一条重要的增长腿——这也是它同比下滑的原因之一。</p>
+
+      <p><strong>五、估值没有安全边际。</strong> 独立估值给出的合理价中位数约 $300（相对 P/E、DCF、所有者盈余收益率、DDM 交叉验证）。当前 $343.30 不是折价，而是相对合理价<strong>溢价约 14%</strong>。Forward P/E 约 22.9x 对一个 EPS 还在下滑、利润率在压缩、回购暂停的公司偏高。反向 DCF 显示现价已隐含约 5.5-6% 的长期 FCF 增长——等于市场提前定价了一场尚未发生的房地产复苏。</p>
+
+      <h4>海图研判</h4>
+
+      <p><strong>评级：持有观望</strong>（全美家居改善龙头 + Pro 生态 + 25.4% ROIC + 自 1987 年从未间断派息的顶级生意，对垒高利率锁死房屋成交 + 内生需求停滞 + 并购稀释利润率 + 回购暂停 + Forward P/E 约 23x 无安全边际）。12 个月概率加权目标价 <strong>$305</strong>（悲观 $265 / 基准 $305 / 乐观 $360），相对现价 -11%——预期回报为负，不在建仓窗口。</p>
+
+      <p>操作建议：独立估值中位数 $300。当前 $343.30 无安全边际，耐心等回调。<strong>首仓 $240（中位数×80%）、二仓 $210（×70%）、三仓 $180（×60%）</strong>，分批建立。止盈三档 $400 / $440 / $480，每档减 25%，最后 25% 长期持有。建议总仓位 3-5%（核心质量仓，回调时建，不追高）。持有周期 5-10 年，赌的是利率回落 + 房屋成交回暖 + Pro 生态兑现 + 回购重启。<span class="hl-t">关键纪律：好公司也要好价格，尤其当它的周期还没转、回购还没回来时。</span></p>
+
+      <h4>风险提示</h4>
+
+      <p>高利率持续压制房屋成交与装修需求 / 并购整合不及预期、协同兑现慢 / 利润率进一步下移 / 消费衰退冲击大额可选支出 / 高杠杆下利率上行推高利息费用——任一项都可能让股价跌向 $290（52 周低 $289 附近）甚至更低。但全美龙头地位 + $1.2 万亿 TAM + 大量自有门店地产 + 连续 37 年派息记录构成质量底，<strong>$280-290 是较硬的估值支撑</strong>。家得宝的"底"比周期建材股高，因为龙头质量溢价难以完全消失。</p>
+
+      <p>关键叙事：<strong>"全美最大家居改善零售收费站 + Pro 生态扩张 + 25.4% ROIC + 自 1987 年从未间断派息"的世界级龙头，对垒"高利率锁死房屋成交 + 内生需求停滞 + 并购稀释利润率 + 回购暂停 + Forward P/E 约 23x 无安全边际"的周期逆风与估值风险</strong>。家得宝不缺质量，缺的是一个便宜的价格和一个转向的利率周期。它不是给追高的人——它值得在房市与估值同时给出安全边际时，耐心建仓，然后让一台顶级龙头慢慢滚雪球。下次财报 2026-08-18，届时重新审视需求节奏与去杠杆进度。</p>
+
+      <p class="haitu-sign">—— 海图，灯下落笔，明日再观风浪。</p>
+
+      <p class="haitu-disc">⚠️ 免责声明：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，不构成任何投资建议。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div>《海图夜读》 · The Home Depot HD Q1 FY2026 海图研判</div>
+  <div style="margin-top:6px;">发布日 2026-05-19 · 研判日 2026-07-11 · 数据来源 The Home Depot Q1 FY2026 官方财报新闻稿（SEC 8-K 附件 99.1 + IR PDF）+ 电话会 transcript + FY2025 官方新闻稿</div>
+</footer>
+
+<script>
+let curTheme = 'light';
+function toggleTheme() {
+  curTheme = curTheme === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', curTheme);
+  renderCharts();
+}
+
+const palette = {
+  light: { accent: '#8a9a8e', accent2: '#7b8fa0', accent3: '#b08d7a', gold: '#b9a06a', red: '#b87070', green: '#7a9a7a', grid: '#e5ddd5', text: '#7a706a' },
+  dark:  { accent: '#8a9a8e', accent2: '#8fabbf', accent3: '#c9a48e', gold: '#c9b07a', red: '#c08080', green: '#8aaa8a', grid: '#3e3a35', text: '#a09890' }
+};
+
+let charts = {};
+function renderCharts() {
+  Object.values(charts).forEach(c => c && c.destroy && c.destroy());
+  charts = {};
+  const p = palette[curTheme];
+  Chart.defaults.color = p.text;
+  Chart.defaults.borderColor = p.grid;
+
+  const quarters = ['Q1 25','Q2 25','Q3 25','Q4 25','Q1 26'];
+  const rev = [39.86, 45.28, 41.35, 38.20, 41.77];
+  const comp = [-0.3, 1.0, 0.2, 0.4, 0.6];
+  charts.rev = new Chart(document.getElementById('chartRev'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { type:'bar', label: '净销售 ($B)', data: rev, backgroundColor: p.accent + 'CC', yAxisID: 'y' },
+      { type: 'line', label: '可比销售 %', data: comp, borderColor: p.red, backgroundColor: p.red, tension: 0.3, yAxisID: 'y1' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false }, y1: { position: 'right', grid: { drawOnChartArea: false }, ticks: { callback: v => v + '%' } } } }
+  });
+
+  const gm = [33.8, 33.4, 33.4, 32.6, 33.0];
+  const om = [12.9, 14.5, 12.9, 10.1, 11.9];
+  charts.margin = new Chart(document.getElementById('chartMargin'), {
+    type: 'line',
+    data: { labels: quarters, datasets: [
+      { label: '毛利率 %', data: gm, borderColor: p.accent2, backgroundColor: p.accent2 + '22', tension: 0.3, fill: false },
+      { label: '营业利润率 %', data: om, borderColor: p.accent3, backgroundColor: p.accent3 + '22', tension: 0.3, fill: true }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false, ticks: { callback: v => v + '%' } } } }
+  });
+
+  charts.segment = new Chart(document.getElementById('chartSegment'), {
+    type: 'doughnut',
+    data: {
+      labels: ['营业成本', '销售&管理费', '折旧摊销', '营业利润'],
+      datasets: [{ data: [27.98, 7.96, 0.84, 4.98], backgroundColor: [p.accent3, p.accent2, p.gold, p.green] }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { font: { size: 11 } } } } }
+  });
+
+  const epsG = [3.45, 4.58, 3.62, 2.58, 3.30];
+  const epsA = [3.56, 4.68, 3.74, 2.72, 3.43];
+  charts.eps = new Chart(document.getElementById('chartEps'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { label: 'GAAP EPS', data: epsG, backgroundColor: p.accent + 'CC' },
+      { label: '调整后 EPS', data: epsA, backgroundColor: p.accent3 + 'CC' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, ticks: { callback: v => '$' + v } } } }
+  });
+
+  buildSankey();
+}
+
+function buildSankey() {
+  const p = palette[curTheme];
+  const labels = ['净销售 $41.77','营业成本 $27.98','毛利 $13.78','销售&管理费 $7.96','折旧摊销 $0.84','营业利润 $4.98','利息及其他 $0.60','所得税 $1.09','净利润 $3.29'];
+  const data = {
+    type: 'sankey',
+    orientation: 'h',
+    node: { pad: 15, thickness: 20, line: { color: p.grid, width: 0.5 }, label: labels, color: [p.accent, p.red, p.green, p.red, p.red, p.green, p.red, p.red, p.green] },
+    link: {
+      source: [0, 0, 2, 2, 2, 5, 5, 5],
+      target: [1, 2, 3, 4, 5, 6, 7, 8],
+      value:  [27.98, 13.78, 7.96, 0.84, 4.98, 0.60, 1.09, 3.29],
+      color: [p.red+'55', p.green+'66', p.red+'55', p.red+'55', p.green+'66', p.red+'55', p.red+'55', p.green+'66']
+    }
+  };
+  const layout = { font: { size: 12, color: p.text }, paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)', margin: { l: 10, r: 10, t: 10, b: 10 } };
+  Plotly.react('sankey', [data], layout, { displayModeBar: false, responsive: true });
+}
+
+renderCharts();
+</script>
+
+</body>
+</html>
