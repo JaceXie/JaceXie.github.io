@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-07-10 · Apple Q2 FY2026 财报已于 2026-04-30 发布 -->
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>苹果 AAPL Q2 FY2026 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+<meta name="description" content="25 亿台活跃设备的生态围城——硬件获客、服务收租。Q2 交出史上最佳三月季：营收 $1,112 亿（+16.6%）、iPhone +21.7%、大中华区 +28.1% 近四年最强、毛利率 49.3% 历史新高，新批 $1,000 亿回购 + 股息上调 4%。但 Forward P/E 36x 比微软贵七成、比 Alphabet 贵三成，内存成本将压毛利率回落、FY2027 高基数在前——完美的财报，满格的价格。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="苹果 AAPL Q2 FY2026 海图研判 · 海图夜读">
+<meta property="og:description" content="25 亿台活跃设备的生态围城——硬件获客、服务收租。Q2 交出史上最佳三月季：营收 $1,112 亿（+16.6%）、iPhone +21.7%、大中华区 +28.1% 近四年最强、毛利率 49.3% 历史新高，新批 $1,000 亿回购 + 股息上调 4%。但 Forward P/E 36x 比微软贵七成、比 Alphabet 贵三成，内存成本将压毛利率回落、FY2027 高基数在前——完美的财报，满格的价格。">
+<meta property="og:url" content="https://jacexie.github.io/haitu/reports/aapl-q2-fy2026.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="苹果 AAPL Q2 FY2026 海图研判 · 海图夜读">
+<meta name="twitter:description" content="25 亿台活跃设备的生态围城——硬件获客、服务收租。Q2 史上最佳三月季：营收 +16.6%、大中华区 +28.1%、毛利率 49.3% 新高。但 Forward P/E 36x 无安全边际——完美的财报，满格的价格。">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root { --bg:#f5f0eb; --bg2:#ece6df; --card:#ffffff; --card2:#f8f5f1; --border:#d9d0c7; --text:#4a4340; --text2:#7a706a; --text3:#a89f98; --accent:#8a9a8e; --accent2:#7b8fa0; --accent3:#b08d7a; --rose:#c09090; --gold:#b9a06a; --red:#b87070; --green:#7a9a7a; --shadow:rgba(0,0,0,0.06); --chart-grid:#e5ddd5; }
+[data-theme="dark"] { --bg:#1e1c1a; --bg2:#28251f; --card:#2e2a25; --card2:#363230; --border:#4a4540; --text:#d4ccc4; --text2:#a09890; --text3:#706860; --accent:#8a9a8e; --accent2:#8fabbf; --accent3:#c9a48e; --rose:#c09090; --gold:#c9b07a; --red:#c08080; --green:#8aaa8a; --shadow:rgba(0,0,0,0.3); --chart-grid:#3e3a35; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', serif; line-height: 1.75; font-size: 14.5px; transition: background .35s, color .35s; }
+a { color: var(--accent2); text-decoration: none; }
+.theme-bar { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); }
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+.toggle-switch { position: relative; width: 44px; height: 22px; background: var(--border); border-radius: 11px; cursor: pointer; transition: background .3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: var(--card); border-radius: 50%; transition: transform .3s; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+
+.hero { padding: 48px 24px 36px; text-align: center; border-bottom: 1px solid var(--border); }
+.hero-tag { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 3px 14px; border-radius: 20px; margin-bottom: 18px; }
+.hero h1 { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.pill { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: 'Segoe UI', sans-serif; font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow); }
+.pill strong { color: var(--text); }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle { font-size: 18px; font-weight: 700; color: var(--accent3); margin-bottom: 20px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+.stitle::before { content: ''; display: block; width: 4px; height: 20px; background: var(--accent3); border-radius: 2px; }
+
+.haitu-quip { display: flex; align-items: center; gap: 18px; background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 18px 24px; margin: 24px 0; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-quote { flex: 1; }
+.haitu-portrait { font-size: 15px; line-height: 1.65; color: var(--text); margin-bottom: 6px; font-weight: 600; }
+.haitu-rating-line { font-size: 13px; color: var(--text2); font-family: 'Segoe UI', sans-serif; }
+.rating-badge { display: inline-block; padding: 2px 12px; border-radius: 12px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; margin-left: 4px; }
+.rating-hold { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+
+.haitu-essay { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 28px 32px; margin: 24px 0 20px; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-essay-header { display: flex; align-items: center; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.haitu-avatar-sm { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); background: var(--red); box-shadow: 0 2px 8px rgba(184,112,112,0.2); }
+.haitu-name-lg { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 28px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 4px; }
+.haitu-essay-tag { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; }
+.haitu-essay-body { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 15px; line-height: 2.0; color: var(--text); }
+.haitu-essay-body p { margin-bottom: 14px; }
+.haitu-essay-body p.lead { font-size: 16px; font-style: italic; color: var(--text2); margin-bottom: 18px; }
+.haitu-essay-body strong { color: var(--text); font-weight: 700; }
+.haitu-essay-body h4 { font-size: 14px; color: var(--accent3); margin: 18px 0 10px; font-family: 'Segoe UI', sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+.haitu-sign { text-align: right; margin-top: 18px; font-family: 'Georgia', serif; font-size: 14px; color: var(--text2); font-style: italic; }
+.haitu-disc { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); font-style: italic; line-height: 1.7; }
+
+.stock-snap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px; }
+.snap-item { text-align: center; }
+.snap-label { font-family: 'Segoe UI', sans-serif; font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.snap-val { font-family: 'Segoe UI', sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+.snap-val.up { color: var(--green); }
+.snap-val.dn { color: var(--red); }
+.snap-sub { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow); }
+.kpi-l { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.badge { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+.up { background: rgba(122,154,122,.15); color: var(--green); }
+.dn { background: rgba(184,112,112,.15); color: var(--red); }
+.nt { background: rgba(123,143,160,.15); color: var(--accent2); }
+
+.tbl-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow); }
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI', sans-serif; font-size: 13px; }
+.tbl th { background: var(--card2); color: var(--text3); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); background: var(--card2); }
+
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); }
+.ctitle { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 260px; }
+
+.cmt { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 26px; line-height: 1.95; font-size: 14px; box-shadow: 0 1px 4px var(--shadow); color: var(--text); }
+.cmt p { margin-bottom: 14px; }
+.cmt p:last-child { margin-bottom: 0; }
+.cmt strong { color: var(--text); }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+
+.bscore { display: flex; align-items: center; gap: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; margin-bottom: 12px; box-shadow: 0 1px 4px var(--shadow); }
+.circle { width: 62px; height: 62px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; flex-shrink: 0; border: 3px solid; font-family: 'Segoe UI', sans-serif; }
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 4px; color: var(--text); }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.moat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+.moat-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); border-left: 4px solid var(--accent); }
+.moat-card.wide { border-left-color: var(--green); }
+.moat-card.narrow { border-left-color: var(--gold); }
+.moat-card.none { border-left-color: var(--red); }
+.moat-card h5 { font-size: 13px; color: var(--text); margin-bottom: 6px; }
+.moat-card .moat-rate { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.moat-card.wide .moat-rate { background: rgba(122,154,122,.18); color: var(--green); }
+.moat-card.narrow .moat-rate { background: rgba(185,160,106,.18); color: var(--gold); }
+.moat-card.none .moat-rate { background: rgba(184,112,112,.18); color: var(--red); }
+.moat-card p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+
+.ec-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 14px; box-shadow: 0 1px 3px var(--shadow); }
+.ec-badge { flex-shrink: 0; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-top: 2px; font-family: 'Segoe UI', sans-serif; }
+.ec-bull { background: rgba(122,154,122,.18); color: var(--green); }
+.ec-bear { background: rgba(184,112,112,.18); color: var(--red); }
+.ec-neut { background: rgba(185,160,106,.18); color: var(--gold); }
+.ec-body { flex: 1; }
+.ec-title { font-weight: 600; color: var(--text); margin-bottom: 3px; font-size: 14px; }
+.ec-note { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.dcf-note { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.dcf-note strong { color: var(--text); }
+
+.scorecard { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow); }
+.score-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.score-card { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px; }
+.score-letter { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Segoe UI', sans-serif; font-weight: 800; font-size: 22px; flex-shrink: 0; border: 3px solid; }
+.s-a { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.12); }
+.s-bp { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.06); }
+.s-b { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.10); }
+.s-bm { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.06); }
+.s-c { color: var(--red); border-color: var(--red); background: rgba(184,112,112,.08); }
+.score-body h4 { font-size: 13px; color: var(--text); margin-bottom: 4px; }
+.score-body p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+.flag-row { margin-top: 16px; padding: 12px 16px; background: rgba(184,112,112,.08); border: 1px solid rgba(184,112,112,.3); border-radius: 8px; font-size: 13px; color: var(--text2); }
+.flag-row strong { color: var(--red); }
+
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center; box-shadow: 0 1px 4px var(--shadow); }
+.pbox .pl { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; }
+.pbox .pv { font-family: 'Segoe UI', sans-serif; font-size: 28px; font-weight: 800; margin-bottom: 5px; }
+.pbox .pn { font-size: 12px; color: var(--text3); line-height: 1.5; }
+.pc { color: var(--red); } .pf { color: var(--gold); } .ps { color: var(--green); }
+
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.risk-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); position: relative; overflow: hidden; }
+.risk-card::before { content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent); }
+.risk-card.r1::before { background: var(--green); }
+.risk-card.r2::before { background: rgba(122,154,122,.6); }
+.risk-card.r3::before { background: var(--gold); }
+.risk-card.r4::before { background: var(--rose); }
+.risk-card.r5::before { background: var(--red); }
+.risk-card h5 { font-size: 14px; margin-bottom: 6px; color: var(--text); }
+.risk-score { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.r1 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r2 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r3 .risk-score { background: rgba(185,160,106,.18); color: var(--gold); }
+.r4 .risk-score { background: rgba(192,144,144,.18); color: var(--rose); }
+.r5 .risk-score { background: rgba(184,112,112,.18); color: var(--red); }
+.risk-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+footer { background: var(--card2); border-top: 1px solid var(--border); padding: 24px; text-align: center; color: var(--text3); font-size: 12px; margin-top: 40px; line-height: 1.8; }
+@media (max-width: 768px) { .cgrid,.pgrid { grid-template-columns: 1fr; } .hero h1 { font-size: 22px; } .kpi-grid { grid-template-columns: 1fr 1fr; } .stock-snap { grid-template-columns: 1fr 1fr; } .haitu-essay-header { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/AAPL" target="_blank" rel="noopener" title="在雪球查看 AAPL 实时行情">雪球 AAPL</a>
+  </div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">Q2 FY2026 财报发布 · 2026-04-30 &nbsp;|&nbsp; 海图研判 · 2026-07-11</div>
+  <h1>苹果 AAPL · FY2026 Q2 财报深度分析</h1>
+  <div class="hero-sub">NASDAQ: AAPL &nbsp;|&nbsp; 财季截至 2026-03-28（"三月季"）&nbsp;|&nbsp; 价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill">股价 <strong>$314.61</strong> <span style="color:var(--gold)">距 52 周高 -0.9%</span></div>
+    <div class="pill">市值 <strong>$4.61T</strong></div>
+    <div class="pill">Q2 营收 <strong>$111.2B</strong> <span style="color:var(--green)">+16.6%</span></div>
+    <div class="pill">摊薄 EPS <strong>$2.01</strong> <span style="color:var(--green)">+21.8%</span></div>
+    <div class="pill">毛利率 <strong>49.3%</strong> <span style="color:var(--green)">历史新高</span></div>
+    <div class="pill">Forward P/E <strong>~36x</strong> <span style="color:var(--gold)">无安全边际</span></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 海图页首短评 ═══ -->
+<div class="haitu-quip">
+  <div class="haitu-quote">
+    <div class="haitu-portrait">全球最大消费电子生态——25 亿台活跃设备的围城，硬件获客、服务收租。Q2 交出史上最佳三月季：营收 +16.6%、所有地区所有品类双位数增长、大中华区 +28.1% 近四年最强、毛利率 49.3% 历史新高，新批 $1,000 亿回购 + 股息上调 4%。但 Forward P/E 36x 比微软贵七成、比 Alphabet 贵三成，内存成本将压毛利率回落、FY2027 超级周期高基数在前——完美的财报，满格的价格。</div>
+    <div class="haitu-rating-line">评级：<span class="rating-badge rating-hold">持有观望</span> · 12 个月目标价 $290（-8%）· 史上最强生态收费站 + iPhone 17 超级周期 + 服务复利机器，对垒 36x 满价 + 毛利率见顶 + 高基数将至</div>
+  </div>
+</div>
+
+<!-- ═══ 市场数据快照 ═══ -->
+<div class="section">
+  <div class="stitle">市场数据快照（2026-07-10 收盘）</div>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">股价（美元）</div><div class="snap-val">$314.61</div><div class="snap-sub">2026-07-10 收盘 · 距 52 周高 -0.9%</div></div>
+    <div class="snap-item"><div class="snap-label">市值</div><div class="snap-val">$4.61T</div><div class="snap-sub">全球市值最大公司之一</div></div>
+    <div class="snap-item"><div class="snap-label">TTM P/E</div><div class="snap-val dn">~38.1x</div><div class="snap-sub">TTM EPS $8.26</div></div>
+    <div class="snap-item"><div class="snap-label">Forward P/E</div><div class="snap-val dn">~36.0x</div><div class="snap-sub">FY2026E EPS ~$8.75</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间</div><div class="snap-val">$201.50 - $317.40</div><div class="snap-sub">紧贴上沿</div></div>
+    <div class="snap-item"><div class="snap-label">股息率</div><div class="snap-val">~0.34%</div><div class="snap-sub">$1.08/年 · 季率 $0.27（+4%）</div></div>
+    <div class="snap-item"><div class="snap-label">FCF Yield（估）</div><div class="snap-val nt">~2.7%</div><div class="snap-sub">TTM FCF ~$125B 量级</div></div>
+    <div class="snap-item"><div class="snap-label">现金 + 投资</div><div class="snap-val up">$146.6B</div><div class="snap-sub">2026-03-28 末</div></div>
+    <div class="snap-item"><div class="snap-label">有息负债</div><div class="snap-val">$84.7B</div><div class="snap-sub">商票 2.0 + 短债 8.3 + 长债 74.4</div></div>
+    <div class="snap-item"><div class="snap-label">真实净现金</div><div class="snap-val up">$61.9B</div><div class="snap-sub">扣租赁负债后约 $48.2B</div></div>
+    <div class="snap-item"><div class="snap-label">TTM 营收 / 净利</div><div class="snap-val">$451.4B / $122.6B</div><div class="snap-sub">净利率 ~27%</div></div>
+    <div class="snap-item"><div class="snap-label">下次财报</div><div class="snap-val nt">2026-07-30</div><div class="snap-sub">Q3 FY2026（六月季）</div></div>
+  </div>
+  <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">数据时点：股价 2026-07-10 收盘（stockanalysis / Yahoo 双源一致）· 财务数据来源 Apple Q2 FY2026 官方财报新闻稿 + 合并报表 PDF（2026-04-30 发布，财季截至 2026-03-28）· 关键科目经 SEC EDGAR XBRL API 逐项核验 · 货币 USD。苹果财年截至 9 月最后一个周六，故 Q2 FY2026 = 2025-12-28 至 2026-03-28（"三月季"）。本季无 Non-GAAP 调整项，GAAP = Non-GAAP。</p>
+</div>
+
+<!-- ═══ Q2 FY2026 KPI ═══ -->
+<div class="section">
+  <div class="stitle">Q2 FY2026 核心业绩（USD · 财季截至 2026-03-28）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">总营收</div><div class="kpi-v">$111.2B</div><span class="badge up">+16.6% YoY</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">史上最佳三月季</div></div>
+    <div class="kpi"><div class="kpi-l">iPhone 营收</div><div class="kpi-v">$57.0B</div><span class="badge up">+21.7%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">三月季历史纪录 · iPhone 17 驱动</div></div>
+    <div class="kpi"><div class="kpi-l">服务营收</div><div class="kpi-v">$31.0B</div><span class="badge up">+16.3%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">历史新高 · 年化 ~$124B</div></div>
+    <div class="kpi"><div class="kpi-l">Mac 营收</div><div class="kpi-v">$8.4B</div><span class="badge up">+5.7%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">受供应约束压制</div></div>
+    <div class="kpi"><div class="kpi-l">iPad 营收</div><div class="kpi-v">$6.9B</div><span class="badge up">+8.0%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">稳健</div></div>
+    <div class="kpi"><div class="kpi-l">可穿戴/家居/配件</div><div class="kpi-v">$7.9B</div><span class="badge up">+5.0%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">低个位数恢复</div></div>
+    <div class="kpi"><div class="kpi-l">大中华区营收</div><div class="kpi-v">$20.5B</div><span class="badge up">+28.1%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">近四年最强</div></div>
+    <div class="kpi"><div class="kpi-l">毛利率</div><div class="kpi-v">49.3%</div><span class="badge up">+220bp</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">历史新高 · 产品 38.7% / 服务 76.7%</div></div>
+    <div class="kpi"><div class="kpi-l">研发费用</div><div class="kpi-v">$11.4B</div><span class="badge dn">+33.6%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">AI 投入加码 · 占营收 10.3%</div></div>
+    <div class="kpi"><div class="kpi-l">经营利润</div><div class="kpi-v">$35.9B</div><span class="badge up">利润率 32.3%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">上年同期 31.0%</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 净利润</div><div class="kpi-v">$29.6B</div><span class="badge up">+19.4%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">本季无 Non-GAAP 调整</div></div>
+    <div class="kpi"><div class="kpi-l">摊薄 EPS</div><div class="kpi-v">$2.01</div><span class="badge up">+21.8%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">缩股贡献 ~2pp</div></div>
+  </div>
+</div>
+
+<!-- ═══ 本季必看 ═══ -->
+<div class="section">
+  <div class="stitle">本季必看 · 三个"看点"：全线开花、毛利率顶点、资产负债表两处异动</div>
+  <div class="cmt">
+    <p><strong>看点一：所有地区、所有品类双位数增长——这是苹果近年最"整齐"的一季。</strong> 营收 $111.2B（+16.6%），iPhone +21.7% 创三月季纪录，服务 +16.3% 创历史新高；五大地区全部双位数：美洲 +11.9%、欧洲 +14.7%、日本 +15.1%、亚太其他 +25.3%，<span class="hl-t">大中华区 +28.1% 为近四年最强</span>——两年前市场还在讲"苹果在中国被国产替代"的故事，如今中国是增长最快的地区。需要打的折扣：汇率为本季增速贡献约 2.5 个百分点顺风，恒定汇率口径约 +14%。</p>
+    <p><strong>看点二：毛利率 49.3% 历史新高，但大概率是本轮顶点。</strong> 产品毛利率 38.7% + 服务毛利率 76.7%，混合毛利率同比 +220bp。但管理层指引下季毛利率回落至 <span class="warn-t">47.5%–48.5%</span>，原因是内存成本将"显著"上升且会持续——AI 数据中心抢占存储产能的行业性涨价正在传导到消费电子。同时研发费用 +33.6%（AI 加码），经营杠杆的顺风正在转向。</p>
+    <p><strong>看点三：资产负债表两处异动值得盯住。</strong> 其一，<span class="warn-t">无形资产净额从 2025-09-27 末的 $110.9 亿单季跳增至 $213.3 亿（约 +$102 亿）</span>，10-Q 报表面未明示原因——量级指向大额技术许可或收购，是后续 10-Q 附注的必查项。其二，留存收益由 -$142.6 亿累计亏损转正至 +$123.6 亿——盈利大幅超过回购 + 分红的返还节奏，侧面印证本季<span class="hl-t">回购 $12.3B 环比腰斩（Q1 为 $24.7B）</span>。管理层一边新批 $1,000 亿授权、一边放缓执行——在 36x 估值上，苹果自己买自己也变得克制了。</p>
+  </div>
+</div>
+
+<!-- ═══ 趋势图 ═══ -->
+<div class="section">
+  <div class="stitle">关键指标趋势</div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">营收（$B）& YoY 增速（近 5 季）</div><div class="cwrap"><canvas id="chartRev"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">毛利率 & 经营利润率（%，近 5 季）</div><div class="cwrap"><canvas id="chartMargin"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">Q2 FY2026 营收分部拆分（$B）</div><div class="cwrap"><canvas id="chartSegment"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">摊薄 EPS（$，近 5 季）</div><div class="cwrap"><canvas id="chartEPS"></canvas></div></div>
+  </div>
+</div>
+
+<!-- ═══ 桑基图 ═══ -->
+<div class="section">
+  <div class="stitle">Q2 FY2026 资金流向桑基图（$B）</div>
+  <div class="ccard">
+    <div id="sankey" style="width:100%;height:480px;"></div>
+    <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">说明：营收 $111.2 → 营业成本 $56.4 + 毛利 $54.8 → 研发 $11.4 + 销售管理 $7.5 + 营业利润 $35.9 → 所得税及其他 $6.3 + 净利润 $29.6（有效税率 17.5%，其他项净额极小）。本季 OCF $28.7B、Capex 仅 $2.0B、FCF $26.7B（FCF 利润率 24%）——苹果把重资产制造环节外置给代工与芯片伙伴，自身报表口径极轻资产。当季向股东返还 $16.1B（回购 $12.3B + 股息 $3.8B），约为 FCF 的 60%。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 1 ═══ -->
+<div class="section">
+  <div class="stitle">模块 1 · 公司概览与背景</div>
+  <div class="cmt">
+    <p><strong>Apple Inc.</strong>（NASDAQ: AAPL），总部加州库比蒂诺。1976 年创立，1980-12 IPO。财年截至 9 月最后一个周六，本季为 FY2026 第二财季（截至 2026-03-28 的"三月季"）。</p>
+    <p><strong>核心叙事</strong>：苹果是<span class="hl-t">全球最大的消费电子生态系统</span>——25 亿台活跃设备（历史新高，去年同期口径 23.5 亿）构成一座围城：iPhone/Mac/iPad/可穿戴是城门，App Store、iCloud、Apple Music/TV+、支付、广告、AppleCare 等服务是城内年年上涨的租金。Q2 营收结构：产品 $80.2B（72%）+ 服务 $31.0B（28%）；服务毛利率 76.7%，贡献的毛利已接近整体毛利的 43%。TTM 营收 $451.4B、净利 $122.6B——单一公司体量相当于一个中等经济体。</p>
+    <p><strong>本季的时代背景</strong>：iPhone 17 系列引发了久违的超级周期——升级用户创纪录、3nm 产能（A19/A19 Pro）供不应求；同时 AI 叙事出现拐点：与 Google 的 Gemini/Siri 合作进展积极，研发开支 +33.6% 为 AI 加码。贸易层面，关税负担从 Q4 FY25 的 $1.1B 高点回落，公司正申请退税。</p>
+    <p><strong>股权与治理</strong>：单一普通股结构，流通股约 146.9 亿股，机构持股为主。治理层面最大的事件是<span class="hl-t">掌舵 15 年的 Tim Cook 将于 2026-09-01 转任执行董事长，硬件工程 SVP John Ternus 接任 CEO</span>，CFO Kevan Parekh 留任——详见模块 2。</p>
+    <p><strong>能力圈检验</strong>：这门生意两句话可以说清——"卖高端硬件获取用户，再向 25 亿设备的安装基数收服务租金"，属于清晰的能力圈之内。但三处不透明需要直说：(1) <span class="warn-t">无形资产单季跳增约 $102 亿</span>，10-Q 报表面未明示原因；(2) AI 自研能力与 Gemini 合作的边界与分成条款未披露；(3) Google 每年支付的搜索默认引擎费（TAC）体量与反垄断裁决的敞口，公司从不单独披露。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 2 ═══ -->
+<div class="section">
+  <div class="stitle">模块 2 · 管理层评估</div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>Tim Cook（CEO 至 2026-09-01）→ John Ternus（候任 CEO）· 一次教科书式的交接</h4>
+      <p>Cook 掌舵 15 年，把苹果从 $3,000 亿市值带到 $4.6 万亿，供应链纪律与服务化转型是他的遗产。2026-09-01 起转任执行董事长，交棒给硬件工程 SVP John Ternus——<span class="hl-t">选择产品工程师而非运营/财务背景接班，信号是回归产品创新</span>。Ternus 主导过 Apple Silicon 迁移等关键项目，内部资历完整；CFO Kevan Parekh 留任保证财务连续性。交接安排提前 4 个月公告、路径清晰，属于治理良好范本——但新 CEO 的资本市场沟通风格与 AI 战略执行力仍需 2-3 个季度观察。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">A</div>
+    <div class="bd">
+      <h4>资本配置纪律 · 全球最大规模的"回购注销机器"</h4>
+      <p>
+      过去三个财年回购 <strong>$2,632 亿</strong> + 股息 $457 亿，合计返还 <strong>$3,089 亿</strong>（官方 10-K 现金流量表，经 SEC XBRL 核验一致）；摊薄股数从 FY2023 的 158.1 亿降至本季 147.3 亿，<strong>三年缩股约 -6.9%</strong>。2026-04-30 新批最多 $1,000 亿回购授权 + 季度股息上调 4% 至 $0.27。<br>
+      <span class="warn-t">一个值得玩味的细节</span>：本季实际回购 $12.3B，较 Q1 的 $24.7B 环比腰斩——在股价历史高位区，管理层放缓了回购节奏。对照其长期"低位加速、高位放缓"的执行记录，这更像纪律而非松懈，但也侧面说明：<strong>连苹果自己都觉得现在的苹果不便宜</strong>。
+      </p>
+    </div>
+  </div>
+
+  <div class="cmt">
+    <p><strong>长期主义测试</strong>：✅ 苹果管理层是典型的"主人翁型经理人"——供应链十年布局、自研芯片十年投入、服务化转型十年兑现，不为单季数字牺牲产品节奏。<strong>坦诚度</strong>：电话会主动披露利空（内存成本将"显著"上升、Mac 供需平衡需数月、关税成本量化到亿级），指引历史偏保守（Q4 FY25 指引 +10–12%，实际 +15.7%）。<strong>利益绑定</strong>：高管持股绝对值大但占比低（超大盘股常态），薪酬与营收/利润率/股东回报强挂钩。<strong>历史兑现</strong>：三年前承诺的服务增长、缩股节奏、自研芯片路线图全部兑现。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 3 ═══ -->
+<div class="section">
+  <div class="stitle">模块 3 · 商业模式深度解析</div>
+  <div class="cmt">
+    <p><strong>海图"一句话测试"</strong>：<span class="hl-t">苹果卖高端硬件把用户请进 25 亿台设备的生态围城，然后用 76.7% 毛利率的服务向城内居民年年收租——硬件获客、服务收租。</span></p>
+    <p><strong>Q2 FY2026 营收模型（按品类）</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>品类</th><th>营收</th><th>YoY</th><th>占比</th><th>驱动</th></tr>
+        <tr><td>iPhone</td><td>$56.99B</td><td>+21.7%</td><td>51%</td><td>iPhone 17 超级周期 · 三月季纪录</td></tr>
+        <tr class="hl"><td>服务 Services</td><td>$30.98B</td><td>+16.3%</td><td>28%</td><td>历史新高 · 毛利率 76.7% · 年化 ~$124B</td></tr>
+        <tr><td>Mac</td><td>$8.40B</td><td>+5.7%</td><td>8%</td><td>受供应约束（MacBook Neo / Mac mini / Studio）</td></tr>
+        <tr><td>可穿戴/家居/配件</td><td>$7.90B</td><td>+5.0%</td><td>7%</td><td>Watch / AirPods 稳态</td></tr>
+        <tr><td>iPad</td><td>$6.91B</td><td>+8.0%</td><td>6%</td><td>稳健</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:14px;"><strong>按地区</strong>：美洲 $45.1B（+11.9%）· 欧洲 $28.1B（+14.7%）· 大中华区 $20.5B（+28.1%，近四年最强）· 日本 $8.4B（+15.1%）· 亚太其他 $9.1B（+25.3%）——五大地区全部双位数，中国从拖累项变成最强引擎。</p>
+    <p><strong>单位经济与议价能力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>双层毛利结构</strong>——产品毛利率 38.7%（消费电子顶级）+ 服务毛利率 76.7%（软件级），服务每提高 1pp 营收占比，混合毛利率自然抬升</li>
+      <li><strong>对供应链议价能力：极强</strong>——全球最大消费电子采购方，但 3nm 产能瓶颈与内存涨价说明议价力也有物理上限</li>
+      <li><strong>对用户定价权：强</strong>——iPhone 均价持续上移而需求"off the chart"，提价不掉量是定价权的直接证据</li>
+      <li><strong>对开发者/渠道：强但受监管挤压</strong>——App Store 佣金 15-30% 是服务利润核心，也正是全球反垄断的靶心</li>
+      <li><strong>轻资产</strong>——Q2 Capex 仅 $2.0B（占营收 1.8%），重资产制造外置给代工与芯片伙伴，自身留下设计、品牌与生态</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══ 模块 4 ═══ -->
+<div class="section">
+  <div class="stitle">模块 4 · 经济护城河分析（5 维）</div>
+  <div class="moat-grid">
+    <div class="moat-card wide">
+      <h5>1. 转换成本</h5>
+      <span class="moat-rate">极宽</span>
+      <p>iMessage / iCloud / 照片 / 健康数据 / App 购买 / 多设备协同层层锁定，换阵营的迁移痛苦极高。25 亿设备安装基数 + 创纪录升级用户是直接证据。<strong>趋势：稳定偏宽</strong>。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>2. 无形资产（品牌）</h5>
+      <span class="moat-rate">宽</span>
+      <p>全球最强消费品牌之一，高端市场利润份额长期占智能手机行业大头；品牌允许"提价不掉量"。<strong>趋势：稳定</strong>（AI 时代品牌与信任反而更值钱）。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>3. 网络效应</h5>
+      <span class="moat-rate">中-宽</span>
+      <p>App Store 双边市场（用户越多开发者越投入）+ iMessage/FaceTime/AirDrop 社交锁定 + 配件生态。弱于纯平台公司，但叠加在转换成本上形成复合壁垒。<strong>趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>4. 规模/成本优势</h5>
+      <span class="moat-rate">宽</span>
+      <p>自研芯片（A/M 系列）摊薄在数亿台设备上，性能功耗比同行难以匹敌；采购规模锁定上游最优产能与价格。<strong>趋势：加宽</strong>（自研硅是十年复利）。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>5. 有效规模</h5>
+      <span class="moat-rate">中</span>
+      <p>高端智能机双寡头（苹果 vs 三星/华为），操作系统双寡头（iOS/Android）。但硬件行业本质开放，份额靠产品力持续赢得。<strong>趋势：稳定</strong>。</p>
+    </div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>10 年后护城河会更宽还是更窄？</strong> <span class="hl-t">生态锁定 + 自研芯片这两条在加宽；两个体系外变量决定长期走向</span>：(1) <span class="warn-t">AI 是否重构人机交互入口</span>——若 AI 原生设备/助理取代 App 生态成为流量入口，App Store 抽成模式会被绕过。苹果的应对是"渠道化 AI"：让 Gemini 等模型接入 Siri，自己守住设备入口与用户关系——历史上它对搜索（Google 付费默认）用过同一策略；(2) <span class="warn-t">全球反垄断对 App Store 佣金与默认协议的持续凿击</span>——欧盟 DMA、美国诉讼逐步打开侧载与第三方支付口子，侵蚀的是服务利润里最肥的一块。</p>
+    <p><strong>定价权</strong>：强。iPhone 17 周期证明高端用户对价格不敏感；服务侧订阅提价历史上几乎无流失。制约来自监管而非竞争。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 5 ═══ -->
+<div class="section">
+  <div class="stitle">模块 5 · 财务深度分析</div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 12px 0; font-family: 'Segoe UI',sans-serif;">5.1 关键比率（Q2 FY2026 vs Q2 FY2025）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>指标</th><th>Q2 FY25</th><th>Q2 FY26</th><th>变化</th><th>含义</th></tr>
+      <tr><td>营收增速</td><td>+5.1%</td><td>+16.6%</td><td><span class="badge up">+11.5pp</span></td><td>超级周期 · 含 ~2.5pp 汇率顺风</td></tr>
+      <tr><td>毛利率</td><td>47.0%</td><td>49.3%</td><td><span class="badge up">+220bp</span></td><td>历史新高 · 服务占比 + 产品组合</td></tr>
+      <tr><td>经营利润率</td><td>31.0%</td><td>32.3%</td><td><span class="badge up">+130bp</span></td><td>研发 +33.6% 部分吃掉毛利红利</td></tr>
+      <tr><td>研发 / 营收</td><td>9.0%</td><td>10.3%</td><td><span class="badge nt">+1.3pp</span></td><td>AI 投入加码</td></tr>
+      <tr><td>有效税率</td><td>~16%</td><td>17.5%</td><td><span class="badge nt">略升</span></td><td>关税税负 Q1→Q2 已下降</td></tr>
+      <tr><td>GAAP 净利（$M）</td><td>24,780</td><td>29,578</td><td><span class="badge up">+19.4%</span></td><td>无 Non-GAAP 调整项</td></tr>
+      <tr><td>摊薄 EPS</td><td>$1.65</td><td>$2.01</td><td><span class="badge up">+21.8%</span></td><td>EPS 增速 &gt; 净利增速 ≈ 缩股 ~2pp</td></tr>
+      <tr><td>ROE（TTM）</td><td>—</td><td>~115%</td><td><span class="badge nt">失真</span></td><td>权益被回购压缩至 $106B，看利润率更有意义</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">杜邦视角：TTM 净利率 ~27.2% × 资产周转 ~1.2 × 高杠杆（权益被 3,000 亿级回购压薄）→ ROE 表观 ~115%。对苹果这类"权益基数被回购人为压缩"的公司，杜邦分解的杠杆项失真，真实盈利能力看净利率 + ROIC（数十个百分点量级，远超 WACC）。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.2 资产负债健康度（2026-03-28 末 · $M）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>金额</th><th>说明</th></tr>
+      <tr><td>现金及等价物</td><td>45,572</td><td>—</td></tr>
+      <tr><td>短期有价证券</td><td>22,935</td><td>现金 + 短投 = 68,507</td></tr>
+      <tr><td>长期有价证券</td><td>78,088</td><td>债券组合为主</td></tr>
+      <tr class="hl"><td>现金及投资总额</td><td>146,595</td><td>—</td></tr>
+      <tr><td>短期借款（商业票据）</td><td>1,997</td><td>独立列示</td></tr>
+      <tr><td>一年内到期定期债务</td><td>8,310</td><td>—</td></tr>
+      <tr><td>长期定期债务</td><td>74,404</td><td>—</td></tr>
+      <tr class="hl"><td>有息负债合计</td><td>84,711</td><td>—</td></tr>
+      <tr class="hl"><td><strong>真实净现金</strong></td><td><strong>61,884</strong></td><td>现金投资 − 有息负债</td></tr>
+      <tr><td>经营 + 融资租赁负债</td><td>13,720</td><td>2025-09-27 末口径（苹果仅年报披露租赁明细）</td></tr>
+      <tr><td>扣租赁后净现金</td><td>~48,164</td><td>更保守口径</td></tr>
+      <tr><td>存货</td><td>6,747</td><td>周转健康</td></tr>
+      <tr><td><span class="warn-t">无形资产净额</span></td><td><span class="warn-t">21,334</span></td><td>⚠️ 较 2025-09-27 末的 11,093 单季跳增约 $102 亿，10-Q 未明示原因</td></tr>
+      <tr><td>留存收益</td><td>12,359</td><td>由 -14,264 累计亏损转正（盈利 &gt; 返还节奏）</td></tr>
+      <tr><td>股东权益</td><td>106,491</td><td>被持续回购压薄</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">⚠️ 两点提示：其一，苹果是<strong>真实净现金 $61.9B</strong>（扣 FY2025 10-K 口径租赁负债后约 $48.2B）——注意不能只看 $146.6B 现金投资总额而无视 $84.7B 有息负债。其二，<strong>无形资产单季 +$102 亿</strong>是本季资产负债表最大异动，量级指向大额许可或收购，10-Q 报表面未明示原因——列为关注项（尚不构成会计红旗，待附注披露），后续财报必查。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.3 现金流量（Q2 FY2026 单季 + H1 累计 · $M）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>Q2 FY26 单季</th><th>H1 FY26 累计</th><th>说明</th></tr>
+      <tr><td>经营活动现金流（OCF）</td><td>28,702</td><td>82,627</td><td>单季 = H1 累计 − Q1 单季（两份官方 PDF 相减）；与新闻稿 "over $28B" 吻合</td></tr>
+      <tr><td>− Capex（官方 line item）</td><td>1,971</td><td>4,344</td><td>"Payments for acquisition of PP&amp;E"</td></tr>
+      <tr class="hl"><td>自由现金流（FCF）</td><td><strong>26,731</strong></td><td><strong>78,283</strong></td><td>FCF 利润率 24%（单季）</td></tr>
+      <tr><td>OCF / 净利</td><td>97%</td><td>115%</td><td>现金流质量优</td></tr>
+      <tr><td>回购</td><td>12,288</td><td>36,989</td><td><span class="warn-t">单季环比 Q1 的 24,701 腰斩</span></td></tr>
+      <tr><td>股息</td><td>3,822</td><td>7,743</td><td>季率 $0.26 → 5 月起 $0.27</td></tr>
+      <tr><td>股权激励费用（SBC）</td><td>—</td><td>7,122</td><td>约为回购额的 1/5</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">口径说明：苹果官方仅披露六个月累计现金流量表，单季数为 H1 FY26 累计减 Q1 FY26 单季（两份官方 PDF 相减），OCF 推导值与新闻稿口径交叉吻合。Capex 占营收仅 1.8%——注意这是苹果商业模式使然（制造与晶圆厂 Capex 由代工伙伴承担），并非投入不足。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.4 所有者盈余（价值投资口径）</h3>
+  <div class="dcf-note">
+    <p><strong>所有者盈余 = 净利润 + 折旧摊销 + SBC − 维护性 Capex ± 营运资金 ≈ FCF</strong></p>
+    <p>苹果是轻资产、高现金转化的生态收费站：H1 FY26 FCF $78.3B / 净利 $71.7B = 109%，FCF 长期略高于净利。TTM FCF 以 H1 实际值 + 季节性外推约 <strong>$120–130B 量级（取 ~$125B）</strong>——官方仅披露半年现金流，此处为标注清楚的估算，非官方 line item。</p>
+    <p><strong>所有者盈余收益率 ≈ $125B / 市值 $4.61T ≈ 2.7%</strong>。这是全场最刺眼的一个数字：2.7% 的所有者盈余收益率，低于无风险利率——市场为"生态确定性 + 超级周期 + AI 期权"支付了极高溢价。<strong>苹果的问题从来不是生意好不好，而是这个价格已经把未来许多年的好都预支了。</strong></p>
+  </div>
+</div>
+
+<!-- ═══ 模块 6 ═══ -->
+<div class="section">
+  <div class="stitle">模块 6 · 电话会分析（Q2 FY2026 + 前 2 季度）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">Q2 FY2026 电话会（2026-04-30）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"史上最佳三月季 $111.2B（+17%），所有地区、所有品类双位数增长；服务 $31B 新高"</div><div class="ec-note">增长的广度罕见——五大地区、五大品类无一掉队，大中华区 +28.1% 近四年最强。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"指引 6 月季营收 +14%–17%，动能延续"——CFO Kevan Parekh</div><div class="ec-note">超级周期不是单季脉冲；华尔街对应 Q3 共识 EPS $1.88（+19.8%）。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"毛利率指引 47.5%–48.5% 环比回落：内存成本将'显著'上升并持续"</div><div class="ec-note">AI 数据中心抢占存储产能的行业性涨价传导至消费电子——49.3% 大概率是本轮毛利率顶点。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"iPhone / Mac 多型号供应受限（3nm 产能瓶颈），Mac 供需平衡需数月"</div><div class="ec-note">需求驱动型缺货——短期压制出货，但侧面证明需求强度；风险在竞品趁缺货抢份额。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"Tim Cook 2026-09-01 转任执行董事长，John Ternus 接任 CEO；CFO Parekh 留任"</div><div class="ec-note">15 年掌舵交棒给硬件工程负责人——回归产品创新的信号；执行连续性待观察。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"新增 $1,000 亿回购授权 + 股息上调 4%；但本季实际回购 $12.3B 环比腰斩"</div><div class="ec-note">授权是上限、执行才是真金——高位放缓回购是纪律，也是管理层对当前估值的无声表态。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"AI 为关键增量投资方向，与 Google（Gemini/Siri）合作进展积极；关税负担下降并寻求退税"</div><div class="ec-note">AI 支出将超常规研发预算节奏；关税成本从 Q4 FY25 的 $1.1B 高点回落。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q1 FY2026 电话会（2026-01-29）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"史上最高单季营收 $143.8B（+16%）、EPS $2.84（+19%）双纪录；iPhone $85.3B（+23%）全地区纪录"</div><div class="ec-note">超级周期在最大体量的假日季得到验证，升级用户历史新高。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"大中华区 +38%，内地升级用户创纪录，门店客流双位数增长"</div><div class="ec-note">中国从"被国产替代"叙事翻转为最强增长引擎。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"服务 +14% 至 $30.0B 创新高，广告/云/音乐/支付均创纪录；安装基数 25 亿台"</div><div class="ec-note">收租机器的分母（设备）与单价（服务渗透）同步扩张。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q4 FY2025 电话会（2025-10-30）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"iPhone 17 需求 'off the chart'，门店客流大增，九月季升级用户创纪录"——Tim Cook</div><div class="ec-note">超级周期的第一声哨响；当季指引 12 月季 +10–12%，实际达成 +15.7%（大幅超指引）。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"关税成本 Q4 $1.1B，预计下季约 $1.4B"</div><div class="ec-note">贸易摩擦的直接成本首次量化到亿级；后续实际税负回落好于当时预期。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"将加码 AI 研发并不排除并购扩张"</div><div class="ec-note">为后续研发 +33.6% 与（可能与无形资产跳增相关的）大额交易埋下伏笔。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">指引兑现度追踪</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>历史指引</th><th>实际</th><th>评价</th></tr>
+      <tr><td>Q4 FY25 指引：12 月季营收 +10–12%</td><td>+15.7%</td><td><span class="badge up">大幅超指引</span></td></tr>
+      <tr><td>Q1 FY26 指引：3 月季毛利率 48–49%</td><td>49.3%</td><td><span class="badge up">超上限</span></td></tr>
+      <tr><td>Q1 FY26 指引：3 月季 opex $18.4–18.7B</td><td>$18.9B</td><td><span class="badge dn">略超上限（AI 投入）</span></td></tr>
+      <tr><td>Q4 FY25：预计大中华区 12 月季恢复增长</td><td>Q1 +38% / Q2 +28.1%</td><td><span class="badge up">远超</span></td></tr>
+      <tr><td>Q4 FY25：预计下季关税 ~$1.4B</td><td>税负 Q1→Q2 下降、正申请退税</td><td><span class="badge up">好于预期</span></td></tr>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>信号汇总</strong>：连续三个季度的电话会构成一条清晰的叙事弧：<span class="hl-t">"需求 off the chart" → 假日季双纪录 → 史上最佳三月季</span>，指引一路保守、实际一路超越——管理层信心度处于近年高位。但 Q2 电话会埋下三个变调：<span class="warn-t">内存成本压毛利率、opex 首次略超指引（AI 烧钱开始）、回购执行腰斩</span>。业绩本身无可挑剔——接下来的问题是 FY2027 面对超级周期高基数时，这台机器还能不能保持双位数。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 7 ═══ -->
+<div class="section">
+  <div class="stitle">模块 7 · 多模型估值（8 种方法）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">7.1 估值汇总表（独立估值 · 不锚定现价 · USD）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>估值方法</th><th>每股公允价</th><th>假设要点</th><th>权重</th></tr>
+      <tr><td>1. 相对估值（P/E）</td><td>$270</td><td>FY2027E EPS ~$9.6（超级周期后回落至 ~+10%）× 28x——给到 Alphabet 级倍数，已含生态质量溢价（微软仅 ~21x）</td><td>20%</td></tr>
+      <tr><td>2. DCF（基准）</td><td>$265</td><td>FCF ~$125B 起步，未来 5 年 CAGR +9–10%，WACC 8%，永续 3.5%，加净现金 $62B</td><td>25%</td></tr>
+      <tr><td>3. 所有者盈余收益率</td><td>$235</td><td>OE ~$125B ÷ 目标收益率 3.5–3.75%（顶级生态 + 高个位数增长的合理要求回报）</td><td>15%</td></tr>
+      <tr><td>4. PEG</td><td>$225</td><td>长期 EPS 增速 ~12%（含缩股 ~2-3pp）× 合理 PEG 2.0–2.2 → 24–26x FY2026E EPS $8.75；当前 PEG 3.0 明显偏贵</td><td>10%</td></tr>
+      <tr><td>5. DDM</td><td>不适用</td><td>股息率仅 0.34%、派息率约 12%——股息在苹果回报结构里是配角，DDM 无参考意义</td><td>0%</td></tr>
+      <tr><td>6. NAV</td><td>不适用</td><td>非资产型公司，价值在生态与品牌，不在账面资产</td><td>0%</td></tr>
+      <tr><td>7. 反向 DCF</td><td>~$252</td><td>现价 $314.61 隐含未来 10 年 FCF 年增 ~9.5%（WACC 8% / 永续 3.5%）——把超级周期外推成常态；按更审慎的 ~6.5% 十年增速回推 ≈ $252</td><td>15%</td></tr>
+      <tr><td>8. SOTP 分部加总</td><td>$245</td><td>硬件 TTM 净利 ~$70B × 26x + 服务 TTM 净利 ~$50B × 34x + 净现金 $62B（服务给软件级倍数、硬件给顶级消费电子倍数）</td><td>15%</td></tr>
+      <tr class="hl"><td><strong>加权公允价中位数</strong></td><td><strong>$255</strong></td><td>估值区间 $225–270 · 加权 ~$255</td><td>100%</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.8;"><strong>与现价对照</strong>：当前 $314.61 vs 加权公允 $255 —— <span class="warn-t">现价高出独立估值约 23%，安全边际为负（约 -19%）</span>，与价值投资 25% 安全边际门槛相距甚远。注意估值口径的诚实性：本表基于最新季度的前瞻趋势（+16.6% 增速、49.3% 毛利率即将回落至 47.5–48.5%、FY2027 高基数）独立推导，未锚定现价。市场价高于独立估值的差额，本质是为"超级周期延续 + AI 期权"支付的情绪溢价。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.2 P/E 多档透视表</h3>
+  <p style="margin-bottom:10px; font-size:13px; color:var(--text2);">苹果本季无 Non-GAAP 调整（GAAP = Non-GAAP），但营收季节性极强（假日季 Q1 独大）+ 超级周期抬升 TTM 基数，单一 P/E 易误读，故多档透视：</p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>口径</th><th>EPS</th><th>P/E（基于 $314.61）</th><th>读数说明</th></tr>
+      <tr><td>TTM GAAP P/E</td><td>$8.26</td><td>~38.1x</td><td>含超级周期红利的后视口径</td></tr>
+      <tr><td>Q2 单季年化 P/E</td><td>$2.01 × 4 = $8.04</td><td>~39.1x</td><td>季节性失真（假日季独大），仅作参照</td></tr>
+      <tr class="hl"><td><strong>Forward P/E（FY2026E 共识 ~$8.75）</strong></td><td><strong>~$8.75</strong></td><td><strong>~36.0x</strong></td><td>最可信档 · 区间 $8.60–8.80</td></tr>
+      <tr><td>FY2027E P/E（~$9.6）</td><td>~$9.6</td><td>~32.8x</td><td>已计入下一年增长后仍 &gt;30x</td></tr>
+      <tr><td>剔净现金核心 P/E（TTM）</td><td>EV $4.55T / $122.6B</td><td>~37.1x</td><td>净现金仅占市值 1.3%，几乎不改善估值</td></tr>
+      <tr><td>FCF Yield（估）</td><td>TTM FCF ~$125B</td><td>~2.7%</td><td>低于无风险利率</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3);"><strong>最可信档</strong>：Forward P/E ~36x。同业对照（详见模块 8）：微软 forward ~21x（增速 +17.9% 相当）、Alphabet ~28x（增速 +22% 更快）。<span class="warn-t">苹果以最慢-居中的增速挂着最贵的倍数</span>——个别 7 月初文章称 "29x forward" 与现价矛盾（旧价格口径），已弃用，按 $314.61 / $8.75 自行计算 = 36.0x。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.3 12 个月目标价（三情景 · 概率加权）</h3>
+  <div class="pgrid">
+    <div class="pbox"><div class="pl">悲观情景 · 25%</div><div class="pv pc">$230</div><div class="pn">内存成本挤压毛利率 + FY2027 高基数下增速转负 + 估值压缩至 ~26x FY2027E<br>距现价 -27%</div></div>
+    <div class="pbox"><div class="pl">基准情景 · 50%</div><div class="pv pf">$290</div><div class="pn">FY2027E EPS ~$9.6 + 估值温和回落至 ~30x（仍高于同业）<br>距现价 -8%</div></div>
+    <div class="pbox"><div class="pl">乐观情景 · 25%</div><div class="pv ps">$355</div><div class="pn">AI Siri 落地成第二超级周期 + 服务加速 + 36x 倍数维持于 FY2027E ~$9.8<br>距现价 +13%</div></div>
+  </div>
+  <p style="font-size:13px; color:var(--text2);"><strong>概率加权 12 个月目标价</strong>：25%×$230 + 50%×$290 + 25%×$355 = <strong>$291 ≈ $290</strong>，距现价 <span class="warn-t">-8%</span>，叠加 0.34% 股息后预期总回报仍为负。注意目标价（$290，含市场倍数惯性）与独立估值中位数（$255，内在价值口径）的差异——两者都低于现价，结论一致：<strong>当前价格透支了基本面。机械首仓价 = $255 × 80% = $204，距现价 -35%。</strong></p>
+</div>
+
+<!-- ═══ 模块 8 ═══ -->
+<div class="section">
+  <div class="stitle">模块 8 · 竞争与行业分析</div>
+  <div class="cmt">
+    <p><strong>行业格局</strong>：高端智能手机基本是苹果与三星（及中国市场的华为）的游戏，苹果长期拿走行业利润的大头；操作系统 iOS/Android 双寡头。真正的战场已从"手机份额"转移到"AI 时代的入口权"——谁掌握用户与 AI 交互的第一触点，谁就掌握下一个十年的抽成权。</p>
+
+    <p><strong>巨头同业对比（2026-07 初口径）</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>公司</th><th>最新季营收增速</th><th>P/E</th><th>核心引擎</th><th>核心评价</th></tr>
+        <tr class="hl"><td><strong>苹果 AAPL</strong></td><td>+16.6%</td><td><strong>TTM ~38x / Fwd ~36x</strong></td><td>iPhone 17 周期 + 服务</td><td>增速居中 · 估值最贵</td></tr>
+        <tr><td>微软 MSFT</td><td>+17.9%（EPS +29.9%）</td><td>TTM 23.3x / Fwd ~21x</td><td>Azure + AI</td><td>增速相当 · 便宜四成</td></tr>
+        <tr><td>Alphabet GOOGL</td><td>+22%（云 +63%，EPS +81%）</td><td>TTM 28.0x</td><td>搜索 + 云 + Gemini</td><td>增速更快 · 便宜两成余</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:10px; font-size:12px; color:var(--text3);">结论直白：<span class="warn-t">AAPL 以 36x forward 显著溢价于 MSFT（~21x）与 GOOGL（28x），但当前增速（+16.6%）低于 GOOGL（+22%）、与 MSFT 相当</span>。市场给苹果的溢价买的是"确定性 + 消费者锁定 + 超级周期"，不是增速。</p>
+
+    <p style="margin-top:14px;"><strong>波特五力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>新进入者：</strong>极低（品牌 + 生态 + 自研芯片 + 供应链，四重壁垒）</li>
+      <li><strong>替代品：</strong>中（AI 原生设备/助理是潜在的"绕过 App 生态"路径，5-10 年维度）</li>
+      <li><strong>供应商议价：</strong>中（多数环节苹果强势，但 3nm 独家依赖台积电、内存行业性涨价说明关键环节有反向议价）</li>
+      <li><strong>买家议价：</strong>低（消费者分散且被生态锁定；提价不掉量）</li>
+      <li><strong>同业竞争：</strong>中（高端市场三星/华为贴身，但利润池份额稳固）</li>
+    </ul>
+
+    <p><strong>颠覆风险</strong>：两条路径值得盯——(1) AI 助理成为新交互入口、绕过 App Store 抽成；(2) 监管强拆默认协议与佣金结构（欧盟 DMA / 美国诉讼 / Google 反垄断案对 TAC 收入的外溢）。苹果的对冲是把 AI"渠道化"（Gemini 接入 Siri、自己守住设备入口），历史上它对搜索用同一策略并大获成功。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 9 ═══ -->
+<div class="section">
+  <div class="stitle">模块 9 · 技术面与 K 线分析（次要参考）</div>
+  <div class="cmt">
+    <p><strong>趋势</strong>：过去一年 AAPL 从 52 周低点 $201.50 上行至 $314.61，<span class="hl-t">涨幅约 +56%，现价距 52 周高点 $317.40 仅 -0.9%</span>——处于强势上行趋势的末端高位，多头结构完好，但赔率已明显恶化。</p>
+    <p><strong>关键价位</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>阻力</strong>：$317.40（52 周高 / 历史高位区）· 突破后进入无阻力区，动量资金主导</li>
+      <li><strong>支撑</strong>：$290（前平台 + 心理关口）/ $270（上行趋势中枢）/ $230–255（估值支撑带：悲观情景价 + 独立估值中位数）</li>
+    </ul>
+    <p><strong>指标信号</strong>：紧贴 52 周高点意味着 RSI 处高位、乖离偏大，任何指引不及预期都容易触发获利了结。7-30 财报（Q3 FY2026）是最近的波动率事件。</p>
+    <p><strong>注意</strong>：技术面强势与估值昂贵并不矛盾——动量可以把满价推成溢价，但价值投资者的纪律恰恰是在这种时候不接力。技术面在本框架中次要于基本面：<span class="warn-t">36x 的 forward P/E 才是这只股票最重要的"技术位"</span>。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 10 ═══ -->
+<div class="section">
+  <div class="stitle">模块 10 · 增长催化剂与前景展望</div>
+  <div class="cmt">
+    <p><strong>短期催化剂（未来 6 个月）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>2026-07-30 Q3 FY2026 财报</strong>——指引 +14–17% 的兑现度、毛利率是否守住 47.5–48.5%（内存成本首个验证点）；共识 EPS $1.88（+19.8%）</li>
+      <li><strong>秋季新品发布 + iPhone 18 周期定调</strong>——超级周期能否续杯，直接决定 FY2027 高基数问题的答案</li>
+      <li><strong>AI Siri（Gemini 合作）落地节奏</strong>——若体验兑现，将成为换机周期的第二引擎与估值叙事支点</li>
+      <li><strong>2026-09-01 Ternus 正式接任 CEO</strong>——首次公开亮相与战略表述是市场重定价的观察窗</li>
+      <li><strong>关税退税落地</strong>——正在申请中，若兑现是一次性利润顺风</li>
+      <li><strong>Mac 供应恢复</strong>——供需平衡需数月，压抑需求逐步释放</li>
+    </ul>
+
+    <p><strong>长期展望（3-5 年）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>服务复利</strong>——年化 ~$124B、+16% 增速、76.7% 毛利率；安装基数 25 亿台还在创新高，收租机器的分母持续扩张</li>
+      <li><strong>AI 端侧入口</strong>——数十亿台设备是 AI 分发的最大端侧渠道，苹果无需赢得模型战争，只需守住入口收"过路费"</li>
+      <li><strong>自研芯片外溢</strong>——A/M 系列的性能功耗比优势在 AI 端侧推理时代被二次放大</li>
+      <li><strong>健康 + 可穿戴</strong>——Watch/AirPods 的健康功能持续加深医疗级粘性</li>
+      <li><strong>潜在并购</strong>——管理层明言不排除以并购扩张 AI 能力（无形资产跳增或是先声）</li>
+    </ul>
+
+    <p><strong>逆风清单</strong>：内存成本上行周期、FY2027 超级周期高基数、反垄断对服务利润的结构性侵蚀、关税反复、AI 竞争格局生变。<strong>核心问题不是苹果会不会增长，而是从 FY2027 起增速回落到高个位数时，36x 的估值靠什么维持。</strong></p>
+  </div>
+</div>
+
+<!-- ═══ 模块 11 ═══ -->
+<div class="section">
+  <div class="stitle">模块 11 · 风险矩阵</div>
+  <div class="risk-grid">
+    <div class="risk-card r5"><h5>1. 估值风险</h5><span class="risk-score">5 / 5 极高</span><p>Forward P/E 36x vs 微软 21x / Alphabet 28x，增速却不占优；现价高出独立估值 ~23%，FCF Yield 仅 ~2.7%。任何增速或毛利率失速都会触发多重压缩</p></div>
+    <div class="risk-card r4"><h5>2. 毛利率回落</h5><span class="risk-score">4 / 5 高</span><p>内存成本"显著"上升且持续，指引毛利率 47.5–48.5% 环比 -80~180bp；研发 +33.6% 的 AI 开支同时挤压经营利润率</p></div>
+    <div class="risk-card r4"><h5>3. FY2027 高基数</h5><span class="risk-score">4 / 5 高</span><p>iPhone 17 超级周期把 FY2026 基数抬得极高，FY2027 若换机动能衰减，营收增速可能骤降至低个位数甚至转负——市场目前几乎没有为此定价</p></div>
+    <div class="risk-card r3"><h5>4. 反垄断 / 监管</h5><span class="risk-score">3 / 5 中</span><p>欧盟 DMA 强拆侧载与第三方支付、美国 App Store 诉讼、Google 反垄断案对默认搜索费（TAC）的外溢——瞄准的都是服务利润里最肥的部分</p></div>
+    <div class="risk-card r3"><h5>5. 地缘与关税</h5><span class="risk-score">3 / 5 中</span><p>大中华区占营收 ~18% 且供应链深度绑定；关税成本一度 $1.1B/季，当前回落但政策随时反复；3nm 独家依赖台积电</p></div>
+    <div class="risk-card r2"><h5>6. CEO 交接 + AI 执行</h5><span class="risk-score">2 / 5 较低</span><p>Ternus 交接安排清晰、内部资历完整；AI 采取"渠道化"策略降低了自研落后的风险敞口。列为观察项而非风险项</p></div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>3 个黑天鹅情景</strong>：</p>
+    <ol style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>App Store 佣金模式被全球监管实质性强拆</strong>——概率 ~10% · 服务利润率结构性下移，估值叙事重置，股价看 $200–230</li>
+      <li><strong>中美科技对抗升级 / 关税全面重来</strong>——概率 ~10% · 供应链重构成本 + 中国市场反噬，双向打击，股价看 $220–250</li>
+      <li><strong>AI 原生设备颠覆智能手机形态</strong>——概率 ~5–10%（5 年维度）· iPhone 门票地位被绕过，围城失去城门</li>
+    </ol>
+    <p style="margin-top:10px;"><strong>下行支撑</strong>：25 亿设备生态 + 净现金 $61.9B + 年 $1,200 亿级 FCF + 回购护盘构成质量底。<span class="hl-t">$230–255 是较硬的估值支撑带</span>（悲观情景价 + 独立估值中位数；对应 forward ~26–29x）。苹果的"底"历来比大盘高，但从 36x 回到 29x 也意味着 -20% 量级的估值消化。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 12 ═══ -->
+<div class="section">
+  <div class="stitle">模块 12 · 股东回报分析</div>
+  <div class="cmt">
+    <p><strong>苹果运营着人类商业史上最大规模的资本返还计划。</strong>但"授权 ≠ 执行、回购 ≠ 注销"——本模块把它拆到可验证的颗粒度：给了多少 → 给的方式好不好 → 能不能继续给。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 18px 0 10px; font-family: 'Segoe UI',sans-serif;">12.1 公司给了股东多少？（$M · 官方 10-K 现金流量表，经 SEC XBRL 核验）</h3>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>期间</th><th>回购（执行）</th><th>股息</th><th>股东总回报</th><th>说明</th></tr>
+        <tr><td>FY2023</td><td>77,550</td><td>15,025</td><td>92,575</td><td>—</td></tr>
+        <tr><td>FY2024</td><td>94,949</td><td>15,234</td><td>110,183</td><td>三年峰值</td></tr>
+        <tr><td>FY2025</td><td>90,711</td><td>15,421</td><td>106,132</td><td>—</td></tr>
+        <tr class="hl"><td><strong>三年合计</strong></td><td><strong>263,210</strong></td><td><strong>45,680</strong></td><td><strong>308,890</strong></td><td>回购占 85%、股息 15%</td></tr>
+        <tr><td>H1 FY2026（在途）</td><td>36,989</td><td>7,743</td><td>44,732</td><td><span class="warn-t">Q2 单季回购 12,288，环比 Q1 的 24,701 腰斩</span></td></tr>
+      </table>
+    </div>
+    <p style="font-size:13px; color: var(--text2); margin-top:8px"><strong>Trailing Shareholder Yield</strong> = FY2025 返还 $106.1B / 当前市值 $4.61T ≈ <strong>2.3%</strong>（回购 ~2.0% + 股息 ~0.33%）。派息率双口径：股息约占 TTM 净利 13%、占 FCF 约 12%——股息只是象征性的"名片"，回购才是主菜。注意：2.3% 的股东收益率历史上并不低，只是分母（市值）涨得太快，把它稀释了。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.2 给的方式好不好？</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>真实注销、真实缩股 · 含金量最高档</strong>：苹果回购的股份直接注销（retired）而非堆积库存股。硬指标——摊薄股数 <strong>FY2023 158.1 亿 → FY2024 154.1 亿 → FY2025 150.0 亿 → 本季 147.3 亿，三年累计 -6.9%</strong>（各年 10-K，经 SEC XBRL API 核验）</li>
+      <li><strong>回购远超 SBC 对冲需求</strong>：H1 SBC $7.1B vs 回购 $37.0B——回购约为股权激励的 5 倍，绝非"替 SBC 接盘"，是真金白银提升每股内在价值。本季 EPS +21.8% 高于净利 +19.4%，差额 ~2pp 即缩股贡献</li>
+      <li><span class="warn-t">择时纪律的两面</span>：在 36x 估值上回购的增值效应显著低于低估值期（2016 年前后 ~12x 时的回购堪称神来之笔）。本季回购腰斩至 $12.3B，从资本配置角度反而是理性——管理层没有为了"好看"在高位硬买</li>
+    </ul>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.3 能不能继续给、给多少？</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>新授权充足</strong>：2026-04-30 董事会新批最多 <strong>$1,000 亿</strong>回购计划（约占市值 2.2%）；苹果 10-Q 不披露旧计划剩余额度精确值。其授权历史执行率极高——过去三年年均执行 $850 亿+，授权不是空头支票</li>
+      <li><strong>股息延续累进</strong>：季度股息上调 4% 至 $0.27（2026-05-14 支付），连续多年小步增息，派息率仅 ~13%，增长空间巨大但管理层刻意保持低派息、高回购结构</li>
+      <li><strong>(股息 + 回购) / FCF 覆盖度</strong>：H1 FY26 返还 $44.7B / FCF $78.3B ≈ <strong>57%</strong>；FY2025 全年返还 $106.1B 亦低于当年 FCF——<strong>完全由经营现金流覆盖，无需动用储备或举债</strong>，叠加净现金 $61.9B，可持续性无忧</li>
+      <li><strong>无借债回购问题</strong>：有息负债 $84.7B 长期呈下降趋势管理，净现金为正——与靠发债返还的公司有本质区别</li>
+    </ul>
+    <p><strong>模块小结</strong>：<span class="hl-t">积极且高含金量</span>——真实注销缩股（三年 -6.9%）+ 回购为 SBC 的 5 倍 + FCF 覆盖度仅 57% + 净现金 $619 亿 + 新批 $1,000 亿授权。唯一的注意项：Q2 回购环比腰斩显示管理层在高估值区主动放缓——这恰是纪律的体现，但也提醒投资者：连买方里最懂苹果的那一个，都在这个价位收着手。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 13 ═══ -->
+<div class="section">
+  <div class="stitle">模块 13 · 海图评分卡 + 投资决策</div>
+
+  <div class="scorecard">
+    <h3 style="font-size:15px; color:var(--text); margin-bottom: 16px; font-family: 'Segoe UI',sans-serif;">海图评分卡（6 维 A-D）</h3>
+    <div class="score-grid">
+      <div class="score-card"><div class="score-letter s-a">A</div><div class="score-body"><h4>1. 生意可预测性</h4><p>一句话说得清（硬件获客、服务收租）；25 亿设备基数 + 订阅化服务给出顶级能见度；唯一的波动源是换机周期。</p></div></div>
+      <div class="score-card"><div class="score-letter s-a">A</div><div class="score-body"><h4>2. 经济护城河</h4><p>转换成本极宽 + 品牌 + 自研芯片 + 双边生态复合壁垒；定价权经超级周期验证。长期变量：AI 入口 + 反垄断。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">A-</div><div class="score-body"><h4>3. 管理层质量</h4><p>供应链与服务化十年兑现、指引保守、披露坦诚；Cook→Ternus 交接安排清晰，但新帅执行力待验证。</p></div></div>
+      <div class="score-card"><div class="score-letter s-a">A</div><div class="score-body"><h4>4. 财务质量</h4><p>毛利率 49.3% 新高、OCF/净利 115%（H1）、净现金 $61.9B、FCF $780 亿半年。扣分项：无形资产 +$102 亿待附注解释。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">A-</div><div class="score-body"><h4>5. 资本配置纪律</h4><p>模块 12 结论：积极且高含金量——真实注销、三年缩股 6.9%、FCF 覆盖 57%、高位主动放缓回购的择时纪律。</p></div></div>
+      <div class="score-card"><div class="score-letter s-c">D</div><div class="score-body"><h4>6. 估值与安全边际</h4><p>现价 $314.61 高出独立估值中位数 $255 约 23%，安全边际 ~-19%；Forward 36x vs 同业 21–28x。<strong>价格透支基本面</strong>。</p></div></div>
+    </div>
+
+    <div class="flag-row">
+      <strong>红旗排查</strong>：① <strong>极端估值</strong>——36x forward 显著溢价于增速相当甚至更快的同业，触发估值红旗（强制降级项）；② <strong>无形资产单季 +$102 亿未明示原因</strong>——列为会计关注项（量级指向大额许可/收购，待 10-Q 附注，尚不定性为红旗）；③ 治理——CEO 交接安排清晰，无红旗。<span class="warn-t">评级纪律：任一红旗 → 强制降至持有观望或更低；且目标价 $290 低于现价，买入无从谈起。</span>
+    </div>
+
+    <p style="margin-top:18px; font-size:14px; color:var(--text); line-height:1.85;"><strong>综合评级</strong>：<span class="rating-badge rating-hold" style="font-size:14px;">持有观望</span>。前 5 维几乎满分（3A + 2A-），但估值维度 D + 极端估值红旗 → 强制降至持有观望。核心判断：<strong>这是本框架评估过基本面质量最高的一季财报之一，也是安全边际最差的价格之一。现有持仓者让复利继续跑并遵守止盈纪律；新资金在 $255 的独立估值之上没有出手的理由。</strong></p>
+  </div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">投资决策（精确价格 · USD）</h3>
+
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>项目</th><th>价格</th><th>说明</th></tr>
+      <tr><td>12 个月目标价（概率加权）</td><td><strong>$290</strong> (-8%)</td><td>25%×$230 + 50%×$290 + 25%×$355 = $291</td></tr>
+      <tr><td>悲观目标（25% 概率）</td><td>$230 (-27%)</td><td>毛利率挤压 + FY2027 高基数失速 + 压缩至 ~26x</td></tr>
+      <tr><td>乐观目标（25% 概率）</td><td>$355 (+13%)</td><td>AI Siri 第二周期 + 服务加速 + 36x 维持</td></tr>
+      <tr class="hl"><td>首仓建仓（独立估值中位数 $255 × 80%）</td><td><strong>$204</strong></td><td>距现价 -35% · 对应 forward ~23x · 耐心等</td></tr>
+      <tr><td>二仓建仓（× 70%）</td><td>$178</td><td>-43% · 系统性回调机会</td></tr>
+      <tr><td>三仓建仓（× 60%）</td><td>$153</td><td>-51% · 黑天鹅级机会</td></tr>
+      <tr><td>止盈一档</td><td>$340</td><td>+8% · 减仓 25%（乐观情景兑现途中）</td></tr>
+      <tr><td>止盈二档</td><td>$380</td><td>+21% · 再减 25%</td></tr>
+      <tr><td>止盈三档</td><td>$420</td><td>+34% · 再减 25% · 最后 25% 长期复利持有</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.85;"><strong>建议总仓位</strong>：<strong>2–4%</strong>（已持有者维持并执行止盈纪律；新资金观望，等待价格进入安全边际区间再分批建仓，不追高）。<strong>持有周期</strong>：5–10 年（若在安全边际价位建仓）。<strong>关键监控指标</strong>：① Q3 毛利率是否守住 47.5–48.5% 指引（内存成本传导的首个验证点）；② iPhone 18 周期定调 vs FY2027 高基数；③ 服务增速与 App Store 反垄断 / Google TAC 裁决；④ 无形资产 +$102 亿的 10-Q 附注解释；⑤ Ternus 接任后的战略连续性与 AI 路线图；⑥ Forward P/E 是否回落至 30x 以下（重估窗口）。<strong>下次财报</strong>：2026-07-30（Q3 FY2026）。</p>
+</div>
+
+<!-- ═══ 海图页末长评 ═══ -->
+<div class="section">
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记 · 约 1100 字</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p class="lead">完美的财报遇上满格的价格——这是读完苹果 Q2 FY2026 财报后最诚实的一句话。营收 +16.6% 创三月季纪录、所有地区所有品类双位数增长、大中华区 +28.1% 近四年最强、毛利率 49.3% 历史新高。可市场早已把这份完美装进了 4.61 万亿美元的市值里：36 倍 forward P/E，比微软贵七成，比 Alphabet 贵三成。</p>
+
+      <p>苹果的生意本质是"硬件获客、服务收租"——25 亿台活跃设备构成一座生态围城，iPhone 是进城的门票，76.7% 毛利率的服务是年年上涨的租金。</p>
+
+      <h4>几个研判要点</h4>
+
+      <p><strong>一、iPhone 17 超级周期是真的。</strong> iPhone 营收 $570 亿（+21.7%）创三月季纪录，大中华区 +28.1%，安装基数 25 亿台创新高。3nm 产能反而供不应求——需求驱动型缺货，是最好的那种缺货。</p>
+
+      <p><strong>二、毛利率 49.3% 大概率是本轮顶点。</strong> 管理层指引下季回落至 47.5%–48.5%，内存成本将"显著"上升并持续；研发 +33.6% 为 AI 加码，opex 已略超上季指引上限。利润率的顺风正在转成逆风。</p>
+
+      <p><strong>三、服务年化 $1,240 亿是估值溢价的根基，也是悬剑所在。</strong> 服务 $310 亿创新高、毛利率 76.7%，但 App Store 反垄断与 Google 默认搜索费（TAC）裁决，是这台收租机器头顶的两把剑。</p>
+
+      <p><strong>四、资本返还依旧教科书，但细节有变化。</strong> 新批 $1,000 亿回购 + 股息上调 4%，三年返还 $3,089 亿、真实注销缩股 6.9%；可 Q2 回购环比腰斩至 $123 亿——在历史高位上，管理层自己也变得克制。另：无形资产单季跳增约 $102 亿，10-Q 未明示原因，值得盯附注。</p>
+
+      <p><strong>五、独立估值中位数 $255，现价高出 23%。</strong> 反向 DCF 显示 $314.61 隐含未来十年 FCF 年增约 9.5%——市场把超级周期外推成了常态。12 个月概率加权目标价 $290（-8%）。</p>
+
+      <h4>海图研判</h4>
+
+      <p><strong>评级：持有观望。</strong> 12 个月目标价 <strong>$290</strong>。分批建仓：首仓 $204（独立估值中位数 × 80%）、二仓 $178、三仓 $153。止盈三档：$340 / $380 / $420 各减仓 25%，最后 25% 长期持有。建议仓位 2–4%，已持有者让复利继续跑并守住止盈纪律，新资金不追高；持有周期 5–10 年。下次财报 2026-07-30。</p>
+
+      <h4>风险提示</h4>
+
+      <p>内存成本挤压毛利率 / FY2027 超级周期高基数 / App Store 反垄断与 Google TAC 裁决 / 关税与地缘反复 / AI 竞争格局生变 / 9 月 CEO 交接——任一项都可能触发 36x 估值的多重压缩，$230–255 才是较硬的估值支撑带。</p>
+
+      <p>关键叙事：<strong>"史上最强生态收费站 + iPhone 17 超级周期 + 服务复利机器"对垒"36x 满价 + 毛利率见顶 + 高基数将至"</strong>。苹果从来不是坏生意，此刻只是贵生意——好公司与好股票之间，隔着一个价格。</p>
+
+      <p class="haitu-sign">—— 海图，灯下落笔，明日再观风浪。</p>
+
+      <p class="haitu-disc">⚠️ 免责声明：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，不构成任何投资建议。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div>《海图夜读》 · 苹果 AAPL Q2 FY2026 海图研判</div>
+  <div style="margin-top:6px;">发布日 2026-04-30 · 研判日 2026-07-11 · 数据来源 Apple Q2 FY2026 官方财报新闻稿 + 合并报表 PDF（SEC 8-K）+ 近 4 季官方财报 + SEC EDGAR XBRL API 核验 + 电话会要点</div>
+</footer>
+
+<script>
+let curTheme = 'light';
+function toggleTheme() {
+  curTheme = curTheme === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', curTheme);
+  renderCharts();
+}
+
+const palette = {
+  light: { accent: '#8a9a8e', accent2: '#7b8fa0', accent3: '#b08d7a', gold: '#b9a06a', red: '#b87070', green: '#7a9a7a', grid: '#e5ddd5', text: '#7a706a' },
+  dark:  { accent: '#8a9a8e', accent2: '#8fabbf', accent3: '#c9a48e', gold: '#c9b07a', red: '#c08080', green: '#8aaa8a', grid: '#3e3a35', text: '#a09890' }
+};
+
+let charts = {};
+function renderCharts() {
+  Object.values(charts).forEach(c => c && c.destroy && c.destroy());
+  charts = {};
+  const p = palette[curTheme];
+  Chart.defaults.color = p.text;
+  Chart.defaults.borderColor = p.grid;
+
+  const quarters = ['Q2 25','Q3 25','Q4 25','Q1 26','Q2 26'];
+  const rev = [95.4, 94.0, 102.5, 143.8, 111.2];
+  const yoy = [5.1, 9.6, 7.9, 15.7, 16.6];
+  charts.rev = new Chart(document.getElementById('chartRev'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { type:'bar', label: '营收 ($B)', data: rev, backgroundColor: p.accent + 'CC', yAxisID: 'y' },
+      { type: 'line', label: 'YoY %', data: yoy, borderColor: p.red, backgroundColor: p.red, tension: 0.3, yAxisID: 'y1' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false }, y1: { position: 'right', grid: { drawOnChartArea: false }, ticks: { callback: v => v + '%' } } } }
+  });
+
+  charts.margin = new Chart(document.getElementById('chartMargin'), {
+    type: 'line',
+    data: { labels: quarters, datasets: [
+      { label: '毛利率 %', data: [47.0, 46.5, 47.2, 48.2, 49.3], borderColor: p.green, backgroundColor: p.green + '33', tension: 0.3, fill: false },
+      { label: '经营利润率 %', data: [31.0, 30.0, 31.6, 35.4, 32.3], borderColor: p.accent2, backgroundColor: p.accent2 + '33', tension: 0.3, fill: false }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false, ticks: { callback: v => v + '%' } } } }
+  });
+
+  charts.segment = new Chart(document.getElementById('chartSegment'), {
+    type: 'doughnut',
+    data: {
+      labels: ['iPhone 57.0', '服务 31.0', 'Mac 8.4', '可穿戴等 7.9', 'iPad 6.9'],
+      datasets: [{ data: [57.0, 31.0, 8.4, 7.9, 6.9], backgroundColor: [p.accent, p.accent2, p.accent3, p.gold, p.green] }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { font: { size: 11 } } } } }
+  });
+
+  charts.eps = new Chart(document.getElementById('chartEPS'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { label: '摊薄 EPS ($)', data: [1.65, 1.57, 1.85, 2.84, 2.01], backgroundColor: p.accent3 + 'CC' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } }
+  });
+
+  buildSankey();
+}
+
+function buildSankey() {
+  const p = palette[curTheme];
+  const labels = ['营收 $111.2B','营业成本 $56.4B','毛利 $54.8B','研发 $11.4B','销售管理 $7.5B','营业利润 $35.9B','所得税及其他 $6.3B','净利润 $29.6B'];
+  const data = {
+    type: 'sankey',
+    orientation: 'h',
+    node: { pad: 16, thickness: 20, line: { color: p.grid, width: 0.5 }, label: labels, color: [p.accent, p.red, p.green, p.red, p.red, p.green, p.red, p.green] },
+    link: {
+      source: [0, 0, 2, 2, 2, 5, 5],
+      target: [1, 2, 3, 4, 5, 6, 7],
+      value:  [56.4, 54.8, 11.4, 7.5, 35.9, 6.3, 29.6],
+      color: [p.red+'55', p.green+'66', p.red+'55', p.red+'55', p.green+'66', p.red+'55', p.green+'66']
+    }
+  };
+  const layout = { font: { size: 12, color: p.text }, paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)', margin: { l: 10, r: 10, t: 10, b: 10 } };
+  Plotly.react('sankey', [data], layout, { displayModeBar: false, responsive: true });
+}
+
+renderCharts();
+</script>
+
+</body>
+</html>
