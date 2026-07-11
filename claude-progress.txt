@@ -20,10 +20,13 @@
 
 ## 进行中
 
-- Wave 1（10 家）：NVDA AAPL AVGO TSLA MU LLY JPM AMD XOM INTC
-  Workflow 三段流水线：research（官方 PR/SEC 数据包）→ verify（对抗核验 10 个关键数字）→ author（13 模块 HTML + social.md）
-  脚本：~/.claude/projects/.../workflows/scripts/haitu-sp100-wave-wf_2500d72a-ffe.js（可复用，args 传 companies+today）
-  注意：args 可能以字符串到达，脚本已做 JSON.parse 兜底。
+- Wave 1 ✅ 完成并推送（commit f15a774 + Wave1 完成 commit）：NVDA(有条件买入$236) AAPL(持有$288) AVGO(持有$445)
+  TSLA(卖出$285) MU(持有$1060) LLY(持有$1240) JPM(持有$318) AMD(持有$540) XOM(持有$127) INTC(卖出$89)
+- Wave 2 🔄 运行中（run wf_595ea3f2-f65）：WMT AMAT CSCO ABBV LRCX CAT MA COST UNH BAC
+  脚本：~/.claude/projects/-Users-hoi-buffett-reports-JaceXie-github-io/e934446d-3f88-4e94-8971-6e6d6d6496f4/workflows/scripts/haitu-sp100-wave-wf_2500d72a-ffe.js
+  中断恢复：Workflow({scriptPath:同上, resumeFromRunId:"wf_595ea3f2-f65", args:同批})——research/verify 有缓存，只重跑 author。
+  经验：一个 5 小时限额窗口约够 1 个 10 家波次（wave1 用了 ~5.6M subagent tokens）；撞限额后等重置再 resume。
+  合并条目：从 journal.jsonl 提取 type=result 且含 tickersEntry 的行，同 ticker 取最后一条（重写会追加）。
 
 ## 每波收尾流程（勿省略）
 
