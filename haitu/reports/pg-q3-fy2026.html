@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-07-10 · Procter & Gamble Q3 FY2026 财报已于 2026-04-24 发布 -->
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>宝洁 PG Q3 FY2026 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+<meta name="description" content="全球日用消费品之王——21 个十亿美元品牌（Tide/Pampers/Gillette/Olay/Oral-B）铺满 70 国货架，靠品牌+规模双护城河，把最普通的日化用品做成一台连续 70 年增息的现金机器。Q3 FY2026 营收 $21.24B（+7.4%，含约 4pt 汇率顺风、有机仅 +3%）、全公司销量时隔一年首次转正 +2% 是拐点；但毛利率降 150bps、关税税后拖累升至约 $400M、全年 EPS 指引偏区间下沿——顶级防御资产，但 Forward P/E 20.7x 几无安全边际。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="宝洁 PG Q3 FY2026 海图研判 · 海图夜读">
+<meta property="og:description" content="全球日用消费品之王——21 个十亿美元品牌铺满 70 国货架，把日化用品做成连续 70 年增息的现金机器。Q3 FY2026 营收 $21.24B（含约 4pt 汇率顺风、有机仅 +3%）、销量时隔一年首次转正 +2%；但毛利率降 150bps、关税税后拖累约 $400M、全年 EPS 偏区间下沿——顶级防御资产，Forward P/E 20.7x 无安全边际。">
+<meta property="og:url" content="https://jacexie.github.io/haitu/reports/pg-q3-fy2026.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="宝洁 PG Q3 FY2026 海图研判 · 海图夜读">
+<meta name="twitter:description" content="全球日用消费品之王 · 连续 70 年增息的现金机器。Q3 有机销售 +3%、销量拐点 +2%，但毛利率 -150bps、关税拖累 $400M、Forward P/E 20.7x 无安全边际——顶级防御资产遇满估值，持有观望。">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root { --bg:#f5f0eb; --bg2:#ece6df; --card:#ffffff; --card2:#f8f5f1; --border:#d9d0c7; --text:#4a4340; --text2:#7a706a; --text3:#a89f98; --accent:#8a9a8e; --accent2:#7b8fa0; --accent3:#b08d7a; --rose:#c09090; --gold:#b9a06a; --red:#b87070; --green:#7a9a7a; --shadow:rgba(0,0,0,0.06); --chart-grid:#e5ddd5; }
+[data-theme="dark"] { --bg:#1e1c1a; --bg2:#28251f; --card:#2e2a25; --card2:#363230; --border:#4a4540; --text:#d4ccc4; --text2:#a09890; --text3:#706860; --accent:#8a9a8e; --accent2:#8fabbf; --accent3:#c9a48e; --rose:#c09090; --gold:#c9b07a; --red:#c08080; --green:#8aaa8a; --shadow:rgba(0,0,0,0.3); --chart-grid:#3e3a35; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', serif; line-height: 1.75; font-size: 14.5px; transition: background .35s, color .35s; }
+a { color: var(--accent2); text-decoration: none; }
+.theme-bar { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); }
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+.toggle-switch { position: relative; width: 44px; height: 22px; background: var(--border); border-radius: 11px; cursor: pointer; transition: background .3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: var(--card); border-radius: 50%; transition: transform .3s; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+
+.hero { padding: 48px 24px 36px; text-align: center; border-bottom: 1px solid var(--border); }
+.hero-tag { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 3px 14px; border-radius: 20px; margin-bottom: 18px; }
+.hero h1 { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.pill { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: 'Segoe UI', sans-serif; font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow); }
+.pill strong { color: var(--text); }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle { font-size: 18px; font-weight: 700; color: var(--accent3); margin-bottom: 20px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+.stitle::before { content: ''; display: block; width: 4px; height: 20px; background: var(--accent3); border-radius: 2px; }
+
+.haitu-quip { display: flex; align-items: center; gap: 18px; background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 18px 24px; margin: 24px 0; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-quote { flex: 1; }
+.haitu-portrait { font-size: 15px; line-height: 1.65; color: var(--text); margin-bottom: 6px; font-weight: 600; }
+.haitu-rating-line { font-size: 13px; color: var(--text2); font-family: 'Segoe UI', sans-serif; }
+.rating-badge { display: inline-block; padding: 2px 12px; border-radius: 12px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; margin-left: 4px; }
+.rating-hold { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+
+.haitu-essay { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 28px 32px; margin: 24px 0 20px; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-essay-header { display: flex; align-items: center; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.haitu-avatar-sm { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); background: var(--red); box-shadow: 0 2px 8px rgba(184,112,112,0.2); }
+.haitu-name-lg { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 28px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 4px; }
+.haitu-essay-tag { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; }
+.haitu-essay-body { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 15px; line-height: 2.0; color: var(--text); }
+.haitu-essay-body p { margin-bottom: 14px; }
+.haitu-essay-body p.lead { font-size: 16px; font-style: italic; color: var(--text2); margin-bottom: 18px; }
+.haitu-essay-body strong { color: var(--text); font-weight: 700; }
+.haitu-essay-body h4 { font-size: 14px; color: var(--accent3); margin: 18px 0 10px; font-family: 'Segoe UI', sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+.haitu-sign { text-align: right; margin-top: 18px; font-family: 'Georgia', serif; font-size: 14px; color: var(--text2); font-style: italic; }
+.haitu-disc { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); font-style: italic; line-height: 1.7; }
+
+.stock-snap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px; }
+.snap-item { text-align: center; }
+.snap-label { font-family: 'Segoe UI', sans-serif; font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.snap-val { font-family: 'Segoe UI', sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+.snap-val.up { color: var(--green); }
+.snap-val.dn { color: var(--red); }
+.snap-sub { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow); }
+.kpi-l { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.badge { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+.up { background: rgba(122,154,122,.15); color: var(--green); }
+.dn { background: rgba(184,112,112,.15); color: var(--red); }
+.nt { background: rgba(123,143,160,.15); color: var(--accent2); }
+
+.tbl-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow); }
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI', sans-serif; font-size: 13px; }
+.tbl th { background: var(--card2); color: var(--text3); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); background: var(--card2); }
+
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); }
+.ctitle { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 260px; }
+
+.cmt { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 26px; line-height: 1.95; font-size: 14px; box-shadow: 0 1px 4px var(--shadow); color: var(--text); }
+.cmt p { margin-bottom: 14px; }
+.cmt p:last-child { margin-bottom: 0; }
+.cmt strong { color: var(--text); }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+
+.bscore { display: flex; align-items: center; gap: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; margin-bottom: 12px; box-shadow: 0 1px 4px var(--shadow); }
+.circle { width: 62px; height: 62px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; flex-shrink: 0; border: 3px solid; font-family: 'Segoe UI', sans-serif; }
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 4px; color: var(--text); }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.moat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+.moat-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); border-left: 4px solid var(--accent); }
+.moat-card.wide { border-left-color: var(--green); }
+.moat-card.narrow { border-left-color: var(--gold); }
+.moat-card.none { border-left-color: var(--red); }
+.moat-card h5 { font-size: 13px; color: var(--text); margin-bottom: 6px; }
+.moat-card .moat-rate { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.moat-card.wide .moat-rate { background: rgba(122,154,122,.18); color: var(--green); }
+.moat-card.narrow .moat-rate { background: rgba(185,160,106,.18); color: var(--gold); }
+.moat-card.none .moat-rate { background: rgba(184,112,112,.18); color: var(--red); }
+.moat-card p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+
+.ec-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 14px; box-shadow: 0 1px 3px var(--shadow); }
+.ec-badge { flex-shrink: 0; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-top: 2px; font-family: 'Segoe UI', sans-serif; }
+.ec-bull { background: rgba(122,154,122,.18); color: var(--green); }
+.ec-bear { background: rgba(184,112,112,.18); color: var(--red); }
+.ec-neut { background: rgba(185,160,106,.18); color: var(--gold); }
+.ec-body { flex: 1; }
+.ec-title { font-weight: 600; color: var(--text); margin-bottom: 3px; font-size: 14px; }
+.ec-note { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.dcf-note { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.dcf-note strong { color: var(--text); }
+
+.scorecard { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow); }
+.score-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.score-card { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px; }
+.score-letter { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Segoe UI', sans-serif; font-weight: 800; font-size: 22px; flex-shrink: 0; border: 3px solid; }
+.s-a { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.12); }
+.s-bp { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.06); }
+.s-b { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.10); }
+.s-bm { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.06); }
+.s-c { color: var(--red); border-color: var(--red); background: rgba(184,112,112,.08); }
+.score-body h4 { font-size: 13px; color: var(--text); margin-bottom: 4px; }
+.score-body p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+.flag-row { margin-top: 16px; padding: 12px 16px; background: rgba(184,112,112,.08); border: 1px solid rgba(184,112,112,.3); border-radius: 8px; font-size: 13px; color: var(--text2); }
+.flag-row strong { color: var(--red); }
+
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center; box-shadow: 0 1px 4px var(--shadow); }
+.pbox .pl { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; }
+.pbox .pv { font-family: 'Segoe UI', sans-serif; font-size: 28px; font-weight: 800; margin-bottom: 5px; }
+.pbox .pn { font-size: 12px; color: var(--text3); line-height: 1.5; }
+.pc { color: var(--red); } .pf { color: var(--gold); } .ps { color: var(--green); }
+
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.risk-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); position: relative; overflow: hidden; }
+.risk-card::before { content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent); }
+.risk-card.r1::before { background: var(--green); }
+.risk-card.r2::before { background: rgba(122,154,122,.6); }
+.risk-card.r3::before { background: var(--gold); }
+.risk-card.r4::before { background: var(--rose); }
+.risk-card.r5::before { background: var(--red); }
+.risk-card h5 { font-size: 14px; margin-bottom: 6px; color: var(--text); }
+.risk-score { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.r1 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r2 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r3 .risk-score { background: rgba(185,160,106,.18); color: var(--gold); }
+.r4 .risk-score { background: rgba(192,144,144,.18); color: var(--rose); }
+.r5 .risk-score { background: rgba(184,112,112,.18); color: var(--red); }
+.risk-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+footer { background: var(--card2); border-top: 1px solid var(--border); padding: 24px; text-align: center; color: var(--text3); font-size: 12px; margin-top: 40px; line-height: 1.8; }
+@media (max-width: 768px) { .cgrid,.pgrid { grid-template-columns: 1fr; } .hero h1 { font-size: 22px; } .kpi-grid { grid-template-columns: 1fr 1fr; } .stock-snap { grid-template-columns: 1fr 1fr; } .haitu-essay-header { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/PG" target="_blank" rel="noopener" title="在雪球查看 PG 实时行情">雪球 PG</a>
+  </div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">Q3 FY2026 财报发布 · 2026-04-24 &nbsp;|&nbsp; 海图研判 · 2026-07-11</div>
+  <h1>宝洁 PG · FY2026 Q3 财报深度分析</h1>
+  <div class="hero-sub">NYSE: PG &nbsp;|&nbsp; 财季截至 2026-03-31（自然季 Jan-Mar）&nbsp;|&nbsp; 价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill">股价 <strong>$147.05</strong> <span style="color:var(--red)">距高点 -12%</span></div>
+    <div class="pill">市值 <strong>$342B</strong></div>
+    <div class="pill">Q3 净销售 <strong>$21.24B</strong> <span style="color:var(--green)">+7.4%</span></div>
+    <div class="pill">有机销售 <strong>+3%</strong> <span style="color:var(--gold)">名义含 ~4pt 汇率</span></div>
+    <div class="pill">核心 EPS <strong>$1.59</strong> <span style="color:var(--green)">+3%</span></div>
+    <div class="pill">Forward P/E <strong>~20.7x</strong> <span style="color:var(--gold)">无安全边际</span></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 海图页首短评 ═══ -->
+<div class="haitu-quip">
+  <div class="haitu-quote">
+    <div class="haitu-portrait">全球日用消费品之王——21 个十亿美元品牌（Tide/Pampers/Gillette/Olay/Oral-B）铺满 70 国货架，靠"品牌 + 规模"双护城河，把牙膏、洗衣液、剃须刀这些最普通的东西，做成一台连续 70 年增息的现金机器。Q3 FY2026 营收 $21.24B（+7.4%，但其中约 4pt 是汇率顺风，有机仅 +3%）、全公司销量时隔一年首次转正 +2% 是拐点信号；然而毛利率降 150bps、关税税后拖累升至约 $400M、全年 EPS 指引偏区间下沿——顶级防御资产，但当前价格几无安全边际。</div>
+    <div class="haitu-rating-line">评级：<span class="rating-badge rating-hold">持有观望</span> · 12 个月目标价 $150（+2%）· 顶级防御性股息之王 + 量增拐点初现，对垒关税侵蚀 + 毛利承压 + 有机增速仅 3% + Forward P/E 20.7x 无安全边际</div>
+  </div>
+</div>
+
+<!-- ═══ 市场数据快照 ═══ -->
+<div class="section">
+  <div class="stitle">市场数据快照（2026-07-10 收盘）</div>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">股价（美元）</div><div class="snap-val">$147.05</div><div class="snap-sub">2026-07-10 收盘 · 距 52 周高 -12%</div></div>
+    <div class="snap-item"><div class="snap-label">市值</div><div class="snap-val">$342B</div><div class="snap-sub">全球日化龙头</div></div>
+    <div class="snap-item"><div class="snap-label">TTM GAAP P/E</div><div class="snap-val">~21.5x</div><div class="snap-sub">TTM EPS ~$6.84</div></div>
+    <div class="snap-item"><div class="snap-label">Forward P/E</div><div class="snap-val nt">~20.7x</div><div class="snap-sub">FY2027 核心 EPS ~$7.30</div></div>
+    <div class="snap-item"><div class="snap-label">P/S (TTM)</div><div class="snap-val">~3.9x</div><div class="snap-sub">TTM 营收 ~$86.7B</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间</div><div class="snap-val">$137.6 - $167.3</div><div class="snap-sub">处区间偏下</div></div>
+    <div class="snap-item"><div class="snap-label">股息率</div><div class="snap-val up">~2.9%</div><div class="snap-sub">年化 ~$4.23 · 连续 70 年增息</div></div>
+    <div class="snap-item"><div class="snap-label">FCF Yield</div><div class="snap-val nt">~4.2%</div><div class="snap-sub">TTM FCF ~$14.5B</div></div>
+    <div class="snap-item"><div class="snap-label">现金及等价物</div><div class="snap-val">$12.31B</div><div class="snap-sub">2026-03-31 末</div></div>
+    <div class="snap-item"><div class="snap-label">有息负债</div><div class="snap-val dn">$37.03B</div><div class="snap-sub">短债 13.17 + 长债 23.85</div></div>
+    <div class="snap-item"><div class="snap-label">真实净负债</div><div class="snap-val dn">-$24.7B</div><div class="snap-sub">⚠️ 净负债非净现金</div></div>
+    <div class="snap-item"><div class="snap-label">Q3 营业利润率</div><div class="snap-val up">21.5%</div><div class="snap-sub">核心 22.2% · 净利率 18.5%</div></div>
+  </div>
+  <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">数据时点：股价 <strong>2026-07-10 收盘 $147.05</strong> · 财务数据来源宝洁 Q3 FY2026 官方财报（SEC 8-K Ex99.1 + 10-Q，2026-04-24 发布，财季截至 2026-03-31）· 货币 USD 单口径。宝洁财年为 7 月 1 日至次年 6 月 30 日，故 <strong>Q3 FY2026 = 2026-01-01 至 2026-03-31（自然季 Jan-Mar）</strong>；FY2026 第四季度暨全年财报预计 2026-07-29 发布（尚未发布）。⚠️ 宝洁是<strong>净负债</strong>公司（有息负债 $37.0B > 现金 $12.3B，真实净负债约 -$24.7B），并非"现金堡垒"，长期用投资级（AA-）信用做杠杆支撑分红回购。</p>
+</div>
+
+<!-- ═══ Q3 FY2026 KPI ═══ -->
+<div class="section">
+  <div class="stitle">Q3 FY2026 核心业绩（USD · 财季截至 2026-03-31）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">净销售额</div><div class="kpi-v">$21.24B</div><span class="badge up">+7.4% YoY</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">含约 4pt 汇率顺风</div></div>
+    <div class="kpi"><div class="kpi-l">有机销售增长</div><div class="kpi-v">+3%</div><span class="badge nt">量+2 价+1</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">组合中性 · 真实增速口径</div></div>
+    <div class="kpi"><div class="kpi-l">毛利润</div><div class="kpi-v">$10.51B</div><span class="badge dn">毛利率 49.5%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">-150bps · 核心 50.0%</div></div>
+    <div class="kpi"><div class="kpi-l">营业利润</div><div class="kpi-v">$4.58B</div><span class="badge dn">利润率 21.5%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">-150bps · 核心 22.2%（-80bps）</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 净利（归属 PG）</div><div class="kpi-v">$3.93B</div><span class="badge up">+4%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">含 Glad 一次性 +$261M</div></div>
+    <div class="kpi"><div class="kpi-l">核心净利 Non-GAAP</div><div class="kpi-v">$3.83B</div><span class="badge nt">经营口径</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">剔 Glad 收益 + 重组</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 摊薄 EPS</div><div class="kpi-v">$1.63</div><span class="badge up">+6%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">去年 $1.54 · 含 +$0.11 Glad</div></div>
+    <div class="kpi"><div class="kpi-l">核心 EPS Non-GAAP</div><div class="kpi-v">$1.59</div><span class="badge up">+3%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">最可信口径 · 去年 $1.54</div></div>
+    <div class="kpi"><div class="kpi-l">恒定汇率核心 EPS</div><div class="kpi-v">$1.54</div><span class="badge nt">剔汇率</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">与去年持平 · 见增长实质</div></div>
+    <div class="kpi"><div class="kpi-l">经营现金流</div><div class="kpi-v">$4.05B</div><span class="badge nt">单季</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">FCF $3.03B · 转化 82%</div></div>
+    <div class="kpi"><div class="kpi-l">有效税率</div><div class="kpi-v">20.8%</div><span class="badge nt">GAAP</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">核心税率指引 20-21%</div></div>
+    <div class="kpi"><div class="kpi-l">回馈股东</div><div class="kpi-v">$3.2B</div><span class="badge up">单季</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">分红 $2.5B + 回购 $0.6B</div></div>
+  </div>
+</div>
+
+<!-- ═══ 本季必看 · 两个看穿 ═══ -->
+<div class="section">
+  <div class="stitle">本季必看 · 两个"看穿"：名义 vs 有机、GAAP vs 核心</div>
+  <div class="cmt">
+    <p><strong>宝洁这一季的利润表有两个必须"看穿"的地方，看不穿就会把一份"平淡但有拐点"的季报读成"高增长"。</strong></p>
+    <p><strong>看穿一：名义 +7.4% 里有约 4 个百分点是汇率水分，真实有机增长只有 +3%。</strong> 很多人只看到"营收 +7.4%"就以为宝洁突然加速了。但拆开看——<span class="hl-t">有机销售增长仅 +3%（量 +2%、价 +1%、组合中性）</span>，名义增速被美元贬值带来的约 +4pt 汇率顺风推高。这也是为什么<strong>恒定汇率核心 EPS 只有 $1.54，与去年同期持平</strong>：汇率给了利润，但经营层面的每股盈利实质上没增长。真正值得记一笔的不是名义营收，而是<span class="hl-t">"量增 +2%"——这是一年来公司整体销量首次转正</span>，5 大分部里 3 个量增，是这份季报里最有含金量的信号。</p>
+    <div class="tbl-wrap" style="margin:14px 0;">
+      <table class="tbl">
+        <tr><th>增长拆解</th><th>Q3 FY2026</th><th>解读</th></tr>
+        <tr><td>名义净销售增速</td><td>+7.4%</td><td>19,776 → 21,235（$M）</td></tr>
+        <tr><td><span class="warn-t">减：汇率顺风</span></td><td><span class="warn-t">约 +4pt</span></td><td>美元走弱推高名义</td></tr>
+        <tr class="hl"><td><strong>有机销售增长</strong></td><td><strong>+3%</strong></td><td>量 +2 / 价 +1 / 组合中性</td></tr>
+        <tr><td>其中：销量</td><td>+2%</td><td><span class="hl-t">一年来首次全公司量增（拐点）</span></td></tr>
+        <tr><td>恒定汇率核心 EPS</td><td>$1.54</td><td>与去年持平 · 经营口径未增长</td></tr>
+      </table>
+    </div>
+    <p><strong>看穿二：GAAP EPS +6% 有一次性收益助推，核心 +3% 才是真相。</strong> GAAP 摊薄 EPS $1.63（+6%）看着不错，但其中<span class="hl-t">一大块来自 Glad 合资企业解散的税后一次性收益 $261M（+$0.11 EPS）</span>——2026 年 1 月宝洁与高乐氏（Clorox）的 Glad 垃圾袋合资到期解散，Clorox 以 $476M 收购宝洁少数股权。剔除这笔一次性收益、再回加增量重组费用（-$0.07 EPS）后，<strong>核心 EPS $1.59（+3%）才反映真实经营</strong>。用"核心口径 + 恒定汇率"两把尺子一量，宝洁本季的经营实质是：<span class="warn-t">量增拐点确立，但盈利被关税、再投资和不利组合压着，几乎没有内生增长。</span></p>
+  </div>
+</div>
+
+<!-- ═══ 趋势图 ═══ -->
+<div class="section">
+  <div class="stitle">关键指标趋势</div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">净销售（$B）& 名义 YoY 增速（近 5 季）</div><div class="cwrap"><canvas id="chartRev"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">毛利率 vs 营业利润率趋势（%，近 5 季）</div><div class="cwrap"><canvas id="chartMargin"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">Q3 FY2026 五大分部净销售拆分（$B）</div><div class="cwrap"><canvas id="chartSegment"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">摊薄 EPS：GAAP vs 核心（近 5 季 · $）</div><div class="cwrap"><canvas id="chartEPS"></canvas></div></div>
+  </div>
+</div>
+
+<!-- ═══ 桑基图 ═══ -->
+<div class="section">
+  <div class="stitle">Q3 FY2026 利润表资金流向桑基图（$B）</div>
+  <div class="ccard">
+    <div id="sankey" style="width:100%;height:480px;"></div>
+    <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">说明：净销售 $21.24 → 销货成本 $10.72 + 毛利 $10.51 → 销售管理费用 $5.94 + 营业利润 $4.58 →（加其他经营净收益 + 净利息合计约 +$0.41）税前利润 $4.99 → 所得税 $1.04 + GAAP 净利 $3.95。流量已闭合。本季 FCF $3.03B（经营现金流 $4.05 − Capex $1.02，FCF 转化率 82%）；回馈股东 $3.2B（分红 $2.5B + 回购 $0.6B）略高于本季 FCF——分红是宝洁股东回报的主菜，回购力度温和。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 1 ═══ -->
+<div class="section">
+  <div class="stitle">模块 1 · 公司概览与背景</div>
+  <div class="cmt">
+    <p><strong>The Procter &amp; Gamble Company</strong>（宝洁，NYSE: PG），总部辛辛那提。<strong>1837 年创立</strong>（蜡烛与肥皂起家），<strong>1890 年注册为公司</strong>，自此连续 136 年不间断派息、连续 <strong>70 年提高股息</strong>（2026 年 4 月宣布，"股息之王"中的股息之王）。财年为 7 月 1 日至次年 6 月 30 日。</p>
+
+    <p><strong>核心叙事</strong>：宝洁是<span class="hl-t">全球最大的日用消费品公司，在约 70 个国家经营，拥有 21 个"十亿美元级"领导品牌</span>——Tide（汰渍）/ Pampers（帮宝适）/ Gillette（吉列）/ Olay（玉兰油）/ Oral-B / Head &amp; Shoulders（海飞丝）/ Dawn 等。它做的是最不性感、却最刚需的生意：洗衣液、纸尿裤、剃须刀、牙膏、洗发水。护城河来自<strong>品牌心智 + 规模成本 + 零售货架掌控力</strong>三位一体，把"每天都要买的小东西"做成一台 49.5% 毛利率、22% 核心营业利润率、连续 70 年增息的现金机器。</p>
+
+    <p><strong>五大业务分部</strong>（管理层报告口径）：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>织物与家庭护理（Fabric &amp; Home Care）</strong>——最大分部，Q3 净销售 $7.40B（占 34%），Tide / Ariel / Dawn / Febreze，量价基本盘</li>
+      <li><strong>婴儿、女性与家庭护理（Baby, Feminine &amp; Family Care）</strong>——$5.06B，Pampers / Always / Bounty / Charmin</li>
+      <li><strong>美容（Beauty）</strong>——$3.87B，本季<span class="hl-t">有机 +7% 领涨</span>，Olay / SK-II / Head &amp; Shoulders / Pantene</li>
+      <li><strong>健康护理（Health Care）</strong>——$3.07B，Oral-B / Crest / Vicks / 个人健康</li>
+      <li><strong>男士修容（Grooming）</strong>——$1.61B，Gillette / Venus，利润率最高（净利率 20.6%）</li>
+    </ul>
+
+    <p><strong>管理层交接</strong>：<span class="hl-t">Jon Moeller 于 2026 年 1 月 1 日卸任 CEO、转任执行董事长（Executive Chairman），Shailesh Jejurikar 接任总裁兼 CEO</span>。故 Q1 FY2026 电话会由 Moeller 主持（其最后一季），Q2/Q3 FY2026 由新任 CEO Jejurikar 主持——这是理解本财年治理连续性的关键背景。</p>
+
+    <p><strong>能力圈检验</strong>：日用消费品收费"必需品"生意极其清晰（看得懂的顶级好生意，一句话能说清）。两块需要盯住的慢变量：(1) <span class="warn-t">品类成熟 + 私有品牌（自有品牌）在通胀后期的份额侵蚀</span>；(2) <span class="warn-t">GLP-1 减重药对零食/部分个护品类需求的长期外溢影响、以及关税对成本端的持续冲击</span>。这些不改变宝洁"卖得动"的本质，但决定它是低个位数还是中个位数增长。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 2 ═══ -->
+<div class="section">
+  <div class="stitle">模块 2 · 管理层评估</div>
+
+  <div class="bscore">
+    <div class="circle cw">B+</div>
+    <div class="bd">
+      <h4>Shailesh Jejurikar · 总裁兼 CEO（2026-01 至今）</h4>
+      <p>宝洁 30 余年老将，曾任 COO，长期主导织物与家庭护理这一最大分部与"Supply Chain 3.0"供应链变革。2026 年 1 月接替 Moeller 出任 CEO。上任后两季（Q2/Q3 FY2026）延续"聚焦日用刚需品类 + 整合增长战略 + 生产率驱动"的既定路线，本季主动"<span class="hl-t">加速投资以维持消费者动能</span>"——在需求疲软期选择短期牺牲利润率换取长期份额。<span class="warn-t">海图判断：路线稳健、内部提拔、无战略突变，但作为新任 CEO 执行记录尚短，且接手的是一个增长天花板明确、关税逆风加大的成熟盘</span>，需再观察两三个财年才能定评。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>资本配置纪律 · "股息之王"的教科书</h4>
+      <p>
+      <strong>连续 70 年提高股息</strong>（2026-04 宣布）、连续 136 年不间断派息（自 1890 年注册）——这是全市场最稀有的资本返还记录之一，历经大萧条、二战、金融危机、疫情从未间断。<br>
+      <strong>持续回购缩股</strong>：过去 3 财年回购合计 $188.6 亿，摊薄加权股数从 FY2023 的 24.84 亿降至 Q3 FY2026 季度口径的 24.17 亿。FY2026 计划分红约 $100 亿 + 回购约 $50 亿。<br>
+      <span class="warn-t">两个需留意点</span>：① 回购多入库存股（美股常态，部分用于对冲股权激励），缩股力度温和（3 年累计仅约 -1.2%）；② 公司长期维持约 $25B 净负债、用发债支撑资本返还——对 AA- 评级、FCF 极稳的宝洁合理，但要清楚这不是"净现金公司"。
+      </p>
+    </div>
+  </div>
+
+  <div class="cmt">
+    <p><strong>长期主义测试</strong>：✅ 宝洁管理层始终以"品牌建设 + 生产率 + 组合优化"的长期复利为主线，2025-06 宣布"投资组合与生产率计划（Supply Chain 3.0）"精简组合与组织，是典型的长期视角而非短期财报博弈。本季"加速投资维持消费者动能"、宁可 EPS 落区间下沿也要保份额，正是主人翁式取舍。<strong>坦诚度</strong>：电话会披露详尽（关税税后拖累从预期上调至约 $400M、毛利率 150bps 逐项拆解、明确指引"偏区间下沿"都主动说明），不粉饰。<strong>利益绑定</strong>：管理层持股比例不高（成熟大盘股常态），薪酬与有机销售、核心 EPS、现金回报强挂钩。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 3 ═══ -->
+<div class="section">
+  <div class="stitle">模块 3 · 商业模式深度解析</div>
+  <div class="cmt">
+    <p><strong>海图"一句话测试"</strong>：<span class="hl-t">宝洁靠 21 个头部品牌，把牙膏、洗衣液、纸尿裤、剃须刀这些"每天都要用、用完就要买"的日用品，以品牌溢价 + 规模成本卖到全球 70 国的每一个货架，赚的是"高频刚需 + 心智垄断"的稳定过路费。</span></p>
+
+    <p><strong>盈利飞轮</strong>：品牌广告投入 → 消费者心智占领 → 零售商必须进货（不进货货架就缺爆款）→ 掌控货架与议价权 → 规模摊薄采购/生产/物流/广告成本 → 更高毛利 → 再投入品牌与创新。这是一个自我强化的"重广告 + 重规模"循环，新进入者难以在同一品类里同时复制品牌心智与全球分销。</p>
+
+    <p><strong>Q3 FY2026 分部营收模型</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>分部</th><th>净销售</th><th>YoY</th><th>有机</th><th>分部净利率*</th></tr>
+        <tr><td>织物与家庭护理</td><td>$7.40B</td><td>+7%</td><td>+3%</td><td>17.6%</td></tr>
+        <tr><td>婴儿/女性/家庭护理</td><td>$5.06B</td><td>+6%</td><td>+3%</td><td>19.4%</td></tr>
+        <tr><td>美容 Beauty</td><td>$3.87B</td><td>+11%</td><td><span class="hl-t">+7%</span></td><td>15.0%</td></tr>
+        <tr><td>健康护理</td><td>$3.07B</td><td>+7%</td><td>+2%</td><td>18.8%</td></tr>
+        <tr><td>男士修容 Grooming</td><td>$1.61B</td><td>+7%</td><td>+1%</td><td>20.6%</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:8px; font-size:11px; color:var(--text3);">*宝洁不按分部披露毛利率，仅披露分部净销售与净利，分部净利率为推算。美容分部有机 +7%、量 +5% 靠创新驱动领涨，是本季结构亮点。</p>
+
+    <p style="margin-top:14px;"><strong>单位经济与议价能力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>对消费者的定价权</strong>：中——头部品牌有溢价，但通胀后期消费者对价格敏感、易转向私有品牌，本季价格贡献仅 +1%，定价权阶段性受限</li>
+      <li><strong>对零售商的议价权</strong>：强——21 个必备爆款让沃尔玛/Costco/亚马逊等大零售商"不得不进货"，货架掌控力是宝洁的隐形护城河</li>
+      <li><strong>对供应商的议价权</strong>：强——全球最大日化采购方之一，规模压低原材料成本；但关税与大宗商品是外生变量，本季分别拖累税后约 $400M / $150M</li>
+      <li><strong>规模效应</strong>：极强——全球生产/物流/广告网络边际成本低，生产率改善本季贡献毛利率 +210bps，部分抵消组合与关税拖累</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══ 模块 4 ═══ -->
+<div class="section">
+  <div class="stitle">模块 4 · 经济护城河分析（5 维）</div>
+  <div class="moat-grid">
+    <div class="moat-card wide">
+      <h5>1. 无形资产 / 品牌</h5>
+      <span class="moat-rate">宽</span>
+      <p>21 个十亿美元品牌 + 一个多世纪的广告心智沉淀，Tide/Pampers/Gillette 是各自品类的代名词。这是宝洁最核心的护城河。<strong>趋势：稳定</strong>（私有品牌是慢性侵蚀）。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>2. 规模 / 成本优势</h5>
+      <span class="moat-rate">宽</span>
+      <p>全球最大日化采购/生产/分销体系，边际成本低。本季生产率贡献毛利率 +210bps。Supply Chain 3.0 持续挖潜。<strong>趋势：稳定/加宽</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>3. 转换成本</h5>
+      <span class="moat-rate">窄</span>
+      <p>消费者随时可换牌子，切换成本几乎为零；靠品牌忠诚与习惯形成弱黏性。这是日化生意的天然短板。<strong>趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>4. 网络效应</h5>
+      <span class="moat-rate">窄 / 无</span>
+      <p>日用品本身无网络效应；唯一近似的是"零售货架掌控 + 供应链规模"形成的分销飞轮，让对手难以同时铺满全球货架。<strong>趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>5. 有效规模</h5>
+      <span class="moat-rate">中-宽</span>
+      <p>成熟日化品类只能容纳少数全球巨头（宝洁/联合利华/高露洁/金佰利），加上货架与广告门槛，新全球玩家几无空间。<strong>趋势：稳定</strong>。</p>
+    </div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>10 年后护城河会更宽还是更窄？</strong> <span class="hl-t">品牌 + 规模的核心护城河仍宽且持久</span>，但两个慢变量决定宽窄边际：(1) <span class="warn-t">私有品牌 / 自有品牌</span>——在通胀后期消费者预算收紧时，零售商自有品牌会蚕食中低端份额，宝洁靠创新与品牌溢价对冲；(2) <span class="warn-t">需求结构变化</span>——GLP-1 减重药、人口结构、新兴市场消费升级等，会重塑部分品类的量增天花板。宝洁的应对是"聚焦刚需大品类 + 创新驱动量增 + 生产率省成本"，本季量增 +2% 拐点正是这套打法初见成效。<strong>结论：护城河宽而稳，但不是加宽型——它是一台守成的复利机器，不是扩张型成长股。</strong></p>
+    <p><strong>定价权</strong>：品牌带来溢价，但受消费者价格敏感度与私有品牌天花板压制。本季价格贡献仅 +1%，说明当前定价权处于阶段性温和区间。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 5 ═══ -->
+<div class="section">
+  <div class="stitle">模块 5 · 财务深度分析</div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 12px 0; font-family: 'Segoe UI',sans-serif;">5.1 关键比率与近 5 季趋势</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>指标</th><th>Q3 FY25</th><th>Q4 FY25</th><th>Q1 FY26</th><th>Q2 FY26</th><th>Q3 FY26</th></tr>
+      <tr><td>净销售（$B）</td><td>19.78</td><td>20.89</td><td>22.39</td><td>22.21</td><td>21.24</td></tr>
+      <tr><td>名义 YoY</td><td>+1%</td><td>+2%</td><td>+3%</td><td>+1%</td><td>+7.4%</td></tr>
+      <tr><td>有机 YoY</td><td>+1%</td><td>+2%</td><td>+2%</td><td>0%</td><td>+3%</td></tr>
+      <tr><td>毛利率</td><td>51.0%</td><td>49.1%</td><td>51.4%</td><td>51.2%</td><td>49.5%</td></tr>
+      <tr><td>营业利润率</td><td>23.0%</td><td>20.8%</td><td>26.2%</td><td>24.2%</td><td>21.5%</td></tr>
+      <tr><td>GAAP 摊薄 EPS</td><td>$1.54</td><td>$1.48</td><td>$1.95</td><td>$1.78</td><td>$1.63</td></tr>
+      <tr class="hl"><td>核心 EPS</td><td>$1.54</td><td>$1.48</td><td>$1.99</td><td>$1.88</td><td>$1.59</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:8px; font-size:12px; color:var(--text3); line-height:1.6;">读数：Q3 名义增速 +7.4% 是 5 季最高，但主要靠汇率；有机 +3% 较 Q2 的 0% 明显回暖（量增拐点）。毛利率 49.5% 与营业利润率 21.5% 均较去年同期降约 150bps，是关税 + 不利组合 + 再投资的合力（生产率 +210bps 部分抵消）。宝洁季度利润率呈明显季节性（Q1 财季即日历 Jul-Sep 通常最高），不宜跨季直接线性外推。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.2 杜邦分析 + 盈利能力（TTM 口径）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>指标</th><th>数值</th><th>说明</th></tr>
+      <tr><td>净利率（Q3）</td><td>18.5%</td><td>净利 $3.93B / 净销售 $21.24B</td></tr>
+      <tr><td>资产周转率（TTM）</td><td>~0.68x</td><td>TTM 营收 $86.7B / 总资产 $128.4B</td></tr>
+      <tr><td>权益乘数</td><td>~2.35x</td><td>总资产 $128.4B / 权益 $54.7B</td></tr>
+      <tr class="hl"><td><strong>ROE（杜邦推算）</strong></td><td><strong>~30%</strong></td><td>18.5% × 0.68 × 2.35 · 高 ROE（回购压低分母）</td></tr>
+      <tr><td>ROIC（估算）</td><td>~14-15%</td><td>NOPAT / 投入资本（权益+净负债）· 远超 WACC ~6.5%</td></tr>
+      <tr><td>毛利率 / 核心营业利润率</td><td>49.5% / 22.2%</td><td>-150bps / -80bps YoY</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:8px; font-size:12px; color:var(--text3); line-height:1.6;">宝洁 ~30% 的 ROE 部分由多年回购压低股东权益放大，但 ~14-15% 的 ROIC（不受资本结构影响）仍稳稳高于 ~6.5% 的 WACC，价值创造能力扎实。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.3 资产负债健康度（2026-03-31 末 · $M）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>2025-06-30 末</th><th>2026-03-31 末</th><th>说明</th></tr>
+      <tr><td>现金及等价物</td><td>9,556</td><td>12,306</td><td>无独立短期投资科目</td></tr>
+      <tr class="hl"><td>一年内到期债务</td><td>9,513</td><td>13,174</td><td>长债当期 $6.5B + 短借/商票 ~$6.7B</td></tr>
+      <tr class="hl"><td>长期债务（非流动）</td><td>24,995</td><td>23,852</td><td>公允价值约 $29.4B</td></tr>
+      <tr class="hl"><td>有息负债合计</td><td>34,508</td><td>37,026</td><td>逐项核对</td></tr>
+      <tr class="hl"><td><strong>真实净负债</strong></td><td><strong>-24,952</strong></td><td><strong>-24,720</strong></td><td>⚠️ 净负债非净现金</td></tr>
+      <tr><td>应付账款</td><td>—</td><td>15,030</td><td>对供应商议价强</td></tr>
+      <tr><td>商誉</td><td>—</td><td>41,359</td><td>多来自吉列等并购</td></tr>
+      <tr><td>无形资产（净）</td><td>—</td><td>21,531</td><td>商誉+无形占总资产 ~49%</td></tr>
+      <tr><td>总资产</td><td>—</td><td>128,378</td><td>—</td></tr>
+      <tr><td>股东权益</td><td>—</td><td>54,731</td><td>—</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">⚠️ <strong>净负债非净现金——铁律提示</strong>：宝洁现金 $12.31B，有息负债 $37.03B（一年内到期 $13.17B + 长期 $23.85B，已逐项核对），<strong>真实净负债约 -$24.72B</strong>。若并入约 $1.0-1.1B 经营租赁负债（金额较小，分别并入"应计及其他负债"与"其他非流动负债"，未单列），净负债约 -$25.8B。宝洁长期维持约 $25B 净杠杆，用 AA- 投资级信用低成本发债支撑分红回购——这是刻意的资本结构选择，不是财务紧张。商誉 + 无形资产约 $62.9B（占总资产约 49%），多来自吉列等历史并购，需留意长期减值风险（历史上宝洁曾对吉列/Gillette 商誉计提过减值）。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.4 现金流量（Q3 单季 + 9 个月累计）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>Q3 FY26 单季</th><th>9 个月累计（截至 Mar-26）</th></tr>
+      <tr><td>经营活动现金流（OCF）</td><td>$4.05B</td><td>$14.43B</td></tr>
+      <tr><td>- Capex</td><td>$1.02B</td><td>$3.39B</td></tr>
+      <tr class="hl"><td>自由现金流（FCF）</td><td>$3.03B</td><td>$11.04B</td></tr>
+      <tr><td>调整后 FCF 转化率</td><td>82%</td><td>指引 85-90%（全年）</td></tr>
+      <tr><td>分红支付</td><td>$2.50B</td><td>$7.62B</td></tr>
+      <tr><td>回购（库存股）</td><td>$0.60B</td><td>$4.15B</td></tr>
+      <tr><td>净利润 / 折旧摊销</td><td>—</td><td>$13.06B / $2.35B</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">Q3 FCF 转化率 82%（分母已剔除 Glad 一次性收益），全年指引 85-90%。9 个月累计 FCF $11.04B，分红 $7.62B + 回购 $4.15B = 返还 $11.77B，略高于 9 个月 FCF——靠稳定 FCF + 适度杠杆支撑，全年计划返还约 $150 亿（分红 ~$100 亿 + 回购 ~$50 亿）。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.5 所有者盈余（价值投资口径 · TTM 估算）</h3>
+  <div class="dcf-note">
+    <p><strong>所有者盈余 = 净利润 + 折旧摊销 + 非现金费用 − 维护性 Capex ± 营运资金 ≈ FCF</strong></p>
+    <p>宝洁是高现金转化的稳态消费龙头，FCF 是所有者盈余的良好近似。以 9 个月累计年化，TTM FCF 约 <strong>$14.5B</strong>（Capex 占营收约 4-5%，属中等资本强度，非重资产）。</p>
+    <p><strong>所有者盈余收益率 = FCF ~$14.5B / 市值 $342B ≈ 4.2%</strong>——对一家有机增速仅 3%、连续 70 年增息的顶级防御龙头，4.2% 的 FCF Yield 属<span class="hl-t">"合理但不便宜"</span>：既没有 25% 安全边际，也未明显高估。叠加 2.9% 股息率，这是一台稳健吐现金、但当前价格已充分定价其质量的机器。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 6 ═══ -->
+<div class="section">
+  <div class="stitle">模块 6 · 电话会分析（Q3 FY2026 + 前 2 季度）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">Q3 FY2026 电话会（2026-04-24 · CEO Jejurikar 主持）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"全公司销量 +2%，为一年来首次；5 大分部中 3 个量增，Beauty 有机 +7%/量 +5% 靠创新领涨"</div><div class="ec-note">量增拐点是本季最有含金量的信号——对一家成熟到极致的巨头，量的转正比名义营收更能说明品牌与创新在起作用。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"营收 $21.2B 超预期、EPS 超预期；管理层选择加速投资以维持消费者动能"——CEO Jejurikar</div><div class="ec-note">在需求疲软期主动加投品牌与创新，短期牺牲利润率换长期份额，是主人翁式取舍，也是全年 EPS 落区间下沿的直接原因。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"FY2026 关税税后拖累上调至约 $400M，大宗商品约 $150M；预计全年 EPS 落指引区间下沿"</div><div class="ec-note">关税是今年最实在的外生逆风，叠加利息税收 $250M，合计每股逆风约 $0.25，靠 $200M 汇率顺风只能对冲一部分。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"报告毛利率降 150bps（不利组合 -180bps + 再投资 -100bps + 关税 -50bps，生产率 +210bps 部分抵消）"</div><div class="ec-note">利润率承压是结构性（组合）+ 主动（再投资）+ 外生（关税）三因素合力，生产率是唯一的正向对冲——毛利率故事要拆开看。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"维持全年销售/EPS/现金回报指引；宣布连续第 70 年提高股息"</div><div class="ec-note">全年指引维持但 EPS 偏下沿，现金回报承诺不变——股息之王的稳定性再获确认，但增长实质温和。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q2 FY2026 电话会（2026-01-22 · Jejurikar 首季主持）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"营收 $22.2B 仅 +1%、有机销售持平（0%）——增长最弱一季，需求疲软"</div><div class="ec-note">Q2 是本财年增长低谷，有机 0% 引发市场对宝洁增长动能的担忧——也正因此，Q3 有机回升至 +3% 的拐点更显重要。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"回馈股东 $4.8B（分红 $2.5B + 回购 $2.3B），FCF 转化率 88%"</div><div class="ec-note">现金回报力度不减，FCF 转化稳健，资本返还纪律在弱增长季依旧兑现。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q1 FY2026 电话会（2025-10 · Moeller 以 CEO 身份最后一季）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"营收 $22.4B +3%、有机 +2%；GAAP 摊薄 EPS $1.95 +21%（去年高重组基数）、核心 EPS $1.99 +3%；FCF 转化率高达 102%"</div><div class="ec-note">Moeller 卸任前交出一份稳健季报，各关键财务指标"均在全年指引区间轨道上"；此后 1 月起 Jejurikar 接任 CEO。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">指引兑现度追踪</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>历史指引</th><th>Q3 FY2026 进展</th><th>评价</th></tr>
+      <tr><td>FY2026 有机销售 0-4%</td><td>维持；Q3 有机 +3%（较 Q2 的 0% 回暖）</td><td><span class="badge nt">维持 · 回暖</span></td></tr>
+      <tr><td>FY2026 核心 EPS 增速 0-4%（$6.83-7.09）</td><td>维持，但明确"落区间下沿"</td><td><span class="badge dn">下修口吻</span></td></tr>
+      <tr><td>销量拐点</td><td>全公司量增 +2%（一年来首次）</td><td><span class="badge up">兑现</span></td></tr>
+      <tr><td>关税逆风</td><td>税后拖累上调至约 $400M</td><td><span class="badge dn">恶化</span></td></tr>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>信号汇总</strong>：Q3 FY2026 是宝洁"<span class="hl-t">量增拐点确立 + 有机回暖至 +3% + 现金回报稳定</span>"与"<span class="warn-t">关税加码 + 毛利率承压 + EPS 偏下沿</span>"并存的一季。三季电话会的信心度演变清晰：Q1（Moeller 收官，稳）→ Q2（Jejurikar 首季，有机 0% 最弱，市场担忧）→ Q3（量增转正，拐点信号，但盈利被外生逆风压着）。<strong>业绩没有暴雷，但也没有惊喜——宝洁的核心矛盾是"稳健防御 vs 温和增长 + 关税成本"，而非经营质量。</strong></p>
+  </div>
+</div>
+
+<!-- ═══ 模块 7 ═══ -->
+<div class="section">
+  <div class="stitle">模块 7 · 多模型估值（8 种方法）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">7.1 估值汇总表（独立估值 · 不锚定现价 · USD）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>估值方法</th><th>每股公允价</th><th>假设要点</th><th>权重</th></tr>
+      <tr><td>1. 相对估值（P/E）</td><td>$153</td><td>FY2027 核心 EPS ~$7.30 × 21x（成熟龙头 + 有机仅 3%，给合理而非峰值倍数）</td><td>25%</td></tr>
+      <tr><td>2. DCF（基准）</td><td>$155</td><td>FCF 基数 ~$14.5B，未来 5 年 CAGR +4%，WACC 6.5%（低 beta 防御股），永续 2.5%</td><td>25%</td></tr>
+      <tr><td>3. 所有者盈余收益率</td><td>$146</td><td>FCF ~$14.5B / 4.25% 目标收益率 = $341B → /2.33B 股</td><td>15%</td></tr>
+      <tr><td>4. DDM（股息贴现）</td><td>$150</td><td>DPS ~$4.23，增长 4.5%，要求回报 7.5%（股息之王，DDM 高度适用）</td><td>15%</td></tr>
+      <tr><td>5. PEG</td><td>$135</td><td>Forward P/E 20.7x ÷ 核心 EPS 增速 ~4.5% = PEG ~4.6（防御股常态高，增长调整口径偏贵）</td><td>5%</td></tr>
+      <tr><td>6. 反向 DCF</td><td>当前价隐含 FCF 增长 <strong>~2.5%</strong></td><td>$147 隐含市场仅定价 ~2.5% 永续增长，低于宝洁可实现的 ~4%——反而暗示估值不算高估</td><td>10%</td></tr>
+      <tr><td>7. SOTP 分部加总</td><td>$140</td><td>5 分部按增速/利润率分别给 18-22x（Beauty/Health 给高倍数）− 净负债 $25B</td><td>5%</td></tr>
+      <tr><td>8. NAV</td><td>不适用</td><td>非资产型公司（品牌/商誉/无形驱动，重置成本无意义）</td><td>0%</td></tr>
+      <tr class="hl"><td><strong>加权公允价中位数</strong></td><td><strong>$150</strong></td><td>估值区间 $135-155 · 中位 ~$150</td><td>100%</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.8;"><strong>与现价对照</strong>：当前 $147.05 vs 加权公允 $150 · <span class="nt">折价仅约 2%</span>——<strong>远不足价值投资 25% 安全边际的门槛</strong>。宝洁是世界级防御资产，但当前价格已充分反映其质量，几乎没有安全边际。有意思的是反向 DCF：$147 只隐含 ~2.5% 永续增长，低于宝洁可实现的 ~4%，说明市场并未把它当成长股高估——它是"合理满价"而非"泡沫"。这决定了评级是"持有观望"（等更好的价格），而非"卖出"。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.2 P/E 多档透视表</h3>
+  <p style="margin-bottom:10px; font-size:13px; color:var(--text2);">本季 GAAP EPS $1.63 含 Glad 一次性收益 +$0.11、增量重组 -$0.07，核心 $1.59；季度利润率季节性明显——故以多档透视，标注"最可信"档：</p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>口径</th><th>EPS / 指标</th><th>P/E（基于 $147.05）</th><th>读数说明</th></tr>
+      <tr><td>TTM GAAP P/E</td><td>~$6.84</td><td>~21.5x</td><td>含 Glad 收益 + 重组噪音</td></tr>
+      <tr><td>TTM 核心 P/E</td><td>~$6.94</td><td>~21.2x</td><td>剔一次性 · 较可信</td></tr>
+      <tr><td>FY2026 核心 EPS（偏下沿 ~$6.90）</td><td>~$6.90</td><td>~21.3x</td><td>本财年在途 · 指引 $6.83-7.09</td></tr>
+      <tr class="hl"><td><strong>Forward P/E（FY2027 核心 ~$7.30）</strong></td><td><strong>~$7.30</strong></td><td><strong>~20.1-20.7x</strong></td><td>最可信档 · 市场惯用（GuruFocus 20.7x）</td></tr>
+      <tr><td>P/S (TTM)</td><td>营收 ~$86.7B</td><td>~3.9x</td><td>日化龙头质量溢价</td></tr>
+      <tr><td>FCF Yield</td><td>FCF ~$14.5B</td><td>~4.2%</td><td>合理但不便宜</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3);"><strong>最可信档</strong>：Forward P/E ~20.7x（FY2027）。同业对比：高露洁 CL ~23-25x（估值溢价最高）、金佰利 KMB ~13-15.5x（增长偏弱、股息率约 5%、估值最低）。<span class="hl-t">宝洁介于两者之间——以约 20.7x 享受质量溢价，但有机增速仅 0-4% 偏温和，估值处"合理偏满"区间</span>。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.3 12 个月目标价（概率加权）</h3>
+  <div class="pgrid">
+    <div class="pbox"><div class="pl">悲观情景 · 30%</div><div class="pv pc">$128</div><div class="pn">有机回落至 0-2% + 关税持续 + 私有品牌侵蚀 + 估值压缩至 ~18x<br>距现价 -13%</div></div>
+    <div class="pbox"><div class="pl">基准情景 · 45%</div><div class="pv pf">$152</div><div class="pn">有机 3% 延续 + 核心 EPS 向 $7.30 + 估值维持 ~21x + 稳定回购<br>距现价 +3%</div></div>
+    <div class="pbox"><div class="pl">乐观情景 · 25%</div><div class="pv ps">$168</div><div class="pn">量增拐点持续 + 有机升至 4-5% + 关税缓和 + 估值重估至 ~23x<br>距现价 +14%</div></div>
+  </div>
+  <p style="font-size:13px; color:var(--text2);"><strong>概率加权公允价</strong>：30%×$128 + 45%×$152 + 25%×$168 = <strong>$149</strong> ≈ $150。<strong>叠加 2.9% 股息 = 总回报仅约 5%</strong>——稳健但不激动。<span class="warn-t">当前 $147 折价仅约 2%，远高于机械首仓 $120——不在合理建仓窗口</span>。这是一台好机器，但价格没给出安全边际。</p>
+</div>
+
+<!-- ═══ 模块 8 ═══ -->
+<div class="section">
+  <div class="stitle">模块 8 · 竞争与行业分析</div>
+  <div class="cmt">
+    <p><strong>全球日用消费品格局</strong>：宝洁是全球最大日化公司，与联合利华（Unilever）、雀巢（部分品类）、高露洁（Colgate-Palmolive）、金佰利（Kimberly-Clark）、拜尔斯道夫等构成成熟寡头竞争；真正的长期竞争压力来自零售商<strong>私有品牌（自有品牌）</strong>在通胀后期的份额蚕食，而非某个单一对手。</p>
+
+    <p><strong>日化龙头同业对比（估值数据截至 2026 年 6-7 月，来源 GuruFocus/stockanalysis，二手仅供相对参照）</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>公司</th><th>Forward P/E</th><th>增长</th><th>股息率</th><th>核心评价</th></tr>
+        <tr class="hl"><td><strong>宝洁 PG</strong></td><td><strong>~20.7x</strong></td><td>有机 0-4%</td><td>~2.9%</td><td>规模与品牌之王 · 估值居中</td></tr>
+        <tr><td>高露洁 CL</td><td>~23-25x</td><td>有机中个位数</td><td>~2.3%</td><td>估值溢价最高 · 更纯口腔/个护</td></tr>
+        <tr><td>金佰利 KMB</td><td>~13-15.5x</td><td>增长偏弱</td><td>~5%</td><td>估值最低 · 纸品为主 · 高股息</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:10px; font-size:12px; color:var(--text3);">PG 介于 CL（高估值高增长预期）与 KMB（低估值弱增长）之间：以约 20.7x forward P/E 享受质量溢价，增速温和但组合更均衡、品牌矩阵更宽。宝洁的相对优势是"品类最全 + 规模最大 + 现金流最稳"，相对短板是"体量太大、增长天花板明确"。</p>
+
+    <p style="margin-top:14px;"><strong>波特五力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>新进入者：</strong>低（品牌心智 + 全球分销 + 广告规模门槛极高）——但小众 DTC 品牌可在细分品类蚕食</li>
+      <li><strong>替代品：</strong>中（私有品牌是最主要替代，通胀期威胁上升）</li>
+      <li><strong>供应商议价：</strong>低（宝洁是最大采购方之一）——但关税/大宗是外生冲击</li>
+      <li><strong>买家议价：</strong>中（大零售商有议价力，但宝洁的必备爆款让其难以完全去宝洁化）</li>
+      <li><strong>同业竞争：</strong>中（理性寡头，靠创新与营销竞争，价格战克制）</li>
+    </ul>
+
+    <p><strong>颠覆风险</strong>：日化是慢变行业，颠覆风险低于科技。核心慢变量是私有品牌份额、GLP-1 对部分品类需求的外溢、以及新兴市场消费升级带来的量增机会。宝洁靠"聚焦刚需大品类 + 持续创新"守成，是 10 年维度的稳态生意。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 9 ═══ -->
+<div class="section">
+  <div class="stitle">模块 9 · 技术面与 K 线分析（次要参考）</div>
+  <div class="cmt">
+    <p><strong>趋势</strong>：PG 当前 $147.05，处于 52 周区间 $137.62-$167.25 的<span class="hl-t">偏下部</span>，距 52 周高 -12%、距 52 周低 +7%。过去 12 个月总回报约 <span class="warn-t">-7.9%</span>——在美股大盘走强的背景下明显跑输，反映市场对其温和增长 + 关税逆风的谨慎定价。这是一只低波动、防御属性强的大盘蓝筹，回调温和、反弹也温和。</p>
+
+    <p><strong>关键价位</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>支撑</strong>：$137.62（52 周低）/ $130（估值下沿，~18x forward）/ $120（机械首仓，~17x forward）</li>
+      <li><strong>阻力</strong>：$150（公允价 + 心理关口）/ $167.25（52 周高）/ $168（乐观情景）</li>
+    </ul>
+
+    <p><strong>指标信号</strong>：处区间偏下、过去一年跑输大盘，情绪偏冷。<span class="hl-t">对防御型标的，情绪偏冷 + 估值合理时更宜观察，而非追高；但当前 $147 仍未跌出足够安全边际。</span></p>
+
+    <p><strong>注意</strong>：宝洁的核心驱动是有机增速、毛利率（关税/组合）、FCF 与股息可持续性，技术面是次要参考。价值投资者应等基本面利空（关税恶化、有机回落）把股价压到 $130 甚至 $120 附近，再分批建仓，而非在 $147 的"合理满价"追入。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 10 ═══ -->
+<div class="section">
+  <div class="stitle">模块 10 · 增长催化剂与前景展望</div>
+  <div class="cmt">
+    <p><strong>短期催化剂（未来 6 个月）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>2026-07-29 FY2026 Q4 暨全年财报</strong>——验证全年 EPS 是否如预期落区间下沿、量增拐点是否延续、FY2027 指引口径</li>
+      <li><strong>关税政策走向</strong>——$400M 税后拖累是否进一步恶化或缓和，是今年最大的短期摆动因素</li>
+      <li><strong>毛利率修复路径</strong>——生产率（Supply Chain 3.0）能否继续抵消组合与关税拖累</li>
+      <li><strong>新任 CEO Jejurikar 的战略落地</strong>——组合精简与整合增长战略的执行进度</li>
+    </ul>
+
+    <p><strong>长期展望（3-5 年）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>刚需复利</strong>——21 个头部品牌 + 全球 70 国分销驱动有机中个位数增长（量 + 温和价 + 创新）</li>
+      <li><strong>Beauty / Health 结构升级</strong>——高利润率、创新驱动的美容与健康分部占比提升，改善组合</li>
+      <li><strong>生产率红利</strong>——Supply Chain 3.0 持续挖潜，长期支撑利润率与 FCF</li>
+      <li><strong>股息之王复利</strong>——连续 70 年增息 + 温和回购，是长期股东回报的稳定引擎</li>
+      <li><strong>风险情景</strong>：私有品牌加速蚕食 / 关税长期化 / 有机增速滑向 0-2% / 新兴市场汇率波动</li>
+    </ul>
+
+    <p><strong>TAM 展望</strong>：全球日用消费品市场庞大且稳定，宝洁的可寻址空间不缺（新兴市场消费升级 + 高端化），核心问题不是空间而是<strong>增速天花板</strong>——体量太大，很难跑出超越 GDP + 通胀太多的增长。它是"稳态复利机器"，不是"高增长故事"。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 11 ═══ -->
+<div class="section">
+  <div class="stitle">模块 11 · 风险矩阵</div>
+  <div class="risk-grid">
+    <div class="risk-card r4"><h5>1. 满估值无安全边际</h5><span class="risk-score">4 / 5 高</span><p>Forward P/E 20.7x / FCF Yield 4.2% / 折价仅约 2% vs 公允 $150 · 任何有机增速放缓或关税恶化都可能触发估值压缩至 18x（$130）</p></div>
+    <div class="risk-card r4"><h5>2. 关税与成本冲击</h5><span class="risk-score">4 / 5 高</span><p>FY2026 关税税后拖累约 $400M + 大宗 $150M · 外生、难对冲 · 是全年 EPS 落区间下沿的直接原因 · 若长期化侵蚀利润率</p></div>
+    <div class="risk-card r3"><h5>3. 增长温和 / 有机疲软</h5><span class="risk-score">3 / 5 中</span><p>有机增速 0-4% · Q2 曾录得 0% · 价格贡献仅 +1% · 增长依赖量的拐点能否延续，天花板明确</p></div>
+    <div class="risk-card r3"><h5>4. 私有品牌 / 需求变迁</h5><span class="risk-score">3 / 5 中</span><p>通胀后期消费者转向自有品牌蚕食份额 · GLP-1 对部分品类需求外溢 · 慢变量但持续</p></div>
+    <div class="risk-card r2"><h5>5. 财务 / 净负债</h5><span class="risk-score">2 / 5 偏低</span><p>真实净负债 -$24.7B（非净现金）+ 商誉无形占资产 ~49% · 但 AA- 评级 + FCF 极稳 · 杠杆安全、减值风险可控</p></div>
+    <div class="risk-card r2"><h5>6. 生意质量（机会）</h5><span class="risk-score">2 / 5 反向</span><p>21 个头部品牌 + 规模成本护城河 + 连续 70 年增息 + ~30% ROE · 世界级防御资产本身是最大的安全垫</p></div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>3 个黑天鹅情景</strong>：</p>
+    <ol style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>关税全面升级 + 长期化</strong>——概率 15% · 成本端持续侵蚀、毛利率跌破 48% · 股价跌至 $120-125</li>
+      <li><strong>私有品牌加速夺份额 + 有机转负</strong>——概率 10% · 量价双杀 · 估值重估至 16-17x · 股价 $115-120</li>
+      <li><strong>大额商誉/无形减值</strong>——概率 8% · 历史上曾对吉列计提减值 · GAAP 利润一次性冲击（不影响现金，但打击信心）· 股价短期承压</li>
+    </ol>
+
+    <p style="margin-top:10px;"><strong>下行支撑</strong>：世界级品牌矩阵 + 规模护城河 + 连续 70 年增息 + FCF ~$14.5B + ~30% ROE 构成质量底。<span class="hl-t">$130-135 是较硬的估值底</span>（52 周低 $137.62 附近 + Forward P/E ~18x 下限 + 股息率升至 ~3.2% 提供支撑）。宝洁的"底"比多数股票稳，因为防御属性 + 股息之王地位在市场恐慌时反而吸引避险资金。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 12 ═══ -->
+<div class="section">
+  <div class="stitle">模块 12 · 股东回报分析</div>
+  <div class="cmt">
+    <p><strong>宝洁是"股息之王"的代名词——连续 70 年增息、136 年不间断派息。但要把"给了多少 → 给的方式好不好 → 能不能继续给"三个问题拆到可验证的颗粒度，尤其是回购的含金量。</strong></p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 18px 0 10px; font-family: 'Segoe UI',sans-serif;">12.1 公司给了股东多少？</h3>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>财年</th><th>现金股息</th><th>回购</th><th>股东总回报</th><th>说明</th></tr>
+        <tr><td>FY2023</td><td>$9.00B</td><td>$7.35B</td><td><strong>$16.35B</strong></td><td>回购力度较高</td></tr>
+        <tr><td>FY2024</td><td>$9.31B</td><td>$5.01B</td><td><strong>$14.32B</strong></td><td>回购收缩</td></tr>
+        <tr><td>FY2025</td><td>$9.87B</td><td>$6.50B</td><td><strong>$16.37B</strong></td><td>股息持续爬升</td></tr>
+        <tr class="hl"><td><strong>3 年合计</strong></td><td><strong>$28.18B</strong></td><td><strong>$18.86B</strong></td><td><strong>$47.04B</strong></td><td>股息占 60% · 回购 40%</td></tr>
+      </table>
+    </div>
+    <p style="font-size:13px; color: var(--text2); margin-top:8px"><strong>Trailing Shareholder Yield</strong> ≈ FY2025 返还 $16.37B / 市值 $342B ≈ <strong>4.8%</strong>（其中股息 ~2.9% + 回购 ~1.9%）。<span class="hl-t">与"低股息大回购"的科技股不同，宝洁是"高股息 + 温和回购"的经典消费股结构——股息是主菜、回购是辅</span>。连续 70 年增息（2026-04 宣布）是全市场最稀有的资本返还记录之一。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.2 给的方式好不好？</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>股息含金量最高</strong>：连续 70 年增息 + 136 年不间断派息，穿越所有周期从未削减——这是宝洁股东回报的核心，含金量无可挑剔</li>
+      <li><span class="warn-t">回购含金量打折</span>：美股回购多入库存股（treasury stock），部分用于对冲股权激励稀释，而非全额注销。<strong>摊薄加权股数 3 年趋势</strong>：FY2023 24.84 亿 → FY2024 24.72 亿 → FY2025 24.54 亿 → Q3 FY2026 季度口径 24.17 亿，3 年累计仅降约 <strong>1.2%</strong>——缩股力度温和，回购更多是"稳住股数 + 对冲 SBC"，而非大力增厚每股价值</li>
+      <li><strong>回购择时中性</strong>：宝洁常年平滑回购，不刻意择时；FY2026 计划回购约 $50 亿（较 FY2023 的 $73.5 亿收缩），显示管理层在关税逆风期偏保守、优先保股息与投资</li>
+    </ul>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.3 能不能继续给、给多少？</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>股息可持续性极强</strong>：股息 / 核心净利派息率约 60%，股息 / FCF 约 65-70%，留有安全垫；连续 70 年增息记录本身就是最强的可持续性背书</li>
+      <li><strong>未来指引明确</strong>：FY2026 计划分红约 <strong>$100 亿</strong> + 回购约 <strong>$50 亿</strong>（合计约 $150 亿）· 资本返还优先级清晰：股息优先、投资次之、回购兜底</li>
+      <li><strong>(股息 + 回购) / FCF 覆盖度</strong>：FY2026 计划返还 ~$150 亿 / 预期 FCF ~$14-15B ≈ <strong>100% 出头</strong>——略超 FCF，靠稳定现金流 + 适度杠杆支撑，对 AA- 评级、FCF 极稳的宝洁完全可持续</li>
+      <li><strong>借债回购检验</strong>：宝洁长期维持约 $25B 净负债做资本结构优化，但净负债本季环比基本持平（-$24.95B → -$24.72B），并非"因回购持续加杠杆"——回购规模已主动收缩以匹配 FCF</li>
+    </ul>
+    <p><strong>模块小结</strong>：<span class="hl-t">积极且高含金量（股息端），回购端含金量温和打折</span>——连续 70 年增息 + 136 年派息的股息记录是全市场顶级、无可挑剔；但美股回购多入库存股、3 年缩股仅约 1.2%，回购的"增厚每股价值"作用有限。整体是一台以股息为核心的稳健资本返还机器，可持续性极强，唯一遗憾是回购力度温和、含金量不及港股强制注销型。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 13 ═══ -->
+<div class="section">
+  <div class="stitle">模块 13 · 海图评分卡 + 投资决策</div>
+
+  <div class="scorecard">
+    <h3 style="font-size:15px; color:var(--text); margin-bottom: 16px; font-family: 'Segoe UI',sans-serif;">海图评分卡（6 维 A-D）</h3>
+    <div class="score-grid">
+      <div class="score-card"><div class="score-letter s-a">A</div><div class="score-body"><h4>1. 生意可预测性</h4><p>日用刚需消费品，一句话能说清、5 年盈利波动极小、业务能见度顶级。防御属性全市场领先。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">A-</div><div class="score-body"><h4>2. 经济护城河</h4><p>品牌 + 规模 + 货架掌控三位一体（宽），但转换成本窄、私有品牌慢性侵蚀。守成型而非加宽型。</p></div></div>
+      <div class="score-card"><div class="score-letter s-b">B+</div><div class="score-body"><h4>3. 管理层质量</h4><p>Jejurikar 内部提拔、路线稳健、坦诚披露关税/毛利，但新任 CEO 执行记录尚短、接手成熟盘。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">A-</div><div class="score-body"><h4>4. 财务质量</h4><p>~30% ROE + ~14-15% ROIC + FCF ~$14.5B + AA- 评级。但净负债 -$24.7B（非净现金）+ 毛利率承压。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">A-</div><div class="score-body"><h4>5. 资本配置纪律</h4><p>连续 70 年增息 + 136 年派息（顶级）。但回购多入库存股、3 年缩股仅 1.2%，含金量温和打折。</p></div></div>
+      <div class="score-card"><div class="score-letter s-c">C+</div><div class="score-body"><h4>6. 估值与安全边际</h4><p>Forward P/E 20.7x / FCF Yield 4.2% / 折价仅约 2% vs 公允 $150 · <strong>无安全边际，当前价合理偏满</strong>。</p></div></div>
+    </div>
+
+    <div class="flag-row">
+      <strong>红旗排查</strong>：无会计舞弊/治理红旗（连续 70 年增息、披露透明、无收入确认疑点）。唯一需留意的是<strong>商誉+无形占总资产约 49%</strong>（历史上曾对吉列计提减值）——属可控风险，非硬红旗。真正压制评级的是<strong>估值无安全边际</strong>（Forward P/E 20.7x、折价仅约 2%）+ 关税逆风 + 有机增速仅 3%。触发"<span class="warn-t">满估值 + 温和增长</span>"——尽管 6 维基础质量优秀，综合评级<strong>定为「持有观望」</strong>。
+    </div>
+
+    <p style="margin-top:18px; font-size:14px; color:var(--text); line-height:1.85;"><strong>综合评级</strong>：<span class="rating-badge rating-hold" style="font-size:14px;">持有观望</span>。生意质量顶级（6 维含 1 个 A、4 个 A-/B+），但估值维度 C+（折价仅 2%、无安全边际）+ 关税逆风 → 定为持有观望。核心判断：<strong>宝洁是一台无可挑剔的防御性复利机器，问题不在生意，在价格——当前 $147 没有安全边际，现有持仓者继续吃股息复利，新买入者应等回调至 $120-130 区间。</strong></p>
+  </div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">投资决策（精确价格 · USD）</h3>
+
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>项目</th><th>价格</th><th>说明</th></tr>
+      <tr><td>12 个月目标价（基准）</td><td><strong>$150</strong> (+2%)</td><td>有机 3% 延续 + 核心 EPS 向 $7.30 + 估值维持 ~21x</td></tr>
+      <tr><td>悲观目标（30% 概率）</td><td>$128 (-13%)</td><td>有机回落 + 关税持续 + 估值压缩至 ~18x</td></tr>
+      <tr><td>乐观目标（25% 概率）</td><td>$168 (+14%)</td><td>量增拐点延续 + 关税缓和 + 估值重估至 ~23x</td></tr>
+      <tr class="hl"><td>首仓建仓（估值中位数 $150 × 80%）</td><td><strong>$120</strong></td><td>距现价 -18% · ~17x forward · 耐心等回调</td></tr>
+      <tr><td>二仓建仓（× 70%）</td><td>$105</td><td>-29% · ~15x forward · 深度回调机会</td></tr>
+      <tr><td>三仓建仓（× 60%）</td><td>$90</td><td>-39% · ~13x forward · 黑天鹅级机会</td></tr>
+      <tr><td>止盈一档</td><td>$165</td><td>+12% · 近 52 周高 · 减仓 25%</td></tr>
+      <tr><td>止盈二档</td><td>$180</td><td>+22% · 再减 25%</td></tr>
+      <tr><td>止盈三档</td><td>$195</td><td>+33% · 再减 25% · 最后 25% 长期持有吃股息</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.85;"><strong>建议总仓位</strong>：<strong>3-4%</strong>（防御压舱石 · 但当前价无安全边际，应在回调时分批建仓，不追高）。<strong>持有周期</strong>：5-10 年（股息之王长期复利 · 穿越关税与消费周期）。<strong>关键监控指标</strong>：① 有机销售增速 + 销量趋势（+2% 量增拐点是否延续）；② 毛利率 / 核心营业利润率（关税 + 组合 + 再投资拖累）；③ 关税政策进展（$400M 税后逆风走向）；④ FCF 转化率（全年指引 85-90%）；⑤ Forward P/E 是否回落至 18x 以下（$130 估值机会）；⑥ 新任 CEO Jejurikar 的组合精简与整合增长执行。<strong>下次催化剂</strong>：<span class="hl-t">2026-07-29 FY2026 Q4 暨全年财报</span>。</p>
+</div>
+
+<!-- ═══ 海图页末长评 ═══ -->
+<div class="section">
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记 · 1150 字</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p class="lead">价值投资里有一类生意，无聊到让人打哈欠，却能安安静静把股息发一辈子——宝洁就是。它不做惊艳的产品，只做你每天都要用的牙膏、洗衣液、剃须刀和纸尿裤，然后连续 70 年提高股息、连续 136 年不间断派息。Q3 营收 +7.4% 看着不错，可拆开一看，有约 4 个百分点是汇率顺风，真实有机增长只有 3%。好消息藏在别处：全公司销量时隔一年首次转正 +2%，这才是拐点。</p>
+
+      <p>宝洁是全球日用消费品之王——21 个十亿美元品牌铺满 70 国货架，靠"品牌 + 规模"双护城河，把最普通的日化用品做成一台连续 70 年增息的现金机器。Q3 FY2026 净销售 $21.24B（名义 +7.4%、有机 +3%）· 核心 EPS $1.59（+3%）· 毛利率 49.5%（-150bps）· ROE ~30% · FCF ~$14.5B。这是商业模式质量位居全球前列、但增长天花板明确的稳态复利机器。</p>
+
+      <h4>几个研判要点</h4>
+
+      <p><strong>一、增长的"含汇率水分"要看穿。</strong> Q3 名义 +7.4% 很漂亮，但其中约 4pt 来自美元贬值的汇率顺风，<span class="hl-t">剔除后有机销售仅 +3%（量 +2、价 +1）</span>，恒定汇率核心 EPS 只有 $1.54、与去年持平。真正值得记一笔的是"量增 +2%"——<span class="hl-t">这是一年来公司整体销量首次转正</span>，5 大分部里 3 个量增，Beauty 靠创新领涨有机 +7%。对一家成熟到极致的巨头，量的拐点比名义增速更有含金量。</p>
+
+      <p><strong>二、毛利率被三座大山压了 150bps。</strong> 报告毛利率降至 49.5%，拆开是不利组合 -180bps + 再投资 -100bps + 关税 -50bps，靠生产率 +210bps 部分抵消。管理层选择"加速投资维持消费者动能"，<span class="hl-t">短期牺牲利润率换长期份额</span>——这是防御龙头在需求疲软期的典型打法，也是全年 EPS 指引"偏区间下沿"的原因。</p>
+
+      <p><strong>三、关税是今年最实在的逆风。</strong> 管理层把 FY2026 关税税后拖累上调到约 <span class="warn-t">$400M</span>，叠加大宗商品 $150M、利息税收 $250M，合计每股逆风约 $0.25，靠 $200M 汇率顺风只能对冲一部分。这不是护城河问题，是外部成本冲击，但足以让核心 EPS 卡在 $6.83-7.09 区间的下沿。</p>
+
+      <p><strong>四、别把宝洁当"现金堡垒"——它是净负债。</strong> 很多人以为消费之王满手现金，其实它<span class="warn-t">现金 $12.3B、有息负债 $37.0B，真实净负债约 -$24.7B</span>，长期维持约 $25B 净杠杆，用 AA- 投资级信用支撑分红回购。对 FCF 极稳的公司，这种适度杠杆合理，但"净现金"的滤镜要摘掉。</p>
+
+      <p><strong>五、股息之王的含金量在"能不能继续给"。</strong> 过去 3 年宝洁回馈股东 $470 亿（分红 $282 亿 + 回购 $189 亿），连续 70 年增息。FY2026 计划分红约 $100 亿 + 回购约 $50 亿，(分红+回购)/FCF 覆盖度约 100% 出头，靠稳定 FCF 支撑。唯一打折项：<span class="warn-t">美股回购多入库存股，摊薄股数 3 年仅降约 1.2%</span>，缩股温和——分红才是宝洁股东回报的主菜。</p>
+
+      <h4>海图研判</h4>
+
+      <p><strong>评级：持有观望</strong>（顶级防御性股息之王 + 品牌规模双护城河 + 连续 70 年增息 + 量增拐点初现的组合，对垒关税税后 $400M 逆风 + 毛利率 -150bps + 有机增速仅 3% + Forward P/E 20.7x 无安全边际的成本与估值压力）。独立估值中位数约 $150，当前 $147 折价仅约 2%，远不足 25% 安全边际。12 个月概率加权目标价 <strong>$150</strong>（悲观 $128 / 基准 $152 / 乐观 $168），叠加 2.9% 股息 = 总回报约 5%——稳健但不激动。</p>
+
+      <p>操作建议：当前 $147 不在合理建仓窗口。<strong>机械首仓 $120</strong>（估值中位 ×80%，对应约 17x forward）、二仓 $105、三仓 $90 等深度回调再出手。止盈三档 $165 / $180 / $195 各减 25%，最后 25% 长期持有吃股息。<strong>建议总仓位 3-4%</strong>（防御压舱石 · 回调时分批建，不追高）。持有周期 5-10 年。<span class="hl-t">关键纪律：现有持仓者继续让它复利吃股息，新买入者必须等价格给出安全边际——好生意也要好价格。</span></p>
+
+      <h4>风险提示</h4>
+
+      <p>关税持续侵蚀 / 毛利率承压 / 有机增速回落至 0-2% / 私有品牌与 GLP-1 对品类的慢侵蚀 / 满估值下的多重压缩——任一项都可能让股价回到 $130 下方。但 21 个头部品牌 + 规模成本护城河 + 股息之王地位构成质量底，<strong>$130-135（52 周低附近）是相对硬的支撑</strong>，股息率升至约 3.2% 时会吸引避险资金。宝洁的"底"比多数股票稳，防御属性在市场恐慌时反而是它的优势。</p>
+
+      <p>关键叙事：<strong>"全球日用消费品之王 + 品牌规模双护城河 + 连续 70 年增息 + 量增拐点初现"的顶级防御资产，对垒"关税税后 $400M 逆风 + 毛利率 -150bps + 有机增速仅 3% + Forward P/E 20.7x 无安全边际"的成本与估值压力</strong>。宝洁不是给追求便宜或高增长的人——它是给愿意在回调时耐心收集、然后把股息一年年再投入、让复利慢慢滚雪球的长期持有者。下次催化剂：2026-07-29 FY2026 Q4 暨全年财报。</p>
+
+      <p class="haitu-sign">—— 海图，灯下落笔，明日再观风浪。</p>
+
+      <p class="haitu-disc">⚠️ 免责声明：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，不构成任何投资建议。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div>《海图夜读》 · 宝洁 PG Q3 FY2026 海图研判</div>
+  <div style="margin-top:6px;">发布日 2026-04-24 · 研判日 2026-07-11 · 数据来源 宝洁 Q3 FY2026 官方财报（SEC 8-K Ex99.1 + 10-Q）+ 历年 8-K 现金流量表 + 电话会 transcript</div>
+</footer>
+
+<script>
+let curTheme = 'light';
+function toggleTheme() {
+  curTheme = curTheme === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', curTheme);
+  renderCharts();
+}
+
+const palette = {
+  light: { accent: '#8a9a8e', accent2: '#7b8fa0', accent3: '#b08d7a', gold: '#b9a06a', red: '#b87070', green: '#7a9a7a', grid: '#e5ddd5', text: '#7a706a' },
+  dark:  { accent: '#8a9a8e', accent2: '#8fabbf', accent3: '#c9a48e', gold: '#c9b07a', red: '#c08080', green: '#8aaa8a', grid: '#3e3a35', text: '#a09890' }
+};
+
+let charts = {};
+function renderCharts() {
+  Object.values(charts).forEach(c => c && c.destroy && c.destroy());
+  charts = {};
+  const p = palette[curTheme];
+  Chart.defaults.color = p.text;
+  Chart.defaults.borderColor = p.grid;
+
+  const quarters = ['Q3 25','Q4 25','Q1 26','Q2 26','Q3 26'];
+  const rev = [19.78, 20.89, 22.39, 22.21, 21.24];
+  const yoy = [1, 2, 3, 1, 7.4];
+  charts.rev = new Chart(document.getElementById('chartRev'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { type:'bar', label: '净销售 ($B)', data: rev, backgroundColor: p.accent + 'CC', yAxisID: 'y' },
+      { type: 'line', label: '名义 YoY %', data: yoy, borderColor: p.red, backgroundColor: p.red, tension: 0.3, yAxisID: 'y1' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false }, y1: { position: 'right', grid: { drawOnChartArea: false }, ticks: { callback: v => v + '%' } } } }
+  });
+
+  charts.margin = new Chart(document.getElementById('chartMargin'), {
+    type: 'line',
+    data: { labels: quarters, datasets: [
+      { label: '毛利率 %', data: [51.0, 49.1, 51.4, 51.2, 49.5], borderColor: p.accent3, backgroundColor: p.accent3 + '22', tension: 0.3, fill: true },
+      { label: '营业利润率 %', data: [23.0, 20.8, 26.2, 24.2, 21.5], borderColor: p.accent2, backgroundColor: p.accent2 + '22', tension: 0.3, fill: true }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false, ticks: { callback: v => v + '%' } } } }
+  });
+
+  charts.segment = new Chart(document.getElementById('chartSegment'), {
+    type: 'doughnut',
+    data: {
+      labels: ['织物与家庭护理', '婴儿/女性/家庭护理', '美容', '健康护理', '男士修容'],
+      datasets: [{ data: [7.40, 5.06, 3.87, 3.07, 1.61], backgroundColor: [p.accent, p.accent2, p.accent3, p.gold, p.green] }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { font: { size: 10 } } } } }
+  });
+
+  charts.eps = new Chart(document.getElementById('chartEPS'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { label: 'GAAP 摊薄 EPS', data: [1.54, 1.48, 1.95, 1.78, 1.63], backgroundColor: p.accent2 + 'CC' },
+      { label: '核心 EPS', data: [1.54, 1.48, 1.99, 1.88, 1.59], backgroundColor: p.accent3 + 'CC' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false } } }
+  });
+
+  buildSankey();
+}
+
+function buildSankey() {
+  const p = palette[curTheme];
+  const labels = ['净销售 21.24','销货成本 10.72','毛利 10.51','销售管理费用 5.94','营业利润 4.58','其他净收益 0.41','税前利润 4.99','所得税 1.04','GAAP 净利 3.95'];
+  const data = {
+    type: 'sankey',
+    orientation: 'h',
+    node: { pad: 16, thickness: 20, line: { color: p.grid, width: 0.5 }, label: labels, color: [p.accent, p.red, p.green, p.red, p.green, p.accent2, p.green, p.red, p.green] },
+    link: {
+      source: [0, 0, 2, 2, 4, 5, 6, 6],
+      target: [1, 2, 3, 4, 6, 6, 7, 8],
+      value:  [10.72, 10.51, 5.94, 4.58, 4.58, 0.41, 1.04, 3.95],
+      color: [p.red+'55', p.green+'66', p.red+'55', p.green+'66', p.green+'55', p.accent2+'55', p.red+'55', p.green+'66']
+    }
+  };
+  const layout = { font: { size: 12, color: p.text }, paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)', margin: { l: 10, r: 10, t: 10, b: 10 } };
+  Plotly.react('sankey', [data], layout, { displayModeBar: false, responsive: true });
+}
+
+renderCharts();
+</script>
+
+</body>
+</html>

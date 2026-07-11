@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-07-11 · Merck & Co. Q1 2026 财报已于 2026-04-30 发布 -->
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>默沙东 MRK Q1 2026 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+<meta name="description" content="全球肿瘤免疫治疗之王——一款 Keytruda 撑起近半营收的制药巨头。74% 毛利率 + FY2025 Non-GAAP EPS $8.98 + 连年增息 + 2.72% 股息率。Q1 营收 $16.29B(+5%)、Winrevair +88%、动物保健 +13% 基础盘强劲并上调全年指引；但因 $90 亿 Cidara 一次性研发费用录得 GAAP 每股亏损 $1.72。核心悬念=Keytruda 占营收约 48%、2028 年底美国专利到期(LOE)+生物类似药竞争，>$250 亿营收敞口——便宜的龙头，头顶一座已知的专利悬崖。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="默沙东 MRK Q1 2026 海图研判 · 海图夜读">
+<meta property="og:description" content="全球肿瘤免疫治疗之王——一款 Keytruda 撑起近半营收的制药巨头。Q1 营收 $16.29B(+5%) 基础盘强劲并上调全年指引，但因 $90 亿 Cidara 一次性研发费用录得 GAAP 每股亏损 $1.72。核心悬念=Keytruda 占营收约 48%、2028 年底美国专利到期——便宜的龙头，头顶一座已知的专利悬崖。">
+<meta property="og:url" content="https://jacexie.github.io/haitu/reports/mrk-q1-2026.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="默沙东 MRK Q1 2026 海图研判 · 海图夜读">
+<meta name="twitter:description" content="一款 Keytruda 撑起近半营收的肿瘤免疫之王。Q1 营收 $16.29B(+5%) 基础盘强劲，因 $90 亿 Cidara 一次性费用录得 GAAP 每股亏损 $1.72。评级：持有观望 · 12 个月目标价 $132。">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root { --bg:#f5f0eb; --bg2:#ece6df; --card:#ffffff; --card2:#f8f5f1; --border:#d9d0c7; --text:#4a4340; --text2:#7a706a; --text3:#a89f98; --accent:#8a9a8e; --accent2:#7b8fa0; --accent3:#b08d7a; --rose:#c09090; --gold:#b9a06a; --red:#b87070; --green:#7a9a7a; --shadow:rgba(0,0,0,0.06); --chart-grid:#e5ddd5; }
+[data-theme="dark"] { --bg:#1e1c1a; --bg2:#28251f; --card:#2e2a25; --card2:#363230; --border:#4a4540; --text:#d4ccc4; --text2:#a09890; --text3:#706860; --accent:#8a9a8e; --accent2:#8fabbf; --accent3:#c9a48e; --rose:#c09090; --gold:#c9b07a; --red:#c08080; --green:#8aaa8a; --shadow:rgba(0,0,0,0.3); --chart-grid:#3e3a35; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', serif; line-height: 1.75; font-size: 14.5px; transition: background .35s, color .35s; }
+a { color: var(--accent2); text-decoration: none; }
+.theme-bar { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); }
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+.toggle-switch { position: relative; width: 44px; height: 22px; background: var(--border); border-radius: 11px; cursor: pointer; transition: background .3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: var(--card); border-radius: 50%; transition: transform .3s; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+
+.hero { padding: 48px 24px 36px; text-align: center; border-bottom: 1px solid var(--border); }
+.hero-tag { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 3px 14px; border-radius: 20px; margin-bottom: 18px; }
+.hero h1 { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.pill { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: 'Segoe UI', sans-serif; font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow); }
+.pill strong { color: var(--text); }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle { font-size: 18px; font-weight: 700; color: var(--accent3); margin-bottom: 20px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+.stitle::before { content: ''; display: block; width: 4px; height: 20px; background: var(--accent3); border-radius: 2px; }
+
+.haitu-quip { display: flex; align-items: center; gap: 18px; background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 18px 24px; margin: 24px 0; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-quote { flex: 1; }
+.haitu-portrait { font-size: 15px; line-height: 1.65; color: var(--text); margin-bottom: 6px; font-weight: 600; }
+.haitu-rating-line { font-size: 13px; color: var(--text2); font-family: 'Segoe UI', sans-serif; }
+.rating-badge { display: inline-block; padding: 2px 12px; border-radius: 12px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; margin-left: 4px; }
+.rating-hold { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+
+.haitu-essay { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 28px 32px; margin: 24px 0 20px; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-essay-header { display: flex; align-items: center; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.haitu-avatar-sm { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); background: var(--red); box-shadow: 0 2px 8px rgba(184,112,112,0.2); }
+.haitu-name-lg { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 28px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 4px; }
+.haitu-essay-tag { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; }
+.haitu-essay-body { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 15px; line-height: 2.0; color: var(--text); }
+.haitu-essay-body p { margin-bottom: 14px; }
+.haitu-essay-body p.lead { font-size: 16px; font-style: italic; color: var(--text2); margin-bottom: 18px; }
+.haitu-essay-body strong { color: var(--text); font-weight: 700; }
+.haitu-essay-body h4 { font-size: 14px; color: var(--accent3); margin: 18px 0 10px; font-family: 'Segoe UI', sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+.haitu-sign { text-align: right; margin-top: 18px; font-family: 'Georgia', serif; font-size: 14px; color: var(--text2); font-style: italic; }
+.haitu-disc { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); font-style: italic; line-height: 1.7; }
+
+.stock-snap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px; }
+.snap-item { text-align: center; }
+.snap-label { font-family: 'Segoe UI', sans-serif; font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.snap-val { font-family: 'Segoe UI', sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+.snap-val.up { color: var(--green); }
+.snap-val.dn { color: var(--red); }
+.snap-sub { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow); }
+.kpi-l { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.badge { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+.up { background: rgba(122,154,122,.15); color: var(--green); }
+.dn { background: rgba(184,112,112,.15); color: var(--red); }
+.nt { background: rgba(123,143,160,.15); color: var(--accent2); }
+
+.tbl-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow); }
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI', sans-serif; font-size: 13px; }
+.tbl th { background: var(--card2); color: var(--text3); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); background: var(--card2); }
+
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); }
+.ctitle { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 260px; }
+
+.cmt { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 26px; line-height: 1.95; font-size: 14px; box-shadow: 0 1px 4px var(--shadow); color: var(--text); }
+.cmt p { margin-bottom: 14px; }
+.cmt p:last-child { margin-bottom: 0; }
+.cmt strong { color: var(--text); }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+
+.bscore { display: flex; align-items: center; gap: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; margin-bottom: 12px; box-shadow: 0 1px 4px var(--shadow); }
+.circle { width: 62px; height: 62px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; flex-shrink: 0; border: 3px solid; font-family: 'Segoe UI', sans-serif; }
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 4px; color: var(--text); }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.moat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+.moat-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); border-left: 4px solid var(--accent); }
+.moat-card.wide { border-left-color: var(--green); }
+.moat-card.narrow { border-left-color: var(--gold); }
+.moat-card.none { border-left-color: var(--red); }
+.moat-card h5 { font-size: 13px; color: var(--text); margin-bottom: 6px; }
+.moat-card .moat-rate { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.moat-card.wide .moat-rate { background: rgba(122,154,122,.18); color: var(--green); }
+.moat-card.narrow .moat-rate { background: rgba(185,160,106,.18); color: var(--gold); }
+.moat-card.none .moat-rate { background: rgba(184,112,112,.18); color: var(--red); }
+.moat-card p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+
+.ec-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 14px; box-shadow: 0 1px 3px var(--shadow); }
+.ec-badge { flex-shrink: 0; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-top: 2px; font-family: 'Segoe UI', sans-serif; }
+.ec-bull { background: rgba(122,154,122,.18); color: var(--green); }
+.ec-bear { background: rgba(184,112,112,.18); color: var(--red); }
+.ec-neut { background: rgba(185,160,106,.18); color: var(--gold); }
+.ec-body { flex: 1; }
+.ec-title { font-weight: 600; color: var(--text); margin-bottom: 3px; font-size: 14px; }
+.ec-note { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.dcf-note { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.dcf-note strong { color: var(--text); }
+
+.scorecard { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow); }
+.score-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.score-card { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px; }
+.score-letter { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Segoe UI', sans-serif; font-weight: 800; font-size: 22px; flex-shrink: 0; border: 3px solid; }
+.s-a { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.12); }
+.s-bp { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.06); }
+.s-b { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.10); }
+.s-bm { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.06); }
+.s-c { color: var(--red); border-color: var(--red); background: rgba(184,112,112,.08); }
+.score-body h4 { font-size: 13px; color: var(--text); margin-bottom: 4px; }
+.score-body p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+.flag-row { margin-top: 16px; padding: 12px 16px; background: rgba(184,112,112,.08); border: 1px solid rgba(184,112,112,.3); border-radius: 8px; font-size: 13px; color: var(--text2); }
+.flag-row strong { color: var(--red); }
+
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center; box-shadow: 0 1px 4px var(--shadow); }
+.pbox .pl { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; }
+.pbox .pv { font-family: 'Segoe UI', sans-serif; font-size: 28px; font-weight: 800; margin-bottom: 5px; }
+.pbox .pn { font-size: 12px; color: var(--text3); line-height: 1.5; }
+.pc { color: var(--red); } .pf { color: var(--gold); } .ps { color: var(--green); }
+
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.risk-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); position: relative; overflow: hidden; }
+.risk-card::before { content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent); }
+.risk-card.r1::before { background: var(--green); }
+.risk-card.r2::before { background: rgba(122,154,122,.6); }
+.risk-card.r3::before { background: var(--gold); }
+.risk-card.r4::before { background: var(--rose); }
+.risk-card.r5::before { background: var(--red); }
+.risk-card h5 { font-size: 14px; margin-bottom: 6px; color: var(--text); }
+.risk-score { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.r1 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r2 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r3 .risk-score { background: rgba(185,160,106,.18); color: var(--gold); }
+.r4 .risk-score { background: rgba(192,144,144,.18); color: var(--rose); }
+.r5 .risk-score { background: rgba(184,112,112,.18); color: var(--red); }
+.risk-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+footer { background: var(--card2); border-top: 1px solid var(--border); padding: 24px; text-align: center; color: var(--text3); font-size: 12px; margin-top: 40px; line-height: 1.8; }
+@media (max-width: 768px) { .cgrid,.pgrid { grid-template-columns: 1fr; } .hero h1 { font-size: 22px; } .kpi-grid { grid-template-columns: 1fr 1fr; } .stock-snap { grid-template-columns: 1fr 1fr; } .haitu-essay-header { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/MRK" target="_blank" rel="noopener" title="在雪球查看 MRK 实时行情">雪球 MRK</a>
+  </div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">Q1 2026 财报发布 · 2026-04-30 &nbsp;|&nbsp; 海图研判 · 2026-07-11</div>
+  <h1>默沙东 Merck &amp; Co. · 2026 Q1 财报深度分析</h1>
+  <div class="hero-sub">NYSE: MRK &nbsp;|&nbsp; 财季截至 2026-03-31 &nbsp;|&nbsp; 价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill">股价 <strong>$124.89</strong> <span style="color:var(--red)">距高点 -4%</span></div>
+    <div class="pill">市值 <strong>$309B</strong></div>
+    <div class="pill">Q1 营收 <strong>$16.29B</strong> <span style="color:var(--green)">+5%</span></div>
+    <div class="pill">Non-GAAP EPS <strong>-$1.28</strong> <span style="color:var(--red)">含 $3.62 一次性</span></div>
+    <div class="pill">Keytruda <strong>$8.03B</strong> <span style="color:var(--green)">+12% · 约48%营收</span></div>
+    <div class="pill">Forward P/E <strong>~12.5x</strong> <span style="color:var(--gold)">FY2027</span></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 海图页首短评 ═══ -->
+<div class="haitu-quip">
+  <div class="haitu-quote">
+    <div class="haitu-portrait">全球肿瘤免疫治疗之王——一款 Keytruda 撑起近半营收的制药巨头。74% 毛利率 + FY2025 Non-GAAP EPS $8.98 + 连年增息 + 2.72% 股息率。Q1 营收 $16.29B（+5%）、Winrevair +88%、动物保健 +13% 基础盘强劲并上调全年指引；但因 $90 亿 Cidara 一次性研发费用录得 GAAP 每股亏损 $1.72。核心悬念=Keytruda 占营收约 48%、2028 年底美国专利到期（LOE）+生物类似药竞争，&gt;$250 亿营收敞口——便宜的龙头，头顶一座已知的专利悬崖。</div>
+    <div class="haitu-rating-line">评级：<span class="rating-badge rating-hold">持有观望</span> · 12 个月目标价 $132（+6%）· 世界级肿瘤管线 + 便宜的前瞻估值（12.5x FY2027）+ 2.72% 股息，对垒 2028 Keytruda 专利悬崖 + 无 25% 安全边际 + 净负债 $43.4B</div>
+  </div>
+</div>
+
+<!-- ═══ 市场数据快照 ═══ -->
+<div class="section">
+  <div class="stitle">市场数据快照（2026-07-11 研判）</div>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">股价（美元）</div><div class="snap-val">$124.89</div><div class="snap-sub">2026-07-09 收盘 · 距 52 周高 -4%</div></div>
+    <div class="snap-item"><div class="snap-label">市值</div><div class="snap-val">$309B</div><div class="snap-sub">全球制药前列</div></div>
+    <div class="snap-item"><div class="snap-label">TTM GAAP P/E</div><div class="snap-val dn">~35x</div><div class="snap-sub">被 Q1 一次性亏损扭曲 · 失真</div></div>
+    <div class="snap-item"><div class="snap-label">Forward P/E</div><div class="snap-val nt">~12.5x</div><div class="snap-sub">FY2027 共识 EPS ~$10</div></div>
+    <div class="snap-item"><div class="snap-label">FY2026 基础 P/E</div><div class="snap-val nt">~14.3x</div><div class="snap-sub">剔一次性 · EPS ~$8.72</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间</div><div class="snap-val">$76.66 - $130.29</div><div class="snap-sub">已从底部大幅修复</div></div>
+    <div class="snap-item"><div class="snap-label">股息率</div><div class="snap-val">~2.72%</div><div class="snap-sub">$3.40/年 · 连年增息</div></div>
+    <div class="snap-item"><div class="snap-label">所有者盈余收益率</div><div class="snap-val nt">~7.3%</div><div class="snap-sub">FY2025 Non-GAAP 净利口径</div></div>
+    <div class="snap-item"><div class="snap-label">现金 + 短投</div><div class="snap-val">$5.70B</div><div class="snap-sub">2026-03-31 末 · 骤降自年初 $14.57B</div></div>
+    <div class="snap-item"><div class="snap-label">有息负债</div><div class="snap-val dn">$49.12B</div><div class="snap-sub">短债 $2.44 + 长债 $46.67</div></div>
+    <div class="snap-item"><div class="snap-label">真实净负债</div><div class="snap-val dn">-$43.4B</div><div class="snap-sub">⚠️ 净负债非净现金</div></div>
+    <div class="snap-item"><div class="snap-label">毛利率（Q1 GAAP / Non-GAAP）</div><div class="snap-val up">74.2% / 81.9%</div><div class="snap-sub">Non-GAAP 净利率 ~28%（FY2025）</div></div>
+  </div>
+  <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">数据时点：股价 2026-07-09 收盘 $124.89（前一日 7/8 为 $125.99）· 财务数据来源 Merck Q1 2026 官方财报新闻稿 + SEC 10-Q（mrk-20260331）+ FY2025 10-K + 电话会 transcript，2026-04-30 盘前发布，财季截至 2026-03-31 · 货币 USD 单口径。默沙东财年=自然年（12 月 31 日止）。⚠️ 默沙东是<strong>净负债</strong>（有息负债 $49.12B &gt; 现金+短投 $5.70B，真实净负债 -$43.4B），Q1 因收购 Cidara 现金支出 $8.78B + 偿债 + 分红回购，现金从年初 $145.7 亿骤降至 $53.3 亿——绝非"现金堡垒"叙事。租赁负债另有 $1.20B（2025-12-31 末口径）。</p>
+</div>
+
+<!-- ═══ Q1 2026 KPI ═══ -->
+<div class="section">
+  <div class="stitle">Q1 2026 核心业绩（USD · 财季截至 2026-03-31）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">总营收</div><div class="kpi-v">$16.29B</div><span class="badge up">+5% YoY</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">剔汇 +3% · 超预期</div></div>
+    <div class="kpi"><div class="kpi-l">药品部门</div><div class="kpi-v">$14.35B</div><span class="badge up">+5%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">占总营收 88%</div></div>
+    <div class="kpi"><div class="kpi-l">动物保健</div><div class="kpi-v">$1.79B</div><span class="badge up">+13%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">畜牧 $1.06 + 宠物 $0.73</div></div>
+    <div class="kpi"><div class="kpi-l">Keytruda 系列</div><div class="kpi-v">$8.03B</div><span class="badge up">+12%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">约占总营收 48% · 皇冠</div></div>
+    <div class="kpi"><div class="kpi-l">Winrevair</div><div class="kpi-v">$0.53B</div><span class="badge up">+88%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">增长最快 · 美+日+欧放量</div></div>
+    <div class="kpi"><div class="kpi-l">Gardasil 系列</div><div class="kpi-v">$1.07B</div><span class="badge dn">-19%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">中国及日本需求下滑</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 毛利率</div><div class="kpi-v">74.2%</div><span class="badge dn">-3.8pp</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">PYQ 78% · 收购摊销拖累</div></div>
+    <div class="kpi"><div class="kpi-l">Non-GAAP 毛利率</div><div class="kpi-v">81.9%</div><span class="badge nt">-0.3pp</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">PYQ 82.2% · 基本稳定</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 净利</div><div class="kpi-v" style="color:var(--red)">-$4.24B</div><span class="badge dn">亏损</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">含 $9.0B Cidara 一次性</div></div>
+    <div class="kpi"><div class="kpi-l">Non-GAAP 净利</div><div class="kpi-v" style="color:var(--red)">-$3.16B</div><span class="badge dn">亏损</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">同含 Cidara 一次性</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 摊薄 EPS</div><div class="kpi-v" style="color:var(--red)">-$1.72</div><span class="badge dn">PYQ +$2.01</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">Cidara 拖累 $3.62</div></div>
+    <div class="kpi"><div class="kpi-l">Non-GAAP 摊薄 EPS</div><div class="kpi-v" style="color:var(--red)">-$1.28</div><span class="badge dn">PYQ +$2.22</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">剔一次性约 +$2.34</div></div>
+  </div>
+</div>
+
+<!-- ═══ 看穿高亮框 ═══ -->
+<div class="section">
+  <div class="stitle">本季必看 · 两个"看穿"：GAAP 亏损的真相 + Keytruda 集中度</div>
+  <div class="cmt">
+    <p><strong>默沙东 Q1 的利润表有两个必须"看穿"的地方，看不穿就会把这季读成灾难，或把风险读成岁月静好。</strong></p>
+    <p><strong>看穿一：GAAP 每股亏损 $1.72 是"账面地雷"，不是经营恶化。</strong> 本季基础盘其实很强——营收 $16.29B（+5%、剔汇 +3%）超预期，Keytruda +12%、Winrevair +88%、动物保健 +13%，公司还上调了全年指引下限。亏损<span class="hl-t">全部来自收购 Cidara Therapeutics 产生的 $90 亿一次性 IPR&amp;D（在研研发）费用</span>，每股 $3.62，且这笔费用<span class="warn-t">没有税收抵免</span>（GAAP 税率因此承受 33.1 个百分点的不利影响）。剔除它，基础 Non-GAAP EPS 约 $2.34/季——经营没有问题，问题在会计口径。</p>
+    <div class="tbl-wrap" style="margin:14px 0;">
+      <table class="tbl">
+        <tr><th>每股收益桥接（Q1 2026）</th><th>金额</th><th>说明</th></tr>
+        <tr><td>基础 Non-GAAP EPS（剔一次性）</td><td>~$2.34</td><td>经营口径 · 强劲</td></tr>
+        <tr><td><span class="warn-t">减：Cidara 一次性 IPR&amp;D</span></td><td><span class="warn-t">-$3.62</span></td><td>无税收抵免</td></tr>
+        <tr class="hl"><td><strong>Non-GAAP 摊薄 EPS</strong></td><td><strong>-$1.28</strong></td><td>PYQ +$2.22</td></tr>
+        <tr><td>再含无形摊销/收购会计等</td><td>-$0.44</td><td>GAAP vs Non-GAAP 差异</td></tr>
+        <tr class="hl"><td><strong>GAAP 摊薄 EPS</strong></td><td><strong>-$1.72</strong></td><td>PYQ +$2.01</td></tr>
+      </table>
+    </div>
+    <p><strong>看穿二：一款药占近半营收，是皇冠也是达摩克利斯之剑。</strong> <span class="hl-t">Keytruda 系列本季 $8.03B（+12%），约占总营收 48%</span>，年化销售额约 $320 亿——这既是默沙东最强的护城河，也是它最大的单点风险。美国核心化合物专利<span class="warn-t">2028 年底到期（LOE）</span>，2028-2029 年生物类似药将实质冲击，敞口 &gt;$250 亿。这不是明年的事，但它是决定默沙东 5 年后价值的那道关。本季所有"基础盘强劲"的好消息，都要放在这个悬崖的背景下读。</p>
+  </div>
+</div>
+
+<!-- ═══ 趋势图 ═══ -->
+<div class="section">
+  <div class="stitle">关键指标趋势</div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">净营收（$B）与 Keytruda 系列（$B）· 近 5 季</div><div class="cwrap"><canvas id="chartRev"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">毛利率趋势：GAAP vs Non-GAAP（Q1 同比 · %）</div><div class="cwrap"><canvas id="chartMargin"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">Q1 2026 营收结构（$M）· Keytruda 独占约半壁</div><div class="cwrap"><canvas id="chartSegment"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">摊薄 EPS 趋势（$ · GAAP vs Non-GAAP · 近 5 季）</div><div class="cwrap"><canvas id="chartEps"></canvas></div></div>
+  </div>
+  <p style="margin-top:4px; font-size:12px; color:var(--text3); line-height:1.6;">说明：Keytruda 系列已连续 4 季稳定在 $80 亿上方，是营收的绝对基石；Q1 2026 EPS 转负全部因 $90 亿 Cidara 一次性费用，剔除后基础经营仍为正。GAAP 毛利率同比下滑主因收购带来的无形资产摊销，Non-GAAP 毛利率基本稳定在 82% 附近。</p>
+</div>
+
+<!-- ═══ 桑基图 ═══ -->
+<div class="section">
+  <div class="stitle">Q1 2026 资金流向桑基图（$亿 · 基础经营口径）</div>
+  <div class="ccard">
+    <div id="sankey" style="width:100%;height:480px;"></div>
+    <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">说明：营收 $162.9 → 营业成本 $42.0（毛利率 74.2%）+ 毛利 $120.9 → 销售管理 $27.0 + 基础研发 $35.9 + 重组及其他 $3.3 + 基础营业利润 $54.7 → 所得税及其他 ~$8.2 + 基础净利 ~$46.5。<strong>本桑基图为剔除 $90 亿 Cidara 一次性 IPR&amp;D 费用的"基础经营口径"</strong>，用以还原真实盈利能力；<span class="warn-t">GAAP 口径因该笔一次性费用（且无税收抵免）录得净亏损 $42.4 亿</span>。基础研发 $35.9 = 报表研发 $125.9 − Cidara $90.0。经营现金流 $39.2 亿（GAAP 亏损但 $85.4 亿一次性费用为非现金加回）− Capex $9.9 亿 = 自由现金流 $29.3 亿，覆盖当季分红 $21.1 亿。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 1 ═══ -->
+<div class="section">
+  <div class="stitle">模块 1 · 公司概览与背景</div>
+  <div class="cmt">
+    <p><strong>Merck &amp; Co., Inc.</strong>（NYSE: MRK，中文常称"默沙东"，在美国及加拿大以"Merck"、在美加以外以"MSD"经营），总部新泽西州 Rahway。公司历史可追溯至 19 世纪末，是全球规模最大的研发驱动型制药企业之一。财年=自然年（12 月 31 日止）。</p>
+
+    <p><strong>核心叙事</strong>：默沙东是<span class="hl-t">全球肿瘤免疫治疗（IO）的领导者</span>——它的 PD-1 抑制剂 Keytruda（可瑞达）拿下了几乎全部主要实体瘤适应症，是当今全球销量最大的处方药，一款药年销售额约 $320 亿、占公司营收约 48%。除肿瘤外，业务横跨疫苗（Gardasil HPV、Capvaxive 肺炎、Enflonsia RSV）、心血管/肺动脉高压（Winrevair）、糖尿病（Januvia，已仿制药化）、医院急救（Bridion、Prevymis）与<strong>动物保健</strong>（畜牧 + 宠物，本季 +13%，是高质量的第二引擎）。这是一门<strong>74% GAAP 毛利率、82% Non-GAAP 毛利率、FY2025 Non-GAAP EPS $8.98、连年增息的高质量制药生意</strong>。</p>
+
+    <p><strong>两大业务板块</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>药品（Pharmaceutical）</strong>——$14.35B/季，占营收 88%，由 Keytruda 主导，Winrevair/Welireg/Capvaxive/Ohtuvayre 等新品放量</li>
+      <li><strong>动物保健（Animal Health）</strong>——$1.79B/季（+13%），畜牧 + 宠物（Bravecto $379M），增长稳健、抗周期，被视为潜在价值释放板块</li>
+    </ul>
+
+    <p><strong>近期重大动作</strong>：默沙东在 Keytruda 专利悬崖前一年之内连做三笔收购——<span class="hl-t">Verona Pharma（2025/10，获得慢阻肺新药 Ohtuvayre）、Cidara Therapeutics（Q1 2026，$90 亿一次性 IPR&amp;D 费用）、Terns（预计 2026/5 完成，约 $58 亿/每股 $2.35 一次性费用，尚未计入指引）</span>。这是"用资产负债表买时间、买管线"的战略布局。</p>
+
+    <p><strong>能力圈检验</strong>：制药生意的商业模式清晰——专利保护期内靠定价权与销量赚超额利润。但<span class="warn-t">两块黑箱决定终局：(1) Keytruda 2028 LOE 后，QLEX 皮下版转换 + 生物类似药侵蚀的净效应究竟几何？(2) Verona/Cidara/Terns 等并购管线能否兑现、填平悬崖？</span>这两点普通投资者难以精确评估，是能力圈的边界。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 2 ═══ -->
+<div class="section">
+  <div class="stitle">模块 2 · 管理层评估</div>
+
+  <div class="bscore">
+    <div class="circle cg">B+</div>
+    <div class="bd">
+      <h4>Robert M. Davis · 董事长兼 CEO（2021 至今）</h4>
+      <p>Davis 于 2014 年以 CFO 身份加入默沙东，2021 年出任 CEO、2022 年兼任董事长，是财务背景出身的掌舵人。他执掌下默沙东最鲜明的战略是<span class="hl-t">在 Keytruda 专利悬崖前主动做"管线多元化"</span>——密集的自研 Phase 3 读出（Winrevair HYPERION、Welireg、Enflonsia）+ 激进外延并购（Acceleron/Winrevair、Prometheus、Verona、Cidara、Terns）。财务纪律上偏进取：一年三笔收购、$90 亿 Cidara 费用无税收抵免直接砸出 GAAP 亏损。海图判断：方向正确（不填悬崖必死），但代价不菲、执行风险真实，是一位"知道钟在滴答、正在拼命买保险"的经理人。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B</div>
+    <div class="bd">
+      <h4>资本配置 · 分红优先、回购温和、并购激进</h4>
+      <p>
+      <strong>连年增息</strong>：季度股息升至 $0.85（PYQ $0.81，+4.9%），年化 $3.40、股息率约 2.72%——分红是默沙东资本返还的"主菜"，政策稳健累进。<br>
+      <strong>回购温和但 2025 提速</strong>：FY2023-2024 回购仅 $13-14 亿/年，FY2025 提速至 $50.8 亿；Q1 2026 回购 $8.74 亿（约 800 万股）。2025 年 1 月董事会批准 $100 亿新授权（无时间限制），季末剩余 $64 亿，2026 计划约 $30 亿。<br>
+      <span class="warn-t">资本的大头流向并购</span>：Q1 现金因 Cidara 收购净支出 $87.8 亿骤降，现金从年初 $145.7 亿降至 $53.3 亿，公司呈净负债 -$43.4B。管理层把绝大部分弹药押在"买管线填悬崖"上，而非回购——这是理性但高风险的选择。
+      </p>
+    </div>
+  </div>
+
+  <div class="cmt">
+    <p><strong>长期主义测试</strong>：✅ 默沙东管理层以"穿越 Keytruda 悬崖、重建增长引擎"为主线，愿意承受短期 GAAP 亏损（$90 亿 Cidara 费用）去布局长期管线，体现长期视角。<strong>坦诚度</strong>：电话会对 Keytruda LOE 风险、Gardasil 中国/日本疲软、指引中 Trump 药价协议与美国儿科疫苗计划削减的"可控影响"均主动披露，透明度较高。<strong>利益绑定</strong>：管理层持股比例不高（成熟大盘制药常态），薪酬与营收/Non-GAAP EPS/管线里程碑挂钩。<strong>历史记录</strong>：Acceleron 收购带来的 Winrevair（本季 +88%）是一次成功的外延兑现，为其并购能力加分；但 Cidara/Terns 尚待验证。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 3 ═══ -->
+<div class="section">
+  <div class="stitle">模块 3 · 商业模式深度解析</div>
+  <div class="cmt">
+    <p><strong>海图"一句话测试"</strong>：<span class="hl-t">默沙东靠一款肿瘤免疫药 Keytruda 拿下几乎全部实体瘤适应症，在专利保护期内以高定价权卖出超 $320 亿/年、贡献近半营收，再用疫苗、肺动脉高压新药、动物保健与并购管线组合支撑——它赚的是"专利期内的定价权"，也困于"专利到期后的悬崖"。</span></p>
+
+    <p><strong>制药的单位经济</strong>：一款创新药的边际成本极低（原料药 + 生产），售价却由临床价值 + 专利垄断决定，因此毛利率极高（默沙东 GAAP 74%、Non-GAAP 82%）。真正的成本在<span class="hl-t">研发（Phase 3 试验动辄数亿至数十亿美元）与销售推广</span>。护城河的本质是<strong>专利期 + 临床数据 + 适应症广度</strong>——Keytruda 靠不断拓展早期癌种（三阴乳腺、宫颈、肾癌）+ 转移性（尿路上皮癌）来延长增长曲线。</p>
+
+    <p><strong>Q1 2026 营收模型（关键产品）</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>产品/系列</th><th>Q1 2026</th><th>YoY</th><th>驱动/备注</th></tr>
+        <tr class="hl"><td>Keytruda 系列（含 QLEX）</td><td>$8,034M</td><td>+12%</td><td>约 48% 营收 · 皮下版 QLEX $128M 启动</td></tr>
+        <tr><td>疫苗合计（含 Gardasil）</td><td>$2,314M</td><td>-11%</td><td>Gardasil $1,069M（-19%）拖累</td></tr>
+        <tr><td>Winrevair</td><td>$525M</td><td>+88%</td><td>肺动脉高压 · 增长最快</td></tr>
+        <tr><td>Januvia/Janumet</td><td>$574M</td><td>-28%</td><td>糖尿病 · 仿制药竞争</td></tr>
+        <tr><td>Bridion</td><td>$472M</td><td>+7%</td><td>麻醉逆转剂</td></tr>
+        <tr><td>Lynparza（联盟）</td><td>$341M</td><td>+9%</td><td>PARP 抑制剂</td></tr>
+        <tr><td>Prevymis / Welireg / Capvaxive</td><td>$272 / $199 / $142M</td><td>+31% / +45% / +33%</td><td>新品组合放量</td></tr>
+        <tr><td>Ohtuvayre（Verona 收购）</td><td>$131M</td><td>新品</td><td>慢阻肺 · 2025/10 收购获得</td></tr>
+        <tr><td>动物保健</td><td>$1,791M</td><td>+13%</td><td>畜牧 $1,064 + 宠物 $727（Bravecto $379）</td></tr>
+      </table>
+    </div>
+
+    <p style="margin-top:14px;"><strong>议价能力与产业链定位</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>对支付方（Payer/PBM）</strong>：强但受压——创新药有临床数据背书定价权，但 Trump 药价协议（2025/12）、Medicare Part D 重构、美国儿科疫苗计划削减在挤压净价</li>
+      <li><strong>对生物类似药的防御</strong>：核心命门——Keytruda 静脉版 2028 LOE 后，靠皮下版 QLEX（配方/给药专利延长保护 + 转换患者）+ 剂型/剂量专利做缓冲</li>
+      <li><strong>多元化对冲</strong>：动物保健（+13%、抗周期）+ 疫苗 + 新品 + 并购管线，降低单药依赖</li>
+      <li><strong>地域风险</strong>：Gardasil 高度依赖中国/日本，本季 -19% 暴露了单市场需求波动的脆弱性</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══ 模块 4 ═══ -->
+<div class="section">
+  <div class="stitle">模块 4 · 经济护城河分析（5 维）</div>
+  <div class="moat-grid">
+    <div class="moat-card narrow">
+      <h5>1. 无形资产/专利</h5>
+      <span class="moat-rate">宽但有到期日</span>
+      <p>Keytruda 广谱适应症 + 数十项专利 + FDA 审批壁垒，是当今最强的药物专利组合。<span class="warn-t">但核心化合物专利 2028 年底到期</span>——护城河有明确的"折旧时钟"。<strong>趋势：Keytruda 侵蚀，其余稳定</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>2. 转换成本</h5>
+      <span class="moat-rate">中</span>
+      <p>处方药的"转换成本"体现在医生用药习惯 + 临床路径 + 患者已有疗效。Keytruda 静脉版转皮下 QLEX 有一定黏性，但生物类似药一旦获批 + 支付方引导，替换会较快。<strong>趋势：受生物类似药压制</strong>。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>3. 规模/研发优势</h5>
+      <span class="moat-rate">宽</span>
+      <p>顶级研发平台 + 全球商业化网络 + 深厚现金流支撑密集 Phase 3 与大额并购。规模让它能同时押注多条管线并购买增长。<strong>趋势：稳定</strong>（但需持续高投入维持）。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>4. 品牌/临床声誉</h5>
+      <span class="moat-rate">宽</span>
+      <p>Merck/MSD 全球信任 + Keytruda/Gardasil 品牌 + 数十年肿瘤与疫苗积累。医生与监管机构的信任是无形壁垒。<strong>趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>5. 有效规模</h5>
+      <span class="moat-rate">中</span>
+      <p>肿瘤 IO 赛道玩家众多（BMS Opdivo、Roche、AZ 等），并非双寡头；但 Keytruda 凭先发 + 适应症广度处领先。<span class="warn-t">生物类似药是"有效规模"外的新进入路径</span>。<strong>趋势：竞争加剧</strong>。</p>
+    </div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>10 年后护城河会更宽还是更窄？</strong> <span class="warn-t">这是默沙东最诚实、也最难回答的问题</span>。核心矛盾在于：<strong>它当前最宽的那道护城河（Keytruda 专利）有一个写好的到期日（2028 底）</strong>。10 年后的护城河宽窄，完全取决于三件事的净效应：(1) <span class="hl-t">QLEX 皮下版</span>能转换多少患者、把多少收入延续到专利期外；(2) <span class="hl-t">自研管线</span>（Winrevair、Welireg、Capvaxive、Enflonsia 及后续 Phase 3）能补上多少缺口；(3) <span class="hl-t">并购</span>（Verona/Cidara/Terns 及未来交易）能买来多少新增长极。如果三者兑现，默沙东会像艾伯维走出 Humira 悬崖那样重建增长；如果接不上，便宜的估值会变成价值陷阱。<strong>这不是"护城河宽不宽"的问题，而是"能不能在悬崖前架好新桥"的问题。</strong></p>
+    <p><strong>定价权</strong>：强但受监管天花板压制（Trump 药价协议、IRA 谈判、Part D 重构、儿科疫苗计划削减）。默沙东的定价权是"专利期内的强定价权 + 专利期后的断崖"。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 5 ═══ -->
+<div class="section">
+  <div class="stitle">模块 5 · 财务深度分析</div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 12px 0; font-family: 'Segoe UI',sans-serif;">5.1 关键比率（Q1 2026 vs Q1 2025）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>指标</th><th>Q1 2025</th><th>Q1 2026</th><th>变化</th><th>含义</th></tr>
+      <tr><td>总营收（$M）</td><td>15,529</td><td>16,286</td><td><span class="badge up">+5%</span></td><td>剔汇 +3% · 超预期</td></tr>
+      <tr><td>GAAP 毛利率</td><td>78%</td><td>74.2%</td><td><span class="badge dn">-3.8pp</span></td><td>收购无形摊销拖累</td></tr>
+      <tr><td>Non-GAAP 毛利率</td><td>82.2%</td><td>81.9%</td><td><span class="badge nt">-0.3pp</span></td><td>基础经营稳定</td></tr>
+      <tr><td>GAAP 研发费用（$M）</td><td>3,621</td><td>12,592</td><td><span class="badge dn">含 $9.0B 一次性</span></td><td>Cidara IPR&amp;D</td></tr>
+      <tr><td>GAAP 有效税率</td><td>正常</td><td>-20.1%</td><td><span class="badge dn">异常</span></td><td>Cidara 无税抵，-33.1pp 冲击</td></tr>
+      <tr><td>GAAP 摊薄 EPS（$）</td><td>2.01</td><td>-1.72</td><td><span class="badge dn">转亏</span></td><td>一次性因素</td></tr>
+      <tr><td>Non-GAAP 摊薄 EPS（$）</td><td>2.22</td><td>-1.28</td><td><span class="badge dn">转亏</span></td><td>剔一次性约 +$2.34</td></tr>
+      <tr><td>摊薄股数（亿）</td><td>~25.2</td><td>24.72</td><td><span class="badge up">-2%</span></td><td>回购温和缩股</td></tr>
+    </table>
+  </div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.2 资产负债健康度（2026-03-31 末 · $M）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>金额</th><th>说明</th></tr>
+      <tr><td>现金及等价物</td><td>5,327</td><td>年初 $14,565 · 因 Cidara 收购骤降</td></tr>
+      <tr><td>短期投资</td><td>375</td><td>—</td></tr>
+      <tr class="hl"><td>现金 + 短投合计</td><td>5,702</td><td>可用流动性</td></tr>
+      <tr><td>长期投资</td><td>1,105</td><td>—</td></tr>
+      <tr><td>应收账款</td><td>12,210</td><td>—</td></tr>
+      <tr><td>存货（流动）</td><td>6,479</td><td>—</td></tr>
+      <tr><td>总流动资产</td><td>35,015</td><td>—</td></tr>
+      <tr class="hl"><td>短期借款 + 一年内到期长债</td><td>2,444</td><td>已独立核对</td></tr>
+      <tr class="hl"><td>长期债务</td><td>46,673</td><td>—</td></tr>
+      <tr><td>经营租赁负债（另计）</td><td>1,195</td><td>2025-12-31 末 · 流动 $294 + 非流动 $901</td></tr>
+      <tr class="hl"><td>有息负债合计</td><td>49,117</td><td>短 $2,444 + 长 $46,673</td></tr>
+      <tr class="hl"><td><strong>真实净负债</strong></td><td><strong>-43,415</strong></td><td>⚠️ 净负债非净现金</td></tr>
+      <tr><td>总资产</td><td>128,685</td><td>Cidara 收购推高</td></tr>
+      <tr><td>股东权益（MRK）</td><td>45,878</td><td>负债/权益 ~1.07x</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">⚠️ <strong>净负债非净现金——铁律提示</strong>：默沙东有息负债 $49.12B（短债 $2.44B + 长债 $46.67B，已逐项核对）远大于现金+短投 $5.70B，<strong>真实净负债 -$43.4B</strong>。Q1 现金从年初 $145.7 亿骤降至 $53.3 亿，主因 Cidara 收购现金净支出 $87.8 亿 + 偿债 + 分红回购。负债/权益约 1.07x，对一个 FCF 强劲、投资级评级的制药龙头属可控范围，但绝不能把默沙东描述成"零负债现金堡垒"。经营租赁负债 $1.20B（10-Q 未单列，取自 FY2025 10-K 附注，季度间变动很小）。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.3 现金流质量（Q1 2026 · 3 个月）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>Q1 2025</th><th>Q1 2026</th><th>说明</th></tr>
+      <tr><td>经营活动现金流（OCF）</td><td>$2,500M</td><td>$3,918M</td><td>+57% · $8.54B 一次性非现金加回</td></tr>
+      <tr><td>- Capex（官方 line item）</td><td>—</td><td>$991M</td><td>资本支出</td></tr>
+      <tr class="hl"><td>自由现金流（FCF）</td><td>$1,172M</td><td>$2,927M</td><td>+150% · 覆盖分红</td></tr>
+      <tr><td>分红支付</td><td>—</td><td>$2,105M</td><td>FCF 覆盖 1.4x</td></tr>
+      <tr><td>回购</td><td>—</td><td>$874M</td><td>约 800 万股</td></tr>
+      <tr><td>Cidara 收购（净现金）</td><td>—</td><td>$8,779M</td><td>投资活动净流出约 $10.2B</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">现金流是本季"看穿 GAAP 亏损"的最好证据：<strong>尽管 GAAP 净亏 $42.4 亿，OCF 仍为正 $39.2 亿</strong>——因为 $90 亿 Cidara 费用中约 $85.4 亿是非现金 IPR&amp;D，会在现金流量表中加回。FCF $29.3 亿从容覆盖当季分红 $21.1 亿（覆盖 1.4x）。真正的现金消耗在投资活动——Cidara 收购净流出 $87.8 亿，这才是现金骤降的原因，也是"买管线填悬崖"的真实代价。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.4 杜邦分析 + 所有者盈余（FY2025 · 价值投资口径）</h3>
+  <div class="dcf-note">
+    <p><strong>杜邦分解（FY2025 · 近似）</strong>：净利率 28.1%（净利 $182.5 亿 / 营收 $650.1 亿）× 资产周转 ~0.51 × 权益乘数 ~2.8 ≈ <strong>ROE ~40%</strong>。高 ROE 典型来自制药高毛利 + 适度杠杆，但需注意权益基数被回购与近期大额并购扰动。</p>
+    <p><strong>所有者盈余 = 净利润 + 折旧摊销 + 股权激励 − 维护性 Capex ± 营运资金</strong>。默沙东是高毛利、资本较轻的制药生意（Q1 Capex 年化约 $40 亿、占营收约 6%），所有者盈余可用 Non-GAAP 净利做近似。<strong>FY2025 Non-GAAP 净利约 $225 亿</strong>（EPS $8.98 × 25.07 亿股）。</p>
+    <p><strong>所有者盈余收益率 = Non-GAAP 净利 ~$225 亿 / 市值 $309B ≈ 7.3%</strong>（GAAP 口径 $182.5 亿 / $309B ≈ 5.9%）。<span class="hl-t">7.3% 的收益率对一个世界级制药龙头不算贵</span>——这正是市场因 Keytruda 悬崖给出的折价。<strong>换句话说：默沙东的问题不是当下不赚钱，而是市场怀疑 2028 之后它还能不能赚这么多。便宜，是"悬崖折价"的便宜。</strong></p>
+  </div>
+</div>
+
+<!-- ═══ 模块 6 ═══ -->
+<div class="section">
+  <div class="stitle">模块 6 · 电话会分析（Q1 2026 + 前 2 季度）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">Q1 2026 电话会（2026-04-30）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"Keytruda 系列 $8.0B（+12% / +8% 剔汇），早期癌种（三阴乳腺/宫颈/肾癌）+ 转移性（尿路上皮癌）双轮驱动；皮下版 QLEX $128M 启动放量"</div><div class="ec-note">QLEX 是 2028 LOE 的核心防御——把静脉版患者转换到有配方/给药专利保护的皮下版，延续专利期外收入。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"Winrevair $525M（+88%），美国持续放量 + 日欧启动；HYPERION Ph3 标签更新 PDUFA 9/21"</div><div class="ec-note">Winrevair（源自 Acceleron 收购）是默沙东"并购兑现"的样板，也是填补悬崖的关键新引擎之一。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"上调 FY2026 指引：营收下限升至 $65.8B、Non-GAAP EPS 升至 $5.04-$5.16；进入密集 Ph3 数据读出期"</div><div class="ec-note">基础盘强劲支撑指引上调（营收下限 +$0.3B、EPS 区间上移）。管理层强调 2026-2027 是管线读出的密集窗口。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"$9.0B Cidara 一次性费用（=$3.62/股，无税收抵免）致 GAAP 每股亏损 $1.72；Terns 收购（约 $5.8B/$2.35 每股）5 月完成且未计入指引"</div><div class="ec-note">激进并购在报表上的代价：连续的一次性费用压制 GAAP 利润，Terns 将进一步拖累（另 $2.35/股一次性 + 全年约 $0.12 稀释）。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"持续激进业务拓展（Verona/Ohtuvayre、Cidara、Terns）为 Keytruda 专利悬崖前多元化布局；宣布 AI 提效 / 管线合作"</div><div class="ec-note">战略清晰但代价高——用现金 + 资产负债表买管线，方向正确，兑现度待观察。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q4 2025 / FY2025 电话会（2026-02-03）</h3>
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"Q4 营收 $16.4B（+5%）、FY2025 $65.0B 超预期；Keytruda Q4 $8.37B（+7%）、全年 $31.7B"</div><div class="ec-note">基础盘扎实，Keytruda 全年破 $316 亿，但增速已在放缓（Q4 +7% vs Q1'26 +12% 有基数波动）。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"首发 2026 指引令市场失望：EPS $5.00-$5.15 vs 共识 $5.63；营收 $65.5-67B vs 共识 $67.58B，财报后股价下跌"</div><div class="ec-note">初始指引低于共识（部分因含 $3.62 Cidara 一次性 + 药价/疫苗政策影响），一度打压股价。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"指引含 Trump 药品定价协议（2025/12）及美国儿科疫苗接种计划削减的'可控影响'"</div><div class="ec-note">监管/政策逆风是持续压制项，管理层称"可控"但方向不利。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q3 2025 电话会（2025-10-30）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"营收 $17.3B（+4%）；Keytruda $8.1B（+10%），历史首次单季破 $80 亿；调整后 EPS $2.58（+64%）"</div><div class="ec-note">Q3 是全年营收高点，Keytruda 里程碑式破 $80 亿，Winrevair $360M（+141%）、Capvaxive $244M 强劲。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"Winrevair 增长部分被分销商采购时点及美国净价下降（Medicare Part D 重构）抵消"</div><div class="ec-note">新品放量真实，但净价与渠道时点是需持续关注的噪音。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">指引兑现度追踪</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>历史指引（2026-02 初发）</th><th>Q1 2026 实际 / 更新</th><th>评价</th></tr>
+      <tr><td>FY2026 Non-GAAP EPS $5.00-5.15</td><td>上调至 $5.04-5.16</td><td><span class="badge up">上调</span></td></tr>
+      <tr><td>FY2026 营收 $65.5-67B</td><td>下限上调至 $65.8-67B</td><td><span class="badge up">上调</span></td></tr>
+      <tr><td>Q1 基础经营（剔一次性）</td><td>营收 $16.29B（+5%）超预期</td><td><span class="badge up">超预期</span></td></tr>
+      <tr><td>Winrevair 放量</td><td>+88%</td><td><span class="badge up">超预期</span></td></tr>
+      <tr><td>Cidara 一次性费用（含于指引）</td><td>$3.62/股如期计入</td><td><span class="badge nt">符合</span></td></tr>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>信号汇总</strong>：Q1 2026 是默沙东"<span class="hl-t">基础盘强劲 + 上调全年指引 + 新品双引擎（Keytruda +12% / Winrevair +88%）</span>"与"<span class="warn-t">激进并购一次性费用致 GAAP 亏损 + 净负债扩大</span>"并存的一季。管理层的坦诚度高（主动披露 LOE、药价政策、Gardasil 疲软），但故事的关键从来不在单季业绩，而在<strong>2026-2027 密集 Phase 3 读出能否为 2028 悬崖架好新桥</strong>。业绩没问题——问题在悬崖，在管线兑现，在估值给不给安全边际。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 7 ═══ -->
+<div class="section">
+  <div class="stitle">模块 7 · 多模型估值（8 种方法）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">7.1 估值汇总表（独立估值 · USD · 不锚定现价）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>估值方法</th><th>每股公允价</th><th>假设要点</th><th>权重</th></tr>
+      <tr><td>1. 相对估值（P/E）</td><td>$130</td><td>FY2027 共识 EPS ~$10 × 13x（介于 PFE/BMY 8-9x 与板块 18x 之间，反映悬崖折价 + 优于同类的管线）</td><td>25%</td></tr>
+      <tr><td>2. DCF（基准）</td><td>$135</td><td>正常化所有者盈余 ~$200 亿起，建模 2028-2030 Keytruda 侵蚀后由管线部分回补，WACC 8%、永续 2%</td><td>20%</td></tr>
+      <tr><td>3. 所有者盈余收益率</td><td>$120</td><td>正常化所有者盈余 ~$200 亿 / 7% 目标收益率（含悬崖风险溢价）= $286B → /24.7 亿股</td><td>15%</td></tr>
+      <tr><td>4. PEG</td><td>$135</td><td>Forward P/E 12.5x ÷ 近端 EPS 增速（2026→2027 基础 +15%）= PEG ~0.8（近端便宜，但悬崖使 PEG 单用失真）</td><td>10%</td></tr>
+      <tr><td>5. DDM</td><td>$119</td><td>DPS $3.40，永续增速 5%，要求回报 8% → $3.40×1.05/(0.08-0.05)（分红稳健但成长受悬崖压制）</td><td>10%</td></tr>
+      <tr><td>6. NAV</td><td>不适用</td><td>非资产型公司（价值在专利/管线无形资产与现金流，非重估净资产）</td><td>0%</td></tr>
+      <tr><td>7. 反向 DCF</td><td>当前价隐含 <strong>~0-1%</strong> 长期增长</td><td>$124.89 隐含市场认为 Keytruda 悬崖后长期近乎零增长——若守住基础盘即有重估空间</td><td>15%</td></tr>
+      <tr><td>8. SOTP 分部加总</td><td>$140</td><td>Keytruda（悬崖前现金流 + QLEX/海外残值）+ 非-Keytruda 药品（Winrevair 等给成长倍数）+ 动物保健（高质量、~4-5x 销售）− 净负债 $43.4B</td><td>5%</td></tr>
+      <tr class="hl"><td><strong>加权公允价</strong></td><td><strong>~$130</strong></td><td>估值区间 $119-$140 · 加权中枢 ~$130</td><td>100%</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.8;"><strong>与现价对照</strong>：当前 $124.89 vs 加权公允 ~$130 · <span class="nt">折让仅约 4%</span>——<strong>远不足价值投资 25% 安全边际的门槛</strong>。默沙东在前瞻估值上确实便宜（12.5x FY2027 vs 板块 18x），但这份便宜是市场对 Keytruda 悬崖的定价，不是白送的折扣。反向 DCF 显示市场已隐含"悬崖后近乎零增长"——<span class="hl-t">若默沙东守住基础盘就有重估空间，但这需要管线兑现来验证，而非估值本身便宜就能实现。</span></p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.2 P/E 多档透视表（利润被一次性费用严重扭曲，必做）</h3>
+  <p style="margin-bottom:10px; font-size:13px; color:var(--text2);">默沙东 Q1 因 $9.0B Cidara 一次性费用录得亏损，TTM P/E 完全失真；GAAP 与 Non-GAAP、含/不含一次性差异巨大，必须多档透视：</p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>口径</th><th>EPS</th><th>P/E（基于 $124.89）</th><th>读数说明</th></tr>
+      <tr><td>TTM GAAP P/E</td><td>~$3.55</td><td>~35x</td><td><span class="warn-t">被 Q1 Cidara 亏损扭曲 · 失真</span></td></tr>
+      <tr><td>FY2025 Non-GAAP P/E（最近完整年）</td><td>$8.98</td><td>~13.9x</td><td>剔一次性、完整年 · 较可信</td></tr>
+      <tr><td>FY2026 指引 Non-GAAP（含 $3.62 Cidara）</td><td>~$5.10</td><td>~24.5x</td><td><span class="warn-t">被一次性费用压低 · 失真</span></td></tr>
+      <tr><td>FY2026 基础 Non-GAAP（剔一次性）</td><td>~$8.72</td><td>~14.3x</td><td>反映基础经营</td></tr>
+      <tr class="hl"><td><strong>Forward P/E（FY2027 共识 ~$10）</strong></td><td><strong>~$10</strong></td><td><strong>~12.5x</strong></td><td>最可信档 · 市场惯用</td></tr>
+      <tr><td>所有者盈余收益率（FY2025 Non-GAAP）</td><td>净利 ~$225 亿</td><td>~7.3%</td><td>悬崖折价下的收益率</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3);"><strong>最可信档</strong>：Forward P/E ~12.5x（FY2027）/ ~14.3x（FY2026 剔一次性）。<span class="warn-t">切勿被 TTM ~35x 或 FY2026 含费用 24.5x 误导</span>——那都是一次性费用制造的假象。同业对比：礼来 30x（GLP-1 高成长溢价）、艾伯维 15-16.5x、辉瑞 8.3x、BMY 9x（同样专利悬崖）。<span class="hl-t">默沙东 12.5x 便宜于板块，贵于 PFE/BMY——市场把它定位在"悬崖股里管线更强的一个"</span>。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.3 12 个月目标价（概率加权）</h3>
+  <div class="pgrid">
+    <div class="pbox"><div class="pl">悲观情景 · 30%</div><div class="pv pc">$100</div><div class="pn">管线读出受挫 + Gardasil 持续下滑 + 悬崖恐慌 + 估值压缩至 ~10x FY2027<br>距现价 -20%</div></div>
+    <div class="pbox"><div class="pl">基准情景 · 45%</div><div class="pv pf">$138</div><div class="pn">基础盘兑现 + Winrevair/新品放量 + ~13.5-14x FY2027 + 温和重估<br>距现价 +10%</div></div>
+    <div class="pbox"><div class="pl">乐观情景 · 25%</div><div class="pv ps">$160</div><div class="pn">Phase 3 强读出 + QLEX 转换叙事强化 + 估值向板块 ~16x 靠拢<br>距现价 +28%</div></div>
+  </div>
+  <p style="font-size:13px; color:var(--text2);"><strong>概率加权公允价</strong>：30%×$100 + 45%×$138 + 25%×$160 = <strong>$132</strong>。<strong>叠加 2.72% 股息 = 总回报约 9%</strong>——稳健但不激动。<span class="warn-t">当前 $124.89 高于机械首仓 $104（估值中位 $130×80%），不在理想建仓窗口</span>；且已逼近 52 周高点 $130.29，追高性价比低。</p>
+</div>
+
+<!-- ═══ 模块 8 ═══ -->
+<div class="section">
+  <div class="stitle">模块 8 · 竞争与行业分析</div>
+  <div class="cmt">
+    <p><strong>大型制药格局</strong>：默沙东身处"大盘制药"赛道，与辉瑞（PFE）、百时美施贵宝（BMY）、艾伯维（ABBV）、礼来（LLY）、罗氏、阿斯利康、诺华等同台。这个赛道当前有两条主线：一是<span class="hl-t">GLP-1 减重（礼来/诺和诺德领跑，高成长高估值）</span>，二是<span class="warn-t">一批巨头正集体穿越专利悬崖（默沙东 Keytruda、BMY Revlimid/Eliquis、艾伯维已走过 Humira）</span>。默沙东是"悬崖组"里管线储备较强、但单药集中度最高的一个。</p>
+
+    <p><strong>制药龙头同业对比（前瞻估值 · 2026-07）</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>公司</th><th>Forward P/E</th><th>股息率</th><th>成长/核心评价</th></tr>
+        <tr class="hl"><td><strong>默沙东 MRK</strong></td><td><strong>~12.5x</strong>(2027)/14.3x(2026剔一次性)</td><td>~2.72%</td><td>基础营收 +3~5% · 2028 Keytruda LOE 为核心风险</td></tr>
+        <tr><td>辉瑞 PFE</td><td>~8.3x</td><td>~7%</td><td>低速/专利悬崖 · 估值历史低位 · 高股息</td></tr>
+        <tr><td>百时美 BMY</td><td>~9x</td><td>~4.3%</td><td>Revlimid/Eliquis 悬崖 · 估值近历史谷底</td></tr>
+        <tr><td>艾伯维 ABBV</td><td>~15-16.5x</td><td>—</td><td>Humira 后靠 Skyrizi/Rinvoq 恢复增长（悬崖穿越样板）</td></tr>
+        <tr><td>礼来 LLY</td><td>~30x</td><td>—</td><td>GLP-1 减重高增长 · 行业最高溢价</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:10px; font-size:12px; color:var(--text3);">板块参照：标普 500 医疗保健板块前瞻 P/E 约 <strong>18.2x</strong>（2026-07）。默沙东 12.5x 显著低于板块、贵于 PFE/BMY、便宜于 ABBV/LLY——市场给它的估值坐标是"悬崖股里质量更好、但成长确定性不如 ABBV/LLY"。<span class="hl-t">关键分野：艾伯维已用 Skyrizi/Rinvoq 证明了穿越 Humira 悬崖，市场因此给它 15-16x；默沙东能否用管线证明穿越 Keytruda 悬崖，将决定它是重估向 ABBV 靠拢，还是沉沦向 PFE/BMY 看齐。</span></p>
+
+    <p style="margin-top:14px;"><strong>波特五力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>新进入者：</strong>专利药门槛极高（研发 + 审批），但<span class="warn-t">生物类似药是"专利到期即涌入"的确定性进入者</span></li>
+      <li><strong>替代品：</strong>中高（同靶点竞品 + 生物类似药 + 新一代疗法）</li>
+      <li><strong>供应商议价：</strong>低</li>
+      <li><strong>买家议价：</strong>中高且上升（支付方/PBM + 政府药价谈判 IRA/Trump 协议持续压价）</li>
+      <li><strong>同业竞争：</strong>高（肿瘤 IO 赛道玩家众多，Keytruda 靠适应症广度领先）</li>
+    </ul>
+
+    <p><strong>颠覆/悬崖风险</strong>：Keytruda 2028 生物类似药是最确定、最重大的行业变量。默沙东的对冲是"悬崖前多元化"——自研管线 + 三笔并购 + QLEX 皮下转换。这不是"会不会来"的问题（一定会来），而是"接得住多少"的问题。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 9 ═══ -->
+<div class="section">
+  <div class="stitle">模块 9 · 技术面与 K 线分析（次要参考）</div>
+  <div class="cmt">
+    <p><strong>趋势</strong>：MRK 当前 $124.89，处于 52 周区间 $76.66 - $130.29 的<span class="hl-t">高位（距高点仅 -4%）</span>。过去一年从 $76.66 的低点大幅修复至接近高点——市场情绪已从"悬崖恐慌"回摆到"便宜龙头修复"。这是一次显著的估值修复行情，追高的性价比在下降。</p>
+
+    <p><strong>关键价位</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>支撑</strong>：$104（估值中位 ×80% · 机械首仓）/ $91（×70%）/ $76.66（52 周低 · 硬底）</li>
+      <li><strong>阻力</strong>：$130.29（52 周高）/ $138（基准目标）/ $160（乐观情景）</li>
+    </ul>
+
+    <p><strong>指标信号</strong>：处于高位、修复动能趋缓。<span class="warn-t">在无 25% 安全边际的当下，技术面"接近高点"意味着回调风险 &gt; 追涨空间</span>。</p>
+
+    <p><strong>注意</strong>：默沙东的核心驱动是前瞻 P/E 估值 + Keytruda LOE 缓冲进展 + 管线 Phase 3 读出 + 药价政策，技术面是次要参考。价值投资者应等基本面/情绪回调（如管线读出不及预期、悬崖临近担忧升温）给出安全边际再介入，而非在 52 周高点附近追高。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 10 ═══ -->
+<div class="section">
+  <div class="stitle">模块 10 · 增长催化剂与前景展望</div>
+  <div class="cmt">
+    <p><strong>短期催化剂（未来 6 个月）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>2026-07-28 前后 Q2 2026 财报</strong>——基础盘持续性 + 指引更新 + Terns 收购一次性费用落地情况</li>
+      <li><strong>2026-09-21 Winrevair HYPERION Ph3 标签更新 PDUFA</strong>——扩大适应症、加速放量的关键节点</li>
+      <li><strong>密集 Phase 3 数据读出</strong>——管理层称 2026-2027 是读出密集窗口，任一正面读出都改善悬崖叙事</li>
+      <li><strong>QLEX 皮下版转换进度</strong>——转换率数据是评估 2028 缓冲力度的先行指标</li>
+    </ul>
+
+    <p><strong>长期展望（3-5 年）· 一切围绕 2028 悬崖</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>2026-2028：悬崖前的黄金窗口</strong>——Keytruda 仍在增长（+12%），基础 EPS 从 $8.72（2026）向 $10+（2027）攀升，是估值与现金流的高点期</li>
+      <li><strong>2028-2030：悬崖冲击期</strong>——生物类似药侵蚀 &gt;$250 亿敞口，QLEX + 管线部分回补，EPS 可能经历一个低谷</li>
+      <li><strong>回补引擎</strong>：Winrevair（峰值潜力 $40-50 亿+）+ Welireg + Capvaxive + Enflonsia + 动物保健（+13%、抗周期）+ Verona/Cidara/Terns 管线</li>
+      <li><strong>价值释放选项</strong>：动物保健板块质量高、抗周期，是潜在的分拆/价值释放来源</li>
+      <li><strong>风险情景</strong>：管线读出失败 / 生物类似药侵蚀超预期 / 并购整合不佳 → 悬崖变成断崖</li>
+    </ul>
+
+    <p><strong>TAM 展望</strong>：肿瘤、疫苗、心肺、动物保健的可寻址市场依然庞大且增长，默沙东不缺赛道。核心问题不是行业空间，而是<span class="hl-t">默沙东能否在 Keytruda 退坡的同时，用管线把营收与利润的绝对水平维持住甚至重新推高</span>——这是一道"填坑赛跑"，而非"开疆拓土"。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 11 ═══ -->
+<div class="section">
+  <div class="stitle">模块 11 · 风险矩阵</div>
+  <div class="risk-grid">
+    <div class="risk-card r5"><h5>1. Keytruda 2028 专利悬崖</h5><span class="risk-score">5 / 5 极高</span><p>美国核心化合物专利 2028 年底到期 · 生物类似药 2028-2029 实质冲击 · &gt;$250 亿营收敞口（占营收约 48%）· 这是决定公司 5 年价值的头号变量</p></div>
+    <div class="risk-card r4"><h5>2. 管线兑现/并购整合</h5><span class="risk-score">4 / 5 高</span><p>Verona/Cidara/Terns 一年三购、代价高（$9.0B Cidara 无税抵 + $5.8B Terns）· 若 Phase 3 读出失败或整合不佳，悬崖无法填平 · 净负债扩大加剧执行压力</p></div>
+    <div class="risk-card r3"><h5>3. 药价/政策监管</h5><span class="risk-score">3 / 5 中高</span><p>Trump 药价协议（2025/12）+ IRA 谈判 + Medicare Part D 重构 + 美国儿科疫苗计划削减 · 持续压制净价</p></div>
+    <div class="risk-card r3"><h5>4. 单产品/单市场集中</h5><span class="risk-score">3 / 5 中</span><p>Keytruda 占营收约 48% · Gardasil 高度依赖中国/日本（本季 -19%）· 集中度放大波动</p></div>
+    <div class="risk-card r3"><h5>5. 估值无安全边际</h5><span class="risk-score">3 / 5 中</span><p>加权公允 ~$130 · 现价 $124.89 折让仅约 4% · 接近 52 周高 · 任何利空都可能触发回调</p></div>
+    <div class="risk-card r2"><h5>6. 基础生意质量（机会）</h5><span class="risk-score">2 / 5 反向</span><p>74% 毛利率 + 强劲 FCF + 连年增息 + 动物保健/新品组合 + 便宜前瞻估值 · 世界级制药资产本身是安全垫</p></div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>3 个黑天鹅情景</strong>：</p>
+    <ol style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>Keytruda 生物类似药侵蚀远超预期 + QLEX 转换失败</strong>——概率 20%（2028-2030 维度）· 悬崖变断崖 · 股价可回落至 $85-95 · 便宜变价值陷阱</li>
+      <li><strong>并购管线（Cidara/Terns）Phase 3 关键读出失败</strong>——概率 15% · 高价买来的增长落空 · 净负债压力凸显 · 估值重置</li>
+      <li><strong>美国药价政策超预期收紧 / 全球贸易-关税冲击制药供应链</strong>——概率 10% · 净价与利润率承压</li>
+    </ol>
+
+    <p style="margin-top:10px;"><strong>下行支撑</strong>：世界级制药资产 + 74% 毛利率 + 强劲 FCF + 2.72% 股息 + 便宜前瞻估值构成质量底。<span class="hl-t">$76.66（52 周低）附近是较硬的估值底</span>——那是市场上一次"悬崖恐慌"定价的水平，对应约 8-9x FY2027（与 PFE/BMY 看齐）。默沙东的"底"由质量与股息托举，但悬崖决定了它的"顶"需要管线来打开。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 12 ═══ -->
+<div class="section">
+  <div class="stitle">模块 12 · 股东回报分析</div>
+  <div class="cmt">
+    <p><strong>默沙东是"分红优先、回购温和、并购激进"的资本配置结构——它把股东回报的主菜放在稳健累进的股息上，回购是配角，绝大部分弹药投向了填补 Keytruda 悬崖的并购。</strong></p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 18px 0 10px; font-family: 'Segoe UI',sans-serif;">12.1 公司给了股东多少？（量 · 过去 3 年 + trailing 收益率）</h3>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>年度</th><th>现金股息</th><th>回购（执行）</th><th>股东总回报</th><th>说明</th></tr>
+        <tr><td>FY2023</td><td>$7,445M</td><td>$1,346M</td><td>$8,791M</td><td>回购象征性</td></tr>
+        <tr><td>FY2024</td><td>$7,840M</td><td>$1,306M</td><td>$9,146M</td><td>回购象征性</td></tr>
+        <tr><td>FY2025</td><td>$8,176M</td><td>$5,084M</td><td>$13,260M</td><td>回购显著提速</td></tr>
+        <tr class="hl"><td><strong>3 年合计</strong></td><td><strong>$23,461M</strong></td><td><strong>$7,736M</strong></td><td><strong>$31,197M</strong></td><td>股息占 75%</td></tr>
+      </table>
+    </div>
+    <p style="font-size:13px; color: var(--text2); margin-top:8px"><strong>派息率</strong>：FY2025 股息 $81.8 亿 / GAAP 净利 $182.5 亿 ≈ <strong>45%</strong>（占 Non-GAAP 净利约 36%）——稳健、有增长空间。<strong>Trailing Shareholder Yield</strong> ≈ FY2025 返还 $132.6 亿 / 市值 $309B ≈ <strong>4.3%</strong>（股息 ~2.72% + 回购 ~1.6%）。<span class="hl-t">这是典型的"高股息 + 温和回购"美股制药返还结构</span>——分红是主菜，回购是 2025 才开始加码的辅菜。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.2 给的方式好不好？（质 · 回购含金量）</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>缩股温和 · 含金量中等偏上</strong>：摊薄股数从 FY2023 的 25.47 亿降至 Q1 2026 的 24.72 亿（3 年约 -2.9%，年均缩约 1%），回购确实在真实减少股本，但力度温和——不像纯回购机器那样大幅缩股。摊薄股数持续下降，说明回购没有被 SBC 增发完全抵消，是"真缩股"而非仅替 SBC 接盘</li>
+      <li><strong>美股库存股机制</strong>：默沙东回购多入库存股（美股常态），部分对冲员工股权激励稀释；但从摊薄股数逐年下降看，净效应仍是缩股，含金量尚可</li>
+      <li><span class="warn-t">回购力度受并购挤压</span>：FY2023-2024 回购仅 $13 亿/年，2025 提速至 $50.8 亿，但同期公司把远超回购的资金投向 Verona/Cidara/Terns 并购。资本配置的优先级是<strong>并购 &gt; 分红 &gt; 回购</strong>——这在悬崖前是合理的（填坑比缩股更紧迫），但意味着回购不是股东回报的主要抓手</li>
+    </ul>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.3 能不能继续给、给多少？（前瞻 · 可持续性）</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>股息可持续性强</strong>：连年增息（季度 $0.85，+4.9%），派息率仅约 45% GAAP / 36% Non-GAAP，即便悬崖期利润承压，股息覆盖仍有缓冲。这是默沙东股东回报最可靠的部分</li>
+      <li><strong>回购授权充裕但执行取决于并购节奏</strong>：2025 年 1 月批准 $100 亿新授权（无时间限制），季末剩余 <strong>$64 亿</strong>，2026 计划约 $30 亿。授权是上限、非承诺，实际执行会让位于并购机会</li>
+      <li><strong>(股息 + 回购) / FCF 覆盖度</strong>：FY2025 返还 $132.6 亿 vs 全年 FCF（强劲，Q1 单季即 $29.3 亿）——常态下 FCF 可覆盖股息 + 温和回购。但<span class="warn-t">2026 因 Cidara/Terns 大额收购，现金骤降、净负债扩至 -$43.4B</span>，短期资本返还的弹性被并购占用</li>
+      <li><strong>借债/动用现金的性质</strong>：现金从 $145.7 亿降至 $53.3 亿主要因并购而非返还本身；但净负债扩大意味着未来若再加码回购需依赖 FCF 恢复或发债，弹性受限于悬崖期的盈利轨迹</li>
+    </ul>
+    <p><strong>模块小结</strong>：<span class="hl-t">积极但以股息为主、回购让位于并购——总体"稳健分红 + 温和缩股"，含金量中等偏上</span>。默沙东给股东的确定性主要来自连年增息的稳健股息（2.72% 收益率、45% 派息率、增长空间充足），回购是 2025 才加码的配角，且随时可能为填补 Keytruda 悬崖的并购让路。对追求稳定分红的长期持有者友好，但别指望它像"回购缩股复利机器"那样靠回购放大每股价值——它的资本弹药，此刻正优先用于"买一座跨越悬崖的桥"。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 13 ═══ -->
+<div class="section">
+  <div class="stitle">模块 13 · 海图评分卡 + 投资决策</div>
+
+  <div class="scorecard">
+    <h3 style="font-size:15px; color:var(--text); margin-bottom: 16px; font-family: 'Segoe UI',sans-serif;">海图评分卡（6 维 A-D）</h3>
+    <div class="score-grid">
+      <div class="score-card"><div class="score-letter s-bm">B-</div><div class="score-body"><h4>1. 生意可预测性</h4><p>制药模式清晰、近端能见度高，但一款药占近半营收 + 2028 明确 LOE，使 2028 之后的盈利能见度大打折扣。</p></div></div>
+      <div class="score-card"><div class="score-letter s-b">B</div><div class="score-body"><h4>2. 经济护城河</h4><p>Keytruda 专利/临床/品牌护城河宽，但核心专利有明确到期日；转换成本与有效规模受生物类似药压制。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">B+</div><div class="score-body"><h4>3. 管理层质量</h4><p>悬崖前主动多元化、坦诚度高、Winrevair 并购兑现出色。但 $9.0B 无税抵一次性 + 激进并购代价不菲。</p></div></div>
+      <div class="score-card"><div class="score-letter s-b">B</div><div class="score-body"><h4>4. 财务质量</h4><p>74% 毛利率 + ~40% ROE + 强劲 FCF + 7.3% 所有者盈余收益率。但净负债 -$43.4B、现金骤降、Q1 GAAP 亏损。</p></div></div>
+      <div class="score-card"><div class="score-letter s-b">B</div><div class="score-body"><h4>5. 资本配置纪律</h4><p>稳健累进股息（45% 派息率）+ 2025 回购提速 + 温和真实缩股。回购让位于并购，资本弹药优先填悬崖。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bm">B-</div><div class="score-body"><h4>6. 估值与安全边际</h4><p>前瞻 12.5x 便宜于板块 18x，但相对公允 ~$130 折让仅约 4%，<strong>无 25% 安全边际</strong>，且近 52 周高。</p></div></div>
+    </div>
+
+    <div class="flag-row">
+      <strong>红旗排查</strong>：会计无重大疑点（$9.0B Cidara 为标准的 IPR&amp;D 收购费用，充分披露，非操纵）、治理无问题、估值不极端（反而便宜）。<strong>但存在一项结构性风险旗：Keytruda 2028 专利悬崖</strong>（占营收约 48%、&gt;$250 亿敞口，明确到期日）叠加<strong>估值无 25% 安全边际</strong>。虽 6 维基础质量稳健（无 A、无 C 以下），但结构性悬崖 + 无安全边际 → 综合评级<strong>定为「持有观望」</strong>。
+    </div>
+
+    <p style="margin-top:18px; font-size:14px; color:var(--text); line-height:1.85;"><strong>综合评级</strong>：<span class="rating-badge rating-hold" style="font-size:14px;">持有观望</span>。基础生意质量稳健（6 维以 B 为主）、前瞻估值确实便宜，但估值维度 B-（无安全边际）+ Keytruda 2028 结构性悬崖 → 定为持有观望。核心判断：<strong>默沙东是"便宜的好龙头"，但便宜是市场对专利悬崖的定价，不是白送的折扣。当前 $124.89 折让仅约 4%、逼近 52 周高，无安全边际；现有持仓者可持有收息、观察管线兑现，新买入者应等回调至 $104 附近给出安全边际、或等管线读出改善悬崖叙事再介入。</strong></p>
+  </div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">投资决策（精确价格 · USD）</h3>
+
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>项目</th><th>价格</th><th>说明</th></tr>
+      <tr><td>12 个月目标价（概率加权）</td><td><strong>$132</strong> (+6%)</td><td>基准 $138 · 叠加 2.72% 股息 ≈ 总回报 9%</td></tr>
+      <tr><td>悲观目标（30% 概率）</td><td>$100 (-20%)</td><td>管线受挫 + 估值压缩至 ~10x</td></tr>
+      <tr><td>乐观目标（25% 概率）</td><td>$160 (+28%)</td><td>Phase 3 强读出 + 估值向板块靠拢</td></tr>
+      <tr class="hl"><td>首仓建仓（估值中位数 $130 × 80%）</td><td><strong>$104</strong></td><td>距现价 -17% · 耐心等回调</td></tr>
+      <tr><td>二仓建仓（× 70%）</td><td>$91</td><td>-27% · 悬崖担忧升温机会</td></tr>
+      <tr><td>三仓建仓（× 60%）</td><td>$78</td><td>-38% · 逼近 52 周低 · 黑天鹅级机会</td></tr>
+      <tr><td>止盈一档</td><td>$150</td><td>+20% · 减仓 25%</td></tr>
+      <tr><td>止盈二档</td><td>$165</td><td>+32% · 再减 25%</td></tr>
+      <tr><td>止盈三档</td><td>$182</td><td>+46% · 再减 25% · 最后 25% 长期持有</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.85;"><strong>建议总仓位</strong>：<strong>2-4%</strong>（分红打底 + 管线期权 · 当前价无安全边际，应在回调时建仓，不追高）。<strong>持有周期</strong>：3-5 年（穿越 Keytruda 悬崖这道关，用管线兑现验证重估逻辑）。<strong>关键监控指标</strong>：① Keytruda 皮下版 QLEX 患者转换率；② Winrevair 放量 + HYPERION PDUFA（2026-09-21）；③ 管线 Phase 3 密集读出（Cidara/Terns/其他）；④ Gardasil 中国/日本需求恢复；⑤ FY2026-2027 基础 EPS 指引及 2028+ 悬崖缓冲进展；⑥ Forward P/E 是否回落至 ≤11x（估值机会）。<strong>下次催化剂</strong>：2026-07-28 前后 Q2 2026 财报。</p>
+</div>
+
+<!-- ═══ 海图页末长评 ═══ -->
+<div class="section">
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记 · 约 1150 字</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p class="lead">价值投资里有一种最考验耐心的标的：生意足够好、价格足够便宜，却头顶一座所有人都看得见、日期都标好了的悬崖。默沙东就是这样——一台靠 Keytruda 撑起近半江山的肿瘤免疫机器，74% 的毛利率、FY2025 Non-GAAP 每股收益 $8.98、Forward P/E 只有 12.5 倍（低于医药板块 18 倍）。可就在这份"便宜"背后，写着四个字：2028 专利悬崖。</p>
+
+      <p>默沙东是全球肿瘤免疫治疗之王——它靠一款 PD-1 抑制剂 Keytruda（可瑞达）拿下几乎全部实体瘤适应症，一年卖出约 $320 亿，占公司营收约 48%；其余靠 Gardasil 疫苗、Winrevair 肺动脉高压、动物保健等组合支撑。它赚的是"专利保护期内的定价权"，也困于"专利到期后的悬崖"。</p>
+
+      <h4>几个研判要点</h4>
+
+      <p><strong>一、Q1 的 GAAP 亏损是"账面地雷"，不是经营恶化。</strong> 本季营收 $16.29B（+5%、剔汇 +3%）超预期，Winrevair +88%、动物保健 +13%、Keytruda 系列 +12%，基础盘强劲，公司还上调了全年指引下限。GAAP 每股亏损 $1.72、Non-GAAP 亏损 $1.28，<span class="hl-t">全部来自收购 Cidara 产生的 $90 亿一次性研发费用</span>（每股 $3.62，且无税收抵免）。剔除这笔一次性，基础 Non-GAAP EPS 约 $8.72——经营没有问题，问题在会计口径。看财报，不能只看头条数字。</p>
+
+      <p><strong>二、Keytruda 是皇冠，也是达摩克利斯之剑。</strong> 一款药占近半营收，本身就是巨大的集中度风险。美国核心化合物专利 2028 年底到期，2028-2029 年生物类似药将实质冲击，<span class="warn-t">敞口 &gt;$250 亿</span>。默沙东的防御有三层：皮下版 QLEX（2025/9 获批，靠配方/给药专利延长保护、把患者从静脉版转换过来）+ 新品放量（Winrevair、Capvaxive、Welireg、Enflonsia）+ 激进并购（Verona/Cidara/Terns）多元化。能不能填平悬崖，是未来三年最重要的一张考卷。</p>
+
+      <p><strong>三、这是一次"买增长"的豪赌。</strong> 一年之内连做三笔收购（Verona/Ohtuvayre、Cidara、Terns），$90 亿 Cidara 费用无税收抵免直接砸出 GAAP 亏损，Terns 还有约 $58 亿（每股 $2.35）尚未计入指引。年初现金从 $145.7 亿骤降至 $53.3 亿，公司呈<span class="warn-t">净负债约 $434 亿</span>——这不是"现金堡垒"。管理层在专利悬崖前用资产负债表买时间、买管线，方向正确，但代价不菲、执行风险真实。</p>
+
+      <p><strong>四、便宜是真的便宜，但"便宜有便宜的理由"。</strong> Forward P/E 12.5 倍（FY2027 共识 EPS ~$10）、14.3 倍（FY2026 剔一次性），显著低于板块 18 倍、更低于礼来 30 倍。股息率 2.72%、连年增息。反向 DCF 显示：<span class="hl-t">当前股价几乎已隐含 Keytruda 悬崖后"零增长"</span>——市场把最坏情形定价了大半。若默沙东守住基础盘，就有重估空间；若悬崖如期而至而管线接不上，便宜会变成价值陷阱。</p>
+
+      <p><strong>五、独立估值 ~$130，安全边际不足。</strong> 八法加权公允价约 $130（区间 $119-$140），12 个月概率加权目标价 $132：悲观 $100（30%）/ 基准 $138（45%）/ 乐观 $160（25%）。当前 $124.89 相对公允价折让仅约 4%，远不到价值投资 25% 安全边际的门槛，且股价已逼近 52 周高点 $130.29。好生意，但此刻的价格不给你余地。</p>
+
+      <h4>海图研判</h4>
+
+      <p><strong>评级：持有观望。</strong> 世界级肿瘤管线 + 74% 毛利率 + 便宜的前瞻估值 + 2.72% 股息的组合，对垒 2028 Keytruda 专利悬崖（&gt;$250 亿敞口）+ 净负债 $434 亿 + 无 25% 安全边际的现实。12 个月概率加权目标价 <strong>$132</strong>（+6%），叠加 2.72% 股息 ≈ 总回报约 9%——稳健，但不激动。</p>
+
+      <p>操作建议：当前 $124.89 高于机械首仓 $104，<strong>不在理想建仓窗口</strong>。耐心等回调至 $104（估值中位数 $130×80%）建首仓、$91 加二仓、$78（52 周低附近）极端机会三仓。止盈三档 $150 / $165 / $182，每档减 25%，最后 25% 长期持有。<strong>建议总仓位 2-4%</strong>（分红打底 + 管线期权）。持有周期 3-5 年，穿越专利悬崖这道关。<span class="hl-t">关键纪律：现有持仓者可持有收息、观察管线兑现；新买入者必须等价格给出安全边际，或等管线读出改善悬崖叙事——便宜的龙头，也要等一个安全的价格。</span></p>
+
+      <h4>风险提示</h4>
+
+      <p>Keytruda 2028 生物类似药冲击超预期 / QLEX 转换不及预期 / 并购管线读出失败 / Gardasil 中国日本需求持续下滑 / 净负债下融资成本上升——任一项都可能让"便宜"变成"陷阱"。但 74% 毛利率、强劲 FCF、连年增息与动物保健/新品组合构成质量底，<strong>52 周低 $76.66 附近是较硬的估值支撑</strong>（对应约 8-9x FY2027，与辉瑞/百时美看齐）。默沙东的"底"由质量与股息托举，它的"顶"需要管线来打开。</p>
+
+      <p>关键叙事：<strong>"全球肿瘤免疫之王 + 便宜前瞻估值 + 连年增息"的世界级制药龙头，对垒"Keytruda 2028 专利悬崖 + 激进并购净负债 + 无安全边际"的结构性风险</strong>。默沙东不缺好生意，缺的是让人安心的价格，与一张填平悬崖的答卷。下一个催化剂：2026-07-28 前后 Q2 2026 财报，以及 9/21 Winrevair HYPERION PDUFA。</p>
+
+      <p class="haitu-sign">—— 海图，灯下落笔，明日再观风浪。</p>
+
+      <p class="haitu-disc">⚠️ 免责声明：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，不构成任何投资建议。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div>《海图夜读》 · 默沙东 Merck &amp; Co. MRK Q1 2026 海图研判</div>
+  <div style="margin-top:6px;">发布日 2026-04-30 · 研判日 2026-07-11 · 数据来源 Merck Q1 2026 官方财报新闻稿（SEC 8-K + 10-Q mrk-20260331）+ FY2025 10-K + 电话会 transcript · 货币 USD</div>
+</footer>
+
+<script>
+let curTheme = 'light';
+function toggleTheme() {
+  curTheme = curTheme === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', curTheme);
+  renderCharts();
+}
+
+const palette = {
+  light: { accent: '#8a9a8e', accent2: '#7b8fa0', accent3: '#b08d7a', gold: '#b9a06a', red: '#b87070', green: '#7a9a7a', grid: '#e5ddd5', text: '#7a706a' },
+  dark:  { accent: '#8a9a8e', accent2: '#8fabbf', accent3: '#c9a48e', gold: '#c9b07a', red: '#c08080', green: '#8aaa8a', grid: '#3e3a35', text: '#a09890' }
+};
+
+let charts = {};
+function renderCharts() {
+  Object.values(charts).forEach(c => c && c.destroy && c.destroy());
+  charts = {};
+  const p = palette[curTheme];
+  Chart.defaults.color = p.text;
+  Chart.defaults.borderColor = p.grid;
+
+  const quarters = ['Q1 25','Q2 25','Q3 25','Q4 25','Q1 26'];
+
+  // 1. 净营收 + Keytruda 双轴
+  const rev = [15.53, 15.81, 17.28, 16.40, 16.29];
+  const keytruda = [7.21, 7.96, 8.14, 8.34, 8.03];
+  charts.rev = new Chart(document.getElementById('chartRev'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { type:'bar', label: '净营收 ($B)', data: rev, backgroundColor: p.accent + 'CC', yAxisID: 'y' },
+      { type: 'line', label: 'Keytruda 系列 ($B)', data: keytruda, borderColor: p.accent3, backgroundColor: p.accent3, tension: 0.3, yAxisID: 'y' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false, title: { display: false } } } }
+  });
+
+  // 2. 毛利率 GAAP vs Non-GAAP（Q1 同比）
+  charts.margin = new Chart(document.getElementById('chartMargin'), {
+    type: 'bar',
+    data: {
+      labels: ['Q1 2025', 'Q1 2026'],
+      datasets: [
+        { label: 'GAAP 毛利率 %', data: [78, 74.2], backgroundColor: p.accent2 + 'CC' },
+        { label: 'Non-GAAP 毛利率 %', data: [82.2, 81.9], backgroundColor: p.green + 'CC' }
+      ]
+    },
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false, min: 70, ticks: { callback: v => v + '%' } } } }
+  });
+
+  // 3. 营收结构 doughnut
+  charts.segment = new Chart(document.getElementById('chartSegment'), {
+    type: 'doughnut',
+    data: {
+      labels: ['Keytruda 系列', 'Gardasil', 'Januvia/Janumet', 'Winrevair', 'Bridion', '动物保健', '其他'],
+      datasets: [{ data: [8034, 1069, 574, 525, 472, 1791, 3821], backgroundColor: [p.accent3, p.red, p.gold, p.green, p.accent2, p.accent, p.text + '55'] }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { font: { size: 10 } } } } }
+  });
+
+  // 4. 摊薄 EPS 柱 GAAP vs Non-GAAP
+  const epsGaap = [2.01, 1.76, 2.32, 1.19, -1.72];
+  const epsNon = [2.22, null, 2.58, null, -1.28];
+  charts.eps = new Chart(document.getElementById('chartEps'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { label: 'GAAP 摊薄 EPS ($)', data: epsGaap, backgroundColor: epsGaap.map(v => v < 0 ? p.red + 'DD' : p.accent + 'CC') },
+      { label: 'Non-GAAP 摊薄 EPS ($)', data: epsNon, backgroundColor: epsNon.map(v => v === null ? 'rgba(0,0,0,0)' : (v < 0 ? p.rose + 'DD' : p.gold + 'CC')) }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false } } }
+  });
+
+  buildSankey();
+}
+
+function buildSankey() {
+  const p = palette[curTheme];
+  const labels = ['营业收入 $162.9','营业成本 $42.0','毛利 $120.9','销售及管理 $27.0','基础研发 $35.9','重组及其他 $3.3','基础营业利润 $54.7','所得税及其他 ~$8.2','基础净利 ~$46.5'];
+  const data = {
+    type: 'sankey',
+    orientation: 'h',
+    node: { pad: 16, thickness: 20, line: { color: p.grid, width: 0.5 }, label: labels, color: [p.accent, p.red, p.green, p.accent2, p.accent3, p.rose, p.green, p.red, p.green] },
+    link: {
+      source: [0, 0, 2, 2, 2, 2, 6, 6],
+      target: [1, 2, 3, 4, 5, 6, 7, 8],
+      value:  [42.0, 120.9, 27.0, 35.9, 3.3, 54.7, 8.2, 46.5],
+      color: [p.red+'55', p.green+'66', p.accent2+'55', p.accent3+'55', p.rose+'55', p.green+'66', p.red+'55', p.green+'66']
+    }
+  };
+  const layout = { font: { size: 11, color: p.text }, paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)', margin: { l: 10, r: 10, t: 10, b: 10 } };
+  Plotly.react('sankey', [data], layout, { displayModeBar: false, responsive: true });
+}
+
+renderCharts();
+</script>
+
+</body>
+</html>

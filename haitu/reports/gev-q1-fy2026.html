@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-07-10 · GE Vernova Q1 2026 财报已于 2026-04-22 发布 -->
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GE Vernova GEV Q1 2026 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+<meta name="description" content="从 GE 分拆的全球电力设备三巨头之一 · 被 AI 数据中心用电点燃的燃气轮机超级周期龙头。Q1 订单 +71%、积压订单 $163B、燃机售罄至 2030、上调全年指引。但 GAAP 净利 94% 为一次性 M&A 收益（经营口径调整后 EBITDA 仅 $896M）· Forward P/E 2027 约 45x / 2026 经营约 73x——好生意，坏价格，无安全边际。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GE Vernova GEV Q1 2026 海图研判 · 海图夜读">
+<meta property="og:description" content="从 GE 分拆的全球电力设备三巨头之一 · 被 AI 数据中心用电点燃的燃气轮机超级周期龙头。Q1 订单 +71%、积压订单 $163B、燃机售罄至 2030、上调全年指引。但 GAAP 净利 94% 为一次性 M&A 收益 · Forward P/E 2027 约 45x——好生意，坏价格，无安全边际。">
+<meta property="og:url" content="https://jacexie.github.io/haitu/reports/gev-q1-fy2026.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="GE Vernova GEV Q1 2026 海图研判 · 海图夜读">
+<meta name="twitter:description" content="被 AI 电力需求点燃的燃气轮机超级周期龙头 · 订单 +71% / 积压 $163B / 燃机售罄至 2030 / 上调指引，对垒 GAAP 盈利失真 + Forward P/E 45x 无安全边际。">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root { --bg:#f5f0eb; --bg2:#ece6df; --card:#ffffff; --card2:#f8f5f1; --border:#d9d0c7; --text:#4a4340; --text2:#7a706a; --text3:#a89f98; --accent:#8a9a8e; --accent2:#7b8fa0; --accent3:#b08d7a; --rose:#c09090; --gold:#b9a06a; --red:#b87070; --green:#7a9a7a; --shadow:rgba(0,0,0,0.06); --chart-grid:#e5ddd5; }
+[data-theme="dark"] { --bg:#1e1c1a; --bg2:#28251f; --card:#2e2a25; --card2:#363230; --border:#4a4540; --text:#d4ccc4; --text2:#a09890; --text3:#706860; --accent:#8a9a8e; --accent2:#8fabbf; --accent3:#c9a48e; --rose:#c09090; --gold:#c9b07a; --red:#c08080; --green:#8aaa8a; --shadow:rgba(0,0,0,0.3); --chart-grid:#3e3a35; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', serif; line-height: 1.75; font-size: 14.5px; transition: background .35s, color .35s; }
+a { color: var(--accent2); text-decoration: none; }
+.theme-bar { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); }
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+.toggle-switch { position: relative; width: 44px; height: 22px; background: var(--border); border-radius: 11px; cursor: pointer; transition: background .3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: var(--card); border-radius: 50%; transition: transform .3s; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+
+.hero { padding: 48px 24px 36px; text-align: center; border-bottom: 1px solid var(--border); }
+.hero-tag { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 3px 14px; border-radius: 20px; margin-bottom: 18px; }
+.hero h1 { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.pill { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: 'Segoe UI', sans-serif; font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow); }
+.pill strong { color: var(--text); }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle { font-size: 18px; font-weight: 700; color: var(--accent3); margin-bottom: 20px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+.stitle::before { content: ''; display: block; width: 4px; height: 20px; background: var(--accent3); border-radius: 2px; }
+
+.haitu-quip { display: flex; align-items: center; gap: 18px; background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 18px 24px; margin: 24px 0; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-quote { flex: 1; }
+.haitu-portrait { font-size: 15px; line-height: 1.65; color: var(--text); margin-bottom: 6px; font-weight: 600; }
+.haitu-rating-line { font-size: 13px; color: var(--text2); font-family: 'Segoe UI', sans-serif; }
+.rating-badge { display: inline-block; padding: 2px 12px; border-radius: 12px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; margin-left: 4px; }
+.rating-hold { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+
+.haitu-essay { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 28px 32px; margin: 24px 0 20px; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-essay-header { display: flex; align-items: center; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.haitu-avatar-sm { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); background: var(--red); box-shadow: 0 2px 8px rgba(184,112,112,0.2); }
+.haitu-name-lg { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 28px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 4px; }
+.haitu-essay-tag { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; }
+.haitu-essay-body { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 15px; line-height: 2.0; color: var(--text); }
+.haitu-essay-body p { margin-bottom: 14px; }
+.haitu-essay-body p.lead { font-size: 16px; font-style: italic; color: var(--text2); margin-bottom: 18px; }
+.haitu-essay-body strong { color: var(--text); font-weight: 700; }
+.haitu-essay-body h4 { font-size: 14px; color: var(--accent3); margin: 18px 0 10px; font-family: 'Segoe UI', sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+.haitu-sign { text-align: right; margin-top: 18px; font-family: 'Georgia', serif; font-size: 14px; color: var(--text2); font-style: italic; }
+.haitu-disc { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); font-style: italic; line-height: 1.7; }
+
+.stock-snap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px; }
+.snap-item { text-align: center; }
+.snap-label { font-family: 'Segoe UI', sans-serif; font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.snap-val { font-family: 'Segoe UI', sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+.snap-val.up { color: var(--green); }
+.snap-val.dn { color: var(--red); }
+.snap-sub { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow); }
+.kpi-l { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.badge { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+.up { background: rgba(122,154,122,.15); color: var(--green); }
+.dn { background: rgba(184,112,112,.15); color: var(--red); }
+.nt { background: rgba(123,143,160,.15); color: var(--accent2); }
+
+.tbl-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow); }
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI', sans-serif; font-size: 13px; }
+.tbl th { background: var(--card2); color: var(--text3); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); background: var(--card2); }
+
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); }
+.ctitle { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 260px; }
+
+.cmt { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 26px; line-height: 1.95; font-size: 14px; box-shadow: 0 1px 4px var(--shadow); color: var(--text); }
+.cmt p { margin-bottom: 14px; }
+.cmt p:last-child { margin-bottom: 0; }
+.cmt strong { color: var(--text); }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+
+.bscore { display: flex; align-items: center; gap: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; margin-bottom: 12px; box-shadow: 0 1px 4px var(--shadow); }
+.circle { width: 62px; height: 62px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; flex-shrink: 0; border: 3px solid; font-family: 'Segoe UI', sans-serif; }
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 4px; color: var(--text); }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.moat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+.moat-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); border-left: 4px solid var(--accent); }
+.moat-card.wide { border-left-color: var(--green); }
+.moat-card.narrow { border-left-color: var(--gold); }
+.moat-card.none { border-left-color: var(--red); }
+.moat-card h5 { font-size: 13px; color: var(--text); margin-bottom: 6px; }
+.moat-card .moat-rate { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.moat-card.wide .moat-rate { background: rgba(122,154,122,.18); color: var(--green); }
+.moat-card.narrow .moat-rate { background: rgba(185,160,106,.18); color: var(--gold); }
+.moat-card.none .moat-rate { background: rgba(184,112,112,.18); color: var(--red); }
+.moat-card p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+
+.ec-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 14px; box-shadow: 0 1px 3px var(--shadow); }
+.ec-badge { flex-shrink: 0; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-top: 2px; font-family: 'Segoe UI', sans-serif; }
+.ec-bull { background: rgba(122,154,122,.18); color: var(--green); }
+.ec-bear { background: rgba(184,112,112,.18); color: var(--red); }
+.ec-neut { background: rgba(185,160,106,.18); color: var(--gold); }
+.ec-body { flex: 1; }
+.ec-title { font-weight: 600; color: var(--text); margin-bottom: 3px; font-size: 14px; }
+.ec-note { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.dcf-note { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.dcf-note strong { color: var(--text); }
+
+.scorecard { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow); }
+.score-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.score-card { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px; }
+.score-letter { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Segoe UI', sans-serif; font-weight: 800; font-size: 22px; flex-shrink: 0; border: 3px solid; }
+.s-a { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.12); }
+.s-bp { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.06); }
+.s-b { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.10); }
+.s-bm { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.06); }
+.s-c { color: var(--red); border-color: var(--red); background: rgba(184,112,112,.08); }
+.s-d { color: var(--red); border-color: var(--red); background: rgba(184,112,112,.14); }
+.score-body h4 { font-size: 13px; color: var(--text); margin-bottom: 4px; }
+.score-body p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+.flag-row { margin-top: 16px; padding: 12px 16px; background: rgba(184,112,112,.08); border: 1px solid rgba(184,112,112,.3); border-radius: 8px; font-size: 13px; color: var(--text2); }
+.flag-row strong { color: var(--red); }
+
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center; box-shadow: 0 1px 4px var(--shadow); }
+.pbox .pl { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; }
+.pbox .pv { font-family: 'Segoe UI', sans-serif; font-size: 28px; font-weight: 800; margin-bottom: 5px; }
+.pbox .pn { font-size: 12px; color: var(--text3); line-height: 1.5; }
+.pc { color: var(--red); } .pf { color: var(--gold); } .ps { color: var(--green); }
+
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.risk-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); position: relative; overflow: hidden; }
+.risk-card::before { content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent); }
+.risk-card.r1::before { background: var(--green); }
+.risk-card.r2::before { background: rgba(122,154,122,.6); }
+.risk-card.r3::before { background: var(--gold); }
+.risk-card.r4::before { background: var(--rose); }
+.risk-card.r5::before { background: var(--red); }
+.risk-card h5 { font-size: 14px; margin-bottom: 6px; color: var(--text); }
+.risk-score { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.r1 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r2 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r3 .risk-score { background: rgba(185,160,106,.18); color: var(--gold); }
+.r4 .risk-score { background: rgba(192,144,144,.18); color: var(--rose); }
+.r5 .risk-score { background: rgba(184,112,112,.18); color: var(--red); }
+.risk-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+footer { background: var(--card2); border-top: 1px solid var(--border); padding: 24px; text-align: center; color: var(--text3); font-size: 12px; margin-top: 40px; line-height: 1.8; }
+@media (max-width: 768px) { .cgrid,.pgrid { grid-template-columns: 1fr; } .hero h1 { font-size: 22px; } .kpi-grid { grid-template-columns: 1fr 1fr; } .stock-snap { grid-template-columns: 1fr 1fr; } .haitu-essay-header { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/GEV" target="_blank" rel="noopener" title="在雪球查看 GEV 实时行情">雪球 GEV</a>
+  </div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">Q1 2026 财报发布 · 2026-04-22 &nbsp;|&nbsp; 海图研判 · 2026-07-11</div>
+  <h1>GE Vernova GEV · 2026 Q1 财报深度分析</h1>
+  <div class="hero-sub">NYSE: GEV &nbsp;|&nbsp; 财季截至 2026-03-31 &nbsp;|&nbsp; 价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill">股价 <strong>$1,093</strong> <span style="color:var(--red)">距高点 -9%</span></div>
+    <div class="pill">市值 <strong>$294B</strong></div>
+    <div class="pill">Q1 营收 <strong>$9.34B</strong> <span style="color:var(--green)">+16%</span></div>
+    <div class="pill">调整后 EBITDA <strong>$896M</strong> <span style="color:var(--green)">+96%</span></div>
+    <div class="pill">调整后 EBITDA 利润率 <strong>9.6%</strong></div>
+    <div class="pill">Forward P/E <strong>~45x</strong> <span style="color:var(--gold)">极端估值</span></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 海图页首短评 ═══ -->
+<div class="haitu-quip">
+  <div class="haitu-quote">
+    <div class="haitu-portrait">从 GE 分拆的全球电力设备三巨头之一——被 AI 数据中心用电点燃的燃气轮机超级周期龙头。Q1 订单 +71%（有机）、积压订单 $163B、燃机产能售罄至 2030、上调全年指引，是一门 A- 级的生意。但 GAAP 净利 $4.75B 里 94% 是一次性 M&A 重估收益（真实经营口径调整后 EBITDA 仅 $896M）· Forward P/E 2027 约 45x / 2026 经营约 73x——好生意，坏价格，无安全边际。</div>
+    <div class="haitu-rating-line">评级：<span class="rating-badge rating-hold">持有观望</span> · 12 个月概率加权目标价 $865（-21%）· 燃机超级周期 + 电网数据中心需求 + 净现金 $7.3B 的顶级组合，对垒 GAAP 盈利失真 + Wind 持续流血 + Forward P/E 45x priced for perfection</div>
+  </div>
+</div>
+
+<!-- ═══ 市场数据快照 ═══ -->
+<div class="section">
+  <div class="stitle">市场数据快照（2026-07-10 收盘）</div>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">股价（美元）</div><div class="snap-val">$1,093</div><div class="snap-sub">2026-07-10 · 距 52 周高 -9%</div></div>
+    <div class="snap-item"><div class="snap-label">市值</div><div class="snap-val">$294B</div><div class="snap-sub">268.7M 股 × $1,093</div></div>
+    <div class="snap-item"><div class="snap-label">TTM GAAP P/E</div><div class="snap-val dn">~31x</div><div class="snap-sub">含大额一次性 · 严重失真</div></div>
+    <div class="snap-item"><div class="snap-label">Forward P/E（2026 经营）</div><div class="snap-val dn">~73x</div><div class="snap-sub">街预期经营 EPS ~$15</div></div>
+    <div class="snap-item"><div class="snap-label">Forward P/E（2027 经营）</div><div class="snap-val nt">~45x</div><div class="snap-sub">最可信档 · EPS ~$24.3</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间</div><div class="snap-val">$530 - $1,196</div><div class="snap-sub">近高位区间</div></div>
+    <div class="snap-item"><div class="snap-label">股息率</div><div class="snap-val">~0.18%</div><div class="snap-sub">$2.00/年 · 象征性</div></div>
+    <div class="snap-item"><div class="snap-label">FCF Yield（2026 指引）</div><div class="snap-val nt">~2.4%</div><div class="snap-sub">指引中值 $7B / 市值</div></div>
+    <div class="snap-item"><div class="snap-label">现金 + 受限现金</div><div class="snap-val">$10.17B</div><div class="snap-sub">2026-03-31 末</div></div>
+    <div class="snap-item"><div class="snap-label">有息负债</div><div class="snap-val">$2.86B</div><div class="snap-sub">当期 $51M + 长债 $2.81B</div></div>
+    <div class="snap-item"><div class="snap-label">真实净现金</div><div class="snap-val up">+$7.32B</div><div class="snap-sub">现金 − 有息债务</div></div>
+    <div class="snap-item"><div class="snap-label">RPO 积压订单</div><div class="snap-val up">$163B</div><div class="snap-sub">2026-03-31 · 环比 +$13B</div></div>
+  </div>
+  <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">数据时点：股价 2026-07-10 收盘约 $1,093（7/7 因同业评论单日回落约 6.5%，7/10 盘中区间 $1,054–$1,102.79）· 财务数据来源 GE Vernova Q1 2026 官方财报新闻稿（2026-04-22 盘前发布）+ 10-Q（SEC EDGAR）· 货币 USD 单口径。GE Vernova 财年 = 日历年（12 月 31 日止），2024-04-02 从 GE 分拆独立上市，故 Q1 2026 = 2026-01-01 至 2026-03-31。⚠️ <strong>TTM GAAP P/E ~31x 严重失真</strong>——TTM GAAP EPS 约 $34.3 含 Q4'25 递延税估值备抵释放 + Q1'26 Prolec 重估 $3,992M 等一次性项，不可作为估值依据；请以调整后 EBITDA 与经营口径 EPS 为准。</p>
+</div>
+
+<!-- ═══ Q1 2026 KPI ═══ -->
+<div class="section">
+  <div class="stitle">Q1 2026 核心业绩（USD · 财季截至 2026-03-31）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">总营收</div><div class="kpi-v">$9,339M</div><span class="badge up">+16% YoY</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">有机 +7% · 余为 Prolec 并购</div></div>
+    <div class="kpi"><div class="kpi-l">设备收入</div><div class="kpi-v">$5,254M</div><span class="badge nt">占比 56%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">燃机/电网/风机交付</div></div>
+    <div class="kpi"><div class="kpi-l">服务收入</div><div class="kpi-v">$4,084M</div><span class="badge nt">占比 44%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">高毛利年金式服务</div></div>
+    <div class="kpi"><div class="kpi-l">毛利</div><div class="kpi-v">$1,781M</div><span class="badge up">毛利率 19.1%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">同比 +0.8pp（18.3%→19.1%）</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 营业利润</div><div class="kpi-v">$179M</div><span class="badge nt">营业利润率 1.9%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">一次性收益记在营业线以下</div></div>
+    <div class="kpi"><div class="kpi-l">调整后 EBITDA</div><div class="kpi-v">$896M</div><span class="badge up">+96%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">利润率 9.6%（+390bps）· 核心口径</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 净利</div><div class="kpi-v">$4,750M</div><span class="badge nt">含 $4.5B 一次性</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">Prolec 重估 $3,992M + Proficy $330M</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 摊薄 EPS</div><div class="kpi-v">$17.44</div><span class="badge nt">失真</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">去年 $0.91 · 一次性推高</div></div>
+    <div class="kpi"><div class="kpi-l">分析师经营 EPS</div><div class="kpi-v">~$1.98</div><span class="badge up">超预期</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">Zacks 口径 · 非公司披露</div></div>
+    <div class="kpi"><div class="kpi-l">订单总额</div><div class="kpi-v">$18.3B</div><span class="badge up">+71% 有机</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">三分部齐增</div></div>
+    <div class="kpi"><div class="kpi-l">RPO 积压订单</div><div class="kpi-v">$163B</div><span class="badge up">+$13B QoQ</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">含 Prolec · 收入能见度</div></div>
+    <div class="kpi"><div class="kpi-l">自由现金流</div><div class="kpi-v">$4,791M</div><span class="badge up">单季超 2025 全年</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">客户预付款 +$5.6B 助推</div></div>
+  </div>
+</div>
+
+<!-- ═══ 看穿桥接 高亮框 ═══ -->
+<div class="section">
+  <div class="stitle">本季必看 · 两个"看穿"：GAAP 净利 vs 真实经营、单季 FCF vs 常态 FCF</div>
+  <div class="cmt">
+    <p><strong>GE Vernova 的这份财报有两个必须"看穿"的地方，看不穿就会把它读成一台"净利率 51%、EPS 暴增 19 倍"的印钞机——那是错觉。</strong></p>
+    <p><strong>看穿一：GAAP 净利 $4.75B，94% 是一次性 M&A 收益，不是经营。</strong> Q1 GAAP 净利 $4,750M、摊薄 EPS $17.44 看着惊人，但其中 <span class="warn-t">$4.5B 来自并购净收益</span>——主要是收购 Prolec GE 剩余 50% 股权时对原有股权的重估收益 $3,992M，加上出售 Proficy 软件的 $330M。剔除后，真正反映盈利的是<span class="hl-t">调整后 EBITDA $896M（+96%）、利润率 9.6%</span>；而 GAAP 营业利润只有 $179M（因为一次性收益记在营业利润线以下的 Other income）。公司官方<strong>不披露 Non-GAAP 每股收益</strong>，其 Non-GAAP 指标只有有机营收、调整后 EBITDA 及利润率、自由现金流四项。读 GEV，请把 GAAP 净利放一边，盯调整后 EBITDA。</p>
+    <div class="tbl-wrap" style="margin:14px 0;">
+      <table class="tbl">
+        <tr><th>调整后 EBITDA 对账（$M）</th><th>Q1 2026</th><th>说明</th></tr>
+        <tr><td>GAAP 净利（起点）</td><td>4,750</td><td>含一次性收益</td></tr>
+        <tr><td><span class="warn-t">减：业务权益处置净收益</span></td><td><span class="warn-t">(4,494)</span></td><td>Prolec 重估 3,992 + Proficy 330 等</td></tr>
+        <tr><td>加：所得税</td><td>344</td><td>还原至税前</td></tr>
+        <tr><td>加：折旧摊销</td><td>341</td><td>非现金</td></tr>
+        <tr><td>加：重组及其他</td><td>94</td><td>—</td></tr>
+        <tr><td>加：分拆费用</td><td>23</td><td>—</td></tr>
+        <tr><td>减：非经营收益 / 利息等</td><td>(161)</td><td>净额还原</td></tr>
+        <tr class="hl"><td><strong>调整后 EBITDA</strong></td><td><strong>896</strong></td><td><strong>利润率 9.6%（去年 5.7%）</strong></td></tr>
+      </table>
+    </div>
+    <p><strong>看穿二：单季 FCF $4.79B 超过 2025 全年，但别当常态。</strong> Q1 自由现金流 $4,791M（OCF $5,188M − Capex $397M），单季就超过 2025 全年 FCF（约 $3.7B），惊艳。但驱动它的一大块是<span class="warn-t">订单强劲带来的客户预付款 / 合同负债增加 +$5.6B</span>——GEV 是"先收钱、后造货"的负营运资本生意，合同负债已达 $31.8B。这部分现金是"随订单增长借来的"，一旦订单增速放缓就会回摆。<strong>全年 FCF 指引 $6.5-7.5B 才是锚，别用单季 $4.79B 年化。</strong>公司自己也把全年 FCF 指引从 $5.0-5.5B 上调至 $6.5-7.5B——这才是可持续口径。</p>
+  </div>
+</div>
+
+<!-- ═══ 趋势图 ═══ -->
+<div class="section">
+  <div class="stitle">关键指标趋势</div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">总营收（$B）& YoY 增速（近 5 季）</div><div class="cwrap"><canvas id="chartRev"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">调整后 EBITDA 利润率趋势（%，近 5 季）</div><div class="cwrap"><canvas id="chartMargin"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">Q1 2026 三分部营收拆分（$M）</div><div class="cwrap"><canvas id="chartSegment"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">调整后 EBITDA（$M · 近 5 季 · 核心盈利口径）</div><div class="cwrap"><canvas id="chartEbitda"></canvas></div></div>
+  </div>
+  <p style="margin-top:4px; font-size:12px; color:var(--text3); line-height:1.6;">说明：第 4 张用<strong>调整后 EBITDA（$M）</strong>而非 GAAP EPS 柱——因 Q4'25 与 Q1'26 的 GAAP EPS（$13.39 / $17.44）被一次性税收利益与 Prolec 重估收益严重推高，柱状图会完全失真、失去可比性；调整后 EBITDA 是公司唯一披露的核心盈利指标，更能反映真实经营轨迹。营收有季节性（Q1 最弱、Q4 最强）。</p>
+</div>
+
+<!-- ═══ 桑基图 ═══ -->
+<div class="section">
+  <div class="stitle">Q1 2026 利润流向桑基图（$M）</div>
+  <div class="ccard">
+    <div id="sankey" style="width:100%;height:480px;"></div>
+    <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">说明：总营收 $9,339 → 营业成本 $7,558 + 毛利 $1,781 → 期间费用 $1,602 + 营业利润 $179。关键看点：<strong>税前利润 $5,094 = 营业利润 $179 + M&A 及非经营净收益 $4,915</strong>——即 GAAP 净利 $4,750 的绝大部分（约 94%）来自 Prolec 重估等一次性收益，而非经营。这张图一眼说清"为什么 GEV 的 GAAP 净利不能当经营盈利看"。真实经营口径请看调整后 EBITDA $896M（利润率 9.6%）。流量已闭合平衡。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 1 ═══ -->
+<div class="section">
+  <div class="stitle">模块 1 · 公司概览与背景</div>
+  <div class="cmt">
+    <p><strong>GE Vernova Inc.</strong>（NYSE: GEV），总部马萨诸塞州剑桥。由通用电气（GE）的电力、可再生能源与数字业务合并组成，<strong>2024-04-02 从 GE 分拆独立上市</strong>——历史很短，仅两年出头。财年 = 日历年（12 月 31 日止）。约 8.5 万名员工、覆盖约 100 个国家。名字里的 "Vernova" = verde（绿色）+ nova（新星），指向能源转型的定位。</p>
+
+    <p><strong>核心叙事</strong>：GE Vernova 是<span class="hl-t">全球电力设备三巨头之一（对垒西门子能源 Siemens Energy、三菱重工 Mitsubishi），做发电与输配电两端的重型装备 + 长期服务合同</span>。它的时运在 2024-2026 被一个巨大的外生变量点燃——<strong>AI 数据中心的用电需求</strong>：算力爆炸让电力成为最稀缺的资源，燃气轮机产能被抢购到 2030 年售罄，电网变压器供不应求。这把一家"传统能源装备公司"变成了"AI 时代的卖铲人"。全球电力需求进入十年结构性上行，GEV 是最直接的受益标的之一。</p>
+
+    <p><strong>三大分部（自 2026-01-01 起重新划分归属）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>Power（电力）</strong>——燃气轮机（重型 + 航改）、核能、水电。Q1 营收 $4,971M（+12%），分部 EBITDA $811M、利润率 16.3%。是盈利基本盘 + 超级周期的核心引擎。</li>
+      <li><strong>Electrification（电气化）</strong>——电网设备、变压器、开关、电力电子。Q1 营收 $2,959M（+61%，含 Prolec 并表），分部 EBITDA $528M、利润率 17.8%。增速最快、被数据中心电网需求拉动。</li>
+      <li><strong>Wind（风电）</strong>——陆上 + 海上风机。Q1 营收 $1,432M（-23%），分部 EBITDA <span class="warn-t">-$382M（亏损扩大）</span>。三条腿里唯一在流血的一条。</li>
+    </ul>
+
+    <p><strong>股权与资本事件</strong>：分拆时约 2.74 亿股，至今因回购缓降至 <strong>2.687 亿股</strong>（2026-03-31）。2026-02 完成收购 Prolec GE 剩余 50% 股权（变压器龙头），并表推高商誉 + 无形资产、贡献重估收益 $3,992M；同期出售 Proficy 软件给 TPG（$0.6B）。信用评级 <strong>BBB（S&P）/ BBB+（Fitch）</strong>，2025-12 双双上调至投资级正面。</p>
+
+    <p><strong>能力圈检验</strong>：生意本身清晰——卖发电/输电设备 + 收服务费，看得懂。但有两块需要谨慎：<span class="warn-t">(1) 上市历史仅两年，缺乏完整周期数据，GAAP 盈利被一连串一次性项（分拆费用、税收利益、M&A 重估）搅得极难读；(2) 这是一个由 AI 资本开支驱动的"超级周期"，周期性行业的估值最忌用峰值外推——一旦数据中心投资退潮或燃机产能过度扩张，供需会反转</span>。这决定了 GEV 是一门好生意，但不是一门可以"闭眼买在任何价格"的生意。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 2 ═══ -->
+<div class="section">
+  <div class="stitle">模块 2 · 管理层评估</div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>Scott Strazik · CEO（2024 分拆至今）</h4>
+      <p>GEV 独立上市以来的掌舵人，此前在 GE 内部长期执掌电力业务。Strazik 把分拆后的 GEV 定位为"能源转型 + 电力可靠性"的双主线执行者，抓住 AI 电力需求这个历史级窗口——<span class="hl-t">燃机订单排到 2030、机位预留（slots）从 83GW 拉到 100GW、目标年底至少 110GW</span>，同时用 Prolec 收购把电网/变压器护城河做厚。海图判断：这是一位在正确的时间、被正确的行业风口托举、且执行到位的经理人。唯一需要观察的是——超级周期的掌舵最容易的是顺风时，逆风时的资本纪律才见真章。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B+</div>
+    <div class="bd">
+      <h4>资本配置 · 分拆两年的成绩单尚可，但择时开始现瑕疵</h4>
+      <p>
+      <strong>股息</strong>：2024Q4 首派 $0.25/季，2025-12 <strong>翻倍至 $0.50/季</strong>（全年化 $2.00）——但股息率仅 0.18%，象征性。<br>
+      <strong>回购</strong>：授权从 $6B（2024Q4）上调至 <strong>$10B（2025-12）</strong>，累计已回购约 $4.6B，剩余约 $5.4B。<br>
+      <strong>M&A</strong>：Prolec 收购（$5.275B 收剩余 50%）强化电网龙头地位，逻辑清晰、并表即增利。信用评级获上调，说明资产负债表管理稳健。<br>
+      <span class="warn-t">一个纪律瑕疵</span>：回购均价从 2025 年的约 $406 一路买到 2026 Q1 的约 $720，如今股价 $1,093——<strong>在周期上行 + 股价快速走高时越买越贵</strong>，择时纪律有待观察。对一个超级周期标的，这是需要留心的信号。
+      </p>
+    </div>
+  </div>
+
+  <div class="cmt">
+    <p><strong>长期主义测试</strong>：✅ 管理层以"电力可靠性 + 能源转型"的十年结构性趋势为主线，Prolec 并购、$6B 资本开支 + $5B 研发承诺（2025-28）都指向长期能力建设，而非短期财报博弈。<strong>坦诚度</strong>：电话会对 Wind 的亏损（-$382M）、关税冲击、海上合同亏损主动披露，不回避利空。<strong>利益绑定</strong>：分拆两年，管理层持股比例不高（新独立公司常态），薪酬与调整后 EBITDA / FCF 挂钩。<strong>兑现记录</strong>：2025-12 给的 2028 展望（营收 $56B、EBITDA 利润率 20%）与 2026-04 上调的全年指引方向一致，短期兑现度良好——但独立时间太短，尚无法验证跨周期的兑现能力。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 3 ═══ -->
+<div class="section">
+  <div class="stitle">模块 3 · 商业模式深度解析</div>
+  <div class="cmt">
+    <p><strong>海图"一句话测试"</strong>：<span class="hl-t">GE Vernova 卖发电和输电的重型装备（燃气轮机、变压器、风机），先收客户巨额预付款再造货，装机之后再靠几十年的维护服务合同持续收费——本质是一台被 AI 用电需求点燃的"设备 + 服务年金"复利机器。</span></p>
+
+    <p><strong>两段式盈利模型</strong>：GEV 的钱分两段赚。第一段是<strong>设备（Equipment，Q1 占 56%）</strong>——卖一台燃机/一套电网设备，毛利率相对薄、但确立了"安装基础"；第二段是<strong>服务（Services，Q1 占 44%）</strong>——设备一旦装机，就绑定几十年的备件、检修、升级合同，<span class="hl-t">毛利率高、现金流稳、粘性极强</span>。真正的护城河在服务：安装基础越大，未来服务年金越厚。这与航空发动机"卖发动机不赚钱、赚后市场服务钱"的逻辑一脉相承。</p>
+
+    <p><strong>Q1 2026 分部模型</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>分部</th><th>营收</th><th>YoY</th><th>分部 EBITDA</th><th>利润率</th><th>驱动</th></tr>
+        <tr class="hl"><td><strong>Power 电力</strong></td><td>$4,971M</td><td>+12%（有机 +10%）</td><td>$811M</td><td>16.3%</td><td>燃机定价 + 交付 + 核能服务</td></tr>
+        <tr class="hl"><td><strong>Electrification 电气化</strong></td><td>$2,959M</td><td>+61%（有机 +29%）</td><td>$528M</td><td>17.8%</td><td>数据中心电网 + Prolec 并表</td></tr>
+        <tr class="hl"><td><strong>Wind 风电</strong></td><td>$1,432M</td><td>-23%（有机 -25%）</td><td>-$382M</td><td>-26.7%</td><td>陆上交付下滑 + 海上合同亏损</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:10px; font-size:12px; color:var(--text3);">注：三分部营收合计 $9,362M，扣除分部间抵消 $32M 后 = 总营收 $9,339M。Electrification +61% 中含 Prolec 并购的无机贡献，有机口径 +29%。</p>
+
+    <p style="margin-top:14px;"><strong>负营运资本 = 现金奶牛</strong>：GEV 是"先收钱、后造货"的生意——大额设备订单要求客户预付款，形成<span class="hl-t">合同负债 $31.8B（环比 +$6.0B）</span>。这让 GEV 在订单高增长期拥有极强的负营运资本现金流（Q1 FCF $4.79B 的核心来源）。<strong>但这是一把双刃剑</strong>：订单增长时它是现金奶牛，订单一旦放缓，预付款流入减少甚至回吐，现金流会明显回摆。</p>
+
+    <p><strong>议价能力</strong>：燃气轮机端<strong>强</strong>——全球三寡头 + 产能售罄至 2030，卖方市场，定价权在 GEV 一侧；电网/变压器端<strong>强</strong>——供不应求 + Prolec 龙头地位；风电端<strong>弱</strong>——产品趋于同质化、受关税与政策补贴摆布，是被动接受价格的一端。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 4 ═══ -->
+<div class="section">
+  <div class="stitle">模块 4 · 经济护城河分析（5 维）</div>
+  <div class="moat-grid">
+    <div class="moat-card wide">
+      <h5>1. 有效规模 / 寡头格局</h5>
+      <span class="moat-rate">宽</span>
+      <p>全球重型燃气轮机本质是三寡头（GEV / 西门子能源 / 三菱），资本 + 技术 + 认证壁垒极高，新进入者几无空间。<strong>趋势：稳定至加宽</strong>（超级周期强化在位者）。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>2. 转换成本 / 服务粘性</h5>
+      <span class="moat-rate">宽</span>
+      <p>燃机/电网设备装机后绑定数十年备件与检修合同，客户切换成本极高。安装基础 = 未来服务年金。<strong>趋势：加宽</strong>（新装机持续扩大服务基座）。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>3. 无形资产 / 技术专利</h5>
+      <span class="moat-rate">中-宽</span>
+      <p>重型燃机热效率技术、核能牌照、电网工程 know-how + Prolec 变压器技术是硬壁垒。<span class="warn-t">但风电技术已相对同质化</span>。<strong>趋势：分化</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>4. 成本 / 规模优势</h5>
+      <span class="moat-rate">中</span>
+      <p>规模带来采购与制造效率，但重型装备是重资产、长周期、受供应链与关税冲击（Wind 已被关税拖累）。<strong>趋势：受成本压力波动</strong>。</p>
+    </div>
+    <div class="moat-card none">
+      <h5>5. 网络效应</h5>
+      <span class="moat-rate">无-弱</span>
+      <p>装备制造 + 服务生意几乎没有典型网络效应——客户增多不会让产品对下一个客户更有价值。这不是 GEV 的护城河来源。<strong>趋势：不适用</strong>。</p>
+    </div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>10 年后护城河会更宽还是更窄？</strong> <span class="hl-t">核心的燃机寡头 + 服务粘性护城河会更宽</span>——每一台新装机都在扩大未来几十年的服务年金基座，安装基础是最硬的护城河。电网/变压器端受益于电气化长期趋势 + Prolec 龙头地位，也在加宽。<span class="warn-t">但两个变量压制护城河的确定性</span>：(1) Wind 是拖累项，技术同质化 + 政策/关税敏感，短期难成护城河；(2) 超级周期本身是把双刃剑——它现在托举估值，但周期性行业的护城河"宽度"会随供需摆动，若燃机产能在 2028-2030 集中释放后需求见顶，定价权与利润率都会回落。<strong>护城河是真的，但它的"当前宽度"里含了周期红利，不能全额外推。</strong></p>
+    <p><strong>定价权</strong>：燃机与电网端强（卖方市场 + 售罄至 2030），风电端弱。综合定价权处于周期高位。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 5 ═══ -->
+<div class="section">
+  <div class="stitle">模块 5 · 财务深度分析</div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 12px 0; font-family: 'Segoe UI',sans-serif;">5.1 关键比率（Q1 2026 vs Q1 2025）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>指标</th><th>Q1 2025</th><th>Q1 2026</th><th>变化</th><th>含义</th></tr>
+      <tr><td>总营收增速</td><td>+15%</td><td>+16%（有机 +7%）</td><td><span class="badge up">强</span></td><td>含 Prolec 无机贡献</td></tr>
+      <tr><td>毛利率</td><td>18.3%</td><td>19.1%</td><td><span class="badge up">+0.8pp</span></td><td>定价与结构改善</td></tr>
+      <tr><td>调整后 EBITDA 利润率</td><td>5.7%</td><td>9.6%</td><td><span class="badge up">+390bps</span></td><td>核心盈利大幅改善</td></tr>
+      <tr><td>调整后 EBITDA（$M）</td><td>457</td><td>896</td><td><span class="badge up">+96%</span></td><td>Power + Electrification 拉动</td></tr>
+      <tr><td>GAAP 营业利润率</td><td>0.5%</td><td>1.9%</td><td><span class="badge nt">失真</span></td><td>一次性收益记营业线以下</td></tr>
+      <tr><td>摊薄加权股数（M）</td><td>279</td><td>272</td><td><span class="badge up">-2.5%</span></td><td>持续回购缩股</td></tr>
+      <tr><td>订单（$B）</td><td>10.7*</td><td>18.3</td><td><span class="badge up">+71% 有机</span></td><td>三分部齐增</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:8px; font-size:12px; color:var(--text3);">*Q1 2025 订单为三分部合计近似值。ROE / ROIC 本季因 GAAP 净利含 $4.5B 一次性收益而严重失真（表观 ROE 极高、无参考意义），故不单列——请以调整后 EBITDA 与 FCF 判断真实盈利能力。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.2 资产负债健康度（2026-03-31 末 · $M）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>2025-12-31</th><th>2026-03-31</th><th>说明</th></tr>
+      <tr><td>现金及等价物（含受限）</td><td>8,848</td><td>10,172</td><td>与新闻稿 "$10.2B" 一致</td></tr>
+      <tr class="hl"><td>短期借款（当期到期部分）</td><td>—</td><td>51</td><td>长债及融资租赁当期到期</td></tr>
+      <tr class="hl"><td>长期借款（非流动）</td><td>265</td><td>2,806</td><td>2026-02 发 $2.6B 高级票据</td></tr>
+      <tr class="hl"><td>有息负债合计</td><td>—</td><td>2,857</td><td>逐项核对（$51M + $2,806M）</td></tr>
+      <tr class="hl"><td><strong>真实净现金</strong></td><td>—</td><td><strong>+7,315</strong></td><td>现金 $10,172 − 有息债务 $2,857</td></tr>
+      <tr><td>经营租赁负债</td><td>843</td><td>898</td><td>另计 · 扣除后净现金约 +$6.4B</td></tr>
+      <tr><td>合同负债 + 递延收入</td><td>25,774</td><td>31,830</td><td>客户预付款 · 现金流核心来源</td></tr>
+      <tr><td>存货</td><td>—</td><td>11,919</td><td>在造设备</td></tr>
+      <tr><td>商誉</td><td>4,439</td><td>9,855</td><td>Prolec 并购推高</td></tr>
+      <tr><td>无形资产（净）</td><td>727</td><td>4,543</td><td>Prolec 并购推高</td></tr>
+      <tr><td>总资产</td><td>63,016</td><td>75,612</td><td>—</td></tr>
+      <tr><td>股东权益（合计）</td><td>12,296</td><td>15,065</td><td>归属 GEV $13,922M</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">✅ <strong>净现金铁律核对</strong>：GEV 有息负债仅 $2,857M（当期到期 $51M + 长期借款 $2,806M，已逐项核对）< 现金 $10,172M，<strong>真实净现金 +$7,315M</strong>（若再扣经营租赁负债 $898M，约 +$6.4B）。$3B 循环信贷 + $3B 备用信用证额度均<strong>未动用（$0）</strong>。<span class="hl-t">$31.8B 的合同负债（客户预付款）是理解 GEV 负营运资本与强现金流的钥匙</span>——它用客户的钱造客户的货，几乎不占用自有资金。商誉 + 无形资产因 Prolec 并购从约 $5.2B 跳升至 $14.4B（占总资产约 19%），是 M&A 的会计印记，需关注未来减值风险。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.3 现金流量（Q1 2026 单季 vs Q1 2025）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>Q1 2025</th><th>Q1 2026</th><th>说明</th></tr>
+      <tr><td>经营活动现金流（OCF）</td><td>$1,161M</td><td>$5,188M</td><td>客户预付款 +$5.6B 助推</td></tr>
+      <tr><td>- Capex（PP&E + 内部软件）</td><td>$186M</td><td>$397M</td><td>现金流量表官方 line item</td></tr>
+      <tr class="hl"><td>自由现金流（FCF）</td><td>$975M</td><td>$4,791M</td><td>单季超 2025 全年（约 $3.7B）</td></tr>
+      <tr><td>收购 Prolec 付现（净）</td><td>—</td><td>-$4,886M</td><td>投资活动主要流出</td></tr>
+      <tr><td>新发债务</td><td>—</td><td>+$2,567M</td><td>部分为 Prolec 融资</td></tr>
+      <tr><td>股份回购</td><td>—</td><td>-$1,278M</td><td>约 180 万股 @ 约 $720</td></tr>
+      <tr><td>股息支付</td><td>—</td><td>-$137M</td><td>$0.50/股</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">⚠️ <strong>现金流质量提示</strong>：Q1 FCF $4.79B 极为强劲，但其中一大块由营运资本（客户预付款 / 合同负债 +$5.6B）贡献，属"随订单增长借来的现金流"，<strong>不可用单季数据年化</strong>。真正可持续的口径是公司上调后的全年 FCF 指引 $6.5-7.5B（对应 FCF Yield 仅约 2.4%）。2025-28 累计 FCF 目标至少 $24B，隐含 2026-28 年均约 $6.7B。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.4 所有者盈余（价值投资口径）</h3>
+  <div class="dcf-note">
+    <p><strong>所有者盈余 = 净利润 + 折旧摊销 + 非现金费用 − 维护性 Capex ± 营运资金变动</strong></p>
+    <p>GEV 的 GAAP 净利被一次性 M&A 收益污染，直接套公式会得到虚高的所有者盈余。更稳健的近似：以<strong>可持续 FCF（全年指引中值约 $7B）</strong>作为所有者盈余的锚——但要扣掉其中约 $5.6B 单季的客户预付款贡献属"周期性 + 一次性"的成分。<span class="warn-t">剔除营运资本红利后的"正常化所有者盈余"更接近调整后 EBITDA $896M × 4 ≈ $3.6B 扣除税/利息/维护 Capex 后的量级，约 $2.5-3.5B/年区间</span>。</p>
+    <p><strong>正常化所有者盈余收益率 ≈ $3B（正常化）/ 市值 $294B ≈ 1.0%</strong>——即便用乐观的全年 FCF 指引 $7B，收益率也仅约 2.4%。<span class="warn-t">这是一个"顶级景气 + 极端估值"的收益率</span>：1-2.4% 的所有者盈余收益率，对一个含大量周期红利的重型装备公司，意味着<strong>市场已把未来多年的超级周期全额定价，几乎没有安全边际</strong>。GEV 的问题从来不是生意好不好，而是价格是否已透支了整个周期。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 6 ═══ -->
+<div class="section">
+  <div class="stitle">模块 6 · 电话会分析（Q1 2026 + 前 2 季度）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">Q1 2026 电话会（2026-04-22）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"订单 $18.3B（+71% 有机），三分部齐增；Electrification 单季拿下 $2.4B 数据中心设备订单，超过 2025 全年；积压订单环比 +$13B 至 $163B"</div><div class="ec-note">book-to-bill（Electrification）约 2.5，设备积压订单 $38.6B（+75% YoY）。订单强度是本季最硬的多头证据，给了未来 2-3 年罕见的收入能见度。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"燃机积压 + 机位预留由 83GW 升至 100GW，目标年底至少 110GW；本季签约 21GW 新增燃机合同（19GW 机位预留 + 2GW 订单）"</div><div class="ec-note">行业报道燃机产能已售罄至 2030 年（AI/数据中心电力需求）——这是 GEV 超级周期叙事的核心支柱。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"上调 FY2026 全年指引：营收 $44.5-45.5B、调整后 EBITDA 利润率 12-14%、FCF $6.5-7.5B"</div><div class="ec-note">三项指标全面上调（原营收 $44-45B、利润率 11-13%、FCF $5.0-5.5B）。FCF 上调幅度最大，反映订单预付款与更强 EBITDA 的双重驱动。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"单季 FCF $4.8B（超 2025 全年），完成 Prolec GE 收购（重估收益约 $4B）"</div><div class="ec-note">FCF 亮眼但由客户预付款 +$5.6B 驱动，属周期性；Prolec 重估收益是一次性、非经营。管理层口径清晰，未粉饰为经营盈利。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"Wind 持续拖累：营收 -23%，分部 EBITDA 亏损扩大至 -$382M，受陆上交付下滑、关税与海上合同亏损影响"</div><div class="ec-note">全年 Wind 指引仍亏约 $400M。三条腿里两条狂奔、一条流血——Wind 是 GEV 故事里最不确定的变量。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q4 2025 电话会（2026-01-28）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"创纪录单季营收 $10.96B，调整后 EBITDA 利润率 10.6%；FY2025 订单 $59.3B（+34% 有机），设备积压利润率同比 +6 点"</div><div class="ec-note">积压订单的利润率改善，意味着未来交付的盈利能力在提升——比订单数量更重要的质量信号。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"上调 2028 多年展望：营收 $56B（原 $52B）、调整后 EBITDA 利润率 20%、2025-28 累计 FCF ≥$24B（含 Prolec）；股息翻倍至 $0.50/季；回购授权由 $6B 上调至 $10B；S&P/Fitch 上调评级至 BBB/BBB+"</div><div class="ec-note">资本返还 + 评级上调 + 长期展望上修，一次性给足多头弹药。但 2028 利润率 20% 是一个需要超级周期持续兑现的高目标。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"Q4 净利 $3.67B / EPS $13.39 主要由大额递延税收益推高（一次性），非经营性"</div><div class="ec-note">又一个"GAAP 净利不能当经营看"的季度——这是 GEV 分拆早期的常态，读财报必须穿透。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q3 2025 电话会（2025-10-22）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"营收 $9.97B（+12%），调整后 EBITDA 利润率 8.1%（+540bps YoY）；FCF $732M 转正；宣布收购 Prolec 剩余 50% 股权（$5.275B）"</div><div class="ec-note">Electrification 全年有机增长上调至约 25%；Prolec 收购强化电网龙头。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"Wind 有机营收下降高个位数、约 $400M 分部 EBITDA 亏损（区间下沿）；本季 1 起工亡事故"</div><div class="ec-note">Wind 的结构性亏损贯穿三个季度，是持续的利空主线。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">指引兑现度追踪</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>历史指引</th><th>Q1 2026 进展</th><th>评价</th></tr>
+      <tr><td>FY2026 营收 $44-45B</td><td>上调至 $44.5-45.5B</td><td><span class="badge up">上调</span></td></tr>
+      <tr><td>FY2026 调整后 EBITDA 利润率 11-13%</td><td>上调至 12-14%</td><td><span class="badge up">上调</span></td></tr>
+      <tr><td>FY2026 FCF $5.0-5.5B</td><td>上调至 $6.5-7.5B</td><td><span class="badge up">大幅上调</span></td></tr>
+      <tr><td>燃机积压 + 机位预留 100GW 目标</td><td>已达 100GW，目标年底 ≥110GW</td><td><span class="badge up">超预期</span></td></tr>
+      <tr><td>Wind 全年分部 EBITDA</td><td>仍指引亏约 $400M</td><td><span class="badge dn">持续利空</span></td></tr>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>信号汇总</strong>：Q1 2026 是 GEV "<span class="hl-t">订单爆发 + 全面上调指引 + 燃机售罄叙事强化</span>"的强势一季。三项全年指引齐上调、FCF 指引上调幅度最大、燃机机位预留冲到 100GW，超级周期的基本面证据链非常完整。<span class="warn-t">唯二的裂缝</span>：(1) Wind 亏损扩大且全年指引仍亏 $400M；(2) 亮眼的 GAAP 净利与单季 FCF 都含大量一次性/周期性成分，读者极易高估其经营盈利。<strong>基本面没有问题——问题在估值：市场已经把这份完整的多头证据链全额定价，甚至定价到了"超级周期永不落幕"。</strong></p>
+  </div>
+</div>
+
+<!-- ═══ 模块 7 ═══ -->
+<div class="section">
+  <div class="stitle">模块 7 · 多模型估值（8 种方法）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">7.1 估值汇总表（独立估值 · 不锚定现价 · USD）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>估值方法</th><th>每股公允价</th><th>假设要点</th><th>权重</th></tr>
+      <tr><td>1. 相对估值（P/E）</td><td>$778</td><td>FY2027 经营 EPS ~$24.3 × 32x（优质工业周期股合理倍数，市场现付 45x）</td><td>22%</td></tr>
+      <tr><td>2. DCF（基准）</td><td>$837</td><td>5 年 FCF $7B→$13B，WACC 8.5%，永续 3.5%（超级周期给溢价）</td><td>28%</td></tr>
+      <tr><td>3. 所有者盈余收益率</td><td>$815</td><td>正常化 FCF $7B / 3.2% 目标收益率 = $219B ÷ 268.7M 股</td><td>12%</td></tr>
+      <tr><td>4. PEG</td><td>偏贵</td><td>Forward P/E 45x ÷ 可持续增速 ~22% = PEG 2.0（优质但极贵）</td><td>8%</td></tr>
+      <tr><td>5. DDM</td><td>参考意义有限</td><td>DPS $2.00、收益率 0.18%，股息太小无意义</td><td>0%</td></tr>
+      <tr><td>6. NAV</td><td>不适用</td><td>非资产型公司（订单驱动的制造 + 服务，无地产/金融属性）</td><td>0%</td></tr>
+      <tr><td>7. 反向 DCF</td><td>当前价隐含 FCF 长期 <strong>~16-18%</strong> 增长</td><td>$1,093 隐含市场认为 FCF 十年复合 16-18% + 利润率冲 20% + 超级周期延续过 2030——priced for perfection</td><td>10%</td></tr>
+      <tr><td>8. SOTP 分部加总</td><td>$720</td><td>Power 26x×$3.9B + Electrification 30x×$2.7B + Wind ~0 + 净现金 $7.3B</td><td>20%</td></tr>
+      <tr class="hl"><td><strong>加权公允价中位数</strong></td><td><strong>~$790</strong></td><td>估值区间 $650（保守）– $900（乐观）· 中位 ~$790</td><td>100%</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.8;"><strong>与现价对照</strong>：当前 $1,093 vs 加权公允 ~$790 · <span class="warn-t">溢价约 +38%（无安全边际）</span>——不仅达不到价值投资 25% 安全边际门槛，反而是<strong>倒挂溢价</strong>。GEV 是一门 A- 级的好生意，但当前价格已把整个超级周期、燃机售罄至 2030、利润率冲上 20% 的乐观剧本全额定价。反向 DCF 显示市场隐含 FCF 长期 16-18% 复合增长——对一个含大量周期红利的重型装备公司，这是"priced for perfection"的定价，任何一环打折（订单放缓 / AI 资本开支退潮 / Wind 恶化 / 同业杀估值）都会触发多重压缩。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.2 P/E 多档透视表（GAAP 与经营口径差异巨大 · 必做）</h3>
+  <p style="margin-bottom:10px; font-size:13px; color:var(--text2);">GEV 的 GAAP 盈利被一连串一次性项（Prolec 重估、递延税利益、分拆费用）严重污染，单一 TTM P/E 会误导。多档透视，并标注哪一档"最可信"：</p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>计算口径</th><th>EPS / 指标</th><th>P/E（基于 $1,093）</th><th>读数说明</th></tr>
+      <tr><td>TTM GAAP P/E</td><td>EPS ~$34.3</td><td>~31x</td><td><span class="warn-t">含 Q4'25 税收利益 + Q1'26 Prolec 重估等一次性 · 严重失真 · 不可用</span></td></tr>
+      <tr><td>Q1'26 经营 EPS 年化</td><td>~$1.98 × 4 ≈ $7.9</td><td>~138x</td><td>季节性最弱季年化，偏高失真</td></tr>
+      <tr><td>FY2026 经营 EPS 共识</td><td>~$14.3-15.0</td><td>~73x</td><td>本财年在途（街预期 / Simply Wall St）</td></tr>
+      <tr class="hl"><td><strong>Forward P/E（FY2027 经营 EPS ~$24.3）</strong></td><td><strong>~$24.3</strong></td><td><strong>~45x</strong></td><td>最可信档 · 市场惯用</td></tr>
+      <tr><td>EV/调整后 EBITDA（FY2026 指引）</td><td>EBITDA ~$5.85B</td><td>~49x</td><td>EV $287B / 指引中值</td></tr>
+      <tr><td>EV/调整后 EBITDA（2028 目标）</td><td>EBITDA ~$11.2B</td><td>~26x</td><td>2028 目标 $56B × 20%</td></tr>
+      <tr><td>FCF Yield（FY2026 指引）</td><td>FCF ~$7B</td><td>~2.4%</td><td>顶级景气 + 极端估值</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3);"><strong>最可信档</strong>：Forward P/E ~45x（FY2027）/ ~73x（FY2026 经营）。<span class="warn-t">即便用 2028 年的目标 EBITDA，EV/EBITDA 仍高达 26x</span>——意味着市场把两年半后的乐观目标都提前打满了。同业对比（下方模块 8）：西门子能源约 30-36x、伊顿约 30-32x、GE 航空约 48x——<strong>GEV 的绝对估值在电力/工业装备板块里处于最贵的一档，且它比同业多了一条流血的 Wind 腿。</strong></p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.3 12 个月目标价（概率加权）</h3>
+  <div class="pgrid">
+    <div class="pbox"><div class="pl">悲观情景 · 35%</div><div class="pv pc">$660</div><div class="pn">超级周期证伪 / AI 资本开支退潮 / 同业杀估值 / Wind 恶化 · 倍数向公允回归<br>距现价 -40%</div></div>
+    <div class="pbox"><div class="pl">基准情景 · 40%</div><div class="pv pf">$850</div><div class="pn">指引兑现、燃机积压达 110GW，但 45x 高倍数向公允价温和压缩<br>距现价 -22%</div></div>
+    <div class="pbox"><div class="pl">乐观情景 · 25%</div><div class="pv ps">$1,180</div><div class="pn">AI 电力叙事延续 + 燃机定价/利润率超预期 + 动量维持高倍数<br>距现价 +8%</div></div>
+  </div>
+  <p style="font-size:13px; color:var(--text2);"><strong>概率加权目标价</strong>：35%×$660 + 40%×$850 + 25%×$1,180 = <strong>$866 ≈ $865</strong>（-21%）。<span class="warn-t">三种情景里有两种（合计 75% 概率）指向下行，且概率加权目标价低于现价 21%</span>——这不是一个应该在 $1,093 追高的位置。叠加 0.18% 象征性股息几乎不改变总回报。<strong>当前 $1,093 远高于机械首仓 $632（公允 × 80%），不在合理建仓窗口。</strong></p>
+</div>
+
+<!-- ═══ 模块 8 ═══ -->
+<div class="section">
+  <div class="stitle">模块 8 · 竞争与行业分析</div>
+  <div class="cmt">
+    <p><strong>全球电力设备格局</strong>：重型燃气轮机是 GEV / 西门子能源 / 三菱重工三寡头；电网/变压器端 GEV 靠 Prolec 强化龙头，与西门子、施耐德、伊顿、日立能源等竞争；风电端 GEV 与维斯塔斯（Vestas）、西门子歌美飒等厮杀，是最内卷的一段。真正托举整个行业的是外生变量——<span class="hl-t">AI 数据中心 + 电气化 + 再工业化带来的十年电力需求上行</span>。</p>
+
+    <p><strong>电力/工业装备同业对比（截至 2026 年中）</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>公司</th><th>Forward P/E</th><th>增长口径</th><th>核心评价</th></tr>
+        <tr class="hl"><td><strong>GE Vernova GEV</strong></td><td><strong>~45x（2027）/ ~73x（2026 经营）</strong></td><td>FY2026 营收 +17-19%（含 Prolec 约 $3B 无机）· 调整后 EBITDA 利润率 12-14%</td><td>燃机超级周期龙头 · 估值最贵 · 多一条流血 Wind 腿</td></tr>
+        <tr><td>西门子能源 ENR</td><td>~30-36x</td><td>可比营收增长 14-16% · 利润率（特殊项前）10-12%</td><td>最直接的燃机同业 · 估值更低</td></tr>
+        <tr><td>伊顿 ETN</td><td>~30-32x</td><td>2026 调整后 EPS 指引 $13.05-13.50（+11-12%）</td><td>电气化纯玩家 · 盈利更稳</td></tr>
+        <tr><td>GE 航空 GE</td><td>~48x</td><td>2026 EPS ~$7.48（+约 17% YoY）</td><td>同源分拆姊妹 · 后市场服务模式类似</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:10px; font-size:12px; color:var(--text3);">GEV vs 西门子能源是核心对照：两者都吃燃机超级周期，但 <strong>GEV 的 Forward P/E（45x）显著高于西门子能源（30-36x）</strong>，市场给 GEV 的溢价来自更强的美国本土数据中心敞口 + Prolec 电网龙头 + 更清晰的 2028 目标。但溢价也意味着更高的证伪风险——同一个超级周期，GEV 的估值容错空间最小。</p>
+
+    <p style="margin-top:14px;"><strong>波特五力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>新进入者：</strong>极低（燃机技术/认证/资本壁垒 + 三寡头格局几不可复制）</li>
+      <li><strong>替代品：</strong>中（太阳能 + 储能是发电侧替代，但无法提供燃机的基荷/调峰可靠性；核能是补充）</li>
+      <li><strong>供应商议价：</strong>中（供应链 + 关税压力已在 Wind 端显现）</li>
+      <li><strong>买家议价：</strong>燃机端低（卖方市场 + 售罄至 2030）/ 风电端高（同质化）</li>
+      <li><strong>同业竞争：</strong>燃机端中（三寡头理性）/ 风电端高（价格战 + 亏损）</li>
+    </ul>
+
+    <p><strong>颠覆与周期风险</strong>：GEV 面临的不是"体系外颠覆"，而是<span class="warn-t">周期风险</span>——若 AI 数据中心资本开支退潮、或三寡头在 2028-2030 集中扩产后燃机供需反转，当前的卖方市场定价权会回落。这是重型装备行业的宿命：最好的时候，估值最高；而周期顶部的高估值，最脆弱。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 9 ═══ -->
+<div class="section">
+  <div class="stitle">模块 9 · 技术面与 K 线分析（次要参考）</div>
+  <div class="cmt">
+    <p><strong>趋势</strong>：GEV 自 2024-04 分拆以来是市场最强的动量股之一，52 周从低点 $530.16 涨到高点 $1,195.94（翻倍以上），当前 $1,093 处于<span class="hl-t">历史高位区间、距高点约 -9%</span>。这是一只高波动、高动量、高估值的题材龙头，与 Visa 那种低波蓝筹截然不同。</p>
+
+    <p><strong>关键价位</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>阻力</strong>：$1,196（52 周高）/ $1,180（乐观情景）</li>
+      <li><strong>支撑</strong>：$1,054（7/10 盘中低）/ $850-870（公允价 + 基准目标区）/ $660（悲观目标）/ $530（52 周低）</li>
+    </ul>
+
+    <p><strong>近期异动</strong>：<span class="warn-t">7 月 7 日因同业（BNP Paribas）评论 / 竞品下调，单日回落约 6.5%</span>——这正是"高估值动量股脆弱性"的预演：一句评论就能砸出 6.5% 的波动，说明筹码在高位、情绪敏感。处于历史高位 + 动量透支，追涨的风险收益比很差。</p>
+
+    <p><strong>注意</strong>：GEV 的核心驱动是燃机订单 / 积压 / 数据中心需求 / 估值倍数，技术面是次要参考。对高动量高估值股，技术面的意义更多是"提示回调风险与情绪脆弱性"，而非"追涨信号"。价值投资者应等基本面 + 估值给出安全边际（回调至 $850 以下、理想 $632 附近），而非在 $1,093 追高。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 10 ═══ -->
+<div class="section">
+  <div class="stitle">模块 10 · 增长催化剂与前景展望</div>
+  <div class="cmt">
+    <p><strong>短期催化剂（未来 6 个月）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>约 2026-07-22 Q2 2026 财报</strong>——订单 / 积压是否延续、燃机机位预留是否向 110GW 推进、Wind 亏损是否收窄、指引是否再上调</li>
+      <li><strong>燃机机位预留冲 110GW</strong>——年底目标，是超级周期持续的最直接验证</li>
+      <li><strong>数据中心设备订单</strong>——Electrification 若延续 $2.4B/季的数据中心接单力度，是新叙事</li>
+      <li><strong>Prolec 并表贡献</strong>——首个完整季度的电网/变压器协同</li>
+    </ul>
+
+    <p><strong>长期展望（3-5 年）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>2028 目标</strong>——营收 $56B、调整后 EBITDA 利润率 20%、2025-28 累计 FCF ≥$24B（含 Prolec）· 若兑现，盈利体量将翻倍</li>
+      <li><strong>服务年金复利</strong>——每台新装机扩大未来几十年服务基座，是最确定的长期增长源</li>
+      <li><strong>电气化长坡</strong>——电网老化更新 + 数据中心 + 再工业化，Electrification 是结构性增长极</li>
+      <li><strong>Wind 修复</strong>——若海上合同亏损出清、陆上需求回暖，是从"流血"到"止血"的期权</li>
+      <li><strong>风险情景</strong>：AI 资本开支退潮 / 燃机产能过剩 / 关税 + 供应链 / Wind 亏损扩大</li>
+    </ul>
+
+    <p><strong>TAM 展望</strong>：全球电力需求进入十年结构性上行，发电 + 输配电 + 电网升级的可寻址市场以万亿美元计。核心问题不是增长空间，而是<span class="warn-t">当前 $1,093 的价格是否已把这条长坡的绝大部分收益提前兑现</span>——答案（见模块 7）是：是的，几乎全额定价。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 11 ═══ -->
+<div class="section">
+  <div class="stitle">模块 11 · 风险矩阵</div>
+  <div class="risk-grid">
+    <div class="risk-card r5"><h5>1. 极端估值 / 无安全边际</h5><span class="risk-score">5 / 5 极高</span><p>Forward P/E 45x（2027）/ 73x（2026 经营）/ 溢价现价约 +38% vs 公允 $790 · 反向 DCF 显示 priced for perfection · 任何证伪都触发多重压缩（7/7 单日 -6.5% 是预演）</p></div>
+    <div class="risk-card r4"><h5>2. 超级周期见顶 / AI 资本开支退潮</h5><span class="risk-score">4 / 5 高</span><p>估值全额依赖燃机售罄至 2030 + AI 用电持续 · 若数据中心投资退潮或三寡头集中扩产致供需反转，卖方市场定价权回落</p></div>
+    <div class="risk-card r4"><h5>3. GAAP 盈利质量 / 会计噪音</h5><span class="risk-score">4 / 5 高</span><p>Q1 净利 94% 为一次性 M&A 收益 · TTM GAAP P/E 失真 · 分拆两年缺完整周期 · 商誉+无形资产 $14.4B（Prolec）藏减值风险</p></div>
+    <div class="risk-card r3"><h5>4. Wind 结构性亏损</h5><span class="risk-score">3 / 5 中</span><p>营收 -23%、分部 EBITDA -$382M、全年指引仍亏约 $400M · 陆上交付下滑 + 关税 + 海上合同亏损 · 拖累整体利润率</p></div>
+    <div class="risk-card r3"><h5>5. 现金流可持续性</h5><span class="risk-score">3 / 5 中</span><p>单季 FCF $4.8B 由客户预付款 +$5.6B 驱动，属周期性 · 订单一旦放缓现金流回摆 · 正常化 FCF Yield 仅约 2.4%</p></div>
+    <div class="risk-card r2"><h5>6. 生意质量（机会）</h5><span class="risk-score">2 / 5 反向</span><p>燃机寡头 + 服务粘性 + 净现金 $7.3B + $163B 积压订单 + 上调指引 · 世界级景气生意本身是最大的基本面支撑</p></div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>3 个黑天鹅情景</strong>：</p>
+    <ol style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>AI 数据中心资本开支急刹车</strong>——概率 15%（3 年维度）· 燃机订单动量逆转 · 股价跌至 $550-650 · 超级周期叙事崩塌</li>
+      <li><strong>估值多重压缩（同业杀估值 + 增速降档）</strong>——概率 20% · 45x 向 25-30x 回归 · 股价跌至 $650-720 · 无基本面恶化也可发生</li>
+      <li><strong>Wind 亏损失控 + 大额商誉减值</strong>——概率 10% · 海上合同亏损扩大 + Prolec 商誉减值 · 拖累整体盈利与信心</li>
+    </ol>
+
+    <p style="margin-top:10px;"><strong>下行支撑</strong>：$163B 积压订单 + 净现金 $7.3B + 燃机寡头地位 + 上调后的指引构成基本面质量底。<span class="hl-t">$700-800 是较硬的估值支撑区</span>（公允价 ~$790 + Forward P/E 回落至 30x 一带），$530 的 52 周低点则是深度回调的极端参考。但要清楚：GEV 是高 beta 动量股，它的"底"由情绪与周期共同决定，波动幅度远大于蓝筹。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 12 ═══ -->
+<div class="section">
+  <div class="stitle">模块 12 · 股东回报分析</div>
+  <div class="cmt">
+    <p><strong>GE Vernova 分拆仅两年，股东回报是"从零起步、快速加码"的故事——但要区分授权、执行、含金量，以及"越买越贵"的择时问题。</strong>股息 2024Q4 才首派、回购 2024-12 才启动，历史很短。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 18px 0 10px; font-family: 'Segoe UI',sans-serif;">12.1 公司给了股东多少？</h3>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>期间</th><th>回购（执行）</th><th>回购股数 / 均价</th><th>股息</th><th>股东总回报</th></tr>
+        <tr><td>2024（分拆后 · 12 月启动）</td><td>约 $3M</td><td>约 0.8 万股</td><td>Q4 宣派（$0.25/季，2025-01 首付）</td><td>约 $3M</td></tr>
+        <tr><td>2025 全年</td><td>约 $3.3B</td><td>约 820 万股 @ 约 $406</td><td>约 $275M（$0.25×4）</td><td><strong>约 $3.6B</strong></td></tr>
+        <tr><td>2026 YTD（Q1）</td><td>约 $1.3B</td><td>约 180 万股 @ 约 $720</td><td>$137M（$0.50/季）</td><td><strong>约 $1.4B</strong></td></tr>
+        <tr class="hl"><td>累计（分拆至今）</td><td>约 $4.6B</td><td>—</td><td>股息年化升至 $2.00/股</td><td>—</td></tr>
+      </table>
+    </div>
+    <p style="font-size:13px; color: var(--text2); margin-top:8px"><strong>Trailing Shareholder Yield</strong>：2025 全年返还约 $3.58B（回购 $3.3B + 股息 $275M）/ 市值 $294B ≈ <strong>1.2%</strong>；若按 2026 Q1 的返还节奏（$1.4B/季）年化约 $5.6B，则约 <strong>1.9%</strong>。<span class="warn-t">派息率角度</span>：2025 股息 $275M / FY2025 FCF 约 $3.7B ≈ 7.4%，占比很小——GEV 是"象征性股息 + 加码回购"的结构，且股息率仅 0.18%，对总回报几乎无贡献。股东回报目前主要靠回购，量级相对市值仍偏小（trailing 仅 1.2%）。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.2 给的方式好不好？</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>库存股口径 · 含金量中等</strong>：GEV 回购的股份计入<strong>库存股（treasury stock）</strong>——库存股从 2025-12-31 的 840 万股升至 2026-03-31 的 1,020 万股（美股惯例，非注销）。好在流通股数确实在降：从 2024-12 的 2.74 亿降至 2026-03 的 <strong>2.687 亿</strong>，摊薄加权股数从 Q1'25 的 279M 降至 Q1'26 的 272M（-2.5%），说明回购在真实缩股、而非仅被 SBC 抵消——含金量中等偏上。</li>
+      <li><span class="warn-t">越买越贵 · 择时是硬伤</span>：回购均价从 2025 年的约 $406，到 2026 Q1 的约 $720，如今股价 $1,093——<strong>在周期上行 + 股价快速走高时逐季抬高回购成本</strong>。$406 的回购很划算，$720 的回购已偏贵，若继续在 $1,000+ 回购则是在周期高位为估值买单。这是资本配置纪律里最需警惕的信号。</li>
+      <li><strong>不是借债回购</strong>：2026-02 发债 $2.6B 主要用于 Prolec 收购融资，而非回购；回购由自有 FCF 支撑，净现金地位未因回购恶化——这一点是加分项。</li>
+    </ul>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.3 能不能继续给、给多少？</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>授权额度充裕</strong>：回购授权 2025-12 由 $6B 上调至 <strong>$10B</strong>，累计已用约 $4.6B，剩余约 <strong>$5.4B</strong>（约占市值 1.8%）· 执行历史短但真实（常年足额）</li>
+      <li><strong>股息刚翻倍、空间大</strong>：2025-12 季率翻倍至 $0.50（全年化 $2.00）· 派息占 FCF 仅约 8%，增息空间充足，但基数太低、短期对总回报无实质影响</li>
+      <li><strong>(股息 + 回购) / FCF 覆盖度</strong>：按 2026 返还节奏年化约 $5.6B / 全年 FCF 指引中值 $7B ≈ <strong>80%</strong>——<span class="hl-t">FCF 充分覆盖，可持续</span>（不像 Visa 那种返还超 FCF 靠发债的杠杆化返还）</li>
+      <li><strong>周期择时警示</strong>：现金流与利润处于超级周期高位，此时的高价回购若周期回落，事后看会是"在周期顶部为高估值买单"——建议管理层若继续回购，应更看重价格纪律</li>
+    </ul>
+    <p><strong>模块小结</strong>：<span class="hl-t">积极且可持续，但含金量中等、择时有瑕疵</span>——真实缩股（摊薄股数 -2.5%）+ 股息翻倍 + FCF 充分覆盖（80%）+ $5.4B 剩余授权 + 非借债回购，方向正确、可持续性好；但回购入库存股（非注销）、且在股价快速走高时越买越贵，周期择时纪律有待观察，且当前 trailing yield 仅 1.2%、量级相对市值仍偏小。定性为"积极加码但含金量中等"，尚未到 Visa 那种"教科书级"的高度。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 13 ═══ -->
+<div class="section">
+  <div class="stitle">模块 13 · 海图评分卡 + 投资决策</div>
+
+  <div class="scorecard">
+    <h3 style="font-size:15px; color:var(--text); margin-bottom: 16px; font-family: 'Segoe UI',sans-serif;">海图评分卡（6 维 A-D）</h3>
+    <div class="score-grid">
+      <div class="score-card"><div class="score-letter s-b">B+</div><div class="score-body"><h4>1. 生意可预测性</h4><p>$163B 积压给了罕见的收入能见度，但三分部轨迹分化（两涨一亏）、超级周期含周期性、分拆仅两年缺完整周期、GAAP 盈利被一次性项搅浑。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">A-</div><div class="score-body"><h4>2. 经济护城河</h4><p>燃机寡头 + 服务年金粘性（宽）+ Prolec 电网龙头。但风电无护城河，且当前护城河"宽度"含周期红利，不能全额外推。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">A-</div><div class="score-body"><h4>3. 管理层质量</h4><p>Strazik 抓住 AI 电力窗口、Prolec 增利并购、上调指引、评级上调。但回购越买越贵、独立时间太短，跨周期纪律未验证。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">A-</div><div class="score-body"><h4>4. 财务质量</h4><p>净现金 +$7.3B、合同负债 $31.8B 负营运资本、FCF 强劲。但 GAAP 盈利失真、Wind 亏损、FCF 含周期性预付款红利、商誉 $14.4B。</p></div></div>
+      <div class="score-card"><div class="score-letter s-b">B+</div><div class="score-body"><h4>5. 资本配置纪律</h4><p>股息翻倍 + $10B 授权 + 非借债回购 + FCF 覆盖 80% · 方向正确、可持续。但回购入库存股且越买越贵，周期择时是瑕疵。</p></div></div>
+      <div class="score-card"><div class="score-letter s-d">D</div><div class="score-body"><h4>6. 估值与安全边际</h4><p>Forward P/E 45x（2027）/ 73x（2026 经营）/ EV/EBITDA 2028 仍 26x · 溢价现价约 +38% vs 公允 · <strong>无安全边际，priced for perfection</strong>。</p></div></div>
+    </div>
+
+    <div class="flag-row">
+      <strong>红旗排查</strong>：<strong>①极端估值</strong>（Forward P/E 45x/73x、溢价公允约 +38%、反向 DCF priced for perfection）+ <strong>②GAAP 盈利质量疑点</strong>（Q1 净利 94% 为一次性 M&A 收益、TTM P/E 失真、商誉 $14.4B 藏减值风险）+ <strong>③Wind 结构性亏损</strong>。触发"<span class="warn-t">极端估值 + 会计噪音</span>"——尽管生意质量优良（3 个 A-），<strong>综合评级强制降至「持有观望」</strong>（安全边际为负，禁止买入评级）。
+    </div>
+
+    <p style="margin-top:18px; font-size:14px; color:var(--text); line-height:1.85;"><strong>综合评级</strong>：<span class="rating-badge rating-hold" style="font-size:14px;">持有观望</span>。生意质量在电力装备板块里属顶级（护城河 / 管理层 / 财务均 A-），但估值维度 D（Forward P/E 45x、溢价公允 +38%、无安全边际）+ 极端估值红旗 + GAAP 盈利质量疑点 → 强制降至持有观望。核心判断：<strong>GEV 是一门好生意配了一个坏价格——燃机超级周期是真的，但当前 $1,093 已把整个周期、燃机售罄至 2030、利润率冲 20% 的乐观剧本全额定价。现有持仓者可让它随超级周期继续跑并逢高分批止盈，新买入者必须等价格给出安全边际（$850 以下、理想 $632 附近）。</strong></p>
+  </div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">投资决策（精确价格 · USD）</h3>
+
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>项目</th><th>价格</th><th>说明</th></tr>
+      <tr><td>12 个月概率加权目标价</td><td><strong>$865</strong> (-21%)</td><td>35%×$660 + 40%×$850 + 25%×$1,180</td></tr>
+      <tr><td>悲观目标（35% 概率）</td><td>$660 (-40%)</td><td>超级周期证伪 + 同业杀估值</td></tr>
+      <tr><td>基准目标（40% 概率）</td><td>$850 (-22%)</td><td>指引兑现但高倍数温和压缩</td></tr>
+      <tr><td>乐观目标（25% 概率）</td><td>$1,180 (+8%)</td><td>AI 电力叙事延续 + 燃机超预期</td></tr>
+      <tr class="hl"><td>首仓建仓（估值中位数 $790 × 80%）</td><td><strong>$632</strong></td><td>距现价 -42% · 耐心等深度回调</td></tr>
+      <tr><td>二仓建仓（× 70%）</td><td>$553</td><td>-49% · 周期回调机会</td></tr>
+      <tr><td>三仓建仓（× 60%）</td><td>$474</td><td>-57% · 黑天鹅级机会（近 52 周低）</td></tr>
+      <tr><td>止盈一档（现有持仓）</td><td>$1,150</td><td>+5% · 减仓 25%</td></tr>
+      <tr><td>止盈二档</td><td>$1,300</td><td>+19% · 再减 25%</td></tr>
+      <tr><td>止盈三档</td><td>$1,500</td><td>+37% · 再减 25% · 最后 25% 长期持有超级周期</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.85;"><strong>建议总仓位</strong>：<strong>0-3%</strong>（新资金观望为主，$1,093 无安全边际不建仓；现有质量持仓者可保留核心 2-3% 并逢高分批止盈）。<strong>持有周期</strong>：3-7 年（穿越燃机超级周期）。<strong>关键监控指标</strong>：① 燃机积压 + 机位预留是否达 110GW；② Electrification 数据中心订单力度；③ Wind 分部 EBITDA 亏损是否收窄；④ 调整后 EBITDA 利润率是否奔向 2028 的 20%；⑤ Forward P/E 是否回落至 30x 以下（估值机会）；⑥ AI 数据中心资本开支趋势（超级周期的外生变量）。<strong>下次催化剂</strong>：约 2026-07-22 Q2 2026 财报。</p>
+</div>
+
+<!-- ═══ 海图页末长评 ═══ -->
+<div class="section">
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记 · 1150 字</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p class="lead">价值投资里有一种最考验纪律的处境：生意好得让人心动，价格贵得让人却步。GE Vernova 就是 2026 年最典型的这一类——它握着全球燃气轮机订单排到 2030 年的超级周期，Q1 订单 +71%、积压订单 $163B、上调全年指引，几乎每一条业务数据都在证明"电力是 AI 时代最稀缺的资源"。但当我把它的价格摊开——Forward P/E 2027 年 45 倍、2026 经营口径 73 倍——我不得不说：好生意，坏价格。</p>
+
+      <p>GE Vernova 是 2024 年从 GE 分拆出的全球电力设备三巨头之一，做三件事：燃气轮机（Power）、电网与变压器（Electrification）、风电（Wind）。它靠"卖设备 + 长期服务合同 + 客户预付款"赚钱，本质是一台被 AI 数据中心用电需求点燃的重型装备复利机器。</p>
+
+      <h4>几个研判要点</h4>
+
+      <p><strong>一、Q1 的 GAAP 净利 $4.75B，有 94% 是水分。</strong> 这个数字看着惊艳（EPS $17.44、净利率 51%），但其中 $4.5B 是收购 Prolec GE 剩余股权的一次性重估收益（$3,992M）+ 出售 Proficy 的收益（$330M）。真正的经营口径——公司唯一披露的核心盈利指标是<span class="hl-t">"调整后 EBITDA" $896M（+96%），利润率 9.6%（+390bps）</span>；GAAP 经营利润只有 $179M。读 GEV，千万别被 GAAP 净利骗了。</p>
+
+      <p><strong>二、超级周期是真的，订单能见度极高。</strong> 燃气轮机积压 + 机位预留从 83GW 升至 100GW，年底目标至少 110GW，行业产能已<span class="hl-t">售罄至 2030 年</span>；Electrification 单季拿下 $2.4B 数据中心设备订单（超过 2025 全年），book-to-bill 约 2.5。$163B 的积压订单给了未来 2-3 年罕见的收入可见度。这是 GEV 值得高估值的底层逻辑——但"值得高估值"和"值得这个估值"是两回事。</p>
+
+      <p><strong>三、Wind 仍是拖后腿的那条腿。</strong> 陆上交付下滑 + 关税 + 海上合同亏损，Wind 营收 -23%、分部 EBITDA 亏损扩大到 <span class="warn-t">-$382M</span>，全年指引仍亏约 $400M。三条腿里两条在狂奔、一条在流血——这是同业（如西门子能源）也有的通病，但它确实拉低了 GEV 的整体成色。</p>
+
+      <p><strong>四、资产负债表极健康，现金流质量却要打个问号。</strong> 净现金 +$7.3B、合同负债（客户预付款）$31.8B 是负营运资本的现金奶牛；Q1 FCF $4.8B 单季超过 2025 全年——但这背后是订单预付款 +$5.6B 的助推，是<span class="warn-t">"随订单增长借来的现金流"</span>，一旦增长放缓会回摆。别把单季 $4.8B 当常态，全年指引 $6.5-7.5B（FCF Yield 仅约 2.4%）才是锚。</p>
+
+      <p><strong>五、估值透支到没有安全边际。</strong> 我用 8 种方法独立估值，中位数约 $790——DCF 基准 $837、SOTP $720、相对估值 $778。当前 $1,093 比公允价高出约 38%。反向 DCF 显示，现价隐含市场认为 GEV 能以 16-18% 的自由现金流增速跑十年、且利润率冲上 20%、超级周期永不落幕——这是 <span class="warn-t">priced for perfection</span>，任何一个环节打折都会触发估值压缩（7 月 7 日同业一句评论就让它单日跌 6.5%，就是预演）。</p>
+
+      <h4>海图研判</h4>
+
+      <p><strong>评级：持有观望</strong>（燃机超级周期 + 电网数据中心需求 + 净现金 $7.3B + $163B 积压 + 上调指引的顶级组合，对垒 GAAP 盈利失真 + Wind 持续流血 + Forward P/E 45x priced for perfection 的估值与结构性风险）。12 个月概率加权目标价 <strong>$865（-21%）</strong>：悲观 $660（35%，超级周期证伪 / 同业杀估值）、基准 $850（40%，指引兑现但高倍数向公允回归）、乐观 $1,180（25%，AI 电力叙事延续 + 燃机超预期）。</p>
+
+      <p>操作建议：新资金观望——机械首仓 $632（公允 × 80%）、二仓 $553、三仓 $474，都远在现价之下，耐心等深度回调。现有持仓者可保留 2-3% 核心仓、逢高分批止盈：$1,150 减 25%、$1,300 再减 25%、$1,500 再减 25%，最后 25% 长期持有超级周期。<strong>建议总仓位 0-3%</strong>，持有周期 3-7 年。关键监控：燃机积压是否达 110GW、数据中心订单、Wind 亏损收窄、调整后 EBITDA 利润率是否奔向 2028 的 20%。下次催化剂：约 2026-07-22 Q2 财报。</p>
+
+      <h4>风险提示</h4>
+
+      <p>超级周期见顶 / AI 资本开支退潮 / Wind 亏损扩大 / 燃机产能过度扩张后的过剩 / 极端估值下的多重压缩——任一项都可能让股价回到 $650-800。但 $163B 积压订单 + 净现金 $7.3B + 燃机寡头地位构成基本面质量底，<strong>$700-800 是较硬的估值支撑区</strong>，$530 的 52 周低点是深度回调的极端参考。GEV 是高 beta 动量股，波动幅度远大于蓝筹。</p>
+
+      <p>关键叙事：<strong>一台被 AI 电力需求点燃的燃气轮机超级周期复利机器（订单 +71% / 积压 $163B / 上调指引 / 燃机售罄至 2030），对垒 Forward P/E 45 倍、priced for perfection、Wind 持续流血、GAAP 盈利失真的估值与结构性风险</strong>。GEV 不缺成长，缺的是一个给得起安全边际的价格。好生意也要好价格——尤其当这个"好"里含了整整一个超级周期的红利时。下次催化剂：约 2026-07-22 Q2 财报。</p>
+
+      <p class="haitu-sign">—— 海图，灯下落笔，明日再观风浪。</p>
+
+      <p class="haitu-disc">⚠️ 免责声明：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，不构成任何投资建议。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div>《海图夜读》 · GE Vernova GEV Q1 2026 海图研判</div>
+  <div style="margin-top:6px;">发布日 2026-04-22 · 研判日 2026-07-11 · 数据来源 GE Vernova Q1 2026 官方财报新闻稿 + 10-Q（SEC EDGAR）+ 电话会 transcript · 股价 2026-07-10 收盘</div>
+</footer>
+
+<script>
+let curTheme = 'light';
+function toggleTheme() {
+  curTheme = curTheme === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', curTheme);
+  renderCharts();
+}
+
+const palette = {
+  light: { accent: '#8a9a8e', accent2: '#7b8fa0', accent3: '#b08d7a', gold: '#b9a06a', red: '#b87070', green: '#7a9a7a', grid: '#e5ddd5', text: '#7a706a' },
+  dark:  { accent: '#8a9a8e', accent2: '#8fabbf', accent3: '#c9a48e', gold: '#c9b07a', red: '#c08080', green: '#8aaa8a', grid: '#3e3a35', text: '#a09890' }
+};
+
+let charts = {};
+function renderCharts() {
+  Object.values(charts).forEach(c => c && c.destroy && c.destroy());
+  charts = {};
+  const p = palette[curTheme];
+  Chart.defaults.color = p.text;
+  Chart.defaults.borderColor = p.grid;
+
+  const quarters = ['Q1 25','Q2 25','Q3 25','Q4 25','Q1 26'];
+  const rev = [8.03, 9.11, 9.97, 10.96, 9.34];
+  const yoy = [15, 11, 12, 4, 16];
+  charts.rev = new Chart(document.getElementById('chartRev'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { type:'bar', label: '总营收 ($B)', data: rev, backgroundColor: p.accent + 'CC', yAxisID: 'y' },
+      { type: 'line', label: 'YoY %', data: yoy, borderColor: p.red, backgroundColor: p.red, tension: 0.3, yAxisID: 'y1' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false }, y1: { position: 'right', grid: { drawOnChartArea: false }, ticks: { callback: v => v + '%' } } } }
+  });
+
+  const margin = [5.7, 8.5, 8.1, 10.6, 9.6];
+  charts.margin = new Chart(document.getElementById('chartMargin'), {
+    type: 'line',
+    data: { labels: quarters, datasets: [
+      { label: '调整后 EBITDA 利润率 (%)', data: margin, borderColor: p.green, backgroundColor: p.green + '33', fill: true, tension: 0.3 }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false, ticks: { callback: v => v + '%' } } }, plugins: { legend: { display: false } } }
+  });
+
+  charts.segment = new Chart(document.getElementById('chartSegment'), {
+    type: 'doughnut',
+    data: {
+      labels: ['Power 电力', 'Electrification 电气化', 'Wind 风电'],
+      datasets: [{ data: [4971, 2959, 1432], backgroundColor: [p.accent, p.accent2, p.gold] }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { font: { size: 11 } } } } }
+  });
+
+  const ebitda = [457, 770, 811, 1158, 896];
+  charts.ebitda = new Chart(document.getElementById('chartEbitda'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { label: '调整后 EBITDA ($M)', data: ebitda, backgroundColor: p.accent3 + 'CC' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } }
+  });
+
+  buildSankey();
+}
+
+function buildSankey() {
+  const p = palette[curTheme];
+  const labels = ['总营收 $9,339','营业成本 $7,558','毛利 $1,781','期间费用 $1,602','营业利润 $179','M&A及非经营净收益 $4,915','税前利润 $5,094','所得税 $344','GAAP 净利 $4,750'];
+  const data = {
+    type: 'sankey',
+    orientation: 'h',
+    node: { pad: 16, thickness: 20, line: { color: p.grid, width: 0.5 }, label: labels, color: [p.accent, p.red, p.green, p.red, p.green, p.accent2, p.green, p.red, p.green] },
+    link: {
+      source: [0, 0, 2, 2, 4, 5, 6, 6],
+      target: [1, 2, 3, 4, 6, 6, 7, 8],
+      value:  [7558, 1781, 1602, 179, 179, 4915, 344, 4750],
+      color: [p.red+'55', p.green+'66', p.red+'55', p.green+'66', p.green+'66', p.accent2+'66', p.red+'55', p.green+'66']
+    }
+  };
+  const layout = { font: { size: 12, color: p.text }, paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)', margin: { l: 10, r: 10, t: 10, b: 10 } };
+  Plotly.react('sankey', [data], layout, { displayModeBar: false, responsive: true });
+}
+
+renderCharts();
+</script>
+
+</body>
+</html>

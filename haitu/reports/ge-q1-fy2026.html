@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-07-10 · GE Aerospace Q1 FY2026 财报已于 2026-04-21 发布 -->
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GE Aerospace GE Q1 FY2026 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+<meta name="description" content="全球商用航空发动机之王——卖引擎只是入场券，真正的金矿是约 5 万台商用装机量未来数十年的高毛利售后年金（备件+大修）。Q1 订单 +87% / 引擎交付 +43% / 服务收入 +39% / 调整后 EPS $1.86（+25%）。但前瞻市盈率 ~48x + PEG 2.8 + 近历史高点 + 净负债 -$9.3B（非净现金）+ 近期利润率摊薄——世界级生意，零安全边际。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GE Aerospace GE Q1 FY2026 海图研判 · 海图夜读">
+<meta property="og:description" content="全球商用航空发动机之王——卖引擎只是入场券，真正的金矿是约 5 万台商用装机量未来数十年的高毛利售后年金（备件+大修）。Q1 订单 +87% / 引擎交付 +43% / 服务收入 +39% / 调整后 EPS $1.86（+25%）。但前瞻市盈率 ~48x + PEG 2.8 + 近历史高点 + 净负债 -$9.3B（非净现金）+ 近期利润率摊薄——世界级生意，零安全边际。">
+<meta property="og:url" content="https://jacexie.github.io/haitu/reports/ge-q1-fy2026.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="GE Aerospace GE Q1 FY2026 海图研判 · 海图夜读">
+<meta name="twitter:description" content="全球商用航空发动机之王——卖引擎只是入场券，真正的金矿是约 5 万台商用装机量未来数十年的高毛利售后年金。Q1 订单 +87% / 服务 +39% / 调整后 EPS $1.86。但前瞻 PE ~48x + 净负债 -$9.3B——世界级生意，零安全边际。">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root { --bg:#f5f0eb; --bg2:#ece6df; --card:#ffffff; --card2:#f8f5f1; --border:#d9d0c7; --text:#4a4340; --text2:#7a706a; --text3:#a89f98; --accent:#8a9a8e; --accent2:#7b8fa0; --accent3:#b08d7a; --rose:#c09090; --gold:#b9a06a; --red:#b87070; --green:#7a9a7a; --shadow:rgba(0,0,0,0.06); --chart-grid:#e5ddd5; }
+[data-theme="dark"] { --bg:#1e1c1a; --bg2:#28251f; --card:#2e2a25; --card2:#363230; --border:#4a4540; --text:#d4ccc4; --text2:#a09890; --text3:#706860; --accent:#8a9a8e; --accent2:#8fabbf; --accent3:#c9a48e; --rose:#c09090; --gold:#c9b07a; --red:#c08080; --green:#8aaa8a; --shadow:rgba(0,0,0,0.3); --chart-grid:#3e3a35; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', serif; line-height: 1.75; font-size: 14.5px; transition: background .35s, color .35s; }
+a { color: var(--accent2); text-decoration: none; }
+.theme-bar { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); }
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+.toggle-switch { position: relative; width: 44px; height: 22px; background: var(--border); border-radius: 11px; cursor: pointer; transition: background .3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: var(--card); border-radius: 50%; transition: transform .3s; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+
+.hero { padding: 48px 24px 36px; text-align: center; border-bottom: 1px solid var(--border); }
+.hero-tag { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 3px 14px; border-radius: 20px; margin-bottom: 18px; }
+.hero h1 { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.pill { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: 'Segoe UI', sans-serif; font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow); }
+.pill strong { color: var(--text); }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle { font-size: 18px; font-weight: 700; color: var(--accent3); margin-bottom: 20px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+.stitle::before { content: ''; display: block; width: 4px; height: 20px; background: var(--accent3); border-radius: 2px; }
+
+.haitu-quip { display: flex; align-items: center; gap: 18px; background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 18px 24px; margin: 24px 0; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-quote { flex: 1; }
+.haitu-portrait { font-size: 15px; line-height: 1.65; color: var(--text); margin-bottom: 6px; font-weight: 600; }
+.haitu-rating-line { font-size: 13px; color: var(--text2); font-family: 'Segoe UI', sans-serif; }
+.rating-badge { display: inline-block; padding: 2px 12px; border-radius: 12px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; margin-left: 4px; }
+.rating-hold { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+
+.haitu-essay { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 28px 32px; margin: 24px 0 20px; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-essay-header { display: flex; align-items: center; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.haitu-avatar-sm { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); background: var(--red); box-shadow: 0 2px 8px rgba(184,112,112,0.2); }
+.haitu-name-lg { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 28px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 4px; }
+.haitu-essay-tag { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; }
+.haitu-essay-body { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 15px; line-height: 2.0; color: var(--text); }
+.haitu-essay-body p { margin-bottom: 14px; }
+.haitu-essay-body p.lead { font-size: 16px; font-style: italic; color: var(--text2); margin-bottom: 18px; }
+.haitu-essay-body strong { color: var(--text); font-weight: 700; }
+.haitu-essay-body h4 { font-size: 14px; color: var(--accent3); margin: 18px 0 10px; font-family: 'Segoe UI', sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+.haitu-sign { text-align: right; margin-top: 18px; font-family: 'Georgia', serif; font-size: 14px; color: var(--text2); font-style: italic; }
+.haitu-disc { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); font-style: italic; line-height: 1.7; }
+
+.stock-snap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px; }
+.snap-item { text-align: center; }
+.snap-label { font-family: 'Segoe UI', sans-serif; font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.snap-val { font-family: 'Segoe UI', sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+.snap-val.up { color: var(--green); }
+.snap-val.dn { color: var(--red); }
+.snap-sub { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow); }
+.kpi-l { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.badge { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+.up { background: rgba(122,154,122,.15); color: var(--green); }
+.dn { background: rgba(184,112,112,.15); color: var(--red); }
+.nt { background: rgba(123,143,160,.15); color: var(--accent2); }
+
+.tbl-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow); }
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI', sans-serif; font-size: 13px; }
+.tbl th { background: var(--card2); color: var(--text3); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); background: var(--card2); }
+
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); }
+.ctitle { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 260px; }
+
+.cmt { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 26px; line-height: 1.95; font-size: 14px; box-shadow: 0 1px 4px var(--shadow); color: var(--text); }
+.cmt p { margin-bottom: 14px; }
+.cmt p:last-child { margin-bottom: 0; }
+.cmt strong { color: var(--text); }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+
+.bscore { display: flex; align-items: center; gap: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; margin-bottom: 12px; box-shadow: 0 1px 4px var(--shadow); }
+.circle { width: 62px; height: 62px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; flex-shrink: 0; border: 3px solid; font-family: 'Segoe UI', sans-serif; }
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 4px; color: var(--text); }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.moat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+.moat-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); border-left: 4px solid var(--accent); }
+.moat-card.wide { border-left-color: var(--green); }
+.moat-card.narrow { border-left-color: var(--gold); }
+.moat-card.none { border-left-color: var(--red); }
+.moat-card h5 { font-size: 13px; color: var(--text); margin-bottom: 6px; }
+.moat-card .moat-rate { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.moat-card.wide .moat-rate { background: rgba(122,154,122,.18); color: var(--green); }
+.moat-card.narrow .moat-rate { background: rgba(185,160,106,.18); color: var(--gold); }
+.moat-card.none .moat-rate { background: rgba(184,112,112,.18); color: var(--red); }
+.moat-card p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+
+.ec-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 14px; box-shadow: 0 1px 3px var(--shadow); }
+.ec-badge { flex-shrink: 0; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-top: 2px; font-family: 'Segoe UI', sans-serif; }
+.ec-bull { background: rgba(122,154,122,.18); color: var(--green); }
+.ec-bear { background: rgba(184,112,112,.18); color: var(--red); }
+.ec-neut { background: rgba(185,160,106,.18); color: var(--gold); }
+.ec-body { flex: 1; }
+.ec-title { font-weight: 600; color: var(--text); margin-bottom: 3px; font-size: 14px; }
+.ec-note { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.dcf-note { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.dcf-note strong { color: var(--text); }
+
+.scorecard { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow); }
+.score-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.score-card { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px; }
+.score-letter { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Segoe UI', sans-serif; font-weight: 800; font-size: 22px; flex-shrink: 0; border: 3px solid; }
+.s-a { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.12); }
+.s-bp { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.06); }
+.s-b { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.10); }
+.s-bm { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.06); }
+.s-c { color: var(--red); border-color: var(--red); background: rgba(184,112,112,.08); }
+.score-body h4 { font-size: 13px; color: var(--text); margin-bottom: 4px; }
+.score-body p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+.flag-row { margin-top: 16px; padding: 12px 16px; background: rgba(184,112,112,.08); border: 1px solid rgba(184,112,112,.3); border-radius: 8px; font-size: 13px; color: var(--text2); }
+.flag-row strong { color: var(--red); }
+
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center; box-shadow: 0 1px 4px var(--shadow); }
+.pbox .pl { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; }
+.pbox .pv { font-family: 'Segoe UI', sans-serif; font-size: 28px; font-weight: 800; margin-bottom: 5px; }
+.pbox .pn { font-size: 12px; color: var(--text3); line-height: 1.5; }
+.pc { color: var(--red); } .pf { color: var(--gold); } .ps { color: var(--green); }
+
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.risk-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); position: relative; overflow: hidden; }
+.risk-card::before { content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent); }
+.risk-card.r1::before { background: var(--green); }
+.risk-card.r2::before { background: rgba(122,154,122,.6); }
+.risk-card.r3::before { background: var(--gold); }
+.risk-card.r4::before { background: var(--rose); }
+.risk-card.r5::before { background: var(--red); }
+.risk-card h5 { font-size: 14px; margin-bottom: 6px; color: var(--text); }
+.risk-score { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.r1 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r2 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r3 .risk-score { background: rgba(185,160,106,.18); color: var(--gold); }
+.r4 .risk-score { background: rgba(192,144,144,.18); color: var(--rose); }
+.r5 .risk-score { background: rgba(184,112,112,.18); color: var(--red); }
+.risk-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+footer { background: var(--card2); border-top: 1px solid var(--border); padding: 24px; text-align: center; color: var(--text3); font-size: 12px; margin-top: 40px; line-height: 1.8; }
+@media (max-width: 768px) { .cgrid,.pgrid { grid-template-columns: 1fr; } .hero h1 { font-size: 22px; } .kpi-grid { grid-template-columns: 1fr 1fr; } .stock-snap { grid-template-columns: 1fr 1fr; } .haitu-essay-header { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/GE" target="_blank" rel="noopener" title="在雪球查看 GE 实时行情">雪球 GE</a>
+  </div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">Q1 FY2026 财报发布 · 2026-04-21 &nbsp;|&nbsp; 海图研判 · 2026-07-11</div>
+  <h1>GE Aerospace GE · FY2026 Q1 财报深度分析</h1>
+  <div class="hero-sub">NYSE: GE &nbsp;|&nbsp; 财季截至 2026-03-31 &nbsp;|&nbsp; 价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill">股价 <strong>$359</strong> <span style="color:var(--red)">距高点 -5%</span></div>
+    <div class="pill">市值 <strong>$375B</strong></div>
+    <div class="pill">调整后营收 <strong>$11.6B</strong> <span style="color:var(--green)">+29%</span></div>
+    <div class="pill">调整后 EPS <strong>$1.86</strong> <span style="color:var(--green)">+25%</span></div>
+    <div class="pill">总订单 <strong>$23.0B</strong> <span style="color:var(--green)">+87%</span></div>
+    <div class="pill">Forward P/E <strong>~48x</strong> <span style="color:var(--gold)">无安全边际</span></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 海图页首短评 ═══ -->
+<div class="haitu-quip">
+  <div class="haitu-quote">
+    <div class="haitu-portrait">全球商用航空发动机之王——卖引擎只是入场券，真正的金矿是约 5 万台商用装机量在未来数十年源源不断的高毛利售后年金（备件 + 大修）。Q1 订单 +87%、引擎交付 +43%（LEAP +63%）、服务收入 +39%、调整后 EPS $1.86（+25%）、服务背backlog $170B——需求能见度顶级。但前瞻市盈率 ~48x + PEG 2.8 + 股价距历史高点仅 -5% + 净负债 -$9.3B（非净现金）+ 近期利润率主动摊薄——世界级生意，价格却贵到没有任何余地。</div>
+    <div class="haitu-rating-line">评级：<span class="rating-badge rating-hold">持有观望</span> · 12 个月概率加权目标价 $343（-4%）· 售后年金 + 凶猛资本返还的顶级组合，对垒 ~48x 满估值 + 近历史高点 + 净负债 + 近期利润率摊薄——好生意，等好价格</div>
+  </div>
+</div>
+
+<!-- ═══ 市场数据快照 ═══ -->
+<div class="section">
+  <div class="stitle">市场数据快照（2026-07-10 收盘）</div>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">股价（美元）</div><div class="snap-val">$359.02</div><div class="snap-sub">2026-07-10 · 距 ATH $377.52 -5%</div></div>
+    <div class="snap-item"><div class="snap-label">市值</div><div class="snap-val">$375B</div><div class="snap-sub">纯航空动力龙头</div></div>
+    <div class="snap-item"><div class="snap-label">Forward P/E (FY26)</div><div class="snap-val gold" style="color:var(--gold)">~48x</div><div class="snap-sub">EPS 共识 ~$7.47</div></div>
+    <div class="snap-item"><div class="snap-label">Forward P/E (FY27)</div><div class="snap-val">~42x</div><div class="snap-sub">EPS 共识 ~$8.53</div></div>
+    <div class="snap-item"><div class="snap-label">PEG</div><div class="snap-val dn">~2.8</div><div class="snap-sub">48x ÷ 17% 增速</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间</div><div class="snap-val">$247 - $383</div><div class="snap-sub">近区间顶部</div></div>
+    <div class="snap-item"><div class="snap-label">股息率</div><div class="snap-val">~0.52%</div><div class="snap-sub">$1.88/年 · 低息高回购</div></div>
+    <div class="snap-item"><div class="snap-label">FCF Yield</div><div class="snap-val dn">~2.2%</div><div class="snap-sub">FY26e FCF ~$8.2B</div></div>
+    <div class="snap-item"><div class="snap-label">现金+受限现金</div><div class="snap-val">$10.98B</div><div class="snap-sub">2026-03-31 末</div></div>
+    <div class="snap-item"><div class="snap-label">有息负债</div><div class="snap-val dn">$20.28B</div><div class="snap-sub">短债 2.10 + 长债 18.17</div></div>
+    <div class="snap-item"><div class="snap-label">真实净负债</div><div class="snap-val dn">-$9.3B</div><div class="snap-sub">⚠️ 净负债非净现金</div></div>
+    <div class="snap-item"><div class="snap-label">在手订单 Backlog</div><div class="snap-val up">~$190B</div><div class="snap-sub">其中服务 $170B</div></div>
+  </div>
+  <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">数据时点：股价 $359.02（2026-07-10 收盘，距历史最高收盘 $377.52 约 -5%）· 财务数据来源 GE Aerospace Q1 FY2026 官方财报新闻稿（SEC 8-K + IR PDF，2026-04-21 盘前发布，财季截至 2026-03-31）+ FY2025 10-K · 货币 USD 单口径。⚠️ GE 是<strong>净负债</strong>（有息负债 $20.28B > 现金+受限现金 $10.98B，真实净负债 -$9.3B）而非净现金——资产负债表上 $38.2B 投资证券几乎全是隔离的保险 run-off 资产（对应 $35.7B 保险负债），<strong>不可计入净现金</strong>。GE HealthCare（2024-01）与 GE Vernova（2024-04）分拆后，本公司为纯航空动力经营主体，历史财报已按"持续经营口径"重述。</p>
+</div>
+
+<!-- ═══ Q1 FY2026 KPI ═══ -->
+<div class="section">
+  <div class="stitle">Q1 FY2026 核心业绩（USD · 财季截至 2026-03-31）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">GAAP 总营收</div><div class="kpi-v">$12.39B</div><span class="badge up">+25% YoY</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">含保险 run-off 收入 $0.78B</div></div>
+    <div class="kpi"><div class="kpi-l">调整后营收</div><div class="kpi-v">$11.61B</div><span class="badge up">+29%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">剔除保险后 · 经营口径</div></div>
+    <div class="kpi"><div class="kpi-l">总订单 Orders</div><div class="kpi-v">$23.0B</div><span class="badge up">+87%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">CES +93% / DPT +67%</div></div>
+    <div class="kpi"><div class="kpi-l">Profit (GAAP · 税前)</div><div class="kpi-v">$2.20B</div><span class="badge dn">利润率 17.7%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">⚠️ 是税前利润非净利 · -490bps</div></div>
+    <div class="kpi"><div class="kpi-l">Non-GAAP 营业利润</div><div class="kpi-v">$2.53B</div><span class="badge up">+18%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">利润率 21.8% · -200bps</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 净利（归普通股）</div><div class="kpi-v">$1.90B</div><span class="badge nt">EPS $1.81</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">含 -$0.03 终止经营</div></div>
+    <div class="kpi"><div class="kpi-l">调整后净利</div><div class="kpi-v">$1.96B</div><span class="badge up">经营口径</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">最可信盈利读数</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 持续经营 EPS</div><div class="kpi-v">$1.83</div><span class="badge nt">持平 0%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">去年同期 $1.83</div></div>
+    <div class="kpi"><div class="kpi-l">调整后摊薄 EPS</div><div class="kpi-v">$1.86</div><span class="badge up">+25%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">去年 $1.49 · 最可信口径</div></div>
+    <div class="kpi"><div class="kpi-l">经营现金流 CFOA</div><div class="kpi-v">$1.87B</div><span class="badge up">+21%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">去年 $1.54B</div></div>
+    <div class="kpi"><div class="kpi-l">自由现金流（报告口径）</div><div class="kpi-v">$1.66B</div><span class="badge up">+14%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">OCF-Capex 口径 $1.54B</div></div>
+    <div class="kpi"><div class="kpi-l">引擎交付</div><div class="kpi-v">+43%</div><span class="badge up">LEAP +63%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">宽体 &gt;+25%（GE9X 领跑）</div></div>
+  </div>
+</div>
+
+<!-- ═══ 看穿桥接 高亮框 ═══ -->
+<div class="section">
+  <div class="stitle">本季必看 · 三个"看穿"：税前 vs 净利、GAAP vs 调整后、投资证券 ≠ 净现金</div>
+  <div class="cmt">
+    <p><strong>GE 这份财报有三处必须"看穿"，看不穿就会把它读成一台"高增长 + 现金堡垒"的完美机器——事实要复杂得多。</strong></p>
+
+    <p><strong>看穿一：头条"Profit (GAAP) $2.2B"是税前利润，不是净利。</strong> GE 新闻稿把"Profit (GAAP) of $2.2B"放在最显眼处，很多人误以为是净利润。<span class="hl-t">这其实是持续经营的<strong>税前</strong>利润（pre-tax income）</span>，税前利润率 17.7%（同比 -490bps）。真正归属普通股股东的 GAAP 净利是 <strong>$1.90B</strong>（每股 $1.81，含 -$0.03 终止经营损失；持续经营口径每股 $1.83）。二者相差约 $0.3B 的税与少数股东权益，读财报时务必对齐口径。</p>
+
+    <p><strong>看穿二：GAAP 持续 EPS 持平，调整后 EPS +25% 才是经营真相。</strong> GAAP 持续经营 EPS $1.83 与去年同期<span class="warn-t">完全持平（0%）</span>——因为去年同期税前利润率更高（含一些非经营性有利项）。剔除分拆相关、无形摊销、非经营项后，<strong>调整后 EPS $1.86（+25%）、调整后营业利润 $2.53B（+18%）</strong>才反映真实经营动能。调整后 EPS +25% 快于营业利润 +18%，差额来自持续回购缩股（摊薄股数同比下降）。</p>
+
+    <div class="tbl-wrap" style="margin:14px 0;">
+      <table class="tbl">
+        <tr><th>盈利口径对照（Q1 FY2026）</th><th>数值</th><th>YoY</th><th>读数</th></tr>
+        <tr><td>Profit (GAAP)——<span class="warn-t">税前</span></td><td><span class="warn-t">$2,198M</span></td><td>利润率 -490bps</td><td>头条数字 · 非净利</td></tr>
+        <tr><td>持续经营净利（归普通股）</td><td>$1,930M</td><td>—</td><td>已扣税与少数股东</td></tr>
+        <tr class="hl"><td><strong>GAAP 净利（归普通股 · 含终止经营）</strong></td><td><strong>$1,904M</strong></td><td>EPS $1.81</td><td>真实 GAAP 底线</td></tr>
+        <tr><td>Non-GAAP 营业利润</td><td>$2,528M</td><td>+18%</td><td>利润率 21.8%（-200bps）</td></tr>
+        <tr class="hl"><td><strong>调整后净利 / 调整后 EPS</strong></td><td><strong>$1,963M / $1.86</strong></td><td>+25%</td><td>最可信经营读数</td></tr>
+      </table>
+    </div>
+
+    <p><strong>看穿三：$38.2B 投资证券几乎全是"隔离"的保险资产，不是可用净现金。</strong> 资产负债表上有 <span class="hl-t">$38.2B 投资证券</span>，看着像现金堡垒。但它几乎全部属于 run-off（停售清算中的）保险业务，<span class="warn-t">对应 $35.7B 保险负债与年金义务，用于赔付而非自由动用，绝不能计入净现金</span>。把它剔除后，GE 有息负债 $20.28B（短债 $2.10B + 长债 $18.17B）> 现金+受限现金 $10.98B，<strong>真实净负债 -$9.3B（含经营租赁 -$10.3B）</strong>。GE 不是"现金堡垒"，而是一家净负债、靠强 FCF 支撑高额回购的公司。</p>
+  </div>
+</div>
+
+<!-- ═══ 趋势图 ═══ -->
+<div class="section">
+  <div class="stitle">关键指标趋势</div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">GAAP 总营收（$B）& YoY 增速（近 5 季）</div><div class="cwrap"><canvas id="chartRev"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">调整后营业利润率趋势（%，近 5 季）</div><div class="cwrap"><canvas id="chartMargin"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">Q1 FY2026 分部营收拆分（$B）</div><div class="cwrap"><canvas id="chartSegment"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">调整后摊薄 EPS（$，近 5 季）</div><div class="cwrap"><canvas id="chartEPS"></canvas></div></div>
+  </div>
+  <p style="margin-top:4px; font-size:12px; color:var(--text3); line-height:1.6;">说明：营业利润率为 Non-GAAP 调整后口径（Q2/Q3 FY25 为近似值）；GAAP 总营收 YoY 中 Q3 FY25 +26%、Q4 FY25 +20%、Q1 FY26 +25% 为官方披露值，Q1/Q2 FY25 为趋势示意。利润率于 Q4 FY25 触及 19.2% 低点后回升——反映新引擎装机期的短期摊薄与后续爬坡。</p>
+</div>
+
+<!-- ═══ 桑基图 ═══ -->
+<div class="section">
+  <div class="stitle">Q1 FY2026 资金流向桑基图（调整后口径 · $B）</div>
+  <div class="ccard">
+    <div id="sankey" style="width:100%;height:480px;"></div>
+    <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">说明：调整后营收 $11.61B → 营业成本 $7.75B（示意）+ 毛利 $3.86B（示意）→ 研发&销售管理费用 $1.33B + 调整后营业利润 $2.53B → 所得税+净利息+少数股东 $0.57B + 调整后净利 $1.96B。<strong>营业利润、净利、营收为官方披露值；毛利/成本拆分为可视化示意估算</strong>（新闻稿未单列调整后 COGS）。本季向股东返还约 $2.78B（回购 $2.40B + 股息 $0.38B）> GAAP 净利 $1.90B——差额由资产负债表现金支撑，属"杠杆化资本返还"。GE 是净负债 -$9.3B、以强 FCF 支撑高回购的公司，而非现金堡垒。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 1 ═══ -->
+<div class="section">
+  <div class="stitle">模块 1 · 公司概览与背景</div>
+  <div class="cmt">
+    <p><strong>GE Aerospace（General Electric Company，NYSE: GE）</strong>，总部辛辛那提附近的埃文代尔。它是百年工业帝国 General Electric 一系列分拆后留下的"皇冠"——<span class="hl-t">2024 年 1 月分拆 GE HealthCare、2024 年 4 月分拆 GE Vernova（能源）后，母公司更名 GE Aerospace，成为纯粹的航空动力经营主体</span>。历史财报已按"持续经营口径"重述。财年即日历年（12 月 31 日结束）。</p>
+
+    <p><strong>核心叙事</strong>：GE Aerospace 是<span class="hl-t">全球最大的商用航空发动机制造商</span>——通过与法国 Safran 各占 50% 的合资公司 CFM International，在窄体机（A320neo / 737 MAX）动力市场以 LEAP 引擎近乎垄断；又以 GEnx（787 / 747-8）、GE9X（777X）主导宽体机。装机基础约 <strong>5 万台商用引擎 + 3 万台军用引擎</strong>，约 5.7 万名员工。但卖引擎本身只是入场券——<strong>真正的复利来自这些引擎未来数十年的高毛利售后年金</strong>：备件销售 + 车间大修（shop visit）。这是典型的"剃须刀-刀片"模式，也是航空动力生意值得溢价的根本。</p>
+
+    <p><strong>两大分部</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>商用发动机与服务（CES, Commercial Engines & Services）</strong>——占绝对大头。Q1 营收 $8.92B（+34%），其中服务收入 +39%、设备收入 +20%。这是利润与护城河的核心。</li>
+      <li><strong>国防与推进技术（DPT, Defense & Propulsion Technologies）</strong>——Q1 营收 $3.21B（+19%），含军用发动机、推进与增材技术（Avio Aero）。本季录得十年来最强国防订单。</li>
+    </ul>
+
+    <p><strong>股权与残留业务</strong>：单一类别普通股，流通股约 <strong>10.43 亿股</strong>（2026-03-31）。仍持有 <span class="warn-t">run-off 保险业务</span>（对应 $35.7B 保险负债与年金义务，用 $38.2B 投资证券支撑）与波兰 <strong>Bank BPH</strong>（列作终止经营）——这两块给资产负债表带来复杂度与潜在尾部资本补提风险。</p>
+
+    <p><strong>能力圈检验</strong>：航空动力 + 售后年金的生意极其清晰（看得懂的顶级好生意——每卖一台引擎，就锁定三十年的高毛利维修现金流）。<span class="warn-t">两块需要额外审视的地方：(1) 近期利润率因新引擎（LEAP、GE9X）大量交付而主动摊薄，"装机换未来售后"的逻辑要靠时间验证；(2) run-off 保险与 Bank BPH 的表外/或有负债，是普通投资者难以完全量化的黑箱。</span></p>
+  </div>
+</div>
+
+<!-- ═══ 模块 2 ═══ -->
+<div class="section">
+  <div class="stitle">模块 2 · 管理层评估</div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>Larry Culp · 董事长兼 CEO</h4>
+      <p>H. Lawrence Culp Jr. 自 2018 年出任 GE CEO，是把百年 GE 从债务泥潭中重构、并主导 GE HealthCare / GE Vernova / GE Aerospace 三分拆的操盘手。分拆后他继续执掌纯航空动力主体。<span class="hl-t">以运营见长（源自丹纳赫的精益体系 GE Flight Deck），强调解决 LEAP 供应链瓶颈、拉动引擎交付</span>——本季引擎交付 +43%、供应商材料投入环比双位数改善，是执行力的直接体现。资本配置上大手笔回购 + 快速增息。海图判断：这是一位把烂摊子救成"皇冠资产"、执行力顶级的掌舵人，唯一需留意的是<span class="warn-t">在近历史高点、~48x 估值大额回购</span>的资本配置择时。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>资本配置 · 回购 + 快速增息双管，但在高位买回</h4>
+      <p>
+      <strong>快速增息</strong>：2026-02 季度股息上调约 30.6% 至 $0.36，6 月进一步宣布升至 <strong>$0.47/季</strong>（年化 $1.88，2026-07-27 派付）——派息率仅约 20% 净利，增息空间充足但基数低（股息率仅 ~0.52%）。<br>
+      <strong>大额回购缩股</strong>：过去三年回购约 $146 亿，摊薄股数从 FY2023 的 11.0 亿降至 Q1'26 的 10.54 亿（年均缩 2-2.5%）。2025-12 董事会新批 <strong>$200 亿</strong>回购授权（叠加旧授权残余约 $5 亿）。<br>
+      <span class="warn-t">一个纪律瑕疵</span>：本季返还股东约 $2.78B > GAAP 净利 $1.90B，靠动用现金支撑；且 Q1 回购均价约 $307、如今 $359，全年在近历史高点持续买回——<strong>再好的公司，用现金买贵了的自家股票也未必划算</strong>。同时公司连续第二年承诺 &gt;$10 亿投入美国制造与供应链，兼顾再投资。
+      </p>
+    </div>
+  </div>
+
+  <div class="cmt">
+    <p><strong>长期主义测试</strong>：✅ 管理层以"装机量 → 售后年金"的长期复利为主线，主动接受近期利润率摊薄以换取未来 30 年的维修现金流，并把 LEAP 服务毛利率追平 CES 整体水平设为 2028 目标——这是典型的长期视角，而非短期财报博弈。<strong>坦诚度</strong>：电话会对利润率下滑的成因（新引擎装机、投资）、LTSA 计提、关税相关冲销都主动说明，指引偏审慎（"不假设全球衰退"）。<strong>利益绑定</strong>：成熟大盘工业股，管理层持股比例不高，薪酬与调整后 EPS / FCF 强挂钩。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 3 ═══ -->
+<div class="section">
+  <div class="stitle">模块 3 · 商业模式深度解析</div>
+  <div class="cmt">
+    <p><strong>海图"一句话测试"</strong>：<span class="hl-t">GE Aerospace 卖引擎几乎不赚钱（甚至贴钱装机），真正的利润来自这些引擎未来数十年的备件与大修——每一台装上机翼的引擎，都是一张锁定三十年高毛利维修收入的年金合约。</span></p>
+
+    <p><strong>剃须刀-刀片（razor-and-blades）模式</strong>：GE 以接近成本甚至亏本的价格把新引擎装上飞机（"埋线"），随后在引擎的整个服役生命周期里，靠<strong>原厂备件 + 车间大修 + 长期服务协议（LTSA）</strong>持续收费。备件与大修的毛利率远高于设备本身。<span class="hl-t">关键：售后业务需求刚性（引擎必须按适航要求定期检修）、切换成本极高（OEM 认证件 + 服务网络），且随装机量增长而线性放大</span>。这是航空动力区别于普通制造业、能长期享受估值溢价的核心。</p>
+
+    <p><strong>Q1 FY2026 分部模型</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>分部 / 项目</th><th>营收</th><th>YoY</th><th>营业利润 / 利润率</th></tr>
+        <tr class="hl"><td><strong>CES 商用发动机与服务</strong></td><td>$8.92B</td><td>+34%</td><td>$2.36B · 26.4%</td></tr>
+        <tr><td>— 服务收入</td><td>—</td><td>+39%</td><td>内部大修 +35% / 备件 +25%</td></tr>
+        <tr><td>— 设备收入</td><td>—</td><td>+20%</td><td>装机量 +50%（含 GE9X）</td></tr>
+        <tr class="hl"><td><strong>DPT 国防与推进技术</strong></td><td>$3.21B</td><td>+19%</td><td>$0.38B · 11.8%</td></tr>
+        <tr><td>— 国防与系统</td><td>—</td><td>+14%</td><td>交付量 +24%</td></tr>
+        <tr><td>— 推进与增材技术</td><td>—</td><td>+29%</td><td>Avio Aero 领跑</td></tr>
+      </table>
+    </div>
+
+    <p style="margin-top:14px;"><strong>单位经济与议价能力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>售后是利润皇冠</strong>——CES 营业利润率 26.4% 远高于 DPT 的 11.8%；服务收入 +39% 是最赚钱的引擎。装机量拐点后，售后现金流进入长坡厚雪</li>
+      <li><strong>对航司议价能力</strong>：强——OEM 备件与认证维修近乎独家，航司几无替代；LTSA 锁定长期收费</li>
+      <li><strong>对供应链议价</strong>：中——受供应商材料投入节奏制约（本季环比双位数改善，是产量放量的关键松绑）</li>
+      <li><strong>近期利润率摊薄</strong>：CES -230bps 至 26.4%，因新引擎大量交付（装机期毛利低）+ 投资；这是"用今天的利润率换未来的售后年金"</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══ 模块 4 ═══ -->
+<div class="section">
+  <div class="stitle">模块 4 · 经济护城河分析（5 维）</div>
+  <div class="moat-grid">
+    <div class="moat-card wide">
+      <h5>1. 转换成本</h5>
+      <span class="moat-rate">极宽</span>
+      <p>引擎认证周期长达数十年，航司一旦选定机型动力便被锁定；OEM 认证备件 + LTSA 使切换成本极高。<strong>趋势：加宽</strong>（装机量增长放大锁定）。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>2. 无形资产/认证壁垒</h5>
+      <span class="moat-rate">极宽</span>
+      <p>航发是全球监管最严、研发门槛最高的产业之一，适航认证 + 数十年热端技术积累几不可复制。<strong>趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>3. 成本/规模优势</h5>
+      <span class="moat-rate">宽</span>
+      <p>约 5 万台商用装机量摊薄研发与服务网络固定成本，售后规模碾压新进入者。<strong>趋势：加宽</strong>（LEAP 大修量翻倍、规模效应释放）。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>4. 网络效应</h5>
+      <span class="moat-rate">中</span>
+      <p>装机量越大 → 全球维修网络与备件生态越密 → 航司越依赖，形成弱网络效应；但不如平台型生意强。<strong>趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>5. 有效规模</h5>
+      <span class="moat-rate">宽</span>
+      <p>大涵道比商用航发本质是寡头（GE/CFM、Rolls-Royce、Pratt &amp; Whitney），窄体机更是 CFM 与 P&amp;W 双雄。新进入者几无空间。<strong>趋势：稳定</strong>。</p>
+    </div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>10 年后护城河会更宽还是更窄？</strong> <span class="hl-t">更宽。</span> 核心逻辑是"装机换年金"：今天大量交付的 LEAP、GEnx、GE9X 会在未来 10-30 年陆续进入高毛利大修周期，售后收入池随装机量线性放大——<strong>护城河会随时间自我加宽</strong>。$170B 的服务背backlog 已把未来许多年的收入提前锁定。真正的长期变量是：(1) 新一代窄体机（2030s 后的下一代机型）的动力竞标格局；(2) 可持续航空燃料 / 电动-混动推进等技术范式的长周期演化——但这些是十年以上的慢变量，不改变当前售后年金的确定性。</p>
+    <p><strong>定价权</strong>：售后备件与维修定价权强（近乎独家），是护城河最硬的部分；新机设备端受航司与竞争制约，定价权中等。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 5 ═══ -->
+<div class="section">
+  <div class="stitle">模块 5 · 财务深度分析</div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 12px 0; font-family: 'Segoe UI',sans-serif;">5.1 关键比率（Q1 FY2026 vs Q1 FY2025）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>指标</th><th>Q1 FY25</th><th>Q1 FY26</th><th>变化</th><th>含义</th></tr>
+      <tr><td>调整后营收增速</td><td>—</td><td>+29%</td><td><span class="badge up">强劲</span></td><td>剔保险经营口径</td></tr>
+      <tr><td>总订单</td><td>$12.7B</td><td>$23.0B</td><td><span class="badge up">+87%</span></td><td>需求能见度顶级</td></tr>
+      <tr><td>调整后营业利润率</td><td>23.8%</td><td>21.8%</td><td><span class="badge dn">-200bps</span></td><td>新引擎装机摊薄</td></tr>
+      <tr><td>CES 营业利润率</td><td>28.7%</td><td>26.4%</td><td><span class="badge dn">-230bps</span></td><td>装机期毛利低 + 投资</td></tr>
+      <tr><td>DPT 营业利润率</td><td>12.0%</td><td>11.8%</td><td><span class="badge nt">-20bps</span></td><td>基本稳定</td></tr>
+      <tr><td>GAAP 税前利润率</td><td>22.6%</td><td>17.7%</td><td><span class="badge dn">-490bps</span></td><td>含非经营项，非经营真相</td></tr>
+      <tr><td>调整后 EPS</td><td>$1.49</td><td>$1.86</td><td><span class="badge up">+25%</span></td><td>缩股放大</td></tr>
+      <tr><td>GAAP 持续 EPS</td><td>$1.83</td><td>$1.83</td><td><span class="badge nt">持平</span></td><td>去年高基数</td></tr>
+      <tr><td>经营现金流 CFOA</td><td>$1.54B</td><td>$1.87B</td><td><span class="badge up">+21%</span></td><td>现金创造强</td></tr>
+    </table>
+  </div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.2 资产负债健康度（2026-03-31 末 · $M）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>2025-12-31</th><th>2026-03-31</th><th>说明</th></tr>
+      <tr><td>现金及等价物 + 受限现金</td><td>12,392</td><td>10,981</td><td>回购+还债消耗（含 $0.4B 外汇管制国现金）</td></tr>
+      <tr class="hl"><td>短期借款</td><td>1,686</td><td>2,103</td><td>已独立核对</td></tr>
+      <tr class="hl"><td>长期借款</td><td>18,808</td><td>18,174</td><td>逐项核对</td></tr>
+      <tr class="hl"><td>有息负债合计</td><td>20,494</td><td>20,277</td><td>$20.3B</td></tr>
+      <tr><td>经营租赁负债</td><td>—</td><td>1,044</td><td>ROU 资产 $1,004M</td></tr>
+      <tr class="hl"><td><strong>真实净负债（不含租赁）</strong></td><td>—</td><td><strong>-9,296</strong></td><td>⚠️ 净负债非净现金</td></tr>
+      <tr class="hl"><td><strong>真实净负债（含租赁）</strong></td><td>—</td><td><strong>-10,340</strong></td><td>—</td></tr>
+      <tr><td>投资证券</td><td>—</td><td>38,193</td><td><span class="warn-t">⚠️ 几乎全为保险 run-off 隔离资产，不可动用</span></td></tr>
+      <tr><td>保险负债与年金义务</td><td>—</td><td>35,699</td><td>对应上项投资证券</td></tr>
+      <tr><td>总资产</td><td>—</td><td>128,445</td><td>—</td></tr>
+      <tr><td>总负债</td><td>—</td><td>110,148</td><td>—</td></tr>
+      <tr><td>股东权益（隐含）</td><td>—</td><td>~18,297</td><td>总资产-总负债</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">⚠️ <strong>净负债非净现金——铁律提示</strong>：GE 有息负债 $20.28B（短债 $2.10B + 长债 $18.17B，已逐项核对）> 现金+受限现金 $10.98B，<strong>真实净负债 -$9.3B（含经营租赁 -$10.3B）</strong>。<strong>切勿</strong>把 $38.2B 投资证券净额与债务相抵——它几乎全部对应 $35.7B 保险负债与年金义务，是隔离的赔付资产。另：run-off 保险与波兰 Bank BPH（终止经营，含约 $1.0B 现金，未计入上表现金）构成表外/或有负债复杂度，是资产负债表最需警惕的黑箱。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.3 现金流量（Q1 FY2026 · $M）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>Q1 FY25</th><th>Q1 FY26</th><th>说明</th></tr>
+      <tr><td>经营活动现金流（CFOA）</td><td>1,543</td><td>1,868</td><td>+21%</td></tr>
+      <tr><td>- Capex（PP&E + 内部软件）</td><td>208</td><td>331</td><td>产量放量下升</td></tr>
+      <tr class="hl"><td>简单 FCF（OCF - Capex）</td><td>1,335</td><td>1,537</td><td>手算口径</td></tr>
+      <tr class="hl"><td>自由现金流（报告 Non-GAAP）</td><td>1,451</td><td>1,658</td><td>+14% · 加回分拆/重组现金</td></tr>
+      <tr><td>回购（库存股购买）</td><td>1,965</td><td>2,399</td><td>7.2M 股 / 含 ASR</td></tr>
+      <tr><td>股息</td><td>302</td><td>381</td><td>增息推动</td></tr>
+      <tr class="hl"><td>资本返还合计</td><td>~2,267</td><td>~2,780</td><td>&gt; GAAP 净利 $1.90B</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">口径说明：GE 报告口径 FCF（$1.66B）在"OCF - Capex"（$1.54B）基础上加回分拆相关现金支出（$83M）+ 公司重组现金（$26M）+ 处置回收（$13M）。全年指引 FCF $8.0-8.4B、转化率 &gt;100%（FY2025 $7.7B / 转化 113%）。资本返还 $2.78B &gt; GAAP 净利，靠动用现金——属杠杆化返还。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.4 杜邦 · ROE / ROIC · 所有者盈余（价值投资口径）</h3>
+  <div class="dcf-note">
+    <p><strong>ROE / ROIC</strong>：股东权益仅约 $18.3B（回购持续压低权益基数），年化调整后净利约 $7.8B → <strong>ROE 名义极高（&gt;40%）但被低权益基数放大</strong>，需谨慎解读；扣除隔离保险资产后的核心经营 ROIC 稳健（航发轻资产、售后高毛利）。杜邦看：净利率（调整后 ~17%）× 资产周转（受大额保险资产拖累而偏低）× 高杠杆（回购推高）——ROE 的"高"更多来自缩股与杠杆，而非资产效率。</p>
+    <p><strong>所有者盈余 = 净利润 + 折旧摊销 + 股权激励 − 维护性 Capex ± 营运资金 ≈ FCF</strong>。GE 航发主体相对轻资产（Capex $331M/季，约 $1.3B/年），FCF 接近所有者盈余。FY2026e FCF 约 $8.2B（指引中值）。</p>
+    <p><strong>所有者盈余收益率 = FCF ~$8.2B / 市值 $375B ≈ 2.2%</strong>——这是一个<span class="warn-t">"顶级质量 + 顶级估值"</span>的极低收益率。2.2% 的 FCF Yield 对一个 ~17% EPS 增长、售后年金护城河的公司并不便宜；它意味着市场已把未来多年的增长充分定价，<strong>当前几乎没有安全边际</strong>。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 6 ═══ -->
+<div class="section">
+  <div class="stitle">模块 6 · 电话会分析（Q1 FY2026 + 前 2 季度）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">Q1 FY2026 电话会（2026-04-21）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"订单 +87%（CES 近翻倍 +93%、DPT +67% 含十年最强国防订单）；服务背backlog $170B"</div><div class="ec-note">需求端全面爆发——商用赢单 &gt;650 台引擎（美航 &gt;300 台 LEAP-1A、美联航 300 台 GEnx、达美 60 台 GEnx；瑞安航空约 2,000 台 CFM56/LEAP 机队长期材料协议）。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"总引擎交付 +43%、LEAP 交付 +63%；供应商材料投入环比双位数改善"</div><div class="ec-note">供应链——这个最关键的产量瓶颈——正在松绑，是本季放量的核心支撑。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"LEAP 服务毛利率有望 2028 年追平 CES 整体水平（约两年前还接近盈亏平衡）；LEAP 大修量预计较上年翻倍"</div><div class="ec-note">售后年金正在从"埋线"进入兑现——这是长期利润率与现金流的核心引擎。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"调整后营业利润率同比 -200bps 至 21.8%（CES -230bps），因新引擎装机（含 GE9X）与投资"</div><div class="ec-note">近期利润率被主动摊薄——装机是未来售后的前置投入，但短期是对利润率的拖累，margin 恢复的叙事要靠 2028 前的售后爬坡兑现。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"维持 FY2026 全年指引，但趋向区间高端；监控关税/油价/地缘，不假设全球衰退"</div><div class="ec-note">指引假设：Brent 油价 3Q 前高企后回落、departures 增速平至低个位数——审慎但不悲观。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q4 FY2025 电话会（2026-01-22）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"Q4 订单 +74%、营收 +20%（双分部双位数）、调整后 EPS +19% 至 $1.57、FCF +15%；FY25 订单 +32%、营收 +21%"</div><div class="ec-note">全年收官强劲，$190B 在手订单。国防引擎交付全年 +30%。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"上调 FY2026 指引：LDD 营收增长、营业利润 $9.85-10.25B、调整后 EPS $7.10-7.40（中值营业利润约 +$10 亿）"</div><div class="ec-note">指引一次性抬高全年盈利中枢——市场对 2026 的乐观预期由此奠定。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"Q4 调整后利润率 -90bps 至 19.2%（如期），因新引擎组合/投资"</div><div class="ec-note">利润率摊薄的趋势在 Q4 已如约出现，Q1'26 回升至 21.8%。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q3 FY2025 电话会（2025-10-21）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"营收 +26%、调整后 EPS +44% 至 $1.66、&gt;130% FCF 转化；再次上调 FY25 指引"</div><div class="ec-note">CES 营收 +27%（服务 +28%）、DPT 利润 $386M +75%；引擎交付 +41%。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"Q3 总订单仅 +2%（高基数/lumpy），但 YTD 订单 +13%"</div><div class="ec-note">订单季度波动大属正常——Q1'26 又暴增 +87%，印证订单的 lumpy 特征。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">指引兑现度追踪</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>历史指引 / 预期</th><th>Q1 FY2026 实际</th><th>评价</th></tr>
+      <tr><td>FY2026 调整后 EPS $7.10-7.40</td><td>维持，趋向高端</td><td><span class="badge up">维持偏上</span></td></tr>
+      <tr><td>供应链材料投入改善</td><td>环比双位数改善</td><td><span class="badge up">兑现</span></td></tr>
+      <tr><td>引擎交付爬坡</td><td>总 +43% / LEAP +63%</td><td><span class="badge up">超预期</span></td></tr>
+      <tr><td>近期利润率摊薄（如 Q4 指引）</td><td>-200bps 至 21.8%（较 Q4 回升）</td><td><span class="badge nt">如期</span></td></tr>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>信号汇总</strong>：Q1 FY2026 是 GE "<span class="hl-t">订单爆发 + 交付放量 + 售后年金加速兑现 + 全年指引维持偏上</span>"的强势一季。三个季度连贯地讲同一个故事：供应链松绑 → 引擎交付放量 → 装机换未来售后。<strong>业绩几乎没有瑕疵——利润率的近期摊薄是主动选择而非恶化。</strong>问题永远不在业绩，而在估值：市场已把这套完美叙事定价到 ~48x 前瞻市盈率。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 7 ═══ -->
+<div class="section">
+  <div class="stitle">模块 7 · 多模型估值（8 种方法）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">7.1 估值汇总表（独立估值 · 不锚定现价 · USD）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>估值方法</th><th>每股公允价</th><th>假设要点</th><th>权重</th></tr>
+      <tr><td>1. 相对估值（P/E）</td><td>$256</td><td>给 30x（A&D 优质档，高于行业中位 ~30x 但远低于市场 48x）× FY2027 调整 EPS ~$8.53</td><td>20%</td></tr>
+      <tr><td>2. DCF（基准）</td><td>$230</td><td>FY26 FCF $8.2B 起，5 年 CAGR ~13%，WACC 8.5%，永续 3.25%，减净负债 $9.3B</td><td>25%</td></tr>
+      <tr><td>3. 所有者盈余收益率</td><td>$224</td><td>FCF $8.2B / 3.5% 要求收益率 = $234B → /10.43 亿股</td><td>15%</td></tr>
+      <tr><td>4. PEG</td><td>$222</td><td>合理 PEG 1.8 × 17% 增速 = 30.6x × FY2026 EPS ~$7.25</td><td>10%</td></tr>
+      <tr><td>5. DDM</td><td>$150</td><td>DPS $1.88，增长 12%，要求回报 8.5%（股息基数太小，参考意义有限）</td><td>5%</td></tr>
+      <tr><td>6. NAV</td><td>不适用</td><td>非资产型公司（价值来自无形认证 + 售后年金现金流，非可变现资产净值）</td><td>0%</td></tr>
+      <tr><td>7. 反向 DCF</td><td>当前价隐含 FCF 增长 <strong>~15%/年持续十年</strong></td><td>$359 隐含市场要求约 15% FCF 长期复合增长——高端、且不留容错空间</td><td>10%</td></tr>
+      <tr><td>8. SOTP 分部加总</td><td>$210</td><td>CES 营业利润 ~$9.75B×22x + DPT ~$1.6B×16x − 公司/净负债；保险 run-off 净额约 0（含尾部风险）</td><td>20%</td></tr>
+      <tr class="hl"><td><strong>加权公允价中枢</strong></td><td><strong>~$235</strong></td><td>估值区间 $210-256 · 中枢 ~$235</td><td>100%</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.8;"><strong>与现价对照</strong>：纪律性内在价值中枢约 <strong>$235</strong> vs 当前 $359——<span class="warn-t">现价高出内在价值约 53%（内在价值较现价约 -35%）</span>，<strong>安全边际为深度负值，远不满足价值投资 ≥25% 折价的买入门槛</strong>。GE 是世界级好生意，但当前价格已把未来数年的售后年金爬坡与利润率恢复几乎全部定价。反向 DCF 显示市场隐含约 15% 的长期 FCF 复合增长——这是很高端的预期，一旦利润率恢复或交付放量不及，估值压缩空间很大。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.2 P/E 多档透视表（GAAP vs 调整后差异显著 + 利润口径复杂 → 必做）</h3>
+  <p style="margin-bottom:10px; font-size:13px; color:var(--text2);">GAAP 持续 EPS（$1.83，持平）与调整后 EPS（$1.86，+25%）方向背离、且头条"税前利润"易被误读，触发多档透视：</p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>口径</th><th>EPS / 指标</th><th>P/E (基于 $359)</th><th>读数说明</th></tr>
+      <tr><td>TTM 调整后 P/E</td><td>~$6.75</td><td>~53x</td><td>近 4 季调整 EPS 累加</td></tr>
+      <tr><td>FY2025 调整后 P/E</td><td>$6.37</td><td>~56x</td><td>已实现全年</td></tr>
+      <tr><td>FY2026 指引中值 P/E</td><td>~$7.25</td><td>~50x</td><td>指引 $7.10-7.40</td></tr>
+      <tr class="hl"><td><strong>Forward P/E（FY2026 共识 ~$7.47）</strong></td><td><strong>~$7.47</strong></td><td><strong>~48x</strong></td><td>最常用档 · 满估值</td></tr>
+      <tr><td>Forward P/E（FY2027 共识 ~$8.53）</td><td>~$8.53</td><td>~42x</td><td>次年 · 仍高</td></tr>
+      <tr><td>PEG</td><td>48x ÷ 17%</td><td>~2.8</td><td>&gt;2 属贵</td></tr>
+      <tr><td>FCF Yield</td><td>FCF ~$8.2B</td><td>~2.2%</td><td>极低 · 顶级质量顶级估值</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3);"><strong>最可信档</strong>：Forward P/E ~48x（FY2026）/ ~42x（FY2027）。同业对比：Safran ~26.8x（最接近的 CFM 合资伙伴）、RTX ~25.6x（多元化 A&D）、Howmet ~35x（引擎结构件）、TransDigm ~30-35x（专有售后件）、行业中位 ~30x。<span class="warn-t">GE 以 ~48x 大幅溢价于所有同业——即便是航发售后年金的顶级质量，也很难为如此高的绝对倍数提供安全边际</span>。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.3 12 个月目标价（概率加权 · 市场路径口径）</h3>
+  <div class="pgrid">
+    <div class="pbox"><div class="pl">悲观情景 · 30%</div><div class="pv pc">$275</div><div class="pn">利润率恢复不及 / 宏观航司走弱 / 估值向同业溢价档回归至 ~32x FY27<br>距现价 -23%</div></div>
+    <div class="pbox"><div class="pl">基准情景 · 45%</div><div class="pv pf">$345</div><div class="pn">EPS 如期兑现，估值小幅回落至 ~40x FY27，优质溢价延续<br>距现价 -4%</div></div>
+    <div class="pbox"><div class="pl">乐观情景 · 25%</div><div class="pv ps">$420</div><div class="pn">售后年金加速 + 2028 EPS 能见度提升 + 溢价维持 ~49x FY27<br>距现价 +17%</div></div>
+  </div>
+  <p style="font-size:13px; color:var(--text2);"><strong>概率加权 12 个月目标价</strong>：30%×$275 + 45%×$345 + 25%×$420 = <strong>$343</strong>（较现价 -4%）。<span class="warn-t">注意两个口径的落差</span>：纪律性内在价值中枢 ~$235（若市场以正常优质倍数定价），而 12 个月市场路径目标 $343（承认优质复利股短期难回归 DCF、长期享受溢价）——<strong>两者都指向同一结论：现价 $359 无任何安全边际，向上空间有限，向下才是主要风险。这正是"短期是投票机、长期是称重机"的写照。</strong></p>
+</div>
+
+<!-- ═══ 模块 8 ═══ -->
+<div class="section">
+  <div class="stitle">模块 8 · 竞争与行业分析</div>
+  <div class="cmt">
+    <p><strong>全球航发格局</strong>：大涵道比商用航发是三巨头 + 合资的寡头——<strong>GE/CFM</strong>（与 Safran 合资，窄体 LEAP 近乎垄断、宽体 GEnx/GE9X 主导）、<strong>Rolls-Royce</strong>（宽体 Trent）、<strong>Pratt & Whitney</strong>（RTX 旗下，GTF）。窄体机动力实质是 CFM 与 P&W 双雄。GE 的独特优势是纯航发 + 售后占比高，享受"商用售后年金"的最高估值。</p>
+
+    <p><strong>航空动力 / 部件同业对比（截至 2026-06）</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>公司</th><th>2026 EPS 增速</th><th>Forward P/E (2026)</th><th>营业利润率</th><th>核心评价</th></tr>
+        <tr class="hl"><td><strong>GE Aerospace</strong></td><td>~17%</td><td><strong>~48x</strong></td><td>~21.8%</td><td>纯航发 + 售后 · 估值最高</td></tr>
+        <tr><td>Safran</td><td>~mid-teens</td><td>~26.8x</td><td>—</td><td>CFM 50/50 合资伙伴 · 最近似标的</td></tr>
+        <tr><td>RTX Corp</td><td>~8-10%</td><td>~25.6x</td><td>—</td><td>多元化 A&D（P&W+Collins+雷神）</td></tr>
+        <tr><td>Howmet HWM</td><td>~20%+</td><td>~35x</td><td>—</td><td>引擎结构件 · Q1'26 营收 +19%/EPS +42%</td></tr>
+        <tr><td>TransDigm TDG</td><td>high-teens</td><td>~30-35x</td><td>—</td><td>专有售后件 · 高毛利</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:10px; font-size:12px; color:var(--text3);">核心看点：GE 与 <strong>Safran</strong> 是同一台 LEAP 引擎的 50/50 合资伙伴，商业本质高度相似，但 <strong>GE 估值 ~48x vs Safran ~26.8x——溢价近乎一倍</strong>。GE 的溢价来自更纯粹的商用售后敞口 + 更高的 2028 EPS 爬坡叙事，但相对同业已定价到极致。行业中位前瞻 P/E ~30x，GE 溢价约 60%。</p>
+
+    <p style="margin-top:14px;"><strong>波特五力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>新进入者：</strong>极低（认证 + 研发 + 装机壁垒几不可复制）</li>
+      <li><strong>替代品：</strong>低-中（下一代推进技术/SAF 是 10 年以上慢变量，短期无替代）</li>
+      <li><strong>供应商议价：</strong>中（受关键铸锻件/热端材料供应商制约，材料投入是产量瓶颈）</li>
+      <li><strong>买家议价：</strong>设备端中（航司选型有 CFM/P&W 二选一），售后端低（OEM 件近乎独家）</li>
+      <li><strong>同业竞争：</strong>中（理性寡头，窄体 CFM/P&W、宽体 GE/RR 各有主场）</li>
+    </ul>
+
+    <p><strong>行业顺风</strong>：全球机队更新（老旧机型退役）+ 航空客运长期增长 + 装机量创纪录 → 售后 TAM 长期扩张。<strong>颠覆风险</strong>：新一代窄体机（2030s+）动力竞标、可持续/电动-混动推进——但均为长周期慢变量，不改当前售后年金确定性。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 9 ═══ -->
+<div class="section">
+  <div class="stitle">模块 9 · 技术面与 K 线分析（次要参考）</div>
+  <div class="cmt">
+    <p><strong>趋势</strong>：GE 长期强势上行，当前 $359.02 距历史最高收盘 $377.52（2026-07-02）仅 <span class="warn-t">-5%</span>，处于 52 周区间（$246.75 - $382.97）<strong>顶部</strong>。全年从 $247 低点强劲攀升，是典型的强势成长蓝筹。</p>
+
+    <p><strong>关键价位</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>支撑</strong>：~$330（近期整理区）/ ~$307（Q1 回购均价附近）/ $270-247（52 周低区间）</li>
+      <li><strong>阻力</strong>：$377-383（历史高点 / 52 周高）/ $420（乐观情景）</li>
+    </ul>
+
+    <p><strong>指标信号</strong>：处历史高位、RSI 中性偏强、无明显背离。<span class="warn-t">近区间顶部意味着回调风险 &gt; 追涨空间</span>——技术面与基本面（满估值）在此罕见地同向发出"不宜追高"的信号。</p>
+
+    <p><strong>注意</strong>：GE 的核心驱动是前瞻 EPS 兑现 + 利润率恢复 + 售后年金爬坡 + 前瞻 P/E 中枢，技术面仅作次要参考。价值投资者应等基本面/情绪回调（如利润率恢复不及、宏观走弱）给出安全边际，而非在历史高点追入。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 10 ═══ -->
+<div class="section">
+  <div class="stitle">模块 10 · 增长催化剂与前景展望</div>
+  <div class="cmt">
+    <p><strong>短期催化剂（未来 6 个月）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>2026-07-16 Q2 FY2026 财报</strong>——利润率是否延续回升、交付放量与订单趋势、指引是否上调至高端</li>
+      <li><strong>LEAP 大修量翻倍</strong>——售后年金加速兑现的直接验证</li>
+      <li><strong>$200 亿新回购放量</strong>——持续缩股放大 EPS</li>
+      <li><strong>供应链持续松绑</strong>——材料投入改善支撑全年产量</li>
+      <li><strong>国防赢单落地</strong>——T408（USMC）、与 Kratos 合作的 GEK1500（USAF 小型 CCA）</li>
+    </ul>
+
+    <p><strong>长期展望（3-5 年）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>装机换年金的复利</strong>——今天创纪录的 LEAP/GEnx/GE9X 交付，未来 10-30 年陆续进入高毛利大修周期</li>
+      <li><strong>LEAP 服务毛利率 2028 追平 CES 整体</strong>——利润率恢复的核心引擎，$170B 服务背backlog 提前锁定收入</li>
+      <li><strong>2028 盈利路径</strong>——公司曾勾勒向更高盈利中枢演进（2027 街面共识调整后 EPS ~$8.44-8.62）</li>
+      <li><strong>GE9X 与 777X</strong>——宽体新引擎进入服役，打开新的装机-售后循环</li>
+      <li><strong>风险情景</strong>：利润率恢复不及 / 宏观航司周期 / 下一代动力竞标格局变化</li>
+    </ul>
+
+    <p><strong>TAM 展望</strong>：全球商用机队规模长期增长 + 老旧机型更新 + 装机量创纪录，售后维修 TAM 随之扩张；叠加国防（记录订单）与推进/增材技术，GE 的可寻址市场远未饱和。核心问题不是增长空间，而是当前 ~48x 的价格已把多少年的增长提前透支。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 11 ═══ -->
+<div class="section">
+  <div class="stitle">模块 11 · 风险矩阵</div>
+  <div class="risk-grid">
+    <div class="risk-card r5"><h5>1. 满估值无安全边际</h5><span class="risk-score">5 / 5 极高</span><p>Forward P/E ~48x / PEG 2.8 / FCF Yield 2.2% / 内在价值较现价 -35% · 距历史高点仅 -5% · 任何增速或利润率不及都可能触发估值压缩</p></div>
+    <div class="risk-card r4"><h5>2. 近期利润率摊薄</h5><span class="risk-score">4 / 5 高</span><p>新引擎装机（LEAP/GE9X）拖累 CES 利润率 -230bps · margin 恢复依赖 2028 前售后爬坡兑现，若延后则盈利与估值双杀</p></div>
+    <div class="risk-card r3"><h5>3. 宏观与航司周期</h5><span class="risk-score">3 / 5 中</span><p>售后与交付挂钩客运/departures · 指引假设油价高企后回落、不假设衰退 · 深度衰退会压制飞行小时与大修量</p></div>
+    <div class="risk-card r3"><h5>4. 供应链材料投入</h5><span class="risk-score">3 / 5 中</span><p>关键铸锻件/热端材料是产量瓶颈 · 本季环比双位数改善 · 若再度收紧将拖累交付与设备收入</p></div>
+    <div class="risk-card r4"><h5>5. 保险 run-off / Bank BPH 尾部</h5><span class="risk-score">4 / 5 高</span><p>$35.7B 保险负债 + 波兰 Bank BPH（终止经营）· 表外/或有负债黑箱 · 潜在未来资本补提，普通投资者难以量化</p></div>
+    <div class="risk-card r2"><h5>6. 生意质量（机会）</h5><span class="risk-score">2 / 5 反向</span><p>约 5 万台装机售后年金 + $170B 服务背backlog + 极宽转换成本 · 世界级franchise 本身是最大安全垫</p></div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>3 个黑天鹅情景</strong>：</p>
+    <ol style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>利润率恢复大幅延后 + 估值向同业回归</strong>——概率 20% · 股价跌至 $250-275 · "装机换年金"叙事被质疑</li>
+      <li><strong>保险 run-off 资本补提 / Bank BPH 意外损失</strong>——概率 8% · 一次性冲击资本与情绪 · 暴露资产负债表黑箱</li>
+      <li><strong>全球深度衰退 + 航司减产</strong>——概率 10% · 飞行小时与大修量骤降 · 股价跌至 $260 附近</li>
+    </ol>
+
+    <p style="margin-top:10px;"><strong>下行支撑</strong>：世界级航发franchise + 约 5 万台装机售后年金 + $170B 服务背backlog + 强 FCF 构成质量底。<span class="hl-t">$247（52 周低）至 $270 一带是相对硬的估值底</span>（前瞻 P/E 回落至 ~32x 下限）。但要注意：GE 的"底"比多数股票高，因为其质量溢价难以完全消失——这既是安全垫，也意味着回调可能没有想象中那么深。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 12 ═══ -->
+<div class="section">
+  <div class="stitle">模块 12 · 股东回报分析</div>
+  <div class="cmt">
+    <p><strong>GE Aerospace 是"大额回购 + 快速增息"的资本返还样本——但要区分授权、执行、含金量，以及"高位回购 + 返还略超 FCF"的性质。</strong>本季返还股东约 $2.78B，超过 GAAP 净利 $1.90B，值得细拆。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 18px 0 10px; font-family: 'Segoe UI',sans-serif;">12.1 公司给了股东多少？</h3>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>年度（持续经营口径）</th><th>回购（执行）</th><th>股息</th><th>股东总回报</th><th>说明</th></tr>
+        <tr><td>FY2023</td><td>$1,233M</td><td>$589M</td><td>$1,822M</td><td>分拆过渡期</td></tr>
+        <tr><td>FY2024</td><td>$5,827M</td><td>$1,008M</td><td>$6,835M</td><td>GE Vernova 4 月分拆后放量</td></tr>
+        <tr><td>FY2025</td><td>$7,551M</td><td>$1,452M</td><td>$9,003M</td><td>纯航发全年 · 力度峰值</td></tr>
+        <tr class="hl"><td><strong>三年合计</strong></td><td><strong>$14,611M</strong></td><td><strong>$3,049M</strong></td><td><strong>$17,660M</strong></td><td>~$146 亿回购 + ~$30 亿股息</td></tr>
+        <tr><td>Q1 FY2026 单季</td><td>$2,399M（7.2M 股 @ ~$307，含 ASR）</td><td>$381M</td><td>~$2,780M</td><td>回购占 86%</td></tr>
+      </table>
+    </div>
+    <p style="font-size:13px; color: var(--text2); margin-top:8px"><strong>Trailing Shareholder Yield</strong> ≈ FY2025 返还 $9.00B / 市值 $375B ≈ <strong>2.40%</strong>（其中回购 ~2.0% + 股息 ~0.4%）。派息率仅约 20% 净利 / 19% FCF——<span class="hl-t">典型"低股息 + 大额回购"的美股结构</span>，回购是主菜、股息是快速增长的辅菜。三年返还从 $18 亿一路放量到 $90 亿，反映分拆完成后纯航发的现金创造与返还意愿。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.2 给的方式好不好？</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>真实缩股 · 含金量高</strong>：摊薄股数 FY2023 <strong>11.0 亿</strong> → FY2024 10.94 亿 → FY2025 10.68 亿 → Q1'26 <strong>10.54 亿</strong>（流通股 10.43 亿），三年真实缩股约 -4%（年均 -2 至 -2.5%）。回购是"真减少股本、增厚每股内在价值"，而非仅对冲股权激励——调整后 EPS +25% 快于营业利润 +18%，差额正是缩股贡献</li>
+      <li><span class="warn-t">高位回购的择时瑕疵</span>：Q1 回购均价约 $307，虽低于当前 $359，但公司全年在 ~48x、距历史高点仅 -5% 的位置大额买回。美股回购多入库存股（用于对冲 SBC），叠加"在贵价位买自家股"，<strong>含金量较"周期底部低价回购"打一定折扣</strong>——这是资本配置纪律上的白璧微瑕</li>
+      <li><strong>杠杆化返还</strong>：本季返还 $2.78B &gt; GAAP 净利 $1.90B，靠动用现金支撑，也是 GE 呈净负债 -$9.3B 的原因之一。对 FCF 强劲的航发主体尚属可控，但不是"用当季赚的钱返还"</li>
+    </ul>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.3 能不能继续给、给多少？</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>已授权额度充裕</strong>：旧 $150 亿授权（2024-03）已用约 $145 亿、余约 $5 亿；2025-12 新批 <strong>$200 亿</strong>——合计可用约 <strong>$205 亿</strong>（约占市值 5.5%）· 执行历史可信（常年足额回购）</li>
+      <li><strong>快速增息、空间充足</strong>：季度股息 2026-02 升约 30.6% 至 $0.36，6 月再升至 $0.47（年化 $1.88）· 派息率仅约 20% 净利 · 增息空间大但基数低（股息率仅 0.52%）</li>
+      <li><strong>(股息 + 回购) / FCF 覆盖度</strong>：FY2025 返还 $9.0B / FCF $7.7B ≈ <strong>117%（&gt;100%）</strong>——略超 FCF，靠动用现金/资产负债表补充；FY2026 指引 FCF $8.0-8.4B、转化 &gt;100%，随盈利爬坡覆盖度有望改善</li>
+      <li><strong>需留意借债/动用现金回购</strong>：净负债 -$9.3B、返还持续超 FCF——虽对强 FCF 航发可控，但"高位 + 超 FCF"叠加需要盯住，一旦利润率恢复不及，返还节奏或受约束</li>
+    </ul>
+    <p><strong>模块小结</strong>：<span class="hl-t">积极且高含金量，唯"高位回购 + 返还略超 FCF"需留意</span>——快速增息 + 真实缩股（年均 2-2.5%）+ $205 亿可用额度 + 强 FCF 支撑，是一台正在成型的资本返还机器；但在近历史高点、~48x 估值大额买回，以及返还持续超过 FCF、依赖资产负债表，是它区别于"周期底部低价回购"样板的白璧微瑕。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 13 ═══ -->
+<div class="section">
+  <div class="stitle">模块 13 · 海图评分卡 + 投资决策</div>
+
+  <div class="scorecard">
+    <h3 style="font-size:15px; color:var(--text); margin-bottom: 16px; font-family: 'Segoe UI',sans-serif;">海图评分卡（6 维 A-D）</h3>
+    <div class="score-grid">
+      <div class="score-card"><div class="score-letter s-bp">A-</div><div class="score-body"><h4>1. 生意可预测性</h4><p>售后年金 + $170B 服务背backlog 提供顶级能见度；但设备端有航司周期、近期利润率有摊薄噪音。</p></div></div>
+      <div class="score-card"><div class="score-letter s-a">A</div><div class="score-body"><h4>2. 经济护城河</h4><p>转换成本 + 认证壁垒极宽，售后近乎独家定价。装机换年金使护城河随时间加宽。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">A-</div><div class="score-body"><h4>3. 管理层质量</h4><p>Culp 把 GE 从债务泥潭救成皇冠资产、执行力顶级。唯在近历史高点大额回购的择时需留意。</p></div></div>
+      <div class="score-card"><div class="score-letter s-b">B+</div><div class="score-body"><h4>4. 财务质量</h4><p>强 FCF + 高转化 + 轻资产售后。但净负债 -$9.3B（非净现金）+ 保险 run-off / Bank BPH 表外复杂度。</p></div></div>
+      <div class="score-card"><div class="score-letter s-b">B+</div><div class="score-body"><h4>5. 资本配置纪律</h4><p>快速增息 + 真实缩股 + $205 亿授权。但高位回购 + 返还略超 FCF、靠资产负债表，含金量打一定折。</p></div></div>
+      <div class="score-card"><div class="score-letter s-c">C-</div><div class="score-body"><h4>6. 估值与安全边际</h4><p>Forward P/E ~48x / PEG 2.8 / FCF Yield 2.2% / 内在价值较现价 -35% · <strong>安全边际深度负值，满估值</strong>。</p></div></div>
+    </div>
+
+    <div class="flag-row">
+      <strong>红旗排查</strong>：<strong>极端估值</strong>（Forward P/E ~48x、PEG 2.8、内在价值较现价约 -35%、距历史高点仅 -5%）+ <strong>会计口径陷阱</strong>（头条"Profit GAAP $2.2B"实为税前利润；$38.2B 投资证券为隔离保险资产、易被误当净现金）+ 保险 run-off / Bank BPH 表外尾部。触发"<span class="warn-t">极端估值红旗</span>"——尽管 6 维基础质量顶级（1 个 A + 2 个 A- + 2 个 B+），综合评级<strong>强制降至「持有观望」</strong>。
+    </div>
+
+    <p style="margin-top:18px; font-size:14px; color:var(--text); line-height:1.85;"><strong>综合评级</strong>：<span class="rating-badge rating-hold" style="font-size:14px;">持有观望</span>。生意质量全球顶级（航发售后年金 + 极宽护城河 + 顶级执行），但估值维度 C-（满价、安全边际为深度负值）+ 极端估值红旗 → 强制降至持有观望。核心判断：<strong>GE 的问题从来不是生意好不好，而是价格贵不贵——当前 $359（~48x）没有任何安全边际，现有持仓者可继续复利持有，新买入者应等大幅回调至内在价值区间。</strong></p>
+  </div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">投资决策（精确价格 · USD）</h3>
+
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>项目</th><th>价格</th><th>说明</th></tr>
+      <tr><td>12 个月目标价（基准 · 45%）</td><td><strong>$345</strong> (-4%)</td><td>EPS 兑现 + 估值小幅回落至 ~40x FY27</td></tr>
+      <tr><td>悲观目标（30% 概率）</td><td>$275 (-23%)</td><td>利润率不及 + 估值向同业回归</td></tr>
+      <tr><td>乐观目标（25% 概率）</td><td>$420 (+17%)</td><td>售后加速 + 2028 能见度 + 溢价维持</td></tr>
+      <tr class="hl"><td>概率加权 12 个月目标价</td><td><strong>$343</strong> (-4%)</td><td>向上空间有限，向下才是主风险</td></tr>
+      <tr class="hl"><td>首仓建仓（内在价值 $235 × 80%）</td><td><strong>$188</strong></td><td>距现价 -48% · 深度回调才建仓</td></tr>
+      <tr><td>二仓建仓（× 70%）</td><td>$164</td><td>-54% · 大幅回调机会</td></tr>
+      <tr><td>三仓建仓（× 60%）</td><td>$141</td><td>-61% · 黑天鹅级机会</td></tr>
+      <tr><td>止盈一档（对现有持仓）</td><td>$410</td><td>+14% · 减仓 25%</td></tr>
+      <tr><td>止盈二档</td><td>$460</td><td>+28% · 再减 25%</td></tr>
+      <tr><td>止盈三档</td><td>$520</td><td>+45% · 再减 25% · 最后 25% 长期复利持有</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.85;"><strong>建议总仓位</strong>：<strong>3-5%</strong>（核心质量仓 · 但当前满估值，机械建仓价远低于现价，应在回调时建仓、不追高）。<strong>持有周期</strong>：5-10 年（长期让售后年金滚雪球 · 穿越利润率恢复周期）。<strong>关键监控指标</strong>：① 后续季度调整后营业利润率是否延续回升；② LEAP 大修量与服务毛利率兑现；③ 订单与在手订单趋势；④ 前瞻 P/E 是否回落至 ~30x 附近（估值机会）；⑤ 保险 run-off / Bank BPH 是否出现资本补提。<strong>下次催化剂</strong>：2026-07-16 Q2 FY2026 财报。</p>
+</div>
+
+<!-- ═══ 海图页末长评 ═══ -->
+<div class="section">
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记 · 约 1100 字</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p class="lead">有一种生意，卖出去的那一刻不是终点，而是一份长达三十年年金合约的开始。GE Aerospace 就是这样——一台 LEAP 或 GEnx 引擎装上机翼，接下来三十年的备件与大修才是真正的金矿。这一季，订单暴增 87%、引擎交付 +43%、服务收入 +39%，几乎无可挑剔；唯一的问题是——市场早已看穿这门生意的好，给了约 48 倍前瞻市盈率。好到极致，也贵到极致。</p>
+
+      <p>GE Aerospace 是全球商用航空发动机之王。它与 Safran 合资的 CFM 几乎垄断窄体机动力，又以 GEnx、GE9X 主导宽体机。但卖引擎本身只是入场券——真正的复利，来自约 5 万台商用引擎装机量在未来数十年里源源不断的高毛利售后年金（备件 + 大修）。Q1 FY2026：GAAP 营收 $12.4B（+25%）、调整后营收 $11.6B（+29%）、总订单 $23.0B（+87%）、调整后 EPS $1.86（+25%）、服务背backlog $170B。</p>
+
+      <h4>几个研判要点</h4>
+
+      <p><strong>一、订单与交付双爆发，利润率却在主动"下蹲"。</strong> 订单 +87%（CES +93%、DPT +67% 创十年国防纪录）、总在手订单约 $190B——需求能见度顶级。但调整后营业利润率同比 -200bps 至 21.8%（CES -230bps 至 26.4%）。<span class="hl-t">这不是恶化，而是 LEAP、GE9X 等新引擎大量交付、装机期毛利偏低所致</span>。今天的装机是明天售后年金的"埋线"——短期摊薄利润率，长期把每一台引擎变成三十年的现金流。管理层的 2028 目标，正押注 LEAP 服务毛利率追平整体 CES 水平。</p>
+
+      <p><strong>二、两个"看穿"，否则会误读这份财报。</strong> 看穿一：头条"Profit (GAAP) $2.2B"是<span class="warn-t">税前利润</span>，不是净利；真正归属普通股股东的 GAAP 净利是 $1.90B、每股 $1.81。看穿二：资产负债表上 $38.2B 投资证券几乎全是<span class="warn-t">隔离的保险 run-off 资产</span>（对应 $35.7B 保险负债与年金义务），不可自由动用、更不能计入净现金。把它剔除后，GE 实为净负债约 -$9.3B（含租赁 -$10.3B），不是很多人想象的"现金堡垒"。</p>
+
+      <p><strong>三、售后年金正在加速兑现。</strong> 服务收入 +39%、内部大修收入 +35%、备件 +25%，LEAP 大修量预计较上年翻倍。这是"剃须刀-刀片"模式最甜的阶段：装机量拐点之后，售后现金流进入长坡厚雪。<span class="hl-t">$170B 的服务背backlog，等于把未来许多年的高毛利收入提前锁定</span>——这是航发生意区别于普通制造业、值得溢价的核心。</p>
+
+      <p><strong>四、资本返还凶猛，但在高位回购。</strong> 过去三年返还股东约 $177 亿（回购约 $146 亿 + 股息约 $30 亿），摊薄股数从 11.0 亿降至 10.5 亿；季度股息刚提到 $0.47（年化增速 30%+），并新批 $200 亿回购授权。含金量高——是真实缩股而非仅对冲股权激励。唯一的瑕疵是：<span class="warn-t">在约 48 倍、距历史高点仅 -5% 的位置大额回购</span>——再好的公司，用现金买贵了的自家股票也未必划算。</p>
+
+      <p><strong>五、世界级生意，零安全边际。</strong> 前瞻市盈率约 48x（FY2026）/ 42x（FY2027）、PEG 约 2.8、FCF 收益率仅约 2%、股价距历史高点仅 -5%。我用相对估值、DCF、所有者盈余、PEG、SOTP 等独立测算，内在价值中枢约 $235——<span class="warn-t">现价 $359 高出约 50%</span>。这不是"生意好不好"的问题，而是"价格贵不贵"的问题。市场短期是投票机，早已为 GE 的质量投了满票；但称重机迟早会来。</p>
+
+      <h4>海图研判</h4>
+
+      <p><strong>评级：持有观望</strong>（世界级航发franchise + 售后年金 + 订单 +87% + 服务 +39% + 凶猛资本返还的顶级组合，对垒约 48x 前瞻市盈率、PEG 2.8、近历史高点、净负债、近期利润率摊薄的满估值与结构性变量）。12 个月概率加权目标价 <strong>$343</strong>（悲观 $275 · 30% / 基准 $345 · 45% / 乐观 $420 · 25%）——较现价约 -4%，几乎没有上行空间。</p>
+
+      <p>操作建议：纪律性内在价值中枢约 $235，机械首仓 <strong>$188</strong>（×80%）、二仓 $164（×70%）、三仓 $141（×60%）——距现价均需大幅回调，当前不在建仓窗口。对已有持仓者：这是可以长期复利持有的世界级资产，止盈三档 $410 / $460 / $520 各减 25%，最后 25% 长期持有；新买入者应空仓等待价格给出安全边际。<strong>建议仓位：核心质量仓 3-5%</strong>（回调时建，不追高）。持有周期 5-10 年。<span class="hl-t">关键纪律：现有持仓者让它复利，新买入者必须等价格给出安全边际——好生意也要好价格，GE 尤其如此。</span></p>
+
+      <h4>风险提示</h4>
+
+      <p>极端估值下的多重压缩、近期利润率持续摊薄、宏观与航司需求周期、供应链材料投入波动、保险 run-off 与波兰 Bank BPH 的表外尾部风险、以及"净负债而非净现金"的资产负债表复杂度——任一项都可能触发估值回归。但约 5 万台装机量的售后年金 + $170B 服务背backlog + 强劲 FCF 构成质量底：<strong>$247（52 周低）至 $270 一带是相对硬的支撑区</strong>。GE 的"底"比多数股票高，因为它的质量溢价难以完全消失。</p>
+
+      <p>关键叙事：<strong>"全球商用航发之王 + 约 5 万台装机量的售后年金 + 订单 +87% + 服务 +39% + 凶猛资本返还"的世界级生意，对垒"约 48x 前瞻市盈率 + PEG 2.8 + 近历史高点 + 净负债 + 近期利润率摊薄"的满估值与结构性风险</strong>。GE Aerospace 不是给追便宜货的人——它几乎从不便宜；它是给愿意在回调时耐心建仓、然后让售后年金慢慢滚雪球的长期投资者。下次催化剂：2026-07-16 Q2 FY2026 财报。</p>
+
+      <p class="haitu-sign">—— 海图，灯下落笔，明日再观风浪。</p>
+
+      <p class="haitu-disc">⚠️ 免责声明：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，不构成任何投资建议。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div>《海图夜读》 · GE Aerospace GE Q1 FY2026 海图研判</div>
+  <div style="margin-top:6px;">发布日 2026-04-21 · 研判日 2026-07-11 · 数据来源 GE Aerospace Q1 FY2026 官方财报新闻稿（SEC 8-K + IR PDF）+ FY2025 10-K + 电话会 transcript</div>
+</footer>
+
+<script>
+let curTheme = 'light';
+function toggleTheme() {
+  curTheme = curTheme === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', curTheme);
+  renderCharts();
+}
+
+const palette = {
+  light: { accent: '#8a9a8e', accent2: '#7b8fa0', accent3: '#b08d7a', gold: '#b9a06a', red: '#b87070', green: '#7a9a7a', grid: '#e5ddd5', text: '#7a706a' },
+  dark:  { accent: '#8a9a8e', accent2: '#8fabbf', accent3: '#c9a48e', gold: '#c9b07a', red: '#c08080', green: '#8aaa8a', grid: '#3e3a35', text: '#a09890' }
+};
+
+let charts = {};
+function renderCharts() {
+  Object.values(charts).forEach(c => c && c.destroy && c.destroy());
+  charts = {};
+  const p = palette[curTheme];
+  Chart.defaults.color = p.text;
+  Chart.defaults.borderColor = p.grid;
+
+  const quarters = ['Q1 25','Q2 25','Q3 25','Q4 25','Q1 26'];
+  const rev = [9.94, 11.0, 12.2, 12.72, 12.39];
+  const yoy = [11, 22, 26, 20, 25];
+  charts.rev = new Chart(document.getElementById('chartRev'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { type:'bar', label: 'GAAP 总营收 ($B)', data: rev, backgroundColor: p.accent + 'CC', yAxisID: 'y' },
+      { type: 'line', label: 'YoY %', data: yoy, borderColor: p.red, backgroundColor: p.red, tension: 0.3, yAxisID: 'y1' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false }, y1: { position: 'right', grid: { drawOnChartArea: false }, ticks: { callback: v => v + '%' } } } }
+  });
+
+  const margin = [23.8, 22.0, 20.4, 19.2, 21.8];
+  charts.margin = new Chart(document.getElementById('chartMargin'), {
+    type: 'line',
+    data: { labels: quarters, datasets: [
+      { label: '调整后营业利润率 %', data: margin, borderColor: p.accent3, backgroundColor: p.accent3 + '33', fill: true, tension: 0.3 }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false, ticks: { callback: v => v + '%' } } }, plugins: { legend: { display: false } } }
+  });
+
+  charts.segment = new Chart(document.getElementById('chartSegment'), {
+    type: 'doughnut',
+    data: {
+      labels: ['商用发动机与服务 CES', '国防与推进技术 DPT'],
+      datasets: [{ data: [8.92, 3.21], backgroundColor: [p.accent, p.accent3] }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { font: { size: 11 } } } } }
+  });
+
+  const eps = [1.49, 1.66, 1.66, 1.57, 1.86];
+  charts.eps = new Chart(document.getElementById('chartEPS'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { label: '调整后摊薄 EPS ($)', data: eps, backgroundColor: p.green + 'CC' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: false } } }
+  });
+
+  buildSankey();
+}
+
+function buildSankey() {
+  const p = palette[curTheme];
+  const labels = ['调整后营收 $11.61','营业成本 $7.75','毛利 $3.86','研发&销管费 $1.33','营业利润 $2.53','税+利息+少数股东 $0.57','调整后净利 $1.96'];
+  const data = {
+    type: 'sankey',
+    orientation: 'h',
+    node: { pad: 16, thickness: 20, line: { color: p.grid, width: 0.5 }, label: labels, color: [p.accent, p.red, p.green, p.red, p.green, p.red, p.green] },
+    link: {
+      source: [0, 0, 2, 2, 4, 4],
+      target: [1, 2, 3, 4, 5, 6],
+      value:  [7.75, 3.86, 1.33, 2.53, 0.57, 1.96],
+      color: [p.red+'55', p.green+'66', p.red+'55', p.green+'66', p.red+'55', p.green+'66']
+    }
+  };
+  const layout = { font: { size: 12, color: p.text }, paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)', margin: { l: 10, r: 10, t: 10, b: 10 } };
+  Plotly.react('sankey', [data], layout, { displayModeBar: false, responsive: true });
+}
+
+renderCharts();
+</script>
+
+</body>
+</html>
