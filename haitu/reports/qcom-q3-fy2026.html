@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-08-04 · NASDAQ: QCOM Q3 FY2026 财报已于 2026-07-29 发布 -->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Qualcomm QCOM Q3 FY2026 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+
+<!-- ⚠️ 无闪烁暗色：这段必须在 <style> 之前、且是同步内联脚本。
+     放到 body 末尾会让暗色用户先看到一闪的白底。
+     key 固定用 'theme'（与门户和 30 份存量报告一致，换 key 会让它们被翻回浅色）。 -->
+<script>
+(function () {
+  try {
+    var t = localStorage.getItem('theme');
+    if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', t);
+  } catch (e) { document.documentElement.setAttribute('data-theme', 'light'); }
+})();
+</script>
+
+<link rel="canonical" href="https://haitu.jacexie.com/haitu/reports/qcom-q3-fy2026.html">
+<meta name="description" content="{企业一句话画像，≤160 字符}">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Qualcomm QCOM Q3 FY2026 海图研判">
+<meta property="og:description" content="{企业一句话画像}">
+<meta property="og:url" content="https://haitu.jacexie.com/haitu/reports/qcom-q3-fy2026.html">
+<meta name="twitter:card" content="summary">
+
+<!-- Chart.js：defer + 放在 head 末尾。⚠️ 不要引 Plotly —— 桑基图用内联 SVG。 -->
+<script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+<style>
+
+/* ── MORANDI PALETTE ── */
+:root {
+  /* Light (default) */
+  --bg:        #f5f0eb;
+  --bg2:       #ece6df;
+  --card:      #ffffff;
+  --card2:     #f8f5f1;
+  --border:    #d9d0c7;
+  --text:      #4a4340;
+  --text2:     #7a706a;
+  --text3:     #a89f98;
+  --accent:    #8a9a8e;   /* sage */
+  --accent2:   #7b8fa0;   /* muted blue */
+  --accent3:   #b08d7a;   /* dusty terracotta */
+  --rose:      #c09090;   /* dusty rose */
+  --gold:      #b9a06a;
+  --red:       #b87070;
+  --green:     #7a9a7a;
+  --shadow:    rgba(0,0,0,0.06);
+  --chart-grid:#e5ddd5;
+  /* ── ink 层：只用于文字，全部达 WCAG AA（装饰色仍用上面的原值）── */
+  --text3-ink:   #70665f;  /* 4.51:1 on --bg2（原 --text3 #a89f98 仅 2.60:1）*/
+  --accent3-ink: #7f6150;  /* 4.97:1 on --bg （原 --accent3 #b08d7a 仅 2.67:1）*/
+  --gold-ink:    #8a6d3b;  /* 原 --gold  #b9a06a 仅 2.53:1 */
+  --red-ink:     #a35555;  /* 原 --red   #b87070 仅 3.76:1 */
+  --green-ink:   #4a7057;  /* 原 --green #7a9a7a 仅 3.12:1 */
+  --accent2-ink: #5a7386;
+  --font-sans: system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-serif: Georgia, 'Noto Serif SC', 'PingFang SC', serif;
+  --bar-h: 44px;
+}
+[data-theme="dark"] {
+  --text3-ink:   #a19991;
+  --accent3-ink: #c9a48e;
+  --gold-ink:    #c9b07a;
+  --red-ink:     #c08080;
+  --green-ink:   #8aaa8a;
+  --accent2-ink: #8fabbf;
+  --bg:        #1e1c1a;
+  --bg2:       #28251f;
+  --card:      #2e2a25;
+  --card2:     #363230;
+  --border:    #4a4540;
+  --text:      #d4ccc4;
+  --text2:     #a09890;
+  --text3:     #706860;
+  --accent:    #8a9a8e;
+  --accent2:   #8fabbf;
+  --accent3:   #c9a48e;
+  --rose:      #c09090;
+  --gold:      #c9b07a;
+  --red:       #c08080;
+  --green:     #8aaa8a;
+  --shadow:    rgba(0,0,0,0.3);
+  --chart-grid:#3e3a35;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-serif);
+  line-height: 1.75;
+  font-size: 14.5px;
+  transition: background .35s, color .35s;
+}
+a { color: var(--accent2); text-decoration: none; }
+
+/* ── THEME TOGGLE ── */
+.theme-bar {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 8px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  transition: background .35s;
+}
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; text-decoration: none; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: var(--font-sans); font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; text-decoration: none; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; color: var(--text2);
+}
+.toggle-switch {
+  appearance: none; -webkit-appearance: none; border: 0; padding: 0; margin: 0;
+  position: relative;
+  width: 44px; height: 22px;
+  background: var(--border);
+  border-radius: 11px;
+  cursor: pointer;
+  transition: background .3s;
+}
+.toggle-switch::after {
+  content: '';
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 18px; height: 18px;
+  background: var(--card);
+  border-radius: 50%;
+  transition: transform .3s;
+  box-shadow: 0 1px 3px rgba(0,0,0,.15);
+}
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+
+/* ── HERO ── */
+.hero {
+  padding: 48px 24px 36px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+.hero-tag {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 3px 14px;
+  border-radius: 20px;
+  margin-bottom: 18px;
+}
+.hero h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills {
+  display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;
+}
+.pill {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 6px 18px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--text2);
+  box-shadow: 0 1px 3px var(--shadow);
+}
+.pill strong { color: var(--text); }
+
+/* ── LAYOUT ── */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle {
+  font-size: 18px; font-weight: 700; color: var(--accent3-ink);
+  margin-bottom: 20px; letter-spacing: 0.5px;
+  display: flex; align-items: center; gap: 10px;
+}
+.stitle::before {
+  content: ''; display: block; width: 4px; height: 20px;
+  background: var(--accent3); border-radius: 2px;
+}
+
+/* ── KPI ── */
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.kpi {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 16px 18px;
+  box-shadow: 0 1px 4px var(--shadow);
+  transition: background .35s;
+}
+.kpi-l { font-family: var(--font-sans); font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.badge {
+  display: inline-block; font-family: var(--font-sans);
+  font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px;
+}
+.up   { background: rgba(122,154,122,.15); color: var(--green); }
+.dn   { background: rgba(184,112,112,.15); color: var(--red); }
+.nt   { background: rgba(123,143,160,.15); color: var(--accent2); }
+
+/* ── TABLE ── */
+.tbl-wrap {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow);
+}
+.tbl { width: 100%; border-collapse: collapse; font-family: var(--font-sans); font-size: 13px;
+       font-variant-numeric: tabular-nums; }
+.tbl th {
+  background: var(--card2); color: var(--text3-ink); font-size: 11px;
+  letter-spacing: .5px; text-transform: uppercase;
+  padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border);
+}
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); }
+
+/* ── CHARTS ── */
+/* ⚠️ 轨道必须写 minmax(0,1fr) 而不是 1fr。
+   grid 子项默认 min-width:auto，canvas 与桑基 SVG 的固有宽度会把轨道撑开，
+   实测在 375px 下 .ccard 被撑到 568px，导致整页横向滚动。
+   .ccard 的 min-width:0 是同一问题的第二道保险。 */
+.cgrid  { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-bottom: 16px; }
+.cgrid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-bottom: 16px; }
+.ccard, .kpi, .moat-card, .risk-card, .score-card, .snap-item, .pbox { min-width: 0; }
+.ccard {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow);
+}
+.ctitle { font-family: var(--font-sans); font-size: 12px; color: var(--text3-ink); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 230px; }
+
+/* ── QUOTES ── */
+.qgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.qcard {
+  background: var(--card); border: 1px solid var(--border);
+  border-left: 4px solid var(--rose);
+  border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow);
+}
+.qname { font-weight: 700; color: var(--accent3); margin-bottom: 2px; }
+.qrole { font-family: var(--font-sans); font-size: 11px; color: var(--text3); margin-bottom: 10px; }
+.qtext { font-style: italic; font-size: 13.5px; color: var(--text); line-height: 1.8; }
+
+/* ── ANALYSIS ── */
+.agrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+.acard {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow);
+}
+.acard h4 { font-size: 13px; color: var(--accent2); margin-bottom: 10px; text-transform: uppercase; letter-spacing: .5px; }
+.acard ul { padding-left: 16px; }
+.acard li { margin-bottom: 5px; font-size: 13px; }
+
+/* ── BUFFETT SCORE ── */
+.bscore {
+  display: flex; align-items: center; gap: 16px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px 22px; margin-bottom: 12px;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.circle {
+  width: 62px; height: 62px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 18px; flex-shrink: 0;
+  border: 3px solid; font-family: var(--font-sans);
+}
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 3px; }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+/* ── VERDICT ── */
+.verdict {
+  background: var(--card2); border: 2px solid var(--accent);
+  border-radius: 10px; padding: 26px 28px; margin-bottom: 16px;
+}
+.verdict-t { font-size: 17px; font-weight: 700; color: var(--accent); margin-bottom: 10px; }
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 14px; text-align: center;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.pbox .pl { font-family: var(--font-sans); font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.pbox .pv { font-family: var(--font-sans); font-size: 26px; font-weight: 800; }
+.pbox .pn { font-size: 11px; color: var(--text3); margin-top: 3px; }
+.pc { color: var(--text2); } .pf { color: var(--gold); } .ps { color: var(--green); }
+
+/* ── SANKEY ── */
+#sankey { width: 100%; height: 460px; }
+
+/* ── COMMENTARY ── */
+.cmt {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 26px; line-height: 1.9; font-size: 14.5px;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.cmt p { margin-bottom: 14px; }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--card2); border-top: 1px solid var(--border);
+  padding: 24px; text-align: center; color: var(--text3); font-size: 12px;
+  margin-top: 40px;
+}
+
+@media (max-width: 768px) {
+  .cgrid,.cgrid3,.qgrid,.agrid,.pgrid { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 22px; }
+  .kpi-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ── HAITU SIGNATURE BLOCKS (页首短评 + 页末长评) ── */
+.haitu-quip {
+  display: flex; align-items: center; gap: 18px;
+  background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red);
+  border-radius: 12px; padding: 18px 24px; margin: 24px 0;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.haitu-avatar-sm {
+  width: 64px; height: 64px; border-radius: 50%;
+  object-fit: cover; flex-shrink: 0;
+  border: 2px solid var(--border); background: var(--red);
+  box-shadow: 0 2px 8px rgba(184,112,112,0.18);
+}
+.haitu-quote { flex: 1; }
+.haitu-name {
+  font-family: var(--font-sans);
+  font-size: 12px; font-weight: 700; letter-spacing: 1.5px;
+  color: var(--red-ink); text-transform: uppercase; margin-bottom: 4px;
+}
+.haitu-portrait {
+  font-size: 15px; line-height: 1.65; color: var(--text);
+  margin-bottom: 6px; font-weight: 600;
+}
+.haitu-rating-line {
+  font-size: 13px; color: var(--text2);
+  font-family: var(--font-sans);
+}
+.rating-badge {
+  display: inline-block; padding: 2px 12px; border-radius: 12px;
+  font-weight: 700; font-size: 13px; letter-spacing: 0.5px;
+  margin-left: 4px;
+}
+.rating-strong-buy { background: rgba(122,154,122,.25); color: var(--green); }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+.rating-cond-buy { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-hold { background: rgba(123,143,160,.18); color: var(--accent2); }
+.rating-sell { background: rgba(184,112,112,.18); color: var(--red); }
+.rating-strong-sell { background: rgba(184,112,112,.28); color: var(--red); }
+
+.haitu-essay {
+  background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red);
+  border-radius: 12px; padding: 28px 32px; margin: 24px 0;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.haitu-essay-header {
+  display: flex; align-items: center; gap: 18px;
+  padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px;
+}
+.haitu-avatar-lg {
+  width: 110px; height: 110px; border-radius: 50%;
+  object-fit: cover; flex-shrink: 0;
+  border: 3px solid var(--border); background: var(--red);
+  box-shadow: 0 4px 14px rgba(184,112,112,0.22);
+}
+.haitu-name-lg {
+  font-family: 'Georgia', 'Noto Serif SC', serif;
+  font-size: 28px; font-weight: 700; color: var(--text);
+  letter-spacing: 1px; margin-bottom: 4px;
+}
+.haitu-essay-tag {
+  font-family: var(--font-sans);
+  font-size: 12px; color: var(--text3); letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+.haitu-essay-body {
+  font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', serif;
+  font-size: 15px; line-height: 2.0; color: var(--text);
+}
+.haitu-essay-body p { margin-bottom: 16px; }
+.haitu-essay-body p:first-child {
+  font-size: 16px; font-style: italic; color: var(--text2);
+}
+.haitu-essay-body p:last-child {
+  margin-top: 22px; padding-top: 14px;
+  border-top: 1px solid var(--border);
+  font-size: 12px; color: var(--text3); font-style: italic;
+}
+.haitu-sign {
+  text-align: right; margin-top: 14px;
+  font-family: 'Georgia', serif; font-size: 14px;
+  color: var(--text2); font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .haitu-quip { flex-direction: column; text-align: center; }
+  .haitu-essay-header { flex-direction: column; text-align: center; }
+  .haitu-avatar-sm { width: 80px; height: 80px; }
+  .haitu-avatar-lg { width: 90px; height: 90px; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   海图 v2 追加规则 —— 修 103 份存量实测出的问题，勿删勿改顺序
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── 1. 锚点落点：一行同时修好 TOC 跳转 / 深链 / Ctrl+F 定位 / :target ──
+   没有这条，所有跳转都会落在 sticky 顶栏底下被遮住 */
+.section { scroll-margin-top: calc(var(--bar-h) + 12px); }
+
+/* h2.stitle 必须显式定字号，否则被 UA 默认样式撑成 32px 巨标题 */
+h2.stitle { font-size: 18px; font-weight: 700; margin: 0 0 20px; }
+
+/* 章节深链锚点：桌面 hover 显形，触屏常显 */
+.anchor {
+  margin-left: 8px; font-size: 13px; color: var(--text3-ink);
+  text-decoration: none; opacity: 0; transition: opacity .2s;
+}
+.stitle:hover .anchor, .anchor:focus-visible { opacity: 1; }
+@media (hover: none) { .anchor { opacity: .35; } }
+
+/* ── 2. 评级徽章：由 data-rating 派生，作者不再手写 class ──
+   实测存量 .rating-hold 在 63 份是金色、30 份是蓝色 —— 这套选择器根除该分歧 */
+.rating-badge[data-rating="强力买入"] { background: rgba(122,154,122,.25); color: var(--green-ink); }
+.rating-badge[data-rating="买入"]     { background: rgba(122,154,122,.18); color: var(--green-ink); }
+.rating-badge[data-rating="有条件买入"]{ background: rgba(185,160,106,.18); color: var(--gold-ink); }
+.rating-badge[data-rating="持有观望"] { background: rgba(123,143,160,.18); color: var(--accent2-ink); }
+.rating-badge[data-rating="卖出"]     { background: rgba(184,112,112,.18); color: var(--red-ink); }
+.rating-badge[data-rating="强烈卖出"] { background: rgba(184,112,112,.28); color: var(--red-ink); }
+
+/* 涨跌不能只靠色相（色盲）—— 文字里必须自带 +/- 号，这里只负责配色 */
+.up, .pos { color: var(--green-ink); }
+.dn, .neg { color: var(--red-ink); }
+
+/* ── 3. 窄屏表格：粘性首列 + 右侧滚动阴影提示 ──
+   实测 375px 下 12 张表有 6 张横向溢出，且无任何可滚动的视觉线索 */
+.tbl-wrap {
+  background-image: linear-gradient(to right, var(--card), var(--card)),
+                    linear-gradient(to right, rgba(0,0,0,.10), rgba(0,0,0,0));
+  background-position: right center, right center;
+  background-repeat: no-repeat;
+  background-size: 24px 100%, 12px 100%;
+  background-attachment: local, scroll;
+}
+@media (max-width: 640px) {
+  /* border-collapse:collapse 下 sticky 单元格的边框会丢，用 box-shadow 补回 */
+  .tbl { border-collapse: separate; border-spacing: 0; }
+  .tbl :is(th, td) { border-bottom: 1px solid var(--border); }
+  .tbl :is(th, td):first-child {
+    position: sticky; left: 0; z-index: 1;
+    background: var(--card); box-shadow: 1px 0 0 var(--border);
+  }
+  .tbl th:first-child { background: var(--card2); }
+}
+
+/* ── 4. 移动端：顶栏必须能换行（实测四元素已折行重叠）── */
+.theme-bar { flex-wrap: wrap; row-gap: 6px; }
+@media (max-width: 420px) { .theme-bar .xueqiu-link { display: none; } }
+
+@media (max-width: 640px) {
+  .container { padding: 0 14px; }          /* 24px 在 375px 上吃掉 12.8% 视口 */
+  body { font-size: 15.5px; }              /* 14.5px 中文长文在手机上偏小 */
+  .cwrap { height: 200px; }
+  #sankey { height: 360px !important; }    /* 480px 挤在 289px 宽里不可读 */
+  .cgrid, .cgrid3, .pgrid { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* 触控目标 ≥44px。用一个不可见的 ::before 撑开命中区，
+   开关本身仍是 44×22 的滑块外观。
+   ⚠️ 不要改 .toggle-switch 的 height/padding 来凑 44px —— 实测那样做会让
+   border-radius 与 ::after 滑块的定位一起错位，开关变成一个大圆角方块。
+   ⚠️ 条件必须同时含宽度 —— 只写 (hover:none) 时窄屏桌面实测仍是 22px。 */
+@media (max-width: 640px), (hover: none) {
+  .toggle-switch::before {
+    content: ''; position: absolute; left: 0; right: 0;
+    top: 50%; transform: translateY(-50%); height: 44px;
+  }
+}
+
+/* ── 5. prefers-reduced-motion ──
+   全语料 103/103 有 scroll-behavior:smooth 且零保护。加了目录之后，
+   一次跳转要跨 4 万像素、持续数秒，前庭敏感者会难受 */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important; animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+}
+
+/* ── 6. 焦点可见（全语料 0 个 :focus-visible 样式）── */
+:focus-visible { outline: 2px solid var(--accent3-ink); outline-offset: 2px; }
+
+/* ── 7. 图表无障碍降级容器 ── */
+figure.chart { margin: 0; }
+figure.chart figcaption { font-size: 12px; color: var(--text3-ink); line-height: 1.6; margin-top: 8px; }
+.chart-data { font-size: 12px; margin-top: 8px; }
+.chart-data summary { cursor: pointer; color: var(--text3-ink); }
+
+/* ── 8. shell 新增组件（skip link / 结论跳转带 / 顶栏右侧 / 屏幕阅读器专用）── */
+
+/* 跳转到正文：平时移出视口，聚焦时才出现。
+   ⚠️ 不能用 display:none —— 那样键盘也聚焦不到，等于没有 */
+.skip {
+  position: absolute; left: -9999px; top: 0;
+  background: var(--card); color: var(--accent3-ink);
+  padding: 8px 14px; border-radius: 0 0 8px 0; z-index: 200;
+  font-size: 13px; text-decoration: none;
+}
+.skip:focus { left: 0; }
+
+/* 只给屏幕阅读器：essay 一节的标题不需要视觉呈现（.haitu-essay 自带头部） */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+.theme-bar-right { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+
+/* 结论跳转带：读者看完评级后一步到证据 */
+.quip-jump { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.quip-jump a {
+  font-family: var(--font-sans); font-size: 12px; line-height: 1;
+  padding: 7px 12px; border-radius: 999px;
+  border: 1px solid var(--border); background: var(--card2);
+  color: var(--accent3-ink); text-decoration: none;
+  transition: border-color .2s, background .2s;
+}
+.quip-jump a:hover { border-color: var(--accent3); background: var(--card); }
+/* 触控目标 ≥44px。
+   ⚠️ 不能只用 @media (hover:none) —— 窄屏但支持 hover 的场景（缩小的桌面窗口、
+   带触控板的二合一设备）拿不到放大，实测那种情况下只有 28px。宽度与指针两个条件都要给。 */
+@media (max-width: 640px), (hover: none) {
+  /* 用 min-height 而不是加 padding —— padding 要靠字体行高凑够 44px，
+     换字体或改字号就又不达标了（实测 padding:13px 只得到 40px）。 */
+  .quip-jump a { min-height: 44px; padding: 0 16px; display: inline-flex; align-items: center; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   9. 报告组件（快照 / KPI / 护城河 / 风险 / 评分卡 / 电话会 / 桑基）
+   来源：现有报告语料中已验证的组件规则，已套用本表的字体栈与 ink 对比度修正。
+   ⚠️ 这一节必须与 body-skeleton.html 的类名保持同步 —— 骨架里出现的
+   每个类都要在这里有定义，否则章节会退化成无样式的纯文本流。
+   ══════════════════════════════════════════════════════════════ */
+.hero-pills {display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;}
+.pill {background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: var(--font-sans); font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow);}
+.pill strong {color: var(--text);}
+.stock-snap {background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px;}
+.snap-item {text-align: center;}
+.snap-label {font-family: var(--font-sans); font-size: 10px; color: var(--text3-ink); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px;}
+.kpi-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px;}
+.kpi {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow);}
+.moat-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px;}
+.moat-card {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); border-left: 4px solid var(--accent);}
+.moat-card.wide {border-left-color: var(--green);}
+.moat-card.narrow {border-left-color: var(--gold);}
+.moat-card.none {border-left-color: var(--red);}
+.moat-card h5 {font-size: 13px; color: var(--text); margin-bottom: 6px;}
+.moat-card .moat-rate {font-family: var(--font-sans); font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px;}
+.moat-card.wide .moat-rate {background: rgba(122,154,122,.18); color: var(--green);}
+.moat-card.narrow .moat-rate {background: rgba(185,160,106,.18); color: var(--gold);}
+.moat-card.none .moat-rate {background: rgba(184,112,112,.18); color: var(--red);}
+.moat-card p {font-size: 12.5px; color: var(--text2); line-height: 1.65;}
+.ec-item {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 14px; box-shadow: 0 1px 3px var(--shadow);}
+.ec-badge {flex-shrink: 0; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-top: 2px; font-family: var(--font-sans);}
+.dcf-note {background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: 13px; color: var(--text2); line-height: 1.8;}
+.dcf-note strong {color: var(--text);}
+.scorecard {background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow);}
+.score-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px;}
+.score-card {background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px;}
+.score-letter {width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-sans); font-weight: 800; font-size: 22px; flex-shrink: 0; border: 3px solid;}
+.flag-row {margin-top: 16px; padding: 12px 16px; background: rgba(184,112,112,.08); border: 1px solid rgba(184,112,112,.3); border-radius: 8px; font-size: 13px; color: var(--text2);}
+.flag-row strong {color: var(--red);}
+.pgrid {display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0;}
+.pbox {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center; box-shadow: 0 1px 4px var(--shadow);}
+.pbox .pl {font-family: var(--font-sans); font-size: 11px; color: var(--text3-ink); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px;}
+.pbox .pv {font-family: var(--font-sans); font-size: 28px; font-weight: 800; margin-bottom: 5px;}
+.pbox .pn {font-size: 12px; color: var(--text3-ink); line-height: 1.5;}
+.risk-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px;}
+.risk-card {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); position: relative; overflow: hidden;}
+.risk-card::before {content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent);}
+.risk-card.r1::before {background: var(--green);}
+.risk-card.r2::before {background: rgba(122,154,122,.6);}
+.risk-card.r3::before {background: var(--gold);}
+.risk-card.r4::before {background: var(--rose);}
+.risk-card.r5::before {background: var(--red);}
+.risk-card h5 {font-size: 14px; margin-bottom: 6px; color: var(--text);}
+.risk-card p {font-size: 13px; color: var(--text2); line-height: 1.7;}
+/* ⚠️ 此处原本混进了三条来自语料 @media(max-width:768px) 内的移动端规则
+   （.cgrid/.pgrid→1fr、.kpi-grid→1fr 1fr、.stock-snap→1fr 1fr）。
+   它们被抽取时丢掉了 @media 包裹，变成无条件规则且排在最后，
+   结果桌面端所有网格都塌成单列。已删除 —— 移动端由本表第 4、9 节的
+   @media(max-width:640px) 统一负责。抽取语料 CSS 时务必排除 @media 块内的规则。 */
+
+/* 骨架用到、但语料里没有现成规则的补充组件 */
+.note { font-size: 12px; color: var(--text3-ink); line-height: 1.7; margin-top: 10px; }
+.lead { font-size: 16px; font-weight: 600; line-height: 1.8; margin-bottom: 14px; }
+.haitu-disc { font-size: 12px; color: var(--text3-ink); line-height: 1.7; margin-top: 18px;
+              padding-top: 14px; border-top: 1px solid var(--border); }
+.bscore { background: var(--card2); border: 1px solid var(--border); border-radius: 10px;
+          padding: 16px 20px; margin: 16px 0; }
+.bscore h4 { font-family: var(--font-sans); font-size: 14px; color: var(--accent3-ink); margin: 0 0 6px; }
+.bscore p { margin: 0; font-size: 14px; }
+
+/* 桑基 SVG：颜色与线宽在标记里给，这里只管描边端点与文字 */
+#sankey { width: 100%; height: auto; }
+.sk-flow path { fill: none; opacity: .45; stroke-linecap: butt; }
+.sk-t .sk-lab { font-family: var(--font-sans); font-size: 12px; fill: var(--text2); }
+.sk-t .sk-num { font-family: var(--font-sans); font-size: 13px; font-weight: 700; fill: var(--text);
+                font-variant-numeric: tabular-nums; }
+.sk-t .warn   { fill: var(--red-ink); }
+
+@media (max-width: 640px) {
+  .stock-snap { grid-template-columns: 1fr 1fr; }
+  .kpi-grid   { grid-template-columns: 1fr 1fr; }
+  .moat-grid, .risk-grid, .score-grid, .pgrid { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* 修饰类：评分等级 / 电话会情绪 / 快照数值。文字色一律走 ink 层。 */
+.score-letter.s-a  { color: var(--green-ink);   border-color: var(--green);   background: rgba(122,154,122,.12); }
+.score-letter.s-bp { color: var(--gold-ink);    border-color: var(--gold);    background: rgba(185,160,106,.12); }
+.score-letter.s-b  { color: var(--accent2-ink); border-color: var(--accent2); background: rgba(123,143,160,.12); }
+.score-letter.s-c  { color: var(--red-ink);     border-color: var(--red);     background: rgba(184,112,112,.12); }
+
+.ec-badge.ec-bull { background: rgba(122,154,122,.18); color: var(--green-ink); }
+.ec-badge.ec-bear { background: rgba(184,112,112,.18); color: var(--red-ink); }
+.ec-badge.ec-neut { background: rgba(123,143,160,.18); color: var(--accent2-ink); }
+
+.snap-value { font-family: var(--font-sans); font-size: 19px; font-weight: 700; color: var(--text);
+              font-variant-numeric: tabular-nums; line-height: 1.3; }
+.snap-note  { font-family: var(--font-sans); font-size: 11px; color: var(--text3-ink); margin-top: 3px; }
+.sk-node rect { opacity: .9; }
+
+</style>
+</head>
+<body>
+
+<a class="skip" href="#kpi">跳到正文</a>
+
+<!-- ── 顶栏 ── -->
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/QCOM" target="_blank" rel="noopener">📊 雪球 QCOM</a>
+  </div>
+  <div class="theme-bar-right">
+    <span>☀️ 浅色</span>
+    <!-- ⚠️ 必须是 <button>，不是 <div onclick>。存量 103/103 用裸 div，键盘完全不可达。
+         CSS 里已配套 appearance:none;border:0;padding:0，否则 UA 默认样式破坏 44×22 造型。 -->
+    <button type="button" class="toggle-switch" id="themeBtn"
+            aria-pressed="false" aria-label="切换深色模式" onclick="toggleTheme()"></button>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-tag">Q3 FY2026 财报发布 · 2026-07-29 ｜ 海图研判 · 2026-08-05</div>
+  <h1>高通 QCOM · Q3 FY2026 财报深度分析</h1>
+  <div class="hero-sub">NASDAQ: QCOM ｜ 财季截至 2026-06-28 ｜ 价值投资视角</div>
+  <div class="hero-pills">
+    <span class="pill">股价 <strong>$162.67</strong> 8/4 收盘</span>
+    <span class="pill">市值 <strong>$170.8B</strong></span>
+    <span class="pill">Q3 营收 <strong>$9.95B</strong> <span class="dn">−4%</span></span>
+    <span class="pill">Non-GAAP EPS <strong>$2.21</strong> <span class="dn">−20%</span></span>
+    <span class="pill">营业利润率 <strong>16.3%</strong> <span class="dn">−10.3pp</span></span>
+    <span class="pill">自由现金流 <strong>$0.50B</strong> <span class="dn">−81%</span></span>
+  </div>
+</div>
+
+<div class="container">
+  <div class="haitu-quip">
+    <div class="haitu-quote">
+      <div class="haitu-portrait">一手卖手机芯片、一手收无线专利过路费的双龙头，正在被苹果抽走旧引擎——而这一季，抽走的速度比预告的还快。</div>
+      <div class="haitu-rating-line">
+        评级：<span class="rating-badge" data-rating="持有观望">持有观望</span>
+        · 12 个月目标价 $170 · 转型更具体了，但当期自由现金流塌到只剩 $4.95 亿
+      </div>
+      <div class="quip-jump" role="group" aria-label="快速跳转">
+        <a href="#m13">评分卡与决策</a>
+        <a href="#m7">目标价怎么算出来的</a>
+        <a href="#m11">风险矩阵</a>
+        <a href="#m4">护城河</a>
+        <a href="#essay">夜读手记</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+<section class="section" id="snapshot" aria-labelledby="snapshot-t">
+  <h2 class="stitle" id="snapshot-t">市场数据快照（2026-08-04 收盘）<a class="anchor" href="#snapshot" aria-label="本节链接">#</a></h2>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">股价</div><div class="snap-value">$162.67</div><div class="snap-note">8/4 收盘 +7.32%</div></div>
+    <div class="snap-item"><div class="snap-label">市值</div><div class="snap-value">$170.8B</div><div class="snap-note">1,057M 股在外</div></div>
+    <div class="snap-item"><div class="snap-label">TTM Non-GAAP P/E</div><div class="snap-value">14.3x</div><div class="snap-note">EPS $11.36</div></div>
+    <div class="snap-item"><div class="snap-label">FY26E P/E</div><div class="snap-value">15.5x</div><div class="snap-note">EPS ~$10.51</div></div>
+    <div class="snap-item"><div class="snap-label">Q4 年化 P/E</div><div class="snap-value">18.9x</div><div class="snap-note">按指引中值外推</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间</div><div class="snap-value">$122 – $260</div><div class="snap-note">距高点 −37%</div></div>
+    <div class="snap-item"><div class="snap-label">股息率</div><div class="snap-value">2.26%</div><div class="snap-note">年化 $3.68</div></div>
+    <div class="snap-item"><div class="snap-label">Q3 营收</div><div class="snap-value">$9.95B</div><div class="snap-note">−4%，达指引上限</div></div>
+    <div class="snap-item"><div class="snap-label">GAAP 营业利润率</div><div class="snap-value">16.3%</div><div class="snap-note">去年同期 26.6%</div></div>
+    <div class="snap-item"><div class="snap-label">单季自由现金流</div><div class="snap-value">$0.50B</div><div class="snap-note">同比 −81%</div></div>
+    <div class="snap-item"><div class="snap-label">净负债</div><div class="snap-value">−$6.97B</div><div class="snap-note">债 $15.27B − 现金 $8.30B</div></div>
+    <div class="snap-item"><div class="snap-label">本季股东回报</div><div class="snap-value">$2.3B</div><div class="snap-note">相当于 FCF 的 465%</div></div>
+  </div>
+</section>
+
+<section class="section" id="kpi" aria-labelledby="kpi-t">
+  <h2 class="stitle" id="kpi-t">Q3 FY2026 核心业绩（财季截至 2026-06-28）<a class="anchor" href="#kpi" aria-label="本节链接">#</a></h2>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="Qualcomm Q3 FY2026 财报新闻稿（2026-07-29）损益表与分部信息；10-Q（qcom-20260628）">
+      <thead><tr><th>指标（百万美元）</th><th>Q3 FY26</th><th>Q3 FY25</th><th>YoY</th><th>读法</th></tr></thead>
+      <tr><td>总营收</td><td>9,947</td><td>10,365</td><td class="dn">−4%</td><td>落在指引 $9.2–10.0B 上限</td></tr>
+      <tr><td>QCT（半导体）</td><td>8,504</td><td>8,993</td><td class="dn">−5%</td><td>内部剧烈分化，见下</td></tr>
+      <tr class="hl"><td>— 手机 Handsets</td><td>5,086</td><td>6,328</td><td class="dn">−20%</td><td>苹果流失 + 中国去库存</td></tr>
+      <tr class="hl"><td>— 汽车 Automotive</td><td>1,588</td><td>984</td><td class="up">+61%</td><td>连续 23 季双位数增长</td></tr>
+      <tr><td>— IoT</td><td>1,830</td><td>1,681</td><td class="up">+9%</td><td>结构优化带动单价</td></tr>
+      <tr><td>QTL（授权）</td><td>1,278</td><td>1,318</td><td class="dn">−3%</td><td>EBT 利润率 69%（去年 71%）</td></tr>
+      <tr><td>QCT EBT 利润率</td><td>26%</td><td>30%</td><td class="dn">−4pp</td><td>Q4 指引再降至 23–25%</td></tr>
+      <tr><td>GAAP 毛利率</td><td>53%</td><td>56%</td><td class="dn">−3pp</td><td>内存与投入成本上涨</td></tr>
+      <tr class="hl"><td>GAAP 营业利润</td><td>1,626</td><td>2,762</td><td class="dn">−41%</td><td>利润率 26.6% → 16.3%</td></tr>
+      <tr><td>投资及其他收入净额</td><td>1,014</td><td>358</td><td class="up">+$656M</td><td>QSI 持股 IPO 收益，非经营</td></tr>
+      <tr><td>GAAP 净利润</td><td>2,002</td><td>2,666</td><td class="dn">−25%</td><td>有效税率 19%（去年 10%）</td></tr>
+      <tr><td>GAAP 摊薄 EPS</td><td>1.87</td><td>2.43</td><td class="dn">−23%</td><td>含 $1,014M 投资收益</td></tr>
+      <tr class="hl"><td>Non-GAAP 摊薄 EPS</td><td>2.21</td><td>2.77</td><td class="dn">−20%</td><td>落在指引 $2.10–2.30 中值上方</td></tr>
+      <tr><td>研发费用（GAAP）</td><td>2,607</td><td>2,226</td><td class="dn">+17%</td><td>占营收 26%，逆势加码</td></tr>
+      <tr><td>经营现金流（单季）</td><td>991</td><td>2,875</td><td class="dn">−66%</td><td>存货与税项吞噬</td></tr>
+      <tr class="hl"><td>自由现金流（单季）</td><td>495</td><td>2,581</td><td class="dn">−81%</td><td>本季真正的分水岭</td></tr>
+    </table>
+  </div>
+  <p class="note">单季经营现金流与资本开支为九个月累计减六个月累计推导所得（Qualcomm 只披露累计数），已逐份核对报表期间标题，无重叠。</p>
+</section>
+
+<section class="section" id="focus" aria-labelledby="focus-t">
+  <h2 class="stitle" id="focus-t">本季必看 · 两个「看穿」<a class="anchor" href="#focus" aria-label="本节链接">#</a></h2>
+  <p><strong>看穿一：GAAP 净利 $20.0 亿里，有 $10.14 亿不是主业赚的。</strong>本季「投资及其他收入净额」高达 $1,014M（去年同期 $358M），主因部分 QSI 股权投资标的 IPO 产生的浮盈——非现金、非经营、不可重复。真正反映经营的是<strong>营业利润 $16.26 亿，同比 −41%，利润率从 26.6% 塌到 16.3%</strong>。这是连续第二个季度出现「GAAP 利润被一次性项目扭曲」——上一季是 $57 亿递延税转回，这一季是投资浮盈，方向都是把报表修饰得比经营好看。</p>
+  <p><strong>看穿二：净利 $20.0 亿，经营现金流只有 $9.91 亿。</strong>两者之间是 <strong>−$10.11 亿的净流出</strong>：存货较财年初大增 28.4% 到 $83.79 亿，加上一次性税款支付。扣掉资本开支后，<strong>本季自由现金流只剩 $4.95 亿，同比 −81%</strong>。而同期公司给股东发了 <strong>$23 亿</strong>（回购 $14 亿 + 股息 $9.73 亿）——<strong>相当于当期自由现金流的 465%</strong>，差额由资产负债表和新增债务承担。净负债因此从上季的 −$54.7 亿扩大到 <strong>−$69.7 亿</strong>。</p>
+  <p>把两个「看穿」合起来：<strong>这一季报表上的「净利 $20 亿、EPS $1.87」，对应的真实现金创造只有 $4.95 亿。</strong>差距不是造假，是周期与转型同时压上来的结果——但读者必须知道自己在为哪一个数字付钱。</p>
+</section>
+
+<section class="section" id="trend" aria-labelledby="trend-t">
+  <h2 class="stitle" id="trend-t">关键指标趋势（近 5 季）<a class="anchor" href="#trend" aria-label="本节链接">#</a></h2>
+  <div class="cgrid">
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">总营收与 QCT 营收（$B）</div>
+        <div class="cwrap"><canvas id="rev" data-chart="rev" role="img" aria-label="总营收从 Q1 FY2026 的 122.5 亿高点连续两季回落至 99.5 亿美元，QCT 同步从 106.1 亿降至 85.0 亿"></canvas></div>
+        <figcaption>来源：各季官方财报新闻稿。Q1 FY26 是本轮高点，此后连续两季回落。</figcaption>
+      </figure>
+    </div>
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">GAAP 营业利润率 vs QCT EBT 利润率（%）</div>
+        <div class="cwrap"><canvas id="margin" data-chart="margin" role="img" aria-label="GAAP 营业利润率从 27.5% 连续下滑至 16.3%，QCT 分部 EBT 利润率同期从 31% 降至 26%"></canvas></div>
+        <figcaption>来源：同上，QCT EBT 利润率为公司披露值。两条线同步下行，且 Q4 指引 QCT 再降至 23–25%。</figcaption>
+      </figure>
+    </div>
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">QCT 三条腿：手机 / 汽车 / IoT（$B）</div>
+        <div class="cwrap"><canvas id="segment" data-chart="segment" role="img" aria-label="手机营收从 78.2 亿连续下滑至 50.9 亿美元，同期汽车从 11.0 亿升至 15.9 亿创纪录，IoT 稳定在 17 至 18 亿之间"></canvas></div>
+        <figcaption>来源：各季 QCT Revenue Streams。<strong>这是全篇最重要的一张图</strong>——旧引擎退潮与新引擎接棒的赛跑。</figcaption>
+      </figure>
+    </div>
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">Non-GAAP EPS（$）vs 单季自由现金流（$B）</div>
+        <div class="cwrap"><canvas id="eps" data-chart="eps" role="img" aria-label="Non-GAAP 每股收益从 3.50 美元连续三季降至 2.21 美元，同期单季自由现金流从 44.2 亿骤降至 4.95 亿美元"></canvas></div>
+        <figcaption>来源：各季新闻稿与现金流量表。自由现金流的下滑幅度远大于 EPS——这个缺口就是存货与税项。</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="flow" aria-labelledby="flow-t">
+  <h2 class="stitle" id="flow-t">资金流向桑基图（Q3 FY2026 · $B）<a class="anchor" href="#flow" aria-label="本节链接">#</a></h2>
+  <div class="ccard">
+    <figure class="chart">
+      <svg id="sankey" viewBox="0 0 1180 470" role="img" aria-label="Q3 FY2026 资金流向：99.5 亿美元营收扣除成本后毛利 52.8 亿，再扣研发销管后营业利润仅 16.3 亿；加上 10.1 亿非经营投资收益后税前利润 24.6 亿，净利 20.0 亿；但营运资金与税项净流出 10.1 亿，经营现金流只剩 9.9 亿，扣除资本开支后自由现金流仅 4.95 亿">
+        <g class="sk-flow">
+          <path d="M96,26 C260,26 260,34 300,34" stroke="var(--accent2)" stroke-width="60"/>
+          <path d="M96,110 C260,110 260,180 300,180" stroke="var(--accent)" stroke-width="68"/>
+          <path d="M330,180 C420,180 420,120 470,120" stroke="var(--accent3)" stroke-width="34"/>
+          <path d="M330,196 C420,196 420,168 470,168" stroke="var(--rose)" stroke-width="13"/>
+          <path d="M330,206 C420,206 420,196 470,196" stroke="var(--gold)" stroke-width="2"/>
+          <path d="M330,224 C420,224 420,250 470,250" stroke="var(--accent)" stroke-width="21"/>
+          <path d="M500,250 C560,250 560,268 610,268" stroke="var(--accent)" stroke-width="21"/>
+          <path d="M500,330 C560,330 560,290 610,290" stroke="var(--green)" stroke-width="13"/>
+          <path d="M640,278 C700,278 700,262 750,262" stroke="var(--rose)" stroke-width="6"/>
+          <path d="M640,292 C700,292 700,300 750,300" stroke="var(--accent)" stroke-width="26"/>
+          <path d="M780,300 C820,300 820,360 860,360" stroke="var(--red)" stroke-width="13"/>
+          <path d="M780,290 C820,290 820,250 860,250" stroke="var(--accent)" stroke-width="13"/>
+          <path d="M890,250 C920,250 920,232 950,232" stroke="var(--red)" stroke-width="6"/>
+          <path d="M890,258 C920,258 920,272 950,272" stroke="var(--green)" stroke-width="6"/>
+        </g>
+        <g class="sk-node">
+          <rect x="82" y="0" width="14" height="144" rx="3" fill="var(--accent2)"/>
+          <rect x="300" y="4" width="14" height="60" rx="3" fill="var(--accent2)"/>
+          <rect x="300" y="146" width="14" height="68" rx="3" fill="var(--accent)"/>
+          <rect x="470" y="103" width="14" height="34" rx="3" fill="var(--accent3)"/>
+          <rect x="470" y="162" width="14" height="13" rx="3" fill="var(--rose)"/>
+          <rect x="470" y="195" width="14" height="3" rx="1" fill="var(--gold)"/>
+          <rect x="470" y="240" width="14" height="21" rx="3" fill="var(--accent)"/>
+          <rect x="486" y="323" width="14" height="14" rx="3" fill="var(--green)"/>
+          <rect x="610" y="258" width="14" height="34" rx="3" fill="var(--accent)"/>
+          <rect x="750" y="259" width="14" height="6" rx="2" fill="var(--rose)"/>
+          <rect x="750" y="287" width="14" height="26" rx="3" fill="var(--accent)"/>
+          <rect x="860" y="244" width="14" height="13" rx="3" fill="var(--accent)"/>
+          <rect x="860" y="354" width="14" height="13" rx="3" fill="var(--red)"/>
+          <rect x="950" y="229" width="14" height="6" rx="2" fill="var(--red)"/>
+          <rect x="950" y="269" width="14" height="6" rx="2" fill="var(--green)"/>
+        </g>
+        <g class="sk-t">
+          <text x="2" y="66" class="sk-lab">营收</text><text x="2" y="82" class="sk-num">9.95</text>
+          <text x="322" y="30" class="sk-lab">收入成本</text><text x="322" y="46" class="sk-num">4.67</text>
+          <text x="322" y="176" class="sk-lab">毛利</text><text x="322" y="192" class="sk-num">5.28</text>
+          <text x="492" y="116" class="sk-lab">研发</text><text x="492" y="132" class="sk-num">2.61</text>
+          <text x="492" y="166" class="sk-lab">销售与管理</text><text x="492" y="181" class="sk-num">0.98</text>
+          <text x="492" y="200" class="sk-lab">重组</text><text x="600" y="200" class="sk-num">0.07</text>
+          <text x="492" y="246" class="sk-lab warn">营业利润</text><text x="492" y="262" class="sk-num warn">1.63</text>
+          <text x="380" y="352" class="sk-lab">＋投资及其他收入（QSI 持股 IPO 浮盈，非经营）− 利息</text><text x="380" y="368" class="sk-num">＋0.84</text>
+          <text x="632" y="252" class="sk-lab">税前利润</text><text x="632" y="268" class="sk-num">2.46</text>
+          <text x="772" y="256" class="sk-lab">所得税</text><text x="772" y="271" class="sk-num">0.46</text>
+          <text x="772" y="330" class="sk-lab">净利润</text><text x="772" y="346" class="sk-num">2.00</text>
+          <text x="700" y="392" class="sk-lab warn">− 营运资金与税项净流出（存货 +28.4%）</text><text x="700" y="408" class="sk-num warn">−1.01</text>
+          <text x="882" y="238" class="sk-lab">经营现金流</text><text x="882" y="254" class="sk-num">0.99</text>
+          <text x="972" y="226" class="sk-lab">资本开支</text><text x="972" y="242" class="sk-num">0.50</text>
+          <text x="972" y="266" class="sk-lab warn">自由现金流</text><text x="972" y="282" class="sk-num warn">0.50</text>
+        </g>
+      </svg>
+      <figcaption>单位：十亿美元。来源：Q3 FY2026 新闻稿损益表、10-Q 现金流量表（单季数由累计相减推导）。每级流入=流出（9.95 = 4.67+5.28；5.28 = 2.61+0.98+0.07+1.63；2.46 = 0.46+2.00；0.99 = 0.50+0.50）。<strong>注意最右端：$99.5 亿营收走到最后，只剩 $4.95 亿自由现金流——而本季发给股东的是 $23 亿。</strong></figcaption>
+    </figure>
+    <details class="chart-data">
+      <summary>查看数据表</summary>
+      <div class="tbl-wrap">
+        <table class="tbl" data-shape="grid" data-source="Qualcomm Q3 FY2026 新闻稿损益表与 10-Q 现金流量表">
+          <thead><tr><th>节点</th><th>金额（$B）</th><th>占营收</th></tr></thead>
+          <tr><td>营收</td><td>9.95</td><td>100.0%</td></tr>
+          <tr><td>收入成本</td><td>4.67</td><td>46.9%</td></tr>
+          <tr><td>毛利</td><td>5.28</td><td>53.1%</td></tr>
+          <tr><td>研发</td><td>2.61</td><td>26.2%</td></tr>
+          <tr><td>销售与管理</td><td>0.98</td><td>9.8%</td></tr>
+          <tr><td>重组</td><td>0.07</td><td>0.7%</td></tr>
+          <tr class="hl"><td>营业利润</td><td>1.63</td><td>16.3%</td></tr>
+          <tr><td>投资及其他收入净额</td><td>1.01</td><td>10.2%</td></tr>
+          <tr><td>利息费用</td><td>0.18</td><td>1.8%</td></tr>
+          <tr><td>税前利润</td><td>2.46</td><td>24.8%</td></tr>
+          <tr><td>所得税</td><td>0.46</td><td>4.6%</td></tr>
+          <tr><td>净利润</td><td>2.00</td><td>20.1%</td></tr>
+          <tr><td>营运资金与税项净流出</td><td>−1.01</td><td>−10.2%</td></tr>
+          <tr><td>经营现金流</td><td>0.99</td><td>10.0%</td></tr>
+          <tr><td>资本开支</td><td>0.50</td><td>5.0%</td></tr>
+          <tr class="hl"><td>自由现金流</td><td>0.50</td><td>5.0%</td></tr>
+        </table>
+      </div>
+    </details>
+  </div>
+</section>
+
+<section class="section" id="m1" aria-labelledby="m1-t">
+  <h2 class="stitle" id="m1-t">模块 1 · 公司概览与背景<a class="anchor" href="#m1" aria-label="本节链接">#</a></h2>
+  <p>Qualcomm 的生意可以用一句话说清：<strong>一手卖手机的大脑（QCT，本季占营收 85.5%），一手向几乎所有手机厂商收无线专利的过路费（QTL，占 12.8%，EBT 利润率 69%）。</strong>前者是周期性的芯片制造生意，后者是接近年金的授权生意——两者叠加，构成了过去十五年这家公司的现金机器。</p>
+  <p>2026 财年的 Qualcomm 正处在一次<strong>被迫的转型</strong>中。苹果自研基带正在把 QCT 手机业务里最大的一块客户抽走，而公司的应对是把重心压到三条新腿上：<strong>汽车</strong>（本季 $15.88 亿，+61%，连续 23 个季度双位数增长）、<strong>IoT / 工业边缘</strong>（$18.30 亿，+9%）、以及<strong>数据中心</strong>（本季并入「非可报告分部」，营收 $1.65 亿，EBT −$2.14 亿，仍在投入期）。</p>
+  <p>规模数据：本季总营收 $99.47 亿（−4%）、在外流通股 10.57 亿股、剩余回购授权 $206 亿。员工人数季报不披露，最近一次为 FY2025 年报的约 52,000 人。FY2025 按客户总部口径，中国（含香港）贡献营收 46%。</p>
+</section>
+
+<section class="section" id="m2" aria-labelledby="m2-t">
+  <h2 class="stitle" id="m2-t">模块 2 · 管理层评估<a class="anchor" href="#m2" aria-label="本节链接">#</a></h2>
+  <p>CEO Cristiano Amon 与 CFO Akash Palkhiwala 这一季交出的是一份<strong>「说到做到、但坏消息说得慢」</strong>的答卷。</p>
+  <div class="bscore">
+    <h4>兑现的部分：上季的判断被证实了</h4>
+    <p>上一季（Q2 FY2026）管理层公开判断「中国手机需求将在 Q3 见底」。本季 CFO 明确确认：<strong>「QCT 来自中国 OEM 的手机营收在第三财季触底，并将在第四季度恢复两位数环比增长。」</strong>依据是渠道库存已薄到无法再消化、采购正在向真实市场规模回归。同时汽车业务的 FY26 退出年化收入目标<strong>从 $60 亿上调到约 $70 亿</strong>，并拿下 BMW 下一代 ADAS 与数字座舱的主力计算芯片定点。营收与 QCT 双双落在指引区间上限。</p>
+  </div>
+  <div class="bscore">
+    <h4>没兑现的部分：苹果的洞比自己三个月前说的更深</h4>
+    <p>上一季给市场的口径是苹果调制解调器份额约 20%。本季书面改口：<strong>「我们现在预计 Apple 产品营收的下台阶将从第四财季开始加速，因为我们在即将到来的 iPhone 发布中的调制解调器份额预计将大幅低于此前 20% 的估计。」</strong>更具体的量化是：12 月季度苹果营收<strong>环比下降约 50%</strong>；FY2027 苹果产品营收将<strong>低于此前指引的「略超 $20 亿」</strong>。Bernstein 分析师在电话会上直接质问「你们是不是在故意饿死苹果」，CFO 的回答是「我们的供应约束是其中一部分，然后谈判最终落在份额大幅低于 20%」——换句话说，<strong>这既有主动取舍，也有被动失守，管理层没有把话说透。</strong></p>
+  </div>
+  <p><strong>资本配置的问号</strong>：本季自由现金流只有 $4.95 亿，却仍发出 $23 亿股东回报，同时完成 Modular 收购（约 $31 亿，主要以发行 1,800 万股支付）。加上去年 12 月的 Alphawave（$23 亿），九个月内另有 7 笔小并购合计 $11 亿。<strong>在现金流最紧的一季维持满额回报 + 大额并购，是把资产负债表的弹性当成了缓冲垫。</strong></p>
+</section>
+
+<section class="section" id="m3" aria-labelledby="m3-t">
+  <h2 class="stitle" id="m3-t">模块 3 · 商业模式深度解析<a class="anchor" href="#m3" aria-label="本节链接">#</a></h2>
+  <p>海图「一句话测试」：<strong>Qualcomm 卖两样东西——把无线信号变成算力的芯片，和「你只要造手机就得付」的专利许可。</strong>这个测试它通过了，但通过得不如三年前干净，因为第三块（数据中心）刚刚长出来，还没有可验证的收入。</p>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="cards" data-source="Q3 FY2026 新闻稿分部信息、10-Q Note 6、官方电话会实录">
+      <thead><tr><th>引擎</th><th>Q3 FY26 规模</th><th>状态与判断</th></tr></thead>
+      <tr><td>QCT 手机</td><td>$50.86 亿（−20%）</td><td><strong>旧引擎，正在退潮。</strong>两个原因：苹果结构性流失（不可逆）+ 中国 OEM 因内存涨价去库存（周期性，已确认见底）。Q4 指引约 $52 亿。</td></tr>
+      <tr><td>QCT 汽车</td><td>$15.88 亿（+61%）</td><td><strong>最确定的新引擎。</strong>增量中 $3.81 亿来自单价提升、$2.23 亿来自出货增长。BMW 定点延伸至 2030 年代，第五代数字底盘 9 月爬坡。Q4 指引同比再 +60%。</td></tr>
+      <tr><td>QCT IoT</td><td>$18.30 亿（+9%）</td><td>工业/网络/机器人设计中标管线 &gt;$70 亿，本财年已锁定 &gt;$35 亿。但 Q4 指引「与去年大致持平」——平板与消费品被内存挤压。</td></tr>
+      <tr><td>QTL 授权</td><td>$12.78 亿（−3%）</td><td><strong>年金，但有到期日。</strong>EBT 利润率 69%，是全公司最赚钱的部分。与主要 OEM 的许可协议在 <strong>FY2027–FY2031 之间陆续到期</strong>。</td></tr>
+      <tr><td>数据中心</td><td>$1.65 亿（非可报告分部合计），EBT −$2.14 亿</td><td><strong>期权，尚未兑现。</strong>两个超大规模厂商定制芯片已投片、已有 PO，12 月季度起确认收入。管理层给出 FY27 $50 亿 / FY29 $150 亿+ 的路线图。</td></tr>
+    </table>
+  </div>
+  <p><strong>单位经济正在恶化，且是行业性的。</strong>CEO 在电话会上说，整个行业「运行状态可能非常类似于疫情时期，所有环节都处于 100% 利用率」——晶圆、封装、测试全在涨价短缺。公司已实施<strong>两位数幅度的全线涨价</strong>，但传导到毛利率需要几个季度。CFO 明确基准毛利率区间是 <strong>48%–50%</strong>，而本季 QCT 毛利率「略低于历史区间」。更关键的是：<strong>数据中心首批收入以定制芯片为主，毛利率显著低于基准，将对 QCT 加权平均毛利率构成 1.5%–2% 的拖累。</strong>换句话说，新引擎接棒的代价之一是利润率结构性下移。</p>
+</section>
+
+<section class="section" id="m4" aria-labelledby="m4-t">
+  <h2 class="stitle" id="m4-t">模块 4 · 经济护城河分析（5 维）<a class="anchor" href="#m4" aria-label="本节链接">#</a></h2>
+  <div class="moat-grid">
+    <div class="moat-card wide"><h5>无形资产（专利）—— 宽，但有到期日</h5><p>QTL 是全球无线通信专利的收费站，EBT 利润率 69%，几乎所有手机厂商都要付。这是 Qualcomm 最硬的护城河。但 10-Q 明确：主要 OEM 许可协议<strong>剩余期限在 FY2027–FY2031 之间到期</strong>，每一次续约都是一次重新定价。</p></div>
+    <div class="moat-card wide"><h5>转换成本 —— 宽（汽车），窄（手机）</h5><p>汽车正在从「逐个 socket 竞标」转向「多代际战略合作」——BMW 的定点延伸至 2030 年代，Stellantis 管线进入 2030 年代。一旦进入整车平台，替换周期以十年计。手机侧则相反：苹果的离开证明了大客户完全可以自研替换。</p></div>
+    <div class="moat-card narrow"><h5>成本优势 —— 窄，且正在被侵蚀</h5><p>规模仍是优势（CEO 称「库存在短缺时期同样是战略优势」），但本季 GAAP 毛利率 53%（去年 56%），QCT 毛利率已跌破 48–50% 基准区间。成本优势在行业性涨价面前正在缩水。</p></div>
+    <div class="moat-card narrow"><h5>网络效应 —— 窄</h5><p>骁龙生态（开发者、参考设计、Arduino + Edge Impulse 触达 3,000 万用户、渠道客户 &gt;38,000 家）有一定聚集效应，但不构成强网络效应——芯片可以被替换，生态迁移成本远低于社交网络。</p></div>
+    <div class="moat-card none"><h5>有效规模 —— 无</h5><p>手机 SoC 市场容得下联发科、苹果自研、三星自研等多个玩家；数据中心更是英伟达、AMD、博通与所有超大规模厂商自研共存的红海。不存在「市场只能容纳有限玩家」的结构。</p></div>
+  </div>
+  <p>综合判断：<strong>护城河仍在，但形状正在改变。</strong>过去它建立在「手机 SoC 份额 + 专利年金」的双重优势上；现在手机那一半正被最大的客户主动拆掉，专利那一半面临 FY2027 起的续约窗口。新长出来的汽车护城河（多代际定点）质地其实更好——转换成本更高、周期更长——但规模还不足以补上缺口。<strong>10 年后护城河会更窄还是更宽，取决于汽车与数据中心能否在 QTL 续约谈判之前长到足够大。</strong></p>
+</section>
+
+<section class="section" id="m5" aria-labelledby="m5-t">
+  <h2 class="stitle" id="m5-t">模块 5 · 财务深度分析<a class="anchor" href="#m5" aria-label="本节链接">#</a></h2>
+  <h3>5.1 近 5 季核心趋势</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="各季官方财报新闻稿（Q3 FY2025 至 Q3 FY2026）；营业利润率与资本开支为累计相减推导">
+      <thead><tr><th>季度</th><th>总营收（$M）</th><th>QCT（$M）</th><th>Non-GAAP EPS</th><th>GAAP 营业利润率</th><th>资本开支（$M）</th></tr></thead>
+      <tr><td>Q3 FY25</td><td>10,365</td><td>8,993</td><td>$2.77</td><td>26.6%</td><td>294</td></tr>
+      <tr><td>Q4 FY25</td><td>11,270</td><td>9,821</td><td>$3.00</td><td>25.9%</td><td>407</td></tr>
+      <tr><td>Q1 FY26</td><td>12,252</td><td>10,613</td><td>$3.50</td><td>27.5%</td><td>549</td></tr>
+      <tr><td>Q2 FY26</td><td>10,599</td><td>9,076</td><td>$2.65</td><td>21.8%</td><td>533</td></tr>
+      <tr class="hl"><td>Q3 FY26</td><td>9,947</td><td>8,504</td><td>$2.21</td><td>16.3%</td><td>496</td></tr>
+    </table>
+  </div>
+  <p><strong>四个季度里，Non-GAAP EPS 从 $3.50 掉到 $2.21，Q4 指引中值 $2.15——运行率累计下滑 39%。</strong>这不是单季波动，是连续三季的方向性下行。</p>
+
+  <h3>5.2 利润质量：本季最该警惕的地方</h3>
+  <p>净利润 $20.02 亿，经营现金流 $9.91 亿，<strong>现金流／净利润仅 0.49 倍</strong>。健康的公司这个比值应该 &gt;1（非现金费用加回）。低于 1 意味着<strong>账面利润没有变成现金</strong>，缺口来自两处：存货较财年初增加 28.4% 至 $83.79 亿（占用现金），以及一次性税款支付。</p>
+  <p>同时要注意 GAAP 利润的构成：$20.02 亿净利里，<strong>$10.14 亿来自投资及其他收入</strong>（QSI 持股 IPO 浮盈）。剔除后，主业贡献的税前利润仅 $14.48 亿。<strong>连续两季，GAAP 利润都被非经营项目显著修饰</strong>（上季是 $57 亿递延税转回）。</p>
+
+  <h3>5.3 资产负债健康度</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="Qualcomm 10-Q（截至 2026-06-28）资产负债表与附注 7、8">
+      <thead><tr><th>项目</th><th>2026-06-28</th><th>2025-09-28</th><th>判断</th></tr></thead>
+      <tr><td>现金及等价物</td><td>$45.33 亿</td><td>$55.20 亿</td><td>下降</td></tr>
+      <tr><td>受限现金</td><td>$0</td><td>$23.23 亿</td><td>已用于并购</td></tr>
+      <tr><td>有价证券</td><td>$37.71 亿</td><td>$46.35 亿</td><td>含 $9.26 亿权益证券</td></tr>
+      <tr><td>现金 + 证券合计</td><td>$83.04 亿</td><td>$101.55 亿</td><td class="dn">−18%</td></tr>
+      <tr><td>短期债务</td><td>$24.89 亿</td><td>$0</td><td>2027/5 到期债券重分类 + 商业票据</td></tr>
+      <tr><td>长期债务</td><td>$127.81 亿</td><td>$148.11 亿</td><td>—</td></tr>
+      <tr class="hl"><td>净负债</td><td>−$69.66 亿</td><td>−$46.56 亿</td><td class="dn">恶化 50%</td></tr>
+      <tr class="hl"><td>存货</td><td>$83.79 亿</td><td>$65.26 亿</td><td class="dn">+28.4%</td></tr>
+      <tr><td>商誉</td><td>$142.74 亿</td><td>$113.58 亿</td><td>并购推高 $29 亿</td></tr>
+    </table>
+  </div>
+  <p><strong>不要再把「净现金公司」安在 Qualcomm 头上。</strong>它已连续两季净负债，且本季从 −$46.56 亿扩大到 −$69.66 亿。循环信贷额度未提取、固定利率票据公允价值约 $140 亿，短期偿付无压力——但<strong>安全垫确实在变薄</strong>，而这发生在自由现金流最弱的一季。</p>
+  <p>存货 +28.4% 是一个双向赌注：管理层的说法是「短缺时期库存是战略优势」，赌的是 Q4 中国手机回补 + 涨价传导。<strong>赌对了是顺周期放大，赌错了是减值。</strong>上一季这个数字是 $74 亿，这一季继续加到 $83.79 亿——注码在加大。</p>
+
+  <h3>5.4 现金流质量与所有者盈余</h3>
+  <p>九个月累计：经营现金流 $84.05 亿（去年 $100.16 亿），资本开支 $15.78 亿（去年 $7.85 亿，<strong>同比 +101%</strong>），自由现金流 $68.27 亿（去年 $92.31 亿，−26%）。单季看则更极端：<strong>FCF $4.95 亿，同比 −81%</strong>。</p>
+  <p><strong>所有者盈余估算</strong>：净利 $20.02 亿 + 折旧摊销（约 $7 亿/季）+ 股权激励 $8.27 亿 − 维护性资本开支（估约 $3 亿，即总 capex $4.96 亿中扣除数据中心与新产能扩张部分）− 营运资金变动 $10.11 亿 ≈ <strong>$22 亿/季</strong>。剔除其中 $10.14 亿非经营投资收益后约 <strong>$12 亿/季</strong>，年化约 <strong>$48 亿</strong>。对应当前市值 $1,708 亿，<strong>所有者盈余收益率约 2.8%</strong>——处于历史低位，反映的正是周期底部与转型投入期的双重压制。作为对照，若周期回暖使季度所有者盈余回到 $25 亿量级，该收益率将回到 5.9%。</p>
+</section>
+
+<section class="section" id="m6" aria-labelledby="m6-t">
+  <h2 class="stitle" id="m6-t">模块 6 · 电话会分析<a class="anchor" href="#m6" aria-label="本节链接">#</a></h2>
+  <div class="ec-item"><span class="ec-badge ec-bull">利好</span> <strong>中国手机确认见底。</strong>CFO：「QCT 来自中国 OEM 的手机营收在第三财季触底，并将在第四季度恢复两位数环比增长。」依据是渠道库存已薄到无法再消化——这是上一季判断的兑现，不是新承诺。</div>
+  <div class="ec-item"><span class="ec-badge ec-bull">利好</span> <strong>汽车目标上调。</strong>FY26 退出年化收入从 $60 亿上调至约 $70 亿；BMW 下一代 ADAS + 数字座舱主力供应商定点，延伸至 2030 年代；「有望成为按营收计的第一大汽车半导体厂商」。</div>
+  <div class="ec-item"><span class="ec-badge ec-bull">利好</span> <strong>数据中心从 PPT 变成 PO。</strong>两个超大规模厂商的定制芯片项目<strong>已投片、已有采购订单</strong>，12 月季度起确认收入，FY27 每家 &gt;$10 亿；与 Meta 达成 CPU 多代际战略协议。</div>
+  <div class="ec-item"><span class="ec-badge ec-neut">中性</span> 全线<strong>两位数涨价</strong>已实施，与同业一致。CEO 认为相对于内存物料涨幅「量级仍然很小」，不预期高端量发生根本变化。传导到毛利率需要「未来几个季度」。</div>
+  <div class="ec-item"><span class="ec-badge ec-bear">利空</span> <strong>苹果流失加速且幅度扩大。</strong>新 iPhone 调制解调器份额「大幅低于此前 20% 的估计」；12 月季度苹果营收环比 −50%；FY27 苹果营收低于此前指引的「略超 $20 亿」。这是本季最重要的负面信息。</div>
+  <div class="ec-item"><span class="ec-badge ec-bear">利空</span> <strong>毛利率被两头挤压。</strong>QCT 毛利率已「略低于历史 48–50% 区间」；且数据中心首批定制芯片收入将对 QCT 加权平均毛利率构成 <strong>1.5%–2% 的拖累</strong>。Q4 QCT EBT 利润率指引降至 23–25%。</div>
+  <div class="ec-item"><span class="ec-badge ec-bear">利空</span> <strong>FY26 手机业务量化损失。</strong>公司书面披露：内存涨价导致「QCT Android 手机营收同比下降约 20%，年度 EPS 减少超过 $1.50」。</div>
+  <h3>指引兑现度追踪</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="cards" data-source="Q2 FY2026 财报（2026-04-29）给出的 Q3 指引 vs Q3 FY2026 实际">
+      <thead><tr><th>项目</th><th>上季指引</th><th>本季实际</th><th>结论</th></tr></thead>
+      <tr><td>总营收</td><td>$9.2–10.0B</td><td>$9.9B</td><td class="up">达上限</td></tr>
+      <tr><td>Non-GAAP EPS</td><td>$2.10–2.30</td><td>$2.21</td><td class="up">中值上方</td></tr>
+      <tr><td>QCT 营收</td><td>$7.9–8.5B</td><td>$8.5B</td><td class="up">达上限</td></tr>
+      <tr><td>QCT EBT 利润率</td><td>25–27%</td><td>26%</td><td>中值</td></tr>
+      <tr><td>QTL 营收</td><td>$1.15–1.35B</td><td>$1.3B</td><td class="up">中值上方</td></tr>
+      <tr><td>Non-GAAP 运营费用</td><td>~$2.60B</td><td>$2.59B</td><td>达标</td></tr>
+    </table>
+  </div>
+  <p><strong>信号汇总：短期指引全部达标甚至达上限，但长期口径连续下修。</strong>这是一个值得记住的模式——管理层对下一个季度的把握很准，对一年以上的结构性问题（苹果份额）则倾向于分批释放坏消息。上一季说 20%，这一季说「大幅低于 20%」。</p>
+</section>
+
+<section class="section" id="m7" aria-labelledby="m7-t">
+  <h2 class="stitle" id="m7-t">模块 7 · 多模型估值（8 种方法）<a class="anchor" href="#m7" aria-label="本节链接">#</a></h2>
+  <h3>7.1 八法明细</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="cards" data-source="基于本报告一手财务数据的独立测算；股价 $162.67（2026-08-04 收盘）">
+      <thead><tr><th>方法</th><th>关键假设</th><th>每股价值</th><th>说明</th></tr></thead>
+      <tr><td>P/E（Non-GAAP）</td><td>FY26E EPS $10.51 × 15x</td><td>$158</td><td>15x 为其近三年周期中枢</td></tr>
+      <tr><td>前瞻 P/E</td><td>FY27E EPS ~$10.0 × 16x</td><td>$160</td><td>假设非手机增长恰好抵消苹果流失</td></tr>
+      <tr><td>P/S</td><td>FY26E 营收 ~$429 亿 × 3.8x</td><td>$152</td><td>历史区间 3–5x</td></tr>
+      <tr><td>EV/EBITDA</td><td>FY26E EBITDA ~$142 亿 × 11x，扣净负债</td><td>$139</td><td>周期股给较低倍数</td></tr>
+      <tr><td>SOTP 分部加总</td><td>QTL 13x 税后 EBT + QCT 11x + 数据中心期权 5 折</td><td>$132</td><td>见 7.2</td></tr>
+      <tr><td>DCF</td><td>三情景概率加权</td><td>$176</td><td>见 7.2，唯一体现 FY29 期权价值的方法</td></tr>
+      <tr><td>所有者盈余收益率（FCF 口径）</td><td>年化所有者盈余约 $48 亿 ÷ 市值</td><td>收益率 2.8%</td><td>处于历史低位。若按周期正常化的 $100 亿年化计，收益率 5.9%，对应每股约 $200。周期底部使该法当期失真，故不纳入中位数</td></tr>
+      <tr><td>反向 DCF</td><td colspan="2">诊断用，非估值</td><td>现价 $162.67 隐含长期永续增长约 3%——市场把它定价成「转型不成功也不失败」</td></tr>
+      <tr><td>NAV / 重置成本</td><td colspan="2">不适用</td><td>核心资产是专利组合与芯片设计能力，非可重置的有形资产。总资产 $573.67 亿中商誉即占 $142.74 亿，账面净资产 $276.58 亿（每股约 $26）远低于任何合理内在价值，NAV 对轻资产科技公司无指示意义</td></tr>
+      <tr><td>PEG</td><td colspan="2">不适用</td><td>近四季 EPS 增速为负（运行率 −39%），PEG 分母无意义，强行计算会得出负值</td></tr>
+      <tr><td>DDM</td><td colspan="2">参考性有限</td><td>年化股息 $3.68、股息率 2.26%，但股东回报以回购为主（本季回购 $14 亿 vs 股息 $9.73 亿）。单用 DDM 会系统性低估，仅作下限参考（Gordon 模型 r=9%/g=4% 得 $76，明显偏低）</td></tr>
+    </table>
+  </div>
+
+  <h3>7.2 SOTP 与 DCF 展开</h3>
+  <p><strong>SOTP（分部加总）</strong>——对 Qualcomm 最贴切，因为两块业务性质完全不同：</p>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="基于 FY2026 各季分部 EBT 的独立测算">
+      <thead><tr><th>分部</th><th>FY26E EBT</th><th>倍数</th><th>估值</th><th>理由</th></tr></thead>
+      <tr><td>QTL 授权</td><td>约 $40 亿</td><td>13x 税后</td><td>$453 亿</td><td>年金属性，但 FY27–31 续约窗口压制倍数</td></tr>
+      <tr><td>QCT 半导体</td><td>约 $100 亿</td><td>11x 税后</td><td>$957 亿</td><td>手机下行、汽车上行，周期股倍数</td></tr>
+      <tr><td>数据中心</td><td>FY27E 营收 $50 亿</td><td>3x P/S × 50% 风险折扣</td><td>$75 亿</td><td>已有 PO 但未确认收入，打对折</td></tr>
+      <tr><td>减：净负债</td><td>—</td><td>—</td><td>−$70 亿</td><td>—</td></tr>
+      <tr class="hl"><td>合计</td><td>—</td><td>—</td><td>$1,415 亿 ÷ 10.69 亿股 = <strong>$132</strong></td><td>—</td></tr>
+    </table>
+  </div>
+  <p><strong>DCF 三情景</strong>（WACC 10%，折现至今）：</p>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="基于本报告一手数据的独立测算">
+      <thead><tr><th>情景</th><th>概率</th><th>核心假设</th><th>每股价值</th></tr></thead>
+      <tr><td>悲观</td><td>30%</td><td>非手机增长不足以抵消苹果流失；数据中心推迟；QTL 续约降价。FY29 EPS 约 $10</td><td>$125</td></tr>
+      <tr class="hl"><td>基准</td><td>45%</td><td>非手机如指引接棒（FY27 +60%），手机企稳；数据中心 FY27 $50 亿达成一半。FY29 EPS 约 $15</td><td>$175</td></tr>
+      <tr><td>乐观</td><td>25%</td><td>数据中心全额兑现（FY29 $150 亿+），汽车 $100 亿，FY29 Non-GAAP EPS 达管理层目标 &gt;$18</td><td>$240</td></tr>
+    </table>
+  </div>
+  <p>概率加权 DCF = 0.30×125 + 0.45×175 + 0.25×240 = <strong>$176</strong>。</p>
+  <p><strong>汇总</strong>：六个可用方法（P/E、前瞻 P/E、P/S、EV/EBITDA、SOTP、DCF）的值分别为 $158 / $160 / $152 / $139 / $132 / $176，<strong>中位数 $155</strong>。DCF 明显高于其他方法，因为只有它给了 FY29 转型成功的期权价值定价。<strong>加权公允价值取 $165</strong>（中位数与 DCF 折中，偏保守——因为 FY29 目标依赖尚未确认收入的数据中心）。</p>
+
+  <h3>7.3 建仓阶梯</h3>
+  <p>按估值中位数 $155 计算：<strong>首仓 $124</strong>（×80%，距现价 −24%，接近 52 周低 $122）、<strong>二仓 $109</strong>（×70%，距现价 −33%）、<strong>三仓 $93</strong>（×60%，距现价 −43%，黑天鹅级）。</p>
+  <p><strong>当前股价 $162.67 高于加权公允 $165 仅 1.4% 之下，安全边际约为零。</strong>按本栏目「安全边际 ≥25% 才给买入」的纪律，现价不构成买入。<strong>注意上一季首仓价是 $148，本季降至 $124</strong>——不是因为股价跌了，而是因为苹果流失加速使估值中位数从 $185 下移到 $155。</p>
+</section>
+
+<section class="section" id="m8" aria-labelledby="m8-t">
+  <h2 class="stitle" id="m8-t">模块 8 · 竞争与行业分析<a class="anchor" href="#m8" aria-label="本节链接">#</a></h2>
+  <p><strong>最大的竞争者是自己的客户。</strong>10-Q 风险因素写得毫不含糊：「我们预计 Apple 将在其未来设备中越来越多地使用自研调制解调器产品，这将对我们的 QCT 营收、经营业绩和现金流产生<strong>重大负面影响</strong>。」这不是分析师推测，是公司自己的书面披露。</p>
+  <p>一条独立的旁证藏在 10-Q 的客户集中度表里：公司匿名披露三个大客户占总营收比重，其中<strong>去年同期占 13% 的客户 (z)，本季已降至 10% 以下</strong>。公司不点名，这里也不臆断对应关系，但趋势是明确的。</p>
+  <p><strong>其他竞争维度：</strong></p>
+  <ul>
+    <li><strong>Arm</strong>——不只是供应商，也是诉讼对手。Arm 就 Nuvia 许可案败诉后已上诉（2025-10 提起，未决）；Qualcomm 的反诉<strong>庭审定于 2026-10-05 开始</strong>。争点直指 Qualcomm 自研 Oryon CPU 核心的许可正当性，而 Oryon 正是数据中心 CPU 与 PC 战略的技术底座。</li>
+    <li><strong>中国 OEM 自研</strong>——10-Q：「我们在中国的部分客户已经开发、其他客户未来可能开发自己的集成电路产品……包括由于中国政府（其已将半导体自给列为优先事项）的压力或政策。」</li>
+    <li><strong>联发科</strong>——本季所有官方材料<strong>零次提及</strong>（新闻稿、演示稿、电话会、10-Q 均已核验），公司只在风险因素里做泛化描述。</li>
+  </ul>
+  <p><strong>行业层面出现了一个新变量：投入成本全面上涨。</strong>CEO 形容当前供应链「可能非常类似于疫情时期，所有环节都处于 100% 利用率」，晶圆、封装、测试全在涨价短缺。这对 Qualcomm 是双刃剑——短期挤压毛利率与手机需求，但也让「有规模、有库存」成为优势。</p>
+</section>
+
+<section class="section" id="m9" aria-labelledby="m9-t">
+  <h2 class="stitle" id="m9-t">模块 9 · 技术面与 K 线分析<a class="anchor" href="#m9" aria-label="本节链接">#</a></h2>
+  <p>52 周区间 $121.99 – $259.92，当前 $162.67 位于区间下部约 30% 分位，<strong>距高点 −37%</strong>。</p>
+  <p>财报后的价格路径值得记录：7/29 盘后发布，7/30 收 $151.60（−2.62%），7/31 收 $147.61（−2.63%），<strong>两日累计 −5.19%</strong>；随后 8/3 收 $151.57（+2.68%），8/4 收 $162.67（<strong>+7.32%</strong>）。即市场先按「苹果加速流失」卖出，三个交易日后又大幅收复。<strong>8 月 4 日单日 +7.32% 的具体驱动因素，在一手来源中未找到对应报道，此处不作臆测。</strong></p>
+  <p>$122 一线（52 周低）与本报告首仓价 $124 高度重合，是技术面与估值面共同指向的区域。技术面在本报告中仅作次要参考。</p>
+</section>
+
+<section class="section" id="m10" aria-labelledby="m10-t">
+  <h2 class="stitle" id="m10-t">模块 10 · 增长催化剂与前景展望<a class="anchor" href="#m10" aria-label="本节链接">#</a></h2>
+  <p><strong>近期可验证的催化剂（未来 6 个月）：</strong></p>
+  <ul>
+    <li><strong>12 月季度：两个超大规模厂商的定制芯片开始确认收入</strong>——已投片、已有 PO。这是数据中心叙事从「路线图」变成「收入」的第一个验证点。</li>
+    <li><strong>Q4 FY2026 财报（预计 2026-10-30）</strong>——三个观察点：中国手机是否如期恢复两位数环比增长、QCT 毛利率是否开始受益于涨价传导、苹果流失的实际幅度。</li>
+    <li><strong>2026-10-05：Qualcomm 诉 Arm 案开庭</strong>——直接关系 Oryon 自研核心的许可地位。</li>
+    <li><strong>9 月：Snapdragon Summit</strong>——智能眼镜等新品类披露；第五代 Snapdragon 数字底盘 9 月开始爬坡。</li>
+  </ul>
+  <p><strong>中长期（3–5 年）——管理层给出的量化路线图：</strong></p>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="Q3 FY2026 官方财报演示稿第 9、11–16 页与电话会实录">
+      <thead><tr><th>指标</th><th>FY26E</th><th>FY27E</th><th>FY29 目标</th></tr></thead>
+      <tr><td>非手机营收同比增速</td><td>+24%</td><td class="up">+60%+</td><td>—</td></tr>
+      <tr><td>数据中心营收</td><td>$3 亿</td><td>$50 亿</td><td>$150 亿+</td></tr>
+      <tr><td>汽车营收</td><td>退出年化约 $70 亿</td><td>—</td><td>$100 亿</td></tr>
+      <tr><td>IoT 营收</td><td>—</td><td>—</td><td>$140 亿+</td></tr>
+      <tr><td>非手机占 QCT 比重</td><td>—</td><td>&gt;50%</td><td>约 2/3</td></tr>
+      <tr class="hl"><td>Non-GAAP EPS</td><td>~$10.51</td><td>—</td><td>&gt;$18</td></tr>
+    </table>
+  </div>
+  <p>核心命题是管理层反复强调的一句话：<strong>「FY27 非手机业务的同比增量，将替代 FY26 全部 Apple 产品营收。」</strong>按分析师推算、管理层认可为「合理区间」的 FY26 苹果营收约 $75 亿计算，这意味着非手机业务一年要增加约 $75–80 亿——而 FY26 非手机基数约 $131 亿，即需要 +60% 增长。<strong>这个数字与公司给的 FY27 非手机增速指引一致，逻辑闭环，但执行难度极高。</strong></p>
+</section>
+
+<section class="section" id="m11" aria-labelledby="m11-t">
+  <h2 class="stitle" id="m11-t">模块 11 · 风险矩阵<a class="anchor" href="#m11" aria-label="本节链接">#</a></h2>
+  <div class="risk-grid">
+    <div class="risk-card r5"><h5>严重度：高 · 苹果流失快于新引擎接棒</h5><p>本季书面确认份额「大幅低于 20%」、12 月季度环比 −50%、FY27 低于 $20 亿。若非手机业务未能如指引 +60%，FY27 营收将直接负增长。这是全篇最核心的风险，且<strong>时间表已经在加速</strong>。</p></div>
+    <div class="risk-card r5"><h5>严重度：高 · 自由现金流塌陷与资本返还失衡</h5><p>单季 FCF $4.95 亿（−81%），同期股东回报 $23 亿 = FCF 的 465%；净负债从 −$46.6 亿扩大到 −$69.7 亿；存货 +28.4%。若 Q4 手机回补不及预期，存货减值 + 现金流持续为负将迫使公司在回购与资产负债表之间二选一。</p></div>
+    <div class="risk-card r4"><h5>严重度：中高 · 毛利率结构性下移</h5><p>QCT 毛利率已跌破 48–50% 基准区间；数据中心首批定制芯片将再拖累 QCT 加权平均毛利率 1.5%–2%；Q4 QCT EBT 利润率指引降至 23–25%。<strong>新引擎接棒的代价是利润率永久下移一档。</strong></p></div>
+    <div class="risk-card r4"><h5>严重度：中高 · QTL 续约窗口</h5><p>与主要 OEM 的许可协议在 <strong>FY2027–FY2031 陆续到期</strong>。QTL 贡献 69% EBT 利润率，是全公司最赚钱的部分。任一大客户续约降价，都会直接冲击利润结构。</p></div>
+    <div class="risk-card r3"><h5>严重度：中 · Arm 诉讼与 Oryon 许可地位</h5><p>Qualcomm 反诉 Arm 案 <strong>2026-10-05 开庭</strong>；Arm 对已败诉的 Nuvia 案上诉未决。争点直指自研 Oryon 核心的许可正当性，而 Oryon 是数据中心 CPU 与 PC 战略的技术底座。公司<strong>未就此计提任何或有损失准备</strong>。</p></div>
+    <div class="risk-card r3"><h5>严重度：中 · 中国集中度与出口管制</h5><p>FY2025 中国（含香港）占营收 46%。华为出口许可已于 2024 年 5 月被撤销，预计不再有产品营收。10-Q 专列风险因素：中国半导体自给政策、关税、实体清单。数据中心业务管理层称「对已有合作不受限制」。</p></div>
+  </div>
+  <p><strong>三个黑天鹅情景：</strong>① 苹果在 FY2027 完全弃用 Qualcomm 基带（比当前指引更快），叠加数据中心推迟，FY27 营收负增长 10%+；② QTL 某个大客户在 FY2027 续约时大幅压价，授权 EBT 利润率从 69% 降至 50% 区间；③ Arm 诉讼出现不利结果，Oryon 核心许可地位受损，直接冲击数据中心 CPU 与 PC 路线图。</p>
+</section>
+
+<section class="section" id="m12" aria-labelledby="m12-t">
+  <h2 class="stitle" id="m12-t">模块 12 · 股东回报分析<a class="anchor" href="#m12" aria-label="本节链接">#</a></h2>
+  <h3>12.1 公司给了股东多少？</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="Q3 FY2026 新闻稿、10-Q Note 4 权益变动表与现金流量表">
+      <thead><tr><th>期间</th><th>回购</th><th>股息</th><th>合计</th><th>占当期 FCF</th></tr></thead>
+      <tr><td>Q3 FY26 单季</td><td>$14.0 亿（800 万股）</td><td>$9.73 亿（$0.92/股）</td><td><strong>$23 亿</strong></td><td class="dn"><strong>465%</strong></td></tr>
+      <tr><td>9M FY26 累计</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+      <tr><td>对照 Q3 FY25</td><td>—</td><td>—</td><td>—</td><td>FCF $25.81 亿，回报覆盖充裕</td></tr>
+    </table>
+  </div>
+  <p>本季股东总回报 $23 亿 ÷ 市值 $1,708 亿 = 单季 <strong>1.35%</strong>，年化约 5.4%——绝对水平仍属慷慨。<strong>但「慷慨」这次是靠资产负债表撑的</strong>：当期自由现金流只有 $4.95 亿，缺口约 $18 亿由存量现金与新增短期债务承担。</p>
+
+  <h3>12.2 给的方式好不好？</h3>
+  <p>美股回购多入库存股，但 Qualcomm 的注销是真实的：在外流通股从期初 10.74 亿降至期末 <strong>10.57 亿</strong>（回购 −4,200 万股，因并购与股权激励发行 +2,500 万股）。<strong>净减少 1,700 万股，是真实缩股。</strong></p>
+  <p>但要注意一个新变化：<strong>本季因收购 Modular 发行了 1,800 万股</strong>（约 $31 亿对价，其中 400 万股附四年服务期条件），去年 12 月收购 Alphawave 又发行了 1,100 万股。<strong>并购正在用股权稀释来对冲回购的缩股效果</strong>——回购 4,200 万股，两笔并购就发出去 2,900 万股。这是过去三年没有的模式，读者应该把「回购缩股」和「并购增发」放在一起看。</p>
+  <p>择时方面，上一季已指出 FY2025 在股价高位把回购从 $41 亿骤增至 $88 亿的纪律瑕疵。本季股价处于 52 周区间下部，回购 $14 亿——<strong>相对而言这次择时是好的</strong>，只是规模受限于现金流。</p>
+
+  <h3>12.3 能不能继续给、给多少？</h3>
+  <p>授权额度充裕：<strong>剩余 $206 亿</strong>（2026-03 新增 $200 亿授权），占当前市值 12%。股息方面，季度股息已从 $0.89 上调至 $0.92（2026 年 3 月季度），年化 $3.68，股息率 2.26%。</p>
+  <p><strong>覆盖度是问题所在。</strong>本季（股息 $9.73 亿 + 回购 $14 亿）÷ 自由现金流 $4.95 亿 = <strong>465%</strong>，远超 100%。九个月累计口径稍好（FCF $68.27 亿），但趋势是恶化的。同时净负债扩大 50%、存货占用现金 $18.5 亿——<strong>三者叠加说明：当前的回报强度依赖周期回暖，而不是当期现金创造能力。</strong></p>
+  <p>可持续性判断：短期无虞（现金 + 证券 $83 亿、循环额度未提取、Q4 指引现金流改善），但如果 Q4 中国手机回补落空、存货无法消化，管理层将面临「降回购」还是「加杠杆」的选择。<strong>这是本报告认为最值得跟踪的单一财务指标。</strong></p>
+  <p><strong>模块小结：积极且真实缩股，但当期已明显透支。</strong>Qualcomm 依然是美股里资本返还最认真的半导体公司之一——真实注销、股息连年上调、授权额度充裕。但本季 465% 的 FCF 覆盖度、扩大 50% 的净负债、以及被并购增发部分抵消的缩股效果，共同说明这份慷慨当前是靠资产负债表维持的。它没有变质，但它变脆了。</p>
+</section>
+
+<section class="section" id="m13" aria-labelledby="m13-t">
+  <h2 class="stitle" id="m13-t">模块 13 · 海图评分卡 + 投资决策<a class="anchor" href="#m13" aria-label="本节链接">#</a></h2>
+  <div class="scorecard">
+    <div class="score-grid">
+      <div class="score-card"><div class="score-letter s-b">B−</div><h5>生意可预测性</h5><p>QTL 年金清晰，但 QCT 手机受苹果与中国周期双重扰动，四季 EPS 运行率下滑 39%，能见度处于近年最低。</p></div>
+      <div class="score-card"><div class="score-letter s-bp">B+</div><h5>经济护城河</h5><p>专利年金仍宽（69% EBT 利润率），汽车多代际定点质地更好；但手机侧被最大客户主动拆解，QTL 面临 FY27 起续约窗口。</p></div>
+      <div class="score-card"><div class="score-letter s-bp">B+</div><h5>管理层质量</h5><p>短期指引连续达标、中国见底判断被证实、汽车目标上调；扣分在苹果坏消息分批释放（上季 20% → 本季「大幅低于 20%」）。</p></div>
+      <div class="score-card"><div class="score-letter s-b">B−</div><h5>财务质量</h5><p>现金流／净利仅 0.49 倍，单季 FCF −81%，净负债扩大 50%，存货 +28.4%。GAAP 利润连续两季被非经营项目修饰。</p></div>
+      <div class="score-card"><div class="score-letter s-b">B−</div><h5>资本配置纪律</h5><p>回报 465% 覆盖度、并购增发抵消部分缩股、现金流最紧一季仍满额回购 + $31 亿收购。真实缩股是加分项，但当期透支明显。</p></div>
+      <div class="score-card"><div class="score-letter s-b">B</div><h5>估值与安全边际</h5><p>TTM Non-GAAP 14.3x 不贵，但相对加权公允 $165，现价 $162.67 安全边际约为零，远达不到 25% 门槛。</p></div>
+    </div>
+    <div class="flag-row">
+      <h4>红旗排查</h4>
+      <p><strong>触发 1 项。</strong>① 会计激进／利润操纵：无——一次性项目均已在财报中明确披露与调节。② 关联交易异常：无。③ <strong>现金流与利润长期背离：触发</strong>——现金流／净利 0.49 倍，且资本返还达当期 FCF 的 465%、净负债扩大 50%。④ 管理层频繁变动：无。⑤ 商誉减值历史：商誉因并购增至 $142.74 亿需持续跟踪，暂无减值。⑥ 重大未决法律风险：Arm 反诉 2026-10-05 开庭、ParkerVision 上诉待决，公司<strong>未计提任何或有损失准备</strong>。</p>
+    </div>
+  </div>
+  <h3>投资决策</h3>
+  <p>综合评级 <strong>B</strong>。红旗触发 1 项（现金流与利润背离），按规范自动降档处理。</p>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="本报告模块 7 估值测算">
+      <thead><tr><th>情景</th><th>概率</th><th>目标价</th><th>相对现价</th></tr></thead>
+      <tr><td>悲观</td><td>30%</td><td>$125</td><td class="dn">−23%</td></tr>
+      <tr class="hl"><td>基准</td><td>45%</td><td>$175</td><td class="up">+8%</td></tr>
+      <tr><td>乐观</td><td>25%</td><td>$240</td><td class="up">+48%</td></tr>
+    </table>
+  </div>
+  <p>12 个月概率加权目标价 <strong>$170</strong>（DCF 加权 $176 与六法中位数 $155 折中后取整），相对现价 $162.67 上行 <strong>+4.5%</strong>，叠加 2.26% 股息，总回报约 <strong>+7%</strong>。</p>
+  <p><strong>评级：<span class="rating-badge" data-rating="持有观望">持有观望</span></strong>。理由：转型的两端这一季都变得更清晰了——<strong>苹果的洞更深更快（份额大幅低于 20%、FY27 低于 $20 亿），而接棒的引擎也更具体（BMW 定点、Meta 协议、两个超大规模客户已下 PO、汽车退出年化 $70 亿）</strong>。问题不在方向，在价格与时点：现价相对加权公允 $165 安全边际约为零，而当期自由现金流塌到 $4.95 亿、净负债扩大 50%、红旗触发一项。<strong>好生意、合理价、但没有余地。</strong></p>
+  <p><strong>操作建议：</strong>分批建仓 <strong>首仓 $124 · 二仓 $109 · 三仓 $93</strong>（首仓价接近 52 周低 $122，是技术面与估值面共同指向的区域）。止盈三档 <strong>$205 / $240 / $280</strong>（每档减仓 25%，最后 25% 长期持有）。建议总仓位 <strong>2–3%</strong>（轻仓观察，等回调或拐点确认）。<strong>持有周期 3–5 年</strong>，赌的是「非手机接棒手机」这一次转型。</p>
+  <p><strong>关键监控指标：</strong>① 12 月季度定制芯片是否如期确认收入；② Q4 中国手机是否恢复两位数环比增长；③ QCT 毛利率是否回到 48–50% 区间；④ 自由现金流是否转正回升、存货是否消化；⑤ 2026-10-05 Arm 案庭审结果。下一财报预计 <strong>2026-10-30</strong>。</p>
+</section>
+
+<section class="section" id="essay" aria-labelledby="essay-t">
+  <h2 class="stitle sr-only" id="essay-t">海图夜读手记<a class="anchor" href="#essay" aria-label="本节链接">#</a></h2>
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p class="lead">三个月前读高通那份季报时，我留了三个悬念：中国手机会不会像管理层说的那样在 Q3 见底、存货从 $65 亿建到 $74 亿的赌注押得对不对、净负债会不会继续恶化。这一季，三个都有了答案——<strong>而且是两好一坏。</strong></p>
+      <p>中国手机<strong>确实见底了</strong>。CFO 给的理由很朴素：渠道库存已经薄到无法再消化，采购正在向真实市场规模回归。Q4 预计恢复两位数环比增长。管理层说到做到。</p>
+      <p>存货<strong>没有消化，反而加到了 $83.79 亿</strong>，比财年初高 28.4%。CEO 的说法从「赌回补」变成了「短缺时期库存本身就是战略优势」。注码在加大。</p>
+      <p>净负债<strong>从 −$46.6 亿扩大到 −$69.7 亿</strong>。而这一季的自由现金流，只有 <strong>$4.95 亿</strong>，同比 −81%。</p>
+      <h4>一、这一季真正该看的不是营收，是现金</h4>
+      <p>营收 $99.5 亿只跌 4%，还落在指引上限。净利 $20.0 亿，EPS $1.87。看上去只是温和承压。</p>
+      <p>但把两层皮剥开：净利里有 <strong>$10.14 亿是投资浮盈</strong>（QSI 持股 IPO），不是主业赚的；剔掉之后，营业利润 $16.26 亿、同比 −41%，<strong>营业利润率从 26.6% 塌到 16.3%</strong>。再往下看现金——净利 $20.0 亿，经营现金流只有 $9.91 亿，中间是存货和税款吞掉的 $10.11 亿。扣完资本开支，<strong>整个季度真实创造的自由现金流是 $4.95 亿。</strong></p>
+      <p>而同一个季度，公司发给股东 <strong>$23 亿</strong>。<strong>相当于当期自由现金流的 465%。</strong></p>
+      <h4>二、苹果的洞，比三个月前说的更深、更快</h4>
+      <p>上一季的口径还是「苹果调制解调器份额约 20%」。这一季写进财报稿的是：新 iPhone 的份额<strong>「大幅低于此前 20% 的估计」</strong>，12 月季度苹果营收<strong>环比下降约 50%</strong>，FY2027 苹果营收将<strong>低于此前指引的「略超 $20 亿」</strong>。</p>
+      <p>电话会上 Bernstein 的 Rasgon 问得很不客气：「你们是不是在有意识地饿死苹果，把硅片送到别处？」CFO 的回答值得逐字读——「我不会那样描述。你应该理解为<strong>我们的供应约束是其中一部分</strong>，然后<strong>谈判最终落在份额大幅低于 20%</strong>。」</p>
+      <p>这句话里有主动，也有被动。但无论哪一种，结果是一样的：<strong>旧引擎抽走的速度，比三个月前告诉你的快。</strong></p>
+      <h4>三、接棒的引擎，这一季确实更具体了</h4>
+      <p>这是我不想只讲坏消息的原因。汽车 $15.88 亿、同比 +61%、连续 23 个季度双位数增长，FY26 退出年化目标从 $60 亿<strong>上调</strong>到约 $70 亿，还拿下了 BMW 下一代 ADAS 与数字座舱的主力定点——延伸到 2030 年代。数据中心那边，两个超大规模厂商的定制芯片<strong>已经投片、已经有采购订单</strong>，12 月季度开始确认收入；与 Meta 签了 CPU 多代际协议。</p>
+      <p>管理层把整件事压缩成一句话：<strong>「FY27 非手机业务的同比增量，将替代 FY26 全部 Apple 产品营收。」</strong>按 FY26 苹果营收约 $75 亿算，这意味着非手机一年要多做出 $75–80 亿，即 +60%。数字是闭环的，执行难度极高。</p>
+      <h4>四、所以价格上该怎么办</h4>
+      <p>八种估值法里，PEG 分母是负的、DDM 系统性低估，都不适用。剩下六法中位数 <strong>$155</strong>；只有 DCF 给出 $176，因为只有它给 FY29 那张「非手机 $400 亿、EPS &gt;$18」的图定了价。折中取<strong>加权公允 $165</strong>。</p>
+      <p>现价 $162.67。<strong>安全边际约等于零。</strong></p>
+      <p>值得注意的是：上一季我给的首仓价是 $148，这一季降到 <strong>$124</strong>。<strong>不是因为股价跌了，而是因为苹果流失加速把估值中位数从 $185 压到了 $155。</strong>股价跌了 14%，价值也跌了——这是最难受的一种下跌。</p>
+      <p>所以这一季我仍然给<strong>持有观望</strong>，但和上一季的理由不同了。上一季是「合理价、没边际、等回调」；这一季是<strong>「转型更清楚了，代价也更清楚了」</strong>——清楚到你能算出：现金流已经支撑不了当前的股东回报，净负债在扩大，而接棒还要等 12 个月才有第一个可验证的数字。</p>
+      <p>$124 是我愿意开始建仓的位置，那里离 52 周低点 $122 只有一步。在那之前，我更愿意等 12 月季度那两笔定制芯片收入真的落在报表上——<strong>一家公司说自己要转型，和它的报表开始证明转型，中间隔着的就是这一个数字。</strong></p>
+      <p class="haitu-sign">—— <strong>海图</strong>，灯下落笔，明日再观风浪。</p>
+      <p class="haitu-disc">⚠️ <strong>免责声明</strong>：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，<strong>不构成任何投资建议</strong>，作者非持牌投资顾问。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。文中评级、目标价与建仓价格均为基于公开信息的个人推演，可能存在错误或随时间失效。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</section>
+
+</div>
+
+
+<footer>
+  <div>本报告由「海图夜读」基于公开财报与电话会资料独立撰写，数据截至 2026-08-04。</div>
+  <div>
+    <strong>免责声明：</strong>本文仅为个人研究记录与信息分享，<strong>不构成任何投资建议</strong>，
+    作者非持牌投资顾问。文中评级、目标价、仓位与建仓价格均为基于公开信息的个人推演，
+    可能存在错误或随时间失效。市场有风险，投资需谨慎，读者应独立判断并自负盈亏。
+  </div>
+</footer>
+
+<script>
+/* ══════════════════════════════════════════════════════════════════
+   海图夜读 · 报告页脚本骨架
+   逐字复制进报告的 <script>，只改 CHART_DATA 里的数字。
+
+   这段脚本解决了存量 103 份实测出的三个问题：
+   1. 主题切换有 3 套实现，73/103 不读 localStorage
+      → 门户切暗色进报告又变亮色。这里统一成一套。
+   2. 71 份把调色板硬编码进 JS（token 的第 4 份拷贝），
+      改一次配色要改 71 个文件；另有 2 份切暗色后图表根本不重绘。
+      → 这里一律从 CSS 变量读，改 :root 即全站生效。
+   3. 4 个图表槽位被写出 39 种 canvas id。
+      → 这里按固定槽位 rev|margin|segment|eps 接管。
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ── 1. 从 CSS 变量取色（唯一真源，禁止在本文件里写 hex）── */
+function cssVar(name) {
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+}
+function palette() {
+  return {
+    accent:  cssVar('--accent'),   accent2: cssVar('--accent2'),
+    accent3: cssVar('--accent3'),  gold:    cssVar('--gold'),
+    red:     cssVar('--red'),      green:   cssVar('--green'),
+    grid:    cssVar('--chart-grid'), text:  cssVar('--text3-ink'),
+  };
+}
+
+/* ── 2. 主题切换：同步 aria-pressed、持久化、重绘图表 ── */
+function toggleTheme() {
+  var html = document.documentElement;
+  var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  try { localStorage.setItem('theme', next); } catch (e) {}
+  var btn = document.getElementById('themeBtn');
+  if (btn) btn.setAttribute('aria-pressed', String(next === 'dark'));
+  renderCharts();
+}
+document.addEventListener('DOMContentLoaded', function () {
+  var btn = document.getElementById('themeBtn');
+  if (btn) btn.setAttribute('aria-pressed',
+    String(document.documentElement.getAttribute('data-theme') === 'dark'));
+});
+
+/* ── 3. 顶栏实测高度写进 --bar-h ──
+   锚点落点与目录高亮都以它为基准。顶栏在窄屏会折行（38px → 60+px），
+   硬编码会让手机上所有跳转偏移。 */
+function syncBarH() {
+  var bar = document.querySelector('.theme-bar');
+  if (bar) document.documentElement.style.setProperty('--bar-h', bar.offsetHeight + 'px');
+}
+addEventListener('DOMContentLoaded', syncBarH);
+addEventListener('resize', syncBarH);
+
+/* ── 4. 本报告的图表数据：只改这一块 ──
+   槽位固定为 rev / margin / segment / eps，与 body-skeleton.html 的
+   canvas id 和 data-chart 一一对应。用不到的槽位整个删掉（连同骨架里的 .ccard）。
+   颜色一律写 palette 的 key 名（'accent' / 'gold' …），不要写 hex。 */
+var CHART_DATA = {
+  rev: { type: 'bar', labels: ['Q3 FY25','Q4 FY25','Q1 FY26','Q2 FY26','Q3 FY26'], datasets: [
+    { label: '总营收（$B）', data: [10.37, 11.27, 12.25, 10.60, 9.95], color: 'accent'  },
+    { label: 'QCT（$B）',    data: [ 8.99,  9.82, 10.61,  9.08, 8.50], color: 'accent2' } ] },
+  margin: { type: 'line', labels: ['Q3 FY25','Q4 FY25','Q1 FY26','Q2 FY26','Q3 FY26'], datasets: [
+    { label: 'GAAP 营业利润率（%）', data: [26.6, 25.9, 27.5, 21.8, 16.3], color: 'red'   },
+    { label: 'QCT EBT 利润率（%）',  data: [30, 29, 31, 27, 26],          color: 'green' } ] },
+  segment: { type: 'bar', labels: ['Q3 FY25','Q4 FY25','Q1 FY26','Q2 FY26','Q3 FY26'], datasets: [
+    { label: '手机（$B）', data: [6.33, 6.96, 7.82, 6.02, 5.09], color: 'accent2' },
+    { label: '汽车（$B）', data: [0.98, 1.05, 1.10, 1.33, 1.59], color: 'green'   },
+    { label: 'IoT（$B）',  data: [1.68, 1.81, 1.69, 1.73, 1.83], color: 'accent3' } ] },
+  eps: { type: 'bar', labels: ['Q3 FY25','Q4 FY25','Q1 FY26','Q2 FY26','Q3 FY26'], datasets: [
+    { label: 'Non-GAAP EPS（$）',   data: [2.77, 3.00, 3.50, 2.65, 2.21], color: 'accent'  },
+    { label: '单季自由现金流（$B）', data: [2.58, 3.59, 4.42, 1.92, 0.50], color: 'gold'    } ] },
+};
+
+/* ── 5. 渲染（一般不需要改）── */
+var _charts = {};
+function renderCharts() {
+  if (typeof Chart === 'undefined') return;      // CDN 不可达时静默跳过，不阻断页面
+  var P = palette();
+  Chart.defaults.font.family =
+    getComputedStyle(document.body).getPropertyValue('--font-sans') ||
+    'system-ui, -apple-system, sans-serif';
+
+  Object.keys(CHART_DATA).forEach(function (slot) {
+    var el = document.getElementById(slot);
+    if (!el) return;
+    if (_charts[slot]) _charts[slot].destroy();
+
+    var cfg = CHART_DATA[slot];
+    var isPie = cfg.type === 'doughnut' || cfg.type === 'pie';
+
+    _charts[slot] = new Chart(el, {
+      type: cfg.type,
+      data: {
+        labels: cfg.labels,
+        datasets: cfg.datasets.map(function (d) {
+          var c = Array.isArray(d.color) ? d.color.map(function (k) { return P[k]; }) : P[d.color];
+          // ⚠️ 判断是否折线要同时看 dataset 的 type 和图表级 type。
+          // 只写 d.type === 'line' 会让「图表级 type:'line' 但 dataset 没写 type」的
+          // 数据集拿到 borderWidth:0 —— 实测表现为「只有点、没有连线」。
+          var isLine = (d.type || cfg.type) === 'line';
+          return Object.assign({}, d, {
+            backgroundColor: c, borderColor: c,
+            borderWidth: isLine ? 2 : 0, tension: 0.3,
+          });
+        }),
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            // 窄屏把图例挪到顶部：右侧图例在 375px 上会吃掉大半个画布
+            position: isPie && innerWidth > 640 ? 'right' : 'top',
+            labels: { color: P.text, boxWidth: 12, font: { size: 11 } },
+          },
+        },
+        scales: isPie ? {} : {
+          x: { grid: { color: P.grid }, ticks: { color: P.text, font: { size: 11 } } },
+          y: { grid: { color: P.grid }, ticks: { color: P.text, font: { size: 11 } } },
+          y1: {
+            position: 'right', grid: { display: false },
+            ticks: { color: P.text, font: { size: 11 } }, display: 'auto',
+          },
+        },
+      },
+    });
+  });
+}
+addEventListener('DOMContentLoaded', renderCharts);
+addEventListener('resize', function () {          // 图例位置随断点变，需重建
+  clearTimeout(window._rcT);
+  window._rcT = setTimeout(renderCharts, 200);
+});
+
+</script>
+</body>
+</html>
