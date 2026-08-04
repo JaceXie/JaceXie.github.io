@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-07-10 · BlackRock Q1 FY2026 财报已于 2026-04-14 发布 -->
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BlackRock BLK Q1 FY2026 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+<meta name="description" content="全球最大资产管理人 · 管理规模 $13.9 万亿的按资产收费过路桥 · 44.5% 调整后营业利润率 + 连续增息。Q1 单季净流入 $1,297 亿创 5 年最佳、有机基础费率增长年化 8%、技术 ACV +14%、私募市场（GIP/HPS/Preqin）转型进入第一个完整年度。但 Forward P/E 19x 无安全边际 + AUM 与市场高度绑定 + 并购增发摊薄——世界级生意，价格不便宜。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BlackRock BLK Q1 FY2026 海图研判 · 海图夜读">
+<meta property="og:description" content="全球最大资产管理人 · 管理规模 $13.9 万亿的按资产收费过路桥 · 44.5% 调整后营业利润率 + 连续增息。Q1 单季净流入 $1,297 亿创 5 年最佳、有机基础费率增长年化 8%、技术 ACV +14%、私募市场转型进入第一个完整年度。但 Forward P/E 19x 无安全边际 + AUM 与市场高度绑定 + 并购增发摊薄——世界级生意，价格不便宜。">
+<meta property="og:url" content="https://jacexie.github.io/haitu/reports/blk-q1-fy2026.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="BlackRock BLK Q1 FY2026 海图研判 · 海图夜读">
+<meta name="twitter:description" content="全球最大资产管理人 · $13.9 万亿按资产收费过路桥 · 44.5% 调整后营业利润率。Q1 净流入 $1,297 亿创 5 年最佳 + 私募市场转型第一年。但 Forward P/E 19x 无安全边际——世界级生意，价格不便宜。">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root { --bg:#f5f0eb; --bg2:#ece6df; --card:#ffffff; --card2:#f8f5f1; --border:#d9d0c7; --text:#4a4340; --text2:#7a706a; --text3:#a89f98; --accent:#8a9a8e; --accent2:#7b8fa0; --accent3:#b08d7a; --rose:#c09090; --gold:#b9a06a; --red:#b87070; --green:#7a9a7a; --shadow:rgba(0,0,0,0.06); --chart-grid:#e5ddd5; }
+[data-theme="dark"] { --bg:#1e1c1a; --bg2:#28251f; --card:#2e2a25; --card2:#363230; --border:#4a4540; --text:#d4ccc4; --text2:#a09890; --text3:#706860; --accent:#8a9a8e; --accent2:#8fabbf; --accent3:#c9a48e; --rose:#c09090; --gold:#c9b07a; --red:#c08080; --green:#8aaa8a; --shadow:rgba(0,0,0,0.3); --chart-grid:#3e3a35; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', serif; line-height: 1.75; font-size: 14.5px; transition: background .35s, color .35s; }
+a { color: var(--accent2); text-decoration: none; }
+.theme-bar { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); }
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+.toggle-switch { position: relative; width: 44px; height: 22px; background: var(--border); border-radius: 11px; cursor: pointer; transition: background .3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: var(--card); border-radius: 50%; transition: transform .3s; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+
+.hero { padding: 48px 24px 36px; text-align: center; border-bottom: 1px solid var(--border); }
+.hero-tag { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 3px 14px; border-radius: 20px; margin-bottom: 18px; }
+.hero h1 { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.pill { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: 'Segoe UI', sans-serif; font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow); }
+.pill strong { color: var(--text); }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle { font-size: 18px; font-weight: 700; color: var(--accent3); margin-bottom: 20px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+.stitle::before { content: ''; display: block; width: 4px; height: 20px; background: var(--accent3); border-radius: 2px; }
+
+.haitu-quip { display: flex; align-items: center; gap: 18px; background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 18px 24px; margin: 24px 0; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-quote { flex: 1; }
+.haitu-portrait { font-size: 15px; line-height: 1.65; color: var(--text); margin-bottom: 6px; font-weight: 600; }
+.haitu-rating-line { font-size: 13px; color: var(--text2); font-family: 'Segoe UI', sans-serif; }
+.rating-badge { display: inline-block; padding: 2px 12px; border-radius: 12px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; margin-left: 4px; }
+.rating-hold { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+
+.haitu-essay { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 28px 32px; margin: 24px 0 20px; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-essay-header { display: flex; align-items: center; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.haitu-avatar-sm { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); background: var(--red); box-shadow: 0 2px 8px rgba(184,112,112,0.2); }
+.haitu-name-lg { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 28px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 4px; }
+.haitu-essay-tag { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; }
+.haitu-essay-body { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 15px; line-height: 2.0; color: var(--text); }
+.haitu-essay-body p { margin-bottom: 14px; }
+.haitu-essay-body p.lead { font-size: 16px; font-style: italic; color: var(--text2); margin-bottom: 18px; }
+.haitu-essay-body strong { color: var(--text); font-weight: 700; }
+.haitu-essay-body h4 { font-size: 14px; color: var(--accent3); margin: 18px 0 10px; font-family: 'Segoe UI', sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+.haitu-sign { text-align: right; margin-top: 18px; font-family: 'Georgia', serif; font-size: 14px; color: var(--text2); font-style: italic; }
+.haitu-disc { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); font-style: italic; line-height: 1.7; }
+
+.stock-snap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px; }
+.snap-item { text-align: center; }
+.snap-label { font-family: 'Segoe UI', sans-serif; font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.snap-val { font-family: 'Segoe UI', sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+.snap-val.up { color: var(--green); }
+.snap-val.dn { color: var(--red); }
+.snap-sub { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow); }
+.kpi-l { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.badge { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+.up { background: rgba(122,154,122,.15); color: var(--green); }
+.dn { background: rgba(184,112,112,.15); color: var(--red); }
+.nt { background: rgba(123,143,160,.15); color: var(--accent2); }
+
+.tbl-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow); }
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI', sans-serif; font-size: 13px; }
+.tbl th { background: var(--card2); color: var(--text3); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); background: var(--card2); }
+
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); }
+.ctitle { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 260px; }
+
+.cmt { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 26px; line-height: 1.95; font-size: 14px; box-shadow: 0 1px 4px var(--shadow); color: var(--text); }
+.cmt p { margin-bottom: 14px; }
+.cmt p:last-child { margin-bottom: 0; }
+.cmt strong { color: var(--text); }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+
+.bscore { display: flex; align-items: center; gap: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; margin-bottom: 12px; box-shadow: 0 1px 4px var(--shadow); }
+.circle { width: 62px; height: 62px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; flex-shrink: 0; border: 3px solid; font-family: 'Segoe UI', sans-serif; }
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 4px; color: var(--text); }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.moat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+.moat-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); border-left: 4px solid var(--accent); }
+.moat-card.wide { border-left-color: var(--green); }
+.moat-card.narrow { border-left-color: var(--gold); }
+.moat-card.none { border-left-color: var(--red); }
+.moat-card h5 { font-size: 13px; color: var(--text); margin-bottom: 6px; }
+.moat-card .moat-rate { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.moat-card.wide .moat-rate { background: rgba(122,154,122,.18); color: var(--green); }
+.moat-card.narrow .moat-rate { background: rgba(185,160,106,.18); color: var(--gold); }
+.moat-card.none .moat-rate { background: rgba(184,112,112,.18); color: var(--red); }
+.moat-card p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+
+.ec-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 14px; box-shadow: 0 1px 3px var(--shadow); }
+.ec-badge { flex-shrink: 0; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-top: 2px; font-family: 'Segoe UI', sans-serif; }
+.ec-bull { background: rgba(122,154,122,.18); color: var(--green); }
+.ec-bear { background: rgba(184,112,112,.18); color: var(--red); }
+.ec-neut { background: rgba(185,160,106,.18); color: var(--gold); }
+.ec-body { flex: 1; }
+.ec-title { font-weight: 600; color: var(--text); margin-bottom: 3px; font-size: 14px; }
+.ec-note { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.dcf-note { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.dcf-note strong { color: var(--text); }
+
+.scorecard { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow); }
+.score-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.score-card { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px; }
+.score-letter { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Segoe UI', sans-serif; font-weight: 800; font-size: 22px; flex-shrink: 0; border: 3px solid; }
+.s-a { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.12); }
+.s-bp { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.06); }
+.s-b { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.10); }
+.s-bm { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.06); }
+.s-c { color: var(--red); border-color: var(--red); background: rgba(184,112,112,.08); }
+.score-body h4 { font-size: 13px; color: var(--text); margin-bottom: 4px; }
+.score-body p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+.flag-row { margin-top: 16px; padding: 12px 16px; background: rgba(184,112,112,.08); border: 1px solid rgba(184,112,112,.3); border-radius: 8px; font-size: 13px; color: var(--text2); }
+.flag-row strong { color: var(--red); }
+
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center; box-shadow: 0 1px 4px var(--shadow); }
+.pbox .pl { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; }
+.pbox .pv { font-family: 'Segoe UI', sans-serif; font-size: 28px; font-weight: 800; margin-bottom: 5px; }
+.pbox .pn { font-size: 12px; color: var(--text3); line-height: 1.5; }
+.pc { color: var(--red); } .pf { color: var(--gold); } .ps { color: var(--green); }
+
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.risk-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); position: relative; overflow: hidden; }
+.risk-card::before { content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent); }
+.risk-card.r1::before { background: var(--green); }
+.risk-card.r2::before { background: rgba(122,154,122,.6); }
+.risk-card.r3::before { background: var(--gold); }
+.risk-card.r4::before { background: var(--rose); }
+.risk-card.r5::before { background: var(--red); }
+.risk-card h5 { font-size: 14px; margin-bottom: 6px; color: var(--text); }
+.risk-score { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.r1 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r2 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r3 .risk-score { background: rgba(185,160,106,.18); color: var(--gold); }
+.r4 .risk-score { background: rgba(192,144,144,.18); color: var(--rose); }
+.r5 .risk-score { background: rgba(184,112,112,.18); color: var(--red); }
+.risk-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+footer { background: var(--card2); border-top: 1px solid var(--border); padding: 24px; text-align: center; color: var(--text3); font-size: 12px; margin-top: 40px; line-height: 1.8; }
+@media (max-width: 768px) { .cgrid,.pgrid { grid-template-columns: 1fr; } .hero h1 { font-size: 22px; } .kpi-grid { grid-template-columns: 1fr 1fr; } .stock-snap { grid-template-columns: 1fr 1fr; } .haitu-essay-header { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/BLK" target="_blank" rel="noopener" title="在雪球查看 BLK 实时行情">雪球 BLK</a>
+  </div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">Q1 FY2026 财报发布 · 2026-04-14 &nbsp;|&nbsp; 海图研判 · 2026-07-11</div>
+  <h1>BlackRock BLK · FY2026 Q1 财报深度分析</h1>
+  <div class="hero-sub">NYSE: BLK &nbsp;|&nbsp; 财季截至 2026-03-31 &nbsp;|&nbsp; 价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill">股价 <strong>$1,036</strong> <span style="color:var(--red)">距高点 -15%</span></div>
+    <div class="pill">市值 <strong>$168B</strong></div>
+    <div class="pill">AUM <strong>$13.89T</strong> <span style="color:var(--green)">+20%</span></div>
+    <div class="pill">Q1 净营收 <strong>$6.70B</strong> <span style="color:var(--green)">+27%</span></div>
+    <div class="pill">调整后 EPS <strong>$12.53</strong> <span style="color:var(--green)">+11%</span></div>
+    <div class="pill">Forward P/E <strong>~19.3x</strong> <span style="color:var(--gold)">无安全边际</span></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 海图页首短评 ═══ -->
+<div class="haitu-quip">
+  <div class="haitu-quote">
+    <div class="haitu-portrait">全球最大的资产管理人——管着 $13.9 万亿的"按资产规模收费的过路桥"。它不赌方向、不担信用风险，只要客户的钱停在平台上就按约 15.3 个基点持续抽成。44.5% 调整后营业利润率 + 连续增息 + Aladdin 技术护城河。Q1 单季净流入 $1,297 亿创 5 年最佳、iShares ETF 净流入 $1,320 亿破 Q1 纪录、技术 ACV +14%、私募市场（GIP/HPS/Preqin）转型进入第一个完整年度。但 Forward P/E 19.3x 无安全边际 + AUM 与市场高度绑定 + 并购增发摊薄股本——世界级生意，价格不便宜。</div>
+    <div class="haitu-rating-line">评级：<span class="rating-badge rating-hold">持有观望</span> · 12 个月概率加权目标价 $1,080（+4%）· 世界级资管收费桥 + 私募/技术双引擎转型，对垒 AUM 与市场高度绑定 + 私募信贷周期风险 + 满估值无安全边际</div>
+  </div>
+</div>
+
+<!-- ═══ 市场数据快照 ═══ -->
+<div class="section">
+  <div class="stitle">市场数据快照（2026-07-10 收盘）</div>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">股价（美元）</div><div class="snap-val">$1,036.11</div><div class="snap-sub">2026-07-10 · 距 52 周高 -15%</div></div>
+    <div class="snap-item"><div class="snap-label">市值</div><div class="snap-val">$168.5B</div><div class="snap-sub">全球资管龙头</div></div>
+    <div class="snap-item"><div class="snap-label">TTM GAAP P/E</div><div class="snap-val">~26x</div><div class="snap-sub">含或有对价收益波动</div></div>
+    <div class="snap-item"><div class="snap-label">Forward P/E</div><div class="snap-val nt">~19.3x</div><div class="snap-sub">FY2026 共识 $53.62</div></div>
+    <div class="snap-item"><div class="snap-label">P/AUM</div><div class="snap-val">~1.21%</div><div class="snap-sub">市值 / $13.9T AUM</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间</div><div class="snap-val">$917 - $1,220</div><div class="snap-sub">中位偏上</div></div>
+    <div class="snap-item"><div class="snap-label">股息率</div><div class="snap-val">~2.2%</div><div class="snap-sub">$22.92/年 · 连续增息</div></div>
+    <div class="snap-item"><div class="snap-label">调整后营业利润率</div><div class="snap-val up">44.5%</div><div class="snap-sub">同比 +130bp</div></div>
+    <div class="snap-item"><div class="snap-label">现金及等价物</div><div class="snap-val">$9.84B</div><div class="snap-sub">2026-03-31 末</div></div>
+    <div class="snap-item"><div class="snap-label">有息负债</div><div class="snap-val dn">$12.75B</div><div class="snap-sub">全为固息高级债</div></div>
+    <div class="snap-item"><div class="snap-label">真实净负债</div><div class="snap-val dn">-$2.9B</div><div class="snap-sub">⚠️ 净负债非净现金</div></div>
+    <div class="snap-item"><div class="snap-label">有机基础费率增长</div><div class="snap-val up">10% (LTM)</div><div class="snap-sub">Q1 年化 8% · 远超 5% 目标</div></div>
+  </div>
+  <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">数据时点：股价 2026-07-10 收盘 $1,036.11（当日 +1.61%）· 财务数据来源 BlackRock Q1 FY2026 官方财报新闻稿 + 10-Q（SEC EDGAR，2026-04-14 发布，财季截至 2026-03-31）· 货币 USD 单口径。BlackRock 财年为自然年（12-31），故 Q1 FY2026 = 2026-01-01 至 2026-03-31。⚠️ BlackRock 是<strong>费用型资管公司，不是银行/保险</strong>——净息差 NII/NIM、拨备、CET1、ROTCE、P/TBV 等银行保险指标<strong>均不适用</strong>；有形净资产为负（权益 $56.7B − 商誉 $35.3B − 无形 $27.7B ≈ -$6.3B），P/TBV 无意义。核心 KPI 是 AUM、净流入、有机基础费率增长、有效费率、调整后营业利润率、技术 ACV。市场数据（股价/市值/Forward EPS）来自二手聚合源，仅作行情参考并明确标注。</p>
+</div>
+
+<!-- ═══ Q1 FY2026 KPI ═══ -->
+<div class="section">
+  <div class="stitle">Q1 FY2026 核心业绩（USD · 财季截至 2026-03-31）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">总营收</div><div class="kpi-v">$6.70B</div><span class="badge up">+27% YoY</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">环比 -4.4%（Q4 季节性高基数）</div></div>
+    <div class="kpi"><div class="kpi-l">基础费用 + 证券出借</div><div class="kpi-v">$5.44B</div><span class="badge up">主引擎</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">占营收 81% · 稳定订阅式</div></div>
+    <div class="kpi"><div class="kpi-l">技术服务及订阅</div><div class="kpi-v">$530M</div><span class="badge up">ACV +14%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">Aladdin + Preqin</div></div>
+    <div class="kpi"><div class="kpi-l">业绩报酬</div><div class="kpi-v">$272M</div><span class="badge nt">波动项</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">私募/对冲策略提成</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 营业利润</div><div class="kpi-v">$2.81B</div><span class="badge up">利润率 42%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">含或有对价收益 $549M</div></div>
+    <div class="kpi"><div class="kpi-l">调整后营业利润</div><div class="kpi-v">$2.67B</div><span class="badge up">44.5%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">利润率同比 +130bp</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 净利润（归母）</div><div class="kpi-v">$2.21B</div><span class="badge up">+46% EPS</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">被非现金收益抬高</div></div>
+    <div class="kpi"><div class="kpi-l">调整后净利润</div><div class="kpi-v">$2.07B</div><span class="badge up">真实口径</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">剔除或有对价等一次性</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 摊薄 EPS</div><div class="kpi-v">$14.06</div><span class="badge up">+46%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">⚠️ 反超调整后（罕见）</div></div>
+    <div class="kpi"><div class="kpi-l">调整后摊薄 EPS</div><div class="kpi-v">$12.53</div><span class="badge up">+11%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">最可信口径</div></div>
+    <div class="kpi"><div class="kpi-l">总净流入</div><div class="kpi-v">$129.7B</div><span class="badge up">5 年最佳 Q1</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">长期净流入 $135.9B</div></div>
+    <div class="kpi"><div class="kpi-l">期末 AUM</div><div class="kpi-v">$13.89T</div><span class="badge up">+20% YoY</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">平均 AUM $14.24T（+22%）</div></div>
+  </div>
+</div>
+
+<!-- ═══ 看穿桥接 高亮框 ═══ -->
+<div class="section">
+  <div class="stitle">本季必看 · 一个"看穿"：为什么 GAAP EPS 反超调整后 EPS？</div>
+  <div class="cmt">
+    <p><strong>这个季度 BlackRock 出了一件罕见的事：GAAP 每股收益 $14.06 竟然高于调整后每股收益 $12.53——通常是反过来。看不穿这一点，就会把它误读成"利润大爆发"。</strong></p>
+    <p><strong>看穿：一笔 $5.49 亿的非现金"或有对价公允价值下降收益"抬高了 GAAP，被调整后口径剔除。</strong> BlackRock 收购 GIP、HPS 时约定了 earnout（业绩对赌）负债，其公允价值与 BLK 股价<span class="hl-t">反向变动</span>——本季股价回落，earnout 负债的公允价值随之下降，产生 $549M 的<strong>非现金账面收益</strong>，直接计入 GAAP 营业利润，却与真实经营无关，因此被调整后结果剔除。这就是 GAAP EPS +46%、而调整后 EPS 仅 +11% 的根源。</p>
+    <div class="tbl-wrap" style="margin:14px 0;">
+      <table class="tbl">
+        <tr><th>利润桥接（$M）</th><th>Q1 FY2026</th><th>口径说明</th></tr>
+        <tr><td>总营收</td><td>6,698</td><td>+27% YoY</td></tr>
+        <tr><td>员工薪酬及福利</td><td>(2,225)</td><td>最大成本项</td></tr>
+        <tr><td>分销及资产类费用</td><td>(1,257)</td><td>随分销规模变动</td></tr>
+        <tr><td>一般及行政费用</td><td>(674)</td><td>—</td></tr>
+        <tr><td>无形资产摊销</td><td>(277)</td><td>并购形成 · 非现金</td></tr>
+        <tr class="hl"><td><span class="hl-t">加：或有对价公允价值下降收益</span></td><td><span class="hl-t">+549</span></td><td>非现金 · 与股价反向</td></tr>
+        <tr class="hl"><td><strong>GAAP 营业利润</strong></td><td><strong>2,814</strong></td><td><strong>利润率 42%</strong></td></tr>
+        <tr><td>调整后营业利润（剔除上述特殊项）</td><td>2,669</td><td>利润率 44.5%（更真实）</td></tr>
+        <tr class="hl"><td><strong>调整后摊薄 EPS</strong></td><td><strong>$12.53</strong></td><td><strong>+11% · 最可信</strong></td></tr>
+      </table>
+    </div>
+    <p><strong>真相：调整后 EPS +11% 才是本季底色。</strong> 而且这 +11% 还被三重逆风压着——(1) 摊薄股数上升（HPS 收购发行的 Subco 单位）；(2) 有效税率从 GAAP 的 18.2% 升到调整后 23.2%；(3) 非经营收益同比走低。<span class="hl-t">换句话说，剔掉会计噪音后，BlackRock 是一台"营收 +27%（含并购）、有机基础费率增长年化 8%、调整后 EPS 稳健 +11%"的机器</span>——业绩没有毛病，罕见的 GAAP 反超只是一次会计视觉效果，不是基本面拐点。</p>
+  </div>
+</div>
+
+<!-- ═══ 趋势图 ═══ -->
+<div class="section">
+  <div class="stitle">关键指标趋势</div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">总营收（$B）& YoY 增速（近 5 季）</div><div class="cwrap"><canvas id="chartRev"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">Q1 FY2026 营收分部拆分（$M）</div><div class="cwrap"><canvas id="chartSegment"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">调整后营业利润率趋势（%，近 5 季）</div><div class="cwrap"><canvas id="chartMargin"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">GAAP vs 调整后 摊薄 EPS（$，近 5 季）</div><div class="cwrap"><canvas id="chartEPS"></canvas></div></div>
+  </div>
+  <p style="margin-top:4px; font-size:12px; color:var(--text3); line-height:1.6;">说明：营收 YoY 在 2025 下半年跳升，主因 GIP（2024-10 完成）、HPS（2025 年中完成）、Preqin 陆续并表；Q3 2025 营收 +25%、Q1 2026 +27% 为官方披露值，其余季度 YoY 为按并表节奏的合理估算。EPS 图清晰显示 GAAP（红）大幅波动、调整后（绿）稳定，Q1 2026 出现 GAAP 反超调整后的罕见一幕。</p>
+</div>
+
+<!-- ═══ 桑基图 ═══ -->
+<div class="section">
+  <div class="stitle">Q1 FY2026 利润分解桑基图（$M · GAAP 口径）</div>
+  <div class="ccard">
+    <div id="sankey" style="width:100%;height:480px;"></div>
+    <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">说明：总营收 $6,698 → 员工薪酬 $2,225 + 分销及资产类费用 $1,257 + 一般及行政 $674 + 无形摊销 $277 + 核心经营利润 $2,265；核心经营利润 $2,265 + 或有对价收益及非经营净收益 $578（以非现金为主）→ 税前利润 $2,843 → 所得税 $517 + 少数股东损益 $114 + 归母净利 $2,212。注：GAAP 营业利润 $2,814 = 核心经营利润 $2,265 + 或有对价收益 $549；该 $549M 为非现金项，抬高 GAAP、被调整后口径剔除。资管为极轻资产模式（Q1 Capex 仅 $106M），Q1 经营现金流按季节性为负（年初发放上年计提的约 $23 亿激励薪酬），须以年度口径评估现金流。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 1 ═══ -->
+<div class="section">
+  <div class="stitle">模块 1 · 公司概览与背景</div>
+  <div class="cmt">
+    <p><strong>BlackRock, Inc.</strong>（NYSE: BLK），总部纽约。1988 年由 Larry Fink 等人创立，最初做固定收益资管与风险管理；1999 年上市，此后通过一系列标志性并购（2006 美林投资管理、2009 <strong>巴克莱全球投资 BGI（收获 iShares）</strong>、2024-2025 <strong>GIP + HPS + Preqin</strong>）成长为<span class="hl-t">全球规模最大的资产管理人</span>。财年为自然年（12-31）。</p>
+
+    <p><strong>核心叙事</strong>：BlackRock 本质是一座<span class="hl-t">"按资产规模收费的过路桥"</span>——它替全球机构、财富平台与个人投资者管理 $13.9 万亿资产，只要这些钱停在它的平台上，就按一个极小的费率（本季约 15.3 个基点年化）持续抽取管理费。它<strong>不用自有资产负债表赌方向、不承担持仓的信用风险</strong>，赚的是"资产在管"的稳定订阅式收入。这门生意的质量在于：调整后营业利润率 44.5%、边际成本随规模趋近于零、客户资金黏性极高。</p>
+
+    <p><strong>三大增长支柱</strong>（管理层战略框架）：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>公募规模化平台</strong>——iShares ETF（本季净流入 $1,320 亿，Q1 历史纪录）+ 指数 + 主动，是基本盘的"称重机"</li>
+      <li><strong>私募市场</strong>——GIP（基础设施）+ HPS（私募信贷）+ 多元另类，是费率更高、增长更快的新曲线，本季私募净流入 $90 亿</li>
+      <li><strong>技术服务</strong>——Aladdin 风险管理平台 + Preqin 私募数据，ACV +14%，软件属性 + 客户锁定，是护城河的延伸与估值加分项</li>
+    </ul>
+
+    <p><strong>股权与治理</strong>：单一类别普通股（无双重股权），流通盘 155.4M 股；含 HPS 收购发行的 Class B-2 Subco 单位后 as-converted 约 163.0M 股，Q1 加权摊薄股数约 165M。机构持股高度分散（BLK 本身也是全球最大被动持股方之一）。<span class="warn-t">值得注意的独特项</span>：并购形成的<strong>或有对价负债 $78.65 亿</strong>（GIP/HPS earnout，与股价反向、可用 BLK 股份结算），是理解本季 GAAP 利润波动的关键。</p>
+
+    <p><strong>能力圈检验</strong>：收费桥主业极其清晰（看得懂的顶级好生意——用一句话就能说清怎么赚钱）。但<span class="warn-t">两块需要额外功课：(1) 刚并入的 HPS 私募信贷正处在信贷周期考验窗口，其资产质量与真实盈利能力尚未经历一轮完整的违约周期检验；(2) AUM 高度绑定资本市场——一轮熊市会同时压低资产规模与费率收入，业绩弹性比"稳定订阅"的表象更大</span>。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 2 ═══ -->
+<div class="section">
+  <div class="stitle">模块 2 · 管理层评估</div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>Larry Fink · 董事长兼 CEO（联合创始人，1988 至今）</h4>
+      <p>Fink 是资管史上最重要的资本配置者之一——把一家 1988 年的固定收益精品店，通过 BGI/iShares、GIP、HPS、Preqin 等一系列<span class="hl-t">变革式并购</span>做成全球规模第一的资管平台。2024-2025 连续押注私募市场 + 技术，是一次刻意的战略重构：把 BlackRock 从"公募费率被被动化持续压低"的赛道，扩展到"公募 + 私募 + 技术"的全天候整户关系。<span class="warn-t">海图判断</span>：视野与执行力顶级，但连环大并购也带来 $353 亿商誉 + $277 亿无形资产、摊薄股本上升与整合风险——这是"用股本换增长曲线"的赌注，需持续检验 ROIC 兑现。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cw">B+</div>
+    <div class="bd">
+      <h4>资本配置纪律 · 分红为主、并购为矛、回购偏保守</h4>
+      <p>
+      <strong>连续多年增息</strong>：Q1 2026 季度股息上调 10% 至 $5.73/股（年化 $22.92），派息率约占调整后 EPS 48%，空间充足。<br>
+      <strong>回购力度温和</strong>：Q1 公开市场回购 $4.5 亿，2026 全年目标 $18 亿——相对约 $80 亿的年度盈利，回购占比不高，且<span class="warn-t">敌不过并购增发</span>：摊薄股数从 FY2023 的 1.507 亿升至 Q1 2026 的约 1.65 亿。<br>
+      <strong>并购是主要资本出口</strong>：GIP/HPS/Preqin 消耗了大量股本与现金。海图评价：分红纪律可靠、增息稳健，但"回购缩股"这条含金量被并购增发抵消；资本配置的胜负手在于这几笔私募/技术并购的长期 ROIC 能否覆盖股本代价。
+      </p>
+    </div>
+  </div>
+
+  <div class="cmt">
+    <p><strong>长期主义测试</strong>：✅ Fink 一贯以"平台规模 + 技术 + 全天候资产类别"的长期复利为主线，敢于用巨额并购重构增长曲线，而非追逐季度财报。<strong>坦诚度</strong>：电话会披露详尽（明确说明 GAAP 被 $549M 非现金或有对价收益抬高、调整后 +11% 才是真实读数，且主动提示更高税率与摊薄逆风），不粉饰。<strong>利益绑定</strong>：管理层持股比例不高（成熟大盘股常态），薪酬与调整后经营指标 + AUM 增长挂钩。整体：管理层质量 A-，唯一保留在于连环大并购的资本代价与整合不确定性。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 3 ═══ -->
+<div class="section">
+  <div class="stitle">模块 3 · 商业模式深度解析</div>
+  <div class="cmt">
+    <p><strong>海图"一句话测试"</strong>：<span class="hl-t">BlackRock 替全球客户管钱，只要资产停在它的平台上，就按一个极小的费率（约 15.3 个基点）持续抽成——它不赌方向、不担信用风险，靠 $13.9 万亿的规模和 44.5% 的调整后营业利润率赚"资产在管"的订阅费。</span></p>
+
+    <p><strong>收入四引擎</strong>：Q1 FY2026 总营收 $6,698M，其中——</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>收入项</th><th>Q1 FY26</th><th>占比</th><th>性质</th></tr>
+        <tr><td>基础费用 + 证券出借</td><td>$5,438M</td><td>81%</td><td>按 AUM × 费率 · 稳定订阅式（含投顾/管理费 $5,259M + 证券出借 $179M）</td></tr>
+        <tr><td>技术服务及订阅</td><td>$530M</td><td>8%</td><td>Aladdin + Preqin · ACV +14% · 软件属性</td></tr>
+        <tr><td>分销费</td><td>$389M</td><td>6%</td><td>随分销规模变动</td></tr>
+        <tr><td>业绩报酬</td><td>$272M</td><td>4%</td><td>私募/对冲策略提成 · 波动大</td></tr>
+        <tr><td>咨询及其他</td><td>$69M</td><td>1%</td><td>—</td></tr>
+      </table>
+    </div>
+
+    <p style="margin-top:14px;"><strong>基础费用按产品拆分（Q1 · $M）</strong>：股票 $2,626 · 固收 $1,058 · 另类/私募 $658 · 多资产 $381 · 现金管理 $340 · 流动另类 $197 · 货币商品 $136 · 数字资产 $42。<span class="hl-t">股票（多为 iShares ETF）贡献近半基础费，另类/私募费率更高、是费率上移的引擎</span>。</p>
+
+    <p style="margin-top:14px;"><strong>单位经济与议价能力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>规模决定成本优势</strong>——管理更多资产的边际成本趋近于零，44.5% 调整后营业利润率是规模碾压的结果，同比还在 +130bp 爬坡</li>
+      <li><strong>费率结构性下行 vs 组合上移</strong>——公募/被动费率长期被压（有效费率约 15.3bp），但组合向私募/另类 + 技术上移，对冲费率下行</li>
+      <li><strong>对客户的黏性</strong>：强——机构与财富平台一旦把资产 + 风控（Aladdin）深度托付，切换成本极高</li>
+      <li><strong>"全天候整户关系"</strong>：私募信贷市场动荡时，财富平台更想要能同时提供"公募 + 私募"两端的单一伙伴——这是 BlackRock 抢份额的独特位势</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══ 模块 4 ═══ -->
+<div class="section">
+  <div class="stitle">模块 4 · 经济护城河分析（5 维）</div>
+  <div class="moat-grid">
+    <div class="moat-card wide">
+      <h5>1. 规模/成本优势</h5>
+      <span class="moat-rate">极宽</span>
+      <p>$13.9 万亿 AUM 全球第一，管理更多资产边际成本趋近于零。44.5% 调整后营业利润率 + 同比 +130bp。规模碾压。<strong>趋势：加宽</strong>（技术 + 私募提升组合费率）。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>2. 转换成本</h5>
+      <span class="moat-rate">宽</span>
+      <p>Aladdin 风控平台深度嵌入客户投资流程 + 机构资产托付黏性极高，切换成本巨大。技术 ACV +14% 强化锁定。<strong>趋势：加宽</strong>。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>3. 无形资产/品牌</h5>
+      <span class="moat-rate">宽</span>
+      <p>iShares 全球第一 ETF 品牌 + BlackRock 机构信任 + Aladdin/Preqin 数据资产。是资金"默认选择"的心智壁垒。<strong>趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>4. 网络效应</h5>
+      <span class="moat-rate">中</span>
+      <p>ETF 流动性有"越大越活跃、越活跃越吸金"的弱网络效应；Aladdin/Preqin 数据随用户增多更有价值。但不及支付网络那样的强双边飞轮。<strong>趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>5. 有效规模</h5>
+      <span class="moat-rate">宽</span>
+      <p>全球规模化被动 + 私募 + 技术一体化平台，能同时做齐三端的玩家极少（Vanguard/State Street 各有短板）。<strong>趋势：稳定</strong>。</p>
+    </div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>10 年后护城河会更宽还是更窄？</strong> <span class="hl-t">大概率更宽，但要过两道关</span>：(1) <strong>被动化压费率</strong>——公募费率长期下行是行业逆风，BlackRock 的对冲是把组合向"私募 + 另类 + 技术"上移（费率更高、软件属性），本季私募/技术双引擎正在兑现这条路径；(2) <span class="warn-t">私募信贷周期</span>——HPS 刚并入，其资产质量尚未经历一轮完整违约周期，若私募信贷出现系统性问题，这条新曲线会从"护城河延伸"变成"风险敞口"。<strong>核心判断：规模 + Aladdin 技术 + 全天候整户关系是极宽且加宽的护城河，私募信贷是唯一需要盯紧的变量。</strong></p>
+    <p><strong>定价权</strong>：公募端弱（被动化压费率），私募/技术端强（费率更高、锁定更深）。整体有效费率靠组合上移维稳。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 5 ═══ -->
+<div class="section">
+  <div class="stitle">模块 5 · 财务深度分析</div>
+
+  <div class="dcf-note" style="margin-bottom:16px;">
+    <p><strong>金融业适配说明 · 为什么银行/保险指标在这里不适用</strong>：BlackRock 是<strong>费用型资产管理公司，不是银行、不是保险公司</strong>。因此净息差（NII/NIM）、信贷拨备、CET1 资本充足率、ROTCE、P/TBV 等银行/保险 KPI <span class="warn-t">全部不适用</span>——它没有生息资产表、没有存贷利差、有形净资产为负（P/TBV 无意义）。资管的正确 KPI 是：<strong>AUM、净流入、有机基础费率增长、有效费率、调整后营业利润率、技术 ACV</strong>。以下按资管口径分析。</p>
+  </div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 12px 0; font-family: 'Segoe UI',sans-serif;">5.1 关键运营与盈利比率（Q1 FY2026）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>指标</th><th>数值</th><th>同比/参考</th><th>含义</th></tr>
+      <tr><td>期末 AUM</td><td>$13.89T</td><td><span class="badge up">+20% YoY</span></td><td>全球第一 · 环比 -1.0%（市场回落）</td></tr>
+      <tr><td>平均 AUM</td><td>$14.24T</td><td><span class="badge up">+22% YoY</span></td><td>决定费率收入的基数</td></tr>
+      <tr><td>总净流入</td><td>$129.7B</td><td>长期 $135.9B</td><td>5 年来最强 Q1</td></tr>
+      <tr><td>有机基础费率增长</td><td>Q1 年化 8%</td><td>LTM 10%</td><td><span class="badge up">远超 5%+ 目标</span></td></tr>
+      <tr><td>有效基础费率（年化）</td><td>~15.3 bps</td><td>基础费 $5,438M×4 / 平均 AUM</td><td>被动压费 vs 组合上移的平衡</td></tr>
+      <tr><td>调整后营业利润率</td><td>44.5%</td><td><span class="badge up">+130bp YoY</span></td><td>规模 + 技术驱动</td></tr>
+      <tr><td>调整后净利率</td><td>~31%</td><td>调整后净利 $2,068M</td><td>—</td></tr>
+      <tr><td>调整后 ROE（年化）</td><td>~14.6%</td><td>净利 $2,068M×4 / 权益 $56.7B</td><td>权益被并购商誉抬高 · 有形口径不适用</td></tr>
+      <tr><td>技术服务 ACV 增速</td><td>+14%</td><td>Aladdin + Preqin</td><td>软件属性 · 估值加分</td></tr>
+      <tr><td>有效税率（GAAP / 调整后）</td><td>18.2% / 23.2%</td><td>调整后更高</td><td>拖累调整后 EPS 的因素之一</td></tr>
+    </table>
+  </div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.2 资产负债健康度（2026-03-31 末 · $M）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>2026-03-31</th><th>说明</th></tr>
+      <tr><td>现金及等价物</td><td>9,841</td><td>可用流动性</td></tr>
+      <tr><td>投资（含合并投资产品 CIP）</td><td>14,574</td><td><span class="warn-t">非纯流动资产</span> · 含种子/共同投资，不可整体计入净现金</td></tr>
+      <tr class="hl"><td>短期借款</td><td>0</td><td>商业票据 $50 亿额度 $0 动用 · 循环授信 $77 亿未提取</td></tr>
+      <tr class="hl"><td>长期借款（账面）</td><td>12,749</td><td>全为固息高级债 · 12 个月内无到期</td></tr>
+      <tr class="hl"><td>有息负债合计</td><td>12,749</td><td>逐项核对 · 无短债</td></tr>
+      <tr class="hl"><td><strong>真实净负债（不含租赁）</strong></td><td><strong>-2,908</strong></td><td>⚠️ 现金 9,841 − 有息负债 12,749</td></tr>
+      <tr><td>含经营租赁负债后净负债</td><td>-5,124</td><td>经营租赁负债 $2,216</td></tr>
+      <tr><td>或有对价负债（GIP/HPS earnout）</td><td>7,865</td><td>非计息 · 与股价反向 · 可用股份结算 · 非债务</td></tr>
+      <tr><td>商誉</td><td>35,296</td><td>并购形成</td></tr>
+      <tr><td>无形资产（净）</td><td>27,691</td><td>并购形成</td></tr>
+      <tr><td>总资产</td><td>170,237</td><td>—</td></tr>
+      <tr><td>归母权益（永久性）</td><td>56,688</td><td>留存收益 $39,182</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">⚠️ <strong>净负债非净现金——铁律提示</strong>：BlackRock 有息负债 $12,749M（全为固息高级债、12 个月内无到期、无短债）> 现金 $9,841M，<strong>真实净负债 -$2,908M</strong>（含经营租赁 -$5,124M）。这对一家年经营现金流约 $90-100 亿、杠杆契约 &lt;1.0x（上限 3.5x）的投资级资管毫无压力，属正常且舒适的资本结构，但"现金堡垒/净现金"叙事<strong>不适用</strong>。另注：$14,574M 投资line 含合并投资产品（CIP）与种子/共同投资，<strong>不可整体加入现金算净现金</strong>；$7,865M 或有对价是并购 earnout（非计息、可用股份结算），不是债务；有形净资产为负（权益 − 商誉 − 无形 ≈ -$6.3B），故 P/TBV 无意义。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.3 现金流量（Q1 FY2026 三个月）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>Q1 FY26</th><th>Q1 FY25</th><th>说明</th></tr>
+      <tr><td>经营活动现金流（OCF）</td><td>-$980M</td><td>-$1,128M</td><td><span class="warn-t">季节性为负</span>（发放上年计提激励）</td></tr>
+      <tr><td>- Capex（PP&E）</td><td>-$106M</td><td>—</td><td>极轻资产</td></tr>
+      <tr class="hl"><td>季度自由现金流（FCF）</td><td>-$1,086M</td><td>—</td><td>纯季节性 · 非经营问题</td></tr>
+      <tr><td>股息 + Subco 分配支付</td><td>$973M</td><td>—</td><td>—</td></tr>
+      <tr><td>回购股份/单位（现金流口径）</td><td>$810M</td><td>—</td><td>含税务代扣 · 公开市场回购 $450M</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">⚠️ <strong>口径说明</strong>：BlackRock 的 <strong>Q1 经营现金流每年都结构性为负</strong>——上一年末计提的约 $23 亿激励薪酬在 Q1 集中发放（应计薪酬从 $3,830M 降至 $1,588M），这会在全年其余季度回补。<strong>FY2025 全年 OCF 强劲为正</strong>。因此<strong>季度 FCF 对 BlackRock 毫无意义，必须按年度评估</strong>——这是资管行业的季节性特征，不是现金流恶化。回购现金流 $810M 中，$450M 为公开市场回购，其余为归属股份代扣税款 + Subco 相关活动。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.4 所有者盈余（价值投资口径 · 年度化）</h3>
+  <div class="dcf-note">
+    <p><strong>所有者盈余 = 净利润 + 折旧摊销 + SBC − 维护性 Capex ± 营运资金 ≈ 调整后净利润</strong></p>
+    <p>BlackRock 是极轻资产、极高现金转化的收费桥（Q1 Capex 仅 $106M）。剔除并购形成的非现金无形摊销与一次性项后，<strong>调整后净利润是所有者盈余的最佳代理</strong>。年度化调整后净利约 $8.3-8.8B（FY2025 调整后净利 $7.7B，FY2026 共识约 $8.6B）。</p>
+    <p><strong>所有者盈余收益率 = 约 $8.6B / 市值 $168.5B ≈ 5.1%</strong>——这是一个<span class="warn-t">"顶级质量 + 满价"</span>的收益率：5.1% 的收益率对一个有机增长 8-10%、44.5% 营业利润率、极宽护城河的公司不算便宜，也不算贵，属"合理偏满"。<strong>结论：BlackRock 的问题不在生意，而在价格——当前 5.1% 的收益率意味着几乎没有安全边际。</strong></p>
+  </div>
+</div>
+
+<!-- ═══ 模块 6 ═══ -->
+<div class="section">
+  <div class="stitle">模块 6 · 电话会分析（Q1 FY2026 + 前 2 季度）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">Q1 FY2026 电话会（2026-04-14）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"$1,300 亿净流入驱动 8% 年化有机基础费率增长——5 年来最强 Q1；营收 +27% 至 $6.7B"</div><div class="ec-note">底层增长强劲且多元化，不是靠单一产品。有机基础费率增长远超 5%+ 长期目标。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"iShares 创 Q1 净流入纪录（$1,320 亿），净新增基础费率是去年同期的两倍；主动 ETF 超 $1,100 亿 AUM、净流入 $190 亿领跑行业"</div><div class="ec-note">被动 + 主动 ETF 双双领先，是 BlackRock 分销与产品力的直接证明。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"调整后营业利润率同比扩张 130bp 至 44.5%；技术 ACV +14%（Aladdin + Preqin 动能）"</div><div class="ec-note">规模 + 技术让利润率持续爬坡，技术的软件属性提升估值中枢。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"管理层把私募信贷市场动荡定义为抢份额的机会——尤其在想要公募+私募一体化整户关系的财富平台"</div><div class="ec-note">别人恐慌处正是 BlackRock 的位势——全天候整户关系是它区别于纯公募/纯私募玩家的独特武器。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"GAAP EPS $14.06 被 $549M 非现金或有对价收益抬高；调整后 EPS $12.53（+11%）才是真实读数，反映更高股数、更高税率、更低非经营收益"——管理层主动说明</div><div class="ec-note">坦诚披露会计噪音，指引读者看调整后口径——这是加分的透明度，但也提示 +11% 才是底色。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q4 FY2025 电话会（2026 年初）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"全年净流入创纪录 $6,980 亿（含 Q4 $3,420 亿），为公司史上最高季度与年度流入"</div><div class="ec-note">Q4 有机基础费率增长 12%、全年 9%，均远超 5%+ 目标。宣布 2026 加息 10% 至 $5.73、设 $18 亿回购目标、调整后营业利润率 45.0%。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"以一个整合平台（BlackRock + GIP + HPS + Preqin）进入 2026，私募市场募资计划雄心勃勃；Q4 GAAP EPS $7.16 被慈善捐赠（Circle 股权）+ 并购项压低"</div><div class="ec-note">2026 是三大并购后的第一个完整年度，私募/技术能否兑现是关键；Q4 GAAP 亦被一次性项扰动。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q3 FY2025 电话会（2025-10-14）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"创纪录 AUM $13.5T；多元化净流入 $2,050 亿；10% 有机基础费率增长——2021 以来最高"</div><div class="ec-note">营收 +25% YoY 至 $6.5B、营业利润 +23%、调整后 EPS $11.55（+1%）。iShares/私募信贷/数字资产/外包全面走强。GAAP EPS 因 HPS 并购摊销与相关薪酬同比降 23%（已被调整后剔除）。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">指引兑现度追踪</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>历史指引/目标</th><th>最新实际</th><th>评价</th></tr>
+      <tr><td>有机基础费率增长 5%+ 基线</td><td>Q1 年化 8% / LTM 10%</td><td><span class="badge up">远超</span></td></tr>
+      <tr><td>调整后营业利润率</td><td>44.5%（同比 +130bp）</td><td><span class="badge up">扩张</span></td></tr>
+      <tr><td>技术 ACV 增长</td><td>+14%</td><td><span class="badge up">兑现</span></td></tr>
+      <tr><td>2026 加息 10% 至 $5.73</td><td>Q1 已落地</td><td><span class="badge up">兑现</span></td></tr>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>信号汇总</strong>：连续三季电话会呈现"<span class="hl-t">创纪录流入 + 有机增长远超目标 + 利润率扩张 + 私募/技术转型兑现</span>"的强势主线。管理层坦诚（主动拆解 GAAP 会计噪音、指引看调整后口径）加分。<strong>业绩几乎没有毛病——唯一的中性信号是 GAAP 利润被非现金项反复扰动（或有对价、慈善捐赠、并购摊销），读财报必须切换到调整后口径。问题永远在估值和私募信贷周期这两个变量上，而非当季经营。</strong></p>
+  </div>
+</div>
+
+<!-- ═══ 模块 7 ═══ -->
+<div class="section">
+  <div class="stitle">模块 7 · 多模型估值（8 种方法）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">7.1 估值汇总表（独立估值 · 不锚定现价 · USD）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>估值方法</th><th>每股公允价</th><th>假设要点</th><th>权重</th></tr>
+      <tr><td>1. 相对估值（P/E）</td><td>$1,060</td><td>FY2026 调整 EPS $53.62×19x 与 FY2027 $61.24×18x 混合（优质但周期，给市场级倍数）</td><td>25%</td></tr>
+      <tr><td>2. DCF（基准）</td><td>$1,100</td><td>所有者盈余 ~$8.6B，5 年 CAGR 9%→终值 3.5%，WACC 9%（护城河溢价，AUM 周期折价）</td><td>20%</td></tr>
+      <tr><td>3. 所有者盈余收益率</td><td>$1,000</td><td>调整后净利 ~$8.6B / 5.2% 目标收益率 → $165B / 165M 股</td><td>10%</td></tr>
+      <tr><td>4. PEG</td><td>$945</td><td>Forward P/E 19.3 ÷ EPS 增速 ~11% = PEG 1.75；合理 PEG 1.6 → 隐含 P/E 17.6×</td><td>10%</td></tr>
+      <tr><td>5. DDM（资本返还调整）</td><td>$900</td><td>纯股息 DDM 仅约 $650（派息率 48% 严重低估）；计入回购的资本返还 DDM 约 $900</td><td>5%</td></tr>
+      <tr><td>6. P/AUM（NAV 替代）</td><td>$1,050</td><td>1.25% × $13.9T AUM / 165M 股（组合向高费率私募/技术上移，给略高于现价 1.21% 的费率）</td><td>15%</td></tr>
+      <tr><td>7. 反向 DCF</td><td>当前价隐含 ~6-7% 长期增长</td><td>$1,036 隐含市场只定价 6-7% 增长——低于 8-10% 有机增速，估值合理偏保守</td><td>5%</td></tr>
+      <tr><td>8. SOTP 分部加总</td><td>$960</td><td>核心资管净利 ~$7.9B×17x + 技术板块（软件属性）~$25B − 净负债 $2.9B</td><td>10%</td></tr>
+      <tr class="hl"><td><strong>加权公允价中位数</strong></td><td><strong>$1,050</strong></td><td>估值区间 $945-1,100 · 中位 ~$1,050</td><td>100%</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.8;"><strong>与现价对照</strong>：当前 $1,036 vs 加权公允 $1,050 · <span class="nt">折价仅约 1.3%</span>——<strong>远不足价值投资 25% 安全边际的门槛</strong>。BlackRock 是世界级好生意，但当前价格已充分反映其规模、护城河与私募转型的乐观预期，几乎没有安全边际。反向 DCF 显示市场已定价 ~6-7% 长期增长（略低于 8-10% 有机增速），估值不算贵、但也谈不上打折，是"合理满价"。<span class="warn-t">P/TBV、纯 FCF 类方法不适用</span>（有形净资产为负；季度 FCF 结构性为负，须年度化，已用调整后净利/所有者盈余替代）。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.2 P/E 多档透视表</h3>
+  <p style="margin-bottom:10px; font-size:13px; color:var(--text2);">本季 GAAP EPS（$14.06）反超调整后（$12.53），差异 12%（&ge;10% 触发多档透视）；且 GAAP 逐季被或有对价、慈善捐赠、并购摊销等非现金项大幅扰动——单一 TTM P/E 会误导，必须多档呈现：</p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>口径</th><th>EPS</th><th>P/E (基于 $1,036)</th><th>读数说明</th></tr>
+      <tr><td>TTM GAAP P/E</td><td>~$39.84</td><td>~26.0x</td><td>含或有对价/捐赠/摊销扰动 · 噪音大</td></tr>
+      <tr><td>TTM 调整后 P/E</td><td>~$49.29</td><td>~21.0x</td><td>剔一次性 · 较可信</td></tr>
+      <tr><td>FY2025 调整后 P/E</td><td>$48.09</td><td>~21.5x</td><td>上一完整财年</td></tr>
+      <tr><td>Q1 2026 调整后年化 P/E</td><td>$50.12</td><td>~20.7x</td><td>最新单季外推</td></tr>
+      <tr class="hl"><td><strong>Forward P/E（FY2026 共识 $53.62）</strong></td><td><strong>$53.62</strong></td><td><strong>~19.3x</strong></td><td>最可信档 · 市场惯用</td></tr>
+      <tr><td>Forward P/E（FY2027 共识 $61.24）</td><td>$61.24</td><td>~16.9x</td><td>次年 · 增长摊薄倍数</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3);"><strong>最可信档</strong>：Forward P/E ~19.3x（FY2026）/ ~16.9x（FY2027）。<span class="hl-t">BlackRock 相对传统资管享大幅溢价（TROW 12x / STT 10.5x / AMP 10.9x），溢价源于 $13.9T 规模、Aladdin 技术护城河、私募转型与 8-12% 有机增长（对比同业停滞至负的有机流入）</span>。溢价合理，但绝对估值仍在满价区，安全边际不足。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.3 12 个月目标价（概率加权）</h3>
+  <div class="pgrid">
+    <div class="pbox"><div class="pl">悲观情景 · 30%</div><div class="pv pc">$840</div><div class="pn">市场回撤压低 AUM 10-15% + 有机增速降至 ~4% + 估值压缩至 15x<br>距现价 -19%</div></div>
+    <div class="pbox"><div class="pl">基准情景 · 45%</div><div class="pv pf">$1,110</div><div class="pn">FY2027 EPS ~$61×18.5x + 高个位数有机增长 + 私募募资按计划<br>距现价 +7%</div></div>
+    <div class="pbox"><div class="pl">乐观情景 · 25%</div><div class="pv ps">$1,320</div><div class="pn">私募募资超预期 + 技术 ACV 加速 + 估值重估至 21x（~$64 EPS）<br>距现价 +27%</div></div>
+  </div>
+  <p style="font-size:13px; color:var(--text2);"><strong>概率加权公允价</strong>：30%×$840 + 45%×$1,110 + 25%×$1,320 = <strong>$1,080</strong>。<strong>叠加 2.2% 股息 = 总回报约 +6%</strong>——稳健但不激动。<span class="warn-t">当前 $1,036 已接近公允、远高于机械首仓 $840——不在合理建仓窗口</span>。</p>
+</div>
+
+<!-- ═══ 模块 8 ═══ -->
+<div class="section">
+  <div class="stitle">模块 8 · 竞争与行业分析</div>
+  <div class="cmt">
+    <p><strong>全球资管格局</strong>：BlackRock 以 $13.9 万亿 AUM 稳居全球第一（Vanguard 紧随、State Street/SSGA 第三梯队）。它的独特位势是<span class="hl-t">同时做齐"规模化被动（iShares）+ 私募/另类（GIP/HPS）+ 技术（Aladdin/Preqin）"三端</span>——多数同业只擅长其中一端。真正的行业逆风是被动化对公募费率的长期压制，BlackRock 靠组合上移对冲。</p>
+
+    <p><strong>资管同业对比（截至 2026-07）</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>公司</th><th>AUM</th><th>有机基础费率增长</th><th>Forward P/E</th><th>核心评价</th></tr>
+        <tr class="hl"><td><strong>BlackRock BLK</strong></td><td>$13.9T</td><td>+10% (LTM)</td><td><strong>~19.3x</strong></td><td>规模 + 技术 + 私募三端之王 · 溢价合理</td></tr>
+        <tr><td>T. Rowe Price TROW</td><td>$1.89T</td><td>低至负</td><td>~12x</td><td>主动为主 · 长期净流出 · 低倍数</td></tr>
+        <tr><td>State Street STT</td><td>—</td><td>低</td><td>~10.5x</td><td>托管行 + SSGA · 增长低倍数低</td></tr>
+        <tr><td>Ameriprise AMP</td><td>—</td><td>中</td><td>~10.9x</td><td>财富 + 资管 · Q1 EPS $11.26 超预期</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:10px; font-size:12px; color:var(--text3);">BLK vs 传统资管是"两个世界"：传统主动资管（TROW）长期净流出、有机增长为负，只值 10-12x；BlackRock 靠 iShares + 私募 + 技术维持 8-12% 有机增长，市场给它近乎两倍的倍数溢价。<strong>溢价的合理性取决于私募/技术能否持续兑现——这是它区别于"廉价但衰退"的传统同业的根本。</strong></p>
+
+    <p style="margin-top:14px;"><strong>波特五力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>新进入者：</strong>极低（$13.9T 规模 + Aladdin 技术壁垒几不可复制）</li>
+      <li><strong>替代品：</strong>中（被动化本身在压公募费率；但私募/技术是升级而非替代）</li>
+      <li><strong>供应商议价：</strong>低（技术/数据自建）</li>
+      <li><strong>买家议价：</strong>中（大机构对费率有议价力，靠规模 + 一体化服务维系）</li>
+      <li><strong>同业竞争：</strong>中（Vanguard 在被动打价格战，BLK 靠差异化 + 私募/技术避开正面费率战）</li>
+    </ul>
+
+    <p><strong>颠覆风险</strong>：核心行业风险是被动化持续压费率 + 私募信贷周期。BlackRock 的对冲是"把组合搬到费率更高、更难被压的私募/技术上"。这是结构性、非突变的慢变量。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 9 ═══ -->
+<div class="section">
+  <div class="stitle">模块 9 · 技术面与 K 线分析（次要参考）</div>
+  <div class="cmt">
+    <p><strong>趋势</strong>：BLK 当前 $1,036，处于 52 周区间 $917-1,220 的中位偏上，<span class="hl-t">距 52 周高 $1,220 约 -15%</span>——不在高点、也不在底部，是一段回调后的震荡区。近日日内 +1.61%。</p>
+
+    <p><strong>关键价位</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>支撑</strong>：$960（SOTP/PEG 公允下沿）/ $917（52 周低）/ $840（机械首仓、悲观目标）</li>
+      <li><strong>阻力</strong>：$1,110（基准目标）/ $1,220（52 周高）/ $1,320（乐观情景）</li>
+    </ul>
+
+    <p><strong>指标信号</strong>：处于中位区间、无明显超买超卖。距高点 -15% 提供一定缓冲，但距离机械首仓 $840 仍有 -19% 空间。</p>
+
+    <p><strong>注意</strong>：BlackRock 的核心驱动是 AUM 随市场的方向、有机流入、私募/技术兑现与 Forward P/E 估值，技术面是次要参考。价值投资者应等基本面回调（如市场调整拖累 AUM、有机增速放缓）到 $840 附近，而非在满价追高。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 10 ═══ -->
+<div class="section">
+  <div class="stitle">模块 10 · 增长催化剂与前景展望</div>
+  <div class="cmt">
+    <p><strong>短期催化剂（未来 6 个月）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>2026-07-15 Q2 FY2026 财报</strong>——就在数日之后，检验有机流入延续性 + 私募募资进度 + 摊薄股数是否止升</li>
+      <li><strong>私募市场募资放量</strong>——2026 是 GIP/HPS/Preqin 整合后第一个完整年度，基础设施/私募信贷/私募股权/多元另类的募资兑现</li>
+      <li><strong>技术 ACV 持续 +14%</strong>——Aladdin + Preqin 的公募+私募一体化数据平台放量</li>
+      <li><strong>$18 亿回购目标执行</strong>——虽力度温和，但可部分对冲并购增发</li>
+    </ul>
+
+    <p><strong>长期展望（3-5 年）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>组合上移复利</strong>——公募规模基本盘 + 私募/另类（高费率）+ 技术（软件属性）驱动有机基础费率增长维持高个位数</li>
+      <li><strong>私募市场成第二增长极</strong>——GIP/HPS 若跑通，费率与增速都高于公募，重估估值中枢</li>
+      <li><strong>Aladdin/Preqin 一体化</strong>——公募+私募的"whole-portfolio"数据与风控平台，锁定客户、软件化收入</li>
+      <li><strong>财富平台整户关系</strong>——私募信贷动荡中抢占想要一体化伙伴的财富渠道份额</li>
+      <li><strong>风险情景</strong>：市场熊市压低 AUM / 被动化加速压费率 / HPS 私募信贷周期爆雷 / 并购整合不及预期</li>
+    </ul>
+
+    <p><strong>TAM 展望</strong>：全球私募市场、退休资产、技术外包（Aladdin）仍有巨大未渗透空间。核心问题不是增长空间，而是这几笔重资本并购的 ROIC 能否覆盖股本代价，以及私募信贷周期是否平稳。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 11 ═══ -->
+<div class="section">
+  <div class="stitle">模块 11 · 风险矩阵</div>
+  <div class="risk-grid">
+    <div class="risk-card r4"><h5>1. AUM 与市场高度绑定</h5><span class="risk-score">4 / 5 高</span><p>费率收入 = AUM × 费率，一轮熊市会同时压低资产规模与费率。本季期末 AUM 已环比 -1.0%（市场回落）。这是资管"稳定订阅"表象下的真实弹性</p></div>
+    <div class="risk-card r4"><h5>2. 私募信贷周期风险</h5><span class="risk-score">4 / 5 高</span><p>HPS 私募信贷刚并入，尚未经历一轮完整违约周期。若私募信贷系统性承压，这条新曲线会从护城河延伸变成风险敞口</p></div>
+    <div class="risk-card r4"><h5>3. 满估值无安全边际</h5><span class="risk-score">4 / 5 高</span><p>Forward P/E 19.3x / 所有者盈余收益率 5.1% · 折价仅约 1% vs 公允 · 任何增速放缓或市场调整都可能触发估值压缩</p></div>
+    <div class="risk-card r3"><h5>4. 并购整合 + 商誉减值</h5><span class="risk-score">3 / 5 中</span><p>连环大并购形成 $353 亿商誉 + $277 亿无形资产 · 摊薄股本上升 · 整合与减值风险 · 或有对价负债 $78.65 亿扰动 GAAP</p></div>
+    <div class="risk-card r3"><h5>5. 被动化压费率</h5><span class="risk-score">3 / 5 中</span><p>公募/被动费率长期结构性下行（有效费率约 15.3bp）· 靠组合上移对冲 · Vanguard 价格战</p></div>
+    <div class="risk-card r2"><h5>6. 生意质量（机会）</h5><span class="risk-score">2 / 5 反向</span><p>$13.9T 规模 + Aladdin 技术护城河 + 44.5% 营业利润率 + 连续增息 · 世界级好生意本身是最大的安全垫</p></div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>3 个黑天鹅情景</strong>：</p>
+    <ol style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>全球市场深度熊市</strong>——概率 15% · AUM 骤降 20%+ · 费率收入与利润同步收缩 · 股价跌至 $760-840</li>
+      <li><strong>私募信贷系统性爆雷</strong>——概率 10%（3-5 年维度）· HPS 资产质量恶化 · 私募新曲线受创 + 声誉冲击 · 长期估值重置</li>
+      <li><strong>大并购整合失败/大额商誉减值</strong>——概率 8% · GIP/HPS ROIC 不及预期 · 股本代价打水漂 · 估值中枢下移</li>
+    </ol>
+
+    <p style="margin-top:10px;"><strong>下行支撑</strong>：世界级生意 + $13.9T 规模 + Aladdin 技术 + 44.5% 营业利润率 + 投资级资产负债表构成质量底。<span class="hl-t">$900-920 是较硬的估值底</span>（52 周低 $917 + Forward P/E ~16x 下限 + 2.5%+ 股息支撑）。但要注意：BlackRock 的"底"比多数股票高，因为规模与技术护城河的质量溢价难以完全消失。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 12 ═══ -->
+<div class="section">
+  <div class="stitle">模块 12 · 股东回报分析</div>
+  <div class="cmt">
+    <p><strong>BlackRock 是"分红为主、回购温和、并购为矛"的资本返还结构——含金量高在稳定增息，打折在回购缩股被并购增发抵消。</strong>本模块用三个递进问题把股东回报拆到可验证颗粒度。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 18px 0 10px; font-family: 'Segoe UI',sans-serif;">12.1 公司给了股东多少？</h3>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>年度</th><th>回购金额</th><th>股息总额</th><th>季度股息/股</th><th>股东总回报</th><th>说明</th></tr>
+        <tr><td>FY2023</td><td>~$1.5B</td><td>~$3.0B</td><td>$5.00</td><td><strong>~$4.5B</strong></td><td>—</td></tr>
+        <tr><td>FY2024</td><td>~$1.6B</td><td>~$3.1B</td><td>$5.10</td><td><strong>~$4.6B</strong></td><td>数据部分为聚合源近似</td></tr>
+        <tr><td>FY2025</td><td>~$1.6B</td><td>~$3.4B</td><td>$5.21</td><td><strong>~$5.0B</strong></td><td>—</td></tr>
+      </table>
+    </div>
+    <p style="font-size:13px; color: var(--text2); margin-top:8px"><strong>Trailing Shareholder Yield</strong> ≈ FY2025 返还约 $5.0B / 市值 $168.5B ≈ <strong>3.0%</strong>（其中股息约 2.0% + 回购约 1.0%）。<span class="hl-t">BlackRock 是"股息为主 + 回购为辅"的资本返还结构</span>——与许多"大额回购"型美股不同，它把更多现金投向并购扩张增长曲线，回购只是辅助。2026 股息已升至 $5.73/季（年化 $22.92，约 2.2% 收益率）。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.2 给的方式好不好？</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><span class="warn-t">回购含金量被并购增发抵消</span>：这是本模块最关键的发现——<strong>摊薄股数不降反升</strong>：FY2023 1.507 亿 → FY2024 1.516 亿 → FY2025 1.609 亿 → Q1 2026 约 1.65 亿。原因是 HPS 收购发行了约 760 万股 Class B-2 Subco 单位（as-converted 计入摊薄）。每年约 $16 亿回购<strong>敌不过并购增发</strong>，净股本在扩张——回购在替 M&A 稀释"部分接盘"，而非真实增厚每股价值</li>
+      <li><strong>股息含金量高</strong>：连续多年增息、2026 加息 10%、派息率仅约 48% 调整后 EPS，可持续且有增长空间——这是股东回报里最实在的部分</li>
+      <li><strong>回购择时中性</strong>：Q1 公开市场回购 $4.5 亿，均价对应股价回调区间，纪律尚可，但绝对力度小</li>
+    </ul>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.3 能不能继续给、给多少？</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>已授权额度</strong>：董事会于 Q4 2025 结果时额外授权 700 万股回购 · 2026 全年<strong>目标回购 $18 亿</strong>（约占市值 1.1%）· 力度温和但执行可信</li>
+      <li><strong>股息可持续性强</strong>：连续增息、2026 季率 $5.73（+10%）· 派息率约 48% 调整后 EPS，增息空间充足</li>
+      <li><strong>(股息 + 回购) / FCF 覆盖度</strong>：FY2025 返还约 $5.0B / 调整后净利 $7.7B ≈ 65%——<strong>充分覆盖、无需举债</strong>。注意季度 OCF 因薪酬季节性为负须年度化看，全年 OCF 强劲为正，返还完全在年度现金流之内</li>
+      <li><strong>非借债回购</strong>：净负债仅 -$2.9B（相对约 $90-100 亿年 OCF 极轻），资本返还靠经营现金而非举债，杠杆安全</li>
+    </ul>
+    <p><strong>模块小结</strong>：<span class="hl-t">积极但含金量因并购增发打折</span>——股息端稳健、连续增息、覆盖充分、可持续（这部分高含金量）；但回购端力度温和且被 HPS 并购增发抵消，<strong>净摊薄股数逐年上升</strong>，"回购缩股增厚每股价值"的叙事在 BlackRock 身上并不成立。它的股东回报本质是"稳定增息 + 用股本换私募/技术增长曲线"，而非"激进缩股"。这一定性会自然反映在评分卡"资本配置纪律"一维。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 13 ═══ -->
+<div class="section">
+  <div class="stitle">模块 13 · 海图评分卡 + 投资决策</div>
+
+  <div class="scorecard">
+    <h3 style="font-size:15px; color:var(--text); margin-bottom: 16px; font-family: 'Segoe UI',sans-serif;">海图评分卡（6 维 A-D）</h3>
+    <div class="score-grid">
+      <div class="score-card"><div class="score-letter s-bp">A-</div><div class="score-body"><h4>1. 生意可预测性</h4><p>收费桥模式极清晰、订阅式基础费占 81%。但 AUM 与市场高度绑定，盈利弹性大于表象，故非满分 A。</p></div></div>
+      <div class="score-card"><div class="score-letter s-a">A</div><div class="score-body"><h4>2. 经济护城河</h4><p>$13.9T 规模 + Aladdin 技术 + iShares 品牌 + 三端一体化，极宽且加宽。被动压费率是唯一逆风。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">A-</div><div class="score-body"><h4>3. 管理层质量</h4><p>Fink 顶级视野 + 变革式并购 + 坦诚披露。但连环大并购的股本代价与整合风险需持续检验。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">A-</div><div class="score-body"><h4>4. 财务质量</h4><p>44.5% 营业利润率 + 极轻资产 + 投资级表 + 净负债仅 -$2.9B。但权益含大额商誉/无形，有形净资产为负。</p></div></div>
+      <div class="score-card"><div class="score-letter s-b">B</div><div class="score-body"><h4>5. 资本配置纪律</h4><p>连续增息 + 覆盖充分（高含金量），但回购温和且被并购增发抵消、净股本上升（打折）。分红稳、缩股弱。</p></div></div>
+      <div class="score-card"><div class="score-letter s-c">C+</div><div class="score-body"><h4>6. 估值与安全边际</h4><p>Forward P/E 19.3x / 所有者盈余收益率 5.1% / 折价仅约 1% vs 公允 · <strong>无安全边际，当前满价</strong>。</p></div></div>
+    </div>
+
+    <div class="flag-row">
+      <strong>红旗排查</strong>：会计层面<strong>无重大红旗</strong>——GAAP 反超调整后 EPS 源于透明披露的非现金或有对价收益，且调整后口径更保守（管理层未借调整虚增利润），反而是加分的会计保守度。真正的结构性变量是<strong>AUM 与市场高度绑定 + HPS 私募信贷未经历完整周期 + 估值无安全边际</strong>（Forward P/E 19.3x、折价仅 1%）。触发"<span class="warn-t">满估值 + 结构性风险</span>"——尽管 6 维基础质量顶级（护城河 A），综合评级<strong>定为「持有观望」</strong>。
+    </div>
+
+    <p style="margin-top:18px; font-size:14px; color:var(--text); line-height:1.85;"><strong>综合评级</strong>：<span class="rating-badge rating-hold" style="font-size:14px;">持有观望</span>。生意质量全球顶级（护城河 A、多维 A-），但估值维度 C+（满价、折价仅约 1%、安全边际远不足 25%）→ 降至持有观望。核心判断：<strong>BlackRock 的问题从来不是生意好不好，而是价格贵不贵——当前 $1,036 已接近公允价 $1,050，没有安全边际。现有持仓者继续复利持有，新买入者应等回调至 $840 附近。</strong></p>
+  </div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">投资决策（精确价格 · USD）</h3>
+
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>项目</th><th>价格</th><th>说明</th></tr>
+      <tr><td>12 个月目标价（概率加权）</td><td><strong>$1,080</strong> (+4%)</td><td>高个位数有机增长 + 估值维持 ~18-19x</td></tr>
+      <tr><td>悲观目标（30% 概率）</td><td>$840 (-19%)</td><td>市场回撤 + 估值压缩至 15x</td></tr>
+      <tr><td>乐观目标（25% 概率）</td><td>$1,320 (+27%)</td><td>私募/技术加速 + 估值重估至 21x</td></tr>
+      <tr class="hl"><td>首仓建仓（估值中位数 $1,050 × 80%）</td><td><strong>$840</strong></td><td>距现价 -19% · 耐心等回调</td></tr>
+      <tr><td>二仓建仓（× 70%）</td><td>$735</td><td>-29% · 大幅回调机会</td></tr>
+      <tr><td>三仓建仓（× 60%）</td><td>$630</td><td>-39% · 黑天鹅级机会</td></tr>
+      <tr><td>止盈一档</td><td>$1,300</td><td>+25% · 减仓 25%</td></tr>
+      <tr><td>止盈二档</td><td>$1,450</td><td>+40% · 再减 25%</td></tr>
+      <tr><td>止盈三档</td><td>$1,600</td><td>+54% · 再减 25% · 最后 25% 长期复利持有</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.85;"><strong>建议总仓位</strong>：<strong>3-5%</strong>（核心质量仓 · 但当前满估值，应在回调时建仓，不追高）。<strong>持有周期</strong>：5-10 年（长期复利 · 穿越私募转型 + 市场周期）。<strong>关键监控指标</strong>：① 有机基础费率增长（每季度，是否维持 5%+）；② 私募市场募资进度（GIP/HPS/Preqin 兑现度）；③ 技术 ACV 增速；④ 摊薄股数是否止升（回购 vs 并购增发）；⑤ AUM 随市场的回撤幅度；⑥ HPS 私募信贷资产质量。<strong>下次催化剂</strong>：2026-07-15 Q2 FY2026 财报（就在数日之后）。</p>
+</div>
+
+<!-- ═══ 海图页末长评 ═══ -->
+<div class="section">
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记 · 1150 字</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p class="lead">这个季度贝莱德出了一件罕见的事：GAAP 每股收益 $14.06，竟然高于调整后每股收益 $12.53——通常反过来。原因是一笔 $5.49 亿的非现金"或有对价公允价值下降收益"（GIP/HPS 收购对赌负债与股价反向变动）抬高了 GAAP，却被调整后口径剔除。真正该看的是调整后 EPS +11%、单季净流入 $1,297 亿、5 年来最强的一季。业绩没有毛病，问题只在价格。</p>
+
+      <p>贝莱德是全球最大的资产管理人，管着 $13.9 万亿——本质是一座"按资产规模收费的过路桥"：它不赌方向、不担信用风险，只要客户的钱停在它的平台上，就按一个极小的费率（本季约 15.3 个基点）持续抽成。如今它正把这座桥从"公募 ETF + 指数"扩建到"私募市场（GIP/HPS）+ 技术（Aladdin/Preqin）"的全天候平台。</p>
+
+      <h4>几个研判要点</h4>
+
+      <p><strong>一、收费桥的规模在稳稳加重。</strong> AUM $13.9 万亿（+20% YoY），单季长期净流入 $1,359 亿，iShares ETF 净流入 $1,320 亿（Q1 历史纪录），<span class="hl-t">有机基础费率增长年化 8%、过去 12 个月 10%</span>——远高于 5% 的长期目标。市场是称重机，而这台秤上的资产在稳稳变重。</p>
+
+      <p><strong>二、利润率还在爬坡，技术是加分项。</strong> 调整后营业利润率 44.5%（同比 +130bp），技术服务 ACV +14%。规模 + 技术让边际成本趋近于零，这是资管里最难得的"越大越赚"。<span class="hl-t">Aladdin/Preqin 的软件属性，还会慢慢拉高它的估值中枢</span>。</p>
+
+      <p><strong>三、私募市场转型是这盘棋的胜负手。</strong> 2026 是 BlackRock + GIP + HPS + Preqin 合并后的第一个完整年度。私募信贷市场的动荡，被管理层视作抢份额的机会——财富平台越来越想要"公募+私募"一体化的整户关系，而全市场能同时做齐两端的玩家寥寥。但硬币的另一面是：<span class="warn-t">HPS 私募信贷刚并入，还没经历一轮完整的违约周期</span>，这条新曲线是护城河延伸，也是尚未验证的风险敞口。</p>
+
+      <p><strong>四、别把"高 EPS 增长"当成便宜的理由。</strong> GAAP EPS +46% 有水分（$5.49 亿非现金收益）；调整后 +11% 才是真相，且被三重逆风压着——因 HPS 收购发行约 760 万股 Class B-2 Subco 单位，<span class="warn-t">摊薄股数从 FY2023 的 1.507 亿升到约 1.65 亿</span>，加上更高的税率、更低的非经营收益。每年约 $16 亿回购，敌不过并购增发，净股本在上升。它的股东回报本质是"稳定增息 + 用股本换增长曲线"，而非激进缩股。</p>
+
+      <p><strong>五、这不是净现金公司。</strong> 现金 $98.4 亿 vs 有息负债 $127.5 亿，真实净负债约 -$29 亿（含租赁 -$51 亿）。对一家年经营现金流 $90-100 亿、杠杆契约 &lt;1.0x（上限 3.5x）的投资级资管，这毫无压力，但"现金堡垒"的叙事不适用。另外要记住：Q1 经营现金流按季节性为负（年初发放上年计提的约 $23 亿激励薪酬），资管的现金流必须按年度看。</p>
+
+      <h4>海图研判</h4>
+
+      <p><strong>评级：持有观望</strong>（世界级资管收费桥 + $13.9 万亿护城河 + Aladdin 技术 + 私募/技术双引擎转型 + 连续增息的顶级组合，对垒 AUM 与市场高度绑定 + HPS 私募信贷周期风险 + 并购增发摊薄 + Forward P/E 19.3x 无安全边际的满估值）。独立加权公允价约 $1,050，12 个月概率加权目标价 <strong>$1,080</strong>（+4%），叠加 2.2% 股息 = 总回报约 +6%。安全边际远不到 25% 的买入门槛。</p>
+
+      <p>操作建议：当前 $1,036 已接近公允、远高于机械首仓 $840，<strong>不在合理建仓窗口</strong>。耐心等回调至 $840（公允中位 × 80%）建首仓、$735 加二仓、$630 极端机会三仓。止盈三档 $1,300 / $1,450 / $1,600，各减 25%，最后 25% 长期复利持有。<strong>建议总仓位 3-5%</strong>（核心质量仓 · 回调时建，不追高）。持有周期 5-10 年。<span class="hl-t">关键纪律：现有持仓者继续让它复利，新买入者必须等价格给出安全边际——好生意也要好价格，贝莱德尤其如此。</span></p>
+
+      <h4>风险提示</h4>
+
+      <p>AUM 与资本市场高度绑定，一轮熊市会同时压低资产规模与费率；HPS 私募信贷正值周期考验，若出现信用事件会冲击这条新曲线；大额并购带来 $353 亿商誉 + $277 亿无形资产，整合与减值风险并存；被动化持续压低公募费率；摊薄股数上升侵蚀每股价值。任一项都可能把股价打到 $840 甚至更低。但 $13.9 万亿规模 + Aladdin 技术护城河 + 投资级资产负债表构成质量底，<strong>$900-920 是较硬的估值底</strong>（52 周低 $917 + Forward P/E 16x 下限）。贝莱德的"底"比多数股票高，因为规模与技术的质量溢价难以完全消失。</p>
+
+      <p>关键叙事：<strong>"全球最大资管的收费桥 + 私募市场/技术双引擎转型 + 连续增息"的世界级生意，对垒"AUM 与市场高度绑定 + 私募信贷周期风险 + 并购增发摊薄 + Forward P/E 19x 无安全边际"的估值与结构性变量</strong>。贝莱德不是给捡便宜的人——它几乎从不便宜；它是给愿意在回调时耐心建仓、然后让一台顶级复利机器慢慢滚雪球的长期投资者。下次催化剂：2026-07-15 Q2 FY2026 财报。</p>
+
+      <p class="haitu-sign">—— 海图，灯下落笔，明日再观风浪。</p>
+
+      <p class="haitu-disc">⚠️ 免责声明：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，不构成任何投资建议。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div>《海图夜读》 · BlackRock BLK Q1 FY2026 海图研判</div>
+  <div style="margin-top:6px;">发布日 2026-04-14 · 研判日 2026-07-11 · 数据来源 BlackRock Q1 FY2026 官方财报新闻稿（SEC 8-K + 10-Q）+ FY2025 年报 + 电话会 transcript</div>
+</footer>
+
+<script>
+let curTheme = 'light';
+function toggleTheme() {
+  curTheme = curTheme === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', curTheme);
+  renderCharts();
+}
+
+const palette = {
+  light: { accent: '#8a9a8e', accent2: '#7b8fa0', accent3: '#b08d7a', gold: '#b9a06a', red: '#b87070', green: '#7a9a7a', grid: '#e5ddd5', text: '#7a706a' },
+  dark:  { accent: '#8a9a8e', accent2: '#8fabbf', accent3: '#c9a48e', gold: '#c9b07a', red: '#c08080', green: '#8aaa8a', grid: '#3e3a35', text: '#a09890' }
+};
+
+let charts = {};
+function renderCharts() {
+  Object.values(charts).forEach(c => c && c.destroy && c.destroy());
+  charts = {};
+  const p = palette[curTheme];
+  Chart.defaults.color = p.text;
+  Chart.defaults.borderColor = p.grid;
+
+  const quarters = ['Q1 25','Q2 25','Q3 25','Q4 25','Q1 26'];
+  const rev = [5.28, 5.42, 6.51, 7.01, 6.70];
+  const yoy = [12, 13, 25, 23, 27];
+  charts.rev = new Chart(document.getElementById('chartRev'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { type:'bar', label: '总营收 ($B)', data: rev, backgroundColor: p.accent + 'CC', yAxisID: 'y' },
+      { type: 'line', label: 'YoY %', data: yoy, borderColor: p.red, backgroundColor: p.red, tension: 0.3, yAxisID: 'y1' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false }, y1: { position: 'right', grid: { drawOnChartArea: false }, ticks: { callback: v => v + '%' } } } }
+  });
+
+  charts.segment = new Chart(document.getElementById('chartSegment'), {
+    type: 'doughnut',
+    data: {
+      labels: ['基础费用+证券出借', '技术服务及订阅', '分销费', '业绩报酬', '咨询及其他'],
+      datasets: [{ data: [5438, 530, 389, 272, 69], backgroundColor: [p.accent, p.accent2, p.accent3, p.gold, p.red] }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { font: { size: 10 } } } } }
+  });
+
+  charts.margin = new Chart(document.getElementById('chartMargin'), {
+    type: 'line',
+    data: { labels: quarters, datasets: [
+      { label: '调整后营业利润率 %', data: [43.2, 43.3, 44.6, 45.0, 44.5], borderColor: p.green, backgroundColor: p.green + '33', fill: true, tension: 0.3 }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false, ticks: { callback: v => v + '%' } } }, plugins: { legend: { display: false } } }
+  });
+
+  charts.eps = new Chart(document.getElementById('chartEPS'), {
+    type: 'bar',
+    data: {
+      labels: quarters,
+      datasets: [
+        { label: 'GAAP 摊薄 EPS', data: [9.64, 10.19, 8.43, 7.16, 14.06], backgroundColor: p.red + 'CC' },
+        { label: '调整后摊薄 EPS', data: [11.30, 12.05, 11.55, 13.16, 12.53], backgroundColor: p.green + 'CC' }
+      ]
+    },
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, ticks: { callback: v => '$' + v } } } }
+  });
+
+  buildSankey();
+}
+
+function buildSankey() {
+  const p = palette[curTheme];
+  const labels = [
+    '营收 $6,698',            // 0
+    '员工薪酬 $2,225',        // 1
+    '分销及资产类费用 $1,257', // 2
+    '一般及行政 $674',         // 3
+    '无形资产摊销 $277',       // 4
+    '核心经营利润 $2,265',     // 5
+    '或有对价+非经营收益 $578', // 6
+    '税前利润 $2,843',         // 7
+    '所得税 $517',             // 8
+    '少数股东损益 $114',       // 9
+    '归母净利 $2,212'          // 10
+  ];
+  const data = {
+    type: 'sankey',
+    orientation: 'h',
+    node: {
+      pad: 15, thickness: 20, line: { color: p.grid, width: 0.5 }, label: labels,
+      color: [p.accent, p.red, p.red, p.red, p.red, p.green, p.accent2, p.gold, p.red, p.rose || p.red, p.green]
+    },
+    link: {
+      source: [0, 0, 0, 0, 0, 5, 6, 7, 7, 7],
+      target: [1, 2, 3, 4, 5, 7, 7, 8, 9, 10],
+      value:  [2225, 1257, 674, 277, 2265, 2265, 578, 517, 114, 2212],
+      color: [p.red+'55', p.red+'55', p.red+'55', p.red+'55', p.green+'66', p.green+'66', p.accent2+'66', p.red+'55', p.red+'55', p.green+'66']
+    }
+  };
+  const layout = { font: { size: 11, color: p.text }, paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)', margin: { l: 10, r: 10, t: 10, b: 10 } };
+  Plotly.react('sankey', [data], layout, { displayModeBar: false, responsive: true });
+}
+
+renderCharts();
+</script>
+
+</body>
+</html>

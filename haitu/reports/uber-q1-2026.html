@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 研判日 2026-07-11 · Uber Q1 2026 财报已于 2026-05-06 发布 -->
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Uber UBER Q1 2026 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+<meta name="description" content="全球出行与外卖双巨头 · 一张把 1.99 亿月活、超 1000 万司机骑手、140 万商户连成网的超级平台收费站。Q1 总订单额 +25%（恒定 +21%）/ 调整后 EBITDA +33% / Non-GAAP EPS +44% 三线加速，会员破 5000 万、TTM 自由现金流破 $98 亿、单季回购 $30 亿创纪录。但 GAAP 净利被股权投资重估砸成 $2.6 亿(-85%) · 呈净负债非净现金 · 自动驾驶既是最大期权也是最大威胁。从 $102 高点回落 27% 至 $74，好生意难得给出中等安全边际。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Uber UBER Q1 2026 海图研判 · 海图夜读">
+<meta property="og:description" content="全球出行与外卖双巨头 · 一张把 1.99 亿月活、超 1000 万司机骑手、140 万商户连成网的超级平台收费站。Q1 总订单额 +25% / 调整后 EBITDA +33% / Non-GAAP EPS +44% 三线加速。但 GAAP 净利被股权重估砸成 $2.6 亿(-85%) · 呈净负债非净现金 · 自动驾驶既是期权也是威胁——从 $102 回落 27% 至 $74，好生意难得中等折价。">
+<meta property="og:url" content="https://jacexie.github.io/haitu/reports/uber-q1-2026.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Uber UBER Q1 2026 海图研判 · 海图夜读">
+<meta name="twitter:description" content="出行+外卖双巨头 · GB +25% / EBITDA +33% / Non-GAAP EPS +44% 三线加速 · 单季回购 $30 亿创纪录。GAAP 净利被股权重估砸成 $2.6 亿(-85%) · 净负债非净现金 · 自动驾驶终局未定——从 $102 回落至 $74，好生意难得中等折价。">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root { --bg:#f5f0eb; --bg2:#ece6df; --card:#ffffff; --card2:#f8f5f1; --border:#d9d0c7; --text:#4a4340; --text2:#7a706a; --text3:#a89f98; --accent:#8a9a8e; --accent2:#7b8fa0; --accent3:#b08d7a; --rose:#c09090; --gold:#b9a06a; --red:#b87070; --green:#7a9a7a; --shadow:rgba(0,0,0,0.06); --chart-grid:#e5ddd5; }
+[data-theme="dark"] { --bg:#1e1c1a; --bg2:#28251f; --card:#2e2a25; --card2:#363230; --border:#4a4540; --text:#d4ccc4; --text2:#a09890; --text3:#706860; --accent:#8a9a8e; --accent2:#8fabbf; --accent3:#c9a48e; --rose:#c09090; --gold:#c9b07a; --red:#c08080; --green:#8aaa8a; --shadow:rgba(0,0,0,0.3); --chart-grid:#3e3a35; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', serif; line-height: 1.75; font-size: 14.5px; transition: background .35s, color .35s; }
+a { color: var(--accent2); text-decoration: none; }
+.theme-bar { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); }
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+.toggle-switch { position: relative; width: 44px; height: 22px; background: var(--border); border-radius: 11px; cursor: pointer; transition: background .3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: var(--card); border-radius: 50%; transition: transform .3s; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+
+.hero { padding: 48px 24px 36px; text-align: center; border-bottom: 1px solid var(--border); }
+.hero-tag { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 3px 14px; border-radius: 20px; margin-bottom: 18px; }
+.hero h1 { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.pill { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: 'Segoe UI', sans-serif; font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow); }
+.pill strong { color: var(--text); }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle { font-size: 18px; font-weight: 700; color: var(--accent3); margin-bottom: 20px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+.stitle::before { content: ''; display: block; width: 4px; height: 20px; background: var(--accent3); border-radius: 2px; }
+
+.haitu-quip { display: flex; align-items: center; gap: 18px; background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 18px 24px; margin: 24px 0; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-quote { flex: 1; }
+.haitu-portrait { font-size: 15px; line-height: 1.65; color: var(--text); margin-bottom: 6px; font-weight: 600; }
+.haitu-rating-line { font-size: 13px; color: var(--text2); font-family: 'Segoe UI', sans-serif; }
+.rating-badge { display: inline-block; padding: 2px 12px; border-radius: 12px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; margin-left: 4px; }
+.rating-hold { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+.rating-cond { background: rgba(138,154,142,.20); color: var(--accent); }
+
+.haitu-essay { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 28px 32px; margin: 24px 0 20px; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-essay-header { display: flex; align-items: center; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.haitu-avatar-sm { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); background: var(--red); box-shadow: 0 2px 8px rgba(184,112,112,0.2); }
+.haitu-name-lg { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 28px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 4px; }
+.haitu-essay-tag { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; }
+.haitu-essay-body { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 15px; line-height: 2.0; color: var(--text); }
+.haitu-essay-body p { margin-bottom: 14px; }
+.haitu-essay-body p.lead { font-size: 16px; font-style: italic; color: var(--text2); margin-bottom: 18px; }
+.haitu-essay-body strong { color: var(--text); font-weight: 700; }
+.haitu-essay-body h4 { font-size: 14px; color: var(--accent3); margin: 18px 0 10px; font-family: 'Segoe UI', sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+.haitu-sign { text-align: right; margin-top: 18px; font-family: 'Georgia', serif; font-size: 14px; color: var(--text2); font-style: italic; }
+.haitu-disc { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); font-style: italic; line-height: 1.7; }
+
+.stock-snap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px; }
+.snap-item { text-align: center; }
+.snap-label { font-family: 'Segoe UI', sans-serif; font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.snap-val { font-family: 'Segoe UI', sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+.snap-val.up { color: var(--green); }
+.snap-val.dn { color: var(--red); }
+.snap-sub { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow); }
+.kpi-l { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.badge { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+.up { background: rgba(122,154,122,.15); color: var(--green); }
+.dn { background: rgba(184,112,112,.15); color: var(--red); }
+.nt { background: rgba(123,143,160,.15); color: var(--accent2); }
+
+.tbl-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow); }
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI', sans-serif; font-size: 13px; }
+.tbl th { background: var(--card2); color: var(--text3); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); background: var(--card2); }
+
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); }
+.ctitle { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 260px; }
+
+.cmt { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 26px; line-height: 1.95; font-size: 14px; box-shadow: 0 1px 4px var(--shadow); color: var(--text); }
+.cmt p { margin-bottom: 14px; }
+.cmt p:last-child { margin-bottom: 0; }
+.cmt strong { color: var(--text); }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+
+.bscore { display: flex; align-items: center; gap: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; margin-bottom: 12px; box-shadow: 0 1px 4px var(--shadow); }
+.circle { width: 62px; height: 62px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; flex-shrink: 0; border: 3px solid; font-family: 'Segoe UI', sans-serif; }
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 4px; color: var(--text); }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.moat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+.moat-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); border-left: 4px solid var(--accent); }
+.moat-card.wide { border-left-color: var(--green); }
+.moat-card.narrow { border-left-color: var(--gold); }
+.moat-card.none { border-left-color: var(--red); }
+.moat-card h5 { font-size: 13px; color: var(--text); margin-bottom: 6px; }
+.moat-card .moat-rate { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.moat-card.wide .moat-rate { background: rgba(122,154,122,.18); color: var(--green); }
+.moat-card.narrow .moat-rate { background: rgba(185,160,106,.18); color: var(--gold); }
+.moat-card.none .moat-rate { background: rgba(184,112,112,.18); color: var(--red); }
+.moat-card p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+
+.ec-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 14px; box-shadow: 0 1px 3px var(--shadow); }
+.ec-badge { flex-shrink: 0; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-top: 2px; font-family: 'Segoe UI', sans-serif; }
+.ec-bull { background: rgba(122,154,122,.18); color: var(--green); }
+.ec-bear { background: rgba(184,112,112,.18); color: var(--red); }
+.ec-neut { background: rgba(185,160,106,.18); color: var(--gold); }
+.ec-body { flex: 1; }
+.ec-title { font-weight: 600; color: var(--text); margin-bottom: 3px; font-size: 14px; }
+.ec-note { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+.dcf-note { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.dcf-note strong { color: var(--text); }
+
+.scorecard { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow); }
+.score-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.score-card { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px; }
+.score-letter { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Segoe UI', sans-serif; font-weight: 800; font-size: 22px; flex-shrink: 0; border: 3px solid; }
+.s-a { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.12); }
+.s-bp { color: var(--green); border-color: var(--green); background: rgba(122,154,122,.06); }
+.s-b { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.10); }
+.s-bm { color: var(--gold); border-color: var(--gold); background: rgba(185,160,106,.06); }
+.s-c { color: var(--red); border-color: var(--red); background: rgba(184,112,112,.08); }
+.score-body h4 { font-size: 13px; color: var(--text); margin-bottom: 4px; }
+.score-body p { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+.flag-row { margin-top: 16px; padding: 12px 16px; background: rgba(184,112,112,.08); border: 1px solid rgba(184,112,112,.3); border-radius: 8px; font-size: 13px; color: var(--text2); }
+.flag-row strong { color: var(--red); }
+
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center; box-shadow: 0 1px 4px var(--shadow); }
+.pbox .pl { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; }
+.pbox .pv { font-family: 'Segoe UI', sans-serif; font-size: 28px; font-weight: 800; margin-bottom: 5px; }
+.pbox .pn { font-size: 12px; color: var(--text3); line-height: 1.5; }
+.pc { color: var(--red); } .pf { color: var(--gold); } .ps { color: var(--green); }
+
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.risk-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); position: relative; overflow: hidden; }
+.risk-card::before { content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent); }
+.risk-card.r1::before { background: var(--green); }
+.risk-card.r2::before { background: rgba(122,154,122,.6); }
+.risk-card.r3::before { background: var(--gold); }
+.risk-card.r4::before { background: var(--rose); }
+.risk-card.r5::before { background: var(--red); }
+.risk-card h5 { font-size: 14px; margin-bottom: 6px; color: var(--text); }
+.risk-score { font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+.r1 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r2 .risk-score { background: rgba(122,154,122,.18); color: var(--green); }
+.r3 .risk-score { background: rgba(185,160,106,.18); color: var(--gold); }
+.r4 .risk-score { background: rgba(192,144,144,.18); color: var(--rose); }
+.r5 .risk-score { background: rgba(184,112,112,.18); color: var(--red); }
+.risk-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+footer { background: var(--card2); border-top: 1px solid var(--border); padding: 24px; text-align: center; color: var(--text3); font-size: 12px; margin-top: 40px; line-height: 1.8; }
+@media (max-width: 768px) { .cgrid,.pgrid { grid-template-columns: 1fr; } .hero h1 { font-size: 22px; } .kpi-grid { grid-template-columns: 1fr 1fr; } .stock-snap { grid-template-columns: 1fr 1fr; } .haitu-essay-header { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/UBER" target="_blank" rel="noopener" title="在雪球查看 UBER 实时行情">雪球 UBER</a>
+  </div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">Q1 2026 财报发布 · 2026-05-06 &nbsp;|&nbsp; 海图研判 · 2026-07-11</div>
+  <h1>Uber UBER · 2026 Q1 财报深度分析</h1>
+  <div class="hero-sub">NYSE: UBER &nbsp;|&nbsp; 财季截至 2026-03-31 &nbsp;|&nbsp; 价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill">股价 <strong>$74.35</strong> <span style="color:var(--red)">距高点 -27%</span></div>
+    <div class="pill">市值 <strong>$151B</strong></div>
+    <div class="pill">总订单额 <strong>$53.72B</strong> <span style="color:var(--green)">+25%</span></div>
+    <div class="pill">调整后 EBITDA <strong>$2.48B</strong> <span style="color:var(--green)">+33%</span></div>
+    <div class="pill">Non-GAAP EPS <strong>$0.72</strong> <span style="color:var(--green)">+44%</span></div>
+    <div class="pill">Forward P/E <strong>~22x</strong> <span style="color:var(--accent2)">PEG ~0.7</span></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 海图页首短评 ═══ -->
+<div class="haitu-quip">
+  <div class="haitu-quote">
+    <div class="haitu-portrait">全球出行与外卖的双巨头——一张把 1.99 亿月活、超 1000 万司机骑手、140 万商户连成网的超级平台收费站。它不拥有一辆车、不开一家餐厅，只从每一单出行和外卖里抽平台费。总订单额 +25% / 调整后 EBITDA +33% / Non-GAAP EPS +44% 三线加速，刚刚跨过盈利拐点；单季回购 $30 亿创纪录、真实注销缩股。但 GAAP 净利被股权投资重估砸成 $2.6 亿（-85%，纯账面非现金）· 呈净负债而非净现金 · 自动驾驶既是最大期权也是最大威胁。从 $102 高点回落 27% 至 $74，好生意难得给出中等安全边际。</div>
+    <div class="haitu-rating-line">评级：<span class="rating-badge rating-cond">有条件买入</span> · 12 个月概率加权目标价 $89（+20%）· 三线加速的超级平台复利机器，对垒 GAAP 盈利波动 + 净负债 + 自动驾驶脱媒 + 安全边际未达 25% 的中等折价</div>
+  </div>
+</div>
+
+<!-- ═══ 市场数据快照 ═══ -->
+<div class="section">
+  <div class="stitle">市场数据快照（2026-07-09 收盘）</div>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">股价（美元）</div><div class="snap-val">$74.35</div><div class="snap-sub">2026-07-09 收盘 · 距 52 周高 -27%</div></div>
+    <div class="snap-item"><div class="snap-label">市值</div><div class="snap-val">$151.3B</div><div class="snap-sub">全球出行外卖龙头</div></div>
+    <div class="snap-item"><div class="snap-label">TTM GAAP P/E</div><div class="snap-val nt">15.7x</div><div class="snap-sub">⚠️ 被递延税项释放灌水</div></div>
+    <div class="snap-item"><div class="snap-label">TTM Non-GAAP P/E</div><div class="snap-val">30.3x</div><div class="snap-sub">更可信历史档</div></div>
+    <div class="snap-item"><div class="snap-label">Forward P/E</div><div class="snap-val nt">~22x</div><div class="snap-sub">FY26 Non-GAAP · PEG ~0.7</div></div>
+    <div class="snap-item"><div class="snap-label">P/S (TTM)</div><div class="snap-val">~2.8x</div><div class="snap-sub">平台净额口径</div></div>
+    <div class="snap-item"><div class="snap-label">EV/EBITDA (TTM)</div><div class="snap-val">~16.7x</div><div class="snap-sub">调整后 EBITDA $9.3B</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间</div><div class="snap-val">$67.19 - $101.99</div><div class="snap-sub">中位偏下</div></div>
+    <div class="snap-item"><div class="snap-label">FCF Yield (TTM)</div><div class="snap-val up">~6.5%</div><div class="snap-sub">FCF $9.8B · 含浮存顺风</div></div>
+    <div class="snap-item"><div class="snap-label">现金 + 短投</div><div class="snap-val">$6.09B</div><div class="snap-sub">2026-03-31 末</div></div>
+    <div class="snap-item"><div class="snap-label">有息负债</div><div class="snap-val dn">$10.51B</div><div class="snap-sub">全部为长期债</div></div>
+    <div class="snap-item"><div class="snap-label">真实净负债</div><div class="snap-val dn">-$4.42B</div><div class="snap-sub">⚠️ 含股权投资则 +$3.69B 净现金</div></div>
+  </div>
+  <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">数据时点：股价 2026-07-09 收盘 $74.35（stockanalysis.com）· 财务数据来源 Uber Q1 2026 官方财报新闻稿（SEC 8-K exhibit 99.1 + IR PDF，2026-05-06 发布，财季截至 2026-03-31）+ FY2025 10-K + 电话会 · 货币 USD 单口径。Uber 财年 = 日历年（12 月 31 日结束），无财年错位。⚠️ 严格现金口径下 Uber 是<strong>净负债</strong>（有息负债 $10.51B &gt; 现金+短投 $6.09B）；仅把 $81 亿可变现股权投资算入才是净现金——Uber 已获投资级评级。</p>
+</div>
+
+<!-- ═══ Q1 2026 KPI ═══ -->
+<div class="section">
+  <div class="stitle">Q1 2026 核心业绩（USD · 财季截至 2026-03-31）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">总营收</div><div class="kpi-v">$13.20B</div><span class="badge up">+14% YoY</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">恒定 +10% · 英国重分类压低 ~8-9pp</div></div>
+    <div class="kpi"><div class="kpi-l">总订单额 GB</div><div class="kpi-v">$53.72B</div><span class="badge up">+25%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">恒定 +21% · 连续 3 季 21%</div></div>
+    <div class="kpi"><div class="kpi-l">出行营收 Mobility</div><div class="kpi-v">$6.80B</div><span class="badge up">+5%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">GB +25% · 营收被重分类压低 ~400bps</div></div>
+    <div class="kpi"><div class="kpi-l">外卖营收 Delivery</div><div class="kpi-v">$5.07B</div><span class="badge up">+34%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">增速最快 · GB +28%</div></div>
+    <div class="kpi"><div class="kpi-l">货运营收 Freight</div><div class="kpi-v">$1.34B</div><span class="badge up">+6%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">时隔约 2 年重回增长</div></div>
+    <div class="kpi"><div class="kpi-l">调整后 EBITDA</div><div class="kpi-v">$2.48B</div><span class="badge up">+33%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">占 GB 4.6% · 创纪录</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 营业利润</div><div class="kpi-v">$1.92B</div><span class="badge up">+57%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">营业利润率 14.6%（去年 10.6%）</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 净利（归属 Uber）</div><div class="kpi-v">$0.26B</div><span class="badge dn">-85%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">⚠️ 股权重估 $15 亿拖累（非现金）</div></div>
+    <div class="kpi"><div class="kpi-l">Non-GAAP 净利</div><div class="kpi-v">$1.49B</div><span class="badge up">+39%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">真实经营口径</div></div>
+    <div class="kpi"><div class="kpi-l">Non-GAAP EPS</div><div class="kpi-v">$0.72</div><span class="badge up">+44%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">指引 $0.65-0.72 高端</div></div>
+    <div class="kpi"><div class="kpi-l">月活平台用户 MAPC</div><div class="kpi-v">199M</div><span class="badge up">+17%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">Uber One 会员破 5000 万</div></div>
+    <div class="kpi"><div class="kpi-l">出行次数 Trips</div><div class="kpi-v">3,643M</div><span class="badge up">+20%</span><div style="font-size:11px;color:var(--text3);margin-top:4px;">日均约 4000 万单</div></div>
+  </div>
+</div>
+
+<!-- ═══ 看穿桥接 高亮框 ═══ -->
+<div class="section">
+  <div class="stitle">本季必看 · 两个"看穿"：报告营收 vs 总订单额、GAAP vs Non-GAAP 净利</div>
+  <div class="cmt">
+    <p><strong>Uber 本季的利润表有两个必须"看穿"的陷阱，看不穿就会把一份强劲季报误读成"营收失速 + 利润崩盘"。</strong></p>
+    <p><strong>看穿一：报告口径营收 +14% 被英国会计变更"人为压低"，真实的量在总订单额 +25% 里。</strong> 本季 Uber 在英国把出行业务的<span class="hl-t">司机报酬从"营收成本"重分类为"营收抵减项"（contra-revenue）</span>，直接从报告营收里扣掉约 $10 亿，把整体营收增速拉低了约 8-9 个百分点、把出行营收增速压低约 400bps。<strong>这是纯会计重分类，对底层经济、订单量、利润一分钱影响都没有</strong>，且预计将在 2026 全年以相似量级持续。所以判断 Uber 的增长，要看不受此影响的<strong>总订单额 GB +25%（恒定 +21%）、出行 GB +25%、外卖 GB +28%</strong>——量在实实在在地加速。</p>
+    <div class="tbl-wrap" style="margin:14px 0;">
+      <table class="tbl">
+        <tr><th>增长口径对照（Q1 2026）</th><th>报告营收增速</th><th>总订单额 GB 增速</th></tr>
+        <tr><td>出行 Mobility</td><td><span class="warn-t">+5%</span>（被压低 ~400bps）</td><td><strong>+25%</strong>（恒定 +20%）</td></tr>
+        <tr><td>外卖 Delivery</td><td>+34%</td><td>+28%（恒定 +23%）</td></tr>
+        <tr><td>货运 Freight</td><td>+6%</td><td>+6%</td></tr>
+        <tr class="hl"><td><strong>合计</strong></td><td><strong>+14%</strong>（英国重分类拖累 ~8-9pp）</td><td><strong>+25%</strong>（恒定 +21%）</td></tr>
+      </table>
+    </div>
+    <p><strong>看穿二：GAAP 净利 $2.6 亿（-85%）是"假摔"，Non-GAAP +39% 才是真相。</strong> GAAP 归属净利同比暴跌 85% 看着吓人，罪魁是<span class="hl-t">对 Uber 持有的股权投资（Aurora、滴滴、Grab 等，账面 $81 亿，多为已上市公司）$15 亿的税前重估亏损</span>——这是按市值重估的非现金损益，<strong>季度间来回大幅摆动</strong>（去年 Q3 还因一次性 $49 亿递延税项释放把 GAAP EPS 冲到 $3.11）。剔除这类噪音后，<strong>Non-GAAP 净利 $14.9 亿（+39%）、Non-GAAP EPS $0.72（+44%）、调整后 EBITDA $24.8 亿（+33%）</strong>才反映真实经营。GAAP 营业利润 $19.2 亿（+57%）、营业利润率从一年前的 10.6% 升到 14.6%——盈利能力才是这季真正的故事。</p>
+  </div>
+</div>
+
+<!-- ═══ 趋势图 ═══ -->
+<div class="section">
+  <div class="stitle">关键指标趋势（近 5 季 · Q1 2025 → Q1 2026）</div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">总营收（$B）& 总订单额 YoY 增速</div><div class="cwrap"><canvas id="chartRev"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">利润率趋势（GAAP 营业利润率 & 调整后 EBITDA 占 GB）</div><div class="cwrap"><canvas id="chartMargin"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">Q1 2026 分部营收拆分（$B）</div><div class="cwrap"><canvas id="chartSegment"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">GAAP vs Non-GAAP 摊薄 EPS（GAAP 极度失真）</div><div class="cwrap"><canvas id="chartEPS"></canvas></div></div>
+  </div>
+  <p style="margin-top:4px; font-size:12px; color:var(--text3); line-height:1.6;">说明：GAAP 摊薄 EPS 高度失真——Q3 2025 的 $3.11 被一次性 $49 亿递延税项估值备抵释放灌高；Q4 2025 $0.14 与 Q1 2026 $0.13 被 $16 亿、$15 亿股权重估拖低。<strong>看趋势请用 Non-GAAP EPS</strong>（Uber 自 Q4 2025 起以 Non-GAAP 营业利润/净利/EPS 为主口径，Q2/Q3 2025 未单列 Non-GAAP EPS 故留空）。</p>
+</div>
+
+<!-- ═══ 桑基图 ═══ -->
+<div class="section">
+  <div class="stitle">Q1 2026 利润流向桑基图（$B）</div>
+  <div class="ccard">
+    <div id="sankey" style="width:100%;height:480px;"></div>
+    <p style="margin-top:12px; font-size:12px; color:var(--text3); line-height:1.6;">说明：总营收 $13.20 → 营收成本 $7.26 + 毛利 $5.94（毛利率 45%，Uber 不单列毛利，此为营收 − 不含 D&A 的营收成本推算）→ 运营费用 $4.02（运营支持 + 销售营销 + 研发 + G&A + D&A）+ 营业利润 $1.92 → 股权投资重估损失 $1.50（非现金）+ 税·利息·少数股东 $0.16 + GAAP 净利 $0.26。<strong>桑基图直观展示了本季 $15 亿股权重估亏损如何把 $19.2 亿营业利润"吞"到只剩 $2.6 亿 GAAP 净利</strong>——这是理解 Uber GAAP 盈利剧烈波动的钥匙。另：本季经营现金流 $23.5 亿、Capex 仅 $0.65 亿、自由现金流 $22.9 亿（Q1 季节性偏弱，TTM 达创纪录 $98 亿）。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 1 ═══ -->
+<div class="section">
+  <div class="stitle">模块 1 · 公司概览与背景</div>
+  <div class="cmt">
+    <p><strong>Uber Technologies, Inc.</strong>（NYSE: UBER），总部旧金山，2009 年成立，<strong>2019-05 IPO</strong>。财年 = 日历年（12 月 31 日结束），无财年错位。市值约 $1513 亿。</p>
+
+    <p><strong>核心叙事</strong>：Uber 是<span class="hl-t">全球最大的出行（Mobility）+ 外卖（Delivery）双边平台，附带一块货运（Freight）业务</span>——它自己不拥有车队、不开餐厅、不雇司机为正式员工，只用一张连接 <strong>1.99 亿月活用户（MAPC）+ 超 1000 万司机/骑手 + 140 万商户 + 200+ 国家地区</strong> 的网络，从每一单出行和外卖里抽取平台费。这是一门<strong>轻资产（本季 Capex 仅 $0.65 亿）、强双边网络效应、且刚刚跨过盈利拐点的超级平台生意</strong>。</p>
+
+    <p><strong>三大分部（本季 GB 口径）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>出行 Mobility</strong>——GB $263.9 亿（+25%），网约车基本盘，分部经营利润率创纪录 7.7%（占 GB）</li>
+      <li><strong>外卖 Delivery</strong>——GB $259.9 亿（+28%），Uber Eats + 杂货 + 零售，与出行几乎等量，分部经营利润率创纪录 3.7%</li>
+      <li><strong>货运 Freight</strong>——GB $13.3 亿（+6%），数字货运撮合，本季时隔约 2 年重回增长，仍小额亏损（-$3000 万）</li>
+    </ul>
+
+    <p><strong>股权结构与治理</strong>：单一类别普通股（无双重投票权结构），治理相对干净。CEO Dara Khosrowshahi（2017 年从 Expedia 加盟接替创始人 Travis Kalanick）持股与薪酬深度绑定长期股东回报。Uber 还持有一篮子<span class="hl-t">战略股权投资（账面 $81 亿）：Aurora（自动驾驶）、滴滴、Grab 等</span>——多为已上市公司，是 GAAP 净利剧烈波动的来源。</p>
+
+    <p><strong>能力圈检验</strong>：出行 + 外卖的双边平台生意极其清晰（打车、点外卖，人人能懂）。但<span class="warn-t">两块黑箱：(1) 自动驾驶（AV）的终局——Robotaxi 是绕过 Uber 直达乘客的脱媒威胁，还是 Uber 成为所有 AV 车队流量总入口的巨大增量？(2) 全球零工用工监管——司机"雇员 vs 独立承包商"的身份认定若逆转，将冲击成本结构</span>。这两点决定了 10 年后 Uber 的护城河是加宽还是被侵蚀。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 2 ═══ -->
+<div class="section">
+  <div class="stitle">模块 2 · 管理层评估</div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>Dara Khosrowshahi · CEO（2017 至今）</h4>
+      <p>2017 年从 Expedia 接手危机中的 Uber，把公司从"不惜代价烧钱抢份额"的增长机器，重构为<span class="hl-t">"有纪律的盈利增长"平台</span>——退出难盈利市场、砍掉共享单车/自动驾驶自研等重资产业务、聚焦出行+外卖双飞轮 + Uber One 会员。本季营业利润率升至 14.6%（去年 10.6%）、连续多季承诺"利润以两倍于营收的速度增长"并兑现。对自动驾驶的态度务实清醒——<strong>不自己造车，走"轻资本 AV"路线</strong>：把 Uber 定位为 AV 车队的需求入口与运营层，本季宣布 10 项新增/扩展 AV 合作、推出 Uber Autonomous Solutions。海图判断：这是一位既守住平台基本盘、又主动应对技术范式变化的掌舵人。</p>
+    </div>
+  </div>
+
+  <div class="bscore">
+    <div class="circle cg">A-</div>
+    <div class="bd">
+      <h4>资本配置纪律 · 从"烧钱"到"回购缩股"的转身</h4>
+      <p>
+      <strong>回购从无到有、逐年放量</strong>：Uber 2024-02 才首次启动回购，FY2024 回购 $12.5 亿、FY2025 $65.2 亿、<strong>Q1 2026 单季 $30.1 亿创纪录</strong>（注销约 4000 万股，几乎等于 2025 全年的 8000 万股的一半），推动摊薄股数同比降约 2%。累计回购已达 $107.9 亿。<br>
+      <strong>授权充裕</strong>：$70 亿（2024-02）+ $200 亿（2025-07）= 合计 $270 亿授权，季末剩余约 <strong>$160 亿</strong>。<br>
+      <strong>从不派息</strong>：Uber 从未支付股息，将留存收益用于再投资与回购——对一家仍处高速复利期的平台，这是合理的资本配置排序。
+      </p>
+    </div>
+  </div>
+
+  <div class="cmt">
+    <p><strong>长期主义测试</strong>：✅ 管理层以"出行+外卖双飞轮 + 会员黏性 + 新垂直（杂货/广告）+ 轻资本 AV"的长期复利为主线，而非短期财报博弈。对自动驾驶这种潜在颠覆者选择"合作收编"而非重金自研，体现资本纪律与长期视角。<strong>坦诚度</strong>：电话会主动披露英国重分类对营收增速的会计拖累、GAAP 净利受股权重估的剧烈波动、Q1 FCF 的季节性偏弱——不粉饰噪音。<strong>利益绑定</strong>：CEO 薪酬与股价/调整后 EBITDA 强挂钩，创始人退出后治理结构简化。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 3 ═══ -->
+<div class="section">
+  <div class="stitle">模块 3 · 商业模式深度解析</div>
+  <div class="cmt">
+    <p><strong>海图"一句话测试"</strong>：<span class="hl-t">Uber 是全球出行与外卖的"超级平台收费站"——每当有人打车或点外卖，它就从这一单的总金额里抽取一定比例的平台费，自己不拥有车队、不开餐厅、不承担库存，靠双边网络规模与会员黏性赚钱。</span></p>
+
+    <p><strong>平台模式（Marketplace Model）</strong>：需求侧（乘客/食客）↔ <strong>Uber 平台（撮合 + 定价 + 支付 + 反欺诈 + 保险）</strong> ↔ 供给侧（司机/骑手/商户）。Uber 从每单的总订单额（Gross Bookings）中抽取"take rate"（平台抽成）确认为营收，再扣除司机激励、保险、支付处理等成本。<span class="hl-t">关键指标是 GB（量）而非报告营收</span>——因为营收会被 take rate 结构、英国重分类等会计口径扰动，GB 才是最干净的规模信号。</p>
+
+    <p><strong>Q1 2026 分部经济模型</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>分部</th><th>GB</th><th>营收</th><th>分部经营利润</th><th>利润率(占 GB)</th></tr>
+        <tr><td>出行 Mobility</td><td>$263.9 亿 (+25%)</td><td>$68.0 亿 (+5%)</td><td>$20.3 亿 (+28%)</td><td><strong>7.7% 创纪录</strong></td></tr>
+        <tr><td>外卖 Delivery</td><td>$259.9 亿 (+28%)</td><td>$50.7 亿 (+34%)</td><td>$9.6 亿 (+43%)</td><td><strong>3.7% 创纪录</strong></td></tr>
+        <tr><td>货运 Freight</td><td>$13.3 亿 (+6%)</td><td>$13.4 亿 (+6%)</td><td>-$0.3 亿</td><td>约盈亏平衡</td></tr>
+        <tr class="hl"><td>公司总部 & 平台研发</td><td>—</td><td>—</td><td>-$10.8 亿</td><td>分摊至各分部前</td></tr>
+      </table>
+    </div>
+
+    <p style="margin-top:14px;"><strong>单位经济与议价能力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>出行是利润引擎</strong>——分部利润率 7.7% 创纪录，网约车规模碾压 + 定价算法 + 会员留存，现金牛属性最强</li>
+      <li><strong>外卖是增长引擎</strong>——GB +28%、分部利润 +43%，从"补贴换规模"转向"规模换利润"的拐点已过，广告与杂货是新增量</li>
+      <li><strong>对司机/骑手议价能力</strong>：中——供给侧充裕（活跃司机 +21% YoY、破 1000 万），但受零工用工监管制约</li>
+      <li><strong>对商户/用户黏性</strong>：Uber One 会员破 5000 万，贡献出行+外卖近一半 GB——会员是提升 LTV、降低获客成本、跨品类交叉销售的关键飞轮</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══ 模块 4 ═══ -->
+<div class="section">
+  <div class="stitle">模块 4 · 经济护城河分析（5 维）</div>
+  <div class="moat-grid">
+    <div class="moat-card wide">
+      <h5>1. 网络效应</h5>
+      <span class="moat-rate">宽</span>
+      <p>司机越多等待越短、乘客越多司机收入越稳，双边飞轮自我强化；外卖端商户-食客同理。1.99 亿月活 × 1000 万供给 × 200+ 国家。<strong>趋势：稳定</strong>（AV 可能重构供给侧）。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>2. 规模/成本优势</h5>
+      <span class="moat-rate">宽</span>
+      <p>日均约 4000 万单，撮合/定价/保险的边际成本趋近于零；调整后 EBITDA +33%、Capex 仅占营收极小比例。<strong>趋势：加宽</strong>（利润率仍在爬坡）。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>3. 转换成本</h5>
+      <span class="moat-rate">中</span>
+      <p>用户切换 App 成本低（多平台并存常态），但 <span class="hl-t">Uber One 会员 + 跨品类习惯</span> 提升黏性，会员贡献近一半 GB。<strong>趋势：靠会员加宽</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>4. 无形资产/品牌</h5>
+      <span class="moat-rate">中</span>
+      <p>"Uber"已成打车动词级品牌 + 数据/算法 + 各地运营牌照。<span class="warn-t">但零工用工监管与各地牌照是持续摩擦</span>。<strong>趋势：稳定</strong>。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>5. 有效规模</h5>
+      <span class="moat-rate">中-宽</span>
+      <p>出行/外卖各地多为双寡头（Uber vs Lyft / DoorDash），但资本可催生新玩家、AV 可从体系外切入。<strong>趋势：竞争仍在</strong>。</p>
+    </div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>10 年后护城河会更宽还是更窄？</strong> <span class="hl-t">核心网络与规模护城河仍宽，但两个变量决定长期走向</span>：(1) <span class="warn-t">自动驾驶</span>——若 Robotaxi 车队（Waymo 等）建立自有需求入口绕过 Uber，是脱媒风险；但若 Uber 凭 1.99 亿月活成为所有 AV 车队最经济的流量总入口，则护城河反而加宽。Uber 的对冲是"轻资本 AV + 10 项合作 + Uber Autonomous Solutions"。(2) <span class="warn-t">零工用工监管</span>——司机身份认定逆转会抬高成本。<strong>相比支付网络式的收费桥，Uber 的护城河更依赖执行与规模、更受竞争与技术冲击——是"宽但需持续加固"的护城河。</strong></p>
+    <p><strong>定价权</strong>：中——take rate 有提升空间（外卖广告是高毛利增量），但受竞争与监管天花板约束。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 5 ═══ -->
+<div class="section">
+  <div class="stitle">模块 5 · 财务深度分析</div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 12px 0; font-family: 'Segoe UI',sans-serif;">5.1 关键比率与近 5 季趋势</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>指标</th><th>Q1 25</th><th>Q2 25</th><th>Q3 25</th><th>Q4 25</th><th>Q1 26</th></tr>
+      <tr><td>总营收（$B）</td><td>11.53</td><td>12.65</td><td>13.47</td><td>14.37</td><td>13.20</td></tr>
+      <tr><td>总订单额 GB（$B）</td><td>42.82</td><td>46.76</td><td>49.74</td><td>54.14</td><td>53.72</td></tr>
+      <tr><td>GB YoY</td><td>+14%</td><td>+17%</td><td>+21%</td><td>+22%</td><td><span class="badge up">+25%</span></td></tr>
+      <tr><td>调整后 EBITDA（$B）</td><td>1.87</td><td>2.12</td><td>2.26</td><td>2.49</td><td>2.48</td></tr>
+      <tr><td>EBITDA 占 GB</td><td>4.4%</td><td>4.5%</td><td>4.5%</td><td>4.6%</td><td>4.6%</td></tr>
+      <tr><td>GAAP 营业利润（$B）</td><td>1.23</td><td>1.45</td><td>1.11</td><td>1.77</td><td>1.92</td></tr>
+      <tr><td>GAAP 营业利润率</td><td>10.6%</td><td>11.5%</td><td>8.3%</td><td>12.3%</td><td><span class="badge up">14.6%</span></td></tr>
+      <tr><td>GAAP 摊薄 EPS</td><td>$0.83</td><td>$0.63</td><td>$3.11⚠️</td><td>$0.14</td><td>$0.13</td></tr>
+      <tr><td>Non-GAAP EPS</td><td>$0.50</td><td>—</td><td>—</td><td>$0.71</td><td><span class="badge up">$0.72</span></td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">⚠️ <strong>GAAP EPS 极度失真</strong>：Q3 2025 的 $3.11 被一次性 $49 亿递延税项估值备抵释放灌高；Q4 2025 $0.14、Q1 2026 $0.13 被 $16 亿、$15 亿股权重估拖低。<strong>趋势请用 GB / 调整后 EBITDA / Non-GAAP EPS</strong>——三者一致向上：GB YoY 从 +14% 加速到 +25%、营业利润率从 10.6% 升到 14.6%、Non-GAAP EPS 从 $0.50 升到 $0.72。Non-GAAP EPS 在 Q2/Q3 2025 未单列（Uber 自 Q4 2025 才以 Non-GAAP EPS 为主口径）。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.2 资产负债健康度（2026-03-31 末 · $M）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>2025-12-31</th><th>2026-03-31</th><th>说明</th></tr>
+      <tr><td>现金及等价物</td><td>7,105</td><td>5,558</td><td>回购 $30 亿消耗</td></tr>
+      <tr><td>短期投资</td><td>528</td><td>533</td><td>—</td></tr>
+      <tr class="hl"><td>非受限现金 + 短投</td><td>7,633</td><td>6,091</td><td>可用流动性</td></tr>
+      <tr><td>长期股权投资</td><td>—</td><td>8,109</td><td>Aurora/滴滴/Grab 等（多已上市）</td></tr>
+      <tr class="hl"><td>短期借款/一年内到期债</td><td>0</td><td>0</td><td>可转债已于 Q4 2025 赎回</td></tr>
+      <tr class="hl"><td>长期债务</td><td>10,521</td><td>10,514</td><td>全部为长期</td></tr>
+      <tr class="hl"><td>有息负债合计</td><td>10,521</td><td>10,514</td><td>逐项核对</td></tr>
+      <tr class="hl"><td><strong>真实净负债（现金口径）</strong></td><td><strong>-2,888</strong></td><td><strong>-4,423</strong></td><td>⚠️ 净负债非净现金</td></tr>
+      <tr><td>净现金（含股权投资）</td><td>—</td><td>+3,686</td><td>加回 $81 亿可变现股权</td></tr>
+      <tr><td>经营租赁负债（流动+非流动）</td><td>1,559</td><td>1,905</td><td>独立列出（非有息债）</td></tr>
+      <tr><td>受限现金+受限投资</td><td>—</td><td>~11,578</td><td>主要抵押保险准备金，不计入净现金</td></tr>
+      <tr><td>Uber 股东权益</td><td>—</td><td>24,751</td><td>总权益 25,641</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">⚠️ <strong>净负债非净现金——铁律提示</strong>：严格现金口径下 Uber 有息负债 $105.1 亿（全为长期债，无短借、可转债已 Q4 2025 赎回）&gt; 非受限现金+短投 $60.9 亿，<strong>真实净负债 -$44.2 亿</strong>。只有把 $81.1 亿可变现股权投资加回，才转为净现金 +$36.9 亿。另有约 $115.8 亿受限现金+受限投资主要抵押保险准备金，<strong>不应计入净现金</strong>。经营租赁负债 $19.1 亿独立列出。Uber 已获投资级评级，杠杆温和且以低成本长期债为主。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.3 现金流量（Q1 2026 · $M）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>科目</th><th>Q1 2026</th><th>说明</th></tr>
+      <tr><td>经营活动现金流（OCF）</td><td>2,351</td><td>Q1 季节性偏弱</td></tr>
+      <tr><td>- Capex（购置 PP&E）</td><td>65</td><td>极轻资产</td></tr>
+      <tr class="hl"><td>自由现金流（FCF）</td><td>2,286</td><td>TTM 达创纪录 $9.8B</td></tr>
+      <tr><td>股份回购</td><td>3,011</td><td>创纪录 · 注销约 4000 万股</td></tr>
+      <tr><td>股息</td><td>0</td><td>从未派息</td></tr>
+      <tr><td>融资租赁本金偿付</td><td>40</td><td>—</td></tr>
+      <tr><td>股权激励（SBC）</td><td>473</td><td>约占营收 3.6%</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3); line-height:1.6;">⚠️ <strong>口径说明</strong>：Q1 现金流季节性偏弱（营运资金季节性 + 付款时点 + 保险准备金流入放缓）。<strong>TTM 自由现金流达创纪录 $98 亿，三年复合增速约 115%</strong>，管理层建议按年度而非单季评估。但要注意：Uber 的 FCF 被<span class="warn-t">营运资金"浮存"</span>放大——先向乘客收款、后向司机付款 + 保险准备金流入，随增速放缓这部分顺风会减弱，故不宜把 $98 亿全额当作干净的所有者盈余。</p>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">5.4 所有者盈余（价值投资口径）</h3>
+  <div class="dcf-note">
+    <p><strong>所有者盈余 = 净利润 + 折旧摊销 + SBC − 维护性 Capex ± 营运资金变动</strong></p>
+    <p>Uber 的报告 FCF（TTM $98 亿）含相当规模的营运资金浮存 + 保险准备金流入，属"非重复性"顺风；而 Non-GAAP 净利（本季 $14.9 亿，TTM 约 $56 亿）又加回了 $19 亿/年的真实 SBC 成本。<strong>综合看，真实所有者盈余介于两者之间，约 $65-75 亿/年</strong>——比报告 FCF 保守、比 Non-GAAP 净利真实。</p>
+    <p><strong>所有者盈余收益率 = 约 $70 亿 / 市值 $1513 亿 ≈ 4.6%</strong>——对一家 GB +25%、EBITDA +33%、EPS +44% 的加速平台，这个收益率<span class="hl-t">在优质成长股里属于合理偏低（因为在给增长付费），但配上 30%+ 的盈利增速，PEG 层面是划算的</span>。这与满估值的收费桥不同：Uber 提供的是"合理估值 + 高增长"，而非"高估值 + 稳增长"。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 6 ═══ -->
+<div class="section">
+  <div class="stitle">模块 6 · 电话会分析（Q1 2026 + 前 2 季度）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">Q1 2026 电话会（2026-05-06）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"总订单额 +21%（恒定）连续第三季，超指引高端；出行、外卖双双强劲，货运时隔约 2 年重回增长"</div><div class="ec-note">增长在出行与外卖间均衡分布，不是单腿驱动。GB $53.7B 高于指引上沿。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"分部经营利润率创纪录：出行 7.7%、外卖 3.7%；Non-GAAP EPS $0.72（+44%）落在指引高端"</div><div class="ec-note">盈利能力持续爬坡是本季核心——营业利润率 14.6%（去年 10.6%），营业利润 +57%。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"单季回购 $30 亿创纪录、注销约 4000 万股（近 2025 全年 8000 万股的一半），摊薄股数同比降 2%；授权余约 $160 亿"</div><div class="ec-note">从"烧钱增长"到"回购缩股"的资本纪律转身——真实缩股而非仅抵消 SBC。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"Uber One 会员破 5000 万（贡献出行+外卖约一半 GB）；3 月破 1000 万活跃司机骑手里程碑；宣布 10 项新增/扩展 AV 合作 + 推出 Uber Autonomous Solutions"</div><div class="ec-note">会员飞轮 + 供给规模 + 轻资本 AV 战略——把自动驾驶潜在颠覆者变为合作增量。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"英国商业模式变更造成约 $10 亿（~8pp）营收增速拖累、出行营收率约 400bps 光学冲击——纯会计重分类，无经济影响，2026 全年持续"</div><div class="ec-note">司机报酬从营收成本重分类为营收抵减，压低报告营收但不影响 GB、利润、现金——判断增长要看 GB。</div></div></div>
+
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"GAAP 净利仅 $2.6 亿，因 $15 亿股权投资税前重估亏损；管理层警示 GAAP 净利将随股权公允价值持续大幅摆动"</div><div class="ec-note">Aurora/滴滴/Grab 等按市值重估的非现金损益——季度间来回震荡，是 GAAP 盈利的持续噪音源。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q4 2025 电话会（2026-02-04）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"创纪录一季：GB +22%（第二季加速）；年化 150 亿次出行运行率（日均 4000 万+ 单）；MAPC 2.02 亿（+18%）；连续第 5 年 GB 增长 20%+"</div><div class="ec-note">FY2025 调整后 EBITDA $87 亿（+35%）、FCF $98 亿（+42%）双创纪录；40% 用户使用多产品。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-bear">利空</div><div class="ec-body"><div class="ec-title">"GAAP 净利仅 $2.96 亿（$16 亿股权重估拖累）；GAAP EPS $0.14 vs 去年同期 $3.21（去年含 $64 亿税收利好）——同比光学难看"</div><div class="ec-note">与本季同源的股权重估波动 + 去年一次性税项高基数，GAAP 口径持续失真。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">Q3 2025 电话会（2025-11）</h3>
+  <div class="ec-item"><div class="ec-badge ec-bull">利好</div><div class="ec-body"><div class="ec-title">"出行次数增速加速至 22%（此前三季 18%）——2023 年底以来最强、除疫情反弹外 Uber 史上最大单次出行量增幅；调整后 EBITDA $23 亿（+33%）"</div><div class="ec-note">量的加速是最强信号；AV 计划 2026 年底前进入 10+ 城市，与 NVIDIA 合作 L4 全栈软件。</div></div></div>
+  <div class="ec-item"><div class="ec-badge ec-neut">中性</div><div class="ec-body"><div class="ec-title">"一次性 $49 亿递延税项估值备抵释放把 GAAP 净利冲到 $66 亿 / GAAP EPS $3.11——非重复性，扭曲 trailing P/E"</div><div class="ec-note">这也是 TTM GAAP P/E 仅 15.7x 却"不干净"的根源——被税项一次性灌水。</div></div></div>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">指引兑现度追踪</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>历史指引</th><th>Q1 2026 实际</th><th>评价</th></tr>
+      <tr><td>Q1 2026 GB 指引</td><td>$53.7B（超上沿）</td><td><span class="badge up">超预期</span></td></tr>
+      <tr><td>Q1 2026 Non-GAAP EPS 指引 $0.65-0.72</td><td>$0.72（高端）</td><td><span class="badge up">达高端</span></td></tr>
+      <tr><td>"利润以 2 倍于营收速度增长"</td><td>营业利润 +57% vs GB +25%</td><td><span class="badge up">兑现</span></td></tr>
+      <tr><td>Q2 2026 GB 指引</td><td>$56.25-57.75B（恒定 +18-22%）</td><td><span class="badge nt">新指引</span></td></tr>
+      <tr><td>Q2 2026 Non-GAAP EPS 指引</td><td>$0.78-0.82（+31-38%）</td><td><span class="badge nt">新指引</span></td></tr>
+    </table>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>信号汇总</strong>：Q1 2026 是 Uber "<span class="hl-t">量在加速（GB +25%）+ 利润率创纪录（出行 7.7%/外卖 3.7%）+ Non-GAAP EPS +44% + 单季回购创纪录 + 会员破 5000 万</span>"的强势一季，GB 与 EPS 双双达/超指引高端。Q2 指引延续（GB 恒定 +18-22%、EPS +31-38%）。<strong>业绩本身没有任何问题——所有的"难看"都来自 GAAP 口径的股权重估噪音与英国会计重分类，看穿即无碍。真正的长期变量在自动驾驶终局与用工监管。</strong></p>
+  </div>
+</div>
+
+<!-- ═══ 模块 7 ═══ -->
+<div class="section">
+  <div class="stitle">模块 7 · 多模型估值（8 种方法）</div>
+
+  <h3 style="font-size:14px; color:var(--text); margin-bottom:14px; font-family: 'Segoe UI',sans-serif;">7.1 估值汇总表（独立估值 · 不锚定现价 · USD）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>估值方法</th><th>每股公允价</th><th>假设要点</th><th>权重</th></tr>
+      <tr><td>1. 相对估值（P/E）</td><td>$85</td><td>FY2026 Non-GAAP EPS ~$3.35 × 25x（30%+ 增速下 PEG ~0.75，折价因估计不确定性）</td><td>20%</td></tr>
+      <tr><td>2. DCF（基准）</td><td>$95</td><td>FCF 2026E ~$10.5B，前 5 年 +15% 后渐降至 4%，WACC 10%，永续 3%（保守假设，激进可达 $120+）</td><td>25%</td></tr>
+      <tr><td>3. EV/EBITDA</td><td>$88</td><td>前瞻调整后 EBITDA ~$11.2B × 16x = EV $179B + 股权投资 $8.1B − 净负债 $4.4B</td><td>15%</td></tr>
+      <tr><td>4. 所有者盈余收益率</td><td>$84</td><td>正常化所有者盈余 ~$70 亿（剔浮存后）/ 6% 目标收益率 → /20.7 亿股</td><td>10%</td></tr>
+      <tr><td>5. PEG</td><td>$90</td><td>Forward P/E 22x ÷ EPS 增速 ~32% = PEG 0.69（显著低于 1，优质成长少见的便宜）</td><td>10%</td></tr>
+      <tr><td>6. DDM</td><td>不适用</td><td>Uber 从未派息，且明确将留存收益再投资，无股息可折现</td><td>0%</td></tr>
+      <tr><td>7. 反向 DCF</td><td>当前价隐含 FCF 增长 <strong>~8-9%</strong></td><td>$74.35 隐含市场只给 8-9% 长期 FCF 增长——远低于实际 20%+ 轨迹，暗示市场偏悲观</td><td>10%</td></tr>
+      <tr><td>8. SOTP 分部加总</td><td>$85</td><td>出行（年化利润 18x）+ 外卖（22x，成长溢价）+ 股权投资 $8.1B − 公司费用资本化 − 净负债</td><td>10%</td></tr>
+      <tr class="hl"><td><strong>加权公允价中位数</strong></td><td><strong>$90</strong></td><td>估值区间 $84-95 · 中位 ~$90</td><td>100%</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.8;"><strong>与现价对照</strong>：当前 $74.35 vs 加权公允 $90 · <span class="nt">折价约 17%</span>——<strong>低于价值投资 25% 安全边际的满仓门槛，但已是好生意难得的中等折扣</strong>。有意思的是：机械首仓价（公允 $90 × 80% = $72）就在现价下方约 3%，意味着<span class="hl-t">当前价格已贴近合理建仓窗口的上沿</span>。反向 DCF 显示市场只定价了 8-9% 的长期 FCF 增长，与 Uber 实际 20%+ 的 GB/EBITDA 轨迹存在明显落差——这正是折价的来源，也是潜在上行的来源。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.2 P/E 多档透视表（利润高度波动 · 必做）</h3>
+  <p style="margin-bottom:10px; font-size:13px; color:var(--text2);">Uber GAAP 净利受股权重估 + 一次性税项剧烈波动（GAAP vs Non-GAAP 差异远超 10%），单一 TTM P/E 严重误导，必须多档透视：</p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>口径</th><th>EPS / 基数</th><th>P/E（基于 $74.35）</th><th>读数说明</th></tr>
+      <tr><td>TTM GAAP P/E</td><td>EPS $4.73</td><td>15.7x</td><td><span class="warn-t">被 $49 亿递延税项释放灌水，不干净</span></td></tr>
+      <tr><td>TTM Non-GAAP P/E</td><td>EPS $2.45（FY2025）</td><td>30.3x</td><td>剔一次性 · 更可信的历史档</td></tr>
+      <tr class="hl"><td><strong>Forward P/E（FY2026 Non-GAAP ~$3.35）</strong></td><td><strong>~$3.35</strong></td><td><strong>~22x</strong></td><td>最可信档 · 30%+ 增速下 PEG 0.7</td></tr>
+      <tr><td>聚合器 Forward P/E</td><td>—</td><td>17-18x</td><td><span class="warn-t">疑用被税项灌水的 GAAP-ish 估计 · 慎用</span></td></tr>
+      <tr><td>P/S (TTM)</td><td>营收 ~$53.7B</td><td>~2.8x</td><td>平台净额口径</td></tr>
+      <tr><td>EV/EBITDA (TTM)</td><td>调整后 EBITDA ~$9.3B</td><td>~16.7x</td><td>20%+ EBITDA 增速</td></tr>
+      <tr><td>FCF Yield (TTM)</td><td>FCF ~$9.8B</td><td>~6.5%</td><td>含浮存顺风 · 打折看</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:10px; font-size:12px; color:var(--text3);"><strong>最可信档</strong>：Forward P/E ~22x（FY2026 Non-GAAP EPS ~$3.35）。<span class="hl-t">切勿被 TTM GAAP P/E 15.7x 的"便宜"误导</span>——那是 $49 亿递延税项释放灌出来的假象。同业对比：DoorDash trailing P/E ~73-87x（最快增长、最贵）、Lyft ~2.1x（被一次性税收利好扭曲，非真实）。Uber 是三者中<strong>规模最大、最盈利，Forward P/E ~22x 配 30%+ 增速，PEG ~0.7 最划算</strong>。</p>
+
+  <h3 style="font-size:14px; color:var(--text); margin:24px 0 14px; font-family: 'Segoe UI',sans-serif;">7.3 12 个月目标价（概率加权）</h3>
+  <div class="pgrid">
+    <div class="pbox"><div class="pl">悲观情景 · 30%</div><div class="pv pc">$60</div><div class="pn">自动驾驶脱媒恐慌 + 增速放缓 + 估值压至 16x + 浮存回吐拖累 FCF<br>距现价 -19%</div></div>
+    <div class="pbox"><div class="pl">基准情景 · 45%</div><div class="pv pf">$93</div><div class="pn">GB 增速维持 20%+ cc + EBITDA +30% + 持续回购 + 估值维持 ~24x<br>距现价 +25%</div></div>
+    <div class="pbox"><div class="pl">乐观情景 · 25%</div><div class="pv ps">$115</div><div class="pn">AV 合作变现 + 利润率超预期 + 会员飞轮加速 + 估值向成长同业重估<br>距现价 +55%</div></div>
+  </div>
+  <p style="font-size:13px; color:var(--text2);"><strong>概率加权公允价</strong>：30%×$60 + 45%×$93 + 25%×$115 = <strong>$89</strong>（+20%）。<span class="hl-t">当前 $74.35 已接近机械首仓 $72，处于合理建仓窗口上沿</span>——不是遥不可及的估值，而是"好生意难得给出中等折扣、值得开始分批建仓但不宜梭哈"的状态。</p>
+</div>
+
+<!-- ═══ 模块 8 ═══ -->
+<div class="section">
+  <div class="stitle">模块 8 · 竞争与行业分析</div>
+  <div class="cmt">
+    <p><strong>全球出行与外卖格局</strong>：出行端，美国是 Uber vs Lyft 双寡头，海外多地由 Uber 或其持股的本地玩家（Grab 东南亚、滴滴中国等）主导；外卖端，美国是 Uber Eats vs DoorDash，Uber 全球 35 国运营。<strong>Uber 是唯一同时在出行与外卖两端都具规模的全球平台</strong>——这种跨品类协同（同一 App、同一会员、同一支付）是 Lyft、DoorDash 都不具备的。</p>
+
+    <p><strong>平台龙头同业对比（截至 2026-06）</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>公司</th><th>市值</th><th>营收增速</th><th>Trailing P/E</th><th>核心评价</th></tr>
+        <tr class="hl"><td><strong>Uber UBER</strong></td><td>$151B</td><td>+14% 报告 / ~18% FY25</td><td><strong>15.7x GAAP / 30.3x Non-GAAP</strong></td><td>最大最盈利的规模平台 · GAAP P/E 被税项灌水</td></tr>
+        <tr><td>DoorDash DASH</td><td>较大</td><td>~28%（FY25 营收 ~$13.7B）</td><td>~73-87x</td><td>成长溢价标的 · 最快增长 · 最贵估值</td></tr>
+        <tr><td>Lyft LYFT</td><td>较小</td><td>~16%（FY26E 营收 ~$7.3B）</td><td>~2.1x（税项扭曲）</td><td>小 · 仅美加 · 无外卖规模 · 低 P/E 是税收利好假象</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:10px; font-size:12px; color:var(--text3);">同业 P/E 均受一次性递延税项利好扭曲，慎用。核心看点：<strong>Uber 规模最大（GB $53.7B/季）、最盈利（调整后 EBITDA $2.48B/季）、跨出行+外卖双端协同</strong>；DoorDash 增速更快但估值极贵（~80x）；Lyft 规模小且仅美加。Uber 是"规模 + 盈利 + 合理估值"的均衡组合。</p>
+
+    <p style="margin-top:14px;"><strong>波特五力</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>新进入者：</strong>中（双边网络 + 规模是壁垒，但资本可催生本地新玩家；AV 是体系外新路径）</li>
+      <li><strong>替代品：</strong>中高（自有 Robotaxi 车队、公共交通、自取是长期替代）</li>
+      <li><strong>供应商（司机/骑手）议价：</strong>中（供给充裕但受用工监管保护）</li>
+      <li><strong>买家（用户）议价：</strong>中（多平台切换成本低，靠 Uber One 会员绑定）</li>
+      <li><strong>同业竞争：</strong>中高（Uber/Lyft、Uber Eats/DoorDash 竞争仍在，但已从价格战转向理性盈利）</li>
+    </ul>
+
+    <p><strong>颠覆风险</strong>：自动驾驶是核心长期变量——既可能被 Robotaxi 车队脱媒，也可能让 Uber 成为所有 AV 车队的流量总入口。Uber 的"轻资本 AV + 10 项合作"策略是对冲。这是 5-10 年维度的慢变量。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 9 ═══ -->
+<div class="section">
+  <div class="stitle">模块 9 · 技术面与 K 线分析（次要参考）</div>
+  <div class="cmt">
+    <p><strong>趋势</strong>：UBER 从 52 周高 $101.99 回落至 $74.35（<span class="warn-t">-27%</span>），接近 52 周低 $67.19，处于区间中位偏下。这是一次基本面加速（GB +25%、EBITDA +33%）背景下的估值回撤——量价背离，通常是价值投资者关注的窗口。</p>
+
+    <p><strong>关键价位</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>支撑</strong>：$72（机械首仓/公允 80%）/ $67（52 周低）/ $63（二仓）/ $54（三仓极端机会）</li>
+      <li><strong>阻力</strong>：$85（公允区间下沿）/ $90（公允中位）/ $102（前高）/ $115（乐观情景）</li>
+    </ul>
+
+    <p><strong>指标信号</strong>：回调后 RSI 中性偏弱，处超卖修复区；量能显示恐慌盘出清后逐步企稳。<span class="hl-t">技术面处相对低位意味着下行空间小于上行空间</span>——与满估值的蓝筹相反。</p>
+
+    <p><strong>注意</strong>：Uber 的核心驱动是 GB/EBITDA 增速 + 盈利拐点兑现 + AV 战略进展 + 估值修复，技术面是次要参考。价值投资者应基于 $90 公允价与 17% 折价的基本面判断，而非追逐 K 线。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 10 ═══ -->
+<div class="section">
+  <div class="stitle">模块 10 · 增长催化剂与前景展望</div>
+  <div class="cmt">
+    <p><strong>短期催化剂（未来 6 个月）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>2026-08-04 Q2 2026 财报</strong>——GB 指引 $56.25-57.75B（恒定 +18-22%）、Non-GAAP EPS $0.78-0.82（+31-38%）、调整后 EBITDA $2.70-2.80B 的兑现度</li>
+      <li><strong>AV 合作落地</strong>——10 项新增/扩展 AV 伙伴关系 + Uber Autonomous Solutions 的商业化信号</li>
+      <li><strong>$160 亿授权余额放量回购</strong>——持续缩股放大 EPS</li>
+      <li><strong>广告业务</strong>——外卖/出行广告是高毛利新增长极，若加速是新叙事</li>
+    </ul>
+
+    <p><strong>长期展望（3-5 年）</strong>：</p>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>双飞轮复利</strong>——出行"现金转网约车"结构性迁移 + 外卖渗透 + 新垂直（杂货/零售）驱动 GB 持续双位数增长</li>
+      <li><strong>利润率继续爬坡</strong>——出行 7.7%/外卖 3.7% 的分部利润率仍有提升空间，"利润 2 倍于营收增长"的承诺是核心</li>
+      <li><strong>Uber One 会员飞轮</strong>——破 5000 万、贡献近一半 GB，提升 LTV 与交叉销售</li>
+      <li><strong>自动驾驶"收编"</strong>——把潜在颠覆者变为增量流量入口，轻资本路线保护 ROIC</li>
+      <li><strong>风险情景</strong>：AV 脱媒加速 / 用工监管逆转 / 消费衰退 / 浮存回吐拖累 FCF</li>
+    </ul>
+
+    <p><strong>TAM 展望</strong>：全球出行（数万亿美元）+ 外卖/杂货 + 货运 + 广告，Uber 当前 GB 年化约 $2100 亿仅是渗透早期。核心问题不是增长空间，而是自动驾驶会重构还是巩固 Uber 的入口地位。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 11 ═══ -->
+<div class="section">
+  <div class="stitle">模块 11 · 风险矩阵</div>
+  <div class="risk-grid">
+    <div class="risk-card r5"><h5>1. 自动驾驶长期脱媒</h5><span class="risk-score">5 / 5 极高</span><p>Robotaxi 车队若建立自有需求入口绕过 Uber，将侵蚀出行基本盘 · Uber 靠"轻资本 AV + 10 项合作 + Autonomous Solutions"对冲 · 5-10 年维度终局变量</p></div>
+    <div class="risk-card r4"><h5>2. GAAP 盈利剧烈波动</h5><span class="risk-score">4 / 5 高</span><p>$81 亿股权投资按市值重估 · 单季可造成 $15-16 亿非现金损益摆动 · 本季 GAAP 净利被砸至 $2.6 亿(-85%) · 虽非现金但持续制造估值噪音与情绪扰动</p></div>
+    <div class="risk-card r3"><h5>3. 零工用工监管</h5><span class="risk-score">3 / 5 中</span><p>司机"雇员 vs 独立承包商"身份认定若逆转（欧盟/加州等），将抬高成本结构 · 各地监管进展不一 · 持续摩擦</p></div>
+    <div class="risk-card r3"><h5>4. 竞争与浮存回吐</h5><span class="risk-score">3 / 5 中</span><p>出行(Lyft)/外卖(DoorDash)竞争仍在 · FCF 含营运资金浮存 + 保险准备金流入，增速放缓时顺风减弱，FCF 增速会低于当前 115% CAGR</p></div>
+    <div class="risk-card r3"><h5>5. 消费/宏观周期 + 净负债</h5><span class="risk-score">3 / 5 中</span><p>GB 与消费/油价挂钩，衰退压制出行量 · 严格口径下净负债 -$44 亿（非净现金），虽投资级但非现金堡垒</p></div>
+    <div class="risk-card r2"><h5>6. 盈利拐点已过（机会）</h5><span class="risk-score">2 / 5 反向</span><p>营业利润率 14.6%（去年 10.6%）+ 利润率创纪录 + 真实缩股回购 + 合理估值 · 从"烧钱"转"复利"的拐点本身是最大安全垫</p></div>
+  </div>
+
+  <div class="cmt" style="margin-top:14px;">
+    <p><strong>3 个黑天鹅情景</strong>：</p>
+    <ol style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>Robotaxi 大规模脱媒</strong>——概率 15%（5 年维度）· 出行基本盘受侵蚀 · 股价跌至 $45-50 · 长期估值重置</li>
+      <li><strong>用工监管全球逆转</strong>——概率 10% · 司机需按雇员计成本 · 利润率结构性下移 · 股价跌至 $50</li>
+      <li><strong>全球深度衰退 + 浮存回吐</strong>——概率 10% · GB 骤降 + FCF 顺风逆转 · 股价跌至 $55</li>
+    </ol>
+
+    <p style="margin-top:10px;"><strong>下行支撑</strong>：盈利拐点已过 + 营业利润率 14.6% + TTM FCF $98 亿 + 双飞轮网络护城河构成质量底。<span class="hl-t">$55-60 是较硬的估值底</span>（52 周低 $67 下方 + Forward P/E ~16x 下限）。相比满估值蓝筹，Uber 的"底"更低但"顶"也更高——它是成长性折价标的，而非稳态收费桥。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 12 ═══ -->
+<div class="section">
+  <div class="stitle">模块 12 · 股东回报分析</div>
+  <div class="cmt">
+    <p><strong>Uber 的股东回报是一个"从零到有、快速放量"的故事——2024 年才首次回购，如今单季回购已破 $30 亿创纪录。要点是区分授权、执行与含金量。</strong>Uber 从不派息，资本返还 100% 靠回购。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 18px 0 10px; font-family: 'Segoe UI',sans-serif;">12.1 公司给了股东多少？</h3>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>年度/期间</th><th>回购（执行）</th><th>股息</th><th>回购股数</th><th>股东总回报</th></tr>
+        <tr><td>FY2023</td><td>$0</td><td>$0</td><td>—</td><td>$0（无回购）</td></tr>
+        <tr><td>FY2024</td><td>$12.5 亿</td><td>$0</td><td>—</td><td>$12.5 亿（2024-02 首启）</td></tr>
+        <tr><td>FY2025</td><td>$65.2 亿</td><td>$0</td><td>约 8000 万股</td><td>$65.2 亿</td></tr>
+        <tr class="hl"><td><strong>Q1 2026 单季</strong></td><td><strong>$30.1 亿</strong>（创纪录）</td><td>$0</td><td>约 4000 万股</td><td><strong>$30.1 亿</strong></td></tr>
+      </table>
+    </div>
+    <p style="font-size:13px; color: var(--text2); margin-top:8px"><strong>Trailing Shareholder Yield</strong> ≈ FY2025 回购 $65.2 亿 / 市值 $1513 亿 ≈ <strong>4.3%</strong>（全部为回购，股息 0）。<span class="hl-t">按 Q1 2026 单季 $30 亿的年化跑量看，回购收益率已升向约 8%</span>——Uber 正从"无股东回报"快速切换到"大额回购缩股"模式。累计回购自启动以来已达 $107.9 亿。</p>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.2 给的方式好不好？</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>真实缩股 · 含金量高</strong>：摊薄加权股数从 FY2024 峰值的 21.51 亿降至 FY2025 的 21.20 亿、再到 Q1 2026 的 <strong>20.71 亿且持续下降</strong>；发行在外股数从 2024-12-31 的 21.08 亿降至 2025-12-31 的 20.68 亿。<span class="hl-t">回购正在真实减少股本、增厚每股价值，而非仅抵消 SBC</span>——本季 Non-GAAP EPS +44% 高于 Non-GAAP 净利 +39%，差额正是缩股贡献</li>
+      <li><strong>股数曾因 SBC 上升，如今已逆转</strong>：FY2023→FY2024 摊薄股数一度上升（SBC 稀释 + 回购 2024-02 才启动），FY2024→FY2025 转为下降——检验通过，回购已盖过 SBC 稀释</li>
+      <li><strong>美股库存股常态</strong>：美股回购多入库存股（可用于未来 SBC），但 Uber 摊薄股数的实际下降证明净效果是真实缩股，含金量高</li>
+    </ul>
+
+    <h3 style="font-size:15px; color:var(--text); margin: 22px 0 10px; font-family: 'Segoe UI',sans-serif;">12.3 能不能继续给、给多少？</h3>
+    <ul style="margin-left:20px; line-height:2; color:var(--text2);">
+      <li><strong>已授权额度充裕</strong>：$70 亿（2024-02）+ $200 亿（2025-07）= 合计 $270 亿授权，季末剩余约 <strong>$160 亿</strong>（约占市值 11%）· 按当前跑量可支撑约 1.5-2 年回购</li>
+      <li><strong>无股息、专注回购 + 再投资</strong>：Uber 从未派息，明确将留存收益优先用于增长再投资与回购——对仍处高速复利期的平台，这是合理排序，而非"象征性回报"</li>
+      <li><strong>回购 / FCF 覆盖度</strong>：Q1 回购 $30.1 亿 vs 单季 FCF $22.9 亿 = 覆盖 131%——<span class="warn-t">短期回购超过单季 FCF</span>，靠动用资产负债表现金。但 TTM FCF $98 亿 vs FY2025 回购 $65 亿 = 覆盖 66%，年度口径 FCF 充分覆盖，且未见借债回购（净负债主要是历史遗留，非因回购扩大）</li>
+      <li><strong>周期择时</strong>：本季 $30 亿回购发生在股价从 $102 回落至 $70 区间——<strong>在相对低位加速回购，择时纪律良好</strong></li>
+    </ul>
+    <p><strong>模块小结</strong>：<span class="hl-t">积极且高含金量、但仍处早期放量阶段</span>——2024 年才起步、如今单季 $30 亿创纪录 + 真实缩股（摊薄股数确凿下降）+ 低位择时回购 + $160 亿授权余额 + 年度 FCF 充分覆盖。唯一保留是无股息（对成长期平台合理）与单季回购一度超过单季 FCF（需靠现金储备）。Uber 正快速成长为美股回购缩股的复利新星，含金量随执行逐季提升。</p>
+  </div>
+</div>
+
+<!-- ═══ 模块 13 ═══ -->
+<div class="section">
+  <div class="stitle">模块 13 · 海图评分卡 + 投资决策</div>
+
+  <div class="scorecard">
+    <h3 style="font-size:15px; color:var(--text); margin-bottom: 16px; font-family: 'Segoe UI',sans-serif;">海图评分卡（6 维 A-D）</h3>
+    <div class="score-grid">
+      <div class="score-card"><div class="score-letter s-bp">B+</div><div class="score-body"><h4>1. 生意可预测性</h4><p>出行+外卖平台模式清晰，但 GAAP 盈利受股权重估剧烈波动 + 英国会计噪音 + AV 终局不确定，能见度不如收费桥。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">A-</div><div class="score-body"><h4>2. 经济护城河</h4><p>双边网络 + 规模 + Uber One 会员 + 跨品类协同 + 双寡头。但竞争仍在、AV 可能重构入口，是"宽但需加固"的护城河。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">A-</div><div class="score-body"><h4>3. 管理层质量</h4><p>Dara 把 Uber 从烧钱扭转为盈利机器 + 务实轻资本 AV + 真实缩股回购 + "利润 2 倍营收"承诺兑现。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">B+</div><div class="score-body"><h4>4. 财务质量</h4><p>营业利润率升至 14.6%、EBITDA +33%、FCF 强；但净负债(非净现金)、FCF 含浮存、GAAP 盈利波动。</p></div></div>
+      <div class="score-card"><div class="score-letter s-bp">A-</div><div class="score-body"><h4>5. 资本配置纪律</h4><p>单季 $30 亿创纪录回购 + 真实注销缩股 + 低位择时 + $160 亿授权；无股息(合理，仍复利期)；轻资本 AV 护 ROIC。</p></div></div>
+      <div class="score-card"><div class="score-letter s-b">B</div><div class="score-body"><h4>6. 估值与安全边际</h4><p>现价 $74.35 vs 公允 $90，折价约 17%；PEG ~0.7 便宜，但未达 25% 满仓门槛，故非满分。</p></div></div>
+    </div>
+
+    <div class="flag-row">
+      <strong>红旗排查</strong>：GAAP 净利受股权重估剧烈波动是<strong>充分披露的会计噪音</strong>（非会计质量问题，管理层主动提示、口径透明）；净负债 -$44 亿温和且投资级；Forward P/E 22x 不属极端估值；治理干净（单一类别股、创始人已退出）。<span class="warn-t">未触发强制降级红旗</span>——GAAP 盈利波动为可看穿的口径噪音，不构成会计疑点。综合评级维持在质量与折价支撑的水平。
+    </div>
+
+    <p style="margin-top:18px; font-size:14px; color:var(--text); line-height:1.85;"><strong>综合评级</strong>：<span class="rating-badge rating-cond" style="font-size:14px;">有条件买入</span>。生意质量优良（护城河/管理/资本 3 个 A-），刚跨过盈利拐点，且难得给出中等折价（折价 17%、PEG 0.7）。但安全边际 17% 未达 25% 的满仓门槛（估值维度仅 B），且自动驾驶终局是 5-10 年的重大不确定性 → 给"有条件"而非无条件买入。核心判断：<strong>Uber 是好生意难得的中等折扣——值得开始分批建仓，但因安全边际未满、AV 变量未定，不宜梭哈。现价 $74.35 已贴近机械首仓 $72。</strong></p>
+  </div>
+
+  <h3 style="font-size:15px; color:var(--text); margin: 24px 0 12px; font-family: 'Segoe UI',sans-serif;">投资决策（精确价格 · USD）</h3>
+
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>项目</th><th>价格</th><th>说明</th></tr>
+      <tr><td>12 个月概率加权目标价</td><td><strong>$89</strong> (+20%)</td><td>30%×$60 + 45%×$93 + 25%×$115</td></tr>
+      <tr><td>悲观目标（30% 概率）</td><td>$60 (-19%)</td><td>AV 脱媒恐慌 + 增速放缓 + 估值压至 16x</td></tr>
+      <tr><td>基准目标（45% 概率）</td><td>$93 (+25%)</td><td>GB 维持 20%+ cc + EBITDA +30% + 估值 ~24x</td></tr>
+      <tr><td>乐观目标（25% 概率）</td><td>$115 (+55%)</td><td>AV 变现 + 利润率超预期 + 估值重估</td></tr>
+      <tr class="hl"><td>首仓建仓（估值中位数 $90 × 80%）</td><td><strong>$72</strong></td><td>距现价 -3% · 现价已贴近，可小仓试建</td></tr>
+      <tr><td>二仓建仓（× 70%）</td><td>$63</td><td>-15% · 回调加仓</td></tr>
+      <tr><td>三仓建仓（× 60%）</td><td>$54</td><td>-27% · 黑天鹅级机会</td></tr>
+      <tr><td>止盈一档</td><td>$110</td><td>+48% · 减仓 25%</td></tr>
+      <tr><td>止盈二档</td><td>$128</td><td>+72% · 再减 25%</td></tr>
+      <tr><td>止盈三档</td><td>$150</td><td>+102% · 再减 25% · 最后 25% 长期复利持有</td></tr>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:13px; color:var(--text2); line-height:1.85;"><strong>建议总仓位</strong>：<strong>4-6%</strong>（成长质量仓 · 现价已在合理建仓窗口上沿，可先建首仓，回调至 $63/$54 加仓）。<strong>持有周期</strong>：3-7 年（穿越自动驾驶范式变化 + 盈利率爬坡）。<strong>关键监控指标</strong>：① 总订单额 GB 恒定汇率增速（是否维持 20%+）；② 出行/外卖分部经营利润率；③ 自动驾驶合作变现进展 + 轻资本 AV 策略执行；④ 剔除浮存后的正常化 FCF；⑤ 回购节奏与摊薄股数；⑥ 用工监管进展。<strong>下次催化剂</strong>：2026-08-04 Q2 2026 财报。</p>
+</div>
+
+<!-- ═══ 海图页末长评 ═══ -->
+<div class="section">
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记 · 1160 字</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p class="lead">价值投资最舒服的时刻，是好生意难得地打了折。Uber 就是这样一个当口——总订单额 +25%、调整后 EBITDA +33%、Non-GAAP EPS +44%，三条线一起加速；可股价却从 $102 的高点回落到 $74，跌了 27%。市场盯着那张 GAAP 净利只有 $2.6 亿（同比 -85%）的报表皱眉，却忘了那 $15 亿的窟窿只是股权投资的账面重估，一分钱现金都没流出。</p>
+
+      <p>Uber 是全球出行与外卖的双巨头——它自己不拥有一辆车、不开一家餐厅，只用一张把 1.99 亿月活、超 1000 万司机骑手、140 万商户连在一起的网络，从每一单出行和外卖里抽取平台费。这是一门轻资产、强双边网络效应、且刚刚跨过盈利拐点的超级平台生意。Q1 2026：GB $53.7B（恒定 +21%，连续三季）· 调整后 EBITDA $24.8 亿 · Non-GAAP EPS $0.72（+44%）· 营业利润率从一年前的 10.6% 升到 14.6%。</p>
+
+      <h4>几个研判要点</h4>
+
+      <p><strong>一、GAAP 净利是假摔，要看穿两层。</strong> 第一层：报告口径营收 +14% 被英国商业模式变更"人为压低"了约 8-9 个百分点（把司机报酬从成本重分类为营收抵减，约 $10 亿，<span class="hl-t">纯会计、无经济影响</span>）；真实的量在总订单额 +25% 里。第二层：GAAP 净利 $2.6 亿（-85%）看着崩了，其实是股权投资（Aurora、滴滴、Grab 等）$15 亿的账面重估亏损——非现金、季度间来回摆动。<span class="hl-t">Non-GAAP 净利 +39%、Non-GAAP EPS +44%、调整后 EBITDA +33% 才是真相。</span></p>
+
+      <p><strong>二、这是一台刚学会赚钱的复利机器。</strong> GAAP 营业利润率从一年前的 10.6% 升到 14.6%，营业利润 +57%。出行分部经营利润率 7.7%、外卖 3.7%，双双创纪录。会员 Uber One 突破 5000 万，贡献了出行+外卖近一半的订单额——这是黏性与交叉销售的飞轮。管理层的承诺是"利润以两倍于营收的速度增长"，本季兑现。</p>
+
+      <p><strong>三、自由现金流很猛，但要打个折看。</strong> TTM 自由现金流创纪录 $98 亿，三年 CAGR 约 115%。但其中有相当一部分来自营运资金的<span class="warn-t">"浮存"</span>——先向乘客收款、后向司机付款，加上保险准备金的流入。随着增速放缓，这部分顺风会减弱。所以我不把 $98 亿当作干净的所有者盈余，真实盈利能力更接近 Non-GAAP 净利的量级，正常化约 $65-75 亿。</p>
+
+      <p><strong>四、别把"净现金"安在 Uber 头上。</strong> 严格看，现金+短投 $60.9 亿 &lt; 有息负债 $105 亿，是净负债 -$44 亿；只有把 $81 亿可变现股权投资算进来，才是净现金 +$37 亿。好在 Uber 已是投资级评级，杠杆温和。它还在用真金白银回购——单季 $30 亿创纪录、注销约 4000 万股，摊薄股数真实下降，$270 亿授权还剩约 $160 亿。</p>
+
+      <p><strong>五、自动驾驶既是最大期权，也是最大威胁。</strong> Uber 选择"轻资本"路线——不自己造车，而是做 AV 车队的需求入口与运营层，一季度宣布 10 项新增/扩展 AV 合作、推出 Uber Autonomous Solutions。若 Robotaxi 绕过 Uber 直接触达乘客，是长期脱媒风险；若 Uber 凭 1.99 亿月活成为所有 AV 车队的流量总入口，则是巨大增量。这是 5-10 年维度的终局变量。</p>
+
+      <h4>海图研判</h4>
+
+      <p><strong>评级：有条件买入</strong>（三线加速的超级平台 + 刚跨过盈利拐点 + 真实缩股回购的组合，对垒 GAAP 盈利波动、净负债、以及自动驾驶脱媒的长期不确定性）。独立估值中位约 $90，12 个月概率加权目标价 <strong>$89</strong>（较现价 +20%）：悲观 $60（30%）/ 基准 $93（45%）/ 乐观 $115（25%）。当前 $74.35 的安全边际约 17%，未达 25% 的满仓门槛，故给"有条件"而非无条件买入。</p>
+
+      <p>操作：现价已贴近机械首仓 $72（公允 $90 × 80%），可小仓试建；$63 加二仓、$54 极端机会三仓。止盈三档 $110 / $128 / $150，各减 25%，最后 25% 长期持有。<strong>建议总仓位 4-6%</strong>，持有周期 3-7 年。<span class="hl-t">关键纪律：好生意难得打折，但折扣还不够深——值得开始，不值得梭哈。</span></p>
+
+      <h4>风险提示</h4>
+
+      <p>自动驾驶长期脱媒 / GAAP 盈利受股权重估剧烈波动 / 零工用工监管（司机身份认定）/ 消费与油价周期 / 竞争（DoorDash、Lyft）/ 营运资金浮存回吐拖累 FCF——任一项都可能压制股价。最坏情景下（Robotaxi 大规模脱媒或用工监管全球逆转），股价可回到 $45-55 的估值底。但盈利拐点已过 + 营业利润率 14.6% + TTM FCF $98 亿 + 双飞轮网络护城河构成质量底，<strong>$55-60 是较硬的下沿</strong>。</p>
+
+      <p>关键叙事：<strong>"全球出行+外卖双巨头 + 盈利拐点 + 真实缩股复利"的超级平台，对垒"GAAP 盈利波动 + 净负债 + 自动驾驶脱媒 + 安全边际未达 25%"的估值与结构性风险</strong>。Uber 不是给追求确定性的人——它的护城河依赖执行与规模、终局受技术冲击；它是给愿意在好生意打折时分批建仓、然后耐心等盈利率爬坡与 AV 迷雾散开的成长型投资者。好生意难得打折，但折扣还不够深，所以我说：值得开始，不值得梭哈。下一个催化剂：2026-08-04 Q2 2026 财报。</p>
+
+      <p class="haitu-sign">—— 海图，灯下落笔，明日再观风浪。</p>
+
+      <p class="haitu-disc">⚠️ 免责声明：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，不构成任何投资建议。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div>《海图夜读》 · Uber UBER Q1 2026 海图研判</div>
+  <div style="margin-top:6px;">发布日 2026-05-06 · 研判日 2026-07-11 · 数据来源 Uber Q1 2026 官方财报新闻稿（SEC 8-K exhibit 99.1 + IR PDF）+ FY2025 10-K + 电话会 transcript</div>
+</footer>
+
+<script>
+let curTheme = 'light';
+function toggleTheme() {
+  curTheme = curTheme === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', curTheme);
+  renderCharts();
+}
+
+const palette = {
+  light: { accent: '#8a9a8e', accent2: '#7b8fa0', accent3: '#b08d7a', gold: '#b9a06a', red: '#b87070', green: '#7a9a7a', grid: '#e5ddd5', text: '#7a706a' },
+  dark:  { accent: '#8a9a8e', accent2: '#8fabbf', accent3: '#c9a48e', gold: '#c9b07a', red: '#c08080', green: '#8aaa8a', grid: '#3e3a35', text: '#a09890' }
+};
+
+let charts = {};
+function renderCharts() {
+  Object.values(charts).forEach(c => c && c.destroy && c.destroy());
+  charts = {};
+  const p = palette[curTheme];
+  Chart.defaults.color = p.text;
+  Chart.defaults.borderColor = p.grid;
+
+  const quarters = ['Q1 25','Q2 25','Q3 25','Q4 25','Q1 26'];
+
+  const rev = [11.53, 12.65, 13.47, 14.37, 13.20];
+  const gbYoy = [14, 17, 21, 22, 25];
+  charts.rev = new Chart(document.getElementById('chartRev'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { type:'bar', label: '总营收 ($B)', data: rev, backgroundColor: p.accent + 'CC', yAxisID: 'y' },
+      { type: 'line', label: '总订单额 GB YoY %', data: gbYoy, borderColor: p.red, backgroundColor: p.red, tension: 0.3, yAxisID: 'y1' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false }, y1: { position: 'right', grid: { drawOnChartArea: false }, ticks: { callback: v => v + '%' } } } }
+  });
+
+  const opMargin = [10.6, 11.5, 8.3, 12.3, 14.6];
+  const ebitdaMargin = [4.4, 4.5, 4.5, 4.6, 4.6];
+  charts.margin = new Chart(document.getElementById('chartMargin'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { type: 'bar', label: '调整后 EBITDA 占 GB %', data: ebitdaMargin, backgroundColor: p.gold + 'CC', yAxisID: 'y1' },
+      { type: 'line', label: 'GAAP 营业利润率 %', data: opMargin, borderColor: p.green, backgroundColor: p.green, tension: 0.3, yAxisID: 'y' }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { position: 'left', beginAtZero: true, suggestedMax: 18, ticks: { callback: v => v + '%' } }, y1: { position: 'right', beginAtZero: true, suggestedMax: 6, grid: { drawOnChartArea: false }, ticks: { callback: v => v + '%' } } } }
+  });
+
+  charts.segment = new Chart(document.getElementById('chartSegment'), {
+    type: 'doughnut',
+    data: {
+      labels: ['出行 Mobility', '外卖 Delivery', '货运 Freight'],
+      datasets: [{ data: [6.80, 5.07, 1.34], backgroundColor: [p.accent, p.accent3, p.accent2] }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { font: { size: 11 } } } } }
+  });
+
+  const gaapEps = [0.83, 0.63, 3.11, 0.14, 0.13];
+  const nonGaapEps = [0.50, null, null, 0.71, 0.72];
+  charts.eps = new Chart(document.getElementById('chartEPS'), {
+    type: 'bar',
+    data: { labels: quarters, datasets: [
+      { type: 'bar', label: 'GAAP 摊薄 EPS ($)', data: gaapEps, backgroundColor: p.red + 'AA' },
+      { type: 'line', label: 'Non-GAAP EPS ($)', data: nonGaapEps, borderColor: p.green, backgroundColor: p.green, tension: 0.3, spanGaps: false, pointRadius: 4 }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, ticks: { callback: v => '$' + v } } } }
+  });
+
+  buildSankey();
+}
+
+function buildSankey() {
+  const p = palette[curTheme];
+  const labels = ['总营收 $13.20','营收成本 $7.26','毛利 $5.94','运营费用 $4.02','营业利润 $1.92','股权重估损失 $1.50','税·利息·少数股东 $0.16','GAAP净利 $0.26'];
+  const data = {
+    type: 'sankey',
+    orientation: 'h',
+    node: { pad: 16, thickness: 20, line: { color: p.grid, width: 0.5 }, label: labels, color: [p.accent, p.red, p.green, p.red, p.green, p.red, p.red, p.green] },
+    link: {
+      source: [0, 0, 2, 2, 4, 4, 4],
+      target: [1, 2, 3, 4, 5, 6, 7],
+      value:  [7.26, 5.94, 4.02, 1.92, 1.50, 0.16, 0.26],
+      color: [p.red+'55', p.green+'66', p.red+'55', p.green+'66', p.red+'55', p.red+'55', p.green+'66']
+    }
+  };
+  const layout = { font: { size: 12, color: p.text }, paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)', margin: { l: 10, r: 10, t: 10, b: 10 } };
+  Plotly.react('sankey', [data], layout, { displayModeBar: false, responsive: true });
+}
+
+renderCharts();
+</script>
+
+</body>
+</html>

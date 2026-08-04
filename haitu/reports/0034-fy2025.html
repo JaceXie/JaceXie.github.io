@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>九龙建业 0034 — FY2025 全年财报深度分析 · 海图夜读</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗺️</text></svg>">
+<meta name="description" content="一家被市场当成'高杠杆 + 内地落后股'按四折定价的香港老牌地产商，账上 65% 是香港资产、香港业务利润还在 +15%——折让源于真实的杠杆与流动性，而非纯粹误读。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="九龙建业 0034 — FY2025 全年财报深度分析 · 海图夜读">
+<meta property="og:description" content="一家被市场当成'高杠杆 + 内地落后股'按四折定价的香港老牌地产商，账上 65% 是香港资产、香港业务利润还在 +15%——折让源于真实的杠杆与流动性，而非纯粹误读。">
+<meta property="og:image" content="https://jacexie.github.io/haitu/assets/og/0034-fy2025.png">
+<meta property="og:url" content="https://jacexie.github.io/haitu/reports/0034-fy2025.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="九龙建业 0034 — FY2025 全年财报深度分析 · 海图夜读">
+<meta name="twitter:description" content="一家被市场当成'高杠杆 + 内地落后股'按四折定价的香港老牌地产商，账上 65% 是香港资产、香港业务利润还在 +15%——折让源于真实的杠杆与流动性，而非纯粹误读。">
+<meta name="twitter:image" content="https://jacexie.github.io/haitu/assets/og/0034-fy2025.png">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+/* ── MORANDI PALETTE ── */
+:root {
+  --bg:        #f5f0eb;
+  --bg2:       #ece6df;
+  --card:      #ffffff;
+  --card2:     #f8f5f1;
+  --border:    #d9d0c7;
+  --text:      #4a4340;
+  --text2:     #7a706a;
+  --text3:     #a89f98;
+  --accent:    #8a9a8e;
+  --accent2:   #7b8fa0;
+  --accent3:   #b08d7a;
+  --rose:      #c09090;
+  --gold:      #b9a06a;
+  --red:       #b87070;
+  --green:     #7a9a7a;
+  --shadow:    rgba(0,0,0,0.06);
+  --chart-grid:#e5ddd5;
+}
+[data-theme="dark"] {
+  --bg:        #1e1c1a;
+  --bg2:       #28251f;
+  --card:      #2e2a25;
+  --card2:     #363230;
+  --border:    #4a4540;
+  --text:      #d4ccc4;
+  --text2:     #a09890;
+  --text3:     #706860;
+  --accent:    #8a9a8e;
+  --accent2:   #8fabbf;
+  --accent3:   #c9a48e;
+  --rose:      #c09090;
+  --gold:      #c9b07a;
+  --red:       #c08080;
+  --green:     #8aaa8a;
+  --shadow:    rgba(0,0,0,0.3);
+  --chart-grid:#3e3a35;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg); color: var(--text);
+  font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', 'SimSun', serif;
+  line-height: 1.75; font-size: 14.5px;
+  transition: background .35s, color .35s;
+}
+a { color: var(--accent2); text-decoration: none; }
+.theme-bar {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--card); border-bottom: 1px solid var(--border);
+  padding: 8px 24px; display: flex; justify-content: space-between; align-items: center;
+  backdrop-filter: blur(10px); transition: background .35s;
+}
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; text-decoration: none; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: 'Segoe UI',sans-serif; font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; text-decoration: none; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+.toggle-switch { position: relative; width: 44px; height: 22px; background: var(--border); border-radius: 11px; cursor: pointer; transition: background .3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: var(--card); border-radius: 50%; transition: transform .3s; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+.hero { padding: 48px 24px 36px; text-align: center; border-bottom: 1px solid var(--border); }
+.hero-tag { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 3px 14px; border-radius: 20px; margin-bottom: 18px; }
+.hero h1 { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.pill { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: 'Segoe UI', sans-serif; font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow); }
+.pill strong { color: var(--text); }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle { font-size: 18px; font-weight: 700; color: var(--accent3); margin-bottom: 20px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+.stitle::before { content: ''; display: block; width: 4px; height: 20px; background: var(--accent3); border-radius: 2px; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow); transition: background .35s; }
+.kpi-l { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.badge { display: inline-block; font-family: 'Segoe UI', sans-serif; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+.up   { background: rgba(122,154,122,.15); color: var(--green); }
+.dn   { background: rgba(184,112,112,.15); color: var(--red); }
+.nt   { background: rgba(123,143,160,.15); color: var(--accent2); }
+.tbl-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow); }
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Segoe UI', sans-serif; font-size: 13px; }
+.tbl th { background: var(--card2); color: var(--text3); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); }
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.cgrid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ccard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); }
+.ctitle { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 230px; }
+.agrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+.acard { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); }
+.acard h4 { font-size: 13px; color: var(--accent2); margin-bottom: 10px; text-transform: uppercase; letter-spacing: .5px; }
+.acard ul { padding-left: 16px; }
+.acard li { margin-bottom: 5px; font-size: 13px; }
+.bscore { display: flex; align-items: center; gap: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; margin-bottom: 12px; box-shadow: 0 1px 4px var(--shadow); }
+.circle { width: 62px; height: 62px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; flex-shrink: 0; border: 3px solid; font-family: 'Segoe UI', sans-serif; }
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 3px; }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.6; }
+.verdict { background: var(--card2); border: 2px solid var(--accent); border-radius: 10px; padding: 26px 28px; margin-bottom: 16px; }
+.verdict-t { font-size: 17px; font-weight: 700; color: var(--accent); margin-bottom: 10px; }
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px; text-align: center; box-shadow: 0 1px 4px var(--shadow); }
+.pbox .pl { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.pbox .pv { font-family: 'Segoe UI', sans-serif; font-size: 26px; font-weight: 800; }
+.pbox .pn { font-size: 11px; color: var(--text3); margin-top: 3px; }
+.pc { color: var(--text2); } .pf { color: var(--gold); } .ps { color: var(--green); }
+#sankey { width: 100%; height: 460px; }
+.cmt { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 26px; line-height: 1.9; font-size: 14.5px; box-shadow: 0 1px 4px var(--shadow); }
+.cmt p { margin-bottom: 14px; }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+footer { background: var(--card2); border-top: 1px solid var(--border); padding: 24px; text-align: center; color: var(--text3); font-size: 12px; margin-top: 40px; }
+@media (max-width: 768px) {
+  .cgrid,.cgrid3,.qgrid,.agrid,.pgrid { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 22px; }
+  .kpi-grid { grid-template-columns: 1fr 1fr; }
+}
+.haitu-quip { display: flex; align-items: center; gap: 18px; background: var(--card); border: 1px solid var(--border); border-left: 4px solid #b87070; border-radius: 12px; padding: 18px 24px; margin: 24px 0; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-avatar-sm { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); background: #b87070; box-shadow: 0 2px 8px rgba(184,112,112,0.18); }
+.haitu-quote { flex: 1; }
+.haitu-portrait { font-size: 15px; line-height: 1.65; color: var(--text); margin-bottom: 6px; font-weight: 600; }
+.haitu-rating-line { font-size: 13px; color: var(--text2); font-family: 'Segoe UI', sans-serif; }
+.rating-badge { display: inline-block; padding: 2px 12px; border-radius: 12px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; margin-left: 4px; }
+.rating-strong-buy { background: rgba(122,154,122,.25); color: var(--green); }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+.rating-cond-buy { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-hold { background: rgba(123,143,160,.18); color: var(--accent2); }
+.rating-sell { background: rgba(184,112,112,.18); color: var(--red); }
+.haitu-essay { background: var(--card); border: 1px solid var(--border); border-left: 4px solid #b87070; border-radius: 12px; padding: 28px 32px; margin: 24px 0; box-shadow: 0 1px 4px var(--shadow); }
+.haitu-essay-header { display: flex; align-items: center; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.haitu-avatar-lg { width: 110px; height: 110px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 3px solid var(--border); background: #b87070; box-shadow: 0 4px 14px rgba(184,112,112,0.22); }
+.haitu-name-lg { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 28px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 4px; }
+.haitu-essay-tag { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; }
+.haitu-essay-body { font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', serif; font-size: 15px; line-height: 2.0; color: var(--text); }
+.haitu-essay-body p { margin-bottom: 16px; }
+.haitu-essay-body p:first-child { font-size: 16px; font-style: italic; color: var(--text2); }
+.haitu-essay-body p:last-child { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); font-style: italic; }
+.haitu-sign { text-align: right; margin-top: 14px; font-family: 'Georgia', serif; font-size: 14px; color: var(--text2); font-style: italic; }
+@media (max-width: 768px) {
+  .haitu-quip { flex-direction: column; text-align: center; }
+  .haitu-essay-header { flex-direction: column; text-align: center; }
+  .haitu-avatar-sm { width: 80px; height: 80px; }
+  .haitu-avatar-lg { width: 90px; height: 90px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── THEME BAR ── -->
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/00034" target="_blank" rel="noopener" title="在雪球查看实时行情">雪球 00034</a>
+  </div>
+  <div class="theme-toggle">
+    <span>☀️ 浅色</span>
+    <div class="toggle-switch" id="themeBtn" onclick="toggleTheme()"></div>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-tag">FY2025 财报发布 · 2026-03-20 &nbsp;|&nbsp; 海图研判 · 2026-06-02</div>
+  <h1>九龙建业 Kowloon Development · FY2025 深度分析</h1>
+  <div class="hero-sub">HKEX: 0034 &nbsp;|&nbsp; 截至 2025-12-31 全年业绩 &nbsp;|&nbsp; 价值投资视角 · 香港住宅复苏链</div>
+  <div class="hero-pills">
+    <div class="pill">股价 <strong>HK$5.29</strong></div>
+    <div class="pill">市值 <strong>~HK$69亿</strong></div>
+    <div class="pill">每股NAV <strong>HK$13.37</strong></div>
+    <div class="pill">P/B <strong>0.40x</strong></div>
+    <div class="pill">股息率 <strong>4.5%</strong></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ── 页首短评 ── -->
+<div class="haitu-quip">
+  <div class="haitu-quote">
+    <div class="haitu-portrait">一家 1961 年的香港老牌地产商：账上六成五是香港住宅 + 投资物业，香港分部利润逆势 +15%，却被市场连同三成五的内地资产一起按四折净资产打包甩卖——折让里既有误读，也有真实的杠杆与流动性折价。</div>
+    <div class="haitu-rating-line">评级：<span class="rating-badge rating-cond-buy">有条件买入</span></div>
+  </div>
+</div>
+
+<!-- ═══ S1: KPI ═══ -->
+<section class="section">
+  <div class="stitle">核心财务指标 — FY2025（截至 2025-12-31）</div>
+  <div style="font-size:12px;color:var(--text3);margin-bottom:8px;">▎损益（单位 HK$，官方业绩公告 2026-03-20）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">营业额</div><div class="kpi-v">49.53亿</div><span class="badge dn">YoY -8.1%</span></div>
+    <div class="kpi"><div class="kpi-l">核心利润（除重估）</div><div class="kpi-v">6.28亿</div><span class="badge up">YoY +39.6%</span></div>
+    <div class="kpi"><div class="kpi-l">核心每股盈利</div><div class="kpi-v">HK$0.48</div><span class="badge up">2024: 0.36</span></div>
+    <div class="kpi"><div class="kpi-l">报告净利（含重估）</div><div class="kpi-v">1.31亿</div><span class="badge up">YoY +12.9%</span></div>
+    <div class="kpi"><div class="kpi-l">报告每股盈利</div><div class="kpi-v">HK$0.10</div><span class="badge nt">2024: 0.09</span></div>
+    <div class="kpi"><div class="kpi-l">全年每股股息</div><div class="kpi-v">HK$0.24</div><span class="badge up">YoY +9.1%</span></div>
+    <div class="kpi"><div class="kpi-l">投资物业重估亏损</div><div class="kpi-v">-3.47亿</div><span class="badge dn">非现金</span></div>
+    <div class="kpi"><div class="kpi-l">存货减值</div><div class="kpi-v">-8.42亿</div><span class="badge dn">内地为主</span></div>
+  </div>
+  <div style="font-size:12px;color:var(--text3);margin:20px 0 8px;">▎资产负债与估值（2025-12-31 末 / 现价 2026-06-02）</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">股东应占权益</div><div class="kpi-v">174.66亿</div><span class="badge nt">每股 NAV 13.37</span></div>
+    <div class="kpi"><div class="kpi-l">P/B（市净率）</div><div class="kpi-v">0.40x</div><span class="badge up">折让 ~60%</span></div>
+    <div class="kpi"><div class="kpi-l">银行贷款合计</div><div class="kpi-v">185.27亿</div><span class="badge dn">+关联贷款21.1亿</span></div>
+    <div class="kpi"><div class="kpi-l">现金及银行结余</div><div class="kpi-v">11.73亿</div><span class="badge up">2024: 7.91亿</span></div>
+    <div class="kpi"><div class="kpi-l">净负债率（银行口径）</div><div class="kpi-v">~99%</div><span class="badge up">2024: 104%</span></div>
+    <div class="kpi"><div class="kpi-l">净负债率（含母公司贷款）</div><div class="kpi-v">~111%</div><span class="badge dn">关联融资</span></div>
+    <div class="kpi"><div class="kpi-l">核心 P/E</div><div class="kpi-v">~11x</div><span class="badge nt">报告 P/E 53x</span></div>
+    <div class="kpi"><div class="kpi-l">土地储备（应占GFA）</div><div class="kpi-v">~280万㎡</div><span class="badge nt">港 + 内地</span></div>
+  </div>
+</section>
+
+<!-- ═══ S2: TABLE ═══ -->
+<section class="section">
+  <div class="stitle">分部财务明细 & 真实估值多档透视</div>
+
+  <div style="background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin-bottom:14px;font-size:13px;color:var(--accent3);">
+    💡 <strong>读懂九建的关键</strong>：报告净利 HK$1.31 亿被三笔<strong>非现金项目</strong>严重压低——投资物业重估亏损 3.47 亿 + 发展权益公允值亏损 1.48 亿 + 存货减值 8.42 亿。剔除公允值变动后的<strong>核心利润 6.28 亿（+39.6%）</strong>才反映真实经营。用报告 EPS 算 P/E（53x）会严重高估倍数；核心口径 P/E 仅约 11x。
+  </div>
+
+  <div class="tbl-wrap">
+  <table class="tbl">
+    <thead><tr>
+      <th>分部（HK$百万）</th><th>FY2025 营收</th><th>FY2024 营收</th><th>FY2025 分部利润</th><th>FY2024 分部利润</th><th>利润 YoY</th>
+    </tr></thead>
+    <tbody>
+      <tr class="hl"><td>香港物业发展</td><td>2,199.8</td><td>2,074.3</td><td>567.1</td><td>492.9</td><td style="color:var(--green)">+15.0%</td></tr>
+      <tr><td>内地物业发展</td><td>1,907.2</td><td>2,373.2</td><td style="color:var(--red)">-13.6</td><td>10.8</td><td style="color:var(--red)">转亏</td></tr>
+      <tr class="hl"><td>物业投资（香港为主）</td><td>264.7</td><td>285.7</td><td>213.6</td><td>229.1</td><td style="color:var(--red)">-6.8%</td></tr>
+      <tr><td>其他（物管/财务/库务）</td><td>581.6</td><td>656.6</td><td>43.1</td><td>42.1</td><td style="color:var(--green)">+2.2%</td></tr>
+      <tr class="hl"><td>分部利润合计</td><td>4,953.3</td><td>5,389.8</td><td>810.1</td><td>774.9</td><td style="color:var(--green)">+4.5%</td></tr>
+      <tr><td>分占联营公司溢利（内地）</td><td>—</td><td>—</td><td>84.4</td><td>21.7</td><td style="color:var(--green)">+289%</td></tr>
+      <tr><td>分占合营企业溢利（内地）</td><td>—</td><td>—</td><td>28.0</td><td>0.1</td><td style="color:var(--green)">大增</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin-top:14px;">
+    <div style="font-size:13px;font-weight:600;color:var(--accent3);margin-bottom:8px;">真实估值多档透视（现价 HK$5.29）</div>
+    <table class="tbl" style="font-size:13px;">
+      <thead><tr><th>计算口径</th><th>每股基准</th><th>倍数 / 折让</th><th>可靠度</th></tr></thead>
+      <tbody>
+        <tr><td>报告 P/E（含公允值变动）</td><td>EPS HK$0.10</td><td style="color:var(--red)">~53x</td><td>⚠️ 被非现金减值扭曲，失真</td></tr>
+        <tr class="hl"><td>核心 P/E（除重估）</td><td>核心EPS HK$0.48</td><td style="color:var(--green)">~11x</td><td>✅ 最反映真实经营</td></tr>
+        <tr><td>P/B（市净率）</td><td>NAV HK$13.37</td><td style="color:var(--green)">0.40x（折让60%）</td><td>✅ 地产股核心估值锚</td></tr>
+        <tr><td>所有者盈余收益率</td><td>核心利润6.28亿/市值</td><td style="color:var(--gold)">9.1%</td><td>📊 经营性回报率</td></tr>
+        <tr><td>股息率</td><td>DPS HK$0.24</td><td style="color:var(--gold)">4.5%</td><td>📊 核心利润派息率50%</td></tr>
+      </tbody>
+    </table>
+    <div style="font-size:11.5px;color:var(--text3);margin-top:8px;">注：净资产 HK$13.37 为<strong>账面 NAV</strong>；其中发展中物业存货按成本与可变现净值孰低入账（非按市值），实际重估 NAV 可能更高；但 ~99% 净负债率意味着股权被高度放大，折让中有相当部分由杠杆与流动性合理解释。</div>
+  </div>
+</section>
+
+<!-- ═══ S3: CHARTS ═══ -->
+<section class="section">
+  <div class="stitle">经营与估值可视化</div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">分部营业额 FY2025（HK$百万）</div><div class="cwrap"><canvas id="c1"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">分部利润 FY2024 vs FY2025（HK$百万）</div><div class="cwrap"><canvas id="c2"></canvas></div></div>
+  </div>
+  <div class="cgrid">
+    <div class="ccard"><div class="ctitle">核心利润 vs 报告净利（HK$百万）</div><div class="cwrap"><canvas id="c3"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">香港住宅价格指数（RVD，2025.6→2026.4）</div><div class="cwrap"><canvas id="c5"></canvas></div></div>
+  </div>
+  <div class="cgrid3">
+    <div class="ccard"><div class="ctitle">总资产地区/分部分布</div><div class="cwrap"><canvas id="c6"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">每股 NAV vs 现价（HK$）</div><div class="cwrap"><canvas id="c4"></canvas></div></div>
+    <div class="ccard"><div class="ctitle">12 个月目标价情景（HK$）</div><div class="cwrap"><canvas id="c7"></canvas></div></div>
+  </div>
+</section>
+
+<!-- ═══ S4: SANKEY ═══ -->
+<section class="section">
+  <div class="stitle">资金流向桑基图 — FY2025（HK$百万）</div>
+  <div class="ccard">
+    <div style="font-size:12px;color:var(--text3);margin-bottom:6px;">营业额 → 核心经营盈余，如何被非现金重估亏损与财务费用吞噬，再由分占联营/合营 + 递延税抵免回补，最终落到报告溢利 HK$1.24 亿。剔除重估损失的<strong>核心利润为 HK$6.28 亿</strong>。</div>
+    <div id="sankey"></div>
+  </div>
+</section>
+
+<!-- ═══ S4b: MODULE 5 FINANCIAL DEEP DIVE ═══ -->
+<section class="section">
+  <div class="stitle">模块 5 · 财务深度与所有者盈余</div>
+  <div class="agrid">
+    <div class="acard">
+      <h4>🩺 资产负债健康度（2025-12-31 末）</h4>
+      <ul>
+        <li>流动比率 <strong>~5.0x</strong>（流动资产 227.7 亿 / 流动负债 45.3 亿）——但分子大头是发展中物业存货 193.9 亿，并非速动资产</li>
+        <li>有息负债：短期银行贷款 16.86 亿 + 长期银行贷款 168.41 亿 + 母公司贷款 21.12 亿 = <strong>206.4 亿</strong></li>
+        <li>真实净负债 = 206.4 − 现金 11.7 = <strong>194.7 亿</strong>；净负债率 99%（银行口径）/ 111%（含母公司）</li>
+        <li>现金 11.73 亿（+48% YoY），流动性改善；FY25 总利息 7.89 亿中 <strong>6.5 亿资本化</strong>计入存货</li>
+      </ul>
+    </div>
+    <div class="acard">
+      <h4>📐 盈利质量与所有者盈余</h4>
+      <ul>
+        <li>毛利率 ~54%（含高毛利收租）；核心净利率 <strong>12.7%</strong>（核心利润 6.28 / 营收 49.5）</li>
+        <li>核心 ROE <strong>~3.6%</strong>（6.28 / 174.66 亿）；报告 ROE 0.75%——低回报是结构短板</li>
+        <li><strong>所有者盈余 ≈ 核心利润 6.28 亿 + 折旧摊销 0.11 亿 ≈ 6.4 亿</strong>；发展商维护性 capex 极低（购地/建造走存货与经营现金流），所有者盈余收益率约 <strong>9.3%</strong></li>
+        <li>现金流提示：发展商经营现金流随购地节奏剧烈波动，单年 FCF 不具代表性，应以"核心利润 + 去化回款"判断</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ S5: MODULES 1-3 ═══ -->
+<section class="section">
+  <div class="stitle">模块 1-3 · 公司概览 / 管理层 / 商业模式</div>
+  <div class="agrid">
+    <div class="acard">
+      <h4>🏛️ 模块1 · 公司概览与背景</h4>
+      <ul>
+        <li>1961 年创立（创办人吴少璋等），1995-07-04 于港交所主板上市，股票代码 0034</li>
+        <li>2002 年<strong>保利达（Polytec）集团取得控制权</strong>，转型为港 + 内地双地区开发商；2005 年收购保利达资产</li>
+        <li>控股股东 New Explorer Developments 持股 <strong>73.46%</strong>，控制链：区永燊 → New Explorer → Intellinsight → 九建</li>
+        <li>业务：物业发展、投资及管理 + 金融投资；横跨香港与内地（沈阳/天津/上海/佛山/珠海/山西等）</li>
+        <li>土地储备约 <strong>280 万㎡</strong> 应占可发展 GFA（2025 年末）</li>
+      </ul>
+    </div>
+    <div class="acard">
+      <h4>👔 模块2 · 管理层评估</h4>
+      <ul>
+        <li>区永燊任<strong>主席兼行政总裁</strong>（2002 年起），亦为母公司保利达控股主席——<span style="color:var(--red)">主席与CEO一人兼任，偏离港企管治守则</span></li>
+        <li>家族经营：执行董事含其子区沛君、女婿林容曦；配偶吴志敏任非执董</li>
+        <li><strong>主人翁信号强</strong>：区永燊于截至 2026-01 的 12 个月内净增持约 <strong>HK$1.67 亿</strong> 股份</li>
+        <li>资本配置：逆周期保持盈利、净负债率自 104%→99% 稳步下行、坚持派息</li>
+        <li>治理瑕疵：与保利达系大量<strong>关联交易</strong>（贷款/共同投资/分派）——下文风险栏详述</li>
+      </ul>
+    </div>
+  </div>
+  <div class="agrid">
+    <div class="acard">
+      <h4>💼 模块3 · 商业模式（海图一句话测试）</h4>
+      <ul>
+        <li><strong>一句话</strong>：低价囤香港 + 内地土地，盖楼卖楼赚发展利润；同时持有香港投资物业收租，用银行 + 母公司杠杆放大权益回报。</li>
+        <li>三大引擎：① 香港物业发展（FY25 利润 5.67 亿，+15%）② 内地物业发展（FY25 转亏 -0.14 亿）③ 香港投资物业收租（毛租金 2.65 亿）</li>
+        <li>FY2025 香港预售/销售合计约 HK$22 亿（应占 18 亿），内地约 RMB16 亿（应占 13 亿）</li>
+        <li>议价能力：香港作为寡头之一的边缘玩家，无定价权；靠地段与成本取胜</li>
+      </ul>
+    </div>
+    <div class="acard">
+      <h4>🏗️ 旗舰项目与催化剂</h4>
+      <ul>
+        <li><strong>西营盘 Upper Manor（持60%）</strong>：2025-07 推售，111 个住宅单位<strong>迅速售罄</strong>，2026 上半年落成——香港复苏的实证</li>
+        <li><strong>牛池湾清水湾道项目（持100%）</strong>：GFA 逾 200 万平方呎，<strong>双轨 MTR 交汇枢纽</strong>（彩虹站 + 东九龙智慧绿色集体运输），首期 2027 上半年落成——最具战略意义的核心储备</li>
+        <li>大角咀福澤街（持50%）2026 中动工；内地山西保利达·贵府一期售出逾 90%</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ S6: MOAT + MANAGEMENT DISCUSSION ═══ -->
+<section class="section">
+  <div class="stitle">模块 4 & 6 · 经济护城河 + 管理层讨论（业绩公告口径）</div>
+
+  <div style="background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:12px 16px;margin-bottom:16px;font-size:12.5px;color:var(--text2);">
+    📌 港股地产商<strong>半年度披露、无季度电话会与逐字稿</strong>，故"模块6电话会分析"以业绩公告中的"市场回顾 / 业务回顾 / 前景"管理层论述替代，并标注利好/中性/利空。
+  </div>
+
+  <div class="agrid">
+    <div class="acard">
+      <h4>🛡️ 模块4 · 五大护城河评分</h4>
+      <ul>
+        <li><strong>网络效应</strong>：无 — 地产开发不具网络属性</li>
+        <li><strong>转换成本</strong>：无 — 一次性购房，无锁定</li>
+        <li><strong>成本优势</strong>：窄 — 早年低价土储 + 母公司低息融资（关联贷款利率约4.4%）</li>
+        <li><strong>无形资产</strong>：窄 — 香港稀缺土储（清水湾道枢纽地段）有一定壁垒，但品牌不及SHKP/长实</li>
+        <li><strong>有效规模</strong>：窄 — 香港发展商寡头格局（前三占新供应约60%），九建是边缘参与者</li>
+        <li>结论：<span style="color:var(--gold)">整体窄护城河</span>，价值更多来自资产折价而非生意质量</li>
+      </ul>
+    </div>
+    <div class="acard">
+      <h4>🗣️ 模块6 · 管理层论述要点</h4>
+      <ul>
+        <li><span style="color:var(--green)">🟢</span> "下半年市况显著回暖，美元利率下行 + 租金续升刺激量价齐升"——确认复苏</li>
+        <li><span style="color:var(--green)">🟢</span> "Upper Manor 111 单位迅速售罄，成绩理想"——香港去化强</li>
+        <li><span style="color:var(--accent2)">📊</span> "写字楼租金与空置率仍受压"——投资物业毛租金 -7.3%</li>
+        <li><span style="color:var(--red)">🔴</span> "内地各项目审慎推进"——内地分部转亏、存货减值 8.42 亿</li>
+        <li><span style="color:var(--green)">🟢</span> "将积极在香港住宅市场寻找投资机会，为未来盈利增长奠基"——加码香港</li>
+        <li><span style="color:var(--accent2)">📊</span> 2026 年预期：Upper Manor 入账 + 租金将贡献集团主要业绩</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ S7: VALUATION (8 METHODS) ═══ -->
+<section class="section">
+  <div class="stitle">模块 7 · 多模型估值（8 种方法 · 独立推导不锚定现价）</div>
+
+  <div class="tbl-wrap" style="margin-bottom:16px;">
+    <table class="tbl" style="font-size:13px;">
+      <thead><tr><th>估值方法</th><th>适用度</th><th>关键假设</th><th>每股内在价值</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td>① 相对估值 P/B</td><td>★★★★★</td><td>地产股核心锚；公允 P/B 0.55x（小盘高杠杆港商）</td><td style="color:var(--gold)">HK$7.35</td></tr>
+        <tr class="hl"><td>② NAV（账面修正）</td><td>★★★★★</td><td>内地发展资产打 4 折减值后股东权益÷股数</td><td style="color:var(--gold)">HK$10.12</td></tr>
+        <tr class="hl"><td>③ SOTP 分部加总</td><td>★★★★★</td><td>香港资产净负债后≈6.2/股 + 内地按半价 + 联营合营</td><td style="color:var(--gold)">HK$8.00</td></tr>
+        <tr><td>④ 所有者盈余收益率</td><td>★★★★</td><td>核心利润 6.28 亿 ÷ 8% 要求回报</td><td>HK$6.01</td></tr>
+        <tr><td>⑤ DDM 股利折现</td><td>★★★★</td><td>DPS 0.24，要求回报 5.5%，温和增长</td><td>HK$4.80</td></tr>
+        <tr><td>⑥ 反向 DCF / 隐含</td><td>★★★</td><td>现价 0.40x 隐含"内地资产近乎归零 + 永不重估"</td><td>偏悲观定价</td></tr>
+        <tr><td>⑦ 核心 P/E</td><td>★★★</td><td>核心 EPS 0.48 × 重估至 13-14x</td><td>HK$6.24-6.72</td></tr>
+        <tr><td>⑧ PEG / EV-EBITDA</td><td>★☆</td><td>发展商盈利波动大、不适用</td><td>不适用</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="verdict">
+    <div class="verdict-t">🎯 估值综合：独立内在价值中位 ~HK$7.50</div>
+    <div style="line-height:1.8;margin-bottom:8px;">以地产股最适用的三法（P/B、NAV、SOTP）为主、收益法为辅，独立估值中位约 <strong>HK$7.50</strong>（约 0.56x 账面 NAV）。现价 HK$5.29 对应<strong>约 29% 安全边际</strong>，已低于"首仓价 = 中位×80% = HK$6.00"。<br>关键洞察：以香港资产（投资物业 13.2 亿 + 香港发展 15.6 亿）减去<strong>全部</strong>有息负债，每股净值已约 HK$6.2——即用现价买香港，等于<strong>免费获得内地全部项目 + 联营合营权益</strong>。但这一折价同时被 ~99-111% 净负债率、薄流动性、内地敞口合理解释——便宜，但"便宜有便宜的理由"。</div>
+    <div class="pgrid">
+      <div class="pbox"><div class="pl">独立内在价值中位</div><div class="pv pf">HK$7.50</div><div class="pn">约 0.56x NAV</div></div>
+      <div class="pbox"><div class="pl">当前股价</div><div class="pv pc">HK$5.29</div><div class="pn">安全边际 ~29%</div></div>
+      <div class="pbox"><div class="pl">账面每股 NAV</div><div class="pv ps">HK$13.37</div><div class="pn">现价 0.40x</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ S8: COMPETITION + TECH + CATALYST + RISK ═══ -->
+<section class="section">
+  <div class="stitle">模块 8-11 · 竞争行业 / 技术面 / 催化剂 / 风险矩阵</div>
+  <div class="agrid">
+    <div class="acard">
+      <h4>🏢 模块8 · 竞争与行业（同业估值）</h4>
+      <ul>
+        <li>香港住宅复苏确立：RVD 指数 4 月 2026 报 <strong>316.6</strong>，连涨 11 月 +10.51%，30 月新高；Q1 2026 成交量 <strong>+53% YoY</strong></li>
+        <li>同业 P/B：九建 0.40x ｜ 大昌 0088 <strong>0.33x</strong>（更便宜）｜ SHKP 0016 ~0.45x ｜ 恒隆 0101 ~0.22x</li>
+        <li>大型股（SHKP/长实/恒基）是复苏<strong>共识重估载体</strong>（投行料 SHKP 折让收窄至22%）；九建是更高 beta 的深价值代理</li>
+        <li>九建折让主因：高杠杆 + 微市值流动性 + 内地敞口 + 报告口径派息未覆盖——并非纯隐藏资产故事</li>
+      </ul>
+    </div>
+    <div class="acard">
+      <h4>📈 模块9 · 技术面（次要参考，2026-06-02）</h4>
+      <ul>
+        <li>现价 HK$5.29，52 周区间 <strong>HK$2.75–5.45</strong>，<span style="color:var(--red)">逼近区间顶部</span></li>
+        <li>12 个月涨幅 <strong>+73%</strong>，站上全部均线（50日5.01/200日4.77）</li>
+        <li>RSI(14) ≈ 66，接近超买；MACD 正；技术面"强力买入"但短线追高风险</li>
+        <li>关键阻力 HK$5.45（52周高）；支撑 5.01（50日）/ 4.77（200日）</li>
+      </ul>
+    </div>
+  </div>
+  <div class="agrid">
+    <div class="acard">
+      <h4>🚀 模块10 · 增长催化剂</h4>
+      <ul>
+        <li><span style="color:var(--green)">短期(6-12月)</span>：Upper Manor 2026 上半年落成入账；香港 1H2026 中报验证去化与去杠杆</li>
+        <li><span style="color:var(--green)">利率顺风</span>：HKMA 2025 三次降息，1 月 HIBOR 自 2025-05 的 0.57% 虽回升至 ~2.58%，但按揭利率仍较 2024 大降</li>
+        <li><span style="color:var(--green)">需求</span>：内地买家激增（2026-04 占成交 27.5%、2 年新高）；撤辣后无额外印花税</li>
+        <li><span style="color:var(--green)">长期(3-5年)</span>：清水湾道 200 万呎 MTR 枢纽 2027 起分期落成，重塑东九龙资产价值</li>
+        <li>投行 2026 香港楼价预测：高盛 +12-15%、瑞银 +10%、摩根士丹利 +10%</li>
+      </ul>
+    </div>
+    <div class="acard">
+      <h4>⚠️ 模块11 · 风险矩阵（1-5 评分）</h4>
+      <ul>
+        <li><strong>财务/杠杆</strong> ★★★★☆ — 净负债率 99-111%，股权被高度放大</li>
+        <li><strong>内地敞口</strong> ★★★★☆ — 沈阳/天津等项目转亏、存货减值；内地楼市未稳</li>
+        <li><strong>治理/关联交易</strong> ★★★★☆ — 主席兼CEO + 保利达系贷款/共投/分派</li>
+        <li><strong>流动性</strong> ★★★★☆ — 73.46% 控股、非港股通标的、日成交清淡</li>
+        <li><strong>估值/时点</strong> ★★★☆☆ — 已 +73%、逼近52周高</li>
+        <li><strong>宏观</strong> ★★★☆☆ — HIBOR 回升 / 美联储路径 / 内地政策</li>
+        <li><strong>🦢 黑天鹅</strong>：内地项目大额再减值 + HIBOR 急升 + 再融资收紧三杀，杠杆向下反噬权益</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ S9: SHAREHOLDER RETURN ═══ -->
+<section class="section">
+  <div class="stitle">模块 12 · 股东回报分析</div>
+  <div class="agrid">
+    <div class="acard">
+      <h4>💰 12.1 给了多少？</h4>
+      <ul>
+        <li>FY2025 每股股息 <strong>HK$0.24</strong>（中期0.10 + 末期0.14），现金总额约 HK$3.13 亿</li>
+        <li>FY2024（同为12月历）HK$0.22；同比 +9.1%</li>
+        <li>Trailing 股息率约 <strong>4.5%</strong>（现价）</li>
+        <li>无股份回购（港股发展商常态）</li>
+      </ul>
+    </div>
+    <div class="acard">
+      <h4>⚖️ 12.2 给的方式好不好？</h4>
+      <ul>
+        <li>派息率：占<strong>核心利润 50%</strong>（健康）；占报告净利 240%（被非现金减值压低分母，非真实超额派发）</li>
+        <li><span style="color:var(--red)">含金量打折点</span>：长期提供<strong>以股代息（scrip）</strong>选项 → 加权股数自 12.36 亿升至 13.06 亿，构成温和稀释</li>
+        <li>2024 年完成 5 合 1 并股 + 年结由 3 月改 12 月</li>
+      </ul>
+    </div>
+  </div>
+  <div class="acard" style="margin-top:0;">
+    <h4>🔮 12.3 能不能继续给？ + 模块小结</h4>
+    <ul>
+      <li>核心利润 6.28 亿对 3.13 亿股息<strong>覆盖约 2 倍</strong>，可持续性尚可；但发展商现金流随土储购置波动大</li>
+      <li>资本优先级：去杠杆（净负债率 104%→99%）+ 加码香港土储 > 提高派息；内地沉淀资本是机会成本</li>
+      <li>主席净增持 HK$1.67 亿 = 比派息更强的信心信号</li>
+      <li style="color:var(--accent3);font-weight:600;">小结：股东回报"温和且以股代息含金量打折"——稳定派息 + 内部人增持是亮点，但 scrip 稀释 + 无注销式回购令其难称积极。</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══ S10: SCORECARD ═══ -->
+<section class="section">
+  <div class="stitle">模块 13 · 海图评分卡 · 6 维 A-D 等级</div>
+
+  <div class="bscore"><div class="circle cr">C+</div><div class="bd">
+    <h4>① 生意可预测性</h4>
+    <p>地产发展周期性强、收入与报告利润随入账节奏与公允值大幅波动（FY25 营收 -8%、报告净利受 4.95 亿重估损失扭曲）。香港收租（毛租 2.65 亿）较稳但占比小，内地添不确定性。核心利润更平稳，但能见度整体偏低。</p>
+  </div></div>
+
+  <div class="bscore"><div class="circle cr">C+</div><div class="bd">
+    <h4>② 经济护城河</h4>
+    <p>整体窄护城河。香港稀缺土储（清水湾道双轨枢纽地段）+ 母公司低息融资构成一定壁垒，但作为寡头边缘玩家无定价权，品牌远逊 SHKP/长实。价值来自资产折价而非生意质量。</p>
+  </div></div>
+
+  <div class="bscore"><div class="circle cw">B-</div><div class="bd">
+    <h4>③ 管理层质量</h4>
+    <p>利益高度绑定（控股 73.46% + 主席 12 个月净增持 HK$1.67 亿），长期任期、逆周期保持盈利、稳步去杠杆——主人翁底色清晰。但主席兼任 CEO（偏离管治守则）+ 与保利达系大量关联交易，是治理上的实质扣分项。</p>
+  </div></div>
+
+  <div class="bscore"><div class="circle cr">C</div><div class="bd">
+    <h4>④ 财务质量</h4>
+    <p>核心 ROE 仅约 3.6%（6.28 亿 / 174.66 亿），净负债率 99-111% 偏高，利息覆盖薄（FY25 资本化利息达 6.5 亿）。资产真实、现金 11.7 亿且在改善，但低回报 + 高杠杆是结构性短板。</p>
+  </div></div>
+
+  <div class="bscore"><div class="circle cr">C+</div><div class="bd">
+    <h4>⑤ 资本配置纪律</h4>
+    <p>股息由核心利润覆盖（50% 派息率）但以股代息温和稀释；去杠杆 + 加码香港土储方向正确，但内地资本沉淀拖累回报。主席持续增持是正面纪律信号。综合中性偏弱。</p>
+  </div></div>
+
+  <div class="bscore"><div class="circle cw">B</div><div class="bd">
+    <h4>⑥ 估值与安全边际</h4>
+    <p>0.40x 账面 NAV、~60% 折让，现价较独立内在价值 HK$7.50 有约 29% 安全边际；以香港资产净负债后即覆盖现价，内地近乎免费。最强一维——但高杠杆令折价有部分合理性，非纯错杀。</p>
+  </div></div>
+
+  <div style="background:rgba(184,112,112,.08);border:1px solid rgba(184,112,112,.3);border-radius:10px;padding:16px 20px;margin-top:16px;">
+    <div style="font-size:13px;font-weight:700;color:var(--red);margin-bottom:8px;">🚩 红旗排查（非评分项 · 触发"有疑问"则封顶有条件买入）</div>
+    <div style="font-size:12.5px;line-height:1.7;color:var(--text2);">
+      ① <strong>关联交易密集</strong>：母公司保利达贷款 HK$21.1 亿（利率~4.4%）、惠州/珠海项目共同投资、FY2025 收保利达分派 HK$7.59 亿——均为与 73.46% 控股股东私人集团的连续关联交易，少数股东需高度关注。<br>
+      ② <strong>主席兼任 CEO</strong>，偏离港企管治守则。<br>
+      ③ <strong>经常性重估/减值</strong>：投资物业 -3.47 亿、发展权益 -1.48 亿、存货减值 -8.42 亿。<br>
+      ④ <strong>薄流动性</strong>：73.46% 控股、非港股通、日成交清淡。<br>
+      → 以上属<strong>已充分披露</strong>的长期结构特征（非财务造假），但足以将综合评级<strong>封顶于「有条件买入」</strong>。
+    </div>
+  </div>
+</section>
+
+<!-- ═══ S11: VERDICT ═══ -->
+<section class="section">
+  <div class="stitle">投资决策 · 12 个月目标价与分批策略</div>
+
+  <div class="verdict">
+    <div class="verdict-t">⚖️ 综合评级：有条件买入（Conditional Buy）</div>
+    <div style="line-height:1.8;margin-bottom:14px;">
+      价值真实（29% 安全边际、香港利润引擎 +15%、内地几近免费、内部人增持、去杠杆），但被四道结构性约束封顶——<strong>高杠杆、关联交易、薄流动性、内地敞口</strong>。这是"赔率不错的深价值地产股"，不是"高质量复利机"。对风险厌恶者，在 1H2026 中报确认去杠杆前，其本质等同<strong>持有观望</strong>。
+    </div>
+    <div class="pgrid">
+      <div class="pbox"><div class="pl">悲观目标价（25%）</div><div class="pv pc">HK$4.30</div><div class="pn">复苏停滞+内地再减值</div></div>
+      <div class="pbox"><div class="pl">基准目标价（50%）</div><div class="pv pf">HK$6.60</div><div class="pn">复苏续 + 去杠杆，+25%</div></div>
+      <div class="pbox"><div class="pl">乐观目标价（25%）</div><div class="pv ps">HK$8.50</div><div class="pn">强复苏 + 内地企稳重估</div></div>
+    </div>
+    <div style="background:rgba(185,160,106,.1);border:1px solid rgba(185,160,106,.3);border-radius:8px;padding:14px;">
+      <div style="color:var(--gold);font-weight:700;margin-bottom:6px;">📐 分批建仓（首仓=内在价值中位 HK$7.50 × 80%）</div>
+      <div style="font-size:13px;line-height:1.9;">
+        • <strong>首仓 HK$6.00</strong>（中位×80%）— 现价 HK$5.29 已低于首仓价，处早期建仓区<br>
+        • <strong>二仓 HK$5.25</strong>（×70%）— 接近现价，可分批<br>
+        • <strong>三仓 HK$4.50</strong>（×60%）— 深跌加码区<br>
+        • <strong>仓位</strong>：组合 2-4% 试探仓；1H2026 中报见"净负债率续降 + 香港回款延续 + 内地无新减值"→ 加至 5-6%<br>
+        • <strong>止盈</strong>：① HK$6.60 减 1/3 ② HK$8.00 再减 1/3 ③ HK$9.50 留最后 25% 长持（博 NAV 折让收窄）<br>
+        • <strong>放弃条件</strong>：净负债率回升 / 内地再大额减值 / HIBOR 急升 → 降级观察，转向净现金的大昌 0088
+      </div>
+    </div>
+  </div>
+
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 20px;font-size:12.5px;color:var(--text2);">
+    <strong style="color:var(--accent3);">关键监控指标</strong>：① 1H2026 中报净负债率（盼 <99% 续降）② 香港物业合约销售/回款 ③ 内地投资物业有无新减值 ④ 投资物业毛租金能否止跌 ⑤ HIBOR 走向 ⑥ 主席增持是否延续。<strong style="color:var(--accent3);">下一催化剂</strong>：2026 年 8 月中期业绩（FY2026 H1）。
+  </div>
+</section>
+
+<!-- ═══ S12: HAITU ESSAY ═══ -->
+<section class="section">
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记 · 800-1200 字</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p>市场给地产股的折让，常常同时藏着两样东西：一份误读，和一份它不愿明说的真相。分辨这两者，是深价值的全部功夫。</p>
+
+      <p>九龙建业，1961 年的香港老牌发展商，今天的样子是：一边盖楼卖楼赚发展利润，一边持有香港物业收租，用银行加母公司的杠杆，把一块块土地放大成股东权益。生意不复杂，复杂的是市场怎么给它定价。</p>
+
+      <p>先说它做对的。截至 2025 年底，香港住宅二手价格已连涨十一个月、累计逾一成，西营盘 Upper Manor 的 111 个单位推出即售罄。九建的香港物业发展分部利润逆势 +15% 到 5.67 亿，核心利润全年 +39.6% 到 6.28 亿——这不是故事，是已经落到报表里的数字。可它的报告净利却只有 1.31 亿，被投资物业重估 3.47 亿、发展权益 1.48 亿、存货减值 8.42 亿这三笔非现金账目压得几乎看不见。于是用报告口径算，市盈率高达 53 倍；用核心口径算，不过 11 倍。市场先生在这里，又一次把"账面波动"误当成了"经营恶化"。</p>
+
+      <p>再说它便宜的真相。每股账面净资产 13.37 港元，现价 5.29，只有 0.4 倍——六折还多。我把它拆开看：单是香港的投资物业（132 亿）加香港发展资产（156 亿），减去全部有息负债，每股净值就已约 6.2 港元。换句话说，按现价买，你拿到的香港资产已经盖过股价，内地那一摊——沈阳、天津、佛山、珠海——几乎是白送的期权。这是 SOTP 给出的、最朴素的安全边际。</p>
+
+      <p>但便宜从不是无缘无故。九建的净负债率在 99% 到 111% 之间，股权被高度放大，资产稍有风吹草动，权益就剧烈摆动；内地分部已经转亏、计提减值；主席区永燊一人兼任 CEO，又与母公司保利达系有密集的贷款、共同投资与分派往来——这些都是真实的、披露在案的折价理由，不是市场的眼花。所以我说，这份折让里，既有误读，也有真相。</p>
+
+      <p>海图研判：评级<strong>有条件买入</strong>。独立估值中位约 7.5 港元（约 0.56 倍账面），现价对应约 29% 安全边际。分批：首仓 6.00（现价已在其下）、二仓 5.25、三仓 4.50；仓位先 2-4% 试探，待 2026 年中报确认"净负债率续降 + 香港回款延续 + 内地不再减值"，再加至 5-6%。止盈三档：6.60 减三分一、8.00 再减三分一、9.50 留最后四分一长持，赌 NAV 折让收窄。一个安静的旁证：过去一年，区永燊自掏约 1.67 亿港元增持——内部人用真金白银投票，往往比派息更诚实。</p>
+
+      <p>风险提示：其一，杠杆是双刃，HIBOR 急升或再融资收紧会让权益向下反噬；其二，内地楼市未稳，项目大额再减值会吞掉香港的进步；其三，73.46% 控股、非港股通标的，流动性极薄，且已 +73%、逼近五十二周高，追高需谨慎。若关键假设证伪，应降级观察，转向净现金、零杠杆的大昌地产。</p>
+
+      <p class="haitu-sign">—— 海图，灯下落笔，明日再观风浪。</p>
+
+      <p>免责声明：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，不构成任何投资建议。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</section>
+</div>
+
+<footer>
+  <div>九龙建业 Kowloon Development（HKEX: 0034）FY2025 全年深度分析</div>
+  <div style="margin-top:4px;">数据来源：公司 FY2025 业绩公告（2026-03-20 · 港交所披露易）、RVD / 土地注册处 / HKAB 等官方数据</div>
+  <div style="margin-top:4px;">海图夜读 · 价值投资研究 · 研判 2026-06-02 · 莫兰迪版</div>
+</footer>
+
+<script>
+/* ── THEME ── */
+function toggleTheme() {
+  const h = document.documentElement;
+  h.dataset.theme = h.dataset.theme === 'dark' ? 'light' : 'dark';
+  buildSankey();
+}
+function cc() {
+  const s = getComputedStyle(document.documentElement);
+  return {
+    grid: s.getPropertyValue('--chart-grid').trim() || '#e5ddd5',
+    txt: s.getPropertyValue('--text3').trim() || '#a89f98',
+  };
+}
+const C = cc();
+Chart.defaults.color = C.txt;
+Chart.defaults.font.family = "'Segoe UI','PingFang SC',sans-serif";
+
+/* C1: 分部营收 FY2025 */
+new Chart(document.getElementById('c1'), {
+  type:'bar', data:{ labels:['香港发展','内地发展','物业投资','其他'], datasets:[{
+    label:'HK$M', data:[2199.8,1907.2,264.7,581.6],
+    backgroundColor:['#8a9a8e','#b08d7a','#7b8fa0','#b9a06a'], borderWidth:1, borderRadius:4
+  }]},
+  options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}},
+    scales:{ y:{grid:{color:'rgba(150,140,130,.15)'},ticks:{callback:v=>v}}, x:{grid:{display:false}} } }
+});
+
+/* C2: 分部利润 FY24 vs FY25 */
+new Chart(document.getElementById('c2'), {
+  type:'bar', data:{ labels:['香港发展','内地发展','物业投资','其他'],
+    datasets:[
+      { label:'FY2024', data:[492.9,10.8,229.1,42.1], backgroundColor:'rgba(123,143,160,.5)', borderColor:'#7b8fa0', borderWidth:1, borderRadius:4 },
+      { label:'FY2025', data:[567.1,-13.6,213.6,43.1], backgroundColor:'rgba(138,154,142,.7)', borderColor:'#8a9a8e', borderWidth:1, borderRadius:4 }
+    ]},
+  options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'top',labels:{boxWidth:10}}},
+    scales:{ y:{grid:{color:'rgba(150,140,130,.15)'}}, x:{grid:{display:false}} } }
+});
+
+/* C3: 核心 vs 报告利润 */
+new Chart(document.getElementById('c3'), {
+  type:'bar', data:{ labels:['FY2024','FY2025'],
+    datasets:[
+      { label:'核心利润(除重估)', data:[450,628], backgroundColor:'rgba(122,154,122,.7)', borderColor:'#7a9a7a', borderWidth:1, borderRadius:4 },
+      { label:'报告净利(含重估)', data:[116,131], backgroundColor:'rgba(184,112,112,.6)', borderColor:'#b87070', borderWidth:1, borderRadius:4 }
+    ]},
+  options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'top',labels:{boxWidth:10}}},
+    scales:{ y:{grid:{color:'rgba(150,140,130,.15)'},ticks:{callback:v=>v}}, x:{grid:{display:false}} } }
+});
+
+/* C4: NAV vs 现价 */
+new Chart(document.getElementById('c4'), {
+  type:'bar', data:{ labels:['每股NAV','现价','内在价值中位'],
+    datasets:[{ label:'HK$', data:[13.37,5.29,7.50], backgroundColor:['#8a9a8e','#b87070','#b9a06a'], borderWidth:1, borderRadius:6 }]},
+  options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}},
+    scales:{ y:{grid:{color:'rgba(150,140,130,.15)'},ticks:{callback:v=>'$'+v}}, x:{grid:{display:false}} } }
+});
+
+/* C5: 香港住宅价格指数 */
+new Chart(document.getElementById('c5'), {
+  type:'line', data:{ labels:['25/6','25/8','25/10','25/12','26/2','26/4'],
+    datasets:[{ label:'RVD指数', data:[286.5,295.0,302.0,308.5,313.2,316.6], borderColor:'#8a9a8e', backgroundColor:'rgba(138,154,142,.12)', fill:true, tension:.35, pointRadius:4 }]},
+  options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}},
+    scales:{ y:{grid:{color:'rgba(150,140,130,.15)'}}, x:{grid:{display:false}} } }
+});
+
+/* C6: 总资产分部分布 */
+new Chart(document.getElementById('c6'), {
+  type:'doughnut', data:{ labels:['香港发展','内地发展','物业投资(港)','其他'],
+    datasets:[{ data:[15587,10610,13204,549], backgroundColor:['#8a9a8e','#b08d7a','#7b8fa0','#b9a06a'], borderColor:['#8a9a8e','#b08d7a','#7b8fa0','#b9a06a'], borderWidth:2 }]},
+  options:{ responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{position:'bottom',labels:{boxWidth:10,font:{size:10}}}, tooltip:{callbacks:{label:c=>c.label+': HK$'+c.raw+'M'}} }, cutout:'60%' }
+});
+
+/* C7: 目标价情景 */
+new Chart(document.getElementById('c7'), {
+  type:'bar', data:{ labels:['悲观','基准','乐观'],
+    datasets:[{ label:'HK$', data:[4.30,6.60,8.50], backgroundColor:['#b87070','#b9a06a','#7a9a7a'], borderWidth:1, borderRadius:6 }]},
+  options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}},
+    scales:{ y:{grid:{color:'rgba(150,140,130,.15)'},ticks:{callback:v=>'$'+v}}, x:{grid:{display:false}} } }
+});
+
+/* ── SANKEY ── */
+function buildSankey() {
+  const isDark = document.documentElement.dataset.theme === 'dark';
+  const bg = isDark ? '#2e2a25' : '#ffffff';
+  const fc = isDark ? '#d4ccc4' : '#4a4340';
+  Plotly.newPlot('sankey', [{
+    type:'sankey', orientation:'h',
+    node: {
+      pad:18, thickness:22,
+      line:{ color: isDark?'rgba(74,69,64,.5)':'rgba(200,190,180,.5)', width:1 },
+      label:['营业额 4,953','销售成本 2,277','毛利 2,677','经营及员工开支(净) 1,303','存货减值及其他 803','核心经营盈余 571','分占联营/合营 112','递延税抵免 74','投资物业重估亏损 347','发展权益重估亏损 148','财务费用净额 139','报告溢利 123'],
+      color:['#7b8fa0','#b87070','#8a9a8e','#b87070','#b87070','#8a9a8e','#8a9a8e','#8a9a8e','#b87070','#b87070','#b87070','#b9a06a']
+    },
+    link: {
+      source:[0,0, 2,2,2, 5,5,5, 6, 7,7],
+      target:[1,2, 3,4,5, 8,9,11, 10, 10,11],
+      value: [2277,2677, 1303,803,571, 347,148,76, 112, 27,47],
+      color: [
+        'rgba(184,112,112,.2)','rgba(138,154,142,.3)',
+        'rgba(184,112,112,.2)','rgba(184,112,112,.2)','rgba(138,154,142,.3)',
+        'rgba(184,112,112,.2)','rgba(184,112,112,.2)','rgba(185,160,106,.35)',
+        'rgba(138,154,142,.3)',
+        'rgba(138,154,142,.3)','rgba(185,160,106,.35)'
+      ]
+    }
+  }], {
+    paper_bgcolor:bg, plot_bgcolor:bg,
+    font:{ color:fc, family:"'Segoe UI','PingFang SC',sans-serif", size:12 },
+    margin:{t:8,b:8,l:8,r:8}
+  }, { responsive:true, displayModeBar:false });
+}
+buildSankey();
+</script>
+</body>
+</html>
