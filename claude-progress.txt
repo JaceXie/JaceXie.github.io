@@ -50,3 +50,88 @@
 
 Wave 1 完成后收尾提交，然后按 roster pending 顺序继续 Wave 2（WMT AMAT CSCO ABBV LRCX CAT MA COST UNH BAC）…
 直至 93 家全部 done。每波 ~10 家。
+
+---
+
+## 2026-08-04 · /haitu 技能恢复与优化（Part 1 完成）
+
+**技能其实没被删** —— 14 个文件全在，丢的是注册：`~/.claude/settings.json` 的
+`extraKnownMarketplaces` 缺 `haitu-night-reading-skills` 条目、`enabledPlugins` 缺
+`haitu-night-reading@haitu-night-reading-skills`。已补回（原文件备份为 .bak）。
+**需重启会话 `/haitu` 才会出现**（buffett 的 local-skills 之前也缺 marketplace，一并补了）。
+
+### 改了什么
+1. **删掉 OG 截图整套流程**（headless Chrome + _ogtmp + sleep 5 强杀）。meta 10→6 条，
+   twitter:card 改 summary，域名 jacexie.github.io → haitu.jacexie.com，新增 canonical。
+2. **83KB 模板拆开**：template.html（一份填满京东数据的完整报告，是 3 代模板漂移的根因）
+   → report-shell.html(5KB 填空) + body-skeleton.html(9KB 骨架) + report-styles.css(22KB 逐字复制)
+   + report-charts.js(5.6KB 逐字复制) + example-jd-q4-2025.html(样例改名保留，不再每次读)。
+   LLM 需要"思考填空"的面从 83KB 降到 14KB。
+3. **从源头修了 103 份存量实测出的问题**：canvas 槽位契约(39种id→固定4个)、
+   评级改 data-rating 派生(根除 .rating-hold 63金/30蓝分裂)、div.stitle→h2+section id、
+   主题开关 div→button、桑基改内联 SVG(省 1.06MB Plotly)、--accent3-ink 修章节标题
+   对比度 2.67:1→4.97:1、localStorage key 统一 'theme'、图表色改读 CSS 变量、
+   表格 data-shape/data-source、prefers-color-scheme + reduced-motion。
+4. **新增 scripts/qc.mjs**：19 项机检替代原 QC 清单里 20+ 条人工核对。禁词带白名单
+   （Munger/Elizabeth Warren/Berkshire 郡名会被误杀）。SKILL.md 里 QC 第 0 步改为跑它。
+5. **加了两个逃生舱**：draft:true 通道 + 连续 2 次不过检可走存量通道并记 escape-hatches.md。
+6. README 的「12 模块」改 13（原与 SKILL.md 打架，LLM 读到哪份决定写几个模块）。
+
+### 验证情况
+- qc.mjs 双向验证：合规 fixture 19 项全过(退出码 0)；存量 nvda 报告 25 项 FAIL（正是实测问题）。
+- 用新资产组装了一份真页面，浏览器实测：0 console 错误、亮/暗主题 token 都正确切换、
+  --bar-h 自动跟随顶栏(40/61px)、scroll-margin-top 随之算对、19 个 h2 + 0 个 div.stitle、
+  canvas id 恰为 rev/margin/segment/eps、375px 无横向滚动、表格首列 sticky、触控目标 44px。
+- 过程中修掉自己引入的 4 个缺陷：.skip/.quip-jump/.sr-only/.theme-bar-right 缺样式、
+  qc.mjs 把 <style> 里的选择器误判为评级不一致、触控目标只用 (hover:none) 在窄屏桌面失效、
+  用 height:44px 撑开关会破坏 44×22 造型（改用不可见 ::before 撑命中区）。
+
+### 未做 / 待定
+- **Part 2 站点重构未开工**（方案见 ~/.claude/plans/https-haitu-jacexie-com-kind-sifakis.md）。
+- ⚠️ **每日管线仍停摆**：PM2 里根本没有 haitu-daily-update 这个 app，logs 最后写入 6-25，
+  最后一次 chore(daily) 提交 7-11，76 条 priceUpdatedAt 全停在 7-11。门户「差距%」正在用
+  24 天前的价格算。这是 Part 2 阶段 0 第一件事。
+- 存量 103 份一律没动。
+
+---
+
+## 2026-08-04（续）· 管线救活 + META Q2 2026 首份新体系报告
+
+### 每日管线已恢复
+- `pm2 start ecosystem.config.cjs` + `pm2 save`，cron `0 6 * * *` 已注册（**`pm2 startup` 需 sudo，待用户自行执行**，否则重启后不自动拉起）。
+- publisher.js：push 前加 `fetch` + `rebase --autostash`（冲突则 abort，绝不强推）；commit 改 `execFileSync` 数组形式。
+  ——原来直接 push，远端一领先就永久静默失败，这是站点停摆 24 天没人发现的原因之一。
+- 补齐 9 份从未 git add 的报告（git 跟踪 94→103）；修 0728 中国电信 ratingClass。
+- 24 份孤儿拆解后：12 份是同公司更早一期（正常历史版本，不动）、12 份公司没进 tickers.json，
+  其中 3 份（CMCC/MINISO/Tencent）实为已存在 ticker 的旧期次，**真正新增 9 家**
+  （0034/ABT/BLK/DE/ISRG/SCHW/T/UBER/UNP），已带研判日、评级、目标价入库。
+- 线上实测：门户 76 → **88 条**，79 条价格全部刷新为 2026-08-04，`today` 已跟上。
+- ⚠️ 管线报告 **38→43 家已发新财报待重新分析**（含 MSFT/AMZN/GOOGL/AAPL/TSLA 等）。
+
+### META Q2 2026 报告（首份走新骨架，端到端跑通）
+- 数据全部一手：Q2 2026 新闻稿 Exhibit 99.1 / 10-Q(meta-20260630) / 官方电话会实录。
+- 核心事实：营收 $608.0 亿(+28%) 单季新高；营业利润率 43%→31%（含 $24 亿法律计提 +
+  $11.8 亿遣散，剔除后 +9%、约 37%）；**自由现金流 $7.84 亿(-91%)**，资本开支 $310.8 亿(+83%)
+  几乎等于经营现金流；上半年**零回购**、股息覆盖度 172%；表外未起租租赁 $2,790 亿 +
+  合同承诺 $3,493 亿。评级**持有观望**，加权公允 $615，首仓 $490（现价 $590.24，安全边际为负）。
+- 产物验证：qc.mjs **32 项机检全过**；Playwright 实测 1440px 与 375px 两档：
+  0 console 错误、4 张 Chart.js 实例数据正确、亮/暗切换时**图表网格色 #e5ddd5↔#3e3a35 跟随**
+  （证明确实从 CSS 变量读色）、19 个 section/h2、无横向页面滚动、宽表在容器内滚动且首列 sticky、
+  触控目标 44px、`--bar-h` 自动注入且 scroll-margin-top 跟随。
+- **线上体积对比**：新报告 30,536 B gzip、**0 处 Plotly**；旧 Q1 报告 23,174 B + Plotly 1,088,807 B。
+  单页下载量 1,112 KB → 31 KB（**−97%**）。页面高度 40,924px → 12,378px。
+
+### 本轮修掉的自身缺陷（都是实测发现，非推断）
+1. qc.mjs 把 `<style>` 里的 `[data-rating="买入"]` 选择器当成正文评级 → 每份合规报告都会误判不一致。
+2. qc.mjs 按非空白字符数判社媒长度，中英混排虚高约 1.7 倍 → 改为只数中日韩汉字。
+3. 抽取语料 CSS 时**丢掉了 @media 包裹**，把 nvda 的移动端规则变成无条件规则排在最后 →
+   桌面端所有网格塌成单列。已删除并在注释里写明成因。
+4. grid 轨道写 `1fr` 而非 `minmax(0,1fr)`，canvas 固有宽度把轨道撑到 568px → 375px 下整页横向滚动。
+5. report-charts.js 只判 `d.type==='line'`，图表级 line 类型的数据集拿到 borderWidth:0 → 只有点没有线。
+6. 骨架/正文用到 37 个组件类（.stock-snap/.moat-card/.risk-card/.score-card/.ec-* 等）
+   在样式表里不存在 —— 因为 CSS 抽自旧 JD 模板、骨架用的是新世代类名。已补齐并加同步警告。
+
+### 仍待用户自己做
+- `sudo pm2 startup`（开机自启）
+- GitHub Pages 打开 **Enforce HTTPS**（现在明文 http 仍返回 200，无 HSTS）
+- 重启会话让 `/haitu` 生效（settings.json 注册已补，本会话内技能列表不会刷新）
