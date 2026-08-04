@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-08-04 · NASDAQ: SPCX Q2 2026 财报已于 2026-08-04 发布 -->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>SpaceX SPCX Q2 2026 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+
+<!-- ⚠️ 无闪烁暗色：这段必须在 <style> 之前、且是同步内联脚本。
+     放到 body 末尾会让暗色用户先看到一闪的白底。
+     key 固定用 'theme'（与门户和 30 份存量报告一致，换 key 会让它们被翻回浅色）。 -->
+<script>
+(function () {
+  try {
+    var t = localStorage.getItem('theme');
+    if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', t);
+  } catch (e) { document.documentElement.setAttribute('data-theme', 'light'); }
+})();
+</script>
+
+<link rel="canonical" href="https://haitu.jacexie.com/haitu/reports/spcx-q2-2026.html">
+<meta name="description" content="一台印钞机（星链）绑着两个吞金兽（发射与 AI）—— 上市首份财报营收 +92%，但本季资本开支的 86.8% 是拿 IPO 募资填的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpaceX SPCX Q2 2026 海图研判">
+<meta property="og:description" content="一台印钞机（星链）绑着两个吞金兽（发射与 AI）—— 上市首份财报营收 +92%，但本季资本开支的 86.8% 是拿 IPO 募资填的。">
+<meta property="og:url" content="https://haitu.jacexie.com/haitu/reports/spcx-q2-2026.html">
+<meta name="twitter:card" content="summary">
+
+<!-- Chart.js：defer + 放在 head 末尾。⚠️ 不要引 Plotly —— 桑基图用内联 SVG。 -->
+<script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+<style>
+
+/* ── MORANDI PALETTE ── */
+:root {
+  /* Light (default) */
+  --bg:        #f5f0eb;
+  --bg2:       #ece6df;
+  --card:      #ffffff;
+  --card2:     #f8f5f1;
+  --border:    #d9d0c7;
+  --text:      #4a4340;
+  --text2:     #7a706a;
+  --text3:     #a89f98;
+  --accent:    #8a9a8e;   /* sage */
+  --accent2:   #7b8fa0;   /* muted blue */
+  --accent3:   #b08d7a;   /* dusty terracotta */
+  --rose:      #c09090;   /* dusty rose */
+  --gold:      #b9a06a;
+  --red:       #b87070;
+  --green:     #7a9a7a;
+  --shadow:    rgba(0,0,0,0.06);
+  --chart-grid:#e5ddd5;
+  /* ── ink 层：只用于文字，全部达 WCAG AA（装饰色仍用上面的原值）── */
+  --text3-ink:   #70665f;  /* 4.51:1 on --bg2（原 --text3 #a89f98 仅 2.60:1）*/
+  --accent3-ink: #7f6150;  /* 4.97:1 on --bg （原 --accent3 #b08d7a 仅 2.67:1）*/
+  --gold-ink:    #8a6d3b;  /* 原 --gold  #b9a06a 仅 2.53:1 */
+  --red-ink:     #a35555;  /* 原 --red   #b87070 仅 3.76:1 */
+  --green-ink:   #4a7057;  /* 原 --green #7a9a7a 仅 3.12:1 */
+  --accent2-ink: #5a7386;
+  --font-sans: system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-serif: Georgia, 'Noto Serif SC', 'PingFang SC', serif;
+  --bar-h: 44px;
+}
+[data-theme="dark"] {
+  --text3-ink:   #a19991;
+  --accent3-ink: #c9a48e;
+  --gold-ink:    #c9b07a;
+  --red-ink:     #c08080;
+  --green-ink:   #8aaa8a;
+  --accent2-ink: #8fabbf;
+  --bg:        #1e1c1a;
+  --bg2:       #28251f;
+  --card:      #2e2a25;
+  --card2:     #363230;
+  --border:    #4a4540;
+  --text:      #d4ccc4;
+  --text2:     #a09890;
+  --text3:     #706860;
+  --accent:    #8a9a8e;
+  --accent2:   #8fabbf;
+  --accent3:   #c9a48e;
+  --rose:      #c09090;
+  --gold:      #c9b07a;
+  --red:       #c08080;
+  --green:     #8aaa8a;
+  --shadow:    rgba(0,0,0,0.3);
+  --chart-grid:#3e3a35;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-serif);
+  line-height: 1.75;
+  font-size: 14.5px;
+  transition: background .35s, color .35s;
+}
+a { color: var(--accent2); text-decoration: none; }
+
+/* ── THEME TOGGLE ── */
+.theme-bar {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 8px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  transition: background .35s;
+}
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; text-decoration: none; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: var(--font-sans); font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; text-decoration: none; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; color: var(--text2);
+}
+.toggle-switch {
+  appearance: none; -webkit-appearance: none; border: 0; padding: 0; margin: 0;
+  position: relative;
+  width: 44px; height: 22px;
+  background: var(--border);
+  border-radius: 11px;
+  cursor: pointer;
+  transition: background .3s;
+}
+.toggle-switch::after {
+  content: '';
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 18px; height: 18px;
+  background: var(--card);
+  border-radius: 50%;
+  transition: transform .3s;
+  box-shadow: 0 1px 3px rgba(0,0,0,.15);
+}
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+
+/* ── HERO ── */
+.hero {
+  padding: 48px 24px 36px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+.hero-tag {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 3px 14px;
+  border-radius: 20px;
+  margin-bottom: 18px;
+}
+.hero h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills {
+  display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;
+}
+.pill {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 6px 18px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--text2);
+  box-shadow: 0 1px 3px var(--shadow);
+}
+.pill strong { color: var(--text); }
+
+/* ── LAYOUT ── */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle {
+  font-size: 18px; font-weight: 700; color: var(--accent3-ink);
+  margin-bottom: 20px; letter-spacing: 0.5px;
+  display: flex; align-items: center; gap: 10px;
+}
+.stitle::before {
+  content: ''; display: block; width: 4px; height: 20px;
+  background: var(--accent3); border-radius: 2px;
+}
+
+/* ── KPI ── */
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.kpi {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 16px 18px;
+  box-shadow: 0 1px 4px var(--shadow);
+  transition: background .35s;
+}
+.kpi-l { font-family: var(--font-sans); font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.badge {
+  display: inline-block; font-family: var(--font-sans);
+  font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px;
+}
+.up   { background: rgba(122,154,122,.15); color: var(--green); }
+.dn   { background: rgba(184,112,112,.15); color: var(--red); }
+.nt   { background: rgba(123,143,160,.15); color: var(--accent2); }
+
+/* ── TABLE ── */
+.tbl-wrap {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow);
+}
+.tbl { width: 100%; border-collapse: collapse; font-family: var(--font-sans); font-size: 13px;
+       font-variant-numeric: tabular-nums; }
+.tbl th {
+  background: var(--card2); color: var(--text3-ink); font-size: 11px;
+  letter-spacing: .5px; text-transform: uppercase;
+  padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border);
+}
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); }
+
+/* ── CHARTS ── */
+/* ⚠️ 轨道必须写 minmax(0,1fr) 而不是 1fr。
+   grid 子项默认 min-width:auto，canvas 与桑基 SVG 的固有宽度会把轨道撑开，
+   实测在 375px 下 .ccard 被撑到 568px，导致整页横向滚动。
+   .ccard 的 min-width:0 是同一问题的第二道保险。 */
+.cgrid  { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-bottom: 16px; }
+.cgrid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-bottom: 16px; }
+.ccard, .kpi, .moat-card, .risk-card, .score-card, .snap-item, .pbox { min-width: 0; }
+.ccard {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow);
+}
+.ctitle { font-family: var(--font-sans); font-size: 12px; color: var(--text3-ink); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 230px; }
+
+/* ── QUOTES ── */
+.qgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.qcard {
+  background: var(--card); border: 1px solid var(--border);
+  border-left: 4px solid var(--rose);
+  border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow);
+}
+.qname { font-weight: 700; color: var(--accent3); margin-bottom: 2px; }
+.qrole { font-family: var(--font-sans); font-size: 11px; color: var(--text3); margin-bottom: 10px; }
+.qtext { font-style: italic; font-size: 13.5px; color: var(--text); line-height: 1.8; }
+
+/* ── ANALYSIS ── */
+.agrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+.acard {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow);
+}
+.acard h4 { font-size: 13px; color: var(--accent2); margin-bottom: 10px; text-transform: uppercase; letter-spacing: .5px; }
+.acard ul { padding-left: 16px; }
+.acard li { margin-bottom: 5px; font-size: 13px; }
+
+/* ── BUFFETT SCORE ── */
+.bscore {
+  display: flex; align-items: center; gap: 16px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px 22px; margin-bottom: 12px;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.circle {
+  width: 62px; height: 62px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 18px; flex-shrink: 0;
+  border: 3px solid; font-family: var(--font-sans);
+}
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 3px; }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+/* ── VERDICT ── */
+.verdict {
+  background: var(--card2); border: 2px solid var(--accent);
+  border-radius: 10px; padding: 26px 28px; margin-bottom: 16px;
+}
+.verdict-t { font-size: 17px; font-weight: 700; color: var(--accent); margin-bottom: 10px; }
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 14px; text-align: center;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.pbox .pl { font-family: var(--font-sans); font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.pbox .pv { font-family: var(--font-sans); font-size: 26px; font-weight: 800; }
+.pbox .pn { font-size: 11px; color: var(--text3); margin-top: 3px; }
+.pc { color: var(--text2); } .pf { color: var(--gold); } .ps { color: var(--green); }
+
+/* ── SANKEY ── */
+#sankey { width: 100%; height: 460px; }
+
+/* ── COMMENTARY ── */
+.cmt {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 26px; line-height: 1.9; font-size: 14.5px;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.cmt p { margin-bottom: 14px; }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--card2); border-top: 1px solid var(--border);
+  padding: 24px; text-align: center; color: var(--text3); font-size: 12px;
+  margin-top: 40px;
+}
+
+@media (max-width: 768px) {
+  .cgrid,.cgrid3,.qgrid,.agrid,.pgrid { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 22px; }
+  .kpi-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ── HAITU SIGNATURE BLOCKS (页首短评 + 页末长评) ── */
+.haitu-quip {
+  display: flex; align-items: center; gap: 18px;
+  background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red);
+  border-radius: 12px; padding: 18px 24px; margin: 24px 0;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.haitu-avatar-sm {
+  width: 64px; height: 64px; border-radius: 50%;
+  object-fit: cover; flex-shrink: 0;
+  border: 2px solid var(--border); background: var(--red);
+  box-shadow: 0 2px 8px rgba(184,112,112,0.18);
+}
+.haitu-quote { flex: 1; }
+.haitu-name {
+  font-family: var(--font-sans);
+  font-size: 12px; font-weight: 700; letter-spacing: 1.5px;
+  color: var(--red-ink); text-transform: uppercase; margin-bottom: 4px;
+}
+.haitu-portrait {
+  font-size: 15px; line-height: 1.65; color: var(--text);
+  margin-bottom: 6px; font-weight: 600;
+}
+.haitu-rating-line {
+  font-size: 13px; color: var(--text2);
+  font-family: var(--font-sans);
+}
+.rating-badge {
+  display: inline-block; padding: 2px 12px; border-radius: 12px;
+  font-weight: 700; font-size: 13px; letter-spacing: 0.5px;
+  margin-left: 4px;
+}
+.rating-strong-buy { background: rgba(122,154,122,.25); color: var(--green); }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+.rating-cond-buy { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-hold { background: rgba(123,143,160,.18); color: var(--accent2); }
+.rating-sell { background: rgba(184,112,112,.18); color: var(--red); }
+.rating-strong-sell { background: rgba(184,112,112,.28); color: var(--red); }
+
+.haitu-essay {
+  background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red);
+  border-radius: 12px; padding: 28px 32px; margin: 24px 0;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.haitu-essay-header {
+  display: flex; align-items: center; gap: 18px;
+  padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px;
+}
+.haitu-avatar-lg {
+  width: 110px; height: 110px; border-radius: 50%;
+  object-fit: cover; flex-shrink: 0;
+  border: 3px solid var(--border); background: var(--red);
+  box-shadow: 0 4px 14px rgba(184,112,112,0.22);
+}
+.haitu-name-lg {
+  font-family: 'Georgia', 'Noto Serif SC', serif;
+  font-size: 28px; font-weight: 700; color: var(--text);
+  letter-spacing: 1px; margin-bottom: 4px;
+}
+.haitu-essay-tag {
+  font-family: var(--font-sans);
+  font-size: 12px; color: var(--text3); letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+.haitu-essay-body {
+  font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', serif;
+  font-size: 15px; line-height: 2.0; color: var(--text);
+}
+.haitu-essay-body p { margin-bottom: 16px; }
+.haitu-essay-body p:first-child {
+  font-size: 16px; font-style: italic; color: var(--text2);
+}
+.haitu-essay-body p:last-child {
+  margin-top: 22px; padding-top: 14px;
+  border-top: 1px solid var(--border);
+  font-size: 12px; color: var(--text3); font-style: italic;
+}
+.haitu-sign {
+  text-align: right; margin-top: 14px;
+  font-family: 'Georgia', serif; font-size: 14px;
+  color: var(--text2); font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .haitu-quip { flex-direction: column; text-align: center; }
+  .haitu-essay-header { flex-direction: column; text-align: center; }
+  .haitu-avatar-sm { width: 80px; height: 80px; }
+  .haitu-avatar-lg { width: 90px; height: 90px; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   海图 v2 追加规则 —— 修 103 份存量实测出的问题，勿删勿改顺序
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── 1. 锚点落点：一行同时修好 TOC 跳转 / 深链 / Ctrl+F 定位 / :target ──
+   没有这条，所有跳转都会落在 sticky 顶栏底下被遮住 */
+.section { scroll-margin-top: calc(var(--bar-h) + 12px); }
+
+/* h2.stitle 必须显式定字号，否则被 UA 默认样式撑成 32px 巨标题 */
+h2.stitle { font-size: 18px; font-weight: 700; margin: 0 0 20px; }
+
+/* 章节深链锚点：桌面 hover 显形，触屏常显 */
+.anchor {
+  margin-left: 8px; font-size: 13px; color: var(--text3-ink);
+  text-decoration: none; opacity: 0; transition: opacity .2s;
+}
+.stitle:hover .anchor, .anchor:focus-visible { opacity: 1; }
+@media (hover: none) { .anchor { opacity: .35; } }
+
+/* ── 2. 评级徽章：由 data-rating 派生，作者不再手写 class ──
+   实测存量 .rating-hold 在 63 份是金色、30 份是蓝色 —— 这套选择器根除该分歧 */
+.rating-badge[data-rating="强力买入"] { background: rgba(122,154,122,.25); color: var(--green-ink); }
+.rating-badge[data-rating="买入"]     { background: rgba(122,154,122,.18); color: var(--green-ink); }
+.rating-badge[data-rating="有条件买入"]{ background: rgba(185,160,106,.18); color: var(--gold-ink); }
+.rating-badge[data-rating="持有观望"] { background: rgba(123,143,160,.18); color: var(--accent2-ink); }
+.rating-badge[data-rating="卖出"]     { background: rgba(184,112,112,.18); color: var(--red-ink); }
+.rating-badge[data-rating="强烈卖出"] { background: rgba(184,112,112,.28); color: var(--red-ink); }
+
+/* 涨跌不能只靠色相（色盲）—— 文字里必须自带 +/- 号，这里只负责配色 */
+.up, .pos { color: var(--green-ink); }
+.dn, .neg { color: var(--red-ink); }
+
+/* ── 3. 窄屏表格：粘性首列 + 右侧滚动阴影提示 ──
+   实测 375px 下 12 张表有 6 张横向溢出，且无任何可滚动的视觉线索 */
+.tbl-wrap {
+  background-image: linear-gradient(to right, var(--card), var(--card)),
+                    linear-gradient(to right, rgba(0,0,0,.10), rgba(0,0,0,0));
+  background-position: right center, right center;
+  background-repeat: no-repeat;
+  background-size: 24px 100%, 12px 100%;
+  background-attachment: local, scroll;
+}
+@media (max-width: 640px) {
+  /* border-collapse:collapse 下 sticky 单元格的边框会丢，用 box-shadow 补回 */
+  .tbl { border-collapse: separate; border-spacing: 0; }
+  .tbl :is(th, td) { border-bottom: 1px solid var(--border); }
+  .tbl :is(th, td):first-child {
+    position: sticky; left: 0; z-index: 1;
+    background: var(--card); box-shadow: 1px 0 0 var(--border);
+  }
+  .tbl th:first-child { background: var(--card2); }
+}
+
+/* ── 4. 移动端：顶栏必须能换行（实测四元素已折行重叠）── */
+.theme-bar { flex-wrap: wrap; row-gap: 6px; }
+@media (max-width: 420px) { .theme-bar .xueqiu-link { display: none; } }
+
+@media (max-width: 640px) {
+  .container { padding: 0 14px; }          /* 24px 在 375px 上吃掉 12.8% 视口 */
+  body { font-size: 15.5px; }              /* 14.5px 中文长文在手机上偏小 */
+  .cwrap { height: 200px; }
+  #sankey { height: 360px !important; }    /* 480px 挤在 289px 宽里不可读 */
+  .cgrid, .cgrid3, .pgrid { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* 触控目标 ≥44px。用一个不可见的 ::before 撑开命中区，
+   开关本身仍是 44×22 的滑块外观。
+   ⚠️ 不要改 .toggle-switch 的 height/padding 来凑 44px —— 实测那样做会让
+   border-radius 与 ::after 滑块的定位一起错位，开关变成一个大圆角方块。
+   ⚠️ 条件必须同时含宽度 —— 只写 (hover:none) 时窄屏桌面实测仍是 22px。 */
+@media (max-width: 640px), (hover: none) {
+  .toggle-switch::before {
+    content: ''; position: absolute; left: 0; right: 0;
+    top: 50%; transform: translateY(-50%); height: 44px;
+  }
+}
+
+/* ── 5. prefers-reduced-motion ──
+   全语料 103/103 有 scroll-behavior:smooth 且零保护。加了目录之后，
+   一次跳转要跨 4 万像素、持续数秒，前庭敏感者会难受 */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important; animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+}
+
+/* ── 6. 焦点可见（全语料 0 个 :focus-visible 样式）── */
+:focus-visible { outline: 2px solid var(--accent3-ink); outline-offset: 2px; }
+
+/* ── 7. 图表无障碍降级容器 ── */
+figure.chart { margin: 0; }
+figure.chart figcaption { font-size: 12px; color: var(--text3-ink); line-height: 1.6; margin-top: 8px; }
+.chart-data { font-size: 12px; margin-top: 8px; }
+.chart-data summary { cursor: pointer; color: var(--text3-ink); }
+
+/* ── 8. shell 新增组件（skip link / 结论跳转带 / 顶栏右侧 / 屏幕阅读器专用）── */
+
+/* 跳转到正文：平时移出视口，聚焦时才出现。
+   ⚠️ 不能用 display:none —— 那样键盘也聚焦不到，等于没有 */
+.skip {
+  position: absolute; left: -9999px; top: 0;
+  background: var(--card); color: var(--accent3-ink);
+  padding: 8px 14px; border-radius: 0 0 8px 0; z-index: 200;
+  font-size: 13px; text-decoration: none;
+}
+.skip:focus { left: 0; }
+
+/* 只给屏幕阅读器：essay 一节的标题不需要视觉呈现（.haitu-essay 自带头部） */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+.theme-bar-right { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+
+/* 结论跳转带：读者看完评级后一步到证据 */
+.quip-jump { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.quip-jump a {
+  font-family: var(--font-sans); font-size: 12px; line-height: 1;
+  padding: 7px 12px; border-radius: 999px;
+  border: 1px solid var(--border); background: var(--card2);
+  color: var(--accent3-ink); text-decoration: none;
+  transition: border-color .2s, background .2s;
+}
+.quip-jump a:hover { border-color: var(--accent3); background: var(--card); }
+/* 触控目标 ≥44px。
+   ⚠️ 不能只用 @media (hover:none) —— 窄屏但支持 hover 的场景（缩小的桌面窗口、
+   带触控板的二合一设备）拿不到放大，实测那种情况下只有 28px。宽度与指针两个条件都要给。 */
+@media (max-width: 640px), (hover: none) {
+  /* 用 min-height 而不是加 padding —— padding 要靠字体行高凑够 44px，
+     换字体或改字号就又不达标了（实测 padding:13px 只得到 40px）。 */
+  .quip-jump a { min-height: 44px; padding: 0 16px; display: inline-flex; align-items: center; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   9. 报告组件（快照 / KPI / 护城河 / 风险 / 评分卡 / 电话会 / 桑基）
+   来源：现有报告语料中已验证的组件规则，已套用本表的字体栈与 ink 对比度修正。
+   ⚠️ 这一节必须与 body-skeleton.html 的类名保持同步 —— 骨架里出现的
+   每个类都要在这里有定义，否则章节会退化成无样式的纯文本流。
+   ══════════════════════════════════════════════════════════════ */
+.hero-pills {display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;}
+.pill {background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: var(--font-sans); font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow);}
+.pill strong {color: var(--text);}
+.stock-snap {background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px;}
+.snap-item {text-align: center;}
+.snap-label {font-family: var(--font-sans); font-size: 10px; color: var(--text3-ink); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px;}
+.kpi-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px;}
+.kpi {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow);}
+.moat-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px;}
+.moat-card {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); border-left: 4px solid var(--accent);}
+.moat-card.wide {border-left-color: var(--green);}
+.moat-card.narrow {border-left-color: var(--gold);}
+.moat-card.none {border-left-color: var(--red);}
+.moat-card h5 {font-size: 13px; color: var(--text); margin-bottom: 6px;}
+.moat-card .moat-rate {font-family: var(--font-sans); font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px;}
+.moat-card.wide .moat-rate {background: rgba(122,154,122,.18); color: var(--green);}
+.moat-card.narrow .moat-rate {background: rgba(185,160,106,.18); color: var(--gold);}
+.moat-card.none .moat-rate {background: rgba(184,112,112,.18); color: var(--red);}
+.moat-card p {font-size: 12.5px; color: var(--text2); line-height: 1.65;}
+.ec-item {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 14px; box-shadow: 0 1px 3px var(--shadow);}
+.ec-badge {flex-shrink: 0; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-top: 2px; font-family: var(--font-sans);}
+.dcf-note {background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: 13px; color: var(--text2); line-height: 1.8;}
+.dcf-note strong {color: var(--text);}
+.scorecard {background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow);}
+.score-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px;}
+.score-card {background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px;}
+.score-letter {width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-sans); font-weight: 800; font-size: 22px; flex-shrink: 0; border: 3px solid;}
+.flag-row {margin-top: 16px; padding: 12px 16px; background: rgba(184,112,112,.08); border: 1px solid rgba(184,112,112,.3); border-radius: 8px; font-size: 13px; color: var(--text2);}
+.flag-row strong {color: var(--red);}
+.pgrid {display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0;}
+.pbox {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center; box-shadow: 0 1px 4px var(--shadow);}
+.pbox .pl {font-family: var(--font-sans); font-size: 11px; color: var(--text3-ink); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px;}
+.pbox .pv {font-family: var(--font-sans); font-size: 28px; font-weight: 800; margin-bottom: 5px;}
+.pbox .pn {font-size: 12px; color: var(--text3-ink); line-height: 1.5;}
+.risk-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px;}
+.risk-card {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); position: relative; overflow: hidden;}
+.risk-card::before {content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent);}
+.risk-card.r1::before {background: var(--green);}
+.risk-card.r2::before {background: rgba(122,154,122,.6);}
+.risk-card.r3::before {background: var(--gold);}
+.risk-card.r4::before {background: var(--rose);}
+.risk-card.r5::before {background: var(--red);}
+.risk-card h5 {font-size: 14px; margin-bottom: 6px; color: var(--text);}
+.risk-card p {font-size: 13px; color: var(--text2); line-height: 1.7;}
+/* ⚠️ 此处原本混进了三条来自语料 @media(max-width:768px) 内的移动端规则
+   （.cgrid/.pgrid→1fr、.kpi-grid→1fr 1fr、.stock-snap→1fr 1fr）。
+   它们被抽取时丢掉了 @media 包裹，变成无条件规则且排在最后，
+   结果桌面端所有网格都塌成单列。已删除 —— 移动端由本表第 4、9 节的
+   @media(max-width:640px) 统一负责。抽取语料 CSS 时务必排除 @media 块内的规则。 */
+
+/* 骨架用到、但语料里没有现成规则的补充组件 */
+.note { font-size: 12px; color: var(--text3-ink); line-height: 1.7; margin-top: 10px; }
+.lead { font-size: 16px; font-weight: 600; line-height: 1.8; margin-bottom: 14px; }
+.haitu-disc { font-size: 12px; color: var(--text3-ink); line-height: 1.7; margin-top: 18px;
+              padding-top: 14px; border-top: 1px solid var(--border); }
+.bscore { background: var(--card2); border: 1px solid var(--border); border-radius: 10px;
+          padding: 16px 20px; margin: 16px 0; }
+.bscore h4 { font-family: var(--font-sans); font-size: 14px; color: var(--accent3-ink); margin: 0 0 6px; }
+.bscore p { margin: 0; font-size: 14px; }
+
+/* 桑基 SVG：颜色与线宽在标记里给，这里只管描边端点与文字 */
+#sankey { width: 100%; height: auto; }
+.sk-flow path { fill: none; opacity: .45; stroke-linecap: butt; }
+.sk-t .sk-lab { font-family: var(--font-sans); font-size: 12px; fill: var(--text2); }
+.sk-t .sk-num { font-family: var(--font-sans); font-size: 13px; font-weight: 700; fill: var(--text);
+                font-variant-numeric: tabular-nums; }
+.sk-t .warn   { fill: var(--red-ink); }
+
+@media (max-width: 640px) {
+  .stock-snap { grid-template-columns: 1fr 1fr; }
+  .kpi-grid   { grid-template-columns: 1fr 1fr; }
+  .moat-grid, .risk-grid, .score-grid, .pgrid { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* 修饰类：评分等级 / 电话会情绪 / 快照数值。文字色一律走 ink 层。 */
+.score-letter.s-a  { color: var(--green-ink);   border-color: var(--green);   background: rgba(122,154,122,.12); }
+.score-letter.s-bp { color: var(--gold-ink);    border-color: var(--gold);    background: rgba(185,160,106,.12); }
+.score-letter.s-b  { color: var(--accent2-ink); border-color: var(--accent2); background: rgba(123,143,160,.12); }
+.score-letter.s-c  { color: var(--red-ink);     border-color: var(--red);     background: rgba(184,112,112,.12); }
+
+.ec-badge.ec-bull { background: rgba(122,154,122,.18); color: var(--green-ink); }
+.ec-badge.ec-bear { background: rgba(184,112,112,.18); color: var(--red-ink); }
+.ec-badge.ec-neut { background: rgba(123,143,160,.18); color: var(--accent2-ink); }
+
+.snap-value { font-family: var(--font-sans); font-size: 19px; font-weight: 700; color: var(--text);
+              font-variant-numeric: tabular-nums; line-height: 1.3; }
+.snap-note  { font-family: var(--font-sans); font-size: 11px; color: var(--text3-ink); margin-top: 3px; }
+.sk-node rect { opacity: .9; }
+
+</style>
+</head>
+<body>
+
+<a class="skip" href="#kpi">跳到正文</a>
+
+<!-- ── 顶栏 ── -->
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/SPCX" target="_blank" rel="noopener">📊 雪球 SPCX</a>
+  </div>
+  <div class="theme-bar-right">
+    <span>☀️ 浅色</span>
+    <!-- ⚠️ 必须是 <button>，不是 <div onclick>。存量 103/103 用裸 div，键盘完全不可达。
+         CSS 里已配套 appearance:none;border:0;padding:0，否则 UA 默认样式破坏 44×22 造型。 -->
+    <button type="button" class="toggle-switch" id="themeBtn"
+            aria-pressed="false" aria-label="切换深色模式" onclick="toggleTheme()"></button>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-tag">Q2 2026 财报发布 · 2026-08-04 ｜ 海图研判 · 2026-08-05</div>
+  <h1>SpaceX SPCX · Q2 2026 财报深度分析</h1>
+  <div class="hero-sub">NASDAQ: SPCX ｜ 财季截至 2026-06-30 ｜ 价值投资视角</div>
+  <div class="hero-pills">
+    <span class="pill">股价 <strong>$125.33</strong> 8/4 收盘</span>
+    <span class="pill">市值 <strong>$1.65T</strong></span>
+    <span class="pill">Q2 营收 <strong>$78.1亿</strong> <span class="up">+92%</span></span>
+    <span class="pill">GAAP EPS <strong>−$0.09</strong> <span class="up">好于预期</span></span>
+    <span class="pill">自由现金流 <strong>−$159.5亿</strong> <span class="dn">capex 6.2x营收</span></span>
+    <span class="pill">P/S <strong>71.7x</strong> <span class="dn">P/E 不适用</span></span>
+  </div>
+</div>
+
+<!-- ── 页首短评：不带头像、不带署名。这是全页唯一的结论卡片 ──
+     ⚠️ 必须包在 .container 里。否则它是 body 直接子元素、宽度撑满视口，
+     而下面每个 .section 都受 .container 的 max-width:1200px 约束 ——
+     结果就是首屏这张卡明显比正文宽出一截。 -->
+<div class="container">
+  <div class="haitu-quip">
+    <div class="haitu-quote">
+      <div class="haitu-portrait">一台印钞机（星链）绑着两个吞金兽（发射与 AI）—— 上市首份财报营收 +92%，但本季资本开支的 86.8% 是拿 IPO 募资填的。</div>
+      <div class="haitu-rating-line">
+        评级：<span class="rating-badge" data-rating="持有观望">持有观望</span>
+        · 12 个月目标价 $108 · 安全边际为负，且明日起解禁 1.43 倍流通盘
+      </div>
+      <!-- 结论跳转带：读者看到评级后第一反应是「凭什么」，给他一步到证据的路。
+           不要再加摘要卡 —— 目标价在 hero、这里、模块 7 已有三份，第四份只会增加不一致。 -->
+      <div class="quip-jump" role="group" aria-label="快速跳转">
+        <a href="#m13">评分卡与决策</a>
+        <a href="#m7">目标价怎么算出来的</a>
+        <a href="#m11">风险矩阵</a>
+        <a href="#m4">护城河</a>
+        <a href="#essay">夜读手记</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+<section class="section" id="snapshot" aria-labelledby="snapshot-t">
+  <h2 class="stitle" id="snapshot-t">市场数据快照（2026-08-04 收盘）<a class="anchor" href="#snapshot" aria-label="本节链接">#</a></h2>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">股价</div><div class="snap-value">$125.33</div><div class="snap-note">8/4 收盘 +9.43%</div></div>
+    <div class="snap-item"><div class="snap-label">财报后盘后</div><div class="snap-value">$117.15</div><div class="snap-note">−6.53%</div></div>
+    <div class="snap-item"><div class="snap-label">市值</div><div class="snap-value">$1.65T</div><div class="snap-note">131.8 亿股</div></div>
+    <div class="snap-item"><div class="snap-label">P/E</div><div class="snap-value">不适用</div><div class="snap-note">TTM 与本季均亏损</div></div>
+    <div class="snap-item"><div class="snap-label">P/S（TTM）</div><div class="snap-value">71.7x</div><div class="snap-note">TTM 营收 $230 亿</div></div>
+    <div class="snap-item"><div class="snap-label">P/S（本季年化）</div><div class="snap-value">52.9x</div><div class="snap-note">年化 $313 亿</div></div>
+    <div class="snap-item"><div class="snap-label">上市以来区间</div><div class="snap-value">$104.83 – $225.64</div><div class="snap-note">仅 38 个交易日</div></div>
+    <div class="snap-item"><div class="snap-label">距发行价 $135</div><div class="snap-value">−7.2%</div><div class="snap-note">7/15 起未收回</div></div>
+    <div class="snap-item"><div class="snap-label">距上市高点</div><div class="snap-value">−44.5%</div><div class="snap-note">6/16 $225.64</div></div>
+    <div class="snap-item"><div class="snap-label">Q2 营收</div><div class="snap-value">$78.1 亿</div><div class="snap-note">+92.0%</div></div>
+    <div class="snap-item"><div class="snap-label">单季自由现金流</div><div class="snap-value">−$159.5 亿</div><div class="snap-note">capex $183.7 亿</div></div>
+    <div class="snap-item"><div class="snap-label">净现金</div><div class="snap-value">$605 亿</div><div class="snap-note">$1,000 亿现金 − $395 亿债</div></div>
+  </div>
+  <p class="note">股息：无。回购：无公开回购计划。上市 38 个交易日，「52 周区间」即「上市以来区间」。</p>
+</section>
+
+<section class="section" id="kpi" aria-labelledby="kpi-t">
+  <h2 class="stitle" id="kpi-t">Q2 2026 核心业绩<a class="anchor" href="#kpi" aria-label="本节链接">#</a></h2>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="SpaceX 8-K 附件 EX-99.1（2026-08-04）合并损益表；10-Q（spcx-20260630）">
+      <thead><tr><th>指标（百万美元）</th><th>Q2 2026</th><th>Q2 2025</th><th>YoY</th><th>读法</th></tr></thead>
+      <tr class="hl"><td>总营收</td><td>7,814</td><td>4,071</td><td class="up">+92.0%</td><td>超预期（$69.3 亿）</td></tr>
+      <tr><td>营业成本</td><td>3,495</td><td>2,282</td><td class="dn">+53.2%</td><td>慢于营收 → 毛利率扩张</td></tr>
+      <tr><td>毛利率</td><td>55.3%</td><td>43.9%</td><td class="up">+11.4pp</td><td>本季最被低估的亮点</td></tr>
+      <tr><td>研发</td><td>3,548</td><td>1,958</td><td class="dn">+81.2%</td><td>占营收 45.4%</td></tr>
+      <tr><td>销售及管理</td><td>912</td><td>606</td><td class="dn">+50.5%</td><td>—</td></tr>
+      <tr class="hl"><td>经营亏损</td><td>(143)</td><td>(970)</td><td class="up">亏损收窄 85%</td><td>接近盈亏平衡</td></tr>
+      <tr><td>利息支出</td><td>(629)</td><td>(411)</td><td class="dn">+53.0%</td><td>含关联方 $327M</td></tr>
+      <tr><td>利息收入</td><td>340</td><td>98</td><td class="up">+247%</td><td>IPO 募资生息</td></tr>
+      <tr class="hl"><td>净亏损</td><td>(541)</td><td>(1,008)</td><td class="up">亏损收窄 46%</td><td>—</td></tr>
+      <tr class="hl"><td>摊薄 EPS（GAAP）</td><td>$(0.09)</td><td>$(0.34)</td><td class="up">好于预期</td><td>市场预期 −$0.26</td></tr>
+      <tr><td>Adjusted EBITDA</td><td>3,538</td><td>1,214</td><td class="up">+191%</td><td>利润率 45.3%</td></tr>
+      <tr><td>股权激励费用</td><td>831</td><td>—</td><td>—</td><td>另有 $110M 资本化</td></tr>
+      <tr><td>经营现金流</td><td>2,419</td><td>—</td><td>—</td><td>推导值，见下</td></tr>
+      <tr><td>资本开支</td><td>18,369</td><td>2,825</td><td class="dn">+550%</td><td>市场预期口径分歧极大</td></tr>
+      <tr class="hl"><td>自由现金流</td><td>(15,950)</td><td>—</td><td>—</td><td>本季真正的分水岭</td></tr>
+    </table>
+  </div>
+  <p class="note"><strong>口径说明</strong>：公司只披露六个月累计现金流量表，<strong>不披露单季现金流、也从未定义或披露自由现金流</strong>。上表单季经营现金流与自由现金流为「上半年累计 − 一季度（取自招股书）」推导所得，非公司披露值。公司唯一的非 GAAP 指标是 Adjusted EBITDA，<strong>不提供任何口径的每股收益调整</strong>。</p>
+</section>
+
+<section class="section" id="focus" aria-labelledby="focus-t">
+  <h2 class="stitle" id="focus-t">本季必看 · 两个「看穿」<a class="anchor" href="#focus" aria-label="本节链接">#</a></h2>
+  <p><strong>看穿一：营收 +92% 是三个完全不同的生意加总，其中只有一个在赚钱。</strong></p>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="cards" data-source="EX-99.1 分部信息表；10-Q Note 18 Segments">
+      <thead><tr><th>分部</th><th>营收</th><th>YoY</th><th>经营损益</th><th>资本开支</th><th>capex / 营收</th></tr></thead>
+      <tr><td>Space（发射）</td><td>962</td><td class="up">+29.0%</td><td class="dn">(542)</td><td>1,174</td><td>1.2x</td></tr>
+      <tr class="hl"><td>Connectivity（Starlink）</td><td>4,291</td><td class="up">+65.8%</td><td class="up">1,656</td><td>1,367</td><td>0.3x</td></tr>
+      <tr><td>AI（xAI + X）</td><td>2,561</td><td class="up">+247.5%</td><td class="dn">(1,257)</td><td><strong>15,828</strong></td><td class="dn"><strong>6.2x</strong></td></tr>
+      <tr><td>合计</td><td>7,814</td><td class="up">+92.0%</td><td class="dn">(143)</td><td>18,369</td><td>2.4x</td></tr>
+    </table>
+  </div>
+  <p>整家公司唯一产生经营利润的是 <strong>Starlink：$16.56 亿经营利润、资本开支只有营收的 0.3 倍</strong>。而 AI 分部本季烧掉 $158.28 亿资本开支，换来 $25.61 亿营收 —— <strong>capex 是营收的 6.2 倍</strong>。市场把它当一家公司估值，但它内部是「一台印钞机 + 两个吞金兽」。</p>
+  <p><strong>看穿二：本季资本开支的 86.8%，是拿 IPO 募来的钱填的。</strong>经营活动本季产生 $24.19 亿现金，资本开支 $183.69 亿 —— 差额 <strong>$159.50 亿</strong> 直接来自 6 月刚募到的 $856.75 亿。这不是「投资未来」的常规叙事，而是<strong>上市募资在两个月内被消耗掉近五分之一</strong>。按管理层「未来两个季度 capex 与本季非常相似」的说法，这个速度会再持续两季。</p>
+</section>
+
+<section class="section" id="trend" aria-labelledby="trend-t">
+  <h2 class="stitle" id="trend-t">关键指标趋势<a class="anchor" href="#trend" aria-label="本节链接">#</a></h2>
+  <div class="cgrid">
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">总营收与 Starlink 营收（$B · 年度）</div>
+        <div class="cwrap"><canvas id="rev" data-chart="rev" role="img" aria-label="2023 至 2025 年总营收从 104 亿增至 187 亿美元，其中 Starlink 从 39 亿增至 114 亿，占比由 37% 升至 61%"></canvas></div>
+        <figcaption>来源：424B4 招股书（追溯合并 xAI 与 X 口径）。Starlink 占比 37.2% → 54.2% → <strong>61.0%</strong>。</figcaption>
+      </figure>
+    </div>
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">经营现金流 vs 资本开支（$B · 年度）</div>
+        <div class="cwrap"><canvas id="margin" data-chart="margin" role="img" aria-label="经营现金流从 45 亿缓慢增至 68 亿美元，同期资本开支从 44 亿飙升至 207 亿，2026 上半年更达 285 亿，两线形成剪刀差"></canvas></div>
+        <figcaption>来源：424B4；2026 上半年取自 10-Q。<strong>自由现金流由 2023 年的 +$1.05 亿转为 2025 年的 −$139.5 亿、2026 上半年 −$250.1 亿</strong>。</figcaption>
+      </figure>
+    </div>
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">Q2 2026 三分部：营收 vs 经营损益 vs 资本开支（$B）</div>
+        <div class="cwrap"><canvas id="segment" data-chart="segment" role="img" aria-label="三分部对比：Starlink 营收 43 亿并盈利 17 亿、资本开支仅 14 亿；AI 分部营收 26 亿却亏损 13 亿、资本开支高达 158 亿"></canvas></div>
+        <figcaption>来源：EX-99.1 分部表。这张图是本季最重要的一张 —— AI 分部的资本开支柱高到让另外两个分部几乎看不见。</figcaption>
+      </figure>
+    </div>
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">Starlink：订阅数（百万） vs ARPU（$/月）</div>
+        <div class="cwrap"><canvas id="eps" data-chart="eps" role="img" aria-label="Starlink 订阅数从 230 万增至 1200 万，同期每用户月均收入从 99 美元连续下滑至 66 美元"></canvas></div>
+        <figcaption>来源：424B4 与 10-Q 经营指标。订阅数四年增长 5.2 倍，<strong>ARPU 同期下滑 33%</strong>（$99 → $66）。</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="flow" aria-labelledby="flow-t">
+  <h2 class="stitle" id="flow-t">资金流向桑基图（Q2 2026 · $B）<a class="anchor" href="#flow" aria-label="本节链接">#</a></h2>
+  <div class="ccard">
+    <figure class="chart">
+      <svg id="sankey" viewBox="0 0 980 470" role="img" aria-label="Q2 2026 资金流向：78.1 亿美元营收加上 1.4 亿经营亏损缺口，共 79.6 亿全部被营业成本、研发、销售管理三项吃掉；下方另一条线显示 183.7 亿资本开支中仅 24.2 亿来自经营现金流，其余 159.5 亿由 IPO 募资填补">
+        <g class="sk-flow">
+          <path d="M96,26 C260,26 260,40 300,40" stroke="var(--accent2)" stroke-width="66"/>
+          <path d="M96,104 C260,104 260,132 300,132" stroke="var(--accent3)" stroke-width="67"/>
+          <path d="M96,164 C260,164 260,196 300,196" stroke="var(--rose)" stroke-width="17"/>
+          <path d="M96,178 C260,178 260,222 300,222" stroke="var(--gold)" stroke-width="2"/>
+          <path d="M96,196 C260,196 260,244 300,244" stroke="var(--red)" stroke-width="3"/>
+          <path d="M600,330 C700,330 700,362 760,362" stroke="var(--accent)" stroke-width="12"/>
+          <path d="M600,430 C700,430 700,398 760,398" stroke="var(--red)" stroke-width="76"/>
+        </g>
+        <g class="sk-node">
+          <rect x="82" y="0" width="14" height="188" rx="3" fill="var(--accent2)"/>
+          <rect x="82" y="190" width="14" height="4" rx="2" fill="var(--red)"/>
+          <rect x="300" y="8" width="14" height="66" rx="3" fill="var(--accent2)"/>
+          <rect x="300" y="99" width="14" height="67" rx="3" fill="var(--accent3)"/>
+          <rect x="300" y="188" width="14" height="17" rx="3" fill="var(--rose)"/>
+          <rect x="300" y="243" width="14" height="3" rx="1" fill="var(--red)"/>
+          <rect x="586" y="324" width="14" height="12" rx="3" fill="var(--accent)"/>
+          <rect x="586" y="392" width="14" height="76" rx="3" fill="var(--red)"/>
+          <rect x="760" y="356" width="14" height="88" rx="3" fill="var(--accent3)"/>
+        </g>
+        <g class="sk-t">
+          <text x="2" y="88" class="sk-lab">营收</text><text x="2" y="105" class="sk-num">78.14</text>
+          <text x="2" y="212" class="sk-lab warn">经营亏损</text><text x="2" y="228" class="sk-num warn">1.43</text>
+          <text x="322" y="36" class="sk-lab">营业成本</text><text x="322" y="52" class="sk-num">34.95</text>
+          <text x="322" y="128" class="sk-lab">研发</text><text x="322" y="144" class="sk-num">35.48</text>
+          <text x="322" y="198" class="sk-lab">销售及管理</text><text x="322" y="214" class="sk-num">9.12</text>
+          <text x="322" y="250" class="sk-lab">重组</text><text x="322" y="264" class="sk-num">0.02</text>
+          <text x="470" y="300" class="sk-lab">─── 以下为资本开支的资金来源 ───</text>
+          <text x="470" y="336" class="sk-lab">经营现金流</text><text x="470" y="352" class="sk-num">24.19</text>
+          <text x="440" y="436" class="sk-lab warn">动用 IPO 募资填补</text><text x="440" y="452" class="sk-num warn">159.50</text>
+          <text x="782" y="394" class="sk-lab">资本开支</text><text x="782" y="410" class="sk-num">183.69</text>
+        </g>
+      </svg>
+      <figcaption>单位：十亿美元。来源：EX-99.1 合并损益表；10-Q 合并现金流量表（单季为累计相减推导）。上半部流量平衡：78.14 + 1.43（亏损缺口）= 34.95 + 35.48 + 9.12 + 0.02 = 79.57。下半部：183.69 = 24.19 + 159.50，即<strong>本季资本开支的 86.8% 由 IPO 募资填补</strong>，而非由经营产生。</figcaption>
+    </figure>
+    <details class="chart-data">
+      <summary>查看数据表</summary>
+      <div class="tbl-wrap">
+        <table class="tbl" data-shape="grid" data-source="EX-99.1 与 10-Q">
+          <thead><tr><th>节点</th><th>金额（$B）</th><th>占营收</th></tr></thead>
+          <tr><td>营收</td><td>78.14</td><td>100.0%</td></tr>
+          <tr><td>营业成本</td><td>34.95</td><td>44.7%</td></tr>
+          <tr><td>研发</td><td>35.48</td><td>45.4%</td></tr>
+          <tr><td>销售及管理</td><td>9.12</td><td>11.7%</td></tr>
+          <tr><td>重组</td><td>0.02</td><td>0.0%</td></tr>
+          <tr class="hl"><td>经营亏损</td><td>(1.43)</td><td>−1.8%</td></tr>
+          <tr><td>经营现金流</td><td>24.19</td><td>31.0%</td></tr>
+          <tr><td>资本开支</td><td>183.69</td><td>235.1%</td></tr>
+          <tr class="hl"><td>自由现金流</td><td>(159.50)</td><td>−204.1%</td></tr>
+        </table>
+      </div>
+    </details>
+  </div>
+</section>
+
+<section class="section" id="m1" aria-labelledby="m1-t">
+  <h2 class="stitle" id="m1-t">模块 1 · 公司概览与背景<a class="anchor" href="#m1" aria-label="本节链接">#</a></h2>
+  <p>SpaceX 于 <strong>2026-06-11 定价 $135/股、6-12 登陆纳斯达克</strong>，发行 638,888,888 股（绿鞋全额行使），净募资 <strong>$856.75 亿</strong>。这是本次分析最重要的背景：<strong>这家公司作为上市公司只存在了 38 个交易日，本季是它有史以来第一份公开季报。</strong></p>
+  <p>今天的 SpaceX 已不是单纯的火箭公司。2025-03-28 并入 X、2026-02-02 并入 xAI（同一控制下企业合并，所有历史期间已追溯重述），形成三分部结构：</p>
+  <ul>
+    <li><strong>Space</strong> —— 发射服务与开发。本季 38 次发射（Falcon 37 + Starship 1），入轨 485 吨，其中<strong>内部任务 28 次、客户仅 10 次</strong>。</li>
+    <li><strong>Connectivity</strong> —— Starlink。<strong>1,200 万订阅</strong>（+101.2%），在轨卫星逾 10,200 颗，覆盖 167 个国家。</li>
+    <li><strong>AI</strong> —— xAI（Grok）+ X。本季营收暴增 247.5%，其中 <strong>$16 亿来自新开展的云服务</strong>。</li>
+  </ul>
+  <p>股权结构是理解这家公司的钥匙：<strong>Class A 一票、Class B 十票</strong>，Class B 合计握有 <strong>88.5% 投票权</strong>，其中 Musk 一人占 <strong>82.4%</strong>。公司据此援引纳斯达克「受控公司」豁免，董事会无需多数独立。</p>
+</section>
+
+<section class="section" id="m2" aria-labelledby="m2-t">
+  <h2 class="stitle" id="m2-t">模块 2 · 管理层评估<a class="anchor" href="#m2" aria-label="本节链接">#</a></h2>
+  <p>SpaceX 的管理层是典型的「主人翁型」，而且是这个类型的极端形态 —— Musk 以 82.4% 的投票权，对任何决策拥有不受制衡的最终裁量。这在 SpaceX 的历史上曾反复产生惊人回报（可回收火箭、Starlink 星座），但作为上市公司股东，你需要清楚地知道：<strong>你没有任何机制可以否决他。</strong></p>
+  <p>本季电话会（这是公司历史上第一次）暴露了三件值得记录的事：</p>
+  <ul>
+    <li><strong>CFO 对资本开支的辩护是本次电话会的核心。</strong>面对 Citigroup 的质询，Bret Johnsen 的说法是：「并非所有 capex 都一样……在 AI 算力这一侧，我们的资本部署能实现<strong>不到一年的回本期</strong>。资本几乎变成了本该计入营业成本的科目，因为它周转太快了。」<strong>这个说法目前无法被任何已披露数据验证</strong> —— 公司没有给出该分部的投资回报测算，也没有披露自由现金流。</li>
+    <li><strong>Musk 当场下修了自己的目标。</strong>被 Morgan Stanley 追问许可、芯片、燃气轮机的可交付性后，他把 2027 年底的供电与散热目标从 20GW 下调到「约 15GW」。<strong>一个能在追问下当场修正数字的 CEO 是加分项</strong>，但也说明先前的数字并不牢固。</li>
+    <li><strong>总裁 Shotwell 两次拒绝给出 Starlink Mobile 的资本开支。</strong>Evercore 尖锐地问「成为美国第四大运营商意味着未来超过 $1,000 亿的移动网络 capex……是不是操之过急？」，她的回答是「我现在不打算谈这块的 capex」。</li>
+  </ul>
+  <div class="bscore">
+    <h4>管理层评分：B</h4>
+    <p>加分：执行力在行业内无出其右（可回收火箭、Starlink 从 0 到 1,200 万用户）；CFO 与总裁自愿把绝大部分持股纳入延长锁定期，10b5-1 计划 2027 年才开始卖出，利益绑定真实。减分：无制衡的控制权结构；招股书明文承认 Musk「不投入全部时间与精力」且同时执掌 Tesla、Neuralink、The Boring Company；<strong>公司未为 Musk 投保关键人寿险</strong>；作为上市公司无任何指引兑现记录可供校准可信度。</p>
+  </div>
+</section>
+
+<section class="section" id="m3" aria-labelledby="m3-t">
+  <h2 class="stitle" id="m3-t">模块 3 · 商业模式深度解析<a class="anchor" href="#m3" aria-label="本节链接">#</a></h2>
+  <p><strong>一句话测试：能不能用一句话说清这个生意？</strong>——不能，而这本身就是结论。SpaceX 现在是三个商业模式截然不同的生意被装进同一个股票代码：一个<strong>重资产的运输公司</strong>（Space）、一个<strong>高利润率的订阅公司</strong>（Starlink）、一个<strong>资本密集的算力租赁公司</strong>（AI）。它们的单位经济、周期性、竞争格局、所需资本强度<strong>没有一项是相同的</strong>。</p>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="cards" data-source="EX-99.1 分部与营收拆分；10-Q Note 3 Revenue">
+      <thead><tr><th>生意</th><th>Q2 营收</th><th>怎么赚钱</th><th>本季判断</th></tr></thead>
+      <tr><td>Starlink 消费级</td><td>$2,485M</td><td>月费订阅，1,200 万户</td><td>唯一的现金引擎，但 ARPU 连续下滑</td></tr>
+      <tr><td>Starlink 企业/政府</td><td>$1,806M</td><td>企业专线、Starshield 政府合同</td><td>本季新增逾 $60 亿 Starshield 多年期合同</td></tr>
+      <tr><td>发射服务</td><td>$648M</td><td>按次收费</td><td>客户仅 10 次，内部 28 次 —— 主要是自用运力</td></tr>
+      <tr><td>发射与开发</td><td>$314M</td><td>NASA/国防部开发合同</td><td>—</td></tr>
+      <tr><td>AI 基础设施与方案</td><td><strong>$2,194M</strong></td><td>云算力租赁</td><td class="dn"><strong>90 天可解约、客户高度集中</strong></td></tr>
+      <tr><td>广告（X）</td><td>$367M</td><td>信息流广告</td><td class="dn">同比<strong>下滑</strong> $59M（平台迁移）</td></tr>
+    </table>
+  </div>
+  <p><strong>最需要盯住的一行是 AI 基础设施的 $21.94 亿。</strong>本季 AI 分部营收增长 $18.24 亿中，<strong>$16 亿来自今年才开始做的云服务</strong>。而 10-Q 本季<strong>唯一新增的风险因素</strong>正是关于它：「我们 AI 基础设施营收中相当大一部分集中于少数客户……<strong>在含产能爬坡的初始期之后，任何一方均可提前 90 天通知终止</strong>。」</p>
+  <p>换句话说：支撑本季营收暴增叙事的那块业务，建立在<strong>可以 90 天解约、且客户高度集中</strong>的合同之上 —— 而为它投入的是 $158 亿一次性、不可撤回的资本开支。这是本季财报里风险收益最不对称的一处。</p>
+</section>
+
+<section class="section" id="m4" aria-labelledby="m4-t">
+  <h2 class="stitle" id="m4-t">模块 4 · 经济护城河分析（5 维）<a class="anchor" href="#m4" aria-label="本节链接">#</a></h2>
+  <div class="moat-grid">
+    <div class="moat-card wide"><h5>成本优势 —— 宽（Space）</h5><p>可回收火箭是行业唯一。截至 2026-03-31，单枚一级最高复飞 <strong>34 次</strong>，累计约 620 次轨道发射、成功率逾 99%。管理层称 Starship 目标是运力翻两番、成本较 Falcon 9 再降 10 倍。<strong>但公司从未披露过单次发射成本或复用率数字</strong>，这条护城河的宽度只能靠外部推断。</p></div>
+    <div class="moat-card wide"><h5>有效规模 —— 宽（Starlink）</h5><p>在轨逾 10,200 颗卫星，且发射能力自有 —— 竞争者要复制必须先解决「谁来送上去」。低轨频谱与轨位是稀缺且先到先得的资源。这是三个生意里最真实、最难被资本快速复制的壁垒。</p></div>
+    <div class="moat-card narrow"><h5>转换成本 —— 窄</h5><p>Starlink 消费者换回地面宽带的成本很低（退租设备即可）；企业与政府客户粘性较高。AI 云服务的转换成本<strong>被合同条款主动削平</strong> —— 90 天通知即可终止。</p></div>
+    <div class="moat-card narrow"><h5>网络效应 —— 窄</h5><p>Starlink 用户增多并不让服务更好，反而<strong>争抢同一片频谱容量</strong>（这正是需要 V3 卫星的原因）。X 有社交网络效应，但本季广告收入是<strong>下滑</strong>的。</p></div>
+    <div class="moat-card none"><h5>无形资产 —— 窄至无</h5><p>FCC 频谱许可与 FAA 发射许可构成准入壁垒，但均可被监管收回或限制 —— 招股书明确写着 Starship <strong>返回发射场再入目前不被 FAA 法规允许，需申请豁免且不保证获得</strong>。品牌对消费者有价值，但不构成定价权：ARPU 在跌。</p></div>
+  </div>
+  <p><strong>综合判断：护城河真实存在，但集中在 Space 与 Starlink 两块，而资本正在大规模流向护城河最窄的 AI 分部。</strong>本季 AI 分部拿走了全公司 86% 的资本开支（$158.28 亿 / $183.69 亿），而它面对的是 90 天可解约的合同和 Nvidia 独家绑定 —— 后者 Musk 在电话会上亲口确认：「今后我们决定完全基于 Nvidia 构建。」这意味着<strong>把供应链议价权交给了单一供应商</strong>。</p>
+</section>
+
+<section class="section" id="m5" aria-labelledby="m5-t">
+  <h2 class="stitle" id="m5-t">模块 5 · 财务深度分析<a class="anchor" href="#m5" aria-label="本节链接">#</a></h2>
+
+  <h3>5.1 可得的历史趋势</h3>
+  <p class="note">⚠️ <strong>先说清楚缺什么</strong>：这家公司首份 10-Q 就是本季，没有 Q1 独立季报（IPO 前不需要），首份 10-K 要到 2027 年初。下表年度数据来自招股书，季度数据只有四个点，<strong>不足以构成常规意义上的「近 5 季趋势」</strong>。我不会把年度数据拆成假的季度序列来凑格式。</p>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="424B4 招股书（2026-06-12）汇总历史财务数据 pp.22-27；2026 上半年取自 10-Q">
+      <thead><tr><th>年度（$M）</th><th>FY2023</th><th>FY2024</th><th>FY2025</th><th>H1 2026</th></tr></thead>
+      <tr><td>总营收</td><td>10,387</td><td>14,015</td><td>18,674</td><td>12,508</td></tr>
+      <tr><td>— Starlink</td><td>3,869</td><td>7,599</td><td>11,387</td><td>7,548</td></tr>
+      <tr><td>Starlink 占比</td><td>37.2%</td><td>54.2%</td><td>61.0%</td><td>60.3%</td></tr>
+      <tr><td>经营损益</td><td>(3,505)</td><td class="up">466</td><td>(2,589)</td><td>(2,086)</td></tr>
+      <tr><td>净损益</td><td>(4,628)</td><td class="up">791</td><td>(4,937)</td><td>(4,817)</td></tr>
+      <tr><td>经营现金流</td><td>4,520</td><td>5,776</td><td>6,785</td><td>3,466</td></tr>
+      <tr><td>资本开支</td><td>4,415</td><td>11,163</td><td>20,737</td><td>28,476</td></tr>
+      <tr class="hl"><td>自由现金流</td><td class="up">+105</td><td class="dn">(5,387)</td><td class="dn">(13,952)</td><td class="dn">(25,010)</td></tr>
+    </table>
+  </div>
+  <p><strong>这张表讲的是一件事：这家公司在 2023 年是自由现金流为正的，此后逐年恶化，2026 上半年一个半年就烧掉了 $250 亿。</strong>转折点是 2024 年 —— 那一年它唯一一次实现全年盈利（净利 $7.91 亿），随后资本开支进入指数区间。</p>
+
+  <h3>5.2 利润质量</h3>
+  <p>本季净亏损 $5.41 亿，经营现金流 $24.19 亿 —— 现金流显著优于账面利润，主因是 <strong>$8.31 亿股权激励</strong>（另有 $1.10 亿资本化进固定资产）与大额折旧摊销。这是重资产成长公司的正常形态。</p>
+  <p><strong>所有者盈余测算受阻</strong>：公司未单独披露本季折旧摊销，也未区分维护性与扩张性资本开支。以 Adjusted EBITDA $35.38 亿倒推，扣除股权激励 $8.31 亿后约 $27 亿，再扣除维护性资本开支 —— 而后者<strong>无法从披露中分离</strong>。在 $183.69 亿总资本开支里，属于「维持现有竞争地位」的部分是多少，公司没有给，任何拆分都是猜测。<strong>因此本季所有者盈余无法可靠计算，这一项如实留空。</strong></p>
+
+  <h3>5.3 资产负债健康度（2026-06-30 末）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="EX-99.1 合并资产负债表；10-Q R2/R63/R64 债务附注">
+      <thead><tr><th>项目</th><th>金额（$M）</th><th>判断</th></tr></thead>
+      <tr><td>现金及等价物</td><td>93,522</td><td>2025 年底仅 24,747</td></tr>
+      <tr><td>有价证券</td><td>6,487</td><td>2025 年底为 0</td></tr>
+      <tr class="hl"><td>现金资产合计</td><td>100,009</td><td>IPO 募了 85,675</td></tr>
+      <tr><td>短期债务</td><td>2,525</td><td>—</td></tr>
+      <tr><td>长期债务</td><td>36,839</td><td>加权利率 5.855%，加权期限 11.7 年</td></tr>
+      <tr><td>融资租赁</td><td>1,079</td><td>—</td></tr>
+      <tr class="hl"><td>有息负债合计</td><td>39,512</td><td>短 2,525 / 长 36,839 / 租赁 1,079</td></tr>
+      <tr class="hl"><td><strong>真实净现金</strong></td><td class="up"><strong>60,497</strong></td><td>现金资产 − 全部有息负债</td></tr>
+      <tr><td>未提取信贷额度</td><td>5,000</td><td>期末零提取，契约合规</td></tr>
+      <tr><td>股东权益</td><td>127,224</td><td>2025 年底仅 2,573</td></tr>
+      <tr><td>累计亏损</td><td>(41,852)</td><td>—</td></tr>
+      <tr><td>递延收入</td><td>14,286</td><td>当期 7,977 + 非流动 6,309</td></tr>
+      <tr><td>合同储备（Backlog）</td><td>47,461</td><td>56% 一年内确认</td></tr>
+    </table>
+  </div>
+  <p><strong>安全垫是真实的：净现金 $605 亿，杠杆契约（≤3.75:1）合规，$50 亿信贷额度一分未动。</strong>以本季 $159.5 亿的自由现金流缺口计，这笔净现金约可支撑<strong>四个季度</strong>。这是「烧得起」，但不是「可持续」—— 而管理层已明示未来两季 capex 不降。</p>
+
+  <h3>5.4 现金流质量</h3>
+  <p>经营现金流本身健康且在改善（上半年 $34.66 亿 vs 去年同期 $3.51 亿）。问题<strong>不在造血，在花钱的速度</strong>：上半年资本开支 $284.76 亿，是经营现金流的 8.2 倍。</p>
+  <p>另需注意上半年的一次性财务费用：债务清偿损失 $15.45 亿 + 提前还款罚金 $11.53 亿 + 数字资产未实现亏损 $5.39 亿，绝大部分落在 Q1 —— 这是 IPO 前重整资本结构的代价，不会重复，但也说明<strong>上市前的债务成本相当高昂</strong>。</p>
+</section>
+
+<section class="section" id="m6" aria-labelledby="m6-t">
+  <h2 class="stitle" id="m6-t">模块 6 · 电话会分析<a class="anchor" href="#m6" aria-label="本节链接">#</a></h2>
+  <p class="note">⚠️ <strong>本节先天残缺，且必须说明</strong>：2026-08-04 是这家公司<strong>有史以来第一次财报电话会</strong>。因此「最新 + 前 2 季度对照」「指引兑现度追踪」<strong>在客观上不存在</strong> —— 不是公司隐瞒，是还没有历史。这也意味着<strong>管理层指引的可信度目前无从校准</strong>：你没有任何一次「他们说过什么、后来做到没有」的记录可查。这是买入一家次新股最实质的信息劣势。</p>
+  <div class="ec-item"><span class="ec-badge ec-bull">利好</span> 毛利率从 43.9% 提升到 55.3%。这是本季最被忽略的数字 —— 在营收 +92% 的同时毛利率扩张 11.4 个百分点，说明规模效应真实存在。</div>
+  <div class="ec-item"><span class="ec-badge ec-bull">利好</span> Starlink 经营利润 $16.56 亿（+79.4%），资本开支仅为营收的 0.3 倍。这块业务已经具备独立上市公司的财务形态。</div>
+  <div class="ec-item"><span class="ec-badge ec-bull">利好</span> Q3 开局两周已额外签下 $67 亿云服务合同（六个月期，10 月开始爬坡）；Starshield 新增逾 $60 亿多年期美国政府合同。合同储备 $474.61 亿。</div>
+  <div class="ec-item"><span class="ec-badge ec-neut">中性</span> Musk 称隔热瓦问题「此刻可以算解决了」，「看不到实现完全快速复用的任何技术障碍」。Flight 14 暂定 8 月底首次尝试上面级塔捕 —— <strong>待监管批准</strong>。</div>
+  <div class="ec-item"><span class="ec-badge ec-bear">利空</span> <strong>全场没有一位分析师问 Starlink 的利润率或单位经济性</strong>，全部火力集中在 AI 资本开支上。这本身是市场关注点的信号：唯一赚钱的业务反而无人关心。</div>
+  <div class="ec-item"><span class="ec-badge ec-bear">利空</span> <strong>转录全文检索「自由现金流」「盈亏平衡」「盈利能力」零命中</strong> —— 无人提问，管理层也未主动提及。一家单季烧掉 $159.5 亿的公司，第一次电话会上没有讨论过何时停止烧钱。</div>
+  <div class="ec-item"><span class="ec-badge ec-bear">利空</span> <strong>「锁定期」在电话会上零提及</strong>，尽管两天后就是首次解禁。</div>
+  <div class="ec-item"><span class="ec-badge ec-bear">利空</span> CFO 明示「地理扩张可能持续拉低混合 ARPU」。Starlink 的增长是<strong>以单价下行换用户数</strong>的。</div>
+  <h3>指引兑现度追踪</h3>
+  <p><strong>无法追踪 —— 这是第一份财报，不存在上季指引。</strong>可记录的是本季给出的、供下季验证的三条：① 未来两个季度资本开支「与本季非常相似」（即各约 $184 亿）；② 年底达到 $1,000 亿 ARR（按 12 月单月营收年化）；③ 2027 年底算力「更接近 10GW 而非 5GW」。<strong>这三条将是下一份报告校准管理层可信度的第一组标尺。</strong></p>
+  <p class="note">来源说明：官方转录截至撰稿时（美东 8/4 18:50）尚未发布，公司承诺 8/5 上线。本节内容取自第三方自动语音转录，<strong>存在说话人标签漂移与分析师姓名音译错误</strong>，引用数字应以官方转录发布后为准。财务数字则全部取自 8-K / EX-99.1 / 10-Q 一手文件，不受此影响。</p>
+</section>
+
+<section class="section" id="m7" aria-labelledby="m7-t">
+  <h2 class="stitle" id="m7-t">模块 7 · 多模型估值（8 种方法）<a class="anchor" href="#m7" aria-label="本节链接">#</a></h2>
+  <h3>7.1 八法明细</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="cards" data-source="基于 EX-99.1 / 10-Q / 424B4 一手数据的独立测算；股价 $125.33（2026-08-04 收盘）">
+      <thead><tr><th>方法</th><th>结果</th><th>适用性判断</th></tr></thead>
+      <tr><td>P/E</td><td colspan="2"><strong>不适用</strong> —— 本季、TTM、FY2025 均为 GAAP 净亏损，且公司不提供任何调整后每股收益口径</td></tr>
+      <tr><td>PEG</td><td colspan="2"><strong>不适用</strong> —— PEG 的分子需要 P/E，而 P/E 不存在</td></tr>
+      <tr><td>DDM</td><td colspan="2"><strong>不适用</strong> —— 从未宣派股息，且资本开支强度决定了可预见未来不会分红</td></tr>
+      <tr><td>DCF</td><td colspan="2"><strong>不适用（关键判断）</strong> —— 自由现金流为 −$159.5 亿且公司<strong>未给出任何盈利或转正时间表</strong>。对一家现金流为负、无指引、无历史可校准的公司做 DCF，等于把假设当结论。<strong>我拒绝用 DCF 给这家公司定价。</strong></td></tr>
+      <tr><td>EV/EBITDA</td><td><strong>112.5x</strong></td><td><strong>适用且是本例最尖锐的一个数字</strong> —— Adjusted EBITDA 为正（年化 $141.5 亿），EV = 市值 $16,521 亿 − 净现金 $605 亿 = $15,916 亿。112.5 倍意味着即便按公司自选的、最宽容的盈利口径，回本也需要一个多世纪</td></tr>
+      <tr><td>NAV / 重置成本</td><td>$1,262 亿</td><td><strong>不作为主要方法，但提供下限参考</strong> —— 固定资产净额 $657 亿（含服务器 $348 亿、卫星 $138 亿、在建 $126 亿）+ 净现金 $605 亿，合计仅为当前市值的 <strong>7.6%</strong>。对重资产公司通常是硬底，但此处显然不是定价依据</td></tr>
+      <tr><td>P/S（TTM）</td><td>71.7x</td><td>可用，但极高。TTM 营收 $230.44 亿</td></tr>
+      <tr><td>P/S（本季年化）</td><td>52.9x</td><td>更贴近当前增速，年化 $312.56 亿</td></tr>
+      <tr><td>所有者盈余收益率</td><td colspan="2"><strong>无法计算</strong> —— 维护性资本开支无法从 $183.69 亿总额中分离（见 5.2）</td></tr>
+      <tr><td>反向 DCF</td><td colspan="2">见 7.2 —— 本例中最有信息量的一种</td></tr>
+      <tr class="hl"><td>SOTP 分部加总</td><td colspan="2">见 7.2 —— 三个生意差异过大，这是唯一结构上合适的方法</td></tr>
+    </table>
+  </div>
+  <p class="note"><strong>八法里四法不适用</strong>，这不是偷懒，是这家公司当前财务状态的客观结果：一家亏损、无自由现金流、无股息、无指引、无历史的次新股，传统估值工具大部分失效。任何给出精确目标价的分析，都应该先解释它是怎么绕过这五个「不适用」的。</p>
+
+  <h3>7.2 唯一有意义的两个问题</h3>
+  <p><strong>问题一（反向推算）：当前 $1.65 万亿市值隐含了什么？</strong>Musk 在电话会上称内部预测「$1 万亿营收的时点从 2031 提前至 2030」。若 2030 年真做到 $1 万亿营收、并给到 20% 的自由现金流利润率（对照今天：−204%），则 2030 年自由现金流 $2,000 亿，按 20 倍计值 $4 万亿 —— 相对今天有 142% 上行空间。<strong>反过来说：当前市值大致锚定在「相信 SpaceX 在四年内成为人类历史上营收最大的公司之一」这个前提上。</strong>这个前提可能成立，但它不是一个估值假设，而是一个信仰。</p>
+  <p><strong>问题二（分部加总）：如果拆开卖，值多少？</strong></p>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="基于 Q2 2026 分部数据年化的独立测算，倍数为分析师判断">
+      <thead><tr><th>分部</th><th>年化营收</th><th>年化经营损益</th><th>取值倍数</th><th>估值</th></tr></thead>
+      <tr><td>Connectivity（Starlink）</td><td>$171.6 亿</td><td class="up">+$66.2 亿</td><td>12x 营收</td><td>$2,060 亿</td></tr>
+      <tr><td>Space（发射）</td><td>$38.5 亿</td><td class="dn">−$21.7 亿</td><td>8x 营收（战略资产）</td><td>$308 亿</td></tr>
+      <tr><td>AI（xAI + X）</td><td>$102.4 亿</td><td class="dn">−$50.3 亿</td><td>15x 营收</td><td>$1,536 亿</td></tr>
+      <tr><td>净现金</td><td>—</td><td>—</td><td>面值</td><td>$605 亿</td></tr>
+      <tr class="hl"><td>合计</td><td>$312.5 亿</td><td>−$5.7 亿</td><td>—</td><td><strong>$4,509 亿</strong></td></tr>
+    </table>
+  </div>
+  <p>分部加总得 <strong>$4,509 亿</strong>，对应每股约 <strong>$34</strong> —— 相当于当前市值的 27%。<strong>这不是我的目标价</strong>，而是一个刻度：它说明当前股价里，有约四分之三来自「今天的财务数字之外的东西」（Starship 的运输革命、Starlink Mobile、AI 云的规模化、以及 Musk 本人）。<strong>你买的主要是这部分。</strong></p>
+
+  <h3>7.3 三情景与建仓阶梯</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="本报告独立测算">
+      <thead><tr><th>情景</th><th>概率</th><th>核心假设</th><th>每股</th></tr></thead>
+      <tr><td>悲观</td><td>30%</td><td>解禁抛压兑现 + AI 云合同因 90 天条款流失 + capex 不降，P/S 压缩至 30x</td><td>$55</td></tr>
+      <tr class="hl"><td>基准</td><td>50%</td><td>Starlink 继续复合增长、AI 云稳住现有客户、2028 年前后 FCF 转正</td><td>$110</td></tr>
+      <tr><td>乐观</td><td>20%</td><td>$1,000 亿 ARR 兑现 + Starship 量产复用 + AI 云规模化，维持高倍数</td><td>$180</td></tr>
+    </table>
+  </div>
+  <p>概率加权 = 0.30×55 + 0.50×110 + 0.20×180 = <strong>$108</strong>，相对现价 $125.33 为 <strong>−14%</strong>。</p>
+  <p class="note"><strong>关于这个目标价，必须诚实：它的离散度远大于它的中枢。</strong>悲观到乐观区间 $55–$180，宽度是中枢值的 116%。对比一家成熟公司通常 ±20% 的区间，<strong>这个「目标价」作为交易锚点的意义非常有限</strong>。我给出它是因为规范要求，但请把它读作「一个宽到几乎不构成指引的区间」，而不是一个精确判断。</p>
+  <p><strong>建仓阶梯</strong>（按加权公允 $108 × 80/70/60%）：<strong>首仓 $86 · 二仓 $76 · 三仓 $65</strong>。当前 $125.33 比首仓价<strong>高 46%</strong>，安全边际为负。</p>
+</section>
+
+<section class="section" id="m8" aria-labelledby="m8-t">
+  <h2 class="stitle" id="m8-t">模块 8 · 竞争与行业分析<a class="anchor" href="#m8" aria-label="本节链接">#</a></h2>
+  <p><strong>发射</strong>：SpaceX 在轨道发射市场处于事实垄断地位 —— 本季 38 次发射中 28 次是自用，意味着它的主要「客户」是自己的 Starlink 星座。这既是垂直整合的优势（不必向对手买运力），也意味着<strong>外部发射市场的规模远小于其运力</strong>。</p>
+  <p><strong>低轨宽带</strong>：招股书列名的竞争者包括 <strong>Amazon Kuiper、Blue Origin TeraWave、Eutelsat OneWeb、Telesat Lightspeed</strong>；移动侧还有 AST SpaceMobile、Lynk、Globalstar。值得注意的是 —— <strong>招股书全文没有提及中国星网</strong>。对一个正在全球部署低轨星座的公司，这是一处信息缺口而非「不存在竞争」。</p>
+  <p><strong>AI 云</strong>：这是竞争最激烈、SpaceX 位置最弱的一块。对手是 AWS、Azure、Google Cloud、CoreWeave 等已有规模与客户关系的玩家，而 SpaceX 是<strong>今年才开始做</strong>的新进入者，且用 90 天可解约的条款吸引客户 —— 这本身就是议价能力弱的表现。Musk 宣布「完全基于 Nvidia 构建」并称明年将拿到「他们相当高比例的 GPU」，用供应保障换取了供应商集中度。</p>
+  <p><strong>客户集中度是本季的一个隐忧</strong>：Customer A 占 18.3% + Customer B 占 19.5% = <strong>37.8%</strong>。去年同期只有一家超过 10%。Customer A 横跨三个分部，加上本季新增的逾 $60 亿 Starshield 政府合同，<strong>强烈指向美国政府</strong> —— 但公司未点名，这是推断而非披露。</p>
+</section>
+
+<section class="section" id="m9" aria-labelledby="m9-t">
+  <h2 class="stitle" id="m9-t">模块 9 · 技术面与 K 线分析<a class="anchor" href="#m9" aria-label="本节链接">#</a></h2>
+  <p class="note">⚠️ 仅 <strong>38 个交易日</strong>的价格历史。均线系统、形态分析、筹码分布在这个样本量下<strong>不具统计意义</strong>，本节只陈述可观察的价格事实。</p>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="Nasdaq 官方历史行情 API，经 Yahoo Finance 与 TradingView 三方交叉验证">
+      <thead><tr><th>事件</th><th>日期</th><th>价格</th></tr></thead>
+      <tr><td>IPO 定价</td><td>2026-06-11</td><td>$135.00</td></tr>
+      <tr><td>首日交易</td><td>2026-06-12</td><td>—</td></tr>
+      <tr class="hl"><td>上市以来最高（盘中）</td><td>2026-06-16</td><td>$225.64</td></tr>
+      <tr><td>最后一次收在发行价上方</td><td>2026-07-15</td><td>$135.27</td></tr>
+      <tr><td>最低收盘</td><td>2026-07-31</td><td>$108.37</td></tr>
+      <tr class="hl"><td>上市以来最低（盘中）</td><td>2026-08-03</td><td>$104.83</td></tr>
+      <tr><td>财报日收盘</td><td>2026-08-04</td><td>$125.33（+9.43%）</td></tr>
+      <tr class="hl"><td>财报后盘后</td><td>2026-08-04 晚</td><td>$117.15（−6.53%）</td></tr>
+    </table>
+  </div>
+  <p>可观察的两点：<strong>其一，8/4 财报前单日大涨 9.43%，是 6/15 以来最佳单日 —— 而财报发布后盘后即回吐 6.53%。</strong>市场在财报前抢跑、财报后失望，这个组合通常意味着预期与现实的错位在于「花了多少钱」而非「赚了多少钱」（营收与 EPS 都超预期，资本开支大幅超出 FactSet 口径预期）。</p>
+  <p><strong>其二，$104.83–$108.37 构成目前唯一被验证过的支撑区</strong>，而它距离本报告的首仓价 $86 还有约 20% 的距离。技术面在此仅作次要参考 —— 真正决定未来两周价格的是明天的解禁，而非任何形态。</p>
+</section>
+
+<section class="section" id="m10" aria-labelledby="m10-t">
+  <h2 class="stitle" id="m10-t">模块 10 · 增长催化剂与前景展望<a class="anchor" href="#m10" aria-label="本节链接">#</a></h2>
+  <p><strong>未来 6 个月可验证的：</strong></p>
+  <ul>
+    <li><strong>8 月底 Flight 14</strong> —— 首次尝试 Starship 上面级塔捕（待监管批准）。成功将实质性推进完全快速复用。</li>
+    <li><strong>12 月单月 $1,000 亿 ARR</strong> —— 管理层给出的最硬的一个可证伪目标。Musk 称「什么都不做也能达到」。</li>
+    <li><strong>Q3 财报（约 11 月初）</strong> —— 三个观察点：资本开支是否真如指引「与本季相似」；AI 云的 $67 亿新签合同是否如期在 10 月爬坡；ARPU 下滑是否止住。</li>
+    <li><strong>Cursor 收购交割（预计 Q3）</strong> —— $600 亿全部以股票支付，将稀释约 3.6%（股价越低，发股越多）。</li>
+  </ul>
+  <p><strong>3–5 年的真正看点：</strong>Starlink V3 需约 1,000 颗才达临界规模，Musk 判断用户可感知改善要到 <strong>2027 年 Q2</strong>；Starlink Mobile 首批客户 <strong>2027 年底</strong>；Artemis III 载人登月「明年」，「2028 年把靴子踩在月球上」。</p>
+  <p>这些都是真实且罕见的期权。<strong>问题不在于它们会不会发生，而在于当前股价已经为它们付了多少钱</strong> —— 按 7.2 的分部加总，约四分之三的市值来自这些尚未产生现金流的东西。</p>
+</section>
+
+<section class="section" id="m11" aria-labelledby="m11-t">
+  <h2 class="stitle" id="m11-t">模块 11 · 风险矩阵<a class="anchor" href="#m11" aria-label="本节链接">#</a></h2>
+  <div class="risk-grid">
+    <div class="risk-card r5"><h5>严重度：高 · 明日（8/6）首次解禁</h5><p><strong>9.115 亿股</strong>解禁，按现价约 <strong>$1,142 亿</strong>，相当于 IPO 流通盘（6.39 亿股）的 <strong>143%</strong>。流通盘将从占总股本 4.85% 跃升至约 11.8%。<strong>单日新增可售股数超过 IPO 创造的全部流通盘。</strong>后续 8/20、9/9、9/24、10/9、10/24 各再释放约 7%。</p></div>
+    <div class="risk-card r5"><h5>严重度：高 · 条件性解禁档触发失败</h5><p>额外 10% 的释放需要「截至财报日的连续十个交易日中至少五日收盘价高于发行价 30%」，即 <strong>&gt;$175.50</strong>。实际十日中 <strong>0 日达标</strong>，最高收盘 $125.33，<strong>差 40%</strong>。后果不是利好 —— 未释放的 4.558 亿股顺延至 12/8，使该档从 3.284 亿股增至 <strong>7.976 亿股</strong>，压力后移而非消失。</p></div>
+    <div class="risk-card r5"><h5>严重度：高 · AI 云收入的合同脆弱性</h5><p>10-Q 本季<strong>唯一新增</strong>的风险因素：AI 基础设施营收「相当大一部分集中于少数客户」，且「初始期后<strong>任何一方均可提前 90 天通知终止</strong>」。本季 AI 营收增量的 88%（$16 亿 / $18.24 亿）来自这块业务，而为它投入的 $158.28 亿资本开支不可撤回。</p></div>
+    <div class="risk-card r4"><h5>严重度：中高 · 关联交易规模异常</h5><p>与董事 Antonio Gracias 创办并任 CEO 的 <strong>Valor Equity Partners</strong> 的设备租赁被会计认定为「<strong>失败的售后回租</strong>」，形成债务 <strong>$133.29 亿</strong>，占公司总债务本金的 <strong>34.7%</strong> —— 而 2025 年底该余额仅 $45.07 亿，<strong>半年翻近三倍</strong>。本季相关利息支出 $3.27 亿。另有向 Tesla 采购 Megapack $2.95 亿。同时 Valor 已设立 10b5-1 计划，拟分配至多 <strong>2.26 亿股</strong>。</p></div>
+    <div class="risk-card r4"><h5>严重度：中高 · 资本开支不可持续</h5><p>本季 capex $183.69 亿 = 经营现金流的 7.6 倍，86.8% 由 IPO 募资填补。管理层明示未来两季不降。按此速度，$605 亿净现金约支撑四个季度。<strong>公司从未给出盈利或自由现金流转正的时间表</strong>，第一次电话会上无人提问、管理层也未主动提及。</p></div>
+    <div class="risk-card r3"><h5>严重度：中 · 控制权与关键人</h5><p>Musk 投票权 <strong>82.4%</strong>，Class B 每股 10 票，纳斯达克「受控公司」豁免下董事会无需多数独立。招股书明文承认他「不投入全部时间与精力」，且<strong>公司未为其投保关键人寿险</strong>。其持股锁至 2027-06-12，本次解禁完全不涉及。</p></div>
+    <div class="risk-card r3"><h5>严重度：中 · 监管与诉讼</h5><p>Starship 返回发射场再入<strong>目前不被 FAA 法规允许</strong>，需申请豁免且「不保证获得」。欧盟 DSA 已对 X、xAI 及 Musk 本人处以 1.2 亿欧元罚款（上诉中）。NAACP 就 xAI 数据中心燃气轮机提起清洁空气法诉讼并申请禁令。诉讼准备金合计 $3.54 亿。</p></div>
+    <div class="risk-card r2"><h5>严重度：中低 · 未来股权稀释</h5><p>三笔已签约未反映在股数中：Cursor $600 亿<strong>全部以股票支付</strong>（按交割前 VWAP 定价，现价下约稀释 3.63%，<strong>股价越低发股越多</strong>）、EchoStar 频谱 261.8M 股（稀释 1.99%）、Mesh Optical 约 380 万股。合计约 5.6%。</p></div>
+  </div>
+  <p><strong>三个黑天鹅情景：</strong>① <strong>AI 云头部客户行使 90 天终止权</strong> —— 本季 $21.94 亿 AI 基础设施收入与 $158 亿已投资本瞬间失配，且该资产的替代用途有限；② <strong>Musk 因健康、法律或注意力转移而无法继续主导</strong> —— 公司无关键人保险，且他持有 82.4% 投票权，继任机制在招股书中未见安排；③ <strong>Starship 发生载人前重大失利叠加 FAA 收紧许可</strong> —— 直接冻结 Starlink V3 部署节奏与 Artemis 时间表，同时打击整个估值叙事的核心。</p>
+</section>
+
+<section class="section" id="m12" aria-labelledby="m12-t">
+  <h2 class="stitle" id="m12-t">模块 12 · 股东回报分析<a class="anchor" href="#m12" aria-label="本节链接">#</a></h2>
+  <h3>12.1 公司给了股东多少？</h3>
+  <p><strong>零。</strong>这不是修辞 —— 公司上市 38 个交易日，<strong>从未宣派过股息，也没有任何公开回购计划</strong>。常规的「过去 3 年股息 + 回购全景表」在这里<strong>客观上不存在</strong>，不是公司隐瞒，是还没有历史。</p>
+  <p>10-Q 里确有「回购」记录，但性质完全不同：Q2 向既有股东回购 $0.80 亿、上半年 $20.13 亿，另向 xAI 现任及前任员工回购 $24.13 亿 —— 这些是<strong>IPO 前的私下流动性安排</strong>（让早期员工与投资人在上市前套现），不是面向公开市场股东的资本返还。把它们算作股东回报是误读。</p>
+  <p><strong>trailing 股东收益率 = 0%。</strong></p>
+
+  <h3>12.2 给的方式好不好？</h3>
+  <p>没有「给」，所以无从评价方式。但有一个反向指标值得记录：<strong>股本正在快速膨胀而非收缩。</strong></p>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="10-Q 封面股数；EX-99.1 损益表加权股数；10-Q Note 20 已签约收购">
+      <thead><tr><th>项目</th><th>股数 / 影响</th><th>说明</th></tr></thead>
+      <tr><td>Q2 加权平均摊薄股数</td><td>5,864 百万</td><td>去年同期 2,929 百万</td></tr>
+      <tr><td>期末实际股数（7/28）</td><td>13,182 百万</td><td>Class A 7,696 + Class B 5,485</td></tr>
+      <tr><td>本季股权激励费用</td><td>$8.31 亿</td><td>另 $1.10 亿资本化</td></tr>
+      <tr><td>Cursor 收购（未交割）</td><td class="dn">+3.63%</td><td>$600 亿全股票，股价越低发股越多</td></tr>
+      <tr><td>EchoStar 频谱（未交割）</td><td class="dn">+1.99%</td><td>261.8M 股固定 $42.40/股</td></tr>
+      <tr><td>Mesh Optical（已交割）</td><td class="dn">+0.03%</td><td>—</td></tr>
+    </table>
+  </div>
+  <p>三笔已签约收购合计将稀释约 <strong>5.6%</strong>，且 Cursor 那笔<strong>按交割前 VWAP 定价 —— 股价跌得越多，发出去的股份越多</strong>，这在下跌行情中是一个自我加强的稀释机制。叠加每季 $8.31 亿的股权激励，<strong>股东在可见的未来只会被稀释，不会被回馈。</strong></p>
+
+  <h3>12.3 能不能继续给、给多少？</h3>
+  <p><strong>能力上完全不具备。</strong>本季自由现金流 −$159.5 亿，上半年 −$250.1 亿。<strong>(股息 + 回购) / FCF 的覆盖度计算在这里没有意义 —— 分子为零，分母为负。</strong></p>
+  <p>管理层在第一次电话会上陈述的资本配置优先级是：「Starship 研发与量产爬坡、下一代 Starlink 宽带与移动星座、AI 算力基础设施……聚焦资本效率、投资回报，以及维持强投资级资产负债表。」<strong>转录全文检索「回购」「分红」零命中。</strong>这与其发展阶段一致，但投资者需要明白：<strong>在自由现金流转正之前，这只股票的全部回报只能来自股价，没有任何现金分配托底。</strong></p>
+  <p><strong>模块小结：几乎无股东回报</strong>，且在可预见的未来不会有。这不构成对公司的批评 —— 一家处于极高速扩张期的公司把现金投回业务是合理的；但它明确改变了这只股票的性质：<strong>它是纯粹的资本利得工具，不含任何收益属性，且股东正在被持续稀释。</strong></p>
+</section>
+
+<section class="section" id="m13" aria-labelledby="m13-t">
+  <h2 class="stitle" id="m13-t">模块 13 · 海图评分卡 + 投资决策<a class="anchor" href="#m13" aria-label="本节链接">#</a></h2>
+  <div class="scorecard">
+    <div class="score-grid">
+      <div class="score-card"><div class="score-letter s-c">C</div><h5>生意可预测性</h5><p>三个商业模式迥异的生意合并计量；无盈利时间表；一个季度的公开财报。能见度极低。</p></div>
+      <div class="score-card"><div class="score-letter s-a">A−</div><h5>经济护城河</h5><p>可回收火箭与在轨 10,200 颗卫星是真实且难以复制的壁垒。但资本正流向护城河最窄的 AI 分部。</p></div>
+      <div class="score-card"><div class="score-letter s-b">B</div><h5>管理层质量</h5><p>执行力行业顶级、利益绑定真实；但控制权无制衡、注意力分散、无关键人保险、无可校准的兑现记录。</p></div>
+      <div class="score-card"><div class="score-letter s-b">B−</div><h5>财务质量</h5><p>净现金 $605 亿、毛利率扩张 11.4pp 是真亮点；但自由现金流 −$159.5 亿、累计亏损 $418.5 亿、关联方债务占比 34.7%。</p></div>
+      <div class="score-card"><div class="score-letter s-c">C</div><h5>资本配置纪律</h5><p>本季 capex 86.8% 由 IPO 募资填补，为 90 天可解约的合同投入 $158 亿不可撤回资本，且无盈利时间表。</p></div>
+      <div class="score-card"><div class="score-letter s-c">C−</div><h5>估值与安全边际</h5><p>P/S 71.7x，八法中五法不适用，分部加总仅得当前市值的 27%。现价高于首仓价 46%，安全边际为负。</p></div>
+    </div>
+    <div class="flag-row">
+      <h4>红旗排查</h4>
+      <p><strong>触发 2 项。</strong>① 会计激进／利润操纵：无。② <strong>关联交易异常：触发</strong> —— 与董事创办并任 CEO 的 Valor Equity 的「失败售后回租」形成 $133.29 亿债务，占总债务 34.7%，半年翻近三倍；同时该机构已设立计划拟分配至多 2.26 亿股。③ 现金流与利润长期背离：无（现金流优于利润）。④ 管理层频繁变动：无。⑤ <strong>收入质量存疑：触发</strong> —— 本季营收增量的核心（AI 云 $16 亿）建立在 90 天可解约、客户高度集中的合同上，10-Q 将其列为本季唯一新增风险因素。⑥ 重大未决法律风险：中等（欧盟 DSA 罚款上诉中、清洁空气法诉讼、准备金 $3.54 亿）。</p>
+    </div>
+  </div>
+  <h3>投资决策</h3>
+  <p>综合评级 <strong>C+</strong>。<strong>红旗触发 2 项，按规范自动降级。</strong></p>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="本报告模块 7 测算">
+      <thead><tr><th>情景</th><th>概率</th><th>目标价</th><th>相对现价</th></tr></thead>
+      <tr><td>悲观</td><td>30%</td><td>$55</td><td class="dn">−56%</td></tr>
+      <tr class="hl"><td>基准</td><td>50%</td><td>$110</td><td class="dn">−12%</td></tr>
+      <tr><td>乐观</td><td>20%</td><td>$180</td><td class="up">+44%</td></tr>
+    </table>
+  </div>
+  <p>12 个月概率加权目标价 <strong>$108</strong>，相对现价 $125.33 为 <strong>−14%</strong>。<strong>但请重读 7.3 的警告：$55–$180 的区间宽度是中枢的 116%，这个目标价的指引价值非常有限。</strong></p>
+  <p><strong>评级：<span class="rating-badge" data-rating="持有观望">持有观望</span></strong>。理由不是「生意不好」—— Starlink 是一门极好的生意，毛利率扩张与合同储备都是真的。理由是三条叠加：<strong>安全边际为负</strong>（现价高于首仓 46%）、<strong>红旗触发两项</strong>（关联方债务、收入合同脆弱性）、以及<strong>明天开始的解禁将在未来数月持续释放相当于当前流通盘数倍的股份</strong>，而价格发现过程尚未开始。</p>
+  <p><strong>操作建议：</strong>现价<strong>不建仓</strong>。分批建仓 <strong>首仓 $86 · 二仓 $76 · 三仓 $65</strong>；止盈三档 <strong>$180 / $225 / $280</strong>（每档减仓 25%，最后 25% 长期持有）。建议总仓位 <strong>0–2%</strong>（在首仓价之前为 0；即便触发也应作为高波动卫星仓，不进核心组合）。<strong>持有周期 3–5 年</strong>，因为这笔投资的兑现依赖 Starship 复用、Starlink V3 与 AI 云规模化，三者最早都要到 2027–2028 年才见分晓。</p>
+  <p><strong>关键监控指标：</strong>① 每季资本开支是否见顶（管理层称未来两季各约 $184 亿）；② 自由现金流何时转正（公司至今<strong>未给任何时间表</strong>）；③ AI 云客户集中度与 90 天解约条款是否出现流失；④ Starlink ARPU 是否止跌（已从 $99 跌至 $66）；⑤ 关联方（Valor）债务余额是否继续膨胀；⑥ 12 月单月是否达到 $1,000 亿 ARR。<strong>下一份财报预计 2026 年 11 月初</strong> —— 那将是第一次能够校准管理层可信度的机会。</p>
+</section>
+
+<section class="section" id="essay" aria-labelledby="essay-t">
+  <h2 class="stitle sr-only" id="essay-t">海图夜读手记<a class="anchor" href="#essay" aria-label="本节链接">#</a></h2>
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p class="lead">一家公司上市两个月，交出第一份财报：营收 +92%、超出预期、亏损大幅收窄。股价盘后跌了 6.5%。</p>
+      <p>读懂这个反差，需要看三个数字。</p>
+      <h4>一、这不是一家公司，是三家</h4>
+      <p>营收 $78.14 亿，同比 +92%。但拆开看：<strong>Starlink 营收 $42.91 亿、经营利润 $16.56 亿，资本开支只有营收的 0.3 倍</strong>——这是一门极好的生意。发射业务营收 $9.62 亿、亏损 $5.42 亿。而 AI 分部营收 $25.61 亿、亏损 $12.57 亿，<strong>资本开支 $158.28 亿，是自身营收的 6.2 倍</strong>。</p>
+      <p>整家公司唯一在赚钱的是 Starlink。市场给的是一个估值，里面装的是一台印钞机和两个吞金兽。</p>
+      <h4>二、本季资本开支的 86.8%，是拿 IPO 的钱填的</h4>
+      <p>经营活动本季产生现金 $24.19 亿，资本开支 $183.69 亿。差额 <strong>$159.50 亿</strong>，来自六月刚募到的 $856.75 亿。<strong>上市募来的钱，两个月消耗了近五分之一。</strong>而管理层说，未来两个季度的资本开支「与本季非常相似」。</p>
+      <p>账上还有 $605 亿净现金，按这个速度大约够四个季度。这叫烧得起，不叫可持续。更值得注意的是：这家公司第一次财报电话会上，<strong>「自由现金流」「盈亏平衡」「盈利能力」三个词的检索结果都是零</strong>——没有分析师问，管理层也没有主动提。</p>
+      <h4>三、明天开始解禁，规模是 IPO 流通盘的 1.43 倍</h4>
+      <p>8 月 6 日，<strong>9.115 亿股</strong>解禁，按现价约 $1,142 亿。IPO 一共才发行 6.39 亿股。<strong>单日新增的可售股份，超过 IPO 创造的全部流通盘。</strong></p>
+      <p>招股书里还有一条精巧的条款：如果股价在财报日前十个交易日中有五日收在发行价 30% 以上（即 $175.50），可以额外释放 10%。实际结果是<strong>十日中零日达标</strong>，最高收盘 $125.33，差了 40%。这不是利好——未释放的 4.558 亿股顺延到 12 月 8 日，使那一档从 3.28 亿股增至 <strong>7.98 亿股</strong>。压力没有消失，只是后移并且变大了。</p>
+      <h4>四、还有一处，报道里几乎没人提</h4>
+      <p>10-Q 附注里，与董事 Antonio Gracias 创办并担任 CEO 的 Valor Equity Partners 之间的设备租赁，被会计认定为<strong>「失败的售后回租」</strong>，形成债务 <strong>$133.29 亿，占公司总债务本金的 34.7%</strong>。2025 年底这个数字还只有 $45.07 亿——<strong>半年翻了近三倍</strong>。本季相关利息支出 $3.27 亿。而同一位董事的机构，已设立计划拟分配至多 2.26 亿股。</p>
+      <p>与之并列的，是 10-Q 本季<strong>唯一新增</strong>的风险因素：AI 基础设施收入「集中于少数客户」，且「初始期后任何一方均可提前 <strong>90 天</strong>通知终止」。支撑本季增长叙事的那块业务，坐在 90 天可解约的合同上；而为它投下去的 $158 亿，是不可撤回的。</p>
+      <h4>估值：八种方法里，四种不适用</h4>
+      <p>亏损，所以 P/E 与 PEG 不适用；无股息，DDM 不适用；自由现金流为负且公司<strong>从未给出任何盈利时间表</strong>，DCF 在这里等于把假设当结论——我拒绝用它给这家公司定价。</p>
+      <p>剩下的几个里，最尖锐的是 <strong>EV/EBITDA：112.5 倍</strong>。这已经是用公司自己选的、最宽容的盈利口径（Adjusted EBITDA，年化 $141.5 亿）算出来的——企业价值 $15,916 亿除以它，意味着回本需要一个多世纪。P/S 71.7 倍。而固定资产净额加净现金合计 $1,262 亿，只有市值的 <strong>7.6%</strong>。</p>
+      <p>按当前三个分部的年化数字加总，得 <strong>$4,509 亿</strong>，约合每股 $34，是当前市值的 27%。这不是目标价，是一把刻度尺：<strong>今天股价里约四分之三，买的是财务报表之外的东西</strong>——Starship 的运输革命、Starlink Mobile、AI 云的规模化，以及 Musk 本人。</p>
+      <p>概率加权目标价 $108，相对现价 −14%。但我必须说实话：悲观到乐观是 $55 到 $180，<strong>区间宽度是中枢的 116%</strong>。这样的「目标价」作为交易锚点意义有限，我给出它是因为规范要求，请把它读作一个宽到几乎不构成指引的区间。</p>
+      <p>所以这一季我给<strong>持有观望</strong>。不是因为生意不好——Starlink 是我今年读到的最好的订阅生意之一，毛利率一年扩张 11.4 个百分点是硬功夫。而是因为：<strong>安全边际是负的</strong>（现价比首仓价 $86 高 46%），<strong>红旗触发了两项</strong>（关联方债务、收入合同脆弱性），以及——<strong>一家上市 38 个交易日的公司，明天才开始真正的价格发现。</strong></p>
+      <p>好公司和好价格是两件事。这家公司很可能是前者，但今天不是后者。历史上多数伟大的公司，都给过耐心的人第二次机会。</p>
+      <p class="haitu-sign">—— <strong>海图</strong>，灯下落笔，明日再观风浪。</p>
+      <p class="haitu-disc">⚠️ <strong>免责声明</strong>：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，<strong>不构成任何投资建议</strong>，作者非持牌投资顾问。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。文中评级、目标价与建仓价格均为基于公开信息的个人推演，可能存在错误或随时间失效；该标的上市仅 38 个交易日、历史数据极为有限，不确定性显著高于成熟公司。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</section>
+
+</div>
+
+
+<footer>
+  <div>本报告由「海图夜读」基于公开财报与电话会资料独立撰写，数据截至 2026-08-04。</div>
+  <div>
+    <strong>免责声明：</strong>本文仅为个人研究记录与信息分享，<strong>不构成任何投资建议</strong>，
+    作者非持牌投资顾问。文中评级、目标价、仓位与建仓价格均为基于公开信息的个人推演，
+    可能存在错误或随时间失效。市场有风险，投资需谨慎，读者应独立判断并自负盈亏。
+  </div>
+</footer>
+
+<script>
+/* ══════════════════════════════════════════════════════════════════
+   海图夜读 · 报告页脚本骨架
+   逐字复制进报告的 <script>，只改 CHART_DATA 里的数字。
+
+   这段脚本解决了存量 103 份实测出的三个问题：
+   1. 主题切换有 3 套实现，73/103 不读 localStorage
+      → 门户切暗色进报告又变亮色。这里统一成一套。
+   2. 71 份把调色板硬编码进 JS（token 的第 4 份拷贝），
+      改一次配色要改 71 个文件；另有 2 份切暗色后图表根本不重绘。
+      → 这里一律从 CSS 变量读，改 :root 即全站生效。
+   3. 4 个图表槽位被写出 39 种 canvas id。
+      → 这里按固定槽位 rev|margin|segment|eps 接管。
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ── 1. 从 CSS 变量取色（唯一真源，禁止在本文件里写 hex）── */
+function cssVar(name) {
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+}
+function palette() {
+  return {
+    accent:  cssVar('--accent'),   accent2: cssVar('--accent2'),
+    accent3: cssVar('--accent3'),  gold:    cssVar('--gold'),
+    red:     cssVar('--red'),      green:   cssVar('--green'),
+    grid:    cssVar('--chart-grid'), text:  cssVar('--text3-ink'),
+  };
+}
+
+/* ── 2. 主题切换：同步 aria-pressed、持久化、重绘图表 ── */
+function toggleTheme() {
+  var html = document.documentElement;
+  var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  try { localStorage.setItem('theme', next); } catch (e) {}
+  var btn = document.getElementById('themeBtn');
+  if (btn) btn.setAttribute('aria-pressed', String(next === 'dark'));
+  renderCharts();
+}
+document.addEventListener('DOMContentLoaded', function () {
+  var btn = document.getElementById('themeBtn');
+  if (btn) btn.setAttribute('aria-pressed',
+    String(document.documentElement.getAttribute('data-theme') === 'dark'));
+});
+
+/* ── 3. 顶栏实测高度写进 --bar-h ──
+   锚点落点与目录高亮都以它为基准。顶栏在窄屏会折行（38px → 60+px），
+   硬编码会让手机上所有跳转偏移。 */
+function syncBarH() {
+  var bar = document.querySelector('.theme-bar');
+  if (bar) document.documentElement.style.setProperty('--bar-h', bar.offsetHeight + 'px');
+}
+addEventListener('DOMContentLoaded', syncBarH);
+addEventListener('resize', syncBarH);
+
+/* ── 4. 本报告的图表数据：只改这一块 ──
+   槽位固定为 rev / margin / segment / eps，与 body-skeleton.html 的
+   canvas id 和 data-chart 一一对应。用不到的槽位整个删掉（连同骨架里的 .ccard）。
+   颜色一律写 palette 的 key 名（'accent' / 'gold' …），不要写 hex。 */
+var CHART_DATA = {
+  rev: { type: 'bar', labels: ['FY2023','FY2024','FY2025','H1 2026'], datasets: [
+    { label: '总营收（$B）',        data: [10.39, 14.02, 18.67, 12.51], color: 'accent'  },
+    { label: 'Starlink 营收（$B）', data: [3.87, 7.60, 11.39, 7.55],    color: 'accent2' } ] },
+  margin: { type: 'line', labels: ['FY2023','FY2024','FY2025','H1 2026'], datasets: [
+    { label: '经营现金流（$B）', data: [4.52, 5.78, 6.79, 3.47],    color: 'green' },
+    { label: '资本开支（$B）',   data: [4.42, 11.16, 20.74, 28.48], color: 'red'   } ] },
+  segment: { type: 'bar', labels: ['Space 发射','Connectivity 星链','AI（xAI+X）'], datasets: [
+    { label: '营收（$B）',     data: [0.96, 4.29, 2.56],    color: 'accent'  },
+    { label: '经营损益（$B）', data: [-0.54, 1.66, -1.26],  color: 'accent2' },
+    { label: '资本开支（$B）', data: [1.17, 1.37, 15.83],   color: 'red'     } ] },
+  eps: { type: 'line', labels: ['FY2023','FY2024','FY2025','Q2 2026'], datasets: [
+    { label: 'Starlink 订阅（百万）', data: [2.3, 4.4, 8.9, 12.0], color: 'accent'  },
+    { label: 'ARPU（$/月）',          data: [99, 91, 81, 66],       color: 'accent3' } ] },
+};
+
+/* ── 5. 渲染（一般不需要改）── */
+var _charts = {};
+function renderCharts() {
+  if (typeof Chart === 'undefined') return;      // CDN 不可达时静默跳过，不阻断页面
+  var P = palette();
+  Chart.defaults.font.family =
+    getComputedStyle(document.body).getPropertyValue('--font-sans') ||
+    'system-ui, -apple-system, sans-serif';
+
+  Object.keys(CHART_DATA).forEach(function (slot) {
+    var el = document.getElementById(slot);
+    if (!el) return;
+    if (_charts[slot]) _charts[slot].destroy();
+
+    var cfg = CHART_DATA[slot];
+    var isPie = cfg.type === 'doughnut' || cfg.type === 'pie';
+
+    _charts[slot] = new Chart(el, {
+      type: cfg.type,
+      data: {
+        labels: cfg.labels,
+        datasets: cfg.datasets.map(function (d) {
+          var c = Array.isArray(d.color) ? d.color.map(function (k) { return P[k]; }) : P[d.color];
+          // ⚠️ 判断是否折线要同时看 dataset 的 type 和图表级 type。
+          // 只写 d.type === 'line' 会让「图表级 type:'line' 但 dataset 没写 type」的
+          // 数据集拿到 borderWidth:0 —— 实测表现为「只有点、没有连线」。
+          var isLine = (d.type || cfg.type) === 'line';
+          return Object.assign({}, d, {
+            backgroundColor: c, borderColor: c,
+            borderWidth: isLine ? 2 : 0, tension: 0.3,
+          });
+        }),
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            // 窄屏把图例挪到顶部：右侧图例在 375px 上会吃掉大半个画布
+            position: isPie && innerWidth > 640 ? 'right' : 'top',
+            labels: { color: P.text, boxWidth: 12, font: { size: 11 } },
+          },
+        },
+        scales: isPie ? {} : {
+          x: { grid: { color: P.grid }, ticks: { color: P.text, font: { size: 11 } } },
+          y: { grid: { color: P.grid }, ticks: { color: P.text, font: { size: 11 } } },
+          y1: {
+            position: 'right', grid: { display: false },
+            ticks: { color: P.text, font: { size: 11 } }, display: 'auto',
+          },
+        },
+      },
+    });
+  });
+}
+addEventListener('DOMContentLoaded', renderCharts);
+addEventListener('resize', function () {          // 图例位置随断点变，需重建
+  clearTimeout(window._rcT);
+  window._rcT = setTimeout(renderCharts, 200);
+});
+
+</script>
+</body>
+</html>
