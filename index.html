@@ -1994,9 +1994,13 @@ const COLS = [
   { key: 'price',  label: '现价',   sort: (a, b) => (b.currentPrice ?? -1) - (a.currentPrice ?? -1) },
   { key: 'target', label: '目标价', sort: (a, b) => (b.targetPrice ?? -1) - (a.targetPrice ?? -1) },
   { key: 'gap',    label: '差距%',  sort: (a, b) => (gapPct(b) ?? -1e9) - (gapPct(a) ?? -1e9) },
-  { key: 'date',   label: '研判',   sort: (a, b) => b.modTime - a.modTime }
+  // 主键用真实研判日期，次键才用 modTime。
+  // modTime 只是维护时人工递增的计数器，与研判日期并不同序
+  // （补录旧报告时会拿到很大的 modTime），单用它排「研判」会给出错误顺序。
+  // 而 59 条并列在同一天，没有次键的话这些行每次渲染顺序都可能变。
+  { key: 'date',   label: '研判',   sort: (a, b) => (b.date || '').localeCompare(a.date || '') || (b.modTime - a.modTime) }
 ];
-let sortKey = 'gap', sortAsc = false;
+let sortKey = 'date', sortAsc = false;
 
 function fmtPrice(v, ccy) {
   if (typeof v !== 'number') return '—';
