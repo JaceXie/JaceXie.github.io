@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-08-05 · NYSE: CRCL Q2 2026 财报已于 2026-08-05 发布 -->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Circle CRCL Q2 2026 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+
+<!-- ⚠️ 无闪烁暗色：这段必须在 <style> 之前、且是同步内联脚本。
+     放到 body 末尾会让暗色用户先看到一闪的白底。
+     key 固定用 'theme'（与门户和 30 份存量报告一致，换 key 会让它们被翻回浅色）。 -->
+<script>
+(function () {
+  try {
+    var t = localStorage.getItem('theme');
+    if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', t);
+  } catch (e) { document.documentElement.setAttribute('data-theme', 'light'); }
+})();
+</script>
+
+<link rel="canonical" href="https://haitu.jacexie.com/haitu/reports/crcl-q2-2026.html">
+<meta name="description" content="{企业一句话画像，≤160 字符}">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Circle CRCL Q2 2026 海图研判">
+<meta property="og:description" content="{企业一句话画像}">
+<meta property="og:url" content="https://haitu.jacexie.com/haitu/reports/crcl-q2-2026.html">
+<meta name="twitter:card" content="summary">
+
+<!-- Chart.js：defer + 放在 head 末尾。⚠️ 不要引 Plotly —— 桑基图用内联 SVG。 -->
+<script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+<style>
+
+/* ── MORANDI PALETTE ── */
+:root {
+  /* Light (default) */
+  --bg:        #f5f0eb;
+  --bg2:       #ece6df;
+  --card:      #ffffff;
+  --card2:     #f8f5f1;
+  --border:    #d9d0c7;
+  --text:      #4a4340;
+  --text2:     #7a706a;
+  --text3:     #a89f98;
+  --accent:    #8a9a8e;   /* sage */
+  --accent2:   #7b8fa0;   /* muted blue */
+  --accent3:   #b08d7a;   /* dusty terracotta */
+  --rose:      #c09090;   /* dusty rose */
+  --gold:      #b9a06a;
+  --red:       #b87070;
+  --green:     #7a9a7a;
+  --shadow:    rgba(0,0,0,0.06);
+  --chart-grid:#e5ddd5;
+  /* ── ink 层：只用于文字，全部达 WCAG AA（装饰色仍用上面的原值）── */
+  --text3-ink:   #70665f;  /* 4.51:1 on --bg2（原 --text3 #a89f98 仅 2.60:1）*/
+  --accent3-ink: #7f6150;  /* 4.97:1 on --bg （原 --accent3 #b08d7a 仅 2.67:1）*/
+  --gold-ink:    #8a6d3b;  /* 原 --gold  #b9a06a 仅 2.53:1 */
+  --red-ink:     #a35555;  /* 原 --red   #b87070 仅 3.76:1 */
+  --green-ink:   #4a7057;  /* 原 --green #7a9a7a 仅 3.12:1 */
+  --accent2-ink: #5a7386;
+  --font-sans: system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-serif: Georgia, 'Noto Serif SC', 'PingFang SC', serif;
+  --bar-h: 44px;
+}
+[data-theme="dark"] {
+  --text3-ink:   #a19991;
+  --accent3-ink: #c9a48e;
+  --gold-ink:    #c9b07a;
+  --red-ink:     #c08080;
+  --green-ink:   #8aaa8a;
+  --accent2-ink: #8fabbf;
+  --bg:        #1e1c1a;
+  --bg2:       #28251f;
+  --card:      #2e2a25;
+  --card2:     #363230;
+  --border:    #4a4540;
+  --text:      #d4ccc4;
+  --text2:     #a09890;
+  --text3:     #706860;
+  --accent:    #8a9a8e;
+  --accent2:   #8fabbf;
+  --accent3:   #c9a48e;
+  --rose:      #c09090;
+  --gold:      #c9b07a;
+  --red:       #c08080;
+  --green:     #8aaa8a;
+  --shadow:    rgba(0,0,0,0.3);
+  --chart-grid:#3e3a35;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-serif);
+  line-height: 1.75;
+  font-size: 14.5px;
+  transition: background .35s, color .35s;
+}
+a { color: var(--accent2); text-decoration: none; }
+
+/* ── THEME TOGGLE ── */
+.theme-bar {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 8px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  transition: background .35s;
+}
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; text-decoration: none; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: var(--font-sans); font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; text-decoration: none; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; color: var(--text2);
+}
+.toggle-switch {
+  appearance: none; -webkit-appearance: none; border: 0; padding: 0; margin: 0;
+  position: relative;
+  width: 44px; height: 22px;
+  background: var(--border);
+  border-radius: 11px;
+  cursor: pointer;
+  transition: background .3s;
+}
+.toggle-switch::after {
+  content: '';
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 18px; height: 18px;
+  background: var(--card);
+  border-radius: 50%;
+  transition: transform .3s;
+  box-shadow: 0 1px 3px rgba(0,0,0,.15);
+}
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+
+/* ── HERO ── */
+.hero {
+  padding: 48px 24px 36px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+.hero-tag {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 3px 14px;
+  border-radius: 20px;
+  margin-bottom: 18px;
+}
+.hero h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills {
+  display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;
+}
+.pill {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 6px 18px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--text2);
+  box-shadow: 0 1px 3px var(--shadow);
+}
+.pill strong { color: var(--text); }
+
+/* ── LAYOUT ── */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle {
+  font-size: 18px; font-weight: 700; color: var(--accent3-ink);
+  margin-bottom: 20px; letter-spacing: 0.5px;
+  display: flex; align-items: center; gap: 10px;
+}
+.stitle::before {
+  content: ''; display: block; width: 4px; height: 20px;
+  background: var(--accent3); border-radius: 2px;
+}
+
+/* ── KPI ── */
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.kpi {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 16px 18px;
+  box-shadow: 0 1px 4px var(--shadow);
+  transition: background .35s;
+}
+.kpi-l { font-family: var(--font-sans); font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.badge {
+  display: inline-block; font-family: var(--font-sans);
+  font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px;
+}
+.up   { background: rgba(122,154,122,.15); color: var(--green); }
+.dn   { background: rgba(184,112,112,.15); color: var(--red); }
+.nt   { background: rgba(123,143,160,.15); color: var(--accent2); }
+
+/* ── TABLE ── */
+.tbl-wrap {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow);
+}
+.tbl { width: 100%; border-collapse: collapse; font-family: var(--font-sans); font-size: 13px;
+       font-variant-numeric: tabular-nums; }
+.tbl th {
+  background: var(--card2); color: var(--text3-ink); font-size: 11px;
+  letter-spacing: .5px; text-transform: uppercase;
+  padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border);
+}
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); }
+
+/* ── CHARTS ── */
+/* ⚠️ 轨道必须写 minmax(0,1fr) 而不是 1fr。
+   grid 子项默认 min-width:auto，canvas 与桑基 SVG 的固有宽度会把轨道撑开，
+   实测在 375px 下 .ccard 被撑到 568px，导致整页横向滚动。
+   .ccard 的 min-width:0 是同一问题的第二道保险。 */
+.cgrid  { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-bottom: 16px; }
+.cgrid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-bottom: 16px; }
+.ccard, .kpi, .moat-card, .risk-card, .score-card, .snap-item, .pbox { min-width: 0; }
+.ccard {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow);
+}
+.ctitle { font-family: var(--font-sans); font-size: 12px; color: var(--text3-ink); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 230px; }
+
+/* ── QUOTES ── */
+.qgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.qcard {
+  background: var(--card); border: 1px solid var(--border);
+  border-left: 4px solid var(--rose);
+  border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow);
+}
+.qname { font-weight: 700; color: var(--accent3); margin-bottom: 2px; }
+.qrole { font-family: var(--font-sans); font-size: 11px; color: var(--text3); margin-bottom: 10px; }
+.qtext { font-style: italic; font-size: 13.5px; color: var(--text); line-height: 1.8; }
+
+/* ── ANALYSIS ── */
+.agrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+.acard {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow);
+}
+.acard h4 { font-size: 13px; color: var(--accent2); margin-bottom: 10px; text-transform: uppercase; letter-spacing: .5px; }
+.acard ul { padding-left: 16px; }
+.acard li { margin-bottom: 5px; font-size: 13px; }
+
+/* ── BUFFETT SCORE ── */
+.bscore {
+  display: flex; align-items: center; gap: 16px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px 22px; margin-bottom: 12px;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.circle {
+  width: 62px; height: 62px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 18px; flex-shrink: 0;
+  border: 3px solid; font-family: var(--font-sans);
+}
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 3px; }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+/* ── VERDICT ── */
+.verdict {
+  background: var(--card2); border: 2px solid var(--accent);
+  border-radius: 10px; padding: 26px 28px; margin-bottom: 16px;
+}
+.verdict-t { font-size: 17px; font-weight: 700; color: var(--accent); margin-bottom: 10px; }
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 14px; text-align: center;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.pbox .pl { font-family: var(--font-sans); font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.pbox .pv { font-family: var(--font-sans); font-size: 26px; font-weight: 800; }
+.pbox .pn { font-size: 11px; color: var(--text3); margin-top: 3px; }
+.pc { color: var(--text2); } .pf { color: var(--gold); } .ps { color: var(--green); }
+
+/* ── SANKEY ── */
+#sankey { width: 100%; height: 460px; }
+
+/* ── COMMENTARY ── */
+.cmt {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 26px; line-height: 1.9; font-size: 14.5px;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.cmt p { margin-bottom: 14px; }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--card2); border-top: 1px solid var(--border);
+  padding: 24px; text-align: center; color: var(--text3); font-size: 12px;
+  margin-top: 40px;
+}
+
+@media (max-width: 768px) {
+  .cgrid,.cgrid3,.qgrid,.agrid,.pgrid { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 22px; }
+  .kpi-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ── HAITU SIGNATURE BLOCKS (页首短评 + 页末长评) ── */
+.haitu-quip {
+  display: flex; align-items: center; gap: 18px;
+  background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red);
+  border-radius: 12px; padding: 18px 24px; margin: 24px 0;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.haitu-avatar-sm {
+  width: 64px; height: 64px; border-radius: 50%;
+  object-fit: cover; flex-shrink: 0;
+  border: 2px solid var(--border); background: var(--red);
+  box-shadow: 0 2px 8px rgba(184,112,112,0.18);
+}
+.haitu-quote { flex: 1; }
+.haitu-name {
+  font-family: var(--font-sans);
+  font-size: 12px; font-weight: 700; letter-spacing: 1.5px;
+  color: var(--red-ink); text-transform: uppercase; margin-bottom: 4px;
+}
+.haitu-portrait {
+  font-size: 15px; line-height: 1.65; color: var(--text);
+  margin-bottom: 6px; font-weight: 600;
+}
+.haitu-rating-line {
+  font-size: 13px; color: var(--text2);
+  font-family: var(--font-sans);
+}
+.rating-badge {
+  display: inline-block; padding: 2px 12px; border-radius: 12px;
+  font-weight: 700; font-size: 13px; letter-spacing: 0.5px;
+  margin-left: 4px;
+}
+.rating-strong-buy { background: rgba(122,154,122,.25); color: var(--green); }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+.rating-cond-buy { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-hold { background: rgba(123,143,160,.18); color: var(--accent2); }
+.rating-sell { background: rgba(184,112,112,.18); color: var(--red); }
+.rating-strong-sell { background: rgba(184,112,112,.28); color: var(--red); }
+
+.haitu-essay {
+  background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red);
+  border-radius: 12px; padding: 28px 32px; margin: 24px 0;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.haitu-essay-header {
+  display: flex; align-items: center; gap: 18px;
+  padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px;
+}
+.haitu-avatar-lg {
+  width: 110px; height: 110px; border-radius: 50%;
+  object-fit: cover; flex-shrink: 0;
+  border: 3px solid var(--border); background: var(--red);
+  box-shadow: 0 4px 14px rgba(184,112,112,0.22);
+}
+.haitu-name-lg {
+  font-family: 'Georgia', 'Noto Serif SC', serif;
+  font-size: 28px; font-weight: 700; color: var(--text);
+  letter-spacing: 1px; margin-bottom: 4px;
+}
+.haitu-essay-tag {
+  font-family: var(--font-sans);
+  font-size: 12px; color: var(--text3); letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+.haitu-essay-body {
+  font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', serif;
+  font-size: 15px; line-height: 2.0; color: var(--text);
+}
+.haitu-essay-body p { margin-bottom: 16px; }
+.haitu-essay-body p:first-child {
+  font-size: 16px; font-style: italic; color: var(--text2);
+}
+.haitu-essay-body p:last-child {
+  margin-top: 22px; padding-top: 14px;
+  border-top: 1px solid var(--border);
+  font-size: 12px; color: var(--text3); font-style: italic;
+}
+.haitu-sign {
+  text-align: right; margin-top: 14px;
+  font-family: 'Georgia', serif; font-size: 14px;
+  color: var(--text2); font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .haitu-quip { flex-direction: column; text-align: center; }
+  .haitu-essay-header { flex-direction: column; text-align: center; }
+  .haitu-avatar-sm { width: 80px; height: 80px; }
+  .haitu-avatar-lg { width: 90px; height: 90px; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   海图 v2 追加规则 —— 修 103 份存量实测出的问题，勿删勿改顺序
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── 1. 锚点落点：一行同时修好 TOC 跳转 / 深链 / Ctrl+F 定位 / :target ──
+   没有这条，所有跳转都会落在 sticky 顶栏底下被遮住 */
+.section { scroll-margin-top: calc(var(--bar-h) + 12px); }
+
+/* h2.stitle 必须显式定字号，否则被 UA 默认样式撑成 32px 巨标题 */
+h2.stitle { font-size: 18px; font-weight: 700; margin: 0 0 20px; }
+
+/* 章节深链锚点：桌面 hover 显形，触屏常显 */
+.anchor {
+  margin-left: 8px; font-size: 13px; color: var(--text3-ink);
+  text-decoration: none; opacity: 0; transition: opacity .2s;
+}
+.stitle:hover .anchor, .anchor:focus-visible { opacity: 1; }
+@media (hover: none) { .anchor { opacity: .35; } }
+
+/* ── 2. 评级徽章：由 data-rating 派生，作者不再手写 class ──
+   实测存量 .rating-hold 在 63 份是金色、30 份是蓝色 —— 这套选择器根除该分歧 */
+.rating-badge[data-rating="强力买入"] { background: rgba(122,154,122,.25); color: var(--green-ink); }
+.rating-badge[data-rating="买入"]     { background: rgba(122,154,122,.18); color: var(--green-ink); }
+.rating-badge[data-rating="有条件买入"]{ background: rgba(185,160,106,.18); color: var(--gold-ink); }
+.rating-badge[data-rating="持有观望"] { background: rgba(123,143,160,.18); color: var(--accent2-ink); }
+.rating-badge[data-rating="卖出"]     { background: rgba(184,112,112,.18); color: var(--red-ink); }
+.rating-badge[data-rating="强烈卖出"] { background: rgba(184,112,112,.28); color: var(--red-ink); }
+
+/* 涨跌不能只靠色相（色盲）—— 文字里必须自带 +/- 号，这里只负责配色 */
+.up, .pos { color: var(--green-ink); }
+.dn, .neg { color: var(--red-ink); }
+
+/* ── 3. 窄屏表格：粘性首列 + 右侧滚动阴影提示 ──
+   实测 375px 下 12 张表有 6 张横向溢出，且无任何可滚动的视觉线索 */
+.tbl-wrap {
+  background-image: linear-gradient(to right, var(--card), var(--card)),
+                    linear-gradient(to right, rgba(0,0,0,.10), rgba(0,0,0,0));
+  background-position: right center, right center;
+  background-repeat: no-repeat;
+  background-size: 24px 100%, 12px 100%;
+  background-attachment: local, scroll;
+}
+@media (max-width: 640px) {
+  /* border-collapse:collapse 下 sticky 单元格的边框会丢，用 box-shadow 补回 */
+  .tbl { border-collapse: separate; border-spacing: 0; }
+  .tbl :is(th, td) { border-bottom: 1px solid var(--border); }
+  .tbl :is(th, td):first-child {
+    position: sticky; left: 0; z-index: 1;
+    background: var(--card); box-shadow: 1px 0 0 var(--border);
+  }
+  .tbl th:first-child { background: var(--card2); }
+}
+
+/* ── 4. 移动端：顶栏必须能换行（实测四元素已折行重叠）── */
+.theme-bar { flex-wrap: wrap; row-gap: 6px; }
+@media (max-width: 420px) { .theme-bar .xueqiu-link { display: none; } }
+
+@media (max-width: 640px) {
+  .container { padding: 0 14px; }          /* 24px 在 375px 上吃掉 12.8% 视口 */
+  body { font-size: 15.5px; }              /* 14.5px 中文长文在手机上偏小 */
+  .cwrap { height: 200px; }
+  #sankey { height: 360px !important; }    /* 480px 挤在 289px 宽里不可读 */
+  .cgrid, .cgrid3, .pgrid { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* 触控目标 ≥44px。用一个不可见的 ::before 撑开命中区，
+   开关本身仍是 44×22 的滑块外观。
+   ⚠️ 不要改 .toggle-switch 的 height/padding 来凑 44px —— 实测那样做会让
+   border-radius 与 ::after 滑块的定位一起错位，开关变成一个大圆角方块。
+   ⚠️ 条件必须同时含宽度 —— 只写 (hover:none) 时窄屏桌面实测仍是 22px。 */
+@media (max-width: 640px), (hover: none) {
+  .toggle-switch::before {
+    content: ''; position: absolute; left: 0; right: 0;
+    top: 50%; transform: translateY(-50%); height: 44px;
+  }
+}
+
+/* ── 5. prefers-reduced-motion ──
+   全语料 103/103 有 scroll-behavior:smooth 且零保护。加了目录之后，
+   一次跳转要跨 4 万像素、持续数秒，前庭敏感者会难受 */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important; animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+}
+
+/* ── 6. 焦点可见（全语料 0 个 :focus-visible 样式）── */
+:focus-visible { outline: 2px solid var(--accent3-ink); outline-offset: 2px; }
+
+/* ── 7. 图表无障碍降级容器 ── */
+figure.chart { margin: 0; }
+figure.chart figcaption { font-size: 12px; color: var(--text3-ink); line-height: 1.6; margin-top: 8px; }
+.chart-data { font-size: 12px; margin-top: 8px; }
+.chart-data summary { cursor: pointer; color: var(--text3-ink); }
+
+/* ── 8. shell 新增组件（skip link / 结论跳转带 / 顶栏右侧 / 屏幕阅读器专用）── */
+
+/* 跳转到正文：平时移出视口，聚焦时才出现。
+   ⚠️ 不能用 display:none —— 那样键盘也聚焦不到，等于没有 */
+.skip {
+  position: absolute; left: -9999px; top: 0;
+  background: var(--card); color: var(--accent3-ink);
+  padding: 8px 14px; border-radius: 0 0 8px 0; z-index: 200;
+  font-size: 13px; text-decoration: none;
+}
+.skip:focus { left: 0; }
+
+/* 只给屏幕阅读器：essay 一节的标题不需要视觉呈现（.haitu-essay 自带头部） */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+.theme-bar-right { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+
+/* 结论跳转带：读者看完评级后一步到证据 */
+.quip-jump { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.quip-jump a {
+  font-family: var(--font-sans); font-size: 12px; line-height: 1;
+  padding: 7px 12px; border-radius: 999px;
+  border: 1px solid var(--border); background: var(--card2);
+  color: var(--accent3-ink); text-decoration: none;
+  transition: border-color .2s, background .2s;
+}
+.quip-jump a:hover { border-color: var(--accent3); background: var(--card); }
+/* 触控目标 ≥44px。
+   ⚠️ 不能只用 @media (hover:none) —— 窄屏但支持 hover 的场景（缩小的桌面窗口、
+   带触控板的二合一设备）拿不到放大，实测那种情况下只有 28px。宽度与指针两个条件都要给。 */
+@media (max-width: 640px), (hover: none) {
+  /* 用 min-height 而不是加 padding —— padding 要靠字体行高凑够 44px，
+     换字体或改字号就又不达标了（实测 padding:13px 只得到 40px）。 */
+  .quip-jump a { min-height: 44px; padding: 0 16px; display: inline-flex; align-items: center; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   9. 报告组件（快照 / KPI / 护城河 / 风险 / 评分卡 / 电话会 / 桑基）
+   来源：现有报告语料中已验证的组件规则，已套用本表的字体栈与 ink 对比度修正。
+   ⚠️ 这一节必须与 body-skeleton.html 的类名保持同步 —— 骨架里出现的
+   每个类都要在这里有定义，否则章节会退化成无样式的纯文本流。
+   ══════════════════════════════════════════════════════════════ */
+.hero-pills {display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;}
+.pill {background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: var(--font-sans); font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow);}
+.pill strong {color: var(--text);}
+.stock-snap {background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px;}
+.snap-item {text-align: center;}
+.snap-label {font-family: var(--font-sans); font-size: 10px; color: var(--text3-ink); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px;}
+.kpi-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px;}
+.kpi {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow);}
+.moat-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px;}
+.moat-card {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); border-left: 4px solid var(--accent);}
+.moat-card.wide {border-left-color: var(--green);}
+.moat-card.narrow {border-left-color: var(--gold);}
+.moat-card.none {border-left-color: var(--red);}
+.moat-card h5 {font-size: 13px; color: var(--text); margin-bottom: 6px;}
+.moat-card .moat-rate {font-family: var(--font-sans); font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px;}
+.moat-card.wide .moat-rate {background: rgba(122,154,122,.18); color: var(--green);}
+.moat-card.narrow .moat-rate {background: rgba(185,160,106,.18); color: var(--gold);}
+.moat-card.none .moat-rate {background: rgba(184,112,112,.18); color: var(--red);}
+.moat-card p {font-size: 12.5px; color: var(--text2); line-height: 1.65;}
+/* ⚠️ .ec-item 必须是 block，不能是 flex。
+   语料里它只装「徽章 + 一句短语」，所以 flex 没出事；但正文里一旦出现
+   <strong>，每个 <strong> 都会变成独立 flex item，默认 min-width:auto 不收缩，
+   实测在 375px 下把 347px 的容器撑到 478px，导致整页横向滚动。
+   改为 block + 内联徽章：徽章仍在句首，正文正常折行环绕。
+   这与 .cgrid 必须写 minmax(0,1fr) 是同一类问题——flex/grid 子项默认不收缩。 */
+.ec-item {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: block; box-shadow: 0 1px 3px var(--shadow); line-height: 1.75;}
+.ec-badge {display: inline-block; vertical-align: baseline; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-right: 10px; font-family: var(--font-sans); white-space: nowrap;}
+.dcf-note {background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: 13px; color: var(--text2); line-height: 1.8;}
+.dcf-note strong {color: var(--text);}
+.scorecard {background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow);}
+.score-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px;}
+.score-card {background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px;}
+.score-letter {width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-sans); font-weight: 800; font-size: 22px; flex-shrink: 0; border: 3px solid;}
+.flag-row {margin-top: 16px; padding: 12px 16px; background: rgba(184,112,112,.08); border: 1px solid rgba(184,112,112,.3); border-radius: 8px; font-size: 13px; color: var(--text2);}
+.flag-row strong {color: var(--red);}
+.pgrid {display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0;}
+.pbox {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center; box-shadow: 0 1px 4px var(--shadow);}
+.pbox .pl {font-family: var(--font-sans); font-size: 11px; color: var(--text3-ink); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px;}
+.pbox .pv {font-family: var(--font-sans); font-size: 28px; font-weight: 800; margin-bottom: 5px;}
+.pbox .pn {font-size: 12px; color: var(--text3-ink); line-height: 1.5;}
+.risk-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px;}
+.risk-card {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); position: relative; overflow: hidden;}
+.risk-card::before {content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent);}
+.risk-card.r1::before {background: var(--green);}
+.risk-card.r2::before {background: rgba(122,154,122,.6);}
+.risk-card.r3::before {background: var(--gold);}
+.risk-card.r4::before {background: var(--rose);}
+.risk-card.r5::before {background: var(--red);}
+.risk-card h5 {font-size: 14px; margin-bottom: 6px; color: var(--text);}
+.risk-card p {font-size: 13px; color: var(--text2); line-height: 1.7;}
+/* ⚠️ 此处原本混进了三条来自语料 @media(max-width:768px) 内的移动端规则
+   （.cgrid/.pgrid→1fr、.kpi-grid→1fr 1fr、.stock-snap→1fr 1fr）。
+   它们被抽取时丢掉了 @media 包裹，变成无条件规则且排在最后，
+   结果桌面端所有网格都塌成单列。已删除 —— 移动端由本表第 4、9 节的
+   @media(max-width:640px) 统一负责。抽取语料 CSS 时务必排除 @media 块内的规则。 */
+
+/* 骨架用到、但语料里没有现成规则的补充组件 */
+.note { font-size: 12px; color: var(--text3-ink); line-height: 1.7; margin-top: 10px; }
+.lead { font-size: 16px; font-weight: 600; line-height: 1.8; margin-bottom: 14px; }
+.haitu-disc { font-size: 12px; color: var(--text3-ink); line-height: 1.7; margin-top: 18px;
+              padding-top: 14px; border-top: 1px solid var(--border); }
+.bscore { background: var(--card2); border: 1px solid var(--border); border-radius: 10px;
+          padding: 16px 20px; margin: 16px 0; }
+.bscore h4 { font-family: var(--font-sans); font-size: 14px; color: var(--accent3-ink); margin: 0 0 6px; }
+.bscore p { margin: 0; font-size: 14px; }
+
+/* 桑基 SVG：颜色与线宽在标记里给，这里只管描边端点与文字 */
+#sankey { width: 100%; height: auto; }
+.sk-flow path { fill: none; opacity: .45; stroke-linecap: butt; }
+.sk-t .sk-lab { font-family: var(--font-sans); font-size: 12px; fill: var(--text2); }
+.sk-t .sk-num { font-family: var(--font-sans); font-size: 13px; font-weight: 700; fill: var(--text);
+                font-variant-numeric: tabular-nums; }
+.sk-t .warn   { fill: var(--red-ink); }
+
+@media (max-width: 640px) {
+  .stock-snap { grid-template-columns: 1fr 1fr; }
+  .kpi-grid   { grid-template-columns: 1fr 1fr; }
+  .moat-grid, .risk-grid, .score-grid, .pgrid { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* 修饰类：评分等级 / 电话会情绪 / 快照数值。文字色一律走 ink 层。 */
+.score-letter.s-a  { color: var(--green-ink);   border-color: var(--green);   background: rgba(122,154,122,.12); }
+.score-letter.s-bp { color: var(--gold-ink);    border-color: var(--gold);    background: rgba(185,160,106,.12); }
+.score-letter.s-b  { color: var(--accent2-ink); border-color: var(--accent2); background: rgba(123,143,160,.12); }
+.score-letter.s-c  { color: var(--red-ink);     border-color: var(--red);     background: rgba(184,112,112,.12); }
+
+.ec-badge.ec-bull { background: rgba(122,154,122,.18); color: var(--green-ink); }
+.ec-badge.ec-bear { background: rgba(184,112,112,.18); color: var(--red-ink); }
+.ec-badge.ec-neut { background: rgba(123,143,160,.18); color: var(--accent2-ink); }
+
+.snap-value { font-family: var(--font-sans); font-size: 19px; font-weight: 700; color: var(--text);
+              font-variant-numeric: tabular-nums; line-height: 1.3; }
+.snap-note  { font-family: var(--font-sans); font-size: 11px; color: var(--text3-ink); margin-top: 3px; }
+.sk-node rect { opacity: .9; }
+
+</style>
+</head>
+<body>
+
+<a class="skip" href="#kpi">跳到正文</a>
+
+<!-- ── 顶栏 ── -->
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/CRCL" target="_blank" rel="noopener">📊 雪球 CRCL</a>
+  </div>
+  <div class="theme-bar-right">
+    <span>☀️ 浅色</span>
+    <!-- ⚠️ 必须是 <button>，不是 <div onclick>。存量 103/103 用裸 div，键盘完全不可达。
+         CSS 里已配套 appearance:none;border:0;padding:0，否则 UA 默认样式破坏 44×22 造型。 -->
+    <button type="button" class="toggle-switch" id="themeBtn"
+            aria-pressed="false" aria-label="切换深色模式" onclick="toggleTheme()"></button>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-tag">Q2 2026 财报发布 · 2026-08-05 ｜ 海图研判 · 2026-08-05</div>
+  <h1>Circle CRCL · Q2 2026 财报深度分析</h1>
+  <div class="hero-sub">NYSE: CRCL ｜ 财季截至 2026-06-30 ｜ 价值投资视角</div>
+  <div class="hero-pills">
+    <span class="pill">股价 <strong>$61.52</strong> 财报日盘中</span>
+    <span class="pill">市值 <strong>$156 亿</strong></span>
+    <span class="pill">Q2 营收 <strong>$7.01 亿</strong> <span class="up">+6.6%</span></span>
+    <span class="pill">摊薄 EPS <strong>$0.18</strong></span>
+    <span class="pill">USDC <strong>$733 亿</strong> <span class="dn">环比 −4.8%</span></span>
+    <span class="pill">付 Coinbase <strong>占营收 46.3%</strong></span>
+  </div>
+</div>
+
+<div class="container">
+  <div class="haitu-quip">
+    <div class="haitu-quote">
+      <div class="haitu-portrait">把 730 亿美元别人的钱存进国债，赚利息，再把其中近一半分给 Coinbase——一家披着科技外衣的利率生意，而它的规模正在缩水。</div>
+      <div class="haitu-rating-line">
+        评级：<span class="rating-badge" data-rating="持有观望">持有观望</span>
+        · 12 个月目标价 $64 · 指引上调 100% 来自一次性代币收入，核心分销经济学零改善
+      </div>
+      <div class="quip-jump" role="group" aria-label="快速跳转">
+        <a href="#m13">评分卡与决策</a>
+        <a href="#m7">目标价怎么算出来的</a>
+        <a href="#m11">风险矩阵</a>
+        <a href="#m4">护城河</a>
+        <a href="#essay">夜读手记</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+<section class="section" id="snapshot" aria-labelledby="snapshot-t">
+  <h2 class="stitle" id="snapshot-t">市场数据快照（2026-08-05 盘中）<a class="anchor" href="#snapshot" aria-label="本节链接">#</a></h2>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">股价</div><div class="snap-value">$61.52</div><div class="snap-note">财报日盘中，前收 $63.25</div></div>
+    <div class="snap-item"><div class="snap-label">市值</div><div class="snap-value">$156 亿</div><div class="snap-note">2.539 亿股（含 B 类）</div></div>
+    <div class="snap-item"><div class="snap-label">企业价值</div><div class="snap-value">$139 亿</div><div class="snap-note">零借款，扣自有现金 $17.3 亿</div></div>
+    <div class="snap-item"><div class="snap-label">P/S（TTM）</div><div class="snap-value">5.4x</div><div class="snap-note">TTM 营收 $29.05 亿</div></div>
+    <div class="snap-item"><div class="snap-label">P/RLDC</div><div class="snap-value">13.3x</div><div class="snap-note">更贴近实质的口径</div></div>
+    <div class="snap-item"><div class="snap-label">P/E（TTM）</div><div class="snap-value">34.6x</div><div class="snap-note">TTM 净利 $4.51 亿</div></div>
+    <div class="snap-item"><div class="snap-label">前瞻 P/E</div><div class="snap-value">71x</div><div class="snap-note">FY26 一致预期 EPS $0.86</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间</div><div class="snap-value">$49.9 – $189.9</div><div class="snap-note">距历史高 $299 −79%</div></div>
+    <div class="snap-item"><div class="snap-label">Q2 营收</div><div class="snap-value">$7.01 亿</div><div class="snap-note">+6.6%，Q4'25 见顶后未回</div></div>
+    <div class="snap-item"><div class="snap-label">USDC 流通量</div><div class="snap-value">$733 亿</div><div class="snap-note">环比 −4.8%，连续两季降</div></div>
+    <div class="snap-item"><div class="snap-label">付给 Coinbase</div><div class="snap-value">$3.25 亿</div><div class="snap-note">占总营收 46.3%</div></div>
+    <div class="snap-item"><div class="snap-label">做空占比</div><div class="snap-value">11.6%</div><div class="snap-note">占 A 类股，2026 年最高</div></div>
+  </div>
+</section>
+
+<section class="section" id="kpi" aria-labelledby="kpi-t">
+  <h2 class="stitle" id="kpi-t">Q2 2026 核心业绩（财季截至 2026-06-30）<a class="anchor" href="#kpi" aria-label="本节链接">#</a></h2>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="Circle Q2 2026 财报 8-K Ex-99.1（2026-08-05）与 10-Q（crcl-20260630）">
+      <thead><tr><th>指标（百万美元）</th><th>Q2 2026</th><th>Q2 2025</th><th>YoY</th><th>读法</th></tr></thead>
+      <tr class="hl"><td>总营收与储备收入</td><td>701.3</td><td>658.1</td><td class="up">+6.6%</td><td>低于 Q4'25 的 $770M</td></tr>
+      <tr><td>— 储备利息收入</td><td>667.7</td><td>634.3</td><td class="up">+5.3%</td><td><strong>占总营收 95.2%</strong></td></tr>
+      <tr><td>— 其他收入</td><td>33.6</td><td>23.8</td><td class="up">+41.1%</td><td class="dn">环比从 Q1 的 $42M 降 19%</td></tr>
+      <tr class="hl"><td>分销/交易/其他成本</td><td>412.5</td><td>406.9</td><td>+1.4%</td><td>占储备收入 61.8%</td></tr>
+      <tr class="hl"><td>— 其中付给 Coinbase</td><td><strong>324.6</strong></td><td>332.3</td><td class="up">−2.3%</td><td class="dn">占分销成本 78.7%</td></tr>
+      <tr><td>营收减分销成本 RLDC</td><td>288.8</td><td>251.1</td><td class="up">+15%</td><td>利润率 41%（+302bps）</td></tr>
+      <tr><td>薪酬费用</td><td>134.0</td><td>503.4</td><td class="up">−73.4%</td><td>去年含 IPO 一次性 RSU $423.8M</td></tr>
+      <tr><td>总运营费用</td><td>254.5</td><td>576.7</td><td class="up">−55.9%</td><td>同上</td></tr>
+      <tr><td>营业利润</td><td>34.4</td><td>(325.6)</td><td class="up">转正</td><td>营业利润率 4.9%</td></tr>
+      <tr class="hl"><td>净利润（GAAP）</td><td>48.2</td><td>(482.1)</td><td class="up">+$530M</td><td class="dn">差额几乎全是去年的 RSU</td></tr>
+      <tr><td>摊薄 EPS</td><td>$0.18</td><td>$(4.48)</td><td class="up">转正</td><td>摊薄股数 2.686 亿</td></tr>
+      <tr class="hl"><td>调整后 EBITDA</td><td>143.5</td><td>133.0</td><td class="up">+7.9%</td><td class="dn">Q4'25 见顶 $175.9M 后连降两季</td></tr>
+      <tr><td>USDC 期末流通量</td><td>$733 亿</td><td>$613 亿</td><td class="up">+19%</td><td class="dn">环比 −4.8%</td></tr>
+      <tr><td>USDC 季度均值</td><td>$765 亿</td><td>$610 亿</td><td class="up">+25%</td><td class="dn">期末低于均值 = 季内持续下滑</td></tr>
+      <tr class="hl"><td>储备收益率</td><td>3.5%</td><td>4.1%</td><td class="dn">−66bps</td><td>反映 SOFR 下行</td></tr>
+    </table>
+  </div>
+  <p class="note">务必区分：总资产 $771.7 亿中约 95% 是 USDC 储备资产，对应 $729.3 亿的稳定币持有人负债，Circle 对其「仅持有名义法定所有权」。<strong>公司真正可动用的自有资金 = 现金 $17.3 亿 + 公司持有稳定币 $8.9 亿 = 总流动性约 $26 亿</strong>，且 2026-06-30 无任何借款。</p>
+</section>
+
+<section class="section" id="focus" aria-labelledby="focus-t">
+  <h2 class="stitle" id="focus-t">本季必看 · 两个「看穿」<a class="anchor" href="#focus" aria-label="本节链接">#</a></h2>
+  <p><strong>看穿一：指引上调是口径变更，不是基本面改善。</strong>公司本季把 FY2026 两项指引大幅上调，读者很容易当成经营转好：</p>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="cards" data-source="Circle Q2 2026 新闻稿指引表与官方电话会 CFO 表述（2026-08-05）">
+      <thead><tr><th>指标</th><th>原指引</th><th>新指引</th><th>拆开看</th></tr></thead>
+      <tr><td>其他收入（FY26）</td><td>$150–170M</td><td class="up">$310–330M</td><td class="dn">ARC 一次性 $180M + <strong>非 ARC $130–150M（实为下调 12.5%）</strong></td></tr>
+      <tr><td>RLDC 利润率（FY26）</td><td>38–40%</td><td class="up">41.7–43.7%</td><td class="dn">CFO 原话：<strong>「剔除 Arc 收入，全年 RLDC 利润率将落在原区间中值附近」</strong>（约 39%）</td></tr>
+      <tr><td>调整后运营费用</td><td>$570–585M</td><td>维持</td><td class="dn">CFO 补充：<strong>预计落在区间上沿</strong></td></tr>
+    </table>
+  </div>
+  <p>ARC 代币预售是这样一笔钱：2026 年 5 月与 6 月两轮共售出 8.075 亿枚 × $0.30 = <strong>$2.42 亿</strong>，Q2 实收现金 $2.22 亿，全部计入<strong>递延收入</strong>（余额从年初 $1,150 万暴增至 $2.462 亿），<strong>Q2 未确认一分钱</strong>。CFO 说预计 2026 年达成约 75% 里程碑、确认 $1.80 亿，且「这部分收入确认时将直接流向利润底线」。</p>
+  <p><strong>验算一下就清楚了</strong>：$1.80 亿零分销成本的收入，摊到约 $28 亿的全年营收基数上，机械性抬高 RLDC 利润率约 <strong>+3.6pp</strong>；而指引中值实际抬升 <strong>+3.7pp</strong>。<strong>几乎完全吻合——上调 100% 是 ARC 口径，核心分销经济学零改善。</strong>而剔除 ARC 后的非 ARC 其他收入，其实是被下调了。</p>
+
+  <p><strong>看穿二：Coinbase 拿走近一半收益，但也替 Circle 承担了一半的利率风险。</strong></p>
+  <p>先看依赖有多深：本季付给 Coinbase <strong>$3.246 亿</strong>，等于储备收入的 <strong>48.6%</strong>、总营收的 <strong>46.3%</strong>、全部分销成本的 <strong>78.7%</strong>。<strong>Circle 每赚 1 美元储备收入，自己只留下 38.2 分。</strong></p>
+  <p>但这里有一个被广泛误读的地方。市场常说「每降息 100bp，Circle 年收入减少约 $7.4 亿」——这个数字对，但那是<strong>毛额</strong>。公司 10-Q 的官方敏感性表同时给了另一半：</p>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="Circle 10-Q（2026-06-30）Item 3 市场风险量化披露，基于 6/30 流通量与 3.49% 平均收益率、假设利率变动后维持 12 个月">
+      <thead><tr><th>利率变动</th><th>储备收入变化</th><th>分销成本变化</th><th>净 RLDC 影响</th><th>占 TTM RLDC</th></tr></thead>
+      <tr><td>+200bp</td><td class="up">+$1,475M</td><td>+$720M</td><td class="up">+$755M</td><td>64%</td></tr>
+      <tr class="hl"><td>+100bp</td><td class="up">+$737M</td><td>+$360M</td><td class="up">+$377M</td><td>32%</td></tr>
+      <tr class="hl"><td>−100bp</td><td class="dn">−$737M</td><td>−$360M</td><td class="dn">−$377M</td><td>32%</td></tr>
+      <tr><td>−200bp</td><td class="dn">−$1,475M</td><td>−$720M</td><td class="dn">−$755M</td><td>64%</td></tr>
+    </table>
+  </div>
+  <p>因为分销成本是按<strong>储备收益分成</strong>算的，利率跌，Coinbase 拿到的也同步跌。<strong>降息 100bp 的净影响是 −$3.77 亿，不是 −$7.37 亿——正好一半。</strong>那份看似苛刻的分成协议，同时也是一份天然的利率对冲。这不改变「分成太贵」的结论，但它改变了利率风险的量级。</p>
+  <p>而且方向已经变了：联邦基金利率停在 3.50–3.75% 已连续五次会议，最近一次 <strong>9-3 通过，三张反对票全部主张加息</strong>；6 月点阵图把 2026 年底中位数从 3.4% 上调到 <strong>3.8%</strong>（隐含年内加息一次），市场对 9 月加息定价约 62%。<strong>如果加息兑现，按上表 Q2 的储备收益率很可能是谷底而非起点。</strong></p>
+  <p><strong>所以真正在恶化的不是利率，是规模。</strong>USDC 从 Q1 末的 $770 亿峰值降到 Q2 末 $733 亿、8 月初 $723 亿，连续两个季度环比下滑。摩根士丹利 8 月 3 日把评级下调至减持、目标价从 $106 砍到 $38，理由正是这一条。</p>
+</section>
+
+<section class="section" id="trend" aria-labelledby="trend-t">
+  <h2 class="stitle" id="trend-t">关键指标趋势（近 5 季）<a class="anchor" href="#trend" aria-label="本节链接">#</a></h2>
+  <div class="cgrid">
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">总营收与储备收入（$M）</div>
+        <div class="cwrap"><canvas id="rev" data-chart="rev" role="img" aria-label="总营收在 Q4 2025 见顶 7.7 亿美元后回落，Q2 2026 为 7.01 亿；储备收入同步在 Q4 2025 见顶 7.33 亿后降至 6.68 亿"></canvas></div>
+        <figcaption>来源：各季 8-K Ex-99.1。<strong>营收与储备收入双双在 Q4 2025 见顶，此后两季未能回到该水平。</strong></figcaption>
+      </figure>
+    </div>
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">RLDC 利润率 vs 储备收益率（%）</div>
+        <div class="cwrap"><canvas id="margin" data-chart="margin" role="img" aria-label="RLDC 利润率从 38% 稳步提升至 41%，同期储备收益率从 4.1% 下滑至 3.5%，两条线呈反向剪刀差"></canvas></div>
+        <figcaption>来源：同上。<strong>这张剪刀差是本季最好的一张图</strong>——利润率靠自有平台份额提升在改善，同时收益率被利率压着走。</figcaption>
+      </figure>
+    </div>
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">USDC 流通量：总量 vs 自有平台（$B）</div>
+        <div class="cwrap"><canvas id="segment" data-chart="segment" role="img" aria-label="USDC 期末流通量从 613 亿增至 Q1 2026 峰值 770 亿后回落至 733 亿；同期自有平台内 USDC 从 60 亿增至 137 亿后微降至 124 亿"></canvas></div>
+        <figcaption>来源：各季 8-K Ex-99.1。总量见顶回落，但<strong>自有平台占比从 7.4% 升至 19.5%</strong>——这是分销成本占比下降的直接原因。</figcaption>
+      </figure>
+    </div>
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">调整后 EBITDA vs RLDC（$M）</div>
+        <div class="cwrap"><canvas id="eps" data-chart="eps" role="img" aria-label="调整后 EBITDA 在 Q4 2025 达 1.759 亿美元后连续两季下滑至 1.435 亿，同期 RLDC 相对稳定在 2.9 亿附近"></canvas></div>
+        <figcaption>来源：同上（调整后 EBITDA 采新定义口径）。<strong>RLDC 几乎持平，调整后 EBITDA 却在掉</strong>——差额是连续 5 季上升的运营费用。</figcaption>
+      </figure>
+    </div>
+  </div>
+  <p class="note">口径提示：调整后 EBITDA 自 2026 Q1 起新增剔除「股权激励相关工资税」，公司未追溯调整前期，但在 8-K 对账表中同时给出五个季度的新旧两套口径。本图统一采用新口径。</p>
+</section>
+
+<section class="section" id="flow" aria-labelledby="flow-t">
+  <h2 class="stitle" id="flow-t">资金流向桑基图（Q2 2026 · $M）<a class="anchor" href="#flow" aria-label="本节链接">#</a></h2>
+  <div class="ccard">
+    <figure class="chart">
+      <svg id="sankey" viewBox="0 0 1180 470" role="img" aria-label="Q2 2026 资金流向：7.013 亿美元营收中 3.246 亿直接付给 Coinbase、0.858 亿付其他分销伙伴，剩余 2.888 亿 RLDC 再扣 2.545 亿运营费用后营业利润仅 0.344 亿，加其他收入后税前 0.523 亿，净利 0.482 亿">
+        <g class="sk-flow">
+          <path d="M106,60 C260,60 260,72 300,72" stroke="var(--red)" stroke-width="106"/>
+          <path d="M106,160 C260,160 260,150 300,150" stroke="var(--rose)" stroke-width="28"/>
+          <path d="M106,182 C260,182 260,170 300,170" stroke="var(--gold)" stroke-width="2"/>
+          <path d="M106,240 C260,240 260,262 300,262" stroke="var(--accent)" stroke-width="94"/>
+          <path d="M330,262 C440,262 440,214 490,214" stroke="var(--accent3)" stroke-width="83"/>
+          <path d="M330,306 C440,306 440,318 490,318" stroke="var(--green)" stroke-width="11"/>
+          <path d="M520,318 C600,318 600,330 660,330" stroke="var(--green)" stroke-width="11"/>
+          <path d="M520,392 C600,392 600,342 660,342" stroke="var(--accent2)" stroke-width="6"/>
+          <path d="M690,330 C760,330 760,300 820,300" stroke="var(--rose)" stroke-width="2"/>
+          <path d="M690,340 C760,340 760,352 820,352" stroke="var(--green)" stroke-width="15"/>
+        </g>
+        <g class="sk-node">
+          <rect x="92" y="4" width="14" height="228" rx="3" fill="var(--accent2)"/>
+          <rect x="300" y="19" width="14" height="106" rx="3" fill="var(--red)"/>
+          <rect x="300" y="136" width="14" height="28" rx="3" fill="var(--rose)"/>
+          <rect x="300" y="169" width="14" height="2" rx="1" fill="var(--gold)"/>
+          <rect x="300" y="215" width="14" height="94" rx="3" fill="var(--accent)"/>
+          <rect x="490" y="173" width="14" height="83" rx="3" fill="var(--accent3)"/>
+          <rect x="490" y="313" width="14" height="11" rx="3" fill="var(--green)"/>
+          <rect x="506" y="386" width="14" height="6" rx="2" fill="var(--accent2)"/>
+          <rect x="660" y="324" width="14" height="17" rx="3" fill="var(--green)"/>
+          <rect x="820" y="299" width="14" height="2" rx="1" fill="var(--rose)"/>
+          <rect x="820" y="344" width="14" height="15" rx="3" fill="var(--green)"/>
+        </g>
+        <g class="sk-t">
+          <text x="2" y="112" class="sk-lab">总营收</text><text x="2" y="128" class="sk-num">701.3</text>
+          <text x="2" y="146" class="sk-lab">储备收入 667.7</text>
+          <text x="2" y="162" class="sk-lab">＋其他 33.6</text>
+          <text x="322" y="66" class="sk-lab warn">付给 Coinbase</text><text x="322" y="82" class="sk-num warn">324.6</text>
+          <text x="322" y="98" class="sk-lab warn">＝总营收的 46.3%</text>
+          <text x="322" y="146" class="sk-lab">其他分销伙伴</text><text x="322" y="162" class="sk-num">85.8</text>
+          <text x="322" y="180" class="sk-lab">其他成本 2.1</text>
+          <text x="322" y="258" class="sk-lab">RLDC</text><text x="322" y="274" class="sk-num">288.8</text>
+          <text x="512" y="210" class="sk-lab">运营费用</text><text x="512" y="226" class="sk-num">254.5</text>
+          <text x="512" y="242" class="sk-lab">薪酬134 管理66 折旧30 其他25</text>
+          <text x="512" y="314" class="sk-lab">营业利润</text><text x="512" y="330" class="sk-num">34.4</text>
+          <text x="380" y="418" class="sk-lab">＋其他收入净额（利息等）</text><text x="380" y="434" class="sk-num">＋17.9</text>
+          <text x="682" y="320" class="sk-lab">税前利润</text><text x="682" y="336" class="sk-num">52.3</text>
+          <text x="842" y="296" class="sk-lab">所得税</text><text x="920" y="296" class="sk-num">4.1</text>
+          <text x="842" y="348" class="sk-lab">净利润</text><text x="842" y="364" class="sk-num">48.2</text>
+          <text x="842" y="380" class="sk-lab">＝营收的 6.9%</text>
+        </g>
+      </svg>
+      <figcaption>单位：百万美元。来源：Circle Q2 2026 8-K Ex-99.1 损益表。每级流入=流出（701.3 = 324.6+85.8+2.1+288.8；288.8 = 254.5+34.4；52.3 = 4.1+48.2）。<strong>最左边那条最粗的分支不是成本项里的某一项，它就是付给单一伙伴 Coinbase 的钱——比全部运营费用还多 27%。</strong></figcaption>
+    </figure>
+    <details class="chart-data">
+      <summary>查看数据表</summary>
+      <div class="tbl-wrap">
+        <table class="tbl" data-shape="grid" data-source="Circle Q2 2026 8-K Ex-99.1 损益表">
+          <thead><tr><th>节点</th><th>金额（$M）</th><th>占总营收</th></tr></thead>
+          <tr><td>总营收与储备收入</td><td>701.3</td><td>100.0%</td></tr>
+          <tr class="hl"><td>付给 Coinbase</td><td>324.6</td><td>46.3%</td></tr>
+          <tr><td>其他分销伙伴</td><td>85.8</td><td>12.2%</td></tr>
+          <tr><td>其他成本</td><td>2.1</td><td>0.3%</td></tr>
+          <tr class="hl"><td>RLDC</td><td>288.8</td><td>41.2%</td></tr>
+          <tr><td>运营费用</td><td>254.5</td><td>36.3%</td></tr>
+          <tr><td>营业利润</td><td>34.4</td><td>4.9%</td></tr>
+          <tr><td>其他收入净额</td><td>17.9</td><td>2.6%</td></tr>
+          <tr><td>所得税</td><td>4.1</td><td>0.6%</td></tr>
+          <tr class="hl"><td>净利润</td><td>48.2</td><td>6.9%</td></tr>
+        </table>
+      </div>
+    </details>
+  </div>
+</section>
+
+<section class="section" id="m1" aria-labelledby="m1-t">
+  <h2 class="stitle" id="m1-t">模块 1 · 公司概览与背景<a class="anchor" href="#m1" aria-label="本节链接">#</a></h2>
+  <p>Circle 的生意可以用两句话说清：<strong>它发行 USDC 稳定币，用户拿美元换 USDC，Circle 把这些美元买成短期国债赚利息；这笔利息里近一半按协议分给帮它分发 USDC 的伙伴，主要是 Coinbase。</strong></p>
+  <p>这意味着 Circle 在会计上像一家资产管理公司，在生意本质上像一家<strong>利率生意</strong>——本季 <strong>95.2% 的收入是储备利息</strong>，只有 4.8% 来自订阅与服务。它的收入函数只有两个变量：<strong>USDC 流通规模 × 短端利率</strong>。</p>
+  <p>公司 2013 年成立，2025 年 6 月 4 日以 $31 IPO，首日收 $83.23（+168.5%），2025 年 6 月 23 日盘中触及历史高点 $298.99，此后回落至今 <strong>−79.4%</strong>。股权为多层结构：A 类 2.347 亿股（唯一上市交易），B 类 1,919 万股（每股 5 票，由创始人 Allaire 与 Neville 持有）。<strong>B 类占股本 7.6%，占投票权 29.0%。</strong></p>
+  <p>本季两项牌照进展值得记下：<strong>2026 年 7 月 10 日获 OCC 最终批准</strong>设立国家信托银行 Circle National Trust，成为首批持联邦银行牌照的稳定币发行方之一；<strong>7 月 31 日获 NYDFS 批准</strong>设立 Circle New York Trust。但要注意：<strong>信托牌照 ≠ GENIUS Act 下的许可支付稳定币发行人（PPSI）资格</strong>，后者的申请窗口因最终规则未出而尚未开启。</p>
+</section>
+
+<section class="section" id="m2" aria-labelledby="m2-t">
+  <h2 class="stitle" id="m2-t">模块 2 · 管理层评估<a class="anchor" href="#m2" aria-label="本节链接">#</a></h2>
+  <p><strong>战略清晰、监管路径走得最扎实，但本季在指引口径上的表述值得警惕。</strong></p>
+  <div class="bscore">
+    <h4>做对的：把「降低对 Coinbase 的依赖」落成了可验证的数字</h4>
+    <p>自有平台内 USDC 的日加权占比从去年同期的 <strong>7.4% 提升到 19.5%</strong>（+1,204bps），这直接推动分销成本占储备收入的比重从 64.2% 降到 <strong>61.7%</strong>，RLDC 利润率从 38% 升到 41%。这不是口号，是连续五个季度单调改善的曲线。牌照方面同样扎实——OCC 国家信托 + NYDFS 信托 + 欧盟 MiCA 首家合规发行人，是同业中最完整的一套。</p>
+  </div>
+  <div class="bscore">
+    <h4>需要警惕的：指引上调的表述方式</h4>
+    <p>公司把 RLDC 利润率指引从 38–40% 上调到 41.7–43.7%，把其他收入从 $150–170M 上调到 $310–330M，两处都只在脚注标注「包含已确认的 ARC 代币预售收入」。<strong>CFO 在电话会上确实两次主动澄清「剔除 Arc 收入，全年 RLDC 利润率将落在原区间中值附近」</strong>——这一点是坦诚的。但新闻稿标题层面的呈现，足以让不读脚注、不听电话会的读者得出相反结论。<strong>而剔除 ARC 后，非 ARC 其他收入其实被下调了约 12.5%。</strong></p>
+  </div>
+  <p><strong>另一处坦诚值得记下</strong>：当摩根大通分析师追问自有平台内 USDC 的单位分销成本时，CFO 明确拒绝披露，但补了一句实话——「存在受重度激励的 USDC 区块，也存在非常大而分散、几乎不承担激励成本的 USDC 面……我理解这让按季预测利润率变得<strong>非常非常困难。而这就是我们现在所处的世界</strong>。」承认自己的利润率不好预测，比假装能预测要好。</p>
+  <p><strong>资本配置</strong>：不派息、不回购。Allaire 的原话是「我们是一只巨大的未来市场成长股，而非今天向股东返还资本的股票」。可转债已于 Q1 全部转股，<strong>目前零借款</strong>。2026-06-12 首席独立董事 Rajeev Date 在任职近 13 年后辞任，董事会由 9 人减至 8 人，公司称与经营、政策或实务分歧无关。</p>
+</section>
+
+<section class="section" id="m3" aria-labelledby="m3-t">
+  <h2 class="stitle" id="m3-t">模块 3 · 商业模式深度解析<a class="anchor" href="#m3" aria-label="本节链接">#</a></h2>
+  <p>海图「一句话测试」：<strong>Circle 替别人保管美元，把这些美元买成国债赚利息，再把近一半利息分给帮它拉客的渠道。</strong>测试通过——但也正因为太好懂，它的问题同样一目了然：<strong>这门生意里，Circle 既不定价，也不控量。</strong>利率由联储定，规模由加密市场定，渠道分成由 2023 年签的协议定。</p>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="cards" data-source="Circle Q2 2026 10-Q、8-K Ex-99.1 与官方电话会">
+      <thead><tr><th>收入引擎</th><th>Q2 2026 规模</th><th>状态与判断</th></tr></thead>
+      <tr><td>储备利息收入</td><td>$6.677 亿（占 95.2%）</td><td class="dn"><strong>纯利率 beta。</strong>收益率 3.48%，低于联邦基金中值 15bp——拖累来自 15.6% 的银行现金部分（仅 2.98%）。</td></tr>
+      <tr><td>其他收入</td><td>$0.336 亿（占 4.8%）</td><td class="dn">同比 +41% 但<strong>环比 −19%</strong>。CFO 归因于「把资源集中投入 Arc 开发而非追加区块链合作」。</td></tr>
+      <tr><td>CPN 跨境支付网络</td><td>年化交易额季末 $147 亿（环比 +76%）</td><td class="up">175 家金融机构（+29% 环比），7/31 已达 $230 亿。<strong>变现「将从下半年真正开始」</strong>——目前几乎不贡献收入。</td></tr>
+      <tr><td>Arc 公链</td><td>$0（递延收入 $2.462 亿）</td><td>主网 <strong>2026-09-16</strong> 上线，验证节点含 BlackRock、DTCC、ICE、Mastercard、Visa。Allaire 称「视 Arc 为可能比 USDC 本身更大的机会」，且 Circle 是 25% 权益方。</td></tr>
+      <tr><td>USYC 代币化货币基金</td><td>$30.0 亿（同比 +10 倍）</td><td class="dn">增长最快，但存在<strong>自我蚕食</strong>——它正是收益禁令管不到、可能吸走 USDC 需求的那类生息产品。</td></tr>
+      <tr><td>EURC</td><td>€4.52 亿（同比 +2.2 倍）</td><td>基数极小，战略意义大于财务意义。</td></tr>
+    </table>
+  </div>
+  <p><strong>储备资产结构</strong>（2026-06-30）：84.4% 在 BlackRock 管理的 Circle Reserve Fund（政府货币市场基金，Q2 收益率 3.57%），15.6% 在银行现金存款（2.98%）。合格资产限定为剩余期限 ≤3 个月的美国国债、隔夜回购与政府货币基金，<strong>2a-7 规则要求加权平均期限 ≤60 天</strong>——久期极短，信用为美国主权级，挤兑时的价格风险很低。代价是收益率完全跟随短端利率，没有任何久期缓冲。</p>
+</section>
+
+<section class="section" id="m4" aria-labelledby="m4-t">
+  <h2 class="stitle" id="m4-t">模块 4 · 经济护城河分析（5 维）<a class="anchor" href="#m4" aria-label="本节链接">#</a></h2>
+  <div class="moat-grid">
+    <div class="moat-card wide"><h5>无形资产（牌照与合规）—— 宽</h5><p>OCC 国家信托（2026-07 最终批准）+ NYDFS 信托 + 欧盟 MiCA 首家合规发行人 + 新加坡 MPI + 英国 FCA。GENIUS Act 2027-01-18 生效后，未持牌者不得在美发行支付稳定币。<strong>这是 Circle 相对 Tether 最实在的优势</strong>，也是它敢做机构生意的底气。</p></div>
+    <div class="moat-card narrow"><h5>网络效应 —— 窄，且在被攻击</h5><p>USDC 接入 700 万有效钱包、150+ 分销协议、跨 8 条主要公链。但稳定币的网络效应<strong>属于「美元」而非「某一枚币」</strong>——USDT 以 2.5 倍于 USDC 的规模证明了先发规模才是壁垒，而 Open USD 联盟正用 140 家机构直接复制分发网络。</p></div>
+    <div class="moat-card narrow"><h5>转换成本 —— 窄</h5><p>对终端用户几乎为零：USDC 与 USDT 之间切换只是一笔兑换。对机构中等——合规接入、托管集成有摩擦，这也是 Circle 的机构战略所在。<strong>但 Hyperliquid 的例子说明大客户说搬就搬。</strong></p></div>
+    <div class="moat-card none"><h5>成本优势 —— 无</h5><p>储备管理外包给 BlackRock，收益率由联储决定，<strong>分销成本高达储备收入的 61.7%——这是行业里最贵的获客结构之一</strong>。Tether 没有这份分成协议，同等规模下利润率远高于 Circle。</p></div>
+    <div class="moat-card none"><h5>有效规模 —— 无</h5><p>市场已有 USDT、USDC、USDS、USD1、USDe、USDG、PYUSD、RLUSD 等十余个玩家，加上尚未上线的 Open USD。<strong>发行稳定币的门槛是牌照，不是资本或技术</strong>，市场远未到只容得下少数玩家的程度。</p></div>
+  </div>
+  <p>综合判断：<strong>Circle 唯一称得上宽的护城河是合规牌照，而这条护城河保护的是「能不能在美国合法经营」，不是「能不能赚到钱」。</strong>它挡得住无牌照的竞争者，挡不住持牌的银行财团，更挡不住一个把储备收益让渡给伙伴的联盟。<strong>10 年后这条护城河大概率仍在，但护住的可能是一门利润率更薄的生意。</strong></p>
+</section>
+
+<section class="section" id="m5" aria-labelledby="m5-t">
+  <h2 class="stitle" id="m5-t">模块 5 · 财务深度分析<a class="anchor" href="#m5" aria-label="本节链接">#</a></h2>
+  <h3>5.1 近 5 季核心趋势</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="各季 8-K Ex-99.1（Q2'25 至 Q2'26），调整后 EBITDA 采新定义口径">
+      <thead><tr><th>季度</th><th>总营收（$M）</th><th>储备收入（$M）</th><th>RLDC 利润率</th><th>调整后 EBITDA（$M）</th><th>USDC 期末（$B）</th><th>储备收益率</th></tr></thead>
+      <tr><td>Q2 2025</td><td>658</td><td>634</td><td>38%</td><td>133.0</td><td>61.3</td><td>4.1%</td></tr>
+      <tr><td>Q3 2025</td><td>740</td><td>711</td><td>39%</td><td>171.5</td><td>73.7</td><td>4.2%</td></tr>
+      <tr class="hl"><td>Q4 2025</td><td><strong>770</strong></td><td><strong>733</strong></td><td>40%</td><td><strong>175.9</strong></td><td>75.3</td><td>3.8%</td></tr>
+      <tr><td>Q1 2026</td><td>694</td><td>653</td><td>41%</td><td>151.4</td><td><strong>77.0</strong></td><td>3.5%</td></tr>
+      <tr class="hl"><td>Q2 2026</td><td>701</td><td>668</td><td>41%</td><td>143.5</td><td>73.3</td><td>3.5%</td></tr>
+    </table>
+  </div>
+  <p><strong>三条曲线都在 Q4 2025 到 Q1 2026 之间转向</strong>：营收与储备收入在 Q4'25 见顶、调整后 EBITDA 在 Q4'25 见顶后连降两季（−13.9%、−5.2%）、USDC 流通量在 Q1'26 见顶。唯一持续改善的是 RLDC 利润率——那是自有平台份额提升的成果，是真实的。</p>
+
+  <h3>5.2 利润质量：本季 GAAP 净利的可比性</h3>
+  <p>GAAP 净利从去年同期的 −$4.821 亿变成 +$0.482 亿，差额 $5.30 亿。<strong>但这不是经营改善</strong>——去年 Q2 单季确认了 IPO 触发的 RSU 归属费用 <strong>$4.238 亿</strong>，占差额的 80%。剔除这笔，去年同期的经营性亏损约 $0.58 亿，今年 +$0.48 亿，真实改善约 $1.06 亿，主要来自 RLDC 增长 $0.38 亿与运营费用正常化。</p>
+  <p>更值得看的是<strong>营业利润率只有 4.9%</strong>：$7.01 亿营收，扣掉 $4.12 亿分销成本、$2.54 亿运营费用，只剩 $0.34 亿。<strong>净利率 6.9% 里还有 $0.18 亿来自其他收入净额（利息等非经营项）。</strong>这是一家规模 $700 亿、季度净利不到 $0.5 亿的公司。</p>
+
+  <h3>5.3 资产负债健康度：要看懂哪些钱不是它的</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="Circle Q2 2026 8-K 资产负债表与 10-Q（2026-06-30）">
+      <thead><tr><th>项目</th><th>2026-06-30</th><th>性质</th></tr></thead>
+      <tr><td>总资产</td><td>$771.65 亿</td><td class="dn">其中约 95% 不属于股东</td></tr>
+      <tr><td>为稳定币持有人隔离的现金（USDC 储备）</td><td>$731.61 亿</td><td class="dn">Circle「仅持有名义法定所有权」</td></tr>
+      <tr><td>稳定币持有人存款（负债端）</td><td>$729.28 亿</td><td>与上项对应</td></tr>
+      <tr class="hl"><td>公司自有现金及等价物</td><td>$17.30 亿</td><td class="up">真正可动用</td></tr>
+      <tr class="hl"><td>公司持有的稳定币</td><td>$8.89 亿</td><td class="up">真正可动用</td></tr>
+      <tr class="hl"><td>总流动性</td><td><strong>约 $26 亿</strong></td><td class="up">公司自述口径</td></tr>
+      <tr><td>借款</td><td><strong>$0</strong></td><td class="up">可转债 Q1 已全部转股</td></tr>
+      <tr><td>股东权益</td><td>$35.10 亿</td><td>每股净资产约 $13.8</td></tr>
+      <tr><td>递延收入</td><td>$2.462 亿</td><td class="dn">ARC 代币预售，待里程碑确认</td></tr>
+    </table>
+  </div>
+  <p><strong>这张表最容易被算错的地方</strong>：计算企业价值时<strong>绝不能</strong>把 $731.6 亿储备现金净额扣除——它对应着等额的持有人负债。只有 $17.3 亿自有现金可扣。<strong>正确的 EV ≈ $139 亿</strong>（市值 $156 亿 − 自有现金 $17.3 亿 − 零债务）。若误扣储备，会得出荒谬的负 EV。</p>
+  <p>健康度本身没有问题：零借款、$26 亿自有流动性、股东权益 $35.1 亿，唯一表外承诺是 $2,450 万办公室租赁。<strong>这家公司的财务风险不在资产负债表，在利润表——它的营业利润率只有 4.9%。</strong></p>
+
+  <h3>5.4 现金流与所有者盈余</h3>
+  <p>上半年经营活动现金流 $5.385 亿（去年同期 $3.037 亿），<strong>但改善的 $2.348 亿里有 $2.220 亿来自 ARC 代币出售所得</strong>——剔除后核心经营现金流仅小幅改善。资本开支很轻：软件开发资本化 $0.358 亿 + 战略投资 $0.117 亿 + 长期资产 $0.104 亿，上半年合计约 $0.58 亿。</p>
+  <p><strong>所有者盈余估算</strong>（Q2 单季）：净利 $0.482 亿 + 折旧摊销 $0.299 亿 + 股权激励（含在薪酬内，约 $0.5 亿）− 维护性资本开支（约 $0.15 亿）≈ <strong>$1.2 亿/季</strong>，年化约 <strong>$4.8 亿</strong>。对应市值 $156 亿，<strong>所有者盈余收益率约 3.1%</strong>——低于同期短期国债收益率。这个对比本身就说明了估值状态：<strong>买这家公司的股票，当前的盈利回报还不如买它持有的那些国债。</strong></p>
+</section>
+
+<section class="section" id="m6" aria-labelledby="m6-t">
+  <h2 class="stitle" id="m6-t">模块 6 · 电话会分析<a class="anchor" href="#m6" aria-label="本节链接">#</a></h2>
+  <p class="note">说明：官方文字实录截至本报告完成时尚未上线（上季于会后约 3 天发布）。以下管理层引述取自官方直播回放，语义可靠但非逐字定稿；<strong>所有财务数字均取自新闻稿与 10-Q，无一取自转录</strong>。</p>
+  <div class="ec-item"><span class="ec-badge ec-bull">利好</span> <strong>Coinbase 协议已按现有条款续约。</strong>Allaire 在会上宣布，Coinbase CFO 已于 7 月 30 日独立佐证「已满足续约条件，将按相同条款续约」。<strong>原协议 2023-08-18 签署、三年期，即本月 18 日到期</strong>——这是本季解除的最大单一悬念。</div>
+  <div class="ec-item"><span class="ec-badge ec-bull">利好</span> 自有平台 USDC 日加权占比 7.4% → <strong>19.5%</strong>，直接推动分销成本占储备收入比从 64.2% 降至 61.7%。这是可验证、可持续的结构性改善。</div>
+  <div class="ec-item"><span class="ec-badge ec-bull">利好</span> CPN 年化交易额季末 $147 亿（环比 +76%），7 月 31 日已达 <strong>$230 亿</strong>；Arc 主网 <strong>9 月 16 日</strong> 上线，验证节点含 BlackRock、DTCC、ICE、Visa、Mastercard。</div>
+  <div class="ec-item"><span class="ec-badge ec-neut">中性</span> Allaire 对 Open USD 的回应：「已表达兴趣的公司中<strong>约 70% 已经是我们网络的参与者</strong>」，并强调同日 Circle 也宣布了与 Visa、Mastercard 就 Arc 的扩展合作。<strong>态度克制，但没有正面回应「储备收益返还伙伴」这一模式冲击。</strong></div>
+  <div class="ec-item"><span class="ec-badge ec-bear">利空</span> <strong>Hyperliquid 安排将从 Q3 开始拖累经济性。</strong>CFO：季末 Coinbase 平台上的 USDC 占流通量 30%，其中 Hyperliquid 约占 6 个百分点，而 Hyperliquid 的 USDC 约 <strong>90% 在 Coinbase 平台</strong>。「向 Coinbase 平台的迁移在季度末才提速，我们预计该影响将从 Q3 开始体现。」分成比例<strong>明确拒绝披露</strong>。</div>
+  <div class="ec-item"><span class="ec-badge ec-bear">利空</span> <strong>其他收入指引实为下调。</strong>剔除 ARC 后从 $150–170M 降至 $130–150M，CFO 归因于「把资源集中投入 Arc 开发而非追加区块链合作」与「数字资产市场疲软」。</div>
+  <div class="ec-item"><span class="ec-badge ec-bear">利空</span> CFO 承认运营费用「预计落在指引区间<strong>上沿</strong>」；调整后运营费用已连续 5 季上升，Q2 同比 <strong>+23%</strong>。</div>
+  <h3>指引兑现度与口径变更追踪</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="cards" data-source="Circle 各季 8-K Ex-99.1 指引表与电话会 CFO 表述对照">
+      <thead><tr><th>项目</th><th>原口径</th><th>新口径</th><th>性质</th></tr></thead>
+      <tr><td>FY26 RLDC 利润率</td><td>38–40%</td><td>41.7–43.7%</td><td class="dn">口径变更（含 ARC），剔除后仍约 39%</td></tr>
+      <tr><td>FY26 其他收入</td><td>$150–170M</td><td>$310–330M</td><td class="dn">含 ARC $180M；非 ARC 实为下调</td></tr>
+      <tr><td>调整后 EBITDA 定义</td><td>原定义</td><td>新增剔除 SBC 工资税</td><td class="dn">未追溯前期，但对账表给双口径</td></tr>
+      <tr><td>USDC 流通量 CAGR</td><td>40%</td><td>40%（维持）</td><td>但当期实际连续两季环比下滑</td></tr>
+      <tr><td>Q3 2026 指引</td><td colspan="2">未给出任何量化指引</td><td class="dn">能见度低</td></tr>
+    </table>
+  </div>
+  <p><strong>信号汇总：本季所有「改善」都需要先问一句「哪个口径」。</strong>指引上调是口径变更、GAAP 净利转正靠去年基数、调整后 EBITDA 换了定义。真正未经修饰的改善只有一项——<strong>自有平台份额带来的分销成本下降</strong>。而未经修饰的恶化也只有一项，但更要紧：<strong>USDC 流通量在缩。</strong></p>
+</section>
+
+<section class="section" id="m7" aria-labelledby="m7-t">
+  <h2 class="stitle" id="m7-t">模块 7 · 多模型估值（8 种方法）<a class="anchor" href="#m7" aria-label="本节链接">#</a></h2>
+  <h3>7.1 八法明细</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="cards" data-source="基于本报告一手数据的独立测算；股价 $61.52（2026-08-05 盘中），2.539 亿股，TTM = Q3'25+Q4'25+Q1'26+Q2'26">
+      <thead><tr><th>方法</th><th>关键假设</th><th>每股价值</th><th>说明</th></tr></thead>
+      <tr><td>P/RLDC</td><td>TTM RLDC $11.77 亿 × 13x</td><td>$60.27</td><td><strong>最贴合的口径</strong>——RLDC 才是 Circle 真正留下的收入</td></tr>
+      <tr><td>EV/EBITDA</td><td>TTM 调整后 EBITDA $6.42 亿 × 20x，加回自有现金</td><td>$57.41</td><td>零负债使 EV 计算干净</td></tr>
+      <tr><td>P/E</td><td>TTM GAAP 净利 $4.51 亿 × 30x</td><td>$53.33</td><td>TTM 已剔除去年 IPO 一次性亏损</td></tr>
+      <tr><td>前瞻 P/E</td><td>FY27 一致预期 EPS $1.42 × 40x</td><td>$56.80</td><td>FY26 预期 $0.86 对应 71x，参考性低</td></tr>
+      <tr><td>P/S</td><td>TTM 营收 $29.05 亿 × 5x</td><td>$57.21</td><td>P/S 对分销成本高的公司会系统性高估</td></tr>
+      <tr class="hl"><td>DCF（情景加权）</td><td>三情景，见 7.2</td><td>$69.70</td><td>唯一给利率反转与 Arc 期权定价的方法</td></tr>
+      <tr><td>反向 DCF</td><td colspan="2">诊断用，非估值</td><td>现价隐含「USDC 恢复增长 + 利率不再下行 + Arc 变现」三者同时成立。市场并未 price in 悲观情形</td></tr>
+      <tr><td>所有者盈余收益率</td><td>年化约 $4.8 亿 ÷ 市值</td><td>收益率 3.1%</td><td class="dn"><strong>低于其所持国债的收益率</strong>——这个对比本身就是估值判断</td></tr>
+      <tr><td>FCF 收益率</td><td>上半年 OCF $5.385 亿 − 资本开支 $0.58 亿</td><td>收益率 3.3%</td><td class="dn">但上半年 OCF 里有 <strong>$2.22 亿是 ARC 卖币所得</strong>；剔除后核心 FCF 年化约 $5.2 亿，收益率降至 <strong>约 1.7%</strong>。资本开支极轻（上半年仅 $0.58 亿）是这门生意少数的结构性优点</td></tr>
+      <tr><td>PEG</td><td colspan="2">不适用</td><td>FY26 一致预期 EPS $0.86 低于 TTM 实际，增速为负；且盈利刚转正，PEG 分母不稳定</td></tr>
+      <tr><td>DDM</td><td colspan="2">不适用</td><td>从不派息。Allaire 明确「我们是成长股，而非今天向股东返还资本的股票」</td></tr>
+      <tr><td>NAV / 重置成本</td><td colspan="2">不适用</td><td>每股净资产 $13.8，但 $731 亿储备属持有人而非股东，账面净资产不代表企业价值。<strong>对稳定币发行方，NAV 是最容易算错的一法</strong></td></tr>
+      <tr><td>SOTP</td><td colspan="2">暂不适用</td><td>Arc（递延 $2.46 亿、Circle 持 25% 权益）与 CPN 尚未产生可归属收入，独立估值缺乏锚点。<strong>这恰是乐观情景的期权来源</strong></td></tr>
+    </table>
+  </div>
+
+  <h3>7.2 情景 DCF</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="基于本报告一手数据与公司 10-Q 利率敏感性披露的独立测算">
+      <thead><tr><th>情景</th><th>概率</th><th>核心假设</th><th>每股价值</th></tr></thead>
+      <tr><td>悲观</td><td>35%</td><td>USDC continued 收缩至 $600 亿；联储转向降息 100bp（净 RLDC −$3.77 亿）；Open USD 上线分流；Arc 里程碑延后触发返还义务</td><td>$38</td></tr>
+      <tr class="hl"><td>基准</td><td>45%</td><td>USDC 稳在 $730 亿附近；利率持平；Arc 按期确认 $1.8 亿；CPN 开始小幅变现；分销成本比重继续缓降</td><td>$72</td></tr>
+      <tr><td>乐观</td><td>20%</td><td>点阵图兑现、加息 100bp（净 RLDC +$3.77 亿）；USDC 回升至 $850 亿；Arc 与 CPN 形成第二增长曲线</td><td>$120</td></tr>
+    </table>
+  </div>
+  <p>概率加权 = 0.35×38 + 0.45×72 + 0.20×120 = <strong>$69.70</strong>。六个可用方法的中位数为 <strong>$57.31</strong>。两者差距来自利率方向：中位数法用的是 TTM 已实现数据，情景法给了加息以 20% 权重。<strong>加权公允价值取 $60.00</strong>——偏向中位数，因为乐观情景依赖尚未发生的加息与尚未变现的 Arc。</p>
+  <p class="note">对照：卖方平均目标价 $113.72（23 家），中位 $100。但评级迁移方向明确恶化——摩根士丹利 8/3 下调至减持并把目标价从 $106 砍至 $38，Mizuho、Compass Point 近期均有调整。<strong>平均目标价明显滞后于评级迁移。</strong></p>
+
+  <h3>7.3 建仓阶梯</h3>
+  <p>按估值中位数 $57.31 计算：<strong>首仓 $45.85</strong>（×80%，距现价 −25%）、<strong>二仓 $40.12</strong>（×70%，距现价 −35%）、<strong>三仓 $34.39</strong>（×60%，距现价 −44%，接近 52 周低 $49.90 之下）。</p>
+  <p><strong>当前股价 $61.52 高于加权公允 $60.00 约 2.5%，安全边际约为零。</strong>按本栏目「安全边际 ≥25% 才给买入」的纪律，现价不构成买入。</p>
+</section>
+
+<section class="section" id="m8" aria-labelledby="m8-t">
+  <h2 class="stitle" id="m8-t">模块 8 · 竞争与行业分析<a class="anchor" href="#m8" aria-label="本节链接">#</a></h2>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="cards" data-source="DefiLlama 链上直接测量（2026-08-05）；Circle 自报份额口径见注">
+      <thead><tr><th>稳定币</th><th>流通量</th><th>份额</th><th>说明</th></tr></thead>
+      <tr><td>USDT（Tether）</td><td>$1,828 亿</td><td>59.6%</td><td>规模是 USDC 的 2.5 倍；美国合规版 USA₮ 仅 $1.85 亿</td></tr>
+      <tr class="hl"><td><strong>USDC（Circle）</strong></td><td><strong>$722 亿</strong></td><td><strong>23.5%</strong></td><td>公司自报 27%（分母仅含法币抵押型）</td></tr>
+      <tr><td>USDS / DAI（Sky）</td><td>$115 亿</td><td>3.8%</td><td>加密抵押型</td></tr>
+      <tr><td>USD1 / USDe / USDG</td><td>合计 $113 亿</td><td>3.7%</td><td>USDG 月环比 +19%，是少数在增长的</td></tr>
+      <tr><td>USYC（Circle 自有）</td><td>$30 亿</td><td>1.0%</td><td class="dn">代币化货币基金，与自家 USDC 存在替代关系</td></tr>
+      <tr><td>PYUSD（PayPal）</td><td>$27 亿</td><td>0.9%</td><td class="up">自 3 月峰值回撤 33%——巨头入场威胁落空的例证</td></tr>
+    </table>
+  </div>
+  <p><strong>三个必须看清的事实：</strong></p>
+  <ul>
+    <li><strong>USDC 近期明显跑输 USDT。</strong>自 2026 年 3 月峰值以来，USDC <strong>−6.6%</strong>，USDT 仅 −0.5%。同比看 USDC +17.8% 略胜 USDT +15.9%，但趋势已在近半年反转。行业总量本身也从 5 月的 $3,191 亿峰值降至 $3,075 亿。</li>
+    <li><strong>「巨头入场」的威胁至今大半落空。</strong>PayPal PYUSD 回撤 33%；Amazon、Walmart 均未发行自有稳定币；Zelle 的 ZelleUSD 至今只有名字；大行的 The Clearing House 网络要等 2027 且明确定性为<strong>代币化存款而非稳定币</strong>；银行系稳定币总市值仅 $2.1 亿。Hyperliquid 自建的 USDH 更是在 7 个月后清盘，转回用 USDC。</li>
+    <li class="dn"><strong>但 Open USD 是真的例外。</strong>2026-06-30 由 Bridge 联合创始人牵头、<strong>140+ 家机构支持</strong>（Visa、Mastercard、AmEx、Stripe、BlackRock、BNY、Google、Shopify，<strong>以及 Coinbase 自己</strong>），商业模式是<strong>零铸造赎回费、把大部分储备收益扣除管理费后返还给分销伙伴</strong>——这是对 Circle「发行人中心 + 分成给渠道」模式的正面拆解。公布当日 CRCL 大跌至四个月低点。<strong>它尚未上线，预计 2026 下半年。</strong></li>
+  </ul>
+  <p><strong>监管维度</strong>：GENIUS Act 已于 2025-07-18 签署，生效日锁定 <strong>2027-01-18</strong>（监管机构已错过 2026-07-18 的最终规则期限）。法案 §4(a)(11) 禁止<strong>发行人</strong>向持有人支付任何利息或收益——但不约束第三方，这就是 Coinbase 能对 USDC 余额付 3.5% APY 的「口子」。OCC 拟议规则 §15.10(c)(4) 增设「关联第三方」推定条款，业界普遍认为<strong>精准命中 Circle-Coinbase 结构</strong>。若该条款最终落地，Coinbase 付息的经济基础被抽掉，Circle 反而有机会重谈分销经济学；若被稀释，61.7% 的分销成本率将延续。<strong>这是未来 18 个月对 Circle 影响最大的单一监管变量。</strong></p>
+</section>
+
+<section class="section" id="m9" aria-labelledby="m9-t">
+  <h2 class="stitle" id="m9-t">模块 9 · 技术面与 K 线分析<a class="anchor" href="#m9" aria-label="本节链接">#</a></h2>
+  <p>52 周区间 <strong>$49.90 – $189.92</strong>，历史最高 <strong>$298.99</strong>（2025-06-23，IPO 后第 13 个交易日）。当前 $61.52，<strong>距历史高点 −79.4%、距 52 周高点 −67.6%</strong>，但仍较 IPO 价 $31 高 98%。较 2025 年 8 月 $130 的增发价 <strong>−52.7%</strong>——那批增发的机构投资者浮亏过半。</p>
+  <p><strong>财报当日走势</strong>（2026-08-05）：盘前一度涨约 10%，开盘后回落，盘中最低 $59.12（较前收 −6.5%），最高 $62.40，取数时 $61.52。<strong>典型的利好兑现回吐 + 方向未定。</strong>前一交易日收 $63.25。</p>
+  <p>一个结构性因素不容忽视：<strong>做空股数 2,710 万（FINRA 结算日 2026-07-15），占 A 类流通股 11.6%，为 2026 年最高水平，且在财报前的 7 月上半月激增 24%</strong>。回补天数仅 1.69 天——意味着空头可以快速离场，逼空的持续性有限。</p>
+  <p>$49.90（52 周低）是过去一年唯一被验证过的支撑，与本报告二仓价 $40.12 之间是一段没有历史成交密集区的真空。技术面在本报告中仅作次要参考。</p>
+</section>
+
+<section class="section" id="m10" aria-labelledby="m10-t">
+  <h2 class="stitle" id="m10-t">模块 10 · 增长催化剂与前景展望<a class="anchor" href="#m10" aria-label="本节链接">#</a></h2>
+  <p><strong>未来 6 个月，四个明确的时间点：</strong></p>
+  <ul>
+    <li><strong>2026-09-16：Arc 主网上线</strong>——这是 $2.462 亿递延收入能否开始确认的前提，也是 Allaire 口中「可能比 USDC 本身更大的机会」。验证节点阵容（BlackRock、DTCC、ICE、Visa、Mastercard、Standard Chartered）足够强，但<strong>公链的商业化从来不是上线即变现</strong>。</li>
+    <li><strong>2026-09-16：同日的 FOMC 会议</strong>——市场定价加息概率约 62%。按公司披露，+100bp 对应净 RLDC <strong>+$3.77 亿/年</strong>。<strong>这一天对 Circle 有两重意义，且方向可能相反。</strong></li>
+    <li><strong>Q3 2026 财报（预计 11 月）</strong>——三个观察点：USDC 流通量是否止跌、Hyperliquid 迁移对分销成本的实际拖累、ARC 收入首次确认的金额。</li>
+    <li><strong>Open USD 上线（预计 2026 下半年）</strong>——140 家机构的联盟真正投入运营时，才能看出它是纸面联盟还是实质分流。</li>
+  </ul>
+  <p><strong>中长期（3–5 年）的三个变量：</strong>① <strong>GENIUS Act 2027-01-18 生效</strong>后的持牌格局——Circle 是准备最充分的，但 PPSI 申请窗口尚未开启；② <strong>OCC「关联第三方」条款</strong>是否落地，这直接决定 Circle 能否重谈那份吃掉 46% 营收的分成协议；③ <strong>非储备收入能否成规模</strong>——CPN 年化交易额已到 $230 亿，但变现「从下半年才真正开始」，目前对 $28 亿营收的贡献接近于零。</p>
+  <p>公司维持 <strong>USDC 流通量 40% CAGR</strong> 的跨周期指引，CFO 的辩护是第三方对 2030 年稳定币市场 1–4 万亿美元的预测隐含 27–77% CAGR。<strong>但当期实际是连续两季环比下滑</strong>——指引与现实之间目前有明显缺口。</p>
+</section>
+
+<section class="section" id="m11" aria-labelledby="m11-t">
+  <h2 class="stitle" id="m11-t">模块 11 · 风险矩阵<a class="anchor" href="#m11" aria-label="本节链接">#</a></h2>
+  <div class="risk-grid">
+    <div class="risk-card r5"><h5>严重度：高 · USDC 流通量收缩</h5><p>从 Q1'26 峰值 $774 亿降至 8 月初 $723 亿，<strong>连续两个季度环比下滑</strong>，且期末值低于季度均值（季内持续流出）。收入 = 规模 × 利率，规模端已在恶化。摩根士丹利 8/3 下调至减持、目标价 $106→$38，理由正是这一条。</p></div>
+    <div class="risk-card r5"><h5>严重度：高 · 单一伙伴依赖</h5><p>付 Coinbase $3.246 亿 = 总营收 46.3%、分销成本 78.7%。协议虽已按原条款续约（悬念解除），但<strong>Coinbase 同时是竞品 Open USD 的支持方</strong>。另有条款：若法律或法院命令使 Circle 无法履行付款且整改期内无解，<strong>Coinbase 有权要求 Circle 转让 USDC 商标所有权</strong>。</p></div>
+    <div class="risk-card r4"><h5>严重度：中高 · 利率双向敏感</h5><p>公司披露：±100bp 对应净 RLDC ±$3.77 亿（TTM RLDC 的 32%），±200bp 对应 ±$7.55 亿（64%）。当前方向偏向加息（对 Circle 有利），但<strong>这是一个 Circle 完全无法控制的变量</strong>，且公司自己在 10-Q 中警告该模型未计入流通量随利率变化的二阶效应。</p></div>
+    <div class="risk-card r4"><h5>严重度：中高 · Open USD 与生息替代品</h5><p>Open USD 联盟 140+ 机构、模式是把储备收益返还伙伴，直接拆解 Circle 的分成结构。更微妙的是代币化货币基金（TMMF）——收益禁令不适用于它们，而 Circle 自家的 USYC（$30 亿）与 BlackRock 的 BUIDL（$27 亿）正在蚕食 USDC 的需求。<strong>Circle 在 Q2 风险提示中亲自写下了这一条。</strong></p></div>
+    <div class="risk-card r3"><h5>严重度：中 · ARC 执行与递延收入返还义务</h5><p>$2.462 亿递延收入的确认依赖里程碑达成，Q2 未确认一分钱。新闻稿新增大段风险语言，明确提及「<strong>若关键上线里程碑未达成可能产生的返还义务</strong>」。代币还涉及证券法定性的不确定性。IDG Capital（持股 &gt;5% 股东）关联实体认购了其中 $2,500 万，属关联交易。</p></div>
+    <div class="risk-card r3"><h5>严重度：中 · 储备集中与挤兑</h5><p>84.4% 储备集中于单一基金（Circle Reserve Fund）、单一管理人（BlackRock）、单一主托管行（BNY）。10-Q 明确 <strong>BlackRock 无义务在基金亏损时提供任何财务支持</strong>。15.6% 银行现金远超 FDIC 保额（7 家机构合计仅覆盖 180 万美元）。缓解因素是久期极短（2a-7 要求 WAM ≤60 天）、信用为美国主权级。</p></div>
+  </div>
+  <p><strong>三个黑天鹅情景：</strong>① <strong>USDC 遭遇信心冲击引发挤兑</strong>——虽然储备久期极短、质量极高，但 $729 亿负债对应 $26 亿自有流动性，任何脱锚传闻都可能自我实现；② <strong>OCC「关联第三方」条款以最严版本落地且被认定溯及既有安排</strong>，Coinbase 被迫停付 3.5% APY，导致其平台上占流通量 30% 的 USDC 大规模流出；③ <strong>联储在通胀失控下连续大幅加息，同时加密市场深度衰退</strong>——利率利好被规模崩塌完全抵消，出现「收益率上升但收入下降」的最坏组合。</p>
+</section>
+
+<section class="section" id="m12" aria-labelledby="m12-t">
+  <h2 class="stitle" id="m12-t">模块 12 · 股东回报分析<a class="anchor" href="#m12" aria-label="本节链接">#</a></h2>
+  <h3>12.1 公司给了股东多少？</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="Circle 10-Q（2026-06-30）现金流量表与权益变动表、FY2025 10-K、IPO 与增发 424B4">
+      <thead><tr><th>形式</th><th>金额</th><th>说明</th></tr></thead>
+      <tr><td>现金股息</td><td class="dn">$0</td><td>上市以来从未派息</td></tr>
+      <tr><td>股票回购</td><td class="dn">$0</td><td>无回购计划、无授权额度</td></tr>
+      <tr class="hl"><td>股东总回报</td><td class="dn"><strong>$0</strong></td><td>trailing shareholder yield = 0%</td></tr>
+      <tr><td>反向：IPO 募资（2025-06）</td><td>净 $5.83 亿</td><td>发行价 $31</td></tr>
+      <tr><td>反向：增发募资（2025-08）</td><td>净 $4.448 亿</td><td>发行价 $130，现价 −52.7%</td></tr>
+      <tr><td>反向：RSU 结算代扣税</td><td>−$1.495 亿</td><td>上半年，现金流出</td></tr>
+    </table>
+  </div>
+  <p><strong>股东总回报为零，且方向是反的。</strong>Allaire 在本季电话会上把这一点说得很直接：<strong>「我们不派息……我们是一只巨大的未来市场成长股，而非今天向股东返还资本的股票。」</strong>对处于扩张期的公司这是合理立场，但读者必须清楚：<strong>持有 CRCL 的全部回报只能来自股价。</strong></p>
+
+  <h3>12.2 给的方式好不好？</h3>
+  <p>既然没有回报，这一节要看的是<strong>稀释的质量</strong>——公司为换取资本，付出了多少股东权益？</p>
+  <p><strong>值得肯定的两点</strong>：① <strong>可转债已于 2026 Q1 全部转为 A 类普通股，公司目前零借款</strong>——不再有利息负担与到期压力；② IPO 与增发的定价都不算贱卖（IPO $31 首日 +168.5%，增发 $130 接近历史高位区），<strong>公司在高位融到了钱</strong>，这一点对老股东是有利的。</p>
+  <p><strong>但摊薄在持续</strong>：Q2 摊薄股数 2.686 亿 vs 基本股数 2.482 亿，<strong>潜在稀释 8.2%</strong>，主要来自尚未归属的 RSU。去年 Q2 单季确认的 IPO RSU 费用高达 $4.238 亿，说明股权激励的体量很大。<strong>没有回购来对冲，这部分稀释是净的。</strong></p>
+  <p>另一处需要标注的是治理结构：<strong>B 类股占股本 7.6%，却占投票权 29.0%</strong>（每股 5 票）。这不是稀释，但它意味着外部股东在资本配置上没有话语权——包括「要不要开始回购」这类问题。</p>
+
+  <h3>12.3 能不能继续给、给多少？</h3>
+  <p>短期内<strong>不会有任何股东回报</strong>，这一点管理层已明说。能力上其实并非不具备：零借款、$26 亿自有流动性、TTM GAAP 净利 $4.51 亿。<strong>公司是选择不给，不是给不起。</strong></p>
+  <p>覆盖度测算无从谈起（分子为零）。真正该问的是反向问题：<strong>还会不会再向股东要钱？</strong>目前看短期不需要——Q2 经营现金流为正，资本开支很轻（上半年仅约 $0.58 亿），且刚通过 ARC 代币预售拿到 $2.22 亿现金。<strong>但 ARC 那笔钱带着返还义务</strong>，若里程碑未达成，它是负债而非收入。</p>
+  <p><strong>模块小结：几乎无股东回报，但资本结构干净。</strong>Circle 不派息、不回购、股东总回报为零，且 RSU 摊薄在持续、B 类股锁死了投票权——单从「给了多少」看，答案是零，且短期不会变。但它<strong>零借款、高位融资、经营现金流为正</strong>，没有在低位向股东伸手，资本结构在同规模的成长股里算干净的。这份「不给」是主动的战略选择而非被迫，判断它对错的唯一标准，是留存的资本能否在 Arc 与 CPN 上挣回超过股东自己投资的回报——<strong>而这一点，至今还没有任何一个可验证的数字。</strong></p>
+</section>
+
+<section class="section" id="m13" aria-labelledby="m13-t">
+  <h2 class="stitle" id="m13-t">模块 13 · 海图评分卡 + 投资决策<a class="anchor" href="#m13" aria-label="本节链接">#</a></h2>
+  <div class="scorecard">
+    <div class="score-grid">
+      <div class="score-card"><div class="score-letter s-b">B−</div><h5>生意可预测性</h5><p>模式极易理解（规模 × 利率），但两个变量都不由公司控制；CFO 自己承认「按季预测利润率非常非常困难」。指引口径本季还换了两处。</p></div>
+      <div class="score-card"><div class="score-letter s-b">B−</div><h5>经济护城河</h5><p>合规牌照是真宽（OCC + NYDFS + MiCA 首家），但它保护的是经营资格而非利润率。网络效应窄、转换成本窄、成本优势为无。</p></div>
+      <div class="score-card"><div class="score-letter s-bp">B+</div><h5>管理层质量</h5><p>监管路径走得最扎实，自有平台份额 7.4%→19.5% 是可验证的兑现；CFO 主动澄清 ARC 口径也算坦诚。扣分在指引呈现方式易致误读。</p></div>
+      <div class="score-card"><div class="score-letter s-bp">B+</div><h5>财务质量</h5><p>零借款、$26 亿自有流动性、经营现金流为正、储备资产久期极短且为主权级。扣分在营业利润率仅 4.9%、运营费用连升 5 季。</p></div>
+      <div class="score-card"><div class="score-letter s-b">B</div><h5>资本配置纪律</h5><p>零派息零回购但主动且说明清晰；高位融资、可转债已清零，资本结构干净。但留存资本的回报（Arc/CPN）至今无可验证数字。</p></div>
+      <div class="score-card"><div class="score-letter s-b">B−</div><h5>估值与安全边际</h5><p>现价 $61.52 相对加权公允 $60.00 高 2.5%，安全边际约为零。所有者盈余收益率 3.1%，低于其所持国债收益率。</p></div>
+    </div>
+    <div class="flag-row">
+      <h4>红旗排查</h4>
+      <p><strong>触发 2 项。</strong>① <strong>会计口径变更：触发</strong>——本季同时发生三处口径变化（指引含一次性 ARC 收入、调整后 EBITDA 新增剔除项且未追溯、非 ARC 其他收入实为下调），虽均有披露与对账表，但叠加后足以让不读脚注者得出相反结论。② <strong>关联交易：触发</strong>——持股 &gt;5% 的 IDG Capital 关联实体认购 ARC 代币 $2,500 万，而该代币收入正是本次指引上调的全部来源。③ 收入确认时点：ARC 递延收入 $2.462 亿的确认依赖里程碑，且附返还义务，需持续跟踪。④ 商誉减值：无重大商誉。⑤ 管理层频繁变动：仅首席独立董事辞任，不构成。⑥ 表外负债：仅 $2,450 万办公室租赁，无。</p>
+    </div>
+  </div>
+  <h3>投资决策</h3>
+  <p>综合评级 <strong>B</strong>。红旗触发 2 项，按规范降档处理。</p>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="本报告模块 7 估值测算">
+      <thead><tr><th>情景</th><th>概率</th><th>目标价</th><th>相对现价</th></tr></thead>
+      <tr><td>悲观</td><td>35%</td><td>$38</td><td class="dn">−38%</td></tr>
+      <tr class="hl"><td>基准</td><td>45%</td><td>$72</td><td class="up">+17%</td></tr>
+      <tr><td>乐观</td><td>20%</td><td>$120</td><td class="up">+95%</td></tr>
+    </table>
+  </div>
+  <p>12 个月概率加权目标价 <strong>$64</strong>（情景加权 $69.70 与六法中位数 $57.31 折中后取整），相对现价 $61.52 上行 <strong>+4%</strong>。无股息。</p>
+  <p><strong>评级：<span class="rating-badge" data-rating="持有观望">持有观望</span></strong>。理由：<strong>这一季真正未经修饰的好消息只有两条</strong>——Coinbase 协议按原条款续约（最大悬念解除）、自有平台份额把分销成本比重压到 61.7%。<strong>而真正未经修饰的坏消息也只有一条，但更要紧：USDC 在缩。</strong>指引上调是口径，GAAP 转正靠基数，调整后 EBITDA 换了定义。叠加安全边际约为零、红旗触发 2 项，现价不是入场点。</p>
+  <p><strong>操作建议：</strong>分批建仓 <strong>首仓 $45.85 · 二仓 $40.12 · 三仓 $34.39</strong>。止盈三档 <strong>$95 / $125 / $160</strong>（每档减仓 25%，最后 25% 长期持有）。建议总仓位 <strong>1–3%</strong>（这是一只利率与加密周期的双重 beta，波动极大——52 周区间从 $49.9 到 $189.9，不适合重仓）。<strong>持有周期 3–5 年</strong>，赌的是「稳定币成为支付基础设施 + Circle 保住持牌先发」。</p>
+  <p><strong>关键监控指标：</strong>① <strong>USDC 流通量能否止跌回升</strong>（这是第一位的）；② 9/16 FOMC 利率决议；③ 9/16 Arc 主网上线与后续 ARC 收入确认；④ Hyperliquid 迁移对 Q3 分销成本的实际拖累；⑤ OCC「关联第三方」条款的最终版本；⑥ Open USD 上线后的实际分流。<strong>下一财报预计 2026 年 11 月。</strong></p>
+</section>
+
+<section class="section" id="essay" aria-labelledby="essay-t">
+  <h2 class="stitle sr-only" id="essay-t">海图夜读手记<a class="anchor" href="#essay" aria-label="本节链接">#</a></h2>
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p class="lead">今天盘前，Circle 交出了一份看上去在好转的季报：营收 +6.6%、GAAP 净利从去年的巨亏 4.82 亿变成盈利 0.48 亿、RLDC 利润率从 38% 升到 41%，还把全年两项指引大幅上调。<strong>但这三件事，没有一件是它表面看上去的样子。</strong></p>
+      <h4>一、指引上调，是口径换了</h4>
+      <p>公司把 RLDC 利润率指引从 38–40% 提到 41.7–43.7%，其他收入从 1.5–1.7 亿提到 3.1–3.3 亿。脚注里写着「包含已确认的 ARC 代币预售收入」。</p>
+      <p>这笔钱是这样来的：5 月和 6 月两轮卖出 8.075 亿枚 ARC 代币，收了 2.42 亿美元现金，全部躺在递延收入里，<strong>Q2 一分钱都没确认</strong>。CFO 说预计今年确认 1.80 亿，「确认时将直接流向利润底线」。</p>
+      <p>算一下：1.80 亿零分销成本的收入，摊到约 28 亿的全年营收上，机械抬高 RLDC 利润率约 <strong>3.6 个百分点</strong>；而指引中值实际抬升 <strong>3.7 个百分点</strong>。<strong>几乎完全吻合。</strong>换句话说，上调 100% 来自一笔一次性卖币收入，核心分销经济学一点没变。CFO 自己在电话会上澄清了两次：「剔除 Arc 收入，全年 RLDC 利润率将落在原区间中值附近」——也就是 39%，还是原来那个数。</p>
+      <p>更该注意的是：剔掉 ARC 之后，<strong>非 ARC 的其他收入其实是被下调了</strong>，从 1.5–1.7 亿降到 1.3–1.5 亿。</p>
+      <h4>二、GAAP 净利转正，是去年的基数</h4>
+      <p>去年 Q2 亏 4.82 亿，今年赚 0.48 亿，差 5.30 亿。其中 <strong>4.24 亿</strong>是去年 IPO 触发的一次性 RSU 归属费用。剔掉这个，真实改善约 1.06 亿。</p>
+      <p>而这一季的营业利润率是多少？<strong>4.9%</strong>。7.01 亿营收，扣掉 4.12 亿分销成本、2.54 亿运营费用，剩 0.34 亿。一家管着 730 亿美元的公司，一个季度赚不到 5000 万。</p>
+      <h4>三、我要纠正一个流传很广的说法</h4>
+      <p>关于 Circle，市场上最常见的一句话是「每降息 100bp，年收入减少约 7.4 亿」。这个数字是对的——但它是<strong>毛额</strong>。</p>
+      <p>公司 10-Q 的敏感性表同时给了另一半：降息 100bp，储备收入 −7.37 亿，<strong>分销成本同步 −3.60 亿</strong>，净影响是 <strong>−3.77 亿</strong>。因为分销成本本身就是按储备收益分成算的，利率跌，Coinbase 拿到的也同步跌。</p>
+      <p>这不改变「分成太贵」的结论——本季付给 Coinbase 3.246 亿，等于总营收的 <strong>46.3%</strong>，Circle 每赚 1 美元储备收入自己只留下 <strong>38.2 分</strong>。但它确实改变了利率风险的量级：<strong>那份看似苛刻的协议，同时也是一份天然的利率对冲。</strong>算错这一点，就会把这家公司的利率敏感度高估一倍。</p>
+      <h4>四、而利率的方向，已经掉头了</h4>
+      <p>联邦基金利率停在 3.50–3.75% 已经连续五次会议。最近一次 9 比 3 通过，<strong>三张反对票全部主张加息</strong>。6 月点阵图把 2026 年底的中位数从 3.4% 上调到 3.8%——隐含年内还要加一次。市场对 9 月 16 日加息的定价约 62%。</p>
+      <p>按公司自己的表，加息 100bp 意味着净 RLDC <strong>+3.77 亿</strong>，相当于 TTM RLDC 的 32%。<strong>如果这条路径兑现，Q2 的 3.5% 储备收益率很可能是谷底，而不是下坡的起点。</strong></p>
+      <h4>五、所以真正在恶化的，是规模</h4>
+      <p>USDC 从 Q1 末的 774 亿峰值，降到 Q2 末 733 亿、8 月初 723 亿，<strong>连续两个季度环比下滑</strong>。而且期末值低于季度均值 765 亿，说明钱是在季度里一路流出的。</p>
+      <p>摩根士丹利 8 月 3 日把评级砍到减持，目标价从 106 直接降到 38，理由就一句话：<strong>USDC 的收缩暴露了储备收入的敏感性。</strong></p>
+      <p>更远处还站着 Open USD——6 月 30 日宣布，140 多家机构支持，Visa、Mastercard、BlackRock、Google、Stripe，<strong>还有 Coinbase 自己</strong>。它的模式是零铸造赎回费、把大部分储备收益返还给分销伙伴。这是冲着 Circle 的商业模式本身来的。它还没上线。</p>
+      <h4>六、我给持有观望</h4>
+      <p>六种可用估值法的中位数 $57.31，情景加权 $69.70，折中取<strong>加权公允 $60.00</strong>。现价 $61.52，<strong>高出 2.5%，安全边际约等于零</strong>。</p>
+      <p>有一个数字我想单独留在这里：Circle 的所有者盈余年化约 4.8 亿，对应 156 亿市值，<strong>收益率 3.1%</strong>。而它替客户持有的那些短期国债，收益率 3.48%。<strong>买这家公司的股票，眼下的盈利回报还不如买它手里的国债。</strong></p>
+      <p>当然，买股票买的是未来——Arc 9 月 16 日上线，CPN 年化交易额已经做到 230 亿。这些都可能长成第二条曲线。但至今为止，它们对那 28 亿营收的贡献，还接近于零。</p>
+      <p><strong>$45.85 是我愿意开始建仓的位置。</strong>在那之前，我更想先看到一个数字止跌：USDC 的流通量。<strong>一门生意的收入等于规模乘以价格，当价格已经开始对你有利、而规模还在缩的时候，先别急着为价格鼓掌。</strong></p>
+      <p class="haitu-sign">—— <strong>海图</strong>，灯下落笔，明日再观风浪。</p>
+      <p class="haitu-disc">⚠️ <strong>免责声明</strong>：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，<strong>不构成任何投资建议</strong>，作者非持牌投资顾问。本文财务数据取自 Circle 2026-08-05 发布的 Q2 2026 财报 8-K Ex-99.1 与 10-Q 一手文件；电话会引述取自官方直播回放，语义可靠但非逐字定稿。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。文中评级、目标价与建仓价格均为基于公开信息的个人推演，可能存在错误或随时间失效。<strong>本报告完成于财报当日盘中，股价为未结算价。</strong>投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</section>
+
+</div>
+
+
+<footer>
+  <div>本报告由「海图夜读」基于公开财报与电话会资料独立撰写，数据截至 2026-08-05。</div>
+  <div>
+    <strong>免责声明：</strong>本文仅为个人研究记录与信息分享，<strong>不构成任何投资建议</strong>，
+    作者非持牌投资顾问。文中评级、目标价、仓位与建仓价格均为基于公开信息的个人推演，
+    可能存在错误或随时间失效。市场有风险，投资需谨慎，读者应独立判断并自负盈亏。
+  </div>
+</footer>
+
+<script>
+/* ══════════════════════════════════════════════════════════════════
+   海图夜读 · 报告页脚本骨架
+   逐字复制进报告的 <script>，只改 CHART_DATA 里的数字。
+
+   这段脚本解决了存量 103 份实测出的三个问题：
+   1. 主题切换有 3 套实现，73/103 不读 localStorage
+      → 门户切暗色进报告又变亮色。这里统一成一套。
+   2. 71 份把调色板硬编码进 JS（token 的第 4 份拷贝），
+      改一次配色要改 71 个文件；另有 2 份切暗色后图表根本不重绘。
+      → 这里一律从 CSS 变量读，改 :root 即全站生效。
+   3. 4 个图表槽位被写出 39 种 canvas id。
+      → 这里按固定槽位 rev|margin|segment|eps 接管。
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ── 1. 从 CSS 变量取色（唯一真源，禁止在本文件里写 hex）── */
+function cssVar(name) {
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+}
+function palette() {
+  return {
+    accent:  cssVar('--accent'),   accent2: cssVar('--accent2'),
+    accent3: cssVar('--accent3'),  gold:    cssVar('--gold'),
+    red:     cssVar('--red'),      green:   cssVar('--green'),
+    grid:    cssVar('--chart-grid'), text:  cssVar('--text3-ink'),
+  };
+}
+
+/* ── 2. 主题切换：同步 aria-pressed、持久化、重绘图表 ── */
+function toggleTheme() {
+  var html = document.documentElement;
+  var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  try { localStorage.setItem('theme', next); } catch (e) {}
+  var btn = document.getElementById('themeBtn');
+  if (btn) btn.setAttribute('aria-pressed', String(next === 'dark'));
+  renderCharts();
+}
+document.addEventListener('DOMContentLoaded', function () {
+  var btn = document.getElementById('themeBtn');
+  if (btn) btn.setAttribute('aria-pressed',
+    String(document.documentElement.getAttribute('data-theme') === 'dark'));
+});
+
+/* ── 3. 顶栏实测高度写进 --bar-h ──
+   锚点落点与目录高亮都以它为基准。顶栏在窄屏会折行（38px → 60+px），
+   硬编码会让手机上所有跳转偏移。 */
+function syncBarH() {
+  var bar = document.querySelector('.theme-bar');
+  if (bar) document.documentElement.style.setProperty('--bar-h', bar.offsetHeight + 'px');
+}
+addEventListener('DOMContentLoaded', syncBarH);
+addEventListener('resize', syncBarH);
+
+/* ── 4. 本报告的图表数据：只改这一块 ──
+   槽位固定为 rev / margin / segment / eps，与 body-skeleton.html 的
+   canvas id 和 data-chart 一一对应。用不到的槽位整个删掉（连同骨架里的 .ccard）。
+   颜色一律写 palette 的 key 名（'accent' / 'gold' …），不要写 hex。 */
+var CHART_DATA = {
+  rev: { type: 'bar', labels: ['Q2 25','Q3 25','Q4 25','Q1 26','Q2 26'], datasets: [
+    { label: '总营收（$M）',   data: [658, 740, 770, 694, 701], color: 'accent'  },
+    { label: '储备收入（$M）', data: [634, 711, 733, 653, 668], color: 'accent2' } ] },
+  margin: { type: 'line', labels: ['Q2 25','Q3 25','Q4 25','Q1 26','Q2 26'], datasets: [
+    { label: 'RLDC 利润率（%）', data: [38, 39, 40, 41, 41],        color: 'green' },
+    { label: '储备收益率（%）',   data: [4.1, 4.2, 3.8, 3.5, 3.5],  color: 'red'   } ] },
+  segment: { type: 'bar', labels: ['Q2 25','Q3 25','Q4 25','Q1 26','Q2 26'], datasets: [
+    { label: 'USDC 期末流通量（$B）', data: [61.3, 73.7, 75.3, 77.0, 73.3], color: 'accent'  },
+    { label: '其中自有平台内（$B）',   data: [ 6.0, 10.2, 12.5, 13.7, 12.4], color: 'accent3' } ] },
+  eps: { type: 'bar', labels: ['Q2 25','Q3 25','Q4 25','Q1 26','Q2 26'], datasets: [
+    { label: '调整后 EBITDA（$M）', data: [133.0, 171.5, 175.9, 151.4, 143.5], color: 'gold'   },
+    { label: 'RLDC（$M）',          data: [251, 292, 309, 287, 289],           color: 'accent' } ] },
+};
+
+/* ── 5. 渲染（一般不需要改）── */
+var _charts = {};
+function renderCharts() {
+  if (typeof Chart === 'undefined') return;      // CDN 不可达时静默跳过，不阻断页面
+  var P = palette();
+  Chart.defaults.font.family =
+    getComputedStyle(document.body).getPropertyValue('--font-sans') ||
+    'system-ui, -apple-system, sans-serif';
+
+  Object.keys(CHART_DATA).forEach(function (slot) {
+    var el = document.getElementById(slot);
+    if (!el) return;
+    if (_charts[slot]) _charts[slot].destroy();
+
+    var cfg = CHART_DATA[slot];
+    var isPie = cfg.type === 'doughnut' || cfg.type === 'pie';
+
+    _charts[slot] = new Chart(el, {
+      type: cfg.type,
+      data: {
+        labels: cfg.labels,
+        datasets: cfg.datasets.map(function (d) {
+          var c = Array.isArray(d.color) ? d.color.map(function (k) { return P[k]; }) : P[d.color];
+          // ⚠️ 判断是否折线要同时看 dataset 的 type 和图表级 type。
+          // 只写 d.type === 'line' 会让「图表级 type:'line' 但 dataset 没写 type」的
+          // 数据集拿到 borderWidth:0 —— 实测表现为「只有点、没有连线」。
+          var isLine = (d.type || cfg.type) === 'line';
+          return Object.assign({}, d, {
+            backgroundColor: c, borderColor: c,
+            borderWidth: isLine ? 2 : 0, tension: 0.3,
+          });
+        }),
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            // 窄屏把图例挪到顶部：右侧图例在 375px 上会吃掉大半个画布
+            position: isPie && innerWidth > 640 ? 'right' : 'top',
+            labels: { color: P.text, boxWidth: 12, font: { size: 11 } },
+          },
+        },
+        scales: isPie ? {} : {
+          x: { grid: { color: P.grid }, ticks: { color: P.text, font: { size: 11 } } },
+          y: { grid: { color: P.grid }, ticks: { color: P.text, font: { size: 11 } } },
+          y1: {
+            position: 'right', grid: { display: false },
+            ticks: { color: P.text, font: { size: 11 } }, display: 'auto',
+          },
+        },
+      },
+    });
+  });
+}
+addEventListener('DOMContentLoaded', renderCharts);
+addEventListener('resize', function () {          // 图例位置随断点变，需重建
+  clearTimeout(window._rcT);
+  window._rcT = setTimeout(renderCharts, 200);
+});
+
+</script>
+</body>
+</html>
