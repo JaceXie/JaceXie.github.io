@@ -30,7 +30,11 @@ module.exports = {
       // 环境
       env: {
         NODE_ENV: 'production',
-        TZ: 'Asia/Shanghai'
+        TZ: 'Asia/Shanghai',
+        // 关掉「发现新财报」的 macOS 桌面弹窗与提示音（用户 2026-08-05 要求）。
+        // 内容仍会写进 logs/daily-update.log，不会丢信息。
+        // 想开回来：改成 '1' 后 pm2 restart haitu-daily-update --update-env
+        HAITU_NOTIFY: '0'
       }
     }
   ]
