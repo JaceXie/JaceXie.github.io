@@ -8,9 +8,6 @@
 <title>Circle CRCL Q2 2026 海图研判 · 海图夜读</title>
 <link rel="icon" type="image/png" href="../assets/hai.png">
 
-<!-- ⚠️ 无闪烁暗色：这段必须在 <style> 之前、且是同步内联脚本。
-     放到 body 末尾会让暗色用户先看到一闪的白底。
-     key 固定用 'theme'（与门户和 30 份存量报告一致，换 key 会让它们被翻回浅色）。 -->
 <script>
 (function () {
   try {
@@ -29,7 +26,6 @@
 <meta property="og:url" content="https://haitu.jacexie.com/haitu/reports/crcl-q2-2026.html">
 <meta name="twitter:card" content="summary">
 
-<!-- Chart.js：defer + 放在 head 末尾。⚠️ 不要引 Plotly —— 桑基图用内联 SVG。 -->
 <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
 <style>
@@ -239,10 +235,6 @@ a { color: var(--accent2); text-decoration: none; }
 .tbl .hl td { font-weight: 600; color: var(--text); }
 
 /* ── CHARTS ── */
-/* ⚠️ 轨道必须写 minmax(0,1fr) 而不是 1fr。
-   grid 子项默认 min-width:auto，canvas 与桑基 SVG 的固有宽度会把轨道撑开，
-   实测在 375px 下 .ccard 被撑到 568px，导致整页横向滚动。
-   .ccard 的 min-width:0 是同一问题的第二道保险。 */
 .cgrid  { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-bottom: 16px; }
 .cgrid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-bottom: 16px; }
 .ccard, .kpi, .moat-card, .risk-card, .score-card, .snap-item, .pbox { min-width: 0; }
@@ -491,11 +483,6 @@ h2.stitle { font-size: 18px; font-weight: 700; margin: 0 0 20px; }
   .cgrid, .cgrid3, .pgrid { grid-template-columns: minmax(0, 1fr); }
 }
 
-/* 触控目标 ≥44px。用一个不可见的 ::before 撑开命中区，
-   开关本身仍是 44×22 的滑块外观。
-   ⚠️ 不要改 .toggle-switch 的 height/padding 来凑 44px —— 实测那样做会让
-   border-radius 与 ::after 滑块的定位一起错位，开关变成一个大圆角方块。
-   ⚠️ 条件必须同时含宽度 —— 只写 (hover:none) 时窄屏桌面实测仍是 22px。 */
 @media (max-width: 640px), (hover: none) {
   .toggle-switch::before {
     content: ''; position: absolute; left: 0; right: 0;
@@ -525,8 +512,6 @@ figure.chart figcaption { font-size: 12px; color: var(--text3-ink); line-height:
 
 /* ── 8. shell 新增组件（skip link / 结论跳转带 / 顶栏右侧 / 屏幕阅读器专用）── */
 
-/* 跳转到正文：平时移出视口，聚焦时才出现。
-   ⚠️ 不能用 display:none —— 那样键盘也聚焦不到，等于没有 */
 .skip {
   position: absolute; left: -9999px; top: 0;
   background: var(--card); color: var(--accent3-ink);
@@ -553,21 +538,12 @@ figure.chart figcaption { font-size: 12px; color: var(--text3-ink); line-height:
   transition: border-color .2s, background .2s;
 }
 .quip-jump a:hover { border-color: var(--accent3); background: var(--card); }
-/* 触控目标 ≥44px。
-   ⚠️ 不能只用 @media (hover:none) —— 窄屏但支持 hover 的场景（缩小的桌面窗口、
-   带触控板的二合一设备）拿不到放大，实测那种情况下只有 28px。宽度与指针两个条件都要给。 */
 @media (max-width: 640px), (hover: none) {
   /* 用 min-height 而不是加 padding —— padding 要靠字体行高凑够 44px，
      换字体或改字号就又不达标了（实测 padding:13px 只得到 40px）。 */
   .quip-jump a { min-height: 44px; padding: 0 16px; display: inline-flex; align-items: center; }
 }
 
-/* ══════════════════════════════════════════════════════════════
-   9. 报告组件（快照 / KPI / 护城河 / 风险 / 评分卡 / 电话会 / 桑基）
-   来源：现有报告语料中已验证的组件规则，已套用本表的字体栈与 ink 对比度修正。
-   ⚠️ 这一节必须与 body-skeleton.html 的类名保持同步 —— 骨架里出现的
-   每个类都要在这里有定义，否则章节会退化成无样式的纯文本流。
-   ══════════════════════════════════════════════════════════════ */
 .hero-pills {display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;}
 .pill {background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: var(--font-sans); font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow);}
 .pill strong {color: var(--text);}
@@ -587,12 +563,6 @@ figure.chart figcaption { font-size: 12px; color: var(--text3-ink); line-height:
 .moat-card.narrow .moat-rate {background: rgba(185,160,106,.18); color: var(--gold);}
 .moat-card.none .moat-rate {background: rgba(184,112,112,.18); color: var(--red);}
 .moat-card p {font-size: 12.5px; color: var(--text2); line-height: 1.65;}
-/* ⚠️ .ec-item 必须是 block，不能是 flex。
-   语料里它只装「徽章 + 一句短语」，所以 flex 没出事；但正文里一旦出现
-   <strong>，每个 <strong> 都会变成独立 flex item，默认 min-width:auto 不收缩，
-   实测在 375px 下把 347px 的容器撑到 478px，导致整页横向滚动。
-   改为 block + 内联徽章：徽章仍在句首，正文正常折行环绕。
-   这与 .cgrid 必须写 minmax(0,1fr) 是同一类问题——flex/grid 子项默认不收缩。 */
 .ec-item {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: block; box-shadow: 0 1px 3px var(--shadow); line-height: 1.75;}
 .ec-badge {display: inline-block; vertical-align: baseline; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-right: 10px; font-family: var(--font-sans); white-space: nowrap;}
 .dcf-note {background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: 13px; color: var(--text2); line-height: 1.8;}
@@ -618,11 +588,6 @@ figure.chart figcaption { font-size: 12px; color: var(--text3-ink); line-height:
 .risk-card.r5::before {background: var(--red);}
 .risk-card h5 {font-size: 14px; margin-bottom: 6px; color: var(--text);}
 .risk-card p {font-size: 13px; color: var(--text2); line-height: 1.7;}
-/* ⚠️ 此处原本混进了三条来自语料 @media(max-width:768px) 内的移动端规则
-   （.cgrid/.pgrid→1fr、.kpi-grid→1fr 1fr、.stock-snap→1fr 1fr）。
-   它们被抽取时丢掉了 @media 包裹，变成无条件规则且排在最后，
-   结果桌面端所有网格都塌成单列。已删除 —— 移动端由本表第 4、9 节的
-   @media(max-width:640px) 统一负责。抽取语料 CSS 时务必排除 @media 块内的规则。 */
 
 /* 骨架用到、但语料里没有现成规则的补充组件 */
 .note { font-size: 12px; color: var(--text3-ink); line-height: 1.7; margin-top: 10px; }
@@ -677,8 +642,6 @@ figure.chart figcaption { font-size: 12px; color: var(--text3-ink); line-height:
   </div>
   <div class="theme-bar-right">
     <span>☀️ 浅色</span>
-    <!-- ⚠️ 必须是 <button>，不是 <div onclick>。存量 103/103 用裸 div，键盘完全不可达。
-         CSS 里已配套 appearance:none;border:0;padding:0，否则 UA 默认样式破坏 44×22 造型。 -->
     <button type="button" class="toggle-switch" id="themeBtn"
             aria-pressed="false" aria-label="切换深色模式" onclick="toggleTheme()"></button>
     <span>🌙 暗色</span>
@@ -1219,7 +1182,6 @@ figure.chart figcaption { font-size: 12px; color: var(--text3-ink); line-height:
 
 </div>
 
-
 <footer>
   <div>本报告由「海图夜读」基于公开财报与电话会资料独立撰写，数据截至 2026-08-05。</div>
   <div>
@@ -1325,7 +1287,6 @@ function renderCharts() {
         labels: cfg.labels,
         datasets: cfg.datasets.map(function (d) {
           var c = Array.isArray(d.color) ? d.color.map(function (k) { return P[k]; }) : P[d.color];
-          // ⚠️ 判断是否折线要同时看 dataset 的 type 和图表级 type。
           // 只写 d.type === 'line' 会让「图表级 type:'line' 但 dataset 没写 type」的
           // 数据集拿到 borderWidth:0 —— 实测表现为「只有点、没有连线」。
           var isLine = (d.type || cfg.type) === 'line';

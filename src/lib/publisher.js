@@ -1,13 +1,46 @@
 import { execSync, execFileSync } from 'node:child_process';
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
 import { logger } from './logger.js';
 
+/** 日更机器人允许触碰的两个文件。 */
+const CORE_PATHS = ['index.html', 'data/tickers.json'];
+
+/** 报告目录。这里的新文件必须与 index.html 同一次提交，理由见 pendingReports()。 */
+const REPORTS_DIR = 'haitu/reports';
+
 /**
- * 检测是否有 unstaged 改动（仅检查 index.html 与 data/tickers.json）。
+ * 列出 haitu/reports/ 下「新增或已改动」的报告文件。
+ *
+ * ⚠️ 这个函数存在的原因，是一次真实事故：
+ * 原来 commitAndPush 只 add index.html 与 data/tickers.json。于是写完一份新报告后，
+ * 门户已经把链接注入进 index.html 并推上线，而报告文件本身还躺在工作区未跟踪 ——
+ * 读者点进去拿到 404，而本地 `git status` 里那两个 `??` 没人会去看。
+ * 站点上曾因此同时存在 9 份「链接得到、打不开」的报告。
+ *
+ * 只认 .html 与 .md，且只认磁盘上真实存在的文件：
+ * `git ls-files --modified` 会把已删除的文件也列出来，而「删掉一份报告」永远应当是
+ * 人的决定，不该由每天 6 点的定时任务代劳。删除留给人处理。
+ */
+function pendingReports(repoRoot) {
+  const out = execSync(
+    `git ls-files --others --modified --exclude-standard -- ${REPORTS_DIR}`,
+    { cwd: repoRoot, encoding: 'utf8' }
+  );
+  return [...new Set(out.split('\n').map(s => s.trim()).filter(Boolean))]
+    .filter(f => f.endsWith('.html') || f.endsWith('.md'))
+    .filter(f => existsSync(join(repoRoot, f)))
+    .sort();
+}
+
+/**
+ * 检测是否有待发布的改动：index.html / data/tickers.json 有 diff，或有新增/改动的报告文件。
  */
 export function hasChanges(repoRoot) {
+  if (pendingReports(repoRoot).length > 0) return true;
   try {
     // git diff --quiet 在无改动时返回 0，有改动时返回 1
-    execSync('git diff --quiet -- index.html data/tickers.json', {
+    execSync(`git diff --quiet -- ${CORE_PATHS.join(' ')}`, {
       cwd: repoRoot,
       stdio: 'ignore'
     });
@@ -20,16 +53,27 @@ export function hasChanges(repoRoot) {
 }
 
 /**
- * Stage + commit + push.
- * 仅 add 白名单文件（index.html, data/tickers.json）。
+ * Stage + commit + push。
+ * 白名单：index.html、data/tickers.json，以及 haitu/reports/ 下新增或改动的 .html / .md。
  */
 export function commitAndPush(repoRoot, message) {
   try {
-    execSync('git add index.html data/tickers.json', { cwd: repoRoot, stdio: 'pipe' });
+    const reports = pendingReports(repoRoot);
+
+    // 路径走参数数组，不拼进 shell 字符串（文件名里的空格与引号会破坏命令）
+    execFileSync('git', ['add', '--', ...CORE_PATHS, ...reports], { cwd: repoRoot, stdio: 'pipe' });
+
+    // 逐条记入日志。绝不静默地把文件扫进提交 —— 谁被带上必须看得见。
+    let finalMessage = message;
+    if (reports.length > 0) {
+      logger.info(`✓ 一并提交 ${reports.length} 份报告文件：`);
+      reports.forEach(f => logger.info(`    + ${f}`));
+      finalMessage = `${message}\n\n随附报告文件：\n${reports.map(f => `  ${f}`).join('\n')}`;
+    }
 
     // commit message 走参数数组，不拼进 shell 字符串
     // （原来是 `git commit -m "${message}"`，message 里一个双引号或反引号就会破坏命令）
-    execFileSync('git', ['commit', '-m', message], { cwd: repoRoot, stdio: 'pipe' });
+    execFileSync('git', ['commit', '-m', finalMessage], { cwd: repoRoot, stdio: 'pipe' });
     logger.info(`✓ git commit: ${message}`);
 
     // push 前先同步远端。
