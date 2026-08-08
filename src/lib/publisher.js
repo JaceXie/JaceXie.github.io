@@ -63,6 +63,19 @@ export function commitAndPush(repoRoot, message) {
     // 路径走参数数组，不拼进 shell 字符串（文件名里的空格与引号会破坏命令）
     execFileSync('git', ['add', '--', ...CORE_PATHS, ...reports], { cwd: repoRoot, stdio: 'pipe' });
 
+    // 暂存区为空时提前返回。
+    // 否则 `git commit` 会因「没有可提交内容」退出非零，被下面的 catch 记成
+    // `git commit failed` —— 一条长得像真故障的 ERROR。实测触发场景：报告文件被删除
+    // （删除按设计不由定时任务代劳提交），此时 add 完暂存区仍是空的。
+    // 没东西可发布不是失败。
+    try {
+      execSync('git diff --cached --quiet', { cwd: repoRoot, stdio: 'ignore' });
+      logger.info('暂存区为空，无内容需要发布，跳过 commit');
+      return true;
+    } catch (e) {
+      if (e.status !== 1) throw e; // exit 1 = 有暂存改动，继续；其他退出码是真错误
+    }
+
     // 逐条记入日志。绝不静默地把文件扫进提交 —— 谁被带上必须看得见。
     let finalMessage = message;
     if (reports.length > 0) {

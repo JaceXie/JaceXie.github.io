@@ -2531,9 +2531,16 @@ function renderCalendar() {
     ].filter(Boolean).join(' ');
     // 整行可点击 → 该股票分析页；无分析页则回退到雪球行情（新标签打开）
     const report = findReport(e);
-    const href = report || ('https://xueqiu.com/S/' + e.xueqiu);
+    // 无分析页时回退到行情站。雪球不收录韩国交易所标的，写 xueqiu.com/S/030190
+    // 会给出 404 —— 韩股（代码为纯 6 位数字，港股是 5 位、美股是字母，不冲突）
+    // 一律回退到 Naver 金融。
+    const isKR = /^\d{6}$/.test(e.xueqiu || '');
+    const quoteUrl = isKR
+      ? 'https://finance.naver.com/item/main.naver?code=' + e.xueqiu
+      : 'https://xueqiu.com/S/' + e.xueqiu;
+    const href = report || quoteUrl;
     const ext = report ? '' : ' target="_blank" rel="noopener"';
-    const tip = report ? '查看海图研判' : '雪球行情';
+    const tip = report ? '查看海图研判' : (isKR ? 'Naver 금융' : '雪球行情');
     return `
       <a class="cal-row ${cls}" href="${href}"${ext} title="${e.ticker} · ${tip}">
         <div class="cal-date">${e.date}</div>

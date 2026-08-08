@@ -7,6 +7,28 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const NOTICES_PATH = resolve(__dirname, '..', '..', 'data', 'earnings-notices.json');
 
 /**
+ * 行情链接。
+ *
+ * ⚠️ 雪球不收录韩国交易所标的（KOSPI 后缀 .KS / KOSDAQ 后缀 .KQ）。
+ * 原来这里三处硬编码 `xueqiu.com/S/${xueqiuCode}`，对韩股会给出 404 ——
+ * 例如 NICE평가정보（030190）在雪球根本没有页面。韩股一律指向 Naver 金融，
+ * 那是韩国本地的标准行情源，用 tickers.json 的 6 位 ticker 作代码。
+ *
+ * 唯一的例外本可以是「有美股 ADS 的韩国公司」（如 SK 海力士的 SKHY），
+ * 但按同一市场一套口径的原则，不再分叉 —— 报告正文里也已统一。
+ */
+export function quoteLink(t) {
+  const sym = String(t.yfinanceSymbol || '');
+  if (sym.endsWith('.KS') || sym.endsWith('.KQ')) {
+    return {
+      url: `https://finance.naver.com/item/main.naver?code=${t.ticker}`,
+      label: 'Naver 금융',
+    };
+  }
+  return { url: `https://xueqiu.com/S/${t.xueqiuCode}`, label: '雪球行情' };
+}
+
+/**
  * 把 yfinance fetch 结果 + tickers.json 转成日历事件数组。
  *
  * 时间窗口：过去 30 天 + 全部未来。
@@ -62,8 +84,8 @@ export function buildCalendar(fetchResults, todayStr) {
       const detail = isPast
         ? `${name} — 详见<a href="${t.lastReportFile}" style="color:var(--accent-gold);">海图研判</a>`
         : isManualNext
-          ? `${name} — 公司已确认发布日期，关注 <a href="https://xueqiu.com/S/${t.xueqiuCode}" target="_blank" style="color:var(--accent-gold);">雪球行情</a>`
-          : `${name} — 来源 yfinance 共识，关注 <a href="https://xueqiu.com/S/${t.xueqiuCode}" target="_blank" style="color:var(--accent-gold);">雪球行情</a>`;
+          ? `${name} — 公司已确认发布日期，关注 <a href="${quoteLink(t).url}" target="_blank" style="color:var(--accent-gold);">${quoteLink(t).label}</a>`
+          : `${name} — 来源 yfinance 共识，关注 <a href="${quoteLink(t).url}" target="_blank" style="color:var(--accent-gold);">${quoteLink(t).label}</a>`;
       events.push({
         date: nextEarnings,
         ticker: displayName,
@@ -220,7 +242,8 @@ function buildEarningsDetail(ticker, data, isPast) {
   if (isPast) {
     return `${name} — 详见<a href="${ticker.lastReportFile}" style="color:var(--accent-gold);">海图研判</a>`;
   }
-  return `${name} — 来源 yfinance 共识，关注 <a href="https://xueqiu.com/S/${ticker.xueqiuCode}" target="_blank" style="color:var(--accent-gold);">雪球行情</a>`;
+  const q = quoteLink(ticker);
+  return `${name} — 来源 yfinance 共识，关注 <a href="${q.url}" target="_blank" style="color:var(--accent-gold);">${q.label}</a>`;
 }
 
 function formatMoney(amount, currency) {

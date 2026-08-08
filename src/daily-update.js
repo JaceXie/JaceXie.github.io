@@ -24,7 +24,7 @@ import { fetchAll } from './lib/data-fetcher.js';
 import { detectNewEarnings } from './lib/earnings-detector.js';
 import { buildCalendar } from './lib/calendar-builder.js';
 import { injectHtml } from './lib/html-injector.js';
-import { notify } from './lib/notifier.js';
+import { notify } from './lib/notifier.js'; // 当前未调用（见下方「刻意不发推送通知」），保留以便一行恢复
 import { hasChanges, commitAndPush } from './lib/publisher.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -96,11 +96,13 @@ async function main() {
       writeFileSync(PENDING_PATH, JSON.stringify(pending, null, 2) + '\n');
       logger.info(`✓ Wrote ${PENDING_PATH}`);
 
-      const tickerNames = pending.map((p) => p.ticker).join(', ');
-      notify(
-        `海图：发现 ${pending.length} 份新财报`,
-        `${tickerNames} 已发布新财报。请手动跑 /haitu <TICKER> 重新分析。`
-      );
+      // ⚠️ 这里刻意不发推送通知。
+      // 待重新分析的清单常年维持在 30–50 家，每天推一次同样的名单只是噪音，
+      // 而且重新分析本来就由人手动触发（/haitu <TICKER>），通知不改变任何行为。
+      // 清单仍然完整写进 data/pending.json，需要时随时可查。
+      // 要恢复推送：把下面两行的注释去掉即可。
+      // const tickerNames = pending.map((p) => p.ticker).join(', ');
+      // notify(`海图：发现 ${pending.length} 份新财报`, `${tickerNames} 已发布新财报。请手动跑 /haitu <TICKER> 重新分析。`);
     } else {
       logger.info(`DRY_RUN: would write pending.json with ${pending.length} entries`);
     }
