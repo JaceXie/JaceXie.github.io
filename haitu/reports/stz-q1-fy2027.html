@@ -1,0 +1,1625 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-08-07 · NYSE: STZ Q1 FY2027 财报已于 2026-06-30 发布 -->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Constellation Brands STZ · Q1 FY2027 财报深度分析 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+
+<script>
+(function () {
+  try {
+    var t = localStorage.getItem('theme');
+    if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', t);
+  } catch (e) { document.documentElement.setAttribute('data-theme', 'light'); }
+})();
+</script>
+
+<link rel="canonical" href="https://haitu.jacexie.com/haitu/reports/stz-q1-fy2027.html">
+<meta name="description" content="它在墨西哥酿造 Corona 与 Modelo，在美国独家销售——啤酒占净销售额 93.9%。本季报告 EPS +31%，剔除会计口径反转后可比只增 7%。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Constellation Brands STZ · Q1 FY2027 财报深度分析">
+<meta property="og:description" content="它在墨西哥酿造 Corona 与 Modelo，在美国独家销售——啤酒占净销售额 93.9%。本季报告 EPS +31%，剔除会计口径反转后可比只增 7%。">
+<meta property="og:url" content="https://haitu.jacexie.com/haitu/reports/stz-q1-fy2027.html">
+<meta name="twitter:card" content="summary">
+
+<script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+<style>
+
+/* ── MORANDI PALETTE ── */
+:root {
+  /* Light (default) */
+  --bg:        #f5f0eb;
+  --bg2:       #ece6df;
+  --card:      #ffffff;
+  --card2:     #f8f5f1;
+  --border:    #d9d0c7;
+  --text:      #4a4340;
+  --text2:     #7a706a;
+  --text3:     #a89f98;
+  --accent:    #8a9a8e;   /* sage */
+  --accent2:   #7b8fa0;   /* muted blue */
+  --accent3:   #b08d7a;   /* dusty terracotta */
+  --rose:      #c09090;   /* dusty rose */
+  --gold:      #b9a06a;
+  --red:       #b87070;
+  --green:     #7a9a7a;
+  --shadow:    rgba(0,0,0,0.06);
+  --chart-grid:#e5ddd5;
+  /* ── ink 层：只用于文字，全部达 WCAG AA（装饰色仍用上面的原值）── */
+  --text3-ink:   #70665f;  /* 4.51:1 on --bg2（原 --text3 #a89f98 仅 2.60:1）*/
+  --accent3-ink: #7f6150;  /* 4.97:1 on --bg （原 --accent3 #b08d7a 仅 2.67:1）*/
+  --gold-ink:    #8a6d3b;  /* 原 --gold  #b9a06a 仅 2.53:1 */
+  --red-ink:     #a35555;  /* 原 --red   #b87070 仅 3.76:1 */
+  --green-ink:   #4a7057;  /* 原 --green #7a9a7a 仅 3.12:1 */
+  --accent2-ink: #5a7386;
+  --font-sans: system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-serif: Georgia, 'Noto Serif SC', 'PingFang SC', serif;
+  --bar-h: 44px;
+}
+[data-theme="dark"] {
+  --text3-ink:   #a19991;
+  --accent3-ink: #c9a48e;
+  --gold-ink:    #c9b07a;
+  --red-ink:     #c08080;
+  --green-ink:   #8aaa8a;
+  --accent2-ink: #8fabbf;
+  --bg:        #1e1c1a;
+  --bg2:       #28251f;
+  --card:      #2e2a25;
+  --card2:     #363230;
+  --border:    #4a4540;
+  --text:      #d4ccc4;
+  --text2:     #a09890;
+  --text3:     #706860;
+  --accent:    #8a9a8e;
+  --accent2:   #8fabbf;
+  --accent3:   #c9a48e;
+  --rose:      #c09090;
+  --gold:      #c9b07a;
+  --red:       #c08080;
+  --green:     #8aaa8a;
+  --shadow:    rgba(0,0,0,0.3);
+  --chart-grid:#3e3a35;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-serif);
+  line-height: 1.75;
+  font-size: 14.5px;
+  transition: background .35s, color .35s;
+}
+a { color: var(--accent2); text-decoration: none; }
+
+/* ── THEME TOGGLE ── */
+.theme-bar {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 8px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  transition: background .35s;
+}
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; text-decoration: none; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: var(--font-sans); font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; text-decoration: none; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; color: var(--text2);
+}
+.toggle-switch {
+  appearance: none; -webkit-appearance: none; border: 0; padding: 0; margin: 0;
+  position: relative;
+  width: 44px; height: 22px;
+  background: var(--border);
+  border-radius: 11px;
+  cursor: pointer;
+  transition: background .3s;
+}
+.toggle-switch::after {
+  content: '';
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 18px; height: 18px;
+  background: var(--card);
+  border-radius: 50%;
+  transition: transform .3s;
+  box-shadow: 0 1px 3px rgba(0,0,0,.15);
+}
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+
+/* ── HERO ── */
+.hero {
+  padding: 48px 24px 36px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+.hero-tag {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 3px 14px;
+  border-radius: 20px;
+  margin-bottom: 18px;
+}
+.hero h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills {
+  display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;
+}
+.pill {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 6px 18px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--text2);
+  box-shadow: 0 1px 3px var(--shadow);
+}
+.pill strong { color: var(--text); }
+
+/* ── LAYOUT ── */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle {
+  font-size: 18px; font-weight: 700; color: var(--accent3-ink);
+  margin-bottom: 20px; letter-spacing: 0.5px;
+  display: flex; align-items: center; gap: 10px;
+}
+.stitle::before {
+  content: ''; display: block; width: 4px; height: 20px;
+  background: var(--accent3); border-radius: 2px;
+}
+
+/* ── KPI ── */
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.kpi {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 16px 18px;
+  box-shadow: 0 1px 4px var(--shadow);
+  transition: background .35s;
+}
+.kpi-l { font-family: var(--font-sans); font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.badge {
+  display: inline-block; font-family: var(--font-sans);
+  font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px;
+}
+.up   { background: rgba(122,154,122,.15); color: var(--green); }
+.dn   { background: rgba(184,112,112,.15); color: var(--red); }
+.nt   { background: rgba(123,143,160,.15); color: var(--accent2); }
+
+/* ── TABLE ── */
+.tbl-wrap {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow);
+}
+.tbl { width: 100%; border-collapse: collapse; font-family: var(--font-sans); font-size: 13px;
+       font-variant-numeric: tabular-nums; }
+.tbl th {
+  background: var(--card2); color: var(--text3-ink); font-size: 11px;
+  letter-spacing: .5px; text-transform: uppercase;
+  padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border);
+}
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); }
+
+/* ── CHARTS ── */
+.cgrid  { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-bottom: 16px; }
+.cgrid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-bottom: 16px; }
+.ccard, .kpi, .moat-card, .risk-card, .score-card, .snap-item, .pbox { min-width: 0; }
+.ccard {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow);
+}
+.ctitle { font-family: var(--font-sans); font-size: 12px; color: var(--text3-ink); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 230px; }
+
+/* ── QUOTES ── */
+.qgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.qcard {
+  background: var(--card); border: 1px solid var(--border);
+  border-left: 4px solid var(--rose);
+  border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow);
+}
+.qname { font-weight: 700; color: var(--accent3); margin-bottom: 2px; }
+.qrole { font-family: var(--font-sans); font-size: 11px; color: var(--text3); margin-bottom: 10px; }
+.qtext { font-style: italic; font-size: 13.5px; color: var(--text); line-height: 1.8; }
+
+/* ── ANALYSIS ── */
+.agrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+.acard {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow);
+}
+.acard h4 { font-size: 13px; color: var(--accent2); margin-bottom: 10px; text-transform: uppercase; letter-spacing: .5px; }
+.acard ul { padding-left: 16px; }
+.acard li { margin-bottom: 5px; font-size: 13px; }
+
+/* ── BUFFETT SCORE ── */
+.bscore {
+  display: flex; align-items: center; gap: 16px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px 22px; margin-bottom: 12px;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.circle {
+  width: 62px; height: 62px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 18px; flex-shrink: 0;
+  border: 3px solid; font-family: var(--font-sans);
+}
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 3px; }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+/* ── VERDICT ── */
+.verdict {
+  background: var(--card2); border: 2px solid var(--accent);
+  border-radius: 10px; padding: 26px 28px; margin-bottom: 16px;
+}
+.verdict-t { font-size: 17px; font-weight: 700; color: var(--accent); margin-bottom: 10px; }
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 14px; text-align: center;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.pbox .pl { font-family: var(--font-sans); font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.pbox .pv { font-family: var(--font-sans); font-size: 26px; font-weight: 800; }
+.pbox .pn { font-size: 11px; color: var(--text3); margin-top: 3px; }
+.pc { color: var(--text2); } .pf { color: var(--gold); } .ps { color: var(--green); }
+
+/* ── SANKEY ── */
+#sankey { width: 100%; height: 460px; }
+
+/* ── COMMENTARY ── */
+.cmt {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 26px; line-height: 1.9; font-size: 14.5px;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.cmt p { margin-bottom: 14px; }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--card2); border-top: 1px solid var(--border);
+  padding: 24px; text-align: center; color: var(--text3); font-size: 12px;
+  margin-top: 40px;
+}
+
+@media (max-width: 768px) {
+  .cgrid,.cgrid3,.qgrid,.agrid,.pgrid { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 22px; }
+  .kpi-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ── HAITU SIGNATURE BLOCKS (页首短评 + 页末长评) ── */
+.haitu-quip {
+  display: flex; align-items: center; gap: 18px;
+  background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red);
+  border-radius: 12px; padding: 18px 24px; margin: 24px 0;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.haitu-avatar-sm {
+  width: 64px; height: 64px; border-radius: 50%;
+  object-fit: cover; flex-shrink: 0;
+  border: 2px solid var(--border); background: var(--red);
+  box-shadow: 0 2px 8px rgba(184,112,112,0.18);
+}
+.haitu-quote { flex: 1; }
+.haitu-name {
+  font-family: var(--font-sans);
+  font-size: 12px; font-weight: 700; letter-spacing: 1.5px;
+  color: var(--red-ink); text-transform: uppercase; margin-bottom: 4px;
+}
+.haitu-portrait {
+  font-size: 15px; line-height: 1.65; color: var(--text);
+  margin-bottom: 6px; font-weight: 600;
+}
+.haitu-rating-line {
+  font-size: 13px; color: var(--text2);
+  font-family: var(--font-sans);
+}
+.rating-badge {
+  display: inline-block; padding: 2px 12px; border-radius: 12px;
+  font-weight: 700; font-size: 13px; letter-spacing: 0.5px;
+  margin-left: 4px;
+}
+.rating-strong-buy { background: rgba(122,154,122,.25); color: var(--green); }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+.rating-cond-buy { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-hold { background: rgba(123,143,160,.18); color: var(--accent2); }
+.rating-sell { background: rgba(184,112,112,.18); color: var(--red); }
+.rating-strong-sell { background: rgba(184,112,112,.28); color: var(--red); }
+
+.haitu-essay {
+  background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red);
+  border-radius: 12px; padding: 28px 32px; margin: 24px 0;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.haitu-essay-header {
+  display: flex; align-items: center; gap: 18px;
+  padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px;
+}
+.haitu-avatar-lg {
+  width: 110px; height: 110px; border-radius: 50%;
+  object-fit: cover; flex-shrink: 0;
+  border: 3px solid var(--border); background: var(--red);
+  box-shadow: 0 4px 14px rgba(184,112,112,0.22);
+}
+.haitu-name-lg {
+  font-family: 'Georgia', 'Noto Serif SC', serif;
+  font-size: 28px; font-weight: 700; color: var(--text);
+  letter-spacing: 1px; margin-bottom: 4px;
+}
+.haitu-essay-tag {
+  font-family: var(--font-sans);
+  font-size: 12px; color: var(--text3); letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+.haitu-essay-body {
+  font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', serif;
+  font-size: 15px; line-height: 2.0; color: var(--text);
+}
+.haitu-essay-body p { margin-bottom: 16px; }
+.haitu-essay-body p:first-child {
+  font-size: 16px; font-style: italic; color: var(--text2);
+}
+.haitu-essay-body p:last-child {
+  margin-top: 22px; padding-top: 14px;
+  border-top: 1px solid var(--border);
+  font-size: 12px; color: var(--text3); font-style: italic;
+}
+.haitu-sign {
+  text-align: right; margin-top: 14px;
+  font-family: 'Georgia', serif; font-size: 14px;
+  color: var(--text2); font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .haitu-quip { flex-direction: column; text-align: center; }
+  .haitu-essay-header { flex-direction: column; text-align: center; }
+  .haitu-avatar-sm { width: 80px; height: 80px; }
+  .haitu-avatar-lg { width: 90px; height: 90px; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   海图 v2 追加规则 —— 修 103 份存量实测出的问题，勿删勿改顺序
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── 1. 锚点落点：一行同时修好 TOC 跳转 / 深链 / Ctrl+F 定位 / :target ──
+   没有这条，所有跳转都会落在 sticky 顶栏底下被遮住 */
+.section { scroll-margin-top: calc(var(--bar-h) + 12px); }
+
+/* h2.stitle 必须显式定字号，否则被 UA 默认样式撑成 32px 巨标题 */
+h2.stitle { font-size: 18px; font-weight: 700; margin: 0 0 20px; }
+
+/* 章节深链锚点：桌面 hover 显形，触屏常显 */
+.anchor {
+  margin-left: 8px; font-size: 13px; color: var(--text3-ink);
+  text-decoration: none; opacity: 0; transition: opacity .2s;
+}
+.stitle:hover .anchor, .anchor:focus-visible { opacity: 1; }
+@media (hover: none) { .anchor { opacity: .35; } }
+
+/* ── 2. 评级徽章：由 data-rating 派生，作者不再手写 class ──
+   实测存量 .rating-hold 在 63 份是金色、30 份是蓝色 —— 这套选择器根除该分歧 */
+.rating-badge[data-rating="强力买入"] { background: rgba(122,154,122,.25); color: var(--green-ink); }
+.rating-badge[data-rating="买入"]     { background: rgba(122,154,122,.18); color: var(--green-ink); }
+.rating-badge[data-rating="有条件买入"]{ background: rgba(185,160,106,.18); color: var(--gold-ink); }
+.rating-badge[data-rating="持有观望"] { background: rgba(123,143,160,.18); color: var(--accent2-ink); }
+.rating-badge[data-rating="卖出"]     { background: rgba(184,112,112,.18); color: var(--red-ink); }
+.rating-badge[data-rating="强烈卖出"] { background: rgba(184,112,112,.28); color: var(--red-ink); }
+
+/* 涨跌不能只靠色相（色盲）—— 文字里必须自带 +/- 号，这里只负责配色 */
+.up, .pos { color: var(--green-ink); }
+.dn, .neg { color: var(--red-ink); }
+
+/* ── 3. 窄屏表格：粘性首列 + 右侧滚动阴影提示 ──
+   实测 375px 下 12 张表有 6 张横向溢出，且无任何可滚动的视觉线索 */
+.tbl-wrap {
+  background-image: linear-gradient(to right, var(--card), var(--card)),
+                    linear-gradient(to right, rgba(0,0,0,.10), rgba(0,0,0,0));
+  background-position: right center, right center;
+  background-repeat: no-repeat;
+  background-size: 24px 100%, 12px 100%;
+  background-attachment: local, scroll;
+}
+@media (max-width: 640px) {
+  /* border-collapse:collapse 下 sticky 单元格的边框会丢，用 box-shadow 补回 */
+  .tbl { border-collapse: separate; border-spacing: 0; }
+  .tbl :is(th, td) { border-bottom: 1px solid var(--border); }
+  .tbl :is(th, td):first-child {
+    position: sticky; left: 0; z-index: 1;
+    background: var(--card); box-shadow: 1px 0 0 var(--border);
+  }
+  .tbl th:first-child { background: var(--card2); }
+}
+
+/* ── 4. 移动端：顶栏必须能换行（实测四元素已折行重叠）── */
+.theme-bar { flex-wrap: wrap; row-gap: 6px; }
+@media (max-width: 420px) { .theme-bar .xueqiu-link { display: none; } }
+
+@media (max-width: 640px) {
+  .container { padding: 0 14px; }          /* 24px 在 375px 上吃掉 12.8% 视口 */
+  body { font-size: 15.5px; }              /* 14.5px 中文长文在手机上偏小 */
+  .cwrap { height: 200px; }
+  #sankey { height: 360px !important; }    /* 480px 挤在 289px 宽里不可读 */
+  .cgrid, .cgrid3, .pgrid { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 640px), (hover: none) {
+  .toggle-switch::before {
+    content: ''; position: absolute; left: 0; right: 0;
+    top: 50%; transform: translateY(-50%); height: 44px;
+  }
+}
+
+/* ── 5. prefers-reduced-motion ──
+   全语料 103/103 有 scroll-behavior:smooth 且零保护。加了目录之后，
+   一次跳转要跨 4 万像素、持续数秒，前庭敏感者会难受 */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important; animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+}
+
+/* ── 6. 焦点可见（全语料 0 个 :focus-visible 样式）── */
+:focus-visible { outline: 2px solid var(--accent3-ink); outline-offset: 2px; }
+
+/* ── 7. 图表无障碍降级容器 ── */
+figure.chart { margin: 0; }
+figure.chart figcaption { font-size: 12px; color: var(--text3-ink); line-height: 1.6; margin-top: 8px; }
+.chart-data { font-size: 12px; margin-top: 8px; }
+.chart-data summary { cursor: pointer; color: var(--text3-ink); }
+
+/* ── 8. shell 新增组件（skip link / 结论跳转带 / 顶栏右侧 / 屏幕阅读器专用）── */
+
+.skip {
+  position: absolute; left: -9999px; top: 0;
+  background: var(--card); color: var(--accent3-ink);
+  padding: 8px 14px; border-radius: 0 0 8px 0; z-index: 200;
+  font-size: 13px; text-decoration: none;
+}
+.skip:focus { left: 0; }
+
+/* 只给屏幕阅读器：essay 一节的标题不需要视觉呈现（.haitu-essay 自带头部） */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+.theme-bar-right { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+
+/* 结论跳转带：读者看完评级后一步到证据 */
+.quip-jump { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.quip-jump a {
+  font-family: var(--font-sans); font-size: 12px; line-height: 1;
+  padding: 7px 12px; border-radius: 999px;
+  border: 1px solid var(--border); background: var(--card2);
+  color: var(--accent3-ink); text-decoration: none;
+  transition: border-color .2s, background .2s;
+}
+.quip-jump a:hover { border-color: var(--accent3); background: var(--card); }
+@media (max-width: 640px), (hover: none) {
+  /* 用 min-height 而不是加 padding —— padding 要靠字体行高凑够 44px，
+     换字体或改字号就又不达标了（实测 padding:13px 只得到 40px）。 */
+  .quip-jump a { min-height: 44px; padding: 0 16px; display: inline-flex; align-items: center; }
+}
+
+.hero-pills {display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;}
+.pill {background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: var(--font-sans); font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow);}
+.pill strong {color: var(--text);}
+.stock-snap {background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px;}
+.snap-item {text-align: center;}
+.snap-label {font-family: var(--font-sans); font-size: 10px; color: var(--text3-ink); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px;}
+.kpi-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px;}
+.kpi {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow);}
+.moat-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px;}
+.moat-card {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); border-left: 4px solid var(--accent);}
+.moat-card.wide {border-left-color: var(--green);}
+.moat-card.narrow {border-left-color: var(--gold);}
+.moat-card.none {border-left-color: var(--red);}
+.moat-card h5 {font-size: 13px; color: var(--text); margin-bottom: 6px;}
+.moat-card .moat-rate {font-family: var(--font-sans); font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px;}
+.moat-card.wide .moat-rate {background: rgba(122,154,122,.18); color: var(--green);}
+.moat-card.narrow .moat-rate {background: rgba(185,160,106,.18); color: var(--gold);}
+.moat-card.none .moat-rate {background: rgba(184,112,112,.18); color: var(--red);}
+.moat-card p {font-size: 12.5px; color: var(--text2); line-height: 1.65;}
+.ec-item {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: block; box-shadow: 0 1px 3px var(--shadow); line-height: 1.75;}
+.ec-badge {display: inline-block; vertical-align: baseline; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-right: 10px; font-family: var(--font-sans); white-space: nowrap;}
+.dcf-note {background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: 13px; color: var(--text2); line-height: 1.8;}
+.dcf-note strong {color: var(--text);}
+.scorecard {background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow);}
+.score-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px;}
+.score-card {background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px;}
+.score-letter {width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-sans); font-weight: 800; font-size: 22px; flex-shrink: 0; border: 3px solid;}
+.flag-row {margin-top: 16px; padding: 12px 16px; background: rgba(184,112,112,.08); border: 1px solid rgba(184,112,112,.3); border-radius: 8px; font-size: 13px; color: var(--text2);}
+.flag-row strong {color: var(--red);}
+.pgrid {display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0;}
+.pbox {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center; box-shadow: 0 1px 4px var(--shadow);}
+.pbox .pl {font-family: var(--font-sans); font-size: 11px; color: var(--text3-ink); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px;}
+.pbox .pv {font-family: var(--font-sans); font-size: 28px; font-weight: 800; margin-bottom: 5px;}
+.pbox .pn {font-size: 12px; color: var(--text3-ink); line-height: 1.5;}
+.risk-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px;}
+.risk-card {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); position: relative; overflow: hidden;}
+.risk-card::before {content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent);}
+.risk-card.r1::before {background: var(--green);}
+.risk-card.r2::before {background: rgba(122,154,122,.6);}
+.risk-card.r3::before {background: var(--gold);}
+.risk-card.r4::before {background: var(--rose);}
+.risk-card.r5::before {background: var(--red);}
+.risk-card h5 {font-size: 14px; margin-bottom: 6px; color: var(--text);}
+.risk-card p {font-size: 13px; color: var(--text2); line-height: 1.7;}
+
+/* 骨架用到、但语料里没有现成规则的补充组件 */
+.note { font-size: 12px; color: var(--text3-ink); line-height: 1.7; margin-top: 10px; }
+.lead { font-size: 16px; font-weight: 600; line-height: 1.8; margin-bottom: 14px; }
+.haitu-disc { font-size: 12px; color: var(--text3-ink); line-height: 1.7; margin-top: 18px;
+              padding-top: 14px; border-top: 1px solid var(--border); }
+.bscore { background: var(--card2); border: 1px solid var(--border); border-radius: 10px;
+          padding: 16px 20px; margin: 16px 0; }
+.bscore h4 { font-family: var(--font-sans); font-size: 14px; color: var(--accent3-ink); margin: 0 0 6px; }
+.bscore p { margin: 0; font-size: 14px; }
+
+/* 桑基 SVG：颜色与线宽在标记里给，这里只管描边端点与文字 */
+#sankey { width: 100%; height: auto; }
+.sk-flow path { fill: none; opacity: .45; stroke-linecap: butt; }
+.sk-t .sk-lab { font-family: var(--font-sans); font-size: 12px; fill: var(--text2); }
+.sk-t .sk-num { font-family: var(--font-sans); font-size: 13px; font-weight: 700; fill: var(--text);
+                font-variant-numeric: tabular-nums; }
+.sk-t .warn   { fill: var(--red-ink); }
+
+@media (max-width: 640px) {
+  .stock-snap { grid-template-columns: 1fr 1fr; }
+  .kpi-grid   { grid-template-columns: 1fr 1fr; }
+  .moat-grid, .risk-grid, .score-grid, .pgrid { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* 修饰类：评分等级 / 电话会情绪 / 快照数值。文字色一律走 ink 层。 */
+.score-letter.s-a  { color: var(--green-ink);   border-color: var(--green);   background: rgba(122,154,122,.12); }
+.score-letter.s-bp { color: var(--gold-ink);    border-color: var(--gold);    background: rgba(185,160,106,.12); }
+.score-letter.s-b  { color: var(--accent2-ink); border-color: var(--accent2); background: rgba(123,143,160,.12); }
+.score-letter.s-c  { color: var(--red-ink);     border-color: var(--red);     background: rgba(184,112,112,.12); }
+
+.ec-badge.ec-bull { background: rgba(122,154,122,.18); color: var(--green-ink); }
+.ec-badge.ec-bear { background: rgba(184,112,112,.18); color: var(--red-ink); }
+.ec-badge.ec-neut { background: rgba(123,143,160,.18); color: var(--accent2-ink); }
+
+.snap-value { font-family: var(--font-sans); font-size: 19px; font-weight: 700; color: var(--text);
+              font-variant-numeric: tabular-nums; line-height: 1.3; }
+.snap-note  { font-family: var(--font-sans); font-size: 11px; color: var(--text3-ink); margin-top: 3px; }
+.sk-node rect { opacity: .9; }
+
+</style>
+</head>
+<body>
+
+<a class="skip" href="#kpi">跳到正文</a>
+
+<!-- ── 顶栏 ── -->
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/STZ" target="_blank" rel="noopener">📊 雪球 STZ</a>
+  </div>
+  <div class="theme-bar-right">
+    <span>☀️ 浅色</span>
+    <button type="button" class="toggle-switch" id="themeBtn"
+            aria-pressed="false" aria-label="切换深色模式" onclick="toggleTheme()"></button>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-tag">Q1 FY2027 财报发布 · 2026-06-30 ｜ 海图研判 · 2026-08-09</div>
+  <h1>Constellation Brands STZ · Q1 FY2027 财报深度分析</h1>
+  <div class="hero-sub">NYSE: STZ ｜ 财季截至 2026-05-31 ｜ 价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill"><span class="pill-k">股价</span><span class="pill-v">$135.76</span></div>
+    <div class="pill"><span class="pill-k">市值</span><span class="pill-v">$231.8 亿</span></div>
+    <div class="pill"><span class="pill-k">可比 P/E</span><span class="pill-v">11.75x</span></div>
+    <div class="pill"><span class="pill-k">FCF 收益率</span><span class="pill-v">7.91%</span></div>
+    <div class="pill"><span class="pill-k">股东总回报率</span><span class="pill-v">6.70%</span></div>
+    <div class="pill"><span class="pill-k">净负债/EBITDA</span><span class="pill-v">3.20x</span></div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="haitu-quip">
+    <div class="haitu-quote">
+      <div class="haitu-portrait">它在墨西哥酿造 Corona 与 Modelo，在美国独家销售——啤酒占净销售额 93.9%，而两个最大的品牌动销都在下滑。</div>
+      <div class="haitu-rating-line">
+        评级：<span class="rating-badge" data-rating="持有观望">持有观望</span>
+        · 12 个月目标价 $144 · 现金创造无可挑剔，但安全边际仅 6.4%，且商誉占权益 63.6%
+      </div>
+      <!-- 结论跳转带：读者看到评级后第一反应是「凭什么」，给他一步到证据的路。
+           不要再加摘要卡 —— 目标价在 hero、这里、模块 7 已有三份，第四份只会增加不一致。 -->
+      <div class="quip-jump" role="group" aria-label="快速跳转">
+        <a href="#m13">评分卡与决策</a>
+        <a href="#m7">目标价怎么算出来的</a>
+        <a href="#m11">风险矩阵</a>
+        <a href="#m4">护城河</a>
+        <a href="#essay">夜读手记</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ══ 前置章节 ══ -->
+
+<section class="section" id="snapshot" aria-labelledby="snapshot-t">
+  <h2 class="stitle" id="snapshot-t">市场数据快照（2026-08-07 收盘）<a class="anchor" href="#snapshot" aria-label="本节链接">#</a></h2>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-k">股价</div><div class="snap-v">$135.76</div></div>
+    <div class="snap-item"><div class="snap-k">市值</div><div class="snap-v">$231.8 亿</div></div>
+    <div class="snap-item"><div class="snap-k">净负债</div><div class="snap-v">$104.4 亿</div></div>
+    <div class="snap-item"><div class="snap-k">企业价值 EV</div><div class="snap-v">$336.2 亿</div></div>
+    <div class="snap-item"><div class="snap-k">TTM P/E（GAAP）</div><div class="snap-v">12.96x</div></div>
+    <div class="snap-item"><div class="snap-k">可比 P/E（FY27E 中值）</div><div class="snap-v">11.75x</div></div>
+    <div class="snap-item"><div class="snap-k">EV / TTM EBITDA</div><div class="snap-v">10.30x</div></div>
+    <div class="snap-item"><div class="snap-k">净负债 / EBITDA</div><div class="snap-v">3.20x</div></div>
+    <div class="snap-item"><div class="snap-k">FCF 收益率</div><div class="snap-v">7.91%</div></div>
+    <div class="snap-item"><div class="snap-k">股息率</div><div class="snap-v">3.04%</div></div>
+    <div class="snap-item"><div class="snap-k">52 周区间</div><div class="snap-v">$126.45 – $174.32</div></div>
+    <div class="snap-item"><div class="snap-k">Beta</div><div class="snap-v">0.40</div></div>
+  </div>
+  <p class="note">财季于 2026-05-31 结束，财报于 2026-06-30 盘后发布。股本为 <strong>170,752,511 股 Class A</strong> ＋ 25,923 股 Class 1 可转换普通股（2026-06-26，取自 10-Q 封面）。<span class="hl-t">Class 1 仅 2.6 万股，可忽略——这家公司此前的双层股权结构已不复存在，今天是实质单一类别。</span></p>
+</section>
+
+<section class="section" id="kpi" aria-labelledby="kpi-t">
+  <h2 class="stitle" id="kpi-t">Q1 FY2027 核心业绩（财季截至 2026-05-31）<a class="anchor" href="#kpi" aria-label="本节链接">#</a></h2>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-k">净销售额</div><div class="kpi-v">$24.33 亿</div><div class="kpi-d down">同比 −3%</div></div>
+    <div class="kpi"><div class="kpi-k">营业利润（报告）</div><div class="kpi-v">$8.45 亿</div><div class="kpi-d up">同比 +18%｜利润率 34.75%</div></div>
+    <div class="kpi"><div class="kpi-k">营业利润（可比）</div><div class="kpi-v">$8.34 亿</div><div class="kpi-d up">同比 +6%</div></div>
+    <div class="kpi"><div class="kpi-k">每股收益（报告）</div><div class="kpi-v">$3.79</div><div class="kpi-d warn">同比 +31%｜含 +$0.37 调整项</div></div>
+    <div class="kpi"><div class="kpi-k">每股收益（可比）</div><div class="kpi-v">$3.43</div><div class="kpi-d up">同比 +7%</div></div>
+    <div class="kpi"><div class="kpi-k">啤酒发货量</div><div class="kpi-v">1.133 亿箱</div><div class="kpi-d up">同比 +1.8%</div></div>
+    <div class="kpi"><div class="kpi-k">啤酒动销（终端）</div><div class="kpi-v">−0.3%</div><div class="kpi-d down">发货与动销背离 2.1pp</div></div>
+    <div class="kpi"><div class="kpi-k">啤酒营业利润率</div><div class="kpi-v">39.0%</div><div class="kpi-d up">基本持平</div></div>
+    <div class="kpi"><div class="kpi-k">经营现金流</div><div class="kpi-v">$6.62 亿</div><div class="kpi-d up">同比 +4%</div></div>
+    <div class="kpi"><div class="kpi-k">自由现金流</div><div class="kpi-v">$4.85 亿</div><div class="kpi-d up">同比 +9%</div></div>
+    <div class="kpi"><div class="kpi-k">股份回购</div><div class="kpi-v">$2.24 亿</div><div class="kpi-d warn">均价 $152.73｜高于现价 12.5%</div></div>
+    <div class="kpi"><div class="kpi-k">季度股息</div><div class="kpi-v">$1.03 / 股</div><div class="kpi-d down">同比 +1.0%</div></div>
+  </div>
+  <p class="note">数据来源：Constellation Brands 2026-06-30 提交 SEC 的 8-K 及 Exhibit 99.1 财报全文、2026-07-01 提交的 10-Q，以及 SEC XBRL 结构化财务数据。啤酒发货量口径为「24 支装 12 盎司标准箱当量」。</p>
+</section>
+
+<section class="section" id="focus" aria-labelledby="focus-t">
+  <h2 class="stitle" id="focus-t">本季必看 · 两个「看穿」<a class="anchor" href="#focus" aria-label="本节链接">#</a></h2>
+
+  <div class="pbox">
+    <h4>看穿一 · 报告 EPS 增长 31%，其中 24 个百分点来自会计口径的符号反转</h4>
+    <div class="cmt">
+      <p>本季标题数字很漂亮：<strong>报告每股收益 $3.79，同比增长 31%</strong>。但把公司自己的调节表打开，故事完全不同：</p>
+      <div class="tbl-wrap">
+        <table class="tbl" data-shape="grid" data-source="Constellation Brands Q1 FY2027 8-K Exhibit 99.1 非 GAAP 调节表">
+          <thead><tr><th>项目</th><th>Q1 FY2027</th><th>Q1 FY2026</th><th>变化</th></tr></thead>
+          <tbody>
+            <tr><td>报告 EPS（GAAP）</td><td>$3.79</td><td>$2.90</td><td><strong>+31%</strong></td></tr>
+            <tr><td>可比调整项</td><td><strong>＋$0.37</strong></td><td><strong>−$0.32</strong></td><td>摆动 $0.69</td></tr>
+            <tr><td>可比 EPS（Non-GAAP）</td><td>$3.43</td><td>$3.22</td><td><strong>+7%</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>去年这一项<strong>拖累</strong>了 $0.32，今年<strong>贡献</strong>了 $0.37。一来一回 $0.69，占去年 $2.90 基数的 <span class="hl-t">24 个百分点</span>——也就是说，那个「31%」里有约四分之三不是经营出来的，是会计口径的方向变了。剔干净之后，真实增速是 <strong>7%</strong>。</p>
+      <p><strong>这不是孤例，而是这家公司长期的特征。</strong>把五个财年的营业利润与 GAAP 净利润并排看：</p>
+      <div class="tbl-wrap">
+        <table class="tbl" data-shape="grid" data-source="SEC XBRL 结构化数据（10-K 口径，FY2022–FY2026）">
+          <thead><tr><th>财年（$ 百万）</th><th>营业利润</th><th>GAAP 净利润</th><th>差额</th><th>主因</th></tr></thead>
+          <tbody>
+            <tr><td>FY2022</td><td>2,331.7</td><td><strong>−40.4</strong></td><td>−2,372.1</td><td>股权投资减值</td></tr>
+            <tr><td>FY2023</td><td>2,842.9</td><td><strong>−71.0</strong></td><td>−2,913.9</td><td>股权投资减值</td></tr>
+            <tr><td>FY2024</td><td>3,169.7</td><td>1,727.4</td><td>−1,442.3</td><td>利息与税</td></tr>
+            <tr><td>FY2025</td><td><strong>354.9</strong></td><td><strong>−81.4</strong></td><td>−436.3</td><td>商誉减值 <strong>2,740.7</strong></td></tr>
+            <tr><td>FY2026</td><td>2,721.4</td><td>1,686.7</td><td>−1,034.7</td><td>利息与税</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>五个财年里，有三年 GAAP 净利润是负的——而营业利润没有一年为负。</strong><span class="hl-t">对这样一家公司，GAAP 净利润在过去五年几乎不能用于估值，因为它记录的主要不是经营，而是历次投资与并购的账面清算。</span></p>
+      <p><strong>而最该被看到的是公司自己的指引：</strong></p>
+      <div class="tbl-wrap">
+        <table class="tbl" data-shape="grid" data-source="Constellation Brands Q1 FY2027 8-K Exhibit 99.1「OUTLOOK」章节">
+          <thead><tr><th>口径</th><th>FY2027 指引</th><th>FY2026 实际</th><th>中值变化</th></tr></thead>
+          <tbody>
+            <tr><td>报告 EPS</td><td>$11.50 – $12.20</td><td>$9.61</td><td><strong>+23.3%</strong></td></tr>
+            <tr><td><strong>可比 EPS</strong></td><td>$11.20 – $11.90</td><td>$11.82</td><td><strong>−2.3%</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>同一份指引，报告口径说今年增长 23%，可比口径说今年下降 2.3%。</strong>差别全在 FY2026 那个被一次性项目压低的 $9.61 基数上。<span class="hl-t">管理层自己给出的、剔除噪音后的预期是：这一年每股收益不增长，还略降。</span></p>
+    </div>
+  </div>
+
+  <div class="pbox">
+    <h4>看穿二 · 发货量在涨，终端在跌，而涨的不是旗舰品牌</h4>
+    <div class="cmt">
+      <p>啤酒是这家公司的全部——本季啤酒净销售额 $22.835 亿，占公司总额 <strong>93.9%</strong>。所以啤酒的两个量指标之间那 2.1 个百分点的裂口，值得单独讲。</p>
+      <div class="tbl-wrap">
+        <table class="tbl" data-shape="grid" data-source="Constellation Brands Q1 FY2027 8-K Exhibit 99.1 啤酒分部">
+          <thead><tr><th>指标</th><th>Q1 FY2027</th><th>Q1 FY2026</th><th>变化</th></tr></thead>
+          <tbody>
+            <tr><td>发货量（发给经销商）</td><td>113.3</td><td>111.3</td><td><strong>＋1.8%</strong></td></tr>
+            <tr><td>动销量（经销商卖给零售终端）</td><td>—</td><td>—</td><td><strong>−0.3%</strong></td></tr>
+            <tr><td>净销售额</td><td>$2,283.5</td><td>$2,234.5</td><td>+2%</td></tr>
+            <tr><td>分部营业利润</td><td>$891.4</td><td>$873.4</td><td>+2%</td></tr>
+            <tr><td>分部营业利润率</td><td>39.0%</td><td>39.1%</td><td>基本持平</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>发货是卖给经销商，动销是经销商真正卖出去。</strong>发货 +1.8% 而动销 −0.3%，意味着这一季有约两个百分点的量<span class="hl-t">留在了渠道里，而不是被消费者喝掉</span>。这部分是未来发货量的透支：渠道库存不会无限增加。</p>
+      <p><strong>再看动销的内部结构，问题更清楚：</strong></p>
+      <ul class="ulist">
+        <li><strong>Modelo Especial 动销约 −2%</strong>——这是全美<strong>销售额第一</strong>的啤酒品牌</li>
+        <li><strong>Corona Extra 动销 −超过 5%</strong>——销售额前五的品牌</li>
+        <li>Pacifico ＋约 21%、Victoria ＋14%、Modelo Chelada ＋6% ——三个体量小得多的品牌把窟窿补上了</li>
+      </ul>
+      <p><strong>两个最大的品牌在萎缩，靠三个小品牌撑住总量。</strong>这在消费品里是一种典型的结构性信号：<span class="hl-t">当增长必须由体量小的产品接棒时，同样的百分比增长需要越来越大的努力，而旗舰品牌的下滑基数却越来越大。</span></p>
+      <p><strong>为什么会这样？公司自己没有回避。</strong>过去一年多，管理层反复提到消费背景疲弱，尤其是<strong>西班牙裔消费者群体</strong>——而这个群体贡献了 Constellation 在美啤酒销售的<strong>约一半</strong>。移民执法的收紧减少了聚会与外出消费的场合，直接压掉了需求。这不是营销能解决的问题。</p>
+      <p><strong>成本端还有一道同向的压力</strong>：这家公司的墨西哥啤酒包装中<strong>约 41% 是铝</strong>，而铝关税在过去几个季度已经实实在在推高了销售成本。<strong>一边是靠西班牙裔消费者的需求在退，一边是靠关税决定的成本在进——两头都不在公司手里。</strong></p>
+      <p>作为对照，需要公平地记下另一面：本季啤酒仍是 Circana 美国渠道<strong>销售额份额增长第一</strong>的品类玩家，跑赢整个啤酒品类近 3 个百分点，前 15 大份额增长品牌里占了 5 个。<span class="hl-t">它在一个正在缩小的池子里，份额还在扩大——这是真本事，但份额不能替代池子。</span></p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="trend" aria-labelledby="trend-t">
+  <h2 class="stitle" id="trend-t">关键指标趋势<a class="anchor" href="#trend" aria-label="本节链接">#</a></h2>
+  <div class="cgrid">
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">五年净销售额（$ 十亿）与营业利润率</div>
+        <div class="cwrap"><canvas id="rev" data-chart="rev" role="img" aria-label="净销售额从 88.2 亿升至 102.1 亿后回落至 91.4 亿，营业利润率在 FY2025 因商誉减值骤降至 3.5% 后回升至 29.8%"></canvas></div>
+        <figcaption>柱＝净销售额；折线＝营业利润率（%）。FY2026 下滑主因葡萄酒业务剥离。来源：SEC XBRL（10-K 口径）。</figcaption>
+      </figure>
+    </div>
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">营业利润 vs GAAP 净利润（$ 十亿）：三年为负的那条线</div>
+        <div class="cwrap"><canvas id="margin" data-chart="margin" role="img" aria-label="五个财年营业利润始终为正，而 GAAP 净利润在 FY2022、FY2023、FY2025 三年为负"></canvas></div>
+        <figcaption>FY2022/FY2023 主因股权投资减值，FY2025 主因 27.4 亿美元商誉减值。来源：SEC XBRL。</figcaption>
+      </figure>
+    </div>
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">Q1 FY2027 净销售额构成（$ 百万）</div>
+        <div class="cwrap"><canvas id="segment" data-chart="segment" role="img" aria-label="啤酒 22.835 亿美元占 93.9%，葡萄酒与烈酒 1.492 亿美元占 6.1%"></canvas></div>
+        <figcaption>啤酒占 93.9%——这家公司实质上已是一家墨西哥进口啤酒公司。来源：Q1 FY2027 财报分部数据。</figcaption>
+      </figure>
+    </div>
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">Q1 FY2027 啤酒各品牌动销增速（%）</div>
+        <div class="cwrap"><canvas id="eps" data-chart="eps" role="img" aria-label="Modelo Especial 约负 2%，Corona Extra 约负 5%，而 Pacifico 正 21%、Victoria 正 14%、Modelo Chelada 正 6%"></canvas></div>
+        <figcaption>两个最大品牌为负，三个小品牌为正。整体动销 −0.3%。来源：Q1 FY2027 财报啤酒分部。</figcaption>
+      </figure>
+    </div>
+  </div>
+  <p class="note"><strong>第二张图是这份报告里最该记住的一张。</strong>五根蓝柱（营业利润）从未跌破零，五根对照柱（GAAP 净利润）却有三根在零线之下。<span class="hl-t">同一家公司、同一批酒厂、同一批品牌——差别全部来自经营以外。</span>这就是为什么本报告的估值全程使用可比口径与现金流，而不用 GAAP 净利润。</p>
+</section>
+
+<section class="section" id="flow" aria-labelledby="flow-t">
+  <h2 class="stitle" id="flow-t">资金流向桑基图（FY2026 全年 · $ 百万）<a class="anchor" href="#flow" aria-label="本节链接">#</a></h2>
+  <div class="ccard">
+    <figure class="chart">
+      <svg id="sankey" viewBox="0 0 1180 600" role="img" aria-label="FY2026 资金流向：净销售额 91.39 亿美元中销售成本 44.275 亿，毛利 47.115 亿；扣营业费用 19.901 亿后营业利润 27.214 亿；扣利息税等 10.347 亿后净利润 16.867 亿；加回非现金调整与营运资金 9.823 亿得经营现金流 26.69 亿；扣资本开支 8.75 亿得自由现金流 17.94 亿；其中回购 9.241 亿、股息 7.157 亿、留存 1.542 亿">
+        <g class="sk-flow">
+          <path d="M94,142.5 C170,142.5 170,132.5 260,132.5" stroke="var(--rose)" stroke-width="205"/>
+          <path d="M94,354.5 C170,354.5 170,379.5 260,379.5" stroke="var(--accent)" stroke-width="219"/>
+          <path d="M274,316.5 C340,316.5 340,296.5 410,296.5" stroke="var(--red)" stroke-width="93"/>
+          <path d="M274,426 C340,426 340,433 410,433" stroke="var(--accent)" stroke-width="126"/>
+          <path d="M424,394 C490,394 490,354 560,354" stroke="var(--red)" stroke-width="48"/>
+          <path d="M424,457 C490,457 490,439 560,439" stroke="var(--green)" stroke-width="78"/>
+          <path d="M574,439 C650,439 650,439 730,439" stroke="var(--green)" stroke-width="78"/>
+          <path d="M664,543 C700,543 700,501 730,501" stroke="var(--gold)" stroke-width="46"/>
+          <path d="M744,420.5 C820,420.5 820,380.5 890,380.5" stroke="var(--red)" stroke-width="41"/>
+          <path d="M744,482.5 C820,482.5 820,461.5 890,461.5" stroke="var(--green)" stroke-width="83"/>
+          <path d="M904,436.5 C970,436.5 970,366.5 1040,366.5" stroke="var(--gold)" stroke-width="33"/>
+          <path d="M904,474.5 C970,474.5 970,417.5 1040,417.5" stroke="var(--accent3)" stroke-width="43"/>
+          <path d="M904,499.5 C970,499.5 970,455.5 1040,455.5" stroke="var(--accent2)" stroke-width="7"/>
+        </g>
+        <g class="sk-node">
+          <rect x="80" y="40" width="14" height="424" rx="3" fill="var(--accent2)"/>
+          <rect x="260" y="30" width="14" height="205" rx="3" fill="var(--rose)"/>
+          <rect x="260" y="270" width="14" height="219" rx="3" fill="var(--accent)"/>
+          <rect x="410" y="250" width="14" height="93" rx="3" fill="var(--red)"/>
+          <rect x="410" y="370" width="14" height="126" rx="3" fill="var(--accent)"/>
+          <rect x="560" y="330" width="14" height="48" rx="3" fill="var(--red)"/>
+          <rect x="560" y="400" width="14" height="78" rx="3" fill="var(--green)"/>
+          <rect x="650" y="520" width="14" height="46" rx="3" fill="var(--gold)"/>
+          <rect x="730" y="400" width="14" height="124" rx="3" fill="var(--green)"/>
+          <rect x="890" y="360" width="14" height="41" rx="3" fill="var(--red)"/>
+          <rect x="890" y="420" width="14" height="83" rx="3" fill="var(--green)"/>
+          <rect x="1040" y="350" width="14" height="33" rx="3" fill="var(--gold)"/>
+          <rect x="1040" y="396" width="14" height="43" rx="3" fill="var(--accent3)"/>
+          <rect x="1040" y="452" width="14" height="7" rx="3" fill="var(--accent2)"/>
+        </g>
+        <g class="sk-t">
+          <text x="2" y="240" class="sk-lab">净销售额</text>
+          <text x="2" y="258" class="sk-num">9,139.0</text>
+          <text x="2" y="276" class="sk-lab">同比 −10.5%</text>
+          <text x="282" y="115" class="sk-lab">销售成本</text>
+          <text x="282" y="133" class="sk-num">4,427.5</text>
+          <text x="282" y="151" class="sk-lab">毛利率 51.6%</text>
+          <text x="282" y="360" class="sk-lab">毛利</text>
+          <text x="282" y="378" class="sk-num">4,711.5</text>
+          <text x="432" y="285" class="sk-lab">营业费用</text>
+          <text x="432" y="303" class="sk-num">1,990.1</text>
+          <text x="432" y="418" class="sk-lab">营业利润</text>
+          <text x="432" y="436" class="sk-num">2,721.4</text>
+          <text x="432" y="454" class="sk-lab">利润率 29.8%</text>
+          <text x="582" y="348" class="sk-lab">利息与税等</text>
+          <text x="582" y="364" class="sk-num">1,034.7</text>
+          <text x="582" y="425" class="sk-lab">GAAP 净利润</text>
+          <text x="582" y="443" class="sk-num">1,686.7</text>
+          <text x="400" y="538" class="sk-lab">＋非现金调整与营运资金</text>
+          <text x="400" y="556" class="sk-num">＋982.3</text>
+          <text x="752" y="425" class="sk-lab">经营现金流</text>
+          <text x="752" y="443" class="sk-num">2,669.0</text>
+          <text x="752" y="461" class="sk-lab">＝净利的 158%</text>
+          <text x="912" y="376" class="sk-lab warn">资本开支</text>
+          <text x="978" y="376" class="sk-num warn">875.0</text>
+          <text x="912" y="448" class="sk-lab">自由现金流</text>
+          <text x="912" y="466" class="sk-num">1,794.0</text>
+          <text x="1062" y="362" class="sk-lab">现金股息</text>
+          <text x="1062" y="378" class="sk-num">715.7</text>
+          <text x="1062" y="412" class="sk-lab">股份回购</text>
+          <text x="1062" y="428" class="sk-num">924.1</text>
+          <text x="1062" y="456" class="sk-lab">留存 154.2</text>
+        </g>
+      </svg>
+      <figcaption>单位：百万美元。来源：SEC XBRL 结构化数据（Constellation Brands FY2026 10-K，财年止于 2026-02-28）。每级流入＝流出（9,139.0 ＝ 4,427.5＋4,711.5；4,711.5 ＝ 1,990.1＋2,721.4；2,721.4 ＝ 1,034.7＋1,686.7；1,686.7＋982.3 ＝ 2,669.0；2,669.0 ＝ 875.0＋1,794.0；1,794.0 ＝ 715.7＋924.1＋154.2）。<strong>看最右边那三条：自由现金流 17.94 亿里，16.39 亿（91.4%）当年就分给了股东，只留下 1.54 亿。这家公司把几乎全部自由现金流都还了出去——在净负债 104 亿、净负债/EBITDA 3.2 倍的同时。</strong></figcaption>
+    </figure>
+    <details class="chart-data">
+      <summary>查看数据表</summary>
+      <div class="tbl-wrap">
+        <table class="tbl" data-shape="grid" data-source="SEC XBRL 结构化数据 · Constellation Brands FY2026（止于 2026-02-28）">
+          <thead><tr><th>流量</th><th>金额（$ 百万）</th><th>占净销售额</th></tr></thead>
+          <tbody>
+            <tr><td>净销售额</td><td>9,139.0</td><td>100.0%</td></tr>
+            <tr><td>销售成本</td><td>4,427.5</td><td>48.4%</td></tr>
+            <tr><td>毛利</td><td>4,711.5</td><td>51.6%</td></tr>
+            <tr><td>营业费用</td><td>1,990.1</td><td>21.8%</td></tr>
+            <tr><td>营业利润</td><td>2,721.4</td><td>29.8%</td></tr>
+            <tr><td>利息与税等</td><td>1,034.7</td><td>11.3%</td></tr>
+            <tr><td>GAAP 净利润</td><td>1,686.7</td><td>18.5%</td></tr>
+            <tr><td>加回：非现金调整与营运资金</td><td>982.3</td><td>10.7%</td></tr>
+            <tr><td>经营现金流</td><td>2,669.0</td><td>29.2%</td></tr>
+            <tr><td>资本开支</td><td>875.0</td><td>9.6%</td></tr>
+            <tr><td>自由现金流</td><td>1,794.0</td><td>19.6%</td></tr>
+            <tr><td>其中：股份回购</td><td>924.1</td><td>10.1%</td></tr>
+            <tr><td>其中：现金股息</td><td>715.7</td><td>7.8%</td></tr>
+            <tr><td>其中：留存现金</td><td>154.2</td><td>1.7%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ══ 13 个分析模块 ══ -->
+
+<section class="section" id="m1" aria-labelledby="m1-t">
+  <h2 class="stitle" id="m1-t">模块 1 · 公司概览与背景<a class="anchor" href="#m1" aria-label="本节链接">#</a></h2>
+  <div class="cmt">
+    <p><strong>Constellation Brands, Inc.（NYSE: STZ）</strong>，总部纽约州维克多，在美国、墨西哥、新西兰、意大利设有运营。财年于每年 2 月底结束——因此现在的「FY2027」实际覆盖 2026 年 3 月至 2027 年 2 月。当前市值 <strong>$231.8 亿</strong>。</p>
+    <p><strong>生意一句话</strong>：<span class="hl-t">它在墨西哥酿造 Corona、Modelo、Pacifico、Victoria，然后在美国独家销售。</span>再加一小块高端葡萄酒与烈酒。本季啤酒占净销售额 <strong>93.9%</strong>，葡萄酒与烈酒只剩 6.1%——<strong>把它当成一家「有一点葡萄酒业务的墨西哥进口啤酒公司」，比当成一家综合酒业公司更准确。</strong></p>
+    <p><strong>近几年做了三件改变公司形态的大事：</strong></p>
+    <ul class="ulist">
+      <li><strong>2025 年出售大部分主流葡萄酒品牌。</strong>这解释了为何 FY2026 净销售额从 $102.09 亿降到 $91.39 亿（−10.5%），也解释了本季葡萄酒与烈酒分部净销售额 −47% 而<strong>有机口径反而 +8%</strong>——分母被切掉了一大块。</li>
+      <li><strong>大额投资减值。</strong>FY2022 与 FY2023 两个财年，营业利润分别是 $23.32 亿与 $28.43 亿，而 GAAP 净利润是 <strong>−$0.40 亿</strong>与 <strong>−$0.71 亿</strong>——差额来自对外股权投资的账面清算。</li>
+      <li><strong>FY2025 计提 $27.41 亿商誉减值</strong>，当年营业利润因此只剩 $3.55 亿，GAAP 净利润 −$0.81 亿。<span class="hl-t">这笔减值发生在两年前，而资产负债表上今天仍有 $52.49 亿商誉，占股东权益的 63.6%。</span></li>
+    </ul>
+    <p><strong>股权结构已经简化。</strong>截至 2026-06-26，公司有 <strong>170,752,511 股 Class A 普通股</strong>与 <strong>25,923 股 Class 1 可转换普通股</strong>。后者不到总股本的 0.02%——<strong>此前长期存在的双层投票权结构已不复存在</strong>，今天的 Constellation 在治理形态上是一家实质单一类别的公司。这是过去几年公司治理上最实质的一次改善。</p>
+    <p><strong>当前最大的在建工程</strong>是墨西哥韦拉克鲁斯（Veracruz）的第三家啤酒厂。FY2027 资本开支指引约 $8 亿，低于 FY2024–FY2025 的每年 $12 亿以上——<strong>扩产周期正在过峰，这对自由现金流是好消息。</strong></p>
+  </div>
+</section>
+
+<section class="section" id="m2" aria-labelledby="m2-t">
+  <h2 class="stitle" id="m2-t">模块 2 · 管理层评估<a class="anchor" href="#m2" aria-label="本节链接">#</a></h2>
+  <div class="cmt">
+    <p><strong>先说做得好的地方，而且是硬指标。</strong></p>
+    <p><strong>成本纪律是真的。</strong>本季净销售额 −3%，而毛利 +4.3%、毛利率从 50.36% 升到 <strong>54.29%（+3.9pp）</strong>，营业利润率从 28.38% 升到 <strong>34.75%（+6.4pp）</strong>。<span class="hl-t">在收入下滑、铝关税推高成本的环境里把利润率抬起来六个百分点，这不是运气。</span></p>
+    <p><strong>资本开支在收敛。</strong>FY2024 $12.69 亿 → FY2025 $12.14 亿 → FY2026 $8.75 亿 → FY2027 指引约 $8 亿。产能扩张周期正在过峰，自由现金流指引因此站上 $16–17 亿。</p>
+    <p><strong>去杠杆在推进。</strong>长期债务（非流动）从 2025-05-31 的 $97.87 亿降到 2026-05-31 的 $90.95 亿，一年减少约 $6.9 亿；管理层明确以「可比净杠杆率约 3.0 倍」为目标。</p>
+    <p><strong>披露质量高。</strong>报告与可比口径逐项调节、分部数据完整、指引给出六个维度的量化区间（营收、分部利润率、税率、经营现金流、资本开支、自由现金流）。<strong>本报告能把「31% 报告增速里有 24 个百分点来自会计口径」算出来，靠的正是公司自己披露的调节表。</strong></p>
+    <p><strong>但有三处让我把评分压下来。</strong></p>
+    <p><strong>第一，回购择时。</strong>本季回购 1,465,295 股，耗资 $2.238 亿，<strong>均价 $152.73</strong>——而今天的股价是 $135.76，<span class="hl-t">回购价比现价高 12.5%</span>。这不是事后诸葛：股价的 52 周区间是 $126.45–$174.32，$152.73 落在区间的中上部。<strong>把几乎全部自由现金流用于回购的公司，买入价格就是资本配置能力的直接考卷。</strong></p>
+    <p><strong>第二，股息增速几近停滞。</strong>季度股息从 $1.02 提到 $1.03，<strong>同比 +1.0%</strong>。对一家股息率 3.04%、派息率仅占自由现金流 39% 的公司，1% 的提升传递的信号并不积极——<strong>要么是对未来现金流没把握，要么是把弹药优先留给了回购与去杠杆。</strong></p>
+    <p><strong>第三，历史包袱是自己背上的。</strong>五年里三年 GAAP 净利润为负，累计减值规模以数十亿美元计。这些减值对应的是过去做过的投资与并购决策——<span class="hl-t">今天资产负债表上还躺着 $52.49 亿商誉，占股东权益 63.6%。</span>公司有权说那些是上一段历史，但股东承担的是同一张资产负债表。</p>
+    <p><strong>结论</strong>：经营执行 A−，成本纪律 A−，披露透明度 A−，<strong>资本配置历史 C+</strong>。</p>
+  </div>
+</section>
+
+<section class="section" id="m3" aria-labelledby="m3-t">
+  <h2 class="stitle" id="m3-t">模块 3 · 商业模式深度解析<a class="anchor" href="#m3" aria-label="本节链接">#</a></h2>
+  <div class="cmt">
+    <p><strong>一句话测试：它在墨西哥酿酒，在美国独家卖，赚的是品牌溢价与规模化酿造之间的差。</strong>能用一句话说清。</p>
+    <p><strong>单位经济好得罕见。</strong>啤酒分部营业利润率 <strong>39.0%</strong>——在整个消费品行业里，这个水平只有极少数拥有强势品牌与规模化产能的公司能做到。作为对照，公司整体营业利润率 34.75%，因为葡萄酒与烈酒分部还在小幅亏损（本季 −$110 万，利润率 −0.7%）。</p>
+    <div class="tbl-wrap">
+      <table class="tbl" data-shape="grid" data-source="Constellation Brands Q1 FY2027 8-K Exhibit 99.1 分部数据">
+        <thead><tr><th>分部</th><th>净销售额</th><th>占比</th><th>同比</th><th>营业利润</th><th>利润率</th></tr></thead>
+        <tbody>
+          <tr><td><strong>啤酒</strong></td><td>$2,283.5</td><td><strong>93.9%</strong></td><td>+2%</td><td>$891.4</td><td><strong>39.0%</strong></td></tr>
+          <tr><td>葡萄酒与烈酒</td><td>$149.2</td><td>6.1%</td><td>−47%（有机 +8%）</td><td>−$1.1</td><td>−0.7%</td></tr>
+          <tr><td><strong>合计</strong></td><td><strong>$2,432.7</strong></td><td>100%</td><td>−3%</td><td>$845.3（报告）</td><td>34.75%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>模式的强项是「独家进口权 ＋ 高端定位」。</strong>Corona 与 Modelo 在美国市场由 Constellation 独家经营，这不是一般的经销合同，而是从原品牌方永久取得的美国权利。这带来了两件事：<span class="hl-t">品牌资产不需要它从零建设，而美国市场的全部溢价归它所有。</span></p>
+    <p><strong>模式的软肋有三处，都在本季暴露：</strong></p>
+    <ul class="ulist">
+      <li><strong>需求集中在单一人群。</strong>西班牙裔消费者贡献约一半的美国啤酒销售，而这个群体的消费场景正被移民执法收紧压制。<strong>这是渠道与营销都够不到的变量。</strong></li>
+      <li><strong>成本集中在单一投入。</strong>墨西哥啤酒包装约 41% 是铝，铝关税直接进销售成本。公司只能靠提价与效率抵消，而提价在需求疲弱时会进一步压动销。</li>
+      <li><strong>产能集中在单一国家。</strong>全部啤酒产能在墨西哥，第三家酒厂也建在墨西哥。这既是成本优势的来源，也是贸易政策风险的全部敞口。</li>
+    </ul>
+    <p><strong>能力圈提示</strong>：这门生意本身极易理解，但有一处我必须承认判断不了——<span class="hl-t">移民执法强度与关税政策的走向，都不是可以从财报里推演的变量</span>，而它们恰好同时决定了这家公司的需求端和成本端。<strong>任何声称能预测这两条的估值，都应该被打折看待，包括我自己下面给出的那个。</strong></p>
+  </div>
+</section>
+
+<section class="section" id="m4" aria-labelledby="m4-t">
+  <h2 class="stitle" id="m4-t">模块 4 · 经济护城河分析（5 维）<a class="anchor" href="#m4" aria-label="本节链接">#</a></h2>
+  <div class="moat-grid">
+    <div class="moat-card wide">
+      <h5>① 无形资产（品牌与独家权利）· 宽</h5>
+      <p>Modelo Especial 是全美<strong>销售额第一</strong>的啤酒品牌，Corona Extra 稳居前五。更关键的是 Constellation 持有这些品牌在美国的<strong>独家经营权利</strong>——竞争者无法通过谈判取得。本季它是 Circana 美国渠道<strong>销售额份额增长第一</strong>的玩家，跑赢整个啤酒品类近 3 个百分点。<span class="hl-t">但请注意：品牌力体现在「份额还在扩大」，而不是「销量还在增长」——旗舰品牌的动销是负的。</span></p>
+    </div>
+    <div class="moat-card wide">
+      <h5>② 成本优势 · 宽</h5>
+      <p>39.0% 的分部营业利润率是这条护城河最直接的证据。来源是墨西哥的规模化酿造产能与低成本劳动力，加上不必自建品牌的营销效率。<strong>但这条护城河有一个特殊的脆弱点：它建立在跨境套利之上</strong>——关税、汇率、贸易政策任何一项变化，都会直接切掉一块。本季铝关税已经在做这件事。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>③ 有效规模 · 窄至中</h5>
+      <p>美国进口啤酒的高端细分市场集中度高，但这不是一个只能容纳少数玩家的市场——精酿、硬苏打、即饮鸡尾酒都在争夺同一批场合。<strong>本季真正的对手不是另一家啤酒公司，是「不喝酒」这个选项。</strong></p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>④ 转换成本 · 无</h5>
+      <p>消费者换一个啤酒品牌的成本是零。这一维在快消饮料行业不成立，不必勉强找证据。<span class="hl-t">Corona Extra 动销 −5% 以上就是这条的直接演示——没有任何东西拦着消费者换一瓶。</span></p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>⑤ 网络效应 · 无</h5>
+      <p>啤酒不因喝的人多而对下一个人更有价值。社交场景中确实存在从众效应，但那属于品牌与营销的范畴，不是结构性的网络效应。</p>
+    </div>
+  </div>
+  <p class="note"><strong>综合判断：护城河「宽，但正在被两股外力同时侵蚀」。</strong>品牌与成本这两条真正值钱的护城河都很扎实，且不像周期股那样随景气呼吸。<span class="hl-t">问题在于这两条护城河的护城河水位——需求端由西班牙裔人群的消费场景决定，成本端由跨境关税决定，而这两者公司都无法影响。</span></p>
+  <p class="note"><strong>十年后会更宽还是更窄？</strong>我倾向于<strong>持平偏窄</strong>。品牌资产不会凭空消失，Modelo 与 Corona 在十年后大概率仍是美国啤酒的头部品牌。但两件事在变：其一，年轻世代的酒精消费总量在结构性下降；其二，Constellation 已经把增长的接力棒交给了 Pacifico 与 Victoria 这些体量小得多的品牌——<strong>当增长必须由小品牌承担时，护城河的绝对宽度可能没变，但它保护的那块地正在缩小。</strong></p>
+</section>
+
+<section class="section" id="m5" aria-labelledby="m5-t">
+  <h2 class="stitle" id="m5-t">模块 5 · 财务深度分析<a class="anchor" href="#m5" aria-label="本节链接">#</a></h2>
+
+  <h3 class="sub">5.1 近 5 季与五年趋势</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="SEC XBRL 结构化数据（各季 10-Q / 10-K）">
+      <thead><tr><th>财季（$ 百万）</th><th>Q1 FY26</th><th>Q2 FY26</th><th>Q3 FY26</th><th>Q4 FY26</th><th>Q1 FY27</th></tr></thead>
+      <tbody>
+        <tr><td>财季止于</td><td>25-05-31</td><td>25-08-31</td><td>25-11-30</td><td>26-02-28</td><td><strong>26-05-31</strong></td></tr>
+        <tr><td>净销售额</td><td>2,515.0</td><td>2,481.0</td><td>2,222.8</td><td>1,920.2</td><td><strong>2,432.7</strong></td></tr>
+        <tr><td>毛利</td><td>1,266.6</td><td>1,310.0</td><td>1,183.2</td><td>951.7</td><td><strong>1,320.6</strong></td></tr>
+        <tr><td>毛利率</td><td>50.36%</td><td>52.80%</td><td>53.23%</td><td>49.56%</td><td><strong>54.29%</strong></td></tr>
+        <tr><td>营业利润</td><td>713.8</td><td>874.0</td><td>692.0</td><td>441.6</td><td><strong>845.3</strong></td></tr>
+        <tr><td>营业利润率</td><td>28.38%</td><td>35.23%</td><td>31.13%</td><td>23.00%</td><td><strong>34.75%</strong></td></tr>
+        <tr><td>GAAP 净利润</td><td>516.1</td><td>466.0</td><td>502.8</td><td>201.8</td><td><strong>653.8</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">Q4 FY2026 营业利润为全年 $2,721.4 减去前三季度之差推得。<span class="hl-t">Q1 FY2027 的毛利率 54.29% 与营业利润率 34.75% 均为这五个季度里的最高值</span>，而净销售额同比是负的——利润率扩张与收入收缩同时发生。</p>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="SEC XBRL 结构化数据（10-K 口径，FY2022–FY2026，财年止于每年 2 月底）">
+      <thead><tr><th>财年（$ 百万）</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th><th>FY2026</th></tr></thead>
+      <tbody>
+        <tr><td>净销售额</td><td>8,820.7</td><td>9,452.6</td><td>9,961.8</td><td><strong>10,208.7</strong></td><td>9,139.0</td></tr>
+        <tr><td>毛利</td><td>4,707.3</td><td>4,769.0</td><td>5,017.5</td><td>5,314.6</td><td>4,711.5</td></tr>
+        <tr><td>营业利润</td><td>2,331.7</td><td>2,842.9</td><td><strong>3,169.7</strong></td><td>354.9</td><td>2,721.4</td></tr>
+        <tr><td>营业利润率</td><td>26.4%</td><td>30.1%</td><td>31.8%</td><td><strong>3.5%</strong></td><td>29.8%</td></tr>
+        <tr><td>GAAP 净利润</td><td><strong>−40.4</strong></td><td><strong>−71.0</strong></td><td>1,727.4</td><td><strong>−81.4</strong></td><td>1,686.7</td></tr>
+        <tr><td>商誉减值</td><td>0</td><td>0</td><td>0</td><td><strong>2,740.7</strong></td><td>0</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="sub">5.2 利润质量：GAAP 净利润在这里不可用</h3>
+  <p><strong>五个财年，三年 GAAP 净利润为负，而营业利润没有一年为负。</strong>这个组合本身就是结论：<span class="hl-t">这家公司利润表的下半段，长期由经营之外的事项主导。</span></p>
+  <p>因此，按本栏目规范（利润波动公司必做），给出多档市盈率透视：</p>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="cards" data-source="海图测算；输入取自 SEC XBRL、Q1 FY2027 8-K 与公司 FY2027 指引">
+      <thead><tr><th>计算口径</th><th>每股收益</th><th>对应 P/E</th><th>可信度评价</th></tr></thead>
+      <tbody>
+        <tr><td>TTM GAAP P/E</td><td>$10.48</td><td>12.96x</td><td><strong>低</strong>——含历次减值与调整的残余影响</td></tr>
+        <tr><td>FY2026 报告 EPS</td><td>$9.61</td><td>14.13x</td><td><strong>低</strong>——被一次性项目压低的基数</td></tr>
+        <tr><td>FY2026 可比 EPS</td><td>$11.82</td><td>11.49x</td><td><strong>高</strong>——剔除一次性后的核心经营</td></tr>
+        <tr><td>最新单季年化（可比 $3.43×4）</td><td>$13.72</td><td>9.90x</td><td><strong>中</strong>——Q1 为季节性旺季，不宜直接年化</td></tr>
+        <tr><td><strong>FY2027 可比 EPS 指引中值</strong></td><td><strong>$11.55</strong></td><td><strong>11.75x</strong></td><td><strong>最可信</strong>——公司自己的前瞻、已剔除噪音</td></tr>
+        <tr><td>FY2027 报告 EPS 指引中值</td><td>$11.85</td><td>11.46x</td><td><strong>低</strong>——与 FY2026 基数不可比</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>本报告后续一律以「FY2027 可比 EPS 指引中值 $11.55、对应 11.75 倍」为估值锚点。</strong><span class="hl-t">注意这一档同时也是唯一一档指向盈利下滑的口径——可比 EPS 从 FY2026 的 $11.82 降到 $11.55，−2.3%。</span></p>
+
+  <h3 class="sub">5.3 资产负债健康度：这是全篇最需要警惕的一节</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="SEC XBRL 结构化数据（各季 10-Q 资产负债表，时点为各期末）">
+      <thead><tr><th>项目（$ 百万）</th><th>2025-05-31</th><th>2025-11-30</th><th>2026-02-28</th><th>2026-05-31</th></tr></thead>
+      <tbody>
+        <tr><td>现金及等价物</td><td>73.9</td><td>152.4</td><td>102.4</td><td><strong>96.6</strong></td></tr>
+        <tr><td>短期借款</td><td>377.5</td><td>374.7</td><td>272.0</td><td><strong>336.3</strong></td></tr>
+        <tr><td>一年内到期长期债务</td><td>1,403.0</td><td>4.0</td><td>603.6</td><td><strong>1,102.6</strong></td></tr>
+        <tr><td>长期债务（非流动）</td><td>9,786.5</td><td>10,285.1</td><td>9,692.9</td><td><strong>9,094.9</strong></td></tr>
+        <tr><td><strong>有息负债合计</strong></td><td>11,567.0</td><td>10,663.8</td><td>10,568.5</td><td><strong>10,533.8</strong></td></tr>
+        <tr><td><strong>净负债</strong></td><td>11,493.1</td><td>10,511.4</td><td>10,466.1</td><td><strong>10,437.2</strong></td></tr>
+        <tr><td>股东权益</td><td>7,265.5</td><td>7,710.8</td><td>8,082.4</td><td><strong>8,255.6</strong></td></tr>
+        <tr><td>商誉</td><td>5,156.8</td><td>5,190.6</td><td>5,233.9</td><td><strong>5,248.9</strong></td></tr>
+        <tr><td>商誉占权益</td><td>71.0%</td><td>67.3%</td><td>64.8%</td><td><strong>63.6%</strong></td></tr>
+        <tr><td>存货</td><td>1,411.9</td><td>1,379.2</td><td>1,433.9</td><td><strong>1,452.6</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>按本栏目口径逐项列清楚</strong>：2026-05-31 末短期借款 $3.363 亿、一年内到期长期债务 $11.026 亿、长期债务（非流动）$90.949 亿，<strong>有息负债合计 $105.338 亿</strong>；现金及等价物仅 $0.966 亿，<span class="hl-t">真实净负债 $104.372 亿</span>。<strong>注意：这家公司账上几乎没有现金——$0.97 亿现金对应 $105 亿有息负债，现金覆盖率不到 1%。</strong></p>
+  <p><strong>净负债 / TTM EBITDA ＝ 3.20 倍</strong>，与管理层「可比净杠杆约 3.0 倍」的目标基本一致。方向是好的：净负债一年内从 $114.93 亿降到 $104.37 亿，减少约 $10.6 亿。<strong>但 3.2 倍在一家收入零增长、旗舰品牌动销为负的公司身上，不是一个可以忽略的数字。</strong></p>
+  <p><strong>商誉 $52.489 亿，占股东权益 63.6%。</strong>两年前刚计提过 $27.41 亿商誉减值。<span class="hl-t">扣掉商誉之后，股东权益只剩约 $30.07 亿——不到市值的 13%。</span>这意味着 P/B 这个指标对本公司基本没有意义，也意味着一旦再次减值，权益会被迅速侵蚀。<strong>这是本报告红旗排查中唯一触发的一项。</strong></p>
+
+  <h3 class="sub">5.4 现金流质量与所有者盈余</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="SEC XBRL 结构化数据（10-K 现金流量表，FY2022–FY2026）">
+      <thead><tr><th>项目（$ 百万）</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th><th>FY2026</th></tr></thead>
+      <tbody>
+        <tr><td>GAAP 净利润</td><td>−40.4</td><td>−71.0</td><td>1,727.4</td><td>−81.4</td><td>1,686.7</td></tr>
+        <tr><td>经营现金流</td><td>2,705.4</td><td>2,756.9</td><td>2,780.0</td><td><strong>3,152.2</strong></td><td>2,669.0</td></tr>
+        <tr><td>资本开支</td><td>1,026.8</td><td>1,035.4</td><td>1,269.1</td><td>1,214.1</td><td><strong>875.0</strong></td></tr>
+        <tr><td><strong>自由现金流</strong></td><td>1,678.6</td><td>1,721.5</td><td>1,510.9</td><td><strong>1,938.1</strong></td><td>1,794.0</td></tr>
+        <tr><td>折旧与摊销</td><td>342.4</td><td>387.0</td><td>429.2</td><td>447.0</td><td>420.0</td></tr>
+        <tr><td>股权激励</td><td>44.9</td><td>68.5</td><td>63.6</td><td>72.2</td><td>67.7</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>这张表是这家公司真正的底牌。</strong>五个财年里，GAAP 净利润三次为负，而<span class="hl-t">经营现金流从未低于 $26.69 亿，自由现金流从未低于 $15.11 亿</span>。<strong>减值只发生在纸面上，现金一直在进来。</strong>这也是我不会给这只股票「卖出」评级的核心原因。</p>
+  <p><strong>所有者盈余计算</strong>（本栏目口径：净利润 ＋ 折旧摊销 ＋ 非现金费用 − 维护性资本开支）。这里的关键判断是维护性资本开支：FY2027 资本开支指引约 $8 亿，其中相当部分投向韦拉克鲁斯第三家酒厂——那是扩张性投入。折旧摊销 TTM 约 $4.124 亿，可作为维护性投入的合理代理，本报告保守取 <strong>$4.2 亿</strong>：</p>
+  <ul class="ulist">
+    <li>TTM 净利润 $18.244 亿 ＋ 折旧摊销 $4.124 亿 ＋ 股权激励 $0.677 亿 − 维护性资本开支 $4.2 亿 ＝ <strong>$18.845 亿</strong></li>
+    <li>对应市值 $231.81 亿 → <strong>所有者盈余收益率 8.13%</strong></li>
+    <li>TTM 自由现金流 $18.342 亿 → <strong>自由现金流收益率 7.91%</strong></li>
+  </ul>
+  <p><strong>两个口径几乎重合（8.13% 与 7.91%），这本身是个好信号</strong>——说明这家公司的会计利润与现金创造在剔除一次性项目后是一致的。<span class="hl-t">问题从来不在它能不能赚到现金，而在它赚到的现金能不能继续增长。</span></p>
+</section>
+
+<section class="section" id="m6" aria-labelledby="m6-t">
+  <h2 class="stitle" id="m6-t">模块 6 · 电话会分析<a class="anchor" href="#m6" aria-label="本节链接">#</a></h2>
+  <div class="ec-list">
+    <div class="ec-item"><span class="ec-badge ec-bull">利好</span><strong>本季自由现金流 $4.85 亿，同比 +9%，且经营现金流 +4% —— 在净销售额 −3% 的背景下。</strong>现金创造与收入增长脱钩，靠的是毛利率 +3.9pp 与资本开支 −8%。<span class="hl-t">这说明公司在收入下滑期仍能扩大现金回报，是本季最扎实的一条。</span></div>
+    <div class="ec-item"><span class="ec-badge ec-bull">利好</span><strong>啤酒份额继续扩大：Circana 美国渠道销售额份额增长第一，跑赢整个啤酒品类近 3 个百分点，前 15 大份额增长品牌中占 5 席。</strong>在一个总量收缩的品类里持续抢份额，是品牌力的直接证据——但要清醒：<strong>份额增长掩盖不了品类萎缩。</strong></div>
+    <div class="ec-item"><span class="ec-badge ec-bull">利好</span><strong>葡萄酒与烈酒有机净销售额 +8%、动销 +6.6%，分部利润率改善 140bp 至 −0.7%。</strong>Mi CAMPO 龙舌兰动销 +62%、Kim Crawford +4%。剥离掉低端品牌之后，剩下的高端组合确实跑赢了品类——<strong>虽然这块只占 6.1% 的收入，扭亏仍需时间。</strong></div>
+    <div class="ec-item"><span class="ec-badge ec-neut">中性</span><strong>资本开支指引降至约 $8 亿，韦拉克鲁斯第三家酒厂继续推进。</strong>短期利好自由现金流，中期是产能承诺——<strong>在动销为负的时候继续建厂，赌的是需求会回来。</strong>这个判断的对错要三五年后才知道。</div>
+    <div class="ec-item"><span class="ec-badge ec-neut">中性</span><strong>可比净杠杆率目标维持约 3.0 倍，实际 3.20 倍。</strong>方向正确（净负债一年降约 $10.6 亿），但仍在目标之上，<span class="hl-t">这限制了公司在股价便宜时大幅加码回购的能力。</span></div>
+    <div class="ec-item"><span class="ec-badge ec-bear">利空</span><strong>FY2027 可比 EPS 指引 $11.20–$11.90，中值低于 FY2026 实际的 $11.82。</strong>这是管理层自己给出的、剔除噪音后的预期：<strong>今年每股收益不增长，还要略降 2.3%。</strong>而同一份指引里的报告 EPS 却显示 +23%——<span class="hl-t">两个口径讲相反的故事，只有一个是关于经营的。</span></div>
+    <div class="ec-item"><span class="ec-badge ec-bear">利空</span><strong>啤酒动销 −0.3%，而发货量 +1.8%。</strong>两者的 2.1pp 裂口意味着渠道库存增加，是未来发货的透支。<strong>更值得警惕的是结构：Modelo Especial −2%、Corona Extra −5% 以上，两个最大的品牌都在萎缩。</strong></div>
+    <div class="ec-item"><span class="ec-badge ec-bear">利空</span><strong>有机净销售额增长指引 −1% 至 +1%。</strong>公司对全年的期待是「基本不增长」。<span class="hl-t">对一家净负债/EBITDA 3.2 倍的公司，零增长意味着去杠杆只能靠利润率与资本开支的节流，没有分母帮忙。</span></div>
+  </div>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="cards" data-source="Constellation Brands FY2026 全年实际与 Q1 FY2027 实际对照">
+      <thead><tr><th>此前趋势 / 指引</th><th>本季实际</th><th>兑现度</th></tr></thead>
+      <tbody>
+        <tr><td>FY2026 全年啤酒动销 −2.1%，Q4 改善至 +0.6%</td><td>Q1 FY2027 动销 <strong>−0.3%</strong></td><td><strong>改善中断</strong>——Q4 的转正未能延续</td></tr>
+        <tr><td>FY2026 全年啤酒发货量 −3.8%</td><td>Q1 FY2027 发货 <strong>+1.8%</strong></td><td><strong>好于趋势</strong>，但快于动销</td></tr>
+        <tr><td>FY2027 可比 EPS 指引 $11.20–$11.90</td><td>Q1 可比 EPS $3.43（+7%）</td><td><strong>符合</strong>——公司维持指引未上调</td></tr>
+        <tr><td>FY2027 自由现金流指引 $16–17 亿</td><td>Q1 已完成 $4.85 亿（约 29%）</td><td><strong>进度正常</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note"><strong>信号汇总</strong>：三条利好全部关于<strong>现金与份额</strong>，三条利空全部关于<strong>量与增长</strong>。<span class="hl-t">这是一家现金创造能力没问题、但需求端正在退潮的公司——而它的估值最终取决于后者。</span></p>
+</section>
+
+<section class="section" id="m7" aria-labelledby="m7-t">
+  <h2 class="stitle" id="m7-t">模块 7 · 多模型估值（8 种方法）<a class="anchor" href="#m7" aria-label="本节链接">#</a></h2>
+
+  <h3 class="sub">7.1 八法明细</h3>
+  <p>估值锚点统一采用 <strong>FY2027 可比 EPS 指引中值 $11.55</strong> 与公司自身的自由现金流指引，<span class="hl-t">全程不使用 GAAP 净利润</span>（理由见模块 5.2）。要求回报率取 <strong>7.0%–7.5%</strong>：Beta 0.40 偏低，但净负债/EBITDA 3.2 倍要求一层杠杆补偿。</p>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="cards" data-source="海图自行测算；输入取自 SEC XBRL、Q1 FY2027 8-K 与公司 FY2027 指引">
+      <thead><tr><th>方法</th><th>关键假设</th><th>得出估值</th><th>适用性</th></tr></thead>
+      <tbody>
+        <tr><td>① 可比 P/E</td><td>FY2027E 可比 EPS $11.55 × 13x（零增长、高杠杆、品牌温和侵蚀的消费品合理区间）</td><td><strong>$150.15</strong></td><td>适用——<strong>本公司最贴切的方法</strong></td></tr>
+        <tr><td>② FCF 收益率</td><td>公司 FY2027 自由现金流指引中值 $16.5 亿 ÷ 7.0%</td><td><strong>$138.05</strong></td><td>适用</td></tr>
+        <tr><td>③ EV/EBITDA</td><td>TTM EBITDA $32.653 亿 × 11x − 净负债 $104.372 亿（现价对应 10.30x）</td><td><strong>$149.23</strong></td><td>适用</td></tr>
+        <tr><td>④ 所有者盈余收益率</td><td>TTM 所有者盈余 $18.845 亿 ÷ 7.5%</td><td><strong>$147.15</strong></td><td>适用</td></tr>
+        <tr><td>⑤ P/S 市销率</td><td>TTM 净销售额 $90.567 亿 × 2.8x（现价对应 2.56x）</td><td><strong>$148.51</strong></td><td>适用——营业利润率稳定在 30% 上下，营收对价值的映射可靠</td></tr>
+        <tr><td>⑥ 股息贴现 DDM</td><td>年化股息 $4.12 ÷ (7.5% − 5.0% 永续增长)</td><td><strong>$117.71</strong></td><td>适用——股息率 3.04%、派息率占自由现金流 39%，是少数真正适用 DDM 的公司</td></tr>
+        <tr><td>⑦ 情景加权 DCF</td><td>悲观 30%×$100.00、基准 45%×$150.15、乐观 25%×$187.50</td><td><strong>$144.44</strong></td><td>适用</td></tr>
+        <tr><td>⑧ 反向 DCF（诊断）</td><td>现价 $135.76 ÷ FY2027E 可比 EPS $11.55 ＝ <strong>11.75x</strong>，隐含市场预期可比 EPS 长期<strong>零增长甚至微降</strong></td><td>诊断用</td><td>参考——<span class="hl-t">市场的预期与公司自己的指引（−2.3%）基本吻合，说明现价不含明显的乐观溢价</span></td></tr>
+        <tr><td>⑨ P/B（NAV 代理）</td><td>—</td><td>—</td><td><strong>不适用</strong>：商誉 $52.489 亿占股东权益 63.6%，扣除后有形权益仅约 $30.07 亿，且两年前刚减值 $27.41 亿——<span class="hl-t">账面净值既不稳定也无解释力</span></td></tr>
+        <tr><td>⑩ PEG</td><td>—</td><td>—</td><td><strong>不适用</strong>：公司自身有机净销售额指引为 −1% 至 +1%，可比 EPS 指引中值 −2.3%，<strong>分母接近零甚至为负，PEG 无经济含义</strong></td></tr>
+        <tr><td>⑪ SOTP 分部加总</td><td>—</td><td>—</td><td><strong>不适用</strong>：啤酒占净销售额 93.9%，葡萄酒与烈酒仍在小幅亏损，分部加总退化为单一分部估值，不产生额外信息</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="sub">7.2 加权汇总</h3>
+  <p>七个可用方法从 $117.71 到 $150.15，<strong>中位数 $147.15</strong>，情景加权 $144.44。取<strong>加权公允价值 $145.00</strong>。</p>
+  <p>现价 $135.76，较公允价值低 <strong>6.4%</strong>——<span class="hl-t">安全边际远未达到本栏目 25% 的门槛</span>。</p>
+  <div class="pbox">
+    <h4>为什么「便宜」和「有安全边际」是两件事</h4>
+    <div class="cmt">
+      <p>这只股票有很多看起来便宜的指标：可比 P/E 11.75 倍、EV/EBITDA 10.30 倍、自由现金流收益率 7.91%、股东总回报率 6.70%、股息率 3.04%。<strong>放在美股大盘里，这些数字每一个都属于便宜的一端。</strong></p>
+      <p>但安全边际衡量的不是「比别人便宜多少」，而是<strong>「价格比我算出的价值低多少」</strong>。七种方法收敛在 $145 上下，现价 $135.76——中间只有 6.4% 的缓冲。<span class="hl-t">对一家旗舰品牌动销为负、需求由移民执法决定、成本由关税决定、净负债/EBITDA 3.2 倍的公司，6.4% 的缓冲不足以吸收任何一个变量往坏的方向走。</span></p>
+      <p><strong>换个角度更清楚</strong>：如果 FY2028 的可比 EPS 从 $11.55 掉到 $10.00（对应动销继续恶化），按同样 13 倍算出来是 $130——<strong>比今天的股价还低。</strong>市场给的 11.75 倍并没有为这种情形留出空间。</p>
+    </div>
+  </div>
+
+  <h3 class="sub">7.3 建仓阶梯</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="海图自行测算：估值中位数 $147.15 × 80% / 70% / 60%">
+      <thead><tr><th>档位</th><th>价格</th><th>距现价</th><th>触发含义</th></tr></thead>
+      <tbody>
+        <tr><td>首仓（中位数 × 80%）</td><td><strong>$117.72</strong></td><td>−13.3%</td><td>低于 52 周低点 $126.45，需要一个新低</td></tr>
+        <tr><td>二仓（× 70%）</td><td><strong>$103.01</strong></td><td>−24.1%</td><td>对应动销跌幅扩大或关税进一步加码</td></tr>
+        <tr><td>三仓（× 60%）</td><td><strong>$88.29</strong></td><td>−35.0%</td><td>对应商誉再次减值或杠杆被迫去化</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note"><strong>止盈三档 $175 / $205 / $240，每档减仓 25%。</strong>建议总仓位 <strong>0–3%</strong>，持有周期 <strong>3–5 年</strong>。<span class="hl-t">注意首仓价 $117.72 低于 52 周低点——这意味着按本栏目规则，现在不构成建仓位置，需要等一个此前一年都没出现过的价格。</span></p>
+</section>
+
+<section class="section" id="m8" aria-labelledby="m8-t">
+  <h2 class="stitle" id="m8-t">模块 8 · 竞争与行业分析<a class="anchor" href="#m8" aria-label="本节链接">#</a></h2>
+  <p><strong>先说清楚这家公司的竞争位置：它在美国啤酒品类里是赢家，而这个品类正在缩小。</strong></p>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="cards" data-source="Constellation Brands Q1 FY2027 8-K 与 FY2026 全年披露（Circana 美国渠道数据）">
+      <thead><tr><th>维度</th><th>本季表现</th><th>解读</th></tr></thead>
+      <tbody>
+        <tr><td>品类份额</td><td>Circana 美国渠道<strong>销售额份额增长第一</strong>，跑赢品类近 3pp</td><td><strong>竞争力强</strong>——在收缩的池子里抢份额</td></tr>
+        <tr><td>头部品牌地位</td><td>Modelo Especial 销售额<strong>第一</strong>；Corona Extra 前五；前 15 大份额增长品牌占 <strong>5 席</strong></td><td><strong>品牌资产真实</strong></td></tr>
+        <tr><td>自身动销</td><td><strong>−0.3%</strong>（FY2026 全年 −2.1%）</td><td><strong>总量在退</strong></td></tr>
+        <tr><td>旗舰品牌动销</td><td>Modelo Especial <strong>−2%</strong>、Corona Extra <strong>−5% 以上</strong></td><td><strong>核心资产在萎缩</strong></td></tr>
+        <tr><td>接棒品牌</td><td>Pacifico <strong>+21%</strong>、Victoria <strong>+14%</strong>、Chelada +6%</td><td>体量小得多，需持续高增速才能补缺口</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>波特五力速判</strong>：新进入者威胁<strong>低</strong>（品牌与独家权利难以复制）；<strong>替代品威胁高</strong>——这是本行业最该被重视的一力，精酿、硬苏打、即饮鸡尾酒、大麻饮品，以及最根本的「少喝酒」都在争夺同一批场合；客户议价力<strong>中</strong>（三级分销体系，零售端集中度上升）；供应商议价力<strong>中高</strong>（铝、玻璃、能源，且铝受关税直接影响）；现有竞争<strong>中高</strong>（与 AB InBev、Molson Coors 在货架与场合上直接争夺）。</p>
+  <p><strong>真正的行业变量有两条，都不在五力模型里：</strong></p>
+  <ul class="ulist">
+    <li><strong>人口与执法。</strong>西班牙裔消费者贡献 Constellation 美国啤酒销售的约一半。移民执法强度直接改变这个群体的外出与聚会频率——<span class="hl-t">这是一个由政治周期而非商业周期决定的需求变量，任何竞争战略都无法对冲。</span></li>
+    <li><strong>贸易政策。</strong>全部啤酒产能在墨西哥，包装约 41% 是铝。关税同时作用于产品与包装两端。<strong>公司的成本优势建立在跨境套利上，而跨境套利的条款由华盛顿单方面决定。</strong></li>
+  </ul>
+  <p><strong>一个需要公平记下的对照</strong>：整个美国啤酒品类都在承压，而 Constellation 是其中表现最好的之一。<span class="hl-t">它的问题不是输给了竞争对手，是赢在了一个正在退潮的赛道上。</span></p>
+</section>
+
+<section class="section" id="m9" aria-labelledby="m9-t">
+  <h2 class="stitle" id="m9-t">模块 9 · 技术面与 K 线分析<a class="anchor" href="#m9" aria-label="本节链接">#</a></h2>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="公开行情数据，截至 2026-08-07 收盘">
+      <thead><tr><th>项目</th><th>数值</th><th>解读</th></tr></thead>
+      <tbody>
+        <tr><td>现价</td><td>$135.76</td><td>当日 +2.44%</td></tr>
+        <tr><td>52 周区间</td><td>$126.45 – $174.32</td><td>区间宽度 37.9%</td></tr>
+        <tr><td>距 52 周高点</td><td>−22.1%</td><td>已进入回撤区间</td></tr>
+        <tr><td>距 52 周低点</td><td>＋7.4%</td><td>接近区间下沿</td></tr>
+        <tr><td>Beta</td><td>0.40</td><td>典型防御性消费股</td></tr>
+        <tr><td>本季回购均价</td><td><strong>$152.73</strong></td><td>高于现价 12.5%</td></tr>
+        <tr><td>卖方一致目标价</td><td>$170.83</td><td>较现价 +25.8%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>价格结构上有一个位置值得记住：$126.45。</strong>这是 52 周低点，距现价仅 −6.9%。<span class="hl-t">而我按估值中位数 × 80% 算出的首仓价是 $117.72——比 52 周低点还低 6.9%。</span>换句话说：<strong>按本栏目的规则建仓，需要这只股票跌到过去一年从未到过的价格。</strong></p>
+  <p><strong>回购均价是本节最有信息量的一个数字。</strong>公司本季以均价 $152.73 回购了 146.5 万股，而现价 $135.76。<strong>管理层用真金白银在比今天高 12.5% 的位置买入</strong>——这既可以读作对内在价值的信心，也可以读作择时能力的一次失手。<span class="hl-t">我倾向于后者：一家把 91% 自由现金流还给股东的公司，回购价格就是它资本配置成绩单上最重的一栏。</span></p>
+  <p><strong>卖方一致目标价 $170.83，较现价 +25.8%</strong>，明显高于我算出的 $145。差异主要来自对可比 EPS 的假设——市场普遍预期 FY2028 能恢复增长，而公司自己 FY2027 的指引是 −2.3%。<strong>我选择相信公司的指引。</strong></p>
+  <p class="note">技术面在本报告中仅作交叉验证，不作为独立买卖依据。Beta 0.40 说明它在组合中的波动贡献低，但也意味着<strong>它不会被大盘的上涨带起来</strong>——重估必须靠基本面自己走出来。</p>
+</section>
+
+<section class="section" id="m10" aria-labelledby="m10-t">
+  <h2 class="stitle" id="m10-t">模块 10 · 增长催化剂与前景展望<a class="anchor" href="#m10" aria-label="本节链接">#</a></h2>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="cards" data-source="Constellation Brands Q1 FY2027 财报指引与公开政策资料">
+      <thead><tr><th>催化剂</th><th>时点</th><th>可验证程度</th><th>方向与量级</th></tr></thead>
+      <tbody>
+        <tr><td><strong>资本开支过峰</strong></td><td>FY2027 起</td><td><strong>高</strong>——指引约 $8 亿，较 FY2024 的 $12.69 亿降 37%</td><td>正面：自由现金流指引站上 $16–17 亿</td></tr>
+        <tr><td><strong>去杠杆推进</strong></td><td>持续</td><td><strong>高</strong>——净负债一年降约 $10.6 亿</td><td>正面：接近 3.0 倍目标后可释放更多回购空间</td></tr>
+        <tr><td><strong>葡萄酒与烈酒扭亏</strong></td><td>FY2027–28</td><td><strong>中</strong>——指引利润率 5–6%，本季 −0.7%</td><td>正面但量级小（占收入 6.1%）</td></tr>
+        <tr><td><strong>Pacifico / Victoria 接棒</strong></td><td>持续</td><td><strong>中</strong>——本季分别 +21%、+14%</td><td>正面，但需持续高增速才能补上旗舰缺口</td></tr>
+        <tr><td><strong>西班牙裔消费场景恢复</strong></td><td>不确定</td><td><strong>低</strong>——取决于移民执法强度</td><td><strong>正面且量级最大</strong>，但完全不可预测</td></tr>
+        <tr><td><strong>关税缓和</strong></td><td>不确定</td><td><strong>低</strong>——政策变量</td><td>正面：包装 41% 是铝，成本弹性大</td></tr>
+        <tr><td><strong>动销跌幅扩大</strong></td><td>随时</td><td>——最大的下行风险</td><td><strong>负面</strong>，量级可超过以上正面之和</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>按可验证程度重排，结论很清楚</strong>：确定性最高的三项（资本开支过峰、去杠杆、葡萄酒扭亏）都是<span class="hl-t">改善现金流与资产负债表的，而不是改善增长的</span>；而量级最大的两个正面变量（消费场景恢复、关税缓和）都不可预测，且与最大的负面风险（动销继续恶化）指向同一组外部条件。</p>
+  <p><strong>这意味着持有这只股票的正确姿势是</strong>：把 7.91% 的自由现金流收益率与 6.70% 的股东总回报当作回报的主体，把增长当作免费期权——<strong>而不是反过来，为「需求会回来」这个假设提前付钱。</strong>而在现价，6.4% 的安全边际意味着你其实已经为它付了一点钱。</p>
+</section>
+
+<section class="section" id="m11" aria-labelledby="m11-t">
+  <h2 class="stitle" id="m11-t">模块 11 · 风险矩阵<a class="anchor" href="#m11" aria-label="本节链接">#</a></h2>
+  <div class="risk-grid">
+    <div class="risk-card r5">
+      <h5>① 旗舰品牌持续萎缩 · 严重度：高</h5>
+      <p>Modelo Especial 动销 −2%、Corona Extra −5% 以上，两个最大品牌同时为负；整体动销 −0.3% 且发货量快 2.1pp，渠道库存在累积。<strong>触发信号</strong>：下季动销跌幅扩大，或发货量转负；Pacifico／Victoria 增速跌破 10%。</p>
+    </div>
+    <div class="risk-card r5">
+      <h5>② 需求由移民执法决定 · 严重度：高</h5>
+      <p>西班牙裔消费者贡献美国啤酒销售约一半，执法收紧直接减少聚会与外出消费场合。<span class="hl-t">这是一个由政治周期决定的需求变量，公司没有任何对冲手段。</span><strong>触发信号</strong>：执法强度进一步上升，或管理层在财报中把该因素的影响量化上调。</p>
+    </div>
+    <div class="risk-card r4">
+      <h5>③ 关税与单一产地 · 严重度：中高</h5>
+      <p>全部啤酒产能在墨西哥，包装约 41% 为铝，关税同时打击产品与包装。FY2026 曾出现营业利润率因铝关税与固定成本吸收不利而下降 170bp 的季度。<strong>触发信号</strong>：新一轮关税加码，或墨西哥产成品进口条款变化。</p>
+    </div>
+    <div class="risk-card r4">
+      <h5>④ 商誉减值 · 严重度：中高</h5>
+      <p>商誉 $52.489 亿占股东权益 <strong>63.6%</strong>，扣除后有形权益仅约 $30.07 亿；<strong>FY2025 刚计提过 $27.41 亿商誉减值</strong>。<span class="hl-t">这是本报告红旗排查中唯一触发的一项。</span><strong>触发信号</strong>：年度减值测试假设调整，或啤酒分部长期增速假设下修。</p>
+    </div>
+    <div class="risk-card r3">
+      <h5>⑤ 杠杆与现金薄 · 严重度：中</h5>
+      <p>有息负债 $105.338 亿而账上现金仅 $0.966 亿，现金覆盖率不到 1%；净负债/EBITDA 3.20 倍，高于管理层 3.0 倍目标。<strong>触发信号</strong>：EBITDA 下滑使杠杆率升破 3.5 倍，或再融资成本显著上行。</p>
+    </div>
+    <div class="risk-card r3">
+      <h5>⑥ 回购择时与股息停滞 · 严重度：中</h5>
+      <p>本季回购均价 $152.73，高于现价 12.5%；季度股息仅从 $1.02 提到 $1.03（+1.0%）。<strong>91% 的自由现金流用于股东回报，因此回购价格直接决定每股价值的增减。</strong><strong>触发信号</strong>：下季回购均价继续高于市价，或股息增速再次低于 2%。</p>
+    </div>
+  </div>
+  <p class="note"><strong>黑天鹅情景（三个）</strong>：<strong>其一</strong>，美国对墨西哥产成品啤酒加征实质性关税——这会一次性摧毁「墨西哥酿造、美国销售」这个模式的成本套利基础，而公司无法在短期内把产能搬回美国。<strong>其二</strong>，酒精消费的代际断层加速——若新一代减少饮酒的趋势从「缓慢下降」转为「结构性坍塌」，品牌份额的优势将失去意义，因为池子本身在消失。<strong>其三</strong>，商誉再次大规模减值叠加评级下调——<span class="hl-t">$52.489 亿商誉、$105.338 亿有息负债、不到 $1 亿现金，这三个数字放在一起，意味着一次减值可能同时触发权益侵蚀与再融资条件恶化。</span></p>
+</section>
+
+<section class="section" id="m12" aria-labelledby="m12-t">
+  <h2 class="stitle" id="m12-t">模块 12 · 股东回报分析<a class="anchor" href="#m12" aria-label="本节链接">#</a></h2>
+
+  <h3 class="sub">12.1 公司给了股东多少？</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="SEC XBRL 现金流量表官方科目「Payments of Dividends」与「Payments for Repurchase of Common Stock」FY2022–FY2026">
+      <thead><tr><th>财年（$ 百万）</th><th>现金股息</th><th>股份回购</th><th>股东总回报</th><th>占自由现金流</th></tr></thead>
+      <tbody>
+        <tr><td>FY2022</td><td>573.0</td><td>1,390.5</td><td>1,963.5</td><td><strong>117.0%</strong></td></tr>
+        <tr><td>FY2023</td><td>587.7</td><td>1,700.2</td><td>2,287.9</td><td><strong>132.9%</strong></td></tr>
+        <tr><td>FY2024</td><td>653.8</td><td>249.7</td><td>903.5</td><td>59.8%</td></tr>
+        <tr><td>FY2025</td><td>731.8</td><td>1,123.8</td><td>1,855.6</td><td>95.7%</td></tr>
+        <tr><td>FY2026</td><td>715.7</td><td>924.1</td><td>1,639.8</td><td><strong>91.4%</strong></td></tr>
+        <tr><td><strong>五年累计</strong></td><td><strong>3,262.0</strong></td><td><strong>5,388.3</strong></td><td><strong>8,650.3</strong></td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>五年累计还给股东 $86.503 亿，相当于当前市值 $231.81 亿的 37.3%。</strong>这是一家把资本返还当作核心承诺的公司。<span class="hl-t">但请注意最右一列：FY2022 与 FY2023 两年的股东回报都超过了当年的自由现金流（117.0% 与 132.9%）——那两年的超额部分只能来自现金储备或举债，而同期这家公司的净负债正处在高位。</span></p>
+  <p><strong>Trailing 股东收益率</strong>：TTM 现金股息 $7.122 亿 ＋ 回购 $8.418 亿 ＝ $15.540 亿，除以市值 $231.81 亿 ＝ <strong>6.70%</strong>（其中股息 3.07%、回购 3.63%）。占 TTM 自由现金流 <strong>84.7%</strong>。</p>
+
+  <h3 class="sub">12.2 给的方式好不好？</h3>
+  <p><strong>先看硬指标：摊薄股数确实在降。</strong>Q1 FY2027 加权平均摊薄股数 <strong>172.407 百万股</strong>，Q1 FY2026 为 177.991 百万股，<strong>同比 −3.14%</strong>。同期回购金额约占市值 3.63%——<span class="hl-t">两者基本匹配，说明回购确实转化成了每股价值，而没有被股权激励大幅抵消</span>（股权激励 FY2026 仅 $0.677 亿，占净销售额 0.74%，在美股大盘公司里属于很低的水平）。</p>
+  <p><strong>但有两处必须扣分。</strong></p>
+  <p><strong>第一，回购的股份进的是库存股，不是注销。</strong>10-Q 原文写明：本季依据 2025 年授权回购的 Class A 股份「become treasury shares」（成为库存股）。<span class="hl-t">按本栏目口径，注销真实减少股本、含金量最高；库存股保留了未来重新发行的可能，含金量打折。</span>不过公平地说，从摊薄股数 −3.14% 的实际结果看，目前这些库存股确实没有被重新投放。</p>
+  <p><strong>第二，回购价格。</strong>本季回购 1,465,295 股、耗资 $2.238 亿，<strong>均价 $152.73</strong>；而当前股价 $135.76，52 周区间为 $126.45–$174.32。<strong>公司在区间中上部买入，比今天的市价高 12.5%。</strong>财报还披露 5 月 31 日之后又回购 714,387 股，年内累计回购 $3.24 亿——按此推算 6 月的回购均价约 $140.26，仍高于现价。</p>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="cards" data-source="Constellation Brands 10-Q（2026-05-31）股份回购披露与公开行情">
+      <thead><tr><th>项目</th><th>数值</th><th>评价</th></tr></thead>
+      <tbody>
+        <tr><td>Q1 回购股数 / 金额</td><td>1,465,295 股 / $223.8M</td><td>—</td></tr>
+        <tr><td><strong>Q1 回购均价</strong></td><td><strong>$152.73</strong></td><td><strong>高于现价 12.5%</strong></td></tr>
+        <tr><td>6 月增量回购</td><td>714,387 股（年内累计 $324M）</td><td>推算均价约 $140.26，仍高于现价</td></tr>
+        <tr><td>股份去向</td><td><strong>库存股（treasury shares）</strong></td><td>含金量打折，非注销</td></tr>
+        <tr><td>摊薄股数同比</td><td>177.991M → 172.407M</td><td><strong>−3.14%，实际效果为真</strong></td></tr>
+        <tr><td>授权到期</td><td>2028 年 2 月</td><td>时间充裕</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="sub">12.3 能不能继续给、给多少？</h3>
+  <p><strong>能力是有的，但余量不宽。</strong>FY2027 自由现金流指引 $16–17 亿，按 TTM 股东回报 $15.540 亿计算，<strong>覆盖率约 94%</strong>——几乎全部自由现金流都要用于分红与回购，留给债务偿还与机会性投资的空间很小。</p>
+  <p><strong>而杠杆是硬约束。</strong>净负债/EBITDA 3.20 倍，高于管理层 3.0 倍目标；账上现金仅 $0.966 亿。<span class="hl-t">这意味着即便股价跌到很有吸引力的位置，公司也很难大幅加码回购——它没有闲置现金，加码就得加杠杆，而杠杆已在目标之上。</span>这是一个真实的、结构性的限制。</p>
+  <p><strong>股息政策的信号偏弱。</strong>季度股息从 $1.02 提到 $1.03，同比仅 <strong>+1.0%</strong>。派息率占 TTM 净利润 39.0%、占自由现金流 38.8%——覆盖倍数是安全的，<strong>所以 1% 的增速不是「给不起」，是「选择不给」。</strong>在可比 EPS 指引为 −2.3% 的年份，这个选择可以理解，但它确实降低了股息作为回报支柱的可预期性。</p>
+  <p><strong>是否借债回购？</strong>本期没有。净负债一年内从 $114.931 亿降到 $104.372 亿，减少约 $10.6 亿，同时完成了 $15.54 亿的股东回报——<strong>这一年是靠真实自由现金流同时做到了去杠杆与高回报</strong>。但 FY2022 与 FY2023 那两年不是（股东回报占自由现金流 117.0% 与 132.9%），<span class="hl-t">这段历史说明该公司在压力下会选择维持回报而非维持资产负债表。</span></p>
+  <p><strong>周期择时角度</strong>：这门生意没有明显景气周期，但有明确的估值周期。<strong>本季在股价区间中上部以 $152.73 回购、而现价 $135.76，是一次不理想的择时。</strong>相比之下，FY2024 回购只有 $2.497 亿（五年最低）——那一年恰是公司现金流最紧的一年，可以理解，但也意味着它<strong>并没有在便宜时加码的历史记录</strong>。</p>
+  <p><strong>模块小结</strong>：Constellation Brands 的股东回报属于<strong>「积极但含金量打折」</strong>——五年累计返还 $86.503 亿（相当于当前市值 37.3%）、摊薄股数同比实降 3.14%、股权激励稀释极小，这些都是真的；<span class="hl-t">但回购进的是库存股而非注销、本季回购均价高于现价 12.5%、股息增速仅 1.0%、且几乎全部自由现金流已被占用而杠杆仍在目标之上</span>。<strong>股东拿到的是一份丰厚但没有余量、且买入价格不佳的资本返还。</strong></p>
+</section>
+
+<section class="section" id="m13" aria-labelledby="m13-t">
+  <h2 class="stitle" id="m13-t">模块 13 · 海图评分卡 + 投资决策<a class="anchor" href="#m13" aria-label="本节链接">#</a></h2>
+  <div class="scorecard">
+    <div class="score-grid">
+      <div class="score-card"><div class="score-letter">B</div><div class="score-dim">生意可预测性</div><div class="score-note">营业利润率五年稳定在 26%–32%（剔除减值年），Beta 0.40；<strong>但需求端由移民执法、成本端由关税决定，两者都不可预测</strong></div></div>
+      <div class="score-card"><div class="score-letter">B+</div><div class="score-dim">经济护城河</div><div class="score-note">品牌与独家权利、39.0% 分部利润率两条宽；<strong>但转换成本与网络效应为零，且护城河保护的池子在缩小</strong></div></div>
+      <div class="score-card"><div class="score-letter">B−</div><div class="score-dim">管理层质量</div><div class="score-note">成本纪律与披露质量优秀（利润率逆势 +6.4pp）；<strong>但回购均价高于现价 12.5%，五年三次 GAAP 亏损源于历史投资决策</strong></div></div>
+      <div class="score-card"><div class="score-letter">B</div><div class="score-dim">财务质量</div><div class="score-note">五年自由现金流从未低于 $15.11 亿，所有者盈余与 FCF 收益率高度吻合；<strong>但净负债 $104.4 亿、现金仅 $0.97 亿、商誉占权益 63.6%</strong></div></div>
+      <div class="score-card"><div class="score-letter">B−</div><div class="score-dim">资本配置纪律</div><div class="score-note">五年返还 $86.5 亿、股数实降 3.14%、稀释极小；<strong>但回购进库存股、择时不佳、股息仅增 1.0%、94% 的 FCF 已被占用</strong></div></div>
+      <div class="score-card"><div class="score-letter">C+</div><div class="score-dim">估值与安全边际</div><div class="score-note">七法中位数 $147.15，<strong>安全边际仅 6.4%</strong>，远低于 25% 门槛；首仓价 $117.72 低于 52 周低点</div></div>
+    </div>
+    <div class="flag-row">
+      <h4>红旗排查（六项）</h4>
+      <ul class="ulist">
+        <li>⚠️ <strong>商誉减值历史</strong>——<strong>触发</strong>。FY2025 计提商誉减值 <strong>$27.407 亿</strong>（FY2014 亦有 $2.787 亿）；截至 2026-05-31 商誉仍有 <strong>$52.489 亿，占股东权益 63.6%</strong>，扣除后有形权益仅约 $30.07 亿。<span class="hl-t">这不是历史遗留问题，而是资产负债表上仍在的现存风险。</span></li>
+        <li>❌ <strong>收入确认时点</strong>——未触发。发货与动销双口径同时披露，透明度高于同业。</li>
+        <li>❌ <strong>关联交易</strong>——未触发。双层股权结构已消除（Class 1 仅 25,923 股，占比不足 0.02%）。</li>
+        <li>❌ <strong>表外负债</strong>——未触发。有息负债三项（短期借款、一年内到期、长期债务）在表内逐项披露。</li>
+        <li>❌ <strong>股权激励比例</strong>——未触发。FY2026 股权激励 $0.677 亿，占净销售额 0.74%，摊薄股数同比实降 3.14%。</li>
+        <li>⚠️ <strong>非经常性项目频繁</strong>——<strong>未触发但需跟踪</strong>。五个财年三次 GAAP 净亏损、可比调整项符号在相邻两季反转（−$0.32 → ＋$0.37）。披露完整合规，但<strong>使 GAAP 口径长期不可用于估值</strong>。</li>
+      </ul>
+      <p><strong>结论：1 项触发，1 项列入跟踪清单。</strong>按本栏目规则，<span class="hl-t">任一红旗触发即强制降至「持有观望」或更低</span>。而本次估值本身（安全边际 6.4%）也不支持任何买入档位——<strong>两条路径指向同一个结论。</strong></p>
+    </div>
+    <div class="verdict">
+      <div class="verdict-rating">最终评级：<span class="rating-badge" data-rating="持有观望">持有观望</span></div>
+      <div class="tbl-wrap">
+        <table class="tbl" data-shape="grid" data-source="海图自行测算，详见模块 7">
+          <thead><tr><th>项目</th><th>数值</th></tr></thead>
+          <tbody>
+            <tr><td>七法估值中位数</td><td>$147.15</td></tr>
+            <tr><td>情景概率加权</td><td>$144.44</td></tr>
+            <tr><td><strong>加权公允价值</strong></td><td><strong>$145.00</strong></td></tr>
+            <tr><td>现价（2026-08-07）</td><td>$135.76</td></tr>
+            <tr><td><strong>安全边际</strong></td><td><strong>6.4%</strong>（远低于 25% 门槛）</td></tr>
+            <tr><td>12 个月概率加权目标价</td><td><strong>$144</strong>（＋6.1%，另有 3.04% 股息）</td></tr>
+            <tr><td>乐观情景（25%）</td><td>$187.50 — 消费场景恢复、关税缓和、可比 EPS 回到 $12.50</td></tr>
+            <tr><td>基准情景（45%）</td><td>$150.15 — 动销企稳、可比 EPS $11.55、维持 13x</td></tr>
+            <tr><td>悲观情景（30%）</td><td>$100.00 — 动销跌幅扩大、可比 EPS 降至 $10.00、倍数压至 10x</td></tr>
+            <tr><td>建仓阶梯</td><td>首仓 <strong>$117.72</strong>（<strong>低于 52 周低点 $126.45</strong>）· 二仓 $103.01 · 三仓 $88.29</td></tr>
+            <tr><td>止盈档位</td><td>$175 / $205 / $240，每档减仓 25%</td></tr>
+            <tr><td>建议总仓位</td><td><strong>0–3%</strong>（可以为零）</td></tr>
+            <tr><td>持有周期</td><td><strong>3–5 年</strong></td></tr>
+            <tr><td>关键监控指标</td><td>啤酒动销（尤其 Modelo Especial 与 Corona Extra）· 发货与动销的裂口 · 回购均价 vs 市价 · 净负债/EBITDA 是否降到 3.0 倍 · 商誉减值测试假设</td></tr>
+            <tr><td><strong>下一个催化剂</strong></td><td><strong>Q2 FY2027 财报（预计 2026 年 10 月初）</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>为什么不是「卖出」</strong>：这家公司五年里 GAAP 净利润三次为负，而经营现金流从未低于 $26.69 亿、自由现金流从未低于 $15.11 亿。<span class="hl-t">减值只发生在纸面上，现金一直在进来。</span>啤酒分部 39.0% 的营业利润率、Circana 渠道份额增长第一、7.91% 的自由现金流收益率、6.70% 的股东总回报——这些都是真的，且没有一项正在崩坏。</p>
+      <p><strong>为什么也不是「有条件买入」</strong>：安全边际只有 6.4%，而红旗（商誉占权益 63.6%，两年前刚减值 $27.41 亿）已经触发。<strong>更根本的是：这家公司最重要的两个变量——西班牙裔消费者的消费场景、以及铝与成品酒的关税——都不在它自己手里，也不在我的能力圈里。</strong>对这样的标的，6.4% 的缓冲不构成保护。</p>
+      <p><strong>条件是什么</strong>：跌到 <strong>$117.72</strong>（需低于 52 周低点 $126.45）开始第一笔。或者，在价格没到之前，出现两件事之一——<strong>啤酒动销重新转正并连续两个季度维持</strong>（尤其 Modelo Especial 与 Corona Extra 止跌），<strong>或净负债/EBITDA 降到 3.0 倍以下且公司在市价下方而非上方回购</strong>。任一发生，我都会重算公允价值。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 页末夜读手记 ══ -->
+<section class="section" id="essay" aria-labelledby="essay-t">
+  <h2 class="stitle sr-only" id="essay-t">海图夜读手记<a class="anchor" href="#essay" aria-label="本节链接">#</a></h2>
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img class="haitu-avatar-sm" src="../assets/hai.png" alt="海图">
+      <span class="haitu-name-lg">海图</span>
+      <span class="haitu-essay-tag">夜读手记 · 2026-08-09</span>
+    </div>
+    <div class="haitu-essay-body">
+      <p>这家公司的季报标题写着：每股收益增长 <strong>31%</strong>。</p>
+      <p>把它自己的调节表打开，故事完全变了。</p>
+      <p>报告口径每股收益 $3.79，去年 $2.90。但去年那个数字里，可比调整项<strong>拖累</strong>了 $0.32；今年这个数字里，同一项<strong>贡献</strong>了 $0.37。</p>
+      <p>一来一回 $0.69，占去年 $2.90 基数的 <strong>24 个百分点</strong>。</p>
+      <p>也就是说，那个「31%」里有约四分之三不是酒卖得更好，是会计口径的方向变了。剔干净之后，可比每股收益的真实增速是 <strong>7%</strong>。</p>
+      <p>这不是一次性的巧合，是这家公司长期的样子。我把五个财年的营业利润和 GAAP 净利润并排放：</p>
+      <p>FY2022 营业利润 23.32 亿，净利润 <strong>−0.40 亿</strong>。FY2023 营业利润 28.43 亿，净利润 <strong>−0.71 亿</strong>。FY2025 营业利润 3.55 亿（那年计提了 <strong>27.41 亿</strong>商誉减值），净利润 <strong>−0.81 亿</strong>。</p>
+      <p><strong>五个财年，三年 GAAP 净利润为负；而营业利润，没有一年为负。</strong></p>
+      <p>同一批酒厂，同一批品牌，同一批人。差别全部来自经营以外——历次投资与并购的账面清算。</p>
+      <p>所以这份报告我全程不用 GAAP 净利润估值。而用什么，公司自己给了答案。</p>
+      <p>它的 FY2027 指引是这样的：报告每股收益 $11.50–$12.20，对比去年实际的 $9.61，<strong>看起来增长 23%</strong>。可比每股收益 $11.20–$11.90，对比去年实际的 $11.82，<strong>中值下降 2.3%</strong>。</p>
+      <p>同一份指引，两个口径，一个说涨两成，一个说跌两个点。<strong>只有一个是关于经营的。</strong></p>
+      <p>接下来说这季我看到的第二件事，也是我更在意的那件。</p>
+      <p>啤酒占这家公司净销售额的 <strong>93.9%</strong>。所以啤酒的两个量指标，就是它的全部。</p>
+      <p>本季发货量 <strong>+1.8%</strong>，动销 <strong>−0.3%</strong>。</p>
+      <p>发货是卖给经销商，动销是经销商真正卖到终端。两者之间 2.1 个百分点的裂口，意思是这一季有约两个点的量<strong>留在了渠道里，而不是被人喝掉</strong>。渠道库存不会无限增加，这是未来发货量的透支。</p>
+      <p>再看动销的内部结构，问题更清楚：<strong>Modelo Especial 动销约 −2%</strong>——这是全美销售额第一的啤酒品牌；<strong>Corona Extra 动销 −超过 5%</strong>——前五的品牌。补上窟窿的是 Pacifico +21%、Victoria +14%、Modelo Chelada +6%，三个体量小得多的牌子。</p>
+      <p><strong>两个最大的品牌在萎缩，靠三个小的撑住总量。</strong>这在消费品里是一种很明确的信号：当增长必须由小品牌接棒时，同样的百分比增长需要越来越大的努力，而旗舰下滑的基数却越来越大。</p>
+      <p>为什么会这样？公司没有回避。西班牙裔消费者贡献了它在美啤酒销售的<strong>约一半</strong>，而移民执法的收紧减少了聚会与外出的场合，直接压掉了需求。</p>
+      <p>成本端还有一道同向的压力：它的墨西哥啤酒包装里<strong>约 41% 是铝</strong>，而铝关税已经实实在在推高了销售成本。</p>
+      <p><strong>一边是需求在退，一边是成本在进，而这两头都不在公司手里。</strong></p>
+      <p>说了这么多不好的，我得把这家公司真正硬的地方讲清楚。</p>
+      <p>啤酒分部的营业利润率是 <strong>39.0%</strong>。在整个消费品行业，这个数字只有极少数拥有强势品牌加规模化产能的公司能做到。本季净销售额 −3%，而毛利率从 50.36% 升到 <strong>54.29%</strong>，营业利润率从 28.38% 升到 <strong>34.75%</strong>——<strong>在收入下滑、关税推高成本的环境里把利润率抬起来六个百分点，这不是运气。</strong></p>
+      <p>还有一条更硬的。五个财年里，GAAP 净利润三次为负，而<strong>经营现金流从未低于 26.69 亿，自由现金流从未低于 15.11 亿</strong>。</p>
+      <p><strong>减值只发生在纸面上，现金一直在进来。</strong>这是我不会给这只股票「卖出」的核心原因。</p>
+      <p>而且它把这些现金几乎全还给了股东：FY2026 自由现金流 17.94 亿，其中 <strong>16.39 亿（91.4%）</strong>当年就分掉了——回购 9.24 亿、股息 7.16 亿，只留下 1.54 亿。五年累计返还 <strong>86.5 亿美元</strong>，相当于今天市值的 37.3%。摊薄股数同比实降 3.14%，股权激励只占营收 0.74%，稀释几乎可以忽略。</p>
+      <p>不过在这里我要停一下，因为有个数字很扎眼。</p>
+      <p>本季它回购了 146.5 万股，花了 2.238 亿美元，<strong>均价 $152.73</strong>。</p>
+      <p>而今天的股价是 <strong>$135.76</strong>。</p>
+      <p>回购价比现价高 <strong>12.5%</strong>。这不是事后诸葛——52 周区间是 $126.45 到 $174.32，$152.73 落在区间的中上部。<strong>一家把 91% 自由现金流都用于回购和分红的公司，买入价格就是它资本配置成绩单上最重的那一栏。</strong>而且这些股份进的是库存股，不是注销。</p>
+      <p>同期，季度股息从 $1.02 提到 $1.03。<strong>增长 1.0%。</strong>派息率只占自由现金流 39%，所以这不是「给不起」，是「选择不给」。</p>
+      <p>那么它到底值多少钱。</p>
+      <p>我用七种方法算，全部以公司自己的可比口径和现金流指引为锚，不碰 GAAP 净利润。结果从 $117.71 到 $150.15，<strong>中位数 $147.15</strong>，情景加权 $144.44。取加权公允价值 <strong>$145</strong>。</p>
+      <p>现价 $135.76，<strong>安全边际 6.4%</strong>。</p>
+      <p>这只股票有很多看起来便宜的指标：可比市盈率 11.75 倍、EV/EBITDA 10.30 倍、自由现金流收益率 7.91%、股东总回报率 6.70%。放在美股大盘里，每一个都属于便宜的一端。</p>
+      <p><strong>但便宜和有安全边际，是两件事。</strong></p>
+      <p>安全边际衡量的不是「比别人便宜多少」，是「价格比我算出的价值低多少」。七种方法收敛在 $145 上下，中间只有 6.4% 的缓冲。</p>
+      <p>换个角度更清楚：如果明年的可比每股收益从 $11.55 掉到 $10.00——对应动销继续恶化——按同样 13 倍算出来是 $130，<strong>比今天的股价还低。</strong>市场给的 11.75 倍，并没有为这种情形留出空间。</p>
+      <p>再加上一条：商誉 <strong>52.49 亿</strong>，占股东权益 <strong>63.6%</strong>，扣掉之后有形权益只剩约 30 亿——不到市值的 13%。而两年前，这家公司刚计提过 27.41 亿的商誉减值。</p>
+      <p>按我的规则，这条红旗触发即强制降级。而估值本身（6.4%）也不支持任何买入档位。<strong>两条路径指向同一个结论：持有观望。</strong></p>
+      <p>首仓价我算出来是 <strong>$117.72</strong>——比 52 周低点 $126.45 还低 6.9%。也就是说，按规则建仓，需要这只股票跌到过去一年从未到过的价格。</p>
+      <p>什么时候我会改主意？价格到 $117.72，或者出现两件事之一：<strong>啤酒动销重新转正并连续两个季度维持</strong>，尤其是 Modelo 和 Corona 止跌；<strong>或者净负债/EBITDA 降到 3.0 倍以下，并且公司开始在市价下方而不是上方回购。</strong></p>
+      <p>最后留一句。</p>
+      <p>这家公司在美国啤酒品类里是赢家——Circana 渠道销售额份额增长第一，跑赢整个品类近三个百分点，前十五大份额增长品牌里占了五个。</p>
+      <p><strong>它的问题不是输给了竞争对手，是赢在了一个正在退潮的赛道上。</strong></p>
+      <p>份额可以靠本事去抢，池子不行。</p>
+      <p>—— 灯下落笔，明日再观风浪。</p>
+    </div>
+  </div>
+</section>
+
+</div><!-- /.container -->
+
+<footer>
+  <div>本报告由「海图夜读」基于公开财报与电话会资料独立撰写，数据截至 2026-08-07。</div>
+  <div>
+    <strong>免责声明：</strong>本文仅为个人研究记录与信息分享，<strong>不构成任何投资建议</strong>，
+    作者非持牌投资顾问。文中评级、目标价、仓位与建仓价格均为基于公开信息的个人推演，
+    可能存在错误或随时间失效。市场有风险，投资需谨慎，读者应独立判断并自负盈亏。
+  </div>
+</footer>
+
+<script>
+/* ══════════════════════════════════════════════════════════════════
+   海图夜读 · 报告页脚本骨架
+   逐字复制进报告的 <script>，只改 CHART_DATA 里的数字。
+
+   这段脚本解决了存量 103 份实测出的三个问题：
+   1. 主题切换有 3 套实现，73/103 不读 localStorage
+      → 门户切暗色进报告又变亮色。这里统一成一套。
+   2. 71 份把调色板硬编码进 JS（token 的第 4 份拷贝），
+      改一次配色要改 71 个文件；另有 2 份切暗色后图表根本不重绘。
+      → 这里一律从 CSS 变量读，改 :root 即全站生效。
+   3. 4 个图表槽位被写出 39 种 canvas id。
+      → 这里按固定槽位 rev|margin|segment|eps 接管。
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ── 1. 从 CSS 变量取色（唯一真源，禁止在本文件里写 hex）── */
+function cssVar(name) {
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+}
+function palette() {
+  return {
+    accent:  cssVar('--accent'),   accent2: cssVar('--accent2'),
+    accent3: cssVar('--accent3'),  gold:    cssVar('--gold'),
+    red:     cssVar('--red'),      green:   cssVar('--green'),
+    grid:    cssVar('--chart-grid'), text:  cssVar('--text3-ink'),
+  };
+}
+
+/* ── 2. 主题切换：同步 aria-pressed、持久化、重绘图表 ── */
+function toggleTheme() {
+  var html = document.documentElement;
+  var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  try { localStorage.setItem('theme', next); } catch (e) {}
+  var btn = document.getElementById('themeBtn');
+  if (btn) btn.setAttribute('aria-pressed', String(next === 'dark'));
+  renderCharts();
+}
+document.addEventListener('DOMContentLoaded', function () {
+  var btn = document.getElementById('themeBtn');
+  if (btn) btn.setAttribute('aria-pressed',
+    String(document.documentElement.getAttribute('data-theme') === 'dark'));
+});
+
+/* ── 3. 顶栏实测高度写进 --bar-h ──
+   锚点落点与目录高亮都以它为基准。顶栏在窄屏会折行（38px → 60+px），
+   硬编码会让手机上所有跳转偏移。 */
+function syncBarH() {
+  var bar = document.querySelector('.theme-bar');
+  if (bar) document.documentElement.style.setProperty('--bar-h', bar.offsetHeight + 'px');
+}
+addEventListener('DOMContentLoaded', syncBarH);
+addEventListener('resize', syncBarH);
+
+/* ── 4. 本报告的图表数据：只改这一块 ──
+   槽位固定为 rev / margin / segment / eps，与 body-skeleton.html 的
+   canvas id 和 data-chart 一一对应。用不到的槽位整个删掉（连同骨架里的 .ccard）。
+   颜色一律写 palette 的 key 名（'accent' / 'gold' …），不要写 hex。 */
+var CHART_DATA = {
+  rev: {
+    type: 'bar',
+    labels: ['FY2022', 'FY2023', 'FY2024', 'FY2025', 'FY2026'],
+    datasets: [
+      { label: '净销售额（$B）', data: [8.82, 9.45, 9.96, 10.21, 9.14], color: 'accent' },
+      { label: '营业利润率 %', data: [26.4, 30.1, 31.8, 3.5, 29.8], color: 'accent3', type: 'line', yAxisID: 'y1' },
+    ],
+  },
+  margin: {
+    type: 'bar',
+    labels: ['FY2022', 'FY2023', 'FY2024', 'FY2025', 'FY2026'],
+    datasets: [
+      { label: '营业利润（$B）', data: [2.33, 2.84, 3.17, 0.35, 2.72], color: 'accent' },
+      { label: 'GAAP 净利润（$B）', data: [-0.04, -0.07, 1.73, -0.08, 1.69], color: 'red' },
+    ],
+  },
+  segment: {
+    type: 'doughnut',
+    labels: ['啤酒', '葡萄酒与烈酒'],
+    datasets: [
+      { label: 'Q1 FY2027 净销售额（$M）', data: [2283.5, 149.2], color: ['accent', 'gold'] },
+    ],
+  },
+  eps: {
+    type: 'bar',
+    labels: ['Modelo Especial', 'Corona Extra', 'Modelo Chelada', 'Victoria', 'Pacifico'],
+    datasets: [
+      { label: 'Q1 FY2027 动销增速 %', data: [-2, -5, 6, 14, 21], color: 'accent' },
+    ],
+  },
+};
+
+/* ── 5. 渲染（一般不需要改）── */
+var _charts = {};
+function renderCharts() {
+  if (typeof Chart === 'undefined') return;      // CDN 不可达时静默跳过，不阻断页面
+  var P = palette();
+  Chart.defaults.font.family =
+    getComputedStyle(document.body).getPropertyValue('--font-sans') ||
+    'system-ui, -apple-system, sans-serif';
+
+  Object.keys(CHART_DATA).forEach(function (slot) {
+    var el = document.getElementById(slot);
+    if (!el) return;
+    if (_charts[slot]) _charts[slot].destroy();
+
+    var cfg = CHART_DATA[slot];
+    var isPie = cfg.type === 'doughnut' || cfg.type === 'pie';
+
+    _charts[slot] = new Chart(el, {
+      type: cfg.type,
+      data: {
+        labels: cfg.labels,
+        datasets: cfg.datasets.map(function (d) {
+          var c = Array.isArray(d.color) ? d.color.map(function (k) { return P[k]; }) : P[d.color];
+          // 只写 d.type === 'line' 会让「图表级 type:'line' 但 dataset 没写 type」的
+          // 数据集拿到 borderWidth:0 —— 实测表现为「只有点、没有连线」。
+          var isLine = (d.type || cfg.type) === 'line';
+          return Object.assign({}, d, {
+            backgroundColor: c, borderColor: c,
+            borderWidth: isLine ? 2 : 0, tension: 0.3,
+          });
+        }),
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            // 窄屏把图例挪到顶部：右侧图例在 375px 上会吃掉大半个画布
+            position: isPie && innerWidth > 640 ? 'right' : 'top',
+            labels: { color: P.text, boxWidth: 12, font: { size: 11 } },
+          },
+        },
+        scales: isPie ? {} : {
+          x: { grid: { color: P.grid }, ticks: { color: P.text, font: { size: 11 } } },
+          y: { grid: { color: P.grid }, ticks: { color: P.text, font: { size: 11 } } },
+          y1: {
+            position: 'right', grid: { display: false },
+            ticks: { color: P.text, font: { size: 11 } }, display: 'auto',
+          },
+        },
+      },
+    });
+  });
+}
+addEventListener('DOMContentLoaded', renderCharts);
+addEventListener('resize', function () {          // 图例位置随断点变，需重建
+  clearTimeout(window._rcT);
+  window._rcT = setTimeout(renderCharts, 200);
+});
+
+</script>
+</body>
+</html>
