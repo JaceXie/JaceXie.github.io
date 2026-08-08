@@ -1,0 +1,1529 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-08-06 · KRX: 000660 Q2 2026 财报已于 2026-07-28 发布 -->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>SK 海力士 000660 · Q2 2026 财报深度分析 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+
+<script>
+(function () {
+  try {
+    var t = localStorage.getItem('theme');
+    if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', t);
+  } catch (e) { document.documentElement.setAttribute('data-theme', 'light'); }
+})();
+</script>
+
+<link rel="canonical" href="https://haitu.jacexie.com/haitu/reports/skhynix-q2-2026.html">
+<meta name="description" content="它制造 DRAM 与 NAND 两种标准品芯片，利润完全由行业供需决定——三年前一年亏 7.7 万亿韩元，如今一个季度赚 60.5 万亿。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SK 海力士 000660 · Q2 2026 财报深度分析">
+<meta property="og:description" content="它制造 DRAM 与 NAND 两种标准品芯片，利润完全由行业供需决定——三年前一年亏 7.7 万亿韩元，如今一个季度赚 60.5 万亿。">
+<meta property="og:url" content="https://haitu.jacexie.com/haitu/reports/skhynix-q2-2026.html">
+<meta name="twitter:card" content="summary">
+
+<script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+<style>
+
+/* ── MORANDI PALETTE ── */
+:root {
+  /* Light (default) */
+  --bg:        #f5f0eb;
+  --bg2:       #ece6df;
+  --card:      #ffffff;
+  --card2:     #f8f5f1;
+  --border:    #d9d0c7;
+  --text:      #4a4340;
+  --text2:     #7a706a;
+  --text3:     #a89f98;
+  --accent:    #8a9a8e;   /* sage */
+  --accent2:   #7b8fa0;   /* muted blue */
+  --accent3:   #b08d7a;   /* dusty terracotta */
+  --rose:      #c09090;   /* dusty rose */
+  --gold:      #b9a06a;
+  --red:       #b87070;
+  --green:     #7a9a7a;
+  --shadow:    rgba(0,0,0,0.06);
+  --chart-grid:#e5ddd5;
+  /* ── ink 层：只用于文字，全部达 WCAG AA（装饰色仍用上面的原值）── */
+  --text3-ink:   #70665f;  /* 4.51:1 on --bg2（原 --text3 #a89f98 仅 2.60:1）*/
+  --accent3-ink: #7f6150;  /* 4.97:1 on --bg （原 --accent3 #b08d7a 仅 2.67:1）*/
+  --gold-ink:    #8a6d3b;  /* 原 --gold  #b9a06a 仅 2.53:1 */
+  --red-ink:     #a35555;  /* 原 --red   #b87070 仅 3.76:1 */
+  --green-ink:   #4a7057;  /* 原 --green #7a9a7a 仅 3.12:1 */
+  --accent2-ink: #5a7386;
+  --font-sans: system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-serif: Georgia, 'Noto Serif SC', 'PingFang SC', serif;
+  --bar-h: 44px;
+}
+[data-theme="dark"] {
+  --text3-ink:   #a19991;
+  --accent3-ink: #c9a48e;
+  --gold-ink:    #c9b07a;
+  --red-ink:     #c08080;
+  --green-ink:   #8aaa8a;
+  --accent2-ink: #8fabbf;
+  --bg:        #1e1c1a;
+  --bg2:       #28251f;
+  --card:      #2e2a25;
+  --card2:     #363230;
+  --border:    #4a4540;
+  --text:      #d4ccc4;
+  --text2:     #a09890;
+  --text3:     #706860;
+  --accent:    #8a9a8e;
+  --accent2:   #8fabbf;
+  --accent3:   #c9a48e;
+  --rose:      #c09090;
+  --gold:      #c9b07a;
+  --red:       #c08080;
+  --green:     #8aaa8a;
+  --shadow:    rgba(0,0,0,0.3);
+  --chart-grid:#3e3a35;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-serif);
+  line-height: 1.75;
+  font-size: 14.5px;
+  transition: background .35s, color .35s;
+}
+a { color: var(--accent2); text-decoration: none; }
+
+/* ── THEME TOGGLE ── */
+.theme-bar {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 8px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  transition: background .35s;
+}
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; text-decoration: none; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: var(--font-sans); font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; text-decoration: none; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; color: var(--text2);
+}
+.toggle-switch {
+  appearance: none; -webkit-appearance: none; border: 0; padding: 0; margin: 0;
+  position: relative;
+  width: 44px; height: 22px;
+  background: var(--border);
+  border-radius: 11px;
+  cursor: pointer;
+  transition: background .3s;
+}
+.toggle-switch::after {
+  content: '';
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 18px; height: 18px;
+  background: var(--card);
+  border-radius: 50%;
+  transition: transform .3s;
+  box-shadow: 0 1px 3px rgba(0,0,0,.15);
+}
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+
+/* ── HERO ── */
+.hero {
+  padding: 48px 24px 36px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+.hero-tag {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 3px 14px;
+  border-radius: 20px;
+  margin-bottom: 18px;
+}
+.hero h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills {
+  display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;
+}
+.pill {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 6px 18px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--text2);
+  box-shadow: 0 1px 3px var(--shadow);
+}
+.pill strong { color: var(--text); }
+
+/* ── LAYOUT ── */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle {
+  font-size: 18px; font-weight: 700; color: var(--accent3-ink);
+  margin-bottom: 20px; letter-spacing: 0.5px;
+  display: flex; align-items: center; gap: 10px;
+}
+.stitle::before {
+  content: ''; display: block; width: 4px; height: 20px;
+  background: var(--accent3); border-radius: 2px;
+}
+
+/* ── KPI ── */
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.kpi {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 16px 18px;
+  box-shadow: 0 1px 4px var(--shadow);
+  transition: background .35s;
+}
+.kpi-l { font-family: var(--font-sans); font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.badge {
+  display: inline-block; font-family: var(--font-sans);
+  font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px;
+}
+.up   { background: rgba(122,154,122,.15); color: var(--green); }
+.dn   { background: rgba(184,112,112,.15); color: var(--red); }
+.nt   { background: rgba(123,143,160,.15); color: var(--accent2); }
+
+/* ── TABLE ── */
+.tbl-wrap {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow);
+}
+.tbl { width: 100%; border-collapse: collapse; font-family: var(--font-sans); font-size: 13px;
+       font-variant-numeric: tabular-nums; }
+.tbl th {
+  background: var(--card2); color: var(--text3-ink); font-size: 11px;
+  letter-spacing: .5px; text-transform: uppercase;
+  padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border);
+}
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); }
+
+/* ── CHARTS ── */
+.cgrid  { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-bottom: 16px; }
+.cgrid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-bottom: 16px; }
+.ccard, .kpi, .moat-card, .risk-card, .score-card, .snap-item, .pbox { min-width: 0; }
+.ccard {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow);
+}
+.ctitle { font-family: var(--font-sans); font-size: 12px; color: var(--text3-ink); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 230px; }
+
+/* ── QUOTES ── */
+.qgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.qcard {
+  background: var(--card); border: 1px solid var(--border);
+  border-left: 4px solid var(--rose);
+  border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow);
+}
+.qname { font-weight: 700; color: var(--accent3); margin-bottom: 2px; }
+.qrole { font-family: var(--font-sans); font-size: 11px; color: var(--text3); margin-bottom: 10px; }
+.qtext { font-style: italic; font-size: 13.5px; color: var(--text); line-height: 1.8; }
+
+/* ── ANALYSIS ── */
+.agrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+.acard {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow);
+}
+.acard h4 { font-size: 13px; color: var(--accent2); margin-bottom: 10px; text-transform: uppercase; letter-spacing: .5px; }
+.acard ul { padding-left: 16px; }
+.acard li { margin-bottom: 5px; font-size: 13px; }
+
+/* ── BUFFETT SCORE ── */
+.bscore {
+  display: flex; align-items: center; gap: 16px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px 22px; margin-bottom: 12px;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.circle {
+  width: 62px; height: 62px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 18px; flex-shrink: 0;
+  border: 3px solid; font-family: var(--font-sans);
+}
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 3px; }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+/* ── VERDICT ── */
+.verdict {
+  background: var(--card2); border: 2px solid var(--accent);
+  border-radius: 10px; padding: 26px 28px; margin-bottom: 16px;
+}
+.verdict-t { font-size: 17px; font-weight: 700; color: var(--accent); margin-bottom: 10px; }
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 14px; text-align: center;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.pbox .pl { font-family: var(--font-sans); font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.pbox .pv { font-family: var(--font-sans); font-size: 26px; font-weight: 800; }
+.pbox .pn { font-size: 11px; color: var(--text3); margin-top: 3px; }
+.pc { color: var(--text2); } .pf { color: var(--gold); } .ps { color: var(--green); }
+
+/* ── SANKEY ── */
+#sankey { width: 100%; height: 460px; }
+
+/* ── COMMENTARY ── */
+.cmt {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 26px; line-height: 1.9; font-size: 14.5px;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.cmt p { margin-bottom: 14px; }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--card2); border-top: 1px solid var(--border);
+  padding: 24px; text-align: center; color: var(--text3); font-size: 12px;
+  margin-top: 40px;
+}
+
+@media (max-width: 768px) {
+  .cgrid,.cgrid3,.qgrid,.agrid,.pgrid { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 22px; }
+  .kpi-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ── HAITU SIGNATURE BLOCKS (页首短评 + 页末长评) ── */
+.haitu-quip {
+  display: flex; align-items: center; gap: 18px;
+  background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red);
+  border-radius: 12px; padding: 18px 24px; margin: 24px 0;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.haitu-avatar-sm {
+  width: 64px; height: 64px; border-radius: 50%;
+  object-fit: cover; flex-shrink: 0;
+  border: 2px solid var(--border); background: var(--red);
+  box-shadow: 0 2px 8px rgba(184,112,112,0.18);
+}
+.haitu-quote { flex: 1; }
+.haitu-name {
+  font-family: var(--font-sans);
+  font-size: 12px; font-weight: 700; letter-spacing: 1.5px;
+  color: var(--red-ink); text-transform: uppercase; margin-bottom: 4px;
+}
+.haitu-portrait {
+  font-size: 15px; line-height: 1.65; color: var(--text);
+  margin-bottom: 6px; font-weight: 600;
+}
+.haitu-rating-line {
+  font-size: 13px; color: var(--text2);
+  font-family: var(--font-sans);
+}
+.rating-badge {
+  display: inline-block; padding: 2px 12px; border-radius: 12px;
+  font-weight: 700; font-size: 13px; letter-spacing: 0.5px;
+  margin-left: 4px;
+}
+.rating-strong-buy { background: rgba(122,154,122,.25); color: var(--green); }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+.rating-cond-buy { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-hold { background: rgba(123,143,160,.18); color: var(--accent2); }
+.rating-sell { background: rgba(184,112,112,.18); color: var(--red); }
+.rating-strong-sell { background: rgba(184,112,112,.28); color: var(--red); }
+
+.haitu-essay {
+  background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red);
+  border-radius: 12px; padding: 28px 32px; margin: 24px 0;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.haitu-essay-header {
+  display: flex; align-items: center; gap: 18px;
+  padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px;
+}
+.haitu-avatar-lg {
+  width: 110px; height: 110px; border-radius: 50%;
+  object-fit: cover; flex-shrink: 0;
+  border: 3px solid var(--border); background: var(--red);
+  box-shadow: 0 4px 14px rgba(184,112,112,0.22);
+}
+.haitu-name-lg {
+  font-family: 'Georgia', 'Noto Serif SC', serif;
+  font-size: 28px; font-weight: 700; color: var(--text);
+  letter-spacing: 1px; margin-bottom: 4px;
+}
+.haitu-essay-tag {
+  font-family: var(--font-sans);
+  font-size: 12px; color: var(--text3); letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+.haitu-essay-body {
+  font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', serif;
+  font-size: 15px; line-height: 2.0; color: var(--text);
+}
+.haitu-essay-body p { margin-bottom: 16px; }
+.haitu-essay-body p:first-child {
+  font-size: 16px; font-style: italic; color: var(--text2);
+}
+.haitu-essay-body p:last-child {
+  margin-top: 22px; padding-top: 14px;
+  border-top: 1px solid var(--border);
+  font-size: 12px; color: var(--text3); font-style: italic;
+}
+.haitu-sign {
+  text-align: right; margin-top: 14px;
+  font-family: 'Georgia', serif; font-size: 14px;
+  color: var(--text2); font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .haitu-quip { flex-direction: column; text-align: center; }
+  .haitu-essay-header { flex-direction: column; text-align: center; }
+  .haitu-avatar-sm { width: 80px; height: 80px; }
+  .haitu-avatar-lg { width: 90px; height: 90px; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   海图 v2 追加规则 —— 修 103 份存量实测出的问题，勿删勿改顺序
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── 1. 锚点落点：一行同时修好 TOC 跳转 / 深链 / Ctrl+F 定位 / :target ──
+   没有这条，所有跳转都会落在 sticky 顶栏底下被遮住 */
+.section { scroll-margin-top: calc(var(--bar-h) + 12px); }
+
+/* h2.stitle 必须显式定字号，否则被 UA 默认样式撑成 32px 巨标题 */
+h2.stitle { font-size: 18px; font-weight: 700; margin: 0 0 20px; }
+
+/* 章节深链锚点：桌面 hover 显形，触屏常显 */
+.anchor {
+  margin-left: 8px; font-size: 13px; color: var(--text3-ink);
+  text-decoration: none; opacity: 0; transition: opacity .2s;
+}
+.stitle:hover .anchor, .anchor:focus-visible { opacity: 1; }
+@media (hover: none) { .anchor { opacity: .35; } }
+
+/* ── 2. 评级徽章：由 data-rating 派生，作者不再手写 class ──
+   实测存量 .rating-hold 在 63 份是金色、30 份是蓝色 —— 这套选择器根除该分歧 */
+.rating-badge[data-rating="强力买入"] { background: rgba(122,154,122,.25); color: var(--green-ink); }
+.rating-badge[data-rating="买入"]     { background: rgba(122,154,122,.18); color: var(--green-ink); }
+.rating-badge[data-rating="有条件买入"]{ background: rgba(185,160,106,.18); color: var(--gold-ink); }
+.rating-badge[data-rating="持有观望"] { background: rgba(123,143,160,.18); color: var(--accent2-ink); }
+.rating-badge[data-rating="卖出"]     { background: rgba(184,112,112,.18); color: var(--red-ink); }
+.rating-badge[data-rating="强烈卖出"] { background: rgba(184,112,112,.28); color: var(--red-ink); }
+
+/* 涨跌不能只靠色相（色盲）—— 文字里必须自带 +/- 号，这里只负责配色 */
+.up, .pos { color: var(--green-ink); }
+.dn, .neg { color: var(--red-ink); }
+
+/* ── 3. 窄屏表格：粘性首列 + 右侧滚动阴影提示 ──
+   实测 375px 下 12 张表有 6 张横向溢出，且无任何可滚动的视觉线索 */
+.tbl-wrap {
+  background-image: linear-gradient(to right, var(--card), var(--card)),
+                    linear-gradient(to right, rgba(0,0,0,.10), rgba(0,0,0,0));
+  background-position: right center, right center;
+  background-repeat: no-repeat;
+  background-size: 24px 100%, 12px 100%;
+  background-attachment: local, scroll;
+}
+@media (max-width: 640px) {
+  /* border-collapse:collapse 下 sticky 单元格的边框会丢，用 box-shadow 补回 */
+  .tbl { border-collapse: separate; border-spacing: 0; }
+  .tbl :is(th, td) { border-bottom: 1px solid var(--border); }
+  .tbl :is(th, td):first-child {
+    position: sticky; left: 0; z-index: 1;
+    background: var(--card); box-shadow: 1px 0 0 var(--border);
+  }
+  .tbl th:first-child { background: var(--card2); }
+}
+
+/* ── 4. 移动端：顶栏必须能换行（实测四元素已折行重叠）── */
+.theme-bar { flex-wrap: wrap; row-gap: 6px; }
+@media (max-width: 420px) { .theme-bar .xueqiu-link { display: none; } }
+
+@media (max-width: 640px) {
+  .container { padding: 0 14px; }          /* 24px 在 375px 上吃掉 12.8% 视口 */
+  body { font-size: 15.5px; }              /* 14.5px 中文长文在手机上偏小 */
+  .cwrap { height: 200px; }
+  #sankey { height: 360px !important; }    /* 480px 挤在 289px 宽里不可读 */
+  .cgrid, .cgrid3, .pgrid { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 640px), (hover: none) {
+  .toggle-switch::before {
+    content: ''; position: absolute; left: 0; right: 0;
+    top: 50%; transform: translateY(-50%); height: 44px;
+  }
+}
+
+/* ── 5. prefers-reduced-motion ──
+   全语料 103/103 有 scroll-behavior:smooth 且零保护。加了目录之后，
+   一次跳转要跨 4 万像素、持续数秒，前庭敏感者会难受 */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important; animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+}
+
+/* ── 6. 焦点可见（全语料 0 个 :focus-visible 样式）── */
+:focus-visible { outline: 2px solid var(--accent3-ink); outline-offset: 2px; }
+
+/* ── 7. 图表无障碍降级容器 ── */
+figure.chart { margin: 0; }
+figure.chart figcaption { font-size: 12px; color: var(--text3-ink); line-height: 1.6; margin-top: 8px; }
+.chart-data { font-size: 12px; margin-top: 8px; }
+.chart-data summary { cursor: pointer; color: var(--text3-ink); }
+
+/* ── 8. shell 新增组件（skip link / 结论跳转带 / 顶栏右侧 / 屏幕阅读器专用）── */
+
+.skip {
+  position: absolute; left: -9999px; top: 0;
+  background: var(--card); color: var(--accent3-ink);
+  padding: 8px 14px; border-radius: 0 0 8px 0; z-index: 200;
+  font-size: 13px; text-decoration: none;
+}
+.skip:focus { left: 0; }
+
+/* 只给屏幕阅读器：essay 一节的标题不需要视觉呈现（.haitu-essay 自带头部） */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+.theme-bar-right { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+
+/* 结论跳转带：读者看完评级后一步到证据 */
+.quip-jump { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.quip-jump a {
+  font-family: var(--font-sans); font-size: 12px; line-height: 1;
+  padding: 7px 12px; border-radius: 999px;
+  border: 1px solid var(--border); background: var(--card2);
+  color: var(--accent3-ink); text-decoration: none;
+  transition: border-color .2s, background .2s;
+}
+.quip-jump a:hover { border-color: var(--accent3); background: var(--card); }
+@media (max-width: 640px), (hover: none) {
+  /* 用 min-height 而不是加 padding —— padding 要靠字体行高凑够 44px，
+     换字体或改字号就又不达标了（实测 padding:13px 只得到 40px）。 */
+  .quip-jump a { min-height: 44px; padding: 0 16px; display: inline-flex; align-items: center; }
+}
+
+.hero-pills {display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;}
+.pill {background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: var(--font-sans); font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow);}
+.pill strong {color: var(--text);}
+.stock-snap {background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px;}
+.snap-item {text-align: center;}
+.snap-label {font-family: var(--font-sans); font-size: 10px; color: var(--text3-ink); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px;}
+.kpi-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px;}
+.kpi {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow);}
+.moat-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px;}
+.moat-card {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); border-left: 4px solid var(--accent);}
+.moat-card.wide {border-left-color: var(--green);}
+.moat-card.narrow {border-left-color: var(--gold);}
+.moat-card.none {border-left-color: var(--red);}
+.moat-card h5 {font-size: 13px; color: var(--text); margin-bottom: 6px;}
+.moat-card .moat-rate {font-family: var(--font-sans); font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px;}
+.moat-card.wide .moat-rate {background: rgba(122,154,122,.18); color: var(--green);}
+.moat-card.narrow .moat-rate {background: rgba(185,160,106,.18); color: var(--gold);}
+.moat-card.none .moat-rate {background: rgba(184,112,112,.18); color: var(--red);}
+.moat-card p {font-size: 12.5px; color: var(--text2); line-height: 1.65;}
+.ec-item {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: block; box-shadow: 0 1px 3px var(--shadow); line-height: 1.75;}
+.ec-badge {display: inline-block; vertical-align: baseline; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-right: 10px; font-family: var(--font-sans); white-space: nowrap;}
+.dcf-note {background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: 13px; color: var(--text2); line-height: 1.8;}
+.dcf-note strong {color: var(--text);}
+.scorecard {background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow);}
+.score-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px;}
+.score-card {background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px;}
+.score-letter {width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-sans); font-weight: 800; font-size: 22px; flex-shrink: 0; border: 3px solid;}
+.flag-row {margin-top: 16px; padding: 12px 16px; background: rgba(184,112,112,.08); border: 1px solid rgba(184,112,112,.3); border-radius: 8px; font-size: 13px; color: var(--text2);}
+.flag-row strong {color: var(--red);}
+.pgrid {display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0;}
+.pbox {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center; box-shadow: 0 1px 4px var(--shadow);}
+.pbox .pl {font-family: var(--font-sans); font-size: 11px; color: var(--text3-ink); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px;}
+.pbox .pv {font-family: var(--font-sans); font-size: 28px; font-weight: 800; margin-bottom: 5px;}
+.pbox .pn {font-size: 12px; color: var(--text3-ink); line-height: 1.5;}
+.risk-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px;}
+.risk-card {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); position: relative; overflow: hidden;}
+.risk-card::before {content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent);}
+.risk-card.r1::before {background: var(--green);}
+.risk-card.r2::before {background: rgba(122,154,122,.6);}
+.risk-card.r3::before {background: var(--gold);}
+.risk-card.r4::before {background: var(--rose);}
+.risk-card.r5::before {background: var(--red);}
+.risk-card h5 {font-size: 14px; margin-bottom: 6px; color: var(--text);}
+.risk-card p {font-size: 13px; color: var(--text2); line-height: 1.7;}
+
+/* 骨架用到、但语料里没有现成规则的补充组件 */
+.note { font-size: 12px; color: var(--text3-ink); line-height: 1.7; margin-top: 10px; }
+.lead { font-size: 16px; font-weight: 600; line-height: 1.8; margin-bottom: 14px; }
+.haitu-disc { font-size: 12px; color: var(--text3-ink); line-height: 1.7; margin-top: 18px;
+              padding-top: 14px; border-top: 1px solid var(--border); }
+.bscore { background: var(--card2); border: 1px solid var(--border); border-radius: 10px;
+          padding: 16px 20px; margin: 16px 0; }
+.bscore h4 { font-family: var(--font-sans); font-size: 14px; color: var(--accent3-ink); margin: 0 0 6px; }
+.bscore p { margin: 0; font-size: 14px; }
+
+/* 桑基 SVG：颜色与线宽在标记里给，这里只管描边端点与文字 */
+#sankey { width: 100%; height: auto; }
+.sk-flow path { fill: none; opacity: .45; stroke-linecap: butt; }
+.sk-t .sk-lab { font-family: var(--font-sans); font-size: 12px; fill: var(--text2); }
+.sk-t .sk-num { font-family: var(--font-sans); font-size: 13px; font-weight: 700; fill: var(--text);
+                font-variant-numeric: tabular-nums; }
+.sk-t .warn   { fill: var(--red-ink); }
+
+@media (max-width: 640px) {
+  .stock-snap { grid-template-columns: 1fr 1fr; }
+  .kpi-grid   { grid-template-columns: 1fr 1fr; }
+  .moat-grid, .risk-grid, .score-grid, .pgrid { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* 修饰类：评分等级 / 电话会情绪 / 快照数值。文字色一律走 ink 层。 */
+.score-letter.s-a  { color: var(--green-ink);   border-color: var(--green);   background: rgba(122,154,122,.12); }
+.score-letter.s-bp { color: var(--gold-ink);    border-color: var(--gold);    background: rgba(185,160,106,.12); }
+.score-letter.s-b  { color: var(--accent2-ink); border-color: var(--accent2); background: rgba(123,143,160,.12); }
+.score-letter.s-c  { color: var(--red-ink);     border-color: var(--red);     background: rgba(184,112,112,.12); }
+
+.ec-badge.ec-bull { background: rgba(122,154,122,.18); color: var(--green-ink); }
+.ec-badge.ec-bear { background: rgba(184,112,112,.18); color: var(--red-ink); }
+.ec-badge.ec-neut { background: rgba(123,143,160,.18); color: var(--accent2-ink); }
+
+.snap-value { font-family: var(--font-sans); font-size: 19px; font-weight: 700; color: var(--text);
+              font-variant-numeric: tabular-nums; line-height: 1.3; }
+.snap-note  { font-family: var(--font-sans); font-size: 11px; color: var(--text3-ink); margin-top: 3px; }
+.sk-node rect { opacity: .9; }
+
+</style>
+</head>
+<body>
+
+<a class="skip" href="#kpi">跳到正文</a>
+
+<!-- ── 顶栏 ── -->
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/SKHY" target="_blank" rel="noopener">📊 雪球 SKHY</a>
+  </div>
+  <div class="theme-bar-right">
+    <span>☀️ 浅色</span>
+    <button type="button" class="toggle-switch" id="themeBtn"
+            aria-pressed="false" aria-label="切换深色模式" onclick="toggleTheme()"></button>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-tag">Q2 2026 财报发布 · 2026-07-28 ｜ 海图研判 · 2026-08-08</div>
+  <h1>SK 海力士 000660 · Q2 2026 财报深度分析</h1>
+  <div class="hero-sub">KRX: 000660 ｜ 纳斯达克 ADS: SKHY ｜ 财季截至 2026-06-30 ｜ 价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill"><span class="pill-k">股价</span><span class="pill-v">₩1,422,000</span></div>
+    <div class="pill"><span class="pill-k">市值</span><span class="pill-v">₩1,036 万亿</span></div>
+    <div class="pill"><span class="pill-k">营业利润</span><span class="pill-v">₩60.5 万亿 +557%</span></div>
+    <div class="pill"><span class="pill-k">营业利润率</span><span class="pill-v">76.3% 新高</span></div>
+    <div class="pill"><span class="pill-k">剔 Kioxia 后 P/E</span><span class="pill-v">10.5x</span></div>
+    <div class="pill"><span class="pill-k">距历史高点</span><span class="pill-v">−52.4%</span></div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="haitu-quip">
+    <div class="haitu-quote">
+      <div class="haitu-portrait">它制造 DRAM 与 NAND 两种标准品芯片，价格由全行业供需决定——三年前一年亏 ₩7.73 万亿，如今一个季度赚 ₩60.54 万亿。</div>
+      <div class="haitu-rating-line">
+        评级：<span class="rating-badge" data-rating="持有观望">持有观望</span>
+        · 12 个月目标价 ₩1,320,000 · 股价已从高点腰斩，但中周期公允价值仍在现价之下 24%
+      </div>
+      <!-- 结论跳转带：读者看到评级后第一反应是「凭什么」，给他一步到证据的路。
+           不要再加摘要卡 —— 目标价在 hero、这里、模块 7 已有三份，第四份只会增加不一致。 -->
+      <div class="quip-jump" role="group" aria-label="快速跳转">
+        <a href="#m13">评分卡与决策</a>
+        <a href="#m7">目标价怎么算出来的</a>
+        <a href="#m11">风险矩阵</a>
+        <a href="#m4">护城河</a>
+        <a href="#essay">夜读手记</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ══ 前置章节 ══ -->
+
+<section class="section" id="snapshot" aria-labelledby="snapshot-t">
+  <h2 class="stitle" id="snapshot-t">市场数据快照（2026-08-07 收盘）<a class="anchor" href="#snapshot" aria-label="本节链接">#</a></h2>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-k">股价</div><div class="snap-v">₩1,422,000</div></div>
+    <div class="snap-item"><div class="snap-k">市值</div><div class="snap-v">₩1,036 万亿</div></div>
+    <div class="snap-item"><div class="snap-k">流通股数</div><div class="snap-v">7.2887 亿股</div></div>
+    <div class="snap-item"><div class="snap-k">净现金</div><div class="snap-v">₩69.4 万亿</div></div>
+    <div class="snap-item"><div class="snap-k">表面 TTM P/E</div><div class="snap-v">6.39x</div></div>
+    <div class="snap-item"><div class="snap-k">剔除 Kioxia 后 P/E</div><div class="snap-v">10.53x</div></div>
+    <div class="snap-item"><div class="snap-k">P/B</div><div class="snap-v">4.02x</div></div>
+    <div class="snap-item"><div class="snap-k">股息率</div><div class="snap-v">0.105%</div></div>
+    <div class="snap-item"><div class="snap-k">历史最高价</div><div class="snap-v">₩2,987,000（06-25）</div></div>
+    <div class="snap-item"><div class="snap-k">距历史高点</div><div class="snap-v">−52.4%</div></div>
+    <div class="snap-item"><div class="snap-k">近一年涨幅</div><div class="snap-v">+450%</div></div>
+    <div class="snap-item"><div class="snap-k">Beta</div><div class="snap-v">2.41</div></div>
+  </div>
+  <p class="note">本报告全程以韩元（₩）为记账本位币。SK hynix 于 <strong>2026-07-10</strong> 在纳斯达克挂牌 ADS（代码 SKHY，1 份 ADS ＝ 1/10 普通股），发行价 <strong>$149/ADS</strong>、募资 <strong>$265 亿</strong>——<span class="hl-t">史上规模最大的外国公司美股上市</span>，超过 2014 年阿里巴巴的 250 亿美元。<br>⚠️ 各聚合数据源给出的 ADS 报价与韩交所价格按汇率折算后相差近五成，无法自洽，因此<strong>本报告不引用任何 ADS 报价</strong>，涨跌一律用韩元同币种口径计算。</p>
+</section>
+
+<section class="section" id="kpi" aria-labelledby="kpi-t">
+  <h2 class="stitle" id="kpi-t">Q2 2026 核心业绩（财季截至 2026-06-30）<a class="anchor" href="#kpi" aria-label="本节链接">#</a></h2>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-k">营业收入</div><div class="kpi-v">₩79.32 万亿</div><div class="kpi-d up">同比 +256.8%｜环比 +50.9%</div></div>
+    <div class="kpi"><div class="kpi-k">营业利润</div><div class="kpi-v">₩60.54 万亿</div><div class="kpi-d up">同比 +557.2%｜环比 +61.0%</div></div>
+    <div class="kpi"><div class="kpi-k">营业利润率</div><div class="kpi-v">76.3%</div><div class="kpi-d up">环比 +4pp｜历史最高</div></div>
+    <div class="kpi"><div class="kpi-k">税前利润</div><div class="kpi-v">₩122.71 万亿</div><div class="kpi-d up">同比 +1,306.8%</div></div>
+    <div class="kpi"><div class="kpi-k">净利润（归母）</div><div class="kpi-v">₩93.82 万亿</div><div class="kpi-d warn">同比 +1,240.8%｜净利率 118%</div></div>
+    <div class="kpi"><div class="kpi-k">其中：非经营收益</div><div class="kpi-v">₩62.17 万亿</div><div class="kpi-d down">Kioxia 处置与重估，非经营所得</div></div>
+    <div class="kpi"><div class="kpi-k">上半年累计营收</div><div class="kpi-v">₩131.90 万亿</div><div class="kpi-d up">首次半年破百万亿</div></div>
+    <div class="kpi"><div class="kpi-k">上半年营业利润</div><div class="kpi-v">₩98.15 万亿</div><div class="kpi-d up">已超 2025 全年 47.21 万亿</div></div>
+    <div class="kpi"><div class="kpi-k">现金及等价物</div><div class="kpi-v">₩88 万亿</div><div class="kpi-d up">环比 +₩33.6 万亿</div></div>
+    <div class="kpi"><div class="kpi-k">有息负债</div><div class="kpi-v">₩18.6 万亿</div><div class="kpi-d up">环比 −₩0.7 万亿</div></div>
+    <div class="kpi"><div class="kpi-k">季度股息</div><div class="kpi-v">₩375 / 股</div><div class="kpi-d down">总额 ₩2,733 亿｜年化股息率 0.105%</div></div>
+    <div class="kpi"><div class="kpi-k">HBM 全球份额</div><div class="kpi-v">约 58%</div><div class="kpi-d up">三星、美光各约 21%</div></div>
+  </div>
+  <p class="note">数据来源：SK hynix 2026-07-28 业绩公告与同日提交 SEC 的 Form 6-K（初步合并数，未经审计）；股息数据取自 2026-08-07 董事会决议 6-K；HBM 份额取自 Counterpoint Research（Q1 2026）。</p>
+</section>
+
+<section class="section" id="focus" aria-labelledby="focus-t">
+  <h2 class="stitle" id="focus-t">本季必看 · 两个「看穿」<a class="anchor" href="#focus" aria-label="本节链接">#</a></h2>
+
+  <div class="pbox">
+    <h4>看穿一 · 净利润比营业收入还高，而多出来的那部分不是它赚的</h4>
+    <div class="cmt">
+      <p>先看一个不该出现的算术：本季营收 <strong>₩79.32 万亿</strong>，净利润 <strong>₩93.92 万亿</strong>。<span class="hl-t">净利率 118%——利润比收入还多 ₩14.6 万亿。</span></p>
+      <p>这在正常经营里不可能发生。答案在公司自己披露的另外两个数字之间：<strong>税前利润 ₩122.71 万亿，营业利润 ₩60.54 万亿</strong>。两者相减——</p>
+      <div class="tbl-wrap">
+        <table class="tbl" data-shape="grid" data-source="SK hynix 2026-07-28 Form 6-K 初步经营成果表（营业利润与税前利润为公司披露原值，非经营收益为两者之差）">
+          <thead><tr><th>项目（₩ 万亿）</th><th>Q2 2026</th><th>Q1 2026</th><th>Q2 2025</th></tr></thead>
+          <tbody>
+            <tr><td>营业利润（公司披露）</td><td>60.54</td><td>37.61</td><td>9.21</td></tr>
+            <tr><td>税前利润（公司披露）</td><td>122.71</td><td>51.62</td><td>8.72</td></tr>
+            <tr><td><strong>非经营净收益（相减得出）</strong></td><td><strong>＋62.17</strong></td><td>＋14.01</td><td>−0.49</td></tr>
+            <tr><td>非经营收益占税前利润</td><td><strong>50.7%</strong></td><td>27.1%</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>本季税前利润里，超过一半不是主营业务赚的。</strong>这笔 ₩62.17 万亿来自它 2018 年随贝恩财团投资的日本 NAND 厂商 Kioxia——股权处置与重估收益，走的是金融收益科目，<span class="hl-t">不产生一分钱经营现金，也和存储芯片卖得好不好没有关系</span>。</p>
+      <p>后果非常具体：<strong>你在任何行情软件上看到的 TTM 市盈率 6.39 倍，是被这笔一次性收益压出来的。</strong>把它剔掉，用营业利润按 23.5% 实际税率还原，正常化 TTM 净利约 ₩98.5 万亿，对应市盈率 <strong>10.53 倍——比表面数字高 65%</strong>。</p>
+      <p>我不认为公司有任何隐瞒：金额、口径都在公告与 6-K 里写得清清楚楚。<strong>但「净利润」这三个字本季确实不能直接用</strong>，而绝大多数看到「六倍市盈率」就心动的人，不会去翻税前利润那一行。</p>
+    </div>
+  </div>
+
+  <div class="pbox">
+    <h4>看穿二 · 周期股在利润顶点看起来最便宜——而董事会正在顶点扩产</h4>
+    <div class="cmt">
+      <p>把这家公司四年的营业利润率排成一列，比任何论证都有力：</p>
+      <div class="tbl-wrap">
+        <table class="tbl" data-shape="grid" data-source="SK hynix Form F-1/A（2026-07-06）审计合并利润表；营业利润＝毛利−销管费−研发费">
+          <thead><tr><th>期间</th><th>营业收入</th><th>营业利润</th><th>营业利润率</th></tr></thead>
+          <tbody>
+            <tr><td>FY2023</td><td>₩32.77 万亿</td><td><strong>−₩7.73 万亿</strong></td><td><strong>−23.6%</strong></td></tr>
+            <tr><td>FY2024</td><td>₩66.19 万亿</td><td>₩23.47 万亿</td><td>35.5%</td></tr>
+            <tr><td>FY2025</td><td>₩97.15 万亿</td><td>₩47.21 万亿</td><td>48.6%</td></tr>
+            <tr><td>H1 2026</td><td>₩131.90 万亿</td><td>₩98.15 万亿</td><td>74.4%</td></tr>
+            <tr><td><strong>Q2 2026 单季</strong></td><td>₩79.32 万亿</td><td>₩60.54 万亿</td><td><strong>76.3%</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>三年前这家公司一年亏 ₩7.73 万亿，今天它一个季度赚 ₩60.54 万亿。</strong>同一批厂房、同一批工程师、同一条产线。变的只有一件事：内存的价格。</p>
+      <p>这就是存储行业的本质，也是它最危险的地方——<span class="hl-t">周期股的市盈率在盈利顶点最低，在亏损时无穷大。低市盈率不是便宜的信号，是周期见顶的信号。</span></p>
+      <p>更值得记下来的是 <strong>2026 年 8 月 7 日</strong>发生的事。就在股价从六周前的高点腰斩、整个存储板块跌入熊市的当天，SK hynix 董事会同日批准了两笔新建产能投资：</p>
+      <div class="tbl-wrap">
+        <table class="tbl" data-shape="grid" data-source="SK hynix 2026-08-07 提交 SEC 的两份 Form 6-K（New Facility Investment）">
+          <thead><tr><th>项目</th><th>投资额</th><th>占 2025 年末净资产</th><th>建设期</th></tr></thead>
+          <tbody>
+            <tr><td>龙仁半导体集群 Fab 2（Y2，1–6 期）</td><td>₩35.22 万亿</td><td>29.19%</td><td>2026-08 → 2031-10</td></tr>
+            <tr><td>清州 M17 新厂</td><td>₩19.10 万亿</td><td>15.83%</td><td>2026-08 → 2031-04</td></tr>
+            <tr><td><strong>合计</strong></td><td><strong>₩54.32 万亿</strong></td><td><strong>45.02%</strong></td><td>横跨五年</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>这两笔加起来，相当于公司 2025 年末全部净资产（₩120.67 万亿）的 <strong>45%</strong>。再加上 2026 年「四十万亿韩元高位」的资本开支指引——<strong>整个行业正在利润率 76% 的时候，把钱投向 2031 年才建成的产能。</strong></p>
+      <p>历史上，存储行业每一次深度衰退的种子，都是在上一轮的利润顶点种下的。<span class="hl-t">我不是说这些厂不该建——AI 需求若持续，不建才是错。我是说：当你在为这家公司的 76% 利润率付钱时，付的是一个正在被它自己的资本开支拆掉的数字。</span></p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="trend" aria-labelledby="trend-t">
+  <h2 class="stitle" id="trend-t">关键指标趋势<a class="anchor" href="#trend" aria-label="本节链接">#</a></h2>
+  <div class="cgrid">
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">近 5 季营收（₩ 万亿）与营业利润率</div>
+        <div class="cwrap"><canvas id="rev" data-chart="rev" role="img" aria-label="近五季营收从 22.2 万亿升至 79.3 万亿韩元，营业利润率从 41.4% 升至 76.3%"></canvas></div>
+        <figcaption>柱＝营业收入；折线＝营业利润率（%）。来源：各季 SEC Form 6-K 与业绩公告。</figcaption>
+      </figure>
+    </div>
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">跨周期营业利润率：这才是这门生意的真实面貌</div>
+        <div class="cwrap"><canvas id="margin" data-chart="margin" role="img" aria-label="营业利润率从 2023 年的负 23.6% 到 2024 年 35.5%、2025 年 48.6%、2026 上半年 74.4%"></canvas></div>
+        <figcaption>年度口径。FY2023 为亏损年。来源：Form F-1/A 审计合并利润表。</figcaption>
+      </figure>
+    </div>
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">产品结构（占总销售额，2026 Q1）</div>
+        <div class="cwrap"><canvas id="segment" data-chart="segment" role="img" aria-label="DRAM 占总销售额 77.3%，NAND 闪存 22.0%，其他 0.7%"></canvas></div>
+        <figcaption>公司在 F-1 风险因素中自行披露的口径。来源：Form F-1/A。</figcaption>
+      </figure>
+    </div>
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">营业利润 vs 净利润（₩ 万亿）：看 Q2 那道裂口</div>
+        <div class="cwrap"><canvas id="eps" data-chart="eps" role="img" aria-label="Q2 2026 净利润 93.8 万亿远超营业利润 60.5 万亿，差额来自非经营收益"></canvas></div>
+        <figcaption>净利润为归属母公司口径。Q3/Q4 2025 未单独披露季度净利，故留空。来源：各季 Form 6-K。</figcaption>
+      </figure>
+    </div>
+  </div>
+  <p class="note"><strong>第四张图是本报告最该被记住的一张。</strong>前四个季度里，净利润始终低于营业利润（正常——中间要交税）。<span class="hl-t">只有 Q2 2026 反过来了，而且高出一大截。凡是这种反常，原因一定在经营之外。</span></p>
+</section>
+
+<section class="section" id="flow" aria-labelledby="flow-t">
+  <h2 class="stitle" id="flow-t">资金流向桑基图（Q2 2026 · ₩ 万亿）<a class="anchor" href="#flow" aria-label="本节链接">#</a></h2>
+  <div class="ccard">
+    <figure class="chart">
+      <svg id="sankey" viewBox="0 0 1180 470" role="img" aria-label="Q2 2026 资金流向：营收 79.32 万亿韩元中成本费用仅 18.78 万亿，营业利润 60.54 万亿；随后并入一笔 62.17 万亿的非经营收益，税前利润达 122.71 万亿，扣所得税 28.79 万亿后净利 93.92 万亿">
+        <g class="sk-flow">
+          <path d="M106,66.5 C210,66.5 210,58.5 310,58.5" stroke="var(--rose)" stroke-width="53"/>
+          <path d="M106,178.5 C210,178.5 210,215.5 310,215.5" stroke="var(--accent)" stroke-width="171"/>
+          <path d="M324,215.5 C420,215.5 420,196.5 510,196.5" stroke="var(--accent)" stroke-width="171"/>
+          <path d="M394,374 C450,374 450,370 510,370" stroke="var(--gold)" stroke-width="176"/>
+          <path d="M524,151.5 C620,151.5 620,127.5 710,127.5" stroke="var(--red)" stroke-width="81"/>
+          <path d="M524,325 C620,325 620,306 710,306" stroke="var(--green)" stroke-width="266"/>
+          <path d="M724,306 C820,306 820,306.5 910,306.5" stroke="var(--green)" stroke-width="265"/>
+        </g>
+        <g class="sk-node">
+          <rect x="92" y="40" width="14" height="224" rx="3" fill="var(--accent2)"/>
+          <rect x="310" y="32" width="14" height="53" rx="3" fill="var(--rose)"/>
+          <rect x="310" y="130" width="14" height="171" rx="3" fill="var(--accent)"/>
+          <rect x="380" y="286" width="14" height="176" rx="3" fill="var(--gold)"/>
+          <rect x="510" y="111" width="14" height="347" rx="3" fill="var(--accent3)"/>
+          <rect x="710" y="87" width="14" height="81" rx="3" fill="var(--red)"/>
+          <rect x="710" y="173" width="14" height="266" rx="3" fill="var(--green)"/>
+          <rect x="910" y="174" width="14" height="265" rx="3" fill="var(--green)"/>
+        </g>
+        <g class="sk-t">
+          <text x="2" y="140" class="sk-lab">营业收入</text>
+          <text x="2" y="158" class="sk-num">79.32</text>
+          <text x="2" y="176" class="sk-lab">DRAM 约 77%</text>
+          <text x="2" y="192" class="sk-lab">NAND 约 22%</text>
+          <text x="332" y="46" class="sk-lab">成本与费用</text>
+          <text x="332" y="64" class="sk-num">18.78</text>
+          <text x="332" y="82" class="sk-lab">仅占营收 23.7%</text>
+          <text x="332" y="196" class="sk-lab">营业利润</text>
+          <text x="332" y="214" class="sk-num">60.54</text>
+          <text x="332" y="232" class="sk-lab">利润率 76.3%</text>
+          <text x="130" y="368" class="sk-lab warn">＋非经营收益（Kioxia 处置与重估）</text>
+          <text x="130" y="386" class="sk-num warn">＋62.17</text>
+          <text x="532" y="188" class="sk-lab">税前利润</text>
+          <text x="532" y="206" class="sk-num">122.71</text>
+          <text x="532" y="224" class="sk-lab warn">其中 50.7% 非经营所得</text>
+          <text x="732" y="120" class="sk-lab">所得税</text>
+          <text x="732" y="138" class="sk-num">28.79</text>
+          <text x="732" y="156" class="sk-lab">实际税率 23.5%</text>
+          <text x="732" y="292" class="sk-lab">净利润</text>
+          <text x="732" y="310" class="sk-num">93.92</text>
+          <text x="732" y="328" class="sk-lab warn">＝营收的 118%</text>
+          <text x="932" y="300" class="sk-lab">归属母公司</text>
+          <text x="932" y="318" class="sk-num">93.82</text>
+        </g>
+      </svg>
+      <figcaption>单位：万亿韩元。来源：SK hynix 2026-07-28 Form 6-K 初步经营成果（营收／营业利润／税前利润／净利润为披露原值，成本费用、非经营收益、所得税为各级差额）。每级流入＝流出（79.32 ＝ 18.78＋60.54；60.54＋62.17 ＝ 122.71；122.71 ＝ 28.79＋93.92）。<strong>请特别看下方那条从底部汇入的金色流带：它比整条主干的营业利润还宽——本季利润的最大单一来源，不在这家公司的工厂里。</strong></figcaption>
+    </figure>
+    <details class="chart-data">
+      <summary>查看数据表</summary>
+      <div class="tbl-wrap">
+        <table class="tbl" data-shape="grid" data-source="SK hynix 2026-07-28 Form 6-K 初步经营成果表">
+          <thead><tr><th>流量</th><th>金额（₩ 万亿）</th><th>占营收</th></tr></thead>
+          <tbody>
+            <tr><td>营业收入</td><td>79.32</td><td>100.0%</td></tr>
+            <tr><td>成本与费用（差额推得）</td><td>18.78</td><td>23.7%</td></tr>
+            <tr><td>营业利润</td><td>60.54</td><td>76.3%</td></tr>
+            <tr><td>非经营净收益（差额推得）</td><td>62.17</td><td>78.4%</td></tr>
+            <tr><td>税前利润</td><td>122.71</td><td>154.7%</td></tr>
+            <tr><td>所得税（差额推得）</td><td>28.79</td><td>36.3%</td></tr>
+            <tr><td>净利润</td><td>93.92</td><td>118.4%</td></tr>
+            <tr><td>其中归属母公司</td><td>93.82</td><td>118.3%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ══ 13 个分析模块 ══ -->
+
+<section class="section" id="m1" aria-labelledby="m1-t">
+  <h2 class="stitle" id="m1-t">模块 1 · 公司概览与背景<a class="anchor" href="#m1" aria-label="本节链接">#</a></h2>
+  <div class="cmt">
+    <p><strong>SK hynix Inc.</strong>（韩交所 KOSPI：000660；纳斯达克 ADS：SKHY），总部位于韩国京畿道利川市。前身为现代电子，2012 年被 SK 集团收购。财年即日历年。当前市值 <strong>₩1,036 万亿</strong>（约 7,160 亿美元），是全球市值第 19 位左右的公司。</p>
+    <p><strong>生意一句话</strong>：它制造两种芯片——<span class="hl-t">DRAM（内存，占销售额 77.3%）和 NAND 闪存（占 22.0%）</span>。这是一门标准品生意：产品高度同质、买家只比价格和交期，因此利润完全由供需决定，而不由品牌或客户关系决定。这也是为什么它三年前一年亏 ₩7.73 万亿，今天一个季度赚 ₩60.54 万亿。</p>
+    <p><strong>但有一块不再是标准品，那就是 HBM。</strong>高带宽内存把多层 DRAM 垂直堆叠、与 GPU 封装在一起，是 AI 加速器的必需组件，且需要与客户共同设计验证。SK hynix 在这块占据全球约 <strong>58%</strong> 的份额（三星、美光各约 21%）——<strong>这是它整个投资故事的核心，也是它与「普通存储厂」的唯一区别。</strong>本季 HBM4 已开始量产出货，良率接近成熟的 HBM3E 水平，HBM4E 样品已送出。</p>
+    <p><strong>股权结构（2026-03-31）</strong>：SK Square 持股 <strong>20.50%</strong>，SK Inc. 持 SK Square 32.14%，最终实控人为崔泰源家族。<span class="hl-t">韩国《垄断规制与公平交易法》要求 SK Square 作为控股公司须维持对 SK hynix 至少 20% 的持股</span>——这条法规直接决定了下面这件事的规模上限。</p>
+    <p><strong>2026 年 7 月 10 日，SK hynix 在纳斯达克挂牌 ADS</strong>，发行 1,779 万股普通股（对应 1.779 亿份 ADS），每份 ADS 定价 $149，净募资约 <strong>265 亿美元</strong>。这是<strong>史上规模最大的外国公司美股上市</strong>，超过阿里巴巴 2014 年的 250 亿美元。发行是<span class="hl-t">全部增发新股，无老股转让</span>，稀释约 2.44%——而发行规模的上限，正是被「SK Square 须保持 ≥20%」这条线卡住的。募资用途为「一般公司用途，含资本开支」。</p>
+    <p><strong>时间线值得并排看</strong>：6 月 25 日股价见顶 ₩2,987,000 → 7 月 3 日（F-1 定价参考日）₩2,425,000 → 7 月 10 日纳斯达克挂牌 → 7 月 28 日发布史上最强季报 → 8 月 7 日 ₩1,422,000。<strong>从 F-1 参考价算起，四周多跌了 41.4%。</strong></p>
+  </div>
+</section>
+
+<section class="section" id="m2" aria-labelledby="m2-t">
+  <h2 class="stitle" id="m2-t">模块 2 · 管理层评估<a class="anchor" href="#m2" aria-label="本节链接">#</a></h2>
+  <div class="cmt">
+    <p><strong>先给这支团队记一笔大功。</strong>2022–2023 年存储行业深度衰退时，SK hynix 一年亏掉 ₩7.73 万亿，资产负债率（负债/权益）高达 87.5%，净负债率 38.4%，那一年经营现金流只有 ₩4.28 万亿而资本开支 ₩8.33 万亿——<span class="hl-t">自由现金流为 −₩4.05 万亿</span>。就是在这样的处境里，它没有砍掉 HBM 的研发投入，反而抢先在 HBM3 上锁定了英伟达。今天 58% 的 HBM 份额，是那两年里熬出来的。<strong>在最难的时候没有削减正确的开支，这是资本配置能力最硬的一次证明。</strong></p>
+    <p><strong>财务纪律的改善同样是实打实的</strong>：负债权益比从 2023 年末的 87.52% 降到 2026 年 3 月末的 <strong>35.56%</strong>；净负债率从 38.40% 转为负值（净现金）；有息负债从 ₩29.47 万亿降到 ₩19.32 万亿，到 6 月末进一步降到 ₩18.6 万亿。<strong>赚到钱先还债、再囤现金，这个顺序是对的。</strong></p>
+    <p><strong>但本季有两处让我把这一项的评分往下压。</strong></p>
+    <p><strong>第一，扩产的时点。</strong>8 月 7 日董事会同日批准 Y2 与 M17 两笔合计 ₩54.32 万亿的新建投资，相当于 2025 年末净资产的 45%。<span class="hl-t">在营业利润率 76.3% 的当口决定五年期扩产，是这个行业最经典的高点决策</span>。管理层的辩护也成立——AI 需求可见、客户催货、不建就丢份额；但这恰恰是每一轮周期顶部所有厂商共同的辩护词，而结果从来一样：产能同时到达，价格同时崩塌。</p>
+    <p><strong>第二，融资的时点很好，好到值得单独说。</strong>在 6 月 25 日创出历史高点后不到三周完成史上最大规模的外国公司美股上市，募到 265 亿美元真金白银——<strong>从卖方角度，这是教科书级的择时</strong>。但反过来读同一件事：<span class="hl-t">最了解这门生意的人，选择在这个价位大规模发行新股，而不是回购。</span>这个信号，认真的投资者不该忽略。</p>
+    <p><strong>信息披露质量：高。</strong>公司同时在韩交所与 SEC 双重披露，6-K 提交及时到近乎同步（8 月 7 日一天四份），连「独立董事出席 6 人、缺席 0 人」都写进公告；对市场传闻（8 月 5 日《韩国经济日报》称子公司 Solidigm 拟进行约 ₩5 万亿 Pre-IPO 融资）在次日即发澄清公告，明确「尚未确定，一个月内再披露」。<strong>这种披露密度在亚洲上市公司里属于第一梯队。</strong></p>
+    <p><strong>结论</strong>：穿越周期的能力 A，财务纪律 A−，本季资本配置时点 <strong>B−</strong>。</p>
+  </div>
+</section>
+
+<section class="section" id="m3" aria-labelledby="m3-t">
+  <h2 class="stitle" id="m3-t">模块 3 · 商业模式深度解析<a class="anchor" href="#m3" aria-label="本节链接">#</a></h2>
+  <div class="cmt">
+    <p><strong>一句话测试：它把硅片做成内存颗粒卖给服务器和手机厂商，价格由全行业的供需缺口决定。</strong>能一句话说清，但这句话里藏着全部风险——<span class="hl-t">「价格由行业供需决定」意味着这家公司对自己最重要的变量没有定价权</span>。</p>
+    <p><strong>这门生意的经济学可以用一组数字讲完</strong>：本季营收环比 +50.9%，而营业利润环比 +61.0%。成本几乎是固定的——折旧、厂房、人员在一个季度里不会变——所以<strong>涨价几乎百分之百落到利润里</strong>。本季成本与费用合计仅 ₩18.78 万亿，只占营收的 23.7%。反过来，跌价也几乎百分之百从利润里出，这就是 2023 年一年亏掉 ₩7.73 万亿的原因。</p>
+    <div class="tbl-wrap">
+      <table class="tbl" data-shape="grid" data-source="SK hynix Form F-1/A 审计利润表与各季 Form 6-K">
+        <thead><tr><th>杠杆</th><th>FY2023（谷底）</th><th>FY2025</th><th>Q2 2026（顶点）</th></tr></thead>
+        <tbody>
+          <tr><td>营业收入</td><td>₩32.77 万亿</td><td>₩97.15 万亿</td><td>₩79.32 万亿（单季）</td></tr>
+          <tr><td>销售成本占营收</td><td><strong>101.6%</strong></td><td>39.6%</td><td>—</td></tr>
+          <tr><td>毛利率</td><td><strong>−1.6%</strong></td><td>60.4%</td><td>—</td></tr>
+          <tr><td>营业利润率</td><td><strong>−23.6%</strong></td><td>48.6%</td><td><strong>76.3%</strong></td></tr>
+          <tr><td>自由现金流</td><td><strong>−₩4.05 万亿</strong></td><td>＋₩25.85 万亿</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>2023 年的销售成本超过营业收入本身</strong>——每卖一颗芯片都在亏钱，而且还不算研发和管理费用。<span class="hl-t">这一行是理解这家公司的钥匙：它的下限比绝大多数人想象的低得多。</span></p>
+    <p><strong>HBM 在多大程度上改变了这个模型？</strong>这是全篇最需要判断力的一问。有利的证据是真实的：HBM 需与客户共同设计验证、认证周期以年计、良率是核心壁垒；公司本季称已与<strong>约 10 家客户签订多年期长期供货协议（LTA）</strong>，管理层称需求「超过供给能力」。这些都让 HBM 更像一门有黏性的定制件生意，而不是纯标准品。</p>
+    <p><strong>但要小心把它推得太远。</strong>公司<strong>没有披露 HBM 占营收的比重</strong>，也没有披露 LTA 的量、价、期限与约束力。<span class="hl-t">在数字披露之前，「HBM 会熨平周期」只是一个合理的假设，不是一个可验证的事实。</span>而 DRAM 整体仍占销售额 77.3%，其中绝大部分是普通服务器与消费内存——那部分完完全全是标准品。</p>
+  </div>
+</section>
+
+<section class="section" id="m4" aria-labelledby="m4-t">
+  <h2 class="stitle" id="m4-t">模块 4 · 经济护城河分析（5 维）<a class="anchor" href="#m4" aria-label="本节链接">#</a></h2>
+  <div class="moat-grid">
+    <div class="moat-card narrow">
+      <h5>① 网络效应 · 无</h5>
+      <p>内存不因用户增多而更有价值。这一维在本行业不成立，不必勉强找证据。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>② 有效规模 · 宽（唯一真正宽的一条）</h5>
+      <p>全球 DRAM 有意义的产能只掌握在<strong>三家</strong>手里：三星、SK hynix、美光。一座先进存储厂的投资额，看 8 月 7 日那两笔公告就知道——<strong>₩54.32 万亿</strong>，且建设期五年。<span class="hl-t">这个门槛把新进入者挡在门外的效果，比任何专利都强。</span>但要注意：中国的长鑫存储（CXMT）已被公司在 F-1 中明确列为 DRAM 主要竞争对手——<strong>门槛挡得住资本，挡不住国家意志。</strong></p>
+    </div>
+    <div class="moat-card wide">
+      <h5>③ 成本优势 · 宽</h5>
+      <p>制程代际与良率带来的单位成本差异，在标准品行业里就是生死线。FY2025 毛利率 60.4%，本季营业利润率 76.3%，而同期全球营业利润率高于它的只有美光一家。NAND 端 321 层产品已是出货主力，年底前将占国内产能约五成。<strong>这条护城河是真实的，但它的宽度随周期起伏——2023 年毛利率是 −1.6%。</strong></p>
+    </div>
+    <div class="moat-card wide">
+      <h5>④ 转换成本 · 窄，但在 HBM 上正在变宽</h5>
+      <p>普通 DRAM 几乎零转换成本，采购员只看价格与交期。<strong>HBM 不同</strong>：需与客户共同设计、通过长周期认证、并深度嵌入对方的加速器封装方案。公司本季与<strong>约 10 家客户</strong>签订多年期 LTA，是这条护城河具体化的第一个证据。<span class="hl-t">但 LTA 的量价条款、约束力、违约条款全部未披露，因此这条护城河目前只能给「窄，趋势向宽」。</span></p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>⑤ 无形资产 · 窄</h5>
+      <p>专利与工艺 know-how 有价值，但存储是无品牌溢价的行业——终端用户不知道也不关心自己电脑里是谁的内存。牌照壁垒亦不存在。<strong>唯一的例外是「英伟达认证供应商」这一身份，而它随时可能被第二、第三供应商稀释。</strong></p>
+    </div>
+  </div>
+  <p class="note"><strong>综合判断：护城河「中等偏宽，且高度依赖 HBM 这一条的走向」。</strong>五维里真正宽的是有效规模与成本优势，而这两条都是<span class="hl-t">周期性的护城河——在下行期会同时变窄</span>：产能过剩时三家一起亏，成本优势换不来利润。真正可能带来结构性改变的是 HBM 的转换成本，但它的证据目前停留在「公司说有 10 家 LTA」这一层，尚未落到可验证的数字上。<strong>十年后这条护城河是更宽还是更窄，取决于 HBM 能否从「紧缺时的定制件」变成「常态下的绑定件」——这个问题今天还没有答案。</strong></p>
+</section>
+
+<section class="section" id="m5" aria-labelledby="m5-t">
+  <h2 class="stitle" id="m5-t">模块 5 · 财务深度分析<a class="anchor" href="#m5" aria-label="本节链接">#</a></h2>
+
+  <h3 class="sub">5.1 近 5 季趋势</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="SK hynix 各季 SEC Form 6-K 与业绩公告（Q2 2025 – Q2 2026）">
+      <thead><tr><th>指标（₩ 万亿）</th><th>Q2 25</th><th>Q3 25</th><th>Q4 25</th><th>Q1 26</th><th>Q2 26</th></tr></thead>
+      <tbody>
+        <tr><td>营业收入</td><td>22.23</td><td>24.45</td><td>32.80</td><td>52.58</td><td><strong>79.32</strong></td></tr>
+        <tr><td>营收环比</td><td>—</td><td>+10.0%</td><td>+34.2%</td><td>+60.3%</td><td>+50.9%</td></tr>
+        <tr><td>营业利润</td><td>9.21</td><td>11.38</td><td>19.20</td><td>37.61</td><td><strong>60.54</strong></td></tr>
+        <tr><td>营业利润率</td><td>41.4%</td><td>46.6%</td><td>58.5%</td><td>71.5%</td><td><strong>76.3%</strong></td></tr>
+        <tr><td>税前利润</td><td>8.72</td><td>—</td><td>—</td><td>51.62</td><td><strong>122.71</strong></td></tr>
+        <tr><td>净利润（归母）</td><td>7.00</td><td>—</td><td>—</td><td>40.33</td><td><strong>93.82</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">Q3／Q4 2025 的季度税前与净利润未在初步公告中单列，故留空；2025 全年净利润为 ₩42.95 万亿（审计值）。<strong>五个季度里营业利润率从 41.4% 一路爬到 76.3%，没有一个季度回落</strong>——这种单向陡升本身就是周期特征，不是经营改善能解释的。</p>
+
+  <h3 class="sub">5.2 利润质量：本季的净利润不能直接用</h3>
+  <p>把税前利润拆开，本季的图景一目了然：<strong>营业利润 ₩60.54 万亿，非经营净收益 ₩62.17 万亿</strong>——后者比前者还大。这笔钱来自 Kioxia 股权的处置与重估，走金融收益科目，<span class="hl-t">不产生经营现金流，也不会重复发生</span>。</p>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="cards" data-source="SK hynix Form 6-K 与 Form F-1/A；正常化净利＝营业利润×(1−23.5% 实际税率)">
+      <thead><tr><th>口径</th><th>金额</th><th>对应市盈率</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td>TTM 归母净利（表面）</td><td>₩162.12 万亿</td><td><strong>6.39x</strong></td><td>含 H1 2026 的 ₩76.17 万亿非经营收益</td></tr>
+        <tr><td>TTM 营业利润</td><td>₩128.71 万亿</td><td>—</td><td>纯经营口径</td></tr>
+        <tr><td><strong>正常化 TTM 净利</strong></td><td><strong>₩98.46 万亿</strong></td><td><strong>10.53x</strong></td><td>营业利润按 23.5% 实际税率还原，<strong>这才是可比口径</strong></td></tr>
+        <tr><td>市场对 FY2026 全年预期</td><td>营收 ₩345.6 万亿<br>营业利润 ₩266.4 万亿</td><td>约 5.1x</td><td>卖方共识，隐含 H2 比 H1 再增七成</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>同一天、同一家公司，市盈率可以是 5.1 倍、6.39 倍或 10.53 倍</strong>，取决于你用哪个口径。而所有这些数字都建立在一个更根本的问题之上：<span class="hl-t">76.3% 的营业利润率能持续多久。</span>这个问题在模块 7 回答。</p>
+
+  <h3 class="sub">5.3 资产负债健康度：这是全篇最漂亮的一节</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="SK hynix Form F-1/A 合并资产负债表（2023–2026Q1）与 2026-07-28 业绩公告（2026Q2）">
+      <thead><tr><th>项目（₩ 万亿）</th><th>2023-12-31</th><th>2024-12-31</th><th>2025-12-31</th><th>2026-03-31</th><th>2026-06-30</th></tr></thead>
+      <tbody>
+        <tr><td>现金＋短期金融工具＋短期投资</td><td>8.92</td><td>14.16</td><td>34.94</td><td>54.33</td><td><strong>88.0</strong></td></tr>
+        <tr><td>有息负债合计</td><td>29.47</td><td>22.68</td><td>22.25</td><td>19.32</td><td><strong>18.6</strong></td></tr>
+        <tr><td><strong>净现金</strong></td><td><strong>−20.55</strong></td><td><strong>−8.52</strong></td><td>＋12.69</td><td>＋35.01</td><td><strong>＋69.4</strong></td></tr>
+        <tr><td>股东权益</td><td>53.50</td><td>73.92</td><td>120.67</td><td>164.38</td><td>约 258</td></tr>
+        <tr><td>负债权益比</td><td>87.52%</td><td>62.15%</td><td>45.95%</td><td><strong>35.56%</strong></td><td>—</td></tr>
+        <tr><td>存货净额</td><td>13.48</td><td>13.31</td><td>14.29</td><td>15.97</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>三年之内，从净负债 ₩20.55 万亿变成净现金 ₩69.4 万亿，摆动 ₩90 万亿。</strong>负债权益比从 87.52% 砍到 35.56%。<span class="hl-t">这张表说明这家公司已经不可能被一次周期下行打死——这是它与 2023 年最本质的区别，也是我不会给它「卖出」的首要原因。</span></p>
+  <p><strong>但请看存货那一行，它讲了一个完全不同的故事。</strong>2023 年末存货 ₩13.48 万亿，当年营收 ₩32.77 万亿——存货相当于<strong>五个月</strong>的收入，那是典型的堆货衰退。到 2026 年 3 月末，存货仅 ₩15.97 万亿（三年只增 18%），而单季营收已达 ₩52.58 万亿——<strong>存货只够一个月。</strong><span class="hl-t">这是当下极度紧缺最硬的一个证据：客户在排队，货架是空的。</span>它同时也是一个警告——库存低到这个程度，任何需求端的一点回落都会立刻转化为价格下跌，因为没有缓冲。</p>
+
+  <h3 class="sub">5.4 现金流与所有者盈余</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="SK hynix Form F-1/A 合并现金流量表">
+      <thead><tr><th>项目（₩ 万亿）</th><th>FY2023</th><th>FY2024</th><th>FY2025</th><th>Q1 2026</th></tr></thead>
+      <tbody>
+        <tr><td>经营活动现金流</td><td>4.28</td><td>29.80</td><td>53.37</td><td>26.33</td></tr>
+        <tr><td>资本开支</td><td>8.33</td><td>15.95</td><td>27.52</td><td>7.66</td></tr>
+        <tr><td><strong>自由现金流</strong></td><td><strong>−4.05</strong></td><td>＋13.85</td><td>＋25.85</td><td>＋18.67</td></tr>
+        <tr><td>折旧与摊销</td><td>13.62</td><td>12.55</td><td>13.89</td><td>3.73</td></tr>
+        <tr><td>调整后 EBITDA</td><td>5.89</td><td>36.01</td><td>61.10</td><td>41.34</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>FY2023 的自由现金流是 −₩4.05 万亿</strong>——在最糟的年份，这家公司烧钱。而 Q1 2026 一个季度的自由现金流（₩18.67 万亿）就超过了 FY2024 全年。<span class="hl-t">同样的资产，同样的团队，四年之间自由现金流从 −4 万亿到一个季度 +18.7 万亿。这就是周期。</span></p>
+  <p><strong>所有者盈余估算</strong>：折旧摊销常年在 ₩12–14 万亿区间，2026 年因新产能投产将升至 ₩18–20 万亿。存储业的维护性资本开支<strong>不低于折旧</strong>——制程每代际推进都必须换设备，不投就掉队。因此对这家公司，<span class="hl-t">所有者盈余 ≈ 税后经营利润</span>，折旧的加回几乎被维护性资本开支完全抵消。这是它与轻资产平台生意的根本差别：<strong>它的账面利润里没有「隐藏的现金」，只有必须再投回去的钱。</strong></p>
+  <p>另需注意：2026 年资本开支指引为「<strong>四十万亿韩元高位</strong>」，是 FY2025（₩27.52 万亿）的约 1.6 倍；而 8 月 7 日新批的 ₩54.32 万亿将在 2031 年前持续支出。<strong>自由现金流的峰值大概率就在今明两年。</strong></p>
+</section>
+
+<section class="section" id="m6" aria-labelledby="m6-t">
+  <h2 class="stitle" id="m6-t">模块 6 · 电话会分析<a class="anchor" href="#m6" aria-label="本节链接">#</a></h2>
+  <div class="ec-list">
+    <div class="ec-item"><span class="ec-badge ec-bull">利好</span><strong>与约 10 家客户完成多年期长期供货协议（LTA），并称仍在与主要客户洽谈。</strong>这是本季最有价值的一条——如果 LTA 真能锁定量与价，存储行业最致命的「价格瞬间崩塌」机制就被削弱了。<span class="hl-t">但公司没有披露任何一份 LTA 的量、价、期限或违约条款，所以这条目前只能算「方向性利好」，不能计入估值。</span></div>
+    <div class="ec-item"><span class="ec-badge ec-bull">利好</span><strong>HBM4 已量产出货，良率接近成熟的 HBM3E 水平，HBM4E 完成样品交付。</strong>新一代产品在第一个量产季就把良率做到接近上一代成熟水平，这是工程能力的直接体现，也直接决定下半年的毛利。</div>
+    <div class="ec-item"><span class="ec-badge ec-bull">利好</span><strong>管理层称需求「超过供给能力」，DRAM 与 NAND 价格环比均显著上涨。</strong>与资产负债表上「存货只够一个月」互为印证，供需紧张是真实的，不是话术。</div>
+    <div class="ec-item"><span class="ec-badge ec-neut">中性</span><strong>2026 年资本开支上调至「四十万亿韩元高位」。</strong>短期是需求强劲的证明，中期是供给增加的来源。<strong>同一句话，一年内是利好，三年内是利空。</strong></div>
+    <div class="ec-item"><span class="ec-badge ec-neut">中性</span><strong>将于第三季度内公布追加股东回报方案。</strong>公司仅确认「会公布」这件事本身；市场广泛报道的规模（约 ₩100 万亿、含约 ₩40 万亿回购）<span class="hl-t">目前没有任何一手文件确认</span>，读者不应把它当作既定事实。</div>
+    <div class="ec-item"><span class="ec-badge ec-bear">利空</span><strong>创纪录的业绩仍低于市场预期。</strong>市场原本预期营业利润约 ₩64 万亿、营收约 ₩84 万亿，实际为 ₩60.54 万亿与 ₩79.32 万亿。<strong>财报当日股价下跌约 9.6%</strong>——当一家公司利润同比增长 557% 还要跌停边缘，说明<span class="hl-t">股价里已经装进了比财报更乐观的东西</span>。</div>
+    <div class="ec-item"><span class="ec-badge ec-bear">利空</span><strong>未披露 HBM 收入占比。</strong>在 HBM 是整个投资逻辑核心的情况下，这项关键数字持续缺席。<strong>被模糊化的，往往正是竞争最激烈的地方。</strong></div>
+    <div class="ec-item"><span class="ec-badge ec-bear">利空</span><strong>本季净利润里超过一半来自 Kioxia 处置与重估，而公司在业绩公告与新闻稿中均未主动解释这笔 ₩62.17 万亿的构成。</strong>数字都在 6-K 里，逻辑要读者自己去减。<span class="hl-t">披露是合规的，呈现是不友好的。</span></div>
+  </div>
+  <p class="note">电话会内容引自 2026-07-28 官方业绩发布与公开转录，语义可靠但非逐字定稿；财务数字一律以同日提交 SEC 的 Form 6-K 为准。</p>
+</section>
+
+<section class="section" id="m7" aria-labelledby="m7-t">
+  <h2 class="stitle" id="m7-t">模块 7 · 多模型估值（8 种方法）<a class="anchor" href="#m7" aria-label="本节链接">#</a></h2>
+
+  <div class="pbox">
+    <h4>估值前必须先立的一条规矩</h4>
+    <div class="cmt">
+      <p><strong>对周期股，不能用当期盈利乘以正常倍数。</strong>这家公司 FY2023 亏 ₩7.73 万亿、Q2 2026 单季赚 ₩60.54 万亿。用前者估值会得出「一文不值」，用后者估值会得出「便宜到不可思议」——<span class="hl-t">两者都是错的，错法相反。</span></p>
+      <p>唯一诚实的做法是<strong>中周期正常化</strong>：假设一个可持续的营收中枢与营业利润率，再给一个反映行业波动性的倍数。下面每一种方法都建立在这个基础上，且我会把假设全部写明，方便你替换成自己的判断。</p>
+    </div>
+  </div>
+
+  <h3 class="sub">7.1 八法明细</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="cards" data-source="海图自行测算；输入取自 SK hynix Form 6-K、Form F-1/A 与 2026-07-28 业绩公告">
+      <thead><tr><th>方法</th><th>关键假设</th><th>得出估值</th><th>适用性</th></tr></thead>
+      <tbody>
+        <tr><td>① P/E（剔除 Kioxia）</td><td>正常化 TTM 净利 ₩98.5 万亿 × <strong>8x</strong>（顶点盈利只能给低倍数）</td><td><strong>₩1,080,727</strong></td><td>适用</td></tr>
+        <tr><td>② 中周期 P/E</td><td>中周期营收 ₩200 万亿 × 利润率 36% ＝ EBIT ₩72 万亿，税后 ₩55.1 万亿 × 13x ＋净现金</td><td><strong>₩1,077,619</strong></td><td>适用</td></tr>
+        <tr><td>③ EV / EBIT</td><td>中周期 EBIT ₩72 万亿 × 11x ＋净现金 ₩69.4 万亿</td><td><strong>₩1,181,836</strong></td><td>适用</td></tr>
+        <tr><td>④ EV/EBITDA</td><td>中周期 EBITDA ＝ EBIT ₩72 ＋ D&amp;A ₩20 ＝ ₩92 万亿 × 8x ＋净现金</td><td><strong>₩1,105,004</strong></td><td>适用</td></tr>
+        <tr><td>⑤ P/B（NAV 代理）</td><td>2026-06-30 权益约 ₩258 万亿 × 2.5x（周期中枢；现价对应 4.02x）</td><td><strong>₩884,936</strong></td><td>适用——重资产制造业，账面净值有真实含义</td></tr>
+        <tr><td>⑥ 所有者盈余收益率</td><td>中周期所有者盈余 ₩53.1 万亿（税后利润 ＋D&amp;A 20 −维护性资本开支 22）÷ 要求收益率 5.5%</td><td><strong>₩1,324,099</strong></td><td>适用</td></tr>
+        <tr><td>⑦ FCF 收益率</td><td>中周期自由现金流 ₩45.1 万亿（税后利润 ＋D&amp;A 20 −全周期资本开支 30）÷ 要求收益率 5.0%</td><td><strong>₩1,236,990</strong></td><td>适用——注意与⑥的差别在于扣的是<strong>全部</strong>资本开支而非仅维护性部分</td></tr>
+        <tr><td>⑧ 情景加权 DCF</td><td>悲观 30%×₩477,262（营收 140／26%／10x）、基准 45%×₩1,077,619（200／36%／13x）、乐观 25%×₩2,026,435（250／46%／16x）</td><td><strong>₩1,134,716</strong></td><td>适用</td></tr>
+        <tr><td>⑨ P/S 市销率</td><td>—</td><td>—</td><td><strong>不适用</strong>：<span class="hl-t">周期股的营收本身就在价格顶点，P/S 在这里比 P/E 更具误导性</span>——同样的位元出货量，营收可以差三倍。TTM 营收 ₩189.17 万亿对应 P/S 5.5x，而 FY2023 同样的产能只做出 ₩32.77 万亿营收。</td></tr>
+        <tr><td>⑩ PEG</td><td>—</td><td>—</td><td><strong>不适用</strong>：周期股的「增长率」在顶点是 +557%、在谷底是负数，<span class="hl-t">分母本身没有经济含义</span></td></tr>
+        <tr><td>⑪ 股息贴现 DDM</td><td>—</td><td>—</td><td><strong>不适用</strong>：年化股息 ₩1,500/股，股息率 0.105%，派息率不足净利的 1%</td></tr>
+        <tr><td>⑫ SOTP 分部加总</td><td>—</td><td>—</td><td><strong>不适用</strong>：DRAM 与 NAND 共用晶圆厂、设备与研发平台，不存在可独立处置的分部</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="sub">7.2 敏感性：什么样的假设才撑得住现价</h3>
+  <p>这张表比上面任何一个数字都重要。它回答的是：<strong>如果你今天以 ₩1,422,000 买入，你实际上相信了什么。</strong></p>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="海图自行测算：中周期营收 × 营业利润率 × (1−23.5%) × 13x ＋净现金 ₩69.4 万亿">
+      <thead><tr><th>中周期营收</th><th>利润率 36%</th><th>利润率 45%</th><th>利润率 55%</th></tr></thead>
+      <tbody>
+        <tr><td>₩200 万亿</td><td>₩1,077,619</td><td>₩1,323,220</td><td><strong>₩1,596,109 ✅</strong></td></tr>
+        <tr><td>₩250 万亿</td><td>₩1,323,220</td><td><strong>₩1,630,220 ✅</strong></td><td><strong>₩1,971,332 ✅</strong></td></tr>
+        <tr><td>₩300 万亿</td><td><strong>₩1,568,820 ✅</strong></td><td><strong>₩1,937,221 ✅</strong></td><td><strong>₩2,346,556 ✅</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>✅ 标记的是能撑住现价 ₩1,422,000 的组合。</strong>读一遍就会发现：<span class="hl-t">要让今天的价格成立，你必须相信这家公司在整个周期里能长期维持 45–55% 的营业利润率，或者营收永久站上 ₩250–300 万亿。</span></p>
+  <p>而它的历史是：FY2023 <strong>−23.6%</strong>、FY2024 35.5%、FY2025 48.6%。<strong>45% 以上的跨周期常态利润率，在这个行业里从未出现过。</strong>买在这个价位，不是在赌 AI 需求好——那已经是共识；是在赌<strong>存储行业的周期性从此消失</strong>。</p>
+
+  <h3 class="sub">7.3 加权汇总与建仓阶梯</h3>
+  <p>八个可用方法从 ₩884,936 到 ₩1,324,099，<strong>中位数 ₩1,119,860</strong>，情景加权 ₩1,134,716。考虑到 LTA 对下行的真实缓冲作用，取偏上沿的<strong>加权公允价值 ₩1,150,000</strong>。</p>
+  <p>现价 ₩1,422,000，<strong>较公允价值高 23.7%——安全边际是负的</strong>。</p>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="海图自行测算：估值中位数 ₩1,119,860 × 80% / 70% / 60%">
+      <thead><tr><th>档位</th><th>价格</th><th>距现价</th><th>触发含义</th></tr></thead>
+      <tbody>
+        <tr><td>首仓（中位数 × 80%）</td><td><strong>₩896,000</strong></td><td>−37.0%</td><td>对应中周期利润率约 30% 的定价，开始有安全边际</td></tr>
+        <tr><td>二仓（× 70%）</td><td><strong>₩784,000</strong></td><td>−44.9%</td><td>需要一轮明确的价格下行周期确认</td></tr>
+        <tr><td>三仓（× 60%）</td><td><strong>₩672,000</strong></td><td>−52.7%</td><td>对应市场重新按「普通存储厂」给它定价</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note"><strong>关于「六倍市盈率还不便宜」这件事</strong>，我知道它反直觉，所以再说一次：那个 6.39 倍里，一半的利润来自 Kioxia 的一次性处置；剩下的一半，来自一个历史上从未持续过的利润率。<span class="hl-t">把这两层都剥掉，它是一家在周期顶点、以 4 倍市净率交易的重资产制造企业。</span></p>
+</section>
+
+<section class="section" id="m8" aria-labelledby="m8-t">
+  <h2 class="stitle" id="m8-t">模块 8 · 竞争与行业分析<a class="anchor" href="#m8" aria-label="本节链接">#</a></h2>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="各公司 2026 年二季度业绩公告；HBM 份额取自 Counterpoint Research（2026 Q1）">
+      <thead><tr><th>公司</th><th>本季营业利润</th><th>营业利润率</th><th>HBM 全球份额</th><th>定位</th></tr></thead>
+      <tbody>
+        <tr><td>三星电子</td><td>₩89.4 万亿（初步）</td><td>—</td><td>约 21%</td><td>全球科技公司营业利润第一</td></tr>
+        <tr><td><strong>SK hynix</strong></td><td><strong>₩60.54 万亿</strong></td><td><strong>76.3%</strong></td><td><strong>约 58%</strong></td><td>全球科技公司营业利润第四</td></tr>
+        <tr><td>美光（FQ3，3–5 月）</td><td>$333 亿（约 ₩51 万亿）</td><td>高于 SK hynix</td><td>约 21%</td><td>全球营业利润率第一</td></tr>
+        <tr><td>长鑫存储 CXMT</td><td>未上市</td><td>—</td><td>—</td><td>公司在 F-1 中列为 DRAM 主要竞争对手</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>先说这张表里最不寻常的一件事：三星与 SK hynix 两家韩国公司，本季营业利润合计接近 ₩150 万亿（约 980 亿美元）。</strong>三星单季营业利润超过英伟达与苹果，位列全球科技公司第一。<span class="hl-t">这不是某一家公司经营出色，这是整个存储行业在同一时刻收割同一轮涨价。</span>而全行业同时暴利，历史上从来只有一个结局。</p>
+  <p><strong>HBM 的格局是 SK hynix 唯一真正领先的地方</strong>：约 58% 对三星、美光各约 21%。这个差距是实打实的技术与认证领先。但要注意两件事——第一，<strong>58% 意味着另外 42% 已经被两个体量相当的对手拿走</strong>，这不是垄断；第二，三星在通用 DRAM 上的产能规模远大于 SK hynix，一旦它在 HBM 上追平，份额结构会很快变化。</p>
+  <p><strong>真正的长期变量是长鑫存储。</strong>公司在 F-1 的竞争章节中，把 CXMT 与三星、美光并列为 DRAM 主要竞争对手——<span class="hl-t">这是它自己的判断，不是外界的猜测</span>。存储是标准品行业，一旦有玩家不以利润为唯一目标，价格底线就会被拉低。这个风险不会在一两个季度内兑现，但它会决定十年后这条护城河还剩多宽。</p>
+  <p><strong>地区结构里也藏着一条政治风险</strong>：美国销售子公司贡献了 Q1 2026 收入的 <strong>64.7%</strong>（2025 年 68.8%），中国贡献 <strong>24.3%</strong>（2025 年 19.7%）。<strong>中国占比在一个季度里上升了 4.6 个百分点</strong>，而中美之间的出口管制与关税正处于高位。<span class="hl-t">这家公司近九成的收入，来自世界上关系最紧张的两个经济体。</span></p>
+</section>
+
+<section class="section" id="m9" aria-labelledby="m9-t">
+  <h2 class="stitle" id="m9-t">模块 9 · 技术面与 K 线分析<a class="anchor" href="#m9" aria-label="本节链接">#</a></h2>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="韩交所 KOSPI 公开行情；历史高点日期经独立来源交叉验证">
+      <thead><tr><th>项目</th><th>数值</th><th>解读</th></tr></thead>
+      <tbody>
+        <tr><td>现价（2026-08-07 收盘）</td><td>₩1,422,000</td><td>当日 −4.88%</td></tr>
+        <tr><td>历史最高价</td><td>₩2,987,000（2026-06-25）</td><td>距今仅六周</td></tr>
+        <tr><td>距历史高点</td><td><strong>−52.4%</strong></td><td>已完成腰斩</td></tr>
+        <tr><td>52 周低点</td><td>₩245,000</td><td>一年内最大涨幅约 12 倍</td></tr>
+        <tr><td>近一年涨幅</td><td>+450%</td><td>腰斩后仍是四倍半</td></tr>
+        <tr><td>F-1 定价参考价（2026-07-03）</td><td>₩2,425,000</td><td>距今 −41.4%</td></tr>
+        <tr><td>Beta</td><td>2.41</td><td>波动是大盘的 2.4 倍</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>这张表里有一组把人拉回现实的对比：股价从 ₩245,000 涨到 ₩2,987,000 用了大约十个月，从 ₩2,987,000 跌回 ₩1,422,000 用了六周。</strong><span class="hl-t">上去用了十个月，下来一半只用了六周——这就是 Beta 2.41 的含义，也是为什么这只股票不适合重仓。</span></p>
+  <p><strong>下跌的直接触发点值得说清楚</strong>：7 月 28 日财报虽创纪录但低于预期，当日跌约 9.6%；随后 SanDisk 给出的下季指引不及预期，情绪蔓延至亚洲，8 月初三星与 SK hynix 连续遭遇抛售。目前美光、三星、SK hynix 与相关 ETF <strong>均已从近期高点回落逾 20%，板块整体进入熊市</strong>。</p>
+  <p><strong>还有一件必须提醒的事</strong>：8 月 6 日，SK hynix 在韩国另类交易系统 Nextrade 的盘前时段发生<strong>闪崩</strong>——11 股以 ₩1,168,000 成交，触及 30% 跌停。<span class="hl-t">这类极小成交量的异常价格会污染部分行情软件的最高／最低价字段</span>，这也是本报告不引用第三方「52 周区间」以外的衍生指标、并且完全不使用 ADS 报价的原因。</p>
+  <p class="note">技术面在本报告中仅作为建仓位置的交叉验证，不作为独立买卖依据。需要指出：我算出的首仓价 ₩896,000 <strong>没有</strong>任何技术位与之呼应——它比目前所有可见的支撑都低。这说明基本面给出的安全位置，比价格图上看起来的「便宜」要远得多。</p>
+</section>
+
+<section class="section" id="m10" aria-labelledby="m10-t">
+  <h2 class="stitle" id="m10-t">模块 10 · 增长催化剂与前景展望<a class="anchor" href="#m10" aria-label="本节链接">#</a></h2>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="cards" data-source="SK hynix 2026-07-28 业绩公告、2026-08-07 Form 6-K 与公开报道">
+      <thead><tr><th>催化剂</th><th>时点</th><th>可验证程度</th><th>方向与量级</th></tr></thead>
+      <tbody>
+        <tr><td><strong>追加股东回报方案公布</strong></td><td>2026 Q3 内</td><td><strong>中</strong>——公司确认会公布；规模（媒体称约 ₩100 万亿含约 ₩40 万亿回购）<span class="hl-t">无一手文件佐证</span></td><td>正面，若属实约相当于市值 10%</td></tr>
+        <tr><td><strong>HBM4 下半年放量</strong></td><td>2026 H2</td><td><strong>高</strong>——已量产，良率接近 HBM3E</td><td>正面，直接决定 H2 毛利</td></tr>
+        <tr><td><strong>LTA 覆盖客户扩大</strong></td><td>持续</td><td><strong>低</strong>——约 10 家已签，条款完全未披露</td><td>正面但无法量化</td></tr>
+        <tr><td><strong>Solidigm 分拆融资</strong></td><td>未定</td><td><strong>低</strong>——媒体称拟募约 ₩5 万亿，公司称「尚未确定」</td><td>中性偏正面</td></tr>
+        <tr><td><strong>Y2 与 M17 新产能</strong></td><td>2031 年前分期</td><td><strong>高</strong>——董事会已批 ₩54.32 万亿</td><td><strong>短期正面，中期负面</strong>——供给最终会压价</td></tr>
+        <tr><td><strong>存储价格见顶回落</strong></td><td>不确定</td><td><strong>——</strong>这是最大的未知数</td><td>负面，量级远超以上全部</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>把这张表按重要性重排，会得到一个不太舒服的结论</strong>：真正确定的催化剂（HBM4 放量、新产能）都是<span class="hl-t">已经被股价充分定价的东西</span>；而最大的变量——价格周期何时转向——既无法预测，也无人能控制，且方向一旦改变，量级会压倒其余所有因素之和。</p>
+  <p><strong>唯一可能在短期内改变股价路径的，是那份股东回报方案。</strong>若规模确如市场传闻，它将是这家公司历史上第一次真正意义的资本返还。<strong>但在公司自己的公告出来之前，把它写进估值是不负责任的。</strong></p>
+</section>
+
+<section class="section" id="m11" aria-labelledby="m11-t">
+  <h2 class="stitle" id="m11-t">模块 11 · 风险矩阵<a class="anchor" href="#m11" aria-label="本节链接">#</a></h2>
+  <div class="risk-grid">
+    <div class="risk-card r5">
+      <h5>① 周期反转 · 严重度：高</h5>
+      <p>营业利润率 76.3% 在历史上从未持续过；FY2023 同一家公司是 −23.6%。存货已降至约一个月收入，<strong>没有任何缓冲</strong>，需求端一旦松动价格会立刻反应。<strong>触发信号</strong>：DRAM 现货价环比转跌，或存货周转天数连续两季回升。</p>
+    </div>
+    <div class="risk-card r5">
+      <h5>② 顶点扩产的后遗症 · 严重度：高</h5>
+      <p>8 月 7 日单日批准 ₩54.32 万亿新建产能（占 2025 年末净资产 45%），2026 年资本开支指引升至「四十万亿韩元高位」。全行业同步扩产，产能将在同一时间窗口释放。<strong>触发信号</strong>：三星、美光同期公布同等量级扩产计划。</p>
+    </div>
+    <div class="risk-card r4">
+      <h5>③ 估值本身 · 严重度：中高</h5>
+      <p>现价较中周期公允价值高 23.7%，安全边际为负；市净率 4.02 倍处于历史高位。<strong>要撑住现价，需相信 45–55% 的跨周期常态利润率——这在本行业从未出现过。</strong><strong>触发信号</strong>：卖方开始下调 2027 年盈利预测。</p>
+    </div>
+    <div class="risk-card r4">
+      <h5>④ 中国竞争与地缘政治 · 严重度：中高</h5>
+      <p>公司在 F-1 中自行把长鑫存储列为 DRAM 主要竞争对手。同时美国占收入 64.7%、中国占 24.3%，合计近九成收入来自中美两国，直接暴露于出口管制与关税。<strong>触发信号</strong>：CXMT 宣布进入 HBM，或新一轮对韩半导体出口限制。</p>
+    </div>
+    <div class="risk-card r3">
+      <h5>⑤ 客户与产品集中 · 严重度：中</h5>
+      <p>HBM 需求高度集中于少数 AI 加速器厂商，而公司<strong>未披露 HBM 收入占比与客户集中度</strong>，外部无法评估。<strong>触发信号</strong>：主要客户自研内存方案，或转向第二供应商。</p>
+    </div>
+    <div class="risk-card r3">
+      <h5>⑥ 财报口径失真 · 严重度：中</h5>
+      <p>本季净利润中 ₩62.17 万亿来自 Kioxia 一次性处置与重估，导致表面市盈率被压低 65%。<span class="hl-t">这不是造假，但会持续误导只看行情软件的投资者，并让 TTM 口径在未来四个季度里一直失真。</span><strong>触发信号</strong>：下季起 TTM 数据逐季剔除该项后倍数跳升。</p>
+    </div>
+  </div>
+  <p class="note"><strong>黑天鹅情景（三个）</strong>：<strong>其一</strong>，AI 资本开支在 2027 年出现一次性急刹——超大规模厂商同步削减订单，而此时新产能刚好投产，重演 2023 年的量价双杀，只是基数高十倍。<strong>其二</strong>，长鑫存储在通用 DRAM 上实现大规模量产并以低于成本价出货，把整个行业的价格底线永久下移。<strong>其三</strong>，台海或朝鲜半岛的地缘冲突导致韩国产能中断——这家公司的绝大部分晶圆厂集中在利川与清州两地，<span class="hl-t">地理集中度是它资产负债表上看不到的最大单点风险</span>。</p>
+</section>
+
+<section class="section" id="m12" aria-labelledby="m12-t">
+  <h2 class="stitle" id="m12-t">模块 12 · 股东回报分析<a class="anchor" href="#m12" aria-label="本节链接">#</a></h2>
+
+  <h3 class="sub">12.1 公司给了股东多少？</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="SK hynix 2026-08-07 董事会决议 Form 6-K；净利润取自 Form F-1/A 与各季 6-K">
+      <thead><tr><th>项目</th><th>数值</th></tr></thead>
+      <tbody>
+        <tr><td>Q2 2026 季度股息（每股）</td><td>₩375</td></tr>
+        <tr><td>季度股息总额</td><td>₩2,733.2 亿</td></tr>
+        <tr><td>年化股息（每股）</td><td>₩1,500</td></tr>
+        <tr><td>年化股息总额</td><td>约 ₩1.09 万亿</td></tr>
+        <tr><td><strong>股息率</strong></td><td><strong>0.105%</strong></td></tr>
+        <tr><td>派息率（占 TTM 归母净利 ₩162.12 万亿）</td><td><strong>0.67%</strong></td></tr>
+        <tr><td>派息率（占 FY2025 净利 ₩42.95 万亿）</td><td>2.5%</td></tr>
+        <tr><td>本季回购</td><td><strong>零</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>把这两个数字并排放：本季净利润 ₩93.92 万亿，全年股息总额约 ₩1.09 万亿。</strong><span class="hl-t">一年发给全体股东的钱，是它一个季度利润的 1.2%。</span>股息率 0.105% 意味着，靠分红收回本金需要约 950 年。<strong>用「股东回报」这四个字形容当前状态，是不准确的。</strong></p>
+
+  <h3 class="sub">12.2 给的方式好不好？</h3>
+  <p><strong>目前几乎没有「方式」可评——因为几乎没有回购。</strong>公司持有的库存股仅 1,626,236 股，占总股本 <strong>0.2%</strong>；2026 年 8 月 7 日董事会决议处置其中 <strong>82 股</strong>，用途是支付独立董事薪酬（每股 ₩1,495,000，总额约 1.23 亿韩元）。这是本季与回购／库存股相关的全部动作。</p>
+  <p><strong>而在回购的另一侧，发生了一件量级完全不同的事：</strong>公司于 7 月 10 日在纳斯达克<strong>增发了 17,790,000 股新股</strong>，相当于总股本的 <strong>2.44%</strong>。</p>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="cards" data-source="SK hynix Form F-1/A（发行结构）、2026-08-07 Form 6-K（库存股）与公开报道（拟议回购规模）">
+      <thead><tr><th>动作</th><th>股本影响</th><th>确认程度</th></tr></thead>
+      <tbody>
+        <tr><td>纳斯达克 ADS 增发 17,790,000 股</td><td><strong>＋2.44%（稀释）</strong></td><td><strong>已完成</strong>（Form F-1/A 与 7 月 10 日挂牌）</td></tr>
+        <tr><td>现有库存股</td><td>0.2%</td><td>已披露</td></tr>
+        <tr><td>拟议回购约 ₩40 万亿</td><td>按现价约 <strong>−3.86%</strong></td><td><span class="hl-t">仅媒体报道，公司未在任何文件中确认金额</span></td></tr>
+        <tr><td><strong>若拟议回购落地，净变动</strong></td><td><strong>约 −1.4%</strong></td><td>取决于实际执行</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>这就是本模块最该记住的一点：市场热议的那笔巨额回购，即便全额执行，扣掉刚刚完成的增发之后，三年下来净减少的股本大约只有 1.4%。</strong><span class="hl-t">先在历史高位附近增发新股，再在腰斩后回购——中间的差价，由留在场内的老股东承担。</span></p>
+  <p>另需说明一条制度差异：韩国上市公司回购的股份可选择注销或留作库存股，<strong>并非强制注销</strong>。因此在方案细则公布前，无法判断这笔回购的含金量属于「真实减少股本」还是「对冲激励与提振股价」。</p>
+
+  <h3 class="sub">12.3 能不能继续给、给多少？</h3>
+  <p><strong>能力毫无疑问是有的。</strong>2025–2027 年股东回报政策为：固定年度股息 <strong>₩1,500/股</strong>，外加<strong>自由现金流的 50%</strong> 作为追加回报资源池。按 FY2025 自由现金流 ₩25.85 万亿计算，仅这一条对应的资源池就有约 ₩12.9 万亿——是当前年度股息总额的 <strong>12 倍</strong>。而 2026 年的自由现金流将远高于此。公司已明确表示<strong>将于第三季度内公布追加方案</strong>。</p>
+  <p><strong>但约束同样清楚，而且正在变强。</strong>8 月 7 日新批的 ₩54.32 万亿产能投资横跨至 2031 年，2026 年资本开支指引已升至「四十万亿韩元高位」——<span class="hl-t">而 FY2025 全年经营现金流是 ₩53.37 万亿。也就是说，仅 2026 年的资本开支，就会吃掉去年全部经营现金流的四分之三以上。</span></p>
+  <p><strong>(股息＋回购) / 自由现金流覆盖度</strong>：当前分子几乎为零，覆盖度不构成任何压力，也没有借债回购的迹象（有息负债还在下降）。<strong>真正的问题不是「给不给得起」，而是「愿不愿意给，以及会不会被资本开支挤掉」。</strong></p>
+  <p><strong>周期择时的角度值得单独记一笔</strong>：如果这笔回购在 ₩1,400,000 附近执行，而周期在两年内回归常态，那么它将成为一次典型的<strong>高位回购</strong>——和它三周前在更高位增发新股，是同一个判断的两面。</p>
+  <p><strong>模块小结</strong>：以当前实际执行看，SK hynix 的股东回报属于<strong>「象征性回报」</strong>——股息率 0.105%、派息率不足净利 1%、本季零回购，而同期刚完成 2.44% 的股本增发。<span class="hl-t">一份可能改变性质的方案确实在路上，公司也确实有足够的现金能力，但在公司自己的公告落地之前，它仍然是一个传闻，而不是一项资产。</span>这也是我在评分卡「资本配置纪律」一项只给 B− 的直接依据。</p>
+</section>
+
+<section class="section" id="m13" aria-labelledby="m13-t">
+  <h2 class="stitle" id="m13-t">模块 13 · 海图评分卡 + 投资决策<a class="anchor" href="#m13" aria-label="本节链接">#</a></h2>
+  <div class="scorecard">
+    <div class="score-grid">
+      <div class="score-card"><div class="score-letter">C</div><div class="score-dim">生意可预测性</div><div class="score-note">四年内营业利润率从 −23.6% 到 76.3%；FY2023 自由现金流 −₩4.05 万亿。<strong>业务能见度极低，这是行业属性，不是管理问题</strong></div></div>
+      <div class="score-card"><div class="score-letter">B</div><div class="score-dim">经济护城河</div><div class="score-note">有效规模与成本优势宽但随周期起伏；HBM 58% 份额与 10 家 LTA 是真实优势，但条款未披露、无法量化</div></div>
+      <div class="score-card"><div class="score-letter">B+</div><div class="score-dim">管理层质量</div><div class="score-note">衰退期不砍 HBM 研发换来今日领先，披露密度亚洲第一梯队；但本季顶点扩产与高位增发压低评分</div></div>
+      <div class="score-card"><div class="score-letter">A−</div><div class="score-dim">财务质量</div><div class="score-note">三年从净负债 ₩20.55 万亿到净现金 ₩69.4 万亿，负债权益比 87.5%→35.6%，存货仅约一个月收入</div></div>
+      <div class="score-card"><div class="score-letter">B−</div><div class="score-dim">资本配置纪律</div><div class="score-note">股息率 0.105%、本季零回购、刚增发 2.44%；₩54.32 万亿扩产在利润顶点批准。<strong>方案在路上但尚未落地</strong></div></div>
+      <div class="score-card"><div class="score-letter">C</div><div class="score-dim">估值与安全边际</div><div class="score-note">现价较中周期公允价值高 23.7%；P/B 4.02x；撑住现价需相信 45–55% 的常态利润率，历史上从未出现</div></div>
+    </div>
+    <div class="flag-row">
+      <h4>红旗排查（六项）</h4>
+      <ul class="ulist">
+        <li>❌ <strong>商誉减值历史</strong>——未触发。商誉规模相对总资产极小，本期无减值。</li>
+        <li>❌ <strong>收入确认时点</strong>——未触发。标准品现货与合约销售，确认时点无争议。</li>
+        <li>⚠️ <strong>关联交易</strong>——<strong>未触发但需跟踪</strong>。SK Square 持股 20.50%，公司为 SK 集团成员，F-1 设有专章披露关联方交易。<span class="hl-t">母公司层面对分红的诉求，与上市公司留存资本扩产的需要，存在天然张力。</span></li>
+        <li>❌ <strong>表外负债</strong>——未触发。₩54.32 万亿产能投资已通过 6-K 完整披露，不属隐藏义务。</li>
+        <li>❌ <strong>股权激励比例</strong>——未触发。规模相对利润可忽略（8 月 7 日处置 82 股用于独董薪酬）。</li>
+        <li>⚠️ <strong>会计变更</strong>——<strong>未触发但需跟踪</strong>。公司在 F-1 中提示，IFRS 18 采用后将改变「营业利润」的计算与列报方式。<strong>这意味着未来的营业利润与今天的口径可能不可直接比较</strong>，跨期分析需重新对齐。</li>
+      </ul>
+      <p><strong>结论：0 项触发，2 项列入跟踪清单</strong>（SK 集团关联方与分红诉求、IFRS 18 口径变更）。<strong>因此评级不因红旗降级——本次「持有观望」完全来自估值，而不是来自对公司质地的怀疑。</strong></p>
+    </div>
+    <div class="verdict">
+      <div class="verdict-rating">最终评级：<span class="rating-badge" data-rating="持有观望">持有观望</span></div>
+      <div class="tbl-wrap">
+        <table class="tbl" data-shape="grid" data-source="海图自行测算，详见模块 7">
+          <thead><tr><th>项目</th><th>数值</th></tr></thead>
+          <tbody>
+            <tr><td>八法估值中位数</td><td>₩1,119,860</td></tr>
+            <tr><td>情景概率加权</td><td>₩1,134,716</td></tr>
+            <tr><td><strong>加权公允价值</strong></td><td><strong>₩1,150,000</strong></td></tr>
+            <tr><td>现价（2026-08-07）</td><td>₩1,422,000</td></tr>
+            <tr><td><strong>安全边际</strong></td><td><strong>−23.7%</strong>（负值，不具备买入条件）</td></tr>
+            <tr><td>12 个月概率加权目标价</td><td><strong>₩1,320,000</strong>（−7.2%）</td></tr>
+            <tr><td>乐观情景（25%）</td><td>₩2,100,000 — 价格维持、HBM4 放量、₩100 万亿回报方案落地</td></tr>
+            <tr><td>基准情景（45%）</td><td>₩1,300,000 — 价格于 2027 年温和回落，LTA 提供缓冲</td></tr>
+            <tr><td>悲观情景（30%）</td><td>₩700,000 — 新产能与需求放缓相遇，重演量价双杀</td></tr>
+            <tr><td>建仓阶梯</td><td>首仓 <strong>₩896,000</strong> · 二仓 ₩784,000 · 三仓 ₩672,000</td></tr>
+            <tr><td>止盈档位</td><td>₩2,000,000 / ₩2,500,000 / ₩3,000,000，每档减仓 25%</td></tr>
+            <tr><td>建议总仓位</td><td><strong>0–3%</strong>（Beta 2.41，周期顶部，可以为零）</td></tr>
+            <tr><td>持有周期</td><td><strong>3–5 年</strong>（须能承受完整一轮下行）</td></tr>
+            <tr><td>关键监控指标</td><td>DRAM 现货价环比、存货周转天数、HBM 收入占比是否开始披露、股东回报方案细则</td></tr>
+            <tr><td>下一个催化剂</td><td>2026 Q3 内的追加股东回报方案；Q3 2026 财报（预计 10 月下旬）</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>为什么是「持有观望」而不是「卖出」</strong>：这家公司的资产负债表已经强到不可能被一轮周期打死——净现金 ₩69.4 万亿、负债权益比 35.56%。HBM 58% 的份额与约 10 家客户的多年期协议是真实的结构性优势。<span class="hl-t">我不会去做空一家一个季度赚 ₩60 万亿、手握全球 58% HBM 份额的公司。</span></p>
+      <p><strong>为什么也不是「有条件买入」</strong>：安全边际是 −23.7%，不是「不够」，是「没有」。<strong>股价已经从高点腰斩，而我算出的公允价值仍在现价之下 24%</strong>——这说明腰斩前的价格离谱到什么程度，也说明现在的位置并不因为「跌了很多」就变得安全。</p>
+      <p><strong>条件是什么</strong>：跌到 <strong>₩896,000</strong>（较现价 −37.0%）开始第一笔。或者，在价格没到之前，出现两件事之一——<strong>公司开始披露 HBM 收入占比与 LTA 的量价条款</strong>（这会让「周期已被熨平」从假设变成可验证的事实），<strong>或股东回报方案以注销式回购的形式正式落地</strong>。任一发生，我都会重算公允价值。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 页末夜读手记 ══ -->
+<section class="section" id="essay" aria-labelledby="essay-t">
+  <h2 class="stitle sr-only" id="essay-t">海图夜读手记<a class="anchor" href="#essay" aria-label="本节链接">#</a></h2>
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img class="haitu-avatar-sm" src="../assets/hai.png" alt="海图">
+      <span class="haitu-name-lg">海图</span>
+      <span class="haitu-essay-tag">夜读手记 · 2026-08-08</span>
+    </div>
+    <div class="haitu-essay-body">
+      <p>先说一个不该出现的算术。</p>
+      <p>SK 海力士这个季度，营收 79.32 万亿韩元，净利润 <strong>93.92 万亿</strong>。利润比收入还多出 14.6 万亿。净利率 118%。</p>
+      <p>这在正常经营里不可能发生。答案藏在公司自己披露的另外两个数字之间：税前利润 122.71 万亿，营业利润 60.54 万亿。<strong>两者相减，62.17 万亿。</strong>这笔钱来自它 2018 年随贝恩财团投资的日本 Kioxia，是股权处置与重估收益，走金融收益科目，不产生一分钱经营现金。</p>
+      <p><strong>本季税前利润里，超过一半不是主营业务赚来的。</strong></p>
+      <p>后果很具体：你在行情软件上看到的「市盈率 6.39 倍」，是被这笔一次性收益压出来的。剔掉它，用营业利润按 23.5% 的实际税率还原，市盈率是 <strong>10.53 倍</strong>——比表面高 65%。</p>
+      <p>公司没有隐瞒，金额和口径都写在公告和 SEC 文件里。但「净利润」这三个字这个季度确实不能直接用，而看到六倍市盈率就心动的人，多半不会去翻税前利润那一行。</p>
+      <p>不过这还不是最要紧的事。</p>
+      <p>把这家公司四年的营业利润率排一列：<strong>2023 年 −23.6%，2024 年 35.5%，2025 年 48.6%，今年二季度 76.3%。</strong></p>
+      <p>三年前它一年亏 7.73 万亿，今天它一个季度赚 60.54 万亿。同一批厂房，同一批工程师，同一条产线。变的只有内存的价格。</p>
+      <p>这就是存储行业的本质，也是它最危险的地方：<strong>周期股的市盈率在盈利顶点最低，在亏损时无穷大。低市盈率不是便宜的信号，是周期见顶的信号。</strong></p>
+      <p>所以我做了一张表，问一个很简单的问题：如果你今天以 142.2 万韩元买入，你实际上相信了什么？</p>
+      <p>答案是：<strong>你必须相信这家公司能在整个周期里长期维持 45% 到 55% 的营业利润率，或者营收永久站上 250 到 300 万亿韩元。</strong></p>
+      <p>而它的历史是：2023 年 −23.6%，2024 年 35.5%，2025 年 48.6%。<strong>45% 以上的跨周期常态利润率，这个行业里从来没有出现过。</strong></p>
+      <p>买在这个价位，不是在赌 AI 需求好——那已经是共识。是在赌<strong>存储行业的周期性从此消失</strong>。</p>
+      <p>接下来是这份季报里我看了两遍的一件事。</p>
+      <p>8 月 7 日，就在股价从六周前的高点腰斩、整个存储板块跌进熊市的当天，董事会同一天批准了两笔新建产能：龙仁 Y2，35.22 万亿；清州 M17，19.10 万亿。<strong>合计 54.32 万亿，相当于公司 2025 年末全部净资产的 45%，建设期一直排到 2031 年。</strong></p>
+      <p>再加上 2026 年「四十万亿韩元高位」的资本开支指引——整个行业正在利润率 76% 的时候，把钱投向 2031 年才建成的产能。</p>
+      <p>历史上，存储行业每一次深度衰退的种子，都是在上一轮的利润顶点种下的。</p>
+      <p>我不是说这些厂不该建。AI 需求若持续，不建才是错的。我是说：<strong>当你为这家公司的 76% 利润率付钱时，你付的是一个正在被它自己的资本开支拆掉的数字。</strong></p>
+      <p>还有一组时间点，我把它们并排放在这里，不加评论：</p>
+      <p><strong>6 月 25 日</strong>，股价创下历史最高 298.7 万韩元。<strong>7 月 3 日</strong>，招股书里写下参考价 242.5 万。<strong>7 月 10 日</strong>，在纳斯达克挂牌，每份 ADS 定价 149 美元，募资 265 亿美元——史上规模最大的外国公司美股上市，超过 2014 年的阿里巴巴。全部是增发新股，没有一股老股转让。<strong>7 月 28 日</strong>，交出韩国企业史上最赚钱的一份季报。<strong>8 月 7 日</strong>，142.2 万韩元。</p>
+      <p>从招股书那个参考价算起，四周多，跌了 41.4%。</p>
+      <p>而市场现在最热议的，是公司即将公布的股东回报方案——媒体说规模约 100 万亿韩元，含约 40 万亿回购。按现价，40 万亿大概能买回 3.86% 的股本。</p>
+      <p><strong>而三周前那次增发，稀释了 2.44%。</strong></p>
+      <p>也就是说，这笔被寄予厚望的巨额回购，扣掉刚刚完成的增发，净减少的股本大约只有 1.4%。<strong>先在历史高位附近增发新股，再在腰斩后回购——中间的差价，由留在场内的老股东承担。</strong></p>
+      <p>说了这么多，我得把这家公司真正了不起的地方讲清楚，因为它同样是实打实的。</p>
+      <p>2022 到 2023 年那场衰退里，它一年亏掉 7.73 万亿，负债率 87.5%，自由现金流是 <strong>负 4.05 万亿</strong>。就是在那种处境里，它没有砍掉 HBM 的研发，反而抢先在 HBM3 上锁定了英伟达。<strong>今天全球 58% 的 HBM 份额，是那两年熬出来的。</strong>在最难的时候没有削减正确的开支，这是资本配置能力最硬的一次证明。</p>
+      <p>三年之内，它从净负债 20.55 万亿变成<strong>净现金 69.4 万亿</strong>，负债权益比从 87.5% 砍到 35.6%。这家公司已经不可能被一轮周期打死了。这是我不会给它「卖出」的首要原因——我不会去做空一家一个季度赚 60 万亿、手握全球 58% HBM 份额的公司。</p>
+      <p>还有一个数字我很喜欢：<strong>存货只够一个月。</strong>2023 年末它的存货相当于五个月的收入，那是典型的堆货衰退；今年三月末，存货三年只增长了 18%，而单季营收已经翻了好几倍。客户在排队，货架是空的。</p>
+      <p>但同一个数字反过来读也成立：<strong>库存低到这个程度，任何需求端的一点回落，都会立刻转化成价格下跌，因为没有缓冲。</strong></p>
+      <p>所以我把公允价值定在 115 万韩元，首仓价 89.6 万。</p>
+      <p>现价 142.2 万，比我的公允价值还高 23.7%。<strong>安全边际不是「不够」，是「没有」。</strong></p>
+      <p>我知道这个结论听起来很不合时宜——股价已经从高点腰斩了，怎么还嫌贵？</p>
+      <p>这恰恰是我想留下的那句话：<strong>腰斩说明的是它涨上去的时候有多离谱，不代表现在的位置就安全。</strong>一只股票十个月涨了十二倍，六周跌掉一半，此刻它离起点仍有四倍半。跌幅是相对于自己的过去，价值是相对于未来的现金流——<strong>这两件事之间，没有任何必然联系。</strong></p>
+      <p>什么时候我会改主意？</p>
+      <p>价格跌到 89.6 万，或者出现两件事之一：<strong>公司开始披露 HBM 的收入占比和长期协议的量价条款</strong>——那会让「周期已被熨平」从一个假设变成可验证的事实；<strong>或者股东回报方案以注销式回购的形式正式落地</strong>，而不是停留在媒体的转述里。</p>
+      <p>任何一件发生，我上面那些数字都得重算一遍。</p>
+      <p>在那之前，它是一家优秀的公司，在一个不优秀的位置。</p>
+      <p>—— 灯下落笔，明日再观风浪。</p>
+    </div>
+  </div>
+</section>
+
+</div><!-- /.container -->
+
+<footer>
+  <div>本报告由「海图夜读」基于公开财报与电话会资料独立撰写，数据截至 2026-08-06。</div>
+  <div>
+    <strong>免责声明：</strong>本文仅为个人研究记录与信息分享，<strong>不构成任何投资建议</strong>，
+    作者非持牌投资顾问。文中评级、目标价、仓位与建仓价格均为基于公开信息的个人推演，
+    可能存在错误或随时间失效。市场有风险，投资需谨慎，读者应独立判断并自负盈亏。
+  </div>
+</footer>
+
+<script>
+/* ══════════════════════════════════════════════════════════════════
+   海图夜读 · 报告页脚本骨架
+   逐字复制进报告的 <script>，只改 CHART_DATA 里的数字。
+
+   这段脚本解决了存量 103 份实测出的三个问题：
+   1. 主题切换有 3 套实现，73/103 不读 localStorage
+      → 门户切暗色进报告又变亮色。这里统一成一套。
+   2. 71 份把调色板硬编码进 JS（token 的第 4 份拷贝），
+      改一次配色要改 71 个文件；另有 2 份切暗色后图表根本不重绘。
+      → 这里一律从 CSS 变量读，改 :root 即全站生效。
+   3. 4 个图表槽位被写出 39 种 canvas id。
+      → 这里按固定槽位 rev|margin|segment|eps 接管。
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ── 1. 从 CSS 变量取色（唯一真源，禁止在本文件里写 hex）── */
+function cssVar(name) {
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+}
+function palette() {
+  return {
+    accent:  cssVar('--accent'),   accent2: cssVar('--accent2'),
+    accent3: cssVar('--accent3'),  gold:    cssVar('--gold'),
+    red:     cssVar('--red'),      green:   cssVar('--green'),
+    grid:    cssVar('--chart-grid'), text:  cssVar('--text3-ink'),
+  };
+}
+
+/* ── 2. 主题切换：同步 aria-pressed、持久化、重绘图表 ── */
+function toggleTheme() {
+  var html = document.documentElement;
+  var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  try { localStorage.setItem('theme', next); } catch (e) {}
+  var btn = document.getElementById('themeBtn');
+  if (btn) btn.setAttribute('aria-pressed', String(next === 'dark'));
+  renderCharts();
+}
+document.addEventListener('DOMContentLoaded', function () {
+  var btn = document.getElementById('themeBtn');
+  if (btn) btn.setAttribute('aria-pressed',
+    String(document.documentElement.getAttribute('data-theme') === 'dark'));
+});
+
+/* ── 3. 顶栏实测高度写进 --bar-h ──
+   锚点落点与目录高亮都以它为基准。顶栏在窄屏会折行（38px → 60+px），
+   硬编码会让手机上所有跳转偏移。 */
+function syncBarH() {
+  var bar = document.querySelector('.theme-bar');
+  if (bar) document.documentElement.style.setProperty('--bar-h', bar.offsetHeight + 'px');
+}
+addEventListener('DOMContentLoaded', syncBarH);
+addEventListener('resize', syncBarH);
+
+/* ── 4. 本报告的图表数据：只改这一块 ──
+   槽位固定为 rev / margin / segment / eps，与 body-skeleton.html 的
+   canvas id 和 data-chart 一一对应。用不到的槽位整个删掉（连同骨架里的 .ccard）。
+   颜色一律写 palette 的 key 名（'accent' / 'gold' …），不要写 hex。 */
+var CHART_DATA = {
+  rev: {
+    type: 'bar',
+    labels: ['Q2 25', 'Q3 25', 'Q4 25', 'Q1 26', 'Q2 26'],
+    datasets: [
+      { label: '营业收入（₩万亿）', data: [22.23, 24.45, 32.80, 52.58, 79.32], color: 'accent' },
+      { label: '营业利润率 %', data: [41.4, 46.6, 58.5, 71.5, 76.3], color: 'accent3', type: 'line', yAxisID: 'y1' },
+    ],
+  },
+  margin: {
+    type: 'line',
+    labels: ['FY2023', 'FY2024', 'FY2025', 'H1 2026'],
+    datasets: [
+      { label: '年度营业利润率 %', data: [-23.6, 35.5, 48.6, 74.4], color: 'red' },
+    ],
+  },
+  segment: {
+    type: 'doughnut',
+    labels: ['DRAM', 'NAND 闪存', '其他'],
+    datasets: [
+      { label: '占总销售额 %', data: [77.3, 22.0, 0.7], color: ['accent', 'gold', 'accent3'] },
+    ],
+  },
+  eps: {
+    type: 'bar',
+    labels: ['Q2 25', 'Q3 25', 'Q4 25', 'Q1 26', 'Q2 26'],
+    datasets: [
+      { label: '营业利润（₩万亿）', data: [9.21, 11.38, 19.20, 37.61, 60.54], color: 'accent' },
+      { label: '归母净利润（₩万亿）', data: [7.00, null, null, 40.33, 93.82], color: 'gold' },
+    ],
+  },
+};
+
+/* ── 5. 渲染（一般不需要改）── */
+var _charts = {};
+function renderCharts() {
+  if (typeof Chart === 'undefined') return;      // CDN 不可达时静默跳过，不阻断页面
+  var P = palette();
+  Chart.defaults.font.family =
+    getComputedStyle(document.body).getPropertyValue('--font-sans') ||
+    'system-ui, -apple-system, sans-serif';
+
+  Object.keys(CHART_DATA).forEach(function (slot) {
+    var el = document.getElementById(slot);
+    if (!el) return;
+    if (_charts[slot]) _charts[slot].destroy();
+
+    var cfg = CHART_DATA[slot];
+    var isPie = cfg.type === 'doughnut' || cfg.type === 'pie';
+
+    _charts[slot] = new Chart(el, {
+      type: cfg.type,
+      data: {
+        labels: cfg.labels,
+        datasets: cfg.datasets.map(function (d) {
+          var c = Array.isArray(d.color) ? d.color.map(function (k) { return P[k]; }) : P[d.color];
+          // 只写 d.type === 'line' 会让「图表级 type:'line' 但 dataset 没写 type」的
+          // 数据集拿到 borderWidth:0 —— 实测表现为「只有点、没有连线」。
+          var isLine = (d.type || cfg.type) === 'line';
+          return Object.assign({}, d, {
+            backgroundColor: c, borderColor: c,
+            borderWidth: isLine ? 2 : 0, tension: 0.3,
+          });
+        }),
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            // 窄屏把图例挪到顶部：右侧图例在 375px 上会吃掉大半个画布
+            position: isPie && innerWidth > 640 ? 'right' : 'top',
+            labels: { color: P.text, boxWidth: 12, font: { size: 11 } },
+          },
+        },
+        scales: isPie ? {} : {
+          x: { grid: { color: P.grid }, ticks: { color: P.text, font: { size: 11 } } },
+          y: { grid: { color: P.grid }, ticks: { color: P.text, font: { size: 11 } } },
+          y1: {
+            position: 'right', grid: { display: false },
+            ticks: { color: P.text, font: { size: 11 } }, display: 'auto',
+          },
+        },
+      },
+    });
+  });
+}
+addEventListener('DOMContentLoaded', renderCharts);
+addEventListener('resize', function () {          // 图例位置随断点变，需重建
+  clearTimeout(window._rcT);
+  window._rcT = setTimeout(renderCharts, 200);
+});
+
+</script>
+</body>
+</html>

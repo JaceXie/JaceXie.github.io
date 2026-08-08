@@ -2012,7 +2012,7 @@ const reports = [
 /* HAITU:REPORTS:END */
 
 /* ── 估值列表：现价 / 目标价 / 差距% · 可排序 ── */
-const CCY_SYMBOL = { USD: '$', HKD: 'HK$', CNY: '¥', HKG: 'HK$' };
+const CCY_SYMBOL = { USD: '$', HKD: 'HK$', CNY: '¥', HKG: 'HK$', KRW: '₩', JPY: '¥' };
 const RATING_ORDER = { '强力买入': 6, '买入': 5, '有条件买入': 4, '持有观望': 3, '卖出': 2, '强烈卖出': 1 };
 
 function gapPct(r) {
@@ -2037,7 +2037,10 @@ let sortKey = 'date', sortAsc = false;
 function fmtPrice(v, ccy) {
   if (typeof v !== 'number') return '—';
   const sym = CCY_SYMBOL[ccy] || '';
-  const s = v >= 100 ? v.toFixed(0) : v >= 10 ? v.toFixed(1) : v.toFixed(2);
+  // 万位以上加千分位。韩元股票的价格量级是美股的一千倍（SK 海力士约 142 万韩元），
+  // 不分节的话渲染出来是「₩1422000」，读者要数零。美股/港股无一超过 1 万，不受影响。
+  const s = v >= 10000 ? Math.round(v).toLocaleString('en-US')
+          : v >= 100 ? v.toFixed(0) : v >= 10 ? v.toFixed(1) : v.toFixed(2);
   return sym + s;
 }
 
