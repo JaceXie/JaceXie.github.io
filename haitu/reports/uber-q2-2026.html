@@ -1,0 +1,1561 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-08-06 · NYSE: UBER Q2 2026 财报已于 2026-08-05 发布 -->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Uber 优步 UBER · Q2 2026 财报深度分析 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+
+<!-- ⚠️ 无闪烁暗色：这段必须在 <style> 之前、且是同步内联脚本。
+     放到 body 末尾会让暗色用户先看到一闪的白底。
+     key 固定用 'theme'（与门户和 30 份存量报告一致，换 key 会让它们被翻回浅色）。 -->
+<script>
+(function () {
+  try {
+    var t = localStorage.getItem('theme');
+    if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', t);
+  } catch (e) { document.documentElement.setAttribute('data-theme', 'light'); }
+})();
+</script>
+
+<link rel="canonical" href="https://haitu.jacexie.com/haitu/reports/uber-q2-2026.html">
+<meta name="description" content="全球最大的出行＋外卖双边平台。本季营收 +12% 系英国会计口径压低，还原后 +20.9%；利润增速三倍于收入，而回购塌陷、净负债扩大。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Uber 优步 UBER · Q2 2026 财报深度分析">
+<meta property="og:description" content="全球最大的出行＋外卖双边平台。本季营收 +12% 系英国会计口径压低，还原后 +20.9%；利润增速三倍于收入，而回购塌陷、净负债扩大。">
+<meta property="og:url" content="https://haitu.jacexie.com/haitu/reports/uber-q2-2026.html">
+<meta name="twitter:card" content="summary">
+
+<!-- Chart.js：defer + 放在 head 末尾。⚠️ 不要引 Plotly —— 桑基图用内联 SVG。 -->
+<script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+<style>
+
+/* ── MORANDI PALETTE ── */
+:root {
+  /* Light (default) */
+  --bg:        #f5f0eb;
+  --bg2:       #ece6df;
+  --card:      #ffffff;
+  --card2:     #f8f5f1;
+  --border:    #d9d0c7;
+  --text:      #4a4340;
+  --text2:     #7a706a;
+  --text3:     #a89f98;
+  --accent:    #8a9a8e;   /* sage */
+  --accent2:   #7b8fa0;   /* muted blue */
+  --accent3:   #b08d7a;   /* dusty terracotta */
+  --rose:      #c09090;   /* dusty rose */
+  --gold:      #b9a06a;
+  --red:       #b87070;
+  --green:     #7a9a7a;
+  --shadow:    rgba(0,0,0,0.06);
+  --chart-grid:#e5ddd5;
+  /* ── ink 层：只用于文字，全部达 WCAG AA（装饰色仍用上面的原值）── */
+  --text3-ink:   #70665f;  /* 4.51:1 on --bg2（原 --text3 #a89f98 仅 2.60:1）*/
+  --accent3-ink: #7f6150;  /* 4.97:1 on --bg （原 --accent3 #b08d7a 仅 2.67:1）*/
+  --gold-ink:    #8a6d3b;  /* 原 --gold  #b9a06a 仅 2.53:1 */
+  --red-ink:     #a35555;  /* 原 --red   #b87070 仅 3.76:1 */
+  --green-ink:   #4a7057;  /* 原 --green #7a9a7a 仅 3.12:1 */
+  --accent2-ink: #5a7386;
+  --font-sans: system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-serif: Georgia, 'Noto Serif SC', 'PingFang SC', serif;
+  --bar-h: 44px;
+}
+[data-theme="dark"] {
+  --text3-ink:   #a19991;
+  --accent3-ink: #c9a48e;
+  --gold-ink:    #c9b07a;
+  --red-ink:     #c08080;
+  --green-ink:   #8aaa8a;
+  --accent2-ink: #8fabbf;
+  --bg:        #1e1c1a;
+  --bg2:       #28251f;
+  --card:      #2e2a25;
+  --card2:     #363230;
+  --border:    #4a4540;
+  --text:      #d4ccc4;
+  --text2:     #a09890;
+  --text3:     #706860;
+  --accent:    #8a9a8e;
+  --accent2:   #8fabbf;
+  --accent3:   #c9a48e;
+  --rose:      #c09090;
+  --gold:      #c9b07a;
+  --red:       #c08080;
+  --green:     #8aaa8a;
+  --shadow:    rgba(0,0,0,0.3);
+  --chart-grid:#3e3a35;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-serif);
+  line-height: 1.75;
+  font-size: 14.5px;
+  transition: background .35s, color .35s;
+}
+a { color: var(--accent2); text-decoration: none; }
+
+/* ── THEME TOGGLE ── */
+.theme-bar {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 8px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  transition: background .35s;
+}
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; text-decoration: none; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: var(--font-sans); font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; text-decoration: none; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; color: var(--text2);
+}
+.toggle-switch {
+  appearance: none; -webkit-appearance: none; border: 0; padding: 0; margin: 0;
+  position: relative;
+  width: 44px; height: 22px;
+  background: var(--border);
+  border-radius: 11px;
+  cursor: pointer;
+  transition: background .3s;
+}
+.toggle-switch::after {
+  content: '';
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 18px; height: 18px;
+  background: var(--card);
+  border-radius: 50%;
+  transition: transform .3s;
+  box-shadow: 0 1px 3px rgba(0,0,0,.15);
+}
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+
+/* ── HERO ── */
+.hero {
+  padding: 48px 24px 36px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+.hero-tag {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 3px 14px;
+  border-radius: 20px;
+  margin-bottom: 18px;
+}
+.hero h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills {
+  display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;
+}
+.pill {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 6px 18px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--text2);
+  box-shadow: 0 1px 3px var(--shadow);
+}
+.pill strong { color: var(--text); }
+
+/* ── LAYOUT ── */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle {
+  font-size: 18px; font-weight: 700; color: var(--accent3-ink);
+  margin-bottom: 20px; letter-spacing: 0.5px;
+  display: flex; align-items: center; gap: 10px;
+}
+.stitle::before {
+  content: ''; display: block; width: 4px; height: 20px;
+  background: var(--accent3); border-radius: 2px;
+}
+
+/* ── KPI ── */
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.kpi {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 16px 18px;
+  box-shadow: 0 1px 4px var(--shadow);
+  transition: background .35s;
+}
+.kpi-l { font-family: var(--font-sans); font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.badge {
+  display: inline-block; font-family: var(--font-sans);
+  font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px;
+}
+.up   { background: rgba(122,154,122,.15); color: var(--green); }
+.dn   { background: rgba(184,112,112,.15); color: var(--red); }
+.nt   { background: rgba(123,143,160,.15); color: var(--accent2); }
+
+/* ── TABLE ── */
+.tbl-wrap {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow);
+}
+.tbl { width: 100%; border-collapse: collapse; font-family: var(--font-sans); font-size: 13px;
+       font-variant-numeric: tabular-nums; }
+.tbl th {
+  background: var(--card2); color: var(--text3-ink); font-size: 11px;
+  letter-spacing: .5px; text-transform: uppercase;
+  padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border);
+}
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td:first-child { text-align: left; color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); }
+
+/* ── CHARTS ── */
+/* ⚠️ 轨道必须写 minmax(0,1fr) 而不是 1fr。
+   grid 子项默认 min-width:auto，canvas 与桑基 SVG 的固有宽度会把轨道撑开，
+   实测在 375px 下 .ccard 被撑到 568px，导致整页横向滚动。
+   .ccard 的 min-width:0 是同一问题的第二道保险。 */
+.cgrid  { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-bottom: 16px; }
+.cgrid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-bottom: 16px; }
+.ccard, .kpi, .moat-card, .risk-card, .score-card, .snap-item, .pbox { min-width: 0; }
+.ccard {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow);
+}
+.ctitle { font-family: var(--font-sans); font-size: 12px; color: var(--text3-ink); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 230px; }
+
+/* ── QUOTES ── */
+.qgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.qcard {
+  background: var(--card); border: 1px solid var(--border);
+  border-left: 4px solid var(--rose);
+  border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow);
+}
+.qname { font-weight: 700; color: var(--accent3); margin-bottom: 2px; }
+.qrole { font-family: var(--font-sans); font-size: 11px; color: var(--text3); margin-bottom: 10px; }
+.qtext { font-style: italic; font-size: 13.5px; color: var(--text); line-height: 1.8; }
+
+/* ── ANALYSIS ── */
+.agrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+.acard {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow);
+}
+.acard h4 { font-size: 13px; color: var(--accent2); margin-bottom: 10px; text-transform: uppercase; letter-spacing: .5px; }
+.acard ul { padding-left: 16px; }
+.acard li { margin-bottom: 5px; font-size: 13px; }
+
+/* ── BUFFETT SCORE ── */
+.bscore {
+  display: flex; align-items: center; gap: 16px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px 22px; margin-bottom: 12px;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.circle {
+  width: 62px; height: 62px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 18px; flex-shrink: 0;
+  border: 3px solid; font-family: var(--font-sans);
+}
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 3px; }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+/* ── VERDICT ── */
+.verdict {
+  background: var(--card2); border: 2px solid var(--accent);
+  border-radius: 10px; padding: 26px 28px; margin-bottom: 16px;
+}
+.verdict-t { font-size: 17px; font-weight: 700; color: var(--accent); margin-bottom: 10px; }
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 14px; text-align: center;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.pbox .pl { font-family: var(--font-sans); font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.pbox .pv { font-family: var(--font-sans); font-size: 26px; font-weight: 800; }
+.pbox .pn { font-size: 11px; color: var(--text3); margin-top: 3px; }
+.pc { color: var(--text2); } .pf { color: var(--gold); } .ps { color: var(--green); }
+
+/* ── SANKEY ── */
+#sankey { width: 100%; height: 460px; }
+
+/* ── COMMENTARY ── */
+.cmt {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 26px; line-height: 1.9; font-size: 14.5px;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.cmt p { margin-bottom: 14px; }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--card2); border-top: 1px solid var(--border);
+  padding: 24px; text-align: center; color: var(--text3); font-size: 12px;
+  margin-top: 40px;
+}
+
+@media (max-width: 768px) {
+  .cgrid,.cgrid3,.qgrid,.agrid,.pgrid { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 22px; }
+  .kpi-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ── HAITU SIGNATURE BLOCKS (页首短评 + 页末长评) ── */
+.haitu-quip {
+  display: flex; align-items: center; gap: 18px;
+  background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red);
+  border-radius: 12px; padding: 18px 24px; margin: 24px 0;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.haitu-avatar-sm {
+  width: 64px; height: 64px; border-radius: 50%;
+  object-fit: cover; flex-shrink: 0;
+  border: 2px solid var(--border); background: var(--red);
+  box-shadow: 0 2px 8px rgba(184,112,112,0.18);
+}
+.haitu-quote { flex: 1; }
+.haitu-name {
+  font-family: var(--font-sans);
+  font-size: 12px; font-weight: 700; letter-spacing: 1.5px;
+  color: var(--red-ink); text-transform: uppercase; margin-bottom: 4px;
+}
+.haitu-portrait {
+  font-size: 15px; line-height: 1.65; color: var(--text);
+  margin-bottom: 6px; font-weight: 600;
+}
+.haitu-rating-line {
+  font-size: 13px; color: var(--text2);
+  font-family: var(--font-sans);
+}
+.rating-badge {
+  display: inline-block; padding: 2px 12px; border-radius: 12px;
+  font-weight: 700; font-size: 13px; letter-spacing: 0.5px;
+  margin-left: 4px;
+}
+.rating-strong-buy { background: rgba(122,154,122,.25); color: var(--green); }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+.rating-cond-buy { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-hold { background: rgba(123,143,160,.18); color: var(--accent2); }
+.rating-sell { background: rgba(184,112,112,.18); color: var(--red); }
+.rating-strong-sell { background: rgba(184,112,112,.28); color: var(--red); }
+
+.haitu-essay {
+  background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red);
+  border-radius: 12px; padding: 28px 32px; margin: 24px 0;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.haitu-essay-header {
+  display: flex; align-items: center; gap: 18px;
+  padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px;
+}
+.haitu-avatar-lg {
+  width: 110px; height: 110px; border-radius: 50%;
+  object-fit: cover; flex-shrink: 0;
+  border: 3px solid var(--border); background: var(--red);
+  box-shadow: 0 4px 14px rgba(184,112,112,0.22);
+}
+.haitu-name-lg {
+  font-family: 'Georgia', 'Noto Serif SC', serif;
+  font-size: 28px; font-weight: 700; color: var(--text);
+  letter-spacing: 1px; margin-bottom: 4px;
+}
+.haitu-essay-tag {
+  font-family: var(--font-sans);
+  font-size: 12px; color: var(--text3); letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+.haitu-essay-body {
+  font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', serif;
+  font-size: 15px; line-height: 2.0; color: var(--text);
+}
+.haitu-essay-body p { margin-bottom: 16px; }
+.haitu-essay-body p:first-child {
+  font-size: 16px; font-style: italic; color: var(--text2);
+}
+.haitu-essay-body p:last-child {
+  margin-top: 22px; padding-top: 14px;
+  border-top: 1px solid var(--border);
+  font-size: 12px; color: var(--text3); font-style: italic;
+}
+.haitu-sign {
+  text-align: right; margin-top: 14px;
+  font-family: 'Georgia', serif; font-size: 14px;
+  color: var(--text2); font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .haitu-quip { flex-direction: column; text-align: center; }
+  .haitu-essay-header { flex-direction: column; text-align: center; }
+  .haitu-avatar-sm { width: 80px; height: 80px; }
+  .haitu-avatar-lg { width: 90px; height: 90px; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   海图 v2 追加规则 —— 修 103 份存量实测出的问题，勿删勿改顺序
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── 1. 锚点落点：一行同时修好 TOC 跳转 / 深链 / Ctrl+F 定位 / :target ──
+   没有这条，所有跳转都会落在 sticky 顶栏底下被遮住 */
+.section { scroll-margin-top: calc(var(--bar-h) + 12px); }
+
+/* h2.stitle 必须显式定字号，否则被 UA 默认样式撑成 32px 巨标题 */
+h2.stitle { font-size: 18px; font-weight: 700; margin: 0 0 20px; }
+
+/* 章节深链锚点：桌面 hover 显形，触屏常显 */
+.anchor {
+  margin-left: 8px; font-size: 13px; color: var(--text3-ink);
+  text-decoration: none; opacity: 0; transition: opacity .2s;
+}
+.stitle:hover .anchor, .anchor:focus-visible { opacity: 1; }
+@media (hover: none) { .anchor { opacity: .35; } }
+
+/* ── 2. 评级徽章：由 data-rating 派生，作者不再手写 class ──
+   实测存量 .rating-hold 在 63 份是金色、30 份是蓝色 —— 这套选择器根除该分歧 */
+.rating-badge[data-rating="强力买入"] { background: rgba(122,154,122,.25); color: var(--green-ink); }
+.rating-badge[data-rating="买入"]     { background: rgba(122,154,122,.18); color: var(--green-ink); }
+.rating-badge[data-rating="有条件买入"]{ background: rgba(185,160,106,.18); color: var(--gold-ink); }
+.rating-badge[data-rating="持有观望"] { background: rgba(123,143,160,.18); color: var(--accent2-ink); }
+.rating-badge[data-rating="卖出"]     { background: rgba(184,112,112,.18); color: var(--red-ink); }
+.rating-badge[data-rating="强烈卖出"] { background: rgba(184,112,112,.28); color: var(--red-ink); }
+
+/* 涨跌不能只靠色相（色盲）—— 文字里必须自带 +/- 号，这里只负责配色 */
+.up, .pos { color: var(--green-ink); }
+.dn, .neg { color: var(--red-ink); }
+
+/* ── 3. 窄屏表格：粘性首列 + 右侧滚动阴影提示 ──
+   实测 375px 下 12 张表有 6 张横向溢出，且无任何可滚动的视觉线索 */
+.tbl-wrap {
+  background-image: linear-gradient(to right, var(--card), var(--card)),
+                    linear-gradient(to right, rgba(0,0,0,.10), rgba(0,0,0,0));
+  background-position: right center, right center;
+  background-repeat: no-repeat;
+  background-size: 24px 100%, 12px 100%;
+  background-attachment: local, scroll;
+}
+@media (max-width: 640px) {
+  /* border-collapse:collapse 下 sticky 单元格的边框会丢，用 box-shadow 补回 */
+  .tbl { border-collapse: separate; border-spacing: 0; }
+  .tbl :is(th, td) { border-bottom: 1px solid var(--border); }
+  .tbl :is(th, td):first-child {
+    position: sticky; left: 0; z-index: 1;
+    background: var(--card); box-shadow: 1px 0 0 var(--border);
+  }
+  .tbl th:first-child { background: var(--card2); }
+}
+
+/* ── 4. 移动端：顶栏必须能换行（实测四元素已折行重叠）── */
+.theme-bar { flex-wrap: wrap; row-gap: 6px; }
+@media (max-width: 420px) { .theme-bar .xueqiu-link { display: none; } }
+
+@media (max-width: 640px) {
+  .container { padding: 0 14px; }          /* 24px 在 375px 上吃掉 12.8% 视口 */
+  body { font-size: 15.5px; }              /* 14.5px 中文长文在手机上偏小 */
+  .cwrap { height: 200px; }
+  #sankey { height: 360px !important; }    /* 480px 挤在 289px 宽里不可读 */
+  .cgrid, .cgrid3, .pgrid { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* 触控目标 ≥44px。用一个不可见的 ::before 撑开命中区，
+   开关本身仍是 44×22 的滑块外观。
+   ⚠️ 不要改 .toggle-switch 的 height/padding 来凑 44px —— 实测那样做会让
+   border-radius 与 ::after 滑块的定位一起错位，开关变成一个大圆角方块。
+   ⚠️ 条件必须同时含宽度 —— 只写 (hover:none) 时窄屏桌面实测仍是 22px。 */
+@media (max-width: 640px), (hover: none) {
+  .toggle-switch::before {
+    content: ''; position: absolute; left: 0; right: 0;
+    top: 50%; transform: translateY(-50%); height: 44px;
+  }
+}
+
+/* ── 5. prefers-reduced-motion ──
+   全语料 103/103 有 scroll-behavior:smooth 且零保护。加了目录之后，
+   一次跳转要跨 4 万像素、持续数秒，前庭敏感者会难受 */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important; animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+}
+
+/* ── 6. 焦点可见（全语料 0 个 :focus-visible 样式）── */
+:focus-visible { outline: 2px solid var(--accent3-ink); outline-offset: 2px; }
+
+/* ── 7. 图表无障碍降级容器 ── */
+figure.chart { margin: 0; }
+figure.chart figcaption { font-size: 12px; color: var(--text3-ink); line-height: 1.6; margin-top: 8px; }
+.chart-data { font-size: 12px; margin-top: 8px; }
+.chart-data summary { cursor: pointer; color: var(--text3-ink); }
+
+/* ── 8. shell 新增组件（skip link / 结论跳转带 / 顶栏右侧 / 屏幕阅读器专用）── */
+
+/* 跳转到正文：平时移出视口，聚焦时才出现。
+   ⚠️ 不能用 display:none —— 那样键盘也聚焦不到，等于没有 */
+.skip {
+  position: absolute; left: -9999px; top: 0;
+  background: var(--card); color: var(--accent3-ink);
+  padding: 8px 14px; border-radius: 0 0 8px 0; z-index: 200;
+  font-size: 13px; text-decoration: none;
+}
+.skip:focus { left: 0; }
+
+/* 只给屏幕阅读器：essay 一节的标题不需要视觉呈现（.haitu-essay 自带头部） */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+.theme-bar-right { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+
+/* 结论跳转带：读者看完评级后一步到证据 */
+.quip-jump { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.quip-jump a {
+  font-family: var(--font-sans); font-size: 12px; line-height: 1;
+  padding: 7px 12px; border-radius: 999px;
+  border: 1px solid var(--border); background: var(--card2);
+  color: var(--accent3-ink); text-decoration: none;
+  transition: border-color .2s, background .2s;
+}
+.quip-jump a:hover { border-color: var(--accent3); background: var(--card); }
+/* 触控目标 ≥44px。
+   ⚠️ 不能只用 @media (hover:none) —— 窄屏但支持 hover 的场景（缩小的桌面窗口、
+   带触控板的二合一设备）拿不到放大，实测那种情况下只有 28px。宽度与指针两个条件都要给。 */
+@media (max-width: 640px), (hover: none) {
+  /* 用 min-height 而不是加 padding —— padding 要靠字体行高凑够 44px，
+     换字体或改字号就又不达标了（实测 padding:13px 只得到 40px）。 */
+  .quip-jump a { min-height: 44px; padding: 0 16px; display: inline-flex; align-items: center; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   9. 报告组件（快照 / KPI / 护城河 / 风险 / 评分卡 / 电话会 / 桑基）
+   来源：现有报告语料中已验证的组件规则，已套用本表的字体栈与 ink 对比度修正。
+   ⚠️ 这一节必须与 body-skeleton.html 的类名保持同步 —— 骨架里出现的
+   每个类都要在这里有定义，否则章节会退化成无样式的纯文本流。
+   ══════════════════════════════════════════════════════════════ */
+.hero-pills {display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;}
+.pill {background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: var(--font-sans); font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow);}
+.pill strong {color: var(--text);}
+.stock-snap {background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px;}
+.snap-item {text-align: center;}
+.snap-label {font-family: var(--font-sans); font-size: 10px; color: var(--text3-ink); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px;}
+.kpi-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px;}
+.kpi {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow);}
+.moat-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px;}
+.moat-card {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); border-left: 4px solid var(--accent);}
+.moat-card.wide {border-left-color: var(--green);}
+.moat-card.narrow {border-left-color: var(--gold);}
+.moat-card.none {border-left-color: var(--red);}
+.moat-card h5 {font-size: 13px; color: var(--text); margin-bottom: 6px;}
+.moat-card .moat-rate {font-family: var(--font-sans); font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px;}
+.moat-card.wide .moat-rate {background: rgba(122,154,122,.18); color: var(--green);}
+.moat-card.narrow .moat-rate {background: rgba(185,160,106,.18); color: var(--gold);}
+.moat-card.none .moat-rate {background: rgba(184,112,112,.18); color: var(--red);}
+.moat-card p {font-size: 12.5px; color: var(--text2); line-height: 1.65;}
+/* ⚠️ .ec-item 必须是 block，不能是 flex。
+   语料里它只装「徽章 + 一句短语」，所以 flex 没出事；但正文里一旦出现
+   <strong>，每个 <strong> 都会变成独立 flex item，默认 min-width:auto 不收缩，
+   实测在 375px 下把 347px 的容器撑到 478px，导致整页横向滚动。
+   改为 block + 内联徽章：徽章仍在句首，正文正常折行环绕。
+   这与 .cgrid 必须写 minmax(0,1fr) 是同一类问题——flex/grid 子项默认不收缩。 */
+.ec-item {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: block; box-shadow: 0 1px 3px var(--shadow); line-height: 1.75;}
+.ec-badge {display: inline-block; vertical-align: baseline; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-right: 10px; font-family: var(--font-sans); white-space: nowrap;}
+.dcf-note {background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: 13px; color: var(--text2); line-height: 1.8;}
+.dcf-note strong {color: var(--text);}
+.scorecard {background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow);}
+.score-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px;}
+.score-card {background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px;}
+.score-letter {width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-sans); font-weight: 800; font-size: 22px; flex-shrink: 0; border: 3px solid;}
+.flag-row {margin-top: 16px; padding: 12px 16px; background: rgba(184,112,112,.08); border: 1px solid rgba(184,112,112,.3); border-radius: 8px; font-size: 13px; color: var(--text2);}
+.flag-row strong {color: var(--red);}
+.pgrid {display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0;}
+.pbox {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center; box-shadow: 0 1px 4px var(--shadow);}
+.pbox .pl {font-family: var(--font-sans); font-size: 11px; color: var(--text3-ink); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px;}
+.pbox .pv {font-family: var(--font-sans); font-size: 28px; font-weight: 800; margin-bottom: 5px;}
+.pbox .pn {font-size: 12px; color: var(--text3-ink); line-height: 1.5;}
+.risk-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px;}
+.risk-card {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); position: relative; overflow: hidden;}
+.risk-card::before {content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent);}
+.risk-card.r1::before {background: var(--green);}
+.risk-card.r2::before {background: rgba(122,154,122,.6);}
+.risk-card.r3::before {background: var(--gold);}
+.risk-card.r4::before {background: var(--rose);}
+.risk-card.r5::before {background: var(--red);}
+.risk-card h5 {font-size: 14px; margin-bottom: 6px; color: var(--text);}
+.risk-card p {font-size: 13px; color: var(--text2); line-height: 1.7;}
+/* ⚠️ 此处原本混进了三条来自语料 @media(max-width:768px) 内的移动端规则
+   （.cgrid/.pgrid→1fr、.kpi-grid→1fr 1fr、.stock-snap→1fr 1fr）。
+   它们被抽取时丢掉了 @media 包裹，变成无条件规则且排在最后，
+   结果桌面端所有网格都塌成单列。已删除 —— 移动端由本表第 4、9 节的
+   @media(max-width:640px) 统一负责。抽取语料 CSS 时务必排除 @media 块内的规则。 */
+
+/* 骨架用到、但语料里没有现成规则的补充组件 */
+.note { font-size: 12px; color: var(--text3-ink); line-height: 1.7; margin-top: 10px; }
+.lead { font-size: 16px; font-weight: 600; line-height: 1.8; margin-bottom: 14px; }
+.haitu-disc { font-size: 12px; color: var(--text3-ink); line-height: 1.7; margin-top: 18px;
+              padding-top: 14px; border-top: 1px solid var(--border); }
+.bscore { background: var(--card2); border: 1px solid var(--border); border-radius: 10px;
+          padding: 16px 20px; margin: 16px 0; }
+.bscore h4 { font-family: var(--font-sans); font-size: 14px; color: var(--accent3-ink); margin: 0 0 6px; }
+.bscore p { margin: 0; font-size: 14px; }
+
+/* 桑基 SVG：颜色与线宽在标记里给，这里只管描边端点与文字 */
+#sankey { width: 100%; height: auto; }
+.sk-flow path { fill: none; opacity: .45; stroke-linecap: butt; }
+.sk-t .sk-lab { font-family: var(--font-sans); font-size: 12px; fill: var(--text2); }
+.sk-t .sk-num { font-family: var(--font-sans); font-size: 13px; font-weight: 700; fill: var(--text);
+                font-variant-numeric: tabular-nums; }
+.sk-t .warn   { fill: var(--red-ink); }
+
+@media (max-width: 640px) {
+  .stock-snap { grid-template-columns: 1fr 1fr; }
+  .kpi-grid   { grid-template-columns: 1fr 1fr; }
+  .moat-grid, .risk-grid, .score-grid, .pgrid { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* 修饰类：评分等级 / 电话会情绪 / 快照数值。文字色一律走 ink 层。 */
+.score-letter.s-a  { color: var(--green-ink);   border-color: var(--green);   background: rgba(122,154,122,.12); }
+.score-letter.s-bp { color: var(--gold-ink);    border-color: var(--gold);    background: rgba(185,160,106,.12); }
+.score-letter.s-b  { color: var(--accent2-ink); border-color: var(--accent2); background: rgba(123,143,160,.12); }
+.score-letter.s-c  { color: var(--red-ink);     border-color: var(--red);     background: rgba(184,112,112,.12); }
+
+.ec-badge.ec-bull { background: rgba(122,154,122,.18); color: var(--green-ink); }
+.ec-badge.ec-bear { background: rgba(184,112,112,.18); color: var(--red-ink); }
+.ec-badge.ec-neut { background: rgba(123,143,160,.18); color: var(--accent2-ink); }
+
+.snap-value { font-family: var(--font-sans); font-size: 19px; font-weight: 700; color: var(--text);
+              font-variant-numeric: tabular-nums; line-height: 1.3; }
+.snap-note  { font-family: var(--font-sans); font-size: 11px; color: var(--text3-ink); margin-top: 3px; }
+.sk-node rect { opacity: .9; }
+
+</style>
+</head>
+<body>
+
+<a class="skip" href="#kpi">跳到正文</a>
+
+<!-- ── 顶栏 ── -->
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/UBER" target="_blank" rel="noopener">📊 雪球 UBER</a>
+  </div>
+  <div class="theme-bar-right">
+    <span>☀️ 浅色</span>
+    <!-- ⚠️ 必须是 <button>，不是 <div onclick>。存量 103/103 用裸 div，键盘完全不可达。
+         CSS 里已配套 appearance:none;border:0;padding:0，否则 UA 默认样式破坏 44×22 造型。 -->
+    <button type="button" class="toggle-switch" id="themeBtn"
+            aria-pressed="false" aria-label="切换深色模式" onclick="toggleTheme()"></button>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-tag">Q2 2026 财报发布 · 2026-08-05 ｜ 海图研判 · 2026-08-07</div>
+  <h1>Uber 优步 UBER · Q2 2026 财报深度分析</h1>
+  <div class="hero-sub">NYSE: UBER ｜ 财季截至 2026-06-30 ｜ 价值投资视角</div>
+  <div class="hero-pills">
+    <div class="pill"><span class="pill-k">股价</span><span class="pill-v">$70.47</span></div>
+    <div class="pill"><span class="pill-k">市值</span><span class="pill-v">$1,439 亿</span></div>
+    <div class="pill"><span class="pill-k">总订单额</span><span class="pill-v">$580.2 亿 +24%</span></div>
+    <div class="pill"><span class="pill-k">Non-GAAP EPS</span><span class="pill-v">$0.81 +35%</span></div>
+    <div class="pill"><span class="pill-k">EBITDA 占 GB</span><span class="pill-v">4.9% 新高</span></div>
+    <div class="pill"><span class="pill-k">Non-GAAP P/E</span><span class="pill-v">24.4x</span></div>
+  </div>
+</div>
+
+<!-- ── 页首短评：不带头像、不带署名。这是全页唯一的结论卡片 ──
+     ⚠️ 必须包在 .container 里。否则它是 body 直接子元素、宽度撑满视口，
+     而下面每个 .section 都受 .container 的 max-width:1200px 约束 ——
+     结果就是首屏这张卡明显比正文宽出一截。 -->
+<div class="container">
+  <div class="haitu-quip">
+    <div class="haitu-quote">
+      <div class="haitu-portrait">它不拥有一辆车、不开一家餐厅，只经营一张连接 2.08 亿用户与 1,020 万司机骑手的双边网络，从每一单里抽成。</div>
+      <div class="haitu-rating-line">
+        评级：<span class="rating-badge" data-rating="有条件买入">有条件买入</span>
+        · 12 个月目标价 $84 · 经营全线超预期，但股价跌 5.2% 的同时公允价值跌了 9.6%——折扣变浅了
+      </div>
+      <!-- 结论跳转带：读者看到评级后第一反应是「凭什么」，给他一步到证据的路。
+           不要再加摘要卡 —— 目标价在 hero、这里、模块 7 已有三份，第四份只会增加不一致。 -->
+      <div class="quip-jump" role="group" aria-label="快速跳转">
+        <a href="#m13">评分卡与决策</a>
+        <a href="#m7">目标价怎么算出来的</a>
+        <a href="#m11">风险矩阵</a>
+        <a href="#m4">护城河</a>
+        <a href="#essay">夜读手记</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ══ 前置章节 ══ -->
+
+<section class="section" id="snapshot" aria-labelledby="snapshot-t">
+  <h2 class="stitle" id="snapshot-t">市场数据快照（2026-08-06 收盘）<a class="anchor" href="#snapshot" aria-label="本节链接">#</a></h2>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-k">股价</div><div class="snap-v">$70.47</div></div>
+    <div class="snap-item"><div class="snap-k">市值</div><div class="snap-v">$1,439 亿</div></div>
+    <div class="snap-item"><div class="snap-k">企业价值 EV</div><div class="snap-v">$1,513 亿</div></div>
+    <div class="snap-item"><div class="snap-k">Non-GAAP TTM P/E</div><div class="snap-v">24.4x</div></div>
+    <div class="snap-item"><div class="snap-k">EV / 调整后 EBITDA</div><div class="snap-v">15.1x</div></div>
+    <div class="snap-item"><div class="snap-k">P / FCF（TTM）</div><div class="snap-v">14.2x</div></div>
+    <div class="snap-item"><div class="snap-k">FCF 收益率</div><div class="snap-v">7.0%</div></div>
+    <div class="snap-item"><div class="snap-k">52 周区间</div><div class="snap-v">$65.41 – $101.99</div></div>
+    <div class="snap-item"><div class="snap-k">距 52 周高点</div><div class="snap-v">−30.9%</div></div>
+    <div class="snap-item"><div class="snap-k">摊薄股数</div><div class="snap-v">20.50 亿</div></div>
+    <div class="snap-item"><div class="snap-k">净负债</div><div class="snap-v">$73.3 亿</div></div>
+    <div class="snap-item"><div class="snap-k">股息</div><div class="snap-v">无</div></div>
+  </div>
+  <p class="note">财报于 2026-08-05 盘前发布。当日收 $68.18（<strong>−5.29%</strong>），次日收 $70.47（+3.36%），两日净 −2.11%。空头占流通股 2.67%，<strong>不是一只拥挤的做空标的</strong>——这次下跌是多头自己在减仓。</p>
+</section>
+
+<section class="section" id="kpi" aria-labelledby="kpi-t">
+  <h2 class="stitle" id="kpi-t">Q2 2026 核心业绩<a class="anchor" href="#kpi" aria-label="本节链接">#</a></h2>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-k">总订单额 GB</div><div class="kpi-v">$580.2 亿</div><div class="kpi-d up">+24%（恒定汇率 +22%）</div></div>
+    <div class="kpi"><div class="kpi-k">总营收</div><div class="kpi-v">$141.9 亿</div><div class="kpi-d up">+12%｜还原英国口径 +20.9%</div></div>
+    <div class="kpi"><div class="kpi-k">月活平台用户 MAPC</div><div class="kpi-v">2.08 亿</div><div class="kpi-d up">+16%</div></div>
+    <div class="kpi"><div class="kpi-k">总行程数</div><div class="kpi-v">38.67 亿</div><div class="kpi-d up">+18%</div></div>
+    <div class="kpi"><div class="kpi-k">调整后 EBITDA</div><div class="kpi-v">$28.19 亿</div><div class="kpi-d up">+33%｜占 GB 4.9%（历史新高）</div></div>
+    <div class="kpi"><div class="kpi-k">Non-GAAP 营业利润</div><div class="kpi-v">$21.43 亿</div><div class="kpi-d up">+40%</div></div>
+    <div class="kpi"><div class="kpi-k">GAAP 营业利润</div><div class="kpi-v">$18.90 亿</div><div class="kpi-d up">+30%｜利润率 13.3%</div></div>
+    <div class="kpi"><div class="kpi-k">GAAP 净利润</div><div class="kpi-v">$23.94 亿</div><div class="kpi-d warn">+77%｜含 +$16.0 亿非现金重估</div></div>
+    <div class="kpi"><div class="kpi-k">Non-GAAP 摊薄 EPS</div><div class="kpi-v">$0.81</div><div class="kpi-d up">+35%</div></div>
+    <div class="kpi"><div class="kpi-k">自由现金流</div><div class="kpi-v">$27.92 亿</div><div class="kpi-d up">+13%｜TTM 首破 $100 亿</div></div>
+    <div class="kpi"><div class="kpi-k">股票回购</div><div class="kpi-v">$5.10 亿</div><div class="kpi-d down">上季 $30 亿｜6 月为零</div></div>
+    <div class="kpi"><div class="kpi-k">股权激励 SBC</div><div class="kpi-v">$5.50 亿</div><div class="kpi-d down">本季回购未能覆盖稀释</div></div>
+  </div>
+  <p class="note">数据来源：Uber 2026-08-05 发布的 Q2 2026 业绩公告（8-K Ex-99.1）、10-Q 与业绩补充材料。</p>
+</section>
+
+<section class="section" id="focus" aria-labelledby="focus-t">
+  <h2 class="stitle" id="focus-t">本季必看 · 两个「看穿」<a class="anchor" href="#focus" aria-label="本节链接">#</a></h2>
+
+  <div class="pbox">
+    <h4>看穿一 · 本季最重要的事不在利润表，在资产负债表</h4>
+    <div class="cmt">
+      <p>市场把注意力放在「营收只增 12%」和「Q3 指引低于预期」上。但这一季 Uber 做的最大一件事，在利润表上<strong>一个字都看不到</strong>：它悄悄花掉约 <span class="hl-t">$40 亿</span>，建立了对德国外卖公司 Delivery Hero 约 <strong>37% 的经济权益</strong>。</p>
+      <p>结构值得看清楚：<strong>24.99% 是直接持股，剩下约 12% 通过总收益互换（TRS）持有</strong>。为什么卡在 24.99%？因为德国收购法规定，持股触及 <strong>30%</strong> 即触发强制全面要约。用 TRS 装下超出部分，等于<strong>先拿到经济利益、暂不触发法定义务</strong>——这是一手设计过的棋，不是顺手买的财务投资。</p>
+      <p>随后 7 月 16 日落子：Uber 提出以 <strong>€41.50/股、约 $148 亿</strong> 全面收购 Delivery Hero，Prosus 已就约 17% 出具不可撤销承诺，合计支持度约 <strong>53%</strong>，并已安排 <strong>€142 亿过桥融资</strong>，预计 2027 年下半年交割。</p>
+      <p>这一件事，同时解释了本季三个看似无关的现象：</p>
+      <ul class="ulist">
+        <li><strong>GAAP 净利暴增 77%</strong>——+$16.0 亿税前股权重估收益里，Delivery Hero 一家贡献 +$11 亿（Aurora +$8.99 亿、滴滴 −$4.37 亿）。<span class="hl-t">这不是经营改善，是它自己买出来的账面浮盈。</span></li>
+        <li><strong>回购从 $30 亿塌到 $5.1 亿、6 月直接归零</strong>——钱去买股权了。</li>
+        <li><strong>净现金变净负债</strong>——现金及短投从 $76.3 亿降到 $53.9 亿，短期借款从 <strong>$0 变成 $20.0 亿</strong>，净负债 $73.3 亿。</li>
+      </ul>
+      <p>我不认为这笔交易本身是错的：Delivery Hero 覆盖 Uber 薄弱的中东、亚太与拉美市场，管理层称交割后即刻增厚、第三年增厚幅度达高个位数。<strong>但股东要清楚自己被换了什么：过去两年「拿自由现金流回购自己」的资本配置故事，在本季被换成了「拿自由现金流去做一笔跨境并购、并背上 €142 亿过桥」。</strong>前者的确定性远高于后者，而估值倍数是按前者给的。</p>
+    </div>
+  </div>
+
+  <div class="pbox">
+    <h4>看穿二 · 自动驾驶叙事在扩张，而 Waymo 关系在收缩</h4>
+    <div class="cmt">
+      <p>业绩会上 AV 是最高频的词：<strong>21 家合作伙伴、约 12 万辆承诺车辆、未来数年投入超 $100 亿</strong>；管理层给了一句很漂亮的杠杆表述——「我们每投入 $1，合作伙伴能从其他投资人处募到 $2.5」。</p>
+      <p>但把补充材料翻到数字页，故事的另一半在那里：</p>
+      <ul class="ulist">
+        <li><strong>上线 AV 的城市从上季 8 个降到本季 7 个。</strong>减少的是凤凰城——Waymo 退出了该地的 Uber 渠道。这是这项业务上线以来<span class="hl-t">第一次城市数下降</span>。</li>
+        <li><strong>整份新闻稿、准备好的发言稿与补充材料正文，一次都没有出现「Waymo」。</strong>只在合作伙伴 logo 墙上留了一个图标。上一季它还是被反复点名的旗舰伙伴。</li>
+        <li>Waymo 已宣布 <strong>2028 年 1 月在奥斯汀、亚特兰大上线自有 App</strong>，车辆留在 Uber 平台至 2028 年 5 月。也就是说，独家期正在明确倒计时。</li>
+        <li>AV 行程规模，管理层的原话是「每周数十万次」。Uber 全平台每周约 <strong>3 亿次</strong>行程——<strong>AV 占比不到 0.5%</strong>。</li>
+      </ul>
+      <p>Uber 给出的反证据是有分量的：在洛杉矶、旧金山、凤凰城这三个 AV 渗透最高的城市，<strong>它的品类份额比一年前更高</strong>。这说明现阶段 AV 还没有把需求从平台上抽走。</p>
+      <p>还有一处值得记下来：管理层公开承诺「未来数年投入超 $100 亿」，<strong>而 10-Q 的不可撤销采购义务里并没有列出 AV 车辆的承购承诺</strong>。这两件事只能有一种解释——这笔钱目前还不是合同义务，是意向。<span class="hl-t">对股东，这意味着灵活性；对估值，这意味着你不能把它当作已经锁定的产能。</span></p>
+      <p>合起来看：<strong>Uber 正在用真金白银把 AV 的供给端从「依赖一家伙伴」改造成「一个由 21 家组成的市场」，这个方向是对的，也是唯一的活路。但改造期里，最强的那家伙伴正在后退，而替代者尚未上量。</strong>这是一段真空期，长度未知。</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="trend" aria-labelledby="trend-t">
+  <h2 class="stitle" id="trend-t">关键指标趋势（近 5 季 · Q2 2025 → Q2 2026）<a class="anchor" href="#trend" aria-label="本节链接">#</a></h2>
+  <div class="cgrid">
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">总营收（$B）与总订单额 GB 同比增速</div>
+        <div class="cwrap"><canvas id="rev" data-chart="rev" role="img" aria-label="近五季总营收从 126.5 亿升至 141.9 亿，同期 GB 同比增速在 17% 到 25% 区间，本季 24%"></canvas></div>
+        <figcaption>柱＝总营收（$B，GAAP）；折线＝GB 同比增速（%）。来源：Uber 各季 8-K Ex-99.1。</figcaption>
+      </figure>
+    </div>
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">利润率趋势：GAAP 营业利润率 vs 调整后 EBITDA 占 GB</div>
+        <div class="cwrap"><canvas id="margin" data-chart="margin" role="img" aria-label="GAAP 营业利润率从 11.5% 升到 14.6% 后本季回落至 13.3%，调整后 EBITDA 占 GB 稳步从 4.5% 升至 4.9% 创新高"></canvas></div>
+        <figcaption>GAAP 营业利润率＝营业利润÷营收；EBITDA 占 GB 是 Uber 的主口径。来源：各季 8-K Ex-99.1。</figcaption>
+      </figure>
+    </div>
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">Q2 2026 分部营收拆分（$B）</div>
+        <div class="cwrap"><canvas id="segment" data-chart="segment" role="img" aria-label="本季分部营收：出行 73.6 亿、外卖 52.5 亿、货运 15.8 亿"></canvas></div>
+        <figcaption>出行营收受英国会计口径变更压低约 $11 亿。来源：Q2 2026 8-K Ex-99.1 分部附注。</figcaption>
+      </figure>
+    </div>
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">GAAP vs Non-GAAP 摊薄 EPS（GAAP 严重失真）</div>
+        <div class="cwrap"><canvas id="eps" data-chart="eps" role="img" aria-label="GAAP EPS 在五季间从 0.63 跳到 3.11 再落到 0.13 后反弹至 1.17，Non-GAAP EPS 则平稳从 0.71 升到 0.81"></canvas></div>
+        <figcaption>Q2/Q3 2025 未单列 Non-GAAP EPS（Uber 自 Q4 2025 起改为主口径），故留空。来源：各季 8-K Ex-99.1。</figcaption>
+      </figure>
+    </div>
+  </div>
+  <p class="note"><strong>看趋势请用 GB、调整后 EBITDA 与 Non-GAAP EPS。</strong>GAAP EPS 在这五季里被三样东西轮流扭曲：Q3 2025 的 $3.11 来自一次性 $49 亿递延税估值备抵释放；Q4 2025 $0.14 与 Q1 2026 $0.13 被 $16 亿、$15 亿股权重估亏损压低；本季 $1.17 又被 +$16 亿重估收益抬高。<span class="hl-t">五个季度、三种方向、同一个科目。</span></p>
+</section>
+
+<section class="section" id="flow" aria-labelledby="flow-t">
+  <h2 class="stitle" id="flow-t">资金流向桑基图（Q2 2026 · $M）<a class="anchor" href="#flow" aria-label="本节链接">#</a></h2>
+  <div class="ccard">
+    <figure class="chart">
+      <svg id="sankey" viewBox="0 0 1180 480" role="img" aria-label="Q2 2026 资金流向：141.91 亿营收中 123.01 亿是成本费用，GAAP 营业利润 18.90 亿，加 13.42 亿其他收入净额（其中 16.18 亿是非现金股权重估）后税前 32.32 亿，扣税得净利 23.94 亿；现金表把这 16.18 亿非现金收益剔除后，加回股权激励与折旧摊销、营运资金，得经营现金流 28.62 亿，扣资本开支 0.70 亿得自由现金流 27.92 亿">
+        <g class="sk-flow">
+          <path d="M106,128.5 C200,128.5 200,118.5 290,118.5" stroke="var(--red)" stroke-width="197"/>
+          <path d="M106,242 C200,242 200,260 290,260" stroke="var(--accent)" stroke-width="30"/>
+          <path d="M304,260 C390,260 390,263 470,263" stroke="var(--accent)" stroke-width="30"/>
+          <path d="M394,406 C430,406 430,289 470,289" stroke="var(--gold)" stroke-width="22"/>
+          <path d="M484,254.5 C560,254.5 560,211.5 630,211.5" stroke="var(--rose)" stroke-width="13"/>
+          <path d="M484,280.5 C560,280.5 560,269.5 630,269.5" stroke="var(--accent)" stroke-width="39"/>
+          <path d="M644,263 C740,263 740,188 830,188" stroke="var(--rose)" stroke-width="26"/>
+          <path d="M644,282.5 C740,282.5 740,254.5 830,254.5" stroke="var(--accent)" stroke-width="13"/>
+          <path d="M754,396.5 C790,396.5 790,278 830,278" stroke="var(--gold)" stroke-width="33"/>
+          <path d="M844,249 C910,249 910,226 990,226" stroke="var(--rose)" stroke-width="2"/>
+          <path d="M844,272 C910,272 910,271 990,271" stroke="var(--green)" stroke-width="44"/>
+        </g>
+        <g class="sk-node">
+          <rect x="92" y="30" width="14" height="227" rx="3" fill="var(--accent2)"/>
+          <rect x="290" y="20" width="14" height="197" rx="3" fill="var(--red)"/>
+          <rect x="290" y="245" width="14" height="30" rx="3" fill="var(--accent)"/>
+          <rect x="380" y="395" width="14" height="22" rx="3" fill="var(--gold)"/>
+          <rect x="470" y="248" width="14" height="52" rx="3" fill="var(--accent)"/>
+          <rect x="630" y="205" width="14" height="13" rx="3" fill="var(--rose)"/>
+          <rect x="630" y="250" width="14" height="39" rx="3" fill="var(--accent)"/>
+          <rect x="830" y="175" width="14" height="26" rx="3" fill="var(--rose)"/>
+          <rect x="740" y="380" width="14" height="33" rx="3" fill="var(--gold)"/>
+          <rect x="830" y="248" width="14" height="46" rx="3" fill="var(--green)"/>
+          <rect x="990" y="225" width="14" height="2" rx="1" fill="var(--rose)"/>
+          <rect x="990" y="249" width="14" height="44" rx="3" fill="var(--green)"/>
+        </g>
+        <g class="sk-t">
+          <text x="2" y="134" class="sk-lab">总营收</text>
+          <text x="2" y="152" class="sk-num">14,191</text>
+          <text x="2" y="172" class="sk-lab">出行 7,363</text>
+          <text x="2" y="188" class="sk-lab">外卖 5,245</text>
+          <text x="2" y="204" class="sk-lab">货运 1,583</text>
+          <text x="312" y="104" class="sk-lab">总成本费用</text>
+          <text x="312" y="122" class="sk-num">12,301</text>
+          <text x="312" y="140" class="sk-lab">＝营收的 86.7%</text>
+          <text x="312" y="252" class="sk-lab">GAAP 营业利润</text>
+          <text x="312" y="270" class="sk-num">1,890</text>
+          <text x="312" y="288" class="sk-lab">利润率 13.3%</text>
+          <text x="492" y="244" class="sk-lab">税前利润</text>
+          <text x="492" y="262" class="sk-num">3,232</text>
+          <text x="240" y="440" class="sk-lab">＋其他收入净额</text>
+          <text x="240" y="458" class="sk-num">＋1,342</text>
+          <text x="240" y="474" class="sk-lab warn">其中非现金股权重估 ＋1,618</text>
+          <text x="652" y="205" class="sk-lab">所得税</text>
+          <text x="706" y="205" class="sk-num">840</text>
+          <text x="652" y="246" class="sk-lab">GAAP 净利润</text>
+          <text x="652" y="264" class="sk-num">2,394</text>
+          <text x="852" y="170" class="sk-lab warn">剔除非现金重估</text>
+          <text x="852" y="188" class="sk-num warn">−1,618</text>
+          <text x="852" y="244" class="sk-lab">经营现金流</text>
+          <text x="852" y="262" class="sk-num">2,862</text>
+          <text x="560" y="436" class="sk-lab">＋股权激励 550　＋折旧摊销与递延税等 1,126</text>
+          <text x="560" y="452" class="sk-lab">＋营运资金浮存 410（占 OCF 14.3%，去年同期 17.5%）</text>
+          <text x="1012" y="222" class="sk-lab">资本开支</text>
+          <text x="1076" y="222" class="sk-num">70</text>
+          <text x="1012" y="264" class="sk-lab">自由现金流</text>
+          <text x="1012" y="282" class="sk-num">2,792</text>
+          <text x="1012" y="300" class="sk-lab">＝营收的 19.7%</text>
+        </g>
+      </svg>
+      <figcaption>单位：百万美元。来源：Uber Q2 2026 8-K Ex-99.1 损益表与现金流量表。每级流入＝流出（14,191 ＝ 12,301＋1,890；1,890＋1,342 ＝ 3,232；3,232 ＝ 840＋2,392＋2 少数股东权益；2,394−1,618＋550＋1,126＋410 ＝ 2,862；2,862 ＝ 70＋2,792）。<strong>请特别看中间那道红色的向上分支：它是把 $16.18 亿「利润」从现金流里减掉的动作——GAAP 净利里最大的一块，从来没有变成过现金。</strong></figcaption>
+    </figure>
+    <details class="chart-data">
+      <summary>查看数据表</summary>
+      <div class="tbl-wrap">
+        <table class="tbl" data-shape="grid" data-source="Uber Q2 2026 8-K Ex-99.1 损益表与现金流量表">
+          <thead><tr><th>流量</th><th>金额（$M）</th><th>占营收</th></tr></thead>
+          <tbody>
+            <tr><td>总营收</td><td>14,191</td><td>100.0%</td></tr>
+            <tr><td>总成本费用</td><td>12,301</td><td>86.7%</td></tr>
+            <tr><td>GAAP 营业利润</td><td>1,890</td><td>13.3%</td></tr>
+            <tr><td>其他收入净额</td><td>1,342</td><td>9.5%</td></tr>
+            <tr><td>其中：非现金股权重估</td><td>1,618</td><td>11.4%</td></tr>
+            <tr><td>税前利润</td><td>3,232</td><td>22.8%</td></tr>
+            <tr><td>所得税</td><td>840</td><td>5.9%</td></tr>
+            <tr><td>GAAP 净利润（归母）</td><td>2,394</td><td>16.9%</td></tr>
+            <tr><td>剔除非现金重估</td><td>−1,618</td><td>−11.4%</td></tr>
+            <tr><td>加回：股权激励</td><td>550</td><td>3.9%</td></tr>
+            <tr><td>加回：折旧摊销与递延税等</td><td>1,126</td><td>7.9%</td></tr>
+            <tr><td>加回：营运资金变动</td><td>410</td><td>2.9%</td></tr>
+            <tr><td>经营现金流</td><td>2,862</td><td>20.2%</td></tr>
+            <tr><td>资本开支</td><td>70</td><td>0.5%</td></tr>
+            <tr><td>自由现金流</td><td>2,792</td><td>19.7%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ══ 13 个分析模块 ══ -->
+
+<section class="section" id="m1" aria-labelledby="m1-t">
+  <h2 class="stitle" id="m1-t">模块 1 · 公司概览与背景<a class="anchor" href="#m1" aria-label="本节链接">#</a></h2>
+  <div class="cmt">
+    <p><strong>Uber Technologies, Inc.</strong>（NYSE: UBER），总部旧金山，2009 年成立，2019 年 5 月上市。财年即日历年，无财年错位。当前市值约 <strong>$1,439 亿</strong>。</p>
+    <p><strong>生意一句话</strong>：Uber 不拥有车、不开餐厅、不把司机雇为正式员工，它经营的是一张连接 <span class="hl-t">2.08 亿月活用户、超 1,020 万司机与骑手、约 140 万商户、70 多个国家</span>的双边网络，从每一单出行和外卖里抽取平台费。本季有 1,020 万司机与骑手通过这张网络赚到超过 <strong>$250 亿</strong>。</p>
+    <p><strong>三大分部（Q2 2026）</strong>：</p>
+    <ul class="ulist">
+      <li><strong>出行 Mobility</strong>——GB $289.9 亿（+22%），营收 $73.6 亿（+1%，受英国口径压低），分部经营利润 $22.15 亿（+28%），利润率 <strong>7.6%</strong>（占 GB）</li>
+      <li><strong>外卖 Delivery</strong>——GB $274.6 亿（+26%），营收 $52.5 亿（+28%），分部经营利润 $10.55 亿（+38%），利润率 <strong>3.8%</strong>（历史新高）</li>
+      <li><strong>货运 Freight</strong>——营收 $15.8 亿（+26%），经营亏损 $0.24 亿。规模不小、贡献为负，是三块里唯一还没走通的</li>
+    </ul>
+    <p><strong>本季必须先说清的一个口径</strong>：2026 年 1 月 2 日起，Uber 在英国改变了出行业务的会计模型（由代理转为主体口径的反向调整），本季<strong>压低营收 $11 亿</strong>、约 8 个百分点，对 GB、EBITDA、利润与现金流<span class="hl-t">均无影响</span>。还原后，本季总营收增速是 <strong>+20.9%</strong>，出行营收增速是 <strong>+16.1%</strong>——而不是表面的 +12% 与 +1%。<strong>这个失真要到 2027 年第一季度才会自然消失。</strong>在那之前，任何只看营收增速的比较都会低估这家公司。</p>
+    <p><strong>其他值得记住的规模数字</strong>：广告业务年化运行率已超 <strong>$25 亿</strong>（同比约 +50%）；杂货与零售年化 GB 约 <strong>$150 亿</strong>；会员计划 Uber One 贡献了外卖 GB 的 <strong>七成以上</strong>，两年提升约 20 个百分点——但本季公司<strong>没有披露 Uber One 的绝对会员数</strong>（上季为 5,000 万），这是一个值得留意的披露退步。</p>
+  </div>
+</section>
+
+<section class="section" id="m2" aria-labelledby="m2-t">
+  <h2 class="stitle" id="m2-t">模块 2 · 管理层评估<a class="anchor" href="#m2" aria-label="本节链接">#</a></h2>
+  <div class="cmt">
+    <p><strong>兑现记录：连续三个季度，实际 GB 超出指引区间上沿。</strong>幅度分别为 +0.4%、+0.7%、+0.5%。这不是运气，是一支把指引当作承诺来管理的团队——而且超出幅度稳定在半个百分点上下，说明<span class="hl-t">他们既没有虚高指引，也没有藏得太深</span>。这项记录在我看来是本报告里最有价值的软信息。</p>
+    <p><strong>本季的表达方式也值得读。</strong>「营收 +12%」是一个会让人误解的数字，公司完全可以只讲这个数字然后在附注里解释。它没有——业绩公告正文直接给出了还原口径的 +20.9%，并明确说明失真将持续到 2027 年第一季度。<strong>主动把自己最难看的数字翻译清楚，是一种正确的姿态。</strong></p>
+    <p><strong>但资本配置上，本季出现了一次重大转向，而且事先没有铺垫。</strong>连续多个季度每季约 $30 亿的回购节奏，在本季骤降到 $5.1 亿、6 月为零，钱转去建立 Delivery Hero 头寸。这笔转向在事后被解释得很充分（协同、地域互补、增厚节奏），<strong>但股东是在钱花完之后才知道的</strong>。用 TRS 结构规避德国 30% 强制要约门槛——合法、聪明、也确实为股东省了钱，但它同时说明：<span class="hl-t">管理层在做一件他们知道市场会有反应、因而选择先做后说的事</span>。</p>
+    <p><strong>信息披露的一处倒退</strong>：Uber One 绝对会员数本季未披露；AV 的行程量只给「每周数十万次」这样的量级词，而不是数字。在一家披露质量整体优秀的公司里，<strong>被模糊化的恰好是竞争压力最大的两项</strong>。这不构成红旗，但值得下一季核对是否恢复。</p>
+    <p><strong>结论</strong>：执行力 A，透明度 B+，资本配置纪律本季从 A− 降到 <strong>B</strong>——不是因为方向错，而是因为它把一个可预测的动作换成了一个不可预测的动作，并且是在事后告知的。</p>
+  </div>
+</section>
+
+<section class="section" id="m3" aria-labelledby="m3-t">
+  <h2 class="stitle" id="m3-t">模块 3 · 商业模式深度解析<a class="anchor" href="#m3" aria-label="本节链接">#</a></h2>
+  <div class="cmt">
+    <p><strong>本质：一门用固定成本撬动可变收入的调度生意。</strong>Uber 的边际成本极低——多一单出行几乎不增加公司自身成本，司机报酬是从 GB 里直接分走的、不经过 Uber 的成本结构。所以它的经济学可以浓缩成一句：<span class="hl-t">GB 增长 22%，调整后 EBITDA 增长 33%，营业利润增长 30–40%——利润增速是规模增速的 1.5 倍，而营收增速被会计口径压住</span>。</p>
+    <p><strong>本季数据把这个杠杆量化得很清楚</strong>：</p>
+    <div class="tbl-wrap">
+      <table class="tbl" data-shape="grid" data-source="Uber Q2 2026 8-K Ex-99.1 与业绩补充材料">
+        <thead><tr><th>层级</th><th>Q2 2026</th><th>同比</th><th>杠杆倍数</th></tr></thead>
+        <tbody>
+          <tr><td>总订单额 GB</td><td>$580.2 亿</td><td>+24%</td><td>1.0x（基准）</td></tr>
+          <tr><td>营收（还原英国口径）</td><td>$152.9 亿</td><td>+20.9%</td><td>0.9x</td></tr>
+          <tr><td>调整后 EBITDA</td><td>$28.19 亿</td><td>+33%</td><td>1.4x</td></tr>
+          <tr><td>Non-GAAP 营业利润</td><td>$21.43 亿</td><td>+40%</td><td>1.7x</td></tr>
+          <tr><td>Non-GAAP 摊薄 EPS</td><td>$0.81</td><td>+35%</td><td>1.5x</td></tr>
+          <tr><td>自由现金流</td><td>$27.92 亿</td><td>+13%</td><td>0.5x</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>注意最后一行。</strong>自由现金流增速 <span class="hl-t">只有 GB 增速的一半</span>，这是本季模型里唯一失速的地方，原因在模块 5.4 详述——不是经营变差，是浮存的顺风在减弱。</p>
+    <p><strong>两块业务的经济结构完全不同，不能混着看</strong>：</p>
+    <ul class="ulist">
+      <li><strong>出行</strong>是高抽成、高利润率的成熟生意（分部利润率 7.6% 占 GB），增长靠渗透与频次；</li>
+      <li><strong>外卖</strong>是低抽成、正在爬坡的生意（3.8% 占 GB，创纪录），但它的<strong>利润增速 +38% 高于出行的 +28%</strong>，且广告与会员两块高毛利收入都长在它身上。<span class="hl-t">未来两年利润率改善的主要弹性在外卖，不在出行。</span></li>
+    </ul>
+    <p><strong>本季一个真实的减速点</strong>：管理层明确说，行程增速减速的 2 个百分点「<strong>完全来自巴西</strong>」——摩托车供给不足。这是一个具体、可修复、且被主动指出的问题，比一句「宏观放缓」诚实得多。</p>
+  </div>
+</section>
+
+<section class="section" id="m4" aria-labelledby="m4-t">
+  <h2 class="stitle" id="m4-t">模块 4 · 经济护城河分析（5 维）<a class="anchor" href="#m4" aria-label="本节链接">#</a></h2>
+  <div class="moat-grid">
+    <div class="moat-card wide">
+      <h5>① 网络效应 · 宽</h5>
+      <p>双边网络的经典形态：司机多→等待短→用户多→司机单量高→司机更多。2.08 亿 MAPC 与 1,020 万司机骑手构成的密度，是新进入者用补贴无法在合理成本内复制的。<strong>本季最强的证据来自敌方阵地</strong>：在洛杉矶、旧金山、凤凰城这三个自动驾驶渗透率最高的城市，Uber 的品类份额<span class="hl-t">比一年前更高</span>——即使有资金雄厚的对手直接投放运力，网络仍在变厚。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>② 规模经济 · 宽</h5>
+      <p>调整后 EBITDA 占 GB 从五季前的 4.5% 升到本季 <strong>4.9%</strong>，同期 GB 增长约 24%——规模上去了，单位经济也在改善，这才是真规模经济。绝对水平的对比更说明问题：DoorDash 2.8%、Lyft 3.2%、Instacart 3.0%，<strong>Uber 的 4.9% 是同业最高</strong>，而它的分母还是四家里最大的。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>③ 转换成本 · 窄</h5>
+      <p>用户装两个 App 的成本几乎为零，这一维本来很弱。唯一的加固来自会员：Uber One 已覆盖外卖 GB 的<strong>七成以上</strong>，两年提升约 20 个百分点——会员一旦付费，跨品类使用会显著提高留存。但本季<span class="hl-t">未披露绝对会员数</span>，这条护城河的宽度暂时无法独立验证。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>④ 品牌与心智 · 窄</h5>
+      <p>「Uber」在英语世界已动词化，这是真实资产。但它换不来定价权——用户对价格高度敏感，本季公司还主动把加州保险改革省下的钱<strong>再投入到降价</strong>上。品牌带来的是获客成本优势，不是提价能力。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>⑤ 监管与牌照 · 窄且双向</h5>
+      <p><strong>本季这一维首次出现明确的正向贡献</strong>：加州 SB 371 自 2026 年 1 月生效，把强制的无保险驾驶人险从每人 $100 万降到 $6 万，保险成本从连续多季的逆风转为<span class="hl-t">本季完全没有被列为成本驱动因素</span>，管理层预计自 2027 年起产生「显著的经常性节约」。<br>但同一维度的另一侧同样真实：马萨诸塞州已在 2026 年 5 月认证全美首个全州网约车工会（约 7 万名司机，谈判期限 11 月 18 日），欧盟平台工作指令转化期限为 2026 年 12 月 2 日。<strong>牌照壁垒挡得住小玩家，挡不住立法机构。</strong></p>
+    </div>
+  </div>
+  <p class="note"><strong>综合判断：护城河「宽且仍在变宽，但最深的一段正在被重新挖掘」。</strong>网络效应与规模经济这两条真正值钱的护城河，本季都拿到了新的、可验证的加固证据。真正的问题不在这五维里——在于自动驾驶是否会把「调度需求」和「提供运力」这两件事重新分开。如果分开，网络效应仍在需求侧，规模经济则会被重新洗牌。<span class="hl-t">这就是为什么 Uber 宁可花 $100 亿也要把 AV 供给端做成一个 21 家的市场，而不是一家的通道。</span></p>
+</section>
+
+<section class="section" id="m5" aria-labelledby="m5-t">
+  <h2 class="stitle" id="m5-t">模块 5 · 财务深度分析<a class="anchor" href="#m5" aria-label="本节链接">#</a></h2>
+
+  <h3 class="sub">5.1 关键比率与近 5 季趋势</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="Uber 各季 8-K Ex-99.1（Q2 2025 – Q2 2026）">
+      <thead><tr><th>指标</th><th>Q2 25</th><th>Q3 25</th><th>Q4 25</th><th>Q1 26</th><th>Q2 26</th></tr></thead>
+      <tbody>
+        <tr><td>总营收（$B）</td><td>12.65</td><td>13.47</td><td>14.37</td><td>13.20</td><td>14.19</td></tr>
+        <tr><td>总订单额 GB（$B）</td><td>46.76</td><td>49.74</td><td>54.14</td><td>53.72</td><td>58.02</td></tr>
+        <tr><td>GB 同比</td><td>+17%</td><td>+21%</td><td>+22%</td><td>+25%</td><td>+24%</td></tr>
+        <tr><td>调整后 EBITDA（$B）</td><td>2.12</td><td>2.26</td><td>2.49</td><td>2.48</td><td>2.82</td></tr>
+        <tr><td>EBITDA 占 GB</td><td>4.5%</td><td>4.5%</td><td>4.6%</td><td>4.6%</td><td>4.9%</td></tr>
+        <tr><td>GAAP 营业利润（$B）</td><td>1.45</td><td>1.11</td><td>1.77</td><td>1.92</td><td>1.89</td></tr>
+        <tr><td>GAAP 营业利润率</td><td>11.5%</td><td>8.3%</td><td>12.3%</td><td>14.6%</td><td>13.3%</td></tr>
+        <tr><td>GAAP 摊薄 EPS</td><td>$0.63</td><td>$3.11 ⚠️</td><td>$0.14</td><td>$0.13</td><td>$1.17 ⚠️</td></tr>
+        <tr><td>Non-GAAP EPS</td><td>—</td><td>—</td><td>$0.71</td><td>$0.72</td><td>$0.81</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note"><strong>本季唯一走弱的一行是 GAAP 营业利润率：14.6% → 13.3%。</strong>拆开看不是经营恶化——Non-GAAP 调整项从上季的净转回变成本季的 $2.53 亿支出，其中 <strong>$1.41 亿是法律事项计提</strong>。按 Non-GAAP 营业利润占 GB 计算，本季是 3.7%，上季 3.5%，<span class="hl-t">口径一致时利润率是在改善的</span>。但读者要知道：法律计提在这家公司是常态科目，把它一律当「一次性」剔除并不稳妥。</p>
+
+  <h3 class="sub">5.2 利润质量：GAAP 净利里有多少是真的</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="cards" data-source="Uber 各季 8-K Ex-99.1「其他收入净额」附注">
+      <thead><tr><th>季度</th><th>股权投资重估（税前）</th><th>GAAP 摊薄 EPS</th><th>该季 GAAP EPS 的可读性</th></tr></thead>
+      <tbody>
+        <tr><td>Q2 2025</td><td>−$0.17 亿</td><td>$0.63</td><td>基本干净</td></tr>
+        <tr><td>Q3 2025</td><td>+$15 亿</td><td>$3.11</td><td>另被 $49 亿递延税估值备抵释放灌高，完全不可读</td></tr>
+        <tr><td>Q4 2025</td><td>−$16 亿</td><td>$0.14</td><td>被压到接近零，不可读</td></tr>
+        <tr><td>Q1 2026</td><td>−$15 亿</td><td>$0.13</td><td>被压到接近零，不可读</td></tr>
+        <tr><td>Q2 2026</td><td><strong>+$16 亿</strong></td><td><strong>$1.17</strong></td><td>被抬高约一倍，不可读</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>五个季度，同一个科目在 −$16 亿到 +$16 亿之间来回摆动，区间 $32 亿。</strong>本季 +$16 亿里，Delivery Hero 贡献 +$11 亿、Aurora +$8.99 亿、滴滴 −$4.37 亿。这些都是<span class="hl-t">按市价重估的未上市或已上市股权，不产生一分钱现金，也不代表任何经营变化</span>。</p>
+  <p>上一期报告我给出的判断是「把 GAAP 净利的波动当噪声，看 Non-GAAP 和现金流」。本季给出了这个判断的最强验证：<strong>上季这个科目是 −$15 亿、GAAP EPS $0.13，本季是 +$16 亿、GAAP EPS $1.17。同一家公司、相邻两季、九倍的 EPS 差距，经营上什么都没有发生。</strong></p>
+  <p>Non-GAAP 口径下，本季 EPS $0.81（+35%）、Non-GAAP 营业利润 $21.43 亿（+40%）。这两个数字才是可以拿来做估值的。</p>
+
+  <h3 class="sub">5.3 资产负债表：本季发生了方向性变化</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="Uber Q1/Q2 2026 10-Q 合并资产负债表">
+      <thead><tr><th>科目（$M）</th><th>2026-03-31</th><th>2026-06-30</th><th>变化</th></tr></thead>
+      <tbody>
+        <tr><td>现金及等价物 ＋ 短期投资</td><td>7,633</td><td>5,391</td><td>−2,242</td></tr>
+        <tr><td>短期借款 / 一年内到期</td><td>0</td><td><strong>1,997</strong></td><td>+1,997</td></tr>
+        <tr><td>长期债务</td><td>10,514</td><td>10,726</td><td>+212</td></tr>
+        <tr><td>有息负债合计</td><td>10,514</td><td>12,723</td><td>+2,209</td></tr>
+        <tr><td><strong>净负债（现金口径）</strong></td><td><strong>−4,423</strong></td><td><strong>−7,332</strong></td><td>恶化 2,909</td></tr>
+        <tr><td>长期股权投资（公允价值）</td><td>8,109</td><td>8,759</td><td>+650</td></tr>
+        <tr><td>权益法投资</td><td>—</td><td>3,773</td><td>—</td></tr>
+        <tr><td>Delivery Hero 总收益互换（TRS）</td><td>—</td><td>~1,500</td><td>新增</td></tr>
+        <tr><td>商誉</td><td>—</td><td>9,472</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>三件事同时发生：现金减少 $22.4 亿、短期借款从零变成 $20.0 亿、净负债扩大到 $73.3 亿。</strong>钱的去向清楚——约 $40 亿建立 Delivery Hero 头寸。加回可变现的股权资产（$125.3 亿），公司整体仍是净现金 <strong>+$52.0 亿</strong>，这一点不能不提；但股权资产是不能用来付利息的，<span class="hl-t">而且其中最大的一块，正是它准备再掏 $148 亿去全资买下的那家公司</span>。</p>
+  <p><strong>更值得放在心上的是表外的那一笔</strong>：为收购 Delivery Hero 安排的 <strong>€142 亿过桥融资</strong>。它尚未提取、不在上表任何一行，但交割一旦发生（预计 2027 年下半年），Uber 的资本结构会与今天完全不同。<strong>今天用「轻资产、净现金、高自由现金流」给它估值的人，需要意识到这三个形容词里至少有一个正在失效。</strong></p>
+
+  <h3 class="sub">5.4 现金流：TTM 首破 $100 亿，但顺风在减弱</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="Uber Q2 2025 / Q2 2026 10-Q 合并现金流量表">
+      <thead><tr><th>科目（$M）</th><th>Q2 2025</th><th>Q2 2026</th><th>同比</th></tr></thead>
+      <tbody>
+        <tr><td>经营现金流 OCF</td><td>2,564</td><td>2,862</td><td>+12%</td></tr>
+        <tr><td>资本开支</td><td>92</td><td>70</td><td>−24%</td></tr>
+        <tr><td>自由现金流 FCF</td><td>2,472</td><td>2,792</td><td>+13%</td></tr>
+        <tr><td>其中：营运资金变动贡献</td><td>449</td><td>410</td><td>−9%</td></tr>
+        <tr><td>营运资金占 OCF 比重</td><td>17.5%</td><td><strong>14.3%</strong></td><td>−3.2pp</td></tr>
+        <tr><td>其中：保险准备金净流入</td><td>812</td><td><strong>387</strong></td><td><strong>−52%</strong></td></tr>
+        <tr><td>TTM 自由现金流</td><td>—</td><td><strong>10,116</strong></td><td>首次突破 $100 亿</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>「TTM 自由现金流首破 $100 亿」是本季最漂亮的标题，也是最需要打折的一个。</strong>Uber 的现金流里长期存在一块「浮存」：它先向乘客收钱、后向司机付钱，且必须为未决赔案计提巨额保险准备金——只要业务在增长，这两笔就持续产生净流入，看起来像利润，实际是<span class="hl-t">规模增长的副产品，增速一旦放缓就会同步缩小，业务收缩时甚至会倒流</span>。</p>
+  <p>上一期我提出应当对这块浮存打折。本季数据把这个判断从推理变成了观察：<strong>保险准备金净流入同比腰斩（$8.12 亿 → $3.87 亿），营运资金对 OCF 的贡献从 17.5% 降到 14.3%。</strong>业务还在高速增长，浮存贡献已经开始下降——这说明保险成本改善（加州 SB 371）在利润表上是好事，在现金流量表上却会<strong>削弱一块此前被计入自由现金流的浮存</strong>。两者方向相反，很少有人同时看这两张表。</p>
+  <p><strong>按剔除营运资金贡献的口径</strong>（年化约 $16.4 亿），正常化自由现金流约 <strong>$84.8 亿</strong>，对应 P/FCF 从表面的 14.2x 升到 <strong>17.0x</strong>，FCF 收益率从 7.0% 降到 <strong>5.9%</strong>。<span class="hl-t">这仍然是一个不贵的估值，但它和「7% 的自由现金流收益率」是两回事。</span>我在模块 7 用的是正常化口径。</p>
+  <p><strong>资本开支只有 $0.70 亿</strong>，占营收 0.5%——这确实是一门极轻的生意。但请把它和「未来数年 AV 投入超 $100 亿」放在一起读：<strong>今天的轻资产，是尚未开始重资产投入的轻资产。</strong></p>
+</section>
+
+<section class="section" id="m6" aria-labelledby="m6-t">
+  <h2 class="stitle" id="m6-t">模块 6 · 电话会分析<a class="anchor" href="#m6" aria-label="本节链接">#</a></h2>
+  <div class="ec-list">
+    <div class="ec-item"><span class="ec-badge ec-bull">利好</span><strong>三连超指引上沿。</strong>管理层重申其指引哲学，并第三次交出高于区间上沿的 GB。稳定的小幅超出比大幅超出更可信——它意味着预测能力，而不是运气。</div>
+    <div class="ec-item"><span class="ec-badge ec-bull">利好</span><strong>加州保险改革的节约「将从 2027 年起显著且经常性地体现」。</strong>这是本季少数几个明确指向未来的量化承诺，且已经有立法（SB 371）背书，不是愿景。</div>
+    <div class="ec-item"><span class="ec-badge ec-bull">利好</span><strong>AV 资本的杠杆表述：「每投入 $1，合作伙伴能从其他投资人处募到 $2.5」。</strong>如果成立，$100 亿的自有投入可以撬动约 $350 亿的行业运力建设，而 Uber 不必自持资产负债表风险。</div>
+    <div class="ec-item"><span class="ec-badge ec-bull">利好</span><strong>三个 AV 渗透最高城市的品类份额同比提升。</strong>这是对「AV 会绕开平台」这一最大空头论点的直接反驳，且用的是可验证的份额数据而非表态。</div>
+    <div class="ec-item"><span class="ec-badge ec-neut">中性</span><strong>行程增速减速 2pp「完全来自巴西」的摩托车供给。</strong>问题具体、局部、可修复，且是主动披露的。但它同时说明新兴市场的供给侧并不总是充裕。</div>
+    <div class="ec-item"><span class="ec-badge ec-neut">中性</span><strong>Delivery Hero「交割即增厚，第三年高个位数增厚」。</strong>方向明确，但交割在 2027 年下半年，中间隔着监管审批、股东接受率与整合执行三道关。承诺的兑现窗口远在验证之外。</div>
+    <div class="ec-item"><span class="ec-badge ec-bear">利空</span><strong>Q3 指引低于市场预期。</strong>GB 区间 $582.5–602.5 亿（中值 $592.5 亿，市场约 $593.3 亿），Non-GAAP EPS $0.84–0.88（市场约 $0.89）。<span class="hl-t">这是当日股价 −5.29% 的直接原因</span>，而不是本季业绩。</div>
+    <div class="ec-item"><span class="ec-badge ec-bear">利空</span><strong>汇率从连续四个季度的顺风转为约 1 个百分点的逆风。</strong>过去四季 GB 的报告增速里一直含有汇率贡献，从 Q3 起这块反向。表观增速会比经营实况更难看。</div>
+    <div class="ec-item"><span class="ec-badge ec-bear">利空</span><strong>整场会议、整份材料，没有一次提到 Waymo。</strong>上季它还是被反复点名的核心伙伴。<strong>沉默本身就是信息</strong>——尤其在对方已宣布 2028 年 1 月自建 App 之后。</div>
+  </div>
+  <p class="note">电话会内容引自 2026-08-05 官方直播回放与「准备好的发言稿」PDF，语义可靠但非逐字定稿。</p>
+</section>
+
+<section class="section" id="m7" aria-labelledby="m7-t">
+  <h2 class="stitle" id="m7-t">模块 7 · 多模型估值（8 种方法）<a class="anchor" href="#m7" aria-label="本节链接">#</a></h2>
+
+  <h3 class="sub">7.1 八法明细</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="cards" data-source="海图自行测算，输入取自 Uber Q2 2026 8-K Ex-99.1、10-Q 与 Q3 指引">
+      <thead><tr><th>方法</th><th>关键假设</th><th>得出估值</th><th>适用性</th></tr></thead>
+      <tbody>
+        <tr><td>① P/E（当年 Non-GAAP）</td><td>FY26E EPS $3.31（Q3 取指引中值 $0.86、Q4 $0.92）× 25x</td><td><strong>$82.75</strong></td><td>适用</td></tr>
+        <tr><td>② 前瞻 P/E</td><td>FY27E EPS $4.14（+25%）× 22x</td><td><strong>$91.03</strong></td><td>适用</td></tr>
+        <tr><td>③ P/FCF</td><td>正常化 FCF $84.8 亿（剔除营运资金浮存年化 $16.4 亿）× 18x</td><td><strong>$74.69</strong></td><td>适用</td></tr>
+        <tr><td>④ EV/EBITDA</td><td>TTM 调整后 EBITDA $100.4 亿 × 17x − 净负债 $73.3 亿</td><td><strong>$80.00</strong></td><td>适用</td></tr>
+        <tr><td>⑤ SOTP 分部加总</td><td>TTM Non-GAAP 营业利润 $76.2 亿 × 20x ＋ 权益类资产 $125.3 亿按 8 折 − 净负债</td><td><strong>$75.92</strong></td><td>适用</td></tr>
+        <tr><td>⑥ 情景加权 DCF</td><td>乐观 25% × $117、基准 45% × $90、悲观 30% × $55</td><td><strong>$86.25</strong></td><td>适用</td></tr>
+        <tr><td>⑦ P/S 市销率</td><td>—</td><td>—</td><td><strong>不适用</strong>：英国会计口径本季压低营收 $11 亿、约 8pp，且该失真要到 2027 Q1 才自然消失。<span class="hl-t">分母本身是失真的，任何 P/S 结果都不可比</span>——这正是本季市场误读「营收只增 12%」的根源，不应在估值里重复这个错误。</td></tr>
+        <tr><td>⑧ NAV 重置净资产</td><td>—</td><td>—</td><td><strong>不适用</strong>：Uber 股东权益约 $247.5 亿，仅为市值的 17%，且 Capex 只占营收 0.5%。<span class="hl-t">这门生意的价值几乎全部在账面之外的网络密度里</span>，NAV 对它没有解释力。</td></tr>
+        <tr><td>⑨ PEG</td><td>Non-GAAP TTM P/E 24.4x ÷ EPS 增速 35% ＝ <strong>0.70</strong></td><td>作为交叉验证</td><td>仅作参考（增速处于口径失真期，分母不稳）</td></tr>
+        <tr><td>⑩ 股息贴现 DDM</td><td>—</td><td>—</td><td><strong>不适用</strong>：从未派息，且明确不打算派息</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note"><strong>关于 GAAP P/E 为何不入表</strong>：TTM GAAP EPS $4.55 对应 P/E 仅 15.5x，看似极便宜，但它含有 Q3 2025 的 $49 亿一次性递延税估值备抵释放。剔除后 GAAP P/E 是 <strong>31.3x</strong>——比 Non-GAAP 的 24.4x 贵得多。<span class="hl-t">同一家公司、同一天，GAAP P/E 可以是 15.5x 也可以是 31.3x，取决于你有没有翻到附注。</span>这也是我在本报告全程用 Non-GAAP 口径的原因。</p>
+
+  <h3 class="sub">7.2 加权汇总</h3>
+  <p>六个可用方法的估值从 $74.69 到 $91.03，<strong>中位数 $81.37</strong>，情景加权 $86.25。两者折中，取<strong>加权公允价值 $82.00</strong>。</p>
+  <p>现价 $70.47，较公允价值低 <strong>14.1%</strong>——<span class="hl-t">安全边际不足 25%，因此不给「买入」</span>。</p>
+  <div class="pbox">
+    <h4>与上一期比：股价跌了，但公允价值跌得几乎一样快</h4>
+    <div class="cmt">
+      <p>上一期（2026-07-11 研判）估值中位数 <strong>$90</strong>、首仓价 $72，当时股价 $74.35。<br>本期估值中位数 <strong>$81.37</strong>（−9.6%）、首仓价 $65.10，现价 $70.47（−5.2%）。</p>
+      <p><strong>股价只跌了 5.2%，我的公允价值判断跌了 9.6%——折扣不但没有变深，反而变浅了。</strong></p>
+      <p>公允价值下调的三个具体原因，都不是情绪：</p>
+      <ul class="ulist">
+        <li><strong>净负债从 $44.2 亿扩大到 $73.3 亿</strong>，且新增 €142 亿过桥承诺——直接降低 EV 法与 SOTP 法的每股结果；</li>
+        <li><strong>自由现金流按浮存打折后从表面 $101.2 亿降到 $84.8 亿</strong>，P/FCF 法从 $90 上方降到 $74.69；</li>
+        <li><strong>回购塌陷</strong>——每股价值的一条确定通道被换成了一笔待验证的并购。</li>
+      </ul>
+      <p>这就是为什么「股价跌破上期首仓价 $72」不能自动读成「机会来了」。<span class="hl-t">分子和分母同时在动，只盯分子会得到相反的结论。</span></p>
+    </div>
+  </div>
+
+  <h3 class="sub">7.3 建仓阶梯</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="海图自行测算：估值中位数 $81.37 × 80% / 70% / 60%">
+      <thead><tr><th>档位</th><th>价格</th><th>距现价</th><th>触发含义</th></tr></thead>
+      <tbody>
+        <tr><td>首仓（中位数 × 80%）</td><td><strong>$65.10</strong></td><td>−7.6%</td><td>接近 52 周低点 $65.41，安全边际达 20%</td></tr>
+        <tr><td>二仓（× 70%）</td><td><strong>$56.96</strong></td><td>−19.2%</td><td>需要一次明确的基本面或情绪冲击</td></tr>
+        <tr><td>三仓（× 60%）</td><td><strong>$48.82</strong></td><td>−30.7%</td><td>对应 AV 分流被证实或并购整合失败</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>止盈三档 $105 / $130 / $160，每档减仓 25%。</strong>建议总仓位 <strong>3–5%</strong>，持有周期 <strong>3–5 年</strong>——这门生意的复利来自网络密度的缓慢加厚，不来自季度波动。</p>
+</section>
+
+<section class="section" id="m8" aria-labelledby="m8-t">
+  <h2 class="stitle" id="m8-t">模块 8 · 竞争与行业分析<a class="anchor" href="#m8" aria-label="本节链接">#</a></h2>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="各公司 2026 Q2 财报（Uber / DoorDash / Lyft / Instacart 8-K Ex-99.1）">
+      <thead><tr><th>公司</th><th>本季 GB / GOV / GTV</th><th>同比</th><th>调整后 EBITDA</th><th>EBITDA 占交易额</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Uber</strong></td><td>$580.2 亿</td><td>+24%</td><td>$28.19 亿</td><td><strong>4.9%</strong></td></tr>
+        <tr><td>DoorDash</td><td>$330.8 亿</td><td>+36%（剔除 Deliveroo +23%）</td><td>$9.14 亿</td><td>2.8%</td></tr>
+        <tr><td>Lyft</td><td>$55.0 亿</td><td>+23%（含 Freenow）</td><td>$1.77 亿</td><td>3.2%</td></tr>
+        <tr><td>Instacart</td><td>$103.5 亿</td><td>+14%</td><td>$3.13 亿</td><td>3.0%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>两条容易被误读的对比，值得掰开</strong>：</p>
+  <ul class="ulist">
+    <li><strong>「DoorDash 增长 36%，比 Uber 快得多」——口径不同。</strong>DoorDash 的 36% 含并购 Deliveroo 的贡献，剔除后是 <strong>+23%</strong>；Uber 外卖同期恒定汇率 <strong>+25%</strong>。<span class="hl-t">在可比口径上，Uber 的外卖业务增长更快，而它的分母还小于对方。</span></li>
+    <li><strong>盈利能力上没有争议。</strong>Uber 的 4.9% 是四家里最高的，且是在最大的分母上做到的。第二名 Lyft 的 3.2% 不到它的三分之二，而 Lyft 的交易额只有它的 9.5%。</li>
+  </ul>
+  <p><strong>真正的竞争问题不在这张表里。</strong>上表四家都在同一个模式里竞争——用 App 调度人类司机。而自动驾驶如果成熟，会把「运力」从「人的时间」变成「资本开支」，这时候赢家不一定是网络最大的那家，可能是资本最便宜的那家。</p>
+  <p>Uber 的应对是可以理解的：<strong>不自建车队（那会毁掉轻资产模型），而是签下 21 家伙伴、承诺投入 $100 亿、锁定约 12 万辆车，把自己变成 AV 行业的需求聚合器与首选分发渠道。</strong>这个策略成立的前提是——<span class="hl-t">AV 公司需要 Uber 的需求，胜过 Uber 需要它们的运力</span>。Waymo 正在测试这个前提是否成立：它已宣布 2028 年 1 月在奥斯汀、亚特兰大上线自有 App。</p>
+  <p><strong>一个有利的时点信号</strong>：Wayve 在本季财报日（8 月 5 日）拿到伦敦网约车牌照。Uber 是它的投资人之一。<strong>伙伴阵营在补位，只是速度慢于头部伙伴的后退速度。</strong></p>
+</section>
+
+<section class="section" id="m9" aria-labelledby="m9-t">
+  <h2 class="stitle" id="m9-t">模块 9 · 技术面与 K 线分析<a class="anchor" href="#m9" aria-label="本节链接">#</a></h2>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="公开行情数据，截至 2026-08-06 收盘">
+      <thead><tr><th>项目</th><th>数值</th><th>解读</th></tr></thead>
+      <tbody>
+        <tr><td>现价</td><td>$70.47</td><td>—</td></tr>
+        <tr><td>52 周区间</td><td>$65.41 – $101.99</td><td>距低点仅 +7.7%</td></tr>
+        <tr><td>距 52 周高点</td><td>−30.9%</td><td>已进入深度回撤区间</td></tr>
+        <tr><td>财报日表现</td><td>−5.29%（8/5）</td><td>盘前一度 +3.8%，指引公布后翻绿</td></tr>
+        <tr><td>次日表现</td><td>+3.36%（8/6）</td><td>两日净 −2.11%，跌幅被收回大半</td></tr>
+        <tr><td>空头占流通股</td><td>2.67%（5,180 万股）</td><td>不拥挤，无逼空基础</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>价格结构上有一个值得记住的位置：$65.41。</strong>它既是 52 周低点，也几乎与我按估值中位数 × 80% 算出的首仓价 $65.10 重合。<span class="hl-t">两条完全独立的推理——一条来自八法估值、一条来自一年的价格历史——落在同一个位置，这是我愿意在那里开始建仓的一部分理由。</span></p>
+  <p><strong>关于财报日那根 −5.29% 的阴线，要读对原因</strong>：本季所有实际数据都超预期，跌的是 Q3 指引（GB 中值差 0.1%、EPS 差 $0.02）。次日反弹 3.36% 说明市场自己也在修正这个反应。<strong>这不是基本面重估，是预期的一次性重置。</strong></p>
+  <p>空头仅占流通股 2.67%，意味着<strong>这次下跌没有空头参与，是多头自己在减仓</strong>——也意味着未来没有轧空带来的技术性反弹。<span class="hl-t">价格要涨回去，只能靠基本面自己走出来。</span></p>
+  <p class="note">技术面在本报告中只作为建仓位置的交叉验证，不作为独立的买卖依据。</p>
+</section>
+
+<section class="section" id="m10" aria-labelledby="m10-t">
+  <h2 class="stitle" id="m10-t">模块 10 · 增长催化剂与前景展望<a class="anchor" href="#m10" aria-label="本节链接">#</a></h2>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="cards" data-source="Uber Q2 2026 业绩公告、准备好的发言稿与 10-Q 披露">
+      <thead><tr><th>催化剂</th><th>时点</th><th>可验证程度</th><th>对每股价值的量级</th></tr></thead>
+      <tbody>
+        <tr><td><strong>加州保险改革节约兑现</strong>（SB 371）</td><td>2027 年起</td><td><strong>高</strong>——已立法，本季保险已从成本驱动因素中消失</td><td>中等且经常性</td></tr>
+        <tr><td><strong>广告业务</strong>（年化 $25 亿，+50%）</td><td>持续</td><td><strong>高</strong>——已在报表中，接近纯毛利</td><td>中等，是利润率改善的主引擎</td></tr>
+        <tr><td><strong>外卖利润率爬坡</strong>（3.8% 创纪录）</td><td>持续</td><td><strong>高</strong>——连续多季改善</td><td>大</td></tr>
+        <tr><td><strong>英国口径失真消失</strong></td><td>2027 Q1</td><td><strong>高</strong>——纯会计事项</td><td>无实质价值，但会让营收增速跳升约 8pp，可能带来估值修复</td></tr>
+        <tr><td><strong>Delivery Hero 收购完成</strong></td><td>2027 下半年</td><td><strong>中</strong>——需监管审批与接受率</td><td>大：管理层称第三年高个位数增厚</td></tr>
+        <tr><td><strong>AV 供给上量</strong>（21 家伙伴 / 12 万辆）</td><td>未明确</td><td><strong>低</strong>——当前占行程不到 0.5%；$100 亿承诺未列入 10-Q 不可撤销义务</td><td>长期最大，也最不确定</td></tr>
+        <tr><td><strong>回购恢复</strong>（剩余授权约 $157 亿）</td><td>未承诺</td><td><strong>低</strong>——本季 6 月为零，现金正流向并购</td><td>中等</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>把这张表按「可验证程度」重排，结论会很清楚</strong>：真正确定的催化剂（保险节约、广告、外卖利润率、口径修复）加起来足以支撑<span class="hl-t">利润增速在未来 4–6 个季度继续高于收入增速</span>；而两个量级最大的（Delivery Hero、AV）都要到 2027 年之后才能验证。</p>
+  <p><strong>这决定了持有这只股票的正确姿势</strong>：用确定的那几项来支撑估值，把不确定的那两项当作免费期权——而不是反过来，为期权先付钱。</p>
+</section>
+
+<section class="section" id="m11" aria-labelledby="m11-t">
+  <h2 class="stitle" id="m11-t">模块 11 · 风险矩阵<a class="anchor" href="#m11" aria-label="本节链接">#</a></h2>
+  <div class="risk-grid">
+    <div class="risk-card r5">
+      <h5>① 自动驾驶脱媒 · 严重度：高</h5>
+      <p>本季 AV 城市数首次下降（8→7，凤凰城因 Waymo 退出），全部对外材料<strong>零次提及 Waymo</strong>，而 Waymo 已宣布 2028 年 1 月在奥斯汀、亚特兰大上线自有 App。<strong>触发信号</strong>：下季 AV 城市数继续下降，或再有头部伙伴宣布自建分发。</p>
+    </div>
+    <div class="risk-card r5">
+      <h5>② 并购执行与资产负债表 · 严重度：高</h5>
+      <p>Delivery Hero €142 亿过桥融资尚未提取，交割预计 2027 下半年。净负债已从 $44.2 亿扩到 $73.3 亿，短期借款从零变 $20.0 亿。<strong>触发信号</strong>：接受率不足、监管附加条件、或过桥转为长期高息债。</p>
+    </div>
+    <div class="risk-card r4">
+      <h5>③ 劳工与监管重定性 · 严重度：中高</h5>
+      <p>马萨诸塞州已认证全美首个全州网约车工会（约 7 万司机，谈判期限 2026-11-18）；加州 AB 1340 已生效；欧盟平台工作指令转化期限 2026-12-02，目前无成员国完成转化。<strong>触发信号</strong>：任一大型市场把司机重定性为雇员。</p>
+    </div>
+    <div class="risk-card r4">
+      <h5>④ 英国 VAT 争议的会计假设 · 严重度：中高</h5>
+      <p>Uber 已就 HMRC 的约 <strong>$18 亿</strong>（£14 亿）增值税评估缴款以启动申诉，并<strong>记为应收账款</strong>——这一处理隐含「预期胜诉」的判断。若败诉，需一次性转为费用。<strong>触发信号</strong>：不利的一审裁决或同类先例。</p>
+    </div>
+    <div class="risk-card r3">
+      <h5>⑤ 回购塌陷与股权稀释 · 严重度：中</h5>
+      <p>本季回购 $5.10 亿 <strong>低于</strong>股权激励 $5.50 亿，6 月回购为零；三年摊薄股数仅降 1.4%。<strong>触发信号</strong>：下季回购仍显著低于 SBC，则「每股价值增长」这条路径在并购完成前实质中断。</p>
+    </div>
+    <div class="risk-card r3">
+      <h5>⑥ 增速与汇率同步转弱 · 严重度：中</h5>
+      <p>Q3 指引低于市场预期，汇率从连续四季顺风转为约 1pp 逆风，巴西摩托供给拖累行程增速 2pp。<strong>触发信号</strong>：GB 恒定汇率增速跌破 18%（指引区间下沿）。</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="m12" aria-labelledby="m12-t">
+  <h2 class="stitle" id="m12-t">模块 12 · 股东回报分析<a class="anchor" href="#m12" aria-label="本节链接">#</a></h2>
+
+  <h3 class="sub">12.1 现金分红</h3>
+  <p><strong>无。</strong>Uber 从未派息，且未表示计划派息。全部股东回报通过回购实现——这使得下一节的分析变得比通常更重要：<span class="hl-t">对一家不派息的公司，回购是股东唯一的现金回报通道，回购停了就等于回报停了。</span></p>
+
+  <h3 class="sub">12.2 股票回购：本季发生了实质性中断</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="Uber 各季 10-Q 股东权益变动表与现金流量表">
+      <thead><tr><th>期间</th><th>回购金额</th><th>回购股数</th><th>均价</th><th>同期股权激励 SBC</th></tr></thead>
+      <tbody>
+        <tr><td>Q2 2025</td><td>$14.0 亿</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td>Q1 2026</td><td>$30.0 亿</td><td>3,975 万股</td><td>~$75.5</td><td>—</td></tr>
+        <tr><td><strong>Q2 2026</strong></td><td><strong>$5.10 亿</strong></td><td>688.5 万股</td><td>~$74.07</td><td><strong>$5.50 亿</strong></td></tr>
+        <tr><td>2026 上半年合计</td><td>$35.0 亿</td><td>4,663 万股</td><td>~$75.1</td><td>—</td></tr>
+        <tr><td>剩余授权</td><td>约 $157 亿</td><td>—</td><td>—</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>三个事实需要并排看</strong>：本季回购 $5.10 亿，是上季的六分之一；<strong>6 月单月回购为零</strong>；而本季股权激励 $5.50 亿——<span class="hl-t">回购金额低于股权激励金额，意味着这一季的回购连稀释都没能对冲掉，更谈不上为股东创造每股价值</span>。</p>
+
+  <h3 class="sub">12.3 摊薄股数：三年只降了 1.4%</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="Uber 各季 8-K Ex-99.1 摊薄加权平均股数">
+      <thead><tr><th>期间</th><th>摊薄加权平均股数</th><th>较三年前</th></tr></thead>
+      <tbody>
+        <tr><td>Q2 2023</td><td>20.79 亿股</td><td>基准</td></tr>
+        <tr><td>Q2 2024</td><td>21.50 亿股（峰值）</td><td>+3.4%</td></tr>
+        <tr><td>Q2 2025</td><td>21.26 亿股</td><td>+2.3%</td></tr>
+        <tr><td><strong>Q2 2026</strong></td><td><strong>20.50 亿股</strong></td><td><strong>−1.4%</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>同比看是 −3.5%，很漂亮；拉到三年看是 −1.4%，故事完全不同。</strong>过去三年 Uber 累计投入了数十亿美元回购，而摊薄股数只净减少约 2,900 万股——<span class="hl-t">绝大部分回购被股权激励的新增股份吃掉了，实际效果接近「用现金买回自己发出去的股票」，而不是「减少股东人数」</span>。</p>
+  <p>上一期我写的是「摊薄股数真实下降」。<strong>按同比口径那句话没错，但它不完整——拉长到三年，这条路径的斜率远比一年期看起来平缓。</strong>这是本期我要修正的一处判断。</p>
+  <p><strong>模块小结</strong>：Uber 不派息，回购是唯一回报通道；而本季这条通道被并购挤压到几乎关闭——回购金额首次低于同期股权激励，6 月归零，三年摊薄股数仅降 1.4%。<strong>剩余 $157 亿授权仍在，恢复只是资本配置的选择而非能力问题</strong>；但在 Delivery Hero 交割完成、€142 亿过桥落地之前，<span class="hl-t">投资者不应把回购当作可预期的每股价值来源</span>。这也是我把资本配置纪律一项从 A− 降到 B 的直接依据。</p>
+</section>
+
+<section class="section" id="m13" aria-labelledby="m13-t">
+  <h2 class="stitle" id="m13-t">模块 13 · 海图评分卡 + 投资决策<a class="anchor" href="#m13" aria-label="本节链接">#</a></h2>
+  <div class="scorecard">
+    <div class="score-grid">
+      <div class="score-card"><div class="score-letter">A</div><div class="score-dim">商业模式</div><div class="score-note">双边网络＋极轻资产，Capex 仅占营收 0.5%；GB +24% 对应 EBITDA +33%，杠杆真实</div></div>
+      <div class="score-card"><div class="score-letter">A−</div><div class="score-dim">护城河</div><div class="score-note">网络效应与规模经济双双拿到新证据（AV 高渗透城市份额反升、EBITDA 占 GB 同业最高）；转换成本仍弱</div></div>
+      <div class="score-card"><div class="score-letter">B+</div><div class="score-dim">管理层</div><div class="score-note">三连超指引上沿、主动翻译英国口径失真；但重大资本转向事后告知，两项关键披露退步</div></div>
+      <div class="score-card"><div class="score-letter">A−</div><div class="score-dim">财务健康</div><div class="score-note">TTM FCF 首破 $100 亿、Non-GAAP 利润率全面改善；但净负债扩至 $73.3 亿、浮存顺风减弱</div></div>
+      <div class="score-card"><div class="score-letter">B</div><div class="score-dim">资本配置纪律</div><div class="score-note">回购从 $30 亿塌到 $5.1 亿且低于 SBC，三年摊薄股数仅降 1.4%；$148 亿并购待验证</div></div>
+      <div class="score-card"><div class="score-letter">B</div><div class="score-dim">估值吸引力</div><div class="score-note">Non-GAAP P/E 24.4x、正常化 FCF 收益率 5.9%、PEG 0.70；安全边际 14.1%，未达 25% 门槛</div></div>
+    </div>
+    <div class="flag-row">
+      <h4>红旗排查（六项）</h4>
+      <ul class="ulist">
+        <li>❌ <strong>商誉减值历史</strong>——未触发。商誉 $94.7 亿，本季无减值。</li>
+        <li>❌ <strong>收入确认时点</strong>——未触发。英国口径变更是准则驱动、方向为<span class="hl-t">压低</span>营收，且公司主动给出还原口径，与激进确认相反。</li>
+        <li>❌ <strong>关联交易</strong>——未触发。无重大关联方依赖。</li>
+        <li>⚠️ <strong>表外承诺</strong>——<strong>未触发但需跟踪</strong>。管理层公开承诺 AV 投入超 $100 亿，10-Q 的不可撤销采购义务中未列示；€142 亿并购过桥亦未提取。两者目前均非合同义务，披露正确，<strong>但这意味着未来的资本需求尚未进入任何一张表</strong>。</li>
+        <li>❌ <strong>股权激励比例</strong>——未触发。SBC $5.50 亿 ＝ 营收 3.9%、Non-GAAP 营业利润 25.7%，对平台型公司属中等水平。<strong>但它超过了本季回购</strong>（见模块 12）。</li>
+        <li>❌ <strong>连续会计变更</strong>——未触发。仅英国出行一处口径变更，已充分披露并给出可比还原。</li>
+      </ul>
+      <p><strong>结论：0 项触发，2 项列入跟踪清单</strong>（AV 表外承诺、英国 VAT $18 亿应收的胜诉假设）。因此不因红旗降级。</p>
+    </div>
+    <div class="verdict">
+      <div class="verdict-rating">最终评级：<span class="rating-badge" data-rating="有条件买入">有条件买入</span></div>
+      <div class="tbl-wrap">
+        <table class="tbl" data-shape="grid" data-source="海图自行测算，见模块 7">
+          <thead><tr><th>项目</th><th>数值</th></tr></thead>
+          <tbody>
+            <tr><td>加权公允价值</td><td><strong>$82.00</strong></td></tr>
+            <tr><td>现价（2026-08-06）</td><td>$70.47</td></tr>
+            <tr><td>安全边际</td><td><strong>14.1%</strong>（未达 25%，故不给「买入」）</td></tr>
+            <tr><td>12 个月概率加权目标价</td><td><strong>$84</strong>（+19%）</td></tr>
+            <tr><td>乐观情景（25%）</td><td>$117 — AV 伙伴上量、Delivery Hero 顺利交割并增厚、保险节约兑现</td></tr>
+            <tr><td>基准情景（45%）</td><td>$90 — GB 增速维持 20% 上下，利润率继续爬坡，并购按期推进</td></tr>
+            <tr><td>悲观情景（30%）</td><td>$55 — 头部 AV 伙伴陆续自建分发，并购整合不顺，回购长期不恢复</td></tr>
+            <tr><td>建仓阶梯</td><td>首仓 <strong>$65.10</strong> · 二仓 $56.96 · 三仓 $48.82</td></tr>
+            <tr><td>止盈档位</td><td>$105 / $130 / $160，每档减仓 25%</td></tr>
+            <tr><td>建议总仓位</td><td><strong>3–5%</strong></td></tr>
+            <tr><td>持有周期</td><td><strong>3–5 年</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>为什么维持「有条件买入」而不是升级</strong>：本季经营数据几乎全线超预期，护城河拿到了新的实证，利润增速是收入增速的三倍。<strong>但安全边际只有 14.1%，比上一期的 17% 还要薄。</strong>股价确实跌了 5.2%，可我的公允价值判断因为净负债扩大、浮存打折与回购中断而下调了 9.6%——<span class="hl-t">折扣变浅了，不是变深了</span>。</p>
+      <p><strong>条件是什么</strong>：跌到 $65.10（接近 52 周低点，安全边际达 20%）可以开始第一笔；在那之前，只适合已持仓者继续持有，不适合新建仓者追。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 页末夜读手记 ══ -->
+<section class="section" id="essay" aria-labelledby="essay-t">
+  <h2 class="stitle sr-only" id="essay-t">海图夜读手记<a class="anchor" href="#essay" aria-label="本节链接">#</a></h2>
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img class="haitu-avatar-sm" src="../assets/hai.png" alt="海图">
+      <span class="haitu-name-lg">海图</span>
+      <span class="haitu-essay-tag">夜读手记 · 2026-08-07</span>
+    </div>
+    <div class="haitu-essay-body">
+      <p>三个月前我写 Uber，结尾那句话是：「好生意难得打折，但折扣还不够深——值得开始，不值得梭哈。」当时股价 $74.35，我算出的首仓价是 $72。</p>
+      <p>今天它 $70.47，跌破了那条线。按理说这是一件该高兴的事。</p>
+      <p><strong>但我重新算了一遍，发现折扣不但没变深，反而变浅了。</strong>股价跌了 5.2%，我的公允价值判断跌了 9.6%。原因不在情绪，在三张表：净负债从 $44 亿扩到 $73 亿；自由现金流里那块靠先收后付撑起来的浮存，保险准备金流入同比腰斩；而每季 $30 亿的回购，本季塌到 $5.1 亿，六月一股没买。</p>
+      <p>钱去哪了？去买了 Delivery Hero 约 37% 的经济权益——24.99% 直接持股，剩下用总收益互换装着，刚好卡在德国强制要约门槛 30% 的下面。三周后，€142 亿的全面收购要约落地。</p>
+      <p>这一手不能说不聪明。但它让我看清一件事：<strong>过去两年我给 Uber 的估值倍数，有一部分是付给「它会持续拿自由现金流回购自己」这个确定动作的。这个季度，那个动作被换成了一笔要到 2027 年下半年才能验证的跨境并购。</strong>确定性换成了可能性，估值倍数却还没换。</p>
+      <p>再说一件我上一期写漏的事。我当时写「摊薄股数真实下降」，按同比口径没错，−3.5%。但拉到三年看：2023 年二季度 20.79 亿股，今天 20.50 亿股，<strong>三年只降了 1.4%</strong>。中间几十亿美元的回购，绝大部分被股权激励发出去的新股吃掉了。这个季度更直接——回购 $5.10 亿，股权激励 $5.50 亿，<strong>回购连稀释都没对冲掉</strong>。</p>
+      <p>我得把这句话补上：一家不派息的公司，回购是股东唯一的现金回报通道。这条通道本季实质上关了。</p>
+      <p>话说回来，这份季报里让我更在意的，其实是一个没出现的词。</p>
+      <p>整份新闻稿、整份准备好的发言稿、整份补充材料的正文——<strong>「Waymo」一次都没有出现</strong>，只在合作伙伴 logo 墙上留了个图标。而上线自动驾驶的城市数，从上季的 8 个降到 7 个，减少的正是凤凰城，因为 Waymo 退出了那里的 Uber 渠道。它已经宣布 2028 年 1 月在奥斯汀和亚特兰大上线自己的 App。</p>
+      <p>同一场会上，管理层反复讲的是另一套数字：21 家合作伙伴、约 12 万辆承诺车辆、未来数年投入超 $100 亿。<strong>叙事在扩张，而最强的那个伙伴在后退。</strong></p>
+      <p>我不认为 Uber 做错了。恰恰相反，把自动驾驶的供给端从「一家伙伴的通道」改造成「21 家组成的市场」，是它唯一的活路，而且它给了这条路真金白银。但改造是有时间的，而这段时间里，AV 行程占全平台不到 0.5%，最强伙伴的独家期正在倒计时。</p>
+      <p>还有一处我想留在这里：管理层公开承诺投入超 $100 亿，<strong>而 10-Q 的不可撤销采购义务里，找不到这笔钱。</strong>这不是隐瞒——它现在确实还不是合同义务。但对估值来说，这意味着你不能把这 12 万辆车当成已经锁定的产能，也不能把这 $100 亿当成不会发生的事。<strong>它同时是一份灵活性和一张欠条，取决于三年后谁先眨眼。</strong></p>
+      <p>说了这么多担忧，我还是要把这季真正的好消息说清楚，因为它同样是实打实的。</p>
+      <p>营收只增 12%，但那是英国改了会计口径压低了 $11 亿，还原后是 <strong>20.9%</strong>——公司自己在公告正文里就把这件事翻译清楚了，没让读者自己去附注里挖。总订单额增 24%，调整后 EBITDA 增 33%，Non-GAAP 营业利润增 40%。<strong>利润增速是收入增速的三倍多。</strong>调整后 EBITDA 占总订单额 4.9%，创历史新高，而同期 DoorDash 是 2.8%、Lyft 3.2%、Instacart 3.0%——<strong>它的分母最大，比率却最高。</strong></p>
+      <p>最让我意外的是护城河那一条。空头最锋利的论点一直是「自动驾驶会绕开平台」，而 Uber 摆出的反证是：在洛杉矶、旧金山、凤凰城这三个自动驾驶渗透最高的城市，<strong>它的品类份额比一年前更高</strong>。有人开着不用司机的车直接进场抢单，网络反而变厚了。这个证据比任何一句管理层表态都有分量。</p>
+      <p>保险那条线也翻身了。加州 SB 371 今年 1 月生效，把强制的无保险驾驶人险从每人 $100 万降到 $6 万。<strong>保险成本连续多季是这家公司的逆风项，本季在成本驱动因素里彻底消失了</strong>，公司还预计从 2027 年起产生显著的经常性节约。</p>
+      <p>不过这里藏着一个很少有人同时看两张表才会发现的东西：<strong>保险成本改善在利润表上是好事，在现金流量表上却在削弱一块此前被计入自由现金流的浮存。</strong>本季保险准备金净流入从去年同期的 $8.12 亿降到 $3.87 亿，腰斩。TTM 自由现金流首次突破 $100 亿，这是本季最漂亮的标题——但把营运资金那块顺风剔掉，正常化后是 $84.8 亿，收益率从 7.0% 降到 5.9%。<strong>仍然不贵，但和「7% 的自由现金流收益率」是两回事。</strong></p>
+      <p>至于财报当天那根 −5.29% 的阴线，其实读错了会很可惜。所有实际数据都超预期，跌的是三季度指引：总订单额中值比市场预期低 0.1%，每股收益低 $0.02。第二天涨回 3.36%。<strong>这不是基本面重估，是预期的一次性重置。</strong>而空头只占流通股 2.67%——这次下跌里没有空头，是多头自己在走。</p>
+      <p>所以我把公允价值定在 $82，首仓价 $65.10。</p>
+      <p>有意思的是，$65.10 和它的 52 周低点 $65.41 几乎重合。一条来自八法估值，一条来自一年的价格记录，两条互不相干的线落在同一个位置。这种巧合我一向当作加分项。</p>
+      <p>今天它 $70.47，离那里还有 7.6%。</p>
+      <p>写到这里我想说一句更一般的话。<strong>股价下跌从来不等于折扣变深——这句话人人都会背，但真正要命的是，它下跌的原因往往同时也在压低它值多少钱。</strong>这一季 Uber 就是标准案例：净负债扩大、浮存变薄、回购中断，这三件事既解释了股价为什么跌，也解释了我为什么把公允价值下调得比股价跌得还多。</p>
+      <p><strong>只盯分子，会在这种时候得到完全相反的结论。</strong></p>
+      <p>三个月前我说它「值得开始，不值得梭哈」。今天我要改一个字：<strong>值得等，暂时不值得开始</strong>——等的不是更低的价格，是回购恢复，或者 AV 城市数重新往上走。这两件事只要有一件发生，我上面那些下调的理由就得再算一遍。</p>
+      <p>好公司很少给你两次同样的价格。但也很少有哪一次，值得你在折扣变浅的时候动手。</p>
+      <p>—— 灯下落笔，明日再观风浪。</p>
+    </div>
+  </div>
+</section>
+
+</div><!-- /.container -->
+
+
+<footer>
+  <div>本报告由「海图夜读」基于公开财报与电话会资料独立撰写，数据截至 2026-08-06。</div>
+  <div>
+    <strong>免责声明：</strong>本文仅为个人研究记录与信息分享，<strong>不构成任何投资建议</strong>，
+    作者非持牌投资顾问。文中评级、目标价、仓位与建仓价格均为基于公开信息的个人推演，
+    可能存在错误或随时间失效。市场有风险，投资需谨慎，读者应独立判断并自负盈亏。
+  </div>
+</footer>
+
+<script>
+/* ══════════════════════════════════════════════════════════════════
+   海图夜读 · 报告页脚本骨架
+   逐字复制进报告的 <script>，只改 CHART_DATA 里的数字。
+
+   这段脚本解决了存量 103 份实测出的三个问题：
+   1. 主题切换有 3 套实现，73/103 不读 localStorage
+      → 门户切暗色进报告又变亮色。这里统一成一套。
+   2. 71 份把调色板硬编码进 JS（token 的第 4 份拷贝），
+      改一次配色要改 71 个文件；另有 2 份切暗色后图表根本不重绘。
+      → 这里一律从 CSS 变量读，改 :root 即全站生效。
+   3. 4 个图表槽位被写出 39 种 canvas id。
+      → 这里按固定槽位 rev|margin|segment|eps 接管。
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ── 1. 从 CSS 变量取色（唯一真源，禁止在本文件里写 hex）── */
+function cssVar(name) {
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+}
+function palette() {
+  return {
+    accent:  cssVar('--accent'),   accent2: cssVar('--accent2'),
+    accent3: cssVar('--accent3'),  gold:    cssVar('--gold'),
+    red:     cssVar('--red'),      green:   cssVar('--green'),
+    grid:    cssVar('--chart-grid'), text:  cssVar('--text3-ink'),
+  };
+}
+
+/* ── 2. 主题切换：同步 aria-pressed、持久化、重绘图表 ── */
+function toggleTheme() {
+  var html = document.documentElement;
+  var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  try { localStorage.setItem('theme', next); } catch (e) {}
+  var btn = document.getElementById('themeBtn');
+  if (btn) btn.setAttribute('aria-pressed', String(next === 'dark'));
+  renderCharts();
+}
+document.addEventListener('DOMContentLoaded', function () {
+  var btn = document.getElementById('themeBtn');
+  if (btn) btn.setAttribute('aria-pressed',
+    String(document.documentElement.getAttribute('data-theme') === 'dark'));
+});
+
+/* ── 3. 顶栏实测高度写进 --bar-h ──
+   锚点落点与目录高亮都以它为基准。顶栏在窄屏会折行（38px → 60+px），
+   硬编码会让手机上所有跳转偏移。 */
+function syncBarH() {
+  var bar = document.querySelector('.theme-bar');
+  if (bar) document.documentElement.style.setProperty('--bar-h', bar.offsetHeight + 'px');
+}
+addEventListener('DOMContentLoaded', syncBarH);
+addEventListener('resize', syncBarH);
+
+/* ── 4. 本报告的图表数据：只改这一块 ──
+   槽位固定为 rev / margin / segment / eps，与 body-skeleton.html 的
+   canvas id 和 data-chart 一一对应。用不到的槽位整个删掉（连同骨架里的 .ccard）。
+   颜色一律写 palette 的 key 名（'accent' / 'gold' …），不要写 hex。 */
+var CHART_DATA = {
+  rev: {
+    type: 'bar',
+    labels: ['Q2 25', 'Q3 25', 'Q4 25', 'Q1 26', 'Q2 26'],
+    datasets: [
+      { label: '总营收（$B）', data: [12.65, 13.47, 14.37, 13.20, 14.19], color: 'accent' },
+      { label: 'GB 同比 %', data: [17, 21, 22, 25, 24], color: 'accent3', type: 'line', yAxisID: 'y1' },
+    ],
+  },
+  margin: {
+    type: 'line',
+    labels: ['Q2 25', 'Q3 25', 'Q4 25', 'Q1 26', 'Q2 26'],
+    datasets: [
+      { label: 'GAAP 营业利润率 %', data: [11.5, 8.3, 12.3, 14.6, 13.3], color: 'accent' },
+      { label: '调整后 EBITDA 占 GB %', data: [4.5, 4.5, 4.6, 4.6, 4.9], color: 'green' },
+    ],
+  },
+  segment: {
+    type: 'doughnut',
+    labels: ['出行 Mobility', '外卖 Delivery', '货运 Freight'],
+    datasets: [
+      { label: '分部营收（$B）', data: [7.363, 5.245, 1.583], color: ['accent', 'gold', 'accent3'] },
+    ],
+  },
+  eps: {
+    type: 'bar',
+    labels: ['Q2 25', 'Q3 25', 'Q4 25', 'Q1 26', 'Q2 26'],
+    datasets: [
+      { label: 'GAAP 摊薄 EPS（$）', data: [0.63, 3.11, 0.14, 0.13, 1.17], color: 'red' },
+      { label: 'Non-GAAP EPS（$）', data: [null, null, 0.71, 0.72, 0.81], color: 'green' },
+    ],
+  },
+};
+
+/* ── 5. 渲染（一般不需要改）── */
+var _charts = {};
+function renderCharts() {
+  if (typeof Chart === 'undefined') return;      // CDN 不可达时静默跳过，不阻断页面
+  var P = palette();
+  Chart.defaults.font.family =
+    getComputedStyle(document.body).getPropertyValue('--font-sans') ||
+    'system-ui, -apple-system, sans-serif';
+
+  Object.keys(CHART_DATA).forEach(function (slot) {
+    var el = document.getElementById(slot);
+    if (!el) return;
+    if (_charts[slot]) _charts[slot].destroy();
+
+    var cfg = CHART_DATA[slot];
+    var isPie = cfg.type === 'doughnut' || cfg.type === 'pie';
+
+    _charts[slot] = new Chart(el, {
+      type: cfg.type,
+      data: {
+        labels: cfg.labels,
+        datasets: cfg.datasets.map(function (d) {
+          var c = Array.isArray(d.color) ? d.color.map(function (k) { return P[k]; }) : P[d.color];
+          // ⚠️ 判断是否折线要同时看 dataset 的 type 和图表级 type。
+          // 只写 d.type === 'line' 会让「图表级 type:'line' 但 dataset 没写 type」的
+          // 数据集拿到 borderWidth:0 —— 实测表现为「只有点、没有连线」。
+          var isLine = (d.type || cfg.type) === 'line';
+          return Object.assign({}, d, {
+            backgroundColor: c, borderColor: c,
+            borderWidth: isLine ? 2 : 0, tension: 0.3,
+          });
+        }),
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            // 窄屏把图例挪到顶部：右侧图例在 375px 上会吃掉大半个画布
+            position: isPie && innerWidth > 640 ? 'right' : 'top',
+            labels: { color: P.text, boxWidth: 12, font: { size: 11 } },
+          },
+        },
+        scales: isPie ? {} : {
+          x: { grid: { color: P.grid }, ticks: { color: P.text, font: { size: 11 } } },
+          y: { grid: { color: P.grid }, ticks: { color: P.text, font: { size: 11 } } },
+          y1: {
+            position: 'right', grid: { display: false },
+            ticks: { color: P.text, font: { size: 11 } }, display: 'auto',
+          },
+        },
+      },
+    });
+  });
+}
+addEventListener('DOMContentLoaded', renderCharts);
+addEventListener('resize', function () {          // 图例位置随断点变，需重建
+  clearTimeout(window._rcT);
+  window._rcT = setTimeout(renderCharts, 200);
+});
+
+</script>
+</body>
+</html>
