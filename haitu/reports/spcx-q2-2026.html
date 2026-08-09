@@ -170,7 +170,7 @@ a { color: var(--accent2); text-decoration: none; }
 /* ── HERO ── */
 .hero {
   padding: 48px 24px 36px;
-  text-align: center;
+  text-align: left;
   border-bottom: 1px solid var(--border);
 }
 .hero-tag {
@@ -249,11 +249,14 @@ a { color: var(--accent2); text-decoration: none; }
 .tbl th {
   background: var(--card2); color: var(--text3-ink); font-size: 11px;
   letter-spacing: .5px; text-transform: uppercase;
-  padding: 12px 16px; text-align: right; border-bottom: 1px solid var(--border);
+  padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border);
 }
-.tbl th:first-child { text-align: left; }
-.tbl td { padding: 11px 16px; border-bottom: 1px solid var(--border); text-align: right; line-height: var(--lh-tight); }
-.tbl td:first-child { text-align: left; color: var(--text2); }
+/* ⚠️ 表格一律左对齐，包括数字列。
+   数字右对齐是会计惯例（个位对齐便于比大小），但本站表格右侧混着「3.4×」
+   「126%」「宽」这类文字，右对齐后同一列里文字与数字各自贴右、参差不齐。
+   全列左对齐 + tabular-nums：等位数的数字仍然逐位成列，而文字不再乱跳。 */
+.tbl td { padding: 11px 16px; border-bottom: 1px solid var(--border); text-align: left; line-height: var(--lh-tight); }
+.tbl td:first-child { color: var(--text2); }
 .tbl .hl td { font-weight: 600; color: var(--text); }
 
 /* ── CHARTS ── */
@@ -320,7 +323,7 @@ a { color: var(--accent2); text-decoration: none; }
 .pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
 .pbox {
   background: var(--card); border: 1px solid var(--border);
-  border-radius: 10px; padding: 14px; text-align: center;
+  border-radius: 10px; padding: 14px; text-align: left;
   box-shadow: 0 1px 4px var(--shadow);
 }
 .pbox .pl { font-family: var(--font-sans); font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
@@ -390,7 +393,7 @@ a { color: var(--accent2); text-decoration: none; }
 /* ── FOOTER ── */
 footer {
   background: var(--card2); border-top: 1px solid var(--border);
-  padding: 24px; text-align: center; color: var(--text3); font-size: 12px;
+  padding: 24px; text-align: left; color: var(--text3); font-size: 12px;
   margin-top: 40px;
 }
 
@@ -478,14 +481,14 @@ footer {
   font-size: var(--fs-xs); color: var(--text3); font-style: italic;
 }
 .haitu-sign {
-  text-align: right; margin-top: 14px;
+  text-align: left; margin-top: 14px;
   font-family: 'Georgia', serif; font-size: 14px;
   color: var(--text2); font-style: italic;
 }
 
 @media (max-width: 768px) {
-  .haitu-quip { flex-direction: column; text-align: center; }
-  .haitu-essay-header { flex-direction: column; text-align: center; }
+  .haitu-quip { flex-direction: column; text-align: left; }
+  .haitu-essay-header { flex-direction: column; text-align: left; }
   .haitu-avatar-sm { width: 80px; height: 80px; }
   .haitu-avatar-lg { width: 90px; height: 90px; }
 }
@@ -632,11 +635,11 @@ figure.chart figcaption { font-size: 12px; color: var(--text3-ink); line-height:
    ⚠️ 这一节必须与 body-skeleton.html 的类名保持同步 —— 骨架里出现的
    每个类都要在这里有定义，否则章节会退化成无样式的纯文本流。
    ══════════════════════════════════════════════════════════════ */
-.hero-pills {display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;}
+.hero-pills {display: flex; justify-content: flex-start; gap: 16px; flex-wrap: wrap;}
 .pill {background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: var(--font-sans); font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow);}
 .pill strong {color: var(--text);}
 .stock-snap {background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px;}
-.snap-item {text-align: center;}
+.snap-item {text-align: left;}
 .snap-label {font-family: var(--font-sans); font-size: 10px; color: var(--text3-ink); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px;}
 .kpi-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px;}
 .kpi {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow);}
@@ -668,12 +671,15 @@ figure.chart figcaption { font-size: 12px; color: var(--text3-ink); line-height:
 .flag-row {margin-top: 16px; padding: 12px 16px; background: rgba(184,112,112,.08); border: 1px solid rgba(184,112,112,.3); border-radius: 8px; font-size: var(--fs-sm); color: var(--text2);}
 .flag-row strong {color: var(--red);}
 .pgrid {display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0;}
+/* ⚠️ 全站默认左对齐，这是兜底声明；上面任何一处再写 center 都要有明确理由。 */
+body { text-align: left; }
+
 /* ⚠️ .pbox 不要整块 text-align:center。
    它最初只用来放「标签＋大数字＋小注」的统计卡（.pl/.pv/.pn），居中是对的；
    但后来它也被用作「本季必看／看穿」的长文容器，于是整段正文、表格、
    列表全被居中，读起来极难。改为：容器左对齐，只有统计卡的三个子元素居中。 */
 .pbox {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 24px; text-align: left; box-shadow: 0 1px 4px var(--shadow);}
-.pbox .pl, .pbox .pv, .pbox .pn {text-align: center;}
+.pbox .pl, .pbox .pv, .pbox .pn {text-align: left;}
 .pbox .pl {font-family: var(--font-sans); font-size: 11px; color: var(--text3-ink); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px;}
 .pbox .pv {font-family: var(--font-sans); font-size: 28px; font-weight: 800; margin-bottom: 5px;}
 .pbox .pn {font-size: var(--fs-xs); color: var(--text3-ink); line-height: var(--lh-tight);}
