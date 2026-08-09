@@ -63,6 +63,24 @@
   --accent2-ink: #5a7386;
   --font-sans: system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
   --font-serif: Georgia, 'Noto Serif SC', 'PingFang SC', serif;
+
+  /* ── 排版标度 ────────────────────────────────────────────────
+     此前全站正文散落 8 档字号（11/12/12.5/13/14/14.5/15/16）与 5 种行高
+     （1.65/1.70/1.75/1.90/2.00），是逐处硬写累积出来的，没有体系。
+     收敛成 4 档字号 + 2 种行高，所有正文一律引用这里。 */
+  --fs-xs:   12px;    /* 注释、图注、页脚 */
+  --fs-sm:   13.5px;  /* 表格、卡片密排文字 */
+  --fs-base: 15px;    /* 正文 */
+  --fs-lg:   16.5px;  /* 夜读手记正文、导语 */
+
+  --lh-tight: 1.7;    /* 密排：表格、卡片、注释 */
+  --lh-prose: 1.85;   /* 正文段落 */
+
+  /* ⚠️ 中文行长上限。实测此前 .cmt 每行 73 字、.note 96 字 —— 中文超过
+     45 字，眼睛回扫时极易丢行，这是「看着累」的首要原因（比字号更关键）。
+     40em 在中文下约等于 40 字/行，落在 35–45 的舒适区间。
+     只约束纯文字块；表格与图表不受此限，仍占满容器宽度。 */
+  --measure: 40em;
   --bar-h: 44px;
 }
 [data-theme="dark"] {
@@ -97,8 +115,8 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-serif);
-  line-height: 1.75;
-  font-size: 14.5px;
+  line-height: var(--lh-prose);
+  font-size: var(--fs-base);
   transition: background .35s, color .35s;
 }
 a { color: var(--accent2); text-decoration: none; }
@@ -226,15 +244,15 @@ a { color: var(--accent2); text-decoration: none; }
   background: var(--card); border: 1px solid var(--border);
   border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow);
 }
-.tbl { width: 100%; border-collapse: collapse; font-family: var(--font-sans); font-size: 13px;
+.tbl { width: 100%; border-collapse: collapse; font-family: var(--font-sans); font-size: var(--fs-sm);
        font-variant-numeric: tabular-nums; }
 .tbl th {
   background: var(--card2); color: var(--text3-ink); font-size: 11px;
   letter-spacing: .5px; text-transform: uppercase;
-  padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border);
+  padding: 12px 16px; text-align: right; border-bottom: 1px solid var(--border);
 }
 .tbl th:first-child { text-align: left; }
-.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td { padding: 11px 16px; border-bottom: 1px solid var(--border); text-align: right; line-height: var(--lh-tight); }
 .tbl td:first-child { text-align: left; color: var(--text2); }
 .tbl .hl td { font-weight: 600; color: var(--text); }
 
@@ -310,16 +328,62 @@ a { color: var(--accent2); text-decoration: none; }
 .pbox .pn { font-size: 11px; color: var(--text3); margin-top: 3px; }
 .pc { color: var(--text2); } .pf { color: var(--gold); } .ps { color: var(--green); }
 
+/* ── 周期切换（三表图）── */
+.period-toggle {
+  display: inline-flex; gap: 0; margin-bottom: 16px;
+  border: 1px solid var(--border); border-radius: 8px; overflow: hidden;
+  background: var(--card);
+}
+.period-btn {
+  appearance: none; -webkit-appearance: none; border: 0; margin: 0;
+  padding: 7px 20px; cursor: pointer;
+  font-family: var(--font-sans); font-size: var(--fs-xs);
+  letter-spacing: .5px; color: var(--text3-ink);
+  background: transparent; transition: background .2s, color .2s;
+  /* 44px 触摸目标：窄屏上两个按钮挨得很近，小于这个高度容易点错 */
+  min-height: 34px;
+}
+.period-btn + .period-btn { border-left: 1px solid var(--border); }
+.period-btn:hover { color: var(--text); background: var(--card2); }
+.period-btn.is-on { background: var(--accent); color: #fff; font-weight: 600; }
+.period-btn:focus-visible { outline: 2px solid var(--accent2); outline-offset: -2px; }
+[data-theme="dark"] .period-btn.is-on { color: var(--bg); }
+
 /* ── SANKEY ── */
 #sankey { width: 100%; height: 460px; }
 
 /* ── COMMENTARY ── */
 .cmt {
   background: var(--card); border: 1px solid var(--border);
-  border-radius: 10px; padding: 26px; line-height: 1.9; font-size: 14.5px;
+  border-radius: 10px; padding: 26px 28px; line-height: var(--lh-prose);
+  font-size: var(--fs-base);
   box-shadow: 0 1px 4px var(--shadow);
 }
-.cmt p { margin-bottom: 14px; }
+/* 段间距取 0.9 行。此前是 14px 对 27.55px 的行高＝0.51 行，
+   段与段之间比行与行之间只宽一点点，整块糊成一片，读者找不到段落边界。 */
+.cmt p { margin-bottom: calc(var(--lh-prose) * 0.9em); }
+.cmt p:last-child { margin-bottom: 0; }
+
+/* ── 行长约束 ──
+   只作用于纯文字块。表格（.tbl-wrap）、图表（figure/.cgrid）与数据表
+   保持容器全宽，不受 --measure 限制 —— 财报的表格需要宽度，正文不需要。
+
+   ⚠️ 只收窄「流动的正文」，不收窄带背景的卡片。把 .ec-item / .risk-card
+   这类卡片本身缩到 40em，会在右侧留下一大块空白，反而更难看 —— 它们本来
+   就只有两三行，长行的代价远小于流动长文。 */
+.cmt > p, .cmt > ul, .cmt > ol,
+.haitu-essay-body > p {
+  max-width: var(--measure);           /* 15px × 40em ≈ 600px，约 40 字/行 */
+}
+.note, p.note {
+  /* 注释是 12px 小字，行长可略放宽：12px × 52em ≈ 624px，约 52 字，
+     仍远好于此前的 96 字，且与正文块的右边界大致齐平，视觉上不突兀。 */
+  max-width: 52em;
+}
+.cmt > .tbl-wrap, .cmt > figure, .cmt > .cgrid { max-width: none; }
+/* 避免段末孤字（中文里一行只剩一两个字特别难看）。
+   Safari/Firefox 不支持时会自动忽略，属渐进增强。 */
+.cmt p, .haitu-essay-body p, .note, .ec-item { text-wrap: pretty; }
 .hl-t { color: var(--accent3); font-weight: 600; }
 .warn-t { color: var(--red); font-weight: 600; }
 
@@ -402,16 +466,16 @@ footer {
 }
 .haitu-essay-body {
   font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', serif;
-  font-size: 15px; line-height: 2.0; color: var(--text);
+  font-size: var(--fs-lg); line-height: var(--lh-prose); color: var(--text);
 }
-.haitu-essay-body p { margin-bottom: 16px; }
+.haitu-essay-body p { margin-bottom: calc(var(--lh-prose) * 0.85em); }
 .haitu-essay-body p:first-child {
-  font-size: 16px; font-style: italic; color: var(--text2);
+  font-size: 18px; font-style: italic; color: var(--text2);
 }
 .haitu-essay-body p:last-child {
   margin-top: 22px; padding-top: 14px;
   border-top: 1px solid var(--border);
-  font-size: 12px; color: var(--text3); font-style: italic;
+  font-size: var(--fs-xs); color: var(--text3); font-style: italic;
 }
 .haitu-sign {
   text-align: right; margin-top: 14px;
@@ -586,22 +650,35 @@ figure.chart figcaption { font-size: 12px; color: var(--text3-ink); line-height:
 .moat-card.wide .moat-rate {background: rgba(122,154,122,.18); color: var(--green);}
 .moat-card.narrow .moat-rate {background: rgba(185,160,106,.18); color: var(--gold);}
 .moat-card.none .moat-rate {background: rgba(184,112,112,.18); color: var(--red);}
-.moat-card p {font-size: 12.5px; color: var(--text2); line-height: 1.65;}
-.ec-item {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 14px; box-shadow: 0 1px 3px var(--shadow);}
-.ec-badge {flex-shrink: 0; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-top: 2px; font-family: var(--font-sans);}
-.dcf-note {background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: 13px; color: var(--text2); line-height: 1.8;}
+.moat-card p {font-size: var(--fs-sm); color: var(--text2); line-height: var(--lh-tight);}
+/* ⚠️ .ec-item 必须是 block，不能是 flex。
+   语料里它只装「徽章 + 一句短语」，所以 flex 没出事；但正文里一旦出现
+   <strong>，每个 <strong> 都会变成独立 flex item，默认 min-width:auto 不收缩，
+   实测在 375px 下把 347px 的容器撑到 478px，导致整页横向滚动。
+   改为 block + 内联徽章：徽章仍在句首，正文正常折行环绕。
+   这与 .cgrid 必须写 minmax(0,1fr) 是同一类问题——flex/grid 子项默认不收缩。 */
+.ec-item {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: block; box-shadow: 0 1px 3px var(--shadow); line-height: var(--lh-prose); font-size: var(--fs-base);}
+.ec-badge {display: inline-block; vertical-align: baseline; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-right: 10px; font-family: var(--font-sans); white-space: nowrap;}
+.dcf-note {background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: var(--fs-sm); color: var(--text2); line-height: var(--lh-prose);}
 .dcf-note strong {color: var(--text);}
 .scorecard {background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow);}
 .score-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px;}
 .score-card {background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px;}
 .score-letter {width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-sans); font-weight: 800; font-size: 22px; flex-shrink: 0; border: 3px solid;}
-.flag-row {margin-top: 16px; padding: 12px 16px; background: rgba(184,112,112,.08); border: 1px solid rgba(184,112,112,.3); border-radius: 8px; font-size: 13px; color: var(--text2);}
+.flag-row {margin-top: 16px; padding: 12px 16px; background: rgba(184,112,112,.08); border: 1px solid rgba(184,112,112,.3); border-radius: 8px; font-size: var(--fs-sm); color: var(--text2);}
 .flag-row strong {color: var(--red);}
 .pgrid {display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0;}
-.pbox {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center; box-shadow: 0 1px 4px var(--shadow);}
+/* ⚠️ .pbox 不要整块 text-align:center。
+   它最初只用来放「标签＋大数字＋小注」的统计卡（.pl/.pv/.pn），居中是对的；
+   但后来它也被用作「本季必看／看穿」的长文容器，于是整段正文、表格、
+   列表全被居中，读起来极难。改为：容器左对齐，只有统计卡的三个子元素居中。 */
+.pbox {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 24px; text-align: left; box-shadow: 0 1px 4px var(--shadow);}
+.pbox .pl, .pbox .pv, .pbox .pn {text-align: center;}
 .pbox .pl {font-family: var(--font-sans); font-size: 11px; color: var(--text3-ink); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px;}
 .pbox .pv {font-family: var(--font-sans); font-size: 28px; font-weight: 800; margin-bottom: 5px;}
-.pbox .pn {font-size: 12px; color: var(--text3-ink); line-height: 1.5;}
+.pbox .pn {font-size: var(--fs-xs); color: var(--text3-ink); line-height: var(--lh-tight);}
+.pbox > h4 {font-size: var(--fs-lg); color: var(--accent3-ink); margin-bottom: 14px; line-height: 1.5;}
+.pbox + .pbox {margin-top: 18px;}
 .risk-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px;}
 .risk-card {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); position: relative; overflow: hidden;}
 .risk-card::before {content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent);}
@@ -611,7 +688,7 @@ figure.chart figcaption { font-size: 12px; color: var(--text3-ink); line-height:
 .risk-card.r4::before {background: var(--rose);}
 .risk-card.r5::before {background: var(--red);}
 .risk-card h5 {font-size: 14px; margin-bottom: 6px; color: var(--text);}
-.risk-card p {font-size: 13px; color: var(--text2); line-height: 1.7;}
+.risk-card p {font-size: var(--fs-sm); color: var(--text2); line-height: var(--lh-tight);}
 /* ⚠️ 此处原本混进了三条来自语料 @media(max-width:768px) 内的移动端规则
    （.cgrid/.pgrid→1fr、.kpi-grid→1fr 1fr、.stock-snap→1fr 1fr）。
    它们被抽取时丢掉了 @media 包裹，变成无条件规则且排在最后，
@@ -619,7 +696,7 @@ figure.chart figcaption { font-size: 12px; color: var(--text3-ink); line-height:
    @media(max-width:640px) 统一负责。抽取语料 CSS 时务必排除 @media 块内的规则。 */
 
 /* 骨架用到、但语料里没有现成规则的补充组件 */
-.note { font-size: 12px; color: var(--text3-ink); line-height: 1.7; margin-top: 10px; }
+.note { font-size: var(--fs-xs); color: var(--text3-ink); line-height: var(--lh-tight); margin-top: 12px; }
 .lead { font-size: 16px; font-weight: 600; line-height: 1.8; margin-bottom: 14px; }
 .haitu-disc { font-size: 12px; color: var(--text3-ink); line-height: 1.7; margin-top: 18px;
               padding-top: 14px; border-top: 1px solid var(--border); }
@@ -656,7 +733,6 @@ figure.chart figcaption { font-size: 12px; color: var(--text3-ink); line-height:
               font-variant-numeric: tabular-nums; line-height: 1.3; }
 .snap-note  { font-family: var(--font-sans); font-size: 11px; color: var(--text3-ink); margin-top: 3px; }
 .sk-node rect { opacity: .9; }
-
 </style>
 </head>
 <body>

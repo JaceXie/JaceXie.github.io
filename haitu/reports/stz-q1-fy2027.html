@@ -59,6 +59,24 @@
   --accent2-ink: #5a7386;
   --font-sans: system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
   --font-serif: Georgia, 'Noto Serif SC', 'PingFang SC', serif;
+
+  /* ── 排版标度 ────────────────────────────────────────────────
+     此前全站正文散落 8 档字号（11/12/12.5/13/14/14.5/15/16）与 5 种行高
+     （1.65/1.70/1.75/1.90/2.00），是逐处硬写累积出来的，没有体系。
+     收敛成 4 档字号 + 2 种行高，所有正文一律引用这里。 */
+  --fs-xs:   12px;    /* 注释、图注、页脚 */
+  --fs-sm:   13.5px;  /* 表格、卡片密排文字 */
+  --fs-base: 15px;    /* 正文 */
+  --fs-lg:   16.5px;  /* 夜读手记正文、导语 */
+
+  --lh-tight: 1.7;    /* 密排：表格、卡片、注释 */
+  --lh-prose: 1.85;   /* 正文段落 */
+
+  /* ⚠️ 中文行长上限。实测此前 .cmt 每行 73 字、.note 96 字 —— 中文超过
+     45 字，眼睛回扫时极易丢行，这是「看着累」的首要原因（比字号更关键）。
+     40em 在中文下约等于 40 字/行，落在 35–45 的舒适区间。
+     只约束纯文字块；表格与图表不受此限，仍占满容器宽度。 */
+  --measure: 40em;
   --bar-h: 44px;
 }
 [data-theme="dark"] {
@@ -93,8 +111,8 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-serif);
-  line-height: 1.75;
-  font-size: 14.5px;
+  line-height: var(--lh-prose);
+  font-size: var(--fs-base);
   transition: background .35s, color .35s;
 }
 a { color: var(--accent2); text-decoration: none; }
@@ -222,19 +240,23 @@ a { color: var(--accent2); text-decoration: none; }
   background: var(--card); border: 1px solid var(--border);
   border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow);
 }
-.tbl { width: 100%; border-collapse: collapse; font-family: var(--font-sans); font-size: 13px;
+.tbl { width: 100%; border-collapse: collapse; font-family: var(--font-sans); font-size: var(--fs-sm);
        font-variant-numeric: tabular-nums; }
 .tbl th {
   background: var(--card2); color: var(--text3-ink); font-size: 11px;
   letter-spacing: .5px; text-transform: uppercase;
-  padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border);
+  padding: 12px 16px; text-align: right; border-bottom: 1px solid var(--border);
 }
 .tbl th:first-child { text-align: left; }
-.tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); text-align: right; }
+.tbl td { padding: 11px 16px; border-bottom: 1px solid var(--border); text-align: right; line-height: var(--lh-tight); }
 .tbl td:first-child { text-align: left; color: var(--text2); }
 .tbl .hl td { font-weight: 600; color: var(--text); }
 
 /* ── CHARTS ── */
+/* ⚠️ 轨道必须写 minmax(0,1fr) 而不是 1fr。
+   grid 子项默认 min-width:auto，canvas 与桑基 SVG 的固有宽度会把轨道撑开，
+   实测在 375px 下 .ccard 被撑到 568px，导致整页横向滚动。
+   .ccard 的 min-width:0 是同一问题的第二道保险。 */
 .cgrid  { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-bottom: 16px; }
 .cgrid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-bottom: 16px; }
 .ccard, .kpi, .moat-card, .risk-card, .score-card, .snap-item, .pbox { min-width: 0; }
@@ -302,16 +324,62 @@ a { color: var(--accent2); text-decoration: none; }
 .pbox .pn { font-size: 11px; color: var(--text3); margin-top: 3px; }
 .pc { color: var(--text2); } .pf { color: var(--gold); } .ps { color: var(--green); }
 
+/* ── 周期切换（三表图）── */
+.period-toggle {
+  display: inline-flex; gap: 0; margin-bottom: 16px;
+  border: 1px solid var(--border); border-radius: 8px; overflow: hidden;
+  background: var(--card);
+}
+.period-btn {
+  appearance: none; -webkit-appearance: none; border: 0; margin: 0;
+  padding: 7px 20px; cursor: pointer;
+  font-family: var(--font-sans); font-size: var(--fs-xs);
+  letter-spacing: .5px; color: var(--text3-ink);
+  background: transparent; transition: background .2s, color .2s;
+  /* 44px 触摸目标：窄屏上两个按钮挨得很近，小于这个高度容易点错 */
+  min-height: 34px;
+}
+.period-btn + .period-btn { border-left: 1px solid var(--border); }
+.period-btn:hover { color: var(--text); background: var(--card2); }
+.period-btn.is-on { background: var(--accent); color: #fff; font-weight: 600; }
+.period-btn:focus-visible { outline: 2px solid var(--accent2); outline-offset: -2px; }
+[data-theme="dark"] .period-btn.is-on { color: var(--bg); }
+
 /* ── SANKEY ── */
 #sankey { width: 100%; height: 460px; }
 
 /* ── COMMENTARY ── */
 .cmt {
   background: var(--card); border: 1px solid var(--border);
-  border-radius: 10px; padding: 26px; line-height: 1.9; font-size: 14.5px;
+  border-radius: 10px; padding: 26px 28px; line-height: var(--lh-prose);
+  font-size: var(--fs-base);
   box-shadow: 0 1px 4px var(--shadow);
 }
-.cmt p { margin-bottom: 14px; }
+/* 段间距取 0.9 行。此前是 14px 对 27.55px 的行高＝0.51 行，
+   段与段之间比行与行之间只宽一点点，整块糊成一片，读者找不到段落边界。 */
+.cmt p { margin-bottom: calc(var(--lh-prose) * 0.9em); }
+.cmt p:last-child { margin-bottom: 0; }
+
+/* ── 行长约束 ──
+   只作用于纯文字块。表格（.tbl-wrap）、图表（figure/.cgrid）与数据表
+   保持容器全宽，不受 --measure 限制 —— 财报的表格需要宽度，正文不需要。
+
+   ⚠️ 只收窄「流动的正文」，不收窄带背景的卡片。把 .ec-item / .risk-card
+   这类卡片本身缩到 40em，会在右侧留下一大块空白，反而更难看 —— 它们本来
+   就只有两三行，长行的代价远小于流动长文。 */
+.cmt > p, .cmt > ul, .cmt > ol,
+.haitu-essay-body > p {
+  max-width: var(--measure);           /* 15px × 40em ≈ 600px，约 40 字/行 */
+}
+.note, p.note {
+  /* 注释是 12px 小字，行长可略放宽：12px × 52em ≈ 624px，约 52 字，
+     仍远好于此前的 96 字，且与正文块的右边界大致齐平，视觉上不突兀。 */
+  max-width: 52em;
+}
+.cmt > .tbl-wrap, .cmt > figure, .cmt > .cgrid { max-width: none; }
+/* 避免段末孤字（中文里一行只剩一两个字特别难看）。
+   Safari/Firefox 不支持时会自动忽略，属渐进增强。 */
+.cmt p, .haitu-essay-body p, .note, .ec-item { text-wrap: pretty; }
 .hl-t { color: var(--accent3); font-weight: 600; }
 .warn-t { color: var(--red); font-weight: 600; }
 
@@ -394,16 +462,16 @@ footer {
 }
 .haitu-essay-body {
   font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', serif;
-  font-size: 15px; line-height: 2.0; color: var(--text);
+  font-size: var(--fs-lg); line-height: var(--lh-prose); color: var(--text);
 }
-.haitu-essay-body p { margin-bottom: 16px; }
+.haitu-essay-body p { margin-bottom: calc(var(--lh-prose) * 0.85em); }
 .haitu-essay-body p:first-child {
-  font-size: 16px; font-style: italic; color: var(--text2);
+  font-size: 18px; font-style: italic; color: var(--text2);
 }
 .haitu-essay-body p:last-child {
   margin-top: 22px; padding-top: 14px;
   border-top: 1px solid var(--border);
-  font-size: 12px; color: var(--text3); font-style: italic;
+  font-size: var(--fs-xs); color: var(--text3); font-style: italic;
 }
 .haitu-sign {
   text-align: right; margin-top: 14px;
@@ -483,6 +551,11 @@ h2.stitle { font-size: 18px; font-weight: 700; margin: 0 0 20px; }
   .cgrid, .cgrid3, .pgrid { grid-template-columns: minmax(0, 1fr); }
 }
 
+/* 触控目标 ≥44px。用一个不可见的 ::before 撑开命中区，
+   开关本身仍是 44×22 的滑块外观。
+   ⚠️ 不要改 .toggle-switch 的 height/padding 来凑 44px —— 实测那样做会让
+   border-radius 与 ::after 滑块的定位一起错位，开关变成一个大圆角方块。
+   ⚠️ 条件必须同时含宽度 —— 只写 (hover:none) 时窄屏桌面实测仍是 22px。 */
 @media (max-width: 640px), (hover: none) {
   .toggle-switch::before {
     content: ''; position: absolute; left: 0; right: 0;
@@ -512,6 +585,8 @@ figure.chart figcaption { font-size: 12px; color: var(--text3-ink); line-height:
 
 /* ── 8. shell 新增组件（skip link / 结论跳转带 / 顶栏右侧 / 屏幕阅读器专用）── */
 
+/* 跳转到正文：平时移出视口，聚焦时才出现。
+   ⚠️ 不能用 display:none —— 那样键盘也聚焦不到，等于没有 */
 .skip {
   position: absolute; left: -9999px; top: 0;
   background: var(--card); color: var(--accent3-ink);
@@ -538,12 +613,21 @@ figure.chart figcaption { font-size: 12px; color: var(--text3-ink); line-height:
   transition: border-color .2s, background .2s;
 }
 .quip-jump a:hover { border-color: var(--accent3); background: var(--card); }
+/* 触控目标 ≥44px。
+   ⚠️ 不能只用 @media (hover:none) —— 窄屏但支持 hover 的场景（缩小的桌面窗口、
+   带触控板的二合一设备）拿不到放大，实测那种情况下只有 28px。宽度与指针两个条件都要给。 */
 @media (max-width: 640px), (hover: none) {
   /* 用 min-height 而不是加 padding —— padding 要靠字体行高凑够 44px，
      换字体或改字号就又不达标了（实测 padding:13px 只得到 40px）。 */
   .quip-jump a { min-height: 44px; padding: 0 16px; display: inline-flex; align-items: center; }
 }
 
+/* ══════════════════════════════════════════════════════════════
+   9. 报告组件（快照 / KPI / 护城河 / 风险 / 评分卡 / 电话会 / 桑基）
+   来源：现有报告语料中已验证的组件规则，已套用本表的字体栈与 ink 对比度修正。
+   ⚠️ 这一节必须与 body-skeleton.html 的类名保持同步 —— 骨架里出现的
+   每个类都要在这里有定义，否则章节会退化成无样式的纯文本流。
+   ══════════════════════════════════════════════════════════════ */
 .hero-pills {display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;}
 .pill {background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: var(--font-sans); font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow);}
 .pill strong {color: var(--text);}
@@ -562,22 +646,35 @@ figure.chart figcaption { font-size: 12px; color: var(--text3-ink); line-height:
 .moat-card.wide .moat-rate {background: rgba(122,154,122,.18); color: var(--green);}
 .moat-card.narrow .moat-rate {background: rgba(185,160,106,.18); color: var(--gold);}
 .moat-card.none .moat-rate {background: rgba(184,112,112,.18); color: var(--red);}
-.moat-card p {font-size: 12.5px; color: var(--text2); line-height: 1.65;}
-.ec-item {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: block; box-shadow: 0 1px 3px var(--shadow); line-height: 1.75;}
+.moat-card p {font-size: var(--fs-sm); color: var(--text2); line-height: var(--lh-tight);}
+/* ⚠️ .ec-item 必须是 block，不能是 flex。
+   语料里它只装「徽章 + 一句短语」，所以 flex 没出事；但正文里一旦出现
+   <strong>，每个 <strong> 都会变成独立 flex item，默认 min-width:auto 不收缩，
+   实测在 375px 下把 347px 的容器撑到 478px，导致整页横向滚动。
+   改为 block + 内联徽章：徽章仍在句首，正文正常折行环绕。
+   这与 .cgrid 必须写 minmax(0,1fr) 是同一类问题——flex/grid 子项默认不收缩。 */
+.ec-item {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: block; box-shadow: 0 1px 3px var(--shadow); line-height: var(--lh-prose); font-size: var(--fs-base);}
 .ec-badge {display: inline-block; vertical-align: baseline; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-right: 10px; font-family: var(--font-sans); white-space: nowrap;}
-.dcf-note {background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: 13px; color: var(--text2); line-height: 1.8;}
+.dcf-note {background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: var(--fs-sm); color: var(--text2); line-height: var(--lh-prose);}
 .dcf-note strong {color: var(--text);}
 .scorecard {background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow);}
 .score-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px;}
 .score-card {background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px;}
 .score-letter {width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-sans); font-weight: 800; font-size: 22px; flex-shrink: 0; border: 3px solid;}
-.flag-row {margin-top: 16px; padding: 12px 16px; background: rgba(184,112,112,.08); border: 1px solid rgba(184,112,112,.3); border-radius: 8px; font-size: 13px; color: var(--text2);}
+.flag-row {margin-top: 16px; padding: 12px 16px; background: rgba(184,112,112,.08); border: 1px solid rgba(184,112,112,.3); border-radius: 8px; font-size: var(--fs-sm); color: var(--text2);}
 .flag-row strong {color: var(--red);}
 .pgrid {display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0;}
-.pbox {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center; box-shadow: 0 1px 4px var(--shadow);}
+/* ⚠️ .pbox 不要整块 text-align:center。
+   它最初只用来放「标签＋大数字＋小注」的统计卡（.pl/.pv/.pn），居中是对的；
+   但后来它也被用作「本季必看／看穿」的长文容器，于是整段正文、表格、
+   列表全被居中，读起来极难。改为：容器左对齐，只有统计卡的三个子元素居中。 */
+.pbox {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 24px; text-align: left; box-shadow: 0 1px 4px var(--shadow);}
+.pbox .pl, .pbox .pv, .pbox .pn {text-align: center;}
 .pbox .pl {font-family: var(--font-sans); font-size: 11px; color: var(--text3-ink); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px;}
 .pbox .pv {font-family: var(--font-sans); font-size: 28px; font-weight: 800; margin-bottom: 5px;}
-.pbox .pn {font-size: 12px; color: var(--text3-ink); line-height: 1.5;}
+.pbox .pn {font-size: var(--fs-xs); color: var(--text3-ink); line-height: var(--lh-tight);}
+.pbox > h4 {font-size: var(--fs-lg); color: var(--accent3-ink); margin-bottom: 14px; line-height: 1.5;}
+.pbox + .pbox {margin-top: 18px;}
 .risk-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px;}
 .risk-card {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); position: relative; overflow: hidden;}
 .risk-card::before {content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent);}
@@ -587,10 +684,15 @@ figure.chart figcaption { font-size: 12px; color: var(--text3-ink); line-height:
 .risk-card.r4::before {background: var(--rose);}
 .risk-card.r5::before {background: var(--red);}
 .risk-card h5 {font-size: 14px; margin-bottom: 6px; color: var(--text);}
-.risk-card p {font-size: 13px; color: var(--text2); line-height: 1.7;}
+.risk-card p {font-size: var(--fs-sm); color: var(--text2); line-height: var(--lh-tight);}
+/* ⚠️ 此处原本混进了三条来自语料 @media(max-width:768px) 内的移动端规则
+   （.cgrid/.pgrid→1fr、.kpi-grid→1fr 1fr、.stock-snap→1fr 1fr）。
+   它们被抽取时丢掉了 @media 包裹，变成无条件规则且排在最后，
+   结果桌面端所有网格都塌成单列。已删除 —— 移动端由本表第 4、9 节的
+   @media(max-width:640px) 统一负责。抽取语料 CSS 时务必排除 @media 块内的规则。 */
 
 /* 骨架用到、但语料里没有现成规则的补充组件 */
-.note { font-size: 12px; color: var(--text3-ink); line-height: 1.7; margin-top: 10px; }
+.note { font-size: var(--fs-xs); color: var(--text3-ink); line-height: var(--lh-tight); margin-top: 12px; }
 .lead { font-size: 16px; font-weight: 600; line-height: 1.8; margin-bottom: 14px; }
 .haitu-disc { font-size: 12px; color: var(--text3-ink); line-height: 1.7; margin-top: 18px;
               padding-top: 14px; border-top: 1px solid var(--border); }
@@ -836,6 +938,38 @@ figure.chart figcaption { font-size: 12px; color: var(--text3-ink); line-height:
     </div>
   </div>
   <p class="note"><strong>第二张图是这份报告里最该记住的一张。</strong>五根蓝柱（营业利润）从未跌破零，五根对照柱（GAAP 净利润）却有三根在零线之下。<span class="hl-t">同一家公司、同一批酒厂、同一批品牌——差别全部来自经营以外。</span>这就是为什么本报告的估值全程使用可比口径与现金流，而不用 GAAP 净利润。</p>
+</section>
+
+<section class="section" id="statements" aria-labelledby="statements-t">
+  <h2 class="stitle" id="statements-t">三张表的五年轨迹<a class="anchor" href="#statements" aria-label="本节链接">#</a></h2>
+  <div class="period-toggle" role="group" aria-label="切换统计周期">
+    <button type="button" class="period-btn is-on" data-period="annual" aria-pressed="true">年度</button>
+    <button type="button" class="period-btn" data-period="quarterly" aria-pressed="false">季度</button>
+  </div>
+  <div class="cgrid">
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">利润表：总收入 · 营业利润 · 净利润</div>
+        <div class="cwrap"><canvas id="income" data-chart="income" role="img" aria-label="五年里营业利润始终为正，而 GAAP 净利润在 FY2022、FY2023、FY2025 三年为负"></canvas></div>
+        <figcaption>单位：百万美元。财年止于每年 2 月底。来源：SEC XBRL（10-K / 10-Q）。</figcaption>
+      </figure>
+    </div>
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">现金流量表：经营现金流 · 资本开支 · 自由现金流</div>
+        <div class="cwrap"><canvas id="cashflow" data-chart="cashflow" role="img" aria-label="五年经营现金流从未低于 26.69 亿美元，自由现金流从未低于 15.11 亿美元"></canvas></div>
+        <figcaption>单位：百万美元。10-Q 的现金流为年初至今累计，季度值由相邻期相减还原。来源：SEC XBRL。</figcaption>
+      </figure>
+    </div>
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">资产负债表：总资产 · 总负债 · 股东权益</div>
+        <div class="cwrap"><canvas id="balance" data-chart="balance" role="img" aria-label="股东权益从 2022 年的 117 亿降到 2026 年的 81 亿，总负债始终在 135 亿以上"></canvas></div>
+        <figcaption>单位：百万美元，各期期末时点值。来源：SEC XBRL。</figcaption>
+      </figure>
+    </div>
+  </div>
+  <p class="note"><strong>把三张图并排看，这家公司的形状就出来了：</strong>利润表的净利润线三次跌破零而营业利润线从未跌破（减值发生在经营之外）；现金流量表五年平稳，资本开支还在收敛；而资产负债表上，<span class="hl-t">股东权益从 FY2022 的 117.3 亿降到 FY2026 的 80.8 亿，缩水三成——同期公司把 86.5 亿还给了股东，并计提了 27.4 亿商誉减值。</span>现金一直在进来，账面净值一直在出去。</p>
 </section>
 
 <section class="section" id="flow" aria-labelledby="flow-t">
@@ -1513,6 +1647,30 @@ document.addEventListener('DOMContentLoaded', function () {
     String(document.documentElement.getAttribute('data-theme') === 'dark'));
 });
 
+/* ── 2b. 三表图的「年度 / 季度」切换 ──
+   income / cashflow / balance 三个槽位的数据写成 {annual:{…}, quarterly:{…}}
+   两套，由这里的 PERIOD 决定渲染哪一套。其余槽位（rev/margin/segment/eps）
+   是单周期的，不受影响。
+   ⚠️ 切换只重绘图表，不改动 DOM 结构 —— 一旦开始动 DOM，暗色切换、
+   窄屏重排、锚点定位都要重新对齐，得不偿失。 */
+var PERIOD = 'annual';
+function switchPeriod(p) {
+  if (p !== 'annual' && p !== 'quarterly') return;
+  PERIOD = p;
+  document.querySelectorAll('.period-btn').forEach(function (b) {
+    var on = b.dataset.period === p;
+    b.setAttribute('aria-pressed', String(on));
+    b.classList.toggle('is-on', on);
+  });
+  renderCharts();
+}
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('.period-btn').forEach(function (b) {
+    b.addEventListener('click', function () { switchPeriod(b.dataset.period); });
+  });
+  switchPeriod(PERIOD);
+});
+
 /* ── 3. 顶栏实测高度写进 --bar-h ──
    锚点落点与目录高亮都以它为基准。顶栏在窄屏会折行（38px → 60+px），
    硬编码会让手机上所有跳转偏移。 */
@@ -1524,8 +1682,15 @@ addEventListener('DOMContentLoaded', syncBarH);
 addEventListener('resize', syncBarH);
 
 /* ── 4. 本报告的图表数据：只改这一块 ──
-   槽位固定为 rev / margin / segment / eps，与 body-skeleton.html 的
-   canvas id 和 data-chart 一一对应。用不到的槽位整个删掉（连同骨架里的 .ccard）。
+   槽位与 body-skeleton.html 的 canvas id / data-chart 一一对应，共 7 个：
+
+     单周期（本期快照）  rev · margin · segment · eps
+     双周期（三表趋势）  income · cashflow · balance
+
+   后三个必须同时给 annual 与 quarterly 两套，读者可用「年度／季度」按钮切换。
+   ⚠️ 年度至少 5 个财年、季度至少 8 个季度 —— 少于这个数看不出趋势，
+   而「看清变化」正是这三张图存在的唯一理由。
+   用不到的槽位整个删掉（连同骨架里的 .ccard）。
    颜色一律写 palette 的 key 名（'accent' / 'gold' …），不要写 hex。 */
 var CHART_DATA = {
   rev: {
@@ -1558,6 +1723,63 @@ var CHART_DATA = {
       { label: 'Q1 FY2027 动销增速 %', data: [-2, -5, 6, 14, 21], color: 'accent' },
     ],
   },
+  income: {
+    type: 'bar', unit: '$M',
+    annual: {
+      labels: ['FY2022', 'FY2023', 'FY2024', 'FY2025', 'FY2026'],
+      datasets: [
+        { label: '总收入',   data: [8820.7, 9452.6, 9961.8, 10208.7, 9139.0], color: 'accent' },
+        { label: '营业利润', data: [2331.7, 2842.9, 3169.7, 354.9, 2721.4], color: 'gold' },
+        { label: '净利润',   data: [-40.4, -71.0, 1727.4, -81.4, 1686.7], color: 'green' },
+      ],
+    },
+    quarterly: {
+      labels: ['24Q2', '24Q3', '24Q4', '25Q1', '25Q2', '25Q3', '25Q4', '26Q1'],
+      datasets: [
+        { label: '总收入',   data: [2918.9, 2463.8, 2164.2, 2515.0, 2481.0, 2222.8, 1920.2, 2432.7], color: 'accent' },
+        { label: '营业利润', data: [-1229.4, 793.0, -150.3, 713.8, 874.0, 692.0, 441.6, 845.3], color: 'gold' },
+        { label: '净利润',   data: [-1199.0, 615.9, -375.3, 516.1, 466.0, 502.8, 201.8, 653.8], color: 'green' },
+      ],
+    },
+  },
+  cashflow: {
+    type: 'bar', unit: '$M',
+    annual: {
+      labels: ['FY2022', 'FY2023', 'FY2024', 'FY2025', 'FY2026'],
+      datasets: [
+        { label: '经营现金流', data: [2705.4, 2756.9, 2780.0, 3152.2, 2669.0], color: 'accent' },
+        { label: '资本开支',   data: [1026.8, 1035.4, 1269.1, 1214.1, 875.0], color: 'red' },
+        { label: '自由现金流', data: [1678.6, 1721.5, 1510.9, 1938.1, 1794.0], color: 'green' },
+      ],
+    },
+    quarterly: {
+      labels: ['24Q2', '24Q3', '24Q4', '25Q1', '25Q2', '25Q3', '25Q4', '26Q1'],
+      datasets: [
+        { label: '经营现金流', data: [1181.8, 685.2, 594.7, 637.2, 852.1, 616.9, 562.8, 661.8], color: 'accent' },
+        { label: '资本开支',   data: [327.8, 228.4, 282.6, 192.8, 217.3, 246.0, 218.9, 177.2], color: 'red' },
+        { label: '自由现金流', data: [854.0, 456.8, 312.1, 444.4, 634.8, 370.9, 343.9, 484.6], color: 'green' },
+      ],
+    },
+  },
+  balance: {
+    type: 'line', unit: '$M',
+    annual: {
+      labels: ['FY2022', 'FY2023', 'FY2024', 'FY2025', 'FY2026'],
+      datasets: [
+        { label: '总资产',   data: [25855.8, 24662.3, 25691.7, 21652.3, 21900.5], color: 'accent' },
+        { label: '总负债',   data: [13808.0, 15928.4, 15627.1, 14517.5, 13513.6], color: 'red' },
+        { label: '股东权益', data: [11731.9, 8413.6, 9743.1, 6882.0, 8082.4], color: 'green' },
+      ],
+    },
+    quarterly: {
+      labels: ['24Q2', '24Q3', '24Q4', '25Q1', '25Q2', '25Q3', '25Q4', '26Q1'],
+      datasets: [
+        { label: '总资产',   data: [23079.1, 22806.2, 21652.3, 22262.7, 21419.4, 21683.4, 21900.5, 22108.7], color: 'accent' },
+        { label: '总负债',   data: [14923.2, 14734.5, 14517.5, 14730.6, 13633.1, 13683.1, 13513.6, 13558.9], color: 'red' },
+        { label: '股东权益', data: [7870.8, 7817.8, 6882.0, 7265.5, 7500.4, 7710.8, 8082.4, 8255.6], color: 'green' },
+      ],
+    },
+  },
 };
 
 /* ── 5. 渲染（一般不需要改）── */
@@ -1575,6 +1797,12 @@ function renderCharts() {
     if (_charts[slot]) _charts[slot].destroy();
 
     var cfg = CHART_DATA[slot];
+    // 双周期槽位（三表图）：按当前 PERIOD 取那一套 labels/datasets。
+    // 缺失所选周期时回落到另一套，避免整张图空白。
+    if (cfg.annual || cfg.quarterly) {
+      var d = cfg[PERIOD] || cfg.annual || cfg.quarterly;
+      cfg = { type: d.type || cfg.type, labels: d.labels, datasets: d.datasets, unit: d.unit || cfg.unit };
+    }
     var isPie = cfg.type === 'doughnut' || cfg.type === 'pie';
 
     _charts[slot] = new Chart(el, {
@@ -1583,6 +1811,7 @@ function renderCharts() {
         labels: cfg.labels,
         datasets: cfg.datasets.map(function (d) {
           var c = Array.isArray(d.color) ? d.color.map(function (k) { return P[k]; }) : P[d.color];
+          // ⚠️ 判断是否折线要同时看 dataset 的 type 和图表级 type。
           // 只写 d.type === 'line' 会让「图表级 type:'line' 但 dataset 没写 type」的
           // 数据集拿到 borderWidth:0 —— 实测表现为「只有点、没有连线」。
           var isLine = (d.type || cfg.type) === 'line';
