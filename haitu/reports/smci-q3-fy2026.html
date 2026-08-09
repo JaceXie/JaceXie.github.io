@@ -1,0 +1,1731 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-08-07 · NASDAQ: SMCI Q3 FY2026 财报已于 2026-05-05 发布 -->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Super Micro Computer SMCI · Q3 FY2026 财报深度分析 · 海图夜读</title>
+<link rel="icon" type="image/png" href="../assets/hai.png">
+
+<script>
+(function () {
+  try {
+    var t = localStorage.getItem('theme');
+    if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', t);
+  } catch (e) { document.documentElement.setAttribute('data-theme', 'light'); }
+})();
+</script>
+
+<link rel="canonical" href="https://haitu.jacexie.com/haitu/reports/smci-q3-fy2026.html">
+<meta name="description" content="从英伟达买芯片、组装成 AI 服务器整机柜卖给数据中心——收入五年涨 11 倍，毛利率从 15% 降到 8%，而增长每快一分，现金缺口就大一分。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Super Micro Computer SMCI · Q3 FY2026 财报深度分析">
+<meta property="og:description" content="从英伟达买芯片、组装成 AI 服务器整机柜卖给数据中心——收入五年涨 11 倍，毛利率从 15% 降到 8%，而增长每快一分，现金缺口就大一分。">
+<meta property="og:url" content="https://haitu.jacexie.com/haitu/reports/smci-q3-fy2026.html">
+<meta name="twitter:card" content="summary">
+
+<script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+<style>
+
+/* ── MORANDI PALETTE ── */
+:root {
+  /* Light (default) */
+  --bg:        #f5f0eb;
+  --bg2:       #ece6df;
+  --card:      #ffffff;
+  --card2:     #f8f5f1;
+  --border:    #d9d0c7;
+  --text:      #4a4340;
+  --text2:     #7a706a;
+  --text3:     #a89f98;
+  --accent:    #8a9a8e;   /* sage */
+  --accent2:   #7b8fa0;   /* muted blue */
+  --accent3:   #b08d7a;   /* dusty terracotta */
+  --rose:      #c09090;   /* dusty rose */
+  --gold:      #b9a06a;
+  --red:       #b87070;
+  --green:     #7a9a7a;
+  --shadow:    rgba(0,0,0,0.06);
+  --chart-grid:#e5ddd5;
+  /* ── ink 层：只用于文字，全部达 WCAG AA（装饰色仍用上面的原值）── */
+  --text3-ink:   #70665f;  /* 4.51:1 on --bg2（原 --text3 #a89f98 仅 2.60:1）*/
+  --accent3-ink: #7f6150;  /* 4.97:1 on --bg （原 --accent3 #b08d7a 仅 2.67:1）*/
+  --gold-ink:    #8a6d3b;  /* 原 --gold  #b9a06a 仅 2.53:1 */
+  --red-ink:     #a35555;  /* 原 --red   #b87070 仅 3.76:1 */
+  --green-ink:   #4a7057;  /* 原 --green #7a9a7a 仅 3.12:1 */
+  --accent2-ink: #5a7386;
+  --font-sans: system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-serif: Georgia, 'Noto Serif SC', 'PingFang SC', serif;
+
+  /* ── 排版标度 ────────────────────────────────────────────────
+     此前全站正文散落 8 档字号（11/12/12.5/13/14/14.5/15/16）与 5 种行高
+     （1.65/1.70/1.75/1.90/2.00），是逐处硬写累积出来的，没有体系。
+     收敛成 4 档字号 + 2 种行高，所有正文一律引用这里。 */
+  --fs-xs:   12px;    /* 注释、图注、页脚 */
+  --fs-sm:   13.5px;  /* 表格、卡片密排文字 */
+  --fs-base: 15px;    /* 正文 */
+  --fs-lg:   16.5px;  /* 夜读手记正文、导语 */
+
+  --lh-tight: 1.7;    /* 密排：表格、卡片、注释 */
+  --lh-prose: 1.85;   /* 正文段落 */
+
+  --measure: 40em;
+  --bar-h: 44px;
+}
+[data-theme="dark"] {
+  --text3-ink:   #a19991;
+  --accent3-ink: #c9a48e;
+  --gold-ink:    #c9b07a;
+  --red-ink:     #c08080;
+  --green-ink:   #8aaa8a;
+  --accent2-ink: #8fabbf;
+  --bg:        #1e1c1a;
+  --bg2:       #28251f;
+  --card:      #2e2a25;
+  --card2:     #363230;
+  --border:    #4a4540;
+  --text:      #d4ccc4;
+  --text2:     #a09890;
+  --text3:     #706860;
+  --accent:    #8a9a8e;
+  --accent2:   #8fabbf;
+  --accent3:   #c9a48e;
+  --rose:      #c09090;
+  --gold:      #c9b07a;
+  --red:       #c08080;
+  --green:     #8aaa8a;
+  --shadow:    rgba(0,0,0,0.3);
+  --chart-grid:#3e3a35;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-serif);
+  line-height: var(--lh-prose);
+  font-size: var(--fs-base);
+  transition: background .35s, color .35s;
+}
+a { color: var(--accent2); text-decoration: none; }
+
+/* ── THEME TOGGLE ── */
+.theme-bar {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 8px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  transition: background .35s;
+}
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; text-decoration: none; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: var(--font-sans); font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; text-decoration: none; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; color: var(--text2);
+}
+.toggle-switch {
+  appearance: none; -webkit-appearance: none; border: 0; padding: 0; margin: 0;
+  position: relative;
+  width: 44px; height: 22px;
+  background: var(--border);
+  border-radius: 11px;
+  cursor: pointer;
+  transition: background .3s;
+}
+.toggle-switch::after {
+  content: '';
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 18px; height: 18px;
+  background: var(--card);
+  border-radius: 50%;
+  transition: transform .3s;
+  box-shadow: 0 1px 3px rgba(0,0,0,.15);
+}
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+
+/* ── HERO ── */
+.hero {
+  padding: 48px 24px 36px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+.hero-tag {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 3px 14px;
+  border-radius: 20px;
+  margin-bottom: 18px;
+}
+.hero h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills {
+  display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;
+}
+.pill {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 6px 18px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--text2);
+  box-shadow: 0 1px 3px var(--shadow);
+}
+.pill strong { color: var(--text); }
+
+/* ── LAYOUT ── */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle {
+  font-size: 18px; font-weight: 700; color: var(--accent3-ink);
+  margin-bottom: 20px; letter-spacing: 0.5px;
+  display: flex; align-items: center; gap: 10px;
+}
+.stitle::before {
+  content: ''; display: block; width: 4px; height: 20px;
+  background: var(--accent3); border-radius: 2px;
+}
+
+/* ── KPI ── */
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.kpi {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 16px 18px;
+  box-shadow: 0 1px 4px var(--shadow);
+  transition: background .35s;
+}
+.kpi-l { font-family: var(--font-sans); font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.badge {
+  display: inline-block; font-family: var(--font-sans);
+  font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px;
+}
+.up   { background: rgba(122,154,122,.15); color: var(--green); }
+.dn   { background: rgba(184,112,112,.15); color: var(--red); }
+.nt   { background: rgba(123,143,160,.15); color: var(--accent2); }
+
+/* ── TABLE ── */
+.tbl-wrap {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow);
+}
+.tbl { width: 100%; border-collapse: collapse; font-family: var(--font-sans); font-size: var(--fs-sm);
+       font-variant-numeric: tabular-nums; }
+.tbl th {
+  background: var(--card2); color: var(--text3-ink); font-size: 11px;
+  letter-spacing: .5px; text-transform: uppercase;
+  padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border);
+}
+.tbl td { padding: 11px 16px; border-bottom: 1px solid var(--border); text-align: left; line-height: var(--lh-tight); }
+.tbl td:first-child { color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); }
+
+/* ── CHARTS ── */
+.cgrid  { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-bottom: 16px; }
+.cgrid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-bottom: 16px; }
+.ccard, .kpi, .moat-card, .risk-card, .score-card, .snap-item, .pbox { min-width: 0; }
+.ccard {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow);
+}
+.ctitle { font-family: var(--font-sans); font-size: 12px; color: var(--text3-ink); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 230px; }
+
+/* ── QUOTES ── */
+.qgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.qcard {
+  background: var(--card); border: 1px solid var(--border);
+  border-left: 4px solid var(--rose);
+  border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow);
+}
+.qname { font-weight: 700; color: var(--accent3); margin-bottom: 2px; }
+.qrole { font-family: var(--font-sans); font-size: 11px; color: var(--text3); margin-bottom: 10px; }
+.qtext { font-style: italic; font-size: 13.5px; color: var(--text); line-height: 1.8; }
+
+/* ── ANALYSIS ── */
+.agrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+.acard {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow);
+}
+.acard h4 { font-size: 13px; color: var(--accent2); margin-bottom: 10px; text-transform: uppercase; letter-spacing: .5px; }
+.acard ul { padding-left: 16px; }
+.acard li { margin-bottom: 5px; font-size: 13px; }
+
+/* ── BUFFETT SCORE ── */
+.bscore {
+  display: flex; align-items: center; gap: 16px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px 22px; margin-bottom: 12px;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.circle {
+  width: 62px; height: 62px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 18px; flex-shrink: 0;
+  border: 3px solid; font-family: var(--font-sans);
+}
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 3px; }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+/* ── VERDICT ── */
+.verdict {
+  background: var(--card2); border: 2px solid var(--accent);
+  border-radius: 10px; padding: 26px 28px; margin-bottom: 16px;
+}
+.verdict-t { font-size: 17px; font-weight: 700; color: var(--accent); margin-bottom: 10px; }
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 14px; text-align: left;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.pbox .pl { font-family: var(--font-sans); font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.pbox .pv { font-family: var(--font-sans); font-size: 26px; font-weight: 800; }
+.pbox .pn { font-size: 11px; color: var(--text3); margin-top: 3px; }
+.pc { color: var(--text2); } .pf { color: var(--gold); } .ps { color: var(--green); }
+
+/* ── 周期切换（三表图）── */
+.period-toggle {
+  display: inline-flex; gap: 0; margin-bottom: 16px;
+  border: 1px solid var(--border); border-radius: 8px; overflow: hidden;
+  background: var(--card);
+}
+.period-btn {
+  appearance: none; -webkit-appearance: none; border: 0; margin: 0;
+  padding: 7px 20px; cursor: pointer;
+  font-family: var(--font-sans); font-size: var(--fs-xs);
+  letter-spacing: .5px; color: var(--text3-ink);
+  background: transparent; transition: background .2s, color .2s;
+  /* 44px 触摸目标：窄屏上两个按钮挨得很近，小于这个高度容易点错 */
+  min-height: 34px;
+}
+.period-btn + .period-btn { border-left: 1px solid var(--border); }
+.period-btn:hover { color: var(--text); background: var(--card2); }
+.period-btn.is-on { background: var(--accent); color: #fff; font-weight: 600; }
+.period-btn:focus-visible { outline: 2px solid var(--accent2); outline-offset: -2px; }
+[data-theme="dark"] .period-btn.is-on { color: var(--bg); }
+
+/* ── SANKEY ── */
+#sankey { width: 100%; height: 460px; }
+
+/* ── COMMENTARY ── */
+.cmt {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 26px 28px; line-height: var(--lh-prose);
+  font-size: var(--fs-base);
+  box-shadow: 0 1px 4px var(--shadow);
+}
+/* 段间距取 0.9 行。此前是 14px 对 27.55px 的行高＝0.51 行，
+   段与段之间比行与行之间只宽一点点，整块糊成一片，读者找不到段落边界。 */
+.cmt p { margin-bottom: calc(var(--lh-prose) * 0.9em); }
+.cmt p:last-child { margin-bottom: 0; }
+
+.cmt > p, .cmt > ul, .cmt > ol,
+.haitu-essay-body > p {
+  max-width: var(--measure);           /* 15px × 40em ≈ 600px，约 40 字/行 */
+}
+.note, p.note {
+  /* 注释是 12px 小字，行长可略放宽：12px × 52em ≈ 624px，约 52 字，
+     仍远好于此前的 96 字，且与正文块的右边界大致齐平，视觉上不突兀。 */
+  max-width: 52em;
+}
+.cmt > .tbl-wrap, .cmt > figure, .cmt > .cgrid { max-width: none; }
+/* 避免段末孤字（中文里一行只剩一两个字特别难看）。
+   Safari/Firefox 不支持时会自动忽略，属渐进增强。 */
+.cmt p, .haitu-essay-body p, .note, .ec-item { text-wrap: pretty; }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--card2); border-top: 1px solid var(--border);
+  padding: 24px; text-align: left; color: var(--text3); font-size: 12px;
+  margin-top: 40px;
+}
+
+@media (max-width: 768px) {
+  .cgrid,.cgrid3,.qgrid,.agrid,.pgrid { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 22px; }
+  .kpi-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ── HAITU SIGNATURE BLOCKS (页首短评 + 页末长评) ── */
+.haitu-quip {
+  display: flex; align-items: center; gap: 18px;
+  background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red);
+  border-radius: 12px; padding: 18px 24px; margin: 24px 0;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.haitu-avatar-sm {
+  width: 64px; height: 64px; border-radius: 50%;
+  object-fit: cover; flex-shrink: 0;
+  border: 2px solid var(--border); background: var(--red);
+  box-shadow: 0 2px 8px rgba(184,112,112,0.18);
+}
+.haitu-quote { flex: 1; }
+.haitu-name {
+  font-family: var(--font-sans);
+  font-size: 12px; font-weight: 700; letter-spacing: 1.5px;
+  color: var(--red-ink); text-transform: uppercase; margin-bottom: 4px;
+}
+.haitu-portrait {
+  font-size: 15px; line-height: 1.65; color: var(--text);
+  margin-bottom: 6px; font-weight: 600;
+}
+.haitu-rating-line {
+  font-size: 13px; color: var(--text2);
+  font-family: var(--font-sans);
+}
+.rating-badge {
+  display: inline-block; padding: 2px 12px; border-radius: 12px;
+  font-weight: 700; font-size: 13px; letter-spacing: 0.5px;
+  margin-left: 4px;
+}
+.rating-strong-buy { background: rgba(122,154,122,.25); color: var(--green); }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+.rating-cond-buy { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-hold { background: rgba(123,143,160,.18); color: var(--accent2); }
+.rating-sell { background: rgba(184,112,112,.18); color: var(--red); }
+.rating-strong-sell { background: rgba(184,112,112,.28); color: var(--red); }
+
+.haitu-essay {
+  background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red);
+  border-radius: 12px; padding: 28px 32px; margin: 24px 0;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.haitu-essay-header {
+  display: flex; align-items: center; gap: 18px;
+  padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px;
+}
+.haitu-avatar-lg {
+  width: 110px; height: 110px; border-radius: 50%;
+  object-fit: cover; flex-shrink: 0;
+  border: 3px solid var(--border); background: var(--red);
+  box-shadow: 0 4px 14px rgba(184,112,112,0.22);
+}
+.haitu-name-lg {
+  font-family: 'Georgia', 'Noto Serif SC', serif;
+  font-size: 28px; font-weight: 700; color: var(--text);
+  letter-spacing: 1px; margin-bottom: 4px;
+}
+.haitu-essay-tag {
+  font-family: var(--font-sans);
+  font-size: 12px; color: var(--text3); letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+.haitu-essay-body {
+  font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', serif;
+  font-size: var(--fs-lg); line-height: var(--lh-prose); color: var(--text);
+}
+.haitu-essay-body p { margin-bottom: calc(var(--lh-prose) * 0.85em); }
+.haitu-essay-body p:first-child {
+  font-size: 18px; font-style: italic; color: var(--text2);
+}
+.haitu-essay-body p:last-child {
+  margin-top: 22px; padding-top: 14px;
+  border-top: 1px solid var(--border);
+  font-size: var(--fs-xs); color: var(--text3); font-style: italic;
+}
+.haitu-sign {
+  text-align: left; margin-top: 14px;
+  font-family: 'Georgia', serif; font-size: 14px;
+  color: var(--text2); font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .haitu-quip { flex-direction: column; text-align: left; }
+  .haitu-essay-header { flex-direction: column; text-align: left; }
+  .haitu-avatar-sm { width: 80px; height: 80px; }
+  .haitu-avatar-lg { width: 90px; height: 90px; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   海图 v2 追加规则 —— 修 103 份存量实测出的问题，勿删勿改顺序
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── 1. 锚点落点：一行同时修好 TOC 跳转 / 深链 / Ctrl+F 定位 / :target ──
+   没有这条，所有跳转都会落在 sticky 顶栏底下被遮住 */
+.section { scroll-margin-top: calc(var(--bar-h) + 12px); }
+
+/* h2.stitle 必须显式定字号，否则被 UA 默认样式撑成 32px 巨标题 */
+h2.stitle { font-size: 18px; font-weight: 700; margin: 0 0 20px; }
+
+/* 章节深链锚点：桌面 hover 显形，触屏常显 */
+.anchor {
+  margin-left: 8px; font-size: 13px; color: var(--text3-ink);
+  text-decoration: none; opacity: 0; transition: opacity .2s;
+}
+.stitle:hover .anchor, .anchor:focus-visible { opacity: 1; }
+@media (hover: none) { .anchor { opacity: .35; } }
+
+/* ── 2. 评级徽章：由 data-rating 派生，作者不再手写 class ──
+   实测存量 .rating-hold 在 63 份是金色、30 份是蓝色 —— 这套选择器根除该分歧 */
+.rating-badge[data-rating="强力买入"] { background: rgba(122,154,122,.25); color: var(--green-ink); }
+.rating-badge[data-rating="买入"]     { background: rgba(122,154,122,.18); color: var(--green-ink); }
+.rating-badge[data-rating="有条件买入"]{ background: rgba(185,160,106,.18); color: var(--gold-ink); }
+.rating-badge[data-rating="持有观望"] { background: rgba(123,143,160,.18); color: var(--accent2-ink); }
+.rating-badge[data-rating="卖出"]     { background: rgba(184,112,112,.18); color: var(--red-ink); }
+.rating-badge[data-rating="强烈卖出"] { background: rgba(184,112,112,.28); color: var(--red-ink); }
+
+/* 涨跌不能只靠色相（色盲）—— 文字里必须自带 +/- 号，这里只负责配色 */
+.up, .pos { color: var(--green-ink); }
+.dn, .neg { color: var(--red-ink); }
+
+/* ── 3. 窄屏表格：粘性首列 + 右侧滚动阴影提示 ──
+   实测 375px 下 12 张表有 6 张横向溢出，且无任何可滚动的视觉线索 */
+.tbl-wrap {
+  background-image: linear-gradient(to right, var(--card), var(--card)),
+                    linear-gradient(to right, rgba(0,0,0,.10), rgba(0,0,0,0));
+  background-position: right center, right center;
+  background-repeat: no-repeat;
+  background-size: 24px 100%, 12px 100%;
+  background-attachment: local, scroll;
+}
+@media (max-width: 640px) {
+  /* border-collapse:collapse 下 sticky 单元格的边框会丢，用 box-shadow 补回 */
+  .tbl { border-collapse: separate; border-spacing: 0; }
+  .tbl :is(th, td) { border-bottom: 1px solid var(--border); }
+  .tbl :is(th, td):first-child {
+    position: sticky; left: 0; z-index: 1;
+    background: var(--card); box-shadow: 1px 0 0 var(--border);
+  }
+  .tbl th:first-child { background: var(--card2); }
+}
+
+/* ── 4. 移动端：顶栏必须能换行（实测四元素已折行重叠）── */
+.theme-bar { flex-wrap: wrap; row-gap: 6px; }
+@media (max-width: 420px) { .theme-bar .xueqiu-link { display: none; } }
+
+@media (max-width: 640px) {
+  .container { padding: 0 14px; }          /* 24px 在 375px 上吃掉 12.8% 视口 */
+  body { font-size: 15.5px; }              /* 14.5px 中文长文在手机上偏小 */
+  .cwrap { height: 200px; }
+  #sankey { height: 360px !important; }    /* 480px 挤在 289px 宽里不可读 */
+  .cgrid, .cgrid3, .pgrid { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 640px), (hover: none) {
+  .toggle-switch::before {
+    content: ''; position: absolute; left: 0; right: 0;
+    top: 50%; transform: translateY(-50%); height: 44px;
+  }
+}
+
+/* ── 5. prefers-reduced-motion ──
+   全语料 103/103 有 scroll-behavior:smooth 且零保护。加了目录之后，
+   一次跳转要跨 4 万像素、持续数秒，前庭敏感者会难受 */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important; animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+}
+
+/* ── 6. 焦点可见（全语料 0 个 :focus-visible 样式）── */
+:focus-visible { outline: 2px solid var(--accent3-ink); outline-offset: 2px; }
+
+/* ── 7. 图表无障碍降级容器 ── */
+figure.chart { margin: 0; }
+figure.chart figcaption { font-size: 12px; color: var(--text3-ink); line-height: 1.6; margin-top: 8px; }
+.chart-data { font-size: 12px; margin-top: 8px; }
+.chart-data summary { cursor: pointer; color: var(--text3-ink); }
+
+/* ── 8. shell 新增组件（skip link / 结论跳转带 / 顶栏右侧 / 屏幕阅读器专用）── */
+
+.skip {
+  position: absolute; left: -9999px; top: 0;
+  background: var(--card); color: var(--accent3-ink);
+  padding: 8px 14px; border-radius: 0 0 8px 0; z-index: 200;
+  font-size: 13px; text-decoration: none;
+}
+.skip:focus { left: 0; }
+
+/* 只给屏幕阅读器：essay 一节的标题不需要视觉呈现（.haitu-essay 自带头部） */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+.theme-bar-right { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+
+/* 结论跳转带：读者看完评级后一步到证据 */
+.quip-jump { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.quip-jump a {
+  font-family: var(--font-sans); font-size: 12px; line-height: 1;
+  padding: 7px 12px; border-radius: 999px;
+  border: 1px solid var(--border); background: var(--card2);
+  color: var(--accent3-ink); text-decoration: none;
+  transition: border-color .2s, background .2s;
+}
+.quip-jump a:hover { border-color: var(--accent3); background: var(--card); }
+@media (max-width: 640px), (hover: none) {
+  /* 用 min-height 而不是加 padding —— padding 要靠字体行高凑够 44px，
+     换字体或改字号就又不达标了（实测 padding:13px 只得到 40px）。 */
+  .quip-jump a { min-height: 44px; padding: 0 16px; display: inline-flex; align-items: center; }
+}
+
+.hero-pills {display: flex; justify-content: flex-start; gap: 16px; flex-wrap: wrap;}
+.pill {background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: var(--font-sans); font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow);}
+.pill strong {color: var(--text);}
+.stock-snap {background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px;}
+.snap-item {text-align: left;}
+.snap-label {font-family: var(--font-sans); font-size: 10px; color: var(--text3-ink); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px;}
+.kpi-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px;}
+.kpi {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow);}
+.moat-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px;}
+.moat-card {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); border-left: 4px solid var(--accent);}
+.moat-card.wide {border-left-color: var(--green);}
+.moat-card.narrow {border-left-color: var(--gold);}
+.moat-card.none {border-left-color: var(--red);}
+.moat-card h5 {font-size: 13px; color: var(--text); margin-bottom: 6px;}
+.moat-card .moat-rate {font-family: var(--font-sans); font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px;}
+.moat-card.wide .moat-rate {background: rgba(122,154,122,.18); color: var(--green);}
+.moat-card.narrow .moat-rate {background: rgba(185,160,106,.18); color: var(--gold);}
+.moat-card.none .moat-rate {background: rgba(184,112,112,.18); color: var(--red);}
+.moat-card p {font-size: var(--fs-sm); color: var(--text2); line-height: var(--lh-tight);}
+.ec-item {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: block; box-shadow: 0 1px 3px var(--shadow); line-height: var(--lh-prose); font-size: var(--fs-base);}
+.ec-badge {display: inline-block; vertical-align: baseline; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-right: 10px; font-family: var(--font-sans); white-space: nowrap;}
+.dcf-note {background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: var(--fs-sm); color: var(--text2); line-height: var(--lh-prose);}
+.dcf-note strong {color: var(--text);}
+.scorecard {background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow);}
+.score-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px;}
+.score-card {background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px;}
+.score-letter {width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-sans); font-weight: 800; font-size: 22px; flex-shrink: 0; border: 3px solid;}
+.flag-row {margin-top: 16px; padding: 12px 16px; background: rgba(184,112,112,.08); border: 1px solid rgba(184,112,112,.3); border-radius: 8px; font-size: var(--fs-sm); color: var(--text2);}
+.flag-row strong {color: var(--red);}
+.pgrid {display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0;}
+body { text-align: left; }
+
+.pbox {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 24px; text-align: left; box-shadow: 0 1px 4px var(--shadow);}
+.pbox .pl, .pbox .pv, .pbox .pn {text-align: left;}
+.pbox .pl {font-family: var(--font-sans); font-size: 11px; color: var(--text3-ink); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px;}
+.pbox .pv {font-family: var(--font-sans); font-size: 28px; font-weight: 800; margin-bottom: 5px;}
+.pbox .pn {font-size: var(--fs-xs); color: var(--text3-ink); line-height: var(--lh-tight);}
+.pbox > h4 {font-size: var(--fs-lg); color: var(--accent3-ink); margin-bottom: 14px; line-height: 1.5;}
+.pbox + .pbox {margin-top: 18px;}
+.risk-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px;}
+.risk-card {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); position: relative; overflow: hidden;}
+.risk-card::before {content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent);}
+.risk-card.r1::before {background: var(--green);}
+.risk-card.r2::before {background: rgba(122,154,122,.6);}
+.risk-card.r3::before {background: var(--gold);}
+.risk-card.r4::before {background: var(--rose);}
+.risk-card.r5::before {background: var(--red);}
+.risk-card h5 {font-size: 14px; margin-bottom: 6px; color: var(--text);}
+.risk-card p {font-size: var(--fs-sm); color: var(--text2); line-height: var(--lh-tight);}
+
+/* 骨架用到、但语料里没有现成规则的补充组件 */
+.note { font-size: var(--fs-xs); color: var(--text3-ink); line-height: var(--lh-tight); margin-top: 12px; }
+.lead { font-size: 16px; font-weight: 600; line-height: 1.8; margin-bottom: 14px; }
+.haitu-disc { font-size: 12px; color: var(--text3-ink); line-height: 1.7; margin-top: 18px;
+              padding-top: 14px; border-top: 1px solid var(--border); }
+.bscore { background: var(--card2); border: 1px solid var(--border); border-radius: 10px;
+          padding: 16px 20px; margin: 16px 0; }
+.bscore h4 { font-family: var(--font-sans); font-size: 14px; color: var(--accent3-ink); margin: 0 0 6px; }
+.bscore p { margin: 0; font-size: 14px; }
+
+/* 桑基 SVG：颜色与线宽在标记里给，这里只管描边端点与文字 */
+#sankey { width: 100%; height: auto; }
+.sk-flow path { fill: none; opacity: .45; stroke-linecap: butt; }
+.sk-t .sk-lab { font-family: var(--font-sans); font-size: 12px; fill: var(--text2); }
+.sk-t .sk-num { font-family: var(--font-sans); font-size: 13px; font-weight: 700; fill: var(--text);
+                font-variant-numeric: tabular-nums; }
+.sk-t .warn   { fill: var(--red-ink); }
+
+@media (max-width: 640px) {
+  .stock-snap { grid-template-columns: 1fr 1fr; }
+  .kpi-grid   { grid-template-columns: 1fr 1fr; }
+  .moat-grid, .risk-grid, .score-grid, .pgrid { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* 修饰类：评分等级 / 电话会情绪 / 快照数值。文字色一律走 ink 层。 */
+.score-letter.s-a  { color: var(--green-ink);   border-color: var(--green);   background: rgba(122,154,122,.12); }
+.score-letter.s-bp { color: var(--gold-ink);    border-color: var(--gold);    background: rgba(185,160,106,.12); }
+.score-letter.s-b  { color: var(--accent2-ink); border-color: var(--accent2); background: rgba(123,143,160,.12); }
+.score-letter.s-c  { color: var(--red-ink);     border-color: var(--red);     background: rgba(184,112,112,.12); }
+
+.ec-badge.ec-bull { background: rgba(122,154,122,.18); color: var(--green-ink); }
+.ec-badge.ec-bear { background: rgba(184,112,112,.18); color: var(--red-ink); }
+.ec-badge.ec-neut { background: rgba(123,143,160,.18); color: var(--accent2-ink); }
+
+.snap-value { font-family: var(--font-sans); font-size: 19px; font-weight: 700; color: var(--text);
+              font-variant-numeric: tabular-nums; line-height: 1.3; }
+.snap-note  { font-family: var(--font-sans); font-size: 11px; color: var(--text3-ink); margin-top: 3px; }
+.sk-node rect { opacity: .9; }
+
+/* ── 桑基图（内联静态 SVG，不引 Plotly）── */
+#sankey svg { width: 100%; height: auto; display: block; }
+.sn { stroke: none; }
+.sn.n-a { fill: var(--accent); }
+.sn.n-b { fill: var(--red); }
+.sn.n-c { fill: var(--green); }
+.sn.n-d { fill: var(--gold); }
+.sn.n-e { fill: var(--accent3); }
+.sf { stroke: none; }
+.sf.f-b { fill: var(--red); opacity: .17; }
+.sf.f-c { fill: var(--green); opacity: .17; }
+.sf.f-d { fill: var(--gold); opacity: .19; }
+.sf.f-e { fill: var(--accent3); opacity: .22; }
+.snl { fill: var(--text2); font-size: 11px; font-family: var(--font-sans); }
+.skcap { fill: var(--text3-ink); font-size: 11px; font-family: var(--font-sans); }
+.skwarn { fill: var(--red); }
+.skdiv { stroke: var(--border); stroke-width: 1; stroke-dasharray: 3 4; }
+
+</style>
+</head>
+<body>
+
+<a class="skip" href="#kpi">跳到正文</a>
+
+<!-- ── 顶栏 ── -->
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/SMCI" target="_blank" rel="noopener">📊 雪球 SMCI</a>
+  </div>
+  <div class="theme-bar-right">
+    <span>☀️ 浅色</span>
+    <button type="button" class="toggle-switch" id="themeBtn"
+            aria-pressed="false" aria-label="切换深色模式" onclick="toggleTheme()"></button>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-tag">Q3 FY2026 财报发布 · 2026-05-05 ｜ 海图研判 · 2026-08-10</div>
+  <h1>超微电脑 SMCI · Q3 FY2026 财报深度分析</h1>
+  <div class="hero-sub">NASDAQ: SMCI ｜ 财季截至 2026-03-31 ｜ 价值投资视角</div>
+  <div class="hero-pills">
+    <span class="pill">股价 $31.13</span>
+    <span class="pill">市值 $20.1B</span>
+    <span class="pill">Q3 营收 $10.24B（+122.7%）</span>
+    <span class="pill">GAAP EPS $0.72</span>
+    <span class="pill">毛利率 9.95%</span>
+    <span class="pill">经营现金流 −$6.62B</span>
+  </div>
+</div>
+
+<div class="container">
+  <div class="haitu-quip">
+    <div class="haitu-quote">
+      <div class="haitu-portrait">从英伟达买芯片、组装成 AI 服务器整机柜卖给数据中心——收入五年涨 11 倍，毛利率从 15% 降到 8%，而增长每快一分，现金缺口就大一分。</div>
+      <div class="haitu-rating-line">
+        评级：<span class="rating-badge" data-rating="卖出">卖出</span> · 12 个月目标价 $22.50 · 价格已隐含它只做到过一次的利润率，而三面治理红旗同时亮着
+      </div>
+      <!-- 结论跳转带：读者看到评级后第一反应是「凭什么」，给他一步到证据的路。
+           不要再加摘要卡 —— 目标价在 hero、这里、模块 7 已有三份，第四份只会增加不一致。 -->
+      <div class="quip-jump" role="group" aria-label="快速跳转">
+        <a href="#m13">评分卡与决策</a>
+        <a href="#m7">目标价怎么算出来的</a>
+        <a href="#m11">风险矩阵</a>
+        <a href="#m4">护城河</a>
+        <a href="#essay">夜读手记</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+<section class="section" id="snapshot" aria-labelledby="snapshot-t">
+  <h2 class="stitle" id="snapshot-t">市场数据快照（2026-08-07 收盘）<a class="anchor" href="#snapshot" aria-label="本节链接">#</a></h2>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">收盘价</div><div class="snap-value">$31.13</div><div class="snap-note">当日 +5.96%</div></div>
+    <div class="snap-item"><div class="snap-label">市值</div><div class="snap-value">$20.14B</div><div class="snap-note">646.87M 股（含 6 月增发）</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间</div><div class="snap-value">$19.48–58.78</div><div class="snap-note">距高点 −47.0%</div></div>
+    <div class="snap-item"><div class="snap-label">近 52 周</div><div class="snap-value">−33.5%</div><div class="snap-note">同期纳指为正</div></div>
+    <div class="snap-item"><div class="snap-label">P/E（TTM）</div><div class="snap-value">16.1x</div><div class="snap-note">TTM 净利 $1.247B</div></div>
+    <div class="snap-item"><div class="snap-label">P/E（FY26E）</div><div class="snap-value">9.6x</div><div class="snap-note">含 Q4 预告推算</div></div>
+    <div class="snap-item"><div class="snap-label">P/S（TTM）</div><div class="snap-value">0.60x</div><div class="snap-note">TTM 营收 $33.7B</div></div>
+    <div class="snap-item"><div class="snap-label">P/B</div><div class="snap-value">2.26x</div><div class="snap-note">备考每股账面 $13.77</div></div>
+    <div class="snap-item"><div class="snap-label">自由现金流收益率</div><div class="snap-value">−34.0%</div><div class="snap-note">TTM FCF −$6.85B</div></div>
+    <div class="snap-item"><div class="snap-label">普通股股息</div><div class="snap-value">无</div><div class="snap-note">优先股 7.00%，已宣派</div></div>
+    <div class="snap-item"><div class="snap-label">Beta</div><div class="snap-value">1.97</div><div class="snap-note">空头占股本 15.0%</div></div>
+    <div class="snap-item"><div class="snap-label">50/200 日均线</div><div class="snap-value">$31.86 / $32.19</div><div class="snap-note">价格在两线之下</div></div>
+    <div class="snap-item"><div class="snap-label">卖方共识</div><div class="snap-value">Hold</div><div class="snap-note">19 家，均值 $37.81</div></div>
+    <div class="snap-item"><div class="snap-label">下一事件</div><div class="snap-value">08-11</div><div class="snap-note">Q4 FY26 正式财报</div></div>
+  </div>
+  <p class="note">股价与技术指标来自行情聚合站（stockanalysis.com，2026-08-07 收盘），交易所一手行情本次未取到，已在此标明。股数、财务数据全部来自 SEC 一手申报。</p>
+</section>
+
+<section class="section" id="kpi" aria-labelledby="kpi-t">
+  <h2 class="stitle" id="kpi-t">Q3 FY2026 核心业绩（财季截至 2026-03-31）<a class="anchor" href="#kpi" aria-label="本节链接">#</a></h2>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">净销售</div><div class="kpi-v">$10.24B</div><span class="badge up">YoY +122.7%</span></div>
+    <div class="kpi"><div class="kpi-l">GAAP 毛利率</div><div class="kpi-v">9.95%</div><span class="badge up">前季 6.30%</span></div>
+    <div class="kpi"><div class="kpi-l">营业利润</div><div class="kpi-v">$625.9M</div><span class="badge up">利润率 6.11%</span></div>
+    <div class="kpi"><div class="kpi-l">GAAP 净利</div><div class="kpi-v">$483.4M</div><span class="badge up">YoY +344.4%</span></div>
+    <div class="kpi"><div class="kpi-l">GAAP 摊薄 EPS</div><div class="kpi-v">$0.72</div><span class="badge up">指引「至少 0.52」</span></div>
+    <div class="kpi"><div class="kpi-l">非 GAAP 摊薄 EPS</div><div class="kpi-v">$0.84</div><span class="badge up">指引「至少 0.60」</span></div>
+    <div class="kpi"><div class="kpi-l">经营现金流</div><div class="kpi-v">−$6.62B</div><span class="badge dn">八季最差</span></div>
+    <div class="kpi"><div class="kpi-l">自由现金流</div><div class="kpi-v">−$6.70B</div><span class="badge dn">Capex $80.3M</span></div>
+    <div class="kpi"><div class="kpi-l">存货</div><div class="kpi-v">$11.10B</div><span class="badge dn">占总资产 47%</span></div>
+    <div class="kpi"><div class="kpi-l">应收账款</div><div class="kpi-v">$8.41B</div><span class="badge dn">同比 +282%</span></div>
+    <div class="kpi"><div class="kpi-l">有息负债</div><div class="kpi-v">$8.77B</div><span class="badge dn">净负债 $7.48B</span></div>
+    <div class="kpi"><div class="kpi-l">现金转换周期</div><div class="kpi-v">148 天</div><span class="badge dn">每 1 元营收垫 0.33 元</span></div>
+  </div>
+  <p class="note">全部取自 SEC 8-K EX-99.1（2026-05-05）与 10-Q（2026-05-11）原文。YoY 逐项自算，未使用任何二手摘要。</p>
+</section>
+
+<section class="section" id="focus" aria-labelledby="focus-t">
+  <h2 class="stitle" id="focus-t">本季必看 · 两个「看穿」<a class="anchor" href="#focus" aria-label="本节链接">#</a></h2>
+
+  <div class="cmt">
+    <p class="lead">看穿一：净利同比 +344%，同一个季度现金流出 66 亿美元。</p>
+    <p>这两个数字不矛盾，它们说的是同一件事的两面。SMCI 前三季报出 <strong>10.52 亿美元</strong>净利，同期经营现金流是 <strong>−75.57 亿美元</strong>。差额去了哪里？应收账款增加 62.1 亿、存货增加 66.7 亿，两项合计 128.8 亿美元被压在了资产负债表上。到 2026-03-31，应收加存货合计 <strong>195.2 亿美元，占总资产的 83%</strong>。</p>
+    <p>把它换算成单位经济：这门生意每做 1 元年营收，要先垫 <strong>0.33 元</strong>的营运资金；而每 1 元营收只留下约 0.049 元税后营业利润。<strong>增长每快一分，现金缺口就大一分。</strong>要让增长自己养活自己，营业利润率需要做到 41.5%——它现在是 6.1%。</p>
+    <p>这不是会计噪音，是这门生意的物理结构。六月那三笔融资（普通股增发 13.3 亿、强制可转换优先股 37.5 亿、ATM 额度 12.5 亿）不是机会主义的资本运作，是被这个结构逼出来的。</p>
+  </div>
+
+  <div class="cmt">
+    <p class="lead">看穿二：8 月 11 日的财报大概率很好看。这不改变结论。</p>
+    <p>7 月 21 日的预告已经把关键数字给了：Q4 毛利率预估 <strong>15%–17%</strong>，而指引只有 8.2%–8.4%——超出 700 到 880 个基点。按此推算 Q4 单季净利可能达到 <strong>10 亿美元上下</strong>，是原指引（EPS 0.53–0.67，约 3.7–4.7 亿美元）的两倍以上。同时 Q4 单季新订单 <strong>超过 600 亿美元</strong>，在手订单创纪录。</p>
+    <p>这些都是真的，而且是好消息。但有三件事它没有回答，而这三件事才决定这笔投资值不值：</p>
+    <ul>
+      <li><strong>那 600 亿订单要用什么垫？</strong>按 33.4% 的营运资金强度，若四个季度交付完，需要约 <strong>200 亿美元</strong>营运资金——而 3 月末股东权益只有 75.8 亿。</li>
+      <li><strong>15%–17% 的毛利率能维持几个季度？</strong>过去八个季度的毛利率走过 13.1% → 6.3% → 9.9%，公司自己把波动归因于「客户与产品结构」，也就是说它不由公司控制。</li>
+      <li><strong>独立调查还没结束。</strong>公司连续三次在公告里写「可能影响<strong>前期业绩</strong>」——这是重述风险的明示信号，不是套话。</li>
+    </ul>
+    <p>一份好看的季报和一门好生意，是两件事。市场先生这两天会给出他的投票；称重要等更久。</p>
+  </div>
+</section>
+
+<section class="section" id="trend" aria-labelledby="trend-t">
+  <h2 class="stitle" id="trend-t">关键指标趋势（近 8 季）<a class="anchor" href="#trend" aria-label="本节链接">#</a></h2>
+  <div class="cgrid">
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">营收与同比增速</div>
+        <div class="cwrap"><canvas id="rev" data-chart="rev" role="img" aria-label="八个季度营收从 53.5 亿美元升到 126.8 亿美元后回落到 102.4 亿美元，增速剧烈波动"></canvas></div>
+        <figcaption>单位十亿美元。来源：各季 8-K EX-99.1 与 10-Q，YoY 自算。</figcaption>
+      </figure>
+    </div>
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">毛利率：结构性下移中的一次反弹</div>
+        <div class="cwrap"><canvas id="margin" data-chart="margin" role="img" aria-label="GAAP 毛利率从 13.06% 一路下滑到 6.30% 谷底后回升到 9.95%，Q4 公司预告 15% 到 17%"></canvas></div>
+        <figcaption>GAAP 口径，%。最后一点为公司 2026-07-21 预告的未审计预估中值 16%。</figcaption>
+      </figure>
+    </div>
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">每 1 美元营收去了哪（9M FY2026）</div>
+        <div class="cwrap"><canvas id="segment" data-chart="segment" role="img" aria-label="营收的 91.8% 是营业成本，研发 2.0%，销售 0.8%，管理 0.8%，只剩 4.6% 是营业利润"></canvas></div>
+        <figcaption>按 9M FY2026 利润表占营收比重。来源：10-Q。</figcaption>
+      </figure>
+    </div>
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">摊薄 EPS 与自由现金流的背离</div>
+        <div class="cwrap"><canvas id="eps" data-chart="eps" role="img" aria-label="摊薄每股收益逐季回升到 0.72 美元，同期单季自由现金流却跌到负 67 亿美元"></canvas></div>
+        <figcaption>EPS 单位美元（左轴），自由现金流单位十亿美元（右轴）。FCF = 经营现金流 − 购置固定资产，单季由 YTD 相减还原。</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="statements" aria-labelledby="statements-t">
+  <h2 class="stitle" id="statements-t">三张表的五年轨迹<a class="anchor" href="#statements" aria-label="本节链接">#</a></h2>
+
+  <div class="period-toggle" role="group" aria-label="切换统计周期">
+    <button type="button" class="period-btn is-on" data-period="annual" aria-pressed="true">年度</button>
+    <button type="button" class="period-btn" data-period="quarterly" aria-pressed="false">季度</button>
+  </div>
+
+  <div class="cgrid">
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">利润表：总收入 · 营业利润 · 净利润</div>
+        <div class="cwrap"><canvas id="income" data-chart="income" role="img" aria-label="五个财年收入从 35.6 亿增长到 219.7 亿美元，但营业利润与净利润的增长远远跟不上收入"></canvas></div>
+        <figcaption>单位百万美元。年度 FY2021–FY2025 取自各年 10-K；季度取自 10-Q 与 8-K，共 8 季。</figcaption>
+      </figure>
+    </div>
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">现金流量表：经营现金流 · 资本开支 · 自由现金流</div>
+        <div class="cwrap"><canvas id="cashflow" data-chart="cashflow" role="img" aria-label="五个财年里有两年经营现金流为负，最近一季更跌到负 66 亿美元，资本开支始终极小"></canvas></div>
+        <figcaption>单位百万美元。资本开支取现金流量表「购置固定资产」一行。季度值由 YTD 相邻期相减还原。</figcaption>
+      </figure>
+    </div>
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">资产负债表：总资产 · 总负债 · 股东权益</div>
+        <div class="cwrap"><canvas id="balance" data-chart="balance" role="img" aria-label="总资产与总负债同步大幅膨胀，股东权益几乎原地不动，杠杆迅速抬升"></canvas></div>
+        <figcaption>单位百万美元，各期期末。取自 SEC XBRL（Assets / Liabilities / 含少数股东权益的股东权益），八期全部精确配平。</figcaption>
+      </figure>
+    </div>
+  </div>
+  <p class="note">三张图并排看，一件事跳出来：收入线陡峭上扬，权益线几乎是平的，中间的差额由负债线填满。FY2021 到 2026-03-31，总资产从 22.4 亿涨到 234.5 亿（10.5 倍），股东权益只从 11.0 亿涨到 75.8 亿（6.9 倍），而总负债从 11.5 亿涨到 158.8 亿（<strong>13.9 倍</strong>）。这门生意的扩张，主要不是股东出的钱。</p>
+</section>
+
+<section class="section" id="flow" aria-labelledby="flow-t">
+  <h2 class="stitle" id="flow-t">资金流向桑基图<a class="anchor" href="#flow" aria-label="本节链接">#</a></h2>
+  <div class="ccard">
+    <figure class="chart">
+      <div id="sankey"><svg viewBox="0 0 960 545" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="skt skd">
+<title id="skt">SMCI 9M FY2026 营收流向与现金桥</title>
+<desc id="skd">上带：279 亿美元营收里 92% 是营业成本，毛利率 8.2%，最终净利润 10.5 亿。下带：这 10.5 亿加上非现金调整、经营负债增加、新增借款与动用现金共 134 亿，几乎全部被应收账款与存货吸收。</desc>
+<text class="skcap" x="40" y="20">利润表 · 百万美元 · 高度按营收 27,943 等比</text>
+<path class="sf f-b" d="M52.0,46.0 C171.0,46.0 171.0,42.0 290.0,42.0 L290.0,205.4 C171.0,205.4 171.0,209.4 52.0,209.4 Z"/><path class="sf f-c" d="M52.0,209.4 C171.0,209.4 171.0,213.4 290.0,213.4 L290.0,228.0 C171.0,228.0 171.0,224.0 52.0,224.0 Z"/><path class="sf f-b" d="M302.0,213.4 C423.5,213.4 423.5,119.6 545.0,119.6 L545.0,126.0 C423.5,126.0 423.5,219.8 302.0,219.8 Z"/><path class="sf f-c" d="M302.0,219.8 C423.5,219.8 423.5,134.0 545.0,134.0 L545.0,142.2 C423.5,142.2 423.5,228.0 302.0,228.0 Z"/><path class="sf f-b" d="M557.0,134.0 C678.5,134.0 678.5,126.8 800.0,126.8 L800.0,128.5 C678.5,128.5 678.5,135.7 557.0,135.7 Z"/><path class="sf f-e" d="M557.0,135.7 C678.5,135.7 678.5,137.8 800.0,137.8 L800.0,144.3 C678.5,144.3 678.5,142.2 557.0,142.2 Z"/><path class="sf f-e" d="M557.0,150.2 C678.5,150.2 678.5,144.3 800.0,144.3 L800.0,145.8 C678.5,145.8 678.5,151.7 557.0,151.7 Z"/><rect class="sn n-a" x="40.0" y="46.0" width="12" height="178.0" rx="2"/><text class="snl" x="59.0" y="139.0" text-anchor="start">营收 27,943</text><rect class="sn n-b" x="290.0" y="42.0" width="12" height="163.4" rx="2"/><text class="snl" x="309.0" y="127.7" text-anchor="start">营业成本 25,659</text><rect class="sn n-c" x="290.0" y="213.4" width="12" height="14.6" rx="2"/><text class="snl" x="309.0" y="224.7" text-anchor="start">毛利 2,285 · 8.2%</text><rect class="sn n-b" x="545.0" y="119.6" width="12" height="6.4" rx="2"/><text class="snl" x="564.0" y="126.8" text-anchor="start">研发销售管理 1,002</text><rect class="sn n-c" x="545.0" y="134.0" width="12" height="8.2" rx="2"/><text class="snl" x="564.0" y="142.1" text-anchor="start">营业利润 1,282</text><rect class="sn n-d" x="545.0" y="150.2" width="12" height="3.0" rx="2"/><text class="snl" x="564.0" y="155.7" text-anchor="start">净利息及其他 +37</text><rect class="sn n-b" x="800.0" y="126.8" width="12" height="3.0" rx="2"/><text class="snl" x="793.0" y="132.3" text-anchor="end">所得税及其他 268</text><rect class="sn n-e" x="800.0" y="137.8" width="12" height="6.7" rx="2"/><text class="snl" x="793.0" y="145.1" text-anchor="end">净利润 1,052 · 3.8%</text>
+<line class="skdiv" x1="40" y1="262" x2="920" y2="262"/>
+<text class="skcap" x="40" y="286">现金桥 · 百万美元 · <tspan class="skwarn">高度改按 13,443 等比，与上带不同尺</tspan></text>
+<path class="sf f-e" d="M52.0,288.0 C206.0,288.0 206.0,304.0 360.0,304.0 L360.0,320.6 C206.0,320.6 206.0,304.6 52.0,304.6 Z"/><path class="sf f-c" d="M52.0,312.6 C206.0,312.6 206.0,320.6 360.0,320.6 L360.0,330.0 C206.0,330.0 206.0,322.0 52.0,322.0 Z"/><path class="sf f-c" d="M52.0,330.0 C206.0,330.0 206.0,330.0 360.0,330.0 L360.0,394.0 C206.0,394.0 206.0,394.0 52.0,394.0 Z"/><path class="sf f-d" d="M52.0,402.0 C206.0,402.0 206.0,394.0 360.0,394.0 L360.0,455.6 C206.0,455.6 206.0,463.6 52.0,463.6 Z"/><path class="sf f-d" d="M52.0,471.6 C206.0,471.6 206.0,455.6 360.0,455.6 L360.0,516.0 C206.0,516.0 206.0,532.0 52.0,532.0 Z"/><path class="sf f-b" d="M372.0,304.0 C546.0,304.0 546.0,288.0 720.0,288.0 L720.0,385.9 C546.0,385.9 546.0,401.9 372.0,401.9 Z"/><path class="sf f-b" d="M372.0,401.9 C546.0,401.9 546.0,393.9 720.0,393.9 L720.0,499.1 C546.0,499.1 546.0,507.1 372.0,507.1 Z"/><path class="sf f-b" d="M372.0,507.1 C546.0,507.1 546.0,507.1 720.0,507.1 L720.0,513.1 C546.0,513.1 546.0,513.1 372.0,513.1 Z"/><path class="sf f-c" d="M372.0,513.1 C546.0,513.1 546.0,521.1 720.0,521.1 L720.0,523.9 C546.0,523.9 546.0,515.9 372.0,515.9 Z"/><path class="sf f-b" d="M372.0,515.9 C546.0,515.9 546.0,532.1 720.0,532.1 L720.0,533.6 C546.0,533.6 546.0,517.4 372.0,517.4 Z"/><rect class="sn n-e" x="40.0" y="288.0" width="12" height="16.6" rx="2"/><text class="snl" x="59.0" y="300.3" text-anchor="start">净利润 1,052</text><rect class="sn n-c" x="40.0" y="312.6" width="12" height="9.5" rx="2"/><text class="snl" x="59.0" y="321.3" text-anchor="start">非现金调整 599</text><rect class="sn n-c" x="40.0" y="330.0" width="12" height="63.9" rx="2"/><text class="snl" x="59.0" y="366.0" text-anchor="start">经营负债增加 4,053</text><rect class="sn n-d" x="40.0" y="402.0" width="12" height="61.6" rx="2"/><text class="snl" x="59.0" y="436.8" text-anchor="start">新增借款净额 3,907</text><rect class="sn n-d" x="40.0" y="471.6" width="12" height="60.4" rx="2"/><text class="snl" x="59.0" y="505.8" text-anchor="start">动用期初现金 3,832</text><rect class="sn n-a" x="360.0" y="304.0" width="12" height="212.0" rx="2"/><text class="snl" x="379.0" y="414.0" text-anchor="start">可动用资金 13,443</text><rect class="sn n-b" x="720.0" y="288.0" width="12" height="97.9" rx="2"/><text class="snl" x="713.0" y="341.0" text-anchor="end">应收账款占用 6,210</text><rect class="sn n-b" x="720.0" y="393.9" width="12" height="105.2" rx="2"/><text class="snl" x="713.0" y="450.5" text-anchor="end">存货占用 6,670</text><rect class="sn n-b" x="720.0" y="507.1" width="12" height="6.0" rx="2"/><text class="snl" x="713.0" y="514.1" text-anchor="end">预付及其他 382</text><rect class="sn n-c" x="720.0" y="521.1" width="12" height="3.0" rx="2"/><text class="snl" x="713.0" y="526.6" text-anchor="end">资本开支及投资 176</text><rect class="sn n-b" x="720.0" y="532.1" width="12" height="3.0" rx="2"/><text class="snl" x="713.0" y="537.6" text-anchor="end">汇率 7</text>
+</svg>
+</div>
+      <figcaption>9M FY2026（2025-07-01 至 2026-03-31），单位百万美元。<strong>上下两带各用自己的比例尺</strong>——上带按营收 27,943 等比，下带按可动用资金 13,443 等比，否则现金桥在营业成本面前完全看不见。每个中间节点的流入等于流出。</figcaption>
+    </figure>
+    <details class="chart-data">
+      <summary>查看数据表</summary>
+      <div class="tbl-wrap">
+        <table class="tbl" data-shape="grid" data-source="SEC 10-Q（2026-05-11 报送）合并利润表与现金流量表">
+          <thead><tr><th>流向</th><th>金额（百万美元）</th><th>口径</th></tr></thead>
+          <tbody>
+            <tr class="hl"><td>营收</td><td>27,943.3</td><td>9M 净销售</td></tr>
+            <tr><td>→ 营业成本</td><td>25,658.7</td><td>占营收 91.8%</td></tr>
+            <tr><td>→ 毛利</td><td>2,284.6</td><td>毛利率 8.18%</td></tr>
+            <tr><td>毛利 → 研发</td><td>569.7</td><td></td></tr>
+            <tr><td>毛利 → 销售</td><td>210.5</td><td></td></tr>
+            <tr><td>毛利 → 管理</td><td>221.9</td><td></td></tr>
+            <tr><td>毛利 → 营业利润</td><td>1,282.4</td><td>营业利润率 4.59%</td></tr>
+            <tr><td>净利息及其他（流入）</td><td>37.3</td><td>利息收入 147.8 − 利息支出 114.8 + 其他 4.2</td></tr>
+            <tr><td>→ 所得税及权益法</td><td>267.5</td><td>有效税率 20.2%</td></tr>
+            <tr class="hl"><td>→ 净利润</td><td>1,052.2</td><td>净利率 3.77%</td></tr>
+            <tr><td>净利润（现金桥起点）</td><td>1,052.2</td><td></td></tr>
+            <tr><td>+ 非现金调整</td><td>599.3</td><td>折旧摊销 66.0 + 股权激励 305.6 + 存货减值 239.3 等</td></tr>
+            <tr><td>+ 经营负债增加</td><td>4,052.7</td><td>应付 2,406.9 + 递延收入 1,404.3 + 应计 232.9 等</td></tr>
+            <tr><td>+ 新增借款净额</td><td>3,906.8</td><td>新借 4,235.3 − 偿还 225.1 等</td></tr>
+            <tr><td>+ 动用期初现金</td><td>3,832.3</td><td>现金从 5,172.3 降至 1,340.0</td></tr>
+            <tr class="hl"><td>= 可动用资金</td><td>13,443.3</td><td></td></tr>
+            <tr><td>→ 应收账款占用</td><td>6,209.8</td><td></td></tr>
+            <tr><td>→ 存货占用</td><td>6,669.6</td><td></td></tr>
+            <tr><td>→ 预付及其他占用</td><td>381.7</td><td></td></tr>
+            <tr><td>→ 资本开支及股权投资</td><td>175.8</td><td>购置固定资产 133.8 + 股权投资 42.0</td></tr>
+            <tr><td>→ 汇率影响</td><td>6.6</td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+  </div>
+</section>
+<section class="section" id="m1" aria-labelledby="m1-t">
+  <h2 class="stitle" id="m1-t">模块 1 · 公司概览与背景<a class="anchor" href="#m1" aria-label="本节链接">#</a></h2>
+  <p>Super Micro Computer（超微电脑，NASDAQ: SMCI）1993 年由 Charles Liang（梁见后）与 Wally Liaw 等人共同创办于加州圣何塞，做的是服务器与存储系统的设计与组装。财年 6 月 30 日结束，因此 FY2026 覆盖 2025 年 7 月至 2026 年 6 月。2024-10-01 完成 10 股拆 1 股的正向拆股，本文所有每股数据均为拆股后口径。</p>
+  <p>它的历史可以用一句话概括：<strong>一家长期在服务器行业里做「快」而不是做「厚」的公司，被 AI 浪潮送上了从未有过的体量，也被送到了从未有过的资产负债表压力之下。</strong>FY2021 营收 35.6 亿美元，FY2025 已是 219.7 亿，FY2026 指引 389–404 亿——五年 11 倍。同一时期毛利率从 15.0% 一路降到 11.1%，再到 FY2026 前三季的 8.2%。</p>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="SEC 10-K FY2021–FY2025（CIK 0001375365），金额单位百万美元">
+      <thead><tr><th>财年</th><th>营收</th><th>毛利率</th><th>营业利润</th><th>净利润</th><th>经营现金流</th><th>自由现金流</th></tr></thead>
+      <tbody>
+        <tr><td>FY2021</td><td>3,557.4</td><td>15.03%</td><td>123.9</td><td>111.9</td><td>123.0</td><td>64.9</td></tr>
+        <tr><td>FY2022</td><td>5,196.1</td><td>15.40%</td><td>335.2</td><td>285.2</td><td>−440.8</td><td>−486.0</td></tr>
+        <tr><td>FY2023</td><td>7,123.5</td><td>18.01%</td><td>761.1</td><td>640.0</td><td>663.6</td><td>626.8</td></tr>
+        <tr><td>FY2024</td><td>14,989.3</td><td>13.75%</td><td>1,210.8</td><td>1,152.7</td><td>−2,486.0</td><td>−2,610.3</td></tr>
+        <tr><td>FY2025</td><td>21,972.0</td><td>11.06%</td><td>1,253.0</td><td>1,048.9</td><td>1,659.5</td><td>1,532.3</td></tr>
+        <tr class="hl"><td>9M FY2026</td><td>27,943.3</td><td>8.18%</td><td>1,282.4</td><td>1,052.2</td><td>−7,556.8</td><td>−7,690.6</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">五年里自由现金流有三年为负。营收增长最快的两年（FY2024、FY2026），恰好是现金流失血最重的两年——这个对应关系不是巧合，见模块 3。</p>
+</section>
+
+<section class="section" id="m2" aria-labelledby="m2-t">
+  <h2 class="stitle" id="m2-t">模块 2 · 管理层评估<a class="anchor" href="#m2" aria-label="本节链接">#</a></h2>
+  <p>创始人 Charles Liang 自 1993 年起任董事长兼 CEO，持股比例高、与公司深度绑定——这是典型的主人翁型经理人配置。但把三十年的记录摊开看，<strong>这家公司的治理问题不是一次意外，而是一条有复发史的线</strong>。</p>
+
+  <h3>2020 年：SEC 会计违规和解</h3>
+  <p>2020-08-25，SEC 就 FY2015–FY2017 期间「广泛的会计违规」与公司达成和解（行政程序 3-19927，AAER-4161）。指控包括八类提前确认收入的手法：客户明确拒收仍发货并确认收入、扣留海外客户提单却仍按发货确认、滥用合作营销资金支付无关费用、高估存货少计费用等。公司缴纳民事罚款 <strong>1,750 万美元</strong>；前 CFO 罚没加利息逾 30 万美元另加罚款 5 万美元；<strong>Charles Liang 本人未被指控不当行为，但依《萨班斯法案》第 304 条向公司返还了 212.2 万美元股票出售利润</strong>。</p>
+
+  <h3>2024 年：审计师中途辞任</h3>
+  <p>时间线值得逐条读，因为它推翻了一个流行的说法。<strong>触发点早于做空报告</strong>：2024 年 7 月下旬，安永（EY）已向审计委员会提出关于治理、透明度与内部控制的担忧；董事会随即成立独立特别委员会（聘 Cooley LLP 与 Secretariat Advisors）。做空报告发表于 8 月 27 日，只是把已在进行的问题公之于众。</p>
+  <p>2024-10-24，EY 在为 SMCI 做的<strong>第一次审计中途辞任</strong>，从未出具过任何一份财报或内控报告。辞职信写道：因近期获知的信息，「已无法再依赖管理层与审计委员会的陈述，亦不愿与管理层编制的财务报表产生关联」。EY 质疑的具体项包括公司是否符合 COSO 框架原则 1（诚信与道德价值观）与原则 2（董事会独立于 CEO 的监督能力）。公司明确表示不同意 EY 的辞任决定。</p>
+  <p>特别委员会 2024-12-02 给出结论：未发现对高管或审计委员会诚信的实质性关切，审计委员会展现了适当独立性，且不认为 EY 的结论得到调查事实的支持。委员会提出两项建议并获董事会全部采纳：<strong>招聘新任 CFO</strong>、设立首席会计官。</p>
+
+  <div class="cmt">
+    <p class="lead">两个必须写下来的落差</p>
+    <p><strong>其一：新任 CFO 至今未到位。</strong>David Weigand 自 2021-02 任 CFO，特别委员会 2024-12 建议另聘新 CFO，董事会宣布「全部采纳」。截至 2026-08-10，所有 8-K 中<strong>无任何 CFO 继任公告</strong>——建议提出约 20 个月，未落实。</p>
+    <p><strong>其二：EY 质疑的正是「重新雇用前员工的高层基调」。</strong>特别委员会认定该基调「适当且完全符合法律合规承诺」。而 2023-12 重回董事会的联合创始人 <strong>Wally Liaw，19 个月后被纽约南区检察官以合谋违反出口管制罪起诉</strong>。Liaw 的履历本身就是这条线的注脚：2018 年 1 月，在公司未能按时申报期间、一项审计委员会调查完成之后，他作为内控重大缺陷整改中销售组织重组的一部分辞去全部职务；2021 年以顾问身份回归，2022 年全职回归，2023 年重回董事会。</p>
+  </div>
+
+  <h3>指引可信度：这是可以量化的</h3>
+  <p>管理层对未来的描述与最终交付之间的距离，是可核对的事实。FY2026 全年营收指引的轨迹：2025-02 说「铺平通往 <strong>400 亿</strong>的道路」→ 2025-08 砍到「至少 <strong>330 亿</strong>」→ 2025-10 重申 330 亿 → 2025-11 抬到「至少 <strong>360 亿</strong>」→ 2026-02 说「<strong>调回</strong>至少 400 亿」→ 2026-05 改为区间 389–404 亿。按 9M 实际 279.4 亿加 Q4 约 110 亿推算，落点约 <strong>389–390 亿</strong>，即最终区间的最下沿，且仍低于两度承诺的 400 亿。<strong>十八个月绕一圈回到原点，最后还差一口气。</strong></p>
+</section>
+
+<section class="section" id="m3" aria-labelledby="m3-t">
+  <h2 class="stitle" id="m3-t">模块 3 · 商业模式深度解析<a class="anchor" href="#m3" aria-label="本节链接">#</a></h2>
+  <p class="lead">一句话测试：SMCI 从英伟达等上游买芯片，配上自研的主板、机箱、电源与液冷，组装成整机与整机柜卖给数据中心，赚组装与集成的差价。</p>
+  <p>这句话能说清，所以它在能力圈内。但要看懂它，得看清一件事：<strong>这门生意的利润率，由它在产业链里的位置决定，而不是由它的技术或努力决定。</strong></p>
+
+  <h3>产业链的价值分配</h3>
+  <p>把同一时段的两家公司放在一起（SMCI 财季截至 2026-03-31，NVIDIA 财季截至 2026-04-26）：</p>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="SMCI 8-K EX-99.1（2026-05-05）；NVIDIA 10-Q FY2027 Q1（截至 2026-04-26）">
+      <thead><tr><th>口径</th><th>SMCI</th><th>NVIDIA</th><th>倍数</th></tr></thead>
+      <tbody>
+        <tr><td>收入（百万美元）</td><td>10,243</td><td>81,615</td><td>8.0×</td></tr>
+        <tr class="hl"><td>毛利（百万美元）</td><td>1,019</td><td>61,157</td><td>60.0×</td></tr>
+        <tr><td>毛利率</td><td>9.95%</td><td>74.9%</td><td>7.5×</td></tr>
+        <tr><td>净利率</td><td>4.72%</td><td>71.5%</td><td>15.1×</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>收入差 8 倍，毛利差 60 倍。</strong>整机组装环节每 1 美元营收留下约 0.099 美元毛利，芯片环节留下约 0.749 美元。SMCI 卖的每一台 AI 服务器，价值的绝大部分在它拿到手之前就已经被上游拿走了。</p>
+
+  <h3>客户结构：定价权在谁手里，公司自己说了</h3>
+  <p>Q2 FY2026 电话会上，CFO David Weigand 说：<strong>「本季一家大型数据中心客户约占总收入的 63%。」</strong>同季企业与渠道业务只有 20 亿美元（占 16%，上季为 31%），OEM 与大型数据中心业务 107 亿美元（占 84%）。地理上美国占 86%。</p>
+  <p>而 Charles Liang 对毛利率塌到 6.3% 的解释是：<strong>「客户与产品结构更多转向<u>有定价权的大模型厂商</u>，压制了毛利率。」</strong>——这是公司自己承认议价权不在自己手上。</p>
+  <p>10-Q 披露的集中度数字与此吻合：9M FY2026 单一客户占净销售 <strong>38.5%</strong>（FY2025 全年最大客户为 20.9%）；2026-03-31 应收账款前四大客户合计占 <strong>75.1%</strong>。集中度在 AI 周期中是<strong>上升</strong>的。</p>
+  <p class="note">口径提醒：10-K/10-Q 用 Customer A/B/C/D 匿名标注，原文明确写明不同期间的 A–D 可能是不同客户，因此跨期追踪「同一个 A」无效。</p>
+
+  <h3>为什么增长会吃掉现金</h3>
+  <p>这是本报告最核心的一段算术。2026-03-31 的净营运资金 = 应收 8,413 + 存货 11,103 − 应付 3,687 − 递延收入 2,136 = <strong>13,694 百万美元</strong>；年化营收（Q3×4）40,972 百万美元。二者之比 <strong>33.4%</strong>。</p>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="按 2026-03-31 资产负债表与 Q3 FY2026 利润表自算">
+      <thead><tr><th>年营收增长</th><th>新增营收</th><th>吃掉营运资金</th><th>产生税后营业利润</th><th>现金缺口</th></tr></thead>
+      <tbody>
+        <tr><td>+10%</td><td>4,097</td><td>1,369</td><td>201</td><td>−1,168</td></tr>
+        <tr><td>+20%</td><td>8,194</td><td>2,739</td><td>403</td><td>−2,336</td></tr>
+        <tr><td>+40%</td><td>16,389</td><td>5,478</td><td>806</td><td>−4,672</td></tr>
+        <tr class="hl"><td>+60%</td><td>24,583</td><td>8,217</td><td>1,209</td><td>−7,008</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>要让增长自己养活自己，营业利润率需要达到 41.5%。</strong>SMCI 现在是 6.1%，历史最高是 FY2023 的 10.7%。这个缺口不是执行问题，是结构问题——除非营运资金强度大幅下降，否则每一轮增长都必须靠外部资本填补。</p>
+</section>
+
+<section class="section" id="m4" aria-labelledby="m4-t">
+  <h2 class="stitle" id="m4-t">模块 4 · 经济护城河分析（5 维）<a class="anchor" href="#m4" aria-label="本节链接">#</a></h2>
+  <div class="moat-grid">
+    <div class="moat-card none">
+      <h3>网络效应 · 无</h3>
+      <p>服务器不因买家增多而对下一个买家更有价值。没有平台、没有生态锁定、没有开发者社区。这一维在硬件组装生意里基本不存在。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h3>转换成本 · 窄</h3>
+      <p>机架尺寸、液冷管路、供电设计确实带来一定粘性，整机柜方案（DCBBS）比卖单机更粘。但大客户同时向 Dell、ODM 询价是常态，且 SMCI 自己承认「有定价权的大模型厂商」压低了毛利率——真有转换成本，压不出这个结果。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h3>成本优势 · 窄</h3>
+      <p>SMCI 长期以「building block」模块化设计做到比一线 OEM 更快上市，这是真的优势。但优势体现在<strong>速度</strong>而非<strong>成本</strong>：毛利率 9.95%，与纯 ODM 緯穎（9.26%）几乎持平，而緯穎的营业利润率 7.27% 反而高于 SMCI 的 6.11%。也就是说 SMCI 相对纯代工没有毛利率溢价，费用端还更重。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h3>无形资产 · 窄</h3>
+      <p>在服务器工程圈有真实口碑与先发优势，尤其液冷。但品牌溢价在毛利率上看不到。而 2020 年 SEC 和解、2024 年审计师辞任、2026 年联合创始人被起诉——这三件事对无形资产是<strong>净减项</strong>。</p>
+    </div>
+    <div class="moat-card none">
+      <h3>有效规模 · 无</h3>
+      <p>市场远未饱和，参与者众多：Dell、HPE、联想、鸿海、广达、纬创、纬颖，加上超大规模云厂商自研。IDC 口径 1Q26 全球服务器市场 1,226 亿美元、同比 +30.4%，ODM Direct 仍占 50.2%。这是一个正在扩张、谁都能进来的市场。</p>
+    </div>
+  </div>
+  <p class="note"><strong>护城河趋势：侵蚀中。</strong>SMCI 的 IDC 份额确实从 1Q25 的 4.3% 升到 1Q26 的 7.6%（+128.9%，前五名中增速第二），份额是真的在拿。但同期毛利率从 13.06% 掉到 9.95%——<strong>它是用价格换的份额</strong>。十年后这条护城河会更宽还是更窄？在一个买方高度集中、上游拿走 75% 毛利的结构里，我看不到它变宽的机制。</p>
+</section>
+
+<section class="section" id="m5" aria-labelledby="m5-t">
+  <h2 class="stitle" id="m5-t">模块 5 · 财务深度分析<a class="anchor" href="#m5" aria-label="本节链接">#</a></h2>
+
+  <h3>5.1 近 8 季核心趋势</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="各季 8-K EX-99.1 与 10-Q；单季现金流由 YTD 相邻期相减还原。单位百万美元">
+      <thead><tr><th>季度</th><th>营收</th><th>毛利率</th><th>营业利润</th><th>净利润</th><th>摊薄 EPS</th><th>经营现金流</th><th>自由现金流</th></tr></thead>
+      <tbody>
+        <tr><td>FY24 Q4</td><td>5,354.6</td><td>10.20%</td><td>288.5</td><td>297.2</td><td>$0.46</td><td>−647.8</td><td>−661.8</td></tr>
+        <tr><td>FY25 Q1</td><td>5,937.3</td><td>13.06%</td><td>509.2</td><td>424.3</td><td>$0.67</td><td>408.9</td><td>364.6</td></tr>
+        <tr><td>FY25 Q2</td><td>5,678.0</td><td>11.80%</td><td>368.6</td><td>320.6</td><td>$0.51</td><td>−239.8</td><td>−267.3</td></tr>
+        <tr><td>FY25 Q3</td><td>4,599.9</td><td>9.57%</td><td>146.8</td><td>108.8</td><td>$0.17</td><td>626.8</td><td>594.1</td></tr>
+        <tr><td>FY25 Q4</td><td>5,756.9</td><td>9.45%</td><td>228.4</td><td>195.2</td><td>$0.31</td><td>863.6</td><td>840.9</td></tr>
+        <tr><td>FY26 Q1</td><td>5,017.8</td><td>9.31%</td><td>182.3</td><td>168.3</td><td>$0.26</td><td>−917.5</td><td>−949.8</td></tr>
+        <tr><td>FY26 Q2</td><td>12,682.5</td><td>6.30%</td><td>474.3</td><td>400.6</td><td>$0.60</td><td>−23.9</td><td>−45.1</td></tr>
+        <tr class="hl"><td>FY26 Q3</td><td>10,243.0</td><td>9.95%</td><td>625.9</td><td>483.4</td><td>$0.72</td><td>−6,615.4</td><td>−6,695.7</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">⚠️ 单季现金流必须由 YTD 相减还原：Q3 = 9M（−7,556.8）− H1（−941.4）= −6,615.4。直接把 9M 的 −7,556.8 当单季，会把这一季的失血夸大 9.41 亿美元。还原结果已与新闻稿「Q3 经营现金流出 66 亿美元」对上。</p>
+
+  <h3>5.2 利润质量</h3>
+  <p>Q3 净利 4.834 亿美元里，有多少是「赚来的」？三个减项值得看：</p>
+  <ul>
+    <li><strong>股权激励 1.259 亿美元</strong>，占净利 26.1%。这是真实成本，只是不花现金。9M 累计 3.056 亿，占 9M 净利 29.0%。</li>
+    <li><strong>存货减值 9M 累计 2.393 亿美元</strong>（上年同期 1.591 亿）。在存货余额涨到 111 亿的背景下，这个数字本身还算克制，但它提示存货里有需要打折的部分。</li>
+    <li><strong>净财务收益 +3,730 万美元</strong>（9M）。利息收入 1.478 亿高于利息支出 1.148 亿——但这是靠期初 51.7 亿现金吃利息换来的，而那笔现金已经花掉了。随着净负债从净现金转为 74.8 亿，这一项在未来会翻成净支出。</li>
+  </ul>
+  <p>杜邦拆解（以 9M FY2026 年化、对期末权益）：净利率 3.77% × 资产周转 1.59 × 权益乘数 3.10 = <strong>ROE 约 18.5%</strong>。看着不错，但这个 ROE 的三个因子里，<strong>权益乘数 3.10 贡献最大</strong>——ROE 是借出来的，不是赚出来的。对照 FY2023：净利率 8.98% × 周转 1.94 × 乘数 1.86 = ROE 32.4%，那才是靠盈利能力驱动的。</p>
+
+  <h3>5.3 资产负债表健康度</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="cards" data-source="10-Q（2026-03-31）合并资产负债表，自算比率">
+      <thead><tr><th>指标</th><th>数值</th><th>读法</th></tr></thead>
+      <tbody>
+        <tr><td>流动比率</td><td>2.66</td><td>看着安全，但流动资产的 90% 是应收加存货，不是现金</td></tr>
+        <tr><td>现金</td><td>$1.29B</td><td>从 FY2025 末的 $5.17B 降下来，九个月烧掉 $3.83B</td></tr>
+        <tr class="hl"><td>有息负债</td><td>$8.77B</td><td>授信及一年内到期 2.10 + 长期借款 2.02 + 可转债 4.66</td></tr>
+        <tr class="hl"><td>净负债</td><td>$7.48B</td><td>一年前还是净现金状态</td></tr>
+        <tr><td>有息负债 / 权益</td><td>1.16</td><td>杠杆已经不低，且六月后又加了 37.5 亿优先股</td></tr>
+        <tr><td>负债率</td><td>67.7%</td><td>FY2021 时是 51.1%</td></tr>
+        <tr><td>利息覆盖（Q3）</td><td>9.7×</td><td>目前无虞，但利息支出同比已从 0.13 亿涨到 0.64 亿</td></tr>
+        <tr><td>应收 + 存货 / 总资产</td><td>83%</td><td>这门生意的资产，本质上是一堆还没变成钱的货和账</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>营运资金周转：DSO 75 天、DIO 110 天、DPO 36 天，<strong>现金转换周期 148 天</strong>。作为对照，公司在 Q1 FY2026 电话会上披露当时 CCC 为 123 天（DIO 105 / DSO 43 / DPO 26）——半年里又拉长了 25 天。</p>
+
+  <h3>5.4 现金流质量与所有者盈余</h3>
+  <p>所有者盈余 = 净利润 + 折旧摊销 + 其他非现金费用 − 维护性资本开支 ± 营运资金变动。按 9M FY2026 计算：</p>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="10-Q（2026-05-11）合并现金流量表，单位百万美元">
+      <thead><tr><th>项目</th><th>金额</th></tr></thead>
+      <tbody>
+        <tr><td>净利润</td><td>1,052.2</td></tr>
+        <tr><td>+ 折旧摊销与使用权资产摊销</td><td>66.0</td></tr>
+        <tr><td>+ 股权激励</td><td>305.6</td></tr>
+        <tr><td>+ 存货减值等其他非现金</td><td>227.7</td></tr>
+        <tr><td>− 资本开支</td><td>133.8</td></tr>
+        <tr><td>= 未计营运资金的所有者盈余</td><td>1,517.7</td></tr>
+        <tr class="hl"><td>± 营运资金变动</td><td>−9,208.4</td></tr>
+        <tr class="hl"><td>= 所有者盈余</td><td>−7,690.7</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>把营运资金排除在外，这门生意九个月产生约 15.2 亿美元的所有者盈余，看起来很健康。把营运资金放回去，是 <strong>−76.9 亿美元</strong>。</p>
+  <p>哪一个才是真的？在一个增长会持续吃掉营运资金的生意里，<strong>营运资金变动不是「一次性项目」，它是经营的一部分</strong>。只有当增长停下来时，那 15.2 亿才会真正变成股东可用的现金——而那时增长故事也就结束了。这正是「所有者盈余」这个概念存在的理由：它逼你回答「利润什么时候变成钱」。</p>
+  <p class="note">补充一个口径细节：CFO 在 Q3 电话会上对<strong>单季</strong>的解释与 9M 口径方向不同——「Q3 经营现金流出 66 亿美元，主要受应付账款减少 100 亿美元与存货增加 5.81 亿美元影响，部分被净利增加与应收账款减少 26 亿美元抵消」。也就是说 Q3 单季的主因是<strong>偿付应付账款</strong>（Q2 那个 126.8 亿营收的季度把应付撑到了极高水平），而 9M 累计的主因是应收与存货。两个口径都对，看的是不同粒度。</p>
+</section>
+
+<section class="section" id="m6" aria-labelledby="m6-t">
+  <h2 class="stitle" id="m6-t">模块 6 · 电话会分析<a class="anchor" href="#m6" aria-label="本节链接">#</a></h2>
+
+  <h3>Q3 FY2026（2026-05-05）</h3>
+  <div class="ec-item">
+    <div class="ec-quote">「本季最重大的成就之一是毛利率回升，非 GAAP 毛利率升至 10.1%，较上季的 6.4% 改善 58%。我们致力于通过重新聚焦企业市场和 DCBBS 业务，实现可持续的两位数毛利率模型。」——Charles Liang</div>
+    <span class="ec-badge ec-bull">利多</span>
+    <div class="ec-note">毛利率回升是真的。但把 6.4% → 10.1% 描述成「改善 58%」是用相对变动放大绝对水平——10.1% 仍低于 FY2023 的 18.0%，也低于一年前的 13.1%。「可持续的两位数」是目标，不是承诺。</div>
+  </div>
+  <div class="ec-item">
+    <div class="ec-quote">「毛利率超出预期，由客户与产品结构、以及更低的关税、加急运输与存货准备费用驱动。」——David Weigand</div>
+    <span class="ec-badge ec-neut">中性</span>
+    <div class="ec-note">CFO 给的四个原因里，三个是成本侧的一次性缓解（关税、加急、准备金），只有「客户与产品结构」是结构性的——而结构恰恰是公司不能控制的那一项。这解释了为什么公司连续两季严重低估自己的毛利率。</div>
+  </div>
+  <div class="ec-item">
+    <div class="ec-quote">「本季营收 102 亿美元受客户站点就绪度延迟影响……这纯粹是短期延迟，若干客户站点尚未配齐云部署所需的电力与网络，我们预计在未来几个季度确认这部分收入。」——Charles Liang</div>
+    <span class="ec-badge ec-bear">利空</span>
+    <div class="ec-note">营收比「至少 123 亿」的地板还低 20.6 亿（−16.7%）。注意措辞是「at least」，落空性质比区间下沿更严重。而「客户站点未就绪」这个理由在 Q1 也用过（当时叫 design win upgrade）——<strong>收入确认时点受制于客户，公司却仍按自己的产能节奏给指引</strong>。</div>
+  </div>
+  <div class="ec-item">
+    <div class="ec-quote">「Q3 经营现金流出 66 亿美元，上季为流出 2,400 万美元。经营现金流受应付账款减少 100 亿美元与存货增加 5.81 亿美元影响，部分被更高的净利与应收账款减少 26 亿美元抵消。」——David Weigand</div>
+    <span class="ec-badge ec-bear">利空</span>
+    <div class="ec-note">这是全场最重要的一段，也是最容易被跳过的一段。CFO 把它放在讲完毛利率之后，用平铺直叙的语气念完，没有展开。66 亿美元的季度失血，相当于公司当时全部市值的三分之一。</div>
+  </div>
+
+  <h3>Q2 FY2026（2026-02-03）</h3>
+  <div class="ec-item">
+    <div class="ec-quote">「本季一家大型数据中心客户约占总收入的 63%。」——David Weigand</div>
+    <span class="ec-badge ec-bear">利空</span>
+    <div class="ec-note">单季 63% 集中于一个客户。这既解释了营收为何大幅增长到 126.8 亿，也解释了毛利率为何腰斩到 6.3%——量是这个客户给的，价也是这个客户定的。</div>
+  </div>
+  <div class="ec-item">
+    <div class="ec-quote">「客户与产品结构更多转向<u>有定价权的大模型厂商</u>，压制了毛利率。」——Charles Liang</div>
+    <span class="ec-badge ec-bear">利空</span>
+    <div class="ec-note">创始人本人用「pricing leverage」形容客户。护城河分析不需要更多证据了——议价权的方向，公司自己说清楚了。</div>
+  </div>
+  <div class="ec-item">
+    <div class="ec-quote">「我们实现了创纪录的 126.8 亿美元营收——<u>其中包含上季从几个客户递延过来的 15 亿美元</u>——同比增长 123%。」——Charles Liang</div>
+    <span class="ec-badge ec-neut">中性</span>
+    <div class="ec-note">超指引上沿 16.8 亿，其中 15 亿是 Q1 掉下来的。剔除后约 112 亿，仅略高于指引上沿 110 亿。这一季的 beat 成色，管理层自己标注得很诚实。</div>
+  </div>
+
+  <h3>Q1 FY2026（2025-11-04）</h3>
+  <div class="ec-item">
+    <div class="ec-quote">「随着订单簿快速扩张，包括超过 130 亿美元的 Blackwell Ultra 订单，我们预计 FY2026 营收至少 360 亿美元。」——Charles Liang</div>
+    <span class="ec-badge ec-neut">中性</span>
+    <div class="ec-note">当季营收 50.2 亿，对 60–70 亿指引大幅落空（且已于 10/23 提前预警）。管理层的应对方式是把叙事推向未来订单——用订单簿盖住当期未达标。这个模式在 Q3、Q4 又各出现一次。</div>
+  </div>
+
+  <h3>指引兑现度追踪</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="cards" data-source="各季 8-K EX-99.1 指引与次季实际值对照">
+      <thead><tr><th>季度</th><th>营收指引</th><th>营收实际</th><th>偏差</th><th>毛利率指引</th><th>毛利率实际</th></tr></thead>
+      <tbody>
+        <tr><td>Q1 FY26</td><td>60–70 亿</td><td>50.2 亿</td><td>低于下沿 16.4%</td><td>未给</td><td>9.31%</td></tr>
+        <tr><td>Q2 FY26</td><td>100–110 亿</td><td>126.8 亿</td><td>超上沿 15.3%（含递延 15 亿）</td><td>未给</td><td>6.30%</td></tr>
+        <tr><td>Q3 FY26</td><td>至少 123 亿</td><td>102.4 亿</td><td>低于地板 16.7%</td><td>约 6.7%</td><td>9.95%（+340bp）</td></tr>
+        <tr class="hl"><td>Q4 FY26</td><td>110–125 亿</td><td>预告「接近下沿」</td><td>落在下沿</td><td>8.2%–8.4%</td><td>预告 15%–17%（+700~880bp）</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note"><strong>两条结构性规律。</strong>其一，<strong>收入端系统性乐观</strong>：三个已完成季度里两次大幅落空，唯一一次超越是把上季掉的补回来加上单一客户集中出货。其二，<strong>毛利率端系统性悲观，且误差在放大</strong>：Q3 低估 340bp，Q4 低估 700–880bp。连续两季严重误判自己的毛利率，无论是可见度差还是刻意留后手，结论都一样——<strong>毛利率指引已基本失去参考价值</strong>。</p>
+</section>
+<section class="section" id="m7" aria-labelledby="m7-t">
+  <h2 class="stitle" id="m7-t">模块 7 · 多模型估值（8 种方法）<a class="anchor" href="#m7" aria-label="本节链接">#</a></h2>
+  <p class="note">估值全部基于财报与电话会独立推导。当前股价 $31.13 只在最后用于计算安全边际，不作为任何模型的输入或锚定。</p>
+
+  <h3>7.1 八法明细</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="cards" data-source="自算，输入取自 SEC 一手申报；股价仅用于事后对照">
+      <thead><tr><th>方法</th><th>结果</th><th>适用性与说明</th></tr></thead>
+      <tbody>
+        <tr><td>① 相对估值</td><td>P/E TTM 16.1×｜P/E FY26E 9.6×｜P/S 0.60×｜P/B 2.26×｜EV/EBITDA 16.4×</td><td><strong>中等适用。</strong>P/E 在利润剧烈波动时会误导，见 7.2 多档表。P/S 0.60× 对一家 10% 毛利率的组装商并不便宜——毛利率决定了每 1 元营收能变成多少价值。</td></tr>
+        <tr><td>② DCF 三情景</td><td>乐观 $40.79｜基准 $18.91｜悲观 $4.16</td><td><strong>最适用，但必须显式建模营运资金。</strong>见 7.3。</td></tr>
+        <tr class="hl"><td>③ 所有者盈余 / FCF 收益率</td><td><strong>−34.0%</strong></td><td><strong>高度适用，且结论刺眼。</strong>TTM 所有者盈余（≈ FCF，即经营现金流 − 资本开支）−68.5 亿 ÷ 市值 201 亿。这一法此刻不产生估值，只产生一个判断：<strong>这门生意目前不是现金的净产出方</strong>。</td></tr>
+        <tr><td>④ PEG</td><td>0.10</td><td><strong>不适用，会给出错误信号。</strong>分母是 FY2026 一次性的周期爆发（净利同比约 +100%），不是可持续增速。PEG 的前提是增长可延续且不耗现金，两条在这里都不成立。</td></tr>
+        <tr><td>⑤ DDM 股利折现</td><td>不适用</td><td>普通股不派息，且六月新发优先股的条款<strong>明令禁止</strong>在优先股股息未付清前对普通股派息或回购。DDM 无从计算。</td></tr>
+        <tr><td>⑥ NAV 净资产</td><td>每股账面 $13.77（备考）</td><td><strong>有限适用，作下限参考。</strong>几乎无商誉，账面≈有形账面。但 83% 的资产是应收加存货，其价值取决于 AI 需求不转向、大客户不违约——这不是一个「硬」底。</td></tr>
+        <tr><td>⑦ 反向 DCF</td><td>隐含营业利润率 <strong>7.86%</strong></td><td><strong>最有信息量的一法。</strong>见 7.2 下方。</td></tr>
+        <tr><td>⑧ SOTP 分部加总</td><td>不适用</td><td>SMCI 是单一经营分部（服务器与存储系统），10-K 未披露可独立估值的分部损益。强行拆分只会制造精确的假象。</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>7.2 P/E 多档透视（触发条件：最新季度净利与四季均值偏离 &gt;20%）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="cards" data-source="自算；FY2026E 含公司 2026-07-21 预告的 Q4 未审计预估">
+      <thead><tr><th>口径</th><th>P/E</th><th>可信度</th></tr></thead>
+      <tbody>
+        <tr><td>TTM GAAP</td><td>16.1×</td><td>中。分母跨越了毛利率 6.3% 与 9.95% 两个极端季度</td></tr>
+        <tr><td>Q3 单季年化</td><td>10.4×</td><td>低。单季净利 4.83 亿 ×4，但 Q3 本身是异常好的一季</td></tr>
+        <tr class="hl"><td>FY2026E（含 Q4 预告）</td><td>9.6×</td><td><strong>最可信</strong>。Q4 毛利率与营收都已由公司预告，估算区间较窄</td></tr>
+        <tr><td>剔除净负债的核心业务</td><td>11.8×</td><td>中。(市值 201 + 备考净负债 24 + 优先股 37.5) ÷ FY26E 净利 20.9</td></tr>
+        <tr><td>卖方共识 Forward</td><td>未获取</td><td>共识 EPS 预估未取得一手数据，不列估算值</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>反向 DCF 的答案。</strong>固定一条温和的增长路径（未来五年营收增速 18%/12%/8%/6%/4%）、营运资金强度维持 30%、WACC 12%，倒推当前 $31.13 需要多少营业利润率——答案是 <strong>7.86%</strong>。</p>
+  <p>对照历史：FY2026 前三季实际 4.59%，FY2025 全年 5.70%，FY2023 峰值 10.68%。<strong>市场要求这门生意长期维持 7.9% 的营业利润率，而它只在 FY2023 那一年做到过</strong>——那时营收只有 71 亿，还没有占收入 63% 的单一客户。</p>
+
+  <h3>7.3 DCF 三情景与敏感性</h3>
+  <p>WACC 推导：无风险利率 4.3% + β 1.97 × 股权风险溢价 5% = 权益成本 14.15%；债务成本按六月发行的 7.00% 优先股与银行借款加权，得 WACC 约 10.8%。<strong>基准情景用 12%</strong>，上浮部分对应 BIS 拒绝令与财报重述这类无法分散的尾部风险。</p>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="cards" data-source="自建 DCF 模型，输入取自 SEC 一手申报">
+      <thead><tr><th>情景</th><th>核心假设</th><th>每股价值</th><th>概率</th></tr></thead>
+      <tbody>
+        <tr><td>乐观</td><td>订单如期兑现（五年营收 28%→6%），毛利率站稳 12%、营业利润率 7.5%，营运资金强度改善到 25%，WACC 11%</td><td><strong>$40.79</strong></td><td>30%</td></tr>
+        <tr class="hl"><td>基准</td><td>增长回落（18%→4%），毛利率回到 10.5%、营业利润率 6.2%，营运资金强度维持 30%，WACC 12%</td><td><strong>$18.91</strong></td><td>50%</td></tr>
+        <tr><td>悲观</td><td>大客户流失或出口管制受限，营收先降 10% 后走平，营业利润率 4.5%，WACC 14%</td><td><strong>$4.16</strong></td><td>20%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">悲观情景里第一年自由现金流反而是 +23.5 亿——因为营收收缩会<strong>释放</strong>营运资金。这是这门生意最反直觉的性质：<strong>它缩小的时候产生现金，扩张的时候消耗现金。</strong></p>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="自建 DCF 模型敏感性分析，基准增长路径固定">
+      <thead><tr><th>营业利润率 ＼ 营运资金强度</th><th>20%</th><th>25%</th><th>30%</th><th>35%</th></tr></thead>
+      <tbody>
+        <tr><td>4.5%</td><td>$11.38</td><td>$8.88</td><td>$6.38</td><td>$3.88</td></tr>
+        <tr><td>5.5%</td><td>$18.75</td><td>$16.25</td><td>$13.75</td><td>$11.25</td></tr>
+        <tr><td>6.2%（近三年区间）</td><td>$23.91</td><td>$21.41</td><td>$18.91</td><td>$16.41</td></tr>
+        <tr class="hl"><td>7.5%</td><td>$33.50</td><td>$31.00</td><td>$28.50</td><td>$26.00</td></tr>
+        <tr><td>9.0%</td><td>$44.56</td><td>$42.06</td><td>$39.56</td><td>$37.06</td></tr>
+        <tr><td>11.0%（历史未及）</td><td>$59.31</td><td>$56.81</td><td>$54.31</td><td>$51.81</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>当前股价 $31.13 落在这张表的什么位置？<strong>只有「营业利润率 ≥7.5% 且营运资金强度 ≤25%」的那个角落能撑住它。</strong>两个条件都要同时成立，而公司目前是 6.1% 与 33.4%。</p>
+
+  <h3>7.4 加权汇总与建仓阶梯</h3>
+  <div class="pgrid">
+    <div class="pbox"><div class="pl">当前市场价</div><div class="pv">$31.13</div><div class="pn">2026-08-07 收盘</div></div>
+    <div class="pbox"><div class="pl">概率加权内在价值</div><div class="pv">$22.52</div><div class="pn">30/50/20 加权</div></div>
+    <div class="pbox"><div class="pl">安全边际</div><div class="pv">−27.6%</div><div class="pn">价格高于价值</div></div>
+  </div>
+  <div class="dcf-note">
+    <p><strong>建仓阶梯（估值中位数 $18.91 × 80% / 70% / 60%）：</strong></p>
+    <ul>
+      <li>首仓 <strong>$15.13</strong>（中位数 ×80%）</li>
+      <li>二仓 <strong>$13.24</strong>（中位数 ×70%）</li>
+      <li>三仓 <strong>$11.35</strong>（中位数 ×60%）</li>
+    </ul>
+    <p>备考每股账面价值 $13.77 恰好落在二仓与三仓之间——在那个价位买入，等于用账面价格买下这门生意，把 AI 期权白拿。这才是这笔投资需要的安全垫。</p>
+  </div>
+</section>
+
+<section class="section" id="m8" aria-labelledby="m8-t">
+  <h2 class="stitle" id="m8-t">模块 8 · 竞争与行业分析<a class="anchor" href="#m8" aria-label="本节链接">#</a></h2>
+  <p>IDC 口径 1Q26 全球服务器市场厂商收入 1,226.2 亿美元，同比 +30.4%。SMCI 收入 93.3 亿、份额 <strong>7.6%</strong>（1Q25 为 4.3%），同比 +128.9%，位列第二，仅次于 Dell（202.8 亿、16.5%、+244.1%）。ODM Direct 份额从 64.1% 压缩到 50.2%——品牌厂商正在从 ODM 手里夺回 AI 部署份额，这对 SMCI 是顺风。</p>
+
+  <h3>毛利率横比：这一列比份额更能说明问题</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="cards" data-source="各公司最新已披露财季的 SEC 10-Q / 港交所公告 / 台湾证交所 MOPS 合并报表">
+      <thead><tr><th>公司</th><th>财季截至</th><th>毛利率</th><th>口径提醒</th></tr></thead>
+      <tbody>
+        <tr><td>NVIDIA（上游）</td><td>2026-04-26</td><td><strong>74.9%</strong></td><td>芯片环节</td></tr>
+        <tr><td>HPE</td><td>2026-04-30</td><td>36.5%</td><td>被并购 Juniper 后的网络业务拉高；服务器所在的 Cloud &amp; AI 段仅 29.05%</td></tr>
+        <tr><td>Dell</td><td>2026-05-01</td><td>17.75%</td><td>合并口径；不披露 AI 服务器毛利率，ISG 段经营利润率 10.5%</td></tr>
+        <tr><td>联想集团</td><td>2026-03-31</td><td>15.4%</td><td>集团口径；ISG 段全年经营利润率仅 <strong>0.38%</strong></td></tr>
+        <tr class="hl"><td>Super Micro</td><td>2026-03-31</td><td><strong>9.95%</strong></td><td>营业利润率 6.11%，净利率 4.72%</td></tr>
+        <tr><td>緯穎（纯云 ODM）</td><td>2026-06-30</td><td>9.26%</td><td>毛利率与 SMCI 几乎持平，但营业利润率 7.27% <strong>更高</strong></td></tr>
+        <tr><td>鴻海</td><td>2026-03-31</td><td>6.18%</td><td>全集团口径，含 iPhone 代工</td></tr>
+        <tr><td>緯創</td><td>2026-06-30</td><td>5.66%</td><td></td></tr>
+        <tr><td>廣達</td><td>2026-03-31</td><td>4.78%</td><td>营收 +66.6% 而毛利金额几乎零增长</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>三条读法：</p>
+  <ul>
+    <li><strong>SMCI 相对纯 ODM 没有毛利率溢价。</strong>緯穎 9.26% vs SMCI 9.95%，几乎持平；而緯穎的营业利润率 7.27% 高于 SMCI 的 6.11%，净利率 5.38% 高于 4.72%。同等毛利率下，SMCI 的费用端更重。「品牌 OEM 比 ODM 值钱」这个假设，在数字上不成立。</li>
+    <li><strong>廣達是整条链条的缩影。</strong>作为 NVIDIA GB 系列机柜主力代工方，2026 Q1 营收同比 +66.6%，毛利金额却从 NT$384.8 亿只涨到 NT$387.0 亿（几乎零增长），毛利率从 7.92% 塌到 4.78%，营业利益金额<strong>同比下降</strong>。AI 带来的量，在组装这一层没有转化成利润。</li>
+    <li><strong>联想给了第三个证据。</strong>ISG 在 AI 需求最猛的一年（收入 +32.1% 至 191.9 亿美元）经营利润率仅 0.38%，且集团毛利率下降被公司明确归因于「ISG 业务盈利能力较低」。</li>
+  </ul>
+
+  <h3>波特五力</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="cards" data-source="基于上述一手财报数据的定性评估">
+      <thead><tr><th>力</th><th>强度</th><th>依据</th></tr></thead>
+      <tbody>
+        <tr><td>供应商议价能力</td><td><strong>极强</strong></td><td>NVIDIA 毛利率 74.9%，且 SMCI 的产品价值主要由 GPU 决定。内存与 SSD 涨价直接压缩毛利（HPE 也提到同一件事）</td></tr>
+        <tr><td>买方议价能力</td><td><strong>极强</strong></td><td>单季一个客户占 63%；创始人自称客户是「有定价权的大模型厂商」</td></tr>
+        <tr><td>新进入者威胁</td><td>中高</td><td>超大规模云厂商自研、台系 ODM 全线扩产</td></tr>
+        <tr><td>替代品威胁</td><td>中</td><td>客户自建白盒、直接向 ODM 下单</td></tr>
+        <tr><td>同业竞争</td><td><strong>极强</strong></td><td>Dell 单一 AI 服务器产品线 FY2027 指引约 600 亿美元，已超过 SMCI 全公司 389–404 亿的营收</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="section" id="m9" aria-labelledby="m9-t">
+  <h2 class="stitle" id="m9-t">模块 9 · 技术面与 K 线分析<a class="anchor" href="#m9" aria-label="本节链接">#</a></h2>
+  <p class="note">技术面是补充，次要于基本面。以下数值来自行情聚合站（stockanalysis.com，2026-08-07 收盘），非交易所一手数据。</p>
+  <ul>
+    <li><strong>均线</strong>：50 日 $31.86、200 日 $32.19，两线相差仅 1.0%，价格 $31.13 夹在两线之下。这是方向未定的收敛形态，不是明确的多头或空头排列。</li>
+    <li><strong>RSI(14) 54.88</strong>：中性区。注意这是 8/7 单日 +5.96% 之后才抬上来的。</li>
+    <li><strong>52 周区间</strong> $19.48–$58.78，当前距高点 −47.0%、距低点 +59.8%，近 52 周 −33.5%。</li>
+    <li><strong>空头占流通股本 15.02%</strong>，Beta 1.97。高空头持仓加上事件驱动，意味着财报后双向波动都可能被放大。</li>
+  </ul>
+  <p>技术面在这里的参考价值有限，原因很具体：<strong>8 月 11 日盘后就是 Q4 正式财报，而 7 月 21 日已经预告了毛利率 15%–17%（远高于指引 8.2%–8.4%）。</strong>当前的均线与 RSI 反映的是一个信息已经部分泄露、但尚未完全定价的中间状态。在这种状态下读形态，等于读一半的句子。</p>
+</section>
+
+<section class="section" id="m10" aria-labelledby="m10-t">
+  <h2 class="stitle" id="m10-t">模块 10 · 增长催化剂与前景展望<a class="anchor" href="#m10" aria-label="本节链接">#</a></h2>
+  <h3>短期催化剂（未来 6 个月）</h3>
+  <ul>
+    <li><strong>2026-08-11 Q4 FY2026 正式财报</strong>（美东 17:00）。预告已给：营收接近 110 亿下沿、毛利率 15%–17%、Q4 新订单超 600 亿。真正要看的是三件预告没说的事：<strong>Q4 经营现金流、期末存货与应收、以及独立调查的最新表述</strong>。</li>
+    <li><strong>FY2027 指引</strong>。若公司据 600 亿订单给出大幅高于 400 亿的营收指引，反而要警惕——那意味着更大的营运资金缺口和更多融资。</li>
+    <li><strong>独立调查结论</strong>。公司连续三次写「可能影响前期业绩」，一旦落地，方向可能是任一端。</li>
+  </ul>
+  <h3>长期展望（3–5 年）</h3>
+  <p>行业顺风是真实的：IDC 将 2026 年 AI 基础设施支出预测上调至 4,970 亿美元，2030 年看到 1.21 万亿。ODM Direct 份额被品牌厂商侵蚀，对 SMCI 有利。DCBBS 整机柜方案若真能提升附加值，是毛利率结构性改善的唯一可信路径——Q4 的 15%–17% 若能连续两到三个季度维持，就是这条路径被验证的证据。</p>
+  <p>但要让这个故事对<strong>股东</strong>成立，需要同时满足两件事：毛利率站上 12% 以上，<strong>且</strong>营运资金强度从 33.4% 降到 25% 以下。前者公司在努力，后者取决于客户账期与备货模式——而这两样都握在买方手里。</p>
+</section>
+
+<section class="section" id="m11" aria-labelledby="m11-t">
+  <h2 class="stitle" id="m11-t">模块 11 · 风险矩阵<a class="anchor" href="#m11" aria-label="本节链接">#</a></h2>
+  <div class="risk-grid">
+    <div class="risk-card r5"><h3>监管与法律 · 严重度 5/5（高）</h3><p>纽约南区起诉联合创始人；DOJ（SDNY 大陪审团 + EDNY + CDCA）、SEC（两份传票）、BIS/OEE（多份传票）<strong>三家同时介入</strong>。风险披露明确点名最坏情形：BIS 可<strong>暂停、撤销或拒绝公司的出口特权，包括发出拒绝令禁止其参与受 EAR 管辖的交易</strong>。</p></div>
+    <div class="risk-card r5"><h3>财务与流动性 · 严重度 5/5（高）</h3><p>9M 经营现金流 −75.6 亿，净负债 74.8 亿，现金仅 12.9 亿。六月被迫融资超 50 亿（含 7% 优先股）。增长每加速一分，缺口大一分。</p></div>
+    <div class="risk-card r5"><h3>内部控制 · 严重度 5/5（高）</h3><p>四项<strong>重大缺陷至今未整改</strong>，BDO 对 FY2024 与 FY2025 内控<strong>连续两年出具否定意见</strong>。特别委员会建议的新任 CFO，20 个月未到位。</p></div>
+    <div class="risk-card r4"><h3>客户集中 · 严重度 4/5（中高）</h3><p>Q2 单季一个客户占 63%，9M 单一客户占 38.5%，应收前四大占 75.1%。任一大客户延付或转单，直接冲击现金流与存货。</p></div>
+    <div class="risk-card r4"><h3>经营与毛利率 · 严重度 4/5（中高）</h3><p>八季毛利率区间 6.30%–13.06%，公司自己无法准确预测（连续两季低估 340–880bp）。毛利率由客户与产品结构决定，而结构不由公司控制。</p></div>
+    <div class="risk-card r3"><h3>估值 · 严重度 3/5（中）</h3><p>当前价隐含长期营业利润率 7.86%，历史仅 FY2023 一年达到过。安全边际 −27.6%。</p></div>
+    <div class="risk-card r3"><h3>稀释 · 严重度 3/5（中）</h3><p>摊薄股数三年 +23.7%；六月增发 4,545 万股 + 37.5 亿强制可转换优先股（未来强制转股）+ 12.5 亿 ATM 额度。</p></div>
+    <div class="risk-card r2"><h3>宏观与周期 · 严重度 2/5（中低）</h3><p>AI 资本开支周期是当前最强顺风，短期无逆转迹象。但周期一旦转向，最先受伤的是存货 111 亿的那一环。</p></div>
+  </div>
+  <h3>黑天鹅情景（三个）</h3>
+  <ul>
+    <li><strong>BIS 拒绝令。</strong>若出口特权被暂停或撤销，SMCI 将无法参与受 EAR 管辖的交易——对一家 86% 收入来自美国、产品含大量美国原产技术的公司，这不是罚款级别的事件，是业务连续性事件。概率低，后果接近毁灭性。</li>
+    <li><strong>前期业绩重述。</strong>公司连续三次写「调查结果可能影响<strong>前期业绩</strong>」。若成真，触发的不只是数字修正——2020 年已有和解前科、2024 年已有审计师中途辞任，第三次会直接冲击这家公司剩余的报表可信度，并可能触发债务契约。</li>
+    <li><strong>大客户在存货高位时撤单。</strong>111 亿存货、84.1 亿应收，对应一个占收入 38.5%–63% 的客户。若该客户因自建、转单或自身资金问题推迟提货，SMCI 将同时面临存货减值与应收坏账，而它手上只有 12.9 亿现金。</li>
+  </ul>
+</section>
+
+<section class="section" id="m12" aria-labelledby="m12-t">
+  <h2 class="stitle" id="m12-t">模块 12 · 股东回报分析<a class="anchor" href="#m12" aria-label="本节链接">#</a></h2>
+
+  <h3>12.1 公司给了股东多少？</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="SEC 10-K FY2023–FY2025 与 10-Q FY2026 合并现金流量表「筹资活动」全部行项">
+      <thead><tr><th>财年</th><th>现金股息</th><th>每股股息</th><th>回购金额</th><th>股东总回报</th><th>同期净融资</th></tr></thead>
+      <tbody>
+        <tr><td>FY2023</td><td>$0</td><td>$0</td><td>$0</td><td><strong>$0</strong></td><td>—</td></tr>
+        <tr><td>FY2024</td><td>$0</td><td>$0</td><td>$0</td><td><strong>$0</strong></td><td>净流入（可转债）</td></tr>
+        <tr><td>FY2025</td><td>$0</td><td>$0</td><td>$0</td><td><strong>$0</strong></td><td>净流入</td></tr>
+        <tr class="hl"><td>9M FY2026</td><td>$0</td><td>$0</td><td>$0</td><td><strong>$0</strong></td><td>+39.07 亿美元</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>trailing 股东收益率 = 0%。</strong>过去三个完整财年，SMCI 没有支付过一分钱普通股股息，也没有回购过一股。这不是「回报力度温和」，是<strong>完全没有资本返还</strong>。</p>
+  <p>更准确的说法是：资金是<strong>反向流动</strong>的。9M FY2026 筹资活动净流入 39.07 亿美元；六月又完成三笔融资——普通股增发 4,545 万股（约 13.3 亿）、7.00% A 系列强制可转换优先股 37.5 亿、ATM 额度最高 12.5 亿。股东在这一年里不是收钱的一方，是<strong>出钱的一方</strong>。</p>
+
+  <h3>12.2 给的方式好不好？</h3>
+  <p>没有回购，所以没有「注销 vs 库存股」的质量问题可谈。但有一个必须检验的替代指标——<strong>摊薄股数的趋势</strong>：</p>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="SEC 10-K 与 10-Q 利润表「加权平均摊薄股数」，均为 2024-10 拆股后口径">
+      <thead><tr><th>期间</th><th>摊薄股数（百万）</th><th>较三年前</th><th>股权激励费用</th><th>占净利比</th></tr></thead>
+      <tbody>
+        <tr><td>FY2023</td><td>559.7</td><td>基准</td><td>$54.4M</td><td>8.5%</td></tr>
+        <tr><td>FY2024</td><td>602.1</td><td>+7.6%</td><td>$231.5M</td><td>20.1%</td></tr>
+        <tr><td>FY2025</td><td>628.4</td><td>+12.3%</td><td>$314.5M</td><td>30.0%</td></tr>
+        <tr class="hl"><td>Q3 FY2026</td><td>692.2</td><td><strong>+23.7%</strong></td><td>$125.9M（单季）</td><td>26.1%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>三年里摊薄股数增加 23.7%，且没有任何回购对冲。股权激励费用从占净利 8.5% 升到 26%–30%——<strong>每四块钱利润里，就有一块多是发给员工的股票</strong>。这部分价值实实在在从现有股东手里转移出去，且没有任何机制把它买回来。</p>
+  <p>另需注意摊薄口径本身：Q3 基本股数 600.2 百万、摊薄 692.2 百万，差额 92.0 百万股来自可转债的 if-converted 稀释。六月新发的强制可转换优先股<strong>将来必然转股</strong>，会在此之上再加一层。</p>
+
+  <h3>12.3 能不能继续给、给多少？</h3>
+  <p>这一问的答案是明确的：<strong>短期内不能，而且是被合同禁止的。</strong></p>
+  <ul>
+    <li><strong>合同约束</strong>：六月优先股的 Certificate of Designations 明确规定——只要强制可转换优先股在外且存在累计未付股息，公司<strong>不得对普通股宣派或支付股息，亦不得回购普通股</strong>。</li>
+    <li><strong>新增的固定负担</strong>：优先股按 7.00% 票息、1,000 美元清算优先权、375 万股计，年化股息约 <strong>2.625 亿美元</strong>。首笔已于 2026-08-05 宣派（每存托股 $0.73889，9 月 1 日支付）。这是普通股股东之前不存在的一道优先扣减。</li>
+    <li><strong>覆盖度</strong>：(股息 + 回购) ÷ 自由现金流这个比率在这里无法计算——分子为 0，而分母 TTM 是 <strong>−68.5 亿美元</strong>。真正该问的是反向问题：<strong>自由现金流要转正多久，才够覆盖每年 2.6 亿的优先股股息？</strong></li>
+    <li><strong>债务契约</strong>：2026-06-10 的信贷协议修正案专门为支付优先股分配放宽了限制，条件是备考固定费用覆盖率不低于 2.00:1.00——说明这笔股息的支付能力，是需要银行专门开口子的。</li>
+  </ul>
+  <p><strong>模块小结：几乎无股东回报，且资本返还通道已被优先股条款合同性封闭。</strong>股东在过去三年得到的现金回报是零，同时承担了 23.7% 的摊薄；从 2026 年 6 月起，还要在普通股之前排上一道每年 2.6 亿美元的优先股股息。</p>
+</section>
+
+<section class="section" id="m13" aria-labelledby="m13-t">
+  <h2 class="stitle" id="m13-t">模块 13 · 海图评分卡 + 投资决策<a class="anchor" href="#m13" aria-label="本节链接">#</a></h2>
+
+  <div class="scorecard">
+    <div class="score-grid">
+      <div class="score-card"><div class="score-letter cr">D</div><h3>生意可预测性</h3><p>三季里两季营收落空 16%–17%；毛利率八季区间 6.30%–13.06%，公司连续两季低估自己 340–880bp；单季一个客户占 63%。一句话能说清商业模式，但说不清下一季会怎样。</p></div>
+      <div class="score-card"><div class="score-letter cr">D</div><h3>经济护城河</h3><p>五维里两个「无」、三个「窄」。毛利率 9.95% 与纯 ODM 緯穎的 9.26% 持平，而对方营业利润率更高。份额从 4.3% 涨到 7.6% 是真的——但是用价格换的。</p></div>
+      <div class="score-card"><div class="score-letter cr">D</div><h3>管理层质量</h3><p>2020 年 SEC 和解、CEO 依 SOX 304 返还 212.2 万美元；2024 年审计师中途辞任；2026 年联合创始人被起诉。特别委员会建议的新任 CFO，20 个月未到位。全年指引 18 个月绕一圈回到原点。</p></div>
+      <div class="score-card"><div class="score-letter cr">D</div><h3>财务质量</h3><p>9M 经营现金流 −75.6 亿；所有者盈余 −76.9 亿；ROE 18.5% 主要来自 3.10 倍权益乘数；83% 的资产是应收加存货；四项重大缺陷未整改，内控连续两年被出具否定意见。</p></div>
+      <div class="score-card"><div class="score-letter cr">D</div><h3>资本配置纪律</h3><p>三年零股息零回购，摊薄股数 +23.7%，股权激励占净利 26%–30%。六月被迫融资超 50 亿，其中 7% 优先股是昂贵资金。资本返还通道已被优先股条款合同性封闭。</p></div>
+      <div class="score-card"><div class="score-letter cw">C</div><h3>估值与安全边际</h3><p>概率加权内在价值 $22.52 vs 现价 $31.13，安全边际 −27.6%。反向 DCF 显示当前价隐含长期营业利润率 7.86%，历史仅 FY2023 一年达到。</p></div>
+    </div>
+    <div class="flag-row">
+      <p><strong>红旗排查（非评分项）：三面红旗全部触发。</strong></p>
+      <ul>
+        <li><strong>内部控制</strong>：四项重大缺陷未整改，BDO 对 FY2024、FY2025 内控<strong>连续两年否定意见</strong>。</li>
+        <li><strong>会计与重述风险</strong>：2020 年 SEC 认定 FY2015–FY2017 存在广泛会计违规；当前独立调查连续三次披露「可能影响<strong>前期业绩</strong>」。</li>
+        <li><strong>股权激励比例</strong>：占净利 26%–30%，且无任何回购对冲。</li>
+      </ul>
+      <p>按评分规则，任一红旗触发即强制降级。此处三面同时触发。</p>
+    </div>
+  </div>
+
+  <h3>投资决策</h3>
+  <div class="verdict">
+    <div class="verdict-t">评级：<span class="rating-badge" data-rating="卖出">卖出</span>　12 个月目标价 $22.50</div>
+    <p><strong>这不是在预测 8 月 11 日的财报会难看。</strong>恰恰相反——按 7 月 21 日的预告推算，Q4 单季净利可能达到 10 亿美元上下，是原指引的两倍以上，很可能是这家公司历史上最好看的一份季报。</p>
+    <p>结论建立在另外三件事上：<strong>价格已经隐含了它只在 FY2023 达到过一次的利润率</strong>；<strong>这门生意在增长时消耗现金、在收缩时才产生现金</strong>；<strong>三面治理红旗同时亮着，而其中任何一面单独出现都足以要求降级</strong>。</p>
+  </div>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="cards" data-source="模块 7 三情景 DCF 与概率加权">
+      <thead><tr><th>情景</th><th>12 个月目标价</th><th>概率</th><th>触发条件</th></tr></thead>
+      <tbody>
+        <tr><td>乐观</td><td>$40.79</td><td>30%</td><td>毛利率连续三季站稳 12% 以上，营运资金强度降到 25%，调查以无重大发现结案</td></tr>
+        <tr class="hl"><td>基准</td><td>$18.91</td><td>50%</td><td>毛利率回落到 10%–11%，增长放缓但现金流转正，调查悬而未决</td></tr>
+        <tr><td>悲观</td><td>$4.16</td><td>20%</td><td>大客户流失、出口特权受限或前期业绩重述</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <ul>
+    <li><strong>分批建仓价</strong>：首仓 $15.13 / 二仓 $13.24 / 三仓 $11.35（估值中位数 $18.91 的 80%/70%/60%）。备考每股账面 $13.77 落在二三仓之间。</li>
+    <li><strong>止盈策略（若已持有）</strong>：$36 减 1/3、$42 减 1/3、$50 清仓。三档分别对应「乐观情景的八成」「乐观情景全值」「乐观情景之上、已无估值支撑」。<strong>不设止损</strong>——这个位置的下跌若发生，多半来自调查结论，而那种时候止损单只会成交在最差的价格。</li>
+    <li><strong>仓位</strong>：当前价位建议 <strong>0%</strong>。即使跌到首仓价，考虑到三面红旗，建议上限不超过组合的 3%，且分三次进。</li>
+    <li><strong>持有周期</strong>：若在首仓价以下建仓，视角应放到 2–3 年——等的是营运资金强度下降和调查落地，不是等下一份季报。</li>
+  </ul>
+  <h3>关键监控指标</h3>
+  <ul>
+    <li><strong>经营现金流是否转正</strong>（每季必看，比 EPS 重要得多）</li>
+    <li><strong>存货与应收的绝对额</strong>（3/31 为 111.0 亿 / 84.1 亿）与现金转换周期（148 天）</li>
+    <li><strong>毛利率能否连续三季站上 12%</strong>——这是 DCBBS 故事被验证的唯一硬标准</li>
+    <li><strong>单一客户占比</strong>（9M 为 38.5%）与应收前四大集中度（75.1%）</li>
+    <li><strong>四项重大缺陷的整改进度</strong>与内控意见是否转为无保留</li>
+    <li><strong>独立调查表述的变化</strong>——「可能影响前期业绩」这句话是去是留</li>
+  </ul>
+  <p><strong>事件时间表</strong>：2026-08-11 Q4 FY2026 财报与 FY2027 指引（美东 17:00）；2026-08-15 优先股股息股权登记日；2026-09-01 首笔优先股股息支付；FY2026 10-K 预计 8 月底至 9 月提交（其中的内控意见是本年度最重要的单一披露）。</p>
+  <p><strong>下一个重新审视的时点</strong>：Q4 财报当日。要看的不是营收和 EPS——那两个已经预告过了——而是<strong>经营现金流、期末存货与应收、以及独立调查的措辞</strong>。</p>
+</section>
+
+<section class="section" id="essay" aria-labelledby="essay-t">
+  <h2 class="stitle sr-only" id="essay-t">海图夜读手记<a class="anchor" href="#essay" aria-label="本节链接">#</a></h2>
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <img src="../assets/hai.png" alt="海图" class="haitu-avatar-sm">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p>一家公司九个月报出 10.5 亿美元净利润，同一段时间现金流出 75.6 亿。这两个数字都出自同一份财报，都经过审计程序，都没有错。</p>
+      <p>Super Micro 是做什么的？它从英伟达买芯片，配上自己的主板、机箱、电源和液冷，组装成整机柜卖给数据中心。这句话能说清楚，所以这门生意在能力圈之内。难的不是看懂它做什么，是看懂它<strong>凭什么赚钱</strong>——以及，那点钱最后有没有变成钱。</p>
+      <p><strong>产业链的账，是这样分的。</strong>同一个季度，SMCI 收入 102 亿美元、毛利 10.2 亿；英伟达收入 816 亿、毛利 612 亿。收入差 8 倍，毛利差 60 倍。整机组装每 1 美元营收留下 0.099 美元，芯片环节留下 0.749 美元。这不是谁更努力的问题，是位置的问题。</p>
+      <p><strong>更要紧的是第二笔账。</strong>到 3 月底，这家公司账上有 84 亿应收账款和 111 亿存货，两项合计占总资产的 83%。换算成单位经济：每做 1 元年营收，要先垫 0.33 元；而每 1 元营收只留下约 0.049 元税后营业利润。<strong>增长每快一分，现金缺口就大一分。</strong>要让增长自己养活自己，营业利润率得做到 41.5%——它现在是 6.1%，历史最高是 10.7%。</p>
+      <p>所以六月那三笔融资——增发 13.3 亿、7% 优先股 37.5 亿、ATM 额度 12.5 亿——不是机会主义的资本运作，是被这个结构逼出来的。而那笔优先股还附带一个条款：只要它的股息没付清，公司<strong>不得对普通股派息或回购</strong>。过去三年股东拿到的现金回报是零，摊薄股数增加 23.7%；从今年六月起，还要在普通股之前排上一道每年 2.6 亿美元的优先股股息。</p>
+      <p><strong>治理这条线更长。</strong>2020 年，SEC 认定 FY2015–FY2017 存在广泛的会计违规，公司缴 1,750 万美元罚款，CEO 依《萨班斯法案》第 304 条返还 212.2 万美元。2024 年，安永在为它做的第一次审计中途辞任，理由是「已无法再依赖管理层与审计委员会的陈述」。特别委员会调查后认定无实质性问题，并建议招聘一位新 CFO——二十个月过去了，这个建议没有落实。2026 年 3 月，联合创始人 Wally Liaw 被纽约南区检察官以合谋违反出口管制罪起诉；他正是 2018 年因内控整改辞职、2023 年又回到董事会的那个人。今天，DOJ、SEC、商务部工业与安全局三家同时在查，四项内控重大缺陷至今未整改，审计师对内部控制连续两年出具否定意见。</p>
+      <p><strong>那么八月十一号呢？</strong>公司七月已经预告：Q4 毛利率 15%–17%，而指引只有 8.2%–8.4%；单季新订单超过 600 亿美元。按这个推算，那可能是它历史上最好看的一份季报。</p>
+      <p>我的判断不建立在赌它难看上。恰恰相反，我认为它会很好看。问题是好看之后：那 600 亿订单，按 33.4% 的营运资金强度，若四个季度交完需要约 200 亿美元来垫——而三月底的股东权益只有 75.8 亿。<strong>订单越多，缺口越大。</strong></p>
+      <p>把八种估值方法摆开，只有两种给出有意义的答案。所有者盈余收益率是 −34%，它不产生估值，只产生一个判断：这门生意现在不是现金的净产出方。反向 DCF 说，$31.13 这个价格隐含它要长期维持 7.86% 的营业利润率——它只在 FY2023 那一年做到过，那时营收 71 亿，还没有占收入 63% 的单一客户。三情景概率加权，内在价值 $22.52，比现价低 27.6%。</p>
+      <p>这门生意有一个反直觉的性质，值得单独写一句：<strong>它缩小的时候产生现金，扩张的时候消耗现金。</strong>悲观情景里第一年反而有 23.5 亿自由现金流，因为收缩会释放营运资金。一门只有在停止增长时才交出现金的生意，很难说它的增长属于股东。</p>
+      <p><strong>评级卖出，12 个月目标价 $22.50。</strong>要我买，得等到 $15.13——那是估值中位数的八成；跌到 $13.77，就等于用账面价格买下它，AI 期权白拿。在那之前，我更愿意把它当作一个观察对象：看它的经营现金流哪一季转正，看毛利率能不能连着三季站上 12%，看「可能影响前期业绩」这句话哪一天从公告里消失。</p>
+      <p>短期看，市场是投票机。这两天它大概会投赞成票。长期看，市场是称重机——而称的是现金，不是订单。</p>
+      <p class="haitu-sign">—— 海图，夜读于 2026 年 8 月 10 日，距其 Q4 财报还有一天</p>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <div>本报告由「海图夜读」基于公开财报与电话会资料独立撰写，数据截至 2026-08-07。</div>
+  <div>
+    <strong>免责声明：</strong>本文仅为个人研究记录与信息分享，<strong>不构成任何投资建议</strong>，
+    作者非持牌投资顾问。文中评级、目标价、仓位与建仓价格均为基于公开信息的个人推演，
+    可能存在错误或随时间失效。市场有风险，投资需谨慎，读者应独立判断并自负盈亏。
+  </div>
+</footer>
+
+<script>
+/* ══════════════════════════════════════════════════════════════════
+   海图夜读 · 报告页脚本骨架
+   逐字复制进报告的 <script>，只改 CHART_DATA 里的数字。
+
+   这段脚本解决了存量 103 份实测出的三个问题：
+   1. 主题切换有 3 套实现，73/103 不读 localStorage
+      → 门户切暗色进报告又变亮色。这里统一成一套。
+   2. 71 份把调色板硬编码进 JS（token 的第 4 份拷贝），
+      改一次配色要改 71 个文件；另有 2 份切暗色后图表根本不重绘。
+      → 这里一律从 CSS 变量读，改 :root 即全站生效。
+   3. 4 个图表槽位被写出 39 种 canvas id。
+      → 这里按固定槽位 rev|margin|segment|eps 接管。
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ── 1. 从 CSS 变量取色（唯一真源，禁止在本文件里写 hex）── */
+function cssVar(name) {
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+}
+function palette() {
+  return {
+    accent:  cssVar('--accent'),   accent2: cssVar('--accent2'),
+    accent3: cssVar('--accent3'),  gold:    cssVar('--gold'),
+    red:     cssVar('--red'),      green:   cssVar('--green'),
+    grid:    cssVar('--chart-grid'), text:  cssVar('--text3-ink'),
+  };
+}
+
+/* ── 2. 主题切换：同步 aria-pressed、持久化、重绘图表 ── */
+function toggleTheme() {
+  var html = document.documentElement;
+  var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  try { localStorage.setItem('theme', next); } catch (e) {}
+  var btn = document.getElementById('themeBtn');
+  if (btn) btn.setAttribute('aria-pressed', String(next === 'dark'));
+  renderCharts();
+}
+document.addEventListener('DOMContentLoaded', function () {
+  var btn = document.getElementById('themeBtn');
+  if (btn) btn.setAttribute('aria-pressed',
+    String(document.documentElement.getAttribute('data-theme') === 'dark'));
+});
+
+var PERIOD = 'annual';
+function switchPeriod(p) {
+  if (p !== 'annual' && p !== 'quarterly') return;
+  PERIOD = p;
+  document.querySelectorAll('.period-btn').forEach(function (b) {
+    var on = b.dataset.period === p;
+    b.setAttribute('aria-pressed', String(on));
+    b.classList.toggle('is-on', on);
+  });
+  renderCharts();
+}
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('.period-btn').forEach(function (b) {
+    b.addEventListener('click', function () { switchPeriod(b.dataset.period); });
+  });
+  switchPeriod(PERIOD);
+});
+
+/* ── 3. 顶栏实测高度写进 --bar-h ──
+   锚点落点与目录高亮都以它为基准。顶栏在窄屏会折行（38px → 60+px），
+   硬编码会让手机上所有跳转偏移。 */
+function syncBarH() {
+  var bar = document.querySelector('.theme-bar');
+  if (bar) document.documentElement.style.setProperty('--bar-h', bar.offsetHeight + 'px');
+}
+addEventListener('DOMContentLoaded', syncBarH);
+addEventListener('resize', syncBarH);
+
+var CHART_DATA = {
+  rev: {
+    type: 'bar',
+    labels: ['FY24Q4','FY25Q1','FY25Q2','FY25Q3','FY25Q4','FY26Q1','FY26Q2','FY26Q3'],
+    datasets: [
+      { label: '营收（$B）', data: [5.35,5.94,5.68,4.60,5.76,5.02,12.68,10.24], color: 'accent' },
+      { label: '同比 %', data: [null,null,null,null,7.5,-15.5,123.4,122.7], color: 'accent3', type: 'line', yAxisID: 'y1' },
+    ],
+  },
+  margin: {
+    type: 'line',
+    labels: ['FY24Q4','FY25Q1','FY25Q2','FY25Q3','FY25Q4','FY26Q1','FY26Q2','FY26Q3','FY26Q4预告'],
+    datasets: [
+      { label: 'GAAP 毛利率 %', data: [10.20,13.06,11.80,9.57,9.45,9.31,6.30,9.95,16.0], color: 'accent' },
+      { label: '营业利润率 %', data: [5.39,8.58,6.49,3.19,3.97,3.63,3.74,6.11,null], color: 'gold' },
+    ],
+  },
+  segment: {
+    type: 'doughnut',
+    labels: ['营业成本 91.8%','研发 2.0%','销售 0.8%','管理 0.8%','营业利润 4.6%'],
+    datasets: [
+      { label: '占营收比重 %', data: [91.82,2.04,0.75,0.79,4.59], color: ['red','gold','accent2','accent3','green'] },
+    ],
+  },
+  eps: {
+    type: 'bar',
+    labels: ['FY24Q4','FY25Q1','FY25Q2','FY25Q3','FY25Q4','FY26Q1','FY26Q2','FY26Q3'],
+    datasets: [
+      { label: '摊薄 EPS（$）', data: [0.46,0.67,0.51,0.17,0.31,0.26,0.60,0.72], color: 'accent' },
+      { label: '自由现金流（$B）', data: [-0.66,0.36,-0.27,0.59,0.84,-0.95,-0.05,-6.70], color: 'red', type: 'line', yAxisID: 'y1' },
+    ],
+  },
+
+  income: {
+    type: 'bar', unit: '百万美元',
+    annual: {
+      labels: ['FY2021','FY2022','FY2023','FY2024','FY2025'],
+      datasets: [
+        { label: '总收入',   data: [3557.4,5196.1,7123.5,14989.3,21972.0], color: 'accent' },
+        { label: '营业利润', data: [123.9,335.2,761.1,1210.8,1253.0], color: 'gold' },
+        { label: '净利润',   data: [111.9,285.2,640.0,1152.7,1048.9], color: 'green' },
+      ],
+    },
+    quarterly: {
+      labels: ['FY24Q4','FY25Q1','FY25Q2','FY25Q3','FY25Q4','FY26Q1','FY26Q2','FY26Q3'],
+      datasets: [
+        { label: '总收入',   data: [5354.6,5937.3,5678.0,4599.9,5756.9,5017.8,12682.5,10243.0], color: 'accent' },
+        { label: '营业利润', data: [288.5,509.2,368.6,146.8,228.4,182.3,474.3,625.9], color: 'gold' },
+        { label: '净利润',   data: [297.2,424.3,320.6,108.8,195.2,168.3,400.6,483.4], color: 'green' },
+      ],
+    },
+  },
+  cashflow: {
+    type: 'bar', unit: '百万美元',
+    annual: {
+      labels: ['FY2021','FY2022','FY2023','FY2024','FY2025'],
+      datasets: [
+        { label: '经营现金流', data: [123.0,-440.8,663.6,-2486.0,1659.5], color: 'accent' },
+        { label: '资本开支',   data: [58.0,45.2,36.8,124.3,127.2], color: 'red' },
+        { label: '自由现金流', data: [64.9,-486.0,626.8,-2610.3,1532.3], color: 'green' },
+      ],
+    },
+    quarterly: {
+      labels: ['FY24Q4','FY25Q1','FY25Q2','FY25Q3','FY25Q4','FY26Q1','FY26Q2','FY26Q3'],
+      datasets: [
+        { label: '经营现金流', data: [-647.8,408.9,-239.8,626.8,863.6,-917.5,-23.9,-6615.4], color: 'accent' },
+        { label: '资本开支',   data: [14.0,44.3,27.5,32.7,22.7,32.3,21.2,80.3], color: 'red' },
+        { label: '自由现金流', data: [-661.8,364.6,-267.3,594.1,840.9,-949.8,-45.1,-6695.7], color: 'green' },
+      ],
+    },
+  },
+  balance: {
+    type: 'line', unit: '百万美元',
+    annual: {
+      labels: ['FY2021','FY2022','FY2023','FY2024','FY2025'],
+      datasets: [
+        { label: '总资产',   data: [2242.0,3205.1,3674.7,9826.1,14018.4], color: 'accent' },
+        { label: '总负债',   data: [1145.6,1779.3,1702.6,4408.7,7716.6], color: 'red' },
+        { label: '股东权益', data: [1096.4,1425.7,1972.2,5417.4,6301.9], color: 'green' },
+      ],
+    },
+    quarterly: {
+      labels: ['FY24Q4','FY25Q1','FY25Q2','FY25Q3','FY25Q4','FY26Q1','FY26Q2','FY26Q3'],
+      datasets: [
+        { label: '总资产',   data: [9826.1,10851.4,9728.3,10738.5,14018.4,14386.0,28001.6,23452.0], color: 'accent' },
+        { label: '总负债',   data: [4408.7,4974.5,3489.9,4359.0,7716.6,7862.5,21009.4,15876.4], color: 'red' },
+        { label: '股东权益', data: [5417.4,5876.9,6238.5,6379.5,6301.9,6523.6,6992.2,7575.6], color: 'green' },
+      ],
+    },
+  },
+};
+
+/* ── 5. 渲染（一般不需要改）── */
+var _charts = {};
+function renderCharts() {
+  if (typeof Chart === 'undefined') return;      // CDN 不可达时静默跳过，不阻断页面
+  var P = palette();
+  Chart.defaults.font.family =
+    getComputedStyle(document.body).getPropertyValue('--font-sans') ||
+    'system-ui, -apple-system, sans-serif';
+
+  Object.keys(CHART_DATA).forEach(function (slot) {
+    var el = document.getElementById(slot);
+    if (!el) return;
+    if (_charts[slot]) _charts[slot].destroy();
+
+    var cfg = CHART_DATA[slot];
+    // 双周期槽位（三表图）：按当前 PERIOD 取那一套 labels/datasets。
+    // 缺失所选周期时回落到另一套，避免整张图空白。
+    if (cfg.annual || cfg.quarterly) {
+      var d = cfg[PERIOD] || cfg.annual || cfg.quarterly;
+      cfg = { type: d.type || cfg.type, labels: d.labels, datasets: d.datasets, unit: d.unit || cfg.unit };
+    }
+    var isPie = cfg.type === 'doughnut' || cfg.type === 'pie';
+
+    _charts[slot] = new Chart(el, {
+      type: cfg.type,
+      data: {
+        labels: cfg.labels,
+        datasets: cfg.datasets.map(function (d) {
+          var c = Array.isArray(d.color) ? d.color.map(function (k) { return P[k]; }) : P[d.color];
+          // 只写 d.type === 'line' 会让「图表级 type:'line' 但 dataset 没写 type」的
+          // 数据集拿到 borderWidth:0 —— 实测表现为「只有点、没有连线」。
+          var isLine = (d.type || cfg.type) === 'line';
+          return Object.assign({}, d, {
+            backgroundColor: c, borderColor: c,
+            borderWidth: isLine ? 2 : 0, tension: 0.3,
+          });
+        }),
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            // 窄屏把图例挪到顶部：右侧图例在 375px 上会吃掉大半个画布
+            position: isPie && innerWidth > 640 ? 'right' : 'top',
+            labels: { color: P.text, boxWidth: 12, font: { size: 11 } },
+          },
+        },
+        scales: isPie ? {} : {
+          x: { grid: { color: P.grid }, ticks: { color: P.text, font: { size: 11 } } },
+          y: { grid: { color: P.grid }, ticks: { color: P.text, font: { size: 11 } } },
+          y1: {
+            position: 'right', grid: { display: false },
+            ticks: { color: P.text, font: { size: 11 } }, display: 'auto',
+          },
+        },
+      },
+    });
+  });
+}
+addEventListener('DOMContentLoaded', renderCharts);
+addEventListener('resize', function () {          // 图例位置随断点变，需重建
+  clearTimeout(window._rcT);
+  window._rcT = setTimeout(renderCharts, 200);
+});
+
+</script>
+</body>
+</html>
