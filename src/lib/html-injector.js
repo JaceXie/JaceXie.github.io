@@ -1,4 +1,5 @@
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, statSync } from 'node:fs';
+import { dirname, resolve } from 'node:path';
 import { logger } from './logger.js';
 
 const MARKERS = {
@@ -25,6 +26,7 @@ const MARKERS = {
  */
 export function injectHtml(htmlPath, { tickers, calendarEvents, todayStr }) {
   let html = readFileSync(htmlPath, 'utf-8');
+  backfillModTime(tickers, dirname(resolve(htmlPath)));
 
   // 验证所有 marker 都存在
   for (const [k, m] of Object.entries(MARKERS)) {
@@ -147,6 +149,34 @@ function toEpoch(v) {
   if (typeof v === 'number' && isFinite(v)) return v;
   const t = Date.parse(v);
   return isFinite(t) ? t : 0;
+}
+
+/**
+ * modTime 缺失时用报告文件的 mtime 兜底，并修正早于研判日的陈旧值。
+ *
+ * 为什么需要：门户前端按「研判日降序 → modTime 降序」排序，modTime 缺失会被
+ * toEpoch() 变成 0，于是那张卡片沉到当天最后。实测事故：手工插进自动生成区的
+ * 4 张卡片（06127 / BCE / RKT / VST）都没写 modTime，结果 8 月 10 日新出的
+ * 两份报告排在同一天其它报告的下面，用户以为报告丢了。
+ * 另有 11 条的 modTime 早于自己的 lastAnalyzedDate —— 一份 8 月 10 日研判的
+ * 报告不可能是 7 月 12 日写的，这类陈旧值同样会把卡片压下去。
+ *
+ * 兜底只会把时间往后调、不会往前调，所以不可能因此把某张卡片挤下去。
+ */
+function backfillModTime(tickers, siteRoot) {
+  let fixed = 0;
+  for (const t of tickers) {
+    if (!t.lastReportFile) continue;
+    let mtime = 0;
+    try { mtime = statSync(resolve(siteRoot, t.lastReportFile)).mtimeMs; } catch { continue; }
+    const cur = toEpoch(t.modTime);
+    const day = toEpoch(t.lastAnalyzedDate);
+    if (!cur || (day && cur < day)) {
+      t.modTime = mtime;
+      fixed++;
+    }
+  }
+  if (fixed) logger.warn(`modTime 缺失或陈旧，已按报告文件 mtime 兜底 ${fixed} 条`);
 }
 
 /**
