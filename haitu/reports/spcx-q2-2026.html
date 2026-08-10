@@ -72,6 +72,10 @@
   --lh-tight: 1.7;    /* 密排：表格、卡片、注释 */
   --lh-prose: 1.85;   /* 正文段落 */
 
+  /* ⚠️ 中文行长上限。实测此前 .cmt 每行 73 字、.note 96 字 —— 中文超过
+     45 字，眼睛回扫时极易丢行，这是「看着累」的首要原因（比字号更关键）。
+     40em 在中文下约等于 40 字/行，落在 35–45 的舒适区间。
+     只约束纯文字块；表格与图表不受此限，仍占满容器宽度。 */
   --measure: 40em;
   --bar-h: 44px;
 }
@@ -247,11 +251,19 @@ a { color: var(--accent2); text-decoration: none; }
   letter-spacing: .5px; text-transform: uppercase;
   padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border);
 }
+/* ⚠️ 表格一律左对齐，包括数字列。
+   数字右对齐是会计惯例（个位对齐便于比大小），但本站表格右侧混着「3.4×」
+   「126%」「宽」这类文字，右对齐后同一列里文字与数字各自贴右、参差不齐。
+   全列左对齐 + tabular-nums：等位数的数字仍然逐位成列，而文字不再乱跳。 */
 .tbl td { padding: 11px 16px; border-bottom: 1px solid var(--border); text-align: left; line-height: var(--lh-tight); }
 .tbl td:first-child { color: var(--text2); }
 .tbl .hl td { font-weight: 600; color: var(--text); }
 
 /* ── CHARTS ── */
+/* ⚠️ 轨道必须写 minmax(0,1fr) 而不是 1fr。
+   grid 子项默认 min-width:auto，canvas 与桑基 SVG 的固有宽度会把轨道撑开，
+   实测在 375px 下 .ccard 被撑到 568px，导致整页横向滚动。
+   .ccard 的 min-width:0 是同一问题的第二道保险。 */
 .cgrid  { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-bottom: 16px; }
 .cgrid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-bottom: 16px; }
 .ccard, .kpi, .moat-card, .risk-card, .score-card, .snap-item, .pbox { min-width: 0; }
@@ -355,6 +367,18 @@ a { color: var(--accent2); text-decoration: none; }
 .cmt p { margin-bottom: calc(var(--lh-prose) * 0.9em); }
 .cmt p:last-child { margin-bottom: 0; }
 
+/* ── 行长约束 ──
+   只作用于纯文字块。表格（.tbl-wrap）、图表（figure/.cgrid）与数据表
+   保持容器全宽，不受 --measure 限制 —— 财报的表格需要宽度，正文不需要。
+
+   ⚠️ 只收窄「流动的正文」，不收窄带背景的卡片。把 .ec-item / .risk-card
+   这类卡片本身缩到 40em，会在右侧留下一大块空白，反而更难看 —— 它们本来
+   就只有两三行，长行的代价远小于流动长文。 */
+/* ⚠️ 行长约束必须覆盖「所有流动的正文」，不能只覆盖 .cmt 里的那些。
+   实测教训：模块正文的 <p>／<ul> 是直接挂在 <section> 下的，不在 .cmt 内，
+   于是上一版把它们整个漏掉了 —— 06127 那份报告实测 37 段模块正文平均每行
+   71 个中文字、列表项 90 字，而同一页 .cmt 里的正文是 35 字。
+   中文一行超过 45 字，回扫时极易丢行，这就是「高宽屏读起来累」的直接原因。 */
 .section > p, .section > ul, .section > ol,
 .section > blockquote,
 .cmt > p, .cmt > ul, .cmt > ol, .cmt > blockquote,
@@ -362,7 +386,14 @@ a { color: var(--accent2); text-decoration: none; }
 .haitu-essay-body > ol, .haitu-essay-body > blockquote {
   max-width: var(--measure);           /* 15px × 40em ≈ 600px，约 40 字/行 */
 }
+/* ⚠️ 手记里的 ul／blockquote 一定要跟着列进来。上一版只写了 .haitu-essay-body > p，
+   于是 VST 报告实测：手记正文 40 字/行，而同一块里的列表 66 字/行 ——
+   页末手记本来就是整页最长的一段连续阅读，漏掉任何一种块级元素都会被读者撞上。 */
 
+/* 行内代码：报告里用来引 XBRL 标签名、字段名、检索词。
+   ⚠️ overflow-wrap: anywhere 不是可选项。XBRL 标签是 CamelCase 长串、没有空格也没有连字符，
+   浏览器找不到任何断点 —— 实测 StockRepurchasedAndRetiredDuringPeriodShares 单个词就有 396px，
+   在 375px 视口下把整页撑出 64px 横向滚动。 */
 code {
   font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace);
   font-size: 0.88em;
@@ -556,6 +587,11 @@ h2.stitle { font-size: 18px; font-weight: 700; margin: 0 0 20px; }
   .cgrid, .cgrid3, .pgrid { grid-template-columns: minmax(0, 1fr); }
 }
 
+/* 触控目标 ≥44px。用一个不可见的 ::before 撑开命中区，
+   开关本身仍是 44×22 的滑块外观。
+   ⚠️ 不要改 .toggle-switch 的 height/padding 来凑 44px —— 实测那样做会让
+   border-radius 与 ::after 滑块的定位一起错位，开关变成一个大圆角方块。
+   ⚠️ 条件必须同时含宽度 —— 只写 (hover:none) 时窄屏桌面实测仍是 22px。 */
 @media (max-width: 640px), (hover: none) {
   .toggle-switch::before {
     content: ''; position: absolute; left: 0; right: 0;
@@ -585,6 +621,8 @@ figure.chart figcaption { font-size: 12px; color: var(--text3-ink); line-height:
 
 /* ── 8. shell 新增组件（skip link / 结论跳转带 / 顶栏右侧 / 屏幕阅读器专用）── */
 
+/* 跳转到正文：平时移出视口，聚焦时才出现。
+   ⚠️ 不能用 display:none —— 那样键盘也聚焦不到，等于没有 */
 .skip {
   position: absolute; left: -9999px; top: 0;
   background: var(--card); color: var(--accent3-ink);
@@ -611,12 +649,21 @@ figure.chart figcaption { font-size: 12px; color: var(--text3-ink); line-height:
   transition: border-color .2s, background .2s;
 }
 .quip-jump a:hover { border-color: var(--accent3); background: var(--card); }
+/* 触控目标 ≥44px。
+   ⚠️ 不能只用 @media (hover:none) —— 窄屏但支持 hover 的场景（缩小的桌面窗口、
+   带触控板的二合一设备）拿不到放大，实测那种情况下只有 28px。宽度与指针两个条件都要给。 */
 @media (max-width: 640px), (hover: none) {
   /* 用 min-height 而不是加 padding —— padding 要靠字体行高凑够 44px，
      换字体或改字号就又不达标了（实测 padding:13px 只得到 40px）。 */
   .quip-jump a { min-height: 44px; padding: 0 16px; display: inline-flex; align-items: center; }
 }
 
+/* ══════════════════════════════════════════════════════════════
+   9. 报告组件（快照 / KPI / 护城河 / 风险 / 评分卡 / 电话会 / 桑基）
+   来源：现有报告语料中已验证的组件规则，已套用本表的字体栈与 ink 对比度修正。
+   ⚠️ 这一节必须与 body-skeleton.html 的类名保持同步 —— 骨架里出现的
+   每个类都要在这里有定义，否则章节会退化成无样式的纯文本流。
+   ══════════════════════════════════════════════════════════════ */
 .hero-pills {display: flex; justify-content: flex-start; gap: 16px; flex-wrap: wrap;}
 .pill {background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: var(--font-sans); font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow);}
 .pill strong {color: var(--text);}
@@ -636,6 +683,12 @@ figure.chart figcaption { font-size: 12px; color: var(--text3-ink); line-height:
 .moat-card.narrow .moat-rate {background: rgba(185,160,106,.18); color: var(--gold);}
 .moat-card.none .moat-rate {background: rgba(184,112,112,.18); color: var(--red);}
 .moat-card p {font-size: var(--fs-sm); color: var(--text2); line-height: var(--lh-tight);}
+/* ⚠️ .ec-item 必须是 block，不能是 flex。
+   语料里它只装「徽章 + 一句短语」，所以 flex 没出事；但正文里一旦出现
+   <strong>，每个 <strong> 都会变成独立 flex item，默认 min-width:auto 不收缩，
+   实测在 375px 下把 347px 的容器撑到 478px，导致整页横向滚动。
+   改为 block + 内联徽章：徽章仍在句首，正文正常折行环绕。
+   这与 .cgrid 必须写 minmax(0,1fr) 是同一类问题——flex/grid 子项默认不收缩。 */
 .ec-item {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: block; box-shadow: 0 1px 3px var(--shadow); line-height: var(--lh-prose); font-size: var(--fs-base);}
 .ec-badge {display: inline-block; vertical-align: baseline; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-right: 10px; font-family: var(--font-sans); white-space: nowrap;}
 .dcf-note {background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: var(--fs-sm); color: var(--text2); line-height: var(--lh-prose);}
@@ -647,8 +700,13 @@ figure.chart figcaption { font-size: 12px; color: var(--text3-ink); line-height:
 .flag-row {margin-top: 16px; padding: 12px 16px; background: rgba(184,112,112,.08); border: 1px solid rgba(184,112,112,.3); border-radius: 8px; font-size: var(--fs-sm); color: var(--text2);}
 .flag-row strong {color: var(--red);}
 .pgrid {display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0;}
+/* ⚠️ 全站默认左对齐，这是兜底声明；上面任何一处再写 center 都要有明确理由。 */
 body { text-align: left; }
 
+/* ⚠️ .pbox 不要整块 text-align:center。
+   它最初只用来放「标签＋大数字＋小注」的统计卡（.pl/.pv/.pn），居中是对的；
+   但后来它也被用作「本季必看／看穿」的长文容器，于是整段正文、表格、
+   列表全被居中，读起来极难。改为：容器左对齐，只有统计卡的三个子元素居中。 */
 .pbox {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 24px; text-align: left; box-shadow: 0 1px 4px var(--shadow);}
 .pbox .pl, .pbox .pv, .pbox .pn {text-align: left;}
 .pbox .pl {font-family: var(--font-sans); font-size: 11px; color: var(--text3-ink); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px;}
@@ -666,6 +724,11 @@ body { text-align: left; }
 .risk-card.r5::before {background: var(--red);}
 .risk-card h5 {font-size: 14px; margin-bottom: 6px; color: var(--text);}
 .risk-card p {font-size: var(--fs-sm); color: var(--text2); line-height: var(--lh-tight);}
+/* ⚠️ 此处原本混进了三条来自语料 @media(max-width:768px) 内的移动端规则
+   （.cgrid/.pgrid→1fr、.kpi-grid→1fr 1fr、.stock-snap→1fr 1fr）。
+   它们被抽取时丢掉了 @media 包裹，变成无条件规则且排在最后，
+   结果桌面端所有网格都塌成单列。已删除 —— 移动端由本表第 4、9 节的
+   @media(max-width:640px) 统一负责。抽取语料 CSS 时务必排除 @media 块内的规则。 */
 
 /* 骨架用到、但语料里没有现成规则的补充组件 */
 .note { font-size: var(--fs-xs); color: var(--text3-ink); line-height: var(--lh-tight); margin-top: 12px; }
@@ -705,6 +768,7 @@ body { text-align: left; }
               font-variant-numeric: tabular-nums; line-height: 1.3; }
 .snap-note  { font-family: var(--font-sans); font-size: 11px; color: var(--text3-ink); margin-top: 3px; }
 .sk-node rect { opacity: .9; }
+
 
 </style>
 </head>

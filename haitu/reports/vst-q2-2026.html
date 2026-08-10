@@ -1,0 +1,2153 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-08-07 · NYSE: VST Q2 2026 财报已于 2026-08-07 发布 -->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Vistra Corp. VST · Q2 2026 财报深度分析 · 海图夜读</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+
+<script>
+(function () {
+  try {
+    var t = localStorage.getItem('theme');
+    if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', t);
+  } catch (e) { document.documentElement.setAttribute('data-theme', 'light'); }
+})();
+</script>
+
+<link rel="canonical" href="https://haitu.jacexie.com/haitu/reports/vst-q2-2026.html">
+<meta name="description" content="把发电与售电捆在一起的美国独立电力商：4.4 万兆瓦机组、2026 年发电量已 100% 套保——报表利润随远期电价反向跳动，AI 电力的上行也被同一份套保锁在门外。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vistra Corp. VST · Q2 2026 财报深度分析 · 海图夜读">
+<meta property="og:description" content="把发电与售电捆在一起的美国独立电力商：4.4 万兆瓦机组、2026 年发电量已 100% 套保——报表利润随远期电价反向跳动，AI 电力的上行也被同一份套保锁在门外。">
+<meta property="og:url" content="https://haitu.jacexie.com/haitu/reports/vst-q2-2026.html">
+<meta name="twitter:card" content="summary">
+
+<script defer src="../assets/vendor/chart.umd.min.js"></script>
+
+<style>
+
+/* ── MORANDI PALETTE ── */
+:root {
+  /* Light (default) */
+  --bg:        #f5f0eb;
+  --bg2:       #ece6df;
+  --card:      #ffffff;
+  --card2:     #f8f5f1;
+  --border:    #d9d0c7;
+  --text:      #4a4340;
+  --text2:     #7a706a;
+  --text3:     #a89f98;
+  --accent:    #8a9a8e;   /* sage */
+  --accent2:   #7b8fa0;   /* muted blue */
+  --accent3:   #b08d7a;   /* dusty terracotta */
+  --rose:      #c09090;   /* dusty rose */
+  --gold:      #b9a06a;
+  --red:       #b87070;
+  --green:     #7a9a7a;
+  --shadow:    rgba(0,0,0,0.06);
+  --chart-grid:#e5ddd5;
+  /* ── ink 层：只用于文字，全部达 WCAG AA（装饰色仍用上面的原值）── */
+  --text3-ink:   #70665f;  /* 4.51:1 on --bg2（原 --text3 #a89f98 仅 2.60:1）*/
+  --accent3-ink: #7f6150;  /* 4.97:1 on --bg （原 --accent3 #b08d7a 仅 2.67:1）*/
+  --gold-ink:    #8a6d3b;  /* 原 --gold  #b9a06a 仅 2.53:1 */
+  --red-ink:     #a35555;  /* 原 --red   #b87070 仅 3.76:1 */
+  --green-ink:   #4a7057;  /* 原 --green #7a9a7a 仅 3.12:1 */
+  --accent2-ink: #5a7386;
+  --font-sans: system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-serif: Georgia, 'Noto Serif SC', 'PingFang SC', serif;
+
+  /* ── 排版标度 ────────────────────────────────────────────────
+     此前全站正文散落 8 档字号（11/12/12.5/13/14/14.5/15/16）与 5 种行高
+     （1.65/1.70/1.75/1.90/2.00），是逐处硬写累积出来的，没有体系。
+     收敛成 4 档字号 + 2 种行高，所有正文一律引用这里。 */
+  --fs-xs:   12px;    /* 注释、图注、页脚 */
+  --fs-sm:   13.5px;  /* 表格、卡片密排文字 */
+  --fs-base: 15px;    /* 正文 */
+  --fs-lg:   16.5px;  /* 夜读手记正文、导语 */
+
+  --lh-tight: 1.7;    /* 密排：表格、卡片、注释 */
+  --lh-prose: 1.85;   /* 正文段落 */
+
+  /* ⚠️ 中文行长上限。实测此前 .cmt 每行 73 字、.note 96 字 —— 中文超过
+     45 字，眼睛回扫时极易丢行，这是「看着累」的首要原因（比字号更关键）。
+     40em 在中文下约等于 40 字/行，落在 35–45 的舒适区间。
+     只约束纯文字块；表格与图表不受此限，仍占满容器宽度。 */
+  --measure: 40em;
+  --bar-h: 44px;
+}
+[data-theme="dark"] {
+  --text3-ink:   #a19991;
+  --accent3-ink: #c9a48e;
+  --gold-ink:    #c9b07a;
+  --red-ink:     #c08080;
+  --green-ink:   #8aaa8a;
+  --accent2-ink: #8fabbf;
+  --bg:        #1e1c1a;
+  --bg2:       #28251f;
+  --card:      #2e2a25;
+  --card2:     #363230;
+  --border:    #4a4540;
+  --text:      #d4ccc4;
+  --text2:     #a09890;
+  --text3:     #706860;
+  --accent:    #8a9a8e;
+  --accent2:   #8fabbf;
+  --accent3:   #c9a48e;
+  --rose:      #c09090;
+  --gold:      #c9b07a;
+  --red:       #c08080;
+  --green:     #8aaa8a;
+  --shadow:    rgba(0,0,0,0.3);
+  --chart-grid:#3e3a35;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-serif);
+  line-height: var(--lh-prose);
+  font-size: var(--fs-base);
+  transition: background .35s, color .35s;
+}
+a { color: var(--accent2); text-decoration: none; }
+
+/* ── THEME TOGGLE ── */
+.theme-bar {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 8px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  transition: background .35s;
+}
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; text-decoration: none; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: var(--font-sans); font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; text-decoration: none; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; color: var(--text2);
+}
+.toggle-switch {
+  appearance: none; -webkit-appearance: none; border: 0; padding: 0; margin: 0;
+  position: relative;
+  width: 44px; height: 22px;
+  background: var(--border);
+  border-radius: 11px;
+  cursor: pointer;
+  transition: background .3s;
+}
+.toggle-switch::after {
+  content: '';
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 18px; height: 18px;
+  background: var(--card);
+  border-radius: 50%;
+  transition: transform .3s;
+  box-shadow: 0 1px 3px rgba(0,0,0,.15);
+}
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+
+/* ── HERO ── */
+.hero {
+  padding: 48px 24px 36px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+.hero-tag {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 3px 14px;
+  border-radius: 20px;
+  margin-bottom: 18px;
+}
+.hero h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills {
+  display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;
+}
+.pill {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 6px 18px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--text2);
+  box-shadow: 0 1px 3px var(--shadow);
+}
+.pill strong { color: var(--text); }
+
+/* ── LAYOUT ── */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle {
+  font-size: 18px; font-weight: 700; color: var(--accent3-ink);
+  margin-bottom: 20px; letter-spacing: 0.5px;
+  display: flex; align-items: center; gap: 10px;
+}
+.stitle::before {
+  content: ''; display: block; width: 4px; height: 20px;
+  background: var(--accent3); border-radius: 2px;
+}
+
+/* ── KPI ── */
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.kpi {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 16px 18px;
+  box-shadow: 0 1px 4px var(--shadow);
+  transition: background .35s;
+}
+.kpi-l { font-family: var(--font-sans); font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+/* KPI 卡的第三行「注解」。此前没有这条规则，写报告的人只能借 .kpi-l（全大写 +
+   字间距，中文读着别扭）或干脆裸写 —— rkt 那份 12 张卡的注解因此按正文字号渲染，
+   把卡片撑得比数值还抢眼。与 .snap-note 同一套视觉语言，多行中文加行高。 */
+.kpi-n { font-family: var(--font-sans); font-size: 11px; color: var(--text3-ink); line-height: 1.5; }
+.badge {
+  display: inline-block; font-family: var(--font-sans);
+  font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px;
+}
+.up   { background: rgba(122,154,122,.15); color: var(--green); }
+.dn   { background: rgba(184,112,112,.15); color: var(--red); }
+.nt   { background: rgba(123,143,160,.15); color: var(--accent2); }
+
+/* ── TABLE ── */
+.tbl-wrap {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow);
+}
+.tbl { width: 100%; border-collapse: collapse; font-family: var(--font-sans); font-size: var(--fs-sm);
+       font-variant-numeric: tabular-nums; }
+.tbl th {
+  background: var(--card2); color: var(--text3-ink); font-size: 11px;
+  letter-spacing: .5px; text-transform: uppercase;
+  padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border);
+}
+/* ⚠️ 表格一律左对齐，包括数字列。
+   数字右对齐是会计惯例（个位对齐便于比大小），但本站表格右侧混着「3.4×」
+   「126%」「宽」这类文字，右对齐后同一列里文字与数字各自贴右、参差不齐。
+   全列左对齐 + tabular-nums：等位数的数字仍然逐位成列，而文字不再乱跳。 */
+.tbl td { padding: 11px 16px; border-bottom: 1px solid var(--border); text-align: left; line-height: var(--lh-tight); }
+.tbl td:first-child { color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); }
+
+/* ── CHARTS ── */
+/* ⚠️ 轨道必须写 minmax(0,1fr) 而不是 1fr。
+   grid 子项默认 min-width:auto，canvas 与桑基 SVG 的固有宽度会把轨道撑开，
+   实测在 375px 下 .ccard 被撑到 568px，导致整页横向滚动。
+   .ccard 的 min-width:0 是同一问题的第二道保险。 */
+.cgrid  { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-bottom: 16px; }
+.cgrid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-bottom: 16px; }
+.ccard, .kpi, .moat-card, .risk-card, .score-card, .snap-item, .pbox { min-width: 0; }
+.ccard {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow);
+}
+.ctitle { font-family: var(--font-sans); font-size: 12px; color: var(--text3-ink); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 230px; }
+
+/* ── QUOTES ── */
+.qgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.qcard {
+  background: var(--card); border: 1px solid var(--border);
+  border-left: 4px solid var(--rose);
+  border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow);
+}
+.qname { font-weight: 700; color: var(--accent3); margin-bottom: 2px; }
+.qrole { font-family: var(--font-sans); font-size: 11px; color: var(--text3); margin-bottom: 10px; }
+.qtext { font-style: italic; font-size: 13.5px; color: var(--text); line-height: 1.8; }
+
+/* ── ANALYSIS ── */
+.agrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+.acard {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow);
+}
+.acard h4 { font-size: 13px; color: var(--accent2); margin-bottom: 10px; text-transform: uppercase; letter-spacing: .5px; }
+.acard ul { padding-left: 16px; }
+.acard li { margin-bottom: 5px; font-size: 13px; }
+
+/* ── BUFFETT SCORE ── */
+.bscore {
+  display: flex; align-items: center; gap: 16px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px 22px; margin-bottom: 12px;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.circle {
+  width: 62px; height: 62px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 18px; flex-shrink: 0;
+  border: 3px solid; font-family: var(--font-sans);
+}
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 3px; }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+/* ── VERDICT ── */
+.verdict {
+  background: var(--card2); border: 2px solid var(--accent);
+  border-radius: 10px; padding: 26px 28px; margin-bottom: 16px;
+}
+.verdict-t { font-size: 17px; font-weight: 700; color: var(--accent); margin-bottom: 10px; }
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 14px; text-align: left;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.pbox .pl { font-family: var(--font-sans); font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.pbox .pv { font-family: var(--font-sans); font-size: 26px; font-weight: 800; }
+.pbox .pn { font-size: 11px; color: var(--text3); margin-top: 3px; }
+.pc { color: var(--text2); } .pf { color: var(--gold); } .ps { color: var(--green); }
+
+/* ── 周期切换（三表图）── */
+.period-toggle {
+  display: inline-flex; gap: 0; margin-bottom: 16px;
+  border: 1px solid var(--border); border-radius: 8px; overflow: hidden;
+  background: var(--card);
+}
+.period-btn {
+  appearance: none; -webkit-appearance: none; border: 0; margin: 0;
+  padding: 7px 20px; cursor: pointer;
+  font-family: var(--font-sans); font-size: var(--fs-xs);
+  letter-spacing: .5px; color: var(--text3-ink);
+  background: transparent; transition: background .2s, color .2s;
+  /* 44px 触摸目标：窄屏上两个按钮挨得很近，小于这个高度容易点错 */
+  min-height: 34px;
+}
+.period-btn + .period-btn { border-left: 1px solid var(--border); }
+.period-btn:hover { color: var(--text); background: var(--card2); }
+.period-btn.is-on { background: var(--accent); color: #fff; font-weight: 600; }
+.period-btn:focus-visible { outline: 2px solid var(--accent2); outline-offset: -2px; }
+[data-theme="dark"] .period-btn.is-on { color: var(--bg); }
+
+/* ── SANKEY ── */
+#sankey { width: 100%; height: 460px; }
+
+/* ── COMMENTARY ── */
+.cmt {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 26px 28px; line-height: var(--lh-prose);
+  font-size: var(--fs-base);
+  box-shadow: 0 1px 4px var(--shadow);
+}
+/* 段间距取 0.9 行。此前是 14px 对 27.55px 的行高＝0.51 行，
+   段与段之间比行与行之间只宽一点点，整块糊成一片，读者找不到段落边界。 */
+.cmt p { margin-bottom: calc(var(--lh-prose) * 0.9em); }
+.cmt p:last-child { margin-bottom: 0; }
+
+/* ── 行长约束 ──
+   只作用于纯文字块。表格（.tbl-wrap）、图表（figure/.cgrid）与数据表
+   保持容器全宽，不受 --measure 限制 —— 财报的表格需要宽度，正文不需要。
+
+   ⚠️ 只收窄「流动的正文」，不收窄带背景的卡片。把 .ec-item / .risk-card
+   这类卡片本身缩到 40em，会在右侧留下一大块空白，反而更难看 —— 它们本来
+   就只有两三行，长行的代价远小于流动长文。 */
+/* ⚠️ 行长约束必须覆盖「所有流动的正文」，不能只覆盖 .cmt 里的那些。
+   实测教训：模块正文的 <p>／<ul> 是直接挂在 <section> 下的，不在 .cmt 内，
+   于是上一版把它们整个漏掉了 —— 06127 那份报告实测 37 段模块正文平均每行
+   71 个中文字、列表项 90 字，而同一页 .cmt 里的正文是 35 字。
+   中文一行超过 45 字，回扫时极易丢行，这就是「高宽屏读起来累」的直接原因。 */
+.section > p, .section > ul, .section > ol,
+.section > blockquote,
+.cmt > p, .cmt > ul, .cmt > ol, .cmt > blockquote,
+.haitu-essay-body > p, .haitu-essay-body > ul,
+.haitu-essay-body > ol, .haitu-essay-body > blockquote {
+  max-width: var(--measure);           /* 15px × 40em ≈ 600px，约 40 字/行 */
+}
+/* ⚠️ 手记里的 ul／blockquote 一定要跟着列进来。上一版只写了 .haitu-essay-body > p，
+   于是 VST 报告实测：手记正文 40 字/行，而同一块里的列表 66 字/行 ——
+   页末手记本来就是整页最长的一段连续阅读，漏掉任何一种块级元素都会被读者撞上。 */
+
+/* 行内代码：报告里用来引 XBRL 标签名、字段名、检索词。
+   ⚠️ overflow-wrap: anywhere 不是可选项。XBRL 标签是 CamelCase 长串、没有空格也没有连字符，
+   浏览器找不到任何断点 —— 实测 StockRepurchasedAndRetiredDuringPeriodShares 单个词就有 396px，
+   在 375px 视口下把整页撑出 64px 横向滚动。 */
+code {
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace);
+  font-size: 0.88em;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  background: var(--card2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+/* .ec-item 是带背景的卡片，缩到 40em 会在右侧留下大片空白；
+   但满宽 1152px 时实测仍有 48 字/行，略超舒适上限，折中收到 60em（≈36 字）。 */
+.ec-item { max-width: 60em; }
+.note, p.note {
+  /* 注释是 12px 小字，行长可略放宽：12px × 52em ≈ 624px，约 52 字，
+     仍远好于此前的 96 字，且与正文块的右边界大致齐平，视觉上不突兀。 */
+  max-width: 52em;
+}
+.cmt > .tbl-wrap, .cmt > figure, .cmt > .cgrid { max-width: none; }
+/* 避免段末孤字（中文里一行只剩一两个字特别难看）。
+   Safari/Firefox 不支持时会自动忽略，属渐进增强。 */
+.cmt p, .haitu-essay-body p, .note, .ec-item { text-wrap: pretty; }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--card2); border-top: 1px solid var(--border);
+  padding: 24px; text-align: left; color: var(--text3); font-size: 12px;
+  margin-top: 40px;
+}
+
+@media (max-width: 768px) {
+  .cgrid,.cgrid3,.qgrid,.agrid,.pgrid { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 22px; }
+  .kpi-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ── HAITU SIGNATURE BLOCKS (页首短评 + 页末长评) ── */
+.haitu-quip {
+  display: flex; align-items: center; gap: 18px;
+  background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red);
+  border-radius: 12px; padding: 18px 24px; margin: 24px 0;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.haitu-avatar-sm {
+  width: 64px; height: 64px; border-radius: 50%;
+  object-fit: cover; flex-shrink: 0;
+  border: 2px solid var(--border); background: var(--red);
+  box-shadow: 0 2px 8px rgba(184,112,112,0.18);
+}
+.haitu-quote { flex: 1; }
+.haitu-name {
+  font-family: var(--font-sans);
+  font-size: 12px; font-weight: 700; letter-spacing: 1.5px;
+  color: var(--red-ink); text-transform: uppercase; margin-bottom: 4px;
+}
+.haitu-portrait {
+  font-size: 15px; line-height: 1.65; color: var(--text);
+  margin-bottom: 6px; font-weight: 600;
+}
+.haitu-rating-line {
+  font-size: 13px; color: var(--text2);
+  font-family: var(--font-sans);
+}
+.rating-badge {
+  display: inline-block; padding: 2px 12px; border-radius: 12px;
+  font-weight: 700; font-size: 13px; letter-spacing: 0.5px;
+  margin-left: 4px;
+}
+.rating-strong-buy { background: rgba(122,154,122,.25); color: var(--green); }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+.rating-cond-buy { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-hold { background: rgba(123,143,160,.18); color: var(--accent2); }
+.rating-sell { background: rgba(184,112,112,.18); color: var(--red); }
+.rating-strong-sell { background: rgba(184,112,112,.28); color: var(--red); }
+
+.haitu-essay {
+  background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red);
+  border-radius: 12px; padding: 28px 32px; margin: 24px 0;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.haitu-essay-header {
+  display: flex; align-items: center; gap: 18px;
+  padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px;
+}
+.haitu-avatar-lg {
+  width: 110px; height: 110px; border-radius: 50%;
+  object-fit: cover; flex-shrink: 0;
+  border: 3px solid var(--border); background: var(--red);
+  box-shadow: 0 4px 14px rgba(184,112,112,0.22);
+}
+.haitu-name-lg {
+  font-family: 'Georgia', 'Noto Serif SC', serif;
+  font-size: 28px; font-weight: 700; color: var(--text);
+  letter-spacing: 1px; margin-bottom: 4px;
+}
+.haitu-essay-tag {
+  font-family: var(--font-sans);
+  font-size: 12px; color: var(--text3); letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+.haitu-essay-body {
+  font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', serif;
+  font-size: var(--fs-lg); line-height: var(--lh-prose); color: var(--text);
+}
+.haitu-essay-body p { margin-bottom: calc(var(--lh-prose) * 0.85em); }
+.haitu-essay-body p:first-child {
+  font-size: 18px; font-style: italic; color: var(--text2);
+}
+.haitu-essay-body p:last-child {
+  margin-top: 22px; padding-top: 14px;
+  border-top: 1px solid var(--border);
+  font-size: var(--fs-xs); color: var(--text3); font-style: italic;
+}
+.haitu-sign {
+  text-align: left; margin-top: 14px;
+  font-family: 'Georgia', serif; font-size: 14px;
+  color: var(--text2); font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .haitu-quip { flex-direction: column; text-align: left; }
+  .haitu-essay-header { flex-direction: column; text-align: left; }
+  .haitu-avatar-sm { width: 80px; height: 80px; }
+  .haitu-avatar-lg { width: 90px; height: 90px; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   海图 v2 追加规则 —— 修 103 份存量实测出的问题，勿删勿改顺序
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── 1. 锚点落点：一行同时修好 TOC 跳转 / 深链 / Ctrl+F 定位 / :target ──
+   没有这条，所有跳转都会落在 sticky 顶栏底下被遮住 */
+.section { scroll-margin-top: calc(var(--bar-h) + 12px); }
+
+/* h2.stitle 必须显式定字号，否则被 UA 默认样式撑成 32px 巨标题 */
+h2.stitle { font-size: 18px; font-weight: 700; margin: 0 0 20px; }
+
+/* 章节深链锚点：桌面 hover 显形，触屏常显 */
+.anchor {
+  margin-left: 8px; font-size: 13px; color: var(--text3-ink);
+  text-decoration: none; opacity: 0; transition: opacity .2s;
+}
+.stitle:hover .anchor, .anchor:focus-visible { opacity: 1; }
+@media (hover: none) { .anchor { opacity: .35; } }
+
+/* ── 2. 评级徽章：由 data-rating 派生，作者不再手写 class ──
+   实测存量 .rating-hold 在 63 份是金色、30 份是蓝色 —— 这套选择器根除该分歧 */
+.rating-badge[data-rating="强力买入"] { background: rgba(122,154,122,.25); color: var(--green-ink); }
+.rating-badge[data-rating="买入"]     { background: rgba(122,154,122,.18); color: var(--green-ink); }
+.rating-badge[data-rating="有条件买入"]{ background: rgba(185,160,106,.18); color: var(--gold-ink); }
+.rating-badge[data-rating="持有观望"] { background: rgba(123,143,160,.18); color: var(--accent2-ink); }
+.rating-badge[data-rating="卖出"]     { background: rgba(184,112,112,.18); color: var(--red-ink); }
+.rating-badge[data-rating="强烈卖出"] { background: rgba(184,112,112,.28); color: var(--red-ink); }
+
+/* 涨跌不能只靠色相（色盲）—— 文字里必须自带 +/- 号，这里只负责配色 */
+.up, .pos { color: var(--green-ink); }
+.dn, .neg { color: var(--red-ink); }
+
+/* ── 3. 窄屏表格：粘性首列 + 右侧滚动阴影提示 ──
+   实测 375px 下 12 张表有 6 张横向溢出，且无任何可滚动的视觉线索 */
+.tbl-wrap {
+  background-image: linear-gradient(to right, var(--card), var(--card)),
+                    linear-gradient(to right, rgba(0,0,0,.10), rgba(0,0,0,0));
+  background-position: right center, right center;
+  background-repeat: no-repeat;
+  background-size: 24px 100%, 12px 100%;
+  background-attachment: local, scroll;
+}
+@media (max-width: 640px) {
+  /* border-collapse:collapse 下 sticky 单元格的边框会丢，用 box-shadow 补回 */
+  .tbl { border-collapse: separate; border-spacing: 0; }
+  .tbl :is(th, td) { border-bottom: 1px solid var(--border); }
+  .tbl :is(th, td):first-child {
+    position: sticky; left: 0; z-index: 1;
+    background: var(--card); box-shadow: 1px 0 0 var(--border);
+  }
+  .tbl th:first-child { background: var(--card2); }
+}
+
+/* ── 4. 移动端：顶栏必须能换行（实测四元素已折行重叠）── */
+.theme-bar { flex-wrap: wrap; row-gap: 6px; }
+@media (max-width: 420px) { .theme-bar .xueqiu-link { display: none; } }
+
+@media (max-width: 640px) {
+  .container { padding: 0 14px; }          /* 24px 在 375px 上吃掉 12.8% 视口 */
+  body { font-size: 15.5px; }              /* 14.5px 中文长文在手机上偏小 */
+  .cwrap { height: 200px; }
+  #sankey { height: 360px !important; }    /* 480px 挤在 289px 宽里不可读 */
+  .cgrid, .cgrid3, .pgrid { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* 触控目标 ≥44px。用一个不可见的 ::before 撑开命中区，
+   开关本身仍是 44×22 的滑块外观。
+   ⚠️ 不要改 .toggle-switch 的 height/padding 来凑 44px —— 实测那样做会让
+   border-radius 与 ::after 滑块的定位一起错位，开关变成一个大圆角方块。
+   ⚠️ 条件必须同时含宽度 —— 只写 (hover:none) 时窄屏桌面实测仍是 22px。 */
+@media (max-width: 640px), (hover: none) {
+  .toggle-switch::before {
+    content: ''; position: absolute; left: 0; right: 0;
+    top: 50%; transform: translateY(-50%); height: 44px;
+  }
+}
+
+/* ── 5. prefers-reduced-motion ──
+   全语料 103/103 有 scroll-behavior:smooth 且零保护。加了目录之后，
+   一次跳转要跨 4 万像素、持续数秒，前庭敏感者会难受 */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important; animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+}
+
+/* ── 6. 焦点可见（全语料 0 个 :focus-visible 样式）── */
+:focus-visible { outline: 2px solid var(--accent3-ink); outline-offset: 2px; }
+
+/* ── 7. 图表无障碍降级容器 ── */
+figure.chart { margin: 0; }
+figure.chart figcaption { font-size: 12px; color: var(--text3-ink); line-height: 1.6; margin-top: 8px; }
+.chart-data { font-size: 12px; margin-top: 8px; }
+.chart-data summary { cursor: pointer; color: var(--text3-ink); }
+
+/* ── 8. shell 新增组件（skip link / 结论跳转带 / 顶栏右侧 / 屏幕阅读器专用）── */
+
+/* 跳转到正文：平时移出视口，聚焦时才出现。
+   ⚠️ 不能用 display:none —— 那样键盘也聚焦不到，等于没有 */
+.skip {
+  position: absolute; left: -9999px; top: 0;
+  background: var(--card); color: var(--accent3-ink);
+  padding: 8px 14px; border-radius: 0 0 8px 0; z-index: 200;
+  font-size: 13px; text-decoration: none;
+}
+.skip:focus { left: 0; }
+
+/* 只给屏幕阅读器：essay 一节的标题不需要视觉呈现（.haitu-essay 自带头部） */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+.theme-bar-right { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+
+/* 结论跳转带：读者看完评级后一步到证据 */
+.quip-jump { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.quip-jump a {
+  font-family: var(--font-sans); font-size: 12px; line-height: 1;
+  padding: 7px 12px; border-radius: 999px;
+  border: 1px solid var(--border); background: var(--card2);
+  color: var(--accent3-ink); text-decoration: none;
+  transition: border-color .2s, background .2s;
+}
+.quip-jump a:hover { border-color: var(--accent3); background: var(--card); }
+/* 触控目标 ≥44px。
+   ⚠️ 不能只用 @media (hover:none) —— 窄屏但支持 hover 的场景（缩小的桌面窗口、
+   带触控板的二合一设备）拿不到放大，实测那种情况下只有 28px。宽度与指针两个条件都要给。 */
+@media (max-width: 640px), (hover: none) {
+  /* 用 min-height 而不是加 padding —— padding 要靠字体行高凑够 44px，
+     换字体或改字号就又不达标了（实测 padding:13px 只得到 40px）。 */
+  .quip-jump a { min-height: 44px; padding: 0 16px; display: inline-flex; align-items: center; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   9. 报告组件（快照 / KPI / 护城河 / 风险 / 评分卡 / 电话会 / 桑基）
+   来源：现有报告语料中已验证的组件规则，已套用本表的字体栈与 ink 对比度修正。
+   ⚠️ 这一节必须与 body-skeleton.html 的类名保持同步 —— 骨架里出现的
+   每个类都要在这里有定义，否则章节会退化成无样式的纯文本流。
+   ══════════════════════════════════════════════════════════════ */
+.hero-pills {display: flex; justify-content: flex-start; gap: 16px; flex-wrap: wrap;}
+.pill {background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: var(--font-sans); font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow);}
+.pill strong {color: var(--text);}
+.stock-snap {background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px;}
+.snap-item {text-align: left;}
+.snap-label {font-family: var(--font-sans); font-size: 10px; color: var(--text3-ink); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px;}
+.kpi-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px;}
+.kpi {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow);}
+.moat-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px;}
+.moat-card {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); border-left: 4px solid var(--accent);}
+.moat-card.wide {border-left-color: var(--green);}
+.moat-card.narrow {border-left-color: var(--gold);}
+.moat-card.none {border-left-color: var(--red);}
+.moat-card h5 {font-size: 13px; color: var(--text); margin-bottom: 6px;}
+.moat-card .moat-rate {font-family: var(--font-sans); font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px;}
+.moat-card.wide .moat-rate {background: rgba(122,154,122,.18); color: var(--green);}
+.moat-card.narrow .moat-rate {background: rgba(185,160,106,.18); color: var(--gold);}
+.moat-card.none .moat-rate {background: rgba(184,112,112,.18); color: var(--red);}
+.moat-card p {font-size: var(--fs-sm); color: var(--text2); line-height: var(--lh-tight);}
+/* ⚠️ .ec-item 必须是 block，不能是 flex。
+   语料里它只装「徽章 + 一句短语」，所以 flex 没出事；但正文里一旦出现
+   <strong>，每个 <strong> 都会变成独立 flex item，默认 min-width:auto 不收缩，
+   实测在 375px 下把 347px 的容器撑到 478px，导致整页横向滚动。
+   改为 block + 内联徽章：徽章仍在句首，正文正常折行环绕。
+   这与 .cgrid 必须写 minmax(0,1fr) 是同一类问题——flex/grid 子项默认不收缩。 */
+.ec-item {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: block; box-shadow: 0 1px 3px var(--shadow); line-height: var(--lh-prose); font-size: var(--fs-base);}
+.ec-badge {display: inline-block; vertical-align: baseline; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-right: 10px; font-family: var(--font-sans); white-space: nowrap;}
+.dcf-note {background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: var(--fs-sm); color: var(--text2); line-height: var(--lh-prose);}
+.dcf-note strong {color: var(--text);}
+.scorecard {background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow);}
+.score-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px;}
+.score-card {background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px;}
+.score-letter {width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-sans); font-weight: 800; font-size: 22px; flex-shrink: 0; border: 3px solid;}
+.flag-row {margin-top: 16px; padding: 12px 16px; background: rgba(184,112,112,.08); border: 1px solid rgba(184,112,112,.3); border-radius: 8px; font-size: var(--fs-sm); color: var(--text2);}
+.flag-row strong {color: var(--red);}
+.pgrid {display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0;}
+/* ⚠️ 全站默认左对齐，这是兜底声明；上面任何一处再写 center 都要有明确理由。 */
+body { text-align: left; }
+
+/* ⚠️ .pbox 不要整块 text-align:center。
+   它最初只用来放「标签＋大数字＋小注」的统计卡（.pl/.pv/.pn），居中是对的；
+   但后来它也被用作「本季必看／看穿」的长文容器，于是整段正文、表格、
+   列表全被居中，读起来极难。改为：容器左对齐，只有统计卡的三个子元素居中。 */
+.pbox {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 24px; text-align: left; box-shadow: 0 1px 4px var(--shadow);}
+.pbox .pl, .pbox .pv, .pbox .pn {text-align: left;}
+.pbox .pl {font-family: var(--font-sans); font-size: 11px; color: var(--text3-ink); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px;}
+.pbox .pv {font-family: var(--font-sans); font-size: 28px; font-weight: 800; margin-bottom: 5px;}
+.pbox .pn {font-size: var(--fs-xs); color: var(--text3-ink); line-height: var(--lh-tight);}
+.pbox > h4 {font-size: var(--fs-lg); color: var(--accent3-ink); margin-bottom: 14px; line-height: 1.5;}
+.pbox + .pbox {margin-top: 18px;}
+.risk-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px;}
+.risk-card {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); position: relative; overflow: hidden;}
+.risk-card::before {content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent);}
+.risk-card.r1::before {background: var(--green);}
+.risk-card.r2::before {background: rgba(122,154,122,.6);}
+.risk-card.r3::before {background: var(--gold);}
+.risk-card.r4::before {background: var(--rose);}
+.risk-card.r5::before {background: var(--red);}
+.risk-card h5 {font-size: 14px; margin-bottom: 6px; color: var(--text);}
+.risk-card p {font-size: var(--fs-sm); color: var(--text2); line-height: var(--lh-tight);}
+/* ⚠️ 此处原本混进了三条来自语料 @media(max-width:768px) 内的移动端规则
+   （.cgrid/.pgrid→1fr、.kpi-grid→1fr 1fr、.stock-snap→1fr 1fr）。
+   它们被抽取时丢掉了 @media 包裹，变成无条件规则且排在最后，
+   结果桌面端所有网格都塌成单列。已删除 —— 移动端由本表第 4、9 节的
+   @media(max-width:640px) 统一负责。抽取语料 CSS 时务必排除 @media 块内的规则。 */
+
+/* 骨架用到、但语料里没有现成规则的补充组件 */
+.note { font-size: var(--fs-xs); color: var(--text3-ink); line-height: var(--lh-tight); margin-top: 12px; }
+.lead { font-size: 16px; font-weight: 600; line-height: 1.8; margin-bottom: 14px; }
+.haitu-disc { font-size: 12px; color: var(--text3-ink); line-height: 1.7; margin-top: 18px;
+              padding-top: 14px; border-top: 1px solid var(--border); }
+.bscore { background: var(--card2); border: 1px solid var(--border); border-radius: 10px;
+          padding: 16px 20px; margin: 16px 0; }
+.bscore h4 { font-family: var(--font-sans); font-size: 14px; color: var(--accent3-ink); margin: 0 0 6px; }
+.bscore p { margin: 0; font-size: 14px; }
+
+/* 桑基 SVG：颜色与线宽在标记里给，这里只管描边端点与文字 */
+#sankey { width: 100%; height: auto; }
+.sk-flow path { fill: none; opacity: .45; stroke-linecap: butt; }
+.sk-t .sk-lab { font-family: var(--font-sans); font-size: 12px; fill: var(--text2); }
+.sk-t .sk-num { font-family: var(--font-sans); font-size: 13px; font-weight: 700; fill: var(--text);
+                font-variant-numeric: tabular-nums; }
+.sk-t .warn   { fill: var(--red-ink); }
+
+@media (max-width: 640px) {
+  .stock-snap { grid-template-columns: 1fr 1fr; }
+  .kpi-grid   { grid-template-columns: 1fr 1fr; }
+  .moat-grid, .risk-grid, .score-grid, .pgrid { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* 修饰类：评分等级 / 电话会情绪 / 快照数值。文字色一律走 ink 层。 */
+.score-letter.s-a  { color: var(--green-ink);   border-color: var(--green);   background: rgba(122,154,122,.12); }
+.score-letter.s-bp { color: var(--gold-ink);    border-color: var(--gold);    background: rgba(185,160,106,.12); }
+.score-letter.s-b  { color: var(--accent2-ink); border-color: var(--accent2); background: rgba(123,143,160,.12); }
+.score-letter.s-c  { color: var(--red-ink);     border-color: var(--red);     background: rgba(184,112,112,.12); }
+
+.ec-badge.ec-bull { background: rgba(122,154,122,.18); color: var(--green-ink); }
+.ec-badge.ec-bear { background: rgba(184,112,112,.18); color: var(--red-ink); }
+.ec-badge.ec-neut { background: rgba(123,143,160,.18); color: var(--accent2-ink); }
+
+.snap-value { font-family: var(--font-sans); font-size: 19px; font-weight: 700; color: var(--text);
+              font-variant-numeric: tabular-nums; line-height: 1.3; }
+.snap-note  { font-family: var(--font-sans); font-size: 11px; color: var(--text3-ink); margin-top: 3px; }
+.sk-node rect { opacity: .9; }
+
+
+
+</style>
+</head>
+<body>
+
+<a class="skip" href="#kpi">跳到正文</a>
+
+<!-- ── 顶栏 ── -->
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/VST" target="_blank" rel="noopener">📊 雪球 VST</a>
+  </div>
+  <div class="theme-bar-right">
+    <span>☀️ 浅色</span>
+    <button type="button" class="toggle-switch" id="themeBtn"
+            aria-pressed="false" aria-label="切换深色模式" onclick="toggleTheme()"></button>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-tag">Q2 2026 财报发布 · 2026-08-07 ｜ 海图研判 · 2026-08-10</div>
+  <h1>Vistra Corp. 维斯特拉 VST · Q2 2026 财报深度分析</h1>
+  <div class="hero-sub">NYSE: VST ｜ 财季截至 2026-06-30 ｜ 价值投资视角</div>
+  <div class="hero-pills">
+    <span class="pill">股价 US$140.59</span>
+    <span class="pill">市值 US$472.4 亿</span>
+    <span class="pill">TTM 营收 US$192.1 亿</span>
+    <span class="pill">TTM EPS US$6.03</span>
+    <span class="pill">TTM 市盈率 23.3×</span>
+    <span class="pill">前瞻市盈率 15.0×</span>
+  </div>
+</div>
+
+<div class="container">
+  <div class="haitu-quip">
+    <div class="haitu-quote">
+      <div class="haitu-portrait">把发电与售电捆在一起的美国独立电力商：4.4 万兆瓦机组、2026 年发电量已 100% 套保——报表利润随远期电价反向跳动，AI 电力的上行也被同一份套保锁在门外。</div>
+      <div class="haitu-rating-line">
+        评级：<span class="rating-badge" data-rating="持有观望">持有观望</span>
+        · 12 个月目标价 US$146.50 · 调整后 EBITDA 同比 +31% 与 GAAP 净利同比 −6.7% 是同一件事：一笔 4.72 亿美元的未实现套保损失
+      </div>
+      <div class="quip-jump" role="group" aria-label="快速跳转">
+        <a href="#m13">评分卡与决策</a>
+        <a href="#m7">目标价怎么算出来的</a>
+        <a href="#m11">风险矩阵</a>
+        <a href="#m4">护城河</a>
+        <a href="#essay">夜读手记</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ══ 前置章节 ══ -->
+
+<section class="section" id="snapshot" aria-labelledby="snapshot-t">
+  <h2 class="stitle" id="snapshot-t">市场数据快照（2026-08-07 收盘）<a class="anchor" href="#snapshot" aria-label="本节链接">#</a></h2>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">股价</div><div class="snap-value">US$140.59</div><div class="snap-note">2026-08-07 收盘</div></div>
+    <div class="snap-item"><div class="snap-label">市值</div><div class="snap-value">US$472.4 亿</div><div class="snap-note">3.360 亿股在外</div></div>
+    <div class="snap-item"><div class="snap-label">企业价值</div><div class="snap-value">US$696.3 亿</div><div class="snap-note">含优先股 24.76 亿</div></div>
+    <div class="snap-item"><div class="snap-label">TTM 市盈率</div><div class="snap-value">23.3×</div><div class="snap-note">EPS US$6.03</div></div>
+    <div class="snap-item"><div class="snap-label">前瞻市盈率</div><div class="snap-value">15.0×</div><div class="snap-note">2026 共识 EPS US$9.06</div></div>
+    <div class="snap-item"><div class="snap-label">EV / 2026E EBITDA</div><div class="snap-value">9.67×</div><div class="snap-note">指引中值 72.0 亿</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间</div><div class="snap-value">132.66 – 219.82</div><div class="snap-note">高点 2025-09-22，现价距高点 −36.0%</div></div>
+    <div class="snap-item"><div class="snap-label">50 / 200 日均线</div><div class="snap-value">155.10 / 162.29</div><div class="snap-note">价在两线之下</div></div>
+    <div class="snap-item"><div class="snap-label">股息率</div><div class="snap-value">0.65%</div><div class="snap-note">年化 US$0.92，派息率 15%</div></div>
+    <div class="snap-item"><div class="snap-label">TTM 自由现金流</div><div class="snap-value">US$22.55 亿</div><div class="snap-note">收益率 4.77%</div></div>
+    <div class="snap-item"><div class="snap-label">净债务</div><div class="snap-value">US$199.1 亿</div><div class="snap-note">债务/权益 3.67×</div></div>
+    <div class="snap-item"><div class="snap-label">Beta（5 年）</div><div class="snap-value">1.43</div><div class="snap-note">52 周 −30.0%</div></div>
+  </div>
+  <p class="note">口径说明：企业价值按「市值 ＋ 总债务 205.70 亿 − 现金 6.58 亿 ＋ 优先股账面 24.76 亿」计算。多数数据商的 EV 不含优先股（得 671.5 亿），但 Vistra 的三档永续优先股（A 类 8.0%、B 类 7.0%、C 类 8.875%）每年吃掉 1.92 亿美元现金股息，对普通股股东是实打实的求偿权，本报告一律计入。</p>
+</section>
+
+<section class="section" id="kpi" aria-labelledby="kpi-t">
+  <h2 class="stitle" id="kpi-t">Q2 2026 核心业绩<a class="anchor" href="#kpi" aria-label="本节链接">#</a></h2>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">营业收入</div><div class="kpi-v">US$40.17 亿</div><div class="snap-note">同比 −5.5%（Q2 2025: 42.50 亿）</div></div>
+    <div class="kpi"><div class="kpi-l">持续经营调整后 EBITDA</div><div class="kpi-v">US$17.67 亿</div><div class="snap-note">同比 <strong>+31.0%</strong>（13.49 亿）</div></div>
+    <div class="kpi"><div class="kpi-l">GAAP 归属净利润</div><div class="kpi-v">US$3.05 亿</div><div class="snap-note">同比 −6.7%（3.27 亿）</div></div>
+    <div class="kpi"><div class="kpi-l">未实现套保损失</div><div class="kpi-v">US$4.72 亿</div><div class="snap-note">Q2 2025 为收益 0.16 亿，摆动 4.88 亿</div></div>
+    <div class="kpi"><div class="kpi-l">归属普通股净利</div><div class="kpi-v">US$2.58 亿</div><div class="snap-note">摊薄 EPS US$0.76</div></div>
+    <div class="kpi"><div class="kpi-l">营业利润</div><div class="kpi-v">US$5.53 亿</div><div class="snap-note">利润率 13.8%（上季 26.6%）</div></div>
+    <div class="kpi"><div class="kpi-l">经营现金流</div><div class="kpi-v">US$10.23 亿</div><div class="snap-note">上半年累计 22.22 亿（+89.8%）</div></div>
+    <div class="kpi"><div class="kpi-l">资本开支</div><div class="kpi-v">US$6.89 亿</div><div class="snap-note">上半年 15.72 亿，已超全年维护性指引</div></div>
+    <div class="kpi"><div class="kpi-l">自由现金流</div><div class="kpi-v">US$3.34 亿</div><div class="snap-note">上半年 6.50 亿（去年同期 −2.87 亿）</div></div>
+    <div class="kpi"><div class="kpi-l">回购</div><div class="kpi-v">US$3.31 亿</div><div class="snap-note">216 万股，均价 <strong>US$153.34</strong></div></div>
+    <div class="kpi"><div class="kpi-l">总债务</div><div class="kpi-v">US$195.95 亿</div><div class="snap-note">较 2025 年末 +25.52 亿（+15.0%）</div></div>
+    <div class="kpi"><div class="kpi-l">2026 指引</div><div class="kpi-v">68–76 亿</div><div class="snap-note">持续经营调整后 EBITDA，<strong>原封重申</strong></div></div>
+  </div>
+</section>
+
+<section class="section" id="focus" aria-labelledby="focus-t">
+  <h2 class="stitle" id="focus-t">本季必看 · 两个「看穿」<a class="anchor" href="#focus" aria-label="本节链接">#</a></h2>
+
+  <div class="cmt">
+    <h3>看穿一：同一个季度，「+31%」与「−6.7%」说的是同一件事</h3>
+    <p>八月七日的新闻稿第一行写着调整后 EBITDA 同比增长逾 30%，第三行写着 GAAP 净利润 3.05 亿、同比下降。两个数字之间只隔着公司自己披露的一句话：本季净利润「包含一笔 4.72 亿美元的、来自未来年份套保的未实现损失」。</p>
+    <p>Vistra 把未来几年要发的电提前在市场上卖出，这些衍生合约每季按公允价值重估，浮盈浮亏直接进利润表；而对应的那些电还没发出来，不在利润表里。公司在年报里把这层关系写得很直白——<span class="hl-t">未实现套保损失通常发生在远期电价上涨时，而电价上涨对整个组合的未来各期是有利的</span>。</p>
+    <p>换句话说：<strong>电价涨，报表利润跌；电价跌，报表利润涨。</strong>看 GAAP 净利润判断这家公司的经营好坏，方向会反。</p>
+
+    <h3>看穿二：把 2026 与 2027 锁死的那份套保，也锁住了 AI 电力的上行</h3>
+    <p>新闻稿倒数第二段：截至 2026 年 8 月 3 日，2026 年预期发电量已套保约 <strong>100%</strong>，2027 年约 <strong>94%</strong>，2028 年约 <strong>72%</strong>。</p>
+    <p>而 2026 年 2 月 18 日披露的同一组数字是 100%、<strong>84%</strong>、<strong>58%</strong>。<span class="hl-t">在股价从高点一路下行的这半年里，管理层把 2027 年多锁了 10 个百分点、2028 年多锁了 14 个百分点。</span></p>
+    <p>这是本分，不是错误——2026 年指引能在股价跌掉三成六时原封不动地重申，靠的正是它。但它同时意味着：若买入理由是「AI 让电价上涨」，那么这个理由在未来两年对 Vistra 的利润几乎不起作用，2026 年一分不剩、2027 年只剩 6%，第一个有意义的敞口要等到 2028 年的那 28%。</p>
+  </div>
+</section>
+
+<section class="section" id="trend" aria-labelledby="trend-t">
+  <h2 class="stitle" id="trend-t">关键指标趋势（近 8 季）<a class="anchor" href="#trend" aria-label="本节链接">#</a></h2>
+  <div class="cgrid">
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">营业收入与营业利润率</div>
+        <div class="cwrap"><canvas id="rev" data-chart="rev" role="img" aria-label="八个季度的营业收入与营业利润率，利润率在 −3.1% 到 41.2% 之间剧烈摆动，摆动主要由未实现套保重估造成"></canvas></div>
+        <figcaption>单位：亿美元 / %。来源：SEC XBRL companyfacts（CIK 1692819）与各期 10-Q；Q4 值按「全年 − 前三季」倒算。</figcaption>
+      </figure>
+    </div>
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">分部调整后 EBITDA：上半年同比</div>
+        <div class="cwrap"><canvas id="margin" data-chart="margin" role="img" aria-label="四个分部上半年调整后 EBITDA 同比，东部 PJM 增长 54.8% 最快，零售下滑 10.5%"></canvas></div>
+        <figcaption>单位：亿美元。来源：2026Q2 业绩新闻稿分部调节表（Ongoing Operations 口径，已剔除 Asset Closure）。</figcaption>
+      </figure>
+    </div>
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">机组燃料结构（2025-12-31，总 43,641 MW）</div>
+        <div class="cwrap"><canvas id="segment" data-chart="segment" role="img" aria-label="燃料结构：天然气 62%、煤 20%、核电 15%、可再生 3%、燃油不足 1%"></canvas></div>
+        <figcaption>单位：兆瓦。来源：FY2025 Form 10-K「Item 1. Business — Electricity Generation Operations」。</figcaption>
+      </figure>
+    </div>
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">摊薄股数与年度回购金额</div>
+        <div class="cwrap"><canvas id="eps" data-chart="eps" role="img" aria-label="摊薄股数五年从 4.822 亿降至 3.457 亿，年度回购金额在 2022 年达 19.49 亿后逐年回落"></canvas></div>
+        <figcaption>单位：百万股 / 亿美元。来源：SEC XBRL（WeightedAverageNumberOfDilutedSharesOutstanding、PaymentsForRepurchaseOfCommonStock）。</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="statements" aria-labelledby="statements-t">
+  <h2 class="stitle" id="statements-t">三张表的五年轨迹<a class="anchor" href="#statements" aria-label="本节链接">#</a></h2>
+
+  <div class="period-toggle" role="group" aria-label="切换统计周期">
+    <button type="button" class="period-btn is-on" data-period="annual" aria-pressed="true">年度</button>
+    <button type="button" class="period-btn" data-period="quarterly" aria-pressed="false">季度</button>
+  </div>
+
+  <div class="cgrid">
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">利润表：总收入 · 营业利润 · 净利润</div>
+        <div class="cwrap"><canvas id="income" data-chart="income" role="img" aria-label="五年利润表：收入稳步上行，而营业利润与净利润在 2021 至 2022 年为负、2024 年冲高、2025 年再度腰斩"></canvas></div>
+        <figcaption>单位：亿美元。年度取 FY2021–FY2025 经审计合并利润表；季度取 2024Q3–2026Q2，Q4 按「全年 − 前三季」倒算。净利润为归属普通股口径（已扣优先股累积股息）。</figcaption>
+      </figure>
+    </div>
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">现金流量表：经营现金流 · 资本开支 · 自由现金流</div>
+        <div class="cwrap"><canvas id="cashflow" data-chart="cashflow" role="img" aria-label="五年现金流：经营现金流 2023 年见顶后连年回落，资本开支持续攀升，自由现金流从 37.77 亿降至 13.18 亿"></canvas></div>
+        <figcaption>单位：亿美元。自由现金流 ＝ 经营现金流 − 资本开支（含核燃料采购与长期服务协议预付）。10-Q 现金流为年初至今累计，季度值已用相邻期相减还原。<strong>口径提示：并购导致跨年不可完全比较</strong>——Energy Harbor 于 2024-03-01 交割，故 FY2024 只含该核电机组队 10 个月；Lotus（2,600 MW）于 2025-10-22 交割，故 FY2025 只含约 2.3 个月。</figcaption>
+      </figure>
+    </div>
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">资产负债表：总资产 · 总负债 · 股东权益</div>
+        <div class="cwrap"><canvas id="balance" data-chart="balance" role="img" aria-label="五年资产负债表：总资产与总负债同步扩张，而股东权益从 82.91 亿降至 50.97 亿"></canvas></div>
+        <figcaption>单位：亿美元，各期期末。⚠️ 2024Q3 另有 31.98 亿可赎回少数股东权益（Vistra Vision 15%）计在临时权益、不含在图中的股东权益内，该笔已于 2024-12-31 以约 32 亿现金买断，故 2024Q4 起三条线重新闭合。</figcaption>
+      </figure>
+    </div>
+  </div>
+  <p class="note">三张图并排看，最该被看到的是一条剪刀差：<span class="hl-t">收入线五年只从 120.77 亿走到 177.38 亿，而权益线从 82.91 亿一路降到 50.97 亿——差额几乎全被回购注销掉了。</span>这解释了为什么每股口径远好于总量口径，也解释了为什么市净率 15 倍对这家公司毫无意义。第二条值得看的是现金流图：经营现金流自 2023 年见顶后连降两年，同期资本开支翻了近两倍，自由现金流因此从 37.77 亿压到 13.18 亿——利润表的波动是会计造成的，现金流的收窄是真实的。</p>
+</section>
+
+<section class="section" id="flow" aria-labelledby="flow-t">
+  <h2 class="stitle" id="flow-t">资金流向桑基图<a class="anchor" href="#flow" aria-label="本节链接">#</a></h2>
+  <div class="ccard">
+    <figure class="chart">
+      <div id="sankey" role="img" aria-label="FY2025 营业收入 177.38 亿美元如何经燃料成本、运营成本、折旧摊销、利息与所得税，最终流到 13.18 亿自由现金流">
+        <svg viewBox="0 0 1160 470" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+          <g class="sk-flow">
+            <path d="M40,117.2 C135,117.2 135,117.2 230,117.2" stroke="var(--red)" stroke-width="174.4"/>
+            <path d="M40,287.2 C135,287.2 135,287.2 230,287.2" stroke="var(--accent)" stroke-width="165.6"/>
+            <path d="M250,231.25 C345,231.25 345,231.25 440,231.25" stroke="var(--red)" stroke-width="53.7"/>
+            <path d="M250,274.55 C345,274.55 345,274.55 440,274.55" stroke="var(--red)" stroke-width="32.9"/>
+            <path d="M250,310.05 C345,310.05 345,310.05 440,310.05" stroke="var(--accent3)" stroke-width="38.1"/>
+            <path d="M250,331.3 C345,331.3 345,331.3 440,331.3" stroke="var(--red)" stroke-width="4.4"/>
+            <path d="M250,351.75 C345,351.75 345,351.75 440,351.75" stroke="var(--green)" stroke-width="36.5"/>
+            <path d="M460,351.75 C555,351.75 555,344.15 650,344.15" stroke="var(--green)" stroke-width="36.5"/>
+            <path d="M460,381.8 C555,381.8 555,366.2 650,366.2" stroke="var(--gold)" stroke-width="7.6"/>
+            <path d="M670,360.95 C760,360.95 760,360.95 850,360.95" stroke="var(--green)" stroke-width="18.1"/>
+            <path d="M670,275.95 C760,275.95 760,321.95 850,321.95" stroke="var(--accent3)" stroke-width="59.9"/>
+            <path d="M870,318.35 C935,318.35 935,318.35 1000,318.35" stroke="var(--red)" stroke-width="52.7"/>
+            <path d="M870,357.35 C935,357.35 935,357.35 1000,357.35" stroke="var(--green)" stroke-width="25.3"/>
+          </g>
+          <g class="sk-node">
+            <rect x="20" y="30" width="20" height="340" rx="3" fill="var(--accent2)"/>
+            <rect x="230" y="30" width="20" height="174.4" rx="3" fill="var(--red)"/>
+            <rect x="230" y="204.4" width="20" height="165.6" rx="3" fill="var(--accent)"/>
+            <rect x="440" y="204.4" width="20" height="53.7" rx="3" fill="var(--red)"/>
+            <rect x="440" y="258.1" width="20" height="32.9" rx="3" fill="var(--red)"/>
+            <rect x="440" y="291" width="20" height="38.1" rx="3" fill="var(--accent3)"/>
+            <rect x="440" y="329.1" width="20" height="4.4" rx="1" fill="var(--red)"/>
+            <rect x="440" y="333.5" width="20" height="36.5" rx="3" fill="var(--green)"/>
+            <rect x="440" y="378" width="20" height="7.6" rx="2" fill="var(--gold)"/>
+            <rect x="650" y="325.9" width="20" height="22.6" rx="3" fill="var(--red)"/>
+            <rect x="650" y="348.5" width="20" height="3.4" rx="1" fill="var(--red)"/>
+            <rect x="650" y="351.9" width="20" height="18.1" rx="3" fill="var(--green)"/>
+            <rect x="650" y="246" width="20" height="59.9" rx="3" fill="var(--accent3)"/>
+            <rect x="850" y="292" width="20" height="78" rx="3" fill="var(--accent2)"/>
+            <rect x="1000" y="292" width="20" height="52.7" rx="3" fill="var(--red)"/>
+            <rect x="1000" y="344.7" width="20" height="25.3" rx="3" fill="var(--green)"/>
+          </g>
+          <g class="sk-t">
+            <text x="20" y="22" class="sk-num">营业收入 17,738</text>
+            <text x="256" y="112" class="sk-lab warn">燃料、外购电力与输配费</text>
+            <text x="256" y="128" class="sk-num">9,101</text>
+            <text x="256" y="282" class="sk-lab">毛利</text>
+            <text x="256" y="298" class="sk-num">8,637</text>
+            <text x="466" y="235" class="sk-lab warn">运营成本 2,803</text>
+            <text x="466" y="278" class="sk-lab warn">销售及管理费用 1,714</text>
+            <text x="466" y="314" class="sk-lab">折旧与摊销 1,986</text>
+            <text x="466" y="335" class="sk-lab warn">长期资产减值 228</text>
+            <text x="466" y="356" class="sk-num">营业利润 1,906</text>
+            <text x="466" y="396" class="sk-lab">＋其他收入净额 396</text>
+            <text x="676" y="332" class="sk-lab warn">利息费用 1,179</text>
+            <text x="676" y="348" class="sk-lab warn">所得税 179</text>
+            <text x="676" y="366" class="sk-num">净利润 944</text>
+            <text x="676" y="242" class="sk-lab">＋非现金调整净额 3,126</text>
+            <text x="850" y="284" class="sk-num">经营现金流 4,070</text>
+            <text x="1026" y="316" class="sk-lab warn">资本开支 2,752</text>
+            <text x="1026" y="360" class="sk-num">自由现金流 1,318</text>
+          </g>
+        </svg>
+      </div>
+      <figcaption>FY2025，单位：百万美元。节点高度按金额等比分配；每一级流入 ＝ 流出。「其他收入净额 396」＝ 其他收入净额 394 ＋ 税收应收协议影响 2，作为 source 节点自下方汇入以使该级闭合。</figcaption>
+    </figure>
+    <details class="chart-data">
+      <summary>查看数据表</summary>
+      <div class="tbl-wrap">
+        <table class="tbl" data-shape="grid" data-source="FY2025 经审计合并利润表与现金流量表（2026-02-26 业绩新闻稿 EX-99.1 / FY2025 Form 10-K）">
+          <thead><tr><th>层级</th><th>项目</th><th>金额（百万美元）</th><th>对账</th></tr></thead>
+          <tbody>
+            <tr class="hl"><td>0</td><td>营业收入</td><td>17,738</td><td>起点</td></tr>
+            <tr><td>1</td><td>燃料、外购电力与输配费</td><td>−9,101</td><td rowspan="2">9,101 ＋ 8,637 ＝ 17,738</td></tr>
+            <tr><td>1</td><td>毛利</td><td>8,637</td></tr>
+            <tr><td>2</td><td>运营成本</td><td>−2,803</td><td rowspan="5">2,803 ＋ 1,714 ＋ 1,986 ＋ 228 ＋ 1,906 ＝ 8,637</td></tr>
+            <tr><td>2</td><td>销售及管理费用</td><td>−1,714</td></tr>
+            <tr><td>2</td><td>折旧与摊销</td><td>−1,986</td></tr>
+            <tr><td>2</td><td>长期资产减值</td><td>−228</td></tr>
+            <tr><td>2</td><td>营业利润</td><td>1,906</td></tr>
+            <tr><td>2b</td><td>＋其他收入净额（含税收应收协议 2）</td><td>396</td><td>1,906 ＋ 396 ＝ 2,302</td></tr>
+            <tr><td>3</td><td>利息费用及相关支出</td><td>−1,179</td><td rowspan="3">1,179 ＋ 179 ＋ 944 ＝ 2,302</td></tr>
+            <tr><td>3</td><td>所得税费用</td><td>−179</td></tr>
+            <tr><td>3</td><td>净利润</td><td>944</td></tr>
+            <tr><td>3b</td><td>＋非现金调整净额</td><td>3,126</td><td>折旧摊销及增值 2,950 ＋ 未实现套保损失 808 ＋ 减值 228 ＋ 递延税 136 − 营运资金及其他净流出 996</td></tr>
+            <tr class="hl"><td>4</td><td>经营现金流</td><td>4,070</td><td>944 ＋ 3,126 ＝ 4,070</td></tr>
+            <tr><td>5</td><td>资本开支（含核燃料与 LTSA 预付）</td><td>−2,752</td><td rowspan="2">2,752 ＋ 1,318 ＝ 4,070</td></tr>
+            <tr class="hl"><td>5</td><td>自由现金流</td><td>1,318</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+  </div>
+  <p class="note">这张图里最该被注意的是倒数第二级那笔 <strong>3,126</strong>：非现金调整净额是净利润的 3.3 倍，其中 808 是未实现套保损失的整笔冲回。<span class="hl-t">换句话说，FY2025 的 GAAP 净利润被扣掉的东西里，有 8.08 亿从来没有以现金形式离开过公司。</span>这既说明净利润低估了当年的现金创造，也说明——反过来的年份里，净利润同样会高估。</p>
+</section>
+
+<!-- ══ 13 个分析模块 ══ -->
+
+<section class="section" id="m1" aria-labelledby="m1-t">
+  <h2 class="stitle" id="m1-t">模块 1 · 公司概览与背景<a class="anchor" href="#m1" aria-label="本节链接">#</a></h2>
+  <div class="cmt">
+    <p>Vistra Corp.（NYSE: VST）总部设在得克萨斯州欧文市，是美国规模最大的竞争性发电商之一，同时经营全美最大的零售售电业务之一。公司以美元记账，财年即日历年，向 SEC 提交 10-K / 10-Q / 8-K。</p>
+    <p>它的前世是 Energy Future Holdings——2007 年那笔 450 亿美元的杠杆收购标的，2014 年破产，2016 年重整计划获特拉华破产法院确认后分拆而出。<span class="hl-t">今天资产负债表上高企的债务与那段历史无关，是重整后十年里主动加上去的。</span></p>
+    <h3>1.1 机组与市场</h3>
+    <p>截至 2025 年 12 月 31 日，自有机组合计 43,641 兆瓦，全部为完全所有权（fee simple）：</p>
+    <div class="tbl-wrap">
+      <table class="tbl" data-shape="grid" data-source="FY2025 Form 10-K，Item 1 Business 与 Item 2 Properties">
+        <thead><tr><th>主燃料</th><th>技术</th><th>净容量（MW）</th><th>占比</th><th>备注</th></tr></thead>
+        <tbody>
+          <tr><td>天然气</td><td>联合循环 / 燃机 / 汽轮</td><td>26,989</td><td>62%</td><td>28 座联合循环 22,167 MW ＋ 12 座调峰 4,822 MW</td></tr>
+          <tr><td>煤 / 褐煤</td><td>汽轮</td><td>8,743</td><td>20%</td><td>7 座；其中 4,578 MW 已定 2028 年中前退役</td></tr>
+          <tr><td>铀</td><td>核电</td><td>6,448</td><td>15%</td><td>科曼奇峰（ERCOT）＋ 佩里 / 戴维斯-贝西 / 比弗谷（PJM）</td></tr>
+          <tr><td>可再生</td><td>光伏 / 储能</td><td>1,274</td><td>3%</td><td>莫斯兰丁 400 MW 电池已转入待关停分部</td></tr>
+          <tr><td>燃油</td><td>燃机</td><td>187</td><td>&lt;1%</td><td>—</td></tr>
+          <tr class="hl"><td>合计</td><td>—</td><td>43,641</td><td>100%</td><td>另有 Cogentrix 5,500 MW 待交割</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>值得记住的一个比例：核电只占容量的 15%，而市场对这家公司的全部想象都建立在这 15% 上。</strong>另外 62% 的燃气机组在 AI 叙事里几乎不被提及，尽管它们才是德州分部利润的主体。</p>
+    <h3>1.2 经营分部</h3>
+    <p>四个持续经营分部：<strong>零售</strong>（TXU Energy、Ambit、Dynegy、TriEagle、Homefield 等品牌）、<strong>得州</strong>（ERCOT 发电）、<strong>东部</strong>（PJM 与 MISO 发电）、<strong>西部</strong>（CAISO）。此外还有一个<strong>待关停</strong>分部，收纳已退役或计划退役的机组，公司披露的「持续经营口径」指标即剔除这一块。</p>
+    <h3>1.3 股权结构与治理</h3>
+    <p>无控股股东，机构持股为主。资本结构里另有三档永续累积可赎回优先股：A 类 8.0%、B 类 7.0%、C 类 8.875%，清算优先权每股 1,000 美元，合计账面 24.76 亿美元，每年产生 1.92 亿美元现金股息。<span class="hl-t">这一层在多数数据商的「企业价值」里被忽略，但它对普通股股东是一笔真实的优先求偿权。</span></p>
+  </div>
+</section>
+
+<section class="section" id="m2" aria-labelledby="m2-t">
+  <h2 class="stitle" id="m2-t">模块 2 · 管理层评估<a class="anchor" href="#m2" aria-label="本节链接">#</a></h2>
+  <div class="cmt">
+    <h3>2.1 核心高管与利益绑定</h3>
+    <p>总裁兼首席执行官 <strong>Jim Burke</strong>，2022 年 8 月起任现职，此前任公司总裁兼首席运营官、更早负责零售业务。2026 年 3 月 18 日提交的委托书披露，其 2025 年度总薪酬约 <strong>1,599 万美元</strong>，较 2024 年的约 1,224 万美元<strong>增长 23.5%</strong>，其中约 8.7% 为基本工资、其余为奖金与股权，长期激励中 65% 为业绩股票单位（PSU）。</p>
+    <p>但薪酬只是一半。另一半是持股：<span class="hl-t">按公司政策口径计算，CEO 持股相当于其基本工资的 106 倍</span>，直接持有约 0.37% 的流通股；公司章程<strong>禁止董事与高管对冲或质押 Vistra 证券</strong>。</p>
+    <p><strong>长期主义测试：偏主人翁一侧。</strong>106 倍的持股倍数在美国大型公用事业里属于高位，禁止对冲质押意味着这份持股无法被金融手段中和。2025 年薪酬涨 23.5% 发生在股价大部分时间处于历史高位的一年（9 月 22 日创下 219.82 的峰值），与 BCE 那种「股价崩了薪酬还涨」的情形不是一回事。</p>
+    <h3>2.2 资本配置履历</h3>
+    <p>这一项分两段读，因为它的质量明显分成两截。</p>
+    <p><strong>2021–2024，优秀。</strong>自 2021 年 11 月启动回购至 2026 年 2 月，累计执行约 <strong>59 亿美元</strong>，注销约 <strong>30% 的股本</strong>——摊薄股数从 FY2021 的 4.822 亿降到 FY2025 的 3.457 亿。倒算平均成本约每股 <strong>41 美元</strong>，对照今日 140.59 的股价，这是一段极高质量的资本配置。尤其 FY2022 在自由现金流为 −8.16 亿的情况下仍回购 19.49 亿，是在能源危机最悲观时逆势买入。</p>
+    <p><strong>2024 至今，转向并购与投资，成色待验。</strong>见模块 12.3 的完整清单。此处只点三件：其一，2024 年 12 月<strong>以约 32 亿现金买回 Vistra Vision 15% 少数股权</strong>，而这 15% 正是九个月前收购 Energy Harbor 时发出去的对价；其二，Cogentrix 5,500 兆瓦作价约每千瓦 819 美元，在当前新建燃气机组成本背景下不算贵；其三，2026 年 6 月作为创始投资人向 KKR 管理的 Helix 基金<strong>承诺出资最高 10 亿美元</strong>，协议约定追加的 5 亿即便商业里程碑未达成，公司仍「可自行选择」投入。</p>
+    <h3>2.3 指引兑现度</h3>
+    <p>记录是好的。FY2025 实际持续经营调整后 EBITDA 59.12 亿、增长前调整后自由现金流 35.92 亿，分别<strong>超出原始指引中值约 1.12 亿与 2.92 亿</strong>。2026 年指引在 Q1、Q2 两次财报后均原封重申。</p>
+    <p><strong>但有一条口径提醒必须写下：</strong>2026 年指引与 2027 年「中点机会」区间，脚注均写明<span class="hl-t">编制于 2025 年 11 月 6 日、基于 2025 年 10 月 31 日的市场曲线</span>。到本报告日已过去九个多月，期间远期电价明显波动过，而基准从未重置。重申的是数字，不是基准。</p>
+  </div>
+</section>
+
+<section class="section" id="m3" aria-labelledby="m3-t">
+  <h2 class="stitle" id="m3-t">模块 3 · 商业模式深度解析<a class="anchor" href="#m3" aria-label="本节链接">#</a></h2>
+  <div class="cmt">
+    <h3>3.1 海图「一句话测试」</h3>
+    <p><strong>它自己发电，自己把电卖给终端用户，中间用金融合约把两头的价差锁起来。</strong></p>
+    <p>能用一句话说完，这是好事。但这句话里的第三个动作——套保——正是让它的财报变得难读的原因，也是本报告大半篇幅在处理的东西。</p>
+    <h3>3.2 一体化模式：内建的对冲</h3>
+    <p>发电与零售放在同一家公司里，是 Vistra 反复强调的「根本性竞争优势」。它的机制是这样：批发电价上涨时，发电分部赚更多，而零售分部的购电成本同步上升、利润被压缩；电价下跌时反之。<strong>两端天然互为对冲。</strong></p>
+    <p>本期数据把这个机制演示得很清楚：</p>
+    <div class="tbl-wrap">
+      <table class="tbl" data-shape="grid" data-source="2026Q2 与 2025Q2 业绩新闻稿分部调节表（持续经营口径）">
+        <thead><tr><th>分部</th><th>H1 2025</th><th>H1 2026</th><th>同比</th><th>读法</th></tr></thead>
+        <tbody>
+          <tr><td>零售</td><td>9.40 亿</td><td>8.41 亿</td><td><strong>−10.5%</strong></td><td>购电成本随批发价上行被挤压</td></tr>
+          <tr><td>得州（ERCOT）</td><td>6.32 亿</td><td>8.97 亿</td><td>+41.9%</td><td>已实现电价与容量收入上行</td></tr>
+          <tr><td>东部（PJM / MISO）</td><td>9.32 亿</td><td>14.43 亿</td><td><strong>+54.8%</strong></td><td>PJM 容量价格触顶 ＋ 核电机组</td></tr>
+          <tr><td>西部（CAISO）</td><td>1.11 亿</td><td>1.24 亿</td><td>+11.7%</td><td>体量小，莫斯兰丁事故后收缩</td></tr>
+          <tr class="hl"><td>持续经营合计</td><td>25.89 亿</td><td>32.61 亿</td><td>+26.0%</td><td>公司与其他项抵消后</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>零售下滑一成、发电大涨——这不是零售业务出了问题，是一体化模型在按设计运转。<span class="hl-t">代价是：整体的电价弹性被自己削平了一部分。</span>这与套保是同一个道理的两种实现。</p>
+    <h3>3.3 单位经济与议价能力</h3>
+    <p>FY2025 营业收入 177.38 亿，燃料、外购电力与输配费 91.01 亿，毛利率 48.7%。核电机组的边际成本极低，是毛利的主要来源；燃气机组的毛利由「市场热耗率」——批发电价与天然气价格之间的隐含关系——决定，公司对此几乎没有定价权，只能通过套保管理。</p>
+    <p>零售端有一定品牌与转换摩擦，但德州零售市场竞争充分，ARPU 型的定价权有限。<strong>真正的议价能力出现在数据中心长约上</strong>：AWS 与 Meta 的两笔合同都是二十年期、对手方为投资级科技巨头，这是 Vistra 历史上第一次在电力销售端拿到长期、可预测、非市场化的定价——见模块 10。</p>
+  </div>
+</section>
+
+<section class="section" id="m4" aria-labelledby="m4-t">
+  <h2 class="stitle" id="m4-t">模块 4 · 经济护城河分析（5 维）<a class="anchor" href="#m4" aria-label="本节链接">#</a></h2>
+  <div class="moat-grid">
+    <div class="moat-card none">
+      <h5>网络效应</h5>
+      <div class="moat-rate">无</div>
+      <p>电力是同质商品。多一个 Vistra 的用户，不会让下一个用户获得更多价值。零售品牌的规模带来采购与获客成本优势，但那是成本优势，不是网络效应。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>转换成本</h5>
+      <div class="moat-rate">窄</div>
+      <p>德州零售用户换供应商只需几分钟，转换成本近乎为零。但二十年期数据中心 PPA 是另一回事：机组位置、并网点、核电的碳属性都不可替代，<span class="hl-t">这部分转换成本极高——只是它目前只覆盖 3,809 兆瓦，占容量的 8.7%。</span></p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>成本优势</h5>
+      <div class="moat-rate">窄偏宽</div>
+      <p>6,448 兆瓦核电的边际成本极低且不受燃料价格波动影响，这是真实且难以复制的优势。但 62% 的燃气机组处在成本曲线中段，与同业无本质差别；20% 的煤电则在成本与政策两端都处于劣势。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>无形资产</h5>
+      <div class="moat-rate">宽</div>
+      <p>核电运营执照是这五项里最硬的一条。美国已数十年未新建同类机组，NRC 执照的取得周期以十年计。佩里机组的执照续期已于 2025 年 7 月获批、<strong>延至 2046 年</strong>。这类许可不可购买、不可加速，构成事实上的准入禁令。</p>
+    </div>
+    <div class="moat-card wide">
+      <h5>有效规模</h5>
+      <div class="moat-rate">宽</div>
+      <p>并网排队周期、燃气轮机订单排到 2030 年前后、输电走廊审批——三重物理约束使得任何区域市场都只能容纳有限的既有玩家。PJM 2028/29 年度拍卖在 6.8 吉瓦缺口下<strong>只吸引到约 525 兆瓦新增资源</strong>，是这条护城河最直接的证据。</p>
+    </div>
+  </div>
+  <div class="cmt">
+    <p><strong>护城河趋势：加宽，但受政策封顶。</strong>物理与许可层面的壁垒在变厚（并网队列更长、设备更紧、新建核电仍不可行）。但两条政策性天花板同时存在：<span class="hl-t">PJM 容量价格由行政上限管着，且 2028/29 年度的上限比上一年下调了 2.5%</span>；核电生产税抵免在电价上行时会自动退坡（见模块 10.3）。</p>
+    <p><strong>十年后会更宽还是更窄？</strong>更宽。届时 4,578 兆瓦煤电已退出，Cogentrix 的燃气机组与核电扩容陆续到位，组合会更干净、更受长约保护。但护城河守住的是「这个市场只能有几家」，守不住「这几家能收多少钱」——后者由 ERCOT 与 PJM 的市场设计决定，而那是政治的产物。</p>
+  </div>
+</section>
+
+<section class="section" id="m5" aria-labelledby="m5-t">
+  <h2 class="stitle" id="m5-t">模块 5 · 财务深度分析<a class="anchor" href="#m5" aria-label="本节链接">#</a></h2>
+  <div class="cmt">
+    <h3>5.1 近 8 季核心趋势</h3>
+    <div class="tbl-wrap">
+      <table class="tbl" data-shape="grid" data-source="SEC XBRL companyfacts（CIK 1692819）＋ 各期 10-Q / 业绩新闻稿；Q4 按「全年 − 前三季」倒算">
+        <thead><tr><th>亿美元</th><th>24Q3</th><th>24Q4</th><th>25Q1</th><th>25Q2</th><th>25Q3</th><th>25Q4</th><th>26Q1</th><th>26Q2</th></tr></thead>
+        <tbody>
+          <tr><td>营业收入</td><td>62.88</td><td>40.37</td><td>39.33</td><td>42.50</td><td>49.71</td><td>45.84</td><td>56.40</td><td>40.17</td></tr>
+          <tr><td>营业利润</td><td>25.88</td><td>5.99</td><td><strong>−1.20</strong></td><td>5.15</td><td>10.37</td><td>4.74</td><td><strong>14.99</strong></td><td>5.53</td></tr>
+          <tr><td>营业利润率</td><td>41.2%</td><td>14.8%</td><td>−3.1%</td><td>12.1%</td><td>20.9%</td><td>10.3%</td><td>26.6%</td><td>13.8%</td></tr>
+          <tr><td>归属普通股净利</td><td>18.40</td><td>3.93</td><td>−3.17</td><td>2.80</td><td>6.04</td><td>1.85</td><td>9.80</td><td>2.58</td></tr>
+          <tr><td>摊薄 EPS（美元）</td><td>5.25</td><td>—</td><td>−0.93</td><td>0.81</td><td>1.75</td><td>—</td><td>2.87</td><td>0.76</td></tr>
+          <tr><td>经营现金流</td><td>17.02</td><td>13.53</td><td>5.99</td><td>5.72</td><td>14.67</td><td>14.32</td><td>11.99</td><td>10.23</td></tr>
+          <tr><td>资本开支</td><td>6.85</td><td>4.30</td><td>7.68</td><td>6.90</td><td>4.58</td><td>8.36</td><td>8.83</td><td>6.89</td></tr>
+          <tr class="hl"><td>自由现金流</td><td>10.17</td><td>9.23</td><td>−1.69</td><td>−1.18</td><td>10.09</td><td>5.96</td><td>3.16</td><td>3.34</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Q4 的摊薄 EPS 公司未单独披露、且用「全年 − 前三季」倒算会因加权股数变化失真，故留空。</p>
+
+    <h3>5.2 利润质量：把未实现套保拆出来</h3>
+    <p>这是本报告的核心一节。先交代制度性成因——它写在 FY2025 10-K 的风险因素里，是一句不能再直白的话：</p>
+    <blockquote>我们不对商品衍生品交易适用套期会计……我们的全部衍生品均按经济套保处理、以估计公允价值计入资产负债表，公允价值变动在其发生的当期计入损益。<strong>没有任何衍生品头寸按现金流量套期或公允价值套期核算。</strong></blockquote>
+    <p><span class="hl-t">这是一个主动的会计选择，不是准则强制。</span>选择的代价就是本节要处理的全部波动。10-K 的会计政策进一步说明了这些损益落在哪一行：电力对冲与金融天然气对冲主要计入<strong>营业收入</strong>，煤炭与实物天然气对冲计入<strong>燃料成本</strong>，利率互换计入<strong>利息费用</strong>——所以受污染的不只是净利润，<strong>连营业收入本身都含未实现重估</strong>（2026Q1 营收同比 +43%，而发电量并未增长 43%）。</p>
+    <p>规模上，这一项常常超过净利润本身：</p>
+    <div class="tbl-wrap">
+      <table class="tbl" data-shape="cards" data-source="FY2023–FY2025 合并现金流量表「未实现商品按市值计价损益」行；2025–2026 各季取业绩新闻稿分部调节表">
+        <thead><tr><th>期间</th><th>未实现套保损益<br>（正数 ＝ 损失）</th><th>GAAP 净利润</th><th>这一项占净利的量级</th></tr></thead>
+        <tbody>
+          <tr><td>FY2023</td><td>收益 4.90 亿</td><td>14.92 亿</td><td>收益贡献约三分之一</td></tr>
+          <tr><td>FY2024</td><td><strong>收益 11.55 亿</strong></td><td>28.12 亿</td><td>收益占 41%</td></tr>
+          <tr><td>FY2025</td><td><strong>损失 8.08 亿</strong></td><td><strong>9.44 亿</strong></td><td>损失几乎等于净利本身</td></tr>
+          <tr><td>2025Q1</td><td>损失 5.68 亿</td><td>−2.68 亿</td><td>单季由此转负</td></tr>
+          <tr><td>2025Q2</td><td>收益 0.16 亿</td><td>3.27 亿</td><td>接近中性</td></tr>
+          <tr><td>2026Q1</td><td><strong>收益 7.23 亿</strong></td><td>10.29 亿</td><td>收益占 70%</td></tr>
+          <tr><td>2026Q2</td><td><strong>损失 4.72 亿</strong></td><td>3.05 亿</td><td>损失超过净利本身</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>第一个结论：FY2024 到 FY2025 净利润下滑 18.68 亿，而这一项自己摆动了 19.63 亿（收益 11.55 → 损失 8.08）。整个跌幅都装在这一行里。</strong>公司在 FY2025 新闻稿中的措辞与此一致：净利润下降「主要由商品套保产生的未实现损失驱动」。</p>
+    <p><strong>第二个结论，也是更反直觉的一个：最近十二个月，这一项净额几乎等于零。</strong>2025 下半年损失 2.56 亿（＝全年 8.08 − 上半年 5.52），2026 上半年收益 2.51 亿，<span class="hl-t">TTM 净额仅约 500 万美元损失。</span></p>
+    <p>也就是说：TTM 每股收益 6.03 美元在<strong>总量</strong>上并未被套保扭曲，但<strong>每一个单季都被扭得面目全非</strong>。这直接决定了下面这张多档透视表该怎么读。</p>
+    <p><strong>第三个结论，来自 Q2 2026 10-Q 衍生品附注的一处拆分，它证明这确实是纯粹的时间差。</strong>公司把当季未实现损益拆成两块：<strong>此前已确认损益的反转</strong>（头寸结算、浮动兑现）为 <strong>＋4,900 万美元</strong>，<strong>公允价值变动产生的新增未实现损益</strong>为 <strong>−5.30 亿美元</strong>。上半年则是反转 ＋3.79 亿、新增 −1.21 亿。<span class="hl-t">「旧账反转、新账建立」——每一笔浮亏最终都会在交割时反向冲回，前提是公司持有到期。</span>这也解释了为什么四个季度加总会趋近于零。</p>
+
+    <h3>5.3 P/E 多档透视（触发条件：最新季度净利与四季均值偏离超 20%）</h3>
+    <div class="tbl-wrap">
+      <table class="tbl" data-shape="cards" data-source="股价 US$140.59（2026-08-07）；EPS 取 SEC 申报值与 2026 指引推算">
+        <thead><tr><th>计算口径</th><th>每股收益</th><th>市盈率</th><th>可信度与理由</th></tr></thead>
+        <tbody>
+          <tr><td>TTM GAAP</td><td>US$6.03</td><td>23.3×</td><td><strong>中</strong>。总量上未被套保扭曲（TTM 净额约 0），但窗口横跨疲弱的 2025 与强劲的 2026，低估了当前盈利能力</td></tr>
+          <tr><td>2026Q1 单季年化</td><td>US$11.48</td><td>12.2×</td><td><strong>低</strong>。该季含 7.23 亿未实现收益，严重高估</td></tr>
+          <tr><td>2026Q2 单季年化</td><td>US$3.04</td><td>46.2×</td><td><strong>低</strong>。该季含 4.72 亿未实现损失，严重低估</td></tr>
+          <tr><td>2026 上半年年化</td><td>US$7.37</td><td>19.1×</td><td><strong>中</strong>。上半年未实现项净额较小，但仍未含季节性最强的三季度</td></tr>
+          <tr class="hl"><td>公司指引中值推算</td><td>US$8.60</td><td><strong>16.3×</strong></td><td><strong>最高</strong>。调整后 EBITDA 72 亿 − 折旧摊销 19.5 亿 − 利息 11.25 亿，税率 24%，再扣优先股息 1.92 亿；<span class="hl-t">2026 年发电量已 100% 套保，这一档的能见度最高</span></td></tr>
+          <tr><td>卖方共识前瞻</td><td>US$9.06</td><td>15.5×</td><td><strong>高</strong>。与指引推算方向一致，略乐观</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>最可信的一档是 16.3×。</strong>理由不是它居中，而是它对应的那个年份的发电量已经全部卖出——价格已定，剩下的只有运营执行与天气。相比之下 23.3 倍与 46.2 倍分别在讲两个不同年份的故事。</p>
+
+    <h3>5.4 关键比率与杜邦分析</h3>
+    <div class="tbl-wrap">
+      <table class="tbl" data-shape="grid" data-source="stockanalysis.com 年度比率页与本报告据 SEC 申报数据自算，两者交叉核对">
+        <thead><tr><th>指标</th><th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th><th>TTM</th></tr></thead>
+        <tbody>
+          <tr><td>净资产收益率</td><td>−15.2%</td><td>−18.3%</td><td>29.1%</td><td><strong>51.6%</strong></td><td>17.7%</td><td>约 38%</td></tr>
+          <tr><td>总资产收益率</td><td>−4.1%</td><td>−2.9%</td><td>6.0%</td><td>9.4%</td><td>4.0%</td><td>—</td></tr>
+          <tr><td>投入资本回报率</td><td>−6.3%</td><td>−5.2%</td><td>11.6%</td><td>16.6%</td><td>6.6%</td><td><strong>9.7%</strong></td></tr>
+          <tr><td>债务 / 权益</td><td>1.27</td><td>2.65</td><td>2.36</td><td>3.09</td><td><strong>3.78</strong></td><td>3.67</td></tr>
+          <tr><td>流动比率</td><td>1.35</td><td>1.08</td><td>1.18</td><td>0.96</td><td><strong>0.78</strong></td><td>—</td></tr>
+          <tr><td>EV / EBITDA</td><td>38.4</td><td>26.2</td><td><strong>5.9</strong></td><td>9.8</td><td>15.5</td><td>10.4</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>杜邦拆解（FY2025）：</strong>净利率 5.3%（944 / 17,738）× 资产周转 0.427（17,738 / 41,550）× 权益乘数 8.15（41,550 / 5,097）＝ <strong>18.5%</strong>，与披露的 17.7% 在四舍五入范围内一致。</p>
+    <p><span class="hl-t">这个分解说明了一切：Vistra 的净资产收益率高，不是因为它赚得多，而是因为权益被回购削到只剩 50.97 亿——权益乘数 8.15 倍是绝大多数工业企业的两三倍。</span>FY2024 那个 51.6% 的 ROE 尤其要打折看：分子含 11.55 亿未实现套保收益，分母是被十年回购压缩后的权益。<strong>不要把它当作这门生意的常态回报率。</strong>更可信的是 TTM 投入资本回报率 9.7%——刚刚站上本报告估算的加权资本成本约 9.0%，也就是说：<strong>这家公司目前只是勉强在创造价值，而不是大幅创造价值。</strong></p>
+
+    <h3>5.5 资产负债健康度</h3>
+    <div class="tbl-wrap">
+      <table class="tbl" data-shape="cards" data-source="2026Q2 Form 10-Q（2026-08-10 归档）第 12 号附注与合并资产负债表">
+        <thead><tr><th>项目</th><th>2025-12-31</th><th>2026-06-30</th><th>变化</th></tr></thead>
+        <tbody>
+          <tr><td>长期债务（含一年内到期）</td><td>170.43 亿</td><td><strong>195.95 亿</strong></td><td>＋25.52 亿（＋15.0%）</td></tr>
+          <tr><td>其中：一年内到期</td><td>12.01 亿</td><td>18.76 亿</td><td>＋6.75 亿</td></tr>
+          <tr><td>现金及等价物</td><td>7.85 亿</td><td>4.35 亿</td><td>−3.50 亿</td></tr>
+          <tr><td>永续优先股（账面）</td><td>24.76 亿</td><td>24.76 亿</td><td>不变</td></tr>
+          <tr><td>股东权益</td><td>50.97 亿</td><td>54.82 亿</td><td>＋3.85 亿</td></tr>
+          <tr><td>净债务 / 2026E 调整后 EBITDA</td><td>—</td><td><strong>约 2.77×</strong></td><td>按指引中值 72 亿</td></tr>
+          <tr><td>利息覆盖（EBITDA / 现金利息）</td><td>—</td><td>约 6.4×</td><td>2026 指引现金利息 11.25 亿</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>2026 上半年融资活动的原始数字更直观：<strong>发债 64.22 亿、偿债 38.59 亿</strong>，另有应收账款融资净减 9.25 亿、循环额度净减 3.80 亿、商品挂钩额度偿还 14.20 亿。净增约 25.5 亿，用于并购与增长开支。</p>
+    <p>2.77 倍的净杠杆对独立发电商属合理区间，利息覆盖 6.4 倍也不紧张。<strong>真正需要盯住的是流动比率 0.78</strong>——这在保证金存款随商品价格波动的业务里意味着流动性缓冲不厚。公司 2025 年末总可用流动性约 27.83 亿（现金 7.85 亿 ＋ 循环额度可用 19.96 亿）。</p>
+
+    <h3>5.6 现金流质量与所有者盈余</h3>
+    <p>经营现金流对净利润的倍数（FY2025 为 4.31 倍）看似极佳，但那主要是非现金项冲回的结果，不是营运效率——见桑基图那笔 31.26 亿的非现金调整净额。<strong>更有信息量的是自由现金流的方向</strong>：37.77 亿（FY2023）→ 24.85 亿 → <strong>13.18 亿</strong>（FY2025），两年缩水 65%。经营现金流同期降 25%，资本开支同期升 64%，两头夹击。</p>
+    <p><strong>所有者盈余（2026 年前瞻口径）：</strong></p>
+    <div class="tbl-wrap">
+      <table class="tbl" data-shape="cards" data-source="2026 年指引调节表（维护性资本开支 15.36 亿、现金利息 11.25 亿、现金税 1.11 亿）＋ 本报告估算">
+        <thead><tr><th>项目</th><th>金额（亿美元）</th><th>依据</th></tr></thead>
+        <tbody>
+          <tr><td>调整后归属普通股净利</td><td>29.43</td><td>EBITDA 72.00 − 折旧摊销 19.50 − 利息 11.25，税率 24%，减优先股息 1.92</td></tr>
+          <tr><td>＋ 折旧与摊销</td><td>19.50</td><td>FY2025 为 19.86 亿，取略低值</td></tr>
+          <tr><td>＋ 股权激励</td><td>1.30</td><td>FY2025 为 1.13 亿，上半年 0.67 亿</td></tr>
+          <tr><td>− 维护性资本开支</td><td><strong>−15.36</strong></td><td><span class="hl-t">直接取公司 2026 指引里「含核燃料采购与 LTSA 预付的资本开支」一行</span></td></tr>
+          <tr class="hl"><td>所有者盈余</td><td><strong>34.87</strong></td><td>对应市值收益率 <strong>7.38%</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>这里有一处必须点破的口径问题。</strong>15.36 亿是公司在「增长前」自由现金流指引中使用的维护性资本开支。而 2026 年上半年实际资本开支已达 15.72 亿，全年很可能落在 31 亿左右。<span class="hl-t">差额约 15 亿是增长性开支——它不出现在公司主推的自由现金流指标里，但它确实从公司账上流出去了。</span></p>
+    <p>把这笔也扣掉，2026 年的「全部开支后」自由现金流约为 <strong>19.9 亿</strong>（对应收益率 4.2%），而不是公司指引的 39.25–47.25 亿。两个数字都不能算错——一个衡量既有资产的现金创造力，一个衡量股东当年实际能拿到的钱。<strong>在一个增长开支持续攀升、且要一直花到 2034 年的阶段，后者更接近所有者的真实处境。</strong></p>
+  </div>
+</section>
+
+<section class="section" id="m6" aria-labelledby="m6-t">
+  <h2 class="stitle" id="m6-t">模块 6 · 电话会分析<a class="anchor" href="#m6" aria-label="本节链接">#</a></h2>
+  <div class="cmt">
+    <h3>6.1 2026Q2（2026-08-07）</h3>
+    <div class="ec-item"><span class="ec-badge ec-bull">利好</span>CEO Jim Burke：「Vistra 团队又交出了一个强劲的季度，延续了年初以来的势头……持续经营调整后 EBITDA 同比增长超过 30%。」——<strong>解读：</strong>这个 31% 是真实的经营改善，来自已实现电价与容量收入上行以及 Lotus 机组并表三个月，与未实现套保无关。三个发电分部同时上行，不是单点。</div>
+    <div class="ec-item"><span class="ec-badge ec-neut">中性</span>2026 年持续经营调整后 EBITDA 68–76 亿、增长前调整后自由现金流 39.25–47.25 亿，<strong>两项均原封重申</strong>。——<strong>解读：</strong>重申本身是能见度的证据（发电量 100% 已套保），但也正因为 100% 已套保，重申不含任何信息增量——上半年 32.61 亿已完成中值的 45.3%，而去年上半年占全年 43.8%，进度甚至略好。<span class="hl-t">市场想听的不是 2026 年，是 2027 年之后。</span></div>
+    <div class="ec-item"><span class="ec-badge ec-bear">利空</span>「2027 年持续经营调整后 EBITDA 中点机会区间 74–78 亿」，且脚注写明基于 <strong>2025 年 10 月 31 日</strong>的市场曲线，并<strong>不含</strong> Cogentrix 与 Meta PPA 的任何影响。——<strong>解读：</strong>这是本季最该被追问的一条。74–78 亿相对 2026 年中值 72 亿只增长 5.6%，而基准曲线已过时九个多月。公司选择不重置基准，也未把已签的 Meta 合同纳入——保守是好事，但读者因此拿不到一个「按今天的曲线、含今天的合同」的 2027 年数字。</div>
+    <div class="ec-item"><span class="ec-badge ec-bull">利好</span>Cogentrix 收购已获美国联邦能源管理委员会（FERC）批准。——<strong>解读：</strong>监管路径上最主要的一关过了。5,500 兆瓦按约每千瓦 819 美元计价，在燃气轮机交付排到 2030 年的背景下，这个价格低于新建成本相当多。</div>
+    <div class="ec-item"><span class="ec-badge ec-neut">中性</span>宣布与 KKR、科威特投资局（KIA）及英伟达共同发起 Helix Digital Infrastructure，Vistra 初始承诺最高 10 亿美元。——<strong>解读：</strong>名单很亮眼，但对 Vistra 而言这是一笔<strong>有限合伙人出资</strong>，不是发电业务。10-Q 载明：初始 5 亿，追加 5 亿「以基金达成若干针对我方既有机组的商业供电里程碑为条件，或由公司自行选择、无论里程碑是否达成」。<span class="hl-t">后半句把条件性去掉了一大半。</span></div>
+    <div class="ec-item"><span class="ec-badge ec-bear">利空</span>本季 GAAP 净利润 3.05 亿，同比减少 2,200 万美元，「主要由衍生头寸未实现按市值计价损失增加 4.88 亿美元所致，大部分被更高的已实现电价与容量收入、以及 Lotus 机组三个月的贡献所抵消」。——<strong>解读：</strong>公司的措辞完全准确。值得注意的是这句话的结构：<strong>一个会计项目吃掉了一整个季度的经营改善</strong>，而这种情况在过去八个季度里出现过三次，方向两次向下、一次向上。</div>
+
+    <h3>6.2 2026Q1（2026-05-07）与 FY2025（2026-02-26）</h3>
+    <div class="ec-item"><span class="ec-badge ec-bull">利好</span>FY2025：持续经营调整后 EBITDA 59.12 亿、增长前调整后自由现金流 35.92 亿，<strong>分别超出原始指引中值约 1.12 亿与 2.92 亿</strong>。——<strong>解读：</strong>兑现度良好，这是给管理层加分的一条实证。</div>
+    <div class="ec-item"><span class="ec-badge ec-neut">中性</span>FY2025：净利润 9.44 亿，「包含一笔 8.08 亿美元的、来自未来年份套保的未实现损失」，并解释「套保的未实现损失通常发生在远期商品价格上涨时，而价格上涨总体上有利于 Vistra 未来各期的整个组合」。——<strong>解读：</strong><span class="hl-t">这是整份财报里最有价值的一句话，公司把因果关系讲得比多数卖方研报都清楚。</span>它同时也是一句警告：读者不能用 GAAP 净利润的方向来判断这门生意的方向。</div>
+    <div class="ec-item"><span class="ec-badge ec-bear">利空</span>2026Q1 净利润 10.29 亿、营业利润率 26.6%，为八个季度最高。——<strong>解读：</strong>标为利空不是笔误。按公司自己给出的规则倒推，该季 7.23 亿的未实现<strong>收益</strong>意味着远期电价在下跌——而远期电价正是这只股票的核心估值变量。<strong>那个季度报表最好看，恰恰因为基本面在变差。</strong></div>
+    <div class="ec-item"><span class="ec-badge ec-neut">中性</span>套保比例披露：2026-02-18 为 2026 年约 100%、2027 年约 84%、2028 年约 58%；2026-08-03 为 100%、<strong>94%</strong>、<strong>72%</strong>。——<strong>解读：</strong>半年内把 2027 年多锁 10 个百分点、2028 年多锁 14 个百分点。风险管理上无可指摘，但对持股逻辑是实质性的改变，详见模块 10.2。</div>
+
+    <h3>6.3 指引兑现度追踪</h3>
+    <div class="tbl-wrap">
+      <table class="tbl" data-shape="cards" data-source="FY2025 与 2026Q1 / Q2 业绩新闻稿">
+        <thead><tr><th>指引项</th><th>给出时点</th><th>指引</th><th>实际 / 最新</th><th>兑现</th></tr></thead>
+        <tbody>
+          <tr><td>FY2025 持续经营调整后 EBITDA</td><td>2024-11</td><td>中值约 58.00 亿</td><td><strong>59.12 亿</strong></td><td>超出约 1.12 亿 ✅</td></tr>
+          <tr><td>FY2025 增长前调整后自由现金流</td><td>2024-11</td><td>中值约 33.00 亿</td><td><strong>35.92 亿</strong></td><td>超出约 2.92 亿 ✅</td></tr>
+          <tr><td>2026 持续经营调整后 EBITDA</td><td>2025-11-06</td><td>68–76 亿</td><td>上半年 32.61 亿（中值进度 45.3%）</td><td>进度符合季节性 ⏳</td></tr>
+          <tr><td>2026 增长前调整后自由现金流</td><td>2025-11-06</td><td>39.25–47.25 亿</td><td>—</td><td>待四季度验证 ⏳</td></tr>
+          <tr><td>2027 中点机会</td><td>2025-11-06</td><td>74–78 亿</td><td>两次财报后<strong>未更新</strong></td><td>基准已过时九个月 ⚠️</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>信号汇总：</strong>经营层面的信号一致向好——三个发电分部同时增长、指引连续重申、并购监管过关、兑现记录良好。<span class="hl-t">但所有向好的信号都集中在已被锁定的 2026 年；而所有的不确定都集中在尚未定价的 2028 年之后。</span>管理层的沟通没有回避这一点，只是也没有主动去填补它。</p>
+  </div>
+</section>
+
+<section class="section" id="m7" aria-labelledby="m7-t">
+  <h2 class="stitle" id="m7-t">模块 7 · 多模型估值（8 种方法）<a class="anchor" href="#m7" aria-label="本节链接">#</a></h2>
+  <div class="cmt">
+    <p><strong>估值基准（不锚定现价，独立推导）：</strong>2026 年持续经营调整后 EBITDA 取公司指引中值 <strong>72.00 亿美元</strong>；净债务 199.12 亿（总债务 205.70 − 现金 6.58）；优先股 24.76 亿；股数 3.360 亿。</p>
+
+    <h3>7.1 先处理相对估值的四个倍数：哪些能用、哪些不能</h3>
+    <div class="tbl-wrap">
+      <table class="tbl" data-shape="cards" data-source="股价 US$140.59（2026-08-07）；同业倍数取自 stockanalysis.com 同日 statistics 页">
+        <thead><tr><th>倍数</th><th>Vistra 当前</th><th>同业对照</th><th>能否用作估值锚</th></tr></thead>
+        <tbody>
+          <tr><td><strong>市盈率 P/E</strong></td><td>TTM 23.3×，前瞻 15.0×</td><td>CEG 前瞻 22.3×、NRG 11.6×</td><td><strong>仅前瞻档可参考。</strong>TTM 口径横跨疲弱的 2025 与强劲的 2026，且各单季被未实现套保扭曲（见模块 5.3 多档透视表）</td></tr>
+          <tr><td><strong>市销率 P/S</strong></td><td>2.46×（FY2025 为 3.07×）</td><td>CEG 3.06×、NRG 0.75×</td><td><strong>不适用。</strong>Vistra 的「营业收入」本身含未实现套保重估——2026Q1 收入同比 +43% 而发电量并未增长 43%。<span class="hl-t">分母被污染的倍数，不能用来定价</span></td></tr>
+          <tr><td><strong>市净率 P/B</strong></td><td>15.2×</td><td>CEG 3.00×、NRG 5.91×</td><td><strong>不适用。</strong>股东权益仅 50.97 亿，是十年回购注销 30% 股本后的残值，不代表资产的经济价值</td></tr>
+          <tr class="hl"><td><strong>EV/EBITDA</strong></td><td>TTM 10.37×，2026E <strong>9.67×</strong></td><td>CEG 14.47×、NRG 12.61×</td><td><strong>可用，且是唯一诚实的整体口径。</strong>它同时覆盖 199 亿净债务与 25 亿优先股，不受权益被回购削薄的影响</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">泰伦能源（TLN）的 EV/EBITDA 显示为 67.71×，因其 TTM 息税折旧摊销前利润仅 3.84 亿美元（且净利为亏损）而失真，本报告不作为可比对象。</p>
+
+    <h3>7.2 八法明细</h3>
+    <div class="tbl-wrap">
+      <table class="tbl" data-shape="cards" data-source="本报告据 SEC 申报数据、2026 年公司指引与同业市场数据独立测算">
+        <thead><tr><th>方法</th><th>关键假设</th><th>每股价值</th><th>适用性</th></tr></thead>
+        <tbody>
+          <tr class="hl"><td><strong>1. 相对估值（EV/EBITDA）</strong></td><td>10.5× × 2026E 72.00 亿 ＝ EV 756 亿，减净债务与优先股。同组的 P/E 仅前瞻档可参考，P/S 与 P/B 不适用，理由见 7.1</td><td><strong>US$158.37</strong></td><td><strong>主锚。</strong>对净债务近 200 亿的发电商，唯一诚实的整体口径</td></tr>
+          <tr><td>2. 现金流折现（DCF，基准情景）</td><td>WACC 9.0%、永续增长 2.5%；2027–2031 无杠杆自由现金流 42.0→52.0 亿</td><td><strong>US$145.66</strong></td><td>高。悲观 DCF（WACC 10%/g 2%）108.12；乐观（8.5%/3%）180.53</td></tr>
+          <tr><td>3. 所有者盈余收益率（自由现金流 FCF 口径）</td><td>所有者盈余 34.87 亿（＝调整后净利 ＋ 折旧摊销 ＋ 股权激励 − 维护性资本开支），要求收益率 7.0%</td><td><strong>US$148.26</strong></td><td>高。维护性资本开支 15.36 亿直接取公司指引，非估算。对照：GAAP FCF 口径的 TTM 收益率为 4.77%</td></tr>
+          <tr><td>4. PEG</td><td>2026–2028 混合增速约 12%，合理市盈率 12×，前瞻 EPS 9.06</td><td>US$108.72</td><td>中。2027 年只增 5.6% 拖低了增速，属偏保守的下限检验</td></tr>
+          <tr><td>5. 股息贴现（DDM）</td><td>每股股息 0.92 美元、增长 6%、要求回报 9.5%</td><td><s>US$27.87</s></td><td><strong>不适用，不计入加权。</strong>DDM 的前提是股息为主要回报形式，而 Vistra 派息率仅 15%、股息收益率 0.65%，回报主体是回购。此处列出仅为完整性</td></tr>
+          <tr><td>6. 净资产价值（NAV）／重置成本</td><td>核电 3,000 美元/千瓦、联合循环 1,100、调峰 500、煤 250、可再生 1,200；零售按 8× EBITDA。发电资产合计 498.9 亿 ＋ 零售 129.8 亿</td><td>US$120.47</td><td>中高。发电是重资产行业，NAV 适用；对联合循环单价敏感（900→1,400 美元/千瓦对应每股 107→140）</td></tr>
+          <tr><td>7. 反向 DCF</td><td>按现价 140.59 倒解永续增长率（同一套 WACC 9.0% 与 2026 年无杠杆自由现金流 39.89 亿）</td><td>隐含 <strong>3.09%</strong></td><td><strong>诊断用，不计入中位数</strong></td></tr>
+          <tr><td>8. 分部加总（SOTP）</td><td>零售 8×、得州 9×、东部 12×、西部 7×（2026E 分部 EBITDA 按上半年同比缩放至指引中值）</td><td>US$149.96</td><td>高。四个分部风险特征差异显著，分开定价比整体倍数更准</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>7.3 加权汇总</h3>
+    <div class="tbl-wrap">
+      <table class="tbl" data-shape="grid" data-source="本报告测算">
+        <thead><tr><th>方法</th><th>每股价值</th><th>权重</th><th>加权贡献</th></tr></thead>
+        <tbody>
+          <tr><td>EV/EBITDA</td><td>158.37</td><td>25%</td><td>39.59</td></tr>
+          <tr><td>现金流折现</td><td>145.66</td><td>20%</td><td>29.13</td></tr>
+          <tr><td>所有者盈余收益率</td><td>148.26</td><td>20%</td><td>29.65</td></tr>
+          <tr><td>分部加总</td><td>149.96</td><td>15%</td><td>22.49</td></tr>
+          <tr><td>重置成本</td><td>120.47</td><td>12%</td><td>14.46</td></tr>
+          <tr><td>PEG</td><td>108.72</td><td>8%</td><td>8.70</td></tr>
+          <tr class="hl"><td><strong>加权公允价值</strong></td><td colspan="2"><strong>US$144.02</strong></td><td>六法中位数 <strong>US$146.97</strong></td></tr>
+          <tr class="hl"><td><strong>现价 US$140.59</strong></td><td colspan="3">较加权公允<strong>低估 2.4%</strong>，安全边际 <strong>2.4%</strong>（门槛 25%，<strong>未达标</strong>）</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>关于 10.5 倍这个主锚的取值，必须说明理由。</strong>同业当前 TTM 口径：星座能源 14.47×、NRG 12.61×（泰伦能源 67.71× 因 TTM 息税折旧摊销前利润仅 3.84 亿而失真，不可比）。取 10.5 倍是<span class="hl-t">同时低于两家可比同业</span>——因为 Vistra 化石燃料占比更高（82%）、杠杆更重；但<span class="hl-t">高于独立发电商历史上 6–9 倍的区间</span>——因为它手上有 3,809 兆瓦二十年期核电长约，且行业供给约束是结构性的。倍数每变动 0.5 倍，每股价值变动约 10.7 美元（7.6%）。</p>
+    <p><strong>反向折现的结果值得单独强调，因为它是本报告里最有利于多头的一条：</strong>现价隐含的永续增长率只有 <strong>3.09%</strong>。对一家 2026 年 EBITDA 指引同比 +21.8%、手握二十年长约、正在收购 5,500 兆瓦机组的公司，这个门槛并不高。<strong>如果你相信 2028 年之后的电价会显著高于今天的远期曲线，那么现价是便宜的，我的估值是错的。</strong></p>
+
+    <h3>7.4 建仓阶梯</h3>
+    <div class="tbl-wrap">
+      <table class="tbl" data-shape="grid" data-source="按六法中位数 US$146.97 × 80/70/60% 机械推导">
+        <thead><tr><th>档位</th><th>价格</th><th>相对中位数</th><th>相对现价</th><th>建议投入</th></tr></thead>
+        <tbody>
+          <tr><td>首仓</td><td><strong>US$117.58</strong></td><td>80%</td><td>−16.4%</td><td>计划仓位的 40%</td></tr>
+          <tr><td>二仓</td><td><strong>US$102.88</strong></td><td>70%</td><td>−26.8%</td><td>计划仓位的 35%</td></tr>
+          <tr><td>三仓</td><td><strong>US$88.18</strong></td><td>60%</td><td>−37.3%</td><td>计划仓位的 25%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">首仓价 117.58 低于 52 周低点 132.66，意味着按本报告的估值纪律，过去一年从未出现过合格的买点。这不是预测股价会跌到那里，而是说明：<strong>在这个估值区间，等待的成本低于犯错的成本。</strong></p>
+  </div>
+</section>
+
+<section class="section" id="m8" aria-labelledby="m8-t">
+  <h2 class="stitle" id="m8-t">模块 8 · 竞争与行业分析<a class="anchor" href="#m8" aria-label="本节链接">#</a></h2>
+  <div class="cmt">
+    <h3>8.1 同业财务对照（2026-08-07）</h3>
+    <div class="tbl-wrap">
+      <table class="tbl" data-shape="grid" data-source="stockanalysis.com 各公司 statistics 页，同日取数">
+        <thead><tr><th>公司</th><th>股价</th><th>市值</th><th>企业价值</th><th>EV/EBITDA</th><th>前瞻市盈率</th><th>52 周涨跌</th><th>一致目标价</th></tr></thead>
+        <tbody>
+          <tr class="hl"><td><strong>Vistra（VST）</strong></td><td>140.59</td><td>472 亿</td><td>672 亿</td><td><strong>10.37</strong></td><td><strong>15.03</strong></td><td><strong>−30.0%</strong></td><td>222.11</td></tr>
+          <tr><td>星座能源（CEG）</td><td>269.89</td><td>956 亿</td><td>1,196 亿</td><td>14.47</td><td>22.25</td><td>−20.3%</td><td>349.96</td></tr>
+          <tr><td>NRG 能源（NRG）</td><td>118.13</td><td>248 亿</td><td>481 亿</td><td>12.61</td><td>11.56</td><td>−20.5%</td><td>193.29</td></tr>
+          <tr><td>泰伦能源（TLN）</td><td>347.71</td><td>167 亿</td><td>260 亿</td><td>67.71 <span class="note">（失真）</span></td><td>11.23</td><td>−8.2%</td><td>467.69</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>三件事可以读出来。</strong>第一，<span class="hl-t">Vistra 是可比同业里 EV/EBITDA 最低、同时 52 周跌幅最大的一个</span>。第二，它对星座能源的折价有基本面依据——后者八成以上是无碳电源，而 Vistra 只有 15% 核电、20% 煤电。第三，它对 NRG 的折价（10.37 对 12.61）较难解释：Vistra 的资产质量（核电占比、EBITDA 绝对额 64.7 亿对 38.2 亿）优于 NRG。这是本报告认为现价并非明显高估的原因之一。</p>
+    <h3>8.2 波特五力</h3>
+    <div class="tbl-wrap">
+      <table class="tbl" data-shape="cards" data-source="本报告基于 FY2025 10-K、PJM 与 ERCOT 公开市场数据判断">
+        <thead><tr><th>力</th><th>强度</th><th>依据</th></tr></thead>
+        <tbody>
+          <tr><td>新进入者威胁</td><td><strong>低</strong></td><td>并网排队、燃气轮机订单排至 2030 年前后、核电事实上无法新建。PJM 2028/29 拍卖在 6.8 吉瓦缺口下只吸引到约 525 兆瓦新增资源</td></tr>
+          <tr><td>供应商议价能力</td><td><strong>中高</strong></td><td>燃气轮机制造商（GE、西门子能源、三菱）产能售罄，交付周期与价格均处于卖方市场；铀与浓缩服务同理</td></tr>
+          <tr><td>买方议价能力</td><td>中</td><td>零售端用户转换成本近零；但超大规模数据中心买方在寻找无碳、可调度、可立即并网的电源时选择极少，议价能力反而下降——这正是两笔二十年 PPA 得以成交的原因</td></tr>
+          <tr><td>替代品威胁</td><td>中</td><td>风光加储成本持续下降，但不可调度；且 ERCOT 与 PJM 的容量机制正在为可调度电源支付溢价</td></tr>
+          <tr><td>行业内竞争</td><td><strong>高</strong></td><td>批发电力是同质商品，价格由边际机组决定。零售端在德州高度竞争</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h3>8.3 PJM 容量市场：增长引擎的行政天花板</h3>
+    <p>东部分部上半年调整后 EBITDA 同比 +54.8%，是 Vistra 增长的主发动机，而它的燃料是 PJM 容量价格。2026 年 7 月 14 日公布的 2028/29 年度基础剩余拍卖结果：</p>
+    <ul class="ulist">
+      <li>清算量 <strong>138,318 兆瓦</strong>，清算价 <strong>325 美元/兆瓦·日</strong>——<strong>连续第三次顶到价格上限</strong></li>
+      <li>但这个上限本身比 2027/28 年度的 333.44 美元<strong>低了 2.5%</strong>，是自 2025/26 年度以来<strong>首次回落</strong></li>
+      <li>结果仍较 PJM 的备用容量目标<strong>短缺 6.8 吉瓦</strong>，且只吸引到约 <strong>525 兆瓦</strong>新增资源</li>
+    </ul>
+    <p><strong>这三条要合起来读。</strong>价格顶到上限说明供需极紧，对 Vistra 有利；上限被行政下调说明<span class="hl-t">这个市场的价格不再由供需单独决定，而是由供需与宾夕法尼亚州政治共同决定</span>；短缺 6.8 吉瓦却只来了 525 兆瓦新增资源，说明上限正在抑制新投资——这对既有机组是长期利好，对监管稳定性却是隐患。<strong>一个被压住的价格，既是护城河，也是政治风险。</strong></p>
+  </div>
+</section>
+
+<section class="section" id="m9" aria-labelledby="m9-t">
+  <h2 class="stitle" id="m9-t">模块 9 · 技术面与 K 线分析<a class="anchor" href="#m9" aria-label="本节链接">#</a></h2>
+  <div class="cmt">
+    <p class="note">技术面在本报告中<strong>次要于基本面</strong>，仅作交易节奏的补充参考。</p>
+    <div class="tbl-wrap">
+      <table class="tbl" data-shape="grid" data-source="stockanalysis.com 报价与统计页，2026-08-07 收盘">
+        <thead><tr><th>指标</th><th>数值</th><th>读法</th></tr></thead>
+        <tbody>
+          <tr><td>现价</td><td>US$140.59</td><td>—</td></tr>
+          <tr><td>52 周高 / 低</td><td>219.82 / 132.66</td><td>高点 2025-09-22；现价位于区间 <strong>9.1%</strong> 分位，贴近下沿</td></tr>
+          <tr><td>距高点</td><td><strong>−36.0%</strong></td><td>典型的主题退潮幅度</td></tr>
+          <tr><td>50 日均线</td><td>155.10</td><td>价在其下 9.4%</td></tr>
+          <tr><td>200 日均线</td><td>162.29</td><td>价在其下 13.4%，<strong>均线空头排列</strong></td></tr>
+          <tr><td>52 周涨跌</td><td>−30.0%</td><td>弱于 CEG（−20.3%）与 NRG（−20.5%）</td></tr>
+          <tr><td>Beta（5 年）</td><td>1.43</td><td>波动显著高于大盘</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>结构判断：</strong>价格位于 50 日与 200 日均线之下且两线向下发散，属确认的中期下降趋势。<span class="hl-t">最重要的支撑是 52 周低点 132.66</span>——该位距现价仅 5.6%，若跌破则下方缺乏近期成交密集区。上方第一压力在 155 附近（50 日均线，且与 2026 年回购均价 156.57 高度重合，存在潜在的机构成本区）。</p>
+    <p><strong>一个值得记的巧合：</strong>2026 年公司回购均价 156.57，与 50 日均线 155.10 几乎重叠。这意味着若股价重回该区域，管理层今年的回购才刚回本。</p>
+    <p class="note">本节未给出 RSI、MACD 等震荡指标的具体数值——本报告未取得可交叉验证的一手计算源，不以估算值充数。</p>
+  </div>
+</section>
+
+<section class="section" id="m10" aria-labelledby="m10-t">
+  <h2 class="stitle" id="m10-t">模块 10 · 增长催化剂与前景展望<a class="anchor" href="#m10" aria-label="本节链接">#</a></h2>
+  <div class="cmt">
+    <h3>10.1 数据中心长约：已签的 3,809 兆瓦，与它真正的时间表</h3>
+    <p>这是全份报告里最需要把「已签」与「已宣布」分开的地方。以下每一笔都是<strong>确定性合同</strong>，均见于 10-K / 10-Q 正文，非意向书：</p>
+    <div class="tbl-wrap">
+      <table class="tbl" data-shape="cards" data-source="FY2025 Form 10-K 与 2026Q2 Form 10-Q 正文（Comanche Peak PPA、PJM Nuclear PPAs and Uprates 两节）">
+        <thead><tr><th>对手方</th><th>电厂</th><th>兆瓦</th><th>期限</th><th>签署</th><th>开始交付</th><th>满负荷</th></tr></thead>
+        <tbody>
+          <tr><td>亚马逊云（AWS）</td><td>科曼奇峰（ERCOT）</td><td>1,200</td><td>20 年（可延最多 20 年）</td><td>2025-09</td><td><strong>2027Q4</strong></td><td><strong>2032</strong></td></tr>
+          <tr><td>Meta</td><td>佩里 1,268 ＋ 戴维斯-贝西 908</td><td>2,176</td><td>20 年</td><td>2026-01</td><td>2026 年末（部分）</td><td>2027 年末</td></tr>
+          <tr><td>Meta</td><td>佩里 213 ＋ 戴维斯-贝西 80 ＋ 比弗谷 140（扩容）</td><td>433</td><td>20 年</td><td>2026-01</td><td><strong>2031</strong></td><td><strong>2034</strong></td></tr>
+          <tr class="hl"><td colspan="2"><strong>合计</strong></td><td><strong>3,809</strong></td><td colspan="4">占 43,641 兆瓦总容量的 <strong>8.7%</strong>，占核电容量的 59%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>两点必须说清楚。</strong></p>
+    <p>其一，<span class="hl-t">Meta 那 2,609 兆瓦里，2,176 兆瓦（83%）是佩里与戴维斯-贝西此刻就在发的电，只是改签给了 Meta。</span>这是把既有出力重新定价——对价格与期限的确定性是重大改善，但它不是新增产能。真正新增的是那 433 兆瓦扩容，而它<strong>2031 年才开始交付、2034 年才交完</strong>。</p>
+    <p>其二，扩容要花多少钱，公司没有给。10-Q 的原话是：资本开支自 2026 年开始、延续至 2034 年，<strong>「2028 年底前落地的预计不到总额的 20%」</strong>，且「时间与金额将取决于监管批准、工程评估与资本配置决策等一系列因素」。<strong>一笔跨九年的开支，连区间都没有。</strong></p>
+    <p>这不是说合同不好——二十年期、投资级对手方、卖给一队本来就在运转的核电机组，这是好生意。<strong>但它的现金流曲线，比「AI 电力」四个字给人的印象要平缓得多、也远得多。</strong></p>
+
+    <h3>10.1b 一个被「二十年」四个字盖住的依赖：执照到期日</h3>
+    <p>10-K 披露的六台机组执照到期日如下：</p>
+    <div class="tbl-wrap">
+      <table class="tbl" data-shape="grid" data-source="FY2025 Form 10-K，Item 1 Business「我们在四个厂址拥有并运营六台核电机组」表">
+        <thead><tr><th>机组</th><th>市场</th><th>净容量（MW）</th><th>换料周期</th><th>执照到期</th></tr></thead>
+        <tbody>
+          <tr><td>科曼奇峰 1 号</td><td>ERCOT</td><td>1,200</td><td>18 个月</td><td>2050</td></tr>
+          <tr><td>科曼奇峰 2 号</td><td>ERCOT</td><td>1,200</td><td>18 个月</td><td>2053</td></tr>
+          <tr><td>比弗谷 1 号</td><td>PJM</td><td>939</td><td>18 个月</td><td><strong>2036</strong></td></tr>
+          <tr><td>比弗谷 2 号</td><td>PJM</td><td>933</td><td>18 个月</td><td>2047</td></tr>
+          <tr><td>佩里</td><td>PJM</td><td>1,268</td><td>24 个月</td><td>2046</td></tr>
+          <tr><td>戴维斯-贝西</td><td>PJM</td><td><strong>908</strong></td><td>24 个月</td><td><strong>2037</strong></td></tr>
+          <tr class="hl"><td>合计</td><td>—</td><td>6,448</td><td>—</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>把这张表和上面那张合同表叠起来看：<span class="hl-t">卖给 Meta 的 2,176 兆瓦运行出力中，有 908 兆瓦来自戴维斯-贝西，而它的执照 2037 年到期</span>——若合同自 2027 年满负荷起算二十年，执照比合同早结束约十年。比弗谷 1 号（承担 140 兆瓦扩容）执照 2036 年到期，比扩容满负荷的 2034 年只多两年。</p>
+    <p>公司对此的表述见 FY2025 业绩新闻稿：PJM 各厂的协议「<strong>支持</strong>四台核电机组各再延二十年的后续执照续期（subsequent license renewal）」。<strong>请注意「支持」这个词。</strong>本报告在 FY2025 年报（10-K）与 2026 年二季报（10-Q）全文中检索 <code>subsequent license</code> 与 <code>SLR</code>，<span class="hl-t">两份定期报告各 0 次命中</span>——即截至最新定期报告，Vistra 未披露任何已向 NRC 递交的后续执照续期申请。</p>
+    <p><strong>要把话说公道：这不是红旗。</strong>美国已有多台机组完成第二次延寿（土耳其角、桃花谷、萨里、北安娜），路径成熟；且申请通常在到期前约五年提交，戴维斯-贝西 2037 年到期意味着 2032 年前后申请属正常节奏，2026 年尚未提交并不反常。<strong>但「二十年 PPA」这个说法本身，确实包含了一个尚未取得的监管批准作为前提，而这一点不写在合同标题里。</strong></p>
+
+    <h3>10.2 套保曲线：能见度与上行空间的取舍</h3>
+    <div class="tbl-wrap">
+      <table class="tbl" data-shape="grid" data-source="2026-02-26 与 2026-08-07 业绩新闻稿披露的预期发电量套保比例">
+        <thead><tr><th>年度</th><th>2026-02-18 披露</th><th>2026-08-03 披露</th><th>变化</th><th>含义</th></tr></thead>
+        <tbody>
+          <tr><td>2026</td><td>约 100%</td><td>约 100%</td><td>—</td><td>电价上行的收益 <strong>0</strong></td></tr>
+          <tr><td>2027</td><td>约 84%</td><td><strong>约 94%</strong></td><td>＋10pp</td><td>敞口仅剩 <strong>6%</strong></td></tr>
+          <tr><td>2028</td><td>约 58%</td><td><strong>约 72%</strong></td><td>＋14pp</td><td>敞口 <strong>28%</strong>，第一个有意义的年份</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>这是全份报告里最重要的一张表。</strong>它同时解释了两件看似矛盾的事：为什么 2026 年指引能在股价跌掉三成六时原封不动地重申（因为发电量已全部卖出，价格已定）；以及为什么股价会跌（因为投资者买入的那个「电价上涨」的看涨期权，被公司自己卖掉了）。</p>
+    <p>套保是电力公司的本分，管理层没有做错。但持股逻辑必须相应调整：<span class="hl-t">未来两年，Vistra 更接近一只有明确票息的类债券资产，而不是一份关于 AI 用电的看涨期权。</span>第一个能承接 AI 电力叙事的年份是 2028 年，而那也只有 28% 的敞口。</p>
+
+    <h3>10.3 容易被忽略的两条天花板</h3>
+    <p><strong>核电生产税抵免：是地板，也是天花板。</strong>《通胀削减法案》第 45U 条为存量核电机组提供 2024 至 2032 年、最高 <strong>15 美元/兆瓦时</strong>的联邦税收抵免，但设有退坡机制——当年度总收入落在 <strong>26.00 至 44.75 美元/兆瓦时</strong>区间时（2025 年口径，逐年通胀调整），抵免逐步归零。</p>
+    <p>Vistra 确认的可转让核电生产税抵免收入：<strong>FY2024 为 5.45 亿美元，FY2025 降至 2.20 亿</strong>。降幅的原因正是电价上行。</p>
+    <p><span class="hl-t">这个机制把核电的收益曲线两头削平：电价跌时托底，电价涨时抽走补贴。</span>它降低了下行风险，也压缩了上行弹性。附带一条会计敏感性：10-K 明确指出，美国财政部对「总收入」定义的解释性指引若与公司当前估计不同，<strong>可能导致 2024 与 2025 年已记录的 PTC 收入发生重大变化</strong>，届时作为会计估计变更处理——累计涉及金额 7.65 亿美元。</p>
+    <p><strong>PJM 容量价格上限：</strong>见模块 8.3。价格连续三次触顶，而上限本身刚刚下调 2.5%。</p>
+
+    <h3>10.4 未来 6 个月的短期催化剂</h3>
+    <ul class="ulist">
+      <li><strong>Cogentrix 交割</strong>——FERC 已批，交割后 5,500 兆瓦并表，并将首次纳入指引</li>
+      <li><strong>2027 年指引正式给出</strong>（通常在 11 月）——届时基准曲线会重置，且可能首次纳入 Cogentrix 与 Meta PPA。<span class="hl-t">这是未来六个月里信息量最大的单一事件</span></li>
+      <li><strong>Meta PPA 开始送电</strong>（2026 年末）——从合同变为收入的第一步</li>
+      <li><strong>Q3 2026 财报</strong>（预计 11 月初）——ERCOT 夏季是全年最强的一季，将检验 68–76 亿指引</li>
+      <li><strong>财政部核电 PTC 指引</strong>——若「总收入」定义收紧，涉及 7.65 亿已确认收入</li>
+    </ul>
+
+    <h3>10.5 三到五年展望</h3>
+    <p>2028 年前后是这家公司的转折点：4,578 兆瓦煤电退出（其中科莱托溪与迈阿密堡计划改造为燃气）；Cogentrix 5,500 兆瓦燃气机组并入；AWS 与 Meta 的长约进入满负荷爬坡；套保敞口首次回到 28% 以上。<strong>届时的 Vistra 将是一家更干净、更长约化、也更依赖并购整合成效的公司。</strong>本报告的估值没有为 2028 年之后的电价上行付费——这是与卖方最大的分歧点。</p>
+  </div>
+</section>
+
+<section class="section" id="m11" aria-labelledby="m11-t">
+  <h2 class="stitle" id="m11-t">模块 11 · 风险矩阵<a class="anchor" href="#m11" aria-label="本节链接">#</a></h2>
+  <div class="risk-grid">
+    <div class="risk-card r4">
+      <h5>商品价格风险 · 严重度 4／5（高）</h5>
+      <p>2028 年 28% 的敞口与 2029 年之后的全部敞口，直接暴露于远期电价。2026Q1 那笔 7.23 亿的未实现收益已经在提示：远期曲线在下行。EV/EBITDA 每变动 0.5 倍，每股价值变动约 10.7 美元。</p>
+    </div>
+    <div class="risk-card r4">
+      <h5>估值风险 · 严重度 4／5（高）</h5>
+      <p>安全边际仅 2.4%，远低于 25% 门槛。加权公允 144.02 与卖方一致目标价 222.11 相差 54%——分歧不在事实而在 2028 年之后的电价假设。若这一假设落空，下行空间可观。</p>
+    </div>
+    <div class="risk-card r3">
+      <h5>财务与流动性风险 · 严重度 3／5（中）</h5>
+      <p>总债务半年增 15.0% 至 195.95 亿，流动比率 0.78。净杠杆 2.77 倍尚属合理、利息覆盖 6.4 倍不紧张，但商品保证金存款随价格波动，缓冲不厚（2025 年末总可用流动性 27.83 亿）。Cogentrix 交割还将承接 15 亿债务。</p>
+    </div>
+    <div class="risk-card r3">
+      <h5>监管与政策风险 · 严重度 3／5（中）</h5>
+      <p>PJM 容量价格上限由行政决定且刚下调 2.5%；核电 PTC 的「总收入」定义待财政部指引，涉及已确认的 7.65 亿；ERCOT 市场设计持续调整；部分州（如纽约）已出现限制数据中心用电的动议。</p>
+    </div>
+    <div class="risk-card r3">
+      <h5>经营与整合风险 · 严重度 3／5（中）</h5>
+      <p>两年内完成 Energy Harbor、Lotus 三笔收购并签下 Cogentrix，整合成效尚未经完整周期检验。核电运营本身是零容错业务。扩容工程跨 2026–2034 年且金额未定量。</p>
+    </div>
+    <div class="risk-card r2">
+      <h5>竞争风险 · 严重度 2／5（较低）</h5>
+      <p>护城河由物理与许可构成，短期难以被侵蚀。主要竞争压力在零售端（德州转换成本近零）与数据中心长约的争夺（星座能源、泰伦能源同场竞标）。</p>
+    </div>
+  </div>
+  <div class="cmt">
+    <h3>黑天鹅情景（三个，均有历史先例或已发生的雏形）</h3>
+    <ul class="ulist">
+      <li><strong>极端天气造成的单点巨额损失。</strong>2021 年 2 月的乌里冬季风暴让 Vistra 损失约 20 亿美元，直接把 FY2021 经营现金流打成 −2.06 亿。ERCOT 的市场设计在极端事件中会让缺电方按上限价格买电——<span class="hl-t">这是唯一一个能在单季吞掉整年利润的风险，而它已经发生过一次。</span></li>
+      <li><strong>核电机组的长期非计划停运，或后续执照续期受阻。</strong>6,448 兆瓦核电承载着 3,809 兆瓦的二十年长约，佩里与戴维斯-贝西合计 2,176 兆瓦已全部签给 Meta，冗余极低。任一机组因技术或监管原因长期停运，公司仍须履约供电——届时需以市场价购电补足，在电价高企时这是巨额负毛利。<span class="hl-t">叠加的一层是：戴维斯-贝西执照 2037 年到期、比弗谷 1 号 2036 年到期，均短于合同期，而后续执照续期申请截至最新定期报告尚未披露递交</span>（详见模块 10.1b）。</li>
+      <li><strong>AI 资本开支周期的骤然中止。</strong>本报告不预测这一情形，但需指出其传导路径：数据中心需求预期是 PJM 与 ERCOT 负荷预测上修的主因，也是容量价格触顶的支撑。若超大规模厂商大幅推迟建设，容量价格与远期电价将同时下行，而 Vistra 2029 年之后的敞口全部暴露于此。已签的二十年 PPA 提供部分保护，但那只覆盖 8.7% 的容量。</li>
+    </ul>
+    <p class="note">另有两个已经发生、可作参照的中等事件：2025 年 1 月 16 日莫斯兰丁 300 兆瓦电池储能起火，导致整个厂区停运、400 兆瓦转入待关停分部并计提 1.55 亿减值；2024 年 11 月 27 日马丁湖 1 号机组（815 兆瓦）起火，于 2026 年 2 月恢复运行，相关支出主要通过财产险回收。<strong>两年内两起火灾，说明这是一门物理风险真实存在的生意。</strong></p>
+  </div>
+</section>
+
+<section class="section" id="m12" aria-labelledby="m12-t">
+  <h2 class="stitle" id="m12-t">模块 12 · 股东回报分析<a class="anchor" href="#m12" aria-label="本节链接">#</a></h2>
+  <div class="cmt">
+    <h3>12.1 公司给了股东多少？</h3>
+    <div class="tbl-wrap">
+      <table class="tbl" data-shape="grid" data-source="FY2023–FY2025 合并现金流量表（Repurchase of common stock、Dividends paid）＋ 2026Q2 10-Q 回购明细表">
+        <thead><tr><th>年度</th><th>现金股息（普通股）</th><th>优先股股息（现金实付）</th><th>回购金额</th><th>回购股数</th><th>回购均价</th><th>股东总回报</th></tr></thead>
+        <tbody>
+          <tr><td>FY2021</td><td>2.90 亿</td><td>0</td><td>4.71 亿</td><td>—</td><td>—</td><td>7.61 亿</td></tr>
+          <tr><td>FY2022</td><td>3.02 亿</td><td>1.51 亿</td><td><strong>19.49 亿</strong></td><td>—</td><td>—</td><td>24.02 亿</td></tr>
+          <tr><td>FY2023</td><td>3.13 亿</td><td>1.50 亿</td><td>12.45 亿</td><td>—</td><td>—</td><td>17.08 亿</td></tr>
+          <tr><td>FY2024</td><td>3.05 亿</td><td>1.73 亿</td><td>12.66 亿</td><td>—</td><td>—</td><td>17.44 亿</td></tr>
+          <tr><td>FY2025</td><td>3.06 亿</td><td>1.92 亿</td><td>10.28 亿</td><td>—</td><td>—</td><td><strong>15.26 亿</strong></td></tr>
+          <tr class="hl"><td>2026 上半年</td><td>1.54 亿</td><td>0.96 亿</td><td>7.10 亿</td><td>453 万股</td><td><strong>US$156.74</strong></td><td>9.60 亿</td></tr>
+          <tr><td>2026Q1</td><td>—</td><td>—</td><td>3.79 亿</td><td>237 万股</td><td>US$159.82</td><td>—</td></tr>
+          <tr><td>2026Q2</td><td>—</td><td>—</td><td>3.31 亿</td><td>216 万股</td><td>US$153.34</td><td>—</td></tr>
+          <tr><td>至 2026-08-03 累计</td><td>—</td><td>—</td><td><strong>7.78 亿</strong></td><td>497 万股</td><td><strong>US$156.57</strong></td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">优先股一列为<strong>现金实付</strong>口径（现金流量表 Dividends paid to preferred stockholders）。利润表上的<strong>权责发生</strong>额与之不同——FY2024 与 FY2025 均为 1.92 亿、FY2022 与 FY2023 均为 1.50 亿、FY2021 为 0.21 亿，且正是「归属 Vistra 净利」与「归属普通股净利」两行之间的全部差额。用现金实付额去倒推那两行会对不上。</p>
+    <p><strong>派息率双口径（FY2025）：</strong>普通股股息 3.06 亿 ÷ 归属普通股净利 7.52 亿 ＝ <strong>40.7%</strong>；÷ GAAP 自由现金流 13.18 亿 ＝ <strong>23.2%</strong>。两个口径都很安全——股息在这家公司是象征性的，不是主要回报形式。</p>
+    <p><strong>trailing 股东收益率：</strong>（FY2025 普通股股息 3.06 亿 ＋ 回购 10.28 亿）÷ 现市值 472.4 亿 ＝ <strong>2.82%</strong>。若把优先股股息也算作资本返还，则为 3.23%——但那笔钱不流向普通股股东。</p>
+
+    <h3>12.2 给的方式好不好？</h3>
+    <p><strong>注销，不是库存股。</strong>Vistra 的 XBRL 申报使用 <code>StockRepurchasedAndRetiredDuringPeriodShares</code> 标签，即回购股份直接注销。这是含金量最高的形式——真实减少股本、提升每股内在价值，而非用现金对冲股权激励稀释。</p>
+    <p><strong>摊薄股数三年趋势——这是硬指标，而 Vistra 的表现极为突出：</strong></p>
+    <div class="tbl-wrap">
+      <table class="tbl" data-shape="grid" data-source="SEC XBRL WeightedAverageNumberOfDilutedSharesOutstanding">
+        <thead><tr><th>年度</th><th>摊薄股数（百万股）</th><th>同比</th><th>累计降幅（自 FY2021）</th></tr></thead>
+        <tbody>
+          <tr><td>FY2021</td><td>482.2</td><td>—</td><td>—</td></tr>
+          <tr><td>FY2022</td><td>422.4</td><td>−12.4%</td><td>−12.4%</td></tr>
+          <tr><td>FY2023</td><td>375.2</td><td>−11.2%</td><td>−22.2%</td></tr>
+          <tr><td>FY2024</td><td>352.6</td><td>−6.0%</td><td>−26.9%</td></tr>
+          <tr><td>FY2025</td><td>345.7</td><td>−2.0%</td><td>−28.3%</td></tr>
+          <tr class="hl"><td>2026Q2</td><td><strong>339.2</strong></td><td>−1.8%（年化）</td><td><strong>−29.7%</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>股权激励费用 FY2025 为 1.13 亿美元，仅占调整后 EBITDA 的 1.9%，且股数每年实打实地下降——<span class="hl-t">回购完全没有沦为替股权激励接盘，这在美股中并不常见。</span></p>
+    <p><strong>但择时质量出现了明显分层，必须如实写出。</strong>公司披露：自 2021 年 11 月至 2026 年 2 月 18 日，累计执行约 <strong>59 亿美元</strong>回购，流通股较 2021 年 11 月 2 日减少约 <strong>30%</strong>。</p>
+    <p>衡量这笔钱花得好不好，最硬的口径是「<strong>每让摊薄股数净减少一股，花掉了多少现金</strong>」——它把股权激励新发行的稀释一并计入，比单纯的回购均价更接近股东的真实处境：</p>
+    <div class="tbl-wrap">
+      <table class="tbl" data-shape="grid" data-source="回购现金取 SEC XBRL PaymentsForRepurchaseOfCommonStock；摊薄股数取 WeightedAverageNumberOfDilutedSharesOutstanding；比值为本报告自算">
+        <thead><tr><th>财年</th><th>回购现金</th><th>摊薄股数净减少</th><th>每减少一股花掉</th></tr></thead>
+        <tbody>
+          <tr><td>FY2022</td><td>19.49 亿</td><td>5,980 万股</td><td><strong>US$32.6</strong></td></tr>
+          <tr><td>FY2023</td><td>12.45 亿</td><td>4,720 万股</td><td><strong>US$26.4</strong></td></tr>
+          <tr><td>FY2024</td><td>12.66 亿</td><td>2,260 万股</td><td>US$56.0</td></tr>
+          <tr><td>FY2025</td><td>10.28 亿</td><td>690 万股</td><td><strong>US$149.0</strong></td></tr>
+          <tr class="hl"><td>2026 年初至 8/3</td><td>7.78 亿</td><td>—（公司直接披露均价）</td><td><strong>US$156.57</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><span class="hl-t">每年掏出去的现金差不多（10 至 19 亿），而每减少一股的代价从 26.4 美元涨到 149.0 美元，五年 5.6 倍。</span>FY2022 与 FY2023 是极高质量的资本配置——尤其 FY2022 在自由现金流为 −8.16 亿时仍回购 19.49 亿，是在能源危机最悲观时逆势买入。而 <strong>FY2025 与 2026 年的均价（约 154 与 156.57 美元）都在今日 140.59 之上，这两年的回购目前是浮亏的</strong>。</p>
+    <p>回购收益率（当年回购额 ÷ 市值）同步从 FY2022 的 <strong>12.39%</strong> 降至 FY2025 的 <strong>1.96%</strong>——不是钱少了，是市值涨了五倍，同样的钱买不动了。</p>
+
+    <h3>12.3 能不能继续给、给多少？</h3>
+    <p><strong>剩余授权：</strong>董事会自 2021 年 10 月起分六次授权，累计 <strong>77.5 亿美元</strong>；截至 2026 年 8 月 3 日，剩余可用 <strong>12.22 亿</strong>，占现市值 2.6%。公司称计划在 <strong>2027 年底前用完</strong>。这是有明确时间承诺的授权，不是空头支票。</p>
+    <p><strong>股息政策：</strong>2026 年 7 月董事会宣布季度股息每股 0.2300 美元，年化 0.92 美元、收益率 0.65%。递增缓慢，定位为补充而非主体。</p>
+    <p><strong>覆盖度检验：</strong>FY2025（普通股股息 3.06 ＋ 回购 10.28）＝ 15.34 亿，而 GAAP 自由现金流 13.18 亿——<span class="hl-t">覆盖率 116%，超出部分靠举债或动用现金。</span>若按公司口径的增长前自由现金流 35.92 亿计，覆盖率仅 43%，非常宽裕。<strong>两个答案的差别，恰恰又是那笔被排除在外的增长性资本开支。</strong></p>
+    <p><strong>是否借债回购？</strong>需要正视：总债务从 FY2023 的 121.16 亿升至 2026Q2 的 195.95 亿，增加约 74.79 亿；同期回购支出约 41.0 亿。但债务增量的主要用途是并购（Vistra Vision 少数股权 32 亿、Lotus、Cogentrix）与增长开支，而非回购本身。<strong>不能简单称之为借债回购，但资本返还确实与债务扩张同期发生。</strong></p>
+    <p><strong>资本配置优先级的实际排序（按 2024 年以来的现金流向）：</strong></p>
+    <div class="tbl-wrap">
+      <table class="tbl" data-shape="cards" data-source="FY2024–FY2025 Form 10-K、2026Q2 Form 10-Q 附注 2 与附注 7">
+        <thead><tr><th>时间</th><th>动作</th><th>金额</th><th>性质</th></tr></thead>
+        <tbody>
+          <tr><td>2024-03</td><td>收购 Energy Harbor（PJM 三座核电站）</td><td>现金 ＋ Vistra Vision 15% 股权</td><td>并购</td></tr>
+          <tr><td>2024-12-31</td><td><strong>回购 Vistra Vision 15% 少数股权</strong>（自 Nuveen 与 Avenue）</td><td><strong>约 32 亿现金</strong></td><td>回购九个月前刚发出去的对价</td></tr>
+          <tr><td>2025-10-22</td><td>收购 Lotus Infrastructure 燃气机组</td><td>现金约 11 亿 ＋ 承接债务约 8 亿</td><td>并购</td></tr>
+          <tr><td>2025-12-31 签约</td><td>收购 Cogentrix Energy（5,500 兆瓦）</td><td>现金 23 亿 ＋ 承接债务 15 亿 ＋ 500 万股</td><td>并购，约 819 美元/千瓦，FERC 已批</td></tr>
+          <tr><td>2026-06</td><td>KKR Helix 基金有限合伙出资承诺</td><td><strong>最高 10 亿</strong>（初始 5 亿 ＋ 追加 5 亿）</td><td><span class="hl-t">私募基金 LP 敞口，非发电业务</span></td></tr>
+          <tr><td>2026–2034</td><td>核电扩容资本开支</td><td><strong>公司未给金额</strong></td><td>2028 年底前落地不到 20%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>关于最后两条，需要多说一句。KKR Helix 基金的协议约定：追加的 5 亿以基金达成若干针对 Vistra 既有机组的商业供电里程碑为条件，<strong>「或由公司自行选择、无论上述里程碑是否达成」</strong>。<span class="hl-t">这后半句把条件性去掉了一大半——一家独立发电商作为有限合伙人向私募基金投入 10 亿美元，这是资产管理业务的敞口，不是发电业务。</span></p>
+
+    <p><strong>模块小结：积极且历史含金量极高，但当前一档的择时已转差，且回报重心正从股东转向并购。</strong>回购全部注销、摊薄股数五年真实下降 29.7%、59 亿美元买回 30% 股本的平均成本约每股 41 美元——这是一份罕见的回购成绩单。但 2026 年均价 156.57 已浮亏一成，回购收益率从 12.4% 降至 2.0%，剩余授权仅占市值 2.6%，而同期公司把数十亿现金投向并购与一只私募基金。<strong>股东回报仍在继续，但它已不再是这家公司创造价值的主引擎。</strong></p>
+  </div>
+</section>
+
+<section class="section" id="m13" aria-labelledby="m13-t">
+  <h2 class="stitle" id="m13-t">模块 13 · 海图评分卡 + 投资决策<a class="anchor" href="#m13" aria-label="本节链接">#</a></h2>
+
+  <div class="scorecard">
+    <div class="score-grid">
+      <div class="score-card">
+        <div class="score-letter s-b">B−</div>
+        <div><strong>1. 生意可预测性</strong>　6 分<br>
+        <span class="snap-note">一句话能说清（发电、售电、套保）。2026–2027 年因 100%／94% 套保而能见度极高。但 GAAP 利润五年在 −13.77 亿到 ＋24.67 亿之间摆动，且乌里风暴证明单季可吞掉整年利润。</span></div>
+      </div>
+      <div class="score-card">
+        <div class="score-letter s-bp">B+</div>
+        <div><strong>2. 经济护城河</strong>　8 分<br>
+        <span class="snap-note">无形资产与有效规模两项为「宽」——核电执照数十年不发新证、并网排队与轮机产能构成物理禁令。转换成本与成本优势为「窄」。趋势加宽，但受 PJM 价格上限与 PTC 退坡两条政策天花板约束。</span></div>
+      </div>
+      <div class="score-card">
+        <div class="score-letter s-b">B</div>
+        <div><strong>3. 管理层质量</strong>　7 分<br>
+        <span class="snap-note">CEO 持股达基本工资 106 倍、直接持股 0.37%、禁止对冲质押，利益绑定扎实。指引兑现记录良好（FY2025 双超中值）。扣分项：2025 年薪酬 +23.5%，以及 KKR 基金那笔条件形同虚设的 10 亿承诺。</span></div>
+      </div>
+      <div class="score-card">
+        <div class="score-letter s-b">B</div>
+        <div><strong>4. 财务质量</strong>　7 分<br>
+        <span class="snap-note">净杠杆 2.77 倍合理，利息覆盖 6.4 倍。但 TTM 投入资本回报率 9.7% 仅勉强站上约 9.0% 的加权资本成本；流动比率 0.78 偏紧；FY2024 那个 51.6% 的 ROE 主要由 8.15 倍权益乘数与未实现收益堆出，不是常态。</span></div>
+      </div>
+      <div class="score-card">
+        <div class="score-letter s-b">B−</div>
+        <div><strong>5. 资本配置纪律</strong>　6 分<br>
+        <span class="snap-note">历史一流：59 亿美元回购 30% 股本、均价约 41 美元、全部注销、摊薄股数真实降 29.7%。但当前一档转差：2026 年均价 156.57 浮亏一成；重心已转向并购与一只私募基金 LP 敞口；扩容开支跨九年且未定量。</span></div>
+      </div>
+      <div class="score-card">
+        <div class="score-letter s-c">C+</div>
+        <div><strong>6. 估值与安全边际</strong>　5 分<br>
+        <span class="snap-note">现价 140.59 对六法中位数 146.97，安全边际仅 2.4%，远低于 25% 门槛。同业比较上确实是最便宜的一个（EV/EBITDA 10.37 对 NRG 12.61、CEG 14.47），但便宜不等于有安全边际。</span></div>
+      </div>
+    </div>
+
+    <div class="flag-row">
+      <strong>红旗排查：0 项触发，1 项列入监控。</strong>
+      商誉 28.10 亿多年未变、无减值历史；FY2025 的 2.28 亿减值发生在莫斯兰丁电池与开发项目上，是真实资产减值且已充分披露；无异常关联交易；股权激励占调整后 EBITDA 仅 1.9%；未发现自由现金流等关键指标的口径变更。
+      <br><br>
+      <strong>监控项（未触发降级）：</strong>核电生产税抵免按类推适用 ASC 832（政府补助）核算，10-K 明确指出财政部对「总收入」定义的解释性指引若与公司估计不同，<strong>可能导致 FY2024 与 FY2025 已确认的合计 7.65 亿美元 PTC 收入发生重大变化</strong>。该风险源于待定的监管解释而非公司行为，故不触发红旗，但需持续跟踪。
+    </div>
+
+    <div class="verdict">
+      <div class="verdict-t">综合评级：<span class="rating-badge" data-rating="持有观望">持有观望</span>　加权得分 6.5／10</div>
+      <p>六维加权 6.5 分本身对应「有条件买入」与「持有观望」之间，<strong>由第 6 维（估值与安全边际，5 分）拉至持有观望</strong>——安全边际 2.4% 距离 25% 的门槛差得太远，本框架不允许在此处给出买入。红旗 0 项触发，故不再进一步降级。</p>
+    </div>
+  </div>
+
+  <div class="cmt">
+    <h3>13.1 12 个月目标价：三情景</h3>
+    <div class="tbl-wrap">
+      <table class="tbl" data-shape="cards" data-source="本报告测算">
+        <thead><tr><th>情景</th><th>概率</th><th>目标价</th><th>触发条件</th></tr></thead>
+        <tbody>
+          <tr><td>乐观</td><td>30%</td><td>US$185</td><td>Cogentrix 顺利交割并增厚；11 月给出的 2027 年指引高于 78 亿且首次纳入 Meta PPA；远期电价企稳回升</td></tr>
+          <tr><td>基准</td><td>45%</td><td>US$144</td><td>2026 年指引兑现于中值上沿；2027 年指引与「中点机会」区间基本一致；估值维持约 10.5 倍</td></tr>
+          <tr><td>悲观</td><td>25%</td><td>US$105</td><td>远期电价继续下行、2028 年剩余敞口按更低价格套保；AI 资本开支进入消化期；PJM 容量价格上限再度下调</td></tr>
+          <tr class="hl"><td colspan="2"><strong>概率加权</strong></td><td colspan="2"><strong>US$146.55 → 取 US$146.50（较现价 +4.2%）</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>13.2 分批建仓与止盈</h3>
+    <div class="tbl-wrap">
+      <table class="tbl" data-shape="grid" data-source="按六法中位数 US$146.97 机械推导；止盈价按公允价值溢价档位设定">
+        <thead><tr><th>操作</th><th>价格</th><th>比例</th><th>说明</th></tr></thead>
+        <tbody>
+          <tr><td>首仓</td><td>US$117.58</td><td>计划仓位 40%</td><td>中位数 × 80%</td></tr>
+          <tr><td>二仓</td><td>US$102.88</td><td>计划仓位 35%</td><td>中位数 × 70%</td></tr>
+          <tr><td>三仓</td><td>US$88.18</td><td>计划仓位 25%</td><td>中位数 × 60%</td></tr>
+          <tr><td>止盈一</td><td>US$185</td><td>减 1／3</td><td>较加权公允溢价 28%</td></tr>
+          <tr><td>止盈二</td><td>US$205</td><td>再减 1／3</td><td>较加权公允溢价 42%</td></tr>
+          <tr><td>止盈三</td><td>US$225</td><td>减剩余的一半</td><td>超过 2025-09-22 的 219.82 峰值</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">本栏目不设止损。仓位管理靠分批与上限控制，不靠事后割肉。</p>
+
+    <h3>13.3 仓位与持有周期</h3>
+    <ul class="ulist">
+      <li><strong>新资金建议仓位：0%。</strong>安全边际不足，首仓价 117.58 尚未触及</li>
+      <li><strong>已持有者：可继续持有，但不宜在 140 美元上方加仓。</strong>生意本身没有问题，估值没有提供缓冲</li>
+      <li><strong>满仓上限：</strong>若跌至建仓区间，建议不超过组合的 4%——高 Beta（1.43）、高杠杆、单一商品敞口，不适合重仓</li>
+      <li><strong>持有周期：</strong>3 年以上。这只股票的核心变量（2028 年之后的电价、扩容交付、并购整合）都在三年之外</li>
+    </ul>
+
+    <h3>13.4 关键监控指标</h3>
+    <ul class="ulist">
+      <li><strong>套保比例</strong>——每季披露。2028 与 2029 年的比例若继续快速上行，说明管理层在锁定而非等待，上行弹性进一步收窄</li>
+      <li><strong>未实现套保损益的方向</strong>——它是远期电价方向的免费指标：<span class="hl-t">出现大额未实现「收益」，意味着远期曲线在跌</span></li>
+      <li><strong>2027 年指引的基准是否重置</strong>——11 月给出时若仍沿用 2025-10-31 曲线，需警惕</li>
+      <li><strong>实际资本开支 vs 15.36 亿维护性口径</strong>——差额即被排除在「增长前自由现金流」之外的部分</li>
+      <li><strong>回购均价与剩余授权</strong>——12.22 亿剩余，承诺 2027 年底前用完</li>
+      <li><strong>PJM 下一次基础剩余拍卖的价格上限</strong></li>
+      <li><strong>核电机组可用率</strong>——3,809 兆瓦长约的履约基础</li>
+    </ul>
+
+    <h3>13.5 事件时间表</h3>
+    <div class="tbl-wrap">
+      <table class="tbl" data-shape="grid" data-source="公司公告与行业日程">
+        <thead><tr><th>时点</th><th>事件</th><th>重要性</th></tr></thead>
+        <tbody>
+          <tr><td>2026 年 9 月</td><td>季度股息派发（每股 0.2300 美元）</td><td>低</td></tr>
+          <tr><td>2026 年 11 月初</td><td><strong>Q3 2026 财报</strong>——ERCOT 夏季最强一季，检验 68–76 亿指引</td><td>高</td></tr>
+          <tr><td>2026 年 11 月</td><td><strong>2027 年正式指引</strong>——基准曲线是否重置、是否纳入 Cogentrix 与 Meta</td><td><strong>最高</strong></td></tr>
+          <tr><td>2026 年末</td><td>Meta PPA 开始部分送电</td><td>中</td></tr>
+          <tr><td>待定（FERC 已批）</td><td>Cogentrix 交割</td><td>高</td></tr>
+          <tr><td>2027Q4</td><td>AWS 科曼奇峰 PPA 开始送电</td><td>中</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>下一个重新审视的时点：2026 年 11 月的 Q3 财报与 2027 年指引。</strong>那一天会同时给出三个本报告目前拿不到的答案——2027 年的基准曲线、Cogentrix 的贡献量级、以及 Meta PPA 是否被纳入指引。</p>
+  </div>
+</section>
+
+<!-- ══ 页末夜读手记（与 -social.md 同源）══ -->
+<section class="section" id="essay" aria-labelledby="essay-t">
+  <h2 class="stitle sr-only" id="essay-t">海图夜读手记<a class="anchor" href="#essay" aria-label="本节链接">#</a></h2>
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p>八月七号，Vistra 交出二季报。</p>
+      <p>调整后 EBITDA <strong>17.67 亿美元，同比增长 31%</strong>。全年指引原封不动地重申。</p>
+      <p>同一天，GAAP 净利润 <strong>3.05 亿，同比下降 6.7%</strong>。</p>
+      <p>同一个季度，同一家公司。一个数字说增长三成，一个数字说不增反降。</p>
+      <p>中间隔着一行字，公司自己写在新闻稿第一段里：<strong>「包含一笔 4.72 亿美元的、来自未来年份套保的未实现损失。」</strong></p>
+      <p>先把这家公司说清楚。</p>
+      <p>Vistra 有两样东西：一队 4.4 万兆瓦的发电机组，和一个把电卖给终端用户的零售品牌（在德州叫 TXU）。它自己发电，自己卖电，中间用金融合约把电价锁起来。</p>
+      <p>机组里天然气占 62%、煤占 20%，<strong>核电只占 15%</strong>。但 AI 数据中心的整个故事，都长在那 15% 上面。</p>
+      <p><strong>一、那笔未实现损益，是理解这家公司的唯一钥匙。</strong></p>
+      <p>Vistra 把未来几年要发的电，提前在市场上卖掉——这叫套保。这些合约要按公允价值逐季重估，浮盈浮亏直接进利润表；而对应的那些电还没发出来，不在利润表里。</p>
+      <p>于是有了这条规则。公司在年报里写得很直白：</p>
+      <blockquote>套保的未实现损失通常发生在远期商品价格上涨时，而价格上涨总体上有利于 Vistra 未来各期的整个组合。</blockquote>
+      <p><strong>翻译过来就是：电价涨，报表利润跌；电价跌，报表利润涨。</strong></p>
+      <p>把三年排开：</p>
+      <div class="tbl-wrap">
+        <table class="tbl" data-shape="grid" data-source="见正文各模块所引一手来源">
+          <thead><tr><th></th><th>未实现套保损益</th><th>GAAP 净利润</th></tr></thead>
+          <tbody>
+            <tr><td>FY2023</td><td>收益 4.90 亿</td><td>14.92 亿</td></tr>
+            <tr><td>FY2024</td><td><strong>收益 11.55 亿</strong></td><td>28.12 亿</td></tr>
+            <tr><td>FY2025</td><td><strong>损失 8.08 亿</strong></td><td><strong>9.44 亿</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>FY2024 到 FY2025，净利润掉了 18.68 亿。而这一项自己就摆动了 <strong>19.63 亿</strong>。</p>
+      <p><strong>净利润的整个跌幅，都装在这一行里。经营层面什么都没发生。</strong></p>
+      <p>反过来也一样。2026 年一季度，公司录得一笔 <strong>7.23 亿的未实现收益</strong>，那个季度营业利润率冲到 26.6%，是八个季度里最高的一档。</p>
+      <p>而那意味着：<strong>远期电价在跌。</strong></p>
+      <p>那个季度，股价也在跌。</p>
+      <p><strong>二、更要紧的是：最近四个季度加起来，这一项几乎等于零。</strong></p>
+      <p>我把 TTM 拆开算过：2025 下半年损失 2.56 亿，2026 上半年收益 2.51 亿。<strong>净额 500 万美元。</strong></p>
+      <p>也就是说，<strong>过去十二个月那 6.03 美元的每股收益，在总量上并没有被套保扭曲——但每一个单季都被扭得面目全非。</strong></p>
+      <p>2026Q1 单季年化，市盈率 12.2 倍。 2026Q2 单季年化，市盈率 46.2 倍。</p>
+      <p>同一家公司，相隔三个月。<strong>任何一个只看单季的人都会得出错的结论，而且错的方向是随机的。</strong></p>
+      <p>另外补一句机制上的：Vistra <strong>主动选择不对商品衍生品适用套期会计</strong>——10-K 原文写着「没有任何衍生品头寸按现金流量套期或公允价值套期核算」。这是选择，不是准则强制，代价就是上面那些波动。而 Q2 的 10-Q 附注把当季拆得很清楚：<strong>旧头寸反转 ＋4,900 万，新头寸建立 −5.30 亿</strong>。每一笔浮亏最终都会在交割时冲回——前提是持有到期。这也是四个季度加总会趋近于零的原因。</p>
+      <p><strong>三、AI 电力的上行，Vistra 自己卖掉了。</strong></p>
+      <p>这是我在这份财报里读到的最重要的一句话，藏在新闻稿倒数第二段：</p>
+      <blockquote>截至 2026 年 8 月 3 日，2026 年预期发电量已套保约 <strong>100%</strong>，2027 年约 <strong>94%</strong>，2028 年约 <strong>72%</strong>。</blockquote>
+      <p>半年前，也就是 2 月 18 日，这三个数字是 100%、<strong>84%</strong>、<strong>58%</strong>。</p>
+      <p><strong>在股价从高点一路下行的这半年里，管理层把 2027 年多锁了 10 个百分点，2028 年多锁了 14 个百分点。</strong></p>
+      <p>这不是错误——套保是电力公司的本分。2026 年指引能在股价跌掉三成六的时候原封不动地重申，靠的正是它。</p>
+      <p>但它意味着一件必须说明白的事：</p>
+      <p><strong>如果你是冲着「AI 让电价涨」买的这只股票，那么未来两年，这个逻辑对 Vistra 的利润几乎不起作用。</strong> 2026 年一分不剩，2027 年只剩 6%。第一个有意义的敞口在 2028 年，而那也只有 28%。</p>
+      <p><strong>投资者买的是一份关于电价的看涨期权。公司已经把它卖掉了。</strong></p>
+      <p><strong>四、3,809 兆瓦的数据中心合同是真的，但时间表要看清楚。</strong></p>
+      <p>这些是确定性合同，不是意向书。我逐条核对过：</p>
+      <div class="tbl-wrap">
+        <table class="tbl" data-shape="grid" data-source="见正文各模块所引一手来源">
+          <thead><tr><th>对手方</th><th>电厂</th><th>兆瓦</th><th>签署</th><th>开始交付</th><th>满负荷</th></tr></thead>
+          <tbody>
+            <tr><td>AWS</td><td>科曼奇峰</td><td>1,200</td><td>2025 年 9 月</td><td><strong>2027Q4</strong></td><td><strong>2032</strong></td></tr>
+            <tr><td>Meta</td><td>佩里＋戴维斯-贝西</td><td>2,176</td><td>2026 年 1 月</td><td>2026 年末</td><td>2027 年末</td></tr>
+            <tr><td>Meta</td><td>三厂扩容</td><td>433</td><td>2026 年 1 月</td><td><strong>2031</strong></td><td><strong>2034</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>两件事值得注意。</p>
+      <p>第一，<strong>Meta 那笔 2,609 兆瓦里，2,176 兆瓦（83%）是佩里和戴维斯-贝西此刻就在发的电，只是改签给了 Meta。</strong> 这是把既有出力重新定价，不是新增产能。真正新增的是那 433 兆瓦扩容——<strong>2031 年才开始交付，2034 年才交完。</strong></p>
+      <p>第二，扩容要花多少钱，公司没说。10-Q 里只有一句：资本开支从 2026 年起、延续到 2034 年，<strong>「2028 年底前落地的不到总额的 20%」</strong>。一笔跨九年的开支，连区间都没给。</p>
+      <p>还有第三件事，藏在「二十年」这四个字后面。</p>
+      <p>10-K 里列着六台核电机组的执照到期日：科曼奇峰两台是 2050 和 2053，佩里 2046，比弗谷 2 号 2047——这些都够。但<strong>比弗谷 1 号是 2036，戴维斯-贝西是 2037</strong>。</p>
+      <p>而卖给 Meta 的那 2,176 兆瓦运行出力里，<strong>有 908 兆瓦就来自戴维斯-贝西</strong>。合同若自 2027 年满负荷起算二十年，<strong>执照比合同早结束约十年</strong>。</p>
+      <p>公司的说法是：PJM 各厂的协议「<strong>支持</strong>」四台机组各再延二十年。请注意「支持」这个词。我在 FY2025 年报和 2026 年二季报全文里检索 subsequent license 和 SLR，<strong>两份定期报告各零次命中</strong>——截至最新定期报告，没有披露任何已递交 NRC 的续期申请。</p>
+      <p><strong>话要说公道：这不是红旗。</strong>美国已有多台机组完成第二次延寿，路径成熟；申请一般在到期前五年左右提交，2037 年到期意味着 2032 年前后递交才是正常节奏。<strong>但「二十年 PPA」这个说法本身，确实以一项尚未取得的监管批准为前提，而这一点不写在合同标题里。</strong></p>
+      <p><strong>这不是说合同不好。</strong> 二十年期、投资级对手方、卖给一队本来就在发电的核电机组——这是好生意。但它的现金流曲线，比「AI 电力」这四个字给人的印象要平缓得多，也远得多。</p>
+      <p><strong>五、公司主推的那个自由现金流，不含增长开支。</strong></p>
+      <p>Vistra 的指引口径叫 Adjusted Free Cash Flow <strong>before Growth</strong>，「增长前调整后自由现金流」。名字里就写着 before growth，这一点公司很坦白。</p>
+      <p>FY2025 这个数是 <strong>35.92 亿美元</strong>。</p>
+      <p>同一年，把现金流量表两行相减——经营现金流 40.70 亿减资本开支 27.52 亿——<strong>GAAP 自由现金流是 13.18 亿。</strong></p>
+      <p><strong>差 22.74 亿。</strong></p>
+      <p>差在哪？2026 年指引表把维护性资本开支写死在 <strong>15.36 亿</strong>。而上半年实际资本开支已经花了 15.72 亿，全年大概会到 31 亿。<strong>超出的那一半是增长开支，被这个口径整个排除在外。</strong></p>
+      <p>这个排除本身合规，也是行业惯例。问题在于时点：<strong>Vistra 恰好正处在增长开支持续爬升的阶段</strong>——资本开支五年从 10.33 亿涨到 27.52 亿，翻了近两倍，而扩容开支要一直花到 2034 年。</p>
+      <p><strong>一个把增长开支排除在外的自由现金流指标，恰好在增长开支最重的那几年，最不能代表股东能拿到什么。</strong></p>
+      <p><strong>六、回购曾经是这家公司最漂亮的一件事。现在不是了。</strong></p>
+      <p>2021 年 11 月至今，Vistra 花了约 59 亿美元回购，流通股减少约 <strong>30%</strong>。摊薄股数从 4.822 亿股降到 3.392 亿股。</p>
+      <p>衡量这笔钱花得值不值，最硬的口径是「<strong>每让摊薄股数净减少一股，花掉了多少现金</strong>」——它把股权激励新发行的稀释也算进去了：</p>
+      <div class="tbl-wrap">
+        <table class="tbl" data-shape="grid" data-source="见正文各模块所引一手来源">
+          <thead><tr><th>财年</th><th>回购现金</th><th>股数净减少</th><th>每减少一股花掉</th></tr></thead>
+          <tbody>
+            <tr><td>FY2022</td><td>19.49 亿</td><td>5,980 万股</td><td><strong>32.6 美元</strong></td></tr>
+            <tr><td>FY2023</td><td>12.45 亿</td><td>4,720 万股</td><td><strong>26.4 美元</strong></td></tr>
+            <tr><td>FY2024</td><td>12.66 亿</td><td>2,260 万股</td><td>56.0 美元</td></tr>
+            <tr><td>FY2025</td><td>10.28 亿</td><td>690 万股</td><td><strong>149.0 美元</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>每年掏出去的钱差不多，而每减少一股的代价从 26.4 美元涨到 149.0 美元，五年 5.6 倍。</strong></p>
+      <p>FY2022 和 FY2023 那两年是极漂亮的资本配置——尤其 FY2022，自由现金流是 −8.16 亿，公司照样回购 19.49 亿，在能源危机最悲观的时候逆势买。</p>
+      <p>但看最近两年：FY2025 均价约 <strong>154 美元</strong>；2026 年到 8 月 3 日累计 497 万股、均价 <strong>156.57</strong>。</p>
+      <p><strong>今天股价 140.59。这两年买的，都是浮亏的。</strong></p>
+      <p>力度也在退。回购收益率——当年回购额占市值的比例——从 FY2022 的 <strong>12.4%</strong> 降到 FY2025 的 <strong>2.0%</strong>。钱其实没少花（每年十亿出头），是市值涨了五倍，同样的钱买不动了。</p>
+      <p><strong>这不是指责。管理层没有在高位加码，本身就是纪律。</strong> 但事实是：这家公司靠回购创造巨额价值的那一段，已经过去了。</p>
+      <p><strong>七、钱去了哪里。</strong></p>
+      <p>一份 2024 年以来的资本部署清单：</p>
+      <ul class="ulist">
+        <li>2024 年 3 月，收购 Energy Harbor，拿到 PJM 的三座核电站</li>
+        <li>2024 年 12 月，<strong>花约 32 亿现金，把 Vistra Vision 15% 的少数股权从 Nuveen 和 Avenue 手里买回来</strong>——而这 15%，正是九个月前收购 Energy Harbor 时发出去的对价</li>
+        <li>2025 年 10 月，收购 Lotus 的燃气机组，现金 11 亿＋承接债务约 8 亿</li>
+        <li>2025 年 12 月 31 日签约收购 Cogentrix：<strong>5,500 兆瓦燃气机组，现金 23 亿＋承接债务 15 亿＋500 万股</strong>，约合每千瓦 819 美元，FERC 已批</li>
+        <li>2026 年 6 月，作为创始投资人，向 KKR 管理的 Helix 基金<strong>承诺出资最高 10 亿美元</strong>，投向「支持人工智能的关键资产」</li>
+      </ul>
+      <p>结果写在资产负债表上：<strong>总债务从 2023 年底的 121 亿涨到 2026 年 6 月底的 196 亿，增了 62%</strong>，光 2026 上半年就净增 25.5 亿。</p>
+      <p>最后那一条我要多说一句。一家独立发电商，作为有限合伙人把 10 亿美元投进一只私募基金——<strong>这不是发电业务，是资产管理业务的敞口。</strong> 而且协议写明，追加的那 5 亿即便商业里程碑没达成，公司也「可自行选择」投入。</p>
+      <p><strong>八、还有两条容易被忽略的天花板。</strong></p>
+      <p><strong>核电 PTC 是地板，也是天花板。</strong>《通胀削减法案》第 45U 条给存量核电最高 <strong>15 美元/兆瓦时</strong>的税收抵免，2024 到 2032 年有效。但它设了退坡：当年度总收入落在 <strong>26.00 到 44.75 美元/兆瓦时</strong>区间时，抵免逐步归零。</p>
+      <p>Vistra 确认的这项收入：<strong>FY2024 是 5.45 亿，FY2025 只剩 2.20 亿。</strong></p>
+      <p><strong>电价涨上去，补贴就没了。</strong> 这个机制两头都削平——跌的时候托底，涨的时候抽走。</p>
+      <p><strong>PJM 的容量价格，被行政上限管着。</strong> 7 月 14 日出的 2028/29 年度拍卖，清算价 <strong>325 美元/兆瓦·日，连续第三次顶到上限</strong>。但这个上限本身，比 2027/28 年度的 333.44 <strong>低了 2.5%</strong>，是 2025/26 以来第一次回头。</p>
+      <p>而 East 分部（PJM）上半年调整后 EBITDA 同比 <strong>+54.8%</strong>，是 Vistra 增长的主发动机。</p>
+      <p><strong>这台发动机的转速有一条由政治划定的红线，而红线刚往下挪了一格。</strong></p>
+      <p><strong>九、我怎么定价。</strong></p>
+      <p>先说不能用的。市净率不能用——股东权益只剩 51 亿，被十年回购削掉了，15 倍市净率毫无信息量。股息贴现也不能用——每股 0.92 美元、派息率 15%，是象征性的。</p>
+      <p>对一家净债务 199 亿、优先股 25 亿的发电商，主锚只能是 <strong>EV/EBITDA</strong>。</p>
+      <p>按 2026 年指引中值 72 亿、给 10.5 倍——低于 NRG 的 12.6 倍和星座能源的 14.5 倍，因为 Vistra 化石比例更高、杠杆更重；但高于历史上独立发电商 6 到 9 倍的区间，因为它手上有 3,809 兆瓦的二十年核电合同——得每股 <strong>158.37</strong>。</p>
+      <p>其余各法：现金流折现基准 145.66；所有者盈余按 7% 要求收益率 148.26；分部加总 149.96；重置成本 120.47；PEG 108.72。股息贴现给出 27.87，<strong>不适用，不计入</strong>。</p>
+      <p>可用口径中位数 <strong>146.97</strong>，加权公允 <strong>144.02</strong>。</p>
+      <p>现价 140.59。<strong>低估 2.4%。</strong></p>
+      <p>还有一个数值得单独说：<strong>反向折现回去，现价隐含的永续增长率只有 3.1%。</strong> 对一家 2026 年 EBITDA 指引同比 +21.8%、手握二十年合同、正在收购 5,500 兆瓦机组的公司，这个门槛不算高。</p>
+      <p><strong>这是看多这只股票最有力的一条论据。我把它放在这里，不藏。</strong></p>
+      <p><strong>十、所以是持有观望。</strong></p>
+      <p>不是买入：安全边际 2.4%，离我自己定的 25% 门槛差得远。</p>
+      <p>不是卖出：这门生意没有坏。护城河是真的——核电执照批不下来、燃气轮机排到 2030 年、并网队列排到看不见头，这些壁垒十年后大概率还在。上半年调整后 EBITDA 同比 +26%，四个分部里三个在涨。</p>
+      <p><strong>评级持有观望，12 个月目标价 146.50 美元。</strong></p>
+      <p>首仓 117.58，二仓 102.88，三仓 88.18。新钱建议仓位 0%；已持有者可以拿着，但不宜在 140 上方加仓。</p>
+      <p>三件收尾的事。</p>
+      <p><strong>第一，我的公允价值远低于街上。</strong> 卖方一致目标价 222 美元，评级「强力买入」，隐含 58% 上行。分歧不在事实，在时间——他们用的是 2028 年及以后的盈利，我用的是 2026 到 2027 年，<strong>而 2026 到 2027 年恰好是被套保锁死的那两年。</strong></p>
+      <p>如果 2028 年的电价确实上去了，他们对，我错。这一点我写在这里。</p>
+      <p><strong>第二，管理层这一关我给的分不低。</strong> CEO Jim Burke 2025 年总薪酬 1,599 万美元，涨了 23.5%——但他的持股是基本工资的 106 倍，直接持有公司 0.37% 的股份，公司章程禁止高管对冲和质押。<strong>利益是绑住的。</strong></p>
+      <p><strong>第三，也是我看这家公司时想得最久的一件事。</strong></p>
+      <p>2025 年 9 月 22 日，股价见顶 219.82。那个月，Vistra 刚宣布与 AWS 签下科曼奇峰 1,200 兆瓦的二十年合同。</p>
+      <p>市场立刻按「AI 电力」给它重新定价。</p>
+      <p>而那份合同写的是：<strong>2027 年第四季度开始送电，2032 年满负荷。</strong></p>
+      <p>一家公司在 2025 年 9 月因为一份 2032 年才满负荷的合同涨到顶，又在 2026 年 8 月因为「没有新的催化剂」跌掉三成六。</p>
+      <p>而在这十一个月里，它的调整后 EBITDA 增长了 31%，指引一次没动过。</p>
+      <p><strong>称重机需要的时间，比投票机长得多。</strong></p>
+      <p>—— 灯下落笔，明日再观风浪。</p>
+      <p class="note"><strong>风险提示</strong>：远期电价继续下行将直接压低 2028 年及以后的敞口价值；Cogentrix 交割与整合尚未完成；扩容资本开支跨 2026–2034 年且公司未给金额区间；核电 PTC 的「总收入」定义仍待美国财政部指引，FY2024–FY2025 累计确认的 7.65 亿美元存在会计估计变更风险；PJM 容量价格上限由行政决定且已下调 2.5%；德州与加州的极端天气事件（Uri、莫斯兰丁火灾）证明单一事件可造成十亿美元级损失。</p>
+    </div>
+  </div>
+</section>
+
+</div><!-- /.container -->
+
+<footer>
+  <div>本报告由「海图夜读」基于公开财报与电话会资料独立撰写，数据截至 2026-08-07。</div>
+  <div>
+    <strong>免责声明：</strong>本文仅为个人研究记录与信息分享，<strong>不构成任何投资建议</strong>，
+    作者非持牌投资顾问。文中评级、目标价、仓位与建仓价格均为基于公开信息的个人推演，
+    可能存在错误或随时间失效。市场有风险，投资需谨慎，读者应独立判断并自负盈亏。
+  </div>
+</footer>
+
+<script>
+/* ══════════════════════════════════════════════════════════════════
+   海图夜读 · 报告页脚本骨架
+   逐字复制进报告的 <script>，只改 CHART_DATA 里的数字。
+
+   这段脚本解决了存量 103 份实测出的三个问题：
+   1. 主题切换有 3 套实现，73/103 不读 localStorage
+      → 门户切暗色进报告又变亮色。这里统一成一套。
+   2. 71 份把调色板硬编码进 JS（token 的第 4 份拷贝），
+      改一次配色要改 71 个文件；另有 2 份切暗色后图表根本不重绘。
+      → 这里一律从 CSS 变量读，改 :root 即全站生效。
+   3. 4 个图表槽位被写出 39 种 canvas id。
+      → 这里按固定槽位 rev|margin|segment|eps 接管。
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ── 1. 从 CSS 变量取色（唯一真源，禁止在本文件里写 hex）── */
+function cssVar(name) {
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+}
+function palette() {
+  return {
+    accent:  cssVar('--accent'),   accent2: cssVar('--accent2'),
+    accent3: cssVar('--accent3'),  gold:    cssVar('--gold'),
+    red:     cssVar('--red'),      green:   cssVar('--green'),
+    grid:    cssVar('--chart-grid'), text:  cssVar('--text3-ink'),
+  };
+}
+
+/* ── 2. 主题切换：同步 aria-pressed、持久化、重绘图表 ── */
+function toggleTheme() {
+  var html = document.documentElement;
+  var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  try { localStorage.setItem('theme', next); } catch (e) {}
+  var btn = document.getElementById('themeBtn');
+  if (btn) btn.setAttribute('aria-pressed', String(next === 'dark'));
+  renderCharts();
+}
+document.addEventListener('DOMContentLoaded', function () {
+  var btn = document.getElementById('themeBtn');
+  if (btn) btn.setAttribute('aria-pressed',
+    String(document.documentElement.getAttribute('data-theme') === 'dark'));
+});
+
+var PERIOD = 'annual';
+function switchPeriod(p) {
+  if (p !== 'annual' && p !== 'quarterly') return;
+  PERIOD = p;
+  document.querySelectorAll('.period-btn').forEach(function (b) {
+    var on = b.dataset.period === p;
+    b.setAttribute('aria-pressed', String(on));
+    b.classList.toggle('is-on', on);
+  });
+  renderCharts();
+}
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('.period-btn').forEach(function (b) {
+    b.addEventListener('click', function () { switchPeriod(b.dataset.period); });
+  });
+  switchPeriod(PERIOD);
+});
+
+/* ── 3. 顶栏实测高度写进 --bar-h ──
+   锚点落点与目录高亮都以它为基准。顶栏在窄屏会折行（38px → 60+px），
+   硬编码会让手机上所有跳转偏移。 */
+function syncBarH() {
+  var bar = document.querySelector('.theme-bar');
+  if (bar) document.documentElement.style.setProperty('--bar-h', bar.offsetHeight + 'px');
+}
+addEventListener('DOMContentLoaded', syncBarH);
+addEventListener('resize', syncBarH);
+
+var CHART_DATA = {
+  rev: {
+    type: 'bar',
+    labels: ['24Q3', '24Q4', '25Q1', '25Q2', '25Q3', '25Q4', '26Q1', '26Q2'],
+    datasets: [
+      { label: '营业收入（亿美元）', data: [62.88, 40.37, 39.33, 42.50, 49.71, 45.84, 56.40, 40.17], color: 'accent' },
+      { label: '营业利润率 %', data: [41.2, 14.8, -3.1, 12.1, 20.9, 10.3, 26.6, 13.8], color: 'accent3', type: 'line', yAxisID: 'y1' },
+    ],
+  },
+  margin: {
+    type: 'bar',
+    labels: ['零售', '得州 ERCOT', '东部 PJM', '西部 CAISO'],
+    datasets: [
+      { label: 'H1 2025（亿美元）', data: [9.40, 6.32, 9.32, 1.11], color: 'accent2' },
+      { label: 'H1 2026（亿美元）', data: [8.41, 8.97, 14.43, 1.24], color: 'accent' },
+    ],
+  },
+  segment: {
+    type: 'doughnut',
+    labels: ['天然气 26,989', '煤 8,743', '核电 6,448', '可再生 1,274', '燃油 187'],
+    datasets: [
+      { label: '净容量（MW）', data: [26989, 8743, 6448, 1274, 187],
+        color: ['accent2', 'red', 'green', 'gold', 'accent3'] },
+    ],
+  },
+  eps: {
+    type: 'bar',
+    labels: ['FY2021', 'FY2022', 'FY2023', 'FY2024', 'FY2025'],
+    datasets: [
+      { label: '摊薄股数（百万股）', data: [482.2, 422.4, 375.2, 352.6, 345.7], color: 'accent2' },
+      { label: '年度回购金额（亿美元）', data: [4.71, 19.49, 12.45, 12.66, 10.28], color: 'gold', type: 'line', yAxisID: 'y1' },
+    ],
+  },
+
+  income: {
+    type: 'bar', unit: '亿美元',
+    annual: {
+      labels: ['FY2021', 'FY2022', 'FY2023', 'FY2024', 'FY2025'],
+      datasets: [
+        { label: '营业收入',      data: [120.77, 137.28, 147.79, 172.24, 177.38], color: 'accent' },
+        { label: '营业利润',      data: [-15.15, -11.77, 26.61, 40.81, 19.06], color: 'gold' },
+        { label: '归属普通股净利', data: [-12.95, -13.77, 13.43, 24.67, 7.52], color: 'green' },
+      ],
+    },
+    quarterly: {
+      labels: ['24Q3', '24Q4', '25Q1', '25Q2', '25Q3', '25Q4', '26Q1', '26Q2'],
+      datasets: [
+        { label: '营业收入',      data: [62.88, 40.37, 39.33, 42.50, 49.71, 45.84, 56.40, 40.17], color: 'accent' },
+        { label: '营业利润',      data: [25.88, 5.99, -1.20, 5.15, 10.37, 4.74, 14.99, 5.53], color: 'gold' },
+        { label: '归属普通股净利', data: [18.40, 3.93, -3.17, 2.80, 6.04, 1.85, 9.80, 2.58], color: 'green' },
+      ],
+    },
+  },
+
+  cashflow: {
+    type: 'bar', unit: '亿美元',
+    annual: {
+      labels: ['FY2021', 'FY2022', 'FY2023', 'FY2024', 'FY2025'],
+      datasets: [
+        { label: '经营现金流', data: [-2.06, 4.85, 54.53, 45.63, 40.70], color: 'accent' },
+        { label: '资本开支',   data: [10.33, 13.01, 16.76, 20.78, 27.52], color: 'red' },
+        { label: '自由现金流', data: [-12.39, -8.16, 37.77, 24.85, 13.18], color: 'green' },
+      ],
+    },
+    quarterly: {
+      labels: ['24Q3', '24Q4', '25Q1', '25Q2', '25Q3', '25Q4', '26Q1', '26Q2'],
+      datasets: [
+        { label: '经营现金流', data: [17.02, 13.53, 5.99, 5.72, 14.67, 14.32, 11.99, 10.23], color: 'accent' },
+        { label: '资本开支',   data: [6.85, 4.30, 7.68, 6.90, 4.58, 8.36, 8.83, 6.89], color: 'red' },
+        { label: '自由现金流', data: [10.17, 9.23, -1.69, -1.18, 10.09, 5.96, 3.16, 3.34], color: 'green' },
+      ],
+    },
+  },
+
+  balance: {
+    type: 'line', unit: '亿美元',
+    annual: {
+      labels: ['FY2021', 'FY2022', 'FY2023', 'FY2024', 'FY2025'],
+      datasets: [
+        { label: '总资产',   data: [296.83, 327.87, 329.66, 377.70, 415.50], color: 'accent' },
+        { label: '总负债',   data: [213.91, 278.69, 276.44, 321.87, 364.40], color: 'red' },
+        { label: '股东权益', data: [82.91, 49.02, 53.07, 55.70, 50.97], color: 'green' },
+      ],
+    },
+    quarterly: {
+      labels: ['24Q3', '24Q4', '25Q1', '25Q2', '25Q3', '25Q4', '26Q1', '26Q2'],
+      datasets: [
+        { label: '总资产',   data: [378.78, 377.70, 382.28, 381.46, 380.20, 415.50, 413.08, 426.03], color: 'accent' },
+        { label: '总负债',   data: [292.25, 321.87, 333.90, 333.10, 327.97, 364.40, 356.98, 371.09], color: 'red' },
+        { label: '股东权益', data: [54.41, 55.70, 48.25, 48.23, 52.10, 50.97, 55.97, 54.82], color: 'green' },
+      ],
+    },
+  },
+};
+
+/* ── 5. 渲染（一般不需要改）── */
+var _charts = {};
+function renderCharts() {
+  if (typeof Chart === 'undefined') return;      // CDN 不可达时静默跳过，不阻断页面
+  var P = palette();
+  Chart.defaults.font.family =
+    getComputedStyle(document.body).getPropertyValue('--font-sans') ||
+    'system-ui, -apple-system, sans-serif';
+
+  Object.keys(CHART_DATA).forEach(function (slot) {
+    var el = document.getElementById(slot);
+    if (!el) return;
+    if (_charts[slot]) _charts[slot].destroy();
+
+    var cfg = CHART_DATA[slot];
+    // 双周期槽位（三表图）：按当前 PERIOD 取那一套 labels/datasets。
+    // 缺失所选周期时回落到另一套，避免整张图空白。
+    if (cfg.annual || cfg.quarterly) {
+      var d = cfg[PERIOD] || cfg.annual || cfg.quarterly;
+      cfg = { type: d.type || cfg.type, labels: d.labels, datasets: d.datasets, unit: d.unit || cfg.unit };
+    }
+    var isPie = cfg.type === 'doughnut' || cfg.type === 'pie';
+
+    _charts[slot] = new Chart(el, {
+      type: cfg.type,
+      data: {
+        labels: cfg.labels,
+        datasets: cfg.datasets.map(function (d) {
+          var c = Array.isArray(d.color) ? d.color.map(function (k) { return P[k]; }) : P[d.color];
+          // 只写 d.type === 'line' 会让「图表级 type:'line' 但 dataset 没写 type」的
+          // 数据集拿到 borderWidth:0 —— 实测表现为「只有点、没有连线」。
+          var isLine = (d.type || cfg.type) === 'line';
+          return Object.assign({}, d, {
+            backgroundColor: c, borderColor: c,
+            borderWidth: isLine ? 2 : 0, tension: 0.3,
+          });
+        }),
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            // 窄屏把图例挪到顶部：右侧图例在 375px 上会吃掉大半个画布
+            position: isPie && innerWidth > 640 ? 'right' : 'top',
+            labels: { color: P.text, boxWidth: 12, font: { size: 11 } },
+          },
+        },
+        scales: isPie ? {} : {
+          x: { grid: { color: P.grid }, ticks: { color: P.text, font: { size: 11 } } },
+          y: { grid: { color: P.grid }, ticks: { color: P.text, font: { size: 11 } } },
+          y1: {
+            position: 'right', grid: { display: false },
+            ticks: { color: P.text, font: { size: 11 } }, display: 'auto',
+          },
+        },
+      },
+    });
+  });
+}
+addEventListener('DOMContentLoaded', renderCharts);
+addEventListener('resize', function () {          // 图例位置随断点变，需重建
+  clearTimeout(window._rcT);
+  window._rcT = setTimeout(renderCharts, 200);
+});
+
+</script>
+</body>
+</html>
