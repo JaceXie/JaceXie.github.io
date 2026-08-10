@@ -1,0 +1,1773 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-08-07 · BCE Q2 2026 财报已于 2026-08-06 发布 -->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>BCE Inc. · Q2 2026 财报深度分析 · 海图夜读</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+
+<script>
+(function () {
+  try {
+    var t = localStorage.getItem('theme');
+    if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', t);
+  } catch (e) { document.documentElement.setAttribute('data-theme', 'light'); }
+})();
+</script>
+
+<link rel="canonical" href="https://haitu.jacexie.com/haitu/reports/bce-q2-2026.html">
+<meta name="description" content="加拿大最大的电信公司，五年营收几乎没动，而报告利润在 1.6 亿与 63 亿加元之间摆动——那 4.7 倍的市盈率是一笔卖资产的收益倒回来的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BCE Inc. · Q2 2026 财报深度分析 · 海图夜读">
+<meta property="og:description" content="加拿大最大的电信公司，五年营收几乎没动，而报告利润在 1.6 亿与 63 亿加元之间摆动——那 4.7 倍的市盈率是一笔卖资产的收益倒回来的。">
+<meta property="og:url" content="https://haitu.jacexie.com/haitu/reports/bce-q2-2026.html">
+<meta name="twitter:card" content="summary">
+
+<script defer src="../assets/vendor/chart.umd.min.js"></script>
+
+<style>
+
+/* ── MORANDI PALETTE ── */
+:root {
+  /* Light (default) */
+  --bg:        #f5f0eb;
+  --bg2:       #ece6df;
+  --card:      #ffffff;
+  --card2:     #f8f5f1;
+  --border:    #d9d0c7;
+  --text:      #4a4340;
+  --text2:     #7a706a;
+  --text3:     #a89f98;
+  --accent:    #8a9a8e;   /* sage */
+  --accent2:   #7b8fa0;   /* muted blue */
+  --accent3:   #b08d7a;   /* dusty terracotta */
+  --rose:      #c09090;   /* dusty rose */
+  --gold:      #b9a06a;
+  --red:       #b87070;
+  --green:     #7a9a7a;
+  --shadow:    rgba(0,0,0,0.06);
+  --chart-grid:#e5ddd5;
+  /* ── ink 层：只用于文字，全部达 WCAG AA（装饰色仍用上面的原值）── */
+  --text3-ink:   #70665f;  /* 4.51:1 on --bg2（原 --text3 #a89f98 仅 2.60:1）*/
+  --accent3-ink: #7f6150;  /* 4.97:1 on --bg （原 --accent3 #b08d7a 仅 2.67:1）*/
+  --gold-ink:    #8a6d3b;  /* 原 --gold  #b9a06a 仅 2.53:1 */
+  --red-ink:     #a35555;  /* 原 --red   #b87070 仅 3.76:1 */
+  --green-ink:   #4a7057;  /* 原 --green #7a9a7a 仅 3.12:1 */
+  --accent2-ink: #5a7386;
+  --font-sans: system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-serif: Georgia, 'Noto Serif SC', 'PingFang SC', serif;
+
+  /* ── 排版标度 ────────────────────────────────────────────────
+     此前全站正文散落 8 档字号（11/12/12.5/13/14/14.5/15/16）与 5 种行高
+     （1.65/1.70/1.75/1.90/2.00），是逐处硬写累积出来的，没有体系。
+     收敛成 4 档字号 + 2 种行高，所有正文一律引用这里。 */
+  --fs-xs:   12px;    /* 注释、图注、页脚 */
+  --fs-sm:   13.5px;  /* 表格、卡片密排文字 */
+  --fs-base: 15px;    /* 正文 */
+  --fs-lg:   16.5px;  /* 夜读手记正文、导语 */
+
+  --lh-tight: 1.7;    /* 密排：表格、卡片、注释 */
+  --lh-prose: 1.85;   /* 正文段落 */
+
+  --measure: 40em;
+  --bar-h: 44px;
+}
+[data-theme="dark"] {
+  --text3-ink:   #a19991;
+  --accent3-ink: #c9a48e;
+  --gold-ink:    #c9b07a;
+  --red-ink:     #c08080;
+  --green-ink:   #8aaa8a;
+  --accent2-ink: #8fabbf;
+  --bg:        #1e1c1a;
+  --bg2:       #28251f;
+  --card:      #2e2a25;
+  --card2:     #363230;
+  --border:    #4a4540;
+  --text:      #d4ccc4;
+  --text2:     #a09890;
+  --text3:     #706860;
+  --accent:    #8a9a8e;
+  --accent2:   #8fabbf;
+  --accent3:   #c9a48e;
+  --rose:      #c09090;
+  --gold:      #c9b07a;
+  --red:       #c08080;
+  --green:     #8aaa8a;
+  --shadow:    rgba(0,0,0,0.3);
+  --chart-grid:#3e3a35;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-serif);
+  line-height: var(--lh-prose);
+  font-size: var(--fs-base);
+  transition: background .35s, color .35s;
+}
+a { color: var(--accent2); text-decoration: none; }
+
+/* ── THEME TOGGLE ── */
+.theme-bar {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 8px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  transition: background .35s;
+}
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; text-decoration: none; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: var(--font-sans); font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; text-decoration: none; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; color: var(--text2);
+}
+.toggle-switch {
+  appearance: none; -webkit-appearance: none; border: 0; padding: 0; margin: 0;
+  position: relative;
+  width: 44px; height: 22px;
+  background: var(--border);
+  border-radius: 11px;
+  cursor: pointer;
+  transition: background .3s;
+}
+.toggle-switch::after {
+  content: '';
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 18px; height: 18px;
+  background: var(--card);
+  border-radius: 50%;
+  transition: transform .3s;
+  box-shadow: 0 1px 3px rgba(0,0,0,.15);
+}
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+
+/* ── HERO ── */
+.hero {
+  padding: 48px 24px 36px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+.hero-tag {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 3px 14px;
+  border-radius: 20px;
+  margin-bottom: 18px;
+}
+.hero h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills {
+  display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;
+}
+.pill {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 6px 18px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--text2);
+  box-shadow: 0 1px 3px var(--shadow);
+}
+.pill strong { color: var(--text); }
+
+/* ── LAYOUT ── */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle {
+  font-size: 18px; font-weight: 700; color: var(--accent3-ink);
+  margin-bottom: 20px; letter-spacing: 0.5px;
+  display: flex; align-items: center; gap: 10px;
+}
+.stitle::before {
+  content: ''; display: block; width: 4px; height: 20px;
+  background: var(--accent3); border-radius: 2px;
+}
+
+/* ── KPI ── */
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.kpi {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 16px 18px;
+  box-shadow: 0 1px 4px var(--shadow);
+  transition: background .35s;
+}
+.kpi-l { font-family: var(--font-sans); font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.badge {
+  display: inline-block; font-family: var(--font-sans);
+  font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px;
+}
+.up   { background: rgba(122,154,122,.15); color: var(--green); }
+.dn   { background: rgba(184,112,112,.15); color: var(--red); }
+.nt   { background: rgba(123,143,160,.15); color: var(--accent2); }
+
+/* ── TABLE ── */
+.tbl-wrap {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow);
+}
+.tbl { width: 100%; border-collapse: collapse; font-family: var(--font-sans); font-size: var(--fs-sm);
+       font-variant-numeric: tabular-nums; }
+.tbl th {
+  background: var(--card2); color: var(--text3-ink); font-size: 11px;
+  letter-spacing: .5px; text-transform: uppercase;
+  padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border);
+}
+.tbl td { padding: 11px 16px; border-bottom: 1px solid var(--border); text-align: left; line-height: var(--lh-tight); }
+.tbl td:first-child { color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); }
+
+/* ── CHARTS ── */
+.cgrid  { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-bottom: 16px; }
+.cgrid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-bottom: 16px; }
+.ccard, .kpi, .moat-card, .risk-card, .score-card, .snap-item, .pbox { min-width: 0; }
+.ccard {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow);
+}
+.ctitle { font-family: var(--font-sans); font-size: 12px; color: var(--text3-ink); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 230px; }
+
+/* ── QUOTES ── */
+.qgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.qcard {
+  background: var(--card); border: 1px solid var(--border);
+  border-left: 4px solid var(--rose);
+  border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow);
+}
+.qname { font-weight: 700; color: var(--accent3); margin-bottom: 2px; }
+.qrole { font-family: var(--font-sans); font-size: 11px; color: var(--text3); margin-bottom: 10px; }
+.qtext { font-style: italic; font-size: 13.5px; color: var(--text); line-height: 1.8; }
+
+/* ── ANALYSIS ── */
+.agrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+.acard {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow);
+}
+.acard h4 { font-size: 13px; color: var(--accent2); margin-bottom: 10px; text-transform: uppercase; letter-spacing: .5px; }
+.acard ul { padding-left: 16px; }
+.acard li { margin-bottom: 5px; font-size: 13px; }
+
+/* ── BUFFETT SCORE ── */
+.bscore {
+  display: flex; align-items: center; gap: 16px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px 22px; margin-bottom: 12px;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.circle {
+  width: 62px; height: 62px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 18px; flex-shrink: 0;
+  border: 3px solid; font-family: var(--font-sans);
+}
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 3px; }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+/* ── VERDICT ── */
+.verdict {
+  background: var(--card2); border: 2px solid var(--accent);
+  border-radius: 10px; padding: 26px 28px; margin-bottom: 16px;
+}
+.verdict-t { font-size: 17px; font-weight: 700; color: var(--accent); margin-bottom: 10px; }
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 14px; text-align: left;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.pbox .pl { font-family: var(--font-sans); font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.pbox .pv { font-family: var(--font-sans); font-size: 26px; font-weight: 800; }
+.pbox .pn { font-size: 11px; color: var(--text3); margin-top: 3px; }
+.pc { color: var(--text2); } .pf { color: var(--gold); } .ps { color: var(--green); }
+
+/* ── 周期切换（三表图）── */
+.period-toggle {
+  display: inline-flex; gap: 0; margin-bottom: 16px;
+  border: 1px solid var(--border); border-radius: 8px; overflow: hidden;
+  background: var(--card);
+}
+.period-btn {
+  appearance: none; -webkit-appearance: none; border: 0; margin: 0;
+  padding: 7px 20px; cursor: pointer;
+  font-family: var(--font-sans); font-size: var(--fs-xs);
+  letter-spacing: .5px; color: var(--text3-ink);
+  background: transparent; transition: background .2s, color .2s;
+  /* 44px 触摸目标：窄屏上两个按钮挨得很近，小于这个高度容易点错 */
+  min-height: 34px;
+}
+.period-btn + .period-btn { border-left: 1px solid var(--border); }
+.period-btn:hover { color: var(--text); background: var(--card2); }
+.period-btn.is-on { background: var(--accent); color: #fff; font-weight: 600; }
+.period-btn:focus-visible { outline: 2px solid var(--accent2); outline-offset: -2px; }
+[data-theme="dark"] .period-btn.is-on { color: var(--bg); }
+
+/* ── SANKEY ── */
+#sankey { width: 100%; height: 460px; }
+
+/* ── COMMENTARY ── */
+.cmt {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 26px 28px; line-height: var(--lh-prose);
+  font-size: var(--fs-base);
+  box-shadow: 0 1px 4px var(--shadow);
+}
+/* 段间距取 0.9 行。此前是 14px 对 27.55px 的行高＝0.51 行，
+   段与段之间比行与行之间只宽一点点，整块糊成一片，读者找不到段落边界。 */
+.cmt p { margin-bottom: calc(var(--lh-prose) * 0.9em); }
+.cmt p:last-child { margin-bottom: 0; }
+
+.section > p, .section > ul, .section > ol,
+.section > blockquote,
+.cmt > p, .cmt > ul, .cmt > ol,
+.haitu-essay-body > p {
+  max-width: var(--measure);           /* 15px × 40em ≈ 600px，约 40 字/行 */
+}
+/* .ec-item 是带背景的卡片，缩到 40em 会在右侧留下大片空白；
+   但满宽 1152px 时实测仍有 48 字/行，略超舒适上限，折中收到 60em（≈36 字）。 */
+.ec-item { max-width: 60em; }
+.note, p.note {
+  /* 注释是 12px 小字，行长可略放宽：12px × 52em ≈ 624px，约 52 字，
+     仍远好于此前的 96 字，且与正文块的右边界大致齐平，视觉上不突兀。 */
+  max-width: 52em;
+}
+.cmt > .tbl-wrap, .cmt > figure, .cmt > .cgrid { max-width: none; }
+/* 避免段末孤字（中文里一行只剩一两个字特别难看）。
+   Safari/Firefox 不支持时会自动忽略，属渐进增强。 */
+.cmt p, .haitu-essay-body p, .note, .ec-item { text-wrap: pretty; }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--card2); border-top: 1px solid var(--border);
+  padding: 24px; text-align: left; color: var(--text3); font-size: 12px;
+  margin-top: 40px;
+}
+
+@media (max-width: 768px) {
+  .cgrid,.cgrid3,.qgrid,.agrid,.pgrid { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 22px; }
+  .kpi-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ── HAITU SIGNATURE BLOCKS (页首短评 + 页末长评) ── */
+.haitu-quip {
+  display: flex; align-items: center; gap: 18px;
+  background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red);
+  border-radius: 12px; padding: 18px 24px; margin: 24px 0;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.haitu-avatar-sm {
+  width: 64px; height: 64px; border-radius: 50%;
+  object-fit: cover; flex-shrink: 0;
+  border: 2px solid var(--border); background: var(--red);
+  box-shadow: 0 2px 8px rgba(184,112,112,0.18);
+}
+.haitu-quote { flex: 1; }
+.haitu-name {
+  font-family: var(--font-sans);
+  font-size: 12px; font-weight: 700; letter-spacing: 1.5px;
+  color: var(--red-ink); text-transform: uppercase; margin-bottom: 4px;
+}
+.haitu-portrait {
+  font-size: 15px; line-height: 1.65; color: var(--text);
+  margin-bottom: 6px; font-weight: 600;
+}
+.haitu-rating-line {
+  font-size: 13px; color: var(--text2);
+  font-family: var(--font-sans);
+}
+.rating-badge {
+  display: inline-block; padding: 2px 12px; border-radius: 12px;
+  font-weight: 700; font-size: 13px; letter-spacing: 0.5px;
+  margin-left: 4px;
+}
+.rating-strong-buy { background: rgba(122,154,122,.25); color: var(--green); }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+.rating-cond-buy { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-hold { background: rgba(123,143,160,.18); color: var(--accent2); }
+.rating-sell { background: rgba(184,112,112,.18); color: var(--red); }
+.rating-strong-sell { background: rgba(184,112,112,.28); color: var(--red); }
+
+.haitu-essay {
+  background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red);
+  border-radius: 12px; padding: 28px 32px; margin: 24px 0;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.haitu-essay-header {
+  display: flex; align-items: center; gap: 18px;
+  padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px;
+}
+.haitu-avatar-lg {
+  width: 110px; height: 110px; border-radius: 50%;
+  object-fit: cover; flex-shrink: 0;
+  border: 3px solid var(--border); background: var(--red);
+  box-shadow: 0 4px 14px rgba(184,112,112,0.22);
+}
+.haitu-name-lg {
+  font-family: 'Georgia', 'Noto Serif SC', serif;
+  font-size: 28px; font-weight: 700; color: var(--text);
+  letter-spacing: 1px; margin-bottom: 4px;
+}
+.haitu-essay-tag {
+  font-family: var(--font-sans);
+  font-size: 12px; color: var(--text3); letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+.haitu-essay-body {
+  font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', serif;
+  font-size: var(--fs-lg); line-height: var(--lh-prose); color: var(--text);
+}
+.haitu-essay-body p { margin-bottom: calc(var(--lh-prose) * 0.85em); }
+.haitu-essay-body p:first-child {
+  font-size: 18px; font-style: italic; color: var(--text2);
+}
+.haitu-essay-body p:last-child {
+  margin-top: 22px; padding-top: 14px;
+  border-top: 1px solid var(--border);
+  font-size: var(--fs-xs); color: var(--text3); font-style: italic;
+}
+.haitu-sign {
+  text-align: left; margin-top: 14px;
+  font-family: 'Georgia', serif; font-size: 14px;
+  color: var(--text2); font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .haitu-quip { flex-direction: column; text-align: left; }
+  .haitu-essay-header { flex-direction: column; text-align: left; }
+  .haitu-avatar-sm { width: 80px; height: 80px; }
+  .haitu-avatar-lg { width: 90px; height: 90px; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   海图 v2 追加规则 —— 修 103 份存量实测出的问题，勿删勿改顺序
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── 1. 锚点落点：一行同时修好 TOC 跳转 / 深链 / Ctrl+F 定位 / :target ──
+   没有这条，所有跳转都会落在 sticky 顶栏底下被遮住 */
+.section { scroll-margin-top: calc(var(--bar-h) + 12px); }
+
+/* h2.stitle 必须显式定字号，否则被 UA 默认样式撑成 32px 巨标题 */
+h2.stitle { font-size: 18px; font-weight: 700; margin: 0 0 20px; }
+
+/* 章节深链锚点：桌面 hover 显形，触屏常显 */
+.anchor {
+  margin-left: 8px; font-size: 13px; color: var(--text3-ink);
+  text-decoration: none; opacity: 0; transition: opacity .2s;
+}
+.stitle:hover .anchor, .anchor:focus-visible { opacity: 1; }
+@media (hover: none) { .anchor { opacity: .35; } }
+
+/* ── 2. 评级徽章：由 data-rating 派生，作者不再手写 class ──
+   实测存量 .rating-hold 在 63 份是金色、30 份是蓝色 —— 这套选择器根除该分歧 */
+.rating-badge[data-rating="强力买入"] { background: rgba(122,154,122,.25); color: var(--green-ink); }
+.rating-badge[data-rating="买入"]     { background: rgba(122,154,122,.18); color: var(--green-ink); }
+.rating-badge[data-rating="有条件买入"]{ background: rgba(185,160,106,.18); color: var(--gold-ink); }
+.rating-badge[data-rating="持有观望"] { background: rgba(123,143,160,.18); color: var(--accent2-ink); }
+.rating-badge[data-rating="卖出"]     { background: rgba(184,112,112,.18); color: var(--red-ink); }
+.rating-badge[data-rating="强烈卖出"] { background: rgba(184,112,112,.28); color: var(--red-ink); }
+
+/* 涨跌不能只靠色相（色盲）—— 文字里必须自带 +/- 号，这里只负责配色 */
+.up, .pos { color: var(--green-ink); }
+.dn, .neg { color: var(--red-ink); }
+
+/* ── 3. 窄屏表格：粘性首列 + 右侧滚动阴影提示 ──
+   实测 375px 下 12 张表有 6 张横向溢出，且无任何可滚动的视觉线索 */
+.tbl-wrap {
+  background-image: linear-gradient(to right, var(--card), var(--card)),
+                    linear-gradient(to right, rgba(0,0,0,.10), rgba(0,0,0,0));
+  background-position: right center, right center;
+  background-repeat: no-repeat;
+  background-size: 24px 100%, 12px 100%;
+  background-attachment: local, scroll;
+}
+@media (max-width: 640px) {
+  /* border-collapse:collapse 下 sticky 单元格的边框会丢，用 box-shadow 补回 */
+  .tbl { border-collapse: separate; border-spacing: 0; }
+  .tbl :is(th, td) { border-bottom: 1px solid var(--border); }
+  .tbl :is(th, td):first-child {
+    position: sticky; left: 0; z-index: 1;
+    background: var(--card); box-shadow: 1px 0 0 var(--border);
+  }
+  .tbl th:first-child { background: var(--card2); }
+}
+
+/* ── 4. 移动端：顶栏必须能换行（实测四元素已折行重叠）── */
+.theme-bar { flex-wrap: wrap; row-gap: 6px; }
+@media (max-width: 420px) { .theme-bar .xueqiu-link { display: none; } }
+
+@media (max-width: 640px) {
+  .container { padding: 0 14px; }          /* 24px 在 375px 上吃掉 12.8% 视口 */
+  body { font-size: 15.5px; }              /* 14.5px 中文长文在手机上偏小 */
+  .cwrap { height: 200px; }
+  #sankey { height: 360px !important; }    /* 480px 挤在 289px 宽里不可读 */
+  .cgrid, .cgrid3, .pgrid { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 640px), (hover: none) {
+  .toggle-switch::before {
+    content: ''; position: absolute; left: 0; right: 0;
+    top: 50%; transform: translateY(-50%); height: 44px;
+  }
+}
+
+/* ── 5. prefers-reduced-motion ──
+   全语料 103/103 有 scroll-behavior:smooth 且零保护。加了目录之后，
+   一次跳转要跨 4 万像素、持续数秒，前庭敏感者会难受 */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important; animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+}
+
+/* ── 6. 焦点可见（全语料 0 个 :focus-visible 样式）── */
+:focus-visible { outline: 2px solid var(--accent3-ink); outline-offset: 2px; }
+
+/* ── 7. 图表无障碍降级容器 ── */
+figure.chart { margin: 0; }
+figure.chart figcaption { font-size: 12px; color: var(--text3-ink); line-height: 1.6; margin-top: 8px; }
+.chart-data { font-size: 12px; margin-top: 8px; }
+.chart-data summary { cursor: pointer; color: var(--text3-ink); }
+
+/* ── 8. shell 新增组件（skip link / 结论跳转带 / 顶栏右侧 / 屏幕阅读器专用）── */
+
+.skip {
+  position: absolute; left: -9999px; top: 0;
+  background: var(--card); color: var(--accent3-ink);
+  padding: 8px 14px; border-radius: 0 0 8px 0; z-index: 200;
+  font-size: 13px; text-decoration: none;
+}
+.skip:focus { left: 0; }
+
+/* 只给屏幕阅读器：essay 一节的标题不需要视觉呈现（.haitu-essay 自带头部） */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+.theme-bar-right { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+
+/* 结论跳转带：读者看完评级后一步到证据 */
+.quip-jump { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.quip-jump a {
+  font-family: var(--font-sans); font-size: 12px; line-height: 1;
+  padding: 7px 12px; border-radius: 999px;
+  border: 1px solid var(--border); background: var(--card2);
+  color: var(--accent3-ink); text-decoration: none;
+  transition: border-color .2s, background .2s;
+}
+.quip-jump a:hover { border-color: var(--accent3); background: var(--card); }
+@media (max-width: 640px), (hover: none) {
+  /* 用 min-height 而不是加 padding —— padding 要靠字体行高凑够 44px，
+     换字体或改字号就又不达标了（实测 padding:13px 只得到 40px）。 */
+  .quip-jump a { min-height: 44px; padding: 0 16px; display: inline-flex; align-items: center; }
+}
+
+.hero-pills {display: flex; justify-content: flex-start; gap: 16px; flex-wrap: wrap;}
+.pill {background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: var(--font-sans); font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow);}
+.pill strong {color: var(--text);}
+.stock-snap {background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px;}
+.snap-item {text-align: left;}
+.snap-label {font-family: var(--font-sans); font-size: 10px; color: var(--text3-ink); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px;}
+.kpi-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px;}
+.kpi {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow);}
+.moat-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px;}
+.moat-card {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); border-left: 4px solid var(--accent);}
+.moat-card.wide {border-left-color: var(--green);}
+.moat-card.narrow {border-left-color: var(--gold);}
+.moat-card.none {border-left-color: var(--red);}
+.moat-card h5 {font-size: 13px; color: var(--text); margin-bottom: 6px;}
+.moat-card .moat-rate {font-family: var(--font-sans); font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px;}
+.moat-card.wide .moat-rate {background: rgba(122,154,122,.18); color: var(--green);}
+.moat-card.narrow .moat-rate {background: rgba(185,160,106,.18); color: var(--gold);}
+.moat-card.none .moat-rate {background: rgba(184,112,112,.18); color: var(--red);}
+.moat-card p {font-size: var(--fs-sm); color: var(--text2); line-height: var(--lh-tight);}
+.ec-item {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: block; box-shadow: 0 1px 3px var(--shadow); line-height: var(--lh-prose); font-size: var(--fs-base);}
+.ec-badge {display: inline-block; vertical-align: baseline; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-right: 10px; font-family: var(--font-sans); white-space: nowrap;}
+.dcf-note {background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: var(--fs-sm); color: var(--text2); line-height: var(--lh-prose);}
+.dcf-note strong {color: var(--text);}
+.scorecard {background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow);}
+.score-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px;}
+.score-card {background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px;}
+.score-letter {width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-sans); font-weight: 800; font-size: 22px; flex-shrink: 0; border: 3px solid;}
+.flag-row {margin-top: 16px; padding: 12px 16px; background: rgba(184,112,112,.08); border: 1px solid rgba(184,112,112,.3); border-radius: 8px; font-size: var(--fs-sm); color: var(--text2);}
+.flag-row strong {color: var(--red);}
+.pgrid {display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0;}
+body { text-align: left; }
+
+.pbox {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 24px; text-align: left; box-shadow: 0 1px 4px var(--shadow);}
+.pbox .pl, .pbox .pv, .pbox .pn {text-align: left;}
+.pbox .pl {font-family: var(--font-sans); font-size: 11px; color: var(--text3-ink); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px;}
+.pbox .pv {font-family: var(--font-sans); font-size: 28px; font-weight: 800; margin-bottom: 5px;}
+.pbox .pn {font-size: var(--fs-xs); color: var(--text3-ink); line-height: var(--lh-tight);}
+.pbox > h4 {font-size: var(--fs-lg); color: var(--accent3-ink); margin-bottom: 14px; line-height: 1.5;}
+.pbox + .pbox {margin-top: 18px;}
+.risk-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px;}
+.risk-card {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); position: relative; overflow: hidden;}
+.risk-card::before {content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent);}
+.risk-card.r1::before {background: var(--green);}
+.risk-card.r2::before {background: rgba(122,154,122,.6);}
+.risk-card.r3::before {background: var(--gold);}
+.risk-card.r4::before {background: var(--rose);}
+.risk-card.r5::before {background: var(--red);}
+.risk-card h5 {font-size: 14px; margin-bottom: 6px; color: var(--text);}
+.risk-card p {font-size: var(--fs-sm); color: var(--text2); line-height: var(--lh-tight);}
+
+/* 骨架用到、但语料里没有现成规则的补充组件 */
+.note { font-size: var(--fs-xs); color: var(--text3-ink); line-height: var(--lh-tight); margin-top: 12px; }
+.lead { font-size: 16px; font-weight: 600; line-height: 1.8; margin-bottom: 14px; }
+.haitu-disc { font-size: 12px; color: var(--text3-ink); line-height: 1.7; margin-top: 18px;
+              padding-top: 14px; border-top: 1px solid var(--border); }
+.bscore { background: var(--card2); border: 1px solid var(--border); border-radius: 10px;
+          padding: 16px 20px; margin: 16px 0; }
+.bscore h4 { font-family: var(--font-sans); font-size: 14px; color: var(--accent3-ink); margin: 0 0 6px; }
+.bscore p { margin: 0; font-size: 14px; }
+
+/* 桑基 SVG：颜色与线宽在标记里给，这里只管描边端点与文字 */
+#sankey { width: 100%; height: auto; }
+.sk-flow path { fill: none; opacity: .45; stroke-linecap: butt; }
+.sk-t .sk-lab { font-family: var(--font-sans); font-size: 12px; fill: var(--text2); }
+.sk-t .sk-num { font-family: var(--font-sans); font-size: 13px; font-weight: 700; fill: var(--text);
+                font-variant-numeric: tabular-nums; }
+.sk-t .warn   { fill: var(--red-ink); }
+
+@media (max-width: 640px) {
+  .stock-snap { grid-template-columns: 1fr 1fr; }
+  .kpi-grid   { grid-template-columns: 1fr 1fr; }
+  .moat-grid, .risk-grid, .score-grid, .pgrid { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* 修饰类：评分等级 / 电话会情绪 / 快照数值。文字色一律走 ink 层。 */
+.score-letter.s-a  { color: var(--green-ink);   border-color: var(--green);   background: rgba(122,154,122,.12); }
+.score-letter.s-bp { color: var(--gold-ink);    border-color: var(--gold);    background: rgba(185,160,106,.12); }
+.score-letter.s-b  { color: var(--accent2-ink); border-color: var(--accent2); background: rgba(123,143,160,.12); }
+.score-letter.s-c  { color: var(--red-ink);     border-color: var(--red);     background: rgba(184,112,112,.12); }
+
+.ec-badge.ec-bull { background: rgba(122,154,122,.18); color: var(--green-ink); }
+.ec-badge.ec-bear { background: rgba(184,112,112,.18); color: var(--red-ink); }
+.ec-badge.ec-neut { background: rgba(123,143,160,.18); color: var(--accent2-ink); }
+
+.snap-value { font-family: var(--font-sans); font-size: 19px; font-weight: 700; color: var(--text);
+              font-variant-numeric: tabular-nums; line-height: 1.3; }
+.snap-note  { font-family: var(--font-sans); font-size: 11px; color: var(--text3-ink); margin-top: 3px; }
+.sk-node rect { opacity: .9; }
+
+</style>
+</head>
+<body>
+
+<a class="skip" href="#kpi">跳到正文</a>
+
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/BCE" target="_blank" rel="noopener">📊 雪球 BCE</a>
+  </div>
+  <div class="theme-bar-right">
+    <span>☀️ 浅色</span>
+    <button type="button" class="toggle-switch" id="themeBtn"
+            aria-pressed="false" aria-label="切换深色模式" onclick="toggleTheme()"></button>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">Q2 2026 财报发布 · 2026-08-06 ｜ 海图研判 · 2026-08-10 ｜ Q3 2026 财报预计 11 月初</div>
+  <h1>BCE Inc. · Q2 2026 财报深度分析</h1>
+  <div class="hero-sub">NYSE: BCE ／ TSX: BCE ｜ 财季截至 2026-06-30 ｜ 报表货币加元 ｜ 价值投资视角</div>
+  <div class="hero-pills">
+    <span class="pill">TSX <strong>C$31.67</strong></span>
+    <span class="pill">NYSE <strong>US$22.75</strong></span>
+    <span class="pill">报告 P/E <strong>4.70×</strong></span>
+    <span class="pill">调整后 P/E <strong>11.5×</strong></span>
+    <span class="pill">股息率 <strong>5.53%</strong></span>
+    <span class="pill">净债务／EBITDA <strong>3.71×</strong></span>
+  </div>
+</div>
+
+<div class="container">
+  <div class="haitu-quip">
+    <div class="haitu-quote">
+      <div class="haitu-portrait">加拿大最大的电信公司，五年营收几乎没动，而报告利润在 C$1.63 亿与 C$63 亿之间摆动——那 4.7 倍的市盈率，是一笔卖资产的收益倒回来的。</div>
+      <div class="haitu-rating-line">
+        评级：<span class="rating-badge" data-rating="持有观望">持有观望</span>
+        · 12 个月目标价 C$28.70（US$20.62）· 七法中位数 C$29.49，现价高于加权公允价值 10.5%
+      </div>
+      <div class="quip-jump" role="group" aria-label="快速跳转">
+        <a href="#m13">评分卡与决策</a>
+        <a href="#m7">目标价怎么算出来的</a>
+        <a href="#m11">风险矩阵</a>
+        <a href="#m4">护城河</a>
+        <a href="#essay">夜读手记</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+<section class="section" id="snapshot" aria-labelledby="snapshot-t">
+  <h2 class="stitle" id="snapshot-t">市场数据快照（2026-08-07 收盘）<a class="anchor" href="#snapshot" aria-label="本节链接">#</a></h2>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">TSX 收盘</div><div class="snap-value">C$31.67</div><div class="snap-note">当日 −0.63%</div></div>
+    <div class="snap-item"><div class="snap-label">NYSE 收盘</div><div class="snap-value">US$22.75</div><div class="snap-note">隐含汇率 USD/CAD 1.392</div></div>
+    <div class="snap-item"><div class="snap-label">市值</div><div class="snap-value">C$295.3 亿</div><div class="snap-note">US$212.2 亿</div></div>
+    <div class="snap-item"><div class="snap-label">报告 TTM 市盈率</div><div class="snap-value">4.70×</div><div class="snap-note">分子含一笔卖资产收益</div></div>
+    <div class="snap-item"><div class="snap-label">调整后市盈率</div><div class="snap-value">11.5×</div><div class="snap-note">TTM 调整后 EPS C$2.76</div></div>
+    <div class="snap-item"><div class="snap-label">EV／调整后 EBITDA</div><div class="snap-value">6.46×</div><div class="snap-note">EV C$694.9 亿</div></div>
+    <div class="snap-item"><div class="snap-label">净债务</div><div class="snap-value">C$399.6 亿</div><div class="snap-note">公司口径，2026-06-30</div></div>
+    <div class="snap-item"><div class="snap-label">净债务／调整后 EBITDA</div><div class="snap-value">3.71×</div><div class="snap-note">2021 年为 3.18×</div></div>
+    <div class="snap-item"><div class="snap-label">股息率</div><div class="snap-value">5.53%</div><div class="snap-note">年化 C$1.75（2025 年砍 56%）</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间（TSX）</div><div class="snap-value">C$29.69–36.12</div><div class="snap-note">低点 2026-07-06</div></div>
+    <div class="snap-item"><div class="snap-label">距 2022 年峰值</div><div class="snap-value">−57.1%</div><div class="snap-note">峰值 C$73.76（2022-04-20）</div></div>
+    <div class="snap-item"><div class="snap-label">每股净债务</div><div class="snap-value">C$42.85</div><div class="snap-note">比股价高 35%</div></div>
+  </div>
+  <p class="note">口径说明：BCE 以<strong>加元</strong>为报表货币，本报告全部财务数字用 C$；股价同时给 TSX 加元价与 NYSE 美元价。所有财务数据取自 BCE 向 SEC 提交的 Form 6-K 与 40-F 原始文件（EDGAR CIK 718940）。「调整后」指标为 BCE 自行披露的非 GAAP 口径，其定义与调节表见公司 MD&amp;A。</p>
+</section>
+
+<section class="section" id="kpi" aria-labelledby="kpi-t">
+  <h2 class="stitle" id="kpi-t">Q2 2026 核心业绩<a class="anchor" href="#kpi" aria-label="本节链接">#</a></h2>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">营业收入</div><div class="kpi-v">C$61.76 亿</div><div class="kpi-l up">同比 +1.5%</div></div>
+    <div class="kpi"><div class="kpi-l">调整后 EBITDA</div><div class="kpi-v">C$27.02 亿</div><div class="kpi-l up">同比 +1.0%，利润率 43.8%</div></div>
+    <div class="kpi"><div class="kpi-l">归母净利润</div><div class="kpi-v">C$5.58 亿</div><div class="kpi-l dn">同比 −3.6%</div></div>
+    <div class="kpi"><div class="kpi-l">报告 EPS</div><div class="kpi-v">C$0.60</div><div class="kpi-l dn">同比 −4.8%</div></div>
+    <div class="kpi"><div class="kpi-l">调整后 EPS</div><div class="kpi-v">C$0.65</div><div class="kpi-l up">同比 +3.2%</div></div>
+    <div class="kpi"><div class="kpi-l">经营现金流</div><div class="kpi-v">C$21.62 亿</div><div class="kpi-l up">同比 +11.0%</div></div>
+    <div class="kpi"><div class="kpi-l">资本开支</div><div class="kpi-v">C$10.80 亿</div><div class="kpi-l dn">同比 +41.5%</div></div>
+    <div class="kpi"><div class="kpi-l">自由现金流（公司口径）</div><div class="kpi-v">C$10.42 亿</div><div class="kpi-l dn">同比 −9.5%</div></div>
+    <div class="kpi"><div class="kpi-l">后付费手机净增</div><div class="kpi-v">41,594 户</div><div class="kpi-l dn">同比 −6.6%</div></div>
+    <div class="kpi"><div class="kpi-l">后付费流失率</div><div class="kpi-v">1.02%</div><div class="kpi-l up">三年来最低单季</div></div>
+    <div class="kpi"><div class="kpi-l">手机混合 ARPU</div><div class="kpi-v">C$56.30</div><div class="kpi-l dn">同比 −2.3%</div></div>
+    <div class="kpi"><div class="kpi-l">净债务杠杆</div><div class="kpi-v">3.71×</div><div class="kpi-l dn">目标是「加速去杠杆」</div></div>
+  </div>
+</section>
+
+<section class="section" id="focus" aria-labelledby="focus-t">
+  <h2 class="stitle" id="focus-t">本季必看 · 两个「看穿」<a class="anchor" href="#focus" aria-label="本节链接">#</a></h2>
+
+  <div class="pbox">
+    <h4>看穿一 · 那个 4.7 倍的市盈率，是一笔在 2023–2024 年被压掉的利润，在 2025 年一次性弹回来</h4>
+    <div class="cmt">
+      <p>BCE 现在的拖尾市盈率是 <strong>4.70 倍</strong>，前瞻市盈率是 <strong>13.02 倍</strong>。两个数字差了近三倍，中间不是「市场看错了」，是一个季度。</p>
+      <div class="tbl-wrap">
+        <table class="tbl" data-shape="grid" data-source="BCE 各季 6-K 新闻稿与 MD&amp;A（SEC EDGAR CIK 718940）；TTM 合计为海图计算">
+          <thead><tr><th>季度</th><th>报告 EPS</th><th>调整后 EPS</th><th>差额来源</th></tr></thead>
+          <tbody>
+            <tr class="hl"><td><strong>Q3 2025</strong></td><td><strong>C$4.84</strong></td><td>C$0.79</td><td><strong>出售 MLSE 股权，投资净收益 C$51.75 亿</strong></td></tr>
+            <tr><td>Q4 2025</td><td>C$0.64</td><td>C$0.69</td><td>—</td></tr>
+            <tr><td>Q1 2026</td><td>C$0.66</td><td>C$0.63</td><td>—</td></tr>
+            <tr><td>Q2 2026</td><td>C$0.60</td><td>C$0.65</td><td>—</td></tr>
+            <tr class="hl"><td><strong>TTM 合计</strong></td><td><strong>C$6.74</strong></td><td><strong>C$2.76</strong></td><td>一个季度贡献了拖尾 EPS 的 <strong>72%</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>剔掉 Q3 2025，其余三个季度报告 EPS 合计 C$1.90，与调整后的 C$1.97 几乎一致。<span class="hl-t">所谓「5 倍市盈率的电信股」，不存在。</span>按 C$31.67 与调整后 EPS 计算，真实倍数是 <strong>11.5 倍</strong>。</p>
+      <p><strong>但这笔收益值得再往里看一层，因为它比「一次性」还要古怪。</strong></p>
+      <p>2024 年 9 月 18 日，Rogers 宣布以 <strong>C$47 亿</strong>现金收购 BCE 间接持有的 MLSE（多伦多枫叶体育娱乐）37.5% 股权，2025 年 7 月 1 日交割。BCE 在 FY2025 年报里写得很清楚：收到毛额 C$47 亿，确认所得税负债 C$5.42 亿，<strong>而在「投资净收益」里记了 C$52 亿的处置收益</strong>。</p>
+      <p><strong>收益比对价还高 5 亿——因为这笔资产的账面值早就被压成了负数。</strong>BCE 披露，截至 2024 年末该头寸在「持有待售负债」中列示为<strong>净负债 C$4.93 亿</strong>，反映它应承担的、按公允价值回购 MLSE 少数股东权益的义务。对应地，FY2023「联营及合营企业权益净损失」<strong>C$5.81 亿</strong>、FY2024 <strong>C$2.47 亿</strong>，后者 BCE 明确说明就是这项回购义务的权益损失。</p>
+      <p><span class="hl-t">也就是说：2023 与 2024 年被这笔义务压低的利润，在 2025 年一次性弹了回来。这是时间错配，不是价值创造。</span></p>
+      <p><strong>还有一个更值得记的细节。</strong>那 C$5.42 亿所得税已于 <strong>2026 年第一季度实际支付</strong>。而 BCE 在同一个季度<strong>修改了自由现金流的定义</strong>，新增剔除「重大处置所支付的所得税」这一项——于是这笔会计收益对应的真实现金代价，被排除在公司用来衡量派息能力的核心指标之外。</p>
+      <p>把这三层叠起来：一笔账面收益，来自前两年已经计提的损失反转，产生的现金税负又被移出了衡量指标。<strong>报表上那个 4.7 倍，什么也没告诉你。</strong></p>
+    </div>
+  </div>
+
+  <div class="pbox">
+    <h4>看穿二 · 股息砍了 56%，按公司自己新增披露的口径，仍然没有被覆盖</h4>
+    <div class="cmt">
+      <p>2025 年 5 月 8 日，BCE 宣布把年化股息从 <strong>C$3.99 砍到 C$1.75</strong>，降幅 <strong>56.1%</strong>——十七年来第一次下调。同一天它还做了两件事：把派息政策目标定为<strong>自由现金流的 40%–55%</strong>，并<strong>承诺此后额外披露「扣除租赁负债本金偿付后的自由现金流」</strong>。</p>
+      <p>第二件事是关键。租赁本金在 IFRS 下走融资活动，不进经营现金流，但它是电信公司躲不掉的年度现金支出（铁塔、机房、门店）。BCE 主动补这个口径，说明它知道市场在看什么。用这个口径回看：</p>
+      <div class="tbl-wrap">
+        <table class="tbl" data-shape="grid" data-source="BCE FY2023–FY2025 年报与 Q2 2026 MD&amp;A；2026E 为按指引中值与租赁本金运行率的海图测算">
+          <thead><tr><th>年度</th><th>公司口径 FCF</th><th>租赁本金</th><th>扣租赁后 FCF</th><th>已付普通股股息</th><th>派息率（扣租赁后）</th></tr></thead>
+          <tbody>
+            <tr><td>FY2023</td><td>C$31.44 亿</td><td>C$10.49 亿</td><td>C$20.95 亿</td><td>C$34.86 亿</td><td><strong>166%</strong></td></tr>
+            <tr class="hl"><td>FY2024</td><td>C$28.88 亿</td><td>C$11.42 亿</td><td>C$17.46 亿</td><td>C$36.13 亿</td><td><strong>207%</strong></td></tr>
+            <tr><td>FY2025（减派当年）</td><td>C$31.78 亿</td><td>C$11.27 亿</td><td>C$20.51 亿</td><td>C$20.26 亿</td><td>99%</td></tr>
+            <tr class="hl"><td><strong>FY2026E（公司指引）</strong></td><td><strong>C$21–23 亿</strong></td><td>约 C$10 亿</td><td>约 C$11–13 亿</td><td>约 C$16.32 亿</td><td><strong>126%–148%</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>FY2024 的 207% 解释了为什么非砍不可。</strong>那一年公司拿 C$17.46 亿的可分配现金，派了 C$36.13 亿的股息——差额靠举债与发新股填上。</p>
+      <p><strong>但真正需要注意的是最后一行。</strong>BCE 自己给的 2026 年指引是自由现金流 <strong>C$21–23 亿，同比下降 28%–34%</strong>；扣掉租赁本金后约 C$11–13 亿，而股息要花 C$16.32 亿。<span class="hl-t">砍了 56% 之后，按公司自己新增的那个口径，股息在 2026 年仍然覆盖不住。</span></p>
+      <p>为什么 2026 年的自由现金流会掉这么多？因为资本开支回来了。<strong>资本强度指引从 2 月的「低于 15%」在 3 月 16 日上调到「约 20%」</strong>，原因是萨斯喀彻温省 300 MW 的 AI 数据中心项目——总投资约 C$17 亿，其中约 C$13 亿落在 2026 年。同期<strong>调整后 EPS 指引是 −11% 到 −5%</strong>。</p>
+      <p>这就是这家公司现在的处境：<span class="hl-t">前几年靠砍资本开支撑住自由现金流去付一个付不起的股息，现在股息砍完了，资本开支又必须回来。</span>FY2022 到 FY2025，经营现金流从 C$83.65 亿降到 C$69.93 亿（−16%），而资本开支从 C$51.33 亿砍到 C$37.00 亿（−28%）——自由现金流看着平稳，是这么来的。</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="trend" aria-labelledby="trend-t">
+  <h2 class="stitle" id="trend-t">关键指标趋势<a class="anchor" href="#trend" aria-label="本节链接">#</a></h2>
+  <div class="cgrid">
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">单季营业收入与调整后 EBITDA 利润率</div>
+        <div class="cwrap"><canvas id="rev" data-chart="rev" role="img" aria-label="八个季度营业收入在 59 亿到 64 亿加元之间窄幅波动，调整后 EBITDA 利润率在 40.6% 到 45.7% 之间随季节起伏"></canvas></div>
+        <figcaption>柱为收入（C$ 亿），线为调整后 EBITDA 利润率（%）。第四季度利润率系统性偏低，是电信业的获客旺季特征。来源：BCE 各季 6-K。</figcaption>
+      </figure>
+    </div>
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">报告 EPS vs 调整后 EPS（C$／股）</div>
+        <div class="cwrap"><canvas id="margin" data-chart="margin" role="img" aria-label="报告每股收益在 0.18 与 6.79 加元之间剧烈摆动，而调整后每股收益是一条从 3.35 缓慢下滑到 2.80 的平缓下行线"></canvas></div>
+        <figcaption>两条线的分离就是本报告的核心。报告 EPS 由减值与资产处置主导，调整后 EPS 才是经营轨迹。来源：BCE 各年年报与 MD&amp;A。</figcaption>
+      </figure>
+    </div>
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">FY2025 经营现金流去了哪里（C$ 亿）</div>
+        <div class="cwrap"><canvas id="segment" data-chart="segment" role="img" aria-label="FY2025 经营现金流 69.93 亿中，资本开支占 37.00 亿、普通股股息 20.26 亿、优先股与少数股东股息 2.02 亿，其余 10.65 亿"></canvas></div>
+        <figcaption>即使在减派当年，资本开支加各类股息仍占去经营现金流的 84.8%。来源：FY2025 合并现金流量表。</figcaption>
+      </figure>
+    </div>
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">普通股股息 vs 自由现金流（C$ 亿）</div>
+        <div class="cwrap"><canvas id="eps" data-chart="eps" role="img" aria-label="FY2021 至 FY2024 连续四年普通股股息高于公司口径自由现金流，FY2025 减派后首次低于"></canvas></div>
+        <figcaption>自由现金流为 BCE 公司口径（已扣优先股息与少数股东股息，但未扣租赁本金）。连续四年入不敷出，是 2025 年减派的直接原因。来源：BCE 各年年报。</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="statements" aria-labelledby="statements-t">
+  <h2 class="stitle" id="statements-t">三张表的五年轨迹<a class="anchor" href="#statements" aria-label="本节链接">#</a></h2>
+
+  <div class="period-toggle" role="group" aria-label="切换统计周期">
+    <button type="button" class="period-btn is-on" data-period="annual" aria-pressed="true">年度</button>
+    <button type="button" class="period-btn" data-period="quarterly" aria-pressed="false">季度</button>
+  </div>
+
+  <div class="cgrid">
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">利润表：营业收入 · 调整后 EBITDA · 归母净利润</div>
+        <div class="cwrap"><canvas id="income" data-chart="income" role="img" aria-label="五年营业收入从 234 亿到 245 亿几乎不动，调整后 EBITDA 稳定在 99 亿到 107 亿，而归母净利润在 1.6 亿与 63 亿之间剧烈摆动"></canvas></div>
+        <figcaption>单位：C$ 亿。收入与 EBITDA 两条线几乎是直的，净利润那条却上下翻飞——差额全部来自减值与资产处置，与经营无关。切到季度可见 24Q3 的 −12.37 亿（Bell Media 商誉减值）与 25Q3 的 +45.02 亿（MLSE 出售）。来源：BCE 40-F 与各季 6-K。</figcaption>
+      </figure>
+    </div>
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">现金流量表：经营现金流 · 资本开支 · 自由现金流</div>
+        <div class="cwrap"><canvas id="cashflow" data-chart="cashflow" role="img" aria-label="经营现金流五年从 83.65 亿降到 69.93 亿，资本开支同期从 51.33 亿砍到 37.00 亿，自由现金流因此维持在 29 亿到 32 亿的窄幅区间"></canvas></div>
+        <figcaption>单位：C$ 亿。自由现金流为 BCE 公司口径（经营现金流扣资本开支、优先股息与少数股东股息，未扣租赁本金）。<strong>这三条线放在一起说明：平稳的自由现金流是砍资本开支砍出来的。</strong>来源：BCE 40-F 与各季 6-K。</figcaption>
+      </figure>
+    </div>
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">资产负债表：总资产 · 总负债 · 股东权益</div>
+        <div class="cwrap"><canvas id="balance" data-chart="balance" role="img" aria-label="总资产五年从 668 亿增至 802 亿，总负债从 438 亿增至 569 亿，股东权益先从 229 亿降到 174 亿再因出售收益回升到 233 亿"></canvas></div>
+        <figcaption>单位：C$ 亿，各期期末时点值。权益在 FY2024 触底 C$173.60 亿，FY2025 回到 C$233.10 亿——回升的来源是那笔处置收益，不是留存经营利润。来源：BCE 40-F 与各季 6-K。</figcaption>
+      </figure>
+    </div>
+  </div>
+  <p class="note">三张图并排看，最该被看到的是<strong>它们的形状完全不同步</strong>：收入线是平的，EBITDA 线是平的，经营现金流线在缓慢下行，而净利润线上下翻飞、权益线跟着跳。<span class="hl-t">当一家公司的利润与权益都由资产处置和减值决定，而不是由收入和现金流决定时，读它的市盈率与市净率就没有意义。</span>能读的只有两样：调整后 EPS 的斜率（向下），和债务的斜率（向上）。</p>
+</section>
+
+<section class="section" id="flow" aria-labelledby="flow-t">
+  <h2 class="stitle" id="flow-t">资金流向桑基图<a class="anchor" href="#flow" aria-label="本节链接">#</a></h2>
+  <div class="ccard">
+    <figure class="chart">
+      <div id="sankey" role="img" aria-label="FY2025 资金流向：营业收入 244.68 亿扣运营成本后调整后 EBITDA 106.58 亿，扣折旧摊销与遣散费用后营业利润 49.03 亿；加上 52.17 亿投资净收益、扣减值与利息税负后净利润 65.14 亿；到现金流量表这笔投资收益被整笔冲回，经营现金流 69.93 亿，扣资本开支后自由现金流 32.93 亿，再扣租赁本金与优先股息后可供普通股 19.64 亿，而已付普通股股息 20.26 亿">
+        <svg viewBox="0 0 1180 560" role="img" aria-label="FY2025 从营业收入到普通股股息的资金流向">
+          <g class="sk-flow">
+            <path d="M114,118 C200,118 200,118 290,118" stroke="var(--red)" stroke-width="66"/>
+            <path d="M114,186 C200,186 200,206 290,206" stroke="var(--green)" stroke-width="51"/>
+            <path d="M304,190 C380,190 380,150 460,150" stroke="var(--red)" stroke-width="25"/>
+            <path d="M304,214 C380,214 380,166 460,166" stroke="var(--red)" stroke-width="3"/>
+            <path d="M304,240 C380,240 380,244 460,244" stroke="var(--green)" stroke-width="24"/>
+            <path d="M304,320 C380,320 380,286 460,286" stroke="var(--gold)" stroke-width="25"/>
+            <path d="M474,232 C550,232 550,180 630,180" stroke="var(--red)" stroke-width="5"/>
+            <path d="M474,244 C550,244 550,204 630,204" stroke="var(--red)" stroke-width="13"/>
+            <path d="M474,282 C550,282 550,286 630,286" stroke="var(--green)" stroke-width="31"/>
+            <path d="M644,286 C700,286 700,330 750,330" stroke="var(--green)" stroke-width="31"/>
+            <path d="M644,376 C700,376 700,366 750,366" stroke="var(--gold)" stroke-width="25"/>
+            <path d="M644,420 C700,420 700,394 750,394" stroke="var(--accent3)" stroke-width="5"/>
+            <path d="M764,340 C820,340 820,296 870,296" stroke="var(--red)" stroke-width="25"/>
+            <path d="M764,382 C820,382 820,352 870,352" stroke="var(--green)" stroke-width="34"/>
+            <path d="M884,352 C930,352 930,306 980,306" stroke="var(--red)" stroke-width="11"/>
+            <path d="M884,366 C930,366 930,324 980,324" stroke="var(--red)" stroke-width="2"/>
+            <path d="M884,392 C930,392 930,368 980,368" stroke="var(--green)" stroke-width="20"/>
+          </g>
+          <g class="sk-node">
+            <rect x="100" y="85" width="14" height="152" rx="3" fill="var(--accent)"/>
+            <rect x="290" y="85" width="14" height="66" rx="3" fill="var(--red)"/>
+            <rect x="290" y="181" width="14" height="51" rx="3" fill="var(--green)"/>
+            <rect x="290" y="308" width="14" height="25" rx="3" fill="var(--gold)"/>
+            <rect x="460" y="138" width="14" height="28" rx="3" fill="var(--red)"/>
+            <rect x="460" y="232" width="14" height="49" rx="3" fill="var(--accent)"/>
+            <rect x="630" y="178" width="14" height="18" rx="3" fill="var(--red)"/>
+            <rect x="630" y="271" width="14" height="31" rx="3" fill="var(--green)"/>
+            <rect x="750" y="315" width="14" height="61" rx="3" fill="var(--accent)"/>
+            <rect x="870" y="284" width="14" height="25" rx="3" fill="var(--red)"/>
+            <rect x="870" y="335" width="14" height="34" rx="3" fill="var(--green)"/>
+            <rect x="980" y="301" width="14" height="11" rx="3" fill="var(--red)"/>
+            <rect x="980" y="318" width="14" height="12" rx="3" fill="var(--red)"/>
+            <rect x="980" y="358" width="14" height="20" rx="3" fill="var(--green)"/>
+          </g>
+          <g class="sk-t">
+            <text x="2" y="150" class="sk-lab">营业收入</text>
+            <text x="2" y="168" class="sk-num">24,468</text>
+            <text x="2" y="186" class="sk-lab">五年 +4.3%</text>
+            <text x="322" y="106" class="sk-lab warn">运营成本</text>
+            <text x="322" y="124" class="sk-num warn">13,810</text>
+            <text x="322" y="200" class="sk-lab">调整后 EBITDA</text>
+            <text x="322" y="218" class="sk-num">10,658</text>
+            <text x="322" y="236" class="sk-lab">利润率 43.6%</text>
+            <text x="322" y="326" class="sk-lab">＋投资净收益</text>
+            <text x="322" y="344" class="sk-num">5,217</text>
+            <text x="322" y="362" class="sk-lab">出售 MLSE 股权</text>
+            <text x="482" y="146" class="sk-lab warn">折旧摊销 5,238</text>
+            <text x="482" y="164" class="sk-lab warn">遣散收购等 517</text>
+            <text x="482" y="252" class="sk-lab">营业利润</text>
+            <text x="482" y="270" class="sk-num">4,903</text>
+            <text x="652" y="186" class="sk-lab warn">资产减值 1,027</text>
+            <text x="652" y="210" class="sk-lab warn">利息与所得税 2,579</text>
+            <text x="652" y="292" class="sk-lab">净利润（总额）</text>
+            <text x="652" y="310" class="sk-num">6,514</text>
+            <text x="652" y="384" class="sk-lab">＋折旧摊销与减值回加</text>
+            <text x="652" y="428" class="sk-lab warn">−投资收益整笔冲回 5,217</text>
+            <text x="652" y="446" class="sk-lab warn">−营运资金等净流出 569</text>
+            <text x="772" y="336" class="sk-lab">经营现金流</text>
+            <text x="772" y="354" class="sk-num">6,993</text>
+            <text x="892" y="292" class="sk-lab warn">资本开支</text>
+            <text x="892" y="310" class="sk-num warn">3,700</text>
+            <text x="892" y="358" class="sk-lab">自由现金流</text>
+            <text x="892" y="376" class="sk-num">3,293</text>
+            <text x="1002" y="309" class="sk-lab warn">租赁本金 1,127</text>
+            <text x="1002" y="333" class="sk-lab warn">优先股与少数股东 202</text>
+            <text x="1002" y="374" class="sk-lab">可供普通股</text>
+            <text x="1002" y="392" class="sk-num">1,964</text>
+            <text x="1002" y="410" class="sk-lab warn">已付股息 2,026，缺口 62</text>
+          </g>
+        </svg>
+      </div>
+      <figcaption>单位：C$ 百万，FY2025。每级流入＝流出：24,468 ＝ 13,810＋10,658；10,658 ＝ 5,238＋517＋4,903；4,903＋5,217 ＝ 1,027＋2,579＋6,514；6,514＋5,238＋1,027 ＝ 5,217＋569（营运资金等净流出）＋6,993；6,993 ＝ 3,700＋3,293；3,293 ＝ 1,127＋202＋1,964。<strong>最右侧那一格是全图的重点：减派之后，可供普通股的现金仍比实付股息少 C$62 百万。</strong></figcaption>
+    </figure>
+    <details class="chart-data">
+      <summary>查看数据表</summary>
+      <div class="tbl-wrap">
+        <table class="tbl" data-shape="grid" data-source="BCE FY2025 合并利润表与合并现金流量表（40-F）">
+          <thead><tr><th>流量</th><th>金额（C$ 百万）</th><th>占营收</th></tr></thead>
+          <tbody>
+            <tr><td>营业收入</td><td>24,468</td><td>100.0%</td></tr>
+            <tr><td>运营成本</td><td>13,810</td><td>56.4%</td></tr>
+            <tr><td>调整后 EBITDA</td><td>10,658</td><td>43.6%</td></tr>
+            <tr><td>折旧与摊销</td><td>5,238</td><td>21.4%</td></tr>
+            <tr><td>遣散、收购及其他</td><td>517</td><td>2.1%</td></tr>
+            <tr><td>营业利润</td><td>4,903</td><td>20.0%</td></tr>
+            <tr><td>投资净收益（出售 MLSE）</td><td>5,217</td><td>21.3%</td></tr>
+            <tr><td>资产减值</td><td>1,027</td><td>4.2%</td></tr>
+            <tr><td>利息与所得税等</td><td>2,579</td><td>10.5%</td></tr>
+            <tr><td>净利润（总额）</td><td>6,514</td><td>26.6%</td></tr>
+            <tr><td>归属普通股股东净利润</td><td>6,305</td><td>25.8%</td></tr>
+            <tr><td>经营活动现金流</td><td>6,993</td><td>28.6%</td></tr>
+            <tr><td>资本开支</td><td>3,700</td><td>15.1%</td></tr>
+            <tr><td>自由现金流（简单口径）</td><td>3,293</td><td>13.5%</td></tr>
+            <tr><td>租赁负债本金偿付</td><td>1,127</td><td>4.6%</td></tr>
+            <tr><td>优先股与少数股东股息</td><td>202</td><td>0.8%</td></tr>
+            <tr><td>可供普通股</td><td>1,964</td><td>8.0%</td></tr>
+            <tr><td>已付普通股股息</td><td>2,026</td><td>8.3%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+  </div>
+</section>
+
+<section class="section" id="m1" aria-labelledby="m1-t">
+  <h2 class="stitle" id="m1-t">模块 1 · 公司概览与背景<a class="anchor" href="#m1" aria-label="本节链接">#</a></h2>
+  <p><strong>BCE Inc.</strong> 是加拿大最大的通信公司，前身可追溯至 1880 年获得联邦特许的 Bell Telephone Company of Canada，1983 年重组为控股公司。业务覆盖无线、宽带、电视、企业网络与媒体，在 TSX 与 NYSE 双重上市，<strong>以加元为报表货币</strong>，作为加拿大发行人向 SEC 提交 Form 40-F（年报）与 6-K（季报）。</p>
+  <p><strong>分部结构在 2025 年发生了变化。</strong>此前是 Bell CTS（通信与技术服务）与 Bell Media 两个分部；随 2025 年 8 月 1 日完成 Ziply Fiber 收购，从 Q3 2025 起拆为三个：<strong>Bell CTS Canada、Bell CTS U.S.、Bell Media</strong>。Q2 2026 分部收入为 Bell CTS 合计 C$53.56 亿（+0.4%）、Bell Media C$9.18 亿（+8.9%）。</p>
+  <p><strong>股本与优先股。</strong>普通股约 9.33 亿股。需要特别注意的是 BCE 有规模可观的优先股——FY2025 末优先股股本 <strong>C$32.88 亿</strong>，年付优先股息约 C$1.5 亿。<span class="hl-t">因此「净利润总额」与「归属普通股股东净利润」并不相同，读财报时若混用会算错每股指标。</span>本报告一律使用归属普通股股东口径。</p>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="BCE FY2021–FY2025 年报（40-F）合并资产负债表">
+      <thead><tr><th>权益结构（C$ 百万）</th><th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th></tr></thead>
+      <tbody>
+        <tr><td>归属普通股股东权益</td><td>18,632</td><td>18,308</td><td>16,562</td><td><strong>13,538</strong></td><td>19,732</td></tr>
+        <tr><td>优先股股本</td><td>4,003</td><td>3,870</td><td>3,667</td><td>3,533</td><td>3,288</td></tr>
+        <tr><td>少数股东权益</td><td>306</td><td>337</td><td>328</td><td>289</td><td>290</td></tr>
+        <tr class="hl"><td>权益合计</td><td>22,941</td><td>22,515</td><td>20,557</td><td><strong>17,360</strong></td><td>23,310</td></tr>
+        <tr><td>商誉与无形资产合计</td><td>26,142</td><td>27,089</td><td>27,551</td><td>27,047</td><td><strong>30,465</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><span class="hl-t">最后一行值得停一下：商誉与无形资产 C$304.65 亿，比全部权益 C$233.10 亿还多 C$71.55 亿。</span>也就是说，按账面口径这家公司的有形净资产是负的——这在重资产的电信业里并不罕见（牌照与频谱本就是无形资产），但它意味着<strong>市净率对 BCE 没有参考价值</strong>。</p>
+</section>
+
+<section class="section" id="m2" aria-labelledby="m2-t">
+  <h2 class="stitle" id="m2-t">模块 2 · 管理层评估<a class="anchor" href="#m2" aria-label="本节链接">#</a></h2>
+  <p><strong>CEO Mirko Bibic</strong>，2020 年 1 月起任 BCE 与 Bell Canada 总裁兼 CEO。2004 年以监管事务高级副总裁加入 Bell，历任首席法务与监管官、公司发展执行副总裁、首席运营官。麦吉尔商学学士 + 多伦多大学法学学位，2017 年获评加拿大年度总法律顾问，现兼任加拿大皇家银行董事。</p>
+  <p><strong>CFO Curtis Millen</strong>，2023 年 9 月 1 日上任，接替服务 30 年、任 CFO 达 18 年的 Glen LeBlanc。2008 年加入 Bell，晋升前任企业战略高级副总裁兼财务主管。</p>
+  <h3 class="sub">2.1 一个必须指出的薪酬观察</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="BCE 2026 年管理层信息通函（SEC Form 6-K 附件 99.1）薪酬汇总表">
+      <thead><tr><th>CEO 薪酬（C$）</th><th>2023</th><th>2024</th><th>2025</th></tr></thead>
+      <tbody>
+        <tr><td>工资</td><td>1,400,000</td><td>1,400,000</td><td>1,400,000</td></tr>
+        <tr><td>股权激励</td><td>8,000,000</td><td>8,000,000</td><td>8,000,000</td></tr>
+        <tr class="hl"><td>年度短期激励</td><td>2,956,800</td><td>2,380,000</td><td><strong>3,136,000</strong></td></tr>
+        <tr><td>养老金与其他</td><td>1,076,966</td><td>1,044,191</td><td>916,136</td></tr>
+        <tr class="hl"><td><strong>合计</strong></td><td>13,433,766</td><td>12,824,191</td><td><strong>13,452,136</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>2025 年是股价震荡、自由现金流指引恶化、并在年中把股息砍掉 56% 的一年。</strong>同一年，CEO 的年度短期现金激励从 C$238 万<strong>升到 C$313.6 万</strong>（+31.8%），总薪酬同比 +4.9%。<span class="hl-t">这不是违规，短期激励挂钩的是公司设定的经营指标而非股价；但它说明激励设计与股东在那一年的实际体验是脱节的。</span></p>
+  <p><strong>持股与绑定。</strong>Bibic 截至 2025 年末持有普通股 138,253 股 + 递延股份单位 267,500 单位，合计市值 C$1,769.8 万，其中 64% 是 DSU。BCE 的持股要求是任职满 10 年达基本工资的 10 倍，他的实际完成度是 <strong>1.3 倍</strong>——即约为要求的 13%。CFO 的对应完成度是 1.1 倍。</p>
+  <h3 class="sub">2.2 长期主义测试与资本配置记录</h3>
+  <ul class="ulist">
+    <li><strong>2024-11-04 宣布以约 C$50 亿收购美国 Ziply Fiber，同日暂停股息增长。</strong>当天 TSX 跌 <strong>9.7%</strong>。Scotiabank 的 Maher Yaghi 当时的评论是「加拿大电信投资者是为股息而来，不是为增长而来」；TD 的 Vince Valentini 更直接：「你刚把债务降下来，现在又把它推上去。」</li>
+    <li><strong>2025-05-08 股息砍 56%。</strong>市场当天的反应是<strong>上涨 5.4%</strong>——被解读为去风险利好。这是一个耐人寻味的对照：市场为「不再硬撑」鼓掌，说明它早就知道那个股息是撑出来的。</li>
+    <li><strong>2025-07-01 出售 MLSE 收 C$47 亿，2025-08-01 用于支付 Ziply。</strong>时序很整齐：卖掉一个不控股的体育资产，买下一个美国光纤网络。方向上是「从被动投资换成主业资产」，逻辑成立；但代价是把杠杆重新推高。</li>
+    <li><strong>2026-03-16 宣布萨斯喀彻温省 300 MW AI 数据中心，总投资约 C$17 亿</strong>，并因此把 2026 年资本强度指引从「低于 15%」上调到「约 20%」。</li>
+  </ul>
+  <p><strong>结论：这是一支职业经理人团队，不是主人翁团队。</strong>方向性的判断（买光纤、卖体育资产、砍股息）事后看多数是对的，但节奏一贯是「被逼到墙角才做」——股息在覆盖率跌到 207% 之后才砍，资本开支在砍了三年之后才被迫加回来。</p>
+</section>
+
+<section class="section" id="m3" aria-labelledby="m3-t">
+  <h2 class="stitle" id="m3-t">模块 3 · 商业模式深度解析<a class="anchor" href="#m3" aria-label="本节链接">#</a></h2>
+  <h3 class="sub">3.1 海图「一句话测试」</h3>
+  <p><strong>加拿大人每个月为手机、宽带和电视付的账单，有约四分之一进了这家公司。</strong></p>
+  <p>这句话能说清，而且这门生意本身没有任何难懂的地方——它是一门收订阅费的公用事业型生意，现金流的可预测性来自账单的黏性而不是产品的优越性。<span class="hl-t">难的不是理解它怎么赚钱，是理解它赚的钱够不够还债和分红。</span></p>
+  <h3 class="sub">3.2 收入拆分与单位经济</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="cards" data-source="BCE Q2 2026 新闻稿与补充财务信息">
+      <thead><tr><th>分部</th><th>Q2 2026 收入</th><th>同比</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td>Bell CTS（加拿大＋美国合计）</td><td>C$53.56 亿</td><td>+0.4%</td><td>无线、宽带、企业网络；含 2025-08 并入的 Ziply Fiber</td></tr>
+        <tr><td>Bell Media</td><td>C$9.18 亿</td><td>+8.9%</td><td>本季受 FIFA 世界杯与 F1 加拿大站驱动；调整后 EBITDA 利润率由 27.9% 降至 26.6%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>单位经济的两个关键读数都在走弱。</strong>手机混合 ARPU 从 FY2024 的 C$58 附近降到 Q2 2026 的 <strong>C$56.30</strong>（同比 −2.3%）；后付费净增从 FY2023 的水平一路下滑，FY2024 全年 213,408 户（同比 −49.9%），FY2025 全年 102,584 户（再 −51.9%）。<span class="hl-t">两年内净增用户数掉了四分之三。</span></p>
+  <p><strong>唯一明确改善的是流失率</strong>：Q2 2026 后付费流失率 1.02%，同比改善 4 个基点，是三年来最低单季。这说明降价保客是有效的——代价写在 ARPU 上。</p>
+  <p><strong>宽带的增长要看清口径。</strong>Q2 2026 零售宽带用户 491.1 万（+7.3%），其中 FTTH 362.7 万（+14.7%）——数字很漂亮，但<strong>增长完全来自并入 Ziply</strong>，公司明确说明「加拿大 Bell CTS 部分同比小幅下滑」。</p>
+  <p><strong>能力圈提示。</strong>这门生意在能力圈之内，但有两处我必须承认看不透：<strong>其一</strong>，AI 数据中心业务（Bell AI Fabric）的单位经济尚无历史数据，C$17 亿投资的回报率无从验证；<strong>其二</strong>，Ziply 在美国光纤市场的竞争位置与长期资本开支需求，BCE 披露有限——Q2 2026 Bell CTS U.S. 调整后 EBITDA 仅 C$0.95 亿、利润率 40.6%，样本太短。</p>
+</section>
+
+<section class="section" id="m4" aria-labelledby="m4-t">
+  <h2 class="stitle" id="m4-t">模块 4 · 经济护城河分析（5 维）<a class="anchor" href="#m4" aria-label="本节链接">#</a></h2>
+  <div class="moat-grid">
+    <div class="moat-card narrow">
+      <h5>网络效应 · 无</h5>
+      <p>电信是典型的无网络效应生意——多一个用户不会让既有用户的服务更好，反而在拥塞时更差。<strong>评级：无。</strong></p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>转换成本 · 窄</h5>
+      <p>加拿大早已实施号码携带，合约期与设备补贴是仅存的摩擦。Q2 2026 后付费流失率 1.02% 看似很低，但那是在 ARPU 连续下滑的前提下买来的。<strong>评级：窄。</strong></p>
+    </div>
+    <div class="moat-card wide">
+      <h5>成本优势 · 宽</h5>
+      <p>全国性铜缆与光纤骨干、已建成的基站网络与频谱资产，重置成本极高。FTTH 覆盖已达 1,000 万户以上量级。<strong>这是 BCE 最实在的一块。评级：宽。</strong></p>
+    </div>
+    <div class="moat-card wide">
+      <h5>无形资产 · 宽</h5>
+      <p>频谱牌照由联邦拍卖分配、总量受限；加拿大对电信业有外资持股限制。牌照本身就是法定壁垒。<strong>评级：宽。</strong></p>
+    </div>
+    <div class="moat-card narrow">
+      <h5>有效规模 · 窄（且正在变窄）</h5>
+      <p>过去是 Bell／Rogers／TELUS 三家分天下，CRTC 口径下三家仍占零售移动收入约 90%。<span class="hl-t">但 2024 年新增用户中超过 55% 被区域性竞争者拿走</span>——Quebecor 旗下 Freedom/Fizz 份额约 11.8% 且同比 +6.4%，公开目标是 20%。<strong>评级：窄。</strong></p>
+    </div>
+  </div>
+  <p><strong>护城河趋势：结构完好，定价权受损。</strong>成本优势与牌照这两条宽护城河是真的，十年后大概率还在；但它们保护的是「这个行业只能有几家」，保护不了「这几家能收多少钱」。<span class="hl-t">ARPU 连续八个季度同比为负、净增用户两年缩水四分之三、而流失率靠降价压住——这就是护城河在定价层面被侵蚀的直接读数。</span></p>
+  <p><strong>十年后会更宽还是更窄？</strong>取决于两件不在公司手里的事：其一，第四家全国性运营商（Quebecor）能否把份额从 12% 推到 20%；其二，CRTC 的批发接入规则。二者都指向更窄。</p>
+</section>
+
+<section class="section" id="m5" aria-labelledby="m5-t">
+  <h2 class="stitle" id="m5-t">模块 5 · 财务深度分析<a class="anchor" href="#m5" aria-label="本节链接">#</a></h2>
+
+  <h3 class="sub">5.1 五年主表</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="BCE FY2021–FY2025 年报（40-F）；比率为海图计算">
+      <thead><tr><th>项目（C$ 百万）</th><th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th></tr></thead>
+      <tbody>
+        <tr><td>营业收入</td><td>23,449</td><td>24,174</td><td>24,673</td><td>24,409</td><td>24,468</td></tr>
+        <tr><td>调整后 EBITDA</td><td>9,893</td><td>10,199</td><td>10,417</td><td>10,589</td><td>10,658</td></tr>
+        <tr><td>调整后 EBITDA 利润率</td><td>42.2%</td><td>42.2%</td><td>42.2%</td><td>43.4%</td><td>43.6%</td></tr>
+        <tr><td>营业利润</td><td>5,075</td><td>5,382</td><td>5,299</td><td>5,094</td><td>4,903</td></tr>
+        <tr class="hl"><td>归属普通股股东净利润</td><td>2,709</td><td>2,716</td><td>2,076</td><td><strong>163</strong></td><td><strong>6,305</strong></td></tr>
+        <tr class="hl"><td>调整后净利润</td><td>2,895</td><td><strong>3,057</strong></td><td>2,926</td><td>2,773</td><td><strong>2,601</strong></td></tr>
+        <tr><td>　资产减值</td><td>−197</td><td>−279</td><td>−143</td><td><strong>−2,190</strong></td><td>−1,027</td></tr>
+        <tr><td>　投资净收益</td><td>−6</td><td>+24</td><td>+80</td><td>+57</td><td><strong>+5,217</strong></td></tr>
+        <tr><td>　联营权益净损失</td><td>−49</td><td>−42</td><td><strong>−581</strong></td><td><strong>−247</strong></td><td>0</td></tr>
+        <tr><td>　遣散、收购及其他</td><td>−209</td><td>−94</td><td>−200</td><td>−454</td><td>−517</td></tr>
+        <tr><td>报告 EPS</td><td>2.99</td><td>2.98</td><td>2.28</td><td>0.18</td><td>6.79</td></tr>
+        <tr class="hl"><td>调整后 EPS</td><td>3.19</td><td><strong>3.35</strong></td><td>3.21</td><td>3.04</td><td><strong>2.80</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>这张表读两行就够了。</strong>收入行五年从 C$234.49 亿到 C$244.68 亿，累计 +4.3%——几乎是一条直线。调整后 EPS 行从 FY2022 的 C$3.35 降到 FY2025 的 C$2.80，<strong>四年 −16.4%</strong>，也是一条线，只是向下。<span class="hl-t">中间那两行剧烈跳动的报告净利润与报告 EPS，是减值与处置的合成产物，不承载任何关于生意本身的信息。</span></p>
+
+  <h3 class="sub">5.2 利润质量：报告口径为什么在这家公司完全失效</h3>
+  <p>用一个具体的算术说明。FY2024 报告 EPS 是 <strong>C$0.18</strong>，当年每股股息 C$3.99——按报告口径算，派息率是 <strong>2,217%</strong>。这个数字不传达任何信息，因为分母被 C$21.90 亿的资产减值（主要是 Q3 2024 的 C$21.13 亿 Bell Media 商誉减值）压到了接近零。</p>
+  <p>第二年反过来。FY2025 报告 EPS <strong>C$6.79</strong>，派息率变成 34%——因为分子里塞进了 C$52.17 亿的处置收益。</p>
+  <p><strong>两年之间，同一家公司、几乎相同的收入与 EBITDA，报告派息率从 2,217% 变成 34%。</strong>用调整后口径看则平稳得多：FY2024 131.3%，FY2025 82.5%。</p>
+  <p class="note">补充一个只有翻附注才看得到的细节：FY2023 与 FY2024 的「联营及合营企业权益净损失」C$5.81 亿与 C$2.47 亿，BCE 明确说明来自 MLSE 少数股东权益回购义务的公允价值变动。<strong>这两年被这项义务压低的利润，正是 2025 年那笔 C$52 亿收益的一部分来源</strong>——把三年连起来看，损益表在做的是把同一件事先记成亏损、再记成收益。</p>
+
+  <h3 class="sub">5.3 资产负债健康度：本篇最需要警惕的一节</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="BCE FY2021–FY2025 年报与 Q2 2026 MD&amp;A；净债务为 BCE 公司定义（含 50% 优先股、扣 50% 次级次顺位债与现金）">
+      <thead><tr><th>项目（C$ 百万）</th><th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th><th>26Q2</th></tr></thead>
+      <tbody>
+        <tr><td>长期债务</td><td>27,048</td><td>27,783</td><td>31,135</td><td>32,835</td><td>34,904</td><td>37,522</td></tr>
+        <tr><td>一年内到期债务</td><td>2,625</td><td>4,137</td><td>5,042</td><td>7,669</td><td>6,155</td><td>4,254</td></tr>
+        <tr class="hl"><td>总债务</td><td>29,673</td><td>31,920</td><td>36,177</td><td>40,504</td><td>41,059</td><td><strong>41,776</strong></td></tr>
+        <tr><td>现金与短期投资</td><td>207</td><td>149</td><td>1,772</td><td>1,972</td><td>320</td><td>479</td></tr>
+        <tr class="hl"><td>净债务（公司口径）</td><td>31,468</td><td>33,706</td><td>36,239</td><td>40,299</td><td>40,234</td><td><strong>39,959</strong></td></tr>
+        <tr class="hl"><td><strong>净债务／调整后 EBITDA</strong></td><td><strong>3.18×</strong></td><td>3.30×</td><td>3.48×</td><td><strong>3.81×</strong></td><td>3.78×</td><td><strong>3.71×</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>五年里总债务增加了 C$121.03 亿（+40.8%），而调整后 EBITDA 只增加了 C$7.65 亿（+7.7%）。</strong>杠杆从 3.18 倍推到 3.81 倍的峰值，砍完股息、卖掉 MLSE 之后回到 3.71 倍——<span class="hl-t">一整套动作下来，杠杆只降回到 2023 年的水平，仍高于 2021 年。</span></p>
+  <p><strong>换一个角度看这件事更直观</strong>：每股净债务 C$42.85，而股价 C$31.67——<strong>净债务比整个股权市值还高 35%</strong>。这意味着 EBITDA 倍数上一个很小的变化，会被杠杆放大成股价上一个很大的变化，两个方向都是。</p>
+
+  <h3 class="sub">5.4 现金流质量与所有者盈余</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="BCE FY2021–FY2025 年报合并现金流量表；所有者盈余为海图按「调整后净利润 ＋ 折旧摊销 − 维护性资本开支」计算">
+      <thead><tr><th>项目（C$ 百万）</th><th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th></tr></thead>
+      <tbody>
+        <tr><td>经营活动现金流</td><td>8,008</td><td><strong>8,365</strong></td><td>7,946</td><td>6,988</td><td>6,993</td></tr>
+        <tr><td>资本开支</td><td>4,852</td><td><strong>5,133</strong></td><td>4,581</td><td>3,897</td><td><strong>3,700</strong></td></tr>
+        <tr><td>资本强度（资本开支÷收入）</td><td>20.7%</td><td>21.2%</td><td>18.6%</td><td>16.0%</td><td><strong>15.1%</strong></td></tr>
+        <tr><td>自由现金流（公司口径）</td><td>2,980</td><td>3,067</td><td>3,144</td><td>2,888</td><td>3,178</td></tr>
+        <tr><td>租赁负债本金偿付</td><td>—</td><td>—</td><td>1,049</td><td>1,142</td><td>1,127</td></tr>
+        <tr class="hl"><td>扣租赁后自由现金流</td><td>—</td><td>—</td><td><strong>2,095</strong></td><td><strong>1,746</strong></td><td><strong>2,051</strong></td></tr>
+        <tr><td>折旧与摊销</td><td>4,609</td><td>4,723</td><td>4,918</td><td>5,041</td><td>5,238</td></tr>
+        <tr class="hl"><td>所有者盈余（维护性资本开支按收入 17% 计）</td><td>3,518</td><td>3,670</td><td>3,649</td><td>3,664</td><td><strong>3,679</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>资本强度那一行是本节的重点。</strong>从 FY2022 的 21.2% 一路降到 FY2025 的 15.1%——四年里少投了大约 C$15 亿／年的量级。自由现金流之所以能在 C$29–32 亿的窄区间里保持平稳，<span class="hl-t">不是因为经营在改善（经营现金流同期 −16%），而是因为投资在收缩。</span></p>
+  <p><strong>而这个动作在 2026 年已经必须反向。</strong>公司把资本强度指引上调到约 20%，回到 FY2021–FY2022 的水平。对应地，自由现金流指引 C$21–23 亿，同比 −28% 到 −34%。</p>
+  <p><strong>所有者盈余</strong>：按「调整后净利润 ＋ 折旧摊销 − 维护性资本开支」计算，维护性资本开支我取收入的 17%（介于 FY2025 实际的 15.1% 与 2026 年指引的 20% 之间，代表一个不扩张、也不欠账的水平）。五年结果在 C$35.18 亿到 C$36.79 亿之间，<strong>相当稳定</strong>。按现价市值 C$295.3 亿计算，所有者盈余收益率 <strong>12.5%</strong>——这是全篇对多头最有利的一个数字。</p>
+  <p class="note">但要立刻加一句限定：所有者盈余是<strong>付利息之前、付股息之前</strong>的口径。BCE 的净债务是 C$399.6 亿，光利息就要吃掉其中一大块。所有者盈余收益率 12.5% 与股权投资者实际能拿到的东西之间，隔着一张 C$400 亿的资产负债表。</p>
+</section>
+
+<section class="section" id="m6" aria-labelledby="m6-t">
+  <h2 class="stitle" id="m6-t">模块 6 · 电话会分析<a class="anchor" href="#m6" aria-label="本节链接">#</a></h2>
+  <div class="ec-item"><span class="ec-badge ec-bull">利好</span><strong>Q2 2026（2026-08-06）：后付费流失率 1.02%，同比改善 4 个基点，为三年来最低单季；调整后 EPS C$0.65，同比 +3.2%；经营现金流 C$21.62 亿，同比 +11.0%。</strong><span class="hl-t">解读：这是一个货真价实的好季度，业绩当日 TSX 涨 3.3%。流失率是电信业最难作假的指标之一——它改善说明降价保客的策略确实起作用了，而不只是账面调整。</span></div>
+  <div class="ec-item"><span class="ec-badge ec-bear">利空</span><strong>同一份新闻稿：自由现金流 C$10.42 亿，同比 −9.5%；资本开支 C$10.80 亿，同比 +41.5%。</strong><span class="hl-t">解读：好季度和坏现金流同时出现，原因就是资本开支回来了。这一条比 EPS 更重要——股息付的是现金，不是调整后利润。</span></div>
+  <div class="ec-item"><span class="ec-badge ec-neut">中性</span><strong>公司「重申」2026 年指引。</strong>新闻稿原文是「confirmed its financial guidance targets for 2026, as provided on February 5, 2026, and as updated on March 16, 2026」。<span class="hl-t">解读：这句话需要穿透。重申的是一份<strong>已经在 3 月 16 日被实质性下修过</strong>的指引——那次因为 AI 数据中心项目，资本强度从「低于 15%」上调到「约 20%」。在一份已经调低的基准上说「维持」，与「本来就这么好」不是一回事。</span></div>
+  <div class="ec-item"><span class="ec-badge ec-bear">利空</span><strong>2026 年全年指引：调整后 EPS 增长 −11% 到 −5%；自由现金流 C$21–23 亿（−28% 到 −34%）；资本强度约 20%。</strong><span class="hl-t">解读：这是公司自己给的数字，不是我推的。一家把股息定在 C$1.75、需要 C$16.32 亿现金的公司，指引自己的自由现金流会掉三成——这两句话放在一起，就是模块 11 里估值风险与财务风险都给到高位的原因。</span></div>
+  <h3 class="sub">6.1 指引兑现度追踪</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="cards" data-source="BCE 各年度业绩指引与实际值（40-F 与季度新闻稿）">
+      <thead><tr><th>时点</th><th>当时的说法</th><th>后来的实际</th><th>兑现度</th></tr></thead>
+      <tbody>
+        <tr><td>2024-02 年度指引</td><td>维持股息增长政策，年化 C$3.99</td><td>2024-11 暂停增长，2025-05 砍 56%</td><td><strong>未兑现</strong></td></tr>
+        <tr><td>2025-05 减派同时</td><td>派息政策目标改为自由现金流的 40%–55%</td><td>FY2025 实际 63.8%；FY2026E 约 71%–78%</td><td><strong>连续两年高于目标区间上沿</strong></td></tr>
+        <tr><td>2026-02-05 年度指引</td><td>资本强度低于 15%</td><td>2026-03-16 上调至约 20%</td><td>六周后即下修</td></tr>
+        <tr><td>2026-08-06</td><td>重申 3 月修订后的指引</td><td>H2 2026 待验证</td><td>待验证</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>信号汇总：管理层在描述当期事实时是准确的，披露也在变透明</strong>——主动新增「扣租赁后自由现金流」这个对自己不利的口径，值得肯定。<span class="hl-t">但前瞻承诺的兑现记录不好：股息政策、派息率目标、资本强度指引，三年内三次没守住。</span></p>
+</section>
+
+<section class="section" id="m7" aria-labelledby="m7-t">
+  <h2 class="stitle" id="m7-t">模块 7 · 多模型估值（8 种方法）<a class="anchor" href="#m7" aria-label="本节链接">#</a></h2>
+  <p><strong>这家公司不能用报告市盈率估值</strong>——理由见模块 5.2。也不能用市净率，因为商誉与无形资产比全部权益还多。<span class="hl-t">对一家净债务比股权市值还高 35% 的公司，唯一诚实的主锚是 EV/EBITDA；其余方法都要围绕「那个股息能不能维持」来交叉验证。</span></p>
+  <p>要求回报率统一取 <strong>8.5%</strong>：加拿大长期国债利率之上，为 3.71 倍杠杆与调整后 EPS 负增长各加一层补偿。</p>
+
+  <h3 class="sub">7.1 八法明细</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="cards" data-source="海图自行测算；输入取自 BCE Q2 2026 MD&amp;A、FY2025 年报与 2026 年度指引">
+      <thead><tr><th>方法</th><th>关键假设</th><th>得出估值</th><th>适用性</th></tr></thead>
+      <tbody>
+        <tr><td>① EV/EBITDA 6.5×</td><td>TTM 调整后 EBITDA C$107.59 亿 × 6.5 − 净债务 C$399.59 亿</td><td><strong>C$32.14</strong></td><td>适用——<strong>本公司最贴切的主锚</strong></td></tr>
+        <tr><td>② 调整后市盈率 12×</td><td>2026E 调整后 EPS C$2.58（指引 −11%～−5% 的中值）× 12</td><td><strong>C$30.96</strong></td><td>适用</td></tr>
+        <tr><td>③ FCF 收益率 8%</td><td>2026E 自由现金流 C$22 亿（指引中值）÷ 8%</td><td><strong>C$29.49</strong></td><td>适用</td></tr>
+        <tr><td>④ 股息贴现 DDM</td><td>C$1.75 × (1+1%) ÷ (8.5% − 1%)</td><td><strong>C$23.57</strong></td><td>适用——<strong>股东基础以收息为主，这条不能省</strong></td></tr>
+        <tr><td>⑤ 扣租赁后 FCF 收益率 7%</td><td>2026E 扣租赁后约 C$12 亿 ÷ 7%</td><td><strong>C$18.38</strong></td><td>适用——压力测试口径，七法中最悲观</td></tr>
+        <tr><td>⑥ NAV 每股普通股权益</td><td>归属普通股股东权益 C$197.32 亿 ÷ 9.325 亿股</td><td><strong>C$21.16</strong></td><td>适用但需打折——商誉与无形资产 C$304.65 亿超过全部权益，有形净资产为负</td></tr>
+        <tr><td>⑦ 情景加权 DCF</td><td>悲观 30%×6.0倍、基准 50%×6.5倍、乐观 20%×7.2倍 EV/EBITDA</td><td><strong>C$32.03</strong></td><td>适用</td></tr>
+        <tr><td>⑧ 反向 DCF（现价隐含什么）</td><td>C$31.67 对应 EV C$694.9 亿 ÷ EBITDA C$107.59 亿</td><td>隐含 <strong>6.46×</strong></td><td>交叉验证——市场付的是「EBITDA 不再下滑」的价</td></tr>
+        <tr><td>⑨ P/S 市销率</td><td>市值 C$295.3 亿 ÷ 收入 C$244.68 亿 ＝ 1.21×；EV/S ＝ 2.84×</td><td>交叉验证</td><td>仅作参考——高杠杆下市值口径的 P/S 会系统性低估真实定价</td></tr>
+        <tr><td>⑩ PEG</td><td>—</td><td>—</td><td><strong>不适用</strong>：2026 年调整后 EPS 指引为负增长，PEG 无意义</td></tr>
+        <tr><td>⑪ SOTP 分部加总</td><td>—</td><td>—</td><td><strong>不适用</strong>：Bell CTS 美国分部自 2025Q3 才并表，仅四个季度数据；Bell Media 与 CTS 共用内容与销售渠道，独立处置价值无法可靠估计</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="sub">7.2 加权汇总与安全边际</h3>
+  <p>七个可用方法从 <strong>C$18.38 到 C$32.14</strong>，<strong>中位数 C$29.49</strong>。区间宽度 75%——比本栏目多数报告都宽，而宽度本身就是结论：<span class="hl-t">这些方法的分歧点只有一个，就是那个股息能不能维持。信它的（EV/EBITDA、调整后 P/E）给三十出头，不信的（DDM、扣租赁 FCF）给二十上下。</span></p>
+  <p>按重要性加权——EV/EBITDA 30%、调整后 P/E 25%、FCF 收益率 20%、DDM 15%、扣租赁 FCF 10%——得<strong>加权公允价值 C$28.65（US$20.59）</strong>。</p>
+  <p><strong>现价 C$31.67，高于加权公允价值 10.5%。</strong>安全边际为负，但幅度不大。</p>
+  <p class="note">对照卖方：2026 年 7–8 月的目标价集中在 C$33–40／US$25–29 区间（RBC C$36、TD Cowen C$37、National Bank C$38、Scotiabank US$29、BMO US$27、Barclays US$25），普遍高于现价。我的加权公允价值低于街上任何一家——<strong>差别几乎全在对股息可持续性的假设上</strong>：卖方模型多数用公司口径自由现金流（2026E 派息率 71%–78%，看着安全），我额外扣了租赁本金（派息率 126%–148%）。这个分歧点读者可以自己判断该站哪边。</p>
+
+  <h3 class="sub">7.3 建仓阶梯</h3>
+  <p>按本栏目规则，首仓价 ＝ 估值中位数 × 80% ＝ C$29.49 × 0.8 ＝ <strong>C$23.59（US$16.95）</strong>；二仓 ×70% ＝ <strong>C$20.64</strong>；三仓 ×60% ＝ <strong>C$17.69</strong>。</p>
+  <p>现价距首仓价还有 <strong>25.5% 的下跌空间</strong>。作为参照，52 周低点是 C$29.69（2026-07-06）——<span class="hl-t">首仓价明显低于过去一年的任何一个价位，意味着这不是一个「等回调」的距离，而是要等一次股息或杠杆层面的实质性坏消息。</span></p>
+</section>
+
+<section class="section" id="m8" aria-labelledby="m8-t">
+  <h2 class="stitle" id="m8-t">模块 8 · 竞争与行业分析<a class="anchor" href="#m8" aria-label="本节链接">#</a></h2>
+  <h3 class="sub">8.1 市场格局</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="各公司 2026 年二季度业绩公告；份额为按自报移动电话用户数的海图测算">
+      <thead><tr><th>运营商</th><th>移动电话用户（26Q2 末）</th><th>测算份额</th><th>同比动向</th></tr></thead>
+      <tbody>
+        <tr><td>Rogers</td><td>1,227 万</td><td>约 32.9%</td><td>后付费 1,105 万</td></tr>
+        <tr class="hl"><td><strong>BCE / Bell</strong></td><td><strong>1,038.0 万</strong></td><td><strong>约 27.8%</strong></td><td>后付费 +0.5%，<strong>预付费 −5.6%</strong></td></tr>
+        <tr><td>TELUS</td><td>1,030 万</td><td>约 27.6%</td><td>同比 +1%</td></tr>
+        <tr class="hl"><td>Quebecor（Videotron／Freedom／Fizz）</td><td>约 440 万</td><td>约 11.8%</td><td><strong>同比 +6.4%，目标 20%</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>三点结构性含义。</strong>第一，BCE 排第二，但与 TELUS 的差距只有约 0.2 个百分点——<strong>随时可能被超过</strong>。第二，BCE 是三大中唯一预付费大幅流失的（−5.6%），而预付费正是移民与留学生驱动的细分市场，加拿大移民配额下调直接打在这里。第三，也是最重要的一条：<span class="hl-t">CRTC 数据显示 2024 年行业新增用户中超过 55% 被区域性竞争者拿走</span>——三大合计份额约 90% 这个静态数字，掩盖了增量份额已经易手的事实。</p>
+  <h3 class="sub">8.2 波特五力速判</h3>
+  <p><strong>供应商议价力 · 低</strong>——设备供应商竞争充分。<strong>客户议价力 · 高且在上升</strong>——号码携带 + 第四家全国运营商 + 监管推动价格透明。<strong>新进入者威胁 · 低</strong>——频谱与外资限制是硬门槛。<strong>替代品威胁 · 中</strong>——固网电视被流媒体替代已经发生（Bell Media 的传统电视业务长期承压），卫星宽带（Starlink）在偏远地区构成真实替代。<strong>同业竞争 · 高</strong>——这是过去三年 ARPU 连续下滑的直接原因。</p>
+  <h3 class="sub">8.3 监管与美国扩张</h3>
+  <p><strong>CRTC 批发光纤接入规则</strong>是悬在头上的结构性变量：它要求在位运营商以规定条件向竞争对手开放光纤网络，直接削弱「自建网络」的排他价值。BCE 曾公开以削减资本开支作为回应。</p>
+  <p><strong>Ziply Fiber（美国西北部光纤）</strong>：2024-11-04 宣布、2025-08-01 完成，对价约 C$50 亿（US$36.5 亿），资金来自出售 MLSE 的 C$47 亿。战略逻辑是把资本从加拿大的低增长市场转向美国的光纤渗透空间。<span class="hl-t">但它同时意味着：BCE 在加拿大之外承担了汇率风险与一个自己不熟悉的竞争环境，而 Q2 2026 该分部调整后 EBITDA 只有 C$0.95 亿——占集团的 3.5%，短期内不构成实质支撑。</span></p>
+</section>
+
+<section class="section" id="m9" aria-labelledby="m9-t">
+  <h2 class="stitle" id="m9-t">模块 9 · 技术面与 K 线分析<a class="anchor" href="#m9" aria-label="本节链接">#</a></h2>
+  <p class="note">技术面仅作补充参考，明确次要于基本面。价格取自 Yahoo Finance 历史行情（未复权收盘）。</p>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="cards" data-source="Yahoo Finance 历史行情（BCE.TO / BCE）；事件成因见对应公告与媒体报道">
+      <thead><tr><th>日期</th><th>TSX 价格动作</th><th>成因</th></tr></thead>
+      <tbody>
+        <tr><td>2022-04-20</td><td>历史最高收盘 C$73.76（NYSE US$59.02）</td><td>低利率环境下的收息股顶点</td></tr>
+        <tr class="hl"><td><strong>2024-11-04</strong></td><td>C$44.81 → 40.47（<strong>−9.7%</strong>）</td><td><strong>宣布收购 Ziply Fiber，同时暂停股息增长</strong></td></tr>
+        <tr><td>2025-02-06/07</td><td>两日累计 −12.0%（C$35.90 → 31.62）</td><td>公布 2024 年报与 2025 年指引</td></tr>
+        <tr><td>2025-04-08</td><td>−5.5%（→ C$29.77）</td><td>与全球关税抛售同日</td></tr>
+        <tr class="hl"><td><strong>2025-05-08</strong></td><td>C$29.38 → 30.96（<strong>+5.4%</strong>）</td><td><strong>宣布股息砍 56% 当日，股价上涨</strong>——市场解读为去风险</td></tr>
+        <tr><td>2026-03-03/04</td><td>52 周高点 C$36.12（NYSE US$26.45）</td><td>—</td></tr>
+        <tr><td>2026-07-06</td><td>52 周低点 C$29.69（NYSE US$20.87）</td><td>—</td></tr>
+        <tr><td>2026-08-06</td><td>C$30.86 → 31.87（+3.3%）</td><td>二季度业绩超预期</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>年度表现：</strong>2023 年末 C$52.17 → 2024 年 C$33.32（<strong>−36.1%</strong>）→ 2025 年 C$32.74（−1.7%）→ 2026 年至今 C$31.67（−3.3%）。<span class="hl-t">跌势的主体发生在 2024 年，此后两年在 C$29–36 之间横盘。技术面给出的唯一信息是：市场已经把「股息不可持续」这件事定价完了，现在在等下一个方向。</span></p>
+  <p><strong>2025 年 5 月 8 日那根阳线值得单独记。</strong>一家公司宣布把股息砍掉一半以上，股价当天涨 5.4%——<strong>这说明在减派之前，市场给这只股票的定价里已经不包含那个股息了。</strong>对今天的投资者而言，这条历史提醒的是：如果 2027 年再砍一次，股价未必会跌。</p>
+</section>
+
+<section class="section" id="m10" aria-labelledby="m10-t">
+  <h2 class="stitle" id="m10-t">模块 10 · 增长催化剂与前景展望<a class="anchor" href="#m10" aria-label="本节链接">#</a></h2>
+  <h3 class="sub">10.1 短期催化剂（未来 6 个月）</h3>
+  <ul class="ulist">
+    <li><strong>Q3 2026 财报（约 11 月初）</strong>——最近的验证点。要看两件事：资本开支是否按「资本强度约 20%」的节奏执行，以及自由现金流是否落在 C$21–23 亿指引区间内。</li>
+    <li><strong>2027 年度指引（预计 2027 年 2 月初）</strong>——真正的关键。若资本强度维持 20%、而自由现金流指引继续下探，<span class="hl-t">股息将再次面临压力</span>。</li>
+    <li><strong>Northwestel 出售交割</strong>——2024 年 6 月宣布售予原住民财团 Sixty North Unity，对价最高 C$10 亿，<strong>截至 Q2 2026 仍未完成</strong>，BCE 明确指出交割取决于买方取得融资。若完成，可小幅改善杠杆。</li>
+    <li><strong>Bell Mobility 陆地移动无线电业务出售 C$6.75 亿</strong>，2026 年 3 月宣布，预计 Q4 2026 交割。</li>
+  </ul>
+  <h3 class="sub">10.2 长期展望（3–5 年）</h3>
+  <p><strong>多头逻辑成立的条件很具体</strong>：加拿大无线价格战见底 → ARPU 止跌 → EBITDA 恢复 3%–4% 增长；同时 Ziply 与 AI 数据中心两块新投资开始产生回报，杠杆自然降到 3.5 倍以下，EV/EBITDA 由 6.46 倍重估到 7.2 倍。若走通，对应每股 <strong>C$40.23</strong>——这就是本报告乐观情景，概率给 20%。</p>
+  <p><strong>但要注意这条链条的第一环不在公司手里。</strong>Quebecor 公开的目标是把全国份额从约 12% 推到 20%；只要它还在推，价格就很难真正企稳。</p>
+  <p><strong>AI 数据中心是唯一的新故事，也是最需要打问号的一块。</strong>萨斯喀彻温省 300 MW、总投资约 C$17 亿——对一家资本开支约 C$40 亿／年的公司，这是一笔实质性的方向转移。<span class="hl-t">但电信运营商做数据中心的历史记录并不好：BCE 自己在 2020 年就把 25 处数据中心以 C$10.4 亿卖给了 Equinix。六年后又建回来，需要一个比「AI 需求很大」更具体的理由，而公司目前没有给出单位经济数据。</span></p>
+</section>
+
+<section class="section" id="m11" aria-labelledby="m11-t">
+  <h2 class="stitle" id="m11-t">模块 11 · 风险矩阵<a class="anchor" href="#m11" aria-label="本节链接">#</a></h2>
+  <div class="risk-grid">
+    <div class="risk-card r5">
+      <h5>① 股息可持续性 · 严重度：高（5/5）</h5>
+      <p>按 BCE 自己新增披露的「扣租赁后自由现金流」口径，2026 年派息率约 <strong>126%–148%</strong>，即减派 56% 之后仍未覆盖。<strong>触发信号</strong>：2027 年指引若自由现金流继续下探，或资本强度维持 20% 以上。</p>
+    </div>
+    <div class="risk-card r5">
+      <h5>② 财务与杠杆风险 · 严重度：高（5/5）</h5>
+      <p>净债务 C$399.6 亿、杠杆 3.71 倍，每股净债务比股价还高 35%。五年债务 +40.8% 而 EBITDA 仅 +7.7%。<strong>触发信号</strong>：评级机构展望下调，或杠杆重回 3.8 倍以上。</p>
+    </div>
+    <div class="risk-card r4">
+      <h5>③ 竞争风险 · 严重度：中高（4/5）</h5>
+      <p>ARPU 连续八个季度同比为负；两年内后付费净增缩水四分之三；与 TELUS 的份额差距仅 0.2 个百分点。<strong>触发信号</strong>：单季后付费净增转负（2025Q1 已发生过一次），或 ARPU 同比跌幅扩大到 3% 以上。</p>
+    </div>
+    <div class="risk-card r4">
+      <h5>④ 估值风险 · 严重度：中高（4/5）</h5>
+      <p>现价高于加权公允价值 10.5%，安全边际为负。更关键的是杠杆放大效应：EV/EBITDA 每变动 0.5 倍，每股价值变动约 C$5.8——<span class="hl-t">相当于股价的 18%</span>。<strong>触发信号</strong>：EBITDA 同比转负。</p>
+    </div>
+    <div class="risk-card r3">
+      <h5>⑤ 监管风险 · 严重度：中（3/5）</h5>
+      <p>CRTC 批发光纤接入规则削弱自建网络的排他价值；移民配额下调直接压制预付费与新增用户。<strong>触发信号</strong>：批发定价进一步下调，或新一轮频谱拍卖设置偏向新进入者的条款。</p>
+    </div>
+    <div class="risk-card r2">
+      <h5>⑥ 经营风险 · 严重度：低（2/5）</h5>
+      <p>收入与 EBITDA 五年高度稳定（利润率 42.2%→43.6%），流失率处于三年最优。<strong>这是全篇最确定的正面因素：这门生意本身不会突然坏掉，它只会慢慢被稀释。</strong></p>
+    </div>
+  </div>
+  <h3 class="sub">11.1 三个黑天鹅情景</h3>
+  <ul class="ulist">
+    <li><strong>第二次减派。</strong>若 2027 年资本强度维持 20%、自由现金流停在 C$20 亿量级，把派息率压回公司自己定的 40%–55% 目标区间，意味着股息要再砍到 <strong>C$0.9–1.2</strong>。<span class="hl-t">对一个以收息为主的股东基础，这会触发被动资金的强制卖出——而不是像 2025 年那样被当作利好。</span></li>
+    <li><strong>评级下调至临界。</strong>BCE 目前处于投资级低段。若杠杆因 AI 数据中心投资重回 3.9 倍以上并被下调至 BBB−／Baa3，融资成本上升会与自由现金流形成负反馈——这对一家净债务 C$400 亿的公司是实质性的。</li>
+    <li><strong>Quebecor 份额攻势超预期。</strong>若 Freedom/Fizz 在两三年内把份额从 12% 推到 16% 以上，加拿大将从「三家默契」变成「四家混战」，行业 ARPU 会出现结构性下台阶。<strong>这个情景对 BCE、Rogers、TELUS 三家同时不利，无法通过换股规避。</strong></li>
+  </ul>
+</section>
+
+<section class="section" id="m12" aria-labelledby="m12-t">
+  <h2 class="stitle" id="m12-t">模块 12 · 股东回报分析<a class="anchor" href="#m12" aria-label="本节链接">#</a></h2>
+
+  <h3 class="sub">12.1 公司给了股东多少</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="BCE 各年年报「精选年度财务信息」与合并现金流量表；派息率为海图计算">
+      <thead><tr><th>年度</th><th>每股股息</th><th>已付普通股股息</th><th>占调整后 EPS</th><th>占公司口径 FCF</th><th>占扣租赁后 FCF</th></tr></thead>
+      <tbody>
+        <tr><td>FY2021</td><td>C$3.50</td><td>C$31.32 亿</td><td>109.7%</td><td>104.6%</td><td>—</td></tr>
+        <tr><td>FY2022</td><td>C$3.68</td><td>C$33.12 亿</td><td>109.9%</td><td>108.0%</td><td>—</td></tr>
+        <tr><td>FY2023</td><td>C$3.87</td><td>C$34.86 亿</td><td>120.6%</td><td>110.9%</td><td><strong>166.4%</strong></td></tr>
+        <tr class="hl"><td>FY2024</td><td>C$3.99</td><td>C$36.13 亿</td><td>131.3%</td><td>125.1%</td><td><strong>206.9%</strong></td></tr>
+        <tr><td>FY2025</td><td>C$2.31（年中减派）</td><td>C$20.26 亿</td><td>82.5%</td><td>63.8%</td><td>98.8%</td></tr>
+        <tr class="hl"><td><strong>FY2026E</strong></td><td><strong>C$1.75</strong></td><td>约 C$16.32 亿</td><td>约 68%</td><td>约 71%–78%</td><td><strong>约 126%–148%</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>trailing 股东收益率</strong>：年化股息 C$1.75 ÷ 现价 C$31.67 ＝ <strong>5.53%</strong>。BCE 没有普通股回购，因此股东总回报等于股息收益率。</p>
+  <p><span class="hl-t">这张表最刺眼的是「占调整后 EPS」那一列：FY2021 到 FY2024 连续四年超过 100%。</span>一家公用事业型公司连续四年派超过它赚到的钱，差额只能来自举债或发新股——两者 BCE 都做了。</p>
+
+  <h3 class="sub">12.2 给的方式好不好</h3>
+  <p><strong>没有回购，只有股息。</strong>BCE 在考察期内没有实质性的普通股回购计划，因此不存在「注销 vs 库存股」的含金量问题——但也意味着<strong>股东回报完全没有弹性</strong>：好年份不能多回购，坏年份只能砍股息。</p>
+  <p><strong>更值得注意的是反向的动作：BCE 长期通过股息再投资计划（DRIP）以折价发行库存股。</strong>这在实质上是「一边派股息、一边发新股把钱要回来」，结果是<strong>股东被稀释而公司现金并未真正流出</strong>。摊薄口径下，普通股股数从 FY2021 的约 9.18 亿股增至 FY2025 的约 9.41 亿股，<strong>三年多稀释约 2.4%</strong>。</p>
+  <p><span class="hl-t">这项安排在 2025 年 5 月 8 日随减派一并终止</span>——公司同时宣布停止 DRIP 的折价库存股发行。这是本模块里唯一一个明确改善股东价值的动作，应当记功。</p>
+
+  <h3 class="sub">12.3 能不能继续给</h3>
+  <p><strong>政策目标已经定明：自由现金流的 40%–55%。</strong>这是 2025 年 5 月减派时同步设立的。用公司自己的 2026 年指引对照：股息 C$16.32 亿 ÷ 自由现金流 C$21–23 亿 ＝ <strong>71%–78%</strong>，<span class="hl-t">仍高于它自己设定的目标区间上沿 23 到 38 个百分点。</span></p>
+  <p><strong>换到扣租赁口径更紧：126%–148%。</strong>需要强调的是，这个口径不是我发明的——是 BCE 在减派当天主动承诺增加披露的那一个。</p>
+  <p><strong>是否借债派息？</strong>FY2021–FY2024 实质上是。四年间总债务增加 C$108.31 亿，同期股息缺口（已付股息减公司口径自由现金流）累计约 C$25 亿；债务增量的其余部分投向了资本开支与收购。<strong>FY2025 起这一循环被打断</strong>：减派后股息首次低于自由现金流，全年债务仅增加 C$5.55 亿。</p>
+  <p><strong>周期择时的检验：不合格。</strong>股息在 2023 年（覆盖率已经 166%）、2024 年（207%）仍在提高，直到 2025 年 5 月才动手。<span class="hl-t">对一个把「股息贵族」身份当作估值支撑的公司，这不是审慎，是拖延。</span></p>
+  <p><strong>模块小结：象征性回报正在向「可持续但仍偏紧」过渡。</strong>5.53% 的股息率在纸面上有吸引力，DRIP 折价发行的停止也确实提升了每股价值；但按公司自己新增的扣租赁口径，这个已经砍掉 56% 的股息在 2026 年仍未被覆盖，且公司自己的派息率目标也没达到。<strong>它不是不能给，是给得仍然勉强。</strong></p>
+</section>
+
+<section class="section" id="m13" aria-labelledby="m13-t">
+  <h2 class="stitle" id="m13-t">模块 13 · 海图评分卡 + 投资决策<a class="anchor" href="#m13" aria-label="本节链接">#</a></h2>
+
+  <div class="scorecard">
+    <h4>海图评分卡（6 维）</h4>
+    <div class="score-grid">
+      <div class="score-card"><div class="score-letter s-b">B</div><div><div class="kpi-l">生意可预测性</div><div class="note">收入五年只动 4.3%、调整后 EBITDA 利润率稳定在 42.2%–43.6%，业务能见度极高。<strong>扣分项是报告口径完全失真</strong>——报告 EPS 在 C$0.18 与 C$6.79 之间摆动，普通读者无法直接读懂这家公司</div></div></div>
+      <div class="score-card"><div class="score-letter s-bp">B+</div><div><div class="kpi-l">经济护城河</div><div class="note">成本优势与频谱牌照两条宽护城河真实且持久；但它们保护的是「行业只能有几家」，保护不了定价——ARPU 连续八季同比为负，护城河趋势为侵蚀</div></div></div>
+      <div class="score-card"><div class="score-letter s-c">C+</div><div><div class="kpi-l">管理层质量</div><div class="note">方向性判断事后看多数正确（买光纤、卖体育资产、砍股息），披露也在主动变透明；但节奏一贯被动，且 2025 年股息腰斩之年 CEO 短期激励反而增加 31.8%，持股仅达 10 年要求的 13%</div></div></div>
+      <div class="score-card"><div class="score-letter s-c">C+</div><div><div class="kpi-l">财务质量</div><div class="note">经营现金流稳定、EBITDA 利润率行业领先；但净债务 C$399.6 亿、杠杆 3.71 倍，五年债务 +40.8% 而 EBITDA 仅 +7.7%，商誉与无形资产超过全部权益</div></div></div>
+      <div class="score-card"><div class="score-letter s-c">C</div><div><div class="kpi-l">资本配置纪律</div><div class="note">连续四年派息超过调整后 EPS，覆盖率跌到 207% 才减派；长期靠 DRIP 折价发行稀释股东；资本强度从 21.2% 砍到 15.1% 撑住现金流，如今又必须回到 20%。<strong>终止 DRIP 是唯一加分项</strong></div></div></div>
+      <div class="score-card"><div class="score-letter s-c">C+</div><div><div class="kpi-l">估值与安全边际</div><div class="note">现价高于加权公允价值 C$28.65 约 10.5%，安全边际为负但幅度不大；七法区间 C$18.38–32.14，分歧全在股息可持续性上</div></div></div>
+    </div>
+
+    <div class="flag-row">
+      <h4>红旗排查（六项）</h4>
+      <ul class="ulist">
+        <li>❌ <strong>会计保守度</strong>——未触发。减值计提及时且充分（FY2024 一次计提 C$21.90 亿），非 GAAP 调节表逐项披露，2025 年主动新增对自己不利的「扣租赁后自由现金流」口径。<span class="hl-t">值得注意但不构成红旗的是</span>：2026 年 Q1 修改自由现金流定义、新增剔除「重大处置所付所得税」，恰好把 MLSE 那笔 C$5.42 亿现金税负移出了派息能力指标——这一改动本身有会计逻辑，但时点敏感。</li>
+        <li>❌ <strong>收入确认时点</strong>——未触发。订阅制收入按期确认，无争议。</li>
+        <li>⚠️ <strong>表外与准表外负债</strong>——<strong>未触发但需跟踪</strong>。租赁负债本金每年约 C$11 亿走融资活动，不进经营现金流；BCE 自己也承认这一口径的重要性并已补充披露。此外优先股 C$32.88 亿在公司净债务定义中只按 50% 计入。</li>
+        <li>⚠️ <strong>关联交易与治理</strong>——<strong>未触发但需说明</strong>。无关联交易问题。但 2025 年股息腰斩之年 CEO 短期激励增加 31.8%、持股仅达长期要求的 13%，属激励设计与股东体验脱节。</li>
+        <li>❌ <strong>连续会计变更</strong>——未触发。五年会计政策稳定，分部结构变更（2025Q3 起拆为三个分部）源于 Ziply 收购，属实质业务变化。</li>
+        <li>⚠️ <strong>商誉减值历史</strong>——<strong>已发生并已计提</strong>。FY2024 计提 C$21.90 亿（主要为 Bell Media 商誉），FY2025 再计提 C$10.27 亿。剩余商誉 C$132.31 亿，其中相当部分来自 2025 年新并入的 Ziply。<span class="hl-t">Bell Media 已被大幅减记，进一步减值空间有限；但 Ziply 的商誉是新的，尚未经历过一次周期检验。</span></li>
+      </ul>
+      <p><strong>结论：0 项触发，3 项列入跟踪清单。</strong>没有红旗需要强制降级——<span class="hl-t">这份评级完全由估值与股息可持续性决定，而不是由会计疑点决定。</span></p>
+    </div>
+
+    <div class="verdict">
+      <div class="verdict-t">最终评级：<span class="rating-badge" data-rating="持有观望">持有观望</span></div>
+      <div class="tbl-wrap">
+        <table class="tbl" data-shape="grid" data-source="海图自行测算，详见模块 7">
+          <thead><tr><th>项目</th><th>数值</th></tr></thead>
+          <tbody>
+            <tr><td>七法估值中位数</td><td>C$29.49（US$21.19）</td></tr>
+            <tr><td><strong>加权公允价值</strong></td><td><strong>C$28.65（US$20.59）</strong></td></tr>
+            <tr><td>现价（2026-08-07 收盘）</td><td>C$31.67（US$22.75）</td></tr>
+            <tr class="hl"><td><strong>相对公允价值</strong></td><td><strong>高估 10.5%</strong>（安全边际为负）</td></tr>
+            <tr><td><strong>12 个月目标价</strong></td><td><strong>C$28.70（US$20.62）</strong>，−9.4%</td></tr>
+            <tr><td>　乐观（20%）</td><td>C$40.23 — ARPU 止跌、杠杆降至 3.5 倍以下、EV/EBITDA 重估至 7.2 倍</td></tr>
+            <tr><td>　基准（50%）</td><td>C$32.15 — EBITDA 走平、杠杆维持、倍数 6.5 倍</td></tr>
+            <tr><td>　悲观（30%）</td><td>C$26.38 — 二次减派、倍数压缩至 6.0 倍</td></tr>
+            <tr><td>建仓阶梯</td><td>首仓 C$23.59 · 二仓 C$20.64 · 三仓 C$17.69</td></tr>
+            <tr><td>止盈策略</td><td>C$38 减 25% · C$44 减 25% · C$52 减 25%（不设止损）</td></tr>
+            <tr><td>建议仓位</td><td><strong>0%</strong>——现价不构成建仓理由；已持有者可继续持有收息，但不宜加仓</td></tr>
+            <tr><td>持有周期</td><td>若在首仓价以下建立头寸，需 3–5 年等待去杠杆与价格战出清</td></tr>
+            <tr><td>关键监控指标</td><td>扣租赁后自由现金流派息率 · 资本强度是否守住 20% · 手机 ARPU 同比 · 净债务杠杆 · 2027 年度指引</td></tr>
+            <tr><td>下一个催化剂</td><td><strong>Q3 2026 财报（约 11 月初）；真正的关键是 2027 年 2 月的年度指引</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>为什么是「持有观望」而不是「卖出」或「买入」。</strong>不是买入，因为安全边际为负——现价高于我的加权公允价值 10.5%，距首仓价还有 25.5% 的下跌空间。不是卖出，因为高估幅度只有一成，且这门生意本身没有坏掉：<span class="hl-t">收入五年只动 4.3%、EBITDA 利润率稳定在 43% 以上、流失率处于三年最优、频谱与网络的护城河是真的。</span>10% 的高估不足以构成做空理由，5.53% 的股息也为下行提供了一定支撑。</p>
+      <p><strong>这份报告可能错在哪里。</strong>最可能错的地方是我在扣租赁口径上过于苛刻。街上的目标价集中在 C$33–40，比我高出 15%–40%，差别几乎全在这一点：<strong>卖方多数用公司口径自由现金流（2026E 派息率 71%–78%，看着安全），我额外扣了每年约 C$11 亿的租赁本金（派息率 126%–148%）。</strong>若认为租赁本金中有相当部分是可延展、可再融资的，那么我的 DDM 与扣租赁 FCF 两条方法就过低，加权公允价值应该更靠近 C$32。<span class="hl-t">这个分歧点是整份报告的枢纽，读者可以自己判断该站哪边。</span></p>
+      <p><strong>已持有者与未持有者的建议不同。</strong>已持有者：这门生意不会突然坏掉，5.53% 的股息在覆盖上虽然勉强但短期无虞，继续持有收息是合理的，只是不宜加仓。未持有者：<strong>现在买入等于为一个「不再变坏」的假设付全价</strong>——而 2027 年 2 月的年度指引会告诉你这个假设成不成立，那时再决定成本很低。</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="essay" aria-labelledby="essay-t">
+  <h2 class="stitle sr-only" id="essay-t">海图夜读手记<a class="anchor" href="#essay" aria-label="本节链接">#</a></h2>
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记 · 2026-08-10</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p>屏幕上显示，BCE 的市盈率是 <strong>4.7 倍</strong>。</p>
+      <p>加拿大最大的电信公司，股息率 5.5%，市盈率不到 5 倍。这三个条件放在一起，任何一个筛选器都会把它跳出来。</p>
+      <p>但同一个页面上，前瞻市盈率是 <strong>13.02 倍</strong>。</p>
+      <p>两个数字差了近三倍。中间隔着的不是分歧，是一个季度。</p>
+      <p>拆开看：过去四个季度的报告每股收益是 C$4.84、0.64、0.66、0.60，合计 C$6.74。<strong>第一个数字，一个季度，占了拖尾利润的 72%。</strong></p>
+      <p>剔掉它，剩下三个季度合计 C$1.90，跟公司自己披露的调整后每股收益 C$1.97 几乎一样。</p>
+      <p><strong>所谓「5 倍市盈率的电信股」，不存在。</strong>真实倍数是 11.5 倍。</p>
+      <p>那一个季度发生了什么？</p>
+      <p>2025 年 7 月 1 日，BCE 把持有的多伦多枫叶体育娱乐（MLSE）37.5% 股权卖给了 Rogers，收到 <strong>47 亿加元</strong>。</p>
+      <p>但它在利润表上记的收益是 <strong>52 亿</strong>。</p>
+      <p>收益比对价还高 5 亿。这不是笔误。</p>
+      <p>BCE 在年报里解释了：截至 2024 年末，这笔资产在账上不是资产，是<strong>净负债 4.93 亿</strong>——因为它承担着一项「按公允价值回购 MLSE 少数股东权益」的义务，这项义务的公允价值变动一直在吃利润。</p>
+      <p>吃了多少？FY2023「联营及合营企业权益净损失」<strong>5.81 亿</strong>，FY2024 <strong>2.47 亿</strong>。</p>
+      <p>所以那 52 亿里，有相当一部分是<strong>把 2023 和 2024 年已经计提的损失，一次性还回来</strong>。</p>
+      <p><span class="hl-t">这不是价值创造，是时间错配。同一件事，先记成亏损，再记成收益。</span></p>
+      <p>还有一层。</p>
+      <p>这笔交易对应的所得税 <strong>5.42 亿</strong>，在 2026 年第一季度真金白银付掉了。而 BCE 在<strong>同一个季度</strong>修改了自由现金流的定义，新增剔除「重大处置所支付的所得税」。</p>
+      <p>于是这笔会计收益的现金代价，被移出了公司用来衡量派息能力的那个指标。</p>
+      <p>这个改动本身有会计逻辑——处置税确实是一次性的。但时点很敏感。</p>
+      <p>说到派息能力，那是这家公司真正的故事。</p>
+      <p>BCE 是加拿大人心目中的「寡妇孤儿股」——买了收息，几十年不用管。到 2024 年，它的年化股息是每股 <strong>3.99 加元</strong>，已经连涨十几年。</p>
+      <p>然后 2025 年 5 月 8 日，它砍到了 <strong>1.75</strong>。</p>
+      <p><strong>降幅 56.1%。十七年来第一次。</strong></p>
+      <p>为什么砍？把覆盖率算出来就明白了。</p>
+      <p>FY2024，公司口径自由现金流 28.88 亿，已付普通股股息 <strong>36.13 亿</strong>。派息率 125%。</p>
+      <p>而如果再扣掉每年约 11 亿的租赁负债本金——铁塔、机房、门店的租金，IFRS 下走融资活动，不进经营现金流，但一分都躲不掉——那一年可分配的现金只有 <strong>17.46 亿</strong>。</p>
+      <p>派息率 <strong>207%</strong>。</p>
+      <p>公司拿 17 亿的现金，派了 36 亿的股息。差额来自举债和发新股。</p>
+      <p>顺带说一句发新股：BCE 长期通过股息再投资计划以折价发行库存股。<strong>一边派股息，一边发新股把钱要回来</strong>——现金没真流出去，股东被稀释了。三年多约 2.4%。这项安排在减派当天一并终止，是整件事里唯一干净的动作。</p>
+      <p>所以砍股息是对的。问题在后面。</p>
+      <p><strong>砍完之后，还是没覆盖。</strong></p>
+      <p>BCE 自己给的 2026 年指引：自由现金流 <strong>21 到 23 亿</strong>，同比下降 28% 到 34%。扣掉租赁本金，剩下约 11 到 13 亿。</p>
+      <p>而股息要花 <strong>16.32 亿</strong>。</p>
+      <p>派息率 <strong>126% 到 148%</strong>。</p>
+      <p>这个口径不是我发明的。是 BCE 在 2025 年 5 月减派那天，主动承诺此后要额外披露的那一个。<span class="hl-t">公司知道市场在看什么，所以自己把这把尺子递了出来——然后量出来还是不够。</span></p>
+      <p>为什么 2026 年的现金流会掉这么多？</p>
+      <p>因为资本开支回来了。</p>
+      <p>看这五年：经营活动现金流从 FY2022 的 83.65 亿降到 FY2025 的 69.93 亿，<strong>掉了 16%</strong>。而同期资本开支从 51.33 亿砍到 37.00 亿，<strong>砍了 28%</strong>。</p>
+      <p>资本强度——资本开支占收入的比例——从 21.2% 一路压到 15.1%。</p>
+      <p>于是自由现金流在 29 亿到 32 亿的窄区间里，看起来非常平稳。</p>
+      <p><span class="hl-t">但那不是经营稳，是投资停。</span></p>
+      <p>2026 年 2 月，公司给的资本强度指引还是「低于 15%」。三月十六号，因为萨斯喀彻温省一个 300 兆瓦的 AI 数据中心项目，改成了「约 20%」。</p>
+      <p>六周，指引变了。</p>
+      <p>顺便一提，BCE 在 2020 年把 25 处数据中心以 10.4 亿卖给了 Equinix。六年后又要花 17 亿建回来。</p>
+      <p>我不反对这个转向，AI 电力需求是真的。但一家公司先卖后买、六年一个来回，需要一个比「AI 需求很大」更具体的理由，而公司目前没有给出单位经济数据。</p>
+      <p>再说债。</p>
+      <p>五年里，BCE 的总债务从 <strong>296.73 亿加到 417.76 亿</strong>，增了 40.8%。同期调整后 EBITDA 从 98.93 亿到 106.58 亿，增了 7.7%。</p>
+      <p>净债务杠杆从 3.18 倍推到 3.81 倍的峰值。砍完股息、卖掉 MLSE、把钱拿去买 Ziply 之后，回到 <strong>3.71 倍</strong>。</p>
+      <p>一整套动作下来，杠杆只降回 2023 年的水平，仍然高于 2021 年。</p>
+      <p>换个角度看更清楚：<strong>每股净债务 42.85 加元，而股价 31.67 加元。</strong></p>
+      <p>净债务比整个股权市值还高 35%。</p>
+      <p>这意味着什么？意味着 EBITDA 倍数上很小的变化，会被杠杆放大成股价上很大的变化。EV/EBITDA 每动 0.5 倍，每股价值动约 5.8 加元——相当于股价的 18%。</p>
+      <p>两个方向都是。</p>
+      <p>那生意本身呢？</p>
+      <p>这是我要说的公道话：<strong>它没坏。</strong></p>
+      <p>五年营业收入从 234.49 亿到 244.68 亿，只动了 4.3%。调整后 EBITDA 利润率从 42.2% 稳到 43.6%。二季度后付费流失率 1.02%，是三年来最低的一个季度。</p>
+      <p>频谱牌照、全国光纤骨干、外资限制——这三条护城河是真的，十年后大概率还在。</p>
+      <p>问题是它们保护的是「这个行业只能有几家」，保护不了「这几家能收多少钱」。</p>
+      <p>手机 ARPU 从 58 块降到 <strong>56.30</strong>，连续八个季度同比为负。后付费净增用户 FY2024 掉了 49.9%，FY2025 再掉 51.9%——<strong>两年缩水四分之三</strong>。</p>
+      <p>而 CRTC 的数据说，2024 年行业新增用户里<strong>超过 55% 被区域性竞争者拿走</strong>。三大合计还占九成收入，但增量已经易手。</p>
+      <p>Quebecor 旗下的 Freedom 和 Fizz，份额约 11.8%，同比增 6.4%，公开目标 20%。</p>
+      <p>它还在推。</p>
+      <p>所以我怎么定价。</p>
+      <p>报告市盈率不能用，理由前面说了。市净率也不能用——商誉加无形资产 304.65 亿，比全部权益 233.10 亿还多，账面有形净资产是负的。</p>
+      <p>对一家净债务比股权市值还高的公司，唯一诚实的主锚是 <strong>EV/EBITDA</strong>。按 6.5 倍算，每股 32.14。调整后市盈率 12 倍，30.96。自由现金流收益率 8%，29.49。</p>
+      <p>然后是两条压力测试。股息贴现模型，1.75 的股息、8.5% 要求回报、1% 增长，得 <strong>23.57</strong>。扣租赁后自由现金流按 7% 收益率，得 <strong>18.38</strong>。</p>
+      <p>七种方法从 18.38 到 32.14，中位数 <strong>29.49</strong>，加权公允价值 <strong>28.65</strong>。</p>
+      <p>现价 31.67。<strong>高估 10.5%。</strong></p>
+      <p><span class="hl-t">这个区间宽得反常——75%。而宽度本身就是结论：所有方法的分歧点只有一个，就是那个股息能不能维持。信它的给三十出头，不信的给二十上下。</span></p>
+      <p>所以评级是<strong>持有观望</strong>，12 个月目标价 <strong>28.70 加元</strong>。</p>
+      <p>不是买入，因为安全边际是负的，距首仓价还有 25.5% 的下跌空间。不是卖出，因为只高估一成，而这门生意没坏，5.5% 的股息也提供了一层支撑。</p>
+      <p>三件事作为收尾。</p>
+      <p><strong>第一，我的估值低于街上任何一家。</strong>2026 年七八月的目标价集中在 33 到 40 加元，RBC 36、TD Cowen 37、National Bank 38。差别几乎全在一点：他们用公司口径自由现金流，派息率 71%–78%，看着安全；我额外扣了租赁本金，派息率 126%–148%。<strong>这个分歧是整份报告的枢纽，也是我最可能错的地方。</strong></p>
+      <p><strong>第二，2025 年 5 月 8 日那天，BCE 宣布把股息砍掉一半以上，股价当天涨了 5.4%。</strong></p>
+      <p>市场为「不再硬撑」鼓掌。这说明在减派之前，定价里早就不包含那个股息了。</p>
+      <p>对今天的投资者，这条历史提醒的是：如果 2027 年再砍一次，股价未必会跌。</p>
+      <p><strong>第三，也是我看这家公司时最在意的一处。</strong></p>
+      <p>2025 年——股价震荡、自由现金流指引恶化、股息在年中被砍掉 56% 的那一年——CEO 的年度短期现金激励从 238 万加元<strong>涨到了 313.6 万</strong>，增幅 31.8%，总薪酬 1,345 万。</p>
+      <p>这不违规。短期激励挂钩的是公司设定的经营指标，不是股价。</p>
+      <p>但它说明一件事：在那一年，管理层的体验和股东的体验，不在同一条曲线上。</p>
+      <p>——一家公司的市盈率是 4.7 倍，因为它卖掉了一支冰球队的股份。而那支球队的账面价值，是被前两年的亏损压成负数的。</p>
+      <p>财报上写着「收益」，但那笔钱在 2023 年就已经从利润里扣掉过一次了。</p>
+      <p>—— 灯下落笔，明日再观风浪。</p>
+    </div>
+  </div>
+</section>
+
+</div><!-- /.container -->
+
+<footer>
+  <div>本报告由「海图夜读」基于公开财报与公告独立撰写，数据截至 2026-08-07 收盘。</div>
+  <div>
+    <strong>免责声明：</strong>本文仅为个人研究记录与信息分享，<strong>不构成任何投资建议</strong>，
+    作者非持牌投资顾问。<strong>本报告完成于 2026-08-10，基于 BCE 于 2026-08-06 发布的 Q2 2026 财报</strong>，
+    2026 年全年数据仍为公司指引区间，实际值可能落在区间之外。财务数据取自 BCE 向 SEC 提交的 Form 40-F 与 6-K 原始文件（EDGAR CIK 718940）及公司投资者关系网站；
+    文中「所有者盈余」「扣租赁后派息率」「测算市场份额」「情景加权估值」等为海图依据披露数据计算，已在报告中注明口径。
+    <strong>本报告的核心分歧点在于是否应从自由现金流中扣除每年约 C$11 亿的租赁负债本金——这一选择直接决定了估值结论，已在模块 7 与模块 13 中明确标注，读者应自行判断。</strong>
+    汇率取 2026-08-07 两地收盘价隐含的 USD/CAD 1.392。
+    文中评级、目标价、仓位与建仓价格均为基于公开信息的个人推演，可能存在错误或随时间失效。
+    市场有风险，投资需谨慎，读者应独立判断并自负盈亏。
+  </div>
+</footer>
+
+<script>
+/* ══════════════════════════════════════════════════════════════════
+   海图夜读 · 报告页脚本骨架
+   逐字复制进报告的 <script>，只改 CHART_DATA 里的数字。
+
+   这段脚本解决了存量 103 份实测出的三个问题：
+   1. 主题切换有 3 套实现，73/103 不读 localStorage
+      → 门户切暗色进报告又变亮色。这里统一成一套。
+   2. 71 份把调色板硬编码进 JS（token 的第 4 份拷贝），
+      改一次配色要改 71 个文件；另有 2 份切暗色后图表根本不重绘。
+      → 这里一律从 CSS 变量读，改 :root 即全站生效。
+   3. 4 个图表槽位被写出 39 种 canvas id。
+      → 这里按固定槽位 rev|margin|segment|eps 接管。
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ── 1. 从 CSS 变量取色（唯一真源，禁止在本文件里写 hex）── */
+function cssVar(name) {
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+}
+function palette() {
+  return {
+    accent:  cssVar('--accent'),   accent2: cssVar('--accent2'),
+    accent3: cssVar('--accent3'),  gold:    cssVar('--gold'),
+    red:     cssVar('--red'),      green:   cssVar('--green'),
+    grid:    cssVar('--chart-grid'), text:  cssVar('--text3-ink'),
+  };
+}
+
+/* ── 2. 主题切换：同步 aria-pressed、持久化、重绘图表 ── */
+function toggleTheme() {
+  var html = document.documentElement;
+  var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  try { localStorage.setItem('theme', next); } catch (e) {}
+  var btn = document.getElementById('themeBtn');
+  if (btn) btn.setAttribute('aria-pressed', String(next === 'dark'));
+  renderCharts();
+}
+document.addEventListener('DOMContentLoaded', function () {
+  var btn = document.getElementById('themeBtn');
+  if (btn) btn.setAttribute('aria-pressed',
+    String(document.documentElement.getAttribute('data-theme') === 'dark'));
+});
+
+var PERIOD = 'annual';
+function switchPeriod(p) {
+  if (p !== 'annual' && p !== 'quarterly') return;
+  PERIOD = p;
+  document.querySelectorAll('.period-btn').forEach(function (b) {
+    var on = b.dataset.period === p;
+    b.setAttribute('aria-pressed', String(on));
+    b.classList.toggle('is-on', on);
+  });
+  renderCharts();
+}
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('.period-btn').forEach(function (b) {
+    b.addEventListener('click', function () { switchPeriod(b.dataset.period); });
+  });
+  switchPeriod(PERIOD);
+});
+
+/* ── 3. 顶栏实测高度写进 --bar-h ──
+   锚点落点与目录高亮都以它为基准。顶栏在窄屏会折行（38px → 60+px），
+   硬编码会让手机上所有跳转偏移。 */
+function syncBarH() {
+  var bar = document.querySelector('.theme-bar');
+  if (bar) document.documentElement.style.setProperty('--bar-h', bar.offsetHeight + 'px');
+}
+addEventListener('DOMContentLoaded', syncBarH);
+addEventListener('resize', syncBarH);
+
+var CHART_DATA = {
+  rev: {
+    type: 'bar',
+    labels: ['24Q3', '24Q4', '25Q1', '25Q2', '25Q3', '25Q4', '26Q1', '26Q2'],
+    datasets: [
+      { label: '营业收入（C$ 亿）', data: [59.71, 64.22, 59.30, 60.85, 60.49, 64.04, 61.68, 61.76], color: 'accent' },
+      { label: '调整后 EBITDA 利润率 %', data: [45.6, 40.6, 43.1, 43.9, 45.7, 41.6, 42.7, 43.8], color: 'accent3', type: 'line', yAxisID: 'y1' },
+    ],
+  },
+  margin: {
+    type: 'line',
+    labels: ['FY2021', 'FY2022', 'FY2023', 'FY2024', 'FY2025'],
+    datasets: [
+      { label: '报告 EPS（C$）', data: [2.99, 2.98, 2.28, 0.18, 6.79], color: 'red' },
+      { label: '调整后 EPS（C$）', data: [3.19, 3.35, 3.21, 3.04, 2.80], color: 'accent' },
+    ],
+  },
+  segment: {
+    type: 'doughnut',
+    labels: ['资本开支', '普通股股息', '优先股与少数股东股息', '其余留存'],
+    datasets: [
+      { label: 'FY2025 经营现金流去向（C$ 亿）', data: [37.00, 20.26, 2.02, 10.65], color: ['red', 'gold', 'accent3', 'green'] },
+    ],
+  },
+  eps: {
+    type: 'bar',
+    labels: ['FY2021', 'FY2022', 'FY2023', 'FY2024', 'FY2025'],
+    datasets: [
+      { label: '已付普通股股息（C$ 亿）', data: [31.32, 33.12, 34.86, 36.13, 20.26], color: 'gold' },
+      { label: '自由现金流（公司口径，C$ 亿）', data: [29.80, 30.67, 31.44, 28.88, 31.78], color: 'green' },
+    ],
+  },
+
+  income: {
+    type: 'bar', unit: 'C$ 亿',
+    annual: {
+      labels: ['FY2021', 'FY2022', 'FY2023', 'FY2024', 'FY2025'],
+      datasets: [
+        { label: '营业收入',      data: [234.49, 241.74, 246.73, 244.09, 244.68], color: 'accent' },
+        { label: '调整后 EBITDA', data: [98.93, 101.99, 104.17, 105.89, 106.58], color: 'gold' },
+        { label: '归母净利润',    data: [27.09, 27.16, 20.76, 1.63, 63.05], color: 'green' },
+      ],
+    },
+    quarterly: {
+      labels: ['24Q3', '24Q4', '25Q1', '25Q2', '25Q3', '25Q4', '26Q1', '26Q2'],
+      datasets: [
+        { label: '营业收入',      data: [59.71, 64.22, 59.30, 60.85, 60.49, 64.04, 61.68, 61.76], color: 'accent' },
+        { label: '调整后 EBITDA', data: [27.22, 26.05, 25.58, 26.74, 27.62, 26.64, 26.31, 27.02], color: 'gold' },
+        { label: '归母净利润',    data: [-12.37, 4.61, 6.30, 5.79, 45.02, 5.94, 6.16, 5.58], color: 'green' },
+      ],
+    },
+  },
+
+  cashflow: {
+    type: 'bar', unit: 'C$ 亿',
+    annual: {
+      labels: ['FY2021', 'FY2022', 'FY2023', 'FY2024', 'FY2025'],
+      datasets: [
+        { label: '经营现金流', data: [80.08, 83.65, 79.46, 69.88, 69.93], color: 'accent' },
+        { label: '资本开支',   data: [48.52, 51.33, 45.81, 38.97, 37.00], color: 'red' },
+        { label: '自由现金流', data: [29.80, 30.67, 31.44, 28.88, 31.78], color: 'green' },
+      ],
+    },
+    quarterly: {
+      labels: ['24Q3', '24Q4', '25Q1', '25Q2', '25Q3', '25Q4', '26Q1', '26Q2'],
+      datasets: [
+        { label: '经营现金流', data: [18.42, 18.77, 15.71, 19.47, 19.14, 15.61, 11.49, 21.62], color: 'accent' },
+        { label: '资本开支',   data: [9.54, 9.63, 7.29, 7.63, 8.91, 13.17, 8.41, 10.80], color: 'red' },
+        { label: '自由现金流', data: [8.32, 8.74, 7.98, 11.52, 10.03, 2.25, 8.04, 10.42], color: 'green' },
+      ],
+    },
+  },
+
+  balance: {
+    type: 'line', unit: 'C$ 亿',
+    annual: {
+      labels: ['FY2021', 'FY2022', 'FY2023', 'FY2024', 'FY2025'],
+      datasets: [
+        { label: '总资产',     data: [667.64, 693.29, 719.40, 734.85, 801.65], color: 'accent' },
+        { label: '总负债',     data: [438.23, 468.14, 513.83, 561.25, 568.55], color: 'red' },
+        { label: '股东权益',   data: [229.41, 225.15, 205.57, 173.60, 233.10], color: 'green' },
+      ],
+    },
+    quarterly: {
+      labels: ['24Q3', '24Q4', '25Q1', '25Q2', '25Q3', '25Q4', '26Q1', '26Q2'],
+      datasets: [
+        { label: '总资产',   data: [727.16, 734.85, 721.62, 711.34, 785.83, 801.65, 813.77, 810.42], color: 'accent' },
+        { label: '总负债',   data: [547.35, 561.25, 545.43, 527.57, 558.25, 568.55, 577.24, 568.64], color: 'red' },
+        { label: '股东权益', data: [179.81, 173.60, 176.19, 183.77, 227.58, 233.10, 236.53, 241.78], color: 'green' },
+      ],
+    },
+  },
+};
+
+/* ── 5. 渲染（一般不需要改）── */
+var _charts = {};
+function renderCharts() {
+  if (typeof Chart === 'undefined') return;      // CDN 不可达时静默跳过，不阻断页面
+  var P = palette();
+  Chart.defaults.font.family =
+    getComputedStyle(document.body).getPropertyValue('--font-sans') ||
+    'system-ui, -apple-system, sans-serif';
+
+  Object.keys(CHART_DATA).forEach(function (slot) {
+    var el = document.getElementById(slot);
+    if (!el) return;
+    if (_charts[slot]) _charts[slot].destroy();
+
+    var cfg = CHART_DATA[slot];
+    // 双周期槽位（三表图）：按当前 PERIOD 取那一套 labels/datasets。
+    // 缺失所选周期时回落到另一套，避免整张图空白。
+    if (cfg.annual || cfg.quarterly) {
+      var d = cfg[PERIOD] || cfg.annual || cfg.quarterly;
+      cfg = { type: d.type || cfg.type, labels: d.labels, datasets: d.datasets, unit: d.unit || cfg.unit };
+    }
+    var isPie = cfg.type === 'doughnut' || cfg.type === 'pie';
+
+    _charts[slot] = new Chart(el, {
+      type: cfg.type,
+      data: {
+        labels: cfg.labels,
+        datasets: cfg.datasets.map(function (d) {
+          var c = Array.isArray(d.color) ? d.color.map(function (k) { return P[k]; }) : P[d.color];
+          // 只写 d.type === 'line' 会让「图表级 type:'line' 但 dataset 没写 type」的
+          // 数据集拿到 borderWidth:0 —— 实测表现为「只有点、没有连线」。
+          var isLine = (d.type || cfg.type) === 'line';
+          return Object.assign({}, d, {
+            backgroundColor: c, borderColor: c,
+            borderWidth: isLine ? 2 : 0, tension: 0.3,
+          });
+        }),
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            // 窄屏把图例挪到顶部：右侧图例在 375px 上会吃掉大半个画布
+            position: isPie && innerWidth > 640 ? 'right' : 'top',
+            labels: { color: P.text, boxWidth: 12, font: { size: 11 } },
+          },
+        },
+        scales: isPie ? {} : {
+          x: { grid: { color: P.grid }, ticks: { color: P.text, font: { size: 11 } } },
+          y: { grid: { color: P.grid }, ticks: { color: P.text, font: { size: 11 } } },
+          y1: {
+            position: 'right', grid: { display: false },
+            ticks: { color: P.text, font: { size: 11 } }, display: 'auto',
+          },
+        },
+      },
+    });
+  });
+}
+addEventListener('DOMContentLoaded', renderCharts);
+addEventListener('resize', function () {          // 图例位置随断点变，需重建
+  clearTimeout(window._rcT);
+  window._rcT = setTimeout(renderCharts, 200);
+});
+
+</script>
+</body>
+</html>
