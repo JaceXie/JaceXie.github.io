@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <title>NICE평가정보 030190 · Q1 2026 财报深度分析 · 海图夜读</title>
-<link rel="icon" type="image/png" href="../assets/hai.png">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 
 <script>
 (function () {
@@ -26,7 +26,7 @@
 <meta property="og:url" content="https://haitu.jacexie.com/haitu/reports/030190-q1-2026.html">
 <meta name="twitter:card" content="summary">
 
-<script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script defer src="../assets/vendor/chart.umd.min.js"></script>
 
 <style>
 
@@ -370,10 +370,20 @@ a { color: var(--accent2); text-decoration: none; }
    ⚠️ 只收窄「流动的正文」，不收窄带背景的卡片。把 .ec-item / .risk-card
    这类卡片本身缩到 40em，会在右侧留下一大块空白，反而更难看 —— 它们本来
    就只有两三行，长行的代价远小于流动长文。 */
+/* ⚠️ 行长约束必须覆盖「所有流动的正文」，不能只覆盖 .cmt 里的那些。
+   实测教训：模块正文的 <p>／<ul> 是直接挂在 <section> 下的，不在 .cmt 内，
+   于是上一版把它们整个漏掉了 —— 06127 那份报告实测 37 段模块正文平均每行
+   71 个中文字、列表项 90 字，而同一页 .cmt 里的正文是 35 字。
+   中文一行超过 45 字，回扫时极易丢行，这就是「高宽屏读起来累」的直接原因。 */
+.section > p, .section > ul, .section > ol,
+.section > blockquote,
 .cmt > p, .cmt > ul, .cmt > ol,
 .haitu-essay-body > p {
   max-width: var(--measure);           /* 15px × 40em ≈ 600px，约 40 字/行 */
 }
+/* .ec-item 是带背景的卡片，缩到 40em 会在右侧留下大片空白；
+   但满宽 1152px 时实测仍有 48 字/行，略超舒适上限，折中收到 60em（≈36 字）。 */
+.ec-item { max-width: 60em; }
 .note, p.note {
   /* 注释是 12px 小字，行长可略放宽：12px × 52em ≈ 624px，约 52 字，
      仍远好于此前的 96 字，且与正文块的右边界大致齐平，视觉上不突兀。 */
@@ -1525,7 +1535,6 @@ body { text-align: left; }
   <h2 class="stitle sr-only" id="essay-t">海图夜读手记<a class="anchor" href="#essay" aria-label="本节链接">#</a></h2>
   <div class="haitu-essay">
     <div class="haitu-essay-header">
-      <img class="haitu-avatar-sm" src="../assets/hai.png" alt="海图">
       <span class="haitu-name-lg">海图</span>
       <span class="haitu-essay-tag">夜读手记 · 2026-08-10</span>
     </div>

@@ -178,7 +178,7 @@ body {
 .calendar-col .cal-detail,
 .calendar-col .cal-action { display: none; }
 @media (max-width: 900px) {
-  .main-layout { grid-template-columns: 1fr; gap: 0; }
+  .main-layout { grid-template-columns: minmax(0, 1fr); gap: 0; }
   .calendar-col { position: static; }
   .calendar-col .calendar-panel { max-height: none; }
 }
@@ -203,9 +203,9 @@ body {
   color: var(--text-dim);
   font-size: 0.74rem;
   font-weight: 600;
-  letter-spacing: 0.8px;
+  letter-spacing: 0.5px;
   text-align: right;
-  padding: 12px 14px;
+  padding: 9px 9px;
   border-bottom: 1px solid var(--border);
   white-space: nowrap;
   cursor: pointer;
@@ -217,17 +217,39 @@ body {
 .stock-table th:first-child { text-align: left; }
 .stock-table th .arrow { font-size: 0.65rem; margin-left: 3px; opacity: 0.9; }
 .stock-table td {
-  padding: 12px 14px;
+  padding: 9px 9px;
   border-bottom: 1px solid var(--border);
   text-align: right;
   white-space: nowrap;
   color: var(--text);
 }
 .stock-table td:first-child { text-align: left; }
+.stock-table td.empty-row { text-align: center; padding: 40px; }
 .stock-table tbody tr { cursor: pointer; transition: background 0.15s; }
 .stock-table tbody tr:hover { background: var(--tag-bg); }
 .stock-table tbody tr:last-child td { border-bottom: none; }
-.stock-name { display: flex; flex-direction: column; gap: 2px; }
+/* 名称单元格＝「公司名 + 星标」的一行。星标放在公司右侧，
+   点击时必须 stopPropagation，否则会连带触发整行的跳转。 */
+.name-cell { display: flex; align-items: center; gap: 8px; }
+.stock-name { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.fav-btn {
+  appearance: none; -webkit-appearance: none;
+  background: none; border: 0; padding: 0; margin: 0;
+  font-size: 1.02rem; line-height: 1; cursor: pointer;
+  color: var(--text-dim); flex-shrink: 0;
+  /* 触摸目标：字形本身只有 22×20，配合单元格内边距撑到约 44px 有效点击区 */
+  min-width: 30px; min-height: 30px;
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: color 0.15s, transform 0.15s;
+}
+.fav-btn:hover { color: var(--accent-gold); transform: scale(1.18); }
+.fav-btn.on { color: var(--accent-gold); }
+.fav-btn:focus-visible { outline: 2px solid var(--accent-gold); outline-offset: 2px; border-radius: 4px; }
+.fav-count { font-size: 0.72rem; color: var(--text-dim); font-weight: 400; letter-spacing: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .fav-btn { transition: none; }
+  .fav-btn:hover { transform: none; }
+}
 .stock-name .nm {
   font-weight: 600;
   color: var(--heading);
@@ -510,6 +532,17 @@ footer p { margin-bottom: 6px; }
   <div class="main-layout">
 
     <section class="section first reports-col">
+      <!-- 收藏表：无收藏时整块隐藏，不占位 -->
+      <div id="favSection" hidden>
+        <div class="section-title">⭐ 我的收藏 <span class="fav-count" id="favCount"></span></div>
+        <div class="stock-table-wrap">
+          <table class="stock-table">
+            <thead><tr id="favHead"></tr></thead>
+            <tbody id="favBody"></tbody>
+          </table>
+        </div>
+      </div>
+
       <div class="section-title">🌙 海图研判 · 估值一览</div>
       <div class="list-toolbar">
         <span class="list-hint">点击表头排序 · 差距% =（目标价 − 现价）/ 现价，正值 = 低估，负值 = 高估</span>
@@ -2135,19 +2168,45 @@ function fmtPrice(v, ccy) {
   return sym + s;
 }
 
-function renderStockList() {
-  const head = document.getElementById('stockHead');
-  const body = document.getElementById('stockBody');
-  if (!reports.length) {
-    body.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:40px;">🌊 第一份海图研判正在准备中……</td></tr>';
-    return;
-  }
+/* ── 收藏 ──
+   存 ticker 而不是 file 路径：报告期次滚动时 file 会变（q1 → q2），
+   ticker 不变，收藏才不会在下一份报告发布后丢失。
+   localStorage 在隐私模式下可能抛异常，全部读写都包 try。 */
+const FAV_KEY = 'haitu:favorites';
+function loadFavs() {
+  try { return new Set(JSON.parse(localStorage.getItem(FAV_KEY) || '[]')); }
+  catch (e) { return new Set(); }
+}
+function saveFavs(set) {
+  try { localStorage.setItem(FAV_KEY, JSON.stringify([...set])); } catch (e) {}
+}
+let favs = loadFavs();
 
-  head.innerHTML = COLS.map(c => {
+function toggleFav(ticker) {
+  if (favs.has(ticker)) favs.delete(ticker); else favs.add(ticker);
+  saveFavs(favs);
+  renderStockList();
+}
+
+// 事件委托：绑在 document 上一次，重渲染后无需重新绑定。
+// 必须 stopPropagation，否则会连带触发 <tr> 上的整行跳转。
+document.addEventListener('click', (ev) => {
+  const btn = ev.target.closest('.fav-btn');
+  if (!btn) return;
+  ev.stopPropagation();
+  ev.preventDefault();
+  toggleFav(btn.dataset.fav);
+}, true);
+
+function headHtml() {
+  return COLS.map(c => {
     const sorted = c.key === sortKey;
     const arrow = sorted ? `<span class="arrow">${sortAsc ? '▲' : '▼'}</span>` : '';
     return `<th class="${sorted ? 'sorted' : ''}" data-key="${c.key}">${c.label}${arrow}</th>`;
   }).join('');
+}
+
+function bindHead(head) {
   head.querySelectorAll('th').forEach(th => {
     th.onclick = () => {
       const k = th.dataset.key;
@@ -2155,27 +2214,59 @@ function renderStockList() {
       renderStockList();
     };
   });
+}
 
-  const col = COLS.find(c => c.key === sortKey);
-  const rows = [...reports].sort((a, b) => (sortAsc ? -1 : 1) * col.sort(a, b));
-
-  body.innerHTML = rows.map(r => {
-    const g = gapPct(r);
-    const gapCell = g == null
-      ? '<span class="gap na">—</span>'
-      : `<span class="gap ${g >= 0 ? 'up' : 'dn'}">${g >= 0 ? '+' : ''}${g.toFixed(1)}%</span>`;
-    return `
+function rowHtml(r) {
+  const g = gapPct(r);
+  const gapCell = g == null
+    ? '<span class="gap na">—</span>'
+    : `<span class="gap ${g >= 0 ? 'up' : 'dn'}">${g >= 0 ? '+' : ''}${g.toFixed(1)}%</span>`;
+  const on = favs.has(r.ticker);
+  const star = `<button type="button" class="fav-btn${on ? ' on' : ''}" aria-pressed="${on}"`
+    + ` aria-label="${on ? '取消收藏' : '收藏'} ${r.name}"`
+    + ` data-fav="${String(r.ticker).replace(/"/g, '&quot;')}">${on ? '★' : '☆'}</button>`;
+  return `
     <tr onclick="location.href='${r.file}'">
-      <td><div class="stock-name"><span class="nm">${r.name}</span><span class="tk">${r.ticker}</span></div></td>
+      <td><div class="name-cell"><div class="stock-name"><span class="nm">${r.name}</span><span class="tk">${r.ticker}</span></div>${star}</div></td>
       <td><span class="tag ${r.tagClass}">${r.rating || r.tag}</span></td>
       <td class="px">${fmtPrice(r.currentPrice, r.currency)}</td>
       <td class="px">${fmtPrice(r.targetPrice, r.currency)}</td>
       <td>${gapCell}</td>
       <td class="dt">${r.period ? r.period + '<br>' : ''}${r.date}</td>
     </tr>`;
-  }).join('');
+}
 
-  const asOf = reports.map(r => r.date).sort().pop();
+function renderStockList() {
+  const head = document.getElementById('stockHead');
+  const body = document.getElementById('stockBody');
+  if (!reports.length) {
+    body.innerHTML = '<tr><td colspan="6" class="empty-row">🌊 第一份海图研判正在准备中……</td></tr>';
+    return;
+  }
+
+  head.innerHTML = headHtml();
+  bindHead(head);
+
+  const col = COLS.find(c => c.key === sortKey);
+  const rows = [...reports].sort((a, b) => (sortAsc ? -1 : 1) * col.sort(a, b));
+  body.innerHTML = rows.map(rowHtml).join('');
+
+  // 收藏表：与主表共用排序状态；收藏项同时保留在主表里，方便对照
+  const favRows = rows.filter(r => favs.has(r.ticker));
+  const favSection = document.getElementById('favSection');
+  const favHead = document.getElementById('favHead');
+  const favBody = document.getElementById('favBody');
+  if (favSection && favHead && favBody) {
+    favSection.hidden = favRows.length === 0;
+    if (favRows.length) {
+      favHead.innerHTML = headHtml();
+      bindHead(favHead);
+      favBody.innerHTML = favRows.map(rowHtml).join('');
+      const cnt = document.getElementById('favCount');
+      if (cnt) cnt.textContent = `${favRows.length} 家`;
+    }
+  }
+
   const el = document.getElementById('priceAsOf');
   if (el) el.textContent = `共 ${reports.length} 家 · 现价随每日更新刷新`;
 }
