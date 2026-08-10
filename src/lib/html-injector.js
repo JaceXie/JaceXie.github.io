@@ -34,13 +34,15 @@ export function injectHtml(htmlPath, { tickers, calendarEvents, todayStr }) {
   }
 
   // ── REPORTS ──
-  const sortedTickers = [...tickers].sort((a, b) => b.modTime - a.modTime);
+  const sortedTickers = [...tickers].sort((a, b) => toEpoch(b.modTime) - toEpoch(a.modTime));
   const reportsBlock = renderReportsBlock(sortedTickers);
+  assertParses(reportsBlock, 'reports');
   html = html.replace(MARKERS.reports.re, reportsBlock);
   logger.info(`Injected ${tickers.length} reports`);
 
   // ── CALENDAR ──
   const calendarBlock = renderCalendarBlock(calendarEvents);
+  assertParses(calendarBlock, 'calendar');
   html = html.replace(MARKERS.calendar.re, calendarBlock);
   logger.info(`Injected ${calendarEvents.length} calendar events`);
 
@@ -62,21 +64,25 @@ function renderReportsBlock(tickers) {
       const displayName = escapeJsString(t.displayName || t.name || t.ticker);
       const rating = escapeJsString(t.rating || '');
       const num = (v) => (typeof v === 'number' && isFinite(v) ? v : 'null');
+      // ⚠️ 每一个插进 JS 的值都要过 escapeJsString / num / toEpoch，一个都不能裸插。
+      // 实测事故：tickers.json 里 SMCI 一条的 modTime 是 ISO 字符串而非纪元毫秒，
+      // 裸插值产出 `modTime: 2026-08-09T19:38:22Z`，整段 132KB 内联脚本语法错误，
+      // 门户一份报告都渲染不出来，而管线一路 exit 0，没有任何报警。
       return `  {
-    file: "${t.lastReportFile}",
-    ticker: "${t.marketSymbol}",
+    file: "${escapeJsString(t.lastReportFile)}",
+    ticker: "${escapeJsString(t.marketSymbol)}",
     name: "${displayName}",
     title: "${title}",
     desc: "${desc}",
     tag: "${tag}",
-    tagClass: "${t.ratingClass}",
+    tagClass: "${escapeJsString(t.ratingClass)}",
     rating: "${rating}",
     currentPrice: ${num(t.currentPrice)},
     targetPrice: ${num(t.targetPrice)},
     currency: "${escapeJsString(t.targetCurrency || t.priceCurrency || 'USD')}",
     period: "${escapeJsString(t.lastReportPeriod || '')}",
-    date: "${t.lastAnalyzedDate}",
-    modTime: ${t.modTime}
+    date: "${escapeJsString(t.lastAnalyzedDate)}",
+    modTime: ${toEpoch(t.modTime)}
   }`;
     })
     .join(',\n');
@@ -111,7 +117,7 @@ const calendar = [];
       const typeLabel = escapeJsString(e.typeLabel);
       const tickerStr = escapeJsString(e.ticker);
       lines.push(
-        `  { date: "${e.date}", ticker: "${tickerStr}", type: "${e.type}", typeLabel: "${typeLabel}", detail: "${detail}", xueqiu: "${e.xueqiu}" },`
+        `  { date: "${escapeJsString(e.date)}", ticker: "${tickerStr}", type: "${escapeJsString(e.type)}", typeLabel: "${typeLabel}", detail: "${detail}", xueqiu: "${escapeJsString(e.xueqiu)}" },`
       );
     }
   }
@@ -129,5 +135,34 @@ function escapeJsString(s) {
     .replace(/\\/g, '\\\\')
     .replace(/"/g, '\\"')
     .replace(/\n/g, '\\n')
-    .replace(/\r/g, '');
+    .replace(/\r/g, '')
+    // ⚠️ desc 是人写的任意 HTML。字符串里出现字面量 </script> 会提前关闭外层
+    // <script> 标签，后面的代码变成页面文本 —— 和 modTime 那次是同一类事故：
+    // 一个字符炸掉整个门户，而且不报错。拆开写成 <\/ 浏览器照样当 </ 解析。
+    .replace(/<\//g, '<\\/');
+}
+
+/** 纪元毫秒。tickers.json 里历史上混进过 ISO 字符串，这里统一收口，绝不返回 NaN。 */
+function toEpoch(v) {
+  if (typeof v === 'number' && isFinite(v)) return v;
+  const t = Date.parse(v);
+  return isFinite(t) ? t : 0;
+}
+
+/**
+ * 生成的代码块必须能被解析。
+ * new Function 只编译不执行，所以拿它当语法检查是安全的。
+ * 没有这道断言，坏数据会一路静默写进 index.html —— 管线 exit 0、日志全绿、
+ * 读者打开是一片空白。宁可让每日任务红着脸失败，也不要让门户悄悄空掉。
+ */
+function assertParses(block, name) {
+  try {
+    // eslint-disable-next-line no-new-func
+    new Function(block);
+  } catch (e) {
+    throw new Error(
+      `注入 ${name} 失败：生成的代码不是合法 JavaScript（${e.message}）。` +
+        `多半是 data/tickers.json 里某个字段类型不对。已中止，index.html 未被改动。`
+    );
+  }
 }
