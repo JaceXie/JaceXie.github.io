@@ -223,6 +223,10 @@ a { color: var(--accent2); text-decoration: none; }
 }
 .kpi-l { font-family: var(--font-sans); font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
 .kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+/* KPI 卡的第三行「注解」。此前没有这条规则，写报告的人只能借 .kpi-l（全大写 +
+   字间距，中文读着别扭）或干脆裸写 —— rkt 那份 12 张卡的注解因此按正文字号渲染，
+   把卡片撑得比数值还抢眼。与 .snap-note 同一套视觉语言，多行中文加行高。 */
+.kpi-n { font-family: var(--font-sans); font-size: 11px; color: var(--text3-ink); line-height: 1.5; }
 .badge {
   display: inline-block; font-family: var(--font-sans);
   font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px;
@@ -353,9 +357,21 @@ a { color: var(--accent2); text-decoration: none; }
 
 .section > p, .section > ul, .section > ol,
 .section > blockquote,
-.cmt > p, .cmt > ul, .cmt > ol,
-.haitu-essay-body > p {
+.cmt > p, .cmt > ul, .cmt > ol, .cmt > blockquote,
+.haitu-essay-body > p, .haitu-essay-body > ul,
+.haitu-essay-body > ol, .haitu-essay-body > blockquote {
   max-width: var(--measure);           /* 15px × 40em ≈ 600px，约 40 字/行 */
+}
+
+code {
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace);
+  font-size: 0.88em;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  background: var(--card2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1px 5px;
 }
 /* .ec-item 是带背景的卡片，缩到 40em 会在右侧留下大片空白；
    但满宽 1152px 时实测仍有 48 字/行，略超舒适上限，折中收到 60em（≈36 字）。 */
