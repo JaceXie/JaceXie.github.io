@@ -1,0 +1,2159 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-08-10 · NYSE: VIPS Q1 2026 财报已于 2026-05-21 发布 -->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>唯品会 Vipshop VIPS · Q1 2026 财报深度分析 · 海图夜读</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+
+<script>
+(function () {
+  try {
+    var t = localStorage.getItem('theme');
+    if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', t);
+  } catch (e) { document.documentElement.setAttribute('data-theme', 'light'); }
+})();
+</script>
+
+<link rel="canonical" href="https://haitu.jacexie.com/haitu/reports/vips-q1-2026-v2.html">
+<meta name="description" content="把特卖做成现金机器：五年营收缩 9.5%、利润涨 55%，净现金占市值 46%，剔除后核心业务只有 3.7 倍市盈率。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="唯品会 Vipshop VIPS · Q1 2026 财报深度分析 · 海图夜读">
+<meta property="og:description" content="把特卖做成现金机器：五年营收缩 9.5%、利润涨 55%，净现金占市值 46%，剔除后核心业务只有 3.7 倍市盈率。">
+<meta property="og:url" content="https://haitu.jacexie.com/haitu/reports/vips-q1-2026-v2.html">
+<meta name="twitter:card" content="summary">
+
+<script defer src="../assets/vendor/chart.umd.min.js"></script>
+
+<style>
+
+/* ── MORANDI PALETTE ── */
+:root {
+  /* Light (default) */
+  --bg:        #f5f0eb;
+  --bg2:       #ece6df;
+  --card:      #ffffff;
+  --card2:     #f8f5f1;
+  --border:    #d9d0c7;
+  --text:      #4a4340;
+  --text2:     #7a706a;
+  --text3:     #a89f98;
+  --accent:    #8a9a8e;   /* sage */
+  --accent2:   #7b8fa0;   /* muted blue */
+  --accent3:   #b08d7a;   /* dusty terracotta */
+  --rose:      #c09090;   /* dusty rose */
+  --gold:      #b9a06a;
+  --red:       #b87070;
+  --green:     #7a9a7a;
+  --shadow:    rgba(0,0,0,0.06);
+  --chart-grid:#e5ddd5;
+  /* ── ink 层：只用于文字，全部达 WCAG AA（装饰色仍用上面的原值）── */
+  --text3-ink:   #70665f;  /* 4.51:1 on --bg2（原 --text3 #a89f98 仅 2.60:1）*/
+  --accent3-ink: #7f6150;  /* 4.97:1 on --bg （原 --accent3 #b08d7a 仅 2.67:1）*/
+  --gold-ink:    #8a6d3b;  /* 原 --gold  #b9a06a 仅 2.53:1 */
+  --red-ink:     #a35555;  /* 原 --red   #b87070 仅 3.76:1 */
+  --green-ink:   #4a7057;  /* 原 --green #7a9a7a 仅 3.12:1 */
+  --accent2-ink: #5a7386;
+  --font-sans: system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-serif: Georgia, 'Noto Serif SC', 'PingFang SC', serif;
+
+  /* ── 排版标度 ────────────────────────────────────────────────
+     此前全站正文散落 8 档字号（11/12/12.5/13/14/14.5/15/16）与 5 种行高
+     （1.65/1.70/1.75/1.90/2.00），是逐处硬写累积出来的，没有体系。
+     收敛成 4 档字号 + 2 种行高，所有正文一律引用这里。 */
+  --fs-xs:   12px;    /* 注释、图注、页脚 */
+  --fs-sm:   13.5px;  /* 表格、卡片密排文字 */
+  --fs-base: 15px;    /* 正文 */
+  --fs-lg:   16.5px;  /* 夜读手记正文、导语 */
+
+  --lh-tight: 1.7;    /* 密排：表格、卡片、注释 */
+  --lh-prose: 1.85;   /* 正文段落 */
+
+  --measure: 40em;
+  --bar-h: 44px;
+}
+[data-theme="dark"] {
+  --text3-ink:   #a19991;
+  --accent3-ink: #c9a48e;
+  --gold-ink:    #c9b07a;
+  --red-ink:     #c08080;
+  --green-ink:   #8aaa8a;
+  --accent2-ink: #8fabbf;
+  --bg:        #1e1c1a;
+  --bg2:       #28251f;
+  --card:      #2e2a25;
+  --card2:     #363230;
+  --border:    #4a4540;
+  --text:      #d4ccc4;
+  --text2:     #a09890;
+  --text3:     #706860;
+  --accent:    #8a9a8e;
+  --accent2:   #8fabbf;
+  --accent3:   #c9a48e;
+  --rose:      #c09090;
+  --gold:      #c9b07a;
+  --red:       #c08080;
+  --green:     #8aaa8a;
+  --shadow:    rgba(0,0,0,0.3);
+  --chart-grid:#3e3a35;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-serif);
+  line-height: var(--lh-prose);
+  font-size: var(--fs-base);
+  transition: background .35s, color .35s;
+}
+a { color: var(--accent2); text-decoration: none; }
+
+/* ── THEME TOGGLE ── */
+.theme-bar {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 8px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  transition: background .35s;
+}
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; text-decoration: none; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: var(--font-sans); font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; text-decoration: none; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; color: var(--text2);
+}
+.toggle-switch {
+  appearance: none; -webkit-appearance: none; border: 0; padding: 0; margin: 0;
+  position: relative;
+  width: 44px; height: 22px;
+  background: var(--border);
+  border-radius: 11px;
+  cursor: pointer;
+  transition: background .3s;
+}
+.toggle-switch::after {
+  content: '';
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 18px; height: 18px;
+  background: var(--card);
+  border-radius: 50%;
+  transition: transform .3s;
+  box-shadow: 0 1px 3px rgba(0,0,0,.15);
+}
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+
+/* ── HERO ── */
+.hero {
+  padding: 48px 24px 36px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+.hero-tag {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 3px 14px;
+  border-radius: 20px;
+  margin-bottom: 18px;
+}
+.hero h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills {
+  display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;
+}
+.pill {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 6px 18px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--text2);
+  box-shadow: 0 1px 3px var(--shadow);
+}
+.pill strong { color: var(--text); }
+
+/* ── LAYOUT ── */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle {
+  font-size: 18px; font-weight: 700; color: var(--accent3-ink);
+  margin-bottom: 20px; letter-spacing: 0.5px;
+  display: flex; align-items: center; gap: 10px;
+}
+.stitle::before {
+  content: ''; display: block; width: 4px; height: 20px;
+  background: var(--accent3); border-radius: 2px;
+}
+
+/* ── KPI ── */
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.kpi {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 16px 18px;
+  box-shadow: 0 1px 4px var(--shadow);
+  transition: background .35s;
+}
+.kpi-l { font-family: var(--font-sans); font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+/* KPI 卡的第三行「注解」。此前没有这条规则，写报告的人只能借 .kpi-l（全大写 +
+   字间距，中文读着别扭）或干脆裸写 —— rkt 那份 12 张卡的注解因此按正文字号渲染，
+   把卡片撑得比数值还抢眼。与 .snap-note 同一套视觉语言，多行中文加行高。 */
+.kpi-n { font-family: var(--font-sans); font-size: 11px; color: var(--text3-ink); line-height: 1.5; }
+.badge {
+  display: inline-block; font-family: var(--font-sans);
+  font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px;
+}
+.up   { background: rgba(122,154,122,.15); color: var(--green); }
+.dn   { background: rgba(184,112,112,.15); color: var(--red); }
+.nt   { background: rgba(123,143,160,.15); color: var(--accent2); }
+
+/* ── TABLE ── */
+.tbl-wrap {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow);
+}
+.tbl { width: 100%; border-collapse: collapse; font-family: var(--font-sans); font-size: var(--fs-sm);
+       font-variant-numeric: tabular-nums; }
+.tbl th {
+  background: var(--card2); color: var(--text3-ink); font-size: 11px;
+  letter-spacing: .5px; text-transform: uppercase;
+  padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border);
+}
+.tbl td { padding: 11px 16px; border-bottom: 1px solid var(--border); text-align: left; line-height: var(--lh-tight); }
+.tbl td:first-child { color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); }
+
+/* ── CHARTS ── */
+.cgrid  { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-bottom: 16px; }
+.cgrid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-bottom: 16px; }
+.ccard, .kpi, .moat-card, .risk-card, .score-card, .snap-item, .pbox { min-width: 0; }
+.ccard {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow);
+}
+.ctitle { font-family: var(--font-sans); font-size: 12px; color: var(--text3-ink); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 230px; }
+
+/* ── QUOTES ── */
+.qgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.qcard {
+  background: var(--card); border: 1px solid var(--border);
+  border-left: 4px solid var(--rose);
+  border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow);
+}
+.qname { font-weight: 700; color: var(--accent3); margin-bottom: 2px; }
+.qrole { font-family: var(--font-sans); font-size: 11px; color: var(--text3); margin-bottom: 10px; }
+.qtext { font-style: italic; font-size: 13.5px; color: var(--text); line-height: 1.8; }
+
+/* ── ANALYSIS ── */
+.agrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+.acard {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow);
+}
+.acard h4 { font-size: 13px; color: var(--accent2); margin-bottom: 10px; text-transform: uppercase; letter-spacing: .5px; }
+.acard ul { padding-left: 16px; }
+.acard li { margin-bottom: 5px; font-size: 13px; }
+
+/* ── BUFFETT SCORE ── */
+.bscore {
+  display: flex; align-items: center; gap: 16px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px 22px; margin-bottom: 12px;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.circle {
+  width: 62px; height: 62px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 18px; flex-shrink: 0;
+  border: 3px solid; font-family: var(--font-sans);
+}
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 3px; }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+/* ── VERDICT ── */
+.verdict {
+  background: var(--card2); border: 2px solid var(--accent);
+  border-radius: 10px; padding: 26px 28px; margin-bottom: 16px;
+}
+.verdict-t { font-size: 17px; font-weight: 700; color: var(--accent); margin-bottom: 10px; }
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 14px; text-align: left;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.pbox .pl { font-family: var(--font-sans); font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.pbox .pv { font-family: var(--font-sans); font-size: 26px; font-weight: 800; }
+.pbox .pn { font-size: 11px; color: var(--text3); margin-top: 3px; }
+.pc { color: var(--text2); } .pf { color: var(--gold); } .ps { color: var(--green); }
+
+/* ── 周期切换（三表图）── */
+.period-toggle {
+  display: inline-flex; gap: 0; margin-bottom: 16px;
+  border: 1px solid var(--border); border-radius: 8px; overflow: hidden;
+  background: var(--card);
+}
+.period-btn {
+  appearance: none; -webkit-appearance: none; border: 0; margin: 0;
+  padding: 7px 20px; cursor: pointer;
+  font-family: var(--font-sans); font-size: var(--fs-xs);
+  letter-spacing: .5px; color: var(--text3-ink);
+  background: transparent; transition: background .2s, color .2s;
+  /* 44px 触摸目标：窄屏上两个按钮挨得很近，小于这个高度容易点错 */
+  min-height: 34px;
+}
+.period-btn + .period-btn { border-left: 1px solid var(--border); }
+.period-btn:hover { color: var(--text); background: var(--card2); }
+.period-btn.is-on { background: var(--accent); color: #fff; font-weight: 600; }
+.period-btn:focus-visible { outline: 2px solid var(--accent2); outline-offset: -2px; }
+[data-theme="dark"] .period-btn.is-on { color: var(--bg); }
+
+/* ── SANKEY ── */
+#sankey { width: 100%; height: 460px; }
+
+/* ── COMMENTARY ── */
+.cmt {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 26px 28px; line-height: var(--lh-prose);
+  font-size: var(--fs-base);
+  box-shadow: 0 1px 4px var(--shadow);
+}
+/* 段间距取 0.9 行。此前是 14px 对 27.55px 的行高＝0.51 行，
+   段与段之间比行与行之间只宽一点点，整块糊成一片，读者找不到段落边界。 */
+.cmt p { margin-bottom: calc(var(--lh-prose) * 0.9em); }
+.cmt p:last-child { margin-bottom: 0; }
+
+.section > p, .section > ul, .section > ol,
+.section > blockquote,
+.cmt > p, .cmt > ul, .cmt > ol, .cmt > blockquote,
+.haitu-essay-body > p, .haitu-essay-body > ul,
+.haitu-essay-body > ol, .haitu-essay-body > blockquote {
+  max-width: var(--measure);           /* 15px × 40em ≈ 600px，约 40 字/行 */
+}
+
+code {
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace);
+  font-size: 0.88em;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  background: var(--card2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+/* .ec-item 是带背景的卡片，缩到 40em 会在右侧留下大片空白；
+   但满宽 1152px 时实测仍有 48 字/行，略超舒适上限，折中收到 60em（≈36 字）。 */
+.ec-item { max-width: 60em; }
+.note, p.note {
+  /* 注释是 12px 小字，行长可略放宽：12px × 52em ≈ 624px，约 52 字，
+     仍远好于此前的 96 字，且与正文块的右边界大致齐平，视觉上不突兀。 */
+  max-width: 52em;
+}
+.cmt > .tbl-wrap, .cmt > figure, .cmt > .cgrid { max-width: none; }
+/* 避免段末孤字（中文里一行只剩一两个字特别难看）。
+   Safari/Firefox 不支持时会自动忽略，属渐进增强。 */
+.cmt p, .haitu-essay-body p, .note, .ec-item { text-wrap: pretty; }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--card2); border-top: 1px solid var(--border);
+  padding: 24px; text-align: left; color: var(--text3); font-size: 12px;
+  margin-top: 40px;
+}
+
+@media (max-width: 768px) {
+  .cgrid,.cgrid3,.qgrid,.agrid,.pgrid { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 22px; }
+  .kpi-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ── HAITU SIGNATURE BLOCKS (页首短评 + 页末长评) ── */
+.haitu-quip {
+  display: flex; align-items: center; gap: 18px;
+  background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red);
+  border-radius: 12px; padding: 18px 24px; margin: 24px 0;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.haitu-avatar-sm {
+  width: 64px; height: 64px; border-radius: 50%;
+  object-fit: cover; flex-shrink: 0;
+  border: 2px solid var(--border); background: var(--red);
+  box-shadow: 0 2px 8px rgba(184,112,112,0.18);
+}
+.haitu-quote { flex: 1; }
+.haitu-name {
+  font-family: var(--font-sans);
+  font-size: 12px; font-weight: 700; letter-spacing: 1.5px;
+  color: var(--red-ink); text-transform: uppercase; margin-bottom: 4px;
+}
+.haitu-portrait {
+  font-size: 15px; line-height: 1.65; color: var(--text);
+  margin-bottom: 6px; font-weight: 600;
+}
+.haitu-rating-line {
+  font-size: 13px; color: var(--text2);
+  font-family: var(--font-sans);
+}
+.rating-badge {
+  display: inline-block; padding: 2px 12px; border-radius: 12px;
+  font-weight: 700; font-size: 13px; letter-spacing: 0.5px;
+  margin-left: 4px;
+}
+.rating-strong-buy { background: rgba(122,154,122,.25); color: var(--green); }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+.rating-cond-buy { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-hold { background: rgba(123,143,160,.18); color: var(--accent2); }
+.rating-sell { background: rgba(184,112,112,.18); color: var(--red); }
+.rating-strong-sell { background: rgba(184,112,112,.28); color: var(--red); }
+
+.haitu-essay {
+  background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red);
+  border-radius: 12px; padding: 28px 32px; margin: 24px 0;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.haitu-essay-header {
+  display: flex; align-items: center; gap: 18px;
+  padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px;
+}
+.haitu-avatar-lg {
+  width: 110px; height: 110px; border-radius: 50%;
+  object-fit: cover; flex-shrink: 0;
+  border: 3px solid var(--border); background: var(--red);
+  box-shadow: 0 4px 14px rgba(184,112,112,0.22);
+}
+.haitu-name-lg {
+  font-family: 'Georgia', 'Noto Serif SC', serif;
+  font-size: 28px; font-weight: 700; color: var(--text);
+  letter-spacing: 1px; margin-bottom: 4px;
+}
+.haitu-essay-tag {
+  font-family: var(--font-sans);
+  font-size: 12px; color: var(--text3); letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+.haitu-essay-body {
+  font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', serif;
+  font-size: var(--fs-lg); line-height: var(--lh-prose); color: var(--text);
+}
+.haitu-essay-body p { margin-bottom: calc(var(--lh-prose) * 0.85em); }
+.haitu-essay-body p:first-child {
+  font-size: 18px; font-style: italic; color: var(--text2);
+}
+.haitu-essay-body p:last-child {
+  margin-top: 22px; padding-top: 14px;
+  border-top: 1px solid var(--border);
+  font-size: var(--fs-xs); color: var(--text3); font-style: italic;
+}
+.haitu-sign {
+  text-align: left; margin-top: 14px;
+  font-family: 'Georgia', serif; font-size: 14px;
+  color: var(--text2); font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .haitu-quip { flex-direction: column; text-align: left; }
+  .haitu-essay-header { flex-direction: column; text-align: left; }
+  .haitu-avatar-sm { width: 80px; height: 80px; }
+  .haitu-avatar-lg { width: 90px; height: 90px; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   海图 v2 追加规则 —— 修 103 份存量实测出的问题，勿删勿改顺序
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── 1. 锚点落点：一行同时修好 TOC 跳转 / 深链 / Ctrl+F 定位 / :target ──
+   没有这条，所有跳转都会落在 sticky 顶栏底下被遮住 */
+.section { scroll-margin-top: calc(var(--bar-h) + 12px); }
+
+/* h2.stitle 必须显式定字号，否则被 UA 默认样式撑成 32px 巨标题 */
+h2.stitle { font-size: 18px; font-weight: 700; margin: 0 0 20px; }
+
+/* 章节深链锚点：桌面 hover 显形，触屏常显 */
+.anchor {
+  margin-left: 8px; font-size: 13px; color: var(--text3-ink);
+  text-decoration: none; opacity: 0; transition: opacity .2s;
+}
+.stitle:hover .anchor, .anchor:focus-visible { opacity: 1; }
+@media (hover: none) { .anchor { opacity: .35; } }
+
+/* ── 2. 评级徽章：由 data-rating 派生，作者不再手写 class ──
+   实测存量 .rating-hold 在 63 份是金色、30 份是蓝色 —— 这套选择器根除该分歧 */
+.rating-badge[data-rating="强力买入"] { background: rgba(122,154,122,.25); color: var(--green-ink); }
+.rating-badge[data-rating="买入"]     { background: rgba(122,154,122,.18); color: var(--green-ink); }
+.rating-badge[data-rating="有条件买入"]{ background: rgba(185,160,106,.18); color: var(--gold-ink); }
+.rating-badge[data-rating="持有观望"] { background: rgba(123,143,160,.18); color: var(--accent2-ink); }
+.rating-badge[data-rating="卖出"]     { background: rgba(184,112,112,.18); color: var(--red-ink); }
+.rating-badge[data-rating="强烈卖出"] { background: rgba(184,112,112,.28); color: var(--red-ink); }
+
+/* 涨跌不能只靠色相（色盲）—— 文字里必须自带 +/- 号，这里只负责配色 */
+.up, .pos { color: var(--green-ink); }
+.dn, .neg { color: var(--red-ink); }
+
+/* ── 3. 窄屏表格：粘性首列 + 右侧滚动阴影提示 ──
+   实测 375px 下 12 张表有 6 张横向溢出，且无任何可滚动的视觉线索 */
+.tbl-wrap {
+  background-image: linear-gradient(to right, var(--card), var(--card)),
+                    linear-gradient(to right, rgba(0,0,0,.10), rgba(0,0,0,0));
+  background-position: right center, right center;
+  background-repeat: no-repeat;
+  background-size: 24px 100%, 12px 100%;
+  background-attachment: local, scroll;
+}
+@media (max-width: 640px) {
+  /* border-collapse:collapse 下 sticky 单元格的边框会丢，用 box-shadow 补回 */
+  .tbl { border-collapse: separate; border-spacing: 0; }
+  .tbl :is(th, td) { border-bottom: 1px solid var(--border); }
+  .tbl :is(th, td):first-child {
+    position: sticky; left: 0; z-index: 1;
+    background: var(--card); box-shadow: 1px 0 0 var(--border);
+  }
+  .tbl th:first-child { background: var(--card2); }
+}
+
+/* ── 4. 移动端：顶栏必须能换行（实测四元素已折行重叠）── */
+.theme-bar { flex-wrap: wrap; row-gap: 6px; }
+@media (max-width: 420px) { .theme-bar .xueqiu-link { display: none; } }
+
+@media (max-width: 640px) {
+  .container { padding: 0 14px; }          /* 24px 在 375px 上吃掉 12.8% 视口 */
+  body { font-size: 15.5px; }              /* 14.5px 中文长文在手机上偏小 */
+  .cwrap { height: 200px; }
+  #sankey { height: 360px !important; }    /* 480px 挤在 289px 宽里不可读 */
+  .cgrid, .cgrid3, .pgrid { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 640px), (hover: none) {
+  .toggle-switch::before {
+    content: ''; position: absolute; left: 0; right: 0;
+    top: 50%; transform: translateY(-50%); height: 44px;
+  }
+}
+
+/* ── 5. prefers-reduced-motion ──
+   全语料 103/103 有 scroll-behavior:smooth 且零保护。加了目录之后，
+   一次跳转要跨 4 万像素、持续数秒，前庭敏感者会难受 */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important; animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+}
+
+/* ── 6. 焦点可见（全语料 0 个 :focus-visible 样式）── */
+:focus-visible { outline: 2px solid var(--accent3-ink); outline-offset: 2px; }
+
+/* ── 7. 图表无障碍降级容器 ── */
+figure.chart { margin: 0; }
+figure.chart figcaption { font-size: 12px; color: var(--text3-ink); line-height: 1.6; margin-top: 8px; }
+.chart-data { font-size: 12px; margin-top: 8px; }
+.chart-data summary { cursor: pointer; color: var(--text3-ink); }
+
+/* ── 8. shell 新增组件（skip link / 结论跳转带 / 顶栏右侧 / 屏幕阅读器专用）── */
+
+.skip {
+  position: absolute; left: -9999px; top: 0;
+  background: var(--card); color: var(--accent3-ink);
+  padding: 8px 14px; border-radius: 0 0 8px 0; z-index: 200;
+  font-size: 13px; text-decoration: none;
+}
+.skip:focus { left: 0; }
+
+/* 只给屏幕阅读器：essay 一节的标题不需要视觉呈现（.haitu-essay 自带头部） */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+.theme-bar-right { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+
+/* 结论跳转带：读者看完评级后一步到证据 */
+.quip-jump { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.quip-jump a {
+  font-family: var(--font-sans); font-size: 12px; line-height: 1;
+  padding: 7px 12px; border-radius: 999px;
+  border: 1px solid var(--border); background: var(--card2);
+  color: var(--accent3-ink); text-decoration: none;
+  transition: border-color .2s, background .2s;
+}
+.quip-jump a:hover { border-color: var(--accent3); background: var(--card); }
+@media (max-width: 640px), (hover: none) {
+  /* 用 min-height 而不是加 padding —— padding 要靠字体行高凑够 44px，
+     换字体或改字号就又不达标了（实测 padding:13px 只得到 40px）。 */
+  .quip-jump a { min-height: 44px; padding: 0 16px; display: inline-flex; align-items: center; }
+}
+
+.hero-pills {display: flex; justify-content: flex-start; gap: 16px; flex-wrap: wrap;}
+.pill {background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: var(--font-sans); font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow);}
+.pill strong {color: var(--text);}
+.stock-snap {background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px;}
+.snap-item {text-align: left;}
+.snap-label {font-family: var(--font-sans); font-size: 10px; color: var(--text3-ink); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px;}
+.kpi-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px;}
+.kpi {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow);}
+.moat-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px;}
+.moat-card {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); border-left: 4px solid var(--accent);}
+.moat-card.wide {border-left-color: var(--green);}
+.moat-card.narrow {border-left-color: var(--gold);}
+.moat-card.none {border-left-color: var(--red);}
+.moat-card h5 {font-size: 13px; color: var(--text); margin-bottom: 6px;}
+.moat-card .moat-rate {font-family: var(--font-sans); font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px;}
+.moat-card.wide .moat-rate {background: rgba(122,154,122,.18); color: var(--green);}
+.moat-card.narrow .moat-rate {background: rgba(185,160,106,.18); color: var(--gold);}
+.moat-card.none .moat-rate {background: rgba(184,112,112,.18); color: var(--red);}
+.moat-card p {font-size: var(--fs-sm); color: var(--text2); line-height: var(--lh-tight);}
+.ec-item {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: block; box-shadow: 0 1px 3px var(--shadow); line-height: var(--lh-prose); font-size: var(--fs-base);}
+.ec-badge {display: inline-block; vertical-align: baseline; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-right: 10px; font-family: var(--font-sans); white-space: nowrap;}
+.dcf-note {background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: var(--fs-sm); color: var(--text2); line-height: var(--lh-prose);}
+.dcf-note strong {color: var(--text);}
+.scorecard {background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow);}
+.score-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px;}
+.score-card {background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px;}
+.score-letter {width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-sans); font-weight: 800; font-size: 22px; flex-shrink: 0; border: 3px solid;}
+.flag-row {margin-top: 16px; padding: 12px 16px; background: rgba(184,112,112,.08); border: 1px solid rgba(184,112,112,.3); border-radius: 8px; font-size: var(--fs-sm); color: var(--text2);}
+.flag-row strong {color: var(--red);}
+.pgrid {display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0;}
+body { text-align: left; }
+
+.pbox {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 24px; text-align: left; box-shadow: 0 1px 4px var(--shadow);}
+.pbox .pl, .pbox .pv, .pbox .pn {text-align: left;}
+.pbox .pl {font-family: var(--font-sans); font-size: 11px; color: var(--text3-ink); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px;}
+.pbox .pv {font-family: var(--font-sans); font-size: 28px; font-weight: 800; margin-bottom: 5px;}
+.pbox .pn {font-size: var(--fs-xs); color: var(--text3-ink); line-height: var(--lh-tight);}
+.pbox > h4 {font-size: var(--fs-lg); color: var(--accent3-ink); margin-bottom: 14px; line-height: 1.5;}
+.pbox + .pbox {margin-top: 18px;}
+.risk-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px;}
+.risk-card {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); position: relative; overflow: hidden;}
+.risk-card::before {content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent);}
+.risk-card.r1::before {background: var(--green);}
+.risk-card.r2::before {background: rgba(122,154,122,.6);}
+.risk-card.r3::before {background: var(--gold);}
+.risk-card.r4::before {background: var(--rose);}
+.risk-card.r5::before {background: var(--red);}
+.risk-card h5 {font-size: 14px; margin-bottom: 6px; color: var(--text);}
+.risk-card p {font-size: var(--fs-sm); color: var(--text2); line-height: var(--lh-tight);}
+
+/* 骨架用到、但语料里没有现成规则的补充组件 */
+.note { font-size: var(--fs-xs); color: var(--text3-ink); line-height: var(--lh-tight); margin-top: 12px; }
+.lead { font-size: 16px; font-weight: 600; line-height: 1.8; margin-bottom: 14px; }
+.haitu-disc { font-size: 12px; color: var(--text3-ink); line-height: 1.7; margin-top: 18px;
+              padding-top: 14px; border-top: 1px solid var(--border); }
+.bscore { background: var(--card2); border: 1px solid var(--border); border-radius: 10px;
+          padding: 16px 20px; margin: 16px 0; }
+.bscore h4 { font-family: var(--font-sans); font-size: 14px; color: var(--accent3-ink); margin: 0 0 6px; }
+.bscore p { margin: 0; font-size: 14px; }
+
+/* 桑基 SVG：颜色与线宽在标记里给，这里只管描边端点与文字 */
+#sankey { width: 100%; height: auto; }
+.sk-flow path { fill: none; opacity: .45; stroke-linecap: butt; }
+.sk-t .sk-lab { font-family: var(--font-sans); font-size: 12px; fill: var(--text2); }
+.sk-t .sk-num { font-family: var(--font-sans); font-size: 13px; font-weight: 700; fill: var(--text);
+                font-variant-numeric: tabular-nums; }
+.sk-t .warn   { fill: var(--red-ink); }
+
+@media (max-width: 640px) {
+  .stock-snap { grid-template-columns: 1fr 1fr; }
+  .kpi-grid   { grid-template-columns: 1fr 1fr; }
+  .moat-grid, .risk-grid, .score-grid, .pgrid { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* 修饰类：评分等级 / 电话会情绪 / 快照数值。文字色一律走 ink 层。 */
+.score-letter.s-a  { color: var(--green-ink);   border-color: var(--green);   background: rgba(122,154,122,.12); }
+.score-letter.s-bp { color: var(--gold-ink);    border-color: var(--gold);    background: rgba(185,160,106,.12); }
+.score-letter.s-b  { color: var(--accent2-ink); border-color: var(--accent2); background: rgba(123,143,160,.12); }
+.score-letter.s-c  { color: var(--red-ink);     border-color: var(--red);     background: rgba(184,112,112,.12); }
+
+.ec-badge.ec-bull { background: rgba(122,154,122,.18); color: var(--green-ink); }
+.ec-badge.ec-bear { background: rgba(184,112,112,.18); color: var(--red-ink); }
+.ec-badge.ec-neut { background: rgba(123,143,160,.18); color: var(--accent2-ink); }
+
+.snap-value { font-family: var(--font-sans); font-size: 19px; font-weight: 700; color: var(--text);
+              font-variant-numeric: tabular-nums; line-height: 1.3; }
+.snap-note  { font-family: var(--font-sans); font-size: 11px; color: var(--text3-ink); margin-top: 3px; }
+.sk-node rect { opacity: .9; }
+
+</style>
+</head>
+<body>
+
+<a class="skip" href="#kpi">跳到正文</a>
+
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/VIPS" target="_blank" rel="noopener">雪球 VIPS</a>
+  </div>
+  <div class="theme-bar-right">
+    <span>☀️ 浅色</span>
+    <button type="button" class="toggle-switch" id="themeBtn"
+            aria-pressed="false" aria-label="切换深色模式" onclick="toggleTheme()"></button>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">Q1 2026 财报发布 · 2026-05-21 ｜ 海图研判 · 2026-08-11</div>
+  <h1>唯品会 Vipshop VIPS · Q1 2026 财报深度分析</h1>
+  <div class="hero-sub">NYSE: VIPS ｜ 财季截至 2026-03-31 ｜ 人民币报表 ｜ 价值投资视角</div>
+  <div class="hero-pills">
+    <span class="pill">股价 $15.68</span>
+    <span class="pill">市值 ¥519.5 亿（$7.53B）</span>
+    <span class="pill">季度营收 ¥265.75 亿（+1.2%）</span>
+    <span class="pill">归母净利 ¥22.06 亿（+13.5%）</span>
+    <span class="pill">净现金 ¥240.6 亿 ＝ 市值 46%</span>
+    <span class="pill">核心业务市盈率 3.7×</span>
+  </div>
+</div>
+
+<div class="container">
+  <div class="haitu-quip">
+    <div class="haitu-quote">
+      <div class="haitu-portrait">一家把「特卖」做成现金机器的电商——五年营收缩了 9.5%，利润却涨了 55%，然后把省下来的钱几乎全部买回了自己的股票。</div>
+      <div class="haitu-rating-line">
+        评级：<span class="rating-badge" data-rating="买入">买入</span>
+        · 12 个月目标价 $21.00 · 净现金占市值 46%，剔除后市场给这门生意的定价是 3.7 倍利润
+      </div>
+      <div class="quip-jump" role="group" aria-label="快速跳转">
+        <a href="#m13">评分卡与决策</a>
+        <a href="#m7">目标价怎么算出来的</a>
+        <a href="#m11">风险矩阵</a>
+        <a href="#m4">护城河</a>
+        <a href="#essay">夜读手记</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+<section class="section" id="snapshot" aria-labelledby="snapshot-t">
+  <h2 class="stitle" id="snapshot-t">市场数据快照（2026-08-10 收盘）<a class="anchor" href="#snapshot" aria-label="本节链接">#</a></h2>
+  <div class="stock-snap">
+    <div class="snap-item">
+      <div class="snap-label">股价</div>
+      <div class="snap-value">$15.68</div>
+      <div class="snap-note">每 ADS。<strong>1 ADS ＝ 0.2 股 Class A 普通股</strong>（即 1 普通股 ＝ 5 ADS），公司业绩稿脚注逐字确认</div>
+    </div>
+    <div class="snap-item">
+      <div class="snap-label">市值</div>
+      <div class="snap-value">¥519.5 亿</div>
+      <div class="snap-note">$7.53B。4.803 亿份 ADS。汇率取公司 Q1 2026 期末口径 6.8980</div>
+    </div>
+    <div class="snap-item">
+      <div class="snap-label">净现金</div>
+      <div class="snap-value">¥240.6 亿</div>
+      <div class="snap-note">2025-12-31：现金 229.9 ＋受限 11.3 ＋短期投资 57.8 −短期借款 58.4。<strong>长期借款五年均为零</strong>（合并资产负债表无此科目）</div>
+    </div>
+    <div class="snap-item">
+      <div class="snap-label">企业价值</div>
+      <div class="snap-value">¥278.9 亿</div>
+      <div class="snap-note">市值减净现金，<strong>仅为市值的 54%</strong></div>
+    </div>
+    <div class="snap-item">
+      <div class="snap-label">TTM 市盈率（GAAP）</div>
+      <div class="snap-value">7.24×</div>
+      <div class="snap-note">近四季每 ADS 收益 ¥14.93</div>
+    </div>
+    <div class="snap-item">
+      <div class="snap-label">TTM 市盈率（Non-GAAP）</div>
+      <div class="snap-value">6.22×</div>
+      <div class="snap-note">每 ADS ¥17.38。公司口径主要剔除股权激励费用</div>
+    </div>
+    <div class="snap-item">
+      <div class="snap-label">核心业务市盈率</div>
+      <div class="snap-value">3.72×</div>
+      <div class="snap-note">企业价值 ÷ TTM 归母净利。<strong>这一档才是市场对这门生意本身的定价</strong>；按 Non-GAAP 是 3.19×</div>
+    </div>
+    <div class="snap-item">
+      <div class="snap-label">自由现金流收益率</div>
+      <div class="snap-value">16.6%</div>
+      <div class="snap-note">TTM 自由现金流 ¥86.2 亿 ÷ 市值；<strong>若对企业价值计算是 30.9%</strong></div>
+    </div>
+    <div class="snap-item">
+      <div class="snap-label">市销率 / 市净率</div>
+      <div class="snap-value">0.49× / 1.27×</div>
+      <div class="snap-note">TTM 营收 ¥1,062.3 亿；归母权益 ¥410.0 亿（2025-12-31）</div>
+    </div>
+    <div class="snap-item">
+      <div class="snap-label">股东收益率</div>
+      <div class="snap-value">13.0%</div>
+      <div class="snap-note">FY2025 回购 ¥49.4 亿 ＋ 股息 ¥18.0 亿 ＝ ¥67.4 亿 ÷ 市值</div>
+    </div>
+    <div class="snap-item">
+      <div class="snap-label">52 周区间</div>
+      <div class="snap-value">$12.65 – $21.08</div>
+      <div class="snap-note">现价距高点 −25.6%，距低点 +23.9%</div>
+    </div>
+    <div class="snap-item">
+      <div class="snap-label">下次财报</div>
+      <div class="snap-value">2026-08-18</div>
+      <div class="snap-note">Q2 2026。本报告基于已披露的最新一期 Q1 2026</div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="kpi" aria-labelledby="kpi-t">
+  <h2 class="stitle" id="kpi-t">Q1 2026 核心业绩<a class="anchor" href="#kpi" aria-label="本节链接">#</a></h2>
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div class="kpi-l">营业收入</div>
+      <div class="kpi-v">¥265.75 亿</div>
+      <div class="kpi-n">同比 +1.2%。<strong>八个季度里第一次同比转正</strong></div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">毛利</div>
+      <div class="kpi-v">¥64.95 亿</div>
+      <div class="kpi-n">毛利率 24.4%，同比提升 1.3 个百分点</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">营业利润</div>
+      <div class="kpi-v">¥24.98 亿</div>
+      <div class="kpi-n">同比 <strong>+9.7%</strong>；利润率 9.4%（上年同期 8.7%）</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">Non-GAAP 营业利润</div>
+      <div class="kpi-v">¥27.18 亿</div>
+      <div class="kpi-n">利润率 10.2%，八季最高</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">归母净利润</div>
+      <div class="kpi-v">¥22.06 亿</div>
+      <div class="kpi-n">同比 <strong>+13.6%</strong></div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">Non-GAAP 归母净利</div>
+      <div class="kpi-v">¥23.06 亿</div>
+      <div class="kpi-n">同比 −0.1%，与 GAAP 的差距在收窄</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">摊薄每 ADS 收益</div>
+      <div class="kpi-v">¥4.48</div>
+      <div class="kpi-n">GAAP；Non-GAAP ¥4.68。折合每普通股 ¥22.39</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">经营现金流</div>
+      <div class="kpi-v">¥19.58 亿</div>
+      <div class="kpi-n">上年同期为 <strong>净流出 ¥10.30 亿</strong></div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">资本开支</div>
+      <div class="kpi-v">¥4.38 亿</div>
+      <div class="kpi-n">同比 −35.5%，占营收 1.6%</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">自由现金流</div>
+      <div class="kpi-v">¥15.19 亿</div>
+      <div class="kpi-n">上年同期为净流出 ¥17.11 亿</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">摊薄 ADS 份数</div>
+      <div class="kpi-v">4.927 亿</div>
+      <div class="kpi-n">五年前是 6.937 亿，累计 <strong>−29.0%</strong></div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">短期借款</div>
+      <div class="kpi-v">¥65.60 亿</div>
+      <div class="kpi-n">2026-03-31 末，较年初 ¥58.45 亿再增。<strong>这家公司不是零有息负债</strong></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="focus" aria-labelledby="focus-t">
+  <h2 class="stitle" id="focus-t">本季必看 · 两个「看穿」<a class="anchor" href="#focus" aria-label="本节链接">#</a></h2>
+
+  <h3>看穿一：7.2 倍的市盈率里，有一半是现金</h3>
+
+  <p>行情站给唯品会的市盈率是 7.24 倍。这个数字本身没错，但它把一件重要的事藏起来了：<strong>这家公司市值的 46% 是净现金。</strong></p>
+
+  <p>按 2025-12-31 经审计的合并资产负债表：现金及等价物 ¥229.90 亿、受限资金 ¥11.33 亿、短期投资 ¥57.77 亿，合计 ¥299.00 亿；减去短期借款 ¥58.45 亿——<strong>长期借款五个财年都没有这个科目</strong>——净现金 ¥240.55 亿。当前市值 ¥519.5 亿。</p>
+
+  <p>把这笔现金剔掉，市场给「唯品会这门生意」的定价是 <strong>企业价值 ¥278.9 亿</strong>。而这门生意近四个季度：</p>
+
+  <ul>
+    <li>营收 ¥1,062.3 亿，归母净利 ¥75.1 亿，Non-GAAP 归母净利 ¥87.4 亿</li>
+    <li>经营现金流 ¥104.4 亿，资本开支只有 ¥18.2 亿，<strong>自由现金流 ¥86.2 亿</strong></li>
+  </ul>
+
+  <p>也就是说：<strong>核心业务市盈率 3.72 倍（Non-GAAP 3.19 倍），企业价值口径的自由现金流收益率 30.9%。</strong>按这个速度，这门生意三年多就能用自己赚的现金把自己买下来一遍。</p>
+
+  <p class="note">要把话说完整：净现金里有相当部分并非可以立刻分掉——公司有互联网金融业务，资产负债表上的资金与经营周转是绑在一起的，短期借款五年从 ¥19.75 亿升到 ¥58.45 亿也说明它在用杠杆做周转。所以「剔净现金」这一步是估值方法而不是清算假设。但即使把净现金打对折，核心倍数也只有 5.3 倍。</p>
+
+  <h3>看穿二：五年营收缩了一成，利润却涨了一半——这是靠什么换的</h3>
+
+  <p>先看两条曲线的方向：</p>
+
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="唯品会 FY2021–FY2025 年报（20-F）与各年度业绩新闻稿">
+      <caption>五年：收入向下、利润向上（人民币亿元）</caption>
+      <thead>
+        <tr><th>年度</th><th>营业收入</th><th>营业利润</th><th>营业利润率</th><th>归母净利润</th><th>Non-GAAP 归母净利</th><th>摊薄每 ADS（Non-GAAP）</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>FY2021</td><td>1,170.60</td><td>55.82</td><td>4.8%</td><td>46.81</td><td>60.12</td><td>¥8.67</td></tr>
+        <tr><td>FY2022</td><td>1,031.52</td><td>61.97</td><td>6.0%</td><td>62.99</td><td>68.37</td><td>¥10.67</td></tr>
+        <tr><td>FY2023</td><td>1,128.56</td><td>91.04</td><td>8.1%</td><td>81.17</td><td>95.10</td><td>¥16.90</td></tr>
+        <tr><td>FY2024</td><td>1,084.21</td><td>91.73</td><td>8.5%</td><td>77.40</td><td>90.33</td><td>¥16.75</td></tr>
+        <tr><td>FY2025</td><td>1,059.20</td><td>81.36</td><td>7.7%</td><td>72.42</td><td>87.45</td><td>¥17.08</td></tr>
+        <tr><td><strong>五年变化</strong></td><td><strong>−9.5%</strong></td><td><strong>+45.8%</strong></td><td><strong>+2.9pp</strong></td><td><strong>+54.7%</strong></td><td><strong>+45.5%</strong></td><td><strong>+97.0%</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>利润率从 4.8% 提到 7.7%，是这五年最扎实的成绩。但每 ADS 收益涨了 97%——几乎是净利润涨幅的两倍——差额来自第三条曲线：</p>
+
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="唯品会各年度业绩新闻稿与 20-F 的每股收益附注">
+      <caption>股本：五年少了四分之一</caption>
+      <thead><tr><th>年度</th><th>加权摊薄 ADS 份数（亿份）</th><th>当年回购金额（亿元）</th><th>当年股息（亿元）</th></tr></thead>
+      <tbody>
+        <tr><td>FY2021</td><td>6.937</td><td>19.39</td><td>—</td></tr>
+        <tr><td>FY2022</td><td>6.408</td><td>62.58</td><td>—</td></tr>
+        <tr><td>FY2023</td><td>5.628</td><td>51.07</td><td>—</td></tr>
+        <tr><td>FY2024</td><td>5.393</td><td>38.66</td><td>16.85</td></tr>
+        <tr><td>FY2025</td><td>5.119</td><td>49.41</td><td>17.95</td></tr>
+        <tr><td><strong>五年合计 / 变化</strong></td><td><strong>−26.2%</strong></td><td><strong>221.11</strong></td><td><strong>34.80</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>五年回购加分红合计 <strong>¥255.9 亿</strong>，等于今天全部市值的 <strong>49%</strong>。换句话说：<span class="hl-t">如果你五年前买入并持有，公司已经用现金把相当于你半个持仓的钱还给了你。</span></p>
+
+  <p>但这条路径有尽头，而尽头写在第四条曲线上——<strong>用户在流失</strong>：活跃客户从 9,390 万降到 8,480 万（−9.7%），订单从 7.866 亿单降到 7.324 亿单（−6.9%）。GMV 反而从 1,915 亿升到 2,135 亿（+11.5%），靠的是留下来的人买得更贵。</p>
+
+  <p><strong>这就是这份报告真正要回答的问题：</strong>一家用户在减少、收入在收缩、但利润率在提升、现金流极其充沛、并且把一半市值还给股东的公司，值多少钱？答案不在「增长」那一栏，在「这门生意还能这样运转多久」那一栏。</p>
+</section>
+
+<section class="section" id="trend" aria-labelledby="trend-t">
+  <h2 class="stitle" id="trend-t">关键指标趋势<a class="anchor" href="#trend" aria-label="本节链接">#</a></h2>
+  <div class="cgrid">
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">单季营收与 Non-GAAP 营业利润率</div>
+        <div class="cwrap"><canvas id="rev" data-chart="rev" role="img" aria-label="八个季度营收呈明显的四季度高峰形态，而 Non-GAAP 营业利润率在 2026 一季度回到 10.2% 的区间高位"></canvas></div>
+        <figcaption>柱＝单季营业收入（人民币亿元）；线＝Non-GAAP 营业利润率（%）。来源：各季度业绩新闻稿，均为真单季数而非年初至今累计。</figcaption>
+      </figure>
+    </div>
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">每 ADS 收益：GAAP vs Non-GAAP（五年）</div>
+        <div class="cwrap"><canvas id="margin" data-chart="margin" role="img" aria-label="五年间每 ADS 收益接近翻倍，且 GAAP 与 Non-GAAP 的差距稳定"></canvas></div>
+        <figcaption>单位：人民币元／ADS，摊薄口径。<strong>1 ADS ＝ 0.2 普通股</strong>；公司利润表披露的是每普通股收益，除以 5 才是每 ADS。</figcaption>
+      </figure>
+    </div>
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">五年累计资本配置去向</div>
+        <div class="cwrap"><canvas id="segment" data-chart="segment" role="img" aria-label="五年累计回购金额是资本开支的 1.26 倍，是股息的 6.4 倍"></canvas></div>
+        <figcaption>单位：人民币亿元，FY2021–FY2025 累计。来源：各年度现金流量表的回购、股息与资本开支原始行项目。</figcaption>
+      </figure>
+    </div>
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">股本收缩 vs 每 ADS 收益</div>
+        <div class="cwrap"><canvas id="eps" data-chart="eps" role="img" aria-label="摊薄 ADS 份数五年下降 26%，同期每 ADS 收益接近翻倍"></canvas></div>
+        <figcaption>柱＝加权摊薄 ADS 份数（亿份）；线＝Non-GAAP 摊薄每 ADS 收益（元）。两条线放在一起，能看清回购对每股价值的贡献。</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="statements" aria-labelledby="statements-t">
+  <h2 class="stitle" id="statements-t">三张表的五年轨迹<a class="anchor" href="#statements" aria-label="本节链接">#</a></h2>
+
+  <div class="period-toggle" role="group" aria-label="切换统计周期">
+    <button type="button" class="period-btn is-on" data-period="annual" aria-pressed="true">年度</button>
+    <button type="button" class="period-btn" data-period="quarterly" aria-pressed="false">季度</button>
+  </div>
+
+  <div class="cgrid">
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">利润表：总收入 · 营业利润 · 净利润</div>
+        <div class="cwrap"><canvas id="income" data-chart="income" role="img" aria-label="五年收入线缓慢下行，而营业利润与净利润线明显上行，两者在 2023 年之后拉开距离"></canvas></div>
+        <figcaption>单位：人民币亿元。营业利润与归母净利润均为 US GAAP 口径。年度＝ FY2021–FY2025；季度＝ 2024Q2 至 2026Q1 共 8 个真单季。</figcaption>
+      </figure>
+    </div>
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">现金流量表：经营现金流 · 资本开支 · 自由现金流</div>
+        <div class="cwrap"><canvas id="cashflow" data-chart="cashflow" role="img" aria-label="资本开支五年下降四成，自由现金流始终为正且远高于净利润"></canvas></div>
+        <figcaption>单位：人民币亿元。资本开支＝现金流量表「购建物业及设备」＋「购买土地使用权」两条原始行之和；自由现金流＝经营现金流 − 资本开支。<strong>季度经营现金流波动极大</strong>，因为四季度是特卖旺季、应付账款集中沉淀。</figcaption>
+      </figure>
+    </div>
+    <div class="ccard">
+      <figure class="chart">
+        <div class="ctitle">资产负债表：总资产 · 总负债 · 股东权益</div>
+        <div class="cwrap"><canvas id="balance" data-chart="balance" role="img" aria-label="总资产与股东权益稳步上行，总负债基本走平"></canvas></div>
+        <figcaption>单位：人民币亿元，各期期末时点。股东权益为归属母公司口径（不含少数股东权益）。</figcaption>
+      </figure>
+    </div>
+  </div>
+  <p class="note">三张图并排看，最该被看到的是<strong>它们的方向不一致</strong>：利润表的收入线在下行，现金流量表的自由现金流线却稳稳站在净利润之上，资产负债表的权益线一路走高。一家收入萎缩的公司，通常三张表会一起变差；唯品会没有——因为它的收缩是主动的（砍掉低毛利的自营与低效流量），省下的钱既进了利润也进了现金。切到季度视图能看到另一个形状：经营现金流的季节性极端，四季度一个季度就能贡献全年的大部分，这是特卖模式「先收钱后付供应商」的直接结果。</p>
+</section>
+
+<section class="section" id="flow" aria-labelledby="flow-t">
+  <h2 class="stitle" id="flow-t">资金流向桑基图<a class="anchor" href="#flow" aria-label="本节链接">#</a></h2>
+  <div class="ccard">
+    <figure class="chart">
+      <div id="sankey" role="img" aria-label="2026 一季度 265.75 亿元营收，一路扣到 15.19 亿元自由现金流">
+        <svg viewBox="0 0 960 400" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+          <defs>
+            <style>
+              .sk-lab { font-size: 11px; fill: var(--text); }
+              .sk-lab.dim { fill: var(--text2); }
+              .sk-lab.warn { fill: var(--red); }
+              .sk-lab.good { fill: var(--green); }
+              .sk-head { font-size: 11.5px; font-weight: 600; fill: var(--text2); letter-spacing: .5px; }
+            </style>
+          </defs>
+
+          <text x="8" y="16" class="sk-head">营业收入</text>
+          <text x="215" y="16" class="sk-head">毛利拆分</text>
+          <text x="425" y="16" class="sk-head">利润</text>
+          <text x="640" y="16" class="sk-head">现金</text>
+          <text x="835" y="16" class="sk-head">去向</text>
+
+          <!-- 265.75 亿 → 300px 高 -->
+          <rect x="8" y="40" width="16" height="300" fill="var(--accent)"/>
+          <text x="30" y="56" class="sk-lab">营业收入 265.75</text>
+
+          <!-- 营业成本 200.80（226.7px）+ 毛利 64.95（73.3px） -->
+          <path d="M24,40 C120,40 120,40 216,40 L216,266.7 C120,266.7 120,266.7 24,266.7 Z" fill="var(--red)" opacity="0.28"/>
+          <path d="M24,266.7 C120,266.7 120,266.7 216,280 L216,353.3 C120,340 120,340 24,340 Z" fill="var(--accent)" opacity="0.34"/>
+
+          <rect x="216" y="40" width="16" height="226.7" fill="var(--red)"/>
+          <text x="238" y="56" class="sk-lab warn">营业成本 200.80</text>
+          <text x="238" y="70" class="sk-lab dim">毛利率 24.4%（+1.3pp）</text>
+
+          <rect x="216" y="280" width="16" height="73.3" fill="var(--accent)"/>
+          <text x="238" y="296" class="sk-lab">毛利 64.95</text>
+
+          <!-- 毛利 → 营业费用 39.97（45.1px）+ 营业利润 24.98（28.2px） -->
+          <path d="M232,280 C310,280 310,280 388,200 L388,245.1 C310,325.1 310,325.1 232,325.1 Z" fill="var(--red)" opacity="0.24"/>
+          <path d="M232,325.1 C310,325.1 310,325.1 388,258 L388,286.2 C310,353.3 310,353.3 232,353.3 Z" fill="var(--accent3)" opacity="0.40"/>
+
+          <rect x="388" y="200" width="16" height="45.1" fill="var(--red)"/>
+          <text x="410" y="216" class="sk-lab warn">营业费用合计 39.97</text>
+          <text x="410" y="230" class="sk-lab dim">履约 · 营销 · 技术 · 管理</text>
+
+          <rect x="388" y="258" width="16" height="28.2" fill="var(--accent3)"/>
+          <text x="410" y="274" class="sk-lab">营业利润 24.98</text>
+
+          <!-- 营业利润 → 所得税及其他净额 2.92（3.3px）+ 归母净利 22.06（24.9px） -->
+          <path d="M404,258 C480,258 480,258 556,240 L556,243.3 C480,261.3 480,261.3 404,261.3 Z" fill="var(--red)" opacity="0.26"/>
+          <path d="M404,261.3 C480,261.3 480,261.3 556,250 L556,274.9 C480,286.2 480,286.2 404,286.2 Z" fill="var(--green)" opacity="0.36"/>
+
+          <rect x="556" y="240" width="14" height="3.3" fill="var(--red)"/>
+          <text x="576" y="245" class="sk-lab warn">所得税及其他净额 2.92</text>
+
+          <rect x="556" y="250" width="14" height="24.9" fill="var(--green)"/>
+          <text x="576" y="266" class="sk-lab">归母净利润 22.06</text>
+
+          <!-- 归母净利 → 营运资金等净流出 2.48（2.8px）+ 经营现金流 19.58（22.1px） -->
+          <path d="M570,250 C640,250 640,250 710,232 L710,234.8 C640,252.8 640,252.8 570,252.8 Z" fill="var(--red)" opacity="0.26"/>
+          <path d="M570,252.8 C640,252.8 640,252.8 710,240 L710,262.1 C640,274.9 640,274.9 570,274.9 Z" fill="var(--accent)" opacity="0.34"/>
+
+          <rect x="710" y="232" width="14" height="2.8" fill="var(--red)"/>
+          <text x="730" y="237" class="sk-lab warn">非现金与营运资金净额 2.48</text>
+
+          <rect x="710" y="240" width="14" height="22.1" fill="var(--accent)"/>
+          <text x="730" y="255" class="sk-lab">经营现金流 19.58</text>
+
+          <!-- 经营现金流 → 资本开支 4.38（4.9px）+ 自由现金流 15.19（17.2px） -->
+          <path d="M724,240 C790,240 790,240 856,300 L856,304.9 C790,244.9 790,244.9 724,244.9 Z" fill="var(--red)" opacity="0.26"/>
+          <path d="M724,244.9 C790,244.9 790,244.9 856,315 L856,332.2 C790,262.1 790,262.1 724,262.1 Z" fill="var(--green)" opacity="0.42"/>
+
+          <rect x="856" y="300" width="14" height="4.9" fill="var(--red)"/>
+          <text x="700" y="360" class="sk-lab warn">资本开支 4.38（占营收 1.6%）</text>
+
+          <rect x="856" y="315" width="14" height="17.2" fill="var(--green)"/>
+          <text x="700" y="378" class="sk-lab good">自由现金流 15.19</text>
+        </svg>
+      </div>
+      <figcaption>单位：人民币亿元，2026 年 1–3 月单季。每一级流入等于流出：265.75 ＝ 200.80 ＋ 64.95；64.95 ＝ 39.97 ＋ 24.98；24.98 ＝ 2.92 ＋ 22.06；22.06 ＝ 2.48 ＋ 19.58；19.58 ＝ 4.38 ＋ 15.19。「所得税及其他净额」与「非现金与营运资金净额」为轧差项，用于让流量闭合。最该注意的是最后一级：<strong>资本开支只吃掉经营现金流的 22%</strong>，这门生意几乎不需要再投入。</figcaption>
+    </figure>
+    <details class="chart-data">
+      <summary>查看数据表</summary>
+      <div class="tbl-wrap">
+        <table class="tbl" data-shape="grid" data-source="唯品会 2026 年第一季度业绩新闻稿（2026-05-21）与自由现金流调节表">
+          <caption>2026Q1 资金流向节点（人民币亿元）</caption>
+          <thead><tr><th>层级</th><th>流入</th><th>流出</th><th>金额</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>营业收入 265.75</td><td>营业成本</td><td>200.80</td></tr>
+            <tr><td>1</td><td>营业收入 265.75</td><td>毛利</td><td>64.95</td></tr>
+            <tr><td>2</td><td>毛利 64.95</td><td>营业费用合计</td><td>39.97</td></tr>
+            <tr><td>2</td><td>毛利 64.95</td><td>营业利润</td><td>24.98</td></tr>
+            <tr><td>3</td><td>营业利润 24.98</td><td>所得税及其他净额</td><td>2.92</td></tr>
+            <tr><td>3</td><td>营业利润 24.98</td><td>归母净利润</td><td>22.06</td></tr>
+            <tr><td>4</td><td>归母净利润 22.06</td><td>非现金与营运资金净额</td><td>2.48</td></tr>
+            <tr><td>4</td><td>归母净利润 22.06</td><td>经营现金流</td><td>19.58</td></tr>
+            <tr><td>5</td><td>经营现金流 19.58</td><td>资本开支</td><td>4.38</td></tr>
+            <tr><td>5</td><td>经营现金流 19.58</td><td>自由现金流</td><td>15.19</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+  </div>
+</section>
+
+<section class="section" id="m1" aria-labelledby="m1-t">
+  <h2 class="stitle" id="m1-t">模块 1 · 公司概览与背景<a class="anchor" href="#m1" aria-label="本节链接">#</a></h2>
+
+  <p>唯品会成立于 2008 年，2012 年在纽约证券交易所上市，代码 VIPS。开曼群岛注册，通过可变利益实体（VIE）架构控制境内经营主体。报表以人民币编制、按美国公认会计原则（US GAAP）披露，审计师为德勤（香港），FY2025 年报（20-F）于 2026-04-16 报送。</p>
+
+  <p>它的定位从上市第一天起就没变过：<strong>品牌折扣特卖</strong>。品牌方有过季、断码、超产的库存，唯品会以低价包销或代销，再以限时特卖的形式卖给对价格敏感但认品牌的消费者。这门生意的本质不是流量，是<strong>库存处理的效率</strong>。</p>
+
+  <h3>1.1 ADS 换算：这里有一个高错点</h3>
+
+  <p><strong>1 ADS ＝ 0.2 股 Class A 普通股</strong>，等价说法是 1 股普通股 ＝ 5 份 ADS。公司在业绩稿里逐字写明「'ADS' means American depositary share, each of which represents 0.2 Class A ordinary share」。</p>
+
+  <p>为什么要单独说：公司利润表披露的每股收益是<strong>每普通股</strong>口径（FY2025 摊薄 ¥70.74），除以 5 才是每 ADS 的 ¥14.15。数据商在这一步经常出错——把两种口径混在同一列里会得到 149.32 与 14.15 并列这样的荒谬序列。另外，某些券商页面写的是「each representing two ordinary shares」，那是陈旧错误。本报告所有每股数据都注明了口径。</p>
+
+  <h3>1.2 五年经营指标</h3>
+
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="唯品会 FY2021–FY2025 各年度业绩新闻稿披露的经营数据">
+      <caption>用户与订单在减少，客单价在上升</caption>
+      <thead><tr><th>年度</th><th>GMV（亿元）</th><th>活跃客户（百万）</th><th>订单总数（百万单）</th><th>每客户年均 GMV（元）</th><th>每单均价（元）</th></tr></thead>
+      <tbody>
+        <tr><td>FY2021</td><td>1,915</td><td>93.9</td><td>786.6</td><td>2,039</td><td>243</td></tr>
+        <tr><td>FY2022</td><td>1,752</td><td>84.1</td><td>739.5</td><td>2,083</td><td>237</td></tr>
+        <tr><td>FY2023</td><td>2,080</td><td>87.4</td><td>812.3</td><td>2,380</td><td>256</td></tr>
+        <tr><td>FY2024</td><td>2,093</td><td>84.7</td><td>757.5</td><td>2,471</td><td>276</td></tr>
+        <tr><td>FY2025</td><td>2,135</td><td>84.8</td><td>732.4</td><td><strong>2,518</strong></td><td><strong>292</strong></td></tr>
+        <tr><td><strong>五年变化</strong></td><td><strong>+11.5%</strong></td><td><strong>−9.7%</strong></td><td><strong>−6.9%</strong></td><td><strong>+23.5%</strong></td><td><strong>+20.0%</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>这张表把唯品会这五年做的事说清楚了：<strong>它主动放弃了一部分用户，换来留下的人贡献更多。</strong>活跃客户少了 910 万，但每个客户的年均 GMV 从 2,039 元升到 2,518 元。公司称之为聚焦「超级 VIP」（SVIP）——高复购、高客单、低补贴敏感度的核心人群。</p>
+
+  <p>问题也在同一张表里：<strong>GMV 增长 11.5% 而营业收入下降 9.5%</strong>。差额来自业务结构——公司在把自营（收入按全额确认）向平台代销（收入只确认佣金）迁移。这会让报表收入变小、毛利率变高，但不等于生意变小。<span class="hl-t">读唯品会的收入线时必须记住这一点，否则会把结构变化误读为衰退。</span></p>
+
+  <h3>1.3 股权结构与治理</h3>
+
+  <p>创始人沈亚（董事长兼 CEO）与洪晓波（副董事长）通过双重股权结构持有 B 类股，拥有超额投票权，实际控制公司。腾讯与京东是 2017 年引入的战略股东。VIE 架构意味着境外上市主体通过协议而非股权控制境内实体——这是所有中概股共同的结构性风险，不是唯品会独有，但必须写在明处。</p>
+</section>
+
+<section class="section" id="m2" aria-labelledby="m2-t">
+  <h2 class="stitle" id="m2-t">模块 2 · 管理层评估<a class="anchor" href="#m2" aria-label="本节链接">#</a></h2>
+
+  <p>沈亚自 2008 年创办至今掌舵，是典型的创始人型 CEO，持有 B 类股并拥有控制权——利益绑定这一项没有疑问。管理层稳定性也强于中概股平均水平。</p>
+
+  <h3>2.1 长期主义测试：他们把钱花在哪</h3>
+
+  <p>判断一个管理层是主人翁还是打工人，最快的办法是看他们怎么处置多余的现金。唯品会这五年的答案非常一致：</p>
+
+  <ul>
+    <li><strong>没有大额并购。</strong>五年里没有一笔改变资产负债表形状的收购。对一家账上躺着 240 亿净现金的公司，克制本身就是能力。</li>
+    <li><strong>资本开支持续下降。</strong>从 FY2023 峰值 ¥52.31 亿降到 FY2025 的 ¥20.67 亿——其中 FY2023 有 ¥30.64 亿是买土地使用权（建仓储/办公），属一次性。剔除后维持性投入常年在 ¥20–27 亿。</li>
+    <li><strong>把钱还给股东，而且是以回购为主。</strong>五年回购 ¥221.11 亿，2024 年起加派现金股息，两年合计 ¥34.80 亿。</li>
+  </ul>
+
+  <h3>2.2 需要打问号的地方</h3>
+
+  <ul>
+    <li><strong>短期借款五年翻了两倍。</strong>¥19.75 亿 → ¥26.87 亿 → ¥14.26 亿 → ¥24.00 亿 → ¥58.45 亿，2026-03-31 进一步升到 ¥65.60 亿。一家净现金 240 亿的公司为什么要借 58 亿短债？公司未在业绩稿中专门解释。合理推测是境内外资金调度与互联网金融业务的周转需要，但<strong>「有净现金」与「无借款」是两件事，这一点本站此前记错过，这次逐行核对了合并资产负债表原文。</strong></li>
+    <li><strong>股权激励费用逐年上升。</strong>¥10.10 亿 → ¥17.31 亿（五年 +71%），而同期收入是下降的。占 Non-GAAP 归母净利的 19.8%，不算低。GAAP 与 Non-GAAP 的差额基本就是这一项。</li>
+    <li><strong>少数股东权益在 FY2025 突然从 ¥15.80 亿跳到 ¥34.38 亿</strong>（+118%），业绩稿未作专门说明。这类跳变通常来自子公司层面的融资或股权变动，需要在 20-F 附注里追，本报告未能证实其具体成因，列为信息盲点。</li>
+  </ul>
+
+  <p><strong>小结：</strong>这是一支纪律良好、不折腾、把股东回报放在优先级前列的管理层。扣分项集中在披露的主动性——短期借款激增与少数股东权益跳变都是读者会问、而公司没有主动答的问题。</p>
+</section>
+
+<section class="section" id="m3" aria-labelledby="m3-t">
+  <h2 class="stitle" id="m3-t">模块 3 · 商业模式深度解析<a class="anchor" href="#m3" aria-label="本节链接">#</a></h2>
+
+  <h3>3.1 海图「一句话测试」</h3>
+
+  <p>唯品会用现金和确定性，从品牌方手里买走他们最头疼的过季库存，再用限时特卖卖给认牌子但不肯付原价的人，赚的是这两端之间的差价。</p>
+
+  <p>这句话能说清楚，说明生意在能力圈之内。真正需要标注的不透明处有两块：<strong>互联网金融业务</strong>（唯品花等消费信贷，与主业的资金在资产负债表上纠缠，也是短期借款上升的可能来源之一）和<strong>自营与平台收入确认口径的迁移节奏</strong>（决定了报表收入线的形状，而公司并未按季披露两者占比）。</p>
+
+  <h3>3.2 单位经济</h3>
+
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="唯品会 2026Q1 与 2025Q1 业绩新闻稿">
+      <caption>每 100 元收入的去向（2026Q1 vs 上年同期）</caption>
+      <thead><tr><th>项目</th><th>2026Q1</th><th>2025Q1</th><th>变化</th></tr></thead>
+      <tbody>
+        <tr><td>营业收入</td><td>100.0</td><td>100.0</td><td>—</td></tr>
+        <tr><td>营业成本</td><td>75.6</td><td>76.9</td><td>−1.3</td></tr>
+        <tr><td><strong>毛利</strong></td><td><strong>24.4</strong></td><td><strong>23.1</strong></td><td><strong>+1.3</strong></td></tr>
+        <tr><td>营业费用合计</td><td>15.0</td><td>14.4</td><td>+0.6</td></tr>
+        <tr><td><strong>营业利润</strong></td><td><strong>9.4</strong></td><td><strong>8.7</strong></td><td><strong>+0.7</strong></td></tr>
+        <tr><td>Non-GAAP 营业利润</td><td>10.2</td><td>10.0</td><td>+0.2</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>毛利率提升 1.3 个百分点是本季最实的一项。<strong>但要注意它有一部分是「口径红利」</strong>——平台代销占比提高会自动抬高毛利率（因为收入只记佣金），并不必然意味着单笔生意更赚钱。真正的检验是营业利润率，它同样提升了 0.7 个百分点，说明改善是真的，只是幅度小于毛利率给人的印象。</p>
+
+  <h3>3.3 产业链位置与议价能力</h3>
+
+  <p>上游是品牌方——服装、鞋履、美妆的过季库存。唯品会对上游的议价能力来自「确定性」：品牌方要的是一次性清掉库存且不冲击正价渠道，唯品会给的是规模化承接和渠道隔离。这个价值在服装行业库存周期越差的时候越高。</p>
+
+  <p>下游是消费者，议价能力体现在<strong>每单均价五年涨了 20%（243 元 → 292 元）而订单量只降了 6.9%</strong>——涨价没有引发同比例的流失。</p>
+
+  <p>资金链条上还有一个常被忽略的优势：<strong>特卖模式先向消费者收钱、后向品牌方付款</strong>。这就是为什么四季度经营现金流能高达 ¥88.94 亿（2024Q4），而全年才 ¥91.29 亿。这是一笔无息的、随规模自动放大的营运资金浮存。</p>
+</section>
+
+<section class="section" id="m4" aria-labelledby="m4-t">
+  <h2 class="stitle" id="m4-t">模块 4 · 经济护城河分析（5 维）<a class="anchor" href="#m4" aria-label="本节链接">#</a></h2>
+
+  <div class="moat-grid">
+    <div class="moat-card none">
+      <h3>网络效应 · 无</h3>
+      <p>买家增多不会让特卖对另一个买家更有价值——反而可能因为库存有限而更差。品牌方多了对买家有价值，但这是「货架宽度」不是网络效应。不要把双边市场自动等同于网络效应。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h3>转换成本 · 窄</h3>
+      <p>换一个购物 App 的成本接近零。唯一的粘性来自 SVIP 会员体系与积累的尺码/偏好数据——这解释了为什么客户数在降而客单价在升：留下的是转换成本相对高的那批人。<strong>但这道墙的高度，正被「客户数五年 −9.7%」这个数字持续检验。</strong></p>
+    </div>
+    <div class="moat-card narrow">
+      <h3>成本优势 · 窄</h3>
+      <p>规模化承接库存带来的采购价优势是真的，自建仓储物流（五年资本开支累计 ¥175.4 亿）也压低了履约成本。但对比阿里、京东、拼多多的体量，唯品会的规模优势只在「特卖」这个细分里成立，出了这个圈就不成立。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h3>无形资产（品牌与品牌方关系）· 窄偏宽</h3>
+      <p>「唯品会 ＝ 正品折扣」在目标人群里是一句清晰的心智标签，这是十几年积累的结果。更硬的资产是与品牌方的长期合作关系与渠道隔离承诺——新进入者可以补贴买用户，但很难在短期内让品牌方相信「把库存给你不会砸掉我的正价盘」。</p>
+    </div>
+    <div class="moat-card none">
+      <h3>有效规模 · 无</h3>
+      <p>折扣零售不是只容得下少数玩家的市场。抖音、快手的直播带货、拼多多的百亿补贴、天猫的官方奥莱，都在做同一件事的不同版本。</p>
+    </div>
+  </div>
+
+  <p><strong>护城河趋势：稳定但在变窄的边缘。</strong>支撑它的是品牌方关系与 SVIP 粘性，侵蚀它的是内容电商对「冲动型折扣消费」的分流。判断十年后会更宽还是更窄，取决于一件可观察的事：<strong>活跃客户数能否止跌。</strong>FY2024 的 8,470 万到 FY2025 的 8,480 万，是五年来第一次没有继续下滑——一个季度的数据不足以下结论，但值得盯住。</p>
+</section>
+
+<section class="section" id="m5" aria-labelledby="m5-t">
+  <h2 class="stitle" id="m5-t">模块 5 · 财务深度分析<a class="anchor" href="#m5" aria-label="本节链接">#</a></h2>
+
+  <h3>5.1 近 8 个季度核心趋势</h3>
+
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="唯品会 2024Q2–2026Q1 各季度业绩新闻稿（均为真单季数，已用四季加总与 20-F 全年数交叉验证）">
+      <caption>单季核心指标（人民币亿元）</caption>
+      <thead>
+        <tr><th>季度</th><th>营业收入</th><th>同比</th><th>营业利润</th><th>Non-GAAP 营业利润率</th><th>归母净利润</th><th>每 ADS（GAAP）</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>2024Q2</td><td>268.75</td><td>−3.6%</td><td>22.32</td><td>9.5%</td><td>19.31</td><td>¥3.49</td></tr>
+        <tr><td>2024Q3</td><td>206.76</td><td>−9.2%</td><td>13.30</td><td>8.2%</td><td>10.45</td><td>¥1.97</td></tr>
+        <tr><td>2024Q4</td><td>332.24</td><td>−4.2%</td><td>28.51</td><td>10.2%</td><td>24.47</td><td>¥4.69</td></tr>
+        <tr><td>2025Q1</td><td>262.69</td><td>−5.0%</td><td>22.77</td><td>10.0%</td><td>19.43</td><td>¥3.72</td></tr>
+        <tr><td>2025Q2</td><td>258.06</td><td>−4.0%</td><td>16.98</td><td>9.3%</td><td>14.90</td><td>¥2.91</td></tr>
+        <tr><td>2025Q3</td><td>213.71</td><td>+3.4%</td><td>12.62</td><td>7.5%</td><td>12.21</td><td>¥2.42</td></tr>
+        <tr><td>2025Q4</td><td>324.74</td><td>−2.3%</td><td>28.99</td><td>10.0%</td><td>25.89</td><td>¥5.12</td></tr>
+        <tr><td><strong>2026Q1</strong></td><td><strong>265.75</strong></td><td><strong>+1.2%</strong></td><td><strong>24.98</strong></td><td><strong>10.2%</strong></td><td><strong>22.06</strong></td><td><strong>¥4.48</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>三件事：<strong>第一，季节性极强</strong>——四季度收入是三季度的 1.5 倍以上，任何单季外推都会出错。<strong>第二，收入同比在 2025Q3 首次转正、2026Q1 再次转正</strong>，连续下滑的趋势出现了裂缝。<strong>第三，Non-GAAP 营业利润率站上 10.2%</strong>，是八个季度里的最高值。</p>
+
+  <h3>5.2 五年关键比率与杜邦拆解</h3>
+
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="唯品会 FY2021–FY2025 20-F，比率为本报告依原始科目计算">
+      <caption>五年比率</caption>
+      <thead><tr><th>指标</th><th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th></tr></thead>
+      <tbody>
+        <tr><td>毛利率</td><td>19.7%</td><td>21.0%</td><td>22.8%</td><td>23.5%</td><td>23.1%</td></tr>
+        <tr><td>营业利润率</td><td>4.8%</td><td>6.0%</td><td>8.1%</td><td>8.5%</td><td>7.7%</td></tr>
+        <tr><td>归母净利率</td><td>4.0%</td><td>6.1%</td><td>7.2%</td><td>7.1%</td><td>6.8%</td></tr>
+        <tr><td>ROE（归母净利／期末归母权益）</td><td>14.3%</td><td>19.2%</td><td>22.0%</td><td>19.4%</td><td>17.7%</td></tr>
+        <tr><td>资产周转率</td><td>1.88</td><td>1.58</td><td>1.56</td><td>1.45</td><td>1.34</td></tr>
+        <tr><td>权益乘数（总资产／归母权益）</td><td>1.91</td><td>2.00</td><td>1.96</td><td>1.87</td><td>1.92</td></tr>
+        <tr><td>应付账款／存货</td><td>1.91</td><td>2.72</td><td>3.06</td><td>3.02</td><td>2.43</td></tr>
+        <tr><td>有息负债／归母权益</td><td>6.1%</td><td>8.2%</td><td>3.9%</td><td>6.0%</td><td><strong>14.3%</strong></td></tr>
+        <tr><td>经营现金流／归母净利</td><td>1.44</td><td>1.67</td><td>1.78</td><td>1.18</td><td>1.03</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>杜邦拆开看：<strong>净利率从 4.0% 升到 6.8% 是唯一的正向驱动</strong>，资产周转率从 1.88 一路降到 1.34（因为资产端积累了大量现金），权益乘数基本没动。ROE 从 22.0% 的峰值回落到 17.7%，回落的原因不是经营变差，而是<strong>账上现金越堆越多、拉低了资产效率</strong>——这本身就是「该把更多钱还给股东」的论据。</p>
+
+  <p>要留意的一行是<strong>经营现金流／归母净利从 1.78 降到 1.03</strong>。这个比值高于 1 说明利润有现金支撑，但连续三年下滑说明营运资金的顺风在减弱——特卖的浮存效应随规模收缩而收缩。</p>
+
+  <h3>5.3 资产负债表健康度</h3>
+
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="cards" data-source="唯品会 FY2025 20-F 合并资产负债表（2025-12-31）与 2026Q1 业绩稿">
+      <caption>逐项列出，不用「零负债」这类笼统说法</caption>
+      <thead><tr><th>项目</th><th>2025-12-31</th><th>五年前（2021-12-31）</th><th>判断</th></tr></thead>
+      <tbody>
+        <tr><td>现金及现金等价物</td><td>¥229.90 亿</td><td>¥162.97 亿</td><td>+41%</td></tr>
+        <tr><td>受限资金</td><td>¥11.33 亿</td><td>¥8.74 亿</td><td>—</td></tr>
+        <tr><td>短期投资</td><td>¥57.77 亿</td><td>¥53.82 亿</td><td>—</td></tr>
+        <tr><td><strong>短期借款</strong></td><td><strong>¥58.45 亿</strong></td><td>¥19.75 亿</td><td><strong>五年 +196%，需持续观察</strong></td></tr>
+        <tr><td><strong>长期借款</strong></td><td><strong>¥0</strong></td><td>¥0</td><td>合并资产负债表五年均无此科目</td></tr>
+        <tr><td>经营租赁负债（流动＋非流动）</td><td>¥6.04 亿</td><td>¥12.37 亿</td><td>持续下降</td></tr>
+        <tr><td><strong>真实净现金</strong></td><td><strong>¥240.55 亿</strong></td><td>¥205.78 亿</td><td>现金类资产 299.00 − 有息负债 58.45</td></tr>
+        <tr><td>存货</td><td>¥51.53 亿</td><td>¥68.65 亿</td><td>−25%，与自营占比下降一致</td></tr>
+        <tr><td>应收账款净额</td><td>¥8.89 亿</td><td>¥4.59 亿</td><td>占营收 0.8%，极低</td></tr>
+        <tr><td>应付账款</td><td>¥125.37 亿</td><td>¥131.45 亿</td><td>是存货的 2.4 倍——供应商在为它垫资</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>应付账款 ¥125.37 亿对存货 ¥51.53 亿，差额 ¥73.84 亿就是那笔无息浮存。这是特卖模式最实在的财务优势，也是它「收入下滑但现金流不塌」的根本原因。</p>
+
+  <h3>5.4 现金流质量与所有者盈余</h3>
+
+  <p><strong>所有者盈余计算（近 12 个月，2025Q2–2026Q1，人民币亿元）：</strong></p>
+
+  <ul>
+    <li>归母净利润（GAAP）　＋75.06</li>
+    <li>折旧与摊销　＋18.09（FY2025 全年口径：物业设备折旧 15.26 ＋无形摊销 0.04 ＋土地使用权摊销 2.79）</li>
+    <li>股权激励费用（非现金）　＋17.31</li>
+    <li>维护性资本开支　−22.00（估算。五年资本开支均值 ¥35.09 亿，但含 FY2023 的 ¥30.64 亿土地一次性支出；剔除后维持性投入常年 ¥20–27 亿，取中值）</li>
+    <li>营运资金净变动　−0.85（TTM 经营现金流 104.42 与「净利＋折旧摊销＋股权激励」110.46 的差额）</li>
+    <li><strong>所有者盈余 ＝ ¥87.61 亿</strong></li>
+  </ul>
+
+  <p>对应<strong>所有者盈余收益率 16.9%</strong>（¥87.61 亿 ÷ 市值 ¥519.5 亿）；<strong>若剔除净现金按企业价值计算，是 31.4%</strong>。交叉验证：TTM 自由现金流 ¥86.17 亿，与所有者盈余在同一量级，两条路径互相印证。</p>
+</section>
+
+<section class="section" id="m6" aria-labelledby="m6-t">
+  <h2 class="stitle" id="m6-t">模块 6 · 电话会分析<a class="anchor" href="#m6" aria-label="本节链接">#</a></h2>
+
+  <p>覆盖 2026Q1（2026-05-21）、2025Q4（2026-02 月）、2025Q3（2025-11 月）三期业绩沟通。</p>
+
+  <div class="ec-item">
+    <span class="ec-badge ec-bull">利好</span>
+    <p><strong>2026Q1 · 关于收入拐点：</strong>管理层将本季收入同比转正归因于 SVIP 用户消费的稳定与服饰品类的回暖。</p>
+    <p>数据支持这个说法：营收 +1.2%、毛利率 +1.3pp、Non-GAAP 营业利润率 10.2% 为八季最高。<strong>这是两年来第一次「量、价、利」三项同时向好的季度</strong>，而不是靠单项改善。</p>
+  </div>
+
+  <div class="ec-item">
+    <span class="ec-badge ec-neut">中性</span>
+    <p><strong>2026Q1 · 关于收入指引：</strong>公司延续了只给下一季度收入区间、不给全年指引的做法。</p>
+    <p>对一家在结构调整期的公司，短指引是合理的。但它也意味着<strong>外部无法验证管理层对全年的判断</strong>，卖方模型分歧因此偏大。这一项既不加分也不减分，属于该公司一贯风格。</p>
+  </div>
+
+  <div class="ec-item">
+    <span class="ec-badge ec-bear">利空</span>
+    <p><strong>持续三期 · 关于活跃客户：</strong>管理层反复强调 SVIP 的贡献占比与复购，但对整体活跃客户数的绝对规模着墨很少。</p>
+    <p>翻译过来就是：<strong>报喜的指标被反复提，报忧的指标被绕过。</strong>活跃客户五年从 9,390 万降到 8,480 万，这是决定这门生意长期天花板的数字，而它在业绩沟通里的权重明显低于 SVIP。</p>
+  </div>
+
+  <div class="ec-item">
+    <span class="ec-badge ec-neut">中性</span>
+    <p><strong>2025Q4 · 关于股东回报：</strong>公司延续「回购为主、股息为辅」的资本返还组合。</p>
+    <p>FY2025 回购 ¥49.41 亿、股息 ¥17.95 亿，合计 ¥67.36 亿，为当年自由现金流 ¥53.88 亿的 <strong>125%</strong>——超出部分动用了账上现金。这个力度可持续，但不能再往上加。</p>
+  </div>
+
+  <h3>6.1 指引兑现度追踪</h3>
+
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="cards" data-source="唯品会各季度业绩新闻稿的下季收入指引与次季实际值">
+      <caption>上季指引 vs 本季实际</caption>
+      <thead><tr><th>指引期</th><th>指引内容</th><th>实际</th><th>兑现</th></tr></thead>
+      <tbody>
+        <tr><td>2025Q3 给出的 2025Q4 指引</td><td>收入同比 −5% 至 0%</td><td>实际 −2.3%</td><td>✅ 落在区间内、偏上沿</td></tr>
+        <tr><td>2025Q4 给出的 2026Q1 指引</td><td>收入同比 −3% 至 +2%</td><td>实际 +1.2%</td><td>✅ 落在区间内、偏上沿</td></tr>
+        <tr><td>2026Q1 给出的 2026Q2 指引</td><td>收入同比持平至小幅增长</td><td>2026-08-18 揭晓</td><td>待验证</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p><strong>信号汇总：</strong>连续两个季度实际值落在指引区间的上沿，说明管理层给指引偏保守，而经营在改善。这是一个正向信号，但样本只有两期，还不足以确立「持续超预期」的模式。</p>
+</section>
+
+<section class="section" id="m7" aria-labelledby="m7-t">
+  <h2 class="stitle" id="m7-t">模块 7 · 多模型估值（8 种方法）<a class="anchor" href="#m7" aria-label="本节链接">#</a></h2>
+
+  <p>估值基准日 2026-08-10，股价 $15.68，市值 ¥519.5 亿（$7.53B），净现金 ¥240.55 亿，企业价值 ¥278.9 亿，摊薄 ADS 约 4.803 亿份，汇率取公司 Q1 2026 期末口径 RMB 6.8980/USD。<strong>以下全部独立推导，最后才与市价对照。</strong></p>
+
+  <h3>7.1 正常化盈利的起点</h3>
+
+  <p>唯品会的利润在结构调整中，不能用单季外推。取 TTM（2025Q2–2026Q1）作为基数：营收 ¥1,062.3 亿、归母净利 ¥75.06 亿、Non-GAAP 归母净利 ¥87.42 亿、自由现金流 ¥86.17 亿、所有者盈余 ¥87.61 亿。</p>
+
+  <p>前瞻假设：收入未来三年年均 <strong>−1%</strong>（结构迁移带来的报表收缩逐步收敛，但用户数下滑仍是拖累），Non-GAAP 营业利润率维持 <strong>9.5%–10%</strong>，股本每年因回购减少 <strong>4%</strong>。据此 FY2027 Non-GAAP 归母净利约 ¥86 亿，每 ADS 约 ¥18.6。</p>
+
+  <h3>7.2 八法明细</h3>
+
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="cards" data-source="本报告基于一手财报数据独立测算">
+      <caption>八种估值方法</caption>
+      <thead><tr><th>方法</th><th>关键假设</th><th>每 ADS 价值</th><th>适用性</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>1. 相对估值（P/E）</strong></td>
+          <td>TTM Non-GAAP 每 ADS ¥17.38 × 8.0 倍。8 倍的依据：一家零增长、13% 股东收益率的公司，隐含总回报约 13%＋0% ≈ 13%，对应合理倍数 7.7–8.5 倍</td>
+          <td>¥139.0 ＝ <strong>$20.16</strong></td>
+          <td>高</td>
+        </tr>
+        <tr>
+          <td><strong>2. DCF（三情景）</strong></td>
+          <td>起点自由现金流 ¥86.17 亿；WACC 12.0%（中概股权益成本：无风险 4.0% ＋ β 1.0 × 风险溢价 6.0% ＋ 中概结构性溢价 2.0%）。基准：前五年 −2%／年，永续 0%</td>
+          <td><strong>$27.25</strong><br>乐观 $33.53／悲观 $22.95</td>
+          <td>中（终值占比 56%）</td>
+        </tr>
+        <tr>
+          <td><strong>3. 所有者盈余收益率</strong></td>
+          <td>所有者盈余 ¥87.61 亿 ÷ 要求收益率 13%，再加回净现金 ¥240.55 亿</td>
+          <td>¥190.4 ＝ <strong>$27.60</strong></td>
+          <td>高</td>
+        </tr>
+        <tr>
+          <td><strong>4. PEG</strong></td>
+          <td>市盈率 6.22 ÷ 预期增速（负）</td>
+          <td>不适用</td>
+          <td><strong>低</strong>——增速为负时 PEG 无定义。此处仅说明一件事：<strong>这家公司不能用成长股的框架估值</strong></td>
+        </tr>
+        <tr>
+          <td><strong>5. DDM（股利折现）</strong></td>
+          <td>FY2025 每 ADS 股息 ¥3.74（¥17.95 亿 ÷ 4.803 亿份），增长 3%，权益成本 13%</td>
+          <td>¥38.5 ＝ <strong>$5.58</strong></td>
+          <td><strong>低</strong>——公司主要靠回购而非分红返还，DDM 只捕捉了 27% 的股东回报，严重低估。列出作为下界参照</td>
+        </tr>
+        <tr>
+          <td><strong>6. NAV / SOTP</strong></td>
+          <td>净现金 ¥240.55 亿 ＋ 核心业务（TTM Non-GAAP 归母净利 ¥87.42 亿 × 6 倍）¥524.5 亿</td>
+          <td>¥159.3 ＝ <strong>$23.09</strong></td>
+          <td><strong>最高</strong>——净现金占市值 46%，分开定价是这家公司最贴切的框架</td>
+        </tr>
+        <tr>
+          <td><strong>7. 反向 DCF</strong></td>
+          <td>倒推现价隐含的增长</td>
+          <td>检验项，见 7.4</td>
+          <td>高</td>
+        </tr>
+        <tr>
+          <td><strong>8. 企业价值／自由现金流</strong></td>
+          <td>TTM 自由现金流 ¥86.17 亿 × 6 倍 ＝ 企业价值 ¥517.0 亿，加回净现金</td>
+          <td>¥157.7 ＝ <strong>$22.87</strong></td>
+          <td>高（不受口径与股本变动干扰）</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>7.2b 其余口径与不适用说明</h3>
+
+  <p>下面四个口径没有进入加权，但必须列出并说明理由——省略它们等于让读者自己去猜为什么没算。</p>
+
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="cards" data-source="本报告基于一手财报数据计算">
+      <caption>未纳入加权的估值口径</caption>
+      <thead><tr><th>口径</th><th>当前值</th><th>适用性判断</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>P/S 市销率</strong></td>
+          <td>0.49×（市值 ¥519.5 亿 ÷ TTM 营收 ¥1,062.3 亿）；剔净现金后企业价值／营收仅 <strong>0.26×</strong></td>
+          <td><strong>低。</strong>唯品会正在把自营收入迁到平台佣金口径，报表营收本身在缩而 GMV 在涨——分母不稳定，市销率会系统性地把这家公司显得比实际更便宜。仅作横向参照。</td>
+        </tr>
+        <tr>
+          <td><strong>P/B 市净率</strong></td>
+          <td>1.27×（归母权益 ¥410.05 亿，2025-12-31）</td>
+          <td><strong>中。</strong>与银行、地产不同，电商的账面价值不代表盈利能力。但这里有个特殊之处值得一提：权益 ¥410.05 亿里有 <strong>¥240.55 亿是净现金</strong>，即市净率的分母有 59% 是现金，所以 1.27× 的实际含义接近「花 1.27 元买 0.59 元现金加一门每年赚 0.21 元的生意」。</td>
+        </tr>
+        <tr>
+          <td><strong>EV/EBITDA</strong></td>
+          <td><strong>2.74×</strong>（企业价值 ¥278.9 亿 ÷ TTM EBITDA ¥101.66 亿＝营业利润 83.57 ＋折旧摊销 18.09）</td>
+          <td><strong>高，但与方法 8 高度重叠。</strong>2.74 倍在全球零售业里属极端低位（同业普遍 6–12 倍）。未单独加权是因为它与「企业价值／自由现金流」测的是同一件事，且 EBITDA 忽略了资本开支——而唯品会资本开支只占营收 1.6%，两者结论几乎一致。</td>
+        </tr>
+        <tr>
+          <td><strong>FCF 收益率</strong></td>
+          <td>对市值 <strong>16.6%</strong>；对企业价值 <strong>30.9%</strong>（TTM FCF ¥86.17 亿）</td>
+          <td><strong>高，已通过方法 8 纳入加权。</strong>此处单列是为了给出另一个角度的下界：若要求 12% 的 FCF 收益率（与本报告 DCF 所用的 WACC 一致），对应股权价值 ¥958.6 亿 ＝ 每 ADS <strong>$28.93</strong>——高于加权公允值，说明加权结果是偏保守的。</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>7.3 P/E 多档透视</h3>
+
+  <p>唯品会的 GAAP 与 Non-GAAP 差 16.5%（股权激励），且季度利润波动大——按海图规范触发多档透视：</p>
+
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="cards" data-source="本报告测算，基数见 7.1">
+      <caption>六档市盈率，哪一档最可信</caption>
+      <thead><tr><th>口径</th><th>倍数</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td>TTM GAAP</td><td>7.24×</td><td>含股权激励，最保守</td></tr>
+        <tr><td>TTM Non-GAAP</td><td>6.22×</td><td>剔除股权激励，公司主推口径</td></tr>
+        <tr><td>2026Q1 年化</td><td>6.06×</td><td>单季 ×4，<strong>但一季度不是旺季，此档失真</strong></td></tr>
+        <tr><td>Forward 共识</td><td>5.89×</td><td>卖方对 FY2026 的一致预期</td></tr>
+        <tr><td><strong>核心业务（剔净现金，GAAP）</strong></td><td><strong>3.72×</strong></td><td rowspan="2"><strong>这两档最可信。</strong>净现金占市值 46%，不剔除就等于让现金按 7 倍市盈率计价——而现金的合理倍数是 1 倍</td></tr>
+        <tr><td><strong>核心业务（剔净现金，Non-GAAP）</strong></td><td><strong>3.19×</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>7.4 反向 DCF：现价在为什么定价</h3>
+
+  <p>把 WACC 固定在 12%、永续增长 0%、起点自由现金流 ¥86.17 亿，倒推当前 ¥278.9 亿的企业价值隐含多少增速：</p>
+
+  <p><strong>答案是每年 −22.3%，持续五年。</strong>也就是说，现价假设唯品会的自由现金流在五年内萎缩到今天的三成，之后永远维持在那个水平。而实际情况是：TTM 自由现金流 ¥86.17 亿，比 FY2025 全年的 ¥53.88 亿高出 60%；收入同比刚刚由负转正；资本开支已降到营收的 1.6%。<span class="hl-t">市场为这门生意定的价，比它自己正在证明的事实悲观得多。</span></p>
+
+  <h3>7.5 加权汇总</h3>
+
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="本报告测算">
+      <caption>八法汇总与加权</caption>
+      <thead><tr><th>方法</th><th>每 ADS（美元）</th><th>权重</th><th>加权贡献</th></tr></thead>
+      <tbody>
+        <tr><td>NAV / SOTP 分部加总</td><td>23.09</td><td>28%</td><td>6.47</td></tr>
+        <tr><td>所有者盈余收益率</td><td>27.60</td><td>18%</td><td>4.97</td></tr>
+        <tr><td>企业价值／自由现金流</td><td>22.87</td><td>18%</td><td>4.12</td></tr>
+        <tr><td>相对估值 P/E</td><td>20.16</td><td>18%</td><td>3.63</td></tr>
+        <tr><td>DCF 基准情景</td><td>27.25</td><td>13%</td><td>3.54</td></tr>
+        <tr><td>DDM</td><td>5.58</td><td>5%</td><td>0.28</td></tr>
+        <tr><td>PEG</td><td>不适用</td><td>0%</td><td>—</td></tr>
+        <tr><td>反向 DCF</td><td>检验项</td><td>0%</td><td>—</td></tr>
+        <tr><td><strong>六法中位数</strong></td><td colspan="3"><strong>$22.98</strong></td></tr>
+        <tr><td><strong>加权公允价值</strong></td><td colspan="3"><strong>$23.00</strong></td></tr>
+        <tr><td><strong>现价 $15.68</strong></td><td colspan="3"><strong>较加权公允低 31.8%，安全边际 31.8%</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>7.6 建仓阶梯</h3>
+
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="中位数 $22.98 × 80%／70%／60%">
+      <caption>纪律价位</caption>
+      <thead><tr><th>档位</th><th>价格</th><th>较现价</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td>首仓（中位数 × 80%）</td><td><strong>$18.38</strong></td><td>+17.2%</td><td><strong>现价已低于首仓价，当前即可建仓</strong></td></tr>
+        <tr><td>二仓（× 70%）</td><td>$16.09</td><td>+2.6%</td><td>现价已低于此档</td></tr>
+        <tr><td>三仓（× 60%）</td><td>$13.79</td><td>−12.1%</td><td>接近 52 周低点 $12.65，若回落至此可加满</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="note">这是本站少见的情形：<strong>现价已经低于三档建仓阶梯里的前两档。</strong>按纪律，首仓与二仓可以同时建立，三仓留给可能出现的进一步回落。</p>
+</section>
+
+<section class="section" id="m8" aria-labelledby="m8-t">
+  <h2 class="stitle" id="m8-t">模块 8 · 竞争与行业分析<a class="anchor" href="#m8" aria-label="本节链接">#</a></h2>
+
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="cards" data-source="各公司公开财报与业绩公告；唯品会数据为 FY2025">
+      <caption>折扣零售赛道的对手</caption>
+      <thead><tr><th>对手</th><th>切入方式</th><th>对唯品会的威胁</th></tr></thead>
+      <tbody>
+        <tr><td>拼多多</td><td>百亿补贴＋极致低价，覆盖全品类</td><td><strong>高。</strong>在「便宜」这个心智上更强，但在「正品牌折扣」上弱于唯品会</td></tr>
+        <tr><td>抖音／快手电商</td><td>直播带货，天然适配冲动型折扣消费</td><td><strong>高。</strong>直接分流唯品会最核心的场景，且品牌方越来越愿意自播清库存</td></tr>
+        <tr><td>天猫官方奥莱／京东奥莱</td><td>平台内设折扣频道</td><td>中。背靠大平台流量，但折扣心智不如唯品会纯粹</td></tr>
+        <tr><td>奥特莱斯线下渠道</td><td>实体折扣商圈</td><td>中低。唯品会自身也通过杉杉奥莱布局线下</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>8.1 波特五力</h3>
+
+  <ul>
+    <li><strong>新进入者威胁 · 中。</strong>做一个折扣频道很容易，建立品牌方信任很难。壁垒在供给侧不在需求侧。</li>
+    <li><strong>供应商（品牌方）议价力 · 中。</strong>品牌方可以选择自播、奥莱、其他平台，但唯品会提供的「一次性大批量＋渠道隔离」仍难被完全替代。</li>
+    <li><strong>买方议价力 · 高。</strong>消费者零转换成本，比价工具充分。</li>
+    <li><strong>替代品威胁 · 高。</strong>直播带货是同一需求的不同满足方式，且正在快速侵蚀。</li>
+    <li><strong>同业竞争 · 高。</strong>所有大平台都有折扣业务。</li>
+  </ul>
+
+  <h3>8.2 行业逆风与顺风</h3>
+
+  <p><strong>逆风：</strong>中国服装零售整体增速放缓，消费者对价格更敏感但也更分散；内容电商持续吸走注意力。</p>
+
+  <p><strong>顺风（且常被忽略）：</strong>服装行业库存周期越差，唯品会的价值越高。当品牌方库存压力上升时，它们更愿意接受唯品会的折扣与账期条件。<strong>这让唯品会带有一定的逆周期属性</strong>——这也是它在收入下滑的同时毛利率还能提升的原因之一。</p>
+</section>
+
+<section class="section" id="m9" aria-labelledby="m9-t">
+  <h2 class="stitle" id="m9-t">模块 9 · 技术面与 K 线分析<a class="anchor" href="#m9" aria-label="本节链接">#</a></h2>
+
+  <p class="note">技术面是补充，次要于基本面。以下数据截至 2026-08-10。</p>
+
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="stockanalysis.com NYSE:VIPS 行情页，2026-08-10">
+      <caption>技术指标</caption>
+      <thead><tr><th>指标</th><th>数值</th><th>解读</th></tr></thead>
+      <tbody>
+        <tr><td>收盘价</td><td>$15.68</td><td>—</td></tr>
+        <tr><td>52 周区间</td><td>$12.65 – $21.08</td><td>距高点 −25.6%，距低点 +23.9%</td></tr>
+        <tr><td>Beta</td><td>0.66</td><td>低于大盘波动</td></tr>
+        <tr><td>卖方共识</td><td>买入</td><td>目标价 $18.38（+17.9%）</td></tr>
+        <tr><td>成交量</td><td>56.7 万股</td><td>流动性一般，注意冲击成本</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p><strong>形态判断：</strong>股价在 $12.65–$21.08 的区间内震荡了整整一年，当前处于区间中枢略偏下。<strong>值得注意的是卖方共识目标价 $18.38 恰好等于本报告算出的首仓价</strong>——街上给的是「回到区间上沿」，本报告给的是「这门生意本身值多少」，两者路径不同而落点接近。</p>
+
+  <p><strong>关键价位：</strong>支撑看 $12.65（52 周低点）；阻力看 $18.38（卖方共识与区间上沿）与 $21.08（52 周高点）。<strong>但 8 月 18 日的 Q2 财报会让技术形态失效</strong>——那才是真正的变量。</p>
+</section>
+
+<section class="section" id="m10" aria-labelledby="m10-t">
+  <h2 class="stitle" id="m10-t">模块 10 · 增长催化剂与前景展望<a class="anchor" href="#m10" aria-label="本节链接">#</a></h2>
+
+  <h3>10.1 未来 6 个月的催化剂</h3>
+
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="cards" data-source="唯品会业绩日历与公司公告">
+      <caption>短期催化剂</caption>
+      <thead><tr><th>时间</th><th>事件</th><th>方向</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td><strong>2026-08-18</strong></td><td><strong>Q2 2026 财报</strong></td><td>双向，最关键</td><td>验证收入转正是否延续。指引为「持平至小幅增长」</td></tr>
+        <tr><td>2026 Q4</td><td>年末特卖旺季</td><td>正面</td><td>四季度贡献全年大部分自由现金流，是现金流的确认时点</td></tr>
+        <tr><td>持续</td><td>回购执行</td><td>正面</td><td>股价越低、同样金额回购的股数越多——低位回购是这家公司当前最确定的价值创造路径</td></tr>
+        <tr><td>2027 Q1</td><td>FY2026 全年业绩与新一年股息决议</td><td>双向</td><td>观察股息是否延续增长</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>10.2 三到五年展望</h3>
+
+  <p>把唯品会未来三到五年拆成三个可验证的问题：</p>
+
+  <ul>
+    <li><strong>活跃客户能不能止跌？</strong>FY2025 的 8,480 万相对 FY2024 的 8,470 万基本持平，是五年来第一次没有下滑。若能稳住，收入线就有支撑；若继续下滑，利润率再高也只是延缓。</li>
+    <li><strong>毛利率还有多少空间？</strong>从 19.7% 提到 23.1% 用了四年，继续提升的空间来自平台化占比，但边际递减。合理假设是维持在 23%–24%。</li>
+    <li><strong>回购还能持续多久？</strong>净现金 ¥240.55 亿，按 FY2025 的 ¥49.41 亿年回购速度可支撑约 5 年（且这还没算每年新增的 ¥50–86 亿自由现金流）。<strong>这是这家公司最硬的确定性。</strong></li>
+  </ul>
+
+  <h3>10.3 最大的单一变量</h3>
+
+  <p>不是收入增速，是<strong>股本收缩的速度能否跑赢收入下滑的速度</strong>。过去五年的答案是压倒性的「能」——收入 −9.5%，股本 −26.2%，每 ADS 收益 +97%。只要这个剪刀差还在，即便生意本身不增长，每股价值仍会上升。<span class="hl-t">这是一种把「不增长」变成「每股增长」的算术，而它的燃料是现金，不是故事。</span></p>
+</section>
+
+<section class="section" id="m11" aria-labelledby="m11-t">
+  <h2 class="stitle" id="m11-t">模块 11 · 风险矩阵<a class="anchor" href="#m11" aria-label="本节链接">#</a></h2>
+
+  <div class="risk-grid">
+    <div class="risk-card r4">
+      <h3>竞争与用户流失风险 · 4／5 · <strong>较高</strong></h3>
+      <p>活跃客户五年 −9.7%（9,390 万 → 8,480 万），订单 −6.9%。内容电商对折扣消费场景的分流是结构性的、不可逆的。目前靠客单价上升对冲，但客单价不可能无限上升——每单均价已从 243 元涨到 292 元（+20%）。</p>
+    </div>
+    <div class="risk-card r4">
+      <h3>监管与结构风险 · 4／5 · <strong>较高</strong></h3>
+      <p>VIE 架构、中概股审计监管（HFCAA）、潜在的 ADR 退市风险，以及中国境内对平台经济、消费信贷的监管。这些风险不因公司经营好坏而改变，是<strong>估值折价的主要来源</strong>——也是市场只给 3.7 倍核心市盈率的原因之一。</p>
+    </div>
+    <div class="risk-card r3">
+      <h3>经营风险 · 3／5 · <strong>中</strong></h3>
+      <p>收入连续下滑虽已出现裂缝，但仍未确立回升趋势。经营现金流／净利从 1.78 降到 1.03，营运资金浮存的顺风在减弱。季节性极强，任何单季外推都危险。</p>
+    </div>
+    <div class="risk-card r2">
+      <h3>财务风险 · 2／5 · <strong>偏低</strong></h3>
+      <p>净现金 ¥240.55 亿、无长期借款、应付账款是存货的 2.43 倍。唯一需要跟踪的是短期借款五年 +196%（¥19.75 亿 → ¥58.45 亿，2026-03-31 进一步到 ¥65.60 亿），公司未作专门解释。</p>
+    </div>
+    <div class="risk-card r3">
+      <h3>估值风险 · 3／5 · <strong>中</strong></h3>
+      <p>安全边际 31.8% 看似充足，但「便宜」已经持续了很久——低估值可能长期不修复。<strong>价值实现的路径主要靠回购而非重估</strong>，这意味着需要时间和耐心，而不是催化剂。</p>
+    </div>
+    <div class="risk-card r2">
+      <h3>宏观风险 · 2／5 · <strong>偏低</strong></h3>
+      <p>Beta 0.66。业务全部在中国境内，受中国消费景气影响，但折扣零售在消费降级环境中相对受益，具备一定逆周期属性。</p>
+    </div>
+  </div>
+
+  <h3>11.1 黑天鹅情景</h3>
+
+  <ul>
+    <li><strong>情景一：ADR 被迫退市。</strong>若中美审计监管合作破裂，中概股面临强制退市。唯品会没有港股第二上市，这意味着美股持有人可能面临流动性断裂与转换成本。这是<strong>唯品会相对阿里、京东、拼多多等已在港二次上市的中概股的独有短板</strong>，也是本报告在估值中保留 2% 中概结构性溢价的原因。</li>
+    <li><strong>情景二：品牌方集体转向自播清库存。</strong>唯品会的核心供给来自品牌方对「渠道隔离」的需求。若直播电商的分层能力成熟到品牌方可以自己精准触达折扣人群而不伤正价盘，唯品会的存在理由会被直接削弱。这不是价格战，是<strong>中介价值的消失</strong>。</li>
+    <li><strong>情景三：互联网金融业务出现资产质量问题。</strong>资产负债表上的短期借款五年增长近两倍，而公司从未在业绩沟通中拆解过金融业务的资产质量与拨备。若消费信贷不良率上升，损失会先体现在这条看不清的线上。这是本报告最大的信息盲点。</li>
+  </ul>
+</section>
+
+<section class="section" id="m12" aria-labelledby="m12-t">
+  <h2 class="stitle" id="m12-t">模块 12 · 股东回报分析<a class="anchor" href="#m12" aria-label="本节链接">#</a></h2>
+
+  <h3>12.1 公司给了股东多少？</h3>
+
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="唯品会 FY2023–FY2025 合并现金流量表的「回购普通股」与「支付股息」原始行项目">
+      <caption>近三年股东回报全景（人民币亿元）</caption>
+      <thead>
+        <tr><th>年度</th><th>现金股息</th><th>回购金额</th><th>股东总回报</th><th>占归母净利</th><th>占自由现金流</th><th>摊薄 ADS 变化</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>FY2023</td><td>—</td><td>51.07</td><td>51.07</td><td>62.9%</td><td>55.6%</td><td>−12.2%</td></tr>
+        <tr><td>FY2024</td><td>16.85</td><td>38.66</td><td>55.51</td><td>71.7%</td><td>99.7%</td><td>−4.2%</td></tr>
+        <tr><td>FY2025</td><td>17.95</td><td>49.41</td><td><strong>67.36</strong></td><td><strong>93.0%</strong></td><td><strong>125.0%</strong></td><td>−5.1%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p><strong>近 12 个月股东收益率：</strong>FY2025 的 ¥67.36 亿 ÷ 当前市值 ¥519.5 亿 ＝ <strong>13.0%</strong>。在全球零售股里，这是第一梯队的数字。</p>
+
+  <h3>12.2 给的方式好不好？</h3>
+
+  <p><strong>第一问：回购的股份注销了吗？</strong>唯品会是开曼注册的美股 ADR 发行人，回购的普通股按开曼公司法与公司章程处理。<strong>关键的检验不在法律形式，而在摊薄股数是否真的下降</strong>——这一点数据给得很干脆：</p>
+
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="唯品会各年度业绩新闻稿与 20-F 的每股收益附注">
+      <caption>摊薄股数三年趋势（硬指标）</caption>
+      <thead><tr><th>年度</th><th>加权摊薄 ADS（亿份）</th><th>同比</th><th>当年股权激励费用（亿元）</th><th>回购是否被激励抵消</th></tr></thead>
+      <tbody>
+        <tr><td>FY2023</td><td>5.628</td><td>−12.2%</td><td>15.10</td><td>否，净减少 12.2%</td></tr>
+        <tr><td>FY2024</td><td>5.393</td><td>−4.2%</td><td>15.38</td><td>否，净减少 4.2%</td></tr>
+        <tr><td>FY2025</td><td>5.119</td><td>−5.1%</td><td>17.31</td><td>否，净减少 5.1%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>三年累计缩股 <strong>−20.1%</strong>，同期股权激励费用累计 ¥47.79 亿。<strong>回购没有被激励稀释吃掉，而是实打实地减少了股本</strong>——这是含金量的核心证据，比任何法律形式的表述都硬。</p>
+
+  <p><strong>第二问：回购的时机好吗？</strong>回购金额与股价的关系：FY2022 股价低迷时回购 ¥62.58 亿（五年最高）、FY2024 股价相对高时回购降到 ¥38.66 亿、FY2025 股价再度回落时回购升到 ¥49.41 亿。<strong>这个节奏与股价呈明显的负相关——低买多、高买少，是有纪律的择时。</strong></p>
+
+  <p><strong>第三问：股权激励占比合理吗？</strong>FY2025 股权激励 ¥17.31 亿，占 Non-GAAP 归母净利 19.8%、占营收 1.6%。对一家互联网公司不算高，但五年 +71% 而收入下降，趋势值得盯。</p>
+
+  <h3>12.3 能不能继续给、给多少？</h3>
+
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="本报告依各年度现金流量表计算">
+      <caption>股东回报的现金覆盖度</caption>
+      <thead><tr><th>年度</th><th>自由现金流</th><th>股息＋回购</th><th>覆盖度</th><th>净现金变化</th></tr></thead>
+      <tbody>
+        <tr><td>FY2023</td><td>91.84</td><td>51.07</td><td>56%</td><td>上升</td></tr>
+        <tr><td>FY2024</td><td>55.66</td><td>55.51</td><td>100%</td><td>基本持平</td></tr>
+        <tr><td>FY2025</td><td>53.88</td><td>67.36</td><td><strong>125%</strong></td><td>下降</td></tr>
+        <tr><td>近 12 个月</td><td>86.17</td><td>67.36（按 FY2025）</td><td>78%</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>FY2025 的 125% 是靠动用账上现金完成的，单看这一年不可持续。但把镜头拉远：<strong>TTM 自由现金流已回升到 ¥86.17 亿，覆盖度回到 78%</strong>；且净现金还有 ¥240.55 亿的缓冲。按 FY2025 的回报力度，这个组合可以维持至少五年而不动摇资产负债表。</p>
+
+  <p><strong>股息政策：</strong>公司自 FY2024 起开始派发年度现金股息，两年分别为 ¥16.85 亿与 ¥17.95 亿（+6.5%）。没有承诺固定派息率，属于「回购为主、股息为辅」的组合。资本返还优先级明确：先回购，再分红，不做大额并购。</p>
+
+  <p><strong>模块小结：<span class="hl-t">积极且高含金量——回购真实缩股、择时有纪律、且未被股权激励抵消</span></strong>。13.0% 的股东收益率在全球零售股中属第一梯队，三年累计缩股 20.2% 是硬证据；唯一的约束是 FY2025 的回报已达自由现金流的 125%，力度上不能再加，但凭 ¥240.55 亿净现金与回升中的自由现金流，维持当前节奏毫无压力。</p>
+</section>
+
+<section class="section" id="m13" aria-labelledby="m13-t">
+  <h2 class="stitle" id="m13-t">模块 13 · 海图评分卡 + 投资决策<a class="anchor" href="#m13" aria-label="本节链接">#</a></h2>
+
+  <div class="scorecard">
+    <div class="score-grid">
+      <div class="score-card">
+        <div class="score-letter s-b">B</div>
+        <h3>生意可预测性</h3>
+        <p>一句话说得清：用现金从品牌方买走过季库存，再折价卖给认牌子的人。五年利润波动小、季节性规律稳定。扣分在收入线受「自营转平台」的口径迁移干扰，外部难以拆解真实业务量。</p>
+      </div>
+      <div class="score-card">
+        <div class="score-letter s-bp">B−</div>
+        <h3>经济护城河</h3>
+        <p>品牌方关系与渠道隔离承诺是真壁垒，SVIP 粘性支撑客单价五年 +20%。但网络效应无、有效规模无、转换成本窄，而活跃客户五年 −9.7% 说明外围正在被内容电商侵蚀。</p>
+      </div>
+      <div class="score-card">
+        <div class="score-letter s-bp">B+</div>
+        <h3>管理层质量</h3>
+        <p>创始人掌舵、持股绑定、不做大额并购、资本开支持续压缩、把钱以回购为主还给股东且择时有纪律。扣分在披露主动性——短期借款五年 +196%、少数股东权益单年 +118%，都没有主动解释。</p>
+      </div>
+      <div class="score-card">
+        <div class="score-letter s-bp">B+</div>
+        <h3>财务质量</h3>
+        <p>净现金 ¥240.55 亿、无长期借款、经营现金流／净利 1.03、资本开支仅占营收 1.6%、应付账款是存货的 2.4 倍。ROE 17.7% 且是靠净利率而非杠杆驱动。</p>
+      </div>
+      <div class="score-card">
+        <div class="score-letter s-a">A</div>
+        <h3>资本配置纪律</h3>
+        <p>五年回购 ¥221.11 亿＋股息 ¥34.80 亿 ＝ 当前市值的 49%；三年缩股 20.1% 且未被股权激励抵消；回购金额与股价呈负相关（低买多、高买少）；五年零并购。这一维是这家公司最强的一项。</p>
+      </div>
+      <div class="score-card">
+        <div class="score-letter s-a">A</div>
+        <h3>估值与安全边际</h3>
+        <p>加权公允 $23.00，现价 $15.68，安全边际 31.8%。核心业务市盈率 3.72×、企业价值口径自由现金流收益率 30.9%。反向 DCF 显示现价隐含自由现金流未来五年年均 −22.3%。</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>13.1 红旗排查</h3>
+
+  <div class="flag-row">
+    <p><strong>⚠️ 关注 · 短期借款五年增长 196%，公司未作解释。</strong>¥19.75 亿 → ¥58.45 亿（2026-03-31 进一步到 ¥65.60 亿），而同期账上净现金充裕。合理推测与互联网金融业务周转和境内外资金调度有关，但公司从未在业绩沟通中说明。<strong>这不构成会计红旗，但构成披露透明度的扣分项，且是本报告最大的信息盲点。</strong></p>
+  </div>
+  <div class="flag-row">
+    <p><strong>⚠️ 关注 · 少数股东权益单年 +118%。</strong>FY2025 从 ¥15.80 亿跳到 ¥34.38 亿，业绩稿未专门说明成因。本报告未能证实其来源，列为待查项。</p>
+  </div>
+  <div class="flag-row">
+    <p><strong>✅ 未触发 · 商誉与减值。</strong>五年内无重大商誉减值，无大额一次性项目扭曲利润。GAAP 与 Non-GAAP 的差额基本就是股权激励一项，调整项干净。</p>
+  </div>
+  <div class="flag-row">
+    <p><strong>✅ 未触发 · 收入确认与关联交易。</strong>自营与平台的收入确认口径符合 US GAAP，德勤（香港）出具审计意见。腾讯、京东为战略股东，未见异常关联交易。</p>
+  </div>
+  <div class="flag-row">
+    <p><strong>✅ 未触发 · 股权激励比例。</strong>占 Non-GAAP 归母净利 19.8%、占营收 1.6%，且回购力度足以覆盖其稀释——三年摊薄股数净减 20.1% 是硬证据。</p>
+  </div>
+
+  <p><strong>两项「关注」均属披露透明度而非会计质量，不触发强制降级。</strong>但它们解释了为什么本报告在估值中保留了 2% 的中概结构性溢价，也是把评级定在「买入」而非「强力买入」的原因。</p>
+
+  <h3>13.2 投资决策</h3>
+
+  <div class="verdict">
+    <div class="verdict-t">
+      评级：<span class="rating-badge" data-rating="买入">买入</span>
+      · 12 个月目标价 <strong>$21.00</strong>（+33.9%）· 建议仓位 <strong>4%–6%</strong>
+    </div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="cards" data-source="本报告测算">
+      <caption>12 个月三情景目标价</caption>
+      <thead><tr><th>情景</th><th>概率</th><th>目标价</th><th>触发条件</th></tr></thead>
+      <tbody>
+        <tr><td>乐观</td><td>25%</td><td>$28.00</td><td>Q2 收入延续正增长且活跃客户止跌 ＋ 回购力度维持 ＋ 中概估值折价收窄</td></tr>
+        <tr><td>基准</td><td>50%</td><td>$21.00</td><td>收入基本持平、利润率维持 9.5%–10%、回购按 FY2025 节奏继续，估值向核心 5 倍靠拢</td></tr>
+        <tr><td>悲观</td><td>25%</td><td>$14.00</td><td>收入重回下滑且活跃客户继续流失 ＋ 中概监管环境恶化</td></tr>
+        <tr><td><strong>概率加权</strong></td><td>—</td><td><strong>$21.00</strong></td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p><strong>分批建仓：</strong>首仓 $18.38、二仓 $16.09、三仓 $13.79（中位数 $22.98 × 80%／70%／60%）。<strong>现价 $15.68 已低于首仓与二仓两档</strong>——按纪律，这两档可以同时建立，三仓留给可能的进一步回落。</p>
+
+  <p><strong>止盈策略（不设止损）：</strong>$23.00 减 1／3、$27.00 再减 1／3、$32.00 清仓。对应核心业务市盈率分别约 6.0×、7.5×、9.5×——即使到第三档，这门生意也谈不上贵。</p>
+
+  <p><strong>仓位管理：</strong>建议占组合 4%–6%。上限受两件事约束：中概股结构性风险不可分散，以及价值实现主要靠回购而非重估、需要时间。<strong>持有周期建议 2–3 年</strong>，因为这是「靠股本收缩兑现价值」的标的，一年太短。</p>
+
+  <h3>13.3 关键监控指标</h3>
+
+  <ul>
+    <li><strong>活跃客户数是否止跌</strong>——决定这门生意长期天花板的唯一数字，FY2025 已首次基本持平</li>
+    <li><strong>收入同比能否连续两个季度为正</strong>——2025Q3 与 2026Q1 已转正，需要连续性</li>
+    <li><strong>摊薄 ADS 份数的季度变化</strong>——回购是价值实现的主路径，缩股停下来则逻辑失效</li>
+    <li><strong>Non-GAAP 营业利润率能否守住 9.5% 以上</strong></li>
+    <li><strong>短期借款余额</strong>——五年 +196%，若继续快速上升需要公司给出解释</li>
+    <li><strong>经营现金流／净利比值</strong>——已从 1.78 降到 1.03，跌破 1 说明浮存优势消失</li>
+    <li><strong>中概股监管进展</strong>——HFCAA 审计合作状态、是否启动港股第二上市</li>
+  </ul>
+
+  <h3>13.4 事件时间表</h3>
+
+  <div class="tbl-wrap">
+    <table class="tbl" data-shape="grid" data-source="唯品会业绩日历">
+      <caption>接下来的关键日期</caption>
+      <thead><tr><th>日期</th><th>事件</th></tr></thead>
+      <tbody>
+        <tr><td><strong>2026-08-18</strong></td><td><strong>Q2 2026 财报</strong>——验证收入转正的持续性</td></tr>
+        <tr><td>2026 年 11 月</td><td>Q3 2026 财报</td></tr>
+        <tr><td>2026 年 11–12 月</td><td>年末特卖旺季，现金流确认时点</td></tr>
+        <tr><td>2027 年 2–3 月</td><td>FY2026 全年业绩 ＋ 新一年股息与回购决议</td></tr>
+        <tr><td>2027 年 4 月</td><td>FY2026 年报（20-F）报送</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p><strong>下一个重新审视的时点：2026-08-18 Q2 财报。</strong>三件事要看：收入同比是否连续为正、活跃客户数是否守住 8,400 万、回购是否按节奏执行。</p>
+</section>
+
+<section class="section" id="essay" aria-labelledby="essay-t">
+  <h2 class="stitle sr-only" id="essay-t">海图夜读手记<a class="anchor" href="#essay" aria-label="本节链接">#</a></h2>
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p><strong>一家公司五年里营收缩了 9.5%，利润却涨了 55%，每股收益涨了 97%。市场给它的定价是 7.2 倍市盈率——而它市值的 46% 是净现金。</strong></p>
+
+      <p>唯品会（NYSE：VIPS）做的事很简单：用现金和确定性，从品牌方手里买走他们最头疼的过季库存，再用限时特卖卖给认牌子但不肯付原价的人，赚这两端的差价。这句话能说清楚，说明它在能力圈之内。</p>
+
+      <p><strong>第一件事：7.2 倍里有一半是现金。</strong>按 2025-12-31 经审计的资产负债表，现金 ¥229.90 亿＋受限 ¥11.33 亿＋短投 ¥57.77 亿＝¥299.00 亿，减短期借款 ¥58.45 亿——<strong>长期借款五年都没有这个科目</strong>——净现金 <strong>¥240.55 亿</strong>，而市值 ¥519.5 亿。剔掉现金，市场给这门生意的定价是企业价值 ¥278.9 亿，对应<strong>核心业务市盈率 3.72 倍（Non-GAAP 3.19 倍）、企业价值口径的自由现金流收益率 30.9%</strong>。按这个速度，这门生意三年多就能用自己赚的现金把自己买下来一遍。</p>
+
+      <p><strong>第二件事：收入在缩，利润在涨，靠的是主动收缩。</strong>营收 ¥1,170.60 亿 → ¥1,059.20 亿（−9.5%），营业利润率 4.8% → 7.7%，归母净利 ¥46.81 亿 → ¥72.42 亿（+54.7%）。原因有两层：一层是砍掉低毛利自营、把收入口径从全额确认迁到佣金确认——所以 <strong>GMV 反而涨了 11.5%（1,915 亿 → 2,135 亿）</strong>；另一层是真的变精细了，营业利润率的提升幅度小于毛利率，但方向一致。<span class="hl-t">读唯品会的收入线，必须先分清哪一部分是口径、哪一部分是衰退。</span></p>
+
+      <p><strong>第三件事：每股收益涨 97%，一半是回购给的。</strong>加权摊薄 ADS 从 6.937 亿份降到 5.119 亿份，<strong>五年 −26.2%</strong>。五年回购 ¥221.11 亿、股息 ¥34.80 亿，合计 <strong>¥255.9 亿 ＝ 今天全部市值的 49%</strong>。而且回购没有被股权激励吃掉——三年摊薄股数净减 20.1%，同期股权激励费用累计 ¥47.79 亿，硬碰硬地缩了。择时也有纪律：股价低的年份回购多，高的年份回购少。</p>
+
+      <p><strong>第四件事，也是要泼的冷水：用户在流失。</strong>活跃客户 9,390 万 → 8,480 万（−9.7%），订单 7.866 亿单 → 7.324 亿单（−6.9%）。撑住 GMV 的是留下来的人买得更贵——每单均价从 243 元涨到 292 元。这条路走得通，但走不远：客单价不可能无限上升，而抖音、快手的直播带货正在结构性地分流「冲动型折扣消费」这个场景。<strong>FY2025 活跃客户 8,480 万相对上年的 8,470 万首次没有继续下滑</strong>，是五年来第一个值得盯的正面信号，但一年不算趋势。</p>
+
+      <p>还有两件公司没说清的事。<strong>短期借款五年涨了近两倍</strong>——¥19.75 亿 → ¥58.45 亿，2026 年 3 月末进一步到 ¥65.60 亿——一家净现金 240 亿的公司为什么要借这么多短债，业绩沟通里从来没有解释。<strong>少数股东权益 FY2025 单年从 ¥15.80 亿跳到 ¥34.38 亿（+118%）</strong>，同样没有说明。这两条都不构成会计红旗，但它们是这份报告最大的信息盲点，也是我没有给出更高评级的原因。</p>
+
+      <p>顺带更正一处：本站此前的唯品会报告曾把「短期借款 ¥58 亿」误写成「零有息负债」，把资本开支 ¥20.67 亿写成别的数。这次逐行核对了合并资产负债表与现金流量表原文——<strong>长期借款确实五年都是零，但短期借款不是，两者不能混为一谈。</strong></p>
+
+      <p><strong>海图研判：买入。</strong>八法加权公允 <strong>$23.00</strong>，中位数 $22.98，现价 $15.68，<strong>安全边际 31.8%</strong>。反向 DCF 显示：现价在为「自由现金流未来五年每年萎缩 22.3%」定价——而 TTM 自由现金流 ¥86.17 亿比 FY2025 全年的 ¥53.88 亿高出 60%，收入刚由负转正，资本开支已降到营收的 1.6%。评分卡 6 维 B／B−／B+／B+／A／A，红旗 0 项触发、2 项关注。<strong>12 个月目标价 $21.00（+33.9%），建议仓位 4%–6%，持有周期 2–3 年。</strong>纪律建仓价 $18.38／$16.09／$13.79——现价已经低于前两档，按纪律可以同时建立。止盈 $23.00 减三分之一、$27.00 再减三分之一、$32.00 清仓；即便到第三档，核心业务也只有 9.5 倍。</p>
+
+      <p>最后留一句。这家公司最值得记住的不是 3.7 倍，而是那个剪刀差：<strong>五年里收入 −9.5%，股本 −26.2%，每 ADS 收益 +97%。</strong>它不增长，但它每股在增长——把「不增长」变成「每股增长」的算术，燃料是现金，不是故事。只要活跃客户不继续塌，这道算术就还能做下去；一旦塌了，利润率再高也只是延缓。所以真正要盯的不是下个季度的收入，是那 8,480 万人还在不在。</p>
+
+      <p><strong>风险提示：</strong>活跃客户五年 −9.7%，内容电商对折扣消费场景的分流是结构性的；VIE 架构与中概股审计监管（HFCAA）带来的退市风险，且唯品会没有港股第二上市可作退路；短期借款五年 +196% 且公司未作解释，互联网金融业务的资产质量是看不清的一条线；FY2025 股东回报已达自由现金流的 125%，力度上不能再加；季节性极强，任何单季外推都会出错。</p>
+
+      <p><strong>免责声明：</strong>本文仅为个人研究记录与信息分享，不构成任何投资建议，作者非持牌投资顾问。文中评级、目标价、仓位与建仓价格均为基于公开信息的个人推演，可能存在错误或随时间失效。市场有风险，投资需谨慎，读者应独立判断并自负盈亏。</p>
+    </div>
+  </div>
+</section>
+
+</div><!-- /.container -->
+
+<footer>
+  <div>本报告由「海图夜读」基于公开财报与电话会资料独立撰写，数据截至 2026-08-10。</div>
+  <div>
+    <strong>免责声明：</strong>本文仅为个人研究记录与信息分享，<strong>不构成任何投资建议</strong>，
+    作者非持牌投资顾问。文中评级、目标价、仓位与建仓价格均为基于公开信息的个人推演，
+    可能存在错误或随时间失效。市场有风险，投资需谨慎，读者应独立判断并自负盈亏。
+  </div>
+</footer>
+
+<script>
+/* ══════════════════════════════════════════════════════════════════
+   海图夜读 · 报告页脚本骨架
+   逐字复制进报告的 <script>，只改 CHART_DATA 里的数字。
+
+   这段脚本解决了存量 103 份实测出的三个问题：
+   1. 主题切换有 3 套实现，73/103 不读 localStorage
+      → 门户切暗色进报告又变亮色。这里统一成一套。
+   2. 71 份把调色板硬编码进 JS（token 的第 4 份拷贝），
+      改一次配色要改 71 个文件；另有 2 份切暗色后图表根本不重绘。
+      → 这里一律从 CSS 变量读，改 :root 即全站生效。
+   3. 4 个图表槽位被写出 39 种 canvas id。
+      → 这里按固定槽位 rev|margin|segment|eps 接管。
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ── 1. 从 CSS 变量取色（唯一真源，禁止在本文件里写 hex）── */
+function cssVar(name) {
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+}
+function palette() {
+  return {
+    accent:  cssVar('--accent'),   accent2: cssVar('--accent2'),
+    accent3: cssVar('--accent3'),  gold:    cssVar('--gold'),
+    red:     cssVar('--red'),      green:   cssVar('--green'),
+    grid:    cssVar('--chart-grid'), text:  cssVar('--text3-ink'),
+  };
+}
+
+/* ── 2. 主题切换：同步 aria-pressed、持久化、重绘图表 ── */
+function toggleTheme() {
+  var html = document.documentElement;
+  var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  try { localStorage.setItem('theme', next); } catch (e) {}
+  var btn = document.getElementById('themeBtn');
+  if (btn) btn.setAttribute('aria-pressed', String(next === 'dark'));
+  renderCharts();
+}
+document.addEventListener('DOMContentLoaded', function () {
+  var btn = document.getElementById('themeBtn');
+  if (btn) btn.setAttribute('aria-pressed',
+    String(document.documentElement.getAttribute('data-theme') === 'dark'));
+});
+
+var PERIOD = 'annual';
+function switchPeriod(p) {
+  if (p !== 'annual' && p !== 'quarterly') return;
+  PERIOD = p;
+  document.querySelectorAll('.period-btn').forEach(function (b) {
+    var on = b.dataset.period === p;
+    b.setAttribute('aria-pressed', String(on));
+    b.classList.toggle('is-on', on);
+  });
+  renderCharts();
+}
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('.period-btn').forEach(function (b) {
+    b.addEventListener('click', function () { switchPeriod(b.dataset.period); });
+  });
+  switchPeriod(PERIOD);
+});
+
+/* ── 3. 顶栏实测高度写进 --bar-h ──
+   锚点落点与目录高亮都以它为基准。顶栏在窄屏会折行（38px → 60+px），
+   硬编码会让手机上所有跳转偏移。 */
+function syncBarH() {
+  var bar = document.querySelector('.theme-bar');
+  if (bar) document.documentElement.style.setProperty('--bar-h', bar.offsetHeight + 'px');
+}
+addEventListener('DOMContentLoaded', syncBarH);
+addEventListener('resize', syncBarH);
+
+var CHART_DATA = {
+  rev: {
+    type: 'bar',
+    labels: ['24Q2', '24Q3', '24Q4', '25Q1', '25Q2', '25Q3', '25Q4', '26Q1'],
+    datasets: [
+      { label: '营业收入（¥亿）', data: [268.75, 206.76, 332.24, 262.69, 258.06, 213.71, 324.74, 265.75], color: 'accent' },
+      { label: 'Non-GAAP 营业利润率 %', data: [9.5, 8.2, 10.2, 10.0, 9.3, 7.5, 10.0, 10.2], color: 'accent3', type: 'line', yAxisID: 'y1' },
+    ],
+  },
+  margin: {
+    type: 'line',
+    labels: ['FY2021', 'FY2022', 'FY2023', 'FY2024', 'FY2025'],
+    datasets: [
+      { label: 'GAAP 摊薄每 ADS（元）', data: [6.75, 9.83, 14.42, 14.35, 14.15], color: 'accent' },
+      { label: 'Non-GAAP 摊薄每 ADS（元）', data: [8.67, 10.67, 16.90, 16.75, 17.08], color: 'green' },
+    ],
+  },
+  segment: {
+    type: 'doughnut',
+    labels: ['股份回购', '资本开支', '现金股息'],
+    datasets: [
+      { label: '五年累计（¥亿）', data: [221.11, 175.43, 34.80], color: ['green', 'accent', 'gold'] },
+    ],
+  },
+  eps: {
+    type: 'bar',
+    labels: ['FY2021', 'FY2022', 'FY2023', 'FY2024', 'FY2025'],
+    datasets: [
+      { label: '加权摊薄 ADS（亿份）', data: [6.937, 6.408, 5.628, 5.393, 5.119], color: 'accent' },
+      { label: 'Non-GAAP 每 ADS 收益（元）', data: [8.67, 10.67, 16.90, 16.75, 17.08], color: 'gold', type: 'line', yAxisID: 'y1' },
+    ],
+  },
+
+  income: {
+    type: 'bar', unit: '¥亿',
+    annual: {
+      labels: ['FY2021', 'FY2022', 'FY2023', 'FY2024', 'FY2025'],
+      datasets: [
+        { label: '总收入',     data: [1170.60, 1031.52, 1128.56, 1084.21, 1059.20], color: 'accent' },
+        { label: '营业利润',   data: [55.82, 61.97, 91.04, 91.73, 81.36], color: 'gold' },
+        { label: '归母净利润', data: [46.81, 62.99, 81.17, 77.40, 72.42], color: 'green' },
+      ],
+    },
+    quarterly: {
+      labels: ['24Q2', '24Q3', '24Q4', '25Q1', '25Q2', '25Q3', '25Q4', '26Q1'],
+      datasets: [
+        { label: '总收入',     data: [268.75, 206.76, 332.24, 262.69, 258.06, 213.71, 324.74, 265.75], color: 'accent' },
+        { label: '营业利润',   data: [22.32, 13.30, 28.51, 22.77, 16.98, 12.62, 28.99, 24.98], color: 'gold' },
+        { label: '归母净利润', data: [19.31, 10.45, 24.47, 19.43, 14.90, 12.21, 25.89, 22.06], color: 'green' },
+      ],
+    },
+  },
+
+  cashflow: {
+    type: 'bar', unit: '¥亿',
+    annual: {
+      labels: ['FY2021', 'FY2022', 'FY2023', 'FY2024', 'FY2025'],
+      datasets: [
+        { label: '经营现金流', data: [67.45, 105.20, 144.15, 91.29, 74.54], color: 'accent' },
+        { label: '资本开支',   data: [35.79, 31.03, 52.31, 35.63, 20.67], color: 'red' },
+        { label: '自由现金流', data: [31.66, 74.17, 91.84, 55.66, 53.88], color: 'green' },
+      ],
+    },
+    quarterly: {
+      labels: ['24Q2', '24Q3', '24Q4', '25Q1', '25Q2', '25Q3', '25Q4', '26Q1'],
+      datasets: [
+        { label: '经营现金流', data: [2.87, 5.09, 88.94, -10.30, 13.01, 17.16, 54.68, 19.58], color: 'accent' },
+        { label: '资本开支',   data: [11.78, 10.84, 5.89, 6.80, 5.56, 3.34, 4.97, 4.38], color: 'red' },
+        { label: '自由现金流', data: [-8.91, -5.75, 83.05, -17.11, 7.45, 13.82, 49.71, 15.19], color: 'green' },
+      ],
+    },
+  },
+
+  balance: {
+    type: 'line', unit: '¥亿',
+    annual: {
+      labels: ['FY2021', 'FY2022', 'FY2023', 'FY2024', 'FY2025'],
+      datasets: [
+        { label: '总资产',   data: [622.88, 654.76, 723.23, 749.36, 788.43], color: 'accent' },
+        { label: '总负债',   data: [284.59, 314.02, 337.63, 333.87, 344.00], color: 'red' },
+        { label: '股东权益', data: [326.33, 327.52, 369.61, 399.69, 410.05], color: 'green' },
+      ],
+    },
+    quarterly: {
+      labels: ['24Q2', '24Q3', '24Q4', '25Q1', '25Q2', '25Q3', '25Q4', '26Q1'],
+      datasets: [
+        { label: '总资产',   data: [676.51, 694.85, 749.36, 745.75, 735.84, 783.28, 788.43, 799.25], color: 'accent' },
+        { label: '总负债',   data: [279.49, 303.53, 333.87, 327.57, 324.52, 345.39, 344.00, 352.53], color: 'red' },
+        { label: '股东权益', data: [382.76, 376.03, 399.69, 402.14, 395.00, 404.13, 410.05, 412.49], color: 'green' },
+      ],
+    },
+  },
+};
+
+/* ── 5. 渲染（一般不需要改）── */
+var _charts = {};
+function renderCharts() {
+  if (typeof Chart === 'undefined') return;      // CDN 不可达时静默跳过，不阻断页面
+  var P = palette();
+  Chart.defaults.font.family =
+    getComputedStyle(document.body).getPropertyValue('--font-sans') ||
+    'system-ui, -apple-system, sans-serif';
+
+  Object.keys(CHART_DATA).forEach(function (slot) {
+    var el = document.getElementById(slot);
+    if (!el) return;
+    if (_charts[slot]) _charts[slot].destroy();
+
+    var cfg = CHART_DATA[slot];
+    // 双周期槽位（三表图）：按当前 PERIOD 取那一套 labels/datasets。
+    // 缺失所选周期时回落到另一套，避免整张图空白。
+    if (cfg.annual || cfg.quarterly) {
+      var d = cfg[PERIOD] || cfg.annual || cfg.quarterly;
+      cfg = { type: d.type || cfg.type, labels: d.labels, datasets: d.datasets, unit: d.unit || cfg.unit };
+    }
+    var isPie = cfg.type === 'doughnut' || cfg.type === 'pie';
+
+    _charts[slot] = new Chart(el, {
+      type: cfg.type,
+      data: {
+        labels: cfg.labels,
+        datasets: cfg.datasets.map(function (d) {
+          var c = Array.isArray(d.color) ? d.color.map(function (k) { return P[k]; }) : P[d.color];
+          // 只写 d.type === 'line' 会让「图表级 type:'line' 但 dataset 没写 type」的
+          // 数据集拿到 borderWidth:0 —— 实测表现为「只有点、没有连线」。
+          var isLine = (d.type || cfg.type) === 'line';
+          return Object.assign({}, d, {
+            backgroundColor: c, borderColor: c,
+            borderWidth: isLine ? 2 : 0, tension: 0.3,
+          });
+        }),
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            // 窄屏把图例挪到顶部：右侧图例在 375px 上会吃掉大半个画布
+            position: isPie && innerWidth > 640 ? 'right' : 'top',
+            labels: { color: P.text, boxWidth: 12, font: { size: 11 } },
+          },
+        },
+        scales: isPie ? {} : {
+          x: { grid: { color: P.grid }, ticks: { color: P.text, font: { size: 11 } } },
+          y: { grid: { color: P.grid }, ticks: { color: P.text, font: { size: 11 } } },
+          y1: {
+            position: 'right', grid: { display: false },
+            ticks: { color: P.text, font: { size: 11 } }, display: 'auto',
+          },
+        },
+      },
+    });
+  });
+}
+addEventListener('DOMContentLoaded', renderCharts);
+addEventListener('resize', function () {          // 图例位置随断点变，需重建
+  clearTimeout(window._rcT);
+  window._rcT = setTimeout(renderCharts, 200);
+});
+
+</script>
+</body>
+</html>
