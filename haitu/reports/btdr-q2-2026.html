@@ -1,0 +1,1906 @@
+<!DOCTYPE html>
+<!-- 海图夜读 · 数据截至 2026-08-10 · NASDAQ: BTDR Q2 2026 财报已于 2026-08-10 发布 -->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Bitdeer 比特迪尔 BTDR Q2 2026 海图研判 · 海图夜读</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+
+<script>
+(function () {
+  try {
+    var t = localStorage.getItem('theme');
+    if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', t);
+  } catch (e) { document.documentElement.setAttribute('data-theme', 'light'); }
+})();
+</script>
+
+<link rel="canonical" href="https://haitu.jacexie.com/haitu/reports/btdr-q2-2026.html">
+<meta name="description" content="一家自己造矿机、自己挖比特币的公司，正把电力资源改造成 AI 机房；账面利润由可转债的公允价值决定，而不是由生意决定。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Bitdeer 比特迪尔 BTDR Q2 2026 海图研判">
+<meta property="og:description" content="一家自己造矿机、自己挖比特币的公司，正把电力资源改造成 AI 机房；账面利润由可转债的公允价值决定，而不是由生意决定。">
+<meta property="og:url" content="https://haitu.jacexie.com/haitu/reports/btdr-q2-2026.html">
+<meta name="twitter:card" content="summary">
+
+<script defer src="../assets/vendor/chart.umd.min.js"></script>
+
+<style>
+
+/* ── MORANDI PALETTE ── */
+:root {
+  /* Light (default) */
+  --bg:        #f5f0eb;
+  --bg2:       #ece6df;
+  --card:      #ffffff;
+  --card2:     #f8f5f1;
+  --border:    #d9d0c7;
+  --text:      #4a4340;
+  --text2:     #7a706a;
+  --text3:     #a89f98;
+  --accent:    #8a9a8e;   /* sage */
+  --accent2:   #7b8fa0;   /* muted blue */
+  --accent3:   #b08d7a;   /* dusty terracotta */
+  --rose:      #c09090;   /* dusty rose */
+  --gold:      #b9a06a;
+  --red:       #b87070;
+  --green:     #7a9a7a;
+  --shadow:    rgba(0,0,0,0.06);
+  --chart-grid:#e5ddd5;
+  /* ── ink 层：只用于文字，全部达 WCAG AA（装饰色仍用上面的原值）── */
+  --text3-ink:   #70665f;  /* 4.51:1 on --bg2（原 --text3 #a89f98 仅 2.60:1）*/
+  --accent3-ink: #7f6150;  /* 4.97:1 on --bg （原 --accent3 #b08d7a 仅 2.67:1）*/
+  --gold-ink:    #8a6d3b;  /* 原 --gold  #b9a06a 仅 2.53:1 */
+  --red-ink:     #a35555;  /* 原 --red   #b87070 仅 3.76:1 */
+  --green-ink:   #4a7057;  /* 原 --green #7a9a7a 仅 3.12:1 */
+  --accent2-ink: #5a7386;
+  --font-sans: system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-serif: Georgia, 'Noto Serif SC', 'PingFang SC', serif;
+
+  /* ── 排版标度 ────────────────────────────────────────────────
+     此前全站正文散落 8 档字号（11/12/12.5/13/14/14.5/15/16）与 5 种行高
+     （1.65/1.70/1.75/1.90/2.00），是逐处硬写累积出来的，没有体系。
+     收敛成 4 档字号 + 2 种行高，所有正文一律引用这里。 */
+  --fs-xs:   12px;    /* 注释、图注、页脚 */
+  --fs-sm:   13.5px;  /* 表格、卡片密排文字 */
+  --fs-base: 15px;    /* 正文 */
+  --fs-lg:   16.5px;  /* 夜读手记正文、导语 */
+
+  --lh-tight: 1.7;    /* 密排：表格、卡片、注释 */
+  --lh-prose: 1.85;   /* 正文段落 */
+
+  --measure: 40em;
+  --bar-h: 44px;
+}
+[data-theme="dark"] {
+  --text3-ink:   #a19991;
+  --accent3-ink: #c9a48e;
+  --gold-ink:    #c9b07a;
+  --red-ink:     #c08080;
+  --green-ink:   #8aaa8a;
+  --accent2-ink: #8fabbf;
+  --bg:        #1e1c1a;
+  --bg2:       #28251f;
+  --card:      #2e2a25;
+  --card2:     #363230;
+  --border:    #4a4540;
+  --text:      #d4ccc4;
+  --text2:     #a09890;
+  --text3:     #706860;
+  --accent:    #8a9a8e;
+  --accent2:   #8fabbf;
+  --accent3:   #c9a48e;
+  --rose:      #c09090;
+  --gold:      #c9b07a;
+  --red:       #c08080;
+  --green:     #8aaa8a;
+  --shadow:    rgba(0,0,0,0.3);
+  --chart-grid:#3e3a35;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-serif);
+  line-height: var(--lh-prose);
+  font-size: var(--fs-base);
+  transition: background .35s, color .35s;
+}
+a { color: var(--accent2); text-decoration: none; }
+
+/* ── THEME TOGGLE ── */
+.theme-bar {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 8px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  transition: background .35s;
+}
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; text-decoration: none; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: var(--font-sans); font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; text-decoration: none; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; color: var(--text2);
+}
+.toggle-switch {
+  appearance: none; -webkit-appearance: none; border: 0; padding: 0; margin: 0;
+  position: relative;
+  width: 44px; height: 22px;
+  background: var(--border);
+  border-radius: 11px;
+  cursor: pointer;
+  transition: background .3s;
+}
+.toggle-switch::after {
+  content: '';
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 18px; height: 18px;
+  background: var(--card);
+  border-radius: 50%;
+  transition: transform .3s;
+  box-shadow: 0 1px 3px rgba(0,0,0,.15);
+}
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+
+/* ── HERO ── */
+.hero {
+  padding: 48px 24px 36px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+.hero-tag {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 3px 14px;
+  border-radius: 20px;
+  margin-bottom: 18px;
+}
+.hero h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills {
+  display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;
+}
+.pill {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 6px 18px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--text2);
+  box-shadow: 0 1px 3px var(--shadow);
+}
+.pill strong { color: var(--text); }
+
+/* ── LAYOUT ── */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle {
+  font-size: 18px; font-weight: 700; color: var(--accent3-ink);
+  margin-bottom: 20px; letter-spacing: 0.5px;
+  display: flex; align-items: center; gap: 10px;
+}
+.stitle::before {
+  content: ''; display: block; width: 4px; height: 20px;
+  background: var(--accent3); border-radius: 2px;
+}
+
+/* ── KPI ── */
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.kpi {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 16px 18px;
+  box-shadow: 0 1px 4px var(--shadow);
+  transition: background .35s;
+}
+.kpi-l { font-family: var(--font-sans); font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+/* KPI 卡的第三行「注解」。此前没有这条规则，写报告的人只能借 .kpi-l（全大写 +
+   字间距，中文读着别扭）或干脆裸写 —— rkt 那份 12 张卡的注解因此按正文字号渲染，
+   把卡片撑得比数值还抢眼。与 .snap-note 同一套视觉语言，多行中文加行高。 */
+.kpi-n { font-family: var(--font-sans); font-size: 11px; color: var(--text3-ink); line-height: 1.5; }
+.badge {
+  display: inline-block; font-family: var(--font-sans);
+  font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px;
+}
+.up   { background: rgba(122,154,122,.15); color: var(--green); }
+.dn   { background: rgba(184,112,112,.15); color: var(--red); }
+.nt   { background: rgba(123,143,160,.15); color: var(--accent2); }
+
+/* ── TABLE ── */
+.tbl-wrap {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow);
+}
+.tbl { width: 100%; border-collapse: collapse; font-family: var(--font-sans); font-size: var(--fs-sm);
+       font-variant-numeric: tabular-nums; }
+.tbl th {
+  background: var(--card2); color: var(--text3-ink); font-size: 11px;
+  letter-spacing: .5px; text-transform: uppercase;
+  padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border);
+}
+.tbl td { padding: 11px 16px; border-bottom: 1px solid var(--border); text-align: left; line-height: var(--lh-tight); }
+.tbl td:first-child { color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); }
+
+/* ── CHARTS ── */
+.cgrid  { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-bottom: 16px; }
+.cgrid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-bottom: 16px; }
+.ccard, .kpi, .moat-card, .risk-card, .score-card, .snap-item, .pbox { min-width: 0; }
+.ccard {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow);
+}
+.ctitle { font-family: var(--font-sans); font-size: 12px; color: var(--text3-ink); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 230px; }
+
+/* ── QUOTES ── */
+.qgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.qcard {
+  background: var(--card); border: 1px solid var(--border);
+  border-left: 4px solid var(--rose);
+  border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow);
+}
+.qname { font-weight: 700; color: var(--accent3); margin-bottom: 2px; }
+.qrole { font-family: var(--font-sans); font-size: 11px; color: var(--text3); margin-bottom: 10px; }
+.qtext { font-style: italic; font-size: 13.5px; color: var(--text); line-height: 1.8; }
+
+/* ── ANALYSIS ── */
+.agrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+.acard {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow);
+}
+.acard h4 { font-size: 13px; color: var(--accent2); margin-bottom: 10px; text-transform: uppercase; letter-spacing: .5px; }
+.acard ul { padding-left: 16px; }
+.acard li { margin-bottom: 5px; font-size: 13px; }
+
+/* ── BUFFETT SCORE ── */
+.bscore {
+  display: flex; align-items: center; gap: 16px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px 22px; margin-bottom: 12px;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.circle {
+  width: 62px; height: 62px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 18px; flex-shrink: 0;
+  border: 3px solid; font-family: var(--font-sans);
+}
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 3px; }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+/* ── VERDICT ── */
+.verdict {
+  background: var(--card2); border: 2px solid var(--accent);
+  border-radius: 10px; padding: 26px 28px; margin-bottom: 16px;
+}
+.verdict-t { font-size: 17px; font-weight: 700; color: var(--accent); margin-bottom: 10px; }
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 14px; text-align: left;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.pbox .pl { font-family: var(--font-sans); font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.pbox .pv { font-family: var(--font-sans); font-size: 26px; font-weight: 800; }
+.pbox .pn { font-size: 11px; color: var(--text3); margin-top: 3px; }
+.pc { color: var(--text2); } .pf { color: var(--gold); } .ps { color: var(--green); }
+
+/* ── 周期切换（三表图）── */
+.period-toggle {
+  display: inline-flex; gap: 0; margin-bottom: 16px;
+  border: 1px solid var(--border); border-radius: 8px; overflow: hidden;
+  background: var(--card);
+}
+.period-btn {
+  appearance: none; -webkit-appearance: none; border: 0; margin: 0;
+  padding: 7px 20px; cursor: pointer;
+  font-family: var(--font-sans); font-size: var(--fs-xs);
+  letter-spacing: .5px; color: var(--text3-ink);
+  background: transparent; transition: background .2s, color .2s;
+  /* 44px 触摸目标：窄屏上两个按钮挨得很近，小于这个高度容易点错 */
+  min-height: 34px;
+}
+.period-btn + .period-btn { border-left: 1px solid var(--border); }
+.period-btn:hover { color: var(--text); background: var(--card2); }
+.period-btn.is-on { background: var(--accent); color: #fff; font-weight: 600; }
+.period-btn:focus-visible { outline: 2px solid var(--accent2); outline-offset: -2px; }
+[data-theme="dark"] .period-btn.is-on { color: var(--bg); }
+
+/* ── SANKEY ── */
+#sankey { width: 100%; height: 460px; }
+
+/* ── COMMENTARY ── */
+.cmt {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 26px 28px; line-height: var(--lh-prose);
+  font-size: var(--fs-base);
+  box-shadow: 0 1px 4px var(--shadow);
+}
+/* 段间距取 0.9 行。此前是 14px 对 27.55px 的行高＝0.51 行，
+   段与段之间比行与行之间只宽一点点，整块糊成一片，读者找不到段落边界。 */
+.cmt p { margin-bottom: calc(var(--lh-prose) * 0.9em); }
+.cmt p:last-child { margin-bottom: 0; }
+
+.section > p, .section > ul, .section > ol,
+.section > blockquote,
+.cmt > p, .cmt > ul, .cmt > ol, .cmt > blockquote,
+.haitu-essay-body > p, .haitu-essay-body > ul,
+.haitu-essay-body > ol, .haitu-essay-body > blockquote {
+  max-width: var(--measure);           /* 15px × 40em ≈ 600px，约 40 字/行 */
+}
+
+code {
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace);
+  font-size: 0.88em;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  background: var(--card2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+/* .ec-item 是带背景的卡片，缩到 40em 会在右侧留下大片空白；
+   但满宽 1152px 时实测仍有 48 字/行，略超舒适上限，折中收到 60em（≈36 字）。 */
+.ec-item { max-width: 60em; }
+.note, p.note {
+  /* 注释是 12px 小字，行长可略放宽：12px × 52em ≈ 624px，约 52 字，
+     仍远好于此前的 96 字，且与正文块的右边界大致齐平，视觉上不突兀。 */
+  max-width: 52em;
+}
+.cmt > .tbl-wrap, .cmt > figure, .cmt > .cgrid { max-width: none; }
+/* 避免段末孤字（中文里一行只剩一两个字特别难看）。
+   Safari/Firefox 不支持时会自动忽略，属渐进增强。 */
+.cmt p, .haitu-essay-body p, .note, .ec-item { text-wrap: pretty; }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--card2); border-top: 1px solid var(--border);
+  padding: 24px; text-align: left; color: var(--text3); font-size: 12px;
+  margin-top: 40px;
+}
+
+@media (max-width: 768px) {
+  .cgrid,.cgrid3,.qgrid,.agrid,.pgrid { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 22px; }
+  .kpi-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ── HAITU SIGNATURE BLOCKS (页首短评 + 页末长评) ── */
+.haitu-quip {
+  display: flex; align-items: center; gap: 18px;
+  background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red);
+  border-radius: 12px; padding: 18px 24px; margin: 24px 0;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.haitu-avatar-sm {
+  width: 64px; height: 64px; border-radius: 50%;
+  object-fit: cover; flex-shrink: 0;
+  border: 2px solid var(--border); background: var(--red);
+  box-shadow: 0 2px 8px rgba(184,112,112,0.18);
+}
+.haitu-quote { flex: 1; }
+.haitu-name {
+  font-family: var(--font-sans);
+  font-size: 12px; font-weight: 700; letter-spacing: 1.5px;
+  color: var(--red-ink); text-transform: uppercase; margin-bottom: 4px;
+}
+.haitu-portrait {
+  font-size: 15px; line-height: 1.65; color: var(--text);
+  margin-bottom: 6px; font-weight: 600;
+}
+.haitu-rating-line {
+  font-size: 13px; color: var(--text2);
+  font-family: var(--font-sans);
+}
+.rating-badge {
+  display: inline-block; padding: 2px 12px; border-radius: 12px;
+  font-weight: 700; font-size: 13px; letter-spacing: 0.5px;
+  margin-left: 4px;
+}
+.rating-strong-buy { background: rgba(122,154,122,.25); color: var(--green); }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+.rating-cond-buy { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-hold { background: rgba(123,143,160,.18); color: var(--accent2); }
+.rating-sell { background: rgba(184,112,112,.18); color: var(--red); }
+.rating-strong-sell { background: rgba(184,112,112,.28); color: var(--red); }
+
+.haitu-essay {
+  background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red);
+  border-radius: 12px; padding: 28px 32px; margin: 24px 0;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.haitu-essay-header {
+  display: flex; align-items: center; gap: 18px;
+  padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px;
+}
+.haitu-avatar-lg {
+  width: 110px; height: 110px; border-radius: 50%;
+  object-fit: cover; flex-shrink: 0;
+  border: 3px solid var(--border); background: var(--red);
+  box-shadow: 0 4px 14px rgba(184,112,112,0.22);
+}
+.haitu-name-lg {
+  font-family: 'Georgia', 'Noto Serif SC', serif;
+  font-size: 28px; font-weight: 700; color: var(--text);
+  letter-spacing: 1px; margin-bottom: 4px;
+}
+.haitu-essay-tag {
+  font-family: var(--font-sans);
+  font-size: 12px; color: var(--text3); letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+.haitu-essay-body {
+  font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', serif;
+  font-size: var(--fs-lg); line-height: var(--lh-prose); color: var(--text);
+}
+.haitu-essay-body p { margin-bottom: calc(var(--lh-prose) * 0.85em); }
+.haitu-essay-body p:first-child {
+  font-size: 18px; font-style: italic; color: var(--text2);
+}
+.haitu-essay-body p:last-child {
+  margin-top: 22px; padding-top: 14px;
+  border-top: 1px solid var(--border);
+  font-size: var(--fs-xs); color: var(--text3); font-style: italic;
+}
+.haitu-sign {
+  text-align: left; margin-top: 14px;
+  font-family: 'Georgia', serif; font-size: 14px;
+  color: var(--text2); font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .haitu-quip { flex-direction: column; text-align: left; }
+  .haitu-essay-header { flex-direction: column; text-align: left; }
+  .haitu-avatar-sm { width: 80px; height: 80px; }
+  .haitu-avatar-lg { width: 90px; height: 90px; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   海图 v2 追加规则 —— 修 103 份存量实测出的问题，勿删勿改顺序
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── 1. 锚点落点：一行同时修好 TOC 跳转 / 深链 / Ctrl+F 定位 / :target ──
+   没有这条，所有跳转都会落在 sticky 顶栏底下被遮住 */
+.section { scroll-margin-top: calc(var(--bar-h) + 12px); }
+
+/* h2.stitle 必须显式定字号，否则被 UA 默认样式撑成 32px 巨标题 */
+h2.stitle { font-size: 18px; font-weight: 700; margin: 0 0 20px; }
+
+/* 章节深链锚点：桌面 hover 显形，触屏常显 */
+.anchor {
+  margin-left: 8px; font-size: 13px; color: var(--text3-ink);
+  text-decoration: none; opacity: 0; transition: opacity .2s;
+}
+.stitle:hover .anchor, .anchor:focus-visible { opacity: 1; }
+@media (hover: none) { .anchor { opacity: .35; } }
+
+/* ── 2. 评级徽章：由 data-rating 派生，作者不再手写 class ──
+   实测存量 .rating-hold 在 63 份是金色、30 份是蓝色 —— 这套选择器根除该分歧 */
+.rating-badge[data-rating="强力买入"] { background: rgba(122,154,122,.25); color: var(--green-ink); }
+.rating-badge[data-rating="买入"]     { background: rgba(122,154,122,.18); color: var(--green-ink); }
+.rating-badge[data-rating="有条件买入"]{ background: rgba(185,160,106,.18); color: var(--gold-ink); }
+.rating-badge[data-rating="持有观望"] { background: rgba(123,143,160,.18); color: var(--accent2-ink); }
+.rating-badge[data-rating="卖出"]     { background: rgba(184,112,112,.18); color: var(--red-ink); }
+.rating-badge[data-rating="强烈卖出"] { background: rgba(184,112,112,.28); color: var(--red-ink); }
+
+/* 涨跌不能只靠色相（色盲）—— 文字里必须自带 +/- 号，这里只负责配色 */
+.up, .pos { color: var(--green-ink); }
+.dn, .neg { color: var(--red-ink); }
+
+/* ── 3. 窄屏表格：粘性首列 + 右侧滚动阴影提示 ──
+   实测 375px 下 12 张表有 6 张横向溢出，且无任何可滚动的视觉线索 */
+.tbl-wrap {
+  background-image: linear-gradient(to right, var(--card), var(--card)),
+                    linear-gradient(to right, rgba(0,0,0,.10), rgba(0,0,0,0));
+  background-position: right center, right center;
+  background-repeat: no-repeat;
+  background-size: 24px 100%, 12px 100%;
+  background-attachment: local, scroll;
+}
+@media (max-width: 640px) {
+  /* border-collapse:collapse 下 sticky 单元格的边框会丢，用 box-shadow 补回 */
+  .tbl { border-collapse: separate; border-spacing: 0; }
+  .tbl :is(th, td) { border-bottom: 1px solid var(--border); }
+  .tbl :is(th, td):first-child {
+    position: sticky; left: 0; z-index: 1;
+    background: var(--card); box-shadow: 1px 0 0 var(--border);
+  }
+  .tbl th:first-child { background: var(--card2); }
+}
+
+/* ── 4. 移动端：顶栏必须能换行（实测四元素已折行重叠）── */
+.theme-bar { flex-wrap: wrap; row-gap: 6px; }
+@media (max-width: 420px) { .theme-bar .xueqiu-link { display: none; } }
+
+@media (max-width: 640px) {
+  .container { padding: 0 14px; }          /* 24px 在 375px 上吃掉 12.8% 视口 */
+  body { font-size: 15.5px; }              /* 14.5px 中文长文在手机上偏小 */
+  .cwrap { height: 200px; }
+  #sankey { height: 360px !important; }    /* 480px 挤在 289px 宽里不可读 */
+  .cgrid, .cgrid3, .pgrid { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 640px), (hover: none) {
+  .toggle-switch::before {
+    content: ''; position: absolute; left: 0; right: 0;
+    top: 50%; transform: translateY(-50%); height: 44px;
+  }
+}
+
+/* ── 5. prefers-reduced-motion ──
+   全语料 103/103 有 scroll-behavior:smooth 且零保护。加了目录之后，
+   一次跳转要跨 4 万像素、持续数秒，前庭敏感者会难受 */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important; animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+}
+
+/* ── 6. 焦点可见（全语料 0 个 :focus-visible 样式）── */
+:focus-visible { outline: 2px solid var(--accent3-ink); outline-offset: 2px; }
+
+/* ── 7. 图表无障碍降级容器 ── */
+figure.chart { margin: 0; }
+figure.chart figcaption { font-size: 12px; color: var(--text3-ink); line-height: 1.6; margin-top: 8px; }
+.chart-data { font-size: 12px; margin-top: 8px; }
+.chart-data summary { cursor: pointer; color: var(--text3-ink); }
+
+/* ── 8. shell 新增组件（skip link / 结论跳转带 / 顶栏右侧 / 屏幕阅读器专用）── */
+
+.skip {
+  position: absolute; left: -9999px; top: 0;
+  background: var(--card); color: var(--accent3-ink);
+  padding: 8px 14px; border-radius: 0 0 8px 0; z-index: 200;
+  font-size: 13px; text-decoration: none;
+}
+.skip:focus { left: 0; }
+
+/* 只给屏幕阅读器：essay 一节的标题不需要视觉呈现（.haitu-essay 自带头部） */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+.theme-bar-right { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+
+/* 结论跳转带：读者看完评级后一步到证据 */
+.quip-jump { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.quip-jump a {
+  font-family: var(--font-sans); font-size: 12px; line-height: 1;
+  padding: 7px 12px; border-radius: 999px;
+  border: 1px solid var(--border); background: var(--card2);
+  color: var(--accent3-ink); text-decoration: none;
+  transition: border-color .2s, background .2s;
+}
+.quip-jump a:hover { border-color: var(--accent3); background: var(--card); }
+@media (max-width: 640px), (hover: none) {
+  /* 用 min-height 而不是加 padding —— padding 要靠字体行高凑够 44px，
+     换字体或改字号就又不达标了（实测 padding:13px 只得到 40px）。 */
+  .quip-jump a { min-height: 44px; padding: 0 16px; display: inline-flex; align-items: center; }
+}
+
+.hero-pills {display: flex; justify-content: flex-start; gap: 16px; flex-wrap: wrap;}
+.pill {background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: var(--font-sans); font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow);}
+.pill strong {color: var(--text);}
+.stock-snap {background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px;}
+.snap-item {text-align: left;}
+.snap-label {font-family: var(--font-sans); font-size: 10px; color: var(--text3-ink); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px;}
+.kpi-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px;}
+.kpi {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow);}
+.moat-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px;}
+.moat-card {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); border-left: 4px solid var(--accent);}
+.moat-card.wide {border-left-color: var(--green);}
+.moat-card.narrow {border-left-color: var(--gold);}
+.moat-card.none {border-left-color: var(--red);}
+.moat-card h5 {font-size: 13px; color: var(--text); margin-bottom: 6px;}
+.moat-card .moat-rate {font-family: var(--font-sans); font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px;}
+.moat-card.wide .moat-rate {background: rgba(122,154,122,.18); color: var(--green);}
+.moat-card.narrow .moat-rate {background: rgba(185,160,106,.18); color: var(--gold);}
+.moat-card.none .moat-rate {background: rgba(184,112,112,.18); color: var(--red);}
+.moat-card p {font-size: var(--fs-sm); color: var(--text2); line-height: var(--lh-tight);}
+.ec-item {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: block; box-shadow: 0 1px 3px var(--shadow); line-height: var(--lh-prose); font-size: var(--fs-base);}
+.ec-badge {display: inline-block; vertical-align: baseline; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-right: 10px; font-family: var(--font-sans); white-space: nowrap;}
+.dcf-note {background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: var(--fs-sm); color: var(--text2); line-height: var(--lh-prose);}
+.dcf-note strong {color: var(--text);}
+.scorecard {background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow);}
+.score-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px;}
+.score-card {background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px;}
+.score-letter {width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-sans); font-weight: 800; font-size: 22px; flex-shrink: 0; border: 3px solid;}
+.flag-row {margin-top: 16px; padding: 12px 16px; background: rgba(184,112,112,.08); border: 1px solid rgba(184,112,112,.3); border-radius: 8px; font-size: var(--fs-sm); color: var(--text2);}
+.flag-row strong {color: var(--red);}
+.pgrid {display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0;}
+body { text-align: left; }
+
+.pbox {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 24px; text-align: left; box-shadow: 0 1px 4px var(--shadow);}
+.pbox .pl, .pbox .pv, .pbox .pn {text-align: left;}
+.pbox .pl {font-family: var(--font-sans); font-size: 11px; color: var(--text3-ink); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px;}
+.pbox .pv {font-family: var(--font-sans); font-size: 28px; font-weight: 800; margin-bottom: 5px;}
+.pbox .pn {font-size: var(--fs-xs); color: var(--text3-ink); line-height: var(--lh-tight);}
+.pbox > h4 {font-size: var(--fs-lg); color: var(--accent3-ink); margin-bottom: 14px; line-height: 1.5;}
+.pbox + .pbox {margin-top: 18px;}
+.risk-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px;}
+.risk-card {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); position: relative; overflow: hidden;}
+.risk-card::before {content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent);}
+.risk-card.r1::before {background: var(--green);}
+.risk-card.r2::before {background: rgba(122,154,122,.6);}
+.risk-card.r3::before {background: var(--gold);}
+.risk-card.r4::before {background: var(--rose);}
+.risk-card.r5::before {background: var(--red);}
+.risk-card h5 {font-size: 14px; margin-bottom: 6px; color: var(--text);}
+.risk-card p {font-size: var(--fs-sm); color: var(--text2); line-height: var(--lh-tight);}
+
+/* 骨架用到、但语料里没有现成规则的补充组件 */
+.note { font-size: var(--fs-xs); color: var(--text3-ink); line-height: var(--lh-tight); margin-top: 12px; }
+.lead { font-size: 16px; font-weight: 600; line-height: 1.8; margin-bottom: 14px; }
+.haitu-disc { font-size: 12px; color: var(--text3-ink); line-height: 1.7; margin-top: 18px;
+              padding-top: 14px; border-top: 1px solid var(--border); }
+.bscore { background: var(--card2); border: 1px solid var(--border); border-radius: 10px;
+          padding: 16px 20px; margin: 16px 0; }
+.bscore h4 { font-family: var(--font-sans); font-size: 14px; color: var(--accent3-ink); margin: 0 0 6px; }
+.bscore p { margin: 0; font-size: 14px; }
+
+/* 桑基 SVG：颜色与线宽在标记里给，这里只管描边端点与文字 */
+#sankey { width: 100%; height: auto; }
+.sk-flow path { fill: none; opacity: .45; stroke-linecap: butt; }
+.sk-t .sk-lab { font-family: var(--font-sans); font-size: 12px; fill: var(--text2); }
+.sk-t .sk-num { font-family: var(--font-sans); font-size: 13px; font-weight: 700; fill: var(--text);
+                font-variant-numeric: tabular-nums; }
+.sk-t .warn   { fill: var(--red-ink); }
+
+@media (max-width: 640px) {
+  .stock-snap { grid-template-columns: 1fr 1fr; }
+  .kpi-grid   { grid-template-columns: 1fr 1fr; }
+  .moat-grid, .risk-grid, .score-grid, .pgrid { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* 修饰类：评分等级 / 电话会情绪 / 快照数值。文字色一律走 ink 层。 */
+.score-letter.s-a  { color: var(--green-ink);   border-color: var(--green);   background: rgba(122,154,122,.12); }
+.score-letter.s-bp { color: var(--gold-ink);    border-color: var(--gold);    background: rgba(185,160,106,.12); }
+.score-letter.s-b  { color: var(--accent2-ink); border-color: var(--accent2); background: rgba(123,143,160,.12); }
+.score-letter.s-c  { color: var(--red-ink);     border-color: var(--red);     background: rgba(184,112,112,.12); }
+
+.ec-badge.ec-bull { background: rgba(122,154,122,.18); color: var(--green-ink); }
+.ec-badge.ec-bear { background: rgba(184,112,112,.18); color: var(--red-ink); }
+.ec-badge.ec-neut { background: rgba(123,143,160,.18); color: var(--accent2-ink); }
+
+.snap-value { font-family: var(--font-sans); font-size: 19px; font-weight: 700; color: var(--text);
+              font-variant-numeric: tabular-nums; line-height: 1.3; }
+.snap-note  { font-family: var(--font-sans); font-size: 11px; color: var(--text3-ink); margin-top: 3px; }
+.sk-node rect { opacity: .9; }
+
+</style>
+</head>
+<body>
+
+<a class="skip" href="#kpi">跳到正文</a>
+
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/BTDR" target="_blank" rel="noopener">📊 雪球 BTDR</a>
+  </div>
+  <div class="theme-bar-right">
+    <span>☀️ 浅色</span>
+    <button type="button" class="toggle-switch" id="themeBtn"
+            aria-pressed="false" aria-label="切换深色模式" onclick="toggleTheme()"></button>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">Q2 2026 财报发布 · 2026-08-10 ｜ 海图研判 · 2026-08-10</div>
+  <h1>Bitdeer 比特迪尔 BTDR · Q2 2026 财报深度分析</h1>
+  <div class="hero-sub">NASDAQ: BTDR ｜ 财季截至 2026-06-30 ｜ 价值投资视角</div>
+  <div class="hero-pills">
+    <span class="pill">股价 US$9.68</span>
+    <span class="pill">市值 US$26.3亿</span>
+    <span class="pill">本季营收 US$2.288亿（+47.0%）</span>
+    <span class="pill">毛利率 −3.7%</span>
+    <span class="pill">净亏损 US$0.923亿</span>
+    <span class="pill">市盈率 不适用（亏损）</span>
+  </div>
+</div>
+
+<div class="container">
+  <div class="haitu-quip">
+    <div class="haitu-quote">
+      <div class="haitu-portrait">一家自己造矿机、自己挖比特币的公司，正把手里的电力改造成 AI 机房。它的账面利润不由生意决定，由可转债的公允价值决定。</div>
+      <div class="haitu-rating-line">
+        评级：<span class="rating-badge" data-rating="卖出">卖出</span>
+        · 12 个月目标价 US$8.40 · 毛利率从 −20.7% 修到 −3.7% 是真进步，但六年毛利连降、五年半烧掉 43.6 亿美元、30 个月股本翻 2.4 倍，而 2,980MW 里只有 4.5% 签了合同
+      </div>
+      <div class="quip-jump" role="group" aria-label="快速跳转">
+        <a href="#m13">评分卡与决策</a>
+        <a href="#m7">目标价怎么算出来的</a>
+        <a href="#m11">风险矩阵</a>
+        <a href="#m4">护城河</a>
+        <a href="#essay">夜读手记</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="section" id="snapshot" aria-labelledby="snapshot-t">
+  <h2 class="stitle" id="snapshot-t">市场数据快照（2026-08-10）<a class="anchor" href="#snapshot" aria-label="本节链接">#</a></h2>
+  <div class="stock-snap">
+    <div class="snap-item"><div class="snap-label">股价</div><div class="snap-value">US$9.68</div><div class="snap-note">2026-08-10 盘中（美东 10:19），前收 10.88，当日 −11.0%</div></div>
+    <div class="snap-item"><div class="snap-label">52 周区间</div><div class="snap-value">6.92 – 27.80</div><div class="snap-note">距高点 −65.2%，距低点 +39.9%</div></div>
+    <div class="snap-item"><div class="snap-label">股本</div><div class="snap-value">2.718 亿股</div><div class="snap-note">A 类 2.274 亿 + V 类 0.444 亿（1:1 可转）</div></div>
+    <div class="snap-item"><div class="snap-label">市值</div><div class="snap-value">US$26.3 亿</div><div class="snap-note">聚合商常按 2.433 亿股计，低估约 12%</div></div>
+    <div class="snap-item"><div class="snap-label">净负债</div><div class="snap-value">US$13.45 亿</div><div class="snap-note">每股 4.95 美元，占股价 51%</div></div>
+    <div class="snap-item"><div class="snap-label">企业价值</div><div class="snap-value">US$39.76 亿</div><div class="snap-note">市值 + 有息负债 − 现金及受限现金</div></div>
+    <div class="snap-item"><div class="snap-label">做空比例</div><div class="snap-value">43.35%</div><div class="snap-note">占流通股，双向波动极端的直接原因</div></div>
+    <div class="snap-item"><div class="snap-label">比特币</div><div class="snap-value">US$65,004</div><div class="snap-note">同比 −45.5%，距 2025-10 高点近腰斩</div></div>
+    <div class="snap-item"><div class="snap-label">市销率（TTM）</div><div class="snap-value">3.24×</div><div class="snap-note">TTM 营收 8.12 亿美元（25Q3–26Q2）</div></div>
+    <div class="snap-item"><div class="snap-label">市净率</div><div class="snap-value">2.39×</div><div class="snap-note">账面权益 11.03 亿美元（2026-06-30）</div></div>
+    <div class="snap-item"><div class="snap-label">市盈率</div><div class="snap-value">不适用</div><div class="snap-note">2026 上半年净亏损 2.518 亿美元</div></div>
+    <div class="snap-item"><div class="snap-label">卖方共识</div><div class="snap-value">US$22.73</div><div class="snap-note">12 家覆盖：11 买入 + 1 中性；区间 14–35</div></div>
+  </div>
+  <p class="note">口径说明：本报告的股本一律取 Q2 2026 资产负债表实际发行在外股数 271,782,245 股（A 类 227,382,323 + V 类 44,399,922）。V 类在 FY2025 有 400 万股按 1:1 转为 A 类，故两类经济权利等同、应一并计入市值。多数聚合商显示的 2.433 亿股会把市值低估约 12%，进而把所有每股指标算错。</p>
+</section>
+
+<section class="section" id="kpi" aria-labelledby="kpi-t">
+  <h2 class="stitle" id="kpi-t">Q2 2026 核心业绩<a class="anchor" href="#kpi" aria-label="本节链接">#</a></h2>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">营业收入</div><div class="kpi-v">$2.288亿</div><div class="note">同比 +47.0%</div></div>
+    <div class="kpi"><div class="kpi-l">毛利</div><div class="kpi-v">−$0.085亿</div><div class="note">毛利率 −3.7%（上季 −20.7%）</div></div>
+    <div class="kpi"><div class="kpi-l">净亏损</div><div class="kpi-v">−$0.923亿</div><div class="note">上年同期 −$0.629亿</div></div>
+    <div class="kpi"><div class="kpi-l">调整后 EBITDA</div><div class="kpi-v">$0.311亿</div><div class="note">上年同期 $0.046亿</div></div>
+    <div class="kpi"><div class="kpi-l">调整后净亏损</div><div class="kpi-v">−$0.960亿</div><div class="note">上年同期 −$0.309亿，同向恶化</div></div>
+    <div class="kpi"><div class="kpi-l">折旧与摊销</div><div class="kpi-v">$1.077亿</div><div class="note">同比 +372%，占营收 47.1%</div></div>
+    <div class="kpi"><div class="kpi-l">经营现金流</div><div class="kpi-v">−$1.585亿</div><div class="note">上季 −$3.469亿，流出收窄</div></div>
+    <div class="kpi"><div class="kpi-l">资本开支</div><div class="kpi-v">$2.660亿</div><div class="note">单季自由现金流 −$4.245亿</div></div>
+    <div class="kpi"><div class="kpi-l">挖出比特币</div><div class="kpi-v">2,694 枚</div><div class="note">同比 +377%</div></div>
+    <div class="kpi"><div class="kpi-l">自挖算力</div><div class="kpi-v">73.0 EH/s</div><div class="note">同比 +342%，机队能效 15.8 J/TH</div></div>
+    <div class="kpi"><div class="kpi-l">现金及受限现金</div><div class="kpi-v">$4.963亿</div><div class="note">2026-06-30 末</div></div>
+    <div class="kpi"><div class="kpi-l">总有息负债</div><div class="kpi-v">$18.42亿</div><div class="note">其中关联方 $6.33亿（34.4%）</div></div>
+  </div>
+  <p class="note">数据来源：<a href="https://www.sec.gov/Archives/edgar/data/1899123/000121390026086938/ea030131301ex99-1.htm" target="_blank" rel="noopener">Q2 2026 财报（6-K 附件 99.1，2026-08-10）</a>。自 2026-01-01 起公司由 IFRS 转为美国 GAAP，本季及比较期均为美国 GAAP 口径。</p>
+</section>
+
+<section class="section" id="focus" aria-labelledby="focus-t">
+  <h2 class="stitle" id="focus-t">本季必看 · 两个「看穿」<a class="anchor" href="#focus" aria-label="本节链接">#</a></h2>
+
+  <div class="cmt">
+    <h3 class="ctitle">看穿一：那个赌注有了答案——毛利率爬了 17 个百分点，但没有爬回地面</h3>
+    <p>上一份关于这家公司的研判写于五天前，结尾留了一句可以被证伪的话：「先看毛利率能不能从 −20.7% 爬回地面」。今天答案出来了。</p>
+    <p>Q2 2026 毛利率 <strong>−3.7%</strong>，比上一季的 −20.66% 改善 <span class="hl-t">16.9 个百分点</span>。这是真进步，而且进步的来源是实的：机队能效从 25.7 J/TH 提升到 <strong>15.8 J/TH</strong>，自挖算力从 16.5 EH/s 涨到 <strong>73.0 EH/s</strong>，电价环比下降约 15%。单枚比特币的账面亏损从上季的 17,363 美元收窄到 <strong>965 美元</strong>。</p>
+    <p>但它仍在地面以下。而且把镜头拉远，这一季的改善是六年长坡里的一个反弹，不是趋势反转：</p>
+    <div class="tbl-wrap">
+      <table class="tbl" data-source="Bitdeer FY2021–FY2025 Form 20-F（IFRS 审计）+ Q2 2026 财报" data-shape="6 期 × 3 列">
+        <thead><tr><th>财年</th><th>营业收入（百万美元）</th><th>毛利（百万美元）</th><th>毛利率</th></tr></thead>
+        <tbody>
+          <tr><td>FY2021</td><td>394.7</td><td>241.4</td><td>61.2%</td></tr>
+          <tr><td>FY2022</td><td>333.3</td><td>83.3</td><td>25.0%</td></tr>
+          <tr><td>FY2023</td><td>368.6</td><td>77.8</td><td>21.1%</td></tr>
+          <tr><td>FY2024</td><td>349.8</td><td>66.4</td><td>19.0%</td></tr>
+          <tr><td>FY2025</td><td>620.3</td><td>61.0</td><td>9.8%</td></tr>
+          <tr><td><strong>H1 2026</strong></td><td><strong>417.7</strong></td><td><strong>−47.6</strong></td><td><strong>−11.4%</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>毛利连续五年下降，第六年转负；而同期收入从 3.95 亿涨到 6.20 亿。</strong>一家公司的收入翻了一倍半，赚到的毛利却从 2.41 亿掉到负数——这不是周期问题，是这门生意的单位经济在系统性变差。</p>
+    <p>那么这一季的改善能不能延续？拆开分部看，答案没有那么乐观：<span class="hl-t">Q2 2026 的六个主要分部里，五个是毛亏</span>。</p>
+    <div class="tbl-wrap">
+      <table class="tbl" data-source="Bitdeer Q2 2026 财报分部收入与成本表（管理层披露为约数）" data-shape="7 行 × 4 列">
+        <thead><tr><th>分部</th><th>收入（百万美元）</th><th>成本（百万美元）</th><th>分部毛利率</th></tr></thead>
+        <tbody>
+          <tr><td>自挖矿</td><td>168.4</td><td>171.0</td><td>−1.5%</td></tr>
+          <tr><td>联合挖矿（Co-Mining）</td><td>25.0</td><td>28.8</td><td>−15.2%</td></tr>
+          <tr><td><strong>AI 云</strong></td><td><strong>14.0</strong></td><td><strong>16.3</strong></td><td><strong>−16.4%</strong></td></tr>
+          <tr><td>云算力</td><td>3.7</td><td>3.8</td><td>−2.7%</td></tr>
+          <tr><td>普通托管</td><td>2.8</td><td>2.8</td><td>0.0%</td></tr>
+          <tr><td>会员托管</td><td>12.8</td><td>11.6</td><td>+9.4%</td></tr>
+          <tr><td>SEALMINER 外销</td><td>0.4</td><td>0.2</td><td>+50.0%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>最值得停一下的是 AI 云。</strong>这是整个转型故事的旗舰业务，年化经常性收入（ARR）已从 2025 年 11 月的约 1,000 万美元涨到 <strong>7,600 万美元</strong>，环比增长 77%，4,248 张 GPU 利用率约 95%——增长是真的、漂亮的。但它在报表上<span class="hl-t">毛亏 16.4%</span>。管理层在电话会上完整披露了 ARR、GPU 数量、利用率与合同期限，<strong>唯独没有披露这个分部的毛利率</strong>。</p>
+    <p class="note">分部表为管理层披露的约数（收入合计 227.1 vs 报表总额 228.784，差 1.7 为「其他」与四舍五入），毛利率据此计算，仅供结构参考。</p>
+  </div>
+
+  <div class="cmt">
+    <h3 class="ctitle">看穿二：毛利转负的机械成因不是电费，是它自己造的矿机</h3>
+    <p>把毛亏归因于「币价低迷」是最省事的解释，但对不上账。真正的原因写在折旧那一行。</p>
+    <p>八个季度里，Bitdeer 的折旧与摊销从 <strong>1,950 万美元涨到 1.077 亿美元，增长 5.5 倍</strong>，占营业收入的比重从 31.5% 升到 <strong>47.1%</strong>。</p>
+    <p>一个简单的反事实：<span class="hl-t">如果本季折旧仍维持在两年前 31.5% 的营收占比（即 7,210 万美元），Q2 2026 的毛利会是 +2,710 万美元，而不是 −850 万美元。</span>整个毛亏，就是折旧的台阶。</p>
+    <p>折旧为什么会跳这么多？因为这家公司改变了自己造的矿机的去向。</p>
+    <ul class="ulist">
+      <li><strong>以前它卖矿机。</strong>FY2025 矿机外销收入 1.083 亿美元，Q2 2025 单季还有 6,950 万美元——卖出去记收入、记毛利。</li>
+      <li><strong>现在它把矿机留给自己。</strong>Q2 2026 外销只剩 <strong>40 万美元</strong>，同比 −99.4%。管理层在电话会上说得很直白：现有晶圆库存「已全部指定为内部使用」。</li>
+      <li><strong>会计上会发生什么。</strong>卖给自己不产生收入，制造利润在合并报表层面被抵消；造矿机的成本先进存货、再转入固定资产——<span class="hl-t">仅 2026 年上半年，存货转固就有 7.969 亿美元</span>——然后以折旧的形式，回到「自挖矿」这个分部的营业成本里。</li>
+    </ul>
+    <p><strong>所以毛利转负不是经营崩了，是一次商业模式切换的会计后果</strong>：过去一次性确认的制造利润，被换成了未来三到四年摊出来的折旧费用。这对现金流其实是中性偏好的（少了一道外部客户的信用风险），但它把利润表压到了水面以下，而且会一直压到机队折旧完为止。</p>
+    <p>这也解释了本季两个非 GAAP 指标为什么会同季反向：<strong>调整后 EBITDA 从 460 万涨到 3,110 万（好了 6.8 倍），调整后净亏损却从 3,090 万扩大到 9,600 万（坏了 3.1 倍）。</strong>差额几乎全在折旧那一行——EBITDA 把它加回去了，调整后净亏损没有。</p>
+    <p>对一家矿机三到四年就被下一代淘汰的公司，把折旧加回去说「EBITDA 转正了」，是把最真实的那笔成本排除在外。<span class="hl-t">这一季真正诚实的口径是调整后净亏损，而它在恶化。</span></p>
+  </div>
+</section>
+
+<section class="section" id="trend" aria-labelledby="trend-t">
+  <h2 class="stitle" id="trend-t">关键指标趋势（近 8 季）<a class="anchor" href="#trend" aria-label="本节链接">#</a></h2>
+  <div class="cgrid">
+    <div class="cw">
+      <div class="ctitle">收入与毛利率：一条向上，一条向下</div>
+      <div class="cwrap"><canvas id="rev" data-chart="rev" role="img" aria-label="八个季度营业收入从 6,200 万美元升至 2.288 亿美元，同期毛利率从 4.5% 一路跌至 26Q1 的 −20.7%，本季回到 −3.7%"></canvas></div>
+      <p class="note">营收八季增长 2.7 倍，毛利率却在 25Q3 见顶（24.1%）后连续两季转负。本季 −3.7% 是修复，不是回正。</p>
+    </div>
+    <div class="cw">
+      <div class="ctitle">净利润与可转债公允价值：几乎是同一条线</div>
+      <div class="cwrap"><canvas id="margin" data-chart="margin" role="img" aria-label="八个季度净利润在负 5.32 亿到正 4.09 亿美元之间剧烈摆动，与可转债衍生品公允价值变动这条线高度重合，相关系数 0.98"></canvas></div>
+      <p class="note">相关系数 <strong>0.98</strong>。净利润的方向不由生意决定，由一笔非现金的会计计量决定——这是本报告最重要的一张图。</p>
+    </div>
+    <div class="cw">
+      <div class="ctitle">FY2025 收入构成：AI 云只占 1.1%</div>
+      <div class="cwrap"><canvas id="segment" data-chart="segment" role="img" aria-label="FY2025 收入 6.203 亿美元中，自挖矿 3.96 亿占 63.8%，矿机外销 1.083 亿占 17.5%，AI 云仅 680 万占 1.1%"></canvas></div>
+      <p class="note">被当作估值主线的 AI 云，在最近一个完整财年只贡献 680 万美元。Q2 2026 单季已到 1,400 万，但仍是毛亏。</p>
+    </div>
+    <div class="cw">
+      <div class="ctitle">折旧：毛利转负的机械成因</div>
+      <div class="cwrap"><canvas id="eps" data-chart="eps" role="img" aria-label="折旧与摊销八季从 1,950 万美元升至 1.077 亿美元，占营业收入比重从 31.5% 升至 47.1%"></canvas></div>
+      <p class="note">折旧八季增长 5.5 倍。若维持 24Q3 的营收占比，本季毛利会是 +2,710 万而非 −850 万。</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="statements" aria-labelledby="statements-t">
+  <h2 class="stitle" id="statements-t">三张表的五年轨迹<a class="anchor" href="#statements" aria-label="本节链接">#</a></h2>
+  <div class="period-toggle" role="group" aria-label="切换周期">
+    <button type="button" class="period-btn is-on" data-period="annual" aria-pressed="true">年度</button>
+    <button type="button" class="period-btn" data-period="quarterly" aria-pressed="false">季度</button>
+  </div>
+  <div class="cgrid3">
+    <div class="cw">
+      <div class="ctitle">利润表</div>
+      <div class="cwrap"><canvas id="income" data-chart="income" role="img" aria-label="五年营业收入从 3.95 亿升至 6.20 亿美元，毛利却从 2.41 亿逐年降至 6,100 万，净利润在正 8,260 万与负 5.99 亿之间剧烈摆动"></canvas></div>
+    </div>
+    <div class="cw">
+      <div class="ctitle">现金流量表</div>
+      <div class="cwrap"><canvas id="cashflow" data-chart="cashflow" role="img" aria-label="五年经营现金流始终为负且逐年扩大，从负 5,250 万扩大到负 17.39 亿美元；资本开支同期从 6,290 万增至 2.32 亿；自由现金流五年全负"></canvas></div>
+    </div>
+    <div class="cw">
+      <div class="ctitle">资产负债表</div>
+      <div class="cwrap"><canvas id="balance" data-chart="balance" role="img" aria-label="五年总资产从 6.47 亿膨胀到 28.05 亿美元，总负债从 3.59 亿升至 19.37 亿，股东权益从 2.88 亿升至 8.68 亿"></canvas></div>
+    </div>
+  </div>
+  <p class="note"><strong>三张图放在一起说明了什么。</strong>利润表的毛利线（金色）五年单调下行、第六年入水，而收入线（蓝色）在 FY2025 增长 77%——增长没有带来盈利。现金流量表三条线全部在零轴以下，且逐年下探：<span class="hl-t">五年里没有一年经营现金流为正</span>。资产负债表则同时在两端膨胀：总资产四年涨 4.3 倍，总负债涨 5.4 倍。把三张图合起来读，这是一家<strong>用融资购买规模、用规模摊薄单位利润</strong>的公司——资产在变大，赚钱能力在变小，缺口由外部资本持续填补。</p>
+  <p class="note">口径说明：年度序列（FY2021–FY2025）全部取自 20-F 的 IFRS 审计数，五年同基可比。季度序列 24Q3–25Q4 为当期披露的 IFRS 数、26Q1 起为美国 GAAP——公司自 2026-01-01 转换准则。<strong>选择这个口径的理由是它能对上账</strong>：25Q1–25Q4 四季的营收、毛利、净利润、经营现金流、资本开支合计，与 20-F 审计年度值分毫不差。资产负债表的 25Q4 一点采用美国 GAAP 重述值（总资产 2,787.9／总负债 1,939.9／权益 848.0），与 26Q1、26Q2 同基；IFRS 原值为 2,804.6／1,936.7／867.8，差异不足 1%。<strong>26Q1 的净利润 −1.595 亿为美国 GAAP 值；25Q4 图中所示 +7,050 万为当期 IFRS 披露值，其美国 GAAP 重述值为 −1.915 亿</strong>，两者相差 2.62 亿美元，详见模块 5。现金流量表口径：Bitdeer 自造矿机，矿机先入存货再转固定资产，<span class="hl-t">造矿机的现金支出走「经营活动」而非「投资活动」</span>，所以经营现金流的巨额负数里含大量扩张性投入，不能等同于经营亏损——公司自己在 Q1 2026 财报中即说明「经营活动净流出 3.469 亿美元，主要由 SEALMINER 供应链与制造成本、电费驱动」。真正该看的是「经营 + 资本开支」的合计。</p>
+</section>
+
+<section class="section" id="flow" aria-labelledby="flow-t">
+  <h2 class="stitle" id="flow-t">资金流向桑基图<a class="anchor" href="#flow" aria-label="本节链接">#</a></h2>
+  <p>对一家毛利为负、自由现金流连续五年半为负的公司，传统的「营收 → 自由现金流」瀑布没有意义——营收还没走到自由现金流那一步就断了。所以这里换一个问法：<strong>2026 年上半年，这家公司手里过了多少现金，从哪来，到哪去。</strong></p>
+  <div id="sankey" role="img" aria-label="2026 年上半年现金流向图">
+<svg viewBox="0 0 1180 520" role="img" aria-label="2026 年上半年现金流向：总可用现金 19.10 亿美元中，营业收入只贡献 4.18 亿（21.9%），其余 78.1% 来自发行股票 4.87 亿、处置数字资产与设备 4.05 亿、可转债 3.64 亿与借款 2.37 亿；支出端经营现金支出 9.23 亿、资本开支 3.60 亿、偿债与资本运作 3.09 亿，期末现金净增 3.18 亿">
+  <g class="sk-flow">
+    <path d="M224,106 C372,106 372,106 520,106" stroke="var(--red)" stroke-width="92"/>
+    <path d="M224,204 C372,204 372,192 520,192" stroke="var(--accent)" stroke-width="79"/>
+    <path d="M224,294 C372,294 372,270 520,270" stroke="var(--gold)" stroke-width="77"/>
+    <path d="M224,379 C372,379 372,343 520,343" stroke="var(--red)" stroke-width="69"/>
+    <path d="M224,448 C372,448 372,400 520,400" stroke="var(--red)" stroke-width="45"/>
+    <path d="M536,150 C683,150 683,150 830,150" stroke="var(--accent2)" stroke-width="181"/>
+    <path d="M536,276 C683,276 683,288 830,288" stroke="var(--accent3)" stroke-width="70"/>
+    <path d="M536,342 C683,342 683,366 830,366" stroke="var(--green)" stroke-width="62"/>
+    <path d="M536,404 C683,404 683,440 830,440" stroke="var(--gold)" stroke-width="60"/>
+  </g>
+  <g class="sk-node">
+    <rect x="210" y="60" width="14" height="92" rx="3" fill="var(--red)"/>
+    <rect x="210" y="164" width="14" height="79" rx="3" fill="var(--accent)"/>
+    <rect x="210" y="255" width="14" height="77" rx="3" fill="var(--gold)"/>
+    <rect x="210" y="344" width="14" height="69" rx="3" fill="var(--red)"/>
+    <rect x="210" y="425" width="14" height="45" rx="3" fill="var(--red)"/>
+    <rect x="520" y="60" width="16" height="362" rx="3" fill="var(--accent)"/>
+    <rect x="830" y="60" width="14" height="181" rx="3" fill="var(--accent2)"/>
+    <rect x="830" y="253" width="14" height="70" rx="3" fill="var(--accent3)"/>
+    <rect x="830" y="335" width="14" height="62" rx="3" fill="var(--green)"/>
+    <rect x="830" y="410" width="14" height="60" rx="3" fill="var(--gold)"/>
+  </g>
+  <g class="sk-t">
+    <text class="sk-lab" x="224" y="40" text-anchor="end">现金从哪来</text>
+    <text class="sk-lab" x="528" y="40" text-anchor="middle">总可用现金</text>
+    <text class="sk-num" x="528" y="54" text-anchor="middle">1,909.9</text>
+    <text class="sk-lab" x="830" y="40">现金到哪去</text>
+    <text class="sk-lab" x="198" y="105" text-anchor="end">发行股票（净）</text>
+    <text class="sk-num" x="198" y="121" text-anchor="end">487.0　25.5%</text>
+    <text class="sk-lab" x="198" y="203" text-anchor="end">营收</text>
+    <text class="sk-num" x="198" y="219" text-anchor="end">417.7　21.9%</text>
+    <text class="sk-lab" x="198" y="293" text-anchor="end">处置数字资产与设备</text>
+    <text class="sk-num" x="198" y="309" text-anchor="end">405.0　21.2%</text>
+    <text class="sk-lab" x="198" y="378" text-anchor="end">可转债（净）</text>
+    <text class="sk-num" x="198" y="394" text-anchor="end">363.6　19.0%</text>
+    <text class="sk-lab" x="198" y="447" text-anchor="end">借款（含关联方）</text>
+    <text class="sk-num" x="198" y="463" text-anchor="end">236.6　12.4%</text>
+    <text class="sk-lab" x="856" y="149">经营现金支出</text>
+    <text class="sk-num" x="856" y="165">923.1　48.3%</text>
+    <text class="sk-lab" x="856" y="287">资本开支</text>
+    <text class="sk-num" x="856" y="303">359.7　18.8%</text>
+    <text class="sk-lab" x="856" y="365">期末现金净增</text>
+    <text class="sk-num" x="856" y="381">318.4　16.7%</text>
+    <text class="sk-lab" x="856" y="439">偿债与资本运作支出</text>
+    <text class="sk-num" x="856" y="455">308.6　16.2%</text>
+    <text class="sk-lab" x="590" y="506" text-anchor="middle">单位：百万美元 · 2026 年上半年 · 取自 Q2 2026 财报现金流量表</text>
+  </g>
+</svg>
+  </div>
+  <p class="note"><strong>这张图只需要看一件事：最左边那根蓝色带子有多细。</strong>上半年 Bitdeer 手里流过 19.10 亿美元现金，其中来自客户的营业收入只有 4.18 亿，<span class="hl-t">占 21.9%</span>；其余 78.1% 来自发行股票（4.87 亿）、出售数字资产（4.05 亿）、发行可转债（3.64 亿）与借款（2.37 亿）。同期经营现金支出 9.23 亿，是营业收入的 <strong>2.21 倍</strong>。</p>
+  <details class="chart-data">
+    <summary>数据表：2026 年上半年现金来源与去向（百万美元）</summary>
+    <div class="tbl-wrap">
+      <table class="tbl" data-source="Bitdeer Q2 2026 财报合并现金流量表（六个月）" data-shape="来源 7 项 + 去向 9 项">
+        <thead><tr><th>类别</th><th>项目</th><th>金额</th><th>占比</th></tr></thead>
+        <tbody>
+          <tr><td>来源</td><td>发行普通股（扣发行费用）</td><td>484.5</td><td>25.4%</td></tr>
+          <tr><td>来源</td><td>营业收入</td><td>417.7</td><td>21.9%</td></tr>
+          <tr><td>来源</td><td>处置数字资产</td><td>402.4</td><td>21.1%</td></tr>
+          <tr><td>来源</td><td>发行可转债（净额）</td><td>363.6</td><td>19.0%</td></tr>
+          <tr><td>来源</td><td>关联方借款</td><td>210.0</td><td>11.0%</td></tr>
+          <tr><td>来源</td><td>其他借款</td><td>26.6</td><td>1.4%</td></tr>
+          <tr><td>来源</td><td>处置固定资产与投资、股权激励行权</td><td>5.1</td><td>0.3%</td></tr>
+          <tr><td><strong>来源合计</strong></td><td></td><td><strong>1,909.9</strong></td><td>100%</td></tr>
+          <tr><td>去向</td><td>经营现金支出（成本、费用、利息、税）</td><td>923.1</td><td>48.3%</td></tr>
+          <tr><td>去向</td><td>资本开支（购建固定资产与无形资产）</td><td>359.7</td><td>18.8%</td></tr>
+          <tr><td>去向</td><td>期末现金净增</td><td>318.4</td><td>16.7%</td></tr>
+          <tr><td>去向</td><td>偿还关联方借款</td><td>149.0</td><td>7.8%</td></tr>
+          <tr><td>去向</td><td>可转债清偿</td><td>93.0</td><td>4.9%</td></tr>
+          <tr><td>去向</td><td>购买零行权价看涨期权</td><td>33.7</td><td>1.8%</td></tr>
+          <tr><td>去向</td><td>偿还其他借款</td><td>26.0</td><td>1.4%</td></tr>
+          <tr><td>去向</td><td>回购股份、长期投资、汇率影响</td><td>6.9</td><td>0.4%</td></tr>
+          <tr><td><strong>去向合计</strong></td><td></td><td><strong>1,909.9</strong></td><td>100%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">流量平衡校验：来源合计 − 去向中的非现金留存 = 期末现金净增 318,411 千美元，与财报披露的「现金净增加额」完全一致。</p>
+  </details>
+</section>
+
+<section class="section" id="m1" aria-labelledby="m1-t">
+  <h2 class="stitle" id="m1-t">模块 1 · 公司概览与背景<a class="anchor" href="#m1" aria-label="本节链接">#</a></h2>
+  <p><strong>Bitdeer Technologies Group（NASDAQ: BTDR）</strong>，注册地开曼、总部新加坡，2023 年 4 月经 SPAC（Blue Safari Group）与 Bitmain 分拆的资产合并上市。财年截至 12 月 31 日，以美元记账，作为外国私人发行人向 SEC 报送 20-F 与 6-K。</p>
+  <p>它做四件事，彼此嵌套：<strong>①</strong> 自己设计比特币矿机芯片（SEALMINER 系列，SEAL01 至 SEAL04）；<strong>②</strong> 用这些矿机在自有数据中心挖比特币；<strong>③</strong> 把多余的机位与算力卖给别人（托管、云算力、联合挖矿）；<strong>④</strong> 把手里的电力资源改造成 AI／HPC 数据中心，出租或自营 GPU 云。</p>
+  <p><strong>海图「一句话测试」</strong>：这家公司买电、造矿机、挖币卖币；现在它想把同一批电，卖给需要算力的 AI 公司。</p>
+  <p>这句话能说清，但里面藏着一个能力圈的边界必须讲明：<span class="hl-t">前半句是可验证的重资产生意，后半句是一个尚未兑现的转型</span>。截至 2026-08-10，全球电力容量 2,980.2 MW，其中<strong>只有 133 gross MW（4.5%）签了 AI/HPC 合同</strong>。剩下 95.5% 的价值，取决于一系列还没发生的事。</p>
+  <div class="tbl-wrap">
+    <table class="tbl" data-source="Bitdeer Q2 2026 财报「电力基础设施」表（截至 2026-07-31）" data-shape="按地区汇总 · 单位 MW">
+      <thead><tr><th>状态</th><th>地区／站点</th><th>容量（MW）</th><th>用途与备注</th></tr></thead>
+      <tbody>
+        <tr><td>在运</td><td>美国（Rockdale 563、Massillon 174、Knoxville 86、Wenatchee 13）</td><td>836</td><td>挖矿为主，部分评估转 AI</td></tr>
+        <tr><td>在运</td><td>挪威（Tydal 180、Molde 84）</td><td>264</td><td>Tydal 为已签约 AI 园区</td></tr>
+        <tr><td>在运</td><td><strong>不丹（Jigmeling 500、Gedu 100）</strong></td><td><strong>600</strong></td><td><strong>仅挖矿</strong></td></tr>
+        <tr><td>在运</td><td><strong>埃塞俄比亚（Oromia）</strong></td><td><strong>50</strong></td><td><strong>仅挖矿</strong></td></tr>
+        <tr><td>在运</td><td>马来西亚（Cyberjaya）</td><td>2</td><td>AI 云（承租）</td></tr>
+        <tr><td>管道</td><td>Clarington, OH</td><td>570</td><td><strong>因法律诉讼，时点「待更新」</strong></td></tr>
+        <tr><td>管道</td><td>Weathersfield, OH</td><td>300</td><td>Q4 2028</td></tr>
+        <tr><td>管道</td><td>Rockdale 扩建 179、马来西亚 31.2、Massillon 47、Fox Creek（加拿大）101</td><td>358</td><td>2026–2027 陆续</td></tr>
+        <tr><td><strong>合计</strong></td><td></td><td><strong>2,980.2</strong></td><td>在运 1,752 / 管道 1,228.2</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>这张表里有两个数字决定了转型故事的上限。</strong>第一，<span class="hl-t">不丹 600 MW + 埃塞俄比亚 50 MW ＝ 650 MW，占在运容量的 37%</span>——这些电力可以挖比特币，但没有任何一家 AI 客户会把训练集群放在不丹或埃塞俄比亚。第二，管道里最大的一块 <strong>Clarington 570 MW（占管道 46%）卡在诉讼里，交付时点写着「待更新」</strong>。剔除这两项后，真正「AI 可落地」的容量约 2,182 MW，而不是 2,980 MW。</p>
+  <p class="note">口径提示：2026 年 6 月运营简报披露的全球容量为 3,025.2 MW、Tydal 分「一期 50 + 二期 175」，与 Q2 财报（截至 7 月 31 日）的 2,980.2 MW 与「三期 66.5/66.5/47」不同。本报告一律采用较新的 Q2 财报口径。</p>
+</section>
+
+<section class="section" id="m2" aria-labelledby="m2-t">
+  <h2 class="stitle" id="m2-t">模块 2 · 管理层评估<a class="anchor" href="#m2" aria-label="本节链接">#</a></h2>
+  <p><strong>吴忌寒（Jihan Wu），40 岁，创始人，2021 年 1 月起任董事长，2024 年 3 月起兼任 CEO。</strong>2013 年联合创办比特大陆（Bitmain），2021 年 1 月离开；北京大学经济学与心理学双学士，2019 年起定居新加坡。他同时是关联方 BIT Group 的创始人与董事。</p>
+  <p><strong>控制权是本案最核心的治理事实。</strong>据 FY2025 20-F 的受益所有权表：吴忌寒持 A 类 2,946,206 股（A 类的 1.5%）与 <strong>全部 44,399,922 股 V 类</strong>，合计经济权益约 <strong>19.5%</strong>；但 <span class="hl-t">V 类每股 10 票</span>，其投票权达 <strong>69.5%</strong>，全体董事与高管合计 69.8%。V 类股经 BVI 实体由一项不可撤销信托持有，吴忌寒为设立人、有权指示受托人行使表决与处分权。</p>
+  <p>公司据此在 20-F 中明确自认是纳斯达克规则下的 <strong>「受控公司」（controlled company）</strong>，可豁免「董事会多数为独立董事」「提名与治理委员会全部由独立董事组成」「薪酬委员会全部由独立董事组成」三项要求，并声明「currently intend to use these exemptions as appropriate」——<strong>即打算继续使用这些豁免</strong>。20-F 同时承认双层股权可能导致公司被排除在 S&amp;P 500 等指数之外。</p>
+
+  <h3 class="ctitle">2026 年的高管更替：需要拆开看，不能一概而论</h3>
+  <p>三个月内三位 C 级高管变动，容易被读成「团队崩了」。逐份看 6-K 原文，结论要分两半：</p>
+  <div class="tbl-wrap">
+    <table class="tbl" data-source="Bitdeer 6-K：2026-05-27、2026-06-08、2026-08-03" data-shape="4 行 × 3 列">
+      <thead><tr><th>日期</th><th>事项</th><th>怎么读</th></tr></thead>
+      <tbody>
+        <tr><td>2026-05-26/27</td><td>CFO 刘建春辞任（2026-06-30 生效），转任首席顾问；<strong>同日</strong>董事会任命 <strong>Michael G. Potter</strong> 为 CFO</td><td><strong>有序接班，且是升级。</strong>Potter 曾任 Corsair Gaming（NASDAQ: CRSR）CFO（2019-11 至 2025-12，主导其 2020 年 IPO）、阿特斯太阳能 CFO 兼首席法务官、Lattice Semiconductor 等多家半导体公司 CFO。公告次日股价 +18.3%</td></tr>
+        <tr><td>2026-06-08</td><td>COO 索超、CBO 孔令辉<strong>同日辞任、即时生效</strong></td><td><strong>这一条是真的异常。</strong>孔令辉是 2021-01 至 2024-03 的前任 CEO、比特大陆时期的老臣。两位同日即时离任，没有接任安排披露</td></tr>
+        <tr><td>2026-08-03</td><td>审计委员会解聘 MaloneBailey，改聘 <strong>德勤（Deloitte &amp; Touche LLP，新加坡）</strong></td><td><strong>这是治理改善，不是红旗。</strong>6-K 明确：过去两个财年审计意见无保留、无否定，双方<strong>无会计分歧</strong>；MaloneBailey 致 SEC 的函件表示同意该陈述。对一家市值近 30 亿美元的公司，从小所换到四大是正向的</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note"><strong>一处对既往判断的修正。</strong>本栏目五天前的那份事件更新，把「换掉审计师」与人事变动一并列为红旗触发项。读完 6-K 原文后，这个判断需要收回：审计师变更是从 MaloneBailey 升级到德勤，且明文记载无分歧。同样需要修正的还有内控——FY2024 确曾存在重大缺陷（涉及物料清单维护、可转债估值模型假设复核、矿池等外部数据可靠性验证），但 <strong>FY2025 20-F 载明该缺陷已于 2025 年内整改完毕，管理层结论为内控有效，且「外部审计师评估管理层的评估后，未发现任何重大缺陷」</strong>。这两项此前被当作扣分项，实际是加分项。</p>
+
+  <h3 class="ctitle">真正该扣分的地方</h3>
+  <ul class="ulist">
+    <li><strong>关联方三重身份。</strong>20-F 披露，2023–2025 三个年度 Bitdeer <span class="hl-t">绝大部分加密资产由 BIT Group 托管，且加密货币的买卖主要以现货价对 BIT Group 进行</span>。BIT Group 由吴忌寒创办并任董事。它同时是托管人、交易对手、以及 <strong>6.331 亿美元借款的债权人</strong>（占公司全部有息负债的 34.4%）。资产负债表上还有 <strong>1.622 亿美元「对关联方的数字资产应收款」</strong>——占公司全部数字资产的 82%。</li>
+    <li><strong>比特币清仓的时点。</strong>持币从 2025-12-31 的 2,017 枚，到 2026-01-31 的 1,530 枚，再到 <strong>2026-02-28 的 51 枚</strong>；20-F 称截至 2026-02-20 持币已清零。而同期比特币从 2025 年末的 88,424 美元跌到 2026 年 2 月底的 65,867 美元。<span class="hl-t">这次清仓发生在下跌途中，不是高点。</span>这是本次研究中对股东最不利的一个发现。</li>
+    <li><strong>电话会上的沉默。</strong>Q2 2026 电话会全程<strong>未提及比特币库存政策，也未提及 BIT Group 关联方借款</strong>——资产负债表上两个最需要解释的项目，没有一位分析师问、也没有一位高管主动说。</li>
+  </ul>
+  <p><strong>长期主义测试：</strong>吴忌寒以 19.5% 的经济权益掌握 69.5% 的投票权，且明示将继续使用受控公司豁免。他是主人翁型经理人——但主人翁的利益与小股东的利益，在「是否继续以增发换扩张」这件事上并不完全一致：<span class="hl-t">30 个月里股本翻了 2.4 倍，而他的 V 类股票数一股未增，投票权几乎不受稀释影响</span>。</p>
+</section>
+
+<section class="section" id="m3" aria-labelledby="m3-t">
+  <h2 class="stitle" id="m3-t">模块 3 · 商业模式深度解析<a class="anchor" href="#m3" aria-label="本节链接">#</a></h2>
+  <p>五年的分部收入把这家公司的三次转身刻得很清楚：</p>
+  <div class="tbl-wrap">
+    <table class="tbl" data-source="Bitdeer FY2021–FY2025 Form 20-F 分部收入表" data-shape="7 行 × 6 列 · 百万美元">
+      <thead><tr><th>分部</th><th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th></tr></thead>
+      <tbody>
+        <tr><td>自挖矿</td><td>191.7</td><td>62.4</td><td>111.7</td><td>163.1</td><td><strong>396.0</strong></td></tr>
+        <tr><td>矿机外销</td><td>45.7</td><td>0.7</td><td>0.0</td><td>0.6</td><td><strong>108.3</strong></td></tr>
+        <tr><td>云算力</td><td>124.2</td><td>121.3</td><td>67.9</td><td>39.8</td><td><strong>2.1</strong></td></tr>
+        <tr><td>普通托管</td><td>18.3</td><td>99.3</td><td>97.3</td><td>67.6</td><td>35.0</td></tr>
+        <tr><td>会员托管</td><td>0.0</td><td>26.1</td><td>79.9</td><td>64.0</td><td>61.2</td></tr>
+        <tr><td><strong>AI 云</strong></td><td>0.0</td><td>0.0</td><td>0.0</td><td>3.5</td><td><strong>6.8</strong></td></tr>
+        <tr><td>其他</td><td>14.8</td><td>23.6</td><td>11.8</td><td>11.3</td><td>10.8</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>第一次转身</strong>是从「卖算力给散户」（云算力）转向「自己挖」——云算力五年从 1.242 亿萎缩到 <span class="hl-t">210 万，跌去 98%</span>。<strong>第二次</strong>是从「替别人托管」转向「自己造机器」——普通托管收入五年从峰值 9,930 万降到 3,500 万，公司自己在 20-F 里解释：2024 年 4 月减半后，托管客户拆掉了老机器（该分部 FY2025 同比 −48.2%）。<strong>第三次</strong>正在发生：从挖矿转向 AI。</p>
+  <p>但第三次转身在损益表上还只是一个小数点：<strong>AI 云在最近一个完整财年只有 680 万美元，占总收入 1.1%。</strong>Q2 2026 单季升到 1,400 万，ARR 约 7,600 万——增速很好，但基数意味着它今天还撑不起估值。</p>
+  <h3 class="ctitle">单位经济：把一枚比特币拆开</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-source="Bitdeer Q2 2026 财报：自挖矿收入/成本、总耗电量与平均电价、产币量" data-shape="5 行 × 2 列">
+      <thead><tr><th>Q2 2026 · 每枚比特币</th><th>金额（美元）</th></tr></thead>
+      <tbody>
+        <tr><td>实现单价（自挖矿收入 1.684 亿 ÷ 2,694 枚）</td><td>62,509</td></tr>
+        <tr><td>报表全成本（自挖矿成本 1.710 亿 ÷ 2,694 枚）</td><td>63,474</td></tr>
+        <tr><td><strong>账面盈亏</strong></td><td><strong>−965</strong>（上季 −17,363）</td></tr>
+        <tr><td>其中：纯电费（253.7 万 MWh × $44/MWh ÷ 2,694 枚）</td><td>41,436</td></tr>
+        <tr><td><strong>现金口径盈亏（实现单价 − 电费）</strong></td><td><strong>+21,073</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>账面亏 965 美元、现金赚 21,073 美元，中间隔着的正是折旧：本季折旧摊销 1.077 亿 ÷ 2,694 枚 ≈ <strong>每枚 39,988 美元</strong>。<span class="hl-t">所以「挖矿现在赚不赚钱」这个问题，取决于你认不认这笔折旧是真实成本。</span>对一家矿机三到四年就被下一代淘汰的公司，我认为它是真的——A1 到 A4 四代产品只用了两年，被淘汰的速度就是折旧的速度。</p>
+  <p class="note">交叉验证：Q2 2026 全网出块补贴约 40,950 枚，Bitdeer 挖出 2,694 枚，占 <strong>6.6%</strong>；而按季度平均自有算力（自挖约 69.5 + 联合挖矿约 11.4 ＝ 80.9 EH/s）对全网约 950–990 EH/s，理论份额应为 8.2%。约 20% 的落差来自矿池费、实际开机率与「标称算力 vs 实测算力」的差异。这个缺口公司未作解释，值得在下次电话会上追问。</p>
+</section>
+
+<section class="section" id="m4" aria-labelledby="m4-t">
+  <h2 class="stitle" id="m4-t">模块 4 · 经济护城河分析（5 维）<a class="anchor" href="#m4" aria-label="本节链接">#</a></h2>
+  <div class="moat-grid">
+    <div class="moat-card"><div class="moat-rate">无</div><h3>网络效应</h3><p>比特币挖矿是纯粹的商品化算力竞争，多一个客户不会让产品对其他客户更有价值。AI 云同理——GPU 租户之间没有互相增强的关系。</p></div>
+    <div class="moat-card"><div class="moat-rate">窄</div><h3>转换成本</h3><p>托管与云算力客户可随时迁走，FY2025 普通托管收入同比 −48.2% 就是证明。<strong>唯一的例外是 Tydal 这类 16 年长租</strong>——一旦 GPU 装进机房，搬迁成本极高。但这样的合同目前只有一份，且租户在第 10 年有无费用终止权。</p></div>
+    <div class="moat-card"><div class="moat-rate">窄</div><h3>成本优势</h3><p><strong>这是它唯一真实的护城河。</strong>自研 SEAL04 芯片级能效 6–7 J/TH、整机 9.45 J/TH，处于行业前列；平均电价 $44/MWh；自产自用免去第三方加价（管理层原话：「我们不受第三方加价约束」）。机队能效两年从 31.4 J/TH 改善到 15.8 J/TH，是可验证的工程能力。</p></div>
+    <div class="moat-card"><div class="moat-rate">窄</div><h3>无形资产</h3><p>SEALMINER 的芯片设计能力是真实资产——全球能自研比特币 ASIC 的公司不超过五家。但品牌溢价不存在（矿机是按 J/TH 报价的商品），专利壁垒有限，且外销业务已主动关停，这项能力目前只在内部体现价值。</p></div>
+    <div class="moat-card"><div class="moat-rate">窄</div><h3>有效规模</h3><p>2,980 MW 的电力组合、双电网接入、PUE 约 1.1 的挪威水电站址，确实稀缺——电力审批与并网排队是真实壁垒。但<span class="hl-t">37% 在不丹与埃塞俄比亚，对 AI 客户不可用</span>；管道里最大的 570 MW 卡在诉讼。稀缺性打了折。</p></div>
+  </div>
+  <p><strong>护城河趋势：成本优势在加宽，其余在原地。</strong>能效曲线（31.4 → 15.8 J/TH）是这家公司过去两年最扎实的成就，而且下一代 A4 已在 2026 年 4 月发布、预计 Q3 量产。</p>
+  <p><strong>十年后会更宽还是更窄？</strong>诚实的回答是：<span class="hl-t">取决于它变成哪一家公司</span>。如果它仍是矿商，护城河会更窄——比特币挖矿的终局是全行业毛利率趋近于电价，能效优势会被对手追平（比特大陆、MicroBT 都在同一条曲线上）。如果它成功变成 AI 数据中心运营商，护城河会更宽——长租合同 + 稀缺电力 + 自建能力是可持续的组合。<strong>但从矿商到数据中心运营商，需要每 IT MW 约 400 万美元的改造资本，而这正是它最缺的东西。</strong></p>
+</section>
+
+<section class="section" id="m5" aria-labelledby="m5-t">
+  <h2 class="stitle" id="m5-t">模块 5 · 财务深度分析<a class="anchor" href="#m5" aria-label="本节链接">#</a></h2>
+
+  <h3 class="ctitle">5.1 近八季趋势</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-source="Bitdeer 各季 6-K 财报附件（24Q3–25Q4 为当期 IFRS 披露，26Q1 起为美国 GAAP）" data-shape="6 行 × 9 列 · 百万美元">
+      <thead><tr><th>项目</th><th>24Q3</th><th>24Q4</th><th>25Q1</th><th>25Q2</th><th>25Q3</th><th>25Q4</th><th>26Q1</th><th>26Q2</th></tr></thead>
+      <tbody>
+        <tr><td>营业收入</td><td>62.0</td><td>69.0</td><td>70.1</td><td>155.6</td><td>169.7</td><td>224.8</td><td>188.9</td><td><strong>228.8</strong></td></tr>
+        <tr><td>毛利</td><td>2.8</td><td>5.1</td><td>−3.2</td><td>12.8</td><td>40.8</td><td>10.6</td><td>−39.0</td><td><strong>−8.5</strong></td></tr>
+        <tr><td>净利润</td><td>−50.1</td><td>−531.9</td><td>409.5</td><td>−147.7</td><td>−266.7</td><td>70.5</td><td>−159.5</td><td><strong>−92.3</strong></td></tr>
+        <tr><td>调整后 EBITDA</td><td>−8.5</td><td>−3.8</td><td>−56.1</td><td>17.3</td><td>43.0</td><td>31.2</td><td>14.4</td><td><strong>31.1</strong></td></tr>
+        <tr><td>折旧摊销</td><td>19.5</td><td>25.1</td><td>25.4</td><td>26.4</td><td>41.2</td><td>75.1</td><td>94.9</td><td><strong>107.7</strong></td></tr>
+        <tr><td>经营现金流</td><td>−90.7</td><td>−325.1</td><td>−284.0</td><td>−334.9</td><td>−520.3</td><td>−599.5</td><td>−346.9</td><td><strong>−158.5</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">口径校验：25Q1–25Q4 四季的营收、毛利、净利润、经营现金流、资本开支合计，与 FY2025 Form 20-F 的审计年度值<strong>分毫不差</strong>（620.2/61.0/65.6/−1,738.7/232.2）。这是选用「当期披露口径」而非混用重述值的理由。</p>
+
+  <h3 class="ctitle">5.2 那笔 2.62 亿美元的差额：同一个季度，两个数字</h3>
+  <p>把上表的 25Q4 净利润 <strong>+7,050 万美元</strong>，和公司三个月后自己公布的同一季度数字 <strong>−1.915 亿美元</strong>放在一起，差 <span class="hl-t">2.620 亿美元</span>。</p>
+  <ul class="ulist">
+    <li><strong>2026-02-12</strong>，Q4 2025 财报：净利润 <strong>+7,050 万美元</strong>（<a href="https://www.sec.gov/Archives/edgar/data/1899123/000121390026015251/ea027678001ex99-1_bitdeer.htm" target="_blank" rel="noopener">6-K 附件</a>）</li>
+    <li><strong>2026-05-14</strong>，Q1 2026 财报的比较列：同一个 Q4 2025，净亏损 <strong>−1.915 亿美元</strong>（<a href="https://www.sec.gov/Archives/edgar/data/1899123/000121390026056587/ea029029701ex99-1.htm" target="_blank" rel="noopener">6-K 附件</a>）</li>
+  </ul>
+  <p><strong>这不是造假，是一次已披露的准则转换。</strong>Q1 2026 财报原文写着：「Effective January 1, 2026, the Company transitioned from IFRS Accounting Standards as issued by the IASB to generally accepted accounting principles in the United States of America (U.S. GAAP)... The consolidated financial statements for prior periods have been recast to conform to U.S. GAAP.」</p>
+  <p>但它说明了一件比造假更值得警惕的事：<span class="hl-t">这家公司的「利润」几乎不由经营决定，而由一组金融工具的计量方法决定。</span>换一套准则，同样三个月的经营活动，从赚 7,050 万变成亏 1.915 亿。</p>
+  <p>同一次转换里还有其他重述：2025Q1 净利润从 +4.095 亿（IFRS）变为 <strong>+1.053 亿</strong>（美国 GAAP），差 3.042 亿；2025Q2 净亏损从 −1.477 亿变为 −6,294 万，差 8,480 万。数字资产的计量基础也从 IAS 38 的「成本减减值」改为 ASU 2023-08 的公允价值——这解释了 2025-12-31 流动资产从 13.866 亿变成 13.891 亿的那 <strong>241 万美元</strong>差额，与数字资产的 8,549 万减 8,308 万完全相等。</p>
+
+  <h3 class="ctitle">5.3 利润与「生意」的关系：相关系数 0.98</h3>
+  <p>把八个季度的净利润，和「可转债衍生工具公允价值变动」这一行并排放：</p>
+  <div class="tbl-wrap">
+    <table class="tbl" data-source="Bitdeer 各季财报损益表（当期披露口径）" data-shape="3 行 × 9 列 · 百万美元">
+      <thead><tr><th></th><th>24Q3</th><th>24Q4</th><th>25Q1</th><th>25Q2</th><th>25Q3</th><th>25Q4</th><th>26Q1</th><th>26Q2</th></tr></thead>
+      <tbody>
+        <tr><td>净利润</td><td>−50.1</td><td>−531.9</td><td>409.5</td><td>−147.7</td><td>−266.7</td><td>70.5</td><td>−159.5</td><td>−92.3</td></tr>
+        <tr><td>衍生品公允价值变动</td><td>−14.4</td><td>−469.5</td><td>507.2</td><td>−91.2</td><td>−247.6</td><td>276.6</td><td>0.0</td><td>13.0</td></tr>
+        <tr><td>营业收入（对照）</td><td>62.0</td><td>69.0</td><td>70.1</td><td>155.6</td><td>169.7</td><td>224.8</td><td>188.9</td><td>228.8</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>两行的相关系数是 0.98。</strong>净利润在 −5.319 亿到 +4.095 亿之间摆动，极差 <strong>9.414 亿美元</strong>；而同期营业收入只是从 6,200 万单调上升到 2.288 亿。</p>
+  <p>这条线是什么？是公司自己发行的可转债里嵌入的转股权，按公允价值重估的结果。<span class="hl-t">股价涨，这笔负债变贵，公司「亏损」；股价跌，这笔负债变便宜，公司「盈利」。</span>它不产生也不消耗一分现金，却决定了利润表最下面那个数的正负。</p>
+  <p><strong>FY2025 的「盈利」就是这么来的。</strong>20-F 审计数：全年净利润 +6,560 万美元。拆开：</p>
+  <div class="tbl-wrap">
+    <table class="tbl" data-source="Bitdeer FY2025 Form 20-F 合并利润表（IFRS 审计）" data-shape="9 行 × 2 列 · 百万美元">
+      <thead><tr><th>FY2025 项目</th><th>金额</th></tr></thead>
+      <tbody>
+        <tr><td>毛利</td><td>+61.0</td></tr>
+        <tr><td>销售费用</td><td>−6.7</td></tr>
+        <tr><td>管理费用</td><td>−84.4</td></tr>
+        <tr><td>研发费用</td><td>−153.9</td></tr>
+        <tr><td>其他经营损益</td><td>−21.4</td></tr>
+        <tr><td><strong>核心经营小计</strong></td><td><strong>−205.3</strong></td></tr>
+        <tr><td><strong>其他净收益（含公允价值变动）</strong></td><td><strong>+365.0</strong></td></tr>
+        <tr><td>财务费用净额</td><td>−88.9</td></tr>
+        <tr><td>所得税</td><td>−5.2</td></tr>
+        <tr><td><strong>全年净利润</strong></td><td><strong>+65.6</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>主业亏 2.053 亿，一笔 3.650 亿的公允价值收益把它翻成了 6,560 万的「盈利」。</strong>这笔收益是净利润的 5.6 倍。</p>
+  <p>而 20-F 里还有一处更直白的自我揭示：<span class="hl-t">FY2025 基本每股收益 <strong>+0.32 美元</strong>，稀释每股收益 <strong>−1.43 美元</strong></span>。同一年、同一家公司，基本口径盈利、稀释口径亏损——因为稀释计算要把可转债「假设已转股」，那笔公允价值收益随即被冲回，利润当场转亏。按稀释股数 2.343 亿股计，对应亏损约 3.351 亿美元。</p>
+
+  <h3 class="ctitle">5.4 五年现金流：没有一年为正</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-source="Bitdeer FY2021–FY2025 Form 20-F 合并现金流量表 + Q2 2026 财报" data-shape="4 行 × 7 列 · 百万美元">
+      <thead><tr><th></th><th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th><th>H1 2026</th><th>累计</th></tr></thead>
+      <tbody>
+        <tr><td>经营现金流</td><td>−52.5</td><td>−268.0</td><td>−271.8</td><td>−622.1</td><td>−1,738.7</td><td>−505.4</td><td><strong>−3,458.5</strong></td></tr>
+        <tr><td>资本开支</td><td>−62.9</td><td>−63.2</td><td>−63.3</td><td>−119.5</td><td>−232.2</td><td>−359.7</td><td><strong>−900.8</strong></td></tr>
+        <tr><td>自由现金流</td><td>−115.4</td><td>−331.2</td><td>−335.1</td><td>−741.6</td><td>−1,970.9</td><td>−865.1</td><td><strong>−4,359.3</strong></td></tr>
+        <tr><td>折旧摊销</td><td>63.1</td><td>66.4</td><td>75.5</td><td>81.1</td><td>168.1</td><td>202.6</td><td>656.8</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>五年零两个季度，累计烧掉 43.59 亿美元，相当于当前市值的 1.66 倍，且没有一个年度经营现金流为正。</strong></p>
+  <p><strong>但这里必须说一句公道话。</strong>Bitdeer 自己造矿机，矿机先记入存货、再转入固定资产——<span class="hl-t">造矿机的现金支出走的是「经营活动」，不是「投资活动」</span>。仅 2026 年上半年，存货转固就有 <strong>7.969 亿美元</strong>。公司在 Q1 2026 财报里自己写明：「经营活动净流出 3.469 亿美元，主要由 SEALMINER 供应链与制造成本、电费驱动」。所以把这个负数直接读成「经营亏损」是不对的，其中相当大一部分是扩张性投入。<strong>诚实的读法是看合计：经营 + 资本开支 = −43.59 亿，全部由发股、发债、卖币填补。</strong></p>
+
+  <h3 class="ctitle">5.5 所有者盈余</h3>
+  <p>价值投资框架下的所有者盈余 = 净利润 + 折旧摊销 + 其他非现金费用 − 维护性资本开支 ± 营运资金变动。对 Bitdeer 按 H1 2026 年化测算：</p>
+  <div class="tbl-wrap">
+    <table class="tbl" data-source="Bitdeer H1 2026 财报，按年化推算" data-shape="6 行 × 2 列 · 百万美元">
+      <thead><tr><th>项目（H1 2026 × 2）</th><th>金额</th></tr></thead>
+      <tbody>
+        <tr><td>净亏损</td><td>−503.6</td></tr>
+        <tr><td>＋折旧与摊销</td><td>+405.2</td></tr>
+        <tr><td>＋股权激励</td><td>+27.1</td></tr>
+        <tr><td>＋非现金公允价值变动净额</td><td>+11.5</td></tr>
+        <tr><td>−维护性资本开支（保守取折旧的 100%，因矿机 3–4 年即被淘汰）</td><td>−405.2</td></tr>
+        <tr><td><strong>所有者盈余</strong></td><td><strong>−465.0</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>所有者盈余为负 4.65 亿美元，所有者盈余收益率为负。</strong>对这类公司，维护性资本开支不能按「折旧的一半」这种通用规则打折——<span class="hl-t">比特币矿机的经济寿命就是被下一代产品定义的，A1 到 A4 只用了两年</span>。要维持 73 EH/s 的算力，必须持续更换机队，维护性资本开支至少等于折旧。</p>
+
+  <h3 class="ctitle">5.6 资产负债健康度</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-source="Bitdeer Q2 2026 合并资产负债表（2026-06-30）" data-shape="10 行 × 3 列">
+      <thead><tr><th>指标</th><th>数值</th><th>判断</th></tr></thead>
+      <tbody>
+        <tr><td>流动比率</td><td>8.465 亿 ÷ 8.410 亿 = <strong>1.01</strong></td><td>刚过 1，几无缓冲</td></tr>
+        <tr><td>现金及受限现金</td><td>4.963 亿</td><td>约合本季自由现金流流出的 1.2 个季度</td></tr>
+        <tr><td>总有息负债</td><td><strong>18.417 亿</strong></td><td>其中关联方 6.331 亿（34.4%）</td></tr>
+        <tr><td><strong>关联方借款「一年内到期」部分</strong></td><td><strong>4.910 亿</strong></td><td><span class="hl-t">较 2025 年末的 2.750 亿增加 79%</span></td></tr>
+        <tr><td>净负债</td><td>13.454 亿</td><td>每股 4.95 美元，占股价 51%</td></tr>
+        <tr><td>股东权益</td><td>11.028 亿</td><td>负债权益比 2.13</td></tr>
+        <tr><td>Q2 利息支出</td><td>3,247 万（年化 1.299 亿）</td><td>同比 +203%</td></tr>
+        <tr><td>Q2 调整后 EBITDA</td><td>3,111 万（年化 1.244 亿）</td><td>—</td></tr>
+        <tr><td><strong>利息覆盖倍数</strong></td><td><strong>0.96×</strong></td><td><span class="hl-t">年化调整后 EBITDA 不足以覆盖年化利息</span></td></tr>
+        <tr><td>经营租赁负债</td><td>1.106 亿</td><td>另计</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>0.96 倍这个数字值得单独停一下。</strong>调整后 EBITDA 已经是最宽松的口径——它把折旧、利息、税、股权激励、所有公允价值变动统统加了回去。<span class="hl-t">即便如此，它仍然不够付利息。</span>这意味着当前的债务规模，需要靠继续融资而非经营来维持。</p>
+  <p>而利息还会继续上升：本季利息支出同比增长 203%，公司自己解释为「主要因可转债与关联方借款增加」。</p>
+
+  <h3 class="ctitle">5.7 杜邦分解</h3>
+  <p>杜邦分析在这里会失效，但失效本身是有信息量的。按 H1 2026 年化：净利率 <strong>−60.2%</strong>（−5.036 亿 ÷ 8.354 亿），资产周转率 <strong>0.27</strong>（8.354 亿 ÷ 平均总资产 31.14 亿），权益乘数 <strong>3.36</strong>（平均总资产 ÷ 平均权益 9.27 亿）。三者相乘得 ROE <strong>−54.3%</strong>。</p>
+  <p><span class="hl-t">在净利率为负的情况下，提高杠杆只会让 ROE 更负。</span>而这家公司的权益乘数正是靠不断增发才没有更高——过去 30 个月股本翻了 2.4 倍，如果不增发，权益乘数会显著恶化。这是一个「用稀释换偿付能力」的结构。</p>
+</section>
+
+<section class="section" id="m6" aria-labelledby="m6-t">
+  <h2 class="stitle" id="m6-t">模块 6 · 电话会分析<a class="anchor" href="#m6" aria-label="本节链接">#</a></h2>
+  <p>Q2 2026 电话会（2026-08-10）出席：吴忌寒（创始人／董事长／CEO）、Haris Basit（首席战略官）、Michael Potter（CFO）、Tesh Dahya（投资者关系）。</p>
+  <div class="ec-item ec-neut">
+    <span class="ec-badge">中性</span>
+    <p><strong>Potter：</strong>「本季度平台各项进展稳健。本月早些时候，我们通过挪威 Tydal 协议，把电力组合中有意义的一部分转化为长期合约收入，这是我们 colocation 战略的第一个大规模验证点。」</p>
+    <p><strong>解读：</strong>「第一个」三个字是准确的，也是问题所在——签约两年后，这仍是<strong>唯一</strong>一份。管理层用「proof point」而非「first of many」，措辞比 2025 年 10 月那次「AI 业务潜在年化收入可超 20 亿美元」谨慎了很多。</p>
+  </div>
+  <div class="ec-item ec-bull">
+    <span class="ec-badge">利好</span>
+    <p><strong>关于毛利率：</strong>本季毛亏 850 万、毛利率约 −3.7%，「环比改善体现了经营杠杆」（较 Q1 改善 3,050 万），驱动因素是电力成本环比下降约 15% 与机队能效提升至 15.8 J/TH。</p>
+    <p><strong>解读：</strong>改善的归因是可验证的，两个驱动因素都在运营数据里对得上。但管理层<strong>没有给出转正的时间表</strong>，只提到折旧与哈希价格仍构成「持续的温和压力」——这等于承认毛利率短期内不会回到正数。</p>
+  </div>
+  <div class="ec-item ec-bear">
+    <span class="ec-badge">利空</span>
+    <p><strong>关于融资：</strong>本季「通过 ATM 股票发行计划获得 4.57 亿美元」；已提交新的自动上架注册（F-3ASR），「该计划下可发行 10 亿美元」。同时表示「2026 年剩余的融资需求，大部分将通过项目级债务融资满足」「我们的偏好是优先采用非稀释性的项目级融资，而非股权发行」。</p>
+    <p><strong>解读：</strong>这两句话之间存在张力——<span class="hl-t">在宣布「偏好非稀释性融资」的同一场电话会上，公布的是单季 4.57 亿美元的 ATM 增发和一个新的 10 亿美元货架</span>。而且 F-3ASR 是与财报<strong>同日</strong>提交的。偏好归偏好，工具已经架好了。</p>
+  </div>
+  <div class="ec-item ec-bear">
+    <span class="ec-badge">利空</span>
+    <p><strong>关于 AI 云：</strong>ARR 约 7,600 万美元（环比 +77%），4,248 张 GPU 利用率约 95%，其中 3,517 张已被外部订阅，合同以五年期为主。吴忌寒：「主要聚焦长期合同，五年……短于这个期限的基本不花时间谈。」</p>
+    <p><strong>解读：</strong>披露的颗粒度很细——ARR、GPU 数量、利用率、外部订阅比例、合同期限，唯独<strong>没有毛利率</strong>。而财报的分部表显示这个业务本季收入 1,400 万、成本 1,630 万，<span class="hl-t">毛亏 16.4%</span>。95% 的利用率配上负毛利，说明问题不在需求，在定价或折旧。</p>
+  </div>
+  <div class="ec-item ec-bear">
+    <span class="ec-badge">利空</span>
+    <p><strong>全场未提及的两件事：</strong>比特币库存政策（持币从 2,017 枚清到 150 枚）与 BIT Group 关联方借款（6.331 亿美元，占全部有息负债 34.4%）。</p>
+    <p><strong>解读：</strong>这是资产负债表上两个最需要解释的项目——一个是把 2,000 枚比特币在下跌途中卖掉的资本配置决定，一个是与董事长本人控制的实体之间的三重关系。<strong>一场完整的业绩电话会，没有一位分析师提问，也没有一位高管主动说明。</strong></p>
+  </div>
+  <div class="ec-item ec-neut">
+    <span class="ec-badge">中性</span>
+    <p><strong>六次「为时尚早」：</strong>欧洲扩张管道（吴忌寒：「既然我们还没做成任何交易，现在谈欧洲计划为时尚早」）、马来西亚数据中心财务数据、阿尔伯塔以外的表后电力机会、Tydal 剩余 47 MW 的部署策略、与 Volta 在其他站点的合作、德州电网暂停的影响。</p>
+    <p><strong>解读：</strong>回避本身不构成利空——这些确实都还没定。但六次集中出现在同一场会上，说明<span class="hl-t">除 Tydal 之外，管理层手里暂时没有可以对外确认的第二件事</span>。</p>
+  </div>
+
+  <h3 class="ctitle">指引兑现度追踪</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-source="Bitdeer Q1 2026 与 Q2 2026 电话会及财报" data-shape="4 行 × 4 列">
+      <thead><tr><th>上季指引／表述</th><th>本季实际</th><th>兑现</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td>「与一个有信用的 colocation 租户处于谈判后期」（2026-05）</td><td>2026-06-29 签约、2026-08-04 条款生效</td><td><strong>兑现</strong></td><td>时间上略晚于市场预期，但确实落地</td></tr>
+        <tr><td>毛利率环比改善</td><td>−20.7% → −3.7%，改善 16.9pp</td><td><strong>兑现</strong></td><td>两个归因（电价、能效）均可验证</td></tr>
+        <tr><td>挖矿基础设施资本开支全年指引</td><td>本季调整为 2.00–2.80 亿美元（不含 SEALMINER 硬件、GPU 与 AI 云）</td><td>—</td><td><span class="hl-t">口径排除项过多</span>：H1 实际总资本开支已达 3.597 亿，远超该区间上限</td></tr>
+        <tr><td>优先非稀释性融资</td><td>单季 ATM 增发 4.57 亿 + 新增 10 亿美元货架</td><td><strong>未兑现</strong></td><td>表述与行动方向相反</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>信号汇总：</strong>运营指标（能效、算力、产币量、AI 云 ARR）全部兑现且超预期，<span class="hl-t">融资纪律与盈利时间表则全部含糊或落空</span>。这家公司在「把机器跑起来」这件事上是可信的，在「什么时候不再需要外部资本」这件事上还没有给出任何可追踪的承诺。</p>
+</section>
+
+<section class="section" id="m7" aria-labelledby="m7-t">
+  <h2 class="stitle" id="m7-t">模块 7 · 多模型估值（8 种方法）<a class="anchor" href="#m7" aria-label="本节链接">#</a></h2>
+  <p><strong>先说哪些方法在这里用不了，以及为什么。</strong>这一步比算数更重要——对一家持续亏损、自由现金流连续五年半为负、不分红的公司，硬套通用模型只会产生看起来精确的错误。</p>
+  <div class="tbl-wrap">
+    <table class="tbl" data-source="海图夜读估值框架适用性判断" data-shape="5 行 × 2 列">
+      <thead><tr><th>不适用的方法</th><th>原因</th></tr></thead>
+      <tbody>
+        <tr><td>市盈率（P/E）</td><td>2026 上半年净亏损 2.518 亿美元，无正利润基数；且净利润与衍生品重估的相关系数为 0.98，即便为正也不反映经营</td></tr>
+        <tr><td>EV/EBITDA</td><td>调整后 EBITDA 年化仅 1.244 亿，而它把每年 4.05 亿的折旧全部加回——对矿机三四年即淘汰的重资产公司，这个口径系统性高估</td></tr>
+        <tr><td>自由现金流收益率（FCF Yield）</td><td><strong>FCF</strong> 连续 5.5 年为负，累计 −43.59 亿美元，收益率无正值可算</td></tr>
+        <tr><td>PEG</td><td>无正利润增长基数</td></tr>
+        <tr><td>股息贴现（DDM）</td><td>从未分红，且现金流状况不支持分红</td></tr>
+        <tr><td>现金流折现（<strong>DCF</strong>）</td><td><strong>不作为主锚，但以两种受限形式使用</strong>：一是 Tydal 租约的 16 年 NPV（见 7.2，这是一份条款确定的合同，可折现）；二是 7.4 的反向推算。对公司整体不做 DCF——自由现金流连续 5.5 年为负且转正时点取决于尚未签约的容量，任何终值假设都会主导结果</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="ctitle">7.1 十档估值汇总</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-source="海图独立测算，输入均取自 Q2 2026 财报与 FY2025 20-F" data-shape="10 行 × 3 列">
+      <thead><tr><th>方法</th><th>每股价值（美元）</th><th>关键假设</th></tr></thead>
+      <tbody>
+        <tr><td>EV/电力容量（同业下沿 $2.0M/MW）</td><td>5.98</td><td>AI 可用 1,102MW 按 $2.0M、管道按 $0.45M、仅挖矿容量按 $0.35M</td></tr>
+        <tr><td>EV/电力容量（同业上沿 $4.0M/MW）</td><td>16.46</td><td>同上，倍数取板块上沿</td></tr>
+        <tr><td>SOTP 保守</td><td>2.40</td><td>Tydal 税后 NPV 8.24 亿 + 挖矿现金毛利 ×4 + AI 云 1.5×ARR + 管道 1.5 亿</td></tr>
+        <tr><td>SOTP 乐观</td><td>8.64</td><td>Tydal 税前 NPV 11.98 亿 + 挖矿现金毛利 ×7 + AI 云 4.0×ARR + 管道 6 亿</td></tr>
+        <tr><td>EV/营收（<strong>P/S</strong> 口径）4×</td><td>7.34</td><td>H1 2026 年化营收 8.354 亿</td></tr>
+        <tr><td>EV/营收（<strong>P/S</strong> 口径）8×</td><td>19.64</td><td>同上，倍数取成长型同业水平</td></tr>
+        <tr><td>市净率（P/B）1.5×</td><td>6.09</td><td>账面权益 11.028 亿</td></tr>
+        <tr><td>市净率（P/B）2.5×</td><td>10.14</td><td>同上</td></tr>
+        <tr><td><strong>NAV</strong>（重估净资产）</td><td>1.56</td><td>总资产 34.46 亿，其中固定资产 20.98 亿按 70% 计、关联方数字资产应收 1.62 亿按 70% 计 → 调整后 27.68 亿 − 全部负债 23.44 亿 = 4.25 亿</td></tr>
+        <tr><td>合同价值法（50% 折现率）</td><td>1.55</td><td>Tydal 合同额 47 亿 × 55% × 30% 净现值率</td></tr>
+        <tr><td>合同价值法（全额）</td><td>3.89</td><td>Tydal 合同额 47 亿 × 100% × 30% 净现值率</td></tr>
+        <tr><td><strong>中位数</strong></td><td><strong>6.09</strong></td><td>11 种方法排序后的中间值</td></tr>
+        <tr><td><strong>加权公允价值</strong></td><td><strong>7.42</strong></td><td>EV/电力 25% · SOTP 30% · EV/营收 15% · P/B 15% · NAV 10% · 合同法 5%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>区间从 1.55 到 19.64，宽达 12.7 倍——而宽度本身就是结论。</strong>所有方法的分歧只在一个问题上：<span class="hl-t">那 2,980 MW 电力，有多少能真正变成 AI 机位？</span>信的给 16–20 美元，不信的给 2–4 美元。</p>
+
+  <h3 class="ctitle">7.2 Tydal 租约的 NPV：这份报告最重要的一次独立测算</h3>
+  <p>合同条款（取自 2026-08-04 公告与 Q2 电话会）：出租方为 Bitdeer 全资子公司 Tydal Data Center AS，承租方为 <strong>Volta Tydal AS</strong>；121 IT MW（由约 133 gross MW 支撑）；初始期 16 年、承租方另有 8 年续约选择权；基础期合同额约 <strong>47 亿美元</strong>；16 年平均租金约 <strong>$202/kW/月</strong>；租赁与服务协议均按 <strong>3% 年递增</strong>；电费由租户实报实销；公司口径 NOI 利润率约 <strong>90%</strong>；剩余资本开支约 <strong>5 亿美元</strong>（约 $4.0M/IT MW）；一期目标起租 2026-12-31、二期 2027-03-31；信用增级为约 <strong>13 亿美元</strong>信用证（由摩根大通关联方与另一家全球金融机构安排，标注为「预期」）。</p>
+  <p class="note">内部一致性校验：121,000 kW × $202 × 12 个月 × 16 年 = 46.93 亿 ✅；按 3% 递增反解首年租金 = 2.332 亿美元（$160.59/kW/月），第 16 年 3.633 亿；把同一首年费率延到 24 年 = 80.3 亿，与公司披露的「续约后潜在总额约 80 亿」吻合 ✅。<strong>披露的费率、递增率与期限三者互洽，没有互相打架。</strong></p>
+  <div class="tbl-wrap">
+    <table class="tbl" data-source="海图独立 NPV 模型，输入全部取自公司披露条款" data-shape="4 行 × 4 列 · 百万美元">
+      <thead><tr><th>情形</th><th>NPV</th><th>市值 ÷ NPV</th><th>企业价值 ÷ NPV</th></tr></thead>
+      <tbody>
+        <tr><td>全 16 年 · 税前（NOI 90%、折现 12%、剩余资本开支 5 亿）</td><td><strong>1,198</strong></td><td>2.20×</td><td>3.32×</td></tr>
+        <tr><td>全 16 年 · 计入挪威 22% 企业所得税</td><td>824</td><td>3.19×</td><td>4.83×</td></tr>
+        <tr><td><strong>只认前 10 年（租户第 10 年有无费用终止权）· 税前</strong></td><td><strong>799</strong></td><td>3.29×</td><td>4.98×</td></tr>
+        <tr><td>只认前 10 年 · 税后</td><td>513</td><td>5.13×</td><td>7.75×</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>一个决定性的反算：即便假设剩余资本开支为零、税率为零、全 16 年租金一分不少地收到，NPV 也只有 16.32 亿美元——仍不到当前企业价值 39.76 亿的 41%。</strong>差额 23.44 亿必须由「Tydal 以外的一切」撑起：挖矿主业、AI 云、以及那 2,800 MW 尚未签约的电力。而挖矿分部本季毛亏 260 万、AI 云毛亏 230 万。</p>
+  <p><strong>合同里有一条容易被跳过的条款，但它把久期砍了一半：</strong><span class="hl-t">承租方在第 10 年享有无费用终止权（no fee termination right at 10 years）</span>。这意味着 11–16 年的租金不是承诺，是租户的选择权——而租户只会在市场租金高于合同租金时才继续。对出租方，这是一个「上有封顶、下无保护」的结构。</p>
+
+  <h3 class="ctitle">7.3 同业对比：每一个已签约兆瓦的定价</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-source="各公司企业价值取自 Finviz 2026-08-10；已签约容量取自各公司公告" data-shape="6 行 × 5 列">
+      <thead><tr><th>公司</th><th>企业价值</th><th>已签约 AI/HPC 容量</th><th>EV / 已签约 MW</th><th>对手方</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Bitdeer (BTDR)</strong></td><td><strong>$39.8 亿</strong></td><td><strong>121 IT MW</strong></td><td><strong>$32.9M</strong></td><td><span class="hl-t">Volta（成立约 7 个月的初创，$3 亿股本）</span></td></tr>
+        <tr><td>Core Scientific (CORZ)</td><td>$91.0 亿</td><td>约 1,119 MW</td><td>$8.1M</td><td>CoreWeave + AMD</td></tr>
+        <tr><td>TeraWulf (WULF)</td><td>$108.0 亿</td><td>约 839 MW</td><td>$12.9M</td><td>Anthropic（20 年 190 亿美元）</td></tr>
+        <tr><td>Cipher (CIFR)</td><td>$78.7 亿</td><td>约 600 MW</td><td>$13.1M</td><td>AWS + Fluidstack</td></tr>
+        <tr><td>Galaxy (GLXY)</td><td>$118.3 亿</td><td>800 MW</td><td>$14.8M</td><td>CoreWeave 独家</td></tr>
+        <tr><td>Hut 8 (HUT)</td><td>$112.0 亿</td><td>约 597 MW</td><td>$18.8M</td><td>Fluidstack／Google 背书</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>同业中位数 $13.1M/MW，Bitdeer $32.9M/MW——是中位数的 2.5 倍。</strong>更值得注意的是最后一列：<span class="hl-t">表里其余五家的对手方全部是超大规模云厂商，或有 Google、AMD 背书；Bitdeer 是唯一一家把 16 年租约签给初创公司的。</span></p>
+  <p>Volta（Volta Infra Holdings）于 2026-08-04 同日宣布种子轮加 A 轮合计 3 亿美元、投后估值 24 亿，a16z 与 Altimeter 联合领投，NVIDIA 与 Michael Dell 家族办公室参投。这是一家有明星股东的公司，但它成立约七个月，自身股本 3 亿美元，而它承诺给 Bitdeer 的是 <strong>16 年、47 亿美元</strong>。信用证覆盖 13 亿，占合同额 <strong>28%</strong>，且仍标注为「预期」。</p>
+  <p class="note">另有两点需要讲明：其一，Bitdeer 的 $202/kW/月是这一批矿商转 colocation 交易里定价最高的（TeraWulf 约 $197、Hut 8 约 $155、Cipher 约 $142）——<strong>租金越高，通常意味着承担的对手方信用风险越大</strong>；其二，Volta 与终端 AI 实验室的合同期限是 6 年，而 Bitdeer 与 Volta 是 16 年，两者存在 10 年的久期错配。媒体报道指向终端客户为某知名 AI 实验室，但公司文件从未具名，本报告不予采信。</p>
+
+  <h3 class="ctitle">7.4 反向推算：现价隐含了什么</h3>
+  <p>当前企业价值 39.76 亿美元 ÷ 全部 2,980 MW = <strong>$1.33M/MW</strong>；剔除不丹与埃塞俄比亚后 ÷ 2,182 MW = <strong>$1.82M/MW</strong>。摩根士丹利给出的板块参考区间是当前约 $2–4M/MW、长期潜力接近 $15M/MW。</p>
+  <p><strong>所以按「每兆瓦」这个板块最常用的口径，Bitdeer 现价反而是便宜的——低于板块下沿。</strong>这是多头论据里最有力的一条，也是 12 位分析师给出 22.73 美元均值目标价的基础。</p>
+  <p><strong>我不接受这个推论，理由只有一条，但它是硬的：</strong>把一兆瓦挖矿电力变成一兆瓦 AI 机位，按公司自己在 Tydal 给出的数字，需要 <span class="hl-t">约 400 万美元／IT MW 的改造资本</span>。要把 AI 可落地的 1,000 IT MW 全部改造，需要约 <strong>40 亿美元</strong>。而这家公司账上现金 4.96 亿、单季自由现金流 −4.25 亿、利息覆盖 0.96 倍、30 个月已稀释 142.7%。</p>
+  <p><strong>期权是真的。资产负债表买不起这个期权。</strong>这是本报告与卖方共识唯一的实质分歧，也是我最可能错的地方——如果 Bitdeer 能以项目级债务（而非股权）融到这笔钱，且不必个个都自己出资，我的结论会明显偏保守。</p>
+
+  <h3 class="ctitle">7.5 结论：公允价值与建仓价位</h3>
+  <p>十一法中位数 <strong>US$6.09</strong>，加权公允价值 <strong>US$7.42</strong>（权重：EV/电力容量 25%、SOTP 30%、EV/营收 15%、市净率 15%、NAV 10%、合同价值法 5%）。现价 US$9.68，<strong>高估 30.4%，安全边际 −23.3%</strong>。</p>
+  <p>按估值中位数推导的分批建仓价位：<strong>首仓 US$4.87</strong>（中位数 ×80%）· <strong>二仓 US$4.26</strong>（×70%）· <strong>三仓 US$3.65</strong>（×60%）。<span class="hl-t">首仓价低于 52 周低点 6.92 美元——按本框架，这只股票在过去一年里从未进入可买区间。</span>详细的仓位与止盈安排见模块 13。</p>
+</section>
+
+<section class="section" id="m8" aria-labelledby="m8-t">
+  <h2 class="stitle" id="m8-t">模块 8 · 竞争与行业分析<a class="anchor" href="#m8" aria-label="本节链接">#</a></h2>
+  <p><strong>行业背景：这是一场集体迁徙。</strong>上市矿商累计已宣布超过 700 亿美元的 AI/HPC 合同，行业预计 2026 年底 AI 收入占比可从目前约 30% 升至 70%。所有人都在做同一件事——把挖矿电力改造成 AI 机位。</p>
+  <p><strong>Bitdeer 在这场迁徙里的位置：起步不晚，兑现最少。</strong>它的旗舰合同 47 亿美元，是同业里最小的一份：</p>
+  <div class="tbl-wrap">
+    <table class="tbl" data-source="各公司 2025–2026 年公告" data-shape="6 行 × 3 列">
+      <thead><tr><th>公司</th><th>旗舰 AI/HPC 合同额</th><th>对手方性质</th></tr></thead>
+      <tbody>
+        <tr><td>TeraWulf</td><td>约 128 亿美元（累计已签约）</td><td>Anthropic，20 年期</td></tr>
+        <tr><td>Core Scientific</td><td>约 102 亿美元（12 年）</td><td>CoreWeave；AMD 另有 1.9 GW 预留选择权</td></tr>
+        <tr><td>Hut 8</td><td>约 98 亿美元（15 年，352 IT MW）</td><td>Fluidstack／Google 背书</td></tr>
+        <tr><td>IREN</td><td>约 97 亿美元（5 年）</td><td>微软</td></tr>
+        <tr><td>Cipher</td><td>约 55 亿美元（15 年）</td><td>AWS</td></tr>
+        <tr><td><strong>Bitdeer</strong></td><td><strong>约 47 亿美元（16 年，121 IT MW）</strong></td><td><span class="hl-t">Volta，成立约 7 个月的初创</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>波特五力：</strong></p>
+  <ul class="ulist">
+    <li><strong>供应商议价能力（高）。</strong>先进制程晶圆产能与 NVIDIA GPU 都是卖方市场。但 Bitdeer 在矿机这一端已经自研到芯片层，<span class="hl-t">这是它相对于 Riot、Marathon 等纯买机矿商的真实优势</span>——它只需要买晶圆，不需要买整机。</li>
+    <li><strong>购买方议价能力（高且在上升）。</strong>AI colocation 的买方是全球十来家超大规模云厂与 AI 实验室，高度集中。它们能选站点、定条款——第 10 年无费用终止权就是买方力量的直接体现。</li>
+    <li><strong>新进入者威胁（中）。</strong>电力审批与并网排队构成真实壁垒，但传统数据中心运营商（Equinix、Digital Realty）与电力公司都在进场，且它们的资产负债表远强于矿商。</li>
+    <li><strong>替代品威胁（中）。</strong>对挖矿业务，替代品是「不挖」——当币价低于全成本，算力会退出。对 AI 业务，替代品是自建：超大规模厂商自己盖数据中心的比例仍在上升。</li>
+    <li><strong>同业竞争（极高）。</strong>七八家矿商同时向同一批客户推销几乎相同的东西：电力 + 场地 + 冷却。差异化只剩下电价、交付速度与信用。</li>
+  </ul>
+  <p><strong>挖矿基本盘的行业逆风。</strong>需要更正一个常见误解：<span class="hl-t">2026 年并没有减半</span>。上一次减半在 2024 年 4 月（区块高度 840,000），下一次预计在 2028 年 4 月。2026 年矿业的压力不来自减半，来自币价——比特币 65,004 美元，同比 −45.5%，距 2025 年 10 月的历史高点 126,198 美元近乎腰斩。而 Bitdeer 的股价高点（2025-10-15，27.80 美元）与比特币的顶部几乎同期。</p>
+  <p><strong>颠覆风险评估。</strong>对这门生意，真正的颠覆不是技术，是<strong>资本成本</strong>。当 AI 数据中心的建设进入拼资产负债表的阶段，能以 5% 发债的公司会淘汰只能以增发融资的公司。Bitdeer 目前 34.4% 的有息负债来自关联方，利息覆盖 0.96 倍——<span class="hl-t">它在这一维度上处于同业最弱的一档</span>。</p>
+</section>
+
+<section class="section" id="m9" aria-labelledby="m9-t">
+  <h2 class="stitle" id="m9-t">模块 9 · 技术面与 K 线分析<a class="anchor" href="#m9" aria-label="本节链接">#</a></h2>
+  <p class="note">技术面是补充参考，明确次要于基本面。</p>
+  <div class="tbl-wrap">
+    <table class="tbl" data-source="Yahoo Finance 日线数据与当日公告" data-shape="8 行 × 3 列">
+      <thead><tr><th>日期</th><th>事件</th><th>股价反应</th></tr></thead>
+      <tbody>
+        <tr><td>2025-10-15</td><td><strong>52 周高点 27.80</strong>。宣布自建自营 AI 数据中心，管理层称 AI 潜在年化收入可超 20 亿美元</td><td><strong>单日 +28.7%</strong></td></tr>
+        <tr><td>2025-11-10 至 13</td><td>加密与 AI 基建股集体回调</td><td>三日 −49.5%</td></tr>
+        <tr><td>2026-01-27</td><td>KBW 下调至 Market Perform，点名关联方敞口</td><td>收 13.90</td></tr>
+        <tr><td>2026-02-19</td><td>宣布 3 亿美元 2032 年可转债私募</td><td><strong>单日 −17.4%</strong></td></tr>
+        <tr><td>2026-03-09</td><td><strong>52 周低点 6.92</strong></td><td>收 7.42</td></tr>
+        <tr><td>2026-05-28</td><td>Potter 出任 CFO</td><td>+18.3%</td></tr>
+        <tr><td>2026-08-04</td><td>Tydal 47 亿美元租约公告</td><td><strong>+0.1%</strong>（盘中一度 +9%）</td></tr>
+        <tr><td><strong>2026-08-10</strong></td><td><strong>Q2 财报（毛亏损）＋ 同日提交 10 亿美元货架注册</strong></td><td><strong>盘中 −11.0%</strong>，低见 9.63</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>三个技术面事实值得记住。</strong></p>
+  <p><strong>第一，做空比例达流通股的 43.35%。</strong>这解释了为什么这只股票会出现单日 +28.7%、+24.7%、−17.4%、−13.4% 这样的振幅。<span class="hl-t">在这样的持仓结构下，任何一份新合同都可能引发逼空</span>——这是本报告「卖出」评级面临的最大风险，也是我要提前讲明的。</p>
+  <p><strong>第二，8 月 4 日那份 47 亿美元大单，市场当天就消化完了。</strong>盘中一度涨 9%，收盘 +0.1%。一份相当于公司当前全年总收入数倍的长期合同，换来零涨幅——这本身是市场对合同质量（或对手方信用）的一次投票。</p>
+  <p><strong>第三，从 27.80 到 9.68，跌幅 65.2%。</strong>股价高点与比特币高点同期，说明市场此前主要把它当作比特币的杠杆工具，而不是 AI 数据中心公司。这个定价框架正在切换，但还没切换完。</p>
+  <p>关键位置：下方支撑 6.92（52 周低点）与 7.42；上方阻力 11.38（8 月 4 日高点）、13.90 与 15.10。当前价位于 52 周区间的下四分之一。</p>
+</section>
+
+<section class="section" id="m10" aria-labelledby="m10-t">
+  <h2 class="stitle" id="m10-t">模块 10 · 增长催化剂与前景展望<a class="anchor" href="#m10" aria-label="本节链接">#</a></h2>
+  <p><strong>未来 6 个月的三个催化剂，全部集中在一件事上：Tydal 能不能按期起租。</strong></p>
+  <ul class="ulist">
+    <li><strong>2026-12-31：Tydal 一期目标起租（60.5 IT MW）。</strong>管理层在 Q2 电话会上确认这是「full RFS」——「届时将完全准备好接收客户的 GPU」。这是最硬的一个时间点，也是本报告基准情景的关键假设。</li>
+    <li><strong>Volta 的信用增级落地。</strong>约 13 亿美元信用证由摩根大通关联方与另一家全球金融机构安排，目前仍标注为「预期」。<span class="hl-t">公告明确写着：若 Volta 未达成信用增级里程碑，Bitdeer 有权终止合同</span>。这条既是保护，也是提醒——它意味着这份合同今天还不是无条件的。</li>
+    <li><strong>第二份 colocation 合同。</strong>这是估值弹性最大的一项。管理层表示「会继续寻求同类机会」，但吴忌寒同时说「现在的重点应该是把 Tydal 这单执行好」——短期内不宜期待。</li>
+  </ul>
+  <p><strong>其他可追踪的事件：</strong>SEALMINER A4 量产（芯片级 6–7 J/TH、整机 9.45 J/TH，预计 2026Q3）；内华达 Sparks 3,600 万美元制造工厂（应对关税与本土化）；马来西亚 Johor Bahru 21.7 MW（2027Q1，规划部署 128 套 NVIDIA GB300 NVL72）；Clarington 570 MW 的诉讼进展。</p>
+  <p><strong>3–5 年展望：两条完全不同的路。</strong></p>
+  <p><span class="hl-t">路径 A（我给 15% 概率）：</span>Tydal 两期按期交付并稳定运营，凭此案例再签两到三份同级合同，把 AI 可落地的 1,000+ IT MW 逐步转化，项目级债务融资打通、股权稀释停止。届时这是一家年收入十几亿、EBITDA 利润率 40%+ 的数据中心公司，现价会显得非常便宜。</p>
+  <p><span class="hl-t">路径 B（我给 40% 概率）：</span>Tydal 延期或 Volta 信用增级未落地，比特币在 5–6 万美元区间徘徊，挖矿现金流无法覆盖利息，公司被迫在低位继续增发。届时股本再稀释三到五成，每股价值被摊薄到个位数低端。</p>
+  <p><strong>剩下 45% 是「都不发生」——Tydal 一期起租、二期滑点，公司继续在两种身份之间过渡，股价在 8–13 美元之间波动。</strong>这就是我的基准情景。</p>
+</section>
+
+<section class="section" id="m11" aria-labelledby="m11-t">
+  <h2 class="stitle" id="m11-t">模块 11 · 风险矩阵<a class="anchor" href="#m11" aria-label="本节链接">#</a></h2>
+  <div class="risk-grid">
+    <div class="risk-card"><div class="badge">经营 · 5/5</div><h3>毛利率与折旧的赛跑</h3><p>六个主要分部中五个毛亏，其中 AI 云 −16.4%。折旧已占营收 47.1% 且仍在上升（本季 1.077 亿）。<strong>毛利率要转正，要么币价大涨，要么折旧见顶——而机队仍在扩张。</strong></p></div>
+    <div class="risk-card"><div class="badge">财务 · 5/5</div><h3>利息覆盖不足 1 倍</h3><p>年化调整后 EBITDA 1.244 亿 vs 年化利息 1.299 亿，覆盖 <strong>0.96×</strong>。关联方借款一年内到期部分 4.910 亿，较年初增 79%。现金 4.963 亿，约等于 1.2 个季度的自由现金流流出。</p></div>
+    <div class="risk-card"><div class="badge">交易对手 · 5/5</div><h3>Volta 的信用</h3><p>16 年、47 亿美元合同签给一家成立约 7 个月、自身股本 3 亿美元的公司；13 亿信用证仅覆盖 28% 且标注「预期」；<strong>租户第 10 年可无费用终止</strong>；Volta 与终端客户的合同期限只有 6 年，与本合同存在 10 年久期错配。</p></div>
+    <div class="risk-card"><div class="badge">稀释 · 4/5</div><h3>股本 30 个月翻 2.4 倍</h3><p>111.97M（2023 末）→ 271.78M（2026-06-30），累计 +142.7%。本季 ATM 增发 4.57 亿美元，财报同日提交 10 亿美元货架注册。管理层说偏好非稀释融资，但工具已架好。</p></div>
+    <div class="risk-card"><div class="badge">宏观 · 4/5</div><h3>比特币价格</h3><p>现价 65,004 美元，同比 −45.5%。Q2 现金口径每枚赚 21,073 美元、账面亏 965 美元。<strong>若币价跌至 45,000 美元，现金毛利将被电费吞掉大半，利息覆盖会跌破 0.5 倍。</strong></p></div>
+    <div class="risk-card"><div class="badge">治理 · 4/5</div><h3>关联方三重身份与控制权</h3><p>BIT Group 同时是托管人、交易对手与 6.331 亿美元借款的债权人，由董事长本人创办。数字资产的 82% 是对该关联方的应收款。吴忌寒 19.5% 经济权益、69.5% 投票权，公司自认「受控公司」并将继续使用独立董事豁免。</p></div>
+    <div class="risk-card"><div class="badge">估值 · 4/5</div><h3>每已签约兆瓦是同业 2.5 倍</h3><p>EV/已签约 MW 为 $32.9M，同业中位数 $13.1M。2,980 MW 中仅 4.5% 签约；不丹与埃塞俄比亚的 650 MW（在运容量的 37%）对 AI 客户不可用；管道最大一块 Clarington 570 MW 卡在诉讼。</p></div>
+    <div class="risk-card"><div class="badge">监管 · 2/5</div><h3>司法辖区分散</h3><p>不丹、埃塞俄比亚、挪威、马来西亚、加拿大、美国六地运营。挪威近年多次讨论对数据中心的能源与税收政策；不丹为主权基金合作模式，透明度有限。</p></div>
+  </div>
+
+  <h3 class="ctitle">三个黑天鹅情景</h3>
+  <ul class="ulist">
+    <li><strong>其一：Volta 违约或被收购后重新谈判。</strong>一家七个月大的公司在 16 年里出事的概率不低。若 Volta 在 Tydal 起租后两三年内无法履约，Bitdeer 手上会是一个已按 AI 规格改造完毕、却没有租户的园区——<span class="hl-t">而 AI 机房无法退回去挖比特币，改造是单向的</span>。届时 5 亿美元改造资本与全部合同价值同时归零，账面减值将远超公司当前的权益规模。</li>
+    <li><strong>其二：关联方借款被要求提前偿还或条款重议。</strong>6.331 亿美元中有 4.910 亿在一年内到期，债权人是董事长控制的实体。正常情况下这是柔性的，但如果 BIT Group 自身出现流动性问题（它同时是 Bitdeer 全部加密资产的托管人），Bitdeer 面临的是<strong>债务与资产托管同时出问题</strong>的双重敞口。1.622 亿美元的「对关联方数字资产应收款」在那种情形下的可回收性无从判断。</li>
+    <li><strong>其三：一次成功的逼空反而摧毁基本面判断的意义。</strong>43.35% 的做空比例意味着，一份新合同公告可能让股价在数日内上行一倍以上，公司随即以高价大规模增发——这对老股东未必是坏事，但会让任何基于当前基本面的估值瞬间失效。<strong>这是唯一一个「向上的黑天鹅」，也是本报告评级的最大风险。</strong></li>
+  </ul>
+</section>
+
+<section class="section" id="m12" aria-labelledby="m12-t">
+  <h2 class="stitle" id="m12-t">模块 12 · 股东回报分析<a class="anchor" href="#m12" aria-label="本节链接">#</a></h2>
+
+  <h3 class="ctitle">12.1 公司给了股东多少？</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-source="Bitdeer FY2023–FY2025 Form 20-F 合并现金流量表与权益变动表" data-shape="6 行 × 4 列 · 百万美元">
+      <thead><tr><th>项目</th><th>FY2023</th><th>FY2024</th><th>FY2025</th></tr></thead>
+      <tbody>
+        <tr><td>现金股息总额</td><td>0</td><td>0</td><td><strong>0</strong></td></tr>
+        <tr><td>每股股息</td><td>0</td><td>0</td><td><strong>0</strong></td></tr>
+        <tr><td>回购金额</td><td>—</td><td>30.0</td><td><strong>4.0</strong>（H1 2026）</td></tr>
+        <tr><td>回购股数</td><td>606,756</td><td>145,762</td><td><strong>5,754,711</strong></td></tr>
+        <tr><td>同期增发股数</td><td>—</td><td>—</td><td><strong>59,235,429</strong></td></tr>
+        <tr><td>股东总回报（股息＋净回购）</td><td>负</td><td>负</td><td><strong>负</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>从未分红，也从未有过净回购。</strong>trailing 股东收益率为负——过去一年股东不但没有从公司拿到钱，还通过增发向公司净输送了资本。FY2025 单年发行 5,924 万股（对价现金增发 1,899 万、可转债清偿对价 2,375 万、可转债转股 1,025 万、认股权证行权 519 万、股权激励行权 106 万），同期回购 575 万股——<span class="hl-t">增发是回购的 10.3 倍</span>。</p>
+
+  <h3 class="ctitle">12.2 给的方式好不好？</h3>
+  <p><strong>注销 vs 库存股：这一项 Bitdeer 做得是对的。</strong>回购的股份确实注销了——FY2025 现金流量表的补充非现金项目里有「Cancellation of treasury shares 35,990 千美元」（H1 2026）与 29,967 千美元（H1 2025）。资产负债表上库存股从 2025 年末的 3,599 万降至 2026-06-30 的 <strong>零</strong>。这是含金量高的做法。</p>
+  <p><strong>但摊薄股数三年趋势把这份含金量抹平了：</strong></p>
+  <div class="tbl-wrap">
+    <table class="tbl" data-source="Bitdeer FY2025 20-F 权益变动表与 Q2 2026 资产负债表" data-shape="4 行 × 4 列">
+      <thead><tr><th>时点</th><th>A 类（股）</th><th>V 类（股）</th><th>合计（股）</th></tr></thead>
+      <tbody>
+        <tr><td>2023-12-31</td><td>63,566,376</td><td>48,399,922</td><td>111,966,298</td></tr>
+        <tr><td>2024-12-31</td><td>143,917,734</td><td>48,399,922</td><td>192,317,656（+71.8%）</td></tr>
+        <tr><td>2025-12-31</td><td>191,152,162</td><td>44,399,922</td><td>235,552,084（+22.5%）</td></tr>
+        <tr><td><strong>2026-06-30</strong></td><td><strong>227,382,323</strong></td><td><strong>44,399,922</strong></td><td><strong>271,782,245（+15.4%）</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>30 个月，股本从 1.120 亿增至 2.718 亿，累计稀释 142.7%——翻了 2.43 倍。</strong>其中吴忌寒持有的 V 类股票数从 4,840 万仅降至 4,440 万（因 400 万股转为 A 类），<span class="hl-t">稀释几乎全部落在 A 类股东身上，而控制权基本未受影响</span>。</p>
+
+  <h3 class="ctitle">12.3 能不能继续给、给多少？</h3>
+  <ul class="ulist">
+    <li><strong>股息与回购指引：无。</strong>公司从未提出分红政策，也未宣布新的回购授权。</li>
+    <li><strong>(股息 + 回购) / 自由现金流：分子近零，分母连续 5.5 年为负。</strong>这个比率在这里没有意义——真正的比率应该倒过来算：<span class="hl-t">过去 30 个月，股东向公司净输入的资本约 28.8 亿美元（八个季度的股权与可转债募资合计）</span>，而公司向股东返还了 3,400 万美元的回购。</li>
+    <li><strong>是否借债回购：不存在，但存在「借债 + 增发同时进行」。</strong>本季一边通过 ATM 增发 4.57 亿，一边关联方借款净增，一边提交 10 亿美元货架注册。</li>
+    <li><strong>周期择时：反向的。</strong>FY2025 的 575 万股回购发生在股价较高的时段，而 2026 年 2 月股价跌到 7.78 美元、6 月回到 20 美元时，公司做的是<strong>增发</strong>而非回购。第二大股东 Tether 倒是做对了——2026 年 2 月以约 8.85 美元增持，6 月 3–4 日以约 20.37 与 20.01 美元减持 62.7 万股。<span class="hl-t">同一只股票，大股东在低位买、高位卖；公司自己在高位回购、低位增发。</span></li>
+  </ul>
+  <p><strong>模块小结：几乎无股东回报。</strong>三年零股息、净回购为负、股本 30 个月翻 2.43 倍，公司是资本的净吸收方而非返还方。这在扩张期的重资产公司身上并非罪过——问题在于，扩张已经进行了五年半、累计投入 43.59 亿美元，而毛利率仍在水面以下。</p>
+</section>
+
+<section class="section" id="m13" aria-labelledby="m13-t">
+  <h2 class="stitle" id="m13-t">模块 13 · 海图评分卡 + 投资决策<a class="anchor" href="#m13" aria-label="本节链接">#</a></h2>
+
+  <div class="score-grid">
+    <div class="score-card"><div class="score-letter">C</div><h3>1. 生意可预测性</h3><p>商业模式一句话说得清，但盈利完全不可预测：八季净利润在 −5.32 亿到 +4.09 亿之间摆动，与衍生品公允价值的相关系数达 0.98。收入受币价与算力双重驱动，利润受会计计量驱动。</p></div>
+    <div class="score-card"><div class="score-letter">C+</div><h3>2. 经济护城河</h3><p>五维中四维为「窄」、一维为「无」。唯一真实的优势是自研 ASIC 带来的成本领先（15.8 J/TH，A4 达 9.45 J/TH），这一项在加宽。但电力资产的稀缺性因 37% 位于不丹与埃塞俄比亚而打折。</p></div>
+    <div class="score-card"><div class="score-letter">C+</div><h3>3. 管理层质量</h3><p>加分：CFO 换成 Corsair 前 CFO Potter 是有序升级；审计师从 MaloneBailey 换到德勤是治理改善；FY2024 内控重大缺陷已整改并经审计师确认。扣分：COO 与 CBO 同日即时辞任；BIT Group 三重身份；比特币在下跌途中清仓；电话会对这两件事全程沉默。</p></div>
+    <div class="score-card"><div class="score-letter">D</div><h3>4. 财务质量</h3><p>ROE −54.3%，毛利率 −3.7%，所有者盈余 −4.65 亿，自由现金流连续 5.5 年为负累计 −43.59 亿，<strong>利息覆盖 0.96 倍</strong>，流动比率 1.01。这一维没有可以辩护的地方。</p></div>
+    <div class="score-card"><div class="score-letter">C</div><h3>5. 资本配置纪律</h3><p>几乎无股东回报，股本 30 个月翻 2.43 倍。回购择时与增发择时都是反向的。加分项是：Tydal 这笔交易<strong>没有付出一股股权、没有发认股权证</strong>，园区 100% 所有权保留——同期 Cipher 为拿下背书付出约 5.4% 股权，Core Scientific 给了 AMD 三千万股权证。这一点上对老股东是厚道的。</p></div>
+    <div class="score-card"><div class="score-letter">C</div><h3>6. 估值与安全边际</h3><p>加权公允 7.42 美元 vs 现价 9.68 美元，安全边际 <strong>−23.3%</strong>。按每已签约兆瓦计价为同业中位数的 2.5 倍；但按每总兆瓦计价又低于板块下沿——分歧全在「未签约容量值多少」。</p></div>
+  </div>
+
+  <h3 class="ctitle">红旗排查</h3>
+  <div class="tbl-wrap">
+    <table class="tbl" data-source="海图夜读红旗清单，逐项核对 SEC 一手文件" data-shape="6 行 × 3 列">
+      <thead><tr><th>检查项</th><th>结论</th><th>依据</th></tr></thead>
+      <tbody>
+        <tr><td>会计准则变更</td><td><span class="hl-t">触发</span></td><td>2026-01-01 由 IFRS 转美国 GAAP，同一个 Q4 2025 从 +7,050 万变为 −1.915 亿，差 2.62 亿。已合规披露，但利润对计量方法的敏感度极高</td></tr>
+        <tr><td>关联交易</td><td><span class="hl-t">触发</span></td><td>BIT Group 兼任托管人、交易对手与债权人（6.331 亿，占有息负债 34.4%）；数字资产的 82% 是对其应收款</td></tr>
+        <tr><td>收入确认时点</td><td>未触发</td><td>挖矿收入按日确认，无激进迹象；Tydal 尚未起租</td></tr>
+        <tr><td>商誉减值历史</td><td>未触发</td><td>商誉 3,582 万，规模很小，无减值记录</td></tr>
+        <tr><td>内控重大缺陷</td><td><strong>已解除</strong></td><td>FY2024 曾存在（物料清单、可转债估值假设、矿池数据核验），<strong>2025 年内整改完毕，外部审计师确认未发现重大缺陷</strong></td></tr>
+        <tr><td>股权激励比例</td><td>未触发</td><td>Q2 股权激励 640 万，占营收 2.8%，且逐季下降</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>两项红旗触发（准则变更的利润敏感度、关联方集中度），依规则综合评级不得高于「持有观望」。而估值维度的 −23.3% 安全边际，把它进一步压到「卖出」。</strong></p>
+
+  <h3 class="ctitle">投资决策</h3>
+  <div class="verdict">
+    <div class="verdict-t">评级：<span class="rating-badge" data-rating="卖出">卖出</span> · 12 个月目标价 US$8.40</div>
+    <p>加权公允价值 <strong>US$7.42</strong>，十一法中位数 US$6.09，现价 US$9.68 — 高估 30.4%，安全边际 <strong>−23.3%</strong>。</p>
+  </div>
+  <div class="tbl-wrap">
+    <table class="tbl" data-source="海图独立测算" data-shape="4 行 × 4 列">
+      <thead><tr><th>情景</th><th>概率</th><th>12 个月目标</th><th>触发条件</th></tr></thead>
+      <tbody>
+        <tr><td>乐观</td><td>15%</td><td>US$18.00</td><td>Tydal 两期按期起租 + 再签一份同级合同 + 比特币回到 85,000 美元以上</td></tr>
+        <tr><td>基准</td><td>45%</td><td>US$9.00</td><td>Tydal 一期 Q4 起租、二期滑点，无第二份合同，继续以增发补缺口</td></tr>
+        <tr><td>悲观</td><td>40%</td><td>US$4.00</td><td>Volta 信用增级未落地或 Tydal 延期，比特币跌破 55,000 美元，被迫低位大规模再融资</td></tr>
+        <tr><td><strong>概率加权</strong></td><td>100%</td><td><strong>US$8.40</strong></td><td>较现价 −13.2%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <ul class="ulist">
+    <li><strong>仓位建议：0%。</strong>已持有者建议减持；若坚持持有，仓位不应超过组合的 1%，并按投机仓对待。</li>
+    <li><strong>分批建仓（未来若跌到这些位置再考虑）：</strong>首仓 <strong>US$4.87</strong>（估值中位数 ×80%）· 二仓 <strong>US$4.26</strong>（×70%）· 三仓 <strong>US$3.65</strong>（×60%）。注意首仓价低于 52 周低点 6.92——<span class="hl-t">这意味着按我的框架，这只股票在过去一年里从未进入过可买区间</span>。</li>
+    <li><strong>止盈三档（若持有）：</strong>US$16.00 减仓 40% · US$22.00 减仓 30% · US$30.00 减仓 30%。</li>
+    <li><strong>持有周期：</strong>不建议持有。若作为投机仓，周期应与 Tydal 交付节点绑定，即 12–18 个月。</li>
+  </ul>
+  <p><strong>关键监控指标（按重要性排序）：</strong></p>
+  <ul class="ulist">
+    <li><strong>① 毛利率是否转正。</strong>本季 −3.7%。若下季仍为负，说明折旧的台阶比管理层预期更高更久。</li>
+    <li><strong>② 利息覆盖倍数。</strong>本季 0.96×。跌破 0.8× 意味着必须再融资，不是选择题。</li>
+    <li><strong>③ Volta 的 13 亿美元信用证是否从「预期」变为「已出具」。</strong>这是 Tydal 合同从「已签」变为「无条件」的分水岭。</li>
+    <li><strong>④ 股本增速。</strong>10 亿美元货架下的实际提取速度。</li>
+    <li><strong>⑤ 关联方借款余额与到期结构。</strong>尤其是一年内到期的 4.910 亿是否续期。</li>
+    <li><strong>⑥ AI 云分部毛利率。</strong>公司目前不披露，需从分部表倒算。ARR 涨到 1.5 亿而毛利率仍为负，才是真问题。</li>
+  </ul>
+  <p><strong>事件时间表：</strong>2026-11 月中旬 Q3 2026 财报 · 2026-12-31 Tydal 一期目标起租 · 2027-03-31 Tydal 二期目标起租 · 2026Q3 SEALMINER A4 量产 · Clarington 570 MW 诉讼进展（无固定时点）。</p>
+  <p><strong>下一个重新审视的时点：Q3 2026 财报。</strong>要看三件事——毛利率、利息覆盖、以及 Tydal 一期的完工进度是否仍指向 12 月 31 日。</p>
+  <p class="note"><strong>对这个评级最诚实的风险提示：做空比例高达流通股的 43.35%。</strong>在这样的持仓结构下，一份新合同公告可能在数日内让股价上行一倍以上——2025 年 10 月 15 日单日 +28.7%、2026 年 7 月 30 日单日 +24.7% 都是先例。<span class="hl-t">「卖出」在这里是估值判断，不是做空建议。</span>这只股票双向都极端，任何单向重仓都不合适。</p>
+</section>
+
+<section class="section" id="essay" aria-labelledby="essay-t">
+  <h2 class="stitle sr-only" id="essay-t">海图夜读手记<a class="anchor" href="#essay" aria-label="本节链接">#</a></h2>
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+    <p>五天前我写过这家公司，结尾留了一句可以被证伪的话：<strong>「先看毛利率能不能从 −20.7% 爬回地面。」</strong></p>
+    <p>今天答案出来了。</p>
+    <p><strong>毛利率 −3.7%。</strong></p>
+    <p>爬了 16.9 个百分点，没有爬回地面。</p>
+    <p>而且爬升的原因是实的：机队能效从 25.7 J/TH 提到 <strong>15.8 J/TH</strong>，自挖算力从 16.5 EH/s 涨到 <strong>73.0 EH/s</strong>，电价环比降了约 15%。单枚比特币的账面亏损从上季的 17,363 美元收窄到 <strong>965 美元</strong>。</p>
+    <p>这是一次真实的运营改善。我先把这句话说在前面，因为接下来的部分不太好听。</p>
+    <h3 class="ctitle">一句话画像</h3>
+    <p><strong>这家公司买电、造矿机、挖币卖币；现在它想把同一批电，卖给需要算力的 AI 公司。</strong></p>
+    <p>前半句是可验证的重资产生意。后半句是一个还没兑现的转型。</p>
+    <h3 class="ctitle">五个研判要点</h3>
+    <p><strong>一、把镜头拉远，这一季的改善是六年长坡里的一次反弹。</strong></p>
+    <p>毛利率：61.2% → 25.0% → 21.1% → 19.0% → 9.8% → <strong>−11.4%</strong>（2026 上半年）。</p>
+    <p><strong>连续五年下降，第六年入水。</strong>而同期收入从 3.95 亿美元涨到 6.20 亿。</p>
+    <p>一家公司的收入涨了一半，赚到的毛利却从 2.41 亿掉进负数。这不是周期，是单位经济在系统性变差。</p>
+    <p><strong>二、毛利转负的原因不是币价，是它自己造的矿机。</strong></p>
+    <p>八个季度里，折旧与摊销从 1,950 万美元涨到 <strong>1.077 亿</strong>，涨了 5.5 倍，占营业收入的比重从 31.5% 升到 <strong>47.1%</strong>。</p>
+    <p>一个简单的反事实：如果本季折旧还维持在两年前 31.5% 的营收占比，Q2 的毛利会是 <strong>+2,710 万</strong>，而不是 −850 万。</p>
+    <p><strong>整个毛亏，就是折旧的台阶。</strong></p>
+    <p>台阶从哪来？以前 Bitdeer 卖矿机——FY2025 外销 1.083 亿美元，卖出去记收入、记毛利。现在它把矿机留给自己：Q2 外销只剩 <strong>40 万美元</strong>，同比 −99.4%。管理层在电话会上说，现有晶圆库存「已全部指定为内部使用」。</p>
+    <p>会计上，卖给自己不产生收入，制造利润在合并报表里被抵消；造矿机的钱先进存货、再转固定资产——<strong>仅上半年存货转固就有 7.969 亿美元</strong>——然后以折旧的形式回到自挖矿的成本里。</p>
+    <p>所以这不是经营崩了，是一次商业模式切换的会计后果：<strong>过去一次性确认的制造利润，换成了未来三四年摊出来的折旧。</strong></p>
+    <p>这也解释了本季两个非 GAAP 指标为什么会同季反向：<strong>调整后 EBITDA 好了 6.8 倍，调整后净亏损坏了 3.1 倍。</strong>差额几乎全在折旧那一行。对一家矿机三四年就被下一代淘汰的公司，把折旧加回去说「EBITDA 转正了」，是把最真实的那笔成本排除在外。</p>
+    <p><strong>三、这家公司的利润，不由生意决定。</strong></p>
+    <p>把八个季度的净利润，和「可转债衍生工具公允价值变动」这一行并排放，<strong>相关系数是 0.98。</strong></p>
+    <p>净利润在 −5.32 亿到 <strong>+4.09 亿</strong>之间摆动，极差 9.41 亿美元；而同期营业收入只是从 6,200 万单调涨到 2.29 亿。</p>
+    <p>这条线是公司自己发行的可转债里嵌的转股权，按公允价值重估的结果。<strong>股价涨，这笔负债变贵，公司「亏损」；股价跌，这笔负债变便宜，公司「盈利」。</strong>它不产生也不消耗一分现金，却决定利润表最下面那个数的正负。</p>
+    <p>FY2025 那笔 6,560 万美元的「盈利」就是这么来的：主业亏 <strong>2.053 亿</strong>，一笔 <strong>3.650 亿</strong>的公允价值收益把它翻成了正数。</p>
+    <p>年报里还有一处更直白的自我揭示：<strong>FY2025 基本每股收益 +0.32 美元，稀释每股收益 −1.43 美元。</strong>同一年、同一家公司，基本口径盈利、稀释口径亏损——因为稀释计算要假设可转债已转股，那笔收益随即被冲回。</p>
+    <p>顺带说一件更能说明问题的事。同一个 2025 年第四季度：2026 年 2 月 12 日的财报写着净利润 <strong>+7,050 万美元</strong>；三个月后，5 月 14 日的财报把同一个季度写成净亏损 <strong>−1.915 亿美元</strong>。</p>
+    <p>差 <strong>2.62 亿</strong>。</p>
+    <p>这不是造假，是一次已披露的准则转换——公司自 2026 年 1 月 1 日起由 IFRS 转为美国 GAAP，前期重述。但它说明了一件比造假更值得警惕的事：<strong>换一套准则，同样三个月的经营活动，从赚七千万变成亏近两亿。</strong></p>
+    <p><strong>四、那份 47 亿美元的大单，是同业里最小的一份，对手方是唯一一家初创公司。</strong></p>
+    <p>Tydal 租约的条款是好的：121 IT MW、16 年、平均 $202/kW/月、3% 年递增、电费租户实报实销、NOI 约 90%，而且<strong>没有付出一股股权、没有发认股权证</strong>——这一点上，对老股东是厚道的。</p>
+    <p>但把它放进同业里看：</p>
+    <p>· TeraWulf 约 128 亿，对手方 Anthropic</p>
+    <p>· Core Scientific 约 102 亿，对手方 CoreWeave 与 AMD</p>
+    <p>· Hut 8 约 98 亿，Google 背书</p>
+    <p>· IREN 约 97 亿，对手方微软</p>
+    <p>· Cipher 约 55 亿，对手方 AWS</p>
+    <p>· <strong>Bitdeer 约 47 亿，对手方 Volta——一家成立约七个月、自身股本 3 亿美元的初创公司</strong></p>
+    <p>信用证覆盖 13 亿，占合同额 <strong>28%</strong>，而且至今仍标注为「预期」。租户在<strong>第 10 年有无费用终止权</strong>。Volta 与终端 AI 实验室的合同期限是 6 年，而 Bitdeer 与 Volta 是 16 年——中间错配十年。</p>
+    <p>还有一个细节：Bitdeer 的租金定价是这批矿商转租赁交易里最高的（同业在 $142 到 $197 之间）。<strong>租金越高，通常意味着承担的对手方信用风险越大。</strong></p>
+    <p>按每一个已签约兆瓦计价：Bitdeer 是 <strong>3,290 万美元</strong>，同业中位数 1,310 万——<strong>2.5 倍。</strong></p>
+    <p><strong>五、期权是真的，但资产负债表买不起这个期权。</strong></p>
+    <p>这是我和卖方唯一的实质分歧，也是我最可能错的地方，所以要说清楚。</p>
+    <p>2,980 兆瓦电力确实稀缺，按每总兆瓦计价，Bitdeer 现价甚至低于板块下沿——这是 12 位分析师给出 22.73 美元均值目标价的基础。</p>
+    <p>我不接受这个推论，理由只有一条，但它是硬的：<strong>把一兆瓦挖矿电力变成一兆瓦 AI 机位，按公司自己在 Tydal 给出的数字，需要约 400 万美元。</strong>要把 AI 可落地的一千兆瓦全部改造，需要约 <strong>40 亿美元</strong>。</p>
+    <p>而这家公司账上现金 4.96 亿，单季自由现金流 −4.25 亿，<strong>利息覆盖 0.96 倍</strong>——年化调整后 EBITDA 1.244 亿，还不够付年化利息 1.299 亿。</p>
+    <p>而且那 2,980 兆瓦里，<strong>不丹 600 兆瓦加埃塞俄比亚 50 兆瓦，占在运容量的 37%</strong>，没有任何一家 AI 客户会把训练集群放在那里。管道里最大的一块 Clarington 570 兆瓦，卡在诉讼里，交付时点写着「待更新」。</p>
+    <p><strong>全部 2,980 兆瓦里，签了合同的只有 133 兆瓦——4.5%。</strong></p>
+    <h3 class="ctitle">两处我要更正自己的判断</h3>
+    <p>五天前那份更新，我把「换掉审计师」和「三个月五个岗位变动」一起列进了红旗。读完 6-K 原文，这两条都要收回一半。</p>
+    <p><strong>审计师是升级，不是警讯。</strong>2026 年 8 月 3 日，审计委员会解聘 MaloneBailey，改聘<strong>德勤（新加坡）</strong>。6-K 明确写着：过去两个财年审计意见无保留、无否定，双方<strong>无会计分歧</strong>，MaloneBailey 致 SEC 的函件表示同意。对一家市值近 30 亿美元的公司，从小所换到四大是正向的。</p>
+    <p><strong>CFO 换人也是有序接班。</strong>前任辞任的<strong>同一天</strong>，董事会任命了 Michael Potter——Corsair Gaming 的前 CFO，主导过它 2020 年的 IPO，此前还做过阿特斯太阳能与多家半导体公司的 CFO。公告次日股价涨了 18.3%。</p>
+    <p><strong>内控同样要更正。</strong>FY2024 确实存在重大缺陷，但年报载明已于 2025 年内整改完毕，且「外部审计师评估管理层的评估后，未发现任何重大缺陷」。</p>
+    <p>真正异常的只剩一条：<strong>COO 与 CBO 在 6 月 8 日同日辞任、即时生效</strong>，其中一位是 2021 至 2024 年的前任 CEO。这一条仍然算数。</p>
+    <h3 class="ctitle">还有一件没人问的事</h3>
+    <p>持币从 2025 年末的 2,017 枚，到 1 月底的 1,530 枚，再到 <strong>2 月底的 51 枚</strong>。年报说，截至 2026 年 2 月 20 日持币已清零。</p>
+    <p>那段时间，比特币从 88,424 美元跌到 65,867 美元。</p>
+    <p><strong>这次清仓发生在下跌途中，不是高点。</strong></p>
+    <p>而在今天这场一小时的电话会上，<strong>比特币库存政策没有被提到一次；关联方 BIT Group 的 6.331 亿美元借款——占公司全部有息负债的 34.4%，债权人是董事长本人创办并任董事的实体——也没有被提到一次。</strong></p>
+    <p>资产负债表上最需要解释的两个项目，没有一位分析师问，也没有一位高管说。</p>
+    <h3 class="ctitle">海图研判</h3>
+    <p><strong>评级：卖出 · 12 个月目标价 US$8.40</strong></p>
+    <p>十种估值方法给出的区间是 1.55 到 19.64 美元，中位数 <strong>6.09</strong>，加权公允 <strong>7.42</strong>。现价 9.68 美元，<strong>安全边际 −23.3%</strong>。</p>
+    <p>区间宽达 12.7 倍，而宽度本身就是结论：所有方法的分歧只在一个问题上——<strong>那 2,980 兆瓦，有多少能真正变成 AI 机位。</strong></p>
+    <p>· 乐观（15%）：18 美元 — Tydal 两期按期起租、再签一份同级合同、比特币回到 85,000 以上</p>
+    <p>· 基准（45%）：9 美元 — Tydal 一期按期、二期滑点，无第二份合同，继续增发补缺口</p>
+    <p>· 悲观（40%）：4 美元 — Volta 信用增级未落地或 Tydal 延期，比特币跌破 55,000，被迫低位再融资</p>
+    <p><strong>操作建议：仓位 0%。</strong>已持有者建议减持。若未来跌到这些位置可重新考虑：首仓 <strong>4.87 美元</strong>（中位数 ×80%）· 二仓 <strong>4.26</strong> · 三仓 <strong>3.65</strong>。</p>
+    <p>请注意，<strong>首仓价低于 52 周低点 6.92 美元</strong>——按我的框架，这只股票在过去一年里从未进入过可买区间。</p>
+    <p>止盈（若持有）：16 / 22 / 30 美元，分别减仓 40% / 30% / 30%。</p>
+    <h3 class="ctitle">对这个评级最大的风险</h3>
+    <p><strong>做空比例达流通股的 43.35%。</strong></p>
+    <p>在这样的持仓结构下，任何一份新合同公告都可能在数日内引发逼空。2025 年 10 月 15 日单日 +28.7%、2026 年 7 月 30 日单日 +24.7%，都是先例。</p>
+    <p><strong>「卖出」在这里是估值判断，不是做空建议。</strong>这只股票双向都极端，任何单向重仓都不合适。</p>
+    <h3 class="ctitle">风险提示</h3>
+    <p>1. <strong>利息覆盖不足 1 倍（高）</strong> — 年化调整后 EBITDA 1.244 亿 vs 年化利息 1.299 亿，覆盖 0.96 倍；关联方借款一年内到期部分 4.910 亿，较年初增 79%</p>
+    <p>2. <strong>交易对手信用（高）</strong> — 16 年 47 亿美元合同签给成立约 7 个月的公司；13 亿信用证仅覆盖 28% 且仍标注「预期」；租户第 10 年可无费用终止</p>
+    <p>3. <strong>毛利率与折旧的赛跑（高）</strong> — 六个主要分部中五个毛亏，AI 云 −16.4%；折旧占营收 47.1% 且仍在上升</p>
+    <p>4. <strong>持续稀释（中高）</strong> — 股本 30 个月翻 2.43 倍；本季 ATM 增发 4.57 亿美元，财报同日提交 10 亿美元货架注册</p>
+    <p>5. <strong>关联方集中（中高）</strong> — BIT Group 同时是托管人、交易对手与债权人；公司 82% 的数字资产是对其应收款</p>
+    <p>6. <strong>比特币价格（中高）</strong> — 现价 65,004 美元，同比 −45.5%；若跌至 45,000，现金毛利将被电费吞掉大半</p>
+    <p>一家公司的净利润，和它自己发行的可转债的市场价格，相关系数是 0.98。</p>
+    <p>股价跌，它就「盈利」；股价涨，它就「亏损」。</p>
+    <p>这一季它的机器跑得比任何时候都好——能效提升四成、算力涨了四倍多、挖出的币是去年同期的近五倍。这些都是真的。</p>
+    <p>但报表最下面那个数，仍然和这些没什么关系。</p>
+    <p>—— <strong>海图</strong>，灯下落笔，明日再观风浪。</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="disclaimer" aria-labelledby="disclaimer-t">
+  <h2 class="stitle" id="disclaimer-t">免责声明<a class="anchor" href="#disclaimer" aria-label="本节链接">#</a></h2>
+  <div class="haitu-disc">
+    <p>⚠️ <strong>免责声明</strong>：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，不构成任何投资建议，作者非持牌投资顾问。本文财务数据全部取自 SEC EDGAR 一手文件（CIK 0001899123）：FY2025 Form 20-F、各季 6-K 财报附件与公司公告；股价与比特币价格取自公开行情数据，标注时点为 2026-08-10 盘中。<strong>文中明确标注了哪些说法未获一手来源证实（如 Tydal 终端客户身份），读者不应将未证实部分作为决策依据。</strong>本报告对同业企业价值的引用来自第三方数据商，口径可能与各公司自身披露不同。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+  </div>
+</section>
+
+<footer>
+  <div>本报告由「海图夜读」基于公开财报与电话会资料独立撰写，数据截至 2026-08-10。</div>
+  <div>
+    <strong>免责声明：</strong>本文仅为个人研究记录与信息分享，<strong>不构成任何投资建议</strong>，
+    作者非持牌投资顾问。文中评级、目标价、仓位与建仓价格均为基于公开信息的个人推演，
+    可能存在错误或随时间失效。市场有风险，投资需谨慎，读者应独立判断并自负盈亏。
+  </div>
+</footer>
+
+<script>
+/* ══════════════════════════════════════════════════════════════════
+   海图夜读 · 报告页脚本骨架
+   逐字复制进报告的 <script>，只改 CHART_DATA 里的数字。
+
+   这段脚本解决了存量 103 份实测出的三个问题：
+   1. 主题切换有 3 套实现，73/103 不读 localStorage
+      → 门户切暗色进报告又变亮色。这里统一成一套。
+   2. 71 份把调色板硬编码进 JS（token 的第 4 份拷贝），
+      改一次配色要改 71 个文件；另有 2 份切暗色后图表根本不重绘。
+      → 这里一律从 CSS 变量读，改 :root 即全站生效。
+   3. 4 个图表槽位被写出 39 种 canvas id。
+      → 这里按固定槽位 rev|margin|segment|eps 接管。
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ── 1. 从 CSS 变量取色（唯一真源，禁止在本文件里写 hex）── */
+function cssVar(name) {
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+}
+function palette() {
+  return {
+    accent:  cssVar('--accent'),   accent2: cssVar('--accent2'),
+    accent3: cssVar('--accent3'),  gold:    cssVar('--gold'),
+    red:     cssVar('--red'),      green:   cssVar('--green'),
+    grid:    cssVar('--chart-grid'), text:  cssVar('--text3-ink'),
+  };
+}
+
+/* ── 2. 主题切换：同步 aria-pressed、持久化、重绘图表 ── */
+function toggleTheme() {
+  var html = document.documentElement;
+  var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  try { localStorage.setItem('theme', next); } catch (e) {}
+  var btn = document.getElementById('themeBtn');
+  if (btn) btn.setAttribute('aria-pressed', String(next === 'dark'));
+  renderCharts();
+}
+document.addEventListener('DOMContentLoaded', function () {
+  var btn = document.getElementById('themeBtn');
+  if (btn) btn.setAttribute('aria-pressed',
+    String(document.documentElement.getAttribute('data-theme') === 'dark'));
+});
+
+var PERIOD = 'annual';
+function switchPeriod(p) {
+  if (p !== 'annual' && p !== 'quarterly') return;
+  PERIOD = p;
+  document.querySelectorAll('.period-btn').forEach(function (b) {
+    var on = b.dataset.period === p;
+    b.setAttribute('aria-pressed', String(on));
+    b.classList.toggle('is-on', on);
+  });
+  renderCharts();
+}
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('.period-btn').forEach(function (b) {
+    b.addEventListener('click', function () { switchPeriod(b.dataset.period); });
+  });
+  switchPeriod(PERIOD);
+});
+
+/* ── 3. 顶栏实测高度写进 --bar-h ──
+   锚点落点与目录高亮都以它为基准。顶栏在窄屏会折行（38px → 60+px），
+   硬编码会让手机上所有跳转偏移。 */
+function syncBarH() {
+  var bar = document.querySelector('.theme-bar');
+  if (bar) document.documentElement.style.setProperty('--bar-h', bar.offsetHeight + 'px');
+}
+addEventListener('DOMContentLoaded', syncBarH);
+addEventListener('resize', syncBarH);
+
+var CHART_DATA = {
+  rev: {
+    type: 'bar',
+    labels: ['24Q3', '24Q4', '25Q1', '25Q2', '25Q3', '25Q4', '26Q1', '26Q2'],
+    datasets: [
+      { label: '营业收入（百万美元）', data: [62.0, 69.0, 70.1, 155.6, 169.7, 224.8, 188.9, 228.8], color: 'accent' },
+      { label: '毛利率 %', data: [4.5, 7.4, -4.6, 8.2, 24.1, 4.7, -20.7, -3.7], color: 'red', type: 'line', yAxisID: 'y1' },
+    ],
+  },
+  margin: {
+    type: 'bar',
+    labels: ['24Q3', '24Q4', '25Q1', '25Q2', '25Q3', '25Q4', '26Q1', '26Q2'],
+    datasets: [
+      { label: '净利润（百万美元）', data: [-50.1, -531.9, 409.5, -147.7, -266.7, 70.5, -159.5, -92.3], color: 'accent2' },
+      { label: '可转债衍生品公允价值变动', data: [-14.4, -469.5, 507.2, -91.2, -247.6, 276.6, 0.0, 13.0], color: 'gold', type: 'line' },
+    ],
+  },
+  segment: {
+    type: 'doughnut',
+    labels: ['自挖矿', '矿机外销', '会员托管', '普通托管', 'AI 云', '云算力与其他'],
+    datasets: [
+      { label: 'FY2025 收入构成（百万美元）', data: [396.0, 108.3, 61.2, 35.0, 6.8, 12.9],
+        color: ['accent', 'gold', 'accent3', 'green', 'red', 'accent2'] },
+    ],
+  },
+  eps: {
+    type: 'bar',
+    labels: ['24Q3', '24Q4', '25Q1', '25Q2', '25Q3', '25Q4', '26Q1', '26Q2'],
+    datasets: [
+      { label: '折旧与摊销（百万美元）', data: [19.5, 25.1, 25.4, 26.4, 41.2, 75.1, 94.9, 107.7], color: 'red' },
+      { label: '占营业收入比重 %', data: [31.5, 36.4, 36.2, 17.0, 24.3, 33.4, 50.2, 47.1], color: 'gold', type: 'line', yAxisID: 'y1' },
+    ],
+  },
+
+  income: {
+    type: 'bar', unit: '百万美元',
+    annual: {
+      labels: ['FY2021', 'FY2022', 'FY2023', 'FY2024', 'FY2025'],
+      datasets: [
+        { label: '营业收入', data: [394.7, 333.3, 368.6, 349.8, 620.3], color: 'accent' },
+        { label: '毛利',     data: [241.4, 83.3, 77.8, 66.4, 61.0], color: 'gold' },
+        { label: '净利润',   data: [82.6, -60.4, -56.7, -599.2, 65.6], color: 'green' },
+      ],
+    },
+    quarterly: {
+      labels: ['24Q3', '24Q4', '25Q1', '25Q2', '25Q3', '25Q4', '26Q1', '26Q2'],
+      datasets: [
+        { label: '营业收入', data: [62.0, 69.0, 70.1, 155.6, 169.7, 224.8, 188.9, 228.8], color: 'accent' },
+        { label: '毛利',     data: [2.8, 5.1, -3.2, 12.8, 40.8, 10.6, -39.0, -8.5], color: 'gold' },
+        { label: '净利润',   data: [-50.1, -531.9, 409.5, -147.7, -266.7, 70.5, -159.5, -92.3], color: 'green' },
+      ],
+    },
+  },
+
+  cashflow: {
+    type: 'bar', unit: '百万美元',
+    annual: {
+      labels: ['FY2021', 'FY2022', 'FY2023', 'FY2024', 'FY2025'],
+      datasets: [
+        { label: '经营现金流', data: [-52.5, -268.0, -271.8, -622.1, -1738.7], color: 'accent' },
+        { label: '资本开支',   data: [-62.9, -63.2, -63.3, -119.5, -232.2], color: 'red' },
+        { label: '自由现金流', data: [-115.4, -331.2, -335.1, -741.6, -1970.9], color: 'green' },
+      ],
+    },
+    quarterly: {
+      labels: ['24Q3', '24Q4', '25Q1', '25Q2', '25Q3', '25Q4', '26Q1', '26Q2'],
+      datasets: [
+        { label: '经营现金流', data: [-90.7, -325.1, -284.0, -334.9, -520.3, -599.5, -346.9, -158.5], color: 'accent' },
+        { label: '资本开支',   data: [-29.9, -42.6, -44.8, -106.5, -46.3, -34.6, -93.7, -266.0], color: 'red' },
+        { label: '自由现金流', data: [-120.6, -367.7, -328.8, -441.4, -566.6, -634.1, -440.6, -424.5], color: 'green' },
+      ],
+    },
+  },
+
+  balance: {
+    type: 'line', unit: '百万美元',
+    annual: {
+      labels: ['FY2021', 'FY2022', 'FY2023', 'FY2024', 'FY2025'],
+      datasets: [
+        { label: '总资产',   data: [647.0, 651.4, 639.4, 1557.9, 2804.6], color: 'accent' },
+        { label: '总负债',   data: [358.9, 333.1, 306.8, 1281.3, 1936.7], color: 'red' },
+        { label: '股东权益', data: [288.1, 318.3, 332.6, 276.6, 867.8], color: 'green' },
+      ],
+    },
+    quarterly: {
+      labels: ['24Q3', '24Q4', '25Q1', '25Q2', '25Q3', '25Q4', '26Q1', '26Q2'],
+      datasets: [
+        { label: '总资产',   data: [1046.4, 1557.9, 1598.6, 2041.1, 2437.1, 2787.9, 3101.1, 3446.4], color: 'accent' },
+        { label: '总负债',   data: [525.7, 1281.3, 804.0, 1334.3, 1863.3, 1939.9, 2371.0, 2343.6], color: 'red' },
+        { label: '股东权益', data: [520.7, 276.6, 794.6, 706.8, 573.8, 848.0, 730.1, 1102.8], color: 'green' },
+      ],
+    },
+  },
+};
+
+/* ── 5. 渲染（一般不需要改）── */
+var _charts = {};
+function renderCharts() {
+  if (typeof Chart === 'undefined') return;      // CDN 不可达时静默跳过，不阻断页面
+  var P = palette();
+  Chart.defaults.font.family =
+    getComputedStyle(document.body).getPropertyValue('--font-sans') ||
+    'system-ui, -apple-system, sans-serif';
+
+  Object.keys(CHART_DATA).forEach(function (slot) {
+    var el = document.getElementById(slot);
+    if (!el) return;
+    if (_charts[slot]) _charts[slot].destroy();
+
+    var cfg = CHART_DATA[slot];
+    // 双周期槽位（三表图）：按当前 PERIOD 取那一套 labels/datasets。
+    // 缺失所选周期时回落到另一套，避免整张图空白。
+    if (cfg.annual || cfg.quarterly) {
+      var d = cfg[PERIOD] || cfg.annual || cfg.quarterly;
+      cfg = { type: d.type || cfg.type, labels: d.labels, datasets: d.datasets, unit: d.unit || cfg.unit };
+    }
+    var isPie = cfg.type === 'doughnut' || cfg.type === 'pie';
+
+    _charts[slot] = new Chart(el, {
+      type: cfg.type,
+      data: {
+        labels: cfg.labels,
+        datasets: cfg.datasets.map(function (d) {
+          var c = Array.isArray(d.color) ? d.color.map(function (k) { return P[k]; }) : P[d.color];
+          // 只写 d.type === 'line' 会让「图表级 type:'line' 但 dataset 没写 type」的
+          // 数据集拿到 borderWidth:0 —— 实测表现为「只有点、没有连线」。
+          var isLine = (d.type || cfg.type) === 'line';
+          return Object.assign({}, d, {
+            backgroundColor: c, borderColor: c,
+            borderWidth: isLine ? 2 : 0, tension: 0.3,
+          });
+        }),
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            // 窄屏把图例挪到顶部：右侧图例在 375px 上会吃掉大半个画布
+            position: isPie && innerWidth > 640 ? 'right' : 'top',
+            labels: { color: P.text, boxWidth: 12, font: { size: 11 } },
+          },
+        },
+        scales: isPie ? {} : {
+          x: { grid: { color: P.grid }, ticks: { color: P.text, font: { size: 11 } } },
+          y: { grid: { color: P.grid }, ticks: { color: P.text, font: { size: 11 } } },
+          y1: {
+            position: 'right', grid: { display: false },
+            ticks: { color: P.text, font: { size: 11 } }, display: 'auto',
+          },
+        },
+      },
+    });
+  });
+}
+addEventListener('DOMContentLoaded', renderCharts);
+addEventListener('resize', function () {          // 图例位置随断点变，需重建
+  clearTimeout(window._rcT);
+  window._rcT = setTimeout(renderCharts, 200);
+});
+
+</script>
+</body>
+</html>
