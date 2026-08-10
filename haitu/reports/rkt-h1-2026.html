@@ -72,10 +72,6 @@
   --lh-tight: 1.7;    /* 密排：表格、卡片、注释 */
   --lh-prose: 1.85;   /* 正文段落 */
 
-  /* ⚠️ 中文行长上限。实测此前 .cmt 每行 73 字、.note 96 字 —— 中文超过
-     45 字，眼睛回扫时极易丢行，这是「看着累」的首要原因（比字号更关键）。
-     40em 在中文下约等于 40 字/行，落在 35–45 的舒适区间。
-     只约束纯文字块；表格与图表不受此限，仍占满容器宽度。 */
   --measure: 40em;
   --bar-h: 44px;
 }
@@ -251,19 +247,11 @@ a { color: var(--accent2); text-decoration: none; }
   letter-spacing: .5px; text-transform: uppercase;
   padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border);
 }
-/* ⚠️ 表格一律左对齐，包括数字列。
-   数字右对齐是会计惯例（个位对齐便于比大小），但本站表格右侧混着「3.4×」
-   「126%」「宽」这类文字，右对齐后同一列里文字与数字各自贴右、参差不齐。
-   全列左对齐 + tabular-nums：等位数的数字仍然逐位成列，而文字不再乱跳。 */
 .tbl td { padding: 11px 16px; border-bottom: 1px solid var(--border); text-align: left; line-height: var(--lh-tight); }
 .tbl td:first-child { color: var(--text2); }
 .tbl .hl td { font-weight: 600; color: var(--text); }
 
 /* ── CHARTS ── */
-/* ⚠️ 轨道必须写 minmax(0,1fr) 而不是 1fr。
-   grid 子项默认 min-width:auto，canvas 与桑基 SVG 的固有宽度会把轨道撑开，
-   实测在 375px 下 .ccard 被撑到 568px，导致整页横向滚动。
-   .ccard 的 min-width:0 是同一问题的第二道保险。 */
 .cgrid  { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-bottom: 16px; }
 .cgrid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-bottom: 16px; }
 .ccard, .kpi, .moat-card, .risk-card, .score-card, .snap-item, .pbox { min-width: 0; }
@@ -367,18 +355,6 @@ a { color: var(--accent2); text-decoration: none; }
 .cmt p { margin-bottom: calc(var(--lh-prose) * 0.9em); }
 .cmt p:last-child { margin-bottom: 0; }
 
-/* ── 行长约束 ──
-   只作用于纯文字块。表格（.tbl-wrap）、图表（figure/.cgrid）与数据表
-   保持容器全宽，不受 --measure 限制 —— 财报的表格需要宽度，正文不需要。
-
-   ⚠️ 只收窄「流动的正文」，不收窄带背景的卡片。把 .ec-item / .risk-card
-   这类卡片本身缩到 40em，会在右侧留下一大块空白，反而更难看 —— 它们本来
-   就只有两三行，长行的代价远小于流动长文。 */
-/* ⚠️ 行长约束必须覆盖「所有流动的正文」，不能只覆盖 .cmt 里的那些。
-   实测教训：模块正文的 <p>／<ul> 是直接挂在 <section> 下的，不在 .cmt 内，
-   于是上一版把它们整个漏掉了 —— 06127 那份报告实测 37 段模块正文平均每行
-   71 个中文字、列表项 90 字，而同一页 .cmt 里的正文是 35 字。
-   中文一行超过 45 字，回扫时极易丢行，这就是「高宽屏读起来累」的直接原因。 */
 .section > p, .section > ul, .section > ol,
 .section > blockquote,
 .cmt > p, .cmt > ul, .cmt > ol, .cmt > blockquote,
@@ -386,14 +362,7 @@ a { color: var(--accent2); text-decoration: none; }
 .haitu-essay-body > ol, .haitu-essay-body > blockquote {
   max-width: var(--measure);           /* 15px × 40em ≈ 600px，约 40 字/行 */
 }
-/* ⚠️ 手记里的 ul／blockquote 一定要跟着列进来。上一版只写了 .haitu-essay-body > p，
-   于是 VST 报告实测：手记正文 40 字/行，而同一块里的列表 66 字/行 ——
-   页末手记本来就是整页最长的一段连续阅读，漏掉任何一种块级元素都会被读者撞上。 */
 
-/* 行内代码：报告里用来引 XBRL 标签名、字段名、检索词。
-   ⚠️ overflow-wrap: anywhere 不是可选项。XBRL 标签是 CamelCase 长串、没有空格也没有连字符，
-   浏览器找不到任何断点 —— 实测 StockRepurchasedAndRetiredDuringPeriodShares 单个词就有 396px，
-   在 375px 视口下把整页撑出 64px 横向滚动。 */
 code {
   font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace);
   font-size: 0.88em;
@@ -587,11 +556,6 @@ h2.stitle { font-size: 18px; font-weight: 700; margin: 0 0 20px; }
   .cgrid, .cgrid3, .pgrid { grid-template-columns: minmax(0, 1fr); }
 }
 
-/* 触控目标 ≥44px。用一个不可见的 ::before 撑开命中区，
-   开关本身仍是 44×22 的滑块外观。
-   ⚠️ 不要改 .toggle-switch 的 height/padding 来凑 44px —— 实测那样做会让
-   border-radius 与 ::after 滑块的定位一起错位，开关变成一个大圆角方块。
-   ⚠️ 条件必须同时含宽度 —— 只写 (hover:none) 时窄屏桌面实测仍是 22px。 */
 @media (max-width: 640px), (hover: none) {
   .toggle-switch::before {
     content: ''; position: absolute; left: 0; right: 0;
@@ -621,8 +585,6 @@ figure.chart figcaption { font-size: 12px; color: var(--text3-ink); line-height:
 
 /* ── 8. shell 新增组件（skip link / 结论跳转带 / 顶栏右侧 / 屏幕阅读器专用）── */
 
-/* 跳转到正文：平时移出视口，聚焦时才出现。
-   ⚠️ 不能用 display:none —— 那样键盘也聚焦不到，等于没有 */
 .skip {
   position: absolute; left: -9999px; top: 0;
   background: var(--card); color: var(--accent3-ink);
@@ -649,21 +611,12 @@ figure.chart figcaption { font-size: 12px; color: var(--text3-ink); line-height:
   transition: border-color .2s, background .2s;
 }
 .quip-jump a:hover { border-color: var(--accent3); background: var(--card); }
-/* 触控目标 ≥44px。
-   ⚠️ 不能只用 @media (hover:none) —— 窄屏但支持 hover 的场景（缩小的桌面窗口、
-   带触控板的二合一设备）拿不到放大，实测那种情况下只有 28px。宽度与指针两个条件都要给。 */
 @media (max-width: 640px), (hover: none) {
   /* 用 min-height 而不是加 padding —— padding 要靠字体行高凑够 44px，
      换字体或改字号就又不达标了（实测 padding:13px 只得到 40px）。 */
   .quip-jump a { min-height: 44px; padding: 0 16px; display: inline-flex; align-items: center; }
 }
 
-/* ══════════════════════════════════════════════════════════════
-   9. 报告组件（快照 / KPI / 护城河 / 风险 / 评分卡 / 电话会 / 桑基）
-   来源：现有报告语料中已验证的组件规则，已套用本表的字体栈与 ink 对比度修正。
-   ⚠️ 这一节必须与 body-skeleton.html 的类名保持同步 —— 骨架里出现的
-   每个类都要在这里有定义，否则章节会退化成无样式的纯文本流。
-   ══════════════════════════════════════════════════════════════ */
 .hero-pills {display: flex; justify-content: flex-start; gap: 16px; flex-wrap: wrap;}
 .pill {background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: var(--font-sans); font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow);}
 .pill strong {color: var(--text);}
@@ -683,12 +636,6 @@ figure.chart figcaption { font-size: 12px; color: var(--text3-ink); line-height:
 .moat-card.narrow .moat-rate {background: rgba(185,160,106,.18); color: var(--gold);}
 .moat-card.none .moat-rate {background: rgba(184,112,112,.18); color: var(--red);}
 .moat-card p {font-size: var(--fs-sm); color: var(--text2); line-height: var(--lh-tight);}
-/* ⚠️ .ec-item 必须是 block，不能是 flex。
-   语料里它只装「徽章 + 一句短语」，所以 flex 没出事；但正文里一旦出现
-   <strong>，每个 <strong> 都会变成独立 flex item，默认 min-width:auto 不收缩，
-   实测在 375px 下把 347px 的容器撑到 478px，导致整页横向滚动。
-   改为 block + 内联徽章：徽章仍在句首，正文正常折行环绕。
-   这与 .cgrid 必须写 minmax(0,1fr) 是同一类问题——flex/grid 子项默认不收缩。 */
 .ec-item {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: block; box-shadow: 0 1px 3px var(--shadow); line-height: var(--lh-prose); font-size: var(--fs-base);}
 .ec-badge {display: inline-block; vertical-align: baseline; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-right: 10px; font-family: var(--font-sans); white-space: nowrap;}
 .dcf-note {background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: var(--fs-sm); color: var(--text2); line-height: var(--lh-prose);}
@@ -700,13 +647,8 @@ figure.chart figcaption { font-size: 12px; color: var(--text3-ink); line-height:
 .flag-row {margin-top: 16px; padding: 12px 16px; background: rgba(184,112,112,.08); border: 1px solid rgba(184,112,112,.3); border-radius: 8px; font-size: var(--fs-sm); color: var(--text2);}
 .flag-row strong {color: var(--red);}
 .pgrid {display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0;}
-/* ⚠️ 全站默认左对齐，这是兜底声明；上面任何一处再写 center 都要有明确理由。 */
 body { text-align: left; }
 
-/* ⚠️ .pbox 不要整块 text-align:center。
-   它最初只用来放「标签＋大数字＋小注」的统计卡（.pl/.pv/.pn），居中是对的；
-   但后来它也被用作「本季必看／看穿」的长文容器，于是整段正文、表格、
-   列表全被居中，读起来极难。改为：容器左对齐，只有统计卡的三个子元素居中。 */
 .pbox {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 24px; text-align: left; box-shadow: 0 1px 4px var(--shadow);}
 .pbox .pl, .pbox .pv, .pbox .pn {text-align: left;}
 .pbox .pl {font-family: var(--font-sans); font-size: 11px; color: var(--text3-ink); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px;}
@@ -724,11 +666,6 @@ body { text-align: left; }
 .risk-card.r5::before {background: var(--red);}
 .risk-card h5 {font-size: 14px; margin-bottom: 6px; color: var(--text);}
 .risk-card p {font-size: var(--fs-sm); color: var(--text2); line-height: var(--lh-tight);}
-/* ⚠️ 此处原本混进了三条来自语料 @media(max-width:768px) 内的移动端规则
-   （.cgrid/.pgrid→1fr、.kpi-grid→1fr 1fr、.stock-snap→1fr 1fr）。
-   它们被抽取时丢掉了 @media 包裹，变成无条件规则且排在最后，
-   结果桌面端所有网格都塌成单列。已删除 —— 移动端由本表第 4、9 节的
-   @media(max-width:640px) 统一负责。抽取语料 CSS 时务必排除 @media 块内的规则。 */
 
 /* 骨架用到、但语料里没有现成规则的补充组件 */
 .note { font-size: var(--fs-xs); color: var(--text3-ink); line-height: var(--lh-tight); margin-top: 12px; }
@@ -769,7 +706,6 @@ body { text-align: left; }
 .snap-note  { font-family: var(--font-sans); font-size: 11px; color: var(--text3-ink); margin-top: 3px; }
 .sk-node rect { opacity: .9; }
 
-
 </style>
 </head>
 <body>
@@ -780,7 +716,7 @@ body { text-align: left; }
 <div class="theme-bar">
   <div class="theme-bar-left">
     <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
-    <a class="xueqiu-link" href="https://finance.yahoo.com/quote/RKT.L" target="_blank" rel="noopener">📊 Yahoo RKT.L</a>
+    <a class="xueqiu-link" href="https://finance.yahoo.com/quote/RKT.L" target="_blank" rel="noopener">Yahoo RKT.L</a>
   </div>
   <div class="theme-bar-right">
     <span>☀️ 浅色</span>
@@ -849,7 +785,7 @@ body { text-align: left; }
     <div class="snap-item">
       <div class="snap-label">TTM 市盈率（IFRS）</div>
       <div class="snap-value">12.4×</div>
-      <div class="snap-note">每股收益 428.0 便士，其中 327.4 便士来自含处置收益的 2025 下半年</div>
+      <div class="snap-note">每股收益 428.0 便士（本报告按公司披露的两个半年期摊薄每股收益相加：327.4 ＋ 100.6），其中 327.4 便士来自含处置收益的 2025 下半年。行情站普遍显示 11.9 倍，因其用 443 便士——那是拿 TTM 归母净利直接除以约 6.49 亿加权股数，而两个半年期各自的加权股数不同（6.852 亿与 6.482 亿）。两种算法都对，差异约 4%，不影响结论</div>
     </div>
     <div class="snap-item">
       <div class="snap-label">TTM 市盈率（调整后）</div>
@@ -967,6 +903,8 @@ body { text-align: left; }
 
   <p>行情站给出的 TTM 市盈率是 11.9 倍，前瞻市盈率却是 15.2 倍。一家消费品公司的拖尾倍数比前瞻倍数还低四成，只可能有一个原因：过去十二个月的利润里混进了不会重复的东西。</p>
 
+  <p class="note">先把口径对齐：本报告自己算的 TTM 报表市盈率是 <strong>12.4 倍</strong>（每股收益 428.0 便士＝公司披露的两个半年期摊薄值 327.4 ＋ 100.6 相加），行情站的 11.9 倍用的是 443 便士（TTM 归母净利直接除以约 6.49 亿加权股数）。两个半年期的加权股数本来就不同——6.852 亿与 6.482 亿——所以两种算法必然差几个百分点。下面的论证对 11.9 还是 12.4 都成立，因为问题不在小数点，在于<strong>这个分母里有一笔卖资产的钱</strong>。</p>
+
   <p>拆开看。近 12 个月归母净利润 <strong>£28.76 亿</strong>，其中 2025 下半年一期就贡献 <strong>£22.24 亿（77%）</strong>，而 2026 上半年只有 £6.52 亿。2025 下半年为什么这么高？因为 12 月 31 日 Essential Home 交割，利润表上出现了一笔 <strong>£12.45 亿的税前处置收益</strong>。</p>
 
   <p>这笔收益本身还得再拆一层。按 2025 年年报附注 29，处置对价净额 £21.72 亿，减去被处置净资产 £11.04 亿，再<strong>加回 £2.02 亿累计外币折算收益</strong>——最后一项是把此前挂在权益里的汇兑储备转进损益，是会计科目之间的搬运，没有一分钱新现金进来。</p>
@@ -1081,10 +1019,10 @@ body { text-align: left; }
             <style>
               .sk-node { rx: 2; }
               .sk-lab { font-size: 11px; fill: var(--text); }
-              .sk-lab.dim { fill: var(--text-dim); }
-              .sk-lab.warn { fill: var(--accent-red); }
-              .sk-lab.good { fill: var(--accent-green); }
-              .sk-head { font-size: 11.5px; font-weight: 600; fill: var(--text-dim); letter-spacing: .5px; }
+              .sk-lab.dim { fill: var(--text2); }
+              .sk-lab.warn { fill: var(--red); }
+              .sk-lab.good { fill: var(--green); }
+              .sk-head { font-size: 11.5px; font-weight: 600; fill: var(--text2); letter-spacing: .5px; }
             </style>
           </defs>
 
@@ -1099,10 +1037,10 @@ body { text-align: left; }
           <text x="30" y="56" class="sk-lab">净收入 6,411</text>
 
           <!-- 6,411 → 销售成本 2,663（占 41.5%，高度 124.6）+ 毛利 3,748（高度 175.4）-->
-          <path d="M24,40 C110,40 110,40 196,40 L196,164.6 C110,164.6 110,164.6 24,164.6 Z" fill="var(--accent-red)" opacity="0.30"/>
+          <path d="M24,40 C110,40 110,40 196,40 L196,164.6 C110,164.6 110,164.6 24,164.6 Z" fill="var(--red)" opacity="0.30"/>
           <path d="M24,164.6 C110,164.6 110,164.6 196,180 L196,355.4 C110,340 110,340 24,340 Z" fill="var(--accent)" opacity="0.35"/>
 
-          <rect x="196" y="40" width="16" height="124.6" fill="var(--accent-red)" class="sk-node"/>
+          <rect x="196" y="40" width="16" height="124.6" fill="var(--red)" class="sk-node"/>
           <text x="218" y="56" class="sk-lab warn">销售成本 2,663</text>
           <text x="218" y="70" class="sk-lab dim">毛利率 58.5%（−250bp）</text>
 
@@ -1110,14 +1048,14 @@ body { text-align: left; }
           <text x="218" y="196" class="sk-lab">毛利 3,748</text>
 
           <!-- 毛利 3,748 → 品牌投入 943（44.1）+ 其他营业费用 1,639（76.7）+ 营业利润 1,166（54.6）-->
-          <path d="M212,180 C300,180 300,180 388,180 L388,224.1 C300,224.1 300,224.1 212,224.1 Z" fill="var(--accent-gold)" opacity="0.35"/>
-          <path d="M212,224.1 C300,224.1 300,224.1 388,238 L388,314.7 C300,300.8 300,300.8 212,300.8 Z" fill="var(--accent-red)" opacity="0.28"/>
+          <path d="M212,180 C300,180 300,180 388,180 L388,224.1 C300,224.1 300,224.1 212,224.1 Z" fill="var(--gold)" opacity="0.35"/>
+          <path d="M212,224.1 C300,224.1 300,224.1 388,238 L388,314.7 C300,300.8 300,300.8 212,300.8 Z" fill="var(--red)" opacity="0.28"/>
           <path d="M212,300.8 C300,300.8 300,300.8 388,328 L388,382.6 C300,355.4 300,355.4 212,355.4 Z" fill="var(--accent3)" opacity="0.40"/>
 
-          <rect x="388" y="180" width="16" height="44.1" fill="var(--accent-gold)" class="sk-node"/>
+          <rect x="388" y="180" width="16" height="44.1" fill="var(--gold)" class="sk-node"/>
           <text x="410" y="194" class="sk-lab">品牌权益投入 943</text>
 
-          <rect x="388" y="238" width="16" height="76.7" fill="var(--accent-red)" class="sk-node"/>
+          <rect x="388" y="238" width="16" height="76.7" fill="var(--red)" class="sk-node"/>
           <text x="410" y="252" class="sk-lab warn">其他营业费用 1,639</text>
 
           <rect x="388" y="328" width="16" height="54.6" fill="var(--accent3)" class="sk-node"/>
@@ -1132,50 +1070,50 @@ body { text-align: left; }
           <text x="618" y="188" class="sk-lab dim">可分配现金 1,717</text>
 
           <!-- 1,717 → 税 494(23.1) 利息 104(4.9) 营运资金 377(17.7) 调整项现金 133(6.2) 资本开支 190(8.9) 自由现金流 419(19.6) -->
-          <path d="M612,196 C680,196 680,196 748,196 L748,219.1 C680,219.1 680,219.1 612,219.1 Z" fill="var(--accent-red)" opacity="0.30"/>
-          <path d="M612,219.1 C680,219.1 680,219.1 748,223 L748,227.9 C680,224 680,224 612,224 Z" fill="var(--accent-red)" opacity="0.30"/>
-          <path d="M612,224 C680,224 680,224 748,232 L748,249.7 C680,241.7 680,241.7 612,241.7 Z" fill="var(--accent-red)" opacity="0.30"/>
-          <path d="M612,241.7 C680,241.7 680,241.7 748,254 L748,260.2 C680,247.9 680,247.9 612,247.9 Z" fill="var(--accent-red)" opacity="0.30"/>
-          <path d="M612,247.9 C680,247.9 680,247.9 748,264 L748,272.9 C680,256.8 680,256.8 612,256.8 Z" fill="var(--accent-red)" opacity="0.30"/>
-          <path d="M612,256.8 C680,256.8 680,256.8 748,277 L748,296.6 C680,276.4 680,276.4 612,276.4 Z" fill="var(--accent-green)" opacity="0.42"/>
+          <path d="M612,196 C680,196 680,196 748,196 L748,219.1 C680,219.1 680,219.1 612,219.1 Z" fill="var(--red)" opacity="0.30"/>
+          <path d="M612,219.1 C680,219.1 680,219.1 748,223 L748,227.9 C680,224 680,224 612,224 Z" fill="var(--red)" opacity="0.30"/>
+          <path d="M612,224 C680,224 680,224 748,232 L748,249.7 C680,241.7 680,241.7 612,241.7 Z" fill="var(--red)" opacity="0.30"/>
+          <path d="M612,241.7 C680,241.7 680,241.7 748,254 L748,260.2 C680,247.9 680,247.9 612,247.9 Z" fill="var(--red)" opacity="0.30"/>
+          <path d="M612,247.9 C680,247.9 680,247.9 748,264 L748,272.9 C680,256.8 680,256.8 612,256.8 Z" fill="var(--red)" opacity="0.30"/>
+          <path d="M612,256.8 C680,256.8 680,256.8 748,277 L748,296.6 C680,276.4 680,276.4 612,276.4 Z" fill="var(--green)" opacity="0.42"/>
 
-          <rect x="748" y="196" width="14" height="23.1" fill="var(--accent-red)" class="sk-node"/>
+          <rect x="748" y="196" width="14" height="23.1" fill="var(--red)" class="sk-node"/>
           <text x="768" y="206" class="sk-lab warn">已付税 494</text>
-          <rect x="748" y="223" width="14" height="4.9" fill="var(--accent-red)" class="sk-node"/>
+          <rect x="748" y="223" width="14" height="4.9" fill="var(--red)" class="sk-node"/>
           <text x="768" y="229" class="sk-lab warn">净利息 104</text>
-          <rect x="748" y="232" width="14" height="17.7" fill="var(--accent-red)" class="sk-node"/>
+          <rect x="748" y="232" width="14" height="17.7" fill="var(--red)" class="sk-node"/>
           <text x="768" y="243" class="sk-lab warn">营运资金及准备金 377</text>
-          <rect x="748" y="254" width="14" height="6.2" fill="var(--accent-red)" class="sk-node"/>
+          <rect x="748" y="254" width="14" height="6.2" fill="var(--red)" class="sk-node"/>
           <text x="768" y="260" class="sk-lab warn">重组等现金支出 133</text>
-          <rect x="748" y="264" width="14" height="8.9" fill="var(--accent-red)" class="sk-node"/>
+          <rect x="748" y="264" width="14" height="8.9" fill="var(--red)" class="sk-node"/>
           <text x="768" y="271" class="sk-lab warn">资本开支净额 190</text>
-          <rect x="748" y="277" width="14" height="19.6" fill="var(--accent-green)" class="sk-node"/>
+          <rect x="748" y="277" width="14" height="19.6" fill="var(--green)" class="sk-node"/>
           <text x="768" y="288" class="sk-lab good">自由现金流 419</text>
 
           <!-- 底部：自由现金流 419 + 新增净债务 2,580 = 股东回报 2,999 -->
           <line x1="8" y1="392" x2="952" y2="392" stroke="var(--border)" stroke-width="1"/>
           <text x="8" y="410" class="sk-head">股东回报的资金来源</text>
 
-          <rect x="8" y="420" width="16" height="19.6" fill="var(--accent-green)" class="sk-node"/>
+          <rect x="8" y="420" width="16" height="19.6" fill="var(--green)" class="sk-node"/>
           <text x="30" y="434" class="sk-lab good">自由现金流 419</text>
-          <rect x="8" y="444" width="16" height="14" fill="var(--accent-red)" class="sk-node"/>
+          <rect x="8" y="444" width="16" height="14" fill="var(--red)" class="sk-node"/>
           <text x="30" y="455" class="sk-lab warn">新增净债务 2,580</text>
 
-          <path d="M24,420 C200,420 200,420 376,420 L376,439.6 C200,439.6 200,439.6 24,439.6 Z" fill="var(--accent-green)" opacity="0.40"/>
-          <path d="M24,444 C200,444 200,444 376,439.6 L376,460 C200,458 200,458 24,458 Z" fill="var(--accent-red)" opacity="0.28"/>
+          <path d="M24,420 C200,420 200,420 376,420 L376,439.6 C200,439.6 200,439.6 24,439.6 Z" fill="var(--green)" opacity="0.40"/>
+          <path d="M24,444 C200,444 200,444 376,439.6 L376,460 C200,458 200,458 24,458 Z" fill="var(--red)" opacity="0.28"/>
 
-          <rect x="376" y="420" width="16" height="40" fill="var(--accent-gold)" class="sk-node"/>
+          <rect x="376" y="420" width="16" height="40" fill="var(--gold)" class="sk-node"/>
           <text x="398" y="434" class="sk-lab">合计 2,999</text>
 
-          <path d="M392,420 C500,420 500,420 608,420 L608,431 C500,431 500,431 392,431 Z" fill="var(--accent-gold)" opacity="0.35"/>
-          <path d="M392,431 C500,431 500,431 608,435 L608,456 C500,452 500,452 392,452 Z" fill="var(--accent-gold)" opacity="0.35"/>
-          <path d="M392,452 C500,452 500,452 608,460 L608,468 C500,460 500,460 392,460 Z" fill="var(--accent-gold)" opacity="0.35"/>
+          <path d="M392,420 C500,420 500,420 608,420 L608,431 C500,431 500,431 392,431 Z" fill="var(--gold)" opacity="0.35"/>
+          <path d="M392,431 C500,431 500,431 608,435 L608,456 C500,452 500,452 392,452 Z" fill="var(--gold)" opacity="0.35"/>
+          <path d="M392,452 C500,452 500,452 608,460 L608,468 C500,460 500,460 392,460 Z" fill="var(--gold)" opacity="0.35"/>
 
-          <rect x="608" y="420" width="14" height="11" fill="var(--accent-gold)" class="sk-node"/>
+          <rect x="608" y="420" width="14" height="11" fill="var(--gold)" class="sk-node"/>
           <text x="628" y="429" class="sk-lab">末期股息 822</text>
-          <rect x="608" y="435" width="14" height="21" fill="var(--accent-gold)" class="sk-node"/>
+          <rect x="608" y="435" width="14" height="21" fill="var(--gold)" class="sk-node"/>
           <text x="628" y="449" class="sk-lab">特别股息 1,578</text>
-          <rect x="608" y="460" width="14" height="8" fill="var(--accent-gold)" class="sk-node"/>
+          <rect x="608" y="460" width="14" height="8" fill="var(--gold)" class="sk-node"/>
           <text x="628" y="467" class="sk-lab">股份回购 599</text>
         </svg>
       </div>
