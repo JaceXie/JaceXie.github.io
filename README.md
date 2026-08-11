@@ -1,6 +1,6 @@
 # 海图夜读 · GitHub Pages 自动化项目
 
-`https://jacexie.github.io/`
+`https://haitu.jacexie.com/`
 
 每天早上 6:00 通过 PM2 cron 运行，自动：
 

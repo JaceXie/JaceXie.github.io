@@ -51,12 +51,13 @@ setTimeout(function () {
 <meta property="og:type" content="website">
 <meta property="og:title" content="海图夜读 · 财报研究所">
 <meta property="og:description" content="海图夜读——价值投资视角的上市公司深度研究。覆盖美股 / 港股 / A 股，融合 Graham、Fisher、Munger、Marks 经典理论，配莫兰迪配色 HTML 报告 + 海图夜读手记。">
-<meta property="og:image" content="https://jacexie.github.io/haitu/assets/og/index.png">
-<meta property="og:url" content="https://jacexie.github.io/">
+<link rel="canonical" href="https://haitu.jacexie.com/">
+<meta property="og:image" content="https://haitu.jacexie.com/haitu/assets/og/index.png">
+<meta property="og:url" content="https://haitu.jacexie.com/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="海图夜读 · 财报研究所">
 <meta name="twitter:description" content="海图夜读——价值投资视角的上市公司深度研究。覆盖美股 / 港股 / A 股，融合 Graham、Fisher、Munger、Marks 经典理论，配莫兰迪配色 HTML 报告 + 海图夜读手记。">
-<meta name="twitter:image" content="https://jacexie.github.io/haitu/assets/og/index.png">
+<meta name="twitter:image" content="https://haitu.jacexie.com/haitu/assets/og/index.png">
 <style>
 :root {
   /* 海图夜读 · 深海蓝 + 金色 + 暗红点缀 */
@@ -325,6 +326,13 @@ html:not([data-booted]) #stockBody .fav-btn { pointer-events: none; opacity: .55
 }
 .notice-bar button:hover { background: var(--tag-bg); }
 .notice-bar .notice-close { margin-left: auto; border-color: transparent; color: var(--text-dim); }
+
+.fav-note { margin: -6px 0 12px; font-size: 0.78rem; color: var(--text-dim); line-height: 1.6; }
+.fav-note button {
+  margin-left: 8px; padding: 3px 10px; border-radius: 6px; cursor: pointer; font-size: 0.75rem;
+  border: 1px solid var(--accent-gold); background: transparent; color: var(--accent-gold);
+}
+.fav-note button:hover { background: var(--tag-bg); }
 @media (prefers-reduced-motion: reduce) {
   .fav-btn { transition: none; }
   .fav-btn:hover { transform: none; }
@@ -622,6 +630,10 @@ footer p { margin-bottom: 6px; }
       <!-- 收藏表：无收藏时整块隐藏，不占位 -->
       <div id="favSection" hidden>
         <div class="section-title">⭐ 我的收藏 <span class="fav-count" id="favCount"></span></div>
+        <div class="fav-note">
+          收藏保存在<strong>这台设备的这个浏览器</strong>里，不会自动同步到别的浏览器或手机。
+          <button type="button" id="favShareBtn">生成同步链接</button>
+        </div>
         <div class="stock-table-wrap">
           <table class="stock-table">
             <thead><tr id="favHead"></tr></thead>
@@ -2495,6 +2507,75 @@ function renderStockList() {
   if (el) el.textContent = `共 ${reports.length} 家 · 现价随每日更新刷新`;
 }
 renderStockList();
+
+/* ── 收藏的跨浏览器搬运 ──
+   localStorage 按「浏览器 × 用户配置 × origin」隔离，浏览器之间没有任何通道。
+   纯静态站没有账号也没有服务端，做不到自动同步，所以这里给的是三件事：
+   说清楚它存在哪（见 .fav-note）、能搬走（#fav= 链接）、能从旧 origin 搬过来（迁移条）。
+
+   ⚠️ 用 # 而不是 ?：fragment 不会随请求上行，不会进 GitHub 的访问日志。 */
+function encodeFavs(set) {
+  return [...set].map((t) => String(t).replace(/\s+/g, '')).join('~');
+}
+function decodeFavs(code) {
+  /* 白名单是 URL 输入唯一可靠的消毒方式：只认当前 reports 里真实存在的代码。
+     顺带把「HKEX: 06198」与「HKEX:06198」两种写法归一到本站的正式写法。 */
+  const canon = new Map(reports.map((r) => [r.ticker.replace(/\s+/g, ''), r.ticker]));
+  const out = new Set();
+  for (const raw of String(code).split('~')) {
+    const hit = canon.get(raw.replace(/\s+/g, ''));
+    if (hit) out.add(hit);
+  }
+  return out;
+}
+
+function shareFavs() {
+  if (!favs.size) { showBar('还没有收藏，先点几颗星。'); return; }
+  const url = location.origin + location.pathname + '#fav=' + encodeFavs(favs);
+  const done = () => showBar(`已复制 ${favs.size} 项收藏的同步链接。在另一个浏览器打开它即可导入；存成书签还能靠浏览器自带的书签同步带到别的设备。`);
+  if (navigator.clipboard && location.protocol === 'https:') {
+    navigator.clipboard.writeText(url).then(done, () => prompt('复制这条链接：', url));
+  } else {
+    prompt('复制这条链接：', url);
+  }
+}
+document.getElementById('favShareBtn')?.addEventListener('click', shareFavs);
+
+/* 打开时若带着 #fav=，不静默导入 —— 让用户自己决定合并还是替换 */
+(function importFavsFromHash() {
+  const m = /^#fav=(.*)$/.exec(location.hash || '');
+  if (!m) return;
+  const incoming = decodeFavs(decodeURIComponent(m[1]));
+  history.replaceState(null, '', location.pathname);   /* 先把 hash 抹掉，刷新不会重复弹 */
+  if (!incoming.size) { showBar('链接里没有可识别的收藏项。'); return; }
+  const apply = (set) => {
+    favs = set;
+    if (!saveFavs(favs)) { showBar('这个浏览器禁用了本地存储，收藏无法保存。'); return; }
+    renderStockList();
+    showBar(`已导入，当前收藏 ${favs.size} 项。`);
+  };
+  showBar(`链接里带着 ${incoming.size} 项收藏，本机现有 ${favs.size} 项。`, [
+    ['合并', () => apply(new Set([...favs, ...incoming]))],
+    ['替换', () => apply(new Set(incoming))],
+    ['忽略', () => {}],
+  ]);
+})();
+
+/* 同一个域名的 http 与 https 是两个 origin，收藏互相看不见。
+   而 jacexie.github.io 的 301 目前落到 http，各家浏览器又只有一部分会自动升级到 https
+   —— 这正是「A 浏览器有、B 浏览器没有」的不对称来源。
+   给一条带着收藏一起搬家的通道，且刻意不自动跳转：裸跳会把 http 这边的收藏原地扔掉。 */
+(function offerHttpsMigration() {
+  if (location.protocol !== 'http:' || /^(localhost|127\.|\[?::1)/.test(location.hostname)) return;
+  const target = 'https://' + location.host + location.pathname
+    + (favs.size ? '#fav=' + encodeURIComponent(encodeFavs(favs)) : '');
+  showBar(
+    favs.size
+      ? `你正通过不安全连接访问，这里的 ${favs.size} 项收藏存在另一个位置。可以带着它们切换到 https。`
+      : '你正通过不安全连接访问。建议切换到 https。',
+    [['切换到 https', () => { location.href = target; }]]
+  );
+})();
 
 /* ── CALENDAR DATA ── */
 /* HAITU:CALENDAR:START -- 自动生成区域，请勿手工编辑 -- 由 src/daily-update.js 每日 6am 更新 */
