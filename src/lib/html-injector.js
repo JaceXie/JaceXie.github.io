@@ -5,17 +5,25 @@ import { logger } from './logger.js';
 const MARKERS = {
   reports: {
     re: /\/\* HAITU:REPORTS:START[\s\S]*?\/\* HAITU:REPORTS:END \*\//,
+    startTag: '/* HAITU:REPORTS:START',
     label: 'reports'
   },
   calendar: {
     re: /\/\* HAITU:CALENDAR:START[\s\S]*?\/\* HAITU:CALENDAR:END \*\//,
+    startTag: '/* HAITU:CALENDAR:START',
     label: 'calendar'
   },
   today: {
     re: /\/\* HAITU:TODAY:START \*\/[\s\S]*?\/\* HAITU:TODAY:END \*\//,
+    startTag: '/* HAITU:TODAY:START',
     label: 'today'
   }
 };
+
+// 首屏预渲染块。刻意不放进上面的 MARKERS —— 那个循环里缺失即 throw，
+// 而这一块是渐进增强：缺了页面照常工作，不该为它把每日的日历与日期更新一起阻断。
+export const STOCKROWS_RE = /<!-- HAITU:STOCKROWS:START -->[\s\S]*?<!-- HAITU:STOCKROWS:END -->/;
+const PRERENDER_ROWS = 16;   // 1920×1080 首屏约看得见 13 行，留 3 行余量
 
 /**
  * 将 reports 数组、calendar 数组、today 日期注入 index.html。
@@ -28,39 +36,104 @@ export function injectHtml(htmlPath, { tickers, calendarEvents, todayStr }) {
   let html = readFileSync(htmlPath, 'utf-8');
   backfillModTime(tickers, dirname(resolve(htmlPath)));
 
-  // 验证所有 marker 都存在
+  // 验证每对 marker 恰好存在一份。
+  // ⚠️ 不能只查「存在」：正则非全局 + String.replace 只替换第一处，
+  //    所以重复的 marker 块不会报错，但会变成一个永远不再更新的僵尸块；
+  //    若僵尸块同样声明 const reports，整段脚本 SyntaxError、门户全白。
   for (const [k, m] of Object.entries(MARKERS)) {
     if (!m.re.test(html)) {
       throw new Error(`Marker ${k} (${m.re.source.slice(0, 30)}…) not found in ${htmlPath}`);
     }
+    const n = html.split(m.startTag).length - 1;
+    if (n !== 1) throw new Error(`Marker ${k} 出现 ${n} 次，必须恰好 1 次（${htmlPath}）`);
   }
 
   // ── REPORTS ──
+  // ⚠️ desc 刻意不注入首页。它是 99 段富文本、gzip 后占全站传输量的 72%，
+  //    而门户前端一处都没有读它（没有展开 UI）。原文完整保存在 data/tickers.json。
   const sortedTickers = [...tickers].sort((a, b) => toEpoch(b.modTime) - toEpoch(a.modTime));
   const reportsBlock = renderReportsBlock(sortedTickers);
   assertParses(reportsBlock, 'reports');
-  html = html.replace(MARKERS.reports.re, reportsBlock);
+  html = html.replace(MARKERS.reports.re, () => reportsBlock);   // 必须函数形式，见文件底部说明
   logger.info(`Injected ${tickers.length} reports`);
+
+  // ── 首屏预渲染（渐进增强，失败不阻断当日注入）──
+  try {
+    const rowsBlock = renderStockRowsBlock(sortedTickers, html);
+    html = html.replace(STOCKROWS_RE, () => rowsBlock);
+    logger.info(`Injected ${Math.min(PRERENDER_ROWS, sortedTickers.length)} prerendered rows`);
+  } catch (e) {
+    logger.error(`预渲染首屏失败，保留上一次的块，不阻断当日注入：${e.message}`);
+  }
 
   // ── CALENDAR ──
   const calendarBlock = renderCalendarBlock(calendarEvents);
   assertParses(calendarBlock, 'calendar');
-  html = html.replace(MARKERS.calendar.re, calendarBlock);
+  html = html.replace(MARKERS.calendar.re, () => calendarBlock);
   logger.info(`Injected ${calendarEvents.length} calendar events`);
 
   // ── TODAY ──
   const todayBlock = `/* HAITU:TODAY:START */ new Date('${todayStr}') /* HAITU:TODAY:END */`;
-  html = html.replace(MARKERS.today.re, todayBlock);
+  html = html.replace(MARKERS.today.re, () => todayBlock);
   logger.info(`Injected today: ${todayStr}`);
 
   writeFileSync(htmlPath, html);
   return html;
 }
 
-function renderReportsBlock(tickers) {
+/**
+ * 生成写死进 HTML 的首屏若干行。
+ *
+ * ⚠️ 这里刻意不重写 rowHtml / fmtPrice / COLS —— 预渲染的唯一正确性标准就是
+ *    「与前端产出逐字节相同」，再写一份实现等于自造一个会慢慢漂移的分叉：
+ *    排序次键、千分位阈值、GBp 的后缀 p、rating||tag 回退，每一条都能悄悄错开。
+ *    改为从 index.html 的 HAITU:ROWTPL 段抠出真身在 Node 里执行，漂移在结构上不可能发生。
+ *    抠取失败会 throw，被上层 catch 成一条错误日志（这一块是渐进增强，不值得阻断每日更新）。
+ */
+export function renderStockRowsBlock(sortedTickers, html) {
+  const m = html.match(/\/\* HAITU:ROWTPL:START[\s\S]*?\/\* HAITU:ROWTPL:END \*\//);
+  if (!m) throw new Error('ROWTPL 段未找到');
+  const make = new Function('favs', m[0] + '\n; return { rowHtml, COLS };');
+  const { rowHtml, COLS } = make(new Set());          // 构建期不可知收藏态，一律按未收藏渲染
+
+  const str = (v) => (v == null ? '' : String(v));
+  const num = (v) => (typeof v === 'number' && isFinite(v) ? v : null);
+  const recs = sortedTickers.map((t) => ({
+    file: str(t.lastReportFile),
+    ticker: str(t.marketSymbol),
+    name: str(t.displayName || t.name || t.ticker),
+    tag: str(t.tag),
+    tagClass: str(t.ratingClass),
+    rating: str(t.rating),
+    currentPrice: num(t.currentPrice),
+    targetPrice: num(t.targetPrice),
+    currency: str(t.targetCurrency || t.priceCurrency || 'USD'),
+    period: str(t.lastReportPeriod),
+    date: str(t.lastAnalyzedDate),
+    modTime: toEpoch(t.modTime)
+  }));
+
+  // 前端 rowHtml 对 name / period / file 是裸插值的，所以这里做完整 HTML 转义反而会
+  // 与 JS 接管后的产出不一致。改为拒绝真正会撕碎表格的字符，让问题在构建期就暴露。
+  const cmp = COLS.find((c) => c.key === 'date').sort;   // 用前端的默认排序，不是纯 modTime 降序
+  const top = [...recs].sort(cmp).slice(0, PRERENDER_ROWS);
+  for (const r of top) {
+    for (const k of ['name', 'period', 'file', 'ticker', 'date']) {
+      if (/[<>]/.test(r[k])) throw new Error(`${r.ticker} 的 ${k} 含尖括号，会撕碎预渲染表格`);
+    }
+  }
+
+  const rows = top.map(rowHtml).join('');
+  const nTr = (rows.match(/<tr /g) || []).length;
+  if (nTr !== top.length) throw new Error(`期望 ${top.length} 行，实得 ${nTr}`);
+  if (/<\/script/i.test(rows)) throw new Error('预渲染内容含 </script，会提前闭合脚本');
+  if (/HAITU:/.test(rows)) throw new Error('预渲染内容含 HAITU: 标记，会污染 marker 匹配');
+  return `<!-- HAITU:STOCKROWS:START -->${rows}<!-- HAITU:STOCKROWS:END -->`;
+}
+
+export function renderReportsBlock(tickers) {
   const items = tickers
     .map((t) => {
-      const desc = escapeJsString(t.desc);
       const title = escapeJsString(t.title);
       const tag = escapeJsString(t.tag);
       const displayName = escapeJsString(t.displayName || t.name || t.ticker);
@@ -75,7 +148,6 @@ function renderReportsBlock(tickers) {
     ticker: "${escapeJsString(t.marketSymbol)}",
     name: "${displayName}",
     title: "${title}",
-    desc: "${desc}",
     tag: "${tag}",
     tagClass: "${escapeJsString(t.ratingClass)}",
     rating: "${rating}",

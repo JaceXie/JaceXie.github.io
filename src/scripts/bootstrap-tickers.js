@@ -87,7 +87,9 @@ function extractReports(html) {
   // 用 eval 安全（这是我们自己的本地文件）
   // 但更安全的做法：用正则提取每条记录
   const records = [];
-  const recordPattern = /\{\s*file:\s*"([^"]+)",[\s\S]*?modTime:\s*(\d+)\s*\}/g;
+  // modTime 允许小数：backfillModTime 直接写 statSync().mtimeMs，那是浮点。
+  // 原来的 \d+ 会让带小数的记录整条匹配不上而被静默丢弃（实测 99 条只抓到 93 条）。
+  const recordPattern = /\{\s*file:\s*"([^"]+)",[\s\S]*?modTime:\s*([\d.]+)\s*\}/g;
   let m;
   while ((m = recordPattern.exec(arrText)) !== null) {
     const block = m[0];
@@ -99,7 +101,7 @@ function extractReports(html) {
       tag: extractField(block, 'tag'),
       tagClass: extractField(block, 'tagClass'),
       date: extractField(block, 'date'),
-      modTime: parseInt(m[2], 10)
+      modTime: Math.round(parseFloat(m[2]))
     });
   }
   return records;
@@ -117,6 +119,18 @@ function main() {
   const reports = extractReports(html);
 
   console.log(`✓ 从 index.html 提取到 ${reports.length} 条报告记录`);
+
+  // index.html 已不再携带 desc，改从现有 tickers.json 保留（按报告文件名对齐）。
+  // 文件不存在时降级为空 Map —— 那是真正的首次 bootstrap，本来就没有 desc 可保。
+  const existingDesc = new Map();
+  try {
+    for (const t of JSON.parse(readFileSync(OUTPUT_PATH, 'utf-8')).tickers) {
+      if (t.lastReportFile && t.desc) existingDesc.set(t.lastReportFile, t.desc);
+    }
+    console.log(`✓ 从现有 tickers.json 保留 ${existingDesc.size} 段 desc`);
+  } catch (e) {
+    console.warn('！未能读取现有 tickers.json，desc 将为空：' + e.message);
+  }
 
   const tickers = reports.map((r) => {
     const ticker = extractTicker(r.ticker); // "NASDAQ: MSFT" → "MSFT"
@@ -137,7 +151,10 @@ function main() {
       ratingClass: r.tagClass,
       tag: r.tag,
       title: r.title,
-      desc: r.desc,
+      // ⚠️ desc 自 2026-08-11 起不再注入 index.html（它占首页传输量七成而前端一处都不读）。
+      //    所以这里必然抓不到，只能从既有的 tickers.json 里保留 —— 否则跑一次 bootstrap
+      //    就会把 99 段人工撰写的点评全部写成 null，且不可逆。
+      desc: r.desc ?? existingDesc.get(r.file) ?? null,
       modTime: r.modTime
     };
   });
