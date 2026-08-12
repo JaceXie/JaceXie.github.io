@@ -1,0 +1,1738 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>腾讯控股 0700 · Q2 2026 财报深度分析 · 海图夜读</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+
+<script>
+(function () {
+  try {
+    var t = localStorage.getItem('theme');
+    if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', t);
+  } catch (e) { document.documentElement.setAttribute('data-theme', 'light'); }
+})();
+</script>
+
+<link rel="canonical" href="https://haitu.jacexie.com/haitu/reports/tencent-q2-2026.html">
+<meta name="description" content="14 亿人的社交图谱把注意力与支付分发给游戏、广告和金融服务——核心利润还在加速，但这一季它把自由现金流花成了负数：算力第一，回购垫后。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="腾讯控股 0700 · Q2 2026 财报深度分析 · 海图夜读">
+<meta property="og:description" content="14 亿人的社交图谱把注意力与支付分发给游戏、广告和金融服务——核心利润还在加速，但这一季它把自由现金流花成了负数：算力第一，回购垫后。">
+<meta property="og:url" content="https://haitu.jacexie.com/haitu/reports/tencent-q2-2026.html">
+<meta name="twitter:card" content="summary">
+
+<script defer src="../assets/vendor/chart.umd.min.js"></script>
+
+<style>
+
+/* ── MORANDI PALETTE ── */
+:root {
+  /* Light (default) */
+  --bg:        #f5f0eb;
+  --bg2:       #ece6df;
+  --card:      #ffffff;
+  --card2:     #f8f5f1;
+  --border:    #d9d0c7;
+  --text:      #4a4340;
+  --text2:     #7a706a;
+  --text3:     #a89f98;
+  --accent:    #8a9a8e;   /* sage */
+  --accent2:   #7b8fa0;   /* muted blue */
+  --accent3:   #b08d7a;   /* dusty terracotta */
+  --rose:      #c09090;   /* dusty rose */
+  --gold:      #b9a06a;
+  --red:       #b87070;
+  --green:     #7a9a7a;
+  --shadow:    rgba(0,0,0,0.06);
+  --chart-grid:#e5ddd5;
+  /* ── ink 层：只用于文字，全部达 WCAG AA（装饰色仍用上面的原值）── */
+  --text3-ink:   #70665f;  /* 4.51:1 on --bg2（原 --text3 #a89f98 仅 2.60:1）*/
+  --accent3-ink: #7f6150;  /* 4.97:1 on --bg （原 --accent3 #b08d7a 仅 2.67:1）*/
+  --gold-ink:    #8a6d3b;  /* 原 --gold  #b9a06a 仅 2.53:1 */
+  --red-ink:     #a35555;  /* 原 --red   #b87070 仅 3.76:1 */
+  --green-ink:   #4a7057;  /* 原 --green #7a9a7a 仅 3.12:1 */
+  --accent2-ink: #5a7386;
+  --font-sans: system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-serif: Georgia, 'Noto Serif SC', 'PingFang SC', serif;
+
+  /* ── 排版标度 ────────────────────────────────────────────────
+     此前全站正文散落 8 档字号（11/12/12.5/13/14/14.5/15/16）与 5 种行高
+     （1.65/1.70/1.75/1.90/2.00），是逐处硬写累积出来的，没有体系。
+     收敛成 4 档字号 + 2 种行高，所有正文一律引用这里。 */
+  --fs-xs:   12px;    /* 注释、图注、页脚 */
+  --fs-sm:   13.5px;  /* 表格、卡片密排文字 */
+  --fs-base: 15px;    /* 正文 */
+  --fs-lg:   16.5px;  /* 夜读手记正文、导语 */
+
+  --lh-tight: 1.7;    /* 密排：表格、卡片、注释 */
+  --lh-prose: 1.85;   /* 正文段落 */
+
+  --measure: 40em;
+  --bar-h: 44px;
+}
+[data-theme="dark"] {
+  --text3-ink:   #a19991;
+  --accent3-ink: #c9a48e;
+  --gold-ink:    #c9b07a;
+  --red-ink:     #c08080;
+  --green-ink:   #8aaa8a;
+  --accent2-ink: #8fabbf;
+  --bg:        #1e1c1a;
+  --bg2:       #28251f;
+  --card:      #2e2a25;
+  --card2:     #363230;
+  --border:    #4a4540;
+  --text:      #d4ccc4;
+  --text2:     #a09890;
+  --text3:     #706860;
+  --accent:    #8a9a8e;
+  --accent2:   #8fabbf;
+  --accent3:   #c9a48e;
+  --rose:      #c09090;
+  --gold:      #c9b07a;
+  --red:       #c08080;
+  --green:     #8aaa8a;
+  --shadow:    rgba(0,0,0,0.3);
+  --chart-grid:#3e3a35;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-serif);
+  line-height: var(--lh-prose);
+  font-size: var(--fs-base);
+  transition: background .35s, color .35s;
+}
+a { color: var(--accent2); text-decoration: none; }
+
+/* ── THEME TOGGLE ── */
+.theme-bar {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 8px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  transition: background .35s;
+}
+.theme-bar .logo { font-size: 13px; color: var(--text2); letter-spacing: 1px; text-decoration: none; transition: color .2s; cursor: pointer; }
+.theme-bar .logo:hover { color: var(--accent3); }
+.theme-bar .logo::before { content: '←'; margin-right: 6px; opacity: 0.5; transition: opacity .2s, transform .2s; display: inline-block; }
+.theme-bar .logo:hover::before { opacity: 1; transform: translateX(-2px); }
+.theme-bar-left { display: flex; align-items: center; gap: 20px; }
+.xueqiu-link { font-family: var(--font-sans); font-size: 11px; color: var(--text2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 14px; transition: all .2s; letter-spacing: 0.5px; text-decoration: none; }
+.xueqiu-link:hover { color: var(--accent); border-color: var(--accent); background: var(--card2); }
+.xueqiu-link::before { content: '📊 '; font-size: 12px; }
+.theme-toggle {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; color: var(--text2);
+}
+.toggle-switch {
+  appearance: none; -webkit-appearance: none; border: 0; padding: 0; margin: 0;
+  position: relative;
+  width: 44px; height: 22px;
+  background: var(--border);
+  border-radius: 11px;
+  cursor: pointer;
+  transition: background .3s;
+}
+.toggle-switch::after {
+  content: '';
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 18px; height: 18px;
+  background: var(--card);
+  border-radius: 50%;
+  transition: transform .3s;
+  box-shadow: 0 1px 3px rgba(0,0,0,.15);
+}
+[data-theme="dark"] .toggle-switch { background: var(--accent2); }
+[data-theme="dark"] .toggle-switch::after { transform: translateX(22px); }
+
+/* ── HERO ── */
+.hero {
+  padding: 48px 24px 36px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+.hero-tag {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 3px 14px;
+  border-radius: 20px;
+  margin-bottom: 18px;
+}
+.hero h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.hero-sub { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+.hero-pills {
+  display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;
+}
+.pill {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 6px 18px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--text2);
+  box-shadow: 0 1px 3px var(--shadow);
+}
+.pill strong { color: var(--text); }
+
+/* ── LAYOUT ── */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.stitle {
+  font-size: 18px; font-weight: 700; color: var(--accent3-ink);
+  margin-bottom: 20px; letter-spacing: 0.5px;
+  display: flex; align-items: center; gap: 10px;
+}
+.stitle::before {
+  content: ''; display: block; width: 4px; height: 20px;
+  background: var(--accent3); border-radius: 2px;
+}
+
+/* ── KPI ── */
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.kpi {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 16px 18px;
+  box-shadow: 0 1px 4px var(--shadow);
+  transition: background .35s;
+}
+.kpi-l { font-family: var(--font-sans); font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.kpi-v { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+/* KPI 卡的第三行「注解」。此前没有这条规则，写报告的人只能借 .kpi-l（全大写 +
+   字间距，中文读着别扭）或干脆裸写 —— rkt 那份 12 张卡的注解因此按正文字号渲染，
+   把卡片撑得比数值还抢眼。与 .snap-note 同一套视觉语言，多行中文加行高。 */
+.kpi-n { font-family: var(--font-sans); font-size: 11px; color: var(--text3-ink); line-height: 1.5; }
+.badge {
+  display: inline-block; font-family: var(--font-sans);
+  font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px;
+}
+.up   { background: rgba(122,154,122,.15); color: var(--green); }
+.dn   { background: rgba(184,112,112,.15); color: var(--red); }
+.nt   { background: rgba(123,143,160,.15); color: var(--accent2); }
+
+/* ── TABLE ── */
+.tbl-wrap {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 4px var(--shadow);
+}
+.tbl { width: 100%; border-collapse: collapse; font-family: var(--font-sans); font-size: var(--fs-sm);
+       font-variant-numeric: tabular-nums; }
+.tbl th {
+  background: var(--card2); color: var(--text3-ink); font-size: 11px;
+  letter-spacing: .5px; text-transform: uppercase;
+  padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border);
+}
+.tbl td { padding: 11px 16px; border-bottom: 1px solid var(--border); text-align: left; line-height: var(--lh-tight); }
+.tbl td:first-child { color: var(--text2); }
+.tbl .hl td { font-weight: 600; color: var(--text); }
+
+/* ── CHARTS ── */
+.cgrid  { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-bottom: 16px; }
+.cgrid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-bottom: 16px; }
+.ccard, .kpi, .moat-card, .risk-card, .score-card, .snap-item, .pbox { min-width: 0; }
+.ccard {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow);
+}
+.ctitle { font-family: var(--font-sans); font-size: 12px; color: var(--text3-ink); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.cwrap { position: relative; height: 230px; }
+
+/* ── QUOTES ── */
+.qgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.qcard {
+  background: var(--card); border: 1px solid var(--border);
+  border-left: 4px solid var(--rose);
+  border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow);
+}
+.qname { font-weight: 700; color: var(--accent3); margin-bottom: 2px; }
+.qrole { font-family: var(--font-sans); font-size: 11px; color: var(--text3); margin-bottom: 10px; }
+.qtext { font-style: italic; font-size: 13.5px; color: var(--text); line-height: 1.8; }
+
+/* ── ANALYSIS ── */
+.agrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+.acard {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow);
+}
+.acard h4 { font-size: 13px; color: var(--accent2); margin-bottom: 10px; text-transform: uppercase; letter-spacing: .5px; }
+.acard ul { padding-left: 16px; }
+.acard li { margin-bottom: 5px; font-size: 13px; }
+
+/* ── BUFFETT SCORE ── */
+.bscore {
+  display: flex; align-items: center; gap: 16px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px 22px; margin-bottom: 12px;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.circle {
+  width: 62px; height: 62px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 18px; flex-shrink: 0;
+  border: 3px solid; font-family: var(--font-sans);
+}
+.cg { border-color: var(--green); color: var(--green); }
+.cw { border-color: var(--gold); color: var(--gold); }
+.cr { border-color: var(--red); color: var(--red); }
+.bscore .bd h4 { font-size: 14px; margin-bottom: 3px; }
+.bscore .bd p { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+/* ── VERDICT ── */
+.verdict {
+  background: var(--card2); border: 2px solid var(--accent);
+  border-radius: 10px; padding: 26px 28px; margin-bottom: 16px;
+}
+.verdict-t { font-size: 17px; font-weight: 700; color: var(--accent); margin-bottom: 10px; }
+.pgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0; }
+.pbox {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 14px; text-align: left;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.pbox .pl { font-family: var(--font-sans); font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.pbox .pv { font-family: var(--font-sans); font-size: 26px; font-weight: 800; }
+.pbox .pn { font-size: 11px; color: var(--text3); margin-top: 3px; }
+.pc { color: var(--text2); } .pf { color: var(--gold); } .ps { color: var(--green); }
+
+/* ── 周期切换（三表图）── */
+.period-toggle {
+  display: inline-flex; gap: 0; margin-bottom: 16px;
+  border: 1px solid var(--border); border-radius: 8px; overflow: hidden;
+  background: var(--card);
+}
+.period-btn {
+  appearance: none; -webkit-appearance: none; border: 0; margin: 0;
+  padding: 7px 20px; cursor: pointer;
+  font-family: var(--font-sans); font-size: var(--fs-xs);
+  letter-spacing: .5px; color: var(--text3-ink);
+  background: transparent; transition: background .2s, color .2s;
+  /* 44px 触摸目标：窄屏上两个按钮挨得很近，小于这个高度容易点错 */
+  min-height: 34px;
+}
+.period-btn + .period-btn { border-left: 1px solid var(--border); }
+.period-btn:hover { color: var(--text); background: var(--card2); }
+.period-btn.is-on { background: var(--accent); color: #fff; font-weight: 600; }
+.period-btn:focus-visible { outline: 2px solid var(--accent2); outline-offset: -2px; }
+[data-theme="dark"] .period-btn.is-on { color: var(--bg); }
+
+/* ── SANKEY ── */
+#sankey { width: 100%; height: 460px; }
+
+/* ── COMMENTARY ── */
+.cmt {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 26px 28px; line-height: var(--lh-prose);
+  font-size: var(--fs-base);
+  box-shadow: 0 1px 4px var(--shadow);
+}
+/* 段间距取 0.9 行。此前是 14px 对 27.55px 的行高＝0.51 行，
+   段与段之间比行与行之间只宽一点点，整块糊成一片，读者找不到段落边界。 */
+.cmt p { margin-bottom: calc(var(--lh-prose) * 0.9em); }
+.cmt p:last-child { margin-bottom: 0; }
+
+.section > p, .section > ul, .section > ol,
+.section > blockquote,
+.cmt > p, .cmt > ul, .cmt > ol, .cmt > blockquote,
+.haitu-essay-body > p, .haitu-essay-body > ul,
+.haitu-essay-body > ol, .haitu-essay-body > blockquote {
+  max-width: var(--measure);           /* 15px × 40em ≈ 600px，约 40 字/行 */
+}
+
+code {
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace);
+  font-size: 0.88em;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  background: var(--card2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+/* .ec-item 是带背景的卡片，缩到 40em 会在右侧留下大片空白；
+   但满宽 1152px 时实测仍有 48 字/行，略超舒适上限，折中收到 60em（≈36 字）。 */
+.ec-item { max-width: 60em; }
+.note, p.note {
+  /* 注释是 12px 小字，行长可略放宽：12px × 52em ≈ 624px，约 52 字，
+     仍远好于此前的 96 字，且与正文块的右边界大致齐平，视觉上不突兀。 */
+  max-width: 52em;
+}
+.cmt > .tbl-wrap, .cmt > figure, .cmt > .cgrid { max-width: none; }
+/* 避免段末孤字（中文里一行只剩一两个字特别难看）。
+   Safari/Firefox 不支持时会自动忽略，属渐进增强。 */
+.cmt p, .haitu-essay-body p, .note, .ec-item { text-wrap: pretty; }
+.hl-t { color: var(--accent3); font-weight: 600; }
+.warn-t { color: var(--red); font-weight: 600; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--card2); border-top: 1px solid var(--border);
+  padding: 24px; text-align: left; color: var(--text3); font-size: 12px;
+  margin-top: 40px;
+}
+
+@media (max-width: 768px) {
+  .cgrid,.cgrid3,.qgrid,.agrid,.pgrid { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 22px; }
+  .kpi-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ── HAITU SIGNATURE BLOCKS (页首短评 + 页末长评) ── */
+.haitu-quip {
+  display: flex; align-items: center; gap: 18px;
+  background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red);
+  border-radius: 12px; padding: 18px 24px; margin: 24px 0;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.haitu-avatar-sm {
+  width: 64px; height: 64px; border-radius: 50%;
+  object-fit: cover; flex-shrink: 0;
+  border: 2px solid var(--border); background: var(--red);
+  box-shadow: 0 2px 8px rgba(184,112,112,0.18);
+}
+.haitu-quote { flex: 1; }
+.haitu-name {
+  font-family: var(--font-sans);
+  font-size: 12px; font-weight: 700; letter-spacing: 1.5px;
+  color: var(--red-ink); text-transform: uppercase; margin-bottom: 4px;
+}
+.haitu-portrait {
+  font-size: 15px; line-height: 1.65; color: var(--text);
+  margin-bottom: 6px; font-weight: 600;
+}
+.haitu-rating-line {
+  font-size: 13px; color: var(--text2);
+  font-family: var(--font-sans);
+}
+.rating-badge {
+  display: inline-block; padding: 2px 12px; border-radius: 12px;
+  font-weight: 700; font-size: 13px; letter-spacing: 0.5px;
+  margin-left: 4px;
+}
+.rating-strong-buy { background: rgba(122,154,122,.25); color: var(--green); }
+.rating-buy { background: rgba(122,154,122,.18); color: var(--green); }
+.rating-cond-buy { background: rgba(185,160,106,.18); color: var(--gold); }
+.rating-hold { background: rgba(123,143,160,.18); color: var(--accent2); }
+.rating-sell { background: rgba(184,112,112,.18); color: var(--red); }
+.rating-strong-sell { background: rgba(184,112,112,.28); color: var(--red); }
+
+.haitu-essay {
+  background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red);
+  border-radius: 12px; padding: 28px 32px; margin: 24px 0;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.haitu-essay-header {
+  display: flex; align-items: center; gap: 18px;
+  padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px;
+}
+.haitu-avatar-lg {
+  width: 110px; height: 110px; border-radius: 50%;
+  object-fit: cover; flex-shrink: 0;
+  border: 3px solid var(--border); background: var(--red);
+  box-shadow: 0 4px 14px rgba(184,112,112,0.22);
+}
+.haitu-name-lg {
+  font-family: 'Georgia', 'Noto Serif SC', serif;
+  font-size: 28px; font-weight: 700; color: var(--text);
+  letter-spacing: 1px; margin-bottom: 4px;
+}
+.haitu-essay-tag {
+  font-family: var(--font-sans);
+  font-size: 12px; color: var(--text3); letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+.haitu-essay-body {
+  font-family: 'Georgia', 'Noto Serif SC', 'PingFang SC', serif;
+  font-size: var(--fs-lg); line-height: var(--lh-prose); color: var(--text);
+}
+.haitu-essay-body p { margin-bottom: calc(var(--lh-prose) * 0.85em); }
+.haitu-essay-body p:first-child {
+  font-size: 18px; font-style: italic; color: var(--text2);
+}
+.haitu-essay-body p:last-child {
+  margin-top: 22px; padding-top: 14px;
+  border-top: 1px solid var(--border);
+  font-size: var(--fs-xs); color: var(--text3); font-style: italic;
+}
+.haitu-sign {
+  text-align: left; margin-top: 14px;
+  font-family: 'Georgia', serif; font-size: 14px;
+  color: var(--text2); font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .haitu-quip { flex-direction: column; text-align: left; }
+  .haitu-essay-header { flex-direction: column; text-align: left; }
+  .haitu-avatar-sm { width: 80px; height: 80px; }
+  .haitu-avatar-lg { width: 90px; height: 90px; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   海图 v2 追加规则 —— 修 103 份存量实测出的问题，勿删勿改顺序
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── 1. 锚点落点：一行同时修好 TOC 跳转 / 深链 / Ctrl+F 定位 / :target ──
+   没有这条，所有跳转都会落在 sticky 顶栏底下被遮住 */
+.section { scroll-margin-top: calc(var(--bar-h) + 12px); }
+
+/* h2.stitle 必须显式定字号，否则被 UA 默认样式撑成 32px 巨标题 */
+h2.stitle { font-size: 18px; font-weight: 700; margin: 0 0 20px; }
+
+/* 章节深链锚点：桌面 hover 显形，触屏常显 */
+.anchor {
+  margin-left: 8px; font-size: 13px; color: var(--text3-ink);
+  text-decoration: none; opacity: 0; transition: opacity .2s;
+}
+.stitle:hover .anchor, .anchor:focus-visible { opacity: 1; }
+@media (hover: none) { .anchor { opacity: .35; } }
+
+/* ── 2. 评级徽章：由 data-rating 派生，作者不再手写 class ──
+   实测存量 .rating-hold 在 63 份是金色、30 份是蓝色 —— 这套选择器根除该分歧 */
+.rating-badge[data-rating="强力买入"] { background: rgba(122,154,122,.25); color: var(--green-ink); }
+.rating-badge[data-rating="买入"]     { background: rgba(122,154,122,.18); color: var(--green-ink); }
+.rating-badge[data-rating="有条件买入"]{ background: rgba(185,160,106,.18); color: var(--gold-ink); }
+.rating-badge[data-rating="持有观望"] { background: rgba(123,143,160,.18); color: var(--accent2-ink); }
+.rating-badge[data-rating="卖出"]     { background: rgba(184,112,112,.18); color: var(--red-ink); }
+.rating-badge[data-rating="强烈卖出"] { background: rgba(184,112,112,.28); color: var(--red-ink); }
+
+/* 涨跌不能只靠色相（色盲）—— 文字里必须自带 +/- 号，这里只负责配色 */
+.up, .pos { color: var(--green-ink); }
+.dn, .neg { color: var(--red-ink); }
+
+/* ── 3. 窄屏表格：粘性首列 + 右侧滚动阴影提示 ──
+   实测 375px 下 12 张表有 6 张横向溢出，且无任何可滚动的视觉线索 */
+.tbl-wrap {
+  background-image: linear-gradient(to right, var(--card), var(--card)),
+                    linear-gradient(to right, rgba(0,0,0,.10), rgba(0,0,0,0));
+  background-position: right center, right center;
+  background-repeat: no-repeat;
+  background-size: 24px 100%, 12px 100%;
+  background-attachment: local, scroll;
+}
+@media (max-width: 640px) {
+  /* border-collapse:collapse 下 sticky 单元格的边框会丢，用 box-shadow 补回 */
+  .tbl { border-collapse: separate; border-spacing: 0; }
+  .tbl :is(th, td) { border-bottom: 1px solid var(--border); }
+  .tbl :is(th, td):first-child {
+    position: sticky; left: 0; z-index: 1;
+    background: var(--card); box-shadow: 1px 0 0 var(--border);
+  }
+  .tbl th:first-child { background: var(--card2); }
+}
+
+/* ── 4. 移动端：顶栏必须能换行（实测四元素已折行重叠）── */
+.theme-bar { flex-wrap: wrap; row-gap: 6px; }
+@media (max-width: 420px) { .theme-bar .xueqiu-link { display: none; } }
+
+@media (max-width: 640px) {
+  .container { padding: 0 14px; }          /* 24px 在 375px 上吃掉 12.8% 视口 */
+  body { font-size: 15.5px; }              /* 14.5px 中文长文在手机上偏小 */
+  .cwrap { height: 200px; }
+  #sankey { height: 360px !important; }    /* 480px 挤在 289px 宽里不可读 */
+  .cgrid, .cgrid3, .pgrid { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 640px), (hover: none) {
+  .toggle-switch::before {
+    content: ''; position: absolute; left: 0; right: 0;
+    top: 50%; transform: translateY(-50%); height: 44px;
+  }
+}
+
+/* ── 5. prefers-reduced-motion ──
+   全语料 103/103 有 scroll-behavior:smooth 且零保护。加了目录之后，
+   一次跳转要跨 4 万像素、持续数秒，前庭敏感者会难受 */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important; animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+}
+
+/* ── 6. 焦点可见（全语料 0 个 :focus-visible 样式）── */
+:focus-visible { outline: 2px solid var(--accent3-ink); outline-offset: 2px; }
+
+/* ── 7. 图表无障碍降级容器 ── */
+figure.chart { margin: 0; }
+figure.chart figcaption { font-size: 12px; color: var(--text3-ink); line-height: 1.6; margin-top: 8px; }
+.chart-data { font-size: 12px; margin-top: 8px; }
+.chart-data summary { cursor: pointer; color: var(--text3-ink); }
+
+/* ── 8. shell 新增组件（skip link / 结论跳转带 / 顶栏右侧 / 屏幕阅读器专用）── */
+
+.skip {
+  position: absolute; left: -9999px; top: 0;
+  background: var(--card); color: var(--accent3-ink);
+  padding: 8px 14px; border-radius: 0 0 8px 0; z-index: 200;
+  font-size: 13px; text-decoration: none;
+}
+.skip:focus { left: 0; }
+
+/* 只给屏幕阅读器：essay 一节的标题不需要视觉呈现（.haitu-essay 自带头部） */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+.theme-bar-right { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+
+/* 结论跳转带：读者看完评级后一步到证据 */
+.quip-jump { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.quip-jump a {
+  font-family: var(--font-sans); font-size: 12px; line-height: 1;
+  padding: 7px 12px; border-radius: 999px;
+  border: 1px solid var(--border); background: var(--card2);
+  color: var(--accent3-ink); text-decoration: none;
+  transition: border-color .2s, background .2s;
+}
+.quip-jump a:hover { border-color: var(--accent3); background: var(--card); }
+@media (max-width: 640px), (hover: none) {
+  /* 用 min-height 而不是加 padding —— padding 要靠字体行高凑够 44px，
+     换字体或改字号就又不达标了（实测 padding:13px 只得到 40px）。 */
+  .quip-jump a { min-height: 44px; padding: 0 16px; display: inline-flex; align-items: center; }
+}
+
+.hero-pills {display: flex; justify-content: flex-start; gap: 16px; flex-wrap: wrap;}
+.pill {background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 6px 18px; font-family: var(--font-sans); font-size: 13px; color: var(--text2); box-shadow: 0 1px 3px var(--shadow);}
+.pill strong {color: var(--text);}
+.stock-snap {background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; box-shadow: 0 1px 4px var(--shadow); margin-bottom: 16px;}
+.snap-item {text-align: left;}
+.snap-label {font-family: var(--font-sans); font-size: 10px; color: var(--text3-ink); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px;}
+.kpi-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px;}
+.kpi {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px var(--shadow);}
+.moat-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px;}
+.moat-card {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); border-left: 4px solid var(--accent);}
+.moat-card.wide {border-left-color: var(--green);}
+.moat-card.narrow {border-left-color: var(--gold);}
+.moat-card.none {border-left-color: var(--red);}
+.moat-card h5 {font-size: 13px; color: var(--text); margin-bottom: 6px;}
+.moat-card .moat-rate {font-family: var(--font-sans); font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px;}
+.moat-card.wide .moat-rate {background: rgba(122,154,122,.18); color: var(--green);}
+.moat-card.narrow .moat-rate {background: rgba(185,160,106,.18); color: var(--gold);}
+.moat-card.none .moat-rate {background: rgba(184,112,112,.18); color: var(--red);}
+.moat-card p {font-size: var(--fs-sm); color: var(--text2); line-height: var(--lh-tight);}
+.ec-item {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: block; box-shadow: 0 1px 3px var(--shadow); line-height: var(--lh-prose); font-size: var(--fs-base);}
+.ec-badge {display: inline-block; vertical-align: baseline; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-right: 10px; font-family: var(--font-sans); white-space: nowrap;}
+.dcf-note {background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; font-size: var(--fs-sm); color: var(--text2); line-height: var(--lh-prose);}
+.dcf-note strong {color: var(--text);}
+.scorecard {background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px var(--shadow);}
+.score-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px;}
+.score-card {background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 16px;}
+.score-letter {width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-sans); font-weight: 800; font-size: 22px; flex-shrink: 0; border: 3px solid;}
+.flag-row {margin-top: 16px; padding: 12px 16px; background: rgba(184,112,112,.08); border: 1px solid rgba(184,112,112,.3); border-radius: 8px; font-size: var(--fs-sm); color: var(--text2);}
+.flag-row strong {color: var(--red);}
+.pgrid {display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 18px 0;}
+body { text-align: left; }
+
+.pbox {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 24px; text-align: left; box-shadow: 0 1px 4px var(--shadow);}
+.pbox .pl, .pbox .pv, .pbox .pn {text-align: left;}
+.pbox .pl {font-family: var(--font-sans); font-size: 11px; color: var(--text3-ink); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px;}
+.pbox .pv {font-family: var(--font-sans); font-size: 28px; font-weight: 800; margin-bottom: 5px;}
+.pbox .pn {font-size: var(--fs-xs); color: var(--text3-ink); line-height: var(--lh-tight);}
+.pbox > h4 {font-size: var(--fs-lg); color: var(--accent3-ink); margin-bottom: 14px; line-height: 1.5;}
+.pbox + .pbox {margin-top: 18px;}
+.risk-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px;}
+.risk-card {background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px var(--shadow); position: relative; overflow: hidden;}
+.risk-card::before {content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; background: var(--accent);}
+.risk-card.r1::before {background: var(--green);}
+.risk-card.r2::before {background: rgba(122,154,122,.6);}
+.risk-card.r3::before {background: var(--gold);}
+.risk-card.r4::before {background: var(--rose);}
+.risk-card.r5::before {background: var(--red);}
+.risk-card h5 {font-size: 14px; margin-bottom: 6px; color: var(--text);}
+.risk-card p {font-size: var(--fs-sm); color: var(--text2); line-height: var(--lh-tight);}
+
+/* 骨架用到、但语料里没有现成规则的补充组件 */
+.note { font-size: var(--fs-xs); color: var(--text3-ink); line-height: var(--lh-tight); margin-top: 12px; }
+.lead { font-size: 16px; font-weight: 600; line-height: 1.8; margin-bottom: 14px; }
+.haitu-disc { font-size: 12px; color: var(--text3-ink); line-height: 1.7; margin-top: 18px;
+              padding-top: 14px; border-top: 1px solid var(--border); }
+.bscore { background: var(--card2); border: 1px solid var(--border); border-radius: 10px;
+          padding: 16px 20px; margin: 16px 0; }
+.bscore h4 { font-family: var(--font-sans); font-size: 14px; color: var(--accent3-ink); margin: 0 0 6px; }
+.bscore p { margin: 0; font-size: 14px; }
+
+/* 桑基 SVG：颜色与线宽在标记里给，这里只管描边端点与文字 */
+#sankey { width: 100%; height: auto; }
+.sk-flow path { fill: none; opacity: .45; stroke-linecap: butt; }
+.sk-t .sk-lab { font-family: var(--font-sans); font-size: 12px; fill: var(--text2); }
+.sk-t .sk-num { font-family: var(--font-sans); font-size: 13px; font-weight: 700; fill: var(--text);
+                font-variant-numeric: tabular-nums; }
+.sk-t .warn   { fill: var(--red-ink); }
+
+@media (max-width: 640px) {
+  .stock-snap { grid-template-columns: 1fr 1fr; }
+  .kpi-grid   { grid-template-columns: 1fr 1fr; }
+  .moat-grid, .risk-grid, .score-grid, .pgrid { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* 修饰类：评分等级 / 电话会情绪 / 快照数值。文字色一律走 ink 层。 */
+.score-letter.s-a  { color: var(--green-ink);   border-color: var(--green);   background: rgba(122,154,122,.12); }
+.score-letter.s-bp { color: var(--gold-ink);    border-color: var(--gold);    background: rgba(185,160,106,.12); }
+.score-letter.s-b  { color: var(--accent2-ink); border-color: var(--accent2); background: rgba(123,143,160,.12); }
+.score-letter.s-c  { color: var(--red-ink);     border-color: var(--red);     background: rgba(184,112,112,.12); }
+
+.ec-badge.ec-bull { background: rgba(122,154,122,.18); color: var(--green-ink); }
+.ec-badge.ec-bear { background: rgba(184,112,112,.18); color: var(--red-ink); }
+.ec-badge.ec-neut { background: rgba(123,143,160,.18); color: var(--accent2-ink); }
+
+.snap-value { font-family: var(--font-sans); font-size: 19px; font-weight: 700; color: var(--text);
+              font-variant-numeric: tabular-nums; line-height: 1.3; }
+.snap-note  { font-family: var(--font-sans); font-size: 11px; color: var(--text3-ink); margin-top: 3px; }
+.sk-node rect { opacity: .9; }
+
+</style>
+</head>
+<body>
+
+<a class="skip" href="#kpi">跳到正文</a>
+
+<div class="theme-bar">
+  <div class="theme-bar-left">
+    <a class="logo" href="../../index.html" title="返回海图夜读门户">海图夜读 · 财报研究所</a>
+    <a class="xueqiu-link" href="https://xueqiu.com/S/00700" target="_blank" rel="noopener">雪球 00700</a>
+  </div>
+  <div class="theme-bar-right">
+    <span>☀️ 浅色</span>
+    <button type="button" class="toggle-switch" id="themeBtn"
+            aria-pressed="false" aria-label="切换深色模式" onclick="toggleTheme()"></button>
+    <span>🌙 暗色</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">Q2 2026 中期业绩发布 · 2026-08-12 ｜ 海图研判 · 2026-08-12（业绩当日）</div>
+  <h1>腾讯控股 0700 · Q2 2026 财报深度分析</h1>
+  <div class="hero-sub">HKEX: 0700 ｜ 财季截至 2026-06-30 ｜ 人民币报表（IFRS）｜ 价值投资视角</div>
+  <div class="hero-pills">
+    <span class="pill">股价 HK$461.60</span>
+    <span class="pill">市值 HK$4.19 万亿</span>
+    <span class="pill">季度营收 ¥2,047.9 亿（+11%）</span>
+    <span class="pill">Non-IFRS 归母 ¥684.2 亿（+9%）</span>
+    <span class="pill">毛利率 58% 新高</span>
+    <span class="pill">季度自由现金流 −¥138 亿</span>
+  </div>
+</div>
+
+<div class="container">
+  <div class="haitu-quip">
+    <div class="haitu-quote">
+      <div class="haitu-portrait">14 亿人的社交图谱把注意力与支付分发给游戏、广告和金融服务——核心生意还在变好（剔除 AI 新品后经营利润 +19%），但这一季它把自由现金流花成了负数：算力第一，回购垫后。</div>
+      <div class="haitu-rating-line">
+        评级：<span class="rating-badge" data-rating="买入">买入</span>
+        · 12 个月目标价 HK$560 · 业绩当日 16:31 刊发，本报告基于公告原文当晚写成
+      </div>
+      <div class="quip-jump" role="group" aria-label="快速跳转">
+        <a href="#m13">评分卡与决策</a>
+        <a href="#m7">目标价怎么算出来的</a>
+        <a href="#focus">本季必看</a>
+        <a href="#m11">风险矩阵</a>
+        <a href="#essay">夜读手记</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+<section class="section" id="snapshot" aria-labelledby="snapshot-t">
+  <h2 class="stitle" id="snapshot-t">市场数据快照（2026-08-12 收盘）<a class="anchor" href="#snapshot" aria-label="本节链接">#</a></h2>
+
+  <p>先交代一个时点事实：业绩公告在今天 16:31 刊发——收盘之后。所以今天 −1.95% 的跌幅不含市场对业绩的反应，明天才是第一个交易日。</p>
+
+  <div class="stock-snap">
+    <div class="snap-item">
+      <div class="snap-label">股价（0700）</div>
+      <div class="snap-value">HK$461.60</div>
+      <div class="snap-note">当日 −1.95%（盘中 456.20–467.20）。<strong>报价是港元，报表是人民币</strong>，换算用 HK$1 ＝ ¥0.8588</div>
+    </div>
+    <div class="snap-item">
+      <div class="snap-label">总市值</div>
+      <div class="snap-value">HK$4.19 万亿</div>
+      <div class="snap-note">按 2026-07-31 月报表 90.83 亿股计，约 ¥3.60 万亿。库存股为零</div>
+    </div>
+    <div class="snap-item">
+      <div class="snap-label">市盈率（TTM Non-IFRS）</div>
+      <div class="snap-value">13.3 倍</div>
+      <div class="snap-note">TTM Non-IFRS 归母 ¥2,715.7 亿。IFRS 口径 15.3 倍——两口径差 15%，本报告以 Non-IFRS 为主轨</div>
+    </div>
+    <div class="snap-item">
+      <div class="snap-label">核心业务市盈率</div>
+      <div class="snap-value">9.7 倍</div>
+      <div class="snap-note">市值剔除投资组合中档 ¥8,751 亿与净现金 ¥582 亿后，对年化 Non-IFRS 归母</div>
+    </div>
+    <div class="snap-item">
+      <div class="snap-label">股息率</div>
+      <div class="snap-value">1.15%</div>
+      <div class="snap-note">FY2025 末期息 HK$5.30（6 月已付）。<strong>今天未宣派中期股息</strong>——腾讯惯例只派末期息</div>
+    </div>
+    <div class="snap-item">
+      <div class="snap-label">Trailing 股东收益率</div>
+      <div class="snap-value">3.05%</div>
+      <div class="snap-note">（FY2025 股息 HK$479 亿 ＋ 回购 HK$800 亿）÷ 市值。回购部分是股息的 1.7 倍</div>
+    </div>
+    <div class="snap-item">
+      <div class="snap-label">52 周区间</div>
+      <div class="snap-value">HK$411.00 – 683.00</div>
+      <div class="snap-note">现价较 2025 年 10 月高点回撤 32%；6 月公司自己的回购区间是 411.00–475.60，现价在其上沿</div>
+    </div>
+    <div class="snap-item">
+      <div class="snap-label">净现金</div>
+      <div class="snap-value">¥582 亿</div>
+      <div class="snap-note">2026-06-30 末，公司披露口径。<strong>一个季度前是 ¥1,469 亿</strong>——付了股息 417 亿、资本开支 593 亿</div>
+    </div>
+    <div class="snap-item">
+      <div class="snap-label">上市投资公允价值</div>
+      <div class="snap-value">¥4,872 亿</div>
+      <div class="snap-note">2026-06-30 末（3 月末 5,471 亿，市场下跌所致）。另有非上市投资账面 ¥3,879 亿</div>
+    </div>
+    <div class="snap-item">
+      <div class="snap-label">大股东</div>
+      <div class="snap-value">MIH 22.80%</div>
+      <div class="snap-note">Prosus/Naspers 系。2025 年净卖 1.35 亿股，2026 年 1–4 月仅减约 1,300 万股，节奏近四年最缓</div>
+    </div>
+    <div class="snap-item">
+      <div class="snap-label">南向持仓</div>
+      <div class="snap-value">11.61%</div>
+      <div class="snap-note">8-11 快照。年初至今净增约 5,000 万股，但 5 月中旬见顶后转为横盘观望</div>
+    </div>
+    <div class="snap-item">
+      <div class="snap-label">下次业绩</div>
+      <div class="snap-value">2026 年 11 月中旬</div>
+      <div class="snap-note">Q3 2026。业绩电话会今晚 20:00 举行（本报告撰写时尚未开始）</div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="kpi" aria-labelledby="kpi-t">
+  <h2 class="stitle" id="kpi-t">Q2 2026 核心业绩<a class="anchor" href="#kpi" aria-label="本节链接">#</a></h2>
+
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">营业收入</div><div class="kpi-v">¥2,047.9 亿</div><div class="kpi-d up">同比 +11%</div><div class="kpi-n">环比 +4%，连续八季 8–11% 区间</div></div>
+    <div class="kpi"><div class="kpi-l">毛利</div><div class="kpi-v">¥1,184.3 亿</div><div class="kpi-d up">同比 +13% · 毛利率 58%</div><div class="kpi-n">历史新高，两年抬升 5 个百分点</div></div>
+    <div class="kpi"><div class="kpi-l">归母净利（IFRS）</div><div class="kpi-v">¥560.2 亿</div><div class="kpi-d dn">同比仅 +0.7%</div><div class="kpi-n">被联营会计噪音打穿，见本季必看</div></div>
+    <div class="kpi"><div class="kpi-l">归母净利（Non-IFRS）</div><div class="kpi-v">¥684.2 亿</div><div class="kpi-d up">同比 +9%</div><div class="kpi-n">核心经营口径</div></div>
+    <div class="kpi"><div class="kpi-l">资本开支</div><div class="kpi-v">¥527.8 亿</div><div class="kpi-d dn">上年同期的 2.76 倍</div><div class="kpi-n">AI 算力采购；另有大额预付款走经营现金流</div></div>
+    <div class="kpi"><div class="kpi-l">自由现金流（公司口径）</div><div class="kpi-v">−¥138 亿</div><div class="kpi-d dn">罕见转负</div><div class="kpi-n">剔除算力采购预付款后为 ＋¥376 亿</div></div>
+  </div>
+
+  <p>收入第八个季度稳定在 8–11% 区间，毛利率创上市以来新高——生意本身没有任何恶化的迹象。所有的戏剧性都在利润表下半段和现金流量表里。</p>
+</section>
+
+<section class="section" id="focus" aria-labelledby="focus-t">
+  <h2 class="stitle" id="focus-t">本季必看 · 两个「看穿」<a class="anchor" href="#focus" aria-label="本节链接">#</a></h2>
+
+  <div class="cmt">
+    <h3>看穿一：IFRS 净利 +0.7% 是会计噪音——被投企业估值涨了，账面反而记亏</h3>
+    <p>本季分占联营合营损益从上年同期的 <strong>＋44.7 亿</strong>变成 <strong>−99.9 亿</strong>，一进一出 145 亿。主因写在公告第 8 页：一家未上市被投企业<strong>因自身估值上升</strong>，其发行的可转换可赎回优先股公允价值重估产生会计亏损，腾讯按持股分占约 128 亿。</p>
+    <p>读一遍就明白这有多拧巴：<strong>投资标的越值钱，优先股负债越大，账面亏损越多。</strong>这笔在 Non-IFRS 里被整体剔除——还原后分占联营利润是 ＋63.6 亿，与上年同期的 ＋63 亿几乎持平。所以 +0.7% 与 +9% 之间那道裂口，四分之三是这一笔。分析腾讯必须走 Non-IFRS ＋现金流双轨，单看任何一轨都会错。</p>
+    <p class="note">另一半裂口是真实的：新 AI 产品（混元、元宝、CodeBuddy、WorkBuddy、小微）本季拖累经营利润约 105 亿——上年同期约 31 亿、上季约 88 亿，亏损在逐季放大。但公告同时给了剔除口径：<strong>剔除新 AI 产品后 Non-IFRS 经营利润 861 亿、同比 +19%</strong>。老生意在加速，新生意在烧钱，两件事都是真的。</p>
+  </div>
+
+  <div class="cmt">
+    <h3>看穿二：自由现金流 −138 亿——不是失血，是管理层主动选的</h3>
+    <p>本季经营现金流 527 亿，而资本开支付款 593 亿、媒体内容付款 50 亿、租赁付款 22 亿——<strong>自由现金流 −138 亿，多年罕见的负数</strong>。缺口靠动用净现金弥补：净现金一个季度从 1,469 亿降到 582 亿（还付了 417 亿股息）。6 月同步发债 24.5 亿美元＋150 亿人民币，票息最低 2.50%。</p>
+    <p>但公告第 17 页给了一个关键拆解：<strong>剔除算力采购预付款后，本季自由现金流是 ＋376 亿</strong>。也就是说约 514 亿现金流出是「预付」——资产负债表上非流动预付款项从年初 245 亿暴增到 <strong>912 亿</strong>，买的是芯片与算力的排队权。马化腾在公告引言里写得直白：「我们大幅加码算力采购，这将使我们未来能把应用与模型的使用量转化为收入。」</p>
+    <p class="note">这笔钱的性质决定这份财报怎么读：如果 AI 需求兑现，预付款是提前锁定稀缺产能的正确决策；如果需求塌方，它是不可退的前置承诺。三月的业绩会上刘炽平已经把优先级说透了：「今年能多买卡肯定投入进去……如果无法买足够多的卡，那资金会相应多用于回购，这块是比较机动的预算。」——<strong>回购从承诺数字降级为买完算力后的余数</strong>，这是本次财报在股东回报维度最需要记住的一句话。</p>
+  </div>
+</section>
+
+<section class="section" id="trend" aria-labelledby="trend-t">
+  <h2 class="stitle" id="trend-t">关键指标趋势（近 8 季）<a class="anchor" href="#trend" aria-label="本节链接">#</a></h2>
+
+  <div class="chart-block">
+    <h3 class="ctitle">季度营收与 Non-IFRS 归母净利率</h3>
+    <div class="cwrap"><canvas id="rev" data-chart="rev" role="img" aria-label="八个季度营收柱状图稳步上行，Non-IFRS 净利率折线在 33 到 37 之间波动"></canvas></div>
+    <p class="note">单位：人民币亿元。收入连续八季增长，净利率在 33–37% 高位横盘——AI 投入开始压住净利率的上行斜率。</p>
+  </div>
+
+  <div class="chart-block">
+    <h3 class="ctitle">归母净利：IFRS vs Non-IFRS 双轨</h3>
+    <div class="cwrap"><canvas id="margin" data-chart="margin" role="img" aria-label="八个季度两条净利线，IFRS 线波动远大于 Non-IFRS 线，26Q2 裂口拉大"></canvas></div>
+    <p class="note">单位：人民币亿元。Non-IFRS 那条线平滑向上，IFRS 那条线被投资公允价值变动反复打穿——本季裂口 124 亿，为八季最大。哪条线更接近生意本身，图上一目了然。</p>
+  </div>
+
+  <div class="chart-block">
+    <h3 class="ctitle">Q2 2026 收入构成</h3>
+    <div class="cwrap"><canvas id="segment" data-chart="segment" role="img" aria-label="Q2 收入环形图：增值服务占近一半，金融科技及企业服务三成，营销服务两成"></canvas></div>
+    <p class="note">单位：人民币亿元。增值服务 48%（其中本土游戏 473 亿 +17%、国际游戏 186 亿、社交网络 325 亿）、金融科技及企业服务 30%、营销服务 21%——营销服务是本季增速最高的分部（+22%）。</p>
+  </div>
+
+  <div class="chart-block">
+    <h3 class="ctitle">资本开支 vs 毛利率：AI 投入的两面</h3>
+    <div class="cwrap"><canvas id="eps" data-chart="eps" role="img" aria-label="八个季度资本开支柱状图急剧抬升至 528 亿，毛利率折线同期从 53 升至 58"></canvas></div>
+    <p class="note">单位：人民币亿元 / %。资本开支八个季度从 171 亿走到 528 亿，而毛利率同期从 53% 升到 58%——AI 目前在广告推荐与云定价上赚回的，还多于它在折旧上吃掉的。这个剪刀差能维持多久，是未来两年最重要的观察项。</p>
+  </div>
+</section>
+
+<section class="section" id="statements" aria-labelledby="statements-t">
+  <h2 class="stitle" id="statements-t">三张表的五年轨迹<a class="anchor" href="#statements" aria-label="本节链接">#</a></h2>
+
+  <div class="period-switch" role="group" aria-label="切换周期">
+    <button type="button" class="period-btn is-on" data-period="annual" aria-pressed="true">年度</button>
+    <button type="button" class="period-btn" data-period="quarterly" aria-pressed="false">季度</button>
+  </div>
+
+  <div class="chart-block">
+    <h3 class="ctitle">利润表：收入、毛利、Non-IFRS 归母净利</h3>
+    <div class="cwrap"><canvas id="income" data-chart="income" role="img" aria-label="五年收入毛利与净利同步上行，2022 年一度回落后连续三年创新高"></canvas></div>
+    <p class="note">单位：人民币亿元。2022 年是唯一的下行年（监管周期底部），此后三年收入年增 10–14%、Non-IFRS 归母年增 17–41%——利润弹性大于收入弹性，因为毛利率同期从 43% 修复到 56%。</p>
+  </div>
+
+  <div class="chart-block">
+    <h3 class="ctitle">现金流量表：经营、资本开支、自由现金流</h3>
+    <div class="cwrap"><canvas id="cashflow" data-chart="cashflow" role="img" aria-label="五年经营现金流上行，资本开支 2024 年起跳升，季度视图里 26Q2 自由现金流转负"></canvas></div>
+    <p class="note">单位：人民币亿元。年度视图：经营现金流五年增长 73%，2024 年起资本开支跳上 770 亿台阶。<strong>季度视图（资本开支与公司口径自由现金流）里 26Q2 那根负的自由现金流柱，是这五年里唯一一根</strong>——单季经营现金流公告未逐季披露，季度视图只画这两条。</p>
+  </div>
+
+  <div class="chart-block">
+    <h3 class="ctitle">资产负债表：总资产、总负债、归母权益</h3>
+    <div class="cwrap"><canvas id="balance" data-chart="balance" role="img" aria-label="总资产与归母权益五年扩张，总负债相对平稳，2026 年中报负债抬升"></canvas></div>
+    <p class="note">单位：人民币亿元。第六个点是 2026-06-30 中报：总资产突破 2.16 万亿，归母权益 1.14 万亿。总负债半年 ＋1,390 亿——发债买算力的痕迹直接写在表上。<strong>季度视图与年度相同</strong>（历季资产负债表未逐季采集）。</p>
+  </div>
+
+  <p class="note">三张图放在一起说明一件事：<strong>这是一门经营现金流强到可以同时养三件事的生意</strong>——年 3,000 亿经营现金流，喂养 800 亿量级的资本开支、1,200 亿量级的股息加回购，还能剩下净现金。2026 年的新情况是第一件事（AI 资本开支）的胃口突然放大到挤压第三件事（净现金一年内可能清零）——资产负债表的纵深（九千亿投资组合）是这场豪赌的后备燃料，7 月减持快手已经开始动用了。</p>
+</section>
+
+<section class="section" id="flow" aria-labelledby="flow-t">
+  <h2 class="stitle" id="flow-t">资金流向桑基图<a class="anchor" href="#flow" aria-label="本节链接">#</a></h2>
+
+  <p>Q2 2026 的 2,047.9 亿收入，最后变成 <strong>−138.9 亿</strong>自由现金流——缺口由动用净现金补上。这张图按金额等比画出每一段的去向。</p>
+
+  <div id="sankey" role="img" aria-label="Q2 2026 营收 2047.9 亿元流向自由现金流的资金流向图，末端出现 138.9 亿缺口由净现金弥补">
+    <svg viewBox="0 0 960 560" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+      <!-- L1 营收 → 成本 + 毛利 -->
+      <path d="M 44,60 C 129,60 129,60 214,60 L 214,237 C 129,237 129,237 44,237 Z" fill="var(--red)" opacity="0.30"/>
+      <path d="M 44,237 C 129,237 129,237 214,237 L 214,480 C 129,480 129,480 44,480 Z" fill="var(--green)" opacity="0.30"/>
+      <!-- L2 毛利 → 销售 + 行政研发 + 其他亏损 + 经营盈利 -->
+      <path d="M 238,237 C 323,237 323,237 408,237 L 408,261 C 323,261 323,261 238,261 Z" fill="var(--red)" opacity="0.30"/>
+      <path d="M 238,261 C 323,261 323,261 408,261 L 408,341 C 323,341 323,341 238,341 Z" fill="var(--red)" opacity="0.24"/>
+      <path d="M 238,341 C 323,341 323,341 408,341 L 408,342 C 323,342 323,342 238,342 Z" fill="var(--text3)" opacity="0.35"/>
+      <path d="M 238,342 C 323,342 323,342 408,342 L 408,480 C 323,480 323,480 238,480 Z" fill="var(--gold)" opacity="0.32"/>
+      <!-- L3 经营盈利 + 投资利息净额 → 税 + 少数股东 + 归母 -->
+      <path d="M 432,342 C 517,342 517,342 602,342 L 602,480 C 517,480 517,480 432,480 Z" fill="var(--gold)" opacity="0.30"/>
+      <path d="M 432,486 C 517,486 517,486 602,486 L 602,491 C 517,491 517,491 432,491 Z" fill="var(--accent3)" opacity="0.35"/>
+      <path d="M 626,342 C 674,342 674,342 722,342 L 722,366 C 674,366 674,366 626,366 Z" fill="var(--red)" opacity="0.30"/>
+      <path d="M 626,366 C 674,366 674,366 722,366 L 722,370 C 674,370 674,370 626,370 Z" fill="var(--text3)" opacity="0.35"/>
+      <path d="M 626,370 C 674,370 674,370 722,370 L 722,485 C 674,485 674,485 626,485 Z" fill="var(--green)" opacity="0.30"/>
+      <!-- L4 归母 → 经营现金流 + 调整 -->
+      <path d="M 746,370 C 786,370 786,370 826,370 L 826,377 C 786,377 786,377 746,377 Z" fill="var(--text3)" opacity="0.32"/>
+      <path d="M 746,377 C 786,377 786,377 826,377 L 826,485 C 786,485 786,485 746,485 Z" fill="var(--green)" opacity="0.30"/>
+      <!-- L5 经营现金流 + 动用净现金 → 资本开支付款 + 内容 + 租赁 -->
+      <path d="M 850,377 C 875,377 875,377 900,377 L 900,499 C 875,499 875,499 850,499 Z" fill="var(--red)" opacity="0.30"/>
+      <path d="M 850,505 C 875,505 875,505 900,505 L 900,520 C 875,520 875,520 850,520 Z" fill="var(--red)" opacity="0.22"/>
+      <path d="M 850,520 C 875,520 875,520 900,520 L 900,525 C 875,525 875,525 850,525 Z" fill="var(--red)" opacity="0.16"/>
+
+      <!-- 节点 -->
+      <rect x="20"  y="60"  width="24" height="420" rx="3" fill="var(--accent)"/>
+      <rect x="214" y="60"  width="24" height="177" rx="3" fill="var(--red)"/>
+      <rect x="214" y="237" width="24" height="243" rx="3" fill="var(--green)"/>
+      <rect x="408" y="237" width="24" height="24"  rx="3" fill="var(--red)"/>
+      <rect x="408" y="261" width="24" height="80"  rx="3" fill="var(--red)" opacity="0.8"/>
+      <rect x="408" y="342" width="24" height="138" rx="3" fill="var(--gold)"/>
+      <rect x="408" y="486" width="24" height="5"   rx="2" fill="var(--accent3)"/>
+      <rect x="602" y="342" width="24" height="143" rx="3" fill="var(--gold)" opacity="0.85"/>
+      <rect x="722" y="342" width="24" height="24"  rx="3" fill="var(--red)"/>
+      <rect x="722" y="366" width="24" height="4"   rx="2" fill="var(--text3)"/>
+      <rect x="722" y="370" width="24" height="115" rx="3" fill="var(--green)"/>
+      <rect x="826" y="370" width="24" height="7"   rx="2" fill="var(--text3)"/>
+      <rect x="826" y="377" width="24" height="108" rx="3" fill="var(--green)"/>
+      <rect x="826" y="505" width="24" height="28"  rx="3" fill="var(--accent2)"/>
+      <rect x="900" y="377" width="24" height="122" rx="3" fill="var(--red)"/>
+      <rect x="900" y="505" width="24" height="10"  rx="2" fill="var(--red)" opacity="0.8"/>
+      <rect x="900" y="520" width="24" height="5"   rx="2" fill="var(--red)" opacity="0.6"/>
+
+      <!-- 标签 -->
+      <text x="20"  y="20"  font-size="12" fill="var(--text3-ink)">单位：人民币亿元 · Q2 2026 单季 · 节点高度按金额等比</text>
+      <text x="20"  y="46"  font-size="14" font-weight="600" fill="var(--text)">营业收入 2,047.9</text>
+      <text x="214" y="46"  font-size="13" fill="var(--text2)">收入成本 863.5</text>
+      <text x="64" y="255" font-size="13" fill="var(--text2)">毛利 1,184.3（58%）</text>
+      <text x="360" y="228" font-size="12" fill="var(--text3-ink)">销售推广 118.7</text>
+      <text x="248" y="300" font-size="12" fill="var(--text3-ink)">一般及行政 388.1</text>
+      <text x="248" y="316" font-size="11" fill="var(--text3-ink)">含研发 272.8 · 其他 4.8</text>
+      <text x="408" y="520" font-size="12" fill="var(--text2)">经营盈利 672.8</text>
+      <text x="432" y="548" font-size="11" fill="var(--text3-ink)">投资/利息/联营净额 +24.1（源）</text>
+      <text x="596" y="318" font-size="12" fill="var(--text3-ink)">所得税 117.1 · 少数股东 19.6</text>
+      <text x="646" y="500" font-size="12" fill="var(--text2)">归母净利 560.2</text>
+      <text x="655" y="336" font-size="11" fill="var(--text3-ink)">非现金与营运资金净调整 33.1</text>
+      <text x="756" y="500" font-size="12" fill="var(--text2)">经营现金流 527.1</text>
+      <text x="700" y="533" font-size="11" fill="var(--accent2-ink)">动用净现金 138.9（源）</text>
+      <text x="826" y="340" font-size="11" fill="var(--text3-ink)">资本开支付款 593.4</text>
+      <text x="836" y="551" font-size="11" fill="var(--text3-ink)">媒体内容 50.4 · 租赁 22.2</text>
+      <text x="700" y="46"  font-size="13" font-weight="600" fill="var(--text)">自由现金流 −138.9（公司口径 −13.8bn）</text>
+    </svg>
+  </div>
+
+  <details class="chart-data">
+    <summary>桑基图数据表（流量逐级平衡）</summary>
+    <div class="tbl-wrap">
+    <table data-source="Q2 2026 中期业绩公告 p.5/p.17/p.18/p.24（港交所披露易 2026081200296.pdf）" data-shape="从营业收入到自由现金流的逐级分解，每一级流入等于流出">
+      <caption>Q2 2026 资金流向逐级分解（人民币亿元）</caption>
+      <thead><tr><th>层级</th><th>流入</th><th>流出</th><th>是否平衡</th></tr></thead>
+      <tbody>
+        <tr><td>① 收入拆分</td><td>营业收入 2,047.9</td><td>收入成本 863.5 ＋ 毛利 1,184.3</td><td>2,047.8 ≈ 2,047.9 ✓（尾差为四舍五入）</td></tr>
+        <tr><td>② 毛利去向</td><td>毛利 1,184.3</td><td>销售推广 118.7 ＋ 一般及行政 388.1 ＋ 其他亏损净额 4.8 ＋ 经营盈利 672.8</td><td>1,184.4 ≈ 1,184.3 ✓</td></tr>
+        <tr><td>③ 利润分配</td><td>经营盈利 672.8 ＋ 投资/利息/联营净额 24.1</td><td>所得税 117.1 ＋ 少数股东 19.6 ＋ 归母净利 560.2</td><td>696.9 ＝ 696.9 ✓</td></tr>
+        <tr><td>④ 转成现金</td><td>归母净利 560.2</td><td>非现金及营运资金净调整 33.1 ＋ 经营现金流 527.1</td><td>560.2 ＝ 560.2 ✓（少数股东贡献并入调整项）</td></tr>
+        <tr><td>⑤ 现金去向</td><td>经营现金流 527.1 ＋ 动用净现金 138.9</td><td>资本开支付款 593.4 ＋ 媒体内容付款 50.4 ＋ 租赁付款 22.2</td><td>666.0 ＝ 666.0 ✓</td></tr>
+        <tr><td>⑥ 结果</td><td colspan="2">自由现金流 ＝ 527.1 − 593.4 − 50.4 − 22.2 ＝ <strong>−138.9</strong>（公司披露 −13.8bn；剔除算力预付款为 ＋376 亿）</td><td>✓</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </details>
+
+  <p class="note">这张图的重点在最后一段：<strong>经营现金流 527 亿装不下 666 亿的支出，缺的 139 亿从净现金里拿</strong>。上一次腾讯的桑基图末端出现「动用净现金」这样的源节点，还要追溯到很多年前——这是 AI 资本开支周期在现金流量表上的具象。</p>
+</section>
+
+<section class="section" id="m1" aria-labelledby="m1-t">
+  <h2 class="stitle" id="m1-t">模块 1 · 公司概览与背景<a class="anchor" href="#m1" aria-label="本节链接">#</a></h2>
+
+  <p>腾讯 1998 年成立于深圳，2004 年在港交所上市。今天它同时是三样东西：中国最大的社交网络运营商（微信合并 MAU <strong>14.39 亿</strong>，仍在净增）、全球收入最大的游戏公司，以及一个账面加公允价值近九千亿的投资控股平台。这个三位一体的结构决定了它必须用分部加总（SOTP）来估值——单一倍数套在它身上都是错的。</p>
+
+  <p>股权结构：第一大股东 MIH（Prosus/Naspers 系）持股 <strong>22.80%</strong>，从 2022 年的 29% 一路减持至今——2025 年净卖约 1.35 亿股，被腾讯同年 800 亿港元的回购基本吸收；2026 年 1–4 月仅减约 1,300 万股，节奏是近四年最缓。创始人马化腾持股 <strong>8.82%</strong>（8.05 亿股），2025 年全年零减持——比例上升纯因公司回购缩股。南向资金持仓 11.61%，年初净买入后自 5 月转为观望。</p>
+
+  <p>治理结构上值得记录的一点：马化腾身兼董事会主席与 CEO，且是董事会<strong>唯一的执行董事</strong>；总裁刘炽平 2023 年 5 月轮席退任董事后仍主持投资委员会。权力高度集中于创始人——过去二十年这是资产而非负债，但结构本身值得知晓。</p>
+</section>
+
+<section class="section" id="m2" aria-labelledby="m2-t">
+  <h2 class="stitle" id="m2-t">模块 2 · 管理层评估<a class="anchor" href="#m2" aria-label="本节链接">#</a></h2>
+
+  <p>核心班子二十年未散：马化腾（主席兼 CEO，已续签 2025 年起三年服务合同）、刘炽平（总裁）、张小龙（微信）、任宇昕（COO）、James Mitchell（首席战略官）、汤道生（云与智慧产业，现兼管元宝等 AI 产品）、罗硕瀚（CFO）——全员在任，无一变动。刘炽平在 5 月的电话会上直言「肯定没有大裁员计划，腾讯跟硅谷公司不太一样」，期末员工 115,927 人、同比不减反增 4.2%，而 H1 薪酬总额微降 0.8%——人没裁，钱管住了。</p>
+
+  <h3>长期主义测试</h3>
+
+  <p>马化腾 8.82% 的持股按现价约值 <strong>HK$3,700 亿</strong>，且 2025 年一股未卖。这不是「薪酬绑定级别」的持股，是真正的所有者。管理层过去两个季度的言行一致性也经得起逐条核对（见模块 6 的兑现度追踪表：投入加码、下半年继续加码、递延释放、广告加速，全部如约兑现）。</p>
+
+  <p>资本配置的历史记录分两面看。投资端：过去二十年孵出了拼多多（现值约 1,195 亿元）、美团（已实物分派给股东）、Sea（约 925 亿元）、Epic 等一长串资产，京东与美团两次大手笔实物分派更是把「还富于股东」做到了教科书级别。回购端有一处真实的瑕疵：<strong>2025 年回购均价 HK$521.7，其中 9–12 月在 591–683 的高位重手买入 553 亿</strong>——对照现价整体浮亏约 12%。每日定额的机械式回购不择时，牛市里会买贵。这不是罪过（2023/2024 年的回购对照现价浮盈 42%/27%），但它提醒你：腾讯的回购是资本纪律工具，不是择时工具。</p>
+
+  <p class="note">2026 年的关键变化：2024 年公告白纸黑字「回购规模从 490 亿增至 1,000 亿以上」、2025 年「至少 800 亿」，而 <strong>2026 年 3 月的年度业绩公告里没有任何回购金额承诺</strong>——取而代之的是刘炽平那句「买卡优先，回购机动」。年初至今回购约 261 亿港元、年化约 450 亿，只有去年的六成。管理层没有失信（事前说得很清楚），但优先级的重排是明牌的。</p>
+</section>
+
+<section class="section" id="m3" aria-labelledby="m3-t">
+  <h2 class="stitle" id="m3-t">模块 3 · 商业模式深度解析<a class="anchor" href="#m3" aria-label="本节链接">#</a></h2>
+
+  <h3>一句话测试</h3>
+
+  <p><strong>腾讯是一条收费桥：14 亿人的社交图谱把注意力与支付流量分发给自研游戏、广告位和金融服务，再把过桥费再投资于一个近九千亿的投资组合和一排 AI 机房。</strong>一句话说得清，通过——但它同时是运营公司与控股公司的复合体，这就是估值必须拆开算的原因。</p>
+
+  <div class="tbl-wrap">
+  <table data-source="Q2 2026 中期业绩公告 p.6–7、Note 2；各期公告分部毛利表" data-shape="三大分部收入、增速与毛利率">
+    <caption>Q2 2026 分部拆解（人民币亿元）</caption>
+    <thead><tr><th>分部</th><th>收入</th><th>同比</th><th>毛利率（vs 上年）</th><th>关键驱动</th></tr></thead>
+    <tbody>
+      <tr><td>增值服务（48%）</td><td>984.1</td><td>+8%</td><td><strong>64%</strong>（60%）</td><td>本土游戏 473 亿 +17%（三角洲行动、VALORANT 双端、洛克王国：世界）；国际 186 亿 −0.8%（恒定汇率 +4%，Supercell 拖累）；社交网络 325 亿 +0.8%</td></tr>
+      <tr><td>营销服务（21%）</td><td>435.7</td><td><strong>+22%</strong></td><td>57%（58%）</td><td>AI 广告推荐大模型、AIM+ 全自动投放、微信生态闭环；视频号时长 +20%</td></tr>
+      <tr><td>金融科技及企业服务（30%）</td><td>602.9</td><td>+9%</td><td>52%（52%）</td><td>商业支付重回增长、理财与消费贷抬毛利；云受 AI 需求与「更有利的定价环境」驱动</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>八个季度的分部毛利率轨迹揭示了这门生意的质变：集团毛利率从 53% 走到 <strong>58%</strong>（历史新高），增值服务从 57% 走到 64%。引擎是「高毛利收入替换低毛利收入」——自研长青游戏替代渠道分成游戏、视频号与搜一搜的高毛利广告放量、云剔除低质转售。<strong>但 AI 的重量已经出现在结构里</strong>：营销服务毛利率从峰值 60% 回落到 57%，公告直接归因「AI 相关设备折旧与运营成本」；本季技术基础设施运营成本（不含折旧）151.2 亿，同比增至上年两倍。</p>
+
+  <p>游戏的领先指标——递延收入 1,358 亿，同比 <strong>+8.4%</strong>：未来两三个季度仍有蓄水，但较 Q1 的 +13% 放缓，下半年游戏增速大概率从 17% 向高个位数回归。广告的储备则来自视频号与抖音的商业化差距：第三方估算视频号加载率约为抖音一半、单价低四成——<strong>单位流量货币化只有抖音的三分之一左右，这是未来两三年广告增长的确定性储备</strong>（这组数字是第三方估算，官方不披露，仅作背景）。</p>
+</section>
+
+<section class="section" id="m4" aria-labelledby="m4-t">
+  <h2 class="stitle" id="m4-t">模块 4 · 经济护城河分析（5 维）<a class="anchor" href="#m4" aria-label="本节链接">#</a></h2>
+
+  <div class="moat-grid">
+    <div class="moat-card wide">
+      <h3>网络效应 · 宽</h3>
+      <p>微信合并 MAU <strong>14.39 亿</strong>（+2%），接近中国网民全覆盖仍在净增；视频号时长 +20%——存量图谱上还能长出新飞轮；小程序、小店、小游戏让广告主—商家—用户的三边网络持续加密。一张图谱同时给三大分部供血。唯一的退坡角是 QQ（5.20 亿，−2%）。</p>
+    </div>
+    <div class="moat-card wide">
+      <h3>转换成本 · 宽</h3>
+      <p>社交关系链不可迁移；商业支付、理财、消费贷嵌入日常收支（本季三项齐增长）；企业侧的微信生态闭环营销让商家的经营系统沉淀在腾讯体内。付费增值订阅 2.59 亿（−2%）提示纯内容订阅的可替代性较高——那是护城河的边缘，不是核心。</p>
+    </div>
+    <div class="moat-card wide">
+      <h3>无形资产 · 宽</h3>
+      <p>长青游戏已制度化管理（公告脚注给出硬定义：移动端 DAU＞500 万或 PC＞200 万、年流水＞40 亿），王者、和平、VALORANT、三角洲行动梯队 DAU 创新高；新 IP 复活能力得到验证（洛克王国：世界为年内新手游 DAU 与流水双第一）。支付牌照、微众银行 30%、基金销售牌照与版号存量是政策性稀缺资产。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h3>成本优势 · 窄→宽（重新证明中）</h3>
+      <p>毛利率 58% 历史峰值；528 亿/季的资本开支可由经营现金流＋2.5–3.1% 票息的发债覆盖，国内没有第二家消费互联网公司有这种算力自建能力。但 AI 时代把成本曲线重置了——折旧 +57%、技术基建成本增至上年两倍，优势要用未来八个季度重新证明。</p>
+    </div>
+    <div class="moat-card narrow">
+      <h3>有效规模／分发 · 窄</h3>
+      <p>小程序与小游戏绕开应用商店抽成是真实的分发权力；但字节在时长与广告上的挤压没有消失，AI 入口之战（元宝/小微 vs 豆包）刚开局——小微还在「小范围原型测试」。这一维既是期权，也是防御成本。</p>
+    </div>
+  </div>
+
+  <p><strong>整体：宽护城河</strong>——三宽两窄，且三个「宽」都有本季公告里的可验证数据支撑。趋势判断：微信侧在加宽（视频号、小店、AI 入口都长在图谱上），游戏侧稳定，云与 AI 侧的护城河尚未成形（份额第三名以外）。十年后大概率仍宽——14 亿人的图谱没有可见的替代路径，真正的问题不是护城河消失，而是护城河里的水（利润率）会不会被 AI 军备竞赛抽走一部分。</p>
+</section>
+
+<section class="section" id="m5" aria-labelledby="m5-t">
+  <h2 class="stitle" id="m5-t">模块 5 · 财务深度分析<a class="anchor" href="#m5" aria-label="本节链接">#</a></h2>
+
+  <h3>五年关键比率</h3>
+
+  <div class="tbl-wrap">
+  <table data-source="FY2021–FY2025 年度业绩公告与 2026 中期公告（全部为港交所披露易一手 PDF，经独立第二来源逐数字比对零偏差）" data-shape="五年收入、利润、现金流与回报比率">
+    <caption>五年轨迹（人民币亿元）</caption>
+    <thead><tr><th>指标</th><th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th></tr></thead>
+    <tbody>
+      <tr><td>营业收入</td><td>5,601.2</td><td>5,545.5</td><td>6,090.2</td><td>6,602.6</td><td>7,517.7</td></tr>
+      <tr><td>毛利率</td><td>43.9%</td><td>43.1%</td><td>48.1%</td><td>52.9%</td><td><strong>56.2%</strong></td></tr>
+      <tr><td>归母净利（Non-IFRS）</td><td>1,237.9</td><td>1,156.5</td><td>1,576.9</td><td>2,227.0</td><td>2,596.3</td></tr>
+      <tr><td>经营现金流</td><td>1,751.9</td><td>1,460.9</td><td>2,219.6</td><td>2,585.2</td><td><strong>3,030.5</strong></td></tr>
+      <tr><td>资本开支</td><td>333.9</td><td>180.1</td><td>238.9</td><td>767.6</td><td>792.0</td></tr>
+      <tr><td>自由现金流（公司口径）</td><td>1,081</td><td>884</td><td>1,670</td><td>1,553</td><td>1,826</td></tr>
+      <tr><td>净现金／（净负债）</td><td>（202.4）</td><td>（148.3）</td><td>547.4</td><td>768.0</td><td>1,071.5</td></tr>
+      <tr><td>归母权益</td><td>8,063.0</td><td>7,213.9</td><td>8,085.9</td><td>9,735.5</td><td>11,541.5</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>Non-IFRS 口径的 ROE（TTM 归母 2,715.7 亿 ÷ 期末归母权益 11,358.5 亿）约 <strong>23.9%</strong>。杜邦意义上的分解对腾讯参考价值有限——权益里一半是投资组合，真正的经营回报要看核心口径：核心经营业务隐含价值约 2.67 万亿，对年化 Non-IFRS 归母 2,737 亿，<strong>核心资产的盈利能力毋庸置疑，问题从来在于给它的倍数</strong>。</p>
+
+  <h3>资产负债健康度：净现金 582 亿，但方向变了</h3>
+
+  <div class="tbl-wrap">
+  <table data-source="2026 中期公告 p.12/p.17/p.20、Note 14/15" data-shape="现金、负债与净现金的期末对比">
+    <caption>资金结构（人民币亿元）</caption>
+    <thead><tr><th>项目</th><th>2026-03-31</th><th>2026-06-30</th><th>变动</th></tr></thead>
+    <tbody>
+      <tr><td>净现金（公司口径）</td><td>1,468.6</td><td><strong>581.9</strong></td><td><strong>−886.7</strong></td></tr>
+      <tr><td>借款</td><td>—</td><td>2,989.4</td><td>6 月新发美元债 24.5 亿＋人民币债 150 亿</td></tr>
+      <tr><td>应付票据</td><td>—</td><td>1,540.2</td><td>—</td></tr>
+      <tr><td>非流动预付款项（AI 预付所在）</td><td>年初 245.4</td><td><strong>912.0</strong></td><td>＋666.6（半年）</td></tr>
+      <tr><td>上市投资公允价值</td><td>5,471</td><td>4,872</td><td>市场下跌所致</td></tr>
+      <tr><td>非上市投资账面值</td><td>3,651</td><td>3,879</td><td>含公允上调 92 亿</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>净现金单季少了 887 亿：417 亿付了 2025 年度股息、593 亿付了资本开支、再加大额 AI 预付。有息负债合计 4,530 亿在上升，但对照 5,112 亿总现金、4,872 亿上市投资和年 3,000 亿经营现金流，偿付能力不构成任何问题——<strong>需要盯的不是安全性，是方向</strong>：按当前烧钱节奏，净现金年内可能清零转负，届时回购与股息的资金来源将更依赖经营现金流与出售投资（7 月减持快手 2.73 亿股已是先例）。</p>
+
+  <h3>所有者盈余</h3>
+
+  <p>Non-IFRS 把股权激励加回去了——但 SBC 是真实成本（年化约 299 亿），诚实的所有者盈余应该扣回来：<strong>TTM Non-IFRS 归母 2,715.7 亿 − SBC 299 亿 ≈ 2,417 亿</strong>。维护性资本开支难以从 AI 扩张开支中拆分，本报告把全部 AI 开支视为扩张性投入、不从所有者盈余中扣除——这是一个对公司有利的假设，它成立的前提是 AI 投入最终产生回报。按市值 3.60 万亿计，<strong>所有者盈余收益率约 6.7%</strong>；若把 AI 开支全部视为维护性（最严苛口径），收益率降到约 4.5%。真相在两者之间，取决于你对那 912 亿预付款的判断。</p>
+</section>
+
+<section class="section" id="m6" aria-labelledby="m6-t">
+  <h2 class="stitle" id="m6-t">模块 6 · 电话会分析<a class="anchor" href="#m6" aria-label="本节链接">#</a></h2>
+
+  <p class="note">Q2 业绩电话会定于今晚 20:00，本报告撰写时尚未举行。本节以公告管理层讨论与马化腾书面引言（一手）替代本季电话会，并对前两季电话会的关键承诺做兑现度追踪。引语中前两季部分来自财经媒体的电话会报道，已标注。</p>
+
+  <p>马化腾在今天公告里的核心表述：「进入第三季度，我们在智能、应用与基础设施三个层面朝着构建全新的 AI 赋能的腾讯取得实质进展……在基础设施层面，<strong>我们大幅加码算力采购，这将使我们未来能把应用与模型的使用量转化为收入</strong>。」——直接含义：Q3 资本开支还要更大，负自由现金流状态短期不会逆转。</p>
+
+  <h3>指引兑现度追踪</h3>
+
+  <div class="tbl-wrap">
+  <table data-source="FY2025 业绩电话会（2026-03-18，新浪财经报道）、Q1 2026 电话会（2026-05-13）、本季公告实际数" data-shape="前两季管理层承诺与本季实际的逐条对照">
+    <caption>说了什么 vs 做了什么</caption>
+    <thead><tr><th>承诺（出处）</th><th>Q2 实际</th><th>标签</th><th>解读</th></tr></thead>
+    <tbody>
+      <tr><td>AI 新产品投入去年 180 亿、今年至少增至两倍（3 月电话会）</td><td>新 AI 产品单季拖累经营利润约 105 亿，年化约 400 亿</td><td><span class="tag-mid">中性</span></td><td>投入如约放大；剔除口径下核心利润 +19%，烧钱暂未伤筋骨</td></tr>
+      <tr><td>「买卡与回购动态平衡，买到卡就少回购」（3 月电话会）</td><td>Q2 资本开支 +176%、H1 回购仅 244 亿、FCF −138 亿</td><td><span class="tag-bad">利空</span></td><td>兑现得非常彻底——钱真的从回购流向了 GPU。事前说清楚了，不算失信，但股东回报被实质挤压</td></tr>
+      <tr><td>「2026 收入增速可能快于利润增速」（3 月指引）</td><td>收入 +11%、Non-IFRS 归母 +9%、IFRS +0.7%</td><td><span class="tag-mid">中性</span></td><td>预警兑现，市场早有心理价位</td></tr>
+      <tr><td>「本土流水 teens 增长、春节错期递延后续释放」（5 月电话会）</td><td>本土游戏收入 +17%</td><td><span class="tag-good">利好</span></td><td>递延如期释放，Q1 的「收入失速」确系会计时点问题</td></tr>
+      <tr><td>「AI 驱动广告：推荐大模型＋AIM+＋闭环」（5 月电话会）</td><td>营销服务 +20% → +22% 加速，「绝大多数行业类别投放增加」</td><td><span class="tag-good">利好</span></td><td>AI 对广告的变现是当下兑现度最高、最硬的一条</td></tr>
+      <tr><td>「WorkBuddy 是中国最广泛使用的生产力 AI agent」（5 月）</td><td>第三方（Analysys 6 月）确认 WorkBuddy 与 CodeBuddy 交互量第一，且已有订阅＋token 充值付费</td><td><span class="tag-good">利好</span></td><td>应用层排位坐实，但仍在烧钱换份额阶段</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p><strong>信号汇总：</strong>管理层过去两季说到做到的比例极高——投入加码、下半年继续加码、递延释放、广告加速全部兑现。唯一「兑现即利空」的是买卡挤回购。今晚电话会最该追问的两个问题：负自由现金流要持续几个季度；回购何时恢复每日节奏（业绩静默期今日结束，按惯例明日即可复购）。</p>
+</section>
+
+<section class="section" id="m7" aria-labelledby="m7-t">
+  <h2 class="stitle" id="m7-t">模块 7 · 多模型估值（8 种方法）<a class="anchor" href="#m7" aria-label="本节链接">#</a></h2>
+
+  <p>基准数：TTM Non-IFRS 归母 <strong>¥2,715.7 亿</strong>（25Q3–26Q2），每股 ¥29.90；总股本 90.83 亿股；市值 HK$4.19 万亿 ≈ ¥3.60 万亿；净现金 ¥582 亿；投资组合三档 ¥6,225 / 8,751 / 9,721 亿（下节有拆法）；所有者盈余（扣回 SBC）约 ¥2,417 亿。汇率 HK$1 ＝ ¥0.8588。</p>
+
+  <div class="tbl-wrap">
+  <table data-source="本报告独立测算；投资组合三档口径见模块 5 与下文" data-shape="八种估值方法的结果与适用性">
+    <caption>八法汇总（每股港元）</caption>
+    <thead><tr><th>方法</th><th>结果</th><th>适用性</th></tr></thead>
+    <tbody>
+      <tr><td>① 相对估值 P/E（TTM Non-IFRS 15 倍）</td><td>HK$522</td><td><strong>高</strong>：15 倍取五年区间中下沿，含控股折价</td></tr>
+      <tr><td>② DCF（所有者盈余起点，概率加权）</td><td>HK$644</td><td>中：对 AI 投入的回报假设极敏感，见敏感性</td></tr>
+      <tr><td>③ 所有者盈余收益率（要求 6%）</td><td>HK$636</td><td><strong>高</strong>：宽护城河大盘股的合理要求回报</td></tr>
+      <tr><td>④ PEG</td><td>0.99</td><td>参考：TTM Non-IFRS 同比 +13.4%，PEG≈1 属合理偏低</td></tr>
+      <tr><td>⑤ DDM</td><td>不适用为主法</td><td>股息率仅 1.15%、派息率约 18%，股利折现严重低估——列出即弃</td></tr>
+      <tr><td>⑥ NAV</td><td>并入 SOTP</td><td>投资组合的净资产价值即 SOTP 的组合块，不单列</td></tr>
+      <tr><td>⑦ 反向 DCF</td><td>见下段</td><td><strong>高</strong>：直接回答市场在给什么定价</td></tr>
+      <tr><td>⑧ SOTP（核心 14 倍＋组合中档＋净现金）</td><td>HK$611</td><td><strong>最高</strong>：控股型公司的正确打开方式</td></tr>
+      <tr><td><strong>四主法中位数</strong></td><td><strong>HK$624</strong></td><td>—</td></tr>
+      <tr><td><strong>加权公允价值</strong></td><td><strong>HK$599</strong></td><td>权重：SOTP 40%、相对估值 25%、所有者盈余 20%、DCF 15%</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p><strong>⑦ 反向 DCF 的答案：</strong>现价 HK$461.60 隐含的是「所有者盈余未来五年年增长仅 <strong>0.1%</strong>」——市场给这门生意的定价是零增长。对照事实：剔除 AI 新品后核心经营利润本季 +19%，广告 +22%，本土游戏 +17%。<strong>零增长定价与正在加速的核心生意之间的裂口，就是这笔投资的全部论点。</strong>市场的隐含担忧当然有名字：AI 资本开支会烧掉未来的自由现金流。这个担忧值多少钱，下面的敏感性给出区间。</p>
+
+  <p class="note"><strong>本次未作主用的三种口径，一并写明理由：</strong>P/S（市销率）＝ 4.6 倍（TTM 收入 ¥7,884.8 亿）——腾讯三大分部毛利率差异大，市销率跨分部不可比，仅作规模参照；EV/EBITDA ＝ 约 10 倍（企业价值 ¥3.54 万亿 ÷ TTM EBITDA 约 ¥3,500 亿）——受折旧口径与租赁准则影响，且未剔投资组合，本报告以核心业务市盈率替代；FCF 收益率 ＝ 按 FY2025 自由现金流 5.1%、按 TTM 仅 3.8%——TTM 值被算力预付款压扁，当下失真，见模块 5 的所有者盈余双口径。</p>
+
+  <h3>7.2 市盈率多档透视（IFRS 与 Non-IFRS 差 22%，必做）</h3>
+
+  <div class="tbl-wrap">
+  <table data-source="本报告按各期公告计算；股价 HK$461.60 折 ¥396.4" data-shape="六种口径的市盈率与可信度">
+    <caption>市盈率多档</caption>
+    <thead><tr><th>口径</th><th>每股收益（¥）</th><th>市盈率</th><th>可信度</th></tr></thead>
+    <tbody>
+      <tr><td>TTM IFRS</td><td>25.93</td><td>15.3 倍</td><td>低——含投资公允价值波动与联营会计噪音</td></tr>
+      <tr><td>TTM Non-IFRS</td><td>29.90</td><td><strong>13.3 倍</strong></td><td><strong>最可信</strong>——剔除一次性与非现金项，反映核心经营</td></tr>
+      <tr><td>H1 2026 年化 Non-IFRS</td><td>30.02</td><td>13.2 倍</td><td>高——最新半年趋势</td></tr>
+      <tr><td>Q2 单季年化 Non-IFRS</td><td>30.13</td><td>13.2 倍</td><td>中——单季外推</td></tr>
+      <tr><td>核心业务（剔组合中档＋净现金）</td><td>—</td><td><strong>9.7 倍</strong></td><td>高——控股结构下的真实经营估值</td></tr>
+      <tr><td>核心业务再剔联营利润</td><td>—</td><td>10.8 倍</td><td>高——最干净口径：纯自营业务 10.8 倍</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>7.3 DCF 敏感性</h3>
+
+  <div class="tbl-wrap">
+  <table data-source="本报告独立测算；起点为所有者盈余（TTM Non-IFRS 扣回 SBC）" data-shape="三情景假设与结果">
+    <caption>三情景（组合与净现金另加）</caption>
+    <thead><tr><th>情景</th><th>假设</th><th>每股</th><th>概率</th></tr></thead>
+    <tbody>
+      <tr><td>悲观</td><td>起点 2,175 亿（打九折），5 年 +2%，永续 2.0%，折现 10.5%，组合取低档</td><td>HK$422</td><td>25%</td></tr>
+      <tr><td>基准</td><td>起点 2,417 亿，5 年 +6%，永续 2.5%，折现 9.5%，组合中档</td><td>HK$646</td><td>50%</td></tr>
+      <tr><td>乐观</td><td>起点 2,417 亿，5 年 +10%，永续 3.0%，折现 8.8%，组合中档</td><td>HK$861</td><td>25%</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p><strong>分批建仓价（由估值独立推导，与市价无关）：</strong>首仓 <strong>HK$499</strong>（四主法中位 × 80%）、二仓 <strong>HK$436</strong>（× 70%）、三仓 <strong>HK$374</strong>（× 60%）。<strong>现价 461.60 已经低于首仓价</strong>——这在海图的框架里意味着：现在就在可以开始买的区间内，且离二仓只有 5% 的距离。</p>
+</section>
+
+<section class="section" id="m8" aria-labelledby="m8-t">
+  <h2 class="stitle" id="m8-t">模块 8 · 竞争与行业分析<a class="anchor" href="#m8" aria-label="本节链接">#</a></h2>
+
+  <h3>三条战线，三种态势</h3>
+
+  <p><strong>游戏：领先且在扩大。</strong>游戏工委口径上半年中国游戏市场销售收入 +12.2%（移动端仅 +7.9%），腾讯本土 +17% 跑赢大盘约 5 个百分点。网易最近一季游戏收入增速只有腾讯的一半不到；米哈游移动端收入两年从 17.7 亿美元退到 9.1 亿美元（第三方估算），挤压边际减弱。版号 2026 年至今发放 1,147 款、全年有望超 2,000 款——供给端完全常态化，瓶颈不再是政策而是产品力。国际端的真实短板是 Supercell 产品老化，连续两季被公告点名拖累。</p>
+
+  <p><strong>广告：追赶且在加速。</strong>字节约占中国数字广告市场 26%（第三方估算），抖音广告体量约为腾讯营销服务的两倍。但腾讯是唯一以 20%+ 增速缩小差距的玩家——本季 +22% 为主要平台最快。视频号单位流量货币化约为抖音的三分之一（加载率约一半 × 单价低四成，均为第三方估算）——差距本身就是储备。</p>
+
+  <p><strong>云与 AI：落后但路线差异化。</strong>中国云基础设施份额：阿里 36%、华为 16%、腾讯 9%；AI 云细分里字节火山引擎（14.8%）都排在腾讯前面。腾讯的选择是不打训练端军备竞赛：混元 Hy3 走开源＋性价比路线（发布后持续位列 OpenRouter 全球 token 消耗前三），算力砸向推理与应用（WorkBuddy/CodeBuddy 按第三方口径为国内 PC 端 AI 办公/编程智能体交互量第一），底牌是微信内智能体「小微」——14 亿 MAU 的分发入口是阿里与字节都没有的。</p>
+
+  <h3>波特五力</h3>
+
+  <ul>
+    <li><strong>现有竞争：强（4/5）。</strong>字节在广告、AI 云、token 生态三线压制；阿里云增速是腾讯金科企服的四倍。游戏端一家独大反而是竞争最弱处。</li>
+    <li><strong>供应商议价：强（4/5）。</strong>算力是当下最强供方——912 亿预付款这个「预付」动作本身，就是供方强势的会计证据；高端芯片受出口管制，供给非市场化。</li>
+    <li><strong>替代品：中（3/5）。</strong>短视频替代游戏时长已被证伪（本土 +17%），但 AI 智能体若成为新流量入口（豆包）可能替代部分微信场景。</li>
+    <li><strong>新进入者：弱（2/5）。</strong>14 亿 MAU 图谱＋支付双寡头网络几乎不可复制；AI 原生应用是唯一侧翼。</li>
+    <li><strong>买方议价：弱（2/5）。</strong>广告主与玩家高度分散。</li>
+  </ul>
+
+  <p class="note">金融科技的格局补一句：支付宝约 54% vs 微信支付约 42%（OECD 引用口径），双寡头十年未被撼动；监管处于常态化阶段，边际变量是数字人民币——目前定位 M0 替代、不动商业支付存量。</p>
+</section>
+
+<section class="section" id="m9" aria-labelledby="m9-t">
+  <h2 class="stitle" id="m9-t">模块 9 · 技术面与 K 线分析<a class="anchor" href="#m9" aria-label="本节链接">#</a></h2>
+
+  <p class="note">技术面是补充参考，明确次要于基本面。</p>
+
+  <ul>
+    <li><strong>位置：</strong>HK$461.60，52 周区间 411.00–683.00，位于区间下方 19% 分位；较 2025 年 10 月 2 日的盘中高点 683.00 回撤 32%。</li>
+    <li><strong>结构：</strong>6 月 26 日见 411.00 低点后反弹，7 月一度到 475 上方，8 月随大盘回落——当前处于底部区域的第二次确认，尚无趋势反转信号。</li>
+    <li><strong>一个有信息量的价位：</strong>公司 6 月在 HK$411.00–475.60 区间回购了 2,203 万股（单月 97.4 亿港元，为 H1 最重的一个月）——<strong>现价正处在公司自己重手买入区间的上沿</strong>。公司回购价是管理层用真金白银投出的估值票。</li>
+    <li><strong>支撑与阻力：</strong>支撑 HK$436（7 月回购均价带）、HK$411（52 周低）；阻力 HK$476（7 月反弹高点）、HK$500 心理关口。</li>
+    <li><strong>供给面：</strong>Prosus 减持节奏近四年最缓；南向横盘观望；公司回购静默期今日结束，按惯例明日可恢复每日回购——短期买盘结构边际改善。</li>
+  </ul>
+</section>
+
+<section class="section" id="m10" aria-labelledby="m10-t">
+  <h2 class="stitle" id="m10-t">模块 10 · 增长催化剂与前景展望<a class="anchor" href="#m10" aria-label="本节链接">#</a></h2>
+
+  <h3>未来 6 个月</h3>
+
+  <ul>
+    <li><strong>今晚 20:00 的业绩电话会。</strong>两个问题定调下半年：负自由现金流持续几个季度；回购何时恢复、力度如何。</li>
+    <li><strong>回购复购（最近的硬催化剂）。</strong>静默期今日结束。若明日起恢复每日约 5 亿港元节奏，将直接改善买盘结构。</li>
+    <li><strong>游戏管线：</strong>洛克王国：世界的流水爬坡、无畏契约手游国际版、Supercell 能否止跌。递延收入 +8.4% 提示三季度游戏收入仍有蓄水。</li>
+    <li><strong>AI 应用变现的里程碑：</strong>WorkBuddy 订阅收入首次披露、小微从原型测试走向灰度放量、Hy3 的 API 收入。任何一个从「烧钱」变成「收钱」的信号都会重估整条 AI 叙事。</li>
+    <li><strong>视频号商业化：</strong>与抖音三倍的单位流量货币化差距，每收窄一成就是百亿级收入。</li>
+  </ul>
+
+  <h3>3–5 年展望</h3>
+
+  <p>把腾讯的未来拆成三层：<strong>底层（图谱与游戏）</strong>是年金——14 亿人的图谱与制度化管理的长青游戏组合，可预测性极高；<strong>中层（广告与金融科技）</strong>是复利——视频号货币化差距＋AI 提效，还有数年两位数增长的储备；<strong>顶层（AI）</strong>是期权——今天每季 105 亿的亏损买的是三张彩票：云追赶（推理需求爆发）、应用付费（WorkBuddy 模式跑通）、微信 AI 入口（小微成为 14 亿人的默认智能体）。三张彩票只要中一张，今天的资本开支就是对的；一张不中，它就是一场昂贵的防御战。</p>
+
+  <p class="note">本报告的估值没有为 AI 期权付钱——SOTP 里核心业务只给了 14 倍，AI 新品按持续亏损计入。这意味着：AI 成功是白送的上行，AI 失败已经部分计价。这是在不确定性面前保持安全边际的方式。</p>
+</section>
+
+<section class="section" id="m11" aria-labelledby="m11-t">
+  <h2 class="stitle" id="m11-t">模块 11 · 风险矩阵<a class="anchor" href="#m11" aria-label="本节链接">#</a></h2>
+
+  <div class="risk-grid">
+    <div class="risk-card r2">
+      <h3>经营风险 · 2／5 · <strong>低</strong></h3>
+      <p>收入 +11%、毛利率 58% 创高、长青游戏 DAU 创新高。老资产的老化信号存在但边缘：QQ MAU −2%、付费增值订阅 −2%。</p>
+    </div>
+    <div class="risk-card r3">
+      <h3>财务风险 · 2.5／5 · <strong>中低</strong></h3>
+      <p>单季净现金骤降 887 亿至 582 亿、自由现金流 −138 亿为多年罕见；有息负债 4,530 亿在上升。但总现金 5,112 亿＋上市投资 4,872 亿＋年 3,000 亿经营现金流，资产负债表纵深极大。</p>
+    </div>
+    <div class="risk-card r4">
+      <h3>竞争风险 · 3.5／5 · <strong>中高</strong></h3>
+      <p>字节在广告（体量两倍）、AI 云（火山 14.8% vs 腾讯未进前二）、token 生态全面压制；云份额 9% 远落后阿里 36%。游戏与社交的护城河完好对冲。</p>
+    </div>
+    <div class="risk-card r3">
+      <h3>监管政策风险 · 3／5 · <strong>中</strong></h3>
+      <p>常态化监管期：版号放量、防沉迷体系稳定、支付条例落地。但平台经济规则可随时重启收紧——历史已经证明其不可预测。</p>
+    </div>
+    <div class="risk-card r3">
+      <h3>宏观风险 · 3／5 · <strong>中</strong></h3>
+      <p>支付、消费贷、广告均系于内需；国际游戏的汇率拖累已现（−0.8% vs 恒定汇率 +4%）；高端芯片出口管制直接制约 AI 路线图。</p>
+    </div>
+    <div class="risk-card r2">
+      <h3>估值风险 · 2／5 · <strong>低</strong></h3>
+      <p>13.3 倍 Non-IFRS、核心业务 9.7 倍、反向 DCF 隐含零增长——悲观已在价格里。风险在于：若 AI 资本开支长期压制自由现金流，市场改用 FCF 估值，则当下不便宜（本季 FCF 为负）。</p>
+    </div>
+  </div>
+
+  <h3>三个黑天鹅情景</h3>
+
+  <ol>
+    <li><strong>AI 资本开支周期见顶塌方。</strong>若全行业 token 需求被推理成本骤降或应用证伪打断，腾讯恰好在周期顶部锁定了 H1 847 亿资本开支＋912 亿预付款——<strong>预付款是不可退的前置承诺</strong>。需求塌方将同时打击云收入、折旧消化（本季折旧已 +57%）与减值风险。腾讯 2026 年才重注加仓，比 2023–24 年加仓的美国同行安全垫更薄。</li>
+    <li><strong>微信被强制「拆墙」升级。</strong>若监管从「开放外链」升级为强制开放社交关系链或支付中立，本季 +22% 广告增长的核心逻辑（微信生态闭环，公告三次强调）将被结构性削弱。当前风向是支持平台企业发展 AI，概率低——但一旦发生直接命中最深的护城河。</li>
+    <li><strong>Prosus 从滴灌转为泄洪。</strong>其持股仍有 22.80%（约 2.07 亿股 × 10 倍于全年南向净买入的量级）。2021 年它曾一次性配售 146 亿美元。若战略转向大宗配售或实物分派，日均供给冲击将数倍于市场承接力。当前节奏放缓恰恰提供了误判的温床。</li>
+  </ol>
+
+  <p class="note">另两个值得留档的次级情景：未成年人监管从「时长」扩展到「付费额度」（473 亿/季的本土游戏现金牛被直接切割）；台海局势冲击算力供应链（预付款变成对无法交付产能的沉没敞口，与黑天鹅一叠加共振）。</p>
+</section>
+
+<section class="section" id="m12" aria-labelledby="m12-t">
+  <h2 class="stitle" id="m12-t">模块 12 · 股东回报分析<a class="anchor" href="#m12" aria-label="本节链接">#</a></h2>
+
+  <h3>12.1 公司给了股东多少</h3>
+
+  <div class="tbl-wrap">
+  <table data-source="FY2023–FY2025 年度业绩公告股息节与「购买、出售或赎回」逐月表；H1 2026 中期公告 p.33/p.44" data-shape="三年股息、回购与回报率全景">
+    <caption>三年股东回报全景（港元）</caption>
+    <thead><tr><th>财年</th><th>每股股息</th><th>股息总额</th><th>回购金额</th><th>回购股数</th><th>回购均价</th></tr></thead>
+    <tbody>
+      <tr><td>FY2023</td><td>HK$3.40（+42%）</td><td>约 320 亿</td><td>494.3 亿</td><td>1.52 亿股</td><td>HK$324.8</td></tr>
+      <tr><td>FY2024</td><td>HK$4.50（+32%）</td><td>约 410 亿</td><td><strong>1,120.0 亿</strong></td><td>3.07 亿股</td><td>HK$364.6</td></tr>
+      <tr><td>FY2025</td><td>HK$5.30（+18%）</td><td>约 479 亿</td><td>800.4 亿</td><td>1.53 亿股</td><td>HK$521.7</td></tr>
+      <tr><td>2026 H1＋7 月</td><td>末期息 6 月已付</td><td>—</td><td>261.3 亿（年化约 450 亿）</td><td>5,388 万股</td><td>HK$484.9</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p><strong>Trailing 股东收益率 ＝（FY2025 股息 479 亿＋回购 800 亿）÷ 市值 41,926 亿 ≈ 3.05%</strong>（股息 1.14%＋回购 1.91%）。<strong>今天未宣派中期股息</strong>——公告 Note 7 白纸黑字，2025 年同样未派，腾讯惯例只派年度末期息，媒体此前的「考虑宣派中期股息」预期落空。</p>
+
+  <h3>12.2 给的方式好不好</h3>
+
+  <p><strong>含金量满分的那一半：</strong>回购股份全部注销——月报表显示库存股始终为零，即便 2024 年港交所已允许库存股，腾讯仍全额注销，最近一笔注销在 7 月 24 日（与翌日披露报表逐日勾稽相符）。期末股数五年从 96.08 亿降到 90.83 亿，<strong>三年半累计净缩股 5.08%</strong>。</p>
+
+  <p><strong>关键检验——回购是否跑赢股权激励稀释：</strong>SBC 年化约 299 亿（真实费用），因股权激励年新发约 0.5–0.7 亿股；回购年买 1.5–3.1 亿股。<strong>回购吞掉全部 SBC 稀释后每年仍净缩 1–3%</strong>——摊薄加权股数同比 9,247M → 9,153M。这项检验通过，而且是大额 SBC 公司里罕见的通过。</p>
+
+  <p class="note">瑕疵在择时：2025 年均价 521.7、其中四季度在 591–683 高位买了 553 亿，对照现价浮亏约 12%。机械式每日回购不择时——2023/24 年买在低位是纪律的奖赏，2025 年买在高位是纪律的代价。</p>
+
+  <h3>12.3 能不能继续给、给多少</h3>
+
+  <p><strong>覆盖度的两副面孔：</strong>FY2025（股息＋回购）约 1,177 亿人民币 ÷ 自由现金流 1,826 亿 ＝ <strong>64%，从容</strong>。H1 2026：股息实付 416 亿＋回购约 212 亿 ≈ 628 亿 ÷ H1 自由现金流 429 亿 ＝ <strong>146%，已入不敷出</strong>——若剔除算力预付款则约 67%。也就是说：按公司真实现金流，回报已经靠动净现金维持；按剔除预付的口径，仍可覆盖。这两个数字的差，就是那 514 亿预付款。</p>
+
+  <p><strong>2026 年的制度性变化：</strong>年度公告里没有回购金额承诺（2024 年「从 490 亿增至 1,000 亿以上」、2025 年「至少 800 亿」，2026 年——没有数字）。刘炽平的原话把逻辑说透了：买卡优先，回购机动。年初至今回购年化约 450 亿，是去年的六成。资产负债表撑得起继续给（总现金 5,112 亿＋上市投资 4,872 亿，7 月已开始卖快手回笼），<strong>但给多少，取决于还剩多少卡没买到</strong>。</p>
+
+  <p class="note"><strong>模块小结：积极且高含金量，但已降级为算力采购的余数。</strong>全注销、真缩股、股息三连涨、SBC 稀释被完全对冲——质量无可挑剔；数量上 2026 年回购腰斩、中期息未派、净现金半年少了九百亿。给得起、也真给，只是今年排在了 GPU 后面。</p>
+</section>
+
+<section class="section" id="m13" aria-labelledby="m13-t">
+  <h2 class="stitle" id="m13-t">模块 13 · 海图评分卡 + 投资决策<a class="anchor" href="#m13" aria-label="本节链接">#</a></h2>
+
+  <div class="score-grid">
+    <div class="score-card">
+      <div class="score-letter s-bp">B+</div>
+      <h3>生意可预测性</h3>
+      <p>收入连续八季稳定在 8–11%，Non-IFRS 净利率 33–37% 高位横盘——核心经营可预测性极高。<strong>扣分不在生意在报表</strong>：IFRS 净利被联营会计噪音反复打穿（本季 +0.7% vs Non-IFRS +9%），必须双轨阅读；AI 投入的回报周期本身不可预测。</p>
+    </div>
+    <div class="score-card">
+      <div class="score-letter s-a">A</div>
+      <h3>经济护城河</h3>
+      <p>五维三宽（网络效应、转换成本、无形资产）两窄，每个「宽」都有本季公告的可验证数据：14.39 亿 MAU 仍在净增、视频号时长 +20%、长青游戏制度化管理且 DAU 创新高。十年内看不到图谱的替代路径。</p>
+    </div>
+    <div class="score-card">
+      <div class="score-letter s-a">A</div>
+      <h3>管理层质量</h3>
+      <p>创始人持股 8.82% 且 2025 年零减持（真所有者）；核心班子二十年未散；指引兑现度逐条核对全部命中——包括「买卡挤回购」这种不讨好的话也提前说透。京东、美团两次实物分派是还富于股东的教科书。</p>
+    </div>
+    <div class="score-card">
+      <div class="score-letter s-bp">B+</div>
+      <h3>财务质量</h3>
+      <p>毛利率 58% 新高、经营现金流年 3,000 亿、Non-IFRS ROE 约 24%、资产纵深近万亿。<strong>扣分</strong>：净现金单季 −887 亿、自由现金流转负、有息负债 4,530 亿上升中——都是主动选择，但方向就是方向。</p>
+    </div>
+    <div class="score-card">
+      <div class="score-letter s-b">B</div>
+      <h3>资本配置纪律</h3>
+      <p>回购全注销、缩股跑赢 SBC、股息三连涨是 A 面；2025 年 591–683 高位重手买贵、2026 年回购降级为「余数」、912 亿预付款是一笔未经验证的巨大下注是 B 面。AI 若兑现此项将回升，若不兑现将是 C。</p>
+    </div>
+    <div class="score-card">
+      <div class="score-letter s-bp">B+</div>
+      <h3>估值与安全边际</h3>
+      <p>四主法中位 HK$624、加权公允 HK$599，现价 HK$461.60，<strong>安全边际 +29.7%</strong>——高于买入所需的 25%。反向 DCF 显示市场在给零增长定价，而核心生意在 +19%。现价甚至低于首仓价 HK$499。</p>
+    </div>
+  </div>
+
+  <h3>红旗排查</h3>
+
+  <div class="tbl-wrap">
+  <table data-source="本季公告附注、历年年报、月报表与翌日披露报表" data-shape="会计保守度各项排查结果">
+    <caption>红旗排查（非评分项）</caption>
+    <thead><tr><th>排查项</th><th>结论</th></tr></thead>
+    <tbody>
+      <tr><td>商誉减值历史</td><td><span class="tag-good">未见异常</span>　无重大减值记录；本季 TME 收购在线音频公司新增商誉 92 亿，规模可控</td></tr>
+      <tr><td>收入确认时点</td><td><span class="tag-good">未见异常</span>　递延收入 1,358 亿与游戏流水节奏一致，确认口径保守（先收钱后确认）</td></tr>
+      <tr><td>非上市投资组合</td><td><span class="tag-mid">需关注</span>　3,879 亿账面无逐名披露；本季一家被投企业的优先股重估单季击穿 IFRS 利润 128 亿——波动可以极大且方向反直觉。列为透明度关注项，非会计红旗</td></tr>
+      <tr><td>股权激励比例</td><td><span class="tag-mid">需关注</span>　年化约 299 亿（约收入 3.7%），但稀释被回购注销完全对冲，摊薄股数持续净降</td></tr>
+      <tr><td>关联交易</td><td><span class="tag-good">未见异常</span>　无重大关联方资金占用</td></tr>
+      <tr><td>会计政策变更</td><td><span class="tag-good">未见异常</span>　口径连续，Non-IFRS 调节表逐项可勾稽（本报告已逐项复算）</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p class="note"><strong>无红旗触发。</strong>六维加权（A×2、B+×3、B×1）映射为「买入」，安全边际 29.7% ≥ 25% 支持该评级——维持 Q1 报告的「买入」，目标价由 HK$580 微调至 <strong>HK$560</strong>（下调反映 AI 资本开支对自由现金流的挤压与回购降速）。</p>
+
+  <h3>投资决策</h3>
+
+  <div class="tbl-wrap">
+  <table data-source="本报告模块 7 估值结论" data-shape="12 个月三情景目标价">
+    <caption>12 个月目标价</caption>
+    <thead><tr><th>情景</th><th>目标价</th><th>相对现价</th><th>概率</th><th>触发条件</th></tr></thead>
+    <tbody>
+      <tr><td>乐观</td><td>HK$640</td><td>+38.6%</td><td>25%</td><td>AI 应用变现出现硬信号（WorkBuddy 收入披露／小微放量），FCF 转正，估值向 SOTP 修复</td></tr>
+      <tr><td><strong>基准</strong></td><td><strong>HK$560</strong></td><td><strong>+21.3%</strong></td><td><strong>50%</strong></td><td>核心利润维持高个位数至双位数增长，回购恢复每日节奏，市场按 15 倍 Non-IFRS 定价</td></tr>
+      <tr><td>悲观</td><td>HK$440</td><td>−4.7%</td><td>25%</td><td>AI 亏损继续扩大且无变现信号，负 FCF 延续三个季度以上，或 Prosus 加速减持</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <ul>
+    <li><strong>评级：买入。</strong>安全边际 29.7%，无红旗。现价已低于首仓价。</li>
+    <li><strong>分批建仓：</strong>首仓 <strong>HK$499</strong>（已触发——现价 461.60 在首仓价之下）、二仓 <strong>HK$436</strong>、三仓 <strong>HK$374</strong>。</li>
+    <li><strong>止盈：</strong>HK$624（四主法中位）减 1/3、HK$683（52 周高点）再减 1/3、HK$760 清仓。不设止损——净现金为正、宽护城河、回购护底的公司，价格下跌本身不构成卖出理由。</li>
+    <li><strong>仓位：5%–8%。</strong>作为组合核心持仓配置；若二仓价触发可加到上限。</li>
+    <li><strong>持有周期：</strong>3 年以上——AI 投入周期的回报本身就需要这个时间尺度来验证。</li>
+  </ul>
+
+  <h3>关键监控指标</h3>
+
+  <ol>
+    <li><strong>回购是否恢复每日节奏</strong>（静默期今日结束，看明天）——这是「算力挤压股东回报」叙事最直接的温度计。</li>
+    <li><strong>自由现金流何时转正</strong>——今晚电话会若给出指引，直接决定悲观情景概率。</li>
+    <li><strong>新 AI 产品季度亏损</strong>（31 → 88 → 105 亿）的拐点，以及任何 AI 直接收入的首次披露。</li>
+    <li><strong>营销服务增速 vs 毛利率</strong>——AI 在广告上「赚的多于吃的」这个剪刀差能否维持。</li>
+    <li><strong>递延收入同比</strong>（+8.4%，较 Q1 的 +13% 放缓）——游戏下半年的领先指标。</li>
+    <li><strong>Prosus 减持节奏</strong>与净现金余额（582 亿，警戒线是转负的时点）。</li>
+  </ol>
+
+  <p><strong>事件时间表：</strong>今晚 20:00 业绩电话会 · 明日起回购窗口重开 · 2026 年 11 月中旬 Q3 业绩 · 2027 年 3 月 FY2026 全年业绩与新一年回购基调。</p>
+
+  <p><strong>下一个重新审视时点：Q3 业绩（11 月中旬）</strong>——看三件事：FCF、回购、AI 亏损曲线。</p>
+</section>
+
+<section class="section" id="essay" aria-labelledby="essay-t">
+  <h2 class="stitle sr-only" id="essay-t">海图夜读手记<a class="anchor" href="#essay" aria-label="本节链接">#</a></h2>
+
+  <div class="haitu-essay">
+    <div class="haitu-essay-header">
+      <div>
+        <div class="haitu-name-lg">海图</div>
+        <div class="haitu-essay-tag">夜读手记</div>
+      </div>
+    </div>
+    <div class="haitu-essay-body">
+      <p><strong>今天这份财报里最重要的数字不是收入 +11%，是自由现金流 −138 亿</strong>——腾讯多年未见的负数，而且是管理层主动选的。</p>
+
+      <p><strong>腾讯怎么赚钱：</strong>14 亿人的社交图谱把注意力与支付流量分发给自研游戏、广告位和金融服务，再把过桥费再投资于一个近九千亿的投资组合——今年起，还有一排 AI 机房。</p>
+
+      <p><strong>第一件事：生意本身在变好，而且在加速。</strong>收入 2,047.9 亿（+11%），毛利率 58% 创上市以来新高；本土游戏 +17%、营销服务 +22%（主要平台最快）。公告给了一个此前从未给过的口径：<strong>剔除新 AI 产品后，Non-IFRS 经营利润 861 亿、同比 +19%</strong>。把烧钱的部分拿掉，这是腾讯近年最好的经营季度之一。</p>
+
+      <p><strong>第二件事：IFRS 净利 +0.7% 是会计的玩笑。</strong>一家未上市被投企业因为自己估值涨了，其发行的可转换优先股负债跟着变大，腾讯按持股分占了约 128 亿账面亏损——投资越成功，账面越难看。这笔在 Non-IFRS 里被剔除，还原后核心利润 +9%。分析腾讯必须走 Non-IFRS 加现金流双轨，单看任何一轨都会错。</p>
+
+      <p><strong>第三件事：钱真的从回购流向了 GPU。</strong>本季资本开支 527.8 亿，是去年同期的 2.76 倍；资产负债表上的预付款项从年初 245 亿暴增到 912 亿——那是芯片的排队钱，不可退。净现金一个季度从 1,469 亿掉到 582 亿。三月刘炽平说过的话在这份财报里兑现得非常彻底：「买到卡就少回购」——2024 年公告写「回购规模从 490 亿增至 1,000 亿以上」，2025 年写「至少 800 亿」，2026 年的公告里没有数字。年初至今回购年化约 450 亿，是去年的六成。今天也没有宣派中期股息。<strong>股东回报从确定的数字，变成了算力采购的余数。</strong></p>
+
+      <p><strong>第四件事：回购的质量依然是全市场的标杆。</strong>买回的每一股都注销，库存股永远是零，三年半净缩股 5.08%，把年化 299 亿的股权激励稀释整个吞掉还有富余。瑕疵也要说：2025 年在 591–683 的高位重手买了 553 亿，对照现价浮亏 12%——机械式回购不择时，牛市里会买贵。</p>
+
+      <p><strong>第五件事：市场在给零增长定价。</strong>反向折现的答案是：现价 461.60 隐含「所有者盈余未来五年年增 0.1%」。而核心生意在 +19%。这道裂口就是整笔投资的论点。市场的担忧当然有名字——AI 资本开支会不会把未来的自由现金流烧光。我的处理方式是不给 AI 期权付一分钱：估值里核心业务只给 14 倍、AI 新品按持续亏损计入，SOTP 加投资组合中档加净现金，得 HK$611；四种主方法的中位数 HK$624，加权公允 <strong>HK$599</strong>。</p>
+
+      <p><strong>海图研判：买入，12 个月目标价 HK$560。</strong>现价对加权公允的安全边际 <strong>+29.7%</strong>，过了 25% 的门槛；红旗排查无触发。首仓 HK$499——<strong>现价已经在首仓价之下</strong>；二仓 HK$436、三仓 HK$374；止盈 HK$624／683／760 各减三分之一；仓位 5%–8%，持有三年以上。一个近端信号值得盯：回购静默期今天结束，明天起是否恢复每日约 5 亿港元的节奏，是「算力挤压股东回报」这个叙事最直接的温度计。</p>
+
+      <p>看这份财报时我总想起一类历史场景：一家收费桥公司，桥上车流稳定增长，桥费年年提价，忽然有一年它宣布把三年的利润预支出去，在河对岸再造一座新桥。市场只看见现金流量表上的大坑，看不见新桥通车后的车流。新桥可能确实通不了车——那 912 亿预付款就是沉没的桥墩；但旧桥的车流没有减少一辆，而市场已经按「永远不再增长」给整家公司定了价。<strong>用零增长的价格，买一门 +19% 的生意，外送三张 AI 彩票</strong>——这是今天这份财报给出的交易。</p>
+
+      <p><strong>风险提示：</strong>AI 资本开支周期若见顶塌方，912 亿预付款是不可退的前置承诺；负自由现金流若延续三个季度以上，市场可能改用现金流口径重新估值；Prosus 仍持股 22.80%，减持节奏放缓不等于结束；微信生态闭环是本季广告 +22% 的核心逻辑，也是监管敏感点；非上市投资组合 3,879 亿账面是黑箱，单季可击穿 IFRS 利润百亿级。</p>
+
+      <p><strong>免责声明：</strong>本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，不构成任何投资建议。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="disclaimer" aria-labelledby="disclaimer-t">
+  <h2 class="stitle" id="disclaimer-t">免责声明<a class="anchor" href="#disclaimer" aria-label="本节链接">#</a></h2>
+  <p>⚠️ <strong>免责声明</strong>：本文为《海图夜读》栏目基于公开信息的研究分享，所有观点为作者独立判断，不构成任何投资建议。本分析框架受 Graham、Fisher、Munger、Marks 等价值投资经典理论启发。「海图」是本栏目的虚拟人物名称，其点评仅代表本栏目立场。投资者应根据自身风险承受能力独立决策。市场有风险，投资需谨慎。</p>
+  <p class="note">数据来源：港交所披露易 2026-08-12 16:31 刊发的中期业绩公告（2026081200296.pdf）及 FY2021–FY2025 各期业绩公告原文、月报表与翌日披露报表、PDD/Sea/Spotify 最新 20-F（SEC EDGAR）、港交所中央结算南向持股查询。五年与八季财务序列经独立第二来源逐数字比对，零实质偏差。报表本币人民币（IFRS）；股价与股息为港元，换算汇率 HK$1 ＝ ¥0.8588（2026-08-12）。股价为 2026-08-12 收盘，业绩公告刊发于当日收盘后。竞争格局中的第三方估算（广告份额、加载率、云份额等）已逐处标注，不作为估值输入。</p>
+</section>
+
+</div>
+
+<footer>
+  <p>《海图夜读》 · 价值投资研究站</p>
+  <p>所有内容仅供研究参考，不构成投资建议。市场有风险，投资需谨慎。</p>
+  <p>© 2026 Haitu Night Reading</p>
+</footer>
+
+<script>
+/* ══════════════════════════════════════════════════════════════════
+   海图夜读 · 报告页脚本骨架
+   逐字复制进报告的 <script>，只改 CHART_DATA 里的数字。
+
+   这段脚本解决了存量 103 份实测出的三个问题：
+   1. 主题切换有 3 套实现，73/103 不读 localStorage
+      → 门户切暗色进报告又变亮色。这里统一成一套。
+   2. 71 份把调色板硬编码进 JS（token 的第 4 份拷贝），
+      改一次配色要改 71 个文件；另有 2 份切暗色后图表根本不重绘。
+      → 这里一律从 CSS 变量读，改 :root 即全站生效。
+   3. 4 个图表槽位被写出 39 种 canvas id。
+      → 这里按固定槽位 rev|margin|segment|eps 接管。
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ── 1. 从 CSS 变量取色（唯一真源，禁止在本文件里写 hex）── */
+function cssVar(name) {
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+}
+function palette() {
+  return {
+    accent:  cssVar('--accent'),   accent2: cssVar('--accent2'),
+    accent3: cssVar('--accent3'),  gold:    cssVar('--gold'),
+    red:     cssVar('--red'),      green:   cssVar('--green'),
+    grid:    cssVar('--chart-grid'), text:  cssVar('--text3-ink'),
+  };
+}
+
+/* ── 2. 主题切换：同步 aria-pressed、持久化、重绘图表 ── */
+function toggleTheme() {
+  var html = document.documentElement;
+  var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  try { localStorage.setItem('theme', next); } catch (e) {}
+  var btn = document.getElementById('themeBtn');
+  if (btn) btn.setAttribute('aria-pressed', String(next === 'dark'));
+  renderCharts();
+}
+document.addEventListener('DOMContentLoaded', function () {
+  var btn = document.getElementById('themeBtn');
+  if (btn) btn.setAttribute('aria-pressed',
+    String(document.documentElement.getAttribute('data-theme') === 'dark'));
+});
+
+var PERIOD = 'annual';
+function switchPeriod(p) {
+  if (p !== 'annual' && p !== 'quarterly') return;
+  PERIOD = p;
+  document.querySelectorAll('.period-btn').forEach(function (b) {
+    var on = b.dataset.period === p;
+    b.setAttribute('aria-pressed', String(on));
+    b.classList.toggle('is-on', on);
+  });
+  renderCharts();
+}
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('.period-btn').forEach(function (b) {
+    b.addEventListener('click', function () { switchPeriod(b.dataset.period); });
+  });
+  switchPeriod(PERIOD);
+});
+
+/* ── 3. 顶栏实测高度写进 --bar-h ──
+   锚点落点与目录高亮都以它为基准。顶栏在窄屏会折行（38px → 60+px），
+   硬编码会让手机上所有跳转偏移。 */
+function syncBarH() {
+  var bar = document.querySelector('.theme-bar');
+  if (bar) document.documentElement.style.setProperty('--bar-h', bar.offsetHeight + 'px');
+}
+addEventListener('DOMContentLoaded', syncBarH);
+addEventListener('resize', syncBarH);
+
+var CHART_DATA = {
+  rev: {
+    type: 'bar',
+    labels: ['24Q3', '24Q4', '25Q1', '25Q2', '25Q3', '25Q4', '26Q1', '26Q2'],
+    datasets: [
+      { label: '营业收入（亿元）', data: [1671.9, 1724.5, 1800.2, 1845.0, 1928.7, 1943.7, 1964.6, 2047.9], color: 'accent' },
+      { label: 'Non-IFRS 归母净利率 %', data: [35.8, 32.1, 34.1, 34.2, 36.6, 33.3, 34.6, 33.4], color: 'gold', type: 'line', yAxisID: 'y1' },
+    ],
+  },
+  margin: {
+    type: 'line',
+    labels: ['24Q3', '24Q4', '25Q1', '25Q2', '25Q3', '25Q4', '26Q1', '26Q2'],
+    datasets: [
+      { label: '归母净利 IFRS（亿元）', data: [532.3, 513.2, 478.2, 556.3, 631.3, 582.6, 580.9, 560.2], color: 'red' },
+      { label: '归母净利 Non-IFRS（亿元）', data: [598.1, 553.1, 613.3, 630.5, 705.5, 646.9, 679.1, 684.2], color: 'green' },
+    ],
+  },
+  segment: {
+    type: 'doughnut',
+    labels: ['本土游戏', '国际游戏', '社交网络', '营销服务', '金融科技及企业服务', '其他'],
+    datasets: [
+      { label: 'Q2 2026 收入构成（亿元）', data: [473.0, 186.0, 325.0, 435.7, 602.9, 25.2],
+        color: ['accent', 'accent2', 'accent3', 'gold', 'green', 'red'] },
+    ],
+  },
+  eps: {
+    type: 'bar',
+    labels: ['24Q3', '24Q4', '25Q1', '25Q2', '25Q3', '25Q4', '26Q1', '26Q2'],
+    datasets: [
+      { label: '资本开支（亿元）', data: [170.9, 365.8, 274.8, 191.1, 129.8, 196.3, 319.4, 527.8], color: 'accent' },
+      { label: '集团毛利率 %', data: [53.1, 52.6, 55.8, 56.9, 56.4, 55.7, 56.6, 57.8], color: 'gold', type: 'line', yAxisID: 'y1' },
+    ],
+  },
+
+  income: {
+    type: 'bar', unit: '亿元',
+    annual: {
+      labels: ['FY2021', 'FY2022', 'FY2023', 'FY2024', 'FY2025'],
+      datasets: [
+        { label: '营业收入',          data: [5601.2, 5545.5, 6090.2, 6602.6, 7517.7], color: 'accent' },
+        { label: '毛利',              data: [2459.4, 2387.5, 2931.1, 3492.5, 4225.9], color: 'gold' },
+        { label: 'Non-IFRS 归母净利', data: [1237.9, 1156.5, 1576.9, 2227.0, 2596.3], color: 'green' },
+      ],
+    },
+    quarterly: {
+      labels: ['24Q3', '24Q4', '25Q1', '25Q2', '25Q3', '25Q4', '26Q1', '26Q2'],
+      datasets: [
+        { label: '营业收入',          data: [1671.9, 1724.5, 1800.2, 1845.0, 1928.7, 1943.7, 1964.6, 2047.9], color: 'accent' },
+        { label: '毛利',              data: [888.3, 906.5, 1004.9, 1050.1, 1088.0, 1082.9, 1112.7, 1184.3], color: 'gold' },
+        { label: 'Non-IFRS 归母净利', data: [598.1, 553.1, 613.3, 630.5, 705.5, 646.9, 679.1, 684.2], color: 'green' },
+      ],
+    },
+  },
+
+  cashflow: {
+    type: 'bar', unit: '亿元',
+    annual: {
+      labels: ['FY2021', 'FY2022', 'FY2023', 'FY2024', 'FY2025'],
+      datasets: [
+        { label: '经营现金流',            data: [1751.9, 1460.9, 2219.6, 2585.2, 3030.5], color: 'accent' },
+        { label: '资本开支',              data: [333.9, 180.1, 238.9, 767.6, 792.0], color: 'red' },
+        { label: '自由现金流（公司口径）', data: [1081.0, 884.0, 1670.0, 1553.0, 1826.0], color: 'green' },
+      ],
+    },
+    quarterly: {
+      labels: ['24Q3', '24Q4', '25Q1', '25Q2', '25Q3', '25Q4', '26Q1', '26Q2'],
+      datasets: [
+        { label: '资本开支',              data: [170.9, 365.8, 274.8, 191.1, 129.8, 196.3, 319.4, 527.8], color: 'red' },
+        { label: '自由现金流（公司口径）', data: [585.0, 45.0, 471.0, 430.0, 585.0, 340.0, 567.0, -138.0], color: 'green' },
+      ],
+    },
+  },
+
+  balance: {
+    type: 'line', unit: '亿元',
+    annual: {
+      labels: ['FY2021', 'FY2022', 'FY2023', 'FY2024', 'FY2025', '26H1'],
+      datasets: [
+        { label: '总资产',   data: [16123.6, 15781.3, 15772.5, 17810.0, 20389.9, 21593.9], color: 'accent' },
+        { label: '总负债',   data: [7356.7, 7952.7, 7035.7, 7271.0, 7979.2, 9368.8], color: 'red' },
+        { label: '归母权益', data: [8063.0, 7213.9, 8085.9, 9735.5, 11541.5, 11358.5], color: 'green' },
+      ],
+    },
+    quarterly: {
+      labels: ['FY2021', 'FY2022', 'FY2023', 'FY2024', 'FY2025', '26H1'],
+      datasets: [
+        { label: '总资产',   data: [16123.6, 15781.3, 15772.5, 17810.0, 20389.9, 21593.9], color: 'accent' },
+        { label: '总负债',   data: [7356.7, 7952.7, 7035.7, 7271.0, 7979.2, 9368.8], color: 'red' },
+        { label: '归母权益', data: [8063.0, 7213.9, 8085.9, 9735.5, 11541.5, 11358.5], color: 'green' },
+      ],
+    },
+  },
+};
+
+/* ── 5. 渲染（一般不需要改）── */
+var _charts = {};
+function renderCharts() {
+  if (typeof Chart === 'undefined') return;      // CDN 不可达时静默跳过，不阻断页面
+  var P = palette();
+  Chart.defaults.font.family =
+    getComputedStyle(document.body).getPropertyValue('--font-sans') ||
+    'system-ui, -apple-system, sans-serif';
+
+  Object.keys(CHART_DATA).forEach(function (slot) {
+    var el = document.getElementById(slot);
+    if (!el) return;
+    if (_charts[slot]) _charts[slot].destroy();
+
+    var cfg = CHART_DATA[slot];
+    // 双周期槽位（三表图）：按当前 PERIOD 取那一套 labels/datasets。
+    // 缺失所选周期时回落到另一套，避免整张图空白。
+    if (cfg.annual || cfg.quarterly) {
+      var d = cfg[PERIOD] || cfg.annual || cfg.quarterly;
+      cfg = { type: d.type || cfg.type, labels: d.labels, datasets: d.datasets, unit: d.unit || cfg.unit };
+    }
+    var isPie = cfg.type === 'doughnut' || cfg.type === 'pie';
+
+    _charts[slot] = new Chart(el, {
+      type: cfg.type,
+      data: {
+        labels: cfg.labels,
+        datasets: cfg.datasets.map(function (d) {
+          var c = Array.isArray(d.color) ? d.color.map(function (k) { return P[k]; }) : P[d.color];
+          // 只写 d.type === 'line' 会让「图表级 type:'line' 但 dataset 没写 type」的
+          // 数据集拿到 borderWidth:0 —— 实测表现为「只有点、没有连线」。
+          var isLine = (d.type || cfg.type) === 'line';
+          return Object.assign({}, d, {
+            backgroundColor: c, borderColor: c,
+            borderWidth: isLine ? 2 : 0, tension: 0.3,
+          });
+        }),
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            // 窄屏把图例挪到顶部：右侧图例在 375px 上会吃掉大半个画布
+            position: isPie && innerWidth > 640 ? 'right' : 'top',
+            labels: { color: P.text, boxWidth: 12, font: { size: 11 } },
+          },
+        },
+        scales: isPie ? {} : {
+          x: { grid: { color: P.grid }, ticks: { color: P.text, font: { size: 11 } } },
+          y: { grid: { color: P.grid }, ticks: { color: P.text, font: { size: 11 } } },
+          y1: {
+            position: 'right', grid: { display: false },
+            ticks: { color: P.text, font: { size: 11 } }, display: 'auto',
+          },
+        },
+      },
+    });
+  });
+}
+addEventListener('DOMContentLoaded', renderCharts);
+addEventListener('resize', function () {          // 图例位置随断点变，需重建
+  clearTimeout(window._rcT);
+  window._rcT = setTimeout(renderCharts, 200);
+});
+
+</script>
+</body>
+</html>
